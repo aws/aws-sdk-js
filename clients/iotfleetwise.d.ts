@@ -356,11 +356,11 @@ declare class IoTFleetWise extends Service {
    */
   putLoggingOptions(callback?: (err: AWSError, data: IoTFleetWise.Types.PutLoggingOptionsResponse) => void): Request<IoTFleetWise.Types.PutLoggingOptionsResponse, AWSError>;
   /**
-   *  This API operation contains deprecated parameters. Register your account again without the Timestream resources parameter so that Amazon Web Services IoT FleetWise can remove the Timestream metadata stored. You should then pass the data destination into the CreateCampaign API operation. You must delete any existing campaigns that include an empty data destination before you register your account again. For more information, see the DeleteCampaign API operation. If you want to delete the Timestream inline policy from the service-linked role, such as to mitigate an overly permissive policy, you must first delete any existing campaigns. Then delete the service-linked role and register your account again to enable CloudWatch metrics. For more information, see DeleteServiceLinkedRole in the Identity and Access Management API Reference.   &lt;p&gt;Registers your Amazon Web Services account, IAM, and Amazon Timestream resources so Amazon Web Services IoT FleetWise can transfer your vehicle data to the Amazon Web Services Cloud. For more information, including step-by-step procedures, see &lt;a href=&quot;https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/setting-up.html&quot;&gt;Setting up Amazon Web Services IoT FleetWise&lt;/a&gt;. &lt;/p&gt; &lt;note&gt; &lt;p&gt;An Amazon Web Services account is &lt;b&gt;not&lt;/b&gt; the same thing as a &quot;user.&quot; An &lt;a href=&quot;https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_identity-management.html#intro-identity-users&quot;&gt;Amazon Web Services user&lt;/a&gt; is an identity that you create using Identity and Access Management (IAM) and takes the form of either an &lt;a href=&quot;https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html&quot;&gt;IAM user&lt;/a&gt; or an &lt;a href=&quot;https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html&quot;&gt;IAM role, both with credentials&lt;/a&gt;. A single Amazon Web Services account can, and typically does, contain many users and roles.&lt;/p&gt; &lt;/note&gt; 
+   *  This API operation contains deprecated parameters. Register your account again without the Timestream resources parameter so that Amazon Web Services IoT FleetWise can remove the Timestream metadata stored. You should then pass the data destination into the CreateCampaign API operation. You must delete any existing campaigns that include an empty data destination before you register your account again. For more information, see the DeleteCampaign API operation. If you want to delete the Timestream inline policy from the service-linked role, such as to mitigate an overly permissive policy, you must first delete any existing campaigns. Then delete the service-linked role and register your account again to enable CloudWatch metrics. For more information, see DeleteServiceLinkedRole in the Identity and Access Management API Reference.  Registers your Amazon Web Services account, IAM, and Amazon Timestream resources so Amazon Web Services IoT FleetWise can transfer your vehicle data to the Amazon Web Services Cloud. For more information, including step-by-step procedures, see Setting up Amazon Web Services IoT FleetWise.   An Amazon Web Services account is not the same thing as a "user." An Amazon Web Services user is an identity that you create using Identity and Access Management (IAM) and takes the form of either an IAM user or an IAM role, both with credentials. A single Amazon Web Services account can, and typically does, contain many users and roles. 
    */
   registerAccount(params: IoTFleetWise.Types.RegisterAccountRequest, callback?: (err: AWSError, data: IoTFleetWise.Types.RegisterAccountResponse) => void): Request<IoTFleetWise.Types.RegisterAccountResponse, AWSError>;
   /**
-   *  This API operation contains deprecated parameters. Register your account again without the Timestream resources parameter so that Amazon Web Services IoT FleetWise can remove the Timestream metadata stored. You should then pass the data destination into the CreateCampaign API operation. You must delete any existing campaigns that include an empty data destination before you register your account again. For more information, see the DeleteCampaign API operation. If you want to delete the Timestream inline policy from the service-linked role, such as to mitigate an overly permissive policy, you must first delete any existing campaigns. Then delete the service-linked role and register your account again to enable CloudWatch metrics. For more information, see DeleteServiceLinkedRole in the Identity and Access Management API Reference.   &lt;p&gt;Registers your Amazon Web Services account, IAM, and Amazon Timestream resources so Amazon Web Services IoT FleetWise can transfer your vehicle data to the Amazon Web Services Cloud. For more information, including step-by-step procedures, see &lt;a href=&quot;https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/setting-up.html&quot;&gt;Setting up Amazon Web Services IoT FleetWise&lt;/a&gt;. &lt;/p&gt; &lt;note&gt; &lt;p&gt;An Amazon Web Services account is &lt;b&gt;not&lt;/b&gt; the same thing as a &quot;user.&quot; An &lt;a href=&quot;https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_identity-management.html#intro-identity-users&quot;&gt;Amazon Web Services user&lt;/a&gt; is an identity that you create using Identity and Access Management (IAM) and takes the form of either an &lt;a href=&quot;https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html&quot;&gt;IAM user&lt;/a&gt; or an &lt;a href=&quot;https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html&quot;&gt;IAM role, both with credentials&lt;/a&gt;. A single Amazon Web Services account can, and typically does, contain many users and roles.&lt;/p&gt; &lt;/note&gt; 
+   *  This API operation contains deprecated parameters. Register your account again without the Timestream resources parameter so that Amazon Web Services IoT FleetWise can remove the Timestream metadata stored. You should then pass the data destination into the CreateCampaign API operation. You must delete any existing campaigns that include an empty data destination before you register your account again. For more information, see the DeleteCampaign API operation. If you want to delete the Timestream inline policy from the service-linked role, such as to mitigate an overly permissive policy, you must first delete any existing campaigns. Then delete the service-linked role and register your account again to enable CloudWatch metrics. For more information, see DeleteServiceLinkedRole in the Identity and Access Management API Reference.  Registers your Amazon Web Services account, IAM, and Amazon Timestream resources so Amazon Web Services IoT FleetWise can transfer your vehicle data to the Amazon Web Services Cloud. For more information, including step-by-step procedures, see Setting up Amazon Web Services IoT FleetWise.   An Amazon Web Services account is not the same thing as a "user." An Amazon Web Services user is an identity that you create using Identity and Access Management (IAM) and takes the form of either an IAM user or an IAM role, both with credentials. A single Amazon Web Services account can, and typically does, contain many users and roles. 
    */
   registerAccount(callback?: (err: AWSError, data: IoTFleetWise.Types.RegisterAccountResponse) => void): Request<IoTFleetWise.Types.RegisterAccountResponse, AWSError>;
   /**
@@ -470,6 +470,10 @@ declare namespace IoTFleetWise {
      * A comment in addition to the description.
      */
     comment?: message;
+    /**
+     * The fully qualified name of the struct node for the actuator if the data type of the actuator is Struct or StructArray. For example, the struct fully qualified name of an actuator might be Vehicle.Door.LockStruct.
+     */
+    structFullyQualifiedName?: NodePath;
   }
   export type AmazonResourceName = string;
   export interface AssociateVehicleFleetRequest {
@@ -621,7 +625,7 @@ declare namespace IoTFleetWise {
      */
     networkInterface: InterfaceId;
     /**
-     * A list of DBC files. You can upload only one DBC file for each network interface and specify up to five (inclusive) files in the list.
+     * A list of DBC files. You can upload only one DBC file for each network interface and specify up to five (inclusive) files in the list. The DBC file can be a maximum size of 200 MB.
      */
     canDbcFiles: NetworkFilesList;
     /**
@@ -652,11 +656,11 @@ declare namespace IoTFleetWise {
     /**
      * Whether the byte ordering of a CAN message is big-endian.
      */
-    isBigEndian: boolean;
+    isBigEndian: PrimitiveBoolean;
     /**
      * Whether the message data is specified as a signed value.
      */
-    isSigned: boolean;
+    isSigned: PrimitiveBoolean;
     /**
      * Indicates the beginning of the CAN signal. This should always be the least significant bit (LSB). This value might be different from the value in a DBC file. For little endian signals, startBit is the same value as in the DBC file. For big endian signals in a DBC file, the start bit is the most significant bit (MSB). You will have to calculate the LSB instead and pass it as the startBit.
      */
@@ -1013,6 +1017,54 @@ declare namespace IoTFleetWise {
      */
     thingArn?: arn;
   }
+  export interface CustomProperty {
+    /**
+     * The fully qualified name of the custom property. For example, the fully qualified name of a custom property might be ComplexDataTypes.VehicleDataTypes.SVMCamera.FPS.
+     */
+    fullyQualifiedName: string;
+    /**
+     * The data type for the custom property. 
+     */
+    dataType: NodeDataType;
+    /**
+     * Indicates whether the property is binary data.
+     */
+    dataEncoding?: NodeDataEncoding;
+    /**
+     * A brief description of the custom property.
+     */
+    description?: description;
+    /**
+     * The deprecation message for the node or the branch that was moved or deleted.
+     */
+    deprecationMessage?: message;
+    /**
+     * A comment in addition to the description.
+     */
+    comment?: message;
+    /**
+     * The fully qualified name of the struct node for the custom property if the data type of the custom property is Struct or StructArray. 
+     */
+    structFullyQualifiedName?: NodePath;
+  }
+  export interface CustomStruct {
+    /**
+     * The fully qualified name of the custom structure. For example, the fully qualified name of a custom structure might be ComplexDataTypes.VehicleDataTypes.SVMCamera.
+     */
+    fullyQualifiedName: string;
+    /**
+     * A brief description of the custom structure.
+     */
+    description?: description;
+    /**
+     * The deprecation message for the node or the branch that was moved or deleted.
+     */
+    deprecationMessage?: message;
+    /**
+     * A comment in addition to the description.
+     */
+    comment?: message;
+  }
   export interface DataDestinationConfig {
     /**
      * The Amazon S3 bucket where the Amazon Web Services IoT FleetWise campaign sends data.
@@ -1055,6 +1107,10 @@ declare namespace IoTFleetWise {
      * The time the decoder manifest was last updated in seconds since epoch (January 1, 1970 at midnight UTC time).
      */
     lastModificationTime: timestamp;
+    /**
+     * The detailed message for the decoder manifest. When a decoder manifest is in an INVALID status, the message contains detailed reason and help information.
+     */
+    message?: message;
   }
   export interface DeleteCampaignRequest {
     /**
@@ -1320,6 +1376,10 @@ declare namespace IoTFleetWise {
      *  The time the decoder manifest was last updated in seconds since epoch (January 1, 1970 at midnight UTC time). 
      */
     lastModificationTime: timestamp;
+    /**
+     * The detailed message for the decoder manifest. When a decoder manifest is in an INVALID status, the message contains detailed reason and help information.
+     */
+    message?: message;
   }
   export interface GetEncryptionConfigurationRequest {
   }
@@ -1333,7 +1393,7 @@ declare namespace IoTFleetWise {
      */
     encryptionStatus: EncryptionStatus;
     /**
-     * The type of encryption. Set to KMS_BASED_ENCRYPTION to use an KMS key that you own and manage. Set to FLEETWISE_DEFAULT_ENCRYPTION to use an Amazon Web Services managed key that is owned by the Amazon Web Services IoT FleetWise service account.
+     * The type of encryption. Set to KMS_BASED_ENCRYPTION to use a KMS key that you own and manage. Set to FLEETWISE_DEFAULT_ENCRYPTION to use an Amazon Web Services managed key that is owned by the Amazon Web Services IoT FleetWise service account.
      */
     encryptionType: EncryptionType;
     /**
@@ -1909,7 +1969,17 @@ declare namespace IoTFleetWise {
     nextToken?: nextToken;
   }
   export type LogType = "OFF"|"ERROR"|string;
-  export type ManifestStatus = "ACTIVE"|"DRAFT"|string;
+  export type ManifestStatus = "ACTIVE"|"DRAFT"|"INVALID"|"VALIDATING"|string;
+  export interface MessageSignal {
+    /**
+     * The topic name for the message signal. It corresponds to topics in ROS 2. 
+     */
+    topicName: TopicName;
+    /**
+     * The structured message for the message signal. It can be defined with either a primitiveMessageDefinition, structuredMessageListDefinition, or structuredMessageDefinition recursively.
+     */
+    structuredMessage: StructuredMessage;
+  }
   export interface ModelManifestSummary {
     /**
      * The name of the vehicle model.
@@ -1967,8 +2037,12 @@ declare namespace IoTFleetWise {
      * Information about a network interface specified by the On-board diagnostic (OBD) II protocol.
      */
     obdInterface?: ObdInterface;
+    /**
+     * The vehicle middleware defined as a type of network interface. Examples of vehicle middleware include ROS2 and SOME/IP.
+     */
+    vehicleMiddleware?: VehicleMiddleware;
   }
-  export type NetworkInterfaceType = "CAN_INTERFACE"|"OBD_INTERFACE"|string;
+  export type NetworkInterfaceType = "CAN_INTERFACE"|"OBD_INTERFACE"|"VEHICLE_MIDDLEWARE"|"CUSTOMER_DECODED_INTERFACE"|string;
   export type NetworkInterfaces = NetworkInterface[];
   export interface Node {
     /**
@@ -1984,6 +2058,14 @@ declare namespace IoTFleetWise {
      * Information about a node specified as an attribute.  An attribute represents static information about a vehicle. 
      */
     attribute?: Attribute;
+    /**
+     * Represents a complex or higher-order data structure.
+     */
+    struct?: CustomStruct;
+    /**
+     * Represents a member of the complex data structure. The datatype of the property can be either primitive or another struct.
+     */
+    property?: CustomProperty;
   }
   export interface NodeCounts {
     /**
@@ -2006,8 +2088,17 @@ declare namespace IoTFleetWise {
      * The total number of nodes in a vehicle network that represent actuators.
      */
     totalActuators?: number;
+    /**
+     * The total structure for the node.
+     */
+    totalStructs?: number;
+    /**
+     * The total properties for the node.
+     */
+    totalProperties?: number;
   }
-  export type NodeDataType = "INT8"|"UINT8"|"INT16"|"UINT16"|"INT32"|"UINT32"|"INT64"|"UINT64"|"BOOLEAN"|"FLOAT"|"DOUBLE"|"STRING"|"UNIX_TIMESTAMP"|"INT8_ARRAY"|"UINT8_ARRAY"|"INT16_ARRAY"|"UINT16_ARRAY"|"INT32_ARRAY"|"UINT32_ARRAY"|"INT64_ARRAY"|"UINT64_ARRAY"|"BOOLEAN_ARRAY"|"FLOAT_ARRAY"|"DOUBLE_ARRAY"|"STRING_ARRAY"|"UNIX_TIMESTAMP_ARRAY"|"UNKNOWN"|string;
+  export type NodeDataEncoding = "BINARY"|"TYPED"|string;
+  export type NodeDataType = "INT8"|"UINT8"|"INT16"|"UINT16"|"INT32"|"UINT32"|"INT64"|"UINT64"|"BOOLEAN"|"FLOAT"|"DOUBLE"|"STRING"|"UNIX_TIMESTAMP"|"INT8_ARRAY"|"UINT8_ARRAY"|"INT16_ARRAY"|"UINT16_ARRAY"|"INT32_ARRAY"|"UINT32_ARRAY"|"INT64_ARRAY"|"UINT64_ARRAY"|"BOOLEAN_ARRAY"|"FLOAT_ARRAY"|"DOUBLE_ARRAY"|"STRING_ARRAY"|"UNIX_TIMESTAMP_ARRAY"|"UNKNOWN"|"STRUCT"|"STRUCT_ARRAY"|string;
   export type NodePath = string;
   export type NodePaths = NodePath[];
   export type Nodes = Node[];
@@ -2037,11 +2128,11 @@ declare namespace IoTFleetWise {
     /**
      * Whether to use extended IDs in the message.
      */
-    useExtendedIds?: boolean;
+    useExtendedIds?: PrimitiveBoolean;
     /**
      * Whether the vehicle has a transmission control module (TCM).
      */
-    hasTransmissionEcu?: boolean;
+    hasTransmissionEcu?: PrimitiveBoolean;
   }
   export type ObdInterfaceName = string;
   export interface ObdSignal {
@@ -2084,18 +2175,26 @@ declare namespace IoTFleetWise {
   }
   export type ObdStandard = string;
   export type Prefix = string;
+  export type PrimitiveBoolean = boolean;
+  export interface PrimitiveMessageDefinition {
+    /**
+     * Information about a PrimitiveMessage using a ROS 2 compliant primitive type message of the complex data structure.
+     */
+    ros2PrimitiveMessageDefinition?: ROS2PrimitiveMessageDefinition;
+  }
   export type ProtocolName = string;
   export type ProtocolVersion = string;
   export interface PutEncryptionConfigurationRequest {
     /**
      * The ID of the KMS key that is used for encryption.
      */
-    kmsKeyId?: String;
+    kmsKeyId?: PutEncryptionConfigurationRequestKmsKeyIdString;
     /**
      * The type of encryption. Choose KMS_BASED_ENCRYPTION to use a KMS key or FLEETWISE_DEFAULT_ENCRYPTION to use an Amazon Web Services managed key.
      */
     encryptionType: EncryptionType;
   }
+  export type PutEncryptionConfigurationRequestKmsKeyIdString = string;
   export interface PutEncryptionConfigurationResponse {
     /**
      * The ID of the KMS key that is used for encryption.
@@ -2118,6 +2217,26 @@ declare namespace IoTFleetWise {
   }
   export interface PutLoggingOptionsResponse {
   }
+  export interface ROS2PrimitiveMessageDefinition {
+    /**
+     * The primitive type (integer, floating point, boolean, etc.) for the ROS 2 primitive message definition.
+     */
+    primitiveType: ROS2PrimitiveType;
+    /**
+     * The offset used to calculate the signal value. Combined with scaling, the calculation is value = raw_value * scaling + offset.
+     */
+    offset?: double;
+    /**
+     * A multiplier used to decode the message.
+     */
+    scaling?: double;
+    /**
+     * An optional attribute specifying the upper bound for STRING and WSTRING.
+     */
+    upperBound?: ROS2PrimitiveMessageDefinitionUpperBoundLong;
+  }
+  export type ROS2PrimitiveMessageDefinitionUpperBoundLong = number;
+  export type ROS2PrimitiveType = "BOOL"|"BYTE"|"CHAR"|"FLOAT32"|"FLOAT64"|"INT8"|"UINT8"|"INT16"|"UINT16"|"INT32"|"UINT32"|"INT64"|"UINT64"|"STRING"|"WSTRING"|string;
   export interface RegisterAccountRequest {
     timestreamResources?: TimestreamResources;
     /**
@@ -2201,6 +2320,10 @@ declare namespace IoTFleetWise {
      * A comment in addition to the description.
      */
     comment?: message;
+    /**
+     * The fully qualified name of the struct node for a sensor if the data type of the actuator is Struct or StructArray. For example, the struct fully qualified name of a sensor might be Vehicle.ADAS.CameraStruct.
+     */
+    structFullyQualifiedName?: NodePath;
   }
   export interface SignalCatalogSummary {
     /**
@@ -2241,8 +2364,12 @@ declare namespace IoTFleetWise {
      * Information about signal decoder using the On-board diagnostic (OBD) II protocol.
      */
     obdSignal?: ObdSignal;
+    /**
+     * The decoding information for a specific message which supports higher order data types. 
+     */
+    messageSignal?: MessageSignal;
   }
-  export type SignalDecoderType = "CAN_SIGNAL"|"OBD_SIGNAL"|string;
+  export type SignalDecoderType = "CAN_SIGNAL"|"OBD_SIGNAL"|"MESSAGE_SIGNAL"|"CUSTOMER_DECODED_SIGNAL"|string;
   export type SignalDecoders = SignalDecoder[];
   export interface SignalInformation {
     /**
@@ -2262,6 +2389,51 @@ declare namespace IoTFleetWise {
   export type SpoolingMode = "OFF"|"TO_DISK"|string;
   export type StorageCompressionFormat = "NONE"|"GZIP"|string;
   export type String = string;
+  export type StructureMessageName = string;
+  export interface StructuredMessage {
+    /**
+     * Represents a primitive type node of the complex data structure.
+     */
+    primitiveMessageDefinition?: PrimitiveMessageDefinition;
+    /**
+     * Represents a list type node of the complex data structure.
+     */
+    structuredMessageListDefinition?: StructuredMessageListDefinition;
+    /**
+     * Represents a struct type node of the complex data structure.
+     */
+    structuredMessageDefinition?: StructuredMessageDefinition;
+  }
+  export type StructuredMessageDefinition = StructuredMessageFieldNameAndDataTypePair[];
+  export interface StructuredMessageFieldNameAndDataTypePair {
+    /**
+     * The field name of the structured message. It determines how a data value is referenced in the target language. 
+     */
+    fieldName: StructureMessageName;
+    /**
+     * The data type. 
+     */
+    dataType: StructuredMessage;
+  }
+  export interface StructuredMessageListDefinition {
+    /**
+     * The name of the structured message list definition. 
+     */
+    name: StructureMessageName;
+    /**
+     * The member type of the structured message list definition.
+     */
+    memberType: StructuredMessage;
+    /**
+     * The type of list of the structured message list definition.
+     */
+    listType: StructuredMessageListType;
+    /**
+     * The capacity of the structured message list definition when the list type is FIXED_CAPACITY or DYNAMIC_BOUNDED_CAPACITY.
+     */
+    capacity?: nonNegativeInteger;
+  }
+  export type StructuredMessageListType = "FIXED_CAPACITY"|"DYNAMIC_UNBOUNDED_CAPACITY"|"DYNAMIC_BOUNDED_CAPACITY"|string;
   export interface Tag {
     /**
      * The tag's key.
@@ -2343,6 +2515,7 @@ declare namespace IoTFleetWise {
   }
   export type TimestreamTableArn = string;
   export type TimestreamTableName = string;
+  export type TopicName = string;
   export type TriggerMode = "ALWAYS"|"RISING_EDGE"|string;
   export interface UntagResourceRequest {
     /**
@@ -2601,6 +2774,18 @@ declare namespace IoTFleetWise {
     arn?: arn;
   }
   export type VehicleAssociationBehavior = "CreateIotThing"|"ValidateIotThingExists"|string;
+  export interface VehicleMiddleware {
+    /**
+     * The name of the vehicle middleware. 
+     */
+    name: VehicleMiddlewareName;
+    /**
+     * The protocol name of the vehicle middleware. 
+     */
+    protocolName: VehicleMiddlewareProtocol;
+  }
+  export type VehicleMiddlewareName = string;
+  export type VehicleMiddlewareProtocol = "ROS_2"|string;
   export type VehicleState = "CREATED"|"READY"|"HEALTHY"|"SUSPENDED"|"DELETING"|string;
   export interface VehicleStatus {
     /**

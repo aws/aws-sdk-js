@@ -37,6 +37,14 @@ declare class Amp extends Service {
    */
   createRuleGroupsNamespace(callback?: (err: AWSError, data: Amp.Types.CreateRuleGroupsNamespaceResponse) => void): Request<Amp.Types.CreateRuleGroupsNamespaceResponse, AWSError>;
   /**
+   * Create a scraper.
+   */
+  createScraper(params: Amp.Types.CreateScraperRequest, callback?: (err: AWSError, data: Amp.Types.CreateScraperResponse) => void): Request<Amp.Types.CreateScraperResponse, AWSError>;
+  /**
+   * Create a scraper.
+   */
+  createScraper(callback?: (err: AWSError, data: Amp.Types.CreateScraperResponse) => void): Request<Amp.Types.CreateScraperResponse, AWSError>;
+  /**
    * Creates a new AMP workspace.
    */
   createWorkspace(params: Amp.Types.CreateWorkspaceRequest, callback?: (err: AWSError, data: Amp.Types.CreateWorkspaceResponse) => void): Request<Amp.Types.CreateWorkspaceResponse, AWSError>;
@@ -68,6 +76,14 @@ declare class Amp extends Service {
    * Delete a rule groups namespace.
    */
   deleteRuleGroupsNamespace(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a scraper.
+   */
+  deleteScraper(params: Amp.Types.DeleteScraperRequest, callback?: (err: AWSError, data: Amp.Types.DeleteScraperResponse) => void): Request<Amp.Types.DeleteScraperResponse, AWSError>;
+  /**
+   * Deletes a scraper.
+   */
+  deleteScraper(callback?: (err: AWSError, data: Amp.Types.DeleteScraperResponse) => void): Request<Amp.Types.DeleteScraperResponse, AWSError>;
   /**
    * Deletes an AMP workspace.
    */
@@ -101,6 +117,14 @@ declare class Amp extends Service {
    */
   describeRuleGroupsNamespace(callback?: (err: AWSError, data: Amp.Types.DescribeRuleGroupsNamespaceResponse) => void): Request<Amp.Types.DescribeRuleGroupsNamespaceResponse, AWSError>;
   /**
+   * Describe an existing scraper.
+   */
+  describeScraper(params: Amp.Types.DescribeScraperRequest, callback?: (err: AWSError, data: Amp.Types.DescribeScraperResponse) => void): Request<Amp.Types.DescribeScraperResponse, AWSError>;
+  /**
+   * Describe an existing scraper.
+   */
+  describeScraper(callback?: (err: AWSError, data: Amp.Types.DescribeScraperResponse) => void): Request<Amp.Types.DescribeScraperResponse, AWSError>;
+  /**
    * Describes an existing AMP workspace.
    */
   describeWorkspace(params: Amp.Types.DescribeWorkspaceRequest, callback?: (err: AWSError, data: Amp.Types.DescribeWorkspaceResponse) => void): Request<Amp.Types.DescribeWorkspaceResponse, AWSError>;
@@ -109,6 +133,14 @@ declare class Amp extends Service {
    */
   describeWorkspace(callback?: (err: AWSError, data: Amp.Types.DescribeWorkspaceResponse) => void): Request<Amp.Types.DescribeWorkspaceResponse, AWSError>;
   /**
+   * Gets a default configuration.
+   */
+  getDefaultScraperConfiguration(params: Amp.Types.GetDefaultScraperConfigurationRequest, callback?: (err: AWSError, data: Amp.Types.GetDefaultScraperConfigurationResponse) => void): Request<Amp.Types.GetDefaultScraperConfigurationResponse, AWSError>;
+  /**
+   * Gets a default configuration.
+   */
+  getDefaultScraperConfiguration(callback?: (err: AWSError, data: Amp.Types.GetDefaultScraperConfigurationResponse) => void): Request<Amp.Types.GetDefaultScraperConfigurationResponse, AWSError>;
+  /**
    * Lists rule groups namespaces.
    */
   listRuleGroupsNamespaces(params: Amp.Types.ListRuleGroupsNamespacesRequest, callback?: (err: AWSError, data: Amp.Types.ListRuleGroupsNamespacesResponse) => void): Request<Amp.Types.ListRuleGroupsNamespacesResponse, AWSError>;
@@ -116,6 +148,14 @@ declare class Amp extends Service {
    * Lists rule groups namespaces.
    */
   listRuleGroupsNamespaces(callback?: (err: AWSError, data: Amp.Types.ListRuleGroupsNamespacesResponse) => void): Request<Amp.Types.ListRuleGroupsNamespacesResponse, AWSError>;
+  /**
+   * Lists all scrapers in a customer account, including scrapers being created or deleted. You may provide filters to return a more specific list of results.
+   */
+  listScrapers(params: Amp.Types.ListScrapersRequest, callback?: (err: AWSError, data: Amp.Types.ListScrapersResponse) => void): Request<Amp.Types.ListScrapersResponse, AWSError>;
+  /**
+   * Lists all scrapers in a customer account, including scrapers being created or deleted. You may provide filters to return a more specific list of results.
+   */
+  listScrapers(callback?: (err: AWSError, data: Amp.Types.ListScrapersResponse) => void): Request<Amp.Types.ListScrapersResponse, AWSError>;
   /**
    * Lists the tags you have assigned to the resource.
    */
@@ -181,6 +221,22 @@ declare class Amp extends Service {
    */
   updateWorkspaceAlias(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Waits for the scraperActive state by periodically calling the underlying Amp.describeScraperoperation every 2 seconds (at most 60 times). Wait until a scraper reaches ACTIVE status
+   */
+  waitFor(state: "scraperActive", params: Amp.Types.DescribeScraperRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Amp.Types.DescribeScraperResponse) => void): Request<Amp.Types.DescribeScraperResponse, AWSError>;
+  /**
+   * Waits for the scraperActive state by periodically calling the underlying Amp.describeScraperoperation every 2 seconds (at most 60 times). Wait until a scraper reaches ACTIVE status
+   */
+  waitFor(state: "scraperActive", callback?: (err: AWSError, data: Amp.Types.DescribeScraperResponse) => void): Request<Amp.Types.DescribeScraperResponse, AWSError>;
+  /**
+   * Waits for the scraperDeleted state by periodically calling the underlying Amp.describeScraperoperation every 2 seconds (at most 60 times). Wait until a scraper reaches DELETED status
+   */
+  waitFor(state: "scraperDeleted", params: Amp.Types.DescribeScraperRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Amp.Types.DescribeScraperResponse) => void): Request<Amp.Types.DescribeScraperResponse, AWSError>;
+  /**
+   * Waits for the scraperDeleted state by periodically calling the underlying Amp.describeScraperoperation every 2 seconds (at most 60 times). Wait until a scraper reaches DELETED status
+   */
+  waitFor(state: "scraperDeleted", callback?: (err: AWSError, data: Amp.Types.DescribeScraperResponse) => void): Request<Amp.Types.DescribeScraperResponse, AWSError>;
+  /**
    * Waits for the workspaceActive state by periodically calling the underlying Amp.describeWorkspaceoperation every 2 seconds (at most 60 times). Wait until a workspace reaches ACTIVE status
    */
   waitFor(state: "workspaceActive", params: Amp.Types.DescribeWorkspaceRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Amp.Types.DescribeWorkspaceResponse) => void): Request<Amp.Types.DescribeWorkspaceResponse, AWSError>;
@@ -228,6 +284,14 @@ declare namespace Amp {
     statusReason?: String;
   }
   export type AlertManagerDefinitionStatusCode = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"CREATION_FAILED"|"UPDATE_FAILED"|string;
+  export interface AmpConfiguration {
+    /**
+     * The ARN of an AMP workspace.
+     */
+    workspaceArn: WorkspaceArn;
+  }
+  export type _Blob = Buffer|Uint8Array|Blob|string;
+  export type ClusterArn = string;
   export interface CreateAlertManagerDefinitionRequest {
     /**
      * The ID of the workspace in which to create the alert manager definition.
@@ -308,6 +372,50 @@ declare namespace Amp {
      */
     tags?: TagMap;
   }
+  export interface CreateScraperRequest {
+    /**
+     * An optional user-assigned alias for this scraper. This alias is for user reference and does not need to be unique.
+     */
+    alias?: ScraperAlias;
+    /**
+     * The configuration used to create the scraper.
+     */
+    scrapeConfiguration: ScrapeConfiguration;
+    /**
+     * The source that the scraper will be discovering and collecting metrics from.
+     */
+    source: Source;
+    /**
+     * The destination that the scraper will be producing metrics to.
+     */
+    destination: Destination;
+    /**
+     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+     */
+    clientToken?: IdempotencyToken;
+    /**
+     * Optional, user-provided tags for this scraper.
+     */
+    tags?: TagMap;
+  }
+  export interface CreateScraperResponse {
+    /**
+     * The generated ID of the scraper that was just created.
+     */
+    scraperId: ScraperId;
+    /**
+     * The ARN of the scraper that was just created.
+     */
+    arn: ScraperArn;
+    /**
+     * The status of the scraper that was just created (usually CREATING).
+     */
+    status: ScraperStatus;
+    /**
+     * The tags of this scraper.
+     */
+    tags?: TagMap;
+  }
   export interface CreateWorkspaceRequest {
     /**
      * An optional user-assigned alias for this workspace. This alias is for user reference and does not need to be unique.
@@ -374,6 +482,26 @@ declare namespace Amp {
      */
     clientToken?: IdempotencyToken;
   }
+  export interface DeleteScraperRequest {
+    /**
+     * The ID of the scraper to delete.
+     */
+    scraperId: ScraperId;
+    /**
+     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+     */
+    clientToken?: IdempotencyToken;
+  }
+  export interface DeleteScraperResponse {
+    /**
+     * The ID of the scraper that was deleted.
+     */
+    scraperId: ScraperId;
+    /**
+     * The status of the scraper that is being deleted.
+     */
+    status: ScraperStatus;
+  }
   export interface DeleteWorkspaceRequest {
     /**
      * The ID of the workspace to delete.
@@ -424,6 +552,18 @@ declare namespace Amp {
      */
     ruleGroupsNamespace: RuleGroupsNamespaceDescription;
   }
+  export interface DescribeScraperRequest {
+    /**
+     * The IDs of the scraper to describe.
+     */
+    scraperId: ScraperId;
+  }
+  export interface DescribeScraperResponse {
+    /**
+     * The properties of the selected scrapers.
+     */
+    scraper: ScraperDescription;
+  }
   export interface DescribeWorkspaceRequest {
     /**
      * The ID of the workspace to describe.
@@ -436,6 +576,38 @@ declare namespace Amp {
      */
     workspace: WorkspaceDescription;
   }
+  export interface Destination {
+    /**
+     * A representation of an AMP destination.
+     */
+    ampConfiguration?: AmpConfiguration;
+  }
+  export interface EksConfiguration {
+    /**
+     * The ARN of an EKS cluster.
+     */
+    clusterArn: ClusterArn;
+    /**
+     * A list of security group IDs specified for VPC configuration.
+     */
+    securityGroupIds?: SecurityGroupIds;
+    /**
+     * A list of subnet IDs specified for VPC configuration.
+     */
+    subnetIds: SubnetIds;
+  }
+  export type FilterKey = string;
+  export type FilterValue = string;
+  export type FilterValues = FilterValue[];
+  export interface GetDefaultScraperConfigurationRequest {
+  }
+  export interface GetDefaultScraperConfigurationResponse {
+    /**
+     * The default configuration.
+     */
+    configuration: _Blob;
+  }
+  export type IamRoleArn = string;
   export type IdempotencyToken = string;
   export interface ListRuleGroupsNamespacesRequest {
     /**
@@ -461,6 +633,31 @@ declare namespace Amp {
      * The list of the selected rule groups namespaces.
      */
     ruleGroupsNamespaces: RuleGroupsNamespaceSummaryList;
+    /**
+     * Pagination token to use when requesting the next page in this list.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListScrapersRequest {
+    /**
+     * A list of scraper filters.
+     */
+    filters?: ScraperFilters;
+    /**
+     * Pagination token to request the next page in a paginated list. This token is obtained from the output of the previous ListScrapers request.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * Maximum results to return in response (default=100, maximum=1000).
+     */
+    maxResults?: ListScrapersRequestMaxResultsInteger;
+  }
+  export type ListScrapersRequestMaxResultsInteger = number;
+  export interface ListScrapersResponse {
+    /**
+     * The list of scrapers, filtered down if a set of filters was provided in the request.
+     */
+    scrapers: ScraperSummaryList;
     /**
      * Pagination token to use when requesting the next page in this list.
      */
@@ -662,7 +859,132 @@ declare namespace Amp {
     tags?: TagMap;
   }
   export type RuleGroupsNamespaceSummaryList = RuleGroupsNamespaceSummary[];
+  export interface ScrapeConfiguration {
+    /**
+     * Binary data representing a Prometheus configuration file.
+     */
+    configurationBlob?: _Blob;
+  }
+  export type ScraperAlias = string;
+  export type ScraperArn = string;
+  export interface ScraperDescription {
+    /**
+     * Alias of this scraper.
+     */
+    alias?: ScraperAlias;
+    /**
+     * Unique string identifying this scraper.
+     */
+    scraperId: ScraperId;
+    /**
+     * The Amazon Resource Name (ARN) of this scraper.
+     */
+    arn: ScraperArn;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role that provides permissions for the scraper to dsicover, collect, and produce metrics on your behalf.
+     */
+    roleArn: IamRoleArn;
+    /**
+     * The status of this scraper.
+     */
+    status: ScraperStatus;
+    /**
+     * The time when the scraper was created.
+     */
+    createdAt: Timestamp;
+    /**
+     * The time when the scraper was last modified.
+     */
+    lastModifiedAt: Timestamp;
+    /**
+     * The tags of this scraper.
+     */
+    tags?: TagMap;
+    /**
+     * The reason for failure if any.
+     */
+    statusReason?: StatusReason;
+    /**
+     * The configuration used to create the scraper.
+     */
+    scrapeConfiguration: ScrapeConfiguration;
+    /**
+     * The source that the scraper is discovering and collecting metrics from.
+     */
+    source: Source;
+    /**
+     * The destination that the scraper is producing metrics to.
+     */
+    destination: Destination;
+  }
+  export type ScraperFilters = {[key: string]: FilterValues};
+  export type ScraperId = string;
+  export interface ScraperStatus {
+    /**
+     * Status code of this scraper.
+     */
+    statusCode: ScraperStatusCode;
+  }
+  export type ScraperStatusCode = "CREATING"|"ACTIVE"|"DELETING"|"CREATION_FAILED"|"DELETION_FAILED"|string;
+  export interface ScraperSummary {
+    /**
+     * Alias of this scraper.
+     */
+    alias?: ScraperAlias;
+    /**
+     * Unique string identifying this scraper.
+     */
+    scraperId: ScraperId;
+    /**
+     * The Amazon Resource Name (ARN) of this scraper.
+     */
+    arn: ScraperArn;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role that provides permissions for the scraper to dsicover, collect, and produce metrics on your behalf.
+     */
+    roleArn: IamRoleArn;
+    /**
+     * The status of this scraper.
+     */
+    status: ScraperStatus;
+    /**
+     * The time when the scraper was created.
+     */
+    createdAt: Timestamp;
+    /**
+     * The time when the scraper was last modified.
+     */
+    lastModifiedAt: Timestamp;
+    /**
+     * The tags of this scraper.
+     */
+    tags?: TagMap;
+    /**
+     * The reason for failure if any.
+     */
+    statusReason?: StatusReason;
+    /**
+     * The source that the scraper is discovering and collecting metrics from.
+     */
+    source: Source;
+    /**
+     * The destination that the scraper is producing metrics to.
+     */
+    destination: Destination;
+  }
+  export type ScraperSummaryList = ScraperSummary[];
+  export type SecurityGroupId = string;
+  export type SecurityGroupIds = SecurityGroupId[];
+  export interface Source {
+    /**
+     * A representation of an EKS source.
+     */
+    eksConfiguration?: EksConfiguration;
+  }
+  export type StatusReason = string;
   export type String = string;
+  export type SubnetId = string;
+  export type SubnetIds = SubnetId[];
   export type TagKey = string;
   export type TagKeys = TagKey[];
   export type TagMap = {[key: string]: TagValue};

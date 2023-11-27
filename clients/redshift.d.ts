@@ -1171,6 +1171,10 @@ declare namespace Redshift {
      * From a datashare consumer account, associates a datashare with all existing and future namespaces in the specified Amazon Web Services Region.
      */
     ConsumerRegion?: String;
+    /**
+     * If set to true, allows write operations for a datashare.
+     */
+    AllowWrites?: BooleanOptional;
   }
   export type AssociatedClusterList = ClusterAssociatedToSchedule[];
   export interface Association {
@@ -1240,6 +1244,10 @@ declare namespace Redshift {
      * The identifier of the data consumer that is authorized to access the datashare. This identifier is an Amazon Web Services account ID or a keyword, such as ADX.
      */
     ConsumerIdentifier: String;
+    /**
+     * If set to true, allows write operations for a datashare.
+     */
+    AllowWrites?: BooleanOptional;
   }
   export interface AuthorizeEndpointAccessMessage {
     /**
@@ -2551,6 +2559,14 @@ declare namespace Redshift {
      * The status change data of the datashare that is associated.
      */
     StatusChangeDate?: TStamp;
+    /**
+     * Specifies whether write operations were allowed during data share authorization.
+     */
+    ProducerAllowedWrites?: BooleanOptional;
+    /**
+     * Specifies whether write operations were allowed during data share association.
+     */
+    ConsumerAcceptedWrites?: BooleanOptional;
   }
   export type DataShareAssociationList = DataShareAssociation[];
   export type DataShareList = DataShare[];

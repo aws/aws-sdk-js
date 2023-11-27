@@ -734,6 +734,12 @@ declare namespace GuardDuty {
     InvitedAt?: String;
   }
   export type AffectedResources = {[key: string]: String};
+  export interface AgentDetails {
+    /**
+     * Version of the installed GuardDuty security agent.
+     */
+    Version?: String;
+  }
   export interface Anomaly {
     /**
      * Information about the types of profiles.
@@ -956,6 +962,16 @@ declare namespace GuardDuty {
      */
     SecurityContext?: SecurityContext;
   }
+  export interface ContainerInstanceDetails {
+    /**
+     * Represents the nodes in the Amazon ECS cluster that has a HEALTHY coverage status.
+     */
+    CoveredContainerInstances?: Long;
+    /**
+     * Represents total number of nodes in the Amazon ECS cluster.
+     */
+    CompatibleContainerInstances?: Long;
+  }
   export type Containers = Container[];
   export type CountByCoverageStatus = {[key: string]: Long};
   export type CountByResourceType = {[key: string]: Long};
@@ -969,6 +985,42 @@ declare namespace GuardDuty {
      * The country name of the remote IP address.
      */
     CountryName?: String;
+  }
+  export interface CoverageEc2InstanceDetails {
+    /**
+     * The Amazon EC2 instance ID.
+     */
+    InstanceId?: String;
+    /**
+     * The instance type of the Amazon EC2 instance.
+     */
+    InstanceType?: String;
+    /**
+     * The cluster ARN of the Amazon ECS cluster running on the Amazon EC2 instance.
+     */
+    ClusterArn?: String;
+    /**
+     * Information about the installed security agent.
+     */
+    AgentDetails?: AgentDetails;
+    /**
+     * Indicates how the GuardDuty security agent is managed for this resource.    AUTO_MANAGED indicates that GuardDuty deploys and manages updates for this resource.    MANUAL indicates that you are responsible to deploy, update, and manage the GuardDuty security agent updates for this resource.    The DISABLED status doesn't apply to Amazon EC2 instances and Amazon EKS clusters that run on Amazon EC2 instances. 
+     */
+    ManagementType?: ManagementType;
+  }
+  export interface CoverageEcsClusterDetails {
+    /**
+     * The name of the Amazon ECS cluster.
+     */
+    ClusterName?: String;
+    /**
+     * Information about the Fargate details associated with the Amazon ECS cluster.
+     */
+    FargateDetails?: FargateDetails;
+    /**
+     * Information about the Amazon ECS container running on Amazon EC2 instance.
+     */
+    ContainerInstanceDetails?: ContainerInstanceDetails;
   }
   export interface CoverageEksClusterDetails {
     /**
@@ -1018,7 +1070,7 @@ declare namespace GuardDuty {
      */
     FilterCondition?: CoverageFilterCondition;
   }
-  export type CoverageFilterCriterionKey = "ACCOUNT_ID"|"CLUSTER_NAME"|"RESOURCE_TYPE"|"COVERAGE_STATUS"|"ADDON_VERSION"|"MANAGEMENT_TYPE"|"EKS_CLUSTER_NAME"|string;
+  export type CoverageFilterCriterionKey = "ACCOUNT_ID"|"CLUSTER_NAME"|"RESOURCE_TYPE"|"COVERAGE_STATUS"|"ADDON_VERSION"|"MANAGEMENT_TYPE"|"EKS_CLUSTER_NAME"|"ECS_CLUSTER_NAME"|"AGENT_VERSION"|"INSTANCE_ID"|"CLUSTER_ARN"|string;
   export type CoverageFilterCriterionList = CoverageFilterCriterion[];
   export interface CoverageResource {
     /**
@@ -1059,6 +1111,14 @@ declare namespace GuardDuty {
      * The type of Amazon Web Services resource.
      */
     ResourceType?: ResourceType;
+    /**
+     * Information about the Amazon ECS cluster that is assessed for runtime coverage.
+     */
+    EcsClusterDetails?: CoverageEcsClusterDetails;
+    /**
+     *  This API is also used when you use GuardDuty Runtime Monitoring for your Amazon EC2 instances (currently in preview release) and is subject to change.  Information about the Amazon EC2 instance assessed for runtime coverage.
+     */
+    Ec2InstanceDetails?: CoverageEc2InstanceDetails;
   }
   export type CoverageResources = CoverageResource[];
   export interface CoverageSortCriteria {
@@ -1071,7 +1131,7 @@ declare namespace GuardDuty {
      */
     OrderBy?: OrderBy;
   }
-  export type CoverageSortKey = "ACCOUNT_ID"|"CLUSTER_NAME"|"COVERAGE_STATUS"|"ISSUE"|"ADDON_VERSION"|"UPDATED_AT"|"EKS_CLUSTER_NAME"|string;
+  export type CoverageSortKey = "ACCOUNT_ID"|"CLUSTER_NAME"|"COVERAGE_STATUS"|"ISSUE"|"ADDON_VERSION"|"UPDATED_AT"|"EKS_CLUSTER_NAME"|"ECS_CLUSTER_NAME"|"INSTANCE_ID"|string;
   export interface CoverageStatistics {
     /**
      * Represents coverage statistics for EKS clusters aggregated by resource type.
@@ -1636,7 +1696,7 @@ declare namespace GuardDuty {
   }
   export type DetectorAdditionalConfigurationResults = DetectorAdditionalConfigurationResult[];
   export type DetectorAdditionalConfigurations = DetectorAdditionalConfiguration[];
-  export type DetectorFeature = "S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|"EKS_RUNTIME_MONITORING"|"LAMBDA_NETWORK_LOGS"|string;
+  export type DetectorFeature = "S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|"EKS_RUNTIME_MONITORING"|"LAMBDA_NETWORK_LOGS"|"RUNTIME_MONITORING"|string;
   export interface DetectorFeatureConfiguration {
     /**
      * The name of the feature.
@@ -1671,7 +1731,7 @@ declare namespace GuardDuty {
   }
   export type DetectorFeatureConfigurations = DetectorFeatureConfiguration[];
   export type DetectorFeatureConfigurationsResults = DetectorFeatureConfigurationResult[];
-  export type DetectorFeatureResult = "FLOW_LOGS"|"CLOUD_TRAIL"|"DNS_LOGS"|"S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|"EKS_RUNTIME_MONITORING"|"LAMBDA_NETWORK_LOGS"|string;
+  export type DetectorFeatureResult = "FLOW_LOGS"|"CLOUD_TRAIL"|"DNS_LOGS"|"S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|"EKS_RUNTIME_MONITORING"|"LAMBDA_NETWORK_LOGS"|"RUNTIME_MONITORING"|string;
   export type DetectorId = string;
   export type DetectorIds = DetectorId[];
   export type DetectorStatus = "ENABLED"|"DISABLED"|string;
@@ -1910,7 +1970,17 @@ declare namespace GuardDuty {
      */
     ThreatIntelligenceDetails?: ThreatIntelligenceDetails;
   }
-  export type FeatureAdditionalConfiguration = "EKS_ADDON_MANAGEMENT"|string;
+  export interface FargateDetails {
+    /**
+     * Runtime coverage issues identified for the resource running on AWS Fargate.
+     */
+    Issues?: Issues;
+    /**
+     * Indicates how the GuardDuty security agent is managed for this resource.    AUTO_MANAGED indicates that GuardDuty deploys and manages updates for this resource.    MANUAL indicates that you are responsible to deploy, update, and manage the GuardDuty security agent updates for this resource.    DISABLED indicates that the deployment of the GuardDuty security agent is disabled for this resource.  
+     */
+    ManagementType?: ManagementType;
+  }
+  export type FeatureAdditionalConfiguration = "EKS_ADDON_MANAGEMENT"|"ECS_FARGATE_AGENT_MANAGEMENT"|string;
   export type FeatureStatus = "ENABLED"|"DISABLED"|string;
   export type Feedback = "USEFUL"|"NOT_USEFUL"|string;
   export type FilePaths = ScanFilePath[];
@@ -2044,7 +2114,7 @@ declare namespace GuardDuty {
     FreeTrialDaysRemaining?: Integer;
   }
   export type FreeTrialFeatureConfigurationsResults = FreeTrialFeatureConfigurationResult[];
-  export type FreeTrialFeatureResult = "FLOW_LOGS"|"CLOUD_TRAIL"|"DNS_LOGS"|"S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|"EKS_RUNTIME_MONITORING"|"LAMBDA_NETWORK_LOGS"|string;
+  export type FreeTrialFeatureResult = "FLOW_LOGS"|"CLOUD_TRAIL"|"DNS_LOGS"|"S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|"EKS_RUNTIME_MONITORING"|"LAMBDA_NETWORK_LOGS"|"FARGATE_RUNTIME_MONITORING"|"EC2_RUNTIME_MONITORING"|string;
   export interface GeoLocation {
     /**
      * The latitude information of the remote IP address.
@@ -2545,6 +2615,7 @@ declare namespace GuardDuty {
   export type IpSetIds = String[];
   export type IpSetStatus = "INACTIVE"|"ACTIVATING"|"ACTIVE"|"DEACTIVATING"|"ERROR"|"DELETE_PENDING"|"DELETED"|string;
   export type Ipv6Addresses = String[];
+  export type Issues = String[];
   export interface KubernetesApiCallAction {
     /**
      * The Kubernetes API request URI.
@@ -3143,7 +3214,7 @@ declare namespace GuardDuty {
      */
     ScanEc2InstanceWithFindings?: DataSourceFreeTrial;
   }
-  export type ManagementType = "AUTO_MANAGED"|"MANUAL"|string;
+  export type ManagementType = "AUTO_MANAGED"|"MANUAL"|"DISABLED"|string;
   export type MapEquals = ScanConditionPair[];
   export interface Master {
     /**
@@ -3360,8 +3431,8 @@ declare namespace GuardDuty {
     Text?: ObservationTexts;
   }
   export type OrderBy = "ASC"|"DESC"|string;
-  export type OrgFeature = "S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|"EKS_RUNTIME_MONITORING"|"LAMBDA_NETWORK_LOGS"|string;
-  export type OrgFeatureAdditionalConfiguration = "EKS_ADDON_MANAGEMENT"|string;
+  export type OrgFeature = "S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|"EKS_RUNTIME_MONITORING"|"LAMBDA_NETWORK_LOGS"|"RUNTIME_MONITORING"|string;
+  export type OrgFeatureAdditionalConfiguration = "EKS_ADDON_MANAGEMENT"|"ECS_FARGATE_AGENT_MANAGEMENT"|string;
   export type OrgFeatureStatus = "NEW"|"NONE"|"ALL"|string;
   export interface Organization {
     /**
@@ -3816,7 +3887,7 @@ declare namespace GuardDuty {
     InstanceArn?: InstanceArn;
   }
   export type ResourceList = String[];
-  export type ResourceType = "EKS"|string;
+  export type ResourceType = "EKS"|"ECS"|"EC2"|string;
   export interface RuntimeContext {
     /**
      * Information about the process that modified the current process. This is available for multiple finding types.
@@ -4658,7 +4729,7 @@ declare namespace GuardDuty {
     Total?: Total;
   }
   export type UsageDataSourceResultList = UsageDataSourceResult[];
-  export type UsageFeature = "FLOW_LOGS"|"CLOUD_TRAIL"|"DNS_LOGS"|"S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|"LAMBDA_NETWORK_LOGS"|"EKS_RUNTIME_MONITORING"|string;
+  export type UsageFeature = "FLOW_LOGS"|"CLOUD_TRAIL"|"DNS_LOGS"|"S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|"LAMBDA_NETWORK_LOGS"|"EKS_RUNTIME_MONITORING"|"FARGATE_RUNTIME_MONITORING"|"EC2_RUNTIME_MONITORING"|string;
   export type UsageFeatureList = UsageFeature[];
   export interface UsageFeatureResult {
     /**

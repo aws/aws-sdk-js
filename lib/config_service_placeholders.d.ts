@@ -361,6 +361,12 @@ export abstract class ConfigurationServicePlaceholders {
   trustedadvisor?: AWS.TrustedAdvisor.Types.ClientConfiguration;
   cloudfrontkeyvaluestore?: AWS.CloudFrontKeyValueStore.Types.ClientConfiguration;
   inspectorscan?: AWS.InspectorScan.Types.ClientConfiguration;
+  bcmdataexports?: AWS.BCMDataExports.Types.ClientConfiguration;
+  costoptimizationhub?: AWS.CostOptimizationHub.Types.ClientConfiguration;
+  eksauth?: AWS.EKSAuth.Types.ClientConfiguration;
+  freetier?: AWS.FreeTier.Types.ClientConfiguration;
+  repostspace?: AWS.Repostspace.Types.ClientConfiguration;
+  workspacesthinclient?: AWS.WorkSpacesThinClient.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -724,4 +730,10 @@ export interface ConfigurationServiceApiVersions {
   trustedadvisor?: AWS.TrustedAdvisor.Types.apiVersion;
   cloudfrontkeyvaluestore?: AWS.CloudFrontKeyValueStore.Types.apiVersion;
   inspectorscan?: AWS.InspectorScan.Types.apiVersion;
+  bcmdataexports?: AWS.BCMDataExports.Types.apiVersion;
+  costoptimizationhub?: AWS.CostOptimizationHub.Types.apiVersion;
+  eksauth?: AWS.EKSAuth.Types.apiVersion;
+  freetier?: AWS.FreeTier.Types.apiVersion;
+  repostspace?: AWS.Repostspace.Types.apiVersion;
+  workspacesthinclient?: AWS.WorkSpacesThinClient.Types.apiVersion;
 }

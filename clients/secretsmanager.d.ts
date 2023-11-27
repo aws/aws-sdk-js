@@ -12,6 +12,14 @@ declare class SecretsManager extends Service {
   constructor(options?: SecretsManager.Types.ClientConfiguration)
   config: Config & SecretsManager.Types.ClientConfiguration;
   /**
+   * Retrieves the contents of the encrypted fields SecretString or SecretBinary for up to 20 secrets. To retrieve a single secret, call GetSecretValue.  To choose which secrets to retrieve, you can specify a list of secrets by name or ARN, or you can use filters. If Secrets Manager encounters errors such as AccessDeniedException while attempting to retrieve any of the secrets, you can see the errors in Errors in the response. Secrets Manager generates CloudTrail GetSecretValue log entries for each secret you request when you call this action. Do not include sensitive information in request parameters because it might be logged. For more information, see Logging Secrets Manager events with CloudTrail.  Required permissions:  secretsmanager:BatchGetSecretValue, and you must have secretsmanager:GetSecretValue for each secret. If you use filters, you must also have secretsmanager:ListSecrets. If the secrets are encrypted using customer-managed keys instead of the Amazon Web Services managed key aws/secretsmanager, then you also need kms:Decrypt permissions for the keys. For more information, see  IAM policy actions for Secrets Manager and Authentication and access control in Secrets Manager. 
+   */
+  batchGetSecretValue(params: SecretsManager.Types.BatchGetSecretValueRequest, callback?: (err: AWSError, data: SecretsManager.Types.BatchGetSecretValueResponse) => void): Request<SecretsManager.Types.BatchGetSecretValueResponse, AWSError>;
+  /**
+   * Retrieves the contents of the encrypted fields SecretString or SecretBinary for up to 20 secrets. To retrieve a single secret, call GetSecretValue.  To choose which secrets to retrieve, you can specify a list of secrets by name or ARN, or you can use filters. If Secrets Manager encounters errors such as AccessDeniedException while attempting to retrieve any of the secrets, you can see the errors in Errors in the response. Secrets Manager generates CloudTrail GetSecretValue log entries for each secret you request when you call this action. Do not include sensitive information in request parameters because it might be logged. For more information, see Logging Secrets Manager events with CloudTrail.  Required permissions:  secretsmanager:BatchGetSecretValue, and you must have secretsmanager:GetSecretValue for each secret. If you use filters, you must also have secretsmanager:ListSecrets. If the secrets are encrypted using customer-managed keys instead of the Amazon Web Services managed key aws/secretsmanager, then you also need kms:Decrypt permissions for the keys. For more information, see  IAM policy actions for Secrets Manager and Authentication and access control in Secrets Manager. 
+   */
+  batchGetSecretValue(callback?: (err: AWSError, data: SecretsManager.Types.BatchGetSecretValueResponse) => void): Request<SecretsManager.Types.BatchGetSecretValueResponse, AWSError>;
+  /**
    * Turns off automatic rotation, and if a rotation is currently in progress, cancels the rotation. If you cancel a rotation in progress, it can leave the VersionStage labels in an unexpected state. You might need to remove the staging label AWSPENDING from the partially created version. You also need to determine whether to roll back to the previous version of the secret by moving the staging label AWSCURRENT to the version that has AWSPENDING. To determine which version has a specific staging label, call ListSecretVersionIds. Then use UpdateSecretVersionStage to change staging labels. For more information, see How rotation works. To turn on automatic rotation again, call RotateSecret. Secrets Manager generates a CloudTrail log entry when you call this action. Do not include sensitive information in request parameters because it might be logged. For more information, see Logging Secrets Manager events with CloudTrail.  Required permissions:  secretsmanager:CancelRotateSecret. For more information, see  IAM policy actions for Secrets Manager and Authentication and access control in Secrets Manager. 
    */
   cancelRotateSecret(params: SecretsManager.Types.CancelRotateSecretRequest, callback?: (err: AWSError, data: SecretsManager.Types.CancelRotateSecretResponse) => void): Request<SecretsManager.Types.CancelRotateSecretResponse, AWSError>;
@@ -68,11 +76,11 @@ declare class SecretsManager extends Service {
    */
   getResourcePolicy(callback?: (err: AWSError, data: SecretsManager.Types.GetResourcePolicyResponse) => void): Request<SecretsManager.Types.GetResourcePolicyResponse, AWSError>;
   /**
-   * Retrieves the contents of the encrypted fields SecretString or SecretBinary from the specified version of a secret, whichever contains content. We recommend that you cache your secret values by using client-side caching. Caching secrets improves speed and reduces your costs. For more information, see Cache secrets for your applications. To retrieve the previous version of a secret, use VersionStage and specify AWSPREVIOUS. To revert to the previous version of a secret, call UpdateSecretVersionStage. Secrets Manager generates a CloudTrail log entry when you call this action. Do not include sensitive information in request parameters because it might be logged. For more information, see Logging Secrets Manager events with CloudTrail.  Required permissions:  secretsmanager:GetSecretValue. If the secret is encrypted using a customer-managed key instead of the Amazon Web Services managed key aws/secretsmanager, then you also need kms:Decrypt permissions for that key. For more information, see  IAM policy actions for Secrets Manager and Authentication and access control in Secrets Manager. 
+   * Retrieves the contents of the encrypted fields SecretString or SecretBinary from the specified version of a secret, whichever contains content. To retrieve the values for a group of secrets, call BatchGetSecretValue. We recommend that you cache your secret values by using client-side caching. Caching secrets improves speed and reduces your costs. For more information, see Cache secrets for your applications. To retrieve the previous version of a secret, use VersionStage and specify AWSPREVIOUS. To revert to the previous version of a secret, call UpdateSecretVersionStage. Secrets Manager generates a CloudTrail log entry when you call this action. Do not include sensitive information in request parameters because it might be logged. For more information, see Logging Secrets Manager events with CloudTrail.  Required permissions:  secretsmanager:GetSecretValue. If the secret is encrypted using a customer-managed key instead of the Amazon Web Services managed key aws/secretsmanager, then you also need kms:Decrypt permissions for that key. For more information, see  IAM policy actions for Secrets Manager and Authentication and access control in Secrets Manager. 
    */
   getSecretValue(params: SecretsManager.Types.GetSecretValueRequest, callback?: (err: AWSError, data: SecretsManager.Types.GetSecretValueResponse) => void): Request<SecretsManager.Types.GetSecretValueResponse, AWSError>;
   /**
-   * Retrieves the contents of the encrypted fields SecretString or SecretBinary from the specified version of a secret, whichever contains content. We recommend that you cache your secret values by using client-side caching. Caching secrets improves speed and reduces your costs. For more information, see Cache secrets for your applications. To retrieve the previous version of a secret, use VersionStage and specify AWSPREVIOUS. To revert to the previous version of a secret, call UpdateSecretVersionStage. Secrets Manager generates a CloudTrail log entry when you call this action. Do not include sensitive information in request parameters because it might be logged. For more information, see Logging Secrets Manager events with CloudTrail.  Required permissions:  secretsmanager:GetSecretValue. If the secret is encrypted using a customer-managed key instead of the Amazon Web Services managed key aws/secretsmanager, then you also need kms:Decrypt permissions for that key. For more information, see  IAM policy actions for Secrets Manager and Authentication and access control in Secrets Manager. 
+   * Retrieves the contents of the encrypted fields SecretString or SecretBinary from the specified version of a secret, whichever contains content. To retrieve the values for a group of secrets, call BatchGetSecretValue. We recommend that you cache your secret values by using client-side caching. Caching secrets improves speed and reduces your costs. For more information, see Cache secrets for your applications. To retrieve the previous version of a secret, use VersionStage and specify AWSPREVIOUS. To revert to the previous version of a secret, call UpdateSecretVersionStage. Secrets Manager generates a CloudTrail log entry when you call this action. Do not include sensitive information in request parameters because it might be logged. For more information, see Logging Secrets Manager events with CloudTrail.  Required permissions:  secretsmanager:GetSecretValue. If the secret is encrypted using a customer-managed key instead of the Amazon Web Services managed key aws/secretsmanager, then you also need kms:Decrypt permissions for that key. For more information, see  IAM policy actions for Secrets Manager and Authentication and access control in Secrets Manager. 
    */
   getSecretValue(callback?: (err: AWSError, data: SecretsManager.Types.GetSecretValueResponse) => void): Request<SecretsManager.Types.GetSecretValueResponse, AWSError>;
   /**
@@ -84,11 +92,11 @@ declare class SecretsManager extends Service {
    */
   listSecretVersionIds(callback?: (err: AWSError, data: SecretsManager.Types.ListSecretVersionIdsResponse) => void): Request<SecretsManager.Types.ListSecretVersionIdsResponse, AWSError>;
   /**
-   * Lists the secrets that are stored by Secrets Manager in the Amazon Web Services account, not including secrets that are marked for deletion. To see secrets marked for deletion, use the Secrets Manager console. ListSecrets is eventually consistent, however it might not reflect changes from the last five minutes. To get the latest information for a specific secret, use DescribeSecret. To list the versions of a secret, use ListSecretVersionIds. To get the secret value from SecretString or SecretBinary, call GetSecretValue. For information about finding secrets in the console, see Find secrets in Secrets Manager. Secrets Manager generates a CloudTrail log entry when you call this action. Do not include sensitive information in request parameters because it might be logged. For more information, see Logging Secrets Manager events with CloudTrail.  Required permissions:  secretsmanager:ListSecrets. For more information, see  IAM policy actions for Secrets Manager and Authentication and access control in Secrets Manager. 
+   * Lists the secrets that are stored by Secrets Manager in the Amazon Web Services account, not including secrets that are marked for deletion. To see secrets marked for deletion, use the Secrets Manager console. ListSecrets is eventually consistent, however it might not reflect changes from the last five minutes. To get the latest information for a specific secret, use DescribeSecret. To list the versions of a secret, use ListSecretVersionIds. To retrieve the values for the secrets, call BatchGetSecretValue or GetSecretValue. For information about finding secrets in the console, see Find secrets in Secrets Manager. Secrets Manager generates a CloudTrail log entry when you call this action. Do not include sensitive information in request parameters because it might be logged. For more information, see Logging Secrets Manager events with CloudTrail.  Required permissions:  secretsmanager:ListSecrets. For more information, see  IAM policy actions for Secrets Manager and Authentication and access control in Secrets Manager. 
    */
   listSecrets(params: SecretsManager.Types.ListSecretsRequest, callback?: (err: AWSError, data: SecretsManager.Types.ListSecretsResponse) => void): Request<SecretsManager.Types.ListSecretsResponse, AWSError>;
   /**
-   * Lists the secrets that are stored by Secrets Manager in the Amazon Web Services account, not including secrets that are marked for deletion. To see secrets marked for deletion, use the Secrets Manager console. ListSecrets is eventually consistent, however it might not reflect changes from the last five minutes. To get the latest information for a specific secret, use DescribeSecret. To list the versions of a secret, use ListSecretVersionIds. To get the secret value from SecretString or SecretBinary, call GetSecretValue. For information about finding secrets in the console, see Find secrets in Secrets Manager. Secrets Manager generates a CloudTrail log entry when you call this action. Do not include sensitive information in request parameters because it might be logged. For more information, see Logging Secrets Manager events with CloudTrail.  Required permissions:  secretsmanager:ListSecrets. For more information, see  IAM policy actions for Secrets Manager and Authentication and access control in Secrets Manager. 
+   * Lists the secrets that are stored by Secrets Manager in the Amazon Web Services account, not including secrets that are marked for deletion. To see secrets marked for deletion, use the Secrets Manager console. ListSecrets is eventually consistent, however it might not reflect changes from the last five minutes. To get the latest information for a specific secret, use DescribeSecret. To list the versions of a secret, use ListSecretVersionIds. To retrieve the values for the secrets, call BatchGetSecretValue or GetSecretValue. For information about finding secrets in the console, see Find secrets in Secrets Manager. Secrets Manager generates a CloudTrail log entry when you call this action. Do not include sensitive information in request parameters because it might be logged. For more information, see Logging Secrets Manager events with CloudTrail.  Required permissions:  secretsmanager:ListSecrets. For more information, see  IAM policy actions for Secrets Manager and Authentication and access control in Secrets Manager. 
    */
   listSecrets(callback?: (err: AWSError, data: SecretsManager.Types.ListSecretsResponse) => void): Request<SecretsManager.Types.ListSecretsResponse, AWSError>;
   /**
@@ -189,8 +197,55 @@ declare class SecretsManager extends Service {
   validateResourcePolicy(callback?: (err: AWSError, data: SecretsManager.Types.ValidateResourcePolicyResponse) => void): Request<SecretsManager.Types.ValidateResourcePolicyResponse, AWSError>;
 }
 declare namespace SecretsManager {
+  export type APIErrorListType = APIErrorType[];
+  export interface APIErrorType {
+    /**
+     * The ARN or name of the secret.
+     */
+    SecretId?: SecretIdType;
+    /**
+     * The error Secrets Manager encountered while retrieving an individual secret as part of BatchGetSecretValue, for example ResourceNotFoundException,InvalidParameterException, InvalidRequestException, DecryptionFailure, or AccessDeniedException.
+     */
+    ErrorCode?: ErrorCode;
+    /**
+     * A message describing the error.
+     */
+    Message?: ErrorMessage;
+  }
   export type AddReplicaRegionListType = ReplicaRegionType[];
   export type AutomaticallyRotateAfterDaysType = number;
+  export interface BatchGetSecretValueRequest {
+    /**
+     * The ARN or names of the secrets to retrieve. You must include Filters or SecretIdList, but not both.
+     */
+    SecretIdList?: SecretIdListType;
+    /**
+     * The filters to choose which secrets to retrieve. You must include Filters or SecretIdList, but not both.
+     */
+    Filters?: FiltersListType;
+    /**
+     * The number of results to include in the response. If there are more results available, in the response, Secrets Manager includes NextToken. To get the next results, call BatchGetSecretValue again with the value from NextToken.
+     */
+    MaxResults?: MaxResultsBatchType;
+    /**
+     * A token that indicates where the output should continue from, if a previous call did not show all results. To get the next results, call BatchGetSecretValue again with this value.
+     */
+    NextToken?: NextTokenType;
+  }
+  export interface BatchGetSecretValueResponse {
+    /**
+     * A list of secret values.
+     */
+    SecretValues?: SecretValuesType;
+    /**
+     * Secrets Manager includes this value if there's more output available than what is included in the current response. This can occur even when the response includes no values at all, such as when you ask for a filtered view of a long list. To get the next results, call BatchGetSecretValue again with this value.
+     */
+    NextToken?: NextTokenType;
+    /**
+     * A list of errors Secrets Manager encountered while attempting to retrieve individual secrets.
+     */
+    Errors?: APIErrorListType;
+  }
   export type BooleanType = boolean;
   export interface CancelRotateSecretRequest {
     /**
@@ -398,6 +453,7 @@ declare namespace SecretsManager {
   }
   export type DescriptionType = string;
   export type DurationType = string;
+  export type ErrorCode = string;
   export type ErrorMessage = string;
   export type ExcludeCharactersType = string;
   export type ExcludeLowercaseType = boolean;
@@ -596,6 +652,7 @@ declare namespace SecretsManager {
      */
     NextToken?: NextTokenType;
   }
+  export type MaxResultsBatchType = number;
   export type MaxResultsType = number;
   export type NameType = string;
   export type NextRotationDateType = Date;
@@ -820,6 +877,7 @@ declare namespace SecretsManager {
   export type ScheduleExpressionType = string;
   export type SecretARNType = string;
   export type SecretBinaryType = Buffer|Uint8Array|Blob|string;
+  export type SecretIdListType = SecretIdType[];
   export type SecretIdType = string;
   export interface SecretListEntry {
     /**
@@ -827,7 +885,7 @@ declare namespace SecretsManager {
      */
     ARN?: SecretARNType;
     /**
-     * The friendly name of the secret. You can use forward slashes in the name to represent a path hierarchy. For example, /prod/databases/dbserver1 could represent the secret for a server named dbserver1 in the folder databases in the folder prod. 
+     * The friendly name of the secret. 
      */
     Name?: SecretNameType;
     /**
@@ -894,6 +952,37 @@ declare namespace SecretsManager {
   export type SecretListType = SecretListEntry[];
   export type SecretNameType = string;
   export type SecretStringType = string;
+  export interface SecretValueEntry {
+    /**
+     * The Amazon Resource Name (ARN) of the secret.
+     */
+    ARN?: SecretARNType;
+    /**
+     * The friendly name of the secret. 
+     */
+    Name?: SecretNameType;
+    /**
+     * The unique version identifier of this version of the secret.
+     */
+    VersionId?: SecretVersionIdType;
+    /**
+     * The decrypted secret value, if the secret value was originally provided as binary data in the form of a byte array. The parameter represents the binary data as a base64-encoded string.
+     */
+    SecretBinary?: SecretBinaryType;
+    /**
+     * The decrypted secret value, if the secret value was originally provided as a string or through the Secrets Manager console.
+     */
+    SecretString?: SecretStringType;
+    /**
+     * A list of all of the staging labels currently attached to this version of the secret.
+     */
+    VersionStages?: SecretVersionStagesType;
+    /**
+     * The date the secret was created.
+     */
+    CreatedDate?: CreatedDateType;
+  }
+  export type SecretValuesType = SecretValueEntry[];
   export type SecretVersionIdType = string;
   export type SecretVersionStageType = string;
   export type SecretVersionStagesType = SecretVersionStageType[];

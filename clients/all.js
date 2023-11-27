@@ -360,5 +360,11 @@ module.exports = {
   LaunchWizard: require('./launchwizard'),
   TrustedAdvisor: require('./trustedadvisor'),
   CloudFrontKeyValueStore: require('./cloudfrontkeyvaluestore'),
-  InspectorScan: require('./inspectorscan')
+  InspectorScan: require('./inspectorscan'),
+  BCMDataExports: require('./bcmdataexports'),
+  CostOptimizationHub: require('./costoptimizationhub'),
+  EKSAuth: require('./eksauth'),
+  FreeTier: require('./freetier'),
+  Repostspace: require('./repostspace'),
+  WorkSpacesThinClient: require('./workspacesthinclient')
 };

@@ -196,11 +196,11 @@ declare class StepFunctions extends Service {
    */
   publishStateMachineVersion(callback?: (err: AWSError, data: StepFunctions.Types.PublishStateMachineVersionOutput) => void): Request<StepFunctions.Types.PublishStateMachineVersionOutput, AWSError>;
   /**
-   * Restarts unsuccessful executions of Standard workflows that didn't complete successfully in the last 14 days. These include failed, aborted, or timed out executions. When you redrive an execution, it continues the failed execution from the unsuccessful step and uses the same input. Step Functions preserves the results and execution history of the successful steps, and doesn't rerun these steps when you redrive an execution. Redriven executions use the same state machine definition and execution ARN as the original execution attempt. For workflows that include an Inline Map or Parallel state, RedriveExecution API action reschedules and redrives only the iterations and branches that failed or aborted. To redrive a workflow that includes a Distributed Map state with failed child workflow executions, you must redrive the parent workflow. The parent workflow redrives all the unsuccessful states, including Distributed Map.  This API action is not supported by EXPRESS state machines. However, you can restart the unsuccessful executions of Express child workflows in a Distributed Map by redriving its Map Run. When you redrive a Map Run, the Express child workflows are rerun using the StartExecution API action. For more information, see Redriving Map Runs.  You can redrive executions if your original execution meets the following conditions:   The execution status isn't SUCCEEDED.   Your workflow execution has not exceeded the redrivable period of 14 days. Redrivable period refers to the time during which you can redrive a given execution. This period starts from the day a state machine completes its execution.   The workflow execution has not exceeded the maximum open time of one year. For more information about state machine quotas, see Quotas related to state machine executions.   The execution event history count is less than 24,999. Redriven executions append their event history to the existing event history. Make sure your workflow execution contains less than 24,999 events to accommodate the ExecutionRedriven history event and at least one other history event.  
+   * Restarts unsuccessful executions of Standard workflows that didn't complete successfully in the last 14 days. These include failed, aborted, or timed out executions. When you redrive an execution, it continues the failed execution from the unsuccessful step and uses the same input. Step Functions preserves the results and execution history of the successful steps, and doesn't rerun these steps when you redrive an execution. Redriven executions use the same state machine definition and execution ARN as the original execution attempt. For workflows that include an Inline Map or Parallel state, RedriveExecution API action reschedules and redrives only the iterations and branches that failed or aborted. To redrive a workflow that includes a Distributed Map state whose Map Run failed, you must redrive the parent workflow. The parent workflow redrives all the unsuccessful states, including a failed Map Run. If a Map Run was not started in the original execution attempt, the redriven parent workflow starts the Map Run.  This API action is not supported by EXPRESS state machines. However, you can restart the unsuccessful executions of Express child workflows in a Distributed Map by redriving its Map Run. When you redrive a Map Run, the Express child workflows are rerun using the StartExecution API action. For more information, see Redriving Map Runs.  You can redrive executions if your original execution meets the following conditions:   The execution status isn't SUCCEEDED.   Your workflow execution has not exceeded the redrivable period of 14 days. Redrivable period refers to the time during which you can redrive a given execution. This period starts from the day a state machine completes its execution.   The workflow execution has not exceeded the maximum open time of one year. For more information about state machine quotas, see Quotas related to state machine executions.   The execution event history count is less than 24,999. Redriven executions append their event history to the existing event history. Make sure your workflow execution contains less than 24,999 events to accommodate the ExecutionRedriven history event and at least one other history event.  
    */
   redriveExecution(params: StepFunctions.Types.RedriveExecutionInput, callback?: (err: AWSError, data: StepFunctions.Types.RedriveExecutionOutput) => void): Request<StepFunctions.Types.RedriveExecutionOutput, AWSError>;
   /**
-   * Restarts unsuccessful executions of Standard workflows that didn't complete successfully in the last 14 days. These include failed, aborted, or timed out executions. When you redrive an execution, it continues the failed execution from the unsuccessful step and uses the same input. Step Functions preserves the results and execution history of the successful steps, and doesn't rerun these steps when you redrive an execution. Redriven executions use the same state machine definition and execution ARN as the original execution attempt. For workflows that include an Inline Map or Parallel state, RedriveExecution API action reschedules and redrives only the iterations and branches that failed or aborted. To redrive a workflow that includes a Distributed Map state with failed child workflow executions, you must redrive the parent workflow. The parent workflow redrives all the unsuccessful states, including Distributed Map.  This API action is not supported by EXPRESS state machines. However, you can restart the unsuccessful executions of Express child workflows in a Distributed Map by redriving its Map Run. When you redrive a Map Run, the Express child workflows are rerun using the StartExecution API action. For more information, see Redriving Map Runs.  You can redrive executions if your original execution meets the following conditions:   The execution status isn't SUCCEEDED.   Your workflow execution has not exceeded the redrivable period of 14 days. Redrivable period refers to the time during which you can redrive a given execution. This period starts from the day a state machine completes its execution.   The workflow execution has not exceeded the maximum open time of one year. For more information about state machine quotas, see Quotas related to state machine executions.   The execution event history count is less than 24,999. Redriven executions append their event history to the existing event history. Make sure your workflow execution contains less than 24,999 events to accommodate the ExecutionRedriven history event and at least one other history event.  
+   * Restarts unsuccessful executions of Standard workflows that didn't complete successfully in the last 14 days. These include failed, aborted, or timed out executions. When you redrive an execution, it continues the failed execution from the unsuccessful step and uses the same input. Step Functions preserves the results and execution history of the successful steps, and doesn't rerun these steps when you redrive an execution. Redriven executions use the same state machine definition and execution ARN as the original execution attempt. For workflows that include an Inline Map or Parallel state, RedriveExecution API action reschedules and redrives only the iterations and branches that failed or aborted. To redrive a workflow that includes a Distributed Map state whose Map Run failed, you must redrive the parent workflow. The parent workflow redrives all the unsuccessful states, including a failed Map Run. If a Map Run was not started in the original execution attempt, the redriven parent workflow starts the Map Run.  This API action is not supported by EXPRESS state machines. However, you can restart the unsuccessful executions of Express child workflows in a Distributed Map by redriving its Map Run. When you redrive a Map Run, the Express child workflows are rerun using the StartExecution API action. For more information, see Redriving Map Runs.  You can redrive executions if your original execution meets the following conditions:   The execution status isn't SUCCEEDED.   Your workflow execution has not exceeded the redrivable period of 14 days. Redrivable period refers to the time during which you can redrive a given execution. This period starts from the day a state machine completes its execution.   The workflow execution has not exceeded the maximum open time of one year. For more information about state machine quotas, see Quotas related to state machine executions.   The execution event history count is less than 24,999. Redriven executions append their event history to the existing event history. Make sure your workflow execution contains less than 24,999 events to accommodate the ExecutionRedriven history event and at least one other history event.  
    */
   redriveExecution(callback?: (err: AWSError, data: StepFunctions.Types.RedriveExecutionOutput) => void): Request<StepFunctions.Types.RedriveExecutionOutput, AWSError>;
   /**
@@ -259,6 +259,14 @@ declare class StepFunctions extends Service {
    * Add a tag to a Step Functions resource. An array of key-value pairs. For more information, see Using Cost Allocation Tags in the Amazon Web Services Billing and Cost Management User Guide, and Controlling Access Using IAM Tags. Tags may only contain Unicode letters, digits, white space, or these symbols: _ . : / = + - @.
    */
   tagResource(callback?: (err: AWSError, data: StepFunctions.Types.TagResourceOutput) => void): Request<StepFunctions.Types.TagResourceOutput, AWSError>;
+  /**
+   * Accepts the definition of a single state and executes it. You can test a state without creating a state machine or updating an existing state machine. Using this API, you can test the following:   A state's input and output processing data flow   An Amazon Web Services service integration request and response   An HTTP Task request and response   You can call this API on only one state at a time. The states that you can test include the following:    All Task types except Activity     Pass     Wait     Choice     Succeed     Fail    The TestState API assumes an IAM role which must contain the required IAM permissions for the resources your state is accessing. For information about the permissions a state might need, see IAM permissions to test a state. The TestState API can run for up to five minutes. If the execution of a state exceeds this duration, it fails with the States.Timeout error.  TestState doesn't support Activity tasks, .sync or .waitForTaskToken service integration patterns, Parallel, or Map states.
+   */
+  testState(params: StepFunctions.Types.TestStateInput, callback?: (err: AWSError, data: StepFunctions.Types.TestStateOutput) => void): Request<StepFunctions.Types.TestStateOutput, AWSError>;
+  /**
+   * Accepts the definition of a single state and executes it. You can test a state without creating a state machine or updating an existing state machine. Using this API, you can test the following:   A state's input and output processing data flow   An Amazon Web Services service integration request and response   An HTTP Task request and response   You can call this API on only one state at a time. The states that you can test include the following:    All Task types except Activity     Pass     Wait     Choice     Succeed     Fail    The TestState API assumes an IAM role which must contain the required IAM permissions for the resources your state is accessing. For information about the permissions a state might need, see IAM permissions to test a state. The TestState API can run for up to five minutes. If the execution of a state exceeds this duration, it fails with the States.Timeout error.  TestState doesn't support Activity tasks, .sync or .waitForTaskToken service integration patterns, Parallel, or Map states.
+   */
+  testState(callback?: (err: AWSError, data: StepFunctions.Types.TestStateOutput) => void): Request<StepFunctions.Types.TestStateOutput, AWSError>;
   /**
    * Remove a tag from a Step Functions resource
    */
@@ -620,7 +628,7 @@ declare namespace StepFunctions {
      */
     stateMachineAliasArn?: Arn;
     /**
-     * The number of times you've redriven an execution. If you have not yet redriven an execution, the redriveCount is 0. This count is not updated for redrives that failed to start or are pending to be redriven.
+     * The number of times you've redriven an execution. If you have not yet redriven an execution, the redriveCount is 0. This count is only updated if you successfully redrive an execution.
      */
     redriveCount?: RedriveCount;
     /**
@@ -684,7 +692,7 @@ declare namespace StepFunctions {
      */
     executionCounts: MapRunExecutionCounts;
     /**
-     * The number of times you've redriven a Map Run. If you have not yet redriven a Map Run, the redriveCount is 0. This count is not updated for redrives that failed to start or are pending to be redriven.
+     * The number of times you've redriven a Map Run. If you have not yet redriven a Map Run, the redriveCount is 0. This count is only updated if you successfully redrive a Map Run.
      */
     redriveCount?: RedriveCount;
     /**
@@ -887,7 +895,7 @@ declare namespace StepFunctions {
      */
     stateMachineAliasArn?: Arn;
     /**
-     * The number of times you've redriven an execution. If you have not yet redriven an execution, the redriveCount is 0. This count is not updated for redrives that failed to start or are pending to be redriven.
+     * The number of times you've redriven an execution. If you have not yet redriven an execution, the redriveCount is 0. This count is only updated when you successfully redrive an execution.
      */
     redriveCount?: RedriveCount;
     /**
@@ -998,6 +1006,12 @@ declare namespace StepFunctions {
      */
     nextToken?: PageToken;
   }
+  export type HTTPBody = string;
+  export type HTTPHeaders = string;
+  export type HTTPMethod = string;
+  export type HTTPProtocol = string;
+  export type HTTPStatusCode = string;
+  export type HTTPStatusMessage = string;
   export interface HistoryEvent {
     /**
      * The date and time the event occurred.
@@ -1123,6 +1137,85 @@ declare namespace StepFunctions {
   export type Identity = string;
   export type IncludeExecutionData = boolean;
   export type IncludeExecutionDataGetExecutionHistory = boolean;
+  export interface InspectionData {
+    /**
+     * The raw state input.
+     */
+    input?: SensitiveData;
+    /**
+     * The input after Step Functions applies the InputPath filter.
+     */
+    afterInputPath?: SensitiveData;
+    /**
+     * The effective input after Step Functions applies the Parameters filter.
+     */
+    afterParameters?: SensitiveData;
+    /**
+     * The state's raw result.
+     */
+    result?: SensitiveData;
+    /**
+     * The effective result after Step Functions applies the ResultSelector filter.
+     */
+    afterResultSelector?: SensitiveData;
+    /**
+     * The effective result combined with the raw state input after Step Functions applies the ResultPath filter.
+     */
+    afterResultPath?: SensitiveData;
+    /**
+     * The raw HTTP request that is sent when you test an HTTP Task.
+     */
+    request?: InspectionDataRequest;
+    /**
+     * The raw HTTP response that is returned when you test an HTTP Task.
+     */
+    response?: InspectionDataResponse;
+  }
+  export interface InspectionDataRequest {
+    /**
+     * The protocol used to make the HTTP request.
+     */
+    protocol?: HTTPProtocol;
+    /**
+     * The HTTP method used for the HTTP request.
+     */
+    method?: HTTPMethod;
+    /**
+     * The API endpoint used for the HTTP request.
+     */
+    url?: URL;
+    /**
+     * The request headers associated with the HTTP request.
+     */
+    headers?: HTTPHeaders;
+    /**
+     * The request body for the HTTP request.
+     */
+    body?: HTTPBody;
+  }
+  export interface InspectionDataResponse {
+    /**
+     * The protocol used to return the HTTP response.
+     */
+    protocol?: HTTPProtocol;
+    /**
+     * The HTTP response status code for the HTTP response.
+     */
+    statusCode?: HTTPStatusCode;
+    /**
+     * The message associated with the HTTP status code.
+     */
+    statusMessage?: HTTPStatusMessage;
+    /**
+     * The response headers associated with the HTTP response.
+     */
+    headers?: HTTPHeaders;
+    /**
+     * The HTTP response returned.
+     */
+    body?: HTTPBody;
+  }
+  export type InspectionLevel = "INFO"|"DEBUG"|"TRACE"|string;
   export interface LambdaFunctionFailedEventDetails {
     /**
      * The error code of the failure.
@@ -1421,7 +1514,7 @@ declare namespace StepFunctions {
      */
     resultsWritten: UnsignedLong;
     /**
-     * The number of FAILED, ABORTED, or TIMED_OUT child workflow executions that cannot be redriven because their execution status is terminal. For example, if your execution event history contains 25,000 entries, or the toleratedFailureCount or toleratedFailurePercentage for the Distributed Map has exceeded.
+     * The number of FAILED, ABORTED, or TIMED_OUT child workflow executions that cannot be redriven because their execution status is terminal. For example, child workflows with an execution status of FAILED, ABORTED, or TIMED_OUT and a redriveStatus of NOT_REDRIVABLE.
      */
     failuresNotRedrivable?: LongObject;
     /**
@@ -1473,7 +1566,7 @@ declare namespace StepFunctions {
      */
     resultsWritten: UnsignedLong;
     /**
-     * The number of FAILED, ABORTED, or TIMED_OUT items in child workflow executions that cannot be redriven because the execution status of those child workflows is terminal. For example, if your execution event history contains 25,000 entries, or the toleratedFailureCount or toleratedFailurePercentage for the Distributed Map has exceeded.
+     * The number of FAILED, ABORTED, or TIMED_OUT items in child workflow executions that cannot be redriven because the execution status of those child workflows is terminal. For example, child workflows with an execution status of FAILED, ABORTED, or TIMED_OUT and a redriveStatus of NOT_REDRIVABLE.
      */
     failuresNotRedrivable?: LongObject;
     /**
@@ -1564,7 +1657,7 @@ declare namespace StepFunctions {
      */
     executionArn: Arn;
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency. The API uses one of the last 10 client tokens provided.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency. The API will return idempotent responses for the last 10 client tokens used to successfully redrive the execution. These client tokens are valid for up to 15 minutes after they are first used.
      */
     clientToken?: ClientToken;
   }
@@ -1574,6 +1667,7 @@ declare namespace StepFunctions {
      */
     redriveDate: Timestamp;
   }
+  export type RevealSecrets = boolean;
   export type ReverseOrder = boolean;
   export type RevisionId = string;
   export type RoutingConfigurationList = RoutingConfigurationListItem[];
@@ -1796,6 +1890,7 @@ declare namespace StepFunctions {
      */
     creationDate: Timestamp;
   }
+  export type StateName = string;
   export interface StopExecutionInput {
     /**
      * The Amazon Resource Name (ARN) of the execution to stop.
@@ -1998,6 +2093,55 @@ declare namespace StepFunctions {
     cause?: SensitiveCause;
   }
   export type TaskToken = string;
+  export type TestExecutionStatus = "SUCCEEDED"|"FAILED"|"RETRIABLE"|"CAUGHT_ERROR"|string;
+  export interface TestStateInput {
+    /**
+     * The Amazon States Language (ASL) definition of the state.
+     */
+    definition: Definition;
+    /**
+     * The Amazon Resource Name (ARN) of the execution role with the required IAM permissions for the state.
+     */
+    roleArn: Arn;
+    /**
+     * A string that contains the JSON input data for the state.
+     */
+    input?: SensitiveData;
+    /**
+     * Determines the values to return when a state is tested. You can specify one of the following types:    INFO: Shows the final state output. By default, Step Functions sets inspectionLevel to INFO if you don't specify a level.    DEBUG: Shows the final state output along with the input and output data processing result.    TRACE: Shows the HTTP request and response for an HTTP Task. This level also shows the final state output along with the input and output data processing result.   Each of these levels also provide information about the status of the state execution and the next state to transition to.
+     */
+    inspectionLevel?: InspectionLevel;
+    /**
+     * Specifies whether or not to include secret information in the test result. For HTTP Tasks, a secret includes the data that an EventBridge connection adds to modify the HTTP request headers, query parameters, and body. Step Functions doesn't omit any information included in the state definition or the HTTP response. If you set revealSecrets to true, you must make sure that the IAM user that calls the TestState API has permission for the states:RevealSecrets action. For an example of IAM policy that sets the states:RevealSecrets permission, see IAM permissions to test a state. Without this permission, Step Functions throws an access denied error. By default, revealSecrets is set to false.
+     */
+    revealSecrets?: RevealSecrets;
+  }
+  export interface TestStateOutput {
+    /**
+     * The JSON output data of the state. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
+     */
+    output?: SensitiveData;
+    /**
+     * The error returned when the execution of a state fails.
+     */
+    error?: SensitiveError;
+    /**
+     * A detailed explanation of the cause for the error when the execution of a state fails.
+     */
+    cause?: SensitiveCause;
+    /**
+     * Returns additional details about the state's execution, including its input and output data processing flow, and HTTP request and response information. The inspectionLevel request parameter specifies which details are returned.
+     */
+    inspectionData?: InspectionData;
+    /**
+     * The name of the next state to transition to. If you haven't defined a next state in your definition or if the execution of the state fails, this ﬁeld doesn't contain a value.
+     */
+    nextState?: StateName;
+    /**
+     * The execution status of the state.
+     */
+    status?: TestExecutionStatus;
+  }
   export type TimeoutInSeconds = number;
   export type Timestamp = Date;
   export type ToleratedFailureCount = number;
@@ -2009,6 +2153,7 @@ declare namespace StepFunctions {
      */
     enabled?: Enabled;
   }
+  export type URL = string;
   export type UnsignedInteger = number;
   export type UnsignedLong = number;
   export interface UntagResourceInput {

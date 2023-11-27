@@ -1136,6 +1136,17 @@ declare namespace WorkSpaces {
      */
     PendingRequests?: WorkspaceList;
   }
+  export type DataReplication = "NO_REPLICATION"|"PRIMARY_AS_SOURCE"|string;
+  export interface DataReplicationSettings {
+    /**
+     * Indicates whether data replication is enabled, and if enabled, the type of data replication.
+     */
+    DataReplication?: DataReplication;
+    /**
+     * The date and time at which the last successful snapshot was taken of the primary WorkSpace used for replicating data.
+     */
+    RecoverySnapshotTime?: Timestamp;
+  }
   export type DedicatedTenancyCidrRangeList = DedicatedTenancyManagementCidrRange[];
   export type DedicatedTenancyManagementCidrRange = string;
   export type DedicatedTenancyModificationStateEnum = "PENDING"|"COMPLETED"|"FAILED"|string;
@@ -2266,7 +2277,11 @@ declare namespace WorkSpaces {
     /**
      * The properties of the WorkSpace.
      */
-    WorkspaceProperties: WorkspaceProperties;
+    WorkspaceProperties?: WorkspaceProperties;
+    /**
+     * Indicates the data replication status.
+     */
+    DataReplication?: DataReplication;
   }
   export interface ModifyWorkspacePropertiesResult {
   }
@@ -2495,9 +2510,28 @@ declare namespace WorkSpaces {
      * The tags associated with the standby WorkSpace.
      */
     Tags?: TagList;
+    /**
+     * Indicates whether data replication is enabled, and if enabled, the type of data replication.
+     */
+    DataReplication?: DataReplication;
   }
   export type StandbyWorkspaceRelationshipType = "PRIMARY"|"STANDBY"|string;
   export type StandbyWorkspacesList = StandbyWorkspace[];
+  export interface StandbyWorkspacesProperties {
+    /**
+     * The identifier of the standby WorkSpace
+     */
+    StandbyWorkspaceId?: WorkspaceId;
+    /**
+     * Indicates whether data replication is enabled, and if enabled, the type of data replication.
+     */
+    DataReplication?: DataReplication;
+    /**
+     * The date and time at which the last successful snapshot was taken of the primary WorkSpace used for replicating data.
+     */
+    RecoverySnapshotTime?: Timestamp;
+  }
+  export type StandbyWorkspacesPropertiesList = StandbyWorkspacesProperties[];
   export interface StartRequest {
     /**
      * The identifier of the WorkSpace.
@@ -2784,6 +2818,14 @@ declare namespace WorkSpaces {
      * The standby WorkSpace or primary WorkSpace related to the specified WorkSpace.
      */
     RelatedWorkspaces?: RelatedWorkspaces;
+    /**
+     * Indicates the settings of the data replication.
+     */
+    DataReplicationSettings?: DataReplicationSettings;
+    /**
+     * The properties of the standby WorkSpace
+     */
+    StandbyWorkspacesProperties?: StandbyWorkspacesPropertiesList;
   }
   export interface WorkspaceAccessProperties {
     /**

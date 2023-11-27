@@ -12,11 +12,11 @@ declare class ManagedBlockchain extends Service {
   constructor(options?: ManagedBlockchain.Types.ClientConfiguration)
   config: Config & ManagedBlockchain.Types.ClientConfiguration;
   /**
-   * Creates a new accessor for use with Managed Blockchain Ethereum nodes. An accessor contains information required for token based access to your Ethereum nodes.
+   * Creates a new accessor for use with Amazon Managed Blockchain service that supports token based access. The accessor contains information required for token based access.
    */
   createAccessor(params: ManagedBlockchain.Types.CreateAccessorInput, callback?: (err: AWSError, data: ManagedBlockchain.Types.CreateAccessorOutput) => void): Request<ManagedBlockchain.Types.CreateAccessorOutput, AWSError>;
   /**
-   * Creates a new accessor for use with Managed Blockchain Ethereum nodes. An accessor contains information required for token based access to your Ethereum nodes.
+   * Creates a new accessor for use with Amazon Managed Blockchain service that supports token based access. The accessor contains information required for token based access.
    */
   createAccessor(callback?: (err: AWSError, data: ManagedBlockchain.Types.CreateAccessorOutput) => void): Request<ManagedBlockchain.Types.CreateAccessorOutput, AWSError>;
   /**
@@ -239,7 +239,7 @@ declare namespace ManagedBlockchain {
      */
     Type?: AccessorType;
     /**
-     * The billing token is a property of the accessor. Use this token to make Ethereum API calls to your Ethereum node. The billing token is used to track your accessor object for billing Ethereum API requests made to your Ethereum nodes.
+     * The billing token is a property of the Accessor. Use this token to when making calls to the blockchain network. The billing token is used to track your accessor token for billing requests.
      */
     BillingToken?: AccessorBillingTokenString;
     /**
@@ -258,9 +258,14 @@ declare namespace ManagedBlockchain {
      * The tags assigned to the Accessor. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
      */
     Tags?: OutputTagMap;
+    /**
+     * The blockchain network that the Accessor token is created for.
+     */
+    NetworkType?: AccessorNetworkType;
   }
   export type AccessorBillingTokenString = string;
   export type AccessorListMaxResults = number;
+  export type AccessorNetworkType = "ETHEREUM_GOERLI"|"ETHEREUM_MAINNET"|"ETHEREUM_MAINNET_AND_GOERLI"|"POLYGON_MAINNET"|"POLYGON_MUMBAI"|string;
   export type AccessorStatus = "AVAILABLE"|"PENDING_DELETION"|"DELETED"|string;
   export interface AccessorSummary {
     /**
@@ -283,6 +288,10 @@ declare namespace ManagedBlockchain {
      * The Amazon Resource Name (ARN) of the accessor. For more information about ARNs and their format, see Amazon Resource Names (ARNs) in the Amazon Web Services General Reference.
      */
     Arn?: ArnString;
+    /**
+     * The blockchain network that the Accessor token is created for.
+     */
+    NetworkType?: AccessorNetworkType;
   }
   export type AccessorSummaryList = AccessorSummary[];
   export type AccessorType = "BILLING_TOKEN"|string;
@@ -296,7 +305,7 @@ declare namespace ManagedBlockchain {
      */
     ProposalDurationInHours?: ProposalDurationInt;
     /**
-     * Determines whether the vote percentage must be greater than the ThresholdPercentage or must be greater than or equal to the ThreholdPercentage to be approved.
+     * Determines whether the vote percentage must be greater than the ThresholdPercentage or must be greater than or equal to the ThresholdPercentage to be approved.
      */
     ThresholdComparator?: ThresholdComparator;
   }
@@ -316,6 +325,10 @@ declare namespace ManagedBlockchain {
      * Tags to assign to the Accessor.  Each tag consists of a key and an optional value. You can specify multiple key-value pairs in a single request with an overall maximum of 50 tags allowed per resource. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
      */
     Tags?: InputTagMap;
+    /**
+     * The blockchain network that the Accessor token is created for.  We recommend using the appropriate networkType value for the blockchain network that you are creating the Accessor token for. You cannnot use the value ETHEREUM_MAINNET_AND_GOERLI to specify a networkType for your Accessor token. The default value of ETHEREUM_MAINNET_AND_GOERLI is only applied:   when the CreateAccessor action does not set a networkType.   to all existing Accessor tokens that were created before the networkType property was introduced.    
+     */
+    NetworkType?: AccessorNetworkType;
   }
   export interface CreateAccessorOutput {
     /**
@@ -323,9 +336,13 @@ declare namespace ManagedBlockchain {
      */
     AccessorId?: ResourceIdString;
     /**
-     * The billing token is a property of the Accessor. Use this token to make Ethereum API calls to your Ethereum node. The billing token is used to track your accessor object for billing Ethereum API requests made to your Ethereum nodes.
+     * The billing token is a property of the Accessor. Use this token to when making calls to the blockchain network. The billing token is used to track your accessor token for billing requests.
      */
     BillingToken?: AccessorBillingTokenString;
+    /**
+     * The blockchain network that the accessor token is created for.
+     */
+    NetworkType?: AccessorNetworkType;
   }
   export interface CreateMemberInput {
     /**
@@ -620,6 +637,10 @@ declare namespace ManagedBlockchain {
      *  The pagination token that indicates the next set of results to retrieve. 
      */
     NextToken?: PaginationToken;
+    /**
+     * The blockchain network that the Accessor token is created for.  Use the value ETHEREUM_MAINNET_AND_GOERLI for all existing Accessors tokens that were created before the networkType property was introduced. 
+     */
+    NetworkType?: AccessorNetworkType;
   }
   export interface ListAccessorsOutput {
     /**

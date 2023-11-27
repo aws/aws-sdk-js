@@ -1354,5 +1354,27 @@
   "inspectorscan": {
     "prefix": "inspector-scan",
     "name": "InspectorScan"
+  },
+  "bcmdataexports": {
+    "prefix": "bcm-data-exports",
+    "name": "BCMDataExports"
+  },
+  "costoptimizationhub": {
+    "prefix": "cost-optimization-hub",
+    "name": "CostOptimizationHub"
+  },
+  "eksauth": {
+    "prefix": "eks-auth",
+    "name": "EKSAuth"
+  },
+  "freetier": {
+    "name": "FreeTier"
+  },
+  "repostspace": {
+    "name": "Repostspace"
+  },
+  "workspacesthinclient": {
+    "prefix": "workspaces-thin-client",
+    "name": "WorkSpacesThinClient"
   }
 }

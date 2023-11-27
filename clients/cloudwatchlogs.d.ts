@@ -44,6 +44,14 @@ declare class CloudWatchLogs extends Service {
    */
   createExportTask(callback?: (err: AWSError, data: CloudWatchLogs.Types.CreateExportTaskResponse) => void): Request<CloudWatchLogs.Types.CreateExportTaskResponse, AWSError>;
   /**
+   * Creates an anomaly detector that regularly scans one or more log groups and look for patterns and anomalies in the logs. An anomaly detector can help surface issues by automatically discovering anomalies in your log event traffic. An anomaly detector uses machine learning algorithms to scan log events and find patterns. A pattern is a shared text structure that recurs among your log fields. Patterns provide a useful tool for analyzing large sets of logs because a large number of log events can often be compressed into a few patterns. The anomaly detector uses pattern recognition to find anomalies, which are unusual log events. It uses the evaluationFrequency to compare current log events and patterns with trained baselines.  Fields within a pattern are called tokens. Fields that vary within a pattern, such as a request ID or timestamp, are referred to as dynamic tokens and represented by &lt;*&gt;.  The following is an example of a pattern:  [INFO] Request time: &lt;*&gt; ms  This pattern represents log events like [INFO] Request time: 327 ms and other similar log events that differ only by the number, in this csse 327. When the pattern is displayed, the different numbers are replaced by &lt;*&gt;   Any parts of log events that are masked as sensitive data are not scanned for anomalies. For more information about masking sensitive data, see Help protect sensitive log data with masking.  
+   */
+  createLogAnomalyDetector(params: CloudWatchLogs.Types.CreateLogAnomalyDetectorRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.CreateLogAnomalyDetectorResponse) => void): Request<CloudWatchLogs.Types.CreateLogAnomalyDetectorResponse, AWSError>;
+  /**
+   * Creates an anomaly detector that regularly scans one or more log groups and look for patterns and anomalies in the logs. An anomaly detector can help surface issues by automatically discovering anomalies in your log event traffic. An anomaly detector uses machine learning algorithms to scan log events and find patterns. A pattern is a shared text structure that recurs among your log fields. Patterns provide a useful tool for analyzing large sets of logs because a large number of log events can often be compressed into a few patterns. The anomaly detector uses pattern recognition to find anomalies, which are unusual log events. It uses the evaluationFrequency to compare current log events and patterns with trained baselines.  Fields within a pattern are called tokens. Fields that vary within a pattern, such as a request ID or timestamp, are referred to as dynamic tokens and represented by &lt;*&gt;.  The following is an example of a pattern:  [INFO] Request time: &lt;*&gt; ms  This pattern represents log events like [INFO] Request time: 327 ms and other similar log events that differ only by the number, in this csse 327. When the pattern is displayed, the different numbers are replaced by &lt;*&gt;   Any parts of log events that are masked as sensitive data are not scanned for anomalies. For more information about masking sensitive data, see Help protect sensitive log data with masking.  
+   */
+  createLogAnomalyDetector(callback?: (err: AWSError, data: CloudWatchLogs.Types.CreateLogAnomalyDetectorResponse) => void): Request<CloudWatchLogs.Types.CreateLogAnomalyDetectorResponse, AWSError>;
+  /**
    * Creates a log group with the specified name. You can create up to 1,000,000 log groups per Region per account. You must use the following guidelines when naming a log group:   Log group names must be unique within a Region for an Amazon Web Services account.   Log group names can be between 1 and 512 characters long.   Log group names consist of the following characters: a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), '/' (forward slash), '.' (period), and '#' (number sign)   When you create a log group, by default the log events in the log group do not expire. To set a retention policy so that events expire and are deleted after a specified time, use PutRetentionPolicy. If you associate an KMS key with the log group, ingested data is encrypted using the KMS key. This association is stored as long as the data encrypted with the KMS key is still within CloudWatch Logs. This enables CloudWatch Logs to decrypt this data whenever it is requested. If you attempt to associate a KMS key with the log group but the KMS key does not exist or the KMS key is disabled, you receive an InvalidParameterException error.   CloudWatch Logs supports only symmetric KMS keys. Do not associate an asymmetric KMS key with your log group. For more information, see Using Symmetric and Asymmetric Keys. 
    */
   createLogGroup(params: CloudWatchLogs.Types.CreateLogGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -115,6 +123,14 @@ declare class CloudWatchLogs extends Service {
    * Deletes the specified destination, and eventually disables all the subscription filters that publish to it. This operation does not delete the physical resource encapsulated by the destination.
    */
   deleteDestination(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified CloudWatch Logs anomaly detector.
+   */
+  deleteLogAnomalyDetector(params: CloudWatchLogs.Types.DeleteLogAnomalyDetectorRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified CloudWatch Logs anomaly detector.
+   */
+  deleteLogAnomalyDetector(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified log group and permanently deletes all the archived log events associated with the log group.
    */
@@ -332,6 +348,14 @@ declare class CloudWatchLogs extends Service {
    */
   getDeliverySource(callback?: (err: AWSError, data: CloudWatchLogs.Types.GetDeliverySourceResponse) => void): Request<CloudWatchLogs.Types.GetDeliverySourceResponse, AWSError>;
   /**
+   * Retrieves information about the log anomaly detector that you specify.
+   */
+  getLogAnomalyDetector(params: CloudWatchLogs.Types.GetLogAnomalyDetectorRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.GetLogAnomalyDetectorResponse) => void): Request<CloudWatchLogs.Types.GetLogAnomalyDetectorResponse, AWSError>;
+  /**
+   * Retrieves information about the log anomaly detector that you specify.
+   */
+  getLogAnomalyDetector(callback?: (err: AWSError, data: CloudWatchLogs.Types.GetLogAnomalyDetectorResponse) => void): Request<CloudWatchLogs.Types.GetLogAnomalyDetectorResponse, AWSError>;
+  /**
    * Lists log events from the specified log stream. You can list all of the log events or filter using a time range. By default, this operation returns as many log events as can fit in a response size of 1MB (up to 10,000 log events). You can get additional log events by specifying one of the tokens in a subsequent call. This operation can return empty results while there are more log events available through the token. If you are using CloudWatch cross-account observability, you can use this operation in a monitoring account and view data from the linked source accounts. For more information, see CloudWatch cross-account observability. You can specify the log group to search by using either logGroupIdentifier or logGroupName. You must include one of these two parameters, but you can't include both. 
    */
   getLogEvents(params: CloudWatchLogs.Types.GetLogEventsRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.GetLogEventsResponse) => void): Request<CloudWatchLogs.Types.GetLogEventsResponse, AWSError>;
@@ -363,6 +387,22 @@ declare class CloudWatchLogs extends Service {
    * Returns the results from the specified query. Only the fields requested in the query are returned, along with a @ptr field, which is the identifier for the log record. You can use the value of @ptr in a GetLogRecord operation to get the full log record.  GetQueryResults does not start running a query. To run a query, use StartQuery. For more information about how long results of previous queries are available, see CloudWatch Logs quotas. If the value of the Status field in the output is Running, this operation returns only partial results. If you see a value of Scheduled or Running for the status, you can retry the operation later to see the final results.  If you are using CloudWatch cross-account observability, you can use this operation in a monitoring account to start queries in linked source accounts. For more information, see CloudWatch cross-account observability.
    */
   getQueryResults(callback?: (err: AWSError, data: CloudWatchLogs.Types.GetQueryResultsResponse) => void): Request<CloudWatchLogs.Types.GetQueryResultsResponse, AWSError>;
+  /**
+   * Returns a list of anomalies that log anomaly detectors have found. For details about the structure format of each anomaly object that is returned, see the example in this section.
+   */
+  listAnomalies(params: CloudWatchLogs.Types.ListAnomaliesRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.ListAnomaliesResponse) => void): Request<CloudWatchLogs.Types.ListAnomaliesResponse, AWSError>;
+  /**
+   * Returns a list of anomalies that log anomaly detectors have found. For details about the structure format of each anomaly object that is returned, see the example in this section.
+   */
+  listAnomalies(callback?: (err: AWSError, data: CloudWatchLogs.Types.ListAnomaliesResponse) => void): Request<CloudWatchLogs.Types.ListAnomaliesResponse, AWSError>;
+  /**
+   * Retrieves a list of the log anomaly detectors in the account.
+   */
+  listLogAnomalyDetectors(params: CloudWatchLogs.Types.ListLogAnomalyDetectorsRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.ListLogAnomalyDetectorsResponse) => void): Request<CloudWatchLogs.Types.ListLogAnomalyDetectorsResponse, AWSError>;
+  /**
+   * Retrieves a list of the log anomaly detectors in the account.
+   */
+  listLogAnomalyDetectors(callback?: (err: AWSError, data: CloudWatchLogs.Types.ListLogAnomalyDetectorsResponse) => void): Request<CloudWatchLogs.Types.ListLogAnomalyDetectorsResponse, AWSError>;
   /**
    * Displays the tags associated with a CloudWatch Logs resource. Currently, log groups and destinations support tagging.
    */
@@ -539,6 +579,22 @@ declare class CloudWatchLogs extends Service {
    * Removes one or more tags from the specified resource.
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Use this operation to suppress anomaly detection for a specified anomaly or pattern. If you suppress an anomaly, CloudWatch Logs won’t report new occurrences of that anomaly and won't update that anomaly with new data. If you suppress a pattern, CloudWatch Logs won’t report any anomalies related to that pattern. You must specify either anomalyId or patternId, but you can't specify both parameters in the same operation. If you have previously used this operation to suppress detection of a pattern or anomaly, you can use it again to cause CloudWatch Logs to end the suppression. To do this, use this operation and specify the anomaly or pattern to stop suppressing, and omit the suppressionType and suppressionPeriod parameters.
+   */
+  updateAnomaly(params: CloudWatchLogs.Types.UpdateAnomalyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Use this operation to suppress anomaly detection for a specified anomaly or pattern. If you suppress an anomaly, CloudWatch Logs won’t report new occurrences of that anomaly and won't update that anomaly with new data. If you suppress a pattern, CloudWatch Logs won’t report any anomalies related to that pattern. You must specify either anomalyId or patternId, but you can't specify both parameters in the same operation. If you have previously used this operation to suppress detection of a pattern or anomaly, you can use it again to cause CloudWatch Logs to end the suppression. To do this, use this operation and specify the anomaly or pattern to stop suppressing, and omit the suppressionType and suppressionPeriod parameters.
+   */
+  updateAnomaly(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates an existing log anomaly detector.
+   */
+  updateLogAnomalyDetector(params: CloudWatchLogs.Types.UpdateLogAnomalyDetectorRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates an existing log anomaly detector.
+   */
+  updateLogAnomalyDetector(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace CloudWatchLogs {
   export type AccessPolicy = string;
@@ -573,6 +629,129 @@ declare namespace CloudWatchLogs {
   }
   export type AccountPolicyDocument = string;
   export type AmazonResourceName = string;
+  export type Anomalies = Anomaly[];
+  export interface Anomaly {
+    /**
+     * The unique ID that CloudWatch Logs assigned to this anomaly.
+     */
+    anomalyId: AnomalyId;
+    /**
+     * The ID of the pattern used to help identify this anomaly.
+     */
+    patternId: PatternId;
+    /**
+     * The ARN of the anomaly detector that identified this anomaly.
+     */
+    anomalyDetectorArn: AnomalyDetectorArn;
+    /**
+     * The pattern used to help identify this anomaly, in string format.
+     */
+    patternString: PatternString;
+    /**
+     * The pattern used to help identify this anomaly, in regular expression format.
+     */
+    patternRegex?: PatternRegex;
+    /**
+     * The priority level of this anomaly, as determined by CloudWatch Logs. Priority is computed based on log severity labels such as FATAL and ERROR and the amount of deviation from the baseline. Possible values are HIGH, MEDIUM, and LOW.
+     */
+    priority?: Priority;
+    /**
+     * The date and time when the anomaly detector first saw this anomaly. It is specified as epoch time, which is the number of seconds since January 1, 1970, 00:00:00 UTC.
+     */
+    firstSeen: EpochMillis;
+    /**
+     * The date and time when the anomaly detector most recently saw this anomaly. It is specified as epoch time, which is the number of seconds since January 1, 1970, 00:00:00 UTC.
+     */
+    lastSeen: EpochMillis;
+    /**
+     * A human-readable description of the anomaly. This description is generated by CloudWatch Logs.
+     */
+    description: Description;
+    /**
+     * Specifies whether this anomaly is still ongoing.
+     */
+    active: Boolean;
+    /**
+     * Indicates the current state of this anomaly. If it is still being treated as an anomaly, the value is Active. If you have suppressed this anomaly by using the UpdateAnomaly operation, the value is Suppressed. If this behavior is now considered to be normal, the value is Baseline.
+     */
+    state: State;
+    /**
+     * A map showing times when the anomaly detector ran, and the number of occurrences of this anomaly that were detected at each of those runs. The times are specified in epoch time, which is the number of seconds since January 1, 1970, 00:00:00 UTC.
+     */
+    histogram: Histogram;
+    /**
+     * An array of sample log event messages that are considered to be part of this anomaly.
+     */
+    logSamples: LogSamples;
+    /**
+     * An array of structures where each structure contains information about one token that makes up the pattern.
+     */
+    patternTokens: PatternTokens;
+    /**
+     * An array of ARNS of the log groups that contained log events considered to be part of this anomaly.
+     */
+    logGroupArnList: LogGroupArnList;
+    /**
+     * Indicates whether this anomaly is currently suppressed. To suppress an anomaly, use UpdateAnomaly.
+     */
+    suppressed?: Boolean;
+    /**
+     * If the anomaly is suppressed, this indicates when it was suppressed.
+     */
+    suppressedDate?: EpochMillis;
+    /**
+     * If the anomaly is suppressed, this indicates when the suppression will end. If this value is 0, the anomaly was suppressed with no expiration, with the INFINITE value.
+     */
+    suppressedUntil?: EpochMillis;
+    /**
+     * If this anomaly is suppressed, this field is true if the suppression is because the pattern is suppressed. If false, then only this particular anomaly is suppressed.
+     */
+    isPatternLevelSuppression?: Boolean;
+  }
+  export interface AnomalyDetector {
+    /**
+     * The ARN of the anomaly detector.
+     */
+    anomalyDetectorArn?: AnomalyDetectorArn;
+    /**
+     * The name of the anomaly detector.
+     */
+    detectorName?: DetectorName;
+    /**
+     * A list of the ARNs of the log groups that this anomaly detector watches.
+     */
+    logGroupArnList?: LogGroupArnList;
+    /**
+     * Specifies how often the anomaly detector runs and look for anomalies.
+     */
+    evaluationFrequency?: EvaluationFrequency;
+    filterPattern?: FilterPattern;
+    /**
+     * Specifies the current status of the anomaly detector. To pause an anomaly detector, use the enabled parameter in the UpdateLogAnomalyDetector operation.
+     */
+    anomalyDetectorStatus?: AnomalyDetectorStatus;
+    /**
+     * The ID of the KMS key assigned to this anomaly detector, if any.
+     */
+    kmsKeyId?: KmsKeyId;
+    /**
+     * The date and time when this anomaly detector was created.
+     */
+    creationTimeStamp?: EpochMillis;
+    /**
+     * The date and time when this anomaly detector was most recently modified.
+     */
+    lastModifiedTimeStamp?: EpochMillis;
+    /**
+     * The number of days used as the life cycle of anomalies. After this time, anomalies are automatically baselined and the anomaly detector model will treat new occurrences of similar event as normal. 
+     */
+    anomalyVisibilityTime?: AnomalyVisibilityTime;
+  }
+  export type AnomalyDetectorArn = string;
+  export type AnomalyDetectorStatus = "INITIALIZING"|"TRAINING"|"ANALYZING"|"FAILED"|"DELETED"|"PAUSED"|string;
+  export type AnomalyDetectors = AnomalyDetector[];
+  export type AnomalyId = string;
+  export type AnomalyVisibilityTime = number;
   export type Arn = string;
   export interface AssociateKmsKeyRequest {
     /**
@@ -588,6 +767,7 @@ declare namespace CloudWatchLogs {
      */
     resourceIdentifier?: ResourceIdentifier;
   }
+  export type Boolean = boolean;
   export interface CancelExportTaskRequest {
     /**
      * The ID of the export task.
@@ -595,6 +775,7 @@ declare namespace CloudWatchLogs {
     taskId: ExportTaskId;
   }
   export type ClientToken = string;
+  export type Count = number;
   export interface CreateDeliveryRequest {
     /**
      * The name of the delivery source to use for this delivery.
@@ -651,9 +832,45 @@ declare namespace CloudWatchLogs {
      */
     taskId?: ExportTaskId;
   }
+  export interface CreateLogAnomalyDetectorRequest {
+    /**
+     * An array containing the ARNs of the log groups that this anomaly detector will watch. You must specify at least one ARN.
+     */
+    logGroupArnList: LogGroupArnList;
+    /**
+     * A name for this anomaly detector.
+     */
+    detectorName?: DetectorName;
+    /**
+     * Specifies how often the anomaly detector is to run and look for anomalies. Set this value according to the frequency that the log group receives new logs. For example, if the log group receives new log events every 10 minutes, then 15 minutes might be a good setting for evaluationFrequency .
+     */
+    evaluationFrequency?: EvaluationFrequency;
+    /**
+     * You can use this parameter to limit the anomaly detection model to examine only log events that match the pattern you specify here. For more information, see Filter and Pattern Syntax.
+     */
+    filterPattern?: FilterPattern;
+    /**
+     * Optionally assigns a KMS key to secure this anomaly detector and its findings. If a key is assigned, the anomalies found and the model used by this detector are encrypted at rest with the key. If a key is assigned to an anomaly detector, a user must have permissions for both this key and for the anomaly detector to retrieve information about the anomalies that it finds. For more information about using a KMS key and to see the required IAM policy, see Use a KMS key with an anomaly detector.
+     */
+    kmsKeyId?: KmsKeyId;
+    /**
+     * The number of days to have visibility on an anomaly. After this time period has elapsed for an anomaly, it will be automatically baselined and the anomaly detector will treat new occurrences of a similar anomaly as normal. Therefore, if you do not correct the cause of an anomaly during the time period specified in anomalyVisibilityTime, it will be considered normal going forward and will not be detected as an anomaly.
+     */
+    anomalyVisibilityTime?: AnomalyVisibilityTime;
+    /**
+     * An optional list of key-value pairs to associate with the resource. For more information about tagging, see Tagging Amazon Web Services resources 
+     */
+    tags?: Tags;
+  }
+  export interface CreateLogAnomalyDetectorResponse {
+    /**
+     * The ARN of the log anomaly detector that you just created.
+     */
+    anomalyDetectorArn?: AnomalyDetectorArn;
+  }
   export interface CreateLogGroupRequest {
     /**
-     * The name of the log group.
+     * A name for the log group.
      */
     logGroupName: LogGroupName;
     /**
@@ -664,6 +881,10 @@ declare namespace CloudWatchLogs {
      * The key-value pairs to use for the tags. You can grant users access to certain log groups while preventing them from accessing other log groups. To do so, tag your groups and use IAM policies that refer to those tags. To assign tags when you create a log group, you must have either the logs:TagResource or logs:TagLogGroup permission. For more information about tagging, see Tagging Amazon Web Services resources. For more information about using tags to control access, see Controlling access to Amazon Web Services resources using tags.
      */
     tags?: Tags;
+    /**
+     * Use this parameter to specify the log group class for this log group. There are two classes:   The Standard log class supports all CloudWatch Logs features.   The Infrequent Access log class supports a subset of CloudWatch Logs features and incurs lower costs.   If you omit this parameter, the default of STANDARD is used. For details about the features supported by each class, see Log classes 
+     */
+    logGroupClass?: LogGroupClass;
   }
   export interface CreateLogStreamRequest {
     /**
@@ -724,6 +945,12 @@ declare namespace CloudWatchLogs {
      * The name of the destination.
      */
     destinationName: DestinationName;
+  }
+  export interface DeleteLogAnomalyDetectorRequest {
+    /**
+     * The ARN of the anomaly detector to delete. You can find the ARNs of log anomaly detectors in your account by using the ListLogAnomalyDetectors operation.
+     */
+    anomalyDetectorArn: AnomalyDetectorArn;
   }
   export interface DeleteLogGroupRequest {
     /**
@@ -1012,6 +1239,10 @@ declare namespace CloudWatchLogs {
      * If you are using a monitoring account, set this to True to have the operation return log groups in the accounts listed in accountIdentifiers. If this parameter is set to true and accountIdentifiers contains a null value, the operation returns all log groups in the monitoring account and all log groups in all source accounts that are linked to the monitoring account. 
      */
     includeLinkedAccounts?: IncludeLinkedAccounts;
+    /**
+     * Specifies the log group class for this log group. There are two classes:   The Standard log class supports all CloudWatch Logs features.   The Infrequent Access log class supports a subset of CloudWatch Logs features and incurs lower costs.   For details about the features supported by each class, see Log classes 
+     */
+    logGroupClass?: LogGroupClass;
   }
   export interface DescribeLogGroupsResponse {
     /**
@@ -1170,6 +1401,7 @@ declare namespace CloudWatchLogs {
     subscriptionFilters?: SubscriptionFilters;
     nextToken?: NextToken;
   }
+  export type Description = string;
   export interface Destination {
     /**
      * The name of the destination.
@@ -1199,6 +1431,7 @@ declare namespace CloudWatchLogs {
   export type DestinationArn = string;
   export type DestinationName = string;
   export type Destinations = Destination[];
+  export type DetectorName = string;
   export type Dimensions = {[key: string]: DimensionsValue};
   export type DimensionsKey = string;
   export type DimensionsValue = string;
@@ -1213,7 +1446,11 @@ declare namespace CloudWatchLogs {
     resourceIdentifier?: ResourceIdentifier;
   }
   export type Distribution = "Random"|"ByLogStream"|string;
+  export type DynamicTokenPosition = number;
   export type EncryptionKey = string;
+  export type Enumerations = {[key: string]: TokenValue};
+  export type EpochMillis = number;
+  export type EvaluationFrequency = "ONE_MIN"|"FIVE_MIN"|"TEN_MIN"|"FIFTEEN_MIN"|"THIRTY_MIN"|"ONE_HOUR"|string;
   export type EventId = string;
   export type EventMessage = string;
   export type EventNumber = number;
@@ -1440,6 +1677,47 @@ declare namespace CloudWatchLogs {
      */
     deliverySource?: DeliverySource;
   }
+  export interface GetLogAnomalyDetectorRequest {
+    /**
+     * The ARN of the anomaly detector to retrieve information about. You can find the ARNs of log anomaly detectors in your account by using the ListLogAnomalyDetectors operation.
+     */
+    anomalyDetectorArn: AnomalyDetectorArn;
+  }
+  export interface GetLogAnomalyDetectorResponse {
+    /**
+     * The name of the log anomaly detector
+     */
+    detectorName?: DetectorName;
+    /**
+     * An array of structures, where each structure contains the ARN of a log group associated with this anomaly detector.
+     */
+    logGroupArnList?: LogGroupArnList;
+    /**
+     * Specifies how often the anomaly detector runs and look for anomalies. Set this value according to the frequency that the log group receives new logs. For example, if the log group receives new log events every 10 minutes, then setting evaluationFrequency to FIFTEEN_MIN might be appropriate.
+     */
+    evaluationFrequency?: EvaluationFrequency;
+    filterPattern?: FilterPattern;
+    /**
+     * Specifies whether the anomaly detector is currently active. To change its status, use the enabled parameter in the UpdateLogAnomalyDetector operation.
+     */
+    anomalyDetectorStatus?: AnomalyDetectorStatus;
+    /**
+     * The ID of the KMS key assigned to this anomaly detector, if any.
+     */
+    kmsKeyId?: KmsKeyId;
+    /**
+     * The date and time when this anomaly detector was created.
+     */
+    creationTimeStamp?: EpochMillis;
+    /**
+     * The date and time when this anomaly detector was most recently modified.
+     */
+    lastModifiedTimeStamp?: EpochMillis;
+    /**
+     * The number of days used as the life cycle of anomalies. After this time, anomalies are automatically baselined and the anomaly detector model will treat new occurrences of similar event as normal. 
+     */
+    anomalyVisibilityTime?: AnomalyVisibilityTime;
+  }
   export interface GetLogEventsRequest {
     /**
      * The name of the log group.   You must include either logGroupIdentifier or logGroupName, but not both.  
@@ -1552,6 +1830,7 @@ declare namespace CloudWatchLogs {
      */
     encryptionKey?: EncryptionKey;
   }
+  export type Histogram = {[key: string]: Count};
   export type IncludeLinkedAccounts = boolean;
   export type InheritedProperties = InheritedProperty[];
   export type InheritedProperty = "ACCOUNT_DATA_PROTECTION"|string;
@@ -1567,8 +1846,51 @@ declare namespace CloudWatchLogs {
   }
   export type InputLogEvents = InputLogEvent[];
   export type InputLogStreamNames = LogStreamName[];
+  export type Integer = number;
   export type Interleaved = boolean;
   export type KmsKeyId = string;
+  export type ListAnomaliesLimit = number;
+  export interface ListAnomaliesRequest {
+    /**
+     * Use this to optionally limit the results to only the anomalies found by a certain anomaly detector.
+     */
+    anomalyDetectorArn?: AnomalyDetectorArn;
+    /**
+     * You can specify this parameter if you want to the operation to return only anomalies that are currently either suppressed or unsuppressed.
+     */
+    suppressionState?: SuppressionState;
+    /**
+     * The maximum number of items to return. If you don't specify a value, the default maximum value of 50 items is used.
+     */
+    limit?: ListAnomaliesLimit;
+    nextToken?: NextToken;
+  }
+  export interface ListAnomaliesResponse {
+    /**
+     * An array of structures, where each structure contains information about one anomaly that a log anomaly detector has found.
+     */
+    anomalies?: Anomalies;
+    nextToken?: NextToken;
+  }
+  export type ListLogAnomalyDetectorsLimit = number;
+  export interface ListLogAnomalyDetectorsRequest {
+    /**
+     * Use this to optionally filter the results to only include anomaly detectors that are associated with the specified log group.
+     */
+    filterLogGroupArn?: LogGroupArn;
+    /**
+     * The maximum number of items to return. If you don't specify a value, the default maximum value of 50 items is used.
+     */
+    limit?: ListLogAnomalyDetectorsLimit;
+    nextToken?: NextToken;
+  }
+  export interface ListLogAnomalyDetectorsResponse {
+    /**
+     * An array of structures, where each structure in the array contains information about one anomaly detector.
+     */
+    anomalyDetectors?: AnomalyDetectors;
+    nextToken?: NextToken;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The ARN of the resource that you want to view tags for. The ARN format of a log group is arn:aws:logs:Region:account-id:log-group:log-group-name   The ARN format of a destination is arn:aws:logs:Region:account-id:destination:destination-name   For more information about ARN format, see CloudWatch Logs resources and operations.
@@ -1593,6 +1915,7 @@ declare namespace CloudWatchLogs {
      */
     tags?: Tags;
   }
+  export type LogEvent = string;
   export type LogEventIndex = number;
   export interface LogGroup {
     /**
@@ -1628,7 +1951,14 @@ declare namespace CloudWatchLogs {
      * Displays all the properties that this log group has inherited from account-level settings.
      */
     inheritedProperties?: InheritedProperties;
+    /**
+     * This specifies the log group class for this log group. There are two classes:   The Standard log class supports all CloudWatch Logs features.   The Infrequent Access log class supports a subset of CloudWatch Logs features and incurs lower costs.   For details about the features supported by each class, see Log classes 
+     */
+    logGroupClass?: LogGroupClass;
   }
+  export type LogGroupArn = string;
+  export type LogGroupArnList = LogGroupArn[];
+  export type LogGroupClass = "STANDARD"|"INFREQUENT_ACCESS"|string;
   export interface LogGroupField {
     /**
      * The name of a log field.
@@ -1648,6 +1978,7 @@ declare namespace CloudWatchLogs {
   export type LogGroups = LogGroup[];
   export type LogRecord = {[key: string]: Value};
   export type LogRecordPointer = string;
+  export type LogSamples = LogEvent[];
   export interface LogStream {
     /**
      * The name of the log stream.
@@ -1769,6 +2100,28 @@ declare namespace CloudWatchLogs {
     ingestionTime?: Timestamp;
   }
   export type OutputLogEvents = OutputLogEvent[];
+  export type PatternId = string;
+  export type PatternRegex = string;
+  export type PatternString = string;
+  export interface PatternToken {
+    /**
+     * For a dynamic token, this indicates where in the pattern that this token appears, related to other dynamic tokens. The dynamic token that appears first has a value of 1, the one that appears second is 2, and so on.
+     */
+    dynamicTokenPosition?: DynamicTokenPosition;
+    /**
+     * Specifies whether this is a dynamic token.
+     */
+    isDynamic?: Boolean;
+    /**
+     * The string represented by this token. If this is a dynamic token, the value will be &lt;*&gt; 
+     */
+    tokenString?: TokenString;
+    /**
+     * Contains the values found for a dynamic token, and the number of times each value was found.
+     */
+    enumerations?: Enumerations;
+  }
+  export type PatternTokens = PatternToken[];
   export type Percentage = number;
   export interface Policy {
     /**
@@ -1779,6 +2132,7 @@ declare namespace CloudWatchLogs {
   export type PolicyDocument = string;
   export type PolicyName = string;
   export type PolicyType = "DATA_PROTECTION_POLICY"|string;
+  export type Priority = string;
   export interface PutAccountPolicyRequest {
     /**
      * A name for the policy. This must be unique within the account.
@@ -2214,6 +2568,7 @@ declare namespace CloudWatchLogs {
      */
     queryId?: QueryId;
   }
+  export type State = "Active"|"Suppressed"|"Baseline"|string;
   export type StatsValue = number;
   export interface StopQueryRequest {
     /**
@@ -2254,6 +2609,19 @@ declare namespace CloudWatchLogs {
   }
   export type SubscriptionFilters = SubscriptionFilter[];
   export type Success = boolean;
+  export interface SuppressionPeriod {
+    /**
+     * Specifies the number of seconds, minutes or hours to suppress this anomaly. There is no maximum.
+     */
+    value?: Integer;
+    /**
+     * Specifies whether the value of value is in seconds, minutes, or hours.
+     */
+    suppressionUnit?: SuppressionUnit;
+  }
+  export type SuppressionState = "SUPPRESSED"|"UNSUPPRESSED"|string;
+  export type SuppressionType = "LIMITED"|"INFINITE"|string;
+  export type SuppressionUnit = "SECONDS"|"MINUTES"|"HOURS"|string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagList = TagKey[];
@@ -2294,8 +2662,11 @@ declare namespace CloudWatchLogs {
      */
     matches?: MetricFilterMatches;
   }
+  export type Time = string;
   export type Timestamp = number;
   export type Token = string;
+  export type TokenString = string;
+  export type TokenValue = number;
   export type Unmask = boolean;
   export interface UntagLogGroupRequest {
     /**
@@ -2316,6 +2687,47 @@ declare namespace CloudWatchLogs {
      * The list of tag keys to remove from the resource.
      */
     tagKeys: TagKeyList;
+  }
+  export interface UpdateAnomalyRequest {
+    /**
+     * If you are suppressing or unsuppressing an anomaly, specify its unique ID here. You can find anomaly IDs by using the ListAnomalies operation.
+     */
+    anomalyId?: AnomalyId;
+    /**
+     * If you are suppressing or unsuppressing an pattern, specify its unique ID here. You can find pattern IDs by using the ListAnomalies operation.
+     */
+    patternId?: PatternId;
+    /**
+     * The ARN of the anomaly detector that this operation is to act on.
+     */
+    anomalyDetectorArn: AnomalyDetectorArn;
+    /**
+     * Use this to specify whether the suppression to be temporary or infinite. If you specify LIMITED, you must also specify a suppressionPeriod. If you specify INFINITE, any value for suppressionPeriod is ignored. 
+     */
+    suppressionType?: SuppressionType;
+    /**
+     * If you are temporarily suppressing an anomaly or pattern, use this structure to specify how long the suppression is to last.
+     */
+    suppressionPeriod?: SuppressionPeriod;
+  }
+  export interface UpdateLogAnomalyDetectorRequest {
+    /**
+     * The ARN of the anomaly detector that you want to update.
+     */
+    anomalyDetectorArn: AnomalyDetectorArn;
+    /**
+     * Specifies how often the anomaly detector runs and look for anomalies. Set this value according to the frequency that the log group receives new logs. For example, if the log group receives new log events every 10 minutes, then setting evaluationFrequency to FIFTEEN_MIN might be appropriate.
+     */
+    evaluationFrequency?: EvaluationFrequency;
+    filterPattern?: FilterPattern;
+    /**
+     * The number of days to use as the life cycle of anomalies. After this time, anomalies are automatically baselined and the anomaly detector model will treat new occurrences of similar event as normal. Therefore, if you do not correct the cause of an anomaly during this time, it will be considered normal going forward and will not be detected.
+     */
+    anomalyVisibilityTime?: AnomalyVisibilityTime;
+    /**
+     * Use this parameter to pause or restart the anomaly detector. 
+     */
+    enabled: Boolean;
   }
   export type Value = string;
   /**

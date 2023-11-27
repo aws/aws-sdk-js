@@ -68,11 +68,11 @@ declare class LexModelsV2 extends Service {
    */
   createBotLocale(callback?: (err: AWSError, data: LexModelsV2.Types.CreateBotLocaleResponse) => void): Request<LexModelsV2.Types.CreateBotLocaleResponse, AWSError>;
   /**
-   * Creates a new version of the bot based on the DRAFT version. If the DRAFT version of this resource hasn't changed since you created the last version, Amazon Lex doesn't create a new version, it returns the last created version. When you create the first version of a bot, Amazon Lex sets the version to 1. Subsequent versions increment by 1.
+   * Creates an immutable version of the bot. When you create the first version of a bot, Amazon Lex sets the version number to 1. Subsequent bot versions increase in an increment of 1. The version number will always represent the total number of versions created of the bot, not the current number of versions. If a bot version is deleted, that bot version number will not be reused.
    */
   createBotVersion(params: LexModelsV2.Types.CreateBotVersionRequest, callback?: (err: AWSError, data: LexModelsV2.Types.CreateBotVersionResponse) => void): Request<LexModelsV2.Types.CreateBotVersionResponse, AWSError>;
   /**
-   * Creates a new version of the bot based on the DRAFT version. If the DRAFT version of this resource hasn't changed since you created the last version, Amazon Lex doesn't create a new version, it returns the last created version. When you create the first version of a bot, Amazon Lex sets the version to 1. Subsequent versions increment by 1.
+   * Creates an immutable version of the bot. When you create the first version of a bot, Amazon Lex sets the version number to 1. Subsequent bot versions increase in an increment of 1. The version number will always represent the total number of versions created of the bot, not the current number of versions. If a bot version is deleted, that bot version number will not be reused.
    */
   createBotVersion(callback?: (err: AWSError, data: LexModelsV2.Types.CreateBotVersionResponse) => void): Request<LexModelsV2.Types.CreateBotVersionResponse, AWSError>;
   /**
@@ -284,6 +284,14 @@ declare class LexModelsV2 extends Service {
    */
   describeBotRecommendation(callback?: (err: AWSError, data: LexModelsV2.Types.DescribeBotRecommendationResponse) => void): Request<LexModelsV2.Types.DescribeBotRecommendationResponse, AWSError>;
   /**
+   * Returns information about a request to generate a bot through natural language description, made through the StartBotResource API. Use the generatedBotLocaleUrl to retrieve the Amazon S3 object containing the bot locale configuration. You can then modify and import this configuration.
+   */
+  describeBotResourceGeneration(params: LexModelsV2.Types.DescribeBotResourceGenerationRequest, callback?: (err: AWSError, data: LexModelsV2.Types.DescribeBotResourceGenerationResponse) => void): Request<LexModelsV2.Types.DescribeBotResourceGenerationResponse, AWSError>;
+  /**
+   * Returns information about a request to generate a bot through natural language description, made through the StartBotResource API. Use the generatedBotLocaleUrl to retrieve the Amazon S3 object containing the bot locale configuration. You can then modify and import this configuration.
+   */
+  describeBotResourceGeneration(callback?: (err: AWSError, data: LexModelsV2.Types.DescribeBotResourceGenerationResponse) => void): Request<LexModelsV2.Types.DescribeBotResourceGenerationResponse, AWSError>;
+  /**
    * Provides metadata about a version of a bot.
    */
   describeBotVersion(params: LexModelsV2.Types.DescribeBotVersionRequest, callback?: (err: AWSError, data: LexModelsV2.Types.DescribeBotVersionResponse) => void): Request<LexModelsV2.Types.DescribeBotVersionResponse, AWSError>;
@@ -380,6 +388,14 @@ declare class LexModelsV2 extends Service {
    */
   describeTestSetGeneration(callback?: (err: AWSError, data: LexModelsV2.Types.DescribeTestSetGenerationResponse) => void): Request<LexModelsV2.Types.DescribeTestSetGenerationResponse, AWSError>;
   /**
+   * Generates sample utterances for an intent.
+   */
+  generateBotElement(params: LexModelsV2.Types.GenerateBotElementRequest, callback?: (err: AWSError, data: LexModelsV2.Types.GenerateBotElementResponse) => void): Request<LexModelsV2.Types.GenerateBotElementResponse, AWSError>;
+  /**
+   * Generates sample utterances for an intent.
+   */
+  generateBotElement(callback?: (err: AWSError, data: LexModelsV2.Types.GenerateBotElementResponse) => void): Request<LexModelsV2.Types.GenerateBotElementResponse, AWSError>;
+  /**
    * The pre-signed Amazon S3 URL to download the test execution result artifacts.
    */
   getTestExecutionArtifactsUrl(params: LexModelsV2.Types.GetTestExecutionArtifactsUrlRequest, callback?: (err: AWSError, data: LexModelsV2.Types.GetTestExecutionArtifactsUrlResponse) => void): Request<LexModelsV2.Types.GetTestExecutionArtifactsUrlResponse, AWSError>;
@@ -419,6 +435,14 @@ declare class LexModelsV2 extends Service {
    * Get a list of bot recommendations that meet the specified criteria.
    */
   listBotRecommendations(callback?: (err: AWSError, data: LexModelsV2.Types.ListBotRecommendationsResponse) => void): Request<LexModelsV2.Types.ListBotRecommendationsResponse, AWSError>;
+  /**
+   * Lists the generation requests made for a bot locale.
+   */
+  listBotResourceGenerations(params: LexModelsV2.Types.ListBotResourceGenerationsRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListBotResourceGenerationsResponse) => void): Request<LexModelsV2.Types.ListBotResourceGenerationsResponse, AWSError>;
+  /**
+   * Lists the generation requests made for a bot locale.
+   */
+  listBotResourceGenerations(callback?: (err: AWSError, data: LexModelsV2.Types.ListBotResourceGenerationsResponse) => void): Request<LexModelsV2.Types.ListBotResourceGenerationsResponse, AWSError>;
   /**
    * Gets information about all of the versions of a bot. The ListBotVersions operation returns a summary of each version of a bot. For example, if a bot has three numbered versions, the ListBotVersions operation returns for summaries, one for each numbered version and one for the DRAFT version. The ListBotVersions operation always returns at least one version, the DRAFT version.
    */
@@ -619,6 +643,14 @@ declare class LexModelsV2 extends Service {
    * Use this to provide your transcript data, and to start the bot recommendation process.
    */
   startBotRecommendation(callback?: (err: AWSError, data: LexModelsV2.Types.StartBotRecommendationResponse) => void): Request<LexModelsV2.Types.StartBotRecommendationResponse, AWSError>;
+  /**
+   * Starts a request for the descriptive bot builder to generate a bot locale configuration based on the prompt you provide it. After you make this call, use the DescribeBotResourceGeneration operation to check on the status of the generation and for the generatedBotLocaleUrl when the generation is complete. Use that value to retrieve the Amazon S3 object containing the bot locale configuration. You can then modify and import this configuration.
+   */
+  startBotResourceGeneration(params: LexModelsV2.Types.StartBotResourceGenerationRequest, callback?: (err: AWSError, data: LexModelsV2.Types.StartBotResourceGenerationResponse) => void): Request<LexModelsV2.Types.StartBotResourceGenerationResponse, AWSError>;
+  /**
+   * Starts a request for the descriptive bot builder to generate a bot locale configuration based on the prompt you provide it. After you make this call, use the DescribeBotResourceGeneration operation to check on the status of the generation and for the generatedBotLocaleUrl when the generation is complete. Use that value to retrieve the Amazon S3 object containing the bot locale configuration. You can then modify and import this configuration.
+   */
+  startBotResourceGeneration(callback?: (err: AWSError, data: LexModelsV2.Types.StartBotResourceGenerationResponse) => void): Request<LexModelsV2.Types.StartBotResourceGenerationResponse, AWSError>;
   /**
    * Starts importing a bot, bot locale, or custom vocabulary from a zip archive that you uploaded to an S3 bucket.
    */
@@ -1468,6 +1500,13 @@ declare namespace LexModelsV2 {
      */
     resources?: CustomVocabularyItems;
   }
+  export type BedrockModelArn = string;
+  export interface BedrockModelSpecification {
+    /**
+     * The ARN of the foundation model used in descriptive bot building.
+     */
+    modelArn: BedrockModelArn;
+  }
   export type Boolean = boolean;
   export interface BotAliasHistoryEvent {
     /**
@@ -1884,6 +1923,13 @@ declare namespace LexModelsV2 {
      */
     lastBuildSubmittedDateTime?: Timestamp;
   }
+  export interface BuildtimeSettings {
+    /**
+     * An object containing specifications for the descriptive bot building feature.
+     */
+    descriptiveBotBuilder?: DescriptiveBotBuilderSpecification;
+    sampleUtteranceGeneration?: SampleUtteranceGenerationSpecification;
+  }
   export type BuiltInIntentSortAttribute = "IntentSignature"|string;
   export interface BuiltInIntentSortBy {
     /**
@@ -2225,6 +2271,7 @@ declare namespace LexModelsV2 {
      * The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user.
      */
     voiceSettings?: VoiceSettings;
+    generativeAISettings?: GenerativeAISettings;
   }
   export interface CreateBotLocaleResponse {
     /**
@@ -2263,6 +2310,7 @@ declare namespace LexModelsV2 {
      * A timestamp specifying the date and time that the bot locale was created.
      */
     creationDateTime?: Timestamp;
+    generativeAISettings?: GenerativeAISettings;
   }
   export interface CreateBotRequest {
     /**
@@ -3397,6 +3445,10 @@ declare namespace LexModelsV2 {
      * Recommended actions to take to resolve an error in the failureReasons field.
      */
     recommendedActions?: RecommendedActions;
+    /**
+     * Contains settings for Amazon Bedrock's generative AI features for your bot locale.
+     */
+    generativeAISettings?: GenerativeAISettings;
   }
   export interface DescribeBotRecommendationRequest {
     /**
@@ -3467,6 +3519,70 @@ declare namespace LexModelsV2 {
      * The unique identifier of the bot to describe.
      */
     botId: Id;
+  }
+  export interface DescribeBotResourceGenerationRequest {
+    /**
+     * The unique identifier of the bot for which to return the generation details.
+     */
+    botId: Id;
+    /**
+     * The version of the bot for which to return the generation details.
+     */
+    botVersion: BotVersion;
+    /**
+     * The locale of the bot for which to return the generation details.
+     */
+    localeId: LocaleId;
+    /**
+     * The unique identifier of the generation request for which to return the generation details.
+     */
+    generationId: Id;
+  }
+  export interface DescribeBotResourceGenerationResponse {
+    /**
+     * The unique identifier of the bot for which the generation request was made.
+     */
+    botId?: Id;
+    /**
+     * The version of the bot for which the generation request was made.
+     */
+    botVersion?: BotVersion;
+    /**
+     * The locale of the bot for which the generation request was made.
+     */
+    localeId?: LocaleId;
+    /**
+     * The generation ID for which to return the generation details.
+     */
+    generationId?: Id;
+    /**
+     * A list of reasons why the generation of bot resources through natural language description failed.
+     */
+    failureReasons?: FailureReasons;
+    /**
+     * The status of the generation request.
+     */
+    generationStatus?: GenerationStatus;
+    /**
+     * The prompt used in the generation request.
+     */
+    generationInputPrompt?: GenerationInput;
+    /**
+     * The Amazon S3 location of the generated bot locale configuration.
+     */
+    generatedBotLocaleUrl?: PresignedS3Url;
+    /**
+     * The date and time at which the item was generated.
+     */
+    creationDateTime?: Timestamp;
+    /**
+     * The ARN of the model used to generate the bot resources.
+     */
+    modelArn?: BedrockModelArn;
+    /**
+     * The date and time at which the generated item was updated.
+     */
+    lastUpdatedDateTime?: Timestamp;
   }
   export interface DescribeBotResponse {
     /**
@@ -4164,6 +4280,16 @@ declare namespace LexModelsV2 {
     lastUpdatedDateTime?: Timestamp;
   }
   export type Description = string;
+  export interface DescriptiveBotBuilderSpecification {
+    /**
+     * Specifies whether the descriptive bot building feature is activated or not.
+     */
+    enabled: Boolean;
+    /**
+     * An object containing information about the Amazon Bedrock model used to interpret the prompt used in descriptive bot building.
+     */
+    bedrockModelSpecification?: BedrockModelSpecification;
+  }
   export interface DialogAction {
     /**
      * The action that the bot should execute. 
@@ -4223,6 +4349,7 @@ declare namespace LexModelsV2 {
      */
     invocationLabel?: Name;
   }
+  export type Enabled = boolean;
   export interface EncryptionSetting {
     /**
      * The KMS key ARN used to encrypt the metadata associated with the bot recommendation.
@@ -4415,6 +4542,82 @@ declare namespace LexModelsV2 {
      * The length of time that the fulfillment Lambda function should run before it times out.
      */
     timeoutInSeconds?: FulfillmentTimeout;
+  }
+  export interface GenerateBotElementRequest {
+    /**
+     * The intent unique Id for the bot request to generate utterances.
+     */
+    intentId: Id;
+    /**
+     * The bot unique Id for the bot request to generate utterances.
+     */
+    botId: Id;
+    /**
+     * The bot version for the bot request to generate utterances.
+     */
+    botVersion: BotVersion;
+    /**
+     * The unique locale Id for the bot request to generate utterances.
+     */
+    localeId: LocaleId;
+  }
+  export interface GenerateBotElementResponse {
+    /**
+     * The unique bot Id for the bot which received the response.
+     */
+    botId?: Id;
+    /**
+     * The unique bot version for the bot which received the response.
+     */
+    botVersion?: DraftBotVersion;
+    /**
+     * The unique locale Id for the bot which received the response.
+     */
+    localeId?: LocaleId;
+    /**
+     * The unique intent Id for the bot which received the response.
+     */
+    intentId?: Id;
+    /**
+     * The sample utterances for the bot which received the response.
+     */
+    sampleUtterances?: SampleUtterancesList;
+  }
+  export type GenerationInput = string;
+  export interface GenerationSortBy {
+    /**
+     * The attribute by which to sort the generation request information. You can sort by the following attributes.    creationStartTime – The time at which the generation request was created.    lastUpdatedTime – The time at which the generation request was last updated.  
+     */
+    attribute: GenerationSortByAttribute;
+    /**
+     * The order by which to sort the generation request information.
+     */
+    order: SortOrder;
+  }
+  export type GenerationSortByAttribute = "creationStartTime"|"lastUpdatedTime"|string;
+  export type GenerationStatus = "Failed"|"Complete"|"InProgress"|string;
+  export interface GenerationSummary {
+    /**
+     * The unique identifier of the generation request.
+     */
+    generationId?: Id;
+    /**
+     * The status of the generation request.
+     */
+    generationStatus?: GenerationStatus;
+    /**
+     * The date and time at which the generation request was made.
+     */
+    creationDateTime?: Timestamp;
+    /**
+     * The date and time at which the generation request was last updated.
+     */
+    lastUpdatedDateTime?: Timestamp;
+  }
+  export type GenerationSummaryList = GenerationSummary[];
+  export interface GenerativeAISettings {
+    runtimeSettings?: RuntimeSettings;
+    buildtimeSettings?: BuildtimeSettings;
   }
   export interface GetTestExecutionArtifactsUrlRequest {
     /**
@@ -5015,6 +5218,54 @@ declare namespace LexModelsV2 {
     botRecommendationSummaries?: BotRecommendationSummaryList;
     /**
      * A token that indicates whether there are more results to return in a response to the ListBotRecommendations operation. If the nextToken field is present, you send the contents as the nextToken parameter of a ListBotRecommendations operation request to get the next page of results. 
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListBotResourceGenerationsRequest {
+    /**
+     * The unique identifier of the bot whose generation requests you want to view.
+     */
+    botId: Id;
+    /**
+     * The version of the bot whose generation requests you want to view.
+     */
+    botVersion: BotVersion;
+    /**
+     * The locale of the bot whose generation requests you want to view.
+     */
+    localeId: LocaleId;
+    /**
+     * An object containing information about the attribute and the method by which to sort the results
+     */
+    sortBy?: GenerationSortBy;
+    /**
+     * The maximum number of results to return in the response.
+     */
+    maxResults?: MaxResults;
+    /**
+     * If the total number of results is greater than the number specified in the maxResults, the response returns a token in the nextToken field. Use this token when making a request to return the next batch of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListBotResourceGenerationsResponse {
+    /**
+     * The unique identifier of the bot for which the generation requests were made.
+     */
+    botId?: Id;
+    /**
+     * The version of the bot for which the generation requests were made.
+     */
+    botVersion?: BotVersion;
+    /**
+     * The locale of the bot for which the generation requests were made.
+     */
+    localeId?: LocaleId;
+    /**
+     * A list of objects, each containing information about a generation request for the bot locale.
+     */
+    generationSummaries?: GenerationSummaryList;
+    /**
+     * If the total number of results is greater than the number specified in the maxResults, the response returns a token in the nextToken field. Use this token when making a request to return the next batch of results.
      */
     nextToken?: NextToken;
   }
@@ -6268,6 +6519,12 @@ declare namespace LexModelsV2 {
      */
     slotHints?: SlotHintsIntentMap;
   }
+  export interface RuntimeSettings {
+    /**
+     * An object containing specifications for the assisted slot resolution feature.
+     */
+    slotResolutionImprovement?: SlotResolutionImprovementSpecification;
+  }
   export type S3BucketArn = string;
   export interface S3BucketLogDestination {
     /**
@@ -6319,6 +6576,13 @@ declare namespace LexModelsV2 {
      * The sample utterance that Amazon Lex uses to build its machine-learning model to recognize intents.
      */
     utterance: Utterance;
+  }
+  export interface SampleUtteranceGenerationSpecification {
+    /**
+     * Specifies whether to enable sample utterance generation or not.
+     */
+    enabled: Boolean;
+    bedrockModelSpecification?: BedrockModelSpecification;
   }
   export type SampleUtterancesCount = number;
   export type SampleUtterancesList = SampleUtterance[];
@@ -6541,6 +6805,23 @@ declare namespace LexModelsV2 {
      */
     slotId: Id;
   }
+  export interface SlotResolutionImprovementSpecification {
+    /**
+     * Specifies whether assisted slot resolution is turned on or off.
+     */
+    enabled: Enabled;
+    /**
+     * An object containing information about the Amazon Bedrock model used to assist slot resolution.
+     */
+    bedrockModelSpecification?: BedrockModelSpecification;
+  }
+  export interface SlotResolutionSetting {
+    /**
+     * Specifies whether assisted slot resolution is turned on for the slot or not. If the value is EnhancedFallback, assisted slot resolution is activated when Amazon Lex defaults to the AMAZON.FallbackIntent. If the value is Default, assisted slot resolution is turned off.
+     */
+    slotResolutionStrategy: SlotResolutionStrategy;
+  }
+  export type SlotResolutionStrategy = "EnhancedFallback"|"Default"|string;
   export interface SlotResolutionTestResultItem {
     /**
      * The name of the slot.
@@ -6711,6 +6992,10 @@ declare namespace LexModelsV2 {
      * Specifies the settings that Amazon Lex uses when a slot value is successfully entered by a user.
      */
     slotCaptureSetting?: SlotCaptureSetting;
+    /**
+     * An object containing information about whether assisted slot resolution is turned on for the slot or not.
+     */
+    slotResolutionSetting?: SlotResolutionSetting;
   }
   export interface SlotValueOverride {
     /**
@@ -6815,6 +7100,54 @@ declare namespace LexModelsV2 {
      * The object representing the passwords that were used to encrypt the data related to the bot recommendation results, as well as the KMS key ARN used to encrypt the associated metadata.
      */
     encryptionSetting?: EncryptionSetting;
+  }
+  export interface StartBotResourceGenerationRequest {
+    /**
+     * The prompt to generate intents and slot types for the bot locale. Your description should be both detailed and precise to help generate appropriate and sufficient intents for your bot. Include a list of actions to improve the intent creation process.
+     */
+    generationInputPrompt: GenerationInput;
+    /**
+     * The unique identifier of the bot for which to generate intents and slot types.
+     */
+    botId: Id;
+    /**
+     * The version of the bot for which to generate intents and slot types.
+     */
+    botVersion: BotVersion;
+    /**
+     * The locale of the bot for which to generate intents and slot types.
+     */
+    localeId: LocaleId;
+  }
+  export interface StartBotResourceGenerationResponse {
+    /**
+     * The prompt that was used generate intents and slot types for the bot locale.
+     */
+    generationInputPrompt?: GenerationInput;
+    /**
+     * The unique identifier of the generation request.
+     */
+    generationId?: Id;
+    /**
+     * The unique identifier of the bot for which the generation request was made.
+     */
+    botId?: Id;
+    /**
+     * The version of the bot for which the generation request was made.
+     */
+    botVersion?: BotVersion;
+    /**
+     * The locale of the bot for which the generation request was made.
+     */
+    localeId?: LocaleId;
+    /**
+     * The status of the generation request.
+     */
+    generationStatus?: GenerationStatus;
+    /**
+     * The date and time at which the generation request was made.
+     */
+    creationDateTime?: Timestamp;
   }
   export interface StartImportRequest {
     /**
@@ -7546,6 +7879,10 @@ declare namespace LexModelsV2 {
      * The new Amazon Polly voice Amazon Lex should use for voice interaction with the user.
      */
     voiceSettings?: VoiceSettings;
+    /**
+     * Contains settings for generative AI features powered by Amazon Bedrock for your bot locale. Use this object to turn generative AI features on and off. Pricing may differ if you turn a feature on. For more information, see LINK.
+     */
+    generativeAISettings?: GenerativeAISettings;
   }
   export interface UpdateBotLocaleResponse {
     /**
@@ -7596,6 +7933,10 @@ declare namespace LexModelsV2 {
      * Recommended actions to take to resolve an error in the failureReasons field.
      */
     recommendedActions?: RecommendedActions;
+    /**
+     * Contains settings for generative AI features powered by Amazon Bedrock for your bot locale.
+     */
+    generativeAISettings?: GenerativeAISettings;
   }
   export interface UpdateBotRecommendationRequest {
     /**

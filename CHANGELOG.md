@@ -1,6 +1,46 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1502.0-->
+<!--LATEST=2.1503.0-->
 <!--ENTRYINSERT-->
+
+## 2.1503.0
+* feature: AccessAnalyzer: IAM Access Analyzer now continuously monitors IAM roles and users in your AWS account or organization to generate findings for unused access. Additionally, IAM Access Analyzer now provides custom policy checks to validate that IAM policies adhere to your security standards ahead of deployments.
+* feature: Amp: This release adds support for the Amazon Managed Service for Prometheus collector, a fully managed, agentless Prometheus metrics scraping capability.
+* feature: BCMDataExports: Users can create, read, update, delete Exports of billing and cost management data.  Users can get details of Export Executions and details of Tables for exporting.  Tagging support is provided for Exports
+* feature: CloudTrail: CloudTrail Lake now supports federating event data stores. giving users the ability to run queries against their event data using Amazon Athena.
+* feature: CloudWatchLogs: Added APIs to Create, Update, Get, List and Delete LogAnomalyDetectors and List and Update Anomalies in Detector. Added LogGroupClass attribute for LogGroups to classify loggroup as Standard loggroup with all capabilities or InfrequentAccess loggroup with limited capabilities.
+* feature: CodeStarconnections: This release adds support for the CloudFormation Git sync feature. Git sync enables updating a CloudFormation stack from a template stored in a Git repository.
+* feature: ComputeOptimizer: This release enables AWS Compute Optimizer to analyze and generate recommendations with customization and discounts preferences.
+* feature: ConfigService: Support Periodic Recording for Configuration Recorder
+* feature: ControlTower: Add APIs to create and manage a landing zone.
+* feature: CostOptimizationHub: This release launches Cost Optimization Hub, a new AWS Billing and Cost Management feature that helps you consolidate and prioritize cost optimization recommendations across your AWS Organizations member accounts and AWS Regions, so that you can get the most out of your AWS spend.
+* feature: Detective: Added new APIs in Detective to support resource investigations
+* feature: ECS: Adds a new 'type' property to the Setting structure. Adds a new AccountSetting - guardDutyActivate for ECS.
+* feature: EFS: Adding support for EFS Archive lifecycle configuration.
+* feature: EKS: This release adds support for EKS Pod Identity feature. EKS Pod Identity makes it easy for customers to obtain IAM permissions for the applications running in their EKS clusters.
+* feature: EKSAuth: This release adds support for EKS Pod Identity feature. EKS Pod Identity makes it easy for customers to obtain IAM permissions for their applications running in the EKS clusters.
+* feature: ELBv2: This release enables both mutual authentication (mTLS), and Automatic Target Weights (ATW) for Application Load Balancers.
+* feature: FSx: Added support for FSx for ONTAP scale-out file systems and FlexGroup volumes. Added the HAPairs field and ThroughputCapacityPerHAPair for filesystem. Added AggregateConfiguration (containing Aggregates and ConstituentsPerAggregate) and SizeInBytes for volume.
+* feature: FreeTier: This is the initial SDK release for the AWS Free Tier GetFreeTierUsage API
+* feature: GuardDuty: Add support for Runtime Monitoring for ECS and ECS-EC2.
+* feature: IoTFleetWise: AWS IoT FleetWise introduces new APIs for vision system data, such as data collected from cameras, radars, and lidars. You can now model and decode complex data types.
+* feature: LakeFormation: This release adds four new APIs "DescribeLakeFormationIdentityCenterConfiguration", "CreateLakeFormationIdentityCenterConfiguration", "DescribeLakeFormationIdentityCenterConfiguration", and "DeleteLakeFormationIdentityCenterConfiguration", and also updates the corresponding documentation.
+* feature: LexModelsV2: This release introduces new generative AI features in AWS Lex: Assisted Slot Resolution, Descriptive Bot Building, and Sample Utterance Generation. These features leverage large language models available through Amazon Bedrock to improve the bot builder and customer experiences.
+* feature: LexRuntimeV2: Updates API to latest version.
+* feature: ManagedBlockchain: Add optional NetworkType property to Accessor APIs
+* feature: Personalize: Enables metadata in recommendations, recommendations with themes, and next best action recommendations
+* feature: PersonalizeEvents: This release enables PutActions and PutActionInteractions
+* feature: PersonalizeRuntime: Enables metadata in recommendations and next best action recommendations
+* feature: QuickSight: This release launches new APIs for trusted identity propagation setup and supports creating datasources using trusted identity propagation as authentication method for QuickSight accounts configured with IAM Identity Center.
+* feature: Redshift: This release adds support for multi-data warehouse writes through data sharing.
+* feature: Repostspace: Initial release of AWS re:Post Private
+* feature: S3: Adding new params - Key and Prefix, to S3 API operations for supporting S3 Access Grants. Note - These updates will not change any of the existing S3 API functionality.
+* feature: S3Control: Introduce Amazon S3 Access Grants, a new S3 access control feature that maps identities in directories such as Active Directory, or AWS Identity and Access Management (IAM) Principals, to datasets in S3.
+* feature: SecretsManager: AWS Secrets Manager has released the BatchGetSecretValue API, which allows customers to fetch up to 20 Secrets with a single request using a list of secret names or filters.
+* feature: SecurityHub: Adds and updates APIs to support customizable security controls. This feature allows Security Hub customers to provide custom parameters for security controls. With this release, findings for controls that support custom parameters will include the parameters used to generate the findings.
+* feature: StepFunctions: Adds new TestState operation which accepts the definition of a single state and executes it. You can test a state without creating a state machine or updating an existing state machine.
+* feature: TranscribeService: This release adds support for transcriptions from audio sources in 64 new languages and introduces generative call summarization in Transcribe Call Analytics (Post call)
+* feature: WorkSpaces: The release introduces Multi-Region Resilience one-way data replication that allows you to replicate data from your primary WorkSpace to a standby WorkSpace in another AWS Region. DescribeWorkspaces now returns the status of data replication.
+* feature: WorkSpacesThinClient: Initial release of Amazon WorkSpaces Thin Client
 
 ## 2.1502.0
 * feature: Kinesis: Updates API to latest version.

@@ -36,6 +36,14 @@ declare class FSx extends Service {
    */
   copyBackup(callback?: (err: AWSError, data: FSx.Types.CopyBackupResponse) => void): Request<FSx.Types.CopyBackupResponse, AWSError>;
   /**
+   * Updates an existing volume by using a snapshot from another Amazon FSx for OpenZFS file system. For more information, see on-demand data replication in the Amazon FSx for OpenZFS User Guide.
+   */
+  copySnapshotAndUpdateVolume(params: FSx.Types.CopySnapshotAndUpdateVolumeRequest, callback?: (err: AWSError, data: FSx.Types.CopySnapshotAndUpdateVolumeResponse) => void): Request<FSx.Types.CopySnapshotAndUpdateVolumeResponse, AWSError>;
+  /**
+   * Updates an existing volume by using a snapshot from another Amazon FSx for OpenZFS file system. For more information, see on-demand data replication in the Amazon FSx for OpenZFS User Guide.
+   */
+  copySnapshotAndUpdateVolume(callback?: (err: AWSError, data: FSx.Types.CopySnapshotAndUpdateVolumeResponse) => void): Request<FSx.Types.CopySnapshotAndUpdateVolumeResponse, AWSError>;
+  /**
    * Creates a backup of an existing Amazon FSx for Windows File Server file system, Amazon FSx for Lustre file system, Amazon FSx for NetApp ONTAP volume, or Amazon FSx for OpenZFS file system. We recommend creating regular backups so that you can restore a file system or volume from a backup if an issue arises with the original file system or volume. For Amazon FSx for Lustre file systems, you can create a backup only for file systems that have the following configuration:   A Persistent deployment type   Are not linked to a data repository   For more information about backups, see the following:   For Amazon FSx for Lustre, see Working with FSx for Lustre backups.   For Amazon FSx for Windows, see Working with FSx for Windows backups.   For Amazon FSx for NetApp ONTAP, see Working with FSx for NetApp ONTAP backups.   For Amazon FSx for OpenZFS, see Working with FSx for OpenZFS backups.   If a backup with the specified client request token exists and the parameters match, this operation returns the description of the existing backup. If a backup with the specified client request token exists and the parameters don't match, this operation returns IncompatibleParameterError. If a backup with the specified client request token doesn't exist, CreateBackup does the following:    Creates a new Amazon FSx backup with an assigned ID, and an initial lifecycle state of CREATING.   Returns the description of the backup.   By using the idempotent operation, you can retry a CreateBackup operation without the risk of creating an extra backup. This approach can be useful when an initial call fails in a way that makes it unclear whether a backup was created. If you use the same client request token and the initial call created a backup, the operation returns a successful result because all the parameters are the same. The CreateBackup operation returns while the backup's lifecycle state is still CREATING. You can check the backup creation status by calling the DescribeBackups operation, which returns the backup state along with other information.
    */
   createBackup(params: FSx.Types.CreateBackupRequest, callback?: (err: AWSError, data: FSx.Types.CreateBackupResponse) => void): Request<FSx.Types.CreateBackupResponse, AWSError>;
@@ -220,6 +228,14 @@ declare class FSx extends Service {
    */
   describeFileSystems(callback?: (err: AWSError, data: FSx.Types.DescribeFileSystemsResponse) => void): Request<FSx.Types.DescribeFileSystemsResponse, AWSError>;
   /**
+   * Indicates whether participant accounts in your organization can create Amazon FSx for NetApp ONTAP Multi-AZ file systems in subnets that are shared by a virtual private cloud (VPC) owner. For more information, see the Amazon FSx for NetApp ONTAP User Guide.
+   */
+  describeSharedVpcConfiguration(params: FSx.Types.DescribeSharedVpcConfigurationRequest, callback?: (err: AWSError, data: FSx.Types.DescribeSharedVpcConfigurationResponse) => void): Request<FSx.Types.DescribeSharedVpcConfigurationResponse, AWSError>;
+  /**
+   * Indicates whether participant accounts in your organization can create Amazon FSx for NetApp ONTAP Multi-AZ file systems in subnets that are shared by a virtual private cloud (VPC) owner. For more information, see the Amazon FSx for NetApp ONTAP User Guide.
+   */
+  describeSharedVpcConfiguration(callback?: (err: AWSError, data: FSx.Types.DescribeSharedVpcConfigurationResponse) => void): Request<FSx.Types.DescribeSharedVpcConfigurationResponse, AWSError>;
+  /**
    * Returns the description of specific Amazon FSx for OpenZFS snapshots, if a SnapshotIds value is provided. Otherwise, this operation returns all snapshots owned by your Amazon Web Services account in the Amazon Web Services Region of the endpoint that you're calling. When retrieving all snapshots, you can optionally specify the MaxResults parameter to limit the number of snapshots in a response. If more backups remain, Amazon FSx returns a NextToken value in the response. In this case, send a later request with the NextToken request parameter set to the value of NextToken from the last response.  Use this operation in an iterative process to retrieve a list of your snapshots. DescribeSnapshots is called first without a NextToken value. Then the operation continues to be called with the NextToken parameter set to the value of the last NextToken value until a response has no NextToken value. When using this operation, keep the following in mind:   The operation might return fewer than the MaxResults value of snapshot descriptions while still including a NextToken value.   The order of snapshots returned in the response of one DescribeSnapshots call and the order of backups returned across the responses of a multi-call iteration is unspecified.   
    */
   describeSnapshots(params: FSx.Types.DescribeSnapshotsRequest, callback?: (err: AWSError, data: FSx.Types.DescribeSnapshotsResponse) => void): Request<FSx.Types.DescribeSnapshotsResponse, AWSError>;
@@ -244,11 +260,11 @@ declare class FSx extends Service {
    */
   describeVolumes(callback?: (err: AWSError, data: FSx.Types.DescribeVolumesResponse) => void): Request<FSx.Types.DescribeVolumesResponse, AWSError>;
   /**
-   * Use this action to disassociate, or remove, one or more Domain Name Service (DNS) aliases from an Amazon FSx for Windows File Server file system. If you attempt to disassociate a DNS alias that is not associated with the file system, Amazon FSx responds with a 400 Bad Request. For more information, see Working with DNS Aliases. The system generated response showing the DNS aliases that Amazon FSx is attempting to disassociate from the file system. Use the API operation to monitor the status of the aliases Amazon FSx is disassociating with the file system.
+   * Use this action to disassociate, or remove, one or more Domain Name Service (DNS) aliases from an Amazon FSx for Windows File Server file system. If you attempt to disassociate a DNS alias that is not associated with the file system, Amazon FSx responds with an HTTP status code 400 (Bad Request). For more information, see Working with DNS Aliases. The system generated response showing the DNS aliases that Amazon FSx is attempting to disassociate from the file system. Use the API operation to monitor the status of the aliases Amazon FSx is disassociating with the file system.
    */
   disassociateFileSystemAliases(params: FSx.Types.DisassociateFileSystemAliasesRequest, callback?: (err: AWSError, data: FSx.Types.DisassociateFileSystemAliasesResponse) => void): Request<FSx.Types.DisassociateFileSystemAliasesResponse, AWSError>;
   /**
-   * Use this action to disassociate, or remove, one or more Domain Name Service (DNS) aliases from an Amazon FSx for Windows File Server file system. If you attempt to disassociate a DNS alias that is not associated with the file system, Amazon FSx responds with a 400 Bad Request. For more information, see Working with DNS Aliases. The system generated response showing the DNS aliases that Amazon FSx is attempting to disassociate from the file system. Use the API operation to monitor the status of the aliases Amazon FSx is disassociating with the file system.
+   * Use this action to disassociate, or remove, one or more Domain Name Service (DNS) aliases from an Amazon FSx for Windows File Server file system. If you attempt to disassociate a DNS alias that is not associated with the file system, Amazon FSx responds with an HTTP status code 400 (Bad Request). For more information, see Working with DNS Aliases. The system generated response showing the DNS aliases that Amazon FSx is attempting to disassociate from the file system. Use the API operation to monitor the status of the aliases Amazon FSx is disassociating with the file system.
    */
   disassociateFileSystemAliases(callback?: (err: AWSError, data: FSx.Types.DisassociateFileSystemAliasesResponse) => void): Request<FSx.Types.DisassociateFileSystemAliasesResponse, AWSError>;
   /**
@@ -316,13 +332,21 @@ declare class FSx extends Service {
    */
   updateFileCache(callback?: (err: AWSError, data: FSx.Types.UpdateFileCacheResponse) => void): Request<FSx.Types.UpdateFileCacheResponse, AWSError>;
   /**
-   * Use this operation to update the configuration of an existing Amazon FSx file system. You can update multiple properties in a single request. For FSx for Windows File Server file systems, you can update the following properties:    AuditLogConfiguration     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     SelfManagedActiveDirectoryConfiguration     StorageCapacity     StorageType     ThroughputCapacity     DiskIopsConfiguration     WeeklyMaintenanceStartTime    For FSx for Lustre file systems, you can update the following properties:    AutoImportPolicy     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     DataCompressionType     LogConfiguration     LustreRootSquashConfiguration     PerUnitStorageThroughput     StorageCapacity     WeeklyMaintenanceStartTime    For FSx for ONTAP file systems, you can update the following properties:    AddRouteTableIds     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     DiskIopsConfiguration     FsxAdminPassword     RemoveRouteTableIds     StorageCapacity     ThroughputCapacity     WeeklyMaintenanceStartTime    For FSx for OpenZFS file systems, you can update the following properties:    AddRouteTableIds     AutomaticBackupRetentionDays     CopyTagsToBackups     CopyTagsToVolumes     DailyAutomaticBackupStartTime     DiskIopsConfiguration     RemoveRouteTableIds     StorageCapacity     ThroughputCapacity     WeeklyMaintenanceStartTime   
+   * Use this operation to update the configuration of an existing Amazon FSx file system. You can update multiple properties in a single request. For FSx for Windows File Server file systems, you can update the following properties:    AuditLogConfiguration     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     SelfManagedActiveDirectoryConfiguration     StorageCapacity     StorageType     ThroughputCapacity     DiskIopsConfiguration     WeeklyMaintenanceStartTime    For FSx for Lustre file systems, you can update the following properties:    AutoImportPolicy     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     DataCompressionType     LogConfiguration     LustreRootSquashConfiguration     PerUnitStorageThroughput     StorageCapacity     WeeklyMaintenanceStartTime    For FSx for ONTAP file systems, you can update the following properties:    AddRouteTableIds     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     DiskIopsConfiguration     FsxAdminPassword     HAPairs     RemoveRouteTableIds     StorageCapacity     ThroughputCapacity     ThroughputCapacityPerHAPair     WeeklyMaintenanceStartTime    For FSx for OpenZFS file systems, you can update the following properties:    AddRouteTableIds     AutomaticBackupRetentionDays     CopyTagsToBackups     CopyTagsToVolumes     DailyAutomaticBackupStartTime     DiskIopsConfiguration     RemoveRouteTableIds     StorageCapacity     ThroughputCapacity     WeeklyMaintenanceStartTime   
    */
   updateFileSystem(params: FSx.Types.UpdateFileSystemRequest, callback?: (err: AWSError, data: FSx.Types.UpdateFileSystemResponse) => void): Request<FSx.Types.UpdateFileSystemResponse, AWSError>;
   /**
-   * Use this operation to update the configuration of an existing Amazon FSx file system. You can update multiple properties in a single request. For FSx for Windows File Server file systems, you can update the following properties:    AuditLogConfiguration     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     SelfManagedActiveDirectoryConfiguration     StorageCapacity     StorageType     ThroughputCapacity     DiskIopsConfiguration     WeeklyMaintenanceStartTime    For FSx for Lustre file systems, you can update the following properties:    AutoImportPolicy     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     DataCompressionType     LogConfiguration     LustreRootSquashConfiguration     PerUnitStorageThroughput     StorageCapacity     WeeklyMaintenanceStartTime    For FSx for ONTAP file systems, you can update the following properties:    AddRouteTableIds     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     DiskIopsConfiguration     FsxAdminPassword     RemoveRouteTableIds     StorageCapacity     ThroughputCapacity     WeeklyMaintenanceStartTime    For FSx for OpenZFS file systems, you can update the following properties:    AddRouteTableIds     AutomaticBackupRetentionDays     CopyTagsToBackups     CopyTagsToVolumes     DailyAutomaticBackupStartTime     DiskIopsConfiguration     RemoveRouteTableIds     StorageCapacity     ThroughputCapacity     WeeklyMaintenanceStartTime   
+   * Use this operation to update the configuration of an existing Amazon FSx file system. You can update multiple properties in a single request. For FSx for Windows File Server file systems, you can update the following properties:    AuditLogConfiguration     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     SelfManagedActiveDirectoryConfiguration     StorageCapacity     StorageType     ThroughputCapacity     DiskIopsConfiguration     WeeklyMaintenanceStartTime    For FSx for Lustre file systems, you can update the following properties:    AutoImportPolicy     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     DataCompressionType     LogConfiguration     LustreRootSquashConfiguration     PerUnitStorageThroughput     StorageCapacity     WeeklyMaintenanceStartTime    For FSx for ONTAP file systems, you can update the following properties:    AddRouteTableIds     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     DiskIopsConfiguration     FsxAdminPassword     HAPairs     RemoveRouteTableIds     StorageCapacity     ThroughputCapacity     ThroughputCapacityPerHAPair     WeeklyMaintenanceStartTime    For FSx for OpenZFS file systems, you can update the following properties:    AddRouteTableIds     AutomaticBackupRetentionDays     CopyTagsToBackups     CopyTagsToVolumes     DailyAutomaticBackupStartTime     DiskIopsConfiguration     RemoveRouteTableIds     StorageCapacity     ThroughputCapacity     WeeklyMaintenanceStartTime   
    */
   updateFileSystem(callback?: (err: AWSError, data: FSx.Types.UpdateFileSystemResponse) => void): Request<FSx.Types.UpdateFileSystemResponse, AWSError>;
+  /**
+   * Configures whether participant accounts in your organization can create Amazon FSx for NetApp ONTAP Multi-AZ file systems in subnets that are shared by a virtual private cloud (VPC) owner. For more information, see the Amazon FSx for NetApp ONTAP User Guide.  We strongly recommend that participant-created Multi-AZ file systems in the shared VPC are deleted before you disable this feature. Once the feature is disabled, these file systems will enter a MISCONFIGURED state and behave like Single-AZ file systems. For more information, see Important considerations before disabling shared VPC support for Multi-AZ file systems. 
+   */
+  updateSharedVpcConfiguration(params: FSx.Types.UpdateSharedVpcConfigurationRequest, callback?: (err: AWSError, data: FSx.Types.UpdateSharedVpcConfigurationResponse) => void): Request<FSx.Types.UpdateSharedVpcConfigurationResponse, AWSError>;
+  /**
+   * Configures whether participant accounts in your organization can create Amazon FSx for NetApp ONTAP Multi-AZ file systems in subnets that are shared by a virtual private cloud (VPC) owner. For more information, see the Amazon FSx for NetApp ONTAP User Guide.  We strongly recommend that participant-created Multi-AZ file systems in the shared VPC are deleted before you disable this feature. Once the feature is disabled, these file systems will enter a MISCONFIGURED state and behave like Single-AZ file systems. For more information, see Important considerations before disabling shared VPC support for Multi-AZ file systems. 
+   */
+  updateSharedVpcConfiguration(callback?: (err: AWSError, data: FSx.Types.UpdateSharedVpcConfigurationResponse) => void): Request<FSx.Types.UpdateSharedVpcConfigurationResponse, AWSError>;
   /**
    * Updates the name of an Amazon FSx for OpenZFS snapshot.
    */
@@ -374,16 +398,24 @@ declare namespace FSx {
      */
     RequestTime?: RequestTime;
     /**
-     * Describes the status of the administrative action, as follows:    FAILED - Amazon FSx failed to process the administrative action successfully.    IN_PROGRESS - Amazon FSx is processing the administrative action.    PENDING - Amazon FSx is waiting to process the administrative action.    COMPLETED - Amazon FSx has finished processing the administrative task.    UPDATED_OPTIMIZING - For a storage-capacity increase update, Amazon FSx has updated the file system with the new storage capacity, and is now performing the storage-optimization process.   
+     * The status of the administrative action, as follows:    FAILED - Amazon FSx failed to process the administrative action successfully.    IN_PROGRESS - Amazon FSx is processing the administrative action.    PENDING - Amazon FSx is waiting to process the administrative action.    COMPLETED - Amazon FSx has finished processing the administrative task.    UPDATED_OPTIMIZING - For a storage-capacity increase update, Amazon FSx has updated the file system with the new storage capacity, and is now performing the storage-optimization process.  
      */
     Status?: Status;
     /**
-     * Describes the target value for the administration action, provided in the UpdateFileSystem operation. Returned for FILE_SYSTEM_UPDATE administrative actions. 
+     * The target value for the administration action, provided in the UpdateFileSystem operation. Returned for FILE_SYSTEM_UPDATE administrative actions. 
      */
     TargetFileSystemValues?: FileSystem;
     FailureDetails?: AdministrativeActionFailureDetails;
     TargetVolumeValues?: Volume;
     TargetSnapshotValues?: Snapshot;
+    /**
+     * The number of bytes that have transferred for the FSx for OpenZFS snapshot that you're copying.
+     */
+    TotalTransferBytes?: TotalTransferBytes;
+    /**
+     * The remaining bytes to transfer for the FSx for OpenZFS snapshot that you're copying.
+     */
+    RemainingTransferBytes?: RemainingTransferBytes;
   }
   export interface AdministrativeActionFailureDetails {
     /**
@@ -391,8 +423,21 @@ declare namespace FSx {
      */
     Message?: ErrorMessage;
   }
-  export type AdministrativeActionType = "FILE_SYSTEM_UPDATE"|"STORAGE_OPTIMIZATION"|"FILE_SYSTEM_ALIAS_ASSOCIATION"|"FILE_SYSTEM_ALIAS_DISASSOCIATION"|"VOLUME_UPDATE"|"SNAPSHOT_UPDATE"|"RELEASE_NFS_V3_LOCKS"|"VOLUME_RESTORE"|"THROUGHPUT_OPTIMIZATION"|"IOPS_OPTIMIZATION"|"STORAGE_TYPE_OPTIMIZATION"|"MISCONFIGURED_STATE_RECOVERY"|string;
+  export type AdministrativeActionType = "FILE_SYSTEM_UPDATE"|"STORAGE_OPTIMIZATION"|"FILE_SYSTEM_ALIAS_ASSOCIATION"|"FILE_SYSTEM_ALIAS_DISASSOCIATION"|"VOLUME_UPDATE"|"SNAPSHOT_UPDATE"|"RELEASE_NFS_V3_LOCKS"|"VOLUME_RESTORE"|"THROUGHPUT_OPTIMIZATION"|"IOPS_OPTIMIZATION"|"STORAGE_TYPE_OPTIMIZATION"|"MISCONFIGURED_STATE_RECOVERY"|"VOLUME_UPDATE_WITH_SNAPSHOT"|"VOLUME_INITIALIZE_WITH_SNAPSHOT"|string;
   export type AdministrativeActions = AdministrativeAction[];
+  export type Aggregate = string;
+  export interface AggregateConfiguration {
+    /**
+     * The list of aggregates that this volume resides on. Aggregates are storage pools which make up your primary storage tier. Each high-availability (HA) pair has one aggregate. The names of the aggregates map to the names of the aggregates in the ONTAP CLI and REST API. For FlexVols, there will always be a single entry. Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The strings in the value of Aggregates are not are not formatted as aggrX, where X is a number between 1 and 6.   The value of Aggregates contains aggregates that are not present.   One or more of the aggregates supplied are too close to the volume limit to support adding more volumes.  
+     */
+    Aggregates?: Aggregates;
+    /**
+     * The total number of constituents this FlexGroup volume has. Not applicable for FlexVols.
+     */
+    TotalConstituents?: TotalConstituents;
+  }
+  export type AggregateListMultiplier = number;
+  export type Aggregates = Aggregate[];
   export interface Alias {
     /**
      * The name of the DNS alias. The alias name has to meet the following requirements:   Formatted as a fully-qualified domain name (FQDN), hostname.domain, for example, accounting.example.com.   Can contain alphanumeric characters, the underscore (_), and the hyphen (-).   Cannot start or end with a hyphen.   Can start with a numeric.   For DNS names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: as uppercase letters, lowercase letters, or the corresponding letters in escape codes.
@@ -574,7 +619,47 @@ declare namespace FSx {
   export interface CopyBackupResponse {
     Backup?: Backup;
   }
+  export interface CopySnapshotAndUpdateVolumeRequest {
+    ClientRequestToken?: ClientRequestToken;
+    /**
+     * Specifies the ID of the volume that you are copying the snapshot to.
+     */
+    VolumeId: VolumeId;
+    SourceSnapshotARN: ResourceARN;
+    /**
+     * Specifies the strategy to use when copying data from a snapshot to the volume.     FULL_COPY - Copies all data from the snapshot to the volume.     INCREMENTAL_COPY - Copies only the snapshot data that's changed since the previous replication.     CLONE isn't a valid copy strategy option for the CopySnapshotAndUpdateVolume operation. 
+     */
+    CopyStrategy?: OpenZFSCopyStrategy;
+    /**
+     * Confirms that you want to delete data on the destination volume that wasn’t there during the previous snapshot replication. Your replication will fail if you don’t include an option for a specific type of data and that data is on your destination. For example, if you don’t include DELETE_INTERMEDIATE_SNAPSHOTS and there are intermediate snapshots on the destination, you can’t copy the snapshot.    DELETE_INTERMEDIATE_SNAPSHOTS - Deletes snapshots on the destination volume that aren’t on the source volume.    DELETE_CLONED_VOLUMES - Deletes snapshot clones on the destination volume that aren't on the source volume.    DELETE_INTERMEDIATE_DATA - Overwrites snapshots on the destination volume that don’t match the source snapshot that you’re copying.  
+     */
+    Options?: UpdateOpenZFSVolumeOptions;
+  }
+  export interface CopySnapshotAndUpdateVolumeResponse {
+    /**
+     * The ID of the volume that you copied the snapshot to.
+     */
+    VolumeId?: VolumeId;
+    /**
+     * The lifecycle state of the destination volume. 
+     */
+    Lifecycle?: VolumeLifecycle;
+    /**
+     * A list of administrative actions for the file system that are in process or waiting to be processed. Administrative actions describe changes to the Amazon FSx system.
+     */
+    AdministrativeActions?: AdministrativeActions;
+  }
   export type CopyTagsToDataRepositoryAssociations = boolean;
+  export interface CreateAggregateConfiguration {
+    /**
+     * Used to specify the names of aggregates on which the volume will be created.
+     */
+    Aggregates?: Aggregates;
+    /**
+     * Used to explicitly set the number of constituents within the FlexGroup per storage aggregate. This field is optional when creating a FlexGroup volume. If unspecified, the default value will be 8. This field cannot be provided when creating a FlexVol volume.
+     */
+    ConstituentsPerAggregate?: AggregateListMultiplier;
+  }
   export interface CreateBackupRequest {
     /**
      * The ID of the file system to back up.
@@ -760,7 +845,7 @@ declare namespace FSx {
      */
     OpenZFSConfiguration?: CreateFileSystemOpenZFSConfiguration;
     /**
-     * Sets the storage capacity of the OpenZFS file system that you're creating from a backup, in gibibytes (GiB). Valid values are from 64 GiB up to 524,288 GiB (512 TiB). However, the value that you specify must be equal to or greater than the backup's storage capacity value. If you don't use the StorageCapacity parameter, the default is the backup's StorageCapacity value. If used to create a file system other than OpenZFS, you must provide a value that matches the backup's StorageCapacity value. If you provide any other value, Amazon FSx responds with a 400 Bad Request. 
+     * Sets the storage capacity of the OpenZFS file system that you're creating from a backup, in gibibytes (GiB). Valid values are from 64 GiB up to 524,288 GiB (512 TiB). However, the value that you specify must be equal to or greater than the backup's storage capacity value. If you don't use the StorageCapacity parameter, the default is the backup's StorageCapacity value. If used to create a file system other than OpenZFS, you must provide a value that matches the backup's StorageCapacity value. If you provide any other value, Amazon FSx responds with with an HTTP status code 400 Bad Request. 
      */
     StorageCapacity?: StorageCapacity;
   }
@@ -829,7 +914,7 @@ declare namespace FSx {
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
     DailyAutomaticBackupStartTime?: DailyTime;
     /**
-     * Specifies the FSx for ONTAP file system deployment type to use in creating the file system.     MULTI_AZ_1 - (Default) A high availability file system configured for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability.     SINGLE_AZ_1 - A file system configured for Single-AZ redundancy.   For information about the use cases for Multi-AZ and Single-AZ deployments, refer to Choosing a file system deployment type. 
+     * Specifies the FSx for ONTAP file system deployment type to use in creating the file system.     MULTI_AZ_1 - (Default) A high availability file system configured for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability.     SINGLE_AZ_1 - A file system configured for Single-AZ redundancy.    SINGLE_AZ_2 - A file system configured with multiple high-availability (HA) pairs for Single-AZ redundancy.   For information about the use cases for Multi-AZ and Single-AZ deployments, refer to Choosing a file system deployment type. 
      */
     DeploymentType: OntapDeploymentType;
     /**
@@ -853,10 +938,18 @@ declare namespace FSx {
      */
     RouteTableIds?: RouteTableIds;
     /**
-     * Sets the throughput capacity for the file system that you're creating. Valid values are 128, 256, 512, 1024, 2048, and 4096 MBps.
+     * Sets the throughput capacity for the file system that you're creating in megabytes per second (MBps). For more information, see Managing throughput capacity in the FSx for ONTAP User Guide. Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the same value.   The value of ThroughputCapacity when divided by the value of HAPairs is outside of the valid range for ThroughputCapacity.  
      */
-    ThroughputCapacity: MegabytesPerSecond;
+    ThroughputCapacity?: MegabytesPerSecond;
     WeeklyMaintenanceStartTime?: WeeklyTime;
+    /**
+     * Specifies how many high-availability (HA) pairs the file system will have. The default value is 1. The value of this property affects the values of StorageCapacity, Iops, and ThroughputCapacity. For more information, see High-availability (HA) pairs in the FSx for ONTAP user guide. Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of HAPairs is less than 1 or greater than 6.   The value of HAPairs is greater than 1 and the value of DeploymentType is SINGLE_AZ_1 or MULTI_AZ_1.  
+     */
+    HAPairs?: HAPairs;
+    /**
+     * Use to choose the throughput capacity per HA pair, rather than the total throughput for the file system.  This field and ThroughputCapacity cannot be defined in the same API call, but one is required. This field and ThroughputCapacity are the same for file systems with one HA pair.   For SINGLE_AZ_1 and MULTI_AZ_1, valid values are 128, 256, 512, 1024, 2048, or 4096 MBps.   For SINGLE_AZ_2, valid values are 3072 or 6144 MBps.   Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the same value   The value of ThroughputCapacityPerHAPair is not a valid value.  
+     */
+    ThroughputCapacityPerHAPair?: ThroughputCapacityPerHAPair;
   }
   export interface CreateFileSystemOpenZFSConfiguration {
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
@@ -906,7 +999,7 @@ declare namespace FSx {
      */
     FileSystemType: FileSystemType;
     /**
-     * Sets the storage capacity of the file system that you're creating, in gibibytes (GiB).  FSx for Lustre file systems - The amount of storage capacity that you can configure depends on the value that you set for StorageType and the Lustre DeploymentType, as follows:   For SCRATCH_2, PERSISTENT_2 and PERSISTENT_1 deployment types using SSD storage type, the valid values are 1200 GiB, 2400 GiB, and increments of 2400 GiB.   For PERSISTENT_1 HDD file systems, valid values are increments of 6000 GiB for 12 MB/s/TiB file systems and increments of 1800 GiB for 40 MB/s/TiB file systems.   For SCRATCH_1 deployment type, valid values are 1200 GiB, 2400 GiB, and increments of 3600 GiB.    FSx for ONTAP file systems - The amount of storage capacity that you can configure is from 1024 GiB up to 196,608 GiB (192 TiB).  FSx for OpenZFS file systems - The amount of storage capacity that you can configure is from 64 GiB up to 524,288 GiB (512 TiB).  FSx for Windows File Server file systems - The amount of storage capacity that you can configure depends on the value that you set for StorageType as follows:   For SSD storage, valid values are 32 GiB-65,536 GiB (64 TiB).   For HDD storage, valid values are 2000 GiB-65,536 GiB (64 TiB).  
+     * Sets the storage capacity of the file system that you're creating, in gibibytes (GiB).  FSx for Lustre file systems - The amount of storage capacity that you can configure depends on the value that you set for StorageType and the Lustre DeploymentType, as follows:   For SCRATCH_2, PERSISTENT_2 and PERSISTENT_1 deployment types using SSD storage type, the valid values are 1200 GiB, 2400 GiB, and increments of 2400 GiB.   For PERSISTENT_1 HDD file systems, valid values are increments of 6000 GiB for 12 MB/s/TiB file systems and increments of 1800 GiB for 40 MB/s/TiB file systems.   For SCRATCH_1 deployment type, valid values are 1200 GiB, 2400 GiB, and increments of 3600 GiB.    FSx for ONTAP file systems - The amount of storage capacity that you can configure depends on the value of the HAPairs property. The minimum value is calculated as 1,024 * HAPairs and the maxium is calculated as 524,288 * HAPairs..  FSx for OpenZFS file systems - The amount of storage capacity that you can configure is from 64 GiB up to 524,288 GiB (512 TiB).  FSx for Windows File Server file systems - The amount of storage capacity that you can configure depends on the value that you set for StorageType as follows:   For SSD storage, valid values are 32 GiB-65,536 GiB (64 TiB).   For HDD storage, valid values are 2000 GiB-65,536 GiB (64 TiB).  
      */
     StorageCapacity: StorageCapacity;
     /**
@@ -1006,7 +1099,7 @@ declare namespace FSx {
     /**
      * Specifies the size of the volume, in megabytes (MB), that you are creating.
      */
-    SizeInMegabytes: VolumeCapacity;
+    SizeInMegabytes?: VolumeCapacity;
     /**
      * Set to true to enable deduplication, compression, and compaction storage efficiency features on the volume, or set to false to disable them. This parameter is required.
      */
@@ -1032,11 +1125,23 @@ declare namespace FSx {
      * Specifies the SnapLock configuration for an FSx for ONTAP volume. 
      */
     SnaplockConfiguration?: CreateSnaplockConfiguration;
+    /**
+     * Use to specify the style of an ONTAP volume. For more information about FlexVols and FlexGroups, see Volume types in Amazon FSx for NetApp ONTAP User Guide.
+     */
+    VolumeStyle?: VolumeStyle;
+    /**
+     * Use to specify configuration options for a volume’s storage aggregate or aggregates.
+     */
+    AggregateConfiguration?: CreateAggregateConfiguration;
+    /**
+     * The configured size of the volume, in bytes.
+     */
+    SizeInBytes?: VolumeCapacityBytes;
   }
   export interface CreateOpenZFSOriginSnapshotConfiguration {
     SnapshotARN: ResourceARN;
     /**
-     * The strategy used when copying data from the snapshot to the new volume.     CLONE - The new volume references the data in the origin snapshot. Cloning a snapshot is faster than copying data from the snapshot to a new volume and doesn't consume disk throughput. However, the origin snapshot can't be deleted if there is a volume using its copied data.     FULL_COPY - Copies all data from the snapshot to the new volume.   
+     * Specifies the strategy used when copying data from the snapshot to the new volume.     CLONE - The new volume references the data in the origin snapshot. Cloning a snapshot is faster than copying data from the snapshot to a new volume and doesn't consume disk throughput. However, the origin snapshot can't be deleted if there is a volume using its copied data.    FULL_COPY - Copies all data from the snapshot to the new volume. Specify this option to create the volume from a snapshot on another FSx for OpenZFS file system.    The INCREMENTAL_COPY option is only for updating an existing volume by using a snapshot from another FSx for OpenZFS file system. For more information, see CopySnapshotAndUpdateVolume. 
      */
     CopyStrategy: OpenZFSCopyStrategy;
   }
@@ -1759,6 +1864,14 @@ declare namespace FSx {
      */
     NextToken?: NextToken;
   }
+  export interface DescribeSharedVpcConfigurationRequest {
+  }
+  export interface DescribeSharedVpcConfigurationResponse {
+    /**
+     * Indicates whether participant accounts can create FSx for ONTAP Multi-AZ file systems in shared subnets.
+     */
+    EnableFsxRouteTableUpdatesFromParticipantAccounts?: VerboseFlag;
+  }
   export interface DescribeSnapshotsRequest {
     /**
      * The IDs of the snapshots that you want to retrieve. This parameter value overrides any filters. If any IDs aren't found, a SnapshotNotFound error occurs.
@@ -1842,7 +1955,7 @@ declare namespace FSx {
      */
     Mode?: DiskIopsConfigurationMode;
     /**
-     * The total number of SSD IOPS provisioned for the file system.
+     * The total number of SSD IOPS provisioned for the file system. The minimum and maximum values for this property depend on the value of HAPairs and StorageCapacity. The minimum value is calculated as StorageCapacity * 3 * HAPairs (3 IOPS per GB of StorageCapacity). The maximum value is calculated as 200,000 * HAPairs. Amazon FSx responds with an HTTP status code 400 (Bad Request) if the value of Iops is outside of the minimum or maximum values.
      */
     Iops?: Iops;
   }
@@ -2057,7 +2170,7 @@ declare namespace FSx {
     Lifecycle?: FileSystemLifecycle;
     FailureDetails?: FileSystemFailureDetails;
     /**
-     * The storage capacity of the file system in gibibytes (GiB).
+     * The storage capacity of the file system in gibibytes (GiB). Amazon FSx responds with an HTTP status code 400 (Bad Request) if the value of StorageCapacity is outside of the minimum or maximum values.
      */
     StorageCapacity?: StorageCapacity;
     /**
@@ -2163,6 +2276,7 @@ declare namespace FSx {
   export type Flag = boolean;
   export type FlexCacheEndpointType = "NONE"|"ORIGIN"|"CACHE"|string;
   export type GeneralARN = string;
+  export type HAPairs = number;
   export type InputOntapVolumeType = "RW"|"DP"|string;
   export type IntegerNoMax = number;
   export type IntegerNoMaxFromNegativeOne = number;
@@ -2302,13 +2416,13 @@ declare namespace FSx {
   export type NetworkInterfaceIds = NetworkInterfaceId[];
   export type NextToken = string;
   export type NfsVersion = "NFS3"|string;
-  export type OntapDeploymentType = "MULTI_AZ_1"|"SINGLE_AZ_1"|string;
+  export type OntapDeploymentType = "MULTI_AZ_1"|"SINGLE_AZ_1"|"SINGLE_AZ_2"|string;
   export type OntapEndpointIpAddresses = IpAddress[];
   export interface OntapFileSystemConfiguration {
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
     DailyAutomaticBackupStartTime?: DailyTime;
     /**
-     * Specifies the FSx for ONTAP file system deployment type in use in the file system.     MULTI_AZ_1 - (Default) A high availability file system configured for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability.     SINGLE_AZ_1 - A file system configured for Single-AZ redundancy.   For information about the use cases for Multi-AZ and Single-AZ deployments, refer to Choosing Multi-AZ or Single-AZ file system deployment. 
+     * Specifies the FSx for ONTAP file system deployment type in use in the file system.     MULTI_AZ_1 - (Default) A high availability file system configured for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability.     SINGLE_AZ_1 - A file system configured for Single-AZ redundancy.    SINGLE_AZ_2 - A file system configured with multiple high-availability (HA) pairs for Single-AZ redundancy.   For information about the use cases for Multi-AZ and Single-AZ deployments, refer to Choosing Multi-AZ or Single-AZ file system deployment. 
      */
     DeploymentType?: OntapDeploymentType;
     /**
@@ -2334,6 +2448,14 @@ declare namespace FSx {
      * You can use the fsxadmin user account to access the NetApp ONTAP CLI and REST API. The password value is always redacted in the response.
      */
     FsxAdminPassword?: AdminPassword;
+    /**
+     * Specifies how many high-availability (HA) file server pairs the file system will have. The default value is 1. The value of this property affects the values of StorageCapacity, Iops, and ThroughputCapacity. For more information, see High-availability (HA) pairs in the FSx for ONTAP user guide. Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of HAPairs is less than 1 or greater than 6.   The value of HAPairs is greater than 1 and the value of DeploymentType is SINGLE_AZ_1 or MULTI_AZ_1.  
+     */
+    HAPairs?: HAPairs;
+    /**
+     * Use to choose the throughput capacity per HA pair. When the value of HAPairs is equal to 1, the value of ThroughputCapacityPerHAPair is the total throughput for the file system. This field and ThroughputCapacity cannot be defined in the same API call, but one is required. This field and ThroughputCapacity are the same for file systems with one HA pair.   For SINGLE_AZ_1 and MULTI_AZ_1, valid values are 128, 256, 512, 1024, 2048, or 4096 MBps.   For SINGLE_AZ_2, valid values are 3072 or 6144 MBps.   Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the same value.   The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity / ThroughputCapacityPerHAPair is a valid HA pair (a value between 2 and 6).   The value of ThroughputCapacityPerHAPair is not a valid value.  
+     */
+    ThroughputCapacityPerHAPair?: ThroughputCapacityPerHAPair;
   }
   export interface OntapVolumeConfiguration {
     /**
@@ -2388,6 +2510,18 @@ declare namespace FSx {
      * The SnapLock configuration object for an FSx for ONTAP SnapLock volume. 
      */
     SnaplockConfiguration?: SnaplockConfiguration;
+    /**
+     * Use to specify the style of an ONTAP volume. For more information about FlexVols and FlexGroups, see Volume types in Amazon FSx for NetApp ONTAP User Guide.
+     */
+    VolumeStyle?: VolumeStyle;
+    /**
+     * This structure specifies configuration options for a volume’s storage aggregate or aggregates.
+     */
+    AggregateConfiguration?: AggregateConfiguration;
+    /**
+     * The configured size of the volume, in bytes.
+     */
+    SizeInBytes?: VolumeCapacityBytes;
   }
   export type OntapVolumeType = "RW"|"DP"|"LS"|string;
   export interface OpenZFSClientConfiguration {
@@ -2402,7 +2536,7 @@ declare namespace FSx {
   }
   export type OpenZFSClientConfigurations = OpenZFSClientConfiguration[];
   export type OpenZFSClients = string;
-  export type OpenZFSCopyStrategy = "CLONE"|"FULL_COPY"|string;
+  export type OpenZFSCopyStrategy = "CLONE"|"FULL_COPY"|"INCREMENTAL_COPY"|string;
   export interface OpenZFSCreateRootVolumeConfiguration {
     /**
      * Specifies the record size of an OpenZFS root volume, in kibibytes (KiB). Valid values are 4, 8, 16, 32, 64, 128, 256, 512, or 1024 KiB. The default is 128 KiB. Most workloads should use the default record size. Database workflows can benefit from a smaller record size, while streaming workflows can benefit from a larger record size. For additional guidance on setting a custom record size, see  Tips for maximizing performance in the Amazon FSx for OpenZFS User Guide.
@@ -2485,7 +2619,7 @@ declare namespace FSx {
   export interface OpenZFSOriginSnapshotConfiguration {
     SnapshotARN?: ResourceARN;
     /**
-     * The strategy used when copying data from the snapshot to the new volume.     CLONE - The new volume references the data in the origin snapshot. Cloning a snapshot is faster than copying the data from a snapshot to a new volume and doesn't consume disk throughput. However, the origin snapshot can't be deleted if there is a volume using its copied data.     FULL_COPY - Copies all data from the snapshot to the new volume.   
+     * The strategy used when copying data from the snapshot to the new volume.     CLONE - The new volume references the data in the origin snapshot. Cloning a snapshot is faster than copying the data from a snapshot to a new volume and doesn't consume disk throughput. However, the origin snapshot can't be deleted if there is a volume using its copied data.     FULL_COPY - Copies all data from the snapshot to the new volume.    The INCREMENTAL_COPY option is only for updating an existing volume by using a snapshot from another FSx for OpenZFS file system. For more information, see CopySnapshotAndUpdateVolume. 
      */
     CopyStrategy?: OpenZFSCopyStrategy;
   }
@@ -2562,6 +2696,15 @@ declare namespace FSx {
      * A Boolean value indicating whether dependent clone volumes created from intermediate snapshots should be deleted when a volume is restored from snapshot.
      */
     DeleteClonedVolumes?: Flag;
+    /**
+     * A Boolean value indicating whether snapshot data that differs between the current state and the specified snapshot should be overwritten when a volume is restored from a snapshot.
+     */
+    DeleteIntermediateData?: Flag;
+    SourceSnapshotARN?: ResourceARN;
+    /**
+     * The ID of the snapshot that's being copied or was most recently copied to the destination volume.
+     */
+    DestinationSnapshot?: SnapshotId;
   }
   export type OrganizationalUnitDistinguishedName = string;
   export type PerUnitStorageThroughput = number;
@@ -2583,6 +2726,7 @@ declare namespace FSx {
     FileSystem?: FileSystem;
   }
   export type ReleasedCapacity = number;
+  export type RemainingTransferBytes = number;
   export type ReportFormat = "REPORT_CSV_20191124"|string;
   export type ReportScope = "FAILED_FILES_ONLY"|string;
   export type RepositoryDnsIps = IpAddress[];
@@ -2947,6 +3091,7 @@ declare namespace FSx {
   export type Tags = Tag[];
   export type TaskId = string;
   export type TaskIds = TaskId[];
+  export type ThroughputCapacityPerHAPair = number;
   export interface TieringPolicy {
     /**
      * Specifies the number of days that user data in a volume must remain inactive before it is considered "cold" and moved to the capacity pool. Used with the AUTO and SNAPSHOT_ONLY tiering policies. Enter a whole number between 2 and 183. Default values are 31 days for AUTO and 2 days for SNAPSHOT_ONLY.
@@ -2958,7 +3103,9 @@ declare namespace FSx {
     Name?: TieringPolicyName;
   }
   export type TieringPolicyName = "SNAPSHOT_ONLY"|"AUTO"|"ALL"|"NONE"|string;
+  export type TotalConstituents = number;
   export type TotalCount = number;
+  export type TotalTransferBytes = number;
   export type UUID = string;
   export type Unit = "DAYS"|string;
   export interface UntagResourceRequest {
@@ -3058,7 +3205,7 @@ declare namespace FSx {
      */
     DiskIopsConfiguration?: DiskIopsConfiguration;
     /**
-     * Enter a new value to change the amount of throughput capacity for the file system. Throughput capacity is measured in megabytes per second (MBps). Valid values are 128, 256, 512, 1024, 2048, and 4096 MBps. For more information, see Managing throughput capacity in the FSx for ONTAP User Guide.
+     * Enter a new value to change the amount of throughput capacity for the file system in megabytes per second (MBps). For more information, see Managing throughput capacity in the FSx for ONTAP User Guide. Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the same value.   The value of ThroughputCapacity when divided by the value of HAPairs is outside of the valid range for ThroughputCapacity.  
      */
     ThroughputCapacity?: MegabytesPerSecond;
     /**
@@ -3069,6 +3216,10 @@ declare namespace FSx {
      * (Multi-AZ only) A list of IDs of existing virtual private cloud (VPC) route tables to disassociate (remove) from your Amazon FSx for NetApp ONTAP file system. You can use the API operation to retrieve the list of VPC route table IDs for a file system.
      */
     RemoveRouteTableIds?: RouteTableIds;
+    /**
+     * Use to choose the throughput capacity per HA pair, rather than the total throughput for the file system.  This field and ThroughputCapacity cannot be defined in the same API call, but one is required. This field and ThroughputCapacity are the same for file systems with one HA pair.   For SINGLE_AZ_1 and MULTI_AZ_1, valid values are 128, 256, 512, 1024, 2048, or 4096 MBps.   For SINGLE_AZ_2, valid values are 3072 or 6144 MBps.   Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions: The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the same value. The value of ThroughputCapacityPerHAPair is not a valid value.
+     */
+    ThroughputCapacityPerHAPair?: ThroughputCapacityPerHAPair;
   }
   export interface UpdateFileSystemOpenZFSConfiguration {
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
@@ -3190,6 +3341,10 @@ declare namespace FSx {
      * The configuration object for updating the SnapLock configuration of an FSx for ONTAP SnapLock volume. 
      */
     SnaplockConfiguration?: UpdateSnaplockConfiguration;
+    /**
+     * The configured size of the volume, in bytes.
+     */
+    SizeInBytes?: VolumeCapacityBytes;
   }
   export interface UpdateOpenZFSVolumeConfiguration {
     /**
@@ -3220,6 +3375,21 @@ declare namespace FSx {
      * A Boolean value indicating whether the volume is read-only.
      */
     ReadOnly?: ReadOnly;
+  }
+  export type UpdateOpenZFSVolumeOption = "DELETE_INTERMEDIATE_SNAPSHOTS"|"DELETE_CLONED_VOLUMES"|"DELETE_INTERMEDIATE_DATA"|string;
+  export type UpdateOpenZFSVolumeOptions = UpdateOpenZFSVolumeOption[];
+  export interface UpdateSharedVpcConfigurationRequest {
+    /**
+     * Specifies whether participant accounts can create FSx for ONTAP Multi-AZ file systems in shared subnets. Set to true to enable or false to disable.
+     */
+    EnableFsxRouteTableUpdatesFromParticipantAccounts?: VerboseFlag;
+    ClientRequestToken?: ClientRequestToken;
+  }
+  export interface UpdateSharedVpcConfigurationResponse {
+    /**
+     * Indicates whether participant accounts can create FSx for ONTAP Multi-AZ file systems in shared subnets.
+     */
+    EnableFsxRouteTableUpdatesFromParticipantAccounts?: VerboseFlag;
   }
   export interface UpdateSnaplockConfiguration {
     /**
@@ -3311,6 +3481,7 @@ declare namespace FSx {
     Volume?: Volume;
   }
   export type Value = number;
+  export type VerboseFlag = string;
   export interface Volume {
     CreationTime?: CreationTime;
     FileSystemId?: FileSystemId;
@@ -3347,6 +3518,7 @@ declare namespace FSx {
     OpenZFSConfiguration?: OpenZFSVolumeConfiguration;
   }
   export type VolumeCapacity = number;
+  export type VolumeCapacityBytes = number;
   export interface VolumeFilter {
     /**
      * The name for this filter.
@@ -3366,6 +3538,7 @@ declare namespace FSx {
   export type VolumeLifecycle = "CREATING"|"CREATED"|"DELETING"|"FAILED"|"MISCONFIGURED"|"PENDING"|"AVAILABLE"|string;
   export type VolumeName = string;
   export type VolumePath = string;
+  export type VolumeStyle = "FLEXVOL"|"FLEXGROUP"|string;
   export type VolumeType = "ONTAP"|"OPENZFS"|string;
   export type Volumes = Volume[];
   export type VpcId = string;

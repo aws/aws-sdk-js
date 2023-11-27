@@ -396,6 +396,14 @@ declare class SecurityHub extends Service {
    */
   getMembers(callback?: (err: AWSError, data: SecurityHub.Types.GetMembersResponse) => void): Request<SecurityHub.Types.GetMembersResponse, AWSError>;
   /**
+   *  Retrieves the definition of a security control. The definition includes the control title, description, Region availability, parameter definitions, and other details. 
+   */
+  getSecurityControlDefinition(params: SecurityHub.Types.GetSecurityControlDefinitionRequest, callback?: (err: AWSError, data: SecurityHub.Types.GetSecurityControlDefinitionResponse) => void): Request<SecurityHub.Types.GetSecurityControlDefinitionResponse, AWSError>;
+  /**
+   *  Retrieves the definition of a security control. The definition includes the control title, description, Region availability, parameter definitions, and other details. 
+   */
+  getSecurityControlDefinition(callback?: (err: AWSError, data: SecurityHub.Types.GetSecurityControlDefinitionResponse) => void): Request<SecurityHub.Types.GetSecurityControlDefinitionResponse, AWSError>;
+  /**
    * Invites other Amazon Web Services accounts to become member accounts for the Security Hub administrator account that the invitation is sent from. This operation is only used to invite accounts that do not belong to an organization. Organization accounts do not receive invitations. Before you can use this action to invite a member, you must first use the CreateMembers action to create the member account in Security Hub. When the account owner enables Security Hub and accepts the invitation to become a member account, the administrator account can view the findings generated from the member account.
    */
   inviteMembers(params: SecurityHub.Types.InviteMembersRequest, callback?: (err: AWSError, data: SecurityHub.Types.InviteMembersResponse) => void): Request<SecurityHub.Types.InviteMembersResponse, AWSError>;
@@ -531,6 +539,14 @@ declare class SecurityHub extends Service {
    * Used to update the configuration related to Organizations. Can only be called from a Security Hub administrator account.
    */
   updateOrganizationConfiguration(callback?: (err: AWSError, data: SecurityHub.Types.UpdateOrganizationConfigurationResponse) => void): Request<SecurityHub.Types.UpdateOrganizationConfigurationResponse, AWSError>;
+  /**
+   *  Updates the properties of a security control. 
+   */
+  updateSecurityControl(params: SecurityHub.Types.UpdateSecurityControlRequest, callback?: (err: AWSError, data: SecurityHub.Types.UpdateSecurityControlResponse) => void): Request<SecurityHub.Types.UpdateSecurityControlResponse, AWSError>;
+  /**
+   *  Updates the properties of a security control. 
+   */
+  updateSecurityControl(callback?: (err: AWSError, data: SecurityHub.Types.UpdateSecurityControlResponse) => void): Request<SecurityHub.Types.UpdateSecurityControlResponse, AWSError>;
   /**
    * Updates configuration options for Security Hub.
    */
@@ -696,6 +712,7 @@ declare namespace SecurityHub {
   export type AdminAccounts = AdminAccount[];
   export type AdminStatus = "ENABLED"|"DISABLE_IN_PROGRESS"|string;
   export type AdminsMaxResults = number;
+  export type AlphaNumericNonEmptyString = string;
   export type ArnList = NonEmptyString[];
   export interface AssociatedStandard {
     /**
@@ -10805,6 +10822,22 @@ declare namespace SecurityHub {
      *  The unique identifier of a standard in which a control is enabled. This field consists of the resource portion of the Amazon Resource Name (ARN) returned for a standard in the DescribeStandards API response. 
      */
     ComplianceAssociatedStandardsId?: StringFilterList;
+    /**
+     *  Indicates whether a software vulnerability in your environment has a known exploit. You can filter findings by this field only if you use Security Hub and Amazon Inspector. 
+     */
+    VulnerabilitiesExploitAvailable?: StringFilterList;
+    /**
+     *  Indicates whether a vulnerability is fixed in a newer version of the affected software packages. You can filter findings by this field only if you use Security Hub and Amazon Inspector. 
+     */
+    VulnerabilitiesFixAvailable?: StringFilterList;
+    /**
+     *  The name of a security control parameter. 
+     */
+    ComplianceSecurityControlParametersName?: StringFilterList;
+    /**
+     *  The current value of a security control parameter. 
+     */
+    ComplianceSecurityControlParametersValue?: StringFilterList;
   }
   export interface AwsSecurityFindingIdentifier {
     /**
@@ -11806,6 +11839,12 @@ declare namespace SecurityHub {
     UnprocessedAssociationUpdates?: UnprocessedStandardsControlAssociationUpdates;
   }
   export type Boolean = boolean;
+  export interface BooleanConfigurationOptions {
+    /**
+     *  The Security Hub default value for a boolean parameter. 
+     */
+    DefaultValue?: Boolean;
+  }
   export interface BooleanFilter {
     /**
      * The value of the boolean.
@@ -11943,8 +11982,46 @@ declare namespace SecurityHub {
      * The enabled security standards in which a security control is currently enabled. 
      */
     AssociatedStandards?: AssociatedStandardsList;
+    /**
+     *  An object that includes security control parameter names and values. 
+     */
+    SecurityControlParameters?: SecurityControlParametersList;
   }
   export type ComplianceStatus = "PASSED"|"WARNING"|"FAILED"|"NOT_AVAILABLE"|string;
+  export interface ConfigurationOptions {
+    /**
+     *  The options for customizing a security control parameter that is an integer. 
+     */
+    Integer?: IntegerConfigurationOptions;
+    /**
+     *  The options for customizing a security control parameter that is a list of integers. 
+     */
+    IntegerList?: IntegerListConfigurationOptions;
+    /**
+     *  The options for customizing a security control parameter that is a double. 
+     */
+    Double?: DoubleConfigurationOptions;
+    /**
+     *  The options for customizing a security control parameter that is a string data type. 
+     */
+    String?: StringConfigurationOptions;
+    /**
+     *  The options for customizing a security control parameter that is a list of strings. 
+     */
+    StringList?: StringListConfigurationOptions;
+    /**
+     *  The options for customizing a security control parameter that is a boolean. For a boolean parameter, the options are true and false. 
+     */
+    Boolean?: BooleanConfigurationOptions;
+    /**
+     *  The options for customizing a security control parameter that is an enum. 
+     */
+    Enum?: EnumConfigurationOptions;
+    /**
+     *  The options for customizing a security control parameter that is a list of enums. 
+     */
+    EnumList?: EnumListConfigurationOptions;
+  }
   export interface ContainerDetails {
     /**
      * The runtime of the container. 
@@ -12137,6 +12214,7 @@ declare namespace SecurityHub {
      */
     TotalCount?: Long;
   }
+  export type CustomizableProperties = SecurityControlProperty[];
   export interface Cvss {
     /**
      * The version of CVSS for the CVSS score.
@@ -12447,6 +12525,20 @@ declare namespace SecurityHub {
     Blocked?: Boolean;
   }
   export type Double = number;
+  export interface DoubleConfigurationOptions {
+    /**
+     *  The Security Hub default value for a control parameter that is a double. 
+     */
+    DefaultValue?: Double;
+    /**
+     *  The minimum valid value for a control parameter that is a double. 
+     */
+    Min?: Double;
+    /**
+     *  The maximum valid value for a control parameter that is a double. 
+     */
+    Max?: Double;
+  }
   export interface EnableImportFindingsForProductRequest {
     /**
      * The ARN of the product to enable the integration for.
@@ -12482,6 +12574,30 @@ declare namespace SecurityHub {
     ControlFindingGenerator?: ControlFindingGenerator;
   }
   export interface EnableSecurityHubResponse {
+  }
+  export interface EnumConfigurationOptions {
+    /**
+     *  The Security Hub default value for a control parameter that is an enum. 
+     */
+    DefaultValue?: NonEmptyString;
+    /**
+     *  The valid values for a control parameter that is an enum. 
+     */
+    AllowedValues?: StringList;
+  }
+  export interface EnumListConfigurationOptions {
+    /**
+     *  The Security Hub default value for a control parameter that is a list of enums. 
+     */
+    DefaultValue?: StringList;
+    /**
+     *  The maximum number of list items that an enum list control parameter can accept. 
+     */
+    MaxItems?: Integer;
+    /**
+     *  The valid values for a control parameter that is a list of enums. 
+     */
+    AllowedValues?: StringList;
   }
   export type FieldMap = {[key: string]: NonEmptyString};
   export type FilePathList = FilePaths[];
@@ -12845,6 +12961,15 @@ declare namespace SecurityHub {
      */
     UnprocessedAccounts?: ResultList;
   }
+  export interface GetSecurityControlDefinitionRequest {
+    /**
+     *  The ID of the security control to retrieve the definition for. This field doesn’t accept an Amazon Resource Name (ARN). 
+     */
+    SecurityControlId: NonEmptyString;
+  }
+  export interface GetSecurityControlDefinitionResponse {
+    SecurityControlDefinition: SecurityControlDefinition;
+  }
   export interface IcmpTypeCode {
     /**
      * The ICMP code for which to deny or allow access. To deny or allow all codes, use the value -1.
@@ -12915,7 +13040,39 @@ declare namespace SecurityHub {
     ResultValues: InsightResultValueList;
   }
   export type Integer = number;
+  export interface IntegerConfigurationOptions {
+    /**
+     *  The Security Hub default value for a control parameter that is an integer. 
+     */
+    DefaultValue?: Integer;
+    /**
+     *  The minimum valid value for a control parameter that is an integer. 
+     */
+    Min?: Integer;
+    /**
+     *  The maximum valid value for a control parameter that is an integer. 
+     */
+    Max?: Integer;
+  }
   export type IntegerList = Integer[];
+  export interface IntegerListConfigurationOptions {
+    /**
+     *  The Security Hub default value for a control parameter that is a list of integers. 
+     */
+    DefaultValue?: IntegerList;
+    /**
+     *  The minimum valid value for a control parameter that is a list of integers. 
+     */
+    Min?: Integer;
+    /**
+     *  The maximum valid value for a control parameter that is a list of integers. 
+     */
+    Max?: Integer;
+    /**
+     *  The maximum number of list items that an interger list control parameter can accept. 
+     */
+    MaxItems?: Integer;
+  }
   export type IntegrationType = "SEND_FINDINGS_TO_SECURITY_HUB"|"RECEIVE_FINDINGS_FROM_SECURITY_HUB"|"UPDATE_FINDINGS_IN_SECURITY_HUB"|string;
   export type IntegrationTypeList = IntegrationType[];
   export interface Invitation {
@@ -13420,6 +13577,14 @@ declare namespace SecurityHub {
      * The equal-to condition to be applied to a single field when querying for findings.
      */
     Eq?: Double;
+    /**
+     *  The greater-than condition to be applied to a single field when querying for findings. 
+     */
+    Gt?: Double;
+    /**
+     *  The less-than condition to be applied to a single field when querying for findings. 
+     */
+    Lt?: Double;
   }
   export type NumberFilterList = NumberFilter[];
   export interface Occurrences {
@@ -13459,6 +13624,63 @@ declare namespace SecurityHub {
     OffsetRange?: Range;
   }
   export type Pages = Page[];
+  export interface ParameterConfiguration {
+    /**
+     *  Identifies whether a control parameter uses a custom user-defined value or the Security Hub default value. 
+     */
+    ValueType: ParameterValueType;
+    /**
+     *  The current value of a control parameter. 
+     */
+    Value?: ParameterValue;
+  }
+  export interface ParameterDefinition {
+    /**
+     *  Description of a control parameter. 
+     */
+    Description: NonEmptyString;
+    /**
+     *  The options for customizing a control parameter. Customization options vary based on the data type of the parameter. 
+     */
+    ConfigurationOptions: ConfigurationOptions;
+  }
+  export type ParameterDefinitions = {[key: string]: ParameterDefinition};
+  export interface ParameterValue {
+    /**
+     *  A control parameter that is an integer. 
+     */
+    Integer?: Integer;
+    /**
+     *  A control parameter that is a list of integers. 
+     */
+    IntegerList?: IntegerList;
+    /**
+     *  A control parameter that is a double. 
+     */
+    Double?: Double;
+    /**
+     *  A control parameter that is a string. 
+     */
+    String?: NonEmptyString;
+    /**
+     *  A control parameter that is a list of strings. 
+     */
+    StringList?: StringList;
+    /**
+     *  A control parameter that is a boolean. 
+     */
+    Boolean?: Boolean;
+    /**
+     *  A control parameter that is an enum. 
+     */
+    Enum?: NonEmptyString;
+    /**
+     *  A control parameter that is a list of enums. 
+     */
+    EnumList?: StringList;
+  }
+  export type ParameterValueType = "DEFAULT"|"CUSTOM"|string;
+  export type Parameters = {[key: string]: ParameterConfiguration};
   export type Partition = "aws"|"aws-cn"|"aws-us-gov"|string;
   export interface PatchSummary {
     /**
@@ -14438,6 +14660,18 @@ declare namespace SecurityHub {
      *  The enablement status of a security control in a specific standard. 
      */
     SecurityControlStatus: ControlStatus;
+    /**
+     *  Identifies whether customizable properties of a security control are reflected in Security Hub findings. A status of READY indicates findings include the current parameter values. A status of UPDATING indicates that all findings may not include the current parameter values. 
+     */
+    UpdateStatus?: UpdateStatus;
+    /**
+     *  An object that identifies the name of a control parameter, its current value, and whether it has been customized. 
+     */
+    Parameters?: Parameters;
+    /**
+     *  The most recent reason for updating the customizable properties of a security control. This differs from the UpdateReason field of the  BatchUpdateStandardsControlAssociations  API, which tracks the reason for updating the enablement status of a control. This field accepts alphanumeric characters in addition to white spaces, dashes, and underscores. 
+     */
+    LastUpdateReason?: AlphaNumericNonEmptyString;
   }
   export interface SecurityControlDefinition {
     /**
@@ -14464,8 +14698,28 @@ declare namespace SecurityHub {
      *  Specifies whether a security control is available in the current Amazon Web Services Region. 
      */
     CurrentRegionAvailability: RegionAvailabilityStatus;
+    /**
+     *  Security control properties that you can customize. Currently, only parameter customization is supported for select controls. An empty array is returned for controls that don’t support custom properties. 
+     */
+    CustomizableProperties?: CustomizableProperties;
+    /**
+     *  An object that provides a security control parameter name, description, and the options for customizing it. This object is excluded for a control that doesn't support custom parameters. 
+     */
+    ParameterDefinitions?: ParameterDefinitions;
   }
   export type SecurityControlDefinitions = SecurityControlDefinition[];
+  export interface SecurityControlParameter {
+    /**
+     *  The name of a 
+     */
+    Name?: NonEmptyString;
+    /**
+     *  The current value of a control parameter. 
+     */
+    Value?: TypeList;
+  }
+  export type SecurityControlParametersList = SecurityControlParameter[];
+  export type SecurityControlProperty = "Parameters"|string;
   export type SecurityControls = SecurityControl[];
   export type SecurityGroups = NonEmptyString[];
   export interface SensitiveDataDetections {
@@ -14500,7 +14754,7 @@ declare namespace SecurityHub {
   export type SensitiveDataResultList = SensitiveDataResult[];
   export interface Severity {
     /**
-     * Deprecated. This attribute is being deprecated. Instead of providing Product, provide Original. The native severity as defined by the Amazon Web Services service or integrated partner product that generated the finding.
+     * Deprecated. This attribute isn't included in findings. Instead of providing Product, provide Original. The native severity as defined by the Amazon Web Services service or integrated partner product that generated the finding.
      */
     Product?: Double;
     /**
@@ -14508,7 +14762,7 @@ declare namespace SecurityHub {
      */
     Label?: SeverityLabel;
     /**
-     * Deprecated. The normalized severity of a finding. This attribute is being deprecated. Instead of providing Normalized, provide Label. If you provide Label and do not provide Normalized, then Normalized is set automatically as follows.    INFORMATIONAL - 0    LOW - 1    MEDIUM - 40    HIGH - 70    CRITICAL - 90  
+     * Deprecated. The normalized severity of a finding. Instead of providing Normalized, provide Label. If you provide Label and do not provide Normalized, then Normalized is set automatically as follows.    INFORMATIONAL - 0    LOW - 1    MEDIUM - 40    HIGH - 70    CRITICAL - 90  
      */
     Normalized?: Integer;
     /**
@@ -14855,6 +15109,20 @@ declare namespace SecurityHub {
   }
   export type StatusReasonCode = "NO_AVAILABLE_CONFIGURATION_RECORDER"|"INTERNAL_ERROR"|string;
   export type StatusReasonsList = StatusReason[];
+  export interface StringConfigurationOptions {
+    /**
+     *  The Security Hub default value for a control parameter that is a string. 
+     */
+    DefaultValue?: NonEmptyString;
+    /**
+     *  An RE2 regular expression that Security Hub uses to validate a user-provided control parameter string. 
+     */
+    Re2Expression?: NonEmptyString;
+    /**
+     *  The description of the RE2 regular expression. 
+     */
+    ExpressionDescription?: NonEmptyString;
+  }
   export interface StringFilter {
     /**
      * The string filter value. Filter values are case sensitive. For example, the product name for control-based findings is Security Hub. If you provide security hub as the filter value, there's no match.
@@ -14868,6 +15136,24 @@ declare namespace SecurityHub {
   export type StringFilterComparison = "EQUALS"|"PREFIX"|"NOT_EQUALS"|"PREFIX_NOT_EQUALS"|"CONTAINS"|"NOT_CONTAINS"|string;
   export type StringFilterList = StringFilter[];
   export type StringList = NonEmptyString[];
+  export interface StringListConfigurationOptions {
+    /**
+     *  The Security Hub default value for a control parameter that is a list of strings. 
+     */
+    DefaultValue?: StringList;
+    /**
+     *  An RE2 regular expression that Security Hub uses to validate a user-provided list of strings for a control parameter. 
+     */
+    Re2Expression?: NonEmptyString;
+    /**
+     *  The maximum number of list items that a string list control parameter can accept. 
+     */
+    MaxItems?: Integer;
+    /**
+     *  The description of the RE2 regular expression. 
+     */
+    ExpressionDescription?: NonEmptyString;
+  }
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagMap = {[key: string]: TagValue};
@@ -15138,6 +15424,22 @@ declare namespace SecurityHub {
   }
   export interface UpdateOrganizationConfigurationResponse {
   }
+  export interface UpdateSecurityControlRequest {
+    /**
+     *  The Amazon Resource Name (ARN) or ID of the control to update. 
+     */
+    SecurityControlId: NonEmptyString;
+    /**
+     *  An object that specifies which security control parameters to update. 
+     */
+    Parameters: Parameters;
+    /**
+     *  The most recent reason for updating the properties of the security control. This field accepts alphanumeric characters in addition to white spaces, dashes, and underscores. 
+     */
+    LastUpdateReason?: AlphaNumericNonEmptyString;
+  }
+  export interface UpdateSecurityControlResponse {
+  }
   export interface UpdateSecurityHubConfigurationRequest {
     /**
      * Whether to automatically enable new controls when they are added to standards that are enabled. By default, this is set to true, and new controls are enabled automatically. To not automatically enable new controls, set this to false. 
@@ -15166,6 +15468,7 @@ declare namespace SecurityHub {
   }
   export interface UpdateStandardsControlResponse {
   }
+  export type UpdateStatus = "READY"|"UPDATING"|string;
   export type VerificationState = "UNKNOWN"|"TRUE_POSITIVE"|"FALSE_POSITIVE"|"BENIGN_POSITIVE"|string;
   export interface VolumeMount {
     /**

@@ -239,6 +239,16 @@ declare namespace ComputeOptimizer {
      */
     instanceType?: InstanceType;
   }
+  export interface AutoScalingGroupEstimatedMonthlySavings {
+    /**
+     *  The currency of the estimated monthly savings. 
+     */
+    currency?: Currency;
+    /**
+     *  The value of the estimated monthly savings. 
+     */
+    value?: Value;
+  }
   export type AutoScalingGroupName = string;
   export interface AutoScalingGroupRecommendation {
     /**
@@ -323,9 +333,23 @@ declare namespace ComputeOptimizer {
      *  Describes the GPU accelerator settings for the recommended instance type of the Auto Scaling group. 
      */
     instanceGpuInfo?: GpuInfo;
+    /**
+     *  An object that describes the savings opportunity for the Auto Scaling group recommendation option that includes Savings Plans and Reserved Instances discounts. Savings opportunity includes the estimated monthly savings and percentage. 
+     */
+    savingsOpportunityAfterDiscounts?: AutoScalingGroupSavingsOpportunityAfterDiscounts;
   }
   export type AutoScalingGroupRecommendationOptions = AutoScalingGroupRecommendationOption[];
   export type AutoScalingGroupRecommendations = AutoScalingGroupRecommendation[];
+  export interface AutoScalingGroupSavingsOpportunityAfterDiscounts {
+    /**
+     *  The estimated monthly savings possible as a percentage of monthly cost after applying the Savings Plans and Reserved Instances discounts. This saving can be achieved by adopting Compute Optimizer’s Auto Scaling group recommendations. 
+     */
+    savingsOpportunityPercentage?: SavingsOpportunityPercentage;
+    /**
+     *  An object that describes the estimated monthly savings possible by adopting Compute Optimizer’s Auto Scaling group recommendations. This is based on the Savings Plans and Reserved Instances pricing discounts. 
+     */
+    estimatedMonthlySavings?: AutoScalingGroupEstimatedMonthlySavings;
+  }
   export type Code = string;
   export interface ContainerConfiguration {
     /**
@@ -383,6 +407,19 @@ declare namespace ComputeOptimizer {
      */
     veryLow?: VeryLow;
   }
+  export type CustomizableMetricHeadroom = "PERCENT_30"|"PERCENT_20"|"PERCENT_0"|string;
+  export type CustomizableMetricName = "CpuUtilization"|string;
+  export interface CustomizableMetricParameters {
+    /**
+     *  The threshold value used for the specified metric parameter. 
+     */
+    threshold?: CustomizableMetricThreshold;
+    /**
+     *  The headroom threshold value in percentage used for the specified metric parameter. 
+     */
+    headroom?: CustomizableMetricHeadroom;
+  }
+  export type CustomizableMetricThreshold = "P90"|"P95"|"P99_5"|string;
   export interface DeleteRecommendationPreferencesRequest {
     /**
      * The target resource type of the recommendation preference to delete. The Ec2Instance option encompasses standalone instances and instances that are part of Auto Scaling groups. The AutoScalingGroup option encompasses only instances that are part of an Auto Scaling group.  The valid values for this parameter are Ec2Instance and AutoScalingGroup. 
@@ -431,6 +468,22 @@ declare namespace ComputeOptimizer {
   export type DestinationBucket = string;
   export type DestinationKey = string;
   export type DestinationKeyPrefix = string;
+  export interface EBSEffectiveRecommendationPreferences {
+    /**
+     *  Describes the savings estimation mode preference applied for calculating savings opportunity for Amazon EBS volumes. 
+     */
+    savingsEstimationMode?: EBSSavingsEstimationMode;
+  }
+  export interface EBSEstimatedMonthlySavings {
+    /**
+     *  The currency of the estimated monthly savings. 
+     */
+    currency?: Currency;
+    /**
+     *  The value of the estimated monthly savings. 
+     */
+    value?: Value;
+  }
   export interface EBSFilter {
     /**
      * The name of the filter. Specify Finding to return recommendations with a specific finding classification (for example, NotOptimized). You can filter your Amazon EBS volume recommendations by tag:key and tag-key tags. A tag:key is a key and value combination of a tag assigned to your Amazon EBS volume recommendations. Use the tag key in the filter name and the tag value as the filter value. For example, to find all Amazon EBS volume recommendations that have a tag with the key of Owner and the value of TeamA, specify tag:Owner for the filter name and TeamA for the filter value. A tag-key is the key of a tag assigned to your Amazon EBS volume recommendations. Use this filter to find all of your Amazon EBS volume recommendations that have a tag with a specific key. This doesn’t consider the tag value. For example, you can find your Amazon EBS volume recommendations with a tag key value of Owner or without any tag keys assigned.
@@ -445,6 +498,23 @@ declare namespace ComputeOptimizer {
   export type EBSFilters = EBSFilter[];
   export type EBSFinding = "Optimized"|"NotOptimized"|string;
   export type EBSMetricName = "VolumeReadOpsPerSecond"|"VolumeWriteOpsPerSecond"|"VolumeReadBytesPerSecond"|"VolumeWriteBytesPerSecond"|string;
+  export interface EBSSavingsEstimationMode {
+    /**
+     *  Describes the source for calculating the savings opportunity for Amazon EBS volumes. 
+     */
+    source?: EBSSavingsEstimationModeSource;
+  }
+  export type EBSSavingsEstimationModeSource = "PublicPricing"|"CostExplorerRightsizing"|"CostOptimizationHub"|string;
+  export interface EBSSavingsOpportunityAfterDiscounts {
+    /**
+     *  The estimated monthly savings possible as a percentage of monthly cost after applying the specific discounts. This saving can be achieved by adopting Compute Optimizer’s Amazon EBS volume recommendations. 
+     */
+    savingsOpportunityPercentage?: SavingsOpportunityPercentage;
+    /**
+     *  The estimated monthly savings possible as a percentage of monthly cost by adopting Compute Optimizer’s Amazon EBS volume recommendations. This saving includes any applicable discounts. 
+     */
+    estimatedMonthlySavings?: EBSEstimatedMonthlySavings;
+  }
   export interface EBSUtilizationMetric {
     /**
      * The name of the utilization metric. The following utilization metrics are available:    VolumeReadOpsPerSecond - The completed read operations per second from the volume in a specified period of time. Unit: Count    VolumeWriteOpsPerSecond - The completed write operations per second to the volume in a specified period of time. Unit: Count    VolumeReadBytesPerSecond - The bytes read per second from the volume in a specified period of time. Unit: Bytes    VolumeWriteBytesPerSecond - The bytes written to the volume in a specified period of time. Unit: Bytes  
@@ -460,6 +530,39 @@ declare namespace ComputeOptimizer {
     value?: MetricValue;
   }
   export type EBSUtilizationMetrics = EBSUtilizationMetric[];
+  export interface ECSEffectiveRecommendationPreferences {
+    /**
+     *  Describes the savings estimation mode preference applied for calculating savings opportunity for Amazon ECS services. 
+     */
+    savingsEstimationMode?: ECSSavingsEstimationMode;
+  }
+  export interface ECSEstimatedMonthlySavings {
+    /**
+     *  The currency of the estimated monthly savings. 
+     */
+    currency?: Currency;
+    /**
+     *  The value of the estimated monthly savings for Amazon ECS services. 
+     */
+    value?: Value;
+  }
+  export interface ECSSavingsEstimationMode {
+    /**
+     *  Describes the source for calculating the savings opportunity for Amazon ECS services. 
+     */
+    source?: ECSSavingsEstimationModeSource;
+  }
+  export type ECSSavingsEstimationModeSource = "PublicPricing"|"CostExplorerRightsizing"|"CostOptimizationHub"|string;
+  export interface ECSSavingsOpportunityAfterDiscounts {
+    /**
+     *  The estimated monthly savings possible as a percentage of monthly cost by adopting Compute Optimizer’s Amazon ECS service recommendations. This includes any applicable Savings Plans discounts. 
+     */
+    savingsOpportunityPercentage?: SavingsOpportunityPercentage;
+    /**
+     *  The estimated monthly savings possible by adopting Compute Optimizer’s Amazon ECS service recommendations. This includes any applicable Savings Plans discounts. 
+     */
+    estimatedMonthlySavings?: ECSEstimatedMonthlySavings;
+  }
   export type ECSServiceLaunchType = "EC2"|"Fargate"|string;
   export type ECSServiceMetricName = "Cpu"|"Memory"|string;
   export type ECSServiceMetricStatistic = "Maximum"|"Average"|string;
@@ -550,6 +653,10 @@ declare namespace ComputeOptimizer {
      *  A list of tags assigned to your Amazon ECS service recommendations. 
      */
     tags?: Tags;
+    /**
+     *  Describes the effective recommendation preferences for Amazon ECS services. 
+     */
+    effectiveRecommendationPreferences?: ECSEffectiveRecommendationPreferences;
   }
   export interface ECSServiceRecommendationFilter {
     /**
@@ -584,6 +691,10 @@ declare namespace ComputeOptimizer {
      *  The CPU and memory size recommendations for the containers within the task of your Amazon ECS service. 
      */
     containerRecommendations?: ContainerRecommendations;
+    /**
+     *  Describes the savings opportunity for Amazon ECS service recommendations or for the recommendation option.  Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts. You can achieve this by implementing a given Compute Optimizer recommendation.
+     */
+    savingsOpportunityAfterDiscounts?: ECSSavingsOpportunityAfterDiscounts;
   }
   export type ECSServiceRecommendationOptions = ECSServiceRecommendationOption[];
   export type ECSServiceRecommendations = ECSServiceRecommendation[];
@@ -617,6 +728,25 @@ declare namespace ComputeOptimizer {
     value?: MetricValue;
   }
   export type ECSServiceUtilizationMetrics = ECSServiceUtilizationMetric[];
+  export interface EffectivePreferredResource {
+    /**
+     *  The name of the preferred resource list. 
+     */
+    name?: PreferredResourceName;
+    /**
+     *  The list of preferred resource values that you want considered as rightsizing recommendation candidates. 
+     */
+    includeList?: PreferredResourceValues;
+    /**
+     *  The expanded version of your preferred resource's include list. 
+     */
+    effectiveIncludeList?: PreferredResourceValues;
+    /**
+     *  The list of preferred resources values that you want excluded from rightsizing recommendation candidates. 
+     */
+    excludeList?: PreferredResourceValues;
+  }
+  export type EffectivePreferredResources = EffectivePreferredResource[];
   export interface EffectiveRecommendationPreferences {
     /**
      * Describes the CPU vendor and architecture for an instance or Auto Scaling group recommendations. For example, when you specify AWS_ARM64 with:   A GetEC2InstanceRecommendations or GetAutoScalingGroupRecommendations request, Compute Optimizer returns recommendations that consist of Graviton2 instance types only.   A GetEC2RecommendationProjectedMetrics request, Compute Optimizer returns projected utilization metrics for Graviton2 instance type recommendations only.   A ExportEC2InstanceRecommendations or ExportAutoScalingGroupRecommendations request, Compute Optimizer exports recommendations that consist of Graviton2 instance types only.  
@@ -634,6 +764,22 @@ declare namespace ComputeOptimizer {
      *  An object that describes the external metrics recommendation preference.   If the preference is applied in the latest recommendation refresh, an object with a valid source value appears in the response. If the preference isn't applied to the recommendations already, then this object doesn't appear in the response. 
      */
     externalMetricsPreference?: ExternalMetricsPreference;
+    /**
+     *  The number of days the utilization metrics of the Amazon Web Services resource are analyzed. 
+     */
+    lookBackPeriod?: LookBackPeriodPreference;
+    /**
+     *  The resource’s CPU utilization threshold preferences, such as threshold and headroom, that are used to generate rightsizing recommendations.   This preference is only available for the Amazon EC2 instance resource type. 
+     */
+    utilizationPreferences?: UtilizationPreferences;
+    /**
+     *  The resource type values that are considered as candidates when generating rightsizing recommendations. 
+     */
+    preferredResources?: EffectivePreferredResources;
+    /**
+     *  Describes the savings estimation mode applied for calculating savings opportunity for a resource. 
+     */
+    savingsEstimationMode?: InstanceSavingsEstimationMode;
   }
   export type EnhancedInfrastructureMetrics = "Active"|"Inactive"|string;
   export interface EnrollmentFilter {
@@ -864,17 +1010,17 @@ declare namespace ComputeOptimizer {
     jobId?: JobId;
     s3Destination?: S3Destination;
   }
-  export type ExportableAutoScalingGroupField = "AccountId"|"AutoScalingGroupArn"|"AutoScalingGroupName"|"Finding"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsEbsReadOpsPerSecondMaximum"|"UtilizationMetricsEbsWriteOpsPerSecondMaximum"|"UtilizationMetricsEbsReadBytesPerSecondMaximum"|"UtilizationMetricsEbsWriteBytesPerSecondMaximum"|"UtilizationMetricsDiskReadOpsPerSecondMaximum"|"UtilizationMetricsDiskWriteOpsPerSecondMaximum"|"UtilizationMetricsDiskReadBytesPerSecondMaximum"|"UtilizationMetricsDiskWriteBytesPerSecondMaximum"|"UtilizationMetricsNetworkInBytesPerSecondMaximum"|"UtilizationMetricsNetworkOutBytesPerSecondMaximum"|"UtilizationMetricsNetworkPacketsInPerSecondMaximum"|"UtilizationMetricsNetworkPacketsOutPerSecondMaximum"|"LookbackPeriodInDays"|"CurrentConfigurationInstanceType"|"CurrentConfigurationDesiredCapacity"|"CurrentConfigurationMinSize"|"CurrentConfigurationMaxSize"|"CurrentOnDemandPrice"|"CurrentStandardOneYearNoUpfrontReservedPrice"|"CurrentStandardThreeYearNoUpfrontReservedPrice"|"CurrentVCpus"|"CurrentMemory"|"CurrentStorage"|"CurrentNetwork"|"RecommendationOptionsConfigurationInstanceType"|"RecommendationOptionsConfigurationDesiredCapacity"|"RecommendationOptionsConfigurationMinSize"|"RecommendationOptionsConfigurationMaxSize"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"RecommendationOptionsPerformanceRisk"|"RecommendationOptionsOnDemandPrice"|"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice"|"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice"|"RecommendationOptionsVcpus"|"RecommendationOptionsMemory"|"RecommendationOptionsStorage"|"RecommendationOptionsNetwork"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"EffectiveRecommendationPreferencesCpuVendorArchitectures"|"EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics"|"EffectiveRecommendationPreferencesInferredWorkloadTypes"|"InferredWorkloadTypes"|"RecommendationOptionsMigrationEffort"|"CurrentInstanceGpuInfo"|"RecommendationOptionsInstanceGpuInfo"|"UtilizationMetricsGpuPercentageMaximum"|"UtilizationMetricsGpuMemoryPercentageMaximum"|"RecommendationOptionsProjectedUtilizationMetricsGpuPercentageMaximum"|"RecommendationOptionsProjectedUtilizationMetricsGpuMemoryPercentageMaximum"|string;
+  export type ExportableAutoScalingGroupField = "AccountId"|"AutoScalingGroupArn"|"AutoScalingGroupName"|"Finding"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsEbsReadOpsPerSecondMaximum"|"UtilizationMetricsEbsWriteOpsPerSecondMaximum"|"UtilizationMetricsEbsReadBytesPerSecondMaximum"|"UtilizationMetricsEbsWriteBytesPerSecondMaximum"|"UtilizationMetricsDiskReadOpsPerSecondMaximum"|"UtilizationMetricsDiskWriteOpsPerSecondMaximum"|"UtilizationMetricsDiskReadBytesPerSecondMaximum"|"UtilizationMetricsDiskWriteBytesPerSecondMaximum"|"UtilizationMetricsNetworkInBytesPerSecondMaximum"|"UtilizationMetricsNetworkOutBytesPerSecondMaximum"|"UtilizationMetricsNetworkPacketsInPerSecondMaximum"|"UtilizationMetricsNetworkPacketsOutPerSecondMaximum"|"LookbackPeriodInDays"|"CurrentConfigurationInstanceType"|"CurrentConfigurationDesiredCapacity"|"CurrentConfigurationMinSize"|"CurrentConfigurationMaxSize"|"CurrentOnDemandPrice"|"CurrentStandardOneYearNoUpfrontReservedPrice"|"CurrentStandardThreeYearNoUpfrontReservedPrice"|"CurrentVCpus"|"CurrentMemory"|"CurrentStorage"|"CurrentNetwork"|"RecommendationOptionsConfigurationInstanceType"|"RecommendationOptionsConfigurationDesiredCapacity"|"RecommendationOptionsConfigurationMinSize"|"RecommendationOptionsConfigurationMaxSize"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"RecommendationOptionsPerformanceRisk"|"RecommendationOptionsOnDemandPrice"|"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice"|"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice"|"RecommendationOptionsVcpus"|"RecommendationOptionsMemory"|"RecommendationOptionsStorage"|"RecommendationOptionsNetwork"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"EffectiveRecommendationPreferencesCpuVendorArchitectures"|"EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics"|"EffectiveRecommendationPreferencesInferredWorkloadTypes"|"InferredWorkloadTypes"|"RecommendationOptionsMigrationEffort"|"CurrentInstanceGpuInfo"|"RecommendationOptionsInstanceGpuInfo"|"UtilizationMetricsGpuPercentageMaximum"|"UtilizationMetricsGpuMemoryPercentageMaximum"|"RecommendationOptionsProjectedUtilizationMetricsGpuPercentageMaximum"|"RecommendationOptionsProjectedUtilizationMetricsGpuMemoryPercentageMaximum"|"EffectiveRecommendationPreferencesSavingsEstimationMode"|"RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts"|"RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"|"EffectiveRecommendationPreferencesPreferredResources"|"EffectiveRecommendationPreferencesLookBackPeriod"|string;
   export type ExportableAutoScalingGroupFields = ExportableAutoScalingGroupField[];
-  export type ExportableECSServiceField = "AccountId"|"ServiceArn"|"LookbackPeriodInDays"|"LastRefreshTimestamp"|"LaunchType"|"CurrentPerformanceRisk"|"CurrentServiceConfigurationMemory"|"CurrentServiceConfigurationCpu"|"CurrentServiceConfigurationTaskDefinitionArn"|"CurrentServiceConfigurationAutoScalingConfiguration"|"CurrentServiceContainerConfigurations"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"Finding"|"FindingReasonCodes"|"RecommendationOptionsMemory"|"RecommendationOptionsCpu"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"RecommendationOptionsContainerRecommendations"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"Tags"|string;
+  export type ExportableECSServiceField = "AccountId"|"ServiceArn"|"LookbackPeriodInDays"|"LastRefreshTimestamp"|"LaunchType"|"CurrentPerformanceRisk"|"CurrentServiceConfigurationMemory"|"CurrentServiceConfigurationCpu"|"CurrentServiceConfigurationTaskDefinitionArn"|"CurrentServiceConfigurationAutoScalingConfiguration"|"CurrentServiceContainerConfigurations"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"Finding"|"FindingReasonCodes"|"RecommendationOptionsMemory"|"RecommendationOptionsCpu"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"RecommendationOptionsContainerRecommendations"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"Tags"|"EffectiveRecommendationPreferencesSavingsEstimationMode"|"RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts"|"RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"|string;
   export type ExportableECSServiceFields = ExportableECSServiceField[];
-  export type ExportableInstanceField = "AccountId"|"InstanceArn"|"InstanceName"|"Finding"|"FindingReasonCodes"|"LookbackPeriodInDays"|"CurrentInstanceType"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsEbsReadOpsPerSecondMaximum"|"UtilizationMetricsEbsWriteOpsPerSecondMaximum"|"UtilizationMetricsEbsReadBytesPerSecondMaximum"|"UtilizationMetricsEbsWriteBytesPerSecondMaximum"|"UtilizationMetricsDiskReadOpsPerSecondMaximum"|"UtilizationMetricsDiskWriteOpsPerSecondMaximum"|"UtilizationMetricsDiskReadBytesPerSecondMaximum"|"UtilizationMetricsDiskWriteBytesPerSecondMaximum"|"UtilizationMetricsNetworkInBytesPerSecondMaximum"|"UtilizationMetricsNetworkOutBytesPerSecondMaximum"|"UtilizationMetricsNetworkPacketsInPerSecondMaximum"|"UtilizationMetricsNetworkPacketsOutPerSecondMaximum"|"CurrentOnDemandPrice"|"CurrentStandardOneYearNoUpfrontReservedPrice"|"CurrentStandardThreeYearNoUpfrontReservedPrice"|"CurrentVCpus"|"CurrentMemory"|"CurrentStorage"|"CurrentNetwork"|"RecommendationOptionsInstanceType"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"RecommendationOptionsPlatformDifferences"|"RecommendationOptionsPerformanceRisk"|"RecommendationOptionsVcpus"|"RecommendationOptionsMemory"|"RecommendationOptionsStorage"|"RecommendationOptionsNetwork"|"RecommendationOptionsOnDemandPrice"|"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice"|"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice"|"RecommendationsSourcesRecommendationSourceArn"|"RecommendationsSourcesRecommendationSourceType"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"EffectiveRecommendationPreferencesCpuVendorArchitectures"|"EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics"|"EffectiveRecommendationPreferencesInferredWorkloadTypes"|"InferredWorkloadTypes"|"RecommendationOptionsMigrationEffort"|"EffectiveRecommendationPreferencesExternalMetricsSource"|"InstanceState"|"Tags"|"ExternalMetricStatusCode"|"ExternalMetricStatusReason"|"CurrentInstanceGpuInfo"|"RecommendationOptionsInstanceGpuInfo"|"UtilizationMetricsGpuPercentageMaximum"|"UtilizationMetricsGpuMemoryPercentageMaximum"|"RecommendationOptionsProjectedUtilizationMetricsGpuPercentageMaximum"|"RecommendationOptionsProjectedUtilizationMetricsGpuMemoryPercentageMaximum"|"Idle"|string;
+  export type ExportableInstanceField = "AccountId"|"InstanceArn"|"InstanceName"|"Finding"|"FindingReasonCodes"|"LookbackPeriodInDays"|"CurrentInstanceType"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsEbsReadOpsPerSecondMaximum"|"UtilizationMetricsEbsWriteOpsPerSecondMaximum"|"UtilizationMetricsEbsReadBytesPerSecondMaximum"|"UtilizationMetricsEbsWriteBytesPerSecondMaximum"|"UtilizationMetricsDiskReadOpsPerSecondMaximum"|"UtilizationMetricsDiskWriteOpsPerSecondMaximum"|"UtilizationMetricsDiskReadBytesPerSecondMaximum"|"UtilizationMetricsDiskWriteBytesPerSecondMaximum"|"UtilizationMetricsNetworkInBytesPerSecondMaximum"|"UtilizationMetricsNetworkOutBytesPerSecondMaximum"|"UtilizationMetricsNetworkPacketsInPerSecondMaximum"|"UtilizationMetricsNetworkPacketsOutPerSecondMaximum"|"CurrentOnDemandPrice"|"CurrentStandardOneYearNoUpfrontReservedPrice"|"CurrentStandardThreeYearNoUpfrontReservedPrice"|"CurrentVCpus"|"CurrentMemory"|"CurrentStorage"|"CurrentNetwork"|"RecommendationOptionsInstanceType"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"RecommendationOptionsPlatformDifferences"|"RecommendationOptionsPerformanceRisk"|"RecommendationOptionsVcpus"|"RecommendationOptionsMemory"|"RecommendationOptionsStorage"|"RecommendationOptionsNetwork"|"RecommendationOptionsOnDemandPrice"|"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice"|"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice"|"RecommendationsSourcesRecommendationSourceArn"|"RecommendationsSourcesRecommendationSourceType"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"EffectiveRecommendationPreferencesCpuVendorArchitectures"|"EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics"|"EffectiveRecommendationPreferencesInferredWorkloadTypes"|"InferredWorkloadTypes"|"RecommendationOptionsMigrationEffort"|"EffectiveRecommendationPreferencesExternalMetricsSource"|"InstanceState"|"Tags"|"ExternalMetricStatusCode"|"ExternalMetricStatusReason"|"CurrentInstanceGpuInfo"|"RecommendationOptionsInstanceGpuInfo"|"UtilizationMetricsGpuPercentageMaximum"|"UtilizationMetricsGpuMemoryPercentageMaximum"|"RecommendationOptionsProjectedUtilizationMetricsGpuPercentageMaximum"|"RecommendationOptionsProjectedUtilizationMetricsGpuMemoryPercentageMaximum"|"Idle"|"EffectiveRecommendationPreferencesPreferredResources"|"EffectiveRecommendationPreferencesLookBackPeriod"|"EffectiveRecommendationPreferencesUtilizationPreferences"|"EffectiveRecommendationPreferencesSavingsEstimationMode"|"RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts"|"RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"|string;
   export type ExportableInstanceFields = ExportableInstanceField[];
-  export type ExportableLambdaFunctionField = "AccountId"|"FunctionArn"|"FunctionVersion"|"Finding"|"FindingReasonCodes"|"NumberOfInvocations"|"UtilizationMetricsDurationMaximum"|"UtilizationMetricsDurationAverage"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsMemoryAverage"|"LookbackPeriodInDays"|"CurrentConfigurationMemorySize"|"CurrentConfigurationTimeout"|"CurrentCostTotal"|"CurrentCostAverage"|"RecommendationOptionsConfigurationMemorySize"|"RecommendationOptionsCostLow"|"RecommendationOptionsCostHigh"|"RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound"|"RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound"|"RecommendationOptionsProjectedUtilizationMetricsDurationExpected"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"Tags"|string;
+  export type ExportableLambdaFunctionField = "AccountId"|"FunctionArn"|"FunctionVersion"|"Finding"|"FindingReasonCodes"|"NumberOfInvocations"|"UtilizationMetricsDurationMaximum"|"UtilizationMetricsDurationAverage"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsMemoryAverage"|"LookbackPeriodInDays"|"CurrentConfigurationMemorySize"|"CurrentConfigurationTimeout"|"CurrentCostTotal"|"CurrentCostAverage"|"RecommendationOptionsConfigurationMemorySize"|"RecommendationOptionsCostLow"|"RecommendationOptionsCostHigh"|"RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound"|"RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound"|"RecommendationOptionsProjectedUtilizationMetricsDurationExpected"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"Tags"|"EffectiveRecommendationPreferencesSavingsEstimationMode"|"RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts"|"RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"|string;
   export type ExportableLambdaFunctionFields = ExportableLambdaFunctionField[];
   export type ExportableLicenseField = "AccountId"|"ResourceArn"|"LookbackPeriodInDays"|"LastRefreshTimestamp"|"Finding"|"FindingReasonCodes"|"CurrentLicenseConfigurationNumberOfCores"|"CurrentLicenseConfigurationInstanceType"|"CurrentLicenseConfigurationOperatingSystem"|"CurrentLicenseConfigurationLicenseName"|"CurrentLicenseConfigurationLicenseEdition"|"CurrentLicenseConfigurationLicenseModel"|"CurrentLicenseConfigurationLicenseVersion"|"CurrentLicenseConfigurationMetricsSource"|"RecommendationOptionsOperatingSystem"|"RecommendationOptionsLicenseEdition"|"RecommendationOptionsLicenseModel"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"Tags"|string;
   export type ExportableLicenseFields = ExportableLicenseField[];
-  export type ExportableVolumeField = "AccountId"|"VolumeArn"|"Finding"|"UtilizationMetricsVolumeReadOpsPerSecondMaximum"|"UtilizationMetricsVolumeWriteOpsPerSecondMaximum"|"UtilizationMetricsVolumeReadBytesPerSecondMaximum"|"UtilizationMetricsVolumeWriteBytesPerSecondMaximum"|"LookbackPeriodInDays"|"CurrentConfigurationVolumeType"|"CurrentConfigurationVolumeBaselineIOPS"|"CurrentConfigurationVolumeBaselineThroughput"|"CurrentConfigurationVolumeBurstIOPS"|"CurrentConfigurationVolumeBurstThroughput"|"CurrentConfigurationVolumeSize"|"CurrentMonthlyPrice"|"RecommendationOptionsConfigurationVolumeType"|"RecommendationOptionsConfigurationVolumeBaselineIOPS"|"RecommendationOptionsConfigurationVolumeBaselineThroughput"|"RecommendationOptionsConfigurationVolumeBurstIOPS"|"RecommendationOptionsConfigurationVolumeBurstThroughput"|"RecommendationOptionsConfigurationVolumeSize"|"RecommendationOptionsMonthlyPrice"|"RecommendationOptionsPerformanceRisk"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"RootVolume"|"Tags"|"CurrentConfigurationRootVolume"|string;
+  export type ExportableVolumeField = "AccountId"|"VolumeArn"|"Finding"|"UtilizationMetricsVolumeReadOpsPerSecondMaximum"|"UtilizationMetricsVolumeWriteOpsPerSecondMaximum"|"UtilizationMetricsVolumeReadBytesPerSecondMaximum"|"UtilizationMetricsVolumeWriteBytesPerSecondMaximum"|"LookbackPeriodInDays"|"CurrentConfigurationVolumeType"|"CurrentConfigurationVolumeBaselineIOPS"|"CurrentConfigurationVolumeBaselineThroughput"|"CurrentConfigurationVolumeBurstIOPS"|"CurrentConfigurationVolumeBurstThroughput"|"CurrentConfigurationVolumeSize"|"CurrentMonthlyPrice"|"RecommendationOptionsConfigurationVolumeType"|"RecommendationOptionsConfigurationVolumeBaselineIOPS"|"RecommendationOptionsConfigurationVolumeBaselineThroughput"|"RecommendationOptionsConfigurationVolumeBurstIOPS"|"RecommendationOptionsConfigurationVolumeBurstThroughput"|"RecommendationOptionsConfigurationVolumeSize"|"RecommendationOptionsMonthlyPrice"|"RecommendationOptionsPerformanceRisk"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"RootVolume"|"Tags"|"CurrentConfigurationRootVolume"|"EffectiveRecommendationPreferencesSavingsEstimationMode"|"RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts"|"RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"|string;
   export type ExportableVolumeFields = ExportableVolumeField[];
   export interface ExternalMetricStatus {
     /**
@@ -1143,6 +1289,18 @@ declare namespace ComputeOptimizer {
      * The provider of the external metrics recommendation preference. Considers all applicable preferences that you might have set at the account and organization level. If the preference is applied in the latest recommendation refresh, an object with a valid source value appears in the response. If the preference isn't applied to the recommendations already, then this object doesn't appear in the response. To validate whether the preference is applied to your last generated set of recommendations, review the effectiveRecommendationPreferences value in the response of the GetEC2InstanceRecommendations actions. For more information, see Enhanced infrastructure metrics in the Compute Optimizer User Guide.
      */
     externalMetricsPreference?: ExternalMetricsPreference;
+    /**
+     *  The number of days the utilization metrics of the Amazon Web Services resource are analyzed.  To validate that the preference is applied to your last generated set of recommendations, review the effectiveRecommendationPreferences value in the response of the GetAutoScalingGroupRecommendations or GetEC2InstanceRecommendations actions.
+     */
+    lookBackPeriod?: LookBackPeriodPreference;
+    /**
+     *  The resource’s CPU utilization threshold preferences, such as threshold and headroom, that were used to generate rightsizing recommendations. It considers all applicable preferences that you set at the resource, account, and organization level.  To validate that the preference is applied to your last generated set of recommendations, review the effectiveRecommendationPreferences value in the response of the GetAutoScalingGroupRecommendations or GetEC2InstanceRecommendations actions.
+     */
+    utilizationPreferences?: UtilizationPreferences;
+    /**
+     *  The resource type values that are considered as candidates when generating rightsizing recommendations. This object resolves any wildcard expressions and returns the effective list of candidate resource type values. It also considers all applicable preferences that you set at the resource, account, and organization level.  To validate that the preference is applied to your last generated set of recommendations, review the effectiveRecommendationPreferences value in the response of the GetAutoScalingGroupRecommendations or GetEC2InstanceRecommendations actions.
+     */
+    preferredResources?: EffectivePreferredResources;
   }
   export interface GetEnrollmentStatusRequest {
   }
@@ -1365,6 +1523,16 @@ declare namespace ComputeOptimizer {
   export type InferredWorkloadTypesPreference = "Active"|"Inactive"|string;
   export type InstanceArn = string;
   export type InstanceArns = InstanceArn[];
+  export interface InstanceEstimatedMonthlySavings {
+    /**
+     *  The currency of the estimated monthly savings. 
+     */
+    currency?: Currency;
+    /**
+     *  The value of the estimated monthly savings. 
+     */
+    value?: Value;
+  }
   export type InstanceIdle = "True"|"False"|string;
   export type InstanceName = string;
   export interface InstanceRecommendation {
@@ -1480,8 +1648,29 @@ declare namespace ComputeOptimizer {
      *  Describes the GPU accelerator settings for the recommended instance type. 
      */
     instanceGpuInfo?: GpuInfo;
+    /**
+     *  An object that describes the savings opportunity for the instance recommendation option that includes Savings Plans and Reserved Instances discounts. Savings opportunity includes the estimated monthly savings and percentage. 
+     */
+    savingsOpportunityAfterDiscounts?: InstanceSavingsOpportunityAfterDiscounts;
   }
   export type InstanceRecommendations = InstanceRecommendation[];
+  export interface InstanceSavingsEstimationMode {
+    /**
+     *  Describes the source for calculating the savings opportunity for Amazon EC2 instances. 
+     */
+    source?: InstanceSavingsEstimationModeSource;
+  }
+  export type InstanceSavingsEstimationModeSource = "PublicPricing"|"CostExplorerRightsizing"|"CostOptimizationHub"|string;
+  export interface InstanceSavingsOpportunityAfterDiscounts {
+    /**
+     *  The estimated monthly savings possible as a percentage of monthly cost after applying the Savings Plans and Reserved Instances discounts. This saving can be achieved by adopting Compute Optimizer’s EC2 instance recommendations. 
+     */
+    savingsOpportunityPercentage?: SavingsOpportunityPercentage;
+    /**
+     *  An object that describes the estimated monthly savings possible by adopting Compute Optimizer’s Amazon EC2 instance recommendations. This is based on pricing after applying the Savings Plans and Reserved Instances discounts. 
+     */
+    estimatedMonthlySavings?: InstanceEstimatedMonthlySavings;
+  }
   export type InstanceState = "pending"|"running"|"shutting-down"|"terminated"|"stopping"|"stopped"|string;
   export type InstanceType = string;
   export interface JobFilter {
@@ -1499,6 +1688,22 @@ declare namespace ComputeOptimizer {
   export type JobId = string;
   export type JobIds = JobId[];
   export type JobStatus = "Queued"|"InProgress"|"Complete"|"Failed"|string;
+  export interface LambdaEffectiveRecommendationPreferences {
+    /**
+     *  Describes the savings estimation mode applied for calculating savings opportunity for Lambda functions. 
+     */
+    savingsEstimationMode?: LambdaSavingsEstimationMode;
+  }
+  export interface LambdaEstimatedMonthlySavings {
+    /**
+     *  The currency of the estimated monthly savings. 
+     */
+    currency?: Currency;
+    /**
+     *  The value of the estimated monthly savings. 
+     */
+    value?: Value;
+  }
   export type LambdaFunctionMemoryMetricName = "Duration"|string;
   export type LambdaFunctionMemoryMetricStatistic = "LowerBound"|"UpperBound"|"Expected"|string;
   export interface LambdaFunctionMemoryProjectedMetric {
@@ -1533,6 +1738,10 @@ declare namespace ComputeOptimizer {
      * An object that describes the savings opportunity for the Lambda function recommendation option. Savings opportunity includes the estimated monthly savings amount and percentage.
      */
     savingsOpportunity?: SavingsOpportunity;
+    /**
+     *  An object that describes the savings opportunity for the Lambda recommendation option which includes Saving Plans discounts. Savings opportunity includes the estimated monthly savings and percentage. 
+     */
+    savingsOpportunityAfterDiscounts?: LambdaSavingsOpportunityAfterDiscounts;
   }
   export type LambdaFunctionMemoryRecommendationOptions = LambdaFunctionMemoryRecommendationOption[];
   export type LambdaFunctionMetricName = "Duration"|"Memory"|string;
@@ -1590,6 +1799,10 @@ declare namespace ComputeOptimizer {
      *  A list of tags assigned to your Lambda function recommendations. 
      */
     tags?: Tags;
+    /**
+     *  Describes the effective recommendation preferences for Lambda functions. 
+     */
+    effectiveRecommendationPreferences?: LambdaEffectiveRecommendationPreferences;
   }
   export interface LambdaFunctionRecommendationFilter {
     /**
@@ -1622,6 +1835,23 @@ declare namespace ComputeOptimizer {
     value?: MetricValue;
   }
   export type LambdaFunctionUtilizationMetrics = LambdaFunctionUtilizationMetric[];
+  export interface LambdaSavingsEstimationMode {
+    /**
+     *  Describes the source for calculation of savings opportunity for Lambda functions. 
+     */
+    source?: LambdaSavingsEstimationModeSource;
+  }
+  export type LambdaSavingsEstimationModeSource = "PublicPricing"|"CostExplorerRightsizing"|"CostOptimizationHub"|string;
+  export interface LambdaSavingsOpportunityAfterDiscounts {
+    /**
+     *  The estimated monthly savings possible as a percentage of monthly cost by adopting Compute Optimizer’s Lambda function recommendations. This includes any applicable Savings Plans discounts. 
+     */
+    savingsOpportunityPercentage?: SavingsOpportunityPercentage;
+    /**
+     *  The estimated monthly savings possible by adopting Compute Optimizer’s Lambda function recommendations. This includes any applicable Savings Plans discounts. 
+     */
+    estimatedMonthlySavings?: LambdaEstimatedMonthlySavings;
+  }
   export type LastRefreshTimestamp = Date;
   export type LastUpdatedTimestamp = Date;
   export interface LicenseConfiguration {
@@ -1737,6 +1967,7 @@ declare namespace ComputeOptimizer {
   export type LicenseRecommendations = LicenseRecommendation[];
   export type LicenseVersion = string;
   export type LookBackPeriodInDays = number;
+  export type LookBackPeriodPreference = "DAYS_14"|"DAYS_32"|"DAYS_93"|string;
   export type Low = number;
   export type LowerBoundValue = number;
   export type MaxResults = number;
@@ -1787,6 +2018,24 @@ declare namespace ComputeOptimizer {
   export type Period = number;
   export type PlatformDifference = "Hypervisor"|"NetworkInterface"|"StorageInterface"|"InstanceStoreAvailability"|"VirtualizationType"|"Architecture"|string;
   export type PlatformDifferences = PlatformDifference[];
+  export interface PreferredResource {
+    /**
+     *  The type of preferred resource to customize.   Compute Optimizer only supports the customization of Ec2InstanceTypes. 
+     */
+    name?: PreferredResourceName;
+    /**
+     *  The preferred resource type values to include in the recommendation candidates. You can specify the exact resource type value, such as m5.large, or use wild card expressions, such as m5. If this isn’t specified, all supported resources are included by default. You can specify up to 1000 values in this list. 
+     */
+    includeList?: PreferredResourceValues;
+    /**
+     *  The preferred resource type values to exclude from the recommendation candidates. If this isn’t specified, all supported resources are included by default. You can specify up to 1000 values in this list. 
+     */
+    excludeList?: PreferredResourceValues;
+  }
+  export type PreferredResourceName = "Ec2InstanceTypes"|string;
+  export type PreferredResourceValue = string;
+  export type PreferredResourceValues = PreferredResourceValue[];
+  export type PreferredResources = PreferredResource[];
   export interface ProjectedMetric {
     /**
      * The name of the projected utilization metric. The following projected utilization metrics are returned:    Cpu - The projected percentage of allocated EC2 compute units that would be in use on the recommendation option had you used that resource during the analyzed period. This metric identifies the processing power required to run an application on the recommendation option. Depending on the instance type, tools in your operating system can show a lower percentage than CloudWatch when the instance is not allocated a full processor core.    Memory - The percentage of memory that would be in use on the recommendation option had you used that resource during the analyzed period. This metric identifies the amount of memory required to run an application on the recommendation option. Units: Percent  The Memory metric is only returned for resources with the unified CloudWatch agent installed on them. For more information, see Enabling Memory Utilization with the CloudWatch Agent.     GPU - The projected percentage of allocated GPUs if you adjust your configurations to Compute Optimizer's recommendation option.    GPU_MEMORY - The projected percentage of total GPU memory if you adjust your configurations to Compute Optimizer's recommendation option.  The GPU and GPU_MEMORY metrics are only returned for resources with the unified CloudWatch Agent installed on them. For more information, see Enabling NVIDIA GPU utilization with the CloudWatch Agent.   
@@ -1824,6 +2073,22 @@ declare namespace ComputeOptimizer {
      * The provider of the external metrics recommendation preference to create or update. Specify a valid provider in the source field to activate the preference. To delete this preference, see the DeleteRecommendationPreferences action. This preference can only be set for the Ec2Instance resource type. For more information, see External metrics ingestion in the Compute Optimizer User Guide.
      */
     externalMetricsPreference?: ExternalMetricsPreference;
+    /**
+     *  The preference to control the number of days the utilization metrics of the Amazon Web Services resource are analyzed. When this preference isn't specified, we use the default value DAYS_14.   You can only set this preference for the Amazon EC2 instance and Auto Scaling group resource types. 
+     */
+    lookBackPeriod?: LookBackPeriodPreference;
+    /**
+     *  The preference to control the resource’s CPU utilization thresholds - threshold and headroom. When this preference isn't specified, we use the following default values:     P99_5 for threshold    PERCENT_17 for headroom    You can only set this preference for the Amazon EC2 instance resource type. 
+     */
+    utilizationPreferences?: UtilizationPreferences;
+    /**
+     *  The preference to control which resource type values are considered when generating rightsizing recommendations. You can specify this preference as a combination of include and exclude lists. You must specify either an includeList or excludeList. If the preference is an empty set of resource type values, an error occurs.   You can only set this preference for the Amazon EC2 instance and Auto Scaling group resource types. 
+     */
+    preferredResources?: PreferredResources;
+    /**
+     *  The status of the savings estimation mode preference to create or update.  Specify the AfterDiscounts status to activate the preference, or specify BeforeDiscounts to deactivate the preference. Only the account manager or delegated administrator of your organization can activate this preference. For more information, see  Savings estimation mode in the Compute Optimizer User Guide.
+     */
+    savingsEstimationMode?: SavingsEstimationMode;
   }
   export interface PutRecommendationPreferencesResponse {
   }
@@ -1871,7 +2136,7 @@ declare namespace ComputeOptimizer {
   }
   export type RecommendationExportJobs = RecommendationExportJob[];
   export type RecommendationOptions = InstanceRecommendationOption[];
-  export type RecommendationPreferenceName = "EnhancedInfrastructureMetrics"|"InferredWorkloadTypes"|"ExternalMetricsPreference"|string;
+  export type RecommendationPreferenceName = "EnhancedInfrastructureMetrics"|"InferredWorkloadTypes"|"ExternalMetricsPreference"|"LookBackPeriodPreference"|"PreferredResources"|"UtilizationPreferences"|string;
   export type RecommendationPreferenceNames = RecommendationPreferenceName[];
   export interface RecommendationPreferences {
     /**
@@ -1900,6 +2165,22 @@ declare namespace ComputeOptimizer {
      *  An object that describes the external metrics recommendation preference.   If the preference is applied in the latest recommendation refresh, an object with a valid source value appears in the response. If the preference isn't applied to the recommendations already, then this object doesn't appear in the response. 
      */
     externalMetricsPreference?: ExternalMetricsPreference;
+    /**
+     *  The preference to control the number of days the utilization metrics of the Amazon Web Services resource are analyzed. If the preference isn’t set, this object is null. 
+     */
+    lookBackPeriod?: LookBackPeriodPreference;
+    /**
+     *  The preference to control the resource’s CPU utilization thresholds - threshold and headroom. If the preference isn’t set, this object is null.   This preference is only available for the Amazon EC2 instance resource type. 
+     */
+    utilizationPreferences?: UtilizationPreferences;
+    /**
+     *  The preference to control which resource type values are considered when generating rightsizing recommendations. This object resolves any wildcard expressions and returns the effective list of candidate resource type values. If the preference isn’t set, this object is null. 
+     */
+    preferredResources?: EffectivePreferredResources;
+    /**
+     *  Describes the savings estimation mode used for calculating savings opportunity.  Only the account manager or delegated administrator of your organization can activate this preference.
+     */
+    savingsEstimationMode?: SavingsEstimationMode;
   }
   export type RecommendationPreferencesDetails = RecommendationPreferencesDetail[];
   export interface RecommendationSource {
@@ -1986,6 +2267,7 @@ declare namespace ComputeOptimizer {
      */
     keyPrefix?: DestinationKeyPrefix;
   }
+  export type SavingsEstimationMode = "AfterDiscounts"|"BeforeDiscounts"|string;
   export interface SavingsOpportunity {
     /**
      * The estimated monthly savings possible as a percentage of monthly cost by adopting Compute Optimizer recommendations for a given resource.
@@ -2103,6 +2385,17 @@ declare namespace ComputeOptimizer {
     value?: MetricValue;
   }
   export type UtilizationMetrics = UtilizationMetric[];
+  export interface UtilizationPreference {
+    /**
+     *  The name of the resource utilization metric name to customize.   Compute Optimizer only supports CpuUtilization. 
+     */
+    metricName?: CustomizableMetricName;
+    /**
+     *  The parameters to set when customizing the resource utilization thresholds. 
+     */
+    metricParameters?: CustomizableMetricParameters;
+  }
+  export type UtilizationPreferences = UtilizationPreference[];
   export type Value = number;
   export type VeryLow = number;
   export type VolumeArn = string;
@@ -2182,6 +2475,10 @@ declare namespace ComputeOptimizer {
      *  A list of tags assigned to your Amazon EBS volume recommendations. 
      */
     tags?: Tags;
+    /**
+     *  Describes the effective recommendation preferences for Amazon EBS volume. 
+     */
+    effectiveRecommendationPreferences?: EBSEffectiveRecommendationPreferences;
   }
   export interface VolumeRecommendationOption {
     /**
@@ -2200,6 +2497,10 @@ declare namespace ComputeOptimizer {
      * An object that describes the savings opportunity for the EBS volume recommendation option. Savings opportunity includes the estimated monthly savings amount and percentage.
      */
     savingsOpportunity?: SavingsOpportunity;
+    /**
+     *  An object that describes the savings opportunity for the Amazon EBS volume recommendation option with specific discounts. Savings opportunity includes the estimated monthly savings and percentage. 
+     */
+    savingsOpportunityAfterDiscounts?: EBSSavingsOpportunityAfterDiscounts;
   }
   export type VolumeRecommendationOptions = VolumeRecommendationOption[];
   export type VolumeRecommendations = VolumeRecommendation[];

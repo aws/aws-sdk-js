@@ -292,6 +292,14 @@ declare class QuickSight extends Service {
    */
   deleteIAMPolicyAssignment(callback?: (err: AWSError, data: QuickSight.Types.DeleteIAMPolicyAssignmentResponse) => void): Request<QuickSight.Types.DeleteIAMPolicyAssignmentResponse, AWSError>;
   /**
+   * Deletes all access scopes and authorized targets that are associated with a service from the Amazon QuickSight IAM Identity Center application. This operation is only supported for Amazon QuickSight accounts that use IAM Identity Center.
+   */
+  deleteIdentityPropagationConfig(params: QuickSight.Types.DeleteIdentityPropagationConfigRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteIdentityPropagationConfigResponse) => void): Request<QuickSight.Types.DeleteIdentityPropagationConfigResponse, AWSError>;
+  /**
+   * Deletes all access scopes and authorized targets that are associated with a service from the Amazon QuickSight IAM Identity Center application. This operation is only supported for Amazon QuickSight accounts that use IAM Identity Center.
+   */
+  deleteIdentityPropagationConfig(callback?: (err: AWSError, data: QuickSight.Types.DeleteIdentityPropagationConfigResponse) => void): Request<QuickSight.Types.DeleteIdentityPropagationConfigResponse, AWSError>;
+  /**
    * Deletes a namespace and the users and groups that are associated with the namespace. This is an asynchronous process. Assets including dashboards, analyses, datasets and data sources are not deleted. To delete these assets, you use the API operations for the relevant asset. 
    */
   deleteNamespace(params: QuickSight.Types.DeleteNamespaceRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteNamespaceResponse) => void): Request<QuickSight.Types.DeleteNamespaceResponse, AWSError>;
@@ -868,6 +876,14 @@ declare class QuickSight extends Service {
    */
   listIAMPolicyAssignmentsForUser(callback?: (err: AWSError, data: QuickSight.Types.ListIAMPolicyAssignmentsForUserResponse) => void): Request<QuickSight.Types.ListIAMPolicyAssignmentsForUserResponse, AWSError>;
   /**
+   * Lists all services and authorized targets that the Amazon QuickSight IAM Identity Center application can access. This operation is only supported for Amazon QuickSight accounts that use IAM Identity Center.
+   */
+  listIdentityPropagationConfigs(params: QuickSight.Types.ListIdentityPropagationConfigsRequest, callback?: (err: AWSError, data: QuickSight.Types.ListIdentityPropagationConfigsResponse) => void): Request<QuickSight.Types.ListIdentityPropagationConfigsResponse, AWSError>;
+  /**
+   * Lists all services and authorized targets that the Amazon QuickSight IAM Identity Center application can access. This operation is only supported for Amazon QuickSight accounts that use IAM Identity Center.
+   */
+  listIdentityPropagationConfigs(callback?: (err: AWSError, data: QuickSight.Types.ListIdentityPropagationConfigsResponse) => void): Request<QuickSight.Types.ListIdentityPropagationConfigsResponse, AWSError>;
+  /**
    * Lists the history of SPICE ingestions for a dataset.
    */
   listIngestions(params: QuickSight.Types.ListIngestionsRequest, callback?: (err: AWSError, data: QuickSight.Types.ListIngestionsResponse) => void): Request<QuickSight.Types.ListIngestionsResponse, AWSError>;
@@ -1227,6 +1243,14 @@ declare class QuickSight extends Service {
    * Updates an existing IAM policy assignment. This operation updates only the optional parameter or parameters that are specified in the request. This overwrites all of the users included in Identities. 
    */
   updateIAMPolicyAssignment(callback?: (err: AWSError, data: QuickSight.Types.UpdateIAMPolicyAssignmentResponse) => void): Request<QuickSight.Types.UpdateIAMPolicyAssignmentResponse, AWSError>;
+  /**
+   * Adds or updates services and authorized targets to configure what the Amazon QuickSight IAM Identity Center application can access. This operation is only supported for Amazon QuickSight accounts using IAM Identity Center
+   */
+  updateIdentityPropagationConfig(params: QuickSight.Types.UpdateIdentityPropagationConfigRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateIdentityPropagationConfigResponse) => void): Request<QuickSight.Types.UpdateIdentityPropagationConfigResponse, AWSError>;
+  /**
+   * Adds or updates services and authorized targets to configure what the Amazon QuickSight IAM Identity Center application can access. This operation is only supported for Amazon QuickSight accounts using IAM Identity Center
+   */
+  updateIdentityPropagationConfig(callback?: (err: AWSError, data: QuickSight.Types.UpdateIdentityPropagationConfigResponse) => void): Request<QuickSight.Types.UpdateIdentityPropagationConfigResponse, AWSError>;
   /**
    * Updates the content and status of IP rules. To use this operation, you must provide the entire map of rules. You can use the DescribeIpRestriction operation to get the current rule map.
    */
@@ -2411,6 +2435,18 @@ declare namespace QuickSight {
   export type AuthenticationMethodOption = "IAM_AND_QUICKSIGHT"|"IAM_ONLY"|"ACTIVE_DIRECTORY"|"IAM_IDENTITY_CENTER"|string;
   export type AuthorSpecifiedAggregation = "COUNT"|"DISTINCT_COUNT"|"MIN"|"MAX"|"MEDIAN"|"SUM"|"AVERAGE"|"STDEV"|"STDEVP"|"VAR"|"VARP"|"PERCENTILE"|string;
   export type AuthorSpecifiedAggregations = AuthorSpecifiedAggregation[];
+  export interface AuthorizedTargetsByService {
+    /**
+     * The name of the Amazon Web Services service.
+     */
+    Service?: ServiceType;
+    /**
+     * Aist of authorized targets that are represented by IAM Identity Center application ARNs.
+     */
+    AuthorizedTargets?: AuthorizedTargetsList;
+  }
+  export type AuthorizedTargetsByServices = AuthorizedTargetsByService[];
+  export type AuthorizedTargetsList = String[];
   export type AwsAccountId = string;
   export type AwsAndAccountId = string;
   export interface AwsIotAnalyticsParameters {
@@ -6567,6 +6603,26 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
   }
+  export interface DeleteIdentityPropagationConfigRequest {
+    /**
+     * The ID of the Amazon Web Services account that you want to delete an identity propagation configuration from.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The name of the Amazon Web Services service that you want to delete the associated access scopes and authorized targets from.
+     */
+    Service: ServiceType;
+  }
+  export interface DeleteIdentityPropagationConfigResponse {
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
   export interface DeleteNamespaceRequest {
     /**
      * The ID for the Amazon Web Services account that you want to delete the Amazon QuickSight namespace from.
@@ -10468,6 +10524,12 @@ declare namespace QuickSight {
   export type IAMPolicyAssignmentSummaryList = IAMPolicyAssignmentSummary[];
   export type IPv4Address = string;
   export type Icon = "CARET_UP"|"CARET_DOWN"|"PLUS"|"MINUS"|"ARROW_UP"|"ARROW_DOWN"|"ARROW_LEFT"|"ARROW_UP_LEFT"|"ARROW_DOWN_LEFT"|"ARROW_RIGHT"|"ARROW_UP_RIGHT"|"ARROW_DOWN_RIGHT"|"FACE_UP"|"FACE_DOWN"|"FACE_FLAT"|"ONE_BAR"|"TWO_BAR"|"THREE_BAR"|"CIRCLE"|"TRIANGLE"|"SQUARE"|"FLAG"|"THUMBS_UP"|"THUMBS_DOWN"|"CHECKMARK"|"X"|string;
+  export interface IdentityCenterConfiguration {
+    /**
+     * A Boolean option that controls whether Trusted Identity Propagation should be used.
+     */
+    EnableIdentityPropagation?: Boolean;
+  }
   export type IdentityMap = {[key: string]: IdentityNameList};
   export type IdentityName = string;
   export type IdentityNameList = IdentityName[];
@@ -11678,6 +11740,39 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
   }
+  export interface ListIdentityPropagationConfigsRequest {
+    /**
+     * The ID of the Amazon Web Services account that contain the identity propagation configurations of.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The maximum number of results to be returned.
+     */
+    MaxResults?: ListIdentityPropagationMaxResults;
+    /**
+     * The token for the next set of results, or null if there are no more results.
+     */
+    NextToken?: String;
+  }
+  export interface ListIdentityPropagationConfigsResponse {
+    /**
+     * A list of services and their authorized targets that the Amazon QuickSight IAM Identity Center application can access.
+     */
+    Services?: AuthorizedTargetsByServices;
+    /**
+     * The token for the next set of results, or null if there are no more results.
+     */
+    NextToken?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+  }
+  export type ListIdentityPropagationMaxResults = number;
   export interface ListIngestionsRequest {
     /**
      * The ID of the dataset used in the ingestion.
@@ -14005,6 +14100,10 @@ declare namespace QuickSight {
      * An optional parameter that uses IAM authentication to grant Amazon QuickSight access to your cluster. This parameter can be used instead of DataSourceCredentials.
      */
     IAMParameters?: RedshiftIAMParameters;
+    /**
+     * An optional parameter that configures IAM Identity Center authentication to grant Amazon QuickSight access to your cluster. This parameter can only be specified if your Amazon QuickSight account is configured with IAM Identity Center.
+     */
+    IdentityCenterConfiguration?: IdentityCenterConfiguration;
   }
   export interface ReferenceLine {
     /**
@@ -15186,6 +15285,7 @@ declare namespace QuickSight {
      */
     SiteBaseUrl: SiteBaseUrl;
   }
+  export type ServiceType = "REDSHIFT"|string;
   export type SessionLifetimeInMinutes = number;
   export interface SessionTag {
     /**
@@ -18481,6 +18581,30 @@ declare namespace QuickSight {
      * The status of the assignment. Possible values are as follows:    ENABLED - Anything specified in this assignment is used when creating the data source.    DISABLED - This assignment isn't used when creating the data source.    DRAFT - This assignment is an unfinished draft and isn't used when creating the data source.  
      */
     AssignmentStatus?: AssignmentStatus;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
+  export interface UpdateIdentityPropagationConfigRequest {
+    /**
+     * The ID of the Amazon Web Services account that contains the identity propagation configuration that you want to update.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The name of the Amazon Web Services service that contains the authorized targets that you want to add or update.
+     */
+    Service: ServiceType;
+    /**
+     * Specifies a list of application ARNs that represent the authorized targets for a service.
+     */
+    AuthorizedTargets?: AuthorizedTargetsList;
+  }
+  export interface UpdateIdentityPropagationConfigResponse {
     /**
      * The Amazon Web Services request ID for this operation.
      */

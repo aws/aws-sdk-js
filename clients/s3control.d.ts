@@ -13,6 +13,38 @@ declare class S3Control extends Service {
   constructor(options?: S3Control.Types.ClientConfiguration)
   config: Config & S3Control.Types.ClientConfiguration;
   /**
+   * Associate your S3 Access Grants instance with an Amazon Web Services IAM Identity Center instance. Use this action if you want to create access grants for users or groups from your corporate identity directory. First, you must add your corporate identity directory to Amazon Web Services IAM Identity Center. Then, you can associate this IAM Identity Center instance with your S3 Access Grants instance.  Permissions  You must have the s3:AssociateAccessGrantsIdentityCenter permission to use this operation.   Additional Permissions  You must also have the following permissions: sso:CreateApplication, sso:PutApplicationGrant, and sso:PutApplicationAuthenticationMethod.   
+   */
+  associateAccessGrantsIdentityCenter(params: S3Control.Types.AssociateAccessGrantsIdentityCenterRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Associate your S3 Access Grants instance with an Amazon Web Services IAM Identity Center instance. Use this action if you want to create access grants for users or groups from your corporate identity directory. First, you must add your corporate identity directory to Amazon Web Services IAM Identity Center. Then, you can associate this IAM Identity Center instance with your S3 Access Grants instance.  Permissions  You must have the s3:AssociateAccessGrantsIdentityCenter permission to use this operation.   Additional Permissions  You must also have the following permissions: sso:CreateApplication, sso:PutApplicationGrant, and sso:PutApplicationAuthenticationMethod.   
+   */
+  associateAccessGrantsIdentityCenter(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Creates an access grant that gives a grantee access to your S3 data. The grantee can be an IAM user or role or a directory user, or group. Before you can create a grant, you must have an S3 Access Grants instance in the same Region as the S3 data. You can create an S3 Access Grants instance using the CreateAccessGrantsInstance. You must also have registered at least one S3 data location in your S3 Access Grants instance using CreateAccessGrantsLocation.   Permissions  You must have the s3:CreateAccessGrant permission to use this operation.   Additional Permissions  For any directory identity - sso:DescribeInstance and sso:DescribeApplication  For directory users - identitystore:DescribeUser  For directory groups - identitystore:DescribeGroup   
+   */
+  createAccessGrant(params: S3Control.Types.CreateAccessGrantRequest, callback?: (err: AWSError, data: S3Control.Types.CreateAccessGrantResult) => void): Request<S3Control.Types.CreateAccessGrantResult, AWSError>;
+  /**
+   * Creates an access grant that gives a grantee access to your S3 data. The grantee can be an IAM user or role or a directory user, or group. Before you can create a grant, you must have an S3 Access Grants instance in the same Region as the S3 data. You can create an S3 Access Grants instance using the CreateAccessGrantsInstance. You must also have registered at least one S3 data location in your S3 Access Grants instance using CreateAccessGrantsLocation.   Permissions  You must have the s3:CreateAccessGrant permission to use this operation.   Additional Permissions  For any directory identity - sso:DescribeInstance and sso:DescribeApplication  For directory users - identitystore:DescribeUser  For directory groups - identitystore:DescribeGroup   
+   */
+  createAccessGrant(callback?: (err: AWSError, data: S3Control.Types.CreateAccessGrantResult) => void): Request<S3Control.Types.CreateAccessGrantResult, AWSError>;
+  /**
+   * Creates an S3 Access Grants instance, which serves as a logical grouping for access grants. You can create one S3 Access Grants instance per Region per account.   Permissions  You must have the s3:CreateAccessGrantsInstance permission to use this operation.   Additional Permissions  To associate an IAM Identity Center instance with your S3 Access Grants instance, you must also have the sso:DescribeInstance, sso:CreateApplication, sso:PutApplicationGrant, and sso:PutApplicationAuthenticationMethod permissions.   
+   */
+  createAccessGrantsInstance(params: S3Control.Types.CreateAccessGrantsInstanceRequest, callback?: (err: AWSError, data: S3Control.Types.CreateAccessGrantsInstanceResult) => void): Request<S3Control.Types.CreateAccessGrantsInstanceResult, AWSError>;
+  /**
+   * Creates an S3 Access Grants instance, which serves as a logical grouping for access grants. You can create one S3 Access Grants instance per Region per account.   Permissions  You must have the s3:CreateAccessGrantsInstance permission to use this operation.   Additional Permissions  To associate an IAM Identity Center instance with your S3 Access Grants instance, you must also have the sso:DescribeInstance, sso:CreateApplication, sso:PutApplicationGrant, and sso:PutApplicationAuthenticationMethod permissions.   
+   */
+  createAccessGrantsInstance(callback?: (err: AWSError, data: S3Control.Types.CreateAccessGrantsInstanceResult) => void): Request<S3Control.Types.CreateAccessGrantsInstanceResult, AWSError>;
+  /**
+   * The S3 data location that you would like to register in your S3 Access Grants instance. Your S3 data must be in the same Region as your S3 Access Grants instance. The location can be one of the following:    The default S3 location s3://    A bucket - S3://&lt;bucket-name&gt;    A bucket and prefix - S3://&lt;bucket-name&gt;/&lt;prefix&gt;    When you register a location, you must include the IAM role that has permission to manage the S3 location that you are registering. Give S3 Access Grants permission to assume this role using a policy. S3 Access Grants assumes this role to manage access to the location and to vend temporary credentials to grantees or client applications.   Permissions  You must have the s3:CreateAccessGrantsLocation permission to use this operation.   Additional Permissions  You must also have the following permission for the specified IAM role: iam:PassRole   
+   */
+  createAccessGrantsLocation(params: S3Control.Types.CreateAccessGrantsLocationRequest, callback?: (err: AWSError, data: S3Control.Types.CreateAccessGrantsLocationResult) => void): Request<S3Control.Types.CreateAccessGrantsLocationResult, AWSError>;
+  /**
+   * The S3 data location that you would like to register in your S3 Access Grants instance. Your S3 data must be in the same Region as your S3 Access Grants instance. The location can be one of the following:    The default S3 location s3://    A bucket - S3://&lt;bucket-name&gt;    A bucket and prefix - S3://&lt;bucket-name&gt;/&lt;prefix&gt;    When you register a location, you must include the IAM role that has permission to manage the S3 location that you are registering. Give S3 Access Grants permission to assume this role using a policy. S3 Access Grants assumes this role to manage access to the location and to vend temporary credentials to grantees or client applications.   Permissions  You must have the s3:CreateAccessGrantsLocation permission to use this operation.   Additional Permissions  You must also have the following permission for the specified IAM role: iam:PassRole   
+   */
+  createAccessGrantsLocation(callback?: (err: AWSError, data: S3Control.Types.CreateAccessGrantsLocationResult) => void): Request<S3Control.Types.CreateAccessGrantsLocationResult, AWSError>;
+  /**
    * Creates an access point and associates it with the specified bucket. For more information, see Managing Data Access with Amazon S3 Access Points in the Amazon S3 User Guide.   S3 on Outposts only supports VPC-style access points.  For more information, see  Accessing Amazon S3 on Outposts using virtual private cloud (VPC) only access points in the Amazon S3 User Guide.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section.  The following actions are related to CreateAccessPoint:    GetAccessPoint     DeleteAccessPoint     ListAccessPoints   
    */
   createAccessPoint(params: S3Control.Types.CreateAccessPointRequest, callback?: (err: AWSError, data: S3Control.Types.CreateAccessPointResult) => void): Request<S3Control.Types.CreateAccessPointResult, AWSError>;
@@ -60,6 +92,38 @@ declare class S3Control extends Service {
    *  Creates a new S3 Storage Lens group and associates it with the specified Amazon Web Services account ID. An S3 Storage Lens group is a custom grouping of objects based on prefix, suffix, object tags, object size, object age, or a combination of these filters. For each Storage Lens group that you’ve created, you can also optionally add Amazon Web Services resource tags. For more information about S3 Storage Lens groups, see Working with S3 Storage Lens groups. To use this operation, you must have the permission to perform the s3:CreateStorageLensGroup action. If you’re trying to create a Storage Lens group with Amazon Web Services resource tags, you must also have permission to perform the s3:TagResource action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about Storage Lens groups errors, see List of Amazon S3 Storage Lens error codes.
    */
   createStorageLensGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the access grant from the S3 Access Grants instance. You cannot undo an access grant deletion and the grantee will no longer have access to the S3 data.  Permissions  You must have the s3:DeleteAccessGrant permission to use this operation.   
+   */
+  deleteAccessGrant(params: S3Control.Types.DeleteAccessGrantRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the access grant from the S3 Access Grants instance. You cannot undo an access grant deletion and the grantee will no longer have access to the S3 data.  Permissions  You must have the s3:DeleteAccessGrant permission to use this operation.   
+   */
+  deleteAccessGrant(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes your S3 Access Grants instance. You must first delete the access grants and locations before S3 Access Grants can delete the instance. See DeleteAccessGrant and DeleteAccessGrantsLocation. If you have associated an IAM Identity Center instance with your S3 Access Grants instance, you must first dissassociate the Identity Center instance from the S3 Access Grants instance before you can delete the S3 Access Grants instance. See AssociateAccessGrantsIdentityCenter and DissociateAccessGrantsIdentityCenter.  Permissions  You must have the s3:DeleteAccessGrantsInstance permission to use this operation.   
+   */
+  deleteAccessGrantsInstance(params: S3Control.Types.DeleteAccessGrantsInstanceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes your S3 Access Grants instance. You must first delete the access grants and locations before S3 Access Grants can delete the instance. See DeleteAccessGrant and DeleteAccessGrantsLocation. If you have associated an IAM Identity Center instance with your S3 Access Grants instance, you must first dissassociate the Identity Center instance from the S3 Access Grants instance before you can delete the S3 Access Grants instance. See AssociateAccessGrantsIdentityCenter and DissociateAccessGrantsIdentityCenter.  Permissions  You must have the s3:DeleteAccessGrantsInstance permission to use this operation.   
+   */
+  deleteAccessGrantsInstance(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the resource policy of the S3 Access Grants instance. The resource policy is used to manage cross-account access to your S3 Access Grants instance. By deleting the resource policy, you delete any cross-account permissions to your S3 Access Grants instance.   Permissions  You must have the s3:DeleteAccessGrantsInstanceResourcePolicy permission to use this operation.   
+   */
+  deleteAccessGrantsInstanceResourcePolicy(params: S3Control.Types.DeleteAccessGrantsInstanceResourcePolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the resource policy of the S3 Access Grants instance. The resource policy is used to manage cross-account access to your S3 Access Grants instance. By deleting the resource policy, you delete any cross-account permissions to your S3 Access Grants instance.   Permissions  You must have the s3:DeleteAccessGrantsInstanceResourcePolicy permission to use this operation.   
+   */
+  deleteAccessGrantsInstanceResourcePolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deregisters a location from your S3 Access Grants instance. You can only delete a location registration from an S3 Access Grants instance if there are no grants associated with this location. See Delete a grant for information on how to delete grants. You need to have at least one registered location in your S3 Access Grants instance in order to create access grants.   Permissions  You must have the s3:DeleteAccessGrantsLocation permission to use this operation.   
+   */
+  deleteAccessGrantsLocation(params: S3Control.Types.DeleteAccessGrantsLocationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deregisters a location from your S3 Access Grants instance. You can only delete a location registration from an S3 Access Grants instance if there are no grants associated with this location. See Delete a grant for information on how to delete grants. You need to have at least one registered location in your S3 Access Grants instance in order to create access grants.   Permissions  You must have the s3:DeleteAccessGrantsLocation permission to use this operation.   
+   */
+  deleteAccessGrantsLocation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified access point. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. The following actions are related to DeleteAccessPoint:    CreateAccessPoint     GetAccessPoint     ListAccessPoints   
    */
@@ -197,6 +261,54 @@ declare class S3Control extends Service {
    */
   describeMultiRegionAccessPointOperation(callback?: (err: AWSError, data: S3Control.Types.DescribeMultiRegionAccessPointOperationResult) => void): Request<S3Control.Types.DescribeMultiRegionAccessPointOperationResult, AWSError>;
   /**
+   * Dissociates the Amazon Web Services IAM Identity Center instance from the S3 Access Grants instance.   Permissions  You must have the s3:DissociateAccessGrantsIdentityCenter permission to use this operation.   Additional Permissions  You must have the sso:DeleteApplication permission to use this operation.   
+   */
+  dissociateAccessGrantsIdentityCenter(params: S3Control.Types.DissociateAccessGrantsIdentityCenterRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Dissociates the Amazon Web Services IAM Identity Center instance from the S3 Access Grants instance.   Permissions  You must have the s3:DissociateAccessGrantsIdentityCenter permission to use this operation.   Additional Permissions  You must have the sso:DeleteApplication permission to use this operation.   
+   */
+  dissociateAccessGrantsIdentityCenter(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Get the details of an access grant from your S3 Access Grants instance.  Permissions  You must have the s3:GetAccessGrant permission to use this operation.   
+   */
+  getAccessGrant(params: S3Control.Types.GetAccessGrantRequest, callback?: (err: AWSError, data: S3Control.Types.GetAccessGrantResult) => void): Request<S3Control.Types.GetAccessGrantResult, AWSError>;
+  /**
+   * Get the details of an access grant from your S3 Access Grants instance.  Permissions  You must have the s3:GetAccessGrant permission to use this operation.   
+   */
+  getAccessGrant(callback?: (err: AWSError, data: S3Control.Types.GetAccessGrantResult) => void): Request<S3Control.Types.GetAccessGrantResult, AWSError>;
+  /**
+   * Retrieves the S3 Access Grants instance for a Region in your account.   Permissions  You must have the s3:GetAccessGrantsInstance permission to use this operation.   
+   */
+  getAccessGrantsInstance(params: S3Control.Types.GetAccessGrantsInstanceRequest, callback?: (err: AWSError, data: S3Control.Types.GetAccessGrantsInstanceResult) => void): Request<S3Control.Types.GetAccessGrantsInstanceResult, AWSError>;
+  /**
+   * Retrieves the S3 Access Grants instance for a Region in your account.   Permissions  You must have the s3:GetAccessGrantsInstance permission to use this operation.   
+   */
+  getAccessGrantsInstance(callback?: (err: AWSError, data: S3Control.Types.GetAccessGrantsInstanceResult) => void): Request<S3Control.Types.GetAccessGrantsInstanceResult, AWSError>;
+  /**
+   * Retrieve the S3 Access Grants instance that contains a particular prefix.   Permissions  You must have the s3:GetAccessGrantsInstanceForPrefix permission for the caller account to use this operation.   Additional Permissions  The prefix owner account must grant you the following permissions to their S3 Access Grants instance: s3:GetAccessGrantsInstanceForPrefix.   
+   */
+  getAccessGrantsInstanceForPrefix(params: S3Control.Types.GetAccessGrantsInstanceForPrefixRequest, callback?: (err: AWSError, data: S3Control.Types.GetAccessGrantsInstanceForPrefixResult) => void): Request<S3Control.Types.GetAccessGrantsInstanceForPrefixResult, AWSError>;
+  /**
+   * Retrieve the S3 Access Grants instance that contains a particular prefix.   Permissions  You must have the s3:GetAccessGrantsInstanceForPrefix permission for the caller account to use this operation.   Additional Permissions  The prefix owner account must grant you the following permissions to their S3 Access Grants instance: s3:GetAccessGrantsInstanceForPrefix.   
+   */
+  getAccessGrantsInstanceForPrefix(callback?: (err: AWSError, data: S3Control.Types.GetAccessGrantsInstanceForPrefixResult) => void): Request<S3Control.Types.GetAccessGrantsInstanceForPrefixResult, AWSError>;
+  /**
+   * Returns the resource policy of the S3 Access Grants instance.   Permissions  You must have the s3:GetAccessGrantsInstanceResourcePolicy permission to use this operation.   
+   */
+  getAccessGrantsInstanceResourcePolicy(params: S3Control.Types.GetAccessGrantsInstanceResourcePolicyRequest, callback?: (err: AWSError, data: S3Control.Types.GetAccessGrantsInstanceResourcePolicyResult) => void): Request<S3Control.Types.GetAccessGrantsInstanceResourcePolicyResult, AWSError>;
+  /**
+   * Returns the resource policy of the S3 Access Grants instance.   Permissions  You must have the s3:GetAccessGrantsInstanceResourcePolicy permission to use this operation.   
+   */
+  getAccessGrantsInstanceResourcePolicy(callback?: (err: AWSError, data: S3Control.Types.GetAccessGrantsInstanceResourcePolicyResult) => void): Request<S3Control.Types.GetAccessGrantsInstanceResourcePolicyResult, AWSError>;
+  /**
+   * Retrieves the details of a particular location registered in your S3 Access Grants instance.   Permissions  You must have the s3:GetAccessGrantsLocation permission to use this operation.   
+   */
+  getAccessGrantsLocation(params: S3Control.Types.GetAccessGrantsLocationRequest, callback?: (err: AWSError, data: S3Control.Types.GetAccessGrantsLocationResult) => void): Request<S3Control.Types.GetAccessGrantsLocationResult, AWSError>;
+  /**
+   * Retrieves the details of a particular location registered in your S3 Access Grants instance.   Permissions  You must have the s3:GetAccessGrantsLocation permission to use this operation.   
+   */
+  getAccessGrantsLocation(callback?: (err: AWSError, data: S3Control.Types.GetAccessGrantsLocationResult) => void): Request<S3Control.Types.GetAccessGrantsLocationResult, AWSError>;
+  /**
    * Returns configuration information about the specified access point.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. The following actions are related to GetAccessPoint:    CreateAccessPoint     DeleteAccessPoint     ListAccessPoints   
    */
   getAccessPoint(params: S3Control.Types.GetAccessPointRequest, callback?: (err: AWSError, data: S3Control.Types.GetAccessPointResult) => void): Request<S3Control.Types.GetAccessPointResult, AWSError>;
@@ -301,6 +413,14 @@ declare class S3Control extends Service {
    */
   getBucketVersioning(callback?: (err: AWSError, data: S3Control.Types.GetBucketVersioningResult) => void): Request<S3Control.Types.GetBucketVersioningResult, AWSError>;
   /**
+   * Returns a temporary access credential from S3 Access Grants to the grantee or client application. The temporary credential is an Amazon Web Services STS token that grants them access to the S3 data.   Permissions  You must have the s3:GetDataAccess permission to use this operation.   Additional Permissions  The IAM role that S3 Access Grants assumes must have the following permissions specified in the trust policy when registering the location: sts:AssumeRole, for directory users or groups sts:SetContext, and for IAM users or roles sts:SourceIdentity.   
+   */
+  getDataAccess(params: S3Control.Types.GetDataAccessRequest, callback?: (err: AWSError, data: S3Control.Types.GetDataAccessResult) => void): Request<S3Control.Types.GetDataAccessResult, AWSError>;
+  /**
+   * Returns a temporary access credential from S3 Access Grants to the grantee or client application. The temporary credential is an Amazon Web Services STS token that grants them access to the S3 data.   Permissions  You must have the s3:GetDataAccess permission to use this operation.   Additional Permissions  The IAM role that S3 Access Grants assumes must have the following permissions specified in the trust policy when registering the location: sts:AssumeRole, for directory users or groups sts:SetContext, and for IAM users or roles sts:SourceIdentity.   
+   */
+  getDataAccess(callback?: (err: AWSError, data: S3Control.Types.GetDataAccessResult) => void): Request<S3Control.Types.GetDataAccessResult, AWSError>;
+  /**
    * Returns the tags on an S3 Batch Operations job. To use the GetJobTagging operation, you must have permission to perform the s3:GetJobTagging action. For more information, see Controlling access and labeling jobs using tags in the Amazon S3 User Guide.  Related actions include:    CreateJob     PutJobTagging     DeleteJobTagging   
    */
   getJobTagging(params: S3Control.Types.GetJobTaggingRequest, callback?: (err: AWSError, data: S3Control.Types.GetJobTaggingResult) => void): Request<S3Control.Types.GetJobTaggingResult, AWSError>;
@@ -373,6 +493,30 @@ declare class S3Control extends Service {
    */
   getStorageLensGroup(callback?: (err: AWSError, data: S3Control.Types.GetStorageLensGroupResult) => void): Request<S3Control.Types.GetStorageLensGroupResult, AWSError>;
   /**
+   * Returns the list of access grants in your S3 Access Grants instance.  Permissions  You must have the s3:ListAccessGrants permission to use this operation.   
+   */
+  listAccessGrants(params: S3Control.Types.ListAccessGrantsRequest, callback?: (err: AWSError, data: S3Control.Types.ListAccessGrantsResult) => void): Request<S3Control.Types.ListAccessGrantsResult, AWSError>;
+  /**
+   * Returns the list of access grants in your S3 Access Grants instance.  Permissions  You must have the s3:ListAccessGrants permission to use this operation.   
+   */
+  listAccessGrants(callback?: (err: AWSError, data: S3Control.Types.ListAccessGrantsResult) => void): Request<S3Control.Types.ListAccessGrantsResult, AWSError>;
+  /**
+   * Returns a list of S3 Access Grants instances. An S3 Access Grants instance serves as a logical grouping for your individual access grants. You can only have one S3 Access Grants instance per Region per account.  Permissions  You must have the s3:ListAccessGrantsInstances permission to use this operation.   
+   */
+  listAccessGrantsInstances(params: S3Control.Types.ListAccessGrantsInstancesRequest, callback?: (err: AWSError, data: S3Control.Types.ListAccessGrantsInstancesResult) => void): Request<S3Control.Types.ListAccessGrantsInstancesResult, AWSError>;
+  /**
+   * Returns a list of S3 Access Grants instances. An S3 Access Grants instance serves as a logical grouping for your individual access grants. You can only have one S3 Access Grants instance per Region per account.  Permissions  You must have the s3:ListAccessGrantsInstances permission to use this operation.   
+   */
+  listAccessGrantsInstances(callback?: (err: AWSError, data: S3Control.Types.ListAccessGrantsInstancesResult) => void): Request<S3Control.Types.ListAccessGrantsInstancesResult, AWSError>;
+  /**
+   * Returns a list of the locations registered in your S3 Access Grants instance.  Permissions  You must have the s3:ListAccessGrantsLocations permission to use this operation.   
+   */
+  listAccessGrantsLocations(params: S3Control.Types.ListAccessGrantsLocationsRequest, callback?: (err: AWSError, data: S3Control.Types.ListAccessGrantsLocationsResult) => void): Request<S3Control.Types.ListAccessGrantsLocationsResult, AWSError>;
+  /**
+   * Returns a list of the locations registered in your S3 Access Grants instance.  Permissions  You must have the s3:ListAccessGrantsLocations permission to use this operation.   
+   */
+  listAccessGrantsLocations(callback?: (err: AWSError, data: S3Control.Types.ListAccessGrantsLocationsResult) => void): Request<S3Control.Types.ListAccessGrantsLocationsResult, AWSError>;
+  /**
    * Returns a list of the access points that are owned by the current account that's associated with the specified bucket. You can retrieve up to 1000 access points per call. If the specified bucket has more than 1,000 access points (or the number specified in maxResults, whichever is less), the response will include a continuation token that you can use to list the additional access points.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. The following actions are related to ListAccessPoints:    CreateAccessPoint     DeleteAccessPoint     GetAccessPoint   
    */
   listAccessPoints(params: S3Control.Types.ListAccessPointsRequest, callback?: (err: AWSError, data: S3Control.Types.ListAccessPointsResult) => void): Request<S3Control.Types.ListAccessPointsResult, AWSError>;
@@ -429,13 +573,21 @@ declare class S3Control extends Service {
    */
   listStorageLensGroups(callback?: (err: AWSError, data: S3Control.Types.ListStorageLensGroupsResult) => void): Request<S3Control.Types.ListStorageLensGroupsResult, AWSError>;
   /**
-   *  This operation allows you to list all the Amazon Web Services resource tags for the specified resource.  To use this operation, you must have the permission to perform the s3:ListTagsForResource action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about S3 Tagging errors, see List of Amazon S3 Tagging error codes.  This operation is only supported for S3 Storage Lens groups. 
+   * This operation allows you to list all the Amazon Web Services resource tags for a specified resource. Each tag is a label consisting of a user-defined key and value. Tags can help you manage, identify, organize, search for, and filter resources.   Permissions  You must have the s3:ListTagsForResource permission to use this operation.     This operation is only supported for S3 Storage Lens groups and for S3 Access Grants. The tagged resource can be an S3 Storage Lens group or S3 Access Grants instance, registered location, or grant.   For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about S3 Tagging errors, see List of Amazon S3 Tagging error codes.
    */
   listTagsForResource(params: S3Control.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: S3Control.Types.ListTagsForResourceResult) => void): Request<S3Control.Types.ListTagsForResourceResult, AWSError>;
   /**
-   *  This operation allows you to list all the Amazon Web Services resource tags for the specified resource.  To use this operation, you must have the permission to perform the s3:ListTagsForResource action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about S3 Tagging errors, see List of Amazon S3 Tagging error codes.  This operation is only supported for S3 Storage Lens groups. 
+   * This operation allows you to list all the Amazon Web Services resource tags for a specified resource. Each tag is a label consisting of a user-defined key and value. Tags can help you manage, identify, organize, search for, and filter resources.   Permissions  You must have the s3:ListTagsForResource permission to use this operation.     This operation is only supported for S3 Storage Lens groups and for S3 Access Grants. The tagged resource can be an S3 Storage Lens group or S3 Access Grants instance, registered location, or grant.   For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about S3 Tagging errors, see List of Amazon S3 Tagging error codes.
    */
   listTagsForResource(callback?: (err: AWSError, data: S3Control.Types.ListTagsForResourceResult) => void): Request<S3Control.Types.ListTagsForResourceResult, AWSError>;
+  /**
+   * Updates the resource policy of the S3 Access Grants instance.   Permissions  You must have the s3:PutAccessGrantsInstanceResourcePolicy permission to use this operation.   
+   */
+  putAccessGrantsInstanceResourcePolicy(params: S3Control.Types.PutAccessGrantsInstanceResourcePolicyRequest, callback?: (err: AWSError, data: S3Control.Types.PutAccessGrantsInstanceResourcePolicyResult) => void): Request<S3Control.Types.PutAccessGrantsInstanceResourcePolicyResult, AWSError>;
+  /**
+   * Updates the resource policy of the S3 Access Grants instance.   Permissions  You must have the s3:PutAccessGrantsInstanceResourcePolicy permission to use this operation.   
+   */
+  putAccessGrantsInstanceResourcePolicy(callback?: (err: AWSError, data: S3Control.Types.PutAccessGrantsInstanceResourcePolicyResult) => void): Request<S3Control.Types.PutAccessGrantsInstanceResourcePolicyResult, AWSError>;
   /**
    * Replaces configuration for an Object Lambda Access Point. The following actions are related to PutAccessPointConfigurationForObjectLambda:    GetAccessPointConfigurationForObjectLambda   
    */
@@ -549,21 +701,29 @@ declare class S3Control extends Service {
    */
   submitMultiRegionAccessPointRoutes(callback?: (err: AWSError, data: S3Control.Types.SubmitMultiRegionAccessPointRoutesResult) => void): Request<S3Control.Types.SubmitMultiRegionAccessPointRoutesResult, AWSError>;
   /**
-   *  Creates a new Amazon Web Services resource tag or updates an existing resource tag. You can add up to 50 Amazon Web Services resource tags for each S3 resource.  To use this operation, you must have the permission to perform the s3:TagResource action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about S3 Tagging errors, see List of Amazon S3 Tagging error codes.  This operation is only supported for S3 Storage Lens groups. 
+   *  Creates a new Amazon Web Services resource tag or updates an existing resource tag. Each tag is a label consisting of a user-defined key and value. Tags can help you manage, identify, organize, search for, and filter resources. You can add up to 50 Amazon Web Services resource tags for each S3 resource.   This operation is only supported for S3 Storage Lens groups and for S3 Access Grants. The tagged resource can be an S3 Storage Lens group or S3 Access Grants instance, registered location, or grant.    Permissions  You must have the s3:TagResource permission to use this operation.    For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about S3 Tagging errors, see List of Amazon S3 Tagging error codes.
    */
   tagResource(params: S3Control.Types.TagResourceRequest, callback?: (err: AWSError, data: S3Control.Types.TagResourceResult) => void): Request<S3Control.Types.TagResourceResult, AWSError>;
   /**
-   *  Creates a new Amazon Web Services resource tag or updates an existing resource tag. You can add up to 50 Amazon Web Services resource tags for each S3 resource.  To use this operation, you must have the permission to perform the s3:TagResource action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about S3 Tagging errors, see List of Amazon S3 Tagging error codes.  This operation is only supported for S3 Storage Lens groups. 
+   *  Creates a new Amazon Web Services resource tag or updates an existing resource tag. Each tag is a label consisting of a user-defined key and value. Tags can help you manage, identify, organize, search for, and filter resources. You can add up to 50 Amazon Web Services resource tags for each S3 resource.   This operation is only supported for S3 Storage Lens groups and for S3 Access Grants. The tagged resource can be an S3 Storage Lens group or S3 Access Grants instance, registered location, or grant.    Permissions  You must have the s3:TagResource permission to use this operation.    For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about S3 Tagging errors, see List of Amazon S3 Tagging error codes.
    */
   tagResource(callback?: (err: AWSError, data: S3Control.Types.TagResourceResult) => void): Request<S3Control.Types.TagResourceResult, AWSError>;
   /**
-   *  This operation removes the specified Amazon Web Services resource tags from an S3 resource.  To use this operation, you must have the permission to perform the s3:UntagResource action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about S3 Tagging errors, see List of Amazon S3 Tagging error codes.  This operation is only supported for S3 Storage Lens groups. 
+   *  This operation removes the specified Amazon Web Services resource tags from an S3 resource. Each tag is a label consisting of a user-defined key and value. Tags can help you manage, identify, organize, search for, and filter resources.   This operation is only supported for S3 Storage Lens groups and for S3 Access Grants. The tagged resource can be an S3 Storage Lens group or S3 Access Grants instance, registered location, or grant.    Permissions  You must have the s3:UntagResource permission to use this operation.    For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about S3 Tagging errors, see List of Amazon S3 Tagging error codes.
    */
   untagResource(params: S3Control.Types.UntagResourceRequest, callback?: (err: AWSError, data: S3Control.Types.UntagResourceResult) => void): Request<S3Control.Types.UntagResourceResult, AWSError>;
   /**
-   *  This operation removes the specified Amazon Web Services resource tags from an S3 resource.  To use this operation, you must have the permission to perform the s3:UntagResource action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about S3 Tagging errors, see List of Amazon S3 Tagging error codes.  This operation is only supported for S3 Storage Lens groups. 
+   *  This operation removes the specified Amazon Web Services resource tags from an S3 resource. Each tag is a label consisting of a user-defined key and value. Tags can help you manage, identify, organize, search for, and filter resources.   This operation is only supported for S3 Storage Lens groups and for S3 Access Grants. The tagged resource can be an S3 Storage Lens group or S3 Access Grants instance, registered location, or grant.    Permissions  You must have the s3:UntagResource permission to use this operation.    For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about S3 Tagging errors, see List of Amazon S3 Tagging error codes.
    */
   untagResource(callback?: (err: AWSError, data: S3Control.Types.UntagResourceResult) => void): Request<S3Control.Types.UntagResourceResult, AWSError>;
+  /**
+   * Updates the IAM role of a registered location in your S3 Access Grants instance.  Permissions  You must have the s3:UpdateAccessGrantsLocation permission to use this operation.   Additional Permissions  You must also have the following permission: iam:PassRole   
+   */
+  updateAccessGrantsLocation(params: S3Control.Types.UpdateAccessGrantsLocationRequest, callback?: (err: AWSError, data: S3Control.Types.UpdateAccessGrantsLocationResult) => void): Request<S3Control.Types.UpdateAccessGrantsLocationResult, AWSError>;
+  /**
+   * Updates the IAM role of a registered location in your S3 Access Grants instance.  Permissions  You must have the s3:UpdateAccessGrantsLocation permission to use this operation.   Additional Permissions  You must also have the following permission: iam:PassRole   
+   */
+  updateAccessGrantsLocation(callback?: (err: AWSError, data: S3Control.Types.UpdateAccessGrantsLocationResult) => void): Request<S3Control.Types.UpdateAccessGrantsLocationResult, AWSError>;
   /**
    * Updates an existing S3 Batch Operations job's priority. For more information, see S3 Batch Operations in the Amazon S3 User Guide.  Related actions include:    CreateJob     ListJobs     DescribeJob     UpdateJobStatus   
    */
@@ -602,6 +762,22 @@ declare namespace S3Control {
      */
     Owner: OwnerOverride;
   }
+  export type AccessGrantArn = string;
+  export type AccessGrantId = string;
+  export type AccessGrantsInstanceArn = string;
+  export type AccessGrantsInstanceId = string;
+  export type AccessGrantsInstancesList = ListAccessGrantsInstanceEntry[];
+  export type AccessGrantsList = ListAccessGrantEntry[];
+  export type AccessGrantsLocationArn = string;
+  export interface AccessGrantsLocationConfiguration {
+    /**
+     * The S3SubPrefix is appended to the location scope creating the grant scope. Use this field to narrow the scope of the grant to a subset of the location scope. This field is required if the location scope is the default location s3:// because you cannot create a grant for all of your S3 data in the Region and must narrow the scope. For example, if the location scope is the default location s3://, the S3SubPrefx can be a &lt;bucket-name&gt;/*, so the full grant scope path would be s3://&lt;bucket-name&gt;/*. Or the S3SubPrefx can be &lt;bucket-name&gt;/&lt;prefix-name&gt;*, so the full grant scope path would be or s3://&lt;bucket-name&gt;/&lt;prefix-name&gt;*. If the S3SubPrefix includes a prefix, append the wildcard character * after the prefix to indicate that you want to include all object key names in the bucket that start with that prefix. 
+     */
+    S3SubPrefix?: S3Prefix;
+  }
+  export type AccessGrantsLocationId = string;
+  export type AccessGrantsLocationsList = ListAccessGrantsLocationsEntry[];
+  export type AccessKeyId = string;
   export interface AccessPoint {
     /**
      * The name of this access point.
@@ -680,6 +856,16 @@ declare namespace S3Control {
     IsEnabled?: IsEnabled;
   }
   export type Alias = string;
+  export interface AssociateAccessGrantsIdentityCenterRequest {
+    /**
+     * The ID of the Amazon Web Services account that is making this request.
+     */
+    AccountId: AccountId;
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon Web Services IAM Identity Center instance that you are associating with your S3 Access Grants instance. An IAM Identity Center instance is your corporate identity directory that you added to the IAM Identity Center. You can use the ListInstances API operation to retrieve a list of your Identity Center instances and their ARNs.
+     */
+    IdentityCenterArn: IdentityCenterArn;
+  }
   export type AsyncCreationTimestamp = Date;
   export interface AsyncErrorDetails {
     /**
@@ -803,6 +989,150 @@ declare namespace S3Control {
   export type ConfirmRemoveSelfBucketAccess = boolean;
   export type ConfirmationRequired = boolean;
   export type ContinuationToken = string;
+  export interface CreateAccessGrantRequest {
+    /**
+     * The ID of the Amazon Web Services account that is making this request.
+     */
+    AccountId: AccountId;
+    /**
+     * The ID of the registered location to which you are granting access. S3 Access Grants assigns this ID when you register the location. S3 Access Grants assigns the ID default to the default location s3:// and assigns an auto-generated ID to other locations that you register.  If you are passing the default location, you cannot create an access grant for the entire default location. You must also specify a bucket or a bucket and prefix in the Subprefix field. 
+     */
+    AccessGrantsLocationId: AccessGrantsLocationId;
+    /**
+     * The configuration options of the grant location. The grant location is the S3 path to the data to which you are granting access. It contains the S3SubPrefix field. The grant scope is the result of appending the subprefix to the location scope of the registered location.
+     */
+    AccessGrantsLocationConfiguration?: AccessGrantsLocationConfiguration;
+    /**
+     * The user, group, or role to which you are granting access. You can grant access to an IAM user or role. If you have added your corporate directory to Amazon Web Services IAM Identity Center and associated your Identity Center instance with your S3 Access Grants instance, the grantee can also be a corporate directory user or group.
+     */
+    Grantee: Grantee;
+    /**
+     * The type of access that you are granting to your S3 data, which can be set to one of the following values:    READ – Grant read-only access to the S3 data.    WRITE – Grant write-only access to the S3 data.    READWRITE – Grant both read and write access to the S3 data.  
+     */
+    Permission: Permission;
+    /**
+     * The Amazon Resource Name (ARN) of an Amazon Web Services IAM Identity Center application associated with your Identity Center instance. If an application ARN is included in the request to create an access grant, the grantee can only access the S3 data through this application. 
+     */
+    ApplicationArn?: IdentityCenterApplicationArn;
+    /**
+     * The type of S3SubPrefix. The only possible value is Object. Pass this value if the access grant scope is an object. Do not pass this value if the access grant scope is a bucket or a bucket and a prefix. 
+     */
+    S3PrefixType?: S3PrefixType;
+    /**
+     * The Amazon Web Services resource tags that you are adding to the access grant. Each tag is a label consisting of a user-defined key and value. Tags can help you manage, identify, organize, search for, and filter resources. 
+     */
+    Tags?: TagList;
+  }
+  export interface CreateAccessGrantResult {
+    /**
+     * The date and time when you created the access grant. 
+     */
+    CreatedAt?: CreationTimestamp;
+    /**
+     * The ID of the access grant. S3 Access Grants auto-generates this ID when you create the access grant.
+     */
+    AccessGrantId?: AccessGrantId;
+    /**
+     * The Amazon Resource Name (ARN) of the access grant. 
+     */
+    AccessGrantArn?: AccessGrantArn;
+    /**
+     * The user, group, or role to which you are granting access. You can grant access to an IAM user or role. If you have added your corporate directory to Amazon Web Services IAM Identity Center and associated your Identity Center instance with your S3 Access Grants instance, the grantee can also be a corporate directory user or group.
+     */
+    Grantee?: Grantee;
+    /**
+     * The ID of the registered location to which you are granting access. S3 Access Grants assigns this ID when you register the location. S3 Access Grants assigns the ID default to the default location s3:// and assigns an auto-generated ID to other locations that you register. 
+     */
+    AccessGrantsLocationId?: AccessGrantsLocationId;
+    /**
+     * The configuration options of the grant location. The grant location is the S3 path to the data to which you are granting access. 
+     */
+    AccessGrantsLocationConfiguration?: AccessGrantsLocationConfiguration;
+    /**
+     * The type of access that you are granting to your S3 data, which can be set to one of the following values:    READ – Grant read-only access to the S3 data.    WRITE – Grant write-only access to the S3 data.    READWRITE – Grant both read and write access to the S3 data.  
+     */
+    Permission?: Permission;
+    /**
+     * The Amazon Resource Name (ARN) of an Amazon Web Services IAM Identity Center application associated with your Identity Center instance. If the grant includes an application ARN, the grantee can only access the S3 data through this application. 
+     */
+    ApplicationArn?: IdentityCenterApplicationArn;
+    /**
+     * The S3 path of the data to which you are granting access. It is the result of appending the Subprefix to the location scope. 
+     */
+    GrantScope?: S3Prefix;
+  }
+  export interface CreateAccessGrantsInstanceRequest {
+    /**
+     * The ID of the Amazon Web Services account that is making this request.
+     */
+    AccountId: AccountId;
+    /**
+     * If you would like to associate your S3 Access Grants instance with an Amazon Web Services IAM Identity Center instance, use this field to pass the Amazon Resource Name (ARN) of the Amazon Web Services IAM Identity Center instance that you are associating with your S3 Access Grants instance. An IAM Identity Center instance is your corporate identity directory that you added to the IAM Identity Center. You can use the ListInstances API operation to retrieve a list of your Identity Center instances and their ARNs. 
+     */
+    IdentityCenterArn?: IdentityCenterArn;
+    /**
+     * The Amazon Web Services resource tags that you are adding to the S3 Access Grants instance. Each tag is a label consisting of a user-defined key and value. Tags can help you manage, identify, organize, search for, and filter resources. 
+     */
+    Tags?: TagList;
+  }
+  export interface CreateAccessGrantsInstanceResult {
+    /**
+     * The date and time when you created the S3 Access Grants instance. 
+     */
+    CreatedAt?: CreationTimestamp;
+    /**
+     * The ID of the S3 Access Grants instance. The ID is default. You can have one S3 Access Grants instance per Region per account. 
+     */
+    AccessGrantsInstanceId?: AccessGrantsInstanceId;
+    /**
+     * The Amazon Resource Name (ARN) of the S3 Access Grants instance. 
+     */
+    AccessGrantsInstanceArn?: AccessGrantsInstanceArn;
+    /**
+     * If you associated your S3 Access Grants instance with an Amazon Web Services IAM Identity Center instance, this field returns the Amazon Resource Name (ARN) of the IAM Identity Center instance application; a subresource of the original Identity Center instance passed in the request. S3 Access Grants creates this Identity Center application for this specific S3 Access Grants instance. 
+     */
+    IdentityCenterArn?: IdentityCenterArn;
+  }
+  export interface CreateAccessGrantsLocationRequest {
+    /**
+     * The ID of the Amazon Web Services account that is making this request.
+     */
+    AccountId: AccountId;
+    /**
+     * The S3 path to the location that you are registering. The location scope can be the default S3 location s3://, the S3 path to a bucket s3://&lt;bucket&gt;, or the S3 path to a bucket and prefix s3://&lt;bucket&gt;/&lt;prefix&gt;. A prefix in S3 is a string of characters at the beginning of an object key name used to organize the objects that you store in your S3 buckets. For example, object key names that start with the engineering/ prefix or object key names that start with the marketing/campaigns/ prefix.
+     */
+    LocationScope: S3Prefix;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role for the registered location. S3 Access Grants assumes this role to manage access to the registered location. 
+     */
+    IAMRoleArn: IAMRoleArn;
+    /**
+     * The Amazon Web Services resource tags that you are adding to the S3 Access Grants location. Each tag is a label consisting of a user-defined key and value. Tags can help you manage, identify, organize, search for, and filter resources.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateAccessGrantsLocationResult {
+    /**
+     * The date and time when you registered the location. 
+     */
+    CreatedAt?: CreationTimestamp;
+    /**
+     * The ID of the registered location to which you are granting access. S3 Access Grants assigns this ID when you register the location. S3 Access Grants assigns the ID default to the default location s3:// and assigns an auto-generated ID to other locations that you register. 
+     */
+    AccessGrantsLocationId?: AccessGrantsLocationId;
+    /**
+     * The Amazon Resource Name (ARN) of the location you are registering.
+     */
+    AccessGrantsLocationArn?: AccessGrantsLocationArn;
+    /**
+     * The S3 URI path to the location that you are registering. The location scope can be the default S3 location s3://, the S3 path to a bucket, or the S3 path to a bucket and prefix. A prefix in S3 is a string of characters at the beginning of an object key name used to organize the objects that you store in your S3 buckets. For example, object key names that start with the engineering/ prefix or object key names that start with the marketing/campaigns/ prefix.
+     */
+    LocationScope?: S3Prefix;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role for the registered location. S3 Access Grants assumes this role to manage access to the registered location. 
+     */
+    IAMRoleArn?: IAMRoleArn;
+  }
   export interface CreateAccessPointForObjectLambdaRequest {
     /**
      * The Amazon Web Services account ID for owner of the specified Object Lambda Access Point.
@@ -1020,9 +1350,59 @@ declare namespace S3Control {
   }
   export type CreationDate = Date;
   export type CreationTimestamp = Date;
+  export interface Credentials {
+    /**
+     * The unique access key ID of the Amazon Web Services STS temporary credential that S3 Access Grants vends to grantees and client applications. 
+     */
+    AccessKeyId?: AccessKeyId;
+    /**
+     * The secret access key of the Amazon Web Services STS temporary credential that S3 Access Grants vends to grantees and client applications. 
+     */
+    SecretAccessKey?: SecretAccessKey;
+    /**
+     * The Amazon Web Services STS temporary credential that S3 Access Grants vends to grantees and client applications. 
+     */
+    SessionToken?: SessionToken;
+    /**
+     * The expiration date and time of the temporary credential that S3 Access Grants vends to grantees and client applications. 
+     */
+    Expiration?: Expiration;
+  }
   export type _Date = Date;
   export type Days = number;
   export type DaysAfterInitiation = number;
+  export interface DeleteAccessGrantRequest {
+    /**
+     * The ID of the Amazon Web Services account that is making this request.
+     */
+    AccountId: AccountId;
+    /**
+     * The ID of the access grant. S3 Access Grants auto-generates this ID when you create the access grant.
+     */
+    AccessGrantId: AccessGrantId;
+  }
+  export interface DeleteAccessGrantsInstanceRequest {
+    /**
+     * The ID of the Amazon Web Services account that is making this request.
+     */
+    AccountId: AccountId;
+  }
+  export interface DeleteAccessGrantsInstanceResourcePolicyRequest {
+    /**
+     * The ID of the Amazon Web Services account that is making this request.
+     */
+    AccountId: AccountId;
+  }
+  export interface DeleteAccessGrantsLocationRequest {
+    /**
+     * The ID of the Amazon Web Services account that is making this request.
+     */
+    AccountId: AccountId;
+    /**
+     * The ID of the registered location that you are deregistering from your S3 Access Grants instance. S3 Access Grants assigned this ID when you registered the location. S3 Access Grants assigns the ID default to the default location s3:// and assigns an auto-generated ID to other locations that you register. 
+     */
+    AccessGrantsLocationId: AccessGrantsLocationId;
+  }
   export interface DeleteAccessPointForObjectLambdaRequest {
     /**
      * The account ID for the account that owns the specified Object Lambda Access Point.
@@ -1264,6 +1644,13 @@ declare namespace S3Control {
      */
     IsEnabled?: IsEnabled;
   }
+  export interface DissociateAccessGrantsIdentityCenterRequest {
+    /**
+     * The ID of the Amazon Web Services account that is making this request.
+     */
+    AccountId: AccountId;
+  }
+  export type DurationSeconds = number;
   export interface EncryptionConfiguration {
     /**
      * Specifies the ID of the customer managed KMS key that's stored in Key Management Service (KMS) for the destination bucket. This ID is either the Amazon Resource Name (ARN) for the KMS key or the alias ARN for the KMS key. Amazon S3 uses this KMS key to encrypt replica objects. Amazon S3 supports only symmetric encryption KMS keys. For more information, see Symmetric encryption KMS keys in the Amazon Web Services Key Management Service Developer Guide.
@@ -1294,6 +1681,7 @@ declare namespace S3Control {
     Status: ExistingObjectReplicationStatus;
   }
   export type ExistingObjectReplicationStatus = "Enabled"|"Disabled"|string;
+  export type Expiration = Date;
   export type ExpirationStatus = "Enabled"|"Disabled"|string;
   export type ExpiredObjectDeleteMarker = boolean;
   export type Format = "CSV"|"Parquet"|string;
@@ -1309,6 +1697,150 @@ declare namespace S3Control {
     SSEKMS?: SSEKMSEncryption;
   }
   export type GeneratedManifestFormat = "S3InventoryReport_CSV_20211130"|string;
+  export interface GetAccessGrantRequest {
+    /**
+     * The ID of the Amazon Web Services account that is making this request.
+     */
+    AccountId: AccountId;
+    /**
+     * The ID of the access grant. S3 Access Grants auto-generates this ID when you create the access grant.
+     */
+    AccessGrantId: AccessGrantId;
+  }
+  export interface GetAccessGrantResult {
+    /**
+     * The date and time when you created the access grant. 
+     */
+    CreatedAt?: CreationTimestamp;
+    /**
+     * The ID of the access grant. S3 Access Grants auto-generates this ID when you create the access grant.
+     */
+    AccessGrantId?: AccessGrantId;
+    /**
+     * The Amazon Resource Name (ARN) of the access grant. 
+     */
+    AccessGrantArn?: AccessGrantArn;
+    /**
+     * The user, group, or role to which you are granting access. You can grant access to an IAM user or role. If you have added a corporate directory to Amazon Web Services IAM Identity Center and associated this Identity Center instance with the S3 Access Grants instance, the grantee can also be a corporate directory user or group.
+     */
+    Grantee?: Grantee;
+    /**
+     * The type of permission that was granted in the access grant. Can be one of the following values:    READ – Grant read-only access to the S3 data.    WRITE – Grant write-only access to the S3 data.    READWRITE – Grant both read and write access to the S3 data.  
+     */
+    Permission?: Permission;
+    /**
+     * The ID of the registered location to which you are granting access. S3 Access Grants assigns this ID when you register the location. S3 Access Grants assigns the ID default to the default location s3:// and assigns an auto-generated ID to other locations that you register. 
+     */
+    AccessGrantsLocationId?: AccessGrantsLocationId;
+    /**
+     * The configuration options of the grant location. The grant location is the S3 path to the data to which you are granting access. 
+     */
+    AccessGrantsLocationConfiguration?: AccessGrantsLocationConfiguration;
+    /**
+     * The S3 path of the data to which you are granting access. It is the result of appending the Subprefix to the location scope.
+     */
+    GrantScope?: S3Prefix;
+    /**
+     * The Amazon Resource Name (ARN) of an Amazon Web Services IAM Identity Center application associated with your Identity Center instance. If the grant includes an application ARN, the grantee can only access the S3 data through this application. 
+     */
+    ApplicationArn?: IdentityCenterApplicationArn;
+  }
+  export interface GetAccessGrantsInstanceForPrefixRequest {
+    /**
+     * The ID of the Amazon Web Services account that is making this request.
+     */
+    AccountId: AccountId;
+    /**
+     * The S3 prefix of the access grants that you would like to retrieve.
+     */
+    S3Prefix: S3Prefix;
+  }
+  export interface GetAccessGrantsInstanceForPrefixResult {
+    /**
+     * The Amazon Resource Name (ARN) of the S3 Access Grants instance. 
+     */
+    AccessGrantsInstanceArn?: AccessGrantsInstanceArn;
+    /**
+     * The ID of the S3 Access Grants instance. The ID is default. You can have one S3 Access Grants instance per Region per account. 
+     */
+    AccessGrantsInstanceId?: AccessGrantsInstanceId;
+  }
+  export interface GetAccessGrantsInstanceRequest {
+    /**
+     * The ID of the Amazon Web Services account that is making this request.
+     */
+    AccountId: AccountId;
+  }
+  export interface GetAccessGrantsInstanceResourcePolicyRequest {
+    /**
+     * The ID of the Amazon Web Services account that is making this request.
+     */
+    AccountId: AccountId;
+  }
+  export interface GetAccessGrantsInstanceResourcePolicyResult {
+    /**
+     * The resource policy of the S3 Access Grants instance.
+     */
+    Policy?: PolicyDocument;
+    /**
+     * The Organization of the resource policy of the S3 Access Grants instance.
+     */
+    Organization?: Organization;
+    /**
+     * The date and time when you created the S3 Access Grants instance resource policy. 
+     */
+    CreatedAt?: CreationTimestamp;
+  }
+  export interface GetAccessGrantsInstanceResult {
+    /**
+     * The Amazon Resource Name (ARN) of the S3 Access Grants instance. 
+     */
+    AccessGrantsInstanceArn?: AccessGrantsInstanceArn;
+    /**
+     * The ID of the S3 Access Grants instance. The ID is default. You can have one S3 Access Grants instance per Region per account. 
+     */
+    AccessGrantsInstanceId?: AccessGrantsInstanceId;
+    /**
+     * If you associated your S3 Access Grants instance with an Amazon Web Services IAM Identity Center instance, this field returns the Amazon Resource Name (ARN) of the Amazon Web Services IAM Identity Center instance application; a subresource of the original Identity Center instance. S3 Access Grants creates this Identity Center application for the specific S3 Access Grants instance. 
+     */
+    IdentityCenterArn?: IdentityCenterArn;
+    /**
+     * The date and time when you created the S3 Access Grants instance. 
+     */
+    CreatedAt?: CreationTimestamp;
+  }
+  export interface GetAccessGrantsLocationRequest {
+    /**
+     * The ID of the Amazon Web Services account that is making this request.
+     */
+    AccountId: AccountId;
+    /**
+     * The ID of the registered location that you are retrieving. S3 Access Grants assigns this ID when you register the location. S3 Access Grants assigns the ID default to the default location s3:// and assigns an auto-generated ID to other locations that you register. 
+     */
+    AccessGrantsLocationId: AccessGrantsLocationId;
+  }
+  export interface GetAccessGrantsLocationResult {
+    /**
+     * The date and time when you registered the location. 
+     */
+    CreatedAt?: CreationTimestamp;
+    /**
+     * The ID of the registered location to which you are granting access. S3 Access Grants assigns this ID when you register the location. S3 Access Grants assigns the ID default to the default location s3:// and assigns an auto-generated ID to other locations that you register. 
+     */
+    AccessGrantsLocationId?: AccessGrantsLocationId;
+    /**
+     * The Amazon Resource Name (ARN) of the registered location. 
+     */
+    AccessGrantsLocationArn?: AccessGrantsLocationArn;
+    /**
+     * The S3 URI path to the registered location. The location scope can be the default S3 location s3://, the S3 path to a bucket, or the S3 path to a bucket and prefix. A prefix in S3 is a string of characters at the beginning of an object key name used to organize the objects that you store in your S3 buckets. For example, object key names that start with the engineering/ prefix or object key names that start with the marketing/campaigns/ prefix.
+     */
+    LocationScope?: S3Prefix;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role for the registered location. S3 Access Grants assumes this role to manage access to the registered location. 
+     */
+    IAMRoleArn?: IAMRoleArn;
+  }
   export interface GetAccessPointConfigurationForObjectLambdaRequest {
     /**
      * The account ID for the account that owns the specified Object Lambda Access Point.
@@ -1571,6 +2103,42 @@ declare namespace S3Control {
      */
     MFADelete?: MFADeleteStatus;
   }
+  export interface GetDataAccessRequest {
+    /**
+     * The ID of the Amazon Web Services account that is making this request.
+     */
+    AccountId: AccountId;
+    /**
+     * The S3 URI path of the data to which you are requesting temporary access credentials. If the requesting account has an access grant for this data, S3 Access Grants vends temporary access credentials in the response.
+     */
+    Target: S3Prefix;
+    /**
+     * The type of permission granted to your S3 data, which can be set to one of the following values:    READ – Grant read-only access to the S3 data.    WRITE – Grant write-only access to the S3 data.    READWRITE – Grant both read and write access to the S3 data.  
+     */
+    Permission: Permission;
+    /**
+     * The session duration, in seconds, of the temporary access credential that S3 Access Grants vends to the grantee or client application. The default value is 1 hour, but the grantee can specify a range from 900 seconds (15 minutes) up to 43200 seconds (12 hours). If the grantee requests a value higher than this maximum, the operation fails. 
+     */
+    DurationSeconds?: DurationSeconds;
+    /**
+     * The scope of the temporary access credential that S3 Access Grants vends to the grantee or client application.     Default – The scope of the returned temporary access token is the scope of the grant that is closest to the target scope.    Minimal – The scope of the returned temporary access token is the same as the requested target scope as long as the requested scope is the same as or a subset of the grant scope.   
+     */
+    Privilege?: Privilege;
+    /**
+     * The type of Target. The only possible value is Object. Pass this value if the target data that you would like to access is a path to an object. Do not pass this value if the target data is a bucket or a bucket and a prefix. 
+     */
+    TargetType?: S3PrefixType;
+  }
+  export interface GetDataAccessResult {
+    /**
+     * The temporary credential token that S3 Access Grants vends.
+     */
+    Credentials?: Credentials;
+    /**
+     * The S3 URI path of the data to which you are being granted temporary access credentials. 
+     */
+    MatchedGrantTarget?: S3Prefix;
+  }
   export interface GetJobTaggingRequest {
     /**
      * The Amazon Web Services account ID associated with the S3 Batch Operations job.
@@ -1717,8 +2285,22 @@ declare namespace S3Control {
   export type GrantReadACP = string;
   export type GrantWrite = string;
   export type GrantWriteACP = string;
+  export interface Grantee {
+    /**
+     * The type of the grantee to which access has been granted. It can be one of the following values:    IAM - An IAM user or role.    DIRECTORY_USER - Your corporate directory user. You can use this option if you have added your corporate identity directory to IAM Identity Center and associated the IAM Identity Center instance with your S3 Access Grants instance.    DIRECTORY_GROUP - Your corporate directory group. You can use this option if you have added your corporate identity directory to IAM Identity Center and associated the IAM Identity Center instance with your S3 Access Grants instance.  
+     */
+    GranteeType?: GranteeType;
+    /**
+     * The unique identifier of the Grantee. If the grantee type is IAM, the identifier is the IAM Amazon Resource Name (ARN) of the user or role. If the grantee type is a directory user or group, the identifier is 128-bit universally unique identifier (UUID) in the format a1b2c3d4-5678-90ab-cdef-EXAMPLE11111. You can obtain this UUID from your Amazon Web Services IAM Identity Center instance.
+     */
+    GranteeIdentifier?: GranteeIdentifier;
+  }
+  export type GranteeIdentifier = string;
+  export type GranteeType = "DIRECTORY_USER"|"DIRECTORY_GROUP"|"IAM"|string;
   export type IAMRoleArn = string;
   export type ID = string;
+  export type IdentityCenterApplicationArn = string;
+  export type IdentityCenterArn = string;
   export interface Include {
     /**
      * A container for the S3 Storage Lens bucket includes.
@@ -2139,6 +2721,180 @@ declare namespace S3Control {
     ObjectSizeLessThan?: ObjectSizeLessThanBytes;
   }
   export type LifecycleRules = LifecycleRule[];
+  export interface ListAccessGrantEntry {
+    /**
+     * The date and time when you created the S3 Access Grants instance. 
+     */
+    CreatedAt?: CreationTimestamp;
+    /**
+     * The ID of the access grant. S3 Access Grants auto-generates this ID when you create the access grant.
+     */
+    AccessGrantId?: AccessGrantId;
+    /**
+     * The Amazon Resource Name (ARN) of the access grant. 
+     */
+    AccessGrantArn?: AccessGrantArn;
+    /**
+     * The user, group, or role to which you are granting access. You can grant access to an IAM user or role. If you have added your corporate directory to Amazon Web Services IAM Identity Center and associated your Identity Center instance with your S3 Access Grants instance, the grantee can also be a corporate directory user or group.
+     */
+    Grantee?: Grantee;
+    /**
+     * The type of access granted to your S3 data, which can be set to one of the following values:    READ – Grant read-only access to the S3 data.    WRITE – Grant write-only access to the S3 data.    READWRITE – Grant both read and write access to the S3 data.  
+     */
+    Permission?: Permission;
+    /**
+     * The ID of the registered location to which you are granting access. S3 Access Grants assigns this ID when you register the location. S3 Access Grants assigns the ID default to the default location s3:// and assigns an auto-generated ID to other locations that you register. 
+     */
+    AccessGrantsLocationId?: AccessGrantsLocationId;
+    /**
+     * The configuration options of the grant location. The grant location is the S3 path to the data to which you are granting access. 
+     */
+    AccessGrantsLocationConfiguration?: AccessGrantsLocationConfiguration;
+    /**
+     * The S3 path of the data to which you are granting access. It is the result of appending the Subprefix to the location scope.
+     */
+    GrantScope?: S3Prefix;
+    /**
+     * The Amazon Resource Name (ARN) of an Amazon Web Services IAM Identity Center application associated with your Identity Center instance. If the grant includes an application ARN, the grantee can only access the S3 data through this application. 
+     */
+    ApplicationArn?: IdentityCenterApplicationArn;
+  }
+  export interface ListAccessGrantsInstanceEntry {
+    /**
+     * The ID of the S3 Access Grants instance. The ID is default. You can have one S3 Access Grants instance per Region per account. 
+     */
+    AccessGrantsInstanceId?: AccessGrantsInstanceId;
+    /**
+     * The Amazon Resource Name (ARN) of the S3 Access Grants instance. 
+     */
+    AccessGrantsInstanceArn?: AccessGrantsInstanceArn;
+    /**
+     * The date and time when you created the S3 Access Grants instance. 
+     */
+    CreatedAt?: CreationTimestamp;
+    /**
+     * If you associated your S3 Access Grants instance with an Amazon Web Services IAM Identity Center instance, this field returns the Amazon Resource Name (ARN) of the IAM Identity Center instance application; a subresource of the original Identity Center instance. S3 Access Grants creates this Identity Center application for the specific S3 Access Grants instance. 
+     */
+    IdentityCenterArn?: IdentityCenterArn;
+  }
+  export interface ListAccessGrantsInstancesRequest {
+    /**
+     * The ID of the Amazon Web Services account that is making this request.
+     */
+    AccountId: AccountId;
+    /**
+     * A pagination token to request the next page of results. Pass this value into a subsequent List Access Grants Instances request in order to retrieve the next page of results.
+     */
+    NextToken?: ContinuationToken;
+    /**
+     * The maximum number of access grants that you would like returned in the List Access Grants response. If the results include the pagination token NextToken, make another call using the NextToken to determine if there are more results.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListAccessGrantsInstancesResult {
+    /**
+     * A pagination token to request the next page of results. Pass this value into a subsequent List Access Grants Instances request in order to retrieve the next page of results.
+     */
+    NextToken?: ContinuationToken;
+    /**
+     * A container for a list of S3 Access Grants instances.
+     */
+    AccessGrantsInstancesList?: AccessGrantsInstancesList;
+  }
+  export interface ListAccessGrantsLocationsEntry {
+    /**
+     * The date and time when you registered the location. 
+     */
+    CreatedAt?: CreationTimestamp;
+    /**
+     * The ID of the registered location to which you are granting access. S3 Access Grants assigns this ID when you register the location. S3 Access Grants assigns the ID default to the default location s3:// and assigns an auto-generated ID to other locations that you register. 
+     */
+    AccessGrantsLocationId?: AccessGrantsLocationId;
+    /**
+     * The Amazon Resource Name (ARN) of the registered location. 
+     */
+    AccessGrantsLocationArn?: AccessGrantsLocationArn;
+    /**
+     * The S3 path to the location that you are registering. The location scope can be the default S3 location s3://, the S3 path to a bucket s3://&lt;bucket&gt;, or the S3 path to a bucket and prefix s3://&lt;bucket&gt;/&lt;prefix&gt;. A prefix in S3 is a string of characters at the beginning of an object key name used to organize the objects that you store in your S3 buckets. For example, object key names that start with the engineering/ prefix or object key names that start with the marketing/campaigns/ prefix.
+     */
+    LocationScope?: S3Prefix;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role for the registered location. S3 Access Grants assumes this role to manage access to the registered location. 
+     */
+    IAMRoleArn?: IAMRoleArn;
+  }
+  export interface ListAccessGrantsLocationsRequest {
+    /**
+     * The ID of the Amazon Web Services account that is making this request.
+     */
+    AccountId: AccountId;
+    /**
+     * A pagination token to request the next page of results. Pass this value into a subsequent List Access Grants Locations request in order to retrieve the next page of results.
+     */
+    NextToken?: ContinuationToken;
+    /**
+     * The maximum number of access grants that you would like returned in the List Access Grants response. If the results include the pagination token NextToken, make another call using the NextToken to determine if there are more results.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The S3 path to the location that you are registering. The location scope can be the default S3 location s3://, the S3 path to a bucket s3://&lt;bucket&gt;, or the S3 path to a bucket and prefix s3://&lt;bucket&gt;/&lt;prefix&gt;. A prefix in S3 is a string of characters at the beginning of an object key name used to organize the objects that you store in your S3 buckets. For example, object key names that start with the engineering/ prefix or object key names that start with the marketing/campaigns/ prefix.
+     */
+    LocationScope?: S3Prefix;
+  }
+  export interface ListAccessGrantsLocationsResult {
+    /**
+     * A pagination token to request the next page of results. Pass this value into a subsequent List Access Grants Locations request in order to retrieve the next page of results.
+     */
+    NextToken?: ContinuationToken;
+    /**
+     * A container for a list of registered locations in an S3 Access Grants instance.
+     */
+    AccessGrantsLocationsList?: AccessGrantsLocationsList;
+  }
+  export interface ListAccessGrantsRequest {
+    /**
+     * The ID of the Amazon Web Services account that is making this request.
+     */
+    AccountId: AccountId;
+    /**
+     * A pagination token to request the next page of results. Pass this value into a subsequent List Access Grants request in order to retrieve the next page of results.
+     */
+    NextToken?: ContinuationToken;
+    /**
+     * The maximum number of access grants that you would like returned in the List Access Grants response. If the results include the pagination token NextToken, make another call using the NextToken to determine if there are more results.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The type of the grantee to which access has been granted. It can be one of the following values:    IAM - An IAM user or role.    DIRECTORY_USER - Your corporate directory user. You can use this option if you have added your corporate identity directory to IAM Identity Center and associated the IAM Identity Center instance with your S3 Access Grants instance.    DIRECTORY_GROUP - Your corporate directory group. You can use this option if you have added your corporate identity directory to IAM Identity Center and associated the IAM Identity Center instance with your S3 Access Grants instance.  
+     */
+    GranteeType?: GranteeType;
+    /**
+     * The unique identifer of the Grantee. If the grantee type is IAM, the identifier is the IAM Amazon Resource Name (ARN) of the user or role. If the grantee type is a directory user or group, the identifier is 128-bit universally unique identifier (UUID) in the format a1b2c3d4-5678-90ab-cdef-EXAMPLE11111. You can obtain this UUID from your Amazon Web Services IAM Identity Center instance.
+     */
+    GranteeIdentifier?: GranteeIdentifier;
+    /**
+     * The type of permission granted to your S3 data, which can be set to one of the following values:    READ – Grant read-only access to the S3 data.    WRITE – Grant write-only access to the S3 data.    READWRITE – Grant both read and write access to the S3 data.  
+     */
+    Permission?: Permission;
+    /**
+     * The S3 path of the data to which you are granting access. It is the result of appending the Subprefix to the location scope.
+     */
+    GrantScope?: S3Prefix;
+    /**
+     * The Amazon Resource Name (ARN) of an Amazon Web Services IAM Identity Center application associated with your Identity Center instance. If the grant includes an application ARN, the grantee can only access the S3 data through this application. 
+     */
+    ApplicationArn?: IdentityCenterApplicationArn;
+  }
+  export interface ListAccessGrantsResult {
+    /**
+     * A pagination token to request the next page of results. Pass this value into a subsequent List Access Grants request in order to retrieve the next page of results.
+     */
+    NextToken?: ContinuationToken;
+    /**
+     * A container for a list of grants in an S3 Access Grants instance.
+     */
+    AccessGrantsList?: AccessGrantsList;
+  }
   export interface ListAccessPointsForObjectLambdaRequest {
     /**
      * The account ID for the account that owns the specified Object Lambda Access Point.
@@ -2349,7 +3105,7 @@ declare namespace S3Control {
      */
     AccountId: AccountId;
     /**
-     *  The Amazon Resource Name (ARN) of the S3 resource that you want to list the tags for. 
+     *  The Amazon Resource Name (ARN) of the S3 resource that you want to list the tags for. The tagged resource can be an S3 Storage Lens group or S3 Access Grants instance, registered location, or grant. 
      */
     ResourceArn: S3ResourceArn;
   }
@@ -2577,9 +3333,12 @@ declare namespace S3Control {
   export type ObjectSizeLessThanBytes = number;
   export type ObjectSizeValue = number;
   export type OperationName = "LambdaInvoke"|"S3PutObjectCopy"|"S3PutObjectAcl"|"S3PutObjectTagging"|"S3DeleteObjectTagging"|"S3InitiateRestoreObject"|"S3PutObjectLegalHold"|"S3PutObjectRetention"|"S3ReplicateObject"|string;
+  export type Organization = string;
   export type OutputSchemaVersion = "V_1"|string;
   export type OwnerOverride = "Destination"|string;
+  export type Permission = "READ"|"WRITE"|"READWRITE"|string;
   export type Policy = string;
+  export type PolicyDocument = string;
   export interface PolicyStatus {
     /**
      * 
@@ -2601,6 +3360,7 @@ declare namespace S3Control {
     SelectionCriteria?: SelectionCriteria;
   }
   export type Priority = number;
+  export type Privilege = "Minimal"|"Default"|string;
   export interface ProposedMultiRegionAccessPointPolicy {
     /**
      * The details of the proposed policy.
@@ -2626,6 +3386,34 @@ declare namespace S3Control {
     RestrictPublicBuckets?: Setting;
   }
   export type PublicAccessBlockEnabled = boolean;
+  export interface PutAccessGrantsInstanceResourcePolicyRequest {
+    /**
+     * The ID of the Amazon Web Services account that is making this request.
+     */
+    AccountId: AccountId;
+    /**
+     * The resource policy of the S3 Access Grants instance that you are updating.
+     */
+    Policy: PolicyDocument;
+    /**
+     * The Organization of the resource policy of the S3 Access Grants instance.
+     */
+    Organization?: Organization;
+  }
+  export interface PutAccessGrantsInstanceResourcePolicyResult {
+    /**
+     * The updated resource policy of the S3 Access Grants instance.
+     */
+    Policy?: PolicyDocument;
+    /**
+     * The Organization of the resource policy of the S3 Access Grants instance.
+     */
+    Organization?: Organization;
+    /**
+     * The date and time when you created the S3 Access Grants instance resource policy. 
+     */
+    CreatedAt?: CreationTimestamp;
+  }
   export interface PutAccessPointConfigurationForObjectLambdaRequest {
     /**
      * The account ID for the account that owns the specified Object Lambda Access Point.
@@ -3280,6 +4068,8 @@ declare namespace S3Control {
   }
   export type S3ObjectVersionId = string;
   export type S3Permission = "FULL_CONTROL"|"READ"|"WRITE"|"READ_ACP"|"WRITE_ACP"|string;
+  export type S3Prefix = string;
+  export type S3PrefixType = "Object"|string;
   export type S3RegionalBucketArn = string;
   export interface S3ReplicateObjectOperation {
   }
@@ -3353,6 +4143,7 @@ declare namespace S3Control {
   }
   export interface SSES3Encryption {
   }
+  export type SecretAccessKey = string;
   export interface SelectionCriteria {
     /**
      * A container for the delimiter of the selection criteria being used.
@@ -3367,6 +4158,7 @@ declare namespace S3Control {
      */
     MinStorageBytesPercentage?: MinStorageBytesPercentage;
   }
+  export type SessionToken = string;
   export type Setting = boolean;
   export interface SourceSelectionCriteria {
     /**
@@ -3592,11 +4384,11 @@ declare namespace S3Control {
   export type SuspendedDate = Date;
   export interface Tag {
     /**
-     *  The tag key for your Amazon Web Services resource. A tag key can be up to 128 Unicode characters in length and is case-sensitive. System created tags that begin with aws: aren’t supported. 
+     * The key of the key-value pair of a tag added to your Amazon Web Services resource. A tag key can be up to 128 Unicode characters in length and is case-sensitive. System created tags that begin with aws: aren’t supported. 
      */
     Key: TagKeyString;
     /**
-     *  The tag value for your Amazon Web Services resource. A tag value can be up to 256 Unicode characters in length and is case-sensitive. 
+     *  The value of the key-value pair of a tag added to your Amazon Web Services resource. A tag value can be up to 256 Unicode characters in length and is case-sensitive. 
      */
     Value: TagValueString;
   }
@@ -3605,11 +4397,11 @@ declare namespace S3Control {
   export type TagList = Tag[];
   export interface TagResourceRequest {
     /**
-     *  The Amazon Web Services account ID that created the S3 resource that you're trying to add tags to. 
+     *  The Amazon Web Services account ID that created the S3 resource that you're trying to add tags to or the requester's account ID. 
      */
     AccountId: AccountId;
     /**
-     *  The Amazon Resource Name (ARN) of the S3 resource that you're trying to add tags to. 
+     * The Amazon Resource Name (ARN) of the S3 resource that you're trying to add tags to. The tagged resource can be an S3 Storage Lens group or S3 Access Grants instance, registered location, or grant.
      */
     ResourceArn: S3ResourceArn;
     /**
@@ -3650,15 +4442,51 @@ declare namespace S3Control {
      */
     AccountId: AccountId;
     /**
-     *  The Amazon Resource Name (ARN) of the S3 resource that you want to remove the resource tags from. 
+     *  The Amazon Resource Name (ARN) of the S3 resource that you're trying to remove the tags from. 
      */
     ResourceArn: S3ResourceArn;
     /**
-     *  The tag key pair of the S3 resource tag that you're trying to remove. 
+     *  The array of tag key-value pairs that you're trying to remove from of the S3 resource. 
      */
     TagKeys: TagKeyList;
   }
   export interface UntagResourceResult {
+  }
+  export interface UpdateAccessGrantsLocationRequest {
+    /**
+     * The ID of the Amazon Web Services account that is making this request.
+     */
+    AccountId: AccountId;
+    /**
+     * The ID of the registered location that you are updating. S3 Access Grants assigns this ID when you register the location. S3 Access Grants assigns the ID default to the default location s3:// and assigns an auto-generated ID to other locations that you register.  The ID of the registered location to which you are granting access. S3 Access Grants assigned this ID when you registered the location. S3 Access Grants assigns the ID default to the default location s3:// and assigns an auto-generated ID to other locations that you register.  If you are passing the default location, you cannot create an access grant for the entire default location. You must also specify a bucket or a bucket and prefix in the Subprefix field. 
+     */
+    AccessGrantsLocationId: AccessGrantsLocationId;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role for the registered location. S3 Access Grants assumes this role to manage access to the registered location. 
+     */
+    IAMRoleArn: IAMRoleArn;
+  }
+  export interface UpdateAccessGrantsLocationResult {
+    /**
+     * The date and time when you registered the location. 
+     */
+    CreatedAt?: CreationTimestamp;
+    /**
+     * The ID of the registered location to which you are granting access. S3 Access Grants assigned this ID when you registered the location. S3 Access Grants assigns the ID default to the default location s3:// and assigns an auto-generated ID to other locations that you register. 
+     */
+    AccessGrantsLocationId?: AccessGrantsLocationId;
+    /**
+     * The Amazon Resource Name (ARN) of the registered location that you are updating. 
+     */
+    AccessGrantsLocationArn?: AccessGrantsLocationArn;
+    /**
+     * The S3 URI path of the location that you are updating. You cannot update the scope of the registered location. The location scope can be the default S3 location s3://, the S3 path to a bucket s3://&lt;bucket&gt;, or the S3 path to a bucket and prefix s3://&lt;bucket&gt;/&lt;prefix&gt;. 
+     */
+    LocationScope?: S3Prefix;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role of the registered location. S3 Access Grants assumes this role to manage access to the registered location. 
+     */
+    IAMRoleArn?: IAMRoleArn;
   }
   export interface UpdateJobPriorityRequest {
     /**

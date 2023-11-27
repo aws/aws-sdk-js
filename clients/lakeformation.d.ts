@@ -77,6 +77,14 @@ declare class LakeFormation extends Service {
    */
   createLFTag(callback?: (err: AWSError, data: LakeFormation.Types.CreateLFTagResponse) => void): Request<LakeFormation.Types.CreateLFTagResponse, AWSError>;
   /**
+   * Creates an IAM Identity Center connection with Lake Formation to allow IAM Identity Center users and groups to access Data Catalog resources.
+   */
+  createLakeFormationIdentityCenterConfiguration(params: LakeFormation.Types.CreateLakeFormationIdentityCenterConfigurationRequest, callback?: (err: AWSError, data: LakeFormation.Types.CreateLakeFormationIdentityCenterConfigurationResponse) => void): Request<LakeFormation.Types.CreateLakeFormationIdentityCenterConfigurationResponse, AWSError>;
+  /**
+   * Creates an IAM Identity Center connection with Lake Formation to allow IAM Identity Center users and groups to access Data Catalog resources.
+   */
+  createLakeFormationIdentityCenterConfiguration(callback?: (err: AWSError, data: LakeFormation.Types.CreateLakeFormationIdentityCenterConfigurationResponse) => void): Request<LakeFormation.Types.CreateLakeFormationIdentityCenterConfigurationResponse, AWSError>;
+  /**
    * Enforce Lake Formation permissions for the given databases, tables, and principals.
    */
   createLakeFormationOptIn(params: LakeFormation.Types.CreateLakeFormationOptInRequest, callback?: (err: AWSError, data: LakeFormation.Types.CreateLakeFormationOptInResponse) => void): Request<LakeFormation.Types.CreateLakeFormationOptInResponse, AWSError>;
@@ -101,6 +109,14 @@ declare class LakeFormation extends Service {
    */
   deleteLFTag(callback?: (err: AWSError, data: LakeFormation.Types.DeleteLFTagResponse) => void): Request<LakeFormation.Types.DeleteLFTagResponse, AWSError>;
   /**
+   * Deletes an IAM Identity Center connection with Lake Formation.
+   */
+  deleteLakeFormationIdentityCenterConfiguration(params: LakeFormation.Types.DeleteLakeFormationIdentityCenterConfigurationRequest, callback?: (err: AWSError, data: LakeFormation.Types.DeleteLakeFormationIdentityCenterConfigurationResponse) => void): Request<LakeFormation.Types.DeleteLakeFormationIdentityCenterConfigurationResponse, AWSError>;
+  /**
+   * Deletes an IAM Identity Center connection with Lake Formation.
+   */
+  deleteLakeFormationIdentityCenterConfiguration(callback?: (err: AWSError, data: LakeFormation.Types.DeleteLakeFormationIdentityCenterConfigurationResponse) => void): Request<LakeFormation.Types.DeleteLakeFormationIdentityCenterConfigurationResponse, AWSError>;
+  /**
    * Remove the Lake Formation permissions enforcement of the given databases, tables, and principals.
    */
   deleteLakeFormationOptIn(params: LakeFormation.Types.DeleteLakeFormationOptInRequest, callback?: (err: AWSError, data: LakeFormation.Types.DeleteLakeFormationOptInResponse) => void): Request<LakeFormation.Types.DeleteLakeFormationOptInResponse, AWSError>;
@@ -124,6 +140,14 @@ declare class LakeFormation extends Service {
    * Deregisters the resource as managed by the Data Catalog. When you deregister a path, Lake Formation removes the path from the inline policy attached to your service-linked role.
    */
   deregisterResource(callback?: (err: AWSError, data: LakeFormation.Types.DeregisterResourceResponse) => void): Request<LakeFormation.Types.DeregisterResourceResponse, AWSError>;
+  /**
+   * Retrieves the instance ARN and application ARN for the connection.
+   */
+  describeLakeFormationIdentityCenterConfiguration(params: LakeFormation.Types.DescribeLakeFormationIdentityCenterConfigurationRequest, callback?: (err: AWSError, data: LakeFormation.Types.DescribeLakeFormationIdentityCenterConfigurationResponse) => void): Request<LakeFormation.Types.DescribeLakeFormationIdentityCenterConfigurationResponse, AWSError>;
+  /**
+   * Retrieves the instance ARN and application ARN for the connection.
+   */
+  describeLakeFormationIdentityCenterConfiguration(callback?: (err: AWSError, data: LakeFormation.Types.DescribeLakeFormationIdentityCenterConfigurationResponse) => void): Request<LakeFormation.Types.DescribeLakeFormationIdentityCenterConfigurationResponse, AWSError>;
   /**
    * Retrieves the current data access role for the given resource registered in Lake Formation.
    */
@@ -389,6 +413,14 @@ declare class LakeFormation extends Service {
    */
   updateLFTag(callback?: (err: AWSError, data: LakeFormation.Types.UpdateLFTagResponse) => void): Request<LakeFormation.Types.UpdateLFTagResponse, AWSError>;
   /**
+   * Updates the IAM Identity Center connection parameters.
+   */
+  updateLakeFormationIdentityCenterConfiguration(params: LakeFormation.Types.UpdateLakeFormationIdentityCenterConfigurationRequest, callback?: (err: AWSError, data: LakeFormation.Types.UpdateLakeFormationIdentityCenterConfigurationResponse) => void): Request<LakeFormation.Types.UpdateLakeFormationIdentityCenterConfigurationResponse, AWSError>;
+  /**
+   * Updates the IAM Identity Center connection parameters.
+   */
+  updateLakeFormationIdentityCenterConfiguration(callback?: (err: AWSError, data: LakeFormation.Types.UpdateLakeFormationIdentityCenterConfigurationResponse) => void): Request<LakeFormation.Types.UpdateLakeFormationIdentityCenterConfigurationResponse, AWSError>;
+  /**
    * Updates the data access role used for vending access to the given (registered) resource in Lake Formation. 
    */
   updateResource(params: LakeFormation.Types.UpdateResourceRequest, callback?: (err: AWSError, data: LakeFormation.Types.UpdateResourceResponse) => void): Request<LakeFormation.Types.UpdateResourceResponse, AWSError>;
@@ -455,6 +487,8 @@ declare namespace LakeFormation {
   }
   export interface AllRowsWildcard {
   }
+  export type ApplicationArn = string;
+  export type ApplicationStatus = "ENABLED"|"DISABLED"|string;
   export interface AssumeDecoratedRoleWithSAMLRequest {
     /**
      * A SAML assertion consisting of an assertion statement for the user who needs temporary credentials. This must match the SAML assertion that was issued to IAM. This must be Base64 encoded.
@@ -632,6 +666,26 @@ declare namespace LakeFormation {
   }
   export interface CreateLFTagResponse {
   }
+  export interface CreateLakeFormationIdentityCenterConfigurationRequest {
+    /**
+     * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, view definitions, and other control information to manage your Lake Formation environment.
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The ARN of the IAM Identity Center instance for which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     */
+    InstanceArn?: IdentityCenterInstanceArn;
+    /**
+     * A list of the account IDs of Amazon Web Services accounts of third-party applications that are allowed to to access data managed by Lake Formation.
+     */
+    ExternalFiltering?: ExternalFilteringConfiguration;
+  }
+  export interface CreateLakeFormationIdentityCenterConfigurationResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the integrated application.
+     */
+    ApplicationArn?: ApplicationArn;
+  }
   export interface CreateLakeFormationOptInRequest {
     Principal: DataLakePrincipal;
     Resource: Resource;
@@ -719,7 +773,7 @@ declare namespace LakeFormation {
      */
     CreateTableDefaultPermissions?: PrincipalPermissionsList;
     /**
-     * A key-value map that provides an additional configuration on your data lake. CrossAccountVersion is the key you can configure in the Parameters field. Accepted values for the CrossAccountVersion key are 1, 2, and 3.
+     * A key-value map that provides an additional configuration on your data lake. CROSS_ACCOUNT_VERSION is the key you can configure in the Parameters field. Accepted values for the CrossAccountVersion key are 1, 2, 3, and 4.
      */
     Parameters?: ParametersMap;
     /**
@@ -797,6 +851,14 @@ declare namespace LakeFormation {
   }
   export interface DeleteLFTagResponse {
   }
+  export interface DeleteLakeFormationIdentityCenterConfigurationRequest {
+    /**
+     * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, view definition, and other control information to manage your Lake Formation environment.
+     */
+    CatalogId?: CatalogIdString;
+  }
+  export interface DeleteLakeFormationIdentityCenterConfigurationResponse {
+  }
   export interface DeleteLakeFormationOptInRequest {
     Principal: DataLakePrincipal;
     Resource: Resource;
@@ -849,6 +911,30 @@ declare namespace LakeFormation {
   }
   export interface DeregisterResourceResponse {
   }
+  export interface DescribeLakeFormationIdentityCenterConfigurationRequest {
+    /**
+     * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment.
+     */
+    CatalogId?: CatalogIdString;
+  }
+  export interface DescribeLakeFormationIdentityCenterConfigurationResponse {
+    /**
+     * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment.
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The Amazon Resource Name (ARN) of the connection.
+     */
+    InstanceArn?: IdentityCenterInstanceArn;
+    /**
+     * The Amazon Resource Name (ARN) of the integrated application.
+     */
+    ApplicationArn?: ApplicationArn;
+    /**
+     * Indicates if external filtering is enabled.
+     */
+    ExternalFiltering?: ExternalFilteringConfiguration;
+  }
   export interface DescribeResourceRequest {
     /**
      * The resource ARN.
@@ -881,6 +967,7 @@ declare namespace LakeFormation {
     ResourceShare?: ResourceShareList;
   }
   export type ETagString = string;
+  export type EnableStatus = "ENABLED"|"DISABLED"|string;
   export interface ErrorDetail {
     /**
      * The code associated with this error.
@@ -915,6 +1002,16 @@ declare namespace LakeFormation {
     TransactionId?: TransactionIdString;
   }
   export interface ExtendTransactionResponse {
+  }
+  export interface ExternalFilteringConfiguration {
+    /**
+     * Allows to enable or disable the third-party applications that are allowed to access data managed by Lake Formation.
+     */
+    Status: EnableStatus;
+    /**
+     * List of third-party application ARNs integrated with Lake Formation.
+     */
+    AuthorizedTargets: ScopeTargets;
   }
   export type FieldNameString = "RESOURCE_ARN"|"ROLE_ARN"|"LAST_MODIFIED"|string;
   export interface FilterCondition {
@@ -1292,6 +1389,7 @@ declare namespace LakeFormation {
   export type IAMRoleArn = string;
   export type IAMSAMLProviderArn = string;
   export type Identifier = string;
+  export type IdentityCenterInstanceArn = string;
   export type Integer = number;
   export type KeyString = string;
   export interface LFTag {
@@ -1855,6 +1953,8 @@ declare namespace LakeFormation {
     AllRowsWildcard?: AllRowsWildcard;
   }
   export type SAMLAssertionString = string;
+  export type ScopeTarget = string;
+  export type ScopeTargets = ScopeTarget[];
   export interface SearchDatabasesByLFTagsRequest {
     /**
      * A continuation token, if this is not the first call to retrieve this list.
@@ -1904,7 +2004,7 @@ declare namespace LakeFormation {
   }
   export interface SearchTablesByLFTagsResponse {
     /**
-     * A continuation token, present if the current list segment is not the last.
+     * A continuation token, present if the current list segment is not the last. On the first run, if you include a not null (a value) token you can get empty pages.
      */
     NextToken?: Token;
     /**
@@ -2117,6 +2217,22 @@ declare namespace LakeFormation {
     TagValuesToAdd?: TagValueList;
   }
   export interface UpdateLFTagResponse {
+  }
+  export interface UpdateLakeFormationIdentityCenterConfigurationRequest {
+    /**
+     * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, view definitions, and other control information to manage your Lake Formation environment.
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * Allows to enable or disable the IAM Identity Center connection.
+     */
+    ApplicationStatus?: ApplicationStatus;
+    /**
+     * A list of the account IDs of Amazon Web Services accounts of third-party applications that are allowed to access data managed by Lake Formation.
+     */
+    ExternalFiltering?: ExternalFilteringConfiguration;
+  }
+  export interface UpdateLakeFormationIdentityCenterConfigurationResponse {
   }
   export interface UpdateResourceRequest {
     /**

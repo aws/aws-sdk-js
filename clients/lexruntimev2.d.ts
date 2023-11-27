@@ -146,7 +146,7 @@ declare namespace LexRuntimeV2 {
   }
   export interface DialogAction {
     /**
-     * The next action that the bot should take in its interaction with the user. The possible values are:    Close - Indicates that there will not be a response from the user. For example, the statement "Your order has been placed" does not require a response.    ConfirmIntent - The next action is asking the user if the intent is complete and ready to be fulfilled. This is a yes/no question such as "Place the order?"    Delegate - The next action is determined by Amazon Lex V2.    ElicitIntent - The next action is to elicit an intent from the user.    ElicitSlot - The next action is to elicit a slot value from the user.  
+     * The next action that the bot should take in its interaction with the user. The following values are possible:    Close – Indicates that there will not be a response from the user. For example, the statement "Your order has been placed" does not require a response.    ConfirmIntent – The next action is asking the user if the intent is complete and ready to be fulfilled. This is a yes/no question such as "Place the order?"    Delegate – The next action is determined by Amazon Lex V2.    ElicitIntent – The next action is to elicit an intent from the user.    ElicitSlot – The next action is to elicit a slot value from the user.  
      */
     type: DialogActionType;
     /**
@@ -238,11 +238,11 @@ declare namespace LexRuntimeV2 {
      */
     slots?: Slots;
     /**
-     * Contains fulfillment information for the intent. 
+     * Indicates the fulfillment state for the intent. The meanings of each value are as follows:    Failed – The bot failed to fulfill the intent.    Fulfilled – The bot has completed fulfillment of the intent.    FulfillmentInProgress – The bot is in the middle of fulfilling the intent.    InProgress – The bot is in the middle of eliciting the slot values that are necessary to fulfill the intent.    ReadyForFulfillment – The bot has elicited all the slot values for the intent and is ready to fulfill the intent.    Waiting – The bot is waiting for a response from the user (limited to streaming conversations).  
      */
     state?: IntentState;
     /**
-     * Contains information about whether fulfillment of the intent has been confirmed.
+     * Indicates whether the intent has been Confirmed, Denied, or None if the confirmation stage has not yet been reached.
      */
     confirmationState?: ConfirmationState;
   }
@@ -260,7 +260,12 @@ declare namespace LexRuntimeV2 {
      * A list of intents that might satisfy the user's utterance. The intents are ordered by the confidence score.
      */
     intent?: Intent;
+    /**
+     * Specifies the service that interpreted the input.
+     */
+    interpretationSource?: InterpretationSource;
   }
+  export type InterpretationSource = "Bedrock"|"Lex"|string;
   export type Interpretations = Interpretation[];
   export type LocaleId = string;
   export interface Message {
@@ -323,11 +328,11 @@ declare namespace LexRuntimeV2 {
      */
     messages?: NonEmptyString;
     /**
-     * Represents the current state of the dialog between the user and the bot. Use this to determine the progress of the conversation and what the next action may be.
+     * A base-64-encoded gzipped field that represents the current state of the dialog between the user and the bot. Use this to determine the progress of the conversation and what the next action may be.
      */
     sessionState?: NonEmptyString;
     /**
-     * Request-specific information passed between the client application and Amazon Lex V2. These are the same as the requestAttribute parameter in the call to the PutSession operation.
+     * A base-64-encoded gzipped field that provides request-specific information passed between the client application and Amazon Lex V2. These are the same as the requestAttribute parameter in the call to the PutSession operation.
      */
     requestAttributes?: NonEmptyString;
     /**
@@ -435,7 +440,7 @@ declare namespace LexRuntimeV2 {
   }
   export interface RecognizeUtteranceResponse {
     /**
-     * Indicates whether the input mode to the operation was text or speech. 
+     * Indicates whether the input mode to the operation was text, speech, or from a touch-tone keypad. 
      */
     inputMode?: NonEmptyString;
     /**
@@ -592,15 +597,15 @@ declare namespace LexRuntimeV2 {
   export type Text = string;
   export interface Value {
     /**
-     * The text of the utterance from the user that was entered for the slot.
+     * The part of the user's response to the slot elicitation that Amazon Lex V2 determines is relevant to the slot value.
      */
     originalValue?: NonEmptyString;
     /**
-     * The value that Amazon Lex V2 determines for the slot. The actual value depends on the setting of the value selection strategy for the bot. You can choose to use the value entered by the user, or you can have Amazon Lex V2 choose the first value in the resolvedValues list.
+     * The value that Amazon Lex V2 determines for the slot, given the user input. The actual value depends on the setting of the value selection strategy for the bot. You can choose to use the value entered by the user, or you can have Amazon Lex V2 choose the first value in the resolvedValues list.
      */
     interpretedValue: NonEmptyString;
     /**
-     * A list of additional values that have been recognized for the slot.
+     * A list of values that Amazon Lex V2 determines are possible resolutions for the user input. The first value matches the interpretedValue.
      */
     resolvedValues?: StringList;
   }

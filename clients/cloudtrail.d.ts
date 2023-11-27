@@ -60,11 +60,11 @@ declare class CloudTrail extends Service {
    */
   deleteChannel(callback?: (err: AWSError, data: CloudTrail.Types.DeleteChannelResponse) => void): Request<CloudTrail.Types.DeleteChannelResponse, AWSError>;
   /**
-   * Disables the event data store specified by EventDataStore, which accepts an event data store ARN. After you run DeleteEventDataStore, the event data store enters a PENDING_DELETION state, and is automatically deleted after a wait period of seven days. TerminationProtectionEnabled must be set to False on the event data store; this operation cannot work if TerminationProtectionEnabled is True. After you run DeleteEventDataStore on an event data store, you cannot run ListQueries, DescribeQuery, or GetQueryResults on queries that are using an event data store in a PENDING_DELETION state. An event data store in the PENDING_DELETION state does not incur costs.
+   * Disables the event data store specified by EventDataStore, which accepts an event data store ARN. After you run DeleteEventDataStore, the event data store enters a PENDING_DELETION state, and is automatically deleted after a wait period of seven days. TerminationProtectionEnabled must be set to False on the event data store and the FederationStatus must be DISABLED. You cannot delete an event data store if TerminationProtectionEnabled is True or the FederationStatus is ENABLED. After you run DeleteEventDataStore on an event data store, you cannot run ListQueries, DescribeQuery, or GetQueryResults on queries that are using an event data store in a PENDING_DELETION state. An event data store in the PENDING_DELETION state does not incur costs.
    */
   deleteEventDataStore(params: CloudTrail.Types.DeleteEventDataStoreRequest, callback?: (err: AWSError, data: CloudTrail.Types.DeleteEventDataStoreResponse) => void): Request<CloudTrail.Types.DeleteEventDataStoreResponse, AWSError>;
   /**
-   * Disables the event data store specified by EventDataStore, which accepts an event data store ARN. After you run DeleteEventDataStore, the event data store enters a PENDING_DELETION state, and is automatically deleted after a wait period of seven days. TerminationProtectionEnabled must be set to False on the event data store; this operation cannot work if TerminationProtectionEnabled is True. After you run DeleteEventDataStore on an event data store, you cannot run ListQueries, DescribeQuery, or GetQueryResults on queries that are using an event data store in a PENDING_DELETION state. An event data store in the PENDING_DELETION state does not incur costs.
+   * Disables the event data store specified by EventDataStore, which accepts an event data store ARN. After you run DeleteEventDataStore, the event data store enters a PENDING_DELETION state, and is automatically deleted after a wait period of seven days. TerminationProtectionEnabled must be set to False on the event data store and the FederationStatus must be DISABLED. You cannot delete an event data store if TerminationProtectionEnabled is True or the FederationStatus is ENABLED. After you run DeleteEventDataStore on an event data store, you cannot run ListQueries, DescribeQuery, or GetQueryResults on queries that are using an event data store in a PENDING_DELETION state. An event data store in the PENDING_DELETION state does not incur costs.
    */
   deleteEventDataStore(callback?: (err: AWSError, data: CloudTrail.Types.DeleteEventDataStoreResponse) => void): Request<CloudTrail.Types.DeleteEventDataStoreResponse, AWSError>;
   /**
@@ -107,6 +107,22 @@ declare class CloudTrail extends Service {
    * Retrieves settings for one or more trails associated with the current Region for your account.
    */
   describeTrails(callback?: (err: AWSError, data: CloudTrail.Types.DescribeTrailsResponse) => void): Request<CloudTrail.Types.DescribeTrailsResponse, AWSError>;
+  /**
+   *  Disables Lake query federation on the specified event data store. When you disable federation, CloudTrail removes the metadata associated with the federated event data store in the Glue Data Catalog and removes registration for the federation role ARN and event data store in Lake Formation. No CloudTrail Lake data is deleted when you disable federation. 
+   */
+  disableFederation(params: CloudTrail.Types.DisableFederationRequest, callback?: (err: AWSError, data: CloudTrail.Types.DisableFederationResponse) => void): Request<CloudTrail.Types.DisableFederationResponse, AWSError>;
+  /**
+   *  Disables Lake query federation on the specified event data store. When you disable federation, CloudTrail removes the metadata associated with the federated event data store in the Glue Data Catalog and removes registration for the federation role ARN and event data store in Lake Formation. No CloudTrail Lake data is deleted when you disable federation. 
+   */
+  disableFederation(callback?: (err: AWSError, data: CloudTrail.Types.DisableFederationResponse) => void): Request<CloudTrail.Types.DisableFederationResponse, AWSError>;
+  /**
+   *  Enables Lake query federation on the specified event data store. Federating an event data store lets you view the metadata associated with the event data store in the Glue Data Catalog and run SQL queries against your event data using Amazon Athena. The table metadata stored in the Glue Data Catalog lets the Athena query engine know how to find, read, and process the data that you want to query. When you enable Lake query federation, CloudTrail creates a federated database named aws:cloudtrail (if the database doesn't already exist) and a federated table in the Glue Data Catalog. The event data store ID is used for the table name. CloudTrail registers the role ARN and event data store in Lake Formation, the service responsible for revoking or granting permissions to the federated resources in the Glue Data Catalog.  For more information about Lake query federation, see Federate an event data store.
+   */
+  enableFederation(params: CloudTrail.Types.EnableFederationRequest, callback?: (err: AWSError, data: CloudTrail.Types.EnableFederationResponse) => void): Request<CloudTrail.Types.EnableFederationResponse, AWSError>;
+  /**
+   *  Enables Lake query federation on the specified event data store. Federating an event data store lets you view the metadata associated with the event data store in the Glue Data Catalog and run SQL queries against your event data using Amazon Athena. The table metadata stored in the Glue Data Catalog lets the Athena query engine know how to find, read, and process the data that you want to query. When you enable Lake query federation, CloudTrail creates a federated database named aws:cloudtrail (if the database doesn't already exist) and a federated table in the Glue Data Catalog. The event data store ID is used for the table name. CloudTrail registers the role ARN and event data store in Lake Formation, the service responsible for revoking or granting permissions to the federated resources in the Glue Data Catalog.  For more information about Lake query federation, see Federate an event data store.
+   */
+  enableFederation(callback?: (err: AWSError, data: CloudTrail.Types.EnableFederationResponse) => void): Request<CloudTrail.Types.EnableFederationResponse, AWSError>;
   /**
    *  Returns information about a specific channel. 
    */
@@ -824,6 +840,46 @@ declare namespace CloudTrail {
   }
   export type DestinationType = "EVENT_DATA_STORE"|"AWS_SERVICE"|string;
   export type Destinations = Destination[];
+  export interface DisableFederationRequest {
+    /**
+     *  The ARN (or ID suffix of the ARN) of the event data store for which you want to disable Lake query federation. 
+     */
+    EventDataStore: EventDataStoreArn;
+  }
+  export interface DisableFederationResponse {
+    /**
+     *  The ARN of the event data store for which you disabled Lake query federation. 
+     */
+    EventDataStoreArn?: EventDataStoreArn;
+    /**
+     *  The federation status. 
+     */
+    FederationStatus?: FederationStatus;
+  }
+  export interface EnableFederationRequest {
+    /**
+     * The ARN (or ID suffix of the ARN) of the event data store for which you want to enable Lake query federation.
+     */
+    EventDataStore: EventDataStoreArn;
+    /**
+     *  The ARN of the federation role to use for the event data store. Amazon Web Services services like Lake Formation use this federation role to access data for the federated event data store. The federation role must exist in your account and provide the required minimum permissions. 
+     */
+    FederationRoleArn: FederationRoleArn;
+  }
+  export interface EnableFederationResponse {
+    /**
+     *  The ARN of the event data store for which you enabled Lake query federation. 
+     */
+    EventDataStoreArn?: EventDataStoreArn;
+    /**
+     *  The federation status. 
+     */
+    FederationStatus?: FederationStatus;
+    /**
+     *  The ARN of the federation role. 
+     */
+    FederationRoleArn?: FederationRoleArn;
+  }
   export type ErrorMessage = string;
   export interface Event {
     /**
@@ -932,6 +988,8 @@ declare namespace CloudTrail {
   export type EventSelectors = EventSelector[];
   export type EventsList = Event[];
   export type ExcludeManagementEventSources = String[];
+  export type FederationRoleArn = string;
+  export type FederationStatus = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|string;
   export interface GetChannelRequest {
     /**
      * The ARN or UUID of a channel.
@@ -1019,6 +1077,14 @@ declare namespace CloudTrail {
      * The billing mode for the event data store.
      */
     BillingMode?: BillingMode;
+    /**
+     *  Indicates the Lake query federation status. The status is ENABLED if Lake query federation is enabled, or DISABLED if Lake query federation is disabled. You cannot delete an event data store if the FederationStatus is ENABLED. 
+     */
+    FederationStatus?: FederationStatus;
+    /**
+     *  If Lake query federation is enabled, provides the ARN of the federation role used to access the resources for the federated event data store. 
+     */
+    FederationRoleArn?: FederationRoleArn;
   }
   export interface GetEventSelectorsRequest {
     /**
@@ -2279,6 +2345,14 @@ declare namespace CloudTrail {
      * The billing mode for the event data store.
      */
     BillingMode?: BillingMode;
+    /**
+     *  Indicates the Lake query federation status. The status is ENABLED if Lake query federation is enabled, or DISABLED if Lake query federation is disabled. You cannot delete an event data store if the FederationStatus is ENABLED. 
+     */
+    FederationStatus?: FederationStatus;
+    /**
+     *  If Lake query federation is enabled, provides the ARN of the federation role used to access the resources for the federated event data store. 
+     */
+    FederationRoleArn?: FederationRoleArn;
   }
   export interface UpdateTrailRequest {
     /**

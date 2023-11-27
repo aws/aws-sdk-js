@@ -96,6 +96,14 @@ declare class Detective extends Service {
    */
   enableOrganizationAdminAccount(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Returns the investigation results of an investigation for a behavior graph. 
+   */
+  getInvestigation(params: Detective.Types.GetInvestigationRequest, callback?: (err: AWSError, data: Detective.Types.GetInvestigationResponse) => void): Request<Detective.Types.GetInvestigationResponse, AWSError>;
+  /**
+   * Returns the investigation results of an investigation for a behavior graph. 
+   */
+  getInvestigation(callback?: (err: AWSError, data: Detective.Types.GetInvestigationResponse) => void): Request<Detective.Types.GetInvestigationResponse, AWSError>;
+  /**
    * Returns the membership details for specified member accounts for a behavior graph.
    */
   getMembers(params: Detective.Types.GetMembersRequest, callback?: (err: AWSError, data: Detective.Types.GetMembersResponse) => void): Request<Detective.Types.GetMembersResponse, AWSError>;
@@ -119,6 +127,22 @@ declare class Detective extends Service {
    * Returns the list of behavior graphs that the calling account is an administrator account of. This operation can only be called by an administrator account. Because an account can currently only be the administrator of one behavior graph within a Region, the results always contain a single behavior graph.
    */
   listGraphs(callback?: (err: AWSError, data: Detective.Types.ListGraphsResponse) => void): Request<Detective.Types.ListGraphsResponse, AWSError>;
+  /**
+   * Get the indicators from an investigation
+   */
+  listIndicators(params: Detective.Types.ListIndicatorsRequest, callback?: (err: AWSError, data: Detective.Types.ListIndicatorsResponse) => void): Request<Detective.Types.ListIndicatorsResponse, AWSError>;
+  /**
+   * Get the indicators from an investigation
+   */
+  listIndicators(callback?: (err: AWSError, data: Detective.Types.ListIndicatorsResponse) => void): Request<Detective.Types.ListIndicatorsResponse, AWSError>;
+  /**
+   * List all Investigations.
+   */
+  listInvestigations(params: Detective.Types.ListInvestigationsRequest, callback?: (err: AWSError, data: Detective.Types.ListInvestigationsResponse) => void): Request<Detective.Types.ListInvestigationsResponse, AWSError>;
+  /**
+   * List all Investigations.
+   */
+  listInvestigations(callback?: (err: AWSError, data: Detective.Types.ListInvestigationsResponse) => void): Request<Detective.Types.ListInvestigationsResponse, AWSError>;
   /**
    * Retrieves the list of open and accepted behavior graph invitations for the member account. This operation can only be called by an invited member account. Open invitations are invitations that the member account has not responded to. The results do not include behavior graphs for which the member account declined the invitation. The results also do not include behavior graphs that the member account resigned from or was removed from.
    */
@@ -160,6 +184,14 @@ declare class Detective extends Service {
    */
   rejectInvitation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * initiate an investigation on an entity in a graph
+   */
+  startInvestigation(params: Detective.Types.StartInvestigationRequest, callback?: (err: AWSError, data: Detective.Types.StartInvestigationResponse) => void): Request<Detective.Types.StartInvestigationResponse, AWSError>;
+  /**
+   * initiate an investigation on an entity in a graph
+   */
+  startInvestigation(callback?: (err: AWSError, data: Detective.Types.StartInvestigationResponse) => void): Request<Detective.Types.StartInvestigationResponse, AWSError>;
+  /**
    * Sends a request to enable data ingest for a member account that has a status of ACCEPTED_BUT_DISABLED. For valid member accounts, the status is updated as follows.   If Detective enabled the member account, then the new status is ENABLED.   If Detective cannot enable the member account, the status remains ACCEPTED_BUT_DISABLED.   
    */
   startMonitoringMember(params: Detective.Types.StartMonitoringMemberRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -192,6 +224,14 @@ declare class Detective extends Service {
    */
   updateDatasourcePackages(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Update the state of an investigation.
+   */
+  updateInvestigationState(params: Detective.Types.UpdateInvestigationStateRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Update the state of an investigation.
+   */
+  updateInvestigationState(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Updates the configuration for the Organizations integration in the current Region. Can only be called by the Detective administrator account for the organization.
    */
   updateOrganizationConfiguration(params: Detective.Types.UpdateOrganizationConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -201,6 +241,9 @@ declare class Detective extends Service {
   updateOrganizationConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace Detective {
+  export type APIFailureCount = number;
+  export type APIName = string;
+  export type APISuccessCount = number;
   export interface AcceptInvitationRequest {
     /**
      * The ARN of the behavior graph that the member account is accepting the invitation for. The member account status in the behavior graph must be INVITED.
@@ -236,6 +279,8 @@ declare namespace Detective {
     DelegationTime?: Timestamp;
   }
   export type AdministratorList = Administrator[];
+  export type AiPaginationToken = string;
+  export type Aso = string;
   export interface BatchGetGraphMemberDatasourcesRequest {
     /**
      * The ARN of the behavior graph.
@@ -340,6 +385,16 @@ declare namespace Detective {
      */
     VolumeUsageUpdateTime?: Timestamp;
   }
+  export interface DateFilter {
+    /**
+     * A timestamp representing the start of the time period from when data is filtered, including the start date.
+     */
+    StartInclusive: Timestamp;
+    /**
+     * A timestamp representing the end date of the time period until when data is filtered , including the end date.
+     */
+    EndInclusive: Timestamp;
+  }
   export interface DeleteGraphRequest {
     /**
      * The ARN of the behavior graph to disable.
@@ -392,6 +447,93 @@ declare namespace Detective {
      */
     AccountId: AccountId;
   }
+  export type EntityArn = string;
+  export type EntityType = "IAM_ROLE"|"IAM_USER"|string;
+  export type Field = "SEVERITY"|"STATUS"|"CREATED_TIME"|string;
+  export interface FilterCriteria {
+    /**
+     * Filter the investigation results based on the severity.
+     */
+    Severity?: StringFilter;
+    /**
+     * Filter the investigation results based on the status.
+     */
+    Status?: StringFilter;
+    /**
+     * Filter the investigation results based on the state.
+     */
+    State?: StringFilter;
+    /**
+     * Filter the investigation results based on the Amazon Resource Name (ARN) of the entity.
+     */
+    EntityArn?: StringFilter;
+    /**
+     * Filter the investigation results based on when the investigation was created.
+     */
+    CreatedTime?: DateFilter;
+  }
+  export interface FlaggedIpAddressDetail {
+    /**
+     * IP address of the suspicious entity.
+     */
+    IpAddress?: IpAddress;
+    /**
+     * Details the reason the IP address was flagged as suspicious.
+     */
+    Reason?: Reason;
+  }
+  export interface GetInvestigationRequest {
+    /**
+     * The ARN of the behavior graph.
+     */
+    GraphArn: GraphArn;
+    /**
+     * The investigation ID of the investigation report.
+     */
+    InvestigationId: InvestigationId;
+  }
+  export interface GetInvestigationResponse {
+    /**
+     * The ARN of the behavior graph.
+     */
+    GraphArn?: GraphArn;
+    /**
+     * The investigation ID of the investigation report.
+     */
+    InvestigationId?: InvestigationId;
+    /**
+     * The unique Amazon Resource Name (ARN) of the IAM user and IAM role.
+     */
+    EntityArn?: EntityArn;
+    /**
+     * Type of entity. For example, Amazon Web Services accounts, such as IAM user and role.
+     */
+    EntityType?: EntityType;
+    /**
+     * The UTC time stamp of the creation time of the investigation report.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The start date and time for the scope time set to generate the investigation report.
+     */
+    ScopeStartTime?: Timestamp;
+    /**
+     * The data and time when the investigation began. The value is an UTC ISO8601 formatted string. For example, 2021-08-18T16:35:56.284Z.
+     */
+    ScopeEndTime?: Timestamp;
+    /**
+     * Status based on the completion status of the investigation.
+     */
+    Status?: Status;
+    /**
+     * Severity based on the likelihood and impact of the indicators of compromise discovered in the investigation.
+     */
+    Severity?: Severity;
+    /**
+     * The current state of the investigation. An archived investigation indicates you have completed reviewing the investigation.
+     */
+    State?: State;
+  }
   export interface GetMembersRequest {
     /**
      * The ARN of the behavior graph for which to request the member details.
@@ -425,7 +567,111 @@ declare namespace Detective {
   export type GraphArn = string;
   export type GraphArnList = GraphArn[];
   export type GraphList = Graph[];
+  export type HourlyTimeDelta = number;
+  export type Id = string;
+  export interface ImpossibleTravelDetail {
+    /**
+     * IP address where the resource was first used in the impossible travel
+     */
+    StartingIpAddress?: IpAddress;
+    /**
+     * IP address where the resource was last used in the impossible travel.
+     */
+    EndingIpAddress?: IpAddress;
+    /**
+     * Location where the resource was first used in the impossible travel
+     */
+    StartingLocation?: Location;
+    /**
+     * Location where the resource was last used in the impossible travel.
+     */
+    EndingLocation?: Location;
+    /**
+     * Returns the time difference between the first and last timestamp the resource was used.
+     */
+    HourlyTimeDelta?: HourlyTimeDelta;
+  }
+  export interface Indicator {
+    /**
+     * The type of indicator.
+     */
+    IndicatorType?: IndicatorType;
+    /**
+     * Details about the indicator of compromise.
+     */
+    IndicatorDetail?: IndicatorDetail;
+  }
+  export interface IndicatorDetail {
+    /**
+     * Details about the indicator of compromise.
+     */
+    TTPsObservedDetail?: TTPsObservedDetail;
+    /**
+     * Identifies unusual and impossible user activity for an account. 
+     */
+    ImpossibleTravelDetail?: ImpossibleTravelDetail;
+    /**
+     * Suspicious IP addresses that are flagged, which indicates critical or severe threats based on threat intelligence by Detective. This indicator is derived from AWS threat intelligence.
+     */
+    FlaggedIpAddressDetail?: FlaggedIpAddressDetail;
+    /**
+     * Contains details about the new geographic location.
+     */
+    NewGeolocationDetail?: NewGeolocationDetail;
+    /**
+     * Contains details about the new Autonomous System Organization (ASO).
+     */
+    NewAsoDetail?: NewAsoDetail;
+    /**
+     * Contains details about the new user agent.
+     */
+    NewUserAgentDetail?: NewUserAgentDetail;
+    /**
+     * Contains details about related findings.
+     */
+    RelatedFindingDetail?: RelatedFindingDetail;
+    /**
+     * Contains details about related finding groups.
+     */
+    RelatedFindingGroupDetail?: RelatedFindingGroupDetail;
+  }
+  export type IndicatorType = "TTP_OBSERVED"|"IMPOSSIBLE_TRAVEL"|"FLAGGED_IP_ADDRESS"|"NEW_GEOLOCATION"|"NEW_ASO"|"NEW_USER_AGENT"|"RELATED_FINDING"|"RELATED_FINDING_GROUP"|string;
+  export type Indicators = Indicator[];
+  export interface InvestigationDetail {
+    /**
+     * The investigation ID of the investigation report.
+     */
+    InvestigationId?: InvestigationId;
+    /**
+     * Severity based on the likelihood and impact of the indicators of compromise discovered in the investigation.
+     */
+    Severity?: Severity;
+    /**
+     * Status based on the completion status of the investigation.
+     */
+    Status?: Status;
+    /**
+     * The current state of the investigation. An archived investigation indicates you have completed reviewing the investigation.
+     */
+    State?: State;
+    /**
+     * The UTC time stamp of the creation time of the investigation report.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The unique Amazon Resource Name (ARN) of the IAM user and IAM role.
+     */
+    EntityArn?: EntityArn;
+    /**
+     * Type of entity. For example, Amazon Web Services accounts, such as IAM user and role.
+     */
+    EntityType?: EntityType;
+  }
+  export type InvestigationDetails = InvestigationDetail[];
+  export type InvestigationId = string;
   export type InvitationType = "INVITATION"|"ORGANIZATION"|string;
+  export type IpAddress = string;
+  export type IsNewForEntireAccount = boolean;
   export type LastIngestStateChangeDates = {[key: string]: TimestampForCollection};
   export interface ListDatasourcePackagesRequest {
     /**
@@ -470,6 +716,78 @@ declare namespace Detective {
      * If there are more behavior graphs remaining in the results, then this is the pagination token to use to request the next page of behavior graphs.
      */
     NextToken?: PaginationToken;
+  }
+  export interface ListIndicatorsRequest {
+    /**
+     * The ARN of the behavior graph.
+     */
+    GraphArn: GraphArn;
+    /**
+     * The investigation ID of the investigation report.
+     */
+    InvestigationId: InvestigationId;
+    /**
+     * See Detective investigations..
+     */
+    IndicatorType?: IndicatorType;
+    /**
+     * List if there are more results available. The value of nextToken is a unique pagination token for each page. Repeat the call using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return a Validation Exception error.
+     */
+    NextToken?: AiPaginationToken;
+    /**
+     * List the maximum number of indicators in a page.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListIndicatorsResponse {
+    /**
+     * The ARN of the behavior graph.
+     */
+    GraphArn?: GraphArn;
+    /**
+     * The investigation ID of the investigation report.
+     */
+    InvestigationId?: InvestigationId;
+    /**
+     * List if there are more results available. The value of nextToken is a unique pagination token for each page. Repeat the call using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return a Validation Exception error.
+     */
+    NextToken?: AiPaginationToken;
+    /**
+     * Indicators of compromise listed based on severity.
+     */
+    Indicators?: Indicators;
+  }
+  export interface ListInvestigationsRequest {
+    /**
+     * The ARN of the behavior graph.
+     */
+    GraphArn: GraphArn;
+    /**
+     * List if there are more results available. The value of nextToken is a unique pagination token for each page. Repeat the call using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return a Validation Exception error.
+     */
+    NextToken?: AiPaginationToken;
+    /**
+     * List the maximum number of investigations in a page.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Filter the investigation results based on a criteria.
+     */
+    FilterCriteria?: FilterCriteria;
+    /**
+     * Sorts the investigation results based on a criteria.
+     */
+    SortCriteria?: SortCriteria;
+  }
+  export interface ListInvestigationsResponse {
+    /**
+     * Investigations details lists the summary of uncommon behavior or malicious activity which indicates a compromise.
+     */
+    InvestigationDetails?: InvestigationDetails;
+    /**
+     * List if there are more results available. The value of nextToken is a unique pagination token for each page. Repeat the call using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.
+     */
+    NextToken?: AiPaginationToken;
   }
   export interface ListInvitationsRequest {
     /**
@@ -547,6 +865,8 @@ declare namespace Detective {
      */
     Tags?: TagMap;
   }
+  export type Location = string;
+  export type MaxResults = number;
   export interface MemberDetail {
     /**
      * The Amazon Web Services account identifier for the member account.
@@ -632,13 +952,105 @@ declare namespace Detective {
     DatasourcePackageIngestHistory?: DatasourcePackageIngestHistory;
   }
   export type MembershipDatasourcesList = MembershipDatasources[];
+  export interface NewAsoDetail {
+    /**
+     * Details about the new Autonomous System Organization (ASO).
+     */
+    Aso?: Aso;
+    /**
+     * Checks if the ASO is for new for the entire account.
+     */
+    IsNewForEntireAccount?: IsNewForEntireAccount;
+  }
+  export interface NewGeolocationDetail {
+    /**
+     * Location where the resource was accessed.
+     */
+    Location?: Location;
+    /**
+     * IP address using which the resource was accessed.
+     */
+    IpAddress?: IpAddress;
+    /**
+     * Checks if the gelocation is new for the entire account.
+     */
+    IsNewForEntireAccount?: IsNewForEntireAccount;
+  }
+  export interface NewUserAgentDetail {
+    /**
+     * New user agent which accessed the resource.
+     */
+    UserAgent?: UserAgent;
+    /**
+     * Checks if the user agent is new for the entire account.
+     */
+    IsNewForEntireAccount?: IsNewForEntireAccount;
+  }
   export type PaginationToken = string;
   export type Percentage = number;
+  export type Procedure = string;
+  export type Reason = "AWS_THREAT_INTELLIGENCE"|string;
   export interface RejectInvitationRequest {
     /**
      * The ARN of the behavior graph to reject the invitation to. The member account's current member status in the behavior graph must be INVITED.
      */
     GraphArn: GraphArn;
+  }
+  export interface RelatedFindingDetail {
+    /**
+     * The ARN of the related finding.
+     */
+    Arn?: EntityArn;
+    /**
+     * The type of finding.
+     */
+    Type?: Type;
+    /**
+     * The IP address of the finding.
+     */
+    IpAddress?: IpAddress;
+  }
+  export interface RelatedFindingGroupDetail {
+    /**
+     * The unique identifier for the finding group.
+     */
+    Id?: Id;
+  }
+  export type Severity = "INFORMATIONAL"|"LOW"|"MEDIUM"|"HIGH"|"CRITICAL"|string;
+  export interface SortCriteria {
+    /**
+     * Represents the Field attribute to sort investigations.
+     */
+    Field?: Field;
+    /**
+     * The order by which the sorted findings are displayed.
+     */
+    SortOrder?: SortOrder;
+  }
+  export type SortOrder = "ASC"|"DESC"|string;
+  export interface StartInvestigationRequest {
+    /**
+     * The ARN of the behavior graph.
+     */
+    GraphArn: GraphArn;
+    /**
+     * The unique Amazon Resource Name (ARN) of the IAM user and IAM role.
+     */
+    EntityArn: EntityArn;
+    /**
+     * The data and time when the investigation began. The value is an UTC ISO8601 formatted string. For example, 2021-08-18T16:35:56.284Z.
+     */
+    ScopeStartTime: Timestamp;
+    /**
+     * The data and time when the investigation began. The value is an UTC ISO8601 formatted string. For example, 2021-08-18T16:35:56.284Z.
+     */
+    ScopeEndTime: Timestamp;
+  }
+  export interface StartInvestigationResponse {
+    /**
+     * The investigation ID of the investigation report.
+     */
+    InvestigationId?: InvestigationId;
   }
   export interface StartMonitoringMemberRequest {
     /**
@@ -650,6 +1062,45 @@ declare namespace Detective {
      */
     AccountId: AccountId;
   }
+  export type State = "ACTIVE"|"ARCHIVED"|string;
+  export type Status = "RUNNING"|"FAILED"|"SUCCESSFUL"|string;
+  export interface StringFilter {
+    /**
+     * The string filter value.
+     */
+    Value: Value;
+  }
+  export interface TTPsObservedDetail {
+    /**
+     * The tactic used, identified by the investigation.
+     */
+    Tactic?: Tactic;
+    /**
+     * The technique used, identified by the investigation. 
+     */
+    Technique?: Technique;
+    /**
+     * The procedure used, identified by the investigation.
+     */
+    Procedure?: Procedure;
+    /**
+     * The IP address where the TTP was observed.
+     */
+    IpAddress?: IpAddress;
+    /**
+     * The name of the API where the TTP was observed.
+     */
+    APIName?: APIName;
+    /**
+     * The total number of successful API requests.
+     */
+    APISuccessCount?: APISuccessCount;
+    /**
+     * The total number of failed API requests.
+     */
+    APIFailureCount?: APIFailureCount;
+  }
+  export type Tactic = string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagMap = {[key: string]: TagValue};
@@ -666,6 +1117,7 @@ declare namespace Detective {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export type Technique = string;
   export type Timestamp = Date;
   export interface TimestampForCollection {
     /**
@@ -673,6 +1125,7 @@ declare namespace Detective {
      */
     Timestamp?: Timestamp;
   }
+  export type Type = string;
   export interface UnprocessedAccount {
     /**
      * The Amazon Web Services account identifier of the member account that was not processed.
@@ -718,6 +1171,20 @@ declare namespace Detective {
      */
     DatasourcePackages: DatasourcePackageList;
   }
+  export interface UpdateInvestigationStateRequest {
+    /**
+     * The ARN of the behavior graph.
+     */
+    GraphArn: GraphArn;
+    /**
+     * The investigation ID of the investigation report.
+     */
+    InvestigationId: InvestigationId;
+    /**
+     * The current state of the investigation. An archived investigation indicates you have completed reviewing the investigation.
+     */
+    State: State;
+  }
   export interface UpdateOrganizationConfigurationRequest {
     /**
      * The ARN of the organization behavior graph.
@@ -728,6 +1195,8 @@ declare namespace Detective {
      */
     AutoEnable?: Boolean;
   }
+  export type UserAgent = string;
+  export type Value = string;
   export type VolumeUsageByDatasourcePackage = {[key: string]: DatasourcePackageUsageInfo};
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

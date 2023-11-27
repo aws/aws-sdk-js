@@ -12,6 +12,14 @@ declare class PersonalizeRuntime extends Service {
   constructor(options?: PersonalizeRuntime.Types.ClientConfiguration)
   config: Config & PersonalizeRuntime.Types.ClientConfiguration;
   /**
+   * Returns a list of recommended actions in sorted in descending order by prediction score. Use the GetActionRecommendations API if you have a custom campaign that deploys a solution version trained with a PERSONALIZED_ACTIONS recipe.  For more information about PERSONALIZED_ACTIONS recipes, see PERSONALIZED_ACTIONS recipes. For more information about getting action recommendations, see Getting action recommendations.
+   */
+  getActionRecommendations(params: PersonalizeRuntime.Types.GetActionRecommendationsRequest, callback?: (err: AWSError, data: PersonalizeRuntime.Types.GetActionRecommendationsResponse) => void): Request<PersonalizeRuntime.Types.GetActionRecommendationsResponse, AWSError>;
+  /**
+   * Returns a list of recommended actions in sorted in descending order by prediction score. Use the GetActionRecommendations API if you have a custom campaign that deploys a solution version trained with a PERSONALIZED_ACTIONS recipe.  For more information about PERSONALIZED_ACTIONS recipes, see PERSONALIZED_ACTIONS recipes. For more information about getting action recommendations, see Getting action recommendations.
+   */
+  getActionRecommendations(callback?: (err: AWSError, data: PersonalizeRuntime.Types.GetActionRecommendationsResponse) => void): Request<PersonalizeRuntime.Types.GetActionRecommendationsResponse, AWSError>;
+  /**
    * Re-ranks a list of recommended items for the given user. The first item in the list is deemed the most likely item to be of interest to the user.  The solution backing the campaign must have been created using a recipe of type PERSONALIZED_RANKING. 
    */
   getPersonalizedRanking(params: PersonalizeRuntime.Types.GetPersonalizedRankingRequest, callback?: (err: AWSError, data: PersonalizeRuntime.Types.GetPersonalizedRankingResponse) => void): Request<PersonalizeRuntime.Types.GetPersonalizedRankingResponse, AWSError>;
@@ -29,20 +37,58 @@ declare class PersonalizeRuntime extends Service {
   getRecommendations(callback?: (err: AWSError, data: PersonalizeRuntime.Types.GetRecommendationsResponse) => void): Request<PersonalizeRuntime.Types.GetRecommendationsResponse, AWSError>;
 }
 declare namespace PersonalizeRuntime {
+  export type ActionID = string;
+  export type ActionList = PredictedAction[];
   export type Arn = string;
   export type AttributeName = string;
   export type AttributeValue = string;
+  export type ColumnName = string;
+  export type ColumnNamesList = ColumnName[];
+  export type ColumnValue = string;
   export type Context = {[key: string]: AttributeValue};
+  export type DatasetType = string;
   export type FilterAttributeName = string;
   export type FilterAttributeValue = string;
   export type FilterValues = {[key: string]: FilterAttributeValue};
+  export interface GetActionRecommendationsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the campaign to use for getting action recommendations. This campaign must deploy a solution version trained with a PERSONALIZED_ACTIONS recipe.
+     */
+    campaignArn?: Arn;
+    /**
+     * The user ID of the user to provide action recommendations for.
+     */
+    userId?: UserID;
+    /**
+     * The number of results to return. The default is 5. The maximum is 100.
+     */
+    numResults?: NumResults;
+    /**
+     * The ARN of the filter to apply to the returned recommendations. For more information, see Filtering Recommendations. When using this parameter, be sure the filter resource is ACTIVE.
+     */
+    filterArn?: Arn;
+    /**
+     * The values to use when filtering recommendations. For each placeholder parameter in your filter expression, provide the parameter name (in matching case) as a key and the filter value(s) as the corresponding value. Separate multiple values for one parameter with a comma.  For filter expressions that use an INCLUDE element to include actions, you must provide values for all parameters that are defined in the expression. For filters with expressions that use an EXCLUDE element to exclude actions, you can omit the filter-values. In this case, Amazon Personalize doesn't use that portion of the expression to filter recommendations. For more information, see Filtering recommendations and user segments.
+     */
+    filterValues?: FilterValues;
+  }
+  export interface GetActionRecommendationsResponse {
+    /**
+     * A list of action recommendations sorted in descending order by prediction score. There can be a maximum of 100 actions in the list. For information about action scores, see How action recommendation scoring works.
+     */
+    actionList?: ActionList;
+    /**
+     * The ID of the recommendation.
+     */
+    recommendationId?: RecommendationID;
+  }
   export interface GetPersonalizedRankingRequest {
     /**
      * The Amazon Resource Name (ARN) of the campaign to use for generating the personalized ranking.
      */
     campaignArn: Arn;
     /**
-     * A list of items (by itemId) to rank. If an item was not included in the training dataset, the item is appended to the end of the reranked list. The maximum is 500.
+     * A list of items (by itemId) to rank. If an item was not included in the training dataset, the item is appended to the end of the reranked list. If you are including metadata in recommendations, the maximum is 50. Otherwise, the maximum is 500.
      */
     inputList: InputList;
     /**
@@ -61,6 +107,10 @@ declare namespace PersonalizeRuntime {
      * The values to use when filtering recommendations. For each placeholder parameter in your filter expression, provide the parameter name (in matching case) as a key and the filter value(s) as the corresponding value. Separate multiple values for one parameter with a comma.  For filter expressions that use an INCLUDE element to include items, you must provide values for all parameters that are defined in the expression. For filters with expressions that use an EXCLUDE element to exclude items, you can omit the filter-values.In this case, Amazon Personalize doesn't use that portion of the expression to filter recommendations. For more information, see Filtering Recommendations.
      */
     filterValues?: FilterValues;
+    /**
+     * If you enabled metadata in recommendations when you created or updated the campaign, specify metadata columns from your Items dataset to include in the personalized ranking. The map key is ITEMS and the value is a list of column names from your Items dataset. The maximum number of columns you can provide is 10.  For information about enabling metadata for a campaign, see Enabling metadata in recommendations for a campaign. 
+     */
+    metadataColumns?: MetadataColumns;
   }
   export interface GetPersonalizedRankingResponse {
     /**
@@ -86,7 +136,7 @@ declare namespace PersonalizeRuntime {
      */
     userId?: UserID;
     /**
-     * The number of results to return. The default is 25. The maximum is 500.
+     * The number of results to return. The default is 25. If you are including metadata in recommendations, the maximum is 50. Otherwise, the maximum is 500.
      */
     numResults?: NumResults;
     /**
@@ -109,6 +159,10 @@ declare namespace PersonalizeRuntime {
      * The promotions to apply to the recommendation request. A promotion defines additional business rules that apply to a configurable subset of recommended items.
      */
     promotions?: PromotionList;
+    /**
+     * If you enabled metadata in recommendations when you created or updated the campaign or recommender, specify the metadata columns from your Items dataset to include in item recommendations. The map key is ITEMS and the value is a list of column names from your Items dataset. The maximum number of columns you can provide is 10.  For information about enabling metadata for a campaign, see Enabling metadata in recommendations for a campaign. For information about enabling metadata for a recommender, see Enabling metadata in recommendations for a recommender. 
+     */
+    metadataColumns?: MetadataColumns;
   }
   export interface GetRecommendationsResponse {
     /**
@@ -123,9 +177,21 @@ declare namespace PersonalizeRuntime {
   export type InputList = ItemID[];
   export type ItemID = string;
   export type ItemList = PredictedItem[];
+  export type Metadata = {[key: string]: ColumnValue};
+  export type MetadataColumns = {[key: string]: ColumnNamesList};
   export type Name = string;
   export type NumResults = number;
   export type PercentPromotedItems = number;
+  export interface PredictedAction {
+    /**
+     * The ID of the recommended action.
+     */
+    actionId?: ActionID;
+    /**
+     * The score of the recommended action. For information about action scores, see How action recommendation scoring works.
+     */
+    score?: Score;
+  }
   export interface PredictedItem {
     /**
      * The recommended item ID.
@@ -139,6 +205,10 @@ declare namespace PersonalizeRuntime {
      * The name of the promotion that included the predicted item.
      */
     promotionName?: Name;
+    /**
+     * Metadata about the item from your Items dataset.
+     */
+    metadata?: Metadata;
   }
   export interface Promotion {
     /**
