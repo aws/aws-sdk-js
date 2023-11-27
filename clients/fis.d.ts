@@ -12,13 +12,21 @@ declare class Fis extends Service {
   constructor(options?: Fis.Types.ClientConfiguration)
   config: Config & Fis.Types.ClientConfiguration;
   /**
-   * Creates an experiment template.  An experiment template includes the following components:    Targets: A target can be a specific resource in your Amazon Web Services environment, or one or more resources that match criteria that you specify, for example, resources that have specific tags.    Actions: The actions to carry out on the target. You can specify multiple actions, the duration of each action, and when to start each action during an experiment.    Stop conditions: If a stop condition is triggered while an experiment is running, the experiment is automatically stopped. You can define a stop condition as a CloudWatch alarm.   For more information, see Experiment templates in the Fault Injection Simulator User Guide.
+   * Creates an experiment template.  An experiment template includes the following components:    Targets: A target can be a specific resource in your Amazon Web Services environment, or one or more resources that match criteria that you specify, for example, resources that have specific tags.    Actions: The actions to carry out on the target. You can specify multiple actions, the duration of each action, and when to start each action during an experiment.    Stop conditions: If a stop condition is triggered while an experiment is running, the experiment is automatically stopped. You can define a stop condition as a CloudWatch alarm.   For more information, see experiment templates in the Fault Injection Simulator User Guide.
    */
   createExperimentTemplate(params: Fis.Types.CreateExperimentTemplateRequest, callback?: (err: AWSError, data: Fis.Types.CreateExperimentTemplateResponse) => void): Request<Fis.Types.CreateExperimentTemplateResponse, AWSError>;
   /**
-   * Creates an experiment template.  An experiment template includes the following components:    Targets: A target can be a specific resource in your Amazon Web Services environment, or one or more resources that match criteria that you specify, for example, resources that have specific tags.    Actions: The actions to carry out on the target. You can specify multiple actions, the duration of each action, and when to start each action during an experiment.    Stop conditions: If a stop condition is triggered while an experiment is running, the experiment is automatically stopped. You can define a stop condition as a CloudWatch alarm.   For more information, see Experiment templates in the Fault Injection Simulator User Guide.
+   * Creates an experiment template.  An experiment template includes the following components:    Targets: A target can be a specific resource in your Amazon Web Services environment, or one or more resources that match criteria that you specify, for example, resources that have specific tags.    Actions: The actions to carry out on the target. You can specify multiple actions, the duration of each action, and when to start each action during an experiment.    Stop conditions: If a stop condition is triggered while an experiment is running, the experiment is automatically stopped. You can define a stop condition as a CloudWatch alarm.   For more information, see experiment templates in the Fault Injection Simulator User Guide.
    */
   createExperimentTemplate(callback?: (err: AWSError, data: Fis.Types.CreateExperimentTemplateResponse) => void): Request<Fis.Types.CreateExperimentTemplateResponse, AWSError>;
+  /**
+   * Creates a target account configuration for the experiment template. A target account configuration is required when accountTargeting of experimentOptions is set to multi-account. For more information, see experiment options in the Fault Injection Simulator User Guide. 
+   */
+  createTargetAccountConfiguration(params: Fis.Types.CreateTargetAccountConfigurationRequest, callback?: (err: AWSError, data: Fis.Types.CreateTargetAccountConfigurationResponse) => void): Request<Fis.Types.CreateTargetAccountConfigurationResponse, AWSError>;
+  /**
+   * Creates a target account configuration for the experiment template. A target account configuration is required when accountTargeting of experimentOptions is set to multi-account. For more information, see experiment options in the Fault Injection Simulator User Guide. 
+   */
+  createTargetAccountConfiguration(callback?: (err: AWSError, data: Fis.Types.CreateTargetAccountConfigurationResponse) => void): Request<Fis.Types.CreateTargetAccountConfigurationResponse, AWSError>;
   /**
    * Deletes the specified experiment template.
    */
@@ -27,6 +35,14 @@ declare class Fis extends Service {
    * Deletes the specified experiment template.
    */
   deleteExperimentTemplate(callback?: (err: AWSError, data: Fis.Types.DeleteExperimentTemplateResponse) => void): Request<Fis.Types.DeleteExperimentTemplateResponse, AWSError>;
+  /**
+   * Deletes the specified target account configuration of the experiment template.
+   */
+  deleteTargetAccountConfiguration(params: Fis.Types.DeleteTargetAccountConfigurationRequest, callback?: (err: AWSError, data: Fis.Types.DeleteTargetAccountConfigurationResponse) => void): Request<Fis.Types.DeleteTargetAccountConfigurationResponse, AWSError>;
+  /**
+   * Deletes the specified target account configuration of the experiment template.
+   */
+  deleteTargetAccountConfiguration(callback?: (err: AWSError, data: Fis.Types.DeleteTargetAccountConfigurationResponse) => void): Request<Fis.Types.DeleteTargetAccountConfigurationResponse, AWSError>;
   /**
    * Gets information about the specified FIS action.
    */
@@ -44,6 +60,14 @@ declare class Fis extends Service {
    */
   getExperiment(callback?: (err: AWSError, data: Fis.Types.GetExperimentResponse) => void): Request<Fis.Types.GetExperimentResponse, AWSError>;
   /**
+   * Gets information about the specified target account configuration of the experiment.
+   */
+  getExperimentTargetAccountConfiguration(params: Fis.Types.GetExperimentTargetAccountConfigurationRequest, callback?: (err: AWSError, data: Fis.Types.GetExperimentTargetAccountConfigurationResponse) => void): Request<Fis.Types.GetExperimentTargetAccountConfigurationResponse, AWSError>;
+  /**
+   * Gets information about the specified target account configuration of the experiment.
+   */
+  getExperimentTargetAccountConfiguration(callback?: (err: AWSError, data: Fis.Types.GetExperimentTargetAccountConfigurationResponse) => void): Request<Fis.Types.GetExperimentTargetAccountConfigurationResponse, AWSError>;
+  /**
    * Gets information about the specified experiment template.
    */
   getExperimentTemplate(params: Fis.Types.GetExperimentTemplateRequest, callback?: (err: AWSError, data: Fis.Types.GetExperimentTemplateResponse) => void): Request<Fis.Types.GetExperimentTemplateResponse, AWSError>;
@@ -51,6 +75,14 @@ declare class Fis extends Service {
    * Gets information about the specified experiment template.
    */
   getExperimentTemplate(callback?: (err: AWSError, data: Fis.Types.GetExperimentTemplateResponse) => void): Request<Fis.Types.GetExperimentTemplateResponse, AWSError>;
+  /**
+   * Gets information about the specified target account configuration of the experiment template.
+   */
+  getTargetAccountConfiguration(params: Fis.Types.GetTargetAccountConfigurationRequest, callback?: (err: AWSError, data: Fis.Types.GetTargetAccountConfigurationResponse) => void): Request<Fis.Types.GetTargetAccountConfigurationResponse, AWSError>;
+  /**
+   * Gets information about the specified target account configuration of the experiment template.
+   */
+  getTargetAccountConfiguration(callback?: (err: AWSError, data: Fis.Types.GetTargetAccountConfigurationResponse) => void): Request<Fis.Types.GetTargetAccountConfigurationResponse, AWSError>;
   /**
    * Gets information about the specified resource type.
    */
@@ -67,6 +99,22 @@ declare class Fis extends Service {
    * Lists the available FIS actions.
    */
   listActions(callback?: (err: AWSError, data: Fis.Types.ListActionsResponse) => void): Request<Fis.Types.ListActionsResponse, AWSError>;
+  /**
+   * Lists the resolved targets information of the specified experiment.
+   */
+  listExperimentResolvedTargets(params: Fis.Types.ListExperimentResolvedTargetsRequest, callback?: (err: AWSError, data: Fis.Types.ListExperimentResolvedTargetsResponse) => void): Request<Fis.Types.ListExperimentResolvedTargetsResponse, AWSError>;
+  /**
+   * Lists the resolved targets information of the specified experiment.
+   */
+  listExperimentResolvedTargets(callback?: (err: AWSError, data: Fis.Types.ListExperimentResolvedTargetsResponse) => void): Request<Fis.Types.ListExperimentResolvedTargetsResponse, AWSError>;
+  /**
+   * Lists the target account configurations of the specified experiment.
+   */
+  listExperimentTargetAccountConfigurations(params: Fis.Types.ListExperimentTargetAccountConfigurationsRequest, callback?: (err: AWSError, data: Fis.Types.ListExperimentTargetAccountConfigurationsResponse) => void): Request<Fis.Types.ListExperimentTargetAccountConfigurationsResponse, AWSError>;
+  /**
+   * Lists the target account configurations of the specified experiment.
+   */
+  listExperimentTargetAccountConfigurations(callback?: (err: AWSError, data: Fis.Types.ListExperimentTargetAccountConfigurationsResponse) => void): Request<Fis.Types.ListExperimentTargetAccountConfigurationsResponse, AWSError>;
   /**
    * Lists your experiment templates.
    */
@@ -91,6 +139,14 @@ declare class Fis extends Service {
    * Lists the tags for the specified resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: Fis.Types.ListTagsForResourceResponse) => void): Request<Fis.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists the target account configurations of the specified experiment template.
+   */
+  listTargetAccountConfigurations(params: Fis.Types.ListTargetAccountConfigurationsRequest, callback?: (err: AWSError, data: Fis.Types.ListTargetAccountConfigurationsResponse) => void): Request<Fis.Types.ListTargetAccountConfigurationsResponse, AWSError>;
+  /**
+   * Lists the target account configurations of the specified experiment template.
+   */
+  listTargetAccountConfigurations(callback?: (err: AWSError, data: Fis.Types.ListTargetAccountConfigurationsResponse) => void): Request<Fis.Types.ListTargetAccountConfigurationsResponse, AWSError>;
   /**
    * Lists the target resource types.
    */
@@ -139,8 +195,17 @@ declare class Fis extends Service {
    * Updates the specified experiment template.
    */
   updateExperimentTemplate(callback?: (err: AWSError, data: Fis.Types.UpdateExperimentTemplateResponse) => void): Request<Fis.Types.UpdateExperimentTemplateResponse, AWSError>;
+  /**
+   * Updates the target account configuration for the specified experiment template.
+   */
+  updateTargetAccountConfiguration(params: Fis.Types.UpdateTargetAccountConfigurationRequest, callback?: (err: AWSError, data: Fis.Types.UpdateTargetAccountConfigurationResponse) => void): Request<Fis.Types.UpdateTargetAccountConfigurationResponse, AWSError>;
+  /**
+   * Updates the target account configuration for the specified experiment template.
+   */
+  updateTargetAccountConfiguration(callback?: (err: AWSError, data: Fis.Types.UpdateTargetAccountConfigurationResponse) => void): Request<Fis.Types.UpdateTargetAccountConfigurationResponse, AWSError>;
 }
 declare namespace Fis {
+  export type AccountTargeting = "single-account"|"multi-account"|string;
   export interface Action {
     /**
      * The ID of the action.
@@ -231,6 +296,16 @@ declare namespace Fis {
     startAfter?: ExperimentTemplateActionStartAfterList;
   }
   export type CreateExperimentTemplateActionInputMap = {[key: string]: CreateExperimentTemplateActionInput};
+  export interface CreateExperimentTemplateExperimentOptionsInput {
+    /**
+     * Specifies the account targeting setting for experiment options.
+     */
+    accountTargeting?: AccountTargeting;
+    /**
+     * Specifies the empty target resolution mode for experiment options.
+     */
+    emptyTargetResolutionMode?: EmptyTargetResolutionMode;
+  }
   export interface CreateExperimentTemplateLogConfigurationInput {
     /**
      * The configuration for experiment logging to Amazon CloudWatch Logs.
@@ -278,6 +353,10 @@ declare namespace Fis {
      * The configuration for experiment logging.
      */
     logConfiguration?: CreateExperimentTemplateLogConfigurationInput;
+    /**
+     * The experiment options for the experiment template.
+     */
+    experimentOptions?: CreateExperimentTemplateExperimentOptionsInput;
   }
   export interface CreateExperimentTemplateResponse {
     /**
@@ -323,6 +402,34 @@ declare namespace Fis {
     parameters?: ExperimentTemplateTargetParameterMap;
   }
   export type CreateExperimentTemplateTargetInputMap = {[key: string]: CreateExperimentTemplateTargetInput};
+  export interface CreateTargetAccountConfigurationRequest {
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The experiment template ID.
+     */
+    experimentTemplateId: ExperimentTemplateId;
+    /**
+     * The AWS account ID of the target account.
+     */
+    accountId: TargetAccountId;
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role for the target account.
+     */
+    roleArn: RoleArn;
+    /**
+     * The description of the target account.
+     */
+    description?: TargetAccountConfigurationDescription;
+  }
+  export interface CreateTargetAccountConfigurationResponse {
+    /**
+     * Information about the target account configuration.
+     */
+    targetAccountConfiguration?: TargetAccountConfiguration;
+  }
   export type CreationTime = Date;
   export interface DeleteExperimentTemplateRequest {
     /**
@@ -336,6 +443,23 @@ declare namespace Fis {
      */
     experimentTemplate?: ExperimentTemplate;
   }
+  export interface DeleteTargetAccountConfigurationRequest {
+    /**
+     * The ID of the experiment template.
+     */
+    experimentTemplateId: ExperimentTemplateId;
+    /**
+     * The AWS account ID of the target account.
+     */
+    accountId: TargetAccountId;
+  }
+  export interface DeleteTargetAccountConfigurationResponse {
+    /**
+     * Information about the target account configuration.
+     */
+    targetAccountConfiguration?: TargetAccountConfiguration;
+  }
+  export type EmptyTargetResolutionMode = "fail"|"skip"|string;
   export interface Experiment {
     /**
      * The ID of the experiment.
@@ -385,6 +509,14 @@ declare namespace Fis {
      * The configuration for experiment logging.
      */
     logConfiguration?: ExperimentLogConfiguration;
+    /**
+     * The experiment options for the experiment.
+     */
+    experimentOptions?: ExperimentOptions;
+    /**
+     * The count of target account configurations for the experiment.
+     */
+    targetAccountConfigurationsCount?: TargetAccountConfigurationsCount;
   }
   export interface ExperimentAction {
     /**
@@ -440,7 +572,7 @@ declare namespace Fis {
      */
     reason?: ExperimentActionStatusReason;
   }
-  export type ExperimentActionStatus = "pending"|"initiating"|"running"|"completed"|"cancelled"|"stopping"|"stopped"|"failed"|string;
+  export type ExperimentActionStatus = "pending"|"initiating"|"running"|"completed"|"cancelled"|"stopping"|"stopped"|"failed"|"skipped"|string;
   export type ExperimentActionStatusReason = string;
   export type ExperimentActionTargetMap = {[key: string]: ExperimentTargetName};
   export type ExperimentActionTargetName = string;
@@ -465,6 +597,16 @@ declare namespace Fis {
      * The schema version.
      */
     logSchemaVersion?: LogSchemaVersion;
+  }
+  export interface ExperimentOptions {
+    /**
+     * The account targeting setting for an experiment.
+     */
+    accountTargeting?: AccountTargeting;
+    /**
+     * The empty target resolution mode for an experiment.
+     */
+    emptyTargetResolutionMode?: EmptyTargetResolutionMode;
   }
   export interface ExperimentS3LogConfiguration {
     /**
@@ -549,6 +691,35 @@ declare namespace Fis {
      */
     parameters?: ExperimentTargetParameterMap;
   }
+  export interface ExperimentTargetAccountConfiguration {
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role for the target account.
+     */
+    roleArn?: RoleArn;
+    /**
+     * The AWS account ID of the target account.
+     */
+    accountId?: TargetAccountId;
+    /**
+     * The description of the target account.
+     */
+    description?: TargetAccountConfigurationDescription;
+  }
+  export type ExperimentTargetAccountConfigurationList = ExperimentTargetAccountConfigurationSummary[];
+  export interface ExperimentTargetAccountConfigurationSummary {
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role for the target account.
+     */
+    roleArn?: RoleArn;
+    /**
+     * The AWS account ID of the target account.
+     */
+    accountId?: TargetAccountId;
+    /**
+     * The description of the target account.
+     */
+    description?: TargetAccountConfigurationDescription;
+  }
   export interface ExperimentTargetFilter {
     /**
      * The attribute path for the filter.
@@ -610,6 +781,14 @@ declare namespace Fis {
      * The configuration for experiment logging.
      */
     logConfiguration?: ExperimentTemplateLogConfiguration;
+    /**
+     * The experiment options for an experiment template.
+     */
+    experimentOptions?: ExperimentTemplateExperimentOptions;
+    /**
+     * The count of target account configurations for the experiment template.
+     */
+    targetAccountConfigurationsCount?: TargetAccountConfigurationsCount;
   }
   export interface ExperimentTemplateAction {
     /**
@@ -656,6 +835,16 @@ declare namespace Fis {
     logGroupArn: CloudWatchLogGroupArn;
   }
   export type ExperimentTemplateDescription = string;
+  export interface ExperimentTemplateExperimentOptions {
+    /**
+     * The account targeting setting for an experiment template. 
+     */
+    accountTargeting?: AccountTargeting;
+    /**
+     * The empty target resolution mode for an experiment template.
+     */
+    emptyTargetResolutionMode?: EmptyTargetResolutionMode;
+  }
   export type ExperimentTemplateId = string;
   export interface ExperimentTemplateLogConfiguration {
     /**
@@ -806,6 +995,22 @@ declare namespace Fis {
      */
     experiment?: Experiment;
   }
+  export interface GetExperimentTargetAccountConfigurationRequest {
+    /**
+     * The ID of the experiment.
+     */
+    experimentId: ExperimentId;
+    /**
+     * The AWS account ID of the target account.
+     */
+    accountId: TargetAccountId;
+  }
+  export interface GetExperimentTargetAccountConfigurationResponse {
+    /**
+     * Information about the target account configuration.
+     */
+    targetAccountConfiguration?: ExperimentTargetAccountConfiguration;
+  }
   export interface GetExperimentTemplateRequest {
     /**
      * The ID of the experiment template.
@@ -817,6 +1022,22 @@ declare namespace Fis {
      * Information about the experiment template.
      */
     experimentTemplate?: ExperimentTemplate;
+  }
+  export interface GetTargetAccountConfigurationRequest {
+    /**
+     * The ID of the experiment template.
+     */
+    experimentTemplateId: ExperimentTemplateId;
+    /**
+     * The AWS account ID of the target account.
+     */
+    accountId: TargetAccountId;
+  }
+  export interface GetTargetAccountConfigurationResponse {
+    /**
+     * Information about the target account configuration.
+     */
+    targetAccountConfiguration?: TargetAccountConfiguration;
   }
   export interface GetTargetResourceTypeRequest {
     /**
@@ -847,6 +1068,55 @@ declare namespace Fis {
      * The actions.
      */
     actions?: ActionSummaryList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    nextToken?: NextToken;
+  }
+  export type ListExperimentResolvedTargetsMaxResults = number;
+  export interface ListExperimentResolvedTargetsRequest {
+    /**
+     * The ID of the experiment.
+     */
+    experimentId: ExperimentId;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    maxResults?: ListExperimentResolvedTargetsMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The name of the target.
+     */
+    targetName?: TargetName;
+  }
+  export interface ListExperimentResolvedTargetsResponse {
+    /**
+     * The resolved targets.
+     */
+    resolvedTargets?: ResolvedTargetList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListExperimentTargetAccountConfigurationsRequest {
+    /**
+     * The ID of the experiment.
+     */
+    experimentId: ExperimentId;
+    /**
+     * The token for the next page of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListExperimentTargetAccountConfigurationsResponse {
+    /**
+     * The target account configurations.
+     */
+    targetAccountConfigurations?: ExperimentTargetAccountConfigurationList;
     /**
      * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
@@ -906,6 +1176,31 @@ declare namespace Fis {
      */
     tags?: TagMap;
   }
+  export type ListTargetAccountConfigurationsMaxResults = number;
+  export interface ListTargetAccountConfigurationsRequest {
+    /**
+     * The ID of the experiment template.
+     */
+    experimentTemplateId: ExperimentTemplateId;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    maxResults?: ListTargetAccountConfigurationsMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListTargetAccountConfigurationsResponse {
+    /**
+     * The target account configurations.
+     */
+    targetAccountConfigurations?: TargetAccountConfigurationList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    nextToken?: NextToken;
+  }
   export type ListTargetResourceTypesMaxResults = number;
   export interface ListTargetResourceTypesRequest {
     /**
@@ -929,6 +1224,21 @@ declare namespace Fis {
   }
   export type LogSchemaVersion = number;
   export type NextToken = string;
+  export interface ResolvedTarget {
+    /**
+     * The resource type of the target.
+     */
+    resourceType?: TargetResourceTypeId;
+    /**
+     * The name of the target.
+     */
+    targetName?: TargetName;
+    /**
+     * Information about the target.
+     */
+    targetInformation?: TargetInformationMap;
+  }
+  export type ResolvedTargetList = ResolvedTarget[];
   export type ResourceArn = string;
   export type ResourceArnList = ResourceArn[];
   export type RoleArn = string;
@@ -984,6 +1294,42 @@ declare namespace Fis {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export interface TargetAccountConfiguration {
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role for the target account.
+     */
+    roleArn?: RoleArn;
+    /**
+     * The AWS account ID of the target account.
+     */
+    accountId?: TargetAccountId;
+    /**
+     * The description of the target account.
+     */
+    description?: TargetAccountConfigurationDescription;
+  }
+  export type TargetAccountConfigurationDescription = string;
+  export type TargetAccountConfigurationList = TargetAccountConfigurationSummary[];
+  export interface TargetAccountConfigurationSummary {
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role for the target account.
+     */
+    roleArn?: RoleArn;
+    /**
+     * The AWS account ID of the target account.
+     */
+    accountId?: TargetAccountId;
+    /**
+     * The description of the target account.
+     */
+    description?: TargetAccountConfigurationDescription;
+  }
+  export type TargetAccountConfigurationsCount = number;
+  export type TargetAccountId = string;
+  export type TargetInformationKey = string;
+  export type TargetInformationMap = {[key: string]: TargetInformationValue};
+  export type TargetInformationValue = string;
+  export type TargetName = string;
   export interface TargetResourceType {
     /**
      * The resource type.
@@ -1060,6 +1406,12 @@ declare namespace Fis {
     startAfter?: ExperimentTemplateActionStartAfterList;
   }
   export type UpdateExperimentTemplateActionInputMap = {[key: string]: UpdateExperimentTemplateActionInputItem};
+  export interface UpdateExperimentTemplateExperimentOptionsInput {
+    /**
+     * The empty target resolution mode of the experiment template.
+     */
+    emptyTargetResolutionMode?: EmptyTargetResolutionMode;
+  }
   export interface UpdateExperimentTemplateLogConfigurationInput {
     /**
      * The configuration for experiment logging to Amazon CloudWatch Logs.
@@ -1103,6 +1455,10 @@ declare namespace Fis {
      * The configuration for experiment logging.
      */
     logConfiguration?: UpdateExperimentTemplateLogConfigurationInput;
+    /**
+     * The experiment options for the experiment template.
+     */
+    experimentOptions?: UpdateExperimentTemplateExperimentOptionsInput;
   }
   export interface UpdateExperimentTemplateResponse {
     /**
@@ -1148,6 +1504,30 @@ declare namespace Fis {
     parameters?: ExperimentTemplateTargetParameterMap;
   }
   export type UpdateExperimentTemplateTargetInputMap = {[key: string]: UpdateExperimentTemplateTargetInput};
+  export interface UpdateTargetAccountConfigurationRequest {
+    /**
+     * The ID of the experiment template.
+     */
+    experimentTemplateId: ExperimentTemplateId;
+    /**
+     * The AWS account ID of the target account.
+     */
+    accountId: TargetAccountId;
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role for the target account.
+     */
+    roleArn?: RoleArn;
+    /**
+     * The description of the target account.
+     */
+    description?: TargetAccountConfigurationDescription;
+  }
+  export interface UpdateTargetAccountConfigurationResponse {
+    /**
+     * Information about the target account configuration.
+     */
+    targetAccountConfiguration?: TargetAccountConfiguration;
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

@@ -60,6 +60,14 @@ declare class SecurityHub extends Service {
    */
   batchGetAutomationRules(callback?: (err: AWSError, data: SecurityHub.Types.BatchGetAutomationRulesResponse) => void): Request<SecurityHub.Types.BatchGetAutomationRulesResponse, AWSError>;
   /**
+   *  Returns associations between an Security Hub configuration and a batch of target accounts, organizational units, or the root. Only the Security Hub delegated administrator can invoke this operation from the home Region. A configuration can refer to a configuration policy or to a self-managed configuration. 
+   */
+  batchGetConfigurationPolicyAssociations(params: SecurityHub.Types.BatchGetConfigurationPolicyAssociationsRequest, callback?: (err: AWSError, data: SecurityHub.Types.BatchGetConfigurationPolicyAssociationsResponse) => void): Request<SecurityHub.Types.BatchGetConfigurationPolicyAssociationsResponse, AWSError>;
+  /**
+   *  Returns associations between an Security Hub configuration and a batch of target accounts, organizational units, or the root. Only the Security Hub delegated administrator can invoke this operation from the home Region. A configuration can refer to a configuration policy or to a self-managed configuration. 
+   */
+  batchGetConfigurationPolicyAssociations(callback?: (err: AWSError, data: SecurityHub.Types.BatchGetConfigurationPolicyAssociationsResponse) => void): Request<SecurityHub.Types.BatchGetConfigurationPolicyAssociationsResponse, AWSError>;
+  /**
    *  Provides details about a batch of security controls for the current Amazon Web Services account and Amazon Web Services Region. 
    */
   batchGetSecurityControls(params: SecurityHub.Types.BatchGetSecurityControlsRequest, callback?: (err: AWSError, data: SecurityHub.Types.BatchGetSecurityControlsResponse) => void): Request<SecurityHub.Types.BatchGetSecurityControlsResponse, AWSError>;
@@ -124,6 +132,14 @@ declare class SecurityHub extends Service {
    */
   createAutomationRule(callback?: (err: AWSError, data: SecurityHub.Types.CreateAutomationRuleResponse) => void): Request<SecurityHub.Types.CreateAutomationRuleResponse, AWSError>;
   /**
+   *  Creates a configuration policy with the defined configuration. Only the Security Hub delegated administrator can invoke this operation from the home Region. 
+   */
+  createConfigurationPolicy(params: SecurityHub.Types.CreateConfigurationPolicyRequest, callback?: (err: AWSError, data: SecurityHub.Types.CreateConfigurationPolicyResponse) => void): Request<SecurityHub.Types.CreateConfigurationPolicyResponse, AWSError>;
+  /**
+   *  Creates a configuration policy with the defined configuration. Only the Security Hub delegated administrator can invoke this operation from the home Region. 
+   */
+  createConfigurationPolicy(callback?: (err: AWSError, data: SecurityHub.Types.CreateConfigurationPolicyResponse) => void): Request<SecurityHub.Types.CreateConfigurationPolicyResponse, AWSError>;
+  /**
    * Used to enable finding aggregation. Must be called from the aggregation Region. For more details about cross-Region replication, see Configuring finding aggregation in the Security Hub User Guide. 
    */
   createFindingAggregator(params: SecurityHub.Types.CreateFindingAggregatorRequest, callback?: (err: AWSError, data: SecurityHub.Types.CreateFindingAggregatorResponse) => void): Request<SecurityHub.Types.CreateFindingAggregatorResponse, AWSError>;
@@ -163,6 +179,14 @@ declare class SecurityHub extends Service {
    * Deletes a custom action target from Security Hub. Deleting a custom action target does not affect any findings or insights that were already sent to Amazon CloudWatch Events using the custom action.
    */
   deleteActionTarget(callback?: (err: AWSError, data: SecurityHub.Types.DeleteActionTargetResponse) => void): Request<SecurityHub.Types.DeleteActionTargetResponse, AWSError>;
+  /**
+   *  Deletes a configuration policy. Only the Security Hub delegated administrator can invoke this operation from the home Region. For the deletion to succeed, you must first disassociate a configuration policy from target accounts, organizational units, or the root by invoking the StartConfigurationPolicyDisassociation operation. 
+   */
+  deleteConfigurationPolicy(params: SecurityHub.Types.DeleteConfigurationPolicyRequest, callback?: (err: AWSError, data: SecurityHub.Types.DeleteConfigurationPolicyResponse) => void): Request<SecurityHub.Types.DeleteConfigurationPolicyResponse, AWSError>;
+  /**
+   *  Deletes a configuration policy. Only the Security Hub delegated administrator can invoke this operation from the home Region. For the deletion to succeed, you must first disassociate a configuration policy from target accounts, organizational units, or the root by invoking the StartConfigurationPolicyDisassociation operation. 
+   */
+  deleteConfigurationPolicy(callback?: (err: AWSError, data: SecurityHub.Types.DeleteConfigurationPolicyResponse) => void): Request<SecurityHub.Types.DeleteConfigurationPolicyResponse, AWSError>;
   /**
    * Deletes a finding aggregator. When you delete the finding aggregator, you stop finding aggregation. When you stop finding aggregation, findings that were already aggregated to the aggregation Region are still visible from the aggregation Region. New findings and finding updates are not aggregated. 
    */
@@ -212,11 +236,11 @@ declare class SecurityHub extends Service {
    */
   describeHub(callback?: (err: AWSError, data: SecurityHub.Types.DescribeHubResponse) => void): Request<SecurityHub.Types.DescribeHubResponse, AWSError>;
   /**
-   * Returns information about the Organizations configuration for Security Hub. Can only be called from a Security Hub administrator account.
+   * Returns information about the way your organization is configured in Security Hub. Only the Security Hub administrator account can invoke this operation.
    */
   describeOrganizationConfiguration(params: SecurityHub.Types.DescribeOrganizationConfigurationRequest, callback?: (err: AWSError, data: SecurityHub.Types.DescribeOrganizationConfigurationResponse) => void): Request<SecurityHub.Types.DescribeOrganizationConfigurationResponse, AWSError>;
   /**
-   * Returns information about the Organizations configuration for Security Hub. Can only be called from a Security Hub administrator account.
+   * Returns information about the way your organization is configured in Security Hub. Only the Security Hub administrator account can invoke this operation.
    */
   describeOrganizationConfiguration(callback?: (err: AWSError, data: SecurityHub.Types.DescribeOrganizationConfigurationResponse) => void): Request<SecurityHub.Types.DescribeOrganizationConfigurationResponse, AWSError>;
   /**
@@ -324,6 +348,22 @@ declare class SecurityHub extends Service {
    */
   getAdministratorAccount(callback?: (err: AWSError, data: SecurityHub.Types.GetAdministratorAccountResponse) => void): Request<SecurityHub.Types.GetAdministratorAccountResponse, AWSError>;
   /**
+   *  Provides information about a configuration policy. Only the Security Hub delegated administrator can invoke this operation from the home Region. 
+   */
+  getConfigurationPolicy(params: SecurityHub.Types.GetConfigurationPolicyRequest, callback?: (err: AWSError, data: SecurityHub.Types.GetConfigurationPolicyResponse) => void): Request<SecurityHub.Types.GetConfigurationPolicyResponse, AWSError>;
+  /**
+   *  Provides information about a configuration policy. Only the Security Hub delegated administrator can invoke this operation from the home Region. 
+   */
+  getConfigurationPolicy(callback?: (err: AWSError, data: SecurityHub.Types.GetConfigurationPolicyResponse) => void): Request<SecurityHub.Types.GetConfigurationPolicyResponse, AWSError>;
+  /**
+   *  Returns the association between a configuration and a target account, organizational unit, or the root. The configuration can be a configuration policy or self-managed behavior. Only the Security Hub delegated administrator can invoke this operation from the home Region. 
+   */
+  getConfigurationPolicyAssociation(params: SecurityHub.Types.GetConfigurationPolicyAssociationRequest, callback?: (err: AWSError, data: SecurityHub.Types.GetConfigurationPolicyAssociationResponse) => void): Request<SecurityHub.Types.GetConfigurationPolicyAssociationResponse, AWSError>;
+  /**
+   *  Returns the association between a configuration and a target account, organizational unit, or the root. The configuration can be a configuration policy or self-managed behavior. Only the Security Hub delegated administrator can invoke this operation from the home Region. 
+   */
+  getConfigurationPolicyAssociation(callback?: (err: AWSError, data: SecurityHub.Types.GetConfigurationPolicyAssociationResponse) => void): Request<SecurityHub.Types.GetConfigurationPolicyAssociationResponse, AWSError>;
+  /**
    * Returns a list of the standards that are currently enabled.
    */
   getEnabledStandards(params: SecurityHub.Types.GetEnabledStandardsRequest, callback?: (err: AWSError, data: SecurityHub.Types.GetEnabledStandardsResponse) => void): Request<SecurityHub.Types.GetEnabledStandardsResponse, AWSError>;
@@ -420,6 +460,22 @@ declare class SecurityHub extends Service {
    */
   listAutomationRules(callback?: (err: AWSError, data: SecurityHub.Types.ListAutomationRulesResponse) => void): Request<SecurityHub.Types.ListAutomationRulesResponse, AWSError>;
   /**
+   *  Lists the configuration policies that the Security Hub delegated administrator has created for your organization. Only the delegated administrator can invoke this operation from the home Region. 
+   */
+  listConfigurationPolicies(params: SecurityHub.Types.ListConfigurationPoliciesRequest, callback?: (err: AWSError, data: SecurityHub.Types.ListConfigurationPoliciesResponse) => void): Request<SecurityHub.Types.ListConfigurationPoliciesResponse, AWSError>;
+  /**
+   *  Lists the configuration policies that the Security Hub delegated administrator has created for your organization. Only the delegated administrator can invoke this operation from the home Region. 
+   */
+  listConfigurationPolicies(callback?: (err: AWSError, data: SecurityHub.Types.ListConfigurationPoliciesResponse) => void): Request<SecurityHub.Types.ListConfigurationPoliciesResponse, AWSError>;
+  /**
+   *  Provides information about the associations for your configuration policies and self-managed behavior. Only the Security Hub delegated administrator can invoke this operation from the home Region. 
+   */
+  listConfigurationPolicyAssociations(params: SecurityHub.Types.ListConfigurationPolicyAssociationsRequest, callback?: (err: AWSError, data: SecurityHub.Types.ListConfigurationPolicyAssociationsResponse) => void): Request<SecurityHub.Types.ListConfigurationPolicyAssociationsResponse, AWSError>;
+  /**
+   *  Provides information about the associations for your configuration policies and self-managed behavior. Only the Security Hub delegated administrator can invoke this operation from the home Region. 
+   */
+  listConfigurationPolicyAssociations(callback?: (err: AWSError, data: SecurityHub.Types.ListConfigurationPolicyAssociationsResponse) => void): Request<SecurityHub.Types.ListConfigurationPolicyAssociationsResponse, AWSError>;
+  /**
    * Lists all findings-generating solutions (products) that you are subscribed to receive findings from in Security Hub.
    */
   listEnabledProductsForImport(params: SecurityHub.Types.ListEnabledProductsForImportRequest, callback?: (err: AWSError, data: SecurityHub.Types.ListEnabledProductsForImportResponse) => void): Request<SecurityHub.Types.ListEnabledProductsForImportResponse, AWSError>;
@@ -484,6 +540,22 @@ declare class SecurityHub extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: SecurityHub.Types.ListTagsForResourceResponse) => void): Request<SecurityHub.Types.ListTagsForResourceResponse, AWSError>;
   /**
+   *  Associates a target account, organizational unit, or the root with a specified configuration. The target can be associated with a configuration policy or self-managed behavior. Only the Security Hub delegated administrator can invoke this operation from the home Region. 
+   */
+  startConfigurationPolicyAssociation(params: SecurityHub.Types.StartConfigurationPolicyAssociationRequest, callback?: (err: AWSError, data: SecurityHub.Types.StartConfigurationPolicyAssociationResponse) => void): Request<SecurityHub.Types.StartConfigurationPolicyAssociationResponse, AWSError>;
+  /**
+   *  Associates a target account, organizational unit, or the root with a specified configuration. The target can be associated with a configuration policy or self-managed behavior. Only the Security Hub delegated administrator can invoke this operation from the home Region. 
+   */
+  startConfigurationPolicyAssociation(callback?: (err: AWSError, data: SecurityHub.Types.StartConfigurationPolicyAssociationResponse) => void): Request<SecurityHub.Types.StartConfigurationPolicyAssociationResponse, AWSError>;
+  /**
+   *  Disassociates a target account, organizational unit, or the root from a specified configuration. When you disassociate a configuration from its target, the target inherits the configuration of the closest parent. If there’s no configuration to inherit, the target retains its settings but becomes a self-managed account. A target can be disassociated from a configuration policy or self-managed behavior. Only the Security Hub delegated administrator can invoke this operation from the home Region. 
+   */
+  startConfigurationPolicyDisassociation(params: SecurityHub.Types.StartConfigurationPolicyDisassociationRequest, callback?: (err: AWSError, data: SecurityHub.Types.StartConfigurationPolicyDisassociationResponse) => void): Request<SecurityHub.Types.StartConfigurationPolicyDisassociationResponse, AWSError>;
+  /**
+   *  Disassociates a target account, organizational unit, or the root from a specified configuration. When you disassociate a configuration from its target, the target inherits the configuration of the closest parent. If there’s no configuration to inherit, the target retains its settings but becomes a self-managed account. A target can be disassociated from a configuration policy or self-managed behavior. Only the Security Hub delegated administrator can invoke this operation from the home Region. 
+   */
+  startConfigurationPolicyDisassociation(callback?: (err: AWSError, data: SecurityHub.Types.StartConfigurationPolicyDisassociationResponse) => void): Request<SecurityHub.Types.StartConfigurationPolicyDisassociationResponse, AWSError>;
+  /**
    * Adds one or more tags to a resource.
    */
   tagResource(params: SecurityHub.Types.TagResourceRequest, callback?: (err: AWSError, data: SecurityHub.Types.TagResourceResponse) => void): Request<SecurityHub.Types.TagResourceResponse, AWSError>;
@@ -507,6 +579,14 @@ declare class SecurityHub extends Service {
    * Updates the name and description of a custom action target in Security Hub.
    */
   updateActionTarget(callback?: (err: AWSError, data: SecurityHub.Types.UpdateActionTargetResponse) => void): Request<SecurityHub.Types.UpdateActionTargetResponse, AWSError>;
+  /**
+   *  Updates a configuration policy. Only the Security Hub delegated administrator can invoke this operation from the home Region. 
+   */
+  updateConfigurationPolicy(params: SecurityHub.Types.UpdateConfigurationPolicyRequest, callback?: (err: AWSError, data: SecurityHub.Types.UpdateConfigurationPolicyResponse) => void): Request<SecurityHub.Types.UpdateConfigurationPolicyResponse, AWSError>;
+  /**
+   *  Updates a configuration policy. Only the Security Hub delegated administrator can invoke this operation from the home Region. 
+   */
+  updateConfigurationPolicy(callback?: (err: AWSError, data: SecurityHub.Types.UpdateConfigurationPolicyResponse) => void): Request<SecurityHub.Types.UpdateConfigurationPolicyResponse, AWSError>;
   /**
    * Updates the finding aggregation configuration. Used to update the Region linking mode and the list of included or excluded Regions. You cannot use UpdateFindingAggregator to change the aggregation Region. You must run UpdateFindingAggregator from the current aggregation Region. 
    */
@@ -532,11 +612,11 @@ declare class SecurityHub extends Service {
    */
   updateInsight(callback?: (err: AWSError, data: SecurityHub.Types.UpdateInsightResponse) => void): Request<SecurityHub.Types.UpdateInsightResponse, AWSError>;
   /**
-   * Used to update the configuration related to Organizations. Can only be called from a Security Hub administrator account.
+   * Updates the configuration of your organization in Security Hub. Only the Security Hub administrator account can invoke this operation.
    */
   updateOrganizationConfiguration(params: SecurityHub.Types.UpdateOrganizationConfigurationRequest, callback?: (err: AWSError, data: SecurityHub.Types.UpdateOrganizationConfigurationResponse) => void): Request<SecurityHub.Types.UpdateOrganizationConfigurationResponse, AWSError>;
   /**
-   * Used to update the configuration related to Organizations. Can only be called from a Security Hub administrator account.
+   * Updates the configuration of your organization in Security Hub. Only the Security Hub administrator account can invoke this operation.
    */
   updateOrganizationConfiguration(callback?: (err: AWSError, data: SecurityHub.Types.UpdateOrganizationConfigurationResponse) => void): Request<SecurityHub.Types.UpdateOrganizationConfigurationResponse, AWSError>;
   /**
@@ -721,6 +801,20 @@ declare namespace SecurityHub {
     StandardsId?: NonEmptyString;
   }
   export type AssociatedStandardsList = AssociatedStandard[];
+  export interface AssociationFilters {
+    /**
+     *  The ARN or UUID of the configuration policy. 
+     */
+    ConfigurationPolicyId?: NonEmptyString;
+    /**
+     *  Indicates whether the association between a target and a configuration was directly applied by the Security Hub delegated administrator or inherited from a parent. 
+     */
+    AssociationType?: AssociationType;
+    /**
+     *  The current status of the association between a target and a configuration policy. 
+     */
+    AssociationStatus?: ConfigurationPolicyAssociationStatus;
+  }
   export interface AssociationSetDetails {
     /**
      *  The state of the association between a route table and a subnet or gateway. 
@@ -759,6 +853,7 @@ declare namespace SecurityHub {
     StatusMessage?: NonEmptyString;
   }
   export type AssociationStatus = "ENABLED"|"DISABLED"|string;
+  export type AssociationType = "INHERITED"|"APPLIED"|string;
   export type AutoEnableStandards = "NONE"|"DEFAULT"|string;
   export interface AutomationRulesAction {
     /**
@@ -854,7 +949,7 @@ declare namespace SecurityHub {
      */
     ProductArn?: StringFilterList;
     /**
-     *  The Amazon Web Services account ID in which a finding was generated.   Array Members: Minimum number of 1 item. Maximum number of 100 items. 
+     * The Amazon Web Services account ID in which a finding was generated.  Array Members: Minimum number of 1 item. Maximum number of 100 items. 
      */
     AwsAccountId?: StringFilterList;
     /**
@@ -989,6 +1084,18 @@ declare namespace SecurityHub {
      *  A list of user-defined name and value string pairs added to a finding.   Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     UserDefinedFields?: MapFilterList;
+    /**
+     *  The Amazon Resource Name (ARN) of the application that is related to a finding.   Array Members: Minimum number of 1 item. Maximum number of 20 items. 
+     */
+    ResourceApplicationArn?: StringFilterList;
+    /**
+     *  The name of the application that is related to a finding.   Array Members: Minimum number of 1 item. Maximum number of 20 items. 
+     */
+    ResourceApplicationName?: StringFilterList;
+    /**
+     * The name of the Amazon Web Services account in which a finding was generated.   Array Members: Minimum number of 1 item. Maximum number of 20 items. 
+     */
+    AwsAccountName?: StringFilterList;
   }
   export interface AutomationRulesMetadata {
     /**
@@ -10432,6 +10539,14 @@ declare namespace SecurityHub {
      * Provides metadata for the Amazon CodeGuru detector associated with a finding. This field pertains to findings that relate to Lambda functions. Amazon Inspector identifies policy violations and vulnerabilities in Lambda function code based on internal detectors developed in collaboration with Amazon CodeGuru. Security Hub receives those findings. 
      */
     GeneratorDetails?: GeneratorDetails;
+    /**
+     * An ISO8601-formatted timestamp that indicates when Security Hub received a finding and begins to process it. A correctly formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces, and date and time should be separated by T. For more information, see RFC 3339 section 5.6, Internet Date/Time Format.
+     */
+    ProcessedAt?: NonEmptyString;
+    /**
+     * The name of the Amazon Web Services account from which a finding was generated. 
+     */
+    AwsAccountName?: NonEmptyString;
   }
   export interface AwsSecurityFindingFilters {
     /**
@@ -10439,7 +10554,7 @@ declare namespace SecurityHub {
      */
     ProductArn?: StringFilterList;
     /**
-     * The Amazon Web Services account ID that a finding is generated in.
+     * The Amazon Web Services account ID in which a finding is generated.
      */
     AwsAccountId?: StringFilterList;
     /**
@@ -10838,6 +10953,18 @@ declare namespace SecurityHub {
      *  The current value of a security control parameter. 
      */
     ComplianceSecurityControlParametersValue?: StringFilterList;
+    /**
+     * The name of the Amazon Web Services account in which a finding is generated.
+     */
+    AwsAccountName?: StringFilterList;
+    /**
+     *  The name of the application that is related to a finding. 
+     */
+    ResourceApplicationName?: StringFilterList;
+    /**
+     *  The ARN of the application that is related to a finding. 
+     */
+    ResourceApplicationArn?: StringFilterList;
   }
   export interface AwsSecurityFindingIdentifier {
     /**
@@ -11693,6 +11820,22 @@ declare namespace SecurityHub {
      */
     UnprocessedAutomationRules?: UnprocessedAutomationRulesList;
   }
+  export interface BatchGetConfigurationPolicyAssociationsRequest {
+    /**
+     *  Specifies one or more target account IDs, organizational unit (OU) IDs, or the root ID to retrieve associations for. 
+     */
+    ConfigurationPolicyAssociationIdentifiers: ConfigurationPolicyAssociationsList;
+  }
+  export interface BatchGetConfigurationPolicyAssociationsResponse {
+    /**
+     *  Describes associations for the target accounts, OUs, or the root. 
+     */
+    ConfigurationPolicyAssociations?: ConfigurationPolicyAssociationList;
+    /**
+     *  An array of configuration policy associations, one for each configuration policy association identifier, that was specified in the request but couldn’t be processed due to an error. 
+     */
+    UnprocessedConfigurationPolicyAssociations?: UnprocessedConfigurationPolicyAssociationList;
+  }
   export interface BatchGetSecurityControlsRequest {
     /**
      *  A list of security controls (identified with SecurityControlId, SecurityControlArn, or a mix of both parameters). The security control ID or Amazon Resource Name (ARN) is the same across standards. 
@@ -12022,6 +12165,73 @@ declare namespace SecurityHub {
      */
     EnumList?: EnumListConfigurationOptions;
   }
+  export interface ConfigurationPolicyAssociation {
+    /**
+     *  The target account, organizational unit, or the root. 
+     */
+    Target?: Target;
+  }
+  export type ConfigurationPolicyAssociationList = ConfigurationPolicyAssociationSummary[];
+  export type ConfigurationPolicyAssociationStatus = "PENDING"|"SUCCESS"|"FAILED"|string;
+  export interface ConfigurationPolicyAssociationSummary {
+    /**
+     *  The universally unique identifier (UUID) of the configuration policy. 
+     */
+    ConfigurationPolicyId?: NonEmptyString;
+    /**
+     *  The identifier of the target account, organizational unit, or the root. 
+     */
+    TargetId?: NonEmptyString;
+    /**
+     *  Specifies whether the target is an Amazon Web Services account, organizational unit, or the root. 
+     */
+    TargetType?: TargetType;
+    /**
+     *  Indicates whether the association between the specified target and the configuration was directly applied by the Security Hub delegated administrator or inherited from a parent. 
+     */
+    AssociationType?: AssociationType;
+    /**
+     *  The date and time, in UTC and ISO 8601 format, that the configuration policy association was last updated. 
+     */
+    UpdatedAt?: Timestamp;
+    /**
+     *  The current status of the association between the specified target and the configuration. 
+     */
+    AssociationStatus?: ConfigurationPolicyAssociationStatus;
+    /**
+     *  The explanation for a FAILED value for AssociationStatus. 
+     */
+    AssociationStatusMessage?: NonEmptyString;
+  }
+  export type ConfigurationPolicyAssociationSummaryList = ConfigurationPolicyAssociationSummary[];
+  export type ConfigurationPolicyAssociationsList = ConfigurationPolicyAssociation[];
+  export interface ConfigurationPolicySummary {
+    /**
+     *  The Amazon Resource Name (ARN) of the configuration policy. 
+     */
+    Arn?: NonEmptyString;
+    /**
+     *  The universally unique identifier (UUID) of the configuration policy. 
+     */
+    Id?: NonEmptyString;
+    /**
+     *  The name of the configuration policy. 
+     */
+    Name?: NonEmptyString;
+    /**
+     *  The description of the configuration policy. 
+     */
+    Description?: NonEmptyString;
+    /**
+     *  The date and time, in UTC and ISO 8601 format, that the configuration policy was last updated. 
+     */
+    UpdatedAt?: Timestamp;
+    /**
+     *  Indicates whether the service that the configuration policy applies to is enabled in the policy. 
+     */
+    ServiceEnabled?: Boolean;
+  }
+  export type ConfigurationPolicySummaryList = ConfigurationPolicySummary[];
   export interface ContainerDetails {
     /**
      * The runtime of the container. 
@@ -12086,7 +12296,7 @@ declare namespace SecurityHub {
   }
   export interface CreateAutomationRuleRequest {
     /**
-     *  User-defined tags that help you label the purpose of a rule. 
+     *  User-defined tags associated with an automation rule. 
      */
     Tags?: TagMap;
     /**
@@ -12123,6 +12333,54 @@ declare namespace SecurityHub {
      *  The Amazon Resource Name (ARN) of the automation rule that you created. 
      */
     RuleArn?: NonEmptyString;
+  }
+  export interface CreateConfigurationPolicyRequest {
+    /**
+     *  The name of the configuration policy. 
+     */
+    Name: NonEmptyString;
+    /**
+     *  The description of the configuration policy. 
+     */
+    Description?: NonEmptyString;
+    /**
+     *  An object that defines how Security Hub is configured. It includes whether Security Hub is enabled or disabled, a list of enabled security standards, a list of enabled or disabled security controls, and a list of custom parameter values for specified controls. If you provide a list of security controls that are enabled in the configuration policy, Security Hub disables all other controls (including newly released controls). If you provide a list of security controls that are disabled in the configuration policy, Security Hub enables all other controls (including newly released controls). 
+     */
+    ConfigurationPolicy: Policy;
+    /**
+     *  User-defined tags associated with a configuration policy. For more information, see Tagging Security Hub resources in the Security Hub user guide. 
+     */
+    Tags?: TagMap;
+  }
+  export interface CreateConfigurationPolicyResponse {
+    /**
+     *  The Amazon Resource Name (ARN) of the configuration policy. 
+     */
+    Arn?: NonEmptyString;
+    /**
+     *  The universally unique identifier (UUID) of the configuration policy. 
+     */
+    Id?: NonEmptyString;
+    /**
+     *  The name of the configuration policy. 
+     */
+    Name?: NonEmptyString;
+    /**
+     *  The description of the configuration policy. 
+     */
+    Description?: NonEmptyString;
+    /**
+     *  The date and time, in UTC and ISO 8601 format, that the configuration policy was last updated. 
+     */
+    UpdatedAt?: Timestamp;
+    /**
+     *  The date and time, in UTC and ISO 8601 format, that the configuration policy was created. 
+     */
+    CreatedAt?: Timestamp;
+    /**
+     *  An object that defines how Security Hub is configured. It includes whether Security Hub is enabled or disabled, a list of enabled security standards, a list of enabled or disabled security controls, and a list of custom parameter values for specified controls. If the request included a list of security controls that are enabled in the configuration policy, Security Hub disables all other controls (including newly released controls). If the request included a list of security controls that are disabled in the configuration policy, Security Hub enables all other controls (including newly released controls). 
+     */
+    ConfigurationPolicy?: Policy;
   }
   export interface CreateFindingAggregatorRequest {
     /**
@@ -12298,6 +12556,14 @@ declare namespace SecurityHub {
      */
     ActionTargetArn: NonEmptyString;
   }
+  export interface DeleteConfigurationPolicyRequest {
+    /**
+     *  The Amazon Resource Name (ARN) or universally unique identifier (UUID) of the configuration policy. 
+     */
+    Identifier: NonEmptyString;
+  }
+  export interface DeleteConfigurationPolicyResponse {
+  }
   export interface DeleteFindingAggregatorRequest {
     /**
      * The ARN of the finding aggregator to delete. To obtain the ARN, use ListFindingAggregators.
@@ -12394,7 +12660,7 @@ declare namespace SecurityHub {
   }
   export interface DescribeOrganizationConfigurationResponse {
     /**
-     * Whether to automatically enable Security Hub for new accounts in the organization. If set to true, then Security Hub is enabled for new accounts. If set to false, then new accounts are not added automatically.
+     * Whether to automatically enable Security Hub in new member accounts when they join the organization. If set to true, then Security Hub is automatically enabled in new accounts. If set to false, then Security Hub isn't enabled in new accounts automatically. The default value is false. If the ConfigurationType of your organization is set to CENTRAL, then this field is set to false and can't be changed in the home Region and linked Regions. However, in that case, the delegated administrator can create a configuration policy in which Security Hub is enabled and associate the policy with new organization accounts.
      */
     AutoEnable?: Boolean;
     /**
@@ -12402,9 +12668,10 @@ declare namespace SecurityHub {
      */
     MemberAccountLimitReached?: Boolean;
     /**
-     * Whether to automatically enable Security Hub default standards for new member accounts in the organization. The default value of this parameter is equal to DEFAULT. If equal to DEFAULT, then Security Hub default standards are automatically enabled for new member accounts. If equal to NONE, then default standards are not automatically enabled for new member accounts.
+     * Whether to automatically enable Security Hub default standards in new member accounts when they join the organization. If equal to DEFAULT, then Security Hub default standards are automatically enabled for new member accounts. If equal to NONE, then default standards are not automatically enabled for new member accounts. The default value of this parameter is equal to DEFAULT. If the ConfigurationType of your organization is set to CENTRAL, then this field is set to NONE and can't be changed in the home Region and linked Regions. However, in that case, the delegated administrator can create a configuration policy in which specific security standards are enabled and associate the policy with new organization accounts.
      */
     AutoEnableStandards?: AutoEnableStandards;
+    OrganizationConfiguration?: OrganizationConfiguration;
   }
   export interface DescribeProductsRequest {
     /**
@@ -12494,6 +12761,7 @@ declare namespace SecurityHub {
   }
   export interface DisableSecurityHubResponse {
   }
+  export type DisabledSecurityControlIdentifierList = NonEmptyString[];
   export interface DisassociateFromAdministratorAccountRequest {
   }
   export interface DisassociateFromAdministratorAccountResponse {
@@ -12575,6 +12843,8 @@ declare namespace SecurityHub {
   }
   export interface EnableSecurityHubResponse {
   }
+  export type EnabledSecurityControlIdentifierList = NonEmptyString[];
+  export type EnabledStandardIdentifierList = NonEmptyString[];
   export interface EnumConfigurationOptions {
     /**
      *  The Security Hub default value for a control parameter that is an enum. 
@@ -12787,6 +13057,78 @@ declare namespace SecurityHub {
   }
   export interface GetAdministratorAccountResponse {
     Administrator?: Invitation;
+  }
+  export interface GetConfigurationPolicyAssociationRequest {
+    /**
+     *  The target account ID, organizational unit ID, or the root ID to retrieve the association for. 
+     */
+    Target: Target;
+  }
+  export interface GetConfigurationPolicyAssociationResponse {
+    /**
+     *  The universally unique identifier (UUID) of a configuration policy. For self-managed behavior, the value is SELF_MANAGED_SECURITY_HUB. 
+     */
+    ConfigurationPolicyId?: NonEmptyString;
+    /**
+     *  The target account ID, organizational unit ID, or the root ID for which the association is retrieved. 
+     */
+    TargetId?: NonEmptyString;
+    /**
+     *  Specifies whether the target is an Amazon Web Services account, organizational unit, or the organization root. 
+     */
+    TargetType?: TargetType;
+    /**
+     *  Indicates whether the association between the specified target and the configuration was directly applied by the Security Hub delegated administrator or inherited from a parent. 
+     */
+    AssociationType?: AssociationType;
+    /**
+     *  The date and time, in UTC and ISO 8601 format, that the configuration policy association was last updated. 
+     */
+    UpdatedAt?: Timestamp;
+    /**
+     *  The current status of the association between the specified target and the configuration. 
+     */
+    AssociationStatus?: ConfigurationPolicyAssociationStatus;
+    /**
+     *  The explanation for a FAILED value for AssociationStatus. 
+     */
+    AssociationStatusMessage?: NonEmptyString;
+  }
+  export interface GetConfigurationPolicyRequest {
+    /**
+     *  The Amazon Resource Name (ARN) or universally unique identifier (UUID) of the configuration policy. 
+     */
+    Identifier: NonEmptyString;
+  }
+  export interface GetConfigurationPolicyResponse {
+    /**
+     *  The ARN of the configuration policy. 
+     */
+    Arn?: NonEmptyString;
+    /**
+     *  The UUID of the configuration policy. 
+     */
+    Id?: NonEmptyString;
+    /**
+     *  The name of the configuration policy. 
+     */
+    Name?: NonEmptyString;
+    /**
+     *  The description of the configuration policy. 
+     */
+    Description?: NonEmptyString;
+    /**
+     *  The date and time, in UTC and ISO 8601 format, that the configuration policy was last updated. 
+     */
+    UpdatedAt?: Timestamp;
+    /**
+     *  The date and time, in UTC and ISO 8601 format, that the configuration policy was created. 
+     */
+    CreatedAt?: Timestamp;
+    /**
+     *  An object that defines how Security Hub is configured. It includes whether Security Hub is enabled or disabled, a list of enabled security standards, a list of enabled or disabled security controls, and a list of custom parameter values for specified controls. If the policy includes a list of security controls that are enabled, Security Hub disables all other controls (including newly released controls). If the policy includes a list of security controls that are disabled, Security Hub enables all other controls (including newly released controls). 
+     */
+    ConfigurationPolicy?: Policy;
   }
   export interface GetEnabledStandardsRequest {
     /**
@@ -13170,6 +13512,50 @@ declare namespace SecurityHub {
     AutomationRulesMetadata?: AutomationRulesMetadataList;
     /**
      *  A pagination token for the response. 
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListConfigurationPoliciesRequest {
+    /**
+     *  The NextToken value that's returned from a previous paginated ListConfigurationPolicies request where MaxResults was used but the results exceeded the value of that parameter. Pagination continues from the MaxResults was used but the results exceeded the value of that parameter. Pagination continues from the end of the previous response that returned the NextToken value. This value is null when there are no more results to return. 
+     */
+    NextToken?: NextToken;
+    /**
+     *  The maximum number of results that's returned by ListConfigurationPolicies in each page of the response. When this parameter is used, ListConfigurationPolicies returns the specified number of results in a single page and a NextToken response element. You can see the remaining results of the initial request by sending another ListConfigurationPolicies request with the returned NextToken value. A valid range for MaxResults is between 1 and 100. 
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListConfigurationPoliciesResponse {
+    /**
+     *  Provides metadata for each of your configuration policies. 
+     */
+    ConfigurationPolicySummaries?: ConfigurationPolicySummaryList;
+    /**
+     *  The NextToken value to include in the next ListConfigurationPolicies request. When the results of a ListConfigurationPolicies request exceed MaxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return. 
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListConfigurationPolicyAssociationsRequest {
+    /**
+     *  The NextToken value that's returned from a previous paginated ListConfigurationPolicyAssociations request where MaxResults was used but the results exceeded the value of that parameter. Pagination continues from the end of the previous response that returned the NextToken value. This value is null when there are no more results to return. 
+     */
+    NextToken?: NextToken;
+    /**
+     *  The maximum number of results that's returned by ListConfigurationPolicies in each page of the response. When this parameter is used, ListConfigurationPolicyAssociations returns the specified number of results in a single page and a NextToken response element. You can see the remaining results of the initial request by sending another ListConfigurationPolicyAssociations request with the returned NextToken value. A valid range for MaxResults is between 1 and 100. 
+     */
+    MaxResults?: MaxResults;
+    /**
+     *  Options for filtering the ListConfigurationPolicyAssociations response. You can filter by the Amazon Resource Name (ARN) or universally unique identifier (UUID) of a configuration, AssociationType, or AssociationStatus. 
+     */
+    Filters?: AssociationFilters;
+  }
+  export interface ListConfigurationPolicyAssociationsResponse {
+    /**
+     *  An object that contains the details of each configuration policy association that’s returned in a ListConfigurationPolicyAssociations request. 
+     */
+    ConfigurationPolicyAssociationSummaries?: ConfigurationPolicyAssociationSummaryList;
+    /**
+     *  The NextToken value to include in the next ListConfigurationPolicyAssociations request. When the results of a ListConfigurationPolicyAssociations request exceed MaxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: NextToken;
   }
@@ -13609,6 +13995,22 @@ declare namespace SecurityHub {
      */
     Cells?: Cells;
   }
+  export interface OrganizationConfiguration {
+    /**
+     *  Indicates whether the organization uses local or central configuration.  If you use local configuration, the Security Hub delegated administrator can set AutoEnable to true and AutoEnableStandards to DEFAULT. This automatically enables Security Hub and default security standards in new organization accounts. These new account settings must be set separately in each Amazon Web Services Region, and settings may be different in each Region.   If you use central configuration, the delegated administrator can create configuration policies. Configuration policies can be used to configure Security Hub, security standards, and security controls in multiple accounts and Regions. If you want new organization accounts to use a specific configuration, you can create a configuration policy and associate it with the root or specific organizational units (OUs). New accounts will inherit the policy from the root or their assigned OU. 
+     */
+    ConfigurationType?: OrganizationConfigurationConfigurationType;
+    /**
+     *  Describes whether central configuration could be enabled as the ConfigurationType for the organization. If your ConfigurationType is local configuration, then the value of Status is always ENABLED. 
+     */
+    Status?: OrganizationConfigurationStatus;
+    /**
+     *  Provides an explanation if the value of Status is equal to FAILED when ConfigurationType is equal to CENTRAL. 
+     */
+    StatusMessage?: NonEmptyString;
+  }
+  export type OrganizationConfigurationConfigurationType = "CENTRAL"|"LOCAL"|string;
+  export type OrganizationConfigurationStatus = "PENDING"|"ENABLED"|"FAILED"|string;
   export interface Page {
     /**
      * The page number of the page that contains the sensitive data.
@@ -13727,6 +14129,12 @@ declare namespace SecurityHub {
      * The type of patch operation performed. For Patch Manager, the values are SCAN and INSTALL. 
      */
     Operation?: NonEmptyString;
+  }
+  export interface Policy {
+    /**
+     *  The Amazon Web Service that the configuration policy applies to. 
+     */
+    SecurityHub?: SecurityHubPolicy;
   }
   export interface PortProbeAction {
     /**
@@ -13937,6 +14345,14 @@ declare namespace SecurityHub {
      * Additional details about the resource related to a finding.
      */
     Details?: ResourceDetails;
+    /**
+     *  The name of the application that is related to a finding. 
+     */
+    ApplicationName?: NonEmptyString;
+    /**
+     *  The Amazon Resource Name (ARN) of the application that is related to a finding. 
+     */
+    ApplicationArn?: NonEmptyString;
   }
   export type ResourceArn = string;
   export interface ResourceDetails {
@@ -14673,6 +15089,17 @@ declare namespace SecurityHub {
      */
     LastUpdateReason?: AlphaNumericNonEmptyString;
   }
+  export interface SecurityControlCustomParameter {
+    /**
+     *  The ID of the security control. 
+     */
+    SecurityControlId?: NonEmptyString;
+    /**
+     *  An object that specifies parameter values for a control in a configuration policy. 
+     */
+    Parameters?: Parameters;
+  }
+  export type SecurityControlCustomParametersList = SecurityControlCustomParameter[];
   export interface SecurityControlDefinition {
     /**
      *  The unique identifier of a security control across standards. Values for this field typically consist of an Amazon Web Service name and a number (for example, APIGateway.3). This parameter differs from SecurityControlArn, which is a unique Amazon Resource Name (ARN) assigned to a control. The ARN references the security control ID (for example, arn:aws:securityhub:eu-central-1:123456789012:security-control/APIGateway.3). 
@@ -14721,7 +15148,35 @@ declare namespace SecurityHub {
   export type SecurityControlParametersList = SecurityControlParameter[];
   export type SecurityControlProperty = "Parameters"|string;
   export type SecurityControls = SecurityControl[];
+  export interface SecurityControlsConfiguration {
+    /**
+     *  A list of security controls that are enabled in the configuration policy. Security Hub disables all other controls (including newly released controls) other than the listed controls. 
+     */
+    EnabledSecurityControlIdentifiers?: EnabledSecurityControlIdentifierList;
+    /**
+     *  A list of security controls that are disabled in the configuration policy. Security Hub enables all other controls (including newly released controls) other than the listed controls. 
+     */
+    DisabledSecurityControlIdentifiers?: DisabledSecurityControlIdentifierList;
+    /**
+     *  A list of security controls and control parameter values that are included in a configuration policy. 
+     */
+    SecurityControlCustomParameters?: SecurityControlCustomParametersList;
+  }
   export type SecurityGroups = NonEmptyString[];
+  export interface SecurityHubPolicy {
+    /**
+     *  Indicates whether Security Hub is enabled in the policy. 
+     */
+    ServiceEnabled?: Boolean;
+    /**
+     *  A list that defines which security standards are enabled in the configuration policy. 
+     */
+    EnabledStandardIdentifiers?: EnabledStandardIdentifierList;
+    /**
+     *  An object that defines which security controls are enabled in the configuration policy. The enablement status of a control is aligned across all of the enabled standards in an account. 
+     */
+    SecurityControlsConfiguration?: SecurityControlsConfiguration;
+  }
   export interface SensitiveDataDetections {
     /**
      * The total number of occurrences of sensitive data that were detected.
@@ -14989,11 +15444,11 @@ declare namespace SecurityHub {
      */
     RelatedRequirements?: RelatedRequirementsList;
     /**
-     *  The last time that a control's enablement status in a specified standard was updated. 
+     * The last time that a control's enablement status in a specified standard was updated.
      */
     UpdatedAt?: Timestamp;
     /**
-     *  The reason for updating the control's enablement status in a specified standard. 
+     * The reason for updating a control's enablement status in a specified standard.
      */
     UpdatedReason?: NonEmptyString;
     /**
@@ -15078,6 +15533,58 @@ declare namespace SecurityHub {
   }
   export type StandardsSubscriptionRequests = StandardsSubscriptionRequest[];
   export type StandardsSubscriptions = StandardsSubscription[];
+  export interface StartConfigurationPolicyAssociationRequest {
+    /**
+     *  The Amazon Resource Name (ARN) or universally unique identifier (UUID) of the configuration policy. 
+     */
+    ConfigurationPolicyIdentifier: NonEmptyString;
+    /**
+     *  The identifier of the target account, organizational unit, or the root to associate with the specified configuration. 
+     */
+    Target: Target;
+  }
+  export interface StartConfigurationPolicyAssociationResponse {
+    /**
+     *  The UUID of the configuration policy. 
+     */
+    ConfigurationPolicyId?: NonEmptyString;
+    /**
+     *  The identifier of the target account, organizational unit, or the organization root with which the configuration is associated. 
+     */
+    TargetId?: NonEmptyString;
+    /**
+     *  Indicates whether the target is an Amazon Web Services account, organizational unit, or the organization root. 
+     */
+    TargetType?: TargetType;
+    /**
+     *  Indicates whether the association between the specified target and the configuration was directly applied by the Security Hub delegated administrator or inherited from a parent. 
+     */
+    AssociationType?: AssociationType;
+    /**
+     *  The date and time, in UTC and ISO 8601 format, that the configuration policy association was last updated. 
+     */
+    UpdatedAt?: Timestamp;
+    /**
+     *  The current status of the association between the specified target and the configuration. 
+     */
+    AssociationStatus?: ConfigurationPolicyAssociationStatus;
+    /**
+     *  An explanation for a FAILED value for AssociationStatus. 
+     */
+    AssociationStatusMessage?: NonEmptyString;
+  }
+  export interface StartConfigurationPolicyDisassociationRequest {
+    /**
+     *  The identifier of the target account, organizational unit, or the root to disassociate from the specified configuration. 
+     */
+    Target?: Target;
+    /**
+     *  The Amazon Resource Name (ARN) or universally unique identifier (UUID) of the configuration policy. 
+     */
+    ConfigurationPolicyIdentifier: NonEmptyString;
+  }
+  export interface StartConfigurationPolicyDisassociationResponse {
+  }
   export interface StatelessCustomActionDefinition {
     /**
      * Information about metrics to publish to CloudWatch.
@@ -15170,6 +15677,21 @@ declare namespace SecurityHub {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export interface Target {
+    /**
+     *  The Amazon Web Services account ID of the target account. 
+     */
+    AccountId?: NonEmptyString;
+    /**
+     *  The organizational unit ID of the target organizational unit. 
+     */
+    OrganizationalUnitId?: NonEmptyString;
+    /**
+     *  The ID of the organization root. 
+     */
+    RootId?: NonEmptyString;
+  }
+  export type TargetType = "ACCOUNT"|"ORGANIZATIONAL_UNIT"|string;
   export interface Threat {
     /**
      * The name of the threat. 
@@ -15235,6 +15757,21 @@ declare namespace SecurityHub {
     ErrorMessage?: NonEmptyString;
   }
   export type UnprocessedAutomationRulesList = UnprocessedAutomationRule[];
+  export interface UnprocessedConfigurationPolicyAssociation {
+    /**
+     *  Configuration policy association identifiers that were specified in a BatchGetConfigurationPolicyAssociations request but couldn’t be processed due to an error. 
+     */
+    ConfigurationPolicyAssociationIdentifiers?: ConfigurationPolicyAssociation;
+    /**
+     *  An HTTP status code that identifies why the configuration policy association failed. 
+     */
+    ErrorCode?: NonEmptyString;
+    /**
+     *  A string that identifies why the configuration policy association failed. 
+     */
+    ErrorReason?: NonEmptyString;
+  }
+  export type UnprocessedConfigurationPolicyAssociationList = UnprocessedConfigurationPolicyAssociation[];
   export type UnprocessedErrorCode = "INVALID_INPUT"|"ACCESS_DENIED"|"NOT_FOUND"|"LIMIT_EXCEEDED"|string;
   export interface UnprocessedSecurityControl {
     /**
@@ -15344,6 +15881,58 @@ declare namespace SecurityHub {
     Actions?: ActionList;
   }
   export type UpdateAutomationRulesRequestItemsList = UpdateAutomationRulesRequestItem[];
+  export interface UpdateConfigurationPolicyRequest {
+    /**
+     *  The Amazon Resource Name (ARN) or universally unique identifier (UUID) of the configuration policy. 
+     */
+    Identifier: NonEmptyString;
+    /**
+     *  The name of the configuration policy. 
+     */
+    Name?: NonEmptyString;
+    /**
+     *  The description of the configuration policy. 
+     */
+    Description?: NonEmptyString;
+    /**
+     *  The reason for updating the configuration policy. 
+     */
+    UpdatedReason?: NonEmptyString;
+    /**
+     *  An object that defines how Security Hub is configured. It includes whether Security Hub is enabled or disabled, a list of enabled security standards, a list of enabled or disabled security controls, and a list of custom parameter values for specified controls. If you provide a list of security controls that are enabled in the configuration policy, Security Hub disables all other controls (including newly released controls). If you provide a list of security controls that are disabled in the configuration policy, Security Hub enables all other controls (including newly released controls).  When updating a configuration policy, provide a complete list of standards that you want to enable and a complete list of controls that you want to enable or disable. The updated configuration replaces the current configuration.
+     */
+    ConfigurationPolicy?: Policy;
+  }
+  export interface UpdateConfigurationPolicyResponse {
+    /**
+     *  The ARN of the configuration policy. 
+     */
+    Arn?: NonEmptyString;
+    /**
+     *  The UUID of the configuration policy. 
+     */
+    Id?: NonEmptyString;
+    /**
+     *  The name of the configuration policy. 
+     */
+    Name?: NonEmptyString;
+    /**
+     *  The description of the configuration policy. 
+     */
+    Description?: NonEmptyString;
+    /**
+     *  The date and time, in UTC and ISO 8601 format, that the configuration policy was last updated. 
+     */
+    UpdatedAt?: Timestamp;
+    /**
+     *  The date and time, in UTC and ISO 8601 format, that the configuration policy was created. 
+     */
+    CreatedAt?: Timestamp;
+    /**
+     *  An object that defines how Security Hub is configured. It includes whether Security Hub is enabled or disabled, a list of enabled security standards, a list of enabled or disabled security controls, and a list of custom parameter values for specified controls. If the request included a list of security controls that are enabled in the configuration policy, Security Hub disables all other controls (including newly released controls). If the request included a list of security controls that are disabled in the configuration policy, Security Hub enables all other controls (including newly released controls). 
+     */
+    ConfigurationPolicy?: Policy;
+  }
   export interface UpdateFindingAggregatorRequest {
     /**
      * The ARN of the finding aggregator. To obtain the ARN, use ListFindingAggregators.
@@ -15414,13 +16003,14 @@ declare namespace SecurityHub {
   }
   export interface UpdateOrganizationConfigurationRequest {
     /**
-     * Whether to automatically enable Security Hub for new accounts in the organization. By default, this is false, and new accounts are not added automatically. To automatically enable Security Hub for new accounts, set this to true.
+     * Whether to automatically enable Security Hub in new member accounts when they join the organization. If set to true, then Security Hub is automatically enabled in new accounts. If set to false, then Security Hub isn't enabled in new accounts automatically. The default value is false. If the ConfigurationType of your organization is set to CENTRAL, then this field is set to false and can't be changed in the home Region and linked Regions. However, in that case, the delegated administrator can create a configuration policy in which Security Hub is enabled and associate the policy with new organization accounts.
      */
     AutoEnable: Boolean;
     /**
-     * Whether to automatically enable Security Hub default standards for new member accounts in the organization. By default, this parameter is equal to DEFAULT, and new member accounts are automatically enabled with default Security Hub standards. To opt out of enabling default standards for new member accounts, set this parameter equal to NONE.
+     * Whether to automatically enable Security Hub default standards in new member accounts when they join the organization. The default value of this parameter is equal to DEFAULT. If equal to DEFAULT, then Security Hub default standards are automatically enabled for new member accounts. If equal to NONE, then default standards are not automatically enabled for new member accounts. If the ConfigurationType of your organization is set to CENTRAL, then this field is set to NONE and can't be changed in the home Region and linked Regions. However, in that case, the delegated administrator can create a configuration policy in which specific security standards are enabled and associate the policy with new organization accounts.
      */
     AutoEnableStandards?: AutoEnableStandards;
+    OrganizationConfiguration?: OrganizationConfiguration;
   }
   export interface UpdateOrganizationConfigurationResponse {
   }

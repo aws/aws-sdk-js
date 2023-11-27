@@ -1376,5 +1376,8 @@
   "workspacesthinclient": {
     "prefix": "workspaces-thin-client",
     "name": "WorkSpacesThinClient"
+  },
+  "b2bi": {
+    "name": "B2bi"
   }
 }

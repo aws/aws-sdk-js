@@ -365,3 +365,4 @@ export import EKSAuth = require('./eksauth');
 export import FreeTier = require('./freetier');
 export import Repostspace = require('./repostspace');
 export import WorkSpacesThinClient = require('./workspacesthinclient');
+export import B2bi = require('./b2bi');

@@ -1745,7 +1745,7 @@ declare namespace Glue {
     CrawlerName?: NameString;
   }
   export type ActionList = Action[];
-  export type AdditionalOptionKeys = "performanceTuning.caching"|string;
+  export type AdditionalOptionKeys = "performanceTuning.caching"|"observations.scope"|string;
   export type AdditionalOptions = {[key: string]: EnclosedInStringProperty};
   export type AdditionalPlanOptionsMap = {[key: string]: GenericString};
   export type AggFunction = "avg"|"countDistinct"|"count"|"first"|"last"|"kurtosis"|"max"|"min"|"skewness"|"stddev_samp"|"stddev_pop"|"sum"|"sumDistinct"|"var_samp"|"var_pop"|string;
@@ -3573,7 +3573,7 @@ declare namespace Glue {
      */
     Name: NodeName;
     /**
-     * The connectionType, as provided to the underlying Glue library. This node type supports the following connection types:     bigquery   
+     * The connectionType, as provided to the underlying Glue library. This node type supports the following connection types:     opensearch     azuresql     azurecosmos     bigquery     saphana     teradata     vertica   
      */
     ConnectionType: EnclosedInStringProperty;
     /**
@@ -3591,7 +3591,7 @@ declare namespace Glue {
      */
     Name: NodeName;
     /**
-     * The connectionType, as provided to the underlying Glue library. This node type supports the following connection types:     bigquery   
+     * The connectionType, as provided to the underlying Glue library. This node type supports the following connection types:     opensearch     azuresql     azurecosmos     bigquery     saphana     teradata     vertica   
      */
     ConnectionType: EnclosedInStringProperty;
     /**

@@ -367,6 +367,7 @@ export abstract class ConfigurationServicePlaceholders {
   freetier?: AWS.FreeTier.Types.ClientConfiguration;
   repostspace?: AWS.Repostspace.Types.ClientConfiguration;
   workspacesthinclient?: AWS.WorkSpacesThinClient.Types.ClientConfiguration;
+  b2bi?: AWS.B2bi.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -736,4 +737,5 @@ export interface ConfigurationServiceApiVersions {
   freetier?: AWS.FreeTier.Types.apiVersion;
   repostspace?: AWS.Repostspace.Types.apiVersion;
   workspacesthinclient?: AWS.WorkSpacesThinClient.Types.apiVersion;
+  b2bi?: AWS.B2bi.Types.apiVersion;
 }

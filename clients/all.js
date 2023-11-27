@@ -366,5 +366,6 @@ module.exports = {
   EKSAuth: require('./eksauth'),
   FreeTier: require('./freetier'),
   Repostspace: require('./repostspace'),
-  WorkSpacesThinClient: require('./workspacesthinclient')
+  WorkSpacesThinClient: require('./workspacesthinclient'),
+  B2bi: require('./b2bi')
 };

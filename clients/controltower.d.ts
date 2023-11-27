@@ -12,19 +12,19 @@ declare class ControlTower extends Service {
   constructor(options?: ControlTower.Types.ClientConfiguration)
   config: Config & ControlTower.Types.ClientConfiguration;
   /**
-   * Creates a new landing zone. This starts an asynchronous operation that creates and configures a landing zone based on the parameters specified in the manifest JSON file. 
+   * Creates a new landing zone. This API call starts an asynchronous operation that creates and configures a landing zone, based on the parameters specified in the manifest JSON file.
    */
   createLandingZone(params: ControlTower.Types.CreateLandingZoneInput, callback?: (err: AWSError, data: ControlTower.Types.CreateLandingZoneOutput) => void): Request<ControlTower.Types.CreateLandingZoneOutput, AWSError>;
   /**
-   * Creates a new landing zone. This starts an asynchronous operation that creates and configures a landing zone based on the parameters specified in the manifest JSON file. 
+   * Creates a new landing zone. This API call starts an asynchronous operation that creates and configures a landing zone, based on the parameters specified in the manifest JSON file.
    */
   createLandingZone(callback?: (err: AWSError, data: ControlTower.Types.CreateLandingZoneOutput) => void): Request<ControlTower.Types.CreateLandingZoneOutput, AWSError>;
   /**
-   * This decommissions a landing zone. This starts an asynchronous operation that deletes Amazon Web Services Control Tower resources deployed in Amazon Web Services Control Tower managed accounts. 
+   * Decommissions a landing zone. This API call starts an asynchronous operation that deletes Amazon Web Services Control Tower resources deployed in accounts managed by Amazon Web Services Control Tower.
    */
   deleteLandingZone(params: ControlTower.Types.DeleteLandingZoneInput, callback?: (err: AWSError, data: ControlTower.Types.DeleteLandingZoneOutput) => void): Request<ControlTower.Types.DeleteLandingZoneOutput, AWSError>;
   /**
-   * This decommissions a landing zone. This starts an asynchronous operation that deletes Amazon Web Services Control Tower resources deployed in Amazon Web Services Control Tower managed accounts. 
+   * Decommissions a landing zone. This API call starts an asynchronous operation that deletes Amazon Web Services Control Tower resources deployed in accounts managed by Amazon Web Services Control Tower.
    */
   deleteLandingZone(callback?: (err: AWSError, data: ControlTower.Types.DeleteLandingZoneOutput) => void): Request<ControlTower.Types.DeleteLandingZoneOutput, AWSError>;
   /**
@@ -60,19 +60,19 @@ declare class ControlTower extends Service {
    */
   getEnabledControl(callback?: (err: AWSError, data: ControlTower.Types.GetEnabledControlOutput) => void): Request<ControlTower.Types.GetEnabledControlOutput, AWSError>;
   /**
-   * Returns details about the landing zone. Displays a message in case of error. 
+   * Returns details about the landing zone. Displays a message in case of error.
    */
   getLandingZone(params: ControlTower.Types.GetLandingZoneInput, callback?: (err: AWSError, data: ControlTower.Types.GetLandingZoneOutput) => void): Request<ControlTower.Types.GetLandingZoneOutput, AWSError>;
   /**
-   * Returns details about the landing zone. Displays a message in case of error. 
+   * Returns details about the landing zone. Displays a message in case of error.
    */
   getLandingZone(callback?: (err: AWSError, data: ControlTower.Types.GetLandingZoneOutput) => void): Request<ControlTower.Types.GetLandingZoneOutput, AWSError>;
   /**
-   * Returns the status of the specified landing zone operation. Details for an operation are available for X days. 
+   * Returns the status of the specified landing zone operation. Details for an operation are available for 60 days.
    */
   getLandingZoneOperation(params: ControlTower.Types.GetLandingZoneOperationInput, callback?: (err: AWSError, data: ControlTower.Types.GetLandingZoneOperationOutput) => void): Request<ControlTower.Types.GetLandingZoneOperationOutput, AWSError>;
   /**
-   * Returns the status of the specified landing zone operation. Details for an operation are available for X days. 
+   * Returns the status of the specified landing zone operation. Details for an operation are available for 60 days.
    */
   getLandingZoneOperation(callback?: (err: AWSError, data: ControlTower.Types.GetLandingZoneOperationOutput) => void): Request<ControlTower.Types.GetLandingZoneOperationOutput, AWSError>;
   /**
@@ -84,11 +84,11 @@ declare class ControlTower extends Service {
    */
   listEnabledControls(callback?: (err: AWSError, data: ControlTower.Types.ListEnabledControlsOutput) => void): Request<ControlTower.Types.ListEnabledControlsOutput, AWSError>;
   /**
-   * Returns the landing zone ARN for the landing zone deployed in your managed account. This API also creates an ARN for existing accounts that do not yet have a landing zone ARN.  The return limit is one landing zone ARN. 
+   * Returns the landing zone ARN for the landing zone deployed in your managed account. This API also creates an ARN for existing accounts that do not yet have a landing zone ARN.  Returns one landing zone ARN.
    */
   listLandingZones(params: ControlTower.Types.ListLandingZonesInput, callback?: (err: AWSError, data: ControlTower.Types.ListLandingZonesOutput) => void): Request<ControlTower.Types.ListLandingZonesOutput, AWSError>;
   /**
-   * Returns the landing zone ARN for the landing zone deployed in your managed account. This API also creates an ARN for existing accounts that do not yet have a landing zone ARN.  The return limit is one landing zone ARN. 
+   * Returns the landing zone ARN for the landing zone deployed in your managed account. This API also creates an ARN for existing accounts that do not yet have a landing zone ARN.  Returns one landing zone ARN.
    */
   listLandingZones(callback?: (err: AWSError, data: ControlTower.Types.ListLandingZonesOutput) => void): Request<ControlTower.Types.ListLandingZonesOutput, AWSError>;
   /**
@@ -100,11 +100,11 @@ declare class ControlTower extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: ControlTower.Types.ListTagsForResourceOutput) => void): Request<ControlTower.Types.ListTagsForResourceOutput, AWSError>;
   /**
-   * This API call resets a landing zone. It starts an asynchronous operation that resets the landing zone to the parameters specified in its original configuration. 
+   * This API call resets a landing zone. It starts an asynchronous operation that resets the landing zone to the parameters specified in its original configuration.
    */
   resetLandingZone(params: ControlTower.Types.ResetLandingZoneInput, callback?: (err: AWSError, data: ControlTower.Types.ResetLandingZoneOutput) => void): Request<ControlTower.Types.ResetLandingZoneOutput, AWSError>;
   /**
-   * This API call resets a landing zone. It starts an asynchronous operation that resets the landing zone to the parameters specified in its original configuration. 
+   * This API call resets a landing zone. It starts an asynchronous operation that resets the landing zone to the parameters specified in its original configuration.
    */
   resetLandingZone(callback?: (err: AWSError, data: ControlTower.Types.ResetLandingZoneOutput) => void): Request<ControlTower.Types.ResetLandingZoneOutput, AWSError>;
   /**
@@ -124,11 +124,19 @@ declare class ControlTower extends Service {
    */
   untagResource(callback?: (err: AWSError, data: ControlTower.Types.UntagResourceOutput) => void): Request<ControlTower.Types.UntagResourceOutput, AWSError>;
   /**
-   * This API call updates the landing zone. It starts an asynchronous operation that updates the landing zone based on the new landing zone version or the updated parameters specified in the updated manifest file. 
+   *  Updates the configuration of an already enabled control. If the enabled control shows an EnablementStatus of SUCCEEDED, supply parameters that are different from the currently configured parameters. Otherwise, Amazon Web Services Control Tower will not accept the request. If the enabled control shows an EnablementStatus of FAILED, Amazon Web Services Control Tower will update the control to match any valid parameters that you supply. If the DriftSummary status for the control shows as DRIFTED, you cannot call this API. Instead, you can update the control by calling DisableControl and again calling EnableControl, or you can run an extending governance operation. For usage examples, see  the Amazon Web Services Control Tower User Guide  
+   */
+  updateEnabledControl(params: ControlTower.Types.UpdateEnabledControlInput, callback?: (err: AWSError, data: ControlTower.Types.UpdateEnabledControlOutput) => void): Request<ControlTower.Types.UpdateEnabledControlOutput, AWSError>;
+  /**
+   *  Updates the configuration of an already enabled control. If the enabled control shows an EnablementStatus of SUCCEEDED, supply parameters that are different from the currently configured parameters. Otherwise, Amazon Web Services Control Tower will not accept the request. If the enabled control shows an EnablementStatus of FAILED, Amazon Web Services Control Tower will update the control to match any valid parameters that you supply. If the DriftSummary status for the control shows as DRIFTED, you cannot call this API. Instead, you can update the control by calling DisableControl and again calling EnableControl, or you can run an extending governance operation. For usage examples, see  the Amazon Web Services Control Tower User Guide  
+   */
+  updateEnabledControl(callback?: (err: AWSError, data: ControlTower.Types.UpdateEnabledControlOutput) => void): Request<ControlTower.Types.UpdateEnabledControlOutput, AWSError>;
+  /**
+   * This API call updates the landing zone. It starts an asynchronous operation that updates the landing zone based on the new landing zone version, or on the changed parameters specified in the updated manifest file. 
    */
   updateLandingZone(params: ControlTower.Types.UpdateLandingZoneInput, callback?: (err: AWSError, data: ControlTower.Types.UpdateLandingZoneOutput) => void): Request<ControlTower.Types.UpdateLandingZoneOutput, AWSError>;
   /**
-   * This API call updates the landing zone. It starts an asynchronous operation that updates the landing zone based on the new landing zone version or the updated parameters specified in the updated manifest file. 
+   * This API call updates the landing zone. It starts an asynchronous operation that updates the landing zone based on the new landing zone version, or on the changed parameters specified in the updated manifest file. 
    */
   updateLandingZone(callback?: (err: AWSError, data: ControlTower.Types.UpdateLandingZoneOutput) => void): Request<ControlTower.Types.UpdateLandingZoneOutput, AWSError>;
 }
@@ -158,7 +166,7 @@ declare namespace ControlTower {
     statusMessage?: String;
   }
   export type ControlOperationStatus = "SUCCEEDED"|"FAILED"|"IN_PROGRESS"|string;
-  export type ControlOperationType = "ENABLE_CONTROL"|"DISABLE_CONTROL"|string;
+  export type ControlOperationType = "ENABLE_CONTROL"|"DISABLE_CONTROL"|"UPDATE_ENABLED_CONTROL"|string;
   export interface CreateLandingZoneInput {
     /**
      * The manifest.yaml file is a text file that describes your Amazon Web Services resources. For examples, review The manifest file. 
@@ -169,35 +177,35 @@ declare namespace ControlTower {
      */
     tags?: TagMap;
     /**
-     * The landing zone version. 
+     * The landing zone version, for example, 3.0.
      */
     version: LandingZoneVersion;
   }
   export interface CreateLandingZoneOutput {
     /**
-     * The ARN of the landing zone. 
+     * The ARN of the landing zone resource.
      */
     arn: Arn;
     /**
-     * A unique identifier assigned to a CreateLandingZone operation. You can use this identifier as an input of GetLandingZoneOperation to check the operation's status. 
+     * A unique identifier assigned to a CreateLandingZone operation. You can use this identifier as an input of GetLandingZoneOperation to check the operation's status.
      */
     operationIdentifier: OperationIdentifier;
   }
   export interface DeleteLandingZoneInput {
     /**
-     * The unique identifier of the landing zone. 
+     * The unique identifier of the landing zone.
      */
     landingZoneIdentifier: String;
   }
   export interface DeleteLandingZoneOutput {
     /**
-     * A unique identifier assigned to a DeleteLandingZone operation. You can use this identifier as an input of GetLandingZoneOperation to check the operation's status. 
+     * &gt;A unique identifier assigned to a DeleteLandingZone operation. You can use this identifier as an input parameter of GetLandingZoneOperation to check the operation's status.
      */
     operationIdentifier: OperationIdentifier;
   }
   export interface DisableControlInput {
     /**
-     * The ARN of the control. Only Strongly recommended and Elective controls are permitted, with the exception of the Region deny control. For information on how to find the controlIdentifier, see the overview page.
+     * The ARN of the control. Only Strongly recommended and Elective controls are permitted, with the exception of the landing zone Region deny control. For information on how to find the controlIdentifier, see the overview page.
      */
     controlIdentifier: ControlIdentifier;
     /**
@@ -211,6 +219,8 @@ declare namespace ControlTower {
      */
     operationIdentifier: OperationIdentifier;
   }
+  export interface Document {
+  }
   export type DriftStatus = "DRIFTED"|"IN_SYNC"|"NOT_CHECKING"|"UNKNOWN"|string;
   export interface DriftStatusSummary {
     /**
@@ -220,9 +230,13 @@ declare namespace ControlTower {
   }
   export interface EnableControlInput {
     /**
-     * The ARN of the control. Only Strongly recommended and Elective controls are permitted, with the exception of the Region deny control. For information on how to find the controlIdentifier, see the overview page.
+     * The ARN of the control. Only Strongly recommended and Elective controls are permitted, with the exception of the landing zone Region deny control. For information on how to find the controlIdentifier, see the overview page.
      */
     controlIdentifier: ControlIdentifier;
+    /**
+     * An array of EnabledControlParameter objects
+     */
+    parameters?: EnabledControlParameters;
     /**
      * Tags to be applied to the EnabledControl resource.
      */
@@ -256,6 +270,10 @@ declare namespace ControlTower {
      */
     driftStatusSummary?: DriftStatusSummary;
     /**
+     * Array of EnabledControlParameter objects.
+     */
+    parameters?: EnabledControlParameterSummaries;
+    /**
      * The deployment summary of the enabled control.
      */
     statusSummary?: EnablementStatusSummary;
@@ -268,6 +286,28 @@ declare namespace ControlTower {
      */
     targetRegions?: TargetRegions;
   }
+  export interface EnabledControlParameter {
+    /**
+     * The key of a key/value pair. It is of type string.
+     */
+    key: String;
+    /**
+     * The value of a key/value pair. It can be of type array string, number, object, or boolean. 
+     */
+    value: Document;
+  }
+  export type EnabledControlParameterSummaries = EnabledControlParameterSummary[];
+  export interface EnabledControlParameterSummary {
+    /**
+     * The key of a key/value pair.
+     */
+    key: String;
+    /**
+     * The value of a key/value pair.
+     */
+    value: Document;
+  }
+  export type EnabledControlParameters = EnabledControlParameter[];
   export interface EnabledControlSummary {
     /**
      * The ARN of the enabled control.
@@ -286,7 +326,7 @@ declare namespace ControlTower {
      */
     statusSummary?: EnablementStatusSummary;
     /**
-     *  The ARN of the organizational unit. 
+     * The ARN of the organizational unit.
      */
     targetIdentifier?: TargetIdentifier;
   }
@@ -328,39 +368,39 @@ declare namespace ControlTower {
   }
   export interface GetLandingZoneInput {
     /**
-     * The unique identifier of the landing zone. 
+     * The unique identifier of the landing zone.
      */
     landingZoneIdentifier: String;
   }
   export interface GetLandingZoneOperationInput {
     /**
-     * A unique identifier assigned to a landing zone operation. 
+     * A unique identifier assigned to a landing zone operation.
      */
     operationIdentifier: OperationIdentifier;
   }
   export interface GetLandingZoneOperationOutput {
     /**
-     * The landing zone operation details. 
+     * Details about a landing zone operation.
      */
     operationDetails: LandingZoneOperationDetail;
   }
   export interface GetLandingZoneOutput {
     /**
-     * Information about the landing zone. 
+     * Information about the landing zone.
      */
     landingZone: LandingZoneDetail;
   }
   export interface LandingZoneDetail {
     /**
-     * The ARN of the landing zone. 
+     * The ARN of the landing zone.
      */
     arn?: Arn;
     /**
-     * The drift status of the landing zone. 
+     * The drift status of the landing zone.
      */
     driftStatus?: LandingZoneDriftStatusSummary;
     /**
-     * The latest available version of the landing zone. 
+     * The latest available version of the landing zone.
      */
     latestAvailableVersion?: LandingZoneVersion;
     /**
@@ -368,11 +408,11 @@ declare namespace ControlTower {
      */
     manifest: Manifest;
     /**
-     * The landing zone deployment status.  Valid values:    ACTIVE: The landing zone is actively deployed.     PROCESSING: The landing zone is processing deployment.     FAILED: The landing zone failed deployment.   
+     * The landing zone deployment status.
      */
     status?: LandingZoneStatus;
     /**
-     * The landing zone's current deployed version. 
+     * The landing zone's current deployed version.
      */
     version: LandingZoneVersion;
   }
@@ -385,7 +425,7 @@ declare namespace ControlTower {
   }
   export interface LandingZoneOperationDetail {
     /**
-     * The landing zone operation end time. 
+     * The landing zone operation end time.
      */
     endTime?: Timestamp;
     /**
@@ -393,15 +433,15 @@ declare namespace ControlTower {
      */
     operationType?: LandingZoneOperationType;
     /**
-     * The landing zone operation start time. 
+     * The landing zone operation start time.
      */
     startTime?: Timestamp;
     /**
-     * The landing zone operation status.  Valid values:    SUCCEEDED: The landing zone operation succeeded.     IN_PROGRESS: The landing zone operation is in progress.     FAILED: The landing zone operation failed.   
+     * Valid values:    SUCCEEDED: The landing zone operation succeeded.     IN_PROGRESS: The landing zone operation is in progress.     FAILED: The landing zone operation failed.   
      */
     status?: LandingZoneOperationStatus;
     /**
-     * If the operation result is FAILED, this string contains a message explaining why the operation failed. 
+     * If the operation result is FAILED, this string contains a message explaining why the operation failed.
      */
     statusMessage?: String;
   }
@@ -410,7 +450,7 @@ declare namespace ControlTower {
   export type LandingZoneStatus = "ACTIVE"|"PROCESSING"|"FAILED"|string;
   export interface LandingZoneSummary {
     /**
-     * The ARN of the landing zone. 
+     * The ARN of the landing zone.
      */
     arn?: Arn;
   }
@@ -435,28 +475,28 @@ declare namespace ControlTower {
      */
     enabledControls: EnabledControls;
     /**
-     * Retrieves the next page of results. If the string is empty, the current response is the end of the results.
+     * Retrieves the next page of results. If the string is empty, the response is the end of the results.
      */
     nextToken?: String;
   }
   export interface ListLandingZonesInput {
     /**
-     * The maximum number of returned landing zone ARNs. 
+     * The maximum number of returned landing zone ARNs, which is one.
      */
     maxResults?: ListLandingZonesMaxResults;
     /**
-     * The token to continue the list from a previous API call with the same parameters. 
+     * The token to continue the list from a previous API call with the same parameters.
      */
     nextToken?: String;
   }
   export type ListLandingZonesMaxResults = number;
   export interface ListLandingZonesOutput {
     /**
-     * The ARN of the landing zone. 
+     * The ARN of the landing zone.
      */
     landingZones: ListLandingZonesOutputLandingZonesList;
     /**
-     * Retrieves the next page of results. If the string is empty, the current response is the end of the results. 
+     * Retrieves the next page of results. If the string is empty, the response is the end of the results.
      */
     nextToken?: String;
   }
@@ -486,13 +526,13 @@ declare namespace ControlTower {
   export type RegionName = string;
   export interface ResetLandingZoneInput {
     /**
-     * The unique identifier of the landing zone. 
+     * The unique identifier of the landing zone.
      */
     landingZoneIdentifier: String;
   }
   export interface ResetLandingZoneOutput {
     /**
-     * A unique identifier assigned to a ResetLandingZone operation. You can use this identifier as an input of GetLandingZoneOperation to check the operation's status.
+     * A unique identifier assigned to a ResetLandingZone operation. You can use this identifier as an input parameter of GetLandingZoneOperation to check the operation's status.
      */
     operationIdentifier: OperationIdentifier;
   }
@@ -529,17 +569,33 @@ declare namespace ControlTower {
   }
   export interface UntagResourceOutput {
   }
+  export interface UpdateEnabledControlInput {
+    /**
+     *  The ARN of the enabled control that will be updated. 
+     */
+    enabledControlIdentifier: Arn;
+    /**
+     * A key/value pair, where Key is of type String and Value is of type Document.
+     */
+    parameters: EnabledControlParameters;
+  }
+  export interface UpdateEnabledControlOutput {
+    /**
+     *  The operation identifier for this UpdateEnabledControl operation. 
+     */
+    operationIdentifier: OperationIdentifier;
+  }
   export interface UpdateLandingZoneInput {
     /**
-     * The unique identifier of the landing zone. 
+     * The unique identifier of the landing zone.
      */
     landingZoneIdentifier: String;
     /**
-     * The manifest.yaml file is a text file that describes your Amazon Web Services resources. For examples, review The manifest file 
+     * The manifest.yaml file is a text file that describes your Amazon Web Services resources. For examples, review The manifest file.
      */
     manifest: Manifest;
     /**
-     * The landing zone version. 
+     * The landing zone version, for example, 3.2.
      */
     version: LandingZoneVersion;
   }

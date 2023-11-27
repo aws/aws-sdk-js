@@ -1,6 +1,17 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1503.0-->
+<!--LATEST=2.1504.0-->
 <!--ENTRYINSERT-->
+
+## 2.1504.0
+* feature: AppSync: This update enables introspection of Aurora cluster databases using the RDS Data API
+* feature: B2bi: This is the initial SDK release for AWS B2B Data Interchange.
+* feature: Backup: AWS Backup now supports restore testing, a new feature that allows customers to automate restore testing and validating their backups. Additionally, this release adds support for EBS Snapshots Archive tier.
+* feature: ControlTower: This release adds the following support: 1. The EnableControl API can configure controls that are configurable.  2. The GetEnabledControl API shows the configured parameters on an enabled control. 3. The new UpdateEnabledControl API can change parameters on an enabled control.
+* feature: EFS: Adding support for EFS Replication to existing file system.
+* feature: Fis: AWS FIS adds support for multi-account experiments & empty target resolution. This release also introduces the CreateTargetAccountConfiguration API that allows experiments across multiple AWS accounts, and the ListExperimentResolvedTargets API to list target details.
+* feature: Glue: add observations support to DQ CodeGen config model + update document for connectiontypes supported by ConnectorData entities
+* feature: SecurityHub: Adds and updates APIs to support central configuration. This feature allows the Security Hub delegated administrator to configure Security Hub for their entire AWS Org across multiple regions from a home Region. With this release, findings also include account name and application metadata.
+* feature: TranscribeService: This release adds support for AWS HealthScribe APIs within Amazon Transcribe
 
 ## 2.1503.0
 * feature: AccessAnalyzer: IAM Access Analyzer now continuously monitors IAM roles and users in your AWS account or organization to generate findings for unused access. Additionally, IAM Access Analyzer now provides custom policy checks to validate that IAM policies adhere to your security standards ahead of deployments.

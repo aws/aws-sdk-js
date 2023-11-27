@@ -76,6 +76,22 @@ declare class Backup extends Service {
    */
   createReportPlan(callback?: (err: AWSError, data: Backup.Types.CreateReportPlanOutput) => void): Request<Backup.Types.CreateReportPlanOutput, AWSError>;
   /**
+   * This is the first of two steps to create a restore testing plan; once this request is successful, finish the procedure with request CreateRestoreTestingSelection. You must include the parameter RestoreTestingPlan. You may optionally include CreatorRequestId and Tags.
+   */
+  createRestoreTestingPlan(params: Backup.Types.CreateRestoreTestingPlanInput, callback?: (err: AWSError, data: Backup.Types.CreateRestoreTestingPlanOutput) => void): Request<Backup.Types.CreateRestoreTestingPlanOutput, AWSError>;
+  /**
+   * This is the first of two steps to create a restore testing plan; once this request is successful, finish the procedure with request CreateRestoreTestingSelection. You must include the parameter RestoreTestingPlan. You may optionally include CreatorRequestId and Tags.
+   */
+  createRestoreTestingPlan(callback?: (err: AWSError, data: Backup.Types.CreateRestoreTestingPlanOutput) => void): Request<Backup.Types.CreateRestoreTestingPlanOutput, AWSError>;
+  /**
+   * This request can be sent after CreateRestoreTestingPlan request returns successfully. This is the second part of creating a resource testing plan, and it must be completed sequentially. This consists of RestoreTestingSelectionName, ProtectedResourceType, and one of the following:    ProtectedResourceArns     ProtectedResourceConditions    Each protected resource type can have one single value. A restore testing selection can include a wildcard value ("*") for ProtectedResourceArns along with ProtectedResourceConditions. Alternatively, you can include up to 30 specific protected resource ARNs in ProtectedResourceArns. Cannot select by both protected resource types AND specific ARNs. Request will fail if both are included.
+   */
+  createRestoreTestingSelection(params: Backup.Types.CreateRestoreTestingSelectionInput, callback?: (err: AWSError, data: Backup.Types.CreateRestoreTestingSelectionOutput) => void): Request<Backup.Types.CreateRestoreTestingSelectionOutput, AWSError>;
+  /**
+   * This request can be sent after CreateRestoreTestingPlan request returns successfully. This is the second part of creating a resource testing plan, and it must be completed sequentially. This consists of RestoreTestingSelectionName, ProtectedResourceType, and one of the following:    ProtectedResourceArns     ProtectedResourceConditions    Each protected resource type can have one single value. A restore testing selection can include a wildcard value ("*") for ProtectedResourceArns along with ProtectedResourceConditions. Alternatively, you can include up to 30 specific protected resource ARNs in ProtectedResourceArns. Cannot select by both protected resource types AND specific ARNs. Request will fail if both are included.
+   */
+  createRestoreTestingSelection(callback?: (err: AWSError, data: Backup.Types.CreateRestoreTestingSelectionOutput) => void): Request<Backup.Types.CreateRestoreTestingSelectionOutput, AWSError>;
+  /**
    * Deletes a backup plan. A backup plan can only be deleted after all associated selections of resources have been deleted. Deleting a backup plan deletes the current version of a backup plan. Previous versions, if any, will still exist.
    */
   deleteBackupPlan(params: Backup.Types.DeleteBackupPlanInput, callback?: (err: AWSError, data: Backup.Types.DeleteBackupPlanOutput) => void): Request<Backup.Types.DeleteBackupPlanOutput, AWSError>;
@@ -147,6 +163,22 @@ declare class Backup extends Service {
    * Deletes the report plan specified by a report plan name.
    */
   deleteReportPlan(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This request deletes the specified restore testing plan. Deletion can only successfully occur if all associated restore testing selections are deleted first.
+   */
+  deleteRestoreTestingPlan(params: Backup.Types.DeleteRestoreTestingPlanInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This request deletes the specified restore testing plan. Deletion can only successfully occur if all associated restore testing selections are deleted first.
+   */
+  deleteRestoreTestingPlan(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Input the Restore Testing Plan name and Restore Testing Selection name. All testing selections associated with a restore testing plan must be deleted before the restore testing plan can be deleted.
+   */
+  deleteRestoreTestingSelection(params: Backup.Types.DeleteRestoreTestingSelectionInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Input the Restore Testing Plan name and Restore Testing Selection name. All testing selections associated with a restore testing plan must be deleted before the restore testing plan can be deleted.
+   */
+  deleteRestoreTestingSelection(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Returns backup job details for the specified BackupJobId.
    */
@@ -324,6 +356,38 @@ declare class Backup extends Service {
    */
   getRecoveryPointRestoreMetadata(callback?: (err: AWSError, data: Backup.Types.GetRecoveryPointRestoreMetadataOutput) => void): Request<Backup.Types.GetRecoveryPointRestoreMetadataOutput, AWSError>;
   /**
+   * This request returns the metadata for the specified restore job.
+   */
+  getRestoreJobMetadata(params: Backup.Types.GetRestoreJobMetadataInput, callback?: (err: AWSError, data: Backup.Types.GetRestoreJobMetadataOutput) => void): Request<Backup.Types.GetRestoreJobMetadataOutput, AWSError>;
+  /**
+   * This request returns the metadata for the specified restore job.
+   */
+  getRestoreJobMetadata(callback?: (err: AWSError, data: Backup.Types.GetRestoreJobMetadataOutput) => void): Request<Backup.Types.GetRestoreJobMetadataOutput, AWSError>;
+  /**
+   * This request returns the minimal required set of metadata needed to start a restore job with secure default settings. BackupVaultName and RecoveryPointArn are required parameters. BackupVaultAccountId is an optional parameter.
+   */
+  getRestoreTestingInferredMetadata(params: Backup.Types.GetRestoreTestingInferredMetadataInput, callback?: (err: AWSError, data: Backup.Types.GetRestoreTestingInferredMetadataOutput) => void): Request<Backup.Types.GetRestoreTestingInferredMetadataOutput, AWSError>;
+  /**
+   * This request returns the minimal required set of metadata needed to start a restore job with secure default settings. BackupVaultName and RecoveryPointArn are required parameters. BackupVaultAccountId is an optional parameter.
+   */
+  getRestoreTestingInferredMetadata(callback?: (err: AWSError, data: Backup.Types.GetRestoreTestingInferredMetadataOutput) => void): Request<Backup.Types.GetRestoreTestingInferredMetadataOutput, AWSError>;
+  /**
+   * Returns RestoreTestingPlan details for the specified RestoreTestingPlanName. The details are the body of a restore testing plan in JSON format, in addition to plan metadata.
+   */
+  getRestoreTestingPlan(params: Backup.Types.GetRestoreTestingPlanInput, callback?: (err: AWSError, data: Backup.Types.GetRestoreTestingPlanOutput) => void): Request<Backup.Types.GetRestoreTestingPlanOutput, AWSError>;
+  /**
+   * Returns RestoreTestingPlan details for the specified RestoreTestingPlanName. The details are the body of a restore testing plan in JSON format, in addition to plan metadata.
+   */
+  getRestoreTestingPlan(callback?: (err: AWSError, data: Backup.Types.GetRestoreTestingPlanOutput) => void): Request<Backup.Types.GetRestoreTestingPlanOutput, AWSError>;
+  /**
+   * Returns RestoreTestingSelection, which displays resources and elements of the restore testing plan.
+   */
+  getRestoreTestingSelection(params: Backup.Types.GetRestoreTestingSelectionInput, callback?: (err: AWSError, data: Backup.Types.GetRestoreTestingSelectionOutput) => void): Request<Backup.Types.GetRestoreTestingSelectionOutput, AWSError>;
+  /**
+   * Returns RestoreTestingSelection, which displays resources and elements of the restore testing plan.
+   */
+  getRestoreTestingSelection(callback?: (err: AWSError, data: Backup.Types.GetRestoreTestingSelectionOutput) => void): Request<Backup.Types.GetRestoreTestingSelectionOutput, AWSError>;
+  /**
    * Returns the Amazon Web Services resource types supported by Backup.
    */
   getSupportedResourceTypes(callback?: (err: AWSError, data: Backup.Types.GetSupportedResourceTypesOutput) => void): Request<Backup.Types.GetSupportedResourceTypesOutput, AWSError>;
@@ -488,6 +552,30 @@ declare class Backup extends Service {
    */
   listRestoreJobs(callback?: (err: AWSError, data: Backup.Types.ListRestoreJobsOutput) => void): Request<Backup.Types.ListRestoreJobsOutput, AWSError>;
   /**
+   * This returns restore jobs that contain the specified protected resource. You must include ResourceArn. You can optionally include NextToken, ByStatus, MaxResults, ByRecoveryPointCreationDateAfter , and ByRecoveryPointCreationDateBefore.
+   */
+  listRestoreJobsByProtectedResource(params: Backup.Types.ListRestoreJobsByProtectedResourceInput, callback?: (err: AWSError, data: Backup.Types.ListRestoreJobsByProtectedResourceOutput) => void): Request<Backup.Types.ListRestoreJobsByProtectedResourceOutput, AWSError>;
+  /**
+   * This returns restore jobs that contain the specified protected resource. You must include ResourceArn. You can optionally include NextToken, ByStatus, MaxResults, ByRecoveryPointCreationDateAfter , and ByRecoveryPointCreationDateBefore.
+   */
+  listRestoreJobsByProtectedResource(callback?: (err: AWSError, data: Backup.Types.ListRestoreJobsByProtectedResourceOutput) => void): Request<Backup.Types.ListRestoreJobsByProtectedResourceOutput, AWSError>;
+  /**
+   * Returns a list of restore testing plans.
+   */
+  listRestoreTestingPlans(params: Backup.Types.ListRestoreTestingPlansInput, callback?: (err: AWSError, data: Backup.Types.ListRestoreTestingPlansOutput) => void): Request<Backup.Types.ListRestoreTestingPlansOutput, AWSError>;
+  /**
+   * Returns a list of restore testing plans.
+   */
+  listRestoreTestingPlans(callback?: (err: AWSError, data: Backup.Types.ListRestoreTestingPlansOutput) => void): Request<Backup.Types.ListRestoreTestingPlansOutput, AWSError>;
+  /**
+   * Returns a list of restore testing selections. Can be filtered by MaxResults and RestoreTestingPlanName.
+   */
+  listRestoreTestingSelections(params: Backup.Types.ListRestoreTestingSelectionsInput, callback?: (err: AWSError, data: Backup.Types.ListRestoreTestingSelectionsOutput) => void): Request<Backup.Types.ListRestoreTestingSelectionsOutput, AWSError>;
+  /**
+   * Returns a list of restore testing selections. Can be filtered by MaxResults and RestoreTestingPlanName.
+   */
+  listRestoreTestingSelections(callback?: (err: AWSError, data: Backup.Types.ListRestoreTestingSelectionsOutput) => void): Request<Backup.Types.ListRestoreTestingSelectionsOutput, AWSError>;
+  /**
    * Returns a list of key-value pairs assigned to a target recovery point, backup plan, or backup vault.  ListTags only works for resource types that support full Backup management of their backups. Those resource types are listed in the "Full Backup management" section of the  Feature availability by resource table.
    */
   listTags(params: Backup.Types.ListTagsInput, callback?: (err: AWSError, data: Backup.Types.ListTagsOutput) => void): Request<Backup.Types.ListTagsOutput, AWSError>;
@@ -519,6 +607,14 @@ declare class Backup extends Service {
    * Turns on notifications on a backup vault for the specified topic and events.
    */
   putBackupVaultNotifications(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This request allows you to send your independent self-run restore test validation results. RestoreJobId and ValidationStatus are required. Optionally, you can input a ValidationStatusMessage.
+   */
+  putRestoreValidationResult(params: Backup.Types.PutRestoreValidationResultInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This request allows you to send your independent self-run restore test validation results. RestoreJobId and ValidationStatus are required. Optionally, you can input a ValidationStatusMessage.
+   */
+  putRestoreValidationResult(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Starts an on-demand backup job for the specified resource.
    */
@@ -623,6 +719,22 @@ declare class Backup extends Service {
    * Updates an existing report plan identified by its ReportPlanName with the input document in JSON format.
    */
   updateReportPlan(callback?: (err: AWSError, data: Backup.Types.UpdateReportPlanOutput) => void): Request<Backup.Types.UpdateReportPlanOutput, AWSError>;
+  /**
+   * This request will send changes to your specified restore testing plan. RestoreTestingPlanName cannot be updated after it is created.  RecoveryPointSelection can contain:    Algorithm     ExcludeVaults     IncludeVaults     RecoveryPointTypes     SelectionWindowDays   
+   */
+  updateRestoreTestingPlan(params: Backup.Types.UpdateRestoreTestingPlanInput, callback?: (err: AWSError, data: Backup.Types.UpdateRestoreTestingPlanOutput) => void): Request<Backup.Types.UpdateRestoreTestingPlanOutput, AWSError>;
+  /**
+   * This request will send changes to your specified restore testing plan. RestoreTestingPlanName cannot be updated after it is created.  RecoveryPointSelection can contain:    Algorithm     ExcludeVaults     IncludeVaults     RecoveryPointTypes     SelectionWindowDays   
+   */
+  updateRestoreTestingPlan(callback?: (err: AWSError, data: Backup.Types.UpdateRestoreTestingPlanOutput) => void): Request<Backup.Types.UpdateRestoreTestingPlanOutput, AWSError>;
+  /**
+   * Most elements except the RestoreTestingSelectionName can be updated with this request.  RestoreTestingSelection can use either protected resource ARNs or conditions, but not both. That is, if your selection has ProtectedResourceArns, requesting an update with the parameter ProtectedResourceConditions will be unsuccessful.
+   */
+  updateRestoreTestingSelection(params: Backup.Types.UpdateRestoreTestingSelectionInput, callback?: (err: AWSError, data: Backup.Types.UpdateRestoreTestingSelectionOutput) => void): Request<Backup.Types.UpdateRestoreTestingSelectionOutput, AWSError>;
+  /**
+   * Most elements except the RestoreTestingSelectionName can be updated with this request.  RestoreTestingSelection can use either protected resource ARNs or conditions, but not both. That is, if your selection has ProtectedResourceArns, requesting an update with the parameter ProtectedResourceConditions will be unsuccessful.
+   */
+  updateRestoreTestingSelection(callback?: (err: AWSError, data: Backup.Types.UpdateRestoreTestingSelectionOutput) => void): Request<Backup.Types.UpdateRestoreTestingSelectionOutput, AWSError>;
 }
 declare namespace Backup {
   export type ARN = string;
@@ -733,7 +845,11 @@ declare namespace Backup {
      */
     ResourceName?: string;
     /**
-     * This parameter is the job count for the specified message category. Example strings include AccessDenied, Success, and InvalidParameters. See Monitoring for a list of MessageCategory strings. The the value ANY returns count of all message categories.  AGGREGATE_ALL aggregates job counts for all message categories and returns the sum.
+     * This is the date on which the backup job was initiated.
+     */
+    InitiationDate?: timestamp;
+    /**
+     * This parameter is the job count for the specified message category. Example strings may include AccessDenied, SUCCESS, AGGREGATE_ALL, and INVALIDPARAMETERS. See Monitoring for a list of MessageCategory strings. The the value ANY returns count of all message categories.  AGGREGATE_ALL aggregates job counts for all message categories and returns the sum.
      */
     MessageCategory?: string;
   }
@@ -964,7 +1080,7 @@ declare namespace Backup {
      */
     Resources?: ResourceArns;
     /**
-     * A list of conditions that you define to assign resources to your backup plans using tags. For example, "StringEquals": { "ConditionKey": "aws:ResourceTag/CreatedByCryo", "ConditionValue": "true" },. Condition operators are case sensitive.  ListOfTags differs from Conditions as follows:   When you specify more than one condition, you assign all resources that match AT LEAST ONE condition (using OR logic).    ListOfTags only supports StringEquals. Conditions supports StringEquals, StringLike, StringNotEquals, and StringNotLike.   
+     * A list of conditions that you define to assign resources to your backup plans using tags. For example, "StringEquals": { "Key": "aws:ResourceTag/CreatedByCryo", "Value": "true" },. Condition operators are case sensitive.  ListOfTags differs from Conditions as follows:   When you specify more than one condition, you assign all resources that match AT LEAST ONE condition (using OR logic).    ListOfTags only supports StringEquals. Conditions supports StringEquals, StringLike, StringNotEquals, and StringNotLike.   
      */
     ListOfTags?: ListOfTags;
     /**
@@ -972,7 +1088,7 @@ declare namespace Backup {
      */
     NotResources?: ResourceArns;
     /**
-     * A list of conditions that you define to assign resources to your backup plans using tags. For example, "StringEquals": { "ConditionKey": "aws:ResourceTag/CreatedByCryo", "ConditionValue": "true" },. Condition operators are case sensitive.  Conditions differs from ListOfTags as follows:   When you specify more than one condition, you only assign the resources that match ALL conditions (using AND logic).    Conditions supports StringEquals, StringLike, StringNotEquals, and StringNotLike. ListOfTags only supports StringEquals.  
+     * A list of conditions that you define to assign resources to your backup plans using tags. For example, "StringEquals": { "Key": "aws:ResourceTag/CreatedByCryo", "Value": "true" },. Condition operators are case sensitive.  Conditions differs from ListOfTags as follows:   When you specify more than one condition, you only assign the resources that match ALL conditions (using AND logic).    Conditions supports StringEquals, StringLike, StringNotEquals, and StringNotLike. ListOfTags only supports StringEquals.  
      */
     Conditions?: Conditions;
   }
@@ -1241,7 +1357,7 @@ declare namespace Backup {
      */
     ResourceName?: string;
     /**
-     * This parameter is the job count for the specified message category. Example strings include AccessDenied, Success, and InvalidParameters. See Monitoring for a list of MessageCategory strings. The the value ANY returns count of all message categories.  AGGREGATE_ALL aggregates job counts for all message categories and returns the sum
+     * This parameter is the job count for the specified message category. Example strings may include AccessDenied, SUCCESS, AGGREGATE_ALL, and InvalidParameters. See Monitoring for a list of MessageCategory strings. The the value ANY returns count of all message categories.  AGGREGATE_ALL aggregates job counts for all message categories and returns the sum
      */
     MessageCategory?: string;
   }
@@ -1474,7 +1590,7 @@ declare namespace Backup {
      */
     BackupVaultTags?: Tags;
     /**
-     * This is the ID of the creation request.
+     * This is the ID of the creation request. This parameter is optional. If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.
      */
     CreatorRequestId?: string;
     /**
@@ -1543,6 +1659,66 @@ declare namespace Backup {
      * The date and time a backup vault is created, in Unix format and Coordinated Universal Time (UTC). The value of CreationTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
      */
     CreationTime?: timestamp;
+  }
+  export interface CreateRestoreTestingPlanInput {
+    /**
+     * This is a unique string that identifies the request and allows failed requests to be retriedwithout the risk of running the operation twice. This parameter is optional. If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.
+     */
+    CreatorRequestId?: String;
+    /**
+     * A restore testing plan must contain a unique RestoreTestingPlanName string you create and must contain a ScheduleExpression cron. You may optionally include a StartWindowHours integer and a CreatorRequestId string. The RestoreTestingPlanName is a unique string that is the name of the restore testing plan. This cannot be changed after creation, and it must consist of only alphanumeric characters and underscores.
+     */
+    RestoreTestingPlan: RestoreTestingPlanForCreate;
+    /**
+     * Optional tags to include. A tag is a key-value pair you can use to manage, filter, and search for your resources. Allowed characters include UTF-8 letters,numbers, spaces, and the following characters: + - = . _ : /.
+     */
+    Tags?: SensitiveStringMap;
+  }
+  export interface CreateRestoreTestingPlanOutput {
+    /**
+     * The date and time a restore testing plan was created, in Unix format and Coordinated Universal Time (UTC). The value of CreationTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087AM.
+     */
+    CreationTime: Timestamp;
+    /**
+     * An Amazon Resource Name (ARN) that uniquely identifies the created restore testing plan.
+     */
+    RestoreTestingPlanArn: String;
+    /**
+     * This unique string is the name of the restore testing plan. The name cannot be changed after creation. The name consists of only alphanumeric characters and underscores. Maximum length is 50.
+     */
+    RestoreTestingPlanName: String;
+  }
+  export interface CreateRestoreTestingSelectionInput {
+    /**
+     * This is an optional unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice. If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.
+     */
+    CreatorRequestId?: String;
+    /**
+     * Input the restore testing plan name that was returned from the related CreateRestoreTestingPlan request.
+     */
+    RestoreTestingPlanName: String;
+    /**
+     * This consists of RestoreTestingSelectionName, ProtectedResourceType, and one of the following:    ProtectedResourceArns     ProtectedResourceConditions    Each protected resource type can have one single value. A restore testing selection can include a wildcard value ("*") for ProtectedResourceArns along with ProtectedResourceConditions. Alternatively, you can include up to 30 specific protected resource ARNs in ProtectedResourceArns.
+     */
+    RestoreTestingSelection: RestoreTestingSelectionForCreate;
+  }
+  export interface CreateRestoreTestingSelectionOutput {
+    /**
+     * This is the time the resource testing selection was created successfully.
+     */
+    CreationTime: Timestamp;
+    /**
+     * This is the ARN of the restore testing plan with which the restore testing selection is associated.
+     */
+    RestoreTestingPlanArn: String;
+    /**
+     * Unique string that is the name of the restore testing plan. The name cannot be changed after creation. The name consists of only alphanumeric characters and underscores. Maximum length is 50.
+     */
+    RestoreTestingPlanName: String;
+    /**
+     * This is the unique name of the restore testing selection that belongs to the related restore testing plan.
+     */
+    RestoreTestingSelectionName: String;
   }
   export type CronExpression = string;
   export interface DateRange {
@@ -1634,6 +1810,22 @@ declare namespace Backup {
      * The unique name of a report plan.
      */
     ReportPlanName: ReportPlanName;
+  }
+  export interface DeleteRestoreTestingPlanInput {
+    /**
+     * Required unique name of the restore testing plan you wish to delete.
+     */
+    RestoreTestingPlanName: String;
+  }
+  export interface DeleteRestoreTestingSelectionInput {
+    /**
+     * Required unique name of the restore testing plan that contains the restore testing selection you wish to delete.
+     */
+    RestoreTestingPlanName: String;
+    /**
+     * Required unique name of the restore testing selection you wish to delete.
+     */
+    RestoreTestingSelectionName: String;
   }
   export interface DescribeBackupJobInput {
     /**
@@ -1743,7 +1935,11 @@ declare namespace Backup {
      */
     ResourceName?: string;
     /**
-     * This is the job count for the specified message category. Example strings may include AccessDenied, Success, and InvalidParameters. See Monitoring for a list of MessageCategory strings.
+     * This is the date a backup job was initiated.
+     */
+    InitiationDate?: timestamp;
+    /**
+     * This is the job count for the specified message category. Example strings may include AccessDenied, SUCCESS, AGGREGATE_ALL, and INVALIDPARAMETERS. View Monitoring for a list of accepted MessageCategory strings.
      */
     MessageCategory?: string;
   }
@@ -1779,7 +1975,7 @@ declare namespace Backup {
      */
     CreationDate?: timestamp;
     /**
-     * A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
+     * A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice. This parameter is optional. If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.
      */
     CreatorRequestId?: string;
     /**
@@ -1890,6 +2086,26 @@ declare namespace Backup {
      * This is the non-unique name of the resource that belongs to the specified backup.
      */
     ResourceName?: string;
+    /**
+     * This is the ARN (Amazon Resource Name) of the backup vault that contains the most recent backup recovery point.
+     */
+    LastBackupVaultArn?: ARN;
+    /**
+     * This is the ARN (Amazon Resource Name) of the most recent recovery point.
+     */
+    LastRecoveryPointArn?: ARN;
+    /**
+     * This is the time in minutes the most recent restore job took to complete.
+     */
+    LatestRestoreExecutionTimeMinutes?: Long;
+    /**
+     * This is the creation date of the most recent restore job.
+     */
+    LatestRestoreJobCreationDate?: timestamp;
+    /**
+     * This is the date the most recent recovery point was created.
+     */
+    LatestRestoreRecoveryPointCreationDate?: timestamp;
   }
   export interface DescribeRecoveryPointInput {
     /**
@@ -2094,6 +2310,30 @@ declare namespace Backup {
      * Returns metadata associated with a restore job listed by resource type.
      */
     ResourceType?: ResourceType;
+    /**
+     * This is the creation date of the recovery point made by the specifed restore job.
+     */
+    RecoveryPointCreationDate?: timestamp;
+    /**
+     * Contains identifying information about the creation of a restore job.
+     */
+    CreatedBy?: RestoreJobCreator;
+    /**
+     * This is the status of validation run on the indicated restore job.
+     */
+    ValidationStatus?: RestoreValidationStatus;
+    /**
+     * This describes the status of validation run on the indicated restore job.
+     */
+    ValidationStatusMessage?: string;
+    /**
+     * This notes the status of the data generated by the restore test. The status may be Deleting, Failed, or Successful.
+     */
+    DeletionStatus?: RestoreDeletionStatus;
+    /**
+     * This describes the restore job deletion status.
+     */
+    DeletionStatusMessage?: string;
   }
   export interface DisassociateRecoveryPointFromParentInput {
     /**
@@ -2224,7 +2464,7 @@ declare namespace Backup {
      */
     VersionId?: string;
     /**
-     * A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
+     * A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice. 
      */
     CreatorRequestId?: string;
     /**
@@ -2395,6 +2635,74 @@ declare namespace Backup {
      * The set of metadata key-value pairs that describe the original configuration of the backed-up resource. These values vary depending on the service that is being restored.
      */
     RestoreMetadata?: Metadata;
+    /**
+     * This is the resource type associated with the recovery point.
+     */
+    ResourceType?: ResourceType;
+  }
+  export interface GetRestoreJobMetadataInput {
+    /**
+     * This is a unique identifier of a restore job within Backup.
+     */
+    RestoreJobId: RestoreJobId;
+  }
+  export interface GetRestoreJobMetadataOutput {
+    /**
+     * This is a unique identifier of a restore job within Backup.
+     */
+    RestoreJobId?: RestoreJobId;
+    /**
+     * This contains the metadata of the specified backup job.
+     */
+    Metadata?: Metadata;
+  }
+  export interface GetRestoreTestingInferredMetadataInput {
+    /**
+     * This is the account ID of the specified backup vault.
+     */
+    BackupVaultAccountId?: String;
+    /**
+     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web ServicesRegion where they are created. They consist of letters, numbers, and hyphens.
+     */
+    BackupVaultName: String;
+    /**
+     * An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45. 
+     */
+    RecoveryPointArn: String;
+  }
+  export interface GetRestoreTestingInferredMetadataOutput {
+    /**
+     * This is a string map of the metadata inferred from the request.
+     */
+    InferredMetadata: stringMap;
+  }
+  export interface GetRestoreTestingPlanInput {
+    /**
+     * Required unique name of the restore testing plan.
+     */
+    RestoreTestingPlanName: String;
+  }
+  export interface GetRestoreTestingPlanOutput {
+    /**
+     * Specifies the body of a restore testing plan. Includes RestoreTestingPlanName.
+     */
+    RestoreTestingPlan: RestoreTestingPlanForGet;
+  }
+  export interface GetRestoreTestingSelectionInput {
+    /**
+     * Required unique name of the restore testing plan.
+     */
+    RestoreTestingPlanName: String;
+    /**
+     * Required unique name of the restore testing selection.
+     */
+    RestoreTestingSelectionName: String;
+  }
+  export interface GetRestoreTestingSelectionOutput {
+    /**
+     * Unique name of the restore testing selection.
+     */
+    RestoreTestingSelection: RestoreTestingSelectionForGet;
   }
   export interface GetSupportedResourceTypesOutput {
     /**
@@ -2408,6 +2716,17 @@ declare namespace Backup {
   export type IAMPolicy = string;
   export type IAMRoleArn = string;
   export type IsEnabled = boolean;
+  export interface KeyValue {
+    /**
+     * The tag key (String). The key can't start with aws:. Length Constraints: Minimum length of 1. Maximum length of 128. Pattern: ^(?![aA]{1}[wW]{1}[sS]{1}:)([\p{L}\p{Z}\p{N}_.:/=+\-@]+)$ 
+     */
+    Key: String;
+    /**
+     * The value of the key. Length Constraints: Maximum length of 256. Pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$ 
+     */
+    Value: String;
+  }
+  export type KeyValueList = KeyValue[];
   export interface LegalHold {
     /**
      * This is the title of a legal hold.
@@ -2449,6 +2768,10 @@ declare namespace Backup {
      * Specifies the number of days after creation that a recovery point is deleted. Must be greater than 90 days plus MoveToColdStorageAfterDays.
      */
     DeleteAfterDays?: Long;
+    /**
+     * Optional Boolean. If this is true, this setting will instruct your backup plan to transition supported resources to archive (cold) storage tier in accordance with your lifecycle settings.
+     */
+    OptInToArchiveForSupportedResources?: Boolean;
   }
   export interface ListBackupJobSummariesInput {
     /**
@@ -2476,7 +2799,7 @@ declare namespace Backup {
      */
     MaxResults?: MaxResults;
     /**
-     * The next item following a partial list of returned resources. For example, if a request is made to return maxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned resources. For example, if a request is made to return MaxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
   }
@@ -2490,13 +2813,13 @@ declare namespace Backup {
      */
     AggregationPeriod?: string;
     /**
-     * The next item following a partial list of returned resources. For example, if a request is made to return maxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned resources. For example, if a request is made to return MaxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
   }
   export interface ListBackupJobsInput {
     /**
-     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
     /**
@@ -2544,7 +2867,7 @@ declare namespace Backup {
      */
     ByParentJobId?: string;
     /**
-     * This returns a list of backup jobs for the specified message category. Example strings may include AccessDenied, Success, and InvalidParameters. See Monitoring for a list of MessageCategory strings.
+     * This is an optional parameter that can be used to filter out jobs with a MessageCategory which matches the value you input. Example strings may include AccessDenied, SUCCESS, AGGREGATE_ALL, and InvalidParameters. View Monitoring  The wildcard () returns count of all message categories.  AGGREGATE_ALL aggregates job counts for all message categories and returns the sum.
      */
     ByMessageCategory?: string;
   }
@@ -2554,13 +2877,13 @@ declare namespace Backup {
      */
     BackupJobs?: BackupJobsList;
     /**
-     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
   }
   export interface ListBackupPlanTemplatesInput {
     /**
-     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
     /**
@@ -2570,7 +2893,7 @@ declare namespace Backup {
   }
   export interface ListBackupPlanTemplatesOutput {
     /**
-     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
     /**
@@ -2584,7 +2907,7 @@ declare namespace Backup {
      */
     BackupPlanId: string;
     /**
-     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
     /**
@@ -2594,7 +2917,7 @@ declare namespace Backup {
   }
   export interface ListBackupPlanVersionsOutput {
     /**
-     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
     /**
@@ -2604,7 +2927,7 @@ declare namespace Backup {
   }
   export interface ListBackupPlansInput {
     /**
-     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
     /**
@@ -2618,7 +2941,7 @@ declare namespace Backup {
   }
   export interface ListBackupPlansOutput {
     /**
-     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
     /**
@@ -2632,7 +2955,7 @@ declare namespace Backup {
      */
     BackupPlanId: string;
     /**
-     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
     /**
@@ -2642,7 +2965,7 @@ declare namespace Backup {
   }
   export interface ListBackupSelectionsOutput {
     /**
-     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
     /**
@@ -2660,7 +2983,7 @@ declare namespace Backup {
      */
     ByShared?: boolean;
     /**
-     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
     /**
@@ -2674,7 +2997,7 @@ declare namespace Backup {
      */
     BackupVaultList?: BackupVaultList;
     /**
-     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
   }
@@ -2704,7 +3027,7 @@ declare namespace Backup {
      */
     MaxResults?: MaxResults;
     /**
-     * The next item following a partial list of returned resources. For example, if a request is made to return maxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned resources. For example, if a request is made to return MaxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
   }
@@ -2718,13 +3041,13 @@ declare namespace Backup {
      */
     AggregationPeriod?: string;
     /**
-     * The next item following a partial list of returned resources. For example, if a request is made to return maxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned resources. For example, if a request is made to return MaxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
   }
   export interface ListCopyJobsInput {
     /**
-     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token. 
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token. 
      */
     NextToken?: string;
     /**
@@ -2772,7 +3095,7 @@ declare namespace Backup {
      */
     ByParentJobId?: string;
     /**
-     * This parameter returns the job count for the specified message category. Example accepted strings include AccessDenied, Success, and InvalidParameters. See Monitoring for a list of accepted MessageCategory strings. The the value ANY returns count of all message categories.  AGGREGATE_ALL aggregates job counts for all message categories and returns the sum.
+     * This is an optional parameter that can be used to filter out jobs with a MessageCategory which matches the value you input. Example strings may include AccessDenied, SUCCESS, AGGREGATE_ALL, and INVALIDPARAMETERS. View Monitoring for a list of accepted strings. The the value ANY returns count of all message categories.  AGGREGATE_ALL aggregates job counts for all message categories and returns the sum.
      */
     ByMessageCategory?: string;
   }
@@ -2782,7 +3105,7 @@ declare namespace Backup {
      */
     CopyJobs?: CopyJobsList;
     /**
-     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token. 
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token. 
      */
     NextToken?: string;
   }
@@ -2808,7 +3131,7 @@ declare namespace Backup {
   }
   export interface ListLegalHoldsInput {
     /**
-     * The next item following a partial list of returned resources. For example, if a request is made to return maxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned resources. For example, if a request is made to return MaxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
     /**
@@ -2818,7 +3141,7 @@ declare namespace Backup {
   }
   export interface ListLegalHoldsOutput {
     /**
-     * The next item following a partial list of returned resources. For example, if a request is made to return maxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned resources. For example, if a request is made to return MaxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
     /**
@@ -2837,7 +3160,7 @@ declare namespace Backup {
      */
     BackupVaultAccountId?: AccountId;
     /**
-     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
     /**
@@ -2851,13 +3174,13 @@ declare namespace Backup {
      */
     Results?: ProtectedResourcesList;
     /**
-     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
   }
   export interface ListProtectedResourcesInput {
     /**
-     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
     /**
@@ -2871,7 +3194,7 @@ declare namespace Backup {
      */
     Results?: ProtectedResourcesList;
     /**
-     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
   }
@@ -2885,7 +3208,7 @@ declare namespace Backup {
      */
     BackupVaultAccountId?: AccountId;
     /**
-     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
     /**
@@ -2919,7 +3242,7 @@ declare namespace Backup {
   }
   export interface ListRecoveryPointsByBackupVaultOutput {
     /**
-     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
     /**
@@ -2933,7 +3256,7 @@ declare namespace Backup {
      */
     LegalHoldId: string;
     /**
-     * This is the next item following a partial list of returned resources. For example, if a request is made to return maxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * This is the next item following a partial list of returned resources. For example, if a request is made to return MaxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
     /**
@@ -2957,7 +3280,7 @@ declare namespace Backup {
      */
     ResourceArn: ARN;
     /**
-     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
     /**
@@ -2967,7 +3290,7 @@ declare namespace Backup {
   }
   export interface ListRecoveryPointsByResourceOutput {
     /**
-     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
     /**
@@ -3053,7 +3376,7 @@ declare namespace Backup {
      */
     MaxResults?: MaxResults;
     /**
-     * The next item following a partial list of returned resources. For example, if a request is made to return maxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned resources. For example, if a request is made to return MaxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
   }
@@ -3067,13 +3390,49 @@ declare namespace Backup {
      */
     AggregationPeriod?: string;
     /**
-     * The next item following a partial list of returned resources. For example, if a request is made to return maxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned resources. For example, if a request is made to return MaxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     */
+    NextToken?: string;
+  }
+  export interface ListRestoreJobsByProtectedResourceInput {
+    /**
+     * Returns only restore jobs that match the specified resource Amazon Resource Name (ARN).
+     */
+    ResourceArn: ARN;
+    /**
+     * Returns only restore jobs associated with the specified job status.
+     */
+    ByStatus?: RestoreJobStatus;
+    /**
+     * Returns only restore jobs of recovery points that were created after the specified date.
+     */
+    ByRecoveryPointCreationDateAfter?: timestamp;
+    /**
+     * Returns only restore jobs of recovery points that were created before the specified date.
+     */
+    ByRecoveryPointCreationDateBefore?: timestamp;
+    /**
+     * The next item following a partial list of returned items. For example, if a request ismade to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     */
+    NextToken?: string;
+    /**
+     * The maximum number of items to be returned.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListRestoreJobsByProtectedResourceOutput {
+    /**
+     * An array of objects that contain detailed information about jobs to restore saved resources.&gt;
+     */
+    RestoreJobs?: RestoreJobsList;
+    /**
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows youto return more items in your list starting at the location pointed to by the next token
      */
     NextToken?: string;
   }
   export interface ListRestoreJobsInput {
     /**
-     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
     /**
@@ -3104,6 +3463,10 @@ declare namespace Backup {
      * Returns only copy jobs completed after a date expressed in Unix format and Coordinated Universal Time (UTC).
      */
     ByCompleteAfter?: timestamp;
+    /**
+     * This returns only restore testing jobs that match the specified resource Amazon Resource Name (ARN).
+     */
+    ByRestoreTestingPlanArn?: ARN;
   }
   export interface ListRestoreJobsOutput {
     /**
@@ -3111,9 +3474,55 @@ declare namespace Backup {
      */
     RestoreJobs?: RestoreJobsList;
     /**
-     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
+  }
+  export interface ListRestoreTestingPlansInput {
+    /**
+     * The maximum number of items to be returned.
+     */
+    MaxResults?: ListRestoreTestingPlansInputMaxResultsInteger;
+    /**
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the nexttoken.
+     */
+    NextToken?: String;
+  }
+  export type ListRestoreTestingPlansInputMaxResultsInteger = number;
+  export interface ListRestoreTestingPlansOutput {
+    /**
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the nexttoken.
+     */
+    NextToken?: String;
+    /**
+     * This is a returned list of restore testing plans.
+     */
+    RestoreTestingPlans: RestoreTestingPlans;
+  }
+  export interface ListRestoreTestingSelectionsInput {
+    /**
+     * The maximum number of items to be returned.
+     */
+    MaxResults?: ListRestoreTestingSelectionsInputMaxResultsInteger;
+    /**
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the nexttoken.
+     */
+    NextToken?: String;
+    /**
+     * Returns restore testing selections by the specified restore testing plan name.
+     */
+    RestoreTestingPlanName: String;
+  }
+  export type ListRestoreTestingSelectionsInputMaxResultsInteger = number;
+  export interface ListRestoreTestingSelectionsOutput {
+    /**
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the nexttoken.
+     */
+    NextToken?: String;
+    /**
+     * The returned restore testing selections associated with the restore testing plan.
+     */
+    RestoreTestingSelections: RestoreTestingSelections;
   }
   export interface ListTagsInput {
     /**
@@ -3121,7 +3530,7 @@ declare namespace Backup {
      */
     ResourceArn: ARN;
     /**
-     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
     /**
@@ -3131,7 +3540,7 @@ declare namespace Backup {
   }
   export interface ListTagsOutput {
     /**
-     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     * The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
     /**
@@ -3165,6 +3574,24 @@ declare namespace Backup {
      * This is the non-unique name of the resource that belongs to the specified backup.
      */
     ResourceName?: string;
+    /**
+     * This is the ARN (Amazon Resource Name) of the backup vault that contains the most recent backup recovery point.
+     */
+    LastBackupVaultArn?: ARN;
+    /**
+     * This is the ARN (Amazon Resource Name) of the most recent recovery point.
+     */
+    LastRecoveryPointArn?: ARN;
+  }
+  export interface ProtectedResourceConditions {
+    /**
+     * Filters the values of your tagged resources for only those resources that you tagged with the same value. Also called "exact matching."
+     */
+    StringEquals?: KeyValueList;
+    /**
+     * Filters the values of your tagged resources for only those resources that you tagged that do not have the same value. Also called "negated matching."
+     */
+    StringNotEquals?: KeyValueList;
   }
   export type ProtectedResourcesList = ProtectedResource[];
   export interface PutBackupVaultAccessPolicyInput {
@@ -3208,6 +3635,20 @@ declare namespace Backup {
      * An array of events that indicate the status of jobs to back up resources to the backup vault. For common use cases and code samples, see Using Amazon SNS to track Backup events. The following events are supported:    BACKUP_JOB_STARTED | BACKUP_JOB_COMPLETED     COPY_JOB_STARTED | COPY_JOB_SUCCESSFUL | COPY_JOB_FAILED     RESTORE_JOB_STARTED | RESTORE_JOB_COMPLETED | RECOVERY_POINT_MODIFIED     S3_BACKUP_OBJECT_FAILED | S3_RESTORE_OBJECT_FAILED     The list below shows items that are deprecated events (for reference) and are no longer in use. They are no longer supported and will not return statuses or notifications. Refer to the list above for current supported events. 
      */
     BackupVaultEvents: BackupVaultEvents;
+  }
+  export interface PutRestoreValidationResultInput {
+    /**
+     * This is a unique identifier of a restore job within Backup.
+     */
+    RestoreJobId: RestoreJobId;
+    /**
+     * This is the status of your restore validation.
+     */
+    ValidationStatus: RestoreValidationStatus;
+    /**
+     * This is an optional message string you can input to describe the validation status for the restore test validation.
+     */
+    ValidationStatusMessage?: string;
   }
   export interface RecoveryPointByBackupVault {
     /**
@@ -3527,6 +3968,13 @@ declare namespace Backup {
   export type ResourceTypeManagementPreference = {[key: string]: IsEnabled};
   export type ResourceTypeOptInPreference = {[key: string]: IsEnabled};
   export type ResourceTypes = ResourceType[];
+  export type RestoreDeletionStatus = "DELETING"|"FAILED"|"SUCCESSFUL"|string;
+  export interface RestoreJobCreator {
+    /**
+     * An Amazon Resource Name (ARN) that uniquely identifies a restore testing plan.
+     */
+    RestoreTestingPlanArn?: ARN;
+  }
   export type RestoreJobId = string;
   export type RestoreJobState = "CREATED"|"PENDING"|"RUNNING"|"ABORTED"|"COMPLETED"|"FAILED"|"AGGREGATE_ALL"|"ANY"|string;
   export type RestoreJobStatus = "PENDING"|"RUNNING"|"COMPLETED"|"ABORTED"|"FAILED"|string;
@@ -3615,7 +4063,296 @@ declare namespace Backup {
      * The resource type of the listed restore jobs; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For Windows Volume Shadow Copy Service (VSS) backups, the only supported resource type is Amazon EC2.
      */
     ResourceType?: ResourceType;
+    /**
+     * The date on which a recovery point was created.
+     */
+    RecoveryPointCreationDate?: timestamp;
+    /**
+     * Contains identifying information about the creation of a restore job.
+     */
+    CreatedBy?: RestoreJobCreator;
+    /**
+     * This is the status of validation run on the indicated restore job.
+     */
+    ValidationStatus?: RestoreValidationStatus;
+    /**
+     * This describes the status of validation run on the indicated restore job.
+     */
+    ValidationStatusMessage?: string;
+    /**
+     * This notes the status of the data generated by the restore test. The status may be Deleting, Failed, or Successful.
+     */
+    DeletionStatus?: RestoreDeletionStatus;
+    /**
+     * This describes the restore job deletion status.
+     */
+    DeletionStatusMessage?: string;
   }
+  export interface RestoreTestingPlanForCreate {
+    /**
+     * Required: Algorithm; Required: Recovery point types; IncludeVaults (one or more). Optional: SelectionWindowDays ('30' if not specified); ExcludeVaults (list of selectors), defaults to empty list if not listed.
+     */
+    RecoveryPointSelection: RestoreTestingRecoveryPointSelection;
+    /**
+     * The RestoreTestingPlanName is a unique string that is the name of the restore testing plan. This cannot be changed after creation, and it must consist of only alphanumeric characters and underscores.
+     */
+    RestoreTestingPlanName: String;
+    /**
+     * A CRON expression in specified timezone when a restore testing plan is executed.
+     */
+    ScheduleExpression: String;
+    /**
+     * Optional. This is the timezone in which the schedule expression is set. By default, ScheduleExpressions are in UTC. You can modify this to a specified timezone.
+     */
+    ScheduleExpressionTimezone?: String;
+    /**
+     * Defaults to 24 hours. A value in hours after a restore test is scheduled before a job will be canceled if it doesn't start successfully. This value is optional. If this value is included, this parameter has a maximum value of 168 hours (one week).
+     */
+    StartWindowHours?: integer;
+  }
+  export interface RestoreTestingPlanForGet {
+    /**
+     * The date and time that a restore testing plan was created, in Unix format and Coordinated Universal Time (UTC). The value of CreationTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     */
+    CreationTime: Timestamp;
+    /**
+     * This identifies the request and allows failed requests to be retried without the risk of running the operation twice. If the request includes a CreatorRequestId that matches an existing backup plan, that plan is returned. This parameter is optional. If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.
+     */
+    CreatorRequestId?: String;
+    /**
+     * The last time a restore test was run with the specified restore testing plan. A date and time, in Unix format and Coordinated Universal Time (UTC). The value of LastExecutionDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     */
+    LastExecutionTime?: Timestamp;
+    /**
+     * The date and time that the restore testing plan was updated. This update is in Unix format and Coordinated Universal Time (UTC). The value of LastUpdateTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     */
+    LastUpdateTime?: Timestamp;
+    /**
+     * The specified criteria to assign a set of resources, such as recovery point types or backup vaults.
+     */
+    RecoveryPointSelection: RestoreTestingRecoveryPointSelection;
+    /**
+     * An Amazon Resource Name (ARN) that uniquely identifies a restore testing plan.
+     */
+    RestoreTestingPlanArn: String;
+    /**
+     * This is the restore testing plan name.
+     */
+    RestoreTestingPlanName: String;
+    /**
+     * A CRON expression in specified timezone when a restore testing plan is executed.
+     */
+    ScheduleExpression: String;
+    /**
+     * Optional. This is the timezone in which the schedule expression is set. By default, ScheduleExpressions are in UTC. You can modify this to a specified timezone.
+     */
+    ScheduleExpressionTimezone?: String;
+    /**
+     * Defaults to 24 hours. A value in hours after a restore test is scheduled before a job will be canceled if it doesn't start successfully. This value is optional. If this value is included, this parameter has a maximum value of 168 hours (one week).
+     */
+    StartWindowHours?: integer;
+  }
+  export interface RestoreTestingPlanForList {
+    /**
+     * The date and time that a restore testing plan was created, in Unix format and Coordinated Universal Time (UTC). The value of CreationTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     */
+    CreationTime: Timestamp;
+    /**
+     * The last time a restore test was run with the specified restore testing plan. A date and time, in Unix format and Coordinated Universal Time (UTC). The value of LastExecutionDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     */
+    LastExecutionTime?: Timestamp;
+    /**
+     * The date and time that the restore testing plan was updated. This update is in Unix format and Coordinated Universal Time (UTC). The value of LastUpdateTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     */
+    LastUpdateTime?: Timestamp;
+    /**
+     * An Amazon Resource Name (ARN) that uniquely identifiesa restore testing plan.
+     */
+    RestoreTestingPlanArn: String;
+    /**
+     * This is the restore testing plan name.
+     */
+    RestoreTestingPlanName: String;
+    /**
+     * A CRON expression in specified timezone when a restore testing plan is executed.
+     */
+    ScheduleExpression: String;
+    /**
+     * Optional. This is the timezone in which the schedule expression is set. By default, ScheduleExpressions are in UTC. You can modify this to a specified timezone.
+     */
+    ScheduleExpressionTimezone?: String;
+    /**
+     * Defaults to 24 hours. A value in hours after a restore test is scheduled before a job will be canceled if it doesn't start successfully. This value is optional. If this value is included, this parameter has a maximum value of 168 hours (one week).
+     */
+    StartWindowHours?: integer;
+  }
+  export interface RestoreTestingPlanForUpdate {
+    /**
+     * Required: Algorithm; RecoveryPointTypes; IncludeVaults (one or more). Optional: SelectionWindowDays ('30' if not specified); ExcludeVaults (defaults to empty list if not listed).
+     */
+    RecoveryPointSelection?: RestoreTestingRecoveryPointSelection;
+    /**
+     * A CRON expression in specified timezone when a restore testing plan is executed.
+     */
+    ScheduleExpression?: String;
+    /**
+     * Optional. This is the timezone in which the schedule expression is set. By default, ScheduleExpressions are in UTC. You can modify this to a specified timezone.
+     */
+    ScheduleExpressionTimezone?: String;
+    /**
+     * Defaults to 24 hours. A value in hours after a restore test is scheduled before a job will be canceled if it doesn't start successfully. This value is optional. If this value is included, this parameter has a maximum value of 168 hours (one week).
+     */
+    StartWindowHours?: integer;
+  }
+  export type RestoreTestingPlans = RestoreTestingPlanForList[];
+  export interface RestoreTestingRecoveryPointSelection {
+    /**
+     * Acceptable values include "LATEST_WITHIN_WINDOW" or "RANDOM_WITHIN_WINDOW"
+     */
+    Algorithm?: RestoreTestingRecoveryPointSelectionAlgorithm;
+    /**
+     * Accepted values include specific ARNs or list of selectors. Defaults to empty list if not listed.
+     */
+    ExcludeVaults?: stringList;
+    /**
+     * Accepted values include wildcard ["*"] or by specific ARNs or ARN wilcard replacement ["arn:aws:backup:us-west-2:123456789012:backup-vault:asdf", ...] ["arn:aws:backup:*:*:backup-vault:asdf-*", ...]
+     */
+    IncludeVaults?: stringList;
+    /**
+     * These are the types of recovery points.
+     */
+    RecoveryPointTypes?: RestoreTestingRecoveryPointTypeList;
+    /**
+     * Accepted values are integers from 1 to 365.
+     */
+    SelectionWindowDays?: integer;
+  }
+  export type RestoreTestingRecoveryPointSelectionAlgorithm = "LATEST_WITHIN_WINDOW"|"RANDOM_WITHIN_WINDOW"|string;
+  export type RestoreTestingRecoveryPointType = "CONTINUOUS"|"SNAPSHOT"|string;
+  export type RestoreTestingRecoveryPointTypeList = RestoreTestingRecoveryPointType[];
+  export interface RestoreTestingSelectionForCreate {
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role that Backup uses to create the target resource; for example: arn:aws:iam::123456789012:role/S3Access. 
+     */
+    IamRoleArn: String;
+    /**
+     * Each protected resource can be filtered by its specific ARNs, such as ProtectedResourceArns: ["arn:aws:...", "arn:aws:..."] or by a wildcard: ProtectedResourceArns: ["*"], but not both.
+     */
+    ProtectedResourceArns?: stringList;
+    /**
+     * If you have included the wildcard in ProtectedResourceArns, you can include resource conditions, such as ProtectedResourceConditions: { StringEquals: [{ key: "XXXX", value: "YYYY" }].
+     */
+    ProtectedResourceConditions?: ProtectedResourceConditions;
+    /**
+     * The type of Amazon Web Services resource included in a restore testing selection; for example, an Amazon EBS volume or an Amazon RDS database. Supported resource types accepted include:    Aurora for Amazon Aurora    DocumentDB for Amazon DocumentDB (with MongoDB compatibility)    DynamoDB for Amazon DynamoDB    EBS for Amazon Elastic Block Store    EC2 for Amazon Elastic Compute Cloud    EFS for Amazon Elastic File System    FSx for Amazon FSx    Neptune for Amazon Neptune    RDS for Amazon Relational Database Service    S3 for Amazon S3  
+     */
+    ProtectedResourceType: String;
+    /**
+     * You can override certain restore metadata keys by including the parameter RestoreMetadataOverrides in the body of RestoreTestingSelection. Key values are not case sensitive. See the complete list of restore testing inferred metadata.
+     */
+    RestoreMetadataOverrides?: SensitiveStringMap;
+    /**
+     * This is the unique name of the restore testing selection that belongs to the related restore testing plan.
+     */
+    RestoreTestingSelectionName: String;
+    /**
+     * This is amount of hours (1 to 168) available to run a validation script on the data. The data will be deleted upon the completion of the validation script or the end of the specified retention period, whichever comes first.
+     */
+    ValidationWindowHours?: integer;
+  }
+  export interface RestoreTestingSelectionForGet {
+    /**
+     * The date and time that a restore testing selection was created, in Unix format and Coordinated Universal Time (UTC). The value of CreationTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 201812:11:30.087 AM.
+     */
+    CreationTime: Timestamp;
+    /**
+     * This identifies the request and allows failed requests to be retried without the risk of running the operation twice. If the request includes a CreatorRequestId that matches an existing backup plan, that plan is returned. This parameter is optional. If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.
+     */
+    CreatorRequestId?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role that Backup uses to create the target resource; for example:arn:aws:iam::123456789012:role/S3Access.
+     */
+    IamRoleArn: String;
+    /**
+     * You can include specific ARNs, such as ProtectedResourceArns: ["arn:aws:...", "arn:aws:..."] or you can include a wildcard: ProtectedResourceArns: ["*"], but not both.
+     */
+    ProtectedResourceArns?: stringList;
+    /**
+     * In a resource testing selection, this parameter filters by specific conditions such as StringEquals or StringNotEquals.
+     */
+    ProtectedResourceConditions?: ProtectedResourceConditions;
+    /**
+     * The type of Amazon Web Services resource included in a resource testing selection; for example, an Amazon EBS volume or an Amazon RDS database.
+     */
+    ProtectedResourceType: String;
+    /**
+     * You can override certain restore metadata keys by including the parameter RestoreMetadataOverrides in the body of RestoreTestingSelection. Key values are not case sensitive. See the complete list of restore testing inferred metadata.
+     */
+    RestoreMetadataOverrides?: SensitiveStringMap;
+    /**
+     * The RestoreTestingPlanName is a unique string that is the name of the restore testing plan.
+     */
+    RestoreTestingPlanName: String;
+    /**
+     * This is the unique name of the restore testing selection that belongs to the related restore testing plan.
+     */
+    RestoreTestingSelectionName: String;
+    /**
+     * This is amount of hours (1 to 168) available to run a validation script on the data. The data will be deleted upon the completion of the validation script or the end of the specified retention period, whichever comes first.
+     */
+    ValidationWindowHours?: integer;
+  }
+  export interface RestoreTestingSelectionForList {
+    /**
+     * This is the date and time that a restore testing selection was created, in Unix format and Coordinated Universal Time (UTC). The value of CreationTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26,2018 12:11:30.087 AM.
+     */
+    CreationTime: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role that Backup uses to create the target resource; for example: arn:aws:iam::123456789012:role/S3Access.
+     */
+    IamRoleArn: String;
+    /**
+     * The type of Amazon Web Services resource included in a restore testing selection; for example, an Amazon EBS volume or an Amazon RDS database.
+     */
+    ProtectedResourceType: String;
+    /**
+     * Unique string that is the name of the restore testing plan. The name cannot be changed after creation. The name must consist of only alphanumeric characters and underscores. Maximum length is 50.
+     */
+    RestoreTestingPlanName: String;
+    /**
+     * Unique name of a restore testing selection.
+     */
+    RestoreTestingSelectionName: String;
+    /**
+     * This value represents the time, in hours, data is retained after a restore test so that optional validation can be completed. Accepted value is an integer between 0 and 168 (the hourly equivalent of seven days).
+     */
+    ValidationWindowHours?: integer;
+  }
+  export interface RestoreTestingSelectionForUpdate {
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role that Backup uses to create the target resource; for example: arn:aws:iam::123456789012:role/S3Access.
+     */
+    IamRoleArn?: String;
+    /**
+     * You can include a list of specific ARNs, such as ProtectedResourceArns: ["arn:aws:...", "arn:aws:..."] or you can include a wildcard: ProtectedResourceArns: ["*"], but not both.
+     */
+    ProtectedResourceArns?: stringList;
+    /**
+     * A list of conditions that you define for resources in your restore testing plan using tags. For example, "StringEquals": { "Key": "aws:ResourceTag/CreatedByCryo", "Value": "true" },. Condition operators are case sensitive.
+     */
+    ProtectedResourceConditions?: ProtectedResourceConditions;
+    /**
+     * You can override certain restore metadata keys by including the parameter RestoreMetadataOverrides in the body of RestoreTestingSelection. Key values are not case sensitive. See the complete list of restore testing inferred metadata.
+     */
+    RestoreMetadataOverrides?: SensitiveStringMap;
+    /**
+     * This value represents the time, in hours, data is retained after a restore test so that optional validation can be completed. Accepted value is an integer between 0 and 168 (the hourly equivalent of seven days).
+     */
+    ValidationWindowHours?: integer;
+  }
+  export type RestoreTestingSelections = RestoreTestingSelectionForList[];
+  export type RestoreValidationStatus = "FAILED"|"SUCCESSFUL"|"TIMED_OUT"|"VALIDATING"|string;
+  export type SensitiveStringMap = {[key: string]: String};
   export interface StartBackupJobInput {
     /**
      * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.
@@ -3764,6 +4501,7 @@ declare namespace Backup {
     BackupJobId: string;
   }
   export type StorageClass = "WARM"|"COLD"|"DELETED"|string;
+  export type String = string;
   export type TagKey = string;
   export type TagKeyList = string[];
   export interface TagResourceInput {
@@ -3778,6 +4516,7 @@ declare namespace Backup {
   }
   export type TagValue = string;
   export type Tags = {[key: string]: TagValue};
+  export type Timestamp = Date;
   export type Timezone = string;
   export interface UntagResourceInput {
     /**
@@ -3936,6 +4675,70 @@ declare namespace Backup {
      * The date and time that a report plan is created, in Unix format and Coordinated Universal Time (UTC). The value of CreationTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
      */
     CreationTime?: timestamp;
+  }
+  export interface UpdateRestoreTestingPlanInput {
+    /**
+     * Specifies the body of a restore testing plan.
+     */
+    RestoreTestingPlan: RestoreTestingPlanForUpdate;
+    /**
+     * This is the restore testing plan name you wish to update.
+     */
+    RestoreTestingPlanName: String;
+  }
+  export interface UpdateRestoreTestingPlanOutput {
+    /**
+     * This is the time the resource testing plan was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * Unique ARN (Amazon Resource Name) of the restore testing plan.
+     */
+    RestoreTestingPlanArn: String;
+    /**
+     * The name cannot be changed after creation. The name consists of only alphanumeric characters and underscores. Maximum length is 50.
+     */
+    RestoreTestingPlanName: String;
+    /**
+     * This is the time the update completed for the restore testing plan.
+     */
+    UpdateTime: Timestamp;
+  }
+  export interface UpdateRestoreTestingSelectionInput {
+    /**
+     * The restore testing plan name is required to update the indicated testing plan.
+     */
+    RestoreTestingPlanName: String;
+    /**
+     * To update your restore testing selection, you can use either protected resource ARNs or conditions, but not both. That is, if your selection has ProtectedResourceArns, requesting an update with the parameter ProtectedResourceConditions will be unsuccessful.
+     */
+    RestoreTestingSelection: RestoreTestingSelectionForUpdate;
+    /**
+     * This is the required restore testing selection name of the restore testing selection you wish to update.
+     */
+    RestoreTestingSelectionName: String;
+  }
+  export interface UpdateRestoreTestingSelectionOutput {
+    /**
+     * This is the time the resource testing selection was updated successfully.
+     */
+    CreationTime: Timestamp;
+    /**
+     * Unique string that is the name of the restore testing plan.
+     */
+    RestoreTestingPlanArn: String;
+    /**
+     * This is the restore testing plan with which the updated restore testing selection is associated.
+     */
+    RestoreTestingPlanName: String;
+    /**
+     * This is the returned restore testing selection name.
+     */
+    RestoreTestingSelectionName: String;
+    /**
+     * This is the time the update completed for the restore testing selection.
+     */
+    UpdateTime: Timestamp;
   }
   export type VaultNames = string[];
   export type VaultState = "CREATING"|"AVAILABLE"|"FAILED"|string;
