@@ -367,5 +367,9 @@ module.exports = {
   FreeTier: require('./freetier'),
   Repostspace: require('./repostspace'),
   WorkSpacesThinClient: require('./workspacesthinclient'),
-  B2bi: require('./b2bi')
+  B2bi: require('./b2bi'),
+  BedrockAgent: require('./bedrockagent'),
+  BedrockAgentRuntime: require('./bedrockagentruntime'),
+  QBusiness: require('./qbusiness'),
+  QConnect: require('./qconnect')
 };

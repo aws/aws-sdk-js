@@ -129,7 +129,7 @@
       "type": "string",
       "max": 2048,
       "min": 1,
-      "pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63}))|([0-9]{12}:provisioned-model/[a-z0-9]{12})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)$"
+      "pattern": "(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:provisioned-model/[a-z0-9]{12})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)"
     },
     "InvokeModelRequest": {
       "type": "structure",
@@ -138,12 +138,6 @@
         "modelId"
       ],
       "members": {
-        "accept": {
-          "shape": "MimeType",
-          "documentation": "<p>The desired MIME type of the inference body in the response. The default value is <code>application/json</code>.</p>",
-          "location": "header",
-          "locationName": "Accept"
-        },
         "body": {
           "shape": "Body",
           "documentation": "<p>Input data in the format specified in the content-type request header. To see the format and content of this field for different models, refer to <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference parameters</a>.</p>"
@@ -153,6 +147,12 @@
           "documentation": "<p>The MIME type of the input data in the request. The default value is <code>application/json</code>.</p>",
           "location": "header",
           "locationName": "Content-Type"
+        },
+        "accept": {
+          "shape": "MimeType",
+          "documentation": "<p>The desired MIME type of the inference body in the response. The default value is <code>application/json</code>.</p>",
+          "location": "header",
+          "locationName": "Accept"
         },
         "modelId": {
           "shape": "InvokeModelIdentifier",
@@ -190,12 +190,6 @@
         "modelId"
       ],
       "members": {
-        "accept": {
-          "shape": "MimeType",
-          "documentation": "<p>The desired MIME type of the inference body in the response. The default value is <code>application/json</code>.</p>",
-          "location": "header",
-          "locationName": "X-Amzn-Bedrock-Accept"
-        },
         "body": {
           "shape": "Body",
           "documentation": "<p>Inference input in the format specified by the content-type. To see the format and content of this field for different models, refer to <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference parameters</a>.</p>"
@@ -205,6 +199,12 @@
           "documentation": "<p>The MIME type of the input data in the request. The default value is <code>application/json</code>.</p>",
           "location": "header",
           "locationName": "Content-Type"
+        },
+        "accept": {
+          "shape": "MimeType",
+          "documentation": "<p>The desired MIME type of the inference body in the response. The default value is <code>application/json</code>.</p>",
+          "location": "header",
+          "locationName": "X-Amzn-Bedrock-Accept"
         },
         "modelId": {
           "shape": "InvokeModelIdentifier",
@@ -244,13 +244,13 @@
         "message": {
           "shape": "NonBlankString"
         },
-        "originalMessage": {
-          "shape": "NonBlankString",
-          "documentation": "<p>The original message.</p>"
-        },
         "originalStatusCode": {
           "shape": "StatusCode",
           "documentation": "<p>The original status code.</p>"
+        },
+        "originalMessage": {
+          "shape": "NonBlankString",
+          "documentation": "<p>The original message.</p>"
         }
       },
       "documentation": "<p>An error occurred while streaming the response.</p>",
@@ -276,7 +276,7 @@
     },
     "NonBlankString": {
       "type": "string",
-      "pattern": "^[\\s\\S]*$"
+      "pattern": "[\\s\\S]*"
     },
     "PartBody": {
       "type": "blob",
@@ -309,14 +309,14 @@
         "modelStreamErrorException": {
           "shape": "ModelStreamErrorException"
         },
-        "modelTimeoutException": {
-          "shape": "ModelTimeoutException"
+        "validationException": {
+          "shape": "ValidationException"
         },
         "throttlingException": {
           "shape": "ThrottlingException"
         },
-        "validationException": {
-          "shape": "ValidationException"
+        "modelTimeoutException": {
+          "shape": "ModelTimeoutException"
         }
       },
       "documentation": "<p>Definition of content in the response stream.</p>",

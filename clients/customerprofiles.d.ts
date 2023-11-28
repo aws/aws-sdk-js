@@ -132,6 +132,14 @@ declare class CustomerProfiles extends Service {
    */
   deleteWorkflow(callback?: (err: AWSError, data: CustomerProfiles.Types.DeleteWorkflowResponse) => void): Request<CustomerProfiles.Types.DeleteWorkflowResponse, AWSError>;
   /**
+   * The process of detecting profile object type mapping by using given objects.
+   */
+  detectProfileObjectType(params: CustomerProfiles.Types.DetectProfileObjectTypeRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.DetectProfileObjectTypeResponse) => void): Request<CustomerProfiles.Types.DetectProfileObjectTypeResponse, AWSError>;
+  /**
+   * The process of detecting profile object type mapping by using given objects.
+   */
+  detectProfileObjectType(callback?: (err: AWSError, data: CustomerProfiles.Types.DetectProfileObjectTypeResponse) => void): Request<CustomerProfiles.Types.DetectProfileObjectTypeResponse, AWSError>;
+  /**
    * Tests the auto-merging settings of your Identity Resolution Job without merging your data. It randomly selects a sample of matching groups from the existing matching results, and applies the automerging settings that you provided. You can then view the number of profiles in the sample, the number of matches, and the number of profiles identified to be merged. This enables you to evaluate the accuracy of the attributes in your matching list.  You can't view which profiles are matched and would be merged.  We strongly recommend you use this API to do a dry run of the automerging process before running the Identity Resolution Job. Include at least two matching attributes. If your matching list includes too few attributes (such as only FirstName or only LastName), there may be a large number of matches. This increases the chances of erroneous merges. 
    */
   getAutoMergingPreview(params: CustomerProfiles.Types.GetAutoMergingPreviewRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.GetAutoMergingPreviewResponse) => void): Request<CustomerProfiles.Types.GetAutoMergingPreviewResponse, AWSError>;
@@ -1167,6 +1175,37 @@ declare namespace CustomerProfiles {
      */
     UnhealthySince?: timestamp;
   }
+  export interface DetectProfileObjectTypeRequest {
+    /**
+     * A string that is serialized from a JSON object.
+     */
+    Objects: Objects;
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+  }
+  export interface DetectProfileObjectTypeResponse {
+    /**
+     * Detected ProfileObjectType mappings from given objects. A maximum of one mapping is supported.
+     */
+    DetectedProfileObjectTypes?: DetectedProfileObjectTypes;
+  }
+  export interface DetectedProfileObjectType {
+    /**
+     * The format of sourceLastUpdatedTimestamp that was detected in fields.
+     */
+    SourceLastUpdatedTimestampFormat?: string1To255;
+    /**
+     * A map of the name and the ObjectType field.
+     */
+    Fields?: FieldMap;
+    /**
+     * A list of unique keys that can be used to map data to a profile.
+     */
+    Keys?: KeyMap;
+  }
+  export type DetectedProfileObjectTypes = DetectedProfileObjectType[];
   export type DomainList = ListDomainItem[];
   export interface DomainStats {
     /**
@@ -2667,6 +2706,7 @@ declare namespace CustomerProfiles {
   }
   export type ObjectTypeKeyList = ObjectTypeKey[];
   export type ObjectTypeNames = {[key: string]: typeName};
+  export type Objects = stringifiedJson[];
   export type Operator = "EQUAL_TO"|"GREATER_THAN"|"LESS_THAN"|"NOT_EQUAL_TO"|string;
   export type OperatorPropertiesKeys = "VALUE"|"VALUES"|"DATA_TYPE"|"UPPER_BOUND"|"LOWER_BOUND"|"SOURCE_DATA_TYPE"|"DESTINATION_DATA_TYPE"|"VALIDATION_ACTION"|"MASK_VALUE"|"MASK_LENGTH"|"TRUNCATE_LENGTH"|"MATH_OPERATION_FIELDS_ORDER"|"CONCAT_FORMAT"|"SUBFIELD_CATEGORY_MAP"|string;
   export type PartyType = "INDIVIDUAL"|"BUSINESS"|"OTHER"|string;

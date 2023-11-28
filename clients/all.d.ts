@@ -366,3 +366,7 @@ export import FreeTier = require('./freetier');
 export import Repostspace = require('./repostspace');
 export import WorkSpacesThinClient = require('./workspacesthinclient');
 export import B2bi = require('./b2bi');
+export import BedrockAgent = require('./bedrockagent');
+export import BedrockAgentRuntime = require('./bedrockagentruntime');
+export import QBusiness = require('./qbusiness');
+export import QConnect = require('./qconnect');

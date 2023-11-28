@@ -1379,5 +1379,19 @@
   },
   "b2bi": {
     "name": "B2bi"
+  },
+  "bedrockagent": {
+    "prefix": "bedrock-agent",
+    "name": "BedrockAgent"
+  },
+  "bedrockagentruntime": {
+    "prefix": "bedrock-agent-runtime",
+    "name": "BedrockAgentRuntime"
+  },
+  "qbusiness": {
+    "name": "QBusiness"
+  },
+  "qconnect": {
+    "name": "QConnect"
   }
 }

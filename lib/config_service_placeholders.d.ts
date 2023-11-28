@@ -368,6 +368,10 @@ export abstract class ConfigurationServicePlaceholders {
   repostspace?: AWS.Repostspace.Types.ClientConfiguration;
   workspacesthinclient?: AWS.WorkSpacesThinClient.Types.ClientConfiguration;
   b2bi?: AWS.B2bi.Types.ClientConfiguration;
+  bedrockagent?: AWS.BedrockAgent.Types.ClientConfiguration;
+  bedrockagentruntime?: AWS.BedrockAgentRuntime.Types.ClientConfiguration;
+  qbusiness?: AWS.QBusiness.Types.ClientConfiguration;
+  qconnect?: AWS.QConnect.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -738,4 +742,8 @@ export interface ConfigurationServiceApiVersions {
   repostspace?: AWS.Repostspace.Types.apiVersion;
   workspacesthinclient?: AWS.WorkSpacesThinClient.Types.apiVersion;
   b2bi?: AWS.B2bi.Types.apiVersion;
+  bedrockagent?: AWS.BedrockAgent.Types.apiVersion;
+  bedrockagentruntime?: AWS.BedrockAgentRuntime.Types.apiVersion;
+  qbusiness?: AWS.QBusiness.Types.apiVersion;
+  qconnect?: AWS.QConnect.Types.apiVersion;
 }

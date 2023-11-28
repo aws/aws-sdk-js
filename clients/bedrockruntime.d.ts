@@ -37,10 +37,6 @@ declare namespace BedrockRuntime {
   export type InvokeModelIdentifier = string;
   export interface InvokeModelRequest {
     /**
-     * The desired MIME type of the inference body in the response. The default value is application/json.
-     */
-    accept?: MimeType;
-    /**
      * Input data in the format specified in the content-type request header. To see the format and content of this field for different models, refer to Inference parameters.
      */
     body: Body;
@@ -48,6 +44,10 @@ declare namespace BedrockRuntime {
      * The MIME type of the input data in the request. The default value is application/json.
      */
     contentType?: MimeType;
+    /**
+     * The desired MIME type of the inference body in the response. The default value is application/json.
+     */
+    accept?: MimeType;
     /**
      * Identifier of the model. 
      */
@@ -65,10 +65,6 @@ declare namespace BedrockRuntime {
   }
   export interface InvokeModelWithResponseStreamRequest {
     /**
-     * The desired MIME type of the inference body in the response. The default value is application/json.
-     */
-    accept?: MimeType;
-    /**
      * Inference input in the format specified by the content-type. To see the format and content of this field for different models, refer to Inference parameters.
      */
     body: Body;
@@ -76,6 +72,10 @@ declare namespace BedrockRuntime {
      * The MIME type of the input data in the request. The default value is application/json.
      */
     contentType?: MimeType;
+    /**
+     * The desired MIME type of the inference body in the response. The default value is application/json.
+     */
+    accept?: MimeType;
     /**
      * Id of the model to invoke using the streaming request.
      */
@@ -95,13 +95,13 @@ declare namespace BedrockRuntime {
   export interface ModelStreamErrorException {
     message?: NonBlankString;
     /**
-     * The original message.
-     */
-    originalMessage?: NonBlankString;
-    /**
      * The original status code.
      */
     originalStatusCode?: StatusCode;
+    /**
+     * The original message.
+     */
+    originalMessage?: NonBlankString;
   }
   export interface ModelTimeoutException {
     message?: NonBlankString;
@@ -114,7 +114,7 @@ declare namespace BedrockRuntime {
      */
     bytes?: PartBody;
   }
-  export type ResponseStream = EventStream<{chunk?:PayloadPart,internalServerException?:InternalServerException,modelStreamErrorException?:ModelStreamErrorException,modelTimeoutException?:ModelTimeoutException,throttlingException?:ThrottlingException,validationException?:ValidationException}>;
+  export type ResponseStream = EventStream<{chunk?:PayloadPart,internalServerException?:InternalServerException,modelStreamErrorException?:ModelStreamErrorException,validationException?:ValidationException,throttlingException?:ThrottlingException,modelTimeoutException?:ModelTimeoutException}>;
   export type StatusCode = number;
   export interface ThrottlingException {
     message?: NonBlankString;

@@ -12,11 +12,11 @@ declare class Bedrock extends Service {
   constructor(options?: Bedrock.Types.ClientConfiguration)
   config: Config & Bedrock.Types.ClientConfiguration;
   /**
-   * Creates a fine-tuning job to customize a base model. You specify the base foundation model and the location of the training data. After the model-customization job completes successfully, your custom model resource will be ready to use. Training data contains input and output text for each record in a JSONL format. Optionally, you can specify validation data in the same format as the training data. Bedrock returns validation loss metrics and output generations after the job completes.   Model-customization jobs are asynchronous and the completion time depends on the base model and the training/validation data size. To monitor a job, use the GetModelCustomizationJob operation to retrieve the job status. For more information, see Custom models in the Bedrock User Guide.
+   * Creates a fine-tuning job to customize a base model. You specify the base foundation model and the location of the training data. After the model-customization job completes successfully, your custom model resource will be ready to use. Training data contains input and output text for each record in a JSONL format. Optionally, you can specify validation data in the same format as the training data. Amazon Bedrock returns validation loss metrics and output generations after the job completes.   Model-customization jobs are asynchronous and the completion time depends on the base model and the training/validation data size. To monitor a job, use the GetModelCustomizationJob operation to retrieve the job status. For more information, see Custom models in the Bedrock User Guide.
    */
   createModelCustomizationJob(params: Bedrock.Types.CreateModelCustomizationJobRequest, callback?: (err: AWSError, data: Bedrock.Types.CreateModelCustomizationJobResponse) => void): Request<Bedrock.Types.CreateModelCustomizationJobResponse, AWSError>;
   /**
-   * Creates a fine-tuning job to customize a base model. You specify the base foundation model and the location of the training data. After the model-customization job completes successfully, your custom model resource will be ready to use. Training data contains input and output text for each record in a JSONL format. Optionally, you can specify validation data in the same format as the training data. Bedrock returns validation loss metrics and output generations after the job completes.   Model-customization jobs are asynchronous and the completion time depends on the base model and the training/validation data size. To monitor a job, use the GetModelCustomizationJob operation to retrieve the job status. For more information, see Custom models in the Bedrock User Guide.
+   * Creates a fine-tuning job to customize a base model. You specify the base foundation model and the location of the training data. After the model-customization job completes successfully, your custom model resource will be ready to use. Training data contains input and output text for each record in a JSONL format. Optionally, you can specify validation data in the same format as the training data. Amazon Bedrock returns validation loss metrics and output generations after the job completes.   Model-customization jobs are asynchronous and the completion time depends on the base model and the training/validation data size. To monitor a job, use the GetModelCustomizationJob operation to retrieve the job status. For more information, see Custom models in the Bedrock User Guide.
    */
   createModelCustomizationJob(callback?: (err: AWSError, data: Bedrock.Types.CreateModelCustomizationJobResponse) => void): Request<Bedrock.Types.CreateModelCustomizationJobResponse, AWSError>;
   /**
@@ -52,19 +52,19 @@ declare class Bedrock extends Service {
    */
   deleteProvisionedModelThroughput(callback?: (err: AWSError, data: Bedrock.Types.DeleteProvisionedModelThroughputResponse) => void): Request<Bedrock.Types.DeleteProvisionedModelThroughputResponse, AWSError>;
   /**
-   * Get the properties associated with a Bedrock custom model that you have created.For more information, see Custom models in the Bedrock User Guide.
+   * Get the properties associated with a Amazon Bedrock custom model that you have created.For more information, see Custom models in the Bedrock User Guide.
    */
   getCustomModel(params: Bedrock.Types.GetCustomModelRequest, callback?: (err: AWSError, data: Bedrock.Types.GetCustomModelResponse) => void): Request<Bedrock.Types.GetCustomModelResponse, AWSError>;
   /**
-   * Get the properties associated with a Bedrock custom model that you have created.For more information, see Custom models in the Bedrock User Guide.
+   * Get the properties associated with a Amazon Bedrock custom model that you have created.For more information, see Custom models in the Bedrock User Guide.
    */
   getCustomModel(callback?: (err: AWSError, data: Bedrock.Types.GetCustomModelResponse) => void): Request<Bedrock.Types.GetCustomModelResponse, AWSError>;
   /**
-   * Get details about a Bedrock foundation model.
+   * Get details about a Amazon Bedrock foundation model.
    */
   getFoundationModel(params: Bedrock.Types.GetFoundationModelRequest, callback?: (err: AWSError, data: Bedrock.Types.GetFoundationModelResponse) => void): Request<Bedrock.Types.GetFoundationModelResponse, AWSError>;
   /**
-   * Get details about a Bedrock foundation model.
+   * Get details about a Amazon Bedrock foundation model.
    */
   getFoundationModel(callback?: (err: AWSError, data: Bedrock.Types.GetFoundationModelResponse) => void): Request<Bedrock.Types.GetFoundationModelResponse, AWSError>;
   /**
@@ -100,11 +100,11 @@ declare class Bedrock extends Service {
    */
   listCustomModels(callback?: (err: AWSError, data: Bedrock.Types.ListCustomModelsResponse) => void): Request<Bedrock.Types.ListCustomModelsResponse, AWSError>;
   /**
-   * List of Bedrock foundation models that you can use. For more information, see Foundation models in the Bedrock User Guide.
+   * List of Amazon Bedrock foundation models that you can use. For more information, see Foundation models in the Bedrock User Guide.
    */
   listFoundationModels(params: Bedrock.Types.ListFoundationModelsRequest, callback?: (err: AWSError, data: Bedrock.Types.ListFoundationModelsResponse) => void): Request<Bedrock.Types.ListFoundationModelsResponse, AWSError>;
   /**
-   * List of Bedrock foundation models that you can use. For more information, see Foundation models in the Bedrock User Guide.
+   * List of Amazon Bedrock foundation models that you can use. For more information, see Foundation models in the Bedrock User Guide.
    */
   listFoundationModels(callback?: (err: AWSError, data: Bedrock.Types.ListFoundationModelsResponse) => void): Request<Bedrock.Types.ListFoundationModelsResponse, AWSError>;
   /**
@@ -203,7 +203,7 @@ declare namespace Bedrock {
      */
     customModelName: CustomModelName;
     /**
-     * The Amazon Resource Name (ARN) of an IAM role that Bedrock can assume to perform tasks on your behalf. For example, during model training, Bedrock needs your permission to read input data from an S3 bucket, write model artifacts to an S3 bucket. To pass this role to Bedrock, the caller of this API must have the iam:PassRole permission. 
+     * The Amazon Resource Name (ARN) of an IAM role that Amazon Bedrock can assume to perform tasks on your behalf. For example, during model training, Amazon Bedrock needs your permission to read input data from an S3 bucket, write model artifacts to an S3 bucket. To pass this role to Amazon Bedrock, the caller of this API must have the iam:PassRole permission. 
      */
     roleArn: RoleArn;
     /**
@@ -214,6 +214,10 @@ declare namespace Bedrock {
      * Name of the base model.
      */
     baseModelIdentifier: BaseModelIdentifier;
+    /**
+     * The customization type.
+     */
+    customizationType?: CustomizationType;
     /**
      * The custom model is encrypted at rest using this key.
      */
@@ -255,7 +259,7 @@ declare namespace Bedrock {
   }
   export interface CreateProvisionedModelThroughputRequest {
     /**
-     * Unique token value that you can provide. If this token matches a previous request, Bedrock ignores the request, but does not return an error.
+     * Unique token value that you can provide. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error.
      */
     clientRequestToken?: IdempotencyToken;
     /**
@@ -308,8 +312,13 @@ declare namespace Bedrock {
      * The base model name.
      */
     baseModelName: ModelName;
+    /**
+     * Specifies whether to carry out continued pre-training of a model or whether to fine-tune it. For more information, see Custom models.
+     */
+    customizationType?: CustomizationType;
   }
   export type CustomModelSummaryList = CustomModelSummary[];
+  export type CustomizationType = "FINE_TUNING"|"CONTINUED_PRE_TRAINING"|string;
   export interface DeleteCustomModelRequest {
     /**
      * Name of the model to delete.
@@ -370,7 +379,18 @@ declare namespace Bedrock {
      * The inference types that the model supports.
      */
     inferenceTypesSupported?: InferenceTypeList;
+    /**
+     * Contains details about whether a model version is available or deprecated
+     */
+    modelLifecycle?: FoundationModelLifecycle;
   }
+  export interface FoundationModelLifecycle {
+    /**
+     * Specifies whether a model version is available (ACTIVE) or deprecated (LEGACY.
+     */
+    status: FoundationModelLifecycleStatus;
+  }
+  export type FoundationModelLifecycleStatus = "ACTIVE"|"LEGACY"|string;
   export interface FoundationModelSummary {
     /**
      * The ARN of the foundation model.
@@ -408,6 +428,10 @@ declare namespace Bedrock {
      * The inference types that the model supports.
      */
     inferenceTypesSupported?: InferenceTypeList;
+    /**
+     * Contains details about whether a model version is available or deprecated.
+     */
+    modelLifecycle?: FoundationModelLifecycle;
   }
   export type FoundationModelSummaryList = FoundationModelSummary[];
   export interface GetCustomModelRequest {
@@ -437,6 +461,10 @@ declare namespace Bedrock {
      * ARN of the base model.
      */
     baseModelArn: ModelArn;
+    /**
+     * The type of model customization.
+     */
+    customizationType?: CustomizationType;
     /**
      * The custom model is encrypted at rest using this key.
      */
@@ -535,7 +563,7 @@ declare namespace Bedrock {
      */
     baseModelArn: FoundationModelArn;
     /**
-     * The hyperparameter values for the job.
+     * The hyperparameter values for the job. For information about hyperparameters for specific models, see Guidelines for model customization.
      */
     hyperParameters: ModelCustomizationHyperParameters;
     trainingDataConfig: TrainingDataConfig;
@@ -544,6 +572,10 @@ declare namespace Bedrock {
      * Output data configuration 
      */
     outputDataConfig: OutputDataConfig;
+    /**
+     * The type of model customization.
+     */
+    customizationType?: CustomizationType;
     /**
      * The custom model is encrypted at rest using this key.
      */
@@ -659,7 +691,7 @@ declare namespace Bedrock {
      */
     maxResults?: MaxResults;
     /**
-     * Continuation token from the previous response, for Bedrock to list the next set of results.
+     * Continuation token from the previous response, for Amazon Bedrock to list the next set of results.
      */
     nextToken?: PaginationToken;
     /**
@@ -683,7 +715,7 @@ declare namespace Bedrock {
   }
   export interface ListFoundationModelsRequest {
     /**
-     * A Bedrock model provider.
+     * A Amazon Bedrock model provider.
      */
     byProvider?: Provider;
     /**
@@ -701,7 +733,7 @@ declare namespace Bedrock {
   }
   export interface ListFoundationModelsResponse {
     /**
-     * A list of bedrock foundation models.
+     * A list of Amazon Bedrock foundation models.
      */
     modelSummaries?: FoundationModelSummaryList;
   }
@@ -727,7 +759,7 @@ declare namespace Bedrock {
      */
     maxResults?: MaxResults;
     /**
-     * Continuation token from the previous response, for Bedrock to list the next set of results.
+     * Continuation token from the previous response, for Amazon Bedrock to list the next set of results.
      */
     nextToken?: PaginationToken;
     /**
@@ -775,7 +807,7 @@ declare namespace Bedrock {
      */
     maxResults?: MaxResults;
     /**
-     * Continuation token from the previous response, for Bedrock to list the next set of results.
+     * Continuation token from the previous response, for Amazon Bedrock to list the next set of results.
      */
     nextToken?: PaginationToken;
     /**
@@ -835,7 +867,7 @@ declare namespace Bedrock {
   export type MaxResults = number;
   export type MetricFloat = number;
   export type ModelArn = string;
-  export type ModelCustomization = "FINE_TUNING"|string;
+  export type ModelCustomization = "FINE_TUNING"|"CONTINUED_PRE_TRAINING"|string;
   export type ModelCustomizationHyperParameters = {[key: string]: String};
   export type ModelCustomizationJobArn = string;
   export type ModelCustomizationJobIdentifier = string;
@@ -878,6 +910,10 @@ declare namespace Bedrock {
      * Name of the custom model.
      */
     customModelName?: CustomModelName;
+    /**
+     * Specifies whether to carry out continued pre-training of a model or whether to fine-tune it. For more information, see Custom models.
+     */
+    customizationType?: CustomizationType;
   }
   export type ModelCustomizationList = ModelCustomization[];
   export type ModelIdentifier = string;

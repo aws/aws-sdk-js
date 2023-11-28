@@ -695,7 +695,7 @@ declare namespace AccessAnalyzer {
      */
     secretsManagerSecret?: SecretsManagerSecretConfiguration;
     /**
-     * The access control configuration is for an Amazon S3 Bucket. 
+     * The access control configuration is for an Amazon S3 bucket. 
      */
     s3Bucket?: S3BucketConfiguration;
     /**
@@ -706,6 +706,10 @@ declare namespace AccessAnalyzer {
      * The access control configuration is for an Amazon SQS queue. 
      */
     sqsQueue?: SqsQueueConfiguration;
+    /**
+     * The access control configuration is for an Amazon S3 directory bucket.
+     */
+    s3ExpressDirectoryBucket?: S3ExpressDirectoryBucketConfiguration;
   }
   export type ConfigurationsMap = {[key: string]: Configuration};
   export type ConfigurationsMapKey = string;
@@ -1772,7 +1776,7 @@ declare namespace AccessAnalyzer {
   export type ReasonSummaryList = ReasonSummary[];
   export type RegionList = String[];
   export type ResourceArn = string;
-  export type ResourceType = "AWS::S3::Bucket"|"AWS::IAM::Role"|"AWS::SQS::Queue"|"AWS::Lambda::Function"|"AWS::Lambda::LayerVersion"|"AWS::KMS::Key"|"AWS::SecretsManager::Secret"|"AWS::EFS::FileSystem"|"AWS::EC2::Snapshot"|"AWS::ECR::Repository"|"AWS::RDS::DBSnapshot"|"AWS::RDS::DBClusterSnapshot"|"AWS::SNS::Topic"|string;
+  export type ResourceType = "AWS::S3::Bucket"|"AWS::IAM::Role"|"AWS::SQS::Queue"|"AWS::Lambda::Function"|"AWS::Lambda::LayerVersion"|"AWS::KMS::Key"|"AWS::SecretsManager::Secret"|"AWS::EFS::FileSystem"|"AWS::EC2::Snapshot"|"AWS::ECR::Repository"|"AWS::RDS::DBSnapshot"|"AWS::RDS::DBClusterSnapshot"|"AWS::SNS::Topic"|"AWS::S3Express::DirectoryBucket"|string;
   export type RetiringPrincipal = string;
   export type RoleArn = string;
   export interface S3AccessPointConfiguration {
@@ -1820,6 +1824,13 @@ declare namespace AccessAnalyzer {
     accessPoints?: S3AccessPointConfigurationsMap;
   }
   export type S3BucketPolicy = string;
+  export interface S3ExpressDirectoryBucketConfiguration {
+    /**
+     * The proposed bucket policy for the Amazon S3 directory bucket.
+     */
+    bucketPolicy?: S3ExpressDirectoryBucketPolicy;
+  }
+  export type S3ExpressDirectoryBucketPolicy = string;
   export interface S3PublicAccessBlockConfiguration {
     /**
      *  Specifies whether Amazon S3 should ignore public ACLs for this bucket and objects in this bucket. 

@@ -9,6 +9,7 @@ Object.defineProperty(apiLoader.services['bedrockruntime'], '2023-09-30', {
   get: function get() {
     var model = require('../apis/bedrock-runtime-2023-09-30.min.json');
     model.paginators = require('../apis/bedrock-runtime-2023-09-30.paginators.json').pagination;
+    model.waiters = require('../apis/bedrock-runtime-2023-09-30.waiters2.json').waiters;
     return model;
   },
   enumerable: true,
