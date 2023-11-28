@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1504.0-->
+<!--LATEST=2.1505.0-->
 <!--ENTRYINSERT-->
+
+## 2.1505.0
+* feature: ElastiCache: Launching Amazon ElastiCache Serverless that enables you to create a cache in under a minute without any capacity management. ElastiCache Serverless monitors the cache's memory, CPU, and network usage and scales both vertically and horizontally to support your application's requirements.
 
 ## 2.1504.0
 * feature: AppSync: This update enables introspection of Aurora cluster databases using the RDS Data API
