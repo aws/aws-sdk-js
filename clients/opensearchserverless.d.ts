@@ -495,6 +495,10 @@ declare namespace OpenSearchServerless {
      */
     name?: CollectionName;
     /**
+     * Details about an OpenSearch Serverless collection.
+     */
+    standbyReplicas?: StandbyReplicas;
+    /**
      * The current status of the collection.
      */
     status?: CollectionStatus;
@@ -618,6 +622,10 @@ declare namespace OpenSearchServerless {
      */
     name?: CollectionName;
     /**
+     * Creates details about an OpenSearch Serverless collection.
+     */
+    standbyReplicas?: StandbyReplicas;
+    /**
      * The current status of the collection.
      */
     status?: CollectionStatus;
@@ -639,6 +647,10 @@ declare namespace OpenSearchServerless {
      * Name of the collection.
      */
     name: CollectionName;
+    /**
+     * Indicates whether standby replicas should be used for a collection.
+     */
+    standbyReplicas?: StandbyReplicas;
     /**
      * An arbitrary set of tags (key–value pairs) to associate with the OpenSearch Serverless collection.
      */
@@ -1473,6 +1485,7 @@ declare namespace OpenSearchServerless {
     type?: SecurityPolicyType;
   }
   export type SecurityPolicyType = "encryption"|"network"|string;
+  export type StandbyReplicas = "ENABLED"|"DISABLED"|string;
   export type String = string;
   export type SubnetId = string;
   export type SubnetIds = SubnetId[];

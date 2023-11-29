@@ -372,6 +372,7 @@ export abstract class ConfigurationServicePlaceholders {
   bedrockagentruntime?: AWS.BedrockAgentRuntime.Types.ClientConfiguration;
   qbusiness?: AWS.QBusiness.Types.ClientConfiguration;
   qconnect?: AWS.QConnect.Types.ClientConfiguration;
+  cleanroomsml?: AWS.CleanRoomsML.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -746,4 +747,5 @@ export interface ConfigurationServiceApiVersions {
   bedrockagentruntime?: AWS.BedrockAgentRuntime.Types.apiVersion;
   qbusiness?: AWS.QBusiness.Types.apiVersion;
   qconnect?: AWS.QConnect.Types.apiVersion;
+  cleanroomsml?: AWS.CleanRoomsML.Types.apiVersion;
 }

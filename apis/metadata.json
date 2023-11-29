@@ -1393,5 +1393,8 @@
   },
   "qconnect": {
     "name": "QConnect"
+  },
+  "cleanroomsml": {
+    "name": "CleanRoomsML"
   }
 }

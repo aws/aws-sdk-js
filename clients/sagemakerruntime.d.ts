@@ -29,11 +29,11 @@ declare class SageMakerRuntime extends Service {
    */
   invokeEndpointAsync(callback?: (err: AWSError, data: SageMakerRuntime.Types.InvokeEndpointAsyncOutput) => void): Request<SageMakerRuntime.Types.InvokeEndpointAsyncOutput, AWSError>;
   /**
-   * Invokes a model at the specified endpoint to return the inference response as a stream. The inference stream provides the response payload incrementally as a series of parts. Before you can get an inference stream, you must have access to a model that's deployed using Amazon SageMaker hosting services, and the container for that model must support inference streaming. For more information that can help you use this API, see the following sections in the Amazon SageMaker Developer Guide:   For information about how to add streaming support to a model, see How Containers Serve Requests.   For information about how to process the streaming response, see Invoke real-time endpoints.   Amazon SageMaker strips all POST headers except those supported by the API. Amazon SageMaker might add additional headers. You should not rely on the behavior of headers outside those enumerated in the request syntax.  Calls to InvokeEndpointWithResponseStream are authenticated by using Amazon Web Services Signature Version 4. For information, see Authenticating Requests (Amazon Web Services Signature Version 4) in the Amazon S3 API Reference.
+   * Invokes a model at the specified endpoint to return the inference response as a stream. The inference stream provides the response payload incrementally as a series of parts. Before you can get an inference stream, you must have access to a model that's deployed using Amazon SageMaker hosting services, and the container for that model must support inference streaming. For more information that can help you use this API, see the following sections in the Amazon SageMaker Developer Guide:   For information about how to add streaming support to a model, see How Containers Serve Requests.   For information about how to process the streaming response, see Invoke real-time endpoints.   Before you can use this operation, your IAM permissions must allow the sagemaker:InvokeEndpoint action. For more information about Amazon SageMaker actions for IAM policies, see Actions, resources, and condition keys for Amazon SageMaker in the IAM Service Authorization Reference. Amazon SageMaker strips all POST headers except those supported by the API. Amazon SageMaker might add additional headers. You should not rely on the behavior of headers outside those enumerated in the request syntax.  Calls to InvokeEndpointWithResponseStream are authenticated by using Amazon Web Services Signature Version 4. For information, see Authenticating Requests (Amazon Web Services Signature Version 4) in the Amazon S3 API Reference.
    */
   invokeEndpointWithResponseStream(params: SageMakerRuntime.Types.InvokeEndpointWithResponseStreamInput, callback?: (err: AWSError, data: SageMakerRuntime.Types.InvokeEndpointWithResponseStreamOutput) => void): Request<SageMakerRuntime.Types.InvokeEndpointWithResponseStreamOutput, AWSError>;
   /**
-   * Invokes a model at the specified endpoint to return the inference response as a stream. The inference stream provides the response payload incrementally as a series of parts. Before you can get an inference stream, you must have access to a model that's deployed using Amazon SageMaker hosting services, and the container for that model must support inference streaming. For more information that can help you use this API, see the following sections in the Amazon SageMaker Developer Guide:   For information about how to add streaming support to a model, see How Containers Serve Requests.   For information about how to process the streaming response, see Invoke real-time endpoints.   Amazon SageMaker strips all POST headers except those supported by the API. Amazon SageMaker might add additional headers. You should not rely on the behavior of headers outside those enumerated in the request syntax.  Calls to InvokeEndpointWithResponseStream are authenticated by using Amazon Web Services Signature Version 4. For information, see Authenticating Requests (Amazon Web Services Signature Version 4) in the Amazon S3 API Reference.
+   * Invokes a model at the specified endpoint to return the inference response as a stream. The inference stream provides the response payload incrementally as a series of parts. Before you can get an inference stream, you must have access to a model that's deployed using Amazon SageMaker hosting services, and the container for that model must support inference streaming. For more information that can help you use this API, see the following sections in the Amazon SageMaker Developer Guide:   For information about how to add streaming support to a model, see How Containers Serve Requests.   For information about how to process the streaming response, see Invoke real-time endpoints.   Before you can use this operation, your IAM permissions must allow the sagemaker:InvokeEndpoint action. For more information about Amazon SageMaker actions for IAM policies, see Actions, resources, and condition keys for Amazon SageMaker in the IAM Service Authorization Reference. Amazon SageMaker strips all POST headers except those supported by the API. Amazon SageMaker might add additional headers. You should not rely on the behavior of headers outside those enumerated in the request syntax.  Calls to InvokeEndpointWithResponseStream are authenticated by using Amazon Web Services Signature Version 4. For information, see Authenticating Requests (Amazon Web Services Signature Version 4) in the Amazon S3 API Reference.
    */
   invokeEndpointWithResponseStream(callback?: (err: AWSError, data: SageMakerRuntime.Types.InvokeEndpointWithResponseStreamOutput) => void): Request<SageMakerRuntime.Types.InvokeEndpointWithResponseStreamOutput, AWSError>;
 }
@@ -44,6 +44,7 @@ declare namespace SageMakerRuntime {
   export type EndpointName = string;
   export type ErrorCode = string;
   export type Header = string;
+  export type InferenceComponentHeader = string;
   export type InferenceId = string;
   export type InputLocationHeader = string;
   export interface InternalStreamFailure {
@@ -139,6 +140,10 @@ declare namespace SageMakerRuntime {
      * An optional JMESPath expression used to override the EnableExplanations parameter of the ClarifyExplainerConfig API. See the EnableExplanations section in the developer guide for more information. 
      */
     EnableExplanations?: EnableExplanationsHeader;
+    /**
+     * If the endpoint hosts one or more inference components, this parameter specifies the name of inference component to invoke.
+     */
+    InferenceComponentName?: InferenceComponentHeader;
   }
   export interface InvokeEndpointOutput {
     /**
@@ -191,6 +196,10 @@ declare namespace SageMakerRuntime {
      * An identifier that you assign to your request.
      */
     InferenceId?: InferenceId;
+    /**
+     * If the endpoint hosts one or more inference components, this parameter specifies the name of inference component to invoke for a streaming response.
+     */
+    InferenceComponentName?: InferenceComponentHeader;
   }
   export interface InvokeEndpointWithResponseStreamOutput {
     Body: ResponseStream;

@@ -1245,6 +1245,10 @@
           "shape": "CollectionName",
           "documentation": "<p>The name of the collection.</p>"
         },
+        "standbyReplicas": {
+          "shape": "StandbyReplicas",
+          "documentation": "<p>Details about an OpenSearch Serverless collection.</p>"
+        },
         "status": {
           "shape": "CollectionStatus",
           "documentation": "<p>The current status of the collection.</p>"
@@ -1459,6 +1463,10 @@
           "shape": "CollectionName",
           "documentation": "<p>The name of the collection.</p>"
         },
+        "standbyReplicas": {
+          "shape": "StandbyReplicas",
+          "documentation": "<p>Creates details about an OpenSearch Serverless collection.</p>"
+        },
         "status": {
           "shape": "CollectionStatus",
           "documentation": "<p>The current status of the collection.</p>"
@@ -1488,6 +1496,10 @@
         "name": {
           "shape": "CollectionName",
           "documentation": "<p>Name of the collection.</p>"
+        },
+        "standbyReplicas": {
+          "shape": "StandbyReplicas",
+          "documentation": "<p>Indicates whether standby replicas should be used for a collection.</p>"
         },
         "tags": {
           "shape": "Tags",
@@ -2796,6 +2808,13 @@
       "enum": [
         "encryption",
         "network"
+      ]
+    },
+    "StandbyReplicas": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
       ]
     },
     "String": {

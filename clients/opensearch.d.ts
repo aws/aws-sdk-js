@@ -20,6 +20,14 @@ declare class OpenSearch extends Service {
    */
   acceptInboundConnection(callback?: (err: AWSError, data: OpenSearch.Types.AcceptInboundConnectionResponse) => void): Request<OpenSearch.Types.AcceptInboundConnectionResponse, AWSError>;
   /**
+   * Adds the data source on the domain.
+   */
+  addDataSource(params: OpenSearch.Types.AddDataSourceRequest, callback?: (err: AWSError, data: OpenSearch.Types.AddDataSourceResponse) => void): Request<OpenSearch.Types.AddDataSourceResponse, AWSError>;
+  /**
+   * Adds the data source on the domain.
+   */
+  addDataSource(callback?: (err: AWSError, data: OpenSearch.Types.AddDataSourceResponse) => void): Request<OpenSearch.Types.AddDataSourceResponse, AWSError>;
+  /**
    * Attaches tags to an existing Amazon OpenSearch Service domain. Tags are a set of case-sensitive key-value pairs. A domain can have up to 10 tags. For more information, see Tagging Amazon OpenSearch Service domains.
    */
   addTags(params: OpenSearch.Types.AddTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -83,6 +91,14 @@ declare class OpenSearch extends Service {
    * Creates an Amazon OpenSearch Service-managed VPC endpoint.
    */
   createVpcEndpoint(callback?: (err: AWSError, data: OpenSearch.Types.CreateVpcEndpointResponse) => void): Request<OpenSearch.Types.CreateVpcEndpointResponse, AWSError>;
+  /**
+   * Deletes the data source.
+   */
+  deleteDataSource(params: OpenSearch.Types.DeleteDataSourceRequest, callback?: (err: AWSError, data: OpenSearch.Types.DeleteDataSourceResponse) => void): Request<OpenSearch.Types.DeleteDataSourceResponse, AWSError>;
+  /**
+   * Deletes the data source.
+   */
+  deleteDataSource(callback?: (err: AWSError, data: OpenSearch.Types.DeleteDataSourceResponse) => void): Request<OpenSearch.Types.DeleteDataSourceResponse, AWSError>;
   /**
    * Deletes an Amazon OpenSearch Service domain and all of its data. You can't recover a domain after you delete it.
    */
@@ -260,6 +276,14 @@ declare class OpenSearch extends Service {
    */
   getCompatibleVersions(callback?: (err: AWSError, data: OpenSearch.Types.GetCompatibleVersionsResponse) => void): Request<OpenSearch.Types.GetCompatibleVersionsResponse, AWSError>;
   /**
+   * Describes the data source details.
+   */
+  getDataSource(params: OpenSearch.Types.GetDataSourceRequest, callback?: (err: AWSError, data: OpenSearch.Types.GetDataSourceResponse) => void): Request<OpenSearch.Types.GetDataSourceResponse, AWSError>;
+  /**
+   * Describes the data source details.
+   */
+  getDataSource(callback?: (err: AWSError, data: OpenSearch.Types.GetDataSourceResponse) => void): Request<OpenSearch.Types.GetDataSourceResponse, AWSError>;
+  /**
    * The status of the maintenance action.
    */
   getDomainMaintenanceStatus(params: OpenSearch.Types.GetDomainMaintenanceStatusRequest, callback?: (err: AWSError, data: OpenSearch.Types.GetDomainMaintenanceStatusResponse) => void): Request<OpenSearch.Types.GetDomainMaintenanceStatusResponse, AWSError>;
@@ -291,6 +315,14 @@ declare class OpenSearch extends Service {
    * Returns the most recent status of the last upgrade or upgrade eligibility check performed on an Amazon OpenSearch Service domain.
    */
   getUpgradeStatus(callback?: (err: AWSError, data: OpenSearch.Types.GetUpgradeStatusResponse) => void): Request<OpenSearch.Types.GetUpgradeStatusResponse, AWSError>;
+  /**
+   * A list of the data source details of the domain.
+   */
+  listDataSources(params: OpenSearch.Types.ListDataSourcesRequest, callback?: (err: AWSError, data: OpenSearch.Types.ListDataSourcesResponse) => void): Request<OpenSearch.Types.ListDataSourcesResponse, AWSError>;
+  /**
+   * A list of the data source details of the domain.
+   */
+  listDataSources(callback?: (err: AWSError, data: OpenSearch.Types.ListDataSourcesResponse) => void): Request<OpenSearch.Types.ListDataSourcesResponse, AWSError>;
   /**
    * A list of maintenance actions for the domain.
    */
@@ -428,6 +460,14 @@ declare class OpenSearch extends Service {
    */
   startServiceSoftwareUpdate(callback?: (err: AWSError, data: OpenSearch.Types.StartServiceSoftwareUpdateResponse) => void): Request<OpenSearch.Types.StartServiceSoftwareUpdateResponse, AWSError>;
   /**
+   * Updates the data source on the domain.
+   */
+  updateDataSource(params: OpenSearch.Types.UpdateDataSourceRequest, callback?: (err: AWSError, data: OpenSearch.Types.UpdateDataSourceResponse) => void): Request<OpenSearch.Types.UpdateDataSourceResponse, AWSError>;
+  /**
+   * Updates the data source on the domain.
+   */
+  updateDataSource(callback?: (err: AWSError, data: OpenSearch.Types.UpdateDataSourceResponse) => void): Request<OpenSearch.Types.UpdateDataSourceResponse, AWSError>;
+  /**
    * Modifies the cluster configuration of the specified Amazon OpenSearch Service domain.
    */
   updateDomainConfig(params: OpenSearch.Types.UpdateDomainConfigRequest, callback?: (err: AWSError, data: OpenSearch.Types.UpdateDomainConfigResponse) => void): Request<OpenSearch.Types.UpdateDomainConfigResponse, AWSError>;
@@ -510,6 +550,30 @@ declare namespace OpenSearch {
   export type ActionSeverity = "HIGH"|"MEDIUM"|"LOW"|string;
   export type ActionStatus = "PENDING_UPDATE"|"IN_PROGRESS"|"FAILED"|"COMPLETED"|"NOT_ELIGIBLE"|"ELIGIBLE"|string;
   export type ActionType = "SERVICE_SOFTWARE_UPDATE"|"JVM_HEAP_SIZE_TUNING"|"JVM_YOUNG_GEN_TUNING"|string;
+  export interface AddDataSourceRequest {
+    /**
+     * The name of the domain.
+     */
+    DomainName: DomainName;
+    /**
+     * The name of the data source.
+     */
+    Name: DataSourceName;
+    /**
+     * The type of data source.
+     */
+    DataSourceType: DataSourceType;
+    /**
+     * A description of the data source.
+     */
+    Description?: DataSourceDescription;
+  }
+  export interface AddDataSourceResponse {
+    /**
+     * A message associated with the data source.
+     */
+    Message?: String;
+  }
   export interface AddTagsRequest {
     /**
      * Amazon Resource Name (ARN) for the OpenSearch Service domain to which you want to attach resource tags.
@@ -1170,6 +1234,45 @@ declare namespace OpenSearch {
      */
     SkipUnavailable?: SkipUnavailableStatus;
   }
+  export type DataSourceDescription = string;
+  export interface DataSourceDetails {
+    /**
+     * The type of data source.
+     */
+    DataSourceType?: DataSourceType;
+    /**
+     * The name of the data source.
+     */
+    Name?: DataSourceName;
+    /**
+     * A description of the data source.
+     */
+    Description?: DataSourceDescription;
+  }
+  export type DataSourceList = DataSourceDetails[];
+  export type DataSourceName = string;
+  export interface DataSourceType {
+    /**
+     * The data source for the AWS S3 Glue Data Catalog.
+     */
+    S3GlueDataCatalog?: S3GlueDataCatalog;
+  }
+  export interface DeleteDataSourceRequest {
+    /**
+     * The name of the domain.
+     */
+    DomainName: DomainName;
+    /**
+     * The name of the data source.
+     */
+    Name: DataSourceName;
+  }
+  export interface DeleteDataSourceResponse {
+    /**
+     * A message associated with the initiated request.
+     */
+    Message?: String;
+  }
   export interface DeleteDomainRequest {
     /**
      * The name of the domain you want to permanently delete.
@@ -1678,7 +1781,7 @@ declare namespace OpenSearch {
      */
     EnforceHTTPS?: Boolean;
     /**
-     * Specify the TLS security policy to apply to the HTTPS endpoint of the domain.  Can be one of the following values:    Policy-Min-TLS-1-0-2019-07: TLS security policy which supports TLS version 1.0 and higher.    Policy-Min-TLS-1-2-2019-07: TLS security policy which supports only TLS version 1.2   
+     * Specify the TLS security policy to apply to the HTTPS endpoint of the domain. The policy can be one of the following values:    Policy-Min-TLS-1-0-2019-07: TLS security policy which supports TLS version 1.0 to TLS version 1.2    Policy-Min-TLS-1-2-2019-07: TLS security policy which supports only TLS version 1.2    Policy-Min-TLS-1-0-2023-10: TLS security policy which supports TLS version 1.0 to TLS version 1.3    Policy-Min-TLS-1-2-2023-10: TLS security policy which supports TLS version 1.2 to TLS version 1.3 with perfect forward secrecy cipher suites  
      */
     TLSSecurityPolicy?: TLSSecurityPolicy;
     /**
@@ -2098,6 +2201,30 @@ declare namespace OpenSearch {
      */
     CompatibleVersions?: CompatibleVersionsList;
   }
+  export interface GetDataSourceRequest {
+    /**
+     * The name of the domain.
+     */
+    DomainName: DomainName;
+    /**
+     * The name of the data source.
+     */
+    Name: DataSourceName;
+  }
+  export interface GetDataSourceResponse {
+    /**
+     * The type of data source.
+     */
+    DataSourceType?: DataSourceType;
+    /**
+     * The name of the data source.
+     */
+    Name?: DataSourceName;
+    /**
+     * A description of the data source.
+     */
+    Description?: DataSourceDescription;
+  }
   export interface GetDomainMaintenanceStatusRequest {
     /**
      * The name of the domain.
@@ -2328,6 +2455,18 @@ declare namespace OpenSearch {
     AdditionalLimits?: AdditionalLimitList;
   }
   export type LimitsByRole = {[key: string]: Limits};
+  export interface ListDataSourcesRequest {
+    /**
+     * The name of the domain.
+     */
+    DomainName: DomainName;
+  }
+  export interface ListDataSourcesResponse {
+    /**
+     * A list of the data sources.
+     */
+    DataSources?: DataSourceList;
+  }
   export interface ListDomainMaintenancesRequest {
     /**
      * The name of the domain.
@@ -3014,6 +3153,12 @@ declare namespace OpenSearch {
   export type RoleArn = string;
   export type RollbackOnDisable = "NO_ROLLBACK"|"DEFAULT_ROLLBACK"|string;
   export type S3BucketName = string;
+  export interface S3GlueDataCatalog {
+    /**
+     * The role ARN for the AWS S3 Glue Data Catalog.
+     */
+    RoleArn?: RoleArn;
+  }
   export type S3Key = string;
   export type SAMLEntityId = string;
   export interface SAMLIdp {
@@ -3301,6 +3446,30 @@ declare namespace OpenSearch {
   export type TotalNumberOfStages = number;
   export type UIntValue = number;
   export type UncompressedPluginSizeInBytes = number;
+  export interface UpdateDataSourceRequest {
+    /**
+     * The name of the domain.
+     */
+    DomainName: DomainName;
+    /**
+     * The name of the data source.
+     */
+    Name: DataSourceName;
+    /**
+     * The type of data source.
+     */
+    DataSourceType: DataSourceType;
+    /**
+     * A description of the data source.
+     */
+    Description?: DataSourceDescription;
+  }
+  export interface UpdateDataSourceResponse {
+    /**
+     * A message associated with the data source.
+     */
+    Message?: String;
+  }
   export interface UpdateDomainConfigRequest {
     /**
      * The name of the domain that you're updating.

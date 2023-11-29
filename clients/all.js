@@ -371,5 +371,6 @@ module.exports = {
   BedrockAgent: require('./bedrockagent'),
   BedrockAgentRuntime: require('./bedrockagentruntime'),
   QBusiness: require('./qbusiness'),
-  QConnect: require('./qconnect')
+  QConnect: require('./qconnect'),
+  CleanRoomsML: require('./cleanroomsml')
 };

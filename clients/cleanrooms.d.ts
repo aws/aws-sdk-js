@@ -44,6 +44,14 @@ declare class CleanRooms extends Service {
    */
   createCollaboration(callback?: (err: AWSError, data: CleanRooms.Types.CreateCollaborationOutput) => void): Request<CleanRooms.Types.CreateCollaborationOutput, AWSError>;
   /**
+   * Provides the details necessary to create a configured audience model association.
+   */
+  createConfiguredAudienceModelAssociation(params: CleanRooms.Types.CreateConfiguredAudienceModelAssociationInput, callback?: (err: AWSError, data: CleanRooms.Types.CreateConfiguredAudienceModelAssociationOutput) => void): Request<CleanRooms.Types.CreateConfiguredAudienceModelAssociationOutput, AWSError>;
+  /**
+   * Provides the details necessary to create a configured audience model association.
+   */
+  createConfiguredAudienceModelAssociation(callback?: (err: AWSError, data: CleanRooms.Types.CreateConfiguredAudienceModelAssociationOutput) => void): Request<CleanRooms.Types.CreateConfiguredAudienceModelAssociationOutput, AWSError>;
+  /**
    * Creates a new configured table resource.
    */
   createConfiguredTable(params: CleanRooms.Types.CreateConfiguredTableInput, callback?: (err: AWSError, data: CleanRooms.Types.CreateConfiguredTableOutput) => void): Request<CleanRooms.Types.CreateConfiguredTableOutput, AWSError>;
@@ -76,6 +84,14 @@ declare class CleanRooms extends Service {
    */
   createMembership(callback?: (err: AWSError, data: CleanRooms.Types.CreateMembershipOutput) => void): Request<CleanRooms.Types.CreateMembershipOutput, AWSError>;
   /**
+   * Creates a privacy budget template for a specified membership. Each membership can have only one privacy budget template, but it can be deleted and recreated. If you need to change the privacy budget template for a membership, use the UpdatePrivacyBudgetTemplate operation.
+   */
+  createPrivacyBudgetTemplate(params: CleanRooms.Types.CreatePrivacyBudgetTemplateInput, callback?: (err: AWSError, data: CleanRooms.Types.CreatePrivacyBudgetTemplateOutput) => void): Request<CleanRooms.Types.CreatePrivacyBudgetTemplateOutput, AWSError>;
+  /**
+   * Creates a privacy budget template for a specified membership. Each membership can have only one privacy budget template, but it can be deleted and recreated. If you need to change the privacy budget template for a membership, use the UpdatePrivacyBudgetTemplate operation.
+   */
+  createPrivacyBudgetTemplate(callback?: (err: AWSError, data: CleanRooms.Types.CreatePrivacyBudgetTemplateOutput) => void): Request<CleanRooms.Types.CreatePrivacyBudgetTemplateOutput, AWSError>;
+  /**
    * Deletes an analysis template.
    */
   deleteAnalysisTemplate(params: CleanRooms.Types.DeleteAnalysisTemplateInput, callback?: (err: AWSError, data: CleanRooms.Types.DeleteAnalysisTemplateOutput) => void): Request<CleanRooms.Types.DeleteAnalysisTemplateOutput, AWSError>;
@@ -91,6 +107,14 @@ declare class CleanRooms extends Service {
    * Deletes a collaboration. It can only be called by the collaboration owner.
    */
   deleteCollaboration(callback?: (err: AWSError, data: CleanRooms.Types.DeleteCollaborationOutput) => void): Request<CleanRooms.Types.DeleteCollaborationOutput, AWSError>;
+  /**
+   * Provides the information necessary to delete a configured audience model association.
+   */
+  deleteConfiguredAudienceModelAssociation(params: CleanRooms.Types.DeleteConfiguredAudienceModelAssociationInput, callback?: (err: AWSError, data: CleanRooms.Types.DeleteConfiguredAudienceModelAssociationOutput) => void): Request<CleanRooms.Types.DeleteConfiguredAudienceModelAssociationOutput, AWSError>;
+  /**
+   * Provides the information necessary to delete a configured audience model association.
+   */
+  deleteConfiguredAudienceModelAssociation(callback?: (err: AWSError, data: CleanRooms.Types.DeleteConfiguredAudienceModelAssociationOutput) => void): Request<CleanRooms.Types.DeleteConfiguredAudienceModelAssociationOutput, AWSError>;
   /**
    * Deletes a configured table.
    */
@@ -132,6 +156,14 @@ declare class CleanRooms extends Service {
    */
   deleteMembership(callback?: (err: AWSError, data: CleanRooms.Types.DeleteMembershipOutput) => void): Request<CleanRooms.Types.DeleteMembershipOutput, AWSError>;
   /**
+   * Deletes a privacy budget template for a specified membership.
+   */
+  deletePrivacyBudgetTemplate(params: CleanRooms.Types.DeletePrivacyBudgetTemplateInput, callback?: (err: AWSError, data: CleanRooms.Types.DeletePrivacyBudgetTemplateOutput) => void): Request<CleanRooms.Types.DeletePrivacyBudgetTemplateOutput, AWSError>;
+  /**
+   * Deletes a privacy budget template for a specified membership.
+   */
+  deletePrivacyBudgetTemplate(callback?: (err: AWSError, data: CleanRooms.Types.DeletePrivacyBudgetTemplateOutput) => void): Request<CleanRooms.Types.DeletePrivacyBudgetTemplateOutput, AWSError>;
+  /**
    * Retrieves an analysis template.
    */
   getAnalysisTemplate(params: CleanRooms.Types.GetAnalysisTemplateInput, callback?: (err: AWSError, data: CleanRooms.Types.GetAnalysisTemplateOutput) => void): Request<CleanRooms.Types.GetAnalysisTemplateOutput, AWSError>;
@@ -155,6 +187,30 @@ declare class CleanRooms extends Service {
    * Retrieves an analysis template within a collaboration.
    */
   getCollaborationAnalysisTemplate(callback?: (err: AWSError, data: CleanRooms.Types.GetCollaborationAnalysisTemplateOutput) => void): Request<CleanRooms.Types.GetCollaborationAnalysisTemplateOutput, AWSError>;
+  /**
+   * Retrieves a configured audience model association within a collaboration.
+   */
+  getCollaborationConfiguredAudienceModelAssociation(params: CleanRooms.Types.GetCollaborationConfiguredAudienceModelAssociationInput, callback?: (err: AWSError, data: CleanRooms.Types.GetCollaborationConfiguredAudienceModelAssociationOutput) => void): Request<CleanRooms.Types.GetCollaborationConfiguredAudienceModelAssociationOutput, AWSError>;
+  /**
+   * Retrieves a configured audience model association within a collaboration.
+   */
+  getCollaborationConfiguredAudienceModelAssociation(callback?: (err: AWSError, data: CleanRooms.Types.GetCollaborationConfiguredAudienceModelAssociationOutput) => void): Request<CleanRooms.Types.GetCollaborationConfiguredAudienceModelAssociationOutput, AWSError>;
+  /**
+   * Returns details about a specified privacy budget template.
+   */
+  getCollaborationPrivacyBudgetTemplate(params: CleanRooms.Types.GetCollaborationPrivacyBudgetTemplateInput, callback?: (err: AWSError, data: CleanRooms.Types.GetCollaborationPrivacyBudgetTemplateOutput) => void): Request<CleanRooms.Types.GetCollaborationPrivacyBudgetTemplateOutput, AWSError>;
+  /**
+   * Returns details about a specified privacy budget template.
+   */
+  getCollaborationPrivacyBudgetTemplate(callback?: (err: AWSError, data: CleanRooms.Types.GetCollaborationPrivacyBudgetTemplateOutput) => void): Request<CleanRooms.Types.GetCollaborationPrivacyBudgetTemplateOutput, AWSError>;
+  /**
+   * Returns information about a configured audience model association.
+   */
+  getConfiguredAudienceModelAssociation(params: CleanRooms.Types.GetConfiguredAudienceModelAssociationInput, callback?: (err: AWSError, data: CleanRooms.Types.GetConfiguredAudienceModelAssociationOutput) => void): Request<CleanRooms.Types.GetConfiguredAudienceModelAssociationOutput, AWSError>;
+  /**
+   * Returns information about a configured audience model association.
+   */
+  getConfiguredAudienceModelAssociation(callback?: (err: AWSError, data: CleanRooms.Types.GetConfiguredAudienceModelAssociationOutput) => void): Request<CleanRooms.Types.GetConfiguredAudienceModelAssociationOutput, AWSError>;
   /**
    * Retrieves a configured table.
    */
@@ -187,6 +243,14 @@ declare class CleanRooms extends Service {
    * Retrieves a specified membership for an identifier.
    */
   getMembership(callback?: (err: AWSError, data: CleanRooms.Types.GetMembershipOutput) => void): Request<CleanRooms.Types.GetMembershipOutput, AWSError>;
+  /**
+   * Returns details for a specified privacy budget template.
+   */
+  getPrivacyBudgetTemplate(params: CleanRooms.Types.GetPrivacyBudgetTemplateInput, callback?: (err: AWSError, data: CleanRooms.Types.GetPrivacyBudgetTemplateOutput) => void): Request<CleanRooms.Types.GetPrivacyBudgetTemplateOutput, AWSError>;
+  /**
+   * Returns details for a specified privacy budget template.
+   */
+  getPrivacyBudgetTemplate(callback?: (err: AWSError, data: CleanRooms.Types.GetPrivacyBudgetTemplateOutput) => void): Request<CleanRooms.Types.GetPrivacyBudgetTemplateOutput, AWSError>;
   /**
    * Returns query processing metadata.
    */
@@ -228,6 +292,30 @@ declare class CleanRooms extends Service {
    */
   listCollaborationAnalysisTemplates(callback?: (err: AWSError, data: CleanRooms.Types.ListCollaborationAnalysisTemplatesOutput) => void): Request<CleanRooms.Types.ListCollaborationAnalysisTemplatesOutput, AWSError>;
   /**
+   * Lists configured audience model associations within a collaboration.
+   */
+  listCollaborationConfiguredAudienceModelAssociations(params: CleanRooms.Types.ListCollaborationConfiguredAudienceModelAssociationsInput, callback?: (err: AWSError, data: CleanRooms.Types.ListCollaborationConfiguredAudienceModelAssociationsOutput) => void): Request<CleanRooms.Types.ListCollaborationConfiguredAudienceModelAssociationsOutput, AWSError>;
+  /**
+   * Lists configured audience model associations within a collaboration.
+   */
+  listCollaborationConfiguredAudienceModelAssociations(callback?: (err: AWSError, data: CleanRooms.Types.ListCollaborationConfiguredAudienceModelAssociationsOutput) => void): Request<CleanRooms.Types.ListCollaborationConfiguredAudienceModelAssociationsOutput, AWSError>;
+  /**
+   * Returns an array that summarizes each privacy budget template in a specified collaboration.
+   */
+  listCollaborationPrivacyBudgetTemplates(params: CleanRooms.Types.ListCollaborationPrivacyBudgetTemplatesInput, callback?: (err: AWSError, data: CleanRooms.Types.ListCollaborationPrivacyBudgetTemplatesOutput) => void): Request<CleanRooms.Types.ListCollaborationPrivacyBudgetTemplatesOutput, AWSError>;
+  /**
+   * Returns an array that summarizes each privacy budget template in a specified collaboration.
+   */
+  listCollaborationPrivacyBudgetTemplates(callback?: (err: AWSError, data: CleanRooms.Types.ListCollaborationPrivacyBudgetTemplatesOutput) => void): Request<CleanRooms.Types.ListCollaborationPrivacyBudgetTemplatesOutput, AWSError>;
+  /**
+   * Returns an array that summarizes each privacy budget in a specified collaboration. The summary includes the collaboration ARN, creation time, creating account, and privacy budget details.
+   */
+  listCollaborationPrivacyBudgets(params: CleanRooms.Types.ListCollaborationPrivacyBudgetsInput, callback?: (err: AWSError, data: CleanRooms.Types.ListCollaborationPrivacyBudgetsOutput) => void): Request<CleanRooms.Types.ListCollaborationPrivacyBudgetsOutput, AWSError>;
+  /**
+   * Returns an array that summarizes each privacy budget in a specified collaboration. The summary includes the collaboration ARN, creation time, creating account, and privacy budget details.
+   */
+  listCollaborationPrivacyBudgets(callback?: (err: AWSError, data: CleanRooms.Types.ListCollaborationPrivacyBudgetsOutput) => void): Request<CleanRooms.Types.ListCollaborationPrivacyBudgetsOutput, AWSError>;
+  /**
    * Lists collaborations the caller owns, is active in, or has been invited to.
    */
   listCollaborations(params: CleanRooms.Types.ListCollaborationsInput, callback?: (err: AWSError, data: CleanRooms.Types.ListCollaborationsOutput) => void): Request<CleanRooms.Types.ListCollaborationsOutput, AWSError>;
@@ -235,6 +323,14 @@ declare class CleanRooms extends Service {
    * Lists collaborations the caller owns, is active in, or has been invited to.
    */
   listCollaborations(callback?: (err: AWSError, data: CleanRooms.Types.ListCollaborationsOutput) => void): Request<CleanRooms.Types.ListCollaborationsOutput, AWSError>;
+  /**
+   * Lists information about requested configured audience model associations.
+   */
+  listConfiguredAudienceModelAssociations(params: CleanRooms.Types.ListConfiguredAudienceModelAssociationsInput, callback?: (err: AWSError, data: CleanRooms.Types.ListConfiguredAudienceModelAssociationsOutput) => void): Request<CleanRooms.Types.ListConfiguredAudienceModelAssociationsOutput, AWSError>;
+  /**
+   * Lists information about requested configured audience model associations.
+   */
+  listConfiguredAudienceModelAssociations(callback?: (err: AWSError, data: CleanRooms.Types.ListConfiguredAudienceModelAssociationsOutput) => void): Request<CleanRooms.Types.ListConfiguredAudienceModelAssociationsOutput, AWSError>;
   /**
    * Lists configured table associations for a membership.
    */
@@ -268,6 +364,22 @@ declare class CleanRooms extends Service {
    */
   listMemberships(callback?: (err: AWSError, data: CleanRooms.Types.ListMembershipsOutput) => void): Request<CleanRooms.Types.ListMembershipsOutput, AWSError>;
   /**
+   * Returns detailed information about the privacy budget templates in a specified membership.
+   */
+  listPrivacyBudgetTemplates(params: CleanRooms.Types.ListPrivacyBudgetTemplatesInput, callback?: (err: AWSError, data: CleanRooms.Types.ListPrivacyBudgetTemplatesOutput) => void): Request<CleanRooms.Types.ListPrivacyBudgetTemplatesOutput, AWSError>;
+  /**
+   * Returns detailed information about the privacy budget templates in a specified membership.
+   */
+  listPrivacyBudgetTemplates(callback?: (err: AWSError, data: CleanRooms.Types.ListPrivacyBudgetTemplatesOutput) => void): Request<CleanRooms.Types.ListPrivacyBudgetTemplatesOutput, AWSError>;
+  /**
+   * Returns detailed information about the privacy budgets in a specified membership.
+   */
+  listPrivacyBudgets(params: CleanRooms.Types.ListPrivacyBudgetsInput, callback?: (err: AWSError, data: CleanRooms.Types.ListPrivacyBudgetsOutput) => void): Request<CleanRooms.Types.ListPrivacyBudgetsOutput, AWSError>;
+  /**
+   * Returns detailed information about the privacy budgets in a specified membership.
+   */
+  listPrivacyBudgets(callback?: (err: AWSError, data: CleanRooms.Types.ListPrivacyBudgetsOutput) => void): Request<CleanRooms.Types.ListPrivacyBudgetsOutput, AWSError>;
+  /**
    * Lists protected queries, sorted by the most recent query.
    */
   listProtectedQueries(params: CleanRooms.Types.ListProtectedQueriesInput, callback?: (err: AWSError, data: CleanRooms.Types.ListProtectedQueriesOutput) => void): Request<CleanRooms.Types.ListProtectedQueriesOutput, AWSError>;
@@ -291,6 +403,14 @@ declare class CleanRooms extends Service {
    * Lists all of the tags that have been added to a resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: CleanRooms.Types.ListTagsForResourceOutput) => void): Request<CleanRooms.Types.ListTagsForResourceOutput, AWSError>;
+  /**
+   * An estimate of the number of aggregation functions that the member who can query can run given epsilon and noise parameters.
+   */
+  previewPrivacyImpact(params: CleanRooms.Types.PreviewPrivacyImpactInput, callback?: (err: AWSError, data: CleanRooms.Types.PreviewPrivacyImpactOutput) => void): Request<CleanRooms.Types.PreviewPrivacyImpactOutput, AWSError>;
+  /**
+   * An estimate of the number of aggregation functions that the member who can query can run given epsilon and noise parameters.
+   */
+  previewPrivacyImpact(callback?: (err: AWSError, data: CleanRooms.Types.PreviewPrivacyImpactOutput) => void): Request<CleanRooms.Types.PreviewPrivacyImpactOutput, AWSError>;
   /**
    * Creates a protected query that is started by Clean Rooms.
    */
@@ -332,6 +452,14 @@ declare class CleanRooms extends Service {
    */
   updateCollaboration(callback?: (err: AWSError, data: CleanRooms.Types.UpdateCollaborationOutput) => void): Request<CleanRooms.Types.UpdateCollaborationOutput, AWSError>;
   /**
+   * Provides the details necessary to update a configured audience model association.
+   */
+  updateConfiguredAudienceModelAssociation(params: CleanRooms.Types.UpdateConfiguredAudienceModelAssociationInput, callback?: (err: AWSError, data: CleanRooms.Types.UpdateConfiguredAudienceModelAssociationOutput) => void): Request<CleanRooms.Types.UpdateConfiguredAudienceModelAssociationOutput, AWSError>;
+  /**
+   * Provides the details necessary to update a configured audience model association.
+   */
+  updateConfiguredAudienceModelAssociation(callback?: (err: AWSError, data: CleanRooms.Types.UpdateConfiguredAudienceModelAssociationOutput) => void): Request<CleanRooms.Types.UpdateConfiguredAudienceModelAssociationOutput, AWSError>;
+  /**
    * Updates a configured table.
    */
   updateConfiguredTable(params: CleanRooms.Types.UpdateConfiguredTableInput, callback?: (err: AWSError, data: CleanRooms.Types.UpdateConfiguredTableOutput) => void): Request<CleanRooms.Types.UpdateConfiguredTableOutput, AWSError>;
@@ -363,6 +491,14 @@ declare class CleanRooms extends Service {
    * Updates a membership.
    */
   updateMembership(callback?: (err: AWSError, data: CleanRooms.Types.UpdateMembershipOutput) => void): Request<CleanRooms.Types.UpdateMembershipOutput, AWSError>;
+  /**
+   * Updates the privacy budget template for the specified membership.
+   */
+  updatePrivacyBudgetTemplate(params: CleanRooms.Types.UpdatePrivacyBudgetTemplateInput, callback?: (err: AWSError, data: CleanRooms.Types.UpdatePrivacyBudgetTemplateOutput) => void): Request<CleanRooms.Types.UpdatePrivacyBudgetTemplateOutput, AWSError>;
+  /**
+   * Updates the privacy budget template for the specified membership.
+   */
+  updatePrivacyBudgetTemplate(callback?: (err: AWSError, data: CleanRooms.Types.UpdatePrivacyBudgetTemplateOutput) => void): Request<CleanRooms.Types.UpdatePrivacyBudgetTemplateOutput, AWSError>;
   /**
    * Updates the processing of a currently running query.
    */
@@ -489,6 +625,10 @@ declare namespace CleanRooms {
      * The Amazon Web Services accounts that are allowed to query by the custom analysis rule. Required when allowedAnalyses is ANY_QUERY.
      */
     allowedAnalysisProviders?: AnalysisRuleCustomAllowedAnalysisProvidersList;
+    /**
+     * The differential privacy configuration.
+     */
+    differentialPrivacy?: DifferentialPrivacyConfiguration;
   }
   export type AnalysisRuleCustomAllowedAnalysesList = AnalysisTemplateArnOrQueryWildcard[];
   export type AnalysisRuleCustomAllowedAnalysisProvidersList = AccountId[];
@@ -868,9 +1008,210 @@ declare namespace CleanRooms {
   }
   export type CollaborationAnalysisTemplateSummaryList = CollaborationAnalysisTemplateSummary[];
   export type CollaborationArn = string;
+  export interface CollaborationConfiguredAudienceModelAssociation {
+    /**
+     * The identifier of the configured audience model association.
+     */
+    id: ConfiguredAudienceModelAssociationIdentifier;
+    /**
+     * The Amazon Resource Name (ARN) of the configured audience model association.
+     */
+    arn: ConfiguredAudienceModelAssociationArn;
+    /**
+     * A unique identifier for the collaboration that the configured audience model associations belong to. Accepts collaboration ID.
+     */
+    collaborationId: UUID;
+    /**
+     * The unique ARN for the configured audience model's associated collaboration.
+     */
+    collaborationArn: CollaborationArn;
+    /**
+     * The Amazon Resource Name (ARN) of the configure audience model.
+     */
+    configuredAudienceModelArn: ConfiguredAudienceModelArn;
+    /**
+     * The name of the configured audience model association.
+     */
+    name: ConfiguredAudienceModelAssociationName;
+    /**
+     * The description of the configured audience model association.
+     */
+    description?: ResourceDescription;
+    /**
+     * The identifier used to reference members of the collaboration. Only supports AWS account ID.
+     */
+    creatorAccountId: AccountId;
+    /**
+     * The time at which the configured audience model association was created.
+     */
+    createTime: Timestamp;
+    /**
+     * The most recent time at which the configured audience model association was updated.
+     */
+    updateTime: Timestamp;
+  }
+  export interface CollaborationConfiguredAudienceModelAssociationSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the configured audience model association.
+     */
+    arn: ConfiguredAudienceModelAssociationArn;
+    /**
+     * The time at which the configured audience model association was created.
+     */
+    createTime: Timestamp;
+    /**
+     * The identifier of the configured audience model association.
+     */
+    id: ConfiguredAudienceModelAssociationIdentifier;
+    /**
+     * The name of the configured audience model association.
+     */
+    name: ConfiguredAudienceModelAssociationName;
+    /**
+     * The most recent time at which the configured audience model association was updated.
+     */
+    updateTime: Timestamp;
+    /**
+     * The unique ARN for the configured audience model's associated collaboration.
+     */
+    collaborationArn: CollaborationArn;
+    /**
+     * A unique identifier for the collaboration that the configured audience model associations belong to. Accepts collaboration ID.
+     */
+    collaborationId: UUID;
+    /**
+     * The identifier used to reference members of the collaboration. Only supports AWS account ID.
+     */
+    creatorAccountId: AccountId;
+    /**
+     * The description of the configured audience model association.
+     */
+    description?: ResourceDescription;
+  }
+  export type CollaborationConfiguredAudienceModelAssociationSummaryList = CollaborationConfiguredAudienceModelAssociationSummary[];
   export type CollaborationDescription = string;
   export type CollaborationIdentifier = string;
   export type CollaborationName = string;
+  export interface CollaborationPrivacyBudgetSummary {
+    /**
+     * The unique identifier of the collaboration privacy budget.
+     */
+    id: UUID;
+    /**
+     * The unique identifier of the collaboration privacy budget template.
+     */
+    privacyBudgetTemplateId: PrivacyBudgetTemplateIdentifier;
+    /**
+     * The ARN of the collaboration privacy budget template.
+     */
+    privacyBudgetTemplateArn: PrivacyBudgetTemplateArn;
+    /**
+     * The unique identifier of the collaboration that includes this privacy budget.
+     */
+    collaborationId: UUID;
+    /**
+     * The ARN of the collaboration that includes this privacy budget.
+     */
+    collaborationArn: CollaborationArn;
+    /**
+     * The unique identifier of the account that created this privacy budget.
+     */
+    creatorAccountId: AccountId;
+    /**
+     * The type of privacy budget template.
+     */
+    type: PrivacyBudgetType;
+    /**
+     * The time at which the privacy budget was created.
+     */
+    createTime: Timestamp;
+    /**
+     * The most recent time at which the privacy budget was updated.
+     */
+    updateTime: Timestamp;
+    /**
+     * The includes epsilon provided and utility in terms of aggregations.
+     */
+    budget: PrivacyBudget;
+  }
+  export type CollaborationPrivacyBudgetSummaryList = CollaborationPrivacyBudgetSummary[];
+  export interface CollaborationPrivacyBudgetTemplate {
+    /**
+     * The unique identifier of the collaboration privacy budget template.
+     */
+    id: PrivacyBudgetTemplateIdentifier;
+    /**
+     * The ARN of the collaboration privacy budget template.
+     */
+    arn: PrivacyBudgetTemplateArn;
+    /**
+     * The unique identifier of the collaboration that includes this collaboration privacy budget template.
+     */
+    collaborationId: UUID;
+    /**
+     * The ARN of the collaboration that includes this collaboration privacy budget template.
+     */
+    collaborationArn: CollaborationArn;
+    /**
+     * The unique identifier of the account that created this collaboration privacy budget template.
+     */
+    creatorAccountId: AccountId;
+    /**
+     * The time at which the collaboration privacy budget template was created.
+     */
+    createTime: Timestamp;
+    /**
+     * The most recent time at which the collaboration privacy budget template was updated.
+     */
+    updateTime: Timestamp;
+    /**
+     * The type of privacy budget template.
+     */
+    privacyBudgetType: PrivacyBudgetType;
+    /**
+     * How often the privacy budget refreshes.  If you plan to regularly bring new data into the collaboration, use CALENDAR_MONTH to automatically get a new privacy budget for the collaboration every calendar month. Choosing this option allows arbitrary amounts of information to be revealed about rows of the data when repeatedly queried across refreshes. Avoid choosing this if the same rows will be repeatedly queried between privacy budget refreshes. 
+     */
+    autoRefresh: PrivacyBudgetTemplateAutoRefresh;
+    /**
+     * Specifies the epsilon and noise parameters for the privacy budget template.
+     */
+    parameters: PrivacyBudgetTemplateParametersOutput;
+  }
+  export interface CollaborationPrivacyBudgetTemplateSummary {
+    /**
+     * The unique identifier of the collaboration privacy budget template.
+     */
+    id: PrivacyBudgetTemplateIdentifier;
+    /**
+     * The ARN of the collaboration privacy budget template.
+     */
+    arn: PrivacyBudgetTemplateArn;
+    /**
+     * The unique identifier of the collaboration that contains this collaboration privacy budget template.
+     */
+    collaborationId: UUID;
+    /**
+     * The ARN of the collaboration that contains this collaboration privacy budget template.
+     */
+    collaborationArn: CollaborationArn;
+    /**
+     * The unique identifier of the account that created this collaboration privacy budget template.
+     */
+    creatorAccountId: AccountId;
+    /**
+     * The type of the privacy budget template.
+     */
+    privacyBudgetType: PrivacyBudgetType;
+    /**
+     * The time at which the collaboration privacy budget template was created.
+     */
+    createTime: Timestamp;
+    /**
+     * The most recent time at which the collaboration privacy budget template was updated.
+     */
+    updateTime: Timestamp;
+  }
+  export type CollaborationPrivacyBudgetTemplateSummaryList = CollaborationPrivacyBudgetTemplateSummary[];
   export type CollaborationQueryLogStatus = "ENABLED"|"DISABLED"|string;
   export interface CollaborationSummary {
     /**
@@ -928,6 +1269,107 @@ declare namespace CleanRooms {
   export type ColumnList = Column[];
   export type ColumnName = string;
   export type ColumnTypeString = string;
+  export type ConfiguredAudienceModelArn = string;
+  export interface ConfiguredAudienceModelAssociation {
+    /**
+     * A unique identifier of the configured audience model association.
+     */
+    id: ConfiguredAudienceModelAssociationIdentifier;
+    /**
+     * The Amazon Resource Name (ARN) of the configured audience model association.
+     */
+    arn: ConfiguredAudienceModelAssociationArn;
+    /**
+     * The Amazon Resource Name (ARN) of the configured audience model that was used for this configured audience model association.
+     */
+    configuredAudienceModelArn: ConfiguredAudienceModelArn;
+    /**
+     * A unique identifier for the membership that contains this configured audience model association.
+     */
+    membershipId: UUID;
+    /**
+     * The Amazon Resource Name (ARN) of the membership that contains this configured audience model association.
+     */
+    membershipArn: MembershipArn;
+    /**
+     * A unique identifier of the collaboration that contains this configured audience model association.
+     */
+    collaborationId: UUID;
+    /**
+     * The Amazon Resource Name (ARN) of the collaboration that contains this configured audience model association.
+     */
+    collaborationArn: CollaborationArn;
+    /**
+     * The name of the configured audience model association.
+     */
+    name: ConfiguredAudienceModelAssociationName;
+    /**
+     * When TRUE, indicates that the resource policy for the configured audience model resource being associated is configured for Clean Rooms to manage permissions related to the given collaboration. When FALSE, indicates that the configured audience model resource owner will manage permissions related to the given collaboration.
+     */
+    manageResourcePolicies: Boolean;
+    /**
+     * The description of the configured audience model association.
+     */
+    description?: ResourceDescription;
+    /**
+     * The time at which the configured audience model association was created.
+     */
+    createTime: Timestamp;
+    /**
+     * The most recent time at which the configured audience model association was updated.
+     */
+    updateTime: Timestamp;
+  }
+  export type ConfiguredAudienceModelAssociationArn = string;
+  export type ConfiguredAudienceModelAssociationIdentifier = string;
+  export type ConfiguredAudienceModelAssociationName = string;
+  export interface ConfiguredAudienceModelAssociationSummary {
+    /**
+     * A unique identifier of the membership that contains the configured audience model association.
+     */
+    membershipId: MembershipIdentifier;
+    /**
+     * The Amazon Resource Name (ARN) of the membership that contains the configured audience model association.
+     */
+    membershipArn: MembershipArn;
+    /**
+     * The Amazon Resource Name (ARN) of the collaboration that contains the configured audience model association.
+     */
+    collaborationArn: CollaborationArn;
+    /**
+     * A unique identifier of the collaboration that configured audience model is associated with.
+     */
+    collaborationId: UUID;
+    /**
+     * The time at which the configured audience model association was created.
+     */
+    createTime: Timestamp;
+    /**
+     * The most recent time at which the configured audience model association was updated.
+     */
+    updateTime: Timestamp;
+    /**
+     * A unique identifier of the configured audience model association.
+     */
+    id: UUID;
+    /**
+     * The Amazon Resource Name (ARN) of the configured audience model association.
+     */
+    arn: ConfiguredAudienceModelAssociationArn;
+    /**
+     * The name of the configured audience model association.
+     */
+    name: ConfiguredAudienceModelAssociationName;
+    /**
+     * The Amazon Resource Name (ARN) of the configured audience model that was used for this configured audience model association.
+     */
+    configuredAudienceModelArn: ConfiguredAudienceModelArn;
+    /**
+     * The description of the configured audience model association.
+     */
+    description?: ResourceDescription;
+  }
+  export type ConfiguredAudienceModelAssociationSummaryList = ConfiguredAudienceModelAssociationSummary[];
   export interface ConfiguredTable {
     /**
      * The unique ID for the configured table.
@@ -1211,6 +1653,38 @@ declare namespace CleanRooms {
      */
     collaboration: Collaboration;
   }
+  export interface CreateConfiguredAudienceModelAssociationInput {
+    /**
+     * A unique identifier for one of your memberships for a collaboration. The configured audience model is associated to the collaboration that this membership belongs to. Accepts a membership ID.
+     */
+    membershipIdentifier: MembershipIdentifier;
+    /**
+     * A unique identifier for the configured audience model that you want to associate.
+     */
+    configuredAudienceModelArn: ConfiguredAudienceModelArn;
+    /**
+     * The name of the configured audience model association.
+     */
+    configuredAudienceModelAssociationName: ConfiguredAudienceModelAssociationName;
+    /**
+     * When TRUE, indicates that the resource policy for the configured audience model resource being associated is configured for Clean Rooms to manage permissions related to the given collaboration. When FALSE, indicates that the configured audience model resource owner will manage permissions related to the given collaboration. Setting this to TRUE requires you to have permissions to create, update, and delete the resource policy for the cleanrooms-ml resource when you call the DeleteConfiguredAudienceModelAssociation resource. In addition, if you are the collaboration creator and specify TRUE, you must have the same permissions when you call the DeleteMember and DeleteCollaboration APIs.
+     */
+    manageResourcePolicies: Boolean;
+    /**
+     * An optional label that you can assign to a resource when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to this resource.
+     */
+    tags?: TagMap;
+    /**
+     * A description of the configured audience model association.
+     */
+    description?: ResourceDescription;
+  }
+  export interface CreateConfiguredAudienceModelAssociationOutput {
+    /**
+     * Information about the configured audience model association.
+     */
+    configuredAudienceModelAssociation: ConfiguredAudienceModelAssociation;
+  }
   export interface CreateConfiguredTableAnalysisRuleInput {
     /**
      * The identifier for the configured table to create the analysis rule for. Currently accepts the configured table ID. 
@@ -1323,6 +1797,34 @@ declare namespace CleanRooms {
      */
     membership: Membership;
   }
+  export interface CreatePrivacyBudgetTemplateInput {
+    /**
+     * A unique identifier for one of your memberships for a collaboration. The privacy budget template is created in the collaboration that this membership belongs to. Accepts a membership ID.
+     */
+    membershipIdentifier: MembershipIdentifier;
+    /**
+     * How often the privacy budget refreshes.  If you plan to regularly bring new data into the collaboration, you can use CALENDAR_MONTH to automatically get a new privacy budget for the collaboration every calendar month. Choosing this option allows arbitrary amounts of information to be revealed about rows of the data when repeatedly queries across refreshes. Avoid choosing this if the same rows will be repeatedly queried between privacy budget refreshes. 
+     */
+    autoRefresh: PrivacyBudgetTemplateAutoRefresh;
+    /**
+     * Specifies the type of the privacy budget template.
+     */
+    privacyBudgetType: PrivacyBudgetType;
+    /**
+     * Specifies your parameters for the privacy budget template.
+     */
+    parameters: PrivacyBudgetTemplateParametersInput;
+    /**
+     * An optional label that you can assign to a resource when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to this resource.
+     */
+    tags?: TagMap;
+  }
+  export interface CreatePrivacyBudgetTemplateOutput {
+    /**
+     * A summary of the elements in the privacy budget template.
+     */
+    privacyBudgetTemplate: PrivacyBudgetTemplate;
+  }
   export interface DataEncryptionMetadata {
     /**
      * Indicates whether encrypted tables can contain cleartext data (TRUE) or are to cryptographically process every column (FALSE).
@@ -1360,6 +1862,18 @@ declare namespace CleanRooms {
     collaborationIdentifier: CollaborationIdentifier;
   }
   export interface DeleteCollaborationOutput {
+  }
+  export interface DeleteConfiguredAudienceModelAssociationInput {
+    /**
+     * A unique identifier of the configured audience model association that you want to delete.
+     */
+    configuredAudienceModelAssociationIdentifier: ConfiguredAudienceModelAssociationIdentifier;
+    /**
+     * A unique identifier of the membership that contains the audience model association that you want to delete.
+     */
+    membershipIdentifier: MembershipIdentifier;
+  }
+  export interface DeleteConfiguredAudienceModelAssociationOutput {
   }
   export interface DeleteConfiguredTableAnalysisRuleInput {
     /**
@@ -1413,8 +1927,152 @@ declare namespace CleanRooms {
   }
   export interface DeleteMembershipOutput {
   }
+  export interface DeletePrivacyBudgetTemplateInput {
+    /**
+     * A unique identifier for one of your memberships for a collaboration. The privacy budget template is deleted from the collaboration that this membership belongs to. Accepts a membership ID.
+     */
+    membershipIdentifier: MembershipIdentifier;
+    /**
+     * A unique identifier for your privacy budget template. 
+     */
+    privacyBudgetTemplateIdentifier: PrivacyBudgetTemplateIdentifier;
+  }
+  export interface DeletePrivacyBudgetTemplateOutput {
+  }
+  export type DifferentialPrivacyAggregationExpression = string;
+  export type DifferentialPrivacyAggregationType = "AVG"|"COUNT"|"COUNT_DISTINCT"|"SUM"|"STDDEV"|string;
+  export interface DifferentialPrivacyColumn {
+    /**
+     * The name of the column, such as user_id, that contains the unique identifier of your users, whose privacy you want to protect. If you want to turn on differential privacy for two or more tables in a collaboration, you must configure the same column as the user identifier column in both analysis rules.
+     */
+    name: String;
+  }
+  export type DifferentialPrivacyColumnList = DifferentialPrivacyColumn[];
+  export interface DifferentialPrivacyConfiguration {
+    /**
+     * The name of the column (such as user_id) that contains the unique identifier of your users whose privacy you want to protect. If you want to turn on diﬀerential privacy for two or more tables in a collaboration, you must conﬁgure the same column as the user identiﬁer column in both analysis rules.
+     */
+    columns: DifferentialPrivacyColumnList;
+  }
+  export interface DifferentialPrivacyParameters {
+    /**
+     * Provides the sensitivity parameters that you can use to better understand the total amount of noise in query results.
+     */
+    sensitivityParameters: DifferentialPrivacySensitivityParametersList;
+  }
+  export interface DifferentialPrivacyPreviewAggregation {
+    /**
+     * The type of aggregation function.
+     */
+    type: DifferentialPrivacyAggregationType;
+    /**
+     * The maximum number of aggregations that the member who can query can run given the epsilon and noise parameters.
+     */
+    maxCount: DifferentialPrivacyPreviewAggregationMaxCountInteger;
+  }
+  export type DifferentialPrivacyPreviewAggregationList = DifferentialPrivacyPreviewAggregation[];
+  export type DifferentialPrivacyPreviewAggregationMaxCountInteger = number;
+  export interface DifferentialPrivacyPreviewParametersInput {
+    /**
+     * The epsilon value that you want to preview.
+     */
+    epsilon: Epsilon;
+    /**
+     * Noise added per query is measured in terms of the number of users whose contributions you want to obscure. This value governs the rate at which the privacy budget is depleted.
+     */
+    usersNoisePerQuery: UsersNoisePerQuery;
+  }
+  export interface DifferentialPrivacyPrivacyBudget {
+    /**
+     * This information includes the configured epsilon value and the utility in terms of total aggregations, as well as the remaining aggregations.
+     */
+    aggregations: DifferentialPrivacyPrivacyBudgetAggregationList;
+    /**
+     * The epsilon value that you configured.
+     */
+    epsilon: Epsilon;
+  }
+  export interface DifferentialPrivacyPrivacyBudgetAggregation {
+    /**
+     * The different types of aggregation functions that you can perform.
+     */
+    type: DifferentialPrivacyAggregationType;
+    /**
+     * The maximum number of aggregation functions that you can perform with the given privacy budget.
+     */
+    maxCount: DifferentialPrivacyPrivacyBudgetAggregationMaxCountInteger;
+    /**
+     * The remaining number of aggregation functions that can be run with the available privacy budget.
+     */
+    remainingCount: DifferentialPrivacyPrivacyBudgetAggregationRemainingCountInteger;
+  }
+  export type DifferentialPrivacyPrivacyBudgetAggregationList = DifferentialPrivacyPrivacyBudgetAggregation[];
+  export type DifferentialPrivacyPrivacyBudgetAggregationMaxCountInteger = number;
+  export type DifferentialPrivacyPrivacyBudgetAggregationRemainingCountInteger = number;
+  export interface DifferentialPrivacyPrivacyImpact {
+    /**
+     * The number of aggregation functions that you can perform.
+     */
+    aggregations: DifferentialPrivacyPreviewAggregationList;
+  }
+  export interface DifferentialPrivacySensitivityParameters {
+    /**
+     * The type of aggregation function that was run.
+     */
+    aggregationType: DifferentialPrivacyAggregationType;
+    /**
+     * The aggregation expression that was run.
+     */
+    aggregationExpression: DifferentialPrivacyAggregationExpression;
+    /**
+     * The maximum number of rows contributed by a user in a SQL query.
+     */
+    userContributionLimit: DifferentialPrivacySensitivityParametersUserContributionLimitInteger;
+    /**
+     * The lower bound of the aggregation expression.
+     */
+    minColumnValue?: Float;
+    /**
+     * The upper bound of the aggregation expression.
+     */
+    maxColumnValue?: Float;
+  }
+  export type DifferentialPrivacySensitivityParametersList = DifferentialPrivacySensitivityParameters[];
+  export type DifferentialPrivacySensitivityParametersUserContributionLimitInteger = number;
+  export interface DifferentialPrivacyTemplateParametersInput {
+    /**
+     * The epsilon value that you want to use.
+     */
+    epsilon: Epsilon;
+    /**
+     * Noise added per query is measured in terms of the number of users whose contributions you want to obscure. This value governs the rate at which the privacy budget is depleted.
+     */
+    usersNoisePerQuery: UsersNoisePerQuery;
+  }
+  export interface DifferentialPrivacyTemplateParametersOutput {
+    /**
+     * The epsilon value that you specified.
+     */
+    epsilon: Epsilon;
+    /**
+     * Noise added per query is measured in terms of the number of users whose contributions you want to obscure. This value governs the rate at which the privacy budget is depleted.
+     */
+    usersNoisePerQuery: UsersNoisePerQuery;
+  }
+  export interface DifferentialPrivacyTemplateUpdateParameters {
+    /**
+     * The updated epsilon value that you want to use.
+     */
+    epsilon?: Epsilon;
+    /**
+     * The updated value of noise added per query. It is measured in terms of the number of users whose contributions you want to obscure. This value governs the rate at which the privacy budget is depleted.
+     */
+    usersNoisePerQuery?: UsersNoisePerQuery;
+  }
   export type DisplayName = string;
+  export type Epsilon = number;
   export type FilterableMemberStatus = "INVITED"|"ACTIVE"|string;
+  export type Float = number;
   export interface GetAnalysisTemplateInput {
     /**
      * The identifier for a membership resource.
@@ -1447,6 +2105,22 @@ declare namespace CleanRooms {
      */
     collaborationAnalysisTemplate: CollaborationAnalysisTemplate;
   }
+  export interface GetCollaborationConfiguredAudienceModelAssociationInput {
+    /**
+     * A unique identifier for the collaboration that the configured audience model association belongs to. Accepts a collaboration ID.
+     */
+    collaborationIdentifier: CollaborationIdentifier;
+    /**
+     * A unique identifier for the configured audience model association that you want to retrieve.
+     */
+    configuredAudienceModelAssociationIdentifier: ConfiguredAudienceModelAssociationIdentifier;
+  }
+  export interface GetCollaborationConfiguredAudienceModelAssociationOutput {
+    /**
+     * The metadata of the configured audience model association.
+     */
+    collaborationConfiguredAudienceModelAssociation: CollaborationConfiguredAudienceModelAssociation;
+  }
   export interface GetCollaborationInput {
     /**
      * The identifier for the collaboration.
@@ -1458,6 +2132,38 @@ declare namespace CleanRooms {
      * The entire collaboration for this identifier.
      */
     collaboration: Collaboration;
+  }
+  export interface GetCollaborationPrivacyBudgetTemplateInput {
+    /**
+     * A unique identifier for one of your collaborations.
+     */
+    collaborationIdentifier: CollaborationIdentifier;
+    /**
+     * A unique identifier for one of your privacy budget templates.
+     */
+    privacyBudgetTemplateIdentifier: PrivacyBudgetTemplateIdentifier;
+  }
+  export interface GetCollaborationPrivacyBudgetTemplateOutput {
+    /**
+     * Returns the details of the privacy budget template that you requested.
+     */
+    collaborationPrivacyBudgetTemplate: CollaborationPrivacyBudgetTemplate;
+  }
+  export interface GetConfiguredAudienceModelAssociationInput {
+    /**
+     * A unique identifier for the configured audience model association that you want to retrieve.
+     */
+    configuredAudienceModelAssociationIdentifier: ConfiguredAudienceModelAssociationIdentifier;
+    /**
+     * A unique identifier for the membership that contains the configured audience model association that you want to retrieve.
+     */
+    membershipIdentifier: MembershipIdentifier;
+  }
+  export interface GetConfiguredAudienceModelAssociationOutput {
+    /**
+     * Information about the configured audience model association that you requested.
+     */
+    configuredAudienceModelAssociation: ConfiguredAudienceModelAssociation;
   }
   export interface GetConfiguredTableAnalysisRuleInput {
     /**
@@ -1514,6 +2220,22 @@ declare namespace CleanRooms {
      * The membership retrieved for the provided identifier.
      */
     membership: Membership;
+  }
+  export interface GetPrivacyBudgetTemplateInput {
+    /**
+     * A unique identifier for one of your memberships for a collaboration. The privacy budget template is retrieved from the collaboration that this membership belongs to. Accepts a membership ID.
+     */
+    membershipIdentifier: MembershipIdentifier;
+    /**
+     * A unique identifier for your privacy budget template.
+     */
+    privacyBudgetTemplateIdentifier: PrivacyBudgetTemplateIdentifier;
+  }
+  export interface GetPrivacyBudgetTemplateOutput {
+    /**
+     * Returns the details of the privacy budget template that you requested.
+     */
+    privacyBudgetTemplate: PrivacyBudgetTemplate;
   }
   export interface GetProtectedQueryInput {
     /**
@@ -1631,6 +2353,82 @@ declare namespace CleanRooms {
      */
     collaborationAnalysisTemplateSummaries: CollaborationAnalysisTemplateSummaryList;
   }
+  export interface ListCollaborationConfiguredAudienceModelAssociationsInput {
+    /**
+     * A unique identifier for the collaboration that the configured audience model association belongs to. Accepts a collaboration ID.
+     */
+    collaborationIdentifier: CollaborationIdentifier;
+    /**
+     * The token value retrieved from a previous call to access the next page of results.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The maximum size of the results that is returned per call.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListCollaborationConfiguredAudienceModelAssociationsOutput {
+    /**
+     * The metadata of the configured audience model association within a collaboration.
+     */
+    collaborationConfiguredAudienceModelAssociationSummaries: CollaborationConfiguredAudienceModelAssociationSummaryList;
+    /**
+     * The token value retrieved from a previous call to access the next page of results.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListCollaborationPrivacyBudgetTemplatesInput {
+    /**
+     * A unique identifier for one of your collaborations.
+     */
+    collaborationIdentifier: CollaborationIdentifier;
+    /**
+     * The token value retrieved from a previous call to access the next page of results.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The maximum size of the results that is returned per call. Service chooses a default if it has not been set. Service may return a nextToken even if the maximum results has not been met.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListCollaborationPrivacyBudgetTemplatesOutput {
+    /**
+     * The token value retrieved from a previous call to access the next page of results.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * An array that summarizes the collaboration privacy budget templates. The summary includes collaboration information, creation information, the privacy budget type.
+     */
+    collaborationPrivacyBudgetTemplateSummaries: CollaborationPrivacyBudgetTemplateSummaryList;
+  }
+  export interface ListCollaborationPrivacyBudgetsInput {
+    /**
+     * A unique identifier for one of your collaborations.
+     */
+    collaborationIdentifier: CollaborationIdentifier;
+    /**
+     * Specifies the type of the privacy budget.
+     */
+    privacyBudgetType: PrivacyBudgetType;
+    /**
+     * The maximum size of the results that is returned per call. Service chooses a default if it has not been set. Service may return a nextToken even if the maximum results has not been met.
+     */
+    maxResults?: MaxResults;
+    /**
+     * The token value retrieved from a previous call to access the next page of results.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListCollaborationPrivacyBudgetsOutput {
+    /**
+     * Summaries of the collaboration privacy budgets.
+     */
+    collaborationPrivacyBudgetSummaries: CollaborationPrivacyBudgetSummaryList;
+    /**
+     * The token value retrieved from a previous call to access the next page of results.
+     */
+    nextToken?: PaginationToken;
+  }
   export interface ListCollaborationsInput {
     /**
      * The token value retrieved from a previous call to access the next page of results.
@@ -1654,6 +2452,30 @@ declare namespace CleanRooms {
      * The list of collaborations.
      */
     collaborationList: CollaborationSummaryList;
+  }
+  export interface ListConfiguredAudienceModelAssociationsInput {
+    /**
+     * A unique identifier for a membership that contains the configured audience model associations that you want to retrieve.
+     */
+    membershipIdentifier: MembershipIdentifier;
+    /**
+     * The token value retrieved from a previous call to access the next page of results.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The maximum size of the results that is returned per call. Service chooses a default if it has not been set. Service may return a nextToken even if the maximum results has not been met.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListConfiguredAudienceModelAssociationsOutput {
+    /**
+     * Summaries of the configured audience model associations that you requested.
+     */
+    configuredAudienceModelAssociationSummaries: ConfiguredAudienceModelAssociationSummaryList;
+    /**
+     * The token value provided to access the next page of results.
+     */
+    nextToken?: PaginationToken;
   }
   export interface ListConfiguredTableAssociationsInput {
     /**
@@ -1746,6 +2568,58 @@ declare namespace CleanRooms {
      * The list of memberships returned from the ListMemberships operation.
      */
     membershipSummaries: MembershipSummaryList;
+  }
+  export interface ListPrivacyBudgetTemplatesInput {
+    /**
+     * A unique identifier for one of your memberships for a collaboration. The privacy budget templates are retrieved from the collaboration that this membership belongs to. Accepts a membership ID.
+     */
+    membershipIdentifier: MembershipIdentifier;
+    /**
+     * The token value retrieved from a previous call to access the next page of results.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The maximum size of the results that is returned per call. Service chooses a default if it has not been set. Service may return a nextToken even if the maximum results has not been met.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListPrivacyBudgetTemplatesOutput {
+    /**
+     * The token value retrieved from a previous call to access the next page of results.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * An array that summarizes the privacy budget templates. The summary includes collaboration information, creation information, and privacy budget type.
+     */
+    privacyBudgetTemplateSummaries: PrivacyBudgetTemplateSummaryList;
+  }
+  export interface ListPrivacyBudgetsInput {
+    /**
+     * A unique identifier for one of your memberships for a collaboration. The privacy budget is retrieved from the collaboration that this membership belongs to. Accepts a membership ID.
+     */
+    membershipIdentifier: MembershipIdentifier;
+    /**
+     * The privacy budget type.
+     */
+    privacyBudgetType: PrivacyBudgetType;
+    /**
+     * The token value retrieved from a previous call to access the next page of results.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The maximum size of the results that is returned per call. Service chooses a default if it has not been set. Service may return a nextToken even if the maximum results has not been met.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListPrivacyBudgetsOutput {
+    /**
+     * An array that summarizes the privacy budgets. The summary includes collaboration information, membership information, privacy budget template information, and privacy budget details.
+     */
+    privacyBudgetSummaries: PrivacyBudgetSummaryList;
+    /**
+     * The token value retrieved from a previous call to access the next page of results.
+     */
+    nextToken?: PaginationToken;
   }
   export interface ListProtectedQueriesInput {
     /**
@@ -2027,6 +2901,194 @@ declare namespace CleanRooms {
      */
     queryCompute: QueryComputePaymentConfig;
   }
+  export interface PreviewPrivacyImpactInput {
+    /**
+     * A unique identifier for one of your memberships for a collaboration. Accepts a membership ID.
+     */
+    membershipIdentifier: MembershipIdentifier;
+    /**
+     * Specifies the desired epsilon and noise parameters to preview.
+     */
+    parameters: PreviewPrivacyImpactParametersInput;
+  }
+  export interface PreviewPrivacyImpactOutput {
+    /**
+     * An estimate of the number of aggregation functions that the member who can query can run given the epsilon and noise parameters. This does not change the privacy budget.
+     */
+    privacyImpact: PrivacyImpact;
+  }
+  export interface PreviewPrivacyImpactParametersInput {
+    /**
+     * An array that specifies the epsilon and noise parameters.
+     */
+    differentialPrivacy?: DifferentialPrivacyPreviewParametersInput;
+  }
+  export interface PrivacyBudget {
+    /**
+     * An object that specifies the epsilon parameter and the utility in terms of total aggregations, as well as the remaining aggregations available.
+     */
+    differentialPrivacy?: DifferentialPrivacyPrivacyBudget;
+  }
+  export interface PrivacyBudgetSummary {
+    /**
+     * The unique identifier of the privacy budget.
+     */
+    id: UUID;
+    /**
+     * The unique identifier of the privacy budget template.
+     */
+    privacyBudgetTemplateId: PrivacyBudgetTemplateIdentifier;
+    /**
+     * The ARN of the privacy budget template.
+     */
+    privacyBudgetTemplateArn: PrivacyBudgetTemplateArn;
+    /**
+     * The identifier for a membership resource.
+     */
+    membershipId: MembershipIdentifier;
+    /**
+     * The Amazon Resource Name (ARN) of the member who created the privacy budget summary.
+     */
+    membershipArn: MembershipArn;
+    /**
+     * The unique identifier of the collaboration that contains this privacy budget.
+     */
+    collaborationId: UUID;
+    /**
+     * The ARN of the collaboration that contains this privacy budget.
+     */
+    collaborationArn: CollaborationArn;
+    /**
+     * Specifies the type of the privacy budget.
+     */
+    type: PrivacyBudgetType;
+    /**
+     * The time at which the privacy budget was created.
+     */
+    createTime: Timestamp;
+    /**
+     * The most recent time at which the privacy budget was updated.
+     */
+    updateTime: Timestamp;
+    /**
+     * The provided privacy budget.
+     */
+    budget: PrivacyBudget;
+  }
+  export type PrivacyBudgetSummaryList = PrivacyBudgetSummary[];
+  export interface PrivacyBudgetTemplate {
+    /**
+     * The unique identifier of the privacy budget template.
+     */
+    id: PrivacyBudgetTemplateIdentifier;
+    /**
+     * The ARN of the privacy budget template.
+     */
+    arn: PrivacyBudgetTemplateArn;
+    /**
+     * The identifier for a membership resource.
+     */
+    membershipId: UUID;
+    /**
+     * The Amazon Resource Name (ARN) of the member who created the privacy budget template.
+     */
+    membershipArn: MembershipArn;
+    /**
+     * The unique ID of the collaboration that contains this privacy budget template.
+     */
+    collaborationId: UUID;
+    /**
+     * The ARN of the collaboration that contains this privacy budget template.
+     */
+    collaborationArn: CollaborationArn;
+    /**
+     * The time at which the privacy budget template was created.
+     */
+    createTime: Timestamp;
+    /**
+     * The most recent time at which the privacy budget template was updated.
+     */
+    updateTime: Timestamp;
+    /**
+     * Specifies the type of the privacy budget template.
+     */
+    privacyBudgetType: PrivacyBudgetType;
+    /**
+     * How often the privacy budget refreshes.  If you plan to regularly bring new data into the collaboration, use CALENDAR_MONTH to automatically get a new privacy budget for the collaboration every calendar month. Choosing this option allows arbitrary amounts of information to be revealed about rows of the data when repeatedly queried across refreshes. Avoid choosing this if the same rows will be repeatedly queried between privacy budget refreshes. 
+     */
+    autoRefresh: PrivacyBudgetTemplateAutoRefresh;
+    /**
+     * Specifies the epislon and noise parameters for the privacy budget template.
+     */
+    parameters: PrivacyBudgetTemplateParametersOutput;
+  }
+  export type PrivacyBudgetTemplateArn = string;
+  export type PrivacyBudgetTemplateAutoRefresh = "CALENDAR_MONTH"|"NONE"|string;
+  export type PrivacyBudgetTemplateIdentifier = string;
+  export interface PrivacyBudgetTemplateParametersInput {
+    /**
+     * An object that specifies the epsilon and noise parameters.
+     */
+    differentialPrivacy?: DifferentialPrivacyTemplateParametersInput;
+  }
+  export interface PrivacyBudgetTemplateParametersOutput {
+    /**
+     * The epsilon and noise parameters.
+     */
+    differentialPrivacy?: DifferentialPrivacyTemplateParametersOutput;
+  }
+  export interface PrivacyBudgetTemplateSummary {
+    /**
+     * The unique identifier of the privacy budget template.
+     */
+    id: PrivacyBudgetTemplateIdentifier;
+    /**
+     * The ARN of the privacy budget template.
+     */
+    arn: PrivacyBudgetTemplateArn;
+    /**
+     * The identifier for a membership resource.
+     */
+    membershipId: UUID;
+    /**
+     * The Amazon Resource Name (ARN) of the member who created the privacy budget template.
+     */
+    membershipArn: MembershipArn;
+    /**
+     * The unique ID of the collaboration that contains this privacy budget template.
+     */
+    collaborationId: UUID;
+    /**
+     * The ARN of the collaboration that contains this privacy budget template.
+     */
+    collaborationArn: CollaborationArn;
+    /**
+     * The type of the privacy budget template.
+     */
+    privacyBudgetType: PrivacyBudgetType;
+    /**
+     * The time at which the privacy budget template was created.
+     */
+    createTime: Timestamp;
+    /**
+     * The most recent time at which the privacy budget template was updated.
+     */
+    updateTime: Timestamp;
+  }
+  export type PrivacyBudgetTemplateSummaryList = PrivacyBudgetTemplateSummary[];
+  export interface PrivacyBudgetTemplateUpdateParameters {
+    /**
+     * An object that specifies the new values for the epsilon and noise parameters.
+     */
+    differentialPrivacy?: DifferentialPrivacyTemplateUpdateParameters;
+  }
+  export type PrivacyBudgetType = "DIFFERENTIAL_PRIVACY"|string;
+  export interface PrivacyImpact {
+    /**
+     * An object that lists the number and type of aggregation functions you can perform.
+     */
+    differentialPrivacy?: DifferentialPrivacyPrivacyImpact;
+  }
   export interface ProtectedQuery {
     /**
      * The identifier for a protected query instance.
@@ -2068,6 +3130,10 @@ declare namespace CleanRooms {
      * An error thrown by the protected query.
      */
     error?: ProtectedQueryError;
+    /**
+     * The sensitivity parameters of the differential privacy results of the protected query.
+     */
+    differentialPrivacy?: DifferentialPrivacyParameters;
   }
   export interface ProtectedQueryError {
     /**
@@ -2391,6 +3457,30 @@ declare namespace CleanRooms {
      */
     collaboration: Collaboration;
   }
+  export interface UpdateConfiguredAudienceModelAssociationInput {
+    /**
+     * A unique identifier for the configured audience model association that you want to update.
+     */
+    configuredAudienceModelAssociationIdentifier: ConfiguredAudienceModelAssociationIdentifier;
+    /**
+     * A unique identifier of the membership that contains the configured audience model association that you want to update.
+     */
+    membershipIdentifier: MembershipIdentifier;
+    /**
+     * A new description for the configured audience model association.
+     */
+    description?: ResourceDescription;
+    /**
+     * A new name for the configured audience model association.
+     */
+    name?: ConfiguredAudienceModelAssociationName;
+  }
+  export interface UpdateConfiguredAudienceModelAssociationOutput {
+    /**
+     * Details about the configured audience model association that you updated.
+     */
+    configuredAudienceModelAssociation: ConfiguredAudienceModelAssociation;
+  }
   export interface UpdateConfiguredTableAnalysisRuleInput {
     /**
      * The unique identifier for the configured table that the analysis rule applies to. Currently accepts the configured table ID.
@@ -2472,6 +3562,30 @@ declare namespace CleanRooms {
   export interface UpdateMembershipOutput {
     membership: Membership;
   }
+  export interface UpdatePrivacyBudgetTemplateInput {
+    /**
+     * A unique identifier for one of your memberships for a collaboration. The privacy budget template is updated in the collaboration that this membership belongs to. Accepts a membership ID.
+     */
+    membershipIdentifier: MembershipIdentifier;
+    /**
+     * A unique identifier for your privacy budget template that you want to update.
+     */
+    privacyBudgetTemplateIdentifier: PrivacyBudgetTemplateIdentifier;
+    /**
+     * Specifies the type of the privacy budget template.
+     */
+    privacyBudgetType: PrivacyBudgetType;
+    /**
+     * Specifies the epsilon and noise parameters for the privacy budget template.
+     */
+    parameters?: PrivacyBudgetTemplateUpdateParameters;
+  }
+  export interface UpdatePrivacyBudgetTemplateOutput {
+    /**
+     * Summary of the privacy budget template.
+     */
+    privacyBudgetTemplate: PrivacyBudgetTemplate;
+  }
   export interface UpdateProtectedQueryInput {
     /**
      * The identifier for a member of a protected query instance.
@@ -2492,6 +3606,7 @@ declare namespace CleanRooms {
      */
     protectedQuery: ProtectedQuery;
   }
+  export type UsersNoisePerQuery = number;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
