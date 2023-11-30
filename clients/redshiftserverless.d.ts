@@ -44,6 +44,14 @@ declare class RedshiftServerless extends Service {
    */
   createNamespace(callback?: (err: AWSError, data: RedshiftServerless.Types.CreateNamespaceResponse) => void): Request<RedshiftServerless.Types.CreateNamespaceResponse, AWSError>;
   /**
+   * Creates a scheduled action. A scheduled action contains a schedule and an Amazon Redshift API action. For example, you can create a schedule of when to run the CreateSnapshot API operation.
+   */
+  createScheduledAction(params: RedshiftServerless.Types.CreateScheduledActionRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.CreateScheduledActionResponse) => void): Request<RedshiftServerless.Types.CreateScheduledActionResponse, AWSError>;
+  /**
+   * Creates a scheduled action. A scheduled action contains a schedule and an Amazon Redshift API action. For example, you can create a schedule of when to run the CreateSnapshot API operation.
+   */
+  createScheduledAction(callback?: (err: AWSError, data: RedshiftServerless.Types.CreateScheduledActionResponse) => void): Request<RedshiftServerless.Types.CreateScheduledActionResponse, AWSError>;
+  /**
    * Creates a snapshot of all databases in a namespace. For more information about snapshots, see  Working with snapshots and recovery points.
    */
   createSnapshot(params: RedshiftServerless.Types.CreateSnapshotRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.CreateSnapshotResponse) => void): Request<RedshiftServerless.Types.CreateSnapshotResponse, AWSError>;
@@ -51,6 +59,14 @@ declare class RedshiftServerless extends Service {
    * Creates a snapshot of all databases in a namespace. For more information about snapshots, see  Working with snapshots and recovery points.
    */
   createSnapshot(callback?: (err: AWSError, data: RedshiftServerless.Types.CreateSnapshotResponse) => void): Request<RedshiftServerless.Types.CreateSnapshotResponse, AWSError>;
+  /**
+   * Creates a snapshot copy configuration that lets you copy snapshots to another Amazon Web Services Region.
+   */
+  createSnapshotCopyConfiguration(params: RedshiftServerless.Types.CreateSnapshotCopyConfigurationRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.CreateSnapshotCopyConfigurationResponse) => void): Request<RedshiftServerless.Types.CreateSnapshotCopyConfigurationResponse, AWSError>;
+  /**
+   * Creates a snapshot copy configuration that lets you copy snapshots to another Amazon Web Services Region.
+   */
+  createSnapshotCopyConfiguration(callback?: (err: AWSError, data: RedshiftServerless.Types.CreateSnapshotCopyConfigurationResponse) => void): Request<RedshiftServerless.Types.CreateSnapshotCopyConfigurationResponse, AWSError>;
   /**
    * Creates a usage limit for a specified Amazon Redshift Serverless usage type. The usage limit is identified by the returned usage limit identifier. 
    */
@@ -100,6 +116,14 @@ declare class RedshiftServerless extends Service {
    */
   deleteResourcePolicy(callback?: (err: AWSError, data: RedshiftServerless.Types.DeleteResourcePolicyResponse) => void): Request<RedshiftServerless.Types.DeleteResourcePolicyResponse, AWSError>;
   /**
+   * Deletes a scheduled action.
+   */
+  deleteScheduledAction(params: RedshiftServerless.Types.DeleteScheduledActionRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.DeleteScheduledActionResponse) => void): Request<RedshiftServerless.Types.DeleteScheduledActionResponse, AWSError>;
+  /**
+   * Deletes a scheduled action.
+   */
+  deleteScheduledAction(callback?: (err: AWSError, data: RedshiftServerless.Types.DeleteScheduledActionResponse) => void): Request<RedshiftServerless.Types.DeleteScheduledActionResponse, AWSError>;
+  /**
    * Deletes a snapshot from Amazon Redshift Serverless.
    */
   deleteSnapshot(params: RedshiftServerless.Types.DeleteSnapshotRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.DeleteSnapshotResponse) => void): Request<RedshiftServerless.Types.DeleteSnapshotResponse, AWSError>;
@@ -107,6 +131,14 @@ declare class RedshiftServerless extends Service {
    * Deletes a snapshot from Amazon Redshift Serverless.
    */
   deleteSnapshot(callback?: (err: AWSError, data: RedshiftServerless.Types.DeleteSnapshotResponse) => void): Request<RedshiftServerless.Types.DeleteSnapshotResponse, AWSError>;
+  /**
+   * Deletes a snapshot copy configuration
+   */
+  deleteSnapshotCopyConfiguration(params: RedshiftServerless.Types.DeleteSnapshotCopyConfigurationRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.DeleteSnapshotCopyConfigurationResponse) => void): Request<RedshiftServerless.Types.DeleteSnapshotCopyConfigurationResponse, AWSError>;
+  /**
+   * Deletes a snapshot copy configuration
+   */
+  deleteSnapshotCopyConfiguration(callback?: (err: AWSError, data: RedshiftServerless.Types.DeleteSnapshotCopyConfigurationResponse) => void): Request<RedshiftServerless.Types.DeleteSnapshotCopyConfigurationResponse, AWSError>;
   /**
    * Deletes a usage limit from Amazon Redshift Serverless.
    */
@@ -172,6 +204,14 @@ declare class RedshiftServerless extends Service {
    */
   getResourcePolicy(callback?: (err: AWSError, data: RedshiftServerless.Types.GetResourcePolicyResponse) => void): Request<RedshiftServerless.Types.GetResourcePolicyResponse, AWSError>;
   /**
+   * Returns information about a scheduled action.
+   */
+  getScheduledAction(params: RedshiftServerless.Types.GetScheduledActionRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.GetScheduledActionResponse) => void): Request<RedshiftServerless.Types.GetScheduledActionResponse, AWSError>;
+  /**
+   * Returns information about a scheduled action.
+   */
+  getScheduledAction(callback?: (err: AWSError, data: RedshiftServerless.Types.GetScheduledActionResponse) => void): Request<RedshiftServerless.Types.GetScheduledActionResponse, AWSError>;
+  /**
    * Returns information about a specific snapshot.
    */
   getSnapshot(params: RedshiftServerless.Types.GetSnapshotRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.GetSnapshotResponse) => void): Request<RedshiftServerless.Types.GetSnapshotResponse, AWSError>;
@@ -235,6 +275,22 @@ declare class RedshiftServerless extends Service {
    * Returns an array of recovery points.
    */
   listRecoveryPoints(callback?: (err: AWSError, data: RedshiftServerless.Types.ListRecoveryPointsResponse) => void): Request<RedshiftServerless.Types.ListRecoveryPointsResponse, AWSError>;
+  /**
+   * Returns a list of scheduled actions. You can use the flags to filter the list of returned scheduled actions.
+   */
+  listScheduledActions(params: RedshiftServerless.Types.ListScheduledActionsRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.ListScheduledActionsResponse) => void): Request<RedshiftServerless.Types.ListScheduledActionsResponse, AWSError>;
+  /**
+   * Returns a list of scheduled actions. You can use the flags to filter the list of returned scheduled actions.
+   */
+  listScheduledActions(callback?: (err: AWSError, data: RedshiftServerless.Types.ListScheduledActionsResponse) => void): Request<RedshiftServerless.Types.ListScheduledActionsResponse, AWSError>;
+  /**
+   * Returns a list of snapshot copy configurations.
+   */
+  listSnapshotCopyConfigurations(params: RedshiftServerless.Types.ListSnapshotCopyConfigurationsRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.ListSnapshotCopyConfigurationsResponse) => void): Request<RedshiftServerless.Types.ListSnapshotCopyConfigurationsResponse, AWSError>;
+  /**
+   * Returns a list of snapshot copy configurations.
+   */
+  listSnapshotCopyConfigurations(callback?: (err: AWSError, data: RedshiftServerless.Types.ListSnapshotCopyConfigurationsResponse) => void): Request<RedshiftServerless.Types.ListSnapshotCopyConfigurationsResponse, AWSError>;
   /**
    * Returns a list of snapshots.
    */
@@ -300,6 +356,14 @@ declare class RedshiftServerless extends Service {
    */
   restoreFromSnapshot(callback?: (err: AWSError, data: RedshiftServerless.Types.RestoreFromSnapshotResponse) => void): Request<RedshiftServerless.Types.RestoreFromSnapshotResponse, AWSError>;
   /**
+   * Restores a table from a recovery point to your Amazon Redshift Serverless instance. You can't use this operation to restore tables with interleaved sort keys.
+   */
+  restoreTableFromRecoveryPoint(params: RedshiftServerless.Types.RestoreTableFromRecoveryPointRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.RestoreTableFromRecoveryPointResponse) => void): Request<RedshiftServerless.Types.RestoreTableFromRecoveryPointResponse, AWSError>;
+  /**
+   * Restores a table from a recovery point to your Amazon Redshift Serverless instance. You can't use this operation to restore tables with interleaved sort keys.
+   */
+  restoreTableFromRecoveryPoint(callback?: (err: AWSError, data: RedshiftServerless.Types.RestoreTableFromRecoveryPointResponse) => void): Request<RedshiftServerless.Types.RestoreTableFromRecoveryPointResponse, AWSError>;
+  /**
    * Restores a table from a snapshot to your Amazon Redshift Serverless instance. You can't use this operation to restore tables with interleaved sort keys.
    */
   restoreTableFromSnapshot(params: RedshiftServerless.Types.RestoreTableFromSnapshotRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.RestoreTableFromSnapshotResponse) => void): Request<RedshiftServerless.Types.RestoreTableFromSnapshotResponse, AWSError>;
@@ -348,6 +412,14 @@ declare class RedshiftServerless extends Service {
    */
   updateNamespace(callback?: (err: AWSError, data: RedshiftServerless.Types.UpdateNamespaceResponse) => void): Request<RedshiftServerless.Types.UpdateNamespaceResponse, AWSError>;
   /**
+   * Updates a scheduled action.
+   */
+  updateScheduledAction(params: RedshiftServerless.Types.UpdateScheduledActionRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.UpdateScheduledActionResponse) => void): Request<RedshiftServerless.Types.UpdateScheduledActionResponse, AWSError>;
+  /**
+   * Updates a scheduled action.
+   */
+  updateScheduledAction(callback?: (err: AWSError, data: RedshiftServerless.Types.UpdateScheduledActionResponse) => void): Request<RedshiftServerless.Types.UpdateScheduledActionResponse, AWSError>;
+  /**
    * Updates a snapshot.
    */
   updateSnapshot(params: RedshiftServerless.Types.UpdateSnapshotRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.UpdateSnapshotResponse) => void): Request<RedshiftServerless.Types.UpdateSnapshotResponse, AWSError>;
@@ -355,6 +427,14 @@ declare class RedshiftServerless extends Service {
    * Updates a snapshot.
    */
   updateSnapshot(callback?: (err: AWSError, data: RedshiftServerless.Types.UpdateSnapshotResponse) => void): Request<RedshiftServerless.Types.UpdateSnapshotResponse, AWSError>;
+  /**
+   * Updates a snapshot copy configuration.
+   */
+  updateSnapshotCopyConfiguration(params: RedshiftServerless.Types.UpdateSnapshotCopyConfigurationRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.UpdateSnapshotCopyConfigurationResponse) => void): Request<RedshiftServerless.Types.UpdateSnapshotCopyConfigurationResponse, AWSError>;
+  /**
+   * Updates a snapshot copy configuration.
+   */
+  updateSnapshotCopyConfiguration(callback?: (err: AWSError, data: RedshiftServerless.Types.UpdateSnapshotCopyConfigurationResponse) => void): Request<RedshiftServerless.Types.UpdateSnapshotCopyConfigurationResponse, AWSError>;
   /**
    * Update a usage limit in Amazon Redshift Serverless. You can't update the usage type or period of a usage limit.
    */
@@ -397,7 +477,7 @@ declare namespace RedshiftServerless {
   export type Boolean = boolean;
   export interface ConfigParameter {
     /**
-     * The key of the parameter. The options are auto_mv, datestyle, enable_case_sensitivity_identifier, enable_user_activity_logging, query_group, search_path, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see Query monitoring metrics for Amazon Redshift Serverless.
+     * The key of the parameter. The options are auto_mv, datestyle, enable_case_sensitive_identifier, enable_user_activity_logging, query_group, search_path, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see Query monitoring metrics for Amazon Redshift Serverless.
      */
     parameterKey?: ParameterKey;
     /**
@@ -467,6 +547,10 @@ declare namespace RedshiftServerless {
      * The name of the VPC endpoint. An endpoint name must contain 1-30 characters. Valid characters are A-Z, a-z, 0-9, and hyphen(-). The first character must be a letter. The name can't contain two consecutive hyphens or end with a hyphen.
      */
     endpointName: String;
+    /**
+     * The owner Amazon Web Services account for the Amazon Redshift Serverless workgroup.
+     */
+    ownerAccount?: OwnerAccount;
     /**
      * The unique identifers of subnets from which Amazon Redshift Serverless chooses one to deploy a VPC endpoint.
      */
@@ -542,6 +626,71 @@ declare namespace RedshiftServerless {
      */
     namespace?: Namespace;
   }
+  export interface CreateScheduledActionRequest {
+    /**
+     * Indicates whether the schedule is enabled. If false, the scheduled action does not trigger. For more information about state of the scheduled action, see ScheduledAction.
+     */
+    enabled?: Boolean;
+    /**
+     * The end time in UTC when the schedule is no longer active. After this time, the scheduled action does not trigger.
+     */
+    endTime?: Timestamp;
+    /**
+     * The name of the namespace for which to create a scheduled action.
+     */
+    namespaceName: NamespaceName;
+    /**
+     * The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots. (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. For more information about the IAM role to use with the Amazon Redshift scheduler, see Using Identity-Based Policies for Amazon Redshift in the Amazon Redshift Cluster Management Guide
+     */
+    roleArn: IamRoleArn;
+    /**
+     * The schedule for a one-time (at format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Format of at expressions is "at(yyyy-mm-ddThh:mm:ss)". For example, "at(2016-03-04T17:27:00)". Format of cron expressions is "cron(Minutes Hours Day-of-month Month Day-of-week Year)". For example, "cron(0 10 ? * MON *)". For more information, see Cron Expressions in the Amazon CloudWatch Events User Guide.
+     */
+    schedule: Schedule;
+    /**
+     * The description of the scheduled action.
+     */
+    scheduledActionDescription?: String;
+    /**
+     * The name of the scheduled action.
+     */
+    scheduledActionName: ScheduledActionName;
+    /**
+     * The start time in UTC when the schedule is active. Before this time, the scheduled action does not trigger.
+     */
+    startTime?: Timestamp;
+    targetAction: TargetAction;
+  }
+  export interface CreateScheduledActionResponse {
+    /**
+     * The returned ScheduledAction object that describes the properties of a scheduled action.
+     */
+    scheduledAction?: ScheduledActionResponse;
+  }
+  export interface CreateSnapshotCopyConfigurationRequest {
+    /**
+     * The KMS key to use to encrypt your snapshots in the destination Amazon Web Services Region.
+     */
+    destinationKmsKeyId?: KmsKeyId;
+    /**
+     * The destination Amazon Web Services Region that you want to copy snapshots to.
+     */
+    destinationRegion: String;
+    /**
+     * The name of the namespace to copy snapshots from.
+     */
+    namespaceName: NamespaceName;
+    /**
+     * The retention period of the snapshots that you copy to the destination Amazon Web Services Region.
+     */
+    snapshotRetentionPeriod?: Integer;
+  }
+  export interface CreateSnapshotCopyConfigurationResponse {
+    /**
+     * The snapshot copy configuration object that is returned.
+     */
+    snapshotCopyConfiguration: SnapshotCopyConfiguration;
+  }
   export interface CreateSnapshotRequest {
     /**
      * The namespace to create a snapshot for.
@@ -565,6 +714,24 @@ declare namespace RedshiftServerless {
      * The created snapshot object.
      */
     snapshot?: Snapshot;
+  }
+  export interface CreateSnapshotScheduleActionParameters {
+    /**
+     * The name of the namespace for which you want to configure a scheduled action to create a snapshot.
+     */
+    namespaceName: NamespaceName;
+    /**
+     * The retention period of the snapshot created by the scheduled action.
+     */
+    retentionPeriod?: Integer;
+    /**
+     * A string prefix that is attached to the name of the snapshot created by the scheduled action. The final name of the snapshot is the string prefix appended by the date and time of when the snapshot was created.
+     */
+    snapshotNamePrefix: SnapshotNamePrefix;
+    /**
+     * An array of Tag objects to associate with the snapshot.
+     */
+    tags?: TagList;
   }
   export interface CreateUsageLimitRequest {
     /**
@@ -600,7 +767,7 @@ declare namespace RedshiftServerless {
      */
     baseCapacity?: Integer;
     /**
-     * An array of parameters to set for advanced control over a database. The options are auto_mv, datestyle, enable_case_sensitivity_identifier, enable_user_activity_logging, query_group, search_path, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see  Query monitoring metrics for Amazon Redshift Serverless.
+     * An array of parameters to set for advanced control over a database. The options are auto_mv, datestyle, enable_case_sensitive_identifier, enable_user_activity_logging, query_group, search_path, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see  Query monitoring metrics for Amazon Redshift Serverless.
      */
     configParameters?: ConfigParameterList;
     /**
@@ -702,6 +869,30 @@ declare namespace RedshiftServerless {
     resourceArn: String;
   }
   export interface DeleteResourcePolicyResponse {
+  }
+  export interface DeleteScheduledActionRequest {
+    /**
+     * The name of the scheduled action to delete.
+     */
+    scheduledActionName: ScheduledActionName;
+  }
+  export interface DeleteScheduledActionResponse {
+    /**
+     * The deleted scheduled action object.
+     */
+    scheduledAction?: ScheduledActionResponse;
+  }
+  export interface DeleteSnapshotCopyConfigurationRequest {
+    /**
+     * The ID of the snapshot copy configuration to delete.
+     */
+    snapshotCopyConfigurationId: String;
+  }
+  export interface DeleteSnapshotCopyConfigurationResponse {
+    /**
+     * The deleted snapshot copy configuration object.
+     */
+    snapshotCopyConfiguration: SnapshotCopyConfiguration;
   }
   export interface DeleteSnapshotRequest {
     /**
@@ -909,6 +1100,18 @@ declare namespace RedshiftServerless {
      */
     resourcePolicy?: ResourcePolicy;
   }
+  export interface GetScheduledActionRequest {
+    /**
+     * The name of the scheduled action.
+     */
+    scheduledActionName: ScheduledActionName;
+  }
+  export interface GetScheduledActionResponse {
+    /**
+     * The returned scheduled action object.
+     */
+    scheduledAction?: ScheduledActionResponse;
+  }
   export interface GetSnapshotRequest {
     /**
      * The owner Amazon Web Services account of a snapshot shared with another user.
@@ -1008,6 +1211,10 @@ declare namespace RedshiftServerless {
      */
     nextToken?: String;
     /**
+     * The owner Amazon Web Services account for the Amazon Redshift Serverless workgroup.
+     */
+    ownerAccount?: OwnerAccount;
+    /**
      * The unique identifier of the virtual private cloud with access to Amazon Redshift Serverless.
      */
     vpcId?: String;
@@ -1084,6 +1291,56 @@ declare namespace RedshiftServerless {
      * The returned recovery point objects.
      */
     recoveryPoints?: RecoveryPointList;
+  }
+  export interface ListScheduledActionsRequest {
+    /**
+     * An optional parameter that specifies the maximum number of results to return. Use nextToken to display the next page of results.
+     */
+    maxResults?: ListScheduledActionsRequestMaxResultsInteger;
+    /**
+     * The name of namespace associated with the scheduled action to retrieve.
+     */
+    namespaceName?: NamespaceName;
+    /**
+     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.
+     */
+    nextToken?: PaginationToken;
+  }
+  export type ListScheduledActionsRequestMaxResultsInteger = number;
+  export interface ListScheduledActionsResponse {
+    /**
+     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * All of the returned scheduled action objects.
+     */
+    scheduledActions?: ScheduledActionsList;
+  }
+  export interface ListSnapshotCopyConfigurationsRequest {
+    /**
+     * An optional parameter that specifies the maximum number of results to return. You can use nextToken to display the next page of results.
+     */
+    maxResults?: ListSnapshotCopyConfigurationsRequestMaxResultsInteger;
+    /**
+     * The namespace from which to list all snapshot copy configurations.
+     */
+    namespaceName?: NamespaceName;
+    /**
+     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.
+     */
+    nextToken?: PaginationToken;
+  }
+  export type ListSnapshotCopyConfigurationsRequestMaxResultsInteger = number;
+  export interface ListSnapshotCopyConfigurationsResponse {
+    /**
+     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * All of the returned snapshot copy configurations.
+     */
+    snapshotCopyConfigurations: SnapshotCopyConfigurations;
   }
   export interface ListSnapshotsRequest {
     /**
@@ -1205,6 +1462,10 @@ declare namespace RedshiftServerless {
      * If your initial ListWorkgroups operation returns a nextToken, you can include the returned nextToken in following ListNamespaces operations, which returns results in the next page.
      */
     nextToken?: String;
+    /**
+     * The owner Amazon Web Services account for the Amazon Redshift Serverless workgroup.
+     */
+    ownerAccount?: OwnerAccount;
   }
   export type ListWorkgroupsRequestMaxResultsInteger = number;
   export interface ListWorkgroupsResponse {
@@ -1296,6 +1557,8 @@ declare namespace RedshiftServerless {
     subnetId?: String;
   }
   export type NetworkInterfaceList = NetworkInterface[];
+  export type NextInvocationsList = Timestamp[];
+  export type OwnerAccount = string;
   export type PaginationToken = string;
   export type ParameterKey = string;
   export type ParameterValue = string;
@@ -1418,6 +1681,51 @@ declare namespace RedshiftServerless {
      */
     snapshotName?: String;
   }
+  export interface RestoreTableFromRecoveryPointRequest {
+    /**
+     * Indicates whether name identifiers for database, schema, and table are case sensitive. If true, the names are case sensitive. If false, the names are not case sensitive. The default is false.
+     */
+    activateCaseSensitiveIdentifier?: Boolean;
+    /**
+     * Namespace of the recovery point to restore from.
+     */
+    namespaceName: String;
+    /**
+     * The name of the table to create from the restore operation.
+     */
+    newTableName: String;
+    /**
+     * The ID of the recovery point to restore the table from.
+     */
+    recoveryPointId: String;
+    /**
+     * The name of the source database that contains the table being restored.
+     */
+    sourceDatabaseName: String;
+    /**
+     * The name of the source schema that contains the table being restored.
+     */
+    sourceSchemaName?: String;
+    /**
+     * The name of the source table being restored.
+     */
+    sourceTableName: String;
+    /**
+     * The name of the database to restore the table to.
+     */
+    targetDatabaseName?: String;
+    /**
+     * The name of the schema to restore the table to.
+     */
+    targetSchemaName?: String;
+    /**
+     * The workgroup to restore the table to.
+     */
+    workgroupName: String;
+  }
+  export interface RestoreTableFromRecoveryPointResponse {
+    tableRestoreStatus?: TableRestoreStatus;
+  }
   export interface RestoreTableFromSnapshotRequest {
     /**
      * Indicates whether name identifiers for database, schema, and table are case sensitive. If true, the names are case sensitive. If false, the names are not case sensitive. The default is false.
@@ -1466,6 +1774,61 @@ declare namespace RedshiftServerless {
      */
     tableRestoreStatus?: TableRestoreStatus;
   }
+  export interface Schedule {
+    /**
+     * The timestamp of when Amazon Redshift Serverless should run the scheduled action. Format of at expressions is "at(yyyy-mm-ddThh:mm:ss)". For example, "at(2016-03-04T17:27:00)".
+     */
+    at?: Timestamp;
+    /**
+     * The cron expression to use to schedule a recurring scheduled action. Schedule invocations must be separated by at least one hour. Format of cron expressions is "cron(Minutes Hours Day-of-month Month Day-of-week Year)". For example, "cron(0 10 ? * MON *)". For more information, see Cron Expressions in the Amazon CloudWatch Events User Guide.
+     */
+    cron?: String;
+  }
+  export type ScheduledActionName = string;
+  export interface ScheduledActionResponse {
+    /**
+     * The end time of 
+     */
+    endTime?: Timestamp;
+    /**
+     * The end time in UTC when the schedule is no longer active. After this time, the scheduled action does not trigger.
+     */
+    namespaceName?: NamespaceName;
+    /**
+     * An array of timestamps of when the next scheduled actions will trigger.
+     */
+    nextInvocations?: NextInvocationsList;
+    /**
+     * The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots. (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. For more information about the IAM role to use with the Amazon Redshift scheduler, see Using Identity-Based Policies for Amazon Redshift in the Amazon Redshift Cluster Management Guide
+     */
+    roleArn?: IamRoleArn;
+    /**
+     * The schedule for a one-time (at format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Format of at expressions is "at(yyyy-mm-ddThh:mm:ss)". For example, "at(2016-03-04T17:27:00)". Format of cron expressions is "cron(Minutes Hours Day-of-month Month Day-of-week Year)". For example, "cron(0 10 ? * MON *)". For more information, see Cron Expressions in the Amazon CloudWatch Events User Guide.
+     */
+    schedule?: Schedule;
+    /**
+     * The description of the scheduled action.
+     */
+    scheduledActionDescription?: String;
+    /**
+     * The name of the scheduled action.
+     */
+    scheduledActionName?: ScheduledActionName;
+    /**
+     * The uuid of the scheduled action.
+     */
+    scheduledActionUuid?: String;
+    /**
+     * The start time in UTC when the schedule is active. Before this time, the scheduled action does not trigger.
+     */
+    startTime?: Timestamp;
+    /**
+     * The state of the scheduled action.
+     */
+    state?: State;
+    targetAction?: TargetAction;
+  }
+  export type ScheduledActionsList = ScheduledActionName[];
   export type SecurityGroupId = string;
   export type SecurityGroupIdList = SecurityGroupId[];
   export interface Snapshot {
@@ -1558,15 +1921,44 @@ declare namespace RedshiftServerless {
      */
     totalBackupSizeInMegaBytes?: Double;
   }
+  export interface SnapshotCopyConfiguration {
+    /**
+     * The ID of the KMS key to use to encrypt your snapshots in the destination Amazon Web Services Region.
+     */
+    destinationKmsKeyId?: KmsKeyId;
+    /**
+     * The destination Amazon Web Services Region to copy snapshots to.
+     */
+    destinationRegion?: String;
+    /**
+     * The name of the namespace to copy snapshots from in the source Amazon Web Services Region.
+     */
+    namespaceName?: NamespaceName;
+    /**
+     * The ARN of the snapshot copy configuration object.
+     */
+    snapshotCopyConfigurationArn?: String;
+    /**
+     * The ID of the snapshot copy configuration object.
+     */
+    snapshotCopyConfigurationId?: String;
+    /**
+     * The retention period of snapshots that are copied to the destination Amazon Web Services Region.
+     */
+    snapshotRetentionPeriod?: Integer;
+  }
+  export type SnapshotCopyConfigurations = SnapshotCopyConfiguration[];
   export type SnapshotList = Snapshot[];
+  export type SnapshotNamePrefix = string;
   export type SnapshotStatus = "AVAILABLE"|"CREATING"|"DELETED"|"CANCELLED"|"FAILED"|"COPYING"|string;
+  export type State = "ACTIVE"|"DISABLED"|string;
   export type String = string;
   export type SubnetId = string;
   export type SubnetIdList = SubnetId[];
   export type SyntheticTimestamp_date_time = Date;
   export interface TableRestoreStatus {
     /**
-     * A description of the status of the table restore request. Status values include SUCCEEDED, FAILED, CANCELED, PENDING, IN_PROGRESS.
+     * A message that explains the returned status. For example, if the status of the operation is FAILED, the message explains why the operation failed.
      */
     message?: String;
     /**
@@ -1581,6 +1973,10 @@ declare namespace RedshiftServerless {
      * The amount of data restored to the new table so far, in megabytes (MB).
      */
     progressInMegaBytes?: Long;
+    /**
+     * The ID of the recovery point being restored from.
+     */
+    recoveryPointId?: String;
     /**
      * The time that the table restore request was made, in Universal Coordinated Time (UTC).
      */
@@ -1602,7 +1998,7 @@ declare namespace RedshiftServerless {
      */
     sourceTableName?: String;
     /**
-     * A value that describes the current state of the table restore request. Possible values include SUCCEEDED, FAILED, CANCELED, PENDING, IN_PROGRESS.
+     * A value that describes the current state of the table restore request. Possible values are SUCCEEDED, FAILED, CANCELED, PENDING, and IN_PROGRESS.
      */
     status?: String;
     /**
@@ -1653,6 +2049,9 @@ declare namespace RedshiftServerless {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export interface TargetAction {
+    createSnapshot?: CreateSnapshotScheduleActionParameters;
+  }
   export type Timestamp = Date;
   export interface UntagResourceRequest {
     /**
@@ -1758,6 +2157,59 @@ declare namespace RedshiftServerless {
      */
     namespace: Namespace;
   }
+  export interface UpdateScheduledActionRequest {
+    /**
+     * Specifies whether to enable the scheduled action.
+     */
+    enabled?: Boolean;
+    /**
+     * The end time in UTC of the scheduled action to update.
+     */
+    endTime?: Timestamp;
+    /**
+     * The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. For more information about the IAM role to use with the Amazon Redshift scheduler, see Using Identity-Based Policies for Amazon Redshift in the Amazon Redshift Cluster Management Guide
+     */
+    roleArn?: IamRoleArn;
+    /**
+     * The schedule for a one-time (at format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Format of at expressions is "at(yyyy-mm-ddThh:mm:ss)". For example, "at(2016-03-04T17:27:00)". Format of cron expressions is "cron(Minutes Hours Day-of-month Month Day-of-week Year)". For example, "cron(0 10 ? * MON *)". For more information, see Cron Expressions in the Amazon CloudWatch Events User Guide.
+     */
+    schedule?: Schedule;
+    /**
+     * The descripion of the scheduled action to update to.
+     */
+    scheduledActionDescription?: String;
+    /**
+     * The name of the scheduled action to update to.
+     */
+    scheduledActionName: ScheduledActionName;
+    /**
+     * The start time in UTC of the scheduled action to update to.
+     */
+    startTime?: Timestamp;
+    targetAction?: TargetAction;
+  }
+  export interface UpdateScheduledActionResponse {
+    /**
+     * The ScheduledAction object that was updated.
+     */
+    scheduledAction?: ScheduledActionResponse;
+  }
+  export interface UpdateSnapshotCopyConfigurationRequest {
+    /**
+     * The ID of the snapshot copy configuration to update.
+     */
+    snapshotCopyConfigurationId: String;
+    /**
+     * The new retention period of how long to keep a snapshot in the destination Amazon Web Services Region.
+     */
+    snapshotRetentionPeriod?: Integer;
+  }
+  export interface UpdateSnapshotCopyConfigurationResponse {
+    /**
+     * The updated snapshot copy configuration object.
+     */
+    snapshotCopyConfiguration: SnapshotCopyConfiguration;
+  }
   export interface UpdateSnapshotRequest {
     /**
      * The new retention period of the snapshot.
@@ -1800,7 +2252,7 @@ declare namespace RedshiftServerless {
      */
     baseCapacity?: Integer;
     /**
-     * An array of parameters to set for advanced control over a database. The options are auto_mv, datestyle, enable_case_sensitivity_identifier, enable_user_activity_logging, query_group, search_path, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see  Query monitoring metrics for Amazon Redshift Serverless.
+     * An array of parameters to set for advanced control over a database. The options are auto_mv, datestyle, enable_case_sensitive_identifier, enable_user_activity_logging, query_group, search_path, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see  Query monitoring metrics for Amazon Redshift Serverless.
      */
     configParameters?: ConfigParameterList;
     /**
@@ -1887,6 +2339,7 @@ declare namespace RedshiftServerless {
     vpcId?: String;
   }
   export type VpcEndpointList = VpcEndpoint[];
+  export type VpcIds = String[];
   export type VpcSecurityGroupId = string;
   export type VpcSecurityGroupIdList = VpcSecurityGroupId[];
   export interface VpcSecurityGroupMembership {
@@ -1906,13 +2359,17 @@ declare namespace RedshiftServerless {
      */
     baseCapacity?: Integer;
     /**
-     * An array of parameters to set for advanced control over a database. The options are auto_mv, datestyle, enable_case_sensitivity_identifier, enable_user_activity_logging, query_group, , search_path, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see  Query monitoring metrics for Amazon Redshift Serverless.
+     * An array of parameters to set for advanced control over a database. The options are auto_mv, datestyle, enable_case_sensitive_identifier, enable_user_activity_logging, query_group, search_path, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see  Query monitoring metrics for Amazon Redshift Serverless.
      */
     configParameters?: ConfigParameterList;
     /**
      * The creation date of the workgroup.
      */
     creationDate?: SyntheticTimestamp_date_time;
+    /**
+     * A list of VPCs. Each entry is the unique identifier of a virtual private cloud with access to Amazon Redshift Serverless. If all of the VPCs for the grantee are allowed, it shows an asterisk.
+     */
+    crossAccountVpcs?: VpcIds;
     /**
      * The custom domain name’s certificate Amazon resource name (ARN).
      */

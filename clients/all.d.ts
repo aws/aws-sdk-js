@@ -371,3 +371,5 @@ export import BedrockAgentRuntime = require('./bedrockagentruntime');
 export import QBusiness = require('./qbusiness');
 export import QConnect = require('./qconnect');
 export import CleanRoomsML = require('./cleanroomsml');
+export import MarketplaceAgreement = require('./marketplaceagreement');
+export import MarketplaceDeployment = require('./marketplacedeployment');

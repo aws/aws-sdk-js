@@ -373,6 +373,8 @@ export abstract class ConfigurationServicePlaceholders {
   qbusiness?: AWS.QBusiness.Types.ClientConfiguration;
   qconnect?: AWS.QConnect.Types.ClientConfiguration;
   cleanroomsml?: AWS.CleanRoomsML.Types.ClientConfiguration;
+  marketplaceagreement?: AWS.MarketplaceAgreement.Types.ClientConfiguration;
+  marketplacedeployment?: AWS.MarketplaceDeployment.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -748,4 +750,6 @@ export interface ConfigurationServiceApiVersions {
   qbusiness?: AWS.QBusiness.Types.apiVersion;
   qconnect?: AWS.QConnect.Types.apiVersion;
   cleanroomsml?: AWS.CleanRoomsML.Types.apiVersion;
+  marketplaceagreement?: AWS.MarketplaceAgreement.Types.apiVersion;
+  marketplacedeployment?: AWS.MarketplaceDeployment.Types.apiVersion;
 }

@@ -110,6 +110,89 @@ declare class MarketplaceCatalog extends Service {
 }
 declare namespace MarketplaceCatalog {
   export type ARN = string;
+  export interface AmiProductEntityIdFilter {
+    /**
+     * A string array of unique entity id values to be filtered on.
+     */
+    ValueList?: AmiProductEntityIdFilterValueList;
+  }
+  export type AmiProductEntityIdFilterValueList = AmiProductEntityIdString[];
+  export type AmiProductEntityIdString = string;
+  export interface AmiProductFilters {
+    /**
+     * Unique identifier for the AMI product.
+     */
+    EntityId?: AmiProductEntityIdFilter;
+    /**
+     * The last date on which the AMI product was modified.
+     */
+    LastModifiedDate?: AmiProductLastModifiedDateFilter;
+    /**
+     * The title of the AMI product.
+     */
+    ProductTitle?: AmiProductTitleFilter;
+    /**
+     * The visibility of the AMI product.
+     */
+    Visibility?: AmiProductVisibilityFilter;
+  }
+  export interface AmiProductLastModifiedDateFilter {
+    /**
+     * Dates between which the AMI product was last modified.
+     */
+    DateRange?: AmiProductLastModifiedDateFilterDateRange;
+  }
+  export interface AmiProductLastModifiedDateFilterDateRange {
+    /**
+     * Date after which the AMI product was last modified.
+     */
+    AfterValue?: DateTimeISO8601;
+    /**
+     * Date before which the AMI product was last modified.
+     */
+    BeforeValue?: DateTimeISO8601;
+  }
+  export interface AmiProductSort {
+    /**
+     * Field to sort the AMI products by.
+     */
+    SortBy?: AmiProductSortBy;
+    /**
+     * The sorting order. Can be ASCENDING or DESCENDING. The default value is DESCENDING.
+     */
+    SortOrder?: SortOrder;
+  }
+  export type AmiProductSortBy = "EntityId"|"LastModifiedDate"|"ProductTitle"|"Visibility"|string;
+  export interface AmiProductSummary {
+    /**
+     * The title of the AMI product.
+     */
+    ProductTitle?: AmiProductTitleString;
+    /**
+     * The lifecycle of the AMI product.
+     */
+    Visibility?: AmiProductVisibilityString;
+  }
+  export interface AmiProductTitleFilter {
+    /**
+     * A string array of unique product title values to be filtered on.
+     */
+    ValueList?: AmiProductTitleFilterValueList;
+    /**
+     * A string that will be the wildCard input for product tile filter. It matches the provided value as a substring in the actual value.
+     */
+    WildCardValue?: AmiProductTitleString;
+  }
+  export type AmiProductTitleFilterValueList = AmiProductTitleString[];
+  export type AmiProductTitleString = string;
+  export interface AmiProductVisibilityFilter {
+    /**
+     * A string array of unique visibility values to be filtered on.
+     */
+    ValueList?: AmiProductVisibilityFilterValueList;
+  }
+  export type AmiProductVisibilityFilterValueList = AmiProductVisibilityString[];
+  export type AmiProductVisibilityString = "Limited"|"Public"|"Restricted"|"Draft"|string;
   export interface CancelChangeSetRequest {
     /**
      * Required. The catalog related to the request. Fixed value: AWSMarketplace.
@@ -224,6 +307,172 @@ declare namespace MarketplaceCatalog {
   }
   export type ChangeType = string;
   export type ClientRequestToken = string;
+  export interface ContainerProductEntityIdFilter {
+    /**
+     * A string array of unique entity id values to be filtered on.
+     */
+    ValueList?: ContainerProductEntityIdFilterValueList;
+  }
+  export type ContainerProductEntityIdFilterValueList = ContainerProductEntityIdString[];
+  export type ContainerProductEntityIdString = string;
+  export interface ContainerProductFilters {
+    /**
+     * Unique identifier for the container product.
+     */
+    EntityId?: ContainerProductEntityIdFilter;
+    /**
+     * The last date on which the container product was modified.
+     */
+    LastModifiedDate?: ContainerProductLastModifiedDateFilter;
+    /**
+     * The title of the container product.
+     */
+    ProductTitle?: ContainerProductTitleFilter;
+    /**
+     * The visibility of the container product.
+     */
+    Visibility?: ContainerProductVisibilityFilter;
+  }
+  export interface ContainerProductLastModifiedDateFilter {
+    /**
+     * Dates between which the container product was last modified.
+     */
+    DateRange?: ContainerProductLastModifiedDateFilterDateRange;
+  }
+  export interface ContainerProductLastModifiedDateFilterDateRange {
+    /**
+     * Date after which the container product was last modified.
+     */
+    AfterValue?: DateTimeISO8601;
+    /**
+     * Date before which the container product was last modified.
+     */
+    BeforeValue?: DateTimeISO8601;
+  }
+  export interface ContainerProductSort {
+    /**
+     * Field to sort the container products by.
+     */
+    SortBy?: ContainerProductSortBy;
+    /**
+     * The sorting order. Can be ASCENDING or DESCENDING. The default value is DESCENDING.
+     */
+    SortOrder?: SortOrder;
+  }
+  export type ContainerProductSortBy = "EntityId"|"LastModifiedDate"|"ProductTitle"|"Visibility"|string;
+  export interface ContainerProductSummary {
+    /**
+     * The title of the container product.
+     */
+    ProductTitle?: ContainerProductTitleString;
+    /**
+     * The lifecycle of the product.
+     */
+    Visibility?: ContainerProductVisibilityString;
+  }
+  export interface ContainerProductTitleFilter {
+    /**
+     * A string array of unique product title values to be filtered on.
+     */
+    ValueList?: ContainerProductTitleFilterValueList;
+    /**
+     * A string that will be the wildCard input for product tile filter. It matches the provided value as a substring in the actual value.
+     */
+    WildCardValue?: ContainerProductTitleString;
+  }
+  export type ContainerProductTitleFilterValueList = ContainerProductTitleString[];
+  export type ContainerProductTitleString = string;
+  export interface ContainerProductVisibilityFilter {
+    /**
+     * A string array of unique visibility values to be filtered on.
+     */
+    ValueList?: ContainerProductVisibilityFilterValueList;
+  }
+  export type ContainerProductVisibilityFilterValueList = ContainerProductVisibilityString[];
+  export type ContainerProductVisibilityString = "Limited"|"Public"|"Restricted"|"Draft"|string;
+  export interface DataProductEntityIdFilter {
+    /**
+     * A string array of unique entity id values to be filtered on.
+     */
+    ValueList?: DataProductEntityIdFilterValueList;
+  }
+  export type DataProductEntityIdFilterValueList = DataProductEntityIdString[];
+  export type DataProductEntityIdString = string;
+  export interface DataProductFilters {
+    /**
+     * Unique identifier for the data product.
+     */
+    EntityId?: DataProductEntityIdFilter;
+    /**
+     * The title of the data product.
+     */
+    ProductTitle?: DataProductTitleFilter;
+    /**
+     * The visibility of the data product.
+     */
+    Visibility?: DataProductVisibilityFilter;
+    /**
+     * The last date on which the data product was modified.
+     */
+    LastModifiedDate?: DataProductLastModifiedDateFilter;
+  }
+  export interface DataProductLastModifiedDateFilter {
+    /**
+     * Dates between which the data product was last modified.
+     */
+    DateRange?: DataProductLastModifiedDateFilterDateRange;
+  }
+  export interface DataProductLastModifiedDateFilterDateRange {
+    /**
+     * Date after which the data product was last modified.
+     */
+    AfterValue?: DateTimeISO8601;
+    /**
+     * Date before which the data product was last modified.
+     */
+    BeforeValue?: DateTimeISO8601;
+  }
+  export interface DataProductSort {
+    /**
+     * Field to sort the data products by.
+     */
+    SortBy?: DataProductSortBy;
+    /**
+     * The sorting order. Can be ASCENDING or DESCENDING. The default value is DESCENDING.
+     */
+    SortOrder?: SortOrder;
+  }
+  export type DataProductSortBy = "EntityId"|"ProductTitle"|"Visibility"|"LastModifiedDate"|string;
+  export interface DataProductSummary {
+    /**
+     * The title of the data product.
+     */
+    ProductTitle?: DataProductTitleString;
+    /**
+     * The lifecycle of the data product.
+     */
+    Visibility?: DataProductVisibilityString;
+  }
+  export interface DataProductTitleFilter {
+    /**
+     * A string array of unique product title values to be filtered on.
+     */
+    ValueList?: DataProductTitleFilterValueList;
+    /**
+     * A string that will be the wildCard input for product tile filter. It matches the provided value as a substring in the actual value.
+     */
+    WildCardValue?: DataProductTitleString;
+  }
+  export type DataProductTitleFilterValueList = DataProductTitleString[];
+  export type DataProductTitleString = string;
+  export interface DataProductVisibilityFilter {
+    /**
+     * A string array of unique visibility values to be filtered on.
+     */
+    ValueList?: DataProductVisibilityFilterValueList;
+  }
+  export type DataProductVisibilityFilterValueList = DataProductVisibilityString[];
+  export type DataProductVisibilityString = "Limited"|"Public"|"Restricted"|"Unavailable"|"Draft"|string;
   export type DateTimeISO8601 = string;
   export interface DeleteResourcePolicyRequest {
     /**
@@ -353,9 +602,85 @@ declare namespace MarketplaceCatalog {
      * The visibility status of the entity to buyers. This value can be Public (everyone can view the entity), Limited (the entity is visible to limited accounts only), or Restricted (the entity was published and then unpublished and only existing buyers can view it). 
      */
     Visibility?: VisibilityValue;
+    /**
+     * An object that contains summary information about the AMI product.
+     */
+    AmiProductSummary?: AmiProductSummary;
+    /**
+     * An object that contains summary information about the container product.
+     */
+    ContainerProductSummary?: ContainerProductSummary;
+    /**
+     * An object that contains summary information about the data product.
+     */
+    DataProductSummary?: DataProductSummary;
+    /**
+     * An object that contains summary information about the SaaS product.
+     */
+    SaaSProductSummary?: SaaSProductSummary;
+    /**
+     * An object that contains summary information about the offer.
+     */
+    OfferSummary?: OfferSummary;
+    /**
+     * An object that contains summary information about the Resale Authorization.
+     */
+    ResaleAuthorizationSummary?: ResaleAuthorizationSummary;
   }
   export type EntitySummaryList = EntitySummary[];
   export type EntityType = string;
+  export interface EntityTypeFilters {
+    /**
+     * A filter for data products.
+     */
+    DataProductFilters?: DataProductFilters;
+    /**
+     * A filter for SaaS products.
+     */
+    SaaSProductFilters?: SaaSProductFilters;
+    /**
+     * A filter for AMI products.
+     */
+    AmiProductFilters?: AmiProductFilters;
+    /**
+     * A filter for offers.
+     */
+    OfferFilters?: OfferFilters;
+    /**
+     * A filter for container products.
+     */
+    ContainerProductFilters?: ContainerProductFilters;
+    /**
+     * A filter for Resale Authorizations.
+     */
+    ResaleAuthorizationFilters?: ResaleAuthorizationFilters;
+  }
+  export interface EntityTypeSort {
+    /**
+     * A sort for data products.
+     */
+    DataProductSort?: DataProductSort;
+    /**
+     * A sort for SaaS products.
+     */
+    SaaSProductSort?: SaaSProductSort;
+    /**
+     * A sort for AMI products.
+     */
+    AmiProductSort?: AmiProductSort;
+    /**
+     * A sort for offers.
+     */
+    OfferSort?: OfferSort;
+    /**
+     * A sort for container products.
+     */
+    ContainerProductSort?: ContainerProductSort;
+    /**
+     * A sort for Resale Authorizations.
+     */
+    ResaleAuthorizationSort?: ResaleAuthorizationSort;
+  }
   export type ErrorCodeString = string;
   export interface ErrorDetail {
     /**
@@ -439,7 +764,7 @@ declare namespace MarketplaceCatalog {
      */
     Catalog: Catalog;
     /**
-     * The type of entities to retrieve.
+     * The type of entities to retrieve. Valid values are: ServerProduct, AmiProduct, ContainerProduct, DataProduct, SaaSProduct, ProcurementPolicy, Experience, Audience, BrandingSettings, Offer, Seller, ResaleAuthorization.
      */
     EntityType: EntityType;
     /**
@@ -462,10 +787,18 @@ declare namespace MarketplaceCatalog {
      * Filters the returned set of entities based on their owner. The default is SELF. To list entities shared with you through AWS Resource Access Manager (AWS RAM), set to SHARED. Entities shared through the AWS Marketplace Catalog API PutResourcePolicy operation can't be discovered through the SHARED parameter.
      */
     OwnershipType?: OwnershipType;
+    /**
+     * A Union object containing filter shapes for all EntityTypes. Each EntityTypeFilter shape will have filters applicable for that EntityType that can be used to search or filter entities.
+     */
+    EntityTypeFilters?: EntityTypeFilters;
+    /**
+     * A Union object containing Sort shapes for all EntityTypes. Each EntityTypeSort shape will have SortBy and SortOrder applicable for fields on that EntityType. This can be used to sort the results of the filter query.
+     */
+    EntityTypeSort?: EntityTypeSort;
   }
   export interface ListEntitiesResponse {
     /**
-     *  Array of EntitySummary object.
+     * Array of EntitySummary objects.
      */
     EntitySummaryList?: EntitySummaryList;
     /**
@@ -490,6 +823,187 @@ declare namespace MarketplaceCatalog {
     Tags?: TagList;
   }
   export type NextToken = string;
+  export interface OfferAvailabilityEndDateFilter {
+    /**
+     * Allows filtering on the AvailabilityEndDate of an offer with date range as input.
+     */
+    DateRange?: OfferAvailabilityEndDateFilterDateRange;
+  }
+  export interface OfferAvailabilityEndDateFilterDateRange {
+    /**
+     * Allows filtering on the AvailabilityEndDate of an offer after a date.
+     */
+    AfterValue?: DateTimeISO8601;
+    /**
+     * Allows filtering on the AvailabilityEndDate of an offer before a date.
+     */
+    BeforeValue?: DateTimeISO8601;
+  }
+  export interface OfferBuyerAccountsFilter {
+    /**
+     * Allows filtering on the BuyerAccounts of an offer with wild card input.
+     */
+    WildCardValue?: OfferBuyerAccountsFilterWildcard;
+  }
+  export type OfferBuyerAccountsFilterWildcard = string;
+  export type OfferBuyerAccountsList = OfferBuyerAccountsString[];
+  export type OfferBuyerAccountsString = string;
+  export interface OfferEntityIdFilter {
+    /**
+     * Allows filtering on entity id of an offer with list input.
+     */
+    ValueList?: OfferEntityIdFilterValueList;
+  }
+  export type OfferEntityIdFilterValueList = OfferEntityIdString[];
+  export type OfferEntityIdString = string;
+  export interface OfferFilters {
+    /**
+     * Allows filtering on EntityId of an offer.
+     */
+    EntityId?: OfferEntityIdFilter;
+    /**
+     * Allows filtering on the Name of an offer.
+     */
+    Name?: OfferNameFilter;
+    /**
+     * Allows filtering on the ProductId of an offer.
+     */
+    ProductId?: OfferProductIdFilter;
+    /**
+     * Allows filtering on the ReleaseDate of an offer.
+     */
+    ReleaseDate?: OfferReleaseDateFilter;
+    /**
+     * Allows filtering on the AvailabilityEndDate of an offer.
+     */
+    AvailabilityEndDate?: OfferAvailabilityEndDateFilter;
+    /**
+     * Allows filtering on the BuyerAccounts of an offer.
+     */
+    BuyerAccounts?: OfferBuyerAccountsFilter;
+    /**
+     * Allows filtering on the State of an offer.
+     */
+    State?: OfferStateFilter;
+    /**
+     * Allows filtering on the Targeting of an offer.
+     */
+    Targeting?: OfferTargetingFilter;
+    /**
+     * Allows filtering on the LastModifiedDate of an offer.
+     */
+    LastModifiedDate?: OfferLastModifiedDateFilter;
+  }
+  export interface OfferLastModifiedDateFilter {
+    /**
+     * Allows filtering on the LastModifiedDate of an offer with date range as input.
+     */
+    DateRange?: OfferLastModifiedDateFilterDateRange;
+  }
+  export interface OfferLastModifiedDateFilterDateRange {
+    /**
+     * Allows filtering on the LastModifiedDate of an offer after a date.
+     */
+    AfterValue?: DateTimeISO8601;
+    /**
+     * Allows filtering on the LastModifiedDate of an offer before a date.
+     */
+    BeforeValue?: DateTimeISO8601;
+  }
+  export interface OfferNameFilter {
+    /**
+     * Allows filtering on the Name of an offer with list input.
+     */
+    ValueList?: OfferNameFilterValueList;
+    /**
+     * Allows filtering on the Name of an offer with wild card input.
+     */
+    WildCardValue?: OfferNameString;
+  }
+  export type OfferNameFilterValueList = OfferNameString[];
+  export type OfferNameString = string;
+  export interface OfferProductIdFilter {
+    /**
+     * Allows filtering on the ProductId of an offer with list input.
+     */
+    ValueList?: OfferProductIdFilterValueList;
+  }
+  export type OfferProductIdFilterValueList = OfferProductIdString[];
+  export type OfferProductIdString = string;
+  export interface OfferReleaseDateFilter {
+    /**
+     * Allows filtering on the ReleaseDate of an offer with date range as input.
+     */
+    DateRange?: OfferReleaseDateFilterDateRange;
+  }
+  export interface OfferReleaseDateFilterDateRange {
+    /**
+     * Allows filtering on the ReleaseDate of offers after a date.
+     */
+    AfterValue?: DateTimeISO8601;
+    /**
+     * Allows filtering on the ReleaseDate of offers before a date.
+     */
+    BeforeValue?: DateTimeISO8601;
+  }
+  export interface OfferSort {
+    /**
+     * Allows to sort offers.
+     */
+    SortBy?: OfferSortBy;
+    /**
+     * Allows to sort offers.
+     */
+    SortOrder?: SortOrder;
+  }
+  export type OfferSortBy = "EntityId"|"Name"|"ProductId"|"ReleaseDate"|"AvailabilityEndDate"|"BuyerAccounts"|"State"|"Targeting"|"LastModifiedDate"|string;
+  export interface OfferStateFilter {
+    /**
+     * Allows filtering on the State of an offer with list input.
+     */
+    ValueList?: OfferStateFilterValueList;
+  }
+  export type OfferStateFilterValueList = OfferStateString[];
+  export type OfferStateString = "Draft"|"Released"|string;
+  export interface OfferSummary {
+    /**
+     * The name of the offer.
+     */
+    Name?: OfferNameString;
+    /**
+     * The product ID of the offer.
+     */
+    ProductId?: OfferProductIdString;
+    /**
+     * The release date of the offer.
+     */
+    ReleaseDate?: DateTimeISO8601;
+    /**
+     * The availability end date of the offer.
+     */
+    AvailabilityEndDate?: DateTimeISO8601;
+    /**
+     * The buyer accounts in the offer.
+     */
+    BuyerAccounts?: OfferBuyerAccountsList;
+    /**
+     * The status of the offer.
+     */
+    State?: OfferStateString;
+    /**
+     * The targeting in the offer.
+     */
+    Targeting?: OfferTargetingList;
+  }
+  export interface OfferTargetingFilter {
+    /**
+     * Allows filtering on the Targeting of an offer with list input.
+     */
+    ValueList?: OfferTargetingFilterValueList;
+  }
+  export type OfferTargetingFilterValueList = OfferTargetingString[];
+  export type OfferTargetingList = OfferTargetingString[];
+  export type OfferTargetingString = "BuyerAccounts"|"ParticipatingPrograms"|"CountryCodes"|"None"|string;
   export type OwnershipType = "SELF"|"SHARED"|string;
   export interface PutResourcePolicyRequest {
     /**
@@ -504,10 +1018,377 @@ declare namespace MarketplaceCatalog {
   export interface PutResourcePolicyResponse {
   }
   export type RequestedChangeList = Change[];
+  export interface ResaleAuthorizationAvailabilityEndDateFilter {
+    /**
+     * Allows filtering on AvailabilityEndDate of a ResaleAuthorization with date range as input
+     */
+    DateRange?: ResaleAuthorizationAvailabilityEndDateFilterDateRange;
+    /**
+     * Allows filtering on AvailabilityEndDate of a ResaleAuthorization with date value as input.
+     */
+    ValueList?: ResaleAuthorizationAvailabilityEndDateFilterValueList;
+  }
+  export interface ResaleAuthorizationAvailabilityEndDateFilterDateRange {
+    /**
+     * Allows filtering on AvailabilityEndDate of a ResaleAuthorization after a date.
+     */
+    AfterValue?: DateTimeISO8601;
+    /**
+     * Allows filtering on AvailabilityEndDate of a ResaleAuthorization before a date.
+     */
+    BeforeValue?: DateTimeISO8601;
+  }
+  export type ResaleAuthorizationAvailabilityEndDateFilterValueList = DateTimeISO8601[];
+  export interface ResaleAuthorizationCreatedDateFilter {
+    /**
+     * Allows filtering on CreatedDate of a ResaleAuthorization with date range as input.
+     */
+    DateRange?: ResaleAuthorizationCreatedDateFilterDateRange;
+    /**
+     * Allows filtering on CreatedDate of a ResaleAuthorization with date value as input.
+     */
+    ValueList?: ResaleAuthorizationCreatedDateFilterValueList;
+  }
+  export interface ResaleAuthorizationCreatedDateFilterDateRange {
+    /**
+     * Allows filtering on CreatedDate of a ResaleAuthorization after a date.
+     */
+    AfterValue?: DateTimeISO8601;
+    /**
+     * Allows filtering on CreatedDate of a ResaleAuthorization before a date.
+     */
+    BeforeValue?: DateTimeISO8601;
+  }
+  export type ResaleAuthorizationCreatedDateFilterValueList = DateTimeISO8601[];
+  export interface ResaleAuthorizationEntityIdFilter {
+    /**
+     * Allows filtering on EntityId of a ResaleAuthorization with list input.
+     */
+    ValueList?: ResaleAuthorizationEntityIdFilterValueList;
+  }
+  export type ResaleAuthorizationEntityIdFilterValueList = ResaleAuthorizationEntityIdString[];
+  export type ResaleAuthorizationEntityIdString = string;
+  export interface ResaleAuthorizationFilters {
+    /**
+     * Allows filtering on the EntityId of a ResaleAuthorization.
+     */
+    EntityId?: ResaleAuthorizationEntityIdFilter;
+    /**
+     * Allows filtering on the Name of a ResaleAuthorization.
+     */
+    Name?: ResaleAuthorizationNameFilter;
+    /**
+     * Allows filtering on the ProductId of a ResaleAuthorization.
+     */
+    ProductId?: ResaleAuthorizationProductIdFilter;
+    /**
+     * Allows filtering on the CreatedDate of a ResaleAuthorization.
+     */
+    CreatedDate?: ResaleAuthorizationCreatedDateFilter;
+    /**
+     * Allows filtering on the AvailabilityEndDate of a ResaleAuthorization.
+     */
+    AvailabilityEndDate?: ResaleAuthorizationAvailabilityEndDateFilter;
+    /**
+     * Allows filtering on the ManufacturerAccountId of a ResaleAuthorization.
+     */
+    ManufacturerAccountId?: ResaleAuthorizationManufacturerAccountIdFilter;
+    /**
+     * Allows filtering on the ProductName of a ResaleAuthorization.
+     */
+    ProductName?: ResaleAuthorizationProductNameFilter;
+    /**
+     * Allows filtering on the ManufacturerLegalName of a ResaleAuthorization.
+     */
+    ManufacturerLegalName?: ResaleAuthorizationManufacturerLegalNameFilter;
+    /**
+     * Allows filtering on the ResellerAccountID of a ResaleAuthorization.
+     */
+    ResellerAccountID?: ResaleAuthorizationResellerAccountIDFilter;
+    /**
+     * Allows filtering on the ResellerLegalName of a ResaleAuthorization.
+     */
+    ResellerLegalName?: ResaleAuthorizationResellerLegalNameFilter;
+    /**
+     * Allows filtering on the Status of a ResaleAuthorization.
+     */
+    Status?: ResaleAuthorizationStatusFilter;
+    /**
+     * Allows filtering on the OfferExtendedStatus of a ResaleAuthorization.
+     */
+    OfferExtendedStatus?: ResaleAuthorizationOfferExtendedStatusFilter;
+    /**
+     * Allows filtering on the LastModifiedDate of a ResaleAuthorization.
+     */
+    LastModifiedDate?: ResaleAuthorizationLastModifiedDateFilter;
+  }
+  export interface ResaleAuthorizationLastModifiedDateFilter {
+    /**
+     * Allows filtering on the LastModifiedDate of a ResaleAuthorization with date range as input.
+     */
+    DateRange?: ResaleAuthorizationLastModifiedDateFilterDateRange;
+  }
+  export interface ResaleAuthorizationLastModifiedDateFilterDateRange {
+    /**
+     * Allows filtering on the LastModifiedDate of a ResaleAuthorization after a date.
+     */
+    AfterValue?: DateTimeISO8601;
+    /**
+     * Allows filtering on the LastModifiedDate of a ResaleAuthorization before a date.
+     */
+    BeforeValue?: DateTimeISO8601;
+  }
+  export interface ResaleAuthorizationManufacturerAccountIdFilter {
+    /**
+     * Allows filtering on the ManufacturerAccountId of a ResaleAuthorization with list input.
+     */
+    ValueList?: ResaleAuthorizationManufacturerAccountIdFilterValueList;
+    /**
+     * Allows filtering on the ManufacturerAccountId of a ResaleAuthorization with wild card input.
+     */
+    WildCardValue?: ResaleAuthorizationManufacturerAccountIdFilterWildcard;
+  }
+  export type ResaleAuthorizationManufacturerAccountIdFilterValueList = ResaleAuthorizationManufacturerAccountIdString[];
+  export type ResaleAuthorizationManufacturerAccountIdFilterWildcard = string;
+  export type ResaleAuthorizationManufacturerAccountIdString = string;
+  export interface ResaleAuthorizationManufacturerLegalNameFilter {
+    /**
+     * Allows filtering on the ManufacturerLegalName of a ResaleAuthorization with list input.
+     */
+    ValueList?: ResaleAuthorizationManufacturerLegalNameFilterValueList;
+    /**
+     * Allows filtering on the ManufacturerLegalName of a ResaleAuthorization with wild card input.
+     */
+    WildCardValue?: ResaleAuthorizationManufacturerLegalNameFilterWildcard;
+  }
+  export type ResaleAuthorizationManufacturerLegalNameFilterValueList = ResaleAuthorizationManufacturerLegalNameString[];
+  export type ResaleAuthorizationManufacturerLegalNameFilterWildcard = string;
+  export type ResaleAuthorizationManufacturerLegalNameString = string;
+  export interface ResaleAuthorizationNameFilter {
+    /**
+     * Allows filtering on the Name of a ResaleAuthorization with list input.
+     */
+    ValueList?: ResaleAuthorizationNameFilterValueList;
+    /**
+     * Allows filtering on the Name of a ResaleAuthorization with wild card input.
+     */
+    WildCardValue?: ResaleAuthorizationNameFilterWildcard;
+  }
+  export type ResaleAuthorizationNameFilterValueList = ResaleAuthorizationNameString[];
+  export type ResaleAuthorizationNameFilterWildcard = string;
+  export type ResaleAuthorizationNameString = string;
+  export interface ResaleAuthorizationOfferExtendedStatusFilter {
+    /**
+     * Allows filtering on the OfferExtendedStatus of a ResaleAuthorization with list input.
+     */
+    ValueList?: ResaleAuthorizationOfferExtendedStatusFilterValueList;
+  }
+  export type ResaleAuthorizationOfferExtendedStatusFilterValueList = ResaleAuthorizationOfferExtendedStatusString[];
+  export type ResaleAuthorizationOfferExtendedStatusString = string;
+  export interface ResaleAuthorizationProductIdFilter {
+    /**
+     * Allows filtering on the ProductId of a ResaleAuthorization with list input.
+     */
+    ValueList?: ResaleAuthorizationProductIdFilterValueList;
+    /**
+     * Allows filtering on the ProductId of a ResaleAuthorization with wild card input.
+     */
+    WildCardValue?: ResaleAuthorizationProductIdFilterWildcard;
+  }
+  export type ResaleAuthorizationProductIdFilterValueList = ResaleAuthorizationProductIdString[];
+  export type ResaleAuthorizationProductIdFilterWildcard = string;
+  export type ResaleAuthorizationProductIdString = string;
+  export interface ResaleAuthorizationProductNameFilter {
+    /**
+     * Allows filtering on the ProductName of a ResaleAuthorization with list input.
+     */
+    ValueList?: ResaleAuthorizationProductNameFilterValueList;
+    /**
+     * Allows filtering on the ProductName of a ResaleAuthorization with wild card input.
+     */
+    WildCardValue?: ResaleAuthorizationProductNameFilterWildcard;
+  }
+  export type ResaleAuthorizationProductNameFilterValueList = ResaleAuthorizationProductNameString[];
+  export type ResaleAuthorizationProductNameFilterWildcard = string;
+  export type ResaleAuthorizationProductNameString = string;
+  export interface ResaleAuthorizationResellerAccountIDFilter {
+    /**
+     * Allows filtering on the ResellerAccountID of a ResaleAuthorization with list input.
+     */
+    ValueList?: ResaleAuthorizationResellerAccountIDFilterValueList;
+    /**
+     * Allows filtering on the ResellerAccountID of a ResaleAuthorization with wild card input.
+     */
+    WildCardValue?: ResaleAuthorizationResellerAccountIDFilterWildcard;
+  }
+  export type ResaleAuthorizationResellerAccountIDFilterValueList = ResaleAuthorizationResellerAccountIDString[];
+  export type ResaleAuthorizationResellerAccountIDFilterWildcard = string;
+  export type ResaleAuthorizationResellerAccountIDString = string;
+  export interface ResaleAuthorizationResellerLegalNameFilter {
+    /**
+     * Allows filtering on the ResellerLegalNameProductName of a ResaleAuthorization with list input.
+     */
+    ValueList?: ResaleAuthorizationResellerLegalNameFilterValueList;
+    /**
+     * Allows filtering on the ResellerLegalName of a ResaleAuthorization with wild card input.
+     */
+    WildCardValue?: ResaleAuthorizationResellerLegalNameFilterWildcard;
+  }
+  export type ResaleAuthorizationResellerLegalNameFilterValueList = ResaleAuthorizationResellerLegalNameString[];
+  export type ResaleAuthorizationResellerLegalNameFilterWildcard = string;
+  export type ResaleAuthorizationResellerLegalNameString = string;
+  export interface ResaleAuthorizationSort {
+    /**
+     * Allows to sort ResaleAuthorization.
+     */
+    SortBy?: ResaleAuthorizationSortBy;
+    /**
+     * Allows to sort ResaleAuthorization.
+     */
+    SortOrder?: SortOrder;
+  }
+  export type ResaleAuthorizationSortBy = "EntityId"|"Name"|"ProductId"|"ProductName"|"ManufacturerAccountId"|"ManufacturerLegalName"|"ResellerAccountID"|"ResellerLegalName"|"Status"|"OfferExtendedStatus"|"CreatedDate"|"AvailabilityEndDate"|"LastModifiedDate"|string;
+  export interface ResaleAuthorizationStatusFilter {
+    /**
+     * Allows filtering on the Status of a ResaleAuthorization with list input.
+     */
+    ValueList?: ResaleAuthorizationStatusFilterValueList;
+  }
+  export type ResaleAuthorizationStatusFilterValueList = ResaleAuthorizationStatusString[];
+  export type ResaleAuthorizationStatusString = "Draft"|"Active"|"Restricted"|string;
+  export interface ResaleAuthorizationSummary {
+    /**
+     * The name of the ResaleAuthorization.
+     */
+    Name?: ResaleAuthorizationNameString;
+    /**
+     * The product ID of the ResaleAuthorization.
+     */
+    ProductId?: ResaleAuthorizationProductIdString;
+    /**
+     * The product name of the ResaleAuthorization.
+     */
+    ProductName?: ResaleAuthorizationProductNameString;
+    /**
+     * The manufacturer account ID of the ResaleAuthorization.
+     */
+    ManufacturerAccountId?: ResaleAuthorizationManufacturerAccountIdString;
+    /**
+     * The manufacturer legal name of the ResaleAuthorization.
+     */
+    ManufacturerLegalName?: ResaleAuthorizationManufacturerLegalNameString;
+    /**
+     * The reseller account ID of the ResaleAuthorization.
+     */
+    ResellerAccountID?: ResaleAuthorizationResellerAccountIDString;
+    /**
+     * The reseller legal name of the ResaleAuthorization
+     */
+    ResellerLegalName?: ResaleAuthorizationResellerLegalNameString;
+    /**
+     * The status of the ResaleAuthorization.
+     */
+    Status?: ResaleAuthorizationStatusString;
+    /**
+     * The offer extended status of the ResaleAuthorization
+     */
+    OfferExtendedStatus?: ResaleAuthorizationOfferExtendedStatusString;
+    /**
+     * The created date of the ResaleAuthorization.
+     */
+    CreatedDate?: DateTimeISO8601;
+    /**
+     * The availability end date of the ResaleAuthorization.
+     */
+    AvailabilityEndDate?: DateTimeISO8601;
+  }
   export type ResourceARN = string;
   export type ResourceId = string;
   export type ResourceIdList = ResourceId[];
   export type ResourcePolicyJson = string;
+  export interface SaaSProductEntityIdFilter {
+    /**
+     * A string array of unique entity id values to be filtered on.
+     */
+    ValueList?: SaaSProductEntityIdFilterValueList;
+  }
+  export type SaaSProductEntityIdFilterValueList = SaaSProductEntityIdString[];
+  export type SaaSProductEntityIdString = string;
+  export interface SaaSProductFilters {
+    /**
+     * Unique identifier for the SaaS product.
+     */
+    EntityId?: SaaSProductEntityIdFilter;
+    /**
+     * The title of the SaaS product.
+     */
+    ProductTitle?: SaaSProductTitleFilter;
+    /**
+     * The visibility of the SaaS product.
+     */
+    Visibility?: SaaSProductVisibilityFilter;
+    /**
+     * The last date on which the SaaS product was modified.
+     */
+    LastModifiedDate?: SaaSProductLastModifiedDateFilter;
+  }
+  export interface SaaSProductLastModifiedDateFilter {
+    /**
+     * Dates between which the SaaS product was last modified.
+     */
+    DateRange?: SaaSProductLastModifiedDateFilterDateRange;
+  }
+  export interface SaaSProductLastModifiedDateFilterDateRange {
+    /**
+     * Date after which the SaaS product was last modified.
+     */
+    AfterValue?: DateTimeISO8601;
+    /**
+     * Date before which the SaaS product was last modified.
+     */
+    BeforeValue?: DateTimeISO8601;
+  }
+  export interface SaaSProductSort {
+    /**
+     * Field to sort the SaaS products by.
+     */
+    SortBy?: SaaSProductSortBy;
+    /**
+     * The sorting order. Can be ASCENDING or DESCENDING. The default value is DESCENDING.
+     */
+    SortOrder?: SortOrder;
+  }
+  export type SaaSProductSortBy = "EntityId"|"ProductTitle"|"Visibility"|"LastModifiedDate"|string;
+  export interface SaaSProductSummary {
+    /**
+     * The title of the SaaS product.
+     */
+    ProductTitle?: SaaSProductTitleString;
+    /**
+     * The lifecycle of the SaaS product.
+     */
+    Visibility?: SaaSProductVisibilityString;
+  }
+  export interface SaaSProductTitleFilter {
+    /**
+     * A string array of unique product title values to be filtered on.
+     */
+    ValueList?: SaaSProductTitleFilterValueList;
+    /**
+     * A string that will be the wildCard input for product tile filter. It matches the provided value as a substring in the actual value.
+     */
+    WildCardValue?: SaaSProductTitleString;
+  }
+  export type SaaSProductTitleFilterValueList = SaaSProductTitleString[];
+  export type SaaSProductTitleString = string;
+  export interface SaaSProductVisibilityFilter {
+    /**
+     * A string array of unique visibility values to be filtered on.
+     */
+    ValueList?: SaaSProductVisibilityFilterValueList;
+  }
+  export type SaaSProductVisibilityFilterValueList = SaaSProductVisibilityString[];
+  export type SaaSProductVisibilityString = "Limited"|"Public"|"Restricted"|"Draft"|string;
   export interface Sort {
     /**
      * For ListEntities, supported attributes include LastModifiedDate (default) and EntityId. In addition to LastModifiedDate and EntityId, each EntityType might support additional fields. For ListChangeSets, supported attributes include StartTime and EndTime.

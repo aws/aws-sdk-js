@@ -1396,5 +1396,13 @@
   },
   "cleanroomsml": {
     "name": "CleanRoomsML"
+  },
+  "marketplaceagreement": {
+    "prefix": "marketplace-agreement",
+    "name": "MarketplaceAgreement"
+  },
+  "marketplacedeployment": {
+    "prefix": "marketplace-deployment",
+    "name": "MarketplaceDeployment"
   }
 }

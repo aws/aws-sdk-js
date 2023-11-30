@@ -372,5 +372,7 @@ module.exports = {
   BedrockAgentRuntime: require('./bedrockagentruntime'),
   QBusiness: require('./qbusiness'),
   QConnect: require('./qconnect'),
-  CleanRoomsML: require('./cleanroomsml')
+  CleanRoomsML: require('./cleanroomsml'),
+  MarketplaceAgreement: require('./marketplaceagreement'),
+  MarketplaceDeployment: require('./marketplacedeployment')
 };
