@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1508.0-->
+<!--LATEST=2.1509.0-->
 <!--ENTRYINSERT-->
+
+## 2.1509.0
+* feature: ARCZonalShift: This release adds a new capability, zonal autoshift. You can configure zonal autoshift so that AWS shifts traffic for a resource away from an Availability Zone, on your behalf, when AWS determines that there is an issue that could potentially affect customers in the Availability Zone.
+* feature: Glue: Adds observation and analyzer support to the GetDataQualityResult and BatchGetDataQualityResult APIs.
+* feature: SageMaker: This release adds support for 1/ Code Editor, based on Code-OSS, Visual Studio Code Open Source, a new fully managed IDE option in SageMaker Studio  2/ JupyterLab, a new fully managed JupyterLab IDE experience in SageMaker Studio
 
 ## 2.1508.0
 * feature: MarketplaceAgreement: The AWS Marketplace Agreement Service provides an API interface that helps AWS Marketplace sellers manage their agreements, including listing, filtering, and viewing details about their agreements.

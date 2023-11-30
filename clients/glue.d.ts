@@ -4998,6 +4998,25 @@ declare namespace Glue {
     DataLakePrincipalIdentifier?: DataLakePrincipalString;
   }
   export type DataLakePrincipalString = string;
+  export interface DataQualityAnalyzerResult {
+    /**
+     * The name of the data quality analyzer.
+     */
+    Name?: NameString;
+    /**
+     * A description of the data quality analyzer.
+     */
+    Description?: DataQualityRuleResultDescription;
+    /**
+     * An evaluation message.
+     */
+    EvaluationMessage?: DataQualityRuleResultDescription;
+    /**
+     * A map of metrics associated with the evaluation of the analyzer.
+     */
+    EvaluatedMetrics?: EvaluatedMetricsMap;
+  }
+  export type DataQualityAnalyzerResults = DataQualityAnalyzerResult[];
   export interface DataQualityEvaluationRunAdditionalRunOptions {
     /**
      * Whether or not to enable CloudWatch metrics.
@@ -5008,6 +5027,36 @@ declare namespace Glue {
      */
     ResultsS3Prefix?: UriString;
   }
+  export interface DataQualityMetricValues {
+    /**
+     * The actual value of the data quality metric.
+     */
+    ActualValue?: NullableDouble;
+    /**
+     * The expected value of the data quality metric according to the analysis of historical data.
+     */
+    ExpectedValue?: NullableDouble;
+    /**
+     * The lower limit of the data quality metric value according to the analysis of historical data.
+     */
+    LowerLimit?: NullableDouble;
+    /**
+     * The upper limit of the data quality metric value according to the analysis of historical data.
+     */
+    UpperLimit?: NullableDouble;
+  }
+  export interface DataQualityObservation {
+    /**
+     * A description of the data quality observation.
+     */
+    Description?: DataQualityObservationDescription;
+    /**
+     * An object of type MetricBasedObservation representing the observation that is based on evaluated data quality metrics.
+     */
+    MetricBasedObservation?: MetricBasedObservation;
+  }
+  export type DataQualityObservationDescription = string;
+  export type DataQualityObservations = DataQualityObservation[];
   export interface DataQualityResult {
     /**
      * A unique result ID for the data quality result.
@@ -5053,6 +5102,14 @@ declare namespace Glue {
      * A list of DataQualityRuleResult objects representing the results for each rule. 
      */
     RuleResults?: DataQualityRuleResults;
+    /**
+     * A list of DataQualityAnalyzerResult objects representing the results for each analyzer. 
+     */
+    AnalyzerResults?: DataQualityAnalyzerResults;
+    /**
+     * A list of DataQualityObservation objects representing the observations generated after evaluating the rules and analyzers. 
+     */
+    Observations?: DataQualityObservations;
   }
   export interface DataQualityResultDescription {
     /**
@@ -5143,11 +5200,11 @@ declare namespace Glue {
     /**
      * A description of the data quality rule.
      */
-    Description?: DescriptionString;
+    Description?: DataQualityRuleResultDescription;
     /**
      * An evaluation message.
      */
-    EvaluationMessage?: DescriptionString;
+    EvaluationMessage?: DataQualityRuleResultDescription;
     /**
      * A pass or fail status for the rule.
      */
@@ -5157,6 +5214,7 @@ declare namespace Glue {
      */
     EvaluatedMetrics?: EvaluatedMetricsMap;
   }
+  export type DataQualityRuleResultDescription = string;
   export type DataQualityRuleResultStatus = "PASS"|"FAIL"|"ERROR"|string;
   export type DataQualityRuleResults = DataQualityRuleResult[];
   export interface DataQualityRulesetEvaluationRunDescription {
@@ -6874,6 +6932,14 @@ declare namespace Glue {
      * A list of DataQualityRuleResult objects representing the results for each rule. 
      */
     RuleResults?: DataQualityRuleResults;
+    /**
+     * A list of DataQualityAnalyzerResult objects representing the results for each analyzer. 
+     */
+    AnalyzerResults?: DataQualityAnalyzerResults;
+    /**
+     * A list of DataQualityObservation objects representing the observations generated after evaluating the rules and analyzers. 
+     */
+    Observations?: DataQualityObservations;
   }
   export interface GetDataQualityRuleRecommendationRunRequest {
     /**
@@ -10111,6 +10177,20 @@ declare namespace Glue {
   export type MetadataList = MetadataKeyValuePair[];
   export type MetadataOperation = "CREATE"|string;
   export type MetadataValueString = string;
+  export interface MetricBasedObservation {
+    /**
+     * The name of the data quality metric used for generating the observation.
+     */
+    MetricName?: NameString;
+    /**
+     * An object of type DataQualityMetricValues representing the analysis of the data quality metric value.
+     */
+    MetricValues?: DataQualityMetricValues;
+    /**
+     * A list of new data quality rules generated as part of the observation based on the data quality metric value.
+     */
+    NewRules?: NewRules;
+  }
   export interface MicrosoftSQLServerCatalogSource {
     /**
      * The name of the data source.
@@ -10193,6 +10273,7 @@ declare namespace Glue {
   }
   export type NameString = string;
   export type NameStringList = NameString[];
+  export type NewRules = NameString[];
   export interface Node {
     /**
      * The type of Glue component represented by the node.

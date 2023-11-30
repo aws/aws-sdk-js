@@ -2956,6 +2956,7 @@ declare namespace SageMaker {
      * The name of the space.
      */
     SpaceName?: SpaceName;
+    ResourceSpec?: ResourceSpec;
   }
   export type AppImageConfigArn = string;
   export interface AppImageConfigDetails {
@@ -2979,6 +2980,10 @@ declare namespace SageMaker {
      * The configuration for the file system and kernels in the SageMaker image.
      */
     KernelGatewayImageConfig?: KernelGatewayImageConfig;
+    /**
+     * The configuration for the file system and the runtime, such as the environment variables and entry point.
+     */
+    JupyterLabAppImageConfig?: JupyterLabAppImageConfig;
   }
   export type AppImageConfigList = AppImageConfigDetails[];
   export type AppImageConfigName = string;
@@ -3005,7 +3010,7 @@ declare namespace SageMaker {
     ContainerArguments?: ContainerArguments;
   }
   export type AppStatus = "Deleted"|"Deleting"|"Failed"|"InService"|"Pending"|string;
-  export type AppType = "JupyterServer"|"KernelGateway"|"TensorBoard"|"RStudioServerPro"|"RSessionGateway"|string;
+  export type AppType = "JupyterServer"|"KernelGateway"|"TensorBoard"|"RStudioServerPro"|"RSessionGateway"|"JupyterLab"|"CodeEditor"|string;
   export type ApprovalDescription = string;
   export type ArnOrName = string;
   export type ArtifactArn = string;
@@ -4279,6 +4284,13 @@ declare namespace SageMaker {
     ClusterStatus: ClusterStatus;
   }
   export type ClusterThreadsPerCore = number;
+  export interface CodeEditorAppSettings {
+    DefaultResourceSpec?: ResourceSpec;
+    /**
+     * The Amazon Resource Name (ARN) of the Code Editor application lifecycle configuration.
+     */
+    LifecycleConfigArns?: LifecycleConfigArns;
+  }
   export type CodeRepositories = CodeRepository[];
   export interface CodeRepository {
     /**
@@ -4425,6 +4437,20 @@ declare namespace SageMaker {
   export type ConfigValue = string;
   export type ContainerArgument = string;
   export type ContainerArguments = ContainerArgument[];
+  export interface ContainerConfig {
+    /**
+     * The arguments for the container when you're running the application.
+     */
+    ContainerArguments?: CustomImageContainerArguments;
+    /**
+     * The entrypoint used to run the application in the container.
+     */
+    ContainerEntrypoint?: CustomImageContainerEntrypoint;
+    /**
+     * The environment variables to set in the container
+     */
+    ContainerEnvironmentVariables?: CustomImageContainerEnvironmentVariables;
+  }
   export interface ContainerDefinition {
     /**
      * This parameter is ignored for models that contain only a PrimaryContainer. When a ContainerDefinition is part of an inference pipeline, the value of the parameter uniquely identifies the container for the purposes of logging and metrics. For information, see Use Logs and Metrics to Monitor an Inference Pipeline. If you don't specify a value for this parameter for a ContainerDefinition that is part of an inference pipeline, a unique name is automatically assigned based on the position of the ContainerDefinition in the pipeline. If you specify a value for the ContainerHostName for any ContainerDefinition that is part of an inference pipeline, you must specify a value for the ContainerHostName parameter of every ContainerDefinition in that pipeline.
@@ -4643,6 +4669,10 @@ declare namespace SageMaker {
      * The KernelGatewayImageConfig. You can only specify one image kernel in the AppImageConfig API. This kernel will be shown to users before the image starts. Once the image runs, all kernels are visible in JupyterLab.
      */
     KernelGatewayImageConfig?: KernelGatewayImageConfig;
+    /**
+     * The JupyterLabAppImageConfig. You can only specify one image kernel in the AppImageConfig API. This kernel is shown to users before the image starts. After the image runs, all kernels are visible in JupyterLab.
+     */
+    JupyterLabAppImageConfig?: JupyterLabAppImageConfig;
   }
   export interface CreateAppImageConfigResponse {
     /**
@@ -6237,6 +6267,18 @@ declare namespace SageMaker {
      * A collection of space settings.
      */
     SpaceSettings?: SpaceSettings;
+    /**
+     * The name of the space that appears in the SageMaker Studio UI.
+     */
+    SpaceDisplayName?: NonEmptyString64;
+    /**
+     * A collection of ownership settings.
+     */
+    OwnershipSettings?: OwnershipSettings;
+    /**
+     * A collection of space sharing settings.
+     */
+    SpaceSharingSettings?: SpaceSharingSettings;
   }
   export interface CreateSpaceResponse {
     /**
@@ -6584,6 +6626,20 @@ declare namespace SageMaker {
   export type CrossAccountFilterOption = "SameAccount"|"CrossAccount"|string;
   export type CsvContentType = string;
   export type CsvContentTypes = CsvContentType[];
+  export interface CustomFileSystem {
+    /**
+     * A custom file system in Amazon EFS.
+     */
+    EFSFileSystem?: EFSFileSystem;
+  }
+  export interface CustomFileSystemConfig {
+    /**
+     * The settings for a custom Amazon EFS file system.
+     */
+    EFSFileSystemConfig?: EFSFileSystemConfig;
+  }
+  export type CustomFileSystemConfigs = CustomFileSystemConfig[];
+  export type CustomFileSystems = CustomFileSystem[];
   export interface CustomImage {
     /**
      * The name of the CustomImage. Must be unique to your account.
@@ -6598,7 +6654,20 @@ declare namespace SageMaker {
      */
     AppImageConfigName: AppImageConfigName;
   }
+  export type CustomImageContainerArguments = NonEmptyString64[];
+  export type CustomImageContainerEntrypoint = NonEmptyString256[];
+  export type CustomImageContainerEnvironmentVariables = {[key: string]: String256};
   export type CustomImages = CustomImage[];
+  export interface CustomPosixUserConfig {
+    /**
+     * The POSIX user ID.
+     */
+    Uid: Uid;
+    /**
+     * The POSIX group ID.
+     */
+    Gid: Gid;
+  }
   export type CustomerMetadataKey = string;
   export type CustomerMetadataKeyList = CustomerMetadataKey[];
   export type CustomerMetadataMap = {[key: string]: CustomerMetadataValue};
@@ -6837,6 +6906,16 @@ declare namespace SageMaker {
     LastModifiedTime?: Timestamp;
   }
   export type DebugRuleEvaluationStatuses = DebugRuleEvaluationStatus[];
+  export interface DefaultEbsStorageSettings {
+    /**
+     * The default size of the EBS storage volume for a private space.
+     */
+    DefaultEbsVolumeSizeInGb: SpaceEbsVolumeSizeInGb;
+    /**
+     * The maximum size of the EBS storage volume for a private space.
+     */
+    MaximumEbsVolumeSizeInGb: SpaceEbsVolumeSizeInGb;
+  }
   export type DefaultGid = number;
   export interface DefaultSpaceSettings {
     /**
@@ -6849,6 +6928,12 @@ declare namespace SageMaker {
     SecurityGroups?: SecurityGroupIds;
     JupyterServerAppSettings?: JupyterServerAppSettings;
     KernelGatewayAppSettings?: KernelGatewayAppSettings;
+  }
+  export interface DefaultSpaceStorageSettings {
+    /**
+     * The default EBS storage settings for a private space.
+     */
+    DefaultEbsStorageSettings?: DefaultEbsStorageSettings;
   }
   export type DefaultUid = number;
   export interface DeleteActionRequest {
@@ -7505,6 +7590,10 @@ declare namespace SageMaker {
      * The configuration of a KernelGateway app.
      */
     KernelGatewayImageConfig?: KernelGatewayImageConfig;
+    /**
+     * The configuration of the JupyterLab app.
+     */
+    JupyterLabAppImageConfig?: JupyterLabAppImageConfig;
   }
   export interface DescribeAppRequest {
     /**
@@ -10256,6 +10345,18 @@ declare namespace SageMaker {
      * Returns the URL of the space. If the space is created with Amazon Web Services IAM Identity Center (Successor to Amazon Web Services Single Sign-On) authentication, users can navigate to the URL after appending the respective redirect parameter for the application type to be federated through Amazon Web Services IAM Identity Center. The following application types are supported:   Studio Classic: &amp;redirect=JupyterServer    JupyterLab: &amp;redirect=JupyterLab   
      */
     Url?: String1024;
+    /**
+     * The name of the space that appears in the Amazon SageMaker Studio UI.
+     */
+    SpaceDisplayName?: NonEmptyString64;
+    /**
+     * The collection of ownership settings for a space.
+     */
+    OwnershipSettings?: OwnershipSettings;
+    /**
+     * The collection of space sharing settings for a space.
+     */
+    SpaceSharingSettings?: SpaceSharingSettings;
   }
   export interface DescribeStudioLifecycleConfigRequest {
     /**
@@ -11120,6 +11221,22 @@ declare namespace SageMaker {
      */
     ScalingPolicies?: ScalingPolicies;
   }
+  export interface EFSFileSystem {
+    /**
+     * The ID of your Amazon EFS file system.
+     */
+    FileSystemId: FileSystemId;
+  }
+  export interface EFSFileSystemConfig {
+    /**
+     * The ID of your Amazon EFS file system.
+     */
+    FileSystemId: FileSystemId;
+    /**
+     * The path to the file system directory that is accessible in Amazon SageMaker Studio. Permitted users can access only this directory and below.
+     */
+    FileSystemPath?: FileSystemPath;
+  }
   export interface EMRStepMetadata {
     /**
      * The identifier of the EMR cluster.
@@ -11137,6 +11254,12 @@ declare namespace SageMaker {
      * The path to the log file where the cluster step's failure root cause is recorded.
      */
     LogFilePath?: String1024;
+  }
+  export interface EbsStorageSettings {
+    /**
+     * The size of an EBS storage volume for a private space.
+     */
+    EbsVolumeSizeInGb: SpaceEbsVolumeSizeInGb;
   }
   export interface Edge {
     /**
@@ -11936,6 +12059,7 @@ declare namespace SageMaker {
     DirectoryPath: DirectoryPath;
   }
   export type FileSystemId = string;
+  export type FileSystemPath = string;
   export type FileSystemType = "EFS"|"FSxLustre"|string;
   export type FillingTransformationMap = {[key: string]: FillingTransformationValue};
   export type FillingTransformationValue = string;
@@ -12186,6 +12310,7 @@ declare namespace SageMaker {
      */
     PropertyNameSuggestions?: PropertyNameSuggestionList;
   }
+  export type Gid = number;
   export interface GitConfig {
     /**
      * The URL where the Git repository is located.
@@ -13508,6 +13633,24 @@ declare namespace SageMaker {
   export type JsonContentType = string;
   export type JsonContentTypes = JsonContentType[];
   export type JsonPath = string;
+  export interface JupyterLabAppImageConfig {
+    ContainerConfig?: ContainerConfig;
+  }
+  export interface JupyterLabAppSettings {
+    DefaultResourceSpec?: ResourceSpec;
+    /**
+     * A list of custom SageMaker images that are configured to run as a JupyterLab app.
+     */
+    CustomImages?: CustomImages;
+    /**
+     * The Amazon Resource Name (ARN) of the lifecycle configurations attached to the user profile or domain. To remove a lifecycle config, you must set LifecycleConfigArns to an empty list.
+     */
+    LifecycleConfigArns?: LifecycleConfigArns;
+    /**
+     * A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterLab application.
+     */
+    CodeRepositories?: CodeRepositories;
+  }
   export interface JupyterServerAppSettings {
     /**
      * The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the JupyterServer app. If you use the LifecycleConfigArns parameter, then this parameter is also required.
@@ -18722,6 +18865,8 @@ declare namespace SageMaker {
   }
   export type NetworkInterfaceId = string;
   export type NextToken = string;
+  export type NonEmptyString256 = string;
+  export type NonEmptyString64 = string;
   export type NotebookInstanceAcceleratorType = "ml.eia1.medium"|"ml.eia1.large"|"ml.eia1.xlarge"|"ml.eia2.medium"|"ml.eia2.large"|"ml.eia2.xlarge"|string;
   export type NotebookInstanceAcceleratorTypes = NotebookInstanceAcceleratorType[];
   export type NotebookInstanceArn = string;
@@ -19019,6 +19164,18 @@ declare namespace SageMaker {
     Value: String1024;
   }
   export type OutputParameterList = OutputParameter[];
+  export interface OwnershipSettings {
+    /**
+     * The user profile who is the owner of the private space.
+     */
+    OwnerUserProfileName: UserProfileName;
+  }
+  export interface OwnershipSettingsSummary {
+    /**
+     * The user profile who is the owner of the private space.
+     */
+    OwnerUserProfileName?: UserProfileName;
+  }
   export type PaginationToken = string;
   export interface ParallelismConfiguration {
     /**
@@ -21198,6 +21355,7 @@ declare namespace SageMaker {
      */
     S3KmsKeyId?: KmsKeyId;
   }
+  export type SharingType = "Private"|"Shared"|string;
   export interface ShuffleConfig {
     /**
      * Determines the shuffling order in ShuffleConfig value.
@@ -21247,6 +21405,9 @@ declare namespace SageMaker {
   export type SourceType = string;
   export type SourceUri = string;
   export type SpaceArn = string;
+  export interface SpaceCodeEditorAppSettings {
+    DefaultResourceSpec?: ResourceSpec;
+  }
   export interface SpaceDetails {
     /**
      * The ID of the associated Domain.
@@ -21268,15 +21429,87 @@ declare namespace SageMaker {
      * The last modified time.
      */
     LastModifiedTime?: LastModifiedTime;
+    /**
+     * The name of the space that appears in the Studio UI.
+     */
+    SpaceDisplayName?: NonEmptyString64;
+    /**
+     * Specifies summary information about the space settings.
+     */
+    SpaceSettingsSummary?: SpaceSettingsSummary;
+    /**
+     * Specifies summary information about the space sharing settings.
+     */
+    SpaceSharingSettingsSummary?: SpaceSharingSettingsSummary;
+    /**
+     * Specifies summary information about the ownership settings.
+     */
+    OwnershipSettingsSummary?: OwnershipSettingsSummary;
+  }
+  export type SpaceEbsVolumeSizeInGb = number;
+  export interface SpaceJupyterLabAppSettings {
+    DefaultResourceSpec?: ResourceSpec;
+    /**
+     * A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterLab application.
+     */
+    CodeRepositories?: CodeRepositories;
   }
   export type SpaceList = SpaceDetails[];
   export type SpaceName = string;
   export interface SpaceSettings {
     JupyterServerAppSettings?: JupyterServerAppSettings;
     KernelGatewayAppSettings?: KernelGatewayAppSettings;
+    /**
+     * The settings for the JupyterLab application.
+     */
+    JupyterLabAppSettings?: SpaceJupyterLabAppSettings;
+    /**
+     * The Code Editor application settings.
+     */
+    CodeEditorAppSettings?: SpaceCodeEditorAppSettings;
+    /**
+     * The storage settings for a private space.
+     */
+    SpaceStorageSettings?: SpaceStorageSettings;
+    /**
+     * The type of app created within the space.
+     */
+    AppType?: AppType;
+    /**
+     * A file system, created by you, that you assign to a space for an Amazon SageMaker Domain. Permitted users can access this file system in Amazon SageMaker Studio.
+     */
+    CustomFileSystems?: CustomFileSystems;
+  }
+  export interface SpaceSettingsSummary {
+    /**
+     * The type of app created within the space.
+     */
+    AppType?: AppType;
+    /**
+     * The storage settings for a private space.
+     */
+    SpaceStorageSettings?: SpaceStorageSettings;
+  }
+  export interface SpaceSharingSettings {
+    /**
+     * Specifies the sharing type of the space.
+     */
+    SharingType: SharingType;
+  }
+  export interface SpaceSharingSettingsSummary {
+    /**
+     * Specifies the sharing type of the space.
+     */
+    SharingType?: SharingType;
   }
   export type SpaceSortKey = "CreationTime"|"LastModifiedTime"|string;
   export type SpaceStatus = "Deleting"|"Failed"|"InService"|"Pending"|"Updating"|"Update_Failed"|"Delete_Failed"|string;
+  export interface SpaceStorageSettings {
+    /**
+     * A collection of EBS storage settings for a private space.
+     */
+    EbsStorageSettings?: EbsStorageSettings;
+  }
   export type SpawnRate = number;
   export type SplitType = "None"|"Line"|"RecordIO"|"TFRecord"|string;
   export type StageStatus = "CREATING"|"READYTODEPLOY"|"STARTING"|"INPROGRESS"|"DEPLOYED"|"FAILED"|"STOPPING"|"STOPPED"|string;
@@ -21517,7 +21750,7 @@ declare namespace SageMaker {
   export type String64 = string;
   export type String8192 = string;
   export type StringParameterValue = string;
-  export type StudioLifecycleConfigAppType = "JupyterServer"|"KernelGateway"|string;
+  export type StudioLifecycleConfigAppType = "JupyterServer"|"KernelGateway"|"JupyterLab"|"CodeEditor"|string;
   export type StudioLifecycleConfigArn = string;
   export type StudioLifecycleConfigContent = string;
   export interface StudioLifecycleConfigDetails {
@@ -22736,6 +22969,7 @@ declare namespace SageMaker {
      */
     ContentSha256?: TemplateContentSha256;
   }
+  export type Uid = number;
   export interface UpdateActionRequest {
     /**
      * The name of the action to update.
@@ -22773,6 +23007,10 @@ declare namespace SageMaker {
      * The new KernelGateway app to run on the image.
      */
     KernelGatewayImageConfig?: KernelGatewayImageConfig;
+    /**
+     * The JupyterLab app running on the image.
+     */
+    JupyterLabAppImageConfig?: JupyterLabAppImageConfig;
   }
   export interface UpdateAppImageConfigResponse {
     /**
@@ -23483,6 +23721,10 @@ declare namespace SageMaker {
      * A collection of space settings.
      */
     SpaceSettings?: SpaceSettings;
+    /**
+     * The name of the space that appears in the Amazon SageMaker Studio UI.
+     */
+    SpaceDisplayName?: NonEmptyString64;
   }
   export interface UpdateSpaceResponse {
     /**
@@ -23734,6 +23976,18 @@ declare namespace SageMaker {
      */
     CanvasAppSettings?: CanvasAppSettings;
     /**
+     * The settings for the JupyterLab application.
+     */
+    JupyterLabAppSettings?: JupyterLabAppSettings;
+    /**
+     * The Code Editor application settings.
+     */
+    CodeEditorAppSettings?: CodeEditorAppSettings;
+    /**
+     * The storage settings for a private space.
+     */
+    SpaceStorageSettings?: DefaultSpaceStorageSettings;
+    /**
      * The default experience that the user is directed to when accessing the domain. The supported values are:    studio::: Indicates that Studio is the default experience. This value can only be passed if StudioWebPortal is set to ENABLED.    app:JupyterServer:: Indicates that Studio Classic is the default experience.  
      */
     DefaultLandingUri?: LandingUri;
@@ -23741,6 +23995,14 @@ declare namespace SageMaker {
      * Whether the user can access Studio. If this value is set to DISABLED, the user cannot access Studio, even if that is the default experience for the domain.
      */
     StudioWebPortal?: StudioWebPortal;
+    /**
+     * Details about the POSIX identity that is used for file system operations.
+     */
+    CustomPosixUserConfig?: CustomPosixUserConfig;
+    /**
+     * The settings for assigning a custom file system to a user profile. Permitted users can access this file system in Amazon SageMaker Studio.
+     */
+    CustomFileSystemConfigs?: CustomFileSystemConfigs;
   }
   export type UsersPerStep = number;
   export type UtilizationMetric = number;
