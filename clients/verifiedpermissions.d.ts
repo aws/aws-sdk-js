@@ -12,11 +12,11 @@ declare class VerifiedPermissions extends Service {
   constructor(options?: VerifiedPermissions.Types.ClientConfiguration)
   config: Config & VerifiedPermissions.Types.ClientConfiguration;
   /**
-   * Makes a series of decisions about multiple authorization requests for one principal or resource. Each request contains the equivalent content of an IsAuthorized request: principal, action, resource, and context. Either the principal or the resource parameter must be identical across all requests. For example, Verified Permissions won't evaluate a pair of requests where bob views photo1 and alice views photo2. Authorization of bob to view photo1 and photo2, or bob and alice to view photo1, are valid batches.  The request is evaluated against all policies in the specified policy store that match the entities that you declare. The result of the decisions is a series of Allow or Deny responses, along with the IDs of the policies that produced each decision. The entities of a BatchIsAuthorized API request can contain up to 100 principals and up to 100 resources. The requests of a BatchIsAuthorized API request can contain up to 30 requests.
+   * Makes a series of decisions about multiple authorization requests for one principal or resource. Each request contains the equivalent content of an IsAuthorized request: principal, action, resource, and context. Either the principal or the resource parameter must be identical across all requests. For example, Verified Permissions won't evaluate a pair of requests where bob views photo1 and alice views photo2. Authorization of bob to view photo1 and photo2, or bob and alice to view photo1, are valid batches.  The request is evaluated against all policies in the specified policy store that match the entities that you declare. The result of the decisions is a series of Allow or Deny responses, along with the IDs of the policies that produced each decision. The entities of a BatchIsAuthorized API request can contain up to 100 principals and up to 100 resources. The requests of a BatchIsAuthorized API request can contain up to 30 requests.  The BatchIsAuthorized operation doesn't have its own IAM permission. To authorize this operation for Amazon Web Services principals, include the permission verifiedpermissions:IsAuthorized in their IAM policies. 
    */
   batchIsAuthorized(params: VerifiedPermissions.Types.BatchIsAuthorizedInput, callback?: (err: AWSError, data: VerifiedPermissions.Types.BatchIsAuthorizedOutput) => void): Request<VerifiedPermissions.Types.BatchIsAuthorizedOutput, AWSError>;
   /**
-   * Makes a series of decisions about multiple authorization requests for one principal or resource. Each request contains the equivalent content of an IsAuthorized request: principal, action, resource, and context. Either the principal or the resource parameter must be identical across all requests. For example, Verified Permissions won't evaluate a pair of requests where bob views photo1 and alice views photo2. Authorization of bob to view photo1 and photo2, or bob and alice to view photo1, are valid batches.  The request is evaluated against all policies in the specified policy store that match the entities that you declare. The result of the decisions is a series of Allow or Deny responses, along with the IDs of the policies that produced each decision. The entities of a BatchIsAuthorized API request can contain up to 100 principals and up to 100 resources. The requests of a BatchIsAuthorized API request can contain up to 30 requests.
+   * Makes a series of decisions about multiple authorization requests for one principal or resource. Each request contains the equivalent content of an IsAuthorized request: principal, action, resource, and context. Either the principal or the resource parameter must be identical across all requests. For example, Verified Permissions won't evaluate a pair of requests where bob views photo1 and alice views photo2. Authorization of bob to view photo1 and photo2, or bob and alice to view photo1, are valid batches.  The request is evaluated against all policies in the specified policy store that match the entities that you declare. The result of the decisions is a series of Allow or Deny responses, along with the IDs of the policies that produced each decision. The entities of a BatchIsAuthorized API request can contain up to 100 principals and up to 100 resources. The requests of a BatchIsAuthorized API request can contain up to 30 requests.  The BatchIsAuthorized operation doesn't have its own IAM permission. To authorize this operation for Amazon Web Services principals, include the permission verifiedpermissions:IsAuthorized in their IAM policies. 
    */
   batchIsAuthorized(callback?: (err: AWSError, data: VerifiedPermissions.Types.BatchIsAuthorizedOutput) => void): Request<VerifiedPermissions.Types.BatchIsAuthorizedOutput, AWSError>;
   /**
@@ -425,6 +425,10 @@ declare namespace VerifiedPermissions {
      * Specifies the validation setting for this policy store. Currently, the only valid and required value is Mode.  We recommend that you turn on STRICT mode only after you define a schema. If a schema doesn't exist, then STRICT mode causes any policy to fail validation, and Verified Permissions rejects the policy. You can turn off validation by using the UpdatePolicyStore. Then, when you have a schema defined, use UpdatePolicyStore again to turn validation back on. 
      */
     validationSettings: ValidationSettings;
+    /**
+     * Descriptive text that you can provide to help with identification of the current policy store.
+     */
+    description?: PolicyStoreDescription;
   }
   export interface CreatePolicyStoreOutput {
     /**
@@ -691,6 +695,10 @@ declare namespace VerifiedPermissions {
      * The date and time that the policy store was last updated.
      */
     lastUpdatedDate: TimestampFormat;
+    /**
+     * Descriptive text that you can provide to help with identification of the current policy store.
+     */
+    description?: PolicyStoreDescription;
   }
   export interface GetPolicyTemplateInput {
     /**
@@ -751,6 +759,10 @@ declare namespace VerifiedPermissions {
      * The date and time that the schema was most recently updated.
      */
     lastUpdatedDate: TimestampFormat;
+    /**
+     * The namespaces of the entities referenced by this schema.
+     */
+    namespaces?: NamespaceList;
   }
   export type IdempotencyToken = string;
   export interface IdentitySourceDetails {
@@ -1101,6 +1113,7 @@ declare namespace VerifiedPermissions {
   }
   export type PolicyList = PolicyItem[];
   export type PolicyStatement = string;
+  export type PolicyStoreDescription = string;
   export type PolicyStoreId = string;
   export interface PolicyStoreItem {
     /**
@@ -1115,6 +1128,14 @@ declare namespace VerifiedPermissions {
      * The date and time the policy was created.
      */
     createdDate: TimestampFormat;
+    /**
+     * The date and time the policy store was most recently updated.
+     */
+    lastUpdatedDate?: TimestampFormat;
+    /**
+     * Descriptive text that you can provide to help with identification of the current policy store.
+     */
+    description?: PolicyStoreDescription;
   }
   export type PolicyStoreList = PolicyStoreItem[];
   export type PolicyTemplateDescription = string;
@@ -1366,6 +1387,10 @@ declare namespace VerifiedPermissions {
      * A structure that defines the validation settings that want to enable for the policy store.
      */
     validationSettings: ValidationSettings;
+    /**
+     * Descriptive text that you can provide to help with identification of the current policy store.
+     */
+    description?: PolicyStoreDescription;
   }
   export interface UpdatePolicyStoreOutput {
     /**

@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1509.0-->
+<!--LATEST=2.1510.0-->
 <!--ENTRYINSERT-->
+
+## 2.1510.0
+* feature: QConnect: This release adds the PutFeedback API and allows providing feedback against the specified assistant for the specified target.
+* feature: Rbin: Added resource identifier in the output and updated error handling.
+* feature: VerifiedPermissions: Adds description field to PolicyStore API's and namespaces field to GetSchema.
 
 ## 2.1509.0
 * feature: ARCZonalShift: This release adds a new capability, zonal autoshift. You can configure zonal autoshift so that AWS shifts traffic for a resource away from an Availability Zone, on your behalf, when AWS determines that there is an issue that could potentially affect customers in the Availability Zone.

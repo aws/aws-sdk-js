@@ -44,11 +44,11 @@ declare class QConnect extends Service {
    */
   createKnowledgeBase(callback?: (err: AWSError, data: QConnect.Types.CreateKnowledgeBaseResponse) => void): Request<QConnect.Types.CreateKnowledgeBaseResponse, AWSError>;
   /**
-   * Creates a Amazon Q quick response.
+   * Creates an Amazon Q quick response.
    */
   createQuickResponse(params: QConnect.Types.CreateQuickResponseRequest, callback?: (err: AWSError, data: QConnect.Types.CreateQuickResponseResponse) => void): Request<QConnect.Types.CreateQuickResponseResponse, AWSError>;
   /**
-   * Creates a Amazon Q quick response.
+   * Creates an Amazon Q quick response.
    */
   createQuickResponse(callback?: (err: AWSError, data: QConnect.Types.CreateQuickResponseResponse) => void): Request<QConnect.Types.CreateQuickResponseResponse, AWSError>;
   /**
@@ -244,6 +244,14 @@ declare class QConnect extends Service {
    */
   notifyRecommendationsReceived(callback?: (err: AWSError, data: QConnect.Types.NotifyRecommendationsReceivedResponse) => void): Request<QConnect.Types.NotifyRecommendationsReceivedResponse, AWSError>;
   /**
+   * Provides feedback against the specified assistant for the specified target. This API only supports generative targets.
+   */
+  putFeedback(params: QConnect.Types.PutFeedbackRequest, callback?: (err: AWSError, data: QConnect.Types.PutFeedbackResponse) => void): Request<QConnect.Types.PutFeedbackResponse, AWSError>;
+  /**
+   * Provides feedback against the specified assistant for the specified target. This API only supports generative targets.
+   */
+  putFeedback(callback?: (err: AWSError, data: QConnect.Types.PutFeedbackResponse) => void): Request<QConnect.Types.PutFeedbackResponse, AWSError>;
+  /**
    * Performs a manual search against the specified assistant. To retrieve recommendations for an assistant, use GetRecommendations. 
    */
   queryAssistant(params: QConnect.Types.QueryAssistantRequest, callback?: (err: AWSError, data: QConnect.Types.QueryAssistantResponse) => void): Request<QConnect.Types.QueryAssistantResponse, AWSError>;
@@ -268,11 +276,11 @@ declare class QConnect extends Service {
    */
   searchContent(callback?: (err: AWSError, data: QConnect.Types.SearchContentResponse) => void): Request<QConnect.Types.SearchContentResponse, AWSError>;
   /**
-   * Searches existing Amazon Q quick responses in a Amazon Q knowledge base.
+   * Searches existing Amazon Q quick responses in an Amazon Q knowledge base.
    */
   searchQuickResponses(params: QConnect.Types.SearchQuickResponsesRequest, callback?: (err: AWSError, data: QConnect.Types.SearchQuickResponsesResponse) => void): Request<QConnect.Types.SearchQuickResponsesResponse, AWSError>;
   /**
-   * Searches existing Amazon Q quick responses in a Amazon Q knowledge base.
+   * Searches existing Amazon Q quick responses in an Amazon Q knowledge base.
    */
   searchQuickResponses(callback?: (err: AWSError, data: QConnect.Types.SearchQuickResponsesResponse) => void): Request<QConnect.Types.SearchQuickResponsesResponse, AWSError>;
   /**
@@ -613,6 +621,12 @@ declare namespace QConnect {
      * Details about the content text data.
      */
     textData: TextData;
+  }
+  export interface ContentFeedbackData {
+    /**
+     * Information about the feedback for a generative target type.
+     */
+    generativeContentFeedbackData?: GenerativeContentFeedbackData;
   }
   export type ContentMetadata = {[key: string]: NonEmptyString};
   export interface ContentReference {
@@ -1056,6 +1070,12 @@ declare namespace QConnect {
   export type FilterField = "NAME"|string;
   export type FilterList = Filter[];
   export type FilterOperator = "EQUALS"|string;
+  export interface GenerativeContentFeedbackData {
+    /**
+     * The relevance of the feedback.
+     */
+    relevance: Relevance;
+  }
   export interface GenerativeDataDetails {
     /**
      * The LLM response.
@@ -1645,6 +1665,46 @@ declare namespace QConnect {
   export type ObjectFieldsList = NonEmptyString[];
   export type Order = "ASC"|"DESC"|string;
   export type Priority = "HIGH"|"MEDIUM"|"LOW"|string;
+  export interface PutFeedbackRequest {
+    /**
+     * The identifier of the Amazon Q assistant.
+     */
+    assistantId: UuidOrArn;
+    /**
+     * Information about the feedback provided.
+     */
+    contentFeedback: ContentFeedbackData;
+    /**
+     * The identifier of the feedback target.
+     */
+    targetId: Uuid;
+    /**
+     * The type of the feedback target.
+     */
+    targetType: TargetType;
+  }
+  export interface PutFeedbackResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon Q assistant.
+     */
+    assistantArn: UuidOrArn;
+    /**
+     * The identifier of the Amazon Q assistant.
+     */
+    assistantId: Uuid;
+    /**
+     * Information about the feedback provided.
+     */
+    contentFeedback: ContentFeedbackData;
+    /**
+     * The identifier of the feedback target.
+     */
+    targetId: Uuid;
+    /**
+     * The type of the feedback target.
+     */
+    targetType: TargetType;
+  }
   export interface QueryAssistantRequest {
     /**
      * The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
@@ -2093,6 +2153,7 @@ declare namespace QConnect {
   export type RecommendationTriggerList = RecommendationTrigger[];
   export type RecommendationTriggerType = "QUERY"|"GENERATIVE"|string;
   export type RecommendationType = "KNOWLEDGE_CONTENT"|"GENERATIVE_RESPONSE"|"GENERATIVE_ANSWER"|string;
+  export type Relevance = "HELPFUL"|"NOT_HELPFUL"|string;
   export type RelevanceLevel = "HIGH"|"MEDIUM"|"LOW"|string;
   export type RelevanceScore = number;
   export interface RemoveKnowledgeBaseTemplateUriRequest {
@@ -2390,6 +2451,7 @@ declare namespace QConnect {
   }
   export type TagValue = string;
   export type Tags = {[key: string]: TagValue};
+  export type TargetType = "RECOMMENDATION"|"RESULT"|string;
   export interface TextData {
     excerpt?: DocumentText;
     title?: DocumentText;

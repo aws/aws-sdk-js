@@ -153,6 +153,10 @@ declare namespace Rbin {
      * The lock state for the retention rule.    locked - The retention rule is locked and can't be modified or deleted.    pending_unlock - The retention rule has been unlocked but it is still within the unlock delay period. The retention rule can be modified or deleted only after the unlock delay period has expired.    unlocked - The retention rule is unlocked and it can be modified or deleted by any user with the required permissions.    null - The retention rule has never been locked. Once a retention rule has been locked, it can transition between the locked and unlocked states only; it can never transition back to null.  
      */
     LockState?: LockState;
+    /**
+     * The Amazon Resource Name (ARN) of the retention rule.
+     */
+    RuleArn?: RuleArn;
   }
   export interface DeleteRuleRequest {
     /**
@@ -206,6 +210,10 @@ declare namespace Rbin {
      * The date and time at which the unlock delay is set to expire. Only returned for retention rules that have been unlocked and that are still within the unlock delay period.
      */
     LockEndTime?: TimeStamp;
+    /**
+     * The Amazon Resource Name (ARN) of the retention rule.
+     */
+    RuleArn?: RuleArn;
   }
   export interface ListRulesRequest {
     /**
@@ -297,6 +305,10 @@ declare namespace Rbin {
      * The lock state for the retention rule.    locked - The retention rule is locked and can't be modified or deleted.    pending_unlock - The retention rule has been unlocked but it is still within the unlock delay period. The retention rule can be modified or deleted only after the unlock delay period has expired.    unlocked - The retention rule is unlocked and it can be modified or deleted by any user with the required permissions.    null - The retention rule has never been locked. Once a retention rule has been locked, it can transition between the locked and unlocked states only; it can never transition back to null.  
      */
     LockState?: LockState;
+    /**
+     * The Amazon Resource Name (ARN) of the retention rule.
+     */
+    RuleArn?: RuleArn;
   }
   export type LockState = "locked"|"pending_unlock"|"unlocked"|string;
   export type MaxResults = number;
@@ -347,6 +359,10 @@ declare namespace Rbin {
      * The lock state for the retention rule.    locked - The retention rule is locked and can't be modified or deleted.    pending_unlock - The retention rule has been unlocked but it is still within the unlock delay period. The retention rule can be modified or deleted only after the unlock delay period has expired.    unlocked - The retention rule is unlocked and it can be modified or deleted by any user with the required permissions.    null - The retention rule has never been locked. Once a retention rule has been locked, it can transition between the locked and unlocked states only; it can never transition back to null.  
      */
     LockState?: LockState;
+    /**
+     * The Amazon Resource Name (ARN) of the retention rule.
+     */
+    RuleArn?: RuleArn;
   }
   export type RuleSummaryList = RuleSummary[];
   export interface Tag {
@@ -428,6 +444,10 @@ declare namespace Rbin {
      * The date and time at which the unlock delay is set to expire. Only returned for retention rules that have been unlocked and that are still within the unlock delay period.
      */
     LockEndTime?: TimeStamp;
+    /**
+     * The Amazon Resource Name (ARN) of the retention rule.
+     */
+    RuleArn?: RuleArn;
   }
   export interface UntagResourceRequest {
     /**
@@ -493,6 +513,10 @@ declare namespace Rbin {
      * The date and time at which the unlock delay is set to expire. Only returned for retention rules that have been unlocked and that are still within the unlock delay period.
      */
     LockEndTime?: TimeStamp;
+    /**
+     * The Amazon Resource Name (ARN) of the retention rule.
+     */
+    RuleArn?: RuleArn;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
