@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "SQS",
+  "description": "Default empty array for previously flattened lists and maps in query compatible services"
+}
