@@ -52,6 +52,44 @@
             }
           }
         };
+        it('sets the default value for list members if service is awsQueryCompatible', function() {
+          var mockSQSShape = {
+            type: 'structure',
+            members: {
+              Failed: {
+                type: 'list',
+                defaultValue: function() {
+                  return [];
+                },
+                member: { type: 'structure' }
+              },
+              Successful: {
+                type: 'list',
+                defaultValue: function() {
+                  return [];
+                },
+                member: { type: 'structure' }
+              }
+            },
+            api: {
+              awsQueryCompatible: {}
+            }
+          };
+          var mockSQSStructure = {
+            Successful: [
+              {
+                Id: 'msg1',
+                MessageId: '63ba9799-f001-4ec0-b05e-21af5124f96a',
+                MD5OfMessageBody: '5f8c4f7ebd0d2503d620bd34a3229868'
+              }
+            ]
+          };
+          var parsed = parser.parse(JSON.stringify(mockSQSStructure), mockSQSShape);
+          expect(parsed).to.have.property('Failed');
+          expect(parsed.Failed).to.be.an('array').that.is.empty;
+          expect(parsed).to.have.property('Successful');
+          expect(parsed.Successful).to.be.an('array').with.lengthOf(1);
+        });
         it('translates input', function() {
           var params;
           params = '{ "Items": { "A": "a", "B": "b" } }';
