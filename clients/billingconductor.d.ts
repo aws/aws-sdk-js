@@ -548,6 +548,10 @@ declare namespace Billingconductor {
      *  A CustomLineItemChargeDetails that describes the charge details for a custom line item. 
      */
     ChargeDetails: CustomLineItemChargeDetails;
+    /**
+     * The Amazon Web Services account in which this custom line item will be applied to.
+     */
+    AccountId?: AccountId;
   }
   export interface CreateCustomLineItemOutput {
     /**
@@ -737,6 +741,10 @@ declare namespace Billingconductor {
      * The number of resources that are associated to the custom line item.
      */
     AssociationSize?: NumberOfAssociations;
+    /**
+     * The Amazon Web Services account in which this custom line item will be applied to.
+     */
+    AccountId?: AccountId;
   }
   export type CustomLineItemName = string;
   export type CustomLineItemNameList = CustomLineItemName[];
@@ -805,6 +813,10 @@ declare namespace Billingconductor {
      *  The inclusive start time. 
      */
     StartTime?: Instant;
+    /**
+     * The Amazon Web Services account in which this custom line item will be applied to.
+     */
+    AccountId?: AccountId;
   }
   export interface DeleteBillingGroupInput {
     /**
@@ -1134,6 +1146,10 @@ declare namespace Billingconductor {
      * A list of custom line item ARNs to retrieve information.
      */
     Arns?: CustomLineItemArns;
+    /**
+     * The Amazon Web Services accounts in which this custom line item will be applied to.
+     */
+    AccountIds?: AccountIdList;
   }
   export interface ListCustomLineItemsInput {
     /**

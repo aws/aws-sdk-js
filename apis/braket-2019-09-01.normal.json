@@ -438,6 +438,40 @@
       },
       "documentation": "<p>Defines the Amazon Braket job to be created. Specifies the container image the job uses and the paths to the Python scripts used for entry and training.</p>"
     },
+    "Association": {
+      "type": "structure",
+      "required": [
+        "arn",
+        "type"
+      ],
+      "members": {
+        "arn": {
+          "shape": "BraketResourceArn",
+          "documentation": "<p>The Amazon Braket resource arn.</p>"
+        },
+        "type": {
+          "shape": "AssociationType",
+          "documentation": "<p>The association type for the specified Amazon Braket resource arn.</p>"
+        }
+      },
+      "documentation": "<p>The Amazon Braket resource and the association type.</p>"
+    },
+    "AssociationType": {
+      "type": "string",
+      "enum": [
+        "RESERVATION_TIME_WINDOW_ARN"
+      ]
+    },
+    "Associations": {
+      "type": "list",
+      "member": {
+        "shape": "Association"
+      }
+    },
+    "BraketResourceArn": {
+      "type": "string",
+      "pattern": "^arn:aws[a-z\\-]*:braket:[a-z0-9\\-]*:[0-9]{12}:.*$"
+    },
     "CancelJobRequest": {
       "type": "structure",
       "required": [
@@ -549,6 +583,10 @@
           "shape": "AlgorithmSpecification",
           "documentation": "<p>Definition of the Amazon Braket job to be created. Specifies the container image the job uses and information about the Python scripts used for entry and training.</p>"
         },
+        "associations": {
+          "shape": "CreateJobRequestAssociationsList",
+          "documentation": "<p>The list of Amazon Braket resources associated with the hybrid job.</p>"
+        },
         "checkpointConfig": {
           "shape": "JobCheckpointConfig",
           "documentation": "<p>Information about the output locations for job checkpoint data.</p>"
@@ -596,6 +634,14 @@
         }
       }
     },
+    "CreateJobRequestAssociationsList": {
+      "type": "list",
+      "member": {
+        "shape": "Association"
+      },
+      "max": 1,
+      "min": 0
+    },
     "CreateJobRequestInputDataConfigList": {
       "type": "list",
       "member": {
@@ -638,6 +684,10 @@
           "documentation": "<p>The action associated with the task.</p>",
           "jsonvalue": true
         },
+        "associations": {
+          "shape": "CreateQuantumTaskRequestAssociationsList",
+          "documentation": "<p>The list of Amazon Braket resources associated with the quantum task.</p>"
+        },
         "clientToken": {
           "shape": "String64",
           "documentation": "<p>The client token associated with the request.</p>",
@@ -673,6 +723,14 @@
           "documentation": "<p>Tags to be added to the quantum task you're creating.</p>"
         }
       }
+    },
+    "CreateQuantumTaskRequestAssociationsList": {
+      "type": "list",
+      "member": {
+        "shape": "Association"
+      },
+      "max": 1,
+      "min": 0
     },
     "CreateQuantumTaskRequestDeviceParametersString": {
       "type": "string",
@@ -912,6 +970,10 @@
           "shape": "AlgorithmSpecification",
           "documentation": "<p>Definition of the Amazon Braket job created. Specifies the container image the job uses, information about the Python scripts used for entry and training, and the user-defined metrics used to evaluation the job.</p>"
         },
+        "associations": {
+          "shape": "Associations",
+          "documentation": "<p>The list of Amazon Braket resources associated with the hybrid job.</p>"
+        },
         "billableDuration": {
           "shape": "Integer",
           "documentation": "<p>The billable time the Amazon Braket job used to complete.</p>"
@@ -1010,7 +1072,7 @@
         },
         "quantumTaskArn": {
           "shape": "QuantumTaskArn",
-          "documentation": "<p>the ARN of the task to retrieve.</p>",
+          "documentation": "<p>The ARN of the task to retrieve.</p>",
           "location": "uri",
           "locationName": "quantumTaskArn"
         }
@@ -1029,6 +1091,10 @@
         "status"
       ],
       "members": {
+        "associations": {
+          "shape": "Associations",
+          "documentation": "<p>The list of Amazon Braket resources associated with the quantum task.</p>"
+        },
         "createdAt": {
           "shape": "SyntheticTimestamp_date_time",
           "documentation": "<p>The time at which the task was created.</p>"
@@ -1132,7 +1198,8 @@
     "HyperParametersValueString": {
       "type": "string",
       "max": 2500,
-      "min": 1
+      "min": 1,
+      "pattern": "^.*$"
     },
     "InputConfigList": {
       "type": "list",
@@ -1282,7 +1349,7 @@
         },
         "timeOfEvent": {
           "shape": "SyntheticTimestamp_date_time",
-          "documentation": "<p>TThe type of event that occurred related to the Amazon Braket job.</p>"
+          "documentation": "<p>The type of event that occurred related to the Amazon Braket job.</p>"
         }
       },
       "documentation": "<p>Details about the type and time events occurred related to the Amazon Braket job.</p>"

@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "awsQueryCompatible",
-  "description": "set default list member value for awsQueryCompatible"
-}

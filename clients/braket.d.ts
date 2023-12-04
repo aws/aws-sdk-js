@@ -127,6 +127,19 @@ declare namespace Braket {
      */
     scriptModeConfig?: ScriptModeConfig;
   }
+  export interface Association {
+    /**
+     * The Amazon Braket resource arn.
+     */
+    arn: BraketResourceArn;
+    /**
+     * The association type for the specified Amazon Braket resource arn.
+     */
+    type: AssociationType;
+  }
+  export type AssociationType = "RESERVATION_TIME_WINDOW_ARN"|string;
+  export type Associations = Association[];
+  export type BraketResourceArn = string;
   export interface CancelJobRequest {
     /**
      * The ARN of the Amazon Braket job to cancel.
@@ -177,6 +190,10 @@ declare namespace Braket {
      */
     algorithmSpecification: AlgorithmSpecification;
     /**
+     * The list of Amazon Braket resources associated with the hybrid job.
+     */
+    associations?: CreateJobRequestAssociationsList;
+    /**
      * Information about the output locations for job checkpoint data.
      */
     checkpointConfig?: JobCheckpointConfig;
@@ -221,6 +238,7 @@ declare namespace Braket {
      */
     tags?: TagsMap;
   }
+  export type CreateJobRequestAssociationsList = Association[];
   export type CreateJobRequestInputDataConfigList = InputFileConfig[];
   export type CreateJobRequestJobNameString = string;
   export interface CreateJobResponse {
@@ -234,6 +252,10 @@ declare namespace Braket {
      * The action associated with the task.
      */
     action: JsonValue;
+    /**
+     * The list of Amazon Braket resources associated with the quantum task.
+     */
+    associations?: CreateQuantumTaskRequestAssociationsList;
     /**
      * The client token associated with the request.
      */
@@ -267,6 +289,7 @@ declare namespace Braket {
      */
     tags?: TagsMap;
   }
+  export type CreateQuantumTaskRequestAssociationsList = Association[];
   export type CreateQuantumTaskRequestDeviceParametersString = string;
   export type CreateQuantumTaskRequestOutputS3BucketString = string;
   export type CreateQuantumTaskRequestOutputS3KeyPrefixString = string;
@@ -382,6 +405,10 @@ declare namespace Braket {
      */
     algorithmSpecification: AlgorithmSpecification;
     /**
+     * The list of Amazon Braket resources associated with the hybrid job.
+     */
+    associations?: Associations;
+    /**
      * The billable time the Amazon Braket job used to complete.
      */
     billableDuration?: Integer;
@@ -465,11 +492,15 @@ declare namespace Braket {
      */
     additionalAttributeNames?: QuantumTaskAdditionalAttributeNamesList;
     /**
-     * the ARN of the task to retrieve.
+     * The ARN of the task to retrieve.
      */
     quantumTaskArn: QuantumTaskArn;
   }
   export interface GetQuantumTaskResponse {
+    /**
+     * The list of Amazon Braket resources associated with the quantum task.
+     */
+    associations?: Associations;
     /**
      * The time at which the task was created.
      */
@@ -596,7 +627,7 @@ declare namespace Braket {
      */
     message?: JobEventDetailsMessageString;
     /**
-     * TThe type of event that occurred related to the Amazon Braket job.
+     * The type of event that occurred related to the Amazon Braket job.
      */
     timeOfEvent?: SyntheticTimestamp_date_time;
   }

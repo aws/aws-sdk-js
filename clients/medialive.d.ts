@@ -1533,6 +1533,27 @@ one destination per packager.
   }
   export interface ClaimDeviceResponse {
   }
+  export interface ColorCorrection {
+    /**
+     * The color space of the input.
+     */
+    InputColorSpace: ColorSpace;
+    /**
+     * The color space of the output.
+     */
+    OutputColorSpace: ColorSpace;
+    /**
+     * The URI of the 3D LUT file. The protocol must be 's3:' or 's3ssl:':.
+     */
+    Uri: __string;
+  }
+  export interface ColorCorrectionSettings {
+    /**
+     * An array of colorCorrections that applies when you are using 3D LUT files to perform color conversion on video. Each colorCorrection contains one 3D LUT file (that defines the color mapping for converting an input color space to an output color space), and the input/output combination that this 3D LUT file applies to. MediaLive reads the color space in the input metadata, determines the color space that you have specified for the output, and finds and uses the LUT file that applies to this combination.
+     */
+    GlobalColorCorrections: __listOfColorCorrection;
+  }
+  export type ColorSpace = "HDR10"|"HLG_2020"|"REC_601"|"REC_709"|string;
   export interface ColorSpacePassthroughSettings {
   }
   export interface CreateChannelRequest {
@@ -2881,6 +2902,10 @@ You specify only the font family. All other style information (color, bold, posi
      * Settings for caption decriptions
      */
     CaptionDescriptions?: __listOfCaptionDescription;
+    /**
+     * Color correction settings
+     */
+    ColorCorrectionSettings?: ColorCorrectionSettings;
     /**
      * Feature Activations
      */
@@ -7522,6 +7547,7 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
   export type __listOfCaptionSelector = CaptionSelector[];
   export type __listOfChannelEgressEndpoint = ChannelEgressEndpoint[];
   export type __listOfChannelSummary = ChannelSummary[];
+  export type __listOfColorCorrection = ColorCorrection[];
   export type __listOfFailoverCondition = FailoverCondition[];
   export type __listOfHlsAdMarkers = HlsAdMarkers[];
   export type __listOfInput = Input[];

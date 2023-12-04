@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1510.0-->
+<!--LATEST=2.1511.0-->
 <!--ENTRYINSERT-->
+
+## 2.1511.0
+* bugfix: awsQueryCompatible: set default list member value for awsQueryCompatible
+* feature: Billingconductor: This release adds the ability to specify a linked account of the billing group for the custom line item resource.
+* feature: Braket: This release enhances service support to create quantum tasks and hybrid jobs associated with Braket Direct Reservations.
+* feature: Cloud9: This release adds the requirement to include the imageId parameter in the CreateEnvironmentEC2 API call.
+* feature: CloudFormation: Including UPDATE_* states as a success status for CreateStack waiter.
+* feature: Finspace: Release General Purpose type clusters
+* feature: MediaLive: Adds support for custom color correction on channels using 3D LUT files.
 
 ## 2.1510.0
 * feature: QConnect: This release adds the PutFeedback API and allows providing feedback against the specified assistant for the specified target.

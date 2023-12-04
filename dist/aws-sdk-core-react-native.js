@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1510.0',
+	  VERSION: '2.1511.0',
 
 	  /**
 	   * @api private
@@ -2640,12 +2640,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  var struct = {};
 	  var shapeMembers = shape.members;
+	  var isAwsQueryCompatible = shape.api && shape.api.awsQueryCompatible;
 	  util.each(shapeMembers, function(name, memberShape) {
 	    var locationName = memberShape.isLocationName ? memberShape.name : name;
 	    if (Object.prototype.hasOwnProperty.call(structure, locationName)) {
 	      var value = structure[locationName];
 	      var result = translate(value, memberShape);
 	      if (result !== undefined) struct[name] = result;
+	    } else if (isAwsQueryCompatible && memberShape.defaultValue) {
+	      if (memberShape.type === 'list') {
+	        struct[name] = typeof memberShape.defaultValue === 'function' ? memberShape.defaultValue() : memberShape.defaultValue;
+	      }
 	    }
 	  });
 	  return struct;
