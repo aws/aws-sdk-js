@@ -596,6 +596,7 @@ declare namespace Athena {
     ErrorMessage?: String;
   }
   export type AuthToken = string;
+  export type AuthenticationType = "DIRECTORY_IDENTITY"|string;
   export type AwsAccountId = string;
   export interface BatchGetNamedQueryInput {
     /**
@@ -847,7 +848,7 @@ declare namespace Athena {
      */
     Scale?: Integer;
     /**
-     * Indicates the column's nullable status.
+     * Unsupported constraint. This value always shows as UNKNOWN.
      */
     Nullable?: ColumnNullable;
     /**
@@ -1325,6 +1326,10 @@ declare namespace Athena {
      * The name of the data catalog to return.
      */
     Name: CatalogNameString;
+    /**
+     * The name of the workgroup. Required if making an IAM Identity Center request.
+     */
+    WorkGroup?: WorkGroupName;
   }
   export interface GetDataCatalogOutput {
     /**
@@ -1341,6 +1346,10 @@ declare namespace Athena {
      * The name of the database to return.
      */
     DatabaseName: NameString;
+    /**
+     * The name of the workgroup for which the metadata is being fetched. Required if requesting an IAM Identity Center enabled Glue Data Catalog.
+     */
+    WorkGroup?: WorkGroupName;
   }
   export interface GetDatabaseOutput {
     /**
@@ -1513,6 +1522,10 @@ declare namespace Athena {
      * The name of the table for which metadata is returned.
      */
     TableName: NameString;
+    /**
+     * The name of the workgroup for which the metadata is being fetched. Required if requesting an IAM Identity Center enabled Glue Data Catalog.
+     */
+    WorkGroup?: WorkGroupName;
   }
   export interface GetTableMetadataOutput {
     /**
@@ -1533,6 +1546,18 @@ declare namespace Athena {
     WorkGroup?: WorkGroup;
   }
   export type IdempotencyToken = string;
+  export type IdentityCenterApplicationArn = string;
+  export interface IdentityCenterConfiguration {
+    /**
+     * Specifies whether the workgroup is IAM Identity Center supported.
+     */
+    EnableIdentityCenter?: BoxedBoolean;
+    /**
+     * The IAM Identity Center instance ARN that the workgroup associates to.
+     */
+    IdentityCenterInstanceArn?: IdentityCenterInstanceArn;
+  }
+  export type IdentityCenterInstanceArn = string;
   export interface ImportNotebookInput {
     /**
      * The name of the Spark enabled workgroup to import the notebook to.
@@ -1641,6 +1666,10 @@ declare namespace Athena {
      * Specifies the maximum number of data catalogs to return.
      */
     MaxResults?: MaxDataCatalogsCount;
+    /**
+     * The name of the workgroup. Required if making an IAM Identity Center request.
+     */
+    WorkGroup?: WorkGroupName;
   }
   export interface ListDataCatalogsOutput {
     /**
@@ -1665,6 +1694,10 @@ declare namespace Athena {
      * Specifies the maximum number of results to return.
      */
     MaxResults?: MaxDatabasesCount;
+    /**
+     * The name of the workgroup for which the metadata is being fetched. Required if requesting an IAM Identity Center enabled Glue Data Catalog.
+     */
+    WorkGroup?: WorkGroupName;
   }
   export interface ListDatabasesOutput {
     /**
@@ -1901,6 +1934,10 @@ declare namespace Athena {
      * Specifies the maximum number of results to return.
      */
     MaxResults?: MaxTableMetadataCount;
+    /**
+     * The name of the workgroup for which the metadata is being fetched. Required if requesting an IAM Identity Center enabled Glue Data Catalog.
+     */
+    WorkGroup?: WorkGroupName;
   }
   export interface ListTableMetadataOutput {
     /**
@@ -2145,6 +2182,10 @@ declare namespace Athena {
      * The kind of query statement that was run.
      */
     SubstatementType?: String;
+    /**
+     * Specifies whether Amazon S3 access grants are enabled for query results.
+     */
+    QueryResultsS3AccessGrantsConfiguration?: QueryResultsS3AccessGrantsConfiguration;
   }
   export interface QueryExecutionContext {
     /**
@@ -2219,6 +2260,20 @@ declare namespace Athena {
      * Provides information about an Athena query error.
      */
     AthenaError?: AthenaError;
+  }
+  export interface QueryResultsS3AccessGrantsConfiguration {
+    /**
+     * Specifies whether Amazon S3 access grants are enabled for query results.
+     */
+    EnableS3AccessGrants: BoxedBoolean;
+    /**
+     * When enabled, appends the user ID as an Amazon S3 path prefix to the query result output location.
+     */
+    CreateUserLevelPrefix?: BoxedBoolean;
+    /**
+     * The authentication type used for Amazon S3 access grants. Currently, only DIRECTORY_IDENTITY is supported.
+     */
+    AuthenticationType: AuthenticationType;
   }
   export interface QueryRuntimeStatistics {
     Timeline?: QueryRuntimeStatisticsTimeline;
@@ -2434,7 +2489,7 @@ declare namespace Athena {
   export type S3Uri = string;
   export interface SessionConfiguration {
     /**
-     * The ARN of the execution role used in a Spark session to access user resources. This property applies only to Spark-enabled workgroups.
+     * The ARN of the execution role used to access user resources for Spark sessions and Identity Center enabled workgroups. This property applies only to Spark enabled workgroups and Identity Center enabled workgroups.
      */
     ExecutionRole?: RoleArn;
     /**
@@ -2544,7 +2599,7 @@ declare namespace Athena {
      */
     QueryString: QueryString;
     /**
-     * A unique case-sensitive string used to ensure the request to create the query is idempotent (executes only once). If another StartQueryExecution request is received, the same response is returned and another query is not created. If a parameter has changed, for example, the QueryString, an error is returned.  This token is listed as not required because Amazon Web Services SDKs (for example the Amazon Web Services SDK for Java) auto-generate the token for users. If you are not using the Amazon Web Services SDK or the Amazon Web Services CLI, you must provide this token or the action will fail. 
+     * A unique case-sensitive string used to ensure the request to create the query is idempotent (executes only once). If another StartQueryExecution request is received, the same response is returned and another query is not created. An error is returned if a parameter, such as QueryString, has changed. A call to StartQueryExecution that uses a previous client request token returns the same QueryExecutionId even if the requester doesn't have permission on the tables specified in QueryString.  This token is listed as not required because Amazon Web Services SDKs (for example the Amazon Web Services SDK for Java) auto-generate the token for users. If you are not using the Amazon Web Services SDK or the Amazon Web Services CLI, you must provide this token or the action will fail. 
      */
     ClientRequestToken?: IdempotencyToken;
     /**
@@ -2919,6 +2974,10 @@ declare namespace Athena {
      * The date and time the workgroup was created.
      */
     CreationTime?: _Date;
+    /**
+     * The ARN of the IAM Identity Center enabled application associated with the workgroup.
+     */
+    IdentityCenterApplicationArn?: IdentityCenterApplicationArn;
   }
   export interface WorkGroupConfiguration {
     /**
@@ -2950,7 +3009,7 @@ declare namespace Athena {
      */
     AdditionalConfiguration?: NameString;
     /**
-     * Role used in a Spark session for accessing the user's resources. This property applies only to Spark-enabled workgroups.
+     * The ARN of the execution role used to access user resources for Spark sessions and Identity Center enabled workgroups. This property applies only to Spark enabled workgroups and Identity Center enabled workgroups.
      */
     ExecutionRole?: RoleArn;
     /**
@@ -2961,6 +3020,14 @@ declare namespace Athena {
      * Enforces a minimal level of encryption for the workgroup for query and calculation results that are written to Amazon S3. When enabled, workgroup users can set encryption only to the minimum level set by the administrator or higher when they submit queries. The EnforceWorkGroupConfiguration setting takes precedence over the EnableMinimumEncryptionConfiguration flag. This means that if EnforceWorkGroupConfiguration is true, the EnableMinimumEncryptionConfiguration flag is ignored, and the workgroup configuration for encryption is used.
      */
     EnableMinimumEncryptionConfiguration?: BoxedBoolean;
+    /**
+     * Specifies whether the workgroup is IAM Identity Center supported.
+     */
+    IdentityCenterConfiguration?: IdentityCenterConfiguration;
+    /**
+     * Specifies whether Amazon S3 access grants are enabled for query results.
+     */
+    QueryResultsS3AccessGrantsConfiguration?: QueryResultsS3AccessGrantsConfiguration;
   }
   export interface WorkGroupConfigurationUpdates {
     /**
@@ -3000,7 +3067,7 @@ declare namespace Athena {
      */
     AdditionalConfiguration?: NameString;
     /**
-     * The ARN of the execution role used to access user resources. This property applies only to Spark-enabled workgroups.
+     * The ARN of the execution role used to access user resources for Spark sessions and Identity Center enabled workgroups. This property applies only to Spark enabled workgroups and Identity Center enabled workgroups.
      */
     ExecutionRole?: RoleArn;
     CustomerContentEncryptionConfiguration?: CustomerContentEncryptionConfiguration;
@@ -3008,6 +3075,10 @@ declare namespace Athena {
      * Enforces a minimal level of encryption for the workgroup for query and calculation results that are written to Amazon S3. When enabled, workgroup users can set encryption only to the minimum level set by the administrator or higher when they submit queries. This setting does not apply to Spark-enabled workgroups. The EnforceWorkGroupConfiguration setting takes precedence over the EnableMinimumEncryptionConfiguration flag. This means that if EnforceWorkGroupConfiguration is true, the EnableMinimumEncryptionConfiguration flag is ignored, and the workgroup configuration for encryption is used.
      */
     EnableMinimumEncryptionConfiguration?: BoxedBoolean;
+    /**
+     * Specifies whether Amazon S3 access grants are enabled for query results.
+     */
+    QueryResultsS3AccessGrantsConfiguration?: QueryResultsS3AccessGrantsConfiguration;
   }
   export type WorkGroupDescriptionString = string;
   export type WorkGroupName = string;
@@ -3034,6 +3105,10 @@ declare namespace Athena {
      * The engine version setting for all queries on the workgroup. Queries on the AmazonAthenaPreviewFunctionality workgroup run on the preview engine regardless of this setting.
      */
     EngineVersion?: EngineVersion;
+    /**
+     * The ARN of the IAM Identity Center enabled application associated with the workgroup.
+     */
+    IdentityCenterApplicationArn?: IdentityCenterApplicationArn;
   }
   export type WorkGroupsList = WorkGroupSummary[];
   export type datumList = Datum[];

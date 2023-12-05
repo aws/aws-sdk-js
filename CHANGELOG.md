@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1511.0-->
+<!--LATEST=2.1512.0-->
 <!--ENTRYINSERT-->
+
+## 2.1512.0
+* feature: Athena: Adding IdentityCenter enabled request for interactive query
+* feature: CleanRoomsML: Updated service title from cleanroomsml to CleanRoomsML.
+* feature: EC2: Adds A10G, T4G, and H100 as accelerator name options and Habana as an accelerator manufacturer option for attribute based selection
 
 ## 2.1511.0
 * bugfix: awsQueryCompatible: set default list member value for awsQueryCompatible

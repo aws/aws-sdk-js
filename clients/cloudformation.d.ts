@@ -909,7 +909,7 @@ declare namespace CloudFormation {
      */
     RootChangeSetId?: ChangeSetId;
     /**
-     * Indicates if the stack set imports resources that already exist.
+     * Indicates if the change set imports resources that already exist.
      */
     ImportExistingResources?: ImportExistingResources;
   }
@@ -1016,7 +1016,7 @@ declare namespace CloudFormation {
      */
     OnStackFailure?: OnStackFailure;
     /**
-     * Indicates if the stack set imports resources that already exist.  This parameter can only import resources that have custom names in templates. For more information, see name type in the CloudFormation User Guide. To import resources that do not accept custom names, such as EC2 instances, use the resource import feature instead. For more information, see Bringing existing resources into CloudFormation management in the CloudFormation User Guide. 
+     * Indicates if the change set imports resources that already exist.  This parameter can only import resources that have custom names in templates. For more information, see name type in the CloudFormation User Guide. To import resources that do not accept custom names, such as EC2 instances, use the resource import feature instead. For more information, see Bringing existing resources into CloudFormation management in the CloudFormation User Guide. 
      */
     ImportExistingResources?: ImportExistingResources;
   }
@@ -1521,7 +1521,7 @@ declare namespace CloudFormation {
      */
     OnStackFailure?: OnStackFailure;
     /**
-     * Indicates if the stack set imports resources that already exist.  This parameter can only import resources that have custom names in templates. To import resources that do not accept custom names, such as EC2 instances, use the resource import feature instead. 
+     * Indicates if the change set imports resources that already exist.  This parameter can only import resources that have custom names in templates. To import resources that do not accept custom names, such as EC2 instances, use the resource import feature instead. 
      */
     ImportExistingResources?: ImportExistingResources;
   }

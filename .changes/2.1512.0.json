@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "Athena",
+        "description": "Adding IdentityCenter enabled request for interactive query"
+    },
+    {
+        "type": "feature",
+        "category": "CleanRoomsML",
+        "description": "Updated service title from cleanroomsml to CleanRoomsML."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Adds A10G, T4G, and H100 as accelerator name options and Habana as an accelerator manufacturer option for attribute based selection"
+    }
+]

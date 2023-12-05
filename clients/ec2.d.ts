@@ -5242,9 +5242,9 @@ declare namespace EC2 {
      */
     Max?: Integer;
   }
-  export type AcceleratorManufacturer = "amazon-web-services"|"amd"|"nvidia"|"xilinx"|string;
+  export type AcceleratorManufacturer = "amazon-web-services"|"amd"|"nvidia"|"xilinx"|"habana"|string;
   export type AcceleratorManufacturerSet = AcceleratorManufacturer[];
-  export type AcceleratorName = "a100"|"inferentia"|"k520"|"k80"|"m60"|"radeon-pro-v520"|"t4"|"vu9p"|"v100"|string;
+  export type AcceleratorName = "a100"|"inferentia"|"k520"|"k80"|"m60"|"radeon-pro-v520"|"t4"|"vu9p"|"v100"|"a10g"|"h100"|"t4g"|string;
   export type AcceleratorNameSet = AcceleratorName[];
   export interface AcceleratorTotalMemoryMiB {
     /**
@@ -24781,11 +24781,11 @@ declare namespace EC2 {
      */
     AcceleratorCount?: AcceleratorCount;
     /**
-     * Indicates whether instance types must have accelerators by specific manufacturers.   For instance types with NVIDIA devices, specify nvidia.   For instance types with AMD devices, specify amd.   For instance types with Amazon Web Services devices, specify amazon-web-services.   For instance types with Xilinx devices, specify xilinx.   Default: Any manufacturer
+     * Indicates whether instance types must have accelerators by specific manufacturers.   For instance types with Amazon Web Services devices, specify amazon-web-services.   For instance types with AMD devices, specify amd.   For instance types with Habana devices, specify habana.   For instance types with NVIDIA devices, specify nvidia.   For instance types with Xilinx devices, specify xilinx.   Default: Any manufacturer
      */
     AcceleratorManufacturers?: AcceleratorManufacturerSet;
     /**
-     * The accelerators that must be on the instance type.   For instance types with NVIDIA A100 GPUs, specify a100.   For instance types with NVIDIA V100 GPUs, specify v100.   For instance types with NVIDIA K80 GPUs, specify k80.   For instance types with NVIDIA T4 GPUs, specify t4.   For instance types with NVIDIA M60 GPUs, specify m60.   For instance types with AMD Radeon Pro V520 GPUs, specify radeon-pro-v520.   For instance types with Xilinx VU9P FPGAs, specify vu9p.   For instance types with Amazon Web Services Inferentia chips, specify inferentia.   For instance types with NVIDIA GRID K520 GPUs, specify k520.   Default: Any accelerator
+     * The accelerators that must be on the instance type.   For instance types with NVIDIA A10G GPUs, specify a10g.   For instance types with NVIDIA A100 GPUs, specify a100.   For instance types with NVIDIA H100 GPUs, specify h100.   For instance types with Amazon Web Services Inferentia chips, specify inferentia.   For instance types with NVIDIA GRID K520 GPUs, specify k520.   For instance types with NVIDIA K80 GPUs, specify k80.   For instance types with NVIDIA M60 GPUs, specify m60.   For instance types with AMD Radeon Pro V520 GPUs, specify radeon-pro-v520.   For instance types with NVIDIA T4 GPUs, specify t4.   For instance types with NVIDIA T4G GPUs, specify t4g.   For instance types with Xilinx VU9P FPGAs, specify vu9p.   For instance types with NVIDIA V100 GPUs, specify v100.   Default: Any accelerator
      */
     AcceleratorNames?: AcceleratorNameSet;
     /**
@@ -24875,11 +24875,11 @@ declare namespace EC2 {
      */
     AcceleratorCount?: AcceleratorCountRequest;
     /**
-     * Indicates whether instance types must have accelerators by specific manufacturers.   For instance types with NVIDIA devices, specify nvidia.   For instance types with AMD devices, specify amd.   For instance types with Amazon Web Services devices, specify amazon-web-services.   For instance types with Xilinx devices, specify xilinx.   Default: Any manufacturer
+     * Indicates whether instance types must have accelerators by specific manufacturers.   For instance types with Amazon Web Services devices, specify amazon-web-services.   For instance types with AMD devices, specify amd.   For instance types with Habana devices, specify habana.   For instance types with NVIDIA devices, specify nvidia.   For instance types with Xilinx devices, specify xilinx.   Default: Any manufacturer
      */
     AcceleratorManufacturers?: AcceleratorManufacturerSet;
     /**
-     * The accelerators that must be on the instance type.   For instance types with NVIDIA A100 GPUs, specify a100.   For instance types with NVIDIA V100 GPUs, specify v100.   For instance types with NVIDIA K80 GPUs, specify k80.   For instance types with NVIDIA T4 GPUs, specify t4.   For instance types with NVIDIA M60 GPUs, specify m60.   For instance types with AMD Radeon Pro V520 GPUs, specify radeon-pro-v520.   For instance types with Xilinx VU9P FPGAs, specify  vu9p.   For instance types with Amazon Web Services Inferentia chips, specify inferentia.   For instance types with NVIDIA GRID K520 GPUs, specify k520.   Default: Any accelerator
+     * The accelerators that must be on the instance type.   For instance types with NVIDIA A10G GPUs, specify a10g.   For instance types with NVIDIA A100 GPUs, specify a100.   For instance types with NVIDIA H100 GPUs, specify h100.   For instance types with Amazon Web Services Inferentia chips, specify inferentia.   For instance types with NVIDIA GRID K520 GPUs, specify k520.   For instance types with NVIDIA K80 GPUs, specify k80.   For instance types with NVIDIA M60 GPUs, specify m60.   For instance types with AMD Radeon Pro V520 GPUs, specify radeon-pro-v520.   For instance types with NVIDIA T4 GPUs, specify t4.   For instance types with NVIDIA T4G GPUs, specify t4g.   For instance types with Xilinx VU9P FPGAs, specify vu9p.   For instance types with NVIDIA V100 GPUs, specify v100.   Default: Any accelerator
      */
     AcceleratorNames?: AcceleratorNameSet;
     /**
