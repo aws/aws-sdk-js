@@ -3026,6 +3026,10 @@ declare namespace Connect {
      * Your contact center allows outbound calls.
      */
     OutboundCallsEnabled: OutboundCallsEnabled;
+    /**
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     */
+    Tags?: TagMap;
   }
   export interface CreateInstanceResponse {
     /**
@@ -6026,6 +6030,10 @@ declare namespace Connect {
      * This URL allows contact center users to access the Amazon Connect admin website.
      */
     InstanceAccessUrl?: Url;
+    /**
+     * The tags of an instance.
+     */
+    Tags?: TagMap;
   }
   export type InstanceArn = string;
   export type InstanceAttributeType = "INBOUND_CALLS"|"OUTBOUND_CALLS"|"CONTACTFLOW_LOGS"|"CONTACT_LENS"|"AUTO_RESOLVE_BEST_VOICES"|"USE_CUSTOM_TTS_VOICES"|"EARLY_MEDIA"|"MULTI_PARTY_CONFERENCE"|"HIGH_VOLUME_OUTBOUND"|"ENHANCED_CONTACT_MONITORING"|string;

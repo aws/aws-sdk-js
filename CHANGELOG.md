@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1512.0-->
+<!--LATEST=2.1513.0-->
 <!--ENTRYINSERT-->
+
+## 2.1513.0
+* bugfix: Endpoints: Use correct FIPS endpoint for EC2 in GovCloud
+* feature: Backup: AWS Backup - Features: Add VaultType to the output of DescribeRecoveryPoint, ListRecoveryPointByBackupVault API and add ResourceType to the input of ListRestoreJobs API
+* feature: Connect: Releasing Tagging Support for Instance Management APIS
+* feature: EC2: Releasing the new cpuManufacturer attribute within the DescribeInstanceTypes API response which notifies our customers with information on who the Manufacturer is for the processor attached to the instance, for example: Intel.
+* feature: PaymentCryptography: AWS Payment Cryptography IPEK feature release
 
 ## 2.1512.0
 * feature: Athena: Adding IdentityCenter enabled request for interactive query

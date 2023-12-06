@@ -8707,6 +8707,7 @@ declare namespace EC2 {
   export type CoreCountList = CoreCount[];
   export type CoreNetworkArn = string;
   export type CpuManufacturer = "intel"|"amd"|"amazon-web-services"|string;
+  export type CpuManufacturerName = string;
   export type CpuManufacturerSet = CpuManufacturer[];
   export interface CpuOptions {
     /**
@@ -31668,6 +31669,10 @@ declare namespace EC2 {
      * Indicates whether the instance type supports AMD SEV-SNP. If the request returns amd-sev-snp, AMD SEV-SNP is supported. Otherwise, it is not supported. For more information, see  AMD SEV-SNP.
      */
     SupportedFeatures?: SupportedAdditionalProcessorFeatureList;
+    /**
+     * The manufacturer of the processor.
+     */
+    Manufacturer?: CpuManufacturerName;
   }
   export type ProcessorSustainedClockSpeed = number;
   export interface ProductCode {

@@ -704,11 +704,11 @@ declare class Backup extends Service {
    */
   updateRecoveryPointLifecycle(callback?: (err: AWSError, data: Backup.Types.UpdateRecoveryPointLifecycleOutput) => void): Request<Backup.Types.UpdateRecoveryPointLifecycleOutput, AWSError>;
   /**
-   * Updates the current service opt-in settings for the Region. If service-opt-in is enabled for a service, Backup tries to protect that service's resources in this Region, when the resource is included in an on-demand backup or scheduled backup plan. Otherwise, Backup does not try to protect that service's resources in this Region. Use the DescribeRegionSettings API to determine the resource types that are supported.
+   * Updates the current service opt-in settings for the Region. Use the DescribeRegionSettings API to determine the resource types that are supported.
    */
   updateRegionSettings(params: Backup.Types.UpdateRegionSettingsInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the current service opt-in settings for the Region. If service-opt-in is enabled for a service, Backup tries to protect that service's resources in this Region, when the resource is included in an on-demand backup or scheduled backup plan. Otherwise, Backup does not try to protect that service's resources in this Region. Use the DescribeRegionSettings API to determine the resource types that are supported.
+   * Updates the current service opt-in settings for the Region. Use the DescribeRegionSettings API to determine the resource types that are supported.
    */
   updateRegionSettings(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -2214,6 +2214,10 @@ declare namespace Backup {
      * This is the non-unique name of the resource that belongs to the specified backup.
      */
     ResourceName?: string;
+    /**
+     * This is the type of vault in which the described recovery point is stored.
+     */
+    VaultType?: VaultType;
   }
   export interface DescribeRegionSettingsInput {
   }
@@ -2847,7 +2851,7 @@ declare namespace Backup {
      */
     ByCreatedAfter?: timestamp;
     /**
-     * Returns only backup jobs for the specified resources:    Aurora for Amazon Aurora    DocumentDB for Amazon DocumentDB (with MongoDB compatibility)    DynamoDB for Amazon DynamoDB    EBS for Amazon Elastic Block Store    EC2 for Amazon Elastic Compute Cloud    EFS for Amazon Elastic File System    FSx for Amazon FSx    Neptune for Amazon Neptune    RDS for Amazon Relational Database Service    Storage Gateway for Storage Gateway    S3 for Amazon S3    VirtualMachine for virtual machines  
+     * Returns only backup jobs for the specified resources:    Aurora for Amazon Aurora    CloudFormation for CloudFormation    DocumentDB for Amazon DocumentDB (with MongoDB compatibility)    DynamoDB for Amazon DynamoDB    EBS for Amazon Elastic Block Store    EC2 for Amazon Elastic Compute Cloud    EFS for Amazon Elastic File System    FSx for Amazon FSx    Neptune for Amazon Neptune    Redshift for Amazon Redshift    RDS for Amazon Relational Database Service    SAP HANA on Amazon EC2 for SAP HANA databases    Storage Gateway for Storage Gateway    S3 for Amazon S3    Timestream for Amazon Timestream    VirtualMachine for virtual machines  
      */
     ByResourceType?: ResourceType;
     /**
@@ -3071,7 +3075,7 @@ declare namespace Backup {
      */
     ByCreatedAfter?: timestamp;
     /**
-     * Returns only backup jobs for the specified resources:    Aurora for Amazon Aurora    DocumentDB for Amazon DocumentDB (with MongoDB compatibility)    DynamoDB for Amazon DynamoDB    EBS for Amazon Elastic Block Store    EC2 for Amazon Elastic Compute Cloud    EFS for Amazon Elastic File System    FSx for Amazon FSx    Neptune for Amazon Neptune    RDS for Amazon Relational Database Service    Storage Gateway for Storage Gateway    S3 for Amazon S3    VirtualMachine for virtual machines  
+     * Returns only backup jobs for the specified resources:    Aurora for Amazon Aurora    CloudFormation for CloudFormation    DocumentDB for Amazon DocumentDB (with MongoDB compatibility)    DynamoDB for Amazon DynamoDB    EBS for Amazon Elastic Block Store    EC2 for Amazon Elastic Compute Cloud    EFS for Amazon Elastic File System    FSx for Amazon FSx    Neptune for Amazon Neptune    Redshift for Amazon Redshift    RDS for Amazon Relational Database Service    SAP HANA on Amazon EC2 for SAP HANA databases    Storage Gateway for Storage Gateway    S3 for Amazon S3    Timestream for Amazon Timestream    VirtualMachine for virtual machines  
      */
     ByResourceType?: ResourceType;
     /**
@@ -3220,7 +3224,7 @@ declare namespace Backup {
      */
     ByResourceArn?: ARN;
     /**
-     * Returns only recovery points that match the specified resource type.
+     * Returns only recovery points that match the specified resource type(s):    Aurora for Amazon Aurora    CloudFormation for CloudFormation    DocumentDB for Amazon DocumentDB (with MongoDB compatibility)    DynamoDB for Amazon DynamoDB    EBS for Amazon Elastic Block Store    EC2 for Amazon Elastic Compute Cloud    EFS for Amazon Elastic File System    FSx for Amazon FSx    Neptune for Amazon Neptune    Redshift for Amazon Redshift    RDS for Amazon Relational Database Service    SAP HANA on Amazon EC2 for SAP HANA databases    Storage Gateway for Storage Gateway    S3 for Amazon S3    Timestream for Amazon Timestream    VirtualMachine for virtual machines  
      */
     ByResourceType?: ResourceType;
     /**
@@ -3443,6 +3447,10 @@ declare namespace Backup {
      * The account ID to list the jobs from. Returns only restore jobs associated with the specified account ID.
      */
     ByAccountId?: AccountId;
+    /**
+     * Include this parameter to return only restore jobs for the specified resources:    Aurora for Amazon Aurora    CloudFormation for CloudFormation    DocumentDB for Amazon DocumentDB (with MongoDB compatibility)    DynamoDB for Amazon DynamoDB    EBS for Amazon Elastic Block Store    EC2 for Amazon Elastic Compute Cloud    EFS for Amazon Elastic File System    FSx for Amazon FSx    Neptune for Amazon Neptune    Redshift for Amazon Redshift    RDS for Amazon Relational Database Service    SAP HANA on Amazon EC2 for SAP HANA databases    Storage Gateway for Storage Gateway    S3 for Amazon S3    Timestream for Amazon Timestream    VirtualMachine for virtual machines  
+     */
+    ByResourceType?: ResourceType;
     /**
      * Returns only restore jobs that were created before the specified date.
      */
@@ -3739,6 +3747,10 @@ declare namespace Backup {
      * This is the non-unique name of the resource that belongs to the specified backup.
      */
     ResourceName?: string;
+    /**
+     * This is the type of vault in which the described recovery point is stored.
+     */
+    VaultType?: VaultType;
   }
   export type RecoveryPointByBackupVaultList = RecoveryPointByBackupVault[];
   export interface RecoveryPointByResource {
@@ -4632,7 +4644,7 @@ declare namespace Backup {
   }
   export interface UpdateRegionSettingsInput {
     /**
-     * Updates the list of services along with the opt-in preferences for the Region.
+     * Updates the list of services along with the opt-in preferences for the Region. If resource assignments are only based on tags, then service opt-in settings are applied. If a resource type is explicitly assigned to a backup plan, such as Amazon S3, Amazon EC2, or Amazon RDS, it will be included in the backup even if the opt-in is not enabled for that particular service. If both a resource type and tags are specified in a resource assignment, the resource type specified in the backup plan takes priority over the tag condition. Service opt-in settings are disregarded in this situation.
      */
     ResourceTypeOptInPreference?: ResourceTypeOptInPreference;
     /**

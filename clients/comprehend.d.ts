@@ -60,11 +60,11 @@ declare class Comprehend extends Service {
    */
   batchDetectTargetedSentiment(callback?: (err: AWSError, data: Comprehend.Types.BatchDetectTargetedSentimentResponse) => void): Request<Comprehend.Types.BatchDetectTargetedSentimentResponse, AWSError>;
   /**
-   * Creates a classification request to analyze a single document in real-time. ClassifyDocument supports the following model types:   Custom classifier - a custom model that you have created and trained. For input, you can provide plain text, a single-page document (PDF, Word, or image), or Textract API output. For more information, see Custom classification in the Amazon Comprehend Developer Guide.   Prompt classifier - Amazon Comprehend provides a model for classifying prompts. For input, you provide English plain text input. For prompt classification, the response includes only the Classes field. For more information about prompt classifiers, see Prompt classifiers in the Amazon Comprehend Developer Guide.   If the system detects errors while processing a page in the input document, the API response includes an entry in Errors that describes the errors. If the system detects a document-level error in your input document, the API returns an InvalidRequestException error response. For details about this exception, see  Errors in semi-structured documents in the Comprehend Developer Guide. 
+   * Creates a classification request to analyze a single document in real-time. ClassifyDocument supports the following model types:   Custom classifier - a custom model that you have created and trained. For input, you can provide plain text, a single-page document (PDF, Word, or image), or Amazon Textract API output. For more information, see Custom classification in the Amazon Comprehend Developer Guide.   Prompt safety classifier - Amazon Comprehend provides a pre-trained model for classifying input prompts for generative AI applications. For input, you provide English plain text input. For prompt safety classification, the response includes only the Classes field. For more information about prompt safety classifiers, see Prompt safety classification in the Amazon Comprehend Developer Guide.   If the system detects errors while processing a page in the input document, the API response includes an Errors field that describes the errors. If the system detects a document-level error in your input document, the API returns an InvalidRequestException error response. For details about this exception, see  Errors in semi-structured documents in the Comprehend Developer Guide. 
    */
   classifyDocument(params: Comprehend.Types.ClassifyDocumentRequest, callback?: (err: AWSError, data: Comprehend.Types.ClassifyDocumentResponse) => void): Request<Comprehend.Types.ClassifyDocumentResponse, AWSError>;
   /**
-   * Creates a classification request to analyze a single document in real-time. ClassifyDocument supports the following model types:   Custom classifier - a custom model that you have created and trained. For input, you can provide plain text, a single-page document (PDF, Word, or image), or Textract API output. For more information, see Custom classification in the Amazon Comprehend Developer Guide.   Prompt classifier - Amazon Comprehend provides a model for classifying prompts. For input, you provide English plain text input. For prompt classification, the response includes only the Classes field. For more information about prompt classifiers, see Prompt classifiers in the Amazon Comprehend Developer Guide.   If the system detects errors while processing a page in the input document, the API response includes an entry in Errors that describes the errors. If the system detects a document-level error in your input document, the API returns an InvalidRequestException error response. For details about this exception, see  Errors in semi-structured documents in the Comprehend Developer Guide. 
+   * Creates a classification request to analyze a single document in real-time. ClassifyDocument supports the following model types:   Custom classifier - a custom model that you have created and trained. For input, you can provide plain text, a single-page document (PDF, Word, or image), or Amazon Textract API output. For more information, see Custom classification in the Amazon Comprehend Developer Guide.   Prompt safety classifier - Amazon Comprehend provides a pre-trained model for classifying input prompts for generative AI applications. For input, you provide English plain text input. For prompt safety classification, the response includes only the Classes field. For more information about prompt safety classifiers, see Prompt safety classification in the Amazon Comprehend Developer Guide.   If the system detects errors while processing a page in the input document, the API response includes an Errors field that describes the errors. If the system detects a document-level error in your input document, the API returns an InvalidRequestException error response. For details about this exception, see  Errors in semi-structured documents in the Comprehend Developer Guide. 
    */
   classifyDocument(callback?: (err: AWSError, data: Comprehend.Types.ClassifyDocumentResponse) => void): Request<Comprehend.Types.ClassifyDocumentResponse, AWSError>;
   /**
@@ -340,11 +340,11 @@ declare class Comprehend extends Service {
    */
   detectTargetedSentiment(callback?: (err: AWSError, data: Comprehend.Types.DetectTargetedSentimentResponse) => void): Request<Comprehend.Types.DetectTargetedSentimentResponse, AWSError>;
   /**
-   * Performs toxicity analysis on the list of text strings that you provide as input. The analysis uses the order of strings in the list to determine context when predicting toxicity. The API response contains a results list that matches the size of the input list. For more information about toxicity detection, see Toxicity detection in the Amazon Comprehend Developer Guide 
+   * Performs toxicity analysis on the list of text strings that you provide as input. The API response contains a results list that matches the size of the input list. For more information about toxicity detection, see Toxicity detection in the Amazon Comprehend Developer Guide. 
    */
   detectToxicContent(params: Comprehend.Types.DetectToxicContentRequest, callback?: (err: AWSError, data: Comprehend.Types.DetectToxicContentResponse) => void): Request<Comprehend.Types.DetectToxicContentResponse, AWSError>;
   /**
-   * Performs toxicity analysis on the list of text strings that you provide as input. The analysis uses the order of strings in the list to determine context when predicting toxicity. The API response contains a results list that matches the size of the input list. For more information about toxicity detection, see Toxicity detection in the Amazon Comprehend Developer Guide 
+   * Performs toxicity analysis on the list of text strings that you provide as input. The API response contains a results list that matches the size of the input list. For more information about toxicity detection, see Toxicity detection in the Amazon Comprehend Developer Guide. 
    */
   detectToxicContent(callback?: (err: AWSError, data: Comprehend.Types.DetectToxicContentResponse) => void): Request<Comprehend.Types.DetectToxicContentResponse, AWSError>;
   /**
@@ -508,11 +508,11 @@ declare class Comprehend extends Service {
    */
   putResourcePolicy(callback?: (err: AWSError, data: Comprehend.Types.PutResourcePolicyResponse) => void): Request<Comprehend.Types.PutResourcePolicyResponse, AWSError>;
   /**
-   * Starts an asynchronous document classification job. Use the DescribeDocumentClassificationJob operation to track the progress of the job.
+   * Starts an asynchronous document classification job using a custom classification model. Use the DescribeDocumentClassificationJob operation to track the progress of the job.
    */
   startDocumentClassificationJob(params: Comprehend.Types.StartDocumentClassificationJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartDocumentClassificationJobResponse) => void): Request<Comprehend.Types.StartDocumentClassificationJobResponse, AWSError>;
   /**
-   * Starts an asynchronous document classification job. Use the DescribeDocumentClassificationJob operation to track the progress of the job.
+   * Starts an asynchronous document classification job using a custom classification model. Use the DescribeDocumentClassificationJob operation to track the progress of the job.
    */
   startDocumentClassificationJob(callback?: (err: AWSError, data: Comprehend.Types.StartDocumentClassificationJobResponse) => void): Request<Comprehend.Types.StartDocumentClassificationJobResponse, AWSError>;
   /**
@@ -1053,11 +1053,11 @@ declare namespace Comprehend {
      */
     Text?: CustomerInputString;
     /**
-     * The Amazon Resource Number (ARN) of the endpoint.  For prompt classification, Amazon Comprehend provides the endpoint ARN: zzz. For custom classification, you create an endpoint for your custom model. For more information, see Using Amazon Comprehend endpoints.
+     * The Amazon Resource Number (ARN) of the endpoint.  For prompt safety classification, Amazon Comprehend provides the endpoint ARN. For more information about prompt safety classifiers, see Prompt safety classification in the Amazon Comprehend Developer Guide  For custom classification, you create an endpoint for your custom model. For more information, see Using Amazon Comprehend endpoints.
      */
     EndpointArn: DocumentClassifierEndpointArn;
     /**
-     * Use the Bytes parameter to input a text, PDF, Word or image file. When you classify a document using a custom model, you can also use the Bytes parameter to input an Amazon Textract DetectDocumentText or AnalyzeDocument output file. To classify a document using the prompt classifier, use the Text parameter for input. Provide the input document as a sequence of base64-encoded bytes. If your code uses an Amazon Web Services SDK to classify documents, the SDK may encode the document file bytes for you.  The maximum length of this field depends on the input document type. For details, see  Inputs for real-time custom analysis in the Comprehend Developer Guide.  If you use the Bytes parameter, do not use the Text parameter.
+     * Use the Bytes parameter to input a text, PDF, Word or image file. When you classify a document using a custom model, you can also use the Bytes parameter to input an Amazon Textract DetectDocumentText or AnalyzeDocument output file. To classify a document using the prompt safety classifier, use the Text parameter for input. Provide the input document as a sequence of base64-encoded bytes. If your code uses an Amazon Web Services SDK to classify documents, the SDK may encode the document file bytes for you.  The maximum length of this field depends on the input document type. For details, see  Inputs for real-time custom analysis in the Comprehend Developer Guide.  If you use the Bytes parameter, do not use the Text parameter.
      */
     Bytes?: SemiStructuredDocumentBlob;
     /**
@@ -1067,11 +1067,11 @@ declare namespace Comprehend {
   }
   export interface ClassifyDocumentResponse {
     /**
-     * The classes used by the document being analyzed. These are used for multi-class trained models. Individual classes are mutually exclusive and each document is expected to have only a single class assigned to it. For example, an animal can be a dog or a cat, but not both at the same time.  For prompt classification, the response includes a single class (UNDESIRED_PROMPT), along with a confidence score. A higher confidence score indicates that the input prompt is undesired in nature.
+     * The classes used by the document being analyzed. These are used for models trained in multi-class mode. Individual classes are mutually exclusive and each document is expected to have only a single class assigned to it. For example, an animal can be a dog or a cat, but not both at the same time.  For prompt safety classification, the response includes only two classes (SAFE_PROMPT and UNSAFE_PROMPT), along with a confidence score for each class. The value range of the score is zero to one, where one is the highest confidence.
      */
     Classes?: ListOfClasses;
     /**
-     * The labels used the document being analyzed. These are used for multi-label trained models. Individual labels represent different categories that are related in some manner and are not mutually exclusive. For example, a movie can be just an action movie, or it can be an action movie, a science fiction movie, and a comedy, all at the same time. 
+     * The labels used in the document being analyzed. These are used for multi-label trained models. Individual labels represent different categories that are related in some manner and are not mutually exclusive. For example, a movie can be just an action movie, or it can be an action movie, a science fiction movie, and a comedy, all at the same time. 
      */
     Labels?: ListOfLabels;
     /**
@@ -1193,7 +1193,7 @@ declare namespace Comprehend {
      */
     VpcConfig?: VpcConfig;
     /**
-     * Indicates the mode in which the classifier will be trained. The classifier can be trained in multi-class mode, which identifies one and only one class for each document, or multi-label mode, which identifies one or more labels for each document. In multi-label mode, multiple labels for an individual document are separated by a delimiter. The default delimiter between labels is a pipe (|).
+     * Indicates the mode in which the classifier will be trained. The classifier can be trained in multi-class (single-label) mode or multi-label mode. Multi-class mode identifies a single class label for each document and multi-label mode identifies one or more class labels for each document. Multiple labels for an individual document are separated by a delimiter. The default delimiter between labels is a pipe (|).
      */
     Mode?: DocumentClassifierMode;
     /**
@@ -1911,7 +1911,7 @@ declare namespace Comprehend {
   }
   export interface DetectToxicContentRequest {
     /**
-     * A list of up to 10 text strings. The maximum size for the list is 10 KB.
+     * A list of up to 10 text strings. Each string has a maximum size of 1 KB, and the maximum size of the list is 10 KB.
      */
     TextSegments: ListOfTextSegments;
     /**
@@ -2244,7 +2244,7 @@ declare namespace Comprehend {
      */
     DocumentReadMode?: DocumentReadMode;
     /**
-     * Specifies the type of Amazon Textract features to apply. If you chose TEXTRACT_ANALYZE_DOCUMENT as the read action, you must specify one or both of the following values:    TABLES - Returns information about any tables that are detected in the input document.     FORMS - Returns information and the data from any forms that are detected in the input document.   
+     * Specifies the type of Amazon Textract features to apply. If you chose TEXTRACT_ANALYZE_DOCUMENT as the read action, you must specify one or both of the following values:    TABLES - Returns additional information about any tables that are detected in the input document.     FORMS - Returns additional information about any forms that are detected in the input document.   
      */
     FeatureTypes?: ListOfDocumentReadFeatureTypes;
   }
@@ -2780,7 +2780,7 @@ declare namespace Comprehend {
   export type EntityTypesList = EntityTypesListItem[];
   export interface EntityTypesListItem {
     /**
-     * An entity type within a labeled training dataset that Amazon Comprehend uses to train a custom entity recognizer. Entity types must not contain the following invalid characters: \n (line break), \\n (escaped line break, \r (carriage return), \\r (escaped carriage return), \t (tab), \\t (escaped tab), space, and , (comma).
+     * An entity type within a labeled training dataset that Amazon Comprehend uses to train a custom entity recognizer. Entity types must not contain the following invalid characters: \n (line break), \\n (escaped line break, \r (carriage return), \\r (escaped carriage return), \t (tab), \\t (escaped tab), and , (comma).
      */
     Type: EntityTypeName;
   }
@@ -4858,7 +4858,7 @@ declare namespace Comprehend {
      */
     Labels?: ListOfToxicContent;
     /**
-     * Overall toxicity score for the string.
+     * Overall toxicity score for the string. Value range is zero to one, where one is the highest confidence.
      */
     Toxicity?: Float;
   }
