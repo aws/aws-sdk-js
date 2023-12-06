@@ -128,6 +128,7 @@
     "us-gov-*/batch": "fipsWithServiceOnly",
     "us-gov-*/cloudformation": "fipsWithServiceOnly",
     "us-gov-*/config": "fipsWithServiceOnly",
+    "us-gov-*/ec2": "fipsWithServiceOnly",
     "us-gov-*/eks": "fipsWithServiceOnly",
     "us-gov-*/elasticmapreduce": "fipsWithServiceOnly",
     "us-gov-*/identitystore": "fipsWithServiceOnly",
