@@ -9893,7 +9893,7 @@
     "region": "us-gov-west-1",
     "useFipsEndpoint": true,
     "useDualstackEndpoint": false,
-    "hostname": "api-fips.sagemaker.us-gov-west-1.amazonaws.com"
+    "hostname": "api.sagemaker.us-gov-west-1.amazonaws.com"
   },
   {
     "endpointPrefix": "apigateway",
@@ -9949,7 +9949,7 @@
     "region": "us-gov-east-1",
     "useFipsEndpoint": true,
     "useDualstackEndpoint": false,
-    "hostname": "application-autoscaling-fips.us-gov-east-1.amazonaws.com"
+    "hostname": "application-autoscaling.us-gov-east-1.amazonaws.com"
   },
   {
     "endpointPrefix": "application-autoscaling",
@@ -9997,7 +9997,7 @@
     "region": "us-gov-east-1",
     "useFipsEndpoint": true,
     "useDualstackEndpoint": false,
-    "hostname": "autoscaling-fips.us-gov-east-1.amazonaws.com"
+    "hostname": "autoscaling.us-gov-east-1.amazonaws.com"
   },
   {
     "endpointPrefix": "autoscaling",
@@ -10029,7 +10029,7 @@
     "region": "us-gov-east-1",
     "useFipsEndpoint": true,
     "useDualstackEndpoint": false,
-    "hostname": "autoscaling-plans-fips.us-gov-east-1.amazonaws.com"
+    "hostname": "autoscaling-plans.us-gov-east-1.amazonaws.com"
   },
   {
     "endpointPrefix": "autoscaling-plans",
@@ -10109,7 +10109,7 @@
     "region": "us-gov-west-1",
     "useFipsEndpoint": true,
     "useDualstackEndpoint": false,
-    "hostname": "clouddirectory-fips.us-gov-west-1.amazonaws.com"
+    "hostname": "clouddirectory.us-gov-west-1.amazonaws.com"
   },
   {
     "endpointPrefix": "clouddirectory",
@@ -10277,7 +10277,7 @@
     "region": "us-gov-west-1",
     "useFipsEndpoint": true,
     "useDualstackEndpoint": false,
-    "hostname": "connect-fips.us-gov-west-1.amazonaws.com"
+    "hostname": "connect.us-gov-west-1.amazonaws.com"
   },
   {
     "endpointPrefix": "connect",
@@ -10317,7 +10317,7 @@
     "region": "us-gov-west-1",
     "useFipsEndpoint": true,
     "useDualstackEndpoint": false,
-    "hostname": "databrew-fips.us-gov-west-1.amazonaws.com"
+    "hostname": "databrew.us-gov-west-1.amazonaws.com"
   },
   {
     "endpointPrefix": "databrew",
@@ -10485,7 +10485,7 @@
     "region": "us-gov-east-1",
     "useFipsEndpoint": true,
     "useDualstackEndpoint": false,
-    "hostname": "greengrass-fips.us-gov-east-1.amazonaws.com"
+    "hostname": "greengrass.us-gov-east-1.amazonaws.com"
   },
   {
     "endpointPrefix": "guardduty",
@@ -10605,7 +10605,7 @@
     "region": "us-gov-east-1",
     "useFipsEndpoint": true,
     "useDualstackEndpoint": false,
-    "hostname": "kafka-fips.us-gov-east-1.amazonaws.com"
+    "hostname": "kafka.us-gov-east-1.amazonaws.com"
   },
   {
     "endpointPrefix": "kafka",
@@ -11029,7 +11029,7 @@
     "region": "us-gov-east-1",
     "useFipsEndpoint": true,
     "useDualstackEndpoint": false,
-    "hostname": "streams.dynamodb-fips.us-gov-east-1.amazonaws.com"
+    "hostname": "streams.dynamodb.us-gov-east-1.amazonaws.com"
   },
   {
     "endpointPrefix": "streams.dynamodb",
