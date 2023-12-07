@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1513.0-->
+<!--LATEST=2.1514.0-->
 <!--ENTRYINSERT-->
+
+## 2.1514.0
+* feature: CodeDeploy: This release adds support for two new CodeDeploy features: 1) zonal deployments for Amazon EC2 in-place deployments, 2) deployments triggered by Auto Scaling group termination lifecycle hook events.
 
 ## 2.1513.0
 * bugfix: Endpoints: Use correct FIPS endpoint for EC2 in GovCloud

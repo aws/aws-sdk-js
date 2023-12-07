@@ -491,9 +491,13 @@ declare namespace CodeDeploy {
      */
     name?: AutoScalingGroupName;
     /**
-     * An Auto Scaling lifecycle event hook name.
+     * The name of the launch hook that CodeDeploy installed into the Auto Scaling group. For more information about the launch hook, see How Amazon EC2 Auto Scaling works with CodeDeploy in the CodeDeploy User Guide.
      */
     hook?: AutoScalingGroupHook;
+    /**
+     * The name of the termination hook that CodeDeploy installed into the Auto Scaling group. For more information about the termination hook, see Enabling termination deployments during Auto Scaling scale-in events in the CodeDeploy User Guide.
+     */
+    terminationHook?: AutoScalingGroupHook;
   }
   export type AutoScalingGroupHook = string;
   export type AutoScalingGroupList = AutoScalingGroup[];
@@ -579,11 +583,11 @@ declare namespace CodeDeploy {
     /**
      *  The unique ID of a deployment. 
      */
-    deploymentId?: DeploymentId;
+    deploymentId: DeploymentId;
     /**
      *  The unique IDs of the deployment targets. The compute platform of the deployment determines the type of the targets and their formats. The maximum number of deployment target IDs you can specify is 25.    For deployments that use the EC2/On-premises compute platform, the target IDs are Amazon EC2 or on-premises instances IDs, and their target type is instanceTarget.     For deployments that use the Lambda compute platform, the target IDs are the names of Lambda functions, and their target type is instanceTarget.     For deployments that use the Amazon ECS compute platform, the target IDs are pairs of Amazon ECS clusters and services specified using the format &lt;clustername&gt;:&lt;servicename&gt;. Their target type is ecsTarget.     For deployments that are deployed with CloudFormation, the target IDs are CloudFormation stack IDs. Their target type is cloudFormationTarget.   
      */
-    targetIds?: TargetIdList;
+    targetIds: TargetIdList;
   }
   export interface BatchGetDeploymentTargetsOutput {
     /**
@@ -721,6 +725,10 @@ declare namespace CodeDeploy {
      * The destination platform type for the deployment (Lambda, Server, or ECS).
      */
     computePlatform?: ComputePlatform;
+    /**
+     * Configure the ZonalConfig object if you want CodeDeploy to deploy your application to one Availability Zone at a time, within an Amazon Web Services Region. For more information about the zonal configuration feature, see zonal configuration in the CodeDeploy User Guide.
+     */
+    zonalConfig?: ZonalConfig;
   }
   export interface CreateDeploymentConfigOutput {
     /**
@@ -801,6 +809,10 @@ declare namespace CodeDeploy {
      *  The metadata that you apply to CodeDeploy deployment groups to help you organize and categorize them. Each tag consists of a key and an optional value, both of which you define. 
      */
     tags?: TagList;
+    /**
+     * This parameter only applies if you are using CodeDeploy with Amazon EC2 Auto Scaling. For more information, see Integrating CodeDeploy with Amazon EC2 Auto Scaling in the CodeDeploy User Guide. Set terminationHookEnabled to true to have CodeDeploy install a termination hook into your Auto Scaling group when you create a deployment group. When this hook is installed, CodeDeploy will perform termination deployments. For information about termination deployments, see Enabling termination deployments during Auto Scaling scale-in events in the CodeDeploy User Guide. For more information about Auto Scaling scale-in events, see the Scale in topic in the Amazon EC2 Auto Scaling User Guide.
+     */
+    terminationHookEnabled?: NullableBoolean;
   }
   export interface CreateDeploymentGroupOutput {
     /**
@@ -919,7 +931,7 @@ declare namespace CodeDeploy {
      */
     deploymentConfigName?: DeploymentConfigName;
     /**
-     * Information about the number or percentage of minimum healthy instance.
+     * Information about the number or percentage of minimum healthy instances.
      */
     minimumHealthyHosts?: MinimumHealthyHosts;
     /**
@@ -934,10 +946,14 @@ declare namespace CodeDeploy {
      * The configuration that specifies how the deployment traffic is routed. Used for deployments with a Lambda or Amazon ECS compute platform only.
      */
     trafficRoutingConfig?: TrafficRoutingConfig;
+    /**
+     * Information about a zonal configuration.
+     */
+    zonalConfig?: ZonalConfig;
   }
   export type DeploymentConfigName = string;
   export type DeploymentConfigsList = DeploymentConfigName[];
-  export type DeploymentCreator = "user"|"autoscaling"|"codeDeployRollback"|"CodeDeploy"|"CodeDeployAutoUpdate"|"CloudFormation"|"CloudFormationRollback"|string;
+  export type DeploymentCreator = "user"|"autoscaling"|"codeDeployRollback"|"CodeDeploy"|"CodeDeployAutoUpdate"|"CloudFormation"|"CloudFormationRollback"|"autoscalingTermination"|string;
   export type DeploymentGroupId = string;
   export interface DeploymentGroupInfo {
     /**
@@ -1028,6 +1044,10 @@ declare namespace CodeDeploy {
      *  The target Amazon ECS services in the deployment group. This applies only to deployment groups that use the Amazon ECS compute platform. A target Amazon ECS service is specified as an Amazon ECS cluster and service name pair using the format &lt;clustername&gt;:&lt;servicename&gt;. 
      */
     ecsServices?: ECSServiceList;
+    /**
+     * Indicates whether the deployment group was configured to have CodeDeploy install a termination hook into an Auto Scaling group. For more information about the termination hook, see How Amazon EC2 Auto Scaling works with CodeDeploy in the CodeDeploy User Guide.
+     */
+    terminationHookEnabled?: Boolean;
   }
   export type DeploymentGroupInfoList = DeploymentGroupInfo[];
   export type DeploymentGroupName = string;
@@ -1498,11 +1518,11 @@ declare namespace CodeDeploy {
     /**
      *  The unique ID of a deployment. 
      */
-    deploymentId?: DeploymentId;
+    deploymentId: DeploymentId;
     /**
      *  The unique ID of a deployment target. 
      */
-    targetId?: TargetId;
+    targetId: TargetId;
   }
   export interface GetDeploymentTargetOutput {
     /**
@@ -1871,7 +1891,7 @@ declare namespace CodeDeploy {
     /**
      *  The unique ID of a deployment. 
      */
-    deploymentId?: DeploymentId;
+    deploymentId: DeploymentId;
     /**
      *  A token identifier returned from the previous ListDeploymentTargets call. It can be used to return the next set of deployment targets in the list. 
      */
@@ -2016,6 +2036,18 @@ declare namespace CodeDeploy {
      */
     value?: MinimumHealthyHostsValue;
   }
+  export interface MinimumHealthyHostsPerZone {
+    /**
+     * The type associated with the MinimumHealthyHostsPerZone option.
+     */
+    type?: MinimumHealthyHostsPerZoneType;
+    /**
+     * The value associated with the MinimumHealthyHostsPerZone option.
+     */
+    value?: MinimumHealthyHostsPerZoneValue;
+  }
+  export type MinimumHealthyHostsPerZoneType = "HOST_COUNT"|"FLEET_PERCENT"|string;
+  export type MinimumHealthyHostsPerZoneValue = number;
   export type MinimumHealthyHostsType = "HOST_COUNT"|"FLEET_PERCENT"|string;
   export type MinimumHealthyHostsValue = number;
   export type NextToken = string;
@@ -2466,6 +2498,10 @@ declare namespace CodeDeploy {
      * Information about an on-premises instance tag set. The deployment group includes only on-premises instances identified by all the tag groups.
      */
     onPremisesTagSet?: OnPremisesTagSet;
+    /**
+     * This parameter only applies if you are using CodeDeploy with Amazon EC2 Auto Scaling. For more information, see Integrating CodeDeploy with Amazon EC2 Auto Scaling in the CodeDeploy User Guide. Set terminationHookEnabled to true to have CodeDeploy install a termination hook into your Auto Scaling group when you update a deployment group. When this hook is installed, CodeDeploy will perform termination deployments. For information about termination deployments, see Enabling termination deployments during Auto Scaling scale-in events in the CodeDeploy User Guide. For more information about Auto Scaling scale-in events, see the Scale in topic in the Amazon EC2 Auto Scaling User Guide.
+     */
+    terminationHookEnabled?: NullableBoolean;
   }
   export interface UpdateDeploymentGroupOutput {
     /**
@@ -2477,6 +2513,21 @@ declare namespace CodeDeploy {
   export type Version = string;
   export type VersionId = string;
   export type WaitTimeInMins = number;
+  export type WaitTimeInSeconds = number;
+  export interface ZonalConfig {
+    /**
+     * The period of time, in seconds, that CodeDeploy must wait after completing a deployment to the first Availability Zone. CodeDeploy will wait this amount of time before starting a deployment to the second Availability Zone. You might set this option if you want to allow extra bake time for the first Availability Zone. If you don't specify a value for firstZoneMonitorDurationInSeconds, then CodeDeploy uses the monitorDurationInSeconds value for the first Availability Zone. For more information about the zonal configuration feature, see zonal configuration in the CodeDeploy User Guide.
+     */
+    firstZoneMonitorDurationInSeconds?: WaitTimeInSeconds;
+    /**
+     * The period of time, in seconds, that CodeDeploy must wait after completing a deployment to an Availability Zone. CodeDeploy will wait this amount of time before starting a deployment to the next Availability Zone. Consider adding a monitor duration to give the deployment some time to prove itself (or 'bake') in one Availability Zone before it is released in the next zone. If you don't specify a monitorDurationInSeconds, CodeDeploy starts deploying to the next Availability Zone immediately. For more information about the zonal configuration feature, see zonal configuration in the CodeDeploy User Guide.
+     */
+    monitorDurationInSeconds?: WaitTimeInSeconds;
+    /**
+     * The number or percentage of instances that must remain available per Availability Zone during a deployment. This option works in conjunction with the MinimumHealthyHosts option. For more information, see About the minimum number of healthy hosts per Availability Zone in the CodeDeploy User Guide. If you don't specify the minimumHealthyHostsPerZone option, then CodeDeploy uses a default value of 0 percent. For more information about the zonal configuration feature, see zonal configuration in the CodeDeploy User Guide.
+     */
+    minimumHealthyHostsPerZone?: MinimumHealthyHostsPerZone;
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
