@@ -2769,7 +2769,7 @@
     "endpointPrefix": "api.sagemaker",
     "clientName": "SageMaker",
     "region": "us-gov-west-1-fips",
-    "hostname": "api-fips.sagemaker.us-gov-west-1.amazonaws.com"
+    "hostname": "api.sagemaker.us-gov-west-1.amazonaws.com"
   },
   {
     "endpointPrefix": "athena",
@@ -3039,7 +3039,7 @@
     "endpointPrefix": "greengrass",
     "clientName": "GreengrassV2",
     "region": "fips-us-gov-east-1",
-    "hostname": "greengrass-fips.us-gov-east-1.amazonaws.com"
+    "hostname": "greengrass.us-gov-east-1.amazonaws.com"
   },
   {
     "endpointPrefix": "guardduty",
@@ -3351,13 +3351,13 @@
     "endpointPrefix": "streams.dynamodb",
     "clientName": "DynamoDBStreams",
     "region": "us-gov-east-1-fips",
-    "hostname": "streams.dynamodb-fips.us-gov-east-1.amazonaws.com"
+    "hostname": "streams.dynamodb.us-gov-east-1.amazonaws.com"
   },
   {
     "endpointPrefix": "streams.dynamodb",
     "clientName": "DynamoDBStreams",
     "region": "us-gov-west-1-fips",
-    "hostname": "streams.dynamodb-fips.us-gov-west-1.amazonaws.com"
+    "hostname": "streams.dynamodb.us-gov-west-1.amazonaws.com"
   },
   {
     "endpointPrefix": "sts",
