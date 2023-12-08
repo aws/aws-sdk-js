@@ -63,6 +63,7 @@
 * feature: QConnect: Amazon Q in Connect, an LLM-enhanced evolution of Amazon Connect Wisdom. This release adds generative AI support to Amazon Q Connect QueryAssistant and GetRecommendations APIs.
 * feature: S3: Adds support for S3 Express One Zone.
 * feature: S3Control: Adds support for S3 Express One Zone, and InvocationSchemaVersion 2.0 for S3 Batch Operations.
+  * Note: S3 Express One Zone is only supported in [AWS SDK for JavaScript (v3)](https://github.com/aws/aws-sdk-js-v3/)
 
 ## 2.1505.0
 * feature: ElastiCache: Launching Amazon ElastiCache Serverless that enables you to create a cache in under a minute without any capacity management. ElastiCache Serverless monitors the cache's memory, CPU, and network usage and scales both vertically and horizontally to support your application's requirements.
