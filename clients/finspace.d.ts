@@ -44,6 +44,14 @@ declare class Finspace extends Service {
    */
   createKxDatabase(callback?: (err: AWSError, data: Finspace.Types.CreateKxDatabaseResponse) => void): Request<Finspace.Types.CreateKxDatabaseResponse, AWSError>;
   /**
+   *  Creates a snapshot of kdb database with tiered storage capabilities and a pre-warmed cache, ready for mounting on kdb clusters. Dataviews are only available for clusters running on a scaling group. They are not supported on dedicated clusters. 
+   */
+  createKxDataview(params: Finspace.Types.CreateKxDataviewRequest, callback?: (err: AWSError, data: Finspace.Types.CreateKxDataviewResponse) => void): Request<Finspace.Types.CreateKxDataviewResponse, AWSError>;
+  /**
+   *  Creates a snapshot of kdb database with tiered storage capabilities and a pre-warmed cache, ready for mounting on kdb clusters. Dataviews are only available for clusters running on a scaling group. They are not supported on dedicated clusters. 
+   */
+  createKxDataview(callback?: (err: AWSError, data: Finspace.Types.CreateKxDataviewResponse) => void): Request<Finspace.Types.CreateKxDataviewResponse, AWSError>;
+  /**
    * Creates a managed kdb environment for the account.
    */
   createKxEnvironment(params: Finspace.Types.CreateKxEnvironmentRequest, callback?: (err: AWSError, data: Finspace.Types.CreateKxEnvironmentResponse) => void): Request<Finspace.Types.CreateKxEnvironmentResponse, AWSError>;
@@ -52,6 +60,14 @@ declare class Finspace extends Service {
    */
   createKxEnvironment(callback?: (err: AWSError, data: Finspace.Types.CreateKxEnvironmentResponse) => void): Request<Finspace.Types.CreateKxEnvironmentResponse, AWSError>;
   /**
+   * Creates a new scaling group. 
+   */
+  createKxScalingGroup(params: Finspace.Types.CreateKxScalingGroupRequest, callback?: (err: AWSError, data: Finspace.Types.CreateKxScalingGroupResponse) => void): Request<Finspace.Types.CreateKxScalingGroupResponse, AWSError>;
+  /**
+   * Creates a new scaling group. 
+   */
+  createKxScalingGroup(callback?: (err: AWSError, data: Finspace.Types.CreateKxScalingGroupResponse) => void): Request<Finspace.Types.CreateKxScalingGroupResponse, AWSError>;
+  /**
    * Creates a user in FinSpace kdb environment with an associated IAM role.
    */
   createKxUser(params: Finspace.Types.CreateKxUserRequest, callback?: (err: AWSError, data: Finspace.Types.CreateKxUserResponse) => void): Request<Finspace.Types.CreateKxUserResponse, AWSError>;
@@ -59,6 +75,14 @@ declare class Finspace extends Service {
    * Creates a user in FinSpace kdb environment with an associated IAM role.
    */
   createKxUser(callback?: (err: AWSError, data: Finspace.Types.CreateKxUserResponse) => void): Request<Finspace.Types.CreateKxUserResponse, AWSError>;
+  /**
+   *  Creates a new volume with a specific amount of throughput and storage capacity. 
+   */
+  createKxVolume(params: Finspace.Types.CreateKxVolumeRequest, callback?: (err: AWSError, data: Finspace.Types.CreateKxVolumeResponse) => void): Request<Finspace.Types.CreateKxVolumeResponse, AWSError>;
+  /**
+   *  Creates a new volume with a specific amount of throughput and storage capacity. 
+   */
+  createKxVolume(callback?: (err: AWSError, data: Finspace.Types.CreateKxVolumeResponse) => void): Request<Finspace.Types.CreateKxVolumeResponse, AWSError>;
   /**
    * Delete an FinSpace environment.
    */
@@ -84,6 +108,14 @@ declare class Finspace extends Service {
    */
   deleteKxDatabase(callback?: (err: AWSError, data: Finspace.Types.DeleteKxDatabaseResponse) => void): Request<Finspace.Types.DeleteKxDatabaseResponse, AWSError>;
   /**
+   *  Deletes the specified dataview. Before deleting a dataview, make sure that it is not in use by any cluster. 
+   */
+  deleteKxDataview(params: Finspace.Types.DeleteKxDataviewRequest, callback?: (err: AWSError, data: Finspace.Types.DeleteKxDataviewResponse) => void): Request<Finspace.Types.DeleteKxDataviewResponse, AWSError>;
+  /**
+   *  Deletes the specified dataview. Before deleting a dataview, make sure that it is not in use by any cluster. 
+   */
+  deleteKxDataview(callback?: (err: AWSError, data: Finspace.Types.DeleteKxDataviewResponse) => void): Request<Finspace.Types.DeleteKxDataviewResponse, AWSError>;
+  /**
    * Deletes the kdb environment. This action is irreversible. Deleting a kdb environment will remove all the associated data and any services running in it. 
    */
   deleteKxEnvironment(params: Finspace.Types.DeleteKxEnvironmentRequest, callback?: (err: AWSError, data: Finspace.Types.DeleteKxEnvironmentResponse) => void): Request<Finspace.Types.DeleteKxEnvironmentResponse, AWSError>;
@@ -92,6 +124,14 @@ declare class Finspace extends Service {
    */
   deleteKxEnvironment(callback?: (err: AWSError, data: Finspace.Types.DeleteKxEnvironmentResponse) => void): Request<Finspace.Types.DeleteKxEnvironmentResponse, AWSError>;
   /**
+   *  Deletes the specified scaling group. This action is irreversible. You cannot delete a scaling group until all the clusters running on it have been deleted.
+   */
+  deleteKxScalingGroup(params: Finspace.Types.DeleteKxScalingGroupRequest, callback?: (err: AWSError, data: Finspace.Types.DeleteKxScalingGroupResponse) => void): Request<Finspace.Types.DeleteKxScalingGroupResponse, AWSError>;
+  /**
+   *  Deletes the specified scaling group. This action is irreversible. You cannot delete a scaling group until all the clusters running on it have been deleted.
+   */
+  deleteKxScalingGroup(callback?: (err: AWSError, data: Finspace.Types.DeleteKxScalingGroupResponse) => void): Request<Finspace.Types.DeleteKxScalingGroupResponse, AWSError>;
+  /**
    * Deletes a user in the specified kdb environment.
    */
   deleteKxUser(params: Finspace.Types.DeleteKxUserRequest, callback?: (err: AWSError, data: Finspace.Types.DeleteKxUserResponse) => void): Request<Finspace.Types.DeleteKxUserResponse, AWSError>;
@@ -99,6 +139,14 @@ declare class Finspace extends Service {
    * Deletes a user in the specified kdb environment.
    */
   deleteKxUser(callback?: (err: AWSError, data: Finspace.Types.DeleteKxUserResponse) => void): Request<Finspace.Types.DeleteKxUserResponse, AWSError>;
+  /**
+   *  Deletes a volume. You can only delete a volume if it's not attached to a cluster or a dataview. When a volume is deleted, any data on the volume is lost. This action is irreversible. 
+   */
+  deleteKxVolume(params: Finspace.Types.DeleteKxVolumeRequest, callback?: (err: AWSError, data: Finspace.Types.DeleteKxVolumeResponse) => void): Request<Finspace.Types.DeleteKxVolumeResponse, AWSError>;
+  /**
+   *  Deletes a volume. You can only delete a volume if it's not attached to a cluster or a dataview. When a volume is deleted, any data on the volume is lost. This action is irreversible. 
+   */
+  deleteKxVolume(callback?: (err: AWSError, data: Finspace.Types.DeleteKxVolumeResponse) => void): Request<Finspace.Types.DeleteKxVolumeResponse, AWSError>;
   /**
    * Returns the FinSpace environment object.
    */
@@ -140,6 +188,14 @@ declare class Finspace extends Service {
    */
   getKxDatabase(callback?: (err: AWSError, data: Finspace.Types.GetKxDatabaseResponse) => void): Request<Finspace.Types.GetKxDatabaseResponse, AWSError>;
   /**
+   *  Retrieves details of the dataview. 
+   */
+  getKxDataview(params: Finspace.Types.GetKxDataviewRequest, callback?: (err: AWSError, data: Finspace.Types.GetKxDataviewResponse) => void): Request<Finspace.Types.GetKxDataviewResponse, AWSError>;
+  /**
+   *  Retrieves details of the dataview. 
+   */
+  getKxDataview(callback?: (err: AWSError, data: Finspace.Types.GetKxDataviewResponse) => void): Request<Finspace.Types.GetKxDataviewResponse, AWSError>;
+  /**
    * Retrieves all the information for the specified kdb environment.
    */
   getKxEnvironment(params: Finspace.Types.GetKxEnvironmentRequest, callback?: (err: AWSError, data: Finspace.Types.GetKxEnvironmentResponse) => void): Request<Finspace.Types.GetKxEnvironmentResponse, AWSError>;
@@ -148,6 +204,14 @@ declare class Finspace extends Service {
    */
   getKxEnvironment(callback?: (err: AWSError, data: Finspace.Types.GetKxEnvironmentResponse) => void): Request<Finspace.Types.GetKxEnvironmentResponse, AWSError>;
   /**
+   *  Retrieves details of a scaling group.
+   */
+  getKxScalingGroup(params: Finspace.Types.GetKxScalingGroupRequest, callback?: (err: AWSError, data: Finspace.Types.GetKxScalingGroupResponse) => void): Request<Finspace.Types.GetKxScalingGroupResponse, AWSError>;
+  /**
+   *  Retrieves details of a scaling group.
+   */
+  getKxScalingGroup(callback?: (err: AWSError, data: Finspace.Types.GetKxScalingGroupResponse) => void): Request<Finspace.Types.GetKxScalingGroupResponse, AWSError>;
+  /**
    * Retrieves information about the specified kdb user.
    */
   getKxUser(params: Finspace.Types.GetKxUserRequest, callback?: (err: AWSError, data: Finspace.Types.GetKxUserResponse) => void): Request<Finspace.Types.GetKxUserResponse, AWSError>;
@@ -155,6 +219,14 @@ declare class Finspace extends Service {
    * Retrieves information about the specified kdb user.
    */
   getKxUser(callback?: (err: AWSError, data: Finspace.Types.GetKxUserResponse) => void): Request<Finspace.Types.GetKxUserResponse, AWSError>;
+  /**
+   *  Retrieves the information about the volume. 
+   */
+  getKxVolume(params: Finspace.Types.GetKxVolumeRequest, callback?: (err: AWSError, data: Finspace.Types.GetKxVolumeResponse) => void): Request<Finspace.Types.GetKxVolumeResponse, AWSError>;
+  /**
+   *  Retrieves the information about the volume. 
+   */
+  getKxVolume(callback?: (err: AWSError, data: Finspace.Types.GetKxVolumeResponse) => void): Request<Finspace.Types.GetKxVolumeResponse, AWSError>;
   /**
    * A list of all of your FinSpace environments.
    */
@@ -196,6 +268,14 @@ declare class Finspace extends Service {
    */
   listKxDatabases(callback?: (err: AWSError, data: Finspace.Types.ListKxDatabasesResponse) => void): Request<Finspace.Types.ListKxDatabasesResponse, AWSError>;
   /**
+   *  Returns a list of all the dataviews in the database.
+   */
+  listKxDataviews(params: Finspace.Types.ListKxDataviewsRequest, callback?: (err: AWSError, data: Finspace.Types.ListKxDataviewsResponse) => void): Request<Finspace.Types.ListKxDataviewsResponse, AWSError>;
+  /**
+   *  Returns a list of all the dataviews in the database.
+   */
+  listKxDataviews(callback?: (err: AWSError, data: Finspace.Types.ListKxDataviewsResponse) => void): Request<Finspace.Types.ListKxDataviewsResponse, AWSError>;
+  /**
    * Returns a list of kdb environments created in an account.
    */
   listKxEnvironments(params: Finspace.Types.ListKxEnvironmentsRequest, callback?: (err: AWSError, data: Finspace.Types.ListKxEnvironmentsResponse) => void): Request<Finspace.Types.ListKxEnvironmentsResponse, AWSError>;
@@ -204,6 +284,14 @@ declare class Finspace extends Service {
    */
   listKxEnvironments(callback?: (err: AWSError, data: Finspace.Types.ListKxEnvironmentsResponse) => void): Request<Finspace.Types.ListKxEnvironmentsResponse, AWSError>;
   /**
+   *  Returns a list of scaling groups in a kdb environment.
+   */
+  listKxScalingGroups(params: Finspace.Types.ListKxScalingGroupsRequest, callback?: (err: AWSError, data: Finspace.Types.ListKxScalingGroupsResponse) => void): Request<Finspace.Types.ListKxScalingGroupsResponse, AWSError>;
+  /**
+   *  Returns a list of scaling groups in a kdb environment.
+   */
+  listKxScalingGroups(callback?: (err: AWSError, data: Finspace.Types.ListKxScalingGroupsResponse) => void): Request<Finspace.Types.ListKxScalingGroupsResponse, AWSError>;
+  /**
    * Lists all the users in a kdb environment.
    */
   listKxUsers(params: Finspace.Types.ListKxUsersRequest, callback?: (err: AWSError, data: Finspace.Types.ListKxUsersResponse) => void): Request<Finspace.Types.ListKxUsersResponse, AWSError>;
@@ -211,6 +299,14 @@ declare class Finspace extends Service {
    * Lists all the users in a kdb environment.
    */
   listKxUsers(callback?: (err: AWSError, data: Finspace.Types.ListKxUsersResponse) => void): Request<Finspace.Types.ListKxUsersResponse, AWSError>;
+  /**
+   *  Lists all the volumes in a kdb environment. 
+   */
+  listKxVolumes(params: Finspace.Types.ListKxVolumesRequest, callback?: (err: AWSError, data: Finspace.Types.ListKxVolumesResponse) => void): Request<Finspace.Types.ListKxVolumesResponse, AWSError>;
+  /**
+   *  Lists all the volumes in a kdb environment. 
+   */
+  listKxVolumes(callback?: (err: AWSError, data: Finspace.Types.ListKxVolumesResponse) => void): Request<Finspace.Types.ListKxVolumesResponse, AWSError>;
   /**
    * A list of all tags for a resource.
    */
@@ -268,6 +364,14 @@ declare class Finspace extends Service {
    */
   updateKxDatabase(callback?: (err: AWSError, data: Finspace.Types.UpdateKxDatabaseResponse) => void): Request<Finspace.Types.UpdateKxDatabaseResponse, AWSError>;
   /**
+   *  Updates the specified dataview. The dataviews get automatically updated when any new changesets are ingested. Each update of the dataview creates a new version, including changeset details and cache configurations
+   */
+  updateKxDataview(params: Finspace.Types.UpdateKxDataviewRequest, callback?: (err: AWSError, data: Finspace.Types.UpdateKxDataviewResponse) => void): Request<Finspace.Types.UpdateKxDataviewResponse, AWSError>;
+  /**
+   *  Updates the specified dataview. The dataviews get automatically updated when any new changesets are ingested. Each update of the dataview creates a new version, including changeset details and cache configurations
+   */
+  updateKxDataview(callback?: (err: AWSError, data: Finspace.Types.UpdateKxDataviewResponse) => void): Request<Finspace.Types.UpdateKxDataviewResponse, AWSError>;
+  /**
    * Updates information for the given kdb environment.
    */
   updateKxEnvironment(params: Finspace.Types.UpdateKxEnvironmentRequest, callback?: (err: AWSError, data: Finspace.Types.UpdateKxEnvironmentResponse) => void): Request<Finspace.Types.UpdateKxEnvironmentResponse, AWSError>;
@@ -291,8 +395,17 @@ declare class Finspace extends Service {
    * Updates the user details. You can only update the IAM role associated with a user.
    */
   updateKxUser(callback?: (err: AWSError, data: Finspace.Types.UpdateKxUserResponse) => void): Request<Finspace.Types.UpdateKxUserResponse, AWSError>;
+  /**
+   *  Updates the throughput or capacity of a volume. During the update process, the filesystem might be unavailable for a few minutes. You can retry any operations after the update is complete. 
+   */
+  updateKxVolume(params: Finspace.Types.UpdateKxVolumeRequest, callback?: (err: AWSError, data: Finspace.Types.UpdateKxVolumeResponse) => void): Request<Finspace.Types.UpdateKxVolumeResponse, AWSError>;
+  /**
+   *  Updates the throughput or capacity of a volume. During the update process, the filesystem might be unavailable for a few minutes. You can retry any operations after the update is complete. 
+   */
+  updateKxVolume(callback?: (err: AWSError, data: Finspace.Types.UpdateKxVolumeResponse) => void): Request<Finspace.Types.UpdateKxVolumeResponse, AWSError>;
 }
 declare namespace Finspace {
+  export type AttachedClusterList = KxClusterName[];
   export type AttributeMap = {[key: string]: FederationAttributeValue};
   export interface AutoScalingConfiguration {
     /**
@@ -355,6 +468,7 @@ declare namespace Finspace {
   export type ChangesetStatus = "PENDING"|"PROCESSING"|"FAILED"|"COMPLETED"|string;
   export type ClientToken = string;
   export type ClientTokenString = string;
+  export type ClusterNodeCount = number;
   export interface CodeConfiguration {
     /**
      * A unique name for the S3 bucket.
@@ -370,6 +484,7 @@ declare namespace Finspace {
     s3ObjectVersion?: S3ObjectVersion;
   }
   export type CooldownTime = number;
+  export type CpuCount = number;
   export interface CreateEnvironmentRequest {
     /**
      * The name of the FinSpace environment to be created.
@@ -484,9 +599,13 @@ declare namespace Finspace {
      */
     clusterName: KxClusterName;
     /**
-     * Specifies the type of KDB database that is being created. The following types are available:    HDB – A Historical Database. The data is only accessible with read-only permissions from one of the FinSpace managed kdb databases mounted to the cluster.   RDB – A Realtime Database. This type of database captures all the data from a ticker plant and stores it in memory until the end of day, after which it writes all of its data to a disk and reloads the HDB. This cluster type requires local storage for temporary storage of data during the savedown process. If you specify this field in your request, you must provide the savedownStorageConfiguration parameter.   GATEWAY – A gateway cluster allows you to access data across processes in kdb systems. It allows you to create your own routing logic using the initialization scripts and custom code. This type of cluster does not require a writable local storage.   GP – A general purpose cluster allows you to quickly iterate on code during development by granting greater access to system commands and enabling a fast reload of custom code. This cluster type can optionally mount databases including cache and savedown storage. For this cluster type, the node count is fixed at 1. It does not support autoscaling and supports only SINGLE AZ mode.  
+     * Specifies the type of KDB database that is being created. The following types are available:    HDB – A Historical Database. The data is only accessible with read-only permissions from one of the FinSpace managed kdb databases mounted to the cluster.   RDB – A Realtime Database. This type of database captures all the data from a ticker plant and stores it in memory until the end of day, after which it writes all of its data to a disk and reloads the HDB. This cluster type requires local storage for temporary storage of data during the savedown process. If you specify this field in your request, you must provide the savedownStorageConfiguration parameter.   GATEWAY – A gateway cluster allows you to access data across processes in kdb systems. It allows you to create your own routing logic using the initialization scripts and custom code. This type of cluster does not require a writable local storage.   GP – A general purpose cluster allows you to quickly iterate on code during development by granting greater access to system commands and enabling a fast reload of custom code. This cluster type can optionally mount databases including cache and savedown storage. For this cluster type, the node count is fixed at 1. It does not support autoscaling and supports only SINGLE AZ mode.   Tickerplant – A tickerplant cluster allows you to subscribe to feed handlers based on IAM permissions. It can publish to RDBs, other Tickerplants, and real-time subscribers (RTS). Tickerplants can persist messages to log, which is readable by any RDB environment. It supports only single-node that is only one kdb process.  
      */
     clusterType: KxClusterType;
+    /**
+     *  A configuration to store Tickerplant logs. It consists of a list of volumes that will be mounted to your cluster. For the cluster type Tickerplant, the location of the TP volume on the cluster will be available by using the global variable .aws.tp_log_path. 
+     */
+    tickerplantLogConfiguration?: TickerplantLogConfiguration;
     /**
      * A list of databases that will be available for querying.
      */
@@ -506,7 +625,7 @@ declare namespace Finspace {
     /**
      * A structure for the metadata of a cluster. It includes information like the CPUs needed, memory of instances, and number of instances.
      */
-    capacityConfiguration: CapacityConfiguration;
+    capacityConfiguration?: CapacityConfiguration;
     /**
      * The version of FinSpace managed kdb to run.
      */
@@ -514,7 +633,7 @@ declare namespace Finspace {
     /**
      * Configuration details about the network where the Privatelink endpoint of the cluster resides.
      */
-    vpcConfiguration?: VpcConfiguration;
+    vpcConfiguration: VpcConfiguration;
     /**
      * Specifies a Q program that will be run at launch of a cluster. It is a relative path within .zip file that contains the custom code, which will be loaded on the cluster. It must include the file name itself. For example, somedir/init.q.
      */
@@ -547,6 +666,10 @@ declare namespace Finspace {
      * A list of key-value pairs to label the cluster. You can add up to 50 tags to a cluster.
      */
     tags?: TagMap;
+    /**
+     * The structure that stores the configuration details of a scaling group.
+     */
+    scalingGroupConfiguration?: KxScalingGroupConfiguration;
   }
   export interface CreateKxClusterResponse {
     /**
@@ -566,9 +689,14 @@ declare namespace Finspace {
      */
     clusterName?: KxClusterName;
     /**
-     * Specifies the type of KDB database that is being created. The following types are available:    HDB – A Historical Database. The data is only accessible with read-only permissions from one of the FinSpace managed kdb databases mounted to the cluster.   RDB – A Realtime Database. This type of database captures all the data from a ticker plant and stores it in memory until the end of day, after which it writes all of its data to a disk and reloads the HDB. This cluster type requires local storage for temporary storage of data during the savedown process. If you specify this field in your request, you must provide the savedownStorageConfiguration parameter.   GATEWAY – A gateway cluster allows you to access data across processes in kdb systems. It allows you to create your own routing logic using the initialization scripts and custom code. This type of cluster does not require a writable local storage.   GP – A general purpose cluster allows you to quickly iterate on code during development by granting greater access to system commands and enabling a fast reload of custom code. This cluster type can optionally mount databases including cache and savedown storage. For this cluster type, the node count is fixed at 1. It does not support autoscaling and supports only SINGLE AZ mode.  
+     * Specifies the type of KDB database that is being created. The following types are available:    HDB – A Historical Database. The data is only accessible with read-only permissions from one of the FinSpace managed kdb databases mounted to the cluster.   RDB – A Realtime Database. This type of database captures all the data from a ticker plant and stores it in memory until the end of day, after which it writes all of its data to a disk and reloads the HDB. This cluster type requires local storage for temporary storage of data during the savedown process. If you specify this field in your request, you must provide the savedownStorageConfiguration parameter.   GATEWAY – A gateway cluster allows you to access data across processes in kdb systems. It allows you to create your own routing logic using the initialization scripts and custom code. This type of cluster does not require a writable local storage.   GP – A general purpose cluster allows you to quickly iterate on code during development by granting greater access to system commands and enabling a fast reload of custom code. This cluster type can optionally mount databases including cache and savedown storage. For this cluster type, the node count is fixed at 1. It does not support autoscaling and supports only SINGLE AZ mode.   Tickerplant – A tickerplant cluster allows you to subscribe to feed handlers based on IAM permissions. It can publish to RDBs, other Tickerplants, and real-time subscribers (RTS). Tickerplants can persist messages to log, which is readable by any RDB environment. It supports only single-node that is only one kdb process.  
      */
     clusterType?: KxClusterType;
+    tickerplantLogConfiguration?: TickerplantLogConfiguration;
+    /**
+     *  A list of volumes mounted on the cluster. 
+     */
+    volumes?: Volumes;
     /**
      * A list of databases that will be available for querying.
      */
@@ -633,6 +761,10 @@ declare namespace Finspace {
      * The timestamp at which the cluster was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
      */
     createdTimestamp?: Timestamp;
+    /**
+     * The structure that stores the configuration details of a scaling group.
+     */
+    scalingGroupConfiguration?: KxScalingGroupConfiguration;
   }
   export interface CreateKxDatabaseRequest {
     /**
@@ -681,6 +813,102 @@ declare namespace Finspace {
      * The last time that the database was updated in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
      */
     lastModifiedTimestamp?: Timestamp;
+  }
+  export interface CreateKxDataviewRequest {
+    /**
+     * A unique identifier for the kdb environment, where you want to create the dataview. 
+     */
+    environmentId: EnvironmentId;
+    /**
+     *  The name of the database where you want to create a dataview. 
+     */
+    databaseName: DatabaseName;
+    /**
+     * A unique identifier for the dataview.
+     */
+    dataviewName: KxDataviewName;
+    /**
+     * The number of availability zones you want to assign per cluster. This can be one of the following     SINGLE – Assigns one availability zone per cluster.    MULTI – Assigns all the availability zones per cluster.  
+     */
+    azMode: KxAzMode;
+    /**
+     *  The identifier of the availability zones. 
+     */
+    availabilityZoneId?: AvailabilityZoneId;
+    /**
+     *  A unique identifier of the changeset that you want to use to ingest data. 
+     */
+    changesetId?: ChangesetId;
+    /**
+     *  The configuration that contains the database path of the data that you want to place on each selected volume. Each segment must have a unique database path for each volume. If you do not explicitly specify any database path for a volume, they are accessible from the cluster through the default S3/object store segment. 
+     */
+    segmentConfigurations?: KxDataviewSegmentConfigurationList;
+    /**
+     * The option to specify whether you want to apply all the future additions and corrections automatically to the dataview, when you ingest new changesets. The default value is false.
+     */
+    autoUpdate?: booleanValue;
+    /**
+     * A description of the dataview.
+     */
+    description?: Description;
+    /**
+     *  A list of key-value pairs to label the dataview. You can add up to 50 tags to a dataview. 
+     */
+    tags?: TagMap;
+    /**
+     * A token that ensures idempotency. This token expires in 10 minutes.
+     */
+    clientToken: ClientTokenString;
+  }
+  export interface CreateKxDataviewResponse {
+    /**
+     * A unique identifier for the dataview.
+     */
+    dataviewName?: KxDataviewName;
+    /**
+     * The name of the database where you want to create a dataview.
+     */
+    databaseName?: DatabaseName;
+    /**
+     * A unique identifier for the kdb environment, where you want to create the dataview. 
+     */
+    environmentId?: EnvironmentId;
+    /**
+     * The number of availability zones you want to assign per cluster. This can be one of the following     SINGLE – Assigns one availability zone per cluster.    MULTI – Assigns all the availability zones per cluster.  
+     */
+    azMode?: KxAzMode;
+    /**
+     *  The identifier of the availability zones. 
+     */
+    availabilityZoneId?: AvailabilityZoneId;
+    /**
+     * A unique identifier for the changeset.
+     */
+    changesetId?: ChangesetId;
+    /**
+     *  The configuration that contains the database path of the data that you want to place on each selected volume. Each segment must have a unique database path for each volume. If you do not explicitly specify any database path for a volume, they are accessible from the cluster through the default S3/object store segment. 
+     */
+    segmentConfigurations?: KxDataviewSegmentConfigurationList;
+    /**
+     * A description of the dataview.
+     */
+    description?: Description;
+    /**
+     * The option to select whether you want to apply all the future additions and corrections automatically to the dataview when you ingest new changesets. The default value is false.
+     */
+    autoUpdate?: booleanValue;
+    /**
+     *  The timestamp at which the dataview was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     */
+    createdTimestamp?: Timestamp;
+    /**
+     *  The last time that the dataview was updated in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000. 
+     */
+    lastModifiedTimestamp?: Timestamp;
+    /**
+     *  The status of dataview creation.    CREATING – The dataview creation is in progress.    UPDATING – The dataview is in the process of being updated.    ACTIVE – The dataview is active.  
+     */
+    status?: KxDataviewStatus;
   }
   export interface CreateKxEnvironmentRequest {
     /**
@@ -734,6 +962,62 @@ declare namespace Finspace {
      */
     creationTimestamp?: Timestamp;
   }
+  export interface CreateKxScalingGroupRequest {
+    /**
+     * A token that ensures idempotency. This token expires in 10 minutes.
+     */
+    clientToken: ClientToken;
+    /**
+     * A unique identifier for the kdb environment, where you want to create the scaling group. 
+     */
+    environmentId: KxEnvironmentId;
+    /**
+     * A unique identifier for the kdb scaling group. 
+     */
+    scalingGroupName: KxScalingGroupName;
+    /**
+     *  The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed. 
+     */
+    hostType: KxHostType;
+    /**
+     * The identifier of the availability zones.
+     */
+    availabilityZoneId: AvailabilityZoneId;
+    /**
+     *  A list of key-value pairs to label the scaling group. You can add up to 50 tags to a scaling group. 
+     */
+    tags?: TagMap;
+  }
+  export interface CreateKxScalingGroupResponse {
+    /**
+     * A unique identifier for the kdb environment, where you create the scaling group. 
+     */
+    environmentId?: KxEnvironmentId;
+    /**
+     * A unique identifier for the kdb scaling group. 
+     */
+    scalingGroupName?: KxScalingGroupName;
+    /**
+     *  The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed. 
+     */
+    hostType?: KxHostType;
+    /**
+     * The identifier of the availability zones.
+     */
+    availabilityZoneId?: AvailabilityZoneId;
+    /**
+     * The status of scaling group.   CREATING – The scaling group creation is in progress.   CREATE_FAILED – The scaling group creation has failed.   ACTIVE – The scaling group is active.   UPDATING – The scaling group is in the process of being updated.   UPDATE_FAILED – The update action failed.   DELETING – The scaling group is in the process of being deleted.   DELETE_FAILED – The system failed to delete the scaling group.   DELETED – The scaling group is successfully deleted.  
+     */
+    status?: KxScalingGroupStatus;
+    /**
+     *  The last time that the scaling group was updated in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000. 
+     */
+    lastModifiedTimestamp?: Timestamp;
+    /**
+     *  The timestamp at which the scaling group was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     */
+    createdTimestamp?: Timestamp;
+  }
   export interface CreateKxUserRequest {
     /**
      * A unique identifier for the kdb environment where you want to create a user.
@@ -773,6 +1057,90 @@ declare namespace Finspace {
      * The IAM role ARN that will be associated with the user.
      */
     iamRole?: RoleArn;
+  }
+  export interface CreateKxVolumeRequest {
+    /**
+     * A token that ensures idempotency. This token expires in 10 minutes.
+     */
+    clientToken?: ClientToken;
+    /**
+     * A unique identifier for the kdb environment, whose clusters can attach to the volume. 
+     */
+    environmentId: KxEnvironmentId;
+    /**
+     *  The type of file system volume. Currently, FinSpace only supports NAS_1 volume type. When you select NAS_1 volume type, you must also provide nas1Configuration. 
+     */
+    volumeType: KxVolumeType;
+    /**
+     * A unique identifier for the volume.
+     */
+    volumeName: KxVolumeName;
+    /**
+     *  A description of the volume. 
+     */
+    description?: Description;
+    /**
+     *  Specifies the configuration for the Network attached storage (NAS_1) file system volume. This parameter is required when you choose volumeType as NAS_1.
+     */
+    nas1Configuration?: KxNAS1Configuration;
+    /**
+     * The number of availability zones you want to assign per cluster. Currently, FinSpace only support SINGLE for volumes.
+     */
+    azMode: KxAzMode;
+    /**
+     * The identifier of the availability zones.
+     */
+    availabilityZoneIds: AvailabilityZoneIds;
+    /**
+     *  A list of key-value pairs to label the volume. You can add up to 50 tags to a volume. 
+     */
+    tags?: TagMap;
+  }
+  export interface CreateKxVolumeResponse {
+    /**
+     * A unique identifier for the kdb environment, whose clusters can attach to the volume. 
+     */
+    environmentId?: KxEnvironmentId;
+    /**
+     * A unique identifier for the volume.
+     */
+    volumeName?: KxVolumeName;
+    /**
+     *  The type of file system volume. Currently, FinSpace only supports NAS_1 volume type. 
+     */
+    volumeType?: KxVolumeType;
+    /**
+     *  The ARN identifier of the volume. 
+     */
+    volumeArn?: KxVolumeArn;
+    /**
+     *  Specifies the configuration for the Network attached storage (NAS_1) file system volume.
+     */
+    nas1Configuration?: KxNAS1Configuration;
+    /**
+     * The status of volume creation.   CREATING – The volume creation is in progress.   CREATE_FAILED – The volume creation has failed.   ACTIVE – The volume is active.   UPDATING – The volume is in the process of being updated.   UPDATE_FAILED – The update action failed.   UPDATED – The volume is successfully updated.   DELETING – The volume is in the process of being deleted.   DELETE_FAILED – The system failed to delete the volume.   DELETED – The volume is successfully deleted.  
+     */
+    status?: KxVolumeStatus;
+    /**
+     * The error message when a failed state occurs. 
+     */
+    statusReason?: KxVolumeStatusReason;
+    /**
+     * The number of availability zones you want to assign per cluster. Currently, FinSpace only support SINGLE for volumes.
+     */
+    azMode?: KxAzMode;
+    /**
+     *  A description of the volume. 
+     */
+    description?: Description;
+    /**
+     * The identifier of the availability zones.
+     */
+    availabilityZoneIds?: AvailabilityZoneIds;
+    /**
+     * The timestamp at which the volume was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     */
+    createdTimestamp?: Timestamp;
   }
   export type CustomDNSConfiguration = CustomDNSServer[];
   export interface CustomDNSServer {
@@ -831,13 +1199,53 @@ declare namespace Finspace {
   }
   export interface DeleteKxDatabaseResponse {
   }
+  export interface DeleteKxDataviewRequest {
+    /**
+     * A unique identifier for the kdb environment, from where you want to delete the dataview. 
+     */
+    environmentId: EnvironmentId;
+    /**
+     * The name of the database whose dataview you want to delete.
+     */
+    databaseName: DatabaseName;
+    /**
+     * The name of the dataview that you want to delete.
+     */
+    dataviewName: KxDataviewName;
+    /**
+     * A token that ensures idempotency. This token expires in 10 minutes.
+     */
+    clientToken: ClientTokenString;
+  }
+  export interface DeleteKxDataviewResponse {
+  }
   export interface DeleteKxEnvironmentRequest {
     /**
      * A unique identifier for the kdb environment.
      */
     environmentId: IdType;
+    /**
+     * A token that ensures idempotency. This token expires in 10 minutes.
+     */
+    clientToken?: ClientToken;
   }
   export interface DeleteKxEnvironmentResponse {
+  }
+  export interface DeleteKxScalingGroupRequest {
+    /**
+     * A unique identifier for the kdb environment, from where you want to delete the dataview. 
+     */
+    environmentId: KxEnvironmentId;
+    /**
+     * A unique identifier for the kdb scaling group. 
+     */
+    scalingGroupName: KxScalingGroupName;
+    /**
+     * A token that ensures idempotency. This token expires in 10 minutes.
+     */
+    clientToken?: ClientTokenString;
+  }
+  export interface DeleteKxScalingGroupResponse {
   }
   export interface DeleteKxUserRequest {
     /**
@@ -848,8 +1256,28 @@ declare namespace Finspace {
      * A unique identifier for the kdb environment.
      */
     environmentId: IdType;
+    /**
+     * A token that ensures idempotency. This token expires in 10 minutes.
+     */
+    clientToken?: ClientToken;
   }
   export interface DeleteKxUserResponse {
+  }
+  export interface DeleteKxVolumeRequest {
+    /**
+     * A unique identifier for the kdb environment, whose clusters can attach to the volume. 
+     */
+    environmentId: KxEnvironmentId;
+    /**
+     *  The name of the volume that you want to delete. 
+     */
+    volumeName: KxVolumeName;
+    /**
+     * A token that ensures idempotency. This token expires in 10 minutes.
+     */
+    clientToken?: ClientTokenString;
+  }
+  export interface DeleteKxVolumeResponse {
   }
   export type Description = string;
   export type EmailId = string;
@@ -1041,9 +1469,14 @@ declare namespace Finspace {
      */
     clusterName?: KxClusterName;
     /**
-     * Specifies the type of KDB database that is being created. The following types are available:    HDB – A Historical Database. The data is only accessible with read-only permissions from one of the FinSpace managed kdb databases mounted to the cluster.   RDB – A Realtime Database. This type of database captures all the data from a ticker plant and stores it in memory until the end of day, after which it writes all of its data to a disk and reloads the HDB. This cluster type requires local storage for temporary storage of data during the savedown process. If you specify this field in your request, you must provide the savedownStorageConfiguration parameter.   GATEWAY – A gateway cluster allows you to access data across processes in kdb systems. It allows you to create your own routing logic using the initialization scripts and custom code. This type of cluster does not require a writable local storage.   GP – A general purpose cluster allows you to quickly iterate on code during development by granting greater access to system commands and enabling a fast reload of custom code. This cluster type can optionally mount databases including cache and savedown storage. For this cluster type, the node count is fixed at 1. It does not support autoscaling and supports only SINGLE AZ mode.  
+     * Specifies the type of KDB database that is being created. The following types are available:    HDB – A Historical Database. The data is only accessible with read-only permissions from one of the FinSpace managed kdb databases mounted to the cluster.   RDB – A Realtime Database. This type of database captures all the data from a ticker plant and stores it in memory until the end of day, after which it writes all of its data to a disk and reloads the HDB. This cluster type requires local storage for temporary storage of data during the savedown process. If you specify this field in your request, you must provide the savedownStorageConfiguration parameter.   GATEWAY – A gateway cluster allows you to access data across processes in kdb systems. It allows you to create your own routing logic using the initialization scripts and custom code. This type of cluster does not require a writable local storage.   GP – A general purpose cluster allows you to quickly iterate on code during development by granting greater access to system commands and enabling a fast reload of custom code. This cluster type can optionally mount databases including cache and savedown storage. For this cluster type, the node count is fixed at 1. It does not support autoscaling and supports only SINGLE AZ mode.   Tickerplant – A tickerplant cluster allows you to subscribe to feed handlers based on IAM permissions. It can publish to RDBs, other Tickerplants, and real-time subscribers (RTS). Tickerplants can persist messages to log, which is readable by any RDB environment. It supports only single-node that is only one kdb process.  
      */
     clusterType?: KxClusterType;
+    tickerplantLogConfiguration?: TickerplantLogConfiguration;
+    /**
+     *  A list of volumes attached to the cluster. 
+     */
+    volumes?: Volumes;
     /**
      *  A list of databases mounted on the cluster.
      */
@@ -1108,6 +1541,7 @@ declare namespace Finspace {
      * The timestamp at which the cluster was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
      */
     createdTimestamp?: Timestamp;
+    scalingGroupConfiguration?: KxScalingGroupConfiguration;
   }
   export interface GetKxConnectionStringRequest {
     /**
@@ -1180,6 +1614,78 @@ declare namespace Finspace {
      * The total number of files in the database.
      */
     numFiles?: numFiles;
+  }
+  export interface GetKxDataviewRequest {
+    /**
+     * A unique identifier for the kdb environment, from where you want to retrieve the dataview details.
+     */
+    environmentId: EnvironmentId;
+    /**
+     *  The name of the database where you created the dataview.
+     */
+    databaseName: DatabaseName;
+    /**
+     * A unique identifier for the dataview.
+     */
+    dataviewName: KxDataviewName;
+  }
+  export interface GetKxDataviewResponse {
+    /**
+     *  The name of the database where you created the dataview.
+     */
+    databaseName?: DatabaseName;
+    /**
+     * A unique identifier for the dataview.
+     */
+    dataviewName?: KxDataviewName;
+    /**
+     * The number of availability zones you want to assign per cluster. This can be one of the following     SINGLE – Assigns one availability zone per cluster.    MULTI – Assigns all the availability zones per cluster.  
+     */
+    azMode?: KxAzMode;
+    /**
+     *  The identifier of the availability zones. 
+     */
+    availabilityZoneId?: AvailabilityZoneId;
+    /**
+     *  A unique identifier of the changeset that you want to use to ingest data. 
+     */
+    changesetId?: ChangesetId;
+    /**
+     *  The configuration that contains the database path of the data that you want to place on each selected volume. Each segment must have a unique database path for each volume. If you do not explicitly specify any database path for a volume, they are accessible from the cluster through the default S3/object store segment. 
+     */
+    segmentConfigurations?: KxDataviewSegmentConfigurationList;
+    /**
+     *  The current active changeset versions of the database on the given dataview. 
+     */
+    activeVersions?: KxDataviewActiveVersionList;
+    /**
+     * A description of the dataview.
+     */
+    description?: Description;
+    /**
+     * The option to specify whether you want to apply all the future additions and corrections automatically to the dataview when new changesets are ingested. The default value is false.
+     */
+    autoUpdate?: booleanValue;
+    /**
+     * A unique identifier for the kdb environment, from where you want to retrieve the dataview details.
+     */
+    environmentId?: EnvironmentId;
+    /**
+     * The timestamp at which the dataview was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     */
+    createdTimestamp?: Timestamp;
+    /**
+     *  The last time that the dataview was updated in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000. 
+     */
+    lastModifiedTimestamp?: Timestamp;
+    /**
+     *  The status of dataview creation.    CREATING – The dataview creation is in progress.    UPDATING – The dataview is in the process of being updated.    ACTIVE – The dataview is active.  
+     */
+    status?: KxDataviewStatus;
+    /**
+     *  The error message when a failed state occurs. 
+     */
+    statusReason?: KxDataviewStatusReason;
   }
   export interface GetKxEnvironmentRequest {
     /**
@@ -1254,6 +1760,54 @@ declare namespace Finspace {
      */
     certificateAuthorityArn?: stringValueLength1to255;
   }
+  export interface GetKxScalingGroupRequest {
+    /**
+     * A unique identifier for the kdb environment. 
+     */
+    environmentId: KxEnvironmentId;
+    /**
+     * A unique identifier for the kdb scaling group. 
+     */
+    scalingGroupName: KxScalingGroupName;
+  }
+  export interface GetKxScalingGroupResponse {
+    /**
+     * A unique identifier for the kdb scaling group. 
+     */
+    scalingGroupName?: KxScalingGroupName;
+    /**
+     *  The ARN identifier for the scaling group. 
+     */
+    scalingGroupArn?: arn;
+    /**
+     *  The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed. 
+     */
+    hostType?: KxHostType;
+    /**
+     *  The list of Managed kdb clusters that are currently active in the given scaling group. 
+     */
+    clusters?: KxClusterNameList;
+    /**
+     * The identifier of the availability zones.
+     */
+    availabilityZoneId?: AvailabilityZoneId;
+    /**
+     * The status of scaling group.   CREATING – The scaling group creation is in progress.   CREATE_FAILED – The scaling group creation has failed.   ACTIVE – The scaling group is active.   UPDATING – The scaling group is in the process of being updated.   UPDATE_FAILED – The update action failed.   DELETING – The scaling group is in the process of being deleted.   DELETE_FAILED – The system failed to delete the scaling group.   DELETED – The scaling group is successfully deleted.  
+     */
+    status?: KxScalingGroupStatus;
+    /**
+     *  The error message when a failed state occurs. 
+     */
+    statusReason?: KxClusterStatusReason;
+    /**
+     *  The last time that the scaling group was updated in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000. 
+     */
+    lastModifiedTimestamp?: Timestamp;
+    /**
+     *  The timestamp at which the scaling group was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     */
+    createdTimestamp?: Timestamp;
+  }
   export interface GetKxUserRequest {
     /**
      * A unique identifier for the user.
@@ -1282,6 +1836,70 @@ declare namespace Finspace {
      */
     iamRole?: RoleArn;
   }
+  export interface GetKxVolumeRequest {
+    /**
+     * A unique identifier for the kdb environment, whose clusters can attach to the volume. 
+     */
+    environmentId: KxEnvironmentId;
+    /**
+     * A unique identifier for the volume.
+     */
+    volumeName: KxVolumeName;
+  }
+  export interface GetKxVolumeResponse {
+    /**
+     * A unique identifier for the kdb environment, whose clusters can attach to the volume. 
+     */
+    environmentId?: KxEnvironmentId;
+    /**
+     *  A unique identifier for the volume.
+     */
+    volumeName?: KxVolumeName;
+    /**
+     *  The type of file system volume. Currently, FinSpace only supports NAS_1 volume type. 
+     */
+    volumeType?: KxVolumeType;
+    /**
+     *  The ARN identifier of the volume. 
+     */
+    volumeArn?: KxVolumeArn;
+    /**
+     *  Specifies the configuration for the Network attached storage (NAS_1) file system volume.
+     */
+    nas1Configuration?: KxNAS1Configuration;
+    /**
+     * The status of volume creation.   CREATING – The volume creation is in progress.   CREATE_FAILED – The volume creation has failed.   ACTIVE – The volume is active.   UPDATING – The volume is in the process of being updated.   UPDATE_FAILED – The update action failed.   UPDATED – The volume is successfully updated.   DELETING – The volume is in the process of being deleted.   DELETE_FAILED – The system failed to delete the volume.   DELETED – The volume is successfully deleted.  
+     */
+    status?: KxVolumeStatus;
+    /**
+     * The error message when a failed state occurs. 
+     */
+    statusReason?: KxVolumeStatusReason;
+    /**
+     *  The timestamp at which the volume was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000. 
+     */
+    createdTimestamp?: Timestamp;
+    /**
+     *  A description of the volume. 
+     */
+    description?: Description;
+    /**
+     * The number of availability zones you want to assign per cluster. Currently, FinSpace only support SINGLE for volumes.
+     */
+    azMode?: KxAzMode;
+    /**
+     * The identifier of the availability zones.
+     */
+    availabilityZoneIds?: AvailabilityZoneIds;
+    /**
+     * The last time that the volume was updated in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     */
+    lastModifiedTimestamp?: Timestamp;
+    /**
+     *  A list of cluster identifiers that a volume is attached to. 
+     */
+    attachedClusters?: KxAttachedClusters;
+  }
   export type IPAddressType = "IP_V4"|string;
   export interface IcmpTypeCode {
     /**
@@ -1298,6 +1916,21 @@ declare namespace Finspace {
   export type InitializationScriptFilePath = string;
   export type KmsKeyARN = string;
   export type KmsKeyId = string;
+  export interface KxAttachedCluster {
+    /**
+     * A unique name for the attached cluster.
+     */
+    clusterName?: KxClusterName;
+    /**
+     * Specifies the type of cluster. The volume for TP and RDB cluster types will be used for TP logs.
+     */
+    clusterType?: KxClusterType;
+    /**
+     * The status of the attached cluster.   PENDING – The cluster is pending creation.   CREATING – The cluster creation process is in progress.   CREATE_FAILED – The cluster creation process has failed.   RUNNING – The cluster creation process is running.   UPDATING – The cluster is in the process of being updated.   DELETING – The cluster is in the process of being deleted.   DELETED – The cluster has been deleted.   DELETE_FAILED – The cluster failed to delete.  
+     */
+    clusterStatus?: KxClusterStatus;
+  }
+  export type KxAttachedClusters = KxAttachedCluster[];
   export type KxAzMode = "SINGLE"|"MULTI"|string;
   export interface KxCacheStorageConfiguration {
     /**
@@ -1349,7 +1982,7 @@ declare namespace Finspace {
      */
     clusterName?: KxClusterName;
     /**
-     * Specifies the type of KDB database that is being created. The following types are available:    HDB – A Historical Database. The data is only accessible with read-only permissions from one of the FinSpace managed kdb databases mounted to the cluster.   RDB – A Realtime Database. This type of database captures all the data from a ticker plant and stores it in memory until the end of day, after which it writes all of its data to a disk and reloads the HDB. This cluster type requires local storage for temporary storage of data during the savedown process. If you specify this field in your request, you must provide the savedownStorageConfiguration parameter.   GATEWAY – A gateway cluster allows you to access data across processes in kdb systems. It allows you to create your own routing logic using the initialization scripts and custom code. This type of cluster does not require a writable local storage.   GP – A general purpose cluster allows you to quickly iterate on code during development by granting greater access to system commands and enabling a fast reload of custom code. This cluster type can optionally mount databases including cache and savedown storage. For this cluster type, the node count is fixed at 1. It does not support autoscaling and supports only SINGLE AZ mode.  
+     * Specifies the type of KDB database that is being created. The following types are available:    HDB – A Historical Database. The data is only accessible with read-only permissions from one of the FinSpace managed kdb databases mounted to the cluster.   RDB – A Realtime Database. This type of database captures all the data from a ticker plant and stores it in memory until the end of day, after which it writes all of its data to a disk and reloads the HDB. This cluster type requires local storage for temporary storage of data during the savedown process. If you specify this field in your request, you must provide the savedownStorageConfiguration parameter.   GATEWAY – A gateway cluster allows you to access data across processes in kdb systems. It allows you to create your own routing logic using the initialization scripts and custom code. This type of cluster does not require a writable local storage.   GP – A general purpose cluster allows you to quickly iterate on code during development by granting greater access to system commands and enabling a fast reload of custom code. This cluster type can optionally mount databases including cache and savedown storage. For this cluster type, the node count is fixed at 1. It does not support autoscaling and supports only SINGLE AZ mode.   Tickerplant – A tickerplant cluster allows you to subscribe to feed handlers based on IAM permissions. It can publish to RDBs, other Tickerplants, and real-time subscribers (RTS). Tickerplants can persist messages to log, which is readable by any RDB environment. It supports only single-node that is only one kdb process.  
      */
     clusterType?: KxClusterType;
     /**
@@ -1360,6 +1993,10 @@ declare namespace Finspace {
      * A version of the FinSpace managed kdb to run.
      */
     releaseLabel?: ReleaseLabel;
+    /**
+     *  A list of volumes attached to the cluster. 
+     */
+    volumes?: Volumes;
     /**
      * Specifies a Q program that will be run at launch of a cluster. It is a relative path within .zip file that contains the custom code, which will be loaded on the cluster. It must include the file name itself. For example, somedir/init.q.
      */
@@ -1394,10 +2031,11 @@ declare namespace Finspace {
   export type KxClusterCodeDeploymentStrategy = "NO_RESTART"|"ROLLING"|"FORCE"|string;
   export type KxClusterDescription = string;
   export type KxClusterName = string;
+  export type KxClusterNameList = KxClusterName[];
   export type KxClusterNodeIdString = string;
   export type KxClusterStatus = "PENDING"|"CREATING"|"CREATE_FAILED"|"RUNNING"|"UPDATING"|"DELETING"|"DELETED"|"DELETE_FAILED"|string;
   export type KxClusterStatusReason = string;
-  export type KxClusterType = "HDB"|"RDB"|"GATEWAY"|"GP"|string;
+  export type KxClusterType = "HDB"|"RDB"|"GATEWAY"|"GP"|"TICKERPLANT"|string;
   export type KxClusters = KxCluster[];
   export interface KxCommandLineArgument {
     /**
@@ -1421,6 +2059,10 @@ declare namespace Finspace {
      * Specifies the portions of database that will be loaded into the cache for access.
      */
     dbPaths: DbPaths;
+    /**
+     *  The name of the dataview to be used for caching historical data on disk. 
+     */
+    dataviewName?: KxDataviewName;
   }
   export type KxDatabaseCacheConfigurations = KxDatabaseCacheConfiguration[];
   export interface KxDatabaseConfiguration {
@@ -1436,6 +2078,14 @@ declare namespace Finspace {
      * A unique identifier of the changeset that is associated with the cluster.
      */
     changesetId?: ChangesetId;
+    /**
+     *  The name of the dataview to be used for caching historical data on disk. 
+     */
+    dataviewName?: KxDataviewName;
+    /**
+     *  The configuration of the dataview to be used with specified cluster. 
+     */
+    dataviewConfiguration?: KxDataviewConfiguration;
   }
   export type KxDatabaseConfigurations = KxDatabaseConfiguration[];
   export interface KxDatabaseListEntry {
@@ -1453,6 +2103,120 @@ declare namespace Finspace {
     lastModifiedTimestamp?: Timestamp;
   }
   export type KxDatabases = KxDatabaseListEntry[];
+  export interface KxDataviewActiveVersion {
+    /**
+     * A unique identifier for the changeset.
+     */
+    changesetId?: ChangesetId;
+    /**
+     *  The configuration that contains the database path of the data that you want to place on each selected volume. Each segment must have a unique database path for each volume. If you do not explicitly specify any database path for a volume, they are accessible from the cluster through the default S3/object store segment. 
+     */
+    segmentConfigurations?: KxDataviewSegmentConfigurationList;
+    /**
+     *  The list of clusters that are currently using this dataview. 
+     */
+    attachedClusters?: AttachedClusterList;
+    /**
+     *  The timestamp at which the dataview version was active. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     */
+    createdTimestamp?: Timestamp;
+    /**
+     *  A unique identifier of the active version.
+     */
+    versionId?: VersionId;
+  }
+  export type KxDataviewActiveVersionList = KxDataviewActiveVersion[];
+  export interface KxDataviewConfiguration {
+    /**
+     *  The unique identifier of the dataview.
+     */
+    dataviewName?: KxDataviewName;
+    /**
+     *  The version of the dataview corresponding to a given changeset. 
+     */
+    dataviewVersionId?: VersionId;
+    /**
+     * A unique identifier for the changeset.
+     */
+    changesetId?: ChangesetId;
+    /**
+     *  The db path and volume configuration for the segmented database.
+     */
+    segmentConfigurations?: KxDataviewSegmentConfigurationList;
+  }
+  export interface KxDataviewListEntry {
+    /**
+     * A unique identifier for the kdb environment.
+     */
+    environmentId?: EnvironmentId;
+    /**
+     *  A unique identifier of the database.
+     */
+    databaseName?: DatabaseName;
+    /**
+     *  A unique identifier of the dataview.
+     */
+    dataviewName?: KxDataviewName;
+    /**
+     * The number of availability zones you want to assign per cluster. This can be one of the following     SINGLE – Assigns one availability zone per cluster.    MULTI – Assigns all the availability zones per cluster.  
+     */
+    azMode?: KxAzMode;
+    /**
+     *  The identifier of the availability zones. 
+     */
+    availabilityZoneId?: AvailabilityZoneId;
+    /**
+     * A unique identifier for the changeset.
+     */
+    changesetId?: ChangesetId;
+    /**
+     *  The configuration that contains the database path of the data that you want to place on each selected volume. Each segment must have a unique database path for each volume. If you do not explicitly specify any database path for a volume, they are accessible from the cluster through the default S3/object store segment. 
+     */
+    segmentConfigurations?: KxDataviewSegmentConfigurationList;
+    /**
+     *  The active changeset versions for the given dataview entry. 
+     */
+    activeVersions?: KxDataviewActiveVersionList;
+    /**
+     *  The status of a given dataview entry. 
+     */
+    status?: KxDataviewStatus;
+    /**
+     *  A description for the dataview list entry.
+     */
+    description?: Description;
+    /**
+     *  The option to specify whether you want to apply all the future additions and corrections automatically to the dataview when you ingest new changesets. The default value is false. 
+     */
+    autoUpdate?: booleanValue;
+    /**
+     *  The timestamp at which the dataview list entry was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     */
+    createdTimestamp?: Timestamp;
+    /**
+     * The last time that the dataview list was updated in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     */
+    lastModifiedTimestamp?: Timestamp;
+    /**
+     *  The error message when a failed state occurs. 
+     */
+    statusReason?: KxDataviewStatusReason;
+  }
+  export type KxDataviewName = string;
+  export interface KxDataviewSegmentConfiguration {
+    /**
+     *  The database path of the data that you want to place on each selected volume for the segment. Each segment must have a unique database path for each volume.
+     */
+    dbPaths: SegmentConfigurationDbPathList;
+    /**
+     *  The name of the volume where you want to add data. 
+     */
+    volumeName: KxVolumeName;
+  }
+  export type KxDataviewSegmentConfigurationList = KxDataviewSegmentConfiguration[];
+  export type KxDataviewStatus = "CREATING"|"ACTIVE"|"UPDATING"|"FAILED"|"DELETING"|string;
+  export type KxDataviewStatusReason = string;
+  export type KxDataviews = KxDataviewListEntry[];
   export interface KxDeploymentConfiguration {
     /**
      *  The type of deployment that you want on a cluster.    ROLLING – This options updates the cluster by stopping the exiting q process and starting a new q process with updated configuration.   NO_RESTART – This option updates the cluster without stopping the running q process. It is only available for HDB type cluster. This option is quicker as it reduces the turn around time to update configuration on a cluster.  With this deployment mode, you cannot update the initializationScript and commandLineArguments parameters.  
@@ -1533,6 +2297,19 @@ declare namespace Finspace {
   export type KxEnvironmentId = string;
   export type KxEnvironmentList = KxEnvironment[];
   export type KxEnvironmentName = string;
+  export type KxHostType = string;
+  export interface KxNAS1Configuration {
+    /**
+     *  The type of the network attached storage. 
+     */
+    type?: KxNAS1Type;
+    /**
+     *  The size of the network attached storage.
+     */
+    size?: KxNAS1Size;
+  }
+  export type KxNAS1Size = number;
+  export type KxNAS1Type = "SSD_1000"|"SSD_250"|"HDD_12"|string;
   export interface KxNode {
     /**
      * A unique identifier for the node.
@@ -1552,14 +2329,77 @@ declare namespace Finspace {
     /**
      * The type of writeable storage space for temporarily storing your savedown data. The valid values are:   SDS01 – This type represents 3000 IOPS and io2 ebs volume type.  
      */
-    type: KxSavedownStorageType;
+    type?: KxSavedownStorageType;
     /**
      * The size of temporary storage in gibibytes.
      */
-    size: KxSavedownStorageSize;
+    size?: KxSavedownStorageSize;
+    /**
+     *  The name of the kdb volume that you want to use as writeable save-down storage for clusters. 
+     */
+    volumeName?: KxVolumeName;
   }
   export type KxSavedownStorageSize = number;
   export type KxSavedownStorageType = "SDS01"|string;
+  export interface KxScalingGroup {
+    /**
+     * A unique identifier for the kdb scaling group. 
+     */
+    scalingGroupName?: KxScalingGroupName;
+    /**
+     *  The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed. 
+     */
+    hostType?: KxHostType;
+    /**
+     *  The list of clusters currently active in a given scaling group. 
+     */
+    clusters?: KxClusterNameList;
+    /**
+     * The identifier of the availability zones.
+     */
+    availabilityZoneId?: AvailabilityZoneId;
+    /**
+     *  The status of scaling groups. 
+     */
+    status?: KxScalingGroupStatus;
+    /**
+     *  The error message when a failed state occurs. 
+     */
+    statusReason?: KxClusterStatusReason;
+    /**
+     *  The last time that the scaling group was updated in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000. 
+     */
+    lastModifiedTimestamp?: Timestamp;
+    /**
+     *  The timestamp at which the scaling group was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000. 
+     */
+    createdTimestamp?: Timestamp;
+  }
+  export interface KxScalingGroupConfiguration {
+    /**
+     * A unique identifier for the kdb scaling group. 
+     */
+    scalingGroupName: KxScalingGroupName;
+    /**
+     *  An optional hard limit on the amount of memory a kdb cluster can use. 
+     */
+    memoryLimit?: MemoryMib;
+    /**
+     *  A reservation of the minimum amount of memory that should be available on the scaling group for a kdb cluster to be successfully placed in a scaling group. 
+     */
+    memoryReservation: MemoryMib;
+    /**
+     *  The number of kdb cluster nodes. 
+     */
+    nodeCount: ClusterNodeCount;
+    /**
+     *  The number of vCPUs that you want to reserve for each node of this kdb cluster on the scaling group host. 
+     */
+    cpu?: CpuCount;
+  }
+  export type KxScalingGroupList = KxScalingGroup[];
+  export type KxScalingGroupName = string;
+  export type KxScalingGroupStatus = "CREATING"|"CREATE_FAILED"|"ACTIVE"|"DELETING"|"DELETED"|"DELETE_FAILED"|string;
   export interface KxUser {
     /**
      *  The Amazon Resource Name (ARN) that identifies the user. For more information about ARNs and how to use ARNs in policies, see IAM Identifiers in the IAM User Guide. 
@@ -1585,6 +2425,50 @@ declare namespace Finspace {
   export type KxUserArn = string;
   export type KxUserList = KxUser[];
   export type KxUserNameString = string;
+  export interface KxVolume {
+    /**
+     * A unique identifier for the volume.
+     */
+    volumeName?: KxVolumeName;
+    /**
+     *  The type of file system volume. Currently, FinSpace only supports NAS_1 volume type. 
+     */
+    volumeType?: KxVolumeType;
+    /**
+     * The status of volume.   CREATING – The volume creation is in progress.   CREATE_FAILED – The volume creation has failed.   ACTIVE – The volume is active.   UPDATING – The volume is in the process of being updated.   UPDATE_FAILED – The update action failed.   UPDATED – The volume is successfully updated.   DELETING – The volume is in the process of being deleted.   DELETE_FAILED – The system failed to delete the volume.   DELETED – The volume is successfully deleted.  
+     */
+    status?: KxVolumeStatus;
+    /**
+     *  A description of the volume. 
+     */
+    description?: Description;
+    /**
+     * The error message when a failed state occurs. 
+     */
+    statusReason?: KxVolumeStatusReason;
+    /**
+     *  The number of availability zones assigned to the volume. Currently, only SINGLE is supported. 
+     */
+    azMode?: KxAzMode;
+    /**
+     * The identifier of the availability zones.
+     */
+    availabilityZoneIds?: AvailabilityZoneIds;
+    /**
+     *  The timestamp at which the volume was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     */
+    createdTimestamp?: Timestamp;
+    /**
+     * The last time that the volume was updated in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     */
+    lastModifiedTimestamp?: Timestamp;
+  }
+  export type KxVolumeArn = string;
+  export type KxVolumeName = string;
+  export type KxVolumeStatus = "CREATING"|"CREATE_FAILED"|"ACTIVE"|"UPDATING"|"UPDATED"|"UPDATE_FAILED"|"DELETING"|"DELETED"|"DELETE_FAILED"|string;
+  export type KxVolumeStatusReason = string;
+  export type KxVolumeType = "NAS_1"|string;
+  export type KxVolumes = KxVolume[];
   export interface ListEnvironmentsRequest {
     /**
      * A token generated by FinSpace that specifies where to continue pagination if a previous request was truncated. To get the next set of pages, pass in the nextTokennextToken value from the response object of the previous page call.
@@ -1667,7 +2551,7 @@ declare namespace Finspace {
      */
     environmentId: KxEnvironmentId;
     /**
-     * Specifies the type of KDB database that is being created. The following types are available:    HDB – A Historical Database. The data is only accessible with read-only permissions from one of the FinSpace managed kdb databases mounted to the cluster.   RDB – A Realtime Database. This type of database captures all the data from a ticker plant and stores it in memory until the end of day, after which it writes all of its data to a disk and reloads the HDB. This cluster type requires local storage for temporary storage of data during the savedown process. If you specify this field in your request, you must provide the savedownStorageConfiguration parameter.   GATEWAY – A gateway cluster allows you to access data across processes in kdb systems. It allows you to create your own routing logic using the initialization scripts and custom code. This type of cluster does not require a writable local storage.   GP – A general purpose cluster allows you to quickly iterate on code during development by granting greater access to system commands and enabling a fast reload of custom code. This cluster type can optionally mount databases including cache and savedown storage. For this cluster type, the node count is fixed at 1. It does not support autoscaling and supports only SINGLE AZ mode.  
+     * Specifies the type of KDB database that is being created. The following types are available:    HDB – A Historical Database. The data is only accessible with read-only permissions from one of the FinSpace managed kdb databases mounted to the cluster.   RDB – A Realtime Database. This type of database captures all the data from a ticker plant and stores it in memory until the end of day, after which it writes all of its data to a disk and reloads the HDB. This cluster type requires local storage for temporary storage of data during the savedown process. If you specify this field in your request, you must provide the savedownStorageConfiguration parameter.   GATEWAY – A gateway cluster allows you to access data across processes in kdb systems. It allows you to create your own routing logic using the initialization scripts and custom code. This type of cluster does not require a writable local storage.   GP – A general purpose cluster allows you to quickly iterate on code during development by granting greater access to system commands and enabling a fast reload of custom code. This cluster type can optionally mount databases including cache and savedown storage. For this cluster type, the node count is fixed at 1. It does not support autoscaling and supports only SINGLE AZ mode.   Tickerplant – A tickerplant cluster allows you to subscribe to feed handlers based on IAM permissions. It can publish to RDBs, other Tickerplants, and real-time subscribers (RTS). Tickerplants can persist messages to log, which is readable by any RDB environment. It supports only single-node that is only one kdb process.  
      */
     clusterType?: KxClusterType;
     /**
@@ -1713,6 +2597,34 @@ declare namespace Finspace {
      */
     nextToken?: PaginationToken;
   }
+  export interface ListKxDataviewsRequest {
+    /**
+     * A unique identifier for the kdb environment, for which you want to retrieve a list of dataviews.
+     */
+    environmentId: EnvironmentId;
+    /**
+     *  The name of the database where the dataviews were created.
+     */
+    databaseName: DatabaseName;
+    /**
+     *  A token that indicates where a results page should begin. 
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The maximum number of results to return in this request.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListKxDataviewsResponse {
+    /**
+     *  The list of kdb dataviews that are currently active for the given database. 
+     */
+    kxDataviews?: KxDataviews;
+    /**
+     *  A token that indicates where a results page should begin. 
+     */
+    nextToken?: PaginationToken;
+  }
   export interface ListKxEnvironmentsRequest {
     /**
      * A token that indicates where a results page should begin.
@@ -1730,6 +2642,30 @@ declare namespace Finspace {
     environments?: KxEnvironmentList;
     /**
      * A token that indicates where a results page should begin.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListKxScalingGroupsRequest {
+    /**
+     * A unique identifier for the kdb environment, for which you want to retrieve a list of scaling groups.
+     */
+    environmentId: KxEnvironmentId;
+    /**
+     * The maximum number of results to return in this request.
+     */
+    maxResults?: MaxResults;
+    /**
+     *  A token that indicates where a results page should begin. 
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListKxScalingGroupsResponse {
+    /**
+     *  A list of scaling groups available in a kdb environment.
+     */
+    scalingGroups?: KxScalingGroupList;
+    /**
+     *  A token that indicates where a results page should begin. 
      */
     nextToken?: PaginationToken;
   }
@@ -1757,6 +2693,34 @@ declare namespace Finspace {
      */
     nextToken?: PaginationToken;
   }
+  export interface ListKxVolumesRequest {
+    /**
+     * A unique identifier for the kdb environment, whose clusters can attach to the volume. 
+     */
+    environmentId: KxEnvironmentId;
+    /**
+     * The maximum number of results to return in this request.
+     */
+    maxResults?: MaxResults;
+    /**
+     * A token that indicates where a results page should begin.
+     */
+    nextToken?: PaginationToken;
+    /**
+     *  The type of file system volume. Currently, FinSpace only supports NAS_1 volume type. 
+     */
+    volumeType?: KxVolumeType;
+  }
+  export interface ListKxVolumesResponse {
+    /**
+     *  A summary of volumes. 
+     */
+    kxVolumeSummaries?: KxVolumes;
+    /**
+     * A token that indicates where a results page should begin.
+     */
+    nextToken?: PaginationToken;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The Amazon Resource Name of the resource.
@@ -1770,6 +2734,7 @@ declare namespace Finspace {
     tags?: TagMap;
   }
   export type MaxResults = number;
+  export type MemoryMib = number;
   export type NameString = string;
   export type NetworkACLConfiguration = NetworkACLEntry[];
   export interface NetworkACLEntry {
@@ -1825,6 +2790,7 @@ declare namespace Finspace {
   export type SamlMetadataDocument = string;
   export type SecurityGroupIdList = SecurityGroupIdString[];
   export type SecurityGroupIdString = string;
+  export type SegmentConfigurationDbPathList = DbPath[];
   export type SignedKxConnectionString = string;
   export type SmsDomainUrl = string;
   export type SubnetIdList = SubnetIdString[];
@@ -1859,6 +2825,13 @@ declare namespace Finspace {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export interface TickerplantLogConfiguration {
+    /**
+     *  The name of the volumes for tickerplant logs. 
+     */
+    tickerplantLogVolumes?: TickerplantLogVolumes;
+  }
+  export type TickerplantLogVolumes = VolumeName[];
   export type Timestamp = Date;
   export interface TransitGatewayConfiguration {
     /**
@@ -1998,6 +2971,90 @@ declare namespace Finspace {
     description?: Description;
     /**
      * The last time that the database was modified. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     */
+    lastModifiedTimestamp?: Timestamp;
+  }
+  export interface UpdateKxDataviewRequest {
+    /**
+     * A unique identifier for the kdb environment, where you want to update the dataview.
+     */
+    environmentId: EnvironmentId;
+    /**
+     *  The name of the database.
+     */
+    databaseName: DatabaseName;
+    /**
+     * The name of the dataview that you want to update.
+     */
+    dataviewName: KxDataviewName;
+    /**
+     *  The description for a dataview. 
+     */
+    description?: Description;
+    /**
+     * A unique identifier for the changeset.
+     */
+    changesetId?: ChangesetId;
+    /**
+     *  The configuration that contains the database path of the data that you want to place on each selected volume. Each segment must have a unique database path for each volume. If you do not explicitly specify any database path for a volume, they are accessible from the cluster through the default S3/object store segment. 
+     */
+    segmentConfigurations?: KxDataviewSegmentConfigurationList;
+    /**
+     * A token that ensures idempotency. This token expires in 10 minutes.
+     */
+    clientToken: ClientTokenString;
+  }
+  export interface UpdateKxDataviewResponse {
+    /**
+     * A unique identifier for the kdb environment, where you want to update the dataview.
+     */
+    environmentId?: EnvironmentId;
+    /**
+     *  The name of the database. 
+     */
+    databaseName?: DatabaseName;
+    /**
+     *  The name of the database under which the dataview was created. 
+     */
+    dataviewName?: KxDataviewName;
+    /**
+     * The number of availability zones you want to assign per cluster. This can be one of the following     SINGLE – Assigns one availability zone per cluster.    MULTI – Assigns all the availability zones per cluster.  
+     */
+    azMode?: KxAzMode;
+    /**
+     *  The identifier of the availability zones. 
+     */
+    availabilityZoneId?: AvailabilityZoneId;
+    /**
+     * A unique identifier for the changeset.
+     */
+    changesetId?: ChangesetId;
+    /**
+     *  The configuration that contains the database path of the data that you want to place on each selected volume. Each segment must have a unique database path for each volume. If you do not explicitly specify any database path for a volume, they are accessible from the cluster through the default S3/object store segment. 
+     */
+    segmentConfigurations?: KxDataviewSegmentConfigurationList;
+    /**
+     *  The current active changeset versions of the database on the given dataview. 
+     */
+    activeVersions?: KxDataviewActiveVersionList;
+    /**
+     *  The status of dataview creation.    CREATING – The dataview creation is in progress.    UPDATING – The dataview is in the process of being updated.    ACTIVE – The dataview is active.  
+     */
+    status?: KxDataviewStatus;
+    /**
+     * The option to specify whether you want to apply all the future additions and corrections automatically to the dataview when new changesets are ingested. The default value is false.
+     */
+    autoUpdate?: booleanValue;
+    /**
+     * A description of the dataview.
+     */
+    description?: Description;
+    /**
+     *  The timestamp at which the dataview was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000. 
+     */
+    createdTimestamp?: Timestamp;
+    /**
+     *  The last time that the dataview was updated in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000. 
      */
     lastModifiedTimestamp?: Timestamp;
   }
@@ -2199,10 +3256,100 @@ declare namespace Finspace {
      */
     iamRole?: RoleArn;
   }
+  export interface UpdateKxVolumeRequest {
+    /**
+     * A unique identifier for the kdb environment where you created the storage volume. 
+     */
+    environmentId: KxEnvironmentId;
+    /**
+     *  A unique identifier for the volume.
+     */
+    volumeName: KxVolumeName;
+    /**
+     *  A description of the volume. 
+     */
+    description?: Description;
+    /**
+     * A token that ensures idempotency. This token expires in 10 minutes.
+     */
+    clientToken?: ClientTokenString;
+    /**
+     *  Specifies the configuration for the Network attached storage (NAS_1) file system volume.
+     */
+    nas1Configuration?: KxNAS1Configuration;
+  }
+  export interface UpdateKxVolumeResponse {
+    /**
+     * A unique identifier for the kdb environment where you want to update the volume. 
+     */
+    environmentId?: KxEnvironmentId;
+    /**
+     * A unique identifier for the volume that you want to update.
+     */
+    volumeName?: KxVolumeName;
+    /**
+     *  The type of file system volume. Currently, FinSpace only supports NAS_1 volume type. 
+     */
+    volumeType?: KxVolumeType;
+    /**
+     *  The ARN identifier of the volume. 
+     */
+    volumeArn?: KxVolumeArn;
+    /**
+     *  Specifies the configuration for the Network attached storage (NAS_1) file system volume.
+     */
+    nas1Configuration?: KxNAS1Configuration;
+    /**
+     * The status of the volume.   CREATING – The volume creation is in progress.   CREATE_FAILED – The volume creation has failed.   ACTIVE – The volume is active.   UPDATING – The volume is in the process of being updated.   UPDATE_FAILED – The update action failed.   UPDATED – The volume is successfully updated.   DELETING – The volume is in the process of being deleted.   DELETE_FAILED – The system failed to delete the volume.   DELETED – The volume is successfully deleted.  
+     */
+    status?: KxVolumeStatus;
+    /**
+     *  The description for the volume. 
+     */
+    description?: Description;
+    /**
+     * The error message when a failed state occurs. 
+     */
+    statusReason?: KxVolumeStatusReason;
+    /**
+     *  The timestamp at which the volume was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     */
+    createdTimestamp?: Timestamp;
+    /**
+     * The number of availability zones you want to assign per cluster. Currently, FinSpace only support SINGLE for volumes.
+     */
+    azMode?: KxAzMode;
+    /**
+     * The identifier of the availability zones.
+     */
+    availabilityZoneIds?: AvailabilityZoneIds;
+    /**
+     * The last time that the volume was updated in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     */
+    lastModifiedTimestamp?: Timestamp;
+    /**
+     *  Specifies the clusters that a volume is attached to. 
+     */
+    attachedClusters?: KxAttachedClusters;
+  }
   export type ValidCIDRBlock = string;
   export type ValidCIDRSpace = string;
   export type ValidHostname = string;
   export type ValidIPAddress = string;
+  export type VersionId = string;
+  export interface Volume {
+    /**
+     * A unique identifier for the volume.
+     */
+    volumeName?: VolumeName;
+    /**
+     *  The type of file system volume. Currently, FinSpace only supports NAS_1 volume type. 
+     */
+    volumeType?: VolumeType;
+  }
+  export type VolumeName = string;
+  export type VolumeType = "NAS_1"|string;
+  export type Volumes = Volume[];
   export interface VpcConfiguration {
     /**
      * The identifier of the VPC endpoint.
@@ -2222,6 +3369,8 @@ declare namespace Finspace {
     ipAddressType?: IPAddressType;
   }
   export type VpcIdString = string;
+  export type arn = string;
+  export type booleanValue = boolean;
   export type dnsStatus = "NONE"|"UPDATE_REQUESTED"|"UPDATING"|"FAILED_UPDATE"|"SUCCESSFULLY_UPDATED"|string;
   export type numBytes = number;
   export type numChangesets = number;

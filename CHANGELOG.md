@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1514.0-->
+<!--LATEST=2.1515.0-->
 <!--ENTRYINSERT-->
+
+## 2.1515.0
+* bugfix: Endpoints: Add endpoint customizations for services which do not use FIPS suffix
+* feature: CloudWatch: Adds support for the OpenTelemetry 1.0 output format in CloudWatch Metric Streams.
+* feature: EC2: M2 Mac instances are built on Apple M2 Mac mini computers. I4i instances are powered by 3rd generation Intel Xeon Scalable processors. C7i compute optimized, M7i general purpose and R7i memory optimized instances are powered by custom 4th Generation Intel Xeon Scalable processors.
+* feature: Finspace: Releasing Scaling Group, Dataview, and Volume APIs
 
 ## 2.1514.0
 * feature: CodeDeploy: This release adds support for two new CodeDeploy features: 1) zonal deployments for Amazon EC2 in-place deployments, 2) deployments triggered by Auto Scaling group termination lifecycle hook events.

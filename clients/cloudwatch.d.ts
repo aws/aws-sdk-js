@@ -1116,7 +1116,7 @@ declare namespace CloudWatch {
      */
     LastUpdateDate?: Timestamp;
     /**
-     * The output format for the stream. Valid values are json and opentelemetry0.7. For more information about metric stream output formats, see Metric streams output formats.
+     * The output format for the stream. Valid values are json, opentelemetry1.0, and opentelemetry0.7. For more information about metric stream output formats, see Metric streams output formats.
      */
     OutputFormat?: MetricStreamOutputFormat;
     /**
@@ -1720,7 +1720,7 @@ declare namespace CloudWatch {
      */
     State?: MetricStreamState;
     /**
-     * The output format of this metric stream. Valid values are json and opentelemetry0.7.
+     * The output format of this metric stream. Valid values are json, opentelemetry1.0, and opentelemetry0.7.
      */
     OutputFormat?: MetricStreamOutputFormat;
   }
@@ -1738,7 +1738,7 @@ declare namespace CloudWatch {
   export type MetricStreamFilters = MetricStreamFilter[];
   export type MetricStreamName = string;
   export type MetricStreamNames = MetricStreamName[];
-  export type MetricStreamOutputFormat = "json"|"opentelemetry0.7"|string;
+  export type MetricStreamOutputFormat = "json"|"opentelemetry0.7"|"opentelemetry1.0"|string;
   export type MetricStreamState = string;
   export type MetricStreamStatistic = string;
   export type MetricStreamStatisticsAdditionalStatistics = MetricStreamStatistic[];
@@ -1748,7 +1748,7 @@ declare namespace CloudWatch {
      */
     IncludeMetrics: MetricStreamStatisticsIncludeMetrics;
     /**
-     * The list of additional statistics that are to be streamed for the metrics listed in the IncludeMetrics array in this structure. This list can include as many as 20 statistics. If the OutputFormat for the stream is opentelemetry0.7, the only valid values are p??  percentile statistics such as p90, p99 and so on. If the OutputFormat for the stream is json, the valid values include the abbreviations for all of the statistics listed in  CloudWatch statistics definitions. For example, this includes tm98,  wm90, PR(:300), and so on.
+     * The list of additional statistics that are to be streamed for the metrics listed in the IncludeMetrics array in this structure. This list can include as many as 20 statistics. If the OutputFormat for the stream is opentelemetry1.0 or opentelemetry0.7, the only valid values are p??  percentile statistics such as p90, p99 and so on. If the OutputFormat for the stream is json, the valid values include the abbreviations for all of the statistics listed in  CloudWatch statistics definitions. For example, this includes tm98,  wm90, PR(:300), and so on.
      */
     AdditionalStatistics: MetricStreamStatisticsAdditionalStatistics;
   }
@@ -1942,7 +1942,7 @@ declare namespace CloudWatch {
      */
     InsufficientDataActions?: ResourceList;
     /**
-     * The name for the metric associated with the alarm. For each PutMetricAlarm operation, you must specify either MetricName or a Metrics array. If you are creating an alarm based on a math expression, you cannot specify this parameter, or any of the Dimensions, Period, Namespace, Statistic, or ExtendedStatistic parameters. Instead, you specify all this information in the Metrics array.
+     * The name for the metric associated with the alarm. For each PutMetricAlarm operation, you must specify either MetricName or a Metrics array. If you are creating an alarm based on a math expression, you cannot specify this parameter, or any of the Namespace, Dimensions, Period, Unit, Statistic, or ExtendedStatistic parameters. Instead, you specify all this information in the Metrics array.
      */
     MetricName?: MetricName;
     /**
@@ -1966,7 +1966,7 @@ declare namespace CloudWatch {
      */
     Period?: Period;
     /**
-     * The unit of measure for the statistic. For example, the units for the Amazon EC2 NetworkIn metric are Bytes because NetworkIn tracks the number of bytes that an instance receives on all network interfaces. You can also specify a unit when you create a custom metric. Units help provide conceptual meaning to your data. Metric data points that specify a unit of measure, such as Percent, are aggregated separately. If you don't specify Unit, CloudWatch retrieves all unit types that have been published for the metric and attempts to evaluate the alarm. Usually, metrics are published with only one unit, so the alarm works as intended. However, if the metric is published with multiple types of units and you don't specify a unit, the alarm's behavior is not defined and it behaves unpredictably. We recommend omitting Unit so that you don't inadvertently specify an incorrect unit that is not published for this metric. Doing so causes the alarm to be stuck in the INSUFFICIENT DATA state.
+     * The unit of measure for the statistic. For example, the units for the Amazon EC2 NetworkIn metric are Bytes because NetworkIn tracks the number of bytes that an instance receives on all network interfaces. You can also specify a unit when you create a custom metric. Units help provide conceptual meaning to your data. Metric data points that specify a unit of measure, such as Percent, are aggregated separately. If you are creating an alarm based on a metric math expression, you can specify the unit for each metric (if needed) within the objects in the Metrics array. If you don't specify Unit, CloudWatch retrieves all unit types that have been published for the metric and attempts to evaluate the alarm. Usually, metrics are published with only one unit, so the alarm works as intended. However, if the metric is published with multiple types of units and you don't specify a unit, the alarm's behavior is not defined and it behaves unpredictably. We recommend omitting Unit so that you don't inadvertently specify an incorrect unit that is not published for this metric. Doing so causes the alarm to be stuck in the INSUFFICIENT DATA state.
      */
     Unit?: StandardUnit;
     /**
@@ -1994,7 +1994,7 @@ declare namespace CloudWatch {
      */
     EvaluateLowSampleCountPercentile?: EvaluateLowSampleCountPercentile;
     /**
-     * An array of MetricDataQuery structures that enable you to create an alarm based on the result of a metric math expression. For each PutMetricAlarm operation, you must specify either MetricName or a Metrics array. Each item in the Metrics array either retrieves a metric or performs a math expression. One item in the Metrics array is the expression that the alarm watches. You designate this expression by setting ReturnData to true for this object in the array. For more information, see MetricDataQuery. If you use the Metrics parameter, you cannot include the MetricName, Dimensions, Period, Namespace, Statistic, or ExtendedStatistic parameters of PutMetricAlarm in the same operation. Instead, you retrieve the metrics you are using in your math expression as part of the Metrics array.
+     * An array of MetricDataQuery structures that enable you to create an alarm based on the result of a metric math expression. For each PutMetricAlarm operation, you must specify either MetricName or a Metrics array. Each item in the Metrics array either retrieves a metric or performs a math expression. One item in the Metrics array is the expression that the alarm watches. You designate this expression by setting ReturnData to true for this object in the array. For more information, see MetricDataQuery. If you use the Metrics parameter, you cannot include the Namespace, MetricName, Dimensions, Period, Unit, Statistic, or ExtendedStatistic parameters of PutMetricAlarm in the same operation. Instead, you retrieve the metrics you are using in your math expression as part of the Metrics array.
      */
     Metrics?: MetricDataQueries;
     /**
@@ -2038,7 +2038,7 @@ declare namespace CloudWatch {
      */
     RoleArn: AmazonResourceName;
     /**
-     * The output format for the stream. Valid values are json and opentelemetry0.7. For more information about metric stream output formats, see  Metric streams output formats.
+     * The output format for the stream. Valid values are json, opentelemetry1.0, and opentelemetry0.7. For more information about metric stream output formats, see  Metric streams output formats.
      */
     OutputFormat: MetricStreamOutputFormat;
     /**
@@ -2046,7 +2046,7 @@ declare namespace CloudWatch {
      */
     Tags?: TagList;
     /**
-     * By default, a metric stream always sends the MAX, MIN, SUM, and SAMPLECOUNT statistics for each metric that is streamed. You can use this parameter to have the metric stream also send additional statistics in the stream. This array can have up to 100 members. For each entry in this array, you specify one or more metrics and the list of additional statistics to stream for those metrics. The additional statistics that you can stream depend on the stream's OutputFormat. If the OutputFormat is json, you can stream any additional statistic that is supported by CloudWatch, listed in  CloudWatch statistics definitions. If the OutputFormat is opentelemetry0.7, you can stream percentile statistics such as p95, p99.9, and so on.
+     * By default, a metric stream always sends the MAX, MIN, SUM, and SAMPLECOUNT statistics for each metric that is streamed. You can use this parameter to have the metric stream also send additional statistics in the stream. This array can have up to 100 members. For each entry in this array, you specify one or more metrics and the list of additional statistics to stream for those metrics. The additional statistics that you can stream depend on the stream's OutputFormat. If the OutputFormat is json, you can stream any additional statistic that is supported by CloudWatch, listed in  CloudWatch statistics definitions. If the OutputFormat is opentelemetry1.0 or opentelemetry0.7, you can stream percentile statistics such as p95, p99.9, and so on.
      */
     StatisticsConfigurations?: MetricStreamStatisticsConfigurations;
     /**

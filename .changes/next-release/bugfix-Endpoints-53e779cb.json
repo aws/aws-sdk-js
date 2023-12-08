@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Endpoints",
-  "description": "Add endpoint customizations for services which do not use FIPS suffix"
-}
