@@ -3508,6 +3508,10 @@ declare namespace SecurityHub {
      * The current status of the table. Valid values are as follows:    ACTIVE     ARCHIVED     ARCHIVING     CREATING     DELETING     INACCESSIBLE_ENCRYPTION_CREDENTIALS     UPDATING   
      */
     TableStatus?: NonEmptyString;
+    /**
+     *  Indicates whether deletion protection is to be enabled (true) or disabled (false) on the table. 
+     */
+    DeletionProtectionEnabled?: Boolean;
   }
   export interface AwsDynamoDbTableGlobalSecondaryIndex {
     /**
@@ -3699,6 +3703,161 @@ declare namespace SecurityHub {
      * Determines the information that is written to the table.
      */
     StreamViewType?: NonEmptyString;
+  }
+  export interface AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails {
+    /**
+     *  The ID of the Active Directory used for authentication. 
+     */
+    DirectoryId?: NonEmptyString;
+  }
+  export interface AwsEc2ClientVpnEndpointAuthenticationOptionsDetails {
+    /**
+     *  The authentication type used. 
+     */
+    Type?: NonEmptyString;
+    /**
+     *  Information about the Active Directory, if applicable. With Active Directory authentication, clients are authenticated against existing Active Directory groups. 
+     */
+    ActiveDirectory?: AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails;
+    /**
+     *  Information about the authentication certificates, if applicable.
+     */
+    MutualAuthentication?: AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails;
+    /**
+     *  Information about the IAM SAML identity provider, if applicable.
+     */
+    FederatedAuthentication?: AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails;
+  }
+  export interface AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails {
+    /**
+     *  The Amazon Resource Name (ARN) of the IAM SAML identity provider. 
+     */
+    SamlProviderArn?: NonEmptyString;
+    /**
+     *  The Amazon Resource Name (ARN) of the IAM SAML identity provider for the self-service portal. 
+     */
+    SelfServiceSamlProviderArn?: NonEmptyString;
+  }
+  export type AwsEc2ClientVpnEndpointAuthenticationOptionsList = AwsEc2ClientVpnEndpointAuthenticationOptionsDetails[];
+  export interface AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails {
+    /**
+     *  The Amazon Resource Name (ARN) of the client certificate. 
+     */
+    ClientRootCertificateChain?: NonEmptyString;
+  }
+  export interface AwsEc2ClientVpnEndpointClientConnectOptionsDetails {
+    /**
+     *  Indicates whether client connect options are enabled. 
+     */
+    Enabled?: Boolean;
+    /**
+     *  The Amazon Resource Name (ARN) of the Lambda function used for connection authorization. 
+     */
+    LambdaFunctionArn?: NonEmptyString;
+    /**
+     *  The status of any updates to the client connect options. 
+     */
+    Status?: AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails;
+  }
+  export interface AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails {
+    /**
+     *  The status code. 
+     */
+    Code?: NonEmptyString;
+    /**
+     *  The status message. 
+     */
+    Message?: NonEmptyString;
+  }
+  export interface AwsEc2ClientVpnEndpointClientLoginBannerOptionsDetails {
+    /**
+     *  Current state of text banner feature. 
+     */
+    Enabled?: Boolean;
+    /**
+     *  Customizable text that will be displayed in a banner on Amazon Web Services provided clients when a VPN session is established. 
+     */
+    BannerText?: NonEmptyString;
+  }
+  export interface AwsEc2ClientVpnEndpointConnectionLogOptionsDetails {
+    /**
+     *  Indicates whether client connection logging is enabled for the Client VPN endpoint. 
+     */
+    Enabled?: Boolean;
+    /**
+     *  The name of the Amazon CloudWatch Logs log group to which connection logging data is published. 
+     */
+    CloudwatchLogGroup?: NonEmptyString;
+    /**
+     *  The name of the Amazon CloudWatch Logs log stream to which connection logging data is published. 
+     */
+    CloudwatchLogStream?: NonEmptyString;
+  }
+  export interface AwsEc2ClientVpnEndpointDetails {
+    /**
+     *  The ID of the Client VPN endpoint. 
+     */
+    ClientVpnEndpointId?: NonEmptyString;
+    /**
+     *  A brief description of the endpoint. 
+     */
+    Description?: NonEmptyString;
+    /**
+     *  The IPv4 address range, in CIDR notation, from which client IP addresses are assigned. 
+     */
+    ClientCidrBlock?: NonEmptyString;
+    /**
+     *  Information about the DNS servers to be used for DNS resolution. 
+     */
+    DnsServer?: StringList;
+    /**
+     *  Indicates whether split-tunnel is enabled in the Client VPN endpoint. 
+     */
+    SplitTunnel?: Boolean;
+    /**
+     *  The transport protocol used by the Client VPN endpoint. 
+     */
+    TransportProtocol?: NonEmptyString;
+    /**
+     *  The port number for the Client VPN endpoint. 
+     */
+    VpnPort?: Integer;
+    /**
+     *  The Amazon Resource Name (ARN) of the server certificate. 
+     */
+    ServerCertificateArn?: NonEmptyString;
+    /**
+     *  Information about the authentication method used by the Client VPN endpoint. 
+     */
+    AuthenticationOptions?: AwsEc2ClientVpnEndpointAuthenticationOptionsList;
+    /**
+     *  Information about the client connection logging options for the Client VPN endpoint. 
+     */
+    ConnectionLogOptions?: AwsEc2ClientVpnEndpointConnectionLogOptionsDetails;
+    /**
+     *  The IDs of the security groups for the target network. 
+     */
+    SecurityGroupIdSet?: StringList;
+    /**
+     *  The ID of the VPC. 
+     */
+    VpcId?: NonEmptyString;
+    /**
+     *  The URL of the self-service portal. 
+     */
+    SelfServicePortalUrl?: NonEmptyString;
+    /**
+     *  The options for managing connection authorization for new client connections. 
+     */
+    ClientConnectOptions?: AwsEc2ClientVpnEndpointClientConnectOptionsDetails;
+    /**
+     *  The maximum VPN session duration time in hours. 
+     */
+    SessionTimeoutHours?: Integer;
+    /**
+     *  Options for enabling a customizable text banner that will be displayed on Amazon Web Services provided clients when a VPN session is established. 
+     */
+    ClientLoginBannerOptions?: AwsEc2ClientVpnEndpointClientLoginBannerOptionsDetails;
   }
   export interface AwsEc2EipDetails {
     /**
@@ -7973,7 +8132,7 @@ declare namespace SecurityHub {
      */
     EncryptionInfo?: AwsMskClusterClusterInfoEncryptionInfoDetails;
     /**
-     *  The current version of the MSK cluster.
+     *  The current version of the cluster.
      */
     CurrentVersion?: NonEmptyString;
     /**
@@ -7988,6 +8147,10 @@ declare namespace SecurityHub {
      *  Provides information for different modes of client authentication.
      */
     ClientAuthentication?: AwsMskClusterClusterInfoClientAuthenticationDetails;
+    /**
+     *  Specifies the level of monitoring for the cluster. 
+     */
+    EnhancedMonitoring?: NonEmptyString;
   }
   export interface AwsMskClusterClusterInfoEncryptionInfoDetails {
     /**
@@ -9806,6 +9969,43 @@ declare namespace SecurityHub {
      */
     CloudWatchLogsLogGroupArn?: CloudWatchLogsLogGroupArnConfigDetails;
   }
+  export interface AwsS3AccessPointDetails {
+    /**
+     *  The Amazon Resource Name (ARN) of the access point. 
+     */
+    AccessPointArn?: NonEmptyString;
+    /**
+     *  The name or alias of the access point. 
+     */
+    Alias?: NonEmptyString;
+    /**
+     *  The name of the S3 bucket associated with the specified access point. 
+     */
+    Bucket?: NonEmptyString;
+    /**
+     *  The Amazon Web Services account ID associated with the S3 bucket associated with this access point. 
+     */
+    BucketAccountId?: NonEmptyString;
+    /**
+     *  The name of the specified access point. 
+     */
+    Name?: NonEmptyString;
+    /**
+     *  Indicates whether this access point allows access from the public internet. 
+     */
+    NetworkOrigin?: NonEmptyString;
+    PublicAccessBlockConfiguration?: AwsS3AccountPublicAccessBlockDetails;
+    /**
+     *  Contains the virtual private cloud (VPC) configuration for the specified access point. 
+     */
+    VpcConfiguration?: AwsS3AccessPointVpcConfigurationDetails;
+  }
+  export interface AwsS3AccessPointVpcConfigurationDetails {
+    /**
+     *  If this field is specified, this access point will only allow connections from the specified VPC ID. 
+     */
+    VpcId?: NonEmptyString;
+  }
   export interface AwsS3AccountPublicAccessBlockDetails {
     /**
      * Indicates whether to reject calls to update an S3 bucket if the calls include a public access control list (ACL).
@@ -10000,7 +10200,7 @@ declare namespace SecurityHub {
      */
     ServerSideEncryptionConfiguration?: AwsS3BucketServerSideEncryptionConfiguration;
     /**
-     * The lifecycle configuration for objects in the S3 bucket.
+     * The lifecycle configuration for objects in the specified bucket.
      */
     BucketLifecycleConfiguration?: AwsS3BucketBucketLifecycleConfigurationDetails;
     /**
@@ -10028,9 +10228,13 @@ declare namespace SecurityHub {
      */
     BucketVersioningConfiguration?: AwsS3BucketBucketVersioningConfiguration;
     /**
-     *  Specifies which rule Amazon S3 applies by default to every new object placed in the specified bucket. 
+     *  Specifies which rule Amazon S3 applies by default to every new object placed in the bucket. 
      */
     ObjectLockConfiguration?: AwsS3BucketObjectLockConfiguration;
+    /**
+     *  The name of the bucket. 
+     */
+    Name?: NonEmptyString;
   }
   export interface AwsS3BucketLoggingConfiguration {
     /**
@@ -12215,7 +12419,7 @@ declare namespace SecurityHub {
      */
     Id?: NonEmptyString;
     /**
-     *  The name of the configuration policy. 
+     *  The name of the configuration policy. Alphanumeric characters and the following ASCII characters are permitted: -, ., !, *, /. 
      */
     Name?: NonEmptyString;
     /**
@@ -12336,7 +12540,7 @@ declare namespace SecurityHub {
   }
   export interface CreateConfigurationPolicyRequest {
     /**
-     *  The name of the configuration policy. 
+     *  The name of the configuration policy. Alphanumeric characters and the following ASCII characters are permitted: -, ., !, *, /. 
      */
     Name: NonEmptyString;
     /**
@@ -14028,7 +14232,7 @@ declare namespace SecurityHub {
   export type Pages = Page[];
   export interface ParameterConfiguration {
     /**
-     *  Identifies whether a control parameter uses a custom user-defined value or the Security Hub default value. 
+     *  Identifies whether a control parameter uses a custom user-defined value or subscribes to the default Security Hub behavior. When ValueType is set equal to DEFAULT, the default behavior can be a specific Security Hub default value, or the default behavior can be to ignore a specific parameter. When ValueType is set equal to DEFAULT, Security Hub ignores user-provided input for the Value field. When ValueType is set equal to CUSTOM, the Value field can't be empty.
      */
     ValueType: ParameterValueType;
     /**
@@ -14732,6 +14936,14 @@ declare namespace SecurityHub {
      *  Provides details about an Amazon Managed Streaming for Apache Kafka (Amazon MSK) cluster.
      */
     AwsMskCluster?: AwsMskClusterDetails;
+    /**
+     *  Provides details about an Amazon Simple Storage Service (Amazon S3) access point. S3 access points are named network endpoints that are attached to S3 buckets that you can use to perform S3 object operations. 
+     */
+    AwsS3AccessPoint?: AwsS3AccessPointDetails;
+    /**
+     *  Provides details about an Client VPN endpoint. A Client VPN endpoint is the resource that you create and configure to enable and manage client VPN sessions. It's the termination point for all client VPN sessions. 
+     */
+    AwsEc2ClientVpnEndpoint?: AwsEc2ClientVpnEndpointDetails;
   }
   export type ResourceList = Resource[];
   export interface Result {
@@ -15887,7 +16099,7 @@ declare namespace SecurityHub {
      */
     Identifier: NonEmptyString;
     /**
-     *  The name of the configuration policy. 
+     *  The name of the configuration policy. Alphanumeric characters and the following ASCII characters are permitted: -, ., !, *, /. 
      */
     Name?: NonEmptyString;
     /**

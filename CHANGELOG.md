@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1515.0-->
+<!--LATEST=2.1516.0-->
 <!--ENTRYINSERT-->
+
+## 2.1516.0
+* feature: Neptune: This release adds a new parameter configuration setting to the Neptune cluster related APIs that can be leveraged to switch between the underlying supported storage modes.
+* feature: SecurityHub: Added new resource detail objects to ASFF, including resources for AwsDynamoDbTable, AwsEc2ClientVpnEndpoint, AwsMskCluster, AwsS3AccessPoint, AwsS3Bucket
 
 ## 2.1515.0
 * bugfix: Endpoints: Add endpoint customizations for services which do not use FIPS suffix

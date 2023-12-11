@@ -690,6 +690,10 @@ declare namespace Neptune {
      */
     BackupRetentionPeriod?: IntegerOptional;
     /**
+     * The storage type for the DB cluster.
+     */
+    StorageType?: String;
+    /**
      * The allocated storage size in gibibytes (GiB) for database engines. For Neptune, AllocatedStorage always returns 1, because Neptune DB cluster storage size isn't fixed, but instead automatically adjusts as needed.
      */
     AllocatedStorage?: IntegerOptional;
@@ -931,7 +935,7 @@ declare namespace Neptune {
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
     /**
-     * The list of log types that need to be enabled for exporting to CloudWatch Logs.
+     * A list of the log types that this DB cluster should export to CloudWatch Logs. Valid log types are: audit (to publish audit logs) and slowquery (to publish slow-query logs). See Publishing Neptune logs to Amazon CloudWatch logs.
      */
     EnableCloudwatchLogsExports?: LogTypeList;
     /**
@@ -946,6 +950,10 @@ declare namespace Neptune {
      * The ID of the Neptune global database to which this new DB cluster should be added.
      */
     GlobalClusterIdentifier?: GlobalClusterIdentifier;
+    /**
+     * The storage type to associate with the DB cluster. Valid Values:    standard | iopt1    Default:    standard     When you create a Neptune cluster with the storage type set to iopt1, the storage type is returned in the response. The storage type isn't returned when you set it to standard. 
+     */
+    StorageType?: String;
   }
   export interface CreateDBClusterParameterGroupMessage {
     /**
@@ -1415,7 +1423,7 @@ declare namespace Neptune {
      */
     CopyTagsToSnapshot?: BooleanOptional;
     /**
-     * A list of log types that this DB cluster is configured to export to CloudWatch Logs.
+     * A list of the log types that this DB cluster is configured to export to CloudWatch Logs. Valid log types are: audit (to publish audit logs to CloudWatch) and slowquery (to publish slow-query logs to CloudWatch). See Publishing Neptune logs to Amazon CloudWatch logs.
      */
     EnabledCloudwatchLogsExports?: LogTypeList;
     /**
@@ -1442,6 +1450,14 @@ declare namespace Neptune {
      * Contains a user-supplied global database cluster identifier. This identifier is the unique key that identifies a global database.
      */
     GlobalClusterIdentifier?: GlobalClusterIdentifier;
+    /**
+     * The next time you can modify the DB cluster to use the iopt1 storage type.
+     */
+    IOOptimizedNextAllowedModificationTime?: TStamp;
+    /**
+     * The storage type associated with the DB cluster.
+     */
+    StorageType?: String;
   }
   export interface DBClusterEndpoint {
     /**
@@ -1678,6 +1694,10 @@ declare namespace Neptune {
      * True if mapping of Amazon Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.
      */
     IAMDatabaseAuthenticationEnabled?: Boolean;
+    /**
+     * The storage type associated with the DB cluster snapshot.
+     */
+    StorageType?: String;
   }
   export interface DBClusterSnapshotAttribute {
     /**
@@ -3067,7 +3087,7 @@ declare namespace Neptune {
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
     /**
-     * The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB cluster.
+     * The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB cluster. See Using the CLI to publish Neptune audit logs to CloudWatch Logs.
      */
     CloudwatchLogsExportConfiguration?: CloudwatchLogsExportConfiguration;
     /**
@@ -3094,6 +3114,10 @@ declare namespace Neptune {
      * Contains the scaling configuration of a Neptune Serverless DB cluster. For more information, see Using Amazon Neptune Serverless in the Amazon Neptune User Guide.
      */
     ServerlessV2ScalingConfiguration?: ServerlessV2ScalingConfiguration;
+    /**
+     * The storage type to associate with the DB cluster. Valid Values:    standard | iopt1    Default:    standard   
+     */
+    StorageType?: String;
   }
   export interface ModifyDBClusterParameterGroupMessage {
     /**
@@ -3818,6 +3842,10 @@ declare namespace Neptune {
      * Contains the scaling configuration of a Neptune Serverless DB cluster. For more information, see Using Amazon Neptune Serverless in the Amazon Neptune User Guide.
      */
     ServerlessV2ScalingConfiguration?: ServerlessV2ScalingConfiguration;
+    /**
+     * Specifies the storage type to be associated with the DB cluster. Valid values: standard, iopt1  Default: standard 
+     */
+    StorageType?: String;
   }
   export interface RestoreDBClusterFromSnapshotResult {
     DBCluster?: DBCluster;
@@ -3887,6 +3915,10 @@ declare namespace Neptune {
      * Contains the scaling configuration of a Neptune Serverless DB cluster. For more information, see Using Amazon Neptune Serverless in the Amazon Neptune User Guide.
      */
     ServerlessV2ScalingConfiguration?: ServerlessV2ScalingConfiguration;
+    /**
+     * Specifies the storage type to be associated with the DB cluster. Valid values: standard, iopt1  Default: standard 
+     */
+    StorageType?: String;
   }
   export interface RestoreDBClusterToPointInTimeResult {
     DBCluster?: DBCluster;
