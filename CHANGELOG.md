@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1516.0-->
+<!--LATEST=2.1517.0-->
 <!--ENTRYINSERT-->
+
+## 2.1517.0
+* feature: CloudWatchLogs: This release introduces the StartLiveTail API to tail ingested logs in near real time.
+* feature: Imagebuilder: This release adds the Image Workflows feature to give more flexibility and control over the image building and testing process.
+* feature: Location: This release 1)  adds sub-municipality field in Places API for searching and getting places information, and 2) allows optimizing route calculation based on expected arrival time.
 
 ## 2.1516.0
 * feature: Neptune: This release adds a new parameter configuration setting to the Neptune cluster related APIs that can be leveraged to switch between the underlying supported storage modes.

@@ -837,6 +837,10 @@ declare namespace Location {
   export type CalculateRouteMatrixSummaryRouteCountInteger = number;
   export interface CalculateRouteRequest {
     /**
+     * Specifies the desired time of arrival. Uses the given time to calculate the route. Otherwise, the best time of day to travel with the best traffic conditions is used to calculate the route.  ArrivalTime is not supported Esri. 
+     */
+    ArrivalTime?: Timestamp;
+    /**
      * The name of the route calculator resource that you want to use to calculate the route. 
      */
     CalculatorName: ResourceName;
@@ -853,7 +857,7 @@ declare namespace Location {
      */
     DeparturePosition: Position;
     /**
-     * Specifies the desired time of departure. Uses the given time to calculate the route. Otherwise, the best time of day to travel with the best traffic conditions is used to calculate the route.  Setting a departure time in the past returns a 400 ValidationException error.    In ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. For example, 2020–07-2T12:15:20.000Z+01:00   
+     * Specifies the desired time of departure. Uses the given time to calculate the route. Otherwise, the best time of day to travel with the best traffic conditions is used to calculate the route.   In ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. For example, 2020–07-2T12:15:20.000Z+01:00   
      */
     DepartureTime?: Timestamp;
     /**
@@ -872,6 +876,10 @@ declare namespace Location {
      * The optional API key to authorize the request.
      */
     Key?: ApiKey;
+    /**
+     * Specifies the distance to optimize for when calculating a route.
+     */
+    OptimizeFor?: OptimizationMode;
     /**
      * Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility. You can choose Car, Truck, Walking, Bicycle or Motorcycle as options for the TravelMode.   Bicycle and Motorcycle are only valid when using Grab as a data provider, and only within Southeast Asia.  Truck is not available for Grab. For more details on the using Grab for routing, including areas of coverage, see GrabMaps in the Amazon Location Service Developer Guide.  The TravelMode you specify also determines how you specify route preferences:    If traveling by Car use the CarModeOptions parameter.   If traveling by Truck use the TruckModeOptions parameter.   Default Value: Car 
      */
@@ -1907,7 +1915,7 @@ declare namespace Location {
   export type LinearRings = LinearRing[];
   export interface ListDevicePositionsRequest {
     /**
-     * The geomerty used to filter device positions.
+     * The geometry used to filter device positions.
      */
     FilterGeometry?: TrackingFilterGeometry;
     /**
@@ -2352,6 +2360,7 @@ declare namespace Location {
     PoliticalView?: CountryCode3OrEmpty;
   }
   export type MapStyle = string;
+  export type OptimizationMode = "FastestRoute"|"ShortestRoute"|string;
   export interface Place {
     /**
      * The numerical portion of an address, such as a building number. 
@@ -2394,6 +2403,10 @@ declare namespace Location {
      * The name for a street or a road to identify a location. For example, Main Street.
      */
     Street?: String;
+    /**
+     * An area that's part of a larger municipality. For example, Blissville  is a submunicipality in the Queen County in New York.  This property supported by Esri and OpenData. The Esri property is district, and the OpenData property is borough. 
+     */
+    SubMunicipality?: String;
     /**
      * A county, or an area that's part of a larger region. For example, Metro Vancouver.
      */

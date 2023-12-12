@@ -4,6 +4,7 @@ import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config-base';
+import {EventStream} from '../lib/event-stream/event-stream';
 interface Blob {}
 declare class CloudWatchLogs extends Service {
   /**
@@ -268,11 +269,11 @@ declare class CloudWatchLogs extends Service {
    */
   describeQueries(callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeQueriesResponse) => void): Request<CloudWatchLogs.Types.DescribeQueriesResponse, AWSError>;
   /**
-   * This operation returns a paginated list of your saved CloudWatch Logs Insights query definitions. You can use the queryDefinitionNamePrefix parameter to limit the results to only the query definitions that have names that start with a certain string.
+   * This operation returns a paginated list of your saved CloudWatch Logs Insights query definitions. You can retrieve query definitions from the current account or from a source account that is linked to the current account. You can use the queryDefinitionNamePrefix parameter to limit the results to only the query definitions that have names that start with a certain string.
    */
   describeQueryDefinitions(params: CloudWatchLogs.Types.DescribeQueryDefinitionsRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeQueryDefinitionsResponse) => void): Request<CloudWatchLogs.Types.DescribeQueryDefinitionsResponse, AWSError>;
   /**
-   * This operation returns a paginated list of your saved CloudWatch Logs Insights query definitions. You can use the queryDefinitionNamePrefix parameter to limit the results to only the query definitions that have names that start with a certain string.
+   * This operation returns a paginated list of your saved CloudWatch Logs Insights query definitions. You can retrieve query definitions from the current account or from a source account that is linked to the current account. You can use the queryDefinitionNamePrefix parameter to limit the results to only the query definitions that have names that start with a certain string.
    */
   describeQueryDefinitions(callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeQueryDefinitionsResponse) => void): Request<CloudWatchLogs.Types.DescribeQueryDefinitionsResponse, AWSError>;
   /**
@@ -523,6 +524,14 @@ declare class CloudWatchLogs extends Service {
    * Creates or updates a subscription filter and associates it with the specified log group. With subscription filters, you can subscribe to a real-time stream of log events ingested through PutLogEvents and have them delivered to a specific destination. When log events are sent to the receiving service, they are Base64 encoded and compressed with the GZIP format. The following destinations are supported for subscription filters:   An Amazon Kinesis data stream belonging to the same account as the subscription filter, for same-account delivery.   A logical destination created with PutDestination that belongs to a different account, for cross-account delivery. We currently support Kinesis Data Streams and Kinesis Data Firehose as logical destinations.   An Amazon Kinesis Data Firehose delivery stream that belongs to the same account as the subscription filter, for same-account delivery.   An Lambda function that belongs to the same account as the subscription filter, for same-account delivery.   Each log group can have up to two subscription filters associated with it. If you are updating an existing filter, you must specify the correct name in filterName.  To perform a PutSubscriptionFilter operation for any destination except a Lambda function, you must also have the iam:PassRole permission.
    */
   putSubscriptionFilter(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Starts a Live Tail streaming session for one or more log groups. A Live Tail session returns a stream of log events that have been recently ingested in the log groups. For more information, see Use Live Tail to view logs in near real time.  The response to this operation is a response stream, over which the server sends live log events and the client receives them. The following objects are sent over the stream:   A single LiveTailSessionStart object is sent at the start of the session.   Every second, a LiveTailSessionUpdate object is sent. Each of these objects contains an array of the actual log events. If no new log events were ingested in the past second, the LiveTailSessionUpdate object will contain an empty array. The array of log events contained in a LiveTailSessionUpdate can include as many as 500 log events. If the number of log events matching the request exceeds 500 per second, the log events are sampled down to 500 log events to be included in each LiveTailSessionUpdate object. If your client consumes the log events slower than the server produces them, CloudWatch Logs buffers up to 10 LiveTailSessionUpdate events or 5000 log events, after which it starts dropping the oldest events.   A SessionStreamingException object is returned if an unknown error occurs on the server side.   A SessionTimeoutException object is returned when the session times out, after it has been kept open for three hours.    You can end a session before it times out by closing the session stream or by closing the client that is receiving the stream. The session also ends if the established connection between the client and the server breaks. 
+   */
+  startLiveTail(params: CloudWatchLogs.Types.StartLiveTailRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.StartLiveTailResponse) => void): Request<CloudWatchLogs.Types.StartLiveTailResponse, AWSError>;
+  /**
+   * Starts a Live Tail streaming session for one or more log groups. A Live Tail session returns a stream of log events that have been recently ingested in the log groups. For more information, see Use Live Tail to view logs in near real time.  The response to this operation is a response stream, over which the server sends live log events and the client receives them. The following objects are sent over the stream:   A single LiveTailSessionStart object is sent at the start of the session.   Every second, a LiveTailSessionUpdate object is sent. Each of these objects contains an array of the actual log events. If no new log events were ingested in the past second, the LiveTailSessionUpdate object will contain an empty array. The array of log events contained in a LiveTailSessionUpdate can include as many as 500 log events. If the number of log events matching the request exceeds 500 per second, the log events are sampled down to 500 log events to be included in each LiveTailSessionUpdate object. If your client consumes the log events slower than the server produces them, CloudWatch Logs buffers up to 10 LiveTailSessionUpdate events or 5000 log events, after which it starts dropping the oldest events.   A SessionStreamingException object is returned if an unknown error occurs on the server side.   A SessionTimeoutException object is returned when the session times out, after it has been kept open for three hours.    You can end a session before it times out by closing the session stream or by closing the client that is receiving the stream. The session also ends if the established connection between the client and the server breaks. 
+   */
+  startLiveTail(callback?: (err: AWSError, data: CloudWatchLogs.Types.StartLiveTailResponse) => void): Request<CloudWatchLogs.Types.StartLiveTailResponse, AWSError>;
   /**
    * Schedules a query of a log group using CloudWatch Logs Insights. You specify the log group and time range to query and the query string to use. For more information, see CloudWatch Logs Insights Query Syntax. After you run a query using StartQuery, the query results are stored by CloudWatch Logs. You can use GetQueryResults to retrieve the results of a query, using the queryId that StartQuery returns.  If you have associated a KMS key with the query results in this account, then StartQuery uses that key to encrypt the results when it stores them. If no key is associated with query results, the query results are encrypted with the default CloudWatch Logs encryption method. Queries time out after 60 minutes of runtime. If your queries are timing out, reduce the time range being searched or partition your query into a number of queries. If you are using CloudWatch cross-account observability, you can use this operation in a monitoring account to start a query in a linked source account. For more information, see CloudWatch cross-account observability. For a cross-account StartQuery operation, the query definition must be defined in the monitoring account. You can have up to 30 concurrent CloudWatch Logs insights queries, including queries that have been added to dashboards. 
    */
@@ -834,7 +843,7 @@ declare namespace CloudWatchLogs {
   }
   export interface CreateLogAnomalyDetectorRequest {
     /**
-     * An array containing the ARNs of the log groups that this anomaly detector will watch. You must specify at least one ARN.
+     * An array containing the ARN of the log group that this anomaly detector will watch. You can specify only one log group ARN.
      */
     logGroupArnList: LogGroupArnList;
     /**
@@ -882,7 +891,7 @@ declare namespace CloudWatchLogs {
      */
     tags?: Tags;
     /**
-     * Use this parameter to specify the log group class for this log group. There are two classes:   The Standard log class supports all CloudWatch Logs features.   The Infrequent Access log class supports a subset of CloudWatch Logs features and incurs lower costs.   If you omit this parameter, the default of STANDARD is used. For details about the features supported by each class, see Log classes 
+     * Use this parameter to specify the log group class for this log group. There are two classes:   The Standard log class supports all CloudWatch Logs features.   The Infrequent Access log class supports a subset of CloudWatch Logs features and incurs lower costs.   If you omit this parameter, the default of STANDARD is used.  After a log group is created, its class can't be changed.  For details about the features supported by each class, see Log classes 
      */
     logGroupClass?: LogGroupClass;
   }
@@ -1848,6 +1857,7 @@ declare namespace CloudWatchLogs {
   export type InputLogStreamNames = LogStreamName[];
   export type Integer = number;
   export type Interleaved = boolean;
+  export type IsSampled = boolean;
   export type KmsKeyId = string;
   export type ListAnomaliesLimit = number;
   export interface ListAnomaliesRequest {
@@ -1914,6 +1924,71 @@ declare namespace CloudWatchLogs {
      * The tags for the log group.
      */
     tags?: Tags;
+  }
+  export interface LiveTailSessionLogEvent {
+    /**
+     * The name of the log stream that ingested this log event.
+     */
+    logStreamName?: LogStreamName;
+    /**
+     * The name or ARN of the log group that ingested this log event.
+     */
+    logGroupIdentifier?: LogGroupIdentifier;
+    /**
+     * The log event message text.
+     */
+    message?: EventMessage;
+    /**
+     * The timestamp specifying when this log event was created.
+     */
+    timestamp?: Timestamp;
+    /**
+     * The timestamp specifying when this log event was ingested into the log group.
+     */
+    ingestionTime?: Timestamp;
+  }
+  export interface LiveTailSessionMetadata {
+    /**
+     * If this is true, then more than 500 log events matched the request for this update, and the sessionResults includes a sample of 500 of those events. If this is false, then 500 or fewer log events matched the request for this update, so no sampling was necessary. In this case, the sessionResults array includes all log events that matched your request during this time.
+     */
+    sampled?: IsSampled;
+  }
+  export type LiveTailSessionResults = LiveTailSessionLogEvent[];
+  export interface LiveTailSessionStart {
+    /**
+     * The unique ID generated by CloudWatch Logs to identify this Live Tail session request.
+     */
+    requestId?: RequestId;
+    /**
+     * The unique ID generated by CloudWatch Logs to identify this Live Tail session.
+     */
+    sessionId?: SessionId;
+    /**
+     * An array of the names and ARNs of the log groups included in this Live Tail session.
+     */
+    logGroupIdentifiers?: StartLiveTailLogGroupIdentifiers;
+    /**
+     * If your StartLiveTail operation request included a logStreamNames parameter that filtered the session to only include certain log streams, these streams are listed here.
+     */
+    logStreamNames?: InputLogStreamNames;
+    /**
+     * If your StartLiveTail operation request included a logStreamNamePrefixes parameter that filtered the session to only include log streams that have names that start with certain prefixes, these prefixes are listed here.
+     */
+    logStreamNamePrefixes?: InputLogStreamNames;
+    /**
+     * An optional pattern to filter the results to include only log events that match the pattern. For example, a filter pattern of error 404 displays only log events that include both error and 404. For more information about filter pattern syntax, see Filter and Pattern Syntax.
+     */
+    logEventFilterPattern?: FilterPattern;
+  }
+  export interface LiveTailSessionUpdate {
+    /**
+     * This object contains the session metadata for a Live Tail session.
+     */
+    sessionMetadata?: LiveTailSessionMetadata;
+    /**
+     * An array, where each member of the array includes the information for one log event in the Live Tail session. A sessionResults array can include as many as 500 log events. If the number of log events matching the request exceeds 500 per second, the log events are sampled down to 500 log events to be included in each sessionUpdate structure.
+     */
+    sessionResults?: LiveTailSessionResults;
   }
   export type LogEvent = string;
   export type LogEventIndex = number;
@@ -2017,6 +2092,7 @@ declare namespace CloudWatchLogs {
   export type LogStreamSearchedCompletely = boolean;
   export type LogStreams = LogStream[];
   export type LogType = string;
+  export type Message = string;
   export interface MetricFilter {
     /**
      * The name of the metric filter.
@@ -2487,6 +2563,7 @@ declare namespace CloudWatchLogs {
      */
     expiredLogEventEndIndex?: LogEventIndex;
   }
+  export type RequestId = string;
   export type ResourceArns = Arn[];
   export type ResourceIdentifier = string;
   export type ResourcePolicies = ResourcePolicy[];
@@ -2530,8 +2607,41 @@ declare namespace CloudWatchLogs {
   export type SearchedLogStreams = SearchedLogStream[];
   export type SequenceToken = string;
   export type Service = string;
+  export type SessionId = string;
+  export interface SessionStreamingException {
+    message?: Message;
+  }
+  export interface SessionTimeoutException {
+    message?: Message;
+  }
   export type StandardUnit = "Seconds"|"Microseconds"|"Milliseconds"|"Bytes"|"Kilobytes"|"Megabytes"|"Gigabytes"|"Terabytes"|"Bits"|"Kilobits"|"Megabits"|"Gigabits"|"Terabits"|"Percent"|"Count"|"Bytes/Second"|"Kilobytes/Second"|"Megabytes/Second"|"Gigabytes/Second"|"Terabytes/Second"|"Bits/Second"|"Kilobits/Second"|"Megabits/Second"|"Gigabits/Second"|"Terabits/Second"|"Count/Second"|"None"|string;
   export type StartFromHead = boolean;
+  export type StartLiveTailLogGroupIdentifiers = LogGroupIdentifier[];
+  export interface StartLiveTailRequest {
+    /**
+     * An array where each item in the array is a log group to include in the Live Tail session. Specify each log group by its ARN.  If you specify an ARN, the ARN can't end with an asterisk (*).   You can include up to 10 log groups. 
+     */
+    logGroupIdentifiers: StartLiveTailLogGroupIdentifiers;
+    /**
+     * If you specify this parameter, then only log events in the log streams that you specify here are included in the Live Tail session.  You can specify this parameter only if you specify only one log group in logGroupIdentifiers. 
+     */
+    logStreamNames?: InputLogStreamNames;
+    /**
+     * If you specify this parameter, then only log events in the log streams that have names that start with the prefixes that you specify here are included in the Live Tail session.  You can specify this parameter only if you specify only one log group in logGroupIdentifiers. 
+     */
+    logStreamNamePrefixes?: InputLogStreamNames;
+    /**
+     * An optional pattern to use to filter the results to include only log events that match the pattern. For example, a filter pattern of error 404 causes only log events that include both error and 404 to be included in the Live Tail stream. Regular expression filter patterns are supported. For more information about filter pattern syntax, see Filter and Pattern Syntax.
+     */
+    logEventFilterPattern?: FilterPattern;
+  }
+  export interface StartLiveTailResponse {
+    /**
+     * An object that includes the stream returned by your request. It can include both log events and exceptions.
+     */
+    responseStream?: StartLiveTailResponseStream;
+  }
+  export type StartLiveTailResponseStream = EventStream<{sessionStart?:LiveTailSessionStart,sessionUpdate?:LiveTailSessionUpdate,SessionTimeoutException?:SessionTimeoutException,SessionStreamingException?:SessionStreamingException}>;
   export interface StartQueryRequest {
     /**
      * The log group on which to perform the query.  A StartQuery operation must include exactly one of the following parameters: logGroupName, logGroupNames, or logGroupIdentifiers.  

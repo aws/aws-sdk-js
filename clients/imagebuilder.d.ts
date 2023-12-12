@@ -92,6 +92,14 @@ declare class Imagebuilder extends Service {
    */
   createLifecyclePolicy(callback?: (err: AWSError, data: Imagebuilder.Types.CreateLifecyclePolicyResponse) => void): Request<Imagebuilder.Types.CreateLifecyclePolicyResponse, AWSError>;
   /**
+   * Create a new workflow or a new version of an existing workflow.
+   */
+  createWorkflow(params: Imagebuilder.Types.CreateWorkflowRequest, callback?: (err: AWSError, data: Imagebuilder.Types.CreateWorkflowResponse) => void): Request<Imagebuilder.Types.CreateWorkflowResponse, AWSError>;
+  /**
+   * Create a new workflow or a new version of an existing workflow.
+   */
+  createWorkflow(callback?: (err: AWSError, data: Imagebuilder.Types.CreateWorkflowResponse) => void): Request<Imagebuilder.Types.CreateWorkflowResponse, AWSError>;
+  /**
    * Deletes a component build version.
    */
   deleteComponent(params: Imagebuilder.Types.DeleteComponentRequest, callback?: (err: AWSError, data: Imagebuilder.Types.DeleteComponentResponse) => void): Request<Imagebuilder.Types.DeleteComponentResponse, AWSError>;
@@ -155,6 +163,14 @@ declare class Imagebuilder extends Service {
    * Delete the specified lifecycle policy resource.
    */
   deleteLifecyclePolicy(callback?: (err: AWSError, data: Imagebuilder.Types.DeleteLifecyclePolicyResponse) => void): Request<Imagebuilder.Types.DeleteLifecyclePolicyResponse, AWSError>;
+  /**
+   * Deletes a specific workflow resource.
+   */
+  deleteWorkflow(params: Imagebuilder.Types.DeleteWorkflowRequest, callback?: (err: AWSError, data: Imagebuilder.Types.DeleteWorkflowResponse) => void): Request<Imagebuilder.Types.DeleteWorkflowResponse, AWSError>;
+  /**
+   * Deletes a specific workflow resource.
+   */
+  deleteWorkflow(callback?: (err: AWSError, data: Imagebuilder.Types.DeleteWorkflowResponse) => void): Request<Imagebuilder.Types.DeleteWorkflowResponse, AWSError>;
   /**
    * Gets a component object.
    */
@@ -259,6 +275,14 @@ declare class Imagebuilder extends Service {
    * Get details for the specified image lifecycle policy.
    */
   getLifecyclePolicy(callback?: (err: AWSError, data: Imagebuilder.Types.GetLifecyclePolicyResponse) => void): Request<Imagebuilder.Types.GetLifecyclePolicyResponse, AWSError>;
+  /**
+   * Get a workflow resource object.
+   */
+  getWorkflow(params: Imagebuilder.Types.GetWorkflowRequest, callback?: (err: AWSError, data: Imagebuilder.Types.GetWorkflowResponse) => void): Request<Imagebuilder.Types.GetWorkflowResponse, AWSError>;
+  /**
+   * Get a workflow resource object.
+   */
+  getWorkflow(callback?: (err: AWSError, data: Imagebuilder.Types.GetWorkflowResponse) => void): Request<Imagebuilder.Types.GetWorkflowResponse, AWSError>;
   /**
    * Get the runtime information that was logged for a specific runtime instance of the workflow.
    */
@@ -428,6 +452,22 @@ declare class Imagebuilder extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Imagebuilder.Types.ListTagsForResourceResponse) => void): Request<Imagebuilder.Types.ListTagsForResourceResponse, AWSError>;
   /**
+   * Get a list of workflow steps that are waiting for action for workflows in your Amazon Web Services account.
+   */
+  listWaitingWorkflowSteps(params: Imagebuilder.Types.ListWaitingWorkflowStepsRequest, callback?: (err: AWSError, data: Imagebuilder.Types.ListWaitingWorkflowStepsResponse) => void): Request<Imagebuilder.Types.ListWaitingWorkflowStepsResponse, AWSError>;
+  /**
+   * Get a list of workflow steps that are waiting for action for workflows in your Amazon Web Services account.
+   */
+  listWaitingWorkflowSteps(callback?: (err: AWSError, data: Imagebuilder.Types.ListWaitingWorkflowStepsResponse) => void): Request<Imagebuilder.Types.ListWaitingWorkflowStepsResponse, AWSError>;
+  /**
+   * Returns a list of build versions for a specific workflow resource.
+   */
+  listWorkflowBuildVersions(params: Imagebuilder.Types.ListWorkflowBuildVersionsRequest, callback?: (err: AWSError, data: Imagebuilder.Types.ListWorkflowBuildVersionsResponse) => void): Request<Imagebuilder.Types.ListWorkflowBuildVersionsResponse, AWSError>;
+  /**
+   * Returns a list of build versions for a specific workflow resource.
+   */
+  listWorkflowBuildVersions(callback?: (err: AWSError, data: Imagebuilder.Types.ListWorkflowBuildVersionsResponse) => void): Request<Imagebuilder.Types.ListWorkflowBuildVersionsResponse, AWSError>;
+  /**
    * Returns a list of workflow runtime instance metadata objects for a specific image build version.
    */
   listWorkflowExecutions(params: Imagebuilder.Types.ListWorkflowExecutionsRequest, callback?: (err: AWSError, data: Imagebuilder.Types.ListWorkflowExecutionsResponse) => void): Request<Imagebuilder.Types.ListWorkflowExecutionsResponse, AWSError>;
@@ -436,13 +476,21 @@ declare class Imagebuilder extends Service {
    */
   listWorkflowExecutions(callback?: (err: AWSError, data: Imagebuilder.Types.ListWorkflowExecutionsResponse) => void): Request<Imagebuilder.Types.ListWorkflowExecutionsResponse, AWSError>;
   /**
-   * Shows runtime data for each step in a runtime instance of the workflow that you specify in the request.
+   * Returns runtime data for each step in a runtime instance of the workflow that you specify in the request.
    */
   listWorkflowStepExecutions(params: Imagebuilder.Types.ListWorkflowStepExecutionsRequest, callback?: (err: AWSError, data: Imagebuilder.Types.ListWorkflowStepExecutionsResponse) => void): Request<Imagebuilder.Types.ListWorkflowStepExecutionsResponse, AWSError>;
   /**
-   * Shows runtime data for each step in a runtime instance of the workflow that you specify in the request.
+   * Returns runtime data for each step in a runtime instance of the workflow that you specify in the request.
    */
   listWorkflowStepExecutions(callback?: (err: AWSError, data: Imagebuilder.Types.ListWorkflowStepExecutionsResponse) => void): Request<Imagebuilder.Types.ListWorkflowStepExecutionsResponse, AWSError>;
+  /**
+   * Lists workflow build versions based on filtering parameters.
+   */
+  listWorkflows(params: Imagebuilder.Types.ListWorkflowsRequest, callback?: (err: AWSError, data: Imagebuilder.Types.ListWorkflowsResponse) => void): Request<Imagebuilder.Types.ListWorkflowsResponse, AWSError>;
+  /**
+   * Lists workflow build versions based on filtering parameters.
+   */
+  listWorkflows(callback?: (err: AWSError, data: Imagebuilder.Types.ListWorkflowsResponse) => void): Request<Imagebuilder.Types.ListWorkflowsResponse, AWSError>;
   /**
    * Applies a policy to a component. We recommend that you call the RAM API CreateResourceShare to share resources. If you call the Image Builder API PutComponentPolicy, you must also call the RAM API PromoteResourceShareCreatedFromPolicy in order for the resource to be visible to all principals with whom the resource is shared.
    */
@@ -475,6 +523,14 @@ declare class Imagebuilder extends Service {
    * Applies a policy to an image recipe. We recommend that you call the RAM API CreateResourceShare to share resources. If you call the Image Builder API PutImageRecipePolicy, you must also call the RAM API PromoteResourceShareCreatedFromPolicy in order for the resource to be visible to all principals with whom the resource is shared.
    */
   putImageRecipePolicy(callback?: (err: AWSError, data: Imagebuilder.Types.PutImageRecipePolicyResponse) => void): Request<Imagebuilder.Types.PutImageRecipePolicyResponse, AWSError>;
+  /**
+   * Pauses or resumes image creation when the associated workflow runs a WaitForAction step.
+   */
+  sendWorkflowStepAction(params: Imagebuilder.Types.SendWorkflowStepActionRequest, callback?: (err: AWSError, data: Imagebuilder.Types.SendWorkflowStepActionResponse) => void): Request<Imagebuilder.Types.SendWorkflowStepActionResponse, AWSError>;
+  /**
+   * Pauses or resumes image creation when the associated workflow runs a WaitForAction step.
+   */
+  sendWorkflowStepAction(callback?: (err: AWSError, data: Imagebuilder.Types.SendWorkflowStepActionResponse) => void): Request<Imagebuilder.Types.SendWorkflowStepActionResponse, AWSError>;
   /**
    * Manually triggers a pipeline to create an image.
    */
@@ -516,11 +572,11 @@ declare class Imagebuilder extends Service {
    */
   updateDistributionConfiguration(callback?: (err: AWSError, data: Imagebuilder.Types.UpdateDistributionConfigurationResponse) => void): Request<Imagebuilder.Types.UpdateDistributionConfigurationResponse, AWSError>;
   /**
-   * Updates an image pipeline. Image pipelines enable you to automate the creation and distribution of images.  UpdateImagePipeline does not support selective updates for the pipeline. You must specify all of the required properties in the update request, not just the properties that have changed. 
+   * Updates an image pipeline. Image pipelines enable you to automate the creation and distribution of images. You must specify exactly one recipe for your image, using either a containerRecipeArn or an imageRecipeArn.  UpdateImagePipeline does not support selective updates for the pipeline. You must specify all of the required properties in the update request, not just the properties that have changed. 
    */
   updateImagePipeline(params: Imagebuilder.Types.UpdateImagePipelineRequest, callback?: (err: AWSError, data: Imagebuilder.Types.UpdateImagePipelineResponse) => void): Request<Imagebuilder.Types.UpdateImagePipelineResponse, AWSError>;
   /**
-   * Updates an image pipeline. Image pipelines enable you to automate the creation and distribution of images.  UpdateImagePipeline does not support selective updates for the pipeline. You must specify all of the required properties in the update request, not just the properties that have changed. 
+   * Updates an image pipeline. Image pipelines enable you to automate the creation and distribution of images. You must specify exactly one recipe for your image, using either a containerRecipeArn or an imageRecipeArn.  UpdateImagePipeline does not support selective updates for the pipeline. You must specify all of the required properties in the update request, not just the properties that have changed. 
    */
   updateImagePipeline(callback?: (err: AWSError, data: Imagebuilder.Types.UpdateImagePipelineResponse) => void): Request<Imagebuilder.Types.UpdateImagePipelineResponse, AWSError>;
   /**
@@ -676,7 +732,7 @@ declare namespace Imagebuilder {
      */
     description?: NonEmptyString;
     /**
-     * The change description of the component.
+     * Describes what change has been made in this version of the component, or what makes this version different from other versions of the component.
      */
     changeDescription?: NonEmptyString;
     /**
@@ -1040,7 +1096,7 @@ declare namespace Imagebuilder {
      */
     description?: NonEmptyString;
     /**
-     * The change description of the component. Describes what change has been made in this version, or what makes this version different from other versions of this component.
+     * The change description of the component. Describes what change has been made in this version, or what makes this version different from other versions of the component.
      */
     changeDescription?: NonEmptyString;
     /**
@@ -1255,6 +1311,14 @@ declare namespace Imagebuilder {
      * Contains settings for vulnerability scans.
      */
     imageScanningConfiguration?: ImageScanningConfiguration;
+    /**
+     * Contains an array of workflow configuration objects.
+     */
+    workflows?: WorkflowConfigurationList;
+    /**
+     * The name or Amazon Resource Name (ARN) for the IAM role you create that grants Image Builder access to perform workflow actions.
+     */
+    executionRole?: RoleNameOrArn;
   }
   export interface CreateImagePipelineResponse {
     /**
@@ -1363,6 +1427,14 @@ declare namespace Imagebuilder {
      * Contains settings for vulnerability scans.
      */
     imageScanningConfiguration?: ImageScanningConfiguration;
+    /**
+     * Contains an array of workflow configuration objects.
+     */
+    workflows?: WorkflowConfigurationList;
+    /**
+     * The name or Amazon Resource Name (ARN) for the IAM role you create that grants Image Builder access to perform workflow actions.
+     */
+    executionRole?: RoleNameOrArn;
   }
   export interface CreateImageResponse {
     /**
@@ -1464,7 +1536,7 @@ declare namespace Imagebuilder {
      */
     status?: LifecyclePolicyStatus;
     /**
-     * The role name or Amazon Resource Name (ARN) for the IAM role that grants Image Builder access to run lifecycle actions.
+     * The name or Amazon Resource Name (ARN) for the IAM role you create that grants Image Builder access to run lifecycle actions.
      */
     executionRole: RoleNameOrArn;
     /**
@@ -1497,6 +1569,58 @@ declare namespace Imagebuilder {
      * The Amazon Resource Name (ARN) of the lifecycle policy that the request created.
      */
     lifecyclePolicyArn?: LifecyclePolicyArn;
+  }
+  export interface CreateWorkflowRequest {
+    /**
+     * The name of the workflow to create.
+     */
+    name: ResourceName;
+    /**
+     * The semantic version of this workflow resource. The semantic version syntax adheres to the following rules.  The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.  Assignment: For the first three nodes you can assign any positive integer value, including zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the build number to the fourth node.  Patterns: You can use any numeric pattern that adheres to the assignment requirements for the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or a date, such as 2021.01.01. 
+     */
+    semanticVersion: VersionNumber;
+    /**
+     * Describes the workflow.
+     */
+    description?: NonEmptyString;
+    /**
+     * Describes what change has been made in this version of the workflow, or what makes this version different from other versions of the workflow.
+     */
+    changeDescription?: NonEmptyString;
+    /**
+     * Contains the UTF-8 encoded YAML document content for the workflow. Alternatively, you can specify the uri of a YAML document file stored in Amazon S3. However, you cannot specify both properties.
+     */
+    data?: InlineWorkflowData;
+    /**
+     * The uri of a YAML component document file. This must be an S3 URL (s3://bucket/key), and the requester must have permission to access the S3 bucket it points to. If you use Amazon S3, you can specify component content up to your service quota. Alternatively, you can specify the YAML document inline, using the component data property. You cannot specify both properties.
+     */
+    uri?: Uri;
+    /**
+     * The ID of the KMS key that is used to encrypt this workflow resource.
+     */
+    kmsKeyId?: NonEmptyString;
+    /**
+     * Tags that apply to the workflow resource.
+     */
+    tags?: TagMap;
+    /**
+     * Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see Ensuring idempotency in the Amazon EC2 API Reference.
+     */
+    clientToken: ClientToken;
+    /**
+     * The phase in the image build process for which the workflow resource is responsible.
+     */
+    type: WorkflowType;
+  }
+  export interface CreateWorkflowResponse {
+    /**
+     * The client token that uniquely identifies the request.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The Amazon Resource Name (ARN) of the workflow resource that the request created.
+     */
+    workflowBuildVersionArn?: WorkflowBuildVersionArn;
   }
   export interface CvssScore {
     /**
@@ -1679,6 +1803,18 @@ declare namespace Imagebuilder {
      * The ARN of the lifecycle policy that was deleted.
      */
     lifecyclePolicyArn?: LifecyclePolicyArn;
+  }
+  export interface DeleteWorkflowRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the workflow resource to delete.
+     */
+    workflowBuildVersionArn: WorkflowBuildVersionArn;
+  }
+  export interface DeleteWorkflowResponse {
+    /**
+     * The ARN of the workflow resource that this request deleted.
+     */
+    workflowBuildVersionArn?: WorkflowBuildVersionArn;
   }
   export type DiskImageFormat = "VMDK"|"RAW"|"VHD"|string;
   export interface Distribution {
@@ -1914,7 +2050,7 @@ declare namespace Imagebuilder {
      */
     requestId?: NonEmptyString;
     /**
-     * The component object associated with the specified ARN.
+     * The component object specified in the request.
      */
     component?: Component;
   }
@@ -2145,6 +2281,22 @@ declare namespace Imagebuilder {
      * The timestamp when the specified runtime instance of the workflow finished.
      */
     endTime?: DateTime;
+    /**
+     * Test workflows are defined within named runtime groups. The parallel group is a named group that contains one or more test workflows.
+     */
+    parallelGroup?: ParallelGroup;
+  }
+  export interface GetWorkflowRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the workflow resource that you want to get.
+     */
+    workflowBuildVersionArn: WorkflowVersionArnOrBuildVersionArn;
+  }
+  export interface GetWorkflowResponse {
+    /**
+     * The workflow resource specified in the request.
+     */
+    workflow?: Workflow;
   }
   export interface GetWorkflowStepExecutionRequest {
     /**
@@ -2321,6 +2473,14 @@ declare namespace Imagebuilder {
      * Identifies the last runtime instance of the lifecycle policy to take action on the image.
      */
     lifecycleExecutionId?: LifecycleExecutionId;
+    /**
+     * The name or Amazon Resource Name (ARN) for the IAM role you create that grants Image Builder access to perform workflow actions.
+     */
+    executionRole?: RoleNameOrArn;
+    /**
+     * Contains the build and test workflows that are associated with the image.
+     */
+    workflows?: WorkflowConfigurationList;
   }
   export interface ImageAggregation {
     /**
@@ -2419,6 +2579,14 @@ declare namespace Imagebuilder {
      * Contains settings for vulnerability scans.
      */
     imageScanningConfiguration?: ImageScanningConfiguration;
+    /**
+     * The name or Amazon Resource Name (ARN) for the IAM role you create that grants Image Builder access to perform workflow actions.
+     */
+    executionRole?: RoleNameOrArn;
+    /**
+     * Contains the workflows that run for the image pipeline.
+     */
+    workflows?: WorkflowConfigurationList;
   }
   export interface ImagePipelineAggregation {
     /**
@@ -2779,7 +2947,7 @@ declare namespace Imagebuilder {
      */
     description?: NonEmptyString;
     /**
-     * The change description of the component. This description indicates the change that has been made in this version, or what makes this version different from other versions of this component.
+     * The change description of the component. This description indicates the change that has been made in this version, or what makes this version different from other versions of the component.
      */
     changeDescription?: NonEmptyString;
     /**
@@ -2985,6 +3153,7 @@ declare namespace Imagebuilder {
   export type InfrastructureConfigurationSummaryList = InfrastructureConfigurationSummary[];
   export type InlineComponentData = string;
   export type InlineDockerFileTemplate = string;
+  export type InlineWorkflowData = string;
   export interface InspectorScoreDetails {
     /**
      * An object that contains details about an adjustment that Amazon Inspector made to the CVSS score for the finding.
@@ -3196,7 +3365,7 @@ declare namespace Imagebuilder {
      */
     status?: LifecyclePolicyStatus;
     /**
-     * The name of the IAM role that Image Builder uses to run the lifecycle policy. This is a custom role that you create.
+     * The name or Amazon Resource Name (ARN) of the IAM role that Image Builder uses to run the lifecycle policy. This is a custom role that you create.
      */
     executionRole?: RoleNameOrArn;
     /**
@@ -3270,7 +3439,7 @@ declare namespace Imagebuilder {
   export type LifecyclePolicyDetailActionType = "DELETE"|"DEPRECATE"|"DISABLE"|string;
   export interface LifecyclePolicyDetailExclusionRules {
     /**
-     * Contains a list of tags that Image Builder uses to skip lifecycle actions for AMIs that have them.
+     * Contains a list of tags that Image Builder uses to skip lifecycle actions for resources that have them.
      */
     tagMap?: TagMap;
     /**
@@ -3284,15 +3453,15 @@ declare namespace Imagebuilder {
      */
     isPublic?: Boolean;
     /**
-     * Specifies Amazon Web Services accounts whose resources are excluded from the lifecycle action.
+     * Configures Amazon Web Services Regions that are excluded from the lifecycle action.
      */
     regions?: StringList;
     /**
-     * Specifies configuration details for Image Builder to exclude the most recent resources from lifecycle actions.
+     * Specifies Amazon Web Services accounts whose resources are excluded from the lifecycle action.
      */
     sharedAccounts?: AccountList;
     /**
-     * Configures Amazon Web Services Regions that are excluded from the lifecycle action.
+     * Specifies configuration details for Image Builder to exclude the most recent resources from lifecycle actions.
      */
     lastLaunched?: LifecyclePolicyDetailExclusionRulesAmisLastLaunched;
     /**
@@ -3374,7 +3543,7 @@ declare namespace Imagebuilder {
      */
     status?: LifecyclePolicyStatus;
     /**
-     * The name of the IAM role that Image Builder uses to run the lifecycle policy.
+     * The name or Amazon Resource Name (ARN) of the IAM role that Image Builder uses to run the lifecycle policy.
      */
     executionRole?: RoleNameOrArn;
     /**
@@ -3893,6 +4062,50 @@ declare namespace Imagebuilder {
      */
     tags?: TagMap;
   }
+  export interface ListWaitingWorkflowStepsRequest {
+    /**
+     * The maximum items to return in a request.
+     */
+    maxResults?: RestrictedInteger;
+    /**
+     * A token to specify where to start paginating. This is the nextToken from a previously truncated response.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListWaitingWorkflowStepsResponse {
+    /**
+     * An array of the workflow steps that are waiting for action in your Amazon Web Services account.
+     */
+    steps?: WorkflowStepExecutionList;
+    /**
+     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListWorkflowBuildVersionsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the workflow resource for which to get a list of build versions.
+     */
+    workflowVersionArn: WorkflowWildcardVersionArn;
+    /**
+     * The maximum items to return in a request.
+     */
+    maxResults?: RestrictedInteger;
+    /**
+     * A token to specify where to start paginating. This is the nextToken from a previously truncated response.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListWorkflowBuildVersionsResponse {
+    /**
+     * A list that contains metadata for the workflow builds that have run for the workflow resource specified in the request.
+     */
+    workflowSummaryList?: WorkflowSummaryList;
+    /**
+     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.
+     */
+    nextToken?: PaginationToken;
+  }
   export interface ListWorkflowExecutionsRequest {
     /**
      * The maximum items to return in a request.
@@ -3973,6 +4186,38 @@ declare namespace Imagebuilder {
      */
     nextToken?: PaginationToken;
   }
+  export interface ListWorkflowsRequest {
+    /**
+     * Used to get a list of workflow build version filtered by the identity of the creator.
+     */
+    owner?: Ownership;
+    /**
+     * Used to streamline search results.
+     */
+    filters?: FilterList;
+    /**
+     * Specify all or part of the workflow name to streamline results.
+     */
+    byName?: Boolean;
+    /**
+     * The maximum items to return in a request.
+     */
+    maxResults?: RestrictedInteger;
+    /**
+     * A token to specify where to start paginating. This is the nextToken from a previously truncated response.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListWorkflowsResponse {
+    /**
+     * A list of workflow build versions that match the request criteria.
+     */
+    workflowVersionList?: WorkflowVersionList;
+    /**
+     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.
+     */
+    nextToken?: PaginationToken;
+  }
   export interface Logging {
     /**
      * The Amazon S3 logging configuration.
@@ -3984,6 +4229,7 @@ declare namespace Imagebuilder {
   export type NonEmptyStringList = NonEmptyString[];
   export type NonNegativeDouble = number;
   export type NullableBoolean = boolean;
+  export type OnWorkflowFailure = "CONTINUE"|"ABORT"|string;
   export type OrganizationArn = string;
   export type OrganizationArnList = OrganizationArn[];
   export type OrganizationalUnitArn = string;
@@ -4046,6 +4292,7 @@ declare namespace Imagebuilder {
     referenceUrls?: NonEmptyStringList;
   }
   export type PaginationToken = string;
+  export type ParallelGroup = string;
   export type PipelineExecutionStartCondition = "EXPRESSION_MATCH_ONLY"|"EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE"|string;
   export type PipelineStatus = "DISABLED"|"ENABLED"|string;
   export type Platform = "Windows"|"Linux"|string;
@@ -4218,6 +4465,42 @@ declare namespace Imagebuilder {
     pipelineExecutionStartCondition?: PipelineExecutionStartCondition;
   }
   export type SecurityGroupIds = NonEmptyString[];
+  export interface SendWorkflowStepActionRequest {
+    /**
+     * Uniquely identifies the workflow step that sent the step action.
+     */
+    stepExecutionId: WorkflowStepExecutionId;
+    /**
+     * The Amazon Resource Name (ARN) of the image build version to send action for.
+     */
+    imageBuildVersionArn: ImageBuildVersionArn;
+    /**
+     * The action for the image creation process to take while a workflow WaitForAction step waits for an asynchronous action to complete.
+     */
+    action: WorkflowStepActionType;
+    /**
+     * The reason why this action is sent.
+     */
+    reason?: NonEmptyString;
+    /**
+     * Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see Ensuring idempotency in the Amazon EC2 API Reference.
+     */
+    clientToken: ClientToken;
+  }
+  export interface SendWorkflowStepActionResponse {
+    /**
+     * The workflow step that sent the step action.
+     */
+    stepExecutionId?: WorkflowStepExecutionId;
+    /**
+     * The Amazon Resource Name (ARN) of the image build version that received the action request.
+     */
+    imageBuildVersionArn?: ImageBuildVersionArn;
+    /**
+     * The client token that uniquely identifies the request.
+     */
+    clientToken?: ClientToken;
+  }
   export type SeverityCountNumber = number;
   export interface SeverityCounts {
     /**
@@ -4431,6 +4714,14 @@ declare namespace Imagebuilder {
      * Contains settings for vulnerability scans.
      */
     imageScanningConfiguration?: ImageScanningConfiguration;
+    /**
+     * Contains the workflows to run for the pipeline.
+     */
+    workflows?: WorkflowConfigurationList;
+    /**
+     * The name or Amazon Resource Name (ARN) for the IAM role you create that grants Image Builder access to perform workflow actions.
+     */
+    executionRole?: RoleNameOrArn;
   }
   export interface UpdateImagePipelineResponse {
     /**
@@ -4528,7 +4819,7 @@ declare namespace Imagebuilder {
      */
     status?: LifecyclePolicyStatus;
     /**
-     * The name of the IAM role that Image Builder should use to update the lifecycle policy.
+     * The name or Amazon Resource Name (ARN) of the IAM role that Image Builder uses to update the lifecycle policy.
      */
     executionRole: RoleNameOrArn;
     /**
@@ -4612,7 +4903,81 @@ declare namespace Imagebuilder {
     remediation?: NonEmptyString;
   }
   export type VulnerablePackageList = VulnerablePackage[];
+  export interface Workflow {
+    /**
+     * The Amazon Resource Name (ARN) of the workflow resource.
+     */
+    arn?: WorkflowBuildVersionArn;
+    /**
+     * The name of the workflow resource.
+     */
+    name?: ResourceName;
+    /**
+     * The workflow resource version. Workflow resources are immutable. To make a change, you can clone a workflow or create a new version.
+     */
+    version?: VersionNumber;
+    /**
+     * The description of the workflow.
+     */
+    description?: NonEmptyString;
+    /**
+     * Describes what change has been made in this version of the workflow, or what makes this version different from other versions of the workflow.
+     */
+    changeDescription?: NonEmptyString;
+    /**
+     * Specifies the image creation stage that the workflow applies to. Image Builder currently supports build and test workflows.
+     */
+    type?: WorkflowType;
+    /**
+     * Describes the current status of the workflow and the reason for that status.
+     */
+    state?: WorkflowState;
+    /**
+     * The owner of the workflow resource.
+     */
+    owner?: NonEmptyString;
+    /**
+     * Contains the YAML document content for the workflow.
+     */
+    data?: WorkflowData;
+    /**
+     * The KMS key identifier used to encrypt the workflow resource.
+     */
+    kmsKeyId?: NonEmptyString;
+    /**
+     * The timestamp when Image Builder created the workflow resource.
+     */
+    dateCreated?: DateTime;
+    /**
+     * The tags that apply to the workflow resource
+     */
+    tags?: TagMap;
+    /**
+     * An array of input parameters that that the image workflow uses to control actions or configure settings.
+     */
+    parameters?: WorkflowParameterDetailList;
+  }
   export type WorkflowBuildVersionArn = string;
+  export interface WorkflowConfiguration {
+    /**
+     * The Amazon Resource Name (ARN) of the workflow resource.
+     */
+    workflowArn: WorkflowVersionArnOrBuildVersionArn;
+    /**
+     * Contains parameter values for each of the parameters that the workflow document defined for the workflow resource.
+     */
+    parameters?: WorkflowParameterList;
+    /**
+     * Test workflows are defined within named runtime groups called parallel groups. The parallel group is the named group that contains this test workflow. Test workflows within a parallel group can run at the same time. Image Builder starts up to five test workflows in the group at the same time, and starts additional workflows as others complete, until all workflows in the group have completed. This field only applies for test workflows.
+     */
+    parallelGroup?: ParallelGroup;
+    /**
+     * The action to take if the workflow fails.
+     */
+    onFailure?: OnWorkflowFailure;
+  }
+  export type WorkflowConfigurationList = WorkflowConfiguration[];
+  export type WorkflowData = string;
   export type WorkflowExecutionId = string;
   export type WorkflowExecutionMessage = string;
   export interface WorkflowExecutionMetadata {
@@ -4660,15 +5025,98 @@ declare namespace Imagebuilder {
      * The timestamp when this runtime instance of the workflow finished.
      */
     endTime?: DateTime;
+    /**
+     * The name of the test group that included the test workflow resource at runtime.
+     */
+    parallelGroup?: ParallelGroup;
   }
-  export type WorkflowExecutionStatus = "PENDING"|"SKIPPED"|"RUNNING"|"COMPLETED"|"FAILED"|"ROLLBACK_IN_PROGRESS"|"ROLLBACK_COMPLETED"|string;
+  export type WorkflowExecutionStatus = "PENDING"|"SKIPPED"|"RUNNING"|"COMPLETED"|"FAILED"|"ROLLBACK_IN_PROGRESS"|"ROLLBACK_COMPLETED"|"CANCELLED"|string;
   export type WorkflowExecutionsList = WorkflowExecutionMetadata[];
+  export type WorkflowNameArn = string;
+  export interface WorkflowParameter {
+    /**
+     * The name of the workflow parameter to set.
+     */
+    name: WorkflowParameterName;
+    /**
+     * Sets the value for the named workflow parameter.
+     */
+    value: WorkflowParameterValueList;
+  }
+  export type WorkflowParameterDescription = string;
+  export interface WorkflowParameterDetail {
+    /**
+     * The name of this input parameter.
+     */
+    name: WorkflowParameterName;
+    /**
+     * The type of input this parameter provides. The currently supported value is "string".
+     */
+    type: WorkflowParameterType;
+    /**
+     * The default value of this parameter if no input is provided.
+     */
+    defaultValue?: WorkflowParameterValueList;
+    /**
+     * Describes this parameter.
+     */
+    description?: WorkflowParameterDescription;
+  }
+  export type WorkflowParameterDetailList = WorkflowParameterDetail[];
+  export type WorkflowParameterList = WorkflowParameter[];
+  export type WorkflowParameterName = string;
+  export type WorkflowParameterType = string;
+  export type WorkflowParameterValue = string;
+  export type WorkflowParameterValueList = WorkflowParameterValue[];
+  export interface WorkflowState {
+    /**
+     * The current state of the workflow.
+     */
+    status?: WorkflowStatus;
+    /**
+     * Describes how or why the workflow changed state.
+     */
+    reason?: NonEmptyString;
+  }
+  export type WorkflowStatus = "DEPRECATED"|string;
   export type WorkflowStepAction = string;
+  export type WorkflowStepActionType = "RESUME"|"STOP"|string;
   export type WorkflowStepCount = number;
   export type WorkflowStepDescription = string;
+  export interface WorkflowStepExecution {
+    /**
+     * Uniquely identifies the workflow step that ran for the associated image build version.
+     */
+    stepExecutionId?: WorkflowStepExecutionId;
+    /**
+     * The Amazon Resource Name (ARN) of the image build version that ran the workflow.
+     */
+    imageBuildVersionArn?: ImageBuildVersionArn;
+    /**
+     * Uniquely identifies the runtime instance of the workflow that contains the workflow step that ran for the associated image build version.
+     */
+    workflowExecutionId?: WorkflowExecutionId;
+    /**
+     * The ARN of the workflow resource that ran.
+     */
+    workflowBuildVersionArn?: WorkflowBuildVersionArn;
+    /**
+     * The name of the workflow step.
+     */
+    name?: WorkflowStepName;
+    /**
+     * The name of the step action.
+     */
+    action?: WorkflowStepAction;
+    /**
+     * The timestamp when the workflow step started.
+     */
+    startTime?: DateTime;
+  }
   export type WorkflowStepExecutionId = string;
+  export type WorkflowStepExecutionList = WorkflowStepExecution[];
   export type WorkflowStepExecutionRollbackStatus = "RUNNING"|"COMPLETED"|"SKIPPED"|"FAILED"|string;
-  export type WorkflowStepExecutionStatus = "PENDING"|"SKIPPED"|"RUNNING"|"COMPLETED"|"FAILED"|string;
+  export type WorkflowStepExecutionStatus = "PENDING"|"SKIPPED"|"RUNNING"|"COMPLETED"|"FAILED"|"CANCELLED"|string;
   export type WorkflowStepExecutionsList = WorkflowStepMetadata[];
   export type WorkflowStepInputs = string;
   export type WorkflowStepMessage = string;
@@ -4721,7 +5169,84 @@ declare namespace Imagebuilder {
   export type WorkflowStepName = string;
   export type WorkflowStepOutputs = string;
   export type WorkflowStepTimeoutSecondsInteger = number;
+  export interface WorkflowSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the workflow resource.
+     */
+    arn?: WorkflowNameArn;
+    /**
+     * The name of the workflow.
+     */
+    name?: ResourceName;
+    /**
+     * The version of the workflow.
+     */
+    version?: VersionNumber;
+    /**
+     * Describes the workflow.
+     */
+    description?: NonEmptyString;
+    /**
+     * The change description for the current version of the workflow resource.
+     */
+    changeDescription?: NonEmptyString;
+    /**
+     * The image creation stage that this workflow applies to. Image Builder currently supports build and test stage workflows.
+     */
+    type?: WorkflowType;
+    /**
+     * The owner of the workflow resource.
+     */
+    owner?: NonEmptyString;
+    /**
+     * Describes the current state of the workflow resource.
+     */
+    state?: WorkflowState;
+    /**
+     * The original creation date of the workflow resource.
+     */
+    dateCreated?: DateTime;
+    /**
+     * Contains a list of tags that are defined for the workflow.
+     */
+    tags?: TagMap;
+  }
+  export type WorkflowSummaryList = WorkflowSummary[];
   export type WorkflowType = "BUILD"|"TEST"|"DISTRIBUTION"|string;
+  export interface WorkflowVersion {
+    /**
+     * The Amazon Resource Name (ARN) of the workflow resource.
+     */
+    arn?: WorkflowVersionArn;
+    /**
+     * The name of the workflow.
+     */
+    name?: ResourceName;
+    /**
+     * The semantic version of the workflow resource. The format includes three nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;.
+     */
+    version?: VersionNumber;
+    /**
+     * Describes the workflow.
+     */
+    description?: NonEmptyString;
+    /**
+     * The image creation stage that this workflow applies to. Image Builder currently supports build and test stage workflows.
+     */
+    type?: WorkflowType;
+    /**
+     * The owner of the workflow resource.
+     */
+    owner?: NonEmptyString;
+    /**
+     * The timestamp when Image Builder created the workflow version.
+     */
+    dateCreated?: DateTime;
+  }
+  export type WorkflowVersionArn = string;
+  export type WorkflowVersionArnOrBuildVersionArn = string;
+  export type WorkflowVersionList = WorkflowVersion[];
+  export type WorkflowWildcardVersionArn = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
