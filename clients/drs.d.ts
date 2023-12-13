@@ -423,6 +423,7 @@ declare namespace Drs {
   export type AccountID = string;
   export type AccountIDs = AccountID[];
   export type Accounts = Account[];
+  export type AgentVersion = string;
   export interface AssociateSourceNetworkStackRequest {
     /**
      * CloudFormation template to associate with a Source Network.
@@ -1694,6 +1695,10 @@ declare namespace Drs {
   }
   export interface RecoveryInstance {
     /**
+     * The version of the DRS agent installed on the recovery instance
+     */
+    agentVersion?: AgentVersion;
+    /**
      * The ARN of the Recovery Instance.
      */
     arn?: ARN;
@@ -2284,6 +2289,10 @@ declare namespace Drs {
     supportsNitroInstances?: Boolean;
   }
   export interface SourceServer {
+    /**
+     * The version of the DRS agent installed on the source server
+     */
+    agentVersion?: AgentVersion;
     /**
      * The ARN of the Source Server.
      */

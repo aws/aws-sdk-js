@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1517.0-->
+<!--LATEST=2.1518.0-->
 <!--ENTRYINSERT-->
+
+## 2.1518.0
+* feature: Drs: Adding AgentVersion to SourceServer and RecoveryInstance structures
 
 ## 2.1517.0
 * feature: CloudWatchLogs: This release introduces the StartLiveTail API to tail ingested logs in near real time.
