@@ -8,6 +8,9 @@ var customConstructorArgs = {
 
 for (var serviceAbbreviation in metadata) {
   var clientName = metadata[serviceAbbreviation].name;
+  if (clientName === 'NeptuneGraph') {
+    continue; // NeptuneGraph is not present in AWS SDK for JSv2.
+  }
   describe(
     'Instantiating AWS.' + clientName + ' clients',
     (function(clientName, serviceAbbreviation) {
