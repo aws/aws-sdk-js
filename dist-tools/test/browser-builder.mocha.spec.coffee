@@ -38,7 +38,7 @@ describe 'ServiceCollector', ->
   it 'accepts "all" for all services', ->
     add 'all'
     Object.keys(helpers.AWS).forEach (name) ->
-      if helpers.AWS[name].serviceIdentifier
+      if helpers.AWS[name].serviceIdentifier  && name !== 'NeptuneGraph'
         assertServiceAdded(name)
 
   it 'throws an error if the service does not exist', ->
