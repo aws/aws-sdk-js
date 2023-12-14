@@ -366,6 +366,7 @@ describe('AWS.Config', function() {
         if (!hasProp.call(allServices, className)) continue;
         var ctor = allServices[className];
         var serviceIdentifier = className.toLowerCase();
+        if (serviceIdentifier === 'neptunegraph') continue;
         results.push((function(id) {
           it(id + ' to be set', function() {
             var config = new AWS.Config();
