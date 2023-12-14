@@ -20,11 +20,11 @@ declare class OpenSearch extends Service {
    */
   acceptInboundConnection(callback?: (err: AWSError, data: OpenSearch.Types.AcceptInboundConnectionResponse) => void): Request<OpenSearch.Types.AcceptInboundConnectionResponse, AWSError>;
   /**
-   * Adds the data source on the domain.
+   * Creates a new direct-query data source to the specified domain. For more information, see Creating Amazon OpenSearch Service data source integrations with Amazon S3.
    */
   addDataSource(params: OpenSearch.Types.AddDataSourceRequest, callback?: (err: AWSError, data: OpenSearch.Types.AddDataSourceResponse) => void): Request<OpenSearch.Types.AddDataSourceResponse, AWSError>;
   /**
-   * Adds the data source on the domain.
+   * Creates a new direct-query data source to the specified domain. For more information, see Creating Amazon OpenSearch Service data source integrations with Amazon S3.
    */
   addDataSource(callback?: (err: AWSError, data: OpenSearch.Types.AddDataSourceResponse) => void): Request<OpenSearch.Types.AddDataSourceResponse, AWSError>;
   /**
@@ -92,11 +92,11 @@ declare class OpenSearch extends Service {
    */
   createVpcEndpoint(callback?: (err: AWSError, data: OpenSearch.Types.CreateVpcEndpointResponse) => void): Request<OpenSearch.Types.CreateVpcEndpointResponse, AWSError>;
   /**
-   * Deletes the data source.
+   * Deletes a direct-query data source. For more information, see Deleting an Amazon OpenSearch Service data source with Amazon S3.
    */
   deleteDataSource(params: OpenSearch.Types.DeleteDataSourceRequest, callback?: (err: AWSError, data: OpenSearch.Types.DeleteDataSourceResponse) => void): Request<OpenSearch.Types.DeleteDataSourceResponse, AWSError>;
   /**
-   * Deletes the data source.
+   * Deletes a direct-query data source. For more information, see Deleting an Amazon OpenSearch Service data source with Amazon S3.
    */
   deleteDataSource(callback?: (err: AWSError, data: OpenSearch.Types.DeleteDataSourceResponse) => void): Request<OpenSearch.Types.DeleteDataSourceResponse, AWSError>;
   /**
@@ -276,11 +276,11 @@ declare class OpenSearch extends Service {
    */
   getCompatibleVersions(callback?: (err: AWSError, data: OpenSearch.Types.GetCompatibleVersionsResponse) => void): Request<OpenSearch.Types.GetCompatibleVersionsResponse, AWSError>;
   /**
-   * Describes the data source details.
+   * Retrieves information about a direct query data source.
    */
   getDataSource(params: OpenSearch.Types.GetDataSourceRequest, callback?: (err: AWSError, data: OpenSearch.Types.GetDataSourceResponse) => void): Request<OpenSearch.Types.GetDataSourceResponse, AWSError>;
   /**
-   * Describes the data source details.
+   * Retrieves information about a direct query data source.
    */
   getDataSource(callback?: (err: AWSError, data: OpenSearch.Types.GetDataSourceResponse) => void): Request<OpenSearch.Types.GetDataSourceResponse, AWSError>;
   /**
@@ -316,11 +316,11 @@ declare class OpenSearch extends Service {
    */
   getUpgradeStatus(callback?: (err: AWSError, data: OpenSearch.Types.GetUpgradeStatusResponse) => void): Request<OpenSearch.Types.GetUpgradeStatusResponse, AWSError>;
   /**
-   * A list of the data source details of the domain.
+   * Lists direct-query data sources for a specific domain. For more information, see For more information, see Working with Amazon OpenSearch Service direct queries with Amazon S3.
    */
   listDataSources(params: OpenSearch.Types.ListDataSourcesRequest, callback?: (err: AWSError, data: OpenSearch.Types.ListDataSourcesResponse) => void): Request<OpenSearch.Types.ListDataSourcesResponse, AWSError>;
   /**
-   * A list of the data source details of the domain.
+   * Lists direct-query data sources for a specific domain. For more information, see For more information, see Working with Amazon OpenSearch Service direct queries with Amazon S3.
    */
   listDataSources(callback?: (err: AWSError, data: OpenSearch.Types.ListDataSourcesResponse) => void): Request<OpenSearch.Types.ListDataSourcesResponse, AWSError>;
   /**
@@ -460,11 +460,11 @@ declare class OpenSearch extends Service {
    */
   startServiceSoftwareUpdate(callback?: (err: AWSError, data: OpenSearch.Types.StartServiceSoftwareUpdateResponse) => void): Request<OpenSearch.Types.StartServiceSoftwareUpdateResponse, AWSError>;
   /**
-   * Updates the data source on the domain.
+   * Updates a direct-query data source. For more information, see Working with Amazon OpenSearch Service data source integrations with Amazon S3.
    */
   updateDataSource(params: OpenSearch.Types.UpdateDataSourceRequest, callback?: (err: AWSError, data: OpenSearch.Types.UpdateDataSourceResponse) => void): Request<OpenSearch.Types.UpdateDataSourceResponse, AWSError>;
   /**
-   * Updates the data source on the domain.
+   * Updates a direct-query data source. For more information, see Working with Amazon OpenSearch Service data source integrations with Amazon S3.
    */
   updateDataSource(callback?: (err: AWSError, data: OpenSearch.Types.UpdateDataSourceResponse) => void): Request<OpenSearch.Types.UpdateDataSourceResponse, AWSError>;
   /**
@@ -552,11 +552,11 @@ declare namespace OpenSearch {
   export type ActionType = "SERVICE_SOFTWARE_UPDATE"|"JVM_HEAP_SIZE_TUNING"|"JVM_YOUNG_GEN_TUNING"|string;
   export interface AddDataSourceRequest {
     /**
-     * The name of the domain.
+     * The name of the domain to add the data source to.
      */
     DomainName: DomainName;
     /**
-     * The name of the data source.
+     * A name for the data source.
      */
     Name: DataSourceName;
     /**
@@ -570,7 +570,7 @@ declare namespace OpenSearch {
   }
   export interface AddDataSourceResponse {
     /**
-     * A message associated with the data source.
+     * A message associated with creation of the data source.
      */
     Message?: String;
   }
@@ -1253,7 +1253,7 @@ declare namespace OpenSearch {
   export type DataSourceName = string;
   export interface DataSourceType {
     /**
-     * The data source for the AWS S3 Glue Data Catalog.
+     * An Amazon S3 data source.
      */
     S3GlueDataCatalog?: S3GlueDataCatalog;
   }
@@ -1263,13 +1263,13 @@ declare namespace OpenSearch {
      */
     DomainName: DomainName;
     /**
-     * The name of the data source.
+     * The name of the data source to delete.
      */
     Name: DataSourceName;
   }
   export interface DeleteDataSourceResponse {
     /**
-     * A message associated with the initiated request.
+     * A message associated with deletion of the data source.
      */
     Message?: String;
   }
@@ -1781,7 +1781,7 @@ declare namespace OpenSearch {
      */
     EnforceHTTPS?: Boolean;
     /**
-     * Specify the TLS security policy to apply to the HTTPS endpoint of the domain. The policy can be one of the following values:    Policy-Min-TLS-1-0-2019-07: TLS security policy which supports TLS version 1.0 to TLS version 1.2    Policy-Min-TLS-1-2-2019-07: TLS security policy which supports only TLS version 1.2    Policy-Min-TLS-1-0-2023-10: TLS security policy which supports TLS version 1.0 to TLS version 1.3    Policy-Min-TLS-1-2-2023-10: TLS security policy which supports TLS version 1.2 to TLS version 1.3 with perfect forward secrecy cipher suites  
+     * Specify the TLS security policy to apply to the HTTPS endpoint of the domain. The policy can be one of the following values:    Policy-Min-TLS-1-0-2019-07: TLS security policy that supports TLS version 1.0 to TLS version 1.2    Policy-Min-TLS-1-2-2019-07: TLS security policy that supports only TLS version 1.2  
      */
     TLSSecurityPolicy?: TLSSecurityPolicy;
     /**
@@ -2207,7 +2207,7 @@ declare namespace OpenSearch {
      */
     DomainName: DomainName;
     /**
-     * The name of the data source.
+     * The name of the data source to get information about.
      */
     Name: DataSourceName;
   }
@@ -2463,7 +2463,7 @@ declare namespace OpenSearch {
   }
   export interface ListDataSourcesResponse {
     /**
-     * A list of the data sources.
+     * A list of data sources associated with specified domain.
      */
     DataSources?: DataSourceList;
   }
@@ -3155,7 +3155,7 @@ declare namespace OpenSearch {
   export type S3BucketName = string;
   export interface S3GlueDataCatalog {
     /**
-     * The role ARN for the AWS S3 Glue Data Catalog.
+     * &gt;The Amazon Resource Name (ARN) for the S3 Glue Data Catalog.
      */
     RoleArn?: RoleArn;
   }
@@ -3452,7 +3452,7 @@ declare namespace OpenSearch {
      */
     DomainName: DomainName;
     /**
-     * The name of the data source.
+     * The name of the data source to modify.
      */
     Name: DataSourceName;
     /**
@@ -3460,13 +3460,13 @@ declare namespace OpenSearch {
      */
     DataSourceType: DataSourceType;
     /**
-     * A description of the data source.
+     * A new description of the data source.
      */
     Description?: DataSourceDescription;
   }
   export interface UpdateDataSourceResponse {
     /**
-     * A message associated with the data source.
+     * A message associated with the updated data source.
      */
     Message?: String;
   }

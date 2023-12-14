@@ -1,6 +1,18 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1518.0-->
+<!--LATEST=2.1519.0-->
 <!--ENTRYINSERT-->
+
+## 2.1519.0
+* feature: AppStream: This release includes support for images of Windows Server 2022 platform.
+* feature: Billingconductor: Billing Conductor is releasing a new API, GetBillingGroupCostReport, which provides the ability to retrieve/view the Billing Group Cost Report broken down by attributes for a specific billing group.
+* feature: Connect: This release adds support for more granular billing using tags (key:value pairs)
+* feature: Firehose: This release, 1) adds configurable buffering hints for the Splunk destination, and 2) reduces the minimum configurable buffering interval for supported destinations
+* feature: GameLift: Amazon GameLift adds the ability to add and update the game properties of active game sessions.
+* feature: Iot: This release adds the ability to self-manage certificate signing in AWS IoT Core fleet provisioning using the new certificate provider resource.
+* feature: Neptune Graph: Exclude Neptune Graph
+* feature: NeptuneGraph: This is the initial SDK release for Amazon Neptune Analytics
+* feature: OpenSearch: Updating documentation for Amazon OpenSearch Service support for new zero-ETL integration with Amazon S3.
+* feature: QuickSight: Update Dashboard Links support; SingleAxisOptions support; Scatterplot Query limit support.
 
 ## 2.1518.0
 * feature: Drs: Adding AgentVersion to SourceServer and RecoveryInstance structures

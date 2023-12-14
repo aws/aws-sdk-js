@@ -1,0 +1,52 @@
+[
+    {
+        "type": "feature",
+        "category": "AppStream",
+        "description": "This release includes support for images of Windows Server 2022 platform."
+    },
+    {
+        "type": "feature",
+        "category": "Billingconductor",
+        "description": "Billing Conductor is releasing a new API, GetBillingGroupCostReport, which provides the ability to retrieve/view the Billing Group Cost Report broken down by attributes for a specific billing group."
+    },
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "This release adds support for more granular billing using tags (key:value pairs)"
+    },
+    {
+        "type": "feature",
+        "category": "Firehose",
+        "description": "This release, 1) adds configurable buffering hints for the Splunk destination, and 2) reduces the minimum configurable buffering interval for supported destinations"
+    },
+    {
+        "type": "feature",
+        "category": "GameLift",
+        "description": "Amazon GameLift adds the ability to add and update the game properties of active game sessions."
+    },
+    {
+        "type": "feature",
+        "category": "Iot",
+        "description": "This release adds the ability to self-manage certificate signing in AWS IoT Core fleet provisioning using the new certificate provider resource."
+    },
+    {
+        "type": "feature",
+        "category": "Neptune Graph",
+        "description": "Exclude Neptune Graph"
+    },
+    {
+        "type": "feature",
+        "category": "NeptuneGraph",
+        "description": "This is the initial SDK release for Amazon Neptune Analytics"
+    },
+    {
+        "type": "feature",
+        "category": "OpenSearch",
+        "description": "Updating documentation for Amazon OpenSearch Service support for new zero-ETL integration with Amazon S3."
+    },
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "Update Dashboard Links support; SingleAxisOptions support; Scatterplot Query limit support."
+    }
+]

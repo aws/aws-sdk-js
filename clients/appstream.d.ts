@@ -2723,7 +2723,7 @@ declare namespace AppStream {
   export type OrganizationalUnitDistinguishedNamesList = OrganizationalUnitDistinguishedName[];
   export type PackagingType = "CUSTOM"|"APPSTREAM2"|string;
   export type Permission = "ENABLED"|"DISABLED"|string;
-  export type PlatformType = "WINDOWS"|"WINDOWS_SERVER_2016"|"WINDOWS_SERVER_2019"|"AMAZON_LINUX2"|string;
+  export type PlatformType = "WINDOWS"|"WINDOWS_SERVER_2016"|"WINDOWS_SERVER_2019"|"WINDOWS_SERVER_2022"|"AMAZON_LINUX2"|string;
   export type Platforms = PlatformType[];
   export type PreferredProtocol = "TCP"|"UDP"|string;
   export type RedirectURL = string;

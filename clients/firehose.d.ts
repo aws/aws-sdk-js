@@ -1876,6 +1876,18 @@ declare namespace Firehose {
      */
     MSKSourceDescription?: MSKSourceDescription;
   }
+  export interface SplunkBufferingHints {
+    /**
+     * Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 60 (1 minute).
+     */
+    IntervalInSeconds?: SplunkBufferingIntervalInSeconds;
+    /**
+     * Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 5. 
+     */
+    SizeInMBs?: SplunkBufferingSizeInMBs;
+  }
+  export type SplunkBufferingIntervalInSeconds = number;
+  export type SplunkBufferingSizeInMBs = number;
   export interface SplunkDestinationConfiguration {
     /**
      * The HTTP Event Collector (HEC) endpoint to which Kinesis Data Firehose sends your data.
@@ -1913,6 +1925,10 @@ declare namespace Firehose {
      * The Amazon CloudWatch logging options for your delivery stream.
      */
     CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
+    /**
+     * The buffering options. If no value is specified, the default values for Splunk are used.
+     */
+    BufferingHints?: SplunkBufferingHints;
   }
   export interface SplunkDestinationDescription {
     /**
@@ -1951,6 +1967,10 @@ declare namespace Firehose {
      * The Amazon CloudWatch logging options for your delivery stream.
      */
     CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
+    /**
+     * The buffering options. If no value is specified, the default values for Splunk are used.
+     */
+    BufferingHints?: SplunkBufferingHints;
   }
   export interface SplunkDestinationUpdate {
     /**
@@ -1989,6 +2009,10 @@ declare namespace Firehose {
      * The Amazon CloudWatch logging options for your delivery stream.
      */
     CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
+    /**
+     * The buffering options. If no value is specified, the default values for Splunk are used.
+     */
+    BufferingHints?: SplunkBufferingHints;
   }
   export type SplunkRetryDurationInSeconds = number;
   export interface SplunkRetryOptions {

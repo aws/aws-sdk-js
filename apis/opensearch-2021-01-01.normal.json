@@ -70,7 +70,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Adds the data source on the domain.</p>"
+      "documentation": "<p>Creates a new direct-query data source to the specified domain. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-creating.html\">Creating Amazon OpenSearch Service data source integrations with Amazon S3</a>.</p>"
     },
     "AddTags": {
       "name": "AddTags",
@@ -361,7 +361,7 @@
           "shape": "DependencyFailureException"
         }
       ],
-      "documentation": "<p>Deletes the data source.</p>"
+      "documentation": "<p>Deletes a direct-query data source. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-delete.html\">Deleting an Amazon OpenSearch Service data source with Amazon S3</a>.</p>"
     },
     "DeleteDomain": {
       "name": "DeleteDomain",
@@ -1020,7 +1020,7 @@
           "shape": "DependencyFailureException"
         }
       ],
-      "documentation": "<p>Describes the data source details.</p>"
+      "documentation": "<p>Retrieves information about a direct query data source.</p>"
     },
     "GetDomainMaintenanceStatus": {
       "name": "GetDomainMaintenanceStatus",
@@ -1178,7 +1178,7 @@
           "shape": "DependencyFailureException"
         }
       ],
-      "documentation": "<p>A list of the data source details of the domain.</p>"
+      "documentation": "<p>Lists direct-query data sources for a specific domain. For more information, see For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3.html\">Working with Amazon OpenSearch Service direct queries with Amazon S3</a>.</p>"
     },
     "ListDomainMaintenances": {
       "name": "ListDomainMaintenances",
@@ -1691,7 +1691,7 @@
           "shape": "DependencyFailureException"
         }
       ],
-      "documentation": "<p>Updates the data source on the domain.</p>"
+      "documentation": "<p>Updates a direct-query data source. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-creating.html\">Working with Amazon OpenSearch Service data source integrations with Amazon S3</a>.</p>"
     },
     "UpdateDomainConfig": {
       "name": "UpdateDomainConfig",
@@ -1980,13 +1980,13 @@
       "members": {
         "DomainName": {
           "shape": "DomainName",
-          "documentation": "<p>The name of the domain.</p>",
+          "documentation": "<p>The name of the domain to add the data source to.</p>",
           "location": "uri",
           "locationName": "DomainName"
         },
         "Name": {
           "shape": "DataSourceName",
-          "documentation": "<p>The name of the data source.</p>"
+          "documentation": "<p>A name for the data source.</p>"
         },
         "DataSourceType": {
           "shape": "DataSourceType",
@@ -2004,7 +2004,7 @@
       "members": {
         "Message": {
           "shape": "String",
-          "documentation": "<p>A message associated with the data source.</p>"
+          "documentation": "<p>A message associated with creation of the data source.</p>"
         }
       },
       "documentation": "<p>The result of an <code>AddDataSource</code> operation.</p>"
@@ -3050,7 +3050,7 @@
           "documentation": "<p>A description of the data source.</p>"
         }
       },
-      "documentation": "<p>Details about the data sources.</p>"
+      "documentation": "<p>Details about a direct-query data source.</p>"
     },
     "DataSourceList": {
       "type": "list",
@@ -3069,10 +3069,10 @@
       "members": {
         "S3GlueDataCatalog": {
           "shape": "S3GlueDataCatalog",
-          "documentation": "<p>The data source for the AWS S3 Glue Data Catalog.</p>"
+          "documentation": "<p>An Amazon S3 data source.</p>"
         }
       },
-      "documentation": "<p>Information about the data source.</p>",
+      "documentation": "<p>The type of data source.</p>",
       "union": true
     },
     "DeleteDataSourceRequest": {
@@ -3090,7 +3090,7 @@
         },
         "Name": {
           "shape": "DataSourceName",
-          "documentation": "<p>The name of the data source.</p>",
+          "documentation": "<p>The name of the data source to delete.</p>",
           "location": "uri",
           "locationName": "DataSourceName"
         }
@@ -3102,7 +3102,7 @@
       "members": {
         "Message": {
           "shape": "String",
-          "documentation": "<p>A message associated with the initiated request.</p>"
+          "documentation": "<p>A message associated with deletion of the data source.</p>"
         }
       },
       "documentation": "<p>The result of a <code>GetDataSource</code> operation.</p>"
@@ -3954,7 +3954,7 @@
         },
         "TLSSecurityPolicy": {
           "shape": "TLSSecurityPolicy",
-          "documentation": "<p>Specify the TLS security policy to apply to the HTTPS endpoint of the domain. The policy can be one of the following values:</p> <ul> <li> <p> <b>Policy-Min-TLS-1-0-2019-07:</b> TLS security policy which supports TLS version 1.0 to TLS version 1.2</p> </li> <li> <p> <b>Policy-Min-TLS-1-2-2019-07:</b> TLS security policy which supports only TLS version 1.2</p> </li> <li> <p> <b>Policy-Min-TLS-1-0-2023-10:</b> TLS security policy which supports TLS version 1.0 to TLS version 1.3</p> </li> <li> <p> <b>Policy-Min-TLS-1-2-2023-10:</b> TLS security policy which supports TLS version 1.2 to TLS version 1.3 with perfect forward secrecy cipher suites</p> </li> </ul>"
+          "documentation": "<p>Specify the TLS security policy to apply to the HTTPS endpoint of the domain. The policy can be one of the following values:</p> <ul> <li> <p> <b>Policy-Min-TLS-1-0-2019-07:</b> TLS security policy that supports TLS version 1.0 to TLS version 1.2</p> </li> <li> <p> <b>Policy-Min-TLS-1-2-2019-07:</b> TLS security policy that supports only TLS version 1.2</p> </li> </ul>"
         },
         "CustomEndpointEnabled": {
           "shape": "Boolean",
@@ -4622,7 +4622,7 @@
         },
         "Name": {
           "shape": "DataSourceName",
-          "documentation": "<p>The name of the data source.</p>",
+          "documentation": "<p>The name of the data source to get information about.</p>",
           "location": "uri",
           "locationName": "DataSourceName"
         }
@@ -5079,7 +5079,7 @@
       "members": {
         "DataSources": {
           "shape": "DataSourceList",
-          "documentation": "<p>A list of the data sources.</p>"
+          "documentation": "<p>A list of data sources associated with specified domain.</p>"
         }
       },
       "documentation": "<p>The result of a <code>ListDataSources</code> operation.</p>"
@@ -6440,10 +6440,10 @@
       "members": {
         "RoleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>The role ARN for the AWS S3 Glue Data Catalog.</p>"
+          "documentation": "<p>&gt;The Amazon Resource Name (ARN) for the S3 Glue Data Catalog.</p>"
         }
       },
-      "documentation": "<p>Information about the AWS S3 Glue Data Catalog.</p>"
+      "documentation": "<p>Information about the Amazon S3 Glue Data Catalog.</p>"
     },
     "S3Key": {
       "type": "string",
@@ -6973,7 +6973,7 @@
         },
         "Name": {
           "shape": "DataSourceName",
-          "documentation": "<p>The name of the data source.</p>",
+          "documentation": "<p>The name of the data source to modify.</p>",
           "location": "uri",
           "locationName": "DataSourceName"
         },
@@ -6983,7 +6983,7 @@
         },
         "Description": {
           "shape": "DataSourceDescription",
-          "documentation": "<p>A description of the data source.</p>"
+          "documentation": "<p>A new description of the data source.</p>"
         }
       },
       "documentation": "<p>Container for the parameters to the <code>UpdateDataSource</code> operation.</p>"
@@ -6993,7 +6993,7 @@
       "members": {
         "Message": {
           "shape": "String",
-          "documentation": "<p>A message associated with the data source.</p>"
+          "documentation": "<p>A message associated with the updated data source.</p>"
         }
       },
       "documentation": "<p>The result of an <code>UpdateDataSource</code> operation.</p>"

@@ -374,5 +374,6 @@ module.exports = {
   QConnect: require('./qconnect'),
   CleanRoomsML: require('./cleanroomsml'),
   MarketplaceAgreement: require('./marketplaceagreement'),
-  MarketplaceDeployment: require('./marketplacedeployment')
+  MarketplaceDeployment: require('./marketplacedeployment'),
+  NeptuneGraph: require('./neptunegraph')
 };

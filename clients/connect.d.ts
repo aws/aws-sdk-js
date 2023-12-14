@@ -1460,6 +1460,14 @@ declare class Connect extends Service {
    */
   suspendContactRecording(callback?: (err: AWSError, data: Connect.Types.SuspendContactRecordingResponse) => void): Request<Connect.Types.SuspendContactRecordingResponse, AWSError>;
   /**
+   * Adds the specified tags to the contact resource. For more information about this API is used, see Set up granular billing for a detailed view of your Amazon Connect usage. 
+   */
+  tagContact(params: Connect.Types.TagContactRequest, callback?: (err: AWSError, data: Connect.Types.TagContactResponse) => void): Request<Connect.Types.TagContactResponse, AWSError>;
+  /**
+   * Adds the specified tags to the contact resource. For more information about this API is used, see Set up granular billing for a detailed view of your Amazon Connect usage. 
+   */
+  tagContact(callback?: (err: AWSError, data: Connect.Types.TagContactResponse) => void): Request<Connect.Types.TagContactResponse, AWSError>;
+  /**
    * Adds the specified tags to the specified resource. Some of the supported resource types are agents, routing profiles, queues, quick connects, contact flows, agent statuses, hours of operation, phone numbers, security profiles, and task templates. For a complete list, see Tagging resources in Amazon Connect. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
    */
   tagResource(params: Connect.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -1475,6 +1483,14 @@ declare class Connect extends Service {
    * Transfers contacts from one agent or queue to another agent or queue at any point after a contact is created. You can transfer a contact to another queue by providing the flow which orchestrates the contact to the destination queue. This gives you more control over contact handling and helps you adhere to the service level agreement (SLA) guaranteed to your customers. Note the following requirements:   Transfer is supported for only TASK contacts.   Do not use both QueueId and UserId in the same call.   The following flow types are supported: Inbound flow, Transfer to agent flow, and Transfer to queue flow.   The TransferContact API can be called only on active contacts.   A contact cannot be transferred more than 11 times.  
    */
   transferContact(callback?: (err: AWSError, data: Connect.Types.TransferContactResponse) => void): Request<Connect.Types.TransferContactResponse, AWSError>;
+  /**
+   * Removes the specified tags from the contact resource. For more information about this API is used, see Set up granular billing for a detailed view of your Amazon Connect usage.
+   */
+  untagContact(params: Connect.Types.UntagContactRequest, callback?: (err: AWSError, data: Connect.Types.UntagContactResponse) => void): Request<Connect.Types.UntagContactResponse, AWSError>;
+  /**
+   * Removes the specified tags from the contact resource. For more information about this API is used, see Set up granular billing for a detailed view of your Amazon Connect usage.
+   */
+  untagContact(callback?: (err: AWSError, data: Connect.Types.UntagContactResponse) => void): Request<Connect.Types.UntagContactResponse, AWSError>;
   /**
    * Removes the specified tags from the specified resource.
    */
@@ -1946,7 +1962,7 @@ declare namespace Connect {
      */
     State?: AgentStatusState;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
     /**
@@ -2500,7 +2516,7 @@ declare namespace Connect {
      */
     PhoneNumberDescription?: PhoneNumberDescription;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
     /**
@@ -2552,7 +2568,7 @@ declare namespace Connect {
      */
     InstanceId?: InstanceId;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
     /**
@@ -2643,6 +2659,10 @@ declare namespace Connect {
      * Information about Amazon Connect Wisdom.
      */
     WisdomInfo?: WisdomInfo;
+    /**
+     * Tags associated with the contact. This contains both Amazon Web Services generated and user-defined tags.
+     */
+    Tags?: ContactTagMap;
   }
   export interface ContactDataRequest {
     /**
@@ -2707,7 +2727,7 @@ declare namespace Connect {
      */
     Content?: ContactFlowContent;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -2744,7 +2764,7 @@ declare namespace Connect {
      */
     Status?: ContactFlowModuleStatus;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -2805,6 +2825,10 @@ declare namespace Connect {
   export type ContactReferences = {[key: string]: Reference};
   export type ContactState = "INCOMING"|"PENDING"|"CONNECTING"|"CONNECTED"|"CONNECTED_ONHOLD"|"MISSED"|"ERROR"|"ENDED"|"REJECTED"|string;
   export type ContactStates = ContactState[];
+  export type ContactTagKey = string;
+  export type ContactTagKeys = ContactTagKey[];
+  export type ContactTagMap = {[key: string]: ContactTagValue};
+  export type ContactTagValue = string;
   export type Content = string;
   export type ContentType = string;
   export interface ControlPlaneTagFilter {
@@ -2843,7 +2867,7 @@ declare namespace Connect {
      */
     DisplayOrder?: AgentStatusOrderNumber;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -2875,7 +2899,7 @@ declare namespace Connect {
      */
     Content: ContactFlowModuleContent;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
     /**
@@ -2915,7 +2939,7 @@ declare namespace Connect {
      */
     Content: ContactFlowContent;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -2987,7 +3011,7 @@ declare namespace Connect {
      */
     Config: HoursOfOperationConfigList;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -3067,7 +3091,7 @@ declare namespace Connect {
      */
     SourceType?: SourceType;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -3155,7 +3179,7 @@ declare namespace Connect {
      */
     S3Uri: S3Uri;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -3199,7 +3223,7 @@ declare namespace Connect {
      */
     QuickConnectIds?: QuickConnectsList;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -3231,7 +3255,7 @@ declare namespace Connect {
      */
     QuickConnectConfig: QuickConnectConfig;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -3271,7 +3295,7 @@ declare namespace Connect {
      */
     MediaConcurrencies: MediaConcurrencies;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
     /**
@@ -3348,7 +3372,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
     /**
@@ -3440,7 +3464,7 @@ declare namespace Connect {
      */
     ClientToken?: ClientToken;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -3468,7 +3492,7 @@ declare namespace Connect {
      */
     UseCaseType: UseCaseType;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -3496,7 +3520,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -3548,7 +3572,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -3644,7 +3668,7 @@ declare namespace Connect {
      */
     Content: VocabularyContent;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -4684,7 +4708,7 @@ declare namespace Connect {
      */
     LastModifiedTime: Timestamp;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -4776,7 +4800,7 @@ declare namespace Connect {
      */
     LastModifiedBy: ARN;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -5564,7 +5588,7 @@ declare namespace Connect {
      */
     CreatedTime?: timestamp;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -5622,7 +5646,7 @@ declare namespace Connect {
      */
     HierarchyPath?: HierarchyPath;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
     /**
@@ -5868,7 +5892,7 @@ declare namespace Connect {
      */
     Config?: HoursOfOperationConfigList;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
     /**
@@ -5966,7 +5990,7 @@ declare namespace Connect {
      */
     PhoneNumberDescription?: PhoneNumberDescription;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
     /**
@@ -7640,7 +7664,7 @@ declare namespace Connect {
   export type NotificationDeliveryType = "EMAIL"|string;
   export interface NotificationRecipientType {
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }. Amazon Connect users with the specified tags will be notified.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }. Amazon Connect users with the specified tags will be notified.
      */
     UserTags?: UserTagMap;
     /**
@@ -7831,7 +7855,7 @@ declare namespace Connect {
      */
     Description?: PromptDescription;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
     /**
@@ -7939,7 +7963,7 @@ declare namespace Connect {
      */
     Status?: QueueStatus;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
     /**
@@ -8061,7 +8085,7 @@ declare namespace Connect {
      */
     QuickConnectConfig?: QuickConnectConfig;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
     /**
@@ -8508,7 +8532,7 @@ declare namespace Connect {
      */
     DefaultOutboundQueueId?: QueueId;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
     /**
@@ -8687,7 +8711,7 @@ declare namespace Connect {
      */
     LastUpdatedBy: ARN;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -9173,7 +9197,7 @@ declare namespace Connect {
      */
     Description?: SecurityProfileDescription;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
     /**
@@ -9234,7 +9258,7 @@ declare namespace Connect {
      */
     Description?: SecurityProfileDescription;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -9808,6 +9832,22 @@ declare namespace Connect {
      */
     TagValue?: String;
   }
+  export interface TagContactRequest {
+    /**
+     * The identifier of the contact in this instance of Amazon Connect. 
+     */
+    ContactId: ContactId;
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The tags to be assigned to the contact resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.  Authorization is not supported by this tag. 
+     */
+    Tags: ContactTagMap;
+  }
+  export interface TagContactResponse {
+  }
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagKeyString = string;
@@ -9819,7 +9859,7 @@ declare namespace Connect {
      */
     resourceArn: ARN;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     tags: TagMap;
   }
@@ -10030,7 +10070,7 @@ declare namespace Connect {
      */
     Status?: TrafficDistributionGroupStatus;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
     /**
@@ -10115,6 +10155,22 @@ declare namespace Connect {
   }
   export type URI = string;
   export type Unit = "SECONDS"|"COUNT"|"PERCENT"|string;
+  export interface UntagContactRequest {
+    /**
+     * The identifier of the contact in this instance of Amazon Connect. 
+     */
+    ContactId: ContactId;
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * A list of tag keys. Existing tags on the contact whose keys are members of this list will be removed.
+     */
+    TagKeys: ContactTagKeys;
+  }
+  export interface UntagContactResponse {
+  }
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource.
@@ -11292,7 +11348,7 @@ declare namespace Connect {
      */
     SecurityProfileIds?: SecurityProfileIds;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
     /**
@@ -11512,7 +11568,7 @@ declare namespace Connect {
      */
     Content?: VocabularyContent;
     /**
-     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "Tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }

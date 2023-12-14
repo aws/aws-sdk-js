@@ -172,6 +172,14 @@ declare class Iot extends Service {
    */
   createCertificateFromCsr(callback?: (err: AWSError, data: Iot.Types.CreateCertificateFromCsrResponse) => void): Request<Iot.Types.CreateCertificateFromCsrResponse, AWSError>;
   /**
+   * Creates an Amazon Web Services IoT Core certificate provider. You can use Amazon Web Services IoT Core certificate provider to customize how to sign a certificate signing request (CSR) in IoT fleet provisioning. For more information, see Customizing certificate signing using Amazon Web Services IoT Core certificate provider from Amazon Web Services IoT Core Developer Guide. Requires permission to access the CreateCertificateProvider action.  After you create a certificate provider, the behavior of  CreateCertificateFromCsr API for fleet provisioning will change and all API calls to CreateCertificateFromCsr will invoke the certificate provider to create the certificates. It can take up to a few minutes for this behavior to change after a certificate provider is created. 
+   */
+  createCertificateProvider(params: Iot.Types.CreateCertificateProviderRequest, callback?: (err: AWSError, data: Iot.Types.CreateCertificateProviderResponse) => void): Request<Iot.Types.CreateCertificateProviderResponse, AWSError>;
+  /**
+   * Creates an Amazon Web Services IoT Core certificate provider. You can use Amazon Web Services IoT Core certificate provider to customize how to sign a certificate signing request (CSR) in IoT fleet provisioning. For more information, see Customizing certificate signing using Amazon Web Services IoT Core certificate provider from Amazon Web Services IoT Core Developer Guide. Requires permission to access the CreateCertificateProvider action.  After you create a certificate provider, the behavior of  CreateCertificateFromCsr API for fleet provisioning will change and all API calls to CreateCertificateFromCsr will invoke the certificate provider to create the certificates. It can take up to a few minutes for this behavior to change after a certificate provider is created. 
+   */
+  createCertificateProvider(callback?: (err: AWSError, data: Iot.Types.CreateCertificateProviderResponse) => void): Request<Iot.Types.CreateCertificateProviderResponse, AWSError>;
+  /**
    *  Use this API to define a Custom Metric published by your devices to Device Defender.  Requires permission to access the CreateCustomMetric action.
    */
   createCustomMetric(params: Iot.Types.CreateCustomMetricRequest, callback?: (err: AWSError, data: Iot.Types.CreateCustomMetricResponse) => void): Request<Iot.Types.CreateCustomMetricResponse, AWSError>;
@@ -427,6 +435,14 @@ declare class Iot extends Service {
    * Deletes the specified certificate. A certificate cannot be deleted if it has a policy or IoT thing attached to it or if its status is set to ACTIVE. To delete a certificate, first use the DetachPolicy action to detach all policies. Next, use the UpdateCertificate action to set the certificate to the INACTIVE status. Requires permission to access the DeleteCertificate action.
    */
   deleteCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a certificate provider. Requires permission to access the DeleteCertificateProvider action.  If you delete the certificate provider resource, the behavior of CreateCertificateFromCsr will resume, and IoT will create certificates signed by IoT from a certificate signing request (CSR).
+   */
+  deleteCertificateProvider(params: Iot.Types.DeleteCertificateProviderRequest, callback?: (err: AWSError, data: Iot.Types.DeleteCertificateProviderResponse) => void): Request<Iot.Types.DeleteCertificateProviderResponse, AWSError>;
+  /**
+   * Deletes a certificate provider. Requires permission to access the DeleteCertificateProvider action.  If you delete the certificate provider resource, the behavior of CreateCertificateFromCsr will resume, and IoT will create certificates signed by IoT from a certificate signing request (CSR).
+   */
+  deleteCertificateProvider(callback?: (err: AWSError, data: Iot.Types.DeleteCertificateProviderResponse) => void): Request<Iot.Types.DeleteCertificateProviderResponse, AWSError>;
   /**
    *  Deletes a Device Defender detect custom metric.  Requires permission to access the DeleteCustomMetric action.  Before you can delete a custom metric, you must first remove the custom metric from all security profiles it's a part of. The security profile associated with the custom metric can be found using the ListSecurityProfiles API with metricName set to your custom metric name. 
    */
@@ -723,6 +739,14 @@ declare class Iot extends Service {
    * Gets information about the specified certificate. Requires permission to access the DescribeCertificate action.
    */
   describeCertificate(callback?: (err: AWSError, data: Iot.Types.DescribeCertificateResponse) => void): Request<Iot.Types.DescribeCertificateResponse, AWSError>;
+  /**
+   * Describes a certificate provider. Requires permission to access the DescribeCertificateProvider action. 
+   */
+  describeCertificateProvider(params: Iot.Types.DescribeCertificateProviderRequest, callback?: (err: AWSError, data: Iot.Types.DescribeCertificateProviderResponse) => void): Request<Iot.Types.DescribeCertificateProviderResponse, AWSError>;
+  /**
+   * Describes a certificate provider. Requires permission to access the DescribeCertificateProvider action. 
+   */
+  describeCertificateProvider(callback?: (err: AWSError, data: Iot.Types.DescribeCertificateProviderResponse) => void): Request<Iot.Types.DescribeCertificateProviderResponse, AWSError>;
   /**
    *  Gets information about a Device Defender detect custom metric.  Requires permission to access the DescribeCustomMetric action.
    */
@@ -1195,6 +1219,14 @@ declare class Iot extends Service {
    * Lists the CA certificates registered for your Amazon Web Services account. The results are paginated with a default page size of 25. You can use the returned marker to retrieve additional results. Requires permission to access the ListCACertificates action.
    */
   listCACertificates(callback?: (err: AWSError, data: Iot.Types.ListCACertificatesResponse) => void): Request<Iot.Types.ListCACertificatesResponse, AWSError>;
+  /**
+   * Lists all your certificate providers in your Amazon Web Services account. Requires permission to access the ListCertificateProviders action. 
+   */
+  listCertificateProviders(params: Iot.Types.ListCertificateProvidersRequest, callback?: (err: AWSError, data: Iot.Types.ListCertificateProvidersResponse) => void): Request<Iot.Types.ListCertificateProvidersResponse, AWSError>;
+  /**
+   * Lists all your certificate providers in your Amazon Web Services account. Requires permission to access the ListCertificateProviders action. 
+   */
+  listCertificateProviders(callback?: (err: AWSError, data: Iot.Types.ListCertificateProvidersResponse) => void): Request<Iot.Types.ListCertificateProvidersResponse, AWSError>;
   /**
    * Lists the certificates registered in your Amazon Web Services account. The results are paginated with a default page size of 25. You can use the returned marker to retrieve additional results. Requires permission to access the ListCertificates action.
    */
@@ -1835,6 +1867,14 @@ declare class Iot extends Service {
    * Updates the status of the specified certificate. This operation is idempotent. Requires permission to access the UpdateCertificate action. Certificates must be in the ACTIVE state to authenticate devices that use a certificate to connect to IoT. Within a few minutes of updating a certificate from the ACTIVE state to any other state, IoT disconnects all devices that used that certificate to connect. Devices cannot use a certificate that is not in the ACTIVE state to reconnect.
    */
   updateCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates a certificate provider. Requires permission to access the UpdateCertificateProvider action. 
+   */
+  updateCertificateProvider(params: Iot.Types.UpdateCertificateProviderRequest, callback?: (err: AWSError, data: Iot.Types.UpdateCertificateProviderResponse) => void): Request<Iot.Types.UpdateCertificateProviderResponse, AWSError>;
+  /**
+   * Updates a certificate provider. Requires permission to access the UpdateCertificateProvider action. 
+   */
+  updateCertificateProvider(callback?: (err: AWSError, data: Iot.Types.UpdateCertificateProviderResponse) => void): Request<Iot.Types.UpdateCertificateProviderResponse, AWSError>;
   /**
    * Updates a Device Defender detect custom metric.  Requires permission to access the UpdateCustomMetric action.
    */
@@ -3204,6 +3244,22 @@ declare namespace Iot {
   export type CertificateName = string;
   export type CertificatePathOnDevice = string;
   export type CertificatePem = string;
+  export type CertificateProviderAccountDefaultForOperations = CertificateProviderOperation[];
+  export type CertificateProviderArn = string;
+  export type CertificateProviderFunctionArn = string;
+  export type CertificateProviderName = string;
+  export type CertificateProviderOperation = "CreateCertificateFromCsr"|string;
+  export interface CertificateProviderSummary {
+    /**
+     * The name of the certificate provider.
+     */
+    certificateProviderName?: CertificateProviderName;
+    /**
+     * The ARN of the certificate provider.
+     */
+    certificateProviderArn?: CertificateProviderArn;
+  }
+  export type CertificateProviders = CertificateProviderSummary[];
   export type CertificateSigningRequest = string;
   export type CertificateStatus = "ACTIVE"|"INACTIVE"|"REVOKED"|"PENDING_TRANSFER"|"REGISTER_INACTIVE"|"PENDING_ACTIVATION"|string;
   export interface CertificateValidity {
@@ -3461,6 +3517,38 @@ declare namespace Iot {
      * The certificate data, in PEM format.
      */
     certificatePem?: CertificatePem;
+  }
+  export interface CreateCertificateProviderRequest {
+    /**
+     * The name of the certificate provider.
+     */
+    certificateProviderName: CertificateProviderName;
+    /**
+     * The ARN of the Lambda function that defines the authentication logic.
+     */
+    lambdaFunctionArn: CertificateProviderFunctionArn;
+    /**
+     * A list of the operations that the certificate provider will use to generate certificates. Valid value: CreateCertificateFromCsr.
+     */
+    accountDefaultForOperations: CertificateProviderAccountDefaultForOperations;
+    /**
+     * A string that you can optionally pass in the CreateCertificateProvider request to make sure the request is idempotent.
+     */
+    clientToken?: ClientToken;
+    /**
+     * Metadata which can be used to manage the certificate provider.
+     */
+    tags?: TagList;
+  }
+  export interface CreateCertificateProviderResponse {
+    /**
+     * The name of the certificate provider.
+     */
+    certificateProviderName?: CertificateProviderName;
+    /**
+     * The ARN of the certificate provider.
+     */
+    certificateProviderArn?: CertificateProviderArn;
   }
   export interface CreateCustomMetricRequest {
     /**
@@ -4531,6 +4619,14 @@ declare namespace Iot {
   }
   export interface DeleteCACertificateResponse {
   }
+  export interface DeleteCertificateProviderRequest {
+    /**
+     * The name of the certificate provider.
+     */
+    certificateProviderName: CertificateProviderName;
+  }
+  export interface DeleteCertificateProviderResponse {
+  }
   export interface DeleteCertificateRequest {
     /**
      * The ID of the certificate. (The last part of the certificate ARN contains the certificate ID.)
@@ -5012,6 +5108,38 @@ declare namespace Iot {
      * Information about the registration configuration.
      */
     registrationConfig?: RegistrationConfig;
+  }
+  export interface DescribeCertificateProviderRequest {
+    /**
+     * The name of the certificate provider.
+     */
+    certificateProviderName: CertificateProviderName;
+  }
+  export interface DescribeCertificateProviderResponse {
+    /**
+     * The name of the certificate provider.
+     */
+    certificateProviderName?: CertificateProviderName;
+    /**
+     * The ARN of the certificate provider.
+     */
+    certificateProviderArn?: CertificateProviderArn;
+    /**
+     * The Lambda function ARN that's associated with the certificate provider.
+     */
+    lambdaFunctionArn?: CertificateProviderFunctionArn;
+    /**
+     * A list of the operations that the certificate provider will use to generate certificates. Valid value: CreateCertificateFromCsr.
+     */
+    accountDefaultForOperations?: CertificateProviderAccountDefaultForOperations;
+    /**
+     * The date-time string that indicates when the certificate provider was created.
+     */
+    creationDate?: DateType;
+    /**
+     * The date-time string that indicates when the certificate provider was last updated.
+     */
+    lastModifiedDate?: DateType;
   }
   export interface DescribeCertificateRequest {
     /**
@@ -7590,6 +7718,26 @@ declare namespace Iot {
      */
     nextMarker?: Marker;
   }
+  export interface ListCertificateProvidersRequest {
+    /**
+     * The token for the next set of results, or null if there are no more results.
+     */
+    nextToken?: Marker;
+    /**
+     * Returns the list of certificate providers in ascending alphabetical order.
+     */
+    ascendingOrder?: AscendingOrder;
+  }
+  export interface ListCertificateProvidersResponse {
+    /**
+     * The list of certificate providers in your Amazon Web Services account.
+     */
+    certificateProviders?: CertificateProviders;
+    /**
+     * The token for the next set of results, or null if there are no more results.
+     */
+    nextToken?: Marker;
+  }
   export interface ListCertificatesByCARequest {
     /**
      * The ID of the CA certificate. This operation will list all registered device certificate that were signed by this CA certificate.
@@ -9028,7 +9176,7 @@ declare namespace Iot {
      */
     metricDimension?: MetricDimension;
     /**
-     * Value added in both Behavior and AdditionalMetricsToRetainV2 to indicate if Device Defender Detect should export the corresponding metrics.
+     * The value indicates exporting metrics related to the MetricToRetain  when it's true.
      */
     exportMetric?: ExportMetric;
   }
@@ -11401,6 +11549,30 @@ declare namespace Iot {
      * If true, removes auto registration.
      */
     removeAutoRegistration?: RemoveAutoRegistration;
+  }
+  export interface UpdateCertificateProviderRequest {
+    /**
+     * The name of the certificate provider.
+     */
+    certificateProviderName: CertificateProviderName;
+    /**
+     * The Lambda function ARN that's associated with the certificate provider.
+     */
+    lambdaFunctionArn?: CertificateProviderFunctionArn;
+    /**
+     * A list of the operations that the certificate provider will use to generate certificates. Valid value: CreateCertificateFromCsr.
+     */
+    accountDefaultForOperations?: CertificateProviderAccountDefaultForOperations;
+  }
+  export interface UpdateCertificateProviderResponse {
+    /**
+     * The name of the certificate provider.
+     */
+    certificateProviderName?: CertificateProviderName;
+    /**
+     * The ARN of the certificate provider.
+     */
+    certificateProviderArn?: CertificateProviderArn;
   }
   export interface UpdateCertificateRequest {
     /**

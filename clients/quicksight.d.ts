@@ -28,11 +28,11 @@ declare class QuickSight extends Service {
    */
   createAccountCustomization(callback?: (err: AWSError, data: QuickSight.Types.CreateAccountCustomizationResponse) => void): Request<QuickSight.Types.CreateAccountCustomizationResponse, AWSError>;
   /**
-   * Creates an Amazon QuickSight account, or subscribes to Amazon QuickSight Q. The Amazon Web Services Region for the account is derived from what is configured in the CLI or SDK. This operation isn't supported in the US East (Ohio) Region, South America (Sao Paulo) Region, or Asia Pacific (Singapore) Region.  Before you use this operation, make sure that you can connect to an existing Amazon Web Services account. If you don't have an Amazon Web Services account, see Sign up for Amazon Web Services in the Amazon QuickSight User Guide. The person who signs up for Amazon QuickSight needs to have the correct Identity and Access Management (IAM) permissions. For more information, see IAM Policy Examples for Amazon QuickSight in the Amazon QuickSight User Guide. If your IAM policy includes both the Subscribe and CreateAccountSubscription actions, make sure that both actions are set to Allow. If either action is set to Deny, the Deny action prevails and your API call fails. You can't pass an existing IAM role to access other Amazon Web Services services using this API operation. To pass your existing IAM role to Amazon QuickSight, see Passing IAM roles to Amazon QuickSight in the Amazon QuickSight User Guide. You can't set default resource access on the new account from the Amazon QuickSight API. Instead, add default resource access from the Amazon QuickSight console. For more information about setting default resource access to Amazon Web Services services, see Setting default resource access to Amazon Web Services services in the Amazon QuickSight User Guide.
+   * Creates an Amazon QuickSight account, or subscribes to Amazon QuickSight Q. The Amazon Web Services Region for the account is derived from what is configured in the CLI or SDK. Before you use this operation, make sure that you can connect to an existing Amazon Web Services account. If you don't have an Amazon Web Services account, see Sign up for Amazon Web Services in the Amazon QuickSight User Guide. The person who signs up for Amazon QuickSight needs to have the correct Identity and Access Management (IAM) permissions. For more information, see IAM Policy Examples for Amazon QuickSight in the Amazon QuickSight User Guide. If your IAM policy includes both the Subscribe and CreateAccountSubscription actions, make sure that both actions are set to Allow. If either action is set to Deny, the Deny action prevails and your API call fails. You can't pass an existing IAM role to access other Amazon Web Services services using this API operation. To pass your existing IAM role to Amazon QuickSight, see Passing IAM roles to Amazon QuickSight in the Amazon QuickSight User Guide. You can't set default resource access on the new account from the Amazon QuickSight API. Instead, add default resource access from the Amazon QuickSight console. For more information about setting default resource access to Amazon Web Services services, see Setting default resource access to Amazon Web Services services in the Amazon QuickSight User Guide.
    */
   createAccountSubscription(params: QuickSight.Types.CreateAccountSubscriptionRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateAccountSubscriptionResponse) => void): Request<QuickSight.Types.CreateAccountSubscriptionResponse, AWSError>;
   /**
-   * Creates an Amazon QuickSight account, or subscribes to Amazon QuickSight Q. The Amazon Web Services Region for the account is derived from what is configured in the CLI or SDK. This operation isn't supported in the US East (Ohio) Region, South America (Sao Paulo) Region, or Asia Pacific (Singapore) Region.  Before you use this operation, make sure that you can connect to an existing Amazon Web Services account. If you don't have an Amazon Web Services account, see Sign up for Amazon Web Services in the Amazon QuickSight User Guide. The person who signs up for Amazon QuickSight needs to have the correct Identity and Access Management (IAM) permissions. For more information, see IAM Policy Examples for Amazon QuickSight in the Amazon QuickSight User Guide. If your IAM policy includes both the Subscribe and CreateAccountSubscription actions, make sure that both actions are set to Allow. If either action is set to Deny, the Deny action prevails and your API call fails. You can't pass an existing IAM role to access other Amazon Web Services services using this API operation. To pass your existing IAM role to Amazon QuickSight, see Passing IAM roles to Amazon QuickSight in the Amazon QuickSight User Guide. You can't set default resource access on the new account from the Amazon QuickSight API. Instead, add default resource access from the Amazon QuickSight console. For more information about setting default resource access to Amazon Web Services services, see Setting default resource access to Amazon Web Services services in the Amazon QuickSight User Guide.
+   * Creates an Amazon QuickSight account, or subscribes to Amazon QuickSight Q. The Amazon Web Services Region for the account is derived from what is configured in the CLI or SDK. Before you use this operation, make sure that you can connect to an existing Amazon Web Services account. If you don't have an Amazon Web Services account, see Sign up for Amazon Web Services in the Amazon QuickSight User Guide. The person who signs up for Amazon QuickSight needs to have the correct Identity and Access Management (IAM) permissions. For more information, see IAM Policy Examples for Amazon QuickSight in the Amazon QuickSight User Guide. If your IAM policy includes both the Subscribe and CreateAccountSubscription actions, make sure that both actions are set to Allow. If either action is set to Deny, the Deny action prevails and your API call fails. You can't pass an existing IAM role to access other Amazon Web Services services using this API operation. To pass your existing IAM role to Amazon QuickSight, see Passing IAM roles to Amazon QuickSight in the Amazon QuickSight User Guide. You can't set default resource access on the new account from the Amazon QuickSight API. Instead, add default resource access from the Amazon QuickSight console. For more information about setting default resource access to Amazon Web Services services, see Setting default resource access to Amazon Web Services services in the Amazon QuickSight User Guide.
    */
   createAccountSubscription(callback?: (err: AWSError, data: QuickSight.Types.CreateAccountSubscriptionResponse) => void): Request<QuickSight.Types.CreateAccountSubscriptionResponse, AWSError>;
   /**
@@ -1163,6 +1163,14 @@ declare class QuickSight extends Service {
    * Updates a dashboard in an Amazon Web Services account.  Updating a Dashboard creates a new dashboard version but does not immediately publish the new version. You can update the published version of a dashboard by using the  UpdateDashboardPublishedVersion  API operation. 
    */
   updateDashboard(callback?: (err: AWSError, data: QuickSight.Types.UpdateDashboardResponse) => void): Request<QuickSight.Types.UpdateDashboardResponse, AWSError>;
+  /**
+   * Updates the linked analyses on a dashboard.
+   */
+  updateDashboardLinks(params: QuickSight.Types.UpdateDashboardLinksRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateDashboardLinksResponse) => void): Request<QuickSight.Types.UpdateDashboardLinksResponse, AWSError>;
+  /**
+   * Updates the linked analyses on a dashboard.
+   */
+  updateDashboardLinks(callback?: (err: AWSError, data: QuickSight.Types.UpdateDashboardLinksResponse) => void): Request<QuickSight.Types.UpdateDashboardLinksResponse, AWSError>;
   /**
    * Updates read and write permissions on a dashboard.
    */
@@ -3373,6 +3381,7 @@ declare namespace QuickSight {
      * The label options (label text, label visibility, and sort icon visibility) of a combo chart's secondary y-axis(line) field well.
      */
     SecondaryYAxisLabelOptions?: ChartAxisLabelOptions;
+    SingleAxisOptions?: SingleAxisOptions;
     /**
      * The label options (label text, label visibility, and sort icon visibility) of a combo chart's color field well.
      */
@@ -3881,6 +3890,10 @@ declare namespace QuickSight {
      * A structure that contains the permissions of a shareable link to the dashboard.
      */
     LinkSharingConfiguration?: LinkSharingConfiguration;
+    /**
+     * A list of analysis Amazon Resource Names (ARNs) to be linked to the dashboard.
+     */
+    LinkEntities?: LinkEntityArnList;
   }
   export interface CreateDashboardResponse {
     /**
@@ -5009,6 +5022,10 @@ declare namespace QuickSight {
      * The last time that this dashboard was updated.
      */
     LastUpdatedTime?: Timestamp;
+    /**
+     * A list of analysis Amazon Resource Names (ARNs) to be linked to the dashboard.
+     */
+    LinkEntities?: LinkEntityArnList;
   }
   export type DashboardBehavior = "ENABLED"|"DISABLED"|string;
   export interface DashboardError {
@@ -11091,6 +11108,7 @@ declare namespace QuickSight {
      * The options that determine the presentation of the secondary y-axis label.
      */
     SecondaryYAxisLabelOptions?: ChartAxisLabelOptions;
+    SingleAxisOptions?: SingleAxisOptions;
     /**
      * The options that determine the default presentation of all line series in LineChartVisual.
      */
@@ -11252,6 +11270,8 @@ declare namespace QuickSight {
      */
     MissingDataConfigurations?: MissingDataConfigurationList;
   }
+  export type LinkEntityArn = string;
+  export type LinkEntityArnList = LinkEntityArn[];
   export interface LinkSharingConfiguration {
     /**
      * A structure that contains the permissions of a shareable link.
@@ -14795,6 +14815,10 @@ declare namespace QuickSight {
      */
     FieldWells?: ScatterPlotFieldWells;
     /**
+     * The sort configuration of a scatter plot.
+     */
+    SortConfiguration?: ScatterPlotSortConfiguration;
+    /**
      * The label options (label text, label visibility, and sort icon visibility) of the scatter plot's x-axis.
      */
     XAxisLabelOptions?: ChartAxisLabelOptions;
@@ -14836,6 +14860,9 @@ declare namespace QuickSight {
      * The unaggregated field wells of a scatter plot. The x and y-axes of these scatter plots are unaggregated.
      */
     ScatterPlotUnaggregatedFieldWells?: ScatterPlotUnaggregatedFieldWells;
+  }
+  export interface ScatterPlotSortConfiguration {
+    ScatterPlotLimitConfiguration?: ItemsLimitConfiguration;
   }
   export interface ScatterPlotUnaggregatedFieldWells {
     /**
@@ -15512,6 +15539,13 @@ declare namespace QuickSight {
   }
   export type SimpleNumericalAggregationFunction = "SUM"|"AVERAGE"|"MIN"|"MAX"|"COUNT"|"DISTINCT_COUNT"|"VAR"|"VARP"|"STDEV"|"STDEVP"|"MEDIAN"|string;
   export type SimpleTotalAggregationFunction = "DEFAULT"|"SUM"|"AVERAGE"|"MIN"|"MAX"|"NONE"|string;
+  export interface SingleAxisOptions {
+    /**
+     * The Y axis options of a single axis configuration.
+     */
+    YAxisOptions?: YAxisOptions;
+  }
+  export type SingleYAxisOption = "PRIMARY_Y_AXIS"|string;
   export type SiteBaseUrl = string;
   export interface SliderControlDisplayOptions {
     /**
@@ -15683,7 +15717,7 @@ declare namespace QuickSight {
     /**
      * A structure that contains details about the Amazon S3 bucket that the generated dashboard snapshot is saved in.
      */
-    BucketConfiguration?: S3BucketConfiguration;
+    BucketConfiguration: S3BucketConfiguration;
   }
   export type SnapshotS3DestinationConfigurationList = SnapshotS3DestinationConfiguration[];
   export interface SnapshotUserConfiguration {
@@ -18077,6 +18111,38 @@ declare namespace QuickSight {
      */
     RequestId?: String;
   }
+  export interface UpdateDashboardLinksRequest {
+    /**
+     * The ID of the Amazon Web Services account that contains the dashboard whose links you want to update.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID for the dashboard.
+     */
+    DashboardId: ShortRestrictiveResourceId;
+    /**
+     *  list of analysis Amazon Resource Names (ARNs) to be linked to the dashboard.
+     */
+    LinkEntities: LinkEntityArnList;
+  }
+  export interface UpdateDashboardLinksResponse {
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The Amazon Resource Name (ARN) of the dashboard.
+     */
+    DashboardArn?: Arn;
+    /**
+     * A list of analysis Amazon Resource Names (ARNs) to be linked to the dashboard.
+     */
+    LinkEntities?: LinkEntityArnList;
+  }
   export interface UpdateDashboardPermissionsRequest {
     /**
      * The ID of the Amazon Web Services account that contains the dashboard whose permissions you're updating.
@@ -19822,6 +19888,12 @@ declare namespace QuickSight {
   export type WordCloudWordPadding = "NONE"|"SMALL"|"MEDIUM"|"LARGE"|string;
   export type WordCloudWordScaling = "EMPHASIZE"|"NORMAL"|string;
   export type WorkGroup = string;
+  export interface YAxisOptions {
+    /**
+     * The Y axis type to be used in the chart. If you choose PRIMARY_Y_AXIS, the primary Y Axis is located on the leftmost vertical axis of the chart.
+     */
+    YAxis: SingleYAxisOption;
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

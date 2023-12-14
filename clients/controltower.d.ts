@@ -169,7 +169,7 @@ declare namespace ControlTower {
   export type ControlOperationType = "ENABLE_CONTROL"|"DISABLE_CONTROL"|"UPDATE_ENABLED_CONTROL"|string;
   export interface CreateLandingZoneInput {
     /**
-     * The manifest.yaml file is a text file that describes your Amazon Web Services resources. For examples, review The manifest file. 
+     * The manifest JSON file is a text file that describes your Amazon Web Services resources. For examples, review Launch your landing zone. 
      */
     manifest: Manifest;
     /**
@@ -404,7 +404,7 @@ declare namespace ControlTower {
      */
     latestAvailableVersion?: LandingZoneVersion;
     /**
-     * The landing zone manifest.yaml text file that specifies the landing zone configurations. 
+     * The landing zone manifest JSON text file that specifies the landing zone configurations. 
      */
     manifest: Manifest;
     /**
@@ -591,7 +591,7 @@ declare namespace ControlTower {
      */
     landingZoneIdentifier: String;
     /**
-     * The manifest.yaml file is a text file that describes your Amazon Web Services resources. For examples, review The manifest file.
+     * The manifest JSON file is a text file that describes your Amazon Web Services resources. For examples, review Launch your landing zone.
      */
     manifest: Manifest;
     /**

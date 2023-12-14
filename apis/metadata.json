@@ -1404,5 +1404,9 @@
   "marketplacedeployment": {
     "prefix": "marketplace-deployment",
     "name": "MarketplaceDeployment"
+  },
+  "neptunegraph": {
+    "prefix": "neptune-graph",
+    "name": "NeptuneGraph"
   }
 }

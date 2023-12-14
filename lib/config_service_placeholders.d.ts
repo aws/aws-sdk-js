@@ -375,6 +375,7 @@ export abstract class ConfigurationServicePlaceholders {
   cleanroomsml?: AWS.CleanRoomsML.Types.ClientConfiguration;
   marketplaceagreement?: AWS.MarketplaceAgreement.Types.ClientConfiguration;
   marketplacedeployment?: AWS.MarketplaceDeployment.Types.ClientConfiguration;
+  neptunegraph?: AWS.NeptuneGraph.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -752,4 +753,5 @@ export interface ConfigurationServiceApiVersions {
   cleanroomsml?: AWS.CleanRoomsML.Types.apiVersion;
   marketplaceagreement?: AWS.MarketplaceAgreement.Types.apiVersion;
   marketplacedeployment?: AWS.MarketplaceDeployment.Types.apiVersion;
+  neptunegraph?: AWS.NeptuneGraph.Types.apiVersion;
 }

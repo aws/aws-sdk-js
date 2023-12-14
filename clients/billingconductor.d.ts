@@ -52,11 +52,11 @@ declare class Billingconductor extends Service {
    */
   createBillingGroup(callback?: (err: AWSError, data: Billingconductor.Types.CreateBillingGroupOutput) => void): Request<Billingconductor.Types.CreateBillingGroupOutput, AWSError>;
   /**
-   *  Creates a custom line item that can be used to create a one-time fixed charge that can be applied to a single billing group for the current or previous billing period. The one-time fixed charge is either a fee or discount. 
+   * Creates a custom line item that can be used to create a one-time fixed charge that can be applied to a single billing group for the current or previous billing period. The one-time fixed charge is either a fee or discount. 
    */
   createCustomLineItem(params: Billingconductor.Types.CreateCustomLineItemInput, callback?: (err: AWSError, data: Billingconductor.Types.CreateCustomLineItemOutput) => void): Request<Billingconductor.Types.CreateCustomLineItemOutput, AWSError>;
   /**
-   *  Creates a custom line item that can be used to create a one-time fixed charge that can be applied to a single billing group for the current or previous billing period. The one-time fixed charge is either a fee or discount. 
+   * Creates a custom line item that can be used to create a one-time fixed charge that can be applied to a single billing group for the current or previous billing period. The one-time fixed charge is either a fee or discount. 
    */
   createCustomLineItem(callback?: (err: AWSError, data: Billingconductor.Types.CreateCustomLineItemOutput) => void): Request<Billingconductor.Types.CreateCustomLineItemOutput, AWSError>;
   /**
@@ -123,6 +123,14 @@ declare class Billingconductor extends Service {
    *  Disassociates a list of pricing rules from a pricing plan. 
    */
   disassociatePricingRules(callback?: (err: AWSError, data: Billingconductor.Types.DisassociatePricingRulesOutput) => void): Request<Billingconductor.Types.DisassociatePricingRulesOutput, AWSError>;
+  /**
+   * Retrieves the margin summary report, which includes the Amazon Web Services cost and charged amount (pro forma cost) by Amazon Web Service for a specific billing group.
+   */
+  getBillingGroupCostReport(params: Billingconductor.Types.GetBillingGroupCostReportInput, callback?: (err: AWSError, data: Billingconductor.Types.GetBillingGroupCostReportOutput) => void): Request<Billingconductor.Types.GetBillingGroupCostReportOutput, AWSError>;
+  /**
+   * Retrieves the margin summary report, which includes the Amazon Web Services cost and charged amount (pro forma cost) by Amazon Web Service for a specific billing group.
+   */
+  getBillingGroupCostReport(callback?: (err: AWSError, data: Billingconductor.Types.GetBillingGroupCostReportOutput) => void): Request<Billingconductor.Types.GetBillingGroupCostReportOutput, AWSError>;
   /**
    *  This is a paginated call to list linked accounts that are linked to the payer account for the specified time period. If no information is provided, the current billing period is used. The response will optionally include the billing group that's associated with the linked account.
    */
@@ -352,6 +360,17 @@ declare namespace Billingconductor {
   }
   export type AssociateResourcesResponseList = AssociateResourceResponseElement[];
   export type Association = string;
+  export interface Attribute {
+    /**
+     * The key in a key-value pair that describes the margin summary.
+     */
+    Key?: String;
+    /**
+     * The value in a key-value pair that describes the margin summary.
+     */
+    Value?: String;
+  }
+  export type AttributesList = Attribute[];
   export interface BatchAssociateResourcesToCustomLineItemInput {
     /**
      *  A percentage custom line item ARN to associate the resources to. 
@@ -424,6 +443,37 @@ declare namespace Billingconductor {
     Currency?: Currency;
   }
   export type BillingGroupCostReportList = BillingGroupCostReportElement[];
+  export interface BillingGroupCostReportResultElement {
+    /**
+     * The Amazon Resource Number (ARN) that uniquely identifies the billing group.
+     */
+    Arn?: BillingGroupArn;
+    /**
+     * The actual Amazon Web Services charges for the billing group.
+     */
+    AWSCost?: AWSCost;
+    /**
+     * The hypothetical Amazon Web Services charges based on the associated pricing plan of a billing group.
+     */
+    ProformaCost?: ProformaCost;
+    /**
+     * The billing group margin.
+     */
+    Margin?: Margin;
+    /**
+     * The percentage of the billing group margin.
+     */
+    MarginPercentage?: MarginPercentage;
+    /**
+     * The displayed currency.
+     */
+    Currency?: Currency;
+    /**
+     * The list of key-value pairs that represent the attributes by which the BillingGroupCostReportResults are grouped. For example, if you want the Amazon S3 service-level breakdown of a billing group for November 2023, the attributes list will contain a key-value pair of "PRODUCT_NAME" and "S3" and a key-value pair of "BILLING_PERIOD" and "Nov 2023".
+     */
+    Attributes?: AttributesList;
+  }
+  export type BillingGroupCostReportResultsList = BillingGroupCostReportResultElement[];
   export type BillingGroupDescription = string;
   export type BillingGroupFullArn = string;
   export type BillingGroupList = BillingGroupListElement[];
@@ -475,6 +525,16 @@ declare namespace Billingconductor {
   export type BillingGroupStatusList = BillingGroupStatus[];
   export type BillingGroupStatusReason = string;
   export type BillingPeriod = string;
+  export interface BillingPeriodRange {
+    /**
+     * The inclusive start billing period that defines a billing period range for the margin summary.
+     */
+    InclusiveStartBillingPeriod: BillingPeriod;
+    /**
+     * The exclusive end billing period that defines a billing period range for the margin summary. For example, if you choose a billing period that starts in October 2023 and ends in December 2023, the margin summary will only include data from October 2023 and November 2023.
+     */
+    ExclusiveEndBillingPeriod: BillingPeriod;
+  }
   export type Boolean = boolean;
   export type ClientToken = string;
   export interface ComputationPreference {
@@ -839,7 +899,7 @@ declare namespace Billingconductor {
   }
   export interface DeleteCustomLineItemOutput {
     /**
-     *  Then ARN of the deleted custom line item. 
+     * The ARN of the deleted custom line item. 
      */
     Arn?: CustomLineItemArn;
   }
@@ -916,6 +976,40 @@ declare namespace Billingconductor {
      */
     Activated: TieringActivated;
   }
+  export interface GetBillingGroupCostReportInput {
+    /**
+     * The Amazon Resource Number (ARN) that uniquely identifies the billing group.
+     */
+    Arn: BillingGroupArn;
+    /**
+     * A time range for which the margin summary is effective. You can specify up to 12 months.
+     */
+    BillingPeriodRange?: BillingPeriodRange;
+    /**
+     * A list of strings that specify the attributes that are used to break down costs in the margin summary reports for the billing group. For example, you can view your costs by the Amazon Web Service name or the billing period.
+     */
+    GroupBy?: GroupByAttributesList;
+    /**
+     * The maximum number of margin summary reports to retrieve.
+     */
+    MaxResults?: MaxBillingGroupCostReportResults;
+    /**
+     * The pagination token used on subsequent calls to get reports.
+     */
+    NextToken?: Token;
+  }
+  export interface GetBillingGroupCostReportOutput {
+    /**
+     * The list of margin summary reports.
+     */
+    BillingGroupCostReportResults?: BillingGroupCostReportResultsList;
+    /**
+     * The pagination token used on subsequent calls to get reports.
+     */
+    NextToken?: Token;
+  }
+  export type GroupByAttributeName = "PRODUCT_NAME"|"BILLING_PERIOD"|string;
+  export type GroupByAttributesList = GroupByAttributeName[];
   export type Instant = number;
   export interface LineItemFilter {
     /**
@@ -1399,6 +1493,7 @@ declare namespace Billingconductor {
   export type Margin = string;
   export type MarginPercentage = string;
   export type MatchOption = "NOT_EQUAL"|string;
+  export type MaxBillingGroupCostReportResults = number;
   export type MaxBillingGroupResults = number;
   export type MaxCustomLineItemResults = number;
   export type MaxPricingPlanResults = number;
