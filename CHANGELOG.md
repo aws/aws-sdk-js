@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1519.0-->
+<!--LATEST=2.1520.0-->
 <!--ENTRYINSERT-->
+
+## 2.1520.0
+* feature: Connect: Adds relatedContactId field to StartOutboundVoiceContact API input. Introduces PauseContact API and ResumeContact API for Task contacts. Adds pause duration, number of pauses, timestamps for last paused and resumed events to DescribeContact API response. Adds new Rule type and new Rule action.
+* feature: ConnectCases: Increase number of fields that can be included in CaseEventIncludedData from 50 to 200
+* feature: SageMaker: This release 1) introduces a new API: DeleteCompilationJob , and 2) adds InfraCheckConfig for Create/Describe training job API
 
 ## 2.1519.0
 * feature: AppStream: This release includes support for images of Windows Server 2022 platform.

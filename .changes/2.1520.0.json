@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "Adds relatedContactId field to StartOutboundVoiceContact API input. Introduces PauseContact API and ResumeContact API for Task contacts. Adds pause duration, number of pauses, timestamps for last paused and resumed events to DescribeContact API response. Adds new Rule type and new Rule action."
+    },
+    {
+        "type": "feature",
+        "category": "ConnectCases",
+        "description": "Increase number of fields that can be included in CaseEventIncludedData from 50 to 200"
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "This release 1) introduces a new API: DeleteCompilationJob , and 2) adds InfraCheckConfig for Create/Describe training job API"
+    }
+]

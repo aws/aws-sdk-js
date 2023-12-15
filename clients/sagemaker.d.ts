@@ -557,6 +557,14 @@ declare class SageMaker extends Service {
    */
   deleteCodeRepository(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes the specified compilation job. This action deletes only the compilation job resource in Amazon SageMaker. It doesn't delete other resources that are related to that job, such as the model artifacts that the job creates, the compilation logs in CloudWatch, the compiled model, or the IAM role. You can delete a compilation job only if its current status is COMPLETED, FAILED, or STOPPED. If the job status is STARTING or INPROGRESS, stop the job, and then delete it after its status becomes STOPPED.
+   */
+  deleteCompilationJob(params: SageMaker.Types.DeleteCompilationJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified compilation job. This action deletes only the compilation job resource in Amazon SageMaker. It doesn't delete other resources that are related to that job, such as the model artifacts that the job creates, the compilation logs in CloudWatch, the compiled model, or the IAM role. You can delete a compilation job only if its current status is COMPLETED, FAILED, or STOPPED. If the job status is STARTING or INPROGRESS, stop the job, and then delete it after its status becomes STOPPED.
+   */
+  deleteCompilationJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes an context.
    */
   deleteContext(params: SageMaker.Types.DeleteContextRequest, callback?: (err: AWSError, data: SageMaker.Types.DeleteContextResponse) => void): Request<SageMaker.Types.DeleteContextResponse, AWSError>;
@@ -2662,7 +2670,7 @@ declare namespace SageMaker {
     /**
      * The URI of the source.
      */
-    SourceUri: String2048;
+    SourceUri: SourceUri;
     /**
      * The type of the source.
      */
@@ -2937,6 +2945,10 @@ declare namespace SageMaker {
      */
     UserProfileName?: UserProfileName;
     /**
+     * The name of the space.
+     */
+    SpaceName?: SpaceName;
+    /**
      * The type of app.
      */
     AppType?: AppType;
@@ -2952,10 +2964,6 @@ declare namespace SageMaker {
      * The creation time.
      */
     CreationTime?: CreationTime;
-    /**
-     * The name of the space.
-     */
-    SpaceName?: SpaceName;
     ResourceSpec?: ResourceSpec;
   }
   export type AppImageConfigArn = string;
@@ -3010,16 +3018,18 @@ declare namespace SageMaker {
     ContainerArguments?: ContainerArguments;
   }
   export type AppStatus = "Deleted"|"Deleting"|"Failed"|"InService"|"Pending"|string;
-  export type AppType = "JupyterServer"|"KernelGateway"|"TensorBoard"|"RStudioServerPro"|"RSessionGateway"|"JupyterLab"|"CodeEditor"|string;
+  export type AppType = "JupyterServer"|"KernelGateway"|"DetailedProfiler"|"TensorBoard"|"VSCode"|"Savitur"|"CodeEditor"|"JupyterLab"|"RStudioServerPro"|"RSession"|"RSessionGateway"|"Canvas"|"DatasetManager"|"SageMakerLite"|"Local"|string;
   export type ApprovalDescription = string;
   export type ArnOrName = string;
   export type ArtifactArn = string;
   export type ArtifactDigest = string;
+  export type ArtifactProperties = {[key: string]: ArtifactPropertyValue};
+  export type ArtifactPropertyValue = string;
   export interface ArtifactSource {
     /**
      * The URI of the source.
      */
-    SourceUri: String2048;
+    SourceUri: SourceUri;
     /**
      * A list of source types.
      */
@@ -3085,7 +3095,7 @@ declare namespace SageMaker {
      */
     TrialArn?: TrialArn;
   }
-  export type AssociationEdgeType = "ContributedTo"|"AssociatedWith"|"DerivedFrom"|"Produced"|string;
+  export type AssociationEdgeType = "ContributedTo"|"AssociatedWith"|"DerivedFrom"|"Produced"|"SameAs"|string;
   export type AssociationEntityArn = string;
   export type AssociationSummaries = AssociationSummary[];
   export interface AssociationSummary {
@@ -3284,7 +3294,7 @@ declare namespace SageMaker {
     /**
      * The data source for an AutoML channel.
      */
-    DataSource: AutoMLDataSource;
+    DataSource?: AutoMLDataSource;
     /**
      * You can use Gzip or None. The default value is None.
      */
@@ -3390,13 +3400,13 @@ declare namespace SageMaker {
      */
     SecurityConfig?: AutoMLSecurityConfig;
     /**
-     * The configuration for splitting the input training dataset. Type: AutoMLDataSplitConfig
-     */
-    DataSplitConfig?: AutoMLDataSplitConfig;
-    /**
      * The configuration for generating a candidate for an AutoML job (optional). 
      */
     CandidateGenerationConfig?: AutoMLCandidateGenerationConfig;
+    /**
+     * The configuration for splitting the input training dataset. Type: AutoMLDataSplitConfig
+     */
+    DataSplitConfig?: AutoMLDataSplitConfig;
     /**
      * The method that Autopilot uses to train the data. You can either specify the mode manually or let Autopilot choose for you based on the dataset size by selecting AUTO. In AUTO mode, Autopilot chooses ENSEMBLING for datasets smaller than 100 MB, and HYPERPARAMETER_TUNING for larger ones. The ENSEMBLING mode uses a multi-stack ensemble model to predict classification and regression tasks directly from your dataset. This machine learning mode combines several base models to produce an optimal predictive model. It then uses a stacking ensemble method to combine predictions from contributing members. A multi-stack ensemble model can provide better performance over a single model by combining the predictive capabilities of multiple models. See Autopilot algorithm support for a list of algorithms supported by ENSEMBLING mode. The HYPERPARAMETER_TUNING (HPO) mode uses the best hyperparameters to train the best version of a model. HPO automatically selects an algorithm for the type of problem you want to solve. Then HPO finds the best hyperparameters according to your objective metric. See Autopilot algorithm support for a list of algorithms supported by HYPERPARAMETER_TUNING mode.
      */
@@ -3411,7 +3421,7 @@ declare namespace SageMaker {
     MetricName: AutoMLMetricEnum;
   }
   export type AutoMLJobObjectiveType = "Maximize"|"Minimize"|string;
-  export type AutoMLJobSecondaryStatus = "Starting"|"AnalyzingData"|"FeatureEngineering"|"ModelTuning"|"MaxCandidatesReached"|"Failed"|"Stopped"|"MaxAutoMLJobRuntimeReached"|"Stopping"|"CandidateDefinitionsGenerated"|"GeneratingExplainabilityReport"|"Completed"|"ExplainabilityError"|"DeployingModel"|"ModelDeploymentError"|"GeneratingModelInsightsReport"|"ModelInsightsError"|"TrainingModels"|"PreTraining"|string;
+  export type AutoMLJobSecondaryStatus = "Starting"|"MaxCandidatesReached"|"Failed"|"Stopped"|"MaxAutoMLJobRuntimeReached"|"Stopping"|"CandidateDefinitionsGenerated"|"Completed"|"ExplainabilityError"|"DeployingModel"|"ModelDeploymentError"|"GeneratingModelInsightsReport"|"ModelInsightsError"|"AnalyzingData"|"FeatureEngineering"|"ModelTuning"|"GeneratingExplainabilityReport"|"TrainingModels"|"PreTraining"|string;
   export type AutoMLJobStatus = "Completed"|"InProgress"|"Failed"|"Stopped"|"Stopping"|string;
   export interface AutoMLJobStepMetadata {
     /**
@@ -3459,7 +3469,8 @@ declare namespace SageMaker {
     PartialFailureReasons?: AutoMLPartialFailureReasons;
   }
   export type AutoMLMaxResults = number;
-  export type AutoMLMetricEnum = "Accuracy"|"MSE"|"F1"|"F1macro"|"AUC"|"RMSE"|"MAE"|"R2"|"BalancedAccuracy"|"Precision"|"PrecisionMacro"|"Recall"|"RecallMacro"|"MAPE"|"MASE"|"WAPE"|"AverageWeightedQuantileLoss"|string;
+  export type AutoMLMaxResultsForTrials = number;
+  export type AutoMLMetricEnum = "Accuracy"|"MSE"|"F1"|"F1macro"|"AUC"|"RMSE"|"BalancedAccuracy"|"R2"|"Recall"|"RecallMacro"|"Precision"|"PrecisionMacro"|"MAE"|"MAPE"|"MASE"|"WAPE"|"AverageWeightedQuantileLoss"|string;
   export type AutoMLMetricExtendedEnum = "Accuracy"|"MSE"|"F1"|"F1macro"|"AUC"|"RMSE"|"MAE"|"R2"|"BalancedAccuracy"|"Precision"|"PrecisionMacro"|"Recall"|"RecallMacro"|"LogLoss"|"InferenceLatency"|"MAPE"|"MASE"|"WAPE"|"AverageWeightedQuantileLoss"|"Rouge1"|"Rouge2"|"RougeL"|"RougeLSum"|"Perplexity"|"ValidationLoss"|"TrainingLoss"|string;
   export type AutoMLMode = "AUTO"|"ENSEMBLING"|"HYPERPARAMETER_TUNING"|string;
   export type AutoMLNameContains = string;
@@ -3490,19 +3501,19 @@ declare namespace SageMaker {
      */
     TextClassificationJobConfig?: TextClassificationJobConfig;
     /**
-     * Settings used to configure an AutoML job V2 for the tabular problem type (regression, classification).
-     */
-    TabularJobConfig?: TabularJobConfig;
-    /**
      * Settings used to configure an AutoML job V2 for the time-series forecasting problem type.
      */
     TimeSeriesForecastingJobConfig?: TimeSeriesForecastingJobConfig;
+    /**
+     * Settings used to configure an AutoML job V2 for the tabular problem type (regression, classification).
+     */
+    TabularJobConfig?: TabularJobConfig;
     /**
      * Settings used to configure an AutoML job V2 for the text generation (LLMs fine-tuning) problem type.  The text generation models that support fine-tuning in Autopilot are currently accessible exclusively in regions supported by Canvas. Refer to the documentation of Canvas for the full list of its supported Regions. 
      */
     TextGenerationJobConfig?: TextGenerationJobConfig;
   }
-  export type AutoMLProblemTypeConfigName = "ImageClassification"|"TextClassification"|"Tabular"|"TimeSeriesForecasting"|"TextGeneration"|string;
+  export type AutoMLProblemTypeConfigName = "ImageClassification"|"TextClassification"|"TimeSeriesForecasting"|"Tabular"|"TextGeneration"|string;
   export interface AutoMLProblemTypeResolvedAttributes {
     /**
      * The resolved attributes for the tabular problem type.
@@ -3573,7 +3584,7 @@ declare namespace SageMaker {
     Mode: AutotuneMode;
   }
   export type AutotuneMode = "Enabled"|string;
-  export type AwsManagedHumanLoopRequestSource = "AWS/Rekognition/DetectModerationLabels/Image/V3"|"AWS/Textract/AnalyzeDocument/Forms/V1"|string;
+  export type AwsManagedHumanLoopRequestSource = "AWS/Rekognition/DetectModerationLabels/Image/V3"|"AWS/Textract/AnalyzeDocument/Forms/V1"|"AWS/Textract/AnalyzeExpense"|"AWS/Handshake/VerifyIdentity"|"AWS/Bedrock/ModelEvaluation"|string;
   export type BacktestResultsLocation = string;
   export type BaseModelName = string;
   export interface BatchDataCaptureConfig {
@@ -3816,13 +3827,13 @@ declare namespace SageMaker {
      */
     IdentityProviderOAuthSettings?: IdentityProviderOAuthSettings;
     /**
-     * The settings for document querying.
-     */
-    KendraSettings?: KendraSettings;
-    /**
      * The model deployment settings for the SageMaker Canvas application.
      */
     DirectDeploySettings?: DirectDeploySettings;
+    /**
+     * The settings for document querying.
+     */
+    KendraSettings?: KendraSettings;
   }
   export interface CapacitySize {
     /**
@@ -3846,7 +3857,7 @@ declare namespace SageMaker {
      */
     JsonContentTypes?: JsonContentTypes;
   }
-  export type CaptureMode = "Input"|"Output"|string;
+  export type CaptureMode = "Input"|"Output"|"InputAndOutput"|string;
   export interface CaptureOption {
     /**
      * Specify the boundary of data to capture.
@@ -4473,6 +4484,10 @@ declare namespace SageMaker {
      */
     ModelDataUrl?: Url;
     /**
+     * Specifies the location of ML model data to deploy.  Currently you cannot use ModelDataSource in conjunction with SageMaker batch transform, SageMaker serverless endpoints, SageMaker multi-model endpoints, and SageMaker Marketplace. 
+     */
+    ModelDataSource?: ModelDataSource;
+    /**
      * The environment variables to set in the Docker container. Each key and value in the Environment string to string map can have length of up to 1024. We support up to 16 entries in the map. 
      */
     Environment?: EnvironmentMap;
@@ -4488,10 +4503,6 @@ declare namespace SageMaker {
      * Specifies additional configuration for multi-model endpoints.
      */
     MultiModelConfig?: MultiModelConfig;
-    /**
-     * Specifies the location of ML model data to deploy.  Currently you cannot use ModelDataSource in conjunction with SageMaker batch transform, SageMaker serverless endpoints, SageMaker multi-model endpoints, and SageMaker Marketplace. 
-     */
-    ModelDataSource?: ModelDataSource;
   }
   export type ContainerDefinitionList = ContainerDefinition[];
   export type ContainerEntrypoint = ContainerEntrypointString[];
@@ -4506,11 +4517,13 @@ declare namespace SageMaker {
   export type ContentType = string;
   export type ContentTypes = ContentType[];
   export type ContextArn = string;
+  export type ContextName = string;
+  export type ContextNameOrArn = string;
   export interface ContextSource {
     /**
      * The URI of the source.
      */
-    SourceUri: String2048;
+    SourceUri: SourceUri;
     /**
      * The type of the source.
      */
@@ -4529,7 +4542,7 @@ declare namespace SageMaker {
     /**
      * The name of the context.
      */
-    ContextName?: ExperimentEntityName;
+    ContextName?: ContextName;
     /**
      * The source of the context.
      */
@@ -4690,6 +4703,10 @@ declare namespace SageMaker {
      */
     UserProfileName?: UserProfileName;
     /**
+     * The name of the space. If this value is not set, then UserProfileName must be set.
+     */
+    SpaceName?: SpaceName;
+    /**
      * The type of app.
      */
     AppType: AppType;
@@ -4705,10 +4722,6 @@ declare namespace SageMaker {
      * The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.  The value of InstanceType passed as part of the ResourceSpec in the CreateApp call overrides the value passed as part of the ResourceSpec configured for the user profile or the domain. If InstanceType is not specified in any of those three ResourceSpec values for a KernelGateway app, the CreateApp call fails with a request validation error. 
      */
     ResourceSpec?: ResourceSpec;
-    /**
-     * The name of the space. If this value is not set, then UserProfileName must be set.
-     */
-    SpaceName?: SpaceName;
   }
   export interface CreateAppResponse {
     /**
@@ -4732,7 +4745,7 @@ declare namespace SageMaker {
     /**
      * A list of properties to add to the artifact.
      */
-    Properties?: LineageEntityParameters;
+    Properties?: ArtifactProperties;
     MetadataProperties?: MetadataProperties;
     /**
      * A list of tags to apply to the artifact.
@@ -4926,7 +4939,7 @@ declare namespace SageMaker {
     /**
      * The name of the context. Must be unique to your account in an Amazon Web Services Region.
      */
-    ContextName: ExperimentEntityName;
+    ContextName: ContextName;
     /**
      * The source type, ID, and URI.
      */
@@ -5033,6 +5046,10 @@ declare namespace SageMaker {
      */
     DefaultUserSettings: UserSettings;
     /**
+     * A collection of Domain settings.
+     */
+    DomainSettings?: DomainSettings;
+    /**
      * The VPC subnets that the domain uses for communication.
      */
     SubnetIds: Subnets;
@@ -5060,10 +5077,6 @@ declare namespace SageMaker {
      * The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Required when CreateDomain.AppNetworkAccessType is VPCOnly and DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is provided. If setting up the domain for use with RStudio, this value must be set to Service.
      */
     AppSecurityGroupManagement?: AppSecurityGroupManagement;
-    /**
-     * A collection of Domain settings.
-     */
-    DomainSettings?: DomainSettings;
     /**
      * The default settings used to create a space.
      */
@@ -5302,7 +5315,7 @@ declare namespace SageMaker {
     /**
      * An object containing information about the tasks the human reviewers will perform.
      */
-    HumanLoopConfig: HumanLoopConfig;
+    HumanLoopConfig?: HumanLoopConfig;
     /**
      * An object containing information about where the human review results will be uploaded.
      */
@@ -5896,14 +5909,6 @@ declare namespace SageMaker {
      */
     ClientToken?: ClientToken;
     /**
-     * The metadata properties associated with the model package versions.
-     */
-    CustomerMetadataProperties?: CustomerMetadataMap;
-    /**
-     * Represents the drift check baselines that can be used when the model monitor is set using the model package. For more information, see the topic on Drift Detection against Previous Baselines in SageMaker Pipelines in the Amazon SageMaker Developer Guide. 
-     */
-    DriftCheckBaselines?: DriftCheckBaselines;
-    /**
      * The machine learning domain of your model package and its components. Common machine learning domains include computer vision and natural language processing.
      */
     Domain?: String;
@@ -5915,6 +5920,14 @@ declare namespace SageMaker {
      * The Amazon Simple Storage Service (Amazon S3) path where the sample payload is stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix). This archive can hold multiple files that are all equally used in the load test. Each file in the archive must satisfy the size constraints of the InvokeEndpoint call.
      */
     SamplePayloadUrl?: S3Uri;
+    /**
+     * The metadata properties associated with the model package versions.
+     */
+    CustomerMetadataProperties?: CustomerMetadataMap;
+    /**
+     * Represents the drift check baselines that can be used when the model monitor is set using the model package. For more information, see the topic on Drift Detection against Previous Baselines in SageMaker Pipelines in the Amazon SageMaker Developer Guide. 
+     */
+    DriftCheckBaselines?: DriftCheckBaselines;
     /**
      * An array of additional Inference Specification objects. Each additional Inference Specification specifies artifacts based on this model package that can be used on inference endpoints. Generally used with SageMaker Neo to store the compiled artifacts. 
      */
@@ -6147,7 +6160,7 @@ declare namespace SageMaker {
      */
     SpaceName?: SpaceName;
     /**
-     * The landing page that the user is directed to when accessing the presigned URL. Using this value, users can access Studio or Studio Classic, even if it is not the default experience for the domain. The supported values are:    studio::relative/path: Directs users to the relative path in Studio.    app:JupyterServer:relative/path: Directs users to the relative path in the Studio Classic application.    app:JupyterLab:relative/path: Directs users to the relative path in the JupyterLab application.    app:RStudioServerPro:relative/path: Directs users to the relative path in the RStudio application.    app:Canvas:relative/path: Directs users to the relative path in the Canvas application.  
+     * The landing page that the user is directed to when accessing the presigned URL. Using this value, users can access Studio or Studio Classic, even if it is not the default experience for the domain. The supported values are:    studio::relative/path: Directs users to the relative path in Studio.    app:JupyterServer:relative/path: Directs users to the relative path in the Studio Classic application.    app:JupyterLab:relative/path: Directs users to the relative path in the JupyterLab application.    app:RStudioServerPro:relative/path: Directs users to the relative path in the RStudio application.    app:CodeEditor:relative/path: Directs users to the relative path in the Code Editor, based on Code-OSS, Visual Studio Code - Open Source application.    app:Canvas:relative/path: Directs users to the relative path in the Canvas application.  
      */
     LandingUri?: LandingUri;
   }
@@ -6268,10 +6281,6 @@ declare namespace SageMaker {
      */
     SpaceSettings?: SpaceSettings;
     /**
-     * The name of the space that appears in the SageMaker Studio UI.
-     */
-    SpaceDisplayName?: NonEmptyString64;
-    /**
      * A collection of ownership settings.
      */
     OwnershipSettings?: OwnershipSettings;
@@ -6279,6 +6288,10 @@ declare namespace SageMaker {
      * A collection of space sharing settings.
      */
     SpaceSharingSettings?: SpaceSharingSettings;
+    /**
+     * The name of the space that appears in the SageMaker Studio UI.
+     */
+    SpaceDisplayName?: NonEmptyString64;
   }
   export interface CreateSpaceResponse {
     /**
@@ -6970,6 +6983,10 @@ declare namespace SageMaker {
      */
     UserProfileName?: UserProfileName;
     /**
+     * The name of the space. If this value is not set, then UserProfileName must be set.
+     */
+    SpaceName?: SpaceName;
+    /**
      * The type of app.
      */
     AppType: AppType;
@@ -6977,10 +6994,6 @@ declare namespace SageMaker {
      * The name of the app.
      */
     AppName: AppName;
-    /**
-     * The name of the space. If this value is not set, then UserProfileName must be set.
-     */
-    SpaceName?: SpaceName;
   }
   export interface DeleteArtifactRequest {
     /**
@@ -7036,11 +7049,17 @@ declare namespace SageMaker {
      */
     CodeRepositoryName: EntityName;
   }
+  export interface DeleteCompilationJobRequest {
+    /**
+     * The name of the compilation job to delete.
+     */
+    CompilationJobName: EntityName;
+  }
   export interface DeleteContextRequest {
     /**
      * The name of the context to delete.
      */
-    ContextName: ExperimentEntityName;
+    ContextName: ContextName;
   }
   export interface DeleteContextResponse {
     /**
@@ -7391,13 +7410,13 @@ declare namespace SageMaker {
      */
     BlueGreenUpdatePolicy?: BlueGreenUpdatePolicy;
     /**
-     * Automatic rollback configuration for handling endpoint deployment failures and recovery.
-     */
-    AutoRollbackConfiguration?: AutoRollbackConfig;
-    /**
      * Specifies a rolling deployment strategy for updating a SageMaker endpoint.
      */
     RollingUpdatePolicy?: RollingUpdatePolicy;
+    /**
+     * Automatic rollback configuration for handling endpoint deployment failures and recovery.
+     */
+    AutoRollbackConfiguration?: AutoRollbackConfig;
   }
   export interface DeploymentRecommendation {
     /**
@@ -7464,7 +7483,7 @@ declare namespace SageMaker {
     /**
      * The name of the action to describe.
      */
-    ActionName: ExperimentEntityName;
+    ActionName: ExperimentEntityNameOrArn;
   }
   export interface DescribeActionResponse {
     /**
@@ -7605,6 +7624,10 @@ declare namespace SageMaker {
      */
     UserProfileName?: UserProfileName;
     /**
+     * The name of the space.
+     */
+    SpaceName?: SpaceName;
+    /**
      * The type of app.
      */
     AppType: AppType;
@@ -7612,10 +7635,6 @@ declare namespace SageMaker {
      * The name of the app.
      */
     AppName: AppName;
-    /**
-     * The name of the space.
-     */
-    SpaceName?: SpaceName;
   }
   export interface DescribeAppResponse {
     /**
@@ -7639,6 +7658,10 @@ declare namespace SageMaker {
      */
     UserProfileName?: UserProfileName;
     /**
+     * The name of the space. If this value is not set, then UserProfileName must be set.
+     */
+    SpaceName?: SpaceName;
+    /**
      * The status.
      */
     Status?: AppStatus;
@@ -7653,7 +7676,7 @@ declare namespace SageMaker {
     /**
      * The creation time.
      */
-    CreationTime?: CreationTime;
+    CreationTime?: Timestamp;
     /**
      * The failure reason.
      */
@@ -7662,10 +7685,6 @@ declare namespace SageMaker {
      * The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.
      */
     ResourceSpec?: ResourceSpec;
-    /**
-     * The name of the space. If this value is not set, then UserProfileName must be set.
-     */
-    SpaceName?: SpaceName;
   }
   export interface DescribeArtifactRequest {
     /**
@@ -7838,6 +7857,10 @@ declare namespace SageMaker {
      */
     AutoMLProblemTypeConfig?: AutoMLProblemTypeConfig;
     /**
+     * Returns the name of the problem type configuration set for the AutoML job V2.
+     */
+    AutoMLProblemTypeConfigName?: AutoMLProblemTypeConfigName;
+    /**
      * Returns the creation time of the AutoML job V2.
      */
     CreationTime: Timestamp;
@@ -7869,6 +7892,11 @@ declare namespace SageMaker {
      * Returns the secondary status of the AutoML job V2.
      */
     AutoMLJobSecondaryStatus: AutoMLJobSecondaryStatus;
+    AutoMLJobArtifacts?: AutoMLJobArtifacts;
+    /**
+     * Returns the resolved attributes used by the AutoML job V2.
+     */
+    ResolvedAttributes?: AutoMLResolvedAttributes;
     /**
      * Indicates whether the model was deployed automatically to an endpoint and the name of that endpoint if deployed automatically.
      */
@@ -7885,15 +7913,6 @@ declare namespace SageMaker {
      * Returns the security configuration for traffic encryption or Amazon VPC settings.
      */
     SecurityConfig?: AutoMLSecurityConfig;
-    AutoMLJobArtifacts?: AutoMLJobArtifacts;
-    /**
-     * Returns the resolved attributes used by the AutoML job V2.
-     */
-    ResolvedAttributes?: AutoMLResolvedAttributes;
-    /**
-     * Returns the name of the problem type configuration set for the AutoML job V2.
-     */
-    AutoMLProblemTypeConfigName?: AutoMLProblemTypeConfigName;
   }
   export interface DescribeClusterNodeRequest {
     /**
@@ -8056,13 +8075,13 @@ declare namespace SageMaker {
     /**
      * The name of the context to describe.
      */
-    ContextName: ExperimentEntityNameOrArn;
+    ContextName: ContextNameOrArn;
   }
   export interface DescribeContextResponse {
     /**
      * The name of the context.
      */
-    ContextName?: ExperimentEntityName;
+    ContextName?: ContextName;
     /**
      * The Amazon Resource Name (ARN) of the context.
      */
@@ -8269,7 +8288,7 @@ declare namespace SageMaker {
      */
     SingleSignOnManagedApplicationInstanceId?: String256;
     /**
-     * The ARN of the application managed by SageMaker in IAM Identity Center. This value is only returned for domains created after September 19, 2023.
+     * The ARN of the application managed by SageMaker in IAM Identity Center. This value is only returned for domains created after October 1, 2023.
      */
     SingleSignOnApplicationArn?: SingleSignOnApplicationArn;
     /**
@@ -8289,6 +8308,10 @@ declare namespace SageMaker {
      */
     FailureReason?: FailureReason;
     /**
+     * The ID of the security group that authorizes traffic between the RSessionGateway apps and the RStudioServerPro app.
+     */
+    SecurityGroupIdForDomainBoundary?: SecurityGroupId;
+    /**
      * The domain's authentication mode.
      */
     AuthMode?: AuthMode;
@@ -8296,6 +8319,10 @@ declare namespace SageMaker {
      * Settings which are applied to UserProfiles in this domain if settings are not explicitly specified in a given UserProfile. 
      */
     DefaultUserSettings?: UserSettings;
+    /**
+     * A collection of Domain settings.
+     */
+    DomainSettings?: DomainSettings;
     /**
      * Specifies the VPC used for non-EFS traffic. The default value is PublicInternetOnly.    PublicInternetOnly - Non-EFS traffic is through a VPC managed by Amazon SageMaker, which allows direct internet access    VpcOnly - All traffic is through the specified VPC and subnets  
      */
@@ -8321,17 +8348,9 @@ declare namespace SageMaker {
      */
     KmsKeyId?: KmsKeyId;
     /**
-     * A collection of Domain settings.
-     */
-    DomainSettings?: DomainSettings;
-    /**
      * The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Required when CreateDomain.AppNetworkAccessType is VPCOnly and DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is provided.
      */
     AppSecurityGroupManagement?: AppSecurityGroupManagement;
-    /**
-     * The ID of the security group that authorizes traffic between the RSessionGateway apps and the RStudioServerPro app.
-     */
-    SecurityGroupIdForDomainBoundary?: SecurityGroupId;
     /**
      * The default settings used to create a space.
      */
@@ -8533,7 +8552,7 @@ declare namespace SageMaker {
     /**
      * The name of the endpoint configuration associated with this endpoint.
      */
-    EndpointConfigName: EndpointConfigName;
+    EndpointConfigName?: EndpointConfigName;
     /**
      * An array of ProductionVariantSummary objects, one for each model hosted behind this endpoint.
      */
@@ -8778,7 +8797,7 @@ declare namespace SageMaker {
     /**
      * An object containing information about who works on the task, the workforce task price, and other task details.
      */
-    HumanLoopConfig: HumanLoopConfig;
+    HumanLoopConfig?: HumanLoopConfig;
     /**
      * An object containing information about the output file.
      */
@@ -9013,6 +9032,10 @@ declare namespace SageMaker {
      */
     WarmStartConfig?: HyperParameterTuningJobWarmStartConfig;
     /**
+     * A flag to indicate if autotune is enabled for the hyperparameter tuning job.
+     */
+    Autotune?: Autotune;
+    /**
      * If the tuning job failed, the reason it failed.
      */
     FailureReason?: FailureReason;
@@ -9021,10 +9044,6 @@ declare namespace SageMaker {
      */
     TuningJobCompletionDetails?: HyperParameterTuningJobCompletionDetails;
     ConsumedResources?: HyperParameterTuningJobConsumedResources;
-    /**
-     * A flag to indicate if autotune is enabled for the hyperparameter tuning job.
-     */
-    Autotune?: Autotune;
   }
   export interface DescribeImageRequest {
     /**
@@ -9788,14 +9807,6 @@ declare namespace SageMaker {
      */
     ApprovalDescription?: ApprovalDescription;
     /**
-     * The metadata properties associated with the model package versions.
-     */
-    CustomerMetadataProperties?: CustomerMetadataMap;
-    /**
-     * Represents the drift check baselines that can be used when the model monitor is set using the model package. For more information, see the topic on Drift Detection against Previous Baselines in SageMaker Pipelines in the Amazon SageMaker Developer Guide. 
-     */
-    DriftCheckBaselines?: DriftCheckBaselines;
-    /**
      * The machine learning domain of the model package you specified. Common machine learning domains include computer vision and natural language processing.
      */
     Domain?: String;
@@ -9807,6 +9818,14 @@ declare namespace SageMaker {
      * The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored. This path points to a single gzip compressed tar archive (.tar.gz suffix).
      */
     SamplePayloadUrl?: String;
+    /**
+     * The metadata properties associated with the model package versions.
+     */
+    CustomerMetadataProperties?: CustomerMetadataMap;
+    /**
+     * Represents the drift check baselines that can be used when the model monitor is set using the model package. For more information, see the topic on Drift Detection against Previous Baselines in SageMaker Pipelines in the Amazon SageMaker Developer Guide. 
+     */
+    DriftCheckBaselines?: DriftCheckBaselines;
     /**
      * An array of additional Inference Specification objects. Each additional Inference Specification specifies artifacts based on this model package that can be used on inference endpoints. Generally used with SageMaker Neo to store the compiled artifacts.
      */
@@ -10342,14 +10361,6 @@ declare namespace SageMaker {
      */
     SpaceSettings?: SpaceSettings;
     /**
-     * Returns the URL of the space. If the space is created with Amazon Web Services IAM Identity Center (Successor to Amazon Web Services Single Sign-On) authentication, users can navigate to the URL after appending the respective redirect parameter for the application type to be federated through Amazon Web Services IAM Identity Center. The following application types are supported:   Studio Classic: &amp;redirect=JupyterServer    JupyterLab: &amp;redirect=JupyterLab   
-     */
-    Url?: String1024;
-    /**
-     * The name of the space that appears in the Amazon SageMaker Studio UI.
-     */
-    SpaceDisplayName?: NonEmptyString64;
-    /**
      * The collection of ownership settings for a space.
      */
     OwnershipSettings?: OwnershipSettings;
@@ -10357,6 +10368,14 @@ declare namespace SageMaker {
      * The collection of space sharing settings for a space.
      */
     SpaceSharingSettings?: SpaceSharingSettings;
+    /**
+     * The name of the space that appears in the Amazon SageMaker Studio UI.
+     */
+    SpaceDisplayName?: NonEmptyString64;
+    /**
+     * Returns the URL of the space. If the space is created with Amazon Web Services IAM Identity Center (Successor to Amazon Web Services Single Sign-On) authentication, users can navigate to the URL after appending the respective redirect parameter for the application type to be federated through Amazon Web Services IAM Identity Center. The following application types are supported:   Studio Classic: &amp;redirect=JupyterServer    JupyterLab: &amp;redirect=JupyterLab    Code Editor, based on Code-OSS, Visual Studio Code - Open Source: &amp;redirect=CodeEditor   
+     */
+    Url?: String1024;
   }
   export interface DescribeStudioLifecycleConfigRequest {
     /**
@@ -10470,6 +10489,10 @@ declare namespace SageMaker {
      */
     ResourceConfig: ResourceConfig;
     /**
+     * The status of the warm pool associated with the training job.
+     */
+    WarmPoolStatus?: WarmPoolStatus;
+    /**
      * A VpcConfig object that specifies the VPC that this training job has access to. For more information, see Protect Training Jobs by Using an Amazon Virtual Private Cloud.
      */
     VpcConfig?: VpcConfig;
@@ -10547,17 +10570,13 @@ declare namespace SageMaker {
      */
     ProfilingStatus?: ProfilingStatus;
     /**
-     * The number of times to retry the job when the job fails due to an InternalServerError.
-     */
-    RetryStrategy?: RetryStrategy;
-    /**
      * The environment variables to set in the Docker container.
      */
     Environment?: TrainingEnvironmentMap;
     /**
-     * The status of the warm pool associated with the training job.
+     * The number of times to retry the job when the job fails due to an InternalServerError.
      */
-    WarmPoolStatus?: WarmPoolStatus;
+    RetryStrategy?: RetryStrategy;
     /**
      * Contains information about the infrastructure health check configuration for the training job.
      */
@@ -11568,7 +11587,7 @@ declare namespace SageMaker {
     /**
      * The name of a customer's endpoint.
      */
-    EndpointName: EndpointName;
+    EndpointName?: EndpointName;
   }
   export interface EndpointInput {
     /**
@@ -11621,6 +11640,7 @@ declare namespace SageMaker {
      * The instance types to use for the load test.
      */
     InstanceType?: ProductionVariantInstanceType;
+    ServerlessConfig?: ProductionVariantServerlessConfig;
     /**
      * The inference specification name in the model package version.
      */
@@ -11629,7 +11649,6 @@ declare namespace SageMaker {
      *  The parameter you want to benchmark against.
      */
     EnvironmentParameterRanges?: EnvironmentParameterRanges;
-    ServerlessConfig?: ProductionVariantServerlessConfig;
   }
   export type EndpointInputConfigurations = EndpointInputConfiguration[];
   export interface EndpointMetadata {
@@ -11855,11 +11874,11 @@ declare namespace SageMaker {
     /**
      * The name of a feature. The type must be a string. FeatureName cannot be any of the following: is_deleted, write_time, api_invocation_time.
      */
-    FeatureName?: FeatureName;
+    FeatureName: FeatureName;
     /**
      * The value type of a feature. Valid values are Integral, Fractional, or String.
      */
-    FeatureType?: FeatureType;
+    FeatureType: FeatureType;
     /**
      * A grouping of elements where each element within the collection must have the same feature type (String, Integral, or Fractional).    List: An ordered collection of elements.    Set: An unordered collection of unique elements.    Vector: A specialized list that represents a fixed-size array of elements. The vector dimension is determined by you. Must have elements with fractional feature types.   
      */
@@ -12665,6 +12684,10 @@ declare namespace SageMaker {
      */
     ResourceConfig?: ResourceConfig;
     /**
+     * The configuration for the hyperparameter tuning resources, including the compute instances and storage volumes, used for training jobs launched by the tuning job. By default, storage volumes hold model artifacts and incremental states. Choose File for TrainingInputMode in the AlgorithmSpecification parameter to additionally store training data in the storage volume (optional).
+     */
+    HyperParameterTuningResourceConfig?: HyperParameterTuningResourceConfig;
+    /**
      * Specifies a limit to how long a model hyperparameter training job can run. It also specifies how long a managed spot training job has to complete. When the job reaches the time limit, SageMaker ends the training job. Use this API to cap model training costs.
      */
     StoppingCondition: StoppingCondition;
@@ -12685,10 +12708,6 @@ declare namespace SageMaker {
      * The number of times to retry the job when the job fails due to an InternalServerError.
      */
     RetryStrategy?: RetryStrategy;
-    /**
-     * The configuration for the hyperparameter tuning resources, including the compute instances and storage volumes, used for training jobs launched by the tuning job. By default, storage volumes hold model artifacts and incremental states. Choose File for TrainingInputMode in the AlgorithmSpecification parameter to additionally store training data in the storage volume (optional).
-     */
-    HyperParameterTuningResourceConfig?: HyperParameterTuningResourceConfig;
     /**
      * An environment variable that you can pass into the SageMaker CreateTrainingJob API. You can use an existing environment variable from the training container or use your own. See Define metrics and variables for more information.  The maximum number of items specified for Map Entries refers to the maximum number of environment variables for each TrainingJobDefinition and also the maximum for the hyperparameter tuning job itself. That is, the sum of the number of environment variables for all the training job definitions can't exceed the maximum number specified. 
      */
@@ -12871,10 +12890,6 @@ declare namespace SageMaker {
      */
     FailureReason?: FailureReason;
     /**
-     * The tags associated with a hyperparameter tuning job. For more information see Tagging Amazon Web Services resources.
-     */
-    Tags?: TagList;
-    /**
      * Information about either a current or completed hyperparameter tuning job.
      */
     TuningJobCompletionDetails?: HyperParameterTuningJobCompletionDetails;
@@ -12882,9 +12897,13 @@ declare namespace SageMaker {
      * The total amount of resources consumed by a hyperparameter tuning job.
      */
     ConsumedResources?: HyperParameterTuningJobConsumedResources;
+    /**
+     * The tags associated with a hyperparameter tuning job. For more information see Tagging Amazon Web Services resources.
+     */
+    Tags?: TagList;
   }
   export type HyperParameterTuningJobSortByOptions = "Name"|"Status"|"CreationTime"|string;
-  export type HyperParameterTuningJobStatus = "Completed"|"InProgress"|"Failed"|"Stopped"|"Stopping"|string;
+  export type HyperParameterTuningJobStatus = "Completed"|"InProgress"|"Failed"|"Stopped"|"Stopping"|"Deleting"|"DeleteFailed"|string;
   export interface HyperParameterTuningJobStrategyConfig {
     /**
      * The configuration for the object that specifies the Hyperband strategy. This parameter is only supported for the Hyperband selection for Strategy within the HyperParameterTuningJobConfig API.
@@ -13412,6 +13431,10 @@ declare namespace SageMaker {
   }
   export interface InferenceRecommendation {
     /**
+     * The recommendation ID which uniquely identifies each recommendation.
+     */
+    RecommendationId?: String;
+    /**
      * The metrics used to decide what recommendation to make.
      */
     Metrics: RecommendationMetrics;
@@ -13423,10 +13446,6 @@ declare namespace SageMaker {
      * Defines the model configuration.
      */
     ModelConfiguration: ModelConfiguration;
-    /**
-     * The recommendation ID which uniquely identifies each recommendation.
-     */
-    RecommendationId?: String;
     /**
      * A timestamp that shows when the benchmark completed.
      */
@@ -13618,7 +13637,6 @@ declare namespace SageMaker {
     MaxValue: ParameterValue;
   }
   export type IntegerParameterRanges = IntegerParameterRange[];
-  export type IntegerValue = number;
   export type InvocationEndTime = Date;
   export type InvocationStartTime = Date;
   export type InvocationsMaxRetries = number;
@@ -13634,6 +13652,7 @@ declare namespace SageMaker {
   export type JsonContentTypes = JsonContentType[];
   export type JsonPath = string;
   export interface JupyterLabAppImageConfig {
+    FileSystemConfig?: FileSystemConfig;
     ContainerConfig?: ContainerConfig;
   }
   export interface JupyterLabAppSettings {
@@ -14356,7 +14375,7 @@ declare namespace SageMaker {
     /**
      * List the job's candidates up to a specified limit.
      */
-    MaxResults?: AutoMLMaxResults;
+    MaxResults?: AutoMLMaxResultsForTrials;
     /**
      * If the previous response was truncated, you receive this token. Use it in your next request to receive the next set of results.
      */
@@ -15030,7 +15049,7 @@ declare namespace SageMaker {
     /**
      * A token to resume pagination of ListFeatureGroups results.
      */
-    NextToken: NextToken;
+    NextToken?: NextToken;
   }
   export interface ListFlowDefinitionsRequest {
     /**
@@ -17815,7 +17834,7 @@ declare namespace SageMaker {
     /**
      * Specifies the S3 location of ML model data to deploy.
      */
-    S3DataSource: S3ModelDataSource;
+    S3DataSource?: S3ModelDataSource;
   }
   export interface ModelDeployConfig {
     /**
@@ -19078,7 +19097,7 @@ declare namespace SageMaker {
     /**
      * A list of comma seperated strings that identifies user groups in your OIDC IdP. Each user group is made up of a group of private workers.
      */
-    Groups: Groups;
+    Groups?: Groups;
   }
   export interface OnlineStoreConfig {
     /**
@@ -19141,7 +19160,7 @@ declare namespace SageMaker {
   }
   export interface OutputDataConfig {
     /**
-     * The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption. The KmsKeyId can be any of the following formats:    // KMS Key ID  "1234abcd-12ab-34cd-56ef-1234567890ab"    // Amazon Resource Name (ARN) of a KMS Key  "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"    // KMS Key Alias  "alias/ExampleAlias"    // Amazon Resource Name (ARN) of a KMS Key Alias  "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"    If you use a KMS key ID or an alias of your KMS key, the SageMaker execution role must include permissions to call kms:Encrypt. If you don't provide a KMS key ID, SageMaker uses the default KMS key for Amazon S3 for your role's account. SageMaker uses server-side encryption with KMS-managed keys for OutputDataConfig. If you use a bucket policy with an s3:PutObject permission that only allows objects with server-side encryption, set the condition key of s3:x-amz-server-side-encryption to "aws:kms". For more information, see KMS-Managed Encryption Keys in the Amazon Simple Storage Service Developer Guide.  The KMS key policy must grant permission to the IAM role that you specify in your CreateTrainingJob, CreateTransformJob, or CreateHyperParameterTuningJob requests. For more information, see Using Key Policies in Amazon Web Services KMS in the Amazon Web Services Key Management Service Developer Guide.
+     * The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption. The KmsKeyId can be any of the following formats:    // KMS Key ID  "1234abcd-12ab-34cd-56ef-1234567890ab"    // Amazon Resource Name (ARN) of a KMS Key  "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"    // KMS Key Alias  "alias/ExampleAlias"    // Amazon Resource Name (ARN) of a KMS Key Alias  "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"    If you use a KMS key ID or an alias of your KMS key, the SageMaker execution role must include permissions to call kms:Encrypt. If you don't provide a KMS key ID, SageMaker uses the default KMS key for Amazon S3 for your role's account. For more information, see KMS-Managed Encryption Keys in the Amazon Simple Storage Service Developer Guide. If the output data is stored in Amazon S3 Express One Zone, it is encrypted with server-side encryption with Amazon S3 managed keys (SSE-S3). KMS key is not supported for Amazon S3 Express One Zone The KMS key policy must grant permission to the IAM role that you specify in your CreateTrainingJob, CreateTransformJob, or CreateHyperParameterTuningJob requests. For more information, see Using Key Policies in Amazon Web Services KMS in the Amazon Web Services Key Management Service Developer Guide.
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -19444,13 +19463,13 @@ declare namespace SageMaker {
      */
     ParallelismConfiguration?: ParallelismConfiguration;
     /**
-     * Contains a list of pipeline parameters. This list can be empty. 
-     */
-    PipelineParameters?: ParameterList;
-    /**
      * The selective execution configuration applied to the pipeline run.
      */
     SelectiveExecutionConfig?: SelectiveExecutionConfig;
+    /**
+     * Contains a list of pipeline parameters. This list can be empty. 
+     */
+    PipelineParameters?: ParameterList;
   }
   export type PipelineExecutionArn = string;
   export type PipelineExecutionDescription = string;
@@ -19487,10 +19506,6 @@ declare namespace SageMaker {
      */
     CacheHitResult?: CacheHitResult;
     /**
-     * The current attempt of the execution step. For more information, see Retry Policy for SageMaker Pipelines steps.
-     */
-    AttemptCount?: IntegerValue;
-    /**
      * The reason why the step failed execution. This is only returned if the step failed its execution.
      */
     FailureReason?: FailureReason;
@@ -19498,6 +19513,10 @@ declare namespace SageMaker {
      * Metadata to run the pipeline step.
      */
     Metadata?: PipelineExecutionStepMetadata;
+    /**
+     * The current attempt of the execution step. For more information, see Retry Policy for SageMaker Pipelines steps.
+     */
+    AttemptCount?: Integer;
     /**
      * The ARN from an execution of the current pipeline from which results are reused for this step.
      */
@@ -19542,6 +19561,10 @@ declare namespace SageMaker {
      */
     Lambda?: LambdaStepMetadata;
     /**
+     * The configurations and outcomes of an Amazon EMR step execution.
+     */
+    EMR?: EMRStepMetadata;
+    /**
      * The configurations and outcomes of the check step execution. This includes:    The type of the check conducted.   The Amazon S3 URIs of baseline constraints and statistics files to be used for the drift check.   The Amazon S3 URIs of newly calculated baseline constraints and statistics.   The model package group name provided.   The Amazon S3 URI of the violation report if violations detected.   The Amazon Resource Name (ARN) of check processing job initiated by the step execution.   The Boolean flags indicating if the drift check is skipped.   If step property BaselineUsedForDriftCheck is set the same as CalculatedBaseline.  
      */
     QualityCheck?: QualityCheckStepMetadata;
@@ -19549,10 +19572,6 @@ declare namespace SageMaker {
      * Container for the metadata for a Clarify check step. The configurations and outcomes of the check step execution. This includes:    The type of the check conducted,   The Amazon S3 URIs of baseline constraints and statistics files to be used for the drift check.   The Amazon S3 URIs of newly calculated baseline constraints and statistics.   The model package group name provided.   The Amazon S3 URI of the violation report if violations detected.   The Amazon Resource Name (ARN) of check processing job initiated by the step execution.   The boolean flags indicating if the drift check is skipped.   If step property BaselineUsedForDriftCheck is set the same as CalculatedBaseline.  
      */
     ClarifyCheck?: ClarifyCheckStepMetadata;
-    /**
-     * The configurations and outcomes of an Amazon EMR step execution.
-     */
-    EMR?: EMRStepMetadata;
     /**
      * The configurations and outcomes of a Fail step execution.
      */
@@ -19602,7 +19621,7 @@ declare namespace SageMaker {
   export type PipelineName = string;
   export type PipelineNameOrArn = string;
   export type PipelineParameterName = string;
-  export type PipelineStatus = "Active"|string;
+  export type PipelineStatus = "Active"|"Deleting"|string;
   export interface PipelineSummary {
     /**
      *  The Amazon Resource Name (ARN) of the pipeline.
@@ -19975,7 +19994,7 @@ declare namespace SageMaker {
      */
     KmsKeyId?: KmsKeyId;
   }
-  export type ProductionVariantInstanceType = "ml.t2.medium"|"ml.t2.large"|"ml.t2.xlarge"|"ml.t2.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.m5d.large"|"ml.m5d.xlarge"|"ml.m5d.2xlarge"|"ml.m5d.4xlarge"|"ml.m5d.12xlarge"|"ml.m5d.24xlarge"|"ml.c4.large"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5d.large"|"ml.c5d.xlarge"|"ml.c5d.2xlarge"|"ml.c5d.4xlarge"|"ml.c5d.9xlarge"|"ml.c5d.18xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.12xlarge"|"ml.r5.24xlarge"|"ml.r5d.large"|"ml.r5d.xlarge"|"ml.r5d.2xlarge"|"ml.r5d.4xlarge"|"ml.r5d.12xlarge"|"ml.r5d.24xlarge"|"ml.inf1.xlarge"|"ml.inf1.2xlarge"|"ml.inf1.6xlarge"|"ml.inf1.24xlarge"|"ml.c6i.large"|"ml.c6i.xlarge"|"ml.c6i.2xlarge"|"ml.c6i.4xlarge"|"ml.c6i.8xlarge"|"ml.c6i.12xlarge"|"ml.c6i.16xlarge"|"ml.c6i.24xlarge"|"ml.c6i.32xlarge"|"ml.g5.xlarge"|"ml.g5.2xlarge"|"ml.g5.4xlarge"|"ml.g5.8xlarge"|"ml.g5.12xlarge"|"ml.g5.16xlarge"|"ml.g5.24xlarge"|"ml.g5.48xlarge"|"ml.p4d.24xlarge"|"ml.c7g.large"|"ml.c7g.xlarge"|"ml.c7g.2xlarge"|"ml.c7g.4xlarge"|"ml.c7g.8xlarge"|"ml.c7g.12xlarge"|"ml.c7g.16xlarge"|"ml.m6g.large"|"ml.m6g.xlarge"|"ml.m6g.2xlarge"|"ml.m6g.4xlarge"|"ml.m6g.8xlarge"|"ml.m6g.12xlarge"|"ml.m6g.16xlarge"|"ml.m6gd.large"|"ml.m6gd.xlarge"|"ml.m6gd.2xlarge"|"ml.m6gd.4xlarge"|"ml.m6gd.8xlarge"|"ml.m6gd.12xlarge"|"ml.m6gd.16xlarge"|"ml.c6g.large"|"ml.c6g.xlarge"|"ml.c6g.2xlarge"|"ml.c6g.4xlarge"|"ml.c6g.8xlarge"|"ml.c6g.12xlarge"|"ml.c6g.16xlarge"|"ml.c6gd.large"|"ml.c6gd.xlarge"|"ml.c6gd.2xlarge"|"ml.c6gd.4xlarge"|"ml.c6gd.8xlarge"|"ml.c6gd.12xlarge"|"ml.c6gd.16xlarge"|"ml.c6gn.large"|"ml.c6gn.xlarge"|"ml.c6gn.2xlarge"|"ml.c6gn.4xlarge"|"ml.c6gn.8xlarge"|"ml.c6gn.12xlarge"|"ml.c6gn.16xlarge"|"ml.r6g.large"|"ml.r6g.xlarge"|"ml.r6g.2xlarge"|"ml.r6g.4xlarge"|"ml.r6g.8xlarge"|"ml.r6g.12xlarge"|"ml.r6g.16xlarge"|"ml.r6gd.large"|"ml.r6gd.xlarge"|"ml.r6gd.2xlarge"|"ml.r6gd.4xlarge"|"ml.r6gd.8xlarge"|"ml.r6gd.12xlarge"|"ml.r6gd.16xlarge"|"ml.p4de.24xlarge"|"ml.trn1.2xlarge"|"ml.trn1.32xlarge"|"ml.inf2.xlarge"|"ml.inf2.8xlarge"|"ml.inf2.24xlarge"|"ml.inf2.48xlarge"|"ml.p5.48xlarge"|string;
+  export type ProductionVariantInstanceType = "ml.t2.medium"|"ml.t2.large"|"ml.t2.xlarge"|"ml.t2.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.m5d.large"|"ml.m5d.xlarge"|"ml.m5d.2xlarge"|"ml.m5d.4xlarge"|"ml.m5d.12xlarge"|"ml.m5d.24xlarge"|"ml.c4.large"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5d.large"|"ml.c5d.xlarge"|"ml.c5d.2xlarge"|"ml.c5d.4xlarge"|"ml.c5d.9xlarge"|"ml.c5d.18xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.12xlarge"|"ml.r5.24xlarge"|"ml.r5d.large"|"ml.r5d.xlarge"|"ml.r5d.2xlarge"|"ml.r5d.4xlarge"|"ml.r5d.12xlarge"|"ml.r5d.24xlarge"|"ml.inf1.xlarge"|"ml.inf1.2xlarge"|"ml.inf1.6xlarge"|"ml.inf1.24xlarge"|"ml.dl1.24xlarge"|"ml.c6i.large"|"ml.c6i.xlarge"|"ml.c6i.2xlarge"|"ml.c6i.4xlarge"|"ml.c6i.8xlarge"|"ml.c6i.12xlarge"|"ml.c6i.16xlarge"|"ml.c6i.24xlarge"|"ml.c6i.32xlarge"|"ml.g5.xlarge"|"ml.g5.2xlarge"|"ml.g5.4xlarge"|"ml.g5.8xlarge"|"ml.g5.12xlarge"|"ml.g5.16xlarge"|"ml.g5.24xlarge"|"ml.g5.48xlarge"|"ml.p4d.24xlarge"|"ml.c7g.large"|"ml.c7g.xlarge"|"ml.c7g.2xlarge"|"ml.c7g.4xlarge"|"ml.c7g.8xlarge"|"ml.c7g.12xlarge"|"ml.c7g.16xlarge"|"ml.m6g.large"|"ml.m6g.xlarge"|"ml.m6g.2xlarge"|"ml.m6g.4xlarge"|"ml.m6g.8xlarge"|"ml.m6g.12xlarge"|"ml.m6g.16xlarge"|"ml.m6gd.large"|"ml.m6gd.xlarge"|"ml.m6gd.2xlarge"|"ml.m6gd.4xlarge"|"ml.m6gd.8xlarge"|"ml.m6gd.12xlarge"|"ml.m6gd.16xlarge"|"ml.c6g.large"|"ml.c6g.xlarge"|"ml.c6g.2xlarge"|"ml.c6g.4xlarge"|"ml.c6g.8xlarge"|"ml.c6g.12xlarge"|"ml.c6g.16xlarge"|"ml.c6gd.large"|"ml.c6gd.xlarge"|"ml.c6gd.2xlarge"|"ml.c6gd.4xlarge"|"ml.c6gd.8xlarge"|"ml.c6gd.12xlarge"|"ml.c6gd.16xlarge"|"ml.c6gn.large"|"ml.c6gn.xlarge"|"ml.c6gn.2xlarge"|"ml.c6gn.4xlarge"|"ml.c6gn.8xlarge"|"ml.c6gn.12xlarge"|"ml.c6gn.16xlarge"|"ml.r6g.large"|"ml.r6g.xlarge"|"ml.r6g.2xlarge"|"ml.r6g.4xlarge"|"ml.r6g.8xlarge"|"ml.r6g.12xlarge"|"ml.r6g.16xlarge"|"ml.r6gd.large"|"ml.r6gd.xlarge"|"ml.r6gd.2xlarge"|"ml.r6gd.4xlarge"|"ml.r6gd.8xlarge"|"ml.r6gd.12xlarge"|"ml.r6gd.16xlarge"|"ml.p4de.24xlarge"|"ml.trn1.2xlarge"|"ml.trn1.32xlarge"|"ml.trn1n.32xlarge"|"ml.inf2.xlarge"|"ml.inf2.8xlarge"|"ml.inf2.24xlarge"|"ml.inf2.48xlarge"|"ml.p5.48xlarge"|"ml.m7i.large"|"ml.m7i.xlarge"|"ml.m7i.2xlarge"|"ml.m7i.4xlarge"|"ml.m7i.8xlarge"|"ml.m7i.12xlarge"|"ml.m7i.16xlarge"|"ml.m7i.24xlarge"|"ml.m7i.48xlarge"|"ml.c7i.large"|"ml.c7i.xlarge"|"ml.c7i.2xlarge"|"ml.c7i.4xlarge"|"ml.c7i.8xlarge"|"ml.c7i.12xlarge"|"ml.c7i.16xlarge"|"ml.c7i.24xlarge"|"ml.c7i.48xlarge"|"ml.r7i.large"|"ml.r7i.xlarge"|"ml.r7i.2xlarge"|"ml.r7i.4xlarge"|"ml.r7i.8xlarge"|"ml.r7i.12xlarge"|"ml.r7i.16xlarge"|"ml.r7i.24xlarge"|"ml.r7i.48xlarge"|string;
   export type ProductionVariantList = ProductionVariant[];
   export interface ProductionVariantManagedInstanceScaling {
     /**
@@ -20527,7 +20546,7 @@ declare namespace SageMaker {
     /**
      * The framework version of the container image.
      */
-    FrameworkVersion?: String;
+    FrameworkVersion?: RecommendationJobFrameworkVersion;
     /**
      * Specifies the SamplePayloadUrl and all other sample payload-related fields.
      */
@@ -20541,13 +20560,13 @@ declare namespace SageMaker {
      */
     SupportedInstanceTypes?: RecommendationJobSupportedInstanceTypes;
     /**
-     * Specifies the name and shape of the expected data inputs for your trained model with a JSON dictionary form. This field is used for optimizing your model using SageMaker Neo. For more information, see DataInputConfig.
-     */
-    DataInputConfig?: RecommendationJobDataInputConfig;
-    /**
      * The endpoint type to receive recommendations for. By default this is null, and the results of the inference recommendation job return a combined list of both real-time and serverless benchmarks. By specifying a value for this field, you can receive a longer list of benchmarks for the desired endpoint type.
      */
     SupportedEndpointType?: RecommendationJobSupportedEndpointType;
+    /**
+     * Specifies the name and shape of the expected data inputs for your trained model with a JSON dictionary form. This field is used for optimizing your model using SageMaker Neo. For more information, see DataInputConfig.
+     */
+    DataInputConfig?: RecommendationJobDataInputConfig;
     /**
      * The supported MIME types for the output data.
      */
@@ -20555,15 +20574,16 @@ declare namespace SageMaker {
   }
   export type RecommendationJobDataInputConfig = string;
   export type RecommendationJobDescription = string;
+  export type RecommendationJobFrameworkVersion = string;
   export interface RecommendationJobInferenceBenchmark {
     Metrics?: RecommendationMetrics;
+    EndpointMetrics?: InferenceMetrics;
     EndpointConfiguration?: EndpointOutputConfiguration;
     ModelConfiguration: ModelConfiguration;
     /**
      * The reason why a benchmark failed.
      */
     FailureReason?: RecommendationFailureReason;
-    EndpointMetrics?: InferenceMetrics;
     /**
      * A timestamp that shows when the benchmark completed.
      */
@@ -20578,6 +20598,10 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) of a versioned model package.
      */
     ModelPackageVersionArn?: ModelPackageArn;
+    /**
+     * The name of the created model.
+     */
+    ModelName?: ModelName;
     /**
      * Specifies the maximum duration of the job, in seconds. The maximum value is 18,000 seconds.
      */
@@ -20610,10 +20634,6 @@ declare namespace SageMaker {
      * Inference Recommender provisions SageMaker endpoints with access to VPC in the inference recommendation job.
      */
     VpcConfig?: RecommendationJobVpcConfig;
-    /**
-     * The name of the created model.
-     */
-    ModelName?: ModelName;
   }
   export type RecommendationJobName = string;
   export interface RecommendationJobOutputConfig {
@@ -20630,7 +20650,7 @@ declare namespace SageMaker {
     /**
      * The Amazon Simple Storage Service (Amazon S3) path where the sample payload is stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).
      */
-    SamplePayloadUrl?: String;
+    SamplePayloadUrl?: S3Uri;
     /**
      * The supported MIME types for the input data.
      */
@@ -20646,7 +20666,7 @@ declare namespace SageMaker {
      */
     MaxParallelOfTests?: MaxParallelOfTests;
   }
-  export type RecommendationJobStatus = "PENDING"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|"STOPPING"|"STOPPED"|string;
+  export type RecommendationJobStatus = "PENDING"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|"STOPPING"|"STOPPED"|"DELETING"|"DELETED"|string;
   export interface RecommendationJobStoppingConditions {
     /**
      * The maximum number of requests per minute expected for the endpoint.
@@ -20661,7 +20681,8 @@ declare namespace SageMaker {
      */
     FlatInvocations?: FlatInvocations;
   }
-  export type RecommendationJobSupportedContentTypes = String[];
+  export type RecommendationJobSupportedContentType = string;
+  export type RecommendationJobSupportedContentTypes = RecommendationJobSupportedContentType[];
   export type RecommendationJobSupportedEndpointType = "RealTime"|"Serverless"|string;
   export type RecommendationJobSupportedInstanceTypes = String[];
   export type RecommendationJobSupportedResponseMIMEType = string;
@@ -20866,13 +20887,13 @@ declare namespace SageMaker {
      */
     VolumeKmsKeyId?: KmsKeyId;
     /**
-     * The configuration of a heterogeneous cluster in JSON format.
-     */
-    InstanceGroups?: InstanceGroups;
-    /**
      * The duration of time in seconds to retain configured resources in a warm pool for subsequent training jobs.
      */
     KeepAlivePeriodInSeconds?: KeepAlivePeriodInSeconds;
+    /**
+     * The configuration of a heterogeneous cluster in JSON format.
+     */
+    InstanceGroups?: InstanceGroups;
   }
   export interface ResourceConfigForUpdate {
     /**
@@ -20908,7 +20929,7 @@ declare namespace SageMaker {
      */
     SageMakerImageVersionArn?: ImageVersionArn;
     /**
-     * The SageMakerImageVersionAlias.
+     * The SageMakerImageVersionAlias of the image to launch with. This value is in SemVer 2.0.0 versioning format.
      */
     SageMakerImageVersionAlias?: ImageVersionAlias;
     /**
@@ -20920,7 +20941,7 @@ declare namespace SageMaker {
      */
     LifecycleConfigArn?: StudioLifecycleConfigArn;
   }
-  export type ResourceType = "TrainingJob"|"Experiment"|"ExperimentTrial"|"ExperimentTrialComponent"|"Endpoint"|"ModelPackage"|"ModelPackageGroup"|"Pipeline"|"PipelineExecution"|"FeatureGroup"|"Project"|"FeatureMetadata"|"HyperParameterTuningJob"|"ModelCard"|"Model"|string;
+  export type ResourceType = "TrainingJob"|"Experiment"|"ExperimentTrial"|"ExperimentTrialComponent"|"Endpoint"|"Model"|"ModelPackage"|"ModelPackageGroup"|"Pipeline"|"PipelineExecution"|"FeatureGroup"|"FeatureMetadata"|"Image"|"ImageVersion"|"Project"|"HyperParameterTuningJob"|"ModelCard"|string;
   export type ResponseMIMEType = string;
   export type ResponseMIMETypes = ResponseMIMEType[];
   export interface RetentionPolicy {
@@ -21131,22 +21152,22 @@ declare namespace SageMaker {
     PipelineExecution?: PipelineExecution;
     FeatureGroup?: FeatureGroup;
     /**
-     * The properties of a project.
-     */
-    Project?: Project;
-    /**
      * The feature metadata used to search through the features.
      */
     FeatureMetadata?: FeatureMetadata;
     /**
+     * The properties of a project.
+     */
+    Project?: Project;
+    /**
      * The properties of a hyperparameter tuning job.
      */
     HyperParameterTuningJob?: HyperParameterTuningJobSearchEntity;
-    Model?: ModelDashboardModel;
     /**
      * An Amazon SageMaker Model Card that documents details about a machine learning model.
      */
     ModelCard?: ModelCard;
+    Model?: ModelDashboardModel;
   }
   export interface SearchRequest {
     /**
@@ -21190,7 +21211,7 @@ declare namespace SageMaker {
   }
   export type SearchResultsList = SearchRecord[];
   export type SearchSortOrder = "Ascending"|"Descending"|string;
-  export type SecondaryStatus = "Starting"|"LaunchingMLInstances"|"PreparingTrainingStack"|"Downloading"|"DownloadingTrainingImage"|"Training"|"Uploading"|"Stopping"|"Stopped"|"MaxRuntimeExceeded"|"Completed"|"Failed"|"Interrupted"|"MaxWaitTimeExceeded"|"Updating"|"Restarting"|string;
+  export type SecondaryStatus = "Starting"|"LaunchingMLInstances"|"PreparingTrainingStack"|"Downloading"|"DownloadingTrainingImage"|"Training"|"Uploading"|"Stopping"|"Stopped"|"MaxRuntimeExceeded"|"Completed"|"Failed"|"Interrupted"|"MaxWaitTimeExceeded"|"Updating"|"Restarting"|"Pending"|string;
   export interface SecondaryStatusTransition {
     /**
      * Contains a secondary status information from a training job. Status might be one of the following secondary statuses:  InProgress     Starting - Starting the training job.    Downloading - An optional stage for algorithms that support File training input mode. It indicates that data is being downloaded to the ML storage volumes.    Training - Training is in progress.    Uploading - Training is complete and the model artifacts are being uploaded to the S3 location.    Completed     Completed - The training job has completed.    Failed     Failed - The training job has failed. The reason for the failure is returned in the FailureReason field of DescribeTrainingJobResponse.    Stopped     MaxRuntimeExceeded - The job stopped because it exceeded the maximum allowed runtime.    Stopped - The training job has stopped.    Stopping     Stopping - Stopping the training job.     We no longer support the following secondary statuses:    LaunchingMLInstances     PreparingTrainingStack     DownloadingTrainingImage   
@@ -21430,10 +21451,6 @@ declare namespace SageMaker {
      */
     LastModifiedTime?: LastModifiedTime;
     /**
-     * The name of the space that appears in the Studio UI.
-     */
-    SpaceDisplayName?: NonEmptyString64;
-    /**
      * Specifies summary information about the space settings.
      */
     SpaceSettingsSummary?: SpaceSettingsSummary;
@@ -21445,6 +21462,10 @@ declare namespace SageMaker {
      * Specifies summary information about the ownership settings.
      */
     OwnershipSettingsSummary?: OwnershipSettingsSummary;
+    /**
+     * The name of the space that appears in the Studio UI.
+     */
+    SpaceDisplayName?: NonEmptyString64;
   }
   export type SpaceEbsVolumeSizeInGb = number;
   export interface SpaceJupyterLabAppSettings {
@@ -21460,21 +21481,21 @@ declare namespace SageMaker {
     JupyterServerAppSettings?: JupyterServerAppSettings;
     KernelGatewayAppSettings?: KernelGatewayAppSettings;
     /**
-     * The settings for the JupyterLab application.
-     */
-    JupyterLabAppSettings?: SpaceJupyterLabAppSettings;
-    /**
      * The Code Editor application settings.
      */
     CodeEditorAppSettings?: SpaceCodeEditorAppSettings;
     /**
-     * The storage settings for a private space.
+     * The settings for the JupyterLab application.
      */
-    SpaceStorageSettings?: SpaceStorageSettings;
+    JupyterLabAppSettings?: SpaceJupyterLabAppSettings;
     /**
      * The type of app created within the space.
      */
     AppType?: AppType;
+    /**
+     * The storage settings for a private space.
+     */
+    SpaceStorageSettings?: SpaceStorageSettings;
     /**
      * A file system, created by you, that you assign to a space for an Amazon SageMaker Domain. Permitted users can access this file system in Amazon SageMaker Studio.
      */
@@ -21743,14 +21764,13 @@ declare namespace SageMaker {
   export type String1024 = string;
   export type String128 = string;
   export type String200 = string;
-  export type String2048 = string;
   export type String256 = string;
   export type String3072 = string;
   export type String40 = string;
   export type String64 = string;
   export type String8192 = string;
   export type StringParameterValue = string;
-  export type StudioLifecycleConfigAppType = "JupyterServer"|"KernelGateway"|"JupyterLab"|"CodeEditor"|string;
+  export type StudioLifecycleConfigAppType = "JupyterServer"|"KernelGateway"|"VSCode"|"Savitur"|"CodeEditor"|"JupyterLab"|string;
   export type StudioLifecycleConfigArn = string;
   export type StudioLifecycleConfigContent = string;
   export interface StudioLifecycleConfigDetails {
@@ -21811,7 +21831,7 @@ declare namespace SageMaker {
      */
     PropertyNameQuery?: PropertyNameQuery;
   }
-  export type TableFormat = "Glue"|"Iceberg"|string;
+  export type TableFormat = "Default"|"Glue"|"Iceberg"|string;
   export type TableName = string;
   export interface TabularJobConfig {
     /**
@@ -21865,7 +21885,7 @@ declare namespace SageMaker {
   export type TagList = Tag[];
   export type TagValue = string;
   export type TargetAttributeName = string;
-  export type TargetDevice = "lambda"|"ml_m4"|"ml_m5"|"ml_c4"|"ml_c5"|"ml_p2"|"ml_p3"|"ml_g4dn"|"ml_inf1"|"ml_inf2"|"ml_trn1"|"ml_eia2"|"jetson_tx1"|"jetson_tx2"|"jetson_nano"|"jetson_xavier"|"rasp3b"|"imx8qm"|"deeplens"|"rk3399"|"rk3288"|"aisage"|"sbe_c"|"qcs605"|"qcs603"|"sitara_am57x"|"amba_cv2"|"amba_cv22"|"amba_cv25"|"x86_win32"|"x86_win64"|"coreml"|"jacinto_tda4vm"|"imx8mplus"|string;
+  export type TargetDevice = "lambda"|"ml_m4"|"ml_m5"|"ml_m6g"|"ml_c4"|"ml_c5"|"ml_c6g"|"ml_p2"|"ml_p3"|"ml_g4dn"|"ml_inf1"|"ml_inf2"|"ml_trn1"|"ml_eia2"|"jetson_tx1"|"jetson_tx2"|"jetson_nano"|"jetson_xavier"|"rasp3b"|"rasp4b"|"imx8qm"|"deeplens"|"rk3399"|"rk3288"|"aisage"|"sbe_c"|"qcs605"|"qcs603"|"sitara_am57x"|"amba_cv2"|"amba_cv22"|"amba_cv25"|"x86_win32"|"x86_win64"|"coreml"|"jacinto_tda4vm"|"imx8mplus"|string;
   export type TargetLabelColumn = string;
   export type TargetObjectiveMetricValue = number;
   export interface TargetPlatform {
@@ -21954,6 +21974,7 @@ declare namespace SageMaker {
      * The hyperparameters used to configure and optimize the learning process of the base model. You can set any combination of the following hyperparameters for all base models. For more information on each supported hyperparameter, see Optimize the learning process of your text generation models with hyperparameters.    "epochCount": The number of times the model goes through the entire training dataset. Its value should be a string containing an integer value within the range of "1" to "10".    "batchSize": The number of data samples used in each iteration of training. Its value should be a string containing an integer value within the range of "1" to "64".    "learningRate": The step size at which a model's parameters are updated during training. Its value should be a string containing a floating-point value within the range of "0" to "1".    "learningRateWarmupSteps": The number of training steps during which the learning rate gradually increases before reaching its target or maximum value. Its value should be a string containing an integer value within the range of "0" to "250".   Here is an example where all four hyperparameters are configured.  { "epochCount":"5", "learningRate":"0.5", "batchSize": "32", "learningRateWarmupSteps": "10" } 
      */
     TextGenerationHyperParameters?: TextGenerationHyperParameters;
+    ModelAccessConfig?: ModelAccessConfig;
   }
   export interface TextGenerationResolvedAttributes {
     /**
@@ -22087,7 +22108,7 @@ declare namespace SageMaker {
   }
   export type TrainingInputMode = "Pipe"|"File"|"FastFile"|string;
   export type TrainingInstanceCount = number;
-  export type TrainingInstanceType = "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.p4d.24xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5n.xlarge"|"ml.c5n.2xlarge"|"ml.c5n.4xlarge"|"ml.c5n.9xlarge"|"ml.c5n.18xlarge"|"ml.g5.xlarge"|"ml.g5.2xlarge"|"ml.g5.4xlarge"|"ml.g5.8xlarge"|"ml.g5.16xlarge"|"ml.g5.12xlarge"|"ml.g5.24xlarge"|"ml.g5.48xlarge"|"ml.trn1.2xlarge"|"ml.trn1.32xlarge"|"ml.trn1n.32xlarge"|"ml.p5.48xlarge"|string;
+  export type TrainingInstanceType = "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.p4d.24xlarge"|"ml.p4de.24xlarge"|"ml.p5.48xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5n.xlarge"|"ml.c5n.2xlarge"|"ml.c5n.4xlarge"|"ml.c5n.9xlarge"|"ml.c5n.18xlarge"|"ml.g5.xlarge"|"ml.g5.2xlarge"|"ml.g5.4xlarge"|"ml.g5.8xlarge"|"ml.g5.16xlarge"|"ml.g5.12xlarge"|"ml.g5.24xlarge"|"ml.g5.48xlarge"|"ml.trn1.2xlarge"|"ml.trn1.32xlarge"|"ml.trn1n.32xlarge"|"ml.m6i.large"|"ml.m6i.xlarge"|"ml.m6i.2xlarge"|"ml.m6i.4xlarge"|"ml.m6i.8xlarge"|"ml.m6i.12xlarge"|"ml.m6i.16xlarge"|"ml.m6i.24xlarge"|"ml.m6i.32xlarge"|"ml.c6i.xlarge"|"ml.c6i.2xlarge"|"ml.c6i.8xlarge"|"ml.c6i.4xlarge"|"ml.c6i.12xlarge"|"ml.c6i.16xlarge"|"ml.c6i.24xlarge"|"ml.c6i.32xlarge"|string;
   export type TrainingInstanceTypes = TrainingInstanceType[];
   export interface TrainingJob {
     /**
@@ -22433,6 +22454,7 @@ declare namespace SageMaker {
     Environment?: TransformEnvironmentMap;
     TransformInput?: TransformInput;
     TransformOutput?: TransformOutput;
+    DataCaptureConfig?: BatchDataCaptureConfig;
     TransformResources?: TransformResources;
     /**
      * A timestamp that shows when the transform Job was created.
@@ -22460,7 +22482,6 @@ declare namespace SageMaker {
      * A list of tags associated with the transform job.
      */
     Tags?: TagList;
-    DataCaptureConfig?: BatchDataCaptureConfig;
   }
   export type TransformJobArn = string;
   export interface TransformJobDefinition {
@@ -22707,8 +22728,9 @@ declare namespace SageMaker {
   }
   export type TrialComponentArtifactValue = string;
   export type TrialComponentArtifacts = {[key: string]: TrialComponentArtifact};
+  export type TrialComponentKey128 = string;
   export type TrialComponentKey256 = string;
-  export type TrialComponentKey64 = string;
+  export type TrialComponentKey320 = string;
   export type TrialComponentMetricSummaries = TrialComponentMetricSummary[];
   export interface TrialComponentMetricSummary {
     /**
@@ -23030,7 +23052,7 @@ declare namespace SageMaker {
     /**
      * The new list of properties. Overwrites the current property list.
      */
-    Properties?: LineageEntityParameters;
+    Properties?: ArtifactProperties;
     /**
      * A list of properties to remove.
      */
@@ -23078,7 +23100,7 @@ declare namespace SageMaker {
     /**
      * The name of the context to update.
      */
-    ContextName: ExperimentEntityName;
+    ContextName: ContextName;
     /**
      * The new description for the context.
      */
@@ -23144,13 +23166,13 @@ declare namespace SageMaker {
      */
     DomainSettingsForUpdate?: DomainSettingsForUpdate;
     /**
-     * The default settings used to create a space within the Domain.
-     */
-    DefaultSpaceSettings?: DefaultSpaceSettings;
-    /**
      * The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Required when CreateDomain.AppNetworkAccessType is VPCOnly and DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is provided. If setting up the domain for use with RStudio, this value must be set to Service.
      */
     AppSecurityGroupManagement?: AppSecurityGroupManagement;
+    /**
+     * The default settings used to create a space within the Domain.
+     */
+    DefaultSpaceSettings?: DefaultSpaceSettings;
     /**
      * The VPC subnets that Studio uses for communication. If removing subnets, ensure there are no apps in the InService, Pending, or Deleting state.
      */
@@ -23976,13 +23998,13 @@ declare namespace SageMaker {
      */
     CanvasAppSettings?: CanvasAppSettings;
     /**
-     * The settings for the JupyterLab application.
-     */
-    JupyterLabAppSettings?: JupyterLabAppSettings;
-    /**
      * The Code Editor application settings.
      */
     CodeEditorAppSettings?: CodeEditorAppSettings;
+    /**
+     * The settings for the JupyterLab application.
+     */
+    JupyterLabAppSettings?: JupyterLabAppSettings;
     /**
      * The storage settings for a private space.
      */
