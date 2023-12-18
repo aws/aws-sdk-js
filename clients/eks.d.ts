@@ -13,21 +13,37 @@ declare class EKS extends Service {
   constructor(options?: EKS.Types.ClientConfiguration)
   config: Config & EKS.Types.ClientConfiguration;
   /**
-   * Associate encryption configuration to an existing cluster. You can use this API to enable encryption on existing clusters which do not have encryption already enabled. This allows you to implement a defense-in-depth security strategy without migrating applications to new Amazon EKS clusters.
+   * Associates an access policy and its scope to an access entry. For more information about associating access policies, see Associating and disassociating access policies to and from access entries in the Amazon EKS User Guide.
+   */
+  associateAccessPolicy(params: EKS.Types.AssociateAccessPolicyRequest, callback?: (err: AWSError, data: EKS.Types.AssociateAccessPolicyResponse) => void): Request<EKS.Types.AssociateAccessPolicyResponse, AWSError>;
+  /**
+   * Associates an access policy and its scope to an access entry. For more information about associating access policies, see Associating and disassociating access policies to and from access entries in the Amazon EKS User Guide.
+   */
+  associateAccessPolicy(callback?: (err: AWSError, data: EKS.Types.AssociateAccessPolicyResponse) => void): Request<EKS.Types.AssociateAccessPolicyResponse, AWSError>;
+  /**
+   * Associates an encryption configuration to an existing cluster. Use this API to enable encryption on existing clusters that don't already have encryption enabled. This allows you to implement a defense-in-depth security strategy without migrating applications to new Amazon EKS clusters.
    */
   associateEncryptionConfig(params: EKS.Types.AssociateEncryptionConfigRequest, callback?: (err: AWSError, data: EKS.Types.AssociateEncryptionConfigResponse) => void): Request<EKS.Types.AssociateEncryptionConfigResponse, AWSError>;
   /**
-   * Associate encryption configuration to an existing cluster. You can use this API to enable encryption on existing clusters which do not have encryption already enabled. This allows you to implement a defense-in-depth security strategy without migrating applications to new Amazon EKS clusters.
+   * Associates an encryption configuration to an existing cluster. Use this API to enable encryption on existing clusters that don't already have encryption enabled. This allows you to implement a defense-in-depth security strategy without migrating applications to new Amazon EKS clusters.
    */
   associateEncryptionConfig(callback?: (err: AWSError, data: EKS.Types.AssociateEncryptionConfigResponse) => void): Request<EKS.Types.AssociateEncryptionConfigResponse, AWSError>;
   /**
-   * Associate an identity provider configuration to a cluster. If you want to authenticate identities using an identity provider, you can create an identity provider configuration and associate it to your cluster. After configuring authentication to your cluster you can create Kubernetes roles and clusterroles to assign permissions to the roles, and then bind the roles to the identities using Kubernetes rolebindings and clusterrolebindings. For more information see Using RBAC Authorization in the Kubernetes documentation.
+   * Associates an identity provider configuration to a cluster. If you want to authenticate identities using an identity provider, you can create an identity provider configuration and associate it to your cluster. After configuring authentication to your cluster you can create Kubernetes Role and ClusterRole objects, assign permissions to them, and then bind them to the identities using Kubernetes RoleBinding and ClusterRoleBinding objects. For more information see Using RBAC Authorization in the Kubernetes documentation.
    */
   associateIdentityProviderConfig(params: EKS.Types.AssociateIdentityProviderConfigRequest, callback?: (err: AWSError, data: EKS.Types.AssociateIdentityProviderConfigResponse) => void): Request<EKS.Types.AssociateIdentityProviderConfigResponse, AWSError>;
   /**
-   * Associate an identity provider configuration to a cluster. If you want to authenticate identities using an identity provider, you can create an identity provider configuration and associate it to your cluster. After configuring authentication to your cluster you can create Kubernetes roles and clusterroles to assign permissions to the roles, and then bind the roles to the identities using Kubernetes rolebindings and clusterrolebindings. For more information see Using RBAC Authorization in the Kubernetes documentation.
+   * Associates an identity provider configuration to a cluster. If you want to authenticate identities using an identity provider, you can create an identity provider configuration and associate it to your cluster. After configuring authentication to your cluster you can create Kubernetes Role and ClusterRole objects, assign permissions to them, and then bind them to the identities using Kubernetes RoleBinding and ClusterRoleBinding objects. For more information see Using RBAC Authorization in the Kubernetes documentation.
    */
   associateIdentityProviderConfig(callback?: (err: AWSError, data: EKS.Types.AssociateIdentityProviderConfigResponse) => void): Request<EKS.Types.AssociateIdentityProviderConfigResponse, AWSError>;
+  /**
+   * Creates an access entry. An access entry allows an IAM principal to access your cluster. Access entries can replace the need to maintain entries in the aws-auth ConfigMap for authentication. You have the following options for authorizing an IAM principal to access Kubernetes objects on your cluster: Kubernetes role-based access control (RBAC), Amazon EKS, or both. Kubernetes RBAC authorization requires you to create and manage Kubernetes Role, ClusterRole, RoleBinding, and ClusterRoleBinding objects, in addition to managing access entries. If you use Amazon EKS authorization exclusively, you don't need to create and manage Kubernetes Role, ClusterRole, RoleBinding, and ClusterRoleBinding objects. For more information about access entries, see Access entries in the Amazon EKS User Guide.
+   */
+  createAccessEntry(params: EKS.Types.CreateAccessEntryRequest, callback?: (err: AWSError, data: EKS.Types.CreateAccessEntryResponse) => void): Request<EKS.Types.CreateAccessEntryResponse, AWSError>;
+  /**
+   * Creates an access entry. An access entry allows an IAM principal to access your cluster. Access entries can replace the need to maintain entries in the aws-auth ConfigMap for authentication. You have the following options for authorizing an IAM principal to access Kubernetes objects on your cluster: Kubernetes role-based access control (RBAC), Amazon EKS, or both. Kubernetes RBAC authorization requires you to create and manage Kubernetes Role, ClusterRole, RoleBinding, and ClusterRoleBinding objects, in addition to managing access entries. If you use Amazon EKS authorization exclusively, you don't need to create and manage Kubernetes Role, ClusterRole, RoleBinding, and ClusterRoleBinding objects. For more information about access entries, see Access entries in the Amazon EKS User Guide.
+   */
+  createAccessEntry(callback?: (err: AWSError, data: EKS.Types.CreateAccessEntryResponse) => void): Request<EKS.Types.CreateAccessEntryResponse, AWSError>;
   /**
    * Creates an Amazon EKS add-on. Amazon EKS add-ons help to automate the provisioning and lifecycle management of common operational software for Amazon EKS clusters. For more information, see Amazon EKS add-ons in the Amazon EKS User Guide.
    */
@@ -37,11 +53,11 @@ declare class EKS extends Service {
    */
   createAddon(callback?: (err: AWSError, data: EKS.Types.CreateAddonResponse) => void): Request<EKS.Types.CreateAddonResponse, AWSError>;
   /**
-   * Creates an Amazon EKS control plane.  The Amazon EKS control plane consists of control plane instances that run the Kubernetes software, such as etcd and the API server. The control plane runs in an account managed by Amazon Web Services, and the Kubernetes API is exposed by the Amazon EKS API server endpoint. Each Amazon EKS cluster control plane is single tenant and unique. It runs on its own set of Amazon EC2 instances. The cluster control plane is provisioned across multiple Availability Zones and fronted by an Elastic Load Balancing Network Load Balancer. Amazon EKS also provisions elastic network interfaces in your VPC subnets to provide connectivity from the control plane instances to the nodes (for example, to support kubectl exec, logs, and proxy data flows). Amazon EKS nodes run in your Amazon Web Services account and connect to your cluster's control plane over the Kubernetes API server endpoint and a certificate file that is created for your cluster. You can use the endpointPublicAccess and endpointPrivateAccess parameters to enable or disable public and private access to your cluster's Kubernetes API server endpoint. By default, public access is enabled, and private access is disabled. For more information, see Amazon EKS Cluster Endpoint Access Control in the  Amazon EKS User Guide .  You can use the logging parameter to enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren't exported to CloudWatch Logs. For more information, see Amazon EKS Cluster Control Plane Logs in the  Amazon EKS User Guide .  CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported control plane logs. For more information, see CloudWatch Pricing.  In most cases, it takes several minutes to create a cluster. After you create an Amazon EKS cluster, you must configure your Kubernetes tooling to communicate with the API server and launch nodes into your cluster. For more information, see Managing Cluster Authentication and Launching Amazon EKS nodes in the Amazon EKS User Guide.
+   * Creates an Amazon EKS control plane. The Amazon EKS control plane consists of control plane instances that run the Kubernetes software, such as etcd and the API server. The control plane runs in an account managed by Amazon Web Services, and the Kubernetes API is exposed by the Amazon EKS API server endpoint. Each Amazon EKS cluster control plane is single tenant and unique. It runs on its own set of Amazon EC2 instances. The cluster control plane is provisioned across multiple Availability Zones and fronted by an Elastic Load Balancing Network Load Balancer. Amazon EKS also provisions elastic network interfaces in your VPC subnets to provide connectivity from the control plane instances to the nodes (for example, to support kubectl exec, logs, and proxy data flows). Amazon EKS nodes run in your Amazon Web Services account and connect to your cluster's control plane over the Kubernetes API server endpoint and a certificate file that is created for your cluster. You can use the endpointPublicAccess and endpointPrivateAccess parameters to enable or disable public and private access to your cluster's Kubernetes API server endpoint. By default, public access is enabled, and private access is disabled. For more information, see Amazon EKS Cluster Endpoint Access Control in the  Amazon EKS User Guide .  You can use the logging parameter to enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren't exported to CloudWatch Logs. For more information, see Amazon EKS Cluster Control Plane Logs in the  Amazon EKS User Guide .  CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported control plane logs. For more information, see CloudWatch Pricing.  In most cases, it takes several minutes to create a cluster. After you create an Amazon EKS cluster, you must configure your Kubernetes tooling to communicate with the API server and launch nodes into your cluster. For more information, see Managing Cluster Authentication and Launching Amazon EKS nodes in the Amazon EKS User Guide.
    */
   createCluster(params: EKS.Types.CreateClusterRequest, callback?: (err: AWSError, data: EKS.Types.CreateClusterResponse) => void): Request<EKS.Types.CreateClusterResponse, AWSError>;
   /**
-   * Creates an Amazon EKS control plane.  The Amazon EKS control plane consists of control plane instances that run the Kubernetes software, such as etcd and the API server. The control plane runs in an account managed by Amazon Web Services, and the Kubernetes API is exposed by the Amazon EKS API server endpoint. Each Amazon EKS cluster control plane is single tenant and unique. It runs on its own set of Amazon EC2 instances. The cluster control plane is provisioned across multiple Availability Zones and fronted by an Elastic Load Balancing Network Load Balancer. Amazon EKS also provisions elastic network interfaces in your VPC subnets to provide connectivity from the control plane instances to the nodes (for example, to support kubectl exec, logs, and proxy data flows). Amazon EKS nodes run in your Amazon Web Services account and connect to your cluster's control plane over the Kubernetes API server endpoint and a certificate file that is created for your cluster. You can use the endpointPublicAccess and endpointPrivateAccess parameters to enable or disable public and private access to your cluster's Kubernetes API server endpoint. By default, public access is enabled, and private access is disabled. For more information, see Amazon EKS Cluster Endpoint Access Control in the  Amazon EKS User Guide .  You can use the logging parameter to enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren't exported to CloudWatch Logs. For more information, see Amazon EKS Cluster Control Plane Logs in the  Amazon EKS User Guide .  CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported control plane logs. For more information, see CloudWatch Pricing.  In most cases, it takes several minutes to create a cluster. After you create an Amazon EKS cluster, you must configure your Kubernetes tooling to communicate with the API server and launch nodes into your cluster. For more information, see Managing Cluster Authentication and Launching Amazon EKS nodes in the Amazon EKS User Guide.
+   * Creates an Amazon EKS control plane. The Amazon EKS control plane consists of control plane instances that run the Kubernetes software, such as etcd and the API server. The control plane runs in an account managed by Amazon Web Services, and the Kubernetes API is exposed by the Amazon EKS API server endpoint. Each Amazon EKS cluster control plane is single tenant and unique. It runs on its own set of Amazon EC2 instances. The cluster control plane is provisioned across multiple Availability Zones and fronted by an Elastic Load Balancing Network Load Balancer. Amazon EKS also provisions elastic network interfaces in your VPC subnets to provide connectivity from the control plane instances to the nodes (for example, to support kubectl exec, logs, and proxy data flows). Amazon EKS nodes run in your Amazon Web Services account and connect to your cluster's control plane over the Kubernetes API server endpoint and a certificate file that is created for your cluster. You can use the endpointPublicAccess and endpointPrivateAccess parameters to enable or disable public and private access to your cluster's Kubernetes API server endpoint. By default, public access is enabled, and private access is disabled. For more information, see Amazon EKS Cluster Endpoint Access Control in the  Amazon EKS User Guide .  You can use the logging parameter to enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren't exported to CloudWatch Logs. For more information, see Amazon EKS Cluster Control Plane Logs in the  Amazon EKS User Guide .  CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported control plane logs. For more information, see CloudWatch Pricing.  In most cases, it takes several minutes to create a cluster. After you create an Amazon EKS cluster, you must configure your Kubernetes tooling to communicate with the API server and launch nodes into your cluster. For more information, see Managing Cluster Authentication and Launching Amazon EKS nodes in the Amazon EKS User Guide.
    */
   createCluster(callback?: (err: AWSError, data: EKS.Types.CreateClusterResponse) => void): Request<EKS.Types.CreateClusterResponse, AWSError>;
   /**
@@ -53,43 +69,51 @@ declare class EKS extends Service {
    */
   createEksAnywhereSubscription(callback?: (err: AWSError, data: EKS.Types.CreateEksAnywhereSubscriptionResponse) => void): Request<EKS.Types.CreateEksAnywhereSubscriptionResponse, AWSError>;
   /**
-   * Creates an Fargate profile for your Amazon EKS cluster. You must have at least one Fargate profile in a cluster to be able to run pods on Fargate. The Fargate profile allows an administrator to declare which pods run on Fargate and specify which pods run on which Fargate profile. This declaration is done through the profile’s selectors. Each profile can have up to five selectors that contain a namespace and labels. A namespace is required for every selector. The label field consists of multiple optional key-value pairs. Pods that match the selectors are scheduled on Fargate. If a to-be-scheduled pod matches any of the selectors in the Fargate profile, then that pod is run on Fargate. When you create a Fargate profile, you must specify a pod execution role to use with the pods that are scheduled with the profile. This role is added to the cluster's Kubernetes Role Based Access Control (RBAC) for authorization so that the kubelet that is running on the Fargate infrastructure can register with your Amazon EKS cluster so that it can appear in your cluster as a node. The pod execution role also provides IAM permissions to the Fargate infrastructure to allow read access to Amazon ECR image repositories. For more information, see Pod Execution Role in the Amazon EKS User Guide. Fargate profiles are immutable. However, you can create a new updated profile to replace an existing profile and then delete the original after the updated profile has finished creating. If any Fargate profiles in a cluster are in the DELETING status, you must wait for that Fargate profile to finish deleting before you can create any other profiles in that cluster. For more information, see Fargate Profile in the Amazon EKS User Guide.
+   * Creates an Fargate profile for your Amazon EKS cluster. You must have at least one Fargate profile in a cluster to be able to run pods on Fargate. The Fargate profile allows an administrator to declare which pods run on Fargate and specify which pods run on which Fargate profile. This declaration is done through the profile’s selectors. Each profile can have up to five selectors that contain a namespace and labels. A namespace is required for every selector. The label field consists of multiple optional key-value pairs. Pods that match the selectors are scheduled on Fargate. If a to-be-scheduled pod matches any of the selectors in the Fargate profile, then that pod is run on Fargate. When you create a Fargate profile, you must specify a pod execution role to use with the pods that are scheduled with the profile. This role is added to the cluster's Kubernetes Role Based Access Control (RBAC) for authorization so that the kubelet that is running on the Fargate infrastructure can register with your Amazon EKS cluster so that it can appear in your cluster as a node. The pod execution role also provides IAM permissions to the Fargate infrastructure to allow read access to Amazon ECR image repositories. For more information, see Pod Execution Role in the Amazon EKS User Guide. Fargate profiles are immutable. However, you can create a new updated profile to replace an existing profile and then delete the original after the updated profile has finished creating. If any Fargate profiles in a cluster are in the DELETING status, you must wait for that Fargate profile to finish deleting before you can create any other profiles in that cluster. For more information, see Fargate profile in the Amazon EKS User Guide.
    */
   createFargateProfile(params: EKS.Types.CreateFargateProfileRequest, callback?: (err: AWSError, data: EKS.Types.CreateFargateProfileResponse) => void): Request<EKS.Types.CreateFargateProfileResponse, AWSError>;
   /**
-   * Creates an Fargate profile for your Amazon EKS cluster. You must have at least one Fargate profile in a cluster to be able to run pods on Fargate. The Fargate profile allows an administrator to declare which pods run on Fargate and specify which pods run on which Fargate profile. This declaration is done through the profile’s selectors. Each profile can have up to five selectors that contain a namespace and labels. A namespace is required for every selector. The label field consists of multiple optional key-value pairs. Pods that match the selectors are scheduled on Fargate. If a to-be-scheduled pod matches any of the selectors in the Fargate profile, then that pod is run on Fargate. When you create a Fargate profile, you must specify a pod execution role to use with the pods that are scheduled with the profile. This role is added to the cluster's Kubernetes Role Based Access Control (RBAC) for authorization so that the kubelet that is running on the Fargate infrastructure can register with your Amazon EKS cluster so that it can appear in your cluster as a node. The pod execution role also provides IAM permissions to the Fargate infrastructure to allow read access to Amazon ECR image repositories. For more information, see Pod Execution Role in the Amazon EKS User Guide. Fargate profiles are immutable. However, you can create a new updated profile to replace an existing profile and then delete the original after the updated profile has finished creating. If any Fargate profiles in a cluster are in the DELETING status, you must wait for that Fargate profile to finish deleting before you can create any other profiles in that cluster. For more information, see Fargate Profile in the Amazon EKS User Guide.
+   * Creates an Fargate profile for your Amazon EKS cluster. You must have at least one Fargate profile in a cluster to be able to run pods on Fargate. The Fargate profile allows an administrator to declare which pods run on Fargate and specify which pods run on which Fargate profile. This declaration is done through the profile’s selectors. Each profile can have up to five selectors that contain a namespace and labels. A namespace is required for every selector. The label field consists of multiple optional key-value pairs. Pods that match the selectors are scheduled on Fargate. If a to-be-scheduled pod matches any of the selectors in the Fargate profile, then that pod is run on Fargate. When you create a Fargate profile, you must specify a pod execution role to use with the pods that are scheduled with the profile. This role is added to the cluster's Kubernetes Role Based Access Control (RBAC) for authorization so that the kubelet that is running on the Fargate infrastructure can register with your Amazon EKS cluster so that it can appear in your cluster as a node. The pod execution role also provides IAM permissions to the Fargate infrastructure to allow read access to Amazon ECR image repositories. For more information, see Pod Execution Role in the Amazon EKS User Guide. Fargate profiles are immutable. However, you can create a new updated profile to replace an existing profile and then delete the original after the updated profile has finished creating. If any Fargate profiles in a cluster are in the DELETING status, you must wait for that Fargate profile to finish deleting before you can create any other profiles in that cluster. For more information, see Fargate profile in the Amazon EKS User Guide.
    */
   createFargateProfile(callback?: (err: AWSError, data: EKS.Types.CreateFargateProfileResponse) => void): Request<EKS.Types.CreateFargateProfileResponse, AWSError>;
   /**
-   * Creates a managed node group for an Amazon EKS cluster. You can only create a node group for your cluster that is equal to the current Kubernetes version for the cluster. An Amazon EKS managed node group is an Amazon EC2 Auto Scaling group and associated Amazon EC2 instances that are managed by Amazon Web Services for an Amazon EKS cluster. For more information, see Managed node groups in the Amazon EKS User Guide.  Windows AMI types are only supported for commercial Regions that support Windows Amazon EKS. 
+   * Creates a managed node group for an Amazon EKS cluster. You can only create a node group for your cluster that is equal to the current Kubernetes version for the cluster. All node groups are created with the latest AMI release version for the respective minor Kubernetes version of the cluster, unless you deploy a custom AMI using a launch template. For more information about using launch templates, see Launch template support. An Amazon EKS managed node group is an Amazon EC2 Auto Scaling group and associated Amazon EC2 instances that are managed by Amazon Web Services for an Amazon EKS cluster. For more information, see Managed node groups in the Amazon EKS User Guide.  Windows AMI types are only supported for commercial Amazon Web Services Regions that support Windows on Amazon EKS. 
    */
   createNodegroup(params: EKS.Types.CreateNodegroupRequest, callback?: (err: AWSError, data: EKS.Types.CreateNodegroupResponse) => void): Request<EKS.Types.CreateNodegroupResponse, AWSError>;
   /**
-   * Creates a managed node group for an Amazon EKS cluster. You can only create a node group for your cluster that is equal to the current Kubernetes version for the cluster. An Amazon EKS managed node group is an Amazon EC2 Auto Scaling group and associated Amazon EC2 instances that are managed by Amazon Web Services for an Amazon EKS cluster. For more information, see Managed node groups in the Amazon EKS User Guide.  Windows AMI types are only supported for commercial Regions that support Windows Amazon EKS. 
+   * Creates a managed node group for an Amazon EKS cluster. You can only create a node group for your cluster that is equal to the current Kubernetes version for the cluster. All node groups are created with the latest AMI release version for the respective minor Kubernetes version of the cluster, unless you deploy a custom AMI using a launch template. For more information about using launch templates, see Launch template support. An Amazon EKS managed node group is an Amazon EC2 Auto Scaling group and associated Amazon EC2 instances that are managed by Amazon Web Services for an Amazon EKS cluster. For more information, see Managed node groups in the Amazon EKS User Guide.  Windows AMI types are only supported for commercial Amazon Web Services Regions that support Windows on Amazon EKS. 
    */
   createNodegroup(callback?: (err: AWSError, data: EKS.Types.CreateNodegroupResponse) => void): Request<EKS.Types.CreateNodegroupResponse, AWSError>;
   /**
-   * Creates an EKS Pod Identity association between a service account in an Amazon EKS cluster and an IAM role with EKS Pod Identity. Use EKS Pod Identity to give temporary IAM credentials to pods and the credentials are rotated automatically. Amazon EKS Pod Identity associations provide the ability to manage credentials for your applications, similar to the way that 7EC2l instance profiles provide credentials to Amazon EC2 instances. If a pod uses a service account that has an association, Amazon EKS sets environment variables in the containers of the pod. The environment variables configure the Amazon Web Services SDKs, including the Command Line Interface, to use the EKS Pod Identity credentials. Pod Identity is a simpler method than IAM roles for service accounts, as this method doesn't use OIDC identity providers. Additionally, you can configure a role for Pod Identity once, and reuse it across clusters.
+   * Creates an EKS Pod Identity association between a service account in an Amazon EKS cluster and an IAM role with EKS Pod Identity. Use EKS Pod Identity to give temporary IAM credentials to pods and the credentials are rotated automatically. Amazon EKS Pod Identity associations provide the ability to manage credentials for your applications, similar to the way that Amazon EC2 instance profiles provide credentials to Amazon EC2 instances. If a pod uses a service account that has an association, Amazon EKS sets environment variables in the containers of the pod. The environment variables configure the Amazon Web Services SDKs, including the Command Line Interface, to use the EKS Pod Identity credentials. Pod Identity is a simpler method than IAM roles for service accounts, as this method doesn't use OIDC identity providers. Additionally, you can configure a role for Pod Identity once, and reuse it across clusters.
    */
   createPodIdentityAssociation(params: EKS.Types.CreatePodIdentityAssociationRequest, callback?: (err: AWSError, data: EKS.Types.CreatePodIdentityAssociationResponse) => void): Request<EKS.Types.CreatePodIdentityAssociationResponse, AWSError>;
   /**
-   * Creates an EKS Pod Identity association between a service account in an Amazon EKS cluster and an IAM role with EKS Pod Identity. Use EKS Pod Identity to give temporary IAM credentials to pods and the credentials are rotated automatically. Amazon EKS Pod Identity associations provide the ability to manage credentials for your applications, similar to the way that 7EC2l instance profiles provide credentials to Amazon EC2 instances. If a pod uses a service account that has an association, Amazon EKS sets environment variables in the containers of the pod. The environment variables configure the Amazon Web Services SDKs, including the Command Line Interface, to use the EKS Pod Identity credentials. Pod Identity is a simpler method than IAM roles for service accounts, as this method doesn't use OIDC identity providers. Additionally, you can configure a role for Pod Identity once, and reuse it across clusters.
+   * Creates an EKS Pod Identity association between a service account in an Amazon EKS cluster and an IAM role with EKS Pod Identity. Use EKS Pod Identity to give temporary IAM credentials to pods and the credentials are rotated automatically. Amazon EKS Pod Identity associations provide the ability to manage credentials for your applications, similar to the way that Amazon EC2 instance profiles provide credentials to Amazon EC2 instances. If a pod uses a service account that has an association, Amazon EKS sets environment variables in the containers of the pod. The environment variables configure the Amazon Web Services SDKs, including the Command Line Interface, to use the EKS Pod Identity credentials. Pod Identity is a simpler method than IAM roles for service accounts, as this method doesn't use OIDC identity providers. Additionally, you can configure a role for Pod Identity once, and reuse it across clusters.
    */
   createPodIdentityAssociation(callback?: (err: AWSError, data: EKS.Types.CreatePodIdentityAssociationResponse) => void): Request<EKS.Types.CreatePodIdentityAssociationResponse, AWSError>;
   /**
-   * Delete an Amazon EKS add-on. When you remove the add-on, it will also be deleted from the cluster. You can always manually start an add-on on the cluster using the Kubernetes API.
+   * Deletes an access entry. Deleting an access entry of a type other than Standard can cause your cluster to function improperly. If you delete an access entry in error, you can recreate it.
+   */
+  deleteAccessEntry(params: EKS.Types.DeleteAccessEntryRequest, callback?: (err: AWSError, data: EKS.Types.DeleteAccessEntryResponse) => void): Request<EKS.Types.DeleteAccessEntryResponse, AWSError>;
+  /**
+   * Deletes an access entry. Deleting an access entry of a type other than Standard can cause your cluster to function improperly. If you delete an access entry in error, you can recreate it.
+   */
+  deleteAccessEntry(callback?: (err: AWSError, data: EKS.Types.DeleteAccessEntryResponse) => void): Request<EKS.Types.DeleteAccessEntryResponse, AWSError>;
+  /**
+   * Deletes an Amazon EKS add-on. When you remove an add-on, it's deleted from the cluster. You can always manually start an add-on on the cluster using the Kubernetes API.
    */
   deleteAddon(params: EKS.Types.DeleteAddonRequest, callback?: (err: AWSError, data: EKS.Types.DeleteAddonResponse) => void): Request<EKS.Types.DeleteAddonResponse, AWSError>;
   /**
-   * Delete an Amazon EKS add-on. When you remove the add-on, it will also be deleted from the cluster. You can always manually start an add-on on the cluster using the Kubernetes API.
+   * Deletes an Amazon EKS add-on. When you remove an add-on, it's deleted from the cluster. You can always manually start an add-on on the cluster using the Kubernetes API.
    */
   deleteAddon(callback?: (err: AWSError, data: EKS.Types.DeleteAddonResponse) => void): Request<EKS.Types.DeleteAddonResponse, AWSError>;
   /**
-   * Deletes the Amazon EKS cluster control plane. If you have active services in your cluster that are associated with a load balancer, you must delete those services before deleting the cluster so that the load balancers are deleted properly. Otherwise, you can have orphaned resources in your VPC that prevent you from being able to delete the VPC. For more information, see Deleting a Cluster in the Amazon EKS User Guide. If you have managed node groups or Fargate profiles attached to the cluster, you must delete them first. For more information, see DeleteNodegroup and DeleteFargateProfile.
+   * Deletes an Amazon EKS cluster control plane. If you have active services in your cluster that are associated with a load balancer, you must delete those services before deleting the cluster so that the load balancers are deleted properly. Otherwise, you can have orphaned resources in your VPC that prevent you from being able to delete the VPC. For more information, see Deleting a cluster in the Amazon EKS User Guide. If you have managed node groups or Fargate profiles attached to the cluster, you must delete them first. For more information, see DeleteNodgroup and DeleteFargateProfile.
    */
   deleteCluster(params: EKS.Types.DeleteClusterRequest, callback?: (err: AWSError, data: EKS.Types.DeleteClusterResponse) => void): Request<EKS.Types.DeleteClusterResponse, AWSError>;
   /**
-   * Deletes the Amazon EKS cluster control plane. If you have active services in your cluster that are associated with a load balancer, you must delete those services before deleting the cluster so that the load balancers are deleted properly. Otherwise, you can have orphaned resources in your VPC that prevent you from being able to delete the VPC. For more information, see Deleting a Cluster in the Amazon EKS User Guide. If you have managed node groups or Fargate profiles attached to the cluster, you must delete them first. For more information, see DeleteNodegroup and DeleteFargateProfile.
+   * Deletes an Amazon EKS cluster control plane. If you have active services in your cluster that are associated with a load balancer, you must delete those services before deleting the cluster so that the load balancers are deleted properly. Otherwise, you can have orphaned resources in your VPC that prevent you from being able to delete the VPC. For more information, see Deleting a cluster in the Amazon EKS User Guide. If you have managed node groups or Fargate profiles attached to the cluster, you must delete them first. For more information, see DeleteNodgroup and DeleteFargateProfile.
    */
   deleteCluster(callback?: (err: AWSError, data: EKS.Types.DeleteClusterResponse) => void): Request<EKS.Types.DeleteClusterResponse, AWSError>;
   /**
@@ -101,19 +125,19 @@ declare class EKS extends Service {
    */
   deleteEksAnywhereSubscription(callback?: (err: AWSError, data: EKS.Types.DeleteEksAnywhereSubscriptionResponse) => void): Request<EKS.Types.DeleteEksAnywhereSubscriptionResponse, AWSError>;
   /**
-   * Deletes an Fargate profile. When you delete a Fargate profile, any pods running on Fargate that were created with the profile are deleted. If those pods match another Fargate profile, then they are scheduled on Fargate with that profile. If they no longer match any Fargate profiles, then they are not scheduled on Fargate and they may remain in a pending state. Only one Fargate profile in a cluster can be in the DELETING status at a time. You must wait for a Fargate profile to finish deleting before you can delete any other profiles in that cluster.
+   * Deletes an Fargate profile. When you delete a Fargate profile, any Pod running on Fargate that was created with the profile is deleted. If the Pod matches another Fargate profile, then it is scheduled on Fargate with that profile. If it no longer matches any Fargate profiles, then it's not scheduled on Fargate and may remain in a pending state. Only one Fargate profile in a cluster can be in the DELETING status at a time. You must wait for a Fargate profile to finish deleting before you can delete any other profiles in that cluster.
    */
   deleteFargateProfile(params: EKS.Types.DeleteFargateProfileRequest, callback?: (err: AWSError, data: EKS.Types.DeleteFargateProfileResponse) => void): Request<EKS.Types.DeleteFargateProfileResponse, AWSError>;
   /**
-   * Deletes an Fargate profile. When you delete a Fargate profile, any pods running on Fargate that were created with the profile are deleted. If those pods match another Fargate profile, then they are scheduled on Fargate with that profile. If they no longer match any Fargate profiles, then they are not scheduled on Fargate and they may remain in a pending state. Only one Fargate profile in a cluster can be in the DELETING status at a time. You must wait for a Fargate profile to finish deleting before you can delete any other profiles in that cluster.
+   * Deletes an Fargate profile. When you delete a Fargate profile, any Pod running on Fargate that was created with the profile is deleted. If the Pod matches another Fargate profile, then it is scheduled on Fargate with that profile. If it no longer matches any Fargate profiles, then it's not scheduled on Fargate and may remain in a pending state. Only one Fargate profile in a cluster can be in the DELETING status at a time. You must wait for a Fargate profile to finish deleting before you can delete any other profiles in that cluster.
    */
   deleteFargateProfile(callback?: (err: AWSError, data: EKS.Types.DeleteFargateProfileResponse) => void): Request<EKS.Types.DeleteFargateProfileResponse, AWSError>;
   /**
-   * Deletes an Amazon EKS node group for a cluster.
+   * Deletes a managed node group.
    */
   deleteNodegroup(params: EKS.Types.DeleteNodegroupRequest, callback?: (err: AWSError, data: EKS.Types.DeleteNodegroupResponse) => void): Request<EKS.Types.DeleteNodegroupResponse, AWSError>;
   /**
-   * Deletes an Amazon EKS node group for a cluster.
+   * Deletes a managed node group.
    */
   deleteNodegroup(callback?: (err: AWSError, data: EKS.Types.DeleteNodegroupResponse) => void): Request<EKS.Types.DeleteNodegroupResponse, AWSError>;
   /**
@@ -125,13 +149,21 @@ declare class EKS extends Service {
    */
   deletePodIdentityAssociation(callback?: (err: AWSError, data: EKS.Types.DeletePodIdentityAssociationResponse) => void): Request<EKS.Types.DeletePodIdentityAssociationResponse, AWSError>;
   /**
-   * Deregisters a connected cluster to remove it from the Amazon EKS control plane.
+   * Deregisters a connected cluster to remove it from the Amazon EKS control plane. A connected cluster is a Kubernetes cluster that you've connected to your control plane using the Amazon EKS Connector.
    */
   deregisterCluster(params: EKS.Types.DeregisterClusterRequest, callback?: (err: AWSError, data: EKS.Types.DeregisterClusterResponse) => void): Request<EKS.Types.DeregisterClusterResponse, AWSError>;
   /**
-   * Deregisters a connected cluster to remove it from the Amazon EKS control plane.
+   * Deregisters a connected cluster to remove it from the Amazon EKS control plane. A connected cluster is a Kubernetes cluster that you've connected to your control plane using the Amazon EKS Connector.
    */
   deregisterCluster(callback?: (err: AWSError, data: EKS.Types.DeregisterClusterResponse) => void): Request<EKS.Types.DeregisterClusterResponse, AWSError>;
+  /**
+   * Describes an access entry.
+   */
+  describeAccessEntry(params: EKS.Types.DescribeAccessEntryRequest, callback?: (err: AWSError, data: EKS.Types.DescribeAccessEntryResponse) => void): Request<EKS.Types.DescribeAccessEntryResponse, AWSError>;
+  /**
+   * Describes an access entry.
+   */
+  describeAccessEntry(callback?: (err: AWSError, data: EKS.Types.DescribeAccessEntryResponse) => void): Request<EKS.Types.DescribeAccessEntryResponse, AWSError>;
   /**
    * Describes an Amazon EKS add-on.
    */
@@ -149,19 +181,19 @@ declare class EKS extends Service {
    */
   describeAddonConfiguration(callback?: (err: AWSError, data: EKS.Types.DescribeAddonConfigurationResponse) => void): Request<EKS.Types.DescribeAddonConfigurationResponse, AWSError>;
   /**
-   * Describes the versions for an add-on. Information such as the Kubernetes versions that you can use the add-on with, the owner, publisher, and the type of the add-on are returned. 
+   * Describes the versions for an add-on. Information such as the Kubernetes versions that you can use the add-on with, the owner, publisher, and the type of the add-on are returned.
    */
   describeAddonVersions(params: EKS.Types.DescribeAddonVersionsRequest, callback?: (err: AWSError, data: EKS.Types.DescribeAddonVersionsResponse) => void): Request<EKS.Types.DescribeAddonVersionsResponse, AWSError>;
   /**
-   * Describes the versions for an add-on. Information such as the Kubernetes versions that you can use the add-on with, the owner, publisher, and the type of the add-on are returned. 
+   * Describes the versions for an add-on. Information such as the Kubernetes versions that you can use the add-on with, the owner, publisher, and the type of the add-on are returned.
    */
   describeAddonVersions(callback?: (err: AWSError, data: EKS.Types.DescribeAddonVersionsResponse) => void): Request<EKS.Types.DescribeAddonVersionsResponse, AWSError>;
   /**
-   * Returns descriptive information about an Amazon EKS cluster. The API server endpoint and certificate authority data returned by this operation are required for kubelet and kubectl to communicate with your Kubernetes API server. For more information, see Create a kubeconfig for Amazon EKS.  The API server endpoint and certificate authority data aren't available until the cluster reaches the ACTIVE state. 
+   * Describes an Amazon EKS cluster. The API server endpoint and certificate authority data returned by this operation are required for kubelet and kubectl to communicate with your Kubernetes API server. For more information, see Creating or updating a kubeconfig file for an Amazon EKS cluster.  The API server endpoint and certificate authority data aren't available until the cluster reaches the ACTIVE state. 
    */
   describeCluster(params: EKS.Types.DescribeClusterRequest, callback?: (err: AWSError, data: EKS.Types.DescribeClusterResponse) => void): Request<EKS.Types.DescribeClusterResponse, AWSError>;
   /**
-   * Returns descriptive information about an Amazon EKS cluster. The API server endpoint and certificate authority data returned by this operation are required for kubelet and kubectl to communicate with your Kubernetes API server. For more information, see Create a kubeconfig for Amazon EKS.  The API server endpoint and certificate authority data aren't available until the cluster reaches the ACTIVE state. 
+   * Describes an Amazon EKS cluster. The API server endpoint and certificate authority data returned by this operation are required for kubelet and kubectl to communicate with your Kubernetes API server. For more information, see Creating or updating a kubeconfig file for an Amazon EKS cluster.  The API server endpoint and certificate authority data aren't available until the cluster reaches the ACTIVE state. 
    */
   describeCluster(callback?: (err: AWSError, data: EKS.Types.DescribeClusterResponse) => void): Request<EKS.Types.DescribeClusterResponse, AWSError>;
   /**
@@ -173,27 +205,27 @@ declare class EKS extends Service {
    */
   describeEksAnywhereSubscription(callback?: (err: AWSError, data: EKS.Types.DescribeEksAnywhereSubscriptionResponse) => void): Request<EKS.Types.DescribeEksAnywhereSubscriptionResponse, AWSError>;
   /**
-   * Returns descriptive information about an Fargate profile.
+   * Describes an Fargate profile.
    */
   describeFargateProfile(params: EKS.Types.DescribeFargateProfileRequest, callback?: (err: AWSError, data: EKS.Types.DescribeFargateProfileResponse) => void): Request<EKS.Types.DescribeFargateProfileResponse, AWSError>;
   /**
-   * Returns descriptive information about an Fargate profile.
+   * Describes an Fargate profile.
    */
   describeFargateProfile(callback?: (err: AWSError, data: EKS.Types.DescribeFargateProfileResponse) => void): Request<EKS.Types.DescribeFargateProfileResponse, AWSError>;
   /**
-   * Returns descriptive information about an identity provider configuration.
+   * Describes an identity provider configuration.
    */
   describeIdentityProviderConfig(params: EKS.Types.DescribeIdentityProviderConfigRequest, callback?: (err: AWSError, data: EKS.Types.DescribeIdentityProviderConfigResponse) => void): Request<EKS.Types.DescribeIdentityProviderConfigResponse, AWSError>;
   /**
-   * Returns descriptive information about an identity provider configuration.
+   * Describes an identity provider configuration.
    */
   describeIdentityProviderConfig(callback?: (err: AWSError, data: EKS.Types.DescribeIdentityProviderConfigResponse) => void): Request<EKS.Types.DescribeIdentityProviderConfigResponse, AWSError>;
   /**
-   * Returns descriptive information about an Amazon EKS node group.
+   * Describes a managed node group.
    */
   describeNodegroup(params: EKS.Types.DescribeNodegroupRequest, callback?: (err: AWSError, data: EKS.Types.DescribeNodegroupResponse) => void): Request<EKS.Types.DescribeNodegroupResponse, AWSError>;
   /**
-   * Returns descriptive information about an Amazon EKS node group.
+   * Describes a managed node group.
    */
   describeNodegroup(callback?: (err: AWSError, data: EKS.Types.DescribeNodegroupResponse) => void): Request<EKS.Types.DescribeNodegroupResponse, AWSError>;
   /**
@@ -205,13 +237,21 @@ declare class EKS extends Service {
    */
   describePodIdentityAssociation(callback?: (err: AWSError, data: EKS.Types.DescribePodIdentityAssociationResponse) => void): Request<EKS.Types.DescribePodIdentityAssociationResponse, AWSError>;
   /**
-   * Returns descriptive information about an update against your Amazon EKS cluster or associated managed node group or Amazon EKS add-on. When the status of the update is Succeeded, the update is complete. If an update fails, the status is Failed, and an error detail explains the reason for the failure.
+   * Describes an update to an Amazon EKS resource. When the status of the update is Succeeded, the update is complete. If an update fails, the status is Failed, and an error detail explains the reason for the failure.
    */
   describeUpdate(params: EKS.Types.DescribeUpdateRequest, callback?: (err: AWSError, data: EKS.Types.DescribeUpdateResponse) => void): Request<EKS.Types.DescribeUpdateResponse, AWSError>;
   /**
-   * Returns descriptive information about an update against your Amazon EKS cluster or associated managed node group or Amazon EKS add-on. When the status of the update is Succeeded, the update is complete. If an update fails, the status is Failed, and an error detail explains the reason for the failure.
+   * Describes an update to an Amazon EKS resource. When the status of the update is Succeeded, the update is complete. If an update fails, the status is Failed, and an error detail explains the reason for the failure.
    */
   describeUpdate(callback?: (err: AWSError, data: EKS.Types.DescribeUpdateResponse) => void): Request<EKS.Types.DescribeUpdateResponse, AWSError>;
+  /**
+   * Disassociates an access policy from an access entry.
+   */
+  disassociateAccessPolicy(params: EKS.Types.DisassociateAccessPolicyRequest, callback?: (err: AWSError, data: EKS.Types.DisassociateAccessPolicyResponse) => void): Request<EKS.Types.DisassociateAccessPolicyResponse, AWSError>;
+  /**
+   * Disassociates an access policy from an access entry.
+   */
+  disassociateAccessPolicy(callback?: (err: AWSError, data: EKS.Types.DisassociateAccessPolicyResponse) => void): Request<EKS.Types.DisassociateAccessPolicyResponse, AWSError>;
   /**
    * Disassociates an identity provider configuration from a cluster. If you disassociate an identity provider from your cluster, users included in the provider can no longer access the cluster. However, you can still access the cluster with IAM principals.
    */
@@ -221,6 +261,22 @@ declare class EKS extends Service {
    */
   disassociateIdentityProviderConfig(callback?: (err: AWSError, data: EKS.Types.DisassociateIdentityProviderConfigResponse) => void): Request<EKS.Types.DisassociateIdentityProviderConfigResponse, AWSError>;
   /**
+   * Lists the access entries for your cluster.
+   */
+  listAccessEntries(params: EKS.Types.ListAccessEntriesRequest, callback?: (err: AWSError, data: EKS.Types.ListAccessEntriesResponse) => void): Request<EKS.Types.ListAccessEntriesResponse, AWSError>;
+  /**
+   * Lists the access entries for your cluster.
+   */
+  listAccessEntries(callback?: (err: AWSError, data: EKS.Types.ListAccessEntriesResponse) => void): Request<EKS.Types.ListAccessEntriesResponse, AWSError>;
+  /**
+   * Lists the available access policies. 
+   */
+  listAccessPolicies(params: EKS.Types.ListAccessPoliciesRequest, callback?: (err: AWSError, data: EKS.Types.ListAccessPoliciesResponse) => void): Request<EKS.Types.ListAccessPoliciesResponse, AWSError>;
+  /**
+   * Lists the available access policies. 
+   */
+  listAccessPolicies(callback?: (err: AWSError, data: EKS.Types.ListAccessPoliciesResponse) => void): Request<EKS.Types.ListAccessPoliciesResponse, AWSError>;
+  /**
    * Lists the installed add-ons.
    */
   listAddons(params: EKS.Types.ListAddonsRequest, callback?: (err: AWSError, data: EKS.Types.ListAddonsResponse) => void): Request<EKS.Types.ListAddonsResponse, AWSError>;
@@ -229,11 +285,19 @@ declare class EKS extends Service {
    */
   listAddons(callback?: (err: AWSError, data: EKS.Types.ListAddonsResponse) => void): Request<EKS.Types.ListAddonsResponse, AWSError>;
   /**
-   * Lists the Amazon EKS clusters in your Amazon Web Services account in the specified Region.
+   * Lists the access policies associated with an access entry.
+   */
+  listAssociatedAccessPolicies(params: EKS.Types.ListAssociatedAccessPoliciesRequest, callback?: (err: AWSError, data: EKS.Types.ListAssociatedAccessPoliciesResponse) => void): Request<EKS.Types.ListAssociatedAccessPoliciesResponse, AWSError>;
+  /**
+   * Lists the access policies associated with an access entry.
+   */
+  listAssociatedAccessPolicies(callback?: (err: AWSError, data: EKS.Types.ListAssociatedAccessPoliciesResponse) => void): Request<EKS.Types.ListAssociatedAccessPoliciesResponse, AWSError>;
+  /**
+   * Lists the Amazon EKS clusters in your Amazon Web Services account in the specified Amazon Web Services Region.
    */
   listClusters(params: EKS.Types.ListClustersRequest, callback?: (err: AWSError, data: EKS.Types.ListClustersResponse) => void): Request<EKS.Types.ListClustersResponse, AWSError>;
   /**
-   * Lists the Amazon EKS clusters in your Amazon Web Services account in the specified Region.
+   * Lists the Amazon EKS clusters in your Amazon Web Services account in the specified Amazon Web Services Region.
    */
   listClusters(callback?: (err: AWSError, data: EKS.Types.ListClustersResponse) => void): Request<EKS.Types.ListClustersResponse, AWSError>;
   /**
@@ -245,27 +309,27 @@ declare class EKS extends Service {
    */
   listEksAnywhereSubscriptions(callback?: (err: AWSError, data: EKS.Types.ListEksAnywhereSubscriptionsResponse) => void): Request<EKS.Types.ListEksAnywhereSubscriptionsResponse, AWSError>;
   /**
-   * Lists the Fargate profiles associated with the specified cluster in your Amazon Web Services account in the specified Region.
+   * Lists the Fargate profiles associated with the specified cluster in your Amazon Web Services account in the specified Amazon Web Services Region.
    */
   listFargateProfiles(params: EKS.Types.ListFargateProfilesRequest, callback?: (err: AWSError, data: EKS.Types.ListFargateProfilesResponse) => void): Request<EKS.Types.ListFargateProfilesResponse, AWSError>;
   /**
-   * Lists the Fargate profiles associated with the specified cluster in your Amazon Web Services account in the specified Region.
+   * Lists the Fargate profiles associated with the specified cluster in your Amazon Web Services account in the specified Amazon Web Services Region.
    */
   listFargateProfiles(callback?: (err: AWSError, data: EKS.Types.ListFargateProfilesResponse) => void): Request<EKS.Types.ListFargateProfilesResponse, AWSError>;
   /**
-   * A list of identity provider configurations.
+   * Lists the identity provider configurations for your cluster.
    */
   listIdentityProviderConfigs(params: EKS.Types.ListIdentityProviderConfigsRequest, callback?: (err: AWSError, data: EKS.Types.ListIdentityProviderConfigsResponse) => void): Request<EKS.Types.ListIdentityProviderConfigsResponse, AWSError>;
   /**
-   * A list of identity provider configurations.
+   * Lists the identity provider configurations for your cluster.
    */
   listIdentityProviderConfigs(callback?: (err: AWSError, data: EKS.Types.ListIdentityProviderConfigsResponse) => void): Request<EKS.Types.ListIdentityProviderConfigsResponse, AWSError>;
   /**
-   * Lists the Amazon EKS managed node groups associated with the specified cluster in your Amazon Web Services account in the specified Region. Self-managed node groups are not listed.
+   * Lists the managed node groups associated with the specified cluster in your Amazon Web Services account in the specified Amazon Web Services Region. Self-managed node groups aren't listed.
    */
   listNodegroups(params: EKS.Types.ListNodegroupsRequest, callback?: (err: AWSError, data: EKS.Types.ListNodegroupsResponse) => void): Request<EKS.Types.ListNodegroupsResponse, AWSError>;
   /**
-   * Lists the Amazon EKS managed node groups associated with the specified cluster in your Amazon Web Services account in the specified Region. Self-managed node groups are not listed.
+   * Lists the managed node groups associated with the specified cluster in your Amazon Web Services account in the specified Amazon Web Services Region. Self-managed node groups aren't listed.
    */
   listNodegroups(callback?: (err: AWSError, data: EKS.Types.ListNodegroupsResponse) => void): Request<EKS.Types.ListNodegroupsResponse, AWSError>;
   /**
@@ -285,37 +349,45 @@ declare class EKS extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: EKS.Types.ListTagsForResourceResponse) => void): Request<EKS.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists the updates associated with an Amazon EKS cluster or managed node group in your Amazon Web Services account, in the specified Region.
+   * Lists the updates associated with an Amazon EKS resource in your Amazon Web Services account, in the specified Amazon Web Services Region.
    */
   listUpdates(params: EKS.Types.ListUpdatesRequest, callback?: (err: AWSError, data: EKS.Types.ListUpdatesResponse) => void): Request<EKS.Types.ListUpdatesResponse, AWSError>;
   /**
-   * Lists the updates associated with an Amazon EKS cluster or managed node group in your Amazon Web Services account, in the specified Region.
+   * Lists the updates associated with an Amazon EKS resource in your Amazon Web Services account, in the specified Amazon Web Services Region.
    */
   listUpdates(callback?: (err: AWSError, data: EKS.Types.ListUpdatesResponse) => void): Request<EKS.Types.ListUpdatesResponse, AWSError>;
   /**
-   * Connects a Kubernetes cluster to the Amazon EKS control plane.  Any Kubernetes cluster can be connected to the Amazon EKS control plane to view current information about the cluster and its nodes.  Cluster connection requires two steps. First, send a  RegisterClusterRequest  to add it to the Amazon EKS control plane. Second, a Manifest containing the activationID and activationCode must be applied to the Kubernetes cluster through it's native provider to provide visibility. After the Manifest is updated and applied, then the connected cluster is visible to the Amazon EKS control plane. If the Manifest is not applied within three days, then the connected cluster will no longer be visible and must be deregistered. See DeregisterCluster.
+   * Connects a Kubernetes cluster to the Amazon EKS control plane.  Any Kubernetes cluster can be connected to the Amazon EKS control plane to view current information about the cluster and its nodes.  Cluster connection requires two steps. First, send a  RegisterClusterRequest  to add it to the Amazon EKS control plane. Second, a Manifest containing the activationID and activationCode must be applied to the Kubernetes cluster through it's native provider to provide visibility. After the manifest is updated and applied, the connected cluster is visible to the Amazon EKS control plane. If the manifest isn't applied within three days, the connected cluster will no longer be visible and must be deregistered using DeregisterCluster.
    */
   registerCluster(params: EKS.Types.RegisterClusterRequest, callback?: (err: AWSError, data: EKS.Types.RegisterClusterResponse) => void): Request<EKS.Types.RegisterClusterResponse, AWSError>;
   /**
-   * Connects a Kubernetes cluster to the Amazon EKS control plane.  Any Kubernetes cluster can be connected to the Amazon EKS control plane to view current information about the cluster and its nodes.  Cluster connection requires two steps. First, send a  RegisterClusterRequest  to add it to the Amazon EKS control plane. Second, a Manifest containing the activationID and activationCode must be applied to the Kubernetes cluster through it's native provider to provide visibility. After the Manifest is updated and applied, then the connected cluster is visible to the Amazon EKS control plane. If the Manifest is not applied within three days, then the connected cluster will no longer be visible and must be deregistered. See DeregisterCluster.
+   * Connects a Kubernetes cluster to the Amazon EKS control plane.  Any Kubernetes cluster can be connected to the Amazon EKS control plane to view current information about the cluster and its nodes.  Cluster connection requires two steps. First, send a  RegisterClusterRequest  to add it to the Amazon EKS control plane. Second, a Manifest containing the activationID and activationCode must be applied to the Kubernetes cluster through it's native provider to provide visibility. After the manifest is updated and applied, the connected cluster is visible to the Amazon EKS control plane. If the manifest isn't applied within three days, the connected cluster will no longer be visible and must be deregistered using DeregisterCluster.
    */
   registerCluster(callback?: (err: AWSError, data: EKS.Types.RegisterClusterResponse) => void): Request<EKS.Types.RegisterClusterResponse, AWSError>;
   /**
-   * Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well. Tags that you create for Amazon EKS resources do not propagate to any other resources associated with the cluster. For example, if you tag a cluster with this operation, that tag does not automatically propagate to the subnets and nodes associated with the cluster.
+   * Associates the specified tags to an Amazon EKS resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they aren't changed. When a resource is deleted, the tags associated with that resource are also deleted. Tags that you create for Amazon EKS resources don't propagate to any other resources associated with the cluster. For example, if you tag a cluster with this operation, that tag doesn't automatically propagate to the subnets and nodes associated with the cluster.
    */
   tagResource(params: EKS.Types.TagResourceRequest, callback?: (err: AWSError, data: EKS.Types.TagResourceResponse) => void): Request<EKS.Types.TagResourceResponse, AWSError>;
   /**
-   * Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well. Tags that you create for Amazon EKS resources do not propagate to any other resources associated with the cluster. For example, if you tag a cluster with this operation, that tag does not automatically propagate to the subnets and nodes associated with the cluster.
+   * Associates the specified tags to an Amazon EKS resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they aren't changed. When a resource is deleted, the tags associated with that resource are also deleted. Tags that you create for Amazon EKS resources don't propagate to any other resources associated with the cluster. For example, if you tag a cluster with this operation, that tag doesn't automatically propagate to the subnets and nodes associated with the cluster.
    */
   tagResource(callback?: (err: AWSError, data: EKS.Types.TagResourceResponse) => void): Request<EKS.Types.TagResourceResponse, AWSError>;
   /**
-   * Deletes specified tags from a resource.
+   * Deletes specified tags from an Amazon EKS resource.
    */
   untagResource(params: EKS.Types.UntagResourceRequest, callback?: (err: AWSError, data: EKS.Types.UntagResourceResponse) => void): Request<EKS.Types.UntagResourceResponse, AWSError>;
   /**
-   * Deletes specified tags from a resource.
+   * Deletes specified tags from an Amazon EKS resource.
    */
   untagResource(callback?: (err: AWSError, data: EKS.Types.UntagResourceResponse) => void): Request<EKS.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Updates an access entry.
+   */
+  updateAccessEntry(params: EKS.Types.UpdateAccessEntryRequest, callback?: (err: AWSError, data: EKS.Types.UpdateAccessEntryResponse) => void): Request<EKS.Types.UpdateAccessEntryResponse, AWSError>;
+  /**
+   * Updates an access entry.
+   */
+  updateAccessEntry(callback?: (err: AWSError, data: EKS.Types.UpdateAccessEntryResponse) => void): Request<EKS.Types.UpdateAccessEntryResponse, AWSError>;
   /**
    * Updates an Amazon EKS add-on.
    */
@@ -325,11 +397,11 @@ declare class EKS extends Service {
    */
   updateAddon(callback?: (err: AWSError, data: EKS.Types.UpdateAddonResponse) => void): Request<EKS.Types.UpdateAddonResponse, AWSError>;
   /**
-   * Updates an Amazon EKS cluster configuration. Your cluster continues to function during the update. The response output includes an update ID that you can use to track the status of your cluster update with the DescribeUpdate API operation. You can use this API operation to enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren't exported to CloudWatch Logs. For more information, see Amazon EKS Cluster Control Plane Logs in the  Amazon EKS User Guide .  CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported control plane logs. For more information, see CloudWatch Pricing.  You can also use this API operation to enable or disable public and private access to your cluster's Kubernetes API server endpoint. By default, public access is enabled, and private access is disabled. For more information, see Amazon EKS cluster endpoint access control in the  Amazon EKS User Guide . You can also use this API operation to choose different subnets and security groups for the cluster. You must specify at least two subnets that are in different Availability Zones. You can't change which VPC the subnets are from, the subnets must be in the same VPC as the subnets that the cluster was created with. For more information about the VPC requirements, see https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html in the  Amazon EKS User Guide . Cluster updates are asynchronous, and they should finish within a few minutes. During an update, the cluster status moves to UPDATING (this status transition is eventually consistent). When the update is complete (either Failed or Successful), the cluster status moves to Active.
+   * Updates an Amazon EKS cluster configuration. Your cluster continues to function during the update. The response output includes an update ID that you can use to track the status of your cluster update with DescribeUpdate"/&gt;. You can use this API operation to enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren't exported to CloudWatch Logs. For more information, see Amazon EKS Cluster control plane logs in the  Amazon EKS User Guide .  CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported control plane logs. For more information, see CloudWatch Pricing.  You can also use this API operation to enable or disable public and private access to your cluster's Kubernetes API server endpoint. By default, public access is enabled, and private access is disabled. For more information, see Amazon EKS cluster endpoint access control in the  Amazon EKS User Guide . You can also use this API operation to choose different subnets and security groups for the cluster. You must specify at least two subnets that are in different Availability Zones. You can't change which VPC the subnets are from, the subnets must be in the same VPC as the subnets that the cluster was created with. For more information about the VPC requirements, see https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html in the  Amazon EKS User Guide . Cluster updates are asynchronous, and they should finish within a few minutes. During an update, the cluster status moves to UPDATING (this status transition is eventually consistent). When the update is complete (either Failed or Successful), the cluster status moves to Active.
    */
   updateClusterConfig(params: EKS.Types.UpdateClusterConfigRequest, callback?: (err: AWSError, data: EKS.Types.UpdateClusterConfigResponse) => void): Request<EKS.Types.UpdateClusterConfigResponse, AWSError>;
   /**
-   * Updates an Amazon EKS cluster configuration. Your cluster continues to function during the update. The response output includes an update ID that you can use to track the status of your cluster update with the DescribeUpdate API operation. You can use this API operation to enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren't exported to CloudWatch Logs. For more information, see Amazon EKS Cluster Control Plane Logs in the  Amazon EKS User Guide .  CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported control plane logs. For more information, see CloudWatch Pricing.  You can also use this API operation to enable or disable public and private access to your cluster's Kubernetes API server endpoint. By default, public access is enabled, and private access is disabled. For more information, see Amazon EKS cluster endpoint access control in the  Amazon EKS User Guide . You can also use this API operation to choose different subnets and security groups for the cluster. You must specify at least two subnets that are in different Availability Zones. You can't change which VPC the subnets are from, the subnets must be in the same VPC as the subnets that the cluster was created with. For more information about the VPC requirements, see https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html in the  Amazon EKS User Guide . Cluster updates are asynchronous, and they should finish within a few minutes. During an update, the cluster status moves to UPDATING (this status transition is eventually consistent). When the update is complete (either Failed or Successful), the cluster status moves to Active.
+   * Updates an Amazon EKS cluster configuration. Your cluster continues to function during the update. The response output includes an update ID that you can use to track the status of your cluster update with DescribeUpdate"/&gt;. You can use this API operation to enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren't exported to CloudWatch Logs. For more information, see Amazon EKS Cluster control plane logs in the  Amazon EKS User Guide .  CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported control plane logs. For more information, see CloudWatch Pricing.  You can also use this API operation to enable or disable public and private access to your cluster's Kubernetes API server endpoint. By default, public access is enabled, and private access is disabled. For more information, see Amazon EKS cluster endpoint access control in the  Amazon EKS User Guide . You can also use this API operation to choose different subnets and security groups for the cluster. You must specify at least two subnets that are in different Availability Zones. You can't change which VPC the subnets are from, the subnets must be in the same VPC as the subnets that the cluster was created with. For more information about the VPC requirements, see https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html in the  Amazon EKS User Guide . Cluster updates are asynchronous, and they should finish within a few minutes. During an update, the cluster status moves to UPDATING (this status transition is eventually consistent). When the update is complete (either Failed or Successful), the cluster status moves to Active.
    */
   updateClusterConfig(callback?: (err: AWSError, data: EKS.Types.UpdateClusterConfigResponse) => void): Request<EKS.Types.UpdateClusterConfigResponse, AWSError>;
   /**
@@ -357,19 +429,19 @@ declare class EKS extends Service {
    */
   updateNodegroupConfig(callback?: (err: AWSError, data: EKS.Types.UpdateNodegroupConfigResponse) => void): Request<EKS.Types.UpdateNodegroupConfigResponse, AWSError>;
   /**
-   * Updates the Kubernetes version or AMI version of an Amazon EKS managed node group. You can update a node group using a launch template only if the node group was originally deployed with a launch template. If you need to update a custom AMI in a node group that was deployed with a launch template, then update your custom AMI, specify the new ID in a new version of the launch template, and then update the node group to the new version of the launch template. If you update without a launch template, then you can update to the latest available AMI version of a node group's current Kubernetes version by not specifying a Kubernetes version in the request. You can update to the latest AMI version of your cluster's current Kubernetes version by specifying your cluster's Kubernetes version in the request. For information about Linux versions, see Amazon EKS optimized Amazon Linux AMI versions in the Amazon EKS User Guide. For information about Windows versions, see Amazon EKS optimized Windows AMI versions in the Amazon EKS User Guide.  You cannot roll back a node group to an earlier Kubernetes version or AMI version. When a node in a managed node group is terminated due to a scaling action or update, the pods in that node are drained first. Amazon EKS attempts to drain the nodes gracefully and will fail if it is unable to do so. You can force the update if Amazon EKS is unable to drain the nodes as a result of a pod disruption budget issue.
+   * Updates the Kubernetes version or AMI version of an Amazon EKS managed node group. You can update a node group using a launch template only if the node group was originally deployed with a launch template. If you need to update a custom AMI in a node group that was deployed with a launch template, then update your custom AMI, specify the new ID in a new version of the launch template, and then update the node group to the new version of the launch template. If you update without a launch template, then you can update to the latest available AMI version of a node group's current Kubernetes version by not specifying a Kubernetes version in the request. You can update to the latest AMI version of your cluster's current Kubernetes version by specifying your cluster's Kubernetes version in the request. For information about Linux versions, see Amazon EKS optimized Amazon Linux AMI versions in the Amazon EKS User Guide. For information about Windows versions, see Amazon EKS optimized Windows AMI versions in the Amazon EKS User Guide.  You cannot roll back a node group to an earlier Kubernetes version or AMI version. When a node in a managed node group is terminated due to a scaling action or update, every Pod on that node is drained first. Amazon EKS attempts to drain the nodes gracefully and will fail if it is unable to do so. You can force the update if Amazon EKS is unable to drain the nodes as a result of a Pod disruption budget issue.
    */
   updateNodegroupVersion(params: EKS.Types.UpdateNodegroupVersionRequest, callback?: (err: AWSError, data: EKS.Types.UpdateNodegroupVersionResponse) => void): Request<EKS.Types.UpdateNodegroupVersionResponse, AWSError>;
   /**
-   * Updates the Kubernetes version or AMI version of an Amazon EKS managed node group. You can update a node group using a launch template only if the node group was originally deployed with a launch template. If you need to update a custom AMI in a node group that was deployed with a launch template, then update your custom AMI, specify the new ID in a new version of the launch template, and then update the node group to the new version of the launch template. If you update without a launch template, then you can update to the latest available AMI version of a node group's current Kubernetes version by not specifying a Kubernetes version in the request. You can update to the latest AMI version of your cluster's current Kubernetes version by specifying your cluster's Kubernetes version in the request. For information about Linux versions, see Amazon EKS optimized Amazon Linux AMI versions in the Amazon EKS User Guide. For information about Windows versions, see Amazon EKS optimized Windows AMI versions in the Amazon EKS User Guide.  You cannot roll back a node group to an earlier Kubernetes version or AMI version. When a node in a managed node group is terminated due to a scaling action or update, the pods in that node are drained first. Amazon EKS attempts to drain the nodes gracefully and will fail if it is unable to do so. You can force the update if Amazon EKS is unable to drain the nodes as a result of a pod disruption budget issue.
+   * Updates the Kubernetes version or AMI version of an Amazon EKS managed node group. You can update a node group using a launch template only if the node group was originally deployed with a launch template. If you need to update a custom AMI in a node group that was deployed with a launch template, then update your custom AMI, specify the new ID in a new version of the launch template, and then update the node group to the new version of the launch template. If you update without a launch template, then you can update to the latest available AMI version of a node group's current Kubernetes version by not specifying a Kubernetes version in the request. You can update to the latest AMI version of your cluster's current Kubernetes version by specifying your cluster's Kubernetes version in the request. For information about Linux versions, see Amazon EKS optimized Amazon Linux AMI versions in the Amazon EKS User Guide. For information about Windows versions, see Amazon EKS optimized Windows AMI versions in the Amazon EKS User Guide.  You cannot roll back a node group to an earlier Kubernetes version or AMI version. When a node in a managed node group is terminated due to a scaling action or update, every Pod on that node is drained first. Amazon EKS attempts to drain the nodes gracefully and will fail if it is unable to do so. You can force the update if Amazon EKS is unable to drain the nodes as a result of a Pod disruption budget issue.
    */
   updateNodegroupVersion(callback?: (err: AWSError, data: EKS.Types.UpdateNodegroupVersionResponse) => void): Request<EKS.Types.UpdateNodegroupVersionResponse, AWSError>;
   /**
-   * Updates a EKS Pod Identity association. Only the IAM role can be changed; an association can't be moved between clusters, namespaces, or service accounts. If you need to edit the namespace or service account, you need to remove the association and then create a new association with your desired settings.
+   * Updates a EKS Pod Identity association. Only the IAM role can be changed; an association can't be moved between clusters, namespaces, or service accounts. If you need to edit the namespace or service account, you need to delete the association and then create a new association with your desired settings.
    */
   updatePodIdentityAssociation(params: EKS.Types.UpdatePodIdentityAssociationRequest, callback?: (err: AWSError, data: EKS.Types.UpdatePodIdentityAssociationResponse) => void): Request<EKS.Types.UpdatePodIdentityAssociationResponse, AWSError>;
   /**
-   * Updates a EKS Pod Identity association. Only the IAM role can be changed; an association can't be moved between clusters, namespaces, or service accounts. If you need to edit the namespace or service account, you need to remove the association and then create a new association with your desired settings.
+   * Updates a EKS Pod Identity association. Only the IAM role can be changed; an association can't be moved between clusters, namespaces, or service accounts. If you need to edit the namespace or service account, you need to delete the association and then create a new association with your desired settings.
    */
   updatePodIdentityAssociation(callback?: (err: AWSError, data: EKS.Types.UpdatePodIdentityAssociationResponse) => void): Request<EKS.Types.UpdatePodIdentityAssociationResponse, AWSError>;
   /**
@@ -439,13 +511,83 @@ declare class EKS extends Service {
 }
 declare namespace EKS {
   export type AMITypes = "AL2_x86_64"|"AL2_x86_64_GPU"|"AL2_ARM_64"|"CUSTOM"|"BOTTLEROCKET_ARM_64"|"BOTTLEROCKET_x86_64"|"BOTTLEROCKET_ARM_64_NVIDIA"|"BOTTLEROCKET_x86_64_NVIDIA"|"WINDOWS_CORE_2019_x86_64"|"WINDOWS_FULL_2019_x86_64"|"WINDOWS_CORE_2022_x86_64"|"WINDOWS_FULL_2022_x86_64"|string;
+  export interface AccessConfigResponse {
+    /**
+     * Specifies whether or not the cluster creator IAM principal was set as a cluster admin access entry during cluster creation time.
+     */
+    bootstrapClusterCreatorAdminPermissions?: BoxedBoolean;
+    /**
+     * The current authentication mode of the cluster.
+     */
+    authenticationMode?: AuthenticationMode;
+  }
+  export interface AccessEntry {
+    /**
+     * The name of your cluster.
+     */
+    clusterName?: String;
+    /**
+     * The ARN of the IAM principal for the access entry. If you ever delete the IAM principal with this ARN, the access entry isn't automatically deleted. We recommend that you delete the access entry with an ARN for an IAM principal that you delete. If you don't delete the access entry and ever recreate the IAM principal, even if it has the same ARN, the access entry won't work. This is because even though the ARN is the same for the recreated IAM principal, the roleID or userID (you can see this with the Security Token Service GetCallerIdentity API) is different for the recreated IAM principal than it was for the original IAM principal. Even though you don't see the IAM principal's roleID or userID for an access entry, Amazon EKS stores it with the access entry.
+     */
+    principalArn?: String;
+    /**
+     * A name that you've specified in a Kubernetes RoleBinding or ClusterRoleBinding object so that Kubernetes authorizes the principalARN access to cluster objects.
+     */
+    kubernetesGroups?: StringList;
+    /**
+     * The ARN of the access entry.
+     */
+    accessEntryArn?: String;
+    /**
+     * The Unix epoch timestamp at object creation.
+     */
+    createdAt?: Timestamp;
+    /**
+     * The Unix epoch timestamp for the last modification to the object.
+     */
+    modifiedAt?: Timestamp;
+    /**
+     * Metadata that assists with categorization and organization. Each tag consists of a key and an optional value. You define both. Tags don't propagate to any other cluster or Amazon Web Services resources.
+     */
+    tags?: TagMap;
+    /**
+     * The name of a user that can authenticate to your cluster.
+     */
+    username?: String;
+    /**
+     * The type of the access entry.
+     */
+    type?: String;
+  }
+  export type AccessPoliciesList = AccessPolicy[];
+  export interface AccessPolicy {
+    /**
+     * The name of the access policy.
+     */
+    name?: String;
+    /**
+     * The ARN of the access policy.
+     */
+    arn?: String;
+  }
+  export interface AccessScope {
+    /**
+     * The scope type of an access policy.
+     */
+    type?: AccessScopeType;
+    /**
+     * A Kubernetes namespace that an access policy is scoped to. A value is required if you specified namespace for Type.
+     */
+    namespaces?: StringList;
+  }
+  export type AccessScopeType = "cluster"|"namespace"|string;
   export interface Addon {
     /**
      * The name of the add-on.
      */
     addonName?: String;
     /**
-     * The name of the cluster.
+     * The name of your cluster.
      */
     clusterName?: ClusterName;
     /**
@@ -465,19 +607,19 @@ declare namespace EKS {
      */
     addonArn?: String;
     /**
-     * The date and time that the add-on was created.
+     * The Unix epoch timestamp at object creation.
      */
     createdAt?: Timestamp;
     /**
-     * The date and time that the add-on was last modified.
+     * The Unix epoch timestamp for the last modification to the object.
      */
     modifiedAt?: Timestamp;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role that's bound to the Kubernetes service account that the add-on uses.
+     * The Amazon Resource Name (ARN) of the IAM role that's bound to the Kubernetes ServiceAccount object that the add-on uses.
      */
     serviceAccountRoleArn?: String;
     /**
-     * The metadata that you apply to the add-on to assist with categorization and organization. Each tag consists of a key and an optional value. You define both. Add-on tags do not propagate to any other resources associated with the cluster. 
+     * Metadata that assists with categorization and organization. Each tag consists of a key and an optional value. You define both. Tags don't propagate to any other cluster or Amazon Web Services resources.
      */
     tags?: TagMap;
     /**
@@ -566,9 +708,41 @@ declare namespace EKS {
   }
   export type AddonVersionInfoList = AddonVersionInfo[];
   export type Addons = AddonInfo[];
+  export interface AssociateAccessPolicyRequest {
+    /**
+     * The name of your cluster.
+     */
+    clusterName: String;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM user or role for the AccessEntry that you're associating the access policy to. 
+     */
+    principalArn: String;
+    /**
+     * The ARN of the AccessPolicy that you're associating. For a list of ARNs, use ListAccessPolicies.
+     */
+    policyArn: String;
+    /**
+     * The scope for the AccessPolicy. You can scope access policies to an entire cluster or to specific Kubernetes namespaces.
+     */
+    accessScope: AccessScope;
+  }
+  export interface AssociateAccessPolicyResponse {
+    /**
+     * The name of your cluster.
+     */
+    clusterName?: String;
+    /**
+     * The ARN of the IAM principal for the AccessEntry.
+     */
+    principalArn?: String;
+    /**
+     * The AccessPolicy and scope associated to the AccessEntry.
+     */
+    associatedAccessPolicy?: AssociatedAccessPolicy;
+  }
   export interface AssociateEncryptionConfigRequest {
     /**
-     * The name of the cluster that you are associating with encryption configuration.
+     * The name of your cluster.
      */
     clusterName: String;
     /**
@@ -576,7 +750,7 @@ declare namespace EKS {
      */
     encryptionConfig: EncryptionConfigList;
     /**
-     * The client request token you are using with the encryption configuration.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
     clientRequestToken?: String;
   }
@@ -585,7 +759,7 @@ declare namespace EKS {
   }
   export interface AssociateIdentityProviderConfigRequest {
     /**
-     * The name of the cluster to associate the configuration to.
+     * The name of your cluster.
      */
     clusterName: String;
     /**
@@ -593,11 +767,11 @@ declare namespace EKS {
      */
     oidc: OidcIdentityProviderConfigRequest;
     /**
-     * The metadata to apply to the configuration to assist with categorization and organization. Each tag consists of a key and an optional value. You define both.
+     * Metadata that assists with categorization and organization. Each tag consists of a key and an optional value. You define both. Tags don't propagate to any other cluster or Amazon Web Services resources.
      */
     tags?: TagMap;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
     clientRequestToken?: String;
   }
@@ -608,6 +782,26 @@ declare namespace EKS {
      */
     tags?: TagMap;
   }
+  export type AssociatedAccessPoliciesList = AssociatedAccessPolicy[];
+  export interface AssociatedAccessPolicy {
+    /**
+     * The ARN of the AccessPolicy.
+     */
+    policyArn?: String;
+    /**
+     * The scope of the access policy.
+     */
+    accessScope?: AccessScope;
+    /**
+     * The date and time the AccessPolicy was associated with an AccessEntry.
+     */
+    associatedAt?: Timestamp;
+    /**
+     * The Unix epoch timestamp for the last modification to the object.
+     */
+    modifiedAt?: Timestamp;
+  }
+  export type AuthenticationMode = "API"|"API_AND_CONFIG_MAP"|"CONFIG_MAP"|string;
   export interface AutoScalingGroup {
     /**
      * The name of the Auto Scaling group associated with an Amazon EKS managed node group.
@@ -628,7 +822,7 @@ declare namespace EKS {
   }
   export interface Cluster {
     /**
-     * The name of the cluster.
+     * The name of your cluster.
      */
     name?: String;
     /**
@@ -636,7 +830,7 @@ declare namespace EKS {
      */
     arn?: String;
     /**
-     * The Unix epoch timestamp in seconds for when the cluster was created.
+     * The Unix epoch timestamp at object creation.
      */
     createdAt?: Timestamp;
     /**
@@ -652,7 +846,7 @@ declare namespace EKS {
      */
     roleArn?: String;
     /**
-     * The VPC configuration used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see Cluster VPC Considerations and Cluster Security Group Considerations in the Amazon EKS User Guide.
+     * The VPC configuration used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see Cluster VPC considerations and Cluster security group considerations in the Amazon EKS User Guide.
      */
     resourcesVpcConfig?: VpcConfigResponse;
     /**
@@ -676,15 +870,15 @@ declare namespace EKS {
      */
     certificateAuthority?: Certificate;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
     clientRequestToken?: String;
     /**
-     * The platform version of your Amazon EKS cluster. For more information, see Platform Versions in the  Amazon EKS User Guide .
+     * The platform version of your Amazon EKS cluster. For more information about clusters deployed on the Amazon Web Services Cloud, see Platform versions in the  Amazon EKS User Guide . For more information about local clusters deployed on an Outpost, see Amazon EKS local cluster platform versions in the  Amazon EKS User Guide .
      */
     platformVersion?: String;
     /**
-     * The metadata that you apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value. You define both. Cluster tags do not propagate to any other resources associated with the cluster.
+     * Metadata that assists with categorization and organization. Each tag consists of a key and an optional value. You define both. Tags don't propagate to any other cluster or Amazon Web Services resources.
      */
     tags?: TagMap;
     /**
@@ -707,6 +901,10 @@ declare namespace EKS {
      * An object representing the configuration of your local Amazon EKS cluster on an Amazon Web Services Outpost. This object isn't available for clusters on the Amazon Web Services cloud.
      */
     outpostConfig?: OutpostConfigResponse;
+    /**
+     * The access configuration for the cluster.
+     */
+    accessConfig?: AccessConfigResponse;
   }
   export interface ClusterHealth {
     /**
@@ -792,13 +990,56 @@ declare namespace EKS {
      */
     groupName?: String;
   }
+  export interface CreateAccessConfigRequest {
+    /**
+     * Specifies whether or not the cluster creator IAM principal was set as a cluster admin access entry during cluster creation time. The default value is true.
+     */
+    bootstrapClusterCreatorAdminPermissions?: BoxedBoolean;
+    /**
+     * The desired authentication mode for the cluster. If you create a cluster by using the EKS API, Amazon Web Services SDKs, or CloudFormation, the default is CONFIG_MAP. If you create the cluster by using the Amazon Web Services Management Console, the default value is API_AND_CONFIG_MAP.
+     */
+    authenticationMode?: AuthenticationMode;
+  }
+  export interface CreateAccessEntryRequest {
+    /**
+     * The name of your cluster.
+     */
+    clusterName: String;
+    /**
+     * The ARN of the IAM principal for the AccessEntry. You can specify one ARN for each access entry. You can't specify the same ARN in more than one access entry. This value can't be changed after access entry creation.  IAM best practices recommend using IAM roles with temporary credentials, rather than IAM users with long-term credentials. 
+     */
+    principalArn: String;
+    /**
+     * The value for name that you've specified for kind: Group as a subject in a Kubernetes RoleBinding or ClusterRoleBinding object. Amazon EKS doesn't confirm that the value for name exists in any bindings on your cluster. You can specify one or more names. Kubernetes authorizes the principalArn of the access entry to access any cluster objects that you've specified in a Kubernetes Role or ClusterRole object that is also specified in a binding's roleRef. For more information about creating Kubernetes RoleBinding, ClusterRoleBinding, Role, or ClusterRole objects, see Using RBAC Authorization in the Kubernetes documentation. If you want Amazon EKS to authorize the principalArn (instead of, or in addition to Kubernetes authorizing the principalArn), you can associate one or more access policies to the access entry using AssociateAccessPolicy. If you associate any access policies, the principalARN has all permissions assigned in the associated access policies and all permissions in any Kubernetes Role or ClusterRole objects that the group names are bound to.
+     */
+    kubernetesGroups?: StringList;
+    /**
+     * Metadata that assists with categorization and organization. Each tag consists of a key and an optional value. You define both. Tags don't propagate to any other cluster or Amazon Web Services resources.
+     */
+    tags?: TagMap;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    clientRequestToken?: String;
+    /**
+     * The username to authenticate to Kubernetes with. We recommend not specifying a username and letting Amazon EKS specify it for you. For more information about the value Amazon EKS specifies for you, or constraints before specifying your own username, see Creating access entries in the Amazon EKS User Guide.
+     */
+    username?: String;
+    /**
+     * If the principalArn is for an IAM role that's used for self-managed Amazon EC2 nodes, specify EC2_LINUX or EC2_WINDOWS. Amazon EKS grants the necessary permissions to the node for you. If the principalArn is for any other purpose, specify STANDARD. If you don't specify a value, Amazon EKS sets the value to STANDARD. It's unnecessary to create access entries for IAM roles used with Fargate profiles or managed Amazon EC2 nodes, because Amazon EKS creates entries in the aws-auth ConfigMap for the roles. You can't change this value once you've created the access entry. If you set the value to EC2_LINUX or EC2_WINDOWS, you can't specify values for kubernetesGroups, or associate an AccessPolicy to the access entry.
+     */
+    type?: String;
+  }
+  export interface CreateAccessEntryResponse {
+    accessEntry?: AccessEntry;
+  }
   export interface CreateAddonRequest {
     /**
-     * The name of the cluster to create the add-on for.
+     * The name of your cluster.
      */
     clusterName: ClusterName;
     /**
-     * The name of the add-on. The name must match one of the names that  DescribeAddonVersions  returns.
+     * The name of the add-on. The name must match one of the names returned by DescribeAddonVersions.
      */
     addonName: String;
     /**
@@ -818,11 +1059,11 @@ declare namespace EKS {
      */
     clientRequestToken?: String;
     /**
-     * The metadata to apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value. You define both.
+     * Metadata that assists with categorization and organization. Each tag consists of a key and an optional value. You define both. Tags don't propagate to any other cluster or Amazon Web Services resources.
      */
     tags?: TagMap;
     /**
-     * The set of configuration values for the add-on that's created. The values that you provide are validated against the schema in  DescribeAddonConfiguration .
+     * The set of configuration values for the add-on that's created. The values that you provide are validated against the schema returned by DescribeAddonConfiguration.
      */
     configurationValues?: String;
   }
@@ -855,11 +1096,11 @@ declare namespace EKS {
      */
     logging?: Logging;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
     clientRequestToken?: String;
     /**
-     * The metadata to apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value. You define both.
+     * Metadata that assists with categorization and organization. Each tag consists of a key and an optional value. You define both. Tags don't propagate to any other cluster or Amazon Web Services resources.
      */
     tags?: TagMap;
     /**
@@ -870,6 +1111,10 @@ declare namespace EKS {
      * An object representing the configuration of your local Amazon EKS cluster on an Amazon Web Services Outpost. Before creating a local cluster on an Outpost, review Local clusters for Amazon EKS on Amazon Web Services Outposts in the Amazon EKS User Guide. This object isn't available for creating Amazon EKS clusters on the Amazon Web Services cloud.
      */
     outpostConfig?: OutpostConfigRequest;
+    /**
+     * The access configuration for the cluster.
+     */
+    accessConfig?: CreateAccessConfigRequest;
   }
   export interface CreateClusterResponse {
     /**
@@ -899,7 +1144,7 @@ declare namespace EKS {
      */
     autoRenew?: Boolean;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
     clientRequestToken?: String;
     /**
@@ -919,27 +1164,27 @@ declare namespace EKS {
      */
     fargateProfileName: String;
     /**
-     * The name of the Amazon EKS cluster to apply the Fargate profile to.
+     * The name of your cluster.
      */
     clusterName: String;
     /**
-     * The Amazon Resource Name (ARN) of the pod execution role to use for pods that match the selectors in the Fargate profile. The pod execution role allows Fargate infrastructure to register with your cluster as a node, and it provides read access to Amazon ECR image repositories. For more information, see Pod Execution Role in the Amazon EKS User Guide.
+     * The Amazon Resource Name (ARN) of the Pod execution role to use for a Pod that matches the selectors in the Fargate profile. The Pod execution role allows Fargate infrastructure to register with your cluster as a node, and it provides read access to Amazon ECR image repositories. For more information, see  Pod execution role in the Amazon EKS User Guide.
      */
     podExecutionRoleArn: String;
     /**
-     * The IDs of subnets to launch your pods into. At this time, pods running on Fargate are not assigned public IP addresses, so only private subnets (with no direct route to an Internet Gateway) are accepted for this parameter.
+     * The IDs of subnets to launch a Pod into. A Pod running on Fargate isn't assigned a public IP address, so only private subnets (with no direct route to an Internet Gateway) are accepted for this parameter.
      */
     subnets?: StringList;
     /**
-     * The selectors to match for pods to use this Fargate profile. Each selector must have an associated namespace. Optionally, you can also specify labels for a namespace. You may specify up to five selectors in a Fargate profile.
+     * The selectors to match for a Pod to use this Fargate profile. Each selector must have an associated Kubernetes namespace. Optionally, you can also specify labels for a namespace. You may specify up to five selectors in a Fargate profile.
      */
     selectors?: FargateProfileSelectors;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
     clientRequestToken?: String;
     /**
-     * The metadata to apply to the Fargate profile to assist with categorization and organization. Each tag consists of a key and an optional value. You define both. Fargate profile tags do not propagate to any other resources associated with the Fargate profile, such as the pods that are scheduled with it.
+     * Metadata that assists with categorization and organization. Each tag consists of a key and an optional value. You define both. Tags don't propagate to any other cluster or Amazon Web Services resources.
      */
     tags?: TagMap;
   }
@@ -951,7 +1196,7 @@ declare namespace EKS {
   }
   export interface CreateNodegroupRequest {
     /**
-     * The name of the cluster to create the node group in.
+     * The name of your cluster.
      */
     clusterName: String;
     /**
@@ -987,7 +1232,7 @@ declare namespace EKS {
      */
     nodeRole: String;
     /**
-     * The Kubernetes labels to be applied to the nodes in the node group when they are created.
+     * The Kubernetes labels to apply to the nodes in the node group when they are created.
      */
     labels?: labelsMap;
     /**
@@ -995,11 +1240,11 @@ declare namespace EKS {
      */
     taints?: taintsList;
     /**
-     * The metadata to apply to the node group to assist with categorization and organization. Each tag consists of a key and an optional value. You define both. Node group tags do not propagate to any other resources associated with the node group, such as the Amazon EC2 instances or subnets.
+     * Metadata that assists with categorization and organization. Each tag consists of a key and an optional value. You define both. Tags don't propagate to any other cluster or Amazon Web Services resources.
      */
     tags?: TagMap;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
     clientRequestToken?: String;
     /**
@@ -1047,11 +1292,11 @@ declare namespace EKS {
      */
     roleArn: String;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
     clientRequestToken?: String;
     /**
-     * The metadata that you apply to a resource to assist with categorization and organization. Each tag consists of a key and an optional value. You define both. The following basic restrictions apply to tags:   Maximum number of tags per resource – 50   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length – 128 Unicode characters in UTF-8   Maximum value length – 256 Unicode characters in UTF-8   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case-sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.  
+     * Metadata that assists with categorization and organization. Each tag consists of a key and an optional value. You define both. Tags don't propagate to any other cluster or Amazon Web Services resources. The following basic restrictions apply to tags:   Maximum number of tags per resource – 50   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length – 128 Unicode characters in UTF-8   Maximum value length – 256 Unicode characters in UTF-8   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case-sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.  
      */
     tags?: TagMap;
   }
@@ -1061,9 +1306,21 @@ declare namespace EKS {
      */
     association?: PodIdentityAssociation;
   }
+  export interface DeleteAccessEntryRequest {
+    /**
+     * The name of your cluster.
+     */
+    clusterName: String;
+    /**
+     * The ARN of the IAM principal for the AccessEntry.
+     */
+    principalArn: String;
+  }
+  export interface DeleteAccessEntryResponse {
+  }
   export interface DeleteAddonRequest {
     /**
-     * The name of the cluster to delete the add-on from.
+     * The name of your cluster.
      */
     clusterName: ClusterName;
     /**
@@ -1104,7 +1361,7 @@ declare namespace EKS {
   }
   export interface DeleteFargateProfileRequest {
     /**
-     * The name of the Amazon EKS cluster associated with the Fargate profile to delete.
+     * The name of your cluster.
      */
     clusterName: String;
     /**
@@ -1120,7 +1377,7 @@ declare namespace EKS {
   }
   export interface DeleteNodegroupRequest {
     /**
-     * The name of the Amazon EKS cluster that is associated with your node group.
+     * The name of your cluster.
      */
     clusterName: String;
     /**
@@ -1159,9 +1416,25 @@ declare namespace EKS {
   export interface DeregisterClusterResponse {
     cluster?: Cluster;
   }
+  export interface DescribeAccessEntryRequest {
+    /**
+     * The name of your cluster.
+     */
+    clusterName: String;
+    /**
+     * The ARN of the IAM principal for the AccessEntry.
+     */
+    principalArn: String;
+  }
+  export interface DescribeAccessEntryResponse {
+    /**
+     * Information about the access entry.
+     */
+    accessEntry?: AccessEntry;
+  }
   export interface DescribeAddonConfigurationRequest {
     /**
-     * The name of the add-on. The name must match one of the names that  DescribeAddonVersions  returns.
+     * The name of the add-on. The name must match one of the names returned by DescribeAddonVersions.
      */
     addonName: String;
     /**
@@ -1179,13 +1452,13 @@ declare namespace EKS {
      */
     addonVersion?: String;
     /**
-     * A JSON schema that's used to validate the configuration values that you provide when an addon is created or updated.
+     * A JSON schema that's used to validate the configuration values you provide when an add-on is created or updated.
      */
     configurationSchema?: String;
   }
   export interface DescribeAddonRequest {
     /**
-     * The name of the cluster.
+     * The name of your cluster.
      */
     clusterName: ClusterName;
     /**
@@ -1202,11 +1475,11 @@ declare namespace EKS {
      */
     kubernetesVersion?: String;
     /**
-     * The maximum number of results to return.
+     * The maximum number of results, returned in paginated output. You receive maxResults in a single page, along with a nextToken response element. You can see the remaining results of the initial request by sending another request with the returned nextToken value. This value can be between 1 and 100. If you don't use this parameter, 100 results and a nextToken value, if applicable, are returned.
      */
     maxResults?: DescribeAddonVersionsRequestMaxResults;
     /**
-     * The nextToken value returned from a previous paginated DescribeAddonVersionsRequest where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value.  This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes. 
+     * The nextToken value returned from a previous paginated request, where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.  This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes. 
      */
     nextToken?: String;
     /**
@@ -1239,7 +1512,7 @@ declare namespace EKS {
   }
   export interface DescribeClusterRequest {
     /**
-     * The name of the cluster to describe.
+     * The name of your cluster.
      */
     name: String;
   }
@@ -1263,7 +1536,7 @@ declare namespace EKS {
   }
   export interface DescribeFargateProfileRequest {
     /**
-     * The name of the Amazon EKS cluster associated with the Fargate profile.
+     * The name of your cluster.
      */
     clusterName: String;
     /**
@@ -1279,7 +1552,7 @@ declare namespace EKS {
   }
   export interface DescribeIdentityProviderConfigRequest {
     /**
-     * The cluster name that the identity provider configuration is associated to.
+     * The name of your cluster.
      */
     clusterName: String;
     /**
@@ -1295,7 +1568,7 @@ declare namespace EKS {
   }
   export interface DescribeNodegroupRequest {
     /**
-     * The name of the Amazon EKS cluster associated with the node group.
+     * The name of your cluster.
      */
     clusterName: String;
     /**
@@ -1349,9 +1622,25 @@ declare namespace EKS {
      */
     update?: Update;
   }
+  export interface DisassociateAccessPolicyRequest {
+    /**
+     * The name of your cluster.
+     */
+    clusterName: String;
+    /**
+     * The ARN of the IAM principal for the AccessEntry.
+     */
+    principalArn: String;
+    /**
+     * The ARN of the policy to disassociate from the access entry. For a list of associated policies ARNs, use ListAssociatedAccessPolicies.
+     */
+    policyArn: String;
+  }
+  export interface DisassociateAccessPolicyResponse {
+  }
   export interface DisassociateIdentityProviderConfigRequest {
     /**
-     * The name of the cluster to disassociate an identity provider from.
+     * The name of your cluster.
      */
     clusterName: String;
     /**
@@ -1434,7 +1723,7 @@ declare namespace EKS {
   export type EksAnywhereSubscriptionTermUnit = "MONTHS"|string;
   export interface EncryptionConfig {
     /**
-     * Specifies the resources to be encrypted. The only supported value is "secrets".
+     * Specifies the resources to be encrypted. The only supported value is secrets.
      */
     resources?: StringList;
     /**
@@ -1446,7 +1735,7 @@ declare namespace EKS {
   export type ErrorCode = "SubnetNotFound"|"SecurityGroupNotFound"|"EniLimitReached"|"IpNotAvailable"|"AccessDenied"|"OperationNotPermitted"|"VpcIdNotFound"|"Unknown"|"NodeCreationFailure"|"PodEvictionFailure"|"InsufficientFreeAddresses"|"ClusterUnreachable"|"InsufficientNumberOfReplicas"|"ConfigurationConflict"|"AdmissionRequestDenied"|"UnsupportedAddonModification"|"K8sResourceNotFound"|string;
   export interface ErrorDetail {
     /**
-     * A brief description of the error.     SubnetNotFound: We couldn't find one of the subnets associated with the cluster.    SecurityGroupNotFound: We couldn't find one of the security groups associated with the cluster.    EniLimitReached: You have reached the elastic network interface limit for your account.    IpNotAvailable: A subnet associated with the cluster doesn't have any free IP addresses.    AccessDenied: You don't have permissions to perform the specified operation.    OperationNotPermitted: The service role associated with the cluster doesn't have the required access permissions for Amazon EKS.    VpcIdNotFound: We couldn't find the VPC associated with the cluster.  
+     * A brief description of the error.     SubnetNotFound: We couldn't find one of the subnets associated with the cluster.    SecurityGroupNotFound: We couldn't find one of the security groups associated with the cluster.    EniLimitReached: You have reached the elastic network interface limit for your account.    IpNotAvailable: A subnet associated with the cluster doesn't have any available IP addresses.    AccessDenied: You don't have permissions to perform the specified operation.    OperationNotPermitted: The service role associated with the cluster doesn't have the required access permissions for Amazon EKS.    VpcIdNotFound: We couldn't find the VPC associated with the cluster.  
      */
     errorCode?: ErrorCode;
     /**
@@ -1469,23 +1758,23 @@ declare namespace EKS {
      */
     fargateProfileArn?: String;
     /**
-     * The name of the Amazon EKS cluster that the Fargate profile belongs to.
+     * The name of your cluster.
      */
     clusterName?: String;
     /**
-     * The Unix epoch timestamp in seconds for when the Fargate profile was created.
+     * The Unix epoch timestamp at object creation.
      */
     createdAt?: Timestamp;
     /**
-     * The Amazon Resource Name (ARN) of the pod execution role to use for pods that match the selectors in the Fargate profile. For more information, see Pod Execution Role in the Amazon EKS User Guide.
+     * The Amazon Resource Name (ARN) of the Pod execution role to use for any Pod that matches the selectors in the Fargate profile. For more information, see  Pod execution role in the Amazon EKS User Guide.
      */
     podExecutionRoleArn?: String;
     /**
-     * The IDs of subnets to launch pods into.
+     * The IDs of subnets to launch a Pod into.
      */
     subnets?: StringList;
     /**
-     * The selectors to match for pods to use this Fargate profile.
+     * The selectors to match for a Pod to use this Fargate profile.
      */
     selectors?: FargateProfileSelectors;
     /**
@@ -1493,7 +1782,7 @@ declare namespace EKS {
      */
     status?: FargateProfileStatus;
     /**
-     * The metadata applied to the Fargate profile to assist with categorization and organization. Each tag consists of a key and an optional value. You define both. Fargate profile tags do not propagate to any other resources associated with the Fargate profile, such as the pods that are scheduled with it.
+     * Metadata that assists with categorization and organization. Each tag consists of a key and an optional value. You define both. Tags don't propagate to any other cluster or Amazon Web Services resources.
      */
     tags?: TagMap;
   }
@@ -1554,7 +1843,7 @@ declare namespace EKS {
   export type IssueList = Issue[];
   export interface KubernetesNetworkConfigRequest {
     /**
-     * Don't specify a value if you select ipv6 for ipFamily. The CIDR block to assign Kubernetes service IP addresses from. If you don't specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC. The block must meet the following requirements:   Within one of the following private IP address blocks: 10.0.0.0/8, 172.16.0.0/12, or 192.168.0.0/16.   Doesn't overlap with any CIDR block assigned to the VPC that you selected for VPC.   Between /24 and /12.    You can only specify a custom CIDR block when you create a cluster and can't change this value once the cluster is created. 
+     * Don't specify a value if you select ipv6 for ipFamily. The CIDR block to assign Kubernetes service IP addresses from. If you don't specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC. The block must meet the following requirements:   Within one of the following private IP address blocks: 10.0.0.0/8, 172.16.0.0/12, or 192.168.0.0/16.   Doesn't overlap with any CIDR block assigned to the VPC that you selected for VPC.   Between /24 and /12.    You can only specify a custom CIDR block when you create a cluster. You can't change this value after the cluster is created. 
      */
     serviceIpv4Cidr?: String;
     /**
@@ -1564,7 +1853,7 @@ declare namespace EKS {
   }
   export interface KubernetesNetworkConfigResponse {
     /**
-     * The CIDR block that Kubernetes pod and service IP addresses are assigned from. Kubernetes assigns addresses from an IPv4 CIDR block assigned to a subnet that the node is in. If you didn't specify a CIDR block when you created the cluster, then Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. If this was specified, then it was specified when the cluster was created and it can't be changed.
+     * The CIDR block that Kubernetes Pod and Service object IP addresses are assigned from. Kubernetes assigns addresses from an IPv4 CIDR block assigned to a subnet that the node is in. If you didn't specify a CIDR block when you created the cluster, then Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. If this was specified, then it was specified when the cluster was created and it can't be changed.
      */
     serviceIpv4Cidr?: String;
     /**
@@ -1572,7 +1861,7 @@ declare namespace EKS {
      */
     serviceIpv6Cidr?: String;
     /**
-     * The IP family used to assign Kubernetes pod and service IP addresses. The IP family is always ipv4, unless you have a 1.21 or later cluster running version 1.10.1 or later of the Amazon VPC CNI add-on and specified ipv6 when you created the cluster. 
+     * The IP family used to assign Kubernetes Pod and Service objects IP addresses. The IP family is always ipv4, unless you have a 1.21 or later cluster running version 1.10.1 or later of the Amazon VPC CNI plugin for Kubernetes and specified ipv6 when you created the cluster. 
      */
     ipFamily?: IpFamily;
   }
@@ -1590,17 +1879,67 @@ declare namespace EKS {
      */
     id?: String;
   }
+  export interface ListAccessEntriesRequest {
+    /**
+     * The name of your cluster.
+     */
+    clusterName: String;
+    /**
+     * The ARN of an AccessPolicy. When you specify an access policy ARN, only the access entries associated to that access policy are returned. For a list of available policy ARNs, use ListAccessPolicies.
+     */
+    associatedPolicyArn?: String;
+    /**
+     * The maximum number of results, returned in paginated output. You receive maxResults in a single page, along with a nextToken response element. You can see the remaining results of the initial request by sending another request with the returned nextToken value. This value can be between 1 and 100. If you don't use this parameter, 100 results and a nextToken value, if applicable, are returned.
+     */
+    maxResults?: ListAccessEntriesRequestMaxResults;
+    /**
+     * The nextToken value returned from a previous paginated request, where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.  This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes. 
+     */
+    nextToken?: String;
+  }
+  export type ListAccessEntriesRequestMaxResults = number;
+  export interface ListAccessEntriesResponse {
+    /**
+     * The list of access entries that exist for the cluster.
+     */
+    accessEntries?: StringList;
+    /**
+     * The nextToken value returned from a previous paginated request, where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.  This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes. 
+     */
+    nextToken?: String;
+  }
+  export interface ListAccessPoliciesRequest {
+    /**
+     * The maximum number of results, returned in paginated output. You receive maxResults in a single page, along with a nextToken response element. You can see the remaining results of the initial request by sending another request with the returned nextToken value. This value can be between 1 and 100. If you don't use this parameter, 100 results and a nextToken value, if applicable, are returned.
+     */
+    maxResults?: ListAccessPoliciesRequestMaxResults;
+    /**
+     * The nextToken value returned from a previous paginated request, where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.  This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes. 
+     */
+    nextToken?: String;
+  }
+  export type ListAccessPoliciesRequestMaxResults = number;
+  export interface ListAccessPoliciesResponse {
+    /**
+     * The list of available access policies. You can't view the contents of an access policy using the API. To view the contents, see Access policy permissions in the Amazon EKS User Guide.
+     */
+    accessPolicies?: AccessPoliciesList;
+    /**
+     * The nextToken value returned from a previous paginated request, where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.  This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes. 
+     */
+    nextToken?: String;
+  }
   export interface ListAddonsRequest {
     /**
-     * The name of the cluster.
+     * The name of your cluster.
      */
     clusterName: ClusterName;
     /**
-     * The maximum number of add-on results returned by ListAddonsRequest in paginated output. When you use this parameter, ListAddonsRequest returns only maxResults results in a single page along with a nextToken response element. You can see the remaining results of the initial request by sending another ListAddonsRequest request with the returned nextToken value. This value can be between 1 and 100. If you don't use this parameter, ListAddonsRequest returns up to 100 results and a nextToken value, if applicable.
+     * The maximum number of results, returned in paginated output. You receive maxResults in a single page, along with a nextToken response element. You can see the remaining results of the initial request by sending another request with the returned nextToken value. This value can be between 1 and 100. If you don't use this parameter, 100 results and a nextToken value, if applicable, are returned.
      */
     maxResults?: ListAddonsRequestMaxResults;
     /**
-     * The nextToken value returned from a previous paginated ListAddonsRequest where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value.  This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes. 
+     * The nextToken value returned from a previous paginated request, where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.  This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes. 
      */
     nextToken?: String;
   }
@@ -1615,28 +1954,65 @@ declare namespace EKS {
      */
     nextToken?: String;
   }
-  export interface ListClustersRequest {
+  export interface ListAssociatedAccessPoliciesRequest {
     /**
-     * The maximum number of cluster results returned by ListClusters in paginated output. When you use this parameter, ListClusters returns only maxResults results in a single page along with a nextToken response element. You can see the remaining results of the initial request by sending another ListClusters request with the returned nextToken value. This value can be between 1 and 100. If you don't use this parameter, ListClusters returns up to 100 results and a nextToken value if applicable.
+     * The name of your cluster.
      */
-    maxResults?: ListClustersRequestMaxResults;
+    clusterName: String;
     /**
-     * The nextToken value returned from a previous paginated ListClusters request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value.  This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes. 
+     * The ARN of the IAM principal for the AccessEntry.
+     */
+    principalArn: String;
+    /**
+     * The maximum number of results, returned in paginated output. You receive maxResults in a single page, along with a nextToken response element. You can see the remaining results of the initial request by sending another request with the returned nextToken value. This value can be between 1 and 100. If you don't use this parameter, 100 results and a nextToken value, if applicable, are returned.
+     */
+    maxResults?: ListAssociatedAccessPoliciesRequestMaxResults;
+    /**
+     * The nextToken value returned from a previous paginated request, where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.  This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes. 
+     */
+    nextToken?: String;
+  }
+  export type ListAssociatedAccessPoliciesRequestMaxResults = number;
+  export interface ListAssociatedAccessPoliciesResponse {
+    /**
+     * The name of your cluster.
+     */
+    clusterName?: String;
+    /**
+     * The ARN of the IAM principal for the AccessEntry.
+     */
+    principalArn?: String;
+    /**
+     * The nextToken value returned from a previous paginated request, where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.  This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes. 
      */
     nextToken?: String;
     /**
-     * Indicates whether external clusters are included in the returned list. Use 'all' to return connected clusters, or blank to return only Amazon EKS clusters. 'all' must be in lowercase otherwise an error occurs.
+     * The list of access policies associated with the access entry.
+     */
+    associatedAccessPolicies?: AssociatedAccessPoliciesList;
+  }
+  export interface ListClustersRequest {
+    /**
+     * The maximum number of results, returned in paginated output. You receive maxResults in a single page, along with a nextToken response element. You can see the remaining results of the initial request by sending another request with the returned nextToken value. This value can be between 1 and 100. If you don't use this parameter, 100 results and a nextToken value, if applicable, are returned.
+     */
+    maxResults?: ListClustersRequestMaxResults;
+    /**
+     * The nextToken value returned from a previous paginated request, where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.  This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes. 
+     */
+    nextToken?: String;
+    /**
+     * Indicates whether external clusters are included in the returned list. Use 'all' to return https://docs.aws.amazon.com/eks/latest/userguide/eks-connector.htmlconnected clusters, or blank to return only Amazon EKS clusters. 'all' must be in lowercase otherwise an error occurs.
      */
     include?: IncludeClustersList;
   }
   export type ListClustersRequestMaxResults = number;
   export interface ListClustersResponse {
     /**
-     * A list of all of the clusters for your account in the specified Region.
+     * A list of all of the clusters for your account in the specified Amazon Web Services Region.
      */
     clusters?: StringList;
     /**
-     * The nextToken value to include in a future ListClusters request. When the results of a ListClusters request exceed maxResults, you can use this value to retrieve the next page of results. This value is null when there are no more results to return.
+     * The nextToken value returned from a previous paginated request, where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.  This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes. 
      */
     nextToken?: String;
   }
@@ -1667,15 +2043,15 @@ declare namespace EKS {
   }
   export interface ListFargateProfilesRequest {
     /**
-     * The name of the Amazon EKS cluster that you would like to list Fargate profiles in.
+     * The name of your cluster.
      */
     clusterName: String;
     /**
-     * The maximum number of Fargate profile results returned by ListFargateProfiles in paginated output. When you use this parameter, ListFargateProfiles returns only maxResults results in a single page along with a nextToken response element. You can see the remaining results of the initial request by sending another ListFargateProfiles request with the returned nextToken value. This value can be between 1 and 100. If you don't use this parameter, ListFargateProfiles returns up to 100 results and a nextToken value if applicable.
+     * The maximum number of results, returned in paginated output. You receive maxResults in a single page, along with a nextToken response element. You can see the remaining results of the initial request by sending another request with the returned nextToken value. This value can be between 1 and 100. If you don't use this parameter, 100 results and a nextToken value, if applicable, are returned.
      */
     maxResults?: FargateProfilesRequestMaxResults;
     /**
-     * The nextToken value returned from a previous paginated ListFargateProfiles request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value.
+     * The nextToken value returned from a previous paginated request, where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.  This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes. 
      */
     nextToken?: String;
   }
@@ -1685,21 +2061,21 @@ declare namespace EKS {
      */
     fargateProfileNames?: StringList;
     /**
-     * The nextToken value to include in a future ListFargateProfiles request. When the results of a ListFargateProfiles request exceed maxResults, you can use this value to retrieve the next page of results. This value is null when there are no more results to return.
+     * The nextToken value returned from a previous paginated request, where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.  This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes. 
      */
     nextToken?: String;
   }
   export interface ListIdentityProviderConfigsRequest {
     /**
-     * The cluster name that you want to list identity provider configurations for.
+     * The name of your cluster.
      */
     clusterName: String;
     /**
-     * The maximum number of identity provider configurations returned by ListIdentityProviderConfigs in paginated output. When you use this parameter, ListIdentityProviderConfigs returns only maxResults results in a single page along with a nextToken response element. You can see the remaining results of the initial request by sending another ListIdentityProviderConfigs request with the returned nextToken value. This value can be between 1 and 100. If you don't use this parameter, ListIdentityProviderConfigs returns up to 100 results and a nextToken value, if applicable.
+     * The maximum number of results, returned in paginated output. You receive maxResults in a single page, along with a nextToken response element. You can see the remaining results of the initial request by sending another request with the returned nextToken value. This value can be between 1 and 100. If you don't use this parameter, 100 results and a nextToken value, if applicable, are returned.
      */
     maxResults?: ListIdentityProviderConfigsRequestMaxResults;
     /**
-     * The nextToken value returned from a previous paginated IdentityProviderConfigsRequest where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value.
+     * The nextToken value returned from a previous paginated request, where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.  This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes. 
      */
     nextToken?: String;
   }
@@ -1716,15 +2092,15 @@ declare namespace EKS {
   }
   export interface ListNodegroupsRequest {
     /**
-     * The name of the Amazon EKS cluster that you would like to list node groups in.
+     * The name of your cluster.
      */
     clusterName: String;
     /**
-     * The maximum number of node group results returned by ListNodegroups in paginated output. When you use this parameter, ListNodegroups returns only maxResults results in a single page along with a nextToken response element. You can see the remaining results of the initial request by sending another ListNodegroups request with the returned nextToken value. This value can be between 1 and 100. If you don't use this parameter, ListNodegroups returns up to 100 results and a nextToken value if applicable.
+     * The maximum number of results, returned in paginated output. You receive maxResults in a single page, along with a nextToken response element. You can see the remaining results of the initial request by sending another request with the returned nextToken value. This value can be between 1 and 100. If you don't use this parameter, 100 results and a nextToken value, if applicable, are returned.
      */
     maxResults?: ListNodegroupsRequestMaxResults;
     /**
-     * The nextToken value returned from a previous paginated ListNodegroups request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value.
+     * The nextToken value returned from a previous paginated request, where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.  This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes. 
      */
     nextToken?: String;
   }
@@ -1735,7 +2111,7 @@ declare namespace EKS {
      */
     nodegroups?: StringList;
     /**
-     * The nextToken value to include in a future ListNodegroups request. When the results of a ListNodegroups request exceed maxResults, you can use this value to retrieve the next page of results. This value is null when there are no more results to return.
+     * The nextToken value returned from a previous paginated request, where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.  This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes. 
      */
     nextToken?: String;
   }
@@ -1774,7 +2150,7 @@ declare namespace EKS {
   }
   export interface ListTagsForResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resources are Amazon EKS clusters and managed node groups.
+     * The Amazon Resource Name (ARN) that identifies the resource to list tags for.
      */
     resourceArn: String;
   }
@@ -1798,11 +2174,11 @@ declare namespace EKS {
      */
     addonName?: String;
     /**
-     * The nextToken value returned from a previous paginated ListUpdates request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value.
+     * The nextToken value returned from a previous paginated request, where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.  This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes. 
      */
     nextToken?: String;
     /**
-     * The maximum number of update results returned by ListUpdates in paginated output. When you use this parameter, ListUpdates returns only maxResults results in a single page along with a nextToken response element. You can see the remaining results of the initial request by sending another ListUpdates request with the returned nextToken value. This value can be between 1 and 100. If you don't use this parameter, ListUpdates returns up to 100 results and a nextToken value if applicable.
+     * The maximum number of results, returned in paginated output. You receive maxResults in a single page, along with a nextToken response element. You can see the remaining results of the initial request by sending another request with the returned nextToken value. This value can be between 1 and 100. If you don't use this parameter, 100 results and a nextToken value, if applicable, are returned.
      */
     maxResults?: ListUpdatesRequestMaxResults;
   }
@@ -1813,7 +2189,7 @@ declare namespace EKS {
      */
     updateIds?: StringList;
     /**
-     * The nextToken value to include in a future ListUpdates request. When the results of a ListUpdates request exceed maxResults, you can use this value to retrieve the next page of results. This value is null when there are no more results to return.
+     * The nextToken value returned from a previous paginated request, where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.  This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes. 
      */
     nextToken?: String;
   }
@@ -1856,7 +2232,7 @@ declare namespace EKS {
      */
     nodegroupArn?: String;
     /**
-     * The name of the cluster that the managed node group resides in.
+     * The name of your cluster.
      */
     clusterName?: String;
     /**
@@ -1868,11 +2244,11 @@ declare namespace EKS {
      */
     releaseVersion?: String;
     /**
-     * The Unix epoch timestamp in seconds for when the managed node group was created.
+     * The Unix epoch timestamp at object creation.
      */
     createdAt?: Timestamp;
     /**
-     * The Unix epoch timestamp in seconds for when the managed node group was last modified.
+     * The Unix epoch timestamp for the last modification to the object.
      */
     modifiedAt?: Timestamp;
     /**
@@ -1936,7 +2312,7 @@ declare namespace EKS {
      */
     launchTemplate?: LaunchTemplateSpecification;
     /**
-     * The metadata applied to the node group to assist with categorization and organization. Each tag consists of a key and an optional value. You define both. Node group tags do not propagate to any other resources associated with the node group, such as the Amazon EC2 instances or subnets. 
+     * Metadata that assists with categorization and organization. Each tag consists of a key and an optional value. You define both. Tags don't propagate to any other cluster or Amazon Web Services resources.
      */
     tags?: TagMap;
   }
@@ -1967,18 +2343,18 @@ declare namespace EKS {
      */
     maxSize?: Capacity;
     /**
-     * The current number of nodes that the managed node group should maintain.  If you use Cluster Autoscaler, you shouldn't change the desiredSize value directly, as this can cause the Cluster Autoscaler to suddenly scale up or scale down.  Whenever this parameter changes, the number of worker nodes in the node group is updated to the specified size. If this parameter is given a value that is smaller than the current number of running worker nodes, the necessary number of worker nodes are terminated to match the given value. When using CloudFormation, no action occurs if you remove this parameter from your CFN template. This parameter can be different from minSize in some cases, such as when starting with extra hosts for testing. This parameter can also be different when you want to start with an estimated number of needed hosts, but let Cluster Autoscaler reduce the number if there are too many. When Cluster Autoscaler is used, the desiredSize parameter is altered by Cluster Autoscaler (but can be out-of-date for short periods of time). Cluster Autoscaler doesn't scale a managed node group lower than minSize or higher than maxSize.
+     * The current number of nodes that the managed node group should maintain.  If you use the Kubernetes Cluster Autoscaler, you shouldn't change the desiredSize value directly, as this can cause the Cluster Autoscaler to suddenly scale up or scale down.  Whenever this parameter changes, the number of worker nodes in the node group is updated to the specified size. If this parameter is given a value that is smaller than the current number of running worker nodes, the necessary number of worker nodes are terminated to match the given value. When using CloudFormation, no action occurs if you remove this parameter from your CFN template. This parameter can be different from minSize in some cases, such as when starting with extra hosts for testing. This parameter can also be different when you want to start with an estimated number of needed hosts, but let the Cluster Autoscaler reduce the number if there are too many. When the Cluster Autoscaler is used, the desiredSize parameter is altered by the Cluster Autoscaler (but can be out-of-date for short periods of time). the Cluster Autoscaler doesn't scale a managed node group lower than minSize or higher than maxSize.
      */
     desiredSize?: ZeroCapacity;
   }
   export type NodegroupStatus = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"CREATE_FAILED"|"DELETE_FAILED"|"DEGRADED"|string;
   export interface NodegroupUpdateConfig {
     /**
-     * The maximum number of nodes unavailable at once during a version update. Nodes will be updated in parallel. This value or maxUnavailablePercentage is required to have a value.The maximum number is 100.
+     * The maximum number of nodes unavailable at once during a version update. Nodes are updated in parallel. This value or maxUnavailablePercentage is required to have a value.The maximum number is 100.
      */
     maxUnavailable?: NonZeroInteger;
     /**
-     * The maximum percentage of nodes unavailable during a version update. This percentage of nodes will be updated in parallel, up to 100 nodes at once. This value or maxUnavailable is required to have a value.
+     * The maximum percentage of nodes unavailable during a version update. This percentage of nodes are updated in parallel, up to 100 nodes at once. This value or maxUnavailable is required to have a value.
      */
     maxUnavailablePercentage?: PercentCapacity;
   }
@@ -1999,7 +2375,7 @@ declare namespace EKS {
      */
     identityProviderConfigArn?: String;
     /**
-     * The cluster that the configuration is associated to.
+     * The name of your cluster.
      */
     clusterName?: String;
     /**
@@ -2031,7 +2407,7 @@ declare namespace EKS {
      */
     requiredClaims?: requiredClaimsMap;
     /**
-     * The metadata to apply to the provider configuration to assist with categorization and organization. Each tag consists of a key and an optional value. You define both.
+     * Metadata that assists with categorization and organization. Each tag consists of a key and an optional value. You define both. Tags don't propagate to any other cluster or Amazon Web Services resources.
      */
     tags?: TagMap;
     /**
@@ -2045,15 +2421,15 @@ declare namespace EKS {
      */
     identityProviderConfigName: String;
     /**
-     * The URL of the OpenID identity provider that allows the API server to discover public signing keys for verifying tokens. The URL must begin with https:// and should correspond to the iss claim in the provider's OIDC ID tokens. Per the OIDC standard, path components are allowed but query parameters are not. Typically the URL consists of only a hostname, like https://server.example.org or https://example.com. This URL should point to the level below .well-known/openid-configuration and must be publicly accessible over the internet.
+     * The URL of the OIDC identity provider that allows the API server to discover public signing keys for verifying tokens. The URL must begin with https:// and should correspond to the iss claim in the provider's OIDC ID tokens. Based on the OIDC standard, path components are allowed but query parameters are not. Typically the URL consists of only a hostname, like https://server.example.org or https://example.com. This URL should point to the level below .well-known/openid-configuration and must be publicly accessible over the internet.
      */
     issuerUrl: String;
     /**
-     * This is also known as audience. The ID for the client application that makes authentication requests to the OpenID identity provider.
+     * This is also known as audience. The ID for the client application that makes authentication requests to the OIDC identity provider.
      */
     clientId: String;
     /**
-     * The JSON Web Token (JWT) claim to use as the username. The default is sub, which is expected to be a unique identifier of the end user. You can choose other claims, such as email or name, depending on the OpenID identity provider. Claims other than email are prefixed with the issuer URL to prevent naming clashes with other plug-ins.
+     * The JSON Web Token (JWT) claim to use as the username. The default is sub, which is expected to be a unique identifier of the end user. You can choose other claims, such as email or name, depending on the OIDC identity provider. Claims other than email are prefixed with the issuer URL to prevent naming clashes with other plug-ins.
      */
     usernameClaim?: String;
     /**
@@ -2128,7 +2504,7 @@ declare namespace EKS {
      */
     associationId?: String;
     /**
-     * The metadata that you apply to a resource to assist with categorization and organization. Each tag consists of a key and an optional value. You define both. The following basic restrictions apply to tags:   Maximum number of tags per resource – 50   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length – 128 Unicode characters in UTF-8   Maximum value length – 256 Unicode characters in UTF-8   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case-sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.  
+     * Metadata that assists with categorization and organization. Each tag consists of a key and an optional value. You define both. Tags don't propagate to any other cluster or Amazon Web Services resources. The following basic restrictions apply to tags:   Maximum number of tags per resource – 50   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length – 128 Unicode characters in UTF-8   Maximum value length – 256 Unicode characters in UTF-8   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case-sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.  
      */
     tags?: TagMap;
     /**
@@ -2171,7 +2547,7 @@ declare namespace EKS {
   }
   export interface RegisterClusterRequest {
     /**
-     * Define a unique name for this cluster for your Region.
+     * A unique name for this cluster in your Amazon Web Services Region.
      */
     name: ClusterName;
     /**
@@ -2179,11 +2555,11 @@ declare namespace EKS {
      */
     connectorConfig: ConnectorConfigRequest;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
     clientRequestToken?: String;
     /**
-     * The metadata that you apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Cluster tags do not propagate to any other resources associated with the cluster.
+     * Metadata that assists with categorization and organization. Each tag consists of a key and an optional value. You define both. Tags don't propagate to any other cluster or Amazon Web Services resources.
      */
     tags?: TagMap;
   }
@@ -2209,11 +2585,11 @@ declare namespace EKS {
   export type TagMap = {[key: string]: TagValue};
   export interface TagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource to which to add tags. Currently, the supported resources are Amazon EKS clusters and managed node groups.
+     * The Amazon Resource Name (ARN) of the resource to add tags to.
      */
     resourceArn: String;
     /**
-     * The tags to add to the resource. A tag is an array of key-value pairs.
+     * Metadata that assists with categorization and organization. Each tag consists of a key and an optional value. You define both. Tags don't propagate to any other cluster or Amazon Web Services resources.
      */
     tags: TagMap;
   }
@@ -2238,11 +2614,11 @@ declare namespace EKS {
   export type Timestamp = Date;
   export interface UntagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource from which to delete tags. Currently, the supported resources are Amazon EKS clusters and managed node groups.
+     * The Amazon Resource Name (ARN) of the resource to delete tags from.
      */
     resourceArn: String;
     /**
-     * The keys of the tags to be removed.
+     * The keys of the tags to remove.
      */
     tagKeys: TagKeyList;
   }
@@ -2266,7 +2642,7 @@ declare namespace EKS {
      */
     params?: UpdateParams;
     /**
-     * The Unix epoch timestamp in seconds for when the update was created.
+     * The Unix epoch timestamp at object creation.
      */
     createdAt?: Timestamp;
     /**
@@ -2274,9 +2650,43 @@ declare namespace EKS {
      */
     errors?: ErrorDetails;
   }
+  export interface UpdateAccessConfigRequest {
+    /**
+     * The desired authentication mode for the cluster.
+     */
+    authenticationMode?: AuthenticationMode;
+  }
+  export interface UpdateAccessEntryRequest {
+    /**
+     * The name of your cluster.
+     */
+    clusterName: String;
+    /**
+     * The ARN of the IAM principal for the AccessEntry.
+     */
+    principalArn: String;
+    /**
+     * The value for name that you've specified for kind: Group as a subject in a Kubernetes RoleBinding or ClusterRoleBinding object. Amazon EKS doesn't confirm that the value for name exists in any bindings on your cluster. You can specify one or more names. Kubernetes authorizes the principalArn of the access entry to access any cluster objects that you've specified in a Kubernetes Role or ClusterRole object that is also specified in a binding's roleRef. For more information about creating Kubernetes RoleBinding, ClusterRoleBinding, Role, or ClusterRole objects, see Using RBAC Authorization in the Kubernetes documentation. If you want Amazon EKS to authorize the principalArn (instead of, or in addition to Kubernetes authorizing the principalArn), you can associate one or more access policies to the access entry using AssociateAccessPolicy. If you associate any access policies, the principalARN has all permissions assigned in the associated access policies and all permissions in any Kubernetes Role or ClusterRole objects that the group names are bound to.
+     */
+    kubernetesGroups?: StringList;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    clientRequestToken?: String;
+    /**
+     * The username to authenticate to Kubernetes with. We recommend not specifying a username and letting Amazon EKS specify it for you. For more information about the value Amazon EKS specifies for you, or constraints before specifying your own username, see Creating access entries in the Amazon EKS User Guide.
+     */
+    username?: String;
+  }
+  export interface UpdateAccessEntryResponse {
+    /**
+     * The ARN of the IAM principal for the AccessEntry.
+     */
+    accessEntry?: AccessEntry;
+  }
   export interface UpdateAddonRequest {
     /**
-     * The name of the cluster.
+     * The name of your cluster.
      */
     clusterName: ClusterName;
     /**
@@ -2296,11 +2706,11 @@ declare namespace EKS {
      */
     resolveConflicts?: ResolveConflicts;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
     clientRequestToken?: String;
     /**
-     * The set of configuration values for the add-on that's created. The values that you provide are validated against the schema in DescribeAddonConfiguration.
+     * The set of configuration values for the add-on that's created. The values that you provide are validated against the schema returned by DescribeAddonConfiguration.
      */
     configurationValues?: String;
   }
@@ -2318,9 +2728,13 @@ declare namespace EKS {
      */
     logging?: Logging;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
     clientRequestToken?: String;
+    /**
+     * The access configuration for the cluster.
+     */
+    accessConfig?: UpdateAccessConfigRequest;
   }
   export interface UpdateClusterConfigResponse {
     update?: Update;
@@ -2335,7 +2749,7 @@ declare namespace EKS {
      */
     version: String;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
     clientRequestToken?: String;
   }
@@ -2367,17 +2781,17 @@ declare namespace EKS {
   }
   export interface UpdateLabelsPayload {
     /**
-     * Kubernetes labels to be added or updated.
+     * The Kubernetes labels to add or update.
      */
     addOrUpdateLabels?: labelsMap;
     /**
-     * Kubernetes labels to be removed.
+     * The Kubernetes labels to remove.
      */
     removeLabels?: labelsKeyList;
   }
   export interface UpdateNodegroupConfigRequest {
     /**
-     * The name of the Amazon EKS cluster that the managed node group resides in.
+     * The name of your cluster.
      */
     clusterName: String;
     /**
@@ -2385,7 +2799,7 @@ declare namespace EKS {
      */
     nodegroupName: String;
     /**
-     * The Kubernetes labels to be applied to the nodes in the node group after the update.
+     * The Kubernetes labels to apply to the nodes in the node group after the update.
      */
     labels?: UpdateLabelsPayload;
     /**
@@ -2401,7 +2815,7 @@ declare namespace EKS {
      */
     updateConfig?: NodegroupUpdateConfig;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
     clientRequestToken?: String;
   }
@@ -2410,7 +2824,7 @@ declare namespace EKS {
   }
   export interface UpdateNodegroupVersionRequest {
     /**
-     * The name of the Amazon EKS cluster that is associated with the managed node group to update.
+     * The name of your cluster.
      */
     clusterName: String;
     /**
@@ -2430,11 +2844,11 @@ declare namespace EKS {
      */
     launchTemplate?: LaunchTemplateSpecification;
     /**
-     * Force the update if the existing node group's pods are unable to be drained due to a pod disruption budget issue. If an update fails because pods could not be drained, you can force the update after it fails to terminate the old node whether or not any pods are running on the node.
+     * Force the update if any Pod on the existing node group can't be drained due to a Pod disruption budget issue. If an update fails because all Pods can't be drained, you can force the update after it fails to terminate the old node whether or not any Pod is running on the node.
      */
     force?: Boolean;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
     clientRequestToken?: String;
   }
@@ -2451,7 +2865,7 @@ declare namespace EKS {
      */
     value?: String;
   }
-  export type UpdateParamType = "Version"|"PlatformVersion"|"EndpointPrivateAccess"|"EndpointPublicAccess"|"ClusterLogging"|"DesiredSize"|"LabelsToAdd"|"LabelsToRemove"|"TaintsToAdd"|"TaintsToRemove"|"MaxSize"|"MinSize"|"ReleaseVersion"|"PublicAccessCidrs"|"LaunchTemplateName"|"LaunchTemplateVersion"|"IdentityProviderConfig"|"EncryptionConfig"|"AddonVersion"|"ServiceAccountRoleArn"|"ResolveConflicts"|"MaxUnavailable"|"MaxUnavailablePercentage"|"ConfigurationValues"|"SecurityGroups"|"Subnets"|string;
+  export type UpdateParamType = "Version"|"PlatformVersion"|"EndpointPrivateAccess"|"EndpointPublicAccess"|"ClusterLogging"|"DesiredSize"|"LabelsToAdd"|"LabelsToRemove"|"TaintsToAdd"|"TaintsToRemove"|"MaxSize"|"MinSize"|"ReleaseVersion"|"PublicAccessCidrs"|"LaunchTemplateName"|"LaunchTemplateVersion"|"IdentityProviderConfig"|"EncryptionConfig"|"AddonVersion"|"ServiceAccountRoleArn"|"ResolveConflicts"|"MaxUnavailable"|"MaxUnavailablePercentage"|"ConfigurationValues"|"SecurityGroups"|"Subnets"|"AuthenticationMode"|string;
   export type UpdateParams = UpdateParam[];
   export interface UpdatePodIdentityAssociationRequest {
     /**
@@ -2467,7 +2881,7 @@ declare namespace EKS {
      */
     roleArn?: String;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
     clientRequestToken?: String;
   }
@@ -2488,7 +2902,7 @@ declare namespace EKS {
      */
     removeTaints?: taintsList;
   }
-  export type UpdateType = "VersionUpdate"|"EndpointAccessUpdate"|"LoggingUpdate"|"ConfigUpdate"|"AssociateIdentityProviderConfig"|"DisassociateIdentityProviderConfig"|"AssociateEncryptionConfig"|"AddonUpdate"|"VpcConfigUpdate"|string;
+  export type UpdateType = "VersionUpdate"|"EndpointAccessUpdate"|"LoggingUpdate"|"ConfigUpdate"|"AssociateIdentityProviderConfig"|"DisassociateIdentityProviderConfig"|"AssociateEncryptionConfig"|"AddonUpdate"|"VpcConfigUpdate"|"AccessConfigUpdate"|string;
   export interface VpcConfigRequest {
     /**
      * Specify subnets for your Amazon EKS nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your nodes and the Kubernetes control plane.
@@ -2507,7 +2921,7 @@ declare namespace EKS {
      */
     endpointPrivateAccess?: BoxedBoolean;
     /**
-     * The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that you specify is denied. The default value is 0.0.0.0/0. If you've disabled private endpoint access and you have nodes or Fargate pods in the cluster, then ensure that you specify the necessary CIDR blocks. For more information, see Amazon EKS cluster endpoint access control in the  Amazon EKS User Guide .
+     * The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that you specify is denied. The default value is 0.0.0.0/0. If you've disabled private endpoint access, make sure that you specify the necessary CIDR blocks for every node and Fargate Pod in the cluster. For more information, see Amazon EKS cluster endpoint access control in the  Amazon EKS User Guide .
      */
     publicAccessCidrs?: StringList;
   }
@@ -2529,7 +2943,7 @@ declare namespace EKS {
      */
     vpcId?: String;
     /**
-     * This parameter indicates whether the Amazon EKS public API server endpoint is enabled. If the Amazon EKS public API server endpoint is disabled, your cluster's Kubernetes API server can only receive requests that originate from within the cluster VPC.
+     * Whether the public API server endpoint is enabled.
      */
     endpointPublicAccess?: Boolean;
     /**
@@ -2537,7 +2951,7 @@ declare namespace EKS {
      */
     endpointPrivateAccess?: Boolean;
     /**
-     * The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the listed CIDR blocks is denied. The default value is 0.0.0.0/0. If you've disabled private endpoint access and you have nodes or Fargate pods in the cluster, then ensure that the necessary CIDR blocks are listed. For more information, see Amazon EKS cluster endpoint access control in the  Amazon EKS User Guide .
+     * The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint.
      */
     publicAccessCidrs?: StringList;
   }

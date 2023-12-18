@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1520.0-->
+<!--LATEST=2.1521.0-->
 <!--ENTRYINSERT-->
+
+## 2.1521.0
+* feature: CognitoIdentityServiceProvider: Amazon Cognito now supports trigger versions that define the fields in the request sent to pre token generation Lambda triggers.
+* feature: EKS: Add support for EKS Cluster Access Management.
+* feature: Route53Resolver: Add DOH protocols in resolver endpoints.
 
 ## 2.1520.0
 * feature: Connect: Adds relatedContactId field to StartOutboundVoiceContact API input. Introduces PauseContact API and ResumeContact API for Task contacts. Adds pause duration, number of pauses, timestamps for last paused and resumed events to DescribeContact API response. Adds new Rule type and new Rule action.

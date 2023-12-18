@@ -20,19 +20,19 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   addCustomAttributes(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AddCustomAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AddCustomAttributesResponse, AWSError>;
   /**
-   * Adds the specified user to the specified group.  Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you must use IAM credentials to authorize requests, and you must grant yourself the corresponding IAM permission in a policy.  Learn more     Signing Amazon Web Services API Requests     Using the Amazon Cognito user pools API and user pool endpoints    
+   * Adds a user to a group. A user who is in a group can present a preferred-role claim to an identity pool, and populates a cognito:groups claim to their access and identity tokens.  Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you must use IAM credentials to authorize requests, and you must grant yourself the corresponding IAM permission in a policy.  Learn more     Signing Amazon Web Services API Requests     Using the Amazon Cognito user pools API and user pool endpoints    
    */
   adminAddUserToGroup(params: CognitoIdentityServiceProvider.Types.AdminAddUserToGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds the specified user to the specified group.  Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you must use IAM credentials to authorize requests, and you must grant yourself the corresponding IAM permission in a policy.  Learn more     Signing Amazon Web Services API Requests     Using the Amazon Cognito user pools API and user pool endpoints    
+   * Adds a user to a group. A user who is in a group can present a preferred-role claim to an identity pool, and populates a cognito:groups claim to their access and identity tokens.  Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you must use IAM credentials to authorize requests, and you must grant yourself the corresponding IAM permission in a policy.  Learn more     Signing Amazon Web Services API Requests     Using the Amazon Cognito user pools API and user pool endpoints    
    */
   adminAddUserToGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Confirms user registration as an admin without using a confirmation code. Works on any user.  Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you must use IAM credentials to authorize requests, and you must grant yourself the corresponding IAM permission in a policy.  Learn more     Signing Amazon Web Services API Requests     Using the Amazon Cognito user pools API and user pool endpoints    
+   * This IAM-authenticated API operation provides a code that Amazon Cognito sent to your user when they signed up in your user pool. After your user enters their code, they confirm ownership of the email address or phone number that they provided, and their user account becomes active. Depending on your user pool configuration, your users will receive their confirmation code in an email or SMS message. Local users who signed up in your user pool are the only type of user who can confirm sign-up with a code. Users who federate through an external identity provider (IdP) have already been confirmed by their IdP. Administrator-created users confirm their accounts when they respond to their invitation email message and choose a password.  Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you must use IAM credentials to authorize requests, and you must grant yourself the corresponding IAM permission in a policy.  Learn more     Signing Amazon Web Services API Requests     Using the Amazon Cognito user pools API and user pool endpoints    
    */
   adminConfirmSignUp(params: CognitoIdentityServiceProvider.Types.AdminConfirmSignUpRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminConfirmSignUpResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminConfirmSignUpResponse, AWSError>;
   /**
-   * Confirms user registration as an admin without using a confirmation code. Works on any user.  Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you must use IAM credentials to authorize requests, and you must grant yourself the corresponding IAM permission in a policy.  Learn more     Signing Amazon Web Services API Requests     Using the Amazon Cognito user pools API and user pool endpoints    
+   * This IAM-authenticated API operation provides a code that Amazon Cognito sent to your user when they signed up in your user pool. After your user enters their code, they confirm ownership of the email address or phone number that they provided, and their user account becomes active. Depending on your user pool configuration, your users will receive their confirmation code in an email or SMS message. Local users who signed up in your user pool are the only type of user who can confirm sign-up with a code. Users who federate through an external identity provider (IdP) have already been confirmed by their IdP. Administrator-created users confirm their accounts when they respond to their invitation email message and choose a password.  Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you must use IAM credentials to authorize requests, and you must grant yourself the corresponding IAM permission in a policy.  Learn more     Signing Amazon Web Services API Requests     Using the Amazon Cognito user pools API and user pool endpoints    
    */
   adminConfirmSignUp(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminConfirmSignUpResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminConfirmSignUpResponse, AWSError>;
   /**
@@ -132,11 +132,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   adminListDevices(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminListDevicesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminListDevicesResponse, AWSError>;
   /**
-   * Lists the groups that the user belongs to.  Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you must use IAM credentials to authorize requests, and you must grant yourself the corresponding IAM permission in a policy.  Learn more     Signing Amazon Web Services API Requests     Using the Amazon Cognito user pools API and user pool endpoints    
+   * Lists the groups that a user belongs to.  Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you must use IAM credentials to authorize requests, and you must grant yourself the corresponding IAM permission in a policy.  Learn more     Signing Amazon Web Services API Requests     Using the Amazon Cognito user pools API and user pool endpoints    
    */
   adminListGroupsForUser(params: CognitoIdentityServiceProvider.Types.AdminListGroupsForUserRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminListGroupsForUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminListGroupsForUserResponse, AWSError>;
   /**
-   * Lists the groups that the user belongs to.  Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you must use IAM credentials to authorize requests, and you must grant yourself the corresponding IAM permission in a policy.  Learn more     Signing Amazon Web Services API Requests     Using the Amazon Cognito user pools API and user pool endpoints    
+   * Lists the groups that a user belongs to.  Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you must use IAM credentials to authorize requests, and you must grant yourself the corresponding IAM permission in a policy.  Learn more     Signing Amazon Web Services API Requests     Using the Amazon Cognito user pools API and user pool endpoints    
    */
   adminListGroupsForUser(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminListGroupsForUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminListGroupsForUserResponse, AWSError>;
   /**
@@ -164,11 +164,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   adminResetUserPassword(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminResetUserPasswordResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminResetUserPasswordResponse, AWSError>;
   /**
-   * Responds to an authentication challenge, as an administrator.  This action might generate an SMS text message. Starting June 1, 2021, US telecom carriers require you to register an origination phone number before you can send SMS messages to US phone numbers. If you use SMS text messages in Amazon Cognito, you must register a phone number with Amazon Pinpoint. Amazon Cognito uses the registered number automatically. Otherwise, Amazon Cognito users who must receive SMS messages might not be able to sign up, activate their accounts, or sign in. If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon Simple Notification Service might place your account in the SMS sandbox. In  sandbox mode , you can send messages only to verified phone numbers. After you test your app while in the sandbox environment, you can move out of the sandbox and into production. For more information, see  SMS message settings for Amazon Cognito user pools in the Amazon Cognito Developer Guide.   Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you must use IAM credentials to authorize requests, and you must grant yourself the corresponding IAM permission in a policy.  Learn more     Signing Amazon Web Services API Requests     Using the Amazon Cognito user pools API and user pool endpoints    
+   * Some API operations in a user pool generate a challenge, like a prompt for an MFA code, for device authentication that bypasses MFA, or for a custom authentication challenge. An AdminRespondToAuthChallenge API request provides the answer to that challenge, like a code or a secure remote password (SRP). The parameters of a response to an authentication challenge vary with the type of challenge. For more information about custom authentication challenges, see Custom authentication challenge Lambda triggers.  This action might generate an SMS text message. Starting June 1, 2021, US telecom carriers require you to register an origination phone number before you can send SMS messages to US phone numbers. If you use SMS text messages in Amazon Cognito, you must register a phone number with Amazon Pinpoint. Amazon Cognito uses the registered number automatically. Otherwise, Amazon Cognito users who must receive SMS messages might not be able to sign up, activate their accounts, or sign in. If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon Simple Notification Service might place your account in the SMS sandbox. In  sandbox mode , you can send messages only to verified phone numbers. After you test your app while in the sandbox environment, you can move out of the sandbox and into production. For more information, see  SMS message settings for Amazon Cognito user pools in the Amazon Cognito Developer Guide.   Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you must use IAM credentials to authorize requests, and you must grant yourself the corresponding IAM permission in a policy.  Learn more     Signing Amazon Web Services API Requests     Using the Amazon Cognito user pools API and user pool endpoints    
    */
   adminRespondToAuthChallenge(params: CognitoIdentityServiceProvider.Types.AdminRespondToAuthChallengeRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminRespondToAuthChallengeResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminRespondToAuthChallengeResponse, AWSError>;
   /**
-   * Responds to an authentication challenge, as an administrator.  This action might generate an SMS text message. Starting June 1, 2021, US telecom carriers require you to register an origination phone number before you can send SMS messages to US phone numbers. If you use SMS text messages in Amazon Cognito, you must register a phone number with Amazon Pinpoint. Amazon Cognito uses the registered number automatically. Otherwise, Amazon Cognito users who must receive SMS messages might not be able to sign up, activate their accounts, or sign in. If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon Simple Notification Service might place your account in the SMS sandbox. In  sandbox mode , you can send messages only to verified phone numbers. After you test your app while in the sandbox environment, you can move out of the sandbox and into production. For more information, see  SMS message settings for Amazon Cognito user pools in the Amazon Cognito Developer Guide.   Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you must use IAM credentials to authorize requests, and you must grant yourself the corresponding IAM permission in a policy.  Learn more     Signing Amazon Web Services API Requests     Using the Amazon Cognito user pools API and user pool endpoints    
+   * Some API operations in a user pool generate a challenge, like a prompt for an MFA code, for device authentication that bypasses MFA, or for a custom authentication challenge. An AdminRespondToAuthChallenge API request provides the answer to that challenge, like a code or a secure remote password (SRP). The parameters of a response to an authentication challenge vary with the type of challenge. For more information about custom authentication challenges, see Custom authentication challenge Lambda triggers.  This action might generate an SMS text message. Starting June 1, 2021, US telecom carriers require you to register an origination phone number before you can send SMS messages to US phone numbers. If you use SMS text messages in Amazon Cognito, you must register a phone number with Amazon Pinpoint. Amazon Cognito uses the registered number automatically. Otherwise, Amazon Cognito users who must receive SMS messages might not be able to sign up, activate their accounts, or sign in. If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon Simple Notification Service might place your account in the SMS sandbox. In  sandbox mode , you can send messages only to verified phone numbers. After you test your app while in the sandbox environment, you can move out of the sandbox and into production. For more information, see  SMS message settings for Amazon Cognito user pools in the Amazon Cognito Developer Guide.   Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you must use IAM credentials to authorize requests, and you must grant yourself the corresponding IAM permission in a policy.  Learn more     Signing Amazon Web Services API Requests     Using the Amazon Cognito user pools API and user pool endpoints    
    */
   adminRespondToAuthChallenge(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminRespondToAuthChallengeResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminRespondToAuthChallengeResponse, AWSError>;
   /**
@@ -220,11 +220,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   adminUpdateUserAttributes(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUpdateUserAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUpdateUserAttributesResponse, AWSError>;
   /**
-   * Signs out a user from all devices. AdminUserGlobalSignOut invalidates all identity, access and refresh tokens that Amazon Cognito has issued to a user. A user can still use a hosted UI cookie to retrieve new tokens for the duration of the 1-hour cookie validity period. Your app isn't aware that a user's access token is revoked unless it attempts to authorize a user pools API request with an access token that contains the scope aws.cognito.signin.user.admin. Your app might otherwise accept access tokens until they expire.  Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you must use IAM credentials to authorize requests, and you must grant yourself the corresponding IAM permission in a policy.  Learn more     Signing Amazon Web Services API Requests     Using the Amazon Cognito user pools API and user pool endpoints    
+   * Invalidates the identity, access, and refresh tokens that Amazon Cognito issued to a user. Call this operation with your administrative credentials when your user signs out of your app. This results in the following behavior.    Amazon Cognito no longer accepts token-authorized user operations that you authorize with a signed-out user's access tokens. For more information, see Using the Amazon Cognito user pools API and user pool endpoints. Amazon Cognito returns an Access Token has been revoked error when your app attempts to authorize a user pools API request with a revoked access token that contains the scope aws.cognito.signin.user.admin.   Amazon Cognito no longer accepts a signed-out user's ID token in a GetId  request to an identity pool with ServerSideTokenCheck enabled for its user pool IdP configuration in CognitoIdentityProvider.   Amazon Cognito no longer accepts a signed-out user's refresh tokens in refresh requests.   Other requests might be valid until your user's token expires.  Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you must use IAM credentials to authorize requests, and you must grant yourself the corresponding IAM permission in a policy.  Learn more     Signing Amazon Web Services API Requests     Using the Amazon Cognito user pools API and user pool endpoints    
    */
   adminUserGlobalSignOut(params: CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutResponse, AWSError>;
   /**
-   * Signs out a user from all devices. AdminUserGlobalSignOut invalidates all identity, access and refresh tokens that Amazon Cognito has issued to a user. A user can still use a hosted UI cookie to retrieve new tokens for the duration of the 1-hour cookie validity period. Your app isn't aware that a user's access token is revoked unless it attempts to authorize a user pools API request with an access token that contains the scope aws.cognito.signin.user.admin. Your app might otherwise accept access tokens until they expire.  Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you must use IAM credentials to authorize requests, and you must grant yourself the corresponding IAM permission in a policy.  Learn more     Signing Amazon Web Services API Requests     Using the Amazon Cognito user pools API and user pool endpoints    
+   * Invalidates the identity, access, and refresh tokens that Amazon Cognito issued to a user. Call this operation with your administrative credentials when your user signs out of your app. This results in the following behavior.    Amazon Cognito no longer accepts token-authorized user operations that you authorize with a signed-out user's access tokens. For more information, see Using the Amazon Cognito user pools API and user pool endpoints. Amazon Cognito returns an Access Token has been revoked error when your app attempts to authorize a user pools API request with a revoked access token that contains the scope aws.cognito.signin.user.admin.   Amazon Cognito no longer accepts a signed-out user's ID token in a GetId  request to an identity pool with ServerSideTokenCheck enabled for its user pool IdP configuration in CognitoIdentityProvider.   Amazon Cognito no longer accepts a signed-out user's refresh tokens in refresh requests.   Other requests might be valid until your user's token expires.  Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you must use IAM credentials to authorize requests, and you must grant yourself the corresponding IAM permission in a policy.  Learn more     Signing Amazon Web Services API Requests     Using the Amazon Cognito user pools API and user pool endpoints    
    */
   adminUserGlobalSignOut(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutResponse, AWSError>;
   /**
@@ -260,11 +260,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   confirmForgotPassword(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ConfirmForgotPasswordResponse) => void): Request<CognitoIdentityServiceProvider.Types.ConfirmForgotPasswordResponse, AWSError>;
   /**
-   * Confirms registration of a new user.  Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you can't use IAM credentials to authorize requests, and you can't grant IAM permissions in policies. For more information about authorization models in Amazon Cognito, see Using the Amazon Cognito native and OIDC APIs. 
+   * This public API operation provides a code that Amazon Cognito sent to your user when they signed up in your user pool via the SignUp API operation. After your user enters their code, they confirm ownership of the email address or phone number that they provided, and their user account becomes active. Depending on your user pool configuration, your users will receive their confirmation code in an email or SMS message. Local users who signed up in your user pool are the only type of user who can confirm sign-up with a code. Users who federate through an external identity provider (IdP) have already been confirmed by their IdP. Administrator-created users, users created with the AdminCreateUser API operation, confirm their accounts when they respond to their invitation email message and choose a password. They do not receive a confirmation code. Instead, they receive a temporary password.  Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you can't use IAM credentials to authorize requests, and you can't grant IAM permissions in policies. For more information about authorization models in Amazon Cognito, see Using the Amazon Cognito native and OIDC APIs. 
    */
   confirmSignUp(params: CognitoIdentityServiceProvider.Types.ConfirmSignUpRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ConfirmSignUpResponse) => void): Request<CognitoIdentityServiceProvider.Types.ConfirmSignUpResponse, AWSError>;
   /**
-   * Confirms registration of a new user.  Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you can't use IAM credentials to authorize requests, and you can't grant IAM permissions in policies. For more information about authorization models in Amazon Cognito, see Using the Amazon Cognito native and OIDC APIs. 
+   * This public API operation provides a code that Amazon Cognito sent to your user when they signed up in your user pool via the SignUp API operation. After your user enters their code, they confirm ownership of the email address or phone number that they provided, and their user account becomes active. Depending on your user pool configuration, your users will receive their confirmation code in an email or SMS message. Local users who signed up in your user pool are the only type of user who can confirm sign-up with a code. Users who federate through an external identity provider (IdP) have already been confirmed by their IdP. Administrator-created users, users created with the AdminCreateUser API operation, confirm their accounts when they respond to their invitation email message and choose a password. They do not receive a confirmation code. Instead, they receive a temporary password.  Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you can't use IAM credentials to authorize requests, and you can't grant IAM permissions in policies. For more information about authorization models in Amazon Cognito, see Using the Amazon Cognito native and OIDC APIs. 
    */
   confirmSignUp(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ConfirmSignUpResponse) => void): Request<CognitoIdentityServiceProvider.Types.ConfirmSignUpResponse, AWSError>;
   /**
@@ -540,11 +540,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   getUserPoolMfaConfig(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetUserPoolMfaConfigResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetUserPoolMfaConfigResponse, AWSError>;
   /**
-   * Signs out a user from all devices. GlobalSignOut invalidates all identity, access and refresh tokens that Amazon Cognito has issued to a user. A user can still use a hosted UI cookie to retrieve new tokens for the duration of the 1-hour cookie validity period. Your app isn't aware that a user's access token is revoked unless it attempts to authorize a user pools API request with an access token that contains the scope aws.cognito.signin.user.admin. Your app might otherwise accept access tokens until they expire.  Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you can't use IAM credentials to authorize requests, and you can't grant IAM permissions in policies. For more information about authorization models in Amazon Cognito, see Using the Amazon Cognito native and OIDC APIs. 
+   * Invalidates the identity, access, and refresh tokens that Amazon Cognito issued to a user. Call this operation when your user signs out of your app. This results in the following behavior.    Amazon Cognito no longer accepts token-authorized user operations that you authorize with a signed-out user's access tokens. For more information, see Using the Amazon Cognito user pools API and user pool endpoints. Amazon Cognito returns an Access Token has been revoked error when your app attempts to authorize a user pools API request with a revoked access token that contains the scope aws.cognito.signin.user.admin.   Amazon Cognito no longer accepts a signed-out user's ID token in a GetId  request to an identity pool with ServerSideTokenCheck enabled for its user pool IdP configuration in CognitoIdentityProvider.   Amazon Cognito no longer accepts a signed-out user's refresh tokens in refresh requests.   Other requests might be valid until your user's token expires.  Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you can't use IAM credentials to authorize requests, and you can't grant IAM permissions in policies. For more information about authorization models in Amazon Cognito, see Using the Amazon Cognito native and OIDC APIs. 
    */
   globalSignOut(params: CognitoIdentityServiceProvider.Types.GlobalSignOutRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GlobalSignOutResponse) => void): Request<CognitoIdentityServiceProvider.Types.GlobalSignOutResponse, AWSError>;
   /**
-   * Signs out a user from all devices. GlobalSignOut invalidates all identity, access and refresh tokens that Amazon Cognito has issued to a user. A user can still use a hosted UI cookie to retrieve new tokens for the duration of the 1-hour cookie validity period. Your app isn't aware that a user's access token is revoked unless it attempts to authorize a user pools API request with an access token that contains the scope aws.cognito.signin.user.admin. Your app might otherwise accept access tokens until they expire.  Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you can't use IAM credentials to authorize requests, and you can't grant IAM permissions in policies. For more information about authorization models in Amazon Cognito, see Using the Amazon Cognito native and OIDC APIs. 
+   * Invalidates the identity, access, and refresh tokens that Amazon Cognito issued to a user. Call this operation when your user signs out of your app. This results in the following behavior.    Amazon Cognito no longer accepts token-authorized user operations that you authorize with a signed-out user's access tokens. For more information, see Using the Amazon Cognito user pools API and user pool endpoints. Amazon Cognito returns an Access Token has been revoked error when your app attempts to authorize a user pools API request with a revoked access token that contains the scope aws.cognito.signin.user.admin.   Amazon Cognito no longer accepts a signed-out user's ID token in a GetId  request to an identity pool with ServerSideTokenCheck enabled for its user pool IdP configuration in CognitoIdentityProvider.   Amazon Cognito no longer accepts a signed-out user's refresh tokens in refresh requests.   Other requests might be valid until your user's token expires.  Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you can't use IAM credentials to authorize requests, and you can't grant IAM permissions in policies. For more information about authorization models in Amazon Cognito, see Using the Amazon Cognito native and OIDC APIs. 
    */
   globalSignOut(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GlobalSignOutResponse) => void): Request<CognitoIdentityServiceProvider.Types.GlobalSignOutResponse, AWSError>;
   /**
@@ -644,11 +644,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   resendConfirmationCode(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ResendConfirmationCodeResponse) => void): Request<CognitoIdentityServiceProvider.Types.ResendConfirmationCodeResponse, AWSError>;
   /**
-   * Responds to the authentication challenge.  Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you can't use IAM credentials to authorize requests, and you can't grant IAM permissions in policies. For more information about authorization models in Amazon Cognito, see Using the Amazon Cognito native and OIDC APIs.   This action might generate an SMS text message. Starting June 1, 2021, US telecom carriers require you to register an origination phone number before you can send SMS messages to US phone numbers. If you use SMS text messages in Amazon Cognito, you must register a phone number with Amazon Pinpoint. Amazon Cognito uses the registered number automatically. Otherwise, Amazon Cognito users who must receive SMS messages might not be able to sign up, activate their accounts, or sign in. If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon Simple Notification Service might place your account in the SMS sandbox. In  sandbox mode , you can send messages only to verified phone numbers. After you test your app while in the sandbox environment, you can move out of the sandbox and into production. For more information, see  SMS message settings for Amazon Cognito user pools in the Amazon Cognito Developer Guide. 
+   * Some API operations in a user pool generate a challenge, like a prompt for an MFA code, for device authentication that bypasses MFA, or for a custom authentication challenge. A RespondToAuthChallenge API request provides the answer to that challenge, like a code or a secure remote password (SRP). The parameters of a response to an authentication challenge vary with the type of challenge. For more information about custom authentication challenges, see Custom authentication challenge Lambda triggers.  Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you can't use IAM credentials to authorize requests, and you can't grant IAM permissions in policies. For more information about authorization models in Amazon Cognito, see Using the Amazon Cognito native and OIDC APIs.   This action might generate an SMS text message. Starting June 1, 2021, US telecom carriers require you to register an origination phone number before you can send SMS messages to US phone numbers. If you use SMS text messages in Amazon Cognito, you must register a phone number with Amazon Pinpoint. Amazon Cognito uses the registered number automatically. Otherwise, Amazon Cognito users who must receive SMS messages might not be able to sign up, activate their accounts, or sign in. If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon Simple Notification Service might place your account in the SMS sandbox. In  sandbox mode , you can send messages only to verified phone numbers. After you test your app while in the sandbox environment, you can move out of the sandbox and into production. For more information, see  SMS message settings for Amazon Cognito user pools in the Amazon Cognito Developer Guide. 
    */
   respondToAuthChallenge(params: CognitoIdentityServiceProvider.Types.RespondToAuthChallengeRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.RespondToAuthChallengeResponse) => void): Request<CognitoIdentityServiceProvider.Types.RespondToAuthChallengeResponse, AWSError>;
   /**
-   * Responds to the authentication challenge.  Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you can't use IAM credentials to authorize requests, and you can't grant IAM permissions in policies. For more information about authorization models in Amazon Cognito, see Using the Amazon Cognito native and OIDC APIs.   This action might generate an SMS text message. Starting June 1, 2021, US telecom carriers require you to register an origination phone number before you can send SMS messages to US phone numbers. If you use SMS text messages in Amazon Cognito, you must register a phone number with Amazon Pinpoint. Amazon Cognito uses the registered number automatically. Otherwise, Amazon Cognito users who must receive SMS messages might not be able to sign up, activate their accounts, or sign in. If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon Simple Notification Service might place your account in the SMS sandbox. In  sandbox mode , you can send messages only to verified phone numbers. After you test your app while in the sandbox environment, you can move out of the sandbox and into production. For more information, see  SMS message settings for Amazon Cognito user pools in the Amazon Cognito Developer Guide. 
+   * Some API operations in a user pool generate a challenge, like a prompt for an MFA code, for device authentication that bypasses MFA, or for a custom authentication challenge. A RespondToAuthChallenge API request provides the answer to that challenge, like a code or a secure remote password (SRP). The parameters of a response to an authentication challenge vary with the type of challenge. For more information about custom authentication challenges, see Custom authentication challenge Lambda triggers.  Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you can't use IAM credentials to authorize requests, and you can't grant IAM permissions in policies. For more information about authorization models in Amazon Cognito, see Using the Amazon Cognito native and OIDC APIs.   This action might generate an SMS text message. Starting June 1, 2021, US telecom carriers require you to register an origination phone number before you can send SMS messages to US phone numbers. If you use SMS text messages in Amazon Cognito, you must register a phone number with Amazon Pinpoint. Amazon Cognito uses the registered number automatically. Otherwise, Amazon Cognito users who must receive SMS messages might not be able to sign up, activate their accounts, or sign in. If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon Simple Notification Service might place your account in the SMS sandbox. In  sandbox mode , you can send messages only to verified phone numbers. After you test your app while in the sandbox environment, you can move out of the sandbox and into production. For more information, see  SMS message settings for Amazon Cognito user pools in the Amazon Cognito Developer Guide. 
    */
   respondToAuthChallenge(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.RespondToAuthChallengeResponse) => void): Request<CognitoIdentityServiceProvider.Types.RespondToAuthChallengeResponse, AWSError>;
   /**
@@ -788,11 +788,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   updateResourceServer(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateResourceServerResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateResourceServerResponse, AWSError>;
   /**
-   * Allows a user to update a specific attribute (one at a time).  Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you can't use IAM credentials to authorize requests, and you can't grant IAM permissions in policies. For more information about authorization models in Amazon Cognito, see Using the Amazon Cognito native and OIDC APIs.   This action might generate an SMS text message. Starting June 1, 2021, US telecom carriers require you to register an origination phone number before you can send SMS messages to US phone numbers. If you use SMS text messages in Amazon Cognito, you must register a phone number with Amazon Pinpoint. Amazon Cognito uses the registered number automatically. Otherwise, Amazon Cognito users who must receive SMS messages might not be able to sign up, activate their accounts, or sign in. If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon Simple Notification Service might place your account in the SMS sandbox. In  sandbox mode , you can send messages only to verified phone numbers. After you test your app while in the sandbox environment, you can move out of the sandbox and into production. For more information, see  SMS message settings for Amazon Cognito user pools in the Amazon Cognito Developer Guide. 
+   * With this operation, your users can update one or more of their attributes with their own credentials. You authorize this API request with the user's access token. To delete an attribute from your user, submit the attribute in your API request with a blank value. Custom attribute values in this request must include the custom: prefix.  Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you can't use IAM credentials to authorize requests, and you can't grant IAM permissions in policies. For more information about authorization models in Amazon Cognito, see Using the Amazon Cognito native and OIDC APIs.   This action might generate an SMS text message. Starting June 1, 2021, US telecom carriers require you to register an origination phone number before you can send SMS messages to US phone numbers. If you use SMS text messages in Amazon Cognito, you must register a phone number with Amazon Pinpoint. Amazon Cognito uses the registered number automatically. Otherwise, Amazon Cognito users who must receive SMS messages might not be able to sign up, activate their accounts, or sign in. If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon Simple Notification Service might place your account in the SMS sandbox. In  sandbox mode , you can send messages only to verified phone numbers. After you test your app while in the sandbox environment, you can move out of the sandbox and into production. For more information, see  SMS message settings for Amazon Cognito user pools in the Amazon Cognito Developer Guide. 
    */
   updateUserAttributes(params: CognitoIdentityServiceProvider.Types.UpdateUserAttributesRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateUserAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateUserAttributesResponse, AWSError>;
   /**
-   * Allows a user to update a specific attribute (one at a time).  Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you can't use IAM credentials to authorize requests, and you can't grant IAM permissions in policies. For more information about authorization models in Amazon Cognito, see Using the Amazon Cognito native and OIDC APIs.   This action might generate an SMS text message. Starting June 1, 2021, US telecom carriers require you to register an origination phone number before you can send SMS messages to US phone numbers. If you use SMS text messages in Amazon Cognito, you must register a phone number with Amazon Pinpoint. Amazon Cognito uses the registered number automatically. Otherwise, Amazon Cognito users who must receive SMS messages might not be able to sign up, activate their accounts, or sign in. If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon Simple Notification Service might place your account in the SMS sandbox. In  sandbox mode , you can send messages only to verified phone numbers. After you test your app while in the sandbox environment, you can move out of the sandbox and into production. For more information, see  SMS message settings for Amazon Cognito user pools in the Amazon Cognito Developer Guide. 
+   * With this operation, your users can update one or more of their attributes with their own credentials. You authorize this API request with the user's access token. To delete an attribute from your user, submit the attribute in your API request with a blank value. Custom attribute values in this request must include the custom: prefix.  Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you can't use IAM credentials to authorize requests, and you can't grant IAM permissions in policies. For more information about authorization models in Amazon Cognito, see Using the Amazon Cognito native and OIDC APIs.   This action might generate an SMS text message. Starting June 1, 2021, US telecom carriers require you to register an origination phone number before you can send SMS messages to US phone numbers. If you use SMS text messages in Amazon Cognito, you must register a phone number with Amazon Pinpoint. Amazon Cognito uses the registered number automatically. Otherwise, Amazon Cognito users who must receive SMS messages might not be able to sign up, activate their accounts, or sign in. If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service, Amazon Simple Notification Service might place your account in the SMS sandbox. In  sandbox mode , you can send messages only to verified phone numbers. After you test your app while in the sandbox environment, you can move out of the sandbox and into production. For more information, see  SMS message settings for Amazon Cognito user pools in the Amazon Cognito Developer Guide. 
    */
   updateUserAttributes(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateUserAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateUserAttributesResponse, AWSError>;
   /**
@@ -899,11 +899,11 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: UserPoolIdType;
     /**
-     * The username for the user.
+     * The username of the user that you want to query or modify. The value of this parameter is typically your user's username, but it can be any of their alias attributes. If username isn't an alias attribute in your user pool, you can also use their sub in this request.
      */
     Username: UsernameType;
     /**
-     * The group name.
+     * The name of the group that you want to add your user to.
      */
     GroupName: GroupNameType;
   }
@@ -913,7 +913,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: UserPoolIdType;
     /**
-     * The user name for which you want to confirm user registration.
+     * The username of the user that you want to query or modify. The value of this parameter is typically your user's username, but it can be any of their alias attributes. If username isn't an alias attribute in your user pool, you can also use their sub in this request.
      */
     Username: UsernameType;
     /**
@@ -929,7 +929,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     AllowAdminCreateUserOnly?: BooleanType;
     /**
-     * The user account expiration limit, in days, after which a new account that hasn't signed in is no longer usable. To reset the account after that time limit, you must call AdminCreateUser again, specifying "RESEND" for the MessageAction parameter. The default value for this parameter is 7.   If you set a value for TemporaryPasswordValidityDays in PasswordPolicy, that value will be used, and UnusedAccountValidityDays will be no longer be an available parameter for that user pool. 
+     * The user account expiration limit, in days, after which a new account that hasn't signed in is no longer usable. To reset the account after that time limit, you must call AdminCreateUser again, specifying "RESEND" for the MessageAction parameter. The default value for this parameter is 7.  If you set a value for TemporaryPasswordValidityDays in PasswordPolicy, that value will be used, and UnusedAccountValidityDays will be no longer be an available parameter for that user pool. 
      */
     UnusedAccountValidityDays?: AdminCreateUserUnusedAccountValidityDaysType;
     /**
@@ -951,7 +951,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserAttributes?: AttributeListType;
     /**
-     * The user's validation data. This is an array of name-value pairs that contain user attributes and attribute values that you can use for custom validation, such as restricting the types of user accounts that can be registered. For example, you might choose to allow or disallow user sign-up based on the user's domain. To configure custom validation, you must create a Pre Sign-up Lambda trigger for the user pool as described in the Amazon Cognito Developer Guide. The Lambda trigger receives the validation data and uses it in the validation process. The user's validation data isn't persisted.
+     * Temporary user attributes that contribute to the outcomes of your pre sign-up Lambda trigger. This set of key-value pairs are for custom validation of information that you collect from your users but don't need to retain. Your Lambda function can analyze this additional data and act on it. Your function might perform external API operations like logging user attributes and validation data to Amazon CloudWatch Logs. Validation data might also affect the response that your function returns to Amazon Cognito, like automatically confirming the user if they sign up from within your network. For more information about the pre sign-up Lambda trigger, see Pre sign-up Lambda trigger.
      */
     ValidationData?: AttributeListType;
     /**
@@ -988,7 +988,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: UserPoolIdType;
     /**
-     * The user name of the user from which you would like to delete attributes.
+     * The username of the user that you want to query or modify. The value of this parameter is typically your user's username, but it can be any of their alias attributes. If username isn't an alias attribute in your user pool, you can also use their sub in this request.
      */
     Username: UsernameType;
     /**
@@ -1004,7 +1004,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: UserPoolIdType;
     /**
-     * The user name of the user you want to delete.
+     * The username of the user that you want to query or modify. The value of this parameter is typically your user's username, but it can be any of their alias attributes. If username isn't an alias attribute in your user pool, you can also use their sub in this request.
      */
     Username: UsernameType;
   }
@@ -1026,7 +1026,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: UserPoolIdType;
     /**
-     * The user name of the user you want to disable.
+     * The username of the user that you want to query or modify. The value of this parameter is typically your user's username, but it can be any of their alias attributes. If username isn't an alias attribute in your user pool, you can also use their sub in this request.
      */
     Username: UsernameType;
   }
@@ -1038,7 +1038,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: UserPoolIdType;
     /**
-     * The user name of the user you want to enable.
+     * The username of the user that you want to query or modify. The value of this parameter is typically your user's username, but it can be any of their alias attributes. If username isn't an alias attribute in your user pool, you can also use their sub in this request.
      */
     Username: UsernameType;
   }
@@ -1050,7 +1050,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: UserPoolIdType;
     /**
-     * The user name.
+     * The username of the user that you want to query or modify. The value of this parameter is typically your user's username, but it can be any of their alias attributes. If username isn't an alias attribute in your user pool, you can also use their sub in this request.
      */
     Username: UsernameType;
     /**
@@ -1068,7 +1068,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: UserPoolIdType;
     /**
-     * The user name.
+     * The username of the user that you want to query or modify. The value of this parameter is typically your user's username, but it can be any of their alias attributes. If username isn't an alias attribute in your user pool, you can also use their sub in this request.
      */
     Username: UsernameType;
   }
@@ -1084,7 +1084,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: UserPoolIdType;
     /**
-     * The user name of the user you want to retrieve.
+     * The username of the user that you want to query or modify. The value of this parameter is typically your user's username, but it can be any of their alias attributes. If username isn't an alias attribute in your user pool, you can also use their sub in this request.
      */
     Username: UsernameType;
   }
@@ -1144,7 +1144,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     AuthParameters?: AuthParametersType;
     /**
-     * A map of custom key-value pairs that you can provide as input for certain custom workflows that this action triggers. You create custom workflows by assigning Lambda functions to user pool triggers. When you use the AdminInitiateAuth API action, Amazon Cognito invokes the Lambda functions that are specified for various triggers. The ClientMetadata value is passed as input to the functions for only the following triggers:   Pre signup   Pre authentication   User migration   When Amazon Cognito invokes the functions for these triggers, it passes a JSON payload, which the function receives as input. This payload contains a validationData attribute, which provides the data that you assigned to the ClientMetadata parameter in your AdminInitiateAuth request. In your function code in Lambda, you can process the validationData value to enhance your workflow for your specific needs. When you use the AdminInitiateAuth API action, Amazon Cognito also invokes the functions for the following triggers, but it doesn't provide the ClientMetadata value as input:   Post authentication   Custom message   Pre token generation   Create auth challenge   Define auth challenge   Verify auth challenge   For more information, see  Customizing user pool Workflows with Lambda Triggers in the Amazon Cognito Developer Guide.  When you use the ClientMetadata parameter, remember that Amazon Cognito won't do the following:   Store the ClientMetadata value. This data is available only to Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration doesn't include triggers, the ClientMetadata parameter serves no purpose.   Validate the ClientMetadata value.   Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide sensitive information.   
+     * A map of custom key-value pairs that you can provide as input for certain custom workflows that this action triggers. You create custom workflows by assigning Lambda functions to user pool triggers. When you use the AdminInitiateAuth API action, Amazon Cognito invokes the Lambda functions that are specified for various triggers. The ClientMetadata value is passed as input to the functions for only the following triggers:   Pre signup   Pre authentication   User migration   When Amazon Cognito invokes the functions for these triggers, it passes a JSON payload, which the function receives as input. This payload contains a validationData attribute, which provides the data that you assigned to the ClientMetadata parameter in your AdminInitiateAuth request. In your function code in Lambda, you can process the validationData value to enhance your workflow for your specific needs. When you use the AdminInitiateAuth API action, Amazon Cognito also invokes the functions for the following triggers, but it doesn't provide the ClientMetadata value as input:   Post authentication   Custom message   Pre token generation   Create auth challenge   Define auth challenge   For more information, see  Customizing user pool Workflows with Lambda Triggers in the Amazon Cognito Developer Guide.  When you use the ClientMetadata parameter, remember that Amazon Cognito won't do the following:   Store the ClientMetadata value. This data is available only to Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration doesn't include triggers, the ClientMetadata parameter serves no purpose.   Validate the ClientMetadata value.   Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide sensitive information.   
      */
     ClientMetadata?: ClientMetadataType;
     /**
@@ -1158,7 +1158,7 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export interface AdminInitiateAuthResponse {
     /**
-     * The name of the challenge that you're responding to with this call. This is returned in the AdminInitiateAuth response if you must pass another challenge.    MFA_SETUP: If MFA is required, users who don't have at least one of the MFA methods set up are presented with an MFA_SETUP challenge. The user must set up at least one MFA type to continue to authenticate.    SELECT_MFA_TYPE: Selects the MFA type. Valid MFA options are SMS_MFA for text SMS MFA, and SOFTWARE_TOKEN_MFA for time-based one-time password (TOTP) software token MFA.    SMS_MFA: Next challenge is to supply an SMS_MFA_CODE, delivered via SMS.    PASSWORD_VERIFIER: Next challenge is to supply PASSWORD_CLAIM_SIGNATURE, PASSWORD_CLAIM_SECRET_BLOCK, and TIMESTAMP after the client-side SRP calculations.    CUSTOM_CHALLENGE: This is returned if your custom authentication flow determines that the user should pass another challenge before tokens are issued.    DEVICE_SRP_AUTH: If device tracking was activated in your user pool and the previous challenges were passed, this challenge is returned so that Amazon Cognito can start tracking this device.    DEVICE_PASSWORD_VERIFIER: Similar to PASSWORD_VERIFIER, but for devices only.    ADMIN_NO_SRP_AUTH: This is returned if you must authenticate with USERNAME and PASSWORD directly. An app client must be enabled to use this flow.    NEW_PASSWORD_REQUIRED: For users who are required to change their passwords after successful first login. Respond to this challenge with NEW_PASSWORD and any required attributes that Amazon Cognito returned in the requiredAttributes parameter. You can also set values for attributes that aren't required by your user pool and that your app client can write. For more information, see AdminRespondToAuthChallenge.  In a NEW_PASSWORD_REQUIRED challenge response, you can't modify a required attribute that already has a value. In AdminRespondToAuthChallenge, set a value for any keys that Amazon Cognito returned in the requiredAttributes parameter, then use the AdminUpdateUserAttributes API operation to modify the value of any additional attributes.     MFA_SETUP: For users who are required to set up an MFA factor before they can sign in. The MFA types activated for the user pool will be listed in the challenge parameters MFA_CAN_SETUP value.   To set up software token MFA, use the session returned here from InitiateAuth as an input to AssociateSoftwareToken, and use the session returned by VerifySoftwareToken as an input to RespondToAuthChallenge with challenge name MFA_SETUP to complete sign-in. To set up SMS MFA, users will need help from an administrator to add a phone number to their account and then call InitiateAuth again to restart sign-in.  
+     * The name of the challenge that you're responding to with this call. This is returned in the AdminInitiateAuth response if you must pass another challenge.    MFA_SETUP: If MFA is required, users who don't have at least one of the MFA methods set up are presented with an MFA_SETUP challenge. The user must set up at least one MFA type to continue to authenticate.    SELECT_MFA_TYPE: Selects the MFA type. Valid MFA options are SMS_MFA for text SMS MFA, and SOFTWARE_TOKEN_MFA for time-based one-time password (TOTP) software token MFA.    SMS_MFA: Next challenge is to supply an SMS_MFA_CODE, delivered via SMS.    PASSWORD_VERIFIER: Next challenge is to supply PASSWORD_CLAIM_SIGNATURE, PASSWORD_CLAIM_SECRET_BLOCK, and TIMESTAMP after the client-side SRP calculations.    CUSTOM_CHALLENGE: This is returned if your custom authentication flow determines that the user should pass another challenge before tokens are issued.    DEVICE_SRP_AUTH: If device tracking was activated in your user pool and the previous challenges were passed, this challenge is returned so that Amazon Cognito can start tracking this device.    DEVICE_PASSWORD_VERIFIER: Similar to PASSWORD_VERIFIER, but for devices only.    ADMIN_NO_SRP_AUTH: This is returned if you must authenticate with USERNAME and PASSWORD directly. An app client must be enabled to use this flow.    NEW_PASSWORD_REQUIRED: For users who are required to change their passwords after successful first login. Respond to this challenge with NEW_PASSWORD and any required attributes that Amazon Cognito returned in the requiredAttributes parameter. You can also set values for attributes that aren't required by your user pool and that your app client can write. For more information, see AdminRespondToAuthChallenge.  In a NEW_PASSWORD_REQUIRED challenge response, you can't modify a required attribute that already has a value. In AdminRespondToAuthChallenge, set a value for any keys that Amazon Cognito returned in the requiredAttributes parameter, then use the AdminUpdateUserAttributes API operation to modify the value of any additional attributes.     MFA_SETUP: For users who are required to set up an MFA factor before they can sign in. The MFA types activated for the user pool will be listed in the challenge parameters MFAS_CAN_SETUP value.   To set up software token MFA, use the session returned here from InitiateAuth as an input to AssociateSoftwareToken, and use the session returned by VerifySoftwareToken as an input to RespondToAuthChallenge with challenge name MFA_SETUP to complete sign-in. To set up SMS MFA, users will need help from an administrator to add a phone number to their account and then call InitiateAuth again to restart sign-in.  
      */
     ChallengeName?: ChallengeNameType;
     /**
@@ -1196,7 +1196,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: UserPoolIdType;
     /**
-     * The user name.
+     * The username of the user that you want to query or modify. The value of this parameter is typically your user's username, but it can be any of their alias attributes. If username isn't an alias attribute in your user pool, you can also use their sub in this request.
      */
     Username: UsernameType;
     /**
@@ -1204,7 +1204,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     Limit?: QueryLimitType;
     /**
-     * The pagination token.
+     * This API operation returns a limited number of results. The pagination token is an identifier that you can present in an additional API request with the same parameters. When you include the pagination token, Amazon Cognito returns the next set of items after the current list. Subsequent requests return a new pagination token. By use of this token, you can paginate through the full list of items.
      */
     PaginationToken?: SearchPaginationTokenType;
   }
@@ -1214,13 +1214,13 @@ declare namespace CognitoIdentityServiceProvider {
      */
     Devices?: DeviceListType;
     /**
-     * The pagination token.
+     * The identifier that Amazon Cognito returned with the previous request to this operation. When you include a pagination token in your request, Amazon Cognito returns the next set of items in the list. By use of this token, you can paginate through the full list of items.
      */
     PaginationToken?: SearchPaginationTokenType;
   }
   export interface AdminListGroupsForUserRequest {
     /**
-     * The username for the user.
+     * The username of the user that you want to query or modify. The value of this parameter is typically your user's username, but it can be any of their alias attributes. If username isn't an alias attribute in your user pool, you can also use their sub in this request.
      */
     Username: UsernameType;
     /**
@@ -1252,7 +1252,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: UserPoolIdType;
     /**
-     * The user pool username or an alias.
+     * The username of the user that you want to query or modify. The value of this parameter is typically your user's username, but it can be any of their alias attributes. If username isn't an alias attribute in your user pool, you can also use their sub in this request.
      */
     Username: UsernameType;
     /**
@@ -1280,7 +1280,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: UserPoolIdType;
     /**
-     * The username for the user.
+     * The username of the user that you want to query or modify. The value of this parameter is typically your user's username, but it can be any of their alias attributes. If username isn't an alias attribute in your user pool, you can also use their sub in this request.
      */
     Username: UsernameType;
     /**
@@ -1294,7 +1294,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: UserPoolIdType;
     /**
-     * The user name of the user whose password you want to reset.
+     * The username of the user that you want to query or modify. The value of this parameter is typically your user's username, but it can be any of their alias attributes. If username isn't an alias attribute in your user pool, you can also use their sub in this request.
      */
     Username: UsernameType;
     /**
@@ -1318,7 +1318,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     ChallengeName: ChallengeNameType;
     /**
-     * The challenge responses. These are inputs corresponding to the value of ChallengeName, for example:    SMS_MFA: SMS_MFA_CODE, USERNAME, SECRET_HASH (if app client is configured with client secret).    PASSWORD_VERIFIER: PASSWORD_CLAIM_SIGNATURE, PASSWORD_CLAIM_SECRET_BLOCK, TIMESTAMP, USERNAME, SECRET_HASH (if app client is configured with client secret).   PASSWORD_VERIFIER requires DEVICE_KEY when signing in with a remembered device.     ADMIN_NO_SRP_AUTH: PASSWORD, USERNAME, SECRET_HASH (if app client is configured with client secret).     NEW_PASSWORD_REQUIRED: NEW_PASSWORD, USERNAME, SECRET_HASH (if app client is configured with client secret). To set any required attributes that Amazon Cognito returned as requiredAttributes in the AdminInitiateAuth response, add a userAttributes.attributename  parameter. This parameter can also set values for writable attributes that aren't required by your user pool.  In a NEW_PASSWORD_REQUIRED challenge response, you can't modify a required attribute that already has a value. In AdminRespondToAuthChallenge, set a value for any keys that Amazon Cognito returned in the requiredAttributes parameter, then use the AdminUpdateUserAttributes API operation to modify the value of any additional attributes.     MFA_SETUP requires USERNAME, plus you must use the session value returned by VerifySoftwareToken in the Session parameter.   The value of the USERNAME attribute must be the user's actual username, not an alias (such as an email address or phone number). To make this simpler, the AdminInitiateAuth response includes the actual username value in the USERNAMEUSER_ID_FOR_SRP attribute. This happens even if you specified an alias in your call to AdminInitiateAuth. For more information about SECRET_HASH, see Computing secret hash values. For information about DEVICE_KEY, see Working with user devices in your user pool.
+     * The responses to the challenge that you received in the previous request. Each challenge has its own required response parameters. The following examples are partial JSON request bodies that highlight challenge-response parameters.  You must provide a SECRET_HASH parameter in all challenge responses to an app client that has a client secret.   SMS_MFA   "ChallengeName": "SMS_MFA", "ChallengeResponses": {"SMS_MFA_CODE": "[SMS_code]", "USERNAME": "[username]"}   PASSWORD_VERIFIER   "ChallengeName": "PASSWORD_VERIFIER", "ChallengeResponses": {"PASSWORD_CLAIM_SIGNATURE": "[claim_signature]", "PASSWORD_CLAIM_SECRET_BLOCK": "[secret_block]", "TIMESTAMP": [timestamp], "USERNAME": "[username]"}  Add "DEVICE_KEY" when you sign in with a remembered device.  CUSTOM_CHALLENGE   "ChallengeName": "CUSTOM_CHALLENGE", "ChallengeResponses": {"USERNAME": "[username]", "ANSWER": "[challenge_answer]"}  Add "DEVICE_KEY" when you sign in with a remembered device.  NEW_PASSWORD_REQUIRED   "ChallengeName": "NEW_PASSWORD_REQUIRED", "ChallengeResponses": {"NEW_PASSWORD": "[new_password]", "USERNAME": "[username]"}  To set any required attributes that InitiateAuth returned in an requiredAttributes parameter, add "userAttributes.[attribute_name]": "[attribute_value]". This parameter can also set values for writable attributes that aren't required by your user pool.  In a NEW_PASSWORD_REQUIRED challenge response, you can't modify a required attribute that already has a value. In RespondToAuthChallenge, set a value for any keys that Amazon Cognito returned in the requiredAttributes parameter, then use the UpdateUserAttributes API operation to modify the value of any additional attributes.   SOFTWARE_TOKEN_MFA   "ChallengeName": "SOFTWARE_TOKEN_MFA", "ChallengeResponses": {"USERNAME": "[username]", "SOFTWARE_TOKEN_MFA_CODE": [authenticator_code]}   DEVICE_SRP_AUTH   "ChallengeName": "DEVICE_SRP_AUTH", "ChallengeResponses": {"USERNAME": "[username]", "DEVICE_KEY": "[device_key]", "SRP_A": "[srp_a]"}   DEVICE_PASSWORD_VERIFIER   "ChallengeName": "DEVICE_PASSWORD_VERIFIER", "ChallengeResponses": {"DEVICE_KEY": "[device_key]", "PASSWORD_CLAIM_SIGNATURE": "[claim_signature]", "PASSWORD_CLAIM_SECRET_BLOCK": "[secret_block]", "TIMESTAMP": [timestamp], "USERNAME": "[username]"}   MFA_SETUP   "ChallengeName": "MFA_SETUP", "ChallengeResponses": {"USERNAME": "[username]"}, "SESSION": "[Session ID from VerifySoftwareToken]"   SELECT_MFA_TYPE   "ChallengeName": "SELECT_MFA_TYPE", "ChallengeResponses": {"USERNAME": "[username]", "ANSWER": "[SMS_MFA or SOFTWARE_TOKEN_MFA]"}    For more information about SECRET_HASH, see Computing secret hash values. For information about DEVICE_KEY, see Working with user devices in your user pool.
      */
     ChallengeResponses?: ChallengeResponsesType;
     /**
@@ -1366,7 +1366,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     SoftwareTokenMfaSettings?: SoftwareTokenMfaSettingsType;
     /**
-     * The user pool username or alias.
+     * The username of the user that you want to query or modify. The value of this parameter is typically your user's username, but it can be any of their alias attributes. If username isn't an alias attribute in your user pool, you can also use their sub in this request.
      */
     Username: UsernameType;
     /**
@@ -1382,7 +1382,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: UserPoolIdType;
     /**
-     * The user name of the user whose password you want to set.
+     * The username of the user that you want to query or modify. The value of this parameter is typically your user's username, but it can be any of their alias attributes. If username isn't an alias attribute in your user pool, you can also use their sub in this request.
      */
     Username: UsernameType;
     /**
@@ -1402,7 +1402,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: UserPoolIdType;
     /**
-     * The user name of the user whose options you're setting.
+     * The username of the user that you want to query or modify. The value of this parameter is typically your user's username, but it can be any of their alias attributes. If username isn't an alias attribute in your user pool, you can also use their sub in this request.
      */
     Username: UsernameType;
     /**
@@ -1418,7 +1418,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: UserPoolIdType;
     /**
-     * The user pool username.
+     * The username of the user that you want to query or modify. The value of this parameter is typically your user's username, but it can be any of their alias attributes. If username isn't an alias attribute in your user pool, you can also use their sub in this request.
      */
     Username: UsernameType;
     /**
@@ -1438,7 +1438,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: UserPoolIdType;
     /**
-     * The user name.
+     * The username of the user that you want to query or modify. The value of this parameter is typically your user's username, but it can be any of their alias attributes. If username isn't an alias attribute in your user pool, you can also use their sub in this request.
      */
     Username: UsernameType;
     /**
@@ -1458,7 +1458,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: UserPoolIdType;
     /**
-     * The user name of the user for whom you want to update user attributes.
+     * The username of the user that you want to query or modify. The value of this parameter is typically your user's username, but it can be any of their alias attributes. If username isn't an alias attribute in your user pool, you can also use their sub in this request.
      */
     Username: UsernameType;
     /**
@@ -1478,7 +1478,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: UserPoolIdType;
     /**
-     * The user name.
+     * The username of the user that you want to query or modify. The value of this parameter is typically your user's username, but it can be any of their alias attributes. If username isn't an alias attribute in your user pool, you can also use their sub in this request.
      */
     Username: UsernameType;
   }
@@ -1734,7 +1734,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     SecretHash?: SecretHashType;
     /**
-     * The user name of the user for whom you want to enter a code to retrieve a forgotten password.
+     * The username of the user that you want to query or modify. The value of this parameter is typically your user's username, but it can be any of their alias attributes. If username isn't an alias attribute in your user pool, you can also use their sub in this request.
      */
     Username: UsernameType;
     /**
@@ -1770,7 +1770,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     SecretHash?: SecretHashType;
     /**
-     * The user name of the user whose registration you want to confirm.
+     * The username of the user that you want to query or modify. The value of this parameter is typically your user's username, but it can be any of their alias attributes. If username isn't an alias attribute in your user pool, you can also use their sub in this request.
      */
     Username: UsernameType;
     /**
@@ -1953,11 +1953,11 @@ declare namespace CognitoIdentityServiceProvider {
      */
     TokenValidityUnits?: TokenValidityUnitsType;
     /**
-     * The read attributes.
+     * The list of user attributes that you want your app client to have read-only access to. After your user authenticates in your app, their access token authorizes them to read their own attribute value for any attribute in this list. An example of this kind of activity is when your user selects a link to view their profile information. Your app makes a GetUser API request to retrieve and display your user's profile data. When you don't specify the ReadAttributes for your app client, your app can read the values of email_verified, phone_number_verified, and the Standard attributes of your user pool. When your user pool has read access to these default attributes, ReadAttributes doesn't return any information. Amazon Cognito only populates ReadAttributes in the API response if you have specified your own custom set of read attributes.
      */
     ReadAttributes?: ClientPermissionListType;
     /**
-     * The user pool attributes that the app client can write to. If your app client allows users to sign in through an IdP, this array must include all attributes that you have mapped to IdP attributes. Amazon Cognito updates mapped attributes when users sign in to your application through an IdP. If your app client does not have write access to a mapped attribute, Amazon Cognito throws an error when it tries to update the attribute. For more information, see Specifying IdP Attribute Mappings for Your user pool.
+     * The list of user attributes that you want your app client to have write access to. After your user authenticates in your app, their access token authorizes them to set or modify their own attribute value for any attribute in this list. An example of this kind of activity is when you present your user with a form to update their profile information and they change their last name. Your app then makes an UpdateUserAttributes API request and sets family_name to the new value.  When you don't specify the WriteAttributes for your app client, your app can write the values of the Standard attributes of your user pool. When your user pool has write access to these default attributes, WriteAttributes doesn't return any information. Amazon Cognito only populates WriteAttributes in the API response if you have specified your own custom set of write attributes. If your app client allows users to sign in through an IdP, this array must include all attributes that you have mapped to IdP attributes. Amazon Cognito updates mapped attributes when users sign in to your application through an IdP. If your app client does not have write access to a mapped attribute, Amazon Cognito throws an error when it tries to update the attribute. For more information, see Specifying IdP Attribute Mappings for Your user pool.
      */
     WriteAttributes?: ClientPermissionListType;
     /**
@@ -2149,22 +2149,22 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export interface CustomEmailLambdaVersionConfigType {
     /**
-     * Signature of the "request" attribute in the "event" information Amazon Cognito passes to your custom email Lambda function. The only supported value is V1_0.
+     * The user pool trigger version of the request that Amazon Cognito sends to your Lambda function. Higher-numbered versions add fields that support new features. You must use a LambdaVersion of V1_0 with a custom sender function.
      */
     LambdaVersion: CustomEmailSenderLambdaVersionType;
     /**
-     * The Amazon Resource Name (ARN) of the Lambda function that Amazon Cognito activates to send email notifications to users.
+     * The Amazon Resource Name (ARN) of the function that you want to assign to your Lambda trigger.
      */
     LambdaArn: ArnType;
   }
   export type CustomEmailSenderLambdaVersionType = "V1_0"|string;
   export interface CustomSMSLambdaVersionConfigType {
     /**
-     * Signature of the "request" attribute in the "event" information that Amazon Cognito passes to your custom SMS Lambda function. The only supported value is V1_0.
+     * The user pool trigger version of the request that Amazon Cognito sends to your Lambda function. Higher-numbered versions add fields that support new features. You must use a LambdaVersion of V1_0 with a custom sender function.
      */
     LambdaVersion: CustomSMSSenderLambdaVersionType;
     /**
-     * The Amazon Resource Name (ARN) of the Lambda function that Amazon Cognito activates to send SMS notifications to users.
+     * The Amazon Resource Name (ARN) of the function that you want to assign to your Lambda trigger.
      */
     LambdaArn: ArnType;
   }
@@ -2552,7 +2552,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserContextData?: UserContextDataType;
     /**
-     * The user name of the user for whom you want to enter a code to reset a forgotten password.
+     * The username of the user that you want to query or modify. The value of this parameter is typically your user's username, but it can be any of their alias attributes. If username isn't an alias attribute in your user pool, you can also use their sub in this request.
      */
     Username: UsernameType;
     /**
@@ -2845,7 +2845,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     AuthParameters?: AuthParametersType;
     /**
-     * A map of custom key-value pairs that you can provide as input for certain custom workflows that this action triggers. You create custom workflows by assigning Lambda functions to user pool triggers. When you use the InitiateAuth API action, Amazon Cognito invokes the Lambda functions that are specified for various triggers. The ClientMetadata value is passed as input to the functions for only the following triggers:   Pre signup   Pre authentication   User migration   When Amazon Cognito invokes the functions for these triggers, it passes a JSON payload, which the function receives as input. This payload contains a validationData attribute, which provides the data that you assigned to the ClientMetadata parameter in your InitiateAuth request. In your function code in Lambda, you can process the validationData value to enhance your workflow for your specific needs. When you use the InitiateAuth API action, Amazon Cognito also invokes the functions for the following triggers, but it doesn't provide the ClientMetadata value as input:   Post authentication   Custom message   Pre token generation   Create auth challenge   Define auth challenge   Verify auth challenge   For more information, see  Customizing user pool Workflows with Lambda Triggers in the Amazon Cognito Developer Guide.  When you use the ClientMetadata parameter, remember that Amazon Cognito won't do the following:   Store the ClientMetadata value. This data is available only to Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration doesn't include triggers, the ClientMetadata parameter serves no purpose.   Validate the ClientMetadata value.   Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide sensitive information.   
+     * A map of custom key-value pairs that you can provide as input for certain custom workflows that this action triggers. You create custom workflows by assigning Lambda functions to user pool triggers. When you use the InitiateAuth API action, Amazon Cognito invokes the Lambda functions that are specified for various triggers. The ClientMetadata value is passed as input to the functions for only the following triggers:   Pre signup   Pre authentication   User migration   When Amazon Cognito invokes the functions for these triggers, it passes a JSON payload, which the function receives as input. This payload contains a validationData attribute, which provides the data that you assigned to the ClientMetadata parameter in your InitiateAuth request. In your function code in Lambda, you can process the validationData value to enhance your workflow for your specific needs. When you use the InitiateAuth API action, Amazon Cognito also invokes the functions for the following triggers, but it doesn't provide the ClientMetadata value as input:   Post authentication   Custom message   Pre token generation   Create auth challenge   Define auth challenge   For more information, see  Customizing user pool Workflows with Lambda Triggers in the Amazon Cognito Developer Guide.  When you use the ClientMetadata parameter, remember that Amazon Cognito won't do the following:   Store the ClientMetadata value. This data is available only to Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration doesn't include triggers, the ClientMetadata parameter serves no purpose.   Validate the ClientMetadata value.   Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide sensitive information.   
      */
     ClientMetadata?: ClientMetadataType;
     /**
@@ -2863,7 +2863,7 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export interface InitiateAuthResponse {
     /**
-     * The name of the challenge that you're responding to with this call. This name is returned in the AdminInitiateAuth response if you must pass another challenge. Valid values include the following:  All of the following challenges require USERNAME and SECRET_HASH (if applicable) in the parameters.     SMS_MFA: Next challenge is to supply an SMS_MFA_CODE, delivered via SMS.    PASSWORD_VERIFIER: Next challenge is to supply PASSWORD_CLAIM_SIGNATURE, PASSWORD_CLAIM_SECRET_BLOCK, and TIMESTAMP after the client-side SRP calculations.    CUSTOM_CHALLENGE: This is returned if your custom authentication flow determines that the user should pass another challenge before tokens are issued.    DEVICE_SRP_AUTH: If device tracking was activated on your user pool and the previous challenges were passed, this challenge is returned so that Amazon Cognito can start tracking this device.    DEVICE_PASSWORD_VERIFIER: Similar to PASSWORD_VERIFIER, but for devices only.    NEW_PASSWORD_REQUIRED: For users who are required to change their passwords after successful first login.  Respond to this challenge with NEW_PASSWORD and any required attributes that Amazon Cognito returned in the requiredAttributes parameter. You can also set values for attributes that aren't required by your user pool and that your app client can write. For more information, see RespondToAuthChallenge.  In a NEW_PASSWORD_REQUIRED challenge response, you can't modify a required attribute that already has a value. In RespondToAuthChallenge, set a value for any keys that Amazon Cognito returned in the requiredAttributes parameter, then use the UpdateUserAttributes API operation to modify the value of any additional attributes.     MFA_SETUP: For users who are required to setup an MFA factor before they can sign in. The MFA types activated for the user pool will be listed in the challenge parameters MFA_CAN_SETUP value.   To set up software token MFA, use the session returned here from InitiateAuth as an input to AssociateSoftwareToken. Use the session returned by VerifySoftwareToken as an input to RespondToAuthChallenge with challenge name MFA_SETUP to complete sign-in. To set up SMS MFA, an administrator should help the user to add a phone number to their account, and then the user should call InitiateAuth again to restart sign-in.  
+     * The name of the challenge that you're responding to with this call. This name is returned in the InitiateAuth response if you must pass another challenge. Valid values include the following:  All of the following challenges require USERNAME and SECRET_HASH (if applicable) in the parameters.     SMS_MFA: Next challenge is to supply an SMS_MFA_CODE, delivered via SMS.    PASSWORD_VERIFIER: Next challenge is to supply PASSWORD_CLAIM_SIGNATURE, PASSWORD_CLAIM_SECRET_BLOCK, and TIMESTAMP after the client-side SRP calculations.    CUSTOM_CHALLENGE: This is returned if your custom authentication flow determines that the user should pass another challenge before tokens are issued.    DEVICE_SRP_AUTH: If device tracking was activated on your user pool and the previous challenges were passed, this challenge is returned so that Amazon Cognito can start tracking this device.    DEVICE_PASSWORD_VERIFIER: Similar to PASSWORD_VERIFIER, but for devices only.    NEW_PASSWORD_REQUIRED: For users who are required to change their passwords after successful first login.  Respond to this challenge with NEW_PASSWORD and any required attributes that Amazon Cognito returned in the requiredAttributes parameter. You can also set values for attributes that aren't required by your user pool and that your app client can write. For more information, see RespondToAuthChallenge.  In a NEW_PASSWORD_REQUIRED challenge response, you can't modify a required attribute that already has a value. In RespondToAuthChallenge, set a value for any keys that Amazon Cognito returned in the requiredAttributes parameter, then use the UpdateUserAttributes API operation to modify the value of any additional attributes.     MFA_SETUP: For users who are required to setup an MFA factor before they can sign in. The MFA types activated for the user pool will be listed in the challenge parameters MFAS_CAN_SETUP value.   To set up software token MFA, use the session returned here from InitiateAuth as an input to AssociateSoftwareToken. Use the session returned by VerifySoftwareToken as an input to RespondToAuthChallenge with challenge name MFA_SETUP to complete sign-in. To set up SMS MFA, an administrator should help the user to add a phone number to their account, and then the user should call InitiateAuth again to restart sign-in.  
      */
     ChallengeName?: ChallengeNameType;
     /**
@@ -2914,9 +2914,13 @@ declare namespace CognitoIdentityServiceProvider {
      */
     VerifyAuthChallengeResponse?: ArnType;
     /**
-     * A Lambda trigger that is invoked before token generation.
+     * The Amazon Resource Name (ARN) of the function that you want to assign to your Lambda trigger. Set this parameter for legacy purposes. If you also set an ARN in PreTokenGenerationConfig, its value must be identical to PreTokenGeneration. For new instances of pre token generation triggers, set the LambdaArn of PreTokenGenerationConfig. You can set  
      */
     PreTokenGeneration?: ArnType;
+    /**
+     * The detailed configuration of a pre token generation trigger. If you also set an ARN in PreTokenGeneration, its value must be identical to PreTokenGenerationConfig.
+     */
+    PreTokenGenerationConfig?: PreTokenGenerationVersionConfigType;
     /**
      * The user migration Lambda config type.
      */
@@ -2944,7 +2948,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     Limit?: QueryLimitType;
     /**
-     * The pagination token for the list request.
+     * This API operation returns a limited number of results. The pagination token is an identifier that you can present in an additional API request with the same parameters. When you include the pagination token, Amazon Cognito returns the next set of items after the current list. Subsequent requests return a new pagination token. By use of this token, you can paginate through the full list of items.
      */
     PaginationToken?: SearchPaginationTokenType;
   }
@@ -2954,7 +2958,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     Devices?: DeviceListType;
     /**
-     * The pagination token for the list device response.
+     * The identifier that Amazon Cognito returned with the previous request to this operation. When you include a pagination token in your request, Amazon Cognito returns the next set of items in the list. By use of this token, you can paginate through the full list of items.
      */
     PaginationToken?: SearchPaginationTokenType;
   }
@@ -3055,7 +3059,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     MaxResults: PoolQueryLimitType;
     /**
-     * An identifier that was returned from the previous call to ListUserImportJobs, which can be used to return the next set of import jobs in the list.
+     * This API operation returns a limited number of results. The pagination token is an identifier that you can present in an additional API request with the same parameters. When you include the pagination token, Amazon Cognito returns the next set of items after the current list. Subsequent requests return a new pagination token. By use of this token, you can paginate through the full list of items.
      */
     PaginationToken?: PaginationKeyType;
   }
@@ -3065,7 +3069,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserImportJobs?: UserImportJobsListType;
     /**
-     * An identifier that can be used to return the next set of user import jobs in the list.
+     * The identifier that Amazon Cognito returned with the previous request to this operation. When you include a pagination token in your request, Amazon Cognito returns the next set of items in the list. By use of this token, you can paginate through the full list of items.
      */
     PaginationToken?: PaginationKeyType;
   }
@@ -3123,7 +3127,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     GroupName: GroupNameType;
     /**
-     * The limit of the request to list users.
+     * The maximum number of users that you want to retrieve before pagination.
      */
     Limit?: QueryLimitType;
     /**
@@ -3133,7 +3137,7 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export interface ListUsersInGroupResponse {
     /**
-     * The users returned in the request to list users.
+     * A list of users in the group, and their attributes.
      */
     Users?: UsersListType;
     /**
@@ -3147,7 +3151,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: UserPoolIdType;
     /**
-     * A JSON array of user attribute names, for example given_name, that you want Amazon Cognito to include in the response for each user. When you don't provide an AttributesToGet parameter, Amazon Cognito returns all attributes for each user.
+     * A JSON array of user attribute names, for example given_name, that you want Amazon Cognito to include in the response for each user. When you don't provide an AttributesToGet parameter, Amazon Cognito returns all attributes for each user. Use AttributesToGet with required attributes in your user pool, or in conjunction with Filter. Amazon Cognito returns an error if not all users in the results have set a value for the attribute you request. Attributes that you can't filter on, including custom attributes, must have a value set in every user profile before an AttributesToGet parameter returns results.
      */
     AttributesToGet?: SearchedAttributeNamesListType;
     /**
@@ -3155,7 +3159,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     Limit?: QueryLimitType;
     /**
-     * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+     * This API operation returns a limited number of results. The pagination token is an identifier that you can present in an additional API request with the same parameters. When you include the pagination token, Amazon Cognito returns the next set of items after the current list. Subsequent requests return a new pagination token. By use of this token, you can paginate through the full list of items.
      */
     PaginationToken?: SearchPaginationTokenType;
     /**
@@ -3169,7 +3173,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     Users?: UsersListType;
     /**
-     * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+     * The identifier that Amazon Cognito returned with the previous request to this operation. When you include a pagination token in your request, Amazon Cognito returns the next set of items in the list. By use of this token, you can paginate through the full list of items.
      */
     PaginationToken?: SearchPaginationTokenType;
   }
@@ -3314,13 +3318,24 @@ declare namespace CognitoIdentityServiceProvider {
      */
     RequireSymbols?: BooleanType;
     /**
-     * The number of days a temporary password is valid in the password policy. If the user doesn't sign in during this time, an administrator must reset their password.  When you set TemporaryPasswordValidityDays for a user pool, you can no longer set a value for the legacy UnusedAccountValidityDays parameter in that user pool. 
+     * The number of days a temporary password is valid in the password policy. If the user doesn't sign in during this time, an administrator must reset their password. Defaults to 7. If you submit a value of 0, Amazon Cognito treats it as a null value and sets TemporaryPasswordValidityDays to its default value.  When you set TemporaryPasswordValidityDays for a user pool, you can no longer set a value for the legacy UnusedAccountValidityDays parameter in that user pool. 
      */
     TemporaryPasswordValidityDays?: TemporaryPasswordValidityDaysType;
   }
   export type PasswordType = string;
   export type PoolQueryLimitType = number;
   export type PreSignedUrlType = string;
+  export type PreTokenGenerationLambdaVersionType = "V1_0"|"V2_0"|string;
+  export interface PreTokenGenerationVersionConfigType {
+    /**
+     * The user pool trigger version of the request that Amazon Cognito sends to your Lambda function. Higher-numbered versions add fields that support new features.
+     */
+    LambdaVersion: PreTokenGenerationLambdaVersionType;
+    /**
+     * The Amazon Resource Name (ARN) of the function that you want to assign to your Lambda trigger. This parameter and the PreTokenGeneration property of LambdaConfig have the same value. For new instances of pre token generation triggers, set LambdaArn.
+     */
+    LambdaArn: ArnType;
+  }
   export type PrecedenceType = number;
   export type PreventUserExistenceErrorTypes = "LEGACY"|"ENABLED"|string;
   export type PriorityType = number;
@@ -3391,7 +3406,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserContextData?: UserContextDataType;
     /**
-     * The username attribute of the user to whom you want to resend a confirmation code.
+     * The username of the user that you want to query or modify. The value of this parameter is typically your user's username, but it can be any of their alias attributes. If username isn't an alias attribute in your user pool, you can also use their sub in this request.
      */
     Username: UsernameType;
     /**
@@ -3457,7 +3472,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     Session?: SessionType;
     /**
-     * The challenge responses. These are inputs corresponding to the value of ChallengeName, for example:   SECRET_HASH (if app client is configured with client secret) applies to all of the inputs that follow (including SOFTWARE_TOKEN_MFA).     SMS_MFA: SMS_MFA_CODE, USERNAME.    PASSWORD_VERIFIER: PASSWORD_CLAIM_SIGNATURE, PASSWORD_CLAIM_SECRET_BLOCK, TIMESTAMP, USERNAME.   PASSWORD_VERIFIER requires DEVICE_KEY when you sign in with a remembered device.     NEW_PASSWORD_REQUIRED: NEW_PASSWORD, USERNAME, SECRET_HASH (if app client is configured with client secret). To set any required attributes that Amazon Cognito returned as requiredAttributes in the InitiateAuth response, add a userAttributes.attributename  parameter. This parameter can also set values for writable attributes that aren't required by your user pool.  In a NEW_PASSWORD_REQUIRED challenge response, you can't modify a required attribute that already has a value. In RespondToAuthChallenge, set a value for any keys that Amazon Cognito returned in the requiredAttributes parameter, then use the UpdateUserAttributes API operation to modify the value of any additional attributes.     SOFTWARE_TOKEN_MFA: USERNAME and SOFTWARE_TOKEN_MFA_CODE are required attributes.    DEVICE_SRP_AUTH requires USERNAME, DEVICE_KEY, SRP_A (and SECRET_HASH).    DEVICE_PASSWORD_VERIFIER requires everything that PASSWORD_VERIFIER requires, plus DEVICE_KEY.    MFA_SETUP requires USERNAME, plus you must use the session value returned by VerifySoftwareToken in the Session parameter.   For more information about SECRET_HASH, see Computing secret hash values. For information about DEVICE_KEY, see Working with user devices in your user pool.
+     * The responses to the challenge that you received in the previous request. Each challenge has its own required response parameters. The following examples are partial JSON request bodies that highlight challenge-response parameters.  You must provide a SECRET_HASH parameter in all challenge responses to an app client that has a client secret.   SMS_MFA   "ChallengeName": "SMS_MFA", "ChallengeResponses": {"SMS_MFA_CODE": "[SMS_code]", "USERNAME": "[username]"}   PASSWORD_VERIFIER   "ChallengeName": "PASSWORD_VERIFIER", "ChallengeResponses": {"PASSWORD_CLAIM_SIGNATURE": "[claim_signature]", "PASSWORD_CLAIM_SECRET_BLOCK": "[secret_block]", "TIMESTAMP": [timestamp], "USERNAME": "[username]"}  Add "DEVICE_KEY" when you sign in with a remembered device.  CUSTOM_CHALLENGE   "ChallengeName": "CUSTOM_CHALLENGE", "ChallengeResponses": {"USERNAME": "[username]", "ANSWER": "[challenge_answer]"}  Add "DEVICE_KEY" when you sign in with a remembered device.  NEW_PASSWORD_REQUIRED   "ChallengeName": "NEW_PASSWORD_REQUIRED", "ChallengeResponses": {"NEW_PASSWORD": "[new_password]", "USERNAME": "[username]"}  To set any required attributes that InitiateAuth returned in an requiredAttributes parameter, add "userAttributes.[attribute_name]": "[attribute_value]". This parameter can also set values for writable attributes that aren't required by your user pool.  In a NEW_PASSWORD_REQUIRED challenge response, you can't modify a required attribute that already has a value. In RespondToAuthChallenge, set a value for any keys that Amazon Cognito returned in the requiredAttributes parameter, then use the UpdateUserAttributes API operation to modify the value of any additional attributes.   SOFTWARE_TOKEN_MFA   "ChallengeName": "SOFTWARE_TOKEN_MFA", "ChallengeResponses": {"USERNAME": "[username]", "SOFTWARE_TOKEN_MFA_CODE": [authenticator_code]}   DEVICE_SRP_AUTH   "ChallengeName": "DEVICE_SRP_AUTH", "ChallengeResponses": {"USERNAME": "[username]", "DEVICE_KEY": "[device_key]", "SRP_A": "[srp_a]"}   DEVICE_PASSWORD_VERIFIER   "ChallengeName": "DEVICE_PASSWORD_VERIFIER", "ChallengeResponses": {"DEVICE_KEY": "[device_key]", "PASSWORD_CLAIM_SIGNATURE": "[claim_signature]", "PASSWORD_CLAIM_SECRET_BLOCK": "[secret_block]", "TIMESTAMP": [timestamp], "USERNAME": "[username]"}   MFA_SETUP   "ChallengeName": "MFA_SETUP", "ChallengeResponses": {"USERNAME": "[username]"}, "SESSION": "[Session ID from VerifySoftwareToken]"   SELECT_MFA_TYPE   "ChallengeName": "SELECT_MFA_TYPE", "ChallengeResponses": {"USERNAME": "[username]", "ANSWER": "[SMS_MFA or SOFTWARE_TOKEN_MFA]"}    For more information about SECRET_HASH, see Computing secret hash values. For information about DEVICE_KEY, see Working with user devices in your user pool.
      */
     ChallengeResponses?: ChallengeResponsesType;
     /**
@@ -3559,11 +3574,11 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export interface SchemaAttributeType {
     /**
-     * The name of your user pool attribute, for example username or custom:costcenter.
+     * The name of your user pool attribute. When you create or update a user pool, adding a schema attribute creates a custom or developer-only attribute. When you add an attribute with a Name value of MyAttribute, Amazon Cognito creates the custom attribute custom:MyAttribute. When DeveloperOnlyAttribute is true, Amazon Cognito creates your attribute as dev:MyAttribute. In an operation that describes a user pool, Amazon Cognito returns this value as value for standard attributes, custom:value for custom attributes, and dev:value for developer-only attributes..
      */
     Name?: CustomAttributeNameType;
     /**
-     * The data format of the values for your attribute.
+     * The data format of the values for your attribute. When you choose an AttributeDataType, Amazon Cognito validates the input against the data type. A custom attribute value in your user's ID token is always a string, for example "custom:isMember" : "true" or "custom:YearsAsMember" : "12". 
      */
     AttributeDataType?: AttributeDataType;
     /**
@@ -3733,7 +3748,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     SecretHash?: SecretHashType;
     /**
-     * The user name of the user you want to register.
+     * The username of the user that you want to sign up. The value of this parameter is typically a username, but can be any alias attribute in your user pool.
      */
     Username: UsernameType;
     /**
@@ -3745,7 +3760,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserAttributes?: AttributeListType;
     /**
-     * The validation data in the request to register a user.
+     * Temporary user attributes that contribute to the outcomes of your pre sign-up Lambda trigger. This set of key-value pairs are for custom validation of information that you collect from your users but don't need to retain. Your Lambda function can analyze this additional data and act on it. Your function might perform external API operations like logging user attributes and validation data to Amazon CloudWatch Logs. Validation data might also affect the response that your function returns to Amazon Cognito, like automatically confirming the user if they sign up from within your network. For more information about the pre sign-up Lambda trigger, see Pre sign-up Lambda trigger.
      */
     ValidationData?: AttributeListType;
     /**
@@ -3942,7 +3957,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: UserPoolIdType;
     /**
-     * The user pool username.
+     * The username of the user that you want to query or modify. The value of this parameter is typically your user's username, but it can be any of their alias attributes. If username isn't an alias attribute in your user pool, you can also use their sub in this request.
      */
     Username: UsernameType;
     /**
@@ -4106,11 +4121,11 @@ declare namespace CognitoIdentityServiceProvider {
      */
     TokenValidityUnits?: TokenValidityUnitsType;
     /**
-     * The read-only attributes of the user pool.
+     * The list of user attributes that you want your app client to have read-only access to. After your user authenticates in your app, their access token authorizes them to read their own attribute value for any attribute in this list. An example of this kind of activity is when your user selects a link to view their profile information. Your app makes a GetUser API request to retrieve and display your user's profile data. When you don't specify the ReadAttributes for your app client, your app can read the values of email_verified, phone_number_verified, and the Standard attributes of your user pool. When your user pool has read access to these default attributes, ReadAttributes doesn't return any information. Amazon Cognito only populates ReadAttributes in the API response if you have specified your own custom set of read attributes.
      */
     ReadAttributes?: ClientPermissionListType;
     /**
-     * The writeable attributes of the user pool.
+     * The list of user attributes that you want your app client to have write access to. After your user authenticates in your app, their access token authorizes them to set or modify their own attribute value for any attribute in this list. An example of this kind of activity is when you present your user with a form to update their profile information and they change their last name. Your app then makes an UpdateUserAttributes API request and sets family_name to the new value.  When you don't specify the WriteAttributes for your app client, your app can write the values of the Standard attributes of your user pool. When your user pool has write access to these default attributes, WriteAttributes doesn't return any information. Amazon Cognito only populates WriteAttributes in the API response if you have specified your own custom set of write attributes. If your app client allows users to sign in through an IdP, this array must include all attributes that you have mapped to IdP attributes. Amazon Cognito updates mapped attributes when users sign in to your application through an IdP. If your app client does not have write access to a mapped attribute, Amazon Cognito throws an error when it tries to update the attribute. For more information, see Specifying IdP Attribute Mappings for Your user pool.
      */
     WriteAttributes?: ClientPermissionListType;
     /**
@@ -4411,11 +4426,11 @@ declare namespace CognitoIdentityServiceProvider {
      */
     TokenValidityUnits?: TokenValidityUnitsType;
     /**
-     * The Read-only attributes.
+     * The list of user attributes that you want your app client to have read-only access to. After your user authenticates in your app, their access token authorizes them to read their own attribute value for any attribute in this list. An example of this kind of activity is when your user selects a link to view their profile information. Your app makes a GetUser API request to retrieve and display your user's profile data. When you don't specify the ReadAttributes for your app client, your app can read the values of email_verified, phone_number_verified, and the Standard attributes of your user pool. When your user pool has read access to these default attributes, ReadAttributes doesn't return any information. Amazon Cognito only populates ReadAttributes in the API response if you have specified your own custom set of read attributes.
      */
     ReadAttributes?: ClientPermissionListType;
     /**
-     * The writeable attributes.
+     * The list of user attributes that you want your app client to have write access to. After your user authenticates in your app, their access token authorizes them to set or modify their own attribute value for any attribute in this list. An example of this kind of activity is when you present your user with a form to update their profile information and they change their last name. Your app then makes an UpdateUserAttributes API request and sets family_name to the new value.  When you don't specify the WriteAttributes for your app client, your app can write the values of the Standard attributes of your user pool. When your user pool has write access to these default attributes, WriteAttributes doesn't return any information. Amazon Cognito only populates WriteAttributes in the API response if you have specified your own custom set of write attributes. If your app client allows users to sign in through an IdP, this array must include all attributes that you have mapped to IdP attributes. Amazon Cognito updates mapped attributes when users sign in to your application through an IdP. If your app client does not have write access to a mapped attribute, Amazon Cognito throws an error when it tries to update the attribute. For more information, see Specifying IdP Attribute Mappings for Your user pool.
      */
     WriteAttributes?: ClientPermissionListType;
     /**
@@ -4531,7 +4546,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     LambdaConfig?: LambdaConfigType;
     /**
-     * The status of a user pool.
+     * This parameter is no longer used.
      */
     Status?: StatusType;
     /**

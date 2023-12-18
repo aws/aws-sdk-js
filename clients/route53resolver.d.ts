@@ -68,11 +68,11 @@ declare class Route53Resolver extends Service {
    */
   createFirewallRuleGroup(callback?: (err: AWSError, data: Route53Resolver.Types.CreateFirewallRuleGroupResponse) => void): Request<Route53Resolver.Types.CreateFirewallRuleGroupResponse, AWSError>;
   /**
-   * Creates an Route 53 Resolver on an Outpost.
+   * Creates a Route 53 Resolver on an Outpost.
    */
   createOutpostResolver(params: Route53Resolver.Types.CreateOutpostResolverRequest, callback?: (err: AWSError, data: Route53Resolver.Types.CreateOutpostResolverResponse) => void): Request<Route53Resolver.Types.CreateOutpostResolverResponse, AWSError>;
   /**
-   * Creates an Route 53 Resolver on an Outpost.
+   * Creates a Route 53 Resolver on an Outpost.
    */
   createOutpostResolver(callback?: (err: AWSError, data: Route53Resolver.Types.CreateOutpostResolverResponse) => void): Request<Route53Resolver.Types.CreateOutpostResolverResponse, AWSError>;
   /**
@@ -540,11 +540,11 @@ declare class Route53Resolver extends Service {
    */
   updateResolverDnssecConfig(callback?: (err: AWSError, data: Route53Resolver.Types.UpdateResolverDnssecConfigResponse) => void): Request<Route53Resolver.Types.UpdateResolverDnssecConfigResponse, AWSError>;
   /**
-   * Updates the name, or enpoint type for an inbound or an outbound Resolver endpoint. You can only update between IPV4 and DUALSTACK, IPV6 endpoint type can't be updated to other type. 
+   * Updates the name, or endpoint type for an inbound or an outbound Resolver endpoint. You can only update between IPV4 and DUALSTACK, IPV6 endpoint type can't be updated to other type. 
    */
   updateResolverEndpoint(params: Route53Resolver.Types.UpdateResolverEndpointRequest, callback?: (err: AWSError, data: Route53Resolver.Types.UpdateResolverEndpointResponse) => void): Request<Route53Resolver.Types.UpdateResolverEndpointResponse, AWSError>;
   /**
-   * Updates the name, or enpoint type for an inbound or an outbound Resolver endpoint. You can only update between IPV4 and DUALSTACK, IPV6 endpoint type can't be updated to other type. 
+   * Updates the name, or endpoint type for an inbound or an outbound Resolver endpoint. You can only update between IPV4 and DUALSTACK, IPV6 endpoint type can't be updated to other type. 
    */
   updateResolverEndpoint(callback?: (err: AWSError, data: Route53Resolver.Types.UpdateResolverEndpointResponse) => void): Request<Route53Resolver.Types.UpdateResolverEndpointResponse, AWSError>;
   /**
@@ -793,9 +793,17 @@ declare namespace Route53Resolver {
      */
     Direction: ResolverEndpointDirection;
     /**
-     * The subnets and IP addresses in your VPC that DNS queries originate from (for outbound endpoints) or that you forward DNS queries to (for inbound endpoints). The subnet ID uniquely identifies a VPC. 
+     * The subnets and IP addresses in your VPC that DNS queries originate from (for outbound endpoints) or that you forward DNS queries to (for inbound endpoints). The subnet ID uniquely identifies a VPC.   Even though the minimum is 1, Route 53 requires that you create at least two. 
      */
     IpAddresses: IpAddressesRequest;
+    /**
+     * The Amazon Resource Name (ARN) of the Outpost. If you specify this, you must also specify a value for the PreferredInstanceType. 
+     */
+    OutpostArn?: OutpostArn;
+    /**
+     * The instance type. If you specify this, you must also specify a value for the OutpostArn.
+     */
+    PreferredInstanceType?: OutpostInstanceType;
     /**
      * A list of the tag keys and values that you want to associate with the endpoint.
      */
@@ -805,13 +813,9 @@ declare namespace Route53Resolver {
      */
     ResolverEndpointType?: ResolverEndpointType;
     /**
-     * The Amazon Resource Name (ARN) of the Outpost. If you specify this, you must also specify a value for the PreferredInstanceType. 
+     *  The protocols you want to use for the endpoint. DoH-FIPS is applicable for inbound endpoints only.  For an inbound endpoint you can apply the protocols as follows:    Do53 and DoH in combination.   Do53 and DoH-FIPS in combination.   Do53 alone.   DoH alone.   DoH-FIPS alone.   None, which is treated as Do53.   For an outbound endpoint you can apply the protocols as follows:    Do53 and DoH in combination.   Do53 alone.   DoH alone.   None, which is treated as Do53.  
      */
-    OutpostArn?: OutpostArn;
-    /**
-     * The instance type. If you specify this, you must also specify a value for the OutpostArn.
-     */
-    PreferredInstanceType?: OutpostInstanceType;
+    Protocols?: ProtocolList;
   }
   export interface CreateResolverEndpointResponse {
     /**
@@ -859,7 +863,7 @@ declare namespace Route53Resolver {
     /**
      * DNS queries for this domain name are forwarded to the IP addresses that you specify in TargetIps. If a query matches multiple Resolver rules (example.com and www.example.com), outbound DNS queries are routed using the Resolver rule that contains the most specific domain name (www.example.com).
      */
-    DomainName: DomainName;
+    DomainName?: DomainName;
     /**
      * The IPs that you want Resolver to forward DNS queries to. You can specify either Ipv4 or Ipv6 addresses but not both in the same rule. Separate IP addresses with a space.  TargetIps is available only when the value of Rule type is FORWARD.
      */
@@ -1821,7 +1825,7 @@ declare namespace Route53Resolver {
      */
     NextToken?: NextToken;
     /**
-     * An array that contains one ResolverDnssecConfig element for each configuration for DNSSEC validation that is associated with the current Amazon Web Services account.
+     * An array that contains one ResolverDnssecConfig element for each configuration for DNSSEC validation that is associated with the current Amazon Web Services account. It doesn't contain disabled DNSSEC configurations for the resource.
      */
     ResolverDnssecConfigs?: ResolverDnssecConfigList;
   }
@@ -2099,6 +2103,8 @@ declare namespace Route53Resolver {
   export type OutpostResolverStatusMessage = string;
   export type Port = number;
   export type Priority = number;
+  export type Protocol = "DoH"|"Do53"|"DoH-FIPS"|string;
+  export type ProtocolList = Protocol[];
   export interface PutFirewallRuleGroupPolicyRequest {
     /**
      * The ARN (Amazon Resource Name) for the rule group that you want to share.
@@ -2237,10 +2243,6 @@ declare namespace Route53Resolver {
      */
     ModificationTime?: Rfc3339TimeString;
     /**
-     *  The Resolver endpoint IP address type. 
-     */
-    ResolverEndpointType?: ResolverEndpointType;
-    /**
      * The ARN (Amazon Resource Name) for the Outpost.
      */
     OutpostArn?: OutpostArn;
@@ -2248,6 +2250,14 @@ declare namespace Route53Resolver {
      *  The Amazon EC2 instance type. 
      */
     PreferredInstanceType?: OutpostInstanceType;
+    /**
+     *  The Resolver endpoint IP address type. 
+     */
+    ResolverEndpointType?: ResolverEndpointType;
+    /**
+     *  Protocols used for the endpoint. DoH-FIPS is applicable for inbound endpoints only.  For an inbound endpoint you can apply the protocols as follows:    Do53 and DoH in combination.   Do53 and DoH-FIPS in combination.   Do53 alone.   DoH alone.   DoH-FIPS alone.   None, which is treated as Do53.   For an outbound endpoint you can apply the protocols as follows:    Do53 and DoH in combination.   Do53 alone.   DoH alone.   None, which is treated as Do53.  
+     */
+    Protocols?: ProtocolList;
   }
   export type ResolverEndpointDirection = "INBOUND"|"OUTBOUND"|string;
   export type ResolverEndpointStatus = "CREATING"|"OPERATIONAL"|"UPDATING"|"AUTO_RECOVERING"|"ACTION_NEEDED"|"DELETING"|string;
@@ -2485,6 +2495,10 @@ declare namespace Route53Resolver {
      *  One IPv6 address that you want to forward DNS queries to. 
      */
     Ipv6?: Ipv6;
+    /**
+     *  The protocols for the Resolver endpoints. DoH-FIPS is applicable for inbound endpoints only.  For an inbound endpoint you can apply the protocols as follows:    Do53 and DoH in combination.   Do53 and DoH-FIPS in combination.   Do53 alone.   DoH alone.   DoH-FIPS alone.   None, which is treated as Do53.   For an outbound endpoint you can apply the protocols as follows:    Do53 and DoH in combination.   Do53 alone.   DoH alone.   None, which is treated as Do53.  
+     */
+    Protocol?: Protocol;
   }
   export type TargetList = TargetAddress[];
   export type Unsigned = number;
@@ -2700,6 +2714,10 @@ declare namespace Route53Resolver {
      *  Specifies the IPv6 address when you update the Resolver endpoint from IPv4 to dual-stack. If you don't specify an IPv6 address, one will be automatically chosen from your subnet. 
      */
     UpdateIpAddresses?: UpdateIpAddresses;
+    /**
+     *  The protocols you want to use for the endpoint. DoH-FIPS is applicable for inbound endpoints only.  For an inbound endpoint you can apply the protocols as follows:    Do53 and DoH in combination.   Do53 and DoH-FIPS in combination.   Do53 alone.   DoH alone.   DoH-FIPS alone.   None, which is treated as Do53.   For an outbound endpoint you can apply the protocols as follows:    Do53 and DoH in combination.   Do53 alone.   DoH alone.   None, which is treated as Do53.     You can't change the protocol of an inbound endpoint directly from only Do53 to only DoH, or DoH-FIPS. This is to prevent a sudden disruption to incoming traffic that relies on Do53. To change the protocol from Do53 to DoH, or DoH-FIPS, you must first enable both Do53 and DoH, or Do53 and DoH-FIPS, to make sure that all incoming traffic has transferred to using the DoH protocol, or DoH-FIPS, and then remove the Do53. 
+     */
+    Protocols?: ProtocolList;
   }
   export interface UpdateResolverEndpointResponse {
     /**

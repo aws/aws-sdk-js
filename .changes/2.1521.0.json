@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "CognitoIdentityServiceProvider",
+        "description": "Amazon Cognito now supports trigger versions that define the fields in the request sent to pre token generation Lambda triggers."
+    },
+    {
+        "type": "feature",
+        "category": "EKS",
+        "description": "Add support for EKS Cluster Access Management."
+    },
+    {
+        "type": "feature",
+        "category": "Route53Resolver",
+        "description": "Add DOH protocols in resolver endpoints."
+    }
+]
