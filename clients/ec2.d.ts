@@ -5683,6 +5683,10 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * If you have Local Zones enabled, you can choose a network border group for Local Zones when you provision and advertise a BYOIPv4 CIDR. Choose the network border group carefully as the EIP and the Amazon Web Services resource it is associated with must reside in the same network border group. You can provision BYOIP address ranges to and advertise them in the following Local Zone network border groups:   us-east-1-dfw-2   us-west-2-lax-1   us-west-2-phx-2    You cannot provision or advertise BYOIPv6 address ranges in Local Zones at this time. 
+     */
+    NetworkBorderGroup?: String;
   }
   export interface AdvertiseByoipCidrResult {
     /**
@@ -7319,6 +7323,10 @@ declare namespace EC2 {
      * The state of the address pool.
      */
     State?: ByoipCidrState;
+    /**
+     * If you have Local Zones enabled, you can choose a network border group for Local Zones when you provision and advertise a BYOIPv4 CIDR. Choose the network border group carefully as the EIP and the Amazon Web Services resource it is associated with must reside in the same network border group. You can provision BYOIP address ranges to and advertise them in the following Local Zone network border groups:   us-east-1-dfw-2   us-west-2-lax-1   us-west-2-phx-2    You cannot provision or advertise BYOIPv6 address ranges in Local Zones at this time. 
+     */
+    NetworkBorderGroup?: String;
   }
   export type ByoipCidrSet = ByoipCidr[];
   export type ByoipCidrState = "advertised"|"deprovisioned"|"failed-deprovision"|"failed-provision"|"pending-deprovision"|"pending-provision"|"provisioned"|"provisioned-not-publicly-advertisable"|string;
@@ -24600,7 +24608,7 @@ declare namespace EC2 {
   export type InstanceNetworkInterfaceList = InstanceNetworkInterface[];
   export interface InstanceNetworkInterfaceSpecification {
     /**
-     * Indicates whether to assign a public IPv4 address to an instance you launch in a VPC. The public IP address can only be assigned to a network interface for eth0, and can only be assigned to a new network interface, not an existing one. You cannot specify more than one network interface in the request. If launching into a default subnet, the default value is true.
+     * Indicates whether to assign a public IPv4 address to an instance you launch in a VPC. The public IP address can only be assigned to a network interface for eth0, and can only be assigned to a new network interface, not an existing one. You cannot specify more than one network interface in the request. If launching into a default subnet, the default value is true. Starting on February 1, 2024, Amazon Web Services will charge for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the Public IPv4 Address tab on the Amazon VPC pricing page.
      */
     AssociatePublicIpAddress?: Boolean;
     /**
@@ -25718,6 +25726,9 @@ declare namespace EC2 {
      * The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Default is BYOIP. For more information, see Create IPv6 pools in the Amazon VPC IPAM User Guide. By default, you can add only one Amazon-provided IPv6 CIDR block to a top-level IPv6 pool. For information on increasing the default limit, see  Quotas for your IPAM in the Amazon VPC IPAM User Guide.
      */
     PublicIpSource?: IpamPoolPublicIpSource;
+    /**
+     * The resource used to provision CIDRs to a resource planning pool.
+     */
     SourceResource?: IpamPoolSourceResource;
   }
   export interface IpamPoolAllocation {
@@ -26674,7 +26685,7 @@ declare namespace EC2 {
      */
     State?: LaunchTemplateInstanceMetadataOptionsState;
     /**
-     * Indicates whether IMDSv2 is optional or required.  optional - When IMDSv2 is optional, you can choose to retrieve instance metadata with or without a session token in your request. If you retrieve the IAM role credentials without a token, the IMDSv1 role credentials are returned. If you retrieve the IAM role credentials using a valid session token, the IMDSv2 role credentials are returned.  required - When IMDSv2 is required, you must send a session token with any instance metadata retrieval requests. In this state, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available. Default: optional 
+     * Indicates whether IMDSv2 is required.    optional - IMDSv2 is optional. You can choose whether to send a session token in your instance metadata retrieval requests. If you retrieve IAM role credentials without a session token, you receive the IMDSv1 role credentials. If you retrieve IAM role credentials using a valid session token, you receive the IMDSv2 role credentials.    required - IMDSv2 is required. You must send a session token in your instance metadata retrieval requests. With this option, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.  
      */
     HttpTokens?: LaunchTemplateHttpTokensState;
     /**
@@ -26696,7 +26707,7 @@ declare namespace EC2 {
   }
   export interface LaunchTemplateInstanceMetadataOptionsRequest {
     /**
-     * IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to optional (in other words, set the use of IMDSv2 to optional) or required (in other words, set the use of IMDSv2 to required).    optional - When IMDSv2 is optional, you can choose to retrieve instance metadata with or without a session token in your request. If you retrieve the IAM role credentials without a token, the IMDSv1 role credentials are returned. If you retrieve the IAM role credentials using a valid session token, the IMDSv2 role credentials are returned.    required - When IMDSv2 is required, you must send a session token with any instance metadata retrieval requests. In this state, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.   Default: optional 
+     * Indicates whether IMDSv2 is required.    optional - IMDSv2 is optional. You can choose whether to send a session token in your instance metadata retrieval requests. If you retrieve IAM role credentials without a session token, you receive the IMDSv1 role credentials. If you retrieve IAM role credentials using a valid session token, you receive the IMDSv2 role credentials.    required - IMDSv2 is required. You must send a session token in your instance metadata retrieval requests. With this option, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.   Default: If the value of ImdsSupport for the Amazon Machine Image (AMI) for your instance is v2.0, the default is required.
      */
     HttpTokens?: LaunchTemplateHttpTokensState;
     /**
@@ -26725,7 +26736,7 @@ declare namespace EC2 {
      */
     AssociateCarrierIpAddress?: Boolean;
     /**
-     * Indicates whether to associate a public IPv4 address with eth0 for a new network interface.
+     * Indicates whether to associate a public IPv4 address with eth0 for a new network interface. Starting on February 1, 2024, Amazon Web Services will charge for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the Public IPv4 Address tab on the Amazon VPC pricing page.
      */
     AssociatePublicIpAddress?: Boolean;
     /**
@@ -26816,7 +26827,7 @@ declare namespace EC2 {
      */
     AssociateCarrierIpAddress?: Boolean;
     /**
-     * Associates a public IPv4 address with eth0 for a new network interface.
+     * Associates a public IPv4 address with eth0 for a new network interface. Starting on February 1, 2024, Amazon Web Services will charge for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the Public IPv4 Address tab on the Amazon VPC pricing page.
      */
     AssociatePublicIpAddress?: Boolean;
     /**
@@ -31730,6 +31741,10 @@ declare namespace EC2 {
      * Reserved.
      */
     MultiRegion?: Boolean;
+    /**
+     * If you have Local Zones enabled, you can choose a network border group for Local Zones when you provision and advertise a BYOIPv4 CIDR. Choose the network border group carefully as the EIP and the Amazon Web Services resource it is associated with must reside in the same network border group. You can provision BYOIP address ranges to and advertise them in the following Local Zone network border groups:   us-east-1-dfw-2   us-west-2-lax-1   us-west-2-phx-2    You cannot provision or advertise BYOIPv6 address ranges in Local Zones at this time. 
+     */
+    NetworkBorderGroup?: String;
   }
   export interface ProvisionByoipCidrResult {
     /**
@@ -32836,7 +32851,7 @@ declare namespace EC2 {
      */
     UserData?: SensitiveUserData;
     /**
-     * The tags to apply to the resources that are created during instance launch. You can specify tags for the following resources only:   Instances   Volumes   Elastic graphics   Spot Instance requests   Network interfaces   To tag a resource after it has been created, see CreateTags.  To tag the launch template itself, you must use the TagSpecification parameter. 
+     * The tags to apply to the resources that are created during instance launch. These tags are not applied to the launch template.
      */
     TagSpecifications?: LaunchTemplateTagSpecificationRequestList;
     /**

@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1521.0-->
+<!--LATEST=2.1522.0-->
 <!--ENTRYINSERT-->
+
+## 2.1522.0
+* bugfix: Neptune Graph: skips Neptune Graph from console repl
+* feature: AppSync: This release adds additional configurations on GraphQL APIs for limits on query depth, resolver count, and introspection
+* feature: ChimeSDKMeetings: Add meeting features to specify a maximum camera resolution, a maximum content sharing resolution, and a maximum number of attendees for a given meeting.
+* feature: EC2: Provision BYOIPv4 address ranges and advertise them by specifying the network border groups option in Los Angeles, Phoenix and Dallas AWS Local Zones.
+* feature: FSx: Added support for FSx for OpenZFS on-demand data replication across AWS accounts and/or regions.Added the IncludeShared attribute for DescribeSnapshots.Added the CopyStrategy attribute for OpenZFSVolumeConfiguration.
+* feature: MarketplaceCatalog: AWS Marketplace now supports a new API, BatchDescribeEntities, which returns metadata and content for multiple entities.
+* feature: RDS: RDS - The release adds two new APIs: DescribeDBRecommendations and ModifyDBRecommendation
 
 ## 2.1521.0
 * feature: CognitoIdentityServiceProvider: Amazon Cognito now supports trigger versions that define the fields in the request sent to pre token generation Lambda triggers.

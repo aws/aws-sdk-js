@@ -12,6 +12,14 @@ declare class MarketplaceCatalog extends Service {
   constructor(options?: MarketplaceCatalog.Types.ClientConfiguration)
   config: Config & MarketplaceCatalog.Types.ClientConfiguration;
   /**
+   * Returns metadata and content for multiple entities.
+   */
+  batchDescribeEntities(params: MarketplaceCatalog.Types.BatchDescribeEntitiesRequest, callback?: (err: AWSError, data: MarketplaceCatalog.Types.BatchDescribeEntitiesResponse) => void): Request<MarketplaceCatalog.Types.BatchDescribeEntitiesResponse, AWSError>;
+  /**
+   * Returns metadata and content for multiple entities.
+   */
+  batchDescribeEntities(callback?: (err: AWSError, data: MarketplaceCatalog.Types.BatchDescribeEntitiesResponse) => void): Request<MarketplaceCatalog.Types.BatchDescribeEntitiesResponse, AWSError>;
+  /**
    * Used to cancel an open change request. Must be sent before the status of the request changes to APPLYING, the final stage of completing your change request. You can describe a change during the 60-day request history retention period for API calls.
    */
   cancelChangeSet(params: MarketplaceCatalog.Types.CancelChangeSetRequest, callback?: (err: AWSError, data: MarketplaceCatalog.Types.CancelChangeSetResponse) => void): Request<MarketplaceCatalog.Types.CancelChangeSetResponse, AWSError>;
@@ -193,6 +201,34 @@ declare namespace MarketplaceCatalog {
   }
   export type AmiProductVisibilityFilterValueList = AmiProductVisibilityString[];
   export type AmiProductVisibilityString = "Limited"|"Public"|"Restricted"|"Draft"|string;
+  export interface BatchDescribeEntitiesRequest {
+    /**
+     * List of entity IDs and the catalogs the entities are present in.
+     */
+    EntityRequestList: EntityRequestList;
+  }
+  export interface BatchDescribeEntitiesResponse {
+    /**
+     * Details about each entity.
+     */
+    EntityDetails?: EntityDetails;
+    /**
+     * A map of errors returned, with EntityId as the key and errorDetail as the value.
+     */
+    Errors?: Errors;
+  }
+  export type BatchDescribeErrorCodeString = string;
+  export interface BatchDescribeErrorDetail {
+    /**
+     * The error code returned.
+     */
+    ErrorCode?: BatchDescribeErrorCodeString;
+    /**
+     * The error message returned.
+     */
+    ErrorMessage?: BatchDescribeErrorMessageContent;
+  }
+  export type BatchDescribeErrorMessageContent = string;
   export interface CancelChangeSetRequest {
     /**
      * Required. The catalog related to the request. Fixed value: AWSMarketplace.
@@ -216,7 +252,7 @@ declare namespace MarketplaceCatalog {
   export type Catalog = string;
   export interface Change {
     /**
-     * Change types are single string values that describe your intention for the change. Each change type is unique for each EntityType provided in the change's scope. For more information on change types available for single-AMI products, see Working with single-AMI products. Also, for more information about change types available for container-based products, see Working with container products.
+     * Change types are single string values that describe your intention for the change. Each change type is unique for each EntityType provided in the change's scope. For more information about change types available for single-AMI products, see Working with single-AMI products. Also, for more information about change types available for container-based products, see Working with container products.
      */
     ChangeType: ChangeType;
     /**
@@ -576,7 +612,42 @@ declare namespace MarketplaceCatalog {
      */
     Identifier?: Identifier;
   }
+  export interface EntityDetail {
+    /**
+     * The entity type of the entity, in the format of EntityType@Version.
+     */
+    EntityType?: EntityType;
+    /**
+     * The Amazon Resource Name (ARN) of the entity.
+     */
+    EntityArn?: ARN;
+    /**
+     * The ID of the entity, in the format of EntityId@RevisionId.
+     */
+    EntityIdentifier?: Identifier;
+    /**
+     * The last time the entity was modified.
+     */
+    LastModifiedDate?: DateTimeISO8601;
+    /**
+     * An object that contains all the details of the entity.
+     */
+    DetailsDocument?: JsonDocumentType;
+  }
+  export type EntityDetails = {[key: string]: EntityDetail};
+  export type EntityId = string;
   export type EntityNameString = string;
+  export interface EntityRequest {
+    /**
+     * The name of the catalog the entity is present in. The only value at this time is AWSMarketplace.
+     */
+    Catalog: Catalog;
+    /**
+     * The ID of the entity.
+     */
+    EntityId: EntityId;
+  }
+  export type EntityRequestList = EntityRequest[];
   export interface EntitySummary {
     /**
      * The name for the entity. This value is not unique. It is defined by the seller.
@@ -693,6 +764,7 @@ declare namespace MarketplaceCatalog {
     ErrorMessage?: ExceptionMessageContent;
   }
   export type ErrorDetailList = ErrorDetail[];
+  export type Errors = {[key: string]: BatchDescribeErrorDetail};
   export type ExceptionMessageContent = string;
   export type FailureCode = "CLIENT_ERROR"|"SERVER_FAULT"|string;
   export interface Filter {
@@ -764,7 +836,7 @@ declare namespace MarketplaceCatalog {
      */
     Catalog: Catalog;
     /**
-     * The type of entities to retrieve. Valid values are: ServerProduct, AmiProduct, ContainerProduct, DataProduct, SaaSProduct, ProcurementPolicy, Experience, Audience, BrandingSettings, Offer, Seller, ResaleAuthorization.
+     * The type of entities to retrieve. Valid values are: AmiProduct, ContainerProduct, DataProduct, SaaSProduct, ProcurementPolicy, Experience, Audience, BrandingSettings, Offer, Seller, ResaleAuthorization.
      */
     EntityType: EntityType;
     /**

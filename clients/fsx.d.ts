@@ -947,7 +947,7 @@ declare namespace FSx {
      */
     HAPairs?: HAPairs;
     /**
-     * Use to choose the throughput capacity per HA pair, rather than the total throughput for the file system.  This field and ThroughputCapacity cannot be defined in the same API call, but one is required. This field and ThroughputCapacity are the same for file systems with one HA pair.   For SINGLE_AZ_1 and MULTI_AZ_1, valid values are 128, 256, 512, 1024, 2048, or 4096 MBps.   For SINGLE_AZ_2, valid values are 3072 or 6144 MBps.   Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the same value   The value of ThroughputCapacityPerHAPair is not a valid value.  
+     * Use to choose the throughput capacity per HA pair, rather than the total throughput for the file system.  This field and ThroughputCapacity cannot be defined in the same API call, but one is required. This field and ThroughputCapacity are the same for file systems with one HA pair.   For SINGLE_AZ_1 and MULTI_AZ_1, valid values are 128, 256, 512, 1024, 2048, or 4096 MBps.   For SINGLE_AZ_2, valid values are 3072 or 6144 MBps.   Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the same value for file systems with one HA pair.   The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity / ThroughputCapacityPerHAPair is a valid HA pair (a value between 2 and 6).   The value of ThroughputCapacityPerHAPair is not a valid value.  
      */
     ThroughputCapacityPerHAPair?: ThroughputCapacityPerHAPair;
   }
@@ -1883,6 +1883,10 @@ declare namespace FSx {
     Filters?: SnapshotFilters;
     MaxResults?: MaxResults;
     NextToken?: NextToken;
+    /**
+     * Set to false (default) if you want to only see the snapshots in your Amazon Web Services account. Set to true if you want to see the snapshots in your account and the ones shared with you from another account.
+     */
+    IncludeShared?: IncludeShared;
   }
   export interface DescribeSnapshotsResponse {
     /**
@@ -2277,6 +2281,7 @@ declare namespace FSx {
   export type FlexCacheEndpointType = "NONE"|"ORIGIN"|"CACHE"|string;
   export type GeneralARN = string;
   export type HAPairs = number;
+  export type IncludeShared = boolean;
   export type InputOntapVolumeType = "RW"|"DP"|string;
   export type IntegerNoMax = number;
   export type IntegerNoMaxFromNegativeOne = number;
@@ -2705,6 +2710,10 @@ declare namespace FSx {
      * The ID of the snapshot that's being copied or was most recently copied to the destination volume.
      */
     DestinationSnapshot?: SnapshotId;
+    /**
+     * Specifies the strategy used when copying data from the snapshot to the new volume.     CLONE - The new volume references the data in the origin snapshot. Cloning a snapshot is faster than copying data from the snapshot to a new volume and doesn't consume disk throughput. However, the origin snapshot can't be deleted if there is a volume using its copied data.    FULL_COPY - Copies all data from the snapshot to the new volume. Specify this option to create the volume from a snapshot on another FSx for OpenZFS file system.    The INCREMENTAL_COPY option is only for updating an existing volume by using a snapshot from another FSx for OpenZFS file system. For more information, see CopySnapshotAndUpdateVolume. 
+     */
+    CopyStrategy?: OpenZFSCopyStrategy;
   }
   export type OrganizationalUnitDistinguishedName = string;
   export type PerUnitStorageThroughput = number;
@@ -3217,7 +3226,7 @@ declare namespace FSx {
      */
     RemoveRouteTableIds?: RouteTableIds;
     /**
-     * Use to choose the throughput capacity per HA pair, rather than the total throughput for the file system.  This field and ThroughputCapacity cannot be defined in the same API call, but one is required. This field and ThroughputCapacity are the same for file systems with one HA pair.   For SINGLE_AZ_1 and MULTI_AZ_1, valid values are 128, 256, 512, 1024, 2048, or 4096 MBps.   For SINGLE_AZ_2, valid values are 3072 or 6144 MBps.   Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions: The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the same value. The value of ThroughputCapacityPerHAPair is not a valid value.
+     * Use to choose the throughput capacity per HA pair, rather than the total throughput for the file system.  This field and ThroughputCapacity cannot be defined in the same API call, but one is required. This field and ThroughputCapacity are the same for file systems with one HA pair.   For SINGLE_AZ_1 and MULTI_AZ_1, valid values are 128, 256, 512, 1024, 2048, or 4096 MBps.   For SINGLE_AZ_2, valid values are 3072 or 6144 MBps.   Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the same value for file systems with one HA pair.   The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity / ThroughputCapacityPerHAPair is a valid HA pair (a value between 2 and 6).   The value of ThroughputCapacityPerHAPair is not a valid value.  
      */
     ThroughputCapacityPerHAPair?: ThroughputCapacityPerHAPair;
   }

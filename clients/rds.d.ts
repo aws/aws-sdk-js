@@ -606,6 +606,14 @@ declare class RDS extends Service {
    */
   describeDBProxyTargets(callback?: (err: AWSError, data: RDS.Types.DescribeDBProxyTargetsResponse) => void): Request<RDS.Types.DescribeDBProxyTargetsResponse, AWSError>;
   /**
+   * Describes the recommendations to resolve the issues for your DB instances, DB clusters, and DB parameter groups.
+   */
+  describeDBRecommendations(params: RDS.Types.DescribeDBRecommendationsMessage, callback?: (err: AWSError, data: RDS.Types.DBRecommendationsMessage) => void): Request<RDS.Types.DBRecommendationsMessage, AWSError>;
+  /**
+   * Describes the recommendations to resolve the issues for your DB instances, DB clusters, and DB parameter groups.
+   */
+  describeDBRecommendations(callback?: (err: AWSError, data: RDS.Types.DBRecommendationsMessage) => void): Request<RDS.Types.DBRecommendationsMessage, AWSError>;
+  /**
    * Returns a list of DBSecurityGroup descriptions. If a DBSecurityGroupName is specified, the list will contain only the descriptions of the specified DB security group.  EC2-Classic was retired on August 15, 2022. If you haven't migrated from EC2-Classic to a VPC, we recommend that you migrate as soon as possible. For more information, see Migrate from EC2-Classic to a VPC in the Amazon EC2 User Guide, the blog EC2-Classic Networking is Retiring – Here’s How to Prepare, and Moving a DB instance not in a VPC into a VPC in the Amazon RDS User Guide. 
    */
   describeDBSecurityGroups(params: RDS.Types.DescribeDBSecurityGroupsMessage, callback?: (err: AWSError, data: RDS.Types.DBSecurityGroupMessage) => void): Request<RDS.Types.DBSecurityGroupMessage, AWSError>;
@@ -917,6 +925,14 @@ declare class RDS extends Service {
    * Modifies the properties of a DBProxyTargetGroup.
    */
   modifyDBProxyTargetGroup(callback?: (err: AWSError, data: RDS.Types.ModifyDBProxyTargetGroupResponse) => void): Request<RDS.Types.ModifyDBProxyTargetGroupResponse, AWSError>;
+  /**
+   * Updates the recommendation status and recommended action status for the specified recommendation.
+   */
+  modifyDBRecommendation(params: RDS.Types.ModifyDBRecommendationMessage, callback?: (err: AWSError, data: RDS.Types.DBRecommendationMessage) => void): Request<RDS.Types.DBRecommendationMessage, AWSError>;
+  /**
+   * Updates the recommendation status and recommended action status for the specified recommendation.
+   */
+  modifyDBRecommendation(callback?: (err: AWSError, data: RDS.Types.DBRecommendationMessage) => void): Request<RDS.Types.DBRecommendationMessage, AWSError>;
   /**
    * Updates a manual DB snapshot with a new engine version. The snapshot can be encrypted or unencrypted, but not shared or public.  Amazon RDS supports upgrading DB snapshots for MySQL, PostgreSQL, and Oracle. This operation doesn't apply to RDS Custom or RDS for Db2.
    */
@@ -1714,6 +1730,17 @@ declare namespace RDS {
      */
     InitQuery?: String;
   }
+  export interface ContextAttribute {
+    /**
+     * The key of ContextAttribute.
+     */
+    Key?: String;
+    /**
+     * The value of ContextAttribute.
+     */
+    Value?: String;
+  }
+  export type ContextAttributeList = ContextAttribute[];
   export interface CopyDBClusterParameterGroupMessage {
     /**
      * The identifier or Amazon Resource Name (ARN) for the source DB cluster parameter group. For information about creating an ARN, see  Constructing an ARN for Amazon RDS in the Amazon Aurora User Guide. Constraints:   Must specify a valid DB cluster parameter group.  
@@ -4610,6 +4637,102 @@ declare namespace RDS {
      */
     UpdatedDate?: TStamp;
   }
+  export interface DBRecommendation {
+    /**
+     * The unique identifier of the recommendation.
+     */
+    RecommendationId?: String;
+    /**
+     * A value that indicates the type of recommendation. This value determines how the description is rendered.
+     */
+    TypeId?: String;
+    /**
+     * The severity level of the recommendation. The severity level can help you decide the urgency with which to address the recommendation. Valid values:    high     medium     low     informational   
+     */
+    Severity?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the RDS resource associated with the recommendation.
+     */
+    ResourceArn?: String;
+    /**
+     * The current status of the recommendation. Valid values:    active - The recommendations which are ready for you to apply.    pending - The applied or scheduled recommendations which are in progress.    resolved - The recommendations which are completed.    dismissed - The recommendations that you dismissed.  
+     */
+    Status?: String;
+    /**
+     * The time when the recommendation was created. For example, 2023-09-28T01:13:53.931000+00:00.
+     */
+    CreatedTime?: TStamp;
+    /**
+     * The time when the recommendation was last updated.
+     */
+    UpdatedTime?: TStamp;
+    /**
+     * A short description of the issue identified for this recommendation. The description might contain markdown.
+     */
+    Detection?: String;
+    /**
+     * A short description of the recommendation to resolve an issue. The description might contain markdown.
+     */
+    Recommendation?: String;
+    /**
+     * A detailed description of the recommendation. The description might contain markdown.
+     */
+    Description?: String;
+    /**
+     * The reason why this recommendation was created. The information might contain markdown.
+     */
+    Reason?: String;
+    /**
+     * A list of recommended actions.
+     */
+    RecommendedActions?: RecommendedActionList;
+    /**
+     * The category of the recommendation. Valid values:    performance efficiency     security     reliability     cost optimization     operational excellence     sustainability   
+     */
+    Category?: String;
+    /**
+     * The Amazon Web Services service that generated the recommendations.
+     */
+    Source?: String;
+    /**
+     * A short description of the recommendation type. The description might contain markdown.
+     */
+    TypeDetection?: String;
+    /**
+     * A short description that summarizes the recommendation to fix all the issues of the recommendation type. The description might contain markdown.
+     */
+    TypeRecommendation?: String;
+    /**
+     * A short description that explains the possible impact of an issue.
+     */
+    Impact?: String;
+    /**
+     * Additional information about the recommendation. The information might contain markdown.
+     */
+    AdditionalInfo?: String;
+    /**
+     * A link to documentation that provides additional information about the recommendation.
+     */
+    Links?: DocLinkList;
+    /**
+     * Details of the issue that caused the recommendation.
+     */
+    IssueDetails?: IssueDetails;
+  }
+  export type DBRecommendationList = DBRecommendation[];
+  export interface DBRecommendationMessage {
+    DBRecommendation?: DBRecommendation;
+  }
+  export interface DBRecommendationsMessage {
+    /**
+     * A list of recommendations which is returned from DescribeDBRecommendations API request.
+     */
+    DBRecommendations?: DBRecommendationList;
+    /**
+     * An optional pagination token provided by a previous DBRecommendationsMessage request. This token can be used later in a DescribeDBRecomendations request. 
+     */
+    Marker?: String;
+  }
   export interface DBSecurityGroup {
     /**
      * Provides the Amazon Web Services ID of the owner of a specific DB security group.
@@ -5700,6 +5823,32 @@ declare namespace RDS {
      */
     Marker?: String;
   }
+  export interface DescribeDBRecommendationsMessage {
+    /**
+     * A filter to include only the recommendations that were updated after this specified time.
+     */
+    LastUpdatedAfter?: TStamp;
+    /**
+     * A filter to include only the recommendations that were updated before this specified time.
+     */
+    LastUpdatedBefore?: TStamp;
+    /**
+     * The language that you choose to return the list of recommendations. Valid values:    en     en_UK     de     es     fr     id     it     ja     ko     pt_BR     zh_TW     zh_CN   
+     */
+    Locale?: String;
+    /**
+     * A filter that specifies one or more recommendations to describe. Supported Filters:    recommendation-id - Accepts a list of recommendation identifiers. The results list only includes the recommendations whose identifier is one of the specified filter values.    status - Accepts a list of recommendation statuses. Valid values:    active - The recommendations which are ready for you to apply.    pending - The applied or scheduled recommendations which are in progress.    resolved - The recommendations which are completed.    dismissed - The recommendations that you dismissed.   The results list only includes the recommendations whose status is one of the specified filter values.    severity - Accepts a list of recommendation severities. The results list only includes the recommendations whose severity is one of the specified filter values. Valid values:    high     medium     low     informational       type-id - Accepts a list of recommendation type identifiers. The results list only includes the recommendations whose type is one of the specified filter values.    dbi-resource-id - Accepts a list of database resource identifiers. The results list only includes the recommendations that generated for the specified databases.    cluster-resource-id - Accepts a list of cluster resource identifiers. The results list only includes the recommendations that generated for the specified clusters.    pg-arn - Accepts a list of parameter group ARNs. The results list only includes the recommendations that generated for the specified parameter groups.    cluster-pg-arn - Accepts a list of cluster parameter group ARNs. The results list only includes the recommendations that generated for the specified cluster parameter groups.  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of recommendations to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional pagination token provided by a previous DescribeDBRecommendations request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+  }
   export interface DescribeDBSecurityGroupsMessage {
     /**
      * The name of the DB security group to return details for.
@@ -6231,6 +6380,17 @@ declare namespace RDS {
     ValidDBInstanceModificationsMessage?: ValidDBInstanceModificationsMessage;
   }
   export type Description = string;
+  export interface DocLink {
+    /**
+     * The text with the link to documentation for the recommendation.
+     */
+    Text?: String;
+    /**
+     * The URL for the documentation for the recommendation.
+     */
+    Url?: String;
+  }
+  export type DocLinkList = DocLink[];
   export interface DomainMembership {
     /**
      * The identifier of the Active Directory Domain.
@@ -6760,6 +6920,12 @@ declare namespace RDS {
   export type IntegrationList = Integration[];
   export type IntegrationName = string;
   export type IntegrationStatus = "creating"|"active"|"modifying"|"failed"|"deleting"|"syncing"|"needs_attention"|string;
+  export interface IssueDetails {
+    /**
+     * A detailed description of the issue when the recommendation category is performance.
+     */
+    PerformanceIssueDetails?: PerformanceIssueDetails;
+  }
   export type KeyList = String[];
   export type KmsKeyIdOrArn = string;
   export interface ListTagsForResourceMessage {
@@ -6792,6 +6958,42 @@ declare namespace RDS {
     KmsKeyId?: String;
   }
   export type MaxRecords = number;
+  export interface Metric {
+    /**
+     * The name of a metric.
+     */
+    Name?: String;
+    /**
+     * A list of metric references (thresholds).
+     */
+    References?: MetricReferenceList;
+    /**
+     * The details of different statistics for a metric. The description might contain markdown.
+     */
+    StatisticsDetails?: String;
+    /**
+     * The query to retrieve metric data points.
+     */
+    MetricQuery?: MetricQuery;
+  }
+  export type MetricList = Metric[];
+  export interface MetricQuery {
+    /**
+     * The Performance Insights query that you can use to retrieve Performance Insights metric data points.
+     */
+    PerformanceInsightsMetricQuery?: PerformanceInsightsMetricQuery;
+  }
+  export interface MetricReference {
+    /**
+     * The name of the metric reference.
+     */
+    Name?: String;
+    /**
+     * The details of a performance issue.
+     */
+    ReferenceDetails?: ReferenceDetails;
+  }
+  export type MetricReferenceList = MetricReference[];
   export interface MinimumEngineVersionPerAllowedValue {
     /**
      * The allowed value for an option setting.
@@ -7449,6 +7651,24 @@ declare namespace RDS {
      * The settings of the modified DBProxyTarget.
      */
     DBProxyTargetGroup?: DBProxyTargetGroup;
+  }
+  export interface ModifyDBRecommendationMessage {
+    /**
+     * The identifier of the recommendation to update.
+     */
+    RecommendationId: String;
+    /**
+     * The language of the modified recommendation.
+     */
+    Locale?: String;
+    /**
+     * The recommendation status to update. Valid values:   active   dismissed  
+     */
+    Status?: String;
+    /**
+     * The list of recommended action status to update. You can update multiple recommended actions at one time.
+     */
+    RecommendedActionUpdates?: RecommendedActionUpdateList;
   }
   export interface ModifyDBSnapshotAttributeMessage {
     /**
@@ -8243,6 +8463,48 @@ declare namespace RDS {
      */
     MultiTenant?: BooleanOptional;
   }
+  export interface PerformanceInsightsMetricDimensionGroup {
+    /**
+     * A list of specific dimensions from a dimension group. If this list isn't included, then all of the dimensions in the group were requested, or are present in the response.
+     */
+    Dimensions?: StringList;
+    /**
+     * The available dimension groups for Performance Insights metric type.
+     */
+    Group?: String;
+    /**
+     * The maximum number of items to fetch for this dimension group.
+     */
+    Limit?: Integer;
+  }
+  export interface PerformanceInsightsMetricQuery {
+    /**
+     * A specification for how to aggregate the data points from a query result. You must specify a valid dimension group. Performance Insights will return all of the dimensions within that group, unless you provide the names of specific dimensions within that group. You can also request that Performance Insights return a limited number of values for a dimension.
+     */
+    GroupBy?: PerformanceInsightsMetricDimensionGroup;
+    /**
+     * The name of a Performance Insights metric to be measured. Valid Values:    db.load.avg - A scaled representation of the number of active sessions for the database engine.    db.sampledload.avg - The raw number of active sessions for the database engine.   The counter metrics listed in Performance Insights operating system counters in the Amazon Aurora User Guide.   If the number of active sessions is less than an internal Performance Insights threshold, db.load.avg and db.sampledload.avg are the same value. If the number of active sessions is greater than the internal threshold, Performance Insights samples the active sessions, with db.load.avg showing the scaled values, db.sampledload.avg showing the raw values, and db.sampledload.avg less than db.load.avg. For most use cases, you can query db.load.avg only.
+     */
+    Metric?: String;
+  }
+  export interface PerformanceIssueDetails {
+    /**
+     * The time when the performance issue started.
+     */
+    StartTime?: TStamp;
+    /**
+     * The time when the performance issue stopped.
+     */
+    EndTime?: TStamp;
+    /**
+     * The metrics that are relevant to the performance issue.
+     */
+    Metrics?: MetricList;
+    /**
+     * The analysis of the performance issue. The information might contain markdown.
+     */
+    Analysis?: String;
+  }
   export interface ProcessorFeature {
     /**
      * The name of the processor feature. Valid names are coreCount and threadsPerCore.
@@ -8353,6 +8615,67 @@ declare namespace RDS {
   export interface RebootDBInstanceResult {
     DBInstance?: DBInstance;
   }
+  export interface RecommendedAction {
+    /**
+     * The unique identifier of the recommended action.
+     */
+    ActionId?: String;
+    /**
+     * A short description to summarize the action. The description might contain markdown.
+     */
+    Title?: String;
+    /**
+     * A detailed description of the action. The description might contain markdown.
+     */
+    Description?: String;
+    /**
+     * An API operation for the action.
+     */
+    Operation?: String;
+    /**
+     * The parameters for the API operation.
+     */
+    Parameters?: RecommendedActionParameterList;
+    /**
+     * The methods to apply the recommended action. Valid values:    manual - The action requires you to resolve the recommendation manually.    immediately - The action is applied immediately.    next-maintainance-window - The action is applied during the next scheduled maintainance.  
+     */
+    ApplyModes?: StringList;
+    /**
+     * The status of the action.    ready     applied     scheduled     resolved   
+     */
+    Status?: String;
+    /**
+     * The details of the issue.
+     */
+    IssueDetails?: IssueDetails;
+    /**
+     * The supporting attributes to explain the recommended action.
+     */
+    ContextAttributes?: ContextAttributeList;
+  }
+  export type RecommendedActionList = RecommendedAction[];
+  export interface RecommendedActionParameter {
+    /**
+     * The key of the parameter to use with the RecommendedAction API operation.
+     */
+    Key?: String;
+    /**
+     * The value of the parameter to use with the RecommendedAction API operation.
+     */
+    Value?: String;
+  }
+  export type RecommendedActionParameterList = RecommendedActionParameter[];
+  export interface RecommendedActionUpdate {
+    /**
+     * A unique identifier of the updated recommendation action.
+     */
+    ActionId: String;
+    /**
+     * The status of the updated recommendation action.    applied     scheduled   
+     */
+    Status: String;
+  }
+  export type RecommendedActionUpdateList = RecommendedActionUpdate[];
   export interface RecurringCharge {
     /**
      * The amount of the recurring charge.
@@ -8364,6 +8687,12 @@ declare namespace RDS {
     RecurringChargeFrequency?: String;
   }
   export type RecurringChargeList = RecurringCharge[];
+  export interface ReferenceDetails {
+    /**
+     * The metric reference details when the reference is a scalar.
+     */
+    ScalarReferenceDetails?: ScalarReferenceDetails;
+  }
   export interface RegisterDBProxyTargetsRequest {
     /**
      * The identifier of the DBProxy that is associated with the DBProxyTargetGroup.
@@ -9572,6 +9901,12 @@ declare namespace RDS {
   }
   export interface RevokeDBSecurityGroupIngressResult {
     DBSecurityGroup?: DBSecurityGroup;
+  }
+  export interface ScalarReferenceDetails {
+    /**
+     * The value of a scalar reference.
+     */
+    Value?: Double;
   }
   export interface ScalingConfiguration {
     /**

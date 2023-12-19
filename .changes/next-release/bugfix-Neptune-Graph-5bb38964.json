@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Neptune Graph",
-  "description": "skips Neptune Graph from console repl"
-}
