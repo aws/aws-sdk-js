@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1522.0-->
+<!--LATEST=2.1523.0-->
 <!--ENTRYINSERT-->
+
+## 2.1523.0
+* feature: AppStream: This release introduces configurable clipboard, allowing admins to specify the maximum length of text that can be copied by the users from their device to the remote session and vice-versa.
+* feature: EKS: Add support for cluster insights, new EKS capability that surfaces potentially upgrade impacting issues.
+* feature: GuardDuty: This release 1) introduces a new API: GetOrganizationStatistics , and 2) adds a new UsageStatisticType TOP_ACCOUNTS_BY_FEATURE for GetUsageStatistics API
+* feature: ManagedBlockchainQuery: Adding Confirmation Status and Execution Status to GetTransaction Response.
+* feature: MediaTailor: Adds the ability to configure time shifting on MediaTailor channels using the TimeShiftConfiguration field
+* feature: Route53: Amazon Route 53 now supports the Canada West (Calgary) Region (ca-west-1) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
 
 ## 2.1522.0
 * bugfix: Neptune Graph: skips Neptune Graph from console repl

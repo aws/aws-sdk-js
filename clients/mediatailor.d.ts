@@ -608,6 +608,10 @@ declare namespace MediaTailor {
      * The tier of the channel.
      */
     Tier?: Tier;
+    /**
+     *  The time-shifted viewing configuration you want to associate to the channel. 
+     */
+    TimeShiftConfiguration?: TimeShiftConfiguration;
   }
   export interface CreateChannelResponse {
     /**
@@ -650,6 +654,10 @@ declare namespace MediaTailor {
      * The tier of the channel.
      */
     Tier?: __string;
+    /**
+     *  The time-shifted viewing configuration assigned to the channel. 
+     */
+    TimeShiftConfiguration?: TimeShiftConfiguration;
   }
   export interface CreateLiveSourceRequest {
     /**
@@ -1114,6 +1122,10 @@ declare namespace MediaTailor {
      * The channel's tier.
      */
     Tier?: __string;
+    /**
+     *  The time-shifted viewing configuration for the channel. 
+     */
+    TimeShiftConfiguration?: TimeShiftConfiguration;
   }
   export interface DescribeLiveSourceRequest {
     /**
@@ -2294,6 +2306,12 @@ declare namespace MediaTailor {
     Tags: __mapOf__string;
   }
   export type Tier = "BASIC"|"STANDARD"|string;
+  export interface TimeShiftConfiguration {
+    /**
+     *  The maximum time delay for time-shifted viewing. The minimum allowed maximum time delay is 0 seconds, and the maximum allowed maximum time delay is 21600 seconds (6 hours). 
+     */
+    MaxTimeDelaySeconds: __integer;
+  }
   export interface TimeSignalMessage {
     /**
      * The configurations for the SCTE-35 segmentation_descriptor message(s) sent with the time_signal message.
@@ -2346,6 +2364,10 @@ declare namespace MediaTailor {
      * The channel's output properties.
      */
     Outputs: RequestOutputs;
+    /**
+     *  The time-shifted viewing configuration you want to associate to the channel. 
+     */
+    TimeShiftConfiguration?: TimeShiftConfiguration;
   }
   export interface UpdateChannelResponse {
     /**
@@ -2388,6 +2410,10 @@ declare namespace MediaTailor {
      * The tier associated with this Channel.
      */
     Tier?: __string;
+    /**
+     *  The time-shifted viewing configuration for the channel. 
+     */
+    TimeShiftConfiguration?: TimeShiftConfiguration;
   }
   export interface UpdateLiveSourceRequest {
     /**

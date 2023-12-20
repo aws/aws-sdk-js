@@ -60,11 +60,11 @@ declare class GuardDuty extends Service {
    */
   createIPSet(callback?: (err: AWSError, data: GuardDuty.Types.CreateIPSetResponse) => void): Request<GuardDuty.Types.CreateIPSetResponse, AWSError>;
   /**
-   * Creates member accounts of the current Amazon Web Services account by specifying a list of Amazon Web Services account IDs. This step is a prerequisite for managing the associated member accounts either by invitation or through an organization. As a delegated administrator, using CreateMembers will enable GuardDuty in the added member accounts, with the exception of the organization delegated administrator account. A delegated administrator must enable GuardDuty prior to being added as a member. If you are adding accounts by invitation, before using InviteMembers, use CreateMembers after GuardDuty has been enabled in potential member accounts. If you disassociate a member from a GuardDuty delegated administrator, the member account details obtained from this API, including the associated email addresses, will be retained. This is done so that the delegated administrator can invoke the InviteMembers API without the need to invoke the CreateMembers API again. To remove the details associated with a member account, the delegated administrator must invoke the DeleteMembers API. 
+   * Creates member accounts of the current Amazon Web Services account by specifying a list of Amazon Web Services account IDs. This step is a prerequisite for managing the associated member accounts either by invitation or through an organization. As a delegated administrator, using CreateMembers will enable GuardDuty in the added member accounts, with the exception of the organization delegated administrator account. A delegated administrator must enable GuardDuty prior to being added as a member. When you use CreateMembers as an Organizations delegated administrator, GuardDuty applies your organization's auto-enable settings to the member accounts in this request, irrespective of the accounts being new or existing members. For more information about the existing auto-enable settings for your organization, see DescribeOrganizationConfiguration. If you are adding accounts by invitation, before using InviteMembers, use CreateMembers after GuardDuty has been enabled in potential member accounts. If you disassociate a member from a GuardDuty delegated administrator, the member account details obtained from this API, including the associated email addresses, will be retained. This is done so that the delegated administrator can invoke the InviteMembers API without the need to invoke the CreateMembers API again. To remove the details associated with a member account, the delegated administrator must invoke the DeleteMembers API. 
    */
   createMembers(params: GuardDuty.Types.CreateMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.CreateMembersResponse) => void): Request<GuardDuty.Types.CreateMembersResponse, AWSError>;
   /**
-   * Creates member accounts of the current Amazon Web Services account by specifying a list of Amazon Web Services account IDs. This step is a prerequisite for managing the associated member accounts either by invitation or through an organization. As a delegated administrator, using CreateMembers will enable GuardDuty in the added member accounts, with the exception of the organization delegated administrator account. A delegated administrator must enable GuardDuty prior to being added as a member. If you are adding accounts by invitation, before using InviteMembers, use CreateMembers after GuardDuty has been enabled in potential member accounts. If you disassociate a member from a GuardDuty delegated administrator, the member account details obtained from this API, including the associated email addresses, will be retained. This is done so that the delegated administrator can invoke the InviteMembers API without the need to invoke the CreateMembers API again. To remove the details associated with a member account, the delegated administrator must invoke the DeleteMembers API. 
+   * Creates member accounts of the current Amazon Web Services account by specifying a list of Amazon Web Services account IDs. This step is a prerequisite for managing the associated member accounts either by invitation or through an organization. As a delegated administrator, using CreateMembers will enable GuardDuty in the added member accounts, with the exception of the organization delegated administrator account. A delegated administrator must enable GuardDuty prior to being added as a member. When you use CreateMembers as an Organizations delegated administrator, GuardDuty applies your organization's auto-enable settings to the member accounts in this request, irrespective of the accounts being new or existing members. For more information about the existing auto-enable settings for your organization, see DescribeOrganizationConfiguration. If you are adding accounts by invitation, before using InviteMembers, use CreateMembers after GuardDuty has been enabled in potential member accounts. If you disassociate a member from a GuardDuty delegated administrator, the member account details obtained from this API, including the associated email addresses, will be retained. This is done so that the delegated administrator can invoke the InviteMembers API without the need to invoke the CreateMembers API again. To remove the details associated with a member account, the delegated administrator must invoke the DeleteMembers API. 
    */
   createMembers(callback?: (err: AWSError, data: GuardDuty.Types.CreateMembersResponse) => void): Request<GuardDuty.Types.CreateMembersResponse, AWSError>;
   /**
@@ -228,11 +228,11 @@ declare class GuardDuty extends Service {
    */
   getAdministratorAccount(callback?: (err: AWSError, data: GuardDuty.Types.GetAdministratorAccountResponse) => void): Request<GuardDuty.Types.GetAdministratorAccountResponse, AWSError>;
   /**
-   * Retrieves aggregated statistics for your account. If you are a GuardDuty administrator, you can retrieve the statistics for all the resources associated with the active member accounts in your organization who have enabled EKS Runtime Monitoring and have the GuardDuty agent running on their EKS nodes.
+   * Retrieves aggregated statistics for your account. If you are a GuardDuty administrator, you can retrieve the statistics for all the resources associated with the active member accounts in your organization who have enabled Runtime Monitoring and have the GuardDuty security agent running on their resources.
    */
   getCoverageStatistics(params: GuardDuty.Types.GetCoverageStatisticsRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetCoverageStatisticsResponse) => void): Request<GuardDuty.Types.GetCoverageStatisticsResponse, AWSError>;
   /**
-   * Retrieves aggregated statistics for your account. If you are a GuardDuty administrator, you can retrieve the statistics for all the resources associated with the active member accounts in your organization who have enabled EKS Runtime Monitoring and have the GuardDuty agent running on their EKS nodes.
+   * Retrieves aggregated statistics for your account. If you are a GuardDuty administrator, you can retrieve the statistics for all the resources associated with the active member accounts in your organization who have enabled Runtime Monitoring and have the GuardDuty security agent running on their resources.
    */
   getCoverageStatistics(callback?: (err: AWSError, data: GuardDuty.Types.GetCoverageStatisticsResponse) => void): Request<GuardDuty.Types.GetCoverageStatisticsResponse, AWSError>;
   /**
@@ -316,6 +316,10 @@ declare class GuardDuty extends Service {
    */
   getMembers(callback?: (err: AWSError, data: GuardDuty.Types.GetMembersResponse) => void): Request<GuardDuty.Types.GetMembersResponse, AWSError>;
   /**
+   * Retrieves how many active member accounts in your Amazon Web Services organization have each feature enabled within GuardDuty. Only a delegated GuardDuty administrator of an organization can run this API. When you create a new Amazon Web Services organization, it might take up to 24 hours to generate the statistics for the entire organization.
+   */
+  getOrganizationStatistics(callback?: (err: AWSError, data: GuardDuty.Types.GetOrganizationStatisticsResponse) => void): Request<GuardDuty.Types.GetOrganizationStatisticsResponse, AWSError>;
+  /**
    * Provides the number of days left for each data source used in the free trial period.
    */
   getRemainingFreeTrialDays(params: GuardDuty.Types.GetRemainingFreeTrialDaysRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetRemainingFreeTrialDaysResponse) => void): Request<GuardDuty.Types.GetRemainingFreeTrialDaysResponse, AWSError>;
@@ -348,11 +352,11 @@ declare class GuardDuty extends Service {
    */
   inviteMembers(callback?: (err: AWSError, data: GuardDuty.Types.InviteMembersResponse) => void): Request<GuardDuty.Types.InviteMembersResponse, AWSError>;
   /**
-   * Lists coverage details for your GuardDuty account. If you're a GuardDuty administrator, you can retrieve all resources associated with the active member accounts in your organization. Make sure the accounts have EKS Runtime Monitoring enabled and GuardDuty agent running on their EKS nodes.
+   * Lists coverage details for your GuardDuty account. If you're a GuardDuty administrator, you can retrieve all resources associated with the active member accounts in your organization. Make sure the accounts have Runtime Monitoring enabled and GuardDuty agent running on their resources.
    */
   listCoverage(params: GuardDuty.Types.ListCoverageRequest, callback?: (err: AWSError, data: GuardDuty.Types.ListCoverageResponse) => void): Request<GuardDuty.Types.ListCoverageResponse, AWSError>;
   /**
-   * Lists coverage details for your GuardDuty account. If you're a GuardDuty administrator, you can retrieve all resources associated with the active member accounts in your organization. Make sure the accounts have EKS Runtime Monitoring enabled and GuardDuty agent running on their EKS nodes.
+   * Lists coverage details for your GuardDuty account. If you're a GuardDuty administrator, you can retrieve all resources associated with the active member accounts in your organization. Make sure the accounts have Runtime Monitoring enabled and GuardDuty agent running on their resources.
    */
   listCoverage(callback?: (err: AWSError, data: GuardDuty.Types.ListCoverageResponse) => void): Request<GuardDuty.Types.ListCoverageResponse, AWSError>;
   /**
@@ -1004,7 +1008,7 @@ declare namespace GuardDuty {
      */
     AgentDetails?: AgentDetails;
     /**
-     * Indicates how the GuardDuty security agent is managed for this resource.    AUTO_MANAGED indicates that GuardDuty deploys and manages updates for this resource.    MANUAL indicates that you are responsible to deploy, update, and manage the GuardDuty security agent updates for this resource.    The DISABLED status doesn't apply to Amazon EC2 instances and Amazon EKS clusters that run on Amazon EC2 instances. 
+     * Indicates how the GuardDuty security agent is managed for this resource.    AUTO_MANAGED indicates that GuardDuty deploys and manages updates for this resource.    MANUAL indicates that you are responsible to deploy, update, and manage the GuardDuty security agent updates for this resource.    The DISABLED status doesn't apply to Amazon EC2 instances and Amazon EKS clusters. 
      */
     ManagementType?: ManagementType;
   }
@@ -1116,7 +1120,7 @@ declare namespace GuardDuty {
      */
     EcsClusterDetails?: CoverageEcsClusterDetails;
     /**
-     *  This API is also used when you use GuardDuty Runtime Monitoring for your Amazon EC2 instances (currently in preview release) and is subject to change.  Information about the Amazon EC2 instance assessed for runtime coverage.
+     *  This API is also used when you use GuardDuty Runtime Monitoring for your Amazon EC2 instances (currently in preview release) and is subject to change. The use of this API is subject to Section 2 of the Amazon Web Services Service Terms ("Betas and Previews").  Information about the Amazon EC2 instance assessed for runtime coverage.
      */
     Ec2InstanceDetails?: CoverageEc2InstanceDetails;
   }
@@ -1972,11 +1976,11 @@ declare namespace GuardDuty {
   }
   export interface FargateDetails {
     /**
-     * Runtime coverage issues identified for the resource running on AWS Fargate.
+     * Runtime coverage issues identified for the resource running on Amazon Web Services Fargate.
      */
     Issues?: Issues;
     /**
-     * Indicates how the GuardDuty security agent is managed for this resource.    AUTO_MANAGED indicates that GuardDuty deploys and manages updates for this resource.    MANUAL indicates that you are responsible to deploy, update, and manage the GuardDuty security agent updates for this resource.    DISABLED indicates that the deployment of the GuardDuty security agent is disabled for this resource.  
+     * Indicates how the GuardDuty security agent is managed for this resource.    AUTO_MANAGED indicates that GuardDuty deploys and manages updates for this resource.    DISABLED indicates that the deployment of the GuardDuty security agent is disabled for this resource.    The MANUAL status doesn't apply to the Amazon Web Services Fargate (Amazon ECS only) woprkloads. 
      */
     ManagementType?: ManagementType;
   }
@@ -2380,6 +2384,12 @@ declare namespace GuardDuty {
      * A list of objects that contain the unprocessed account and a result string that explains why it was unprocessed.
      */
     UnprocessedAccounts: UnprocessedAccounts;
+  }
+  export interface GetOrganizationStatisticsResponse {
+    /**
+     * Information about the statistics report for your organization.
+     */
+    OrganizationDetails?: OrganizationDetails;
   }
   export interface GetRemainingFreeTrialDaysRequest {
     /**
@@ -3502,6 +3512,16 @@ declare namespace GuardDuty {
      */
     MalwareProtection?: OrganizationMalwareProtectionConfigurationResult;
   }
+  export interface OrganizationDetails {
+    /**
+     * The timestamp at which the organization statistics was last updated. This is in UTC format.
+     */
+    UpdatedAt?: Timestamp;
+    /**
+     * Information about the GuardDuty coverage statistics for members in your Amazon Web Services organization.
+     */
+    OrganizationStatistics?: OrganizationStatistics;
+  }
   export interface OrganizationEbsVolumes {
     /**
      * Whether scanning EBS volumes should be auto-enabled for new members joining the organization.
@@ -3542,6 +3562,32 @@ declare namespace GuardDuty {
      */
     AdditionalConfiguration?: OrganizationAdditionalConfigurationResults;
   }
+  export interface OrganizationFeatureStatistics {
+    /**
+     * Name of the feature.
+     */
+    Name?: OrgFeature;
+    /**
+     * Total number of accounts that have enabled a specific feature.
+     */
+    EnabledAccountsCount?: Integer;
+    /**
+     * Name of the additional configuration.
+     */
+    AdditionalConfiguration?: OrganizationFeatureStatisticsAdditionalConfigurations;
+  }
+  export interface OrganizationFeatureStatisticsAdditionalConfiguration {
+    /**
+     * Name of the additional configuration within a feature.
+     */
+    Name?: OrgFeatureAdditionalConfiguration;
+    /**
+     * Total number of accounts that have enabled the additional configuration.
+     */
+    EnabledAccountsCount?: Integer;
+  }
+  export type OrganizationFeatureStatisticsAdditionalConfigurations = OrganizationFeatureStatisticsAdditionalConfiguration[];
+  export type OrganizationFeatureStatisticsResults = OrganizationFeatureStatistics[];
   export type OrganizationFeaturesConfigurations = OrganizationFeatureConfiguration[];
   export type OrganizationFeaturesConfigurationsResults = OrganizationFeatureConfigurationResult[];
   export interface OrganizationKubernetesAuditLogsConfiguration {
@@ -3603,6 +3649,28 @@ declare namespace GuardDuty {
      * Describes the configuration for scanning EBS volumes for an organization.
      */
     EbsVolumes?: OrganizationEbsVolumesResult;
+  }
+  export interface OrganizationStatistics {
+    /**
+     * Total number of accounts in your Amazon Web Services organization.
+     */
+    TotalAccountsCount?: Integer;
+    /**
+     * Total number of accounts in your Amazon Web Services organization that are associated with GuardDuty.
+     */
+    MemberAccountsCount?: Integer;
+    /**
+     * Total number of active accounts in your Amazon Web Services organization that are associated with GuardDuty.
+     */
+    ActiveAccountsCount?: Integer;
+    /**
+     * Total number of accounts that have enabled GuardDuty.
+     */
+    EnabledAccountsCount?: Integer;
+    /**
+     * Retrieves the coverage statistics for each feature.
+     */
+    CountByFeature?: OrganizationFeatureStatisticsResults;
   }
   export interface Owner {
     /**
@@ -4750,12 +4818,16 @@ declare namespace GuardDuty {
     Total?: Total;
   }
   export type UsageResourceResultList = UsageResourceResult[];
-  export type UsageStatisticType = "SUM_BY_ACCOUNT"|"SUM_BY_DATA_SOURCE"|"SUM_BY_RESOURCE"|"TOP_RESOURCES"|"SUM_BY_FEATURES"|string;
+  export type UsageStatisticType = "SUM_BY_ACCOUNT"|"SUM_BY_DATA_SOURCE"|"SUM_BY_RESOURCE"|"TOP_RESOURCES"|"SUM_BY_FEATURES"|"TOP_ACCOUNTS_BY_FEATURE"|string;
   export interface UsageStatistics {
     /**
      * The usage statistic sum organized by account ID.
      */
     SumByAccount?: UsageAccountResultList;
+    /**
+     * Lists the top 50 accounts by feature that have generated the most GuardDuty usage, in the order from most to least expensive. Currently, this doesn't support RDS_LOGIN_EVENTS.
+     */
+    TopAccountsByFeature?: UsageTopAccountsResultList;
     /**
      * The usage statistic sum organized by on data source.
      */
@@ -4773,6 +4845,25 @@ declare namespace GuardDuty {
      */
     SumByFeature?: UsageFeatureResultList;
   }
+  export interface UsageTopAccountResult {
+    /**
+     * The unique account ID.
+     */
+    AccountId?: AccountId;
+    Total?: Total;
+  }
+  export type UsageTopAccountsByFeatureList = UsageTopAccountResult[];
+  export interface UsageTopAccountsResult {
+    /**
+     * Features by which you can generate the usage statistics.  RDS_LOGIN_EVENTS is currently not supported with topAccountsByFeature.
+     */
+    Feature?: UsageFeature;
+    /**
+     * The accounts that contributed to the total usage cost.
+     */
+    Accounts?: UsageTopAccountsByFeatureList;
+  }
+  export type UsageTopAccountsResultList = UsageTopAccountsResult[];
   export interface Volume {
     /**
      * Volume name.

@@ -150,6 +150,7 @@ declare namespace ManagedBlockchainQuery {
     time?: Timestamp;
   }
   export type ChainAddress = string;
+  export type ConfirmationStatus = "FINAL"|string;
   export interface ContractFilter {
     /**
      * The blockchain network of the contract.
@@ -189,6 +190,7 @@ declare namespace ManagedBlockchainQuery {
     decimals?: Integer;
   }
   export type ErrorType = "VALIDATION_EXCEPTION"|"RESOURCE_NOT_FOUND_EXCEPTION"|string;
+  export type ExecutionStatus = "FAILED"|"SUCCEEDED"|string;
   export interface GetAssetContractInput {
     /**
      * Contains the blockchain address and network information about the contract.
@@ -395,7 +397,7 @@ declare namespace ManagedBlockchainQuery {
      */
     address: ChainAddress;
   }
-  export type QueryNetwork = "ETHEREUM_MAINNET"|"BITCOIN_MAINNET"|"BITCOIN_TESTNET"|"ETHEREUM_SEPOLIA_TESTNET"|string;
+  export type QueryNetwork = "ETHEREUM_MAINNET"|"ETHEREUM_SEPOLIA_TESTNET"|"BITCOIN_MAINNET"|"BITCOIN_TESTNET"|string;
   export type QueryTokenId = string;
   export type QueryTokenStandard = "ERC20"|"ERC721"|"ERC1155"|string;
   export type QueryTransactionEventType = "ERC20_TRANSFER"|"ERC20_MINT"|"ERC20_BURN"|"ERC20_DEPOSIT"|"ERC20_WITHDRAWAL"|"ERC721_TRANSFER"|"ERC1155_TRANSFER"|"BITCOIN_VIN"|"BITCOIN_VOUT"|"INTERNAL_ETH_TRANSFER"|"ETH_TRANSFER"|string;
@@ -485,9 +487,9 @@ declare namespace ManagedBlockchainQuery {
      */
     numberOfTransactions: Long;
     /**
-     * The status of the transaction.
+     * The status of the transaction.  This property is deprecated. You must use the confirmationStatus and the executionStatus properties to determine if the status of the transaction is FINAL or FAILED.   Transactions with a status of FINAL will now have the confirmationStatus set to FINAL and the executionStatus set to SUCCEEDED.   Transactions with a status of FAILED will now have the confirmationStatus set to FINAL and the executionStatus set to FAILED.   
      */
-    status: QueryTransactionStatus;
+    status?: QueryTransactionStatus;
     /**
      * The identifier of the transaction. It is generated whenever a transaction is verified and added to the blockchain.
      */
@@ -532,6 +534,14 @@ declare namespace ManagedBlockchainQuery {
      * The unique identifier of the transaction. It is generated whenever a transaction is verified and added to the blockchain.
      */
     transactionId?: String;
+    /**
+     * Specifies whether the transaction has reached Finality.
+     */
+    confirmationStatus?: ConfirmationStatus;
+    /**
+     * Identifies whether the transaction has succeeded or failed.
+     */
+    executionStatus?: ExecutionStatus;
   }
   export interface TransactionEvent {
     /**

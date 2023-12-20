@@ -3416,6 +3416,10 @@ declare namespace AppStream {
      * Indicates whether the action is enabled or disabled.
      */
     Permission: Permission;
+    /**
+     * Specifies the number of characters that can be copied by end users from the local device to the remote session, and to the local device from the remote session. This can be specified only for the CLIPBOARD_COPY_FROM_LOCAL_DEVICE and CLIPBOARD_COPY_TO_LOCAL_DEVICE actions. This defaults to 20,971,520 (20 MB) when unspecified and the permission is ENABLED. This can't be specified when the permission is DISABLED.  This can only be specified for AlwaysOn and OnDemand fleets. The attribute is not supported on Elastic fleets. The value can be between 1 and 20,971,520 (20 MB).
+     */
+    MaximumLength?: Integer;
   }
   export type UserSettingList = UserSetting[];
   export interface UserStackAssociation {

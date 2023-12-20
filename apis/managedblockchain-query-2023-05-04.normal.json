@@ -451,6 +451,12 @@
       "type": "string",
       "pattern": "[-A-Za-z0-9]{13,74}"
     },
+    "ConfirmationStatus": {
+      "type": "string",
+      "enum": [
+        "FINAL"
+      ]
+    },
     "ContractFilter": {
       "type": "structure",
       "required": [
@@ -515,6 +521,13 @@
       "enum": [
         "VALIDATION_EXCEPTION",
         "RESOURCE_NOT_FOUND_EXCEPTION"
+      ]
+    },
+    "ExecutionStatus": {
+      "type": "string",
+      "enum": [
+        "FAILED",
+        "SUCCEEDED"
       ]
     },
     "GetAssetContractInput": {
@@ -892,9 +905,9 @@
       "type": "string",
       "enum": [
         "ETHEREUM_MAINNET",
+        "ETHEREUM_SEPOLIA_TESTNET",
         "BITCOIN_MAINNET",
-        "BITCOIN_TESTNET",
-        "ETHEREUM_SEPOLIA_TESTNET"
+        "BITCOIN_TESTNET"
       ]
     },
     "QueryTokenId": {
@@ -1037,7 +1050,6 @@
         "transactionTimestamp",
         "transactionIndex",
         "numberOfTransactions",
-        "status",
         "to"
       ],
       "members": {
@@ -1071,7 +1083,9 @@
         },
         "status": {
           "shape": "QueryTransactionStatus",
-          "documentation": "<p>The status of the transaction.</p>"
+          "documentation": "<p>The status of the transaction.</p> <important> <p>This property is deprecated. You must use the <code>confirmationStatus</code> and the <code>executionStatus</code> properties to determine if the <code>status</code> of the transaction is <code>FINAL</code> or <code>FAILED</code>.</p> <ul> <li> <p>Transactions with a <code>status</code> of <code>FINAL</code> will now have the <code>confirmationStatus</code> set to <code>FINAL</code> and the <code>executionStatus</code> set to <code>SUCCEEDED</code>.</p> </li> <li> <p>Transactions with a <code>status</code> of <code>FAILED</code> will now have the <code>confirmationStatus</code> set to <code>FINAL</code> and the <code>executionStatus</code> set to <code>FAILED</code>.</p> </li> </ul> </important>",
+          "deprecated": true,
+          "deprecatedMessage": "The status field in the GetTransaction response is deprecated and is replaced with the confirmationStatus and executionStatus fields."
         },
         "to": {
           "shape": "ChainAddress",
@@ -1116,6 +1130,14 @@
         "transactionId": {
           "shape": "String",
           "documentation": "<p>The unique identifier of the transaction. It is generated whenever a transaction is verified and added to the blockchain.</p>"
+        },
+        "confirmationStatus": {
+          "shape": "ConfirmationStatus",
+          "documentation": "<p>Specifies whether the transaction has reached Finality.</p>"
+        },
+        "executionStatus": {
+          "shape": "ExecutionStatus",
+          "documentation": "<p>Identifies whether the transaction has succeeded or failed.</p>"
         }
       },
       "documentation": "<p>There are two possible types of transactions used for this data type:</p> <ul> <li> <p>A Bitcoin transaction is a movement of BTC from one address to another.</p> </li> <li> <p>An Ethereum transaction refers to an action initiated by an externally owned account, which is an account managed by a human, not a contract. For example, if Bob sends Alice 1 ETH, Bob's account must be debited and Alice's must be credited. This state-changing action occurs within a transaction.</p> </li> </ul>"

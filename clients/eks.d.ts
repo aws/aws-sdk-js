@@ -221,6 +221,14 @@ declare class EKS extends Service {
    */
   describeIdentityProviderConfig(callback?: (err: AWSError, data: EKS.Types.DescribeIdentityProviderConfigResponse) => void): Request<EKS.Types.DescribeIdentityProviderConfigResponse, AWSError>;
   /**
+   * Returns details about an insight that you specify using its ID.
+   */
+  describeInsight(params: EKS.Types.DescribeInsightRequest, callback?: (err: AWSError, data: EKS.Types.DescribeInsightResponse) => void): Request<EKS.Types.DescribeInsightResponse, AWSError>;
+  /**
+   * Returns details about an insight that you specify using its ID.
+   */
+  describeInsight(callback?: (err: AWSError, data: EKS.Types.DescribeInsightResponse) => void): Request<EKS.Types.DescribeInsightResponse, AWSError>;
+  /**
    * Describes a managed node group.
    */
   describeNodegroup(params: EKS.Types.DescribeNodegroupRequest, callback?: (err: AWSError, data: EKS.Types.DescribeNodegroupResponse) => void): Request<EKS.Types.DescribeNodegroupResponse, AWSError>;
@@ -324,6 +332,14 @@ declare class EKS extends Service {
    * Lists the identity provider configurations for your cluster.
    */
   listIdentityProviderConfigs(callback?: (err: AWSError, data: EKS.Types.ListIdentityProviderConfigsResponse) => void): Request<EKS.Types.ListIdentityProviderConfigsResponse, AWSError>;
+  /**
+   * Returns a list of all insights checked for against the specified cluster. You can filter which insights are returned by category, associated Kubernetes version, and status.
+   */
+  listInsights(params: EKS.Types.ListInsightsRequest, callback?: (err: AWSError, data: EKS.Types.ListInsightsResponse) => void): Request<EKS.Types.ListInsightsResponse, AWSError>;
+  /**
+   * Returns a list of all insights checked for against the specified cluster. You can filter which insights are returned by category, associated Kubernetes version, and status.
+   */
+  listInsights(callback?: (err: AWSError, data: EKS.Types.ListInsightsResponse) => void): Request<EKS.Types.ListInsightsResponse, AWSError>;
   /**
    * Lists the managed node groups associated with the specified cluster in your Amazon Web Services account in the specified Amazon Web Services Region. Self-managed node groups aren't listed.
    */
@@ -581,6 +597,7 @@ declare namespace EKS {
     namespaces?: StringList;
   }
   export type AccessScopeType = "cluster"|"namespace"|string;
+  export type AdditionalInfoMap = {[key: string]: String};
   export interface Addon {
     /**
      * The name of the add-on.
@@ -814,12 +831,29 @@ declare namespace EKS {
   export type BoxedInteger = number;
   export type Capacity = number;
   export type CapacityTypes = "ON_DEMAND"|"SPOT"|string;
+  export type Category = "UPGRADE_READINESS"|string;
+  export type CategoryList = Category[];
   export interface Certificate {
     /**
      * The Base64-encoded certificate data required to communicate with your cluster. Add this to the certificate-authority-data section of the kubeconfig file for your cluster.
      */
     data?: String;
   }
+  export interface ClientStat {
+    /**
+     * The user agent of the Kubernetes client using the deprecated resource.
+     */
+    userAgent?: String;
+    /**
+     * The number of requests from the Kubernetes client seen over the last 30 days.
+     */
+    numberOfRequestsLast30Days?: Integer;
+    /**
+     * The timestamp of the last request seen from the Kubernetes client.
+     */
+    lastRequestTime?: Timestamp;
+  }
+  export type ClientStats = ClientStat[];
   export interface Cluster {
     /**
      * The name of your cluster.
@@ -1006,7 +1040,7 @@ declare namespace EKS {
      */
     clusterName: String;
     /**
-     * The ARN of the IAM principal for the AccessEntry. You can specify one ARN for each access entry. You can't specify the same ARN in more than one access entry. This value can't be changed after access entry creation.  IAM best practices recommend using IAM roles with temporary credentials, rather than IAM users with long-term credentials. 
+     * The ARN of the IAM principal for the AccessEntry. You can specify one ARN for each access entry. You can't specify the same ARN in more than one access entry. This value can't be changed after access entry creation. The valid principals differ depending on the type of the access entry in the type field. The only valid ARN is IAM roles for the types of access entries for nodes:  . You can use every IAM principal type for STANDARD access entries. You can't use the STS session principal type with access entries because this is a temporary principal for each session and not a permanent identity that can be assigned permissions.  IAM best practices recommend using IAM roles with temporary credentials, rather than IAM users with long-term credentials. 
      */
     principalArn: String;
     /**
@@ -1026,7 +1060,7 @@ declare namespace EKS {
      */
     username?: String;
     /**
-     * If the principalArn is for an IAM role that's used for self-managed Amazon EC2 nodes, specify EC2_LINUX or EC2_WINDOWS. Amazon EKS grants the necessary permissions to the node for you. If the principalArn is for any other purpose, specify STANDARD. If you don't specify a value, Amazon EKS sets the value to STANDARD. It's unnecessary to create access entries for IAM roles used with Fargate profiles or managed Amazon EC2 nodes, because Amazon EKS creates entries in the aws-auth ConfigMap for the roles. You can't change this value once you've created the access entry. If you set the value to EC2_LINUX or EC2_WINDOWS, you can't specify values for kubernetesGroups, or associate an AccessPolicy to the access entry.
+     * The type of the new access entry. Valid values are Standard, FARGATE_LINUX, EC2_LINUX, and EC2_WINDOWS. If the principalArn is for an IAM role that's used for self-managed Amazon EC2 nodes, specify EC2_LINUX or EC2_WINDOWS. Amazon EKS grants the necessary permissions to the node for you. If the principalArn is for any other purpose, specify STANDARD. If you don't specify a value, Amazon EKS sets the value to STANDARD. It's unnecessary to create access entries for IAM roles used with Fargate profiles or managed Amazon EC2 nodes, because Amazon EKS creates entries in the aws-auth ConfigMap for the roles. You can't change this value once you've created the access entry. If you set the value to EC2_LINUX or EC2_WINDOWS, you can't specify values for kubernetesGroups, or associate an AccessPolicy to the access entry.
      */
     type?: String;
   }
@@ -1407,6 +1441,29 @@ declare namespace EKS {
      */
     association?: PodIdentityAssociation;
   }
+  export interface DeprecationDetail {
+    /**
+     * The deprecated version of the resource.
+     */
+    usage?: String;
+    /**
+     * The newer version of the resource to migrate to if applicable. 
+     */
+    replacedWith?: String;
+    /**
+     * The version of the software where the deprecated resource version will stop being served.
+     */
+    stopServingVersion?: String;
+    /**
+     * The version of the software where the newer resource version became available to migrate to if applicable.
+     */
+    startServingReplacementVersion?: String;
+    /**
+     * Details about Kubernetes clients using the deprecated resources.
+     */
+    clientStats?: ClientStats;
+  }
+  export type DeprecationDetails = DeprecationDetail[];
   export interface DeregisterClusterRequest {
     /**
      * The name of the connected cluster to deregister.
@@ -1565,6 +1622,22 @@ declare namespace EKS {
      * The object that represents an OpenID Connect (OIDC) identity provider configuration.
      */
     identityProviderConfig?: IdentityProviderConfigResponse;
+  }
+  export interface DescribeInsightRequest {
+    /**
+     * The name of the cluster to describe the insight for.
+     */
+    clusterName: String;
+    /**
+     * The identity of the insight to describe.
+     */
+    id: String;
+  }
+  export interface DescribeInsightResponse {
+    /**
+     * The full description of the insight.
+     */
+    insight?: Insight;
   }
   export interface DescribeNodegroupRequest {
     /**
@@ -1824,6 +1897,138 @@ declare namespace EKS {
   }
   export type IdentityProviderConfigs = IdentityProviderConfig[];
   export type IncludeClustersList = String[];
+  export interface Insight {
+    /**
+     * The ID of the insight.
+     */
+    id?: String;
+    /**
+     * The name of the insight.
+     */
+    name?: String;
+    /**
+     * The category of the insight.
+     */
+    category?: Category;
+    /**
+     * The Kubernetes minor version associated with an insight if applicable.
+     */
+    kubernetesVersion?: String;
+    /**
+     * The time Amazon EKS last successfully completed a refresh of this insight check on the cluster.
+     */
+    lastRefreshTime?: Timestamp;
+    /**
+     * The time the status of the insight last changed.
+     */
+    lastTransitionTime?: Timestamp;
+    /**
+     * The description of the insight which includes alert criteria, remediation recommendation, and additional resources (contains Markdown).
+     */
+    description?: String;
+    /**
+     * An object containing more detail on the status of the insight resource.
+     */
+    insightStatus?: InsightStatus;
+    /**
+     * A summary of how to remediate the finding of this insight if applicable. 
+     */
+    recommendation?: String;
+    /**
+     * Links to sources that provide additional context on the insight.
+     */
+    additionalInfo?: AdditionalInfoMap;
+    /**
+     * The details about each resource listed in the insight check result.
+     */
+    resources?: InsightResourceDetails;
+    /**
+     * Summary information that relates to the category of the insight. Currently only returned with certain insights having category UPGRADE_READINESS.
+     */
+    categorySpecificSummary?: InsightCategorySpecificSummary;
+  }
+  export interface InsightCategorySpecificSummary {
+    /**
+     * The summary information about deprecated resource usage for an insight check in the UPGRADE_READINESS category.
+     */
+    deprecationDetails?: DeprecationDetails;
+  }
+  export interface InsightResourceDetail {
+    /**
+     * An object containing more detail on the status of the insight resource.
+     */
+    insightStatus?: InsightStatus;
+    /**
+     * The Kubernetes resource URI if applicable.
+     */
+    kubernetesResourceUri?: String;
+    /**
+     * The Amazon Resource Name (ARN) if applicable.
+     */
+    arn?: String;
+  }
+  export type InsightResourceDetails = InsightResourceDetail[];
+  export interface InsightStatus {
+    /**
+     * The status of the resource.
+     */
+    status?: InsightStatusValue;
+    /**
+     * Explanation on the reasoning for the status of the resource. 
+     */
+    reason?: String;
+  }
+  export type InsightStatusValue = "PASSING"|"WARNING"|"ERROR"|"UNKNOWN"|string;
+  export type InsightStatusValueList = InsightStatusValue[];
+  export type InsightSummaries = InsightSummary[];
+  export interface InsightSummary {
+    /**
+     * The ID of the insight.
+     */
+    id?: String;
+    /**
+     * The name of the insight.
+     */
+    name?: String;
+    /**
+     * The category of the insight.
+     */
+    category?: Category;
+    /**
+     * The Kubernetes minor version associated with an insight if applicable. 
+     */
+    kubernetesVersion?: String;
+    /**
+     * The time Amazon EKS last successfully completed a refresh of this insight check on the cluster.
+     */
+    lastRefreshTime?: Timestamp;
+    /**
+     * The time the status of the insight last changed.
+     */
+    lastTransitionTime?: Timestamp;
+    /**
+     * The description of the insight which includes alert criteria, remediation recommendation, and additional resources (contains Markdown).
+     */
+    description?: String;
+    /**
+     * An object containing more detail on the status of the insight.
+     */
+    insightStatus?: InsightStatus;
+  }
+  export interface InsightsFilter {
+    /**
+     * The categories to use to filter insights.
+     */
+    categories?: CategoryList;
+    /**
+     * The Kubernetes versions to use to filter the insights.
+     */
+    kubernetesVersions?: StringList;
+    /**
+     * The statuses to use to filter the insights. 
+     */
+    statuses?: InsightStatusValueList;
+  }
   export type Integer = number;
   export type IpFamily = "ipv4"|"ipv6"|string;
   export interface Issue {
@@ -2086,7 +2291,36 @@ declare namespace EKS {
      */
     identityProviderConfigs?: IdentityProviderConfigs;
     /**
-     * The nextToken value to include in a future ListIdentityProviderConfigsResponse request. When the results of a ListIdentityProviderConfigsResponse request exceed maxResults, you can use this value to retrieve the next page of results. This value is null when there are no more results to return.
+     * The nextToken value to include in a future ListIdentityProviderConfigsResponse request. When the results of a ListIdentityProviderConfigsResponse request exceed maxResults, you can use this value to retrieve the next page of results. This value is null when there are no more results to return.  This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes. 
+     */
+    nextToken?: String;
+  }
+  export type ListInsightsMaxResults = number;
+  export interface ListInsightsRequest {
+    /**
+     * The name of the Amazon EKS cluster associated with the insights.
+     */
+    clusterName: String;
+    /**
+     * The criteria to filter your list of insights for your cluster. You can filter which insights are returned by category, associated Kubernetes version, and status.
+     */
+    filter?: InsightsFilter;
+    /**
+     * The maximum number of identity provider configurations returned by ListInsights in paginated output. When you use this parameter, ListInsights returns only maxResults results in a single page along with a nextToken response element. You can see the remaining results of the initial request by sending another ListInsights request with the returned nextToken value. This value can be between 1 and 100. If you don't use this parameter, ListInsights returns up to 100 results and a nextToken value, if applicable.
+     */
+    maxResults?: ListInsightsMaxResults;
+    /**
+     * The nextToken value returned from a previous paginated ListInsights request. When the results of a ListInsights request exceed maxResults, you can use this value to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    nextToken?: String;
+  }
+  export interface ListInsightsResponse {
+    /**
+     * The returned list of insights.
+     */
+    insights?: InsightSummaries;
+    /**
+     * The nextToken value to include in a future ListInsights request. When the results of a ListInsights request exceed maxResults, you can use this value to retrieve the next page of results. This value is null when there are no more results to return.
      */
     nextToken?: String;
   }
