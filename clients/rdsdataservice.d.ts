@@ -36,11 +36,11 @@ declare class RDSDataService extends Service {
    */
   commitTransaction(callback?: (err: AWSError, data: RDSDataService.Types.CommitTransactionResponse) => void): Request<RDSDataService.Types.CommitTransactionResponse, AWSError>;
   /**
-   * Runs one or more SQL statements.  This operation is deprecated. Use the BatchExecuteStatement or ExecuteStatement operation. 
+   * Runs one or more SQL statements.  This operation isn't supported for Aurora PostgreSQL Serverless v2 and provisioned DB clusters, and for Aurora Serverless v1 DB clusters, the operation is deprecated. Use the BatchExecuteStatement or ExecuteStatement operation. 
    */
   executeSql(params: RDSDataService.Types.ExecuteSqlRequest, callback?: (err: AWSError, data: RDSDataService.Types.ExecuteSqlResponse) => void): Request<RDSDataService.Types.ExecuteSqlResponse, AWSError>;
   /**
-   * Runs one or more SQL statements.  This operation is deprecated. Use the BatchExecuteStatement or ExecuteStatement operation. 
+   * Runs one or more SQL statements.  This operation isn't supported for Aurora PostgreSQL Serverless v2 and provisioned DB clusters, and for Aurora Serverless v1 DB clusters, the operation is deprecated. Use the BatchExecuteStatement or ExecuteStatement operation. 
    */
   executeSql(callback?: (err: AWSError, data: RDSDataService.Types.ExecuteSqlResponse) => void): Request<RDSDataService.Types.ExecuteSqlResponse, AWSError>;
   /**
@@ -323,7 +323,7 @@ declare namespace RDSDataService {
      */
     numberOfRecordsUpdated?: RecordsUpdated;
     /**
-     * Values for fields generated during a DML request.  &lt;note&gt; &lt;p&gt;The &lt;code&gt;generatedFields&lt;/code&gt; data isn't supported by Aurora PostgreSQL. To get the values of generated fields, use the &lt;code&gt;RETURNING&lt;/code&gt; clause. For more information, see &lt;a href=&quot;https://www.postgresql.org/docs/10/dml-returning.html&quot;&gt;Returning Data From Modified Rows&lt;/a&gt; in the PostgreSQL documentation.&lt;/p&gt; &lt;/note&gt; 
+     * Values for fields generated during a DML request.  The generatedFields data isn't supported by Aurora PostgreSQL. To get the values of generated fields, use the RETURNING clause. For more information, see Returning Data From Modified Rows in the PostgreSQL documentation. 
      */
     generatedFields?: FieldList;
     /**

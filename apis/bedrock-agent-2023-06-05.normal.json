@@ -2089,6 +2089,13 @@
       "min": 33,
       "pattern": "[a-zA-Z0-9](-*[a-zA-Z0-9])*"
     },
+    "ColumnName": {
+      "type": "string",
+      "documentation": "<p>Name of the column</p>",
+      "max": 63,
+      "min": 0,
+      "pattern": "[a-zA-Z0-9_\\-]+"
+    },
     "CreateAgentActionGroupRequest": {
       "type": "structure",
       "required": [
@@ -3403,7 +3410,8 @@
       "enum": [
         "OPENSEARCH_SERVERLESS",
         "PINECONE",
-        "REDIS_ENTERPRISE_CLOUD"
+        "REDIS_ENTERPRISE_CLOUD",
+        "RDS"
       ]
     },
     "KnowledgeBaseSummaries": {
@@ -4022,6 +4030,77 @@
         "KNOWLEDGE_BASE_RESPONSE_GENERATION"
       ]
     },
+    "RdsArn": {
+      "type": "string",
+      "documentation": "<p>Arn of a RDS Resource.</p>",
+      "pattern": "arn:aws(|-cn|-us-gov):rds:[a-zA-Z0-9-]*:[0-9]{12}:cluster:[a-zA-Z0-9-]{1,63}"
+    },
+    "RdsConfiguration": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "credentialsSecretArn",
+        "databaseName",
+        "tableName",
+        "fieldMapping"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "RdsArn"
+        },
+        "credentialsSecretArn": {
+          "shape": "SecretArn"
+        },
+        "databaseName": {
+          "shape": "RdsDatabaseName"
+        },
+        "tableName": {
+          "shape": "RdsTableName"
+        },
+        "fieldMapping": {
+          "shape": "RdsFieldMapping"
+        }
+      },
+      "documentation": "<p>Contains the configurations to use RDS to store knowledge base data.</p>"
+    },
+    "RdsDatabaseName": {
+      "type": "string",
+      "documentation": "<p>Name of the database within RDS</p>",
+      "max": 63,
+      "min": 0,
+      "pattern": "[a-zA-Z0-9_\\-]+"
+    },
+    "RdsFieldMapping": {
+      "type": "structure",
+      "required": [
+        "primaryKeyField",
+        "vectorField",
+        "textField",
+        "metadataField"
+      ],
+      "members": {
+        "primaryKeyField": {
+          "shape": "ColumnName"
+        },
+        "vectorField": {
+          "shape": "ColumnName"
+        },
+        "textField": {
+          "shape": "ColumnName"
+        },
+        "metadataField": {
+          "shape": "ColumnName"
+        }
+      },
+      "documentation": "<p>A mapping of Bedrock Knowledge Base fields to RDS column names</p>"
+    },
+    "RdsTableName": {
+      "type": "string",
+      "documentation": "<p>Name of the table within RDS</p>",
+      "max": 63,
+      "min": 0,
+      "pattern": "[a-zA-Z0-9_\\.\\-]+"
+    },
     "RecommendedAction": {
       "type": "string",
       "documentation": "<p>The recommended action users can take to resolve an error in failureReasons.</p>",
@@ -4161,7 +4240,7 @@
     "SecretArn": {
       "type": "string",
       "documentation": "<p>Arn of a SecretsManager Secret.</p>",
-      "pattern": "arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9/_+=.@-]{1,63}"
+      "pattern": "arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}"
     },
     "ServerSideEncryptionConfiguration": {
       "type": "structure",
@@ -4250,6 +4329,9 @@
         },
         "redisEnterpriseCloudConfiguration": {
           "shape": "RedisEnterpriseCloudConfiguration"
+        },
+        "rdsConfiguration": {
+          "shape": "RdsConfiguration"
         }
       },
       "documentation": "<p>Configures the physical storage of ingested data in a knowledge base.</p>"

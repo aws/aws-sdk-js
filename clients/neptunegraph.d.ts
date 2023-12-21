@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config-base';
 interface Blob {}
@@ -187,6 +188,70 @@ declare class NeptuneGraph extends Service {
    * Updates the configuration of a specified Neptune Analytics graph
    */
   updateGraph(callback?: (err: AWSError, data: NeptuneGraph.Types.UpdateGraphOutput) => void): Request<NeptuneGraph.Types.UpdateGraphOutput, AWSError>;
+  /**
+   * Waits for the graphAvailable state by periodically calling the underlying NeptuneGraph.getGraphoperation every 60 seconds (at most 480 times). Wait until Graph is Available
+   */
+  waitFor(state: "graphAvailable", params: NeptuneGraph.Types.GetGraphInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: NeptuneGraph.Types.GetGraphOutput) => void): Request<NeptuneGraph.Types.GetGraphOutput, AWSError>;
+  /**
+   * Waits for the graphAvailable state by periodically calling the underlying NeptuneGraph.getGraphoperation every 60 seconds (at most 480 times). Wait until Graph is Available
+   */
+  waitFor(state: "graphAvailable", callback?: (err: AWSError, data: NeptuneGraph.Types.GetGraphOutput) => void): Request<NeptuneGraph.Types.GetGraphOutput, AWSError>;
+  /**
+   * Waits for the graphDeleted state by periodically calling the underlying NeptuneGraph.getGraphoperation every 60 seconds (at most 60 times). Wait until Graph is Deleted
+   */
+  waitFor(state: "graphDeleted", params: NeptuneGraph.Types.GetGraphInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: NeptuneGraph.Types.GetGraphOutput) => void): Request<NeptuneGraph.Types.GetGraphOutput, AWSError>;
+  /**
+   * Waits for the graphDeleted state by periodically calling the underlying NeptuneGraph.getGraphoperation every 60 seconds (at most 60 times). Wait until Graph is Deleted
+   */
+  waitFor(state: "graphDeleted", callback?: (err: AWSError, data: NeptuneGraph.Types.GetGraphOutput) => void): Request<NeptuneGraph.Types.GetGraphOutput, AWSError>;
+  /**
+   * Waits for the graphSnapshotAvailable state by periodically calling the underlying NeptuneGraph.getGraphSnapshotoperation every 60 seconds (at most 120 times). Wait until GraphSnapshot is Available
+   */
+  waitFor(state: "graphSnapshotAvailable", params: NeptuneGraph.Types.GetGraphSnapshotInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: NeptuneGraph.Types.GetGraphSnapshotOutput) => void): Request<NeptuneGraph.Types.GetGraphSnapshotOutput, AWSError>;
+  /**
+   * Waits for the graphSnapshotAvailable state by periodically calling the underlying NeptuneGraph.getGraphSnapshotoperation every 60 seconds (at most 120 times). Wait until GraphSnapshot is Available
+   */
+  waitFor(state: "graphSnapshotAvailable", callback?: (err: AWSError, data: NeptuneGraph.Types.GetGraphSnapshotOutput) => void): Request<NeptuneGraph.Types.GetGraphSnapshotOutput, AWSError>;
+  /**
+   * Waits for the graphSnapshotDeleted state by periodically calling the underlying NeptuneGraph.getGraphSnapshotoperation every 60 seconds (at most 60 times). Wait until GraphSnapshot is Deleted
+   */
+  waitFor(state: "graphSnapshotDeleted", params: NeptuneGraph.Types.GetGraphSnapshotInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: NeptuneGraph.Types.GetGraphSnapshotOutput) => void): Request<NeptuneGraph.Types.GetGraphSnapshotOutput, AWSError>;
+  /**
+   * Waits for the graphSnapshotDeleted state by periodically calling the underlying NeptuneGraph.getGraphSnapshotoperation every 60 seconds (at most 60 times). Wait until GraphSnapshot is Deleted
+   */
+  waitFor(state: "graphSnapshotDeleted", callback?: (err: AWSError, data: NeptuneGraph.Types.GetGraphSnapshotOutput) => void): Request<NeptuneGraph.Types.GetGraphSnapshotOutput, AWSError>;
+  /**
+   * Waits for the importTaskCancelled state by periodically calling the underlying NeptuneGraph.getImportTaskoperation every 60 seconds (at most 60 times). Wait until Import Task is Cancelled
+   */
+  waitFor(state: "importTaskCancelled", params: NeptuneGraph.Types.GetImportTaskInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: NeptuneGraph.Types.GetImportTaskOutput) => void): Request<NeptuneGraph.Types.GetImportTaskOutput, AWSError>;
+  /**
+   * Waits for the importTaskCancelled state by periodically calling the underlying NeptuneGraph.getImportTaskoperation every 60 seconds (at most 60 times). Wait until Import Task is Cancelled
+   */
+  waitFor(state: "importTaskCancelled", callback?: (err: AWSError, data: NeptuneGraph.Types.GetImportTaskOutput) => void): Request<NeptuneGraph.Types.GetImportTaskOutput, AWSError>;
+  /**
+   * Waits for the importTaskSuccessful state by periodically calling the underlying NeptuneGraph.getImportTaskoperation every 60 seconds (at most 480 times). Wait until Import Task is Successful
+   */
+  waitFor(state: "importTaskSuccessful", params: NeptuneGraph.Types.GetImportTaskInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: NeptuneGraph.Types.GetImportTaskOutput) => void): Request<NeptuneGraph.Types.GetImportTaskOutput, AWSError>;
+  /**
+   * Waits for the importTaskSuccessful state by periodically calling the underlying NeptuneGraph.getImportTaskoperation every 60 seconds (at most 480 times). Wait until Import Task is Successful
+   */
+  waitFor(state: "importTaskSuccessful", callback?: (err: AWSError, data: NeptuneGraph.Types.GetImportTaskOutput) => void): Request<NeptuneGraph.Types.GetImportTaskOutput, AWSError>;
+  /**
+   * Waits for the privateGraphEndpointAvailable state by periodically calling the underlying NeptuneGraph.getPrivateGraphEndpointoperation every 10 seconds (at most 180 times). Wait until PrivateGraphEndpoint is Available
+   */
+  waitFor(state: "privateGraphEndpointAvailable", params: NeptuneGraph.Types.GetPrivateGraphEndpointInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: NeptuneGraph.Types.GetPrivateGraphEndpointOutput) => void): Request<NeptuneGraph.Types.GetPrivateGraphEndpointOutput, AWSError>;
+  /**
+   * Waits for the privateGraphEndpointAvailable state by periodically calling the underlying NeptuneGraph.getPrivateGraphEndpointoperation every 10 seconds (at most 180 times). Wait until PrivateGraphEndpoint is Available
+   */
+  waitFor(state: "privateGraphEndpointAvailable", callback?: (err: AWSError, data: NeptuneGraph.Types.GetPrivateGraphEndpointOutput) => void): Request<NeptuneGraph.Types.GetPrivateGraphEndpointOutput, AWSError>;
+  /**
+   * Waits for the privateGraphEndpointDeleted state by periodically calling the underlying NeptuneGraph.getPrivateGraphEndpointoperation every 10 seconds (at most 180 times). Wait until PrivateGraphEndpoint is Deleted
+   */
+  waitFor(state: "privateGraphEndpointDeleted", params: NeptuneGraph.Types.GetPrivateGraphEndpointInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: NeptuneGraph.Types.GetPrivateGraphEndpointOutput) => void): Request<NeptuneGraph.Types.GetPrivateGraphEndpointOutput, AWSError>;
+  /**
+   * Waits for the privateGraphEndpointDeleted state by periodically calling the underlying NeptuneGraph.getPrivateGraphEndpointoperation every 10 seconds (at most 180 times). Wait until PrivateGraphEndpoint is Deleted
+   */
+  waitFor(state: "privateGraphEndpointDeleted", callback?: (err: AWSError, data: NeptuneGraph.Types.GetPrivateGraphEndpointOutput) => void): Request<NeptuneGraph.Types.GetPrivateGraphEndpointOutput, AWSError>;
 }
 declare namespace NeptuneGraph {
   export type Arn = string;

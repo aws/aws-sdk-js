@@ -36,6 +36,14 @@ declare class AppIntegrations extends Service {
    */
   createEventIntegration(callback?: (err: AWSError, data: AppIntegrations.Types.CreateEventIntegrationResponse) => void): Request<AppIntegrations.Types.CreateEventIntegrationResponse, AWSError>;
   /**
+   * Deletes the Application. Only Applications that don't have any Application Associations can be deleted.
+   */
+  deleteApplication(params: AppIntegrations.Types.DeleteApplicationRequest, callback?: (err: AWSError, data: AppIntegrations.Types.DeleteApplicationResponse) => void): Request<AppIntegrations.Types.DeleteApplicationResponse, AWSError>;
+  /**
+   * Deletes the Application. Only Applications that don't have any Application Associations can be deleted.
+   */
+  deleteApplication(callback?: (err: AWSError, data: AppIntegrations.Types.DeleteApplicationResponse) => void): Request<AppIntegrations.Types.DeleteApplicationResponse, AWSError>;
+  /**
    * Deletes the DataIntegration. Only DataIntegrations that don't have any DataIntegrationAssociations can be deleted. Deleting a DataIntegration also deletes the underlying Amazon AppFlow flow and service linked role.   You cannot create a DataIntegration association for a DataIntegration that has been previously associated. Use a different DataIntegration, or recreate the DataIntegration using the CreateDataIntegration API. 
    */
   deleteDataIntegration(params: AppIntegrations.Types.DeleteDataIntegrationRequest, callback?: (err: AWSError, data: AppIntegrations.Types.DeleteDataIntegrationResponse) => void): Request<AppIntegrations.Types.DeleteDataIntegrationResponse, AWSError>;
@@ -75,6 +83,14 @@ declare class AppIntegrations extends Service {
    * Returns information about the event integration.
    */
   getEventIntegration(callback?: (err: AWSError, data: AppIntegrations.Types.GetEventIntegrationResponse) => void): Request<AppIntegrations.Types.GetEventIntegrationResponse, AWSError>;
+  /**
+   * Returns a paginated list of application associations for an application.
+   */
+  listApplicationAssociations(params: AppIntegrations.Types.ListApplicationAssociationsRequest, callback?: (err: AWSError, data: AppIntegrations.Types.ListApplicationAssociationsResponse) => void): Request<AppIntegrations.Types.ListApplicationAssociationsResponse, AWSError>;
+  /**
+   * Returns a paginated list of application associations for an application.
+   */
+  listApplicationAssociations(callback?: (err: AWSError, data: AppIntegrations.Types.ListApplicationAssociationsResponse) => void): Request<AppIntegrations.Types.ListApplicationAssociationsResponse, AWSError>;
   /**
    * This API is in preview release and subject to change. Lists applications in the account.
    */
@@ -166,6 +182,21 @@ declare class AppIntegrations extends Service {
 }
 declare namespace AppIntegrations {
   export type ApplicationApprovedOrigins = ApplicationTrustedSource[];
+  export interface ApplicationAssociationSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the Application Association.
+     */
+    ApplicationAssociationArn?: Arn;
+    /**
+     * The Amazon Resource Name (ARN) of the Application.
+     */
+    ApplicationArn?: Arn;
+    /**
+     * The identifier for the client that is associated with the Application Association.
+     */
+    ClientId?: ClientId;
+  }
+  export type ApplicationAssociationsList = ApplicationAssociationSummary[];
   export type ApplicationName = string;
   export type ApplicationNamespace = string;
   export interface ApplicationSourceConfig {
@@ -239,6 +270,10 @@ declare namespace AppIntegrations {
      * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
+    /**
+     * The configuration of events or requests that the application has access to.
+     */
+    Permissions?: PermissionList;
   }
   export interface CreateApplicationResponse {
     /**
@@ -396,6 +431,14 @@ declare namespace AppIntegrations {
     SourceURI?: SourceURI;
   }
   export type DataIntegrationsList = DataIntegrationSummary[];
+  export interface DeleteApplicationRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the Application.
+     */
+    Arn: ArnOrUUID;
+  }
+  export interface DeleteApplicationResponse {
+  }
   export interface DeleteDataIntegrationRequest {
     /**
      * A unique identifier for the DataIntegration.
@@ -552,6 +595,10 @@ declare namespace AppIntegrations {
      * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
+    /**
+     * The configuration of events or requests that the application has access to.
+     */
+    Permissions?: PermissionList;
   }
   export interface GetDataIntegrationRequest {
     /**
@@ -635,6 +682,30 @@ declare namespace AppIntegrations {
   }
   export type IdempotencyToken = string;
   export type Identifier = string;
+  export interface ListApplicationAssociationsRequest {
+    /**
+     * A unique identifier for the Application.
+     */
+    ApplicationId: ArnOrUUID;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListApplicationAssociationsResponse {
+    /**
+     * List of Application Associations for the Application.
+     */
+    ApplicationAssociations?: ApplicationAssociationsList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListApplicationsRequest {
     /**
      * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
@@ -762,6 +833,8 @@ declare namespace AppIntegrations {
   export type NonBlankString = string;
   export type Object = string;
   export type ObjectConfiguration = {[key: string]: FieldsMap};
+  export type Permission = string;
+  export type PermissionList = Permission[];
   export interface Publication {
     /**
      * The name of the publication.
@@ -860,6 +933,10 @@ declare namespace AppIntegrations {
      * The events that the application publishes.
      */
     Publications?: PublicationList;
+    /**
+     * The configuration of events or requests that the application has access to.
+     */
+    Permissions?: PermissionList;
   }
   export interface UpdateApplicationResponse {
   }

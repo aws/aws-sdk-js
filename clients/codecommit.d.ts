@@ -628,6 +628,14 @@ declare class CodeCommit extends Service {
    */
   updateRepositoryDescription(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Updates the Key Management Service encryption key used to encrypt and decrypt a CodeCommit repository.
+   */
+  updateRepositoryEncryptionKey(params: CodeCommit.Types.UpdateRepositoryEncryptionKeyInput, callback?: (err: AWSError, data: CodeCommit.Types.UpdateRepositoryEncryptionKeyOutput) => void): Request<CodeCommit.Types.UpdateRepositoryEncryptionKeyOutput, AWSError>;
+  /**
+   * Updates the Key Management Service encryption key used to encrypt and decrypt a CodeCommit repository.
+   */
+  updateRepositoryEncryptionKey(callback?: (err: AWSError, data: CodeCommit.Types.UpdateRepositoryEncryptionKeyOutput) => void): Request<CodeCommit.Types.UpdateRepositoryEncryptionKeyOutput, AWSError>;
+  /**
    * Renames a repository. The repository name must be unique across the calling Amazon Web Services account. Repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. The suffix .git is prohibited. For more information about the limits on repository names, see Quotas in the CodeCommit User Guide.
    */
   updateRepositoryName(params: CodeCommit.Types.UpdateRepositoryNameInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -964,6 +972,26 @@ declare namespace CodeCommit {
      */
     errors?: BatchGetCommitsErrorsList;
   }
+  export interface BatchGetRepositoriesError {
+    /**
+     * The ID of a repository that either could not be found or was not in a valid state.
+     */
+    repositoryId?: RepositoryId;
+    /**
+     * The name of a repository that either could not be found or was not in a valid state.
+     */
+    repositoryName?: RepositoryName;
+    /**
+     * An error code that specifies the type of failure.
+     */
+    errorCode?: BatchGetRepositoriesErrorCodeEnum;
+    /**
+     * An error message that provides detail about why the repository either was not found or was not in a valid state.
+     */
+    errorMessage?: ErrorMessage;
+  }
+  export type BatchGetRepositoriesErrorCodeEnum = "EncryptionIntegrityChecksFailedException"|"EncryptionKeyAccessDeniedException"|"EncryptionKeyDisabledException"|"EncryptionKeyNotFoundException"|"EncryptionKeyUnavailableException"|"RepositoryDoesNotExistException"|string;
+  export type BatchGetRepositoriesErrorsList = BatchGetRepositoriesError[];
   export interface BatchGetRepositoriesInput {
     /**
      * The names of the repositories to get information about.  The length constraint limit is for each string in the array. The array itself can be empty. 
@@ -979,6 +1007,10 @@ declare namespace CodeCommit {
      * Returns a list of repository names for which information could not be found.
      */
     repositoriesNotFound?: RepositoryNotFoundList;
+    /**
+     * Returns information about any errors returned when attempting to retrieve information about the repositories.
+     */
+    errors?: BatchGetRepositoriesErrorsList;
   }
   export interface BlobMetadata {
     /**
@@ -1383,6 +1415,10 @@ declare namespace CodeCommit {
      * One or more tag key-value pairs to use when tagging this repository.
      */
     tags?: TagsMap;
+    /**
+     * The ID of the encryption key. You can view the ID of an encryption key in the KMS console, or use the KMS APIs to programmatically retrieve a key ID. For more information about acceptable values for kmsKeyID, see KeyId in the Decrypt API description in the Key Management Service API Reference. If no key is specified, the default aws/codecommit Amazon Web Services managed key is used.
+     */
+    kmsKeyId?: KmsKeyId;
   }
   export interface CreateRepositoryOutput {
     /**
@@ -2364,6 +2400,7 @@ declare namespace CodeCommit {
   export type IsMove = boolean;
   export type IsObjectTypeConflict = boolean;
   export type KeepEmptyFolders = boolean;
+  export type KmsKeyId = string;
   export type LastModifiedDate = Date;
   export type Limit = number;
   export type LineNumber = number;
@@ -3464,6 +3501,10 @@ declare namespace CodeCommit {
      * The Amazon Resource Name (ARN) of the repository.
      */
     Arn?: Arn;
+    /**
+     * The ID of the Key Management Service encryption key used to encrypt and decrypt the repository.
+     */
+    kmsKeyId?: KmsKeyId;
   }
   export type RepositoryMetadataList = RepositoryMetadata[];
   export type RepositoryName = string;
@@ -3812,6 +3853,30 @@ declare namespace CodeCommit {
      * The new comment or description for the specified repository. Repository descriptions are limited to 1,000 characters.
      */
     repositoryDescription?: RepositoryDescription;
+  }
+  export interface UpdateRepositoryEncryptionKeyInput {
+    /**
+     * The name of the repository for which you want to update the KMS encryption key used to encrypt and decrypt the repository.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The ID of the encryption key. You can view the ID of an encryption key in the KMS console, or use the KMS APIs to programmatically retrieve a key ID. For more information about acceptable values for keyID, see KeyId in the Decrypt API description in the Key Management Service API Reference.
+     */
+    kmsKeyId: KmsKeyId;
+  }
+  export interface UpdateRepositoryEncryptionKeyOutput {
+    /**
+     * The ID of the repository.
+     */
+    repositoryId?: RepositoryId;
+    /**
+     * The ID of the encryption key.
+     */
+    kmsKeyId?: KmsKeyId;
+    /**
+     * The ID of the encryption key formerly used to encrypt and decrypt the repository.
+     */
+    originalKmsKeyId?: KmsKeyId;
   }
   export interface UpdateRepositoryNameInput {
     /**

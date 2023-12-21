@@ -500,6 +500,7 @@ declare namespace BedrockAgent {
   }
   export type ChunkingStrategy = "FIXED_SIZE"|"NONE"|string;
   export type ClientToken = string;
+  export type ColumnName = string;
   export interface CreateAgentActionGroupRequest {
     /**
      * Id generated at the server side when an Agent is created
@@ -894,7 +895,7 @@ declare namespace BedrockAgent {
   export type KnowledgeBaseRoleArn = string;
   export type KnowledgeBaseState = "ENABLED"|"DISABLED"|string;
   export type KnowledgeBaseStatus = "CREATING"|"ACTIVE"|"DELETING"|"UPDATING"|"FAILED"|string;
-  export type KnowledgeBaseStorageType = "OPENSEARCH_SERVERLESS"|"PINECONE"|"REDIS_ENTERPRISE_CLOUD"|string;
+  export type KnowledgeBaseStorageType = "OPENSEARCH_SERVERLESS"|"PINECONE"|"REDIS_ENTERPRISE_CLOUD"|"RDS"|string;
   export type KnowledgeBaseSummaries = KnowledgeBaseSummary[];
   export interface KnowledgeBaseSummary {
     knowledgeBaseId: Id;
@@ -1063,6 +1064,22 @@ declare namespace BedrockAgent {
   }
   export type PromptState = "ENABLED"|"DISABLED"|string;
   export type PromptType = "PRE_PROCESSING"|"ORCHESTRATION"|"POST_PROCESSING"|"KNOWLEDGE_BASE_RESPONSE_GENERATION"|string;
+  export type RdsArn = string;
+  export interface RdsConfiguration {
+    resourceArn: RdsArn;
+    credentialsSecretArn: SecretArn;
+    databaseName: RdsDatabaseName;
+    tableName: RdsTableName;
+    fieldMapping: RdsFieldMapping;
+  }
+  export type RdsDatabaseName = string;
+  export interface RdsFieldMapping {
+    primaryKeyField: ColumnName;
+    vectorField: ColumnName;
+    textField: ColumnName;
+    metadataField: ColumnName;
+  }
+  export type RdsTableName = string;
   export type RecommendedAction = string;
   export type RecommendedActions = RecommendedAction[];
   export interface RedisEnterpriseCloudConfiguration {
@@ -1112,6 +1129,7 @@ declare namespace BedrockAgent {
     opensearchServerlessConfiguration?: OpenSearchServerlessConfiguration;
     pineconeConfiguration?: PineconeConfiguration;
     redisEnterpriseCloudConfiguration?: RedisEnterpriseCloudConfiguration;
+    rdsConfiguration?: RdsConfiguration;
   }
   export type String = string;
   export type TagKey = string;

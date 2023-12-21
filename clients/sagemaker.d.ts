@@ -6401,6 +6401,10 @@ declare namespace SageMaker {
      */
     RetryStrategy?: RetryStrategy;
     /**
+     * Configuration for remote debugging. To learn more about the remote debugging functionality of SageMaker, see Access a training container through Amazon Web Services Systems Manager (SSM) for remote debugging.
+     */
+    RemoteDebugConfig?: RemoteDebugConfig;
+    /**
      * Contains information about the infrastructure health check configuration for the training job.
      */
     InfraCheckConfig?: InfraCheckConfig;
@@ -10578,6 +10582,10 @@ declare namespace SageMaker {
      */
     RetryStrategy?: RetryStrategy;
     /**
+     * Configuration for remote debugging. To learn more about the remote debugging functionality of SageMaker, see Access a training container through Amazon Web Services Systems Manager (SSM) for remote debugging.
+     */
+    RemoteDebugConfig?: RemoteDebugConfig;
+    /**
      * Contains information about the infrastructure health check configuration for the training job.
      */
     InfraCheckConfig?: InfraCheckConfig;
@@ -11512,6 +11520,7 @@ declare namespace SageMaker {
   export type EnableCapture = boolean;
   export type EnableInfraCheck = boolean;
   export type EnableIotRoleAlias = boolean;
+  export type EnableRemoteDebug = boolean;
   export interface EnableSagemakerServicecatalogPortfolioInput {
   }
   export interface EnableSagemakerServicecatalogPortfolioOutput {
@@ -20782,6 +20791,18 @@ declare namespace SageMaker {
     Arn?: String256;
   }
   export type ReleaseNotes = string;
+  export interface RemoteDebugConfig {
+    /**
+     * If set to True, enables remote debugging.
+     */
+    EnableRemoteDebug?: EnableRemoteDebug;
+  }
+  export interface RemoteDebugConfigForUpdate {
+    /**
+     * If set to True, enables remote debugging.
+     */
+    EnableRemoteDebug?: EnableRemoteDebug;
+  }
   export interface RenderUiTemplateRequest {
     /**
      * A Template object containing the worker UI template to render.
@@ -21198,6 +21219,10 @@ declare namespace SageMaker {
      *  A cross account filter option. When the value is "CrossAccount" the search results will only include resources made discoverable to you from other accounts. When the value is "SameAccount" or null the search results will only include resources from your account. Default is null. For more information on searching for resources made discoverable to your account, see  Search discoverable resources in the SageMaker Developer Guide. The maximum number of ResourceCatalogs viewable is 1000. 
      */
     CrossAccountFilterOption?: CrossAccountFilterOption;
+    /**
+     *  Limits the results of your search request to the resources that you can access. 
+     */
+    VisibilityConditions?: VisibilityConditionsList;
   }
   export interface SearchResponse {
     /**
@@ -21226,7 +21251,7 @@ declare namespace SageMaker {
      */
     EndTime?: Timestamp;
     /**
-     * A detailed description of the progress within a secondary status.  SageMaker provides secondary statuses and status messages that apply to each of them:  Starting    Starting the training job.   Launching requested ML instances.   Insufficient capacity error from EC2 while launching instances, retrying!   Launched instance was unhealthy, replacing it!   Preparing the instances for training.    Training    Downloading the training image.   Training image download completed. Training in progress.      Status messages are subject to change. Therefore, we recommend not including them in code that programmatically initiates actions. For examples, don't use status messages in if statements.  To have an overview of your training job's progress, view TrainingJobStatus and SecondaryStatus in DescribeTrainingJob, and StatusMessage together. For example, at the start of a training job, you might see the following:    TrainingJobStatus - InProgress    SecondaryStatus - Training    StatusMessage - Downloading the training image  
+     * A detailed description of the progress within a secondary status.  SageMaker provides secondary statuses and status messages that apply to each of them:  Starting    Starting the training job.   Launching requested ML instances.   Insufficient capacity error from EC2 while launching instances, retrying!   Launched instance was unhealthy, replacing it!   Preparing the instances for training.    Training    Training image download completed. Training in progress.      Status messages are subject to change. Therefore, we recommend not including them in code that programmatically initiates actions. For examples, don't use status messages in if statements.  To have an overview of your training job's progress, view TrainingJobStatus and SecondaryStatus in DescribeTrainingJob, and StatusMessage together. For example, at the start of a training job, you might see the following:    TrainingJobStatus - InProgress    SecondaryStatus - Training    StatusMessage - Downloading the training image  
      */
     StatusMessage?: StatusMessage;
   }
@@ -23771,6 +23796,10 @@ declare namespace SageMaker {
      * The training job ResourceConfig to update warm pool retention length.
      */
     ResourceConfig?: ResourceConfigForUpdate;
+    /**
+     * Configuration for remote debugging while the training job is running. You can update the remote debugging configuration when the SecondaryStatus of the job is Downloading or Training.To learn more about the remote debugging functionality of SageMaker, see Access a training container through Amazon Web Services Systems Manager (SSM) for remote debugging.
+     */
+    RemoteDebugConfig?: RemoteDebugConfigForUpdate;
   }
   export interface UpdateTrainingJobResponse {
     /**
@@ -24066,6 +24095,19 @@ declare namespace SageMaker {
     LineageType?: LineageType;
   }
   export type Vertices = Vertex[];
+  export interface VisibilityConditions {
+    /**
+     * The key for that specifies the tag that you're using to filter the search results. The key must start with Tags..
+     */
+    Key?: VisibilityConditionsKey;
+    /**
+     * The value for the tag that you're using to filter the search results.
+     */
+    Value?: VisibilityConditionsValue;
+  }
+  export type VisibilityConditionsKey = string;
+  export type VisibilityConditionsList = VisibilityConditions[];
+  export type VisibilityConditionsValue = string;
   export type VolumeSizeInGB = number;
   export interface VpcConfig {
     /**

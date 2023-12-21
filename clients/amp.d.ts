@@ -429,6 +429,10 @@ declare namespace Amp {
      * Optional, user-provided tags for this workspace.
      */
     tags?: TagMap;
+    /**
+     * Optional, customer managed KMS key used to encrypt data for this workspace
+     */
+    kmsKeyArn?: KmsKeyArn;
   }
   export interface CreateWorkspaceResponse {
     /**
@@ -447,6 +451,10 @@ declare namespace Amp {
      * The tags of this workspace.
      */
     tags?: TagMap;
+    /**
+     * Customer managed KMS key ARN for this workspace
+     */
+    kmsKeyArn?: KmsKeyArn;
   }
   export interface DeleteAlertManagerDefinitionRequest {
     /**
@@ -609,6 +617,7 @@ declare namespace Amp {
   }
   export type IamRoleArn = string;
   export type IdempotencyToken = string;
+  export type KmsKeyArn = string;
   export interface ListRuleGroupsNamespacesRequest {
     /**
      * The ID of the workspace.
@@ -1077,6 +1086,10 @@ declare namespace Amp {
      * The tags of this workspace.
      */
     tags?: TagMap;
+    /**
+     * The customer managed KMS key of this workspace.
+     */
+    kmsKeyArn?: KmsKeyArn;
   }
   export type WorkspaceId = string;
   export interface WorkspaceStatus {
@@ -1111,6 +1124,10 @@ declare namespace Amp {
      * The tags of this workspace.
      */
     tags?: TagMap;
+    /**
+     * Customer managed KMS key ARN for this workspace
+     */
+    kmsKeyArn?: KmsKeyArn;
   }
   export type WorkspaceSummaryList = WorkspaceSummary[];
   /**

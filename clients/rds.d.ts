@@ -790,6 +790,14 @@ declare class RDS extends Service {
    */
   describeValidDBInstanceModifications(callback?: (err: AWSError, data: RDS.Types.DescribeValidDBInstanceModificationsResult) => void): Request<RDS.Types.DescribeValidDBInstanceModificationsResult, AWSError>;
   /**
+   * Disables the HTTP endpoint for the specified DB cluster. Disabling this endpoint disables RDS Data API. For more information, see Using RDS Data API in the Amazon Aurora User Guide.  This operation applies only to Aurora PostgreSQL Serverless v2 and provisioned DB clusters. To disable the HTTP endpoint for Aurora Serverless v1 DB clusters, use the EnableHttpEndpoint parameter of the ModifyDBCluster operation. 
+   */
+  disableHttpEndpoint(params: RDS.Types.DisableHttpEndpointRequest, callback?: (err: AWSError, data: RDS.Types.DisableHttpEndpointResponse) => void): Request<RDS.Types.DisableHttpEndpointResponse, AWSError>;
+  /**
+   * Disables the HTTP endpoint for the specified DB cluster. Disabling this endpoint disables RDS Data API. For more information, see Using RDS Data API in the Amazon Aurora User Guide.  This operation applies only to Aurora PostgreSQL Serverless v2 and provisioned DB clusters. To disable the HTTP endpoint for Aurora Serverless v1 DB clusters, use the EnableHttpEndpoint parameter of the ModifyDBCluster operation. 
+   */
+  disableHttpEndpoint(callback?: (err: AWSError, data: RDS.Types.DisableHttpEndpointResponse) => void): Request<RDS.Types.DisableHttpEndpointResponse, AWSError>;
+  /**
    * Downloads all or a portion of the specified log file, up to 1 MB in size. This command doesn't apply to RDS Custom.
    */
   downloadDBLogFilePortion(params: RDS.Types.DownloadDBLogFilePortionMessage, callback?: (err: AWSError, data: RDS.Types.DownloadDBLogFilePortionDetails) => void): Request<RDS.Types.DownloadDBLogFilePortionDetails, AWSError>;
@@ -797,6 +805,14 @@ declare class RDS extends Service {
    * Downloads all or a portion of the specified log file, up to 1 MB in size. This command doesn't apply to RDS Custom.
    */
   downloadDBLogFilePortion(callback?: (err: AWSError, data: RDS.Types.DownloadDBLogFilePortionDetails) => void): Request<RDS.Types.DownloadDBLogFilePortionDetails, AWSError>;
+  /**
+   * Enables the HTTP endpoint for the DB cluster. By default, the HTTP endpoint isn't enabled. When enabled, this endpoint provides a connectionless web service API (RDS Data API) for running SQL queries on the Aurora DB cluster. You can also query your database from inside the RDS console with the RDS query editor. For more information, see Using RDS Data API in the Amazon Aurora User Guide.  This operation applies only to Aurora PostgreSQL Serverless v2 and provisioned DB clusters. To enable the HTTP endpoint for Aurora Serverless v1 DB clusters, use the EnableHttpEndpoint parameter of the ModifyDBCluster operation. 
+   */
+  enableHttpEndpoint(params: RDS.Types.EnableHttpEndpointRequest, callback?: (err: AWSError, data: RDS.Types.EnableHttpEndpointResponse) => void): Request<RDS.Types.EnableHttpEndpointResponse, AWSError>;
+  /**
+   * Enables the HTTP endpoint for the DB cluster. By default, the HTTP endpoint isn't enabled. When enabled, this endpoint provides a connectionless web service API (RDS Data API) for running SQL queries on the Aurora DB cluster. You can also query your database from inside the RDS console with the RDS query editor. For more information, see Using RDS Data API in the Amazon Aurora User Guide.  This operation applies only to Aurora PostgreSQL Serverless v2 and provisioned DB clusters. To enable the HTTP endpoint for Aurora Serverless v1 DB clusters, use the EnableHttpEndpoint parameter of the ModifyDBCluster operation. 
+   */
+  enableHttpEndpoint(callback?: (err: AWSError, data: RDS.Types.EnableHttpEndpointResponse) => void): Request<RDS.Types.EnableHttpEndpointResponse, AWSError>;
   /**
    * Forces a failover for a DB cluster. For an Aurora DB cluster, failover for a DB cluster promotes one of the Aurora Replicas (read-only instances) in the DB cluster to be the primary DB instance (the cluster writer). For a Multi-AZ DB cluster, failover for a DB cluster promotes one of the readable standby DB instances (read-only instances) in the DB cluster to be the primary DB instance (the cluster writer). An Amazon Aurora DB cluster automatically fails over to an Aurora Replica, if one exists, when the primary DB instance fails. A Multi-AZ DB cluster automatically fails over to a readable standby DB instance when the primary DB instance fails. To simulate a failure of a primary instance for testing, you can force a failover. Because each instance in a DB cluster has its own endpoint address, make sure to clean up and re-establish any existing connections that use those endpoint addresses when the failover is complete. For more information on Amazon Aurora DB clusters, see  What is Amazon Aurora? in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters, see  Multi-AZ DB cluster deployments in the Amazon RDS User Guide.
    */
@@ -2091,7 +2107,7 @@ declare namespace RDS {
      */
     GlobalClusterIdentifier?: String;
     /**
-     * Specifies whether to enable the HTTP endpoint for an Aurora Serverless v1 DB cluster. By default, the HTTP endpoint is disabled. When enabled, the HTTP endpoint provides a connectionless web service API for running SQL queries on the Aurora Serverless v1 DB cluster. You can also query your database from inside the RDS console with the query editor. For more information, see Using the Data API for Aurora Serverless v1 in the Amazon Aurora User Guide. Valid for Cluster Type: Aurora DB clusters only
+     * Specifies whether to enable the HTTP endpoint for the DB cluster. By default, the HTTP endpoint isn't enabled. When enabled, the HTTP endpoint provides a connectionless web service API (RDS Data API) for running SQL queries on the DB cluster. You can also query your database from inside the RDS console with the RDS query editor. RDS Data API is supported with the following DB clusters:   Aurora PostgreSQL Serverless v2 and provisioned   Aurora PostgreSQL and Aurora MySQL Serverless v1   For more information, see Using RDS Data API in the Amazon Aurora User Guide. Valid for Cluster Type: Aurora DB clusters only
      */
     EnableHttpEndpoint?: BooleanOptional;
     /**
@@ -3148,7 +3164,7 @@ declare namespace RDS {
      */
     DeletionProtection?: BooleanOptional;
     /**
-     * Indicates whether the HTTP endpoint for an Aurora Serverless v1 DB cluster is enabled. When enabled, the HTTP endpoint provides a connectionless web service API for running SQL queries on the Aurora Serverless v1 DB cluster. You can also query your database from inside the RDS console with the query editor. For more information, see Using the Data API for Aurora Serverless v1 in the Amazon Aurora User Guide.
+     * Indicates whether the HTTP endpoint is enabled for an Aurora DB cluster. When enabled, the HTTP endpoint provides a connectionless web service API (RDS Data API) for running SQL queries on the DB cluster. You can also query your database from inside the RDS console with the RDS query editor. For more information, see Using RDS Data API in the Amazon Aurora User Guide.
      */
     HttpEndpointEnabled?: BooleanOptional;
     /**
@@ -6380,6 +6396,22 @@ declare namespace RDS {
     ValidDBInstanceModificationsMessage?: ValidDBInstanceModificationsMessage;
   }
   export type Description = string;
+  export interface DisableHttpEndpointRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the DB cluster.
+     */
+    ResourceArn: String;
+  }
+  export interface DisableHttpEndpointResponse {
+    /**
+     * The ARN of the DB cluster.
+     */
+    ResourceArn?: String;
+    /**
+     * Indicates whether the HTTP endpoint is enabled or disabled for the DB cluster.
+     */
+    HttpEndpointEnabled?: Boolean;
+  }
   export interface DocLink {
     /**
      * The text with the link to documentation for the recommendation.
@@ -6486,6 +6518,22 @@ declare namespace RDS {
     EC2SecurityGroupOwnerId?: String;
   }
   export type EC2SecurityGroupList = EC2SecurityGroup[];
+  export interface EnableHttpEndpointRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the DB cluster.
+     */
+    ResourceArn: String;
+  }
+  export interface EnableHttpEndpointResponse {
+    /**
+     * The ARN of the DB cluster.
+     */
+    ResourceArn?: String;
+    /**
+     * Indicates whether the HTTP endpoint is enabled or disabled for the DB cluster.
+     */
+    HttpEndpointEnabled?: Boolean;
+  }
   export type EncryptionContextMap = {[key: string]: String};
   export interface Endpoint {
     /**
@@ -7194,7 +7242,7 @@ declare namespace RDS {
      */
     DeletionProtection?: BooleanOptional;
     /**
-     * Specifies whether to enable the HTTP endpoint for an Aurora Serverless v1 DB cluster. By default, the HTTP endpoint is disabled. When enabled, the HTTP endpoint provides a connectionless web service API for running SQL queries on the Aurora Serverless v1 DB cluster. You can also query your database from inside the RDS console with the query editor. For more information, see Using the Data API for Aurora Serverless v1 in the Amazon Aurora User Guide. Valid for Cluster Type: Aurora DB clusters only
+     * Specifies whether to enable the HTTP endpoint for an Aurora Serverless v1 DB cluster. By default, the HTTP endpoint isn't enabled. When enabled, the HTTP endpoint provides a connectionless web service API (RDS Data API) for running SQL queries on the Aurora Serverless v1 DB cluster. You can also query your database from inside the RDS console with the RDS query editor. For more information, see Using RDS Data API in the Amazon Aurora User Guide.  This parameter applies only to Aurora Serverless v1 DB clusters. To enable or disable the HTTP endpoint for an Aurora PostgreSQL Serverless v2 or provisioned DB cluster, use the EnableHttpEndpoint and DisableHttpEndpoint operations.  Valid for Cluster Type: Aurora DB clusters only
      */
     EnableHttpEndpoint?: BooleanOptional;
     /**

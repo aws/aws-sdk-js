@@ -2903,10 +2903,6 @@ You specify only the font family. All other style information (color, bold, posi
      */
     CaptionDescriptions?: __listOfCaptionDescription;
     /**
-     * Color correction settings
-     */
-    ColorCorrectionSettings?: ColorCorrectionSettings;
-    /**
      * Feature Activations
      */
     FeatureActivations?: FeatureActivations;
@@ -2932,6 +2928,10 @@ You specify only the font family. All other style information (color, bold, posi
      * Thumbnail configuration settings.
      */
     ThumbnailConfiguration?: ThumbnailConfiguration;
+    /**
+     * Color Correction Settings
+     */
+    ColorCorrectionSettings?: ColorCorrectionSettings;
   }
   export interface EpochLockingSettings {
     /**
@@ -4120,6 +4120,10 @@ to.
      * To attach this device to a MediaConnect flow, specify these parameters. To detach an existing flow, enter {} for the value of mediaconnectSettings. Only UHD devices can specify this parameter.
      */
     MediaconnectSettings?: InputDeviceMediaConnectConfigurableSettings;
+    /**
+     * An array of eight audio configurations, one for each audio pair in the source. Set up each audio configuration either to exclude the pair, or to format it and include it in the output from the device. This parameter applies only to UHD devices, and only when the device is configured as the source for a MediaConnect flow. For an HD device, you configure the audio by setting up audio selectors in the channel configuration.
+     */
+    AudioChannelPairs?: __listOfInputDeviceConfigurableAudioChannelPairConfig;
   }
   export type InputDeviceConfiguredInput = "AUTO"|"HDMI"|"SDI"|string;
   export type InputDeviceConnectionState = "DISCONNECTED"|"CONNECTED"|string;
@@ -4348,6 +4352,10 @@ to.
      * Information about the MediaConnect flow attached to the device. Returned only if the outputType is MEDIACONNECT_FLOW.
      */
     MediaconnectSettings?: InputDeviceMediaConnectSettings;
+    /**
+     * An array of eight audio configurations, one for each audio pair in the source. Each audio configuration specifies either to exclude the pair, or to format it and include it in the output from the UHD device. Applies only when the device is configured as the source for a MediaConnect flow.
+     */
+    AudioChannelPairs?: __listOfInputDeviceUhdAudioChannelPairConfig;
   }
   export type InputFilter = "AUTO"|"DISABLED"|"FORCED"|string;
   export interface InputLocation {
@@ -7614,6 +7622,30 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
   export type AcceptHeader = "image/jpeg"|string;
   export type ContentType = "image/jpeg"|string;
   export type __timestamp = Date;
+  export interface InputDeviceConfigurableAudioChannelPairConfig {
+    /**
+     * The ID for one audio pair configuration, a value from 1 to 8.
+     */
+    Id?: __integer;
+    /**
+     * The profile to set for one audio pair configuration. Choose an enumeration value. Each value describes one audio configuration using the format (rate control algorithm)-(codec)_(quality)-(bitrate in bytes). For example, CBR-AAC_HQ-192000. Or choose DISABLED, in which case the device won't produce audio for this pair.
+     */
+    Profile?: InputDeviceConfigurableAudioChannelPairProfile;
+  }
+  export type InputDeviceConfigurableAudioChannelPairProfile = "DISABLED"|"VBR-AAC_HHE-16000"|"VBR-AAC_HE-64000"|"VBR-AAC_LC-128000"|"CBR-AAC_HQ-192000"|"CBR-AAC_HQ-256000"|"CBR-AAC_HQ-384000"|"CBR-AAC_HQ-512000"|string;
+  export interface InputDeviceUhdAudioChannelPairConfig {
+    /**
+     * The ID for one audio pair configuration, a value from 1 to 8.
+     */
+    Id?: __integer;
+    /**
+     * The profile for one audio pair configuration. This property describes one audio configuration in the format (rate control algorithm)-(codec)_(quality)-(bitrate in bytes). For example, CBR-AAC_HQ-192000. Or DISABLED, in which case the device won't produce audio for this pair.
+     */
+    Profile?: InputDeviceUhdAudioChannelPairProfile;
+  }
+  export type InputDeviceUhdAudioChannelPairProfile = "DISABLED"|"VBR-AAC_HHE-16000"|"VBR-AAC_HE-64000"|"VBR-AAC_LC-128000"|"CBR-AAC_HQ-192000"|"CBR-AAC_HQ-256000"|"CBR-AAC_HQ-384000"|"CBR-AAC_HQ-512000"|string;
+  export type __listOfInputDeviceConfigurableAudioChannelPairConfig = InputDeviceConfigurableAudioChannelPairConfig[];
+  export type __listOfInputDeviceUhdAudioChannelPairConfig = InputDeviceUhdAudioChannelPairConfig[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

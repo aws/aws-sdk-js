@@ -10,6 +10,7 @@ Object.defineProperty(apiLoader.services['neptunegraph'], '2023-11-29', {
   get: function get() {
     var model = require('../apis/neptune-graph-2023-11-29.min.json');
     model.paginators = require('../apis/neptune-graph-2023-11-29.paginators.json').pagination;
+    model.waiters = require('../apis/neptune-graph-2023-11-29.waiters2.json').waiters;
     return model;
   },
   enumerable: true,
