@@ -375,5 +375,6 @@ module.exports = {
   CleanRoomsML: require('./cleanroomsml'),
   MarketplaceAgreement: require('./marketplaceagreement'),
   MarketplaceDeployment: require('./marketplacedeployment'),
-  NeptuneGraph: require('./neptunegraph')
+  NeptuneGraph: require('./neptunegraph'),
+  NetworkMonitor: require('./networkmonitor')
 };

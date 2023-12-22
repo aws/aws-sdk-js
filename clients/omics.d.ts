@@ -406,11 +406,11 @@ declare class Omics extends Service {
    */
   listAnnotationStores(callback?: (err: AWSError, data: Omics.Types.ListAnnotationStoresResponse) => void): Request<Omics.Types.ListAnnotationStoresResponse, AWSError>;
   /**
-   *  Lists all multipart read set uploads and their statuses. 
+   *  Lists multipart read set uploads and for in progress uploads. Once the upload is completed, a read set is created and the upload will no longer be returned in the respone. 
    */
   listMultipartReadSetUploads(params: Omics.Types.ListMultipartReadSetUploadsRequest, callback?: (err: AWSError, data: Omics.Types.ListMultipartReadSetUploadsResponse) => void): Request<Omics.Types.ListMultipartReadSetUploadsResponse, AWSError>;
   /**
-   *  Lists all multipart read set uploads and their statuses. 
+   *  Lists multipart read set uploads and for in progress uploads. Once the upload is completed, a read set is created and the upload will no longer be returned in the respone. 
    */
   listMultipartReadSetUploads(callback?: (err: AWSError, data: Omics.Types.ListMultipartReadSetUploadsResponse) => void): Request<Omics.Types.ListMultipartReadSetUploadsResponse, AWSError>;
   /**
@@ -1591,7 +1591,7 @@ declare namespace Omics {
      */
     parameterTemplate?: WorkflowParameterTemplate;
     /**
-     * A storage capacity for the workflow in gigabytes.
+     * A storage capacity for the workflow in gibibytes.
      */
     storageCapacity?: CreateWorkflowRequestStorageCapacityInteger;
     /**

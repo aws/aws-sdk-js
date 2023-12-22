@@ -133,6 +133,14 @@ declare class MediaConnect extends Service {
    */
   describeFlow(callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowResponse) => void): Request<MediaConnect.Types.DescribeFlowResponse, AWSError>;
   /**
+   * Displays details of the flow's source stream. The response contains information about the contents of the stream and its programs.
+   */
+  describeFlowSourceMetadata(params: MediaConnect.Types.DescribeFlowSourceMetadataRequest, callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowSourceMetadataResponse) => void): Request<MediaConnect.Types.DescribeFlowSourceMetadataResponse, AWSError>;
+  /**
+   * Displays details of the flow's source stream. The response contains information about the contents of the stream and its programs.
+   */
+  describeFlowSourceMetadata(callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowSourceMetadataResponse) => void): Request<MediaConnect.Types.DescribeFlowSourceMetadataResponse, AWSError>;
+  /**
    * Displays the details of a gateway. The response includes the gateway ARN, name, and CIDR blocks, as well as details about the networks.
    */
   describeGateway(params: MediaConnect.Types.DescribeGatewayRequest, callback?: (err: AWSError, data: MediaConnect.Types.DescribeGatewayResponse) => void): Request<MediaConnect.Types.DescribeGatewayResponse, AWSError>;
@@ -1027,6 +1035,27 @@ declare namespace MediaConnect {
     Flow?: Flow;
     Messages?: Messages;
   }
+  export interface DescribeFlowSourceMetadataRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the flow.
+     */
+    FlowArn: __string;
+  }
+  export interface DescribeFlowSourceMetadataResponse {
+    /**
+     * The ARN of the flow that DescribeFlowSourceMetadata was performed on.
+     */
+    FlowArn?: __string;
+    /**
+     * Provides a status code and message regarding issues found with the flow source metadata.
+     */
+    Messages?: __listOfMessageDetail;
+    /**
+     * The timestamp of the most recent change in metadata for this flow’s source.
+     */
+    Timestamp?: __timestampIso8601;
+    TransportMediaInfo?: TransportMediaInfo;
+  }
   export interface DescribeGatewayInstanceRequest {
     /**
      * The Amazon Resource Name (ARN) of the gateway instance that you want to describe.
@@ -1319,6 +1348,16 @@ declare namespace MediaConnect {
      * The transfer characteristic system (TCS) that is used in the video.
      */
     Tcs?: Tcs;
+  }
+  export interface FrameResolution {
+    /**
+     * The number of pixels in the height of the video frame.
+     */
+    FrameHeight: __integer;
+    /**
+     * The number of pixels in the width of the video frame.
+     */
+    FrameWidth: __integer;
   }
   export interface Gateway {
     /**
@@ -2473,6 +2512,65 @@ declare namespace MediaConnect {
      */
     StreamId?: __string;
   }
+  export interface TransportMediaInfo {
+    /**
+     * The list of transport stream programs in the current flow's source.
+     */
+    Programs: __listOfTransportStreamProgram;
+  }
+  export interface TransportStream {
+    /**
+     * The number of channels in the audio stream.
+     */
+    Channels?: __integer;
+    /**
+     * The codec used by the stream.
+     */
+    Codec?: __string;
+    /**
+     * The frame rate used by the video stream.
+     */
+    FrameRate?: __string;
+    FrameResolution?: FrameResolution;
+    /**
+     * The Packet ID (PID) as it is reported in the Program Map Table.
+     */
+    Pid: __integer;
+    /**
+     * The sample rate used by the audio stream.
+     */
+    SampleRate?: __integer;
+    /**
+     * The sample bit size used by the audio stream.
+     */
+    SampleSize?: __integer;
+    /**
+     * The Stream Type as it is reported in the Program Map Table.
+     */
+    StreamType: __string;
+  }
+  export interface TransportStreamProgram {
+    /**
+     * The Program Clock Reference (PCR) Packet ID (PID) as it is reported in the Program Association Table.
+     */
+    PcrPid: __integer;
+    /**
+     * The program name as it is reported in the Program Association Table.
+     */
+    ProgramName?: __string;
+    /**
+     * The program number as it is reported in the Program Association Table.
+     */
+    ProgramNumber: __integer;
+    /**
+     * The program Packet ID (PID) as it is reported in the Program Association Table.
+     */
+    ProgramPid: __integer;
+    /**
+     * The list of elementary transport streams in the program. The list includes video, audio, and data streams.
+     */
+    Streams: __listOfTransportStream;
+  }
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) that identifies the AWS Elemental MediaConnect resource from which to delete tags.
@@ -3060,12 +3158,15 @@ declare namespace MediaConnect {
   export type __listOfReservation = Reservation[];
   export type __listOfSetSourceRequest = SetSourceRequest[];
   export type __listOfSource = Source[];
+  export type __listOfTransportStream = TransportStream[];
+  export type __listOfTransportStreamProgram = TransportStreamProgram[];
   export type __listOfVpcInterface = VpcInterface[];
   export type __listOfVpcInterfaceRequest = VpcInterfaceRequest[];
   export type __listOf__integer = __integer[];
   export type __listOf__string = __string[];
   export type __mapOf__string = {[key: string]: __string};
   export type __string = string;
+  export type __timestampIso8601 = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

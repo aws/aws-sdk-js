@@ -1408,5 +1408,8 @@
   "neptunegraph": {
     "prefix": "neptune-graph",
     "name": "NeptuneGraph"
+  },
+  "networkmonitor": {
+    "name": "NetworkMonitor"
   }
 }

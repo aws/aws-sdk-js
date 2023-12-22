@@ -204,11 +204,11 @@ declare class Glue extends Service {
    */
   createClassifier(callback?: (err: AWSError, data: Glue.Types.CreateClassifierResponse) => void): Request<Glue.Types.CreateClassifierResponse, AWSError>;
   /**
-   * Creates a connection definition in the Data Catalog.
+   * Creates a connection definition in the Data Catalog. Connections used for creating federated resources require the IAM glue:PassConnection permission.
    */
   createConnection(params: Glue.Types.CreateConnectionRequest, callback?: (err: AWSError, data: Glue.Types.CreateConnectionResponse) => void): Request<Glue.Types.CreateConnectionResponse, AWSError>;
   /**
-   * Creates a connection definition in the Data Catalog.
+   * Creates a connection definition in the Data Catalog. Connections used for creating federated resources require the IAM glue:PassConnection permission.
    */
   createConnection(callback?: (err: AWSError, data: Glue.Types.CreateConnectionResponse) => void): Request<Glue.Types.CreateConnectionResponse, AWSError>;
   /**
@@ -1745,6 +1745,7 @@ declare namespace Glue {
     CrawlerName?: NameString;
   }
   export type ActionList = Action[];
+  export type AdditionalContextMap = {[key: string]: ContextValue};
   export type AdditionalOptionKeys = "performanceTuning.caching"|"observations.scope"|string;
   export type AdditionalOptions = {[key: string]: EnclosedInStringProperty};
   export type AdditionalPlanOptionsMap = {[key: string]: GenericString};
@@ -3604,6 +3605,8 @@ declare namespace Glue {
     Inputs?: OneInput;
   }
   export type ConnectorOptions = {[key: string]: GenericString};
+  export type ContextKey = string;
+  export type ContextValue = string;
   export type ContextWords = NameString[];
   export interface Crawl {
     /**
@@ -8161,6 +8164,10 @@ declare namespace Glue {
   }
   export interface GetUnfilteredPartitionMetadataRequest {
     /**
+     * Specified only if the base tables belong to a different Amazon Web Services Region.
+     */
+    Region?: ValueString;
+    /**
      * The catalog ID where the partition resides.
      */
     CatalogId: CatalogIdString;
@@ -8184,6 +8191,10 @@ declare namespace Glue {
      * (Required) A list of supported permission types. 
      */
     SupportedPermissionTypes: PermissionTypeList;
+    /**
+     * A structure used as a protocol between query engines and Lake Formation or Glue. Contains both a Lake Formation generated authorization identifier and information from the request's authorization context.
+     */
+    QuerySessionContext?: QuerySessionContext;
   }
   export interface GetUnfilteredPartitionMetadataResponse {
     /**
@@ -8200,6 +8211,10 @@ declare namespace Glue {
     IsRegisteredWithLakeFormation?: Boolean;
   }
   export interface GetUnfilteredPartitionsMetadataRequest {
+    /**
+     * Specified only if the base tables belong to a different Amazon Web Services Region.
+     */
+    Region?: ValueString;
     /**
      * The ID of the Data Catalog where the partitions in question reside. If none is provided, the AWS account ID is used by default. 
      */
@@ -8236,6 +8251,10 @@ declare namespace Glue {
      * The maximum number of partitions to return in a single response.
      */
     MaxResults?: PageSize;
+    /**
+     * A structure used as a protocol between query engines and Lake Formation or Glue. Contains both a Lake Formation generated authorization identifier and information from the request's authorization context.
+     */
+    QuerySessionContext?: QuerySessionContext;
   }
   export interface GetUnfilteredPartitionsMetadataResponse {
     /**
@@ -8248,6 +8267,10 @@ declare namespace Glue {
     NextToken?: Token;
   }
   export interface GetUnfilteredTableMetadataRequest {
+    /**
+     * Specified only if the base tables belong to a different Amazon Web Services Region.
+     */
+    Region?: ValueString;
     /**
      * The catalog ID where the table resides.
      */
@@ -8268,6 +8291,18 @@ declare namespace Glue {
      * (Required) A list of supported permission types. 
      */
     SupportedPermissionTypes: PermissionTypeList;
+    /**
+     * A structure specifying the dialect and dialect version used by the query engine.
+     */
+    SupportedDialect?: SupportedDialect;
+    /**
+     * The Lake Formation data permissions of the caller on the table. Used to authorize the call when no view context is found.
+     */
+    Permissions?: PermissionList;
+    /**
+     * A structure used as a protocol between query engines and Lake Formation or Glue. Contains both a Lake Formation generated authorization identifier and information from the request's authorization context.
+     */
+    QuerySessionContext?: QuerySessionContext;
   }
   export interface GetUnfilteredTableMetadataResponse {
     /**
@@ -8286,6 +8321,18 @@ declare namespace Glue {
      * A list of column row filters.
      */
     CellFilters?: ColumnRowFilterList;
+    /**
+     * A cryptographically generated query identifier generated by Glue or Lake Formation.
+     */
+    QueryAuthorizationId?: HashString;
+    /**
+     * The resource ARN of the parent resource extracted from the request.
+     */
+    ResourceArn?: ArnString;
+    /**
+     * The Lake Formation data permissions of the caller on the table. Used to authorize the call when no view context is found.
+     */
+    Permissions?: PermissionList;
   }
   export interface GetUserDefinedFunctionRequest {
     /**
@@ -10344,6 +10391,7 @@ declare namespace Glue {
   export type NullableBoolean = boolean;
   export type NullableDouble = number;
   export type NullableInteger = number;
+  export type NullableString = string;
   export type OneInput = NodeId[];
   export interface OpenTableFormatInput {
     /**
@@ -10836,6 +10884,28 @@ declare namespace Glue {
      * A continuation token for paginating the returned list of tokens, returned if the current segment of the list is not the last.
      */
     NextToken?: SchemaRegistryTokenString;
+  }
+  export interface QuerySessionContext {
+    /**
+     * A unique identifier generated by the query engine for the query.
+     */
+    QueryId?: HashString;
+    /**
+     * A timestamp provided by the query engine for when the query started.
+     */
+    QueryStartTime?: Timestamp;
+    /**
+     * An identifier string for the consumer cluster.
+     */
+    ClusterId?: NullableString;
+    /**
+     * A cryptographically generated query identifier generated by Glue or Lake Formation.
+     */
+    QueryAuthorizationId?: HashString;
+    /**
+     * An opaque string-string map passed by the query engine.
+     */
+    AdditionalContext?: AdditionalContextMap;
   }
   export type QuoteChar = "quote"|"quillemet"|"single_quote"|"disabled"|string;
   export interface Recipe {
@@ -12903,6 +12973,16 @@ declare namespace Glue {
     NumberOfDistinctValues: NonNegativeLong;
   }
   export type StringList = GenericString[];
+  export interface SupportedDialect {
+    /**
+     * The dialect of the query engine.
+     */
+    Dialect?: ViewDialect;
+    /**
+     * The version of the dialect of the query engine. For example, 3.0.0.
+     */
+    DialectVersion?: ViewDialectVersionString;
+  }
   export interface Table {
     /**
      * The table name. For Hive compatibility, this must be entirely lowercase.
@@ -14269,6 +14349,8 @@ declare namespace Glue {
   export type VersionLongNumber = number;
   export type VersionString = string;
   export type VersionsString = string;
+  export type ViewDialect = "REDSHIFT"|"ATHENA"|"SPARK"|string;
+  export type ViewDialectVersionString = string;
   export type ViewTextString = string;
   export type WorkerType = "Standard"|"G.1X"|"G.2X"|"G.025X"|"G.4X"|"G.8X"|"Z.2X"|string;
   export interface Workflow {

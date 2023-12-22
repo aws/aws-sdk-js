@@ -374,3 +374,4 @@ export import CleanRoomsML = require('./cleanroomsml');
 export import MarketplaceAgreement = require('./marketplaceagreement');
 export import MarketplaceDeployment = require('./marketplacedeployment');
 export import NeptuneGraph = require('./neptunegraph');
+export import NetworkMonitor = require('./networkmonitor');
