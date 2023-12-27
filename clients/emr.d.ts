@@ -389,6 +389,14 @@ declare class EMR extends Service {
    */
   runJobFlow(callback?: (err: AWSError, data: EMR.Types.RunJobFlowOutput) => void): Request<EMR.Types.RunJobFlowOutput, AWSError>;
   /**
+   * You can use the SetKeepJobFlowAliveWhenNoSteps to configure a cluster (job flow) to terminate after the step execution, i.e., all your steps are executed. If you want a transient cluster that shuts down after the last of the current executing steps are completed, you can configure SetKeepJobFlowAliveWhenNoSteps to false. If you want a long running cluster, configure SetKeepJobFlowAliveWhenNoSteps to true. For more information, see Managing Cluster Termination in the Amazon EMR Management Guide.
+   */
+  setKeepJobFlowAliveWhenNoSteps(params: EMR.Types.SetKeepJobFlowAliveWhenNoStepsInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * You can use the SetKeepJobFlowAliveWhenNoSteps to configure a cluster (job flow) to terminate after the step execution, i.e., all your steps are executed. If you want a transient cluster that shuts down after the last of the current executing steps are completed, you can configure SetKeepJobFlowAliveWhenNoSteps to false. If you want a long running cluster, configure SetKeepJobFlowAliveWhenNoSteps to true. For more information, see Managing Cluster Termination in the Amazon EMR Management Guide.
+   */
+  setKeepJobFlowAliveWhenNoSteps(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * SetTerminationProtection locks a cluster (job flow) so the Amazon EC2 instances in the cluster cannot be terminated by user intervention, an API call, or in the event of a job-flow error. The cluster still terminates upon successful completion of the job flow. Calling SetTerminationProtection on a cluster is similar to calling the Amazon EC2 DisableAPITermination API on all Amazon EC2 instances in a cluster.  SetTerminationProtection is used to prevent accidental termination of a cluster and to ensure that in the event of an error, the instances persist so that you can recover any data stored in their ephemeral instance storage.  To terminate a cluster that has been locked by setting SetTerminationProtection to true, you must first unlock the job flow by a subsequent call to SetTerminationProtection in which you set the value to false.   For more information, seeManaging Cluster Termination in the Amazon EMR Management Guide. 
    */
   setTerminationProtection(params: EMR.Types.SetTerminationProtectionInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -3333,6 +3341,16 @@ declare namespace EMR {
     CreationTime?: _Date;
   }
   export type SessionMappingSummaryList = SessionMappingSummary[];
+  export interface SetKeepJobFlowAliveWhenNoStepsInput {
+    /**
+     * A list of strings that uniquely identify the clusters to protect. This identifier is returned by RunJobFlow and can also be obtained from DescribeJobFlows.
+     */
+    JobFlowIds: XmlStringList;
+    /**
+     * A Boolean that indicates whether to terminate the cluster after all steps are executed.
+     */
+    KeepJobFlowAliveWhenNoSteps: Boolean;
+  }
   export interface SetTerminationProtectionInput {
     /**
      *  A list of strings that uniquely identify the clusters to protect. This identifier is returned by RunJobFlow and can also be obtained from DescribeJobFlows . 

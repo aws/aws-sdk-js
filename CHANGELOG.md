@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1525.0-->
+<!--LATEST=2.1526.0-->
 <!--ENTRYINSERT-->
+
+## 2.1526.0
+* feature: EMR: Add support for customers to modify cluster attribute auto-terminate post cluster launch
 
 ## 2.1525.0
 * feature: BedrockAgent: Adding Claude 2.1 support to Bedrock Agents
