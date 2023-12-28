@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1526.0-->
+<!--LATEST=2.1527.0-->
 <!--ENTRYINSERT-->
+
+## 2.1527.0
+* feature: CodeStarconnections: New integration with the GitLab self-managed provider type.
+* feature: KinesisVideoArchivedMedia: NoDataRetentionException thrown when GetImages requested for a Stream that does not retain data (that is, has a DataRetentionInHours of 0).
+* feature: SageMaker: Amazon SageMaker Studio now supports Docker access from within app container
 
 ## 2.1526.0
 * feature: EMR: Add support for customers to modify cluster attribute auto-terminate post cluster launch

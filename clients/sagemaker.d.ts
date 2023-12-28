@@ -11096,6 +11096,16 @@ declare namespace SageMaker {
      */
     TrialArn?: TrialArn;
   }
+  export interface DockerSettings {
+    /**
+     * Indicates whether the domain can access Docker.
+     */
+    EnableDockerAccess?: FeatureStatus;
+    /**
+     * The list of Amazon Web Services accounts that are trusted when the domain is created in VPC-only mode.
+     */
+    VpcOnlyTrustedAccounts?: VpcOnlyTrustedAccounts;
+  }
   export type DocumentSchemaVersion = string;
   export type Dollars = number;
   export type DomainArn = string;
@@ -11146,6 +11156,10 @@ declare namespace SageMaker {
      * The configuration for attaching a SageMaker user profile name to the execution role as a sts:SourceIdentity key.
      */
     ExecutionRoleIdentityConfig?: ExecutionRoleIdentityConfig;
+    /**
+     * A collection of settings that configure the domain's Docker interaction.
+     */
+    DockerSettings?: DockerSettings;
   }
   export interface DomainSettingsForUpdate {
     /**
@@ -11160,6 +11174,10 @@ declare namespace SageMaker {
      * The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.
      */
     SecurityGroupIds?: DomainSecurityGroupIds;
+    /**
+     * A collection of settings that configure the domain's Docker interaction.
+     */
+    DockerSettings?: DockerSettings;
   }
   export type DomainStatus = "Deleting"|"Failed"|"InService"|"Pending"|"Updating"|"Update_Failed"|"Delete_Failed"|string;
   export type Double = number;
@@ -24120,6 +24138,7 @@ declare namespace SageMaker {
     Subnets: Subnets;
   }
   export type VpcId = string;
+  export type VpcOnlyTrustedAccounts = AccountId[];
   export type VpcSecurityGroupIds = SecurityGroupId[];
   export type WaitIntervalInSeconds = number;
   export type WarmPoolResourceStatus = "Available"|"Terminated"|"Reused"|"InUse"|string;

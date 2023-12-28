@@ -37,11 +37,11 @@ declare class KinesisVideoArchivedMedia extends Service {
    */
   getHLSStreamingSessionURL(callback?: (err: AWSError, data: KinesisVideoArchivedMedia.Types.GetHLSStreamingSessionURLOutput) => void): Request<KinesisVideoArchivedMedia.Types.GetHLSStreamingSessionURLOutput, AWSError>;
   /**
-   * Retrieves a list of Images corresponding to each timestamp for a given time range, sampling interval, and image format configuration.
+   * Retrieves a list of images corresponding to each timestamp for a given time range, sampling interval, and image format configuration.
    */
   getImages(params: KinesisVideoArchivedMedia.Types.GetImagesInput, callback?: (err: AWSError, data: KinesisVideoArchivedMedia.Types.GetImagesOutput) => void): Request<KinesisVideoArchivedMedia.Types.GetImagesOutput, AWSError>;
   /**
-   * Retrieves a list of Images corresponding to each timestamp for a given time range, sampling interval, and image format configuration.
+   * Retrieves a list of images corresponding to each timestamp for a given time range, sampling interval, and image format configuration.
    */
   getImages(callback?: (err: AWSError, data: KinesisVideoArchivedMedia.Types.GetImagesOutput) => void): Request<KinesisVideoArchivedMedia.Types.GetImagesOutput, AWSError>;
   /**
@@ -282,7 +282,7 @@ declare namespace KinesisVideoArchivedMedia {
      */
     EndTimestamp: Timestamp;
     /**
-     * The time interval in milliseconds (ms) at which the images need to be generated from the stream, with a default of 3000 ms. The minimum value that can be provided is 200 ms. If the timestamp range is less than the sampling interval, the Image from the startTimestamp will be returned if available.   The minimum value of 200 ms is a hard limit. 
+     * The time interval in milliseconds (ms) at which the images need to be generated from the stream. The minimum value that can be provided is 200 ms (5 images per second). If the timestamp range is less than the sampling interval, the image from the startTimestamp will be returned if available. 
      */
     SamplingInterval?: SamplingInterval;
     /**
@@ -408,7 +408,7 @@ declare namespace KinesisVideoArchivedMedia {
      */
     NextToken?: NextToken;
     /**
-     * Describes the timestamp range and timestamp origin for the range of fragments to return.
+     * Describes the timestamp range and timestamp origin for the range of fragments to return.  This is only required when the NextToken isn't passed in the API. 
      */
     FragmentSelector?: FragmentSelector;
   }

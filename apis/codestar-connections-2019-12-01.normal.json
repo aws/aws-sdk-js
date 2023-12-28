@@ -1628,7 +1628,8 @@
         "Bitbucket",
         "GitHub",
         "GitHubEnterpriseServer",
-        "GitLab"
+        "GitLab",
+        "GitLabSelfManaged"
       ]
     },
     "RepositoryLinkArn": {

@@ -724,7 +724,7 @@ declare namespace CodeStarconnections {
   export type NextToken = string;
   export type OwnerId = string;
   export type Parent = string;
-  export type ProviderType = "Bitbucket"|"GitHub"|"GitHubEnterpriseServer"|"GitLab"|string;
+  export type ProviderType = "Bitbucket"|"GitHub"|"GitHubEnterpriseServer"|"GitLab"|"GitLabSelfManaged"|string;
   export type RepositoryLinkArn = string;
   export type RepositoryLinkId = string;
   export interface RepositoryLinkInfo {
