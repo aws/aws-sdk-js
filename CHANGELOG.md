@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1527.0-->
+<!--LATEST=2.1528.0-->
 <!--ENTRYINSERT-->
+
+## 2.1528.0
+* feature: AppRunner: AWS App Runner adds Python 3.11 and Node.js 18 runtimes.
+* feature: Location: This release introduces a new parameter to bypasses an API key's expiry conditions and delete the key.
+* feature: QuickSight: Add LinkEntityArn support for different partitions; Add UnsupportedUserEditionException in UpdateDashboardLinks API; Add support for New Reader Experience Topics
 
 ## 2.1527.0
 * feature: CodeStarconnections: New integration with the GitLab self-managed provider type.

@@ -495,7 +495,7 @@ declare namespace Location {
      */
     AllowReferers?: ApiKeyRestrictionsAllowReferersList;
     /**
-     * A list of allowed resource ARNs that a API key bearer can perform actions on.   The ARN must be the correct ARN for a map, place, or route ARN. You may include wildcards in the resource-id to match multiple resources of the same type.   The resources must be in the same partition, region, and account-id as the key that is being created.   Other than wildcards, you must include the full ARN, including the arn, partition, service, region, account-id and resource-id, delimited by colons (:).   No spaces allowed, even with wildcards. For example, arn:aws:geo:region:account-id:map/ExampleMap*.   For more information about ARN format, see Amazon Resource Names (ARNs).
+     * A list of allowed resource ARNs that a API key bearer can perform actions on.   The ARN must be the correct ARN for a map, place, or route ARN. You may include wildcards in the resource-id to match multiple resources of the same type.   The resources must be in the same partition, region, and account-id as the key that is being created.   Other than wildcards, you must include the full ARN, including the arn, partition, service, region, account-id and resource-id delimited by colons (:).   No spaces allowed, even with wildcards. For example, arn:aws:geo:region:account-id:map/ExampleMap*.   For more information about ARN format, see Amazon Resource Names (ARNs).
      */
     AllowResources: ApiKeyRestrictionsAllowResourcesList;
   }
@@ -1223,6 +1223,10 @@ declare namespace Location {
   export interface DeleteGeofenceCollectionResponse {
   }
   export interface DeleteKeyRequest {
+    /**
+     * ForceDelete bypasses an API key's expiry conditions and deletes the key. Set the parameter true to delete the key or to false to not preemptively delete the API key. Valid values: true, or false. Required: No  This action is irreversible. Only use ForceDelete if you are certain the key is no longer in use. 
+     */
+    ForceDelete?: Boolean;
     /**
      * The name of the API key to delete.
      */

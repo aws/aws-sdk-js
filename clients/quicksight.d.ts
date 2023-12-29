@@ -17385,6 +17385,10 @@ declare namespace QuickSight {
      */
     Description?: LimitedString;
     /**
+     * The user experience version of a topic.
+     */
+    UserExperienceVersion?: TopicUserExperienceVersion;
+    /**
      * The data sets that the topic is associated with.
      */
     DataSets?: Datasets;
@@ -17597,6 +17601,7 @@ declare namespace QuickSight {
     Name?: ResourceName;
   }
   export type TopicTimeGranularity = "SECOND"|"MINUTE"|"HOUR"|"DAY"|"WEEK"|"MONTH"|"QUARTER"|"YEAR"|string;
+  export type TopicUserExperienceVersion = "LEGACY"|"NEW_READER_EXPERIENCE"|string;
   export interface TotalAggregationComputation {
     /**
      * The ID for a computation.

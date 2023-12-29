@@ -1304,7 +1304,7 @@ declare namespace AppRunner {
      */
     IngressConfiguration?: IngressConfiguration;
     /**
-     * App Runner provides you with the option to choose between Internet Protocol version 4 (IPv4) and dual-stack (IPv4 and IPv6) for your incoming public network configuration. This is an optional parameter. If you do not specify an IpAddressType, it defaults to select IPv4.   Currently, App Runner supports dual-stack for only Public endpoint. Only IPv4 is supported for Private endpoint. If you update a service that's using dual-stack Public endpoint to a Private endpoint, your App Runner service will default to support only IPv4 for Private endpoint and fail to receive traffic originating from IPv6 endpoint.  
+     * App Runner provides you with the option to choose between Internet Protocol version 4 (IPv4) and dual stack (IPv4 and IPv6) for your incoming public network configuration. This is an optional parameter. If you do not specify an IpAddressType, it defaults to select IPv4.   Currently, App Runner supports dual stack for only Public endpoint. Only IPv4 is supported for Private endpoint. If you update a service that's using dual-stack Public endpoint to a Private endpoint, your App Runner service will default to support only IPv4 for Private endpoint and fail to receive traffic originating from IPv6 endpoint.  
      */
     IpAddressType?: IpAddressType;
   }
@@ -1428,7 +1428,7 @@ declare namespace AppRunner {
     OperationId?: UUID;
   }
   export type RoleArn = string;
-  export type Runtime = "PYTHON_3"|"NODEJS_12"|"NODEJS_14"|"CORRETTO_8"|"CORRETTO_11"|"NODEJS_16"|"GO_1"|"DOTNET_6"|"PHP_81"|"RUBY_31"|string;
+  export type Runtime = "PYTHON_3"|"NODEJS_12"|"NODEJS_14"|"CORRETTO_8"|"CORRETTO_11"|"NODEJS_16"|"GO_1"|"DOTNET_6"|"PHP_81"|"RUBY_31"|"PYTHON_311"|"NODEJS_18"|string;
   export type RuntimeEnvironmentSecrets = {[key: string]: RuntimeEnvironmentSecretsValue};
   export type RuntimeEnvironmentSecretsName = string;
   export type RuntimeEnvironmentSecretsValue = string;
