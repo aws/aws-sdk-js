@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1528.0-->
+<!--LATEST=2.1529.0-->
 <!--ENTRYINSERT-->
+
+## 2.1529.0
+* feature: Connect: Amazon Connect, Contact Lens Evaluation API increase evaluation notes max length to 3072.
+* feature: MediaConvert: This release includes video engine updates including HEVC improvements, support for ingesting VP9 encoded video in MP4 containers, and support for user-specified 3D LUTs.
 
 ## 2.1528.0
 * feature: AppRunner: AWS App Runner adds Python 3.11 and Node.js 18 runtimes.

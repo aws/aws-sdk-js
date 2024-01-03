@@ -2845,7 +2845,7 @@ declare namespace Connect {
   }
   export interface ContactAnalysis {
     /**
-     * A structure that defines filters can be used to search with text within an Amazon Connect Contact Lens analyzed transcript.
+     * Search criteria based on transcript analyzed by Amazon Connect Contact Lens.
      */
     Transcript?: Transcript;
   }
@@ -3010,7 +3010,7 @@ declare namespace Connect {
   export type ContactReferences = {[key: string]: Reference};
   export interface ContactSearchSummary {
     /**
-     * The Amazon Resource Name (ARN) of the contact
+     * The Amazon Resource Name (ARN) of the contact.
      */
     Arn?: ARN;
     /**
@@ -9372,11 +9372,11 @@ declare namespace Connect {
   export type SearchContactsMatchType = "MATCH_ALL"|"MATCH_ANY"|string;
   export interface SearchContactsRequest {
     /**
-     * The identifier of Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance
+     * The identifier of Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
-     * Time range that you want to search results
+     * Time range that you want to search results.
      */
     TimeRange: SearchContactsTimeRange;
     /**
@@ -9392,7 +9392,7 @@ declare namespace Connect {
      */
     NextToken?: LargeNextToken;
     /**
-     * Specifies a field to sort by and a sort order
+     * Specifies a field to sort by and a sort order.
      */
     Sort?: Sort;
   }
@@ -9412,7 +9412,7 @@ declare namespace Connect {
   }
   export interface SearchContactsTimeRange {
     /**
-     * The type of timestamp to search
+     * The type of timestamp to search.
      */
     Type: SearchContactsTimeRangeType;
     /**
@@ -9427,31 +9427,31 @@ declare namespace Connect {
   export type SearchContactsTimeRangeType = "INITIATION_TIMESTAMP"|"SCHEDULED_TIMESTAMP"|"CONNECTED_TO_AGENT_TIMESTAMP"|"DISCONNECT_TIMESTAMP"|string;
   export interface SearchCriteria {
     /**
-     * The array of agent ids
+     * The identifiers of agents who handled the contacts.
      */
     AgentIds?: AgentResourceIdList;
     /**
-     * The agent hierarchy groups
+     * The agent hierarchy groups of the agent at the time of handling the contact.
      */
     AgentHierarchyGroups?: AgentHierarchyGroups;
     /**
-     * The array of channels
+     * The list of channels associated with contacts.
      */
     Channels?: ChannelList;
     /**
-     * The ContactAnalysis object used in search criteria
+     * Search criteria based on analysis outputs from Amazon Connect Contact Lens.
      */
     ContactAnalysis?: ContactAnalysis;
     /**
-     * The array of initiaton methods
+     * The list of initiation methods associated with contacts.
      */
     InitiationMethods?: InitiationMethodList;
     /**
-     * The array of queue ids.
+     * The list of queue IDs associated with contacts.
      */
     QueueIds?: QueueIdList;
     /**
-     * The SearchableContactAttributes object used in search criteria
+     * The search criteria based on user-defined contact attributes that have been configured for contact search. For more information, see Search by customer contact attributes in the Amazon Connect Administrator Guide.  To use SearchableContactAttributes in a search request, the GetContactAttributes action is required to perform an API request. For more information, see https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonconnect.html#amazonconnect-actions-as-permissionsActions defined by Amazon Connect. 
      */
     SearchableContactAttributes?: SearchableContactAttributes;
   }
@@ -9811,21 +9811,21 @@ declare namespace Connect {
   export type SearchableContactAttributeValueList = SearchableContactAttributeValue[];
   export interface SearchableContactAttributes {
     /**
-     * The array of searhale contact attribute criteria
+     * The list of criteria based on user-defined contact attributes that are configured for contact search.
      */
     Criteria: SearchableContactAttributesCriteriaList;
     /**
-     * The match type of multiple searchable contact attributes criteria.
+     * The match type combining search criteria using multiple searchable contact attributes.
      */
     MatchType?: SearchContactsMatchType;
   }
   export interface SearchableContactAttributesCriteria {
     /**
-     * The searchable contact attribute key
+     * The key containing a searchable user-defined contact attribute.
      */
     Key: SearchableContactAttributeKey;
     /**
-     * The array of contact attribute values used to filter search results.
+     * The list of values to search for within a user-defined contact attribute.
      */
     Values: SearchableContactAttributeValueList;
   }
@@ -10821,11 +10821,11 @@ declare namespace Connect {
   export type TrafficType = "GENERAL"|"CAMPAIGN"|string;
   export interface Transcript {
     /**
-     * The array of transcript search criteria
+     * The list of search criteria based on Contact Lens conversational analytics transcript.
      */
     Criteria: TranscriptCriteriaList;
     /**
-     * The match type of multiple transcript criteira
+     * The match type combining search criteria using multiple transcript criteria.
      */
     MatchType?: SearchContactsMatchType;
   }
@@ -10839,7 +10839,7 @@ declare namespace Connect {
      */
     SearchText: SearchTextList;
     /**
-     * The match type of search texts in a transcript criteria.
+     * The match type combining search criteria using multiple search texts in a transcript criteria.
      */
     MatchType: SearchContactsMatchType;
   }
@@ -12113,7 +12113,7 @@ declare namespace Connect {
      */
     AndConditions?: UserSearchConditionList;
     /**
-     * A leaf node condition which can be used to specify a string condition.  The currently supported values for FieldName are name, description, and resourceID. 
+     * A leaf node condition which can be used to specify a string condition. The currently supported values for FieldName are username, firstname, lastname, resourceId, routingProfileId, securityProfileId, agentGroupId, and agentGroupPathIds.
      */
     StringCondition?: StringCondition;
     /**

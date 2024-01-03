@@ -252,7 +252,7 @@ declare namespace MediaConvert {
      */
     Bitrate?: __integerMin6000Max1024000;
     /**
-     * AAC Profile.
+     * Specify the AAC profile. For the widest player compatibility and where higher bitrates are acceptable: Keep the default profile, LC (AAC-LC) For improved audio performance at lower bitrates: Choose HEV1 or HEV2. HEV1 (AAC-HE v1) adds spectral band replication to improve speech audio at low bitrates. HEV2 (AAC-HE v2) adds parametric stereo, which optimizes for encoding stereo audio at very low bitrates.
      */
     CodecProfile?: AacCodecProfile;
     /**
@@ -260,7 +260,7 @@ declare namespace MediaConvert {
      */
     CodingMode?: AacCodingMode;
     /**
-     * Rate Control Mode.
+     * Specify the AAC rate control mode. For a constant bitrate: Choose CBR. Your AAC output bitrate will be equal to the value that you choose for Bitrate. For a variable bitrate: Choose VBR. Your AAC output bitrate will vary according to your audio content and the value that you choose for Bitrate quality.
      */
     RateControlMode?: AacRateControlMode;
     /**
@@ -268,7 +268,7 @@ declare namespace MediaConvert {
      */
     RawFormat?: AacRawFormat;
     /**
-     * Specify the Sample rate in Hz. Valid sample rates depend on the Profile and Coding mode that you select. The following list shows valid sample rates for each Profile and Coding mode. * LC Profile, Coding mode 1.0, 2.0, and Receiver Mix: 8000, 12000, 16000, 22050, 24000, 32000, 44100, 48000, 88200, 96000. * LC Profile, Coding mode 5.1: 32000, 44100, 48000, 96000. * HEV1 Profile, Coding mode 1.0 and Receiver Mix: 22050, 24000, 32000, 44100, 48000. * HEV1 Profile, Coding mode 2.0 and 5.1: 32000, 44100, 48000, 96000. * HEV2 Profile, Coding mode 2.0: 22050, 24000, 32000, 44100, 48000.
+     * Specify the AAC sample rate in samples per second (Hz). Valid sample rates depend on the AAC profile and Coding mode that you select. For a list of supported sample rates, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/aac-support.html
      */
     SampleRate?: __integerMin8000Max96000;
     /**
@@ -276,7 +276,7 @@ declare namespace MediaConvert {
      */
     Specification?: AacSpecification;
     /**
-     * VBR Quality Level - Only used if rate_control_mode is VBR.
+     * Specify the quality of your variable bitrate (VBR) AAC audio. For a list of approximate VBR bitrates, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/aac-support.html#aac_vbr
      */
     VbrQuality?: AacVbrQuality;
   }
@@ -1339,6 +1339,29 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
   }
   export type CmfcTimedMetadata = "PASSTHROUGH"|"NONE"|string;
   export type CmfcTimedMetadataBoxVersion = "VERSION_0"|"VERSION_1"|string;
+  export interface ColorConversion3DLUTSetting {
+    /**
+     * Specify the input file S3, HTTP, or HTTPS URL for your 3D LUT .cube file. Note that MediaConvert accepts 3D LUT files up to 8MB in size.
+     */
+    FileInput?: __stringMin14PatternS3CubeCUBEHttpsCubeCUBE;
+    /**
+     * Specify which inputs use this 3D LUT, according to their color space.
+     */
+    InputColorSpace?: ColorSpace;
+    /**
+     * Specify which inputs use this 3D LUT, according to their luminance. To apply this 3D LUT to HDR10 or P3D65 (HDR) inputs with a specific mastering luminance: Enter an integer from 0 to 2147483647, corresponding to the input's Maximum luminance value. To apply this 3D LUT to any input regardless of its luminance: Leave blank, or enter 0.
+     */
+    InputMasteringLuminance?: __integerMin0Max2147483647;
+    /**
+     * Specify which outputs use this 3D LUT, according to their color space.
+     */
+    OutputColorSpace?: ColorSpace;
+    /**
+     * Specify which outputs use this 3D LUT, according to their luminance. To apply this 3D LUT to HDR10 or P3D65 (HDR) outputs with a specific luminance: Enter an integer from 0 to 2147483647, corresponding to the output's luminance. To apply this 3D LUT to any output regardless of its luminance: Leave blank, or enter 0.
+     */
+    OutputMasteringLuminance?: __integerMin0Max2147483647;
+  }
+  export type ColorConversion3DLUTSettings = ColorConversion3DLUTSetting[];
   export interface ColorCorrector {
     /**
      * Brightness level.
@@ -1373,6 +1396,10 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
      * Hue in degrees.
      */
     Hue?: __integerMinNegative180Max180;
+    /**
+     * Specify the maximum mastering display luminance. Enter an integer from 0 to 2147483647, in units of 0.0001 nits. For example, enter 10000000 for 1000 nits.
+     */
+    MaxLuminance?: __integerMin0Max2147483647;
     /**
      * Specify how MediaConvert limits the color sample range for this output. To create a limited range output from a full range input: Choose Limited range squeeze. For full range inputs, MediaConvert performs a linear offset to color samples equally across all pixels and frames. Color samples in 10-bit outputs are limited to 64 through 940, and 8-bit outputs are limited to 16 through 235. Note: For limited range inputs, values for color samples are passed through to your output unchanged. MediaConvert does not limit the sample range. To correct pixels in your input that are out of range or out of gamut: Choose Limited range clip. Use for broadcast applications. MediaConvert conforms any pixels outside of the values that you specify under Minimum YUV and Maximum YUV to limited range bounds. MediaConvert also corrects any YUV values that, when converted to RGB, would be outside the bounds you specify under Minimum RGB tolerance and Maximum RGB tolerance. With either limited range conversion, MediaConvert writes the sample range metadata in the output.
      */
@@ -1429,7 +1456,7 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
      */
     MxfSettings?: MxfSettings;
   }
-  export type ContainerType = "F4V"|"ISMV"|"M2TS"|"M3U8"|"CMFC"|"MOV"|"MP4"|"MPD"|"MXF"|"WEBM"|"RAW"|string;
+  export type ContainerType = "F4V"|"ISMV"|"M2TS"|"M3U8"|"CMFC"|"MOV"|"MP4"|"MPD"|"MXF"|"WEBM"|"RAW"|"Y4M"|string;
   export type CopyProtectionAction = "PASSTHROUGH"|"STRIP"|string;
   export interface CreateJobRequest {
     /**
@@ -3659,6 +3686,10 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     AvailBlanking?: AvailBlanking;
     /**
+     * Use 3D LUTs to specify custom color mapping behavior when you convert from one color space into another. You can include up to 8 different 3D LUTs.
+     */
+    ColorConversion3DLUTSettings?: ColorConversion3DLUTSettings;
+    /**
      * Settings for Event Signaling And Messaging (ESAM). If you don't do ad insertion, you can ignore these settings.
      */
     Esam?: EsamSettings;
@@ -3768,6 +3799,10 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      * Settings for ad avail blanking. Video can be blanked or overlaid with an image, and audio muted during SCTE-35 triggered ad avails.
      */
     AvailBlanking?: AvailBlanking;
+    /**
+     * Use 3D LUTs to specify custom color mapping behavior when you convert from one color space into another. You can include up to 8 different 3D LUTs.
+     */
+    ColorConversion3DLUTSettings?: ColorConversion3DLUTSettings;
     /**
      * Settings for Event Signaling And Messaging (ESAM). If you don't do ad insertion, you can ignore these settings.
      */
@@ -5517,6 +5552,51 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
   }
   export type TtmlStylePassthrough = "ENABLED"|"DISABLED"|string;
   export type Type = "SYSTEM"|"CUSTOM"|string;
+  export type UncompressedFourcc = "I420"|"I422"|"I444"|string;
+  export type UncompressedFramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
+  export type UncompressedFramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|"FRAMEFORMER"|string;
+  export type UncompressedInterlaceMode = "INTERLACED"|"PROGRESSIVE"|string;
+  export type UncompressedScanTypeConversionMode = "INTERLACED"|"INTERLACED_OPTIMIZE"|string;
+  export interface UncompressedSettings {
+    /**
+     * The four character code for the uncompressed video.
+     */
+    Fourcc?: UncompressedFourcc;
+    /**
+     * Use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction.
+     */
+    FramerateControl?: UncompressedFramerateControl;
+    /**
+     * Choose the method that you want MediaConvert to use when increasing or decreasing the frame rate. For numerically simple conversions, such as 60 fps to 30 fps: We recommend that you keep the default value, Drop duplicate. For numerically complex conversions, to avoid stutter: Choose Interpolate. This results in a smooth picture, but might introduce undesirable video artifacts. For complex frame rate conversions, especially if your source video has already been converted from its original cadence: Choose FrameFormer to do motion-compensated interpolation. FrameFormer uses the best conversion method frame by frame. Note that using FrameFormer increases the transcoding time and incurs a significant add-on cost. When you choose FrameFormer, your input video resolution must be at least 128x96.
+     */
+    FramerateConversionAlgorithm?: UncompressedFramerateConversionAlgorithm;
+    /**
+     * When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use FramerateDenominator to specify the denominator of this fraction. In this example, use 1001 for the value of FramerateDenominator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.
+     */
+    FramerateDenominator?: __integerMin1Max2147483647;
+    /**
+     * When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator of this fraction. In this example, use 24000 for the value of FramerateNumerator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.
+     */
+    FramerateNumerator?: __integerMin1Max2147483647;
+    /**
+     * Optional. Choose the scan line type for this output. If you don't specify a value, MediaConvert will create a progressive output.
+     */
+    InterlaceMode?: UncompressedInterlaceMode;
+    /**
+     * Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing, for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn't suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine to None or Soft. You can't use optimized interlacing for hard telecine outputs. You must also set Interlace mode to a value other than Progressive.
+     */
+    ScanTypeConversionMode?: UncompressedScanTypeConversionMode;
+    /**
+     * Ignore this setting unless your input frame rate is 23.976 or 24 frames per second (fps). Enable slow PAL to create a 25 fps output by relabeling the video frames and resampling your audio. Note that enabling this setting will slightly reduce the duration of your video. Related settings: You must also set Framerate to 25.
+     */
+    SlowPal?: UncompressedSlowPal;
+    /**
+     * When you do frame rate conversion from 23.976 frames per second (fps) to 29.97 fps, and your output scan type is interlaced, you can optionally enable hard telecine to create a smoother picture. When you keep the default value, None, MediaConvert does a standard frame rate conversion to 29.97 without doing anything with the field polarity to create a smoother picture.
+     */
+    Telecine?: UncompressedTelecine;
+  }
+  export type UncompressedSlowPal = "DISABLED"|"ENABLED"|string;
+  export type UncompressedTelecine = "NONE"|"HARD"|string;
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource that you want to remove tags from. To get the ARN, send a GET request with the resource name.
@@ -5667,7 +5747,7 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
   export type Vc3SlowPal = "DISABLED"|"ENABLED"|string;
   export type Vc3Telecine = "NONE"|"HARD"|string;
   export type VchipAction = "PASSTHROUGH"|"STRIP"|string;
-  export type VideoCodec = "AV1"|"AVC_INTRA"|"FRAME_CAPTURE"|"H_264"|"H_265"|"MPEG2"|"PASSTHROUGH"|"PRORES"|"VC3"|"VP8"|"VP9"|"XAVC"|string;
+  export type VideoCodec = "AV1"|"AVC_INTRA"|"FRAME_CAPTURE"|"H_264"|"H_265"|"MPEG2"|"PASSTHROUGH"|"PRORES"|"UNCOMPRESSED"|"VC3"|"VP8"|"VP9"|"XAVC"|string;
   export interface VideoCodecSettings {
     /**
      * Required when you set Codec, under VideoDescription>CodecSettings to the value AV1.
@@ -5702,6 +5782,10 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
      */
     ProresSettings?: ProresSettings;
     /**
+     * Required when you set Codec, under VideoDescription>CodecSettings to the value UNCOMPRESSED.
+     */
+    UncompressedSettings?: UncompressedSettings;
+    /**
      * Required when you set Codec to the value VC3
      */
     Vc3Settings?: Vc3Settings;
@@ -5728,7 +5812,7 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
      */
     AntiAlias?: AntiAlias;
     /**
-     * Video codec settings contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec. For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AV1, Av1Settings * AVC_INTRA, AvcIntraSettings * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * VC3, Vc3Settings * VP8, Vp8Settings * VP9, Vp9Settings * XAVC, XavcSettings
+     * Video codec settings contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec. For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AV1, Av1Settings * AVC_INTRA, AvcIntraSettings * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * UNCOMPRESSED, UncompressedSettings * VC3, Vc3Settings * VP8, Vp8Settings * VP9, Vp9Settings * XAVC, XavcSettings
      */
     CodecSettings?: VideoCodecSettings;
     /**
@@ -5892,6 +5976,10 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
      * Use these settings to provide HDR 10 metadata that is missing or inaccurate in your input video. Appropriate values vary depending on the input video and must be provided by a color grader. The color grader generates these values during the HDR 10 mastering process. The valid range for each of these settings is 0 to 50,000. Each increment represents 0.00002 in CIE1931 color coordinate. Related settings - When you specify these values, you must also set Color space to HDR 10. To specify whether the the values you specify here take precedence over the values in the metadata of your input file, set Color space usage. To specify whether color metadata is included in an output, set Color metadata. For more information about MediaConvert HDR jobs, see https://docs.aws.amazon.com/console/mediaconvert/hdr.
      */
     Hdr10Metadata?: Hdr10Metadata;
+    /**
+     * Specify the maximum mastering display luminance. Enter an integer from 0 to 2147483647, in units of 0.0001 nits. For example, enter 10000000 for 1000 nits.
+     */
+    MaxLuminance?: __integerMin0Max2147483647;
     /**
      * Use this setting if your input has video and audio durations that don't align, and your output or player has strict alignment requirements. Examples: Input audio track has a delayed start. Input video track ends before audio ends. When you set Pad video to Black, MediaConvert generates black video frames so that output video and audio durations match. Black video frames are added at the beginning or end, depending on your input. To keep the default behavior and not generate black video, set Pad video to Disabled or leave blank.
      */
@@ -6442,6 +6530,7 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
   export type __stringMin11Max11Pattern01D20305D205D = string;
   export type __stringMin14PatternS3BmpBMPPngPNGHttpsBmpBMPPngPNG = string;
   export type __stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA = string;
+  export type __stringMin14PatternS3CubeCUBEHttpsCubeCUBE = string;
   export type __stringMin14PatternS3Mov09PngHttpsMov09Png = string;
   export type __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT = string;
   export type __stringMin14PatternS3XmlXMLHttpsXmlXML = string;
