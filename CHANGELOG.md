@@ -1,6 +1,16 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1529.0-->
+<!--LATEST=2.1530.0-->
 <!--ENTRYINSERT-->
+
+## 2.1530.0
+* feature: ConfigService: Updated ResourceType enum with new resource types onboarded by AWS Config in November and December 2023.
+* feature: DocDB: Adding PerformanceInsightsEnabled and PerformanceInsightsKMSKeyId fields to DescribeDBInstances Response.
+* feature: ECS: This release adds support for managed instance draining which facilitates graceful termination of Amazon ECS instances.
+* feature: ES: This release adds support for new or existing Amazon OpenSearch domains to enable TLS 1.3 or TLS 1.2 with perfect forward secrecy cipher suites for domain endpoints.
+* feature: Lightsail: This release adds support to set up an HTTPS endpoint on an instance.
+* feature: OpenSearch: This release adds support for new or existing Amazon OpenSearch domains to enable TLS 1.3 or TLS 1.2 with perfect forward secrecy cipher suites for domain endpoints.
+* feature: SageMaker: Adding support for provisioned throughput mode for SageMaker Feature Groups
+* feature: ServiceCatalog: Added Idempotency token support to Service Catalog  AssociateServiceActionWithProvisioningArtifact, DisassociateServiceActionFromProvisioningArtifact, DeleteServiceAction API
 
 ## 2.1529.0
 * feature: Connect: Amazon Connect, Contact Lens Evaluation API increase evaluation notes max length to 3072.

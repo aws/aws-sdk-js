@@ -1,0 +1,42 @@
+[
+    {
+        "type": "feature",
+        "category": "ConfigService",
+        "description": "Updated ResourceType enum with new resource types onboarded by AWS Config in November and December 2023."
+    },
+    {
+        "type": "feature",
+        "category": "DocDB",
+        "description": "Adding PerformanceInsightsEnabled and PerformanceInsightsKMSKeyId fields to DescribeDBInstances Response."
+    },
+    {
+        "type": "feature",
+        "category": "ECS",
+        "description": "This release adds support for managed instance draining which facilitates graceful termination of Amazon ECS instances."
+    },
+    {
+        "type": "feature",
+        "category": "ES",
+        "description": "This release adds support for new or existing Amazon OpenSearch domains to enable TLS 1.3 or TLS 1.2 with perfect forward secrecy cipher suites for domain endpoints."
+    },
+    {
+        "type": "feature",
+        "category": "Lightsail",
+        "description": "This release adds support to set up an HTTPS endpoint on an instance."
+    },
+    {
+        "type": "feature",
+        "category": "OpenSearch",
+        "description": "This release adds support for new or existing Amazon OpenSearch domains to enable TLS 1.3 or TLS 1.2 with perfect forward secrecy cipher suites for domain endpoints."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Adding support for provisioned throughput mode for SageMaker Feature Groups"
+    },
+    {
+        "type": "feature",
+        "category": "ServiceCatalog",
+        "description": "Added Idempotency token support to Service Catalog  AssociateServiceActionWithProvisioningArtifact, DisassociateServiceActionFromProvisioningArtifact, DeleteServiceAction API"
+    }
+]

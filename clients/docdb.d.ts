@@ -1377,6 +1377,14 @@ declare namespace DocDB {
      * The details of the DB instance's server certificate.
      */
     CertificateDetails?: CertificateDetails;
+    /**
+     * Set to true if Amazon RDS Performance Insights is enabled for the DB instance, and otherwise false.
+     */
+    PerformanceInsightsEnabled?: BooleanOptional;
+    /**
+     * The KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.
+     */
+    PerformanceInsightsKMSKeyId?: String;
   }
   export type DBInstanceList = DBInstance[];
   export interface DBInstanceMessage {

@@ -837,6 +837,10 @@ declare namespace ServiceCatalog {
      * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
+    /**
+     * A unique identifier that you provide to ensure idempotency. If multiple requests from the same Amazon Web Services account use the same idempotency token, the same response is returned for each repeated request. 
+     */
+    IdempotencyToken?: IdempotencyToken;
   }
   export interface AssociateServiceActionWithProvisioningArtifactOutput {
   }
@@ -1105,7 +1109,7 @@ declare namespace ServiceCatalog {
      */
     ShareTagOptions?: Boolean;
     /**
-     * Enables or disables Principal sharing when creating the portfolio share. If this flag is not provided, principal sharing is disabled.  When you enable Principal Name Sharing for a portfolio share, the share recipient account end users with a principal that matches any of the associated IAM patterns can provision products from the portfolio. Once shared, the share recipient can view associations of PrincipalType: IAM_PATTERN on their portfolio. You can create the principals in the recipient account before or after creating the share. 
+     * This parameter is only supported for portfolios with an OrganizationalNode Type of ORGANIZATION or ORGANIZATIONAL_UNIT.  Enables or disables Principal sharing when creating the portfolio share. If you do not provide this flag, principal sharing is disabled.  When you enable Principal Name Sharing for a portfolio share, the share recipient account end users with a principal that matches any of the associated IAM patterns can provision products from the portfolio. Once shared, the share recipient can view associations of PrincipalType: IAM_PATTERN on their portfolio. You can create the principals in the recipient account before or after creating the share. 
      */
     SharePrincipals?: Boolean;
   }
@@ -1435,6 +1439,10 @@ declare namespace ServiceCatalog {
      * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
+    /**
+     * A unique identifier that you provide to ensure idempotency. If multiple requests from the same Amazon Web Services account use the same idempotency token, the same response is returned for each repeated request. 
+     */
+    IdempotencyToken?: IdempotencyToken;
   }
   export interface DeleteServiceActionOutput {
   }
@@ -1986,6 +1994,10 @@ declare namespace ServiceCatalog {
      * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
+    /**
+     * A unique identifier that you provide to ensure idempotency. If multiple requests from the same Amazon Web Services account use the same idempotency token, the same response is returned for each repeated request. 
+     */
+    IdempotencyToken?: IdempotencyToken;
   }
   export interface DisassociateServiceActionFromProvisioningArtifactOutput {
   }

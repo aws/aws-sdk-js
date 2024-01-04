@@ -3847,6 +3847,7 @@ declare namespace SageMaker {
   }
   export type CapacitySizeType = "INSTANCE_COUNT"|"CAPACITY_PERCENT"|string;
   export type CapacitySizeValue = number;
+  export type CapacityUnit = number;
   export interface CaptureContentTypeHeader {
     /**
      * The list of all content type headers that Amazon SageMaker will treat as CSV and capture accordingly.
@@ -5280,6 +5281,7 @@ declare namespace SageMaker {
      * Use this to configure an OfflineFeatureStore. This parameter allows you to specify:   The Amazon Simple Storage Service (Amazon S3) location of an OfflineStore.   A configuration for an Amazon Web Services Glue or Amazon Web Services Hive data catalog.    An KMS encryption key to encrypt the Amazon S3 location used for OfflineStore. If KMS encryption key is not specified, by default we encrypt all data at rest using Amazon Web Services KMS key. By defining your bucket-level key for SSE, you can reduce Amazon Web Services KMS requests costs by up to 99 percent.   Format for the offline store table. Supported formats are Glue (Default) and Apache Iceberg.   To learn more about this parameter, see OfflineStoreConfig.
      */
     OfflineStoreConfig?: OfflineStoreConfig;
+    ThroughputConfig?: ThroughputConfig;
     /**
      * The Amazon Resource Name (ARN) of the IAM execution role used to persist data into the OfflineStore if an OfflineStoreConfig is provided.
      */
@@ -8690,6 +8692,7 @@ declare namespace SageMaker {
      * The configuration of the offline store. It includes the following configurations:   Amazon S3 location of the offline store.   Configuration of the Glue data catalog.   Table format of the offline store.   Option to disable the automatic creation of a Glue table for the offline store.   Encryption configuration.  
      */
     OfflineStoreConfig?: OfflineStoreConfig;
+    ThroughputConfig?: ThroughputConfigDescription;
     /**
      * The Amazon Resource Name (ARN) of the IAM execution role used to persist data into the OfflineStore if an OfflineStoreConfig is provided.
      */
@@ -22026,6 +22029,49 @@ declare namespace SageMaker {
     BaseModelName?: BaseModelName;
   }
   export type ThingName = string;
+  export interface ThroughputConfig {
+    /**
+     * The mode used for your feature group throughput: ON_DEMAND or PROVISIONED. 
+     */
+    ThroughputMode: ThroughputMode;
+    /**
+     *  For provisioned feature groups with online store enabled, this indicates the read throughput you are billed for and can consume without throttling.  This field is not applicable for on-demand feature groups. 
+     */
+    ProvisionedReadCapacityUnits?: CapacityUnit;
+    /**
+     *  For provisioned feature groups, this indicates the write throughput you are billed for and can consume without throttling.  This field is not applicable for on-demand feature groups. 
+     */
+    ProvisionedWriteCapacityUnits?: CapacityUnit;
+  }
+  export interface ThroughputConfigDescription {
+    /**
+     * The mode used for your feature group throughput: ON_DEMAND or PROVISIONED. 
+     */
+    ThroughputMode: ThroughputMode;
+    /**
+     *  For provisioned feature groups with online store enabled, this indicates the read throughput you are billed for and can consume without throttling.  This field is not applicable for on-demand feature groups. 
+     */
+    ProvisionedReadCapacityUnits?: CapacityUnit;
+    /**
+     *  For provisioned feature groups, this indicates the write throughput you are billed for and can consume without throttling.  This field is not applicable for on-demand feature groups. 
+     */
+    ProvisionedWriteCapacityUnits?: CapacityUnit;
+  }
+  export interface ThroughputConfigUpdate {
+    /**
+     * Target throughput mode of the feature group. Throughput update is an asynchronous operation, and the outcome should be monitored by polling LastUpdateStatus field in DescribeFeatureGroup response. You cannot update a feature group's throughput while another update is in progress. 
+     */
+    ThroughputMode?: ThroughputMode;
+    /**
+     * For provisioned feature groups with online store enabled, this indicates the read throughput you are billed for and can consume without throttling. 
+     */
+    ProvisionedReadCapacityUnits?: CapacityUnit;
+    /**
+     * For provisioned feature groups, this indicates the write throughput you are billed for and can consume without throttling. 
+     */
+    ProvisionedWriteCapacityUnits?: CapacityUnit;
+  }
+  export type ThroughputMode = "OnDemand"|"Provisioned"|string;
   export interface TimeSeriesConfig {
     /**
      * The name of the column representing the target variable that you want to predict for each item in your dataset. The data type of the target variable must be numerical.
@@ -23312,6 +23358,7 @@ declare namespace SageMaker {
      * Updates the feature group online store configuration.
      */
     OnlineStoreConfig?: OnlineStoreConfigUpdate;
+    ThroughputConfig?: ThroughputConfigUpdate;
   }
   export interface UpdateFeatureGroupResponse {
     /**

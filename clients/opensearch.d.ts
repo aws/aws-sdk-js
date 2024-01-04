@@ -1069,7 +1069,7 @@ declare namespace OpenSearch {
      */
     AccessPolicies?: PolicyDocument;
     /**
-     * The type of IP addresses supported by the endpoint for the domain.
+     * Specify either dual stack or IPv4 as your IP address type. Dual stack allows you to share domain resources across IPv4 and IPv6 address types, and is the recommended option. If you set your IP address type to dual stack, you can't change your address type later.
      */
     IPAddressType?: IPAddressType;
     /**
@@ -1719,7 +1719,7 @@ declare namespace OpenSearch {
      */
     AccessPolicies?: AccessPoliciesStatus;
     /**
-     * The type of IP addresses supported by the endpoint for the domain.
+     * Choose either dual stack or IPv4 as your IP address type. Dual stack allows you to share domain resources across IPv4 and IPv6 address types, and is the recommended option. If you set your IP address type to dual stack, you can't change your address type later.
      */
     IPAddressType?: IPAddressTypeStatus;
     /**
@@ -1781,7 +1781,7 @@ declare namespace OpenSearch {
      */
     EnforceHTTPS?: Boolean;
     /**
-     * Specify the TLS security policy to apply to the HTTPS endpoint of the domain. The policy can be one of the following values:    Policy-Min-TLS-1-0-2019-07: TLS security policy that supports TLS version 1.0 to TLS version 1.2    Policy-Min-TLS-1-2-2019-07: TLS security policy that supports only TLS version 1.2  
+     * Specify the TLS security policy to apply to the HTTPS endpoint of the domain. The policy can be one of the following values:    Policy-Min-TLS-1-0-2019-07: TLS security policy that supports TLS version 1.0 to TLS version 1.2    Policy-Min-TLS-1-2-2019-07: TLS security policy that supports only TLS version 1.2    Policy-Min-TLS-1-2-PFS-2023-10: TLS security policy that supports TLS version 1.2 to TLS version 1.3 with perfect forward secrecy cipher suites  
      */
     TLSSecurityPolicy?: TLSSecurityPolicy;
     /**
@@ -1965,9 +1965,12 @@ declare namespace OpenSearch {
      * Domain-specific endpoint used to submit index, search, and data upload requests to the domain.
      */
     Endpoint?: ServiceUrl;
+    /**
+     * If IPAddressType to set to dualstack, a version 2 domain endpoint is provisioned. This endpoint functions like a normal endpoint, except that it works with both IPv4 and IPv6 IP addresses. Normal endpoints work only with IPv4 IP addresses. 
+     */
     EndpointV2?: ServiceUrl;
     /**
-     * The key-value pair that exists if the OpenSearch Service domain uses VPC endpoints.. Example key, value: 'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'.
+     * The key-value pair that exists if the OpenSearch Service domain uses VPC endpoints. Example key, value: 'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'.
      */
     Endpoints?: EndpointsMap;
     /**
@@ -3428,7 +3431,7 @@ declare namespace OpenSearch {
   export type StorageTypeName = string;
   export type String = string;
   export type StringList = String[];
-  export type TLSSecurityPolicy = "Policy-Min-TLS-1-0-2019-07"|"Policy-Min-TLS-1-2-2019-07"|string;
+  export type TLSSecurityPolicy = "Policy-Min-TLS-1-0-2019-07"|"Policy-Min-TLS-1-2-2019-07"|"Policy-Min-TLS-1-2-PFS-2023-10"|string;
   export interface Tag {
     /**
      * The tag key. Tag keys must be unique for the domain to which they are attached.
@@ -3504,7 +3507,7 @@ declare namespace OpenSearch {
      */
     AccessPolicies?: PolicyDocument;
     /**
-     * The type of IP addresses supported by the endpoint for the domain.
+     * Specify either dual stack or IPv4 as your IP address type. Dual stack allows you to share domain resources across IPv4 and IPv6 address types, and is the recommended option. If your IP address type is currently set to dual stack, you can't change it. 
      */
     IPAddressType?: IPAddressType;
     /**

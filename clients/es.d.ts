@@ -1269,7 +1269,7 @@ declare namespace ES {
      */
     EnforceHTTPS?: Boolean;
     /**
-     * Specify the TLS security policy that needs to be applied to the HTTPS endpoint of Elasticsearch domain.  It can be one of the following values:  Policy-Min-TLS-1-0-2019-07:  TLS security policy which supports TLSv1.0 and higher. Policy-Min-TLS-1-2-2019-07:  TLS security policy which supports only TLSv1.2  
+     * Specify the TLS security policy that needs to be applied to the HTTPS endpoint of Elasticsearch domain.  It can be one of the following values:  Policy-Min-TLS-1-0-2019-07:  TLS security policy that supports TLS version 1.0 to TLS version 1.2 Policy-Min-TLS-1-2-2019-07:  TLS security policy that supports only TLS version 1.2 Policy-Min-TLS-1-2-PFS-2023-10:  TLS security policy that supports TLS version 1.2 to TLS version 1.3 with perfect forward secrecy cipher suites  
      */
     TLSSecurityPolicy?: TLSSecurityPolicy;
     /**
@@ -2491,7 +2491,7 @@ declare namespace ES {
   export type StorageTypeName = string;
   export type String = string;
   export type StringList = String[];
-  export type TLSSecurityPolicy = "Policy-Min-TLS-1-0-2019-07"|"Policy-Min-TLS-1-2-2019-07"|string;
+  export type TLSSecurityPolicy = "Policy-Min-TLS-1-0-2019-07"|"Policy-Min-TLS-1-2-2019-07"|"Policy-Min-TLS-1-2-PFS-2023-10"|string;
   export interface Tag {
     /**
      * Specifies the TagKey, the name of the tag. Tag keys must be unique for the Elasticsearch domain to which they are attached.

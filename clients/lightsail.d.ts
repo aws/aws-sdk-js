@@ -140,19 +140,19 @@ declare class Lightsail extends Service {
    */
   createContainerServiceRegistryLogin(callback?: (err: AWSError, data: Lightsail.Types.CreateContainerServiceRegistryLoginResult) => void): Request<Lightsail.Types.CreateContainerServiceRegistryLoginResult, AWSError>;
   /**
-   * Creates a block storage disk that can be attached to an Amazon Lightsail instance in the same Availability Zone (e.g., us-east-2a). The create disk operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
+   * Creates a block storage disk that can be attached to an Amazon Lightsail instance in the same Availability Zone (us-east-2a). The create disk operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
    */
   createDisk(params: Lightsail.Types.CreateDiskRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateDiskResult) => void): Request<Lightsail.Types.CreateDiskResult, AWSError>;
   /**
-   * Creates a block storage disk that can be attached to an Amazon Lightsail instance in the same Availability Zone (e.g., us-east-2a). The create disk operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
+   * Creates a block storage disk that can be attached to an Amazon Lightsail instance in the same Availability Zone (us-east-2a). The create disk operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
    */
   createDisk(callback?: (err: AWSError, data: Lightsail.Types.CreateDiskResult) => void): Request<Lightsail.Types.CreateDiskResult, AWSError>;
   /**
-   * Creates a block storage disk from a manual or automatic snapshot of a disk. The resulting disk can be attached to an Amazon Lightsail instance in the same Availability Zone (e.g., us-east-2a). The create disk from snapshot operation supports tag-based access control via request tags and resource tags applied to the resource identified by disk snapshot name. For more information, see the Amazon Lightsail Developer Guide.
+   * Creates a block storage disk from a manual or automatic snapshot of a disk. The resulting disk can be attached to an Amazon Lightsail instance in the same Availability Zone (us-east-2a). The create disk from snapshot operation supports tag-based access control via request tags and resource tags applied to the resource identified by disk snapshot name. For more information, see the Amazon Lightsail Developer Guide.
    */
   createDiskFromSnapshot(params: Lightsail.Types.CreateDiskFromSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateDiskFromSnapshotResult) => void): Request<Lightsail.Types.CreateDiskFromSnapshotResult, AWSError>;
   /**
-   * Creates a block storage disk from a manual or automatic snapshot of a disk. The resulting disk can be attached to an Amazon Lightsail instance in the same Availability Zone (e.g., us-east-2a). The create disk from snapshot operation supports tag-based access control via request tags and resource tags applied to the resource identified by disk snapshot name. For more information, see the Amazon Lightsail Developer Guide.
+   * Creates a block storage disk from a manual or automatic snapshot of a disk. The resulting disk can be attached to an Amazon Lightsail instance in the same Availability Zone (us-east-2a). The create disk from snapshot operation supports tag-based access control via request tags and resource tags applied to the resource identified by disk snapshot name. For more information, see the Amazon Lightsail Developer Guide.
    */
   createDiskFromSnapshot(callback?: (err: AWSError, data: Lightsail.Types.CreateDiskFromSnapshotResult) => void): Request<Lightsail.Types.CreateDiskFromSnapshotResult, AWSError>;
   /**
@@ -172,11 +172,11 @@ declare class Lightsail extends Service {
    */
   createDistribution(callback?: (err: AWSError, data: Lightsail.Types.CreateDistributionResult) => void): Request<Lightsail.Types.CreateDistributionResult, AWSError>;
   /**
-   * Creates a domain resource for the specified domain (e.g., example.com). The create domain operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
+   * Creates a domain resource for the specified domain (example.com). The create domain operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
    */
   createDomain(params: Lightsail.Types.CreateDomainRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateDomainResult) => void): Request<Lightsail.Types.CreateDomainResult, AWSError>;
   /**
-   * Creates a domain resource for the specified domain (e.g., example.com). The create domain operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
+   * Creates a domain resource for the specified domain (example.com). The create domain operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
    */
   createDomain(callback?: (err: AWSError, data: Lightsail.Types.CreateDomainResult) => void): Request<Lightsail.Types.CreateDomainResult, AWSError>;
   /**
@@ -884,11 +884,11 @@ declare class Lightsail extends Service {
    */
   getOperations(callback?: (err: AWSError, data: Lightsail.Types.GetOperationsResult) => void): Request<Lightsail.Types.GetOperationsResult, AWSError>;
   /**
-   * Gets operations for a specific resource (e.g., an instance or a static IP).
+   * Gets operations for a specific resource (an instance or a static IP).
    */
   getOperationsForResource(params: Lightsail.Types.GetOperationsForResourceRequest, callback?: (err: AWSError, data: Lightsail.Types.GetOperationsForResourceResult) => void): Request<Lightsail.Types.GetOperationsForResourceResult, AWSError>;
   /**
-   * Gets operations for a specific resource (e.g., an instance or a static IP).
+   * Gets operations for a specific resource (an instance or a static IP).
    */
   getOperationsForResource(callback?: (err: AWSError, data: Lightsail.Types.GetOperationsForResourceResult) => void): Request<Lightsail.Types.GetOperationsForResourceResult, AWSError>;
   /**
@@ -995,6 +995,14 @@ declare class Lightsail extends Service {
    * Returns information about all of your databases in Amazon Lightsail.
    */
   getRelationalDatabases(callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabasesResult) => void): Request<Lightsail.Types.GetRelationalDatabasesResult, AWSError>;
+  /**
+   * Returns detailed information for five of the most recent SetupInstanceHttps requests that were ran on the target instance.
+   */
+  getSetupHistory(params: Lightsail.Types.GetSetupHistoryRequest, callback?: (err: AWSError, data: Lightsail.Types.GetSetupHistoryResult) => void): Request<Lightsail.Types.GetSetupHistoryResult, AWSError>;
+  /**
+   * Returns detailed information for five of the most recent SetupInstanceHttps requests that were ran on the target instance.
+   */
+  getSetupHistory(callback?: (err: AWSError, data: Lightsail.Types.GetSetupHistoryResult) => void): Request<Lightsail.Types.GetSetupHistoryResult, AWSError>;
   /**
    * Returns information about an Amazon Lightsail static IP.
    */
@@ -1123,6 +1131,14 @@ declare class Lightsail extends Service {
    * Sets the Amazon Lightsail resources that can access the specified Lightsail bucket. Lightsail buckets currently support setting access for Lightsail instances in the same Amazon Web Services Region.
    */
   setResourceAccessForBucket(callback?: (err: AWSError, data: Lightsail.Types.SetResourceAccessForBucketResult) => void): Request<Lightsail.Types.SetResourceAccessForBucketResult, AWSError>;
+  /**
+   * Creates an SSL/TLS certificate that secures traffic for your website. After the certificate is created, it is installed on the specified Lightsail instance. If you provide more than one domain name in the request, at least one name must be less than or equal to 63 characters in length.
+   */
+  setupInstanceHttps(params: Lightsail.Types.SetupInstanceHttpsRequest, callback?: (err: AWSError, data: Lightsail.Types.SetupInstanceHttpsResult) => void): Request<Lightsail.Types.SetupInstanceHttpsResult, AWSError>;
+  /**
+   * Creates an SSL/TLS certificate that secures traffic for your website. After the certificate is created, it is installed on the specified Lightsail instance. If you provide more than one domain name in the request, at least one name must be less than or equal to 63 characters in length.
+   */
+  setupInstanceHttps(callback?: (err: AWSError, data: Lightsail.Types.SetupInstanceHttpsResult) => void): Request<Lightsail.Types.SetupInstanceHttpsResult, AWSError>;
   /**
    * Initiates a graphical user interface (GUI) session that’s used to access a virtual computer’s operating system and application. The session will be active for 1 hour. Use this action to resume the session after it expires. 
    */
@@ -1415,7 +1431,7 @@ declare namespace Lightsail {
      */
     location?: ResourceLocation;
     /**
-     * The Lightsail resource type (e.g., Alarm).
+     * The Lightsail resource type of the alarm.
      */
     resourceType?: ResourceType;
     /**
@@ -1513,7 +1529,7 @@ declare namespace Lightsail {
   }
   export interface AttachDiskRequest {
     /**
-     * The unique Lightsail disk name (e.g., my-disk).
+     * The unique Lightsail disk name (my-disk).
      */
     diskName: ResourceName;
     /**
@@ -1521,7 +1537,7 @@ declare namespace Lightsail {
      */
     instanceName: ResourceName;
     /**
-     * The disk path to expose to the instance (e.g., /dev/xvdf).
+     * The disk path to expose to the instance (/dev/xvdf).
      */
     diskPath: NonEmptyString;
     /**
@@ -1585,7 +1601,7 @@ declare namespace Lightsail {
   }
   export interface AttachedDisk {
     /**
-     * The path of the disk (e.g., /dev/xvdf).
+     * The path of the disk (/dev/xvdf).
      */
     path?: string;
     /**
@@ -1639,19 +1655,19 @@ declare namespace Lightsail {
   export type BehaviorEnum = "dont-cache"|"cache"|string;
   export interface Blueprint {
     /**
-     * The ID for the virtual private server image (e.g., app_wordpress_4_4 or app_lamp_7_0).
+     * The ID for the virtual private server image (app_wordpress_4_4 or app_lamp_7_0).
      */
     blueprintId?: NonEmptyString;
     /**
-     * The friendly name of the blueprint (e.g., Amazon Linux).
+     * The friendly name of the blueprint (Amazon Linux).
      */
     name?: ResourceName;
     /**
-     * The group name of the blueprint (e.g., amazon-linux).
+     * The group name of the blueprint (amazon-linux).
      */
     group?: NonEmptyString;
     /**
-     * The type of the blueprint (e.g., os or app).
+     * The type of the blueprint (os or app).
      */
     type?: BlueprintType;
     /**
@@ -1667,7 +1683,7 @@ declare namespace Lightsail {
      */
     minPower?: integer;
     /**
-     * The version number of the operating system, application, or stack (e.g., 2016.03.0).
+     * The version number of the operating system, application, or stack ( 2016.03.0).
      */
     version?: string;
     /**
@@ -1695,7 +1711,7 @@ declare namespace Lightsail {
   export type BlueprintType = "os"|"app"|string;
   export interface Bucket {
     /**
-     * The Lightsail resource type of the bucket (for example, Bucket).
+     * The Lightsail resource type of the bucket.
      */
     resourceType?: NonEmptyString;
     /**
@@ -1816,23 +1832,23 @@ declare namespace Lightsail {
   }
   export interface Bundle {
     /**
-     * The price in US dollars (e.g., 5.0) of the bundle.
+     * The price in US dollars (5.0) of the bundle.
      */
     price?: float;
     /**
-     * The number of vCPUs included in the bundle (e.g., 2).
+     * The number of vCPUs included in the bundle (2).
      */
     cpuCount?: integer;
     /**
-     * The size of the SSD (e.g., 30).
+     * The size of the SSD (30).
      */
     diskSizeInGb?: integer;
     /**
-     * The bundle ID (e.g., micro_1_0).
+     * The bundle ID (micro_1_0).
      */
     bundleId?: NonEmptyString;
     /**
-     * The Amazon EC2 instance type (e.g., t2.micro).
+     * The Amazon EC2 instance type (t2.micro).
      */
     instanceType?: string;
     /**
@@ -1840,19 +1856,19 @@ declare namespace Lightsail {
      */
     isActive?: boolean;
     /**
-     * A friendly name for the bundle (e.g., Micro).
+     * A friendly name for the bundle (Micro).
      */
     name?: string;
     /**
-     * A numeric value that represents the power of the bundle (e.g., 500). You can use the bundle's power value in conjunction with a blueprint's minimum power value to determine whether the blueprint will run on the bundle. For example, you need a bundle with a power value of 500 or more to create an instance that uses a blueprint with a minimum power value of 500.
+     * A numeric value that represents the power of the bundle (500). You can use the bundle's power value in conjunction with a blueprint's minimum power value to determine whether the blueprint will run on the bundle. For example, you need a bundle with a power value of 500 or more to create an instance that uses a blueprint with a minimum power value of 500.
      */
     power?: integer;
     /**
-     * The amount of RAM in GB (e.g., 2.0).
+     * The amount of RAM in GB (2.0).
      */
     ramSizeInGb?: float;
     /**
-     * The data transfer rate per month in GB (e.g., 2000).
+     * The data transfer rate per month in GB (2000).
      */
     transferPerMonthInGb?: integer;
     /**
@@ -1922,7 +1938,7 @@ declare namespace Lightsail {
      */
     arn?: NonEmptyString;
     /**
-     * The name of the certificate (e.g., my-certificate).
+     * The name of the certificate (my-certificate).
      */
     name?: CertificateName;
     /**
@@ -1938,7 +1954,7 @@ declare namespace Lightsail {
      */
     serialNumber?: SerialNumber;
     /**
-     * An array of strings that specify the alternate domains (e.g., example2.com) and subdomains (e.g., blog.example.com) of the certificate.
+     * An array of strings that specify the alternate domains (example2.com) and subdomains (blog.example.com) of the certificate.
      */
     subjectAlternativeNames?: SubjectAlternativeNameList;
     /**
@@ -2004,6 +2020,7 @@ declare namespace Lightsail {
   }
   export type CertificateDomainValidationStatus = "PENDING_VALIDATION"|"FAILED"|"SUCCESS"|string;
   export type CertificateName = string;
+  export type CertificateProvider = "LetsEncrypt"|string;
   export type CertificateStatus = "PENDING_VALIDATION"|"ISSUED"|"INACTIVE"|"EXPIRED"|"VALIDATION_TIMED_OUT"|"REVOKED"|"FAILED"|string;
   export type CertificateStatusList = CertificateStatus[];
   export interface CertificateSummary {
@@ -2063,7 +2080,7 @@ declare namespace Lightsail {
      */
     location?: ResourceLocation;
     /**
-     * The Lightsail resource type (e.g., CloudFormationStackRecord).
+     * The Lightsail resource type (CloudFormationStackRecord).
      */
     resourceType?: ResourceType;
     /**
@@ -2082,7 +2099,7 @@ declare namespace Lightsail {
   export type CloudFormationStackRecordList = CloudFormationStackRecord[];
   export interface CloudFormationStackRecordSourceInfo {
     /**
-     * The Lightsail resource type (e.g., ExportSnapshotRecord).
+     * The Lightsail resource type (ExportSnapshotRecord).
      */
     resourceType?: CloudFormationStackRecordSourceType;
     /**
@@ -2127,7 +2144,7 @@ declare namespace Lightsail {
      */
     location?: ResourceLocation;
     /**
-     * The Lightsail resource type (e.g., ContactMethod).
+     * The Lightsail resource type of the contact method.
      */
     resourceType?: ResourceType;
     /**
@@ -2194,7 +2211,7 @@ declare namespace Lightsail {
      */
     location?: ResourceLocation;
     /**
-     * The Lightsail resource type of the container service (i.e., ContainerService).
+     * The Lightsail resource type of the container service.
      */
     resourceType?: ResourceType;
     /**
@@ -2260,7 +2277,7 @@ declare namespace Lightsail {
      */
     version?: integer;
     /**
-     * The state of the deployment. A deployment can be in one of the following states:    Activating - The deployment is being created.    Active - The deployment was successfully created, and it's currently running on the container service. The container service can have only one deployment in an active state at a time.    Inactive - The deployment was previously successfully created, but it is not currently running on the container service.    Failed - The deployment failed. Use the GetContainerLog action to view the log events for the containers in the deployment to try to determine the reason for the failure.  
+     * The state of the deployment. A deployment can be in one of the following states:    ACTIVATING - The deployment is being created.    ACTIVE - The deployment was successfully created, and it's currently running on the container service. The container service can have only one deployment in an active state at a time.    INACTIVE - The deployment was previously successfully created, but it is not currently running on the container service.    FAILED - The deployment failed. Use the GetContainerLog action to view the log events for the containers in the deployment to try to determine the reason for the failure.  
      */
     state?: ContainerServiceDeploymentState;
     /**
@@ -2362,7 +2379,7 @@ declare namespace Lightsail {
   export type ContainerServiceName = string;
   export interface ContainerServicePower {
     /**
-     * The ID of the power (e.g., nano-1).
+     * The ID of the power (nano-1).
      */
     powerId?: string;
     /**
@@ -2378,7 +2395,7 @@ declare namespace Lightsail {
      */
     ramSizeInGb?: float;
     /**
-     * The friendly name of the power (e.g., nano).
+     * The friendly name of the power (nano).
      */
     name?: string;
     /**
@@ -2531,11 +2548,11 @@ declare namespace Lightsail {
      */
     certificateName: CertificateName;
     /**
-     * The domain name (e.g., example.com) for the certificate.
+     * The domain name (example.com) for the certificate.
      */
     domainName: DomainName;
     /**
-     * An array of strings that specify the alternate domains (e.g., example2.com) and subdomains (e.g., blog.example.com) for the certificate. You can specify a maximum of nine alternate domains (in addition to the primary domain name). Wildcard domain entries (e.g., *.example.com) are not supported.
+     * An array of strings that specify the alternate domains (example2.com) and subdomains (blog.example.com) for the certificate. You can specify a maximum of nine alternate domains (in addition to the primary domain name). Wildcard domain entries (*.example.com) are not supported.
      */
     subjectAlternativeNames?: SubjectAlternativeNameList;
     /**
@@ -2647,19 +2664,19 @@ declare namespace Lightsail {
   }
   export interface CreateDiskFromSnapshotRequest {
     /**
-     * The unique Lightsail disk name (e.g., my-disk).
+     * The unique Lightsail disk name (my-disk).
      */
     diskName: ResourceName;
     /**
-     * The name of the disk snapshot (e.g., my-snapshot) from which to create the new storage disk. Constraint:   This parameter cannot be defined together with the source disk name parameter. The disk snapshot name and source disk name parameters are mutually exclusive.  
+     * The name of the disk snapshot (my-snapshot) from which to create the new storage disk. Constraint:   This parameter cannot be defined together with the source disk name parameter. The disk snapshot name and source disk name parameters are mutually exclusive.  
      */
     diskSnapshotName?: ResourceName;
     /**
-     * The Availability Zone where you want to create the disk (e.g., us-east-2a). Choose the same Availability Zone as the Lightsail instance where you want to create the disk. Use the GetRegions operation to list the Availability Zones where Lightsail is currently available.
+     * The Availability Zone where you want to create the disk (us-east-2a). Choose the same Availability Zone as the Lightsail instance where you want to create the disk. Use the GetRegions operation to list the Availability Zones where Lightsail is currently available.
      */
     availabilityZone: NonEmptyString;
     /**
-     * The size of the disk in GB (e.g., 32).
+     * The size of the disk in GB (32).
      */
     sizeInGb: integer;
     /**
@@ -2691,15 +2708,15 @@ declare namespace Lightsail {
   }
   export interface CreateDiskRequest {
     /**
-     * The unique Lightsail disk name (e.g., my-disk).
+     * The unique Lightsail disk name (my-disk).
      */
     diskName: ResourceName;
     /**
-     * The Availability Zone where you want to create the disk (e.g., us-east-2a). Use the same Availability Zone as the Lightsail instance to which you want to attach the disk. Use the get regions operation to list the Availability Zones where Lightsail is currently available.
+     * The Availability Zone where you want to create the disk (us-east-2a). Use the same Availability Zone as the Lightsail instance to which you want to attach the disk. Use the get regions operation to list the Availability Zones where Lightsail is currently available.
      */
     availabilityZone: NonEmptyString;
     /**
-     * The size of the disk in GB (e.g., 32).
+     * The size of the disk in GB (32).
      */
     sizeInGb: integer;
     /**
@@ -2719,15 +2736,15 @@ declare namespace Lightsail {
   }
   export interface CreateDiskSnapshotRequest {
     /**
-     * The unique name of the source disk (e.g., Disk-Virginia-1).  This parameter cannot be defined together with the instance name parameter. The disk name and instance name parameters are mutually exclusive. 
+     * The unique name of the source disk (Disk-Virginia-1).  This parameter cannot be defined together with the instance name parameter. The disk name and instance name parameters are mutually exclusive. 
      */
     diskName?: ResourceName;
     /**
-     * The name of the destination disk snapshot (e.g., my-disk-snapshot) based on the source disk.
+     * The name of the destination disk snapshot (my-disk-snapshot) based on the source disk.
      */
     diskSnapshotName: ResourceName;
     /**
-     * The unique name of the source instance (e.g., Amazon_Linux-512MB-Virginia-1). When this is defined, a snapshot of the instance's system volume is created.  This parameter cannot be defined together with the disk name parameter. The instance name and disk name parameters are mutually exclusive. 
+     * The unique name of the source instance (Amazon_Linux-512MB-Virginia-1). When this is defined, a snapshot of the instance's system volume is created.  This parameter cannot be defined together with the disk name parameter. The instance name and disk name parameters are mutually exclusive. 
      */
     instanceName?: ResourceName;
     /**
@@ -2787,7 +2804,7 @@ declare namespace Lightsail {
   }
   export interface CreateDomainEntryRequest {
     /**
-     * The domain name (e.g., example.com) for which you want to create the domain entry.
+     * The domain name (example.com) for which you want to create the domain entry.
      */
     domainName: DomainName;
     /**
@@ -2803,7 +2820,7 @@ declare namespace Lightsail {
   }
   export interface CreateDomainRequest {
     /**
-     * The domain name to manage (e.g., example.com).
+     * The domain name to manage (example.com).
      */
     domainName: DomainName;
     /**
@@ -2883,7 +2900,7 @@ declare namespace Lightsail {
      */
     instanceSnapshotName?: ResourceName;
     /**
-     * The bundle of specification information for your virtual private server (or instance), including the pricing plan (e.g., micro_1_0).
+     * The bundle of specification information for your virtual private server (or instance), including the pricing plan (micro_1_0).
      */
     bundleId: NonEmptyString;
     /**
@@ -2935,15 +2952,15 @@ declare namespace Lightsail {
      */
     availabilityZone: string;
     /**
-     * (Deprecated) The name for your custom image.  In releases prior to June 12, 2017, this parameter was ignored by the API. It is now deprecated. 
+     * (Discontinued) The name for your custom image.  In releases prior to June 12, 2017, this parameter was ignored by the API. It is now discontinued. 
      */
     customImageName?: ResourceName;
     /**
-     * The ID for a virtual private server image (e.g., app_wordpress_4_4 or app_lamp_7_0). Use the get blueprints operation to return a list of available images (or blueprints).  Use active blueprints when creating new instances. Inactive blueprints are listed to support customers with existing instances and are not necessarily available to create new instances. Blueprints are marked inactive when they become outdated due to operating system updates or new application releases. 
+     * The ID for a virtual private server image (app_wordpress_4_4 or app_lamp_7_0). Use the get blueprints operation to return a list of available images (or blueprints).  Use active blueprints when creating new instances. Inactive blueprints are listed to support customers with existing instances and are not necessarily available to create new instances. Blueprints are marked inactive when they become outdated due to operating system updates or new application releases. 
      */
     blueprintId: NonEmptyString;
     /**
-     * The bundle of specification information for your virtual private server (or instance), including the pricing plan (e.g., micro_1_0).
+     * The bundle of specification information for your virtual private server (or instance), including the pricing plan (micro_1_0).
      */
     bundleId: NonEmptyString;
     /**
@@ -3011,7 +3028,7 @@ declare namespace Lightsail {
      */
     instancePort: Port;
     /**
-     * The path you provided to perform the load balancer health check. If you didn't specify a health check path, Lightsail uses the root path of your website (e.g., "/"). You may want to specify a custom health check path other than the root of your application if your home page loads slowly or has a lot of media or scripting on it.
+     * The path you provided to perform the load balancer health check. If you didn't specify a health check path, Lightsail uses the root path of your website ("/"). You may want to specify a custom health check path other than the root of your application if your home page loads slowly or has a lot of media or scripting on it.
      */
     healthCheckPath?: string;
     /**
@@ -3019,11 +3036,11 @@ declare namespace Lightsail {
      */
     certificateName?: ResourceName;
     /**
-     * The domain name with which your certificate is associated (e.g., example.com). If you specify certificateDomainName, then certificateName is required (and vice-versa).
+     * The domain name with which your certificate is associated (example.com). If you specify certificateDomainName, then certificateName is required (and vice-versa).
      */
     certificateDomainName?: DomainName;
     /**
-     * The optional alternative domains and subdomains to use with your SSL/TLS certificate (e.g., www.example.com, example.com, m.example.com, blog.example.com).
+     * The optional alternative domains and subdomains to use with your SSL/TLS certificate (www.example.com, example.com, m.example.com, blog.example.com).
      */
     certificateAlternativeNames?: DomainNameList;
     /**
@@ -3055,11 +3072,11 @@ declare namespace Lightsail {
      */
     certificateName: ResourceName;
     /**
-     * The domain name (e.g., example.com) for your SSL/TLS certificate.
+     * The domain name (example.com) for your SSL/TLS certificate.
      */
     certificateDomainName: DomainName;
     /**
-     * An array of strings listing alternative domains and subdomains for your SSL/TLS certificate. Lightsail will de-dupe the names for you. You can have a maximum of 9 alternative names (in addition to the 1 primary domain). We do not support wildcards (e.g., *.example.com).
+     * An array of strings listing alternative domains and subdomains for your SSL/TLS certificate. Lightsail will de-dupe the names for you. You can have a maximum of 9 alternative names (in addition to the 1 primary domain). We do not support wildcards (*.example.com).
      */
     certificateAlternativeNames?: DomainNameList;
     /**
@@ -3296,7 +3313,7 @@ declare namespace Lightsail {
   }
   export interface DeleteDiskRequest {
     /**
-     * The unique name of the disk you want to delete (e.g., my-disk).
+     * The unique name of the disk you want to delete (my-disk).
      */
     diskName: ResourceName;
     /**
@@ -3312,7 +3329,7 @@ declare namespace Lightsail {
   }
   export interface DeleteDiskSnapshotRequest {
     /**
-     * The name of the disk snapshot you want to delete (e.g., my-disk-snapshot).
+     * The name of the disk snapshot you want to delete (my-disk-snapshot).
      */
     diskSnapshotName: ResourceName;
   }
@@ -3506,7 +3523,7 @@ declare namespace Lightsail {
   }
   export interface DetachDiskRequest {
     /**
-     * The unique name of the disk you want to detach from your instance (e.g., my-disk).
+     * The unique name of the disk you want to detach from your instance (my-disk).
      */
     diskName: ResourceName;
   }
@@ -3582,7 +3599,7 @@ declare namespace Lightsail {
      */
     location?: ResourceLocation;
     /**
-     * The Lightsail resource type (e.g., Disk).
+     * The Lightsail resource type (Disk).
      */
     resourceType?: ResourceType;
     /**
@@ -3622,11 +3639,11 @@ declare namespace Lightsail {
      */
     isAttached?: boolean;
     /**
-     * (Deprecated) The attachment state of the disk.  In releases prior to November 14, 2017, this parameter returned attached for system disks in the API response. It is now deprecated, but still included in the response. Use isAttached instead. 
+     * (Discontinued) The attachment state of the disk.  In releases prior to November 14, 2017, this parameter returned attached for system disks in the API response. It is now discontinued, but still included in the response. Use isAttached instead. 
      */
     attachmentState?: string;
     /**
-     * (Deprecated) The number of GB in use by the disk.  In releases prior to November 14, 2017, this parameter was not included in the API response. It is now deprecated. 
+     * (Discontinued) The number of GB in use by the disk.  In releases prior to November 14, 2017, this parameter was not included in the API response. It is now discontinued. 
      */
     gbInUse?: integer;
     /**
@@ -3644,7 +3661,7 @@ declare namespace Lightsail {
      */
     path?: NonEmptyString;
     /**
-     * The size of the disk in GB (e.g., 32).
+     * The size of the disk in GB (32).
      */
     sizeInGb?: integer;
     /**
@@ -3660,14 +3677,14 @@ declare namespace Lightsail {
      */
     originalDiskPath?: NonEmptyString;
     /**
-     * The new disk name (e.g., my-new-disk).
+     * The new disk name (my-new-disk).
      */
     newDiskName?: ResourceName;
   }
   export type DiskMapList = DiskMap[];
   export interface DiskSnapshot {
     /**
-     * The name of the disk snapshot (e.g., my-disk-snapshot).
+     * The name of the disk snapshot (my-disk-snapshot).
      */
     name?: ResourceName;
     /**
@@ -3687,7 +3704,7 @@ declare namespace Lightsail {
      */
     location?: ResourceLocation;
     /**
-     * The Lightsail resource type (e.g., DiskSnapshot).
+     * The Lightsail resource type (DiskSnapshot).
      */
     resourceType?: ResourceType;
     /**
@@ -3729,7 +3746,7 @@ declare namespace Lightsail {
   }
   export interface DiskSnapshotInfo {
     /**
-     * The size of the disk in GB (e.g., 32).
+     * The size of the disk in GB (32).
      */
     sizeInGb?: integer;
   }
@@ -3778,7 +3795,7 @@ declare namespace Lightsail {
      */
     name?: ResourceName;
     /**
-     * The Amazon Resource Name (ARN) of the domain recordset (e.g., arn:aws:lightsail:global:123456789101:Domain/824cede0-abc7-4f84-8dbc-12345EXAMPLE).
+     * The Amazon Resource Name (ARN) of the domain recordset (arn:aws:lightsail:global:123456789101:Domain/824cede0-abc7-4f84-8dbc-12345EXAMPLE).
      */
     arn?: NonEmptyString;
     /**
@@ -3820,7 +3837,7 @@ declare namespace Lightsail {
      */
     name?: DomainName;
     /**
-     * The target IP address (e.g., 192.0.2.0), or AWS name server (e.g., ns-111.awsdns-22.com.). For Lightsail load balancers, the value looks like ab1234c56789c6b86aba6fb203d443bc-123456789.us-east-2.elb.amazonaws.com. For Lightsail distributions, the value looks like exampled1182ne.cloudfront.net. For Lightsail container services, the value looks like container-service-1.example23scljs.us-west-2.cs.amazonlightsail.com. Be sure to also set isAlias to true when setting up an A record for a Lightsail load balancer, distribution, or container service.
+     * The target IP address (192.0.2.0), or AWS name server (ns-111.awsdns-22.com.). For Lightsail load balancers, the value looks like ab1234c56789c6b86aba6fb203d443bc-123456789.us-east-2.elb.amazonaws.com. For Lightsail distributions, the value looks like exampled1182ne.cloudfront.net. For Lightsail container services, the value looks like container-service-1.example23scljs.us-west-2.cs.amazonlightsail.com. Be sure to also set isAlias to true when setting up an A record for a Lightsail load balancer, distribution, or container service.
      */
     target?: string;
     /**
@@ -3832,7 +3849,7 @@ declare namespace Lightsail {
      */
     type?: DomainEntryType;
     /**
-     * (Deprecated) The options for the domain entry.  In releases prior to November 29, 2017, this parameter was not included in the API response. It is now deprecated. 
+     * (Discontinued) The options for the domain entry.  In releases prior to November 29, 2017, this parameter was not included in the API response. It is now discontinued. 
      */
     options?: DomainEntryOptions;
   }
@@ -3879,6 +3896,7 @@ declare namespace Lightsail {
     createdAt?: IsoDate;
   }
   export type EligibleToRenew = string;
+  export type EmailAddress = string;
   export interface EnableAddOnRequest {
     /**
      * The name of the source resource for which to enable or modify the add-on.
@@ -3951,7 +3969,7 @@ declare namespace Lightsail {
      */
     location?: ResourceLocation;
     /**
-     * The Lightsail resource type (e.g., ExportSnapshotRecord).
+     * The Lightsail resource type (ExportSnapshotRecord).
      */
     resourceType?: ResourceType;
     /**
@@ -3970,7 +3988,7 @@ declare namespace Lightsail {
   export type ExportSnapshotRecordList = ExportSnapshotRecord[];
   export interface ExportSnapshotRecordSourceInfo {
     /**
-     * The Lightsail resource type (e.g., InstanceSnapshot or DiskSnapshot).
+     * The Lightsail resource type (InstanceSnapshot or DiskSnapshot).
      */
     resourceType?: ExportSnapshotRecordSourceType;
     /**
@@ -4068,7 +4086,7 @@ declare namespace Lightsail {
      */
     resourceName?: ResourceName;
     /**
-     * The resource type (e.g., Instance or Disk).
+     * The resource type of the automatic snapshot. The possible values are Instance, and Disk.
      */
     resourceType?: ResourceType;
     /**
@@ -4412,7 +4430,7 @@ declare namespace Lightsail {
   }
   export interface GetDiskRequest {
     /**
-     * The name of the disk (e.g., my-disk).
+     * The name of the disk (my-disk).
      */
     diskName: ResourceName;
   }
@@ -4424,7 +4442,7 @@ declare namespace Lightsail {
   }
   export interface GetDiskSnapshotRequest {
     /**
-     * The name of the disk snapshot (e.g., my-disk-snapshot).
+     * The name of the disk snapshot (my-disk-snapshot).
      */
     diskSnapshotName: ResourceName;
   }
@@ -4486,7 +4504,7 @@ declare namespace Lightsail {
      */
     status?: string;
     /**
-     * The timestamp of the last cache reset (e.g., 1479734909.17) in Unix time format.
+     * The timestamp of the last cache reset (1479734909.17) in Unix time format.
      */
     createTime?: IsoDate;
   }
@@ -4886,7 +4904,7 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
     /**
-     * (Deprecated) Returns the number of pages of results that remain.  In releases prior to June 12, 2017, this parameter returned null by the API. It is now deprecated, and the API returns the next page token parameter instead. 
+     * (Discontinued) Returns the number of pages of results that remain.  In releases prior to June 12, 2017, this parameter returned null by the API. It is now discontinued, and the API returns the next page token parameter instead. 
      */
     nextPageCount?: string;
     /**
@@ -4912,11 +4930,11 @@ declare namespace Lightsail {
   }
   export interface GetRegionsRequest {
     /**
-     * A Boolean value indicating whether to also include Availability Zones in your get regions request. Availability Zones are indicated with a letter: e.g., us-east-2a.
+     * A Boolean value indicating whether to also include Availability Zones in your get regions request. Availability Zones are indicated with a letter: us-east-2a.
      */
     includeAvailabilityZones?: boolean;
     /**
-     * A Boolean value indicating whether to also include Availability Zones for databases in your get regions request. Availability Zones are indicated with a letter (e.g., us-east-2a).
+     * A Boolean value indicating whether to also include Availability Zones for databases in your get regions request. Availability Zones are indicated with a letter (us-east-2a).
      */
     includeRelationalDatabaseAvailabilityZones?: boolean;
   }
@@ -5174,6 +5192,26 @@ declare namespace Lightsail {
      */
     nextPageToken?: string;
   }
+  export interface GetSetupHistoryRequest {
+    /**
+     * The name of the resource for which you are requesting information.
+     */
+    resourceName: ResourceName;
+    /**
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetSetupHistory request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
+     */
+    pageToken?: SetupHistoryPageToken;
+  }
+  export interface GetSetupHistoryResult {
+    /**
+     * The historical information that's returned.
+     */
+    setupHistory?: setupHistoryList;
+    /**
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetSetupHistory request and specify the next page token using the pageToken parameter.
+     */
+    nextPageToken?: SetupHistoryPageToken;
+  }
   export interface GetStaticIpRequest {
     /**
      * The name of the static IP in Lightsail.
@@ -5283,11 +5321,11 @@ declare namespace Lightsail {
   }
   export interface Instance {
     /**
-     * The name the user gave the instance (e.g., Amazon_Linux-1GB-Ohio-1).
+     * The name the user gave the instance (Amazon_Linux-1GB-Ohio-1).
      */
     name?: ResourceName;
     /**
-     * The Amazon Resource Name (ARN) of the instance (e.g., arn:aws:lightsail:us-east-2:123456789101:Instance/244ad76f-8aad-4741-809f-12345EXAMPLE).
+     * The Amazon Resource Name (ARN) of the instance (arn:aws:lightsail:us-east-2:123456789101:Instance/244ad76f-8aad-4741-809f-12345EXAMPLE).
      */
     arn?: NonEmptyString;
     /**
@@ -5295,7 +5333,7 @@ declare namespace Lightsail {
      */
     supportCode?: string;
     /**
-     * The timestamp when the instance was created (e.g., 1479734909.17) in Unix time format.
+     * The timestamp when the instance was created (1479734909.17) in Unix time format.
      */
     createdAt?: IsoDate;
     /**
@@ -5311,15 +5349,15 @@ declare namespace Lightsail {
      */
     tags?: TagList;
     /**
-     * The blueprint ID (e.g., os_amlinux_2016_03).
+     * The blueprint ID (os_amlinux_2016_03).
      */
     blueprintId?: NonEmptyString;
     /**
-     * The friendly name of the blueprint (e.g., Amazon Linux).
+     * The friendly name of the blueprint (Amazon Linux).
      */
     blueprintName?: NonEmptyString;
     /**
-     * The bundle for the instance (e.g., micro_1_0).
+     * The bundle for the instance (micro_1_0).
      */
     bundleId?: NonEmptyString;
     /**
@@ -5355,15 +5393,15 @@ declare namespace Lightsail {
      */
     networking?: InstanceNetworking;
     /**
-     * The status code and the state (e.g., running) for the instance.
+     * The status code and the state (running) for the instance.
      */
     state?: InstanceState;
     /**
-     * The user name for connecting to the instance (e.g., ec2-user).
+     * The user name for connecting to the instance (ec2-user).
      */
     username?: NonEmptyString;
     /**
-     * The name of the SSH key being used to connect to the instance (e.g., LightsailDefaultKeyPair).
+     * The name of the SSH key being used to connect to the instance (LightsailDefaultKeyPair).
      */
     sshKeyName?: ResourceName;
     /**
@@ -5373,7 +5411,7 @@ declare namespace Lightsail {
   }
   export interface InstanceAccessDetails {
     /**
-     * For SSH access, the public key to use when accessing your instance For OpenSSH clients (e.g., command line SSH), you should save this value to tempkey-cert.pub.
+     * For SSH access, the public key to use when accessing your instance For OpenSSH clients (command line SSH), you should save this value to tempkey-cert.pub.
      */
     certKey?: string;
     /**
@@ -5393,7 +5431,7 @@ declare namespace Lightsail {
      */
     passwordData?: PasswordData;
     /**
-     * For SSH access, the temporary private key. For OpenSSH clients (e.g., command line SSH), you should save this value to tempkey).
+     * For SSH access, the temporary private key. For OpenSSH clients (command line SSH), you should save this value to tempkey).
      */
     privateKey?: string;
     /**
@@ -5420,7 +5458,7 @@ declare namespace Lightsail {
      */
     sourceName: ResourceName;
     /**
-     * The instance type (e.g., t2.micro) to use for the new Amazon EC2 instance.
+     * The instance type (t2.micro) to use for the new Amazon EC2 instance.
      */
     instanceType: NonEmptyString;
     /**
@@ -5447,7 +5485,7 @@ declare namespace Lightsail {
      */
     disks?: DiskList;
     /**
-     * The amount of RAM in GB on the instance (e.g., 1.0).
+     * The amount of RAM in GB on the instance (1.0).
      */
     ramSizeInGb?: float;
   }
@@ -5585,7 +5623,7 @@ declare namespace Lightsail {
      */
     name?: ResourceName;
     /**
-     * The Amazon Resource Name (ARN) of the snapshot (e.g., arn:aws:lightsail:us-east-2:123456789101:InstanceSnapshot/d23b5706-3322-4d83-81e5-12345EXAMPLE).
+     * The Amazon Resource Name (ARN) of the snapshot (arn:aws:lightsail:us-east-2:123456789101:InstanceSnapshot/d23b5706-3322-4d83-81e5-12345EXAMPLE).
      */
     arn?: NonEmptyString;
     /**
@@ -5593,7 +5631,7 @@ declare namespace Lightsail {
      */
     supportCode?: string;
     /**
-     * The timestamp when the snapshot was created (e.g., 1479907467.024).
+     * The timestamp when the snapshot was created (1479907467.024).
      */
     createdAt?: IsoDate;
     /**
@@ -5625,15 +5663,15 @@ declare namespace Lightsail {
      */
     fromInstanceName?: ResourceName;
     /**
-     * The Amazon Resource Name (ARN) of the instance from which the snapshot was created (e.g., arn:aws:lightsail:us-east-2:123456789101:Instance/64b8404c-ccb1-430b-8daf-12345EXAMPLE).
+     * The Amazon Resource Name (ARN) of the instance from which the snapshot was created (arn:aws:lightsail:us-east-2:123456789101:Instance/64b8404c-ccb1-430b-8daf-12345EXAMPLE).
      */
     fromInstanceArn?: NonEmptyString;
     /**
-     * The blueprint ID from which you created the snapshot (e.g., os_debian_8_3). A blueprint is a virtual private server (or instance) image used to create instances quickly.
+     * The blueprint ID from which you created the snapshot (os_debian_8_3). A blueprint is a virtual private server (or instance) image used to create instances quickly.
      */
     fromBlueprintId?: string;
     /**
-     * The bundle ID from which you created the snapshot (e.g., micro_1_0).
+     * The bundle ID from which you created the snapshot (micro_1_0).
      */
     fromBundleId?: string;
     /**
@@ -5647,11 +5685,11 @@ declare namespace Lightsail {
   }
   export interface InstanceSnapshotInfo {
     /**
-     * The bundle ID from which the source instance was created (e.g., micro_1_0).
+     * The bundle ID from which the source instance was created (micro_1_0).
      */
     fromBundleId?: NonEmptyString;
     /**
-     * The blueprint ID from which the source instance (e.g., os_debian_8_3).
+     * The blueprint ID from which the source instance (os_debian_8_3).
      */
     fromBlueprintId?: NonEmptyString;
     /**
@@ -5667,7 +5705,7 @@ declare namespace Lightsail {
      */
     code?: integer;
     /**
-     * The state of the instance (e.g., running or pending).
+     * The state of the instance (running or pending).
      */
     name?: string;
   }
@@ -5692,7 +5730,7 @@ declare namespace Lightsail {
      */
     name?: ResourceName;
     /**
-     * The Amazon Resource Name (ARN) of the key pair (e.g., arn:aws:lightsail:us-east-2:123456789101:KeyPair/05859e3d-331d-48ba-9034-12345EXAMPLE).
+     * The Amazon Resource Name (ARN) of the key pair (arn:aws:lightsail:us-east-2:123456789101:KeyPair/05859e3d-331d-48ba-9034-12345EXAMPLE).
      */
     arn?: NonEmptyString;
     /**
@@ -5700,7 +5738,7 @@ declare namespace Lightsail {
      */
     supportCode?: string;
     /**
-     * The timestamp when the key pair was created (e.g., 1479816991.349).
+     * The timestamp when the key pair was created (1479816991.349).
      */
     createdAt?: IsoDate;
     /**
@@ -5743,7 +5781,7 @@ declare namespace Lightsail {
      */
     location?: ResourceLocation;
     /**
-     * The Lightsail resource type (e.g., Distribution).
+     * The Lightsail resource type (Distribution).
      */
     resourceType?: ResourceType;
     /**
@@ -5805,7 +5843,7 @@ declare namespace Lightsail {
   }
   export interface LoadBalancer {
     /**
-     * The name of the load balancer (e.g., my-load-balancer).
+     * The name of the load balancer (my-load-balancer).
      */
     name?: ResourceName;
     /**
@@ -5821,11 +5859,11 @@ declare namespace Lightsail {
      */
     createdAt?: IsoDate;
     /**
-     * The AWS Region where your load balancer was created (e.g., us-east-2a). Lightsail automatically creates your load balancer across Availability Zones.
+     * The AWS Region where your load balancer was created (us-east-2a). Lightsail automatically creates your load balancer across Availability Zones.
      */
     location?: ResourceLocation;
     /**
-     * The resource type (e.g., LoadBalancer.
+     * The resource type (LoadBalancer.
      */
     resourceType?: ResourceType;
     /**
@@ -5889,7 +5927,7 @@ declare namespace Lightsail {
   export type LoadBalancerState = "active"|"provisioning"|"active_impaired"|"failed"|"unknown"|string;
   export interface LoadBalancerTlsCertificate {
     /**
-     * The name of the SSL/TLS certificate (e.g., my-certificate).
+     * The name of the SSL/TLS certificate (my-certificate).
      */
     name?: ResourceName;
     /**
@@ -5909,7 +5947,7 @@ declare namespace Lightsail {
      */
     location?: ResourceLocation;
     /**
-     * The resource type (e.g., LoadBalancerTlsCertificate).     Instance  - A Lightsail instance (a virtual private server)     StaticIp  - A static IP address     KeyPair  - The key pair used to connect to a Lightsail instance     InstanceSnapshot  - A Lightsail instance snapshot     Domain  - A DNS zone     PeeredVpc  - A peered VPC     LoadBalancer  - A Lightsail load balancer     LoadBalancerTlsCertificate  - An SSL/TLS certificate associated with a Lightsail load balancer     Disk  - A Lightsail block storage disk     DiskSnapshot  - A block storage disk snapshot  
+     * The resource type (LoadBalancerTlsCertificate).     Instance  - A Lightsail instance (a virtual private server)     StaticIp  - A static IP address     KeyPair  - The key pair used to connect to a Lightsail instance     InstanceSnapshot  - A Lightsail instance snapshot     Domain  - A DNS zone     PeeredVpc  - A peered VPC     LoadBalancer  - A Lightsail load balancer     LoadBalancerTlsCertificate  - An SSL/TLS certificate associated with a Lightsail load balancer     Disk  - A Lightsail block storage disk     DiskSnapshot  - A block storage disk snapshot  
      */
     resourceType?: ResourceType;
     /**
@@ -5985,7 +6023,7 @@ declare namespace Lightsail {
      */
     subject?: NonEmptyString;
     /**
-     * An array of strings that specify the alternate domains (e.g., example2.com) and subdomains (e.g., blog.example.com) for the certificate.
+     * An array of strings that specify the alternate domains (example2.com) and subdomains (blog.example.com) for the certificate.
      */
     subjectAlternativeNames?: StringList;
   }
@@ -6121,7 +6159,7 @@ declare namespace Lightsail {
      */
     sum?: double;
     /**
-     * The timestamp (e.g., 1479816991.349).
+     * The timestamp (1479816991.349).
      */
     timestamp?: timestamp;
     /**
@@ -6199,7 +6237,7 @@ declare namespace Lightsail {
      */
     resourceType?: ResourceType;
     /**
-     * The timestamp when the operation was initialized (e.g., 1479816991.349).
+     * The timestamp when the operation was initialized (1479816991.349).
      */
     createdAt?: IsoDate;
     /**
@@ -6211,7 +6249,7 @@ declare namespace Lightsail {
      */
     isTerminal?: boolean;
     /**
-     * Details about the operation (e.g., Debian-1GB-Ohio-1).
+     * Details about the operation (Debian-1GB-Ohio-1).
      */
     operationDetails?: string;
     /**
@@ -6223,7 +6261,7 @@ declare namespace Lightsail {
      */
     status?: OperationStatus;
     /**
-     * The timestamp when the status was changed (e.g., 1479816991.349).
+     * The timestamp when the status was changed (1479816991.349).
      */
     statusChangedAt?: IsoDate;
     /**
@@ -6237,14 +6275,14 @@ declare namespace Lightsail {
   }
   export type OperationList = Operation[];
   export type OperationStatus = "NotStarted"|"Started"|"Failed"|"Completed"|"Succeeded"|string;
-  export type OperationType = "DeleteKnownHostKeys"|"DeleteInstance"|"CreateInstance"|"StopInstance"|"StartInstance"|"RebootInstance"|"OpenInstancePublicPorts"|"PutInstancePublicPorts"|"CloseInstancePublicPorts"|"AllocateStaticIp"|"ReleaseStaticIp"|"AttachStaticIp"|"DetachStaticIp"|"UpdateDomainEntry"|"DeleteDomainEntry"|"CreateDomain"|"DeleteDomain"|"CreateInstanceSnapshot"|"DeleteInstanceSnapshot"|"CreateInstancesFromSnapshot"|"CreateLoadBalancer"|"DeleteLoadBalancer"|"AttachInstancesToLoadBalancer"|"DetachInstancesFromLoadBalancer"|"UpdateLoadBalancerAttribute"|"CreateLoadBalancerTlsCertificate"|"DeleteLoadBalancerTlsCertificate"|"AttachLoadBalancerTlsCertificate"|"CreateDisk"|"DeleteDisk"|"AttachDisk"|"DetachDisk"|"CreateDiskSnapshot"|"DeleteDiskSnapshot"|"CreateDiskFromSnapshot"|"CreateRelationalDatabase"|"UpdateRelationalDatabase"|"DeleteRelationalDatabase"|"CreateRelationalDatabaseFromSnapshot"|"CreateRelationalDatabaseSnapshot"|"DeleteRelationalDatabaseSnapshot"|"UpdateRelationalDatabaseParameters"|"StartRelationalDatabase"|"RebootRelationalDatabase"|"StopRelationalDatabase"|"EnableAddOn"|"DisableAddOn"|"PutAlarm"|"GetAlarms"|"DeleteAlarm"|"TestAlarm"|"CreateContactMethod"|"GetContactMethods"|"SendContactMethodVerification"|"DeleteContactMethod"|"CreateDistribution"|"UpdateDistribution"|"DeleteDistribution"|"ResetDistributionCache"|"AttachCertificateToDistribution"|"DetachCertificateFromDistribution"|"UpdateDistributionBundle"|"SetIpAddressType"|"CreateCertificate"|"DeleteCertificate"|"CreateContainerService"|"UpdateContainerService"|"DeleteContainerService"|"CreateContainerServiceDeployment"|"CreateContainerServiceRegistryLogin"|"RegisterContainerImage"|"DeleteContainerImage"|"CreateBucket"|"DeleteBucket"|"CreateBucketAccessKey"|"DeleteBucketAccessKey"|"UpdateBucketBundle"|"UpdateBucket"|"SetResourceAccessForBucket"|"UpdateInstanceMetadataOptions"|"StartGUISession"|"StopGUISession"|string;
+  export type OperationType = "DeleteKnownHostKeys"|"DeleteInstance"|"CreateInstance"|"StopInstance"|"StartInstance"|"RebootInstance"|"OpenInstancePublicPorts"|"PutInstancePublicPorts"|"CloseInstancePublicPorts"|"AllocateStaticIp"|"ReleaseStaticIp"|"AttachStaticIp"|"DetachStaticIp"|"UpdateDomainEntry"|"DeleteDomainEntry"|"CreateDomain"|"DeleteDomain"|"CreateInstanceSnapshot"|"DeleteInstanceSnapshot"|"CreateInstancesFromSnapshot"|"CreateLoadBalancer"|"DeleteLoadBalancer"|"AttachInstancesToLoadBalancer"|"DetachInstancesFromLoadBalancer"|"UpdateLoadBalancerAttribute"|"CreateLoadBalancerTlsCertificate"|"DeleteLoadBalancerTlsCertificate"|"AttachLoadBalancerTlsCertificate"|"CreateDisk"|"DeleteDisk"|"AttachDisk"|"DetachDisk"|"CreateDiskSnapshot"|"DeleteDiskSnapshot"|"CreateDiskFromSnapshot"|"CreateRelationalDatabase"|"UpdateRelationalDatabase"|"DeleteRelationalDatabase"|"CreateRelationalDatabaseFromSnapshot"|"CreateRelationalDatabaseSnapshot"|"DeleteRelationalDatabaseSnapshot"|"UpdateRelationalDatabaseParameters"|"StartRelationalDatabase"|"RebootRelationalDatabase"|"StopRelationalDatabase"|"EnableAddOn"|"DisableAddOn"|"PutAlarm"|"GetAlarms"|"DeleteAlarm"|"TestAlarm"|"CreateContactMethod"|"GetContactMethods"|"SendContactMethodVerification"|"DeleteContactMethod"|"CreateDistribution"|"UpdateDistribution"|"DeleteDistribution"|"ResetDistributionCache"|"AttachCertificateToDistribution"|"DetachCertificateFromDistribution"|"UpdateDistributionBundle"|"SetIpAddressType"|"CreateCertificate"|"DeleteCertificate"|"CreateContainerService"|"UpdateContainerService"|"DeleteContainerService"|"CreateContainerServiceDeployment"|"CreateContainerServiceRegistryLogin"|"RegisterContainerImage"|"DeleteContainerImage"|"CreateBucket"|"DeleteBucket"|"CreateBucketAccessKey"|"DeleteBucketAccessKey"|"UpdateBucketBundle"|"UpdateBucket"|"SetResourceAccessForBucket"|"UpdateInstanceMetadataOptions"|"StartGUISession"|"StopGUISession"|"SetupInstanceHttps"|string;
   export interface Origin {
     /**
      * The name of the origin resource.
      */
     name?: ResourceName;
     /**
-     * The resource type of the origin resource (e.g., Instance).
+     * The resource type of the origin resource (Instance).
      */
     resourceType?: ResourceType;
     /**
@@ -6467,19 +6505,19 @@ declare namespace Lightsail {
   export type RecordState = "Started"|"Succeeded"|"Failed"|string;
   export interface Region {
     /**
-     * The continent code (e.g., NA, meaning North America).
+     * The continent code (NA, meaning North America).
      */
     continentCode?: string;
     /**
-     * The description of the Amazon Web Services Region (e.g., This region is recommended to serve users in the eastern United States and eastern Canada).
+     * The description of the Amazon Web Services Region (This region is recommended to serve users in the eastern United States and eastern Canada).
      */
     description?: string;
     /**
-     * The display name (e.g., Ohio).
+     * The display name (Ohio).
      */
     displayName?: string;
     /**
-     * The region name (e.g., us-east-2).
+     * The region name (us-east-2).
      */
     name?: RegionName;
     /**
@@ -6885,7 +6923,7 @@ declare namespace Lightsail {
      */
     status?: string;
     /**
-     * The timestamp of the reset cache request (e.g., 1479734909.17) in Unix time format.
+     * The timestamp of the reset cache request (1479734909.17) in Unix time format.
      */
     createTime?: IsoDate;
     /**
@@ -6988,7 +7026,7 @@ declare namespace Lightsail {
   export type Sessions = Session[];
   export interface SetIpAddressTypeRequest {
     /**
-     * The resource type. The possible values are Distribution, Instance, and LoadBalancer.  Distribution-related APIs are available only in the N. Virginia (us-east-1) Amazon Web Services Region. Set your Amazon Web Services Region configuration to us-east-1 to create, view, or edit distributions. 
+     * The resource type. The resource values are Distribution, Instance, and LoadBalancer.  Distribution-related APIs are available only in the N. Virginia (us-east-1) Amazon Web Services Region. Set your Amazon Web Services Region configuration to us-east-1 to create, view, or edit distributions. 
      */
     resourceType: ResourceType;
     /**
@@ -7026,6 +7064,120 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
+  export type SetupDomainName = string;
+  export type SetupDomainNameList = SetupDomainName[];
+  export interface SetupExecutionDetails {
+    /**
+     * The command that was executed.
+     */
+    command?: string;
+    /**
+     * The timestamp for when the request was run.
+     */
+    dateTime?: IsoDate;
+    /**
+     * The name of the target resource.
+     */
+    name?: NonEmptyString;
+    /**
+     * The status of the SetupInstanceHttps request.
+     */
+    status?: SetupStatus;
+    /**
+     * The text written by the command to stderr.
+     */
+    standardError?: string;
+    /**
+     * The text written by the command to stdout.
+     */
+    standardOutput?: string;
+    /**
+     * The current version of the script..
+     */
+    version?: string;
+  }
+  export type SetupExecutionDetailsList = SetupExecutionDetails[];
+  export interface SetupHistory {
+    /**
+     * A GUID that's used to identify the operation.
+     */
+    operationId?: NonEmptyString;
+    /**
+     * Information about the specified request.
+     */
+    request?: SetupRequest;
+    /**
+     * The target resource name for the request.
+     */
+    resource?: SetupHistoryResource;
+    /**
+     * Describes the full details of the request.
+     */
+    executionDetails?: SetupExecutionDetailsList;
+    /**
+     * The status of the request.
+     */
+    status?: SetupStatus;
+  }
+  export type SetupHistoryPageToken = string;
+  export interface SetupHistoryResource {
+    /**
+     * The name of the Lightsail resource.
+     */
+    name?: ResourceName;
+    /**
+     * The Amazon Resource Name (ARN) of the Lightsail resource.
+     */
+    arn?: NonEmptyString;
+    /**
+     * The timestamp for when the resource was created.
+     */
+    createdAt?: IsoDate;
+    location?: ResourceLocation;
+    /**
+     * The Lightsail resource type. For example, Instance.
+     */
+    resourceType?: ResourceType;
+  }
+  export interface SetupInstanceHttpsRequest {
+    /**
+     * The name of the Lightsail instance.
+     */
+    instanceName: ResourceName;
+    /**
+     * The contact method for SSL/TLS certificate renewal alerts. You can enter one email address. 
+     */
+    emailAddress: EmailAddress;
+    /**
+     * The name of the domain and subdomains that were specified for the SSL/TLS certificate.
+     */
+    domainNames: SetupDomainNameList;
+    /**
+     * The certificate authority that issues the SSL/TLS certificate.
+     */
+    certificateProvider: CertificateProvider;
+  }
+  export interface SetupInstanceHttpsResult {
+    /**
+     * The available API operations for SetupInstanceHttps.
+     */
+    operations?: OperationList;
+  }
+  export interface SetupRequest {
+    /**
+     * The name of the Lightsail instance.
+     */
+    instanceName?: ResourceName;
+    /**
+     * The name of the domain and subdomains that the SSL/TLS certificate secures.
+     */
+    domainNames?: SetupDomainNameList;
+    /**
+     * The Certificate Authority (CA) that issues the SSL/TLS certificate.
+     */
+    certificateProvider?: CertificateProvider;
+  }
+  export type SetupStatus = "succeeded"|"failed"|"inProgress"|string;
   export interface StartGUISessionRequest {
     /**
      * The resource name.
@@ -7064,11 +7216,11 @@ declare namespace Lightsail {
   }
   export interface StaticIp {
     /**
-     * The name of the static IP (e.g., StaticIP-Ohio-EXAMPLE).
+     * The name of the static IP (StaticIP-Ohio-EXAMPLE).
      */
     name?: ResourceName;
     /**
-     * The Amazon Resource Name (ARN) of the static IP (e.g., arn:aws:lightsail:us-east-2:123456789101:StaticIp/9cbb4a9e-f8e3-4dfe-b57e-12345EXAMPLE).
+     * The Amazon Resource Name (ARN) of the static IP (arn:aws:lightsail:us-east-2:123456789101:StaticIp/9cbb4a9e-f8e3-4dfe-b57e-12345EXAMPLE).
      */
     arn?: NonEmptyString;
     /**
@@ -7076,7 +7228,7 @@ declare namespace Lightsail {
      */
     supportCode?: string;
     /**
-     * The timestamp when the static IP was created (e.g., 1479735304.222).
+     * The timestamp when the static IP was created (1479735304.222).
      */
     createdAt?: IsoDate;
     /**
@@ -7092,7 +7244,7 @@ declare namespace Lightsail {
      */
     ipAddress?: IpAddress;
     /**
-     * The instance where the static IP is attached (e.g., Amazon_Linux-1GB-Ohio-1).
+     * The instance where the static IP is attached (Amazon_Linux-1GB-Ohio-1).
      */
     attachedTo?: ResourceName;
     /**
@@ -7424,7 +7576,7 @@ declare namespace Lightsail {
   }
   export interface UpdateLoadBalancerAttributeRequest {
     /**
-     * The name of the load balancer that you want to modify (e.g., my-load-balancer.
+     * The name of the load balancer that you want to modify (my-load-balancer.
      */
     loadBalancerName: ResourceName;
     /**
@@ -7510,6 +7662,7 @@ declare namespace Lightsail {
   export type float = number;
   export type integer = number;
   export type long = number;
+  export type setupHistoryList = SetupHistory[];
   export type timestamp = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

@@ -37,11 +37,11 @@ declare class ECS extends Service {
    */
   createService(callback?: (err: AWSError, data: ECS.Types.CreateServiceResponse) => void): Request<ECS.Types.CreateServiceResponse, AWSError>;
   /**
-   * Create a task set in the specified cluster and service. This is used when a service uses the EXTERNAL deployment controller type. For more information, see Amazon ECS deployment types in the Amazon Elastic Container Service Developer Guide.
+   * Create a task set in the specified cluster and service. This is used when a service uses the EXTERNAL deployment controller type. For more information, see Amazon ECS deployment types in the Amazon Elastic Container Service Developer Guide. You can create a maximum of 5 tasks sets for a deployment.
    */
   createTaskSet(params: ECS.Types.CreateTaskSetRequest, callback?: (err: AWSError, data: ECS.Types.CreateTaskSetResponse) => void): Request<ECS.Types.CreateTaskSetResponse, AWSError>;
   /**
-   * Create a task set in the specified cluster and service. This is used when a service uses the EXTERNAL deployment controller type. For more information, see Amazon ECS deployment types in the Amazon Elastic Container Service Developer Guide.
+   * Create a task set in the specified cluster and service. This is used when a service uses the EXTERNAL deployment controller type. For more information, see Amazon ECS deployment types in the Amazon Elastic Container Service Developer Guide. You can create a maximum of 5 tasks sets for a deployment.
    */
   createTaskSet(callback?: (err: AWSError, data: ECS.Types.CreateTaskSetResponse) => void): Request<ECS.Types.CreateTaskSetResponse, AWSError>;
   /**
@@ -560,6 +560,10 @@ declare namespace ECS {
      * The managed termination protection setting to use for the Auto Scaling group capacity provider. This determines whether the Auto Scaling group has managed termination protection. The default is off.  When using managed termination protection, managed scaling must also be used otherwise managed termination protection doesn't work.  When managed termination protection is on, Amazon ECS prevents the Amazon EC2 instances in an Auto Scaling group that contain tasks from being terminated during a scale-in action. The Auto Scaling group and each instance in the Auto Scaling group must have instance protection from scale-in actions on as well. For more information, see Instance Protection in the Auto Scaling User Guide. When managed termination protection is off, your Amazon EC2 instances aren't protected from termination when the Auto Scaling group scales in.
      */
     managedTerminationProtection?: ManagedTerminationProtection;
+    /**
+     * The managed draining option for the Auto Scaling group capacity provider. When you enable this, Amazon ECS manages and gracefully drains the EC2 container instances that are in the Auto Scaling group capacity provider. The default is ENABLED.
+     */
+    managedDraining?: ManagedDraining;
   }
   export interface AutoScalingGroupProviderUpdate {
     /**
@@ -570,6 +574,10 @@ declare namespace ECS {
      * The managed termination protection setting to use for the Auto Scaling group capacity provider. This determines whether the Auto Scaling group has managed termination protection.  When using managed termination protection, managed scaling must also be used otherwise managed termination protection doesn't work.  When managed termination protection is on, Amazon ECS prevents the Amazon EC2 instances in an Auto Scaling group that contain tasks from being terminated during a scale-in action. The Auto Scaling group and each instance in the Auto Scaling group must have instance protection from scale-in actions on. For more information, see Instance Protection in the Auto Scaling User Guide. When managed termination protection is off, your Amazon EC2 instances aren't protected from termination when the Auto Scaling group scales in.
      */
     managedTerminationProtection?: ManagedTerminationProtection;
+    /**
+     * The managed draining option for the Auto Scaling group capacity provider. When you enable this, Amazon ECS manages and gracefully drains the EC2 container instances that are in the Auto Scaling group capacity provider. The default is ENABLED.
+     */
+    managedDraining?: ManagedDraining;
   }
   export interface AwsVpcConfiguration {
     /**
@@ -2591,6 +2599,7 @@ declare namespace ECS {
   }
   export type ManagedAgentStateChanges = ManagedAgentStateChange[];
   export type ManagedAgents = ManagedAgent[];
+  export type ManagedDraining = "ENABLED"|"DISABLED"|string;
   export interface ManagedScaling {
     /**
      * Determines whether to use managed scaling for the capacity provider.
