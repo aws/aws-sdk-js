@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1530.0-->
+<!--LATEST=2.1531.0-->
 <!--ENTRYINSERT-->
+
+## 2.1531.0
+* feature: Connect: Minor trait updates for User APIs
+* feature: QConnect: Marked SearchQuickResponses API as readonly.
 
 ## 2.1530.0
 * feature: ConfigService: Updated ResourceType enum with new resource types onboarded by AWS Config in November and December 2023.
