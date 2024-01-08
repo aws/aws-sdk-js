@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1531.0-->
+<!--LATEST=2.1532.0-->
 <!--ENTRYINSERT-->
+
+## 2.1532.0
+* feature: CodeBuild: Aws CodeBuild now supports new compute type BUILD_GENERAL1_XLARGE
+* feature: EC2: Amazon EC2 R7iz bare metal instances are powered by custom 4th generation Intel Xeon Scalable processors.
+* feature: Route53Resolver: This release adds support for query type configuration on firewall rules that enables customers for granular action (ALLOW, ALERT, BLOCK) by DNS query type.
 
 ## 2.1531.0
 * feature: Connect: Minor trait updates for User APIs

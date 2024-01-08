@@ -736,6 +736,10 @@ declare namespace Route53Resolver {
      * A name that lets you identify the rule in the rule group.
      */
     Name: Name;
+    /**
+     *  The DNS query type you want the rule to evaluate. Allowed values are;     A: Returns an IPv4 address.   AAAA: Returns an Ipv6 address.   CAA: Restricts CAs that can create SSL/TLS certifications for the domain.   CNAME: Returns another domain name.   DS: Record that identifies the DNSSEC signing key of a delegated zone.   MX: Specifies mail servers.   NAPTR: Regular-expression-based rewriting of domain names.   NS: Authoritative name servers.   PTR: Maps an IP address to a domain name.   SOA: Start of authority record for the zone.   SPF: Lists the servers authorized to send emails from a domain.   SRV: Application specific values that identify servers.   TXT: Verifies email senders and application-specific values.  
+     */
+    Qtype?: Qtype;
   }
   export interface CreateFirewallRuleResponse {
     /**
@@ -917,6 +921,10 @@ declare namespace Route53Resolver {
      * The ID of the domain list that's used in the rule. 
      */
     FirewallDomainListId: ResourceId;
+    /**
+     *  The DNS query type that the rule you are deleting evaluates. Allowed values are;     A: Returns an IPv4 address.   AAAA: Returns an Ipv6 address.   CAA: Restricts CAs that can create SSL/TLS certifications for the domain.   CNAME: Returns another domain name.   DS: Record that identifies the DNSSEC signing key of a delegated zone.   MX: Specifies mail servers.   NAPTR: Regular-expression-based rewriting of domain names.   NS: Authoritative name servers.   PTR: Maps an IP address to a domain name.   SOA: Start of authority record for the zone.   SPF: Lists the servers authorized to send emails from a domain.   SRV: Application specific values that identify servers.   TXT: Verifies email senders and application-specific values.  
+     */
+    Qtype?: Qtype;
   }
   export interface DeleteFirewallRuleResponse {
     /**
@@ -1188,6 +1196,10 @@ declare namespace Route53Resolver {
      * The date and time that the rule was last modified, in Unix time format and Coordinated Universal Time (UTC).
      */
     ModificationTime?: Rfc3339TimeString;
+    /**
+     *  The DNS query type you want the rule to evaluate. Allowed values are;     A: Returns an IPv4 address.   AAAA: Returns an Ipv6 address.   CAA: Restricts CAs that can create SSL/TLS certifications for the domain.   CNAME: Returns another domain name.   DS: Record that identifies the DNSSEC signing key of a delegated zone.   MX: Specifies mail servers.   NAPTR: Regular-expression-based rewriting of domain names.   NS: Authoritative name servers.   PTR: Maps an IP address to a domain name.   SOA: Start of authority record for the zone.   SPF: Lists the servers authorized to send emails from a domain.   SRV: Application specific values that identify servers.   TXT: Verifies email senders and application-specific values.  
+     */
+    Qtype?: Qtype;
   }
   export interface FirewallRuleGroup {
     /**
@@ -2153,6 +2165,7 @@ declare namespace Route53Resolver {
      */
     ReturnValue?: Boolean;
   }
+  export type Qtype = string;
   export type ResolverAutodefinedReverseStatus = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|"UPDATING_TO_USE_LOCAL_RESOURCE_SETTING"|"USE_LOCAL_RESOURCE_SETTING"|string;
   export interface ResolverConfig {
     /**
@@ -2623,6 +2636,10 @@ declare namespace Route53Resolver {
      * The name of the rule.
      */
     Name?: Name;
+    /**
+     *  The DNS query type you want the rule to evaluate. Allowed values are;     A: Returns an IPv4 address.   AAAA: Returns an Ipv6 address.   CAA: Restricts CAs that can create SSL/TLS certifications for the domain.   CNAME: Returns another domain name.   DS: Record that identifies the DNSSEC signing key of a delegated zone.   MX: Specifies mail servers.   NAPTR: Regular-expression-based rewriting of domain names.   NS: Authoritative name servers.   PTR: Maps an IP address to a domain name.   SOA: Start of authority record for the zone.   SPF: Lists the servers authorized to send emails from a domain.   SRV: Application specific values that identify servers.   TXT: Verifies email senders and application-specific values.  
+     */
+    Qtype?: Qtype;
   }
   export interface UpdateFirewallRuleResponse {
     /**
