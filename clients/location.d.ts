@@ -1208,6 +1208,8 @@ declare namespace Location {
      */
     TrackerName: ResourceName;
   }
+  export type CustomLayer = string;
+  export type CustomLayerList = CustomLayer[];
   export interface DataSourceConfiguration {
     /**
      * Specifies how the results of an operation will be stored by the caller.  Valid values include:    SingleUse specifies that the results won't be stored.     Storage specifies that the result can be cached or stored in a database.   Default value: SingleUse 
@@ -2349,6 +2351,10 @@ declare namespace Location {
   export type ListTrackersResponseEntryList = ListTrackersResponseEntry[];
   export interface MapConfiguration {
     /**
+     * Specifies the custom layers for the style. Leave unset to not enable any custom layer, or, for styles that support custom layers, you can enable layer(s), such as POI layer for the VectorEsriNavigation style. Default is unset.  Not all map resources or styles support custom layers. See Custom Layers for more information. 
+     */
+    CustomLayers?: CustomLayerList;
+    /**
      * Specifies the political view for the style. Leave unset to not use a political view, or, for styles that support specific political views, you can choose a view, such as IND for the Indian view. Default is unset.  Not all map resources or styles support political view styles. See Political views for more information. 
      */
     PoliticalView?: CountryCode3;
@@ -2358,6 +2364,10 @@ declare namespace Location {
     Style: MapStyle;
   }
   export interface MapConfigurationUpdate {
+    /**
+     * Specifies the custom layers for the style. Leave unset to not enable any custom layer, or, for styles that support custom layers, you can enable layer(s), such as POI layer for the VectorEsriNavigation style. Default is unset.  Not all map resources or styles support custom layers. See Custom Layers for more information. 
+     */
+    CustomLayers?: CustomLayerList;
     /**
      * Specifies the political view for the style. Set to an empty string to not use a political view, or, for styles that support specific political views, you can choose a view, such as IND for the Indian view.  Not all map resources or styles support political view styles. See Political views for more information. 
      */

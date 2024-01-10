@@ -584,6 +584,7 @@ declare class Route53 extends Service {
 declare namespace Route53 {
   export type ARN = string;
   export type AWSAccountID = string;
+  export type AWSRegion = string;
   export interface AccountLimit {
     /**
      * The limit that you requested. Valid values include the following:    MAX_HEALTH_CHECKS_BY_OWNER: The maximum number of health checks that you can create using the current account.    MAX_HOSTED_ZONES_BY_OWNER: The maximum number of hosted zones that you can create using the current account.    MAX_REUSABLE_DELEGATION_SETS_BY_OWNER: The maximum number of reusable delegation sets that you can create using the current account.    MAX_TRAFFIC_POLICIES_BY_OWNER: The maximum number of traffic policies that you can create using the current account.    MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER: The maximum number of traffic policy instances that you can create using the current account. (Traffic policy instances are referred to as traffic flow policy records in the Amazon Route 53 console.)  
@@ -622,7 +623,7 @@ declare namespace Route53 {
   export type AliasHealthEnabled = boolean;
   export interface AliasTarget {
     /**
-     *  Alias resource records sets only: The value used depends on where you want to route traffic:  Amazon API Gateway custom regional APIs and edge-optimized APIs  Specify the hosted zone ID for your API. You can get the applicable value using the CLI command get-domain-names:   For regional APIs, specify the value of regionalHostedZoneId.   For edge-optimized APIs, specify the value of distributionHostedZoneId.    Amazon Virtual Private Cloud interface VPC endpoint  Specify the hosted zone ID for your interface endpoint. You can get the value of HostedZoneId using the CLI command describe-vpc-endpoints.  CloudFront distribution  Specify Z2FDTNDATAQYW2.  Alias resource record sets for CloudFront can't be created in a private zone.   Elastic Beanstalk environment  Specify the hosted zone ID for the region that you created the environment in. The environment must have a regionalized subdomain. For a list of regions and the corresponding hosted zone IDs, see Elastic Beanstalk endpoints and quotas in the the Amazon Web Services General Reference.  ELB load balancer  Specify the value of the hosted zone ID for the load balancer. Use the following methods to get the hosted zone ID:    Elastic Load Balancing endpoints and quotas topic in the Amazon Web Services General Reference: Use the value that corresponds with the region that you created your load balancer in. Note that there are separate columns for Application and Classic Load Balancers and for Network Load Balancers.    Amazon Web Services Management Console: Go to the Amazon EC2 page, choose Load Balancers in the navigation pane, select the load balancer, and get the value of the Hosted zone field on the Description tab.    Elastic Load Balancing API: Use DescribeLoadBalancers to get the applicable value. For more information, see the applicable guide:   Classic Load Balancers: Use DescribeLoadBalancers to get the value of CanonicalHostedZoneNameId.   Application and Network Load Balancers: Use DescribeLoadBalancers to get the value of CanonicalHostedZoneId.      CLI: Use describe-load-balancers to get the applicable value. For more information, see the applicable guide:   Classic Load Balancers: Use describe-load-balancers to get the value of CanonicalHostedZoneNameId.   Application and Network Load Balancers: Use describe-load-balancers to get the value of CanonicalHostedZoneId.      Global Accelerator accelerator  Specify Z2BJ6XQ5FK7U4H.  An Amazon S3 bucket configured as a static website  Specify the hosted zone ID for the region that you created the bucket in. For more information about valid values, see the table Amazon S3 Website Endpoints in the Amazon Web Services General Reference.  Another Route 53 resource record set in your hosted zone  Specify the hosted zone ID of your hosted zone. (An alias resource record set can't reference a resource record set in a different hosted zone.)  
+     *  Alias resource records sets only: The value used depends on where you want to route traffic:  Amazon API Gateway custom regional APIs and edge-optimized APIs  Specify the hosted zone ID for your API. You can get the applicable value using the CLI command get-domain-names:   For regional APIs, specify the value of regionalHostedZoneId.   For edge-optimized APIs, specify the value of distributionHostedZoneId.    Amazon Virtual Private Cloud interface VPC endpoint  Specify the hosted zone ID for your interface endpoint. You can get the value of HostedZoneId using the CLI command describe-vpc-endpoints.  CloudFront distribution  Specify Z2FDTNDATAQYW2.  Alias resource record sets for CloudFront can't be created in a private zone.   Elastic Beanstalk environment  Specify the hosted zone ID for the region that you created the environment in. The environment must have a regionalized subdomain. For a list of regions and the corresponding hosted zone IDs, see Elastic Beanstalk endpoints and quotas in the Amazon Web Services General Reference.  ELB load balancer  Specify the value of the hosted zone ID for the load balancer. Use the following methods to get the hosted zone ID:    Elastic Load Balancing endpoints and quotas topic in the Amazon Web Services General Reference: Use the value that corresponds with the region that you created your load balancer in. Note that there are separate columns for Application and Classic Load Balancers and for Network Load Balancers.    Amazon Web Services Management Console: Go to the Amazon EC2 page, choose Load Balancers in the navigation pane, select the load balancer, and get the value of the Hosted zone field on the Description tab.    Elastic Load Balancing API: Use DescribeLoadBalancers to get the applicable value. For more information, see the applicable guide:   Classic Load Balancers: Use DescribeLoadBalancers to get the value of CanonicalHostedZoneNameId.   Application and Network Load Balancers: Use DescribeLoadBalancers to get the value of CanonicalHostedZoneId.      CLI: Use describe-load-balancers to get the applicable value. For more information, see the applicable guide:   Classic Load Balancers: Use describe-load-balancers to get the value of CanonicalHostedZoneNameId.   Application and Network Load Balancers: Use describe-load-balancers to get the value of CanonicalHostedZoneId.      Global Accelerator accelerator  Specify Z2BJ6XQ5FK7U4H.  An Amazon S3 bucket configured as a static website  Specify the hosted zone ID for the region that you created the bucket in. For more information about valid values, see the table Amazon S3 Website Endpoints in the Amazon Web Services General Reference.  Another Route 53 resource record set in your hosted zone  Specify the hosted zone ID of your hosted zone. (An alias resource record set can't reference a resource record set in a different hosted zone.)  
      */
     HostedZoneId: ResourceId;
     /**
@@ -655,6 +656,7 @@ declare namespace Route53 {
      */
     ChangeInfo: ChangeInfo;
   }
+  export type Bias = number;
   export interface Change {
     /**
      * The action to perform:    CREATE: Creates a resource record set that has the specified values.    DELETE: Deletes a existing resource record set.  To delete the resource record set that is associated with a traffic policy instance, use DeleteTrafficPolicyInstance. Amazon Route 53 will delete the resource record set automatically. If you delete the resource record set by using ChangeResourceRecordSets, Route 53 doesn't automatically delete the traffic policy instance, and you'll continue to be charged for it even though it's no longer in use.      UPSERT: If a resource record set doesn't already exist, Route 53 creates it. If a resource record set does exist, Route 53 updates it with the values in the request.  
@@ -873,6 +875,16 @@ declare namespace Route53 {
   }
   export type CollectionVersion = number;
   export type ComparisonOperator = "GreaterThanOrEqualToThreshold"|"GreaterThanThreshold"|"LessThanThreshold"|"LessThanOrEqualToThreshold"|string;
+  export interface Coordinates {
+    /**
+     *  Specifies a coordinate of the north–south position of a geographic point on the surface of the Earth (-90 - 90). 
+     */
+    Latitude: Latitude;
+    /**
+     *  Specifies a coordinate of the east–west position of a geographic point on the surface of the Earth (-180 - 180). 
+     */
+    Longitude: Longitude;
+  }
   export interface CreateCidrCollectionRequest {
     /**
      * A unique identifier for the account that can be used to reference the collection from other API calls.
@@ -1322,7 +1334,7 @@ declare namespace Route53 {
      */
     ContinentCode?: GeoLocationContinentCode;
     /**
-     * For geolocation resource record sets, the two-letter code for a country. Amazon Route 53 uses the two-letter country codes that are specified in ISO standard 3166-1 alpha-2. Route 53 also supports the contry code UA forr Ukraine.
+     * For geolocation resource record sets, the two-letter code for a country. Amazon Route 53 uses the two-letter country codes that are specified in ISO standard 3166-1 alpha-2. Route 53 also supports the country code UA for Ukraine.
      */
     CountryCode?: GeoLocationCountryCode;
     /**
@@ -1363,6 +1375,24 @@ declare namespace Route53 {
   export type GeoLocationDetailsList = GeoLocationDetails[];
   export type GeoLocationSubdivisionCode = string;
   export type GeoLocationSubdivisionName = string;
+  export interface GeoProximityLocation {
+    /**
+     *  The Amazon Web Services Region the resource you are directing DNS traffic to, is in. 
+     */
+    AWSRegion?: AWSRegion;
+    /**
+     *  Specifies an Amazon Web Services Local Zone Group.  A local Zone Group is usually the Local Zone code without the ending character. For example, if the Local Zone is us-east-1-bue-1a the Local Zone Group is us-east-1-bue-1. You can identify the Local Zones Group for a specific Local Zone by using the describe-availability-zones CLI command: This command returns: "GroupName": "us-west-2-den-1", specifying that the Local Zone us-west-2-den-1a belongs to the Local Zone Group us-west-2-den-1.
+     */
+    LocalZoneGroup?: LocalZoneGroup;
+    /**
+     *  Contains the longitude and latitude for a geographic region. 
+     */
+    Coordinates?: Coordinates;
+    /**
+     *  The bias increases or decreases the size of the geographic region from which Route 53 routes traffic to a resource.  To use Bias to change the size of the geographic region, specify the applicable value for the bias:   To expand the size of the geographic region from which Route 53 routes traffic to a resource, specify a positive integer from 1 to 99 for the bias. Route 53 shrinks the size of adjacent regions.    To shrink the size of the geographic region from which Route 53 routes traffic to a resource, specify a negative bias of -1 to -99. Route 53 expands the size of adjacent regions.   
+     */
+    Bias?: Bias;
+  }
   export interface GetAccountLimitRequest {
     /**
      * The limit that you want to get. Valid values include the following:    MAX_HEALTH_CHECKS_BY_OWNER: The maximum number of health checks that you can create using the current account.    MAX_HOSTED_ZONES_BY_OWNER: The maximum number of hosted zones that you can create using the current account.    MAX_REUSABLE_DELEGATION_SETS_BY_OWNER: The maximum number of reusable delegation sets that you can create using the current account.    MAX_TRAFFIC_POLICIES_BY_OWNER: The maximum number of traffic policies that you can create using the current account.    MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER: The maximum number of traffic policy instances that you can create using the current account. (Traffic policy instances are referred to as traffic flow policy records in the Amazon Route 53 console.)  
@@ -1407,7 +1437,7 @@ declare namespace Route53 {
   }
   export interface GetDNSSECResponse {
     /**
-     * A string repesenting the status of DNSSEC.
+     * A string representing the status of DNSSEC.
      */
     Status: DNSSECStatus;
     /**
@@ -1421,7 +1451,7 @@ declare namespace Route53 {
      */
     ContinentCode?: GeoLocationContinentCode;
     /**
-     * Amazon Route 53 uses the two-letter country codes that are specified in ISO standard 3166-1 alpha-2. Route 53 also supports the contry code UA forr Ukraine.
+     * Amazon Route 53 uses the two-letter country codes that are specified in ISO standard 3166-1 alpha-2. Route 53 also supports the country code UA for Ukraine.
      */
     CountryCode?: GeoLocationCountryCode;
     /**
@@ -1643,7 +1673,7 @@ declare namespace Route53 {
      */
     Port?: Port;
     /**
-     * The type of health check that you want to create, which indicates how Amazon Route 53 determines whether an endpoint is healthy.  You can't change the value of Type after you create a health check.  You can create the following types of health checks:    HTTP: Route 53 tries to establish a TCP connection. If successful, Route 53 submits an HTTP request and waits for an HTTP status code of 200 or greater and less than 400.    HTTPS: Route 53 tries to establish a TCP connection. If successful, Route 53 submits an HTTPS request and waits for an HTTP status code of 200 or greater and less than 400.  If you specify HTTPS for the value of Type, the endpoint must support TLS v1.0 or later.     HTTP_STR_MATCH: Route 53 tries to establish a TCP connection. If successful, Route 53 submits an HTTP request and searches the first 5,120 bytes of the response body for the string that you specify in SearchString.    HTTPS_STR_MATCH: Route 53 tries to establish a TCP connection. If successful, Route 53 submits an HTTPS request and searches the first 5,120 bytes of the response body for the string that you specify in SearchString.    TCP: Route 53 tries to establish a TCP connection.    CLOUDWATCH_METRIC: The health check is associated with a CloudWatch alarm. If the state of the alarm is OK, the health check is considered healthy. If the state is ALARM, the health check is considered unhealthy. If CloudWatch doesn't have sufficient data to determine whether the state is OK or ALARM, the health check status depends on the setting for InsufficientDataHealthStatus: Healthy, Unhealthy, or LastKnownStatus.     CALCULATED: For health checks that monitor the status of other health checks, Route 53 adds up the number of health checks that Route 53 health checkers consider to be healthy and compares that number with the value of HealthThreshold.     RECOVERY_CONTROL: The health check is assocated with a Route53 Application Recovery Controller routing control. If the routing control state is ON, the health check is considered healthy. If the state is OFF, the health check is considered unhealthy.    For more information, see How Route 53 Determines Whether an Endpoint Is Healthy in the Amazon Route 53 Developer Guide.
+     * The type of health check that you want to create, which indicates how Amazon Route 53 determines whether an endpoint is healthy.  You can't change the value of Type after you create a health check.  You can create the following types of health checks:    HTTP: Route 53 tries to establish a TCP connection. If successful, Route 53 submits an HTTP request and waits for an HTTP status code of 200 or greater and less than 400.    HTTPS: Route 53 tries to establish a TCP connection. If successful, Route 53 submits an HTTPS request and waits for an HTTP status code of 200 or greater and less than 400.  If you specify HTTPS for the value of Type, the endpoint must support TLS v1.0 or later.     HTTP_STR_MATCH: Route 53 tries to establish a TCP connection. If successful, Route 53 submits an HTTP request and searches the first 5,120 bytes of the response body for the string that you specify in SearchString.    HTTPS_STR_MATCH: Route 53 tries to establish a TCP connection. If successful, Route 53 submits an HTTPS request and searches the first 5,120 bytes of the response body for the string that you specify in SearchString.    TCP: Route 53 tries to establish a TCP connection.    CLOUDWATCH_METRIC: The health check is associated with a CloudWatch alarm. If the state of the alarm is OK, the health check is considered healthy. If the state is ALARM, the health check is considered unhealthy. If CloudWatch doesn't have sufficient data to determine whether the state is OK or ALARM, the health check status depends on the setting for InsufficientDataHealthStatus: Healthy, Unhealthy, or LastKnownStatus.     CALCULATED: For health checks that monitor the status of other health checks, Route 53 adds up the number of health checks that Route 53 health checkers consider to be healthy and compares that number with the value of HealthThreshold.     RECOVERY_CONTROL: The health check is associated with a Route53 Application Recovery Controller routing control. If the routing control state is ON, the health check is considered healthy. If the state is OFF, the health check is considered unhealthy.    For more information, see How Route 53 Determines Whether an Endpoint Is Healthy in the Amazon Route 53 Developer Guide.
      */
     Type: HealthCheckType;
     /**
@@ -1880,6 +1910,7 @@ declare namespace Route53 {
     LastModifiedDate?: TimeStamp;
   }
   export type KeySigningKeys = KeySigningKey[];
+  export type Latitude = string;
   export type LimitValue = number;
   export interface LinkedService {
     /**
@@ -2515,6 +2546,7 @@ declare namespace Route53 {
      */
     VPCs: VPCs;
   }
+  export type LocalZoneGroup = string;
   export type LocationSummaries = LocationSummary[];
   export interface LocationSummary {
     /**
@@ -2522,6 +2554,7 @@ declare namespace Route53 {
      */
     LocationName?: CidrLocationNameDefaultAllowed;
   }
+  export type Longitude = string;
   export type MaxResults = string;
   export type MeasureLatency = boolean;
   export type Message = string;
@@ -2589,7 +2622,7 @@ declare namespace Route53 {
      */
     Region?: ResourceRecordSetRegion;
     /**
-     *  Geolocation resource record sets only: A complex type that lets you control how Amazon Route 53 responds to DNS queries based on the geographic origin of the query. For example, if you want all queries from Africa to be routed to a web server with an IP address of 192.0.2.111, create a resource record set with a Type of A and a ContinentCode of AF.  Although creating geolocation and geolocation alias resource record sets in a private hosted zone is allowed, it's not supported.  If you create separate resource record sets for overlapping geographic regions (for example, one resource record set for a continent and one for a country on the same continent), priority goes to the smallest geographic region. This allows you to route most queries for a continent to one resource and to route queries for a country on that continent to a different resource. You can't create two geolocation resource record sets that specify the same geographic location. The value * in the CountryCode element matches all geographic locations that aren't specified in other geolocation resource record sets that have the same values for the Name and Type elements.  Geolocation works by mapping IP addresses to locations. However, some IP addresses aren't mapped to geographic locations, so even if you create geolocation resource record sets that cover all seven continents, Route 53 will receive some DNS queries from locations that it can't identify. We recommend that you create a resource record set for which the value of CountryCode is *. Two groups of queries are routed to the resource that you specify in this record: queries that come from locations for which you haven't created geolocation resource record sets and queries from IP addresses that aren't mapped to a location. If you don't create a * resource record set, Route 53 returns a "no answer" response for queries from those locations.  You can't create non-geolocation resource record sets that have the same values for the Name and Type elements as geolocation resource record sets.
+     *  Geolocation resource record sets only: A complex type that lets you control how Amazon Route 53 responds to DNS queries based on the geographic origin of the query. For example, if you want all queries from Africa to be routed to a web server with an IP address of 192.0.2.111, create a resource record set with a Type of A and a ContinentCode of AF. If you create separate resource record sets for overlapping geographic regions (for example, one resource record set for a continent and one for a country on the same continent), priority goes to the smallest geographic region. This allows you to route most queries for a continent to one resource and to route queries for a country on that continent to a different resource. You can't create two geolocation resource record sets that specify the same geographic location. The value * in the CountryCode element matches all geographic locations that aren't specified in other geolocation resource record sets that have the same values for the Name and Type elements.  Geolocation works by mapping IP addresses to locations. However, some IP addresses aren't mapped to geographic locations, so even if you create geolocation resource record sets that cover all seven continents, Route 53 will receive some DNS queries from locations that it can't identify. We recommend that you create a resource record set for which the value of CountryCode is *. Two groups of queries are routed to the resource that you specify in this record: queries that come from locations for which you haven't created geolocation resource record sets and queries from IP addresses that aren't mapped to a location. If you don't create a * resource record set, Route 53 returns a "no answer" response for queries from those locations.  You can't create non-geolocation resource record sets that have the same values for the Name and Type elements as geolocation resource record sets.
      */
     GeoLocation?: GeoLocation;
     /**
@@ -2621,6 +2654,10 @@ declare namespace Route53 {
      */
     TrafficPolicyInstanceId?: TrafficPolicyInstanceId;
     CidrRoutingConfig?: CidrRoutingConfig;
+    /**
+     *   GeoproximityLocation resource record sets only: A complex type that lets you control how Route 53 responds to DNS queries based on the geographic origin of the query and your resources. 
+     */
+    GeoProximityLocation?: GeoProximityLocation;
   }
   export type ResourceRecordSetFailover = "PRIMARY"|"SECONDARY"|string;
   export type ResourceRecordSetIdentifier = string;
@@ -2873,7 +2910,7 @@ declare namespace Route53 {
      */
     ResourcePath?: ResourcePath;
     /**
-     * Amazon Route 53 behavior depends on whether you specify a value for IPAddress.  If a health check already has a value for IPAddress, you can change the value. However, you can't update an existing health check to add or remove the value of IPAddress.    If you specify a value for IPAddress: Route 53 sends health check requests to the specified IPv4 or IPv6 address and passes the value of FullyQualifiedDomainName in the Host header for all health checks except TCP health checks. This is typically the fully qualified DNS name of the endpoint on which you want Route 53 to perform health checks. When Route 53 checks the health of an endpoint, here is how it constructs the Host header:   If you specify a value of 80 for Port and HTTP or HTTP_STR_MATCH for Type, Route 53 passes the value of FullyQualifiedDomainName to the endpoint in the Host header.   If you specify a value of 443 for Port and HTTPS or HTTPS_STR_MATCH for Type, Route 53 passes the value of FullyQualifiedDomainName to the endpoint in the Host header.   If you specify another value for Port and any value except TCP for Type, Route 53 passes  FullyQualifiedDomainName:Port  to the endpoint in the Host header.   If you don't specify a value for FullyQualifiedDomainName, Route 53 substitutes the value of IPAddress in the Host header in each of the above cases.  If you don't specify a value for IPAddress: If you don't specify a value for IPAddress, Route 53 sends a DNS request to the domain that you specify in FullyQualifiedDomainName at the interval you specify in RequestInterval. Using an IPv4 address that is returned by DNS, Route 53 then checks the health of the endpoint.  If you don't specify a value for IPAddress, Route 53 uses only IPv4 to send health checks to the endpoint. If there's no resource record set with a type of A for the name that you specify for FullyQualifiedDomainName, the health check fails with a "DNS resolution failed" error.  If you want to check the health of weighted, latency, or failover resource record sets and you choose to specify the endpoint only by FullyQualifiedDomainName, we recommend that you create a separate health check for each endpoint. For example, create a health check for each HTTP server that is serving content for www.example.com. For the value of FullyQualifiedDomainName, specify the domain name of the server (such as us-east-2-www.example.com), not the name of the resource record sets (www.example.com).  In this configuration, if the value of FullyQualifiedDomainName matches the name of the resource record sets and you then associate the health check with those resource record sets, health check results will be unpredictable.  In addition, if the value of Type is HTTP, HTTPS, HTTP_STR_MATCH, or HTTPS_STR_MATCH, Route 53 passes the value of FullyQualifiedDomainName in the Host header, as it does when you specify a value for IPAddress. If the value of Type is TCP, Route 53 doesn't pass a Host header.
+     * Amazon Route 53 behavior depends on whether you specify a value for IPAddress.  If a health check already has a value for IPAddress, you can change the value. However, you can't update an existing health check to add or remove the value of IPAddress.    If you specify a value for IPAddress: Route 53 sends health check requests to the specified IPv4 or IPv6 address and passes the value of FullyQualifiedDomainName in the Host header for all health checks except TCP health checks. This is typically the fully qualified DNS name of the endpoint on which you want Route 53 to perform health checks. When Route 53 checks the health of an endpoint, here is how it constructs the Host header:   If you specify a value of 80 for Port and HTTP or HTTP_STR_MATCH for Type, Route 53 passes the value of FullyQualifiedDomainName to the endpoint in the Host header.   If you specify a value of 443 for Port and HTTPS or HTTPS_STR_MATCH for Type, Route 53 passes the value of FullyQualifiedDomainName to the endpoint in the Host header.   If you specify another value for Port and any value except TCP for Type, Route 53 passes  FullyQualifiedDomainName:Port  to the endpoint in the Host header.   If you don't specify a value for FullyQualifiedDomainName, Route 53 substitutes the value of IPAddress in the Host header in each of the above cases.  If you don't specify a value for IPAddress: If you don't specify a value for IPAddress, Route 53 sends a DNS request to the domain that you specify in FullyQualifiedDomainName at the interval you specify in RequestInterval. Using an IPv4 address that is returned by DNS, Route 53 then checks the health of the endpoint. If you don't specify a value for IPAddress, you can’t update the health check to remove the FullyQualifiedDomainName; if you don’t specify a value for IPAddress on creation, a FullyQualifiedDomainName is required.  If you don't specify a value for IPAddress, Route 53 uses only IPv4 to send health checks to the endpoint. If there's no resource record set with a type of A for the name that you specify for FullyQualifiedDomainName, the health check fails with a "DNS resolution failed" error.  If you want to check the health of weighted, latency, or failover resource record sets and you choose to specify the endpoint only by FullyQualifiedDomainName, we recommend that you create a separate health check for each endpoint. For example, create a health check for each HTTP server that is serving content for www.example.com. For the value of FullyQualifiedDomainName, specify the domain name of the server (such as us-east-2-www.example.com), not the name of the resource record sets (www.example.com).  In this configuration, if the value of FullyQualifiedDomainName matches the name of the resource record sets and you then associate the health check with those resource record sets, health check results will be unpredictable.  In addition, if the value of Type is HTTP, HTTPS, HTTP_STR_MATCH, or HTTPS_STR_MATCH, Route 53 passes the value of FullyQualifiedDomainName in the Host header, as it does when you specify a value for IPAddress. If the value of Type is TCP, Route 53 doesn't pass a Host header.
      */
     FullyQualifiedDomainName?: FullyQualifiedDomainName;
     /**
