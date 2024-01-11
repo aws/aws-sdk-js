@@ -2042,7 +2042,7 @@ declare namespace IoTFleetWise {
      */
     vehicleMiddleware?: VehicleMiddleware;
   }
-  export type NetworkInterfaceType = "CAN_INTERFACE"|"OBD_INTERFACE"|"VEHICLE_MIDDLEWARE"|"CUSTOMER_DECODED_INTERFACE"|string;
+  export type NetworkInterfaceType = "CAN_INTERFACE"|"OBD_INTERFACE"|"VEHICLE_MIDDLEWARE"|string;
   export type NetworkInterfaces = NetworkInterface[];
   export interface Node {
     /**
@@ -2369,7 +2369,7 @@ declare namespace IoTFleetWise {
      */
     messageSignal?: MessageSignal;
   }
-  export type SignalDecoderType = "CAN_SIGNAL"|"OBD_SIGNAL"|"MESSAGE_SIGNAL"|"CUSTOMER_DECODED_SIGNAL"|string;
+  export type SignalDecoderType = "CAN_SIGNAL"|"OBD_SIGNAL"|"MESSAGE_SIGNAL"|string;
   export type SignalDecoders = SignalDecoder[];
   export interface SignalInformation {
     /**

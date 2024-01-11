@@ -3828,7 +3828,7 @@ declare namespace Iot {
      */
     schedulingConfig?: SchedulingConfig;
     /**
-     * The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes.   Note:The following Length Constraints relates to a single ARN. Up to 25 package version ARNs are allowed.
+     * The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes. The package version must be in either the Published or Deprecated state when the job deploys. For more information, see Package version lifecycle.   Note:The following Length Constraints relates to a single ARN. Up to 25 package version ARNs are allowed.
      */
     destinationPackageVersions?: DestinationPackageVersions;
   }
@@ -3884,7 +3884,7 @@ declare namespace Iot {
      */
     maintenanceWindows?: MaintenanceWindows;
     /**
-     * The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes.   Note:The following Length Constraints relates to a single ARN. Up to 25 package version ARNs are allowed.
+     * The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes. The package version must be in either the Published or Deprecated state when the job deploys. For more information, see Package version lifecycle.  Note:The following Length Constraints relates to a single ARN. Up to 25 package version ARNs are allowed.
      */
     destinationPackageVersions?: DestinationPackageVersions;
   }
@@ -5473,7 +5473,7 @@ declare namespace Iot {
      */
     maintenanceWindows?: MaintenanceWindows;
     /**
-     * The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes.   Note:The following Length Constraints relates to a single ARN. Up to 25 package version ARNs are allowed.
+     * The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes. The package version must be in either the Published or Deprecated state when the job deploys. For more information, see Package version lifecycle.  Note:The following Length Constraints relates to a single ARN. Up to 25 package version ARNs are allowed.
      */
     destinationPackageVersions?: DestinationPackageVersions;
   }
@@ -7088,7 +7088,7 @@ declare namespace Iot {
      */
     scheduledJobRollouts?: ScheduledJobRolloutList;
     /**
-     * The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes.   Note:The following Length Constraints relates to a single ARN. Up to 25 package version ARNs are allowed.
+     * The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes. The package version must be in either the Published or Deprecated state when the job deploys. For more information, see Package version lifecycle.The package version must be in either the Published or Deprecated state when the job deploys. For more information, see Package version lifecycle.  Note:The following Length Constraints relates to a single ARN. Up to 25 package version ARNs are allowed.
      */
     destinationPackageVersions?: DestinationPackageVersions;
   }

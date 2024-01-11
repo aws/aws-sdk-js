@@ -514,6 +514,12 @@ declare namespace EventBridge {
   export type ApiDestinationName = string;
   export type ApiDestinationResponseList = ApiDestination[];
   export type ApiDestinationState = "ACTIVE"|"INACTIVE"|string;
+  export interface AppSyncParameters {
+    /**
+     * The GraphQL operation; that is, the query, mutation, or subscription to be parsed and executed by the GraphQL service. For more information, see Operations in the AppSync User Guide.
+     */
+    GraphQLOperation?: GraphQLOperation;
+  }
   export interface Archive {
     /**
      * The name of the archive.
@@ -1816,6 +1822,7 @@ declare namespace EventBridge {
      */
     Secondary: Secondary;
   }
+  export type GraphQLOperation = string;
   export type HeaderKey = string;
   export type HeaderParametersMap = {[key: string]: HeaderValue};
   export type HeaderValue = string;
@@ -2441,7 +2448,7 @@ declare namespace EventBridge {
      */
     EventPattern?: EventPattern;
     /**
-     * The state of the rule. Valid values include:    DISABLED: The rule is disabled. EventBridge does not match any events against the rule.    ENABLED: The rule is enabled. EventBridge matches events against the rule, except for Amazon Web Services management events delivered through CloudTrail.    ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS: The rule is enabled for all events, including Amazon Web Services management events delivered through CloudTrail. Management events provide visibility into management operations that are performed on resources in your Amazon Web Services account. These are also known as control plane operations. For more information, see Logging management events in the CloudTrail User Guide, and Filtering management events from Amazon Web Services services in the Amazon EventBridge User Guide. This value is only valid for rules on the default event bus or custom event buses. It does not apply to partner event buses.  
+     * Indicates whether the rule is enabled or disabled.
      */
     State?: RuleState;
     /**
@@ -2695,7 +2702,7 @@ declare namespace EventBridge {
      */
     EventPattern?: EventPattern;
     /**
-     * The state of the rule. Valid values include:    DISABLED: The rule is disabled. EventBridge does not match any events against the rule.    ENABLED: The rule is enabled. EventBridge matches events against the rule, except for Amazon Web Services management events delivered through CloudTrail.    ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS: The rule is enabled for all events, including Amazon Web Services management events delivered through CloudTrail. Management events provide visibility into management operations that are performed on resources in your Amazon Web Services account. These are also known as control plane operations. For more information, see Logging management events in the CloudTrail User Guide, and Filtering management events from Amazon Web Services services in the Amazon EventBridge User Guide. This value is only valid for rules on the default event bus or custom event buses. It does not apply to partner event buses.  
+     * The state of the rule.
      */
     State?: RuleState;
     /**
@@ -2920,6 +2927,10 @@ declare namespace EventBridge {
      * The RetryPolicy object that contains the retry policy configuration to use for the dead-letter queue.
      */
     RetryPolicy?: RetryPolicy;
+    /**
+     * Contains the GraphQL operation to be parsed and executed, if the event target is an AppSync API.
+     */
+    AppSyncParameters?: AppSyncParameters;
   }
   export type TargetArn = string;
   export type TargetId = string;

@@ -2989,11 +2989,11 @@ declare class EC2 extends Service {
    */
   detachVerifiedAccessTrustProvider(callback?: (err: AWSError, data: EC2.Types.DetachVerifiedAccessTrustProviderResult) => void): Request<EC2.Types.DetachVerifiedAccessTrustProviderResult, AWSError>;
   /**
-   * Detaches an EBS volume from an instance. Make sure to unmount any file systems on the device within your operating system before detaching the volume. Failure to do so can result in the volume becoming stuck in the busy state while detaching. If this happens, detachment can be delayed indefinitely until you unmount the volume, force detachment, reboot the instance, or all three. If an EBS volume is the root device of an instance, it can't be detached while the instance is running. To detach the root volume, stop the instance first. When a volume with an Amazon Web Services Marketplace product code is detached from an instance, the product code is no longer associated with the instance. For more information, see Detach an Amazon EBS volume in the Amazon Elastic Compute Cloud User Guide.
+   * Detaches an EBS volume from an instance. Make sure to unmount any file systems on the device within your operating system before detaching the volume. Failure to do so can result in the volume becoming stuck in the busy state while detaching. If this happens, detachment can be delayed indefinitely until you unmount the volume, force detachment, reboot the instance, or all three. If an EBS volume is the root device of an instance, it can't be detached while the instance is running. To detach the root volume, stop the instance first. When a volume with an Amazon Web Services Marketplace product code is detached from an instance, the product code is no longer associated with the instance. You can't detach or force detach volumes that are attached to Amazon ECS or Fargate tasks. Attempting to do this results in the UnsupportedOperationException exception with the Unable to detach volume attached to ECS tasks error message. For more information, see Detach an Amazon EBS volume in the Amazon Elastic Compute Cloud User Guide.
    */
   detachVolume(params: EC2.Types.DetachVolumeRequest, callback?: (err: AWSError, data: EC2.Types.VolumeAttachment) => void): Request<EC2.Types.VolumeAttachment, AWSError>;
   /**
-   * Detaches an EBS volume from an instance. Make sure to unmount any file systems on the device within your operating system before detaching the volume. Failure to do so can result in the volume becoming stuck in the busy state while detaching. If this happens, detachment can be delayed indefinitely until you unmount the volume, force detachment, reboot the instance, or all three. If an EBS volume is the root device of an instance, it can't be detached while the instance is running. To detach the root volume, stop the instance first. When a volume with an Amazon Web Services Marketplace product code is detached from an instance, the product code is no longer associated with the instance. For more information, see Detach an Amazon EBS volume in the Amazon Elastic Compute Cloud User Guide.
+   * Detaches an EBS volume from an instance. Make sure to unmount any file systems on the device within your operating system before detaching the volume. Failure to do so can result in the volume becoming stuck in the busy state while detaching. If this happens, detachment can be delayed indefinitely until you unmount the volume, force detachment, reboot the instance, or all three. If an EBS volume is the root device of an instance, it can't be detached while the instance is running. To detach the root volume, stop the instance first. When a volume with an Amazon Web Services Marketplace product code is detached from an instance, the product code is no longer associated with the instance. You can't detach or force detach volumes that are attached to Amazon ECS or Fargate tasks. Attempting to do this results in the UnsupportedOperationException exception with the Unable to detach volume attached to ECS tasks error message. For more information, see Detach an Amazon EBS volume in the Amazon Elastic Compute Cloud User Guide.
    */
   detachVolume(callback?: (err: AWSError, data: EC2.Types.VolumeAttachment) => void): Request<EC2.Types.VolumeAttachment, AWSError>;
   /**
@@ -13725,7 +13725,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
     /**
-     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned nextToken value. This value can be between 5 and 500. If maxResults is given a larger value than 500, you receive an error.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: DescribeCapacityBlockOfferingsMaxResults;
   }
@@ -13750,7 +13750,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
     /**
-     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned nextToken value. This value can be between 5 and 500. If maxResults is given a larger value than 500, you receive an error.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: DescribeCapacityReservationFleetsMaxResults;
     /**
@@ -13783,7 +13783,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
     /**
-     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned nextToken value. This value can be between 5 and 500. If maxResults is given a larger value than 500, you receive an error.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: DescribeCapacityReservationsMaxResults;
     /**
@@ -19307,6 +19307,14 @@ declare namespace EC2 {
      * The ID of the EBS volume.
      */
     VolumeId?: String;
+    /**
+     * The ARN of the Amazon ECS or Fargate task to which the volume is attached.
+     */
+    AssociatedResource?: String;
+    /**
+     * The ID of the Amazon Web Services account that owns the volume. This parameter is returned only for volumes that are attached to Fargate tasks.
+     */
+    VolumeOwnerId?: String;
   }
   export interface EbsInstanceBlockDeviceSpecification {
     /**
@@ -19897,7 +19905,7 @@ declare namespace EC2 {
   }
   export interface EnableSnapshotBlockPublicAccessRequest {
     /**
-     * The mode in which to enable block public access for snapshots for the Region. Specify one of the following values:    block-all-sharing - Prevents all public sharing of snapshots in the Region. Users in the account will no longer be able to request new public sharing. Additionally, snapshots that are already publicly shared are treated as private and they are no longer publicly available.  If you enable block public access for snapshots in block-all-sharing mode, it does not change the permissions for snapshots that are already publicly shared. Instead, it prevents these snapshots from be publicly visible and publicly accessible. Therefore, the attributes for these snapshots still indicate that they are publicly shared, even though they are not publicly available.     block-new-sharing - Prevents only new public sharing of snapshots in the Region. Users in the account will no longer be able to request new public sharing. However, snapshots that are already publicly shared, remain publicly available.  
+     * The mode in which to enable block public access for snapshots for the Region. Specify one of the following values:    block-all-sharing - Prevents all public sharing of snapshots in the Region. Users in the account will no longer be able to request new public sharing. Additionally, snapshots that are already publicly shared are treated as private and they are no longer publicly available.  If you enable block public access for snapshots in block-all-sharing mode, it does not change the permissions for snapshots that are already publicly shared. Instead, it prevents these snapshots from be publicly visible and publicly accessible. Therefore, the attributes for these snapshots still indicate that they are publicly shared, even though they are not publicly available.     block-new-sharing - Prevents only new public sharing of snapshots in the Region. Users in the account will no longer be able to request new public sharing. However, snapshots that are already publicly shared, remain publicly available.    unblocked is not a valid value for EnableSnapshotBlockPublicAccess.
      */
     State: SnapshotBlockPublicAccessState;
     /**
@@ -21294,7 +21302,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
     /**
-     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned nextToken value. This value can be between 5 and 500. If maxResults is given a larger value than 500, you receive an error. Valid range: Minimum value of 1. Maximum value of 1000.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: GetCapacityReservationUsageRequestMaxResults;
     /**
@@ -21503,7 +21511,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
     /**
-     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned nextToken value. This value can be between 5 and 500. If maxResults is given a larger value than 500, you receive an error.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: GetGroupsForCapacityReservationRequestMaxResults;
     /**
@@ -22167,7 +22175,7 @@ declare namespace EC2 {
      */
     TargetCapacity: SpotPlacementScoresTargetCapacity;
     /**
-     * The unit for the target capacity. Default: units (translates to number of instances)
+     * The unit for the target capacity.
      */
     TargetCapacityUnitType?: TargetCapacityUnitType;
     /**
@@ -24415,7 +24423,7 @@ declare namespace EC2 {
   export type InstanceMetadataEndpointState = "disabled"|"enabled"|string;
   export interface InstanceMetadataOptionsRequest {
     /**
-     * IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to optional (in other words, set the use of IMDSv2 to optional) or required (in other words, set the use of IMDSv2 to required).    optional - When IMDSv2 is optional, you can choose to retrieve instance metadata with or without a session token in your request. If you retrieve the IAM role credentials without a token, the IMDSv1 role credentials are returned. If you retrieve the IAM role credentials using a valid session token, the IMDSv2 role credentials are returned.    required - When IMDSv2 is required, you must send a session token with any instance metadata retrieval requests. In this state, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.   Default: optional 
+     * Indicates whether IMDSv2 is required.    optional - IMDSv2 is optional. You can choose whether to send a session token in your instance metadata retrieval requests. If you retrieve IAM role credentials without a session token, you receive the IMDSv1 role credentials. If you retrieve IAM role credentials using a valid session token, you receive the IMDSv2 role credentials.    required - IMDSv2 is required. You must send a session token in your instance metadata retrieval requests. With this option, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.   Default: If the value of ImdsSupport for the Amazon Machine Image (AMI) for your instance is v2.0, the default is required.
      */
     HttpTokens?: HttpTokensState;
     /**
@@ -24441,7 +24449,7 @@ declare namespace EC2 {
      */
     State?: InstanceMetadataOptionsState;
     /**
-     * IMDSv2 uses token-backed sessions. Indicates whether the use of HTTP tokens is optional (in other words, indicates whether the use of IMDSv2 is optional) or required (in other words, indicates whether the use of IMDSv2 is required).    optional - When IMDSv2 is optional, you can choose to retrieve instance metadata with or without a session token in your request. If you retrieve the IAM role credentials without a token, the IMDSv1 role credentials are returned. If you retrieve the IAM role credentials using a valid session token, the IMDSv2 role credentials are returned.    required - When IMDSv2 is required, you must send a session token with any instance metadata retrieval requests. In this state, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.   Default: optional 
+     * Indicates whether IMDSv2 is required.    optional - IMDSv2 is optional. You can choose whether to send a session token in your instance metadata retrieval requests. If you retrieve IAM role credentials without a session token, you receive the IMDSv1 role credentials. If you retrieve IAM role credentials using a valid session token, you receive the IMDSv2 role credentials.    required - IMDSv2 is required. You must send a session token in your instance metadata retrieval requests. With this option, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.  
      */
     HttpTokens?: HttpTokensState;
     /**
@@ -28216,7 +28224,7 @@ declare namespace EC2 {
      */
     Attribute?: InstanceAttributeName;
     /**
-     * Modifies the DeleteOnTermination attribute for volumes that are currently attached. The volume must be owned by the caller. If no value is specified for DeleteOnTermination, the default is true and the volume is deleted when the instance is terminated. To add instance store volumes to an Amazon EBS-backed instance, you must add them when you launch the instance. For more information, see Update the block device mapping when launching an instance in the Amazon EC2 User Guide.
+     * Modifies the DeleteOnTermination attribute for volumes that are currently attached. The volume must be owned by the caller. If no value is specified for DeleteOnTermination, the default is true and the volume is deleted when the instance is terminated. You can't modify the DeleteOnTermination attribute for volumes that are attached to Fargate tasks. To add instance store volumes to an Amazon EBS-backed instance, you must add them when you launch the instance. For more information, see Update the block device mapping when launching an instance in the Amazon EC2 User Guide.
      */
     BlockDeviceMappings?: InstanceBlockDeviceMappingSpecificationList;
     /**
@@ -28402,7 +28410,7 @@ declare namespace EC2 {
      */
     InstanceId: InstanceId;
     /**
-     * IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to optional (in other words, set the use of IMDSv2 to optional) or required (in other words, set the use of IMDSv2 to required).    optional - When IMDSv2 is optional, you can choose to retrieve instance metadata with or without a session token in your request. If you retrieve the IAM role credentials without a token, the IMDSv1 role credentials are returned. If you retrieve the IAM role credentials using a valid session token, the IMDSv2 role credentials are returned.    required - When IMDSv2 is required, you must send a session token with any instance metadata retrieval requests. In this state, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.   Default: optional 
+     * Indicates whether IMDSv2 is required.    optional - IMDSv2 is optional. You can choose whether to send a session token in your instance metadata retrieval requests. If you retrieve IAM role credentials without a session token, you receive the IMDSv1 role credentials. If you retrieve IAM role credentials using a valid session token, you receive the IMDSv2 role credentials.    required - IMDSv2 is required. You must send a session token in your instance metadata retrieval requests. With this option, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.   Default: If the value of ImdsSupport for the Amazon Machine Image (AMI) for your instance is v2.0, the default is required.
      */
     HttpTokens?: HttpTokensState;
     /**
@@ -34695,7 +34703,7 @@ declare namespace EC2 {
   }
   export interface ScheduledInstancesNetworkInterface {
     /**
-     * Indicates whether to assign a public IPv4 address to instances launched in a VPC. The public IPv4 address can only be assigned to a network interface for eth0, and can only be assigned to a new network interface, not an existing one. You cannot specify more than one network interface in the request. If launching into a default subnet, the default value is true.
+     * Indicates whether to assign a public IPv4 address to instances launched in a VPC. The public IPv4 address can only be assigned to a network interface for eth0, and can only be assigned to a new network interface, not an existing one. You cannot specify more than one network interface in the request. If launching into a default subnet, the default value is true. Starting on February 1, 2024, Amazon Web Services will charge for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the Public IPv4 Address tab on the Amazon VPC pricing page.
      */
     AssociatePublicIpAddress?: Boolean;
     /**
@@ -35791,7 +35799,7 @@ declare namespace EC2 {
      */
     Context?: String;
     /**
-     * The unit for the target capacity. TargetCapacityUnitType can only be specified when InstanceRequirements is specified. Default: units (translates to number of instances)
+     * The unit for the target capacity. You can specify this parameter only when using attribute-based instance type selection. Default: units (the number of instances)
      */
     TargetCapacityUnitType?: TargetCapacityUnitType;
     /**
@@ -36225,7 +36233,7 @@ declare namespace EC2 {
      */
     Code?: String;
     /**
-     * The message for the state change.    Server.InsufficientInstanceCapacity: There was insufficient capacity available to satisfy the launch request.    Server.InternalError: An internal error caused the instance to terminate during launch.    Server.ScheduledStop: The instance was stopped due to a scheduled retirement.    Server.SpotInstanceShutdown: The instance was stopped because the number of Spot requests with a maximum price equal to or higher than the Spot price exceeded available capacity or because of an increase in the Spot price.    Server.SpotInstanceTermination: The instance was terminated because the number of Spot requests with a maximum price equal to or higher than the Spot price exceeded available capacity or because of an increase in the Spot price.    Client.InstanceInitiatedShutdown: The instance was shut down using the shutdown -h command from the instance.    Client.InstanceTerminated: The instance was terminated or rebooted during AMI creation.    Client.InternalError: A client error caused the instance to terminate during launch.    Client.InvalidSnapshot.NotFound: The specified snapshot was not found.    Client.UserInitiatedHibernate: Hibernation was initiated on the instance.    Client.UserInitiatedShutdown: The instance was shut down using the Amazon EC2 API.    Client.VolumeLimitExceeded: The limit on the number of EBS volumes or total storage was exceeded. Decrease usage or request an increase in your account limits.  
+     * The message for the state change.    Server.InsufficientInstanceCapacity: There was insufficient capacity available to satisfy the launch request.    Server.InternalError: An internal error caused the instance to terminate during launch.    Server.ScheduledStop: The instance was stopped due to a scheduled retirement.    Server.SpotInstanceShutdown: The instance was stopped because the number of Spot requests with a maximum price equal to or higher than the Spot price exceeded available capacity or because of an increase in the Spot price.    Server.SpotInstanceTermination: The instance was terminated because the number of Spot requests with a maximum price equal to or higher than the Spot price exceeded available capacity or because of an increase in the Spot price.    Client.InstanceInitiatedShutdown: The instance was shut down from the operating system of the instance.    Client.InstanceTerminated: The instance was terminated or rebooted during AMI creation.    Client.InternalError: A client error caused the instance to terminate during launch.    Client.InvalidSnapshot.NotFound: The specified snapshot was not found.    Client.UserInitiatedHibernate: Hibernation was initiated on the instance.    Client.UserInitiatedShutdown: The instance was shut down using the Amazon EC2 API.    Client.VolumeLimitExceeded: The limit on the number of EBS volumes or total storage was exceeded. Decrease usage or request an increase in your account limits.  
      */
     Message?: String;
   }
@@ -36570,7 +36578,7 @@ declare namespace EC2 {
   export type TaggableResourceId = string;
   export interface TargetCapacitySpecification {
     /**
-     * The number of units to request, filled using DefaultTargetCapacityType.
+     * The number of units to request, filled the default target capacity type.
      */
     TotalTargetCapacity?: Integer;
     /**
@@ -36582,17 +36590,17 @@ declare namespace EC2 {
      */
     SpotTargetCapacity?: Integer;
     /**
-     * The default TotalTargetCapacity, which is either Spot or On-Demand.
+     * The default target capacity type.
      */
     DefaultTargetCapacityType?: DefaultTargetCapacityType;
     /**
-     * The unit for the target capacity. TargetCapacityUnitType can only be specified when InstanceRequirements is specified. Default: units (translates to number of instances)
+     * The unit for the target capacity.
      */
     TargetCapacityUnitType?: TargetCapacityUnitType;
   }
   export interface TargetCapacitySpecificationRequest {
     /**
-     * The number of units to request, filled using DefaultTargetCapacityType.
+     * The number of units to request, filled using the default target capacity type.
      */
     TotalTargetCapacity: Integer;
     /**
@@ -36604,11 +36612,11 @@ declare namespace EC2 {
      */
     SpotTargetCapacity?: Integer;
     /**
-     * The default TotalTargetCapacity, which is either Spot or On-Demand.
+     * The default target capacity type.
      */
     DefaultTargetCapacityType?: DefaultTargetCapacityType;
     /**
-     * The unit for the target capacity. TargetCapacityUnitType can only be specified when InstanceRequirements is specified. Default: units (translates to number of instances)
+     * The unit for the target capacity. You can specify this parameter only when using attributed-based instance type selection. Default: units (the number of instances)
      */
     TargetCapacityUnitType?: TargetCapacityUnitType;
   }
@@ -39006,11 +39014,11 @@ declare namespace EC2 {
      */
     AttachTime?: DateTime;
     /**
-     * The device name.
+     * The device name. If the volume is attached to a Fargate task, this parameter returns null.
      */
     Device?: String;
     /**
-     * The ID of the instance.
+     * The ID of the instance. If the volume is attached to a Fargate task, this parameter returns null.
      */
     InstanceId?: String;
     /**
@@ -39025,6 +39033,14 @@ declare namespace EC2 {
      * Indicates whether the EBS volume is deleted on instance termination.
      */
     DeleteOnTermination?: Boolean;
+    /**
+     * The ARN of the Amazon ECS or Fargate task to which the volume is attached.
+     */
+    AssociatedResource?: String;
+    /**
+     * The service principal of Amazon Web Services service that owns the underlying instance to which the volume is attached. This parameter is returned only for volumes that are attached to Fargate tasks.
+     */
+    InstanceOwningService?: String;
   }
   export type VolumeAttachmentList = VolumeAttachment[];
   export type VolumeAttachmentState = "attaching"|"attached"|"detaching"|"detached"|"busy"|string;
