@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1534.0-->
+<!--LATEST=2.1535.0-->
 <!--ENTRYINSERT-->
+
+## 2.1535.0
+* feature: Connect: Supervisor Barge for Chat is now supported through the MonitorContact API.
+* feature: ConnectParticipant: Introduce new Supervisor participant role
+* feature: MWAA: This Amazon MWAA feature release includes new fields in CreateWebLoginToken response model. The new fields IamIdentity and AirflowIdentity will let you match identifications, as the Airflow identity length is currently hashed to 64 characters.
+* feature: S3Control: S3 On Outposts team adds dualstack endpoints support for S3Control and S3Outposts API calls.
+* feature: SupplyChain: This release includes APIs CreateBillOfMaterialsImportJob and GetBillOfMaterialsImportJob.
+* feature: Transfer: AWS Transfer Family now supports static IP addresses for SFTP & AS2 connectors and for async MDNs on AS2 servers.
 
 ## 2.1534.0
 * feature: EC2: This release adds support for adding an ElasticBlockStorage volume configurations in ECS RunTask/StartTask/CreateService/UpdateService APIs. The configuration allows for attaching EBS volumes to ECS Tasks.

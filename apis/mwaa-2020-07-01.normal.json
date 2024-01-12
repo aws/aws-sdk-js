@@ -337,6 +337,11 @@
       },
       "sensitive": true
     },
+    "AirflowIdentity": {
+      "type": "string",
+      "max": 64,
+      "min": 1
+    },
     "AirflowVersion": {
       "type": "string",
       "max": 32,
@@ -528,6 +533,14 @@
     "CreateWebLoginTokenResponse": {
       "type": "structure",
       "members": {
+        "AirflowIdentity": {
+          "shape": "AirflowIdentity",
+          "documentation": "<p>The user name of the Apache Airflow identity creating the web login token.</p>"
+        },
+        "IamIdentity": {
+          "shape": "IamIdentity",
+          "documentation": "<p>The name of the IAM identity creating the web login token. This might be an IAM user, or an assumed or federated identity. For example, <code>assumed-role/Admin/your-name</code>.</p>"
+        },
         "WebServerHostname": {
           "shape": "Hostname",
           "documentation": "<p>The Airflow web server hostname for the environment.</p>"
@@ -808,6 +821,9 @@
       "max": 255,
       "min": 1,
       "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])$"
+    },
+    "IamIdentity": {
+      "type": "string"
     },
     "IamRoleArn": {
       "type": "string",

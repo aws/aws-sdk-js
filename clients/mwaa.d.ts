@@ -102,6 +102,7 @@ declare class MWAA extends Service {
 }
 declare namespace MWAA {
   export type AirflowConfigurationOptions = {[key: string]: ConfigValue};
+  export type AirflowIdentity = string;
   export type AirflowVersion = string;
   export type CeleryExecutorQueue = string;
   export type CloudWatchLogGroupArn = string;
@@ -230,6 +231,14 @@ declare namespace MWAA {
     Name: EnvironmentName;
   }
   export interface CreateWebLoginTokenResponse {
+    /**
+     * The user name of the Apache Airflow identity creating the web login token.
+     */
+    AirflowIdentity?: AirflowIdentity;
+    /**
+     * The name of the IAM identity creating the web login token. This might be an IAM user, or an assumed or federated identity. For example, assumed-role/Admin/your-name.
+     */
+    IamIdentity?: IamIdentity;
     /**
      * The Airflow web server hostname for the environment.
      */
@@ -411,6 +420,7 @@ declare namespace MWAA {
     Environment?: Environment;
   }
   export type Hostname = string;
+  export type IamIdentity = string;
   export type IamRoleArn = string;
   export type Integer = number;
   export type KmsKey = string;

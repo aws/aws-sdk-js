@@ -377,6 +377,7 @@ export abstract class ConfigurationServicePlaceholders {
   marketplacedeployment?: AWS.MarketplaceDeployment.Types.ClientConfiguration;
   neptunegraph?: AWS.NeptuneGraph.Types.ClientConfiguration;
   networkmonitor?: AWS.NetworkMonitor.Types.ClientConfiguration;
+  supplychain?: AWS.SupplyChain.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -756,4 +757,5 @@ export interface ConfigurationServiceApiVersions {
   marketplacedeployment?: AWS.MarketplaceDeployment.Types.apiVersion;
   neptunegraph?: AWS.NeptuneGraph.Types.apiVersion;
   networkmonitor?: AWS.NetworkMonitor.Types.apiVersion;
+  supplychain?: AWS.SupplyChain.Types.apiVersion;
 }

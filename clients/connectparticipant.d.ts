@@ -330,7 +330,7 @@ declare namespace ConnectParticipant {
   export type NextToken = string;
   export type NonEmptyClientToken = string;
   export type ParticipantId = string;
-  export type ParticipantRole = "AGENT"|"CUSTOMER"|"SYSTEM"|"CUSTOM_BOT"|string;
+  export type ParticipantRole = "AGENT"|"CUSTOMER"|"SYSTEM"|"CUSTOM_BOT"|"SUPERVISOR"|string;
   export type ParticipantToken = string;
   export type PreSignedAttachmentUrl = string;
   export type PreSignedConnectionUrl = string;

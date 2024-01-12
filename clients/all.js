@@ -376,5 +376,6 @@ module.exports = {
   MarketplaceAgreement: require('./marketplaceagreement'),
   MarketplaceDeployment: require('./marketplacedeployment'),
   NeptuneGraph: require('./neptunegraph'),
-  NetworkMonitor: require('./networkmonitor')
+  NetworkMonitor: require('./networkmonitor'),
+  SupplyChain: require('./supplychain')
 };

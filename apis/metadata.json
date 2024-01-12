@@ -1411,5 +1411,8 @@
   },
   "networkmonitor": {
     "name": "NetworkMonitor"
+  },
+  "supplychain": {
+    "name": "SupplyChain"
   }
 }

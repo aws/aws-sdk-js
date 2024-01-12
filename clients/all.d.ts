@@ -375,3 +375,4 @@ export import MarketplaceAgreement = require('./marketplaceagreement');
 export import MarketplaceDeployment = require('./marketplacedeployment');
 export import NeptuneGraph = require('./neptunegraph');
 export import NetworkMonitor = require('./networkmonitor');
+export import SupplyChain = require('./supplychain');

@@ -1331,6 +1331,10 @@ declare namespace Transfer {
      * A structure that contains the parameters for an SFTP connector object.
      */
     SftpConfig?: SftpConnectorConfig;
+    /**
+     * The list of egress IP addresses of this connector. These IP addresses are assigned automatically when you create the connector.
+     */
+    ServiceManagedEgressIpAddresses?: ServiceManagedEgressIpAddresses;
   }
   export interface DescribedExecution {
     /**
@@ -1530,6 +1534,10 @@ declare namespace Transfer {
      * Specifies whether or not performance for your Amazon S3 directories is optimized. This is disabled by default. By default, home directory mappings have a TYPE of DIRECTORY. If you enable this option, you would then need to explicitly set the HomeDirectoryMapEntry Type to FILE if you want a mapping to have a file target.
      */
     S3StorageOptions?: S3StorageOptions;
+    /**
+     * The list of egress IP addresses of this server. These IP addresses are only relevant for servers that use the AS2 protocol. They are used for sending asynchronous MDNs. These IP addresses are assigned automatically when you create an AS2 server. Additionally, if you update an existing server and add the AS2 protocol, static IP addresses are assigned as well.
+     */
+    As2ServiceManagedEgressIpAddresses?: ServiceManagedEgressIpAddresses;
   }
   export interface DescribedUser {
     /**
@@ -1726,7 +1734,7 @@ declare namespace Transfer {
      */
     InvocationRole?: Role;
     /**
-     * The identifier of the Directory Service directory that you want to stop sharing.
+     * The identifier of the Directory Service directory that you want to use as your identity provider.
      */
     DirectoryId?: DirectoryId;
     /**
@@ -2523,6 +2531,8 @@ declare namespace Transfer {
   export interface SendWorkflowStepStateResponse {
   }
   export type ServerId = string;
+  export type ServiceManagedEgressIpAddress = string;
+  export type ServiceManagedEgressIpAddresses = ServiceManagedEgressIpAddress[];
   export interface ServiceMetadata {
     /**
      * The Server ID (ServerId), Session ID (SessionId) and user (UserName) make up the UserDetails.
