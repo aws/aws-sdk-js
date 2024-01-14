@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1535.0-->
+<!--LATEST=2.1536.0-->
 <!--ENTRYINSERT-->
+
+## 2.1536.0
+* feature: SageMaker: This release will have ValidationException thrown if certain invalid app types are provided. The release will also throw ValidationException if more than 10 account ids are provided in VpcOnlyTrustedAccounts.
 
 ## 2.1535.0
 * feature: Connect: Supervisor Barge for Chat is now supported through the MonitorContact API.

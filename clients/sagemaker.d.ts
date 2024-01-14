@@ -2798,7 +2798,7 @@ declare namespace SageMaker {
      */
     CompressionType?: CompressionType;
   }
-  export type AdditionalS3DataSourceDataType = "S3Object"|string;
+  export type AdditionalS3DataSourceDataType = "S3Object"|"S3Prefix"|string;
   export interface AgentVersion {
     /**
      * Version of the agent.
@@ -3018,7 +3018,7 @@ declare namespace SageMaker {
     ContainerArguments?: ContainerArguments;
   }
   export type AppStatus = "Deleted"|"Deleting"|"Failed"|"InService"|"Pending"|string;
-  export type AppType = "JupyterServer"|"KernelGateway"|"DetailedProfiler"|"TensorBoard"|"VSCode"|"Savitur"|"CodeEditor"|"JupyterLab"|"RStudioServerPro"|"RSession"|"RSessionGateway"|"Canvas"|"DatasetManager"|"SageMakerLite"|"Local"|string;
+  export type AppType = "JupyterServer"|"KernelGateway"|"DetailedProfiler"|"TensorBoard"|"CodeEditor"|"JupyterLab"|"RStudioServerPro"|"RSessionGateway"|"Canvas"|string;
   export type ApprovalDescription = string;
   export type ArnOrName = string;
   export type ArtifactArn = string;
@@ -21816,7 +21816,7 @@ declare namespace SageMaker {
   export type String64 = string;
   export type String8192 = string;
   export type StringParameterValue = string;
-  export type StudioLifecycleConfigAppType = "JupyterServer"|"KernelGateway"|"VSCode"|"Savitur"|"CodeEditor"|"JupyterLab"|string;
+  export type StudioLifecycleConfigAppType = "JupyterServer"|"KernelGateway"|"CodeEditor"|"JupyterLab"|string;
   export type StudioLifecycleConfigArn = string;
   export type StudioLifecycleConfigContent = string;
   export interface StudioLifecycleConfigDetails {
