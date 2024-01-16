@@ -9080,7 +9080,7 @@ declare namespace Iot {
   }
   export type LogTargetConfigurations = LogTargetConfiguration[];
   export type LogTargetName = string;
-  export type LogTargetType = "DEFAULT"|"THING_GROUP"|"CLIENT_ID"|"SOURCE_IP"|"PRINCIPAL_ID"|"EVENT_TYPE"|"DEVICE_DEFENDER"|string;
+  export type LogTargetType = "DEFAULT"|"THING_GROUP"|"CLIENT_ID"|"SOURCE_IP"|"PRINCIPAL_ID"|string;
   export interface LoggingOptionsPayload {
     /**
      * The ARN of the IAM role that grants access.

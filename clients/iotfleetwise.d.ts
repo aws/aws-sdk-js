@@ -707,7 +707,7 @@ declare namespace IoTFleetWise {
   export type Compression = "OFF"|"SNAPPY"|string;
   export interface ConditionBasedCollectionScheme {
     /**
-     * The logical expression used to recognize what data to collect. For example, $variable.Vehicle.OutsideAirTemperature &gt;= 105.0.
+     * The logical expression used to recognize what data to collect. For example, $variable.`Vehicle.OutsideAirTemperature` &gt;= 105.0.
      */
     expression: eventExpression;
     /**
@@ -1877,6 +1877,10 @@ declare namespace IoTFleetWise {
      *  The maximum number of items to return, between 1 and 100, inclusive. 
      */
     maxResults?: maxResults;
+    /**
+     * The type of node in the signal catalog.
+     */
+    signalNodeType?: SignalNodeType;
   }
   export interface ListSignalCatalogNodesResponse {
     /**
@@ -2386,6 +2390,7 @@ declare namespace IoTFleetWise {
     minimumSamplingIntervalMs?: uint32;
   }
   export type SignalInformationList = SignalInformation[];
+  export type SignalNodeType = "SENSOR"|"ACTUATOR"|"ATTRIBUTE"|"BRANCH"|"CUSTOM_STRUCT"|"CUSTOM_PROPERTY"|string;
   export type SpoolingMode = "OFF"|"TO_DISK"|string;
   export type StorageCompressionFormat = "NONE"|"GZIP"|string;
   export type String = string;
@@ -2827,6 +2832,10 @@ declare namespace IoTFleetWise {
      * The time the vehicle was last updated in seconds since epoch (January 1, 1970 at midnight UTC time). 
      */
     lastModificationTime: timestamp;
+    /**
+     * Static information about a vehicle in a key-value pair. For example:  "engineType" : "1.3 L R2" 
+     */
+    attributes?: attributesMap;
   }
   export type arn = string;
   export type attributeName = string;
