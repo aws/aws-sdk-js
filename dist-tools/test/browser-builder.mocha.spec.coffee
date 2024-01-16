@@ -38,7 +38,7 @@ describe 'ServiceCollector', ->
   it 'accepts "all" for all services', ->
     add 'all'
     Object.keys(helpers.AWS).forEach (name) ->
-      if helpers.AWS[name].serviceIdentifier && name != 'NeptuneGraph'
+      if helpers.AWS[name].serviceIdentifier
         assertServiceAdded(name)
 
   it 'throws an error if the service does not exist', ->
@@ -88,7 +88,7 @@ describe 'build', ->
         result = helpers.evalCode(code, data)
       cb(err, result)
 
-  it 'always bundles sts and cognitoidentity clients', -> 
+  it 'always bundles sts and cognitoidentity clients', ->
     buildBundle 's3', null, 'window.AWS', (err, AWS) ->
       expect(new AWS.STS().api.apiVersion).to.equal(new helpers.AWS.STS().api.apiVersion)
       expect(new AWS.CognitoIdentity().api.apiVersion).to.equal(new helpers.AWS.CognitoIdentity().api.apiVersion)

@@ -20,9 +20,9 @@ function customEval(cmd, context, filename, callback) {
       context.error = resp.error;
       callback(resp.error, resp.data);
     }
-    
+
     if (value && value.constructor === AWS.Request && !value.__hasBeenEval__) {
-      
+
       try {
         value.__hasBeenEval__ = true;
         if (value.response) value.response.__hasBeenEval__ = true;
@@ -107,7 +107,7 @@ repl.context.autoSend = true;
 for (var key in AWS) {
   var id = AWS[key].serviceIdentifier;
   if (id) {
-    if (id === 'cloudsearchdomain' || id === 'iotdata' || id === 'neptunegraph') continue; // this required an explicit endpoint
+    if (id === 'cloudsearchdomain' || id === 'iotdata') continue; // this required an explicit endpoint
 
     var svcClass = AWS[key];
     var svc = new svcClass(defaultOptions);

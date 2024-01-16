@@ -1347,10 +1347,6 @@
   "trustedadvisor": {
     "name": "TrustedAdvisor"
   },
-  "cloudfrontkeyvaluestore": {
-    "prefix": "cloudfront-keyvaluestore",
-    "name": "CloudFrontKeyValueStore"
-  },
   "inspectorscan": {
     "prefix": "inspector-scan",
     "name": "InspectorScan"
@@ -1404,10 +1400,6 @@
   "marketplacedeployment": {
     "prefix": "marketplace-deployment",
     "name": "MarketplaceDeployment"
-  },
-  "neptunegraph": {
-    "prefix": "neptune-graph",
-    "name": "NeptuneGraph"
   },
   "networkmonitor": {
     "name": "NetworkMonitor"

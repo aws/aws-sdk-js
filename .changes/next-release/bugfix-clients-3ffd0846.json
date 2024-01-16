@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "clients",
+  "description": "remove cloudnfront-keyvaluestore and neptune-graph clients. These clients are available in AWS SDK for JavaScript (v3) https://github.com/aws/aws-sdk-js-v3/."
+}
