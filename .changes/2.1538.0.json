@@ -1,0 +1,12 @@
+[
+    {
+        "type": "bugfix",
+        "category": "clients",
+        "description": "remove cloudnfront-keyvaluestore and neptune-graph clients. These clients are available in AWS SDK for JavaScript (v3) https://github.com/aws/aws-sdk-js-v3/."
+    },
+    {
+        "type": "feature",
+        "category": "Keyspaces",
+        "description": "This release adds support for Multi-Region Replication with provisioned tables, and Keyspaces auto scaling APIs"
+    }
+]

@@ -60,6 +60,14 @@ declare class Keyspaces extends Service {
    */
   getTable(callback?: (err: AWSError, data: Keyspaces.Types.GetTableResponse) => void): Request<Keyspaces.Types.GetTableResponse, AWSError>;
   /**
+   * Returns auto scaling related settings of the specified table in JSON format. If the table is a multi-Region table, the Amazon Web Services Region specific auto scaling settings of the table are included. Amazon Keyspaces auto scaling helps you provision throughput capacity for variable workloads efficiently by increasing and decreasing your table's read and write capacity automatically in response to application traffic. For more information, see Managing throughput capacity automatically with Amazon Keyspaces auto scaling in the Amazon Keyspaces Developer Guide.
+   */
+  getTableAutoScalingSettings(params: Keyspaces.Types.GetTableAutoScalingSettingsRequest, callback?: (err: AWSError, data: Keyspaces.Types.GetTableAutoScalingSettingsResponse) => void): Request<Keyspaces.Types.GetTableAutoScalingSettingsResponse, AWSError>;
+  /**
+   * Returns auto scaling related settings of the specified table in JSON format. If the table is a multi-Region table, the Amazon Web Services Region specific auto scaling settings of the table are included. Amazon Keyspaces auto scaling helps you provision throughput capacity for variable workloads efficiently by increasing and decreasing your table's read and write capacity automatically in response to application traffic. For more information, see Managing throughput capacity automatically with Amazon Keyspaces auto scaling in the Amazon Keyspaces Developer Guide.
+   */
+  getTableAutoScalingSettings(callback?: (err: AWSError, data: Keyspaces.Types.GetTableAutoScalingSettingsResponse) => void): Request<Keyspaces.Types.GetTableAutoScalingSettingsResponse, AWSError>;
+  /**
    * Returns a list of keyspaces.
    */
   listKeyspaces(params: Keyspaces.Types.ListKeyspacesRequest, callback?: (err: AWSError, data: Keyspaces.Types.ListKeyspacesResponse) => void): Request<Keyspaces.Types.ListKeyspacesResponse, AWSError>;
@@ -84,11 +92,11 @@ declare class Keyspaces extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Keyspaces.Types.ListTagsForResourceResponse) => void): Request<Keyspaces.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Restores the specified table to the specified point in time within the earliest_restorable_timestamp and the current time. For more information about restore points, see  Time window for PITR continuous backups in the Amazon Keyspaces Developer Guide. Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account. When you restore using point in time recovery, Amazon Keyspaces restores your source table's schema and data to the state based on the selected timestamp (day:hour:minute:second) to a new table. The Time to Live (TTL) settings are also restored to the state based on the selected timestamp. In addition to the table's schema, data, and TTL settings, RestoreTable restores the capacity mode, encryption, and point-in-time recovery settings from the source table. Unlike the table's schema data and TTL settings, which are restored based on the selected timestamp, these settings are always restored based on the table's settings as of the current time or when the table was deleted. You can also overwrite these settings during restore:   Read/write capacity mode   Provisioned throughput capacity settings   Point-in-time (PITR) settings   Tags   For more information, see PITR restore settings in the Amazon Keyspaces Developer Guide. Note that the following settings are not restored, and you must configure them manually for the new table:   Automatic scaling policies (for tables that use provisioned capacity mode)   Identity and Access Management (IAM) policies   Amazon CloudWatch metrics and alarms  
+   * Restores the table to the specified point in time within the earliest_restorable_timestamp and the current time. For more information about restore points, see  Time window for PITR continuous backups in the Amazon Keyspaces Developer Guide. Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account. When you restore using point in time recovery, Amazon Keyspaces restores your source table's schema and data to the state based on the selected timestamp (day:hour:minute:second) to a new table. The Time to Live (TTL) settings are also restored to the state based on the selected timestamp. In addition to the table's schema, data, and TTL settings, RestoreTable restores the capacity mode, auto scaling settings, encryption settings, and point-in-time recovery settings from the source table. Unlike the table's schema data and TTL settings, which are restored based on the selected timestamp, these settings are always restored based on the table's settings as of the current time or when the table was deleted. You can also overwrite these settings during restore:   Read/write capacity mode   Provisioned throughput capacity units   Auto scaling settings   Point-in-time (PITR) settings   Tags   For more information, see PITR restore settings in the Amazon Keyspaces Developer Guide. Note that the following settings are not restored, and you must configure them manually for the new table:   Identity and Access Management (IAM) policies   Amazon CloudWatch metrics and alarms  
    */
   restoreTable(params: Keyspaces.Types.RestoreTableRequest, callback?: (err: AWSError, data: Keyspaces.Types.RestoreTableResponse) => void): Request<Keyspaces.Types.RestoreTableResponse, AWSError>;
   /**
-   * Restores the specified table to the specified point in time within the earliest_restorable_timestamp and the current time. For more information about restore points, see  Time window for PITR continuous backups in the Amazon Keyspaces Developer Guide. Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account. When you restore using point in time recovery, Amazon Keyspaces restores your source table's schema and data to the state based on the selected timestamp (day:hour:minute:second) to a new table. The Time to Live (TTL) settings are also restored to the state based on the selected timestamp. In addition to the table's schema, data, and TTL settings, RestoreTable restores the capacity mode, encryption, and point-in-time recovery settings from the source table. Unlike the table's schema data and TTL settings, which are restored based on the selected timestamp, these settings are always restored based on the table's settings as of the current time or when the table was deleted. You can also overwrite these settings during restore:   Read/write capacity mode   Provisioned throughput capacity settings   Point-in-time (PITR) settings   Tags   For more information, see PITR restore settings in the Amazon Keyspaces Developer Guide. Note that the following settings are not restored, and you must configure them manually for the new table:   Automatic scaling policies (for tables that use provisioned capacity mode)   Identity and Access Management (IAM) policies   Amazon CloudWatch metrics and alarms  
+   * Restores the table to the specified point in time within the earliest_restorable_timestamp and the current time. For more information about restore points, see  Time window for PITR continuous backups in the Amazon Keyspaces Developer Guide. Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account. When you restore using point in time recovery, Amazon Keyspaces restores your source table's schema and data to the state based on the selected timestamp (day:hour:minute:second) to a new table. The Time to Live (TTL) settings are also restored to the state based on the selected timestamp. In addition to the table's schema, data, and TTL settings, RestoreTable restores the capacity mode, auto scaling settings, encryption settings, and point-in-time recovery settings from the source table. Unlike the table's schema data and TTL settings, which are restored based on the selected timestamp, these settings are always restored based on the table's settings as of the current time or when the table was deleted. You can also overwrite these settings during restore:   Read/write capacity mode   Provisioned throughput capacity units   Auto scaling settings   Point-in-time (PITR) settings   Tags   For more information, see PITR restore settings in the Amazon Keyspaces Developer Guide. Note that the following settings are not restored, and you must configure them manually for the new table:   Identity and Access Management (IAM) policies   Amazon CloudWatch metrics and alarms  
    */
   restoreTable(callback?: (err: AWSError, data: Keyspaces.Types.RestoreTableResponse) => void): Request<Keyspaces.Types.RestoreTableResponse, AWSError>;
   /**
@@ -108,16 +116,51 @@ declare class Keyspaces extends Service {
    */
   untagResource(callback?: (err: AWSError, data: Keyspaces.Types.UntagResourceResponse) => void): Request<Keyspaces.Types.UntagResourceResponse, AWSError>;
   /**
-   * Adds new columns to the table or updates one of the table's settings, for example capacity mode, encryption, point-in-time recovery, or ttl settings. Note that you can only update one specific table setting per update operation.
+   * Adds new columns to the table or updates one of the table's settings, for example capacity mode, auto scaling, encryption, point-in-time recovery, or ttl settings. Note that you can only update one specific table setting per update operation.
    */
   updateTable(params: Keyspaces.Types.UpdateTableRequest, callback?: (err: AWSError, data: Keyspaces.Types.UpdateTableResponse) => void): Request<Keyspaces.Types.UpdateTableResponse, AWSError>;
   /**
-   * Adds new columns to the table or updates one of the table's settings, for example capacity mode, encryption, point-in-time recovery, or ttl settings. Note that you can only update one specific table setting per update operation.
+   * Adds new columns to the table or updates one of the table's settings, for example capacity mode, auto scaling, encryption, point-in-time recovery, or ttl settings. Note that you can only update one specific table setting per update operation.
    */
   updateTable(callback?: (err: AWSError, data: Keyspaces.Types.UpdateTableResponse) => void): Request<Keyspaces.Types.UpdateTableResponse, AWSError>;
 }
 declare namespace Keyspaces {
   export type ARN = string;
+  export interface AutoScalingPolicy {
+    /**
+     * Auto scaling scales up capacity automatically when traffic exceeds this target utilization rate, and then back down when it falls below the target. A double between 20 and 90.
+     */
+    targetTrackingScalingPolicyConfiguration?: TargetTrackingScalingPolicyConfiguration;
+  }
+  export interface AutoScalingSettings {
+    /**
+     * This optional parameter enables auto scaling for the table if set to false.
+     */
+    autoScalingDisabled?: BooleanObject;
+    /**
+     * The minimum level of throughput the table should always be ready to support. The value must be between 1 and the max throughput per second quota for your account (40,000 by default).
+     */
+    minimumUnits?: CapacityUnits;
+    /**
+     * Manage costs by specifying the maximum amount of throughput to provision. The value must be between 1 and the max throughput per second quota for your account (40,000 by default).
+     */
+    maximumUnits?: CapacityUnits;
+    /**
+     * Amazon Keyspaces supports the target tracking auto scaling policy. With this policy, Amazon Keyspaces auto scaling ensures that the table's ratio of consumed to provisioned capacity stays at or near the target value that you specify. You define the target value as a percentage between 20 and 90.
+     */
+    scalingPolicy?: AutoScalingPolicy;
+  }
+  export interface AutoScalingSpecification {
+    /**
+     * The auto scaling settings for the table's write capacity.
+     */
+    writeCapacityAutoScaling?: AutoScalingSettings;
+    /**
+     * The auto scaling settings for the table's read capacity.
+     */
+    readCapacityAutoScaling?: AutoScalingSettings;
+  }
+  export type BooleanObject = boolean;
   export interface CapacitySpecification {
     /**
      * The read/write throughput capacity mode for a table. The options are:    throughputMode:PAY_PER_REQUEST and     throughputMode:PROVISIONED - Provisioned capacity mode requires readCapacityUnits and writeCapacityUnits as input.   The default is throughput_mode:PAY_PER_REQUEST. For more information, see Read/write capacity modes in the Amazon Keyspaces Developer Guide.
@@ -251,6 +294,14 @@ declare namespace Keyspaces {
      *  Enables client-side timestamps for the table. By default, the setting is disabled. You can enable client-side timestamps with the following option:    status: "enabled"    Once client-side timestamps are enabled for a table, this setting cannot be disabled.
      */
     clientSideTimestamps?: ClientSideTimestamps;
+    /**
+     * The optional auto scaling settings for a table in provisioned capacity mode. Specifies if the service can manage throughput capacity automatically on your behalf. Auto scaling helps you provision throughput capacity for variable workloads efficiently by increasing and decreasing your table's read and write capacity automatically in response to application traffic. For more information, see Managing throughput capacity automatically with Amazon Keyspaces auto scaling in the Amazon Keyspaces Developer Guide. By default, auto scaling is disabled for a table. 
+     */
+    autoScalingSpecification?: AutoScalingSpecification;
+    /**
+     * The optional Amazon Web Services Region specific settings of a multi-Region table. These settings overwrite the general settings of the table for the specified Region.  For a multi-Region table in provisioned capacity mode, you can configure the table's read capacity differently for each Region's replica. The write capacity, however, remains synchronized between all replicas to ensure that there's enough capacity to replicate writes across all Regions. To define the read capacity for a table replica in a specific Region, you can do so by configuring the following parameters.    region: The Region where these settings are applied. (Required)    readCapacityUnits: The provisioned read capacity units. (Optional)    readCapacityAutoScaling: The read capacity auto scaling settings for the table. (Optional)   
+     */
+    replicaSpecifications?: ReplicaSpecificationList;
   }
   export interface CreateTableResponse {
     /**
@@ -279,6 +330,7 @@ declare namespace Keyspaces {
   }
   export interface DeleteTableResponse {
   }
+  export type DoubleObject = number;
   export interface EncryptionSpecification {
     /**
      * The encryption option specified for the table. You can choose one of the following KMS keys (KMS keys):    type:AWS_OWNED_KMS_KEY - This key is owned by Amazon Keyspaces.     type:CUSTOMER_MANAGED_KMS_KEY - This key is stored in your account and is created, owned, and managed by you. This option requires the kms_key_identifier of the KMS key in Amazon Resource Name (ARN) format as input.    The default is type:AWS_OWNED_KMS_KEY.  For more information, see Encryption at rest in the Amazon Keyspaces Developer Guide.
@@ -314,6 +366,38 @@ declare namespace Keyspaces {
      *  If the replicationStrategy of the keyspace is MULTI_REGION, a list of replication Regions is returned. 
      */
     replicationRegions?: RegionList;
+  }
+  export interface GetTableAutoScalingSettingsRequest {
+    /**
+     * The name of the keyspace.
+     */
+    keyspaceName: KeyspaceName;
+    /**
+     * The name of the table.
+     */
+    tableName: TableName;
+  }
+  export interface GetTableAutoScalingSettingsResponse {
+    /**
+     * The name of the keyspace.
+     */
+    keyspaceName: KeyspaceName;
+    /**
+     * The name of the table.
+     */
+    tableName: TableName;
+    /**
+     * The Amazon Resource Name (ARN) of the table.
+     */
+    resourceArn: ARN;
+    /**
+     * The auto scaling settings of the table.
+     */
+    autoScalingSpecification?: AutoScalingSpecification;
+    /**
+     * The Amazon Web Services Region specific settings of a multi-Region table. Returns the settings for all Regions the table is replicated in.
+     */
+    replicaSpecifications?: ReplicaAutoScalingSpecificationList;
   }
   export interface GetTableRequest {
     /**
@@ -378,7 +462,12 @@ declare namespace Keyspaces {
      *  The client-side timestamps setting of the table.
      */
     clientSideTimestamps?: ClientSideTimestamps;
+    /**
+     * Returns the Amazon Web Services Region specific settings of all Regions a multi-Region table is replicated in.
+     */
+    replicaSpecifications?: ReplicaSpecificationSummaryList;
   }
+  export type IntegerObject = number;
   export type KeyspaceName = string;
   export interface KeyspaceSummary {
     /**
@@ -494,6 +583,44 @@ declare namespace Keyspaces {
     earliestRestorableTimestamp?: Timestamp;
   }
   export type RegionList = region[];
+  export interface ReplicaAutoScalingSpecification {
+    /**
+     * The Amazon Web Services Region.
+     */
+    region?: region;
+    /**
+     * The auto scaling settings for a multi-Region table in the specified Amazon Web Services Region.
+     */
+    autoScalingSpecification?: AutoScalingSpecification;
+  }
+  export type ReplicaAutoScalingSpecificationList = ReplicaAutoScalingSpecification[];
+  export interface ReplicaSpecification {
+    /**
+     * The Amazon Web Services Region.
+     */
+    region: region;
+    /**
+     * The provisioned read capacity units for the multi-Region table in the specified Amazon Web Services Region.
+     */
+    readCapacityUnits?: CapacityUnits;
+    /**
+     * The read capacity auto scaling settings for the multi-Region table in the specified Amazon Web Services Region.
+     */
+    readCapacityAutoScaling?: AutoScalingSettings;
+  }
+  export type ReplicaSpecificationList = ReplicaSpecification[];
+  export interface ReplicaSpecificationSummary {
+    /**
+     * The Amazon Web Services Region.
+     */
+    region?: region;
+    /**
+     * The status of the multi-Region table in the specified Amazon Web Services Region.
+     */
+    status?: TableStatus;
+    capacitySpecification?: CapacitySpecificationSummary;
+  }
+  export type ReplicaSpecificationSummaryList = ReplicaSpecificationSummary[];
   export interface ReplicationSpecification {
     /**
      *  The replicationStrategy of a keyspace, the required value is SINGLE_REGION or MULTI_REGION. 
@@ -541,6 +668,14 @@ declare namespace Keyspaces {
      * A list of key-value pair tags to be attached to the restored table.  For more information, see Adding tags and labels to Amazon Keyspaces resources in the Amazon Keyspaces Developer Guide.
      */
     tagsOverride?: TagList;
+    /**
+     * The optional auto scaling settings for the restored table in provisioned capacity mode. Specifies if the service can manage throughput capacity of a provisioned table automatically on your behalf. Amazon Keyspaces auto scaling helps you provision throughput capacity for variable workloads efficiently by increasing and decreasing your table's read and write capacity automatically in response to application traffic. For more information, see Managing throughput capacity automatically with Amazon Keyspaces auto scaling in the Amazon Keyspaces Developer Guide.
+     */
+    autoScalingSpecification?: AutoScalingSpecification;
+    /**
+     * The optional Region specific settings of a multi-Regional table.
+     */
+    replicaSpecifications?: ReplicaSpecificationList;
   }
   export interface RestoreTableResponse {
     /**
@@ -617,6 +752,24 @@ declare namespace Keyspaces {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export interface TargetTrackingScalingPolicyConfiguration {
+    /**
+     * Specifies if scale-in is enabled. When auto scaling automatically decreases capacity for a table, the table scales in. When scaling policies are set, they can't scale in the table lower than its minimum capacity.
+     */
+    disableScaleIn?: BooleanObject;
+    /**
+     * Specifies a scale-in cool down period. A cooldown period in seconds between scaling activities that lets the table stabilize before another scaling activity starts. 
+     */
+    scaleInCooldown?: IntegerObject;
+    /**
+     * Specifies a scale out cool down period. A cooldown period in seconds between scaling activities that lets the table stabilize before another scaling activity starts. 
+     */
+    scaleOutCooldown?: IntegerObject;
+    /**
+     * Specifies the target value for the target tracking auto scaling policy. Amazon Keyspaces auto scaling scales up capacity automatically when traffic exceeds this target utilization rate, and then back down when it falls below the target. This ensures that the ratio of consumed capacity to provisioned capacity stays at or near this value. You define targetValue as a percentage. A double between 20 and 90.
+     */
+    targetValue: DoubleObject;
+  }
   export type ThroughputMode = "PAY_PER_REQUEST"|"PROVISIONED"|string;
   export interface TimeToLive {
     /**
@@ -675,6 +828,14 @@ declare namespace Keyspaces {
      * Enables client-side timestamps for the table. By default, the setting is disabled. You can enable client-side timestamps with the following option:    status: "enabled"    Once client-side timestamps are enabled for a table, this setting cannot be disabled.
      */
     clientSideTimestamps?: ClientSideTimestamps;
+    /**
+     * The optional auto scaling settings to update for a table in provisioned capacity mode. Specifies if the service can manage throughput capacity of a provisioned table automatically on your behalf. Amazon Keyspaces auto scaling helps you provision throughput capacity for variable workloads efficiently by increasing and decreasing your table's read and write capacity automatically in response to application traffic. If auto scaling is already enabled for the table, you can use UpdateTable to update the minimum and maximum values or the auto scaling policy settings independently. For more information, see Managing throughput capacity automatically with Amazon Keyspaces auto scaling in the Amazon Keyspaces Developer Guide.
+     */
+    autoScalingSpecification?: AutoScalingSpecification;
+    /**
+     * The Region specific settings of a multi-Regional table.
+     */
+    replicaSpecifications?: ReplicaSpecificationList;
   }
   export interface UpdateTableResponse {
     /**

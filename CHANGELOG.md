@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1537.0-->
+<!--LATEST=2.1538.0-->
 <!--ENTRYINSERT-->
+
+## 2.1538.0
+* bugfix: clients: remove cloudnfront-keyvaluestore and neptune-graph clients. These clients are available in AWS SDK for JavaScript (v3) https://github.com/aws/aws-sdk-js-v3/.
+* feature: Keyspaces: This release adds support for Multi-Region Replication with provisioned tables, and Keyspaces auto scaling APIs
 
 ## 2.1537.0
 * feature: IoTFleetWise: Updated APIs: SignalNodeType query parameter has been added to ListSignalCatalogNodesRequest and ListVehiclesResponse has been extended with attributes field.
