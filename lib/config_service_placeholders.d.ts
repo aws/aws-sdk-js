@@ -359,7 +359,6 @@ export abstract class ConfigurationServicePlaceholders {
   datazone?: AWS.DataZone.Types.ClientConfiguration;
   launchwizard?: AWS.LaunchWizard.Types.ClientConfiguration;
   trustedadvisor?: AWS.TrustedAdvisor.Types.ClientConfiguration;
-  cloudfrontkeyvaluestore?: AWS.CloudFrontKeyValueStore.Types.ClientConfiguration;
   inspectorscan?: AWS.InspectorScan.Types.ClientConfiguration;
   bcmdataexports?: AWS.BCMDataExports.Types.ClientConfiguration;
   costoptimizationhub?: AWS.CostOptimizationHub.Types.ClientConfiguration;
@@ -375,7 +374,6 @@ export abstract class ConfigurationServicePlaceholders {
   cleanroomsml?: AWS.CleanRoomsML.Types.ClientConfiguration;
   marketplaceagreement?: AWS.MarketplaceAgreement.Types.ClientConfiguration;
   marketplacedeployment?: AWS.MarketplaceDeployment.Types.ClientConfiguration;
-  neptunegraph?: AWS.NeptuneGraph.Types.ClientConfiguration;
   networkmonitor?: AWS.NetworkMonitor.Types.ClientConfiguration;
   supplychain?: AWS.SupplyChain.Types.ClientConfiguration;
 }
@@ -739,7 +737,6 @@ export interface ConfigurationServiceApiVersions {
   datazone?: AWS.DataZone.Types.apiVersion;
   launchwizard?: AWS.LaunchWizard.Types.apiVersion;
   trustedadvisor?: AWS.TrustedAdvisor.Types.apiVersion;
-  cloudfrontkeyvaluestore?: AWS.CloudFrontKeyValueStore.Types.apiVersion;
   inspectorscan?: AWS.InspectorScan.Types.apiVersion;
   bcmdataexports?: AWS.BCMDataExports.Types.apiVersion;
   costoptimizationhub?: AWS.CostOptimizationHub.Types.apiVersion;
@@ -755,7 +752,6 @@ export interface ConfigurationServiceApiVersions {
   cleanroomsml?: AWS.CleanRoomsML.Types.apiVersion;
   marketplaceagreement?: AWS.MarketplaceAgreement.Types.apiVersion;
   marketplacedeployment?: AWS.MarketplaceDeployment.Types.apiVersion;
-  neptunegraph?: AWS.NeptuneGraph.Types.apiVersion;
   networkmonitor?: AWS.NetworkMonitor.Types.apiVersion;
   supplychain?: AWS.SupplyChain.Types.apiVersion;
 }

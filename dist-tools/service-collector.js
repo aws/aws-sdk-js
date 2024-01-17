@@ -13,7 +13,7 @@ var sanitizeRegex = /[^a-zA-Z0-9,-]/;
 
 var serviceClasses = {};
 Object.keys(AWS).forEach(function(name) {
-  if (AWS[name].serviceIdentifier && name !== 'NeptuneGraph') {
+  if (AWS[name].serviceIdentifier) {
     serviceClasses[AWS[name].serviceIdentifier] = AWS[name];
   }
 });

@@ -359,7 +359,6 @@ module.exports = {
   DataZone: require('./datazone'),
   LaunchWizard: require('./launchwizard'),
   TrustedAdvisor: require('./trustedadvisor'),
-  CloudFrontKeyValueStore: require('./cloudfrontkeyvaluestore'),
   InspectorScan: require('./inspectorscan'),
   BCMDataExports: require('./bcmdataexports'),
   CostOptimizationHub: require('./costoptimizationhub'),
@@ -375,7 +374,6 @@ module.exports = {
   CleanRoomsML: require('./cleanroomsml'),
   MarketplaceAgreement: require('./marketplaceagreement'),
   MarketplaceDeployment: require('./marketplacedeployment'),
-  NeptuneGraph: require('./neptunegraph'),
   NetworkMonitor: require('./networkmonitor'),
   SupplyChain: require('./supplychain')
 };
