@@ -526,6 +526,9 @@
         },
         {
           "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
         }
       ],
       "documentation": "<p>Lists all of the tags associated with the Amazon Resource Name (ARN) that you specify. The resource can be a capability, partnership, profile, or transformer.</p>"
@@ -594,6 +597,9 @@
         },
         {
           "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
         }
       ],
       "documentation": "<p>Attaches a key-value pair to a resource, as identified by its Amazon Resource Name (ARN). Resources are capability, partnership, profile, transformers and other entities.</p> <p>There is no response returned from this call.</p>"
@@ -659,7 +665,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Parses the input EDI (electronic data interchange) file.</p>",
+      "documentation": "<p>Parses the input EDI (electronic data interchange) file. The input file has a file size limit of 250 KB.</p>",
       "idempotent": true
     },
     "UntagResource": {
@@ -677,6 +683,9 @@
         },
         {
           "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
         }
       ],
       "documentation": "<p>Detaches a key-value pair from the specified resource, as identified by its Amazon Resource Name (ARN). Resources are capability, partnership, profile, transformers and other entities.</p>",
@@ -2100,7 +2109,7 @@
     },
     "TestMappingInputFileContent": {
       "type": "string",
-      "max": 200000,
+      "max": 5000000,
       "min": 0
     },
     "TestMappingRequest": {

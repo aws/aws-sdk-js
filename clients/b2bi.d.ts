@@ -180,11 +180,11 @@ declare class B2bi extends Service {
    */
   testMapping(callback?: (err: AWSError, data: B2bi.Types.TestMappingResponse) => void): Request<B2bi.Types.TestMappingResponse, AWSError>;
   /**
-   * Parses the input EDI (electronic data interchange) file.
+   * Parses the input EDI (electronic data interchange) file. The input file has a file size limit of 250 KB.
    */
   testParsing(params: B2bi.Types.TestParsingRequest, callback?: (err: AWSError, data: B2bi.Types.TestParsingResponse) => void): Request<B2bi.Types.TestParsingResponse, AWSError>;
   /**
-   * Parses the input EDI (electronic data interchange) file.
+   * Parses the input EDI (electronic data interchange) file. The input file has a file size limit of 250 KB.
    */
   testParsing(callback?: (err: AWSError, data: B2bi.Types.TestParsingResponse) => void): Request<B2bi.Types.TestParsingResponse, AWSError>;
   /**

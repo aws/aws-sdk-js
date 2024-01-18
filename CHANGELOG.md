@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1538.0-->
+<!--LATEST=2.1539.0-->
 <!--ENTRYINSERT-->
+
+## 2.1539.0
+* feature: B2bi: Increasing TestMapping inputFileContent file size limit to 5MB and adding file size limit 250KB for TestParsing input file. This release also includes exposing InternalServerException for Tag APIs.
+* feature: CloudTrail: This release adds a new API ListInsightsMetricData to retrieve metric data from CloudTrail Insights.
+* feature: Connect: GetMetricDataV2 now supports 3 groupings
+* feature: Drs: Removed invalid and unnecessary default values.
+* feature: Firehose: Allow support for Snowflake as a Kinesis Data Firehose delivery destination.
+* feature: SageMakerFeatureStoreRuntime: Increase BatchGetRecord limits from 10 items to 100 items
 
 ## 2.1538.0
 * bugfix: clients: remove cloudnfront-keyvaluestore and neptune-graph clients. These clients are available in AWS SDK for JavaScript (v3) https://github.com/aws/aws-sdk-js-v3/.

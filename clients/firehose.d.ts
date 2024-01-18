@@ -486,6 +486,10 @@ declare namespace Firehose {
      */
     AmazonOpenSearchServerlessDestinationConfiguration?: AmazonOpenSearchServerlessDestinationConfiguration;
     MSKSourceConfiguration?: MSKSourceConfiguration;
+    /**
+     * Configure Snowflake destination
+     */
+    SnowflakeDestinationConfiguration?: SnowflakeDestinationConfiguration;
   }
   export interface CreateDeliveryStreamOutput {
     /**
@@ -678,6 +682,10 @@ declare namespace Firehose {
      * Describes the specified HTTP endpoint destination.
      */
     HttpEndpointDestinationDescription?: HttpEndpointDestinationDescription;
+    /**
+     * Optional description for the destination
+     */
+    SnowflakeDestinationDescription?: SnowflakeDestinationDescription;
     /**
      * The destination in the Serverless offering for Amazon OpenSearch Service.
      */
@@ -1866,6 +1874,225 @@ declare namespace Firehose {
     OrcSerDe?: OrcSerDe;
   }
   export type SizeInMBs = number;
+  export type SnowflakeAccountUrl = string;
+  export type SnowflakeContentColumnName = string;
+  export type SnowflakeDataLoadingOption = "JSON_MAPPING"|"VARIANT_CONTENT_MAPPING"|"VARIANT_CONTENT_AND_METADATA_MAPPING"|string;
+  export type SnowflakeDatabase = string;
+  export interface SnowflakeDestinationConfiguration {
+    /**
+     * URL for accessing your Snowflake account. This URL must include your account identifier. Note that the protocol (https://) and port number are optional.
+     */
+    AccountUrl: SnowflakeAccountUrl;
+    /**
+     * The private key used to encrypt your Snowflake client. For information, see Using Key Pair Authentication &amp; Key Rotation.
+     */
+    PrivateKey: SnowflakePrivateKey;
+    /**
+     * Passphrase to decrypt the private key when the key is encrypted. For information, see Using Key Pair Authentication &amp; Key Rotation.
+     */
+    KeyPassphrase?: SnowflakeKeyPassphrase;
+    /**
+     * User login name for the Snowflake account.
+     */
+    User: SnowflakeUser;
+    /**
+     * All data in Snowflake is maintained in databases.
+     */
+    Database: SnowflakeDatabase;
+    /**
+     * Each database consists of one or more schemas, which are logical groupings of database objects, such as tables and views
+     */
+    Schema: SnowflakeSchema;
+    /**
+     * All data in Snowflake is stored in database tables, logically structured as collections of columns and rows.
+     */
+    Table: SnowflakeTable;
+    /**
+     * Optionally configure a Snowflake role. Otherwise the default user role will be used.
+     */
+    SnowflakeRoleConfiguration?: SnowflakeRoleConfiguration;
+    /**
+     * Choose to load JSON keys mapped to table column names or choose to split the JSON payload where content is mapped to a record content column and source metadata is mapped to a record metadata column.
+     */
+    DataLoadingOption?: SnowflakeDataLoadingOption;
+    /**
+     * The name of the record metadata column
+     */
+    MetaDataColumnName?: SnowflakeMetaDataColumnName;
+    /**
+     * The name of the record content column
+     */
+    ContentColumnName?: SnowflakeContentColumnName;
+    /**
+     * The VPCE ID for Firehose to privately connect with Snowflake. The ID format is com.amazonaws.vpce.[region].vpce-svc-&lt;[id]&gt;. For more information, see Amazon PrivateLink &amp; Snowflake 
+     */
+    SnowflakeVpcConfiguration?: SnowflakeVpcConfiguration;
+    CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
+    ProcessingConfiguration?: ProcessingConfiguration;
+    /**
+     * The Amazon Resource Name (ARN) of the Snowflake role
+     */
+    RoleARN: RoleARN;
+    /**
+     * The time period where Kinesis Data Firehose will retry sending data to the chosen HTTP endpoint.
+     */
+    RetryOptions?: SnowflakeRetryOptions;
+    /**
+     * Choose an S3 backup mode
+     */
+    S3BackupMode?: SnowflakeS3BackupMode;
+    S3Configuration: S3DestinationConfiguration;
+  }
+  export interface SnowflakeDestinationDescription {
+    /**
+     * URL for accessing your Snowflake account. This URL must include your account identifier. Note that the protocol (https://) and port number are optional.
+     */
+    AccountUrl?: SnowflakeAccountUrl;
+    /**
+     * User login name for the Snowflake account.
+     */
+    User?: SnowflakeUser;
+    /**
+     * All data in Snowflake is maintained in databases.
+     */
+    Database?: SnowflakeDatabase;
+    /**
+     * Each database consists of one or more schemas, which are logical groupings of database objects, such as tables and views
+     */
+    Schema?: SnowflakeSchema;
+    /**
+     * All data in Snowflake is stored in database tables, logically structured as collections of columns and rows.
+     */
+    Table?: SnowflakeTable;
+    /**
+     * Optionally configure a Snowflake role. Otherwise the default user role will be used.
+     */
+    SnowflakeRoleConfiguration?: SnowflakeRoleConfiguration;
+    /**
+     * Choose to load JSON keys mapped to table column names or choose to split the JSON payload where content is mapped to a record content column and source metadata is mapped to a record metadata column.
+     */
+    DataLoadingOption?: SnowflakeDataLoadingOption;
+    /**
+     * The name of the record metadata column
+     */
+    MetaDataColumnName?: SnowflakeMetaDataColumnName;
+    /**
+     * The name of the record content column
+     */
+    ContentColumnName?: SnowflakeContentColumnName;
+    /**
+     * The VPCE ID for Firehose to privately connect with Snowflake. The ID format is com.amazonaws.vpce.[region].vpce-svc-&lt;[id]&gt;. For more information, see Amazon PrivateLink &amp; Snowflake 
+     */
+    SnowflakeVpcConfiguration?: SnowflakeVpcConfiguration;
+    CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
+    ProcessingConfiguration?: ProcessingConfiguration;
+    /**
+     * The Amazon Resource Name (ARN) of the Snowflake role
+     */
+    RoleARN?: RoleARN;
+    /**
+     * The time period where Kinesis Data Firehose will retry sending data to the chosen HTTP endpoint.
+     */
+    RetryOptions?: SnowflakeRetryOptions;
+    /**
+     * Choose an S3 backup mode
+     */
+    S3BackupMode?: SnowflakeS3BackupMode;
+    S3DestinationDescription?: S3DestinationDescription;
+  }
+  export interface SnowflakeDestinationUpdate {
+    /**
+     * URL for accessing your Snowflake account. This URL must include your account identifier. Note that the protocol (https://) and port number are optional.
+     */
+    AccountUrl?: SnowflakeAccountUrl;
+    /**
+     * The private key used to encrypt your Snowflake client. For information, see Using Key Pair Authentication &amp; Key Rotation.
+     */
+    PrivateKey?: SnowflakePrivateKey;
+    /**
+     * Passphrase to decrypt the private key when the key is encrypted. For information, see Using Key Pair Authentication &amp; Key Rotation.
+     */
+    KeyPassphrase?: SnowflakeKeyPassphrase;
+    /**
+     * User login name for the Snowflake account.
+     */
+    User?: SnowflakeUser;
+    /**
+     * All data in Snowflake is maintained in databases.
+     */
+    Database?: SnowflakeDatabase;
+    /**
+     * Each database consists of one or more schemas, which are logical groupings of database objects, such as tables and views
+     */
+    Schema?: SnowflakeSchema;
+    /**
+     * All data in Snowflake is stored in database tables, logically structured as collections of columns and rows.
+     */
+    Table?: SnowflakeTable;
+    /**
+     * Optionally configure a Snowflake role. Otherwise the default user role will be used.
+     */
+    SnowflakeRoleConfiguration?: SnowflakeRoleConfiguration;
+    /**
+     *  JSON keys mapped to table column names or choose to split the JSON payload where content is mapped to a record content column and source metadata is mapped to a record metadata column.
+     */
+    DataLoadingOption?: SnowflakeDataLoadingOption;
+    /**
+     * The name of the record metadata column
+     */
+    MetaDataColumnName?: SnowflakeMetaDataColumnName;
+    /**
+     * The name of the content metadata column
+     */
+    ContentColumnName?: SnowflakeContentColumnName;
+    CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
+    ProcessingConfiguration?: ProcessingConfiguration;
+    /**
+     * The Amazon Resource Name (ARN) of the Snowflake role
+     */
+    RoleARN?: RoleARN;
+    /**
+     * Specify how long Kinesis Data Firehose retries sending data to the New Relic HTTP endpoint. After sending data, Kinesis Data Firehose first waits for an acknowledgment from the HTTP endpoint. If an error occurs or the acknowledgment doesn’t arrive within the acknowledgment timeout period, Kinesis Data Firehose starts the retry duration counter. It keeps retrying until the retry duration expires. After that, Kinesis Data Firehose considers it a data delivery failure and backs up the data to your Amazon S3 bucket. Every time that Kinesis Data Firehose sends data to the HTTP endpoint (either the initial attempt or a retry), it restarts the acknowledgement timeout counter and waits for an acknowledgement from the HTTP endpoint. Even if the retry duration expires, Kinesis Data Firehose still waits for the acknowledgment until it receives it or the acknowledgement timeout period is reached. If the acknowledgment times out, Kinesis Data Firehose determines whether there's time left in the retry counter. If there is time left, it retries again and repeats the logic until it receives an acknowledgment or determines that the retry time has expired. If you don't want Kinesis Data Firehose to retry sending data, set this value to 0.
+     */
+    RetryOptions?: SnowflakeRetryOptions;
+    /**
+     * Choose an S3 backup mode
+     */
+    S3BackupMode?: SnowflakeS3BackupMode;
+    S3Update?: S3DestinationUpdate;
+  }
+  export type SnowflakeKeyPassphrase = string;
+  export type SnowflakeMetaDataColumnName = string;
+  export type SnowflakePrivateKey = string;
+  export type SnowflakePrivateLinkVpceId = string;
+  export type SnowflakeRetryDurationInSeconds = number;
+  export interface SnowflakeRetryOptions {
+    /**
+     * the time period where Kinesis Data Firehose will retry sending data to the chosen HTTP endpoint.
+     */
+    DurationInSeconds?: SnowflakeRetryDurationInSeconds;
+  }
+  export type SnowflakeRole = string;
+  export interface SnowflakeRoleConfiguration {
+    /**
+     * Enable Snowflake role
+     */
+    Enabled?: BooleanObject;
+    /**
+     * The Snowflake role you wish to configure
+     */
+    SnowflakeRole?: SnowflakeRole;
+  }
+  export type SnowflakeS3BackupMode = "FailedDataOnly"|"AllData"|string;
+  export type SnowflakeSchema = string;
+  export type SnowflakeTable = string;
+  export type SnowflakeUser = string;
+  export interface SnowflakeVpcConfiguration {
+    /**
+     * The VPCE ID for Firehose to privately connect with Snowflake. The ID format is com.amazonaws.vpce.[region].vpce-svc-&lt;[id]&gt;. For more information, see Amazon PrivateLink &amp; Snowflake 
+     */
+    PrivateLinkVpceId: SnowflakePrivateLinkVpceId;
+  }
   export interface SourceDescription {
     /**
      * The KinesisStreamSourceDescription value for the source Kinesis data stream.
@@ -2128,6 +2355,10 @@ declare namespace Firehose {
      * Describes an update for a destination in the Serverless offering for Amazon OpenSearch Service.
      */
     AmazonOpenSearchServerlessDestinationUpdate?: AmazonOpenSearchServerlessDestinationUpdate;
+    /**
+     * Update to the Snowflake destination condiguration settings
+     */
+    SnowflakeDestinationUpdate?: SnowflakeDestinationUpdate;
   }
   export interface UpdateDestinationOutput {
   }
