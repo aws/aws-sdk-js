@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1539.0-->
+<!--LATEST=2.1540.0-->
 <!--ENTRYINSERT-->
+
+## 2.1540.0
+* feature: Athena: Introducing new NotebookS3LocationUri parameter to Athena ImportNotebook API. Payload is no longer required and either Payload or NotebookS3LocationUri needs to be provided (not both) for a successful ImportNotebook API call. If both are provided, an InvalidRequestException will be thrown.
+* feature: CodeBuild: Release CodeBuild Reserved Capacity feature
+* feature: DynamoDB: This release adds support for including ApproximateCreationDateTimePrecision configurations in EnableKinesisStreamingDestination API, adds the same as an optional field in the response of DescribeKinesisStreamingDestination, and adds support for a new UpdateKinesisStreamingDestination API.
+* feature: QConnect: Increased Quick Response name max length to 100
 
 ## 2.1539.0
 * feature: B2bi: Increasing TestMapping inputFileContent file size limit to 5MB and adding file size limit 250KB for TestParsing input file. This release also includes exposing InternalServerException for Tag APIs.

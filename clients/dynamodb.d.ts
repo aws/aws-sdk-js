@@ -415,6 +415,14 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   updateItem(callback?: (err: AWSError, data: DynamoDB.Types.UpdateItemOutput) => void): Request<DynamoDB.Types.UpdateItemOutput, AWSError>;
   /**
+   * The command to update the Kinesis stream destination.
+   */
+  updateKinesisStreamingDestination(params: DynamoDB.Types.UpdateKinesisStreamingDestinationInput, callback?: (err: AWSError, data: DynamoDB.Types.UpdateKinesisStreamingDestinationOutput) => void): Request<DynamoDB.Types.UpdateKinesisStreamingDestinationOutput, AWSError>;
+  /**
+   * The command to update the Kinesis stream destination.
+   */
+  updateKinesisStreamingDestination(callback?: (err: AWSError, data: DynamoDB.Types.UpdateKinesisStreamingDestinationOutput) => void): Request<DynamoDB.Types.UpdateKinesisStreamingDestinationOutput, AWSError>;
+  /**
    * Modifies the provisioned throughput settings, global secondary indexes, or DynamoDB Streams settings for a given table.  This operation only applies to Version 2019.11.21 (Current) of global tables.   You can only perform one of the following operations at once:   Modify the provisioned throughput settings of the table.   Remove a global secondary index from the table.   Create a new global secondary index on the table. After the index begins backfilling, you can use UpdateTable to perform other operations.    UpdateTable is an asynchronous operation; while it is executing, the table status changes from ACTIVE to UPDATING. While it is UPDATING, you cannot issue another UpdateTable request. When the table returns to the ACTIVE state, the UpdateTable operation is complete.
    */
   updateTable(params: DynamoDB.Types.UpdateTableInput, callback?: (err: AWSError, data: DynamoDB.Types.UpdateTableOutput) => void): Request<DynamoDB.Types.UpdateTableOutput, AWSError>;
@@ -460,6 +468,7 @@ declare namespace DynamoDB {
   export import Converter = converter;
 }
 declare namespace DynamoDB {
+  export type ApproximateCreationDateTimePrecision = "MILLISECOND"|"MICROSECOND"|string;
   export type ArchivalReason = string;
   export interface ArchivalSummary {
     /**
@@ -1463,8 +1472,14 @@ declare namespace DynamoDB {
      */
     TimeToLiveDescription?: TimeToLiveDescription;
   }
-  export type DestinationStatus = "ENABLING"|"ACTIVE"|"DISABLING"|"DISABLED"|"ENABLE_FAILED"|string;
+  export type DestinationStatus = "ENABLING"|"ACTIVE"|"DISABLING"|"DISABLED"|"ENABLE_FAILED"|"UPDATING"|string;
   export type DoubleObject = number;
+  export interface EnableKinesisStreamingConfiguration {
+    /**
+     * Toggle for the precision of Kinesis data stream timestamp. The values are either MILLISECOND or MICROSECOND.
+     */
+    ApproximateCreationDateTimePrecision?: ApproximateCreationDateTimePrecision;
+  }
   export interface Endpoint {
     /**
      * IP address of the endpoint.
@@ -2206,6 +2221,10 @@ declare namespace DynamoDB {
      * The human-readable string that corresponds to the replica status.
      */
     DestinationStatusDescription?: String;
+    /**
+     * The precision of the Kinesis data stream timestamp. The values are either MILLISECOND or MICROSECOND.
+     */
+    ApproximateCreationDateTimePrecision?: ApproximateCreationDateTimePrecision;
   }
   export type KinesisDataStreamDestinations = KinesisDataStreamDestination[];
   export interface KinesisStreamingDestinationInput {
@@ -2217,6 +2236,10 @@ declare namespace DynamoDB {
      * The ARN for a Kinesis data stream.
      */
     StreamArn: StreamArn;
+    /**
+     * The source for the Kinesis streaming information that is being enabled.
+     */
+    EnableKinesisStreamingConfiguration?: EnableKinesisStreamingConfiguration;
   }
   export interface KinesisStreamingDestinationOutput {
     /**
@@ -2231,6 +2254,10 @@ declare namespace DynamoDB {
      * The current status of the replication.
      */
     DestinationStatus?: DestinationStatus;
+    /**
+     * The destination for the Kinesis streaming information that is being enabled.
+     */
+    EnableKinesisStreamingConfiguration?: EnableKinesisStreamingConfiguration;
   }
   export type LastUpdateDateTime = Date;
   export type ListAttributeValue = AttributeValue[];
@@ -2479,7 +2506,7 @@ declare namespace DynamoDB {
   export type NumberSetAttributeValue = NumberAttributeValue[];
   export interface ParameterizedStatement {
     /**
-     *  A PartiQL statment that uses parameters. 
+     *  A PartiQL statement that uses parameters. 
      */
     Statement: PartiQLStatement;
     /**
@@ -3805,6 +3832,44 @@ declare namespace DynamoDB {
      */
     ItemCollectionMetrics?: ItemCollectionMetrics;
   }
+  export interface UpdateKinesisStreamingConfiguration {
+    /**
+     * Enables updating the precision of Kinesis data stream timestamp. 
+     */
+    ApproximateCreationDateTimePrecision?: ApproximateCreationDateTimePrecision;
+  }
+  export interface UpdateKinesisStreamingDestinationInput {
+    /**
+     * The table name for the Kinesis streaming destination input.
+     */
+    TableName: TableName;
+    /**
+     * The ARN for the Kinesis stream input.
+     */
+    StreamArn: StreamArn;
+    /**
+     * The command to update the Kinesis stream configuration.
+     */
+    UpdateKinesisStreamingConfiguration?: UpdateKinesisStreamingConfiguration;
+  }
+  export interface UpdateKinesisStreamingDestinationOutput {
+    /**
+     * The table name for the Kinesis streaming destination output.
+     */
+    TableName?: TableName;
+    /**
+     * The ARN for the Kinesis stream input.
+     */
+    StreamArn?: StreamArn;
+    /**
+     * The status of the attempt to update the Kinesis streaming destination output.
+     */
+    DestinationStatus?: DestinationStatus;
+    /**
+     * The command to update the Kinesis streaming destination configuration.
+     */
+    UpdateKinesisStreamingConfiguration?: UpdateKinesisStreamingConfiguration;
+  }
   export interface UpdateReplicationGroupMemberAction {
     /**
      * The Region where the replica exists.
@@ -3849,7 +3914,7 @@ declare namespace DynamoDB {
      */
     GlobalSecondaryIndexUpdates?: GlobalSecondaryIndexUpdateList;
     /**
-     * Represents the DynamoDB Streams configuration for the table.  You receive a ValidationException if you try to enable a stream on a table that already has a stream, or if you try to disable a stream on a table that doesn't have a stream. 
+     * Represents the DynamoDB Streams configuration for the table.  You receive a ResourceInUseException if you try to enable a stream on a table that already has a stream, or if you try to disable a stream on a table that doesn't have a stream. 
      */
     StreamSpecification?: StreamSpecification;
     /**

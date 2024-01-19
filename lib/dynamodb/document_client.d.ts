@@ -127,6 +127,7 @@ export namespace DocumentClient {
 export namespace DocumentClient {
   //<!--auto-generated start-->
   interface Blob {}
+  export type ApproximateCreationDateTimePrecision = "MILLISECOND"|"MICROSECOND"|string;
   export type ArchivalReason = string;
   export interface ArchivalSummary {
     /**
@@ -1092,8 +1093,14 @@ export namespace DocumentClient {
      */
     TimeToLiveDescription?: TimeToLiveDescription;
   }
-  export type DestinationStatus = "ENABLING"|"ACTIVE"|"DISABLING"|"DISABLED"|"ENABLE_FAILED"|string;
+  export type DestinationStatus = "ENABLING"|"ACTIVE"|"DISABLING"|"DISABLED"|"ENABLE_FAILED"|"UPDATING"|string;
   export type DoubleObject = number;
+  export interface EnableKinesisStreamingConfiguration {
+    /**
+     * Toggle for the precision of Kinesis data stream timestamp. The values are either MILLISECOND or MICROSECOND.
+     */
+    ApproximateCreationDateTimePrecision?: ApproximateCreationDateTimePrecision;
+  }
   export interface Endpoint {
     /**
      * IP address of the endpoint.
@@ -1835,6 +1842,10 @@ export namespace DocumentClient {
      * The human-readable string that corresponds to the replica status.
      */
     DestinationStatusDescription?: String;
+    /**
+     * The precision of the Kinesis data stream timestamp. The values are either MILLISECOND or MICROSECOND.
+     */
+    ApproximateCreationDateTimePrecision?: ApproximateCreationDateTimePrecision;
   }
   export type KinesisDataStreamDestinations = KinesisDataStreamDestination[];
   export interface KinesisStreamingDestinationInput {
@@ -1846,6 +1857,10 @@ export namespace DocumentClient {
      * The ARN for a Kinesis data stream.
      */
     StreamArn: StreamArn;
+    /**
+     * The source for the Kinesis streaming information that is being enabled.
+     */
+    EnableKinesisStreamingConfiguration?: EnableKinesisStreamingConfiguration;
   }
   export interface KinesisStreamingDestinationOutput {
     /**
@@ -1860,6 +1875,10 @@ export namespace DocumentClient {
      * The current status of the replication.
      */
     DestinationStatus?: DestinationStatus;
+    /**
+     * The destination for the Kinesis streaming information that is being enabled.
+     */
+    EnableKinesisStreamingConfiguration?: EnableKinesisStreamingConfiguration;
   }
   export type LastUpdateDateTime = Date;
   export type ListAttributeValue = AttributeValue[];
@@ -2108,7 +2127,7 @@ export namespace DocumentClient {
   export type NumberSetAttributeValue = NumberAttributeValue[];
   export interface ParameterizedStatement {
     /**
-     *  A PartiQL statment that uses parameters. 
+     *  A PartiQL statement that uses parameters. 
      */
     Statement: PartiQLStatement;
     /**
@@ -3434,6 +3453,44 @@ export namespace DocumentClient {
      */
     ItemCollectionMetrics?: ItemCollectionMetrics;
   }
+  export interface UpdateKinesisStreamingConfiguration {
+    /**
+     * Enables updating the precision of Kinesis data stream timestamp. 
+     */
+    ApproximateCreationDateTimePrecision?: ApproximateCreationDateTimePrecision;
+  }
+  export interface UpdateKinesisStreamingDestinationInput {
+    /**
+     * The table name for the Kinesis streaming destination input.
+     */
+    TableName: TableName;
+    /**
+     * The ARN for the Kinesis stream input.
+     */
+    StreamArn: StreamArn;
+    /**
+     * The command to update the Kinesis stream configuration.
+     */
+    UpdateKinesisStreamingConfiguration?: UpdateKinesisStreamingConfiguration;
+  }
+  export interface UpdateKinesisStreamingDestinationOutput {
+    /**
+     * The table name for the Kinesis streaming destination output.
+     */
+    TableName?: TableName;
+    /**
+     * The ARN for the Kinesis stream input.
+     */
+    StreamArn?: StreamArn;
+    /**
+     * The status of the attempt to update the Kinesis streaming destination output.
+     */
+    DestinationStatus?: DestinationStatus;
+    /**
+     * The command to update the Kinesis streaming destination configuration.
+     */
+    UpdateKinesisStreamingConfiguration?: UpdateKinesisStreamingConfiguration;
+  }
   export interface UpdateReplicationGroupMemberAction {
     /**
      * The Region where the replica exists.
@@ -3478,7 +3535,7 @@ export namespace DocumentClient {
      */
     GlobalSecondaryIndexUpdates?: GlobalSecondaryIndexUpdateList;
     /**
-     * Represents the DynamoDB Streams configuration for the table.  You receive a ValidationException if you try to enable a stream on a table that already has a stream, or if you try to disable a stream on a table that doesn't have a stream. 
+     * Represents the DynamoDB Streams configuration for the table.  You receive a ResourceInUseException if you try to enable a stream on a table that already has a stream, or if you try to disable a stream on a table that doesn't have a stream. 
      */
     StreamSpecification?: StreamSpecification;
     /**

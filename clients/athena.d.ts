@@ -292,11 +292,11 @@ declare class Athena extends Service {
    */
   getWorkGroup(callback?: (err: AWSError, data: Athena.Types.GetWorkGroupOutput) => void): Request<Athena.Types.GetWorkGroupOutput, AWSError>;
   /**
-   * Imports a single ipynb file to a Spark enabled workgroup. The maximum file size that can be imported is 10 megabytes. If an ipynb file with the same name already exists in the workgroup, throws an error.
+   * Imports a single ipynb file to a Spark enabled workgroup. To import the notebook, the request must specify a value for either Payload or NoteBookS3LocationUri. If neither is specified or both are specified, an InvalidRequestException occurs. The maximum file size that can be imported is 10 megabytes. If an ipynb file with the same name already exists in the workgroup, throws an error.
    */
   importNotebook(params: Athena.Types.ImportNotebookInput, callback?: (err: AWSError, data: Athena.Types.ImportNotebookOutput) => void): Request<Athena.Types.ImportNotebookOutput, AWSError>;
   /**
-   * Imports a single ipynb file to a Spark enabled workgroup. The maximum file size that can be imported is 10 megabytes. If an ipynb file with the same name already exists in the workgroup, throws an error.
+   * Imports a single ipynb file to a Spark enabled workgroup. To import the notebook, the request must specify a value for either Payload or NoteBookS3LocationUri. If neither is specified or both are specified, an InvalidRequestException occurs. The maximum file size that can be imported is 10 megabytes. If an ipynb file with the same name already exists in the workgroup, throws an error.
    */
   importNotebook(callback?: (err: AWSError, data: Athena.Types.ImportNotebookOutput) => void): Request<Athena.Types.ImportNotebookOutput, AWSError>;
   /**
@@ -1568,13 +1568,17 @@ declare namespace Athena {
      */
     Name: NotebookName;
     /**
-     * The notebook content to be imported.
+     * The notebook content to be imported. The payload must be in ipynb format.
      */
-    Payload: Payload;
+    Payload?: Payload;
     /**
      * The notebook content type. Currently, the only valid type is IPYNB.
      */
     Type: NotebookType;
+    /**
+     * A URI that specifies the Amazon S3 location of a notebook file in ipynb format.
+     */
+    NotebookS3LocationUri?: S3Uri;
     /**
      * A unique case-sensitive string used to ensure the request to import the notebook is idempotent (executes only once).  This token is listed as not required because Amazon Web Services SDKs (for example the Amazon Web Services SDK for Java) auto-generate the token for you. If you are not using the Amazon Web Services SDK or the Amazon Web Services CLI, you must provide this token or the action will fail. 
      */
@@ -3009,7 +3013,7 @@ declare namespace Athena {
      */
     AdditionalConfiguration?: NameString;
     /**
-     * The ARN of the execution role used to access user resources for Spark sessions and Identity Center enabled workgroups. This property applies only to Spark enabled workgroups and Identity Center enabled workgroups.
+     * The ARN of the execution role used to access user resources for Spark sessions and IAM Identity Center enabled workgroups. This property applies only to Spark enabled workgroups and IAM Identity Center enabled workgroups. The property is required for IAM Identity Center enabled workgroups.
      */
     ExecutionRole?: RoleArn;
     /**
