@@ -28,11 +28,11 @@ declare class ConnectCases extends Service {
    */
   batchPutFieldOptions(callback?: (err: AWSError, data: ConnectCases.Types.BatchPutFieldOptionsResponse) => void): Request<ConnectCases.Types.BatchPutFieldOptionsResponse, AWSError>;
   /**
-   * Creates a case in the specified Cases domain. Case system and custom fields are taken as an array id/value pairs with a declared data types. The following fields are required when creating a case:  &lt;ul&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;customer_id&lt;/code&gt; - You must provide the full customer profile ARN in this format: &lt;code&gt;arn:aws:profile:your_AWS_Region:your_AWS_account ID:domains/your_profiles_domain_name/profiles/profile_ID&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;title&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;/ul&gt; 
+   *  If you provide a value for PerformedBy.UserArn you must also have connect:DescribeUser permission on the User ARN resource that you provide   &lt;p&gt;Creates a case in the specified Cases domain. Case system and custom fields are taken as an array id/value pairs with a declared data types.&lt;/p&gt; &lt;p&gt;The following fields are required when creating a case:&lt;/p&gt; &lt;ul&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;customer_id&lt;/code&gt; - You must provide the full customer profile ARN in this format: &lt;code&gt;arn:aws:profile:your_AWS_Region:your_AWS_account ID:domains/your_profiles_domain_name/profiles/profile_ID&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;title&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;/ul&gt; 
    */
   createCase(params: ConnectCases.Types.CreateCaseRequest, callback?: (err: AWSError, data: ConnectCases.Types.CreateCaseResponse) => void): Request<ConnectCases.Types.CreateCaseResponse, AWSError>;
   /**
-   * Creates a case in the specified Cases domain. Case system and custom fields are taken as an array id/value pairs with a declared data types. The following fields are required when creating a case:  &lt;ul&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;customer_id&lt;/code&gt; - You must provide the full customer profile ARN in this format: &lt;code&gt;arn:aws:profile:your_AWS_Region:your_AWS_account ID:domains/your_profiles_domain_name/profiles/profile_ID&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;title&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;/ul&gt; 
+   *  If you provide a value for PerformedBy.UserArn you must also have connect:DescribeUser permission on the User ARN resource that you provide   &lt;p&gt;Creates a case in the specified Cases domain. Case system and custom fields are taken as an array id/value pairs with a declared data types.&lt;/p&gt; &lt;p&gt;The following fields are required when creating a case:&lt;/p&gt; &lt;ul&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;customer_id&lt;/code&gt; - You must provide the full customer profile ARN in this format: &lt;code&gt;arn:aws:profile:your_AWS_Region:your_AWS_account ID:domains/your_profiles_domain_name/profiles/profile_ID&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;title&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;/ul&gt; 
    */
   createCase(callback?: (err: AWSError, data: ConnectCases.Types.CreateCaseResponse) => void): Request<ConnectCases.Types.CreateCaseResponse, AWSError>;
   /**
@@ -91,6 +91,14 @@ declare class ConnectCases extends Service {
    * Returns information about a specific case if it exists. 
    */
   getCase(callback?: (err: AWSError, data: ConnectCases.Types.GetCaseResponse) => void): Request<ConnectCases.Types.GetCaseResponse, AWSError>;
+  /**
+   * Returns the audit history about a specific case if it exists.
+   */
+  getCaseAuditEvents(params: ConnectCases.Types.GetCaseAuditEventsRequest, callback?: (err: AWSError, data: ConnectCases.Types.GetCaseAuditEventsResponse) => void): Request<ConnectCases.Types.GetCaseAuditEventsResponse, AWSError>;
+  /**
+   * Returns the audit history about a specific case if it exists.
+   */
+  getCaseAuditEvents(callback?: (err: AWSError, data: ConnectCases.Types.GetCaseAuditEventsResponse) => void): Request<ConnectCases.Types.GetCaseAuditEventsResponse, AWSError>;
   /**
    * Returns the case event publishing configuration.
    */
@@ -220,11 +228,11 @@ declare class ConnectCases extends Service {
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the values of fields on a case. Fields to be updated are received as an array of id/value pairs identical to the CreateCase input . If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.
+   *  If you provide a value for PerformedBy.UserArn you must also have connect:DescribeUser permission on the User ARN resource that you provide   &lt;p&gt;Updates the values of fields on a case. Fields to be updated are received as an array of id/value pairs identical to the &lt;code&gt;CreateCase&lt;/code&gt; input .&lt;/p&gt; &lt;p&gt;If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.&lt;/p&gt; 
    */
   updateCase(params: ConnectCases.Types.UpdateCaseRequest, callback?: (err: AWSError, data: ConnectCases.Types.UpdateCaseResponse) => void): Request<ConnectCases.Types.UpdateCaseResponse, AWSError>;
   /**
-   * Updates the values of fields on a case. Fields to be updated are received as an array of id/value pairs identical to the CreateCase input . If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.
+   *  If you provide a value for PerformedBy.UserArn you must also have connect:DescribeUser permission on the User ARN resource that you provide   &lt;p&gt;Updates the values of fields on a case. Fields to be updated are received as an array of id/value pairs identical to the &lt;code&gt;CreateCase&lt;/code&gt; input .&lt;/p&gt; &lt;p&gt;If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.&lt;/p&gt; 
    */
   updateCase(callback?: (err: AWSError, data: ConnectCases.Types.UpdateCaseResponse) => void): Request<ConnectCases.Types.UpdateCaseResponse, AWSError>;
   /**
@@ -255,6 +263,78 @@ declare class ConnectCases extends Service {
 declare namespace ConnectCases {
   export type Arn = string;
   export type AssociationTime = Date;
+  export interface AuditEvent {
+    /**
+     * Unique identifier of a case audit history event.
+     */
+    eventId: AuditEventId;
+    /**
+     * A list of Case Audit History event fields.
+     */
+    fields: AuditEventFieldList;
+    /**
+     * Information of the user which performed the audit.
+     */
+    performedBy?: AuditEventPerformedBy;
+    /**
+     * Time at which an Audit History event took place.
+     */
+    performedTime: AuditEventDateTime;
+    /**
+     * The Type of the related item.
+     */
+    relatedItemType?: RelatedItemType;
+    /**
+     * The Type of an audit history event.
+     */
+    type: AuditEventType;
+  }
+  export type AuditEventDateTime = Date;
+  export interface AuditEventField {
+    /**
+     * Unique identifier of field in an Audit History entry.
+     */
+    eventFieldId: AuditEventFieldId;
+    /**
+     * Union of potential field value types.
+     */
+    newValue: AuditEventFieldValueUnion;
+    /**
+     * Union of potential field value types.
+     */
+    oldValue?: AuditEventFieldValueUnion;
+  }
+  export type AuditEventFieldId = string;
+  export type AuditEventFieldList = AuditEventField[];
+  export interface AuditEventFieldValueUnion {
+    /**
+     * Can be either null, or have a Boolean value type. Only one value can be provided.
+     */
+    booleanValue?: Boolean;
+    /**
+     * Can be either null, or have a Double value type. Only one value can be provided.
+     */
+    doubleValue?: Double;
+    emptyValue?: EmptyFieldValue;
+    /**
+     * Can be either null, or have a String value type. Only one value can be provided.
+     */
+    stringValue?: AuditEventFieldValueUnionStringValueString;
+    /**
+     * Can be either null, or have a String value type formatted as an ARN. Only one value can be provided.
+     */
+    userArnValue?: String;
+  }
+  export type AuditEventFieldValueUnionStringValueString = string;
+  export type AuditEventId = string;
+  export interface AuditEventPerformedBy {
+    /**
+     * Unique identifier of an IAM role.
+     */
+    iamPrincipalArn: IamPrincipalArn;
+    user?: UserUnion;
+  }
+  export type AuditEventType = "Case.Created"|"Case.Updated"|"RelatedItem.Created"|string;
   export interface BasicLayout {
     /**
      * This represents sections in a tab of the page layout.
@@ -408,6 +488,7 @@ declare namespace ConnectCases {
      * An array of objects with field ID (matching ListFields/DescribeField) and value union data.
      */
     fields: CreateCaseRequestFieldsList;
+    performedBy?: UserUnion;
     /**
      * A unique identifier of a template.
      */
@@ -738,7 +819,7 @@ declare namespace ConnectCases {
      */
     type: FieldType;
   }
-  export type FieldType = "Text"|"Number"|"Boolean"|"DateTime"|"SingleSelect"|"Url"|string;
+  export type FieldType = "Text"|"Number"|"Boolean"|"DateTime"|"SingleSelect"|"Url"|"User"|string;
   export interface FieldValue {
     /**
      * Unique identifier of a field.
@@ -766,8 +847,42 @@ declare namespace ConnectCases {
      * String value type.
      */
     stringValue?: FieldValueUnionStringValueString;
+    /**
+     * Represents the user that performed the audit.
+     */
+    userArnValue?: String;
   }
   export type FieldValueUnionStringValueString = string;
+  export interface GetCaseAuditEventsRequest {
+    /**
+     * A unique identifier of the case.
+     */
+    caseId: CaseId;
+    /**
+     * The unique identifier of the Cases domain.
+     */
+    domainId: DomainId;
+    /**
+     * The maximum number of audit events to return. The current maximum supported value is 25. This is also the default when no other value is provided.
+     */
+    maxResults?: GetCaseAuditEventsRequestMaxResultsInteger;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    nextToken?: NextToken;
+  }
+  export type GetCaseAuditEventsRequestMaxResultsInteger = number;
+  export interface GetCaseAuditEventsResponse {
+    /**
+     * A list of case audits where each represents a particular edit of the case.
+     */
+    auditEvents: GetCaseAuditEventsResponseAuditEventsList;
+    /**
+     * The token for the next set of results. This is null if there are no more results to return.
+     */
+    nextToken?: NextToken;
+  }
+  export type GetCaseAuditEventsResponseAuditEventsList = AuditEvent[];
   export interface GetCaseEventConfigurationRequest {
     /**
      * The unique identifier of the Cases domain. 
@@ -956,6 +1071,7 @@ declare namespace ConnectCases {
      */
     templateId: TemplateId;
   }
+  export type IamPrincipalArn = string;
   export type LayoutArn = string;
   export interface LayoutConfiguration {
     /**
@@ -1426,6 +1542,7 @@ declare namespace ConnectCases {
      * An array of objects with fieldId (matching ListFields/DescribeField) and value union data, structured identical to CreateCase.
      */
     fields: UpdateCaseRequestFieldsList;
+    performedBy?: UserUnion;
   }
   export type UpdateCaseRequestFieldsList = FieldValue[];
   export interface UpdateCaseResponse {

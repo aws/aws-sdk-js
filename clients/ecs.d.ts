@@ -1886,6 +1886,7 @@ declare namespace ECS {
     labels?: StringMap;
   }
   export type Double = number;
+  export type Duration = number;
   export type EBSKMSKeyId = string;
   export type EBSResourceType = "volume"|string;
   export type EBSSnapshotId = string;
@@ -3352,6 +3353,11 @@ declare namespace ECS {
      * The port number for the Service Connect proxy to listen on. Use the value of this field to bypass the proxy for traffic on the port number specified in the named portMapping in the task definition of this application, and then use it in your VPC security groups to allow traffic into the proxy for this Amazon ECS service. In awsvpc mode and Fargate, the default value is the container port number. The container port number is in the portMapping in the task definition. In bridge mode, the default value is the ephemeral port of the Service Connect proxy.
      */
     ingressPortOverride?: PortNumber;
+    /**
+     * A reference to an object that represents the configured timeouts for Service Connect.
+     */
+    timeout?: TimeoutConfiguration;
+    tls?: ServiceConnectTlsConfiguration;
   }
   export type ServiceConnectServiceList = ServiceConnectService[];
   export interface ServiceConnectServiceResource {
@@ -3365,6 +3371,26 @@ declare namespace ECS {
     discoveryArn?: String;
   }
   export type ServiceConnectServiceResourceList = ServiceConnectServiceResource[];
+  export interface ServiceConnectTlsCertificateAuthority {
+    /**
+     * The ARN of the Amazon Web Services Private Certificate Authority certificate.
+     */
+    awsPcaAuthorityArn?: String;
+  }
+  export interface ServiceConnectTlsConfiguration {
+    /**
+     * The signer certificate authority.
+     */
+    issuerCertificateAuthority: ServiceConnectTlsCertificateAuthority;
+    /**
+     * The Amazon Web Services Key Management Service key.
+     */
+    kmsKey?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role that's associated with the Service Connect TLS.
+     */
+    roleArn?: String;
+  }
   export interface ServiceEvent {
     /**
      * The ID string for the event.
@@ -4182,6 +4208,16 @@ declare namespace ECS {
   }
   export type TaskVolumeConfigurations = TaskVolumeConfiguration[];
   export type Tasks = Task[];
+  export interface TimeoutConfiguration {
+    /**
+     * The amount of time in seconds a connection will stay active while idle. A value of 0 can be set to disable idleTimeout. The idleTimeout default for HTTP/HTTP2/GRPC is 5 minutes. The idleTimeout default for TCP is 1 hour.
+     */
+    idleTimeoutSeconds?: Duration;
+    /**
+     * The amount of time waiting for the upstream to respond with a complete response per request. A value of 0 can be set to disable perRequestTimeout. perRequestTimeout can only be set if Service Connect appProtocol isn't TCP. Only idleTimeout is allowed for TCP appProtocol.
+     */
+    perRequestTimeoutSeconds?: Duration;
+  }
   export type Timestamp = Date;
   export interface Tmpfs {
     /**

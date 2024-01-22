@@ -474,6 +474,9 @@
           "shape": "DBClusterAlreadyExistsFault"
         },
         {
+          "shape": "InsufficientDBInstanceCapacityFault"
+        },
+        {
           "shape": "InsufficientStorageClusterCapacityFault"
         },
         {
