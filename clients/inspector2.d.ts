@@ -84,6 +84,14 @@ declare class Inspector2 extends Service {
    */
   cancelSbomExport(callback?: (err: AWSError, data: Inspector2.Types.CancelSbomExportResponse) => void): Request<Inspector2.Types.CancelSbomExportResponse, AWSError>;
   /**
+   * Creates a CIS scan configuration.
+   */
+  createCisScanConfiguration(params: Inspector2.Types.CreateCisScanConfigurationRequest, callback?: (err: AWSError, data: Inspector2.Types.CreateCisScanConfigurationResponse) => void): Request<Inspector2.Types.CreateCisScanConfigurationResponse, AWSError>;
+  /**
+   * Creates a CIS scan configuration.
+   */
+  createCisScanConfiguration(callback?: (err: AWSError, data: Inspector2.Types.CreateCisScanConfigurationResponse) => void): Request<Inspector2.Types.CreateCisScanConfigurationResponse, AWSError>;
+  /**
    * Creates a filter resource using specified filter criteria. When the filter action is set to SUPPRESS this action creates a suppression rule.
    */
   createFilter(params: Inspector2.Types.CreateFilterRequest, callback?: (err: AWSError, data: Inspector2.Types.CreateFilterResponse) => void): Request<Inspector2.Types.CreateFilterResponse, AWSError>;
@@ -107,6 +115,14 @@ declare class Inspector2 extends Service {
    * Creates a software bill of materials (SBOM) report.
    */
   createSbomExport(callback?: (err: AWSError, data: Inspector2.Types.CreateSbomExportResponse) => void): Request<Inspector2.Types.CreateSbomExportResponse, AWSError>;
+  /**
+   * Deletes a CIS scan configuration.
+   */
+  deleteCisScanConfiguration(params: Inspector2.Types.DeleteCisScanConfigurationRequest, callback?: (err: AWSError, data: Inspector2.Types.DeleteCisScanConfigurationResponse) => void): Request<Inspector2.Types.DeleteCisScanConfigurationResponse, AWSError>;
+  /**
+   * Deletes a CIS scan configuration.
+   */
+  deleteCisScanConfiguration(callback?: (err: AWSError, data: Inspector2.Types.DeleteCisScanConfigurationResponse) => void): Request<Inspector2.Types.DeleteCisScanConfigurationResponse, AWSError>;
   /**
    * Deletes a filter resource.
    */
@@ -163,6 +179,22 @@ declare class Inspector2 extends Service {
    * Enables the Amazon Inspector delegated administrator for your Organizations organization.
    */
   enableDelegatedAdminAccount(callback?: (err: AWSError, data: Inspector2.Types.EnableDelegatedAdminAccountResponse) => void): Request<Inspector2.Types.EnableDelegatedAdminAccountResponse, AWSError>;
+  /**
+   * Retrieves a CIS scan report.
+   */
+  getCisScanReport(params: Inspector2.Types.GetCisScanReportRequest, callback?: (err: AWSError, data: Inspector2.Types.GetCisScanReportResponse) => void): Request<Inspector2.Types.GetCisScanReportResponse, AWSError>;
+  /**
+   * Retrieves a CIS scan report.
+   */
+  getCisScanReport(callback?: (err: AWSError, data: Inspector2.Types.GetCisScanReportResponse) => void): Request<Inspector2.Types.GetCisScanReportResponse, AWSError>;
+  /**
+   * Retrieves CIS scan result details.
+   */
+  getCisScanResultDetails(params: Inspector2.Types.GetCisScanResultDetailsRequest, callback?: (err: AWSError, data: Inspector2.Types.GetCisScanResultDetailsResponse) => void): Request<Inspector2.Types.GetCisScanResultDetailsResponse, AWSError>;
+  /**
+   * Retrieves CIS scan result details.
+   */
+  getCisScanResultDetails(callback?: (err: AWSError, data: Inspector2.Types.GetCisScanResultDetailsResponse) => void): Request<Inspector2.Types.GetCisScanResultDetailsResponse, AWSError>;
   /**
    * Retrieves setting configurations for Inspector scans.
    */
@@ -227,6 +259,38 @@ declare class Inspector2 extends Service {
    * Lists the permissions an account has to configure Amazon Inspector.
    */
   listAccountPermissions(callback?: (err: AWSError, data: Inspector2.Types.ListAccountPermissionsResponse) => void): Request<Inspector2.Types.ListAccountPermissionsResponse, AWSError>;
+  /**
+   * Lists CIS scan configurations.
+   */
+  listCisScanConfigurations(params: Inspector2.Types.ListCisScanConfigurationsRequest, callback?: (err: AWSError, data: Inspector2.Types.ListCisScanConfigurationsResponse) => void): Request<Inspector2.Types.ListCisScanConfigurationsResponse, AWSError>;
+  /**
+   * Lists CIS scan configurations.
+   */
+  listCisScanConfigurations(callback?: (err: AWSError, data: Inspector2.Types.ListCisScanConfigurationsResponse) => void): Request<Inspector2.Types.ListCisScanConfigurationsResponse, AWSError>;
+  /**
+   * Lists scan results aggregated by checks.
+   */
+  listCisScanResultsAggregatedByChecks(params: Inspector2.Types.ListCisScanResultsAggregatedByChecksRequest, callback?: (err: AWSError, data: Inspector2.Types.ListCisScanResultsAggregatedByChecksResponse) => void): Request<Inspector2.Types.ListCisScanResultsAggregatedByChecksResponse, AWSError>;
+  /**
+   * Lists scan results aggregated by checks.
+   */
+  listCisScanResultsAggregatedByChecks(callback?: (err: AWSError, data: Inspector2.Types.ListCisScanResultsAggregatedByChecksResponse) => void): Request<Inspector2.Types.ListCisScanResultsAggregatedByChecksResponse, AWSError>;
+  /**
+   * Lists scan results aggregated by a target resource.
+   */
+  listCisScanResultsAggregatedByTargetResource(params: Inspector2.Types.ListCisScanResultsAggregatedByTargetResourceRequest, callback?: (err: AWSError, data: Inspector2.Types.ListCisScanResultsAggregatedByTargetResourceResponse) => void): Request<Inspector2.Types.ListCisScanResultsAggregatedByTargetResourceResponse, AWSError>;
+  /**
+   * Lists scan results aggregated by a target resource.
+   */
+  listCisScanResultsAggregatedByTargetResource(callback?: (err: AWSError, data: Inspector2.Types.ListCisScanResultsAggregatedByTargetResourceResponse) => void): Request<Inspector2.Types.ListCisScanResultsAggregatedByTargetResourceResponse, AWSError>;
+  /**
+   * Returns a CIS scan list.
+   */
+  listCisScans(params: Inspector2.Types.ListCisScansRequest, callback?: (err: AWSError, data: Inspector2.Types.ListCisScansResponse) => void): Request<Inspector2.Types.ListCisScansResponse, AWSError>;
+  /**
+   * Returns a CIS scan list.
+   */
+  listCisScans(callback?: (err: AWSError, data: Inspector2.Types.ListCisScansResponse) => void): Request<Inspector2.Types.ListCisScansResponse, AWSError>;
   /**
    * Lists coverage details for you environment.
    */
@@ -316,6 +380,38 @@ declare class Inspector2 extends Service {
    */
   searchVulnerabilities(callback?: (err: AWSError, data: Inspector2.Types.SearchVulnerabilitiesResponse) => void): Request<Inspector2.Types.SearchVulnerabilitiesResponse, AWSError>;
   /**
+   *  Sends a CIS session health. This API is used by the Amazon Inspector SSM plugin to communicate with the Amazon Inspector service. The Amazon Inspector SSM plugin calls this API to start a CIS scan session for the scan ID supplied by the service. 
+   */
+  sendCisSessionHealth(params: Inspector2.Types.SendCisSessionHealthRequest, callback?: (err: AWSError, data: Inspector2.Types.SendCisSessionHealthResponse) => void): Request<Inspector2.Types.SendCisSessionHealthResponse, AWSError>;
+  /**
+   *  Sends a CIS session health. This API is used by the Amazon Inspector SSM plugin to communicate with the Amazon Inspector service. The Amazon Inspector SSM plugin calls this API to start a CIS scan session for the scan ID supplied by the service. 
+   */
+  sendCisSessionHealth(callback?: (err: AWSError, data: Inspector2.Types.SendCisSessionHealthResponse) => void): Request<Inspector2.Types.SendCisSessionHealthResponse, AWSError>;
+  /**
+   *  Sends a CIS session telemetry. This API is used by the Amazon Inspector SSM plugin to communicate with the Amazon Inspector service. The Amazon Inspector SSM plugin calls this API to start a CIS scan session for the scan ID supplied by the service. 
+   */
+  sendCisSessionTelemetry(params: Inspector2.Types.SendCisSessionTelemetryRequest, callback?: (err: AWSError, data: Inspector2.Types.SendCisSessionTelemetryResponse) => void): Request<Inspector2.Types.SendCisSessionTelemetryResponse, AWSError>;
+  /**
+   *  Sends a CIS session telemetry. This API is used by the Amazon Inspector SSM plugin to communicate with the Amazon Inspector service. The Amazon Inspector SSM plugin calls this API to start a CIS scan session for the scan ID supplied by the service. 
+   */
+  sendCisSessionTelemetry(callback?: (err: AWSError, data: Inspector2.Types.SendCisSessionTelemetryResponse) => void): Request<Inspector2.Types.SendCisSessionTelemetryResponse, AWSError>;
+  /**
+   *  Starts a CIS session. This API is used by the Amazon Inspector SSM plugin to communicate with the Amazon Inspector service. The Amazon Inspector SSM plugin calls this API to start a CIS scan session for the scan ID supplied by the service. 
+   */
+  startCisSession(params: Inspector2.Types.StartCisSessionRequest, callback?: (err: AWSError, data: Inspector2.Types.StartCisSessionResponse) => void): Request<Inspector2.Types.StartCisSessionResponse, AWSError>;
+  /**
+   *  Starts a CIS session. This API is used by the Amazon Inspector SSM plugin to communicate with the Amazon Inspector service. The Amazon Inspector SSM plugin calls this API to start a CIS scan session for the scan ID supplied by the service. 
+   */
+  startCisSession(callback?: (err: AWSError, data: Inspector2.Types.StartCisSessionResponse) => void): Request<Inspector2.Types.StartCisSessionResponse, AWSError>;
+  /**
+   *  Stops a CIS session. This API is used by the Amazon Inspector SSM plugin to communicate with the Amazon Inspector service. The Amazon Inspector SSM plugin calls this API to start a CIS scan session for the scan ID supplied by the service. 
+   */
+  stopCisSession(params: Inspector2.Types.StopCisSessionRequest, callback?: (err: AWSError, data: Inspector2.Types.StopCisSessionResponse) => void): Request<Inspector2.Types.StopCisSessionResponse, AWSError>;
+  /**
+   *  Stops a CIS session. This API is used by the Amazon Inspector SSM plugin to communicate with the Amazon Inspector service. The Amazon Inspector SSM plugin calls this API to start a CIS scan session for the scan ID supplied by the service. 
+   */
+  stopCisSession(callback?: (err: AWSError, data: Inspector2.Types.StopCisSessionResponse) => void): Request<Inspector2.Types.StopCisSessionResponse, AWSError>;
+  /**
    * Adds tags to a resource.
    */
   tagResource(params: Inspector2.Types.TagResourceRequest, callback?: (err: AWSError, data: Inspector2.Types.TagResourceResponse) => void): Request<Inspector2.Types.TagResourceResponse, AWSError>;
@@ -331,6 +427,14 @@ declare class Inspector2 extends Service {
    * Removes tags from a resource.
    */
   untagResource(callback?: (err: AWSError, data: Inspector2.Types.UntagResourceResponse) => void): Request<Inspector2.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Updates a CIS scan configuration.
+   */
+  updateCisScanConfiguration(params: Inspector2.Types.UpdateCisScanConfigurationRequest, callback?: (err: AWSError, data: Inspector2.Types.UpdateCisScanConfigurationResponse) => void): Request<Inspector2.Types.UpdateCisScanConfigurationResponse, AWSError>;
+  /**
+   * Updates a CIS scan configuration.
+   */
+  updateCisScanConfiguration(callback?: (err: AWSError, data: Inspector2.Types.UpdateCisScanConfigurationResponse) => void): Request<Inspector2.Types.UpdateCisScanConfigurationResponse, AWSError>;
   /**
    * Updates setting configurations for your Amazon Inspector account. When you use this API as an Amazon Inspector delegated administrator this updates the setting for all accounts you manage. Member accounts in an organization cannot update this setting.
    */
@@ -424,6 +528,7 @@ declare namespace Inspector2 {
     severityCounts?: SeverityCounts;
   }
   export type AccountId = string;
+  export type AccountIdFilterList = CisStringFilter[];
   export type AccountIdSet = AccountId[];
   export type AccountList = Account[];
   export type AccountSortBy = "CRITICAL"|"HIGH"|"ALL"|string;
@@ -901,6 +1006,8 @@ declare namespace Inspector2 {
      */
     failedAccountIds?: FailedMemberAccountEc2DeepInspectionStatusStateList;
   }
+  export type BenchmarkProfile = string;
+  export type BenchmarkVersion = string;
   export type Boolean = boolean;
   export interface CancelFindingsReportRequest {
     /**
@@ -925,6 +1032,443 @@ declare namespace Inspector2 {
      * The report ID of the canceled SBOM export.
      */
     reportId?: ReportId;
+  }
+  export type CheckCount = number;
+  export type CheckIdFilterList = CisStringFilter[];
+  export type CisAccountIdList = AccountId[];
+  export interface CisCheckAggregation {
+    /**
+     * The account ID for the CIS check.
+     */
+    accountId?: AccountId;
+    /**
+     * The description for the CIS check.
+     */
+    checkDescription?: String;
+    /**
+     * The check ID for the CIS check.
+     */
+    checkId?: String;
+    /**
+     * The CIS check level.
+     */
+    level?: CisSecurityLevel;
+    /**
+     * The CIS check platform.
+     */
+    platform?: String;
+    /**
+     * The scan ARN for the CIS check scan ARN.
+     */
+    scanArn: CisScanArn;
+    /**
+     * The CIS check status counts.
+     */
+    statusCounts?: StatusCounts;
+    /**
+     * The CIS check title.
+     */
+    title?: String;
+  }
+  export type CisCheckAggregationList = CisCheckAggregation[];
+  export interface CisDateFilter {
+    /**
+     * The CIS date filter's earliest scan start time.
+     */
+    earliestScanStartTime?: Timestamp;
+    /**
+     * The CIS date filter's latest scan start time.
+     */
+    latestScanStartTime?: Timestamp;
+  }
+  export type CisFindingArn = string;
+  export type CisFindingArnFilterList = CisStringFilter[];
+  export type CisFindingStatus = "PASSED"|"FAILED"|"SKIPPED"|string;
+  export type CisFindingStatusComparison = "EQUALS"|string;
+  export interface CisFindingStatusFilter {
+    /**
+     * The comparison value of the CIS finding status filter.
+     */
+    comparison: CisFindingStatusComparison;
+    /**
+     * The value of the CIS finding status filter.
+     */
+    value: CisFindingStatus;
+  }
+  export type CisFindingStatusFilterList = CisFindingStatusFilter[];
+  export interface CisNumberFilter {
+    /**
+     * The CIS number filter's lower inclusive.
+     */
+    lowerInclusive?: Integer;
+    /**
+     * The CIS number filter's upper inclusive.
+     */
+    upperInclusive?: Integer;
+  }
+  export type CisNumberFilterList = CisNumberFilter[];
+  export type CisOwnerId = string;
+  export type CisReportStatus = "SUCCEEDED"|"FAILED"|"IN_PROGRESS"|string;
+  export type CisResultStatus = "PASSED"|"FAILED"|"SKIPPED"|string;
+  export type CisResultStatusComparison = "EQUALS"|string;
+  export interface CisResultStatusFilter {
+    /**
+     * The comparison value of the CIS result status filter.
+     */
+    comparison: CisResultStatusComparison;
+    /**
+     * The value of the CIS result status filter.
+     */
+    value: CisResultStatus;
+  }
+  export type CisResultStatusFilterList = CisResultStatusFilter[];
+  export type CisRuleDetails = Buffer|Uint8Array|Blob|string;
+  export type CisRuleStatus = "FAILED"|"PASSED"|"NOT_EVALUATED"|"INFORMATIONAL"|"UNKNOWN"|"NOT_APPLICABLE"|"ERROR"|string;
+  export interface CisScan {
+    /**
+     * The CIS scan's failed checks.
+     */
+    failedChecks?: Integer;
+    /**
+     * The CIS scan's ARN.
+     */
+    scanArn: CisScanArn;
+    /**
+     * The CIS scan's configuration ARN.
+     */
+    scanConfigurationArn: CisScanConfigurationArn;
+    /**
+     * The CIS scan's date.
+     */
+    scanDate?: Timestamp;
+    /**
+     * The the name of the scan configuration that's associated with this scan.
+     */
+    scanName?: CisScanName;
+    /**
+     * The account or organization that schedules the CIS scan.
+     */
+    scheduledBy?: String;
+    /**
+     *  The security level for the CIS scan. Security level refers to the Benchmark levels that CIS assigns to a profile. 
+     */
+    securityLevel?: CisSecurityLevel;
+    /**
+     * The CIS scan's status.
+     */
+    status?: CisScanStatus;
+    /**
+     * The CIS scan's targets.
+     */
+    targets?: CisTargets;
+    /**
+     * The CIS scan's total checks.
+     */
+    totalChecks?: Integer;
+  }
+  export type CisScanArn = string;
+  export type CisScanArnFilterList = CisStringFilter[];
+  export interface CisScanConfiguration {
+    /**
+     * The CIS scan configuration's owner ID.
+     */
+    ownerId?: CisOwnerId;
+    /**
+     * The CIS scan configuration's scan configuration ARN.
+     */
+    scanConfigurationArn: CisScanConfigurationArn;
+    /**
+     * The name of the CIS scan configuration.
+     */
+    scanName?: CisScanName;
+    /**
+     * The CIS scan configuration's schedule.
+     */
+    schedule?: Schedule;
+    /**
+     * The CIS scan configuration's security level.
+     */
+    securityLevel?: CisSecurityLevel;
+    /**
+     * The CIS scan configuration's tags.
+     */
+    tags?: CisTagMap;
+    /**
+     * The CIS scan configuration's targets.
+     */
+    targets?: CisTargets;
+  }
+  export type CisScanConfigurationArn = string;
+  export type CisScanConfigurationArnFilterList = CisStringFilter[];
+  export type CisScanConfigurationList = CisScanConfiguration[];
+  export type CisScanConfigurationsSortBy = "SCAN_NAME"|"SCAN_CONFIGURATION_ARN"|string;
+  export type CisScanDateFilterList = CisDateFilter[];
+  export type CisScanList = CisScan[];
+  export type CisScanName = string;
+  export type CisScanNameFilterList = CisStringFilter[];
+  export interface CisScanResultDetails {
+    /**
+     * The CIS scan result details' account ID.
+     */
+    accountId?: AccountId;
+    /**
+     * The account ID that's associated with the CIS scan result details.
+     */
+    checkDescription?: String;
+    /**
+     * The CIS scan result details' check ID.
+     */
+    checkId?: String;
+    /**
+     * The CIS scan result details' finding ARN.
+     */
+    findingArn?: CisFindingArn;
+    /**
+     * The CIS scan result details' level.
+     */
+    level?: CisSecurityLevel;
+    /**
+     * The CIS scan result details' platform.
+     */
+    platform?: String;
+    /**
+     * The CIS scan result details' remediation.
+     */
+    remediation?: String;
+    /**
+     * The CIS scan result details' scan ARN.
+     */
+    scanArn: CisScanArn;
+    /**
+     * The CIS scan result details' status.
+     */
+    status?: CisFindingStatus;
+    /**
+     * The CIS scan result details' status reason.
+     */
+    statusReason?: String;
+    /**
+     * The CIS scan result details' target resource ID.
+     */
+    targetResourceId?: ResourceId;
+    /**
+     * The CIS scan result details' title.
+     */
+    title?: String;
+  }
+  export interface CisScanResultDetailsFilterCriteria {
+    /**
+     * The criteria's check ID filters.
+     */
+    checkIdFilters?: CheckIdFilterList;
+    /**
+     * The criteria's finding ARN filters.
+     */
+    findingArnFilters?: CisFindingArnFilterList;
+    /**
+     * The criteria's finding status filters.
+     */
+    findingStatusFilters?: CisFindingStatusFilterList;
+    /**
+     *  The criteria's security level filters. . Security level refers to the Benchmark levels that CIS assigns to a profile. 
+     */
+    securityLevelFilters?: CisSecurityLevelFilterList;
+    /**
+     * The criteria's title filters.
+     */
+    titleFilters?: TitleFilterList;
+  }
+  export type CisScanResultDetailsList = CisScanResultDetails[];
+  export type CisScanResultDetailsSortBy = "CHECK_ID"|"STATUS"|string;
+  export interface CisScanResultsAggregatedByChecksFilterCriteria {
+    /**
+     * The criteria's account ID filters.
+     */
+    accountIdFilters?: OneAccountIdFilterList;
+    /**
+     * The criteria's check ID filters.
+     */
+    checkIdFilters?: CheckIdFilterList;
+    /**
+     * The criteria's failed resources filters.
+     */
+    failedResourcesFilters?: CisNumberFilterList;
+    /**
+     * The criteria's platform filters.
+     */
+    platformFilters?: PlatformFilterList;
+    /**
+     * The criteria's security level filters.
+     */
+    securityLevelFilters?: CisSecurityLevelFilterList;
+    /**
+     * The criteria's title filters.
+     */
+    titleFilters?: TitleFilterList;
+  }
+  export type CisScanResultsAggregatedByChecksSortBy = "CHECK_ID"|"TITLE"|"PLATFORM"|"FAILED_COUNTS"|"SECURITY_LEVEL"|string;
+  export interface CisScanResultsAggregatedByTargetResourceFilterCriteria {
+    /**
+     * The criteria's account ID filters.
+     */
+    accountIdFilters?: AccountIdFilterList;
+    /**
+     * The criteria's check ID filters.
+     */
+    checkIdFilters?: CheckIdFilterList;
+    /**
+     * The criteria's failed checks filters.
+     */
+    failedChecksFilters?: CisNumberFilterList;
+    /**
+     * The criteria's platform filters.
+     */
+    platformFilters?: PlatformFilterList;
+    /**
+     * The criteria's status filter.
+     */
+    statusFilters?: CisResultStatusFilterList;
+    /**
+     * The criteria's target resource ID filters.
+     */
+    targetResourceIdFilters?: ResourceIdFilterList;
+    /**
+     * The criteria's target resource tag filters.
+     */
+    targetResourceTagFilters?: ResourceTagFilterList;
+    /**
+     * The criteria's target status filters.
+     */
+    targetStatusFilters?: TargetStatusFilterList;
+    /**
+     * The criteria's target status reason filters.
+     */
+    targetStatusReasonFilters?: TargetStatusReasonFilterList;
+  }
+  export type CisScanResultsAggregatedByTargetResourceSortBy = "RESOURCE_ID"|"FAILED_COUNTS"|"ACCOUNT_ID"|"PLATFORM"|"TARGET_STATUS"|"TARGET_STATUS_REASON"|string;
+  export type CisScanResultsMaxResults = number;
+  export type CisScanStatus = "FAILED"|"COMPLETED"|"CANCELLED"|"IN_PROGRESS"|string;
+  export type CisScanStatusComparison = "EQUALS"|string;
+  export interface CisScanStatusFilter {
+    /**
+     * The filter comparison value.
+     */
+    comparison: CisScanStatusComparison;
+    /**
+     * The filter value.
+     */
+    value: CisScanStatus;
+  }
+  export type CisScanStatusFilterList = CisScanStatusFilter[];
+  export type CisScheduledByFilterList = CisStringFilter[];
+  export type CisSecurityLevel = "LEVEL_1"|"LEVEL_2"|string;
+  export type CisSecurityLevelComparison = "EQUALS"|string;
+  export interface CisSecurityLevelFilter {
+    /**
+     * The CIS security filter comparison value.
+     */
+    comparison: CisSecurityLevelComparison;
+    /**
+     * The CIS security filter value.
+     */
+    value: CisSecurityLevel;
+  }
+  export type CisSecurityLevelFilterList = CisSecurityLevelFilter[];
+  export interface CisSessionMessage {
+    /**
+     * The CIS rule details for the CIS session message.
+     */
+    cisRuleDetails: CisRuleDetails;
+    /**
+     * The rule ID for the CIS session message.
+     */
+    ruleId: RuleId;
+    /**
+     * The status of the CIS session message.
+     */
+    status: CisRuleStatus;
+  }
+  export type CisSessionMessages = CisSessionMessage[];
+  export type CisSortOrder = "ASC"|"DESC"|string;
+  export type CisStringComparison = "EQUALS"|"PREFIX"|"NOT_EQUALS"|string;
+  export interface CisStringFilter {
+    /**
+     * The comparison value of the CIS string filter.
+     */
+    comparison: CisStringComparison;
+    /**
+     * The value of the CIS string filter.
+     */
+    value: String;
+  }
+  export type CisTagMap = {[key: string]: MapValue};
+  export interface CisTargetResourceAggregation {
+    /**
+     * The account ID for the CIS target resource.
+     */
+    accountId?: AccountId;
+    /**
+     * The platform for the CIS target resource.
+     */
+    platform?: String;
+    /**
+     * The scan ARN for the CIS target resource.
+     */
+    scanArn: CisScanArn;
+    /**
+     * The target resource status counts.
+     */
+    statusCounts?: StatusCounts;
+    /**
+     * The ID of the target resource.
+     */
+    targetResourceId?: ResourceId;
+    /**
+     * The tag for the target resource.
+     */
+    targetResourceTags?: TargetResourceTags;
+    /**
+     * The status of the target resource.
+     */
+    targetStatus?: CisTargetStatus;
+    /**
+     * The reason for the target resource.
+     */
+    targetStatusReason?: CisTargetStatusReason;
+  }
+  export type CisTargetResourceAggregationList = CisTargetResourceAggregation[];
+  export type CisTargetStatus = "TIMED_OUT"|"CANCELLED"|"COMPLETED"|string;
+  export type CisTargetStatusComparison = "EQUALS"|string;
+  export interface CisTargetStatusFilter {
+    /**
+     * The comparison value of the CIS target status filter.
+     */
+    comparison: CisTargetStatusComparison;
+    /**
+     * The value of the CIS target status filter.
+     */
+    value: CisTargetStatus;
+  }
+  export type CisTargetStatusReason = "SCAN_IN_PROGRESS"|"UNSUPPORTED_OS"|"SSM_UNMANAGED"|string;
+  export interface CisTargetStatusReasonFilter {
+    /**
+     * The comparison value of the CIS target status reason filter.
+     */
+    comparison: CisTargetStatusComparison;
+    /**
+     * The value of the CIS target status reason filter.
+     */
+    value: CisTargetStatusReason;
+  }
+  export interface CisTargets {
+    /**
+     * The CIS target account ids.
+     */
+    accountIds?: CisAccountIdList;
+    /**
+     * The CIS target resource tags.
+     */
+    targetResourceTags?: TargetResourceTags;
   }
   export type CisaAction = string;
   export interface CisaData {
@@ -1049,6 +1593,20 @@ declare namespace Inspector2 {
   }
   export type Component = string;
   export type ComponentType = string;
+  export interface ComputePlatform {
+    /**
+     * The compute platform product.
+     */
+    product?: Product;
+    /**
+     * The compute platform vendor.
+     */
+    vendor?: Vendor;
+    /**
+     * The compute platform version.
+     */
+    version?: PlatformVersion;
+  }
   export interface Counts {
     /**
      * The number of resources.
@@ -1109,7 +1667,7 @@ declare namespace Inspector2 {
      */
     resourceId?: CoverageStringFilterList;
     /**
-     * An array of Amazon Web Services resource types to return coverage statistics for. The values can be AWS_EC2_INSTANCE, AWS_LAMBDA_FUNCTION or AWS_ECR_REPOSITORY.
+     * An array of Amazon Web Services resource types to return coverage statistics for. The values can be AWS_EC2_INSTANCE, AWS_LAMBDA_FUNCTION, AWS_ECR_CONTAINER_IMAGE, AWS_ECR_REPOSITORY or AWS_ACCOUNT.
      */
     resourceType?: CoverageStringFilterList;
     /**
@@ -1186,6 +1744,44 @@ declare namespace Inspector2 {
     scanType: ScanType;
   }
   export type CoveredResources = CoveredResource[];
+  export interface CreateCisScanConfigurationRequest {
+    /**
+     * The scan name for the CIS scan configuration.
+     */
+    scanName: CisScanName;
+    /**
+     * The schedule for the CIS scan configuration.
+     */
+    schedule: Schedule;
+    /**
+     *  The security level for the CIS scan configuration. Security level refers to the Benchmark levels that CIS assigns to a profile. 
+     */
+    securityLevel: CisSecurityLevel;
+    /**
+     * The tags for the CIS scan configuration.
+     */
+    tags?: CisTagMap;
+    /**
+     * The targets for the CIS scan configuration.
+     */
+    targets: CreateCisTargets;
+  }
+  export interface CreateCisScanConfigurationResponse {
+    /**
+     * The scan configuration ARN for the CIS scan configuration.
+     */
+    scanConfigurationArn?: CisScanConfigurationArn;
+  }
+  export interface CreateCisTargets {
+    /**
+     * The CIS target account ids.
+     */
+    accountIds: TargetAccountList;
+    /**
+     * The CIS target resource tags.
+     */
+    targetResourceTags: TargetResourceTags;
+  }
   export interface CreateFilterRequest {
     /**
      * Defines the action that is to be applied to the findings that match the filter.
@@ -1339,6 +1935,12 @@ declare namespace Inspector2 {
   export type Cwe = string;
   export type CweList = NonEmptyString[];
   export type Cwes = Cwe[];
+  export interface DailySchedule {
+    /**
+     * The schedule start time.
+     */
+    startTime: Time;
+  }
   export interface DateFilter {
     /**
      * A timestamp representing the end of the time period filtered on.
@@ -1351,6 +1953,8 @@ declare namespace Inspector2 {
   }
   export type DateFilterList = DateFilter[];
   export type DateTimeTimestamp = Date;
+  export type Day = "SUN"|"MON"|"TUE"|"WED"|"THU"|"FRI"|"SAT"|string;
+  export type DaysList = Day[];
   export interface DelegatedAdmin {
     /**
      * The Amazon Web Services account ID of the Amazon Inspector delegated administrator for your organization.
@@ -1373,6 +1977,18 @@ declare namespace Inspector2 {
   }
   export type DelegatedAdminAccountList = DelegatedAdminAccount[];
   export type DelegatedAdminStatus = "ENABLED"|"DISABLE_IN_PROGRESS"|string;
+  export interface DeleteCisScanConfigurationRequest {
+    /**
+     * The ARN of the CIS scan configuration.
+     */
+    scanConfigurationArn: CisScanConfigurationArn;
+  }
+  export interface DeleteCisScanConfigurationResponse {
+    /**
+     * The ARN of the CIS scan configuration.
+     */
+    scanConfigurationArn: CisScanConfigurationArn;
+  }
   export interface DeleteFilterRequest {
     /**
      * The Amazon Resource Number (ARN) of the filter to be deleted.
@@ -2155,6 +2771,71 @@ declare namespace Inspector2 {
   export type FreeTrialStatus = "ACTIVE"|"INACTIVE"|string;
   export type FreeTrialType = "EC2"|"ECR"|"LAMBDA"|"LAMBDA_CODE"|string;
   export type FunctionName = string;
+  export interface GetCisScanReportRequest {
+    /**
+     * The scan ARN.
+     */
+    scanArn: CisScanArn;
+    /**
+     * The target accounts.
+     */
+    targetAccounts?: ReportTargetAccounts;
+  }
+  export interface GetCisScanReportResponse {
+    /**
+     * The status.
+     */
+    status?: CisReportStatus;
+    /**
+     *  The URL where the CIS scan report PDF can be downloaded. 
+     */
+    url?: String;
+  }
+  export type GetCisScanResultDetailsMaxResults = number;
+  export interface GetCisScanResultDetailsRequest {
+    /**
+     * The account ID.
+     */
+    accountId: AccountId;
+    /**
+     * The filter criteria.
+     */
+    filterCriteria?: CisScanResultDetailsFilterCriteria;
+    /**
+     * The maximum number of CIS scan result details to be returned in a single page of results.
+     */
+    maxResults?: GetCisScanResultDetailsMaxResults;
+    /**
+     * The pagination token from a previous request that's used to retrieve the next page of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The scan ARN.
+     */
+    scanArn: CisScanArn;
+    /**
+     * The sort by order.
+     */
+    sortBy?: CisScanResultDetailsSortBy;
+    /**
+     * The sort order.
+     */
+    sortOrder?: CisSortOrder;
+    /**
+     * The target resource ID.
+     */
+    targetResourceId: ResourceId;
+  }
+  export interface GetCisScanResultDetailsResponse {
+    /**
+     * The pagination token from a previous request that's used to retrieve the next page of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The scan result details.
+     */
+    scanResultDetails?: CisScanResultDetailsList;
+  }
   export interface GetConfigurationRequest {
   }
   export interface GetConfigurationResponse {
@@ -2501,6 +3182,206 @@ declare namespace Inspector2 {
      */
     permissions: Permissions;
   }
+  export interface ListCisScanConfigurationsFilterCriteria {
+    /**
+     * The list of scan configuration ARN filters.
+     */
+    scanConfigurationArnFilters?: CisScanConfigurationArnFilterList;
+    /**
+     * The list of scan name filters.
+     */
+    scanNameFilters?: CisScanNameFilterList;
+    /**
+     * The list of target resource tag filters.
+     */
+    targetResourceTagFilters?: ResourceTagFilterList;
+  }
+  export type ListCisScanConfigurationsMaxResults = number;
+  export interface ListCisScanConfigurationsRequest {
+    /**
+     * The CIS scan configuration filter criteria.
+     */
+    filterCriteria?: ListCisScanConfigurationsFilterCriteria;
+    /**
+     * The maximum number of CIS scan configurations to be returned in a single page of results.
+     */
+    maxResults?: ListCisScanConfigurationsMaxResults;
+    /**
+     * The pagination token from a previous request that's used to retrieve the next page of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The CIS scan configuration sort by order.
+     */
+    sortBy?: CisScanConfigurationsSortBy;
+    /**
+     * The CIS scan configuration sort order order.
+     */
+    sortOrder?: CisSortOrder;
+  }
+  export interface ListCisScanConfigurationsResponse {
+    /**
+     * The pagination token from a previous request that's used to retrieve the next page of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The CIS scan configuration scan configurations.
+     */
+    scanConfigurations?: CisScanConfigurationList;
+  }
+  export interface ListCisScanResultsAggregatedByChecksRequest {
+    /**
+     * The filter criteria.
+     */
+    filterCriteria?: CisScanResultsAggregatedByChecksFilterCriteria;
+    /**
+     * The maximum number of scan results aggregated by checks to be returned in a single page of results.
+     */
+    maxResults?: CisScanResultsMaxResults;
+    /**
+     * The pagination token from a previous request that's used to retrieve the next page of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The scan ARN.
+     */
+    scanArn: CisScanArn;
+    /**
+     * The sort by order.
+     */
+    sortBy?: CisScanResultsAggregatedByChecksSortBy;
+    /**
+     * The sort order.
+     */
+    sortOrder?: CisSortOrder;
+  }
+  export interface ListCisScanResultsAggregatedByChecksResponse {
+    /**
+     * The check aggregations.
+     */
+    checkAggregations?: CisCheckAggregationList;
+    /**
+     * The pagination token from a previous request that's used to retrieve the next page of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListCisScanResultsAggregatedByTargetResourceRequest {
+    /**
+     * The filter criteria.
+     */
+    filterCriteria?: CisScanResultsAggregatedByTargetResourceFilterCriteria;
+    /**
+     * The maximum number of scan results aggregated by a target resource to be returned in a single page of results.
+     */
+    maxResults?: CisScanResultsMaxResults;
+    /**
+     * The pagination token from a previous request that's used to retrieve the next page of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The scan ARN.
+     */
+    scanArn: CisScanArn;
+    /**
+     * The sort by order.
+     */
+    sortBy?: CisScanResultsAggregatedByTargetResourceSortBy;
+    /**
+     * The sort order.
+     */
+    sortOrder?: CisSortOrder;
+  }
+  export interface ListCisScanResultsAggregatedByTargetResourceResponse {
+    /**
+     * The pagination token from a previous request that's used to retrieve the next page of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The resource aggregations.
+     */
+    targetResourceAggregations?: CisTargetResourceAggregationList;
+  }
+  export type ListCisScansDetailLevel = "ORGANIZATION"|"MEMBER"|string;
+  export interface ListCisScansFilterCriteria {
+    /**
+     * The list of failed checks filters.
+     */
+    failedChecksFilters?: CisNumberFilterList;
+    /**
+     * The list of scan ARN filters.
+     */
+    scanArnFilters?: CisScanArnFilterList;
+    /**
+     * The list of scan at filters.
+     */
+    scanAtFilters?: CisScanDateFilterList;
+    /**
+     * The list of scan configuration ARN filters.
+     */
+    scanConfigurationArnFilters?: CisScanConfigurationArnFilterList;
+    /**
+     * The list of scan name filters.
+     */
+    scanNameFilters?: CisScanNameFilterList;
+    /**
+     * The list of scan status filters.
+     */
+    scanStatusFilters?: CisScanStatusFilterList;
+    /**
+     * The list of scheduled by filters.
+     */
+    scheduledByFilters?: CisScheduledByFilterList;
+    /**
+     * The list of target account ID filters.
+     */
+    targetAccountIdFilters?: AccountIdFilterList;
+    /**
+     * The list of target resource ID filters.
+     */
+    targetResourceIdFilters?: ResourceIdFilterList;
+    /**
+     * The list of target resource tag filters.
+     */
+    targetResourceTagFilters?: ResourceTagFilterList;
+  }
+  export type ListCisScansMaxResults = number;
+  export interface ListCisScansRequest {
+    /**
+     * The detail applied to the CIS scan.
+     */
+    detailLevel?: ListCisScansDetailLevel;
+    /**
+     * The CIS scan filter criteria.
+     */
+    filterCriteria?: ListCisScansFilterCriteria;
+    /**
+     * The maximum number of results to be returned.
+     */
+    maxResults?: ListCisScansMaxResults;
+    /**
+     * The pagination token from a previous request that's used to retrieve the next page of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The CIS scans sort by order.
+     */
+    sortBy?: ListCisScansSortBy;
+    /**
+     * The CIS scans sort order.
+     */
+    sortOrder?: CisSortOrder;
+  }
+  export interface ListCisScansResponse {
+    /**
+     * The pagination token from a previous request that's used to retrieve the next page of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The CIS scans.
+     */
+    scans?: CisScanList;
+  }
+  export type ListCisScansSortBy = "STATUS"|"SCHEDULED_BY"|"SCAN_START_DATE"|"FAILED_CHECKS"|string;
   export type ListCoverageMaxResults = number;
   export interface ListCoverageRequest {
     /**
@@ -2799,6 +3680,16 @@ declare namespace Inspector2 {
   export type MemberList = Member[];
   export type MeteringAccountId = string;
   export type MonthlyCostEstimate = number;
+  export interface MonthlySchedule {
+    /**
+     * The monthly schedule's day.
+     */
+    day: Day;
+    /**
+     * The monthly schedule's start time.
+     */
+    startTime: Time;
+  }
   export interface NetworkPath {
     /**
      * The details on the steps in the network path.
@@ -2834,6 +3725,9 @@ declare namespace Inspector2 {
     upperInclusive?: Double;
   }
   export type NumberFilterList = NumberFilter[];
+  export type OneAccountIdFilterList = CisStringFilter[];
+  export interface OneTimeSchedule {
+  }
   export type Operation = "ENABLE_SCANNING"|"DISABLE_SCANNING"|"ENABLE_REPOSITORY"|"DISABLE_REPOSITORY"|string;
   export type OwnerId = string;
   export interface PackageAggregation {
@@ -2956,6 +3850,8 @@ declare namespace Inspector2 {
   }
   export type Permissions = Permission[];
   export type Platform = string;
+  export type PlatformFilterList = CisStringFilter[];
+  export type PlatformVersion = string;
   export type Port = number;
   export interface PortRange {
     /**
@@ -2978,6 +3874,8 @@ declare namespace Inspector2 {
     endInclusive?: Port;
   }
   export type PortRangeFilterList = PortRangeFilter[];
+  export type Product = string;
+  export type Reason = string;
   export interface Recommendation {
     /**
      * The URL address to the CVE remediation recommendations.
@@ -3000,6 +3898,7 @@ declare namespace Inspector2 {
   }
   export type ReportFormat = "CSV"|"JSON"|string;
   export type ReportId = string;
+  export type ReportTargetAccounts = AccountId[];
   export type ReportingErrorCode = "INTERNAL_ERROR"|"INVALID_PERMISSIONS"|"NO_FINDINGS_FOUND"|"BUCKET_NOT_FOUND"|"INCOMPATIBLE_BUCKET_REGION"|"MALFORMED_KMS_KEY"|string;
   export interface RepositoryAggregation {
     /**
@@ -3121,6 +4020,7 @@ declare namespace Inspector2 {
     resourceType?: ResourceStringFilterList;
   }
   export type ResourceId = string;
+  export type ResourceIdFilterList = CisStringFilter[];
   export type ResourceList = Resource[];
   export type ResourceMapComparison = "EQUALS"|string;
   export interface ResourceMapFilter {
@@ -3200,8 +4100,10 @@ declare namespace Inspector2 {
   }
   export type ResourceStringFilterList = ResourceStringFilter[];
   export type ResourceStringInput = string;
+  export type ResourceTagFilterList = TagFilter[];
   export type ResourceType = "AWS_EC2_INSTANCE"|"AWS_ECR_CONTAINER_IMAGE"|"AWS_ECR_REPOSITORY"|"AWS_LAMBDA_FUNCTION"|string;
   export type RiskScore = number;
+  export type RuleId = string;
   export type Runtime = "NODEJS"|"NODEJS_12_X"|"NODEJS_14_X"|"NODEJS_16_X"|"JAVA_8"|"JAVA_8_AL2"|"JAVA_11"|"PYTHON_3_7"|"PYTHON_3_8"|"PYTHON_3_9"|"UNSUPPORTED"|"NODEJS_18_X"|"GO_1_X"|"JAVA_17"|"PYTHON_3_10"|string;
   export type SbomReportFormat = "CYCLONEDX_1_4"|"SPDX_2_3"|string;
   export interface ScanStatus {
@@ -3217,6 +4119,24 @@ declare namespace Inspector2 {
   export type ScanStatusCode = "ACTIVE"|"INACTIVE"|string;
   export type ScanStatusReason = "PENDING_INITIAL_SCAN"|"ACCESS_DENIED"|"INTERNAL_ERROR"|"UNMANAGED_EC2_INSTANCE"|"UNSUPPORTED_OS"|"SCAN_ELIGIBILITY_EXPIRED"|"RESOURCE_TERMINATED"|"SUCCESSFUL"|"NO_RESOURCES_FOUND"|"IMAGE_SIZE_EXCEEDED"|"SCAN_FREQUENCY_MANUAL"|"SCAN_FREQUENCY_SCAN_ON_PUSH"|"EC2_INSTANCE_STOPPED"|"PENDING_DISABLE"|"NO_INVENTORY"|"STALE_INVENTORY"|"EXCLUDED_BY_TAG"|"UNSUPPORTED_RUNTIME"|"UNSUPPORTED_MEDIA_TYPE"|"UNSUPPORTED_CONFIG_FILE"|"DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED"|"DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED"|"DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED"|"DEEP_INSPECTION_NO_INVENTORY"|string;
   export type ScanType = "NETWORK"|"PACKAGE"|"CODE"|string;
+  export interface Schedule {
+    /**
+     * The schedule's daily.
+     */
+    daily?: DailySchedule;
+    /**
+     * The schedule's monthly.
+     */
+    monthly?: MonthlySchedule;
+    /**
+     * The schedule's one time.
+     */
+    oneTime?: OneTimeSchedule;
+    /**
+     * The schedule's weekly.
+     */
+    weekly?: WeeklySchedule;
+  }
   export interface SearchVulnerabilitiesFilterCriteria {
     /**
      * The IDs for specific vulnerabilities.
@@ -3245,6 +4165,34 @@ declare namespace Inspector2 {
   }
   export type SecurityGroupId = string;
   export type SecurityGroupIdList = SecurityGroupId[];
+  export interface SendCisSessionHealthRequest {
+    /**
+     * A unique identifier for the scan job.
+     */
+    scanJobId: UUID;
+    /**
+     * The unique token that identifies the CIS session.
+     */
+    sessionToken: UUID;
+  }
+  export interface SendCisSessionHealthResponse {
+  }
+  export interface SendCisSessionTelemetryRequest {
+    /**
+     * The CIS session telemetry messages.
+     */
+    messages: CisSessionMessages;
+    /**
+     * A unique identifier for the scan job.
+     */
+    scanJobId: UUID;
+    /**
+     * The unique token that identifies the CIS session.
+     */
+    sessionToken: UUID;
+  }
+  export interface SendCisSessionTelemetryResponse {
+  }
   export type Service = "EC2"|"ECR"|"LAMBDA"|string;
   export type Severity = "INFORMATIONAL"|"LOW"|"MEDIUM"|"HIGH"|"CRITICAL"|"UNTRIAGED"|string;
   export interface SeverityCounts {
@@ -3278,6 +4226,24 @@ declare namespace Inspector2 {
   export type SortField = "AWS_ACCOUNT_ID"|"FINDING_TYPE"|"SEVERITY"|"FIRST_OBSERVED_AT"|"LAST_OBSERVED_AT"|"FINDING_STATUS"|"RESOURCE_TYPE"|"ECR_IMAGE_PUSHED_AT"|"ECR_IMAGE_REPOSITORY_NAME"|"ECR_IMAGE_REGISTRY"|"NETWORK_PROTOCOL"|"COMPONENT_TYPE"|"VULNERABILITY_ID"|"VULNERABILITY_SOURCE"|"INSPECTOR_SCORE"|"VENDOR_SEVERITY"|"EPSS_SCORE"|string;
   export type SortOrder = "ASC"|"DESC"|string;
   export type SourceLayerHash = string;
+  export interface StartCisSessionMessage {
+    /**
+     * The unique token that identifies the CIS session.
+     */
+    sessionToken: UUID;
+  }
+  export interface StartCisSessionRequest {
+    /**
+     * The start CIS session message.
+     */
+    message: StartCisSessionMessage;
+    /**
+     * A unique identifier for the scan job.
+     */
+    scanJobId: UUID;
+  }
+  export interface StartCisSessionResponse {
+  }
   export interface State {
     /**
      * The error code explaining why the account failed to enable Amazon Inspector.
@@ -3293,6 +4259,20 @@ declare namespace Inspector2 {
     status: Status;
   }
   export type Status = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|"SUSPENDING"|"SUSPENDED"|string;
+  export interface StatusCounts {
+    /**
+     * The number of checks that failed.
+     */
+    failed?: Integer;
+    /**
+     * The number of checks that passed.
+     */
+    passed?: Integer;
+    /**
+     * The number of checks that were skipped.
+     */
+    skipped?: Integer;
+  }
   export interface Step {
     /**
      * The component ID.
@@ -3304,6 +4284,83 @@ declare namespace Inspector2 {
     componentType: ComponentType;
   }
   export type StepList = Step[];
+  export interface StopCisMessageProgress {
+    /**
+     * The progress' error checks.
+     */
+    errorChecks?: CheckCount;
+    /**
+     * The progress' failed checks.
+     */
+    failedChecks?: CheckCount;
+    /**
+     * The progress' informational checks.
+     */
+    informationalChecks?: CheckCount;
+    /**
+     * The progress' not applicable checks.
+     */
+    notApplicableChecks?: CheckCount;
+    /**
+     * The progress' not evaluated checks.
+     */
+    notEvaluatedChecks?: CheckCount;
+    /**
+     * The progress' successful checks.
+     */
+    successfulChecks?: CheckCount;
+    /**
+     * The progress' total checks.
+     */
+    totalChecks?: CheckCount;
+    /**
+     * The progress' unknown checks.
+     */
+    unknownChecks?: CheckCount;
+  }
+  export interface StopCisSessionMessage {
+    /**
+     * The message benchmark profile.
+     */
+    benchmarkProfile?: BenchmarkProfile;
+    /**
+     * The message benchmark version.
+     */
+    benchmarkVersion?: BenchmarkVersion;
+    /**
+     * The message compute platform.
+     */
+    computePlatform?: ComputePlatform;
+    /**
+     * The progress of the message.
+     */
+    progress: StopCisMessageProgress;
+    /**
+     * The reason for the message.
+     */
+    reason?: Reason;
+    /**
+     * The status of the message.
+     */
+    status: StopCisSessionStatus;
+  }
+  export interface StopCisSessionRequest {
+    /**
+     * The stop CIS session message.
+     */
+    message: StopCisSessionMessage;
+    /**
+     * A unique identifier for the scan job.
+     */
+    scanJobId: UUID;
+    /**
+     * The unique token that identifies the CIS session.
+     */
+    sessionToken: UUID;
+  }
+  export interface StopCisSessionResponse {
+  }
+  export type StopCisSessionStatus = "SUCCESS"|"FAILED"|"INTERRUPTED"|"UNSUPPORTED_OS"|string;
   export type String = string;
   export type StringComparison = "EQUALS"|"PREFIX"|"NOT_EQUALS"|string;
   export interface StringFilter {
@@ -3334,6 +4391,21 @@ declare namespace Inspector2 {
   export type SuggestedFixCodeString = string;
   export type SuggestedFixDescriptionString = string;
   export type SuggestedFixes = SuggestedFix[];
+  export type TagComparison = "EQUALS"|string;
+  export interface TagFilter {
+    /**
+     * The tag filter comparison value.
+     */
+    comparison: TagComparison;
+    /**
+     * The tag filter key.
+     */
+    key: NonEmptyString;
+    /**
+     * The tag filter value.
+     */
+    value: NonEmptyString;
+  }
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagList = String[];
@@ -3350,9 +4422,27 @@ declare namespace Inspector2 {
   }
   export interface TagResourceResponse {
   }
+  export type TagValueList = String[];
   export type Target = string;
+  export type TargetAccount = string;
+  export type TargetAccountList = TargetAccount[];
+  export type TargetResourceTags = {[key: string]: TagValueList};
+  export type TargetStatusFilterList = CisTargetStatusFilter[];
+  export type TargetStatusReasonFilterList = CisTargetStatusReasonFilter[];
   export type Targets = Target[];
+  export interface Time {
+    /**
+     * The time of day in 24-hour format (00:00).
+     */
+    timeOfDay: TimeOfDay;
+    /**
+     * The timezone.
+     */
+    timezone: Timezone;
+  }
+  export type TimeOfDay = string;
   export type Timestamp = Date;
+  export type Timezone = string;
   export interface TitleAggregation {
     /**
      * The type of finding to aggregate on.
@@ -3397,11 +4487,13 @@ declare namespace Inspector2 {
      */
     vulnerabilityId?: String;
   }
+  export type TitleFilterList = CisStringFilter[];
   export type TitleSortBy = "CRITICAL"|"HIGH"|"ALL"|string;
   export type Tool = string;
   export type Tools = Tool[];
   export type Ttp = string;
   export type Ttps = Ttp[];
+  export type UUID = string;
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) for the resource to remove tags from.
@@ -3413,6 +4505,44 @@ declare namespace Inspector2 {
     tagKeys: TagKeyList;
   }
   export interface UntagResourceResponse {
+  }
+  export interface UpdateCisScanConfigurationRequest {
+    /**
+     * The CIS scan configuration ARN.
+     */
+    scanConfigurationArn: CisScanConfigurationArn;
+    /**
+     * The scan name for the CIS scan configuration.
+     */
+    scanName?: CisScanName;
+    /**
+     * The schedule for the CIS scan configuration.
+     */
+    schedule?: Schedule;
+    /**
+     *  The security level for the CIS scan configuration. Security level refers to the Benchmark levels that CIS assigns to a profile. 
+     */
+    securityLevel?: CisSecurityLevel;
+    /**
+     * The targets for the CIS scan configuration.
+     */
+    targets?: UpdateCisTargets;
+  }
+  export interface UpdateCisScanConfigurationResponse {
+    /**
+     * The CIS scan configuration ARN.
+     */
+    scanConfigurationArn: CisScanConfigurationArn;
+  }
+  export interface UpdateCisTargets {
+    /**
+     * The target account ids.
+     */
+    accountIds?: TargetAccountList;
+    /**
+     * The target resource tags.
+     */
+    targetResourceTags?: TargetResourceTags;
   }
   export interface UpdateConfigurationRequest {
     /**
@@ -3552,6 +4682,7 @@ declare namespace Inspector2 {
   export type UsageTotalList = UsageTotal[];
   export type UsageType = "EC2_INSTANCE_HOURS"|"ECR_INITIAL_SCAN"|"ECR_RESCAN"|"LAMBDA_FUNCTION_HOURS"|"LAMBDA_FUNCTION_CODE_HOURS"|string;
   export type UsageValue = number;
+  export type Vendor = string;
   export type VendorCreatedAt = Date;
   export type VendorSeverity = string;
   export type VendorUpdatedAt = Date;
@@ -3685,6 +4816,16 @@ declare namespace Inspector2 {
   }
   export type VulnerablePackageList = VulnerablePackage[];
   export type VulnerablePackageRemediation = string;
+  export interface WeeklySchedule {
+    /**
+     * The weekly schedule's days.
+     */
+    days: DaysList;
+    /**
+     * The weekly schedule's start time.
+     */
+    startTime: Time;
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

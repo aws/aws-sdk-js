@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1541.0-->
+<!--LATEST=2.1542.0-->
 <!--ENTRYINSERT-->
+
+## 2.1542.0
+* feature: Inspector2: This release adds support for CIS scans on EC2 instances.
 
 ## 2.1541.0
 * feature: AppConfigData: Fix FIPS Endpoints in aws-us-gov.
