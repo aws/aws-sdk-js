@@ -2263,6 +2263,7 @@ declare namespace S3 {
   export type ExpirationStatus = "Enabled"|"Disabled"|string;
   export type ExpiredObjectDeleteMarker = boolean;
   export type Expires = Date;
+  export type ExpiresString = string;
   export type ExposeHeader = string;
   export type ExposeHeaders = ExposeHeader[];
   export type Expression = string;
@@ -2895,9 +2896,13 @@ declare namespace S3 {
      */
     ContentType?: ContentType;
     /**
-     * The date and time at which the object is no longer cacheable.
+     * Deprecated in favor of ExpiresString.
      */
     Expires?: Expires;
+    /**
+     * The date and time at which the object is no longer cacheable.
+     */
+    ExpiresString?: ExpiresString;
     /**
      * If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata.  This functionality is not supported for directory buckets. 
      */
@@ -3282,9 +3287,13 @@ declare namespace S3 {
      */
     ContentType?: ContentType;
     /**
-     * The date and time at which the object is no longer cacheable.
+     * Deprecated in favor of ExpiresString.
      */
     Expires?: Expires;
+    /**
+     * The date and time at which the object is no longer cacheable.
+     */
+    ExpiresString?: ExpiresString;
     /**
      * If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata.  This functionality is not supported for directory buckets. 
      */

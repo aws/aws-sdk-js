@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "S3",
+  "description": "add compatibility fallback S3#ExpiresString when S3#Expires field is not a date-time"
+}
