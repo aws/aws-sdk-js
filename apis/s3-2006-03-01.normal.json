@@ -4582,6 +4582,9 @@
     "Expires": {
       "type": "timestamp"
     },
+    "ExpiresString": {
+      "type": "string"
+    },
     "ExposeHeader": {
       "type": "string"
     },
@@ -5806,9 +5809,16 @@
         },
         "Expires": {
           "shape": "Expires",
+          "documentation": "Deprecated in favor of ExpiresString.",
+          "location": "header",
+          "locationName": "Expires",
+          "deprecated": true
+        },
+        "ExpiresString": {
+          "shape": "ExpiresString",
           "documentation": "<p>The date and time at which the object is no longer cacheable.</p>",
           "location": "header",
-          "locationName": "Expires"
+          "locationName": "ExpiresString"
         },
         "WebsiteRedirectLocation": {
           "shape": "WebsiteRedirectLocation",
@@ -6495,9 +6505,16 @@
         },
         "Expires": {
           "shape": "Expires",
+          "documentation": "Deprecated in favor of ExpiresString.",
+          "location": "header",
+          "locationName": "Expires",
+          "deprecated": true
+        },
+        "ExpiresString": {
+          "shape": "ExpiresString",
           "documentation": "<p>The date and time at which the object is no longer cacheable.</p>",
           "location": "header",
-          "locationName": "Expires"
+          "locationName": "ExpiresString"
         },
         "WebsiteRedirectLocation": {
           "shape": "WebsiteRedirectLocation",

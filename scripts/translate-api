@@ -3,6 +3,7 @@
 var fs = require('fs');
 var Translator = require('./lib/translator');
 var removeEventStreamOperations = require('./lib/remove-event-stream-ops').removeEventStreamOperations;
+var setS3ExpiresString = require('./lib/set-s3-expires-string');
 var util = require('util');
 var path = require('path');
 
@@ -24,7 +25,7 @@ function ApiTranslator(basePath) {
 ApiTranslator.prototype.minimizeFile = function minimizeFile(filepath) {
   var opath = filepath.replace(/\.normal\.json$/, '.min.json');
   var data = JSON.parse(fs.readFileSync(path.join(this._apisPath, filepath)).toString());
-  var didModify = removeEventStreamOperations(data);
+  var didModify = removeEventStreamOperations(data) || setS3ExpiresString(data);
   if (didModify) {
     // original model modified, replace existing normal.json so docs/ts definitions are accurate
     fs.writeFileSync(path.join(this._apisPath, filepath), JSON.stringify(data, null, '  '));
