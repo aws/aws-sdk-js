@@ -7142,7 +7142,7 @@ declare namespace EC2 {
   export type AvailabilityZoneMessageList = AvailabilityZoneMessage[];
   export type AvailabilityZoneName = string;
   export type AvailabilityZoneOptInStatus = "opt-in-not-required"|"opted-in"|"not-opted-in"|string;
-  export type AvailabilityZoneState = "available"|"information"|"impaired"|"unavailable"|string;
+  export type AvailabilityZoneState = "available"|"information"|"impaired"|"unavailable"|"constrained"|string;
   export type AvailabilityZoneStringList = String[];
   export interface AvailableCapacity {
     /**
@@ -9179,7 +9179,7 @@ declare namespace EC2 {
   }
   export interface CreateEgressOnlyInternetGatewayRequest {
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring idempotency.
      */
     ClientToken?: String;
     /**
@@ -9987,7 +9987,7 @@ declare namespace EC2 {
      */
     AllocationId?: AllocationId;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency. Constraint: Maximum 64 ASCII characters.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring idempotency. Constraint: Maximum 64 ASCII characters.
      */
     ClientToken?: String;
     /**
@@ -10088,12 +10088,20 @@ declare namespace EC2 {
      * The tags to assign to the network ACL.
      */
     TagSpecifications?: TagSpecificationList;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring idempotency.
+     */
+    ClientToken?: String;
   }
   export interface CreateNetworkAclResult {
     /**
      * Information about the network ACL.
      */
     NetworkAcl?: NetworkAcl;
+    /**
+     * Unique, case-sensitive identifier to ensure the idempotency of the request. Only returned if a client token was provided in the request.
+     */
+    ClientToken?: String;
   }
   export interface CreateNetworkInsightsAccessScopeRequest {
     /**
@@ -10512,12 +10520,20 @@ declare namespace EC2 {
      * The tags to assign to the route table.
      */
     TagSpecifications?: TagSpecificationList;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring idempotency.
+     */
+    ClientToken?: String;
   }
   export interface CreateRouteTableResult {
     /**
      * Information about the route table.
      */
     RouteTable?: RouteTable;
+    /**
+     * Unique, case-sensitive identifier to ensure the idempotency of the request. Only returned if a client token was provided in the request.
+     */
+    ClientToken?: String;
   }
   export interface CreateSecurityGroupRequest {
     /**
@@ -36492,7 +36508,7 @@ declare namespace EC2 {
   }
   export type SubnetIpv6CidrBlockAssociationSet = SubnetIpv6CidrBlockAssociation[];
   export type SubnetList = Subnet[];
-  export type SubnetState = "pending"|"available"|string;
+  export type SubnetState = "pending"|"available"|"unavailable"|string;
   export interface Subscription {
     /**
      * The Region or Availability Zone that's the source for the subscription. For example, us-east-1.

@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1542.0-->
+<!--LATEST=2.1543.0-->
 <!--ENTRYINSERT-->
+
+## 2.1543.0
+* bugfix: S3: add compatibility fallback S3#ExpiresString when S3#Expires field is not a date-time
+* feature: EC2: Introduced a new clientToken request parameter on CreateNetworkAcl and CreateRouteTable APIs. The clientToken parameter allows idempotent operations on the APIs.
+* feature: Outposts: DeviceSerialNumber parameter is now optional in StartConnection API
+* feature: RDS: This release adds support for Aurora Limitless Database.
+* feature: StorageGateway: Add DeprecationDate and SoftwareVersion to response of ListGateways.
 
 ## 2.1542.0
 * feature: Inspector2: This release adds support for CIS scans on EC2 instances.

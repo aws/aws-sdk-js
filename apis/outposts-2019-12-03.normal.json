@@ -1673,7 +1673,6 @@
     },
     "LineItemQuantity": {
       "type": "integer",
-      "max": 20,
       "min": 1
     },
     "LineItemRequest": {
@@ -2447,7 +2446,6 @@
     "StartConnectionRequest": {
       "type": "structure",
       "required": [
-        "DeviceSerialNumber",
         "AssetId",
         "ClientPublicKey",
         "NetworkInterfaceDeviceIndex"

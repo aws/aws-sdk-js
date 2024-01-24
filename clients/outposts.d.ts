@@ -1001,7 +1001,7 @@ declare namespace Outposts {
     /**
      *  The serial number of the dongle. 
      */
-    DeviceSerialNumber: DeviceSerialNumber;
+    DeviceSerialNumber?: DeviceSerialNumber;
     /**
      *  The ID of the Outpost server. 
      */

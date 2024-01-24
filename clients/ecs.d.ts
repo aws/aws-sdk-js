@@ -37,11 +37,11 @@ declare class ECS extends Service {
    */
   createService(callback?: (err: AWSError, data: ECS.Types.CreateServiceResponse) => void): Request<ECS.Types.CreateServiceResponse, AWSError>;
   /**
-   * Create a task set in the specified cluster and service. This is used when a service uses the EXTERNAL deployment controller type. For more information, see Amazon ECS deployment types in the Amazon Elastic Container Service Developer Guide. You can create a maximum of 5 tasks sets for a deployment.
+   * Create a task set in the specified cluster and service. This is used when a service uses the EXTERNAL deployment controller type. For more information, see Amazon ECS deployment types in the Amazon Elastic Container Service Developer Guide. For information about the maximum number of task sets and otther quotas, see Amazon ECS service quotas in the Amazon Elastic Container Service Developer Guide.
    */
   createTaskSet(params: ECS.Types.CreateTaskSetRequest, callback?: (err: AWSError, data: ECS.Types.CreateTaskSetResponse) => void): Request<ECS.Types.CreateTaskSetResponse, AWSError>;
   /**
-   * Create a task set in the specified cluster and service. This is used when a service uses the EXTERNAL deployment controller type. For more information, see Amazon ECS deployment types in the Amazon Elastic Container Service Developer Guide. You can create a maximum of 5 tasks sets for a deployment.
+   * Create a task set in the specified cluster and service. This is used when a service uses the EXTERNAL deployment controller type. For more information, see Amazon ECS deployment types in the Amazon Elastic Container Service Developer Guide. For information about the maximum number of task sets and otther quotas, see Amazon ECS service quotas in the Amazon Elastic Container Service Developer Guide.
    */
   createTaskSet(callback?: (err: AWSError, data: ECS.Types.CreateTaskSetResponse) => void): Request<ECS.Types.CreateTaskSetResponse, AWSError>;
   /**
@@ -956,7 +956,7 @@ declare namespace ECS {
      */
     dockerLabels?: DockerLabelsMap;
     /**
-     * A list of ulimits to set in the container. If a ulimit value is specified in a task definition, it overrides the default values set by Docker. This parameter maps to Ulimits in the Create a container section of the Docker Remote API and the --ulimit option to docker run. Valid naming values are displayed in the Ulimit data type. Amazon ECS tasks hosted on Fargate use the default resource limit values set by the operating system with the exception of the nofile resource limit parameter which Fargate overrides. The nofile resource limit sets a restriction on the number of open files that a container can use. The default nofile soft limit is 1024 and the default hard limit is 4096. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: sudo docker version --format '{{.Server.APIVersion}}'   This parameter is not supported for Windows containers. 
+     * A list of ulimits to set in the container. If a ulimit value is specified in a task definition, it overrides the default values set by Docker. This parameter maps to Ulimits in the Create a container section of the Docker Remote API and the --ulimit option to docker run. Valid naming values are displayed in the Ulimit data type. Amazon ECS tasks hosted on Fargate use the default resource limit values set by the operating system with the exception of the nofile resource limit parameter which Fargate overrides. The nofile resource limit sets a restriction on the number of open files that a container can use. The default nofile soft limit is 1024 and the default hard limit is 65535. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: sudo docker version --format '{{.Server.APIVersion}}'   This parameter is not supported for Windows containers. 
      */
     ulimits?: UlimitList;
     /**
@@ -1599,7 +1599,7 @@ declare namespace ECS {
      */
     maximumPercent?: BoxedInteger;
     /**
-     * If a service is using the rolling update (ECS) deployment type, the minimumHealthyPercent represents a lower limit on the number of your service's tasks that must remain in the RUNNING state during a deployment, as a percentage of the desiredCount (rounded up to the nearest integer). This parameter enables you to deploy without using additional cluster capacity. For example, if your service has a desiredCount of four tasks and a minimumHealthyPercent of 50%, the service scheduler may stop two existing tasks to free up cluster capacity before starting two new tasks.  For services that do not use a load balancer, the following should be noted:   A service is considered healthy if all essential containers within the tasks in the service pass their health checks.   If a task has no essential containers with a health check defined, the service scheduler will wait for 40 seconds after a task reaches a RUNNING state before the task is counted towards the minimum healthy percent total.   If a task has one or more essential containers with a health check defined, the service scheduler will wait for the task to reach a healthy status before counting it towards the minimum healthy percent total. A task is considered healthy when all essential containers within the task have passed their health checks. The amount of time the service scheduler can wait for is determined by the container health check settings.    For services are that do use a load balancer, the following should be noted:   If a task has no essential containers with a health check defined, the service scheduler will wait for the load balancer target group health check to return a healthy status before counting the task towards the minimum healthy percent total.   If a task has an essential container with a health check defined, the service scheduler will wait for both the task to reach a healthy status and the load balancer target group health check to return a healthy status before counting the task towards the minimum healthy percent total.   If a service is using either the blue/green (CODE_DEPLOY) or EXTERNAL deployment types and is running tasks that use the EC2 launch type, the minimum healthy percent value is set to the default value and is used to define the lower limit on the number of the tasks in the service that remain in the RUNNING state while the container instances are in the DRAINING state. If a service is using either the blue/green (CODE_DEPLOY) or EXTERNAL deployment types and is running tasks that use the Fargate launch type, the minimum healthy percent value is not used, although it is returned when describing your service.
+     * If a service is using the rolling update (ECS) deployment type, the minimumHealthyPercent represents a lower limit on the number of your service's tasks that must remain in the RUNNING state during a deployment, as a percentage of the desiredCount (rounded up to the nearest integer). This parameter enables you to deploy without using additional cluster capacity. For example, if your service has a desiredCount of four tasks and a minimumHealthyPercent of 50%, the service scheduler may stop two existing tasks to free up cluster capacity before starting two new tasks.  For services that do not use a load balancer, the following should be noted:   A service is considered healthy if all essential containers within the tasks in the service pass their health checks.   If a task has no essential containers with a health check defined, the service scheduler will wait for 40 seconds after a task reaches a RUNNING state before the task is counted towards the minimum healthy percent total.   If a task has one or more essential containers with a health check defined, the service scheduler will wait for the task to reach a healthy status before counting it towards the minimum healthy percent total. A task is considered healthy when all essential containers within the task have passed their health checks. The amount of time the service scheduler can wait for is determined by the container health check settings.    For services that do use a load balancer, the following should be noted:   If a task has no essential containers with a health check defined, the service scheduler will wait for the load balancer target group health check to return a healthy status before counting the task towards the minimum healthy percent total.   If a task has an essential container with a health check defined, the service scheduler will wait for both the task to reach a healthy status and the load balancer target group health check to return a healthy status before counting the task towards the minimum healthy percent total.   If a service is using either the blue/green (CODE_DEPLOY) or EXTERNAL deployment types and is running tasks that use the EC2 launch type, the minimum healthy percent value is set to the default value and is used to define the lower limit on the number of the tasks in the service that remain in the RUNNING state while the container instances are in the DRAINING state. If a service is using either the blue/green (CODE_DEPLOY) or EXTERNAL deployment types and is running tasks that use the Fargate launch type, the minimum healthy percent value is not used, although it is returned when describing your service.
      */
     minimumHealthyPercent?: BoxedInteger;
     /**
@@ -3357,6 +3357,9 @@ declare namespace ECS {
      * A reference to an object that represents the configured timeouts for Service Connect.
      */
     timeout?: TimeoutConfiguration;
+    /**
+     * A reference to an object that represents a Transport Layer Security (TLS) configuration.
+     */
     tls?: ServiceConnectTlsConfiguration;
   }
   export type ServiceConnectServiceList = ServiceConnectService[];
@@ -3593,7 +3596,7 @@ declare namespace ECS {
      */
     task: String;
     /**
-     * An optional message specified when a task is stopped. For example, if you're using a custom scheduler, you can use this parameter to specify the reason for stopping the task here, and the message appears in subsequent DescribeTasks API operations on this task. Up to 255 characters are allowed in this message.
+     * An optional message specified when a task is stopped. For example, if you're using a custom scheduler, you can use this parameter to specify the reason for stopping the task here, and the message appears in subsequent DescribeTasks API operations on this task.
      */
     reason?: String;
   }
@@ -3858,7 +3861,7 @@ declare namespace ECS {
      */
     startedBy?: String;
     /**
-     * The stop code indicating why a task was stopped. The stoppedReason might contain additional details.  For more information about stop code, see Stopped tasks error codes in the Amazon ECS User Guide. The following are valid values:    TaskFailedToStart     EssentialContainerExited     UserInitiated     TerminationNotice     ServiceSchedulerInitiated     SpotInterruption   
+     * The stop code indicating why a task was stopped. The stoppedReason might contain additional details.  For more information about stop code, see Stopped tasks error codes in the Amazon ECS User Guide.
      */
     stopCode?: TaskStopCode;
     /**

@@ -214,6 +214,14 @@ declare class RDS extends Service {
    */
   createDBSecurityGroup(callback?: (err: AWSError, data: RDS.Types.CreateDBSecurityGroupResult) => void): Request<RDS.Types.CreateDBSecurityGroupResult, AWSError>;
   /**
+   * Creates a new DB shard group for Aurora Limitless Database. You must enable Aurora Limitless Database to create a DB shard group. Valid for: Aurora DB clusters only
+   */
+  createDBShardGroup(params: RDS.Types.CreateDBShardGroupMessage, callback?: (err: AWSError, data: RDS.Types.DBShardGroup) => void): Request<RDS.Types.DBShardGroup, AWSError>;
+  /**
+   * Creates a new DB shard group for Aurora Limitless Database. You must enable Aurora Limitless Database to create a DB shard group. Valid for: Aurora DB clusters only
+   */
+  createDBShardGroup(callback?: (err: AWSError, data: RDS.Types.DBShardGroup) => void): Request<RDS.Types.DBShardGroup, AWSError>;
+  /**
    * Creates a snapshot of a DB instance. The source DB instance must be in the available or storage-optimization state.
    */
   createDBSnapshot(params: RDS.Types.CreateDBSnapshotMessage, callback?: (err: AWSError, data: RDS.Types.CreateDBSnapshotResult) => void): Request<RDS.Types.CreateDBSnapshotResult, AWSError>;
@@ -373,6 +381,14 @@ declare class RDS extends Service {
    * Deletes a DB security group. The specified DB security group must not be associated with any DB instances.  EC2-Classic was retired on August 15, 2022. If you haven't migrated from EC2-Classic to a VPC, we recommend that you migrate as soon as possible. For more information, see Migrate from EC2-Classic to a VPC in the Amazon EC2 User Guide, the blog EC2-Classic Networking is Retiring – Here’s How to Prepare, and Moving a DB instance not in a VPC into a VPC in the Amazon RDS User Guide. 
    */
   deleteDBSecurityGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an Aurora Limitless Database DB shard group.
+   */
+  deleteDBShardGroup(params: RDS.Types.DeleteDBShardGroupMessage, callback?: (err: AWSError, data: RDS.Types.DBShardGroup) => void): Request<RDS.Types.DBShardGroup, AWSError>;
+  /**
+   * Deletes an Aurora Limitless Database DB shard group.
+   */
+  deleteDBShardGroup(callback?: (err: AWSError, data: RDS.Types.DBShardGroup) => void): Request<RDS.Types.DBShardGroup, AWSError>;
   /**
    * Deletes a DB snapshot. If the snapshot is being copied, the copy operation is terminated.  The DB snapshot must be in the available state to be deleted. 
    */
@@ -622,6 +638,14 @@ declare class RDS extends Service {
    */
   describeDBSecurityGroups(callback?: (err: AWSError, data: RDS.Types.DBSecurityGroupMessage) => void): Request<RDS.Types.DBSecurityGroupMessage, AWSError>;
   /**
+   * Describes existing Aurora Limitless Database DB shard groups.
+   */
+  describeDBShardGroups(params: RDS.Types.DescribeDBShardGroupsMessage, callback?: (err: AWSError, data: RDS.Types.DescribeDBShardGroupsResponse) => void): Request<RDS.Types.DescribeDBShardGroupsResponse, AWSError>;
+  /**
+   * Describes existing Aurora Limitless Database DB shard groups.
+   */
+  describeDBShardGroups(callback?: (err: AWSError, data: RDS.Types.DescribeDBShardGroupsResponse) => void): Request<RDS.Types.DescribeDBShardGroupsResponse, AWSError>;
+  /**
    * Returns a list of DB snapshot attribute names and values for a manual DB snapshot. When sharing snapshots with other Amazon Web Services accounts, DescribeDBSnapshotAttributes returns the restore attribute and a list of IDs for the Amazon Web Services accounts that are authorized to copy or restore the manual DB snapshot. If all is included in the list of values for the restore attribute, then the manual DB snapshot is public and can be copied or restored by all Amazon Web Services accounts. To add or remove access for an Amazon Web Services account to copy or restore a manual DB snapshot, or to make the manual DB snapshot public or private, use the ModifyDBSnapshotAttribute API action.
    */
   describeDBSnapshotAttributes(params: RDS.Types.DescribeDBSnapshotAttributesMessage, callback?: (err: AWSError, data: RDS.Types.DescribeDBSnapshotAttributesResult) => void): Request<RDS.Types.DescribeDBSnapshotAttributesResult, AWSError>;
@@ -814,11 +838,11 @@ declare class RDS extends Service {
    */
   enableHttpEndpoint(callback?: (err: AWSError, data: RDS.Types.EnableHttpEndpointResponse) => void): Request<RDS.Types.EnableHttpEndpointResponse, AWSError>;
   /**
-   * Forces a failover for a DB cluster. For an Aurora DB cluster, failover for a DB cluster promotes one of the Aurora Replicas (read-only instances) in the DB cluster to be the primary DB instance (the cluster writer). For a Multi-AZ DB cluster, failover for a DB cluster promotes one of the readable standby DB instances (read-only instances) in the DB cluster to be the primary DB instance (the cluster writer). An Amazon Aurora DB cluster automatically fails over to an Aurora Replica, if one exists, when the primary DB instance fails. A Multi-AZ DB cluster automatically fails over to a readable standby DB instance when the primary DB instance fails. To simulate a failure of a primary instance for testing, you can force a failover. Because each instance in a DB cluster has its own endpoint address, make sure to clean up and re-establish any existing connections that use those endpoint addresses when the failover is complete. For more information on Amazon Aurora DB clusters, see  What is Amazon Aurora? in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters, see  Multi-AZ DB cluster deployments in the Amazon RDS User Guide.
+   * Forces a failover for a DB cluster. For an Aurora DB cluster, failover for a DB cluster promotes one of the Aurora Replicas (read-only instances) in the DB cluster to be the primary DB instance (the cluster writer). For a Multi-AZ DB cluster, after RDS terminates the primary DB instance, the internal monitoring system detects that the primary DB instance is unhealthy and promotes a readable standby (read-only instances) in the DB cluster to be the primary DB instance (the cluster writer). Failover times are typically less than 35 seconds. An Amazon Aurora DB cluster automatically fails over to an Aurora Replica, if one exists, when the primary DB instance fails. A Multi-AZ DB cluster automatically fails over to a readable standby DB instance when the primary DB instance fails. To simulate a failure of a primary instance for testing, you can force a failover. Because each instance in a DB cluster has its own endpoint address, make sure to clean up and re-establish any existing connections that use those endpoint addresses when the failover is complete. For more information on Amazon Aurora DB clusters, see  What is Amazon Aurora? in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters, see  Multi-AZ DB cluster deployments in the Amazon RDS User Guide.
    */
   failoverDBCluster(params: RDS.Types.FailoverDBClusterMessage, callback?: (err: AWSError, data: RDS.Types.FailoverDBClusterResult) => void): Request<RDS.Types.FailoverDBClusterResult, AWSError>;
   /**
-   * Forces a failover for a DB cluster. For an Aurora DB cluster, failover for a DB cluster promotes one of the Aurora Replicas (read-only instances) in the DB cluster to be the primary DB instance (the cluster writer). For a Multi-AZ DB cluster, failover for a DB cluster promotes one of the readable standby DB instances (read-only instances) in the DB cluster to be the primary DB instance (the cluster writer). An Amazon Aurora DB cluster automatically fails over to an Aurora Replica, if one exists, when the primary DB instance fails. A Multi-AZ DB cluster automatically fails over to a readable standby DB instance when the primary DB instance fails. To simulate a failure of a primary instance for testing, you can force a failover. Because each instance in a DB cluster has its own endpoint address, make sure to clean up and re-establish any existing connections that use those endpoint addresses when the failover is complete. For more information on Amazon Aurora DB clusters, see  What is Amazon Aurora? in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters, see  Multi-AZ DB cluster deployments in the Amazon RDS User Guide.
+   * Forces a failover for a DB cluster. For an Aurora DB cluster, failover for a DB cluster promotes one of the Aurora Replicas (read-only instances) in the DB cluster to be the primary DB instance (the cluster writer). For a Multi-AZ DB cluster, after RDS terminates the primary DB instance, the internal monitoring system detects that the primary DB instance is unhealthy and promotes a readable standby (read-only instances) in the DB cluster to be the primary DB instance (the cluster writer). Failover times are typically less than 35 seconds. An Amazon Aurora DB cluster automatically fails over to an Aurora Replica, if one exists, when the primary DB instance fails. A Multi-AZ DB cluster automatically fails over to a readable standby DB instance when the primary DB instance fails. To simulate a failure of a primary instance for testing, you can force a failover. Because each instance in a DB cluster has its own endpoint address, make sure to clean up and re-establish any existing connections that use those endpoint addresses when the failover is complete. For more information on Amazon Aurora DB clusters, see  What is Amazon Aurora? in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters, see  Multi-AZ DB cluster deployments in the Amazon RDS User Guide.
    */
   failoverDBCluster(callback?: (err: AWSError, data: RDS.Types.FailoverDBClusterResult) => void): Request<RDS.Types.FailoverDBClusterResult, AWSError>;
   /**
@@ -950,6 +974,14 @@ declare class RDS extends Service {
    */
   modifyDBRecommendation(callback?: (err: AWSError, data: RDS.Types.DBRecommendationMessage) => void): Request<RDS.Types.DBRecommendationMessage, AWSError>;
   /**
+   * Modifies the settings of an Aurora Limitless Database DB shard group. You can change one or more settings by specifying these parameters and the new values in the request.
+   */
+  modifyDBShardGroup(params: RDS.Types.ModifyDBShardGroupMessage, callback?: (err: AWSError, data: RDS.Types.DBShardGroup) => void): Request<RDS.Types.DBShardGroup, AWSError>;
+  /**
+   * Modifies the settings of an Aurora Limitless Database DB shard group. You can change one or more settings by specifying these parameters and the new values in the request.
+   */
+  modifyDBShardGroup(callback?: (err: AWSError, data: RDS.Types.DBShardGroup) => void): Request<RDS.Types.DBShardGroup, AWSError>;
+  /**
    * Updates a manual DB snapshot with a new engine version. The snapshot can be encrypted or unencrypted, but not shared or public.  Amazon RDS supports upgrading DB snapshots for MySQL, PostgreSQL, and Oracle. This operation doesn't apply to RDS Custom or RDS for Db2.
    */
   modifyDBSnapshot(params: RDS.Types.ModifyDBSnapshotMessage, callback?: (err: AWSError, data: RDS.Types.ModifyDBSnapshotResult) => void): Request<RDS.Types.ModifyDBSnapshotResult, AWSError>;
@@ -1045,6 +1077,14 @@ declare class RDS extends Service {
    * You might need to reboot your DB instance, usually for maintenance reasons. For example, if you make certain modifications, or if you change the DB parameter group associated with the DB instance, you must reboot the instance for the changes to take effect. Rebooting a DB instance restarts the database engine service. Rebooting a DB instance results in a momentary outage, during which the DB instance status is set to rebooting. For more information about rebooting, see Rebooting a DB Instance in the Amazon RDS User Guide.  This command doesn't apply to RDS Custom. If your DB instance is part of a Multi-AZ DB cluster, you can reboot the DB cluster with the RebootDBCluster operation.
    */
   rebootDBInstance(callback?: (err: AWSError, data: RDS.Types.RebootDBInstanceResult) => void): Request<RDS.Types.RebootDBInstanceResult, AWSError>;
+  /**
+   * You might need to reboot your DB shard group, usually for maintenance reasons. For example, if you make certain modifications, reboot the DB shard group for the changes to take effect. This operation applies only to Aurora Limitless Database DBb shard groups.
+   */
+  rebootDBShardGroup(params: RDS.Types.RebootDBShardGroupMessage, callback?: (err: AWSError, data: RDS.Types.DBShardGroup) => void): Request<RDS.Types.DBShardGroup, AWSError>;
+  /**
+   * You might need to reboot your DB shard group, usually for maintenance reasons. For example, if you make certain modifications, reboot the DB shard group for the changes to take effect. This operation applies only to Aurora Limitless Database DBb shard groups.
+   */
+  rebootDBShardGroup(callback?: (err: AWSError, data: RDS.Types.DBShardGroup) => void): Request<RDS.Types.DBShardGroup, AWSError>;
   /**
    * Associate one or more DBProxyTarget data structures with a DBProxyTargetGroup.
    */
@@ -1909,7 +1949,7 @@ declare namespace RDS {
      */
     Tags?: TagList;
     /**
-     * Specify the DB instance class for the databases in the green environment.
+     * Specify the DB instance class for the databases in the green environment. This parameter only applies to RDS DB instances, because DB instances within an Aurora DB cluster can have multiple different instance classes. If you're creating a blue/green deployment from an Aurora DB cluster, don't specify this parameter. After the green environment is created, you can individually modify the instance classes of the DB instances within the green DB cluster.
      */
     TargetDBInstanceClass?: TargetDBInstanceClass;
     /**
@@ -2170,6 +2210,10 @@ declare namespace RDS {
      * The number of days to retain Performance Insights data. Valid for Cluster Type: Multi-AZ DB clusters only Valid Values:    7     month * 31, where month is a number of months from 1-23. Examples: 93 (3 months * 31), 341 (11 months * 31), 589 (19 months * 31)    731    Default: 7 days If you specify a retention period that isn't valid, such as 94, Amazon RDS issues an error.
      */
     PerformanceInsightsRetentionPeriod?: IntegerOptional;
+    /**
+     * Specifies whether to enable Aurora Limitless Database. You must enable Aurora Limitless Database to create a DB shard group. Valid for: Aurora DB clusters only
+     */
+    EnableLimitlessDatabase?: BooleanOptional;
     ServerlessV2ScalingConfiguration?: ServerlessV2ScalingConfiguration;
     /**
      * The network type of the DB cluster. The network type is determined by the DBSubnetGroup specified for the DB cluster. A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (DUAL). For more information, see  Working with a DB instance in a VPC in the Amazon Aurora User Guide.  Valid for Cluster Type: Aurora DB clusters only Valid Values: IPV4 | DUAL 
@@ -2787,6 +2831,28 @@ declare namespace RDS {
   export interface CreateDBSecurityGroupResult {
     DBSecurityGroup?: DBSecurityGroup;
   }
+  export interface CreateDBShardGroupMessage {
+    /**
+     * The name of the DB shard group.
+     */
+    DBShardGroupIdentifier: String;
+    /**
+     * The name of the primary DB cluster for the DB shard group.
+     */
+    DBClusterIdentifier: String;
+    /**
+     * Specifies whether to create standby instances for the DB shard group. Valid values are the following:   0 - Creates a single, primary DB instance for each physical shard. This is the default value, and the only one supported for the preview.   1 - Creates a primary DB instance and a standby instance in a different Availability Zone (AZ) for each physical shard.   2 - Creates a primary DB instance and two standby instances in different AZs for each physical shard.  
+     */
+    ComputeRedundancy?: IntegerOptional;
+    /**
+     * The maximum capacity of the DB shard group in Aurora capacity units (ACUs).
+     */
+    MaxACU: DoubleOptional;
+    /**
+     * Specifies whether the DB shard group is publicly accessible. When the DB shard group is publicly accessible, its Domain Name System (DNS) endpoint resolves to the private IP address from within the DB shard group's virtual private cloud (VPC). It resolves to the public IP address from outside of the DB shard group's VPC. Access to the DB shard group is ultimately controlled by the security group it uses. That public access is not permitted if the security group assigned to the DB shard group doesn't permit it. When the DB shard group isn't publicly accessible, it is an internal DB shard group with a DNS name that resolves to a private IP address. Default: The default behavior varies depending on whether DBSubnetGroupName is specified. If DBSubnetGroupName isn't specified, and PubliclyAccessible isn't specified, the following applies:   If the default VPC in the target Region doesn’t have an internet gateway attached to it, the DB shard group is private.   If the default VPC in the target Region has an internet gateway attached to it, the DB shard group is public.   If DBSubnetGroupName is specified, and PubliclyAccessible isn't specified, the following applies:   If the subnets are part of a VPC that doesn’t have an internet gateway attached to it, the DB shard group is private.   If the subnets are part of a VPC that has an internet gateway attached to it, the DB shard group is public.  
+     */
+    PubliclyAccessible?: BooleanOptional;
+  }
   export interface CreateDBSnapshotMessage {
     /**
      * The identifier for the DB snapshot. Constraints:   Can't be null, empty, or blank   Must contain from 1 to 255 letters, numbers, or hyphens   First character must be a letter   Can't end with a hyphen or contain two consecutive hyphens   Example: my-snapshot-id 
@@ -2828,7 +2894,7 @@ declare namespace RDS {
      */
     SubscriptionName: String;
     /**
-     * The Amazon Resource Name (ARN) of the SNS topic created for event notification. The ARN is created by Amazon SNS when you create a topic and subscribe to it.
+     * The Amazon Resource Name (ARN) of the SNS topic created for event notification. SNS automatically creates the ARN when you create a topic and subscribe to it.  RDS doesn't support FIFO (first in, first out) topics. For more information, see Message ordering and deduplication (FIFO topics) in the Amazon Simple Notification Service Developer Guide. 
      */
     SnsTopicArn: String;
     /**
@@ -3273,6 +3339,10 @@ declare namespace RDS {
      * The Amazon Resource Name (ARN) of the recovery point in Amazon Web Services Backup.
      */
     AwsBackupRecoveryPointArn?: String;
+    /**
+     * The details for Aurora Limitless Database.
+     */
+    LimitlessDatabase?: LimitlessDatabase;
   }
   export interface DBClusterAutomatedBackup {
     /**
@@ -4802,6 +4872,41 @@ declare namespace RDS {
   }
   export type DBSecurityGroupNameList = String[];
   export type DBSecurityGroups = DBSecurityGroup[];
+  export interface DBShardGroup {
+    /**
+     * The Amazon Web Services Region-unique, immutable identifier for the DB shard group.
+     */
+    DBShardGroupResourceId?: String;
+    /**
+     * The name of the DB shard group.
+     */
+    DBShardGroupIdentifier?: String;
+    /**
+     * The name of the primary DB cluster for the DB shard group.
+     */
+    DBClusterIdentifier?: String;
+    /**
+     * The maximum capacity of the DB shard group in Aurora capacity units (ACUs).
+     */
+    MaxACU?: DoubleOptional;
+    /**
+     * Specifies whether to create standby instances for the DB shard group. Valid values are the following:   0 - Creates a single, primary DB instance for each physical shard. This is the default value, and the only one supported for the preview.   1 - Creates a primary DB instance and a standby instance in a different Availability Zone (AZ) for each physical shard.   2 - Creates a primary DB instance and two standby instances in different AZs for each physical shard.  
+     */
+    ComputeRedundancy?: IntegerOptional;
+    /**
+     * The status of the DB shard group.
+     */
+    Status?: String;
+    /**
+     * Indicates whether the DB shard group is publicly accessible. When the DB shard group is publicly accessible, its Domain Name System (DNS) endpoint resolves to the private IP address from within the DB shard group's virtual private cloud (VPC). It resolves to the public IP address from outside of the DB shard group's VPC. Access to the DB shard group is ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned to the DB shard group doesn't permit it. When the DB shard group isn't publicly accessible, it is an internal DB shard group with a DNS name that resolves to a private IP address. For more information, see CreateDBShardGroup. This setting is only for Aurora Limitless Database.
+     */
+    PubliclyAccessible?: BooleanOptional;
+    /**
+     * The connection endpoint for the DB shard group.
+     */
+    Endpoint?: String;
+  }
+  export type DBShardGroupsList = DBShardGroup[];
   export interface DBSnapshot {
     /**
      * Specifies the identifier for the DB snapshot.
@@ -5225,6 +5330,12 @@ declare namespace RDS {
      */
     DBSecurityGroupName: String;
   }
+  export interface DeleteDBShardGroupMessage {
+    /**
+     * Teh name of the DB shard group to delete.
+     */
+    DBShardGroupIdentifier: String;
+  }
   export interface DeleteDBSnapshotMessage {
     /**
      * The DB snapshot identifier. Constraints: Must be the name of an existing DB snapshot in the available state.
@@ -5522,7 +5633,7 @@ declare namespace RDS {
      */
     Filters?: FilterList;
     /**
-     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so you can retrieve the remaining results. Default: 100 Constraints: Minimum 20, maximum 100.
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so you can retrieve the remaining results. Default: 100 Constraints: Minimum 20, maximum 100
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -5880,6 +5991,34 @@ declare namespace RDS {
     MaxRecords?: IntegerOptional;
     /**
      * An optional pagination token provided by a previous DescribeDBSecurityGroups request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+     */
+    Marker?: String;
+  }
+  export interface DescribeDBShardGroupsMessage {
+    /**
+     * The user-supplied DB shard group identifier or the Amazon Resource Name (ARN) of the DB shard group. If this parameter is specified, information for only the specific DB shard group is returned. This parameter isn't case-sensitive. Constraints:   If supplied, must match an existing DB shard group identifier.  
+     */
+    DBShardGroupIdentifier?: String;
+    /**
+     * A filter that specifies one or more DB shard groups to describe.
+     */
+    Filters?: FilterList;
+    /**
+     * An optional pagination token provided by a previous DescribeDBShardGroups request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+     */
+    Marker?: String;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so you can retrieve the remaining results. Default: 100 Constraints: Minimum 20, maximum 100
+     */
+    MaxRecords?: MaxRecords;
+  }
+  export interface DescribeDBShardGroupsResponse {
+    /**
+     * Contains a list of DB shard groups for the user.
+     */
+    DBShardGroups?: DBShardGroupsList;
+    /**
+     * A pagination token that can be used in a later DescribeDBClusters request.
      */
     Marker?: String;
   }
@@ -6976,6 +7115,17 @@ declare namespace RDS {
   }
   export type KeyList = String[];
   export type KmsKeyIdOrArn = string;
+  export interface LimitlessDatabase {
+    /**
+     * The status of Aurora Limitless Database.
+     */
+    Status?: LimitlessDatabaseStatus;
+    /**
+     * The minimum required capacity for Aurora Limitless Database in Aurora capacity units (ACUs).
+     */
+    MinRequiredACU?: DoubleOptional;
+  }
+  export type LimitlessDatabaseStatus = "active"|"not-in-use"|"enabled"|"disabled"|"enabling"|"disabling"|"modifying-max-capacity"|"error"|string;
   export interface ListTagsForResourceMessage {
     /**
      * The Amazon RDS resource with tags to be listed. This value is an Amazon Resource Name (ARN). For information about creating an ARN, see  Constructing an ARN for Amazon RDS in the Amazon RDS User Guide.
@@ -7326,6 +7476,10 @@ declare namespace RDS {
      * The Amazon Resource Name (ARN) of the recovery point in Amazon Web Services Backup.
      */
     AwsBackupRecoveryPointArn?: AwsBackupRecoveryPointArn;
+    /**
+     * Specifies whether to enable Aurora Limitless Database. You must enable Aurora Limitless Database to create a DB shard group. Valid for: Aurora DB clusters only
+     */
+    EnableLimitlessDatabase?: BooleanOptional;
   }
   export interface ModifyDBClusterParameterGroupMessage {
     /**
@@ -7717,6 +7871,16 @@ declare namespace RDS {
      * The list of recommended action status to update. You can update multiple recommended actions at one time.
      */
     RecommendedActionUpdates?: RecommendedActionUpdateList;
+  }
+  export interface ModifyDBShardGroupMessage {
+    /**
+     * The name of the DB shard group to modify.
+     */
+    DBShardGroupIdentifier: String;
+    /**
+     * The maximum capacity of the DB shard group in Aurora capacity units (ACUs).
+     */
+    MaxACU?: DoubleOptional;
   }
   export interface ModifyDBSnapshotAttributeMessage {
     /**
@@ -8662,6 +8826,12 @@ declare namespace RDS {
   }
   export interface RebootDBInstanceResult {
     DBInstance?: DBInstance;
+  }
+  export interface RebootDBShardGroupMessage {
+    /**
+     * The name of the DB shard group to reboot.
+     */
+    DBShardGroupIdentifier: String;
   }
   export interface RecommendedAction {
     /**
