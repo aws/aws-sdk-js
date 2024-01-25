@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1543.0-->
+<!--LATEST=2.1544.0-->
 <!--ENTRYINSERT-->
+
+## 2.1544.0
+* feature: ACMPCA: AWS Private CA now supports an option to omit the CDP extension from issued certificates, when CRL revocation is enabled.
+* feature: Lightsail: This release adds support for IPv6-only instance plans.
 
 ## 2.1543.0
 * bugfix: S3: add compatibility fallback S3#ExpiresString when S3#Expires field is not a date-time

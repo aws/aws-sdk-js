@@ -1879,6 +1879,10 @@ declare namespace Lightsail {
      * Virtual computer blueprints that are supported by a Lightsail for Research bundle.  This parameter only applies to Lightsail for Research resources. 
      */
     supportedAppCategories?: AppCategoryList;
+    /**
+     * An integer that indicates the public ipv4 address count included in the bundle, the value is either 0 or 1.
+     */
+    publicIpv4AddressCount?: integer;
   }
   export type BundleList = Bundle[];
   export interface CacheBehavior {
@@ -5422,6 +5426,10 @@ declare namespace Lightsail {
      * The public IP address of the Amazon Lightsail instance.
      */
     ipAddress?: IpAddress;
+    /**
+     * The IPv6 address of the Amazon Lightsail instance.
+     */
+    ipv6Addresses?: Ipv6AddressList;
     /**
      * For RDP access, the password for your Amazon Lightsail instance. Password will be an empty string if the password for your new instance is not ready yet. When you create an instance, it can take up to 15 minutes for the instance to be ready.  If you create an instance using any key pair other than the default (LightsailDefaultKeyPair), password will always be an empty string. If you change the Administrator password on the instance, Lightsail will continue to return the original password value. When accessing the instance using RDP, you need to manually enter the Administrator password after changing it from the default. 
      */
