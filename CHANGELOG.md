@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1544.0-->
+<!--LATEST=2.1545.0-->
 <!--ENTRYINSERT-->
+
+## 2.1545.0
+* feature: Connect: Update list and string length limits for predefined attributes.
+* feature: Inspector2: This release adds ECR container image scanning based on their lastRecordedPullTime.
+* feature: SageMaker: Amazon SageMaker Automatic Model Tuning now provides an API to programmatically delete tuning jobs.
 
 ## 2.1544.0
 * feature: ACMPCA: AWS Private CA now supports an option to omit the CDP extension from issued certificates, when CRL revocation is enabled.

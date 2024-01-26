@@ -452,11 +452,11 @@ declare class Inspector2 extends Service {
    */
   updateEc2DeepInspectionConfiguration(callback?: (err: AWSError, data: Inspector2.Types.UpdateEc2DeepInspectionConfigurationResponse) => void): Request<Inspector2.Types.UpdateEc2DeepInspectionConfigurationResponse, AWSError>;
   /**
-   * Updates an encryption key. A ResourceNotFoundException means that an AWS owned key is being used for encryption.
+   * Updates an encryption key. A ResourceNotFoundException means that an Amazon Web Services owned key is being used for encryption.
    */
   updateEncryptionKey(params: Inspector2.Types.UpdateEncryptionKeyRequest, callback?: (err: AWSError, data: Inspector2.Types.UpdateEncryptionKeyResponse) => void): Request<Inspector2.Types.UpdateEncryptionKeyResponse, AWSError>;
   /**
-   * Updates an encryption key. A ResourceNotFoundException means that an AWS owned key is being used for encryption.
+   * Updates an encryption key. A ResourceNotFoundException means that an Amazon Web Services owned key is being used for encryption.
    */
   updateEncryptionKey(callback?: (err: AWSError, data: Inspector2.Types.UpdateEncryptionKeyResponse) => void): Request<Inspector2.Types.UpdateEncryptionKeyResponse, AWSError>;
   /**
@@ -575,11 +575,11 @@ declare namespace Inspector2 {
      */
     imageLayerAggregation?: ImageLayerAggregation;
     /**
-     * Returns an object with findings aggregated by AWS Lambda function.
+     * Returns an object with findings aggregated by Amazon Web Services Lambda function.
      */
     lambdaFunctionAggregation?: LambdaFunctionAggregation;
     /**
-     * Returns an object with findings aggregated by AWS Lambda layer.
+     * Returns an object with findings aggregated by Amazon Web Services Lambda layer.
      */
     lambdaLayerAggregation?: LambdaLayerAggregation;
     /**
@@ -622,11 +622,11 @@ declare namespace Inspector2 {
      */
     imageLayerAggregation?: ImageLayerAggregationResponse;
     /**
-     * An aggregation of findings by AWS Lambda function.
+     * An aggregation of findings by Amazon Web Services Lambda function.
      */
     lambdaFunctionAggregation?: LambdaFunctionAggregationResponse;
     /**
-     * An aggregation of findings by AWS Lambda layer.
+     * An aggregation of findings by Amazon Web Services Lambda layer.
      */
     lambdaLayerAggregation?: LambdaLayerAggregationResponse;
     /**
@@ -721,11 +721,11 @@ declare namespace Inspector2 {
      */
     ecr: Boolean;
     /**
-     * Represents whether AWS Lambda standard scans are automatically enabled for new members of your Amazon Inspector organization. 
+     * Represents whether Amazon Web Services Lambda standard scans are automatically enabled for new members of your Amazon Inspector organization. 
      */
     lambda?: Boolean;
     /**
-     * Represents whether AWS Lambda code scans are automatically enabled for new members of your Amazon Inspector organization.  &lt;/p&gt; 
+     * Represents whether Lambda code scans are automatically enabled for new members of your Amazon Inspector organization.  &lt;/p&gt; 
      */
     lambdaCode?: Boolean;
   }
@@ -868,19 +868,19 @@ declare namespace Inspector2 {
   export type AwsEcrContainerSortBy = "CRITICAL"|"HIGH"|"ALL"|string;
   export interface AwsLambdaFunctionDetails {
     /**
-     * The instruction set architecture that the AWS Lambda function supports. Architecture is a string array with one of the valid values. The default architecture value is x86_64.
+     * The instruction set architecture that the Amazon Web Services Lambda function supports. Architecture is a string array with one of the valid values. The default architecture value is x86_64.
      */
     architectures?: ArchitectureList;
     /**
-     * The SHA256 hash of the AWS Lambda function's deployment package.
+     * The SHA256 hash of the Amazon Web Services Lambda function's deployment package.
      */
     codeSha256: NonEmptyString;
     /**
-     * The AWS Lambda function's execution role.
+     * The Amazon Web Services Lambda function's execution role.
      */
     executionRoleArn: ExecutionRoleArn;
     /**
-     * The name of the AWS Lambda function.
+     * The name of the Amazon Web Services Lambda function.
      */
     functionName: FunctionName;
     /**
@@ -888,7 +888,7 @@ declare namespace Inspector2 {
      */
     lastModifiedAt?: Timestamp;
     /**
-     * The AWS Lambda function's  layers. A Lambda function can have up to five layers.
+     * The Amazon Web Services Lambda function's  layers. A Lambda function can have up to five layers.
      */
     layers?: LayerList;
     /**
@@ -896,15 +896,15 @@ declare namespace Inspector2 {
      */
     packageType?: PackageType;
     /**
-     * The runtime environment for the AWS Lambda function.
+     * The runtime environment for the Amazon Web Services Lambda function.
      */
     runtime: Runtime;
     /**
-     * The version of the AWS Lambda function.
+     * The version of the Amazon Web Services Lambda function.
      */
     version: Version;
     /**
-     * The AWS Lambda function's networking configuration.
+     * The Amazon Web Services Lambda function's networking configuration.
      */
     vpcConfig?: LambdaVpcConfig;
   }
@@ -1647,15 +1647,19 @@ declare namespace Inspector2 {
      */
     ecrRepositoryName?: CoverageStringFilterList;
     /**
-     * Returns coverage statistics for AWS Lambda functions filtered by function names.
+     * The date an image was last pulled at.
+     */
+    imagePulledAt?: CoverageDateFilterList;
+    /**
+     * Returns coverage statistics for Amazon Web Services Lambda functions filtered by function names.
      */
     lambdaFunctionName?: CoverageStringFilterList;
     /**
-     * Returns coverage statistics for AWS Lambda functions filtered by runtime.
+     * Returns coverage statistics for Amazon Web Services Lambda functions filtered by runtime.
      */
     lambdaFunctionRuntime?: CoverageStringFilterList;
     /**
-     * Returns coverage statistics for AWS Lambda functions filtered by tag.
+     * Returns coverage statistics for Amazon Web Services Lambda functions filtered by tag.
      */
     lambdaFunctionTags?: CoverageMapFilterList;
     /**
@@ -2150,22 +2154,31 @@ declare namespace Inspector2 {
   export type Ec2Platform = "WINDOWS"|"LINUX"|"UNKNOWN"|"MACOS"|string;
   export interface EcrConfiguration {
     /**
-     * The ECR automated re-scan duration defines how long an ECR image will be actively scanned by Amazon Inspector. When the number of days since an image was last pushed exceeds the automated re-scan duration the monitoring state of that image becomes inactive and all associated findings are scheduled for closure.
+     * The rescan duration configured for image pull date.
+     */
+    pullDateRescanDuration?: EcrPullDateRescanDuration;
+    /**
+     * The rescan duration configured for image push date.
      */
     rescanDuration: EcrRescanDuration;
   }
   export interface EcrConfigurationState {
     /**
-     * An object that contains details about the state of the ECR automated re-scan setting.
+     * An object that contains details about the state of the ECR re-scan settings.
      */
     rescanDurationState?: EcrRescanDurationState;
   }
   export interface EcrContainerImageMetadata {
     /**
+     * The date an image was last pulled at.
+     */
+    imagePulledAt?: DateTimeTimestamp;
+    /**
      * Tags associated with the Amazon ECR image metadata.
      */
     tags?: TagList;
   }
+  export type EcrPullDateRescanDuration = "DAYS_14"|"DAYS_30"|"DAYS_60"|"DAYS_90"|"DAYS_180"|string;
   export interface EcrRepositoryMetadata {
     /**
      * The name of the Amazon ECR repository.
@@ -2176,10 +2189,14 @@ declare namespace Inspector2 {
      */
     scanFrequency?: EcrScanFrequency;
   }
-  export type EcrRescanDuration = "LIFETIME"|"DAYS_30"|"DAYS_180"|string;
+  export type EcrRescanDuration = "LIFETIME"|"DAYS_30"|"DAYS_180"|"DAYS_14"|"DAYS_60"|"DAYS_90"|string;
   export interface EcrRescanDurationState {
     /**
-     * The ECR automated re-scan duration defines how long an ECR image will be actively scanned by Amazon Inspector. When the number of days since an image was last pushed exceeds the automated re-scan duration the monitoring state of that image becomes inactive and all associated findings are scheduled for closure.
+     * The rescan duration configured for image pull date.
+     */
+    pullDateRescanDuration?: EcrPullDateRescanDuration;
+    /**
+     * The rescan duration configured for image push date.  &lt;/p&gt; 
      */
     rescanDuration?: EcrRescanDuration;
     /**
@@ -2437,7 +2454,7 @@ declare namespace Inspector2 {
      */
     epssScore?: NumberFilterList;
     /**
-     * Filters the list of AWS Lambda findings by the availability of exploits.
+     * Filters the list of Amazon Web Services Lambda findings by the availability of exploits.
      */
     exploitAvailable?: StringFilterList;
     /**
@@ -2465,23 +2482,23 @@ declare namespace Inspector2 {
      */
     inspectorScore?: NumberFilterList;
     /**
-     * Filters the list of AWS Lambda functions by execution role.
+     * Filters the list of Amazon Web Services Lambda functions by execution role.
      */
     lambdaFunctionExecutionRoleArn?: StringFilterList;
     /**
-     * Filters the list of AWS Lambda functions by the date and time that a user last updated the configuration, in ISO 8601 format 
+     * Filters the list of Amazon Web Services Lambda functions by the date and time that a user last updated the configuration, in ISO 8601 format 
      */
     lambdaFunctionLastModifiedAt?: DateFilterList;
     /**
-     * Filters the list of AWS Lambda functions by the function's  layers. A Lambda function can have up to five layers.
+     * Filters the list of Amazon Web Services Lambda functions by the function's  layers. A Lambda function can have up to five layers.
      */
     lambdaFunctionLayers?: StringFilterList;
     /**
-     * Filters the list of AWS Lambda functions by the name of the function.
+     * Filters the list of Amazon Web Services Lambda functions by the name of the function.
      */
     lambdaFunctionName?: StringFilterList;
     /**
-     * Filters the list of AWS Lambda functions by the runtime environment for the Lambda function.
+     * Filters the list of Amazon Web Services Lambda functions by the runtime environment for the Lambda function.
      */
     lambdaFunctionRuntime?: StringFilterList;
     /**
@@ -3027,7 +3044,7 @@ declare namespace Inspector2 {
   export type KmsKeyArn = string;
   export interface LambdaFunctionAggregation {
     /**
-     * The AWS Lambda function names to include in the aggregation results.
+     * The Amazon Web Services Lambda function names to include in the aggregation results.
      */
     functionNames?: StringFilterList;
     /**
@@ -3039,7 +3056,7 @@ declare namespace Inspector2 {
      */
     resourceIds?: StringFilterList;
     /**
-     * Returns findings aggregated by AWS Lambda function runtime environments.
+     * Returns findings aggregated by Amazon Web Services Lambda function runtime environments.
      */
     runtimes?: StringFilterList;
     /**
@@ -3053,11 +3070,11 @@ declare namespace Inspector2 {
   }
   export interface LambdaFunctionAggregationResponse {
     /**
-     * The ID of the AWS account that owns the AWS Lambda function. 
+     * The ID of the Amazon Web Services account that owns the Amazon Web Services Lambda function. 
      */
     accountId?: AccountId;
     /**
-     * The AWS Lambda function names included in the aggregation results.
+     * The Amazon Web Services Lambda function names included in the aggregation results.
      */
     functionName?: String;
     /**
@@ -3065,7 +3082,7 @@ declare namespace Inspector2 {
      */
     lambdaTags?: TagMap;
     /**
-     * The date that the AWS Lambda function included in the aggregation results was last changed.
+     * The date that the Amazon Web Services Lambda function included in the aggregation results was last changed.
      */
     lastModifiedAt?: DateTimeTimestamp;
     /**
@@ -3084,30 +3101,30 @@ declare namespace Inspector2 {
      */
     functionName?: String;
     /**
-     * The resource tags on an AWS Lambda function.
+     * The resource tags on an Amazon Web Services Lambda function.
      */
     functionTags?: TagMap;
     /**
-     * The layers for an AWS Lambda function. A Lambda function can have up to five layers.
+     * The layers for an Amazon Web Services Lambda function. A Lambda function can have up to five layers.
      */
     layers?: LambdaLayerList;
     /**
-     * An AWS Lambda function's runtime.
+     * An Amazon Web Services Lambda function's runtime.
      */
     runtime?: Runtime;
   }
   export type LambdaFunctionSortBy = "CRITICAL"|"HIGH"|"ALL"|string;
   export interface LambdaLayerAggregation {
     /**
-     * The names of the AWS Lambda functions associated with the layers.
+     * The names of the Amazon Web Services Lambda functions associated with the layers.
      */
     functionNames?: StringFilterList;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Lambda function layer. 
+     * The Amazon Resource Name (ARN) of the Amazon Web Services Lambda function layer. 
      */
     layerArns?: StringFilterList;
     /**
-     * The resource IDs for the AWS Lambda function layers.
+     * The resource IDs for the Amazon Web Services Lambda function layers.
      */
     resourceIds?: StringFilterList;
     /**
@@ -3121,19 +3138,19 @@ declare namespace Inspector2 {
   }
   export interface LambdaLayerAggregationResponse {
     /**
-     * The account ID of the AWS Lambda function layer.
+     * The account ID of the Amazon Web Services Lambda function layer.
      */
     accountId: AccountId;
     /**
-     * The names of the AWS Lambda functions associated with the layers.
+     * The names of the Amazon Web Services Lambda functions associated with the layers.
      */
     functionName: NonEmptyString;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Lambda function layer.
+     * The Amazon Resource Name (ARN) of the Amazon Web Services Lambda function layer.
      */
     layerArn: NonEmptyString;
     /**
-     * The Resource ID of the AWS Lambda function layer.
+     * The Resource ID of the Amazon Web Services Lambda function layer.
      */
     resourceId: NonEmptyString;
     severityCounts?: SeverityCounts;
@@ -3143,7 +3160,7 @@ declare namespace Inspector2 {
   export type LambdaLayerSortBy = "CRITICAL"|"HIGH"|"ALL"|string;
   export interface LambdaVpcConfig {
     /**
-     * The VPC security groups and subnets that are attached to an AWS Lambda function. For more information, see VPC Settings.
+     * The VPC security groups and subnets that are attached to an Amazon Web Services Lambda function. For more information, see VPC Settings.
      */
     securityGroupIds?: SecurityGroupIdList;
     /**
@@ -3981,7 +3998,7 @@ declare namespace Inspector2 {
      */
     awsEcrContainerImage?: AwsEcrContainerImageDetails;
     /**
-     * A summary of the information about an AWS Lambda function affected by a finding.
+     * A summary of the information about an Amazon Web Services Lambda function affected by a finding.
      */
     awsLambdaFunction?: AwsLambdaFunctionDetails;
   }
@@ -4003,11 +4020,11 @@ declare namespace Inspector2 {
      */
     ecrRepositoryName?: ResourceStringFilterList;
     /**
-     * The AWS Lambda function name used as resource filter criteria.
+     * The Amazon Web Services Lambda function name used as resource filter criteria.
      */
     lambdaFunctionName?: ResourceStringFilterList;
     /**
-     * The AWS Lambda function tags used as resource filter criteria.
+     * The Amazon Web Services Lambda function tags used as resource filter criteria.
      */
     lambdaFunctionTags?: ResourceMapFilterList;
     /**
@@ -4052,7 +4069,7 @@ declare namespace Inspector2 {
      */
     ecrRepository?: EcrRepositoryMetadata;
     /**
-     * An object that contains metadata details for an AWS Lambda function.
+     * An object that contains metadata details for an Amazon Web Services Lambda function.
      */
     lambdaFunction?: LambdaFunctionMetadata;
   }
@@ -4079,7 +4096,7 @@ declare namespace Inspector2 {
      */
     ecr: Status;
     /**
-     * The status of Amazon Inspector scanning for AWS Lambda function.
+     * The status of Amazon Inspector scanning for Amazon Web Services Lambda function.
      */
     lambda?: Status;
     /**
@@ -4802,7 +4819,7 @@ declare namespace Inspector2 {
      */
     remediation?: VulnerablePackageRemediation;
     /**
-     * The Amazon Resource Number (ARN) of the AWS Lambda function affected by a finding.
+     * The Amazon Resource Number (ARN) of the Amazon Web Services Lambda function affected by a finding.
      */
     sourceLambdaLayerArn?: LambdaLayerArn;
     /**
