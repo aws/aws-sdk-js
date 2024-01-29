@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1545.0-->
+<!--LATEST=2.1546.0-->
 <!--ENTRYINSERT-->
+
+## 2.1546.0
+* feature: AutoScaling: EC2 Auto Scaling customers who use attribute based instance-type selection can now intuitively define their Spot instances price protection limit as a percentage of the lowest priced On-Demand instance type.
+* feature: EC2: EC2 Fleet customers who use attribute based instance-type selection can now intuitively define their Spot instances price protection limit as a percentage of the lowest priced On-Demand instance type.
+* feature: MWAA: This release adds MAINTENANCE environment status for Amazon MWAA environments.
+* feature: RDS: Introduced support for the InsufficientDBInstanceCapacityFault error in the RDS RestoreDBClusterFromSnapshot and RestoreDBClusterToPointInTime API methods. This provides enhanced error handling, ensuring a more robust experience.
 
 ## 2.1545.0
 * feature: Connect: Update list and string length limits for predefined attributes.

@@ -28,11 +28,11 @@ declare class Snowball extends Service {
    */
   cancelJob(callback?: (err: AWSError, data: Snowball.Types.CancelJobResult) => void): Request<Snowball.Types.CancelJobResult, AWSError>;
   /**
-   * Creates an address for a Snow device to be shipped to. In most regions, addresses are validated at the time of creation. The address you provide must be located within the serviceable area of your region. If the address is invalid or unsupported, then an exception is thrown.
+   * Creates an address for a Snow device to be shipped to. In most regions, addresses are validated at the time of creation. The address you provide must be located within the serviceable area of your region. If the address is invalid or unsupported, then an exception is thrown. If providing an address as a JSON file through the cli-input-json option, include the full file path. For example, --cli-input-json file://create-address.json.
    */
   createAddress(params: Snowball.Types.CreateAddressRequest, callback?: (err: AWSError, data: Snowball.Types.CreateAddressResult) => void): Request<Snowball.Types.CreateAddressResult, AWSError>;
   /**
-   * Creates an address for a Snow device to be shipped to. In most regions, addresses are validated at the time of creation. The address you provide must be located within the serviceable area of your region. If the address is invalid or unsupported, then an exception is thrown.
+   * Creates an address for a Snow device to be shipped to. In most regions, addresses are validated at the time of creation. The address you provide must be located within the serviceable area of your region. If the address is invalid or unsupported, then an exception is thrown. If providing an address as a JSON file through the cli-input-json option, include the full file path. For example, --cli-input-json file://create-address.json.
    */
   createAddress(callback?: (err: AWSError, data: Snowball.Types.CreateAddressResult) => void): Request<Snowball.Types.CreateAddressResult, AWSError>;
   /**

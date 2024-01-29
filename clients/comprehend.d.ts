@@ -1105,7 +1105,7 @@ declare namespace Comprehend {
      */
     Text: String;
     /**
-     * The language of the input documents. Currently, English is the only valid language.
+     * The language of the input documents.
      */
     LanguageCode: LanguageCode;
   }
@@ -1847,7 +1847,7 @@ declare namespace Comprehend {
      */
     Text: String;
     /**
-     * The language of the input documents. Currently, English is the only valid language.
+     * The language of the input text. Enter the language code for English (en) or Spanish (es).
      */
     LanguageCode: LanguageCode;
   }
@@ -3767,7 +3767,7 @@ declare namespace Comprehend {
      */
     RedactionConfig?: RedactionConfig;
     /**
-     * The language code of the input documents
+     * The language code of the input documents.
      */
     LanguageCode?: LanguageCode;
     /**
@@ -4284,7 +4284,7 @@ declare namespace Comprehend {
      */
     JobName?: JobName;
     /**
-     * The language of the input documents. Currently, English is the only valid language.
+     * The language of the input documents. Enter the language code for English (en) or Spanish (es).
      */
     LanguageCode: LanguageCode;
     /**

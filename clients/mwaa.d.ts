@@ -312,7 +312,7 @@ declare namespace MWAA {
      */
     ExecutionRoleArn?: IamRoleArn;
     /**
-     * The Amazon Web Services Key Management Service (KMS) encryption key used to encrypt the data in your environment.
+     * The KMS encryption key used to encrypt the data in your environment.
      */
     KmsKey?: KmsKey;
     /**
@@ -376,7 +376,7 @@ declare namespace MWAA {
      */
     StartupScriptS3Path?: String;
     /**
-     * The status of the Amazon MWAA environment. Valid values:    CREATING - Indicates the request to create the environment is in progress.    CREATING_SNAPSHOT - Indicates the request to update environment details, or upgrade the environment version, is in progress and Amazon MWAA is creating a storage volume snapshot of the Amazon RDS database cluster associated with the environment. A database snapshot is a backup created at a specific point in time. Amazon MWAA uses snapshots to recover environment metadata if the process to update or upgrade an environment fails.    CREATE_FAILED - Indicates the request to create the environment failed, and the environment could not be created.    AVAILABLE - Indicates the request was successful and the environment is ready to use.    PENDING - Indicates the request was successful, but the process to create the environment is paused until you create the required VPC endpoints in your VPC. After you create the VPC endpoints, the process resumes.    UPDATING - Indicates the request to update the environment is in progress.    ROLLING_BACK - Indicates the request to update environment details, or upgrade the environment version, failed and Amazon MWAA is restoring the environment using the latest storage volume snapshot.    DELETING - Indicates the request to delete the environment is in progress.    DELETED - Indicates the request to delete the environment is complete, and the environment has been deleted.    UNAVAILABLE - Indicates the request failed, but the environment was unable to rollback and is not in a stable state.    UPDATE_FAILED - Indicates the request to update the environment failed, and the environment has rolled back successfully and is ready to use.   We recommend reviewing our troubleshooting guide for a list of common errors and their solutions. For more information, see Amazon MWAA troubleshooting.
+     * The status of the Amazon MWAA environment. Valid values:    CREATING - Indicates the request to create the environment is in progress.    CREATING_SNAPSHOT - Indicates the request to update environment details, or upgrade the environment version, is in progress and Amazon MWAA is creating a storage volume snapshot of the Amazon RDS database cluster associated with the environment. A database snapshot is a backup created at a specific point in time. Amazon MWAA uses snapshots to recover environment metadata if the process to update or upgrade an environment fails.    CREATE_FAILED - Indicates the request to create the environment failed, and the environment could not be created.    AVAILABLE - Indicates the request was successful and the environment is ready to use.    PENDING - Indicates the request was successful, but the process to create the environment is paused until you create the required VPC endpoints in your VPC. After you create the VPC endpoints, the process resumes.    UPDATING - Indicates the request to update the environment is in progress.    ROLLING_BACK - Indicates the request to update environment details, or upgrade the environment version, failed and Amazon MWAA is restoring the environment using the latest storage volume snapshot.    DELETING - Indicates the request to delete the environment is in progress.    DELETED - Indicates the request to delete the environment is complete, and the environment has been deleted.    UNAVAILABLE - Indicates the request failed, but the environment did not return to its previous state and is not stable.    UPDATE_FAILED - Indicates the request to update the environment failed, and the environment was restored to its previous state successfully and is ready to use.    MAINTENANCE - Indicates that the environment is undergoing maintenance. Depending on the type of work Amazon MWAA is performing, your environment might become unavailable during this process. After all operations are done, your environment will return to its status prior to mainteneace operations.    We recommend reviewing our troubleshooting guide for a list of common errors and their solutions. For more information, see Amazon MWAA troubleshooting.
      */
     Status?: EnvironmentStatus;
     /**
@@ -388,7 +388,7 @@ declare namespace MWAA {
      */
     WebserverAccessMode?: WebserverAccessMode;
     /**
-     * The Apache Airflow Web server host name for the Amazon MWAA environment. For more information, see Accessing the Apache Airflow UI.
+     * The Apache Airflow web server host name for the Amazon MWAA environment. For more information, see Accessing the Apache Airflow UI.
      */
     WebserverUrl?: WebserverUrl;
     /**
@@ -404,7 +404,7 @@ declare namespace MWAA {
   export type EnvironmentClass = string;
   export type EnvironmentList = EnvironmentName[];
   export type EnvironmentName = string;
-  export type EnvironmentStatus = "CREATING"|"CREATE_FAILED"|"AVAILABLE"|"UPDATING"|"DELETING"|"DELETED"|"UNAVAILABLE"|"UPDATE_FAILED"|"ROLLING_BACK"|"CREATING_SNAPSHOT"|"PENDING"|string;
+  export type EnvironmentStatus = "CREATING"|"CREATE_FAILED"|"AVAILABLE"|"UPDATING"|"DELETING"|"DELETED"|"UNAVAILABLE"|"UPDATE_FAILED"|"ROLLING_BACK"|"CREATING_SNAPSHOT"|"PENDING"|"MAINTENANCE"|string;
   export type ErrorCode = string;
   export type ErrorMessage = string;
   export interface GetEnvironmentInput {
