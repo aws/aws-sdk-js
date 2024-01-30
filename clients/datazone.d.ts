@@ -2310,6 +2310,10 @@ declare namespace DataZone {
      */
     domainId: DomainId;
     /**
+     * Reasons for failed project deletion
+     */
+    failureReasons?: FailureReasons;
+    /**
      * The glossary terms that can be used in the project.
      */
     glossaryTerms?: GlossaryTerms;
@@ -2325,6 +2329,10 @@ declare namespace DataZone {
      * The name of the project.
      */
     name: ProjectName;
+    /**
+     * Status of the project
+     */
+    projectStatus?: ProjectStatus;
   }
   export interface CreateSubscriptionGrantInput {
     /**
@@ -3003,6 +3011,10 @@ declare namespace DataZone {
      * The identifier of the Amazon Web Services domain that is to be deleted.
      */
     identifier: DomainId;
+    /**
+     * Optional flag to delete all child entities within the domain
+     */
+    skipDeletionCheck?: Boolean;
   }
   export interface DeleteDomainOutput {
     /**
@@ -3099,6 +3111,10 @@ declare namespace DataZone {
      * The identifier of the project that is to be deleted.
      */
     identifier: ProjectId;
+    /**
+     * Optional flag to asynchronously delete child entities within the project
+     */
+    skipDeletionCheck?: Boolean;
   }
   export interface DeleteProjectMembershipInput {
     /**
@@ -3503,6 +3519,7 @@ declare namespace DataZone {
      */
     message?: String;
   }
+  export type FailureReasons = ProjectDeletionError[];
   export interface Filter {
     /**
      * A search filter attribute in Amazon DataZone.
@@ -4592,6 +4609,10 @@ declare namespace DataZone {
      */
     domainId: DomainId;
     /**
+     * Reasons for failed project deletion
+     */
+    failureReasons?: FailureReasons;
+    /**
      * The business glossary terms that can be used in the project.
      */
     glossaryTerms?: GlossaryTerms;
@@ -4607,6 +4628,10 @@ declare namespace DataZone {
      * The name of the project.
      */
     name: ProjectName;
+    /**
+     * Status of the project
+     */
+    projectStatus?: ProjectStatus;
   }
   export interface GetSubscriptionGrantInput {
     /**
@@ -5849,6 +5874,16 @@ declare namespace DataZone {
      */
     businessNameGeneration?: BusinessNameGenerationConfiguration;
   }
+  export interface ProjectDeletionError {
+    /**
+     * Project Deletion Error Code
+     */
+    code?: String;
+    /**
+     * Project Deletion Error Message
+     */
+    message?: String;
+  }
   export type ProjectId = string;
   export interface ProjectMember {
     /**
@@ -5862,6 +5897,7 @@ declare namespace DataZone {
   }
   export type ProjectMembers = ProjectMember[];
   export type ProjectName = string;
+  export type ProjectStatus = "ACTIVE"|"DELETING"|"DELETE_FAILED"|string;
   export type ProjectSummaries = ProjectSummary[];
   export interface ProjectSummary {
     /**
@@ -5881,6 +5917,10 @@ declare namespace DataZone {
      */
     domainId: DomainId;
     /**
+     * Reasons for failed project deletion
+     */
+    failureReasons?: FailureReasons;
+    /**
      * The identifier of a project.
      */
     id: ProjectId;
@@ -5888,6 +5928,10 @@ declare namespace DataZone {
      * The name of a project.
      */
     name: ProjectName;
+    /**
+     * Status of the project
+     */
+    projectStatus?: ProjectStatus;
     /**
      * The timestamp of when the project was updated.
      */
@@ -7639,6 +7683,10 @@ declare namespace DataZone {
      */
     domainId: DomainId;
     /**
+     * Reasons for failed project deletion
+     */
+    failureReasons?: FailureReasons;
+    /**
      * The glossary terms of the project that are to be updated.
      */
     glossaryTerms?: GlossaryTerms;
@@ -7654,6 +7702,10 @@ declare namespace DataZone {
      * The name of the project that is to be updated.
      */
     name: ProjectName;
+    /**
+     * Status of the project
+     */
+    projectStatus?: ProjectStatus;
   }
   export interface UpdateSubscriptionGrantStatusInput {
     /**

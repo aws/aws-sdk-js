@@ -5740,6 +5740,10 @@
           "shape": "DomainId",
           "documentation": "<p>The identifier of the Amazon DataZone domain in which the project was created.</p>"
         },
+        "failureReasons": {
+          "shape": "FailureReasons",
+          "documentation": "<p>Reasons for failed project deletion</p>"
+        },
         "glossaryTerms": {
           "shape": "GlossaryTerms",
           "documentation": "<p>The glossary terms that can be used in the project.</p>"
@@ -5755,6 +5759,10 @@
         "name": {
           "shape": "ProjectName",
           "documentation": "<p>The name of the project.</p>"
+        },
+        "projectStatus": {
+          "shape": "ProjectStatus",
+          "documentation": "<p>Status of the project</p>"
         }
       }
     },
@@ -6817,6 +6825,12 @@
           "documentation": "<p>The identifier of the Amazon Web Services domain that is to be deleted.</p>",
           "location": "uri",
           "locationName": "identifier"
+        },
+        "skipDeletionCheck": {
+          "shape": "Boolean",
+          "documentation": "<p>Optional flag to delete all child entities within the domain</p>",
+          "location": "querystring",
+          "locationName": "skipDeletionCheck"
         }
       }
     },
@@ -7017,6 +7031,12 @@
           "documentation": "<p>The identifier of the project that is to be deleted.</p>",
           "location": "uri",
           "locationName": "identifier"
+        },
+        "skipDeletionCheck": {
+          "shape": "Boolean",
+          "documentation": "<p>Optional flag to asynchronously delete child entities within the project</p>",
+          "location": "querystring",
+          "locationName": "skipDeletionCheck"
         }
       }
     },
@@ -7730,6 +7750,12 @@
         }
       },
       "documentation": "<p>Specifies the error message that is returned if the operation cannot be successfully completed.</p>"
+    },
+    "FailureReasons": {
+      "type": "list",
+      "member": {
+        "shape": "ProjectDeletionError"
+      }
     },
     "Filter": {
       "type": "structure",
@@ -9298,6 +9324,10 @@
           "shape": "DomainId",
           "documentation": "<p>The ID of the Amazon DataZone domain in which the project exists.</p>"
         },
+        "failureReasons": {
+          "shape": "FailureReasons",
+          "documentation": "<p>Reasons for failed project deletion</p>"
+        },
         "glossaryTerms": {
           "shape": "GlossaryTerms",
           "documentation": "<p>The business glossary terms that can be used in the project.</p>"
@@ -9313,6 +9343,10 @@
         "name": {
           "shape": "ProjectName",
           "documentation": "<p>The name of the project.</p>"
+        },
+        "projectStatus": {
+          "shape": "ProjectStatus",
+          "documentation": "<p>Status of the project</p>"
         }
       }
     },
@@ -11436,6 +11470,20 @@
       },
       "documentation": "<p>The configuration of the prediction.</p>"
     },
+    "ProjectDeletionError": {
+      "type": "structure",
+      "members": {
+        "code": {
+          "shape": "String",
+          "documentation": "<p>Project Deletion Error Code</p>"
+        },
+        "message": {
+          "shape": "String",
+          "documentation": "<p>Project Deletion Error Message</p>"
+        }
+      },
+      "documentation": "<p>Error that occurred during project deletion</p>"
+    },
     "ProjectId": {
       "type": "string",
       "pattern": "^[a-zA-Z0-9_-]{1,36}$"
@@ -11471,6 +11519,14 @@
       "pattern": "^[\\w -]+$",
       "sensitive": true
     },
+    "ProjectStatus": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "DELETING",
+        "DELETE_FAILED"
+      ]
+    },
     "ProjectSummaries": {
       "type": "list",
       "member": {
@@ -11502,6 +11558,10 @@
           "shape": "DomainId",
           "documentation": "<p>The identifier of a Amazon DataZone domain where the project exists.</p>"
         },
+        "failureReasons": {
+          "shape": "FailureReasons",
+          "documentation": "<p>Reasons for failed project deletion</p>"
+        },
         "id": {
           "shape": "ProjectId",
           "documentation": "<p>The identifier of a project.</p>"
@@ -11509,6 +11569,10 @@
         "name": {
           "shape": "ProjectName",
           "documentation": "<p>The name of a project.</p>"
+        },
+        "projectStatus": {
+          "shape": "ProjectStatus",
+          "documentation": "<p>Status of the project</p>"
         },
         "updatedAt": {
           "shape": "SyntheticTimestamp_date_time",
@@ -14305,6 +14369,10 @@
           "shape": "DomainId",
           "documentation": "<p>The identifier of the Amazon DataZone domain in which a project is updated.</p>"
         },
+        "failureReasons": {
+          "shape": "FailureReasons",
+          "documentation": "<p>Reasons for failed project deletion</p>"
+        },
         "glossaryTerms": {
           "shape": "GlossaryTerms",
           "documentation": "<p>The glossary terms of the project that are to be updated.</p>"
@@ -14320,6 +14388,10 @@
         "name": {
           "shape": "ProjectName",
           "documentation": "<p>The name of the project that is to be updated.</p>"
+        },
+        "projectStatus": {
+          "shape": "ProjectStatus",
+          "documentation": "<p>Status of the project</p>"
         }
       }
     },

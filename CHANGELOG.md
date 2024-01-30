@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1546.0-->
+<!--LATEST=2.1547.0-->
 <!--ENTRYINSERT-->
+
+## 2.1547.0
+* feature: DataZone: Add new skipDeletionCheck to DeleteDomain. Add new skipDeletionCheck to DeleteProject which also automatically deletes dependent objects
 
 ## 2.1546.0
 * feature: AutoScaling: EC2 Auto Scaling customers who use attribute based instance-type selection can now intuitively define their Spot instances price protection limit as a percentage of the lowest priced On-Demand instance type.
