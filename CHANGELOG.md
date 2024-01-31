@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1547.0-->
+<!--LATEST=2.1548.0-->
 <!--ENTRYINSERT-->
+
+## 2.1548.0
+* feature: CloudFormation: CloudFormation IaC generator allows you to scan existing resources in your account and select resources to generate a template for a new or existing CloudFormation stack.
+* feature: ELBv2: This release enables unhealthy target draining intervals for Network Load Balancers.
+* feature: Glue: Update page size limits for GetJobRuns and GetTriggers APIs.
+* feature: SSM: This release adds an optional Duration parameter to StateManager Associations. This allows customers to specify how long an apply-only-on-cron association execution should run. Once the specified Duration is out all the ongoing cancellable commands or automations are cancelled.
 
 ## 2.1547.0
 * feature: DataZone: Add new skipDeletionCheck to DeleteDomain. Add new skipDeletionCheck to DeleteProject which also automatically deletes dependent objects

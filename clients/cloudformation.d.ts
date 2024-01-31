@@ -61,6 +61,14 @@ declare class CloudFormation extends Service {
    */
   createChangeSet(callback?: (err: AWSError, data: CloudFormation.Types.CreateChangeSetOutput) => void): Request<CloudFormation.Types.CreateChangeSetOutput, AWSError>;
   /**
+   * Creates a template from existing resources that are not already managed with CloudFormation. You can check the status of the template generation using the DescribeGeneratedTemplate API action.
+   */
+  createGeneratedTemplate(params: CloudFormation.Types.CreateGeneratedTemplateInput, callback?: (err: AWSError, data: CloudFormation.Types.CreateGeneratedTemplateOutput) => void): Request<CloudFormation.Types.CreateGeneratedTemplateOutput, AWSError>;
+  /**
+   * Creates a template from existing resources that are not already managed with CloudFormation. You can check the status of the template generation using the DescribeGeneratedTemplate API action.
+   */
+  createGeneratedTemplate(callback?: (err: AWSError, data: CloudFormation.Types.CreateGeneratedTemplateOutput) => void): Request<CloudFormation.Types.CreateGeneratedTemplateOutput, AWSError>;
+  /**
    * Creates a stack as specified in the template. After the call completes successfully, the stack creation starts. You can check the status of the stack through the DescribeStacks operation.
    */
   createStack(params: CloudFormation.Types.CreateStackInput, callback?: (err: AWSError, data: CloudFormation.Types.CreateStackOutput) => void): Request<CloudFormation.Types.CreateStackOutput, AWSError>;
@@ -108,6 +116,14 @@ declare class CloudFormation extends Service {
    * Deletes the specified change set. Deleting change sets ensures that no one executes the wrong change set. If the call successfully completes, CloudFormation successfully deleted the change set. If IncludeNestedStacks specifies True during the creation of the nested change set, then DeleteChangeSet will delete all change sets that belong to the stacks hierarchy and will also delete all change sets for nested stacks with the status of REVIEW_IN_PROGRESS.
    */
   deleteChangeSet(callback?: (err: AWSError, data: CloudFormation.Types.DeleteChangeSetOutput) => void): Request<CloudFormation.Types.DeleteChangeSetOutput, AWSError>;
+  /**
+   * Deleted a generated template.
+   */
+  deleteGeneratedTemplate(params: CloudFormation.Types.DeleteGeneratedTemplateInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deleted a generated template.
+   */
+  deleteGeneratedTemplate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a specified stack. Once the call completes successfully, stack deletion starts. Deleted stacks don't show up in the DescribeStacks operation if the deletion has been completed successfully.
    */
@@ -165,6 +181,14 @@ declare class CloudFormation extends Service {
    */
   describeChangeSetHooks(callback?: (err: AWSError, data: CloudFormation.Types.DescribeChangeSetHooksOutput) => void): Request<CloudFormation.Types.DescribeChangeSetHooksOutput, AWSError>;
   /**
+   * Describes a generated template. The output includes details about the progress of the creation of a generated template started by a CreateGeneratedTemplate API action or the update of a generated template started with an UpdateGeneratedTemplate API action.
+   */
+  describeGeneratedTemplate(params: CloudFormation.Types.DescribeGeneratedTemplateInput, callback?: (err: AWSError, data: CloudFormation.Types.DescribeGeneratedTemplateOutput) => void): Request<CloudFormation.Types.DescribeGeneratedTemplateOutput, AWSError>;
+  /**
+   * Describes a generated template. The output includes details about the progress of the creation of a generated template started by a CreateGeneratedTemplate API action or the update of a generated template started with an UpdateGeneratedTemplate API action.
+   */
+  describeGeneratedTemplate(callback?: (err: AWSError, data: CloudFormation.Types.DescribeGeneratedTemplateOutput) => void): Request<CloudFormation.Types.DescribeGeneratedTemplateOutput, AWSError>;
+  /**
    * Retrieves information about the account's OrganizationAccess status. This API can be called either by the management account or the delegated administrator by using the CallAs parameter. This API can also be called without the CallAs parameter by the management account.
    */
   describeOrganizationsAccess(params: CloudFormation.Types.DescribeOrganizationsAccessInput, callback?: (err: AWSError, data: CloudFormation.Types.DescribeOrganizationsAccessOutput) => void): Request<CloudFormation.Types.DescribeOrganizationsAccessOutput, AWSError>;
@@ -180,6 +204,14 @@ declare class CloudFormation extends Service {
    * Returns information about a CloudFormation extension publisher. If you don't supply a PublisherId, and you have registered as an extension publisher, DescribePublisher returns information about your own publisher account. For more information about registering as a publisher, see:    RegisterPublisher     Publishing extensions to make them available for public use in the CloudFormation CLI User Guide   
    */
   describePublisher(callback?: (err: AWSError, data: CloudFormation.Types.DescribePublisherOutput) => void): Request<CloudFormation.Types.DescribePublisherOutput, AWSError>;
+  /**
+   * Describes details of a resource scan.
+   */
+  describeResourceScan(params: CloudFormation.Types.DescribeResourceScanInput, callback?: (err: AWSError, data: CloudFormation.Types.DescribeResourceScanOutput) => void): Request<CloudFormation.Types.DescribeResourceScanOutput, AWSError>;
+  /**
+   * Describes details of a resource scan.
+   */
+  describeResourceScan(callback?: (err: AWSError, data: CloudFormation.Types.DescribeResourceScanOutput) => void): Request<CloudFormation.Types.DescribeResourceScanOutput, AWSError>;
   /**
    * Returns information about a stack drift detection operation. A stack drift detection operation detects whether a stack's actual configuration differs, or has drifted, from its expected configuration, as defined in the stack template and any values specified as template parameters. A stack is considered to have drifted if one or more of its resources have drifted. For more information about stack and resource drift, see Detecting Unregulated Configuration Changes to Stacks and Resources. Use DetectStackDrift to initiate a stack drift detection operation. DetectStackDrift returns a StackDriftDetectionId you can use to monitor the progress of the operation using DescribeStackDriftDetectionStatus. Once the drift detection operation has completed, use DescribeStackResourceDrifts to return drift information about the stack and its resources.
    */
@@ -309,6 +341,14 @@ declare class CloudFormation extends Service {
    */
   executeChangeSet(callback?: (err: AWSError, data: CloudFormation.Types.ExecuteChangeSetOutput) => void): Request<CloudFormation.Types.ExecuteChangeSetOutput, AWSError>;
   /**
+   * Retrieves a generated template. If the template is in an InProgress or Pending status then the template returned will be the template when the template was last in a Complete status. If the template has not yet been in a Complete status then an empty template will be returned.
+   */
+  getGeneratedTemplate(params: CloudFormation.Types.GetGeneratedTemplateInput, callback?: (err: AWSError, data: CloudFormation.Types.GetGeneratedTemplateOutput) => void): Request<CloudFormation.Types.GetGeneratedTemplateOutput, AWSError>;
+  /**
+   * Retrieves a generated template. If the template is in an InProgress or Pending status then the template returned will be the template when the template was last in a Complete status. If the template has not yet been in a Complete status then an empty template will be returned.
+   */
+  getGeneratedTemplate(callback?: (err: AWSError, data: CloudFormation.Types.GetGeneratedTemplateOutput) => void): Request<CloudFormation.Types.GetGeneratedTemplateOutput, AWSError>;
+  /**
    * Returns the stack policy for a specified stack. If a stack doesn't have a policy, a null value is returned.
    */
   getStackPolicy(params: CloudFormation.Types.GetStackPolicyInput, callback?: (err: AWSError, data: CloudFormation.Types.GetStackPolicyOutput) => void): Request<CloudFormation.Types.GetStackPolicyOutput, AWSError>;
@@ -357,6 +397,14 @@ declare class CloudFormation extends Service {
    */
   listExports(callback?: (err: AWSError, data: CloudFormation.Types.ListExportsOutput) => void): Request<CloudFormation.Types.ListExportsOutput, AWSError>;
   /**
+   * Lists your generated templates in this Region.
+   */
+  listGeneratedTemplates(params: CloudFormation.Types.ListGeneratedTemplatesInput, callback?: (err: AWSError, data: CloudFormation.Types.ListGeneratedTemplatesOutput) => void): Request<CloudFormation.Types.ListGeneratedTemplatesOutput, AWSError>;
+  /**
+   * Lists your generated templates in this Region.
+   */
+  listGeneratedTemplates(callback?: (err: AWSError, data: CloudFormation.Types.ListGeneratedTemplatesOutput) => void): Request<CloudFormation.Types.ListGeneratedTemplatesOutput, AWSError>;
+  /**
    * Lists all stacks that are importing an exported output value. To modify or remove an exported output value, first use this action to see which stacks are using it. To see the exported output values in your account, see ListExports. For more information about importing an exported output value, see the Fn::ImportValue function.
    */
   listImports(params: CloudFormation.Types.ListImportsInput, callback?: (err: AWSError, data: CloudFormation.Types.ListImportsOutput) => void): Request<CloudFormation.Types.ListImportsOutput, AWSError>;
@@ -364,6 +412,30 @@ declare class CloudFormation extends Service {
    * Lists all stacks that are importing an exported output value. To modify or remove an exported output value, first use this action to see which stacks are using it. To see the exported output values in your account, see ListExports. For more information about importing an exported output value, see the Fn::ImportValue function.
    */
   listImports(callback?: (err: AWSError, data: CloudFormation.Types.ListImportsOutput) => void): Request<CloudFormation.Types.ListImportsOutput, AWSError>;
+  /**
+   * Lists the related resources for a list of resources from a resource scan. The response indicates whether each returned resource is already managed by CloudFormation.
+   */
+  listResourceScanRelatedResources(params: CloudFormation.Types.ListResourceScanRelatedResourcesInput, callback?: (err: AWSError, data: CloudFormation.Types.ListResourceScanRelatedResourcesOutput) => void): Request<CloudFormation.Types.ListResourceScanRelatedResourcesOutput, AWSError>;
+  /**
+   * Lists the related resources for a list of resources from a resource scan. The response indicates whether each returned resource is already managed by CloudFormation.
+   */
+  listResourceScanRelatedResources(callback?: (err: AWSError, data: CloudFormation.Types.ListResourceScanRelatedResourcesOutput) => void): Request<CloudFormation.Types.ListResourceScanRelatedResourcesOutput, AWSError>;
+  /**
+   * Lists the resources from a resource scan. The results can be filtered by resource identifier, resource type prefix, tag key, and tag value. Only resources that match all specified filters are returned. The response indicates whether each returned resource is already managed by CloudFormation.
+   */
+  listResourceScanResources(params: CloudFormation.Types.ListResourceScanResourcesInput, callback?: (err: AWSError, data: CloudFormation.Types.ListResourceScanResourcesOutput) => void): Request<CloudFormation.Types.ListResourceScanResourcesOutput, AWSError>;
+  /**
+   * Lists the resources from a resource scan. The results can be filtered by resource identifier, resource type prefix, tag key, and tag value. Only resources that match all specified filters are returned. The response indicates whether each returned resource is already managed by CloudFormation.
+   */
+  listResourceScanResources(callback?: (err: AWSError, data: CloudFormation.Types.ListResourceScanResourcesOutput) => void): Request<CloudFormation.Types.ListResourceScanResourcesOutput, AWSError>;
+  /**
+   * List the resource scans from newest to oldest. By default it will return up to 10 resource scans.
+   */
+  listResourceScans(params: CloudFormation.Types.ListResourceScansInput, callback?: (err: AWSError, data: CloudFormation.Types.ListResourceScansOutput) => void): Request<CloudFormation.Types.ListResourceScansOutput, AWSError>;
+  /**
+   * List the resource scans from newest to oldest. By default it will return up to 10 resource scans.
+   */
+  listResourceScans(callback?: (err: AWSError, data: CloudFormation.Types.ListResourceScansOutput) => void): Request<CloudFormation.Types.ListResourceScansOutput, AWSError>;
   /**
    * Returns drift information for resources in a stack instance.   ListStackInstanceResourceDrifts returns drift information for the most recent drift detection operation. If an operation is in progress, it may only return partial results. 
    */
@@ -517,6 +589,14 @@ declare class CloudFormation extends Service {
    */
   signalResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Starts a scan of the resources in this account in this Region. You can the status of a scan using the ListResourceScans API action.
+   */
+  startResourceScan(params: CloudFormation.Types.StartResourceScanInput, callback?: (err: AWSError, data: CloudFormation.Types.StartResourceScanOutput) => void): Request<CloudFormation.Types.StartResourceScanOutput, AWSError>;
+  /**
+   * Starts a scan of the resources in this account in this Region. You can the status of a scan using the ListResourceScans API action.
+   */
+  startResourceScan(callback?: (err: AWSError, data: CloudFormation.Types.StartResourceScanOutput) => void): Request<CloudFormation.Types.StartResourceScanOutput, AWSError>;
+  /**
    * Stops an in-progress operation on a stack set and its associated stack instances. StackSets will cancel all the unstarted stack instance deployments and wait for those are in-progress to complete.
    */
   stopStackSetOperation(params: CloudFormation.Types.StopStackSetOperationInput, callback?: (err: AWSError, data: CloudFormation.Types.StopStackSetOperationOutput) => void): Request<CloudFormation.Types.StopStackSetOperationOutput, AWSError>;
@@ -532,6 +612,14 @@ declare class CloudFormation extends Service {
    * Tests a registered extension to make sure it meets all necessary requirements for being published in the CloudFormation registry.   For resource types, this includes passing all contracts tests defined for the type.   For modules, this includes determining if the module's model meets all necessary requirements.   For more information, see Testing your public extension prior to publishing in the CloudFormation CLI User Guide. If you don't specify a version, CloudFormation uses the default version of the extension in your account and Region for testing. To perform testing, CloudFormation assumes the execution role specified when the type was registered. For more information, see RegisterType. Once you've initiated testing on an extension using TestType, you can pass the returned TypeVersionArn into DescribeType to monitor the current test status and test status description for the extension. An extension must have a test status of PASSED before it can be published. For more information, see Publishing extensions to make them available for public use in the CloudFormation CLI User Guide.
    */
   testType(callback?: (err: AWSError, data: CloudFormation.Types.TestTypeOutput) => void): Request<CloudFormation.Types.TestTypeOutput, AWSError>;
+  /**
+   * Updates a generated template. This can be used to change the name, add and remove resources, refresh resources, and change the DeletionPolicy and UpdateReplacePolicy settings. You can check the status of the update to the generated template using the DescribeGeneratedTemplate API action.
+   */
+  updateGeneratedTemplate(params: CloudFormation.Types.UpdateGeneratedTemplateInput, callback?: (err: AWSError, data: CloudFormation.Types.UpdateGeneratedTemplateOutput) => void): Request<CloudFormation.Types.UpdateGeneratedTemplateOutput, AWSError>;
+  /**
+   * Updates a generated template. This can be used to change the name, add and remove resources, refresh resources, and change the DeletionPolicy and UpdateReplacePolicy settings. You can check the status of the update to the generated template using the DescribeGeneratedTemplate API action.
+   */
+  updateGeneratedTemplate(callback?: (err: AWSError, data: CloudFormation.Types.UpdateGeneratedTemplateOutput) => void): Request<CloudFormation.Types.UpdateGeneratedTemplateOutput, AWSError>;
   /**
    * Updates a stack as specified in the template. After the call completes successfully, the stack update starts. You can check the status of the stack through the DescribeStacks action. To get a copy of the template for an existing stack, you can use the GetTemplate action. For more information about creating an update template, updating a stack, and monitoring the progress of the update, see Updating a Stack.
    */
@@ -1030,6 +1118,30 @@ declare namespace CloudFormation {
      */
     StackId?: StackId;
   }
+  export interface CreateGeneratedTemplateInput {
+    /**
+     * An optional list of resources to be included in the generated template.  If no resources are specified,the template will be created without any resources. Resources can be added to the template using the UpdateGeneratedTemplate API action.
+     */
+    Resources?: ResourceDefinitions;
+    /**
+     * The name assigned to the generated template.
+     */
+    GeneratedTemplateName: GeneratedTemplateName;
+    /**
+     * An optional name or ARN of a stack to use as the base stack for the generated template.
+     */
+    StackName?: StackName;
+    /**
+     * The configuration details of the generated template, including the DeletionPolicy and UpdateReplacePolicy.
+     */
+    TemplateConfiguration?: TemplateConfiguration;
+  }
+  export interface CreateGeneratedTemplateOutput {
+    /**
+     * The ID of the generated template.
+     */
+    GeneratedTemplateId?: GeneratedTemplateId;
+  }
   export interface CreateStackInput {
     /**
      * The name that's associated with the stack. The name must be unique in the Region in which you are creating the stack.  A stack name can contain only alphanumeric characters (case sensitive) and hyphens. It must start with an alphabetical character and can't be longer than 128 characters. 
@@ -1250,6 +1362,12 @@ declare namespace CloudFormation {
     StackName?: StackNameOrId;
   }
   export interface DeleteChangeSetOutput {
+  }
+  export interface DeleteGeneratedTemplateInput {
+    /**
+     * The name or Amazon Resource Name (ARN) of a generated template.
+     */
+    GeneratedTemplateName: GeneratedTemplateName;
   }
   export interface DeleteStackInput {
     /**
@@ -1525,6 +1643,58 @@ declare namespace CloudFormation {
      */
     ImportExistingResources?: ImportExistingResources;
   }
+  export interface DescribeGeneratedTemplateInput {
+    /**
+     * The name or Amazon Resource Name (ARN) of a generated template.
+     */
+    GeneratedTemplateName: GeneratedTemplateName;
+  }
+  export interface DescribeGeneratedTemplateOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the generated template. The format is arn:${Partition}:cloudformation:${Region}:${Account}:generatedtemplate/${Id}. For example, arn:aws:cloudformation:us-east-1:123456789012:generatedtemplate/2e8465c1-9a80-43ea-a3a3-4f2d692fe6dc .
+     */
+    GeneratedTemplateId?: GeneratedTemplateId;
+    /**
+     * The name of the generated template.
+     */
+    GeneratedTemplateName?: GeneratedTemplateName;
+    /**
+     * A list of objects describing the details of the resources in the template generation.
+     */
+    Resources?: ResourceDetails;
+    /**
+     * The status of the template generation. Supported values are:    CreatePending - the creation of the template is pending.    CreateInProgress - the creation of the template is in progress.    DeletePending - the deletion of the template is pending.    DeleteInProgress - the deletion of the template is in progress.    UpdatePending - the update of the template is pending.    UpdateInProgress - the update of the template is in progress.    Failed - the template operation failed.    Complete - the template operation is complete.  
+     */
+    Status?: GeneratedTemplateStatus;
+    /**
+     * The reason for the current template generation status. This will provide more details if a failure happened.
+     */
+    StatusReason?: TemplateStatusReason;
+    /**
+     * The time the generated template was created.
+     */
+    CreationTime?: CreationTime;
+    /**
+     * The time the generated template was last updated.
+     */
+    LastUpdatedTime?: LastUpdatedTime;
+    /**
+     * An object describing the progress of the template generation.
+     */
+    Progress?: TemplateProgress;
+    /**
+     * The stack ARN of the base stack if a base stack was provided when generating the template.
+     */
+    StackId?: StackId;
+    /**
+     * The configuration details of the generated template, including the DeletionPolicy and UpdateReplacePolicy.
+     */
+    TemplateConfiguration?: TemplateConfiguration;
+    /**
+     * The number of warnings generated for this template. The warnings are found in the details of each of the resources in the template.
+     */
+    TotalWarnings?: TotalWarnings;
+  }
   export interface DescribeOrganizationsAccessInput {
     /**
      * [Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account. By default, SELF is specified.   If you are signed in to the management account, specify SELF.   If you are signed in to a delegated administrator account, specify DELEGATED_ADMIN. Your Amazon Web Services account must be registered as a delegated administrator in the management account. For more information, see Register a delegated administrator in the CloudFormation User Guide.  
@@ -1560,6 +1730,50 @@ declare namespace CloudFormation {
      * The URL to the publisher's profile with the identity provider.
      */
     PublisherProfile?: PublisherProfile;
+  }
+  export interface DescribeResourceScanInput {
+    /**
+     * The Amazon Resource Name (ARN) of the resource scan.
+     */
+    ResourceScanId: ResourceScanId;
+  }
+  export interface DescribeResourceScanOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the resource scan. The format is arn:${Partition}:cloudformation:${Region}:${Account}:resourceScan/${Id}. An example is arn:aws:cloudformation:us-east-1:123456789012:resourceScan/f5b490f7-7ed4-428a-aa06-31ff25db0772 .
+     */
+    ResourceScanId?: ResourceScanId;
+    /**
+     * Status of the resource scan.  INPROGRESS  The resource scan is still in progress.  COMPLETE  The resource scan is complete.  EXPIRED  The resource scan has expired.  FAILED  The resource scan has failed.  
+     */
+    Status?: ResourceScanStatus;
+    /**
+     * The reason for the resource scan status, providing more information if a failure happened.
+     */
+    StatusReason?: ResourceScanStatusReason;
+    /**
+     * The time that the resource scan was started.
+     */
+    StartTime?: Timestamp;
+    /**
+     * The time that the resource scan was finished.
+     */
+    EndTime?: Timestamp;
+    /**
+     * The percentage of the resource scan that has been completed.
+     */
+    PercentageCompleted?: PercentageCompleted;
+    /**
+     * The list of resource types for the specified scan. Resource types are only available for scans with a Status set to COMPLETE or FAILED .
+     */
+    ResourceTypes?: ResourceTypes;
+    /**
+     * The number of resources that were listed. This is only available for scans with a Status set to COMPLETE, EXPIRED, or FAILED .
+     */
+    ResourcesScanned?: ResourcesScanned;
+    /**
+     * The number of resources that were read. This is only available for scans with a Status set to COMPLETE, EXPIRED, or FAILED .  This field may be 0 if the resource scan failed with a ResourceScanLimitExceededException. 
+     */
+    ResourcesRead?: ResourcesRead;
   }
   export interface DescribeStackDriftDetectionStatusInput {
     /**
@@ -2052,6 +2266,32 @@ declare namespace CloudFormation {
   export type FailedStackInstancesCount = number;
   export type FailureToleranceCount = number;
   export type FailureTolerancePercentage = number;
+  export type GeneratedTemplateDeletionPolicy = "DELETE"|"RETAIN"|string;
+  export type GeneratedTemplateId = string;
+  export type GeneratedTemplateName = string;
+  export type GeneratedTemplateResourceStatus = "PENDING"|"IN_PROGRESS"|"FAILED"|"COMPLETE"|string;
+  export type GeneratedTemplateStatus = "CREATE_PENDING"|"UPDATE_PENDING"|"DELETE_PENDING"|"CREATE_IN_PROGRESS"|"UPDATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"FAILED"|"COMPLETE"|string;
+  export type GeneratedTemplateUpdateReplacePolicy = "DELETE"|"RETAIN"|string;
+  export interface GetGeneratedTemplateInput {
+    /**
+     * The language to use to retrieve for the generated template. Supported values are:    JSON     YAML   
+     */
+    Format?: TemplateFormat;
+    /**
+     * The name or Amazon Resource Name (ARN) of the generated template. The format is arn:${Partition}:cloudformation:${Region}:${Account}:generatedtemplate/${Id}. For example, arn:aws:cloudformation:us-east-1:123456789012:generatedtemplate/2e8465c1-9a80-43ea-a3a3-4f2d692fe6dc .
+     */
+    GeneratedTemplateName: GeneratedTemplateName;
+  }
+  export interface GetGeneratedTemplateOutput {
+    /**
+     * The status of the template generation. Supported values are:    CreatePending - the creation of the template is pending.    CreateInProgress - the creation of the template is in progress.    DeletePending - the deletion of the template is pending.    DeleteInProgress - the deletion of the template is in progress.    UpdatePending - the update of the template is pending.    UpdateInProgress - the update of the template is in progress.    Failed - the template operation failed.    Complete - the template operation is complete.  
+     */
+    Status?: GeneratedTemplateStatus;
+    /**
+     * The template body of the generated template, in the language specified by the Language parameter.
+     */
+    TemplateBody?: TemplateBody;
+  }
   export interface GetStackPolicyInput {
     /**
      * The name or unique stack ID that's associated with the stack whose policy you want to get.
@@ -2213,6 +2453,10 @@ declare namespace CloudFormation {
   export type IsActivated = boolean;
   export type IsDefaultConfiguration = boolean;
   export type IsDefaultVersion = boolean;
+  export type JazzLogicalResourceIds = LogicalResourceId[];
+  export type JazzResourceIdentifierProperties = {[key: string]: JazzResourceIdentifierPropertyValue};
+  export type JazzResourceIdentifierPropertyKey = string;
+  export type JazzResourceIdentifierPropertyValue = string;
   export type Key = string;
   export type LastUpdatedTime = Date;
   export type LimitName = string;
@@ -2253,6 +2497,26 @@ declare namespace CloudFormation {
      */
     NextToken?: NextToken;
   }
+  export interface ListGeneratedTemplatesInput {
+    /**
+     * A string that identifies the next page of resource scan results.
+     */
+    NextToken?: NextToken;
+    /**
+     *  If the number of available results exceeds this maximum, the response includes a NextToken value that you can use for the NextToken parameter to get the next set of results. By default the ListGeneratedTemplates API action will return at most 50 results in each response. The maximum value is 100.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListGeneratedTemplatesOutput {
+    /**
+     * A list of summaries of the generated templates.
+     */
+    Summaries?: TemplateSummaries;
+    /**
+     * If the request doesn't return all the remaining results, NextToken is set to a token. To retrieve the next set of results, call ListGeneratedTemplates again and use that value for the NextToken parameter. If the request returns all results, NextToken is set to an empty string.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListImportsInput {
     /**
      * The name of the exported output value. CloudFormation returns the stack names that are importing this value.
@@ -2270,6 +2534,94 @@ declare namespace CloudFormation {
     Imports?: Imports;
     /**
      * A string that identifies the next page of exports. If there is no additional page, this value is null.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListResourceScanRelatedResourcesInput {
+    /**
+     * The Amazon Resource Name (ARN) of the resource scan.
+     */
+    ResourceScanId: ResourceScanId;
+    /**
+     * The list of resources for which you want to get the related resources. Up to 100 resources can be provided.
+     */
+    Resources: ScannedResourceIdentifiers;
+    /**
+     * A string that identifies the next page of resource scan results.
+     */
+    NextToken?: NextToken;
+    /**
+     *  If the number of available results exceeds this maximum, the response includes a NextToken value that you can use for the NextToken parameter to get the next set of results. By default the ListResourceScanRelatedResources API action will return up to 100 results in each response. The maximum value is 100.
+     */
+    MaxResults?: BoxedMaxResults;
+  }
+  export interface ListResourceScanRelatedResourcesOutput {
+    /**
+     * List of up to MaxResults resources in the specified resource scan related to the specified resources.
+     */
+    RelatedResources?: RelatedResources;
+    /**
+     * If the request doesn't return all the remaining results, NextToken is set to a token. To retrieve the next set of results, call ListResourceScanRelatedResources again and use that value for the NextToken parameter. If the request returns all results, NextToken is set to an empty string.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListResourceScanResourcesInput {
+    /**
+     * The Amazon Resource Name (ARN) of the resource scan.
+     */
+    ResourceScanId: ResourceScanId;
+    /**
+     * If specified, the returned resources will have the specified resource identifier (or one of them in the case where the resource has multiple identifiers).
+     */
+    ResourceIdentifier?: ResourceIdentifier;
+    /**
+     * If specified, the returned resources will be of any of the resource types with the specified prefix.
+     */
+    ResourceTypePrefix?: ResourceTypePrefix;
+    /**
+     * If specified, the returned resources will have a matching tag key.
+     */
+    TagKey?: TagKey;
+    /**
+     * If specified, the returned resources will have a matching tag value.
+     */
+    TagValue?: TagValue;
+    /**
+     * A string that identifies the next page of resource scan results.
+     */
+    NextToken?: NextToken;
+    /**
+     *  If the number of available results exceeds this maximum, the response includes a NextToken value that you can use for the NextToken parameter to get the next set of results. By default the ListResourceScanResources API action will return at most 100 results in each response. The maximum value is 100.
+     */
+    MaxResults?: ResourceScannerMaxResults;
+  }
+  export interface ListResourceScanResourcesOutput {
+    /**
+     * List of up to MaxResults resources in the specified resource scan that match all of the specified filters.
+     */
+    Resources?: ScannedResources;
+    /**
+     * If the request doesn't return all the remaining results, NextToken is set to a token. To retrieve the next set of results, call ListResourceScanResources again and use that value for the NextToken parameter. If the request returns all results, NextToken is set to an empty string.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListResourceScansInput {
+    /**
+     * A string that identifies the next page of resource scan results.
+     */
+    NextToken?: NextToken;
+    /**
+     *  If the number of available results exceeds this maximum, the response includes a NextToken value that you can use for the NextToken parameter to get the next set of results. The default value is 10. The maximum value is 100.
+     */
+    MaxResults?: ResourceScannerMaxResults;
+  }
+  export interface ListResourceScansOutput {
+    /**
+     * The list of scans returned.
+     */
+    ResourceScanSummaries?: ResourceScanSummaries;
+    /**
+     * If the request doesn't return all the remaining results, NextToken is set to a token. To retrieve the next set of results, call ListResourceScans again and use that value for the NextToken parameter. If the request returns all results, NextToken is set to an empty string.
      */
     NextToken?: NextToken;
   }
@@ -2620,6 +2972,7 @@ declare namespace CloudFormation {
   export type LogicalResourceId = string;
   export type LogicalResourceIds = LogicalResourceId[];
   export type MajorVersion = number;
+  export type ManagedByStack = boolean;
   export interface ManagedExecution {
     /**
      * When true, StackSets performs non-conflicting operations concurrently and queues conflicting operations. After conflicting operations finish, StackSets starts queued operations in request order.  If there are already running or queued operations, StackSets queues all incoming operations even if they are non-conflicting. You can't modify your stack set's execution configuration while there are running or queued operations for that stack set.  When false (default), StackSets performs one operation at a time in request order.
@@ -2646,6 +2999,7 @@ declare namespace CloudFormation {
   export type NoEcho = boolean;
   export type NotificationARN = string;
   export type NotificationARNs = NotificationARN[];
+  export type NumberOfResources = number;
   export type OnFailure = "DO_NOTHING"|"ROLLBACK"|"DELETE"|string;
   export type OnStackFailure = "DO_NOTHING"|"ROLLBACK"|"DELETE"|string;
   export interface OperationResultFilter {
@@ -2742,6 +3096,7 @@ declare namespace CloudFormation {
   export type ParameterType = string;
   export type ParameterValue = string;
   export type Parameters = Parameter[];
+  export type PercentageCompleted = number;
   export type PermissionModels = "SERVICE_MANAGED"|"SELF_MANAGED"|string;
   export type PhysicalResourceId = string;
   export type PhysicalResourceIdContext = PhysicalResourceIdContextKeyValuePair[];
@@ -2757,6 +3112,7 @@ declare namespace CloudFormation {
   }
   export type PrivateTypeArn = string;
   export type Properties = string;
+  export type PropertyDescription = string;
   export interface PropertyDifference {
     /**
      * The fully-qualified path to the resource property.
@@ -2842,6 +3198,7 @@ declare namespace CloudFormation {
   }
   export interface RecordHandlerProgressOutput {
   }
+  export type RefreshAllResources = boolean;
   export type Region = string;
   export type RegionConcurrencyType = "SEQUENTIAL"|"PARALLEL"|string;
   export type RegionList = Region[];
@@ -2897,6 +3254,7 @@ declare namespace CloudFormation {
   export type RegistrationToken = string;
   export type RegistrationTokenList = RegistrationToken[];
   export type RegistryType = "RESOURCE"|"MODULE"|"HOOK"|string;
+  export type RelatedResources = ScannedResource[];
   export type Replacement = "True"|"False"|"Conditional"|string;
   export type RequestToken = string;
   export interface RequiredActivatedType {
@@ -2918,6 +3276,7 @@ declare namespace CloudFormation {
     SupportedMajorVersions?: SupportedMajorVersions;
   }
   export type RequiredActivatedTypes = RequiredActivatedType[];
+  export type RequiredProperty = boolean;
   export type RequiresRecreation = "Never"|"Conditionally"|"Always"|string;
   export type ResourceAttribute = "Properties"|"Metadata"|"CreationPolicy"|"UpdatePolicy"|"DeletionPolicy"|"UpdateReplacePolicy"|"Tags"|string;
   export interface ResourceChange {
@@ -2977,6 +3336,49 @@ declare namespace CloudFormation {
     CausingEntity?: CausingEntity;
   }
   export type ResourceChangeDetails = ResourceChangeDetail[];
+  export interface ResourceDefinition {
+    /**
+     * The type of the resource, such as AWS::DynamoDB::Table. For the list of supported resources, see IaC generator supported resource types in the CloudFormation User Guide 
+     */
+    ResourceType: ResourceType;
+    /**
+     * The logical resource id for this resource in the generated template.
+     */
+    LogicalResourceId?: LogicalResourceId;
+    /**
+     * A list of up to 256 key-value pairs that identifies the scanned resource. The key is the name of one of the primary identifiers for the resource. (Primary identifiers are specified in the primaryIdentifier list in the resource schema.) The value is the value of that primary identifier. For example, for a AWS::DynamoDB::Table resource, the primary identifiers is TableName so the key-value pair could be "TableName": "MyDDBTable". For more information, see primaryIdentifier in the CloudFormation Command Line Interface User guide for extension development.
+     */
+    ResourceIdentifier: ResourceIdentifierProperties;
+  }
+  export type ResourceDefinitions = ResourceDefinition[];
+  export interface ResourceDetail {
+    /**
+     * The type of the resource, such as AWS::DynamoDB::Table. For the list of supported resources, see IaC generator supported resource types In the CloudFormation User Guide 
+     */
+    ResourceType?: ResourceType;
+    /**
+     * The logical id for this resource in the final generated template.
+     */
+    LogicalResourceId?: LogicalResourceId;
+    /**
+     * A list of up to 256 key-value pairs that identifies the resource in the generated template. The key is the name of one of the primary identifiers for the resource. (Primary identifiers are specified in the primaryIdentifier list in the resource schema.) The value is the value of that primary identifier. For example, for a AWS::DynamoDB::Table resource, the primary identifiers is TableName so the key-value pair could be "TableName": "MyDDBTable". For more information, see primaryIdentifier in the CloudFormation Command Line Interface User guide for extension development.
+     */
+    ResourceIdentifier?: ResourceIdentifierProperties;
+    /**
+     * Status of the processing of a resource in a generated template.  InProgress  The resource processing is still in progress.  Complete  The resource processing is complete.  Pending  The resource processing is pending.  Failed  The resource processing has failed.  
+     */
+    ResourceStatus?: GeneratedTemplateResourceStatus;
+    /**
+     * The reason for the resource detail, providing more information if a failure happened.
+     */
+    ResourceStatusReason?: ResourceStatusReason;
+    /**
+     * The warnings generated for this resource.
+     */
+    Warnings?: WarningDetails;
+  }
+  export type ResourceDetails = ResourceDetail[];
+  export type ResourceIdentifier = string;
   export type ResourceIdentifierProperties = {[key: string]: ResourceIdentifierPropertyValue};
   export type ResourceIdentifierPropertyKey = string;
   export type ResourceIdentifierPropertyValue = string;
@@ -2998,6 +3400,37 @@ declare namespace CloudFormation {
   export type ResourceIdentifiers = ResourceIdentifierPropertyKey[];
   export type ResourceModel = string;
   export type ResourceProperties = string;
+  export type ResourceScanId = string;
+  export type ResourceScanStatus = "IN_PROGRESS"|"FAILED"|"COMPLETE"|"EXPIRED"|string;
+  export type ResourceScanStatusReason = string;
+  export type ResourceScanSummaries = ResourceScanSummary[];
+  export interface ResourceScanSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the resource scan.
+     */
+    ResourceScanId?: ResourceScanId;
+    /**
+     * Status of the resource scan.  INPROGRESS  The resource scan is still in progress.  COMPLETE  The resource scan is complete.  EXPIRED  The resource scan has expired.  FAILED  The resource scan has failed.  
+     */
+    Status?: ResourceScanStatus;
+    /**
+     * The reason for the resource scan status, providing more information if a failure happened.
+     */
+    StatusReason?: ResourceScanStatusReason;
+    /**
+     * The time that the resource scan was started.
+     */
+    StartTime?: Timestamp;
+    /**
+     * The time that the resource scan was finished.
+     */
+    EndTime?: Timestamp;
+    /**
+     * The percentage of the resource scan that has been completed.
+     */
+    PercentageCompleted?: PercentageCompleted;
+  }
+  export type ResourceScannerMaxResults = number;
   export type ResourceSignalStatus = "SUCCESS"|"FAILURE"|string;
   export type ResourceSignalUniqueId = string;
   export type ResourceStatus = "CREATE_IN_PROGRESS"|"CREATE_FAILED"|"CREATE_COMPLETE"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|"DELETE_COMPLETE"|"DELETE_SKIPPED"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|"UPDATE_COMPLETE"|"IMPORT_FAILED"|"IMPORT_COMPLETE"|"IMPORT_IN_PROGRESS"|"IMPORT_ROLLBACK_IN_PROGRESS"|"IMPORT_ROLLBACK_FAILED"|"IMPORT_ROLLBACK_COMPLETE"|"UPDATE_ROLLBACK_IN_PROGRESS"|"UPDATE_ROLLBACK_COMPLETE"|"UPDATE_ROLLBACK_FAILED"|"ROLLBACK_IN_PROGRESS"|"ROLLBACK_COMPLETE"|"ROLLBACK_FAILED"|string;
@@ -3032,7 +3465,14 @@ declare namespace CloudFormation {
   }
   export type ResourceToSkip = string;
   export type ResourceType = string;
+  export type ResourceTypePrefix = string;
   export type ResourceTypes = ResourceType[];
+  export type ResourcesFailed = number;
+  export type ResourcesPending = number;
+  export type ResourcesProcessing = number;
+  export type ResourcesRead = number;
+  export type ResourcesScanned = number;
+  export type ResourcesSucceeded = number;
   export type ResourcesToImport = ResourceToImport[];
   export type ResourcesToSkip = ResourceToSkip[];
   export type RetainExceptOnCreate = boolean;
@@ -3089,6 +3529,32 @@ declare namespace CloudFormation {
   export type RollbackTriggers = RollbackTrigger[];
   export type S3Bucket = string;
   export type S3Url = string;
+  export interface ScannedResource {
+    /**
+     * The type of the resource, such as AWS::DynamoDB::Table. For the list of supported resources, see IaC generator supported resource types In the CloudFormation User Guide 
+     */
+    ResourceType?: ResourceType;
+    /**
+     * A list of up to 256 key-value pairs that identifies for the scanned resource. The key is the name of one of the primary identifiers for the resource. (Primary identifiers are specified in the primaryIdentifier list in the resource schema.) The value is the value of that primary identifier. For example, for a AWS::DynamoDB::Table resource, the primary identifiers is TableName so the key-value pair could be "TableName": "MyDDBTable". For more information, see primaryIdentifier in the CloudFormation Command Line Interface User guide for extension development.
+     */
+    ResourceIdentifier?: JazzResourceIdentifierProperties;
+    /**
+     * If true, the resource is managed by a CloudFormation stack.
+     */
+    ManagedByStack?: ManagedByStack;
+  }
+  export interface ScannedResourceIdentifier {
+    /**
+     * The type of the resource, such as AWS::DynamoDB::Table. For the list of supported resources, see IaC generator supported resource types In the CloudFormation User Guide 
+     */
+    ResourceType: ResourceType;
+    /**
+     * A list of up to 256 key-value pairs that identifies the scanned resource. The key is the name of one of the primary identifiers for the resource. (Primary identifiers are specified in the primaryIdentifier list in the resource schema.) The value is the value of that primary identifier. For example, for a AWS::DynamoDB::Table resource, the primary identifiers is TableName so the key-value pair could be "TableName": "MyDDBTable". For more information, see primaryIdentifier in the CloudFormation Command Line Interface User guide for extension development.
+     */
+    ResourceIdentifier: JazzResourceIdentifierProperties;
+  }
+  export type ScannedResourceIdentifiers = ScannedResourceIdentifier[];
+  export type ScannedResources = ScannedResource[];
   export type Scope = ResourceAttribute[];
   export interface SetStackPolicyInput {
     /**
@@ -3893,7 +4359,7 @@ declare namespace CloudFormation {
      */
     RegionConcurrencyType?: RegionConcurrencyType;
     /**
-     * The order of the Regions where you want to perform the stack operation.
+     * The order of the Regions where you want to perform the stack operation.   RegionOrder isn't followed if AutoDeployment is enabled. 
      */
     RegionOrder?: RegionList;
     /**
@@ -4080,6 +4546,18 @@ declare namespace CloudFormation {
   }
   export type Stacks = Stack[];
   export type StageList = TemplateStage[];
+  export interface StartResourceScanInput {
+    /**
+     * A unique identifier for this StartResourceScan request. Specify this token if you plan to retry requests so that CloudFormation knows that you're not attempting to start a new resource scan.
+     */
+    ClientRequestToken?: ClientRequestToken;
+  }
+  export interface StartResourceScanOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the resource scan. The format is arn:${Partition}:cloudformation:${Region}:${Account}:resourceScan/${Id}. An example is arn:aws:cloudformation:us-east-1:123456789012:resourceScan/f5b490f7-7ed4-428a-aa06-31ff25db0772 .
+     */
+    ResourceScanId?: ResourceScanId;
+  }
   export type StatusMessage = string;
   export interface StopStackSetOperationInput {
     /**
@@ -4113,7 +4591,18 @@ declare namespace CloudFormation {
   export type TagValue = string;
   export type Tags = Tag[];
   export type TemplateBody = string;
+  export interface TemplateConfiguration {
+    /**
+     * The DeletionPolicy assigned to resources in the generated template. Supported values are:    DELETE - delete all resources when the stack is deleted.    RETAIN - retain all resources when the stack is deleted.   For more information, see  DeletionPolicy attribute in the CloudFormation User Guide.
+     */
+    DeletionPolicy?: GeneratedTemplateDeletionPolicy;
+    /**
+     * The UpdateReplacePolicy assigned to resources in the generated template. Supported values are:    DELETE - delete all resources when the resource is replaced during an update operation.    RETAIN - retain all resources when the resource is replaced during an update operation.   For more information, see  UpdateReplacePolicy attribute in the CloudFormation User Guide.
+     */
+    UpdateReplacePolicy?: GeneratedTemplateUpdateReplacePolicy;
+  }
   export type TemplateDescription = string;
+  export type TemplateFormat = "JSON"|"YAML"|string;
   export interface TemplateParameter {
     /**
      * The name associated with the parameter.
@@ -4133,7 +4622,57 @@ declare namespace CloudFormation {
     Description?: Description;
   }
   export type TemplateParameters = TemplateParameter[];
+  export interface TemplateProgress {
+    /**
+     * The number of resources that succeeded the template generation.
+     */
+    ResourcesSucceeded?: ResourcesSucceeded;
+    /**
+     * The number of resources that failed the template generation.
+     */
+    ResourcesFailed?: ResourcesFailed;
+    /**
+     * The number of resources that are in-process for the template generation.
+     */
+    ResourcesProcessing?: ResourcesProcessing;
+    /**
+     * The number of resources that are still pending the template generation.
+     */
+    ResourcesPending?: ResourcesPending;
+  }
   export type TemplateStage = "Original"|"Processed"|string;
+  export type TemplateStatusReason = string;
+  export type TemplateSummaries = TemplateSummary[];
+  export interface TemplateSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the generated template. The format is arn:${Partition}:cloudformation:${Region}:${Account}:generatedtemplate/${Id}. For example, arn:aws:cloudformation:us-east-1:123456789012:generatedtemplate/2e8465c1-9a80-43ea-a3a3-4f2d692fe6dc .
+     */
+    GeneratedTemplateId?: GeneratedTemplateId;
+    /**
+     * The name of the generated template.
+     */
+    GeneratedTemplateName?: GeneratedTemplateName;
+    /**
+     * The status of the template generation. Supported values are:    CreatePending - the creation of the template is pending.    CreateInProgress - the creation of the template is in progress.    DeletePending - the deletion of the template is pending.    DeleteInProgress - the deletion of the template is in progress.    UpdatePending - the update of the template is pending.    UpdateInProgress - the update of the template is in progress.    Failed - the template operation failed.    Complete - the template operation is complete.  
+     */
+    Status?: GeneratedTemplateStatus;
+    /**
+     * The reason for the current template generation status. This will provide more details if a failure happened.
+     */
+    StatusReason?: TemplateStatusReason;
+    /**
+     * The time the generated template was created.
+     */
+    CreationTime?: CreationTime;
+    /**
+     * The time the generated template was last updated.
+     */
+    LastUpdatedTime?: LastUpdatedTime;
+    /**
+     * The number of resources in the generated template. This is a total of resources in pending, in-progress, completed, and failed states.
+     */
+    NumberOfResources?: NumberOfResources;
+  }
   export interface TemplateSummaryConfig {
     /**
      * If set to True, any unrecognized resource types generate warnings and not an error. Any unrecognized resource types are returned in the Warnings output parameter.
@@ -4174,6 +4713,7 @@ declare namespace CloudFormation {
   export type TimeoutMinutes = number;
   export type Timestamp = Date;
   export type TotalStackInstancesCount = number;
+  export type TotalWarnings = number;
   export type TransformName = string;
   export type TransformsList = TransformName[];
   export type TreatUnrecognizedResourceTypesAsWarnings = boolean;
@@ -4348,6 +4888,38 @@ declare namespace CloudFormation {
     PublicVersionNumber?: PublicVersionNumber;
   }
   export type UnprocessedTypeConfigurations = TypeConfigurationIdentifier[];
+  export interface UpdateGeneratedTemplateInput {
+    /**
+     * The name or Amazon Resource Name (ARN) of a generated template.
+     */
+    GeneratedTemplateName: GeneratedTemplateName;
+    /**
+     * An optional new name to assign to the generated template.
+     */
+    NewGeneratedTemplateName?: GeneratedTemplateName;
+    /**
+     * An optional list of resources to be added to the generated template.
+     */
+    AddResources?: ResourceDefinitions;
+    /**
+     * A list of logical ids for resources to remove from the generated template.
+     */
+    RemoveResources?: JazzLogicalResourceIds;
+    /**
+     * If true, update the resource properties in the generated template with their current live state. This feature is useful when the resource properties in your generated a template does not reflect the live state of the resource properties. This happens when a user update the resource properties after generating a template.
+     */
+    RefreshAllResources?: RefreshAllResources;
+    /**
+     * The configuration details of the generated template, including the DeletionPolicy and UpdateReplacePolicy.
+     */
+    TemplateConfiguration?: TemplateConfiguration;
+  }
+  export interface UpdateGeneratedTemplateOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the generated template. The format is arn:${Partition}:cloudformation:${Region}:${Account}:generatedtemplate/${Id}. For example, arn:aws:cloudformation:us-east-1:123456789012:generatedtemplate/2e8465c1-9a80-43ea-a3a3-4f2d692fe6dc .
+     */
+    GeneratedTemplateId?: GeneratedTemplateId;
+  }
   export interface UpdateStackInput {
     /**
      * The name or unique stack ID of the stack to update.
@@ -4607,6 +5179,33 @@ declare namespace CloudFormation {
   export type Version = string;
   export type VersionBump = "MAJOR"|"MINOR"|string;
   export type Visibility = "PUBLIC"|"PRIVATE"|string;
+  export interface WarningDetail {
+    /**
+     * The type of this warning. For more information, see IaC generator and write-only properties in the CloudFormation User Guide.    MUTUALLY_EXCLUSIVE_PROPERTIES - The resource requires mutually-exclusive write-only properties. The IaC generator selects one set of mutually exclusive properties and converts the included properties into parameters. The parameter names have a suffix OneOf and the parameter descriptions indicate that the corresponding property can be replaced with other exclusive properties.    UNSUPPORTED_PROPERTIES - Unsupported properties are present in the resource. One example of unsupported properties would be a required write-only property that is an array, because a parameter cannot be an array. Another example is an optional write-only property.    MUTUALLY_EXCLUSIVE_TYPES - One or more required write-only properties are found in the resource, and the type of that property can be any of several types.    Currently the resource and property reference documentation does not indicate if a property uses a type of oneOf or anyOf. You need to look at the resource provider schema. 
+     */
+    Type?: WarningType;
+    /**
+     * The properties of the resource that are impacted by this warning.
+     */
+    Properties?: WarningProperties;
+  }
+  export type WarningDetails = WarningDetail[];
+  export type WarningProperties = WarningProperty[];
+  export interface WarningProperty {
+    /**
+     * The path of the property. For example, if this is for the S3Bucket member of the Code property, the property path would be Code/S3Bucket.
+     */
+    PropertyPath?: PropertyPath;
+    /**
+     * If true, the specified property is required.
+     */
+    Required?: RequiredProperty;
+    /**
+     * The description of the property from the resource provider schema.
+     */
+    Description?: PropertyDescription;
+  }
+  export type WarningType = "MUTUALLY_EXCLUSIVE_PROPERTIES"|"UNSUPPORTED_PROPERTIES"|"MUTUALLY_EXCLUSIVE_TYPES"|string;
   export interface Warnings {
     /**
      * A list of all of the unrecognized resource types. This is only returned if the TemplateSummaryConfig parameter has the TreatUnrecognizedResourceTypesAsWarning configuration set to True.

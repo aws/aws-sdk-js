@@ -7260,7 +7260,7 @@ declare namespace Glue {
     /**
      * The maximum size of the response.
      */
-    MaxResults?: PageSize;
+    MaxResults?: OrchestrationPageSize200;
   }
   export interface GetJobRunsResponse {
     /**
@@ -8150,7 +8150,7 @@ declare namespace Glue {
     /**
      * The maximum size of the response.
      */
-    MaxResults?: PageSize;
+    MaxResults?: OrchestrationPageSize200;
   }
   export interface GetTriggersResponse {
     /**
@@ -8959,7 +8959,7 @@ declare namespace Glue {
      */
     PythonVersion?: PythonVersionString;
     /**
-     * In Ray jobs, Runtime is used to specify the versions of Ray, Python and additional libraries available in your environment. This field is not used in other job types. For supported runtime environment values, see Working with Ray jobs in the Glue Developer Guide.
+     * In Ray jobs, Runtime is used to specify the versions of Ray, Python and additional libraries available in your environment. This field is not used in other job types. For supported runtime environment values, see Supported Ray runtime environments in the Glue Developer Guide.
      */
     Runtime?: RuntimeNameString;
   }
@@ -9470,7 +9470,7 @@ declare namespace Glue {
     /**
      * The maximum size of a list to return.
      */
-    MaxResults?: PageSize;
+    MaxResults?: OrchestrationPageSize25;
     /**
      * Filters the list by an Amazon Web Services resource tag.
      */
@@ -9947,7 +9947,7 @@ declare namespace Glue {
     /**
      * The maximum size of a list to return.
      */
-    MaxResults?: PageSize;
+    MaxResults?: OrchestrationPageSize200;
     /**
      * Specifies to return only these tagged resources.
      */
@@ -9971,7 +9971,7 @@ declare namespace Glue {
     /**
      * The maximum size of a list to return.
      */
-    MaxResults?: PageSize;
+    MaxResults?: OrchestrationPageSize25;
   }
   export interface ListWorkflowsResponse {
     /**
@@ -10450,6 +10450,8 @@ declare namespace Glue {
   export type OrchestrationArgumentsValue = string;
   export type OrchestrationIAMRoleArn = string;
   export type OrchestrationNameString = string;
+  export type OrchestrationPageSize200 = number;
+  export type OrchestrationPageSize25 = number;
   export type OrchestrationRoleArn = string;
   export type OrchestrationS3Location = string;
   export type OrchestrationStatementCodeString = string;

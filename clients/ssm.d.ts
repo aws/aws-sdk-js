@@ -293,11 +293,11 @@ declare class SSM extends Service {
    */
   describeAutomationStepExecutions(callback?: (err: AWSError, data: SSM.Types.DescribeAutomationStepExecutionsResult) => void): Request<SSM.Types.DescribeAutomationStepExecutionsResult, AWSError>;
   /**
-   * Lists all patches eligible to be included in a patch baseline.
+   * Lists all patches eligible to be included in a patch baseline.  Currently, DescribeAvailablePatches supports only the Amazon Linux 1, Amazon Linux 2, and Windows Server operating systems. 
    */
   describeAvailablePatches(params: SSM.Types.DescribeAvailablePatchesRequest, callback?: (err: AWSError, data: SSM.Types.DescribeAvailablePatchesResult) => void): Request<SSM.Types.DescribeAvailablePatchesResult, AWSError>;
   /**
-   * Lists all patches eligible to be included in a patch baseline.
+   * Lists all patches eligible to be included in a patch baseline.  Currently, DescribeAvailablePatches supports only the Amazon Linux 1, Amazon Linux 2, and Windows Server operating systems. 
    */
   describeAvailablePatches(callback?: (err: AWSError, data: SSM.Types.DescribeAvailablePatchesResult) => void): Request<SSM.Types.DescribeAvailablePatchesResult, AWSError>;
   /**
@@ -1315,6 +1315,10 @@ declare namespace SSM {
      */
     ScheduleOffset?: ScheduleOffset;
     /**
+     * The number of hours that an association can run on specified targets. After the resulting cutoff time passes, associations that are currently running are cancelled, and no pending executions are started on remaining targets.
+     */
+    Duration?: Duration;
+    /**
      * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps can't be specified together.
      */
     TargetMaps?: TargetMaps;
@@ -1421,6 +1425,10 @@ declare namespace SSM {
      * Number of days to wait after the scheduled day to run an association.
      */
     ScheduleOffset?: ScheduleOffset;
+    /**
+     * The number of hours that an association can run on specified targets. After the resulting cutoff time passes, associations that are currently running are cancelled, and no pending executions are started on remaining targets.
+     */
+    Duration?: Duration;
     /**
      * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps can't be specified together.
      */
@@ -1671,6 +1679,10 @@ declare namespace SSM {
      * Number of days to wait after the scheduled day to run an association.
      */
     ScheduleOffset?: ScheduleOffset;
+    /**
+     * The number of hours that an association can run on specified targets. After the resulting cutoff time passes, associations that are currently running are cancelled, and no pending executions are started on remaining targets.
+     */
+    Duration?: Duration;
     /**
      * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps can't be specified together.
      */
@@ -2601,6 +2613,10 @@ declare namespace SSM {
      */
     ScheduleOffset?: ScheduleOffset;
     /**
+     * The number of hours the association can run before it is canceled. Duration applies to associations that are currently running, and any pending and in progress commands on all targets. If a target was taken offline for the association to run, it is made available again immediately, without a reboot.  The Duration parameter applies only when both these conditions are true:   The association for which you specify a duration is cancelable according to the parameters of the SSM command document or Automation runbook associated with this execution.    The command specifies the  ApplyOnlyAtCronInterval  parameter, which means that the association doesn't run immediately after it is created, but only according to the specified schedule.  
+     */
+    Duration?: Duration;
+    /**
      * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps can't be specified together.
      */
     TargetMaps?: TargetMaps;
@@ -2685,6 +2701,10 @@ declare namespace SSM {
      * Number of days to wait after the scheduled day to run an association. For example, if you specified a cron schedule of cron(0 0 ? * THU#2 *), you could specify an offset of 3 to run the association each Sunday after the second Thursday of the month. For more information about cron schedules for associations, see Reference: Cron and rate expressions for Systems Manager in the Amazon Web Services Systems Manager User Guide.   To use offsets, you must specify the ApplyOnlyAtCronInterval parameter. This option tells the system not to run an association immediately after you create it.  
      */
     ScheduleOffset?: ScheduleOffset;
+    /**
+     * The number of hours the association can run before it is canceled. Duration applies to associations that are currently running, and any pending and in progress commands on all targets. If a target was taken offline for the association to run, it is made available again immediately, without a reboot.  The Duration parameter applies only when both these conditions are true:   The association for which you specify a duration is cancelable according to the parameters of the SSM command document or Automation runbook associated with this execution.    The command specifies the  ApplyOnlyAtCronInterval  parameter, which means that the association doesn't run immediately after it is created, but only according to the specified schedule.  
+     */
+    Duration?: Duration;
     /**
      * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps can't be specified together.
      */
@@ -3468,7 +3488,7 @@ declare namespace SSM {
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * An optional field specifying the version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and can't be changed.
+     * An optional field specifying the version of the artifact associated with the document. For example, 12.6. This value is unique across all versions of a document, and can't be changed.
      */
     VersionName?: DocumentVersionName;
   }
@@ -4317,7 +4337,7 @@ declare namespace SSM {
      */
     Owner?: DocumentOwner;
     /**
-     * An optional field specifying the version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and can't be changed.
+     * An optional field specifying the version of the artifact associated with the document. For example, 12.6. This value is unique across all versions of a document, and can't be changed.
      */
     VersionName?: DocumentVersionName;
     /**
@@ -4424,7 +4444,7 @@ declare namespace SSM {
      */
     RequireType?: RequireType;
     /**
-     * An optional field specifying the version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and can't be changed.
+     * An optional field specifying the version of the artifact associated with the document. For example, 12.6. This value is unique across all versions of a document, and can't be changed.
      */
     VersionName?: DocumentVersionName;
   }
@@ -4496,7 +4516,7 @@ declare namespace SSM {
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * The version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and can't be changed.
+     * The version of the artifact associated with the document. For example, 12.6. This value is unique across all versions of a document, and can't be changed.
      */
     VersionName?: DocumentVersionName;
     /**
@@ -4528,6 +4548,7 @@ declare namespace SSM {
   export type DocumentVersionName = string;
   export type DocumentVersionNumber = string;
   export type DryRun = boolean;
+  export type Duration = number;
   export type EffectiveInstanceAssociationMaxResults = number;
   export interface EffectivePatch {
     /**
@@ -4707,7 +4728,7 @@ declare namespace SSM {
      */
     Target?: SessionTarget;
     /**
-     * The status of the connection to the managed node. For example, 'Connected' or 'Not Connected'.
+     * The status of the connection to the managed node.
      */
     Status?: ConnectionStatus;
   }
@@ -4765,7 +4786,7 @@ declare namespace SSM {
      */
     Name: DocumentARN;
     /**
-     * An optional field specifying the version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document and can't be changed.
+     * An optional field specifying the version of the artifact associated with the document. For example, 12.6. This value is unique across all versions of a document and can't be changed.
      */
     VersionName?: DocumentVersionName;
     /**
@@ -4791,7 +4812,7 @@ declare namespace SSM {
      */
     DisplayName?: DocumentDisplayName;
     /**
-     * The version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and can't be changed.
+     * The version of the artifact associated with the document. For example, 12.6. This value is unique across all versions of a document, and can't be changed.
      */
     VersionName?: DocumentVersionName;
     /**
@@ -7603,7 +7624,7 @@ declare namespace SSM {
      */
     Type?: ParameterType;
     /**
-     * The ID of the query key used for this parameter.
+     * The alias of the Key Management Service (KMS) key used to encrypt the parameter. Applies to SecureString parameters only
      */
     KeyId?: ParameterKeyId;
     /**
@@ -7676,7 +7697,7 @@ declare namespace SSM {
      */
     Type?: ParameterType;
     /**
-     * The ID of the query key used for this parameter.
+     * The alias of the Key Management Service (KMS) key used to encrypt the parameter. Applies to SecureString parameters only.
      */
     KeyId?: ParameterKeyId;
     /**
@@ -7931,7 +7952,7 @@ declare namespace SSM {
      */
     InstalledTime: DateTime;
     /**
-     * The IDs of one or more Common Vulnerabilities and Exposure (CVE) issues that are resolved by the patch.
+     * The IDs of one or more Common Vulnerabilities and Exposure (CVE) issues that are resolved by the patch.  Currently, CVE ID values are reported only for patches with a status of Missing or Failed. 
      */
     CVEIds?: PatchCVEIds;
   }
@@ -9478,6 +9499,10 @@ declare namespace SSM {
      */
     ScheduleOffset?: ScheduleOffset;
     /**
+     * The number of hours the association can run before it is canceled. Duration applies to associations that are currently running, and any pending and in progress commands on all targets. If a target was taken offline for the association to run, it is made available again immediately, without a reboot.  The Duration parameter applies only when both these conditions are true:   The association for which you specify a duration is cancelable according to the parameters of the SSM command document or Automation runbook associated with this execution.    The command specifies the  ApplyOnlyAtCronInterval  parameter, which means that the association doesn't run immediately after it is updated, but only according to the specified schedule.  
+     */
+    Duration?: Duration;
+    /**
      * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps can't be specified together.
      */
     TargetMaps?: TargetMaps;
@@ -9559,7 +9584,7 @@ declare namespace SSM {
      */
     DisplayName?: DocumentDisplayName;
     /**
-     * An optional field specifying the version of the artifact you are updating with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and can't be changed.
+     * An optional field specifying the version of the artifact you are updating with the document. For example, 12.6. This value is unique across all versions of a document, and can't be changed.
      */
     VersionName?: DocumentVersionName;
     /**
