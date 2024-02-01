@@ -44,6 +44,14 @@ declare class IVS extends Service {
    */
   createChannel(callback?: (err: AWSError, data: IVS.Types.CreateChannelResponse) => void): Request<IVS.Types.CreateChannelResponse, AWSError>;
   /**
+   * Creates a new playback restriction policy, for constraining playback by countries and/or origins.
+   */
+  createPlaybackRestrictionPolicy(params: IVS.Types.CreatePlaybackRestrictionPolicyRequest, callback?: (err: AWSError, data: IVS.Types.CreatePlaybackRestrictionPolicyResponse) => void): Request<IVS.Types.CreatePlaybackRestrictionPolicyResponse, AWSError>;
+  /**
+   * Creates a new playback restriction policy, for constraining playback by countries and/or origins.
+   */
+  createPlaybackRestrictionPolicy(callback?: (err: AWSError, data: IVS.Types.CreatePlaybackRestrictionPolicyResponse) => void): Request<IVS.Types.CreatePlaybackRestrictionPolicyResponse, AWSError>;
+  /**
    * Creates a new recording configuration, used to enable recording to Amazon S3.  Known issue: In the us-east-1 region, if you use the Amazon Web Services CLI to create a recording configuration, it returns success even if the S3 bucket is in a different region. In this case, the state of the recording configuration is CREATE_FAILED (instead of ACTIVE). (In other regions, the CLI correctly returns failure if the bucket is in a different region.)  Workaround: Ensure that your S3 bucket is in the same region as the recording configuration. If you create a recording configuration in a different region as your S3 bucket, delete that recording configuration and create a new one with an S3 bucket from the correct region.
    */
   createRecordingConfiguration(params: IVS.Types.CreateRecordingConfigurationRequest, callback?: (err: AWSError, data: IVS.Types.CreateRecordingConfigurationResponse) => void): Request<IVS.Types.CreateRecordingConfigurationResponse, AWSError>;
@@ -76,6 +84,14 @@ declare class IVS extends Service {
    */
   deletePlaybackKeyPair(callback?: (err: AWSError, data: IVS.Types.DeletePlaybackKeyPairResponse) => void): Request<IVS.Types.DeletePlaybackKeyPairResponse, AWSError>;
   /**
+   * Deletes the specified playback restriction policy.
+   */
+  deletePlaybackRestrictionPolicy(params: IVS.Types.DeletePlaybackRestrictionPolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified playback restriction policy.
+   */
+  deletePlaybackRestrictionPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes the recording configuration for the specified ARN. If you try to delete a recording configuration that is associated with a channel, you will get an error (409 ConflictException). To avoid this, for all channels that reference the recording configuration, first use UpdateChannel to set the recordingConfigurationArn field to an empty string, then use DeleteRecordingConfiguration.
    */
   deleteRecordingConfiguration(params: IVS.Types.DeleteRecordingConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -107,6 +123,14 @@ declare class IVS extends Service {
    * Gets a specified playback authorization key pair and returns the arn and fingerprint. The privateKey held by the caller can be used to generate viewer authorization tokens, to grant viewers access to private channels. For more information, see Setting Up Private Channels in the Amazon IVS User Guide.
    */
   getPlaybackKeyPair(callback?: (err: AWSError, data: IVS.Types.GetPlaybackKeyPairResponse) => void): Request<IVS.Types.GetPlaybackKeyPairResponse, AWSError>;
+  /**
+   * Gets the specified playback restriction policy.
+   */
+  getPlaybackRestrictionPolicy(params: IVS.Types.GetPlaybackRestrictionPolicyRequest, callback?: (err: AWSError, data: IVS.Types.GetPlaybackRestrictionPolicyResponse) => void): Request<IVS.Types.GetPlaybackRestrictionPolicyResponse, AWSError>;
+  /**
+   * Gets the specified playback restriction policy.
+   */
+  getPlaybackRestrictionPolicy(callback?: (err: AWSError, data: IVS.Types.GetPlaybackRestrictionPolicyResponse) => void): Request<IVS.Types.GetPlaybackRestrictionPolicyResponse, AWSError>;
   /**
    * Gets the recording configuration for the specified ARN.
    */
@@ -163,6 +187,14 @@ declare class IVS extends Service {
    * Gets summary information about playback key pairs. For more information, see Setting Up Private Channels in the Amazon IVS User Guide.
    */
   listPlaybackKeyPairs(callback?: (err: AWSError, data: IVS.Types.ListPlaybackKeyPairsResponse) => void): Request<IVS.Types.ListPlaybackKeyPairsResponse, AWSError>;
+  /**
+   * Gets summary information about playback restriction policies.
+   */
+  listPlaybackRestrictionPolicies(params: IVS.Types.ListPlaybackRestrictionPoliciesRequest, callback?: (err: AWSError, data: IVS.Types.ListPlaybackRestrictionPoliciesResponse) => void): Request<IVS.Types.ListPlaybackRestrictionPoliciesResponse, AWSError>;
+  /**
+   * Gets summary information about playback restriction policies.
+   */
+  listPlaybackRestrictionPolicies(callback?: (err: AWSError, data: IVS.Types.ListPlaybackRestrictionPoliciesResponse) => void): Request<IVS.Types.ListPlaybackRestrictionPoliciesResponse, AWSError>;
   /**
    * Gets summary information about all recording configurations in your account, in the Amazon Web Services region where the API request is processed.
    */
@@ -251,6 +283,14 @@ declare class IVS extends Service {
    * Updates a channel's configuration. Live channels cannot be updated. You must stop the ongoing stream, update the channel, and restart the stream for the changes to take effect.
    */
   updateChannel(callback?: (err: AWSError, data: IVS.Types.UpdateChannelResponse) => void): Request<IVS.Types.UpdateChannelResponse, AWSError>;
+  /**
+   * Updates a specified playback restriction policy.
+   */
+  updatePlaybackRestrictionPolicy(params: IVS.Types.UpdatePlaybackRestrictionPolicyRequest, callback?: (err: AWSError, data: IVS.Types.UpdatePlaybackRestrictionPolicyResponse) => void): Request<IVS.Types.UpdatePlaybackRestrictionPolicyResponse, AWSError>;
+  /**
+   * Updates a specified playback restriction policy.
+   */
+  updatePlaybackRestrictionPolicy(callback?: (err: AWSError, data: IVS.Types.UpdatePlaybackRestrictionPolicyResponse) => void): Request<IVS.Types.UpdatePlaybackRestrictionPolicyResponse, AWSError>;
 }
 declare namespace IVS {
   export interface AudioConfiguration {
@@ -391,6 +431,10 @@ declare namespace IVS {
      */
     name?: ChannelName;
     /**
+     * Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables playback restriction. Default: "" (empty string, no playback restriction policy is applied).
+     */
+    playbackRestrictionPolicyArn?: ChannelPlaybackRestrictionPolicyArn;
+    /**
      * Channel playback URL.
      */
     playbackUrl?: PlaybackURL;
@@ -399,7 +443,7 @@ declare namespace IVS {
      */
     preset?: TranscodePreset;
     /**
-     * Recording-configuration ARN. A value other than an empty string indicates that recording is enabled. Default: "" (empty string, recording is disabled).
+     * Recording-configuration ARN. A valid ARN value here both specifies the ARN and enables recording. Default: "" (empty string, recording is disabled).
      */
     recordingConfigurationArn?: ChannelRecordingConfigurationArn;
     /**
@@ -416,6 +460,7 @@ declare namespace IVS {
   export type ChannelLatencyMode = "NORMAL"|"LOW"|string;
   export type ChannelList = ChannelSummary[];
   export type ChannelName = string;
+  export type ChannelPlaybackRestrictionPolicyArn = string;
   export type ChannelRecordingConfigurationArn = string;
   export interface ChannelSummary {
     /**
@@ -439,11 +484,15 @@ declare namespace IVS {
      */
     name?: ChannelName;
     /**
+     * Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables playback restriction. Default: "" (empty string, no playback restriction policy is applied).
+     */
+    playbackRestrictionPolicyArn?: ChannelPlaybackRestrictionPolicyArn;
+    /**
      * Optional transcode preset for the channel. This is selectable only for ADVANCED_HD and ADVANCED_SD channel types. For those channel types, the default preset is HIGHER_BANDWIDTH_DELIVERY. For other channel types (BASIC and STANDARD), preset is the empty string ("").
      */
     preset?: TranscodePreset;
     /**
-     * Recording-configuration ARN. A value other than an empty string indicates that recording is enabled. Default: "" (empty string, recording is disabled).
+     * Recording-configuration ARN. A valid ARN value here both specifies the ARN and enables recording. Default: "" (empty string, recording is disabled).
      */
     recordingConfigurationArn?: ChannelRecordingConfigurationArn;
     /**
@@ -475,11 +524,15 @@ declare namespace IVS {
      */
     name?: ChannelName;
     /**
+     * Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables playback restriction. Default: "" (empty string, no playback restriction policy is applied).
+     */
+    playbackRestrictionPolicyArn?: ChannelPlaybackRestrictionPolicyArn;
+    /**
      * Optional transcode preset for the channel. This is selectable only for ADVANCED_HD and ADVANCED_SD channel types. For those channel types, the default preset is HIGHER_BANDWIDTH_DELIVERY. For other channel types (BASIC and STANDARD), preset is the empty string ("").
      */
     preset?: TranscodePreset;
     /**
-     * Recording-configuration ARN. Default: "" (empty string, recording is disabled).
+     * Recording-configuration ARN. A valid ARN value here both specifies the ARN and enables recording. Default: "" (empty string, recording is disabled).
      */
     recordingConfigurationArn?: ChannelRecordingConfigurationArn;
     /**
@@ -500,6 +553,34 @@ declare namespace IVS {
      * 
      */
     streamKey?: StreamKey;
+  }
+  export interface CreatePlaybackRestrictionPolicyRequest {
+    /**
+     * A list of country codes that control geoblocking restriction. Allowed values are the officially assigned ISO 3166-1 alpha-2 codes. Default: All countries (an empty array).
+     */
+    allowedCountries?: PlaybackRestrictionPolicyAllowedCountryList;
+    /**
+     * A list of origin sites that control CORS restriction. Allowed values are the same as valid values of the Origin header defined at https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin. Default: All origins (an empty array).
+     */
+    allowedOrigins?: PlaybackRestrictionPolicyAllowedOriginList;
+    /**
+     * Whether channel playback is constrained by origin site. Default: false.
+     */
+    enableStrictOriginEnforcement?: PlaybackRestrictionPolicyEnableStrictOriginEnforcement;
+    /**
+     * Playback-restriction-policy name. The value does not need to be unique.
+     */
+    name?: PlaybackRestrictionPolicyName;
+    /**
+     * Array of 1-50 maps, each of the form string:string (key:value). See Tagging Amazon Web Services Resources for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.
+     */
+    tags?: Tags;
+  }
+  export interface CreatePlaybackRestrictionPolicyResponse {
+    /**
+     * 
+     */
+    playbackRestrictionPolicy?: PlaybackRestrictionPolicy;
   }
   export interface CreateRecordingConfigurationRequest {
     /**
@@ -563,6 +644,12 @@ declare namespace IVS {
   }
   export interface DeletePlaybackKeyPairResponse {
   }
+  export interface DeletePlaybackRestrictionPolicyRequest {
+    /**
+     * ARN of the playback restriction policy to be deleted.
+     */
+    arn: PlaybackRestrictionPolicyArn;
+  }
   export interface DeleteRecordingConfigurationRequest {
     /**
      * ARN of the recording configuration to be deleted.
@@ -604,6 +691,18 @@ declare namespace IVS {
      * 
      */
     keyPair?: PlaybackKeyPair;
+  }
+  export interface GetPlaybackRestrictionPolicyRequest {
+    /**
+     * ARN of the playback restriction policy to be returned.
+     */
+    arn: PlaybackRestrictionPolicyArn;
+  }
+  export interface GetPlaybackRestrictionPolicyResponse {
+    /**
+     * 
+     */
+    playbackRestrictionPolicy?: PlaybackRestrictionPolicy;
   }
   export interface GetRecordingConfigurationRequest {
     /**
@@ -697,6 +796,10 @@ declare namespace IVS {
      */
     filterByName?: ChannelName;
     /**
+     * Filters the channel list to match the specified policy.
+     */
+    filterByPlaybackRestrictionPolicyArn?: ChannelPlaybackRestrictionPolicyArn;
+    /**
      * Filters the channel list to match the specified recording-configuration ARN.
      */
     filterByRecordingConfigurationArn?: ChannelRecordingConfigurationArn;
@@ -738,6 +841,26 @@ declare namespace IVS {
      * If there are more key pairs than maxResults, use nextToken in the request to get the next set.
      */
     nextToken?: PaginationToken;
+  }
+  export interface ListPlaybackRestrictionPoliciesRequest {
+    /**
+     * Maximum number of policies to return. Default: 1.
+     */
+    maxResults?: MaxPlaybackRestrictionPolicyResults;
+    /**
+     * The first policy to retrieve. This is used for pagination; see the nextToken response field.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListPlaybackRestrictionPoliciesResponse {
+    /**
+     * If there are more channels than maxResults, use nextToken in the request to get the next set.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * List of the matching policies.
+     */
+    playbackRestrictionPolicies: PlaybackRestrictionPolicyList;
   }
   export interface ListRecordingConfigurationsRequest {
     /**
@@ -845,6 +968,7 @@ declare namespace IVS {
   }
   export type MaxChannelResults = number;
   export type MaxPlaybackKeyPairResults = number;
+  export type MaxPlaybackRestrictionPolicyResults = number;
   export type MaxRecordingConfigurationResults = number;
   export type MaxStreamKeyResults = number;
   export type MaxStreamResults = number;
@@ -886,6 +1010,66 @@ declare namespace IVS {
     tags?: Tags;
   }
   export type PlaybackPublicKeyMaterial = string;
+  export interface PlaybackRestrictionPolicy {
+    /**
+     * A list of country codes that control geoblocking restriction. Allowed values are the officially assigned ISO 3166-1 alpha-2 codes. Default: All countries (an empty array).
+     */
+    allowedCountries: PlaybackRestrictionPolicyAllowedCountryList;
+    /**
+     * A list of origin sites that control CORS restriction. Allowed values are the same as valid values of the Origin header defined at https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin. Default: All origins (an empty array).
+     */
+    allowedOrigins: PlaybackRestrictionPolicyAllowedOriginList;
+    /**
+     * Playback-restriction-policy ARN
+     */
+    arn: PlaybackRestrictionPolicyArn;
+    /**
+     * Whether channel playback is constrained by origin site. Default: false.
+     */
+    enableStrictOriginEnforcement?: PlaybackRestrictionPolicyEnableStrictOriginEnforcement;
+    /**
+     * Playback-restriction-policy name. The value does not need to be unique.
+     */
+    name?: PlaybackRestrictionPolicyName;
+    /**
+     * Tags attached to the resource. Array of 1-50 maps, each of the form string:string (key:value). See Tagging Amazon Web Services Resources for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.
+     */
+    tags?: Tags;
+  }
+  export type PlaybackRestrictionPolicyAllowedCountry = string;
+  export type PlaybackRestrictionPolicyAllowedCountryList = PlaybackRestrictionPolicyAllowedCountry[];
+  export type PlaybackRestrictionPolicyAllowedOrigin = string;
+  export type PlaybackRestrictionPolicyAllowedOriginList = PlaybackRestrictionPolicyAllowedOrigin[];
+  export type PlaybackRestrictionPolicyArn = string;
+  export type PlaybackRestrictionPolicyEnableStrictOriginEnforcement = boolean;
+  export type PlaybackRestrictionPolicyList = PlaybackRestrictionPolicySummary[];
+  export type PlaybackRestrictionPolicyName = string;
+  export interface PlaybackRestrictionPolicySummary {
+    /**
+     * A list of country codes that control geoblocking restriction. Allowed values are the officially assigned ISO 3166-1 alpha-2 codes. Default: All countries (an empty array).
+     */
+    allowedCountries: PlaybackRestrictionPolicyAllowedCountryList;
+    /**
+     * A list of origin sites that control CORS restriction. Allowed values are the same as valid values of the Origin header defined at https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin. Default: All origins (an empty array).
+     */
+    allowedOrigins: PlaybackRestrictionPolicyAllowedOriginList;
+    /**
+     * Playback-restriction-policy ARN
+     */
+    arn: PlaybackRestrictionPolicyArn;
+    /**
+     * Whether channel playback is constrained by origin site. Default: false.
+     */
+    enableStrictOriginEnforcement?: PlaybackRestrictionPolicyEnableStrictOriginEnforcement;
+    /**
+     * Playback-restriction-policy name. The value does not need to be unique.
+     */
+    name?: PlaybackRestrictionPolicyName;
+    /**
+     * Tags attached to the resource. Array of 1-50 maps, each of the form string:string (key:value). See Tagging Amazon Web Services Resources for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.
+     */
+    tags?: Tags;
+  }
   export type PlaybackURL = string;
   export interface PutMetadataRequest {
     /**
@@ -1249,11 +1433,15 @@ declare namespace IVS {
      */
     name?: ChannelName;
     /**
+     * Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables playback restriction. If this is set to an empty string, playback restriction policy is disabled.
+     */
+    playbackRestrictionPolicyArn?: ChannelPlaybackRestrictionPolicyArn;
+    /**
      * Optional transcode preset for the channel. This is selectable only for ADVANCED_HD and ADVANCED_SD channel types. For those channel types, the default preset is HIGHER_BANDWIDTH_DELIVERY. For other channel types (BASIC and STANDARD), preset is the empty string ("").
      */
     preset?: TranscodePreset;
     /**
-     * Recording-configuration ARN. If this is set to an empty string, recording is disabled. A value other than an empty string indicates that recording is enabled
+     * Recording-configuration ARN. A valid ARN value here both specifies the ARN and enables recording. If this is set to an empty string, recording is disabled.
      */
     recordingConfigurationArn?: ChannelRecordingConfigurationArn;
     /**
@@ -1262,7 +1450,38 @@ declare namespace IVS {
     type?: ChannelType;
   }
   export interface UpdateChannelResponse {
+    /**
+     * Object specifying the updated channel.
+     */
     channel?: Channel;
+  }
+  export interface UpdatePlaybackRestrictionPolicyRequest {
+    /**
+     * A list of country codes that control geoblocking restriction. Allowed values are the officially assigned ISO 3166-1 alpha-2 codes. Default: All countries (an empty array).
+     */
+    allowedCountries?: PlaybackRestrictionPolicyAllowedCountryList;
+    /**
+     * A list of origin sites that control CORS restriction. Allowed values are the same as valid values of the Origin header defined at https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin. Default: All origins (an empty array).
+     */
+    allowedOrigins?: PlaybackRestrictionPolicyAllowedOriginList;
+    /**
+     * ARN of the playback-restriction-policy to be updated.
+     */
+    arn: PlaybackRestrictionPolicyArn;
+    /**
+     * Whether channel playback is constrained by origin site. Default: false.
+     */
+    enableStrictOriginEnforcement?: PlaybackRestrictionPolicyEnableStrictOriginEnforcement;
+    /**
+     * Playback-restriction-policy name. The value does not need to be unique.
+     */
+    name?: PlaybackRestrictionPolicyName;
+  }
+  export interface UpdatePlaybackRestrictionPolicyResponse {
+    /**
+     * Object specifying the updated policy.
+     */
+    playbackRestrictionPolicy?: PlaybackRestrictionPolicy;
   }
   export interface VideoConfiguration {
     /**

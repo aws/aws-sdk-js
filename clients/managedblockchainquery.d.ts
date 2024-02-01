@@ -12,11 +12,11 @@ declare class ManagedBlockchainQuery extends Service {
   constructor(options?: ManagedBlockchainQuery.Types.ClientConfiguration)
   config: Config & ManagedBlockchainQuery.Types.ClientConfiguration;
   /**
-   * Gets the token balance for a batch of tokens by using the BatchGetTokenBalance action for every token in the request.  Only the native tokens BTC,ETH, and the ERC-20, ERC-721, and ERC 1155 token standards are supported. 
+   * Gets the token balance for a batch of tokens by using the BatchGetTokenBalance action for every token in the request.  Only the native tokens BTC and ETH, and the ERC-20, ERC-721, and ERC 1155 token standards are supported. 
    */
   batchGetTokenBalance(params: ManagedBlockchainQuery.Types.BatchGetTokenBalanceInput, callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.BatchGetTokenBalanceOutput) => void): Request<ManagedBlockchainQuery.Types.BatchGetTokenBalanceOutput, AWSError>;
   /**
-   * Gets the token balance for a batch of tokens by using the BatchGetTokenBalance action for every token in the request.  Only the native tokens BTC,ETH, and the ERC-20, ERC-721, and ERC 1155 token standards are supported. 
+   * Gets the token balance for a batch of tokens by using the BatchGetTokenBalance action for every token in the request.  Only the native tokens BTC and ETH, and the ERC-20, ERC-721, and ERC 1155 token standards are supported. 
    */
   batchGetTokenBalance(callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.BatchGetTokenBalanceOutput) => void): Request<ManagedBlockchainQuery.Types.BatchGetTokenBalanceOutput, AWSError>;
   /**
@@ -28,19 +28,19 @@ declare class ManagedBlockchainQuery extends Service {
    */
   getAssetContract(callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.GetAssetContractOutput) => void): Request<ManagedBlockchainQuery.Types.GetAssetContractOutput, AWSError>;
   /**
-   * Gets the balance of a specific token, including native tokens, for a given address (wallet or contract) on the blockchain.  Only the native tokens BTC,ETH, and the ERC-20, ERC-721, and ERC 1155 token standards are supported. 
+   * Gets the balance of a specific token, including native tokens, for a given address (wallet or contract) on the blockchain.  Only the native tokens BTC and ETH, and the ERC-20, ERC-721, and ERC 1155 token standards are supported. 
    */
   getTokenBalance(params: ManagedBlockchainQuery.Types.GetTokenBalanceInput, callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.GetTokenBalanceOutput) => void): Request<ManagedBlockchainQuery.Types.GetTokenBalanceOutput, AWSError>;
   /**
-   * Gets the balance of a specific token, including native tokens, for a given address (wallet or contract) on the blockchain.  Only the native tokens BTC,ETH, and the ERC-20, ERC-721, and ERC 1155 token standards are supported. 
+   * Gets the balance of a specific token, including native tokens, for a given address (wallet or contract) on the blockchain.  Only the native tokens BTC and ETH, and the ERC-20, ERC-721, and ERC 1155 token standards are supported. 
    */
   getTokenBalance(callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.GetTokenBalanceOutput) => void): Request<ManagedBlockchainQuery.Types.GetTokenBalanceOutput, AWSError>;
   /**
-   * Get the details of a transaction.
+   * Gets the details of a transaction.  This action will return transaction details for all transactions that are confirmed on the blockchain, even if they have not reached finality.  
    */
   getTransaction(params: ManagedBlockchainQuery.Types.GetTransactionInput, callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.GetTransactionOutput) => void): Request<ManagedBlockchainQuery.Types.GetTransactionOutput, AWSError>;
   /**
-   * Get the details of a transaction.
+   * Gets the details of a transaction.  This action will return transaction details for all transactions that are confirmed on the blockchain, even if they have not reached finality.  
    */
   getTransaction(callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.GetTransactionOutput) => void): Request<ManagedBlockchainQuery.Types.GetTransactionOutput, AWSError>;
   /**
@@ -60,11 +60,11 @@ declare class ManagedBlockchainQuery extends Service {
    */
   listTokenBalances(callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.ListTokenBalancesOutput) => void): Request<ManagedBlockchainQuery.Types.ListTokenBalancesOutput, AWSError>;
   /**
-   * An array of TransactionEvent objects. Each object contains details about the transaction event.
+   * An array of TransactionEvent objects. Each object contains details about the transaction event.  This action will return transaction details for all transactions that are confirmed on the blockchain, even if they have not reached finality.  
    */
   listTransactionEvents(params: ManagedBlockchainQuery.Types.ListTransactionEventsInput, callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.ListTransactionEventsOutput) => void): Request<ManagedBlockchainQuery.Types.ListTransactionEventsOutput, AWSError>;
   /**
-   * An array of TransactionEvent objects. Each object contains details about the transaction event.
+   * An array of TransactionEvent objects. Each object contains details about the transaction event.  This action will return transaction details for all transactions that are confirmed on the blockchain, even if they have not reached finality.  
    */
   listTransactionEvents(callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.ListTransactionEventsOutput) => void): Request<ManagedBlockchainQuery.Types.ListTransactionEventsOutput, AWSError>;
   /**
@@ -150,7 +150,14 @@ declare namespace ManagedBlockchainQuery {
     time?: Timestamp;
   }
   export type ChainAddress = string;
-  export type ConfirmationStatus = "FINAL"|string;
+  export type ConfirmationStatus = "FINAL"|"NONFINAL"|string;
+  export interface ConfirmationStatusFilter {
+    /**
+     * The container to determine whether to list results that have only reached  finality . Transactions that have reached finality are always part of the response.
+     */
+    include: ConfirmationStatusIncludeList;
+  }
+  export type ConfirmationStatusIncludeList = ConfirmationStatus[];
   export interface ContractFilter {
     /**
      * The blockchain network of the contract.
@@ -264,7 +271,7 @@ declare namespace ManagedBlockchainQuery {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of contracts to list.
+     * The maximum number of contracts to list. Default:100   Even if additional results can be retrieved, the request can return less results than maxResults or an empty array of results. To retrieve the next set of results, make another request with the returned nextToken value. The value of nextToken is null when there are no more results to return 
      */
     maxResults?: ListAssetContractsInputMaxResultsInteger;
   }
@@ -293,7 +300,7 @@ declare namespace ManagedBlockchainQuery {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of token balances to return.
+     * The maximum number of token balances to return. Default:100   Even if additional results can be retrieved, the request can return less results than maxResults or an empty array of results. To retrieve the next set of results, make another request with the returned nextToken value. The value of nextToken is null when there are no more results to return 
      */
     maxResults?: ListTokenBalancesInputMaxResultsInteger;
   }
@@ -322,7 +329,7 @@ declare namespace ManagedBlockchainQuery {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of transaction events to list.  Even if additional results can be retrieved, the request can return less results than maxResults or an empty array of results. To retrieve the next set of results, make another request with the returned nextToken value. The value of nextToken is null when there are no more results to return 
+     * The maximum number of transaction events to list. Default:100   Even if additional results can be retrieved, the request can return less results than maxResults or an empty array of results. To retrieve the next set of results, make another request with the returned nextToken value. The value of nextToken is null when there are no more results to return 
      */
     maxResults?: ListTransactionEventsInputMaxResultsInteger;
   }
@@ -349,7 +356,7 @@ declare namespace ManagedBlockchainQuery {
     fromBlockchainInstant?: BlockchainInstant;
     toBlockchainInstant?: BlockchainInstant;
     /**
-     * Sorts items in an ascending order if the first page starts at fromTime. Sorts items in a descending order if the first page starts at toTime.
+     * The order by which the results will be sorted. If ASCENNDING is selected, the results will be ordered by fromTime. 
      */
     sort?: ListTransactionsSort;
     /**
@@ -357,9 +364,13 @@ declare namespace ManagedBlockchainQuery {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of transactions to list.  Even if additional results can be retrieved, the request can return less results than maxResults or an empty array of results. To retrieve the next set of results, make another request with the returned nextToken value. The value of nextToken is null when there are no more results to return 
+     * The maximum number of transactions to list. Default:100   Even if additional results can be retrieved, the request can return less results than maxResults or an empty array of results. To retrieve the next set of results, make another request with the returned nextToken value. The value of nextToken is null when there are no more results to return 
      */
     maxResults?: ListTransactionsInputMaxResultsInteger;
+    /**
+     * This filter is used to include transactions in the response that haven't reached  finality . Transactions that have reached finiality are always part of the response.
+     */
+    confirmationStatusFilter?: ConfirmationStatusFilter;
   }
   export type ListTransactionsInputMaxResultsInteger = number;
   export interface ListTransactionsOutput {
@@ -402,7 +413,6 @@ declare namespace ManagedBlockchainQuery {
   export type QueryTokenStandard = "ERC20"|"ERC721"|"ERC1155"|string;
   export type QueryTransactionEventType = "ERC20_TRANSFER"|"ERC20_MINT"|"ERC20_BURN"|"ERC20_DEPOSIT"|"ERC20_WITHDRAWAL"|"ERC721_TRANSFER"|"ERC1155_TRANSFER"|"BITCOIN_VIN"|"BITCOIN_VOUT"|"INTERNAL_ETH_TRANSFER"|"ETH_TRANSFER"|string;
   export type QueryTransactionHash = string;
-  export type QueryTransactionStatus = "FINAL"|"FAILED"|string;
   export type SortOrder = "ASCENDING"|"DESCENDING"|string;
   export type String = string;
   export type Timestamp = Date;
@@ -453,7 +463,7 @@ declare namespace ManagedBlockchainQuery {
      */
     contractAddress?: ChainAddress;
     /**
-     * The unique identifier of the token.  You must specify this container with btc for the native BTC token, and eth for the native ETH token. For all other token types you must specify the tokenId in the 64 character hexadecimal tokenid format. 
+     * The unique identifier of the token.  For native tokens, use the 3 character abbreviation that best matches your token. For example, btc for Bitcoin, eth for Ether, etc. For all other token types you must specify the tokenId in the 64 character hexadecimal tokenid format. 
      */
     tokenId?: QueryTokenId;
   }
@@ -486,10 +496,6 @@ declare namespace ManagedBlockchainQuery {
      * The number of transactions in the block.
      */
     numberOfTransactions: Long;
-    /**
-     * The status of the transaction.  This property is deprecated. You must use the confirmationStatus and the executionStatus properties to determine if the status of the transaction is FINAL or FAILED.   Transactions with a status of FINAL will now have the confirmationStatus set to FINAL and the executionStatus set to SUCCEEDED.   Transactions with a status of FAILED will now have the confirmationStatus set to FINAL and the executionStatus set to FAILED.   
-     */
-    status?: QueryTransactionStatus;
     /**
      * The identifier of the transaction. It is generated whenever a transaction is verified and added to the blockchain.
      */
@@ -599,6 +605,10 @@ declare namespace ManagedBlockchainQuery {
      * The time when the transaction occurred.
      */
     transactionTimestamp: Timestamp;
+    /**
+     * Specifies whether to list transactions that have not reached Finality.
+     */
+    confirmationStatus?: ConfirmationStatus;
   }
   export type TransactionOutputList = TransactionOutputItem[];
   /**

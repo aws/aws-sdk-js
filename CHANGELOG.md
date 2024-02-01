@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1548.0-->
+<!--LATEST=2.1549.0-->
 <!--ENTRYINSERT-->
+
+## 2.1549.0
+* feature: CognitoIdentityServiceProvider: Added CreateIdentityProvider and UpdateIdentityProvider details for new SAML IdP features
+* feature: IVS: This release introduces a new resource Playback Restriction Policy which can be used to geo-restrict or domain-restrict channel stream playback when associated with a channel.  New APIs to support this resource were introduced in the form of Create/Delete/Get/Update/List.
+* feature: ManagedBlockchainQuery: This release adds support for transactions that have not reached finality. It also removes support for the status property from the response of the GetTransaction operation. You can use the confirmationStatus and executionStatus properties to determine the status of the transaction.
+* feature: MediaConvert: This release includes support for broadcast-mixed audio description tracks.
 
 ## 2.1548.0
 * feature: CloudFormation: CloudFormation IaC generator allows you to scan existing resources in your account and select resources to generate a template for a new or existing CloudFormation stack.

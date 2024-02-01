@@ -252,7 +252,7 @@ declare namespace MediaConvert {
      */
     Bitrate?: __integerMin6000Max1024000;
     /**
-     * Specify the AAC profile. For the widest player compatibility and where higher bitrates are acceptable: Keep the default profile, LC (AAC-LC) For improved audio performance at lower bitrates: Choose HEV1 or HEV2. HEV1 (AAC-HE v1) adds spectral band replication to improve speech audio at low bitrates. HEV2 (AAC-HE v2) adds parametric stereo, which optimizes for encoding stereo audio at very low bitrates.
+     * AAC Profile.
      */
     CodecProfile?: AacCodecProfile;
     /**
@@ -260,7 +260,7 @@ declare namespace MediaConvert {
      */
     CodingMode?: AacCodingMode;
     /**
-     * Specify the AAC rate control mode. For a constant bitrate: Choose CBR. Your AAC output bitrate will be equal to the value that you choose for Bitrate. For a variable bitrate: Choose VBR. Your AAC output bitrate will vary according to your audio content and the value that you choose for Bitrate quality.
+     * Rate Control Mode.
      */
     RateControlMode?: AacRateControlMode;
     /**
@@ -268,7 +268,7 @@ declare namespace MediaConvert {
      */
     RawFormat?: AacRawFormat;
     /**
-     * Specify the AAC sample rate in samples per second (Hz). Valid sample rates depend on the AAC profile and Coding mode that you select. For a list of supported sample rates, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/aac-support.html
+     * Specify the Sample rate in Hz. Valid sample rates depend on the Profile and Coding mode that you select. The following list shows valid sample rates for each Profile and Coding mode. * LC Profile, Coding mode 1.0, 2.0, and Receiver Mix: 8000, 12000, 16000, 22050, 24000, 32000, 44100, 48000, 88200, 96000. * LC Profile, Coding mode 5.1: 32000, 44100, 48000, 96000. * HEV1 Profile, Coding mode 1.0 and Receiver Mix: 22050, 24000, 32000, 44100, 48000. * HEV1 Profile, Coding mode 2.0 and 5.1: 32000, 44100, 48000, 96000. * HEV2 Profile, Coding mode 2.0: 22050, 24000, 32000, 44100, 48000.
      */
     SampleRate?: __integerMin8000Max96000;
     /**
@@ -276,7 +276,7 @@ declare namespace MediaConvert {
      */
     Specification?: AacSpecification;
     /**
-     * Specify the quality of your variable bitrate (VBR) AAC audio. For a list of approximate VBR bitrates, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/aac-support.html#aac_vbr
+     * VBR Quality Level - Only used if rate_control_mode is VBR.
      */
     VbrQuality?: AacVbrQuality;
   }
@@ -498,7 +498,7 @@ declare namespace MediaConvert {
     /**
      * Specify the language for this audio output track. The service puts this language code into your output audio track when you set Language code control to Use configured. The service also uses your specified custom language code when you set Language code control to Follow input, but your input file doesn't specify a language code. For all outputs, you can use an ISO 639-2 or ISO 639-3 code. For streaming outputs, you can also use any other code in the full RFC-5646 specification. Streaming outputs are those that are in one of the following output groups: CMAF, DASH ISO, Apple HLS, or Microsoft Smooth Streaming.
      */
-    CustomLanguageCode?: __stringPatternAZaZ23AZaZ;
+    CustomLanguageCode?: __stringPatternAZaZ23AZaZ09;
     /**
      * Indicates the language of the audio output track. The ISO 639 language specified in the 'Language Code' drop down will be used when 'Follow Input Language Code' is not selected or when 'Follow Input Language Code' is selected but there is no ISO 639 language code specified by the input.
      */
@@ -1361,7 +1361,6 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
      */
     OutputMasteringLuminance?: __integerMin0Max2147483647;
   }
-  export type ColorConversion3DLUTSettings = ColorConversion3DLUTSetting[];
   export interface ColorCorrector {
     /**
      * Brightness level.
@@ -3688,7 +3687,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
     /**
      * Use 3D LUTs to specify custom color mapping behavior when you convert from one color space into another. You can include up to 8 different 3D LUTs.
      */
-    ColorConversion3DLUTSettings?: ColorConversion3DLUTSettings;
+    ColorConversion3DLUTSettings?: __listOfColorConversion3DLUTSetting;
     /**
      * Settings for Event Signaling And Messaging (ESAM). If you don't do ad insertion, you can ignore these settings.
      */
@@ -3802,7 +3801,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
     /**
      * Use 3D LUTs to specify custom color mapping behavior when you convert from one color space into another. You can include up to 8 different 3D LUTs.
      */
-    ColorConversion3DLUTSettings?: ColorConversion3DLUTSettings;
+    ColorConversion3DLUTSettings?: __listOfColorConversion3DLUTSetting;
     /**
      * Settings for Event Signaling And Messaging (ESAM). If you don't do ad insertion, you can ignore these settings.
      */
@@ -5272,6 +5271,14 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
   }
   export interface RemixSettings {
     /**
+     * Optionally specify the channel in your input that contains your audio description audio signal. MediaConvert mixes your audio signal across all output channels, while reducing their volume according to your data stream. When you specify an audio description audio channel, you must also specify an audio description data channel. For more information about audio description signals, see the BBC WHP 198 and 051 white papers.
+     */
+    AudioDescriptionAudioChannel?: __integerMin1Max64;
+    /**
+     * Optionally specify the channel in your input that contains your audio description data stream. MediaConvert mixes your audio signal across all output channels, while reducing their volume according to your data stream. When you specify an audio description data channel, you must also specify an audio description audio channel. For more information about audio description signals, see the BBC WHP 198 and 051 white papers.
+     */
+    AudioDescriptionDataChannel?: __integerMin1Max64;
+    /**
      * Channel mapping contains the group of fields that hold the remixing value for each channel, in dB. Specify remix values to indicate how much of the content from your input audio channel you want in your output audio channels. Each instance of the InputChannels or InputChannelsFineTune array specifies these values for one output channel. Use one instance of this array for each output channel. In the console, each array corresponds to a column in the graphical depiction of the mapping matrix. The rows of the graphical matrix correspond to input channels. Valid values are within the range from -60 (mute) through 6. A setting of 0 passes the input channel unchanged to the output channel (no attenuation or amplification). Use InputChannels or InputChannelsFineTune to specify your remix values. Don't use both.
      */
     ChannelMapping?: ChannelMapping;
@@ -6483,6 +6490,7 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
   export type __listOfCaptionDescription = CaptionDescription[];
   export type __listOfCaptionDescriptionPreset = CaptionDescriptionPreset[];
   export type __listOfCmafAdditionalManifest = CmafAdditionalManifest[];
+  export type __listOfColorConversion3DLUTSetting = ColorConversion3DLUTSetting[];
   export type __listOfDashAdditionalManifest = DashAdditionalManifest[];
   export type __listOfEndpoint = Endpoint[];
   export type __listOfForceIncludeRenditionSize = ForceIncludeRenditionSize[];
@@ -6557,6 +6565,7 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
   export type __stringPatternAZaZ0902 = string;
   export type __stringPatternAZaZ0932 = string;
   export type __stringPatternAZaZ23AZaZ = string;
+  export type __stringPatternAZaZ23AZaZ09 = string;
   export type __stringPatternArnAwsUsGovAcm = string;
   export type __stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932 = string;
   export type __stringPatternDD = string;
