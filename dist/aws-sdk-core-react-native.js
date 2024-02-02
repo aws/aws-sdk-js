@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1549.0',
+	  VERSION: '2.1550.0',
 
 	  /**
 	   * @api private
@@ -10616,6 +10616,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var whichTypedArray = __webpack_require__(70);
 
+	/** @type {import('.')} */
 	module.exports = function isTypedArray(value) {
 		return !!whichTypedArray(value);
 	};

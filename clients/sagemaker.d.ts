@@ -69,11 +69,11 @@ declare class SageMaker extends Service {
    */
   createApp(callback?: (err: AWSError, data: SageMaker.Types.CreateAppResponse) => void): Request<SageMaker.Types.CreateAppResponse, AWSError>;
   /**
-   * Creates a configuration for running a SageMaker image as a KernelGateway app. The configuration specifies the Amazon Elastic File System (EFS) storage volume on the image, and a list of the kernels in the image.
+   * Creates a configuration for running a SageMaker image as a KernelGateway app. The configuration specifies the Amazon Elastic File System storage volume on the image, and a list of the kernels in the image.
    */
   createAppImageConfig(params: SageMaker.Types.CreateAppImageConfigRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateAppImageConfigResponse) => void): Request<SageMaker.Types.CreateAppImageConfigResponse, AWSError>;
   /**
-   * Creates a configuration for running a SageMaker image as a KernelGateway app. The configuration specifies the Amazon Elastic File System (EFS) storage volume on the image, and a list of the kernels in the image.
+   * Creates a configuration for running a SageMaker image as a KernelGateway app. The configuration specifies the Amazon Elastic File System storage volume on the image, and a list of the kernels in the image.
    */
   createAppImageConfig(callback?: (err: AWSError, data: SageMaker.Types.CreateAppImageConfigResponse) => void): Request<SageMaker.Types.CreateAppImageConfigResponse, AWSError>;
   /**
@@ -245,19 +245,19 @@ declare class SageMaker extends Service {
    */
   createHyperParameterTuningJob(callback?: (err: AWSError, data: SageMaker.Types.CreateHyperParameterTuningJobResponse) => void): Request<SageMaker.Types.CreateHyperParameterTuningJobResponse, AWSError>;
   /**
-   * Creates a custom SageMaker image. A SageMaker image is a set of image versions. Each image version represents a container image stored in Amazon Elastic Container Registry (ECR). For more information, see Bring your own SageMaker image.
+   * Creates a custom SageMaker image. A SageMaker image is a set of image versions. Each image version represents a container image stored in Amazon ECR. For more information, see Bring your own SageMaker image.
    */
   createImage(params: SageMaker.Types.CreateImageRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateImageResponse) => void): Request<SageMaker.Types.CreateImageResponse, AWSError>;
   /**
-   * Creates a custom SageMaker image. A SageMaker image is a set of image versions. Each image version represents a container image stored in Amazon Elastic Container Registry (ECR). For more information, see Bring your own SageMaker image.
+   * Creates a custom SageMaker image. A SageMaker image is a set of image versions. Each image version represents a container image stored in Amazon ECR. For more information, see Bring your own SageMaker image.
    */
   createImage(callback?: (err: AWSError, data: SageMaker.Types.CreateImageResponse) => void): Request<SageMaker.Types.CreateImageResponse, AWSError>;
   /**
-   * Creates a version of the SageMaker image specified by ImageName. The version represents the Amazon Elastic Container Registry (ECR) container image specified by BaseImage.
+   * Creates a version of the SageMaker image specified by ImageName. The version represents the Amazon ECR container image specified by BaseImage.
    */
   createImageVersion(params: SageMaker.Types.CreateImageVersionRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateImageVersionResponse) => void): Request<SageMaker.Types.CreateImageVersionResponse, AWSError>;
   /**
-   * Creates a version of the SageMaker image specified by ImageName. The version represents the Amazon Elastic Container Registry (ECR) container image specified by BaseImage.
+   * Creates a version of the SageMaker image specified by ImageName. The version represents the Amazon ECR container image specified by BaseImage.
    */
   createImageVersion(callback?: (err: AWSError, data: SageMaker.Types.CreateImageVersionResponse) => void): Request<SageMaker.Types.CreateImageVersionResponse, AWSError>;
   /**
@@ -373,11 +373,11 @@ declare class SageMaker extends Service {
    */
   createNotebookInstance(callback?: (err: AWSError, data: SageMaker.Types.CreateNotebookInstanceOutput) => void): Request<SageMaker.Types.CreateNotebookInstanceOutput, AWSError>;
   /**
-   * Creates a lifecycle configuration that you can associate with a notebook instance. A lifecycle configuration is a collection of shell scripts that run when you create or start a notebook instance. Each lifecycle configuration script has a limit of 16384 characters. The value of the $PATH environment variable that is available to both scripts is /sbin:bin:/usr/sbin:/usr/bin. View CloudWatch Logs for notebook instance lifecycle configurations in log group /aws/sagemaker/NotebookInstances in log stream [notebook-instance-name]/[LifecycleConfigHook]. Lifecycle configuration scripts cannot run for longer than 5 minutes. If a script runs for longer than 5 minutes, it fails and the notebook instance is not created or started. For information about notebook instance lifestyle configurations, see Step 2.1: (Optional) Customize a Notebook Instance.
+   * Creates a lifecycle configuration that you can associate with a notebook instance. A lifecycle configuration is a collection of shell scripts that run when you create or start a notebook instance. Each lifecycle configuration script has a limit of 16384 characters. The value of the $PATH environment variable that is available to both scripts is /sbin:bin:/usr/sbin:/usr/bin. View Amazon CloudWatch Logs for notebook instance lifecycle configurations in log group /aws/sagemaker/NotebookInstances in log stream [notebook-instance-name]/[LifecycleConfigHook]. Lifecycle configuration scripts cannot run for longer than 5 minutes. If a script runs for longer than 5 minutes, it fails and the notebook instance is not created or started. For information about notebook instance lifestyle configurations, see Step 2.1: (Optional) Customize a Notebook Instance.
    */
   createNotebookInstanceLifecycleConfig(params: SageMaker.Types.CreateNotebookInstanceLifecycleConfigInput, callback?: (err: AWSError, data: SageMaker.Types.CreateNotebookInstanceLifecycleConfigOutput) => void): Request<SageMaker.Types.CreateNotebookInstanceLifecycleConfigOutput, AWSError>;
   /**
-   * Creates a lifecycle configuration that you can associate with a notebook instance. A lifecycle configuration is a collection of shell scripts that run when you create or start a notebook instance. Each lifecycle configuration script has a limit of 16384 characters. The value of the $PATH environment variable that is available to both scripts is /sbin:bin:/usr/sbin:/usr/bin. View CloudWatch Logs for notebook instance lifecycle configurations in log group /aws/sagemaker/NotebookInstances in log stream [notebook-instance-name]/[LifecycleConfigHook]. Lifecycle configuration scripts cannot run for longer than 5 minutes. If a script runs for longer than 5 minutes, it fails and the notebook instance is not created or started. For information about notebook instance lifestyle configurations, see Step 2.1: (Optional) Customize a Notebook Instance.
+   * Creates a lifecycle configuration that you can associate with a notebook instance. A lifecycle configuration is a collection of shell scripts that run when you create or start a notebook instance. Each lifecycle configuration script has a limit of 16384 characters. The value of the $PATH environment variable that is available to both scripts is /sbin:bin:/usr/sbin:/usr/bin. View Amazon CloudWatch Logs for notebook instance lifecycle configurations in log group /aws/sagemaker/NotebookInstances in log stream [notebook-instance-name]/[LifecycleConfigHook]. Lifecycle configuration scripts cannot run for longer than 5 minutes. If a script runs for longer than 5 minutes, it fails and the notebook instance is not created or started. For information about notebook instance lifestyle configurations, see Step 2.1: (Optional) Customize a Notebook Instance.
    */
   createNotebookInstanceLifecycleConfig(callback?: (err: AWSError, data: SageMaker.Types.CreateNotebookInstanceLifecycleConfigOutput) => void): Request<SageMaker.Types.CreateNotebookInstanceLifecycleConfigOutput, AWSError>;
   /**
@@ -389,11 +389,11 @@ declare class SageMaker extends Service {
    */
   createPipeline(callback?: (err: AWSError, data: SageMaker.Types.CreatePipelineResponse) => void): Request<SageMaker.Types.CreatePipelineResponse, AWSError>;
   /**
-   * Creates a URL for a specified UserProfile in a Domain. When accessed in a web browser, the user will be automatically signed in to the domain, and granted access to all of the Apps and files associated with the Domain's Amazon Elastic File System (EFS) volume. This operation can only be called when the authentication mode equals IAM.  The IAM role or user passed to this API defines the permissions to access the app. Once the presigned URL is created, no additional permission is required to access this URL. IAM authorization policies for this API are also enforced for every HTTP request and WebSocket frame that attempts to connect to the app. You can restrict access to this API and to the URL that it returns to a list of IP addresses, Amazon VPCs or Amazon VPC Endpoints that you specify. For more information, see Connect to Amazon SageMaker Studio Through an Interface VPC Endpoint .  The URL that you get from a call to CreatePresignedDomainUrl has a default timeout of 5 minutes. You can configure this value using ExpiresInSeconds. If you try to use the URL after the timeout limit expires, you are directed to the Amazon Web Services console sign-in page. 
+   * Creates a URL for a specified UserProfile in a Domain. When accessed in a web browser, the user will be automatically signed in to the domain, and granted access to all of the Apps and files associated with the Domain's Amazon Elastic File System volume. This operation can only be called when the authentication mode equals IAM.  The IAM role or user passed to this API defines the permissions to access the app. Once the presigned URL is created, no additional permission is required to access this URL. IAM authorization policies for this API are also enforced for every HTTP request and WebSocket frame that attempts to connect to the app. You can restrict access to this API and to the URL that it returns to a list of IP addresses, Amazon VPCs or Amazon VPC Endpoints that you specify. For more information, see Connect to Amazon SageMaker Studio Through an Interface VPC Endpoint .  The URL that you get from a call to CreatePresignedDomainUrl has a default timeout of 5 minutes. You can configure this value using ExpiresInSeconds. If you try to use the URL after the timeout limit expires, you are directed to the Amazon Web Services console sign-in page. 
    */
   createPresignedDomainUrl(params: SageMaker.Types.CreatePresignedDomainUrlRequest, callback?: (err: AWSError, data: SageMaker.Types.CreatePresignedDomainUrlResponse) => void): Request<SageMaker.Types.CreatePresignedDomainUrlResponse, AWSError>;
   /**
-   * Creates a URL for a specified UserProfile in a Domain. When accessed in a web browser, the user will be automatically signed in to the domain, and granted access to all of the Apps and files associated with the Domain's Amazon Elastic File System (EFS) volume. This operation can only be called when the authentication mode equals IAM.  The IAM role or user passed to this API defines the permissions to access the app. Once the presigned URL is created, no additional permission is required to access this URL. IAM authorization policies for this API are also enforced for every HTTP request and WebSocket frame that attempts to connect to the app. You can restrict access to this API and to the URL that it returns to a list of IP addresses, Amazon VPCs or Amazon VPC Endpoints that you specify. For more information, see Connect to Amazon SageMaker Studio Through an Interface VPC Endpoint .  The URL that you get from a call to CreatePresignedDomainUrl has a default timeout of 5 minutes. You can configure this value using ExpiresInSeconds. If you try to use the URL after the timeout limit expires, you are directed to the Amazon Web Services console sign-in page. 
+   * Creates a URL for a specified UserProfile in a Domain. When accessed in a web browser, the user will be automatically signed in to the domain, and granted access to all of the Apps and files associated with the Domain's Amazon Elastic File System volume. This operation can only be called when the authentication mode equals IAM.  The IAM role or user passed to this API defines the permissions to access the app. Once the presigned URL is created, no additional permission is required to access this URL. IAM authorization policies for this API are also enforced for every HTTP request and WebSocket frame that attempts to connect to the app. You can restrict access to this API and to the URL that it returns to a list of IP addresses, Amazon VPCs or Amazon VPC Endpoints that you specify. For more information, see Connect to Amazon SageMaker Studio Through an Interface VPC Endpoint .  The URL that you get from a call to CreatePresignedDomainUrl has a default timeout of 5 minutes. You can configure this value using ExpiresInSeconds. If you try to use the URL after the timeout limit expires, you are directed to the Amazon Web Services console sign-in page. 
    */
   createPresignedDomainUrl(callback?: (err: AWSError, data: SageMaker.Types.CreatePresignedDomainUrlResponse) => void): Request<SageMaker.Types.CreatePresignedDomainUrlResponse, AWSError>;
   /**
@@ -421,11 +421,11 @@ declare class SageMaker extends Service {
    */
   createProject(callback?: (err: AWSError, data: SageMaker.Types.CreateProjectOutput) => void): Request<SageMaker.Types.CreateProjectOutput, AWSError>;
   /**
-   * Creates a space used for real time collaboration in a Domain.
+   * Creates a space used for real time collaboration in a domain.
    */
   createSpace(params: SageMaker.Types.CreateSpaceRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateSpaceResponse) => void): Request<SageMaker.Types.CreateSpaceResponse, AWSError>;
   /**
-   * Creates a space used for real time collaboration in a Domain.
+   * Creates a space used for real time collaboration in a domain.
    */
   createSpace(callback?: (err: AWSError, data: SageMaker.Types.CreateSpaceResponse) => void): Request<SageMaker.Types.CreateSpaceResponse, AWSError>;
   /**
@@ -469,11 +469,11 @@ declare class SageMaker extends Service {
    */
   createTrialComponent(callback?: (err: AWSError, data: SageMaker.Types.CreateTrialComponentResponse) => void): Request<SageMaker.Types.CreateTrialComponentResponse, AWSError>;
   /**
-   * Creates a user profile. A user profile represents a single user within a domain, and is the main way to reference a "person" for the purposes of sharing, reporting, and other user-oriented features. This entity is created when a user onboards to a domain. If an administrator invites a person by email or imports them from IAM Identity Center, a user profile is automatically created. A user profile is the primary holder of settings for an individual user and has a reference to the user's private Amazon Elastic File System (EFS) home directory. 
+   * Creates a user profile. A user profile represents a single user within a domain, and is the main way to reference a "person" for the purposes of sharing, reporting, and other user-oriented features. This entity is created when a user onboards to a domain. If an administrator invites a person by email or imports them from IAM Identity Center, a user profile is automatically created. A user profile is the primary holder of settings for an individual user and has a reference to the user's private Amazon Elastic File System home directory. 
    */
   createUserProfile(params: SageMaker.Types.CreateUserProfileRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateUserProfileResponse) => void): Request<SageMaker.Types.CreateUserProfileResponse, AWSError>;
   /**
-   * Creates a user profile. A user profile represents a single user within a domain, and is the main way to reference a "person" for the purposes of sharing, reporting, and other user-oriented features. This entity is created when a user onboards to a domain. If an administrator invites a person by email or imports them from IAM Identity Center, a user profile is automatically created. A user profile is the primary holder of settings for an individual user and has a reference to the user's private Amazon Elastic File System (EFS) home directory. 
+   * Creates a user profile. A user profile represents a single user within a domain, and is the main way to reference a "person" for the purposes of sharing, reporting, and other user-oriented features. This entity is created when a user onboards to a domain. If an administrator invites a person by email or imports them from IAM Identity Center, a user profile is automatically created. A user profile is the primary holder of settings for an individual user and has a reference to the user's private Amazon Elastic File System home directory. 
    */
   createUserProfile(callback?: (err: AWSError, data: SageMaker.Types.CreateUserProfileResponse) => void): Request<SageMaker.Types.CreateUserProfileResponse, AWSError>;
   /**
@@ -2977,7 +2977,7 @@ declare namespace SageMaker {
   export type AppImageConfigArn = string;
   export interface AppImageConfigDetails {
     /**
-     * The Amazon Resource Name (ARN) of the AppImageConfig.
+     * The ARN of the AppImageConfig.
      */
     AppImageConfigArn?: AppImageConfigArn;
     /**
@@ -3484,7 +3484,7 @@ declare namespace SageMaker {
   export type AutoMLNameContains = string;
   export interface AutoMLOutputDataConfig {
     /**
-     * The Key Management Service (KMS) encryption key ID.
+     * The Key Management Service encryption key ID.
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -3842,6 +3842,10 @@ declare namespace SageMaker {
      * The settings for document querying.
      */
     KendraSettings?: KendraSettings;
+    /**
+     * The generative AI settings for the SageMaker Canvas application.
+     */
+    GenerativeAiSettings?: GenerativeAiSettings;
   }
   export interface CapacitySize {
     /**
@@ -4698,7 +4702,7 @@ declare namespace SageMaker {
   }
   export interface CreateAppImageConfigResponse {
     /**
-     * The Amazon Resource Name (ARN) of the AppImageConfig.
+     * The ARN of the AppImageConfig.
      */
     AppImageConfigArn?: AppImageConfigArn;
   }
@@ -4781,7 +4785,7 @@ declare namespace SageMaker {
      */
     OutputDataConfig: AutoMLOutputDataConfig;
     /**
-     * Defines the type of supervised learning problem available for the candidates. For more information, see  Amazon SageMaker Autopilot problem types.
+     * Defines the type of supervised learning problem available for the candidates. For more information, see  SageMaker Autopilot problem types.
      */
     ProblemType?: ProblemType;
     /**
@@ -5460,7 +5464,7 @@ declare namespace SageMaker {
   }
   export interface CreateImageVersionRequest {
     /**
-     * The registry path of the container image to use as the starting point for this version. The path is an Amazon Elastic Container Registry (ECR) URI in the following format:  &lt;acct-id&gt;.dkr.ecr.&lt;region&gt;.amazonaws.com/&lt;repo-name[:tag] or [@digest]&gt; 
+     * The registry path of the container image to use as the starting point for this version. The path is an Amazon ECR URI in the following format:  &lt;acct-id&gt;.dkr.ecr.&lt;region&gt;.amazonaws.com/&lt;repo-name[:tag] or [@digest]&gt; 
      */
     BaseImage: ImageBaseImage;
     /**
@@ -6275,7 +6279,7 @@ declare namespace SageMaker {
   }
   export interface CreateSpaceRequest {
     /**
-     * The ID of the associated Domain.
+     * The ID of the associated domain.
      */
     DomainId: DomainId;
     /**
@@ -6950,7 +6954,7 @@ declare namespace SageMaker {
      */
     ExecutionRole?: RoleArn;
     /**
-     * The security group IDs for the Amazon Virtual Private Cloud that the space uses for communication.
+     * The security group IDs for the Amazon VPC that the space uses for communication.
      */
     SecurityGroups?: SecurityGroupIds;
     JupyterServerAppSettings?: JupyterServerAppSettings;
@@ -7327,7 +7331,7 @@ declare namespace SageMaker {
   }
   export interface DeleteSpaceRequest {
     /**
-     * The ID of the associated Domain.
+     * The ID of the associated domain.
      */
     DomainId: DomainId;
     /**
@@ -7610,7 +7614,7 @@ declare namespace SageMaker {
   }
   export interface DescribeAppImageConfigResponse {
     /**
-     * The Amazon Resource Name (ARN) of the AppImageConfig.
+     * The ARN of the AppImageConfig.
      */
     AppImageConfigArn?: AppImageConfigArn;
     /**
@@ -7773,7 +7777,7 @@ declare namespace SageMaker {
      */
     OutputDataConfig: AutoMLOutputDataConfig;
     /**
-     * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that has read permission to the input data location and write permission to the output data location in Amazon S3.
+     * The ARN of the IAM role that has read permission to the input data location and write permission to the output data location in Amazon S3.
      */
     RoleArn: RoleArn;
     /**
@@ -7865,7 +7869,7 @@ declare namespace SageMaker {
      */
     OutputDataConfig: AutoMLOutputDataConfig;
     /**
-     * The ARN of the Identity and Access Management role that has read permission to the input data location and write permission to the output data location in Amazon S3.
+     * The ARN of the IAM role that has read permission to the input data location and write permission to the output data location in Amazon S3.
      */
     RoleArn: RoleArn;
     /**
@@ -10336,7 +10340,7 @@ declare namespace SageMaker {
   }
   export interface DescribeSpaceRequest {
     /**
-     * The ID of the associated Domain.
+     * The ID of the associated domain.
      */
     DomainId: DomainId;
     /**
@@ -10346,7 +10350,7 @@ declare namespace SageMaker {
   }
   export interface DescribeSpaceResponse {
     /**
-     * The ID of the associated Domain.
+     * The ID of the associated domain.
      */
     DomainId?: DomainId;
     /**
@@ -10358,7 +10362,7 @@ declare namespace SageMaker {
      */
     SpaceName?: SpaceName;
     /**
-     * The ID of the space's profile in the Amazon Elastic File System volume.
+     * The ID of the space's profile in the Amazon EFS volume.
      */
     HomeEfsFileSystemUid?: EfsUid;
     /**
@@ -10839,7 +10843,7 @@ declare namespace SageMaker {
      */
     UserProfileName?: UserProfileName;
     /**
-     * The ID of the user's profile in the Amazon Elastic File System (EFS) volume.
+     * The ID of the user's profile in the Amazon Elastic File System volume.
      */
     HomeEfsFileSystemUid?: EfsUid;
     /**
@@ -12229,6 +12233,12 @@ declare namespace SageMaker {
   export type Framework = "TENSORFLOW"|"KERAS"|"MXNET"|"ONNX"|"PYTORCH"|"XGBOOST"|"TFLITE"|"DARKNET"|"SKLEARN"|string;
   export type FrameworkVersion = string;
   export type GenerateCandidateDefinitionsOnly = boolean;
+  export interface GenerativeAiSettings {
+    /**
+     * The ARN of an Amazon Web Services IAM role that allows fine-tuning of large language models (LLMs) in Amazon Bedrock. The IAM role should have Amazon S3 read and write permissions, as well as a trust relationship that establishes bedrock.amazonaws.com as a service principal.
+     */
+    AmazonBedrockRoleArn?: RoleArn;
+  }
   export interface GetDeviceFleetReportRequest {
     /**
      * The name of the fleet.
@@ -13044,7 +13054,7 @@ declare namespace SageMaker {
      */
     MinResource?: HyperbandStrategyMinResource;
     /**
-     * The maximum number of resources (such as epochs) that can be used by a training job launched by a hyperparameter tuning job. Once a job reaches the MaxResource value, it is stopped. If a value for MaxResource is not provided, and Hyperband is selected as the hyperparameter tuning strategy, HyperbandTrainingJ attempts to infer MaxResource from the following keys (if present) in StaticsHyperParameters:    epochs     numepochs     n-epochs     n_epochs     num_epochs    If HyperbandStrategyConfig is unable to infer a value for MaxResource, it generates a validation error. The maximum value is 20,000 epochs. All metrics that correspond to an objective metric are used to derive early stopping decisions. For distributive training jobs, ensure that duplicate metrics are not printed in the logs across the individual nodes in a training job. If multiple nodes are publishing duplicate or incorrect metrics, training jobs may make an incorrect stopping decision and stop the job prematurely. 
+     * The maximum number of resources (such as epochs) that can be used by a training job launched by a hyperparameter tuning job. Once a job reaches the MaxResource value, it is stopped. If a value for MaxResource is not provided, and Hyperband is selected as the hyperparameter tuning strategy, HyperbandTraining attempts to infer MaxResource from the following keys (if present) in StaticsHyperParameters:    epochs     numepochs     n-epochs     n_epochs     num_epochs    If HyperbandStrategyConfig is unable to infer a value for MaxResource, it generates a validation error. The maximum value is 20,000 epochs. All metrics that correspond to an objective metric are used to derive early stopping decisions. For distributed training jobs, ensure that duplicate metrics are not printed in the logs across the individual nodes in a training job. If multiple nodes are publishing duplicate or incorrect metrics, training jobs may make an incorrect stopping decision and stop the job prematurely. 
      */
     MaxResource?: HyperbandStrategyMaxResource;
   }
@@ -13738,7 +13748,7 @@ declare namespace SageMaker {
   export type KernelDisplayName = string;
   export interface KernelGatewayAppSettings {
     /**
-     * The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app.  The Amazon SageMaker Studio UI does not use the default instance type value set here. The default instance type set here is used when Apps are created using the Amazon Web Services Command Line Interface or Amazon Web Services CloudFormation and the instance type parameter value is not passed. 
+     * The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app.  The Amazon SageMaker Studio UI does not use the default instance type value set here. The default instance type set here is used when Apps are created using the CLI or CloudFormation and the instance type parameter value is not passed. 
      */
     DefaultResourceSpec?: ResourceSpec;
     /**
@@ -13756,7 +13766,7 @@ declare namespace SageMaker {
      */
     KernelSpecs: KernelSpecs;
     /**
-     * The Amazon Elastic File System (EFS) storage configuration for a SageMaker image.
+     * The Amazon Elastic File System storage configuration for a SageMaker image.
      */
     FileSystemConfig?: FileSystemConfig;
   }
@@ -16837,7 +16847,7 @@ declare namespace SageMaker {
      */
     SortBy?: SpaceSortKey;
     /**
-     * A parameter to search for the Domain ID.
+     * A parameter to search for the domain ID.
      */
     DomainIdEquals?: DomainId;
     /**
@@ -21002,7 +21012,7 @@ declare namespace SageMaker {
   export type ResponseMIMETypes = ResponseMIMEType[];
   export interface RetentionPolicy {
     /**
-     * The default is Retain, which specifies to keep the data stored on the EFS volume. Specify Delete to delete the data stored on the EFS volume.
+     * The default is Retain, which specifies to keep the data stored on the Amazon EFS volume. Specify Delete to delete the data stored on the Amazon EFS volume.
      */
     HomeEfsFileSystem?: RetentionType;
   }
@@ -21491,7 +21501,7 @@ declare namespace SageMaker {
   }
   export interface SpaceDetails {
     /**
-     * The ID of the associated Domain.
+     * The ID of the associated domain.
      */
     DomainId?: DomainId;
     /**
@@ -21912,7 +21922,7 @@ declare namespace SageMaker {
      */
     GenerateCandidateDefinitionsOnly?: GenerateCandidateDefinitionsOnly;
     /**
-     * The type of supervised learning problem available for the model candidates of the AutoML job V2. For more information, see  Amazon SageMaker Autopilot problem types.  You must either specify the type of supervised learning problem in ProblemType and provide the AutoMLJobObjective metric, or none at all. 
+     * The type of supervised learning problem available for the model candidates of the AutoML job V2. For more information, see  SageMaker Autopilot problem types.  You must either specify the type of supervised learning problem in ProblemType and provide the AutoMLJobObjective metric, or none at all. 
      */
     ProblemType?: ProblemType;
     /**
@@ -21926,7 +21936,7 @@ declare namespace SageMaker {
   }
   export interface TabularResolvedAttributes {
     /**
-     * The type of supervised learning problem available for the model candidates of the AutoML job V2 (Binary Classification, Multiclass Classification, Regression). For more information, see  Amazon SageMaker Autopilot problem types.
+     * The type of supervised learning problem available for the model candidates of the AutoML job V2 (Binary Classification, Multiclass Classification, Regression). For more information, see  SageMaker Autopilot problem types.
      */
     ProblemType?: ProblemType;
   }
@@ -23139,7 +23149,7 @@ declare namespace SageMaker {
   }
   export interface UpdateAppImageConfigResponse {
     /**
-     * The Amazon Resource Name (ARN) for the AppImageConfig.
+     * The ARN for the AppImageConfig.
      */
     AppImageConfigArn?: AppImageConfigArn;
   }
@@ -23273,7 +23283,7 @@ declare namespace SageMaker {
      */
     AppSecurityGroupManagement?: AppSecurityGroupManagement;
     /**
-     * The default settings used to create a space within the Domain.
+     * The default settings used to create a space within the domain.
      */
     DefaultSpaceSettings?: DefaultSpaceSettings;
     /**
@@ -23836,7 +23846,7 @@ declare namespace SageMaker {
   }
   export interface UpdateSpaceRequest {
     /**
-     * The ID of the associated Domain.
+     * The ID of the associated domain.
      */
     DomainId: DomainId;
     /**
@@ -24176,7 +24186,7 @@ declare namespace SageMaker {
   export type Vertices = Vertex[];
   export interface VisibilityConditions {
     /**
-     * The key for that specifies the tag that you're using to filter the search results. The key must start with Tags..
+     * The key that specifies the tag that you're using to filter the search results. It must be in the following format: Tags.&lt;key&gt;/EqualsIfExists.
      */
     Key?: VisibilityConditionsKey;
     /**

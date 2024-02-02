@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "eks pod identity",
-  "description": "adds support to use eks pod identity"
-}

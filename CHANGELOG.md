@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1549.0-->
+<!--LATEST=2.1550.0-->
 <!--ENTRYINSERT-->
+
+## 2.1550.0
+* bugfix: eks pod identity: adds support to use eks pod identity
+* feature: SageMaker: Amazon SageMaker Canvas adds GenerativeAiSettings support for CanvasAppSettings.
 
 ## 2.1549.0
 * feature: CognitoIdentityServiceProvider: Added CreateIdentityProvider and UpdateIdentityProvider details for new SAML IdP features
