@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1550.0-->
+<!--LATEST=2.1551.0-->
 <!--ENTRYINSERT-->
+
+## 2.1551.0
+* feature: Glue: Introduce Catalog Encryption Role within Glue Data Catalog Settings. Introduce SASL/PLAIN as an authentication method for Glue Kafka connections
 
 ## 2.1550.0
 * bugfix: eks pod identity: adds support to use eks pod identity
