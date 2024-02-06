@@ -268,6 +268,14 @@ declare class AppSync extends Service {
    */
   getGraphqlApi(callback?: (err: AWSError, data: AppSync.Types.GetGraphqlApiResponse) => void): Request<AppSync.Types.GetGraphqlApiResponse, AWSError>;
   /**
+   * Retrieves the list of environmental variable key-value pairs associated with an API by its ID value.
+   */
+  getGraphqlApiEnvironmentVariables(params: AppSync.Types.GetGraphqlApiEnvironmentVariablesRequest, callback?: (err: AWSError, data: AppSync.Types.GetGraphqlApiEnvironmentVariablesResponse) => void): Request<AppSync.Types.GetGraphqlApiEnvironmentVariablesResponse, AWSError>;
+  /**
+   * Retrieves the list of environmental variable key-value pairs associated with an API by its ID value.
+   */
+  getGraphqlApiEnvironmentVariables(callback?: (err: AWSError, data: AppSync.Types.GetGraphqlApiEnvironmentVariablesResponse) => void): Request<AppSync.Types.GetGraphqlApiEnvironmentVariablesResponse, AWSError>;
+  /**
    * Retrieves the introspection schema for a GraphQL API.
    */
   getIntrospectionSchema(params: AppSync.Types.GetIntrospectionSchemaRequest, callback?: (err: AWSError, data: AppSync.Types.GetIntrospectionSchemaResponse) => void): Request<AppSync.Types.GetIntrospectionSchemaResponse, AWSError>;
@@ -395,6 +403,14 @@ declare class AppSync extends Service {
    * Lists Type objects by the source API association ID.
    */
   listTypesByAssociation(callback?: (err: AWSError, data: AppSync.Types.ListTypesByAssociationResponse) => void): Request<AppSync.Types.ListTypesByAssociationResponse, AWSError>;
+  /**
+   * Creates a list of environmental variables in an API by its ID value.  When creating an environmental variable, it must follow the constraints below:   Both JavaScript and VTL templates support environmental variables.   Environmental variables are not evaluated before function invocation.   Environmental variables only support string values.   Any defined value in an environmental variable is considered a string literal and not expanded.   Variable evaluations should ideally be performed in the function code.   When creating an environmental variable key-value pair, it must follow the additional constraints below:   Keys must begin with a letter.   Keys must be at least two characters long.   Keys can only contain letters, numbers, and the underscore character (_).   Values can be up to 512 characters long.   You can configure up to 50 key-value pairs in a GraphQL API.   You can create a list of environmental variables by adding it to the environmentVariables payload as a list in the format {"key1":"value1","key2":"value2", …}. Note that each call of the PutGraphqlApiEnvironmentVariables action will result in the overwriting of the existing environmental variable list of that API. This means the existing environmental variables will be lost. To avoid this, you must include all existing and new environmental variables in the list each time you call this action.
+   */
+  putGraphqlApiEnvironmentVariables(params: AppSync.Types.PutGraphqlApiEnvironmentVariablesRequest, callback?: (err: AWSError, data: AppSync.Types.PutGraphqlApiEnvironmentVariablesResponse) => void): Request<AppSync.Types.PutGraphqlApiEnvironmentVariablesResponse, AWSError>;
+  /**
+   * Creates a list of environmental variables in an API by its ID value.  When creating an environmental variable, it must follow the constraints below:   Both JavaScript and VTL templates support environmental variables.   Environmental variables are not evaluated before function invocation.   Environmental variables only support string values.   Any defined value in an environmental variable is considered a string literal and not expanded.   Variable evaluations should ideally be performed in the function code.   When creating an environmental variable key-value pair, it must follow the additional constraints below:   Keys must begin with a letter.   Keys must be at least two characters long.   Keys can only contain letters, numbers, and the underscore character (_).   Values can be up to 512 characters long.   You can configure up to 50 key-value pairs in a GraphQL API.   You can create a list of environmental variables by adding it to the environmentVariables payload as a list in the format {"key1":"value1","key2":"value2", …}. Note that each call of the PutGraphqlApiEnvironmentVariables action will result in the overwriting of the existing environmental variable list of that API. This means the existing environmental variables will be lost. To avoid this, you must include all existing and new environmental variables in the list each time you call this action.
+   */
+  putGraphqlApiEnvironmentVariables(callback?: (err: AWSError, data: AppSync.Types.PutGraphqlApiEnvironmentVariablesResponse) => void): Request<AppSync.Types.PutGraphqlApiEnvironmentVariablesResponse, AWSError>;
   /**
    * Creates a new introspection. Returns the introspectionId of the new introspection after its creation. 
    */
@@ -1412,6 +1428,9 @@ declare namespace AppSync {
      */
     awsRegion: String;
   }
+  export type EnvironmentVariableKey = string;
+  export type EnvironmentVariableMap = {[key: string]: EnvironmentVariableValue};
+  export type EnvironmentVariableValue = string;
   export interface ErrorDetail {
     /**
      * The error payload.
@@ -1650,6 +1669,18 @@ declare namespace AppSync {
      * The Function object.
      */
     functionConfiguration?: FunctionConfiguration;
+  }
+  export interface GetGraphqlApiEnvironmentVariablesRequest {
+    /**
+     * The ID of the API from which the environmental variable list will be retrieved.
+     */
+    apiId: String;
+  }
+  export interface GetGraphqlApiEnvironmentVariablesResponse {
+    /**
+     * The payload containing each environmental variable in the "key" : "value" format.
+     */
+    environmentVariables?: EnvironmentVariableMap;
   }
   export interface GetGraphqlApiRequest {
     /**
@@ -2214,6 +2245,22 @@ declare namespace AppSync {
      * A list of Function objects.
      */
     functions?: FunctionsIds;
+  }
+  export interface PutGraphqlApiEnvironmentVariablesRequest {
+    /**
+     * The ID of the API to which the environmental variable list will be written.
+     */
+    apiId: String;
+    /**
+     * The list of environmental variables to add to the API. When creating an environmental variable key-value pair, it must follow the additional constraints below:   Keys must begin with a letter.   Keys must be at least two characters long.   Keys can only contain letters, numbers, and the underscore character (_).   Values can be up to 512 characters long.   You can configure up to 50 key-value pairs in a GraphQL API.   You can create a list of environmental variables by adding it to the environmentVariables payload as a list in the format {"key1":"value1","key2":"value2", …}. Note that each call of the PutGraphqlApiEnvironmentVariables action will result in the overwriting of the existing environmental variable list of that API. This means the existing environmental variables will be lost. To avoid this, you must include all existing and new environmental variables in the list each time you call this action.
+     */
+    environmentVariables: EnvironmentVariableMap;
+  }
+  export interface PutGraphqlApiEnvironmentVariablesResponse {
+    /**
+     * The payload containing each environmental variable in the "key" : "value" format.
+     */
+    environmentVariables?: EnvironmentVariableMap;
   }
   export type QueryDepthLimit = number;
   export interface RdsDataApiConfig {

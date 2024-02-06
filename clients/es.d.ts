@@ -44,6 +44,14 @@ declare class ES extends Service {
    */
   authorizeVpcEndpointAccess(callback?: (err: AWSError, data: ES.Types.AuthorizeVpcEndpointAccessResponse) => void): Request<ES.Types.AuthorizeVpcEndpointAccessResponse, AWSError>;
   /**
+   * Cancels a pending configuration change on an Amazon OpenSearch Service domain.
+   */
+  cancelDomainConfigChange(params: ES.Types.CancelDomainConfigChangeRequest, callback?: (err: AWSError, data: ES.Types.CancelDomainConfigChangeResponse) => void): Request<ES.Types.CancelDomainConfigChangeResponse, AWSError>;
+  /**
+   * Cancels a pending configuration change on an Amazon OpenSearch Service domain.
+   */
+  cancelDomainConfigChange(callback?: (err: AWSError, data: ES.Types.CancelDomainConfigChangeResponse) => void): Request<ES.Types.CancelDomainConfigChangeResponse, AWSError>;
+  /**
    * Cancels a scheduled service software update for an Amazon ES domain. You can only perform this operation before the AutomatedUpdateDate and when the UpdateStatus is in the PENDING_UPDATE state.
    */
   cancelElasticsearchServiceSoftwareUpdate(params: ES.Types.CancelElasticsearchServiceSoftwareUpdateRequest, callback?: (err: AWSError, data: ES.Types.CancelElasticsearchServiceSoftwareUpdateResponse) => void): Request<ES.Types.CancelElasticsearchServiceSoftwareUpdateResponse, AWSError>;
@@ -667,6 +675,30 @@ declare namespace ES {
   export type AutoTuneType = "SCHEDULED_ACTION"|string;
   export type BackendRole = string;
   export type Boolean = boolean;
+  export interface CancelDomainConfigChangeRequest {
+    /**
+     * Name of the OpenSearch Service domain configuration request to cancel.
+     */
+    DomainName: DomainName;
+    /**
+     * When set to True, returns the list of change IDs and properties that will be cancelled without actually cancelling the change.
+     */
+    DryRun?: DryRun;
+  }
+  export interface CancelDomainConfigChangeResponse {
+    /**
+     * Whether or not the request was a dry run. If True, the changes were not actually cancelled.
+     */
+    DryRun?: DryRun;
+    /**
+     * The unique identifiers of the changes that were cancelled.
+     */
+    CancelledChangeIds?: GUIDList;
+    /**
+     * The domain change properties that were cancelled.
+     */
+    CancelledChangeProperties?: CancelledChangePropertyList;
+  }
   export interface CancelElasticsearchServiceSoftwareUpdateRequest {
     /**
      * The name of the domain that you want to stop the latest service software update on.
@@ -679,6 +711,21 @@ declare namespace ES {
      */
     ServiceSoftwareOptions?: ServiceSoftwareOptions;
   }
+  export interface CancelledChangeProperty {
+    /**
+     * The name of the property whose change was cancelled.
+     */
+    PropertyName?: String;
+    /**
+     * The pending value of the property that was cancelled. This would have been the eventual value of the property if the chance had not been cancelled.
+     */
+    CancelledValue?: String;
+    /**
+     * The current value of the property, after the change was cancelled.
+     */
+    ActiveValue?: String;
+  }
+  export type CancelledChangePropertyList = CancelledChangeProperty[];
   export interface ChangeProgressDetails {
     /**
      * The unique change identifier associated with a specific domain configuration change.
@@ -688,6 +735,22 @@ declare namespace ES {
      * Contains an optional message associated with the domain configuration change.
      */
     Message?: Message;
+    /**
+     * The current status of the configuration change.
+     */
+    ConfigChangeStatus?: ConfigChangeStatus;
+    /**
+     * The time that the configuration change was initiated, in Universal Coordinated Time (UTC).
+     */
+    StartTime?: UpdateTimestamp;
+    /**
+     * The last time that the configuration change was updated.
+     */
+    LastUpdatedTime?: UpdateTimestamp;
+    /**
+     * The IAM principal who initiated the configuration change.
+     */
+    InitiatedBy?: InitiatedBy;
   }
   export interface ChangeProgressStage {
     /**
@@ -739,6 +802,18 @@ declare namespace ES {
      * The specific stages that the domain is going through to perform the configuration change.
      */
     ChangeProgressStages?: ChangeProgressStageList;
+    /**
+     * The current status of the configuration change.
+     */
+    ConfigChangeStatus?: ConfigChangeStatus;
+    /**
+     * The last time that the status of the configuration change was updated.
+     */
+    LastUpdatedTime?: UpdateTimestamp;
+    /**
+     * The IAM principal who initiated the configuration change.
+     */
+    InitiatedBy?: InitiatedBy;
   }
   export type ClientToken = string;
   export type CloudWatchLogsLogGroupArn = string;
@@ -785,6 +860,7 @@ declare namespace ES {
     SourceVersion?: ElasticsearchVersionString;
     TargetVersions?: ElasticsearchVersionList;
   }
+  export type ConfigChangeStatus = "Pending"|"Initializing"|"Validating"|"ValidationFailed"|"ApplyingChanges"|"Completed"|"PendingUserInput"|"Cancelled"|string;
   export type ConnectionAlias = string;
   export interface CreateElasticsearchDomainRequest {
     /**
@@ -1352,6 +1428,7 @@ declare namespace ES {
   }
   export type DomainPackageDetailsList = DomainPackageDetails[];
   export type DomainPackageStatus = "ASSOCIATING"|"ASSOCIATION_FAILED"|"ACTIVE"|"DISSOCIATING"|"DISSOCIATION_FAILED"|string;
+  export type DomainProcessingStatusType = "Creating"|"Active"|"Modifying"|"UpgradingEngineVersion"|"UpdatingServiceSoftware"|"Isolated"|"Deleting"|string;
   export type Double = number;
   export type DryRun = boolean;
   export interface DryRunResults {
@@ -1526,6 +1603,10 @@ declare namespace ES {
      * Specifies change details of the domain configuration change.
      */
     ChangeProgressDetails?: ChangeProgressDetails;
+    /**
+     * Information about the domain properties that are currently being modified.
+     */
+    ModifyingProperties?: ModifyingPropertiesList;
   }
   export interface ElasticsearchDomainStatus {
     /**
@@ -1625,6 +1706,14 @@ declare namespace ES {
      * Specifies change details of the domain configuration change.
      */
     ChangeProgressDetails?: ChangeProgressDetails;
+    /**
+     * The status of any changes that are currently in progress for the domain.
+     */
+    DomainProcessingStatus?: DomainProcessingStatusType;
+    /**
+     * Information about the domain properties that are currently being modified.
+     */
+    ModifyingProperties?: ModifyingPropertiesList;
   }
   export type ElasticsearchDomainStatusList = ElasticsearchDomainStatus[];
   export type ElasticsearchInstanceTypeList = ESPartitionInstanceType[];
@@ -1681,6 +1770,7 @@ declare namespace ES {
   }
   export type FilterList = Filter[];
   export type GUID = string;
+  export type GUIDList = GUID[];
   export interface GetCompatibleElasticsearchVersionsRequest {
     DomainName?: DomainName;
   }
@@ -1775,6 +1865,7 @@ declare namespace ES {
   }
   export type InboundCrossClusterSearchConnectionStatusCode = "PENDING_ACCEPTANCE"|"APPROVED"|"REJECTING"|"REJECTED"|"DELETING"|"DELETED"|string;
   export type InboundCrossClusterSearchConnections = InboundCrossClusterSearchConnection[];
+  export type InitiatedBy = "CUSTOMER"|"SERVICE"|string;
   export type InstanceCount = number;
   export interface InstanceCountLimits {
     MinimumInstanceCount?: MinimumInstanceCount;
@@ -2006,6 +2097,25 @@ declare namespace ES {
   export type MaximumInstanceCount = number;
   export type Message = string;
   export type MinimumInstanceCount = number;
+  export interface ModifyingProperties {
+    /**
+     * The name of the property that is currently being modified.
+     */
+    Name?: String;
+    /**
+     * The current value of the domain property that is being modified.
+     */
+    ActiveValue?: String;
+    /**
+     * The value that the property that is currently being modified will eventually have.
+     */
+    PendingValue?: String;
+    /**
+     * The type of value that is currently being modified. Properties can have two types:  PLAIN_TEXT: Contain direct values such as "1", "True", or "c5.large.search". STRINGIFIED_JSON: Contain content in JSON format, such as {"Enabled":"True"}". 
+     */
+    ValueType?: PropertyValueType;
+  }
+  export type ModifyingPropertiesList = ModifyingProperties[];
   export type NextToken = string;
   export interface NodeToNodeEncryptionOptions {
     /**
@@ -2150,6 +2260,7 @@ declare namespace ES {
   export type Password = string;
   export type PolicyDocument = string;
   export type PrincipalType = "AWS_ACCOUNT"|"AWS_SERVICE"|string;
+  export type PropertyValueType = "PLAIN_TEXT"|"STRINGIFIED_JSON"|string;
   export interface PurchaseReservedElasticsearchInstanceOfferingRequest {
     /**
      * The ID of the reserved Elasticsearch instance offering to purchase.

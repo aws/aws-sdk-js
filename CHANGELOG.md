@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1551.0-->
+<!--LATEST=2.1552.0-->
 <!--ENTRYINSERT-->
+
+## 2.1552.0
+* feature: AppSync: Support for environment variables in AppSync GraphQL APIs
+* feature: CloudWatchLogs: This release adds a new field, logGroupArn, to the response of the logs:DescribeLogGroups action.
+* feature: ES: This release adds clear visibility to the customers on the changes that they make on the domain.
+* feature: OpenSearch: This release adds clear visibility to the customers on the changes that they make on the domain.
+* feature: WAFV2: You can now delete an API key that you've created for use with your CAPTCHA JavaScript integration API.
 
 ## 2.1551.0
 * feature: Glue: Introduce Catalog Encryption Role within Glue Data Catalog Settings. Introduce SASL/PLAIN as an authentication method for Glue Kafka connections

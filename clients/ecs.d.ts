@@ -968,7 +968,7 @@ declare namespace ECS {
      */
     healthCheck?: HealthCheck;
     /**
-     * A list of namespaced kernel parameters to set in the container. This parameter maps to Sysctls in the Create a container section of the Docker Remote API and the --sysctl option to docker run. For example, you can configure net.ipv4.tcp_keepalive_time setting to maintain longer lived connections.  We don't recommended that you specify network-related systemControls parameters for multiple containers in a single task that also uses either the awsvpc or host network modes. For tasks that use the awsvpc network mode, the container that's started last determines which systemControls parameters take effect. For tasks that use the host network mode, it changes the container instance's namespaced kernel parameters as well as the containers.   This parameter is not supported for Windows containers.   This parameter is only supported for tasks that are hosted on Fargate if the tasks are using platform version 1.4.0 or later (Linux). This isn't supported for Windows containers on Fargate. 
+     * A list of namespaced kernel parameters to set in the container. This parameter maps to Sysctls in the Create a container section of the Docker Remote API and the --sysctl option to docker run. For example, you can configure net.ipv4.tcp_keepalive_time setting to maintain longer lived connections.
      */
     systemControls?: SystemControls;
     /**
@@ -2564,7 +2564,7 @@ declare namespace ECS {
      */
     loadBalancerName?: String;
     /**
-     * The name of the container (as it appears in a container definition) to associate with the load balancer.
+     * The name of the container (as it appears in a container definition) to associate with the load balancer. You need to specify the container name when configuring the target group for an Amazon ECS load balancer.
      */
     containerName?: String;
     /**
@@ -2997,7 +2997,7 @@ declare namespace ECS {
      */
     inferenceAccelerators?: InferenceAccelerators;
     /**
-     * The amount of ephemeral storage to allocate for the task. This parameter is used to expand the total amount of ephemeral storage available, beyond the default amount, for tasks hosted on Fargate. For more information, see Fargate task storage in the Amazon ECS User Guide for Fargate.  For tasks using the Fargate launch type, the task requires the following platforms:   Linux platform version 1.4.0 or later.   Windows platform version 1.0.0 or later.   
+     * The amount of ephemeral storage to allocate for the task. This parameter is used to expand the total amount of ephemeral storage available, beyond the default amount, for tasks hosted on Fargate. For more information, see Using data volumes in tasks in the Amazon ECS Developer Guide.  For tasks using the Fargate launch type, the task requires the following platforms:   Linux platform version 1.4.0 or later.   Windows platform version 1.0.0 or later.   
      */
     ephemeralStorage?: EphemeralStorage;
     /**
@@ -3087,7 +3087,7 @@ declare namespace ECS {
      */
     group?: String;
     /**
-     * The infrastructure to run your standalone task on. For more information, see Amazon ECS launch types in the Amazon Elastic Container Service Developer Guide. The FARGATE launch type runs your tasks on Fargate On-Demand infrastructure.  Fargate Spot infrastructure is available for use but a capacity provider strategy must be used. For more information, see Fargate capacity providers in the Amazon ECS User Guide for Fargate.  The EC2 launch type runs your tasks on Amazon EC2 instances registered to your cluster. The EXTERNAL launch type runs your tasks on your on-premises server or virtual machine (VM) capacity registered to your cluster. A task can use either a launch type or a capacity provider strategy. If a launchType is specified, the capacityProviderStrategy parameter must be omitted. When you use cluster auto scaling, you must specify capacityProviderStrategy and not launchType. 
+     * The infrastructure to run your standalone task on. For more information, see Amazon ECS launch types in the Amazon Elastic Container Service Developer Guide. The FARGATE launch type runs your tasks on Fargate On-Demand infrastructure.  Fargate Spot infrastructure is available for use but a capacity provider strategy must be used. For more information, see Fargate capacity providers in the Amazon ECS Developer Guide.  The EC2 launch type runs your tasks on Amazon EC2 instances registered to your cluster. The EXTERNAL launch type runs your tasks on your on-premises server or virtual machine (VM) capacity registered to your cluster. A task can use either a launch type or a capacity provider strategy. If a launchType is specified, the capacityProviderStrategy parameter must be omitted. When you use cluster auto scaling, you must specify capacityProviderStrategy and not launchType. 
      */
     launchType?: LaunchType;
     /**
@@ -3861,7 +3861,7 @@ declare namespace ECS {
      */
     startedBy?: String;
     /**
-     * The stop code indicating why a task was stopped. The stoppedReason might contain additional details.  For more information about stop code, see Stopped tasks error codes in the Amazon ECS User Guide.
+     * The stop code indicating why a task was stopped. The stoppedReason might contain additional details.  For more information about stop code, see Stopped tasks error codes in the Amazon ECS Developer Guide.
      */
     stopCode?: TaskStopCode;
     /**

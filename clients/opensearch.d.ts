@@ -52,6 +52,14 @@ declare class OpenSearch extends Service {
    */
   authorizeVpcEndpointAccess(callback?: (err: AWSError, data: OpenSearch.Types.AuthorizeVpcEndpointAccessResponse) => void): Request<OpenSearch.Types.AuthorizeVpcEndpointAccessResponse, AWSError>;
   /**
+   * Cancels a pending configuration change on an Amazon OpenSearch Service domain.
+   */
+  cancelDomainConfigChange(params: OpenSearch.Types.CancelDomainConfigChangeRequest, callback?: (err: AWSError, data: OpenSearch.Types.CancelDomainConfigChangeResponse) => void): Request<OpenSearch.Types.CancelDomainConfigChangeResponse, AWSError>;
+  /**
+   * Cancels a pending configuration change on an Amazon OpenSearch Service domain.
+   */
+  cancelDomainConfigChange(callback?: (err: AWSError, data: OpenSearch.Types.CancelDomainConfigChangeResponse) => void): Request<OpenSearch.Types.CancelDomainConfigChangeResponse, AWSError>;
+  /**
    * Cancels a scheduled service software update for an Amazon OpenSearch Service domain. You can only perform this operation before the AutomatedUpdateDate and when the domain's UpdateStatus is PENDING_UPDATE. For more information, see Service software updates in Amazon OpenSearch Service.
    */
   cancelServiceSoftwareUpdate(params: OpenSearch.Types.CancelServiceSoftwareUpdateRequest, callback?: (err: AWSError, data: OpenSearch.Types.CancelServiceSoftwareUpdateResponse) => void): Request<OpenSearch.Types.CancelServiceSoftwareUpdateResponse, AWSError>;
@@ -852,6 +860,27 @@ declare namespace OpenSearch {
   export type AvailabilityZoneList = AvailabilityZone[];
   export type BackendRole = string;
   export type Boolean = boolean;
+  export interface CancelDomainConfigChangeRequest {
+    DomainName: DomainName;
+    /**
+     * When set to True, returns the list of change IDs and properties that will be cancelled without actually cancelling the change.
+     */
+    DryRun?: DryRun;
+  }
+  export interface CancelDomainConfigChangeResponse {
+    /**
+     * The unique identifiers of the changes that were cancelled.
+     */
+    CancelledChangeIds?: GUIDList;
+    /**
+     * The domain change properties that were cancelled.
+     */
+    CancelledChangeProperties?: CancelledChangePropertyList;
+    /**
+     * Whether or not the request was a dry run. If True, the changes were not actually cancelled. 
+     */
+    DryRun?: DryRun;
+  }
   export interface CancelServiceSoftwareUpdateRequest {
     /**
      * Name of the OpenSearch Service domain that you want to cancel the service software update on.
@@ -864,6 +893,21 @@ declare namespace OpenSearch {
      */
     ServiceSoftwareOptions?: ServiceSoftwareOptions;
   }
+  export interface CancelledChangeProperty {
+    /**
+     * The name of the property whose change was cancelled.
+     */
+    PropertyName?: String;
+    /**
+     * The pending value of the property that was cancelled. This would have been the eventual value of the property if the chance had not been cancelled.
+     */
+    CancelledValue?: String;
+    /**
+     * The current value of the property, after the change was cancelled.
+     */
+    ActiveValue?: String;
+  }
+  export type CancelledChangePropertyList = CancelledChangeProperty[];
   export interface ChangeProgressDetails {
     /**
      * The ID of the configuration change.
@@ -873,6 +917,22 @@ declare namespace OpenSearch {
      * A message corresponding to the status of the configuration change.
      */
     Message?: Message;
+    /**
+     * The current status of the configuration change.
+     */
+    ConfigChangeStatus?: ConfigChangeStatus;
+    /**
+     * The IAM principal who initiated the configuration change.
+     */
+    InitiatedBy?: InitiatedBy;
+    /**
+     * The time that the configuration change was initiated, in Universal Coordinated Time (UTC).
+     */
+    StartTime?: UpdateTimestamp;
+    /**
+     * The last time that the configuration change was updated.
+     */
+    LastUpdatedTime?: UpdateTimestamp;
   }
   export interface ChangeProgressStage {
     /**
@@ -924,6 +984,18 @@ declare namespace OpenSearch {
      * The specific stages that the domain is going through to perform the configuration change.
      */
     ChangeProgressStages?: ChangeProgressStageList;
+    /**
+     * The last time that the status of the configuration change was updated.
+     */
+    LastUpdatedTime?: UpdateTimestamp;
+    /**
+     * The current status of the configuration change.
+     */
+    ConfigChangeStatus?: ConfigChangeStatus;
+    /**
+     * The IAM principal who initiated the configuration change.
+     */
+    InitiatedBy?: InitiatedBy;
   }
   export type ClientToken = string;
   export type CloudWatchLogsLogGroupArn = string;
@@ -1033,6 +1105,7 @@ declare namespace OpenSearch {
      */
     TargetVersions?: VersionList;
   }
+  export type ConfigChangeStatus = "Pending"|"Initializing"|"Validating"|"ValidationFailed"|"ApplyingChanges"|"Completed"|"PendingUserInput"|"Cancelled"|string;
   export type ConnectionAlias = string;
   export type ConnectionId = string;
   export type ConnectionMode = "DIRECT"|"VPC_ENDPOINT"|string;
@@ -1774,6 +1847,10 @@ declare namespace OpenSearch {
      * Software update options for the domain.
      */
     SoftwareUpdateOptions?: SoftwareUpdateOptionsStatus;
+    /**
+     * Information about the domain properties that are currently being modified.
+     */
+    ModifyingProperties?: ModifyingPropertiesList;
   }
   export interface DomainEndpointOptions {
     /**
@@ -1939,6 +2016,7 @@ declare namespace OpenSearch {
   }
   export type DomainPackageDetailsList = DomainPackageDetails[];
   export type DomainPackageStatus = "ASSOCIATING"|"ASSOCIATION_FAILED"|"ACTIVE"|"DISSOCIATING"|"DISSOCIATION_FAILED"|string;
+  export type DomainProcessingStatusType = "Creating"|"Active"|"Modifying"|"UpgradingEngineVersion"|"UpdatingServiceSoftware"|"Isolated"|"Deleting"|string;
   export type DomainState = "Active"|"Processing"|"NotAvailable"|string;
   export interface DomainStatus {
     /**
@@ -2057,6 +2135,14 @@ declare namespace OpenSearch {
      * Service software update options for the domain.
      */
     SoftwareUpdateOptions?: SoftwareUpdateOptions;
+    /**
+     * The status of any changes that are currently in progress for the domain.
+     */
+    DomainProcessingStatus?: DomainProcessingStatusType;
+    /**
+     * Information about the domain properties that are currently being modified.
+     */
+    ModifyingProperties?: ModifyingPropertiesList;
   }
   export type DomainStatusList = DomainStatus[];
   export type Double = number;
@@ -2192,6 +2278,7 @@ declare namespace OpenSearch {
   }
   export type FilterList = Filter[];
   export type GUID = string;
+  export type GUIDList = GUID[];
   export interface GetCompatibleVersionsRequest {
     /**
      * The name of an existing domain. Provide this parameter to limit the results to a single domain.
@@ -2379,6 +2466,7 @@ declare namespace OpenSearch {
   }
   export type InboundConnectionStatusCode = "PENDING_ACCEPTANCE"|"APPROVED"|"PROVISIONING"|"ACTIVE"|"REJECTING"|"REJECTED"|"DELETING"|"DELETED"|string;
   export type InboundConnections = InboundConnection[];
+  export type InitiatedBy = "CUSTOMER"|"SERVICE"|string;
   export type InstanceCount = number;
   export interface InstanceCountLimits {
     /**
@@ -2755,6 +2843,25 @@ declare namespace OpenSearch {
   export type MaximumInstanceCount = number;
   export type Message = string;
   export type MinimumInstanceCount = number;
+  export interface ModifyingProperties {
+    /**
+     * The name of the property that is currently being modified.
+     */
+    Name?: String;
+    /**
+     * The current value of the domain property that is being modified.
+     */
+    ActiveValue?: String;
+    /**
+     * The value that the property that is currently being modified will eventually have.
+     */
+    PendingValue?: String;
+    /**
+     * The type of value that is currently being modified. Properties can have two types:    PLAIN_TEXT: Contain direct values such as "1", "True", or "c5.large.search".    STRINGIFIED_JSON: Contain content in JSON format, such as {"Enabled":"True"}".  
+     */
+    ValueType?: PropertyValueType;
+  }
+  export type ModifyingPropertiesList = ModifyingProperties[];
   export type NextToken = string;
   export type NodeId = string;
   export type NodeStatus = "Active"|"StandBy"|"NotAvailable"|string;
@@ -2985,6 +3092,7 @@ declare namespace OpenSearch {
   export type PluginVersion = string;
   export type PolicyDocument = string;
   export type PrincipalType = "AWS_ACCOUNT"|"AWS_SERVICE"|string;
+  export type PropertyValueType = "PLAIN_TEXT"|"STRINGIFIED_JSON"|string;
   export interface PurchaseReservedInstanceOfferingRequest {
     /**
      * The ID of the Reserved Instance offering to purchase.

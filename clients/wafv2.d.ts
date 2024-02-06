@@ -68,6 +68,14 @@ declare class WAFV2 extends Service {
    */
   createWebACL(callback?: (err: AWSError, data: WAFV2.Types.CreateWebACLResponse) => void): Request<WAFV2.Types.CreateWebACLResponse, AWSError>;
   /**
+   * Deletes the specified API key.  After you delete a key, it can take up to 24 hours for WAF to disallow use of the key in all regions. 
+   */
+  deleteAPIKey(params: WAFV2.Types.DeleteAPIKeyRequest, callback?: (err: AWSError, data: WAFV2.Types.DeleteAPIKeyResponse) => void): Request<WAFV2.Types.DeleteAPIKeyResponse, AWSError>;
+  /**
+   * Deletes the specified API key.  After you delete a key, it can take up to 24 hours for WAF to disallow use of the key in all regions. 
+   */
+  deleteAPIKey(callback?: (err: AWSError, data: WAFV2.Types.DeleteAPIKeyResponse) => void): Request<WAFV2.Types.DeleteAPIKeyResponse, AWSError>;
+  /**
    * Deletes all rule groups that are managed by Firewall Manager for the specified web ACL.  You can only use this if ManagedByFirewallManager is false in the specified WebACL. 
    */
   deleteFirewallManagerRuleGroups(params: WAFV2.Types.DeleteFirewallManagerRuleGroupsRequest, callback?: (err: AWSError, data: WAFV2.Types.DeleteFirewallManagerRuleGroupsResponse) => void): Request<WAFV2.Types.DeleteFirewallManagerRuleGroupsResponse, AWSError>;
@@ -717,7 +725,7 @@ declare namespace WAFV2 {
      */
     Scope: Scope;
     /**
-     * The client application domains that you want to use this API key for.  Example JSON: "TokenDomains": ["abc.com", "store.abc.com"]  Public suffixes aren't allowed. For example, you can't use usa.gov or co.uk as token domains.
+     * The client application domains that you want to use this API key for.  Example JSON: "TokenDomains": ["abc.com", "store.abc.com"]  Public suffixes aren't allowed. For example, you can't use gov.au or co.uk as token domains.
      */
     TokenDomains: APIKeyTokenDomains;
   }
@@ -869,7 +877,7 @@ declare namespace WAFV2 {
      */
     ChallengeConfig?: ChallengeConfig;
     /**
-     * Specifies the domains that WAF should accept in a web request token. This enables the use of tokens across multiple protected websites. When WAF provides a token, it uses the domain of the Amazon Web Services resource that the web ACL is protecting. If you don't specify a list of token domains, WAF accepts tokens only for the domain of the protected resource. With a token domain list, WAF accepts the resource's host domain plus all domains in the token domain list, including their prefixed subdomains. Example JSON: "TokenDomains": { "mywebsite.com", "myotherwebsite.com" }  Public suffixes aren't allowed. For example, you can't use usa.gov or co.uk as token domains.
+     * Specifies the domains that WAF should accept in a web request token. This enables the use of tokens across multiple protected websites. When WAF provides a token, it uses the domain of the Amazon Web Services resource that the web ACL is protecting. If you don't specify a list of token domains, WAF accepts tokens only for the domain of the protected resource. With a token domain list, WAF accepts the resource's host domain plus all domains in the token domain list, including their prefixed subdomains. Example JSON: "TokenDomains": { "mywebsite.com", "myotherwebsite.com" }  Public suffixes aren't allowed. For example, you can't use gov.au or co.uk as token domains.
      */
     TokenDomains?: TokenDomains;
     /**
@@ -937,6 +945,18 @@ declare namespace WAFV2 {
      * Specifies that WAF should allow requests by default.
      */
     Allow?: AllowAction;
+  }
+  export interface DeleteAPIKeyRequest {
+    /**
+     * Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     */
+    Scope: Scope;
+    /**
+     * The encrypted API key that you want to delete. 
+     */
+    APIKey: APIKey;
+  }
+  export interface DeleteAPIKeyResponse {
   }
   export interface DeleteFirewallManagerRuleGroupsRequest {
     /**
@@ -3421,7 +3441,7 @@ declare namespace WAFV2 {
      */
     ChallengeConfig?: ChallengeConfig;
     /**
-     * Specifies the domains that WAF should accept in a web request token. This enables the use of tokens across multiple protected websites. When WAF provides a token, it uses the domain of the Amazon Web Services resource that the web ACL is protecting. If you don't specify a list of token domains, WAF accepts tokens only for the domain of the protected resource. With a token domain list, WAF accepts the resource's host domain plus all domains in the token domain list, including their prefixed subdomains. Example JSON: "TokenDomains": { "mywebsite.com", "myotherwebsite.com" }  Public suffixes aren't allowed. For example, you can't use usa.gov or co.uk as token domains.
+     * Specifies the domains that WAF should accept in a web request token. This enables the use of tokens across multiple protected websites. When WAF provides a token, it uses the domain of the Amazon Web Services resource that the web ACL is protecting. If you don't specify a list of token domains, WAF accepts tokens only for the domain of the protected resource. With a token domain list, WAF accepts the resource's host domain plus all domains in the token domain list, including their prefixed subdomains. Example JSON: "TokenDomains": { "mywebsite.com", "myotherwebsite.com" }  Public suffixes aren't allowed. For example, you can't use gov.au or co.uk as token domains.
      */
     TokenDomains?: TokenDomains;
     /**
