@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1552.0-->
+<!--LATEST=2.1553.0-->
 <!--ENTRYINSERT-->
+
+## 2.1553.0
+* feature: DataSync: AWS DataSync now supports manifests for specifying files or objects to transfer.
+* feature: LexModelsV2: This release introduces a new bot replication feature as part of Lex Global Resiliency offering. This feature leverages a new set of APIs that allow customers to create bot replicas and replicate changes to bots across regions.
+* feature: Redshift: LisRecommendations API to fetch Amazon Redshift Advisor recommendations.
 
 ## 2.1552.0
 * feature: AppSync: Support for environment variables in AppSync GraphQL APIs

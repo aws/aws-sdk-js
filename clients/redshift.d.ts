@@ -801,6 +801,14 @@ declare class Redshift extends Service {
    */
   getResourcePolicy(callback?: (err: AWSError, data: Redshift.Types.GetResourcePolicyResult) => void): Request<Redshift.Types.GetResourcePolicyResult, AWSError>;
   /**
+   * List the Amazon Redshift Advisor recommendations for one or multiple Amazon Redshift clusters in an Amazon Web Services account.
+   */
+  listRecommendations(params: Redshift.Types.ListRecommendationsMessage, callback?: (err: AWSError, data: Redshift.Types.ListRecommendationsResult) => void): Request<Redshift.Types.ListRecommendationsResult, AWSError>;
+  /**
+   * List the Amazon Redshift Advisor recommendations for one or multiple Amazon Redshift clusters in an Amazon Web Services account.
+   */
+  listRecommendations(callback?: (err: AWSError, data: Redshift.Types.ListRecommendationsResult) => void): Request<Redshift.Types.ListRecommendationsResult, AWSError>;
+  /**
    * This operation is retired. Calling this operation does not change AQUA configuration. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator). 
    */
   modifyAquaConfiguration(params: Redshift.Types.ModifyAquaInputMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyAquaOutputMessage) => void): Request<Redshift.Types.ModifyAquaOutputMessage, AWSError>;
@@ -4200,6 +4208,7 @@ declare namespace Redshift {
   export type IamRoleArnList = String[];
   export type IdcDisplayNameString = string;
   export type IdentityNamespaceString = string;
+  export type ImpactRankingType = "HIGH"|"MEDIUM"|"LOW"|string;
   export type ImportTablesCompleted = String[];
   export type ImportTablesInProgress = String[];
   export type ImportTablesNotStarted = String[];
@@ -4266,6 +4275,34 @@ declare namespace Redshift {
     LakeFormationQuery?: LakeFormationQuery;
   }
   export type LakeFormationServiceIntegrations = LakeFormationScopeUnion[];
+  export interface ListRecommendationsMessage {
+    /**
+     * The unique identifier of the Amazon Redshift cluster for which the list of Advisor recommendations is returned. If the neither the cluster identifier and the cluster namespace ARN parameters are specified, then recommendations for all clusters in the account are returned.
+     */
+    ClusterIdentifier?: String;
+    /**
+     * The Amazon Redshift cluster namespace Amazon Resource Name (ARN) for which the list of Advisor recommendations is returned. If the neither the cluster identifier and the cluster namespace ARN parameters are specified, then recommendations for all clusters in the account are returned.
+     */
+    NamespaceArn?: String;
+    /**
+     * The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the Marker parameter and retrying the command. If the Marker field is empty, all response records have been retrieved for the request. 
+     */
+    Marker?: String;
+  }
+  export interface ListRecommendationsResult {
+    /**
+     * The Advisor recommendations for action on the Amazon Redshift cluster.
+     */
+    Recommendations?: RecommendationList;
+    /**
+     * A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the Marker parameter and retrying the command. If the Marker field is empty, all response records have been retrieved for the request. 
+     */
+    Marker?: String;
+  }
   export type LogDestinationType = "s3"|"cloudwatch"|string;
   export type LogTypeList = String[];
   export interface LoggingStatus {
@@ -5070,6 +5107,77 @@ declare namespace Redshift {
   export interface RebootClusterResult {
     Cluster?: Cluster;
   }
+  export interface Recommendation {
+    /**
+     * A unique identifier of the Advisor recommendation.
+     */
+    Id?: String;
+    /**
+     * The unique identifier of the cluster for which the recommendation is returned.
+     */
+    ClusterIdentifier?: String;
+    /**
+     * The Amazon Redshift cluster namespace ARN for which the recommendations is returned.
+     */
+    NamespaceArn?: String;
+    /**
+     * The date and time (UTC) that the recommendation was created.
+     */
+    CreatedAt?: TStamp;
+    /**
+     * The type of Advisor recommendation.
+     */
+    RecommendationType?: String;
+    /**
+     * The title of the recommendation.
+     */
+    Title?: String;
+    /**
+     * The description of the recommendation.
+     */
+    Description?: String;
+    /**
+     * The description of what was observed about your cluster.
+     */
+    Observation?: String;
+    /**
+     * The scale of the impact that the Advisor recommendation has to the performance and cost of the cluster.
+     */
+    ImpactRanking?: ImpactRankingType;
+    /**
+     * The description of the recommendation.
+     */
+    RecommendationText?: String;
+    /**
+     * List of Amazon Redshift recommended actions.
+     */
+    RecommendedActions?: RecommendedActionList;
+    /**
+     * List of helpful links for more information about the Advisor recommendation.
+     */
+    ReferenceLinks?: ReferenceLinkList;
+  }
+  export type RecommendationList = Recommendation[];
+  export interface RecommendedAction {
+    /**
+     * The specific instruction about the command.
+     */
+    Text?: String;
+    /**
+     * The database name to perform the action on. Only applicable if the type of command is SQL.
+     */
+    Database?: String;
+    /**
+     * The command to run.
+     */
+    Command?: String;
+    /**
+     * The type of command.
+     */
+    Type?: RecommendedActionType;
+  }
+  export type RecommendedActionList = RecommendedAction[];
+  export type RecommendedActionType = "SQL"|"CLI"|string;
   export interface RecurringCharge {
     /**
      * The amount charged per the period of time specified by the recurring charge frequency.
@@ -5125,6 +5233,17 @@ declare namespace Redshift {
   }
   export type RedshiftIdcApplicationList = RedshiftIdcApplication[];
   export type RedshiftIdcApplicationName = string;
+  export interface ReferenceLink {
+    /**
+     * The hyperlink text that describes the link to more information.
+     */
+    Text?: String;
+    /**
+     * The URL address to find more information.
+     */
+    Link?: String;
+  }
+  export type ReferenceLinkList = ReferenceLink[];
   export interface RejectDataShareMessage {
     /**
      * The Amazon Resource Name (ARN) of the datashare to reject.
