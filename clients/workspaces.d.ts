@@ -492,11 +492,11 @@ declare class WorkSpaces extends Service {
    */
   modifyWorkspaceState(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyWorkspaceStateResult) => void): Request<WorkSpaces.Types.ModifyWorkspaceStateResult, AWSError>;
   /**
-   * Reboots the specified WorkSpaces. You cannot reboot a WorkSpace unless its state is AVAILABLE, UNHEALTHY, or REBOOTING. Reboot a WorkSpace in the REBOOTING state only if your WorkSpace has been stuck in the REBOOTING state for over 20 minutes. This operation is asynchronous and returns before the WorkSpaces have rebooted.
+   * Reboots the specified WorkSpaces. You cannot reboot a WorkSpace unless its state is AVAILABLE or UNHEALTHY. This operation is asynchronous and returns before the WorkSpaces have rebooted.
    */
   rebootWorkspaces(params: WorkSpaces.Types.RebootWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.RebootWorkspacesResult) => void): Request<WorkSpaces.Types.RebootWorkspacesResult, AWSError>;
   /**
-   * Reboots the specified WorkSpaces. You cannot reboot a WorkSpace unless its state is AVAILABLE, UNHEALTHY, or REBOOTING. Reboot a WorkSpace in the REBOOTING state only if your WorkSpace has been stuck in the REBOOTING state for over 20 minutes. This operation is asynchronous and returns before the WorkSpaces have rebooted.
+   * Reboots the specified WorkSpaces. You cannot reboot a WorkSpace unless its state is AVAILABLE or UNHEALTHY. This operation is asynchronous and returns before the WorkSpaces have rebooted.
    */
   rebootWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.RebootWorkspacesResult) => void): Request<WorkSpaces.Types.RebootWorkspacesResult, AWSError>;
   /**
@@ -1789,6 +1789,10 @@ declare namespace WorkSpaces {
      * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
      */
     NextToken?: PaginationToken;
+    /**
+     * The name of the user-decoupled WorkSpace.
+     */
+    WorkspaceName?: WorkspaceName;
   }
   export interface DescribeWorkspacesResult {
     /**
@@ -2771,7 +2775,7 @@ declare namespace WorkSpaces {
      */
     IpAddress?: IpAddress;
     /**
-     * The operational state of the WorkSpace.    PENDING – The WorkSpace is in a waiting state (for example, the WorkSpace is being created).    AVAILABLE – The WorkSpace is running and has passed the health checks.    IMPAIRED – Refer to UNHEALTHY state.    UNHEALTHY – The WorkSpace is not responding to health checks.    REBOOTING – The WorkSpace is being rebooted (restarted).    STARTING – The WorkSpace is starting up and health checks are being run.    REBUILDING – The WorkSpace is being rebuilt.    RESTORING – The WorkSpace is being restored.    MAINTENANCE – The WorkSpace is undergoing scheduled maintenance by Amazon Web Services.    ADMIN_MAINTENANCE – The WorkSpace is undergoing maintenance by the WorkSpaces administrator.    TERMINATING – The WorkSpace is being deleted.    TERMINATED – The WorkSpace has been deleted.    SUSPENDED – The WorkSpace has been suspended for image creation.    UPDATING – The WorkSpace is undergoing an update.    STOPPING – The WorkSpace is being stopped.    STOPPED – The WorkSpace has been stopped.    ERROR  – The WorkSpace is an error state (for example, an error occurred during startup).    After a WorkSpace is terminated, the TERMINATED state is returned only briefly before the WorkSpace directory metadata is cleaned up, so this state is rarely returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID by using  DescribeWorkSpaces. If the WorkSpace ID isn't returned, then the WorkSpace has been successfully terminated. 
+     * The operational state of the WorkSpace.  After a WorkSpace is terminated, the TERMINATED state is returned only briefly before the WorkSpace directory metadata is cleaned up, so this state is rarely returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID by using  DescribeWorkSpaces. If the WorkSpace ID isn't returned, then the WorkSpace has been successfully terminated. 
      */
     State?: WorkspaceState;
     /**
@@ -2806,6 +2810,10 @@ declare namespace WorkSpaces {
      * Indicates whether the data stored on the root volume is encrypted.
      */
     RootVolumeEncryptionEnabled?: BooleanObject;
+    /**
+     * The name of the user-decoupled WorkSpace.
+     */
+    WorkspaceName?: WorkspaceName;
     /**
      * The properties of the WorkSpace.
      */
@@ -3099,6 +3107,7 @@ declare namespace WorkSpaces {
   export type WorkspaceImageRequiredTenancy = "DEFAULT"|"DEDICATED"|string;
   export type WorkspaceImageState = "AVAILABLE"|"PENDING"|"ERROR"|string;
   export type WorkspaceList = Workspace[];
+  export type WorkspaceName = string;
   export interface WorkspaceProperties {
     /**
      * The running mode. For more information, see Manage the WorkSpace Running Mode.  The MANUAL value is only supported by Amazon WorkSpaces Core. Contact your account team to be allow-listed to use this value. For more information, see Amazon WorkSpaces Core. 
@@ -3135,7 +3144,7 @@ declare namespace WorkSpaces {
      */
     DirectoryId: DirectoryId;
     /**
-     * The user name of the user for the WorkSpace. This user name must exist in the Directory Service directory for the WorkSpace.
+     * The user name of the user for the WorkSpace. This user name must exist in the Directory Service directory for the WorkSpace. The reserved keyword, [UNDEFINED], is used when creating user-decoupled WorkSpaces.
      */
     UserName: UserName;
     /**
@@ -3162,6 +3171,10 @@ declare namespace WorkSpaces {
      * The tags for the WorkSpace.
      */
     Tags?: TagList;
+    /**
+     * The name of the user-decoupled WorkSpace.
+     */
+    WorkspaceName?: WorkspaceName;
   }
   export type WorkspaceRequestList = WorkspaceRequest[];
   export interface WorkspaceResourceAssociation {

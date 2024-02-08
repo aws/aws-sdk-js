@@ -541,6 +541,10 @@ declare namespace CodePipeline {
      */
     lastUpdateTime?: Timestamp;
     /**
+     * The ARN of the user who changed the pipeline execution details.
+     */
+    updatedBy?: LastUpdatedBy;
+    /**
      *  The status of the action execution. Status categories are InProgress, Succeeded, and Failed.
      */
     status?: ActionExecutionStatus;
@@ -559,6 +563,10 @@ declare namespace CodePipeline {
      * The pipeline execution ID used to filter action execution history.
      */
     pipelineExecutionId?: PipelineExecutionId;
+    /**
+     * The latest execution in the pipeline.  Filtering on the latest execution is available for executions run on or after February 08, 2024. 
+     */
+    latestInPipelineExecution?: LatestInPipelineExecutionFilter;
   }
   export type ActionExecutionId = string;
   export interface ActionExecutionInput {
@@ -615,6 +623,7 @@ declare namespace CodePipeline {
      * The deepest external link to the external resource (for example, a repository URL or deployment endpoint) that is used when running the action.
      */
     externalExecutionUrl?: Url;
+    errorDetails?: ErrorDetails;
   }
   export type ActionExecutionStatus = "InProgress"|"Abandoned"|"Succeeded"|"Failed"|string;
   export type ActionExecutionToken = string;
@@ -1167,6 +1176,7 @@ declare namespace CodePipeline {
     percentComplete?: Percentage;
   }
   export type ExecutionId = string;
+  export type ExecutionMode = "QUEUED"|"SUPERSEDED"|"PARALLEL"|string;
   export type ExecutionSummary = string;
   export interface ExecutionTrigger {
     /**
@@ -1322,21 +1332,74 @@ declare namespace CodePipeline {
      */
     jobDetails?: ThirdPartyJobDetails;
   }
+  export interface GitBranchFilterCriteria {
+    /**
+     * The list of patterns of Git branches that, when a commit is pushed, are to be included as criteria that starts the pipeline.
+     */
+    includes?: GitBranchPatternList;
+    /**
+     * The list of patterns of Git branches that, when a commit is pushed, are to be excluded from starting the pipeline.
+     */
+    excludes?: GitBranchPatternList;
+  }
+  export type GitBranchNamePattern = string;
+  export type GitBranchPatternList = GitBranchNamePattern[];
   export interface GitConfiguration {
     /**
      * The name of the pipeline source action where the trigger configuration, such as Git tags, is specified. The trigger configuration will start the pipeline upon the specified change only.  You can only specify one trigger configuration per source action. 
      */
     sourceActionName: ActionName;
     /**
-     * The field where the repository event that will start the pipeline, such as pushing Git tags, is specified with details.  Git tags is the only supported event type. 
+     * The field where the repository event that will start the pipeline, such as pushing Git tags, is specified with details.
      */
     push?: GitPushFilterList;
+    /**
+     * The field where the repository event that will start the pipeline is specified as pull requests.
+     */
+    pullRequest?: GitPullRequestFilterList;
   }
+  export interface GitFilePathFilterCriteria {
+    /**
+     * The list of patterns of Git repository file paths that, when a commit is pushed, are to be included as criteria that starts the pipeline.
+     */
+    includes?: GitFilePathPatternList;
+    /**
+     * The list of patterns of Git repository file paths that, when a commit is pushed, are to be excluded from starting the pipeline.
+     */
+    excludes?: GitFilePathPatternList;
+  }
+  export type GitFilePathPattern = string;
+  export type GitFilePathPatternList = GitFilePathPattern[];
+  export type GitPullRequestEventType = "OPEN"|"UPDATED"|"CLOSED"|string;
+  export type GitPullRequestEventTypeList = GitPullRequestEventType[];
+  export interface GitPullRequestFilter {
+    /**
+     * The field that specifies which pull request events to filter on (opened, updated, closed) for the trigger configuration.
+     */
+    events?: GitPullRequestEventTypeList;
+    /**
+     * The field that specifies to filter on branches for the pull request trigger configuration.
+     */
+    branches?: GitBranchFilterCriteria;
+    /**
+     * The field that specifies to filter on file paths for the pull request trigger configuration.
+     */
+    filePaths?: GitFilePathFilterCriteria;
+  }
+  export type GitPullRequestFilterList = GitPullRequestFilter[];
   export interface GitPushFilter {
     /**
      * The field that contains the details for the Git tags trigger configuration.
      */
     tags?: GitTagFilterCriteria;
+    /**
+     * The field that specifies to filter on branches for the push trigger configuration.
+     */
+    branches?: GitBranchFilterCriteria;
+    /**
+     * The field that specifies to filter on file paths for the push trigger configuration.
+     */
+    filePaths?: GitFilePathFilterCriteria;
   }
   export type GitPushFilterList = GitPushFilter[];
   export interface GitTagFilterCriteria {
@@ -1449,6 +1512,16 @@ declare namespace CodePipeline {
   export type LastChangedAt = Date;
   export type LastChangedBy = string;
   export type LastUpdatedBy = string;
+  export interface LatestInPipelineExecutionFilter {
+    /**
+     * The execution ID for the latest execution in the pipeline.
+     */
+    pipelineExecutionId: PipelineExecutionId;
+    /**
+     * The start time to filter on for the latest execution in the pipeline. Valid options:   All   Latest  
+     */
+    startTimeRange: StartTimeRange;
+  }
   export interface ListActionExecutionsInput {
     /**
      *  The name of the pipeline for which you want to list action execution history.
@@ -1690,17 +1763,21 @@ declare namespace CodePipeline {
      */
     version?: PipelineVersion;
     /**
-     * CodePipeline provides the following pipeline types, which differ in characteristics and price, so that you can tailor your pipeline features and cost to the needs of your applications.   V1 type pipelines have a JSON structure that contains standard pipeline, stage, and action-level parameters.   V2 type pipelines have the same structure as a V1 type, along with additional parameters for release safety and trigger configuration.    Including V2 parameters, such as triggers on Git tags, in the pipeline JSON when creating or updating a pipeline will result in the pipeline having the V2 type of pipeline and the associated costs.  For information about pricing for CodePipeline, see Pricing.  For information about which type of pipeline to choose, see What type of pipeline is right for me?.  V2 type pipelines, along with triggers on Git tags and pipeline-level variables, are not currently supported for CloudFormation and CDK resources in CodePipeline. For more information about V2 type pipelines, see Pipeline types in the CodePipeline User Guide. 
+     * The method that the pipeline will use to handle multiple executions. The default mode is SUPERSEDED.
+     */
+    executionMode?: ExecutionMode;
+    /**
+     * CodePipeline provides the following pipeline types, which differ in characteristics and price, so that you can tailor your pipeline features and cost to the needs of your applications.   V1 type pipelines have a JSON structure that contains standard pipeline, stage, and action-level parameters.   V2 type pipelines have the same structure as a V1 type, along with additional parameters for release safety and trigger configuration.    Including V2 parameters, such as triggers on Git tags, in the pipeline JSON when creating or updating a pipeline will result in the pipeline having the V2 type of pipeline and the associated costs.  For information about pricing for CodePipeline, see Pricing.  For information about which type of pipeline to choose, see What type of pipeline is right for me?.
      */
     pipelineType?: PipelineType;
-    /**
-     * The trigger configuration specifying a type of event, such as Git tags, that starts the pipeline.  When a trigger configuration is specified, default change detection for repository and branch commits is disabled. 
-     */
-    triggers?: PipelineTriggerDeclarationList;
     /**
      * A list that defines the pipeline variables for a pipeline resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9@\-_]+.
      */
     variables?: PipelineVariableDeclarationList;
+    /**
+     * The trigger configuration specifying a type of event, such as Git tags, that starts the pipeline.  When a trigger configuration is specified, default change detection for repository and branch commits is disabled. 
+     */
+    triggers?: PipelineTriggerDeclarationList;
   }
   export interface PipelineExecution {
     /**
@@ -1727,11 +1804,15 @@ declare namespace CodePipeline {
      * A list of ArtifactRevision objects included in a pipeline execution.
      */
     artifactRevisions?: ArtifactRevisionList;
-    trigger?: ExecutionTrigger;
     /**
      * A list of pipeline variables used for the pipeline execution.
      */
     variables?: ResolvedPipelineVariableList;
+    trigger?: ExecutionTrigger;
+    /**
+     * The method that the pipeline will use to handle multiple executions. The default mode is SUPERSEDED.
+     */
+    executionMode?: ExecutionMode;
   }
   export type PipelineExecutionId = string;
   export type PipelineExecutionStatus = "Cancelled"|"InProgress"|"Stopped"|"Stopping"|"Succeeded"|"Superseded"|"Failed"|string;
@@ -1765,6 +1846,10 @@ declare namespace CodePipeline {
      * The interaction that stopped a pipeline execution.
      */
     stopTrigger?: StopExecutionTrigger;
+    /**
+     * The method that the pipeline will use to handle multiple executions. The default mode is SUPERSEDED.
+     */
+    executionMode?: ExecutionMode;
   }
   export type PipelineExecutionSummaryList = PipelineExecutionSummary[];
   export type PipelineList = PipelineSummary[];
@@ -1798,9 +1883,13 @@ declare namespace CodePipeline {
      */
     version?: PipelineVersion;
     /**
-     * CodePipeline provides the following pipeline types, which differ in characteristics and price, so that you can tailor your pipeline features and cost to the needs of your applications.   V1 type pipelines have a JSON structure that contains standard pipeline, stage, and action-level parameters.   V2 type pipelines have the same structure as a V1 type, along with additional parameters for release safety and trigger configuration.    Including V2 parameters, such as triggers on Git tags, in the pipeline JSON when creating or updating a pipeline will result in the pipeline having the V2 type of pipeline and the associated costs.  For information about pricing for CodePipeline, see Pricing.  For information about which type of pipeline to choose, see What type of pipeline is right for me?.  V2 type pipelines, along with triggers on Git tags and pipeline-level variables, are not currently supported for CloudFormation and CDK resources in CodePipeline. For more information about V2 type pipelines, see Pipeline types in the CodePipeline User Guide. 
+     * CodePipeline provides the following pipeline types, which differ in characteristics and price, so that you can tailor your pipeline features and cost to the needs of your applications.   V1 type pipelines have a JSON structure that contains standard pipeline, stage, and action-level parameters.   V2 type pipelines have the same structure as a V1 type, along with additional parameters for release safety and trigger configuration.    Including V2 parameters, such as triggers on Git tags, in the pipeline JSON when creating or updating a pipeline will result in the pipeline having the V2 type of pipeline and the associated costs.  For information about pricing for CodePipeline, see Pricing.  For information about which type of pipeline to choose, see What type of pipeline is right for me?.
      */
     pipelineType?: PipelineType;
+    /**
+     * The method that the pipeline will use to handle multiple executions. The default mode is SUPERSEDED.
+     */
+    executionMode?: ExecutionMode;
     /**
      * The date and time the pipeline was created, in timestamp format.
      */
@@ -2177,6 +2266,7 @@ declare namespace CodePipeline {
      */
     status: StageExecutionStatus;
   }
+  export type StageExecutionList = StageExecution[];
   export type StageExecutionStatus = "Cancelled"|"InProgress"|"Failed"|"Stopped"|"Stopping"|"Succeeded"|string;
   export type StageName = string;
   export type StageRetryMode = "FAILED_ACTIONS"|"ALL_ACTIONS"|string;
@@ -2186,6 +2276,10 @@ declare namespace CodePipeline {
      */
     stageName?: StageName;
     inboundExecution?: StageExecution;
+    /**
+     * The inbound executions for a stage.
+     */
+    inboundExecutions?: StageExecutionList;
     /**
      * The state of the inbound transition, which is either enabled or disabled.
      */
@@ -2225,6 +2319,7 @@ declare namespace CodePipeline {
      */
     pipelineExecutionId?: PipelineExecutionId;
   }
+  export type StartTimeRange = "Latest"|"All"|string;
   export interface StopExecutionTrigger {
     /**
      * The user-specified reason the pipeline was stopped.

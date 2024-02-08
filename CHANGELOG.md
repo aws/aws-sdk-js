@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1553.0-->
+<!--LATEST=2.1554.0-->
 <!--ENTRYINSERT-->
+
+## 2.1554.0
+* feature: CodePipeline: Add ability to execute pipelines with new parallel & queued execution modes and add support for triggers with filtering on branches and file paths.
+* feature: QuickSight: General Interactions for Visuals; Waterfall Chart Color Configuration; Documentation Update
+* feature: WorkSpaces: This release introduces User-Decoupling feature. This feature allows Workspaces Core customers to provision workspaces without providing users. CreateWorkspaces and DescribeWorkspaces APIs will now take a new optional parameter "WorkspaceName".
 
 ## 2.1553.0
 * feature: DataSync: AWS DataSync now supports manifests for specifying files or objects to transfer.

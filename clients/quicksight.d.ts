@@ -2666,6 +2666,10 @@ declare namespace QuickSight {
      * The contribution analysis (anomaly configuration) setup of the visual.
      */
     ContributionAnalysisDefaults?: ContributionAnalysisDefaultList;
+    /**
+     * The general visual interactions setup for a visual.
+     */
+    Interactions?: VisualInteractionOptions;
   }
   export interface BarChartFieldWells {
     /**
@@ -2848,6 +2852,10 @@ declare namespace QuickSight {
      * The palette (chart color) display setup of the visual.
      */
     VisualPalette?: VisualPalette;
+    /**
+     * The general visual interactions setup for a visual.
+     */
+    Interactions?: VisualInteractionOptions;
   }
   export type BoxPlotDimensionFieldList = DimensionField[];
   export interface BoxPlotFieldWells {
@@ -3410,6 +3418,10 @@ declare namespace QuickSight {
      * The palette (chart color) display setup of the visual.
      */
     VisualPalette?: VisualPalette;
+    /**
+     * The general visual interactions setup for a visual.
+     */
+    Interactions?: VisualInteractionOptions;
   }
   export interface ComboChartFieldWells {
     /**
@@ -3626,6 +3638,12 @@ declare namespace QuickSight {
     Color?: HexColor;
   }
   export type ConstantType = "SINGULAR"|"RANGE"|"COLLECTIVE"|string;
+  export interface ContextMenuOption {
+    /**
+     * The availability status of the context menu options. If the value of this property is set to ENABLED, dashboard readers can interact with the context menu.
+     */
+    AvailabilityStatus?: DashboardBehavior;
+  }
   export interface ContributionAnalysisDefault {
     /**
      * The measure field that is used in the contribution analysis.
@@ -4873,6 +4891,10 @@ declare namespace QuickSight {
      * The sizing options for the size of the custom content visual. This structure is required when the ContentType of the visual is 'IMAGE'.
      */
     ImageScaling?: CustomContentImageScalingConfiguration;
+    /**
+     * The general visual interactions setup for a visual.
+     */
+    Interactions?: VisualInteractionOptions;
   }
   export type CustomContentImageScalingConfiguration = "FIT_TO_HEIGHT"|"FIT_TO_WIDTH"|"DO_NOT_SCALE"|"SCALE_TO_VISUAL"|string;
   export type CustomContentType = "IMAGE"|"OTHER_EMBEDDED_CONTENT"|string;
@@ -8873,6 +8895,10 @@ declare namespace QuickSight {
      * The map style options of the filled map visual.
      */
     MapStyleOptions?: GeospatialMapStyleOptions;
+    /**
+     * The general visual interactions setup for a visual.
+     */
+    Interactions?: VisualInteractionOptions;
   }
   export type FilledMapDimensionFieldList = DimensionField[];
   export interface FilledMapFieldWells {
@@ -9610,6 +9636,10 @@ declare namespace QuickSight {
      * The visual palette configuration of a FunnelChartVisual.
      */
     VisualPalette?: VisualPalette;
+    /**
+     * The general visual interactions setup for a visual.
+     */
+    Interactions?: VisualInteractionOptions;
   }
   export interface FunnelChartDataLabelOptions {
     /**
@@ -9730,6 +9760,10 @@ declare namespace QuickSight {
      * The visual palette configuration of a GaugeChartVisual.
      */
     VisualPalette?: VisualPalette;
+    /**
+     * The general visual interactions setup for a visual.
+     */
+    Interactions?: VisualInteractionOptions;
   }
   export interface GaugeChartFieldWells {
     /**
@@ -9976,6 +10010,10 @@ declare namespace QuickSight {
      */
     PointStyleOptions?: GeospatialPointStyleOptions;
     VisualPalette?: VisualPalette;
+    /**
+     * The general visual interactions setup for a visual.
+     */
+    Interactions?: VisualInteractionOptions;
   }
   export interface GeospatialMapFieldWells {
     /**
@@ -10355,6 +10393,10 @@ declare namespace QuickSight {
      * The tooltip display setup of the visual.
      */
     Tooltip?: TooltipOptions;
+    /**
+     * The general visual interactions setup for a visual.
+     */
+    Interactions?: VisualInteractionOptions;
   }
   export type HeatMapDimensionFieldList = DimensionField[];
   export interface HeatMapFieldWells {
@@ -10469,6 +10511,10 @@ declare namespace QuickSight {
      * The visual palette configuration of a histogram.
      */
     VisualPalette?: VisualPalette;
+    /**
+     * The general visual interactions setup for a visual.
+     */
+    Interactions?: VisualInteractionOptions;
   }
   export interface HistogramFieldWells {
     /**
@@ -10631,6 +10677,10 @@ declare namespace QuickSight {
      * The custom narrative of the insight visual.
      */
     CustomNarrative?: CustomNarrativeOptions;
+    /**
+     * The general visual interactions setup for a visual.
+     */
+    Interactions?: VisualInteractionOptions;
   }
   export interface InsightVisual {
     /**
@@ -10846,6 +10896,10 @@ declare namespace QuickSight {
      * The options that determine the presentation of a KPI visual.
      */
     KPIOptions?: KPIOptions;
+    /**
+     * The general visual interactions setup for a visual.
+     */
+    Interactions?: VisualInteractionOptions;
   }
   export interface KPIFieldWells {
     /**
@@ -11141,6 +11195,10 @@ declare namespace QuickSight {
      * The visual palette configuration of a line chart.
      */
     VisualPalette?: VisualPalette;
+    /**
+     * The general visual interactions setup for a visual.
+     */
+    Interactions?: VisualInteractionOptions;
   }
   export interface LineChartDefaultSeriesSettings {
     /**
@@ -13412,6 +13470,10 @@ declare namespace QuickSight {
      * The contribution analysis (anomaly configuration) setup of the visual.
      */
     ContributionAnalysisDefaults?: ContributionAnalysisDefaultList;
+    /**
+     * The general visual interactions setup for a visual.
+     */
+    Interactions?: VisualInteractionOptions;
   }
   export interface PieChartFieldWells {
     /**
@@ -13553,6 +13615,10 @@ declare namespace QuickSight {
      * The paginated report options for a pivot table visual.
      */
     PaginatedReportOptions?: PivotTablePaginatedReportOptions;
+    /**
+     * The general visual interactions setup for a visual.
+     */
+    Interactions?: VisualInteractionOptions;
   }
   export interface PivotTableDataPathOption {
     /**
@@ -13994,6 +14060,10 @@ declare namespace QuickSight {
      * The axis behavior options of a radar chart.
      */
     AxesRangeScale?: RadarChartAxesRangeScale;
+    /**
+     * The general visual interactions setup for a visual.
+     */
+    Interactions?: VisualInteractionOptions;
   }
   export interface RadarChartFieldWells {
     /**
@@ -14744,6 +14814,10 @@ declare namespace QuickSight {
      * The data label configuration of a sankey diagram.
      */
     DataLabels?: DataLabelOptions;
+    /**
+     * The general visual interactions setup for a visual.
+     */
+    Interactions?: VisualInteractionOptions;
   }
   export interface SankeyDiagramFieldWells {
     /**
@@ -14850,6 +14924,10 @@ declare namespace QuickSight {
      * The palette (chart color) display setup of the visual.
      */
     VisualPalette?: VisualPalette;
+    /**
+     * The general visual interactions setup for a visual.
+     */
+    Interactions?: VisualInteractionOptions;
   }
   export interface ScatterPlotFieldWells {
     /**
@@ -16224,6 +16302,10 @@ declare namespace QuickSight {
      * A collection of inline visualizations to display within a chart.
      */
     TableInlineVisualizations?: TableInlineVisualizationList;
+    /**
+     * The general visual interactions setup for a visual.
+     */
+    Interactions?: VisualInteractionOptions;
   }
   export interface TableFieldCustomIconContent {
     /**
@@ -17739,6 +17821,10 @@ declare namespace QuickSight {
      * The tooltip display setup of the visual.
      */
     Tooltip?: TooltipOptions;
+    /**
+     * The general visual interactions setup for a visual.
+     */
+    Interactions?: VisualInteractionOptions;
   }
   export type TreeMapDimensionFieldList = DimensionField[];
   export interface TreeMapFieldWells {
@@ -18511,11 +18597,11 @@ declare namespace QuickSight {
      */
     FolderId: RestrictiveResourceId;
     /**
-     * The permissions that you want to grant on a resource.
+     * The permissions that you want to grant on a resource. Namespace ARNs are not supported Principal values for folder permissions.
      */
     GrantPermissions?: ResourcePermissionList;
     /**
-     * The permissions that you want to revoke from a resource.
+     * The permissions that you want to revoke from a resource. Namespace ARNs are not supported Principal values for folder permissions.
      */
     RevokePermissions?: ResourcePermissionList;
   }
@@ -19615,6 +19701,16 @@ declare namespace QuickSight {
   }
   export type VisualCustomActionOperationList = VisualCustomActionOperation[];
   export type VisualCustomActionTrigger = "DATA_POINT_CLICK"|"DATA_POINT_MENU"|string;
+  export interface VisualInteractionOptions {
+    /**
+     * The on-visual menu options for a visual.
+     */
+    VisualMenuOption?: VisualMenuOption;
+    /**
+     * The context menu options for a visual.
+     */
+    ContextMenuOption?: ContextMenuOption;
+  }
   export type VisualList = Visual[];
   export interface VisualMenuOption {
     /**
@@ -19673,6 +19769,12 @@ declare namespace QuickSight {
      */
     Breakdowns?: DimensionFieldList;
   }
+  export interface WaterfallChartColorConfiguration {
+    /**
+     * The color configuration for individual groups within a waterfall visual.
+     */
+    GroupColorConfiguration?: WaterfallChartGroupColorConfiguration;
+  }
   export interface WaterfallChartConfiguration {
     /**
      * The field well configuration of a waterfall visual.
@@ -19714,12 +19816,34 @@ declare namespace QuickSight {
      * The visual palette configuration of a waterfall visual.
      */
     VisualPalette?: VisualPalette;
+    /**
+     * The color configuration of a waterfall visual.
+     */
+    ColorConfiguration?: WaterfallChartColorConfiguration;
+    /**
+     * The general visual interactions setup for a visual.
+     */
+    Interactions?: VisualInteractionOptions;
   }
   export interface WaterfallChartFieldWells {
     /**
      * The field well configuration of a waterfall visual.
      */
     WaterfallChartAggregatedFieldWells?: WaterfallChartAggregatedFieldWells;
+  }
+  export interface WaterfallChartGroupColorConfiguration {
+    /**
+     * Defines the color for the positive bars of a waterfall chart.
+     */
+    PositiveBarColor?: HexColor;
+    /**
+     * Defines the color for the negative bars of a waterfall chart.
+     */
+    NegativeBarColor?: HexColor;
+    /**
+     * Defines the color for the total bars of a waterfall chart.
+     */
+    TotalBarColor?: HexColor;
   }
   export interface WaterfallChartOptions {
     /**
@@ -19815,6 +19939,10 @@ declare namespace QuickSight {
      * The options for a word cloud visual.
      */
     WordCloudOptions?: WordCloudOptions;
+    /**
+     * The general visual interactions setup for a visual.
+     */
+    Interactions?: VisualInteractionOptions;
   }
   export type WordCloudCloudLayout = "FLUID"|"NORMAL"|string;
   export type WordCloudDimensionFieldList = DimensionField[];
