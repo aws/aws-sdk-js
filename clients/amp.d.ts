@@ -13,211 +13,211 @@ declare class Amp extends Service {
   constructor(options?: Amp.Types.ClientConfiguration)
   config: Config & Amp.Types.ClientConfiguration;
   /**
-   * Create an alert manager definition.
+   * The CreateAlertManagerDefinition operation creates the alert manager definition in a workspace. If a workspace already has an alert manager definition, don't use this operation to update it. Instead, use PutAlertManagerDefinition.
    */
   createAlertManagerDefinition(params: Amp.Types.CreateAlertManagerDefinitionRequest, callback?: (err: AWSError, data: Amp.Types.CreateAlertManagerDefinitionResponse) => void): Request<Amp.Types.CreateAlertManagerDefinitionResponse, AWSError>;
   /**
-   * Create an alert manager definition.
+   * The CreateAlertManagerDefinition operation creates the alert manager definition in a workspace. If a workspace already has an alert manager definition, don't use this operation to update it. Instead, use PutAlertManagerDefinition.
    */
   createAlertManagerDefinition(callback?: (err: AWSError, data: Amp.Types.CreateAlertManagerDefinitionResponse) => void): Request<Amp.Types.CreateAlertManagerDefinitionResponse, AWSError>;
   /**
-   * Create logging configuration.
+   * The CreateLoggingConfiguration operation creates a logging configuration for the workspace. Use this operation to set the CloudWatch log group to which the logs will be published to.
    */
   createLoggingConfiguration(params: Amp.Types.CreateLoggingConfigurationRequest, callback?: (err: AWSError, data: Amp.Types.CreateLoggingConfigurationResponse) => void): Request<Amp.Types.CreateLoggingConfigurationResponse, AWSError>;
   /**
-   * Create logging configuration.
+   * The CreateLoggingConfiguration operation creates a logging configuration for the workspace. Use this operation to set the CloudWatch log group to which the logs will be published to.
    */
   createLoggingConfiguration(callback?: (err: AWSError, data: Amp.Types.CreateLoggingConfigurationResponse) => void): Request<Amp.Types.CreateLoggingConfigurationResponse, AWSError>;
   /**
-   * Create a rule group namespace.
+   * The CreateRuleGroupsNamespace operation creates a rule groups namespace within a workspace. A rule groups namespace is associated with exactly one rules file. A workspace can have multiple rule groups namespaces. Use this operation only to create new rule groups namespaces. To update an existing rule groups namespace, use PutRuleGroupsNamespace.
    */
   createRuleGroupsNamespace(params: Amp.Types.CreateRuleGroupsNamespaceRequest, callback?: (err: AWSError, data: Amp.Types.CreateRuleGroupsNamespaceResponse) => void): Request<Amp.Types.CreateRuleGroupsNamespaceResponse, AWSError>;
   /**
-   * Create a rule group namespace.
+   * The CreateRuleGroupsNamespace operation creates a rule groups namespace within a workspace. A rule groups namespace is associated with exactly one rules file. A workspace can have multiple rule groups namespaces. Use this operation only to create new rule groups namespaces. To update an existing rule groups namespace, use PutRuleGroupsNamespace.
    */
   createRuleGroupsNamespace(callback?: (err: AWSError, data: Amp.Types.CreateRuleGroupsNamespaceResponse) => void): Request<Amp.Types.CreateRuleGroupsNamespaceResponse, AWSError>;
   /**
-   * Create a scraper.
+   * The CreateScraper operation creates a scraper to collect metrics. A scraper pulls metrics from Prometheus-compatible sources within an Amazon EKS cluster, and sends them to your Amazon Managed Service for Prometheus workspace. You can configure the scraper to control what metrics are collected, and what transformations are applied prior to sending them to your workspace. If needed, an IAM role will be created for you that gives Amazon Managed Service for Prometheus access to the metrics in your cluster. For more information, see Using roles for scraping metrics from EKS in the Amazon Managed Service for Prometheus User Guide. You cannot update a scraper. If you want to change the configuration of the scraper, create a new scraper and delete the old one. The scrapeConfiguration parameter contains the base64-encoded version of the YAML configuration file.  For more information about collectors, including what metrics are collected, and how to configure the scraper, see Amazon Web Services managed collectors in the Amazon Managed Service for Prometheus User Guide. 
    */
   createScraper(params: Amp.Types.CreateScraperRequest, callback?: (err: AWSError, data: Amp.Types.CreateScraperResponse) => void): Request<Amp.Types.CreateScraperResponse, AWSError>;
   /**
-   * Create a scraper.
+   * The CreateScraper operation creates a scraper to collect metrics. A scraper pulls metrics from Prometheus-compatible sources within an Amazon EKS cluster, and sends them to your Amazon Managed Service for Prometheus workspace. You can configure the scraper to control what metrics are collected, and what transformations are applied prior to sending them to your workspace. If needed, an IAM role will be created for you that gives Amazon Managed Service for Prometheus access to the metrics in your cluster. For more information, see Using roles for scraping metrics from EKS in the Amazon Managed Service for Prometheus User Guide. You cannot update a scraper. If you want to change the configuration of the scraper, create a new scraper and delete the old one. The scrapeConfiguration parameter contains the base64-encoded version of the YAML configuration file.  For more information about collectors, including what metrics are collected, and how to configure the scraper, see Amazon Web Services managed collectors in the Amazon Managed Service for Prometheus User Guide. 
    */
   createScraper(callback?: (err: AWSError, data: Amp.Types.CreateScraperResponse) => void): Request<Amp.Types.CreateScraperResponse, AWSError>;
   /**
-   * Creates a new AMP workspace.
+   * Creates a Prometheus workspace. A workspace is a logical space dedicated to the storage and querying of Prometheus metrics. You can have one or more workspaces in each Region in your account.
    */
   createWorkspace(params: Amp.Types.CreateWorkspaceRequest, callback?: (err: AWSError, data: Amp.Types.CreateWorkspaceResponse) => void): Request<Amp.Types.CreateWorkspaceResponse, AWSError>;
   /**
-   * Creates a new AMP workspace.
+   * Creates a Prometheus workspace. A workspace is a logical space dedicated to the storage and querying of Prometheus metrics. You can have one or more workspaces in each Region in your account.
    */
   createWorkspace(callback?: (err: AWSError, data: Amp.Types.CreateWorkspaceResponse) => void): Request<Amp.Types.CreateWorkspaceResponse, AWSError>;
   /**
-   * Deletes an alert manager definition.
+   * Deletes the alert manager definition from a workspace.
    */
   deleteAlertManagerDefinition(params: Amp.Types.DeleteAlertManagerDefinitionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an alert manager definition.
+   * Deletes the alert manager definition from a workspace.
    */
   deleteAlertManagerDefinition(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete logging configuration.
+   * Deletes the logging configuration for a workspace.
    */
   deleteLoggingConfiguration(params: Amp.Types.DeleteLoggingConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete logging configuration.
+   * Deletes the logging configuration for a workspace.
    */
   deleteLoggingConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete a rule groups namespace.
+   * Deletes one rule groups namespace and its associated rule groups definition.
    */
   deleteRuleGroupsNamespace(params: Amp.Types.DeleteRuleGroupsNamespaceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete a rule groups namespace.
+   * Deletes one rule groups namespace and its associated rule groups definition.
    */
   deleteRuleGroupsNamespace(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a scraper.
+   * The DeleteScraper operation deletes one scraper, and stops any metrics collection that the scraper performs.
    */
   deleteScraper(params: Amp.Types.DeleteScraperRequest, callback?: (err: AWSError, data: Amp.Types.DeleteScraperResponse) => void): Request<Amp.Types.DeleteScraperResponse, AWSError>;
   /**
-   * Deletes a scraper.
+   * The DeleteScraper operation deletes one scraper, and stops any metrics collection that the scraper performs.
    */
   deleteScraper(callback?: (err: AWSError, data: Amp.Types.DeleteScraperResponse) => void): Request<Amp.Types.DeleteScraperResponse, AWSError>;
   /**
-   * Deletes an AMP workspace.
+   * Deletes an existing workspace.   When you delete a workspace, the data that has been ingested into it is not immediately deleted. It will be permanently deleted within one month. 
    */
   deleteWorkspace(params: Amp.Types.DeleteWorkspaceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an AMP workspace.
+   * Deletes an existing workspace.   When you delete a workspace, the data that has been ingested into it is not immediately deleted. It will be permanently deleted within one month. 
    */
   deleteWorkspace(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Describes an alert manager definition.
+   * Retrieves the full information about the alert manager definition for a workspace.
    */
   describeAlertManagerDefinition(params: Amp.Types.DescribeAlertManagerDefinitionRequest, callback?: (err: AWSError, data: Amp.Types.DescribeAlertManagerDefinitionResponse) => void): Request<Amp.Types.DescribeAlertManagerDefinitionResponse, AWSError>;
   /**
-   * Describes an alert manager definition.
+   * Retrieves the full information about the alert manager definition for a workspace.
    */
   describeAlertManagerDefinition(callback?: (err: AWSError, data: Amp.Types.DescribeAlertManagerDefinitionResponse) => void): Request<Amp.Types.DescribeAlertManagerDefinitionResponse, AWSError>;
   /**
-   * Describes logging configuration.
+   * Returns complete information about the current logging configuration of the workspace.
    */
   describeLoggingConfiguration(params: Amp.Types.DescribeLoggingConfigurationRequest, callback?: (err: AWSError, data: Amp.Types.DescribeLoggingConfigurationResponse) => void): Request<Amp.Types.DescribeLoggingConfigurationResponse, AWSError>;
   /**
-   * Describes logging configuration.
+   * Returns complete information about the current logging configuration of the workspace.
    */
   describeLoggingConfiguration(callback?: (err: AWSError, data: Amp.Types.DescribeLoggingConfigurationResponse) => void): Request<Amp.Types.DescribeLoggingConfigurationResponse, AWSError>;
   /**
-   * Describe a rule groups namespace.
+   * Returns complete information about one rule groups namespace. To retrieve a list of rule groups namespaces, use ListRuleGroupsNamespaces.
    */
   describeRuleGroupsNamespace(params: Amp.Types.DescribeRuleGroupsNamespaceRequest, callback?: (err: AWSError, data: Amp.Types.DescribeRuleGroupsNamespaceResponse) => void): Request<Amp.Types.DescribeRuleGroupsNamespaceResponse, AWSError>;
   /**
-   * Describe a rule groups namespace.
+   * Returns complete information about one rule groups namespace. To retrieve a list of rule groups namespaces, use ListRuleGroupsNamespaces.
    */
   describeRuleGroupsNamespace(callback?: (err: AWSError, data: Amp.Types.DescribeRuleGroupsNamespaceResponse) => void): Request<Amp.Types.DescribeRuleGroupsNamespaceResponse, AWSError>;
   /**
-   * Describe an existing scraper.
+   * The DescribeScraper operation displays information about an existing scraper.
    */
   describeScraper(params: Amp.Types.DescribeScraperRequest, callback?: (err: AWSError, data: Amp.Types.DescribeScraperResponse) => void): Request<Amp.Types.DescribeScraperResponse, AWSError>;
   /**
-   * Describe an existing scraper.
+   * The DescribeScraper operation displays information about an existing scraper.
    */
   describeScraper(callback?: (err: AWSError, data: Amp.Types.DescribeScraperResponse) => void): Request<Amp.Types.DescribeScraperResponse, AWSError>;
   /**
-   * Describes an existing AMP workspace.
+   * Returns information about an existing workspace. 
    */
   describeWorkspace(params: Amp.Types.DescribeWorkspaceRequest, callback?: (err: AWSError, data: Amp.Types.DescribeWorkspaceResponse) => void): Request<Amp.Types.DescribeWorkspaceResponse, AWSError>;
   /**
-   * Describes an existing AMP workspace.
+   * Returns information about an existing workspace. 
    */
   describeWorkspace(callback?: (err: AWSError, data: Amp.Types.DescribeWorkspaceResponse) => void): Request<Amp.Types.DescribeWorkspaceResponse, AWSError>;
   /**
-   * Gets a default configuration.
+   * The GetDefaultScraperConfiguration operation returns the default scraper configuration used when Amazon EKS creates a scraper for you.
    */
   getDefaultScraperConfiguration(params: Amp.Types.GetDefaultScraperConfigurationRequest, callback?: (err: AWSError, data: Amp.Types.GetDefaultScraperConfigurationResponse) => void): Request<Amp.Types.GetDefaultScraperConfigurationResponse, AWSError>;
   /**
-   * Gets a default configuration.
+   * The GetDefaultScraperConfiguration operation returns the default scraper configuration used when Amazon EKS creates a scraper for you.
    */
   getDefaultScraperConfiguration(callback?: (err: AWSError, data: Amp.Types.GetDefaultScraperConfigurationResponse) => void): Request<Amp.Types.GetDefaultScraperConfigurationResponse, AWSError>;
   /**
-   * Lists rule groups namespaces.
+   * Returns a list of rule groups namespaces in a workspace.
    */
   listRuleGroupsNamespaces(params: Amp.Types.ListRuleGroupsNamespacesRequest, callback?: (err: AWSError, data: Amp.Types.ListRuleGroupsNamespacesResponse) => void): Request<Amp.Types.ListRuleGroupsNamespacesResponse, AWSError>;
   /**
-   * Lists rule groups namespaces.
+   * Returns a list of rule groups namespaces in a workspace.
    */
   listRuleGroupsNamespaces(callback?: (err: AWSError, data: Amp.Types.ListRuleGroupsNamespacesResponse) => void): Request<Amp.Types.ListRuleGroupsNamespacesResponse, AWSError>;
   /**
-   * Lists all scrapers in a customer account, including scrapers being created or deleted. You may provide filters to return a more specific list of results.
+   * The ListScrapers operation lists all of the scrapers in your account. This includes scrapers being created or deleted. You can optionally filter the returned list.
    */
   listScrapers(params: Amp.Types.ListScrapersRequest, callback?: (err: AWSError, data: Amp.Types.ListScrapersResponse) => void): Request<Amp.Types.ListScrapersResponse, AWSError>;
   /**
-   * Lists all scrapers in a customer account, including scrapers being created or deleted. You may provide filters to return a more specific list of results.
+   * The ListScrapers operation lists all of the scrapers in your account. This includes scrapers being created or deleted. You can optionally filter the returned list.
    */
   listScrapers(callback?: (err: AWSError, data: Amp.Types.ListScrapersResponse) => void): Request<Amp.Types.ListScrapersResponse, AWSError>;
   /**
-   * Lists the tags you have assigned to the resource.
+   * The ListTagsForResource operation returns the tags that are associated with an Amazon Managed Service for Prometheus resource. Currently, the only resources that can be tagged are workspaces and rule groups namespaces. 
    */
   listTagsForResource(params: Amp.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Amp.Types.ListTagsForResourceResponse) => void): Request<Amp.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists the tags you have assigned to the resource.
+   * The ListTagsForResource operation returns the tags that are associated with an Amazon Managed Service for Prometheus resource. Currently, the only resources that can be tagged are workspaces and rule groups namespaces. 
    */
   listTagsForResource(callback?: (err: AWSError, data: Amp.Types.ListTagsForResourceResponse) => void): Request<Amp.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists all AMP workspaces, including workspaces being created or deleted.
+   * Lists all of the Amazon Managed Service for Prometheus workspaces in your account. This includes workspaces being created or deleted. 
    */
   listWorkspaces(params: Amp.Types.ListWorkspacesRequest, callback?: (err: AWSError, data: Amp.Types.ListWorkspacesResponse) => void): Request<Amp.Types.ListWorkspacesResponse, AWSError>;
   /**
-   * Lists all AMP workspaces, including workspaces being created or deleted.
+   * Lists all of the Amazon Managed Service for Prometheus workspaces in your account. This includes workspaces being created or deleted. 
    */
   listWorkspaces(callback?: (err: AWSError, data: Amp.Types.ListWorkspacesResponse) => void): Request<Amp.Types.ListWorkspacesResponse, AWSError>;
   /**
-   * Update an alert manager definition.
+   * Updates an existing alert manager definition in a workspace. If the workspace does not already have an alert manager definition, don't use this operation to create it. Instead, use CreateAlertManagerDefinition.
    */
   putAlertManagerDefinition(params: Amp.Types.PutAlertManagerDefinitionRequest, callback?: (err: AWSError, data: Amp.Types.PutAlertManagerDefinitionResponse) => void): Request<Amp.Types.PutAlertManagerDefinitionResponse, AWSError>;
   /**
-   * Update an alert manager definition.
+   * Updates an existing alert manager definition in a workspace. If the workspace does not already have an alert manager definition, don't use this operation to create it. Instead, use CreateAlertManagerDefinition.
    */
   putAlertManagerDefinition(callback?: (err: AWSError, data: Amp.Types.PutAlertManagerDefinitionResponse) => void): Request<Amp.Types.PutAlertManagerDefinitionResponse, AWSError>;
   /**
-   * Update a rule groups namespace.
+   * Updates an existing rule groups namespace within a workspace. A rule groups namespace is associated with exactly one rules file. A workspace can have multiple rule groups namespaces. Use this operation only to update existing rule groups namespaces. To create a new rule groups namespace, use CreateRuleGroupsNamespace. You can't use this operation to add tags to an existing rule groups namespace. Instead, use TagResource.
    */
   putRuleGroupsNamespace(params: Amp.Types.PutRuleGroupsNamespaceRequest, callback?: (err: AWSError, data: Amp.Types.PutRuleGroupsNamespaceResponse) => void): Request<Amp.Types.PutRuleGroupsNamespaceResponse, AWSError>;
   /**
-   * Update a rule groups namespace.
+   * Updates an existing rule groups namespace within a workspace. A rule groups namespace is associated with exactly one rules file. A workspace can have multiple rule groups namespaces. Use this operation only to update existing rule groups namespaces. To create a new rule groups namespace, use CreateRuleGroupsNamespace. You can't use this operation to add tags to an existing rule groups namespace. Instead, use TagResource.
    */
   putRuleGroupsNamespace(callback?: (err: AWSError, data: Amp.Types.PutRuleGroupsNamespaceResponse) => void): Request<Amp.Types.PutRuleGroupsNamespaceResponse, AWSError>;
   /**
-   * Creates tags for the specified resource.
+   * The TagResource operation associates tags with an Amazon Managed Service for Prometheus resource. The only resources that can be tagged are workspaces and rule groups namespaces.  If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.
    */
   tagResource(params: Amp.Types.TagResourceRequest, callback?: (err: AWSError, data: Amp.Types.TagResourceResponse) => void): Request<Amp.Types.TagResourceResponse, AWSError>;
   /**
-   * Creates tags for the specified resource.
+   * The TagResource operation associates tags with an Amazon Managed Service for Prometheus resource. The only resources that can be tagged are workspaces and rule groups namespaces.  If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.
    */
   tagResource(callback?: (err: AWSError, data: Amp.Types.TagResourceResponse) => void): Request<Amp.Types.TagResourceResponse, AWSError>;
   /**
-   * Deletes tags from the specified resource.
+   * Removes the specified tags from an Amazon Managed Service for Prometheus resource. The only resources that can be tagged are workspaces and rule groups namespaces. 
    */
   untagResource(params: Amp.Types.UntagResourceRequest, callback?: (err: AWSError, data: Amp.Types.UntagResourceResponse) => void): Request<Amp.Types.UntagResourceResponse, AWSError>;
   /**
-   * Deletes tags from the specified resource.
+   * Removes the specified tags from an Amazon Managed Service for Prometheus resource. The only resources that can be tagged are workspaces and rule groups namespaces. 
    */
   untagResource(callback?: (err: AWSError, data: Amp.Types.UntagResourceResponse) => void): Request<Amp.Types.UntagResourceResponse, AWSError>;
   /**
-   * Update logging configuration.
+   * Updates the log group ARN or the workspace ID of the current logging configuration.
    */
   updateLoggingConfiguration(params: Amp.Types.UpdateLoggingConfigurationRequest, callback?: (err: AWSError, data: Amp.Types.UpdateLoggingConfigurationResponse) => void): Request<Amp.Types.UpdateLoggingConfigurationResponse, AWSError>;
   /**
-   * Update logging configuration.
+   * Updates the log group ARN or the workspace ID of the current logging configuration.
    */
   updateLoggingConfiguration(callback?: (err: AWSError, data: Amp.Types.UpdateLoggingConfigurationResponse) => void): Request<Amp.Types.UpdateLoggingConfigurationResponse, AWSError>;
   /**
-   * Updates an AMP workspace alias.
+   * Updates the alias of an existing workspace. 
    */
   updateWorkspaceAlias(params: Amp.Types.UpdateWorkspaceAliasRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates an AMP workspace alias.
+   * Updates the alias of an existing workspace. 
    */
   updateWorkspaceAlias(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -257,36 +257,36 @@ declare namespace Amp {
   export type AlertManagerDefinitionData = Buffer|Uint8Array|Blob|string;
   export interface AlertManagerDefinitionDescription {
     /**
-     * The status of alert manager definition.
-     */
-    status: AlertManagerDefinitionStatus;
-    /**
-     * The alert manager definition.
-     */
-    data: AlertManagerDefinitionData;
-    /**
-     * The time when the alert manager definition was created.
+     * The date and time that the alert manager definition was created.
      */
     createdAt: Timestamp;
     /**
-     * The time when the alert manager definition was modified.
+     * The actual alert manager definition. For details about the alert manager definition, see AlertManagedDefinitionData.
+     */
+    data: AlertManagerDefinitionData;
+    /**
+     * The date and time that the alert manager definition was most recently changed.
      */
     modifiedAt: Timestamp;
+    /**
+     * A structure that displays the current status of the alert manager definition..
+     */
+    status: AlertManagerDefinitionStatus;
   }
   export interface AlertManagerDefinitionStatus {
     /**
-     * Status code of this definition.
+     * The current status of the alert manager. 
      */
     statusCode: AlertManagerDefinitionStatusCode;
     /**
-     * The reason for failure if any.
+     * If there is a failure, the reason for the failure.
      */
     statusReason?: String;
   }
   export type AlertManagerDefinitionStatusCode = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"CREATION_FAILED"|"UPDATE_FAILED"|string;
   export interface AmpConfiguration {
     /**
-     * The ARN of an AMP workspace.
+     * ARN of the Amazon Managed Service for Prometheus workspace.
      */
     workspaceArn: WorkspaceArn;
   }
@@ -294,281 +294,281 @@ declare namespace Amp {
   export type ClusterArn = string;
   export interface CreateAlertManagerDefinitionRequest {
     /**
-     * The ID of the workspace in which to create the alert manager definition.
+     * A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.
      */
-    workspaceId: WorkspaceId;
+    clientToken?: IdempotencyToken;
     /**
-     * The alert manager definition data.
+     * The alert manager definition to add. A base64-encoded version of the YAML alert manager definition file. For details about the alert manager definition, see AlertManagedDefinitionData.
      */
     data: AlertManagerDefinitionData;
     /**
-     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+     * The ID of the workspace to add the alert manager definition to.
      */
-    clientToken?: IdempotencyToken;
+    workspaceId: WorkspaceId;
   }
   export interface CreateAlertManagerDefinitionResponse {
     /**
-     * The status of alert manager definition.
+     * A structure that displays the current status of the alert manager definition.
      */
     status: AlertManagerDefinitionStatus;
   }
   export interface CreateLoggingConfigurationRequest {
     /**
-     * The ID of the workspace to vend logs to.
+     * A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.
      */
-    workspaceId: WorkspaceId;
+    clientToken?: IdempotencyToken;
     /**
-     * The ARN of the CW log group to which the vended log data will be published.
+     * The ARN of the CloudWatch log group to which the vended log data will be published. This log group must exist prior to calling this API.
      */
     logGroupArn: LogGroupArn;
     /**
-     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+     * The ID of the workspace to create the logging configuration for.
      */
-    clientToken?: IdempotencyToken;
+    workspaceId: WorkspaceId;
   }
   export interface CreateLoggingConfigurationResponse {
     /**
-     * The status of the logging configuration.
+     * A structure that displays the current status of the logging configuration.
      */
     status: LoggingConfigurationStatus;
   }
   export interface CreateRuleGroupsNamespaceRequest {
     /**
-     * The ID of the workspace in which to create the rule group namespace.
-     */
-    workspaceId: WorkspaceId;
-    /**
-     * The rule groups namespace name.
-     */
-    name: RuleGroupsNamespaceName;
-    /**
-     * The namespace data that define the rule groups.
-     */
-    data: RuleGroupsNamespaceData;
-    /**
-     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+     * A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.
      */
     clientToken?: IdempotencyToken;
     /**
-     * Optional, user-provided tags for this rule groups namespace.
+     * The rules file to use in the new namespace. Contains the base64-encoded version of the YAML rules file. For details about the rule groups namespace structure, see RuleGroupsNamespaceData.
      */
-    tags?: TagMap;
-  }
-  export interface CreateRuleGroupsNamespaceResponse {
+    data: RuleGroupsNamespaceData;
     /**
-     * The rule groups namespace name.
+     * The name for the new rule groups namespace.
      */
     name: RuleGroupsNamespaceName;
     /**
-     * The Amazon Resource Name (ARN) of this rule groups namespace.
+     * The list of tag keys and values to associate with the rule groups namespace.
+     */
+    tags?: TagMap;
+    /**
+     * The ID of the workspace to add the rule groups namespace.
+     */
+    workspaceId: WorkspaceId;
+  }
+  export interface CreateRuleGroupsNamespaceResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the new rule groups namespace.
      */
     arn: RuleGroupsNamespaceArn;
     /**
-     * The status of rule groups namespace.
+     * The name of the new rule groups namespace.
+     */
+    name: RuleGroupsNamespaceName;
+    /**
+     * A structure that returns the current status of the rule groups namespace.
      */
     status: RuleGroupsNamespaceStatus;
     /**
-     * The tags of this rule groups namespace.
+     * The list of tag keys and values that are associated with the namespace.
      */
     tags?: TagMap;
   }
   export interface CreateScraperRequest {
     /**
-     * An optional user-assigned alias for this scraper. This alias is for user reference and does not need to be unique.
+     * (optional) a name to associate with the scraper. This is for your use, and does not need to be unique.
      */
     alias?: ScraperAlias;
     /**
-     * The configuration used to create the scraper.
-     */
-    scrapeConfiguration: ScrapeConfiguration;
-    /**
-     * The source that the scraper will be discovering and collecting metrics from.
-     */
-    source: Source;
-    /**
-     * The destination that the scraper will be producing metrics to.
-     */
-    destination: Destination;
-    /**
-     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+     * (Optional) A unique, case-sensitive identifier that you can provide to ensure the idempotency of the request.
      */
     clientToken?: IdempotencyToken;
     /**
-     * Optional, user-provided tags for this scraper.
+     * The Amazon Managed Service for Prometheus workspace to send metrics to.
+     */
+    destination: Destination;
+    /**
+     * The configuration file to use in the new scraper. For more information, see Scraper configuration in the Amazon Managed Service for Prometheus User Guide.
+     */
+    scrapeConfiguration: ScrapeConfiguration;
+    /**
+     * The Amazon EKS cluster from which the scraper will collect metrics.
+     */
+    source: Source;
+    /**
+     * (Optional) The list of tag keys and values to associate with the scraper.
      */
     tags?: TagMap;
   }
   export interface CreateScraperResponse {
     /**
-     * The generated ID of the scraper that was just created.
-     */
-    scraperId: ScraperId;
-    /**
-     * The ARN of the scraper that was just created.
+     * The Amazon Resource Name (ARN) of the new scraper.
      */
     arn: ScraperArn;
     /**
-     * The status of the scraper that was just created (usually CREATING).
+     * The ID of the new scraper.
+     */
+    scraperId: ScraperId;
+    /**
+     * A structure that displays the current status of the scraper.
      */
     status: ScraperStatus;
     /**
-     * The tags of this scraper.
+     * The list of tag keys and values that are associated with the scraper.
      */
     tags?: TagMap;
   }
   export interface CreateWorkspaceRequest {
     /**
-     * An optional user-assigned alias for this workspace. This alias is for user reference and does not need to be unique.
+     * An alias that you assign to this workspace to help you identify it. It does not need to be unique. Blank spaces at the beginning or end of the alias that you specify will be trimmed from the value used.
      */
     alias?: WorkspaceAlias;
     /**
-     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+     * A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.
      */
     clientToken?: IdempotencyToken;
     /**
-     * Optional, user-provided tags for this workspace.
-     */
-    tags?: TagMap;
-    /**
-     * Optional, customer managed KMS key used to encrypt data for this workspace
+     * (optional) The ARN for a customer managed KMS key to use for encrypting data within your workspace. For more information about using your own key in your workspace, see Encryption at rest in the Amazon Managed Service for Prometheus User Guide.
      */
     kmsKeyArn?: KmsKeyArn;
+    /**
+     * The list of tag keys and values to associate with the workspace.
+     */
+    tags?: TagMap;
   }
   export interface CreateWorkspaceResponse {
     /**
-     * The generated ID of the workspace that was just created.
-     */
-    workspaceId: WorkspaceId;
-    /**
-     * The ARN of the workspace that was just created.
+     * The ARN for the new workspace.
      */
     arn: WorkspaceArn;
     /**
-     * The status of the workspace that was just created (usually CREATING).
+     * (optional) If the workspace was created with a customer managed KMS key, the ARN for the key used.
+     */
+    kmsKeyArn?: KmsKeyArn;
+    /**
+     * The current status of the new workspace. Immediately after you create the workspace, the status is usually CREATING.
      */
     status: WorkspaceStatus;
     /**
-     * The tags of this workspace.
+     * The list of tag keys and values that are associated with the workspace.
      */
     tags?: TagMap;
     /**
-     * Customer managed KMS key ARN for this workspace
+     * The unique ID for the new workspace.
      */
-    kmsKeyArn?: KmsKeyArn;
+    workspaceId: WorkspaceId;
   }
   export interface DeleteAlertManagerDefinitionRequest {
     /**
-     * The ID of the workspace in which to delete the alert manager definition.
-     */
-    workspaceId: WorkspaceId;
-    /**
-     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+     * A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.
      */
     clientToken?: IdempotencyToken;
+    /**
+     * The ID of the workspace to delete the alert manager definition from.
+     */
+    workspaceId: WorkspaceId;
   }
   export interface DeleteLoggingConfigurationRequest {
     /**
-     * The ID of the workspace to vend logs to.
-     */
-    workspaceId: WorkspaceId;
-    /**
-     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+     * A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.
      */
     clientToken?: IdempotencyToken;
+    /**
+     * The ID of the workspace containing the logging configuration to delete.
+     */
+    workspaceId: WorkspaceId;
   }
   export interface DeleteRuleGroupsNamespaceRequest {
     /**
-     * The ID of the workspace to delete rule group definition.
+     * A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.
      */
-    workspaceId: WorkspaceId;
+    clientToken?: IdempotencyToken;
     /**
-     * The rule groups namespace name.
+     * The name of the rule groups namespace to delete.
      */
     name: RuleGroupsNamespaceName;
     /**
-     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+     * The ID of the workspace containing the rule groups namespace and definition to delete.
      */
-    clientToken?: IdempotencyToken;
+    workspaceId: WorkspaceId;
   }
   export interface DeleteScraperRequest {
+    /**
+     * (Optional) A unique, case-sensitive identifier that you can provide to ensure the idempotency of the request.
+     */
+    clientToken?: IdempotencyToken;
+    /**
+     * The ID of the scraper to delete.
+     */
+    scraperId: ScraperId;
+  }
+  export interface DeleteScraperResponse {
     /**
      * The ID of the scraper to delete.
      */
     scraperId: ScraperId;
     /**
-     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
-     */
-    clientToken?: IdempotencyToken;
-  }
-  export interface DeleteScraperResponse {
-    /**
-     * The ID of the scraper that was deleted.
-     */
-    scraperId: ScraperId;
-    /**
-     * The status of the scraper that is being deleted.
+     * The current status of the scraper.
      */
     status: ScraperStatus;
   }
   export interface DeleteWorkspaceRequest {
     /**
+     * A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.
+     */
+    clientToken?: IdempotencyToken;
+    /**
      * The ID of the workspace to delete.
      */
     workspaceId: WorkspaceId;
-    /**
-     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
-     */
-    clientToken?: IdempotencyToken;
   }
   export interface DescribeAlertManagerDefinitionRequest {
     /**
-     * The ID of the workspace to describe.
+     * The ID of the workspace to retrieve the alert manager definition from.
      */
     workspaceId: WorkspaceId;
   }
   export interface DescribeAlertManagerDefinitionResponse {
     /**
-     * The properties of the selected workspace's alert manager definition.
+     * The alert manager definition.
      */
     alertManagerDefinition: AlertManagerDefinitionDescription;
   }
   export interface DescribeLoggingConfigurationRequest {
     /**
-     * The ID of the workspace to vend logs to.
+     * The ID of the workspace to describe the logging configuration for.
      */
     workspaceId: WorkspaceId;
   }
   export interface DescribeLoggingConfigurationResponse {
     /**
-     * Metadata object containing information about the logging configuration of a workspace.
+     * A structure that displays the information about the logging configuration.
      */
     loggingConfiguration: LoggingConfigurationMetadata;
   }
   export interface DescribeRuleGroupsNamespaceRequest {
     /**
-     * The ID of the workspace to describe.
-     */
-    workspaceId: WorkspaceId;
-    /**
-     * The rule groups namespace.
+     * The name of the rule groups namespace that you want information for.
      */
     name: RuleGroupsNamespaceName;
+    /**
+     * The ID of the workspace containing the rule groups namespace.
+     */
+    workspaceId: WorkspaceId;
   }
   export interface DescribeRuleGroupsNamespaceResponse {
     /**
-     * The selected rule groups namespace.
+     * The information about the rule groups namespace.
      */
     ruleGroupsNamespace: RuleGroupsNamespaceDescription;
   }
   export interface DescribeScraperRequest {
     /**
-     * The IDs of the scraper to describe.
+     * The ID of the scraper to describe.
      */
     scraperId: ScraperId;
   }
   export interface DescribeScraperResponse {
     /**
-     * The properties of the selected scrapers.
+     * Contains details about the scraper.
      */
     scraper: ScraperDescription;
   }
@@ -580,27 +580,27 @@ declare namespace Amp {
   }
   export interface DescribeWorkspaceResponse {
     /**
-     * The properties of the selected workspace.
+     * A structure that contains details about the workspace.
      */
     workspace: WorkspaceDescription;
   }
   export interface Destination {
     /**
-     * A representation of an AMP destination.
+     * The Amazon Managed Service for Prometheusworkspace to send metrics to.
      */
     ampConfiguration?: AmpConfiguration;
   }
   export interface EksConfiguration {
     /**
-     * The ARN of an EKS cluster.
+     * ARN of the Amazon EKS cluster.
      */
     clusterArn: ClusterArn;
     /**
-     * A list of security group IDs specified for VPC configuration.
+     * A list of the security group IDs for the Amazon EKS cluster VPC configuration.
      */
     securityGroupIds?: SecurityGroupIds;
     /**
-     * A list of subnet IDs specified for VPC configuration.
+     * A list of subnet IDs for the Amazon EKS cluster VPC configuration.
      */
     subnetIds: SubnetIds;
   }
@@ -611,7 +611,7 @@ declare namespace Amp {
   }
   export interface GetDefaultScraperConfigurationResponse {
     /**
-     * The default configuration.
+     * The configuration file. Base 64 encoded. For more information, see Scraper configurationin the Amazon Managed Service for Prometheus User Guide.
      */
     configuration: _Blob;
   }
@@ -620,122 +620,125 @@ declare namespace Amp {
   export type KmsKeyArn = string;
   export interface ListRuleGroupsNamespacesRequest {
     /**
-     * The ID of the workspace.
+     * The maximum number of results to return. The default is 100.
      */
-    workspaceId: WorkspaceId;
+    maxResults?: ListRuleGroupsNamespacesRequestMaxResultsInteger;
     /**
-     * Optional filter for rule groups namespace name. Only the rule groups namespace that begin with this value will be returned.
+     * Use this parameter to filter the rule groups namespaces that are returned. Only the namespaces with names that begin with the value that you specify are returned.
      */
     name?: RuleGroupsNamespaceName;
     /**
-     * Pagination token to request the next page in a paginated list. This token is obtained from the output of the previous ListRuleGroupsNamespaces request.
+     * The token for the next set of items to return. You receive this token from a previous call, and use it to get the next page of results. The other parameters must be the same as the initial call. For example, if your initial request has maxResults of 10, and there are 12 rule groups namespaces to return, then your initial request will return 10 and a nextToken. Using the next token in a subsequent call will return the remaining 2 namespaces.
      */
     nextToken?: PaginationToken;
     /**
-     * Maximum results to return in response (default=100, maximum=1000).
+     * The ID of the workspace containing the rule groups namespaces.
      */
-    maxResults?: ListRuleGroupsNamespacesRequestMaxResultsInteger;
+    workspaceId: WorkspaceId;
   }
   export type ListRuleGroupsNamespacesRequestMaxResultsInteger = number;
   export interface ListRuleGroupsNamespacesResponse {
     /**
-     * The list of the selected rule groups namespaces.
-     */
-    ruleGroupsNamespaces: RuleGroupsNamespaceSummaryList;
-    /**
-     * Pagination token to use when requesting the next page in this list.
+     * A token indicating that there are more results to retrieve. You can use this token as part of your next ListRuleGroupsNamespaces request to retrieve those results.
      */
     nextToken?: PaginationToken;
+    /**
+     * The returned list of rule groups namespaces.
+     */
+    ruleGroupsNamespaces: RuleGroupsNamespaceSummaryList;
   }
   export interface ListScrapersRequest {
     /**
-     * A list of scraper filters.
+     * (Optional) A list of key-value pairs to filter the list of scrapers returned. Keys include status, sourceArn, destinationArn, and alias. Filters on the same key are OR'd together, and filters on different keys are AND'd together. For example, status=ACTIVE&amp;status=CREATING&amp;alias=Test, will return all scrapers that have the alias Test, and are either in status ACTIVE or CREATING. To find all active scrapers that are sending metrics to a specific Amazon Managed Service for Prometheus workspace, you would use the ARN of the workspace in a query:  status=ACTIVE&amp;destinationArn=arn:aws:aps:us-east-1:123456789012:workspace/ws-example1-1234-abcd-56ef-123456789012  If this is included, it filters the results to only the scrapers that match the filter.
      */
     filters?: ScraperFilters;
     /**
-     * Pagination token to request the next page in a paginated list. This token is obtained from the output of the previous ListScrapers request.
-     */
-    nextToken?: PaginationToken;
-    /**
-     * Maximum results to return in response (default=100, maximum=1000).
+     * Optional) The maximum number of scrapers to return in one ListScrapers operation. The range is 1-1000. If you omit this parameter, the default of 100 is used.
      */
     maxResults?: ListScrapersRequestMaxResultsInteger;
+    /**
+     * (Optional) The token for the next set of items to return. (You received this token from a previous call.)
+     */
+    nextToken?: PaginationToken;
   }
   export type ListScrapersRequestMaxResultsInteger = number;
   export interface ListScrapersResponse {
     /**
-     * The list of scrapers, filtered down if a set of filters was provided in the request.
-     */
-    scrapers: ScraperSummaryList;
-    /**
-     * Pagination token to use when requesting the next page in this list.
+     * A token indicating that there are more results to retrieve. You can use this token as part of your next ListScrapers operation to retrieve those results.
      */
     nextToken?: PaginationToken;
+    /**
+     * A list of ScraperSummary structures giving information about scrapers in the account that match the filters provided.
+     */
+    scrapers: ScraperSummaryList;
   }
   export interface ListTagsForResourceRequest {
     /**
-     * The ARN of the resource.
+     * The ARN of the resource to list tages for. Must be a workspace or rule groups namespace resource.
      */
     resourceArn: String;
   }
   export interface ListTagsForResourceResponse {
+    /**
+     * The list of tag keys and values associated with the resource.
+     */
     tags?: TagMap;
   }
   export interface ListWorkspacesRequest {
     /**
-     * Pagination token to request the next page in a paginated list. This token is obtained from the output of the previous ListWorkspaces request.
-     */
-    nextToken?: PaginationToken;
-    /**
-     * Optional filter for workspace alias. Only the workspaces with aliases that begin with this value will be returned.
+     * If this is included, it filters the results to only the workspaces with names that start with the value that you specify here. Amazon Managed Service for Prometheus will automatically strip any blank spaces from the beginning and end of the alias that you specify.
      */
     alias?: WorkspaceAlias;
     /**
-     * Maximum results to return in response (default=100, maximum=1000).
+     * The maximum number of workspaces to return per request. The default is 100.
      */
     maxResults?: ListWorkspacesRequestMaxResultsInteger;
+    /**
+     * The token for the next set of items to return. You receive this token from a previous call, and use it to get the next page of results. The other parameters must be the same as the initial call. For example, if your initial request has maxResults of 10, and there are 12 workspaces to return, then your initial request will return 10 and a nextToken. Using the next token in a subsequent call will return the remaining 2 workspaces.
+     */
+    nextToken?: PaginationToken;
   }
   export type ListWorkspacesRequestMaxResultsInteger = number;
   export interface ListWorkspacesResponse {
     /**
-     * The list of existing workspaces, including those undergoing creation or deletion.
-     */
-    workspaces: WorkspaceSummaryList;
-    /**
-     * Pagination token to use when requesting the next page in this list.
+     * A token indicating that there are more results to retrieve. You can use this token as part of your next ListWorkspaces request to retrieve those results.
      */
     nextToken?: PaginationToken;
+    /**
+     * An array of WorkspaceSummary structures containing information about the workspaces requested.
+     */
+    workspaces: WorkspaceSummaryList;
   }
   export type LogGroupArn = string;
   export interface LoggingConfigurationMetadata {
     /**
-     * The status of the logging configuration.
-     */
-    status: LoggingConfigurationStatus;
-    /**
-     * The workspace where the logging configuration exists.
-     */
-    workspace: WorkspaceId;
-    /**
-     * The ARN of the CW log group to which the vended log data will be published.
-     */
-    logGroupArn: LogGroupArn;
-    /**
-     * The time when the logging configuration was created.
+     * The date and time that the logging configuration was created.
      */
     createdAt: Timestamp;
     /**
-     * The time when the logging configuration was modified.
+     * The ARN of the CloudWatch log group to which the vended log data will be published.
+     */
+    logGroupArn: LogGroupArn;
+    /**
+     * The date and time that the logging configuration was most recently changed.
      */
     modifiedAt: Timestamp;
+    /**
+     * The current status of the logging configuration.
+     */
+    status: LoggingConfigurationStatus;
+    /**
+     * The ID of the workspace the logging configuration is for.
+     */
+    workspace: WorkspaceId;
   }
   export interface LoggingConfigurationStatus {
     /**
-     * Status code of the logging configuration.
+     * The current status of the logging configuration.
      */
     statusCode: LoggingConfigurationStatusCode;
     /**
-     * The reason for failure if any.
+     * If failed, the reason for the failure.
      */
     statusReason?: String;
   }
@@ -743,57 +746,57 @@ declare namespace Amp {
   export type PaginationToken = string;
   export interface PutAlertManagerDefinitionRequest {
     /**
-     * The ID of the workspace in which to update the alert manager definition.
+     * A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.
      */
-    workspaceId: WorkspaceId;
+    clientToken?: IdempotencyToken;
     /**
-     * The alert manager definition data.
+     * The alert manager definition to use. A base64-encoded version of the YAML alert manager definition file. For details about the alert manager definition, see AlertManagedDefinitionData.
      */
     data: AlertManagerDefinitionData;
     /**
-     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+     * The ID of the workspace to update the alert manager definition in.
      */
-    clientToken?: IdempotencyToken;
+    workspaceId: WorkspaceId;
   }
   export interface PutAlertManagerDefinitionResponse {
     /**
-     * The status of alert manager definition.
+     * A structure that returns the current status of the alert manager definition.
      */
     status: AlertManagerDefinitionStatus;
   }
   export interface PutRuleGroupsNamespaceRequest {
     /**
-     * The ID of the workspace in which to update the rule group namespace.
+     * A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.
      */
-    workspaceId: WorkspaceId;
+    clientToken?: IdempotencyToken;
     /**
-     * The rule groups namespace name.
-     */
-    name: RuleGroupsNamespaceName;
-    /**
-     * The namespace data that define the rule groups.
+     * The new rules file to use in the namespace. A base64-encoded version of the YAML rule groups file. For details about the rule groups namespace structure, see RuleGroupsNamespaceData.
      */
     data: RuleGroupsNamespaceData;
     /**
-     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
-     */
-    clientToken?: IdempotencyToken;
-  }
-  export interface PutRuleGroupsNamespaceResponse {
-    /**
-     * The rule groups namespace name.
+     * The name of the rule groups namespace that you are updating.
      */
     name: RuleGroupsNamespaceName;
     /**
-     * The Amazon Resource Name (ARN) of this rule groups namespace.
+     * The ID of the workspace where you are updating the rule groups namespace.
+     */
+    workspaceId: WorkspaceId;
+  }
+  export interface PutRuleGroupsNamespaceResponse {
+    /**
+     * The ARN of the rule groups namespace.
      */
     arn: RuleGroupsNamespaceArn;
     /**
-     * The status of rule groups namespace.
+     * The name of the rule groups namespace that was updated.
+     */
+    name: RuleGroupsNamespaceName;
+    /**
+     * A structure that includes the current status of the rule groups namespace.
      */
     status: RuleGroupsNamespaceStatus;
     /**
-     * The tags of this rule groups namespace.
+     * The list of tag keys and values that are associated with the namespace.
      */
     tags?: TagMap;
   }
@@ -801,76 +804,76 @@ declare namespace Amp {
   export type RuleGroupsNamespaceData = Buffer|Uint8Array|Blob|string;
   export interface RuleGroupsNamespaceDescription {
     /**
-     * The Amazon Resource Name (ARN) of this rule groups namespace.
+     * The ARN of the rule groups namespace.
      */
     arn: RuleGroupsNamespaceArn;
     /**
-     * The rule groups namespace name.
-     */
-    name: RuleGroupsNamespaceName;
-    /**
-     * The status of rule groups namespace.
-     */
-    status: RuleGroupsNamespaceStatus;
-    /**
-     * The rule groups namespace data.
-     */
-    data: RuleGroupsNamespaceData;
-    /**
-     * The time when the rule groups namespace was created.
+     * The date and time that the rule groups namespace was created.
      */
     createdAt: Timestamp;
     /**
-     * The time when the rule groups namespace was modified.
+     * The rule groups file used in the namespace. For details about the rule groups namespace structure, see RuleGroupsNamespaceData.
+     */
+    data: RuleGroupsNamespaceData;
+    /**
+     * The date and time that the rule groups namespace was most recently changed.
      */
     modifiedAt: Timestamp;
     /**
-     * The tags of this rule groups namespace.
+     * The name of the rule groups namespace.
+     */
+    name: RuleGroupsNamespaceName;
+    /**
+     * The current status of the rule groups namespace.
+     */
+    status: RuleGroupsNamespaceStatus;
+    /**
+     * The list of tag keys and values that are associated with the rule groups namespace.
      */
     tags?: TagMap;
   }
   export type RuleGroupsNamespaceName = string;
   export interface RuleGroupsNamespaceStatus {
     /**
-     * Status code of this namespace.
+     * The current status of the namespace.
      */
     statusCode: RuleGroupsNamespaceStatusCode;
     /**
-     * The reason for failure if any.
+     * The reason for the failure, if any.
      */
     statusReason?: String;
   }
   export type RuleGroupsNamespaceStatusCode = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"CREATION_FAILED"|"UPDATE_FAILED"|string;
   export interface RuleGroupsNamespaceSummary {
     /**
-     * The Amazon Resource Name (ARN) of this rule groups namespace.
+     * The ARN of the rule groups namespace.
      */
     arn: RuleGroupsNamespaceArn;
     /**
-     * The rule groups namespace name.
-     */
-    name: RuleGroupsNamespaceName;
-    /**
-     * The status of rule groups namespace.
-     */
-    status: RuleGroupsNamespaceStatus;
-    /**
-     * The time when the rule groups namespace was created.
+     * The date and time that the rule groups namespace was created.
      */
     createdAt: Timestamp;
     /**
-     * The time when the rule groups namespace was modified.
+     * The date and time that the rule groups namespace was most recently changed.
      */
     modifiedAt: Timestamp;
     /**
-     * The tags of this rule groups namespace.
+     * The name of the rule groups namespace.
+     */
+    name: RuleGroupsNamespaceName;
+    /**
+     * A structure that displays the current status of the rule groups namespace.
+     */
+    status: RuleGroupsNamespaceStatus;
+    /**
+     * The list of tag keys and values that are associated with the rule groups namespace.
      */
     tags?: TagMap;
   }
   export type RuleGroupsNamespaceSummaryList = RuleGroupsNamespaceSummary[];
   export interface ScrapeConfiguration {
     /**
-     * Binary data representing a Prometheus configuration file.
+     * The base 64 encoded scrape configuration file.
      */
     configurationBlob?: _Blob;
   }
@@ -878,115 +881,115 @@ declare namespace Amp {
   export type ScraperArn = string;
   export interface ScraperDescription {
     /**
-     * Alias of this scraper.
+     * (Optional) A name associated with the scraper.
      */
     alias?: ScraperAlias;
     /**
-     * Unique string identifying this scraper.
-     */
-    scraperId: ScraperId;
-    /**
-     * The Amazon Resource Name (ARN) of this scraper.
+     * The Amazon Resource Name (ARN) of the scraper.
      */
     arn: ScraperArn;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role that provides permissions for the scraper to dsicover, collect, and produce metrics on your behalf.
-     */
-    roleArn: IamRoleArn;
-    /**
-     * The status of this scraper.
-     */
-    status: ScraperStatus;
-    /**
-     * The time when the scraper was created.
+     * The date and time that the scraper was created.
      */
     createdAt: Timestamp;
     /**
-     * The time when the scraper was last modified.
+     * The Amazon Managed Service for Prometheus workspace the scraper sends metrics to.
+     */
+    destination: Destination;
+    /**
+     * The date and time that the scraper was last modified.
      */
     lastModifiedAt: Timestamp;
     /**
-     * The tags of this scraper.
+     * The Amazon Resource Name (ARN) of the IAM role that provides permissions for the scraper to discover and collect metrics on your behalf.
      */
-    tags?: TagMap;
+    roleArn: IamRoleArn;
     /**
-     * The reason for failure if any.
-     */
-    statusReason?: StatusReason;
-    /**
-     * The configuration used to create the scraper.
+     * The configuration file in use by the scraper.
      */
     scrapeConfiguration: ScrapeConfiguration;
     /**
-     * The source that the scraper is discovering and collecting metrics from.
+     * The ID of the scraper.
+     */
+    scraperId: ScraperId;
+    /**
+     * The Amazon EKS cluster from which the scraper collects metrics.
      */
     source: Source;
     /**
-     * The destination that the scraper is producing metrics to.
+     * A structure that contains the current status of the scraper.
      */
-    destination: Destination;
+    status: ScraperStatus;
+    /**
+     * If there is a failure, the reason for the failure.
+     */
+    statusReason?: StatusReason;
+    /**
+     * (Optional) The list of tag keys and values associated with the scraper.
+     */
+    tags?: TagMap;
   }
   export type ScraperFilters = {[key: string]: FilterValues};
   export type ScraperId = string;
   export interface ScraperStatus {
     /**
-     * Status code of this scraper.
+     * The current status of the scraper.
      */
     statusCode: ScraperStatusCode;
   }
   export type ScraperStatusCode = "CREATING"|"ACTIVE"|"DELETING"|"CREATION_FAILED"|"DELETION_FAILED"|string;
   export interface ScraperSummary {
     /**
-     * Alias of this scraper.
+     * (Optional) A name associated with the scraper.
      */
     alias?: ScraperAlias;
     /**
-     * Unique string identifying this scraper.
-     */
-    scraperId: ScraperId;
-    /**
-     * The Amazon Resource Name (ARN) of this scraper.
+     * The Amazon Resource Name (ARN) of the scraper.
      */
     arn: ScraperArn;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role that provides permissions for the scraper to dsicover, collect, and produce metrics on your behalf.
-     */
-    roleArn: IamRoleArn;
-    /**
-     * The status of this scraper.
-     */
-    status: ScraperStatus;
-    /**
-     * The time when the scraper was created.
+     * The date and time that the scraper was created.
      */
     createdAt: Timestamp;
     /**
-     * The time when the scraper was last modified.
+     * The Amazon Managed Service for Prometheus workspace the scraper sends metrics to.
+     */
+    destination: Destination;
+    /**
+     * The date and time that the scraper was last modified.
      */
     lastModifiedAt: Timestamp;
     /**
-     * The tags of this scraper.
+     * The Amazon Resource Name (ARN) of the IAM role that provides permissions for the scraper to discover and collect metrics on your behalf.
      */
-    tags?: TagMap;
+    roleArn: IamRoleArn;
     /**
-     * The reason for failure if any.
+     * The ID of the scraper.
      */
-    statusReason?: StatusReason;
+    scraperId: ScraperId;
     /**
-     * The source that the scraper is discovering and collecting metrics from.
+     * The Amazon EKS cluster from which the scraper collects metrics.
      */
     source: Source;
     /**
-     * The destination that the scraper is producing metrics to.
+     * A structure that contains the current status of the scraper.
      */
-    destination: Destination;
+    status: ScraperStatus;
+    /**
+     * If there is a failure, the reason for the failure.
+     */
+    statusReason?: StatusReason;
+    /**
+     * (Optional) The list of tag keys and values associated with the scraper.
+     */
+    tags?: TagMap;
   }
   export type ScraperSummaryList = ScraperSummary[];
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
   export interface Source {
     /**
-     * A representation of an EKS source.
+     * The Amazon EKS cluster from which a scraper collects metrics.
      */
     eksConfiguration?: EksConfiguration;
   }
@@ -999,9 +1002,12 @@ declare namespace Amp {
   export type TagMap = {[key: string]: TagValue};
   export interface TagResourceRequest {
     /**
-     * The ARN of the resource.
+     * The ARN of the workspace or rule groups namespace to apply tags to.
      */
     resourceArn: String;
+    /**
+     * The list of tag keys and values to associate with the resource. Keys may not begin with aws:.
+     */
     tags: TagMap;
   }
   export interface TagResourceResponse {
@@ -1010,11 +1016,11 @@ declare namespace Amp {
   export type Timestamp = Date;
   export interface UntagResourceRequest {
     /**
-     * The ARN of the resource.
+     * The ARN of the workspace or rule groups namespace.
      */
     resourceArn: String;
     /**
-     * One or more tag keys
+     * The keys of the tags to remove.
      */
     tagKeys: TagKeys;
   }
@@ -1022,112 +1028,112 @@ declare namespace Amp {
   }
   export interface UpdateLoggingConfigurationRequest {
     /**
-     * The ID of the workspace to vend logs to.
+     * A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.
      */
-    workspaceId: WorkspaceId;
+    clientToken?: IdempotencyToken;
     /**
-     * The ARN of the CW log group to which the vended log data will be published.
+     * The ARN of the CloudWatch log group to which the vended log data will be published.
      */
     logGroupArn: LogGroupArn;
     /**
-     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+     * The ID of the workspace to update the logging configuration for.
      */
-    clientToken?: IdempotencyToken;
+    workspaceId: WorkspaceId;
   }
   export interface UpdateLoggingConfigurationResponse {
     /**
-     * The status of the logging configuration.
+     * A structure that contains the current status of the logging configuration.
      */
     status: LoggingConfigurationStatus;
   }
   export interface UpdateWorkspaceAliasRequest {
     /**
-     * The ID of the workspace being updated.
-     */
-    workspaceId: WorkspaceId;
-    /**
-     * The new alias of the workspace.
+     * The new alias for the workspace. It does not need to be unique. Amazon Managed Service for Prometheus will automatically strip any blank spaces from the beginning and end of the alias that you specify.
      */
     alias?: WorkspaceAlias;
     /**
-     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+     * A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.
      */
     clientToken?: IdempotencyToken;
+    /**
+     * The ID of the workspace to update.
+     */
+    workspaceId: WorkspaceId;
   }
   export type Uri = string;
   export type WorkspaceAlias = string;
   export type WorkspaceArn = string;
   export interface WorkspaceDescription {
     /**
-     * Unique string identifying this workspace.
-     */
-    workspaceId: WorkspaceId;
-    /**
-     * Alias of this workspace.
+     * The alias that is assigned to this workspace to help identify it. It may not be unique.
      */
     alias?: WorkspaceAlias;
     /**
-     * The Amazon Resource Name (ARN) of this workspace.
+     * The ARN of the workspace.
      */
     arn: WorkspaceArn;
     /**
-     * The status of this workspace.
-     */
-    status: WorkspaceStatus;
-    /**
-     * Prometheus endpoint URI.
-     */
-    prometheusEndpoint?: Uri;
-    /**
-     * The time when the workspace was created.
+     * The date and time that the workspace was created.
      */
     createdAt: Timestamp;
     /**
-     * The tags of this workspace.
+     * (optional) If the workspace was created with a customer managed KMS key, the ARN for the key used.
+     */
+    kmsKeyArn?: KmsKeyArn;
+    /**
+     * The Prometheus endpoint available for this workspace. 
+     */
+    prometheusEndpoint?: Uri;
+    /**
+     * The current status of the workspace.
+     */
+    status: WorkspaceStatus;
+    /**
+     * The list of tag keys and values that are associated with the workspace.
      */
     tags?: TagMap;
     /**
-     * The customer managed KMS key of this workspace.
+     * The unique ID for the workspace.
      */
-    kmsKeyArn?: KmsKeyArn;
+    workspaceId: WorkspaceId;
   }
   export type WorkspaceId = string;
   export interface WorkspaceStatus {
     /**
-     * Status code of this workspace.
+     * The current status of the workspace.
      */
     statusCode: WorkspaceStatusCode;
   }
   export type WorkspaceStatusCode = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"CREATION_FAILED"|string;
   export interface WorkspaceSummary {
     /**
-     * Unique string identifying this workspace.
-     */
-    workspaceId: WorkspaceId;
-    /**
-     * Alias of this workspace.
+     * The alias that is assigned to this workspace to help identify it. It may not be unique.
      */
     alias?: WorkspaceAlias;
     /**
-     * The AmazonResourceName of this workspace.
+     * The ARN of the workspace.
      */
     arn: WorkspaceArn;
     /**
-     * The status of this workspace.
-     */
-    status: WorkspaceStatus;
-    /**
-     * The time when the workspace was created.
+     * The date and time that the workspace was created.
      */
     createdAt: Timestamp;
     /**
-     * The tags of this workspace.
+     * (optional) If the workspace was created with a customer managed KMS key, the ARN for the key used.
+     */
+    kmsKeyArn?: KmsKeyArn;
+    /**
+     * The current status of the workspace.
+     */
+    status: WorkspaceStatus;
+    /**
+     * The list of tag keys and values that are associated with the workspace.
      */
     tags?: TagMap;
     /**
-     * Customer managed KMS key ARN for this workspace
+     * The unique ID for the workspace.
      */
-    kmsKeyArn?: KmsKeyArn;
+    workspaceId: WorkspaceId;
   }
   export type WorkspaceSummaryList = WorkspaceSummary[];
   /**

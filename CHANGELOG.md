@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1554.0-->
+<!--LATEST=2.1555.0-->
 <!--ENTRYINSERT-->
+
+## 2.1555.0
+* feature: Batch: This feature allows Batch to support configuration of repository credentials for jobs running on ECS
+* feature: Braket: Creating a job will result in DeviceOfflineException when using an offline device, and DeviceRetiredException when using a retired device.
+* feature: CostOptimizationHub: Adding includeMemberAccounts field to the response of ListEnrollmentStatuses API.
+* feature: Iot: This release allows AWS IoT Core users to enable Online Certificate Status Protocol (OCSP) Stapling for TLS X.509 Server Certificates when creating and updating AWS IoT Domain Configurations with Custom Domain.
+* feature: Pricing: Add Throttling Exception to all APIs.
 
 ## 2.1554.0
 * feature: CodePipeline: Add ability to execute pipelines with new parallel & queued execution modes and add support for triggers with filtering on branches and file paths.

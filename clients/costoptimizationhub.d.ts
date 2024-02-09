@@ -599,7 +599,7 @@ declare namespace CostOptimizationHub {
   }
   export interface ListEnrollmentStatusesRequest {
     /**
-     * The enrollment status of a specific account ID in the organization.
+     * The account ID of a member account in the organization.
      */
     accountId?: AccountId;
     /**
@@ -617,7 +617,11 @@ declare namespace CostOptimizationHub {
   }
   export interface ListEnrollmentStatusesResponse {
     /**
-     * The account enrollment statuses.
+     * The enrollment status of all member accounts in the organization if the account is the management account.
+     */
+    includeMemberAccounts?: Boolean;
+    /**
+     * The enrollment status of a specific account ID, including creation and last updated timestamps.
      */
     items?: AccountEnrollmentStatuses;
     /**

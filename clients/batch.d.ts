@@ -382,7 +382,7 @@ declare namespace Batch {
      */
     type: CRType;
     /**
-     * The allocation strategy to use for the compute resource if not enough instances of the best fitting instance type can be allocated. This might be because of availability of the instance type in the Region or Amazon EC2 service limits. For more information, see Allocation strategies in the Batch User Guide.  This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it.   BEST_FIT (default)  Batch selects an instance type that best fits the needs of the jobs with a preference for the lowest-cost instance type. If additional instances of the selected instance type aren't available, Batch waits for the additional instances to be available. If there aren't enough instances available or the user is reaching Amazon EC2 service limits, additional jobs aren't run until the currently running jobs are completed. This allocation strategy keeps costs lower but can limit scaling. If you're using Spot Fleets with BEST_FIT, the Spot Fleet IAM Role must be specified. Compute resources that use a BEST_FIT allocation strategy don't support infrastructure updates and can't update some parameters. For more information, see Updating compute environments in the Batch User Guide.  BEST_FIT_PROGRESSIVE  Batch selects additional instance types that are large enough to meet the requirements of the jobs in the queue. Its preference is for instance types with lower cost vCPUs. If additional instances of the previously selected instance types aren't available, Batch selects new instance types.  SPOT_CAPACITY_OPTIMIZED  Batch selects one or more instance types that are large enough to meet the requirements of the jobs in the queue. Its preference is for instance types that are less likely to be interrupted. This allocation strategy is only available for Spot Instance compute resources.  SPOT_PRICE_CAPACITY_OPTIMIZED  The price and capacity optimized allocation strategy looks at both price and capacity to select the Spot Instance pools that are the least likely to be interrupted and have the lowest possible price. This allocation strategy is only available for Spot Instance compute resources.   With BEST_FIT_PROGRESSIVE,SPOT_CAPACITY_OPTIMIZED and SPOT_PRICE_CAPACITY_OPTIMIZED strategies using On-Demand or Spot Instances, and the BEST_FIT strategy using Spot Instances, Batch might need to exceed maxvCpus to meet your capacity requirements. In this event, Batch never exceeds maxvCpus by more than a single instance.
+     * The allocation strategy to use for the compute resource if not enough instances of the best fitting instance type can be allocated. This might be because of availability of the instance type in the Region or Amazon EC2 service limits. For more information, see Allocation strategies in the Batch User Guide.  This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it.   BEST_FIT (default)  Batch selects an instance type that best fits the needs of the jobs with a preference for the lowest-cost instance type. If additional instances of the selected instance type aren't available, Batch waits for the additional instances to be available. If there aren't enough instances available or the user is reaching Amazon EC2 service limits, additional jobs aren't run until the currently running jobs are completed. This allocation strategy keeps costs lower but can limit scaling. If you're using Spot Fleets with BEST_FIT, the Spot Fleet IAM Role must be specified. Compute resources that use a BEST_FIT allocation strategy don't support infrastructure updates and can't update some parameters. For more information, see Updating compute environments in the Batch User Guide.  BEST_FIT_PROGRESSIVE  Batch selects additional instance types that are large enough to meet the requirements of the jobs in the queue. Its preference is for instance types with lower cost vCPUs. If additional instances of the previously selected instance types aren't available, Batch selects new instance types.  SPOT_CAPACITY_OPTIMIZED  Batch selects one or more instance types that are large enough to meet the requirements of the jobs in the queue. Its preference is for instance types that are less likely to be interrupted. This allocation strategy is only available for Spot Instance compute resources.  SPOT_PRICE_CAPACITY_OPTIMIZED  The price and capacity optimized allocation strategy looks at both price and capacity to select the Spot Instance pools that are the least likely to be interrupted and have the lowest possible price. This allocation strategy is only available for Spot Instance compute resources.   With BEST_FIT_PROGRESSIVE,SPOT_CAPACITY_OPTIMIZED and SPOT_PRICE_CAPACITY_OPTIMIZED (recommended) strategies using On-Demand or Spot Instances, and the BEST_FIT strategy using Spot Instances, Batch might need to exceed maxvCpus to meet your capacity requirements. In this event, Batch never exceeds maxvCpus by more than a single instance.
      */
     allocationStrategy?: CRAllocationStrategy;
     /**
@@ -390,7 +390,7 @@ declare namespace Batch {
      */
     minvCpus?: Integer;
     /**
-     * The maximum number of vCPUs that a compute environment can support.  With BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED and SPOT_PRICE_CAPACITY_OPTIMIZED allocation strategies using On-Demand or Spot Instances, and the BEST_FIT strategy using Spot Instances, Batch might need to exceed maxvCpus to meet your capacity requirements. In this event, Batch never exceeds maxvCpus by more than a single instance. For example, no more than a single instance from among those specified in your compute environment is allocated. 
+     * The maximum number of vCPUs that a compute environment can support.  With BEST_FIT_PROGRESSIVE,SPOT_CAPACITY_OPTIMIZED and SPOT_PRICE_CAPACITY_OPTIMIZED (recommended) strategies using On-Demand or Spot Instances, and the BEST_FIT strategy using Spot Instances, Batch might need to exceed maxvCpus to meet your capacity requirements. In this event, Batch never exceeds maxvCpus by more than a single instance. 
      */
     maxvCpus: Integer;
     /**
@@ -418,7 +418,7 @@ declare namespace Batch {
      */
     ec2KeyPair?: String;
     /**
-     * The Amazon ECS instance profile applied to Amazon EC2 instances in a compute environment. You can specify the short name or full Amazon Resource Name (ARN) of an instance profile. For example,  ecsInstanceRole  or arn:aws:iam::&lt;aws_account_id&gt;:instance-profile/ecsInstanceRole . For more information, see Amazon ECS instance role in the Batch User Guide.  This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it. 
+     * The Amazon ECS instance profile applied to Amazon EC2 instances in a compute environment. This parameter is required for Amazon EC2 instances types. You can specify the short name or full Amazon Resource Name (ARN) of an instance profile. For example,  ecsInstanceRole  or arn:aws:iam::&lt;aws_account_id&gt;:instance-profile/ecsInstanceRole . For more information, see Amazon ECS instance role in the Batch User Guide.  This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it. 
      */
     instanceRole?: String;
     /**
@@ -452,7 +452,7 @@ declare namespace Batch {
      */
     minvCpus?: Integer;
     /**
-     * The maximum number of Amazon EC2 vCPUs that an environment can reach.  With BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED, and SPOT_PRICE_CAPACITY_OPTIMIZED allocation strategies using On-Demand or Spot Instances, and the BEST_FIT strategy using Spot Instances, Batch might need to exceed maxvCpus to meet your capacity requirements. In this event, Batch never exceeds maxvCpus by more than a single instance. That is, no more than a single instance from among those specified in your compute environment. 
+     * The maximum number of Amazon EC2 vCPUs that an environment can reach.  With BEST_FIT_PROGRESSIVE,SPOT_CAPACITY_OPTIMIZED and SPOT_PRICE_CAPACITY_OPTIMIZED (recommended) strategies using On-Demand or Spot Instances, and the BEST_FIT strategy using Spot Instances, Batch might need to exceed maxvCpus to meet your capacity requirements. In this event, Batch never exceeds maxvCpus by more than a single instance. 
      */
     maxvCpus?: Integer;
     /**
@@ -468,7 +468,7 @@ declare namespace Batch {
      */
     securityGroupIds?: StringList;
     /**
-     * The allocation strategy to use for the compute resource if there's not enough instances of the best fitting instance type that can be allocated. This might be because of availability of the instance type in the Region or Amazon EC2 service limits. For more information, see Allocation strategies in the Batch User Guide. When updating a compute environment, changing the allocation strategy requires an infrastructure update of the compute environment. For more information, see Updating compute environments in the Batch User Guide. BEST_FIT isn't supported when updating a compute environment.  This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it.   BEST_FIT_PROGRESSIVE  Batch selects additional instance types that are large enough to meet the requirements of the jobs in the queue. Its preference is for instance types with lower cost vCPUs. If additional instances of the previously selected instance types aren't available, Batch selects new instance types.  SPOT_CAPACITY_OPTIMIZED  Batch selects one or more instance types that are large enough to meet the requirements of the jobs in the queue. Its preference is for instance types that are less likely to be interrupted. This allocation strategy is only available for Spot Instance compute resources.  SPOT_PRICE_CAPACITY_OPTIMIZED  The price and capacity optimized allocation strategy looks at both price and capacity to select the Spot Instance pools that are the least likely to be interrupted and have the lowest possible price. This allocation strategy is only available for Spot Instance compute resources.   With both BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED, and SPOT_PRICE_CAPACITY_OPTIMIZED strategies using On-Demand or Spot Instances, and the BEST_FIT strategy using Spot Instances, Batch might need to exceed maxvCpus to meet your capacity requirements. In this event, Batch never exceeds maxvCpus by more than a single instance.
+     * The allocation strategy to use for the compute resource if there's not enough instances of the best fitting instance type that can be allocated. This might be because of availability of the instance type in the Region or Amazon EC2 service limits. For more information, see Allocation strategies in the Batch User Guide. When updating a compute environment, changing the allocation strategy requires an infrastructure update of the compute environment. For more information, see Updating compute environments in the Batch User Guide. BEST_FIT isn't supported when updating a compute environment.  This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it.   BEST_FIT_PROGRESSIVE  Batch selects additional instance types that are large enough to meet the requirements of the jobs in the queue. Its preference is for instance types with lower cost vCPUs. If additional instances of the previously selected instance types aren't available, Batch selects new instance types.  SPOT_CAPACITY_OPTIMIZED  Batch selects one or more instance types that are large enough to meet the requirements of the jobs in the queue. Its preference is for instance types that are less likely to be interrupted. This allocation strategy is only available for Spot Instance compute resources.  SPOT_PRICE_CAPACITY_OPTIMIZED  The price and capacity optimized allocation strategy looks at both price and capacity to select the Spot Instance pools that are the least likely to be interrupted and have the lowest possible price. This allocation strategy is only available for Spot Instance compute resources.   With BEST_FIT_PROGRESSIVE,SPOT_CAPACITY_OPTIMIZED and SPOT_PRICE_CAPACITY_OPTIMIZED (recommended) strategies using On-Demand or Spot Instances, and the BEST_FIT strategy using Spot Instances, Batch might need to exceed maxvCpus to meet your capacity requirements. In this event, Batch never exceeds maxvCpus by more than a single instance.
      */
     allocationStrategy?: CRUpdateAllocationStrategy;
     /**
@@ -480,7 +480,7 @@ declare namespace Batch {
      */
     ec2KeyPair?: String;
     /**
-     * The Amazon ECS instance profile applied to Amazon EC2 instances in a compute environment. You can specify the short name or full Amazon Resource Name (ARN) of an instance profile. For example,  ecsInstanceRole  or arn:aws:iam::&lt;aws_account_id&gt;:instance-profile/ecsInstanceRole . For more information, see Amazon ECS instance role in the Batch User Guide. When updating a compute environment, changing this setting requires an infrastructure update of the compute environment. For more information, see Updating compute environments in the Batch User Guide.  This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it. 
+     * The Amazon ECS instance profile applied to Amazon EC2 instances in a compute environment. Required for Amazon EC2 instances. You can specify the short name or full Amazon Resource Name (ARN) of an instance profile. For example,  ecsInstanceRole  or arn:aws:iam::&lt;aws_account_id&gt;:instance-profile/ecsInstanceRole . For more information, see Amazon ECS instance role in the Batch User Guide. When updating a compute environment, changing this setting requires an infrastructure update of the compute environment. For more information, see Updating compute environments in the Batch User Guide.  This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it. 
      */
     instanceRole?: String;
     /**
@@ -625,7 +625,14 @@ declare namespace Batch {
      * The amount of ephemeral storage allocated for the task. This parameter is used to expand the total amount of ephemeral storage available, beyond the default amount, for tasks hosted on Fargate.
      */
     ephemeralStorage?: EphemeralStorage;
+    /**
+     * An object that represents the compute environment architecture for Batch jobs on Fargate.
+     */
     runtimePlatform?: RuntimePlatform;
+    /**
+     * The private repository authentication credentials to use.
+     */
+    repositoryCredentials?: RepositoryCredentials;
   }
   export interface ContainerOverrides {
     /**
@@ -655,7 +662,7 @@ declare namespace Batch {
   }
   export interface ContainerProperties {
     /**
-     * The image used to start a container. This string is passed directly to the Docker daemon. Images in the Docker Hub registry are available by default. Other repositories are specified with  repository-url/image:tag . It can be 255 characters long. It can contain uppercase and lowercase letters, numbers, hyphens (-), underscores (_), colons (:), periods (.), forward slashes (/), and number signs (#). This parameter maps to Image in the Create a container section of the Docker Remote API and the IMAGE parameter of docker run.  Docker image architecture must match the processor architecture of the compute resources that they're scheduled on. For example, ARM-based Docker images can only run on ARM-based compute resources.    Images in Amazon ECR Public repositories use the full registry/repository[:tag] or registry/repository[@digest] naming conventions. For example, public.ecr.aws/registry_alias/my-web-app:latest .   Images in Amazon ECR repositories use the full registry and repository URI (for example, 123456789012.dkr.ecr.&lt;region-name&gt;.amazonaws.com/&lt;repository-name&gt;).   Images in official repositories on Docker Hub use a single name (for example, ubuntu or mongo).   Images in other repositories on Docker Hub are qualified with an organization name (for example, amazon/amazon-ecs-agent).   Images in other online repositories are qualified further by a domain name (for example, quay.io/assemblyline/ubuntu).  
+     * Required. The image used to start a container. This string is passed directly to the Docker daemon. Images in the Docker Hub registry are available by default. Other repositories are specified with  repository-url/image:tag . It can be 255 characters long. It can contain uppercase and lowercase letters, numbers, hyphens (-), underscores (_), colons (:), periods (.), forward slashes (/), and number signs (#). This parameter maps to Image in the Create a container section of the Docker Remote API and the IMAGE parameter of docker run.  Docker image architecture must match the processor architecture of the compute resources that they're scheduled on. For example, ARM-based Docker images can only run on ARM-based compute resources.    Images in Amazon ECR Public repositories use the full registry/repository[:tag] or registry/repository[@digest] naming conventions. For example, public.ecr.aws/registry_alias/my-web-app:latest .   Images in Amazon ECR repositories use the full registry and repository URI (for example, 123456789012.dkr.ecr.&lt;region-name&gt;.amazonaws.com/&lt;repository-name&gt;).   Images in official repositories on Docker Hub use a single name (for example, ubuntu or mongo).   Images in other repositories on Docker Hub are qualified with an organization name (for example, amazon/amazon-ecs-agent).   Images in other online repositories are qualified further by a domain name (for example, quay.io/assemblyline/ubuntu).  
      */
     image?: String;
     /**
@@ -738,7 +745,14 @@ declare namespace Batch {
      * The amount of ephemeral storage to allocate for the task. This parameter is used to expand the total amount of ephemeral storage available, beyond the default amount, for tasks hosted on Fargate.
      */
     ephemeralStorage?: EphemeralStorage;
+    /**
+     * An object that represents the compute environment architecture for Batch jobs on Fargate.
+     */
     runtimePlatform?: RuntimePlatform;
+    /**
+     * The private repository authentication credentials to use.
+     */
+    repositoryCredentials?: RepositoryCredentials;
   }
   export interface ContainerSummary {
     /**
@@ -912,7 +926,7 @@ declare namespace Batch {
   }
   export interface DescribeJobDefinitionsRequest {
     /**
-     * A list of up to 100 job definitions. Each entry in the list can either be an ARN in the format arn:aws:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision} or a short version using the form ${JobDefinitionName}:${Revision}.
+     * A list of up to 100 job definitions. Each entry in the list can either be an ARN in the format arn:aws:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision} or a short version using the form ${JobDefinitionName}:${Revision}. This parameter can't be used with other parameters.
      */
     jobDefinitions?: StringList;
     /**
@@ -1043,7 +1057,7 @@ declare namespace Batch {
   }
   export interface Ec2Configuration {
     /**
-     * The image type to match with the instance type to select an AMI. The supported values are different for ECS and EKS resources.  ECS  If the imageIdOverride parameter isn't specified, then a recent Amazon ECS-optimized Amazon Linux 2 AMI (ECS_AL2) is used. If a new image type is specified in an update, but neither an imageId nor a imageIdOverride parameter is specified, then the latest Amazon ECS optimized AMI for that image type that's supported by Batch is used.  ECS_AL2   Amazon Linux 2: Default for all non-GPU instance families.  ECS_AL2_NVIDIA   Amazon Linux 2 (GPU): Default for all GPU instance families (for example P4 and G4) and can be used for all non Amazon Web Services Graviton-based instance types.  ECS_AL1   Amazon Linux. Amazon Linux has reached the end-of-life of standard support. For more information, see Amazon Linux AMI.    EKS  If the imageIdOverride parameter isn't specified, then a recent Amazon EKS-optimized Amazon Linux AMI (EKS_AL2) is used. If a new image type is specified in an update, but neither an imageId nor a imageIdOverride parameter is specified, then the latest Amazon EKS optimized AMI for that image type that Batch supports is used.  EKS_AL2   Amazon Linux 2: Default for all non-GPU instance families.  EKS_AL2_NVIDIA   Amazon Linux 2 (accelerated): Default for all GPU instance families (for example, P4 and G4) and can be used for all non Amazon Web Services Graviton-based instance types.    
+     * The image type to match with the instance type to select an AMI. The supported values are different for ECS and EKS resources.  ECS  If the imageIdOverride parameter isn't specified, then a recent Amazon ECS-optimized Amazon Linux 2 AMI (ECS_AL2) is used. If a new image type is specified in an update, but neither an imageId nor a imageIdOverride parameter is specified, then the latest Amazon ECS optimized AMI for that image type that's supported by Batch is used.  ECS_AL2   Amazon Linux 2: Default for all non-GPU instance families.  ECS_AL2_NVIDIA   Amazon Linux 2 (GPU): Default for all GPU instance families (for example P4 and G4) and can be used for all non Amazon Web Services Graviton-based instance types.  ECS_AL2023   Amazon Linux 2023: Batch supports Amazon Linux 2023.  Amazon Linux 2023 does not support A1 instances.   ECS_AL1   Amazon Linux. Amazon Linux has reached the end-of-life of standard support. For more information, see Amazon Linux AMI.    EKS  If the imageIdOverride parameter isn't specified, then a recent Amazon EKS-optimized Amazon Linux AMI (EKS_AL2) is used. If a new image type is specified in an update, but neither an imageId nor a imageIdOverride parameter is specified, then the latest Amazon EKS optimized AMI for that image type that Batch supports is used.  EKS_AL2   Amazon Linux 2: Default for all non-GPU instance families.  EKS_AL2_NVIDIA   Amazon Linux 2 (accelerated): Default for all GPU instance families (for example, P4 and G4) and can be used for all non Amazon Web Services Graviton-based instance types.    
      */
     imageType: ImageType;
     /**
@@ -1350,6 +1364,9 @@ declare namespace Batch {
      * The name of the node for this job.
      */
     nodeName?: String;
+    /**
+     * Describes and uniquely identifies Kubernetes resources. For example, the compute environment that a pod runs in or the jobID for a job running in the pod. For more information, see Understanding Kubernetes Objects in the Kubernetes documentation.
+     */
     metadata?: EksMetadata;
   }
   export interface EksPodPropertiesOverride {
@@ -1442,7 +1459,7 @@ declare namespace Batch {
      */
     shareDecaySeconds?: Integer;
     /**
-     * A value used to reserve some of the available maximum vCPU for fair share identifiers that aren't already used. The reserved ratio is (computeReservation/100)^ActiveFairShares  where  ActiveFairShares  is the number of active fair share identifiers. For example, a computeReservation value of 50 indicates that Batchreserves 50% of the maximum available vCPU if there's only one fair share identifier. It reserves 25% if there are two fair share identifiers. It reserves 12.5% if there are three fair share identifiers. A computeReservation value of 25 indicates that Batch should reserve 25% of the maximum available vCPU if there's only one fair share identifier, 6.25% if there are two fair share identifiers, and 1.56% if there are three fair share identifiers. The minimum value is 0 and the maximum value is 99.
+     * A value used to reserve some of the available maximum vCPU for fair share identifiers that aren't already used. The reserved ratio is (computeReservation/100)^ActiveFairShares  where  ActiveFairShares  is the number of active fair share identifiers. For example, a computeReservation value of 50 indicates that Batch reserves 50% of the maximum available vCPU if there's only one fair share identifier. It reserves 25% if there are two fair share identifiers. It reserves 12.5% if there are three fair share identifiers. A computeReservation value of 25 indicates that Batch should reserve 25% of the maximum available vCPU if there's only one fair share identifier, 6.25% if there are two fair share identifiers, and 1.56% if there are three fair share identifiers. The minimum value is 0 and the maximum value is 99.
      */
     computeReservation?: Integer;
     /**
@@ -1593,7 +1610,7 @@ declare namespace Batch {
      */
     retryStrategy?: RetryStrategy;
     /**
-     * The Unix timestamp (in milliseconds) for when the job was started. More specifically, it's when the job transitioned from the STARTING state to the RUNNING state. This parameter isn't provided for child jobs of array jobs or multi-node parallel jobs.
+     * The Unix timestamp (in milliseconds) for when the job was started. More specifically, it's when the job transitioned from the STARTING state to the RUNNING state. 
      */
     startedAt: Long;
     /**
@@ -2086,6 +2103,12 @@ declare namespace Batch {
      */
     revision: Integer;
   }
+  export interface RepositoryCredentials {
+    /**
+     * The Amazon Resource Name (ARN) of the secret containing the private repository credentials.
+     */
+    credentialsParameter: String;
+  }
   export interface ResourceRequirement {
     /**
      * The quantity of the specified resource to reserve for the container. The values vary based on the type specified.  type="GPU"  The number of physical GPUs to reserve for the container. Make sure that the number of GPUs reserved for all containers in a job doesn't exceed the number of available GPUs on the compute resource that the job is launched on.  GPUs aren't available for jobs that are running on Fargate resources.   type="MEMORY"  The memory hard limit (in MiB) present to the container. This parameter is supported for jobs that are running on EC2 resources. If your container attempts to exceed the memory specified, the container is terminated. This parameter maps to Memory in the Create a container section of the Docker Remote API and the --memory option to docker run. You must specify at least 4 MiB of memory for a job. This is required but can be specified in several places for multi-node parallel (MNP) jobs. It must be specified for each node at least once. This parameter maps to Memory in the Create a container section of the Docker Remote API and the --memory option to docker run.  If you're trying to maximize your resource utilization by providing your jobs as much memory as possible for a particular instance type, see Memory management in the Batch User Guide.  For jobs that are running on Fargate resources, then value is the hard limit (in MiB), and must match one of the supported values and the VCPU values must be one of the values supported for that memory value.  value = 512   VCPU = 0.25  value = 1024   VCPU = 0.25 or 0.5  value = 2048   VCPU = 0.25, 0.5, or 1  value = 3072   VCPU = 0.5, or 1  value = 4096   VCPU = 0.5, 1, or 2  value = 5120, 6144, or 7168   VCPU = 1 or 2  value = 8192   VCPU = 1, 2, or 4  value = 9216, 10240, 11264, 12288, 13312, 14336, or 15360   VCPU = 2 or 4  value = 16384   VCPU = 2, 4, or 8  value = 17408, 18432, 19456, 21504, 22528, 23552, 25600, 26624, 27648, 29696, or 30720   VCPU = 4  value = 20480, 24576, or 28672   VCPU = 4 or 8  value = 36864, 45056, 53248, or 61440   VCPU = 8  value = 32768, 40960, 49152, or 57344   VCPU = 8 or 16  value = 65536, 73728, 81920, 90112, 98304, 106496, 114688, or 122880   VCPU = 16    type="VCPU"  The number of vCPUs reserved for the container. This parameter maps to CpuShares in the Create a container section of the Docker Remote API and the --cpu-shares option to docker run. Each vCPU is equivalent to 1,024 CPU shares. For EC2 resources, you must specify at least one vCPU. This is required but can be specified in several places; it must be specified for each node at least once. The default for the Fargate On-Demand vCPU resource count quota is 6 vCPUs. For more information about Fargate quotas, see Fargate quotas in the Amazon Web Services General Reference. For jobs that are running on Fargate resources, then value must match one of the supported values and the MEMORY values must be one of the values supported for that VCPU value. The supported values are 0.25, 0.5, 1, 2, 4, 8, and 16  value = 0.25   MEMORY = 512, 1024, or 2048  value = 0.5   MEMORY = 1024, 2048, 3072, or 4096  value = 1   MEMORY = 2048, 3072, 4096, 5120, 6144, 7168, or 8192  value = 2   MEMORY = 4096, 5120, 6144, 7168, 8192, 9216, 10240, 11264, 12288, 13312, 14336, 15360, or 16384  value = 4   MEMORY = 8192, 9216, 10240, 11264, 12288, 13312, 14336, 15360, 16384, 17408, 18432, 19456, 20480, 21504, 22528, 23552, 24576, 25600, 26624, 27648, 28672, 29696, or 30720  value = 8   MEMORY = 16384, 20480, 24576, 28672, 32768, 36864, 40960, 45056, 49152, 53248, 57344, or 61440   value = 16   MEMORY = 32768, 40960, 49152, 57344, 65536, 73728, 81920, 90112, 98304, 106496, 114688, or 122880     
@@ -2111,11 +2134,11 @@ declare namespace Batch {
   }
   export interface RuntimePlatform {
     /**
-     * The operating system for the compute environment. Valid values are: LINUX (default), WINDOWS_SERVER_2019_CORE, WINDOWS_SERVER_2019_FULL, WINDOWS_SERVER_2022_CORE, and WINDOWS_SERVER_2022_FULL.  The following parameters can’t be set for Windows containers: linuxParameters, privileged, user, ulimits, readonlyRootFilesystem, and efsVolumeConfiguration.   The Batch Scheduler checks before registering a task definition with Fargate. If the job requires a Windows container and the first compute environment is LINUX, the compute environment is skipped and the next is checked until a Windows-based compute environment is found.   Fargate Spot is not supported for Windows-based containers on Fargate. A job queue will be blocked if a Fargate Windows job is submitted to a job queue with only Fargate Spot compute environments. However, you can attach both FARGATE and FARGATE_SPOT compute environments to the same job queue. 
+     * The operating system for the compute environment. Valid values are: LINUX (default), WINDOWS_SERVER_2019_CORE, WINDOWS_SERVER_2019_FULL, WINDOWS_SERVER_2022_CORE, and WINDOWS_SERVER_2022_FULL.  The following parameters can’t be set for Windows containers: linuxParameters, privileged, user, ulimits, readonlyRootFilesystem, and efsVolumeConfiguration.   The Batch Scheduler checks the compute environments that are attached to the job queue before registering a task definition with Fargate. In this scenario, the job queue is where the job is submitted. If the job requires a Windows container and the first compute environment is LINUX, the compute environment is skipped and the next compute environment is checked until a Windows-based compute environment is found.   Fargate Spot is not supported for ARM64 and Windows-based containers on Fargate. A job queue will be blocked if a Fargate ARM64 or Windows job is submitted to a job queue with only Fargate Spot compute environments. However, you can attach both FARGATE and FARGATE_SPOT compute environments to the same job queue. 
      */
     operatingSystemFamily?: String;
     /**
-     * The vCPU architecture. The default value is X86_64. Valid values are X86_64 and ARM64.  This parameter must be set to X86_64 for Windows containers. 
+     *  The vCPU architecture. The default value is X86_64. Valid values are X86_64 and ARM64.  This parameter must be set to X86_64 for Windows containers.   Fargate Spot is not supported for ARM64 and Windows-based containers on Fargate. A job queue will be blocked if a Fargate ARM64 or Windows job is submitted to a job queue with only Fargate Spot compute environments. However, you can attach both FARGATE and FARGATE_SPOT compute environments to the same job queue. 
      */
     cpuArchitecture?: String;
   }
@@ -2183,7 +2206,7 @@ declare namespace Batch {
      */
     shareIdentifier?: String;
     /**
-     * The scheduling priority for the job. This only affects jobs in job queues with a fair share policy. Jobs with a higher scheduling priority are scheduled before jobs with a lower scheduling priority. This overrides any scheduling priority in the job definition. The minimum supported value is 0 and the maximum supported value is 9999.
+     * The scheduling priority for the job. This only affects jobs in job queues with a fair share policy. Jobs with a higher scheduling priority are scheduled before jobs with a lower scheduling priority. This overrides any scheduling priority in the job definition and works only within a single share identifier. The minimum supported value is 0 and the maximum supported value is 9999.
      */
     schedulingPriorityOverride?: Integer;
     /**
@@ -2291,11 +2314,11 @@ declare namespace Batch {
   export type TmpfsList = Tmpfs[];
   export interface Ulimit {
     /**
-     * The hard limit for the ulimit type.
+     * The hard limit for the ulimit type. 
      */
     hardLimit: Integer;
     /**
-     * The type of the ulimit.
+     * The type of the ulimit. Valid values are: core | cpu | data | fsize | locks | memlock | msgqueue | nice | nofile | nproc | rss | rtprio | rttime | sigpending | stack.
      */
     name: String;
     /**

@@ -788,11 +788,11 @@ declare class Iot extends Service {
    */
   describeDomainConfiguration(callback?: (err: AWSError, data: Iot.Types.DescribeDomainConfigurationResponse) => void): Request<Iot.Types.DescribeDomainConfigurationResponse, AWSError>;
   /**
-   * Returns a unique endpoint specific to the Amazon Web Services account making the call. Requires permission to access the DescribeEndpoint action.
+   * Returns or creates a unique endpoint specific to the Amazon Web Services account making the call.  The first time DescribeEndpoint is called, an endpoint is created. All subsequent calls to DescribeEndpoint return the same endpoint.  Requires permission to access the DescribeEndpoint action.
    */
   describeEndpoint(params: Iot.Types.DescribeEndpointRequest, callback?: (err: AWSError, data: Iot.Types.DescribeEndpointResponse) => void): Request<Iot.Types.DescribeEndpointResponse, AWSError>;
   /**
-   * Returns a unique endpoint specific to the Amazon Web Services account making the call. Requires permission to access the DescribeEndpoint action.
+   * Returns or creates a unique endpoint specific to the Amazon Web Services account making the call.  The first time DescribeEndpoint is called, an endpoint is created. All subsequent calls to DescribeEndpoint return the same endpoint.  Requires permission to access the DescribeEndpoint action.
    */
   describeEndpoint(callback?: (err: AWSError, data: Iot.Types.DescribeEndpointResponse) => void): Request<Iot.Types.DescribeEndpointResponse, AWSError>;
   /**
@@ -1100,11 +1100,11 @@ declare class Iot extends Service {
    */
   getPolicyVersion(callback?: (err: AWSError, data: Iot.Types.GetPolicyVersionResponse) => void): Request<Iot.Types.GetPolicyVersionResponse, AWSError>;
   /**
-   * Gets a registration code used to register a CA certificate with IoT. Requires permission to access the GetRegistrationCode action.
+   * Gets a registration code used to register a CA certificate with IoT. IoT will create a registration code as part of this API call if the registration code doesn't exist or has been deleted. If you already have a registration code, this API call will return the same registration code. Requires permission to access the GetRegistrationCode action.
    */
   getRegistrationCode(params: Iot.Types.GetRegistrationCodeRequest, callback?: (err: AWSError, data: Iot.Types.GetRegistrationCodeResponse) => void): Request<Iot.Types.GetRegistrationCodeResponse, AWSError>;
   /**
-   * Gets a registration code used to register a CA certificate with IoT. Requires permission to access the GetRegistrationCode action.
+   * Gets a registration code used to register a CA certificate with IoT. IoT will create a registration code as part of this API call if the registration code doesn't exist or has been deleted. If you already have a registration code, this API call will return the same registration code. Requires permission to access the GetRegistrationCode action.
    */
   getRegistrationCode(callback?: (err: AWSError, data: Iot.Types.GetRegistrationCodeResponse) => void): Request<Iot.Types.GetRegistrationCodeResponse, AWSError>;
   /**
@@ -3647,6 +3647,10 @@ declare namespace Iot {
      * An object that specifies the TLS configuration for a domain.
      */
     tlsConfig?: TlsConfig;
+    /**
+     * The server certificate configuration.
+     */
+    serverCertificateConfig?: ServerCertificateConfig;
   }
   export interface CreateDomainConfigurationResponse {
     /**
@@ -5284,6 +5288,10 @@ declare namespace Iot {
      * An object that specifies the TLS configuration for a domain.
      */
     tlsConfig?: TlsConfig;
+    /**
+     * The server certificate configuration.
+     */
+    serverCertificateConfig?: ServerCertificateConfig;
   }
   export interface DescribeEndpointRequest {
     /**
@@ -6256,6 +6264,7 @@ declare namespace Iot {
      */
     logLevel: LogLevel;
   }
+  export type EnableOCSPCheck = boolean;
   export interface EnableTopicRuleRequest {
     /**
      * The name of the topic rule to enable.
@@ -10320,6 +10329,12 @@ declare namespace Iot {
   export type SecurityProfileTargetMappings = SecurityProfileTargetMapping[];
   export type SecurityProfileTargets = SecurityProfileTarget[];
   export type ServerCertificateArns = AcmCertificateArn[];
+  export interface ServerCertificateConfig {
+    /**
+     * A Boolean value that indicates whether Online Certificate Status Protocol (OCSP) server certificate check is enabled or not. For more information, see Configuring OCSP server-certificate stapling in domain configuration from Amazon Web Services IoT Core Developer Guide.
+     */
+    enableOCSPCheck?: EnableOCSPCheck;
+  }
   export type ServerCertificateStatus = "INVALID"|"VALID"|string;
   export type ServerCertificateStatusDetail = string;
   export interface ServerCertificateSummary {
@@ -11683,6 +11698,10 @@ declare namespace Iot {
      * An object that specifies the TLS configuration for a domain.
      */
     tlsConfig?: TlsConfig;
+    /**
+     * The server certificate configuration.
+     */
+    serverCertificateConfig?: ServerCertificateConfig;
   }
   export interface UpdateDomainConfigurationResponse {
     /**
