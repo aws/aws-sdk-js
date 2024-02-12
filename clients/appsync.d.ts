@@ -587,6 +587,10 @@ declare namespace AppSync {
      * The cache instance status.    AVAILABLE: The instance is available for use.    CREATING: The instance is currently creating.    DELETING: The instance is currently deleting.    MODIFYING: The instance is currently modifying.    FAILED: The instance has failed creation.  
      */
     status?: ApiCacheStatus;
+    /**
+     * Controls how cache health metrics will be emitted to CloudWatch. Cache health metrics include:   NetworkBandwidthOutAllowanceExceeded: The network packets dropped because the throughput exceeded the aggregated bandwidth limit. This is useful for diagnosing bottlenecks in a cache configuration.   EngineCPUUtilization: The CPU utilization (percentage) allocated to the Redis process. This is useful for diagnosing bottlenecks in a cache configuration.   Metrics will be recorded by API ID. You can set the value to ENABLED or DISABLED.
+     */
+    healthMetricsConfig?: CacheHealthMetricsConfig;
   }
   export type ApiCacheStatus = "AVAILABLE"|"CREATING"|"DELETING"|"MODIFYING"|"FAILED"|string;
   export type ApiCacheType = "T2_SMALL"|"T2_MEDIUM"|"R4_LARGE"|"R4_XLARGE"|"R4_2XLARGE"|"R4_4XLARGE"|"R4_8XLARGE"|"SMALL"|"MEDIUM"|"LARGE"|"XLARGE"|"LARGE_2X"|"LARGE_4X"|"LARGE_8X"|"LARGE_12X"|string;
@@ -710,6 +714,7 @@ declare namespace AppSync {
   export type _Blob = Buffer|Uint8Array|Blob|string;
   export type Boolean = boolean;
   export type BooleanValue = boolean;
+  export type CacheHealthMetricsConfig = "ENABLED"|"DISABLED"|string;
   export interface CachingConfig {
     /**
      * The TTL in seconds for a resolver that has caching activated. Valid values are 1–3,600 seconds.
@@ -797,6 +802,10 @@ declare namespace AppSync {
      * The cache instance type. Valid values are     SMALL     MEDIUM     LARGE     XLARGE     LARGE_2X     LARGE_4X     LARGE_8X (not available in all regions)    LARGE_12X    Historically, instance types were identified by an EC2-style value. As of July 2020, this is deprecated, and the generic identifiers above should be used. The following legacy instance types are available, but their use is discouraged:    T2_SMALL: A t2.small instance type.    T2_MEDIUM: A t2.medium instance type.    R4_LARGE: A r4.large instance type.    R4_XLARGE: A r4.xlarge instance type.    R4_2XLARGE: A r4.2xlarge instance type.    R4_4XLARGE: A r4.4xlarge instance type.    R4_8XLARGE: A r4.8xlarge instance type.  
      */
     type: ApiCacheType;
+    /**
+     * Controls how cache health metrics will be emitted to CloudWatch. Cache health metrics include:   NetworkBandwidthOutAllowanceExceeded: The number of times a specified GraphQL operation was called.   EngineCPUUtilization: The number of GraphQL errors that occurred during a specified GraphQL operation.   Metrics will be recorded by API ID. You can set the value to ENABLED or DISABLED.
+     */
+    healthMetricsConfig?: CacheHealthMetricsConfig;
   }
   export interface CreateApiCacheResponse {
     /**
@@ -873,6 +882,10 @@ declare namespace AppSync {
      * Amazon EventBridge settings.
      */
     eventBridgeConfig?: EventBridgeDataSourceConfig;
+    /**
+     * Enables or disables enhanced data source metrics for specified data sources. Note that metricsConfig won't be used unless the dataSourceLevelMetricsBehavior value is set to PER_DATA_SOURCE_METRICS. If the dataSourceLevelMetricsBehavior is set to FULL_REQUEST_DATA_SOURCE_METRICS instead, metricsConfig will be ignored. However, you can still set its value.  metricsConfig can be ENABLED or DISABLED.
+     */
+    metricsConfig?: DataSourceLevelMetricsConfig;
   }
   export interface CreateDataSourceResponse {
     /**
@@ -1011,6 +1024,10 @@ declare namespace AppSync {
      * The maximum number of resolvers that can be invoked in a single request. The default value is 0 (or unspecified), which will set the limit to 10000. When specified, the limit value can be between 1 and 10000. This field will produce a limit error if the operation falls out of bounds.
      */
     resolverCountLimit?: ResolverCountLimit;
+    /**
+     * The enhancedMetricsConfig object.
+     */
+    enhancedMetricsConfig?: EnhancedMetricsConfig;
   }
   export interface CreateGraphqlApiResponse {
     /**
@@ -1068,6 +1085,10 @@ declare namespace AppSync {
      * The resolver code that contains the request and response functions. When code is used, the runtime is required. The runtime value must be APPSYNC_JS.
      */
     code?: Code;
+    /**
+     * Enables or disables enhanced resolver metrics for specified resolvers. Note that metricsConfig won't be used unless the resolverLevelMetricsBehavior value is set to PER_RESOLVER_METRICS. If the resolverLevelMetricsBehavior is set to FULL_REQUEST_RESOLVER_METRICS instead, metricsConfig will be ignored. However, you can still set its value.  metricsConfig can be ENABLED or DISABLED.
+     */
+    metricsConfig?: ResolverLevelMetricsConfig;
   }
   export interface CreateResolverResponse {
     /**
@@ -1144,6 +1165,10 @@ declare namespace AppSync {
      * Amazon EventBridge settings.
      */
     eventBridgeConfig?: EventBridgeDataSourceConfig;
+    /**
+     * Enables or disables enhanced data source metrics for specified data sources. Note that metricsConfig won't be used unless the dataSourceLevelMetricsBehavior value is set to PER_DATA_SOURCE_METRICS. If the dataSourceLevelMetricsBehavior is set to FULL_REQUEST_DATA_SOURCE_METRICS instead, metricsConfig will be ignored. However, you can still set its value.  metricsConfig can be ENABLED or DISABLED.
+     */
+    metricsConfig?: DataSourceLevelMetricsConfig;
   }
   export interface DataSourceIntrospectionModel {
     /**
@@ -1225,6 +1250,8 @@ declare namespace AppSync {
     nextToken?: PaginationToken;
   }
   export type DataSourceIntrospectionStatus = "PROCESSING"|"FAILED"|"SUCCESS"|string;
+  export type DataSourceLevelMetricsBehavior = "FULL_REQUEST_DATA_SOURCE_METRICS"|"PER_DATA_SOURCE_METRICS"|string;
+  export type DataSourceLevelMetricsConfig = "ENABLED"|"DISABLED"|string;
   export type DataSourceType = "AWS_LAMBDA"|"AMAZON_DYNAMODB"|"AMAZON_ELASTICSEARCH"|"NONE"|"HTTP"|"RELATIONAL_DATABASE"|"AMAZON_OPENSEARCH_SERVICE"|"AMAZON_EVENTBRIDGE"|string;
   export type DataSources = DataSource[];
   export type _Date = Date;
@@ -1427,6 +1454,20 @@ declare namespace AppSync {
      * The Amazon Web Services Region.
      */
     awsRegion: String;
+  }
+  export interface EnhancedMetricsConfig {
+    /**
+     * Controls how resolver metrics will be emitted to CloudWatch. Resolver metrics include:   GraphQL errors: The number of GraphQL errors that occurred.   Requests: The number of invocations that occurred during a request.    Latency: The time to complete a resolver invocation.   Cache hits: The number of cache hits during a request.   Cache misses: The number of cache misses during a request.   These metrics can be emitted to CloudWatch per resolver or for all resolvers in the request. Metrics will be recorded by API ID and resolver name. resolverLevelMetricsBehavior accepts one of these values at a time:    FULL_REQUEST_RESOLVER_METRICS: Records and emits metric data for all resolvers in the request.    PER_RESOLVER_METRICS: Records and emits metric data for resolvers that have the metricConfig value set to ENABLED.  
+     */
+    resolverLevelMetricsBehavior: ResolverLevelMetricsBehavior;
+    /**
+     * Controls how data source metrics will be emitted to CloudWatch. Data source metrics include:   Requests: The number of invocations that occured during a request.   Latency: The time to complete a data source invocation.   Errors: The number of errors that occurred during a data source invocation.   These metrics can be emitted to CloudWatch per data source or for all data sources in the request. Metrics will be recorded by API ID and data source name. dataSourceLevelMetricsBehavior accepts one of these values at a time:    FULL_REQUEST_DATA_SOURCE_METRICS: Records and emits metric data for all data sources in the request.    PER_DATA_SOURCE_METRICS: Records and emits metric data for data sources that have the metricConfig value set to ENABLED.  
+     */
+    dataSourceLevelMetricsBehavior: DataSourceLevelMetricsBehavior;
+    /**
+     *  Controls how operation metrics will be emitted to CloudWatch. Operation metrics include:   Requests: The number of times a specified GraphQL operation was called.   GraphQL errors: The number of GraphQL errors that occurred during a specified GraphQL operation.   Metrics will be recorded by API ID and operation name. You can set the value to ENABLED or DISABLED.
+     */
+    operationLevelMetricsConfig: OperationLevelMetricsConfig;
   }
   export type EnvironmentVariableKey = string;
   export type EnvironmentVariableMap = {[key: string]: EnvironmentVariableValue};
@@ -1878,6 +1919,10 @@ declare namespace AppSync {
      * The maximum number of resolvers that can be invoked in a single request. The default value is 0 (or unspecified), which will set the limit to 10000. When specified, the limit value can be between 1 and 10000. This field will produce a limit error if the operation falls out of bounds.
      */
     resolverCountLimit?: ResolverCountLimit;
+    /**
+     * The enhancedMetricsConfig object.
+     */
+    enhancedMetricsConfig?: EnhancedMetricsConfig;
   }
   export type GraphqlApis = GraphqlApi[];
   export interface HttpDataSourceConfig {
@@ -2237,6 +2282,7 @@ declare namespace AppSync {
      */
     awsRegion: String;
   }
+  export type OperationLevelMetricsConfig = "ENABLED"|"DISABLED"|string;
   export type OutputType = "SDL"|"JSON"|string;
   export type Ownership = "CURRENT_ACCOUNT"|"OTHER_ACCOUNTS"|string;
   export type PaginationToken = string;
@@ -2363,9 +2409,15 @@ declare namespace AppSync {
      * The resolver code that contains the request and response functions. When code is used, the runtime is required. The runtime value must be APPSYNC_JS.
      */
     code?: Code;
+    /**
+     * Enables or disables enhanced resolver metrics for specified resolvers. Note that metricsConfig won't be used unless the resolverLevelMetricsBehavior value is set to PER_RESOLVER_METRICS. If the resolverLevelMetricsBehavior is set to FULL_REQUEST_RESOLVER_METRICS instead, metricsConfig will be ignored. However, you can still set its value.  metricsConfig can be ENABLED or DISABLED.
+     */
+    metricsConfig?: ResolverLevelMetricsConfig;
   }
   export type ResolverCountLimit = number;
   export type ResolverKind = "UNIT"|"PIPELINE"|string;
+  export type ResolverLevelMetricsBehavior = "FULL_REQUEST_RESOLVER_METRICS"|"PER_RESOLVER_METRICS"|string;
+  export type ResolverLevelMetricsConfig = "ENABLED"|"DISABLED"|string;
   export type Resolvers = Resolver[];
   export type ResourceArn = string;
   export type ResourceName = string;
@@ -2593,6 +2645,10 @@ declare namespace AppSync {
      * The cache instance type. Valid values are     SMALL     MEDIUM     LARGE     XLARGE     LARGE_2X     LARGE_4X     LARGE_8X (not available in all regions)    LARGE_12X    Historically, instance types were identified by an EC2-style value. As of July 2020, this is deprecated, and the generic identifiers above should be used. The following legacy instance types are available, but their use is discouraged:    T2_SMALL: A t2.small instance type.    T2_MEDIUM: A t2.medium instance type.    R4_LARGE: A r4.large instance type.    R4_XLARGE: A r4.xlarge instance type.    R4_2XLARGE: A r4.2xlarge instance type.    R4_4XLARGE: A r4.4xlarge instance type.    R4_8XLARGE: A r4.8xlarge instance type.  
      */
     type: ApiCacheType;
+    /**
+     * Controls how cache health metrics will be emitted to CloudWatch. Cache health metrics include:   NetworkBandwidthOutAllowanceExceeded: The number of times a specified GraphQL operation was called.   EngineCPUUtilization: The number of GraphQL errors that occurred during a specified GraphQL operation.   Metrics will be recorded by API ID. You can set the value to ENABLED or DISABLED.
+     */
+    healthMetricsConfig?: CacheHealthMetricsConfig;
   }
   export interface UpdateApiCacheResponse {
     /**
@@ -2673,6 +2729,10 @@ declare namespace AppSync {
      * The new Amazon EventBridge settings.
      */
     eventBridgeConfig?: EventBridgeDataSourceConfig;
+    /**
+     * Enables or disables enhanced data source metrics for specified data sources. Note that metricsConfig won't be used unless the dataSourceLevelMetricsBehavior value is set to PER_DATA_SOURCE_METRICS. If the dataSourceLevelMetricsBehavior is set to FULL_REQUEST_DATA_SOURCE_METRICS instead, metricsConfig will be ignored. However, you can still set its value.  metricsConfig can be ENABLED or DISABLED.
+     */
+    metricsConfig?: DataSourceLevelMetricsConfig;
   }
   export interface UpdateDataSourceResponse {
     /**
@@ -2803,6 +2863,10 @@ declare namespace AppSync {
      * The maximum number of resolvers that can be invoked in a single request. The default value is 0 (or unspecified), which will set the limit to 10000. When specified, the limit value can be between 1 and 10000. This field will produce a limit error if the operation falls out of bounds.
      */
     resolverCountLimit?: ResolverCountLimit;
+    /**
+     * The enhancedMetricsConfig object.
+     */
+    enhancedMetricsConfig?: EnhancedMetricsConfig;
   }
   export interface UpdateGraphqlApiResponse {
     /**
@@ -2860,6 +2924,10 @@ declare namespace AppSync {
      * The resolver code that contains the request and response functions. When code is used, the runtime is required. The runtime value must be APPSYNC_JS.
      */
     code?: Code;
+    /**
+     * Enables or disables enhanced resolver metrics for specified resolvers. Note that metricsConfig won't be used unless the resolverLevelMetricsBehavior value is set to PER_RESOLVER_METRICS. If the resolverLevelMetricsBehavior is set to FULL_REQUEST_RESOLVER_METRICS instead, metricsConfig will be ignored. However, you can still set its value.  metricsConfig can be ENABLED or DISABLED.
+     */
+    metricsConfig?: ResolverLevelMetricsConfig;
   }
   export interface UpdateResolverResponse {
     /**

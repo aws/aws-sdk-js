@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1555.0-->
+<!--LATEST=2.1556.0-->
 <!--ENTRYINSERT-->
+
+## 2.1556.0
+* feature: AppSync: Adds support for new options on GraphqlAPIs, Resolvers and  Data Sources for emitting Amazon CloudWatch metrics for enhanced monitoring of AppSync APIs.
+* feature: CloudWatch: This release enables PutMetricData API request payload compression by default.
+* feature: Route53Domains: This release adds bill contact support for RegisterDomain, TransferDomain, UpdateDomainContact and GetDomainDetail API.
 
 ## 2.1555.0
 * feature: Batch: This feature allows Batch to support configuration of repository credentials for jobs running on ECS

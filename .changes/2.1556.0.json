@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "AppSync",
+        "description": "Adds support for new options on GraphqlAPIs, Resolvers and  Data Sources for emitting Amazon CloudWatch metrics for enhanced monitoring of AppSync APIs."
+    },
+    {
+        "type": "feature",
+        "category": "CloudWatch",
+        "description": "This release enables PutMetricData API request payload compression by default."
+    },
+    {
+        "type": "feature",
+        "category": "Route53Domains",
+        "description": "This release adds bill contact support for RegisterDomain, TransferDomain, UpdateDomainContact and GetDomainDetail API."
+    }
+]
