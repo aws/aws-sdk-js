@@ -7659,6 +7659,10 @@ declare namespace Lightsail {
      * Indicates the certificate that needs to be associated with the database.
      */
     caCertificateIdentifier?: string;
+    /**
+     * This parameter is used to update the major version of the database. Enter the blueprintId for the major version that you want to update to. Use the GetRelationalDatabaseBlueprints action to get a list of available blueprint IDs.
+     */
+    relationalDatabaseBlueprintId?: string;
   }
   export interface UpdateRelationalDatabaseResult {
     /**

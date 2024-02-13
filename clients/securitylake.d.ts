@@ -585,7 +585,7 @@ declare namespace SecurityLake {
   export type DataLakeLifecycleTransitionList = DataLakeLifecycleTransition[];
   export interface DataLakeReplicationConfiguration {
     /**
-     * Replication enables automatic, asynchronous copying of objects across Amazon S3 buckets. Amazon S3 buckets that are configured for object replication can be owned by the same Amazon Web Services account or by different accounts. You can replicate objects to a single destination bucket or to multiple destination buckets. The destination buckets can be in different Amazon Web Services Regions or within the same Region as the source bucket. Set up one or more rollup Regions by providing the Region or Regions that should contribute to the central rollup Region.
+     * Specifies one or more centralized rollup Regions. The Amazon Web Services Region specified in the region parameter of the  CreateDataLake  or  UpdateDataLake  operations contributes data to the rollup Region or Regions specified in this parameter. Replication enables automatic, asynchronous copying of objects across Amazon S3 buckets. S3 buckets that are configured for object replication can be owned by the same Amazon Web Services account or by different accounts. You can replicate objects to a single destination bucket or to multiple destination buckets. The destination buckets can be in different Regions or within the same Region as the source bucket.
      */
     regions?: RegionList;
     /**
@@ -848,7 +848,7 @@ declare namespace SecurityLake {
      */
     nextToken?: NextToken;
     /**
-     * List the Amazon Web Services Regions from which exceptions are retrieved.
+     * The Amazon Web Services Regions from which exceptions are retrieved.
      */
     regions?: RegionList;
   }
@@ -864,7 +864,7 @@ declare namespace SecurityLake {
   }
   export interface ListDataLakesRequest {
     /**
-     * The list of regions where Security Lake is enabled.
+     * The list of Regions where Security Lake is enabled.
      */
     regions?: RegionList;
   }
@@ -888,7 +888,7 @@ declare namespace SecurityLake {
      */
     nextToken?: NextToken;
     /**
-     * The list of regions for which log sources are displayed.
+     * The list of Regions for which log sources are displayed.
      */
     regions?: RegionList;
     /**

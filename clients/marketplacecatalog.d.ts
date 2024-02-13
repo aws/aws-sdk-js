@@ -12,11 +12,11 @@ declare class MarketplaceCatalog extends Service {
   constructor(options?: MarketplaceCatalog.Types.ClientConfiguration)
   config: Config & MarketplaceCatalog.Types.ClientConfiguration;
   /**
-   * Returns metadata and content for multiple entities.
+   * Returns metadata and content for multiple entities. This is the Batch version of the DescribeEntity API and uses the same IAM permission action as DescribeEntity API.
    */
   batchDescribeEntities(params: MarketplaceCatalog.Types.BatchDescribeEntitiesRequest, callback?: (err: AWSError, data: MarketplaceCatalog.Types.BatchDescribeEntitiesResponse) => void): Request<MarketplaceCatalog.Types.BatchDescribeEntitiesResponse, AWSError>;
   /**
-   * Returns metadata and content for multiple entities.
+   * Returns metadata and content for multiple entities. This is the Batch version of the DescribeEntity API and uses the same IAM permission action as DescribeEntity API.
    */
   batchDescribeEntities(callback?: (err: AWSError, data: MarketplaceCatalog.Types.BatchDescribeEntitiesResponse) => void): Request<MarketplaceCatalog.Types.BatchDescribeEntitiesResponse, AWSError>;
   /**
@@ -542,6 +542,10 @@ declare namespace MarketplaceCatalog {
      */
     ChangeSetName?: ChangeSetName;
     /**
+     * The optional intent provided in the StartChangeSet request. If you do not provide an intent, APPLY is set by default.
+     */
+    Intent?: Intent;
+    /**
      * The date and time, in ISO 8601 format (2018-02-27T13:45:22Z), the request started. 
      */
     StartTime?: DateTimeISO8601;
@@ -793,6 +797,7 @@ declare namespace MarketplaceCatalog {
     Policy?: ResourcePolicyJson;
   }
   export type Identifier = string;
+  export type Intent = "VALIDATE"|"APPLY"|string;
   export type Json = string;
   export interface JsonDocumentType {
   }
@@ -1494,6 +1499,10 @@ declare namespace MarketplaceCatalog {
      * A list of objects specifying each key name and value for the ChangeSetTags property.
      */
     ChangeSetTags?: TagList;
+    /**
+     * The intent related to the request. The default is APPLY. To test your request before applying changes to your entities, use VALIDATE. This feature is currently available for adding versions to single-AMI products. For more information, see Add a new version.
+     */
+    Intent?: Intent;
   }
   export interface StartChangeSetResponse {
     /**

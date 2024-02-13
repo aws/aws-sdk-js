@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1556.0-->
+<!--LATEST=2.1557.0-->
 <!--ENTRYINSERT-->
+
+## 2.1557.0
+* feature: Lightsail: This release adds support to upgrade the major version of a database.
+* feature: MarketplaceCatalog: AWS Marketplace Catalog API now supports setting intent on requests
+* feature: ResourceExplorer2: Resource Explorer now uses newly supported IPv4 'amazonaws.com' endpoints by default.
 
 ## 2.1556.0
 * feature: AppSync: Adds support for new options on GraphqlAPIs, Resolvers and  Data Sources for emitting Amazon CloudWatch metrics for enhanced monitoring of AppSync APIs.
