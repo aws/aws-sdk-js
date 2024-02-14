@@ -760,6 +760,7 @@ declare namespace QBusiness {
     systemMessageOverride?: SystemMessageOverride;
   }
   export type Boolean = boolean;
+  export type BoostingDurationInSeconds = number;
   export interface ChatSyncInput {
     /**
      * A request from an end user to perform an Amazon Q plugin action.
@@ -1226,6 +1227,16 @@ declare namespace QBusiness {
     subnetIds: SubnetIds;
   }
   export type DataSources = DataSource[];
+  export interface DateAttributeBoostingConfiguration {
+    /**
+     * Specifies the duration, in seconds, of a boost applies to a DATE type document attribute.
+     */
+    boostingDurationInSeconds?: BoostingDurationInSeconds;
+    /**
+     * Specifies how much a document attribute is boosted.
+     */
+    boostingLevel: DocumentAttributeBoostingLevel;
+  }
   export interface DeleteApplicationRequest {
     /**
      * The identifier of the Amazon Q application.
@@ -1402,6 +1413,26 @@ declare namespace QBusiness {
      */
     value: DocumentAttributeValue;
   }
+  export interface DocumentAttributeBoostingConfiguration {
+    /**
+     * Provides information on boosting DATE type document attributes.
+     */
+    dateConfiguration?: DateAttributeBoostingConfiguration;
+    /**
+     * Provides information on boosting NUMBER type document attributes.
+     */
+    numberConfiguration?: NumberAttributeBoostingConfiguration;
+    /**
+     * Provides information on boosting STRING type document attributes.
+     */
+    stringConfiguration?: StringAttributeBoostingConfiguration;
+    /**
+     * Provides information on boosting STRING_LIST type document attributes.
+     */
+    stringListConfiguration?: StringListAttributeBoostingConfiguration;
+  }
+  export type DocumentAttributeBoostingLevel = "NONE"|"LOW"|"MEDIUM"|"HIGH"|"VERY_HIGH"|string;
+  export type DocumentAttributeBoostingOverrideMap = {[key: string]: DocumentAttributeBoostingConfiguration};
   export interface DocumentAttributeCondition {
     /**
      * The identifier of the document attribute used for the condition. For example, 'Source_URI' could be an identifier for the attribute or metadata field that contains source URIs associated with the documents. Amazon Q currently doesn't support _document_body as an attribute key used for the condition.
@@ -2510,16 +2541,31 @@ declare namespace QBusiness {
      */
     usefulness: MessageUsefulness;
   }
-  export type MessageUsefulnessReason = "NOT_FACTUALLY_CORRECT"|"HARMFUL_OR_UNSAFE"|"INCORRECT_OR_MISSING_SOURCES"|"NOT_HELPFUL"|"FACTUALLY_CORRECT"|"COMPLETE"|"RELEVANT_SOURCES"|"HELPFUL"|string;
+  export type MessageUsefulnessReason = "NOT_FACTUALLY_CORRECT"|"HARMFUL_OR_UNSAFE"|"INCORRECT_OR_MISSING_SOURCES"|"NOT_HELPFUL"|"FACTUALLY_CORRECT"|"COMPLETE"|"RELEVANT_SOURCES"|"HELPFUL"|"NOT_BASED_ON_DOCUMENTS"|"NOT_COMPLETE"|"NOT_CONCISE"|"OTHER"|string;
   export type Messages = Message[];
   export type MetricValue = string;
   export interface NativeIndexConfiguration {
+    /**
+     * Overrides the default boosts applied by Amazon Q to supported document attribute data types.
+     */
+    boostingOverride?: DocumentAttributeBoostingOverrideMap;
     /**
      * The identifier for the Amazon Q index.
      */
     indexId: IndexId;
   }
   export type NextToken = string;
+  export interface NumberAttributeBoostingConfiguration {
+    /**
+     * Specifies the duration, in seconds, of a boost applies to a NUMBER type document attribute.
+     */
+    boostingLevel: DocumentAttributeBoostingLevel;
+    /**
+     * Specifies how much a document attribute is boosted.
+     */
+    boostingType?: NumberAttributeBoostingType;
+  }
+  export type NumberAttributeBoostingType = "PRIORITIZE_LARGER_VALUES"|"PRIORITIZE_SMALLER_VALUES"|string;
   export interface OAuth2ClientCredentialConfiguration {
     /**
      * The ARN of an IAM role used by Amazon Q to access the OAuth 2.0 authentication credentials stored in a Secrets Manager secret.
@@ -2721,7 +2767,7 @@ declare namespace QBusiness {
      */
     ruleConfiguration?: RuleConfiguration;
     /**
-     * The type fo rule.
+     * The type of rule.
      */
     ruleType: RuleType;
   }
@@ -2834,6 +2880,24 @@ declare namespace QBusiness {
   export interface StopDataSourceSyncJobResponse {
   }
   export type String = string;
+  export interface StringAttributeBoostingConfiguration {
+    /**
+     * Specifies specific values of a STRING type document attribute being boosted.
+     */
+    attributeValueBoosting?: StringAttributeValueBoosting;
+    /**
+     * Specifies how much a document attribute is boosted.
+     */
+    boostingLevel: DocumentAttributeBoostingLevel;
+  }
+  export type StringAttributeValueBoosting = {[key: string]: StringAttributeValueBoostingLevel};
+  export type StringAttributeValueBoostingLevel = "LOW"|"MEDIUM"|"HIGH"|"VERY_HIGH"|string;
+  export interface StringListAttributeBoostingConfiguration {
+    /**
+     * Specifies how much a document attribute is boosted.
+     */
+    boostingLevel: DocumentAttributeBoostingLevel;
+  }
   export type SubnetId = string;
   export type SubnetIds = SubnetId[];
   export type SyncSchedule = string;
@@ -2890,7 +2954,7 @@ declare namespace QBusiness {
   export type Title = string;
   export interface TopicConfiguration {
     /**
-     * A description for your topic control configuration. Use this outline how the large language model (LLM) should use this topic control configuration.
+     * A description for your topic control configuration. Use this to outline how the large language model (LLM) should use this topic control configuration.
      */
     description?: TopicDescription;
     /**

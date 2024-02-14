@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1557.0-->
+<!--LATEST=2.1558.0-->
 <!--ENTRYINSERT-->
+
+## 2.1558.0
+* feature: ControlTower: Adds support for new Baseline and EnabledBaseline APIs for automating multi-account governance.
+* feature: LookoutEquipment: This feature allows customers to see pointwise model diagnostics results for their models.
+* feature: QBusiness: This release adds the metadata-boosting feature, which allows customers to easily fine-tune the underlying ranking of retrieved RAG passages in order to optimize Q&A answer relevance. It also adds new feedback reasons for the PutFeedback API.
 
 ## 2.1557.0
 * feature: Lightsail: This release adds support to upgrade the major version of a database.

@@ -650,6 +650,10 @@ declare namespace LookoutEquipment {
      * Indicates that the asset associated with this sensor has been shut off. As long as this condition is met, Lookout for Equipment will not use data from this asset for training, evaluation, or inference.
      */
     OffCondition?: OffCondition;
+    /**
+     * The Amazon S3 location where you want Amazon Lookout for Equipment to save the pointwise model diagnostics. You must also specify the RoleArn request parameter.
+     */
+    ModelDiagnosticsOutputConfiguration?: ModelDiagnosticsOutputConfiguration;
   }
   export interface CreateModelResponse {
     /**
@@ -935,7 +939,7 @@ declare namespace LookoutEquipment {
      */
     DataQualitySummary?: DataQualitySummary;
     /**
-     *  IngestedFilesSummary associated with the given dataset for the latest successful associated ingestion job id. 
+     * IngestedFilesSummary associated with the given dataset for the latest successful associated ingestion job id. 
      */
     IngestedFilesSummary?: IngestedFilesSummary;
     /**
@@ -1266,6 +1270,10 @@ declare namespace LookoutEquipment {
      * Indicates the status of the retraining scheduler. 
      */
     RetrainingSchedulerStatus?: RetrainingSchedulerStatus;
+    /**
+     * Configuration information for the model's pointwise model diagnostics.
+     */
+    ModelDiagnosticsOutputConfiguration?: ModelDiagnosticsOutputConfiguration;
   }
   export interface DescribeModelVersionRequest {
     /**
@@ -1400,6 +1408,14 @@ declare namespace LookoutEquipment {
      * Indicates the reason for the AutoPromotionResult. For example, a model might not be promoted if its performance was worse than the active version, if there was an error during training, or if the retraining scheduler was using MANUAL promote mode. The model will be promoted in MANAGED promote mode if the performance is better than the previous model. 
      */
     AutoPromotionResultReason?: AutoPromotionResultReason;
+    /**
+     * The Amazon S3 location where Amazon Lookout for Equipment saves the pointwise model diagnostics for the model version.
+     */
+    ModelDiagnosticsOutputConfiguration?: ModelDiagnosticsOutputConfiguration;
+    /**
+     * The Amazon S3 output prefix for where Lookout for Equipment saves the pointwise model diagnostics for the model version.
+     */
+    ModelDiagnosticsResultsObject?: S3Object;
   }
   export interface DescribeResourcePolicyRequest {
     /**
@@ -1804,7 +1820,7 @@ declare namespace LookoutEquipment {
      */
     MissingCompleteSensorData: MissingCompleteSensorData;
     /**
-     *  Parameter that describes the total number of sensors that have a short date range of less than 90 days of data overall. 
+     *  Parameter that describes the total number of sensors that have a short date range of less than 14 days of data overall. 
      */
     SensorsWithShortDateRange: SensorsWithShortDateRange;
   }
@@ -2034,7 +2050,7 @@ declare namespace LookoutEquipment {
      */
     NextToken?: NextToken;
     /**
-     * Provides an array of information about the individual inference executions returned from the ListInferenceExecutions operation, including model used, inference scheduler, data configuration, and so on. 
+     * Provides an array of information about the individual inference executions returned from the ListInferenceExecutions operation, including model used, inference scheduler, data configuration, and so on.   If you don't supply the InferenceSchedulerName request parameter, or if you supply the name of an inference scheduler that doesn't exist, ListInferenceExecutions returns an empty array in InferenceExecutionSummaries. 
      */
     InferenceExecutionSummaries?: InferenceExecutionSummaries;
   }
@@ -2096,7 +2112,7 @@ declare namespace LookoutEquipment {
   }
   export interface ListLabelsRequest {
     /**
-     *  Retruns the name of the label group. 
+     *  Returns the name of the label group. 
      */
     LabelGroupName: LabelGroupName;
     /**
@@ -2130,7 +2146,7 @@ declare namespace LookoutEquipment {
      */
     NextToken?: NextToken;
     /**
-     *  A summary of the items in the label group. 
+     *  A summary of the items in the label group.   If you don't supply the LabelGroupName request parameter, or if you supply the name of a label group that doesn't exist, ListLabels returns an empty array in LabelSummaries. 
      */
     LabelSummaries?: LabelSummaries;
   }
@@ -2178,7 +2194,7 @@ declare namespace LookoutEquipment {
      */
     NextToken?: NextToken;
     /**
-     * Provides information on the specified model version, including the created time, model and dataset ARNs, and status.
+     * Provides information on the specified model version, including the created time, model and dataset ARNs, and status.  If you don't supply the ModelName request parameter, or if you supply the name of a model that doesn't exist, ListModelVersions returns an empty array in ModelVersionSummaries.  
      */
     ModelVersionSummaries?: ModelVersionSummaries;
   }
@@ -2302,6 +2318,26 @@ declare namespace LookoutEquipment {
     TotalNumberOfMissingValues: Integer;
   }
   export type ModelArn = string;
+  export interface ModelDiagnosticsOutputConfiguration {
+    /**
+     * The Amazon S3 location for the pointwise model diagnostics. 
+     */
+    S3OutputConfiguration: ModelDiagnosticsS3OutputConfiguration;
+    /**
+     * The Amazon Web Services Key Management Service (KMS) key identifier to encrypt the pointwise model diagnostics files.
+     */
+    KmsKeyId?: NameOrArn;
+  }
+  export interface ModelDiagnosticsS3OutputConfiguration {
+    /**
+     * The name of the Amazon S3 bucket where the pointwise model diagnostics are located. You must be the owner of the Amazon S3 bucket. 
+     */
+    Bucket: S3Bucket;
+    /**
+     * The Amazon S3 prefix for the location of the pointwise model diagnostics. The prefix specifies the folder and evaluation result file name. (bucket). When you call CreateModel or UpdateModel, specify the path within the bucket that you want Lookout for Equipment to save the model to. During training, Lookout for Equipment creates the model evaluation model as a compressed JSON file with the name model_diagnostics_results.json.gz. When you call DescribeModel or DescribeModelVersion, prefix contains the file path and filename of the model evaluation file. 
+     */
+    Prefix?: S3Prefix;
+  }
   export type ModelMetrics = string;
   export type ModelName = string;
   export type ModelPromoteMode = "MANAGED"|"MANUAL"|string;
@@ -2360,6 +2396,7 @@ declare namespace LookoutEquipment {
      * Indicates the status of the retraining scheduler. 
      */
     RetrainingSchedulerStatus?: RetrainingSchedulerStatus;
+    ModelDiagnosticsOutputConfiguration?: ModelDiagnosticsOutputConfiguration;
   }
   export type ModelVersion = number;
   export type ModelVersionArn = string;
@@ -2547,7 +2584,7 @@ declare namespace LookoutEquipment {
   }
   export interface SensorsWithShortDateRange {
     /**
-     *  Indicates the number of sensors that have less than 90 days of data. 
+     *  Indicates the number of sensors that have less than 14 days of data. 
      */
     AffectedSensorCount: Integer;
   }
@@ -2805,6 +2842,10 @@ declare namespace LookoutEquipment {
      * The ARN of the model to update.
      */
     RoleArn?: IamRoleArn;
+    /**
+     * The Amazon S3 location where you want Amazon Lookout for Equipment to save the pointwise model diagnostics for the model. You must also specify the RoleArn request parameter.
+     */
+    ModelDiagnosticsOutputConfiguration?: ModelDiagnosticsOutputConfiguration;
   }
   export interface UpdateRetrainingSchedulerRequest {
     /**
