@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1558.0-->
+<!--LATEST=2.1559.0-->
 <!--ENTRYINSERT-->
+
+## 2.1559.0
+* feature: Artifact: This is the initial SDK release for AWS Artifact. AWS Artifact provides on-demand access to compliance and third-party compliance reports. This release includes access to List and Get reports, along with their metadata. This release also includes access to AWS Artifact notifications settings.
+* feature: CodePipeline: Add ability to override timeout on action level.
+* feature: GuardDuty: Marked fields IpAddressV4, PrivateIpAddress, Email as Sensitive.
+* feature: HealthLake: This release adds a new response parameter, JobProgressReport, to the DescribeFHIRImportJob and ListFHIRImportJobs API operation. JobProgressReport provides details on the progress of the import job on the server.
+* feature: OpenSearch: Adds additional supported instance types.
+* feature: Polly: Amazon Polly adds 1 new voice - Burcu (tr-TR)
+* feature: SageMaker: This release adds a new API UpdateClusterSoftware for SageMaker HyperPod. This API allows users to patch HyperPod clusters with latest platform softwares.
 
 ## 2.1558.0
 * feature: ControlTower: Adds support for new Baseline and EnabledBaseline APIs for automating multi-account governance.

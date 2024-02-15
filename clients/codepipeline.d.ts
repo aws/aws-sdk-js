@@ -468,6 +468,10 @@ declare namespace CodePipeline {
      * The variable namespace associated with the action. All variables produced as output by this action fall under this namespace.
      */
     namespace?: ActionNamespace;
+    /**
+     * A timeout duration in minutes that can be applied against the ActionType’s default timeout value specified in Quotas for CodePipeline . This attribute is available only to the manual approval ActionType.
+     */
+    timeoutInMinutes?: ActionTimeout;
   }
   export interface ActionExecution {
     /**
@@ -669,6 +673,7 @@ declare namespace CodePipeline {
     revisionUrl?: Url;
   }
   export type ActionStateList = ActionState[];
+  export type ActionTimeout = number;
   export interface ActionType {
     /**
      * Represents information about an action type.

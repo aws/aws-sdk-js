@@ -1406,5 +1406,8 @@
   },
   "supplychain": {
     "name": "SupplyChain"
+  },
+  "artifact": {
+    "name": "Artifact"
   }
 }

@@ -36,11 +36,11 @@ declare class Detective extends Service {
    */
   batchGetMembershipDatasources(callback?: (err: AWSError, data: Detective.Types.BatchGetMembershipDatasourcesResponse) => void): Request<Detective.Types.BatchGetMembershipDatasourcesResponse, AWSError>;
   /**
-   * Creates a new behavior graph for the calling account, and sets that account as the administrator account. This operation is called by the account that is enabling Detective. Before you try to enable Detective, make sure that your account has been enrolled in Amazon GuardDuty for at least 48 hours. If you do not meet this requirement, you cannot enable Detective. If you do meet the GuardDuty prerequisite, then when you make the request to enable Detective, it checks whether your data volume is within the Detective quota. If it exceeds the quota, then you cannot enable Detective.  The operation also enables Detective for the calling account in the currently selected Region. It returns the ARN of the new behavior graph.  CreateGraph triggers a process to create the corresponding data tables for the new behavior graph. An account can only be the administrator account for one behavior graph within a Region. If the same account calls CreateGraph with the same administrator account, it always returns the same behavior graph ARN. It does not create a new behavior graph.
+   * Creates a new behavior graph for the calling account, and sets that account as the administrator account. This operation is called by the account that is enabling Detective. The operation also enables Detective for the calling account in the currently selected Region. It returns the ARN of the new behavior graph.  CreateGraph triggers a process to create the corresponding data tables for the new behavior graph. An account can only be the administrator account for one behavior graph within a Region. If the same account calls CreateGraph with the same administrator account, it always returns the same behavior graph ARN. It does not create a new behavior graph.
    */
   createGraph(params: Detective.Types.CreateGraphRequest, callback?: (err: AWSError, data: Detective.Types.CreateGraphResponse) => void): Request<Detective.Types.CreateGraphResponse, AWSError>;
   /**
-   * Creates a new behavior graph for the calling account, and sets that account as the administrator account. This operation is called by the account that is enabling Detective. Before you try to enable Detective, make sure that your account has been enrolled in Amazon GuardDuty for at least 48 hours. If you do not meet this requirement, you cannot enable Detective. If you do meet the GuardDuty prerequisite, then when you make the request to enable Detective, it checks whether your data volume is within the Detective quota. If it exceeds the quota, then you cannot enable Detective.  The operation also enables Detective for the calling account in the currently selected Region. It returns the ARN of the new behavior graph.  CreateGraph triggers a process to create the corresponding data tables for the new behavior graph. An account can only be the administrator account for one behavior graph within a Region. If the same account calls CreateGraph with the same administrator account, it always returns the same behavior graph ARN. It does not create a new behavior graph.
+   * Creates a new behavior graph for the calling account, and sets that account as the administrator account. This operation is called by the account that is enabling Detective. The operation also enables Detective for the calling account in the currently selected Region. It returns the ARN of the new behavior graph.  CreateGraph triggers a process to create the corresponding data tables for the new behavior graph. An account can only be the administrator account for one behavior graph within a Region. If the same account calls CreateGraph with the same administrator account, it always returns the same behavior graph ARN. It does not create a new behavior graph.
    */
   createGraph(callback?: (err: AWSError, data: Detective.Types.CreateGraphResponse) => void): Request<Detective.Types.CreateGraphResponse, AWSError>;
   /**
@@ -96,11 +96,11 @@ declare class Detective extends Service {
    */
   enableOrganizationAdminAccount(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Returns the investigation results of an investigation for a behavior graph. 
+   * Detective investigations lets you investigate IAM users and IAM roles using indicators of compromise. An indicator of compromise (IOC) is an artifact observed in or on a network, system, or environment that can (with a high level of confidence) identify malicious activity or a security incident. GetInvestigation returns the investigation results of an investigation for a behavior graph. 
    */
   getInvestigation(params: Detective.Types.GetInvestigationRequest, callback?: (err: AWSError, data: Detective.Types.GetInvestigationResponse) => void): Request<Detective.Types.GetInvestigationResponse, AWSError>;
   /**
-   * Returns the investigation results of an investigation for a behavior graph. 
+   * Detective investigations lets you investigate IAM users and IAM roles using indicators of compromise. An indicator of compromise (IOC) is an artifact observed in or on a network, system, or environment that can (with a high level of confidence) identify malicious activity or a security incident. GetInvestigation returns the investigation results of an investigation for a behavior graph. 
    */
   getInvestigation(callback?: (err: AWSError, data: Detective.Types.GetInvestigationResponse) => void): Request<Detective.Types.GetInvestigationResponse, AWSError>;
   /**
@@ -128,19 +128,19 @@ declare class Detective extends Service {
    */
   listGraphs(callback?: (err: AWSError, data: Detective.Types.ListGraphsResponse) => void): Request<Detective.Types.ListGraphsResponse, AWSError>;
   /**
-   * Get the indicators from an investigation
+   * Gets the indicators from an investigation. You can use the information from the indicators to determine if an IAM user and/or IAM role is involved in an unusual activity that could indicate malicious behavior and its impact.
    */
   listIndicators(params: Detective.Types.ListIndicatorsRequest, callback?: (err: AWSError, data: Detective.Types.ListIndicatorsResponse) => void): Request<Detective.Types.ListIndicatorsResponse, AWSError>;
   /**
-   * Get the indicators from an investigation
+   * Gets the indicators from an investigation. You can use the information from the indicators to determine if an IAM user and/or IAM role is involved in an unusual activity that could indicate malicious behavior and its impact.
    */
   listIndicators(callback?: (err: AWSError, data: Detective.Types.ListIndicatorsResponse) => void): Request<Detective.Types.ListIndicatorsResponse, AWSError>;
   /**
-   * List all Investigations.
+   * Detective investigations lets you investigate IAM users and IAM roles using indicators of compromise. An indicator of compromise (IOC) is an artifact observed in or on a network, system, or environment that can (with a high level of confidence) identify malicious activity or a security incident. ListInvestigations lists all active Detective investigations.
    */
   listInvestigations(params: Detective.Types.ListInvestigationsRequest, callback?: (err: AWSError, data: Detective.Types.ListInvestigationsResponse) => void): Request<Detective.Types.ListInvestigationsResponse, AWSError>;
   /**
-   * List all Investigations.
+   * Detective investigations lets you investigate IAM users and IAM roles using indicators of compromise. An indicator of compromise (IOC) is an artifact observed in or on a network, system, or environment that can (with a high level of confidence) identify malicious activity or a security incident. ListInvestigations lists all active Detective investigations.
    */
   listInvestigations(callback?: (err: AWSError, data: Detective.Types.ListInvestigationsResponse) => void): Request<Detective.Types.ListInvestigationsResponse, AWSError>;
   /**
@@ -184,11 +184,11 @@ declare class Detective extends Service {
    */
   rejectInvitation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * initiate an investigation on an entity in a graph
+   * Detective investigations lets you investigate IAM users and IAM roles using indicators of compromise. An indicator of compromise (IOC) is an artifact observed in or on a network, system, or environment that can (with a high level of confidence) identify malicious activity or a security incident. StartInvestigation initiates an investigation on an entity in a behavior graph. 
    */
   startInvestigation(params: Detective.Types.StartInvestigationRequest, callback?: (err: AWSError, data: Detective.Types.StartInvestigationResponse) => void): Request<Detective.Types.StartInvestigationResponse, AWSError>;
   /**
-   * initiate an investigation on an entity in a graph
+   * Detective investigations lets you investigate IAM users and IAM roles using indicators of compromise. An indicator of compromise (IOC) is an artifact observed in or on a network, system, or environment that can (with a high level of confidence) identify malicious activity or a security incident. StartInvestigation initiates an investigation on an entity in a behavior graph. 
    */
   startInvestigation(callback?: (err: AWSError, data: Detective.Types.StartInvestigationResponse) => void): Request<Detective.Types.StartInvestigationResponse, AWSError>;
   /**
@@ -224,11 +224,11 @@ declare class Detective extends Service {
    */
   updateDatasourcePackages(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Update the state of an investigation.
+   * Updates the state of an investigation.
    */
   updateInvestigationState(params: Detective.Types.UpdateInvestigationStateRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Update the state of an investigation.
+   * Updates the state of an investigation.
    */
   updateInvestigationState(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -391,7 +391,7 @@ declare namespace Detective {
      */
     StartInclusive: Timestamp;
     /**
-     * A timestamp representing the end date of the time period until when data is filtered , including the end date.
+     * A timestamp representing the end date of the time period until when data is filtered, including the end date.
      */
     EndInclusive: Timestamp;
   }
@@ -484,7 +484,7 @@ declare namespace Detective {
   }
   export interface GetInvestigationRequest {
     /**
-     * The ARN of the behavior graph.
+     * The Amazon Resource Name (ARN) of the behavior graph.
      */
     GraphArn: GraphArn;
     /**
@@ -494,7 +494,7 @@ declare namespace Detective {
   }
   export interface GetInvestigationResponse {
     /**
-     * The ARN of the behavior graph.
+     * The Amazon Resource Name (ARN) of the behavior graph.
      */
     GraphArn?: GraphArn;
     /**
@@ -502,19 +502,19 @@ declare namespace Detective {
      */
     InvestigationId?: InvestigationId;
     /**
-     * The unique Amazon Resource Name (ARN) of the IAM user and IAM role.
+     * The unique Amazon Resource Name (ARN). Detective supports IAM user ARNs and IAM role ARNs.
      */
     EntityArn?: EntityArn;
     /**
-     * Type of entity. For example, Amazon Web Services accounts, such as IAM user and role.
+     * Type of entity. For example, Amazon Web Services accounts, such as an IAM user and/or IAM role.
      */
     EntityType?: EntityType;
     /**
-     * The UTC time stamp of the creation time of the investigation report.
+     * The creation time of the investigation report in UTC time stamp format.
      */
     CreatedTime?: Timestamp;
     /**
-     * The start date and time for the scope time set to generate the investigation report.
+     * The start date and time used to set the scope time within which you want to generate the investigation report. The value is an UTC ISO8601 formatted string. For example, 2021-08-18T16:35:56.284Z.
      */
     ScopeStartTime?: Timestamp;
     /**
@@ -522,15 +522,15 @@ declare namespace Detective {
      */
     ScopeEndTime?: Timestamp;
     /**
-     * Status based on the completion status of the investigation.
+     * The status based on the completion status of the investigation.
      */
     Status?: Status;
     /**
-     * Severity based on the likelihood and impact of the indicators of compromise discovered in the investigation.
+     * The severity assigned is based on the likelihood and impact of the indicators of compromise discovered in the investigation.
      */
     Severity?: Severity;
     /**
-     * The current state of the investigation. An archived investigation indicates you have completed reviewing the investigation.
+     * The current state of the investigation. An archived investigation indicates that you have completed reviewing the investigation.
      */
     State?: State;
   }
@@ -571,7 +571,7 @@ declare namespace Detective {
   export type Id = string;
   export interface ImpossibleTravelDetail {
     /**
-     * IP address where the resource was first used in the impossible travel
+     * IP address where the resource was first used in the impossible travel.
      */
     StartingIpAddress?: IpAddress;
     /**
@@ -579,7 +579,7 @@ declare namespace Detective {
      */
     EndingIpAddress?: IpAddress;
     /**
-     * Location where the resource was first used in the impossible travel
+     * Location where the resource was first used in the impossible travel.
      */
     StartingLocation?: Location;
     /**
@@ -593,11 +593,11 @@ declare namespace Detective {
   }
   export interface Indicator {
     /**
-     * The type of indicator.
+     * The type of indicator. 
      */
     IndicatorType?: IndicatorType;
     /**
-     * Details about the indicator of compromise.
+     * Details about the indicators of compromise that are used to determine if a resource is involved in a security incident. An indicator of compromise (IOC) is an artifact observed in or on a network, system, or environment that can (with a high level of confidence) identify malicious activity or a security incident.
      */
     IndicatorDetail?: IndicatorDetail;
   }
@@ -611,7 +611,7 @@ declare namespace Detective {
      */
     ImpossibleTravelDetail?: ImpossibleTravelDetail;
     /**
-     * Suspicious IP addresses that are flagged, which indicates critical or severe threats based on threat intelligence by Detective. This indicator is derived from AWS threat intelligence.
+     * Suspicious IP addresses that are flagged, which indicates critical or severe threats based on threat intelligence by Detective. This indicator is derived from Amazon Web Services threat intelligence.
      */
     FlaggedIpAddressDetail?: FlaggedIpAddressDetail;
     /**
@@ -655,7 +655,7 @@ declare namespace Detective {
      */
     State?: State;
     /**
-     * The UTC time stamp of the creation time of the investigation report.
+     * The time stamp of the creation time of the investigation report. The value is an UTC ISO8601 formatted string. For example, 2021-08-18T16:35:56.284Z.
      */
     CreatedTime?: Timestamp;
     /**
@@ -719,7 +719,7 @@ declare namespace Detective {
   }
   export interface ListIndicatorsRequest {
     /**
-     * The ARN of the behavior graph.
+     * The Amazon Resource Name (ARN) of the behavior graph.
      */
     GraphArn: GraphArn;
     /**
@@ -727,21 +727,21 @@ declare namespace Detective {
      */
     InvestigationId: InvestigationId;
     /**
-     * See Detective investigations..
+     * For the list of indicators of compromise that are generated by Detective investigations, see Detective investigations.
      */
     IndicatorType?: IndicatorType;
     /**
-     * List if there are more results available. The value of nextToken is a unique pagination token for each page. Repeat the call using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return a Validation Exception error.
+     * Lists if there are more results available. The value of nextToken is a unique pagination token for each page. Repeat the call using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return a Validation Exception error.
      */
     NextToken?: AiPaginationToken;
     /**
-     * List the maximum number of indicators in a page.
+     * Lists the maximum number of indicators in a page.
      */
     MaxResults?: MaxResults;
   }
   export interface ListIndicatorsResponse {
     /**
-     * The ARN of the behavior graph.
+     * The Amazon Resource Name (ARN) of the behavior graph.
      */
     GraphArn?: GraphArn;
     /**
@@ -749,29 +749,29 @@ declare namespace Detective {
      */
     InvestigationId?: InvestigationId;
     /**
-     * List if there are more results available. The value of nextToken is a unique pagination token for each page. Repeat the call using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return a Validation Exception error.
+     * Lists if there are more results available. The value of nextToken is a unique pagination token for each page. Repeat the call using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return a Validation Exception error.
      */
     NextToken?: AiPaginationToken;
     /**
-     * Indicators of compromise listed based on severity.
+     * Lists the indicators of compromise.
      */
     Indicators?: Indicators;
   }
   export interface ListInvestigationsRequest {
     /**
-     * The ARN of the behavior graph.
+     * The Amazon Resource Name (ARN) of the behavior graph.
      */
     GraphArn: GraphArn;
     /**
-     * List if there are more results available. The value of nextToken is a unique pagination token for each page. Repeat the call using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return a Validation Exception error.
+     * Lists if there are more results available. The value of nextToken is a unique pagination token for each page. Repeat the call using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return a Validation Exception error.
      */
     NextToken?: AiPaginationToken;
     /**
-     * List the maximum number of investigations in a page.
+     * Lists the maximum number of investigations in a page.
      */
     MaxResults?: MaxResults;
     /**
-     * Filter the investigation results based on a criteria.
+     * Filters the investigation results based on a criteria.
      */
     FilterCriteria?: FilterCriteria;
     /**
@@ -781,11 +781,11 @@ declare namespace Detective {
   }
   export interface ListInvestigationsResponse {
     /**
-     * Investigations details lists the summary of uncommon behavior or malicious activity which indicates a compromise.
+     * Lists the summary of uncommon behavior or malicious activity which indicates a compromise.
      */
     InvestigationDetails?: InvestigationDetails;
     /**
-     * List if there are more results available. The value of nextToken is a unique pagination token for each page. Repeat the call using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.
+     * Lists if there are more results available. The value of nextToken is a unique pagination token for each page. Repeat the call using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. 
      */
     NextToken?: AiPaginationToken;
   }
@@ -958,7 +958,7 @@ declare namespace Detective {
      */
     Aso?: Aso;
     /**
-     * Checks if the ASO is for new for the entire account.
+     * Checks if the Autonomous System Organization (ASO) is new for the entire account.
      */
     IsNewForEntireAccount?: IsNewForEntireAccount;
   }
@@ -972,7 +972,7 @@ declare namespace Detective {
      */
     IpAddress?: IpAddress;
     /**
-     * Checks if the gelocation is new for the entire account.
+     * Checks if the geolocation is new for the entire account.
      */
     IsNewForEntireAccount?: IsNewForEntireAccount;
   }
@@ -998,7 +998,7 @@ declare namespace Detective {
   }
   export interface RelatedFindingDetail {
     /**
-     * The ARN of the related finding.
+     * The Amazon Resource Name (ARN) of the related finding.
      */
     Arn?: EntityArn;
     /**
@@ -1030,7 +1030,7 @@ declare namespace Detective {
   export type SortOrder = "ASC"|"DESC"|string;
   export interface StartInvestigationRequest {
     /**
-     * The ARN of the behavior graph.
+     * The Amazon Resource Name (ARN) of the behavior graph.
      */
     GraphArn: GraphArn;
     /**
@@ -1042,7 +1042,7 @@ declare namespace Detective {
      */
     ScopeStartTime: Timestamp;
     /**
-     * The data and time when the investigation began. The value is an UTC ISO8601 formatted string. For example, 2021-08-18T16:35:56.284Z.
+     * The data and time when the investigation ended. The value is an UTC ISO8601 formatted string. For example, 2021-08-18T16:35:56.284Z.
      */
     ScopeEndTime: Timestamp;
   }
@@ -1084,11 +1084,11 @@ declare namespace Detective {
      */
     Procedure?: Procedure;
     /**
-     * The IP address where the TTP was observed.
+     * The IP address where the tactics, techniques, and procedure (TTP) was observed.
      */
     IpAddress?: IpAddress;
     /**
-     * The name of the API where the TTP was observed.
+     * The name of the API where the tactics, techniques, and procedure (TTP) was observed.
      */
     APIName?: APIName;
     /**
@@ -1173,7 +1173,7 @@ declare namespace Detective {
   }
   export interface UpdateInvestigationStateRequest {
     /**
-     * The ARN of the behavior graph.
+     * The Amazon Resource Name (ARN) of the behavior graph.
      */
     GraphArn: GraphArn;
     /**

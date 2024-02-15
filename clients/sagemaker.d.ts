@@ -2301,13 +2301,21 @@ declare class SageMaker extends Service {
    */
   updateArtifact(callback?: (err: AWSError, data: SageMaker.Types.UpdateArtifactResponse) => void): Request<SageMaker.Types.UpdateArtifactResponse, AWSError>;
   /**
-   * Update a SageMaker HyperPod cluster.
+   * Updates a SageMaker HyperPod cluster.
    */
   updateCluster(params: SageMaker.Types.UpdateClusterRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateClusterResponse) => void): Request<SageMaker.Types.UpdateClusterResponse, AWSError>;
   /**
-   * Update a SageMaker HyperPod cluster.
+   * Updates a SageMaker HyperPod cluster.
    */
   updateCluster(callback?: (err: AWSError, data: SageMaker.Types.UpdateClusterResponse) => void): Request<SageMaker.Types.UpdateClusterResponse, AWSError>;
+  /**
+   * Updates the platform software of a SageMaker HyperPod cluster for security patching. To learn how to use this API, see Update the SageMaker HyperPod platform software of a cluster.
+   */
+  updateClusterSoftware(params: SageMaker.Types.UpdateClusterSoftwareRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateClusterSoftwareResponse) => void): Request<SageMaker.Types.UpdateClusterSoftwareResponse, AWSError>;
+  /**
+   * Updates the platform software of a SageMaker HyperPod cluster for security patching. To learn how to use this API, see Update the SageMaker HyperPod platform software of a cluster.
+   */
+  updateClusterSoftware(callback?: (err: AWSError, data: SageMaker.Types.UpdateClusterSoftwareResponse) => void): Request<SageMaker.Types.UpdateClusterSoftwareResponse, AWSError>;
   /**
    * Updates the specified Git repository with the specified values.
    */
@@ -23190,6 +23198,18 @@ declare namespace SageMaker {
   export interface UpdateClusterResponse {
     /**
      * The Amazon Resource Name (ARN) of the updated SageMaker HyperPod cluster.
+     */
+    ClusterArn: ClusterArn;
+  }
+  export interface UpdateClusterSoftwareRequest {
+    /**
+     * Specify the name or the Amazon Resource Name (ARN) of the SageMaker HyperPod cluster you want to update for security patching.
+     */
+    ClusterName: ClusterNameOrArn;
+  }
+  export interface UpdateClusterSoftwareResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster being updated for security patching.
      */
     ClusterArn: ClusterArn;
   }

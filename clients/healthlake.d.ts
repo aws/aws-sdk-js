@@ -301,7 +301,7 @@ declare namespace HealthLake {
   }
   export interface DescribeFHIRImportJobResponse {
     /**
-     * The properties of the Import job request, including the ID, ARN, name, and the status of the job.
+     * The properties of the Import job request, including the ID, ARN, name, status of the job, and the progress report of the job.
      */
     ImportJobProperties: ImportJobProperties;
   }
@@ -346,6 +346,8 @@ declare namespace HealthLake {
   }
   export type ExportJobPropertiesList = ExportJobProperties[];
   export type FHIRVersion = "R4"|string;
+  export type GenericDouble = number;
+  export type GenericLong = number;
   export type IamRoleArn = string;
   export interface IdentityProviderConfiguration {
     /**
@@ -396,6 +398,10 @@ declare namespace HealthLake {
     InputDataConfig: InputDataConfig;
     JobOutputDataConfig?: OutputDataConfig;
     /**
+     * Displays the progress of the import job, including total resources scanned, total resources ingested, and total size of data ingested.
+     */
+    JobProgressReport?: JobProgressReport;
+    /**
      * The Amazon Resource Name (ARN) that gives AWS HealthLake access to your input data.
      */
     DataAccessRoleArn?: IamRoleArn;
@@ -413,6 +419,40 @@ declare namespace HealthLake {
   }
   export type JobId = string;
   export type JobName = string;
+  export interface JobProgressReport {
+    /**
+     * The number of files scanned from input S3 bucket.
+     */
+    TotalNumberOfScannedFiles?: GenericLong;
+    /**
+     * The size (in MB) of the files scanned from the input S3 bucket.
+     */
+    TotalSizeOfScannedFilesInMB?: GenericDouble;
+    /**
+     * The number of files imported so far.
+     */
+    TotalNumberOfImportedFiles?: GenericLong;
+    /**
+     * The number of resources scanned from the input S3 bucket.
+     */
+    TotalNumberOfResourcesScanned?: GenericLong;
+    /**
+     * The number of resources imported so far.
+     */
+    TotalNumberOfResourcesImported?: GenericLong;
+    /**
+     * The number of resources that failed due to customer error.
+     */
+    TotalNumberOfResourcesWithCustomerError?: GenericLong;
+    /**
+     * The number of files that failed to be read from the input S3 bucket due to customer error.
+     */
+    TotalNumberOfFilesReadWithCustomerError?: GenericLong;
+    /**
+     * The throughput (in MB/sec) of the import job.
+     */
+    Throughput?: GenericDouble;
+  }
   export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED_WITH_ERRORS"|"COMPLETED"|"FAILED"|"CANCEL_SUBMITTED"|"CANCEL_IN_PROGRESS"|"CANCEL_COMPLETED"|"CANCEL_FAILED"|string;
   export interface KmsEncryptionConfig {
     /**
@@ -521,7 +561,7 @@ declare namespace HealthLake {
   }
   export interface ListFHIRImportJobsResponse {
     /**
-     *  The properties of a listed FHIR import jobs, including the ID, ARN, name, and the status of the job. 
+     *  The properties of a listed FHIR import jobs, including the ID, ARN, name, the status of the job, and the progress report of the job. 
      */
     ImportJobPropertiesList: ImportJobPropertiesList;
     /**

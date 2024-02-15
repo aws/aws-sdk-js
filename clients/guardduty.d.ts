@@ -260,11 +260,11 @@ declare class GuardDuty extends Service {
    */
   getFindings(callback?: (err: AWSError, data: GuardDuty.Types.GetFindingsResponse) => void): Request<GuardDuty.Types.GetFindingsResponse, AWSError>;
   /**
-   * Lists Amazon GuardDuty findings statistics for the specified detector ID.
+   * Lists Amazon GuardDuty findings statistics for the specified detector ID. There might be regional differences because some flags might not be available in all the Regions where GuardDuty is currently supported. For more information, see Regions and endpoints.
    */
   getFindingsStatistics(params: GuardDuty.Types.GetFindingsStatisticsRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetFindingsStatisticsResponse) => void): Request<GuardDuty.Types.GetFindingsStatisticsResponse, AWSError>;
   /**
-   * Lists Amazon GuardDuty findings statistics for the specified detector ID.
+   * Lists Amazon GuardDuty findings statistics for the specified detector ID. There might be regional differences because some flags might not be available in all the Regions where GuardDuty is currently supported. For more information, see Regions and endpoints.
    */
   getFindingsStatistics(callback?: (err: AWSError, data: GuardDuty.Types.GetFindingsStatisticsResponse) => void): Request<GuardDuty.Types.GetFindingsStatisticsResponse, AWSError>;
   /**
@@ -376,11 +376,11 @@ declare class GuardDuty extends Service {
    */
   listFilters(callback?: (err: AWSError, data: GuardDuty.Types.ListFiltersResponse) => void): Request<GuardDuty.Types.ListFiltersResponse, AWSError>;
   /**
-   * Lists Amazon GuardDuty findings for the specified detector ID.
+   * Lists GuardDuty findings for the specified detector ID. There might be regional differences because some flags might not be available in all the Regions where GuardDuty is currently supported. For more information, see Regions and endpoints.
    */
   listFindings(params: GuardDuty.Types.ListFindingsRequest, callback?: (err: AWSError, data: GuardDuty.Types.ListFindingsResponse) => void): Request<GuardDuty.Types.ListFindingsResponse, AWSError>;
   /**
-   * Lists Amazon GuardDuty findings for the specified detector ID.
+   * Lists GuardDuty findings for the specified detector ID. There might be regional differences because some flags might not be available in all the Regions where GuardDuty is currently supported. For more information, see Regions and endpoints.
    */
   listFindings(callback?: (err: AWSError, data: GuardDuty.Types.ListFindingsResponse) => void): Request<GuardDuty.Types.ListFindingsResponse, AWSError>;
   /**
@@ -488,11 +488,11 @@ declare class GuardDuty extends Service {
    */
   untagResource(callback?: (err: AWSError, data: GuardDuty.Types.UntagResourceResponse) => void): Request<GuardDuty.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates the Amazon GuardDuty detector specified by the detectorId. There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
+   * Updates the GuardDuty detector specified by the detectorId. There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
    */
   updateDetector(params: GuardDuty.Types.UpdateDetectorRequest, callback?: (err: AWSError, data: GuardDuty.Types.UpdateDetectorResponse) => void): Request<GuardDuty.Types.UpdateDetectorResponse, AWSError>;
   /**
-   * Updates the Amazon GuardDuty detector specified by the detectorId. There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
+   * Updates the GuardDuty detector specified by the detectorId. There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
    */
   updateDetector(callback?: (err: AWSError, data: GuardDuty.Types.UpdateDetectorResponse) => void): Request<GuardDuty.Types.UpdateDetectorResponse, AWSError>;
   /**
@@ -3168,7 +3168,7 @@ declare namespace GuardDuty {
     /**
      * The IPv4 local address of the connection.
      */
-    IpAddressV4?: String;
+    IpAddressV4?: SensitiveString;
   }
   export interface LocalPortDetails {
     /**
@@ -3404,7 +3404,7 @@ declare namespace GuardDuty {
     /**
      * The private IP address of the EC2 instance.
      */
-    PrivateIpAddress?: String;
+    PrivateIpAddress?: SensitiveString;
     /**
      * Other private IP address information of the EC2 instance.
      */
@@ -3722,7 +3722,7 @@ declare namespace GuardDuty {
     /**
      * The private IP address of the EC2 instance.
      */
-    PrivateIpAddress?: String;
+    PrivateIpAddress?: SensitiveString;
   }
   export type PrivateIpAddresses = PrivateIpAddressDetails[];
   export interface ProcessDetails {
@@ -3884,7 +3884,7 @@ declare namespace GuardDuty {
     /**
      * The IPv4 remote address of the connection.
      */
-    IpAddressV4?: String;
+    IpAddressV4?: SensitiveString;
     /**
      * The ISP organization information of the remote IP address.
      */
@@ -4297,6 +4297,7 @@ declare namespace GuardDuty {
     GroupName?: String;
   }
   export type SecurityGroups = SecurityGroup[];
+  export type SensitiveString = string;
   export interface Service {
     /**
      * Information about the activity that is described in a finding.
