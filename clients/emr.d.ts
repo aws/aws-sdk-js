@@ -397,13 +397,21 @@ declare class EMR extends Service {
    */
   setKeepJobFlowAliveWhenNoSteps(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * SetTerminationProtection locks a cluster (job flow) so the Amazon EC2 instances in the cluster cannot be terminated by user intervention, an API call, or in the event of a job-flow error. The cluster still terminates upon successful completion of the job flow. Calling SetTerminationProtection on a cluster is similar to calling the Amazon EC2 DisableAPITermination API on all Amazon EC2 instances in a cluster.  SetTerminationProtection is used to prevent accidental termination of a cluster and to ensure that in the event of an error, the instances persist so that you can recover any data stored in their ephemeral instance storage.  To terminate a cluster that has been locked by setting SetTerminationProtection to true, you must first unlock the job flow by a subsequent call to SetTerminationProtection in which you set the value to false.   For more information, seeManaging Cluster Termination in the Amazon EMR Management Guide. 
+   * SetTerminationProtection locks a cluster (job flow) so the Amazon EC2 instances in the cluster cannot be terminated by user intervention, an API call, or in the event of a job-flow error. The cluster still terminates upon successful completion of the job flow. Calling SetTerminationProtection on a cluster is similar to calling the Amazon EC2 DisableAPITermination API on all Amazon EC2 instances in a cluster.  SetTerminationProtection is used to prevent accidental termination of a cluster and to ensure that in the event of an error, the instances persist so that you can recover any data stored in their ephemeral instance storage.  To terminate a cluster that has been locked by setting SetTerminationProtection to true, you must first unlock the job flow by a subsequent call to SetTerminationProtection in which you set the value to false.   For more information, see Managing Cluster Termination in the Amazon EMR Management Guide. 
    */
   setTerminationProtection(params: EMR.Types.SetTerminationProtectionInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * SetTerminationProtection locks a cluster (job flow) so the Amazon EC2 instances in the cluster cannot be terminated by user intervention, an API call, or in the event of a job-flow error. The cluster still terminates upon successful completion of the job flow. Calling SetTerminationProtection on a cluster is similar to calling the Amazon EC2 DisableAPITermination API on all Amazon EC2 instances in a cluster.  SetTerminationProtection is used to prevent accidental termination of a cluster and to ensure that in the event of an error, the instances persist so that you can recover any data stored in their ephemeral instance storage.  To terminate a cluster that has been locked by setting SetTerminationProtection to true, you must first unlock the job flow by a subsequent call to SetTerminationProtection in which you set the value to false.   For more information, seeManaging Cluster Termination in the Amazon EMR Management Guide. 
+   * SetTerminationProtection locks a cluster (job flow) so the Amazon EC2 instances in the cluster cannot be terminated by user intervention, an API call, or in the event of a job-flow error. The cluster still terminates upon successful completion of the job flow. Calling SetTerminationProtection on a cluster is similar to calling the Amazon EC2 DisableAPITermination API on all Amazon EC2 instances in a cluster.  SetTerminationProtection is used to prevent accidental termination of a cluster and to ensure that in the event of an error, the instances persist so that you can recover any data stored in their ephemeral instance storage.  To terminate a cluster that has been locked by setting SetTerminationProtection to true, you must first unlock the job flow by a subsequent call to SetTerminationProtection in which you set the value to false.   For more information, see Managing Cluster Termination in the Amazon EMR Management Guide. 
    */
   setTerminationProtection(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Specify whether to enable unhealthy node replacement, which lets Amazon EMR gracefully replace core nodes on a cluster if any nodes become unhealthy. For example, a node becomes unhealthy if disk usage is above 90%. If unhealthy node replacement is on and TerminationProtected are off, Amazon EMR immediately terminates the unhealthy core nodes. To use unhealthy node replacement and retain unhealthy core nodes, use to turn on termination protection. In such cases, Amazon EMR adds the unhealthy nodes to a denylist, reducing job interruptions and failures. If unhealthy node replacement is on, Amazon EMR notifies YARN and other applications on the cluster to stop scheduling tasks with these nodes, moves the data, and then terminates the nodes. For more information, see graceful node replacement in the Amazon EMR Management Guide.
+   */
+  setUnhealthyNodeReplacement(params: EMR.Types.SetUnhealthyNodeReplacementInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Specify whether to enable unhealthy node replacement, which lets Amazon EMR gracefully replace core nodes on a cluster if any nodes become unhealthy. For example, a node becomes unhealthy if disk usage is above 90%. If unhealthy node replacement is on and TerminationProtected are off, Amazon EMR immediately terminates the unhealthy core nodes. To use unhealthy node replacement and retain unhealthy core nodes, use to turn on termination protection. In such cases, Amazon EMR adds the unhealthy nodes to a denylist, reducing job interruptions and failures. If unhealthy node replacement is on, Amazon EMR notifies YARN and other applications on the cluster to stop scheduling tasks with these nodes, moves the data, and then terminates the nodes. For more information, see graceful node replacement in the Amazon EMR Management Guide.
+   */
+  setUnhealthyNodeReplacement(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    *  The SetVisibleToAllUsers parameter is no longer supported. Your cluster may be visible to all users in your account. To restrict cluster access using an IAM policy, see Identity and Access Management for Amazon EMR.   Sets the Cluster$VisibleToAllUsers value for an Amazon EMR cluster. When true, IAM principals in the Amazon Web Services account can perform Amazon EMR cluster actions that their IAM policies allow. When false, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform Amazon EMR actions on the cluster, regardless of IAM permissions policies attached to other IAM principals. This action works on running clusters. When you create a cluster, use the RunJobFlowInput$VisibleToAllUsers parameter. For more information, see Understanding the Amazon EMR Cluster VisibleToAllUsers Setting in the Amazon EMR Management Guide.
    */
@@ -796,6 +804,10 @@ declare namespace EMR {
      * Indicates whether Amazon EMR will lock the cluster to prevent the Amazon EC2 instances from being terminated by an API call or user intervention, or in the event of a cluster error.
      */
     TerminationProtected?: Boolean;
+    /**
+     * Indicates whether Amazon EMR should gracefully replace Amazon EC2 core instances that have degraded within the cluster.
+     */
+    UnhealthyNodeReplacement?: BooleanObject;
     /**
      * Indicates whether the cluster is visible to IAM principals in the Amazon Web Services account associated with the cluster. When true, IAM principals in the Amazon Web Services account can perform Amazon EMR cluster actions on the cluster that their IAM policies allow. When false, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform Amazon EMR actions, regardless of IAM permissions policies attached to other IAM principals. The default value is true if a value is not provided when creating a cluster using the Amazon EMR API RunJobFlow command, the CLI create-cluster command, or the Amazon Web Services Management Console.
      */
@@ -2274,6 +2286,10 @@ declare namespace EMR {
      */
     TerminationProtected?: Boolean;
     /**
+     * Indicates whether Amazon EMR should gracefully replace core nodes that have degraded within the cluster.
+     */
+    UnhealthyNodeReplacement?: BooleanObject;
+    /**
      * Applies only to Amazon EMR release versions earlier than 4.0. The Hadoop version for the cluster. Valid inputs are "0.18" (no longer maintained), "0.20" (no longer maintained), "0.20.205" (no longer maintained), "1.0.3", "2.2.0", or "2.4.0". If you do not set this value, the default of 0.18 is used, unless the AmiVersion parameter is set in the RunJobFlow call, in which case the default version of Hadoop for that AMI version is used.
      */
     HadoopVersion?: XmlStringMaxLen256;
@@ -2355,6 +2371,10 @@ declare namespace EMR {
      * Specifies whether the Amazon EC2 instances in the cluster are protected from termination by API calls, user intervention, or in the event of a job-flow error.
      */
     TerminationProtected?: Boolean;
+    /**
+     * Indicates whether Amazon EMR should gracefully replace core nodes that have degraded within the cluster.
+     */
+    UnhealthyNodeReplacement?: BooleanObject;
     /**
      * The Hadoop version for the cluster.
      */
@@ -3360,6 +3380,16 @@ declare namespace EMR {
      * A Boolean that indicates whether to protect the cluster and prevent the Amazon EC2 instances in the cluster from shutting down due to API calls, user intervention, or job-flow error.
      */
     TerminationProtected: Boolean;
+  }
+  export interface SetUnhealthyNodeReplacementInput {
+    /**
+     * The list of strings that uniquely identify the clusters for which to turn on unhealthy node replacement. You can get these identifiers by running the RunJobFlow or the DescribeJobFlows operations.
+     */
+    JobFlowIds: XmlStringList;
+    /**
+     * Indicates whether to turn on or turn off graceful unhealthy node replacement.
+     */
+    UnhealthyNodeReplacement: BooleanObject;
   }
   export interface SetVisibleToAllUsersInput {
     /**

@@ -287,11 +287,11 @@ declare class Lambda extends Service {
    */
   invoke(callback?: (err: AWSError, data: Lambda.Types.InvocationResponse) => void): Request<Lambda.Types.InvocationResponse, AWSError>;
   /**
-   *  For asynchronous function invocation, use Invoke.  Invokes a function asynchronously.
+   *  For asynchronous function invocation, use Invoke.  Invokes a function asynchronously.  If you do use the InvokeAsync action, note that it doesn't support the use of X-Ray active tracing. Trace ID is not propagated to the function, even if X-Ray active tracing is turned on. 
    */
   invokeAsync(params: Lambda.Types.InvokeAsyncRequest, callback?: (err: AWSError, data: Lambda.Types.InvokeAsyncResponse) => void): Request<Lambda.Types.InvokeAsyncResponse, AWSError>;
   /**
-   *  For asynchronous function invocation, use Invoke.  Invokes a function asynchronously.
+   *  For asynchronous function invocation, use Invoke.  Invokes a function asynchronously.  If you do use the InvokeAsync action, note that it doesn't support the use of X-Ray active tracing. Trace ID is not propagated to the function, even if X-Ray active tracing is turned on. 
    */
   invokeAsync(callback?: (err: AWSError, data: Lambda.Types.InvokeAsyncResponse) => void): Request<Lambda.Types.InvokeAsyncResponse, AWSError>;
   /**
@@ -892,7 +892,7 @@ declare namespace Lambda {
   }
   export interface CreateEventSourceMappingRequest {
     /**
-     * The Amazon Resource Name (ARN) of the event source.    Amazon Kinesis – The ARN of the data stream or a stream consumer.    Amazon DynamoDB Streams – The ARN of the stream.    Amazon Simple Queue Service – The ARN of the queue.    Amazon Managed Streaming for Apache Kafka – The ARN of the cluster.    Amazon MQ – The ARN of the broker.    Amazon DocumentDB – The ARN of the DocumentDB change stream.  
+     * The Amazon Resource Name (ARN) of the event source.    Amazon Kinesis – The ARN of the data stream or a stream consumer.    Amazon DynamoDB Streams – The ARN of the stream.    Amazon Simple Queue Service – The ARN of the queue.    Amazon Managed Streaming for Apache Kafka – The ARN of the cluster or the ARN of the VPC connection (for cross-account event source mappings).    Amazon MQ – The ARN of the broker.    Amazon DocumentDB – The ARN of the DocumentDB change stream.  
      */
     EventSourceArn?: Arn;
     /**
@@ -928,7 +928,7 @@ declare namespace Lambda {
      */
     StartingPositionTimestamp?: _Date;
     /**
-     * (Kinesis and DynamoDB Streams only) A standard Amazon SQS queue or standard Amazon SNS topic destination for discarded records.
+     * (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Kafka only) A configuration object that specifies the destination of an event after Lambda processes it.
      */
     DestinationConfig?: DestinationConfig;
     /**
@@ -1070,7 +1070,7 @@ declare namespace Lambda {
      */
     Architectures?: ArchitecturesList;
     /**
-     * The size of the function's /tmp directory in MB. The default value is 512, but can be any whole number between 512 and 10,240 MB.
+     * The size of the function's /tmp directory in MB. The default value is 512, but can be any whole number between 512 and 10,240 MB. For more information, see Configuring ephemeral storage (console).
      */
     EphemeralStorage?: EphemeralStorage;
     /**
@@ -1602,7 +1602,7 @@ declare namespace Lambda {
      */
     Architectures?: ArchitecturesList;
     /**
-     * The size of the function’s /tmp directory in MB. The default value is 512, but it can be any whole number between 512 and 10,240 MB.
+     * The size of the function's /tmp directory in MB. The default value is 512, but can be any whole number between 512 and 10,240 MB. For more information, see Configuring ephemeral storage (console).
      */
     EphemeralStorage?: EphemeralStorage;
     /**
@@ -2043,7 +2043,7 @@ declare namespace Lambda {
      */
     LogType?: LogType;
     /**
-     * Up to 3,583 bytes of base64-encoded data about the invoking client to pass to the function in the context object.
+     * Up to 3,583 bytes of base64-encoded data about the invoking client to pass to the function in the context object. Lambda passes the ClientContext object to your function for synchronous invocations only.
      */
     ClientContext?: String;
     /**
@@ -2327,7 +2327,7 @@ declare namespace Lambda {
   }
   export interface ListEventSourceMappingsRequest {
     /**
-     * The Amazon Resource Name (ARN) of the event source.    Amazon Kinesis – The ARN of the data stream or a stream consumer.    Amazon DynamoDB Streams – The ARN of the stream.    Amazon Simple Queue Service – The ARN of the queue.    Amazon Managed Streaming for Apache Kafka – The ARN of the cluster.    Amazon MQ – The ARN of the broker.    Amazon DocumentDB – The ARN of the DocumentDB change stream.  
+     * The Amazon Resource Name (ARN) of the event source.    Amazon Kinesis – The ARN of the data stream or a stream consumer.    Amazon DynamoDB Streams – The ARN of the stream.    Amazon Simple Queue Service – The ARN of the queue.    Amazon Managed Streaming for Apache Kafka – The ARN of the cluster or the ARN of the VPC connection (for cross-account event source mappings).    Amazon MQ – The ARN of the broker.    Amazon DocumentDB – The ARN of the DocumentDB change stream.  
      */
     EventSourceArn?: Arn;
     /**
@@ -2455,7 +2455,7 @@ declare namespace Lambda {
   }
   export interface ListLayerVersionsRequest {
     /**
-     * A runtime identifier. For example, go1.x. The following list includes deprecated runtimes. For more information, see Runtime deprecation policy.
+     * A runtime identifier. For example, java21. The following list includes deprecated runtimes. For more information, see Runtime deprecation policy.
      */
     CompatibleRuntime?: Runtime;
     /**
@@ -2487,7 +2487,7 @@ declare namespace Lambda {
   }
   export interface ListLayersRequest {
     /**
-     * A runtime identifier. For example, go1.x. The following list includes deprecated runtimes. For more information, see Runtime deprecation policy.
+     * A runtime identifier. For example, java21. The following list includes deprecated runtimes. For more information, see Runtime deprecation policy.
      */
     CompatibleRuntime?: Runtime;
     /**
@@ -2583,11 +2583,11 @@ declare namespace Lambda {
      */
     LogFormat?: LogFormat;
     /**
-     * Set this property to filter the application logs for your function that Lambda sends to CloudWatch. Lambda only sends application logs at the selected level and lower.
+     * Set this property to filter the application logs for your function that Lambda sends to CloudWatch. Lambda only sends application logs at the selected level of detail and lower, where TRACE is the highest level and FATAL is the lowest.
      */
     ApplicationLogLevel?: ApplicationLogLevel;
     /**
-     * Set this property to filter the system logs for your function that Lambda sends to CloudWatch. Lambda only sends system logs at the selected level and lower.
+     * Set this property to filter the system logs for your function that Lambda sends to CloudWatch. Lambda only sends system logs at the selected level of detail and lower, where DEBUG is the highest level and WARN is the lowest.
      */
     SystemLogLevel?: SystemLogLevel;
     /**
@@ -2618,7 +2618,7 @@ declare namespace Lambda {
   export type NullableBoolean = boolean;
   export interface OnFailure {
     /**
-     * The Amazon Resource Name (ARN) of the destination resource.
+     * The Amazon Resource Name (ARN) of the destination resource. To retain records of asynchronous invocations, you can configure an Amazon SNS topic, Amazon SQS queue, Lambda function, or Amazon EventBridge event bus as the destination. To retain records of failed invocations from Kinesis and DynamoDB event sources, you can configure an Amazon SNS topic or Amazon SQS queue as the destination. To retain records of failed invocations from self-managed Kafka or Amazon MSK, you can configure an Amazon SNS topic or Amazon SQS queue as the destination.
      */
     Destination?: DestinationArn;
   }
@@ -3124,7 +3124,7 @@ declare namespace Lambda {
      */
     MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
     /**
-     * (Kinesis and DynamoDB Streams only) A standard Amazon SQS queue or standard Amazon SNS topic destination for discarded records.
+     * (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Kafka only) A configuration object that specifies the destination of an event after Lambda processes it.
      */
     DestinationConfig?: DestinationConfig;
     /**
@@ -3272,7 +3272,7 @@ declare namespace Lambda {
      */
     ImageConfig?: ImageConfig;
     /**
-     * The size of the function's /tmp directory in MB. The default value is 512, but can be any whole number between 512 and 10,240 MB.
+     * The size of the function's /tmp directory in MB. The default value is 512, but can be any whole number between 512 and 10,240 MB. For more information, see Configuring ephemeral storage (console).
      */
     EphemeralStorage?: EphemeralStorage;
     /**

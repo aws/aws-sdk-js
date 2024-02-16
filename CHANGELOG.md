@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1559.0-->
+<!--LATEST=2.1560.0-->
 <!--ENTRYINSERT-->
+
+## 2.1560.0
+* feature: EMR: adds fine grained control over Unhealthy Node Replacement to Amazon ElasticMapReduce
+* feature: Firehose: This release adds support for Data Message Extraction for decompressed CloudWatch logs, and to use a custom file extension or time zone for S3 destinations.
+* feature: SNS: This release marks phone numbers as sensitive inputs.
 
 ## 2.1559.0
 * feature: Artifact: This is the initial SDK release for AWS Artifact. AWS Artifact provides on-demand access to compliance and third-party compliance reports. This release includes access to List and Get reports, along with their metadata. This release also includes access to AWS Artifact notifications settings.

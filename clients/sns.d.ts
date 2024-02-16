@@ -36,11 +36,11 @@ declare class SNS extends Service {
    */
   confirmSubscription(callback?: (err: AWSError, data: SNS.Types.ConfirmSubscriptionResponse) => void): Request<SNS.Types.ConfirmSubscriptionResponse, AWSError>;
   /**
-   * Creates a platform application object for one of the supported push notification services, such as APNS and GCM (Firebase Cloud Messaging), to which devices and mobile apps may register. You must specify PlatformPrincipal and PlatformCredential attributes when using the CreatePlatformApplication action.  PlatformPrincipal and PlatformCredential are received from the notification service.   For ADM, PlatformPrincipal is client id and PlatformCredential is client secret.   For Baidu, PlatformPrincipal is API key and PlatformCredential is secret key.   For APNS and APNS_SANDBOX using certificate credentials, PlatformPrincipal is SSL certificate and PlatformCredential is private key.   For APNS and APNS_SANDBOX using token credentials, PlatformPrincipal is signing key ID and PlatformCredential is signing key.   For GCM (Firebase Cloud Messaging), there is no PlatformPrincipal and the PlatformCredential is API key.   For MPNS, PlatformPrincipal is TLS certificate and PlatformCredential is private key.   For WNS, PlatformPrincipal is Package Security Identifier and PlatformCredential is secret key.   You can use the returned PlatformApplicationArn as an attribute for the CreatePlatformEndpoint action.
+   * Creates a platform application object for one of the supported push notification services, such as APNS and GCM (Firebase Cloud Messaging), to which devices and mobile apps may register. You must specify PlatformPrincipal and PlatformCredential attributes when using the CreatePlatformApplication action.  PlatformPrincipal and PlatformCredential are received from the notification service.   For ADM, PlatformPrincipal is client id and PlatformCredential is client secret.   For Baidu, PlatformPrincipal is API key and PlatformCredential is secret key.   For APNS and APNS_SANDBOX using certificate credentials, PlatformPrincipal is SSL certificate and PlatformCredential is private key.   For APNS and APNS_SANDBOX using token credentials, PlatformPrincipal is signing key ID and PlatformCredential is signing key.   For GCM (Firebase Cloud Messaging) using key credentials, there is no PlatformPrincipal. The PlatformCredential is API key.   For GCM (Firebase Cloud Messaging) using token credentials, there is no PlatformPrincipal. The PlatformCredential is a JSON formatted private key file. When using the Amazon Web Services CLI, the file must be in string format and special characters must be ignored. To format the file correctly, Amazon SNS recommends using the following command: SERVICE_JSON=`jq @json &lt;&lt;&lt; cat service.json`.   For MPNS, PlatformPrincipal is TLS certificate and PlatformCredential is private key.   For WNS, PlatformPrincipal is Package Security Identifier and PlatformCredential is secret key.   You can use the returned PlatformApplicationArn as an attribute for the CreatePlatformEndpoint action.
    */
   createPlatformApplication(params: SNS.Types.CreatePlatformApplicationInput, callback?: (err: AWSError, data: SNS.Types.CreatePlatformApplicationResponse) => void): Request<SNS.Types.CreatePlatformApplicationResponse, AWSError>;
   /**
-   * Creates a platform application object for one of the supported push notification services, such as APNS and GCM (Firebase Cloud Messaging), to which devices and mobile apps may register. You must specify PlatformPrincipal and PlatformCredential attributes when using the CreatePlatformApplication action.  PlatformPrincipal and PlatformCredential are received from the notification service.   For ADM, PlatformPrincipal is client id and PlatformCredential is client secret.   For Baidu, PlatformPrincipal is API key and PlatformCredential is secret key.   For APNS and APNS_SANDBOX using certificate credentials, PlatformPrincipal is SSL certificate and PlatformCredential is private key.   For APNS and APNS_SANDBOX using token credentials, PlatformPrincipal is signing key ID and PlatformCredential is signing key.   For GCM (Firebase Cloud Messaging), there is no PlatformPrincipal and the PlatformCredential is API key.   For MPNS, PlatformPrincipal is TLS certificate and PlatformCredential is private key.   For WNS, PlatformPrincipal is Package Security Identifier and PlatformCredential is secret key.   You can use the returned PlatformApplicationArn as an attribute for the CreatePlatformEndpoint action.
+   * Creates a platform application object for one of the supported push notification services, such as APNS and GCM (Firebase Cloud Messaging), to which devices and mobile apps may register. You must specify PlatformPrincipal and PlatformCredential attributes when using the CreatePlatformApplication action.  PlatformPrincipal and PlatformCredential are received from the notification service.   For ADM, PlatformPrincipal is client id and PlatformCredential is client secret.   For Baidu, PlatformPrincipal is API key and PlatformCredential is secret key.   For APNS and APNS_SANDBOX using certificate credentials, PlatformPrincipal is SSL certificate and PlatformCredential is private key.   For APNS and APNS_SANDBOX using token credentials, PlatformPrincipal is signing key ID and PlatformCredential is signing key.   For GCM (Firebase Cloud Messaging) using key credentials, there is no PlatformPrincipal. The PlatformCredential is API key.   For GCM (Firebase Cloud Messaging) using token credentials, there is no PlatformPrincipal. The PlatformCredential is a JSON formatted private key file. When using the Amazon Web Services CLI, the file must be in string format and special characters must be ignored. To format the file correctly, Amazon SNS recommends using the following command: SERVICE_JSON=`jq @json &lt;&lt;&lt; cat service.json`.   For MPNS, PlatformPrincipal is TLS certificate and PlatformCredential is private key.   For WNS, PlatformPrincipal is Package Security Identifier and PlatformCredential is secret key.   You can use the returned PlatformApplicationArn as an attribute for the CreatePlatformEndpoint action.
    */
   createPlatformApplication(callback?: (err: AWSError, data: SNS.Types.CreatePlatformApplicationResponse) => void): Request<SNS.Types.CreatePlatformApplicationResponse, AWSError>;
   /**
@@ -437,19 +437,19 @@ declare namespace SNS {
      */
     Platform: String;
     /**
-     * For a list of attributes, see SetPlatformApplicationAttributes.
+     * For a list of attributes, see  SetPlatformApplicationAttributes .
      */
     Attributes: MapStringToString;
   }
   export interface CreatePlatformApplicationResponse {
     /**
-     * PlatformApplicationArn is returned.
+     *  PlatformApplicationArn is returned.
      */
     PlatformApplicationArn?: String;
   }
   export interface CreatePlatformEndpointInput {
     /**
-     * PlatformApplicationArn returned from CreatePlatformApplication is used to create a an endpoint.
+     *  PlatformApplicationArn returned from CreatePlatformApplication is used to create a an endpoint.
      */
     PlatformApplicationArn: String;
     /**
@@ -461,7 +461,7 @@ declare namespace SNS {
      */
     CustomUserData?: String;
     /**
-     * For a list of attributes, see SetEndpointAttributes.
+     * For a list of attributes, see  SetEndpointAttributes .
      */
     Attributes?: MapStringToString;
   }
@@ -504,13 +504,13 @@ declare namespace SNS {
   export type DelegatesList = delegate[];
   export interface DeleteEndpointInput {
     /**
-     * EndpointArn of endpoint to delete.
+     *  EndpointArn of endpoint to delete.
      */
     EndpointArn: String;
   }
   export interface DeletePlatformApplicationInput {
     /**
-     * PlatformApplicationArn of platform application object to delete.
+     *  PlatformApplicationArn of platform application object to delete.
      */
     PlatformApplicationArn: String;
   }
@@ -552,7 +552,7 @@ declare namespace SNS {
   }
   export interface GetEndpointAttributesInput {
     /**
-     * EndpointArn for GetEndpointAttributes input.
+     *  EndpointArn for GetEndpointAttributes input.
      */
     EndpointArn: String;
   }
@@ -564,13 +564,13 @@ declare namespace SNS {
   }
   export interface GetPlatformApplicationAttributesInput {
     /**
-     * PlatformApplicationArn for GetPlatformApplicationAttributesInput.
+     *  PlatformApplicationArn for GetPlatformApplicationAttributesInput.
      */
     PlatformApplicationArn: String;
   }
   export interface GetPlatformApplicationAttributesResponse {
     /**
-     * Attributes include the following:    AppleCertificateExpiryDate – The expiry date of the SSL certificate used to configure certificate-based authentication.    ApplePlatformTeamID – The Apple developer account ID used to configure token-based authentication.    ApplePlatformBundleID – The app identifier used to configure token-based authentication.    EventEndpointCreated – Topic ARN to which EndpointCreated event notifications should be sent.    EventEndpointDeleted – Topic ARN to which EndpointDeleted event notifications should be sent.    EventEndpointUpdated – Topic ARN to which EndpointUpdate event notifications should be sent.    EventDeliveryFailure – Topic ARN to which DeliveryFailure event notifications should be sent upon Direct Publish delivery failure (permanent) to one of the application's endpoints.  
+     * Attributes include the following:    AppleCertificateExpiryDate – The expiry date of the SSL certificate used to configure certificate-based authentication.    ApplePlatformTeamID – The Apple developer account ID used to configure token-based authentication.    ApplePlatformBundleID – The app identifier used to configure token-based authentication.    AuthenticationMethod – Returns the credential type used when sending push notifications from application to APNS/APNS_Sandbox, or application to GCM.   APNS – Returns the token or certificate.   GCM – Returns the token or key.      EventEndpointCreated – Topic ARN to which EndpointCreated event notifications should be sent.    EventEndpointDeleted – Topic ARN to which EndpointDeleted event notifications should be sent.    EventEndpointUpdated – Topic ARN to which EndpointUpdate event notifications should be sent.    EventDeliveryFailure – Topic ARN to which DeliveryFailure event notifications should be sent upon Direct Publish delivery failure (permanent) to one of the application's endpoints.  
      */
     Attributes?: MapStringToString;
   }
@@ -622,11 +622,11 @@ declare namespace SNS {
   export type LanguageCodeString = "en-US"|"en-GB"|"es-419"|"es-ES"|"de-DE"|"fr-CA"|"fr-FR"|"it-IT"|"ja-JP"|"pt-BR"|"kr-KR"|"zh-CN"|"zh-TW"|string;
   export interface ListEndpointsByPlatformApplicationInput {
     /**
-     * PlatformApplicationArn for ListEndpointsByPlatformApplicationInput action.
+     *  PlatformApplicationArn for ListEndpointsByPlatformApplicationInput action.
      */
     PlatformApplicationArn: String;
     /**
-     * NextToken string is used when calling ListEndpointsByPlatformApplication action to retrieve additional records that are available after the first page results.
+     *  NextToken string is used when calling ListEndpointsByPlatformApplication action to retrieve additional records that are available after the first page results.
      */
     NextToken?: String;
   }
@@ -636,7 +636,7 @@ declare namespace SNS {
      */
     Endpoints?: ListOfEndpoints;
     /**
-     * NextToken string is returned when calling ListEndpointsByPlatformApplication action if additional records are available after the first page results.
+     *  NextToken string is returned when calling ListEndpointsByPlatformApplication action if additional records are available after the first page results.
      */
     NextToken?: String;
   }
@@ -680,7 +680,7 @@ declare namespace SNS {
   }
   export interface ListPlatformApplicationsInput {
     /**
-     * NextToken string is used when calling ListPlatformApplications action to retrieve additional records that are available after the first page results.
+     *  NextToken string is used when calling ListPlatformApplications action to retrieve additional records that are available after the first page results.
      */
     NextToken?: String;
   }
@@ -690,7 +690,7 @@ declare namespace SNS {
      */
     PlatformApplications?: ListOfPlatformApplications;
     /**
-     * NextToken string is returned when calling ListPlatformApplications action if additional records are available after the first page results.
+     *  NextToken string is returned when calling ListPlatformApplications action if additional records are available after the first page results.
      */
     NextToken?: String;
   }
@@ -817,7 +817,7 @@ declare namespace SNS {
     /**
      * The phone number.
      */
-    PhoneNumber?: String;
+    PhoneNumber?: PhoneNumber;
     /**
      * The status of the phone number.
      */
@@ -926,7 +926,7 @@ declare namespace SNS {
     /**
      * The phone number to which you want to deliver an SMS message. Use E.164 format. If you don't specify a value for the PhoneNumber parameter, you must specify a value for the TargetArn or TopicArn parameters.
      */
-    PhoneNumber?: String;
+    PhoneNumber?: PhoneNumber;
     /**
      * The message you want to send. If you are publishing to a topic and you want to send the same message to all transport protocols, include the text of the message as a String value. If you want to send different messages for each transport protocol, set the value of the MessageStructure parameter to json and use a JSON object for the Message parameter.   Constraints:   With the exception of SMS, messages must be UTF-8 encoded strings and at most 256 KB in size (262,144 bytes, not 262,144 characters).   For SMS, each message can contain up to 140 characters. This character limit depends on the encoding schema. For example, an SMS message can contain 160 GSM characters, 140 ASCII characters, or 70 UCS-2 characters. If you publish a message that exceeds this size limit, Amazon SNS sends the message as multiple messages, each fitting within the size limit. Messages aren't truncated mid-word but are cut off at whole-word boundaries. The total size limit for a single SMS Publish action is 1,600 characters.   JSON-specific constraints:   Keys in the JSON object that correspond to supported transport protocols must have simple JSON string values.   The values will be parsed (unescaped) before they are used in outgoing messages.   Outbound notifications are JSON encoded (meaning that the characters will be reescaped for sending).   Values have a minimum length of 0 (the empty string, "", is allowed).   Values have a maximum length bounded by the overall message size (so, including multiple protocols may limit message sizes).   Non-string values will cause the key to be ignored.   Keys that do not correspond to supported transport protocols are ignored.   Duplicate keys are not allowed.   Failure to parse or validate any key or value in the message will cause the Publish call to return an error (no partial delivery).  
      */
@@ -1007,11 +1007,11 @@ declare namespace SNS {
   }
   export interface SetPlatformApplicationAttributesInput {
     /**
-     * PlatformApplicationArn for SetPlatformApplicationAttributes action.
+     *  PlatformApplicationArn for SetPlatformApplicationAttributes action.
      */
     PlatformApplicationArn: String;
     /**
-     * A map of the platform application attributes. Attributes in this map include the following:    PlatformCredential – The credential received from the notification service.   For ADM, PlatformCredentialis client secret.   For Apple Services using certificate credentials, PlatformCredential is private key.   For Apple Services using token credentials, PlatformCredential is signing key.   For GCM (Firebase Cloud Messaging), PlatformCredential is API key.         PlatformPrincipal – The principal received from the notification service.   For ADM, PlatformPrincipalis client id.   For Apple Services using certificate credentials, PlatformPrincipal is SSL certificate.   For Apple Services using token credentials, PlatformPrincipal is signing key ID.   For GCM (Firebase Cloud Messaging), there is no PlatformPrincipal.         EventEndpointCreated – Topic ARN to which EndpointCreated event notifications are sent.    EventEndpointDeleted – Topic ARN to which EndpointDeleted event notifications are sent.    EventEndpointUpdated – Topic ARN to which EndpointUpdate event notifications are sent.    EventDeliveryFailure – Topic ARN to which DeliveryFailure event notifications are sent upon Direct Publish delivery failure (permanent) to one of the application's endpoints.    SuccessFeedbackRoleArn – IAM role ARN used to give Amazon SNS write access to use CloudWatch Logs on your behalf.    FailureFeedbackRoleArn – IAM role ARN used to give Amazon SNS write access to use CloudWatch Logs on your behalf.    SuccessFeedbackSampleRate – Sample rate percentage (0-100) of successfully delivered messages.   The following attributes only apply to APNs token-based authentication:    ApplePlatformTeamID – The identifier that's assigned to your Apple developer account team.    ApplePlatformBundleID – The bundle identifier that's assigned to your iOS app.  
+     * A map of the platform application attributes. Attributes in this map include the following:    PlatformCredential – The credential received from the notification service.   For ADM, PlatformCredentialis client secret.   For Apple Services using certificate credentials, PlatformCredential is private key.   For Apple Services using token credentials, PlatformCredential is signing key.   For GCM (Firebase Cloud Messaging) using key credentials, there is no PlatformPrincipal. The PlatformCredential is API key.   For GCM (Firebase Cloud Messaging) using token credentials, there is no PlatformPrincipal. The PlatformCredential is a JSON formatted private key file. When using the Amazon Web Services CLI, the file must be in string format and special characters must be ignored. To format the file correctly, Amazon SNS recommends using the following command: SERVICE_JSON=`jq @json &lt;&lt;&lt; cat service.json`.        PlatformPrincipal – The principal received from the notification service.   For ADM, PlatformPrincipalis client id.   For Apple Services using certificate credentials, PlatformPrincipal is SSL certificate.   For Apple Services using token credentials, PlatformPrincipal is signing key ID.   For GCM (Firebase Cloud Messaging), there is no PlatformPrincipal.         EventEndpointCreated – Topic ARN to which EndpointCreated event notifications are sent.    EventEndpointDeleted – Topic ARN to which EndpointDeleted event notifications are sent.    EventEndpointUpdated – Topic ARN to which EndpointUpdate event notifications are sent.    EventDeliveryFailure – Topic ARN to which DeliveryFailure event notifications are sent upon Direct Publish delivery failure (permanent) to one of the application's endpoints.    SuccessFeedbackRoleArn – IAM role ARN used to give Amazon SNS write access to use CloudWatch Logs on your behalf.    FailureFeedbackRoleArn – IAM role ARN used to give Amazon SNS write access to use CloudWatch Logs on your behalf.    SuccessFeedbackSampleRate – Sample rate percentage (0-100) of successfully delivered messages.   The following attributes only apply to APNs token-based authentication:    ApplePlatformTeamID – The identifier that's assigned to your Apple developer account team.    ApplePlatformBundleID – The bundle identifier that's assigned to your iOS app.  
      */
     Attributes: MapStringToString;
   }
