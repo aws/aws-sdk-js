@@ -44,11 +44,11 @@ declare class Amplify extends Service {
    */
   createDeployment(callback?: (err: AWSError, data: Amplify.Types.CreateDeploymentResult) => void): Request<Amplify.Types.CreateDeploymentResult, AWSError>;
   /**
-   *  Creates a new domain association for an Amplify app. This action associates a custom domain with the Amplify app 
+   * Creates a new domain association for an Amplify app. This action associates a custom domain with the Amplify app 
    */
   createDomainAssociation(params: Amplify.Types.CreateDomainAssociationRequest, callback?: (err: AWSError, data: Amplify.Types.CreateDomainAssociationResult) => void): Request<Amplify.Types.CreateDomainAssociationResult, AWSError>;
   /**
-   *  Creates a new domain association for an Amplify app. This action associates a custom domain with the Amplify app 
+   * Creates a new domain association for an Amplify app. This action associates a custom domain with the Amplify app 
    */
   createDomainAssociation(callback?: (err: AWSError, data: Amplify.Types.CreateDomainAssociationResult) => void): Request<Amplify.Types.CreateDomainAssociationResult, AWSError>;
   /**
@@ -84,11 +84,11 @@ declare class Amplify extends Service {
    */
   deleteBranch(callback?: (err: AWSError, data: Amplify.Types.DeleteBranchResult) => void): Request<Amplify.Types.DeleteBranchResult, AWSError>;
   /**
-   *  Deletes a domain association for an Amplify app. 
+   * Deletes a domain association for an Amplify app. 
    */
   deleteDomainAssociation(params: Amplify.Types.DeleteDomainAssociationRequest, callback?: (err: AWSError, data: Amplify.Types.DeleteDomainAssociationResult) => void): Request<Amplify.Types.DeleteDomainAssociationResult, AWSError>;
   /**
-   *  Deletes a domain association for an Amplify app. 
+   * Deletes a domain association for an Amplify app. 
    */
   deleteDomainAssociation(callback?: (err: AWSError, data: Amplify.Types.DeleteDomainAssociationResult) => void): Request<Amplify.Types.DeleteDomainAssociationResult, AWSError>;
   /**
@@ -148,11 +148,11 @@ declare class Amplify extends Service {
    */
   getBranch(callback?: (err: AWSError, data: Amplify.Types.GetBranchResult) => void): Request<Amplify.Types.GetBranchResult, AWSError>;
   /**
-   *  Returns the domain information for an Amplify app. 
+   * Returns the domain information for an Amplify app. 
    */
   getDomainAssociation(params: Amplify.Types.GetDomainAssociationRequest, callback?: (err: AWSError, data: Amplify.Types.GetDomainAssociationResult) => void): Request<Amplify.Types.GetDomainAssociationResult, AWSError>;
   /**
-   *  Returns the domain information for an Amplify app. 
+   * Returns the domain information for an Amplify app. 
    */
   getDomainAssociation(callback?: (err: AWSError, data: Amplify.Types.GetDomainAssociationResult) => void): Request<Amplify.Types.GetDomainAssociationResult, AWSError>;
   /**
@@ -204,11 +204,11 @@ declare class Amplify extends Service {
    */
   listBranches(callback?: (err: AWSError, data: Amplify.Types.ListBranchesResult) => void): Request<Amplify.Types.ListBranchesResult, AWSError>;
   /**
-   *  Returns the domain associations for an Amplify app. 
+   * Returns the domain associations for an Amplify app. 
    */
   listDomainAssociations(params: Amplify.Types.ListDomainAssociationsRequest, callback?: (err: AWSError, data: Amplify.Types.ListDomainAssociationsResult) => void): Request<Amplify.Types.ListDomainAssociationsResult, AWSError>;
   /**
-   *  Returns the domain associations for an Amplify app. 
+   * Returns the domain associations for an Amplify app. 
    */
   listDomainAssociations(callback?: (err: AWSError, data: Amplify.Types.ListDomainAssociationsResult) => void): Request<Amplify.Types.ListDomainAssociationsResult, AWSError>;
   /**
@@ -292,11 +292,11 @@ declare class Amplify extends Service {
    */
   updateBranch(callback?: (err: AWSError, data: Amplify.Types.UpdateBranchResult) => void): Request<Amplify.Types.UpdateBranchResult, AWSError>;
   /**
-   *  Creates a new domain association for an Amplify app.
+   * Creates a new domain association for an Amplify app.
    */
   updateDomainAssociation(params: Amplify.Types.UpdateDomainAssociationRequest, callback?: (err: AWSError, data: Amplify.Types.UpdateDomainAssociationResult) => void): Request<Amplify.Types.UpdateDomainAssociationResult, AWSError>;
   /**
-   *  Creates a new domain association for an Amplify app.
+   * Creates a new domain association for an Amplify app.
    */
   updateDomainAssociation(callback?: (err: AWSError, data: Amplify.Types.UpdateDomainAssociationResult) => void): Request<Amplify.Types.UpdateDomainAssociationResult, AWSError>;
   /**
@@ -626,6 +626,32 @@ declare namespace Amplify {
   export type BranchName = string;
   export type Branches = Branch[];
   export type BuildSpec = string;
+  export interface Certificate {
+    /**
+     * The type of SSL/TLS certificate that you want to use. Specify AMPLIFY_MANAGED to use the default certificate that Amplify provisions for you. Specify CUSTOM to use your own certificate that you have already added to Certificate Manager in your Amazon Web Services account. Make sure you request (or import) the certificate in the US East (N. Virginia) Region (us-east-1). For more information about using ACM, see Importing certificates into Certificate Manager in the ACM User guide .
+     */
+    type: CertificateType;
+    /**
+     * The Amazon resource name (ARN) for a custom certificate that you have already added to Certificate Manager in your Amazon Web Services account.  This field is required only when the certificate type is CUSTOM.
+     */
+    customCertificateArn?: CertificateArn;
+    /**
+     * The DNS record for certificate verification.
+     */
+    certificateVerificationDNSRecord?: CertificateVerificationDNSRecord;
+  }
+  export type CertificateArn = string;
+  export interface CertificateSettings {
+    /**
+     * The certificate type. Specify AMPLIFY_MANAGED to use the default certificate that Amplify provisions for you. Specify CUSTOM to use your own certificate that you have already added to Certificate Manager in your Amazon Web Services account. Make sure you request (or import) the certificate in the US East (N. Virginia) Region (us-east-1). For more information about using ACM, see Importing certificates into Certificate Manager in the ACM User guide.
+     */
+    type: CertificateType;
+    /**
+     * The Amazon resource name (ARN) for the custom certificate that you have already added to Certificate Manager in your Amazon Web Services account. This field is required only when the certificate type is CUSTOM.
+     */
+    customCertificateArn?: CertificateArn;
+  }
+  export type CertificateType = "AMPLIFY_MANAGED"|"CUSTOM"|string;
   export type CertificateVerificationDNSRecord = string;
   export type CommitId = string;
   export type CommitMessage = string;
@@ -874,6 +900,10 @@ declare namespace Amplify {
      *  The required AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) for automatically creating subdomains. 
      */
     autoSubDomainIAMRole?: AutoSubDomainIAMRole;
+    /**
+     * The type of SSL/TLS certificate to use for your custom domain. If you don't specify a certificate type, Amplify uses the default certificate that it provisions and manages for you.
+     */
+    certificateSettings?: CertificateSettings;
   }
   export interface CreateDomainAssociationResult {
     /**
@@ -915,7 +945,7 @@ declare namespace Amplify {
      */
     target: Target;
     /**
-     * The status code for a URL rewrite or redirect rule.   200  Represents a 200 rewrite rule.  301  Represents a 301 (moved pemanently) redirect rule. This and all future requests should be directed to the target URL.   302  Represents a 302 temporary redirect rule.  404  Represents a 404 redirect rule.  404-200  Represents a 404 rewrite rule.  
+     * The status code for a URL rewrite or redirect rule.   200  Represents a 200 rewrite rule.  301  Represents a 301 (moved permanently) redirect rule. This and all future requests should be directed to the target URL.   302  Represents a 302 temporary redirect rule.  404  Represents a 404 redirect rule.  404-200  Represents a 404 rewrite rule.  
      */
     status?: Status;
     /**
@@ -1038,7 +1068,11 @@ declare namespace Amplify {
      */
     domainStatus: DomainStatus;
     /**
-     *  The reason for the current status of the domain association. 
+     * The status of the domain update operation that is currently in progress. The following list describes the valid update states.  REQUESTING_CERTIFICATE  The certificate is in the process of being updated.  PENDING_VERIFICATION  Indicates that an Amplify managed certificate is in the process of being verified. This occurs during the creation of a custom domain or when a custom domain is updated to use a managed certificate.  IMPORTING_CUSTOM_CERTIFICATE  Indicates that an Amplify custom certificate is in the process of being imported. This occurs during the creation of a custom domain or when a custom domain is updated to use a custom certificate.  PENDING_DEPLOYMENT  Indicates that the subdomain or certificate changes are being propagated.  AWAITING_APP_CNAME  Amplify is waiting for CNAME records corresponding to subdomains to be propagated. If your custom domain is on Route 53, Amplify handles this for you automatically. For more information about custom domains, see Setting up custom domains in the Amplify Hosting User Guide.   UPDATE_COMPLETE  The certificate has been associated with a domain.  UPDATE_FAILED  The certificate has failed to be provisioned or associated, and there is no existing active certificate to roll back to.  
+     */
+    updateStatus?: UpdateStatus;
+    /**
+     *  Additional information that describes why the domain association is in the current state.
      */
     statusReason: StatusReason;
     /**
@@ -1049,12 +1083,16 @@ declare namespace Amplify {
      *  The subdomains for the domain association. 
      */
     subDomains: SubDomains;
+    /**
+     * Describes the SSL/TLS certificate for the domain association. This can be your own custom certificate or the default certificate that Amplify provisions for you. If you are updating your domain to use a different certificate, certificate points to the new certificate that is being created instead of the current active certificate. Otherwise, certificate points to the current active certificate.
+     */
+    certificate?: Certificate;
   }
   export type DomainAssociationArn = string;
   export type DomainAssociations = DomainAssociation[];
   export type DomainName = string;
   export type DomainPrefix = string;
-  export type DomainStatus = "PENDING_VERIFICATION"|"IN_PROGRESS"|"AVAILABLE"|"PENDING_DEPLOYMENT"|"FAILED"|"CREATING"|"REQUESTING_CERTIFICATE"|"UPDATING"|string;
+  export type DomainStatus = "PENDING_VERIFICATION"|"IN_PROGRESS"|"AVAILABLE"|"IMPORTING_CUSTOM_CERTIFICATE"|"PENDING_DEPLOYMENT"|"AWAITING_APP_CNAME"|"FAILED"|"CREATING"|"REQUESTING_CERTIFICATE"|"UPDATING"|string;
   export type EnableAutoBranchCreation = boolean;
   export type EnableAutoBuild = boolean;
   export type EnableAutoSubDomain = boolean;
@@ -1864,6 +1902,10 @@ declare namespace Amplify {
      *  The required AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) for automatically creating subdomains. 
      */
     autoSubDomainIAMRole?: AutoSubDomainIAMRole;
+    /**
+     * The type of SSL/TLS certificate to use for your custom domain.
+     */
+    certificateSettings?: CertificateSettings;
   }
   export interface UpdateDomainAssociationResult {
     /**
@@ -1871,6 +1913,7 @@ declare namespace Amplify {
      */
     domainAssociation: DomainAssociation;
   }
+  export type UpdateStatus = "REQUESTING_CERTIFICATE"|"PENDING_VERIFICATION"|"IMPORTING_CUSTOM_CERTIFICATE"|"PENDING_DEPLOYMENT"|"AWAITING_APP_CNAME"|"UPDATE_COMPLETE"|"UPDATE_FAILED"|string;
   export type UpdateTime = Date;
   export interface UpdateWebhookRequest {
     /**

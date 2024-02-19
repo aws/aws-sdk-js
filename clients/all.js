@@ -376,5 +376,6 @@ module.exports = {
   MarketplaceDeployment: require('./marketplacedeployment'),
   NetworkMonitor: require('./networkmonitor'),
   SupplyChain: require('./supplychain'),
-  Artifact: require('./artifact')
+  Artifact: require('./artifact'),
+  Chatbot: require('./chatbot')
 };

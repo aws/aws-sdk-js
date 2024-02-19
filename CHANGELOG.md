@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1560.0-->
+<!--LATEST=2.1561.0-->
 <!--ENTRYINSERT-->
+
+## 2.1561.0
+* feature: Amplify: This release contains API changes that enable users to configure their Amplify domains with their own custom SSL/TLS certificate.
+* feature: Chatbot: This release adds support for AWS Chatbot. You can now monitor, operate, and troubleshoot your AWS resources with interactive ChatOps using the AWS SDK.
+* feature: MediaTailor: MediaTailor: marking #AdBreak.OffsetMillis as required.
 
 ## 2.1560.0
 * feature: EMR: adds fine grained control over Unhealthy Node Replacement to Amazon ElasticMapReduce

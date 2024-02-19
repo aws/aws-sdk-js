@@ -388,7 +388,7 @@ declare namespace MediaTailor {
     /**
      * How long (in milliseconds) after the beginning of the program that an ad starts. This value must fall within 100ms of a segment boundary, otherwise the ad break will be skipped.
      */
-    OffsetMillis?: __long;
+    OffsetMillis: __long;
     /**
      * Ad break slate configuration.
      */

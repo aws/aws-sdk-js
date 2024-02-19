@@ -423,7 +423,7 @@ declare namespace IVS {
      */
     insecureIngest?: InsecureIngest;
     /**
-     * Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full HD. Use LOW for near-real-time interaction with viewers. Default: LOW. (Note: In the Amazon IVS console, LOW and NORMAL correspond to Ultra-low and Standard, respectively.)
+     * Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full HD. Use LOW for near-real-time interaction with viewers. Default: LOW.
      */
     latencyMode?: ChannelLatencyMode;
     /**
@@ -476,7 +476,7 @@ declare namespace IVS {
      */
     insecureIngest?: InsecureIngest;
     /**
-     * Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full HD. Use LOW for near-real-time interaction with viewers. Default: LOW. (Note: In the Amazon IVS console, LOW and NORMAL correspond to Ultra-low and Standard, respectively.)
+     * Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full HD. Use LOW for near-real-time interaction with viewers. Default: LOW.
      */
     latencyMode?: ChannelLatencyMode;
     /**
@@ -516,7 +516,7 @@ declare namespace IVS {
      */
     insecureIngest?: Boolean;
     /**
-     * Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full HD. Use LOW for near-real-time interaction with viewers. (Note: In the Amazon IVS console, LOW and NORMAL correspond to Ultra-low and Standard, respectively.) Default: LOW.
+     * Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full HD. Use LOW for near-real-time interaction with viewers. Default: LOW.
      */
     latencyMode?: ChannelLatencyMode;
     /**
@@ -1425,7 +1425,7 @@ declare namespace IVS {
      */
     insecureIngest?: Boolean;
     /**
-     * Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full HD. Use LOW for near-real-time interaction with viewers. (Note: In the Amazon IVS console, LOW and NORMAL correspond to Ultra-low and Standard, respectively.)
+     * Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full HD. Use LOW for near-real-time interaction with viewers.
      */
     latencyMode?: ChannelLatencyMode;
     /**

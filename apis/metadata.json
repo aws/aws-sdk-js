@@ -1409,5 +1409,8 @@
   },
   "artifact": {
     "name": "Artifact"
+  },
+  "chatbot": {
+    "name": "Chatbot"
   }
 }
