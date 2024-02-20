@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1561.0',
+	  VERSION: '2.1562.0',
 
 	  /**
 	   * @api private
@@ -143,12 +143,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	__webpack_require__(46);
 	__webpack_require__(49);
 	__webpack_require__(50);
-	__webpack_require__(85);
-	__webpack_require__(88);
+	__webpack_require__(86);
 	__webpack_require__(89);
 	__webpack_require__(90);
-	__webpack_require__(99);
+	__webpack_require__(91);
 	__webpack_require__(100);
+	__webpack_require__(101);
 
 	/**
 	 * @readonly
@@ -8857,7 +8857,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	exports.isPrimitive = isPrimitive;
 
-	exports.isBuffer = __webpack_require__(83);
+	exports.isBuffer = __webpack_require__(84);
 
 	function objectToString(o) {
 	  return Object.prototype.toString.call(o);
@@ -8901,7 +8901,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *     prototype.
 	 * @param {function} superCtor Constructor function to inherit prototype from.
 	 */
-	exports.inherits = __webpack_require__(84);
+	exports.inherits = __webpack_require__(85);
 
 	exports._extend = function(origin, add) {
 	  // Don't do anything if add isn't an object
@@ -9040,7 +9040,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var isArgumentsObject = __webpack_require__(54);
 	var isGeneratorFunction = __webpack_require__(77);
 	var whichTypedArray = __webpack_require__(78);
-	var isTypedArray = __webpack_require__(82);
+	var isTypedArray = __webpack_require__(83);
 
 	function uncurryThis(f) {
 	  return f.call.bind(f);
@@ -9951,13 +9951,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var test = {
+		__proto__: null,
 		foo: {}
 	};
 
 	var $Object = Object;
 
+	/** @type {import('.')} */
 	module.exports = function hasProto() {
-		return { __proto__: test }.foo === test.foo && !({ __proto__: null } instanceof $Object);
+		// @ts-expect-error: TS errors on an inherited property for some reason
+		return { __proto__: test }.foo === test.foo
+			&& !(test instanceof $Object);
 	};
 
 
@@ -10642,23 +10646,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ }),
 /* 81 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
 
-	var /** @type {ReturnType<import('.')>} */ possibleNames = [
-		'BigInt64Array',
-		'BigUint64Array',
-		'Float32Array',
-		'Float64Array',
-		'Int16Array',
-		'Int32Array',
-		'Int8Array',
-		'Uint16Array',
-		'Uint32Array',
-		'Uint8Array',
-		'Uint8ClampedArray'
-	];
+	var possibleNames = __webpack_require__(82);
 
 	var g = typeof globalThis === 'undefined' ? global : globalThis;
 
@@ -10678,6 +10670,28 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ }),
 /* 82 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	/** @type {import('.')} */
+	module.exports = [
+		'Float32Array',
+		'Float64Array',
+		'Int8Array',
+		'Int16Array',
+		'Int32Array',
+		'Uint8Array',
+		'Uint8ClampedArray',
+		'Uint16Array',
+		'Uint32Array',
+		'BigInt64Array',
+		'BigUint64Array'
+	];
+
+
+/***/ }),
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10691,7 +10705,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports) {
 
 	module.exports = function isBuffer(arg) {
@@ -10702,7 +10716,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports) {
 
 	if (typeof Object.create === 'function') {
@@ -10735,14 +10749,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {var AWS = __webpack_require__(1);
-	var AcceptorStateMachine = __webpack_require__(86);
+	var AcceptorStateMachine = __webpack_require__(87);
 	var inherit = AWS.util.inherit;
 	var domain = AWS.util.domain;
-	var jmespath = __webpack_require__(87);
+	var jmespath = __webpack_require__(88);
 
 	/**
 	 * @api private
@@ -11551,7 +11565,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, exports) {
 
 	function AcceptorStateMachine(states, state) {
@@ -11602,7 +11616,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	(function(exports) {
@@ -13280,12 +13294,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
 	var inherit = AWS.util.inherit;
-	var jmespath = __webpack_require__(87);
+	var jmespath = __webpack_require__(88);
 
 	/**
 	 * This class encapsulates the response information
@@ -13487,7 +13501,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -13507,7 +13521,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var AWS = __webpack_require__(1);
 	var inherit = AWS.util.inherit;
-	var jmespath = __webpack_require__(87);
+	var jmespath = __webpack_require__(88);
 
 	/**
 	 * @api private
@@ -13697,7 +13711,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -13734,17 +13748,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	  throw new Error('Unknown signing version ' + version);
 	};
 
-	__webpack_require__(91);
 	__webpack_require__(92);
 	__webpack_require__(93);
 	__webpack_require__(94);
-	__webpack_require__(96);
+	__webpack_require__(95);
 	__webpack_require__(97);
 	__webpack_require__(98);
+	__webpack_require__(99);
 
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -13798,7 +13812,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -13881,13 +13895,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
 	var inherit = AWS.util.inherit;
 
-	__webpack_require__(92);
+	__webpack_require__(93);
 
 	/**
 	 * @api private
@@ -13912,11 +13926,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
-	var v4Credentials = __webpack_require__(95);
+	var v4Credentials = __webpack_require__(96);
 	var inherit = AWS.util.inherit;
 
 	/**
@@ -14133,7 +14147,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -14239,7 +14253,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -14420,7 +14434,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -14545,7 +14559,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -14565,7 +14579,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -14842,7 +14856,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {var warning = [

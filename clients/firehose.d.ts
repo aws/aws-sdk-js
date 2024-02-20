@@ -36,14 +36,6 @@ declare class Firehose extends Service {
    */
   describeDeliveryStream(callback?: (err: AWSError, data: Firehose.Types.DescribeDeliveryStreamOutput) => void): Request<Firehose.Types.DescribeDeliveryStreamOutput, AWSError>;
   /**
-   * 
-   */
-  getKinesisStream(params: Firehose.Types.GetKinesisStreamInput, callback?: (err: AWSError, data: Firehose.Types.GetKinesisStreamOutput) => void): Request<Firehose.Types.GetKinesisStreamOutput, AWSError>;
-  /**
-   * 
-   */
-  getKinesisStream(callback?: (err: AWSError, data: Firehose.Types.GetKinesisStreamOutput) => void): Request<Firehose.Types.GetKinesisStreamOutput, AWSError>;
-  /**
    * Lists your delivery streams in alphabetical order of their names. The number of delivery streams might be too large to return using a single call to ListDeliveryStreams. You can limit the number of delivery streams returned, using the Limit parameter. To determine whether there are more delivery streams to list, check the value of HasMoreDeliveryStreams in the output. If there are more delivery streams to list, you can request them by calling this operation again and setting the ExclusiveStartDeliveryStreamName parameter to the name of the last delivery stream returned in the last call.
    */
   listDeliveryStreams(params: Firehose.Types.ListDeliveryStreamsInput, callback?: (err: AWSError, data: Firehose.Types.ListDeliveryStreamsOutput) => void): Request<Firehose.Types.ListDeliveryStreamsOutput, AWSError>;
@@ -115,18 +107,9 @@ declare class Firehose extends Service {
    * Updates the specified destination of the specified delivery stream. Use this operation to change the destination type (for example, to replace the Amazon S3 destination with Amazon Redshift) or change the parameters associated with a destination (for example, to change the bucket name of the Amazon S3 destination). The update might not occur immediately. The target delivery stream remains active while the configurations are updated, so data writes to the delivery stream can continue during this process. The updated configurations are usually effective within a few minutes. Switching between Amazon OpenSearch Service and other services is not supported. For an Amazon OpenSearch Service destination, you can only update to another Amazon OpenSearch Service destination. If the destination type is the same, Firehose merges the configuration parameters specified with the destination configuration that already exists on the delivery stream. If any of the parameters are not specified in the call, the existing values are retained. For example, in the Amazon S3 destination, if EncryptionConfiguration is not specified, then the existing EncryptionConfiguration is maintained on the destination. If the destination type is not the same, for example, changing the destination from Amazon S3 to Amazon Redshift, Firehose does not merge any parameters. In this case, all parameters must be specified. Firehose uses CurrentDeliveryStreamVersionId to avoid race conditions and conflicting merges. This is a required field, and the service updates the configuration only if the existing configuration has a version ID that matches. After the update is applied successfully, the version ID is updated, and can be retrieved using DescribeDeliveryStream. Use the new version ID to set CurrentDeliveryStreamVersionId in the next call.
    */
   updateDestination(callback?: (err: AWSError, data: Firehose.Types.UpdateDestinationOutput) => void): Request<Firehose.Types.UpdateDestinationOutput, AWSError>;
-  /**
-   * 
-   */
-  verifyResourcesExistForTagris(params: Firehose.Types.TagrisVerifyResourcesExistInput, callback?: (err: AWSError, data: Firehose.Types.TagrisVerifyResourcesExistOutput) => void): Request<Firehose.Types.TagrisVerifyResourcesExistOutput, AWSError>;
-  /**
-   * 
-   */
-  verifyResourcesExistForTagris(callback?: (err: AWSError, data: Firehose.Types.TagrisVerifyResourcesExistOutput) => void): Request<Firehose.Types.TagrisVerifyResourcesExistOutput, AWSError>;
 }
 declare namespace Firehose {
   export type AWSKMSKeyARN = string;
-  export type AccessKeyId = string;
   export interface AmazonOpenSearchServerlessBufferingHints {
     /**
      * Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300 (5 minutes).
@@ -1128,13 +1111,6 @@ declare namespace Firehose {
     Details: NonEmptyString;
   }
   export type FileExtension = string;
-  export interface GetKinesisStreamInput {
-    DeliveryStreamARN: DeliveryStreamARN;
-  }
-  export interface GetKinesisStreamOutput {
-    KinesisStreamARN?: KinesisStreamARN;
-    CredentialsForReadingKinesisStream?: SessionCredentials;
-  }
   export type HECAcknowledgmentTimeoutInSeconds = number;
   export type HECEndpoint = string;
   export type HECEndpointType = "Raw"|"Event"|string;
@@ -1912,7 +1888,6 @@ declare namespace Firehose {
      */
     VersionId?: NonEmptyStringWithoutWhitespace;
   }
-  export type SecretAccessKey = string;
   export type SecurityGroupIdList = NonEmptyStringWithoutWhitespace[];
   export interface Serializer {
     /**
@@ -1924,13 +1899,6 @@ declare namespace Firehose {
      */
     OrcSerDe?: OrcSerDe;
   }
-  export interface SessionCredentials {
-    AccessKeyId: AccessKeyId;
-    SecretAccessKey: SecretAccessKey;
-    SessionToken: SessionToken;
-    Expiration: Timestamp;
-  }
-  export type SessionToken = string;
   export type SizeInMBs = number;
   export type SnowflakeAccountUrl = string;
   export type SnowflakeContentColumnName = string;
@@ -2354,25 +2322,6 @@ declare namespace Firehose {
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagValue = string;
-  export type TagrisAccountId = string;
-  export type TagrisAmazonResourceName = string;
-  export type TagrisInternalId = string;
-  export type TagrisStatus = "ACTIVE"|"NOT_ACTIVE"|string;
-  export type TagrisSweepList = TagrisSweepListItem[];
-  export interface TagrisSweepListItem {
-    TagrisAccountId?: TagrisAccountId;
-    TagrisAmazonResourceName?: TagrisAmazonResourceName;
-    TagrisInternalId?: TagrisInternalId;
-    TagrisVersion?: TagrisVersion;
-  }
-  export type TagrisSweepListResult = {[key: string]: TagrisStatus};
-  export interface TagrisVerifyResourcesExistInput {
-    TagrisSweepList: TagrisSweepList;
-  }
-  export interface TagrisVerifyResourcesExistOutput {
-    TagrisSweepListResult: TagrisSweepListResult;
-  }
-  export type TagrisVersion = number;
   export type Timestamp = Date;
   export type TopicName = string;
   export interface UntagDeliveryStreamInput {

@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1561.0-->
+<!--LATEST=2.1562.0-->
 <!--ENTRYINSERT-->
+
+## 2.1562.0
+* feature: Firehose: This release updates a few Firehose related APIs.
+* feature: Lambda: Add .NET 8 (dotnet8) Runtime support to AWS Lambda.
 
 ## 2.1561.0
 * feature: Amplify: This release contains API changes that enable users to configure their Amplify domains with their own custom SSL/TLS certificate.

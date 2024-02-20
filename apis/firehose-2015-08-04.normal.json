@@ -82,34 +82,6 @@
       ],
       "documentation": "<p>Describes the specified delivery stream and its status. For example, after your delivery stream is created, call <code>DescribeDeliveryStream</code> to see whether the delivery stream is <code>ACTIVE</code> and therefore ready for data to be sent to it. </p> <p>If the status of a delivery stream is <code>CREATING_FAILED</code>, this status doesn't change, and you can't invoke <a>CreateDeliveryStream</a> again on it. However, you can invoke the <a>DeleteDeliveryStream</a> operation to delete it. If the status is <code>DELETING_FAILED</code>, you can force deletion by invoking <a>DeleteDeliveryStream</a> again but with <a>DeleteDeliveryStreamInput$AllowForceDelete</a> set to true.</p>"
     },
-    "GetKinesisStream": {
-      "name": "GetKinesisStream",
-      "http": {
-        "method": "POST",
-        "requestUri": "/"
-      },
-      "input": {
-        "shape": "GetKinesisStreamInput"
-      },
-      "output": {
-        "shape": "GetKinesisStreamOutput"
-      },
-      "errors": [
-        {
-          "shape": "ResourceNotFoundException"
-        },
-        {
-          "shape": "InvalidArgumentException"
-        },
-        {
-          "shape": "InvalidStreamTypeException"
-        },
-        {
-          "shape": "InvalidKMSResourceException"
-        }
-      ],
-      "internalonly": true
-    },
     "ListDeliveryStreams": {
       "name": "ListDeliveryStreams",
       "http": {
@@ -353,40 +325,6 @@
         }
       ],
       "documentation": "<p>Updates the specified destination of the specified delivery stream.</p> <p>Use this operation to change the destination type (for example, to replace the Amazon S3 destination with Amazon Redshift) or change the parameters associated with a destination (for example, to change the bucket name of the Amazon S3 destination). The update might not occur immediately. The target delivery stream remains active while the configurations are updated, so data writes to the delivery stream can continue during this process. The updated configurations are usually effective within a few minutes.</p> <p>Switching between Amazon OpenSearch Service and other services is not supported. For an Amazon OpenSearch Service destination, you can only update to another Amazon OpenSearch Service destination.</p> <p>If the destination type is the same, Firehose merges the configuration parameters specified with the destination configuration that already exists on the delivery stream. If any of the parameters are not specified in the call, the existing values are retained. For example, in the Amazon S3 destination, if <a>EncryptionConfiguration</a> is not specified, then the existing <code>EncryptionConfiguration</code> is maintained on the destination.</p> <p>If the destination type is not the same, for example, changing the destination from Amazon S3 to Amazon Redshift, Firehose does not merge any parameters. In this case, all parameters must be specified.</p> <p>Firehose uses <code>CurrentDeliveryStreamVersionId</code> to avoid race conditions and conflicting merges. This is a required field, and the service updates the configuration only if the existing configuration has a version ID that matches. After the update is applied successfully, the version ID is updated, and can be retrieved using <a>DescribeDeliveryStream</a>. Use the new version ID to set <code>CurrentDeliveryStreamVersionId</code> in the next call.</p>"
-    },
-    "VerifyResourcesExistForTagris": {
-      "name": "VerifyResourcesExistForTagris",
-      "http": {
-        "method": "POST",
-        "requestUri": "/"
-      },
-      "input": {
-        "shape": "TagrisVerifyResourcesExistInput"
-      },
-      "output": {
-        "shape": "TagrisVerifyResourcesExistOutput"
-      },
-      "errors": [
-        {
-          "shape": "TagrisAccessDeniedException"
-        },
-        {
-          "shape": "TagrisInternalServiceException"
-        },
-        {
-          "shape": "TagrisInvalidArnException"
-        },
-        {
-          "shape": "TagrisInvalidParameterException"
-        },
-        {
-          "shape": "TagrisPartialResourcesExistResultsException"
-        },
-        {
-          "shape": "TagrisThrottledException"
-        }
-      ],
-      "internalonly": true
     }
   },
   "shapes": {
@@ -395,10 +333,6 @@
       "max": 512,
       "min": 1,
       "pattern": "arn:.*"
-    },
-    "AccessKeyId": {
-      "type": "string",
-      "sensitive": true
     },
     "AmazonOpenSearchServerlessBufferingHints": {
       "type": "structure",
@@ -1950,28 +1884,6 @@
       "min": 0,
       "pattern": "^$|\\.[0-9a-z!\\-_.*'()]+"
     },
-    "GetKinesisStreamInput": {
-      "type": "structure",
-      "required": [
-        "DeliveryStreamARN"
-      ],
-      "members": {
-        "DeliveryStreamARN": {
-          "shape": "DeliveryStreamARN"
-        }
-      }
-    },
-    "GetKinesisStreamOutput": {
-      "type": "structure",
-      "members": {
-        "KinesisStreamARN": {
-          "shape": "KinesisStreamARN"
-        },
-        "CredentialsForReadingKinesisStream": {
-          "shape": "SessionCredentials"
-        }
-      }
-    },
     "HECAcknowledgmentTimeoutInSeconds": {
       "type": "integer",
       "max": 600,
@@ -3291,10 +3203,6 @@
       },
       "documentation": "<p>Specifies the schema to which you want Firehose to configure your data before it writes it to Amazon S3. This parameter is required if <code>Enabled</code> is set to true.</p>"
     },
-    "SecretAccessKey": {
-      "type": "string",
-      "sensitive": true
-    },
     "SecurityGroupIdList": {
       "type": "list",
       "member": {
@@ -3316,34 +3224,6 @@
         }
       },
       "documentation": "<p>The serializer that you want Firehose to use to convert data to the target format before writing it to Amazon S3. Firehose supports two types of serializers: the <a href=\"https://hive.apache.org/javadocs/r1.2.2/api/org/apache/hadoop/hive/ql/io/orc/OrcSerde.html\">ORC SerDe</a> and the <a href=\"https://hive.apache.org/javadocs/r1.2.2/api/org/apache/hadoop/hive/ql/io/parquet/serde/ParquetHiveSerDe.html\">Parquet SerDe</a>.</p>"
-    },
-    "SessionCredentials": {
-      "type": "structure",
-      "required": [
-        "AccessKeyId",
-        "SecretAccessKey",
-        "SessionToken",
-        "Expiration"
-      ],
-      "members": {
-        "AccessKeyId": {
-          "shape": "AccessKeyId"
-        },
-        "SecretAccessKey": {
-          "shape": "SecretAccessKey"
-        },
-        "SessionToken": {
-          "shape": "SessionToken"
-        },
-        "Expiration": {
-          "shape": "Timestamp"
-        }
-      },
-      "sensitive": true
-    },
-    "SessionToken": {
-      "type": "string",
-      "sensitive": true
     },
     "SizeInMBs": {
       "type": "integer",
@@ -4012,85 +3892,6 @@
       "max": 256,
       "min": 0,
       "pattern": "^[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@%]*$"
-    },
-    "TagrisAccountId": {
-      "type": "string",
-      "max": 12,
-      "min": 12
-    },
-    "TagrisAmazonResourceName": {
-      "type": "string",
-      "max": 1011,
-      "min": 1
-    },
-    "TagrisInternalId": {
-      "type": "string",
-      "max": 64,
-      "min": 0
-    },
-    "TagrisStatus": {
-      "type": "string",
-      "enum": [
-        "ACTIVE",
-        "NOT_ACTIVE"
-      ]
-    },
-    "TagrisSweepList": {
-      "type": "list",
-      "member": {
-        "shape": "TagrisSweepListItem"
-      }
-    },
-    "TagrisSweepListItem": {
-      "type": "structure",
-      "members": {
-        "TagrisAccountId": {
-          "shape": "TagrisAccountId"
-        },
-        "TagrisAmazonResourceName": {
-          "shape": "TagrisAmazonResourceName"
-        },
-        "TagrisInternalId": {
-          "shape": "TagrisInternalId"
-        },
-        "TagrisVersion": {
-          "shape": "TagrisVersion"
-        }
-      }
-    },
-    "TagrisSweepListResult": {
-      "type": "map",
-      "key": {
-        "shape": "TagrisAmazonResourceName"
-      },
-      "value": {
-        "shape": "TagrisStatus"
-      }
-    },
-    "TagrisVerifyResourcesExistInput": {
-      "type": "structure",
-      "required": [
-        "TagrisSweepList"
-      ],
-      "members": {
-        "TagrisSweepList": {
-          "shape": "TagrisSweepList"
-        }
-      }
-    },
-    "TagrisVerifyResourcesExistOutput": {
-      "type": "structure",
-      "required": [
-        "TagrisSweepListResult"
-      ],
-      "members": {
-        "TagrisSweepListResult": {
-          "shape": "TagrisSweepListResult"
-        }
-      }
-    },
-    "TagrisVersion": {
-      "type": "long"
     },
     "Timestamp": {
       "type": "timestamp"

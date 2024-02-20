@@ -1345,7 +1345,7 @@ declare namespace Lambda {
      */
     StateTransitionReason?: String;
     /**
-     * (Kinesis and DynamoDB Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded records.
+     * (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka event sources only) A configuration object that specifies the destination of an event after Lambda processes it.
      */
     DestinationConfig?: DestinationConfig;
     /**
@@ -2618,7 +2618,7 @@ declare namespace Lambda {
   export type NullableBoolean = boolean;
   export interface OnFailure {
     /**
-     * The Amazon Resource Name (ARN) of the destination resource. To retain records of asynchronous invocations, you can configure an Amazon SNS topic, Amazon SQS queue, Lambda function, or Amazon EventBridge event bus as the destination. To retain records of failed invocations from Kinesis and DynamoDB event sources, you can configure an Amazon SNS topic or Amazon SQS queue as the destination. To retain records of failed invocations from self-managed Kafka or Amazon MSK, you can configure an Amazon SNS topic or Amazon SQS queue as the destination.
+     * The Amazon Resource Name (ARN) of the destination resource. To retain records of asynchronous invocations, you can configure an Amazon SNS topic, Amazon SQS queue, Lambda function, or Amazon EventBridge event bus as the destination. To retain records of failed invocations from Kinesis and DynamoDB event sources, you can configure an Amazon SNS topic or Amazon SQS queue as the destination. To retain records of failed invocations from self-managed Kafka or Amazon MSK, you can configure an Amazon SNS topic, Amazon SQS queue, or Amazon S3 bucket as the destination.
      */
     Destination?: DestinationArn;
   }
@@ -2917,7 +2917,7 @@ declare namespace Lambda {
   export type ResourceArn = string;
   export type ResponseStreamingInvocationType = "RequestResponse"|"DryRun"|string;
   export type RoleArn = string;
-  export type Runtime = "nodejs"|"nodejs4.3"|"nodejs6.10"|"nodejs8.10"|"nodejs10.x"|"nodejs12.x"|"nodejs14.x"|"nodejs16.x"|"java8"|"java8.al2"|"java11"|"python2.7"|"python3.6"|"python3.7"|"python3.8"|"python3.9"|"dotnetcore1.0"|"dotnetcore2.0"|"dotnetcore2.1"|"dotnetcore3.1"|"dotnet6"|"nodejs4.3-edge"|"go1.x"|"ruby2.5"|"ruby2.7"|"provided"|"provided.al2"|"nodejs18.x"|"python3.10"|"java17"|"ruby3.2"|"python3.11"|"nodejs20.x"|"provided.al2023"|"python3.12"|"java21"|string;
+  export type Runtime = "nodejs"|"nodejs4.3"|"nodejs6.10"|"nodejs8.10"|"nodejs10.x"|"nodejs12.x"|"nodejs14.x"|"nodejs16.x"|"java8"|"java8.al2"|"java11"|"python2.7"|"python3.6"|"python3.7"|"python3.8"|"python3.9"|"dotnetcore1.0"|"dotnetcore2.0"|"dotnetcore2.1"|"dotnetcore3.1"|"dotnet6"|"dotnet8"|"nodejs4.3-edge"|"go1.x"|"ruby2.5"|"ruby2.7"|"provided"|"provided.al2"|"nodejs18.x"|"python3.10"|"java17"|"ruby3.2"|"python3.11"|"nodejs20.x"|"provided.al2023"|"python3.12"|"java21"|string;
   export type RuntimeVersionArn = string;
   export interface RuntimeVersionConfig {
     /**
