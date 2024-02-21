@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1562.0-->
+<!--LATEST=2.1563.0-->
 <!--ENTRYINSERT-->
+
+## 2.1563.0
+* feature: IoTEvents: Increase the maximum length of descriptions for Inputs, Detector Models, and Alarm Models
+* feature: LookoutEquipment: This release adds a field exposing model quality to read APIs for models. It also adds a model quality field to the API response when creating an inference scheduler.
+* feature: MediaLive: MediaLive now supports the ability to restart pipelines in a running channel.
+* feature: SSM: This release adds support for sharing Systems Manager parameters with other AWS accounts.
 
 ## 2.1562.0
 * feature: Firehose: This release updates a few Firehose related APIs.

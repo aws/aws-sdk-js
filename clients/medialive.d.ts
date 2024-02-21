@@ -526,6 +526,14 @@ declare class MediaLive extends Service {
    */
   updateReservation(callback?: (err: AWSError, data: MediaLive.Types.UpdateReservationResponse) => void): Request<MediaLive.Types.UpdateReservationResponse, AWSError>;
   /**
+   * Restart pipelines in one channel that is currently running.
+   */
+  restartChannelPipelines(params: MediaLive.Types.RestartChannelPipelinesRequest, callback?: (err: AWSError, data: MediaLive.Types.RestartChannelPipelinesResponse) => void): Request<MediaLive.Types.RestartChannelPipelinesResponse, AWSError>;
+  /**
+   * Restart pipelines in one channel that is currently running.
+   */
+  restartChannelPipelines(callback?: (err: AWSError, data: MediaLive.Types.RestartChannelPipelinesResponse) => void): Request<MediaLive.Types.RestartChannelPipelinesResponse, AWSError>;
+  /**
    * Waits for the channelCreated state by periodically calling the underlying MediaLive.describeChanneloperation every 3 seconds (at most 5 times). Wait until a channel has been created
    */
   waitFor(state: "channelCreated", params: MediaLive.Types.DescribeChannelRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MediaLive.Types.DescribeChannelResponse) => void): Request<MediaLive.Types.DescribeChannelResponse, AWSError>;
@@ -1270,7 +1278,7 @@ Alternate rendition that the client will not try to play back by default. Repres
   }
   export interface CaptionDescription {
     /**
-     * Indicates whether the caption track implements accessibility features such as written descriptions of spoken dialog, music, and sounds.
+     * Indicates whether the caption track implements accessibility features such as written descriptions of spoken dialog, music, and sounds. This signaling is added to HLS output group and MediaPackage output group.
      */
     Accessibility?: AccessibilityType;
     /**
@@ -1397,7 +1405,6 @@ This field corresponds to tts:extent - X in the TTML standard.
      * A list of destinations of the channel. For UDP outputs, there is one
 destination per output. For other types (HLS, for example), there is
 one destination per packager.
-
      */
     Destinations?: __listOfOutputDestination;
     /**
@@ -1476,7 +1483,6 @@ one destination per packager.
      * A list of destinations of the channel. For UDP outputs, there is one
 destination per output. For other types (HLS, for example), there is
 one destination per packager.
-
      */
     Destinations?: __listOfOutputDestination;
     /**
@@ -1590,7 +1596,6 @@ one destination per packager.
     /**
      * Unique request ID to be specified. This is needed to prevent retries from
 creating multiple resources.
-
      */
     RequestId?: __string;
     /**
@@ -1630,7 +1635,6 @@ creating multiple resources.
      * A list of the MediaConnect Flows that you want to use in this input. You can specify as few as one
 Flow and presently, as many as two. The only requirement is when you have more than one is that each Flow is in a
 separate Availability Zone as this ensures your EML input is redundant to AZ issues.
-
      */
     MediaConnectFlows?: __listOfMediaConnectFlowRequest;
     /**
@@ -1640,7 +1644,6 @@ separate Availability Zone as this ensures your EML input is redundant to AZ iss
     /**
      * Unique identifier of the request to ensure the request is handled
 exactly once in case of retries.
-
      */
     RequestId?: __string;
     /**
@@ -1651,7 +1654,6 @@ exactly once in case of retries.
      * The source URLs for a PULL-type input. Every PULL type input needs
 exactly two source URLs for redundancy.
 Only specify sources for PULL type Inputs. Leave Destinations empty.
-
      */
     Sources?: __listOfInputSourceRequest;
     /**
@@ -1693,7 +1695,6 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
     /**
      * Unique request ID. This prevents retries from creating multiple
 resources.
-
      */
     RequestId: __string;
   }
@@ -1719,7 +1720,6 @@ resources.
     /**
      * Unique request ID. This prevents retries from creating multiple
 resources.
-
      */
     RequestId: __string;
     /**
@@ -1741,7 +1741,6 @@ resources.
     /**
      * Unique identifier of the request to ensure the request is handled
 exactly once in case of retries.
-
      */
     RequestId?: __string;
     /**
@@ -1779,7 +1778,6 @@ exactly once in case of retries.
      * A list of destinations of the channel. For UDP outputs, there is one
 destination per output. For other types (HLS, for example), there is
 one destination per packager.
-
      */
     Destinations?: __listOfOutputDestination;
     /**
@@ -2056,7 +2054,6 @@ one destination per packager.
      * A list of destinations of the channel. For UDP outputs, there is one
 destination per output. For other types (HLS, for example), there is
 one destination per packager.
-
      */
     Destinations?: __listOfOutputDestination;
     /**
@@ -2240,7 +2237,6 @@ one destination per packager.
     /**
      * STANDARD - MediaLive expects two sources to be connected to this input. If the channel is also STANDARD, both sources will be ingested. If the channel is SINGLE_PIPELINE, only the first source will be ingested; the second source will always be ignored, even if the first source fails.
 SINGLE_PIPELINE - You can connect only one source to this input. If the ChannelClass is also  SINGLE_PIPELINE, this value is valid. If the ChannelClass is STANDARD, this value is not valid because the channel requires two sources in the input.
-
      */
     InputClass?: InputClass;
     /**
@@ -2254,7 +2250,6 @@ SINGLE_PIPELINE - You can connect only one source to this input. If the ChannelC
     /**
      * Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes
 during input switch actions. Presently, this functionality only works with MP4_FILE and TS_FILE inputs.
-
      */
     InputSourceType?: InputSourceType;
     /**
@@ -3968,7 +3963,6 @@ Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
     /**
      * STANDARD - MediaLive expects two sources to be connected to this input. If the channel is also STANDARD, both sources will be ingested. If the channel is SINGLE_PIPELINE, only the first source will be ingested; the second source will always be ignored, even if the first source fails.
 SINGLE_PIPELINE - You can connect only one source to this input. If the ChannelClass is also  SINGLE_PIPELINE, this value is valid. If the ChannelClass is STANDARD, this value is not valid because the channel requires two sources in the input.
-
      */
     InputClass?: InputClass;
     /**
@@ -3982,7 +3976,6 @@ SINGLE_PIPELINE - You can connect only one source to this input. If the ChannelC
     /**
      * Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes
 during input switch actions. Presently, this functionality only works with MP4_FILE and TS_FILE inputs.
-
      */
     InputSourceType?: InputSourceType;
     /**
@@ -4062,7 +4055,6 @@ during input switch actions. Presently, this functionality only works with MP4_F
     /**
      * The system-generated static IP address of endpoint.
 It remains fixed for the lifetime of the input.
-
      */
     Ip?: __string;
     /**
@@ -4072,7 +4064,6 @@ It remains fixed for the lifetime of the input.
     /**
      * This represents the endpoint that the customer stream will be
 pushed to.
-
      */
     Url?: __string;
     Vpc?: InputDestinationVpc;
@@ -4081,19 +4072,16 @@ pushed to.
     /**
      * A unique name for the location the RTMP stream is being pushed
 to.
-
      */
     StreamName?: __string;
   }
   export interface InputDestinationVpc {
     /**
      * The availability zone of the Input destination.
-
      */
     AvailabilityZone?: __string;
     /**
      * The network interface ID of the Input destination in the VPC.
-
      */
     NetworkInterfaceId?: __string;
   }
@@ -4508,7 +4496,6 @@ to.
     /**
      * This represents the customer's source URL where stream is
 pulled from.
-
      */
     Url?: __string;
     /**
@@ -4525,7 +4512,6 @@ pulled from.
     /**
      * This represents the customer's source URL where stream is
 pulled from.
-
      */
     Url?: __string;
     /**
@@ -4569,13 +4555,11 @@ pulled from.
     /**
      * A list of up to 5 EC2 VPC security group IDs to attach to the Input VPC network interfaces.
 Requires subnetIds. If none are specified then the VPC default security group will be used.
-
      */
     SecurityGroupIds?: __listOf__string;
     /**
      * A list of 2 VPC subnet IDs from the same VPC.
 Subnet IDs must be mapped to two unique availability zones (AZ).
-
      */
     SubnetIds: __listOf__string;
   }
@@ -4698,12 +4682,10 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
   export interface ListOfferingsRequest {
     /**
      * Filter by channel class, 'STANDARD' or 'SINGLE_PIPELINE'
-
      */
     ChannelClass?: __string;
     /**
      * Filter to offerings that match the configuration of an existing channel, e.g. '2345678' (a channel ID)
-
      */
     ChannelConfiguration?: __string;
     /**
@@ -4717,7 +4699,6 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
     MaxResults?: MaxResults;
     /**
      * Filter by bitrate, 'MAX_10_MBPS', 'MAX_20_MBPS', or 'MAX_50_MBPS'
-
      */
     MaximumBitrate?: __string;
     /**
@@ -4735,12 +4716,10 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
     ResourceType?: __string;
     /**
      * Filter by special feature, 'ADVANCED_AUDIO' or 'AUDIO_NORMALIZATION'
-
      */
     SpecialFeature?: __string;
     /**
      * Filter by video quality, 'STANDARD', 'ENHANCED', or 'PREMIUM'
-
      */
     VideoQuality?: __string;
   }
@@ -4757,7 +4736,6 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
   export interface ListReservationsRequest {
     /**
      * Filter by channel class, 'STANDARD' or 'SINGLE_PIPELINE'
-
      */
     ChannelClass?: __string;
     /**
@@ -4767,7 +4745,6 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
     MaxResults?: MaxResults;
     /**
      * Filter by bitrate, 'MAX_10_MBPS', 'MAX_20_MBPS', or 'MAX_50_MBPS'
-
      */
     MaximumBitrate?: __string;
     /**
@@ -4785,12 +4762,10 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
     ResourceType?: __string;
     /**
      * Filter by special feature, 'ADVANCED_AUDIO' or 'AUDIO_NORMALIZATION'
-
      */
     SpecialFeature?: __string;
     /**
      * Filter by video quality, 'STANDARD', 'ENHANCED', or 'PREMIUM'
-
      */
     VideoQuality?: __string;
   }
@@ -6497,7 +6472,6 @@ provide the language to consider when translating the image-based source to text
      * A list of destinations of the channel. For UDP outputs, there is one
 destination per output. For other types (HLS, for example), there is
 one destination per packager.
-
      */
     Destinations?: __listOfOutputDestination;
     /**
@@ -6766,7 +6740,6 @@ one destination per packager.
      * A list of destinations of the channel. For UDP outputs, there is one
 destination per output. For other types (HLS, for example), there is
 one destination per packager.
-
      */
     Destinations?: __listOfOutputDestination;
     /**
@@ -7231,7 +7204,6 @@ one destination per packager.
      * A list of the MediaConnect Flow ARNs that you want to use as the source of the input. You can specify as few as one
 Flow and presently, as many as two. The only requirement is when you have more than one is that each Flow is in a
 separate Availability Zone as this ensures your EML input is redundant to AZ issues.
-
      */
     MediaConnectFlows?: __listOfMediaConnectFlowRequest;
     /**
@@ -7246,7 +7218,6 @@ separate Availability Zone as this ensures your EML input is redundant to AZ iss
      * The source URLs for a PULL-type input. Every PULL type input needs
 exactly two source URLs for redundancy.
 Only specify sources for PULL type Inputs. Leave Destinations empty.
-
      */
     Sources?: __listOfInputSourceRequest;
   }
@@ -7421,19 +7392,16 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
     /**
      * List of public address allocation ids to associate with ENIs that will be created in Output VPC.
 Must specify one for SINGLE_PIPELINE, two for STANDARD channels
-
      */
     PublicAddressAllocationIds?: __listOf__string;
     /**
      * A list of up to 5 EC2 VPC security group IDs to attach to the Output VPC network interfaces.
 If none are specified then the VPC default security group will be used
-
      */
     SecurityGroupIds?: __listOf__string;
     /**
      * A list of VPC subnet IDs from the same VPC.
 If STANDARD channel, subnet IDs must be mapped to two unique availability zones (AZ).
-
      */
     SubnetIds: __listOf__string;
   }
@@ -7442,23 +7410,19 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
      * The Availability Zones where the vpc subnets are located.
 The first Availability Zone applies to the first subnet in the list of subnets.
 The second Availability Zone applies to the second subnet.
-
      */
     AvailabilityZones?: __listOf__string;
     /**
      * A list of Elastic Network Interfaces created by MediaLive in the customer's VPC
-
      */
     NetworkInterfaceIds?: __listOf__string;
     /**
      * A list of up EC2 VPC security group IDs attached to the Output VPC network interfaces.
-
      */
     SecurityGroupIds?: __listOf__string;
     /**
      * A list of VPC subnet IDs from the same VPC.
 If STANDARD channel, subnet IDs must be mapped to two unique availability zones (AZ).
-
      */
     SubnetIds?: __listOf__string;
   }
@@ -7646,6 +7610,92 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
   export type InputDeviceUhdAudioChannelPairProfile = "DISABLED"|"VBR-AAC_HHE-16000"|"VBR-AAC_HE-64000"|"VBR-AAC_LC-128000"|"CBR-AAC_HQ-192000"|"CBR-AAC_HQ-256000"|"CBR-AAC_HQ-384000"|"CBR-AAC_HQ-512000"|string;
   export type __listOfInputDeviceConfigurableAudioChannelPairConfig = InputDeviceConfigurableAudioChannelPairConfig[];
   export type __listOfInputDeviceUhdAudioChannelPairConfig = InputDeviceUhdAudioChannelPairConfig[];
+  export type ChannelPipelineIdToRestart = "PIPELINE_0"|"PIPELINE_1"|string;
+  export interface RestartChannelPipelinesRequest {
+    /**
+     * ID of channel
+     */
+    ChannelId: __string;
+    /**
+     * An array of pipelines to restart in this channel. Format PIPELINE_0 or PIPELINE_1.
+     */
+    PipelineIds?: __listOfChannelPipelineIdToRestart;
+  }
+  export interface RestartChannelPipelinesResponse {
+    /**
+     * The unique arn of the channel.
+     */
+    Arn?: __string;
+    /**
+     * Specification of CDI inputs for this channel
+     */
+    CdiInputSpecification?: CdiInputSpecification;
+    /**
+     * The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline.
+     */
+    ChannelClass?: ChannelClass;
+    /**
+     * A list of destinations of the channel. For UDP outputs, there is one
+destination per output. For other types (HLS, for example), there is
+one destination per packager.
+     */
+    Destinations?: __listOfOutputDestination;
+    /**
+     * The endpoints where outgoing connections initiate from
+     */
+    EgressEndpoints?: __listOfChannelEgressEndpoint;
+    EncoderSettings?: EncoderSettings;
+    /**
+     * The unique id of the channel.
+     */
+    Id?: __string;
+    /**
+     * List of input attachments for channel.
+     */
+    InputAttachments?: __listOfInputAttachment;
+    /**
+     * Specification of network and file inputs for this channel
+     */
+    InputSpecification?: InputSpecification;
+    /**
+     * The log level being written to CloudWatch Logs.
+     */
+    LogLevel?: LogLevel;
+    /**
+     * Maintenance settings for this channel.
+     */
+    Maintenance?: MaintenanceStatus;
+    /**
+     * The time in milliseconds by when the PVRE restart must occur.
+     */
+    MaintenanceStatus?: __string;
+    /**
+     * The name of the channel. (user-mutable)
+     */
+    Name?: __string;
+    /**
+     * Runtime details for the pipelines of a running channel.
+     */
+    PipelineDetails?: __listOfPipelineDetail;
+    /**
+     * The number of currently healthy pipelines.
+     */
+    PipelinesRunningCount?: __integer;
+    /**
+     * The Amazon Resource Name (ARN) of the role assumed when running the Channel.
+     */
+    RoleArn?: __string;
+    State?: ChannelState;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
+    /**
+     * Settings for VPC output
+     */
+    Vpc?: VpcOutputSettingsDescription;
+  }
+  export type __listOfChannelPipelineIdToRestart = ChannelPipelineIdToRestart[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

@@ -524,6 +524,10 @@ declare namespace LookoutEquipment {
      * Indicates the status of the CreateInferenceScheduler operation. 
      */
     Status?: InferenceSchedulerStatus;
+    /**
+     * Provides a quality assessment for a model that uses labels. If Lookout for Equipment determines that the model quality is poor based on training metrics, the value is POOR_QUALITY_DETECTED. Otherwise, the value is QUALITY_THRESHOLD_MET.  If the model is unlabeled, the model quality can't be assessed and the value of ModelQuality is CANNOT_DETERMINE_QUALITY. In this situation, you can get a model quality assessment by adding labels to the input dataset and retraining the model. For information about using labels with your models, see Understanding labeling. For information about improving the quality of a model, see Best practices with Amazon Lookout for Equipment.
+     */
+    ModelQuality?: ModelQuality;
   }
   export interface CreateLabelGroupRequest {
     /**
@@ -1274,6 +1278,10 @@ declare namespace LookoutEquipment {
      * Configuration information for the model's pointwise model diagnostics.
      */
     ModelDiagnosticsOutputConfiguration?: ModelDiagnosticsOutputConfiguration;
+    /**
+     * Provides a quality assessment for a model that uses labels. If Lookout for Equipment determines that the model quality is poor based on training metrics, the value is POOR_QUALITY_DETECTED. Otherwise, the value is QUALITY_THRESHOLD_MET. If the model is unlabeled, the model quality can't be assessed and the value of ModelQuality is CANNOT_DETERMINE_QUALITY. In this situation, you can get a model quality assessment by adding labels to the input dataset and retraining the model. For information about using labels with your models, see Understanding labeling. For information about improving the quality of a model, see Best practices with Amazon Lookout for Equipment.
+     */
+    ModelQuality?: ModelQuality;
   }
   export interface DescribeModelVersionRequest {
     /**
@@ -1416,6 +1424,10 @@ declare namespace LookoutEquipment {
      * The Amazon S3 output prefix for where Lookout for Equipment saves the pointwise model diagnostics for the model version.
      */
     ModelDiagnosticsResultsObject?: S3Object;
+    /**
+     * Provides a quality assessment for a model that uses labels. If Lookout for Equipment determines that the model quality is poor based on training metrics, the value is POOR_QUALITY_DETECTED. Otherwise, the value is QUALITY_THRESHOLD_MET. If the model is unlabeled, the model quality can't be assessed and the value of ModelQuality is CANNOT_DETERMINE_QUALITY. In this situation, you can get a model quality assessment by adding labels to the input dataset and retraining the model. For information about using labels with your models, see Understanding labeling. For information about improving the quality of a model, see Best practices with Amazon Lookout for Equipment.
+     */
+    ModelQuality?: ModelQuality;
   }
   export interface DescribeResourcePolicyRequest {
     /**
@@ -2341,6 +2353,7 @@ declare namespace LookoutEquipment {
   export type ModelMetrics = string;
   export type ModelName = string;
   export type ModelPromoteMode = "MANAGED"|"MANUAL"|string;
+  export type ModelQuality = "QUALITY_THRESHOLD_MET"|"CANNOT_DETERMINE_QUALITY"|"POOR_QUALITY_DETECTED"|string;
   export type ModelStatus = "IN_PROGRESS"|"SUCCESS"|"FAILED"|"IMPORT_IN_PROGRESS"|string;
   export type ModelSummaries = ModelSummary[];
   export interface ModelSummary {
@@ -2397,6 +2410,10 @@ declare namespace LookoutEquipment {
      */
     RetrainingSchedulerStatus?: RetrainingSchedulerStatus;
     ModelDiagnosticsOutputConfiguration?: ModelDiagnosticsOutputConfiguration;
+    /**
+     * Provides a quality assessment for a model that uses labels. If Lookout for Equipment determines that the model quality is poor based on training metrics, the value is POOR_QUALITY_DETECTED. Otherwise, the value is QUALITY_THRESHOLD_MET. If the model is unlabeled, the model quality can't be assessed and the value of ModelQuality is CANNOT_DETERMINE_QUALITY. In this situation, you can get a model quality assessment by adding labels to the input dataset and retraining the model. For information about using labels with your models, see Understanding labeling. For information about improving the quality of a model, see Best practices with Amazon Lookout for Equipment.
+     */
+    ModelQuality?: ModelQuality;
   }
   export type ModelVersion = number;
   export type ModelVersionArn = string;
@@ -2432,6 +2449,10 @@ declare namespace LookoutEquipment {
      * Indicates how this model version was generated.
      */
     SourceType?: ModelVersionSourceType;
+    /**
+     * Provides a quality assessment for a model that uses labels. If Lookout for Equipment determines that the model quality is poor based on training metrics, the value is POOR_QUALITY_DETECTED. Otherwise, the value is QUALITY_THRESHOLD_MET.  If the model is unlabeled, the model quality can't be assessed and the value of ModelQuality is CANNOT_DETERMINE_QUALITY. In this situation, you can get a model quality assessment by adding labels to the input dataset and retraining the model. For information about improving the quality of a model, see Best practices with Amazon Lookout for Equipment.
+     */
+    ModelQuality?: ModelQuality;
   }
   export interface MonotonicValues {
     /**

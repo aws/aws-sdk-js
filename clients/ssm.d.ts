@@ -205,11 +205,11 @@ declare class SSM extends Service {
    */
   deleteResourceDataSync(callback?: (err: AWSError, data: SSM.Types.DeleteResourceDataSyncResult) => void): Request<SSM.Types.DeleteResourceDataSyncResult, AWSError>;
   /**
-   * Deletes a Systems Manager resource policy. A resource policy helps you to define the IAM entity (for example, an Amazon Web Services account) that can manage your Systems Manager resources. Currently, OpsItemGroup is the only resource that supports Systems Manager resource policies. The resource policy for OpsItemGroup enables Amazon Web Services accounts to view and interact with OpsCenter operational work items (OpsItems).
+   * Deletes a Systems Manager resource policy. A resource policy helps you to define the IAM entity (for example, an Amazon Web Services account) that can manage your Systems Manager resources. The following resources support Systems Manager resource policies.    OpsItemGroup - The resource policy for OpsItemGroup enables Amazon Web Services accounts to view and interact with OpsCenter operational work items (OpsItems).    Parameter - The resource policy is used to share a parameter with other accounts using Resource Access Manager (RAM). For more information about cross-account sharing of parameters, see Working with shared parameters in the Amazon Web Services Systems Manager User Guide.  
    */
   deleteResourcePolicy(params: SSM.Types.DeleteResourcePolicyRequest, callback?: (err: AWSError, data: SSM.Types.DeleteResourcePolicyResponse) => void): Request<SSM.Types.DeleteResourcePolicyResponse, AWSError>;
   /**
-   * Deletes a Systems Manager resource policy. A resource policy helps you to define the IAM entity (for example, an Amazon Web Services account) that can manage your Systems Manager resources. Currently, OpsItemGroup is the only resource that supports Systems Manager resource policies. The resource policy for OpsItemGroup enables Amazon Web Services accounts to view and interact with OpsCenter operational work items (OpsItems).
+   * Deletes a Systems Manager resource policy. A resource policy helps you to define the IAM entity (for example, an Amazon Web Services account) that can manage your Systems Manager resources. The following resources support Systems Manager resource policies.    OpsItemGroup - The resource policy for OpsItemGroup enables Amazon Web Services accounts to view and interact with OpsCenter operational work items (OpsItems).    Parameter - The resource policy is used to share a parameter with other accounts using Resource Access Manager (RAM). For more information about cross-account sharing of parameters, see Working with shared parameters in the Amazon Web Services Systems Manager User Guide.  
    */
   deleteResourcePolicy(callback?: (err: AWSError, data: SSM.Types.DeleteResourcePolicyResponse) => void): Request<SSM.Types.DeleteResourcePolicyResponse, AWSError>;
   /**
@@ -453,11 +453,11 @@ declare class SSM extends Service {
    */
   describeOpsItems(callback?: (err: AWSError, data: SSM.Types.DescribeOpsItemsResponse) => void): Request<SSM.Types.DescribeOpsItemsResponse, AWSError>;
   /**
-   * Get information about a parameter. Request results are returned on a best-effort basis. If you specify MaxResults in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of MaxResults. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a NextToken. You can specify the NextToken in a subsequent call to get the next set of results.  If you change the KMS key alias for the KMS key used to encrypt a parameter, then you must also update the key alias the parameter uses to reference KMS. Otherwise, DescribeParameters retrieves whatever the original key alias was referencing. 
+   * Lists the parameters in your Amazon Web Services account or the parameters shared with you when you enable the Shared option. Request results are returned on a best-effort basis. If you specify MaxResults in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of MaxResults. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a NextToken. You can specify the NextToken in a subsequent call to get the next set of results.  If you change the KMS key alias for the KMS key used to encrypt a parameter, then you must also update the key alias the parameter uses to reference KMS. Otherwise, DescribeParameters retrieves whatever the original key alias was referencing. 
    */
   describeParameters(params: SSM.Types.DescribeParametersRequest, callback?: (err: AWSError, data: SSM.Types.DescribeParametersResult) => void): Request<SSM.Types.DescribeParametersResult, AWSError>;
   /**
-   * Get information about a parameter. Request results are returned on a best-effort basis. If you specify MaxResults in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of MaxResults. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a NextToken. You can specify the NextToken in a subsequent call to get the next set of results.  If you change the KMS key alias for the KMS key used to encrypt a parameter, then you must also update the key alias the parameter uses to reference KMS. Otherwise, DescribeParameters retrieves whatever the original key alias was referencing. 
+   * Lists the parameters in your Amazon Web Services account or the parameters shared with you when you enable the Shared option. Request results are returned on a best-effort basis. If you specify MaxResults in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of MaxResults. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a NextToken. You can specify the NextToken in a subsequent call to get the next set of results.  If you change the KMS key alias for the KMS key used to encrypt a parameter, then you must also update the key alias the parameter uses to reference KMS. Otherwise, DescribeParameters retrieves whatever the original key alias was referencing. 
    */
   describeParameters(callback?: (err: AWSError, data: SSM.Types.DescribeParametersResult) => void): Request<SSM.Types.DescribeParametersResult, AWSError>;
   /**
@@ -877,11 +877,11 @@ declare class SSM extends Service {
    */
   putParameter(callback?: (err: AWSError, data: SSM.Types.PutParameterResult) => void): Request<SSM.Types.PutParameterResult, AWSError>;
   /**
-   * Creates or updates a Systems Manager resource policy. A resource policy helps you to define the IAM entity (for example, an Amazon Web Services account) that can manage your Systems Manager resources. Currently, OpsItemGroup is the only resource that supports Systems Manager resource policies. The resource policy for OpsItemGroup enables Amazon Web Services accounts to view and interact with OpsCenter operational work items (OpsItems).
+   * Creates or updates a Systems Manager resource policy. A resource policy helps you to define the IAM entity (for example, an Amazon Web Services account) that can manage your Systems Manager resources. The following resources support Systems Manager resource policies.    OpsItemGroup - The resource policy for OpsItemGroup enables Amazon Web Services accounts to view and interact with OpsCenter operational work items (OpsItems).    Parameter - The resource policy is used to share a parameter with other accounts using Resource Access Manager (RAM).  To share a parameter, it must be in the advanced parameter tier. For information about parameter tiers, see Managing parameter tiers. For information about changing an existing standard parameter to an advanced parameter, see Changing a standard parameter to an advanced parameter. To share a SecureString parameter, it must be encrypted with a customer managed key, and you must share the key separately through Key Management Service. Amazon Web Services managed keys cannot be shared. Parameters encrypted with the default Amazon Web Services managed key can be updated to use a customer managed key instead. For KMS key definitions, see KMS concepts in the Key Management Service Developer Guide.  While you can share a parameter using the Systems Manager PutResourcePolicy operation, we recommend using Resource Access Manager (RAM) instead. This is because using PutResourcePolicy requires the extra step of promoting the parameter to a standard RAM Resource Share using the RAM PromoteResourceShareCreatedFromPolicy API operation. Otherwise, the parameter won't be returned by the Systems Manager DescribeParameters API operation using the --shared option. For more information, see Sharing a parameter in the Amazon Web Services Systems Manager User Guide    
    */
   putResourcePolicy(params: SSM.Types.PutResourcePolicyRequest, callback?: (err: AWSError, data: SSM.Types.PutResourcePolicyResponse) => void): Request<SSM.Types.PutResourcePolicyResponse, AWSError>;
   /**
-   * Creates or updates a Systems Manager resource policy. A resource policy helps you to define the IAM entity (for example, an Amazon Web Services account) that can manage your Systems Manager resources. Currently, OpsItemGroup is the only resource that supports Systems Manager resource policies. The resource policy for OpsItemGroup enables Amazon Web Services accounts to view and interact with OpsCenter operational work items (OpsItems).
+   * Creates or updates a Systems Manager resource policy. A resource policy helps you to define the IAM entity (for example, an Amazon Web Services account) that can manage your Systems Manager resources. The following resources support Systems Manager resource policies.    OpsItemGroup - The resource policy for OpsItemGroup enables Amazon Web Services accounts to view and interact with OpsCenter operational work items (OpsItems).    Parameter - The resource policy is used to share a parameter with other accounts using Resource Access Manager (RAM).  To share a parameter, it must be in the advanced parameter tier. For information about parameter tiers, see Managing parameter tiers. For information about changing an existing standard parameter to an advanced parameter, see Changing a standard parameter to an advanced parameter. To share a SecureString parameter, it must be encrypted with a customer managed key, and you must share the key separately through Key Management Service. Amazon Web Services managed keys cannot be shared. Parameters encrypted with the default Amazon Web Services managed key can be updated to use a customer managed key instead. For KMS key definitions, see KMS concepts in the Key Management Service Developer Guide.  While you can share a parameter using the Systems Manager PutResourcePolicy operation, we recommend using Resource Access Manager (RAM) instead. This is because using PutResourcePolicy requires the extra step of promoting the parameter to a standard RAM Resource Share using the RAM PromoteResourceShareCreatedFromPolicy API operation. Otherwise, the parameter won't be returned by the Systems Manager DescribeParameters API operation using the --shared option. For more information, see Sharing a parameter in the Amazon Web Services Systems Manager User Guide    
    */
   putResourcePolicy(callback?: (err: AWSError, data: SSM.Types.PutResourcePolicyResponse) => void): Request<SSM.Types.PutResourcePolicyResponse, AWSError>;
   /**
@@ -3111,7 +3111,7 @@ declare namespace SSM {
   }
   export interface DeleteParameterRequest {
     /**
-     * The name of the parameter to delete.
+     * The name of the parameter to delete.  You can't enter the Amazon Resource Name (ARN) for a parameter, only the parameter name itself. 
      */
     Name: PSParameterName;
   }
@@ -3119,7 +3119,7 @@ declare namespace SSM {
   }
   export interface DeleteParametersRequest {
     /**
-     * The names of the parameters to delete. After deleting a parameter, wait for at least 30 seconds to create a parameter with the same name.
+     * The names of the parameters to delete. After deleting a parameter, wait for at least 30 seconds to create a parameter with the same name.  You can't enter the Amazon Resource Name (ARN) for a parameter, only the parameter name itself. 
      */
     Names: ParameterNameList;
   }
@@ -3975,6 +3975,10 @@ declare namespace SSM {
      * The token for the next set of items to return. (You received this token from a previous call.)
      */
     NextToken?: NextToken;
+    /**
+     * Lists parameters that are shared with you.  By default when using this option, the command returns parameters that have been shared using a standard Resource Access Manager Resource Share. In order for a parameter that was shared using the PutResourcePolicy command to be returned, the associated RAM Resource Share Created From Policy must have been promoted to a standard Resource Share using the RAM PromoteResourceShareCreatedFromPolicy API operation. For more information about sharing parameters, see Working with shared parameters in the Amazon Web Services Systems Manager User Guide. 
+     */
+    Shared?: Boolean;
   }
   export interface DescribeParametersResult {
     /**
@@ -5312,7 +5316,7 @@ declare namespace SSM {
   }
   export interface GetParameterHistoryRequest {
     /**
-     * The name of the parameter for which you want to review history.
+     * The name or Amazon Resource Name (ARN) of the parameter for which you want to review history. For parameters shared with you from another account, you must use the full ARN.
      */
     Name: PSParameterName;
     /**
@@ -5340,7 +5344,7 @@ declare namespace SSM {
   }
   export interface GetParameterRequest {
     /**
-     * The name of the parameter you want to query. To query by parameter label, use "Name": "name:label". To query by parameter version, use "Name": "name:version".
+     * The name or Amazon Resource Name (ARN) of the parameter that you want to query. For parameters shared with you from another account, you must use the full ARN. To query by parameter label, use "Name": "name:label". To query by parameter version, use "Name": "name:version". For more information about shared parameters, see Working with shared parameters in the Amazon Web Services Systems Manager User Guide.
      */
     Name: PSParameterName;
     /**
@@ -5393,7 +5397,7 @@ declare namespace SSM {
   }
   export interface GetParametersRequest {
     /**
-     * Names of the parameters for which you want to query information. To query by parameter label, use "Name": "name:label". To query by parameter version, use "Name": "name:version".
+     * The names or Amazon Resource Names (ARNs) of the parameters that you want to query. For parameters shared with you from another account, you must use the full ARNs. To query by parameter label, use "Name": "name:label". To query by parameter version, use "Name": "name:version". For more information about shared parameters, see Working with shared parameters in the Amazon Web Services Systems Manager User Guide.
      */
     Names: ParameterNameList;
     /**
@@ -6104,7 +6108,7 @@ declare namespace SSM {
   export type KeyList = TagKey[];
   export interface LabelParameterVersionRequest {
     /**
-     * The parameter name on which you want to attach one or more labels.
+     * The parameter name on which you want to attach one or more labels.  You can't enter the Amazon Resource Name (ARN) for a parameter, only the parameter name itself. 
      */
     Name: PSParameterName;
     /**
@@ -7693,6 +7697,10 @@ declare namespace SSM {
      */
     Name?: PSParameterName;
     /**
+     * The (ARN) of the last user to update the parameter.
+     */
+    ARN?: String;
+    /**
      * The type of parameter. Valid parameter types include the following: String, StringList, and SecureString.
      */
     Type?: ParameterType;
@@ -8186,7 +8194,7 @@ declare namespace SSM {
   }
   export interface PutParameterRequest {
     /**
-     * The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For parameters in a hierarchy, you must include a leading forward slash character (/) when you create or reference a parameter. For example: /Dev/DBServer/MySQL/db-string13  Naming Constraints:   Parameter names are case sensitive.   A parameter name must be unique within an Amazon Web Services Region   A parameter name can't be prefixed with "aws" or "ssm" (case-insensitive).   Parameter names can include only the following symbols and letters: a-zA-Z0-9_.-  In addition, the slash character ( / ) is used to delineate hierarchies in parameter names. For example: /Dev/Production/East/Project-ABC/MyParameter    A parameter name can't include spaces.   Parameter hierarchies are limited to a maximum depth of fifteen levels.   For additional information about valid values for parameter names, see Creating Systems Manager parameters in the Amazon Web Services Systems Manager User Guide.  The maximum length constraint of 2048 characters listed below includes 1037 characters reserved for internal use by Systems Manager. The maximum length for a parameter name that you create is 1011 characters. This includes the characters in the ARN that precede the name you specify, such as arn:aws:ssm:us-east-2:111122223333:parameter/. 
+     * The fully qualified name of the parameter that you want to add to the system.  You can't enter the Amazon Resource Name (ARN) for a parameter, only the parameter name itself.  The fully qualified name includes the complete hierarchy of the parameter path and name. For parameters in a hierarchy, you must include a leading forward slash character (/) when you create or reference a parameter. For example: /Dev/DBServer/MySQL/db-string13  Naming Constraints:   Parameter names are case sensitive.   A parameter name must be unique within an Amazon Web Services Region   A parameter name can't be prefixed with "aws" or "ssm" (case-insensitive).   Parameter names can include only the following symbols and letters: a-zA-Z0-9_.-  In addition, the slash character ( / ) is used to delineate hierarchies in parameter names. For example: /Dev/Production/East/Project-ABC/MyParameter    A parameter name can't include spaces.   Parameter hierarchies are limited to a maximum depth of fifteen levels.   For additional information about valid values for parameter names, see Creating Systems Manager parameters in the Amazon Web Services Systems Manager User Guide.  The maximum length constraint of 2048 characters listed below includes 1037 characters reserved for internal use by Systems Manager. The maximum length for a parameter name that you create is 1011 characters. This includes the characters in the ARN that precede the name you specify, such as arn:aws:ssm:us-east-2:111122223333:parameter/. 
      */
     Name: PSParameterName;
     /**
@@ -9403,7 +9411,7 @@ declare namespace SSM {
   export type UUID = string;
   export interface UnlabelParameterVersionRequest {
     /**
-     * The name of the parameter from which you want to delete one or more labels.
+     * The name of the parameter from which you want to delete one or more labels.  You can't enter the Amazon Resource Name (ARN) for a parameter, only the parameter name itself. 
      */
     Name: PSParameterName;
     /**
