@@ -498,6 +498,10 @@ declare namespace InternetMonitor {
      * The calculated health at a specific location.
      */
     InternetHealth?: InternetHealth;
+    /**
+     * The IPv4 prefixes at the client location that was impacted by the health event.
+     */
+    Ipv4Prefixes?: Ipv4PrefixList;
   }
   export type ImpactedLocationsList = ImpactedLocation[];
   export interface InternetHealth {
@@ -516,6 +520,7 @@ declare namespace InternetMonitor {
      */
     S3Config?: S3Config;
   }
+  export type Ipv4PrefixList = String[];
   export interface ListHealthEventsInput {
     /**
      * The name of the monitor.
@@ -598,7 +603,7 @@ declare namespace InternetMonitor {
      */
     HealthScoreThreshold?: Percentage;
     /**
-     * The minimum percentage of overall traffic for an application that must be impacted by an issue before Internet Monitor creates an event when a threshold is crossed for a local health score. If you don't set a minimum traffic impact threshold, the default value is 0.01%.
+     * The minimum percentage of overall traffic for an application that must be impacted by an issue before Internet Monitor creates an event when a threshold is crossed for a local health score. If you don't set a minimum traffic impact threshold, the default value is 0.1%.
      */
     MinTrafficImpact?: Percentage;
   }
@@ -735,7 +740,7 @@ declare namespace InternetMonitor {
      */
     EndTime: SyntheticTimestamp_date_time;
     /**
-     * The type of query to run. The following are the three types of queries that you can run using the Internet Monitor query interface:    MEASUREMENTS: TBD definition    TOP_LOCATIONS: TBD definition    TOP_LOCATION_DETAILS: TBD definition   For lists of the fields returned with each query type and more information about how each type of query is performed, see  Using the Amazon CloudWatch Internet Monitor query interface in the Amazon CloudWatch Internet Monitor User Guide.
+     * The type of query to run. The following are the three types of queries that you can run using the Internet Monitor query interface:    MEASUREMENTS: Provides availability score, performance score, total traffic, and round-trip times, at 5 minute intervals.    TOP_LOCATIONS: Provides availability score, performance score, total traffic, and time to first byte (TTFB) information, for the top location and ASN combinations that you're monitoring, by traffic volume.    TOP_LOCATION_DETAILS: Provides TTFB for Amazon CloudFront, your current configuration, and the best performing EC2 configuration, at 1 hour intervals.   For lists of the fields returned with each query type and more information about how each type of query is performed, see  Using the Amazon CloudWatch Internet Monitor query interface in the Amazon CloudWatch Internet Monitor User Guide.
      */
     QueryType: QueryType;
     /**

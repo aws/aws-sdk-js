@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1563.0-->
+<!--LATEST=2.1564.0-->
 <!--ENTRYINSERT-->
+
+## 2.1564.0
+* feature: InternetMonitor: This release adds IPv4 prefixes to health events
+* feature: KinesisVideo: Increasing NextToken parameter length restriction for List APIs from 512 to 1024.
 
 ## 2.1563.0
 * feature: IoTEvents: Increase the maximum length of descriptions for Inputs, Detector Models, and Alarm Models
