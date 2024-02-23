@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1564.0-->
+<!--LATEST=2.1565.0-->
 <!--ENTRYINSERT-->
+
+## 2.1565.0
+* feature: RDS: Add pattern and length based validations for DBShardGroupIdentifier
 
 ## 2.1564.0
 * feature: InternetMonitor: This release adds IPv4 prefixes to health events

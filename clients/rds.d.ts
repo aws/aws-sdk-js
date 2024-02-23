@@ -4880,7 +4880,7 @@ declare namespace RDS {
     /**
      * The name of the DB shard group.
      */
-    DBShardGroupIdentifier?: String;
+    DBShardGroupIdentifier?: DBShardGroupIdentifier;
     /**
      * The name of the primary DB cluster for the DB shard group.
      */
@@ -4906,6 +4906,7 @@ declare namespace RDS {
      */
     Endpoint?: String;
   }
+  export type DBShardGroupIdentifier = string;
   export type DBShardGroupsList = DBShardGroup[];
   export interface DBSnapshot {
     /**
@@ -5334,7 +5335,7 @@ declare namespace RDS {
     /**
      * Teh name of the DB shard group to delete.
      */
-    DBShardGroupIdentifier: String;
+    DBShardGroupIdentifier: DBShardGroupIdentifier;
   }
   export interface DeleteDBSnapshotMessage {
     /**
@@ -5998,7 +5999,7 @@ declare namespace RDS {
     /**
      * The user-supplied DB shard group identifier or the Amazon Resource Name (ARN) of the DB shard group. If this parameter is specified, information for only the specific DB shard group is returned. This parameter isn't case-sensitive. Constraints:   If supplied, must match an existing DB shard group identifier.  
      */
-    DBShardGroupIdentifier?: String;
+    DBShardGroupIdentifier?: DBShardGroupIdentifier;
     /**
      * A filter that specifies one or more DB shard groups to describe.
      */
@@ -7876,7 +7877,7 @@ declare namespace RDS {
     /**
      * The name of the DB shard group to modify.
      */
-    DBShardGroupIdentifier: String;
+    DBShardGroupIdentifier: DBShardGroupIdentifier;
     /**
      * The maximum capacity of the DB shard group in Aurora capacity units (ACUs).
      */
@@ -8831,7 +8832,7 @@ declare namespace RDS {
     /**
      * The name of the DB shard group to reboot.
      */
-    DBShardGroupIdentifier: String;
+    DBShardGroupIdentifier: DBShardGroupIdentifier;
   }
   export interface RecommendedAction {
     /**
