@@ -908,11 +908,11 @@ declare class APIGateway extends Service {
    */
   updateMethodResponse(callback?: (err: AWSError, data: APIGateway.Types.MethodResponse) => void): Request<APIGateway.Types.MethodResponse, AWSError>;
   /**
-   * Changes information about a model.
+   * Changes information about a model. The maximum size of the model is 400 KB.
    */
   updateModel(params: APIGateway.Types.UpdateModelRequest, callback?: (err: AWSError, data: APIGateway.Types.Model) => void): Request<APIGateway.Types.Model, AWSError>;
   /**
-   * Changes information about a model.
+   * Changes information about a model. The maximum size of the model is 400 KB.
    */
   updateModel(callback?: (err: AWSError, data: APIGateway.Types.Model) => void): Request<APIGateway.Types.Model, AWSError>;
   /**
@@ -1437,7 +1437,7 @@ declare namespace APIGateway {
      */
     description?: String;
     /**
-     * The schema for the model. For application/json models, this should be JSON schema draft 4 model.
+     * The schema for the model. For application/json models, this should be JSON schema draft 4 model. The maximum size of the model is 400 KB.
      */
     schema?: String;
     /**
@@ -3491,7 +3491,7 @@ declare namespace APIGateway {
      */
     description?: String;
     /**
-     * Specifies whether a cache cluster is enabled for the stage.
+     * Specifies whether a cache cluster is enabled for the stage. To activate a method-level cache, set CachingEnabled to true for a method. 
      */
     cacheClusterEnabled?: Boolean;
     /**

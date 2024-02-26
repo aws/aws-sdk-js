@@ -3343,6 +3343,10 @@ declare namespace RDS {
      * The details for Aurora Limitless Database.
      */
     LimitlessDatabase?: LimitlessDatabase;
+    /**
+     * The storage throughput for the DB cluster. The throughput is automatically set based on the IOPS that you provision, and is not configurable. This setting is only for non-Aurora Multi-AZ DB clusters.
+     */
+    StorageThroughput?: IntegerOptional;
   }
   export interface DBClusterAutomatedBackup {
     /**
@@ -3438,6 +3442,10 @@ declare namespace RDS {
      * The Amazon Resource Name (ARN) of the recovery point in Amazon Web Services Backup.
      */
     AwsBackupRecoveryPointArn?: String;
+    /**
+     * The storage throughput for the automated backup. The throughput is automatically set based on the IOPS that you provision, and is not configurable. This setting is only for non-Aurora Multi-AZ DB clusters.
+     */
+    StorageThroughput?: IntegerOptional;
   }
   export type DBClusterAutomatedBackupList = DBClusterAutomatedBackup[];
   export interface DBClusterAutomatedBackupMessage {
@@ -3762,6 +3770,10 @@ declare namespace RDS {
      * The resource ID of the DB cluster that this DB cluster snapshot was created from.
      */
     DbClusterResourceId?: String;
+    /**
+     * The storage throughput for the DB cluster snapshot. The throughput is automatically set based on the IOPS that you provision, and is not configurable. This setting is only for non-Aurora Multi-AZ DB clusters.
+     */
+    StorageThroughput?: IntegerOptional;
   }
   export interface DBClusterSnapshotAttribute {
     /**
@@ -9692,7 +9704,7 @@ declare namespace RDS {
      */
     StorageThroughput?: IntegerOptional;
     /**
-     * The identifier for the RDS for MySQL Multi-AZ DB cluster snapshot to restore from. For more information on Multi-AZ DB clusters, see  Multi-AZ DB cluster deployments in the Amazon RDS User Guide. Constraints:   Must match the identifier of an existing Multi-AZ DB cluster snapshot.   Can't be specified when DBSnapshotIdentifier is specified.   Must be specified when DBSnapshotIdentifier isn't specified.   If you are restoring from a shared manual Multi-AZ DB cluster snapshot, the DBClusterSnapshotIdentifier must be the ARN of the shared snapshot.   Can't be the identifier of an Aurora DB cluster snapshot.   Can't be the identifier of an RDS for PostgreSQL Multi-AZ DB cluster snapshot.  
+     * The identifier for the Multi-AZ DB cluster snapshot to restore from. For more information on Multi-AZ DB clusters, see  Multi-AZ DB cluster deployments in the Amazon RDS User Guide. Constraints:   Must match the identifier of an existing Multi-AZ DB cluster snapshot.   Can't be specified when DBSnapshotIdentifier is specified.   Must be specified when DBSnapshotIdentifier isn't specified.   If you are restoring from a shared manual Multi-AZ DB cluster snapshot, the DBClusterSnapshotIdentifier must be the ARN of the shared snapshot.   Can't be the identifier of an Aurora DB cluster snapshot.  
      */
     DBClusterSnapshotIdentifier?: String;
     /**

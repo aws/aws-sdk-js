@@ -12,11 +12,11 @@ declare class KafkaConnect extends Service {
   constructor(options?: KafkaConnect.Types.ClientConfiguration)
   config: Config & KafkaConnect.Types.ClientConfiguration;
   /**
-   * Creates a connector using the specified properties.
+   * Creates a connector using the specified properties. 
    */
   createConnector(params: KafkaConnect.Types.CreateConnectorRequest, callback?: (err: AWSError, data: KafkaConnect.Types.CreateConnectorResponse) => void): Request<KafkaConnect.Types.CreateConnectorResponse, AWSError>;
   /**
-   * Creates a connector using the specified properties.
+   * Creates a connector using the specified properties. 
    */
   createConnector(callback?: (err: AWSError, data: KafkaConnect.Types.CreateConnectorResponse) => void): Request<KafkaConnect.Types.CreateConnectorResponse, AWSError>;
   /**
@@ -51,6 +51,14 @@ declare class KafkaConnect extends Service {
    * Deletes a custom plugin.
    */
   deleteCustomPlugin(callback?: (err: AWSError, data: KafkaConnect.Types.DeleteCustomPluginResponse) => void): Request<KafkaConnect.Types.DeleteCustomPluginResponse, AWSError>;
+  /**
+   * Deletes the specified worker configuration.
+   */
+  deleteWorkerConfiguration(params: KafkaConnect.Types.DeleteWorkerConfigurationRequest, callback?: (err: AWSError, data: KafkaConnect.Types.DeleteWorkerConfigurationResponse) => void): Request<KafkaConnect.Types.DeleteWorkerConfigurationResponse, AWSError>;
+  /**
+   * Deletes the specified worker configuration.
+   */
+  deleteWorkerConfiguration(callback?: (err: AWSError, data: KafkaConnect.Types.DeleteWorkerConfigurationResponse) => void): Request<KafkaConnect.Types.DeleteWorkerConfigurationResponse, AWSError>;
   /**
    * Returns summary information about the connector.
    */
@@ -92,6 +100,14 @@ declare class KafkaConnect extends Service {
    */
   listCustomPlugins(callback?: (err: AWSError, data: KafkaConnect.Types.ListCustomPluginsResponse) => void): Request<KafkaConnect.Types.ListCustomPluginsResponse, AWSError>;
   /**
+   * Lists all the tags attached to the specified resource.
+   */
+  listTagsForResource(params: KafkaConnect.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: KafkaConnect.Types.ListTagsForResourceResponse) => void): Request<KafkaConnect.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists all the tags attached to the specified resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: KafkaConnect.Types.ListTagsForResourceResponse) => void): Request<KafkaConnect.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Returns a list of all of the worker configurations in this account and Region.
    */
   listWorkerConfigurations(params: KafkaConnect.Types.ListWorkerConfigurationsRequest, callback?: (err: AWSError, data: KafkaConnect.Types.ListWorkerConfigurationsResponse) => void): Request<KafkaConnect.Types.ListWorkerConfigurationsResponse, AWSError>;
@@ -99,6 +115,22 @@ declare class KafkaConnect extends Service {
    * Returns a list of all of the worker configurations in this account and Region.
    */
   listWorkerConfigurations(callback?: (err: AWSError, data: KafkaConnect.Types.ListWorkerConfigurationsResponse) => void): Request<KafkaConnect.Types.ListWorkerConfigurationsResponse, AWSError>;
+  /**
+   * Attaches tags to the specified resource.
+   */
+  tagResource(params: KafkaConnect.Types.TagResourceRequest, callback?: (err: AWSError, data: KafkaConnect.Types.TagResourceResponse) => void): Request<KafkaConnect.Types.TagResourceResponse, AWSError>;
+  /**
+   * Attaches tags to the specified resource.
+   */
+  tagResource(callback?: (err: AWSError, data: KafkaConnect.Types.TagResourceResponse) => void): Request<KafkaConnect.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes tags from the specified resource.
+   */
+  untagResource(params: KafkaConnect.Types.UntagResourceRequest, callback?: (err: AWSError, data: KafkaConnect.Types.UntagResourceResponse) => void): Request<KafkaConnect.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes tags from the specified resource.
+   */
+  untagResource(callback?: (err: AWSError, data: KafkaConnect.Types.UntagResourceResponse) => void): Request<KafkaConnect.Types.UntagResourceResponse, AWSError>;
   /**
    * Updates the specified connector.
    */
@@ -346,13 +378,17 @@ declare namespace KafkaConnect {
      */
     logDelivery?: LogDelivery;
     /**
-     * Specifies which plugins to use for the connector.
+     *  Amazon MSK Connect does not currently support specifying multiple plugins as a list. To use more than one plugin for your connector, you can create a single custom plugin using a ZIP file that bundles multiple plugins together.  Specifies which plugin to use for the connector. You must specify a single-element list containing one customPlugin object.
      */
     plugins: __listOfPlugin;
     /**
      * The Amazon Resource Name (ARN) of the IAM role used by the connector to access the Amazon Web Services resources that it needs. The types of resources depends on the logic of the connector. For example, a connector that has Amazon S3 as a destination must have permissions that allow it to write to the S3 destination bucket.
      */
     serviceExecutionRoleArn: __string;
+    /**
+     * The tags you want to attach to the connector.
+     */
+    tags?: Tags;
     /**
      * Specifies which worker configuration to use with the connector.
      */
@@ -389,6 +425,10 @@ declare namespace KafkaConnect {
      * The name of the custom plugin.
      */
     name: __stringMin1Max128;
+    /**
+     * The tags you want to attach to the custom plugin.
+     */
+    tags?: Tags;
   }
   export interface CreateCustomPluginResponse {
     /**
@@ -421,6 +461,10 @@ declare namespace KafkaConnect {
      * Base64 encoded contents of connect-distributed.properties file.
      */
     propertiesFileContent: __sensitiveString;
+    /**
+     * The tags you want to attach to the worker configuration.
+     */
+    tags?: Tags;
   }
   export interface CreateWorkerConfigurationResponse {
     /**
@@ -439,6 +483,10 @@ declare namespace KafkaConnect {
      * The Amazon Resource Name (ARN) that Amazon assigned to the worker configuration.
      */
     workerConfigurationArn?: __string;
+    /**
+     * The state of the worker configuration.
+     */
+    workerConfigurationState?: WorkerConfigurationState;
   }
   export interface CustomPlugin {
     /**
@@ -571,6 +619,22 @@ declare namespace KafkaConnect {
      * The state of the custom plugin.
      */
     customPluginState?: CustomPluginState;
+  }
+  export interface DeleteWorkerConfigurationRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the worker configuration that you want to delete.
+     */
+    workerConfigurationArn: __string;
+  }
+  export interface DeleteWorkerConfigurationResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the worker configuration that you requested to delete.
+     */
+    workerConfigurationArn?: __string;
+    /**
+     * The state of the worker configuration.
+     */
+    workerConfigurationState?: WorkerConfigurationState;
   }
   export interface DescribeConnectorRequest {
     /**
@@ -711,6 +775,10 @@ declare namespace KafkaConnect {
      * The Amazon Resource Name (ARN) of the custom configuration.
      */
     workerConfigurationArn?: __string;
+    /**
+     * The state of the worker configuration.
+     */
+    workerConfigurationState?: WorkerConfigurationState;
   }
   export interface FirehoseLogDelivery {
     /**
@@ -800,6 +868,10 @@ declare namespace KafkaConnect {
      */
     maxResults?: MaxResults;
     /**
+     * Lists custom plugin names that start with the specified text string.
+     */
+    namePrefix?: __string;
+    /**
      * If the response of a ListCustomPlugins operation is truncated, it will include a NextToken. Send this NextToken in a subsequent request to continue listing from where the previous operation left off.
      */
     nextToken?: __string;
@@ -814,11 +886,27 @@ declare namespace KafkaConnect {
      */
     nextToken?: __string;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource for which you want to list all attached tags.
+     */
+    resourceArn: __string;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * Lists the tags attached to the specified resource in the corresponding request.
+     */
+    tags?: Tags;
+  }
   export interface ListWorkerConfigurationsRequest {
     /**
      * The maximum number of worker configurations to list in one response.
      */
     maxResults?: MaxResults;
+    /**
+     * Lists worker configuration names that start with the specified text string.
+     */
+    namePrefix?: __string;
     /**
      * If the response of a ListWorkerConfigurations operation is truncated, it will include a NextToken. Send this NextToken in a subsequent request to continue listing from where the previous operation left off.
      */
@@ -991,6 +1079,34 @@ declare namespace KafkaConnect {
      */
     message?: __string;
   }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource to which you want to attach tags.
+     */
+    resourceArn: __string;
+    /**
+     * The tags that you want to attach to the resource.
+     */
+    tags: Tags;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
+  export type Tags = {[key: string]: TagValue};
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource from which you want to remove tags.
+     */
+    resourceArn: __string;
+    /**
+     * The keys of the tags that you want to remove from the resource.
+     */
+    tagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateConnectorRequest {
     /**
      * The target capacity.
@@ -1087,6 +1203,7 @@ declare namespace KafkaConnect {
      */
     revision?: __long;
   }
+  export type WorkerConfigurationState = "ACTIVE"|"DELETING"|string;
   export interface WorkerConfigurationSummary {
     /**
      * The time that a worker configuration was created.
@@ -1108,6 +1225,10 @@ declare namespace KafkaConnect {
      * The Amazon Resource Name (ARN) of the worker configuration.
      */
     workerConfigurationArn?: __string;
+    /**
+     * The state of the worker configuration.
+     */
+    workerConfigurationState?: WorkerConfigurationState;
   }
   export interface WorkerLogDelivery {
     /**

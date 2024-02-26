@@ -474,6 +474,10 @@ declare namespace Drs {
      */
     volumeToConversionMap?: VolumeToConversionMap;
     /**
+     * A mapping between the volumes being converted and the product codes associated with them
+     */
+    volumeToProductCodes?: VolumeToProductCodes;
+    /**
      * A mapping between the volumes and their sizes
      */
     volumeToVolumeSize?: VolumeToSizeMap;
@@ -687,6 +691,10 @@ declare namespace Drs {
      * The total amount of data to be replicated in bytes.
      */
     totalStorageBytes?: PositiveInteger;
+    /**
+     * The status of the volume.
+     */
+    volumeStatus?: VolumeStatus;
   }
   export type DataReplicationInfoReplicatedDisks = DataReplicationInfoReplicatedDisk[];
   export interface DataReplicationInitiation {
@@ -1645,6 +1653,19 @@ declare namespace Drs {
   }
   export type ParticipatingServers = ParticipatingServer[];
   export type PositiveInteger = number;
+  export interface ProductCode {
+    /**
+     * Id of a product code associated with a volume.
+     */
+    productCodeId?: ProductCodeId;
+    /**
+     * Mode of a product code associated with a volume.
+     */
+    productCodeMode?: ProductCodeMode;
+  }
+  export type ProductCodeId = string;
+  export type ProductCodeMode = "ENABLED"|"DISABLED"|string;
+  export type ProductCodes = ProductCode[];
   export interface PutLaunchActionRequest {
     /**
      * Launch action code.
@@ -2793,7 +2814,9 @@ declare namespace Drs {
      */
     useDedicatedReplicationServer?: Boolean;
   }
+  export type VolumeStatus = "REGULAR"|"CONTAINS_MARKETPLACE_PRODUCT_CODES"|"MISSING_VOLUME_ATTRIBUTES"|"MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE"|string;
   export type VolumeToConversionMap = {[key: string]: ConversionMap};
+  export type VolumeToProductCodes = {[key: string]: ProductCodes};
   export type VolumeToSizeMap = {[key: string]: PositiveInteger};
   export type VpcID = string;
   /**

@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1565.0-->
+<!--LATEST=2.1566.0-->
 <!--ENTRYINSERT-->
+
+## 2.1566.0
+* feature: Drs: Added volume status to DescribeSourceServer replicated volumes.
+* feature: KafkaConnect: Adds support for tagging, with new TagResource, UntagResource and ListTagsForResource APIs to manage tags and updates to existing APIs to allow tag on create. This release also adds support for the new DeleteWorkerConfiguration API.
+* feature: RDS: This release adds support for gp3 data volumes for Multi-AZ DB Clusters.
 
 ## 2.1565.0
 * feature: RDS: Add pattern and length based validations for DBShardGroupIdentifier
