@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1566.0-->
+<!--LATEST=2.1567.0-->
 <!--ENTRYINSERT-->
+
+## 2.1567.0
+* feature: AmplifyUIBuilder: We have added the ability to tag resources after they are created
 
 ## 2.1566.0
 * feature: Drs: Added volume status to DescribeSourceServer replicated volumes.

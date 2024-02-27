@@ -156,6 +156,14 @@ declare class AmplifyUIBuilder extends Service {
    */
   listForms(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.ListFormsResponse) => void): Request<AmplifyUIBuilder.Types.ListFormsResponse, AWSError>;
   /**
+   * Returns a list of tags for a specified Amazon Resource Name (ARN).
+   */
+  listTagsForResource(params: AmplifyUIBuilder.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: AmplifyUIBuilder.Types.ListTagsForResourceResponse) => void): Request<AmplifyUIBuilder.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Returns a list of tags for a specified Amazon Resource Name (ARN).
+   */
+  listTagsForResource(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.ListTagsForResourceResponse) => void): Request<AmplifyUIBuilder.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Retrieves a list of themes for a specified Amplify app and backend environment.
    */
   listThemes(params: AmplifyUIBuilder.Types.ListThemesRequest, callback?: (err: AWSError, data: AmplifyUIBuilder.Types.ListThemesResponse) => void): Request<AmplifyUIBuilder.Types.ListThemesResponse, AWSError>;
@@ -187,6 +195,22 @@ declare class AmplifyUIBuilder extends Service {
    * Starts a code generation job for a specified Amplify app and backend environment.
    */
   startCodegenJob(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.StartCodegenJobResponse) => void): Request<AmplifyUIBuilder.Types.StartCodegenJobResponse, AWSError>;
+  /**
+   * Tags the resource with a tag key and value.
+   */
+  tagResource(params: AmplifyUIBuilder.Types.TagResourceRequest, callback?: (err: AWSError, data: AmplifyUIBuilder.Types.TagResourceResponse) => void): Request<AmplifyUIBuilder.Types.TagResourceResponse, AWSError>;
+  /**
+   * Tags the resource with a tag key and value.
+   */
+  tagResource(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.TagResourceResponse) => void): Request<AmplifyUIBuilder.Types.TagResourceResponse, AWSError>;
+  /**
+   * Untags a resource with a specified Amazon Resource Name (ARN).
+   */
+  untagResource(params: AmplifyUIBuilder.Types.UntagResourceRequest, callback?: (err: AWSError, data: AmplifyUIBuilder.Types.UntagResourceResponse) => void): Request<AmplifyUIBuilder.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Untags a resource with a specified Amazon Resource Name (ARN).
+   */
+  untagResource(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.UntagResourceResponse) => void): Request<AmplifyUIBuilder.Types.UntagResourceResponse, AWSError>;
   /**
    * Updates an existing component.
    */
@@ -1668,7 +1692,6 @@ declare namespace AmplifyUIBuilder {
      */
     nextToken?: String;
   }
-  export type ListComponentsLimit = number;
   export interface ListComponentsRequest {
     /**
      * The unique ID for the Amplify app.
@@ -1685,7 +1708,7 @@ declare namespace AmplifyUIBuilder {
     /**
      * The maximum number of components to retrieve.
      */
-    maxResults?: ListComponentsLimit;
+    maxResults?: ListEntityLimit;
   }
   export interface ListComponentsResponse {
     /**
@@ -1697,7 +1720,7 @@ declare namespace AmplifyUIBuilder {
      */
     nextToken?: String;
   }
-  export type ListFormsLimit = number;
+  export type ListEntityLimit = number;
   export interface ListFormsRequest {
     /**
      * The unique ID for the Amplify app.
@@ -1714,7 +1737,7 @@ declare namespace AmplifyUIBuilder {
     /**
      * The maximum number of forms to retrieve.
      */
-    maxResults?: ListFormsLimit;
+    maxResults?: ListEntityLimit;
   }
   export interface ListFormsResponse {
     /**
@@ -1726,7 +1749,18 @@ declare namespace AmplifyUIBuilder {
      */
     nextToken?: String;
   }
-  export type ListThemesLimit = number;
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) to use to list tags.
+     */
+    resourceArn: String;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * A list of tag key value pairs for a specified Amazon Resource Name (ARN).
+     */
+    tags: Tags;
+  }
   export interface ListThemesRequest {
     /**
      * The unique ID for the Amplify app.
@@ -1743,7 +1777,7 @@ declare namespace AmplifyUIBuilder {
     /**
      * The maximum number of theme results to return in the response.
      */
-    maxResults?: ListThemesLimit;
+    maxResults?: ListEntityLimit;
   }
   export interface ListThemesResponse {
     /**
@@ -1977,6 +2011,19 @@ declare namespace AmplifyUIBuilder {
   export type String = string;
   export type SyntheticTimestamp_date_time = Date;
   export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) to use to tag a resource.
+     */
+    resourceArn: String;
+    /**
+     * A list of tag key value pairs for a specified Amazon Resource Name (ARN).
+     */
+    tags: Tags;
+  }
+  export interface TagResourceResponse {
+  }
   export type TagValue = string;
   export type Tags = {[key: string]: TagValue};
   export interface Theme {
@@ -2060,6 +2107,18 @@ declare namespace AmplifyUIBuilder {
   }
   export type ThemeValuesList = ThemeValues[];
   export type TokenProviders = "figma"|string;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) to use to untag a resource.
+     */
+    resourceArn: String;
+    /**
+     * The tag keys to use to untag a resource.
+     */
+    tagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateComponentData {
     /**
      * The unique ID of the component to update.
