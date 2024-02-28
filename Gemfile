@@ -12,7 +12,7 @@ group :documentation do
   
   # When updating yard, override app.js from upstream to doc-src/templates/default/fulldoc/js/app.js
   # and add patch from PR https://github.com/lsegal/yard/pull/1399 to support jQuery 3.6.0+
-  gem 'yard', '~> 0.9.26'
+  gem 'yard', '~> 0.9.35'
 
   gem 'parsejs', path: './doc-src/parsejs'
 end
