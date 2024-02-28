@@ -21996,6 +21996,7 @@ declare namespace EC2 {
      */
     NextToken?: NextToken;
   }
+  export type GetNetworkInsightsAccessScopeAnalysisFindingsMaxResults = number;
   export interface GetNetworkInsightsAccessScopeAnalysisFindingsRequest {
     /**
      * The ID of the Network Access Scope analysis.
@@ -22004,7 +22005,7 @@ declare namespace EC2 {
     /**
      * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
      */
-    MaxResults?: NetworkInsightsMaxResults;
+    MaxResults?: GetNetworkInsightsAccessScopeAnalysisFindingsMaxResults;
     /**
      * The token for the next page of results.
      */

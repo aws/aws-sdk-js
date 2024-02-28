@@ -186,12 +186,17 @@ declare namespace BedrockAgentRuntime {
   export interface KnowledgeBaseRetrieveAndGenerateConfiguration {
     knowledgeBaseId: KnowledgeBaseId;
     modelArn: BedrockModelArn;
+    retrievalConfiguration?: KnowledgeBaseRetrievalConfiguration;
   }
   export interface KnowledgeBaseVectorSearchConfiguration {
     /**
      * Top-K results to retrieve from knowledge base.
      */
-    numberOfResults: KnowledgeBaseVectorSearchConfigurationNumberOfResultsInteger;
+    numberOfResults?: KnowledgeBaseVectorSearchConfigurationNumberOfResultsInteger;
+    /**
+     * Override the type of query to be performed on data store
+     */
+    overrideSearchType?: SearchType;
   }
   export type KnowledgeBaseVectorSearchConfigurationNumberOfResultsInteger = number;
   export type LambdaArn = string;
@@ -358,6 +363,7 @@ declare namespace BedrockAgentRuntime {
     location?: RetrievalResultLocation;
   }
   export type RetrievedReferences = RetrievedReference[];
+  export type SearchType = "HYBRID"|"SEMANTIC"|string;
   export interface ServiceQuotaExceededException {
     message?: NonBlankString;
   }

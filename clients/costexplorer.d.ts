@@ -92,6 +92,14 @@ declare class CostExplorer extends Service {
    */
   getAnomalySubscriptions(callback?: (err: AWSError, data: CostExplorer.Types.GetAnomalySubscriptionsResponse) => void): Request<CostExplorer.Types.GetAnomalySubscriptionsResponse, AWSError>;
   /**
+   * Retrieves estimated usage records for hourly granularity or resource-level data at daily granularity.
+   */
+  getApproximateUsageRecords(params: CostExplorer.Types.GetApproximateUsageRecordsRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetApproximateUsageRecordsResponse) => void): Request<CostExplorer.Types.GetApproximateUsageRecordsResponse, AWSError>;
+  /**
+   * Retrieves estimated usage records for hourly granularity or resource-level data at daily granularity.
+   */
+  getApproximateUsageRecords(callback?: (err: AWSError, data: CostExplorer.Types.GetApproximateUsageRecordsResponse) => void): Request<CostExplorer.Types.GetApproximateUsageRecordsResponse, AWSError>;
+  /**
    * Retrieves cost and usage metrics for your account. You can specify which cost and usage-related metric that you want the request to return. For example, you can specify BlendedCosts or UsageQuantity. You can also filter and group your data by various dimensions, such as SERVICE or AZ, in a specific time range. For a complete list of valid dimensions, see the GetDimensionValues operation. Management account in an organization in Organizations have access to all member accounts. For information about filter limitations, see Quotas and restrictions in the Billing and Cost Management User Guide.
    */
   getCostAndUsage(params: CostExplorer.Types.GetCostAndUsageRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetCostAndUsageResponse) => void): Request<CostExplorer.Types.GetCostAndUsageResponse, AWSError>;
@@ -452,6 +460,8 @@ declare namespace CostExplorer {
   }
   export type AnomalySubscriptionFrequency = "DAILY"|"IMMEDIATE"|"WEEKLY"|string;
   export type AnomalySubscriptions = AnomalySubscription[];
+  export type ApproximateUsageRecordsPerService = {[key: string]: NonNegativeLong};
+  export type ApproximationDimension = "SERVICE"|"RESOURCE"|string;
   export type Arn = string;
   export type AttributeType = string;
   export type AttributeValue = string;
@@ -1261,6 +1271,34 @@ declare namespace CostExplorer {
      * The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size. 
      */
     NextPageToken?: NextPageToken;
+  }
+  export interface GetApproximateUsageRecordsRequest {
+    /**
+     * How granular you want the data to be. You can enable data at hourly or daily granularity.
+     */
+    Granularity: Granularity;
+    /**
+     * The service metadata for the service or services you want to query. If not specified, all elements are returned.
+     */
+    Services?: UsageServices;
+    /**
+     * The service to evaluate for the usage records. You can choose resource-level data at daily granularity, or hourly granularity with or without resource-level data.
+     */
+    ApproximationDimension: ApproximationDimension;
+  }
+  export interface GetApproximateUsageRecordsResponse {
+    /**
+     * The service metadata for the service or services in the response.
+     */
+    Services?: ApproximateUsageRecordsPerService;
+    /**
+     * The total number of usage records for all services in the services list.
+     */
+    TotalRecords?: NonNegativeLong;
+    /**
+     * The lookback period that's used for the estimation.
+     */
+    LookbackPeriod?: DateInterval;
   }
   export interface GetCostAndUsageRequest {
     /**
@@ -2158,6 +2196,7 @@ declare namespace CostExplorer {
   }
   export type NextPageToken = string;
   export type NonNegativeInteger = number;
+  export type NonNegativeLong = number;
   export type NullableNonNegativeDouble = number;
   export type NumericOperator = "EQUAL"|"GREATER_THAN_OR_EQUAL"|"LESS_THAN_OR_EQUAL"|"GREATER_THAN"|"LESS_THAN"|"BETWEEN"|string;
   export type OfferingClass = "STANDARD"|"CONVERTIBLE"|string;
@@ -3338,6 +3377,7 @@ declare namespace CostExplorer {
      */
     EffectiveStart?: ZonedDateTime;
   }
+  export type UsageServices = GenericString[];
   export interface UtilizationByTime {
     /**
      * The period of time that this utilization was used for.

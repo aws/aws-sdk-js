@@ -34077,6 +34077,11 @@
         }
       }
     },
+    "GetNetworkInsightsAccessScopeAnalysisFindingsMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 1
+    },
     "GetNetworkInsightsAccessScopeAnalysisFindingsRequest": {
       "type": "structure",
       "required": [
@@ -34088,7 +34093,7 @@
           "documentation": "<p>The ID of the Network Access Scope analysis.</p>"
         },
         "MaxResults": {
-          "shape": "NetworkInsightsMaxResults",
+          "shape": "GetNetworkInsightsAccessScopeAnalysisFindingsMaxResults",
           "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
         },
         "NextToken": {

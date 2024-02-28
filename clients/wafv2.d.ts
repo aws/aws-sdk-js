@@ -1164,6 +1164,7 @@ declare namespace WAFV2 {
   export type EntityDescription = string;
   export type EntityId = string;
   export type EntityName = string;
+  export type EvaluationWindowSec = number;
   export interface ExcludedRule {
     /**
      * The name of the rule whose action you want to override to Count.
@@ -2496,6 +2497,10 @@ declare namespace WAFV2 {
      * The limit on requests per 5-minute period for a single aggregation instance for the rate-based rule. If the rate-based statement includes a ScopeDownStatement, this limit is applied only to the requests that match the statement. Examples:    If you aggregate on just the IP address, this is the limit on requests from any single IP address.    If you aggregate on the HTTP method and the query argument name "city", then this is the limit on requests for any single method, city pair.   
      */
     Limit: RateLimit;
+    /**
+     * The amount of time, in seconds, that WAF should include in its request counts, looking back from the current time. For example, for a setting of 120, when WAF checks the rate, it counts the requests for the 2 minutes immediately preceding the current time. Valid settings are 60, 120, 300, and 600.  This setting doesn't determine how often WAF checks the rate, but how far back it looks each time it checks. WAF checks the rate about every 10 seconds. Default: 300 (5 minutes)
+     */
+    EvaluationWindowSec?: EvaluationWindowSec;
     /**
      * Setting that indicates how to aggregate the request counts.   Web requests that are missing any of the components specified in the aggregation keys are omitted from the rate-based rule evaluation and handling.      CONSTANT - Count and limit the requests that match the rate-based rule's scope-down statement. With this option, the counted requests aren't further aggregated. The scope-down statement is the only specification used. When the count of all requests that satisfy the scope-down statement goes over the limit, WAF applies the rule action to all requests that satisfy the scope-down statement.  With this option, you must configure the ScopeDownStatement property.     CUSTOM_KEYS - Aggregate the request counts using one or more web request components as the aggregate keys. With this option, you must specify the aggregate keys in the CustomKeys property.  To aggregate on only the IP address or only the forwarded IP address, don't use custom keys. Instead, set the aggregate key type to IP or FORWARDED_IP.    FORWARDED_IP - Aggregate the request counts on the first IP address in an HTTP header.  With this option, you must specify the header to use in the ForwardedIPConfig property.  To aggregate on a combination of the forwarded IP address with other aggregate keys, use CUSTOM_KEYS.     IP - Aggregate the request counts on the IP address from the web request origin. To aggregate on a combination of the IP address with other aggregate keys, use CUSTOM_KEYS.   
      */
