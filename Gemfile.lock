@@ -18,7 +18,7 @@ GEM
     rdiscount (2.2.0.2)
     redcarpet (3.5.1)
     samus (3.0.9)
-    yard (0.9.26)
+    yard (0.9.35)
     yard-sitemap (1.0.1)
 
 PLATFORMS
@@ -30,7 +30,7 @@ DEPENDENCIES
   rdiscount
   redcarpet (~> 3.0)
   samus
-  yard (~> 0.9.26)
+  yard (~> 0.9.35)
   yard-js!
   yard-sitemap (~> 1.0)
 
