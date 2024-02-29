@@ -3333,6 +3333,10 @@ declare namespace QuickSight {
      * The aggregation function of the column tooltip item.
      */
     Aggregation?: AggregationFunction;
+    /**
+     * Determines the target of the column tooltip item in a combo chart visual.
+     */
+    TooltipTarget?: TooltipTarget;
   }
   export interface ComboChartAggregatedFieldWells {
     /**
@@ -8844,6 +8848,10 @@ declare namespace QuickSight {
      * The visibility of the tooltip item.
      */
     Visibility?: Visibility;
+    /**
+     * Determines the target of the field tooltip item in a combo chart visual.
+     */
+    TooltipTarget?: TooltipTarget;
   }
   export type FieldValue = string;
   export type FileFormat = "CSV"|"TSV"|"CLF"|"ELF"|"XLSX"|"JSON"|string;
@@ -17182,6 +17190,7 @@ declare namespace QuickSight {
      */
     FieldBasedTooltip?: FieldBasedTooltip;
   }
+  export type TooltipTarget = "BOTH"|"BAR"|"LINE"|string;
   export type TooltipTitleType = "NONE"|"PRIMARY_VALUE"|string;
   export type TopBottomComputationType = "TOP"|"BOTTOM"|string;
   export interface TopBottomFilter {

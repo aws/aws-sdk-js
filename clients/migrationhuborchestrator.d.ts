@@ -12,6 +12,14 @@ declare class MigrationHubOrchestrator extends Service {
   constructor(options?: MigrationHubOrchestrator.Types.ClientConfiguration)
   config: Config & MigrationHubOrchestrator.Types.ClientConfiguration;
   /**
+   * Creates a migration workflow template.
+   */
+  createTemplate(params: MigrationHubOrchestrator.Types.CreateTemplateRequest, callback?: (err: AWSError, data: MigrationHubOrchestrator.Types.CreateTemplateResponse) => void): Request<MigrationHubOrchestrator.Types.CreateTemplateResponse, AWSError>;
+  /**
+   * Creates a migration workflow template.
+   */
+  createTemplate(callback?: (err: AWSError, data: MigrationHubOrchestrator.Types.CreateTemplateResponse) => void): Request<MigrationHubOrchestrator.Types.CreateTemplateResponse, AWSError>;
+  /**
    * Create a workflow to orchestrate your migrations.
    */
   createWorkflow(params: MigrationHubOrchestrator.Types.CreateMigrationWorkflowRequest, callback?: (err: AWSError, data: MigrationHubOrchestrator.Types.CreateMigrationWorkflowResponse) => void): Request<MigrationHubOrchestrator.Types.CreateMigrationWorkflowResponse, AWSError>;
@@ -35,6 +43,14 @@ declare class MigrationHubOrchestrator extends Service {
    * Create a step group in a migration workflow.
    */
   createWorkflowStepGroup(callback?: (err: AWSError, data: MigrationHubOrchestrator.Types.CreateWorkflowStepGroupResponse) => void): Request<MigrationHubOrchestrator.Types.CreateWorkflowStepGroupResponse, AWSError>;
+  /**
+   * Deletes a migration workflow template.
+   */
+  deleteTemplate(params: MigrationHubOrchestrator.Types.DeleteTemplateRequest, callback?: (err: AWSError, data: MigrationHubOrchestrator.Types.DeleteTemplateResponse) => void): Request<MigrationHubOrchestrator.Types.DeleteTemplateResponse, AWSError>;
+  /**
+   * Deletes a migration workflow template.
+   */
+  deleteTemplate(callback?: (err: AWSError, data: MigrationHubOrchestrator.Types.DeleteTemplateResponse) => void): Request<MigrationHubOrchestrator.Types.DeleteTemplateResponse, AWSError>;
   /**
    * Delete a migration workflow. You must pause a running workflow in Migration Hub Orchestrator console to delete it.
    */
@@ -212,6 +228,14 @@ declare class MigrationHubOrchestrator extends Service {
    */
   untagResource(callback?: (err: AWSError, data: MigrationHubOrchestrator.Types.UntagResourceResponse) => void): Request<MigrationHubOrchestrator.Types.UntagResourceResponse, AWSError>;
   /**
+   * Updates a migration workflow template.
+   */
+  updateTemplate(params: MigrationHubOrchestrator.Types.UpdateTemplateRequest, callback?: (err: AWSError, data: MigrationHubOrchestrator.Types.UpdateTemplateResponse) => void): Request<MigrationHubOrchestrator.Types.UpdateTemplateResponse, AWSError>;
+  /**
+   * Updates a migration workflow template.
+   */
+  updateTemplate(callback?: (err: AWSError, data: MigrationHubOrchestrator.Types.UpdateTemplateResponse) => void): Request<MigrationHubOrchestrator.Types.UpdateTemplateResponse, AWSError>;
+  /**
    * Update a migration workflow.
    */
   updateWorkflow(params: MigrationHubOrchestrator.Types.UpdateMigrationWorkflowRequest, callback?: (err: AWSError, data: MigrationHubOrchestrator.Types.UpdateMigrationWorkflowResponse) => void): Request<MigrationHubOrchestrator.Types.UpdateMigrationWorkflowResponse, AWSError>;
@@ -239,6 +263,7 @@ declare class MigrationHubOrchestrator extends Service {
 declare namespace MigrationHubOrchestrator {
   export type ApplicationConfigurationName = string;
   export type Boolean = boolean;
+  export type ClientToken = string;
   export interface CreateMigrationWorkflowRequest {
     /**
      * The name of the migration workflow.
@@ -255,7 +280,7 @@ declare namespace MigrationHubOrchestrator {
     /**
      * The configuration ID of the application configured in Application Discovery Service.
      */
-    applicationConfigurationId: CreateMigrationWorkflowRequestApplicationConfigurationIdString;
+    applicationConfigurationId?: CreateMigrationWorkflowRequestApplicationConfigurationIdString;
     /**
      * The input parameters required to create a migration workflow.
      */
@@ -316,6 +341,44 @@ declare namespace MigrationHubOrchestrator {
     creationTime?: Timestamp;
     /**
      * The tags to add on a migration workflow.
+     */
+    tags?: StringMap;
+  }
+  export interface CreateTemplateRequest {
+    /**
+     * The name of the migration workflow template.
+     */
+    templateName: CreateTemplateRequestTemplateNameString;
+    /**
+     * A description of the migration workflow template.
+     */
+    templateDescription?: CreateTemplateRequestTemplateDescriptionString;
+    /**
+     * The source of the migration workflow template.
+     */
+    templateSource: TemplateSource;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Idempotency in the Smithy documentation.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The tags to add to the migration workflow template.
+     */
+    tags?: TagMap;
+  }
+  export type CreateTemplateRequestTemplateDescriptionString = string;
+  export type CreateTemplateRequestTemplateNameString = string;
+  export interface CreateTemplateResponse {
+    /**
+     * The ID of the migration workflow template.
+     */
+    templateId?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the migration workflow template. The format for an Migration Hub Orchestrator template ARN is arn:aws:migrationhub-orchestrator:region:account:template/template-abcd1234. For more information about ARNs, see Amazon Resource Names (ARNs) in the AWS General Reference.
+     */
+    templateArn?: String;
+    /**
+     * The tags added to the migration workflow template.
      */
     tags?: StringMap;
   }
@@ -456,6 +519,14 @@ declare namespace MigrationHubOrchestrator {
      */
     status?: MigrationWorkflowStatusEnum;
   }
+  export interface DeleteTemplateRequest {
+    /**
+     * The ID of the request to delete a migration workflow template.
+     */
+    id: TemplateId;
+  }
+  export interface DeleteTemplateResponse {
+  }
   export interface DeleteWorkflowStepGroupRequest {
     /**
      * The ID of the migration workflow.
@@ -584,6 +655,10 @@ declare namespace MigrationHubOrchestrator {
      */
     id?: String;
     /**
+     * &gt;The Amazon Resource Name (ARN) of the migration workflow template. The format for an Migration Hub Orchestrator template ARN is arn:aws:migrationhub-orchestrator:region:account:template/template-abcd1234. For more information about ARNs, see Amazon Resource Names (ARNs) in the AWS General Reference.
+     */
+    templateArn?: String;
+    /**
      * The name of the template.
      */
     name?: String;
@@ -600,13 +675,29 @@ declare namespace MigrationHubOrchestrator {
      */
     tools?: ToolsList;
     /**
+     * The time at which the template was last created.
+     */
+    creationTime?: Timestamp;
+    /**
+     * The owner of the migration workflow template.
+     */
+    owner?: String;
+    /**
      * The status of the template.
      */
     status?: TemplateStatus;
     /**
-     * The time at which the template was last created.
+     * The status message of retrieving migration workflow templates.
      */
-    creationTime?: Timestamp;
+    statusMessage?: String;
+    /**
+     * The class of the migration workflow template. The available template classes are:   A2C   MGN   SAP_MULTI   SQL_EC2   SQL_RDS   VMIE  
+     */
+    templateClass?: String;
+    /**
+     * The tags added to the migration workflow template.
+     */
+    tags?: StringMap;
   }
   export interface GetTemplateStepGroupRequest {
     /**
@@ -786,7 +877,7 @@ declare namespace MigrationHubOrchestrator {
      */
     workflowId: MigrationWorkflowId;
     /**
-     * desThe ID of the step group.
+     * The ID of the step group.
      */
     stepGroupId: StepGroupId;
     /**
@@ -1080,6 +1171,8 @@ declare namespace MigrationHubOrchestrator {
     workflowStepsSummary: WorkflowStepsSummaryList;
   }
   export type MaxResults = number;
+  export type MaxStringList = MaxStringValue[];
+  export type MaxStringValue = string;
   export type MigrationWorkflowDescription = string;
   export type MigrationWorkflowId = string;
   export type MigrationWorkflowName = string;
@@ -1308,7 +1401,7 @@ declare namespace MigrationHubOrchestrator {
     required?: Boolean;
   }
   export type StepOutputList = StepOutput[];
-  export type StepStatus = "AWAITING_DEPENDENCIES"|"READY"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|"PAUSED"|"USER_ATTENTION_REQUIRED"|string;
+  export type StepStatus = "AWAITING_DEPENDENCIES"|"SKIPPED"|"READY"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|"PAUSED"|"USER_ATTENTION_REQUIRED"|string;
   export interface StopMigrationWorkflowRequest {
     /**
      * The ID of the migration workflow.
@@ -1379,7 +1472,13 @@ declare namespace MigrationHubOrchestrator {
   export type TemplateInputList = TemplateInput[];
   export type TemplateInputName = string;
   export type TemplateName = string;
-  export type TemplateStatus = "CREATED"|string;
+  export interface TemplateSource {
+    /**
+     * The ID of the workflow from the source migration workflow template.
+     */
+    workflowId?: MigrationWorkflowId;
+  }
+  export type TemplateStatus = "CREATED"|"READY"|"PENDING_CREATION"|"CREATING"|"CREATION_FAILED"|string;
   export interface TemplateStepGroupSummary {
     /**
      * The ID of the step group.
@@ -1552,6 +1651,40 @@ declare namespace MigrationHubOrchestrator {
     lastModifiedTime?: Timestamp;
     /**
      * The tags added to the migration workflow.
+     */
+    tags?: StringMap;
+  }
+  export interface UpdateTemplateRequest {
+    /**
+     * The ID of the request to update a migration workflow template.
+     */
+    id: TemplateId;
+    /**
+     * The name of the migration workflow template to update.
+     */
+    templateName?: UpdateTemplateRequestTemplateNameString;
+    /**
+     * The description of the migration workflow template to update.
+     */
+    templateDescription?: UpdateTemplateRequestTemplateDescriptionString;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    clientToken?: ClientToken;
+  }
+  export type UpdateTemplateRequestTemplateDescriptionString = string;
+  export type UpdateTemplateRequestTemplateNameString = string;
+  export interface UpdateTemplateResponse {
+    /**
+     * The ID of the migration workflow template being updated.
+     */
+    templateId?: String;
+    /**
+     * The ARN of the migration workflow template being updated. The format for an Migration Hub Orchestrator template ARN is arn:aws:migrationhub-orchestrator:region:account:template/template-abcd1234. For more information about ARNs, see Amazon Resource Names (ARNs) in the AWS General Reference.
+     */
+    templateArn?: String;
+    /**
+     * The tags added to the migration workflow template.
      */
     tags?: StringMap;
   }
@@ -1760,11 +1893,11 @@ declare namespace MigrationHubOrchestrator {
     /**
      * The string value.
      */
-    stringValue?: StringValue;
+    stringValue?: MaxStringValue;
     /**
      * The list of string value.
      */
-    listOfStringValue?: StringList;
+    listOfStringValue?: MaxStringList;
   }
   export interface WorkflowStepSummary {
     /**

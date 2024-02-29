@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1568.0-->
+<!--LATEST=2.1569.0-->
 <!--ENTRYINSERT-->
+
+## 2.1569.0
+* feature: DocDBElastic: Launched Elastic Clusters Readable Secondaries, Start/Stop, Configurable Shard Instance count, Automatic Backups and Snapshot Copying
+* feature: EKS: Added support for new AL2023 AMIs to the supported AMITypes.
+* feature: LexModelsV2: This release makes AMAZON.QnAIntent generally available in Amazon Lex. This generative AI feature leverages large language models available through Amazon Bedrock to automate frequently asked questions (FAQ) experience for end-users.
+* feature: MigrationHubOrchestrator: Adds new CreateTemplate, UpdateTemplate and DeleteTemplate APIs.
+* feature: QuickSight: TooltipTarget for Combo chart visuals; ColumnConfiguration limit increase to 2000; Documentation Update
+* feature: SageMaker: Adds support for ModelDataSource in Model Packages to support unzipped models. Adds support to specify SourceUri for models which allows registration of models without mandating a container for hosting. Using SourceUri, customers can decouple the model from hosting information during registration.
+* feature: SecurityLake: Add capability to update the Data Lake's MetaStoreManager Role in order to perform required data lake updates to use Iceberg table format in their data lake or update the role for any other reason.
 
 ## 2.1568.0
 * feature: Batch: This release adds Batch support for configuration of multicontainer jobs in ECS, Fargate, and EKS. This support is available for all types of jobs, including both array jobs and multi-node parallel jobs.

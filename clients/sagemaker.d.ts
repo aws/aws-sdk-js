@@ -293,11 +293,11 @@ declare class SageMaker extends Service {
    */
   createLabelingJob(callback?: (err: AWSError, data: SageMaker.Types.CreateLabelingJobResponse) => void): Request<SageMaker.Types.CreateLabelingJobResponse, AWSError>;
   /**
-   * Creates a model in SageMaker. In the request, you name the model and describe a primary container. For the primary container, you specify the Docker image that contains inference code, artifacts (from prior training), and a custom environment map that the inference code uses when you deploy the model for predictions. Use this API to create a model if you want to use SageMaker hosting services or run a batch transform job. To host your model, you create an endpoint configuration with the CreateEndpointConfig API, and then create an endpoint with the CreateEndpoint API. SageMaker then deploys all of the containers that you defined for the model in the hosting environment.  For an example that calls this method when deploying a model to SageMaker hosting services, see Create a Model (Amazon Web Services SDK for Python (Boto 3)).  To run a batch transform using your model, you start a job with the CreateTransformJob API. SageMaker uses your model and your dataset to get inferences which are then saved to a specified S3 location. In the request, you also provide an IAM role that SageMaker can assume to access model artifacts and docker image for deployment on ML compute hosting instances or for batch transform jobs. In addition, you also use the IAM role to manage permissions the inference code needs. For example, if the inference code access any other Amazon Web Services resources, you grant necessary permissions via this role.
+   * Creates a model in SageMaker. In the request, you name the model and describe a primary container. For the primary container, you specify the Docker image that contains inference code, artifacts (from prior training), and a custom environment map that the inference code uses when you deploy the model for predictions. Use this API to create a model if you want to use SageMaker hosting services or run a batch transform job. To host your model, you create an endpoint configuration with the CreateEndpointConfig API, and then create an endpoint with the CreateEndpoint API. SageMaker then deploys all of the containers that you defined for the model in the hosting environment.  To run a batch transform using your model, you start a job with the CreateTransformJob API. SageMaker uses your model and your dataset to get inferences which are then saved to a specified S3 location. In the request, you also provide an IAM role that SageMaker can assume to access model artifacts and docker image for deployment on ML compute hosting instances or for batch transform jobs. In addition, you also use the IAM role to manage permissions the inference code needs. For example, if the inference code access any other Amazon Web Services resources, you grant necessary permissions via this role.
    */
   createModel(params: SageMaker.Types.CreateModelInput, callback?: (err: AWSError, data: SageMaker.Types.CreateModelOutput) => void): Request<SageMaker.Types.CreateModelOutput, AWSError>;
   /**
-   * Creates a model in SageMaker. In the request, you name the model and describe a primary container. For the primary container, you specify the Docker image that contains inference code, artifacts (from prior training), and a custom environment map that the inference code uses when you deploy the model for predictions. Use this API to create a model if you want to use SageMaker hosting services or run a batch transform job. To host your model, you create an endpoint configuration with the CreateEndpointConfig API, and then create an endpoint with the CreateEndpoint API. SageMaker then deploys all of the containers that you defined for the model in the hosting environment.  For an example that calls this method when deploying a model to SageMaker hosting services, see Create a Model (Amazon Web Services SDK for Python (Boto 3)).  To run a batch transform using your model, you start a job with the CreateTransformJob API. SageMaker uses your model and your dataset to get inferences which are then saved to a specified S3 location. In the request, you also provide an IAM role that SageMaker can assume to access model artifacts and docker image for deployment on ML compute hosting instances or for batch transform jobs. In addition, you also use the IAM role to manage permissions the inference code needs. For example, if the inference code access any other Amazon Web Services resources, you grant necessary permissions via this role.
+   * Creates a model in SageMaker. In the request, you name the model and describe a primary container. For the primary container, you specify the Docker image that contains inference code, artifacts (from prior training), and a custom environment map that the inference code uses when you deploy the model for predictions. Use this API to create a model if you want to use SageMaker hosting services or run a batch transform job. To host your model, you create an endpoint configuration with the CreateEndpointConfig API, and then create an endpoint with the CreateEndpoint API. SageMaker then deploys all of the containers that you defined for the model in the hosting environment.  To run a batch transform using your model, you start a job with the CreateTransformJob API. SageMaker uses your model and your dataset to get inferences which are then saved to a specified S3 location. In the request, you also provide an IAM role that SageMaker can assume to access model artifacts and docker image for deployment on ML compute hosting instances or for batch transform jobs. In addition, you also use the IAM role to manage permissions the inference code needs. For example, if the inference code access any other Amazon Web Services resources, you grant necessary permissions via this role.
    */
   createModel(callback?: (err: AWSError, data: SageMaker.Types.CreateModelOutput) => void): Request<SageMaker.Types.CreateModelOutput, AWSError>;
   /**
@@ -2381,11 +2381,11 @@ declare class SageMaker extends Service {
    */
   updateExperiment(callback?: (err: AWSError, data: SageMaker.Types.UpdateExperimentResponse) => void): Request<SageMaker.Types.UpdateExperimentResponse, AWSError>;
   /**
-   * Updates the feature group by either adding features or updating the online store configuration. Use one of the following request parameters at a time while using the UpdateFeatureGroup API. You can add features for your feature group using the FeatureAdditions request parameter. Features cannot be removed from a feature group. You can update the online store configuration by using the OnlineStoreConfig request parameter. If a TtlDuration is specified, the default TtlDuration applies for all records added to the feature group after the feature group is updated. If a record level TtlDuration exists from using the PutRecord API, the record level TtlDuration applies to that record instead of the default TtlDuration.
+   * Updates the feature group by either adding features or updating the online store configuration. Use one of the following request parameters at a time while using the UpdateFeatureGroup API. You can add features for your feature group using the FeatureAdditions request parameter. Features cannot be removed from a feature group. You can update the online store configuration by using the OnlineStoreConfig request parameter. If a TtlDuration is specified, the default TtlDuration applies for all records added to the feature group after the feature group is updated. If a record level TtlDuration exists from using the PutRecord API, the record level TtlDuration applies to that record instead of the default TtlDuration. To remove the default TtlDuration from an existing feature group, use the UpdateFeatureGroup API and set the TtlDuration Unit and Value to null.
    */
   updateFeatureGroup(params: SageMaker.Types.UpdateFeatureGroupRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateFeatureGroupResponse) => void): Request<SageMaker.Types.UpdateFeatureGroupResponse, AWSError>;
   /**
-   * Updates the feature group by either adding features or updating the online store configuration. Use one of the following request parameters at a time while using the UpdateFeatureGroup API. You can add features for your feature group using the FeatureAdditions request parameter. Features cannot be removed from a feature group. You can update the online store configuration by using the OnlineStoreConfig request parameter. If a TtlDuration is specified, the default TtlDuration applies for all records added to the feature group after the feature group is updated. If a record level TtlDuration exists from using the PutRecord API, the record level TtlDuration applies to that record instead of the default TtlDuration.
+   * Updates the feature group by either adding features or updating the online store configuration. Use one of the following request parameters at a time while using the UpdateFeatureGroup API. You can add features for your feature group using the FeatureAdditions request parameter. Features cannot be removed from a feature group. You can update the online store configuration by using the OnlineStoreConfig request parameter. If a TtlDuration is specified, the default TtlDuration applies for all records added to the feature group after the feature group is updated. If a record level TtlDuration exists from using the PutRecord API, the record level TtlDuration applies to that record instead of the default TtlDuration. To remove the default TtlDuration from an existing feature group, use the UpdateFeatureGroup API and set the TtlDuration Unit and Value to null.
    */
   updateFeatureGroup(callback?: (err: AWSError, data: SageMaker.Types.UpdateFeatureGroupResponse) => void): Request<SageMaker.Types.UpdateFeatureGroupResponse, AWSError>;
   /**
@@ -3432,7 +3432,7 @@ declare namespace SageMaker {
   export type AutoMLJobName = string;
   export interface AutoMLJobObjective {
     /**
-     * The name of the objective metric used to measure the predictive quality of a machine learning system. During training, the model's parameters are updated iteratively to optimize its performance based on the feedback provided by the objective metric when evaluating the model on the validation dataset. The list of available metrics supported by Autopilot and the default metric applied when you do not specify a metric name explicitly depend on the problem type.   For tabular problem types:   List of available metrics:     Regression: InferenceLatency, MAE, MSE, R2, RMSE     Binary classification: Accuracy, AUC, BalancedAccuracy, F1, InferenceLatency, LogLoss, Precision, Recall     Multiclass classification: Accuracy, BalancedAccuracy, F1macro, InferenceLatency, LogLoss, PrecisionMacro, RecallMacro    For a description of each metric, see Autopilot metrics for classification and regression.   Default objective metrics:   Regression: MSE.   Binary classification: F1.   Multiclass classification: Accuracy.       For image or text classification problem types:   List of available metrics: Accuracy  For a description of each metric, see Autopilot metrics for text and image classification.   Default objective metrics: Accuracy      For time-series forecasting problem types:   List of available metrics: RMSE, wQL, Average wQL, MASE, MAPE, WAPE  For a description of each metric, see Autopilot metrics for time-series forecasting.   Default objective metrics: AverageWeightedQuantileLoss      For text generation problem types (LLMs fine-tuning): Fine-tuning language models in Autopilot does not require setting the AutoMLJobObjective field. Autopilot fine-tunes LLMs without requiring multiple candidates to be trained and evaluated. Instead, using your dataset, Autopilot directly fine-tunes your target model to enhance a default objective metric, the cross-entropy loss. After fine-tuning a language model, you can evaluate the quality of its generated text using different metrics. For a list of the available metrics, see Metrics for fine-tuning LLMs in Autopilot.  
+     * The name of the objective metric used to measure the predictive quality of a machine learning system. During training, the model's parameters are updated iteratively to optimize its performance based on the feedback provided by the objective metric when evaluating the model on the validation dataset. The list of available metrics supported by Autopilot and the default metric applied when you do not specify a metric name explicitly depend on the problem type.   For tabular problem types:   List of available metrics:     Regression: MAE, MSE, R2, RMSE     Binary classification: Accuracy, AUC, BalancedAccuracy, F1, Precision, Recall     Multiclass classification: Accuracy, BalancedAccuracy, F1macro, PrecisionMacro, RecallMacro    For a description of each metric, see Autopilot metrics for classification and regression.   Default objective metrics:   Regression: MSE.   Binary classification: F1.   Multiclass classification: Accuracy.       For image or text classification problem types:   List of available metrics: Accuracy  For a description of each metric, see Autopilot metrics for text and image classification.   Default objective metrics: Accuracy      For time-series forecasting problem types:   List of available metrics: RMSE, wQL, Average wQL, MASE, MAPE, WAPE  For a description of each metric, see Autopilot metrics for time-series forecasting.   Default objective metrics: AverageWeightedQuantileLoss      For text generation problem types (LLMs fine-tuning): Fine-tuning language models in Autopilot does not require setting the AutoMLJobObjective field. Autopilot fine-tunes LLMs without requiring multiple candidates to be trained and evaluated. Instead, using your dataset, Autopilot directly fine-tunes your target model to enhance a default objective metric, the cross-entropy loss. After fine-tuning a language model, you can evaluate the quality of its generated text using different metrics. For a list of the available metrics, see Metrics for fine-tuning LLMs in Autopilot.  
      */
     MetricName: AutoMLMetricEnum;
   }
@@ -5898,7 +5898,7 @@ declare namespace SageMaker {
      */
     ModelPackageDescription?: EntityDescription;
     /**
-     * Specifies details about inference jobs that can be run with models based on this model package, including the following:   The Amazon ECR paths of containers that contain the inference code and model artifacts.   The instance types that the model package supports for transform jobs and real-time endpoints used for inference.   The input and output content formats that the model package supports for inference.  
+     * Specifies details about inference jobs that you can run with models based on this model package, including the following information:   The Amazon ECR paths of containers that contain the inference code and model artifacts.   The instance types that the model package supports for transform jobs and real-time endpoints used for inference.   The input and output content formats that the model package supports for inference.  
      */
     InferenceSpecification?: InferenceSpecification;
     /**
@@ -5958,6 +5958,10 @@ declare namespace SageMaker {
      * Indicates if you want to skip model validation.
      */
     SkipModelValidation?: SkipModelValidation;
+    /**
+     * The URI of the source for the model package. If you want to clone a model package, set it to the model package Amazon Resource Name (ARN). If you want to register a model, set it to the model ARN.
+     */
+    SourceUri?: ModelPackageSourceUri;
   }
   export interface CreateModelPackageOutput {
     /**
@@ -7706,7 +7710,7 @@ declare namespace SageMaker {
      */
     LastUserActivityTimestamp?: Timestamp;
     /**
-     * The creation time.
+     * The creation time of the application.  After an application has been shut down for 24 hours, SageMaker deletes all metadata for the application. To be considered an update and retain application metadata, applications must be restarted within 24 hours after the previous application has been shut down. After this time window, creation of an application is considered a new application rather than an update of the previous application. 
      */
     CreationTime?: Timestamp;
     /**
@@ -9797,7 +9801,7 @@ declare namespace SageMaker {
      */
     CreationTime: CreationTime;
     /**
-     * Details about inference jobs that can be run with models based on this model package.
+     * Details about inference jobs that you can run with models based on this model package.
      */
     InferenceSpecification?: InferenceSpecification;
     /**
@@ -9867,6 +9871,10 @@ declare namespace SageMaker {
      * Indicates if you want to skip model validation.
      */
     SkipModelValidation?: SkipModelValidation;
+    /**
+     * The URI of the source for the model package.
+     */
+    SourceUri?: ModelPackageSourceUri;
   }
   export interface DescribeModelQualityJobDefinitionRequest {
     /**
@@ -18028,7 +18036,7 @@ declare namespace SageMaker {
      */
     ModelDataQuality?: ModelDataQuality;
     /**
-     * Metrics that measure bais in a model.
+     * Metrics that measure bias in a model.
      */
     Bias?: Bias;
     /**
@@ -18132,6 +18140,10 @@ declare namespace SageMaker {
      */
     AdditionalInferenceSpecifications?: AdditionalInferenceSpecifications;
     /**
+     * The URI of the source for the model package.
+     */
+    SourceUri?: ModelPackageSourceUri;
+    /**
      * A list of the tags associated with the model package. For more information, see Tagging Amazon Web Services resources in the Amazon Web Services General Reference Guide.
      */
     Tags?: TagList;
@@ -18167,6 +18179,10 @@ declare namespace SageMaker {
      * The Amazon S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).  The model artifacts must be in an S3 bucket that is in the same region as the model package. 
      */
     ModelDataUrl?: Url;
+    /**
+     * Specifies the location of ML model data to deploy during endpoint creation.
+     */
+    ModelDataSource?: ModelDataSource;
     /**
      * The Amazon Web Services Marketplace product ID of the model package.
      */
@@ -18252,6 +18268,7 @@ declare namespace SageMaker {
   }
   export type ModelPackageGroupSummaryList = ModelPackageGroupSummary[];
   export type ModelPackageSortBy = "Name"|"CreationTime"|string;
+  export type ModelPackageSourceUri = string;
   export type ModelPackageStatus = "Pending"|"InProgress"|"Completed"|"Failed"|"Deleting"|string;
   export interface ModelPackageStatusDetails {
     /**
@@ -21484,6 +21501,10 @@ declare namespace SageMaker {
      */
     ModelDataUrl?: Url;
     /**
+     * Specifies the location of ML model data to deploy during endpoint creation.
+     */
+    ModelDataSource?: ModelDataSource;
+    /**
      * The name of an algorithm that was used to create the model package. The algorithm must be either an algorithm resource in your SageMaker account or an algorithm in Amazon Web Services Marketplace that you are subscribed to.
      */
     AlgorithmName: ArnOrName;
@@ -23653,6 +23674,14 @@ declare namespace SageMaker {
      * An array of additional Inference Specification objects to be added to the existing array additional Inference Specification. Total number of additional Inference Specifications can not exceed 15. Each additional Inference Specification specifies artifacts based on this model package that can be used on inference endpoints. Generally used with SageMaker Neo to store the compiled artifacts.
      */
     AdditionalInferenceSpecificationsToAdd?: AdditionalInferenceSpecifications;
+    /**
+     * Specifies details about inference jobs that you can run with models based on this model package, including the following information:   The Amazon ECR paths of containers that contain the inference code and model artifacts.   The instance types that the model package supports for transform jobs and real-time endpoints used for inference.   The input and output content formats that the model package supports for inference.  
+     */
+    InferenceSpecification?: InferenceSpecification;
+    /**
+     * The URI of the source for the model package.
+     */
+    SourceUri?: ModelPackageSourceUri;
   }
   export interface UpdateModelPackageOutput {
     /**
@@ -24206,7 +24235,7 @@ declare namespace SageMaker {
   export type Vertices = Vertex[];
   export interface VisibilityConditions {
     /**
-     * The key that specifies the tag that you're using to filter the search results. It must be in the following format: Tags.&lt;key&gt;/EqualsIfExists.
+     * The key that specifies the tag that you're using to filter the search results. It must be in the following format: Tags.&lt;key&gt;.
      */
     Key?: VisibilityConditionsKey;
     /**

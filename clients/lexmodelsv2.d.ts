@@ -1363,6 +1363,7 @@ declare namespace LexModelsV2 {
   }
   export type AnalyticsUtteranceResults = AnalyticsUtteranceResult[];
   export type AnalyticsUtteranceSortByName = "UtteranceTimestamp"|string;
+  export type AnswerField = string;
   export interface AssociatedTranscript {
     /**
      * The content of the transcript that meets the search filter criteria. For the JSON format of the transcript, see Output transcript format.
@@ -1547,6 +1548,13 @@ declare namespace LexModelsV2 {
      * A list of custom vocabulary items that were successfully updated during the operation.
      */
     resources?: CustomVocabularyItems;
+  }
+  export type BedrockKnowledgeBaseArn = string;
+  export interface BedrockKnowledgeStoreConfiguration {
+    /**
+     * The ARN of the knowledge base used.
+     */
+    bedrockKnowledgeBaseArn: BedrockKnowledgeBaseArn;
   }
   export type BedrockModelArn = string;
   export interface BedrockModelSpecification {
@@ -2055,6 +2063,9 @@ declare namespace LexModelsV2 {
      * An object containing specifications for the descriptive bot building feature.
      */
     descriptiveBotBuilder?: DescriptiveBotBuilderSpecification;
+    /**
+     * Contains specifications for the sample utterance generation feature.
+     */
     sampleUtteranceGeneration?: SampleUtteranceGenerationSpecification;
   }
   export type BuiltInIntentSortAttribute = "IntentSignature"|string;
@@ -2697,6 +2708,10 @@ declare namespace LexModelsV2 {
      * Configuration settings for the response that is sent to the user at the beginning of a conversation, before eliciting slot values.
      */
     initialResponseSetting?: InitialResponseSetting;
+    /**
+     * Specifies the configuration of the built-in Amazon.QnAIntent. The AMAZON.QnAIntent intent is called when Amazon Lex can't determine another intent to invoke. If you specify this field, you can't specify the kendraConfiguration field.
+     */
+    qnAIntentConfiguration?: QnAIntentConfiguration;
   }
   export interface CreateIntentResponse {
     /**
@@ -2767,6 +2782,10 @@ declare namespace LexModelsV2 {
      * Configuration settings for the response that is sent to the user at the beginning of a conversation, before eliciting slot values.
      */
     initialResponseSetting?: InitialResponseSetting;
+    /**
+     * Details about the the configuration of the built-in Amazon.QnAIntent.
+     */
+    qnAIntentConfiguration?: QnAIntentConfiguration;
   }
   export interface CreateResourcePolicyRequest {
     /**
@@ -3145,6 +3164,20 @@ declare namespace LexModelsV2 {
      * For each Amazon Lex bot created with the Amazon Lex Model Building Service, you must specify whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to the Children's Online Privacy Protection Act (COPPA) by specifying true or false in the childDirected field. By specifying true in the childDirected field, you confirm that your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. By specifying false in the childDirected field, you confirm that your use of Amazon Lex is not related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. You may not specify a default value for the childDirected field that does not accurately reflect whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. If your use of Amazon Lex relates to a website, program, or other application that is directed in whole or in part, to children under age 13, you must obtain any required verifiable parental consent under COPPA. For information regarding the use of Amazon Lex in connection with websites, programs, or other applications that are directed or targeted, in whole or in part, to children under age 13, see the Amazon Lex FAQ.
      */
     childDirected: ChildDirected;
+  }
+  export interface DataSourceConfiguration {
+    /**
+     * Contains details about the configuration of the Amazon OpenSearch Service database used for the AMAZON.QnAIntent. To create a domain, follow the steps at Creating and managing Amazon OpenSearch Service domains.
+     */
+    opensearchConfiguration?: OpensearchConfiguration;
+    /**
+     * Contains details about the configuration of the Amazon Kendra index used for the AMAZON.QnAIntent. To create a Amazon Kendra index, follow the steps at Creating an index.
+     */
+    kendraConfiguration?: QnAKendraConfiguration;
+    /**
+     * Contains details about the configuration of the Amazon Bedrock knowledge base used for the AMAZON.QnAIntent. To set up a knowledge base, follow the steps at Building a knowledge base.
+     */
+    bedrockKnowledgeStoreConfiguration?: BedrockKnowledgeStoreConfiguration;
   }
   export interface DateRangeFilter {
     /**
@@ -4136,6 +4169,10 @@ declare namespace LexModelsV2 {
      * Configuration setting for a response sent to the user before Amazon Lex starts eliciting slots.
      */
     initialResponseSetting?: InitialResponseSetting;
+    /**
+     * Details about the configuration of the built-in Amazon.QnAIntent.
+     */
+    qnAIntentConfiguration?: QnAIntentConfiguration;
   }
   export interface DescribeResourcePolicyRequest {
     /**
@@ -4556,6 +4593,7 @@ declare namespace LexModelsV2 {
      */
     sessionAttributes?: StringMap;
   }
+  export type DomainEndpoint = string;
   export type DraftBotVersion = string;
   export type Effect = "Allow"|"Deny"|string;
   export interface ElicitationCodeHookInvocationSetting {
@@ -4585,6 +4623,16 @@ declare namespace LexModelsV2 {
   }
   export type ErrorCode = "DUPLICATE_INPUT"|"RESOURCE_DOES_NOT_EXIST"|"RESOURCE_ALREADY_EXISTS"|"INTERNAL_SERVER_FAILURE"|string;
   export type ErrorMessage = string;
+  export interface ExactResponseFields {
+    /**
+     * The name of the field that contains the query made to the OpenSearch Service database.
+     */
+    questionField: QuestionField;
+    /**
+     * The name of the field that contains the answer to the query made to the OpenSearch Service database.
+     */
+    answerField: AnswerField;
+  }
   export interface ExecutionErrorDetails {
     /**
      * The error code for the error.
@@ -4977,6 +5025,7 @@ declare namespace LexModelsV2 {
   }
   export type ImportSummaryList = ImportSummary[];
   export type ImportedResourceId = string;
+  export type IncludeField = string;
   export interface InitialResponseSetting {
     initialResponse?: ResponseSpecification;
     /**
@@ -6583,6 +6632,8 @@ declare namespace LexModelsV2 {
   export type NextToken = string;
   export type NonEmptyString = string;
   export type NumericalBotVersion = string;
+  export type OSIncludeFields = IncludeField[];
+  export type OSIndexName = string;
   export interface ObfuscationSetting {
     /**
      * Value that determines whether Amazon Lex obscures slot values in conversation logs. The default is to obscure the values.
@@ -6592,6 +6643,28 @@ declare namespace LexModelsV2 {
   export type ObfuscationSettingType = "None"|"DefaultObfuscation"|string;
   export type ObjectPrefix = string;
   export type ObjectPrefixes = ObjectPrefix[];
+  export interface OpensearchConfiguration {
+    /**
+     * The endpoint of the Amazon OpenSearch Service domain.
+     */
+    domainEndpoint: DomainEndpoint;
+    /**
+     * The name of the Amazon OpenSearch Service index.
+     */
+    indexName: OSIndexName;
+    /**
+     * Specifies whether to return an exact response or to return an answer generated by the model using the fields you specify from the database.
+     */
+    exactResponse?: Boolean;
+    /**
+     * Contains the names of the fields used for an exact response to the user.
+     */
+    exactResponseFields?: ExactResponseFields;
+    /**
+     * Contains a list of fields from the Amazon OpenSearch Service that the model can use to generate the answer to the query.
+     */
+    includeFields?: OSIncludeFields;
+  }
   export type Operation = string;
   export type OperationList = Operation[];
   export interface OutputContext {
@@ -6775,7 +6848,33 @@ declare namespace LexModelsV2 {
      */
     promptAttemptsSpecification?: PromptAttemptsSpecificationMap;
   }
+  export interface QnAIntentConfiguration {
+    /**
+     * Contains details about the configuration of the data source used for the AMAZON.QnAIntent.
+     */
+    dataSourceConfiguration?: DataSourceConfiguration;
+    bedrockModelConfiguration?: BedrockModelSpecification;
+  }
+  export interface QnAKendraConfiguration {
+    /**
+     * The ARN of the Amazon Kendra index to use.
+     */
+    kendraIndex: KendraIndexArn;
+    /**
+     * Specifies whether to enable an Amazon Kendra filter string or not.
+     */
+    queryFilterStringEnabled?: Boolean;
+    /**
+     * Contains the Amazon Kendra filter string to use if enabled. For more information on the Amazon Kendra search filter JSON format, see Using document attributes to filter search results.
+     */
+    queryFilterString?: QueryFilterString;
+    /**
+     * Specifies whether to return an exact response from the Amazon Kendra index or to let the Amazon Bedrock model you select generate a response based on the results. To use this feature, you must first add FAQ questions to your index by following the steps at Adding frequently asked questions (FAQs) to an index.
+     */
+    exactResponse?: Boolean;
+  }
   export type QueryFilterString = string;
+  export type QuestionField = string;
   export type RecommendedAction = string;
   export type RecommendedActions = RecommendedAction[];
   export interface RecommendedIntentSummary {
@@ -8508,6 +8607,10 @@ declare namespace LexModelsV2 {
      * Configuration settings for a response sent to the user before Amazon Lex starts eliciting slots.
      */
     initialResponseSetting?: InitialResponseSetting;
+    /**
+     * Specifies the configuration of the built-in Amazon.QnAIntent. The AMAZON.QnAIntent intent is called when Amazon Lex can't determine another intent to invoke. If you specify this field, you can't specify the kendraConfiguration field.
+     */
+    qnAIntentConfiguration?: QnAIntentConfiguration;
   }
   export interface UpdateIntentResponse {
     /**
@@ -8586,6 +8689,10 @@ declare namespace LexModelsV2 {
      * Configuration settings for a response sent to the user before Amazon Lex starts eliciting slots.
      */
     initialResponseSetting?: InitialResponseSetting;
+    /**
+     * Details about the configuration of the built-in Amazon.QnAIntent.
+     */
+    qnAIntentConfiguration?: QnAIntentConfiguration;
   }
   export interface UpdateResourcePolicyRequest {
     /**
