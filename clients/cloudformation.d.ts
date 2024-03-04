@@ -21,11 +21,11 @@ declare class CloudFormation extends Service {
    */
   activateOrganizationsAccess(callback?: (err: AWSError, data: CloudFormation.Types.ActivateOrganizationsAccessOutput) => void): Request<CloudFormation.Types.ActivateOrganizationsAccessOutput, AWSError>;
   /**
-   * Activates a public third-party extension, making it available for use in stack templates. For more information, see Using public extensions in the CloudFormation User Guide. Once you have activated a public third-party extension in your account and Region, use SetTypeConfiguration to specify configuration properties for the extension. For more information, see Configuring extensions at the account level in the CloudFormation User Guide.
+   * Activates a public third-party extension, making it available for use in stack templates. For more information, see Using public extensions in the CloudFormation User Guide. Once you have activated a public third-party extension in your account and Region, use  SetTypeConfiguration  to specify configuration properties for the extension. For more information, see Configuring extensions at the account level in the CloudFormation User Guide.
    */
   activateType(params: CloudFormation.Types.ActivateTypeInput, callback?: (err: AWSError, data: CloudFormation.Types.ActivateTypeOutput) => void): Request<CloudFormation.Types.ActivateTypeOutput, AWSError>;
   /**
-   * Activates a public third-party extension, making it available for use in stack templates. For more information, see Using public extensions in the CloudFormation User Guide. Once you have activated a public third-party extension in your account and Region, use SetTypeConfiguration to specify configuration properties for the extension. For more information, see Configuring extensions at the account level in the CloudFormation User Guide.
+   * Activates a public third-party extension, making it available for use in stack templates. For more information, see Using public extensions in the CloudFormation User Guide. Once you have activated a public third-party extension in your account and Region, use  SetTypeConfiguration  to specify configuration properties for the extension. For more information, see Configuring extensions at the account level in the CloudFormation User Guide.
    */
   activateType(callback?: (err: AWSError, data: CloudFormation.Types.ActivateTypeOutput) => void): Request<CloudFormation.Types.ActivateTypeOutput, AWSError>;
   /**
@@ -149,11 +149,11 @@ declare class CloudFormation extends Service {
    */
   deleteStackSet(callback?: (err: AWSError, data: CloudFormation.Types.DeleteStackSetOutput) => void): Request<CloudFormation.Types.DeleteStackSetOutput, AWSError>;
   /**
-   * Marks an extension or extension version as DEPRECATED in the CloudFormation registry, removing it from active use. Deprecated extensions or extension versions cannot be used in CloudFormation operations. To deregister an entire extension, you must individually deregister all active versions of that extension. If an extension has only a single active version, deregistering that version results in the extension itself being deregistered and marked as deprecated in the registry. You can't deregister the default version of an extension if there are other active version of that extension. If you do deregister the default version of an extension, the extension type itself is deregistered as well and marked as deprecated. To view the deprecation status of an extension or extension version, use DescribeType.
+   * Marks an extension or extension version as DEPRECATED in the CloudFormation registry, removing it from active use. Deprecated extensions or extension versions cannot be used in CloudFormation operations. To deregister an entire extension, you must individually deregister all active versions of that extension. If an extension has only a single active version, deregistering that version results in the extension itself being deregistered and marked as deprecated in the registry. You can't deregister the default version of an extension if there are other active version of that extension. If you do deregister the default version of an extension, the extension type itself is deregistered as well and marked as deprecated. To view the deprecation status of an extension or extension version, use  DescribeType .
    */
   deregisterType(params: CloudFormation.Types.DeregisterTypeInput, callback?: (err: AWSError, data: CloudFormation.Types.DeregisterTypeOutput) => void): Request<CloudFormation.Types.DeregisterTypeOutput, AWSError>;
   /**
-   * Marks an extension or extension version as DEPRECATED in the CloudFormation registry, removing it from active use. Deprecated extensions or extension versions cannot be used in CloudFormation operations. To deregister an entire extension, you must individually deregister all active versions of that extension. If an extension has only a single active version, deregistering that version results in the extension itself being deregistered and marked as deprecated in the registry. You can't deregister the default version of an extension if there are other active version of that extension. If you do deregister the default version of an extension, the extension type itself is deregistered as well and marked as deprecated. To view the deprecation status of an extension or extension version, use DescribeType.
+   * Marks an extension or extension version as DEPRECATED in the CloudFormation registry, removing it from active use. Deprecated extensions or extension versions cannot be used in CloudFormation operations. To deregister an entire extension, you must individually deregister all active versions of that extension. If an extension has only a single active version, deregistering that version results in the extension itself being deregistered and marked as deprecated in the registry. You can't deregister the default version of an extension if there are other active version of that extension. If you do deregister the default version of an extension, the extension type itself is deregistered as well and marked as deprecated. To view the deprecation status of an extension or extension version, use  DescribeType .
    */
   deregisterType(callback?: (err: AWSError, data: CloudFormation.Types.DeregisterTypeOutput) => void): Request<CloudFormation.Types.DeregisterTypeOutput, AWSError>;
   /**
@@ -197,11 +197,11 @@ declare class CloudFormation extends Service {
    */
   describeOrganizationsAccess(callback?: (err: AWSError, data: CloudFormation.Types.DescribeOrganizationsAccessOutput) => void): Request<CloudFormation.Types.DescribeOrganizationsAccessOutput, AWSError>;
   /**
-   * Returns information about a CloudFormation extension publisher. If you don't supply a PublisherId, and you have registered as an extension publisher, DescribePublisher returns information about your own publisher account. For more information about registering as a publisher, see:    RegisterPublisher     Publishing extensions to make them available for public use in the CloudFormation CLI User Guide   
+   * Returns information about a CloudFormation extension publisher. If you don't supply a PublisherId, and you have registered as an extension publisher, DescribePublisher returns information about your own publisher account. For more information about registering as a publisher, see:     RegisterPublisher      Publishing extensions to make them available for public use in the CloudFormation CLI User Guide   
    */
   describePublisher(params: CloudFormation.Types.DescribePublisherInput, callback?: (err: AWSError, data: CloudFormation.Types.DescribePublisherOutput) => void): Request<CloudFormation.Types.DescribePublisherOutput, AWSError>;
   /**
-   * Returns information about a CloudFormation extension publisher. If you don't supply a PublisherId, and you have registered as an extension publisher, DescribePublisher returns information about your own publisher account. For more information about registering as a publisher, see:    RegisterPublisher     Publishing extensions to make them available for public use in the CloudFormation CLI User Guide   
+   * Returns information about a CloudFormation extension publisher. If you don't supply a PublisherId, and you have registered as an extension publisher, DescribePublisher returns information about your own publisher account. For more information about registering as a publisher, see:     RegisterPublisher      Publishing extensions to make them available for public use in the CloudFormation CLI User Guide   
    */
   describePublisher(callback?: (err: AWSError, data: CloudFormation.Types.DescribePublisherOutput) => void): Request<CloudFormation.Types.DescribePublisherOutput, AWSError>;
   /**
@@ -517,11 +517,11 @@ declare class CloudFormation extends Service {
    */
   listTypes(callback?: (err: AWSError, data: CloudFormation.Types.ListTypesOutput) => void): Request<CloudFormation.Types.ListTypesOutput, AWSError>;
   /**
-   * Publishes the specified extension to the CloudFormation registry as a public extension in this Region. Public extensions are available for use by all CloudFormation users. For more information about publishing extensions, see Publishing extensions to make them available for public use in the CloudFormation CLI User Guide. To publish an extension, you must be registered as a publisher with CloudFormation. For more information, see RegisterPublisher.
+   * Publishes the specified extension to the CloudFormation registry as a public extension in this Region. Public extensions are available for use by all CloudFormation users. For more information about publishing extensions, see Publishing extensions to make them available for public use in the CloudFormation CLI User Guide. To publish an extension, you must be registered as a publisher with CloudFormation. For more information, see  RegisterPublisher .
    */
   publishType(params: CloudFormation.Types.PublishTypeInput, callback?: (err: AWSError, data: CloudFormation.Types.PublishTypeOutput) => void): Request<CloudFormation.Types.PublishTypeOutput, AWSError>;
   /**
-   * Publishes the specified extension to the CloudFormation registry as a public extension in this Region. Public extensions are available for use by all CloudFormation users. For more information about publishing extensions, see Publishing extensions to make them available for public use in the CloudFormation CLI User Guide. To publish an extension, you must be registered as a publisher with CloudFormation. For more information, see RegisterPublisher.
+   * Publishes the specified extension to the CloudFormation registry as a public extension in this Region. Public extensions are available for use by all CloudFormation users. For more information about publishing extensions, see Publishing extensions to make them available for public use in the CloudFormation CLI User Guide. To publish an extension, you must be registered as a publisher with CloudFormation. For more information, see  RegisterPublisher .
    */
   publishType(callback?: (err: AWSError, data: CloudFormation.Types.PublishTypeOutput) => void): Request<CloudFormation.Types.PublishTypeOutput, AWSError>;
   /**
@@ -541,11 +541,11 @@ declare class CloudFormation extends Service {
    */
   registerPublisher(callback?: (err: AWSError, data: CloudFormation.Types.RegisterPublisherOutput) => void): Request<CloudFormation.Types.RegisterPublisherOutput, AWSError>;
   /**
-   * Registers an extension with the CloudFormation service. Registering an extension makes it available for use in CloudFormation templates in your Amazon Web Services account, and includes:   Validating the extension schema.   Determining which handlers, if any, have been specified for the extension.   Making the extension available for use in your account.   For more information about how to develop extensions and ready them for registration, see Creating Resource Providers in the CloudFormation CLI User Guide. You can have a maximum of 50 resource extension versions registered at a time. This maximum is per account and per Region. Use DeregisterType to deregister specific extension versions if necessary. Once you have initiated a registration request using RegisterType, you can use DescribeTypeRegistration to monitor the progress of the registration request. Once you have registered a private extension in your account and Region, use SetTypeConfiguration to specify configuration properties for the extension. For more information, see Configuring extensions at the account level in the CloudFormation User Guide.
+   * Registers an extension with the CloudFormation service. Registering an extension makes it available for use in CloudFormation templates in your Amazon Web Services account, and includes:   Validating the extension schema.   Determining which handlers, if any, have been specified for the extension.   Making the extension available for use in your account.   For more information about how to develop extensions and ready them for registration, see Creating Resource Providers in the CloudFormation CLI User Guide. You can have a maximum of 50 resource extension versions registered at a time. This maximum is per account and per Region. Use  DeregisterType  to deregister specific extension versions if necessary. Once you have initiated a registration request using RegisterType, you can use DescribeTypeRegistration to monitor the progress of the registration request. Once you have registered a private extension in your account and Region, use  SetTypeConfiguration  to specify configuration properties for the extension. For more information, see Configuring extensions at the account level in the CloudFormation User Guide.
    */
   registerType(params: CloudFormation.Types.RegisterTypeInput, callback?: (err: AWSError, data: CloudFormation.Types.RegisterTypeOutput) => void): Request<CloudFormation.Types.RegisterTypeOutput, AWSError>;
   /**
-   * Registers an extension with the CloudFormation service. Registering an extension makes it available for use in CloudFormation templates in your Amazon Web Services account, and includes:   Validating the extension schema.   Determining which handlers, if any, have been specified for the extension.   Making the extension available for use in your account.   For more information about how to develop extensions and ready them for registration, see Creating Resource Providers in the CloudFormation CLI User Guide. You can have a maximum of 50 resource extension versions registered at a time. This maximum is per account and per Region. Use DeregisterType to deregister specific extension versions if necessary. Once you have initiated a registration request using RegisterType, you can use DescribeTypeRegistration to monitor the progress of the registration request. Once you have registered a private extension in your account and Region, use SetTypeConfiguration to specify configuration properties for the extension. For more information, see Configuring extensions at the account level in the CloudFormation User Guide.
+   * Registers an extension with the CloudFormation service. Registering an extension makes it available for use in CloudFormation templates in your Amazon Web Services account, and includes:   Validating the extension schema.   Determining which handlers, if any, have been specified for the extension.   Making the extension available for use in your account.   For more information about how to develop extensions and ready them for registration, see Creating Resource Providers in the CloudFormation CLI User Guide. You can have a maximum of 50 resource extension versions registered at a time. This maximum is per account and per Region. Use  DeregisterType  to deregister specific extension versions if necessary. Once you have initiated a registration request using RegisterType, you can use DescribeTypeRegistration to monitor the progress of the registration request. Once you have registered a private extension in your account and Region, use  SetTypeConfiguration  to specify configuration properties for the extension. For more information, see Configuring extensions at the account level in the CloudFormation User Guide.
    */
   registerType(callback?: (err: AWSError, data: CloudFormation.Types.RegisterTypeOutput) => void): Request<CloudFormation.Types.RegisterTypeOutput, AWSError>;
   /**
@@ -565,11 +565,11 @@ declare class CloudFormation extends Service {
    */
   setStackPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Specifies the configuration data for a registered CloudFormation extension, in the given account and Region. To view the current configuration data for an extension, refer to the ConfigurationSchema element of DescribeType. For more information, see Configuring extensions at the account level in the CloudFormation User Guide.  It's strongly recommended that you use dynamic references to restrict sensitive configuration definitions, such as third-party credentials. For more details on dynamic references, see Using dynamic references to specify template values in the CloudFormation User Guide. 
+   * Specifies the configuration data for a registered CloudFormation extension, in the given account and Region. To view the current configuration data for an extension, refer to the ConfigurationSchema element of  DescribeType . For more information, see Configuring extensions at the account level in the CloudFormation User Guide.  It's strongly recommended that you use dynamic references to restrict sensitive configuration definitions, such as third-party credentials. For more details on dynamic references, see Using dynamic references to specify template values in the CloudFormation User Guide. 
    */
   setTypeConfiguration(params: CloudFormation.Types.SetTypeConfigurationInput, callback?: (err: AWSError, data: CloudFormation.Types.SetTypeConfigurationOutput) => void): Request<CloudFormation.Types.SetTypeConfigurationOutput, AWSError>;
   /**
-   * Specifies the configuration data for a registered CloudFormation extension, in the given account and Region. To view the current configuration data for an extension, refer to the ConfigurationSchema element of DescribeType. For more information, see Configuring extensions at the account level in the CloudFormation User Guide.  It's strongly recommended that you use dynamic references to restrict sensitive configuration definitions, such as third-party credentials. For more details on dynamic references, see Using dynamic references to specify template values in the CloudFormation User Guide. 
+   * Specifies the configuration data for a registered CloudFormation extension, in the given account and Region. To view the current configuration data for an extension, refer to the ConfigurationSchema element of  DescribeType . For more information, see Configuring extensions at the account level in the CloudFormation User Guide.  It's strongly recommended that you use dynamic references to restrict sensitive configuration definitions, such as third-party credentials. For more details on dynamic references, see Using dynamic references to specify template values in the CloudFormation User Guide. 
    */
   setTypeConfiguration(callback?: (err: AWSError, data: CloudFormation.Types.SetTypeConfigurationOutput) => void): Request<CloudFormation.Types.SetTypeConfigurationOutput, AWSError>;
   /**
@@ -605,11 +605,11 @@ declare class CloudFormation extends Service {
    */
   stopStackSetOperation(callback?: (err: AWSError, data: CloudFormation.Types.StopStackSetOperationOutput) => void): Request<CloudFormation.Types.StopStackSetOperationOutput, AWSError>;
   /**
-   * Tests a registered extension to make sure it meets all necessary requirements for being published in the CloudFormation registry.   For resource types, this includes passing all contracts tests defined for the type.   For modules, this includes determining if the module's model meets all necessary requirements.   For more information, see Testing your public extension prior to publishing in the CloudFormation CLI User Guide. If you don't specify a version, CloudFormation uses the default version of the extension in your account and Region for testing. To perform testing, CloudFormation assumes the execution role specified when the type was registered. For more information, see RegisterType. Once you've initiated testing on an extension using TestType, you can pass the returned TypeVersionArn into DescribeType to monitor the current test status and test status description for the extension. An extension must have a test status of PASSED before it can be published. For more information, see Publishing extensions to make them available for public use in the CloudFormation CLI User Guide.
+   * Tests a registered extension to make sure it meets all necessary requirements for being published in the CloudFormation registry.   For resource types, this includes passing all contracts tests defined for the type.   For modules, this includes determining if the module's model meets all necessary requirements.   For more information, see Testing your public extension prior to publishing in the CloudFormation CLI User Guide. If you don't specify a version, CloudFormation uses the default version of the extension in your account and Region for testing. To perform testing, CloudFormation assumes the execution role specified when the type was registered. For more information, see  RegisterType . Once you've initiated testing on an extension using TestType, you can pass the returned TypeVersionArn into  DescribeType  to monitor the current test status and test status description for the extension. An extension must have a test status of PASSED before it can be published. For more information, see Publishing extensions to make them available for public use in the CloudFormation CLI User Guide.
    */
   testType(params: CloudFormation.Types.TestTypeInput, callback?: (err: AWSError, data: CloudFormation.Types.TestTypeOutput) => void): Request<CloudFormation.Types.TestTypeOutput, AWSError>;
   /**
-   * Tests a registered extension to make sure it meets all necessary requirements for being published in the CloudFormation registry.   For resource types, this includes passing all contracts tests defined for the type.   For modules, this includes determining if the module's model meets all necessary requirements.   For more information, see Testing your public extension prior to publishing in the CloudFormation CLI User Guide. If you don't specify a version, CloudFormation uses the default version of the extension in your account and Region for testing. To perform testing, CloudFormation assumes the execution role specified when the type was registered. For more information, see RegisterType. Once you've initiated testing on an extension using TestType, you can pass the returned TypeVersionArn into DescribeType to monitor the current test status and test status description for the extension. An extension must have a test status of PASSED before it can be published. For more information, see Publishing extensions to make them available for public use in the CloudFormation CLI User Guide.
+   * Tests a registered extension to make sure it meets all necessary requirements for being published in the CloudFormation registry.   For resource types, this includes passing all contracts tests defined for the type.   For modules, this includes determining if the module's model meets all necessary requirements.   For more information, see Testing your public extension prior to publishing in the CloudFormation CLI User Guide. If you don't specify a version, CloudFormation uses the default version of the extension in your account and Region for testing. To perform testing, CloudFormation assumes the execution role specified when the type was registered. For more information, see  RegisterType . Once you've initiated testing on an extension using TestType, you can pass the returned TypeVersionArn into  DescribeType  to monitor the current test status and test status description for the extension. An extension must have a test status of PASSED before it can be published. For more information, see Publishing extensions to make them available for public use in the CloudFormation CLI User Guide.
    */
   testType(callback?: (err: AWSError, data: CloudFormation.Types.TestTypeOutput) => void): Request<CloudFormation.Types.TestTypeOutput, AWSError>;
   /**
@@ -629,11 +629,11 @@ declare class CloudFormation extends Service {
    */
   updateStack(callback?: (err: AWSError, data: CloudFormation.Types.UpdateStackOutput) => void): Request<CloudFormation.Types.UpdateStackOutput, AWSError>;
   /**
-   * Updates the parameter values for stack instances for the specified accounts, within the specified Amazon Web Services Regions. A stack instance refers to a stack in a specific account and Region. You can only update stack instances in Amazon Web Services Regions and accounts where they already exist; to create additional stack instances, use CreateStackInstances. During stack set updates, any parameters overridden for a stack instance aren't updated, but retain their overridden value. You can only update the parameter values that are specified in the stack set; to add or delete a parameter itself, use UpdateStackSet to update the stack set template. If you add a parameter to a template, before you can override the parameter value specified in the stack set you must first use UpdateStackSet to update all stack instances with the updated template and parameter value specified in the stack set. Once a stack instance has been updated with the new parameter, you can then override the parameter value using UpdateStackInstances.
+   * Updates the parameter values for stack instances for the specified accounts, within the specified Amazon Web Services Regions. A stack instance refers to a stack in a specific account and Region. You can only update stack instances in Amazon Web Services Regions and accounts where they already exist; to create additional stack instances, use  CreateStackInstances . During stack set updates, any parameters overridden for a stack instance aren't updated, but retain their overridden value. You can only update the parameter values that are specified in the stack set; to add or delete a parameter itself, use  UpdateStackSet  to update the stack set template. If you add a parameter to a template, before you can override the parameter value specified in the stack set you must first use  UpdateStackSet  to update all stack instances with the updated template and parameter value specified in the stack set. Once a stack instance has been updated with the new parameter, you can then override the parameter value using UpdateStackInstances.
    */
   updateStackInstances(params: CloudFormation.Types.UpdateStackInstancesInput, callback?: (err: AWSError, data: CloudFormation.Types.UpdateStackInstancesOutput) => void): Request<CloudFormation.Types.UpdateStackInstancesOutput, AWSError>;
   /**
-   * Updates the parameter values for stack instances for the specified accounts, within the specified Amazon Web Services Regions. A stack instance refers to a stack in a specific account and Region. You can only update stack instances in Amazon Web Services Regions and accounts where they already exist; to create additional stack instances, use CreateStackInstances. During stack set updates, any parameters overridden for a stack instance aren't updated, but retain their overridden value. You can only update the parameter values that are specified in the stack set; to add or delete a parameter itself, use UpdateStackSet to update the stack set template. If you add a parameter to a template, before you can override the parameter value specified in the stack set you must first use UpdateStackSet to update all stack instances with the updated template and parameter value specified in the stack set. Once a stack instance has been updated with the new parameter, you can then override the parameter value using UpdateStackInstances.
+   * Updates the parameter values for stack instances for the specified accounts, within the specified Amazon Web Services Regions. A stack instance refers to a stack in a specific account and Region. You can only update stack instances in Amazon Web Services Regions and accounts where they already exist; to create additional stack instances, use  CreateStackInstances . During stack set updates, any parameters overridden for a stack instance aren't updated, but retain their overridden value. You can only update the parameter values that are specified in the stack set; to add or delete a parameter itself, use  UpdateStackSet  to update the stack set template. If you add a parameter to a template, before you can override the parameter value specified in the stack set you must first use  UpdateStackSet  to update all stack instances with the updated template and parameter value specified in the stack set. Once a stack instance has been updated with the new parameter, you can then override the parameter value using UpdateStackInstances.
    */
   updateStackInstances(callback?: (err: AWSError, data: CloudFormation.Types.UpdateStackInstancesOutput) => void): Request<CloudFormation.Types.UpdateStackInstancesOutput, AWSError>;
   /**
@@ -1040,7 +1040,7 @@ declare namespace CloudFormation {
      */
     TemplateBody?: TemplateBody;
     /**
-     * The location of the file that contains the revised template. The URL must point to a template (max size: 460,800 bytes) that's located in an Amazon S3 bucket or a Systems Manager document. CloudFormation generates the change set by comparing this template with the stack that you specified. Conditional: You must specify only TemplateBody or TemplateURL.
+     * The location of the file that contains the revised template. The URL must point to a template (max size: 460,800 bytes) that's located in an Amazon S3 bucket or a Systems Manager document. CloudFormation generates the change set by comparing this template with the stack that you specified. The location for an Amazon S3 bucket must start with https://. Conditional: You must specify only TemplateBody or TemplateURL.
      */
     TemplateURL?: TemplateURL;
     /**
@@ -1052,7 +1052,7 @@ declare namespace CloudFormation {
      */
     Parameters?: Parameters;
     /**
-     * In some cases, you must explicitly acknowledge that your stack template contains certain capabilities in order for CloudFormation to create the stack.    CAPABILITY_IAM and CAPABILITY_NAMED_IAM  Some stack templates might include resources that can affect permissions in your Amazon Web Services account; for example, by creating new Identity and Access Management (IAM) users. For those stacks, you must explicitly acknowledge this by specifying one of these capabilities. The following IAM resources require you to specify either the CAPABILITY_IAM or CAPABILITY_NAMED_IAM capability.   If you have IAM resources, you can specify either capability.   If you have IAM resources with custom names, you must specify CAPABILITY_NAMED_IAM.   If you don't specify either of these capabilities, CloudFormation returns an InsufficientCapabilities error.   If your stack template contains these resources, we suggest that you review all permissions associated with them and edit their permissions if necessary.     AWS::IAM::AccessKey      AWS::IAM::Group     AWS::IAM::InstanceProfile      AWS::IAM::Policy      AWS::IAM::Role      AWS::IAM::User     AWS::IAM::UserToGroupAddition    For more information, see Acknowledging IAM resources in CloudFormation templates.    CAPABILITY_AUTO_EXPAND  Some template contain macros. Macros perform custom processing on templates; this can include simple actions like find-and-replace operations, all the way to extensive transformations of entire templates. Because of this, users typically create a change set from the processed template, so that they can review the changes resulting from the macros before actually creating the stack. If your stack template contains one or more macros, and you choose to create a stack directly from the processed template, without first reviewing the resulting changes in a change set, you must acknowledge this capability. This includes the AWS::Include and AWS::Serverless transforms, which are macros hosted by CloudFormation.  This capacity doesn't apply to creating change sets, and specifying it when creating change sets has no effect. If you want to create a stack from a stack template that contains macros and nested stacks, you must create or update the stack directly from the template using the CreateStack or UpdateStack action, and specifying this capability.  For more information about macros, see Using CloudFormation macros to perform custom processing on templates.    Only one of the Capabilities and ResourceType parameters can be specified. 
+     * In some cases, you must explicitly acknowledge that your stack template contains certain capabilities in order for CloudFormation to create the stack.    CAPABILITY_IAM and CAPABILITY_NAMED_IAM  Some stack templates might include resources that can affect permissions in your Amazon Web Services account; for example, by creating new Identity and Access Management (IAM) users. For those stacks, you must explicitly acknowledge this by specifying one of these capabilities. The following IAM resources require you to specify either the CAPABILITY_IAM or CAPABILITY_NAMED_IAM capability.   If you have IAM resources, you can specify either capability.   If you have IAM resources with custom names, you must specify CAPABILITY_NAMED_IAM.   If you don't specify either of these capabilities, CloudFormation returns an InsufficientCapabilities error.   If your stack template contains these resources, we suggest that you review all permissions associated with them and edit their permissions if necessary.     AWS::IAM::AccessKey       AWS::IAM::Group       AWS::IAM::InstanceProfile       AWS::IAM::Policy       AWS::IAM::Role       AWS::IAM::User       AWS::IAM::UserToGroupAddition     For more information, see Acknowledging IAM resources in CloudFormation templates.    CAPABILITY_AUTO_EXPAND  Some template contain macros. Macros perform custom processing on templates; this can include simple actions like find-and-replace operations, all the way to extensive transformations of entire templates. Because of this, users typically create a change set from the processed template, so that they can review the changes resulting from the macros before actually creating the stack. If your stack template contains one or more macros, and you choose to create a stack directly from the processed template, without first reviewing the resulting changes in a change set, you must acknowledge this capability. This includes the  AWS::Include  and  AWS::Serverless  transforms, which are macros hosted by CloudFormation.  This capacity doesn't apply to creating change sets, and specifying it when creating change sets has no effect. If you want to create a stack from a stack template that contains macros and nested stacks, you must create or update the stack directly from the template using the CreateStack or UpdateStack action, and specifying this capability.  For more information about macros, see Using CloudFormation macros to perform custom processing on templates.    Only one of the Capabilities and ResourceType parameters can be specified. 
      */
     Capabilities?: Capabilities;
     /**
@@ -1100,7 +1100,7 @@ declare namespace CloudFormation {
      */
     IncludeNestedStacks?: IncludeNestedStacks;
     /**
-     * Determines what action will be taken if stack creation fails. If this parameter is specified, the DisableRollback parameter to the ExecuteChangeSet API operation must not be specified. This must be one of these values:    DELETE - Deletes the change set if the stack creation fails. This is only valid when the ChangeSetType parameter is set to CREATE. If the deletion of the stack fails, the status of the stack is DELETE_FAILED.    DO_NOTHING - if the stack creation fails, do nothing. This is equivalent to specifying true for the DisableRollback parameter to the ExecuteChangeSet API operation.    ROLLBACK - if the stack creation fails, roll back the stack. This is equivalent to specifying false for the DisableRollback parameter to the ExecuteChangeSet API operation.   For nested stacks, when the OnStackFailure parameter is set to DELETE for the change set for the parent stack, any failure in a child stack will cause the parent stack creation to fail and all stacks to be deleted.
+     * Determines what action will be taken if stack creation fails. If this parameter is specified, the DisableRollback parameter to the  ExecuteChangeSet  API operation must not be specified. This must be one of these values:    DELETE - Deletes the change set if the stack creation fails. This is only valid when the ChangeSetType parameter is set to CREATE. If the deletion of the stack fails, the status of the stack is DELETE_FAILED.    DO_NOTHING - if the stack creation fails, do nothing. This is equivalent to specifying true for the DisableRollback parameter to the  ExecuteChangeSet  API operation.    ROLLBACK - if the stack creation fails, roll back the stack. This is equivalent to specifying false for the DisableRollback parameter to the  ExecuteChangeSet  API operation.   For nested stacks, when the OnStackFailure parameter is set to DELETE for the change set for the parent stack, any failure in a child stack will cause the parent stack creation to fail and all stacks to be deleted.
      */
     OnStackFailure?: OnStackFailure;
     /**
@@ -1152,11 +1152,11 @@ declare namespace CloudFormation {
      */
     TemplateBody?: TemplateBody;
     /**
-     * Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that's located in an Amazon S3 bucket or a Systems Manager document. For more information, go to the Template anatomy in the CloudFormation User Guide. Conditional: You must specify either the TemplateBody or the TemplateURL parameter, but not both.
+     * Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that's located in an Amazon S3 bucket or a Systems Manager document. For more information, go to the Template anatomy in the CloudFormation User Guide. The location for an Amazon S3 bucket must start with https://. Conditional: You must specify either the TemplateBody or the TemplateURL parameter, but not both.
      */
     TemplateURL?: TemplateURL;
     /**
-     * A list of Parameter structures that specify input parameters for the stack. For more information, see the Parameter data type.
+     * A list of Parameter structures that specify input parameters for the stack. For more information, see the  Parameter  data type.
      */
     Parameters?: Parameters;
     /**
@@ -1176,7 +1176,7 @@ declare namespace CloudFormation {
      */
     NotificationARNs?: NotificationARNs;
     /**
-     * In some cases, you must explicitly acknowledge that your stack template contains certain capabilities in order for CloudFormation to create the stack.    CAPABILITY_IAM and CAPABILITY_NAMED_IAM  Some stack templates might include resources that can affect permissions in your Amazon Web Services account; for example, by creating new Identity and Access Management (IAM) users. For those stacks, you must explicitly acknowledge this by specifying one of these capabilities. The following IAM resources require you to specify either the CAPABILITY_IAM or CAPABILITY_NAMED_IAM capability.   If you have IAM resources, you can specify either capability.   If you have IAM resources with custom names, you must specify CAPABILITY_NAMED_IAM.   If you don't specify either of these capabilities, CloudFormation returns an InsufficientCapabilities error.   If your stack template contains these resources, we recommend that you review all permissions associated with them and edit their permissions if necessary.     AWS::IAM::AccessKey      AWS::IAM::Group     AWS::IAM::InstanceProfile      AWS::IAM::Policy      AWS::IAM::Role      AWS::IAM::User     AWS::IAM::UserToGroupAddition    For more information, see Acknowledging IAM Resources in CloudFormation Templates.    CAPABILITY_AUTO_EXPAND  Some template contain macros. Macros perform custom processing on templates; this can include simple actions like find-and-replace operations, all the way to extensive transformations of entire templates. Because of this, users typically create a change set from the processed template, so that they can review the changes resulting from the macros before actually creating the stack. If your stack template contains one or more macros, and you choose to create a stack directly from the processed template, without first reviewing the resulting changes in a change set, you must acknowledge this capability. This includes the AWS::Include and AWS::Serverless transforms, which are macros hosted by CloudFormation. If you want to create a stack from a stack template that contains macros and nested stacks, you must create the stack directly from the template using this capability.  You should only create stacks directly from a stack template that contains macros if you know what processing the macro performs. Each macro relies on an underlying Lambda service function for processing stack templates. Be aware that the Lambda function owner can update the function operation without CloudFormation being notified.  For more information, see Using CloudFormation macros to perform custom processing on templates.    Only one of the Capabilities and ResourceType parameters can be specified. 
+     * In some cases, you must explicitly acknowledge that your stack template contains certain capabilities in order for CloudFormation to create the stack.    CAPABILITY_IAM and CAPABILITY_NAMED_IAM  Some stack templates might include resources that can affect permissions in your Amazon Web Services account; for example, by creating new Identity and Access Management (IAM) users. For those stacks, you must explicitly acknowledge this by specifying one of these capabilities. The following IAM resources require you to specify either the CAPABILITY_IAM or CAPABILITY_NAMED_IAM capability.   If you have IAM resources, you can specify either capability.   If you have IAM resources with custom names, you must specify CAPABILITY_NAMED_IAM.   If you don't specify either of these capabilities, CloudFormation returns an InsufficientCapabilities error.   If your stack template contains these resources, we recommend that you review all permissions associated with them and edit their permissions if necessary.     AWS::IAM::AccessKey AWS::IAM::AccessKey      AWS::IAM::Group       AWS::IAM::InstanceProfile       AWS::IAM::Policy       AWS::IAM::Role       AWS::IAM::User       AWS::IAM::UserToGroupAddition     For more information, see Acknowledging IAM Resources in CloudFormation Templates.    CAPABILITY_AUTO_EXPAND  Some template contain macros. Macros perform custom processing on templates; this can include simple actions like find-and-replace operations, all the way to extensive transformations of entire templates. Because of this, users typically create a change set from the processed template, so that they can review the changes resulting from the macros before actually creating the stack. If your stack template contains one or more macros, and you choose to create a stack directly from the processed template, without first reviewing the resulting changes in a change set, you must acknowledge this capability. This includes the  AWS::Include  and  AWS::Serverless  transforms, which are macros hosted by CloudFormation. If you want to create a stack from a stack template that contains macros and nested stacks, you must create the stack directly from the template using this capability.  You should only create stacks directly from a stack template that contains macros if you know what processing the macro performs. Each macro relies on an underlying Lambda service function for processing stack templates. Be aware that the Lambda function owner can update the function operation without CloudFormation being notified.  For more information, see Using CloudFormation macros to perform custom processing on templates.    Only one of the Capabilities and ResourceType parameters can be specified. 
      */
     Capabilities?: Capabilities;
     /**
@@ -1196,7 +1196,7 @@ declare namespace CloudFormation {
      */
     StackPolicyBody?: StackPolicyBody;
     /**
-     * Location of a file containing the stack policy. The URL must point to a policy (maximum size: 16 KB) located in an S3 bucket in the same Region as the stack. You can specify either the StackPolicyBody or the StackPolicyURL parameter, but not both.
+     * Location of a file containing the stack policy. The URL must point to a policy (maximum size: 16 KB) located in an S3 bucket in the same Region as the stack. The location for an Amazon S3 bucket must start with https://. You can specify either the StackPolicyBody or the StackPolicyURL parameter, but not both.
      */
     StackPolicyURL?: StackPolicyURL;
     /**
@@ -1234,7 +1234,7 @@ declare namespace CloudFormation {
      */
     Regions: RegionList;
     /**
-     * A list of stack set parameters whose values you want to override in the selected stack instances. Any overridden parameter values will be applied to all stack instances in the specified accounts and Amazon Web Services Regions. When specifying parameters and their values, be aware of how CloudFormation sets parameter values during stack instance operations:   To override the current value for a parameter, include the parameter and specify its value.   To leave an overridden parameter set to its present value, include the parameter and specify UsePreviousValue as true. (You can't specify both a value and set UsePreviousValue to true.)   To set an overridden parameter back to the value specified in the stack set, specify a parameter list but don't include the parameter in the list.   To leave all parameters set to their present values, don't specify this property at all.   During stack set updates, any parameter values overridden for a stack instance aren't updated, but retain their overridden value. You can only override the parameter values that are specified in the stack set; to add or delete a parameter itself, use UpdateStackSet to update the stack set template.
+     * A list of stack set parameters whose values you want to override in the selected stack instances. Any overridden parameter values will be applied to all stack instances in the specified accounts and Amazon Web Services Regions. When specifying parameters and their values, be aware of how CloudFormation sets parameter values during stack instance operations:   To override the current value for a parameter, include the parameter and specify its value.   To leave an overridden parameter set to its present value, include the parameter and specify UsePreviousValue as true. (You can't specify both a value and set UsePreviousValue to true.)   To set an overridden parameter back to the value specified in the stack set, specify a parameter list but don't include the parameter in the list.   To leave all parameters set to their present values, don't specify this property at all.   During stack set updates, any parameter values overridden for a stack instance aren't updated, but retain their overridden value. You can only override the parameter values that are specified in the stack set; to add or delete a parameter itself, use  UpdateStackSet  to update the stack set template.
      */
     ParameterOverrides?: Parameters;
     /**
@@ -1288,7 +1288,7 @@ declare namespace CloudFormation {
      */
     Parameters?: Parameters;
     /**
-     * In some cases, you must explicitly acknowledge that your stack set template contains certain capabilities in order for CloudFormation to create the stack set and related stack instances.    CAPABILITY_IAM and CAPABILITY_NAMED_IAM  Some stack templates might include resources that can affect permissions in your Amazon Web Services account; for example, by creating new Identity and Access Management (IAM) users. For those stack sets, you must explicitly acknowledge this by specifying one of these capabilities. The following IAM resources require you to specify either the CAPABILITY_IAM or CAPABILITY_NAMED_IAM capability.   If you have IAM resources, you can specify either capability.   If you have IAM resources with custom names, you must specify CAPABILITY_NAMED_IAM.   If you don't specify either of these capabilities, CloudFormation returns an InsufficientCapabilities error.   If your stack template contains these resources, we recommend that you review all permissions associated with them and edit their permissions if necessary.     AWS::IAM::AccessKey      AWS::IAM::Group     AWS::IAM::InstanceProfile      AWS::IAM::Policy      AWS::IAM::Role      AWS::IAM::User     AWS::IAM::UserToGroupAddition    For more information, see Acknowledging IAM Resources in CloudFormation Templates.    CAPABILITY_AUTO_EXPAND  Some templates reference macros. If your stack set template references one or more macros, you must create the stack set directly from the processed template, without first reviewing the resulting changes in a change set. To create the stack set directly, you must acknowledge this capability. For more information, see Using CloudFormation Macros to Perform Custom Processing on Templates.  Stack sets with service-managed permissions don't currently support the use of macros in templates. (This includes the AWS::Include and AWS::Serverless transforms, which are macros hosted by CloudFormation.) Even if you specify this capability for a stack set with service-managed permissions, if you reference a macro in your template the stack set operation will fail.   
+     * In some cases, you must explicitly acknowledge that your stack set template contains certain capabilities in order for CloudFormation to create the stack set and related stack instances.    CAPABILITY_IAM and CAPABILITY_NAMED_IAM  Some stack templates might include resources that can affect permissions in your Amazon Web Services account; for example, by creating new Identity and Access Management (IAM) users. For those stack sets, you must explicitly acknowledge this by specifying one of these capabilities. The following IAM resources require you to specify either the CAPABILITY_IAM or CAPABILITY_NAMED_IAM capability.   If you have IAM resources, you can specify either capability.   If you have IAM resources with custom names, you must specify CAPABILITY_NAMED_IAM.   If you don't specify either of these capabilities, CloudFormation returns an InsufficientCapabilities error.   If your stack template contains these resources, we recommend that you review all permissions associated with them and edit their permissions if necessary.     AWS::IAM::AccessKey       AWS::IAM::Group       AWS::IAM::InstanceProfile       AWS::IAM::Policy       AWS::IAM::Role       AWS::IAM::User       AWS::IAM::UserToGroupAddition     For more information, see Acknowledging IAM Resources in CloudFormation Templates.    CAPABILITY_AUTO_EXPAND  Some templates reference macros. If your stack set template references one or more macros, you must create the stack set directly from the processed template, without first reviewing the resulting changes in a change set. To create the stack set directly, you must acknowledge this capability. For more information, see Using CloudFormation Macros to Perform Custom Processing on Templates.  Stack sets with service-managed permissions don't currently support the use of macros in templates. (This includes the  AWS::Include  and  AWS::Serverless  transforms, which are macros hosted by CloudFormation.) Even if you specify this capability for a stack set with service-managed permissions, if you reference a macro in your template the stack set operation will fail.   
      */
     Capabilities?: Capabilities;
     /**
@@ -1579,7 +1579,7 @@ declare namespace CloudFormation {
      */
     Description?: Description;
     /**
-     * A list of Parameter structures that describes the input parameters and their values used to create the change set. For more information, see the Parameter data type.
+     * A list of Parameter structures that describes the input parameters and their values used to create the change set. For more information, see the  Parameter  data type.
      */
     Parameters?: Parameters;
     /**
@@ -1635,7 +1635,7 @@ declare namespace CloudFormation {
      */
     RootChangeSetId?: ChangeSetId;
     /**
-     * Determines what action will be taken if stack creation fails. When this parameter is specified, the DisableRollback parameter to the ExecuteChangeSet API operation must not be specified. This must be one of these values:    DELETE - Deletes the change set if the stack creation fails. This is only valid when the ChangeSetType parameter is set to CREATE. If the deletion of the stack fails, the status of the stack is DELETE_FAILED.    DO_NOTHING - if the stack creation fails, do nothing. This is equivalent to specifying true for the DisableRollback parameter to the ExecuteChangeSet API operation.    ROLLBACK - if the stack creation fails, roll back the stack. This is equivalent to specifying false for the DisableRollback parameter to the ExecuteChangeSet API operation.  
+     * Determines what action will be taken if stack creation fails. When this parameter is specified, the DisableRollback parameter to the  ExecuteChangeSet  API operation must not be specified. This must be one of these values:    DELETE - Deletes the change set if the stack creation fails. This is only valid when the ChangeSetType parameter is set to CREATE. If the deletion of the stack fails, the status of the stack is DELETE_FAILED.    DO_NOTHING - if the stack creation fails, do nothing. This is equivalent to specifying true for the DisableRollback parameter to the  ExecuteChangeSet  API operation.    ROLLBACK - if the stack creation fails, roll back the stack. This is equivalent to specifying false for the DisableRollback parameter to the  ExecuteChangeSet  API operation.  
      */
     OnStackFailure?: OnStackFailure;
     /**
@@ -2011,11 +2011,11 @@ declare namespace CloudFormation {
      */
     Type?: RegistryType;
     /**
-     * The name of the extension. If the extension is a public third-party type you have activated with a type name alias, CloudFormation returns the type name alias. For more information, see ActivateType.
+     * The name of the extension. If the extension is a public third-party type you have activated with a type name alias, CloudFormation returns the type name alias. For more information, see  ActivateType .
      */
     TypeName?: TypeName;
     /**
-     * The ID of the default version of the extension. The default version is used when the extension version isn't specified. This applies only to private extensions you have registered in your account. For public extensions, both those provided by Amazon Web Services and published by third parties, CloudFormation returns null. For more information, see RegisterType. To set the default version of an extension, use SetTypeDefaultVersion.
+     * The ID of the default version of the extension. The default version is used when the extension version isn't specified. This applies only to private extensions you have registered in your account. For public extensions, both those provided by Amazon Web Services and published by third parties, CloudFormation returns null. For more information, see  RegisterType . To set the default version of an extension, use SetTypeDefaultVersion.
      */
     DefaultVersionId?: TypeVersionId;
     /**
@@ -2047,7 +2047,7 @@ declare namespace CloudFormation {
      */
     DeprecatedStatus?: DeprecatedStatus;
     /**
-     * Contains logging configuration information for private extensions. This applies only to private extensions you have registered in your account. For public extensions, both those provided by Amazon Web Services and published by third parties, CloudFormation returns null. For more information, see RegisterType.
+     * Contains logging configuration information for private extensions. This applies only to private extensions you have registered in your account. For public extensions, both those provided by Amazon Web Services and published by third parties, CloudFormation returns null. For more information, see  RegisterType .
      */
     LoggingConfig?: LoggingConfig;
     /**
@@ -2055,7 +2055,7 @@ declare namespace CloudFormation {
      */
     RequiredActivatedTypes?: RequiredActivatedTypes;
     /**
-     * The Amazon Resource Name (ARN) of the IAM execution role used to register the extension. This applies only to private extensions you have registered in your account. For more information, see RegisterType. If the registered extension calls any Amazon Web Services APIs, you must create an  IAM execution role  that includes the necessary permissions to call those Amazon Web Services APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your extension with the appropriate credentials.
+     * The Amazon Resource Name (ARN) of the IAM execution role used to register the extension. This applies only to private extensions you have registered in your account. For more information, see  RegisterType . If the registered extension calls any Amazon Web Services APIs, you must create an  IAM execution role  that includes the necessary permissions to call those Amazon Web Services APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your extension with the appropriate credentials.
      */
     ExecutionRoleArn?: RoleArn;
     /**
@@ -2071,7 +2071,7 @@ declare namespace CloudFormation {
      */
     DocumentationUrl?: OptionalSecureUrl;
     /**
-     * When the specified extension version was registered. This applies only to:   Private extensions you have registered in your account. For more information, see RegisterType.   Public extensions you have activated in your account with auto-update specified. For more information, see ActivateType.  
+     * When the specified extension version was registered. This applies only to:   Private extensions you have registered in your account. For more information, see  RegisterType .   Public extensions you have activated in your account with auto-update specified. For more information, see  ActivateType .  
      */
     LastUpdated?: Timestamp;
     /**
@@ -2079,7 +2079,7 @@ declare namespace CloudFormation {
      */
     TimeCreated?: Timestamp;
     /**
-     * A JSON string that represent the current configuration data for the extension in this account and Region. To set the configuration data for an extension, use SetTypeConfiguration. For more information, see Configuring extensions at the account level in the CloudFormation User Guide.
+     * A JSON string that represent the current configuration data for the extension in this account and Region. To set the configuration data for an extension, use  SetTypeConfiguration . For more information, see Configuring extensions at the account level in the CloudFormation User Guide.
      */
     ConfigurationSchema?: ConfigurationSchema;
     /**
@@ -2136,6 +2136,7 @@ declare namespace CloudFormation {
     TypeVersionArn?: TypeArn;
   }
   export type Description = string;
+  export type DetailedStatus = "CONFIGURATION_COMPLETE"|"VALIDATION_FAILED"|string;
   export interface DetectStackDriftInput {
     /**
      * The name of the stack for which you want to detect drift.
@@ -2204,7 +2205,7 @@ declare namespace CloudFormation {
      */
     TemplateBody?: TemplateBody;
     /**
-     * Location of file containing the template body. The URL must point to a template that's located in an Amazon S3 bucket or a Systems Manager document. For more information, go to Template Anatomy in the CloudFormation User Guide. Conditional: You must pass TemplateURL or TemplateBody. If both are passed, only TemplateBody is used.
+     * Location of file containing the template body. The URL must point to a template that's located in an Amazon S3 bucket or a Systems Manager document. For more information, go to Template Anatomy in the CloudFormation User Guide. The location for an Amazon S3 bucket must start with https://. Conditional: You must pass TemplateURL or TemplateBody. If both are passed, only TemplateBody is used.
      */
     TemplateURL?: TemplateURL;
     /**
@@ -2234,7 +2235,7 @@ declare namespace CloudFormation {
      */
     ClientRequestToken?: ClientRequestToken;
     /**
-     * Preserves the state of previously provisioned resources when an operation fails. This parameter can't be specified when the OnStackFailure parameter to the CreateChangeSet API operation was specified.    True - if the stack creation fails, do nothing. This is equivalent to specifying DO_NOTHING for the OnStackFailure parameter to the CreateChangeSet API operation.    False - if the stack creation fails, roll back the stack. This is equivalent to specifying ROLLBACK for the OnStackFailure parameter to the CreateChangeSet API operation.   Default: True 
+     * Preserves the state of previously provisioned resources when an operation fails. This parameter can't be specified when the OnStackFailure parameter to the  CreateChangeSet  API operation was specified.    True - if the stack creation fails, do nothing. This is equivalent to specifying DO_NOTHING for the OnStackFailure parameter to the  CreateChangeSet  API operation.    False - if the stack creation fails, roll back the stack. This is equivalent to specifying ROLLBACK for the OnStackFailure parameter to the  CreateChangeSet  API operation.   Default: True 
      */
     DisableRollback?: DisableRollback;
     /**
@@ -2334,7 +2335,7 @@ declare namespace CloudFormation {
      */
     TemplateBody?: TemplateBody;
     /**
-     * Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that's located in an Amazon S3 bucket or a Systems Manager document. For more information about templates, see Template anatomy in the CloudFormation User Guide. Conditional: You must specify only one of the following parameters: StackName, StackSetName, TemplateBody, or TemplateURL.
+     * Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that's located in an Amazon S3 bucket or a Systems Manager document. For more information about templates, see Template anatomy in the CloudFormation User Guide. The location for an Amazon S3 bucket must start with https://. Conditional: You must specify only one of the following parameters: StackName, StackSetName, TemplateBody, or TemplateURL.
      */
     TemplateURL?: TemplateURL;
     /**
@@ -3488,7 +3489,7 @@ declare namespace CloudFormation {
      */
     RollbackTriggers?: RollbackTriggers;
     /**
-     * The amount of time, in minutes, during which CloudFormation should monitor all the rollback triggers after the stack creation or update operation deploys all necessary resources. The default is 0 minutes. If you specify a monitoring period but don't specify any rollback triggers, CloudFormation still waits the specified period of time before cleaning up old resources after update operations. You can use this monitoring period to perform any manual stack validation desired, and manually cancel the stack creation or update (using CancelUpdateStack, for example) as necessary. If you specify 0 for this parameter, CloudFormation still monitors the specified rollback triggers during stack creation and update operations. Then, for update operations, it begins disposing of old resources immediately once the operation completes.
+     * The amount of time, in minutes, during which CloudFormation should monitor all the rollback triggers after the stack creation or update operation deploys all necessary resources. The default is 0 minutes. If you specify a monitoring period but don't specify any rollback triggers, CloudFormation still waits the specified period of time before cleaning up old resources after update operations. You can use this monitoring period to perform any manual stack validation desired, and manually cancel the stack creation or update (using  CancelUpdateStack , for example) as necessary. If you specify 0 for this parameter, CloudFormation still monitors the specified rollback triggers during stack creation and update operations. Then, for update operations, it begins disposing of old resources immediately once the operation completes.
      */
     MonitoringTimeInMinutes?: MonitoringTimeInMinutes;
   }
@@ -3522,7 +3523,7 @@ declare namespace CloudFormation {
      */
     Arn: Arn;
     /**
-     * The resource type of the rollback trigger. Specify either AWS::CloudWatch::Alarm or AWS::CloudWatch::CompositeAlarm resource types.
+     * The resource type of the rollback trigger. Specify either  AWS::CloudWatch::Alarm  or  AWS::CloudWatch::CompositeAlarm  resource types.
      */
     Type: Type;
   }
@@ -3531,7 +3532,7 @@ declare namespace CloudFormation {
   export type S3Url = string;
   export interface ScannedResource {
     /**
-     * The type of the resource, such as AWS::DynamoDB::Table. For the list of supported resources, see IaC generator supported resource types In the CloudFormation User Guide 
+     * The type of the resource, such as AWS::DynamoDB::Table. For the list of supported resources, see Resource type support In the CloudFormation User Guide 
      */
     ResourceType?: ResourceType;
     /**
@@ -3545,7 +3546,7 @@ declare namespace CloudFormation {
   }
   export interface ScannedResourceIdentifier {
     /**
-     * The type of the resource, such as AWS::DynamoDB::Table. For the list of supported resources, see IaC generator supported resource types In the CloudFormation User Guide 
+     * The type of the resource, such as AWS::DynamoDB::Table. For the list of supported resources, see IaC generator supported resource types In the CloudFormation User Guide.
      */
     ResourceType: ResourceType;
     /**
@@ -3566,17 +3567,17 @@ declare namespace CloudFormation {
      */
     StackPolicyBody?: StackPolicyBody;
     /**
-     * Location of a file containing the stack policy. The URL must point to a policy (maximum size: 16 KB) located in an Amazon S3 bucket in the same Amazon Web Services Region as the stack. You can specify either the StackPolicyBody or the StackPolicyURL parameter, but not both.
+     * Location of a file containing the stack policy. The URL must point to a policy (maximum size: 16 KB) located in an Amazon S3 bucket in the same Amazon Web Services Region as the stack. The location for an Amazon S3 bucket must start with https://. You can specify either the StackPolicyBody or the StackPolicyURL parameter, but not both.
      */
     StackPolicyURL?: StackPolicyURL;
   }
   export interface SetTypeConfigurationInput {
     /**
-     * The Amazon Resource Name (ARN) for the extension, in this account and Region. For public extensions, this will be the ARN assigned when you activate the type in this account and Region. For private extensions, this will be the ARN assigned when you register the type in this account and Region. Do not include the extension versions suffix at the end of the ARN. You can set the configuration for an extension, but not for a specific extension version.
+     * The Amazon Resource Name (ARN) for the extension, in this account and Region. For public extensions, this will be the ARN assigned when you call the  ActivateType  API operation in this account and Region. For private extensions, this will be the ARN assigned when you call the  RegisterType  API operation in this account and Region. Do not include the extension versions suffix at the end of the ARN. You can set the configuration for an extension, but not for a specific extension version.
      */
     TypeArn?: TypeArn;
     /**
-     * The configuration data for the extension, in this account and Region. The configuration data must be formatted as JSON, and validate against the schema returned in the ConfigurationSchema response element of DescribeType. For more information, see Defining account-level configuration data for an extension in the CloudFormation CLI User Guide.
+     * The configuration data for the extension, in this account and Region. The configuration data must be formatted as JSON, and validate against the schema returned in the ConfigurationSchema response element of  DescribeType . For more information, see Defining account-level configuration data for an extension in the CloudFormation CLI User Guide.
      */
     Configuration: TypeConfiguration;
     /**
@@ -3729,6 +3730,10 @@ declare namespace CloudFormation {
      * When set to true, newly created resources are deleted when the operation rolls back. This includes newly created resources marked with a deletion policy of Retain. Default: false 
      */
     RetainExceptOnCreate?: RetainExceptOnCreate;
+    /**
+     * The detailed status of the resource or stack. If CONFIGURATION_COMPLETE is present, the resource or resource configuration phase has completed and the stabilization of the resources is in progress. The stack sets CONFIGURATION_COMPLETE when all of the resources in the stack have reached that event. For more information, see CloudFormation stack deployment in the CloudFormation User Guide.
+     */
+    DetailedStatus?: DetailedStatus;
   }
   export type StackDriftDetectionId = string;
   export type StackDriftDetectionStatus = "DETECTION_IN_PROGRESS"|"DETECTION_FAILED"|"DETECTION_COMPLETE"|string;
@@ -3819,6 +3824,10 @@ declare namespace CloudFormation {
      * Specify the hook failure mode for non-compliant resources in the followings ways.    FAIL Stops provisioning resources.    WARN Allows provisioning to continue with a warning message.  
      */
     HookFailureMode?: HookFailureMode;
+    /**
+     * An optional field containing information about the detailed status of the stack event.    CONFIGURATION_COMPLETE - all of the resources in the stack have reached that event. For more information, see CloudFormation stack deployment in the CloudFormation User Guide.      VALIDATION_FAILED - template validation failed because of invalid properties in the template. The ResourceStatusReason field shows what properties are defined incorrectly.  
+     */
+    DetailedStatus?: DetailedStatus;
   }
   export type StackEvents = StackEvent[];
   export type StackId = string;
@@ -3846,7 +3855,7 @@ declare namespace CloudFormation {
      */
     ParameterOverrides?: Parameters;
     /**
-     * The status of the stack instance, in terms of its synchronization with its associated stack set.    INOPERABLE: A DeleteStackInstances operation has failed and left the stack in an unstable state. Stacks in this state are excluded from further UpdateStackSet operations. You might need to perform a DeleteStackInstances operation, with RetainStacks set to true, to delete the stack instance, and then delete the stack manually.    OUTDATED: The stack isn't currently up to date with the stack set because:   The associated stack failed during a CreateStackSet or UpdateStackSet operation.   The stack was part of a CreateStackSet or UpdateStackSet operation that failed or was stopped before the stack was created or updated.      CURRENT: The stack is currently up to date with the stack set.  
+     * The status of the stack instance, in terms of its synchronization with its associated stack set.    INOPERABLE: A DeleteStackInstances operation has failed and left the stack in an unstable state. Stacks in this state are excluded from further UpdateStackSet operations. You might need to perform a DeleteStackInstances operation, with RetainStacks set to true, to delete the stack instance, and then delete the stack manually. INOPERABLE can be returned here when the cause is a failed import. If it's due to a failed import, the operation can be retried once the failures are fixed. To see if this is due to a failed import, look at the DetailedStatus member in the StackInstanceSummary member that is a peer to this Status member.    OUTDATED: The stack isn't currently up to date with the stack set because:   The associated stack failed during a CreateStackSet or UpdateStackSet operation.   The stack was part of a CreateStackSet or UpdateStackSet operation that failed or was stopped before the stack was created or updated.      CURRENT: The stack is currently up to date with the stack set.  
      */
     Status?: StackInstanceStatus;
     /**
@@ -3858,7 +3867,7 @@ declare namespace CloudFormation {
      */
     StatusReason?: Reason;
     /**
-     * [Service-managed permissions] The organization root ID or organizational unit (OU) IDs that you specified for DeploymentTargets.
+     * [Service-managed permissions] The organization root ID or organizational unit (OU) IDs that you specified for  DeploymentTargets .
      */
     OrganizationalUnitId?: OrganizationalUnitId;
     /**
@@ -3876,11 +3885,11 @@ declare namespace CloudFormation {
   }
   export interface StackInstanceComprehensiveStatus {
     /**
-     *    CANCELLED: The operation in the specified account and Region has been canceled. This is either because a user has stopped the stack set operation, or because the failure tolerance of the stack set operation has been exceeded.    FAILED: The operation in the specified account and Region failed. If the stack set operation fails in enough accounts within a Region, the failure tolerance for the stack set operation as a whole might be exceeded.    INOPERABLE: A DeleteStackInstances operation has failed and left the stack in an unstable state. Stacks in this state are excluded from further UpdateStackSet operations. You might need to perform a DeleteStackInstances operation, with RetainStacks set to true, to delete the stack instance, and then delete the stack manually.    PENDING: The operation in the specified account and Region has yet to start.    RUNNING: The operation in the specified account and Region is currently in progress.    SKIPPED_SUSPENDED_ACCOUNT: The operation in the specified account and Region has been skipped because the account was suspended at the time of the operation.    SUCCEEDED: The operation in the specified account and Region completed successfully.  
+     *    CANCELLED: The operation in the specified account and Region has been canceled. This is either because a user has stopped the stack set operation, or because the failure tolerance of the stack set operation has been exceeded.    FAILED: The operation in the specified account and Region failed. If the stack set operation fails in enough accounts within a Region, the failure tolerance for the stack set operation as a whole might be exceeded.    FAILED_IMPORT: The import of the stack instance in the specified account and Region failed and left the stack in an unstable state. Once the issues causing the failure are fixed, the import operation can be retried. If enough stack set operations fail in enough accounts within a Region, the failure tolerance for the stack set operation as a whole might be exceeded.    INOPERABLE: A DeleteStackInstances operation has failed and left the stack in an unstable state. Stacks in this state are excluded from further UpdateStackSet operations. You might need to perform a DeleteStackInstances operation, with RetainStacks set to true, to delete the stack instance, and then delete the stack manually.    PENDING: The operation in the specified account and Region has yet to start.    RUNNING: The operation in the specified account and Region is currently in progress.    SKIPPED_SUSPENDED_ACCOUNT: The operation in the specified account and Region has been skipped because the account was suspended at the time of the operation.    SUCCEEDED: The operation in the specified account and Region completed successfully.  
      */
     DetailedStatus?: StackInstanceDetailedStatus;
   }
-  export type StackInstanceDetailedStatus = "PENDING"|"RUNNING"|"SUCCEEDED"|"FAILED"|"CANCELLED"|"INOPERABLE"|"SKIPPED_SUSPENDED_ACCOUNT"|string;
+  export type StackInstanceDetailedStatus = "PENDING"|"RUNNING"|"SUCCEEDED"|"FAILED"|"CANCELLED"|"INOPERABLE"|"SKIPPED_SUSPENDED_ACCOUNT"|"FAILED_IMPORT"|string;
   export interface StackInstanceFilter {
     /**
      * The type of filter to apply.
@@ -3949,7 +3958,7 @@ declare namespace CloudFormation {
      */
     StackId?: StackId;
     /**
-     * The status of the stack instance, in terms of its synchronization with its associated stack set.    INOPERABLE: A DeleteStackInstances operation has failed and left the stack in an unstable state. Stacks in this state are excluded from further UpdateStackSet operations. You might need to perform a DeleteStackInstances operation, with RetainStacks set to true, to delete the stack instance, and then delete the stack manually.    OUTDATED: The stack isn't currently up to date with the stack set because:   The associated stack failed during a CreateStackSet or UpdateStackSet operation.   The stack was part of a CreateStackSet or UpdateStackSet operation that failed or was stopped before the stack was created or updated.      CURRENT: The stack is currently up to date with the stack set.  
+     * The status of the stack instance, in terms of its synchronization with its associated stack set.    INOPERABLE: A DeleteStackInstances operation has failed and left the stack in an unstable state. Stacks in this state are excluded from further UpdateStackSet operations. You might need to perform a DeleteStackInstances operation, with RetainStacks set to true, to delete the stack instance, and then delete the stack manually. INOPERABLE can be returned here when the cause is a failed import. If it's due to a failed import, the operation can be retried once the failures are fixed. To see if this is due to a failed import, call the DescribeStackInstance API operation, look at the DetailedStatus member returned in the StackInstanceSummary member.    OUTDATED: The stack isn't currently up to date with the stack set because:   The associated stack failed during a CreateStackSet or UpdateStackSet operation.   The stack was part of a CreateStackSet or UpdateStackSet operation that failed or was stopped before the stack was created or updated.      CURRENT: The stack is currently up to date with the stack set.  
      */
     Status?: StackInstanceStatus;
     /**
@@ -3961,7 +3970,7 @@ declare namespace CloudFormation {
      */
     StackInstanceStatus?: StackInstanceComprehensiveStatus;
     /**
-     * [Service-managed permissions] The organization root ID or organizational unit (OU) IDs that you specified for DeploymentTargets.
+     * [Service-managed permissions] The organization root ID or organizational unit (OU) IDs that you specified for  DeploymentTargets .
      */
     OrganizationalUnitId?: OrganizationalUnitId;
     /**
@@ -4242,7 +4251,7 @@ declare namespace CloudFormation {
      */
     PermissionModel?: PermissionModels;
     /**
-     * [Service-managed permissions] The organization root ID or organizational unit (OU) IDs that you specified for DeploymentTargets.
+     * [Service-managed permissions] The organization root ID or organizational unit (OU) IDs that you specified for  DeploymentTargets .
      */
     OrganizationalUnitIds?: OrganizationalUnitIdList;
     /**
@@ -4407,7 +4416,7 @@ declare namespace CloudFormation {
      */
     AccountGateResult?: AccountGateResult;
     /**
-     * [Service-managed permissions] The organization root ID or organizational unit (OU) IDs that you specified for DeploymentTargets.
+     * [Service-managed permissions] The organization root ID or organizational unit (OU) IDs that you specified for  DeploymentTargets .
      */
     OrganizationalUnitId?: OrganizationalUnitId;
   }
@@ -4740,7 +4749,7 @@ declare namespace CloudFormation {
      */
     LastUpdated?: Timestamp;
     /**
-     * The Amazon Resource Name (ARN) for the extension, in this account and Region. For public extensions, this will be the ARN assigned when you activate the type in this account and Region. For private extensions, this will be the ARN assigned when you register the type in this account and Region.
+     * The Amazon Resource Name (ARN) for the extension, in this account and Region. For public extensions, this will be the ARN assigned when you call the  ActivateType  API operation in this account and Region. For private extensions, this will be the ARN assigned when you call the  RegisterType  API operation in this account and Region.
      */
     TypeArn?: TypeArn;
     /**
@@ -4755,7 +4764,7 @@ declare namespace CloudFormation {
   export type TypeConfigurationDetailsList = TypeConfigurationDetails[];
   export interface TypeConfigurationIdentifier {
     /**
-     * The Amazon Resource Name (ARN) for the extension, in this account and Region. For public extensions, this will be the ARN assigned when you activate the type in this account and Region. For private extensions, this will be the ARN assigned when you register the type in this account and Region.
+     * The Amazon Resource Name (ARN) for the extension, in this account and Region. For public extensions, this will be the ARN assigned when you call the  ActivateType  API operation in this account and Region. For private extensions, this will be the ARN assigned when you call the  RegisterType  API operation in this account and Region.
      */
     TypeArn?: TypeArn;
     /**
@@ -4801,11 +4810,11 @@ declare namespace CloudFormation {
      */
     Type?: RegistryType;
     /**
-     * The name of the extension. If you specified a TypeNameAlias when you activate this extension in your account and Region, CloudFormation considers that alias as the type name.
+     * The name of the extension. If you specified a TypeNameAlias when you call the  ActivateType  API operation in your account and Region, CloudFormation considers that alias as the type name.
      */
     TypeName?: TypeName;
     /**
-     * The ID of the default version of the extension. The default version is used when the extension version isn't specified. This applies only to private extensions you have registered in your account. For public extensions, both those provided by Amazon and published by third parties, CloudFormation returns null. For more information, see RegisterType. To set the default version of an extension, use SetTypeDefaultVersion.
+     * The ID of the default version of the extension. The default version is used when the extension version isn't specified. This applies only to private extensions you have registered in your account. For public extensions, both those provided by Amazon and published by third parties, CloudFormation returns null. For more information, see  RegisterType . To set the default version of an extension, use SetTypeDefaultVersion.
      */
     DefaultVersionId?: TypeVersionId;
     /**
@@ -4813,7 +4822,7 @@ declare namespace CloudFormation {
      */
     TypeArn?: TypeArn;
     /**
-     * When the specified extension version was registered. This applies only to:   Private extensions you have registered in your account. For more information, see RegisterType.   Public extensions you have activated in your account with auto-update specified. For more information, see ActivateType.   For all other extension types, CloudFormation returns null.
+     * When the specified extension version was registered. This applies only to:   Private extensions you have registered in your account. For more information, see  RegisterType .   Public extensions you have activated in your account with auto-update specified. For more information, see  ActivateType .   For all other extension types, CloudFormation returns null.
      */
     LastUpdated?: Timestamp;
     /**
@@ -4930,7 +4939,7 @@ declare namespace CloudFormation {
      */
     TemplateBody?: TemplateBody;
     /**
-     * Location of file containing the template body. The URL must point to a template that's located in an Amazon S3 bucket or a Systems Manager document. For more information, go to Template Anatomy in the CloudFormation User Guide. Conditional: You must specify only one of the following parameters: TemplateBody, TemplateURL, or set the UsePreviousTemplate to true.
+     * Location of file containing the template body. The URL must point to a template that's located in an Amazon S3 bucket or a Systems Manager document. For more information, go to Template Anatomy in the CloudFormation User Guide. The location for an Amazon S3 bucket must start with https://. Conditional: You must specify only one of the following parameters: TemplateBody, TemplateURL, or set the UsePreviousTemplate to true.
      */
     TemplateURL?: TemplateURL;
     /**
@@ -4942,15 +4951,15 @@ declare namespace CloudFormation {
      */
     StackPolicyDuringUpdateBody?: StackPolicyDuringUpdateBody;
     /**
-     * Location of a file containing the temporary overriding stack policy. The URL must point to a policy (max size: 16KB) located in an S3 bucket in the same Region as the stack. You can specify either the StackPolicyDuringUpdateBody or the StackPolicyDuringUpdateURL parameter, but not both. If you want to update protected resources, specify a temporary overriding stack policy during this update. If you don't specify a stack policy, the current policy that is associated with the stack will be used.
+     * Location of a file containing the temporary overriding stack policy. The URL must point to a policy (max size: 16KB) located in an S3 bucket in the same Region as the stack. The location for an Amazon S3 bucket must start with https://. You can specify either the StackPolicyDuringUpdateBody or the StackPolicyDuringUpdateURL parameter, but not both. If you want to update protected resources, specify a temporary overriding stack policy during this update. If you don't specify a stack policy, the current policy that is associated with the stack will be used.
      */
     StackPolicyDuringUpdateURL?: StackPolicyDuringUpdateURL;
     /**
-     * A list of Parameter structures that specify input parameters for the stack. For more information, see the Parameter data type.
+     * A list of Parameter structures that specify input parameters for the stack. For more information, see the  Parameter  data type.
      */
     Parameters?: Parameters;
     /**
-     * In some cases, you must explicitly acknowledge that your stack template contains certain capabilities in order for CloudFormation to update the stack.    CAPABILITY_IAM and CAPABILITY_NAMED_IAM  Some stack templates might include resources that can affect permissions in your Amazon Web Services account; for example, by creating new Identity and Access Management (IAM) users. For those stacks, you must explicitly acknowledge this by specifying one of these capabilities. The following IAM resources require you to specify either the CAPABILITY_IAM or CAPABILITY_NAMED_IAM capability.   If you have IAM resources, you can specify either capability.   If you have IAM resources with custom names, you must specify CAPABILITY_NAMED_IAM.   If you don't specify either of these capabilities, CloudFormation returns an InsufficientCapabilities error.   If your stack template contains these resources, we suggest that you review all permissions associated with them and edit their permissions if necessary.     AWS::IAM::AccessKey      AWS::IAM::Group     AWS::IAM::InstanceProfile      AWS::IAM::Policy      AWS::IAM::Role      AWS::IAM::User     AWS::IAM::UserToGroupAddition    For more information, see Acknowledging IAM Resources in CloudFormation Templates.    CAPABILITY_AUTO_EXPAND  Some template contain macros. Macros perform custom processing on templates; this can include simple actions like find-and-replace operations, all the way to extensive transformations of entire templates. Because of this, users typically create a change set from the processed template, so that they can review the changes resulting from the macros before actually updating the stack. If your stack template contains one or more macros, and you choose to update a stack directly from the processed template, without first reviewing the resulting changes in a change set, you must acknowledge this capability. This includes the AWS::Include and AWS::Serverless transforms, which are macros hosted by CloudFormation. If you want to update a stack from a stack template that contains macros and nested stacks, you must update the stack directly from the template using this capability.  You should only update stacks directly from a stack template that contains macros if you know what processing the macro performs. Each macro relies on an underlying Lambda service function for processing stack templates. Be aware that the Lambda function owner can update the function operation without CloudFormation being notified.  For more information, see Using CloudFormation Macros to Perform Custom Processing on Templates.    Only one of the Capabilities and ResourceType parameters can be specified. 
+     * In some cases, you must explicitly acknowledge that your stack template contains certain capabilities in order for CloudFormation to update the stack.    CAPABILITY_IAM and CAPABILITY_NAMED_IAM  Some stack templates might include resources that can affect permissions in your Amazon Web Services account; for example, by creating new Identity and Access Management (IAM) users. For those stacks, you must explicitly acknowledge this by specifying one of these capabilities. The following IAM resources require you to specify either the CAPABILITY_IAM or CAPABILITY_NAMED_IAM capability.   If you have IAM resources, you can specify either capability.   If you have IAM resources with custom names, you must specify CAPABILITY_NAMED_IAM.   If you don't specify either of these capabilities, CloudFormation returns an InsufficientCapabilities error.   If your stack template contains these resources, we suggest that you review all permissions associated with them and edit their permissions if necessary.     AWS::IAM::AccessKey       AWS::IAM::Group       AWS::IAM::InstanceProfile        AWS::IAM::Policy       AWS::IAM::Role       AWS::IAM::User       AWS::IAM::UserToGroupAddition     For more information, see Acknowledging IAM Resources in CloudFormation Templates.    CAPABILITY_AUTO_EXPAND  Some template contain macros. Macros perform custom processing on templates; this can include simple actions like find-and-replace operations, all the way to extensive transformations of entire templates. Because of this, users typically create a change set from the processed template, so that they can review the changes resulting from the macros before actually updating the stack. If your stack template contains one or more macros, and you choose to update a stack directly from the processed template, without first reviewing the resulting changes in a change set, you must acknowledge this capability. This includes the  AWS::Include  and  AWS::Serverless  transforms, which are macros hosted by CloudFormation. If you want to update a stack from a stack template that contains macros and nested stacks, you must update the stack directly from the template using this capability.  You should only update stacks directly from a stack template that contains macros if you know what processing the macro performs. Each macro relies on an underlying Lambda service function for processing stack templates. Be aware that the Lambda function owner can update the function operation without CloudFormation being notified.  For more information, see Using CloudFormation Macros to Perform Custom Processing on Templates.    Only one of the Capabilities and ResourceType parameters can be specified. 
      */
     Capabilities?: Capabilities;
     /**
@@ -4970,7 +4979,7 @@ declare namespace CloudFormation {
      */
     StackPolicyBody?: StackPolicyBody;
     /**
-     * Location of a file containing the updated stack policy. The URL must point to a policy (max size: 16KB) located in an S3 bucket in the same Region as the stack. You can specify either the StackPolicyBody or the StackPolicyURL parameter, but not both. You might update the stack policy, for example, in order to protect a new resource that you created during a stack update. If you don't specify a stack policy, the current policy that is associated with the stack is unchanged.
+     * Location of a file containing the updated stack policy. The URL must point to a policy (max size: 16KB) located in an S3 bucket in the same Region as the stack. The location for an Amazon S3 bucket must start with https://. You can specify either the StackPolicyBody or the StackPolicyURL parameter, but not both. You might update the stack policy, for example, in order to protect a new resource that you created during a stack update. If you don't specify a stack policy, the current policy that is associated with the stack is unchanged.
      */
     StackPolicyURL?: StackPolicyURL;
     /**
@@ -5012,7 +5021,7 @@ declare namespace CloudFormation {
      */
     Regions: RegionList;
     /**
-     * A list of input parameters whose values you want to update for the specified stack instances. Any overridden parameter values will be applied to all stack instances in the specified accounts and Amazon Web Services Regions. When specifying parameters and their values, be aware of how CloudFormation sets parameter values during stack instance update operations:   To override the current value for a parameter, include the parameter and specify its value.   To leave an overridden parameter set to its present value, include the parameter and specify UsePreviousValue as true. (You can't specify both a value and set UsePreviousValue to true.)   To set an overridden parameter back to the value specified in the stack set, specify a parameter list but don't include the parameter in the list.   To leave all parameters set to their present values, don't specify this property at all.   During stack set updates, any parameter values overridden for a stack instance aren't updated, but retain their overridden value. You can only override the parameter values that are specified in the stack set; to add or delete a parameter itself, use UpdateStackSet to update the stack set template. If you add a parameter to a template, before you can override the parameter value specified in the stack set you must first use UpdateStackSet to update all stack instances with the updated template and parameter value specified in the stack set. Once a stack instance has been updated with the new parameter, you can then override the parameter value using UpdateStackInstances.
+     * A list of input parameters whose values you want to update for the specified stack instances. Any overridden parameter values will be applied to all stack instances in the specified accounts and Amazon Web Services Regions. When specifying parameters and their values, be aware of how CloudFormation sets parameter values during stack instance update operations:   To override the current value for a parameter, include the parameter and specify its value.   To leave an overridden parameter set to its present value, include the parameter and specify UsePreviousValue as true. (You can't specify both a value and set UsePreviousValue to true.)   To set an overridden parameter back to the value specified in the stack set, specify a parameter list but don't include the parameter in the list.   To leave all parameters set to their present values, don't specify this property at all.   During stack set updates, any parameter values overridden for a stack instance aren't updated, but retain their overridden value. You can only override the parameter values that are specified in the stack set; to add or delete a parameter itself, use UpdateStackSet to update the stack set template. If you add a parameter to a template, before you can override the parameter value specified in the stack set you must first use  UpdateStackSet  to update all stack instances with the updated template and parameter value specified in the stack set. Once a stack instance has been updated with the new parameter, you can then override the parameter value using UpdateStackInstances.
      */
     ParameterOverrides?: Parameters;
     /**
@@ -5066,7 +5075,7 @@ declare namespace CloudFormation {
      */
     Parameters?: Parameters;
     /**
-     * In some cases, you must explicitly acknowledge that your stack template contains certain capabilities in order for CloudFormation to update the stack set and its associated stack instances.    CAPABILITY_IAM and CAPABILITY_NAMED_IAM  Some stack templates might include resources that can affect permissions in your Amazon Web Services account; for example, by creating new Identity and Access Management (IAM) users. For those stacks sets, you must explicitly acknowledge this by specifying one of these capabilities. The following IAM resources require you to specify either the CAPABILITY_IAM or CAPABILITY_NAMED_IAM capability.   If you have IAM resources, you can specify either capability.   If you have IAM resources with custom names, you must specify CAPABILITY_NAMED_IAM.   If you don't specify either of these capabilities, CloudFormation returns an InsufficientCapabilities error.   If your stack template contains these resources, we recommend that you review all permissions associated with them and edit their permissions if necessary.     AWS::IAM::AccessKey      AWS::IAM::Group      AWS::IAM::InstanceProfile      AWS::IAM::Policy      AWS::IAM::Role      AWS::IAM::User      AWS::IAM::UserToGroupAddition    For more information, see Acknowledging IAM Resources in CloudFormation Templates.    CAPABILITY_AUTO_EXPAND  Some templates reference macros. If your stack set template references one or more macros, you must update the stack set directly from the processed template, without first reviewing the resulting changes in a change set. To update the stack set directly, you must acknowledge this capability. For more information, see Using CloudFormation Macros to Perform Custom Processing on Templates.  Stack sets with service-managed permissions do not currently support the use of macros in templates. (This includes the AWS::Include and AWS::Serverless transforms, which are macros hosted by CloudFormation.) Even if you specify this capability for a stack set with service-managed permissions, if you reference a macro in your template the stack set operation will fail.   
+     * In some cases, you must explicitly acknowledge that your stack template contains certain capabilities in order for CloudFormation to update the stack set and its associated stack instances.    CAPABILITY_IAM and CAPABILITY_NAMED_IAM  Some stack templates might include resources that can affect permissions in your Amazon Web Services account; for example, by creating new Identity and Access Management (IAM) users. For those stacks sets, you must explicitly acknowledge this by specifying one of these capabilities. The following IAM resources require you to specify either the CAPABILITY_IAM or CAPABILITY_NAMED_IAM capability.   If you have IAM resources, you can specify either capability.   If you have IAM resources with custom names, you must specify CAPABILITY_NAMED_IAM.   If you don't specify either of these capabilities, CloudFormation returns an InsufficientCapabilities error.   If your stack template contains these resources, we recommend that you review all permissions associated with them and edit their permissions if necessary.     AWS::IAM::AccessKey       AWS::IAM::Group       AWS::IAM::InstanceProfile       AWS::IAM::Policy       AWS::IAM::Role       AWS::IAM::User       AWS::IAM::UserToGroupAddition     For more information, see Acknowledging IAM Resources in CloudFormation Templates.    CAPABILITY_AUTO_EXPAND  Some templates reference macros. If your stack set template references one or more macros, you must update the stack set directly from the processed template, without first reviewing the resulting changes in a change set. To update the stack set directly, you must acknowledge this capability. For more information, see Using CloudFormation Macros to Perform Custom Processing on Templates.  Stack sets with service-managed permissions do not currently support the use of macros in templates. (This includes the  AWS::Include  and  AWS::Serverless  transforms, which are macros hosted by CloudFormation.) Even if you specify this capability for a stack set with service-managed permissions, if you reference a macro in your template the stack set operation will fail.   
      */
     Capabilities?: Capabilities;
     /**
@@ -5149,7 +5158,7 @@ declare namespace CloudFormation {
      */
     TemplateBody?: TemplateBody;
     /**
-     * Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket or a Systems Manager document. For more information, go to Template Anatomy in the CloudFormation User Guide. Conditional: You must pass TemplateURL or TemplateBody. If both are passed, only TemplateBody is used.
+     * Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket or a Systems Manager document. For more information, go to Template Anatomy in the CloudFormation User Guide. The location for an Amazon S3 bucket must start with https://. Conditional: You must pass TemplateURL or TemplateBody. If both are passed, only TemplateBody is used.
      */
     TemplateURL?: TemplateURL;
   }

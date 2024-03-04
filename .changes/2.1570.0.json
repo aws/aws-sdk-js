@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudFormation",
+        "description": "Add DetailedStatus field to DescribeStackEvents and DescribeStacks APIs"
+    },
+    {
+        "type": "feature",
+        "category": "FSx",
+        "description": "Added support for creating FSx for NetApp ONTAP file systems with up to 12 HA pairs, delivering up to 72 GB/s of read throughput and 12 GB/s of write throughput."
+    },
+    {
+        "type": "feature",
+        "category": "Organizations",
+        "description": "Documentation update for AWS Organizations"
+    }
+]

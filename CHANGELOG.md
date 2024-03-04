@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1569.0-->
+<!--LATEST=2.1570.0-->
 <!--ENTRYINSERT-->
+
+## 2.1570.0
+* feature: CloudFormation: Add DetailedStatus field to DescribeStackEvents and DescribeStacks APIs
+* feature: FSx: Added support for creating FSx for NetApp ONTAP file systems with up to 12 HA pairs, delivering up to 72 GB/s of read throughput and 12 GB/s of write throughput.
+* feature: Organizations: Documentation update for AWS Organizations
 
 ## 2.1569.0
 * feature: DocDBElastic: Launched Elastic Clusters Readable Secondaries, Start/Stop, Configurable Shard Instance count, Automatic Backups and Snapshot Copying

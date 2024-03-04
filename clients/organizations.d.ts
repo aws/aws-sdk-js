@@ -1466,7 +1466,7 @@ declare namespace Organizations {
   export type OrganizationId = string;
   export interface OrganizationalUnit {
     /**
-     * The unique identifier (ID) associated with this OU. The regex pattern for an organizational unit ID string requires "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that contains the OU). This string is followed by a second "-" dash and from 8 to 32 additional lowercase letters or digits.
+     * The unique identifier (ID) associated with this OU. The ID is unique to the organization only. The regex pattern for an organizational unit ID string requires "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that contains the OU). This string is followed by a second "-" dash and from 8 to 32 additional lowercase letters or digits.
      */
     Id?: OrganizationalUnitId;
     /**
@@ -1628,7 +1628,7 @@ declare namespace Organizations {
   export type RoleName = string;
   export interface Root {
     /**
-     * The unique identifier (ID) for the root. The regex pattern for a root ID string requires "r-" followed by from 4 to 32 lowercase letters or digits.
+     * The unique identifier (ID) for the root. The ID is unique to the organization only. The regex pattern for a root ID string requires "r-" followed by from 4 to 32 lowercase letters or digits.
      */
     Id?: RootId;
     /**

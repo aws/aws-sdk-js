@@ -228,11 +228,11 @@ declare class FSx extends Service {
    */
   describeFileSystems(callback?: (err: AWSError, data: FSx.Types.DescribeFileSystemsResponse) => void): Request<FSx.Types.DescribeFileSystemsResponse, AWSError>;
   /**
-   * Indicates whether participant accounts in your organization can create Amazon FSx for NetApp ONTAP Multi-AZ file systems in subnets that are shared by a virtual private cloud (VPC) owner. For more information, see the Amazon FSx for NetApp ONTAP User Guide.
+   * Indicates whether participant accounts in your organization can create Amazon FSx for NetApp ONTAP Multi-AZ file systems in subnets that are shared by a virtual private cloud (VPC) owner. For more information, see Creating FSx for ONTAP file systems in shared subnets. 
    */
   describeSharedVpcConfiguration(params: FSx.Types.DescribeSharedVpcConfigurationRequest, callback?: (err: AWSError, data: FSx.Types.DescribeSharedVpcConfigurationResponse) => void): Request<FSx.Types.DescribeSharedVpcConfigurationResponse, AWSError>;
   /**
-   * Indicates whether participant accounts in your organization can create Amazon FSx for NetApp ONTAP Multi-AZ file systems in subnets that are shared by a virtual private cloud (VPC) owner. For more information, see the Amazon FSx for NetApp ONTAP User Guide.
+   * Indicates whether participant accounts in your organization can create Amazon FSx for NetApp ONTAP Multi-AZ file systems in subnets that are shared by a virtual private cloud (VPC) owner. For more information, see Creating FSx for ONTAP file systems in shared subnets. 
    */
   describeSharedVpcConfiguration(callback?: (err: AWSError, data: FSx.Types.DescribeSharedVpcConfigurationResponse) => void): Request<FSx.Types.DescribeSharedVpcConfigurationResponse, AWSError>;
   /**
@@ -934,7 +934,7 @@ declare namespace FSx {
      */
     PreferredSubnetId?: SubnetId;
     /**
-     * (Multi-AZ only) Specifies the route tables in which Amazon FSx creates the rules for routing traffic to the correct file server. You should specify all virtual private cloud (VPC) route tables associated with the subnets in which your clients are located. By default, Amazon FSx selects your VPC's default route table.
+     * (Multi-AZ only) Specifies the route tables in which Amazon FSx creates the rules for routing traffic to the correct file server. You should specify all virtual private cloud (VPC) route tables associated with the subnets in which your clients are located. By default, Amazon FSx selects your VPC's default route table.  Amazon FSx manages these route tables for Multi-AZ file systems using tag-based authentication. These route tables are tagged with Key: AmazonFSx; Value: ManagedByAmazonFSx. When creating FSx for ONTAP Multi-AZ file systems using CloudFormation we recommend that you add the Key: AmazonFSx; Value: ManagedByAmazonFSx tag manually. 
      */
     RouteTableIds?: RouteTableIds;
     /**
@@ -943,11 +943,11 @@ declare namespace FSx {
     ThroughputCapacity?: MegabytesPerSecond;
     WeeklyMaintenanceStartTime?: WeeklyTime;
     /**
-     * Specifies how many high-availability (HA) pairs the file system will have. The default value is 1. The value of this property affects the values of StorageCapacity, Iops, and ThroughputCapacity. For more information, see High-availability (HA) pairs in the FSx for ONTAP user guide. Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of HAPairs is less than 1 or greater than 6.   The value of HAPairs is greater than 1 and the value of DeploymentType is SINGLE_AZ_1 or MULTI_AZ_1.  
+     * Specifies how many high-availability (HA) pairs of file servers will power your file system. Scale-up file systems are powered by 1 HA pair. The default value is 1. FSx for ONTAP scale-out file systems are powered by up to 12 HA pairs. The value of this property affects the values of StorageCapacity, Iops, and ThroughputCapacity. For more information, see High-availability (HA) pairs in the FSx for ONTAP user guide. Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of HAPairs is less than 1 or greater than 12.   The value of HAPairs is greater than 1 and the value of DeploymentType is SINGLE_AZ_1 or MULTI_AZ_1.  
      */
     HAPairs?: HAPairs;
     /**
-     * Use to choose the throughput capacity per HA pair, rather than the total throughput for the file system.  This field and ThroughputCapacity cannot be defined in the same API call, but one is required. This field and ThroughputCapacity are the same for file systems with one HA pair.   For SINGLE_AZ_1 and MULTI_AZ_1, valid values are 128, 256, 512, 1024, 2048, or 4096 MBps.   For SINGLE_AZ_2, valid values are 3072 or 6144 MBps.   Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the same value for file systems with one HA pair.   The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity / ThroughputCapacityPerHAPair is a valid HA pair (a value between 2 and 6).   The value of ThroughputCapacityPerHAPair is not a valid value.  
+     * Use to choose the throughput capacity per HA pair, rather than the total throughput for the file system.  You can define either the ThroughputCapacityPerHAPair or the ThroughputCapacity when creating a file system, but not both. This field and ThroughputCapacity are the same for scale-up file systems powered by one HA pair.   For SINGLE_AZ_1 and MULTI_AZ_1 file systems, valid values are 128, 256, 512, 1024, 2048, or 4096 MBps.   For SINGLE_AZ_2 file systems, valid values are 3072 or 6144 MBps.   Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the same value for file systems with one HA pair.   The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity / ThroughputCapacityPerHAPair is a valid HA pair (a value between 2 and 12).   The value of ThroughputCapacityPerHAPair is not a valid value.  
      */
     ThroughputCapacityPerHAPair?: ThroughputCapacityPerHAPair;
   }
@@ -999,7 +999,7 @@ declare namespace FSx {
      */
     FileSystemType: FileSystemType;
     /**
-     * Sets the storage capacity of the file system that you're creating, in gibibytes (GiB).  FSx for Lustre file systems - The amount of storage capacity that you can configure depends on the value that you set for StorageType and the Lustre DeploymentType, as follows:   For SCRATCH_2, PERSISTENT_2 and PERSISTENT_1 deployment types using SSD storage type, the valid values are 1200 GiB, 2400 GiB, and increments of 2400 GiB.   For PERSISTENT_1 HDD file systems, valid values are increments of 6000 GiB for 12 MB/s/TiB file systems and increments of 1800 GiB for 40 MB/s/TiB file systems.   For SCRATCH_1 deployment type, valid values are 1200 GiB, 2400 GiB, and increments of 3600 GiB.    FSx for ONTAP file systems - The amount of storage capacity that you can configure depends on the value of the HAPairs property. The minimum value is calculated as 1,024 * HAPairs and the maxium is calculated as 524,288 * HAPairs..  FSx for OpenZFS file systems - The amount of storage capacity that you can configure is from 64 GiB up to 524,288 GiB (512 TiB).  FSx for Windows File Server file systems - The amount of storage capacity that you can configure depends on the value that you set for StorageType as follows:   For SSD storage, valid values are 32 GiB-65,536 GiB (64 TiB).   For HDD storage, valid values are 2000 GiB-65,536 GiB (64 TiB).  
+     * Sets the storage capacity of the file system that you're creating, in gibibytes (GiB).  FSx for Lustre file systems - The amount of storage capacity that you can configure depends on the value that you set for StorageType and the Lustre DeploymentType, as follows:   For SCRATCH_2, PERSISTENT_2 and PERSISTENT_1 deployment types using SSD storage type, the valid values are 1200 GiB, 2400 GiB, and increments of 2400 GiB.   For PERSISTENT_1 HDD file systems, valid values are increments of 6000 GiB for 12 MB/s/TiB file systems and increments of 1800 GiB for 40 MB/s/TiB file systems.   For SCRATCH_1 deployment type, valid values are 1200 GiB, 2400 GiB, and increments of 3600 GiB.    FSx for ONTAP file systems - The amount of storage capacity that you can configure depends on the value of the HAPairs property. The minimum value is calculated as 1,024 * HAPairs and the maximum is calculated as 524,288 * HAPairs.   FSx for OpenZFS file systems - The amount of storage capacity that you can configure is from 64 GiB up to 524,288 GiB (512 TiB).  FSx for Windows File Server file systems - The amount of storage capacity that you can configure depends on the value that you set for StorageType as follows:   For SSD storage, valid values are 32 GiB-65,536 GiB (64 TiB).   For HDD storage, valid values are 2000 GiB-65,536 GiB (64 TiB).  
      */
     StorageCapacity: StorageCapacity;
     /**
@@ -1011,7 +1011,7 @@ declare namespace FSx {
      */
     SubnetIds: SubnetIds;
     /**
-     * A list of IDs specifying the security groups to apply to all network interfaces created for file system access. This list isn't returned in later requests to describe the file system.
+     * A list of IDs specifying the security groups to apply to all network interfaces created for file system access. This list isn't returned in later requests to describe the file system.  You must specify a security group if you are creating a Multi-AZ FSx for ONTAP file system in a VPC subnet that has been shared with you. 
      */
     SecurityGroupIds?: SecurityGroupIds;
     /**
@@ -1093,15 +1093,15 @@ declare namespace FSx {
      */
     JunctionPath?: JunctionPath;
     /**
-     * Specifies the security style for the volume. If a volume's security style is not specified, it is automatically set to the root volume's security style. The security style determines the type of permissions that FSx for ONTAP uses to control data access. For more information, see Volume security style in the Amazon FSx for NetApp ONTAP User Guide. Specify one of the following values:    UNIX if the file system is managed by a UNIX administrator, the majority of users are NFS clients, and an application accessing the data uses a UNIX user as the service account.     NTFS if the file system is managed by a Windows administrator, the majority of users are SMB clients, and an application accessing the data uses a Windows user as the service account.    MIXED if the file system is managed by both UNIX and Windows administrators and users consist of both NFS and SMB clients.  
+     * Specifies the security style for the volume. If a volume's security style is not specified, it is automatically set to the root volume's security style. The security style determines the type of permissions that FSx for ONTAP uses to control data access. For more information, see Volume security style in the Amazon FSx for NetApp ONTAP User Guide. Specify one of the following values:    UNIX if the file system is managed by a UNIX administrator, the majority of users are NFS clients, and an application accessing the data uses a UNIX user as the service account.     NTFS if the file system is managed by a Windows administrator, the majority of users are SMB clients, and an application accessing the data uses a Windows user as the service account.    MIXED This is an advanced setting. For more information, see the topic What the security styles and their effects are in the NetApp Documentation Center.   For more information, see Volume security style in the FSx for ONTAP User Guide.
      */
     SecurityStyle?: SecurityStyle;
     /**
-     * Specifies the size of the volume, in megabytes (MB), that you are creating.
+     * Use SizeInBytes instead. Specifies the size of the volume, in megabytes (MB), that you are creating.
      */
     SizeInMegabytes?: VolumeCapacity;
     /**
-     * Set to true to enable deduplication, compression, and compaction storage efficiency features on the volume, or set to false to disable them. This parameter is required.
+     * Set to true to enable deduplication, compression, and compaction storage efficiency features on the volume, or set to false to disable them.  StorageEfficiencyEnabled is required when creating a RW volume (OntapVolumeType set to RW).
      */
     StorageEfficiencyEnabled?: Flag;
     /**
@@ -1126,7 +1126,7 @@ declare namespace FSx {
      */
     SnaplockConfiguration?: CreateSnaplockConfiguration;
     /**
-     * Use to specify the style of an ONTAP volume. For more information about FlexVols and FlexGroups, see Volume types in Amazon FSx for NetApp ONTAP User Guide.
+     * Use to specify the style of an ONTAP volume. FSx for ONTAP offers two styles of volumes that you can use for different purposes, FlexVol and FlexGroup volumes. For more information, see Volume styles in the Amazon FSx for NetApp ONTAP User Guide.
      */
     VolumeStyle?: VolumeStyle;
     /**
@@ -1134,7 +1134,7 @@ declare namespace FSx {
      */
     AggregateConfiguration?: CreateAggregateConfiguration;
     /**
-     * The configured size of the volume, in bytes.
+     * Specifies the configured size of the volume, in bytes.
      */
     SizeInBytes?: VolumeCapacityBytes;
   }
@@ -1183,7 +1183,7 @@ declare namespace FSx {
      */
     NfsExports?: OpenZFSNfsExports;
     /**
-     * An object specifying how much storage users or groups can use on the volume.
+     * Configures how much storage users and groups can use on the volume.
      */
     UserAndGroupQuotas?: OpenZFSUserAndGroupQuotas;
   }
@@ -1233,7 +1233,7 @@ declare namespace FSx {
   }
   export interface CreateStorageVirtualMachineRequest {
     /**
-     * Describes the self-managed Microsoft Active Directory to which you want to join the SVM. Joining an Active Directory provides user authentication and access control for SMB clients, including Microsoft Windows and macOS client accessing the file system.
+     * Describes the self-managed Microsoft Active Directory to which you want to join the SVM. Joining an Active Directory provides user authentication and access control for SMB clients, including Microsoft Windows and macOS clients accessing the file system.
      */
     ActiveDirectoryConfiguration?: CreateSvmActiveDirectoryConfiguration;
     ClientRequestToken?: ClientRequestToken;
@@ -1248,7 +1248,7 @@ declare namespace FSx {
     SvmAdminPassword?: AdminPassword;
     Tags?: Tags;
     /**
-     * The security style of the root volume of the SVM. Specify one of the following values:    UNIX if the file system is managed by a UNIX administrator, the majority of users are NFS clients, and an application accessing the data uses a UNIX user as the service account.    NTFS if the file system is managed by a Windows administrator, the majority of users are SMB clients, and an application accessing the data uses a Windows user as the service account.    MIXED if the file system is managed by both UNIX and Windows administrators and users consist of both NFS and SMB clients.  
+     * The security style of the root volume of the SVM. Specify one of the following values:    UNIX if the file system is managed by a UNIX administrator, the majority of users are NFS clients, and an application accessing the data uses a UNIX user as the service account.    NTFS if the file system is managed by a Microsoft Windows administrator, the majority of users are SMB clients, and an application accessing the data uses a Microsoft Windows user as the service account.    MIXED This is an advanced setting. For more information, see Volume security style in the Amazon FSx for NetApp ONTAP User Guide.   
      */
     RootVolumeSecurityStyle?: StorageVirtualMachineRootVolumeSecurityStyle;
   }
@@ -1884,7 +1884,7 @@ declare namespace FSx {
     MaxResults?: MaxResults;
     NextToken?: NextToken;
     /**
-     * Set to false (default) if you want to only see the snapshots in your Amazon Web Services account. Set to true if you want to see the snapshots in your account and the ones shared with you from another account.
+     * Set to false (default) if you want to only see the snapshots owned by your Amazon Web Services account. Set to true if you want to see the snapshots in your account and the ones shared with you from another account.
      */
     IncludeShared?: IncludeShared;
   }
@@ -1955,7 +1955,7 @@ declare namespace FSx {
   }
   export interface DiskIopsConfiguration {
     /**
-     * Specifies whether the file system is using the AUTOMATIC setting of SSD IOPS of 3 IOPS per GB of storage capacity, , or if it using a USER_PROVISIONED value.
+     * Specifies whether the file system is using the AUTOMATIC setting of SSD IOPS of 3 IOPS per GB of storage capacity, or if it using a USER_PROVISIONED value.
      */
     Mode?: DiskIopsConfigurationMode;
     /**
@@ -2206,7 +2206,7 @@ declare namespace FSx {
      */
     ResourceARN?: ResourceARN;
     /**
-     * The tags to associate with the file system. For more information, see Tagging your Amazon EC2 resources in the Amazon EC2 User Guide.
+     * The tags to associate with the file system. For more information, see Tagging your Amazon FSx resources in the Amazon FSx for Lustre User Guide.
      */
     Tags?: Tags;
     /**
@@ -2454,11 +2454,11 @@ declare namespace FSx {
      */
     FsxAdminPassword?: AdminPassword;
     /**
-     * Specifies how many high-availability (HA) file server pairs the file system will have. The default value is 1. The value of this property affects the values of StorageCapacity, Iops, and ThroughputCapacity. For more information, see High-availability (HA) pairs in the FSx for ONTAP user guide. Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of HAPairs is less than 1 or greater than 6.   The value of HAPairs is greater than 1 and the value of DeploymentType is SINGLE_AZ_1 or MULTI_AZ_1.  
+     * Specifies how many high-availability (HA) file server pairs the file system will have. The default value is 1. The value of this property affects the values of StorageCapacity, Iops, and ThroughputCapacity. For more information, see High-availability (HA) pairs in the FSx for ONTAP user guide. Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of HAPairs is less than 1 or greater than 12.   The value of HAPairs is greater than 1 and the value of DeploymentType is SINGLE_AZ_1 or MULTI_AZ_1.  
      */
     HAPairs?: HAPairs;
     /**
-     * Use to choose the throughput capacity per HA pair. When the value of HAPairs is equal to 1, the value of ThroughputCapacityPerHAPair is the total throughput for the file system. This field and ThroughputCapacity cannot be defined in the same API call, but one is required. This field and ThroughputCapacity are the same for file systems with one HA pair.   For SINGLE_AZ_1 and MULTI_AZ_1, valid values are 128, 256, 512, 1024, 2048, or 4096 MBps.   For SINGLE_AZ_2, valid values are 3072 or 6144 MBps.   Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the same value.   The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity / ThroughputCapacityPerHAPair is a valid HA pair (a value between 2 and 6).   The value of ThroughputCapacityPerHAPair is not a valid value.  
+     * Use to choose the throughput capacity per HA pair. When the value of HAPairs is equal to 1, the value of ThroughputCapacityPerHAPair is the total throughput for the file system. This field and ThroughputCapacity cannot be defined in the same API call, but one is required. This field and ThroughputCapacity are the same for file systems with one HA pair.   For SINGLE_AZ_1 and MULTI_AZ_1, valid values are 128, 256, 512, 1024, 2048, or 4096 MBps.   For SINGLE_AZ_2, valid values are 3072 or 6144 MBps.   Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the same value.   The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity / ThroughputCapacityPerHAPair is a valid HA pair (a value between 2 and 12).   The value of ThroughputCapacityPerHAPair is not a valid value.  
      */
     ThroughputCapacityPerHAPair?: ThroughputCapacityPerHAPair;
   }
@@ -2632,15 +2632,15 @@ declare namespace FSx {
   export type OpenZFSUserAndGroupQuotas = OpenZFSUserOrGroupQuota[];
   export interface OpenZFSUserOrGroupQuota {
     /**
-     * A value that specifies whether the quota applies to a user or group.
+     * Specifies whether the quota applies to a user or group.
      */
     Type: OpenZFSQuotaType;
     /**
-     * The ID of the user or group.
+     * The ID of the user or group that the quota applies to.
      */
     Id: IntegerNoMax;
     /**
-     * The amount of storage that the user or group can use in gibibytes (GiB).
+     * The user or group's storage quota, in gibibytes (GiB).
      */
     StorageCapacityQuotaGiB: IntegerNoMax;
   }
@@ -3226,7 +3226,7 @@ declare namespace FSx {
      */
     RemoveRouteTableIds?: RouteTableIds;
     /**
-     * Use to choose the throughput capacity per HA pair, rather than the total throughput for the file system.  This field and ThroughputCapacity cannot be defined in the same API call, but one is required. This field and ThroughputCapacity are the same for file systems with one HA pair.   For SINGLE_AZ_1 and MULTI_AZ_1, valid values are 128, 256, 512, 1024, 2048, or 4096 MBps.   For SINGLE_AZ_2, valid values are 3072 or 6144 MBps.   Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the same value for file systems with one HA pair.   The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity / ThroughputCapacityPerHAPair is a valid HA pair (a value between 2 and 6).   The value of ThroughputCapacityPerHAPair is not a valid value.  
+     * Use to choose the throughput capacity per HA pair, rather than the total throughput for the file system.  This field and ThroughputCapacity cannot be defined in the same API call, but one is required. This field and ThroughputCapacity are the same for file systems with one HA pair.   For SINGLE_AZ_1 and MULTI_AZ_1, valid values are 128, 256, 512, 1024, 2048, or 4096 MBps.   For SINGLE_AZ_2, valid values are 3072 or 6144 MBps.   Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the same value for file systems with one HA pair.   The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity / ThroughputCapacityPerHAPair is a valid HA pair (a value between 2 and 12).   The value of ThroughputCapacityPerHAPair is not a valid value.  
      */
     ThroughputCapacityPerHAPair?: ThroughputCapacityPerHAPair;
   }
