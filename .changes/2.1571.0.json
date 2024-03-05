@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "Organizations",
+        "description": "This release contains an endpoint addition"
+    },
+    {
+        "type": "feature",
+        "category": "SESV2",
+        "description": "Adds support for providing custom headers within SendEmail and SendBulkEmail for SESv2."
+    }
+]

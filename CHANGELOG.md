@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1570.0-->
+<!--LATEST=2.1571.0-->
 <!--ENTRYINSERT-->
+
+## 2.1571.0
+* feature: Organizations: This release contains an endpoint addition
+* feature: SESV2: Adds support for providing custom headers within SendEmail and SendBulkEmail for SESv2.
 
 ## 2.1570.0
 * feature: CloudFormation: Add DetailedStatus field to DescribeStackEvents and DescribeStacks APIs

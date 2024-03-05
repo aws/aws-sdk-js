@@ -708,11 +708,11 @@ declare class SESV2 extends Service {
    */
   updateConfigurationSetEventDestination(callback?: (err: AWSError, data: SESV2.Types.UpdateConfigurationSetEventDestinationResponse) => void): Request<SESV2.Types.UpdateConfigurationSetEventDestinationResponse, AWSError>;
   /**
-   * Updates a contact's preferences for a list. It is not necessary to specify all existing topic preferences in the TopicPreferences object, just the ones that need updating.
+   * Updates a contact's preferences for a list.  You must specify all existing topic preferences in the TopicPreferences object, not just the ones that need updating; otherwise, all your existing preferences will be removed. 
    */
   updateContact(params: SESV2.Types.UpdateContactRequest, callback?: (err: AWSError, data: SESV2.Types.UpdateContactResponse) => void): Request<SESV2.Types.UpdateContactResponse, AWSError>;
   /**
-   * Updates a contact's preferences for a list. It is not necessary to specify all existing topic preferences in the TopicPreferences object, just the ones that need updating.
+   * Updates a contact's preferences for a list.  You must specify all existing topic preferences in the TopicPreferences object, not just the ones that need updating; otherwise, all your existing preferences will be removed. 
    */
   updateContact(callback?: (err: AWSError, data: SESV2.Types.UpdateContactResponse) => void): Request<SESV2.Types.UpdateContactResponse, AWSError>;
   /**
@@ -1871,7 +1871,7 @@ declare namespace SESV2 {
      */
     EnforcementStatus?: GeneralEnforcementStatus;
     /**
-     * Indicates whether or not your account has production access in the current Amazon Web Services Region. If the value is false, then your account is in the sandbox. When your account is in the sandbox, you can only send email to verified identities. Additionally, the maximum number of emails you can send in a 24-hour period (your sending quota) is 200, and the maximum number of emails you can send per second (your maximum sending rate) is 1. If the value is true, then your account has production access. When your account has production access, you can send email to any address. The sending quota and maximum sending rate for your account vary based on your specific use case.
+     * Indicates whether or not your account has production access in the current Amazon Web Services Region. If the value is false, then your account is in the sandbox. When your account is in the sandbox, you can only send email to verified identities.  If the value is true, then your account has production access. When your account has production access, you can send email to any address. The sending quota and maximum sending rate for your account vary based on your specific use case.
      */
     ProductionAccessEnabled?: Enabled;
     /**
@@ -2913,9 +2913,26 @@ declare namespace SESV2 {
      * The body of the message. You can specify an HTML version of the message, a text-only version of the message, or both.
      */
     Body: Body;
+    /**
+     * The list of message headers that will be added to the email message.
+     */
+    Headers?: MessageHeaderList;
   }
   export type MessageContent = string;
   export type MessageData = string;
+  export interface MessageHeader {
+    /**
+     * The name of the message header. The message header name has to meet the following criteria:   Can contain any printable ASCII character (33 - 126) except for colon (:).   Can contain no more than 126 characters.  
+     */
+    Name: MessageHeaderName;
+    /**
+     * The value of the message header. The message header value has to meet the following criteria:   Can contain any printable ASCII character.   Can contain no more than 870 characters.  
+     */
+    Value: MessageHeaderValue;
+  }
+  export type MessageHeaderList = MessageHeader[];
+  export type MessageHeaderName = string;
+  export type MessageHeaderValue = string;
   export interface MessageInsightsDataSource {
     /**
      * Represents the start date for the export interval as a timestamp. The start date is inclusive.
@@ -3119,7 +3136,7 @@ declare namespace SESV2 {
      */
     AdditionalContactEmailAddresses?: AdditionalContactEmailAddresses;
     /**
-     * Indicates whether or not your account should have production access in the current Amazon Web Services Region. If the value is false, then your account is in the sandbox. When your account is in the sandbox, you can only send email to verified identities. Additionally, the maximum number of emails you can send in a 24-hour period (your sending quota) is 200, and the maximum number of emails you can send per second (your maximum sending rate) is 1. If the value is true, then your account has production access. When your account has production access, you can send email to any address. The sending quota and maximum sending rate for your account vary based on your specific use case.
+     * Indicates whether or not your account should have production access in the current Amazon Web Services Region. If the value is false, then your account is in the sandbox. When your account is in the sandbox, you can only send email to verified identities.  If the value is true, then your account has production access. When your account has production access, you can send email to any address. The sending quota and maximum sending rate for your account vary based on your specific use case.
      */
     ProductionAccessEnabled?: EnabledWrapper;
   }
@@ -3550,7 +3567,7 @@ declare namespace SESV2 {
      */
     FeedbackForwardingEmailAddressIdentityArn?: AmazonResourceName;
     /**
-     * An object that contains the body of the message. You can send either a Simple message Raw message or a template Message.
+     * An object that contains the body of the message. You can send either a Simple message, Raw message, or a Templated message.
      */
     Content: EmailContent;
     /**
@@ -3568,7 +3585,7 @@ declare namespace SESV2 {
   }
   export interface SendEmailResponse {
     /**
-     * A unique identifier for the message that is generated when the message is accepted.  It's possible for Amazon SES to accept a message without sending it. This can happen when the message that you're trying to send has an attachment contains a virus, or when you send a templated email that contains invalid personalization content, for example. 
+     * A unique identifier for the message that is generated when the message is accepted.  It's possible for Amazon SES to accept a message without sending it. For example, this can happen when the message that you're trying to send has an attachment that contains a virus, or when you send a templated email that contains invalid personalization content. 
      */
     MessageId?: OutboundMessageId;
   }
@@ -3707,6 +3724,10 @@ declare namespace SESV2 {
      * An object that defines the values to use for message variables in the template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the value to use for that variable.
      */
     TemplateData?: EmailTemplateData;
+    /**
+     * The list of message headers that will be added to the email message.
+     */
+    Headers?: MessageHeaderList;
   }
   export type TemplateContent = string;
   export interface TestRenderEmailTemplateRequest {
