@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "CognitoIdentityServiceProvider",
+  "description": "`Attributes` property defined in `UserType` updated to `UserAttributes` according to SDK documentation."
+}
