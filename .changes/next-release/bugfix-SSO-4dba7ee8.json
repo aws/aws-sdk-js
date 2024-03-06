@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "SSO",
+  "description": "fix sso credential resolution failure when sso-session access token requires a refresh"
+}
