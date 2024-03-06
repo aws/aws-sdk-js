@@ -2121,6 +2121,14 @@ const exp = require('constants');
         });
       });
 
+      it('should forward endpoint param to sts client', function() {
+        var creds = new AWS.TokenFileWebIdentityCredentials({
+          endpoint: 'https://testendpoint'
+        });
+        creds.createClients();
+        expect(creds.service.endpoint.hostname).to.equal('testendpoint');
+      });
+
       return it('fails if params are not available in both environment variables or shared config', function(done) {
         delete process.env.AWS_WEB_IDENTITY_TOKEN_FILE;
         helpers.spyOn(AWS.util, 'getProfilesFromSharedConfig').andReturn({});
@@ -2359,7 +2367,7 @@ const exp = require('constants');
         });
         expect(creds).to.have.property('tokenCodeFn', null);
       });
-      it('should forward enpoint param to sts client', function() {
+      it('should forward endpoint param to sts client', function() {
         var creds = new AWS.ChainableTemporaryCredentials({
           stsConfig: { endpoint: 'https://testendpoint' }
         });
