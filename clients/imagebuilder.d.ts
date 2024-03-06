@@ -3294,6 +3294,14 @@ declare namespace Imagebuilder {
      * For an impacted container image, this identifies a list of URIs for associated container images distributed to ECR repositories.
      */
     imageUris?: StringList;
+    /**
+     * The starting timestamp from the lifecycle action that was applied to the resource.
+     */
+    startTime?: DateTimeTimestamp;
+    /**
+     * The ending timestamp from the lifecycle action that was applied to the resource.
+     */
+    endTime?: DateTimeTimestamp;
   }
   export interface LifecycleExecutionResourceAction {
     /**
@@ -3345,7 +3353,7 @@ declare namespace Imagebuilder {
      */
     reason?: NonEmptyString;
   }
-  export type LifecycleExecutionStatus = "IN_PROGRESS"|"CANCELLED"|"CANCELLING"|"FAILED"|"SUCCESS"|string;
+  export type LifecycleExecutionStatus = "IN_PROGRESS"|"CANCELLED"|"CANCELLING"|"FAILED"|"SUCCESS"|"PENDING"|string;
   export type LifecycleExecutionsList = LifecycleExecution[];
   export interface LifecyclePolicy {
     /**
@@ -3439,7 +3447,7 @@ declare namespace Imagebuilder {
   export type LifecyclePolicyDetailActionType = "DELETE"|"DEPRECATE"|"DISABLE"|string;
   export interface LifecyclePolicyDetailExclusionRules {
     /**
-     * Contains a list of tags that Image Builder uses to skip lifecycle actions for resources that have them.
+     * Contains a list of tags that Image Builder uses to skip lifecycle actions for Image Builder image resources that have them.
      */
     tagMap?: TagMap;
     /**
@@ -3508,7 +3516,7 @@ declare namespace Imagebuilder {
      */
     recipes?: LifecyclePolicyResourceSelectionRecipes;
     /**
-     * A list of tags that are used as selection criteria for the resources that the lifecycle policy applies to.
+     * A list of tags that are used as selection criteria for the Image Builder image resources that the lifecycle policy applies to.
      */
     tagMap?: TagMap;
   }

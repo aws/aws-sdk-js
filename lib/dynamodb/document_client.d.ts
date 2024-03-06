@@ -1327,7 +1327,7 @@ export namespace DocumentClient {
      */
     S3Bucket: S3Bucket;
     /**
-     * The ID of the Amazon Web Services account that owns the bucket the export will be stored in.
+     * The ID of the Amazon Web Services account that owns the bucket the export will be stored in.  S3BucketOwner is a required parameter when exporting to a S3 bucket in another account. 
      */
     S3BucketOwner?: S3BucketOwner;
     /**
@@ -2171,7 +2171,7 @@ export namespace DocumentClient {
   export type ProcessedItemCount = number;
   export interface Projection {
     /**
-     * The set of attributes that are projected into the index:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - In addition to the attributes described in KEYS_ONLY, the secondary index will include other non-key attributes that you specify.    ALL - All of the table attributes are projected into the index.  
+     * The set of attributes that are projected into the index:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - In addition to the attributes described in KEYS_ONLY, the secondary index will include other non-key attributes that you specify.    ALL - All of the table attributes are projected into the index.   When using the DynamoDB console, ALL is selected by default.
      */
     ProjectionType?: ProjectionType;
     /**

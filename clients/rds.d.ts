@@ -1741,6 +1741,7 @@ declare namespace RDS {
      * The storage type for the DB cluster.
      */
     StorageType?: String;
+    CertificateDetails?: CertificateDetails;
   }
   export interface ConnectionPoolConfiguration {
     /**
@@ -2236,6 +2237,10 @@ declare namespace RDS {
      */
     EnableLocalWriteForwarding?: BooleanOptional;
     /**
+     * The CA certificate identifier to use for the DB cluster's server certificate. Valid for Cluster Type: Multi-AZ DB clusters
+     */
+    CACertificateIdentifier?: String;
+    /**
      * The ID of the region that contains the source for the read replica.
      */
     SourceRegion?: String;
@@ -2291,7 +2296,7 @@ declare namespace RDS {
      */
     DBInstanceIdentifier: String;
     /**
-     * The amount of storage in gibibytes (GiB) to allocate for the DB instance. This setting doesn't apply to Amazon Aurora DB instances. Aurora cluster volumes automatically grow as the amount of data in your database increases, though you are only charged for the space that you use in an Aurora cluster volume.  Amazon RDS Custom  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3): Must be an integer from 40 to 65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL Server.   Provisioned IOPS storage (io1): Must be an integer from 40 to 65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL Server.    RDS for Db2  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp3): Must be an integer from 20 to 64000.   Provisioned IOPS storage (io1): Must be an integer from 100 to 64000.    RDS for MariaDB  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.   Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.   Magnetic storage (standard): Must be an integer from 5 to 3072.    RDS for MySQL  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.   Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.   Magnetic storage (standard): Must be an integer from 5 to 3072.    RDS for Oracle  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.   Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.   Magnetic storage (standard): Must be an integer from 10 to 3072.    RDS for PostgreSQL  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.   Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.   Magnetic storage (standard): Must be an integer from 5 to 3072.    RDS for SQL Server  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3):   Enterprise and Standard editions: Must be an integer from 20 to 16384.   Web and Express editions: Must be an integer from 20 to 16384.     Provisioned IOPS storage (io1):   Enterprise and Standard editions: Must be an integer from 100 to 16384.   Web and Express editions: Must be an integer from 100 to 16384.     Magnetic storage (standard):   Enterprise and Standard editions: Must be an integer from 20 to 1024.   Web and Express editions: Must be an integer from 20 to 1024.      
+     * The amount of storage in gibibytes (GiB) to allocate for the DB instance. This setting doesn't apply to Amazon Aurora DB instances. Aurora cluster volumes automatically grow as the amount of data in your database increases, though you are only charged for the space that you use in an Aurora cluster volume.  Amazon RDS Custom  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3): Must be an integer from 40 to 65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL Server.   Provisioned IOPS storage (io1, io2): Must be an integer from 40 to 65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL Server.    RDS for Db2  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp3): Must be an integer from 20 to 65536.   Provisioned IOPS storage (io1, io2): Must be an integer from 100 to 65536.    RDS for MariaDB  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.   Provisioned IOPS storage (io1, io2): Must be an integer from 100 to 65536.   Magnetic storage (standard): Must be an integer from 5 to 3072.    RDS for MySQL  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.   Provisioned IOPS storage (io1, io2): Must be an integer from 100 to 65536.   Magnetic storage (standard): Must be an integer from 5 to 3072.    RDS for Oracle  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.   Provisioned IOPS storage (io1, io2): Must be an integer from 100 to 65536.   Magnetic storage (standard): Must be an integer from 10 to 3072.    RDS for PostgreSQL  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.   Provisioned IOPS storage (io1, io2): Must be an integer from 100 to 65536.   Magnetic storage (standard): Must be an integer from 5 to 3072.    RDS for SQL Server  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3):   Enterprise and Standard editions: Must be an integer from 20 to 16384.   Web and Express editions: Must be an integer from 20 to 16384.     Provisioned IOPS storage (io1, io2):   Enterprise and Standard editions: Must be an integer from 100 to 16384.   Web and Express editions: Must be an integer from 100 to 16384.     Magnetic storage (standard):   Enterprise and Standard editions: Must be an integer from 20 to 1024.   Web and Express editions: Must be an integer from 20 to 1024.      
      */
     AllocatedStorage?: IntegerOptional;
     /**
@@ -2391,7 +2396,7 @@ declare namespace RDS {
      */
     DBClusterIdentifier?: String;
     /**
-     * The storage type to associate with the DB instance. If you specify io1 or gp3, you must also include a value for the Iops parameter. This setting doesn't apply to Amazon Aurora DB instances. Storage is managed by the DB cluster. Valid Values: gp2 | gp3 | io1 | standard  Default: io1, if the Iops parameter is specified. Otherwise, gp2.
+     * The storage type to associate with the DB instance. If you specify io1, io2, or gp3, you must also include a value for the Iops parameter. This setting doesn't apply to Amazon Aurora DB instances. Storage is managed by the DB cluster. Valid Values: gp2 | gp3 | io1 | io2 | standard  Default: io1, if the Iops parameter is specified. Otherwise, gp2.
      */
     StorageType?: String;
     /**
@@ -2586,7 +2591,7 @@ declare namespace RDS {
      */
     VpcSecurityGroupIds?: VpcSecurityGroupIdList;
     /**
-     * The storage type to associate with the read replica. If you specify io1 or gp3, you must also include a value for the Iops parameter. Valid Values: gp2 | gp3 | io1 | standard  Default: io1 if the Iops parameter is specified. Otherwise, gp2.
+     * The storage type to associate with the read replica. If you specify io1, io2, or gp3, you must also include a value for the Iops parameter. Valid Values: gp2 | gp3 | io1 | io2 | standard  Default: io1 if the Iops parameter is specified. Otherwise, gp2.
      */
     StorageType?: String;
     /**
@@ -3347,6 +3352,7 @@ declare namespace RDS {
      * The storage throughput for the DB cluster. The throughput is automatically set based on the IOPS that you provision, and is not configurable. This setting is only for non-Aurora Multi-AZ DB clusters.
      */
     StorageThroughput?: IntegerOptional;
+    CertificateDetails?: CertificateDetails;
   }
   export interface DBClusterAutomatedBackup {
     /**
@@ -7493,6 +7499,10 @@ declare namespace RDS {
      * Specifies whether to enable Aurora Limitless Database. You must enable Aurora Limitless Database to create a DB shard group. Valid for: Aurora DB clusters only
      */
     EnableLimitlessDatabase?: BooleanOptional;
+    /**
+     * The CA certificate identifier to use for the DB cluster's server certificate. Valid for Cluster Type: Multi-AZ DB clusters
+     */
+    CACertificateIdentifier?: String;
   }
   export interface ModifyDBClusterParameterGroupMessage {
     /**
@@ -7610,7 +7620,7 @@ declare namespace RDS {
      */
     NewDBInstanceIdentifier?: String;
     /**
-     * The storage type to associate with the DB instance. If you specify Provisioned IOPS (io1), you must also include a value for the Iops parameter. If you choose to migrate your DB instance from using standard storage to using Provisioned IOPS, or from using Provisioned IOPS to using standard storage, the process can take time. The duration of the migration depends on several factors such as database load, storage size, storage type (standard or Provisioned IOPS), amount of IOPS provisioned (if any), and the number of prior scale storage operations. Typical migration times are under 24 hours, but the process can take up to several days in some cases. During the migration, the DB instance is available for use, but might experience performance degradation. While the migration takes place, nightly backups for the instance are suspended. No other Amazon RDS operations can take place for the instance, including modifying the instance, rebooting the instance, deleting the instance, creating a read replica for the instance, and creating a DB snapshot of the instance. Valid Values: gp2 | gp3 | io1 | standard  Default: io1, if the Iops parameter is specified. Otherwise, gp2.
+     * The storage type to associate with the DB instance. If you specify io1), io2, or gp3 you must also include a value for the Iops parameter. If you choose to migrate your DB instance from using standard storage to using Provisioned IOPS, or from using Provisioned IOPS to using standard storage, the process can take time. The duration of the migration depends on several factors such as database load, storage size, storage type (standard or Provisioned IOPS), amount of IOPS provisioned (if any), and the number of prior scale storage operations. Typical migration times are under 24 hours, but the process can take up to several days in some cases. During the migration, the DB instance is available for use, but might experience performance degradation. While the migration takes place, nightly backups for the instance are suspended. No other Amazon RDS operations can take place for the instance, including modifying the instance, rebooting the instance, deleting the instance, creating a read replica for the instance, and creating a DB snapshot of the instance. Valid Values: gp2 | gp3 | io1 | io2 | standard  Default: io1, if the Iops parameter is specified. Otherwise, gp2.
      */
     StorageType?: String;
     /**
@@ -9616,7 +9626,7 @@ declare namespace RDS {
     OptionGroupName?: String;
     Tags?: TagList;
     /**
-     * Specifies the storage type to be associated with the DB instance. Valid Values: gp2 | gp3 | io1 | standard  If you specify io1 or gp3, you must also include a value for the Iops parameter. Default: io1 if the Iops parameter is specified, otherwise gp2 
+     * Specifies the storage type to be associated with the DB instance. Valid Values: gp2 | gp3 | io1 | io2 | standard  If you specify io1, io2, or gp3, you must also include a value for the Iops parameter. Default: io1 if the Iops parameter is specified, otherwise gp2 
      */
     StorageType?: String;
     /**
@@ -9817,7 +9827,7 @@ declare namespace RDS {
      */
     Tags?: TagList;
     /**
-     * Specifies the storage type to be associated with the DB instance. Valid Values: gp2 | gp3 | io1 | standard  If you specify io1 or gp3, you must also include a value for the Iops parameter. Default: io1 if the Iops parameter is specified; otherwise gp2 
+     * Specifies the storage type to be associated with the DB instance. Valid Values: gp2 | gp3 | io1 | io2 | standard  If you specify io1, io2, or gp3, you must also include a value for the Iops parameter. Default: io1 if the Iops parameter is specified; otherwise gp2 
      */
     StorageType?: String;
     /**
@@ -9991,7 +10001,7 @@ declare namespace RDS {
     CopyTagsToSnapshot?: BooleanOptional;
     Tags?: TagList;
     /**
-     * The storage type to associate with the DB instance. Valid Values: gp2 | gp3 | io1 | standard  Default: io1, if the Iops parameter is specified. Otherwise, gp2. Constraints:   If you specify io1 or gp3, you must also include a value for the Iops parameter.  
+     * The storage type to associate with the DB instance. Valid Values: gp2 | gp3 | io1 | io2 | standard  Default: io1, if the Iops parameter is specified. Otherwise, gp2. Constraints:   If you specify io1, io2, or gp3, you must also include a value for the Iops parameter.  
      */
     StorageType?: String;
     /**
@@ -10726,7 +10736,7 @@ declare namespace RDS {
   }
   export interface ValidStorageOptions {
     /**
-     * The valid storage types for your DB instance. For example: gp2, gp3, io1.
+     * The valid storage types for your DB instance. For example: gp2, gp3, io1, io2.
      */
     StorageType?: String;
     /**

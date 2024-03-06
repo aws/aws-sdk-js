@@ -1164,7 +1164,7 @@ declare namespace Redshift {
   export type AquaStatus = "enabled"|"disabled"|"applying"|string;
   export interface AssociateDataShareConsumerMessage {
     /**
-     * The Amazon Resource Name (ARN) of the datashare that the consumer is to use with the account or the namespace.
+     * The Amazon Resource Name (ARN) of the datashare that the consumer is to use.
      */
     DataShareArn: String;
     /**
@@ -1172,7 +1172,7 @@ declare namespace Redshift {
      */
     AssociateEntireAccount?: BooleanOptional;
     /**
-     * The Amazon Resource Name (ARN) of the consumer that is associated with the datashare.
+     * The Amazon Resource Name (ARN) of the consumer namespace associated with the datashare.
      */
     ConsumerArn?: String;
     /**
@@ -1245,7 +1245,7 @@ declare namespace Redshift {
   }
   export interface AuthorizeDataShareMessage {
     /**
-     * The Amazon Resource Name (ARN) of the datashare that producers are to authorize sharing for.
+     * The Amazon Resource Name (ARN) of the datashare namespace that producers are to authorize sharing for.
      */
     DataShareArn: String;
     /**
@@ -1281,7 +1281,7 @@ declare namespace Redshift {
      */
     SnapshotArn?: String;
     /**
-     * The identifier of the cluster the snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
+     * The identifier of the cluster the snapshot was created from.    If the snapshot to access doesn't exist and the associated IAM policy doesn't allow access to all (*) snapshots - This parameter is required. Otherwise, permissions aren't available to check if the snapshot exists.    If the snapshot to access exists - This parameter isn't required. Redshift can retrieve the cluster identifier and use it to validate snapshot authorization.  
      */
     SnapshotClusterIdentifier?: String;
     /**
@@ -2032,7 +2032,7 @@ declare namespace Redshift {
      */
     ManualSnapshotRetentionPeriod?: IntegerOptional;
     /**
-     * The port number on which the cluster accepts incoming connections. The cluster is accessible only via the JDBC and ODBC connection strings. Part of the connection string requires the port on which the cluster will listen for incoming connections. Default: 5439  Valid Values: 1150-65535 
+     * The port number on which the cluster accepts incoming connections. The cluster is accessible only via the JDBC and ODBC connection strings. Part of the connection string requires the port on which the cluster will listen for incoming connections. Default: 5439  Valid Values:    For clusters with ra3 nodes - Select a port within the ranges 5431-5455 or 8191-8215. (If you have an existing cluster with ra3 nodes, it isn't required that you change the port to these ranges.)   For clusters with ds2 or dc2 nodes - Select a port within the range 1150-65535.  
      */
     Port?: IntegerOptional;
     /**
@@ -2526,11 +2526,11 @@ declare namespace Redshift {
   }
   export interface DataShare {
     /**
-     * An Amazon Resource Name (ARN) that references the datashare that is owned by a specific namespace of the producer cluster. A datashare ARN is in the arn:aws:redshift:{region}:{account-id}:{datashare}:{namespace-guid}/{datashare-name} format.
+     * The Amazon Resource Name (ARN) of the datashare that the consumer is to use.
      */
     DataShareArn?: String;
     /**
-     * The Amazon Resource Name (ARN) of the producer.
+     * The Amazon Resource Name (ARN) of the producer namespace.
      */
     ProducerArn?: String;
     /**
@@ -2610,7 +2610,7 @@ declare namespace Redshift {
   export type DbGroupList = String[];
   export interface DeauthorizeDataShareMessage {
     /**
-     * The Amazon Resource Name (ARN) of the datashare to remove authorization from.
+     * The namespace Amazon Resource Name (ARN) of the datashare to remove authorization from.
      */
     DataShareArn: String;
     /**
@@ -3036,7 +3036,7 @@ declare namespace Redshift {
   }
   export interface DescribeDataSharesForConsumerMessage {
     /**
-     * The Amazon Resource Name (ARN) of the consumer that returns in the list of datashares.
+     * The Amazon Resource Name (ARN) of the consumer namespace that returns in the list of datashares.
      */
     ConsumerArn?: String;
     /**
@@ -3064,7 +3064,7 @@ declare namespace Redshift {
   }
   export interface DescribeDataSharesForProducerMessage {
     /**
-     * The Amazon Resource Name (ARN) of the producer that returns in the list of datashares.
+     * The Amazon Resource Name (ARN) of the producer namespace that returns in the list of datashares.
      */
     ProducerArn?: String;
     /**
@@ -3092,7 +3092,7 @@ declare namespace Redshift {
   }
   export interface DescribeDataSharesMessage {
     /**
-     * The identifier of the datashare to describe details of.
+     * The Amazon resource name (ARN) of the datashare to describe details of.
      */
     DataShareArn?: String;
     /**
@@ -3650,7 +3650,7 @@ declare namespace Redshift {
   }
   export interface DisassociateDataShareConsumerMessage {
     /**
-     * The Amazon Resource Name (ARN) of the datashare to remove association for. 
+     * The Amazon Resource Name (ARN) of the datashare to remove association for.
      */
     DataShareArn: String;
     /**
@@ -3658,7 +3658,7 @@ declare namespace Redshift {
      */
     DisassociateEntireAccount?: BooleanOptional;
     /**
-     * The Amazon Resource Name (ARN) of the consumer that association for the datashare is removed from.
+     * The Amazon Resource Name (ARN) of the consumer namespace that association for the datashare is removed from.
      */
     ConsumerArn?: String;
     /**
@@ -4553,7 +4553,7 @@ declare namespace Redshift {
      */
     AvailabilityZone?: String;
     /**
-     * The option to change the port of an Amazon Redshift cluster.
+     * The option to change the port of an Amazon Redshift cluster. Valid Values:    For clusters with ra3 nodes - Select a port within the ranges 5431-5455 or 8191-8215. (If you have an existing cluster with ra3 nodes, it isn't required that you change the port to these ranges.)   For clusters with ds2 or dc2 nodes - Select a port within the range 1150-65535.  
      */
     Port?: IntegerOptional;
     /**
@@ -5567,7 +5567,7 @@ declare namespace Redshift {
      */
     SnapshotClusterIdentifier?: String;
     /**
-     * The port number on which the cluster accepts connections. Default: The same port as the original cluster. Constraints: Must be between 1115 and 65535.
+     * The port number on which the cluster accepts connections. Default: The same port as the original cluster. Valid values: For clusters with ds2 or dc2 nodes, must be within the range 1150-65535. For clusters with ra3 nodes, must be within the ranges 5431-5455 or 8191-8215.
      */
     Port?: IntegerOptional;
     /**

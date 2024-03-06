@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "Support",
-  "description": "Add upcoming end-of-support message in postinstall"
-}

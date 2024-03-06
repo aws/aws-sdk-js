@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1571.0-->
+<!--LATEST=2.1572.0-->
 <!--ENTRYINSERT-->
+
+## 2.1572.0
+* feature: Imagebuilder: Add PENDING status to Lifecycle Execution resource status. Add StartTime and EndTime to ListLifecycleExecutionResource API response.
+* feature: RDS: Updated the input of CreateDBCluster and ModifyDBCluster to support setting CA certificates. Updated the output of DescribeDBCluster to show current CA certificate setting value.
+* feature: Support: Update README with v2 end-of-support announcement
+* feature: Support: Add upcoming end-of-support message in postinstall
+* feature: VerifiedPermissions: Deprecating details in favor of configuration for GetIdentitySource and ListIdentitySources APIs.
 
 ## 2.1571.0
 * feature: Organizations: This release contains an endpoint addition

@@ -20,35 +20,35 @@ declare class VerifiedPermissions extends Service {
    */
   batchIsAuthorized(callback?: (err: AWSError, data: VerifiedPermissions.Types.BatchIsAuthorizedOutput) => void): Request<VerifiedPermissions.Types.BatchIsAuthorizedOutput, AWSError>;
   /**
-   * Creates a reference to an Amazon Cognito user pool as an external identity provider (IdP).  After you create an identity source, you can use the identities provided by the IdP as proxies for the principal in authorization queries that use the IsAuthorizedWithToken operation. These identities take the form of tokens that contain claims about the user, such as IDs, attributes and group memberships. Amazon Cognito provides both identity tokens and access tokens, and Verified Permissions can use either or both. Any combination of identity and access tokens results in the same Cedar principal. Verified Permissions automatically translates the information about the identities into the standard Cedar attributes that can be evaluated by your policies. Because the Amazon Cognito identity and access tokens can contain different information, the tokens you choose to use determine which principal attributes are available to access when evaluating Cedar policies.  If you delete a Amazon Cognito user pool or user, tokens from that deleted pool or that deleted user continue to be usable until they expire.   To reference a user from this identity source in your Cedar policies, use the following syntax.  IdentityType::"&lt;CognitoUserPoolIdentifier&gt;|&lt;CognitoClientId&gt;  Where IdentityType is the string that you provide to the PrincipalEntityType parameter for this operation. The CognitoUserPoolId and CognitoClientId are defined by the Amazon Cognito user pool.   Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to be propagate through the service and be visible in the results of other Verified Permissions operations. 
+   * Creates a reference to an Amazon Cognito user pool as an external identity provider (IdP).  After you create an identity source, you can use the identities provided by the IdP as proxies for the principal in authorization queries that use the IsAuthorizedWithToken operation. These identities take the form of tokens that contain claims about the user, such as IDs, attributes and group memberships. Amazon Cognito provides both identity tokens and access tokens, and Verified Permissions can use either or both. Any combination of identity and access tokens results in the same Cedar principal. Verified Permissions automatically translates the information about the identities into the standard Cedar attributes that can be evaluated by your policies. Because the Amazon Cognito identity and access tokens can contain different information, the tokens you choose to use determine which principal attributes are available to access when evaluating Cedar policies.  If you delete a Amazon Cognito user pool or user, tokens from that deleted pool or that deleted user continue to be usable until they expire.   To reference a user from this identity source in your Cedar policies, use the following syntax.  IdentityType::"&lt;CognitoUserPoolIdentifier&gt;|&lt;CognitoClientId&gt;  Where IdentityType is the string that you provide to the PrincipalEntityType parameter for this operation. The CognitoUserPoolId and CognitoClientId are defined by the Amazon Cognito user pool.   Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations. 
    */
   createIdentitySource(params: VerifiedPermissions.Types.CreateIdentitySourceInput, callback?: (err: AWSError, data: VerifiedPermissions.Types.CreateIdentitySourceOutput) => void): Request<VerifiedPermissions.Types.CreateIdentitySourceOutput, AWSError>;
   /**
-   * Creates a reference to an Amazon Cognito user pool as an external identity provider (IdP).  After you create an identity source, you can use the identities provided by the IdP as proxies for the principal in authorization queries that use the IsAuthorizedWithToken operation. These identities take the form of tokens that contain claims about the user, such as IDs, attributes and group memberships. Amazon Cognito provides both identity tokens and access tokens, and Verified Permissions can use either or both. Any combination of identity and access tokens results in the same Cedar principal. Verified Permissions automatically translates the information about the identities into the standard Cedar attributes that can be evaluated by your policies. Because the Amazon Cognito identity and access tokens can contain different information, the tokens you choose to use determine which principal attributes are available to access when evaluating Cedar policies.  If you delete a Amazon Cognito user pool or user, tokens from that deleted pool or that deleted user continue to be usable until they expire.   To reference a user from this identity source in your Cedar policies, use the following syntax.  IdentityType::"&lt;CognitoUserPoolIdentifier&gt;|&lt;CognitoClientId&gt;  Where IdentityType is the string that you provide to the PrincipalEntityType parameter for this operation. The CognitoUserPoolId and CognitoClientId are defined by the Amazon Cognito user pool.   Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to be propagate through the service and be visible in the results of other Verified Permissions operations. 
+   * Creates a reference to an Amazon Cognito user pool as an external identity provider (IdP).  After you create an identity source, you can use the identities provided by the IdP as proxies for the principal in authorization queries that use the IsAuthorizedWithToken operation. These identities take the form of tokens that contain claims about the user, such as IDs, attributes and group memberships. Amazon Cognito provides both identity tokens and access tokens, and Verified Permissions can use either or both. Any combination of identity and access tokens results in the same Cedar principal. Verified Permissions automatically translates the information about the identities into the standard Cedar attributes that can be evaluated by your policies. Because the Amazon Cognito identity and access tokens can contain different information, the tokens you choose to use determine which principal attributes are available to access when evaluating Cedar policies.  If you delete a Amazon Cognito user pool or user, tokens from that deleted pool or that deleted user continue to be usable until they expire.   To reference a user from this identity source in your Cedar policies, use the following syntax.  IdentityType::"&lt;CognitoUserPoolIdentifier&gt;|&lt;CognitoClientId&gt;  Where IdentityType is the string that you provide to the PrincipalEntityType parameter for this operation. The CognitoUserPoolId and CognitoClientId are defined by the Amazon Cognito user pool.   Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations. 
    */
   createIdentitySource(callback?: (err: AWSError, data: VerifiedPermissions.Types.CreateIdentitySourceOutput) => void): Request<VerifiedPermissions.Types.CreateIdentitySourceOutput, AWSError>;
   /**
-   * Creates a Cedar policy and saves it in the specified policy store. You can create either a static policy or a policy linked to a policy template.   To create a static policy, provide the Cedar policy text in the StaticPolicy section of the PolicyDefinition.   To create a policy that is dynamically linked to a policy template, specify the policy template ID and the principal and resource to associate with this policy in the templateLinked section of the PolicyDefinition. If the policy template is ever updated, any policies linked to the policy template automatically use the updated template.    Creating a policy causes it to be validated against the schema in the policy store. If the policy doesn't pass validation, the operation fails and the policy isn't stored.   Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to be propagate through the service and be visible in the results of other Verified Permissions operations. 
+   * Creates a Cedar policy and saves it in the specified policy store. You can create either a static policy or a policy linked to a policy template.   To create a static policy, provide the Cedar policy text in the StaticPolicy section of the PolicyDefinition.   To create a policy that is dynamically linked to a policy template, specify the policy template ID and the principal and resource to associate with this policy in the templateLinked section of the PolicyDefinition. If the policy template is ever updated, any policies linked to the policy template automatically use the updated template.    Creating a policy causes it to be validated against the schema in the policy store. If the policy doesn't pass validation, the operation fails and the policy isn't stored.   Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations. 
    */
   createPolicy(params: VerifiedPermissions.Types.CreatePolicyInput, callback?: (err: AWSError, data: VerifiedPermissions.Types.CreatePolicyOutput) => void): Request<VerifiedPermissions.Types.CreatePolicyOutput, AWSError>;
   /**
-   * Creates a Cedar policy and saves it in the specified policy store. You can create either a static policy or a policy linked to a policy template.   To create a static policy, provide the Cedar policy text in the StaticPolicy section of the PolicyDefinition.   To create a policy that is dynamically linked to a policy template, specify the policy template ID and the principal and resource to associate with this policy in the templateLinked section of the PolicyDefinition. If the policy template is ever updated, any policies linked to the policy template automatically use the updated template.    Creating a policy causes it to be validated against the schema in the policy store. If the policy doesn't pass validation, the operation fails and the policy isn't stored.   Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to be propagate through the service and be visible in the results of other Verified Permissions operations. 
+   * Creates a Cedar policy and saves it in the specified policy store. You can create either a static policy or a policy linked to a policy template.   To create a static policy, provide the Cedar policy text in the StaticPolicy section of the PolicyDefinition.   To create a policy that is dynamically linked to a policy template, specify the policy template ID and the principal and resource to associate with this policy in the templateLinked section of the PolicyDefinition. If the policy template is ever updated, any policies linked to the policy template automatically use the updated template.    Creating a policy causes it to be validated against the schema in the policy store. If the policy doesn't pass validation, the operation fails and the policy isn't stored.   Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations. 
    */
   createPolicy(callback?: (err: AWSError, data: VerifiedPermissions.Types.CreatePolicyOutput) => void): Request<VerifiedPermissions.Types.CreatePolicyOutput, AWSError>;
   /**
-   * Creates a policy store. A policy store is a container for policy resources.  Although Cedar supports multiple namespaces, Verified Permissions currently supports only one namespace per policy store.   Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to be propagate through the service and be visible in the results of other Verified Permissions operations. 
+   * Creates a policy store. A policy store is a container for policy resources.  Although Cedar supports multiple namespaces, Verified Permissions currently supports only one namespace per policy store.   Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations. 
    */
   createPolicyStore(params: VerifiedPermissions.Types.CreatePolicyStoreInput, callback?: (err: AWSError, data: VerifiedPermissions.Types.CreatePolicyStoreOutput) => void): Request<VerifiedPermissions.Types.CreatePolicyStoreOutput, AWSError>;
   /**
-   * Creates a policy store. A policy store is a container for policy resources.  Although Cedar supports multiple namespaces, Verified Permissions currently supports only one namespace per policy store.   Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to be propagate through the service and be visible in the results of other Verified Permissions operations. 
+   * Creates a policy store. A policy store is a container for policy resources.  Although Cedar supports multiple namespaces, Verified Permissions currently supports only one namespace per policy store.   Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations. 
    */
   createPolicyStore(callback?: (err: AWSError, data: VerifiedPermissions.Types.CreatePolicyStoreOutput) => void): Request<VerifiedPermissions.Types.CreatePolicyStoreOutput, AWSError>;
   /**
-   * Creates a policy template. A template can use placeholders for the principal and resource. A template must be instantiated into a policy by associating it with specific principals and resources to use for the placeholders. That instantiated policy can then be considered in authorization decisions. The instantiated policy works identically to any other policy, except that it is dynamically linked to the template. If the template changes, then any policies that are linked to that template are immediately updated as well.  Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to be propagate through the service and be visible in the results of other Verified Permissions operations. 
+   * Creates a policy template. A template can use placeholders for the principal and resource. A template must be instantiated into a policy by associating it with specific principals and resources to use for the placeholders. That instantiated policy can then be considered in authorization decisions. The instantiated policy works identically to any other policy, except that it is dynamically linked to the template. If the template changes, then any policies that are linked to that template are immediately updated as well.  Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations. 
    */
   createPolicyTemplate(params: VerifiedPermissions.Types.CreatePolicyTemplateInput, callback?: (err: AWSError, data: VerifiedPermissions.Types.CreatePolicyTemplateOutput) => void): Request<VerifiedPermissions.Types.CreatePolicyTemplateOutput, AWSError>;
   /**
-   * Creates a policy template. A template can use placeholders for the principal and resource. A template must be instantiated into a policy by associating it with specific principals and resources to use for the placeholders. That instantiated policy can then be considered in authorization decisions. The instantiated policy works identically to any other policy, except that it is dynamically linked to the template. If the template changes, then any policies that are linked to that template are immediately updated as well.  Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to be propagate through the service and be visible in the results of other Verified Permissions operations. 
+   * Creates a policy template. A template can use placeholders for the principal and resource. A template must be instantiated into a policy by associating it with specific principals and resources to use for the placeholders. That instantiated policy can then be considered in authorization decisions. The instantiated policy works identically to any other policy, except that it is dynamically linked to the template. If the template changes, then any policies that are linked to that template are immediately updated as well.  Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations. 
    */
   createPolicyTemplate(callback?: (err: AWSError, data: VerifiedPermissions.Types.CreatePolicyTemplateOutput) => void): Request<VerifiedPermissions.Types.CreatePolicyTemplateOutput, AWSError>;
   /**
@@ -172,43 +172,43 @@ declare class VerifiedPermissions extends Service {
    */
   listPolicyTemplates(callback?: (err: AWSError, data: VerifiedPermissions.Types.ListPolicyTemplatesOutput) => void): Request<VerifiedPermissions.Types.ListPolicyTemplatesOutput, AWSError>;
   /**
-   * Creates or updates the policy schema in the specified policy store. The schema is used to validate any Cedar policies and policy templates submitted to the policy store. Any changes to the schema validate only policies and templates submitted after the schema change. Existing policies and templates are not re-evaluated against the changed schema. If you later update a policy, then it is evaluated against the new schema at that time.  Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to be propagate through the service and be visible in the results of other Verified Permissions operations. 
+   * Creates or updates the policy schema in the specified policy store. The schema is used to validate any Cedar policies and policy templates submitted to the policy store. Any changes to the schema validate only policies and templates submitted after the schema change. Existing policies and templates are not re-evaluated against the changed schema. If you later update a policy, then it is evaluated against the new schema at that time.  Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations. 
    */
   putSchema(params: VerifiedPermissions.Types.PutSchemaInput, callback?: (err: AWSError, data: VerifiedPermissions.Types.PutSchemaOutput) => void): Request<VerifiedPermissions.Types.PutSchemaOutput, AWSError>;
   /**
-   * Creates or updates the policy schema in the specified policy store. The schema is used to validate any Cedar policies and policy templates submitted to the policy store. Any changes to the schema validate only policies and templates submitted after the schema change. Existing policies and templates are not re-evaluated against the changed schema. If you later update a policy, then it is evaluated against the new schema at that time.  Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to be propagate through the service and be visible in the results of other Verified Permissions operations. 
+   * Creates or updates the policy schema in the specified policy store. The schema is used to validate any Cedar policies and policy templates submitted to the policy store. Any changes to the schema validate only policies and templates submitted after the schema change. Existing policies and templates are not re-evaluated against the changed schema. If you later update a policy, then it is evaluated against the new schema at that time.  Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations. 
    */
   putSchema(callback?: (err: AWSError, data: VerifiedPermissions.Types.PutSchemaOutput) => void): Request<VerifiedPermissions.Types.PutSchemaOutput, AWSError>;
   /**
-   * Updates the specified identity source to use a new identity provider (IdP) source, or to change the mapping of identities from the IdP to a different principal entity type.  Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to be propagate through the service and be visible in the results of other Verified Permissions operations. 
+   * Updates the specified identity source to use a new identity provider (IdP) source, or to change the mapping of identities from the IdP to a different principal entity type.  Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations. 
    */
   updateIdentitySource(params: VerifiedPermissions.Types.UpdateIdentitySourceInput, callback?: (err: AWSError, data: VerifiedPermissions.Types.UpdateIdentitySourceOutput) => void): Request<VerifiedPermissions.Types.UpdateIdentitySourceOutput, AWSError>;
   /**
-   * Updates the specified identity source to use a new identity provider (IdP) source, or to change the mapping of identities from the IdP to a different principal entity type.  Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to be propagate through the service and be visible in the results of other Verified Permissions operations. 
+   * Updates the specified identity source to use a new identity provider (IdP) source, or to change the mapping of identities from the IdP to a different principal entity type.  Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations. 
    */
   updateIdentitySource(callback?: (err: AWSError, data: VerifiedPermissions.Types.UpdateIdentitySourceOutput) => void): Request<VerifiedPermissions.Types.UpdateIdentitySourceOutput, AWSError>;
   /**
-   * Modifies a Cedar static policy in the specified policy store. You can change only certain elements of the UpdatePolicyDefinition parameter. You can directly update only static policies. To change a template-linked policy, you must update the template instead, using UpdatePolicyTemplate.    If policy validation is enabled in the policy store, then updating a static policy causes Verified Permissions to validate the policy against the schema in the policy store. If the updated static policy doesn't pass validation, the operation fails and the update isn't stored.   When you edit a static policy, You can change only certain elements of a static policy:   The action referenced by the policy.    A condition clause, such as when and unless.    You can't change these elements of a static policy:    Changing a policy from a static policy to a template-linked policy.    Changing the effect of a static policy from permit or forbid.    The principal referenced by a static policy.    The resource referenced by a static policy.      To update a template-linked policy, you must update the template instead.      Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to be propagate through the service and be visible in the results of other Verified Permissions operations. 
+   * Modifies a Cedar static policy in the specified policy store. You can change only certain elements of the UpdatePolicyDefinition parameter. You can directly update only static policies. To change a template-linked policy, you must update the template instead, using UpdatePolicyTemplate.    If policy validation is enabled in the policy store, then updating a static policy causes Verified Permissions to validate the policy against the schema in the policy store. If the updated static policy doesn't pass validation, the operation fails and the update isn't stored.   When you edit a static policy, you can change only certain elements of a static policy:   The action referenced by the policy.    A condition clause, such as when and unless.    You can't change these elements of a static policy:    Changing a policy from a static policy to a template-linked policy.    Changing the effect of a static policy from permit or forbid.    The principal referenced by a static policy.    The resource referenced by a static policy.      To update a template-linked policy, you must update the template instead.      Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations. 
    */
   updatePolicy(params: VerifiedPermissions.Types.UpdatePolicyInput, callback?: (err: AWSError, data: VerifiedPermissions.Types.UpdatePolicyOutput) => void): Request<VerifiedPermissions.Types.UpdatePolicyOutput, AWSError>;
   /**
-   * Modifies a Cedar static policy in the specified policy store. You can change only certain elements of the UpdatePolicyDefinition parameter. You can directly update only static policies. To change a template-linked policy, you must update the template instead, using UpdatePolicyTemplate.    If policy validation is enabled in the policy store, then updating a static policy causes Verified Permissions to validate the policy against the schema in the policy store. If the updated static policy doesn't pass validation, the operation fails and the update isn't stored.   When you edit a static policy, You can change only certain elements of a static policy:   The action referenced by the policy.    A condition clause, such as when and unless.    You can't change these elements of a static policy:    Changing a policy from a static policy to a template-linked policy.    Changing the effect of a static policy from permit or forbid.    The principal referenced by a static policy.    The resource referenced by a static policy.      To update a template-linked policy, you must update the template instead.      Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to be propagate through the service and be visible in the results of other Verified Permissions operations. 
+   * Modifies a Cedar static policy in the specified policy store. You can change only certain elements of the UpdatePolicyDefinition parameter. You can directly update only static policies. To change a template-linked policy, you must update the template instead, using UpdatePolicyTemplate.    If policy validation is enabled in the policy store, then updating a static policy causes Verified Permissions to validate the policy against the schema in the policy store. If the updated static policy doesn't pass validation, the operation fails and the update isn't stored.   When you edit a static policy, you can change only certain elements of a static policy:   The action referenced by the policy.    A condition clause, such as when and unless.    You can't change these elements of a static policy:    Changing a policy from a static policy to a template-linked policy.    Changing the effect of a static policy from permit or forbid.    The principal referenced by a static policy.    The resource referenced by a static policy.      To update a template-linked policy, you must update the template instead.      Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations. 
    */
   updatePolicy(callback?: (err: AWSError, data: VerifiedPermissions.Types.UpdatePolicyOutput) => void): Request<VerifiedPermissions.Types.UpdatePolicyOutput, AWSError>;
   /**
-   * Modifies the validation setting for a policy store.  Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to be propagate through the service and be visible in the results of other Verified Permissions operations. 
+   * Modifies the validation setting for a policy store.  Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations. 
    */
   updatePolicyStore(params: VerifiedPermissions.Types.UpdatePolicyStoreInput, callback?: (err: AWSError, data: VerifiedPermissions.Types.UpdatePolicyStoreOutput) => void): Request<VerifiedPermissions.Types.UpdatePolicyStoreOutput, AWSError>;
   /**
-   * Modifies the validation setting for a policy store.  Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to be propagate through the service and be visible in the results of other Verified Permissions operations. 
+   * Modifies the validation setting for a policy store.  Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations. 
    */
   updatePolicyStore(callback?: (err: AWSError, data: VerifiedPermissions.Types.UpdatePolicyStoreOutput) => void): Request<VerifiedPermissions.Types.UpdatePolicyStoreOutput, AWSError>;
   /**
-   * Updates the specified policy template. You can update only the description and the some elements of the policyBody.   Changes you make to the policy template content are immediately (within the constraints of eventual consistency) reflected in authorization decisions that involve all template-linked policies instantiated from this template.   Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to be propagate through the service and be visible in the results of other Verified Permissions operations. 
+   * Updates the specified policy template. You can update only the description and the some elements of the policyBody.   Changes you make to the policy template content are immediately (within the constraints of eventual consistency) reflected in authorization decisions that involve all template-linked policies instantiated from this template.   Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations. 
    */
   updatePolicyTemplate(params: VerifiedPermissions.Types.UpdatePolicyTemplateInput, callback?: (err: AWSError, data: VerifiedPermissions.Types.UpdatePolicyTemplateOutput) => void): Request<VerifiedPermissions.Types.UpdatePolicyTemplateOutput, AWSError>;
   /**
-   * Updates the specified policy template. You can update only the description and the some elements of the policyBody.   Changes you make to the policy template content are immediately (within the constraints of eventual consistency) reflected in authorization decisions that involve all template-linked policies instantiated from this template.   Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to be propagate through the service and be visible in the results of other Verified Permissions operations. 
+   * Updates the specified policy template. You can update only the description and the some elements of the policyBody.   Changes you make to the policy template content are immediately (within the constraints of eventual consistency) reflected in authorization decisions that involve all template-linked policies instantiated from this template.   Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations. 
    */
   updatePolicyTemplate(callback?: (err: AWSError, data: VerifiedPermissions.Types.UpdatePolicyTemplateOutput) => void): Request<VerifiedPermissions.Types.UpdatePolicyTemplateOutput, AWSError>;
 }
@@ -323,11 +323,51 @@ declare namespace VerifiedPermissions {
      */
     clientIds?: ClientIds;
   }
+  export interface CognitoUserPoolConfigurationDetail {
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon Cognito user pool that contains the identities to be authorized. Example: "userPoolArn": "arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5" 
+     */
+    userPoolArn: UserPoolArn;
+    /**
+     * The unique application client IDs that are associated with the specified Amazon Cognito user pool. Example: "clientIds": ["&amp;ExampleCogClientId;"] 
+     */
+    clientIds: ClientIds;
+    /**
+     * The OpenID Connect (OIDC) issuer ID of the Amazon Cognito user pool that contains the identities to be authorized. Example: "issuer": "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_1a2b3c4d5" 
+     */
+    issuer: Issuer;
+  }
+  export interface CognitoUserPoolConfigurationItem {
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon Cognito user pool that contains the identities to be authorized. Example: "userPoolArn": "arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5" 
+     */
+    userPoolArn: UserPoolArn;
+    /**
+     * The unique application client IDs that are associated with the specified Amazon Cognito user pool. Example: "clientIds": ["&amp;ExampleCogClientId;"] 
+     */
+    clientIds: ClientIds;
+    /**
+     * The OpenID Connect (OIDC) issuer ID of the Amazon Cognito user pool that contains the identities to be authorized. Example: "issuer": "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_1a2b3c4d5" 
+     */
+    issuer: Issuer;
+  }
   export interface Configuration {
     /**
      * Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of authenticated identities as entities. It specifies the Amazon Resource Name (ARN) of a Amazon Cognito user pool and one or more application client IDs. Example: "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds": ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}} 
      */
     cognitoUserPoolConfiguration?: CognitoUserPoolConfiguration;
+  }
+  export interface ConfigurationDetail {
+    /**
+     * Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of authenticated identities as entities. It specifies the Amazon Resource Name (ARN) of a Amazon Cognito user pool and one or more application client IDs. Example: "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds": ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}} 
+     */
+    cognitoUserPoolConfiguration?: CognitoUserPoolConfigurationDetail;
+  }
+  export interface ConfigurationItem {
+    /**
+     * Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of authenticated identities as entities. It specifies the Amazon Resource Name (ARN) of a Amazon Cognito user pool and one or more application client IDs. Example: "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds": ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}} 
+     */
+    cognitoUserPoolConfiguration?: CognitoUserPoolConfigurationItem;
   }
   export interface ContextDefinition {
     /**
@@ -338,7 +378,7 @@ declare namespace VerifiedPermissions {
   export type ContextMap = {[key: string]: AttributeValue};
   export interface CreateIdentitySourceInput {
     /**
-     * Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a UUID type of value.. If you don't provide this value, then Amazon Web Services generates a random one for you. If you retry the operation with the same ClientToken, but with different parameters, the retry fails with an IdempotentParameterMismatch error.
+     * Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a UUID type of value.. If you don't provide this value, then Amazon Web Services generates a random one for you. If you retry the operation with the same ClientToken, but with different parameters, the retry fails with an ConflictException error. Verified Permissions recognizes a ClientToken for eight hours. After eight hours, the next request with the same parameters performs the operation again regardless of the value of ClientToken.
      */
     clientToken?: IdempotencyToken;
     /**
@@ -374,7 +414,7 @@ declare namespace VerifiedPermissions {
   }
   export interface CreatePolicyInput {
     /**
-     * Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a UUID type of value.. If you don't provide this value, then Amazon Web Services generates a random one for you. If you retry the operation with the same ClientToken, but with different parameters, the retry fails with an IdempotentParameterMismatch error.
+     * Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a UUID type of value.. If you don't provide this value, then Amazon Web Services generates a random one for you. If you retry the operation with the same ClientToken, but with different parameters, the retry fails with an ConflictException error. Verified Permissions recognizes a ClientToken for eight hours. After eight hours, the next request with the same parameters performs the operation again regardless of the value of ClientToken.
      */
     clientToken?: IdempotencyToken;
     /**
@@ -418,7 +458,7 @@ declare namespace VerifiedPermissions {
   }
   export interface CreatePolicyStoreInput {
     /**
-     * Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a UUID type of value.. If you don't provide this value, then Amazon Web Services generates a random one for you. If you retry the operation with the same ClientToken, but with different parameters, the retry fails with an IdempotentParameterMismatch error.
+     * Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a UUID type of value.. If you don't provide this value, then Amazon Web Services generates a random one for you. If you retry the operation with the same ClientToken, but with different parameters, the retry fails with an ConflictException error. Verified Permissions recognizes a ClientToken for eight hours. After eight hours, the next request with the same parameters performs the operation again regardless of the value of ClientToken.
      */
     clientToken?: IdempotencyToken;
     /**
@@ -450,7 +490,7 @@ declare namespace VerifiedPermissions {
   }
   export interface CreatePolicyTemplateInput {
     /**
-     * Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a UUID type of value.. If you don't provide this value, then Amazon Web Services generates a random one for you. If you retry the operation with the same ClientToken, but with different parameters, the retry fails with an IdempotentParameterMismatch error.
+     * Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a UUID type of value.. If you don't provide this value, then Amazon Web Services generates a random one for you. If you retry the operation with the same ClientToken, but with different parameters, the retry fails with an ConflictException error. Verified Permissions recognizes a ClientToken for eight hours. After eight hours, the next request with the same parameters performs the operation again regardless of the value of ClientToken.
      */
     clientToken?: IdempotencyToken;
     /**
@@ -606,7 +646,7 @@ declare namespace VerifiedPermissions {
     /**
      * A structure that describes the configuration of the identity source.
      */
-    details: IdentitySourceDetails;
+    details?: IdentitySourceDetails;
     /**
      * The ID of the identity source.
      */
@@ -623,6 +663,10 @@ declare namespace VerifiedPermissions {
      * The data type of principals generated for identities authenticated by this identity source.
      */
     principalEntityType: PrincipalEntityType;
+    /**
+     * Contains configuration information about an identity source.
+     */
+    configuration?: ConfigurationDetail;
   }
   export interface GetPolicyInput {
     /**
@@ -799,7 +843,7 @@ declare namespace VerifiedPermissions {
     /**
      * A structure that contains the details of the associated identity provider (IdP).
      */
-    details: IdentitySourceItemDetails;
+    details?: IdentitySourceItemDetails;
     /**
      * The unique identifier of the identity source.
      */
@@ -816,6 +860,10 @@ declare namespace VerifiedPermissions {
      * The Cedar entity type of the principals returned from the IdP associated with this identity source.
      */
     principalEntityType: PrincipalEntityType;
+    /**
+     * Contains configuration information about an identity source.
+     */
+    configuration?: ConfigurationItem;
   }
   export interface IdentitySourceItemDetails {
     /**
@@ -882,11 +930,11 @@ declare namespace VerifiedPermissions {
      */
     policyStoreId: PolicyStoreId;
     /**
-     * Specifies an identity token for the principal to be authorized. This token is provided to you by the identity provider (IdP) associated with the specified identity source. You must specify either an AccessToken or an IdentityToken, or both.
+     * Specifies an identity token for the principal to be authorized. This token is provided to you by the identity provider (IdP) associated with the specified identity source. You must specify either an accessToken, an identityToken, or both. Must be an ID token. Verified Permissions returns an error if the token_use claim in the submitted token isn't id.
      */
     identityToken?: Token;
     /**
-     * Specifies an access token for the principal to be authorized. This token is provided to you by the identity provider (IdP) associated with the specified identity source. You must specify either an AccessToken, or an IdentityToken, or both.
+     * Specifies an access token for the principal to be authorized. This token is provided to you by the identity provider (IdP) associated with the specified identity source. You must specify either an accessToken, an identityToken, or both. Must be an access token. Verified Permissions returns an error if the token_use claim in the submitted token isn't access.
      */
     accessToken?: Token;
     /**
@@ -920,6 +968,7 @@ declare namespace VerifiedPermissions {
      */
     errors: EvaluationErrorList;
   }
+  export type Issuer = string;
   export interface ListIdentitySourcesInput {
     /**
      * Specifies the ID of the policy store that contains the identity sources that you want to list.
