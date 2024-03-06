@@ -8,7 +8,7 @@
 [![Coverage Status](https://codecov.io/gh/aws/aws-sdk-js/branch/master/graph/badge.svg)](https://codecov.io/gh/aws/aws-sdk-js)
 [![Known Vulnerabilities](https://snyk.io/test/github/aws/aws-sdk-js/badge.svg)](https://snyk.io/test/github/aws/aws-sdk-js)
 
-## Version 2.x End-of-Support
+## Version 2.x upcoming End-of-Support
 
 We [announced][v2-maintenance-mode] the upcoming end-of-support for AWS SDK for JavaScript v2.
 We recommend that you migrate to [AWS SDK for JavaScript v3][aws-sdk-js-v3].
