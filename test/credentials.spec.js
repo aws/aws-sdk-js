@@ -1958,7 +1958,10 @@ const exp = require('constants');
             }
           }
         );
-        helpers.spyOn(fs, 'readFileSync').andReturn('oidcToken');
+        helpers.spyOn(fs, 'readFile').andCallFake(function() {
+          var callback = arguments[arguments.length - 1];
+          return callback(null, 'oidcToken');
+        });
       });
       afterEach(function() {
         iniLoader.clearCachedFiles();
@@ -1985,7 +1988,7 @@ const exp = require('constants');
 
       it('reads params from environment variables when available', function(done) {
         new AWS.TokenFileWebIdentityCredentials().refresh(function() {
-          expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('envTokenFile');
+          expect(fs.readFile.calls[0]['arguments'][0]).to.equal('envTokenFile');
           done();
         });
       });
@@ -1994,7 +1997,7 @@ const exp = require('constants');
         it('when AWS_WEB_IDENTITY_TOKEN_FILE is not available', function(done) {
           delete process.env.AWS_WEB_IDENTITY_TOKEN_FILE;
           new AWS.TokenFileWebIdentityCredentials().refresh(function() {
-            expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('cfgTokenFile');
+            expect(fs.readFile.calls[0]['arguments'][0]).to.equal('cfgTokenFile');
             done();
           });
         });
@@ -2002,7 +2005,7 @@ const exp = require('constants');
         it('when AWS_IAM_ROLE_ARN is not available', function(done) {
           delete process.env.AWS_ROLE_ARN;
           new AWS.TokenFileWebIdentityCredentials().refresh(function() {
-            expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('cfgTokenFile');
+            expect(fs.readFile.calls[0]['arguments'][0]).to.equal('cfgTokenFile');
             done();
           });
         });
@@ -2010,7 +2013,7 @@ const exp = require('constants');
         return it('when process.env is empty', function(done) {
           process.env = {};
           new AWS.TokenFileWebIdentityCredentials().refresh(function() {
-            expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('cfgTokenFile');
+            expect(fs.readFile.calls[0]['arguments'][0]).to.equal('cfgTokenFile');
             done();
           });
         });
@@ -2023,7 +2026,10 @@ const exp = require('constants');
           credentials.refresh(function() {
             expect(assumeRoleWithWebIdentitySpy.calls[0]['arguments'][0].WebIdentityToken).to.equal('oidcToken');
             var updatedOidcToken = 'updatedOidcToken';
-            helpers.spyOn(fs, 'readFileSync').andReturn(updatedOidcToken);
+            helpers.spyOn(fs, 'readFile').andCallFake(function() {
+              var callback = arguments[arguments.length - 1];
+              return callback(null, updatedOidcToken);
+            });
             credentials.refresh(function() {
               expect(assumeRoleWithWebIdentitySpy.calls[1]['arguments'][0].WebIdentityToken).to.equal(updatedOidcToken);
               done();
@@ -2061,7 +2067,7 @@ const exp = require('constants');
         );
         var credentials = new AWS.TokenFileWebIdentityCredentials();
         credentials.refresh(function() {
-          expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('cfgTokenFileSource');
+          expect(fs.readFile.calls[0]['arguments'][0]).to.equal('cfgTokenFileSource');
           const sourceCredentials = {
             AccessKeyId: 'AccessKeyIdSource',
             SecretAccessKey: 'SecretAccessKeySource'
@@ -2104,7 +2110,7 @@ const exp = require('constants');
         );
         var credentials = new AWS.TokenFileWebIdentityCredentials();
         credentials.refresh(function() {
-          expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('cfgTokenFileDefault');
+          expect(fs.readFile.calls[0]['arguments'][0]).to.equal('cfgTokenFileDefault');
           var assumeRoleWithWebIdentitySpy = helpers.spyOn(credentials.service, 'assumeRoleWithWebIdentity').andCallFake(function(params, cb) {
             return cb(null, {
               Credentials: defaultCredentials
