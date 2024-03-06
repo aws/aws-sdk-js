@@ -21,7 +21,7 @@ migration scripts in [aws-sdk-js-codemod][aws-sdk-js-codemod] to migrate
 your application from v2 to v3.
 
 To get help with your migration, please follow our general guidelines to 
-[open an issue][v2-new-issue] and choose [guidance][open-issue-v2-guidance].
+[open an issue][v3-new-issue] and choose [guidance][open-issue-v3-guidance].
 To give feedback on and report issues in the v3 repo, please refer to 
 [Giving feedback and contributing][v3-contributing].
 
@@ -41,13 +41,13 @@ var SDK = require('aws-sdk');
 require('aws-sdk/lib/maintenance_mode_message').suppress = true;
 ```
 
-[v2-new-issue]: https://github.com/aws/aws-sdk-js/issues/new/choose
+[v3-new-issue]: https://github.com/aws/aws-sdk-js-v3/issues/new?assignees=&labels=needs-triage%2Cv2-v3-inconsistency&projects=&template=v2-to-v3-migration.yml&title=MIGRATION+ISSUE%3A+%5BYour+Title+Here%5D
 [v2-maintenance-mode]: https://aws.amazon.com/blogs/developer/announcing-end-of-support-for-aws-sdk-for-javascript-v2
 [v3-recommended-blog]: https://aws.amazon.com/blogs/developer/why-and-how-you-should-use-aws-sdk-for-javascript-v3-on-node-js-18/
 [v3-contributing]: https://github.com/aws/aws-sdk-js-v3#giving-feedback-and-contributing
 [aws-sdk-js-v3]: https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html
 [aws-devtools-blog]: https://aws.amazon.com/blogs/developer/
-[open-issue-v2-guidance]: https://github.com/aws/aws-sdk-js/issues/new?assignees=&labels=guidance%2C+needs-triage&template=---questions---help.md&title=
+[open-issue-v3-guidance]: https://github.com/aws/aws-sdk-js-v3/issues/new?assignees=&labels=guidance%2C+needs-triage&template=---questions---help.md&title=
 [aws-sdk-js-codemod]: https://www.npmjs.com/package/aws-sdk-js-codemod
 
 ## Table of Contents:
