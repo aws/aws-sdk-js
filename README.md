@@ -8,18 +8,13 @@
 [![Coverage Status](https://codecov.io/gh/aws/aws-sdk-js/branch/master/graph/badge.svg)](https://codecov.io/gh/aws/aws-sdk-js)
 [![Known Vulnerabilities](https://snyk.io/test/github/aws/aws-sdk-js/badge.svg)](https://snyk.io/test/github/aws/aws-sdk-js)
 
-## Version 3.x Now Available
-The [version 3.x](https://github.com/aws/aws-sdk-js-v3) of the AWS SDK for JavaScript is generally available.
-For more information see the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
-or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
+## Version 2.x End-of-Support
 
-For release notes, see the [CHANGELOG](https://github.com/aws/aws-sdk-js/blob/master/CHANGELOG.md). Prior to v2.4.8, release notes can be found at https://aws.amazon.com/releasenotes/?tag=releasenotes%23keywords%23javascript
+We [announced][v2-maintenance-mode] the upcoming end-of-support for AWS SDK for JavaScript v2.
+We recommend that you migrate to [AWS SDK for JavaScript v3][aws-sdk-js-v3].
+For dates, additional details, and information on how to migrate, please refer to the linked announcement.
 
-## Version 2.x Support
-We are formalizing our plans to make the *Maintenance Announcement (Phase 2)* for **AWS SDK for JavaScript v2** in early 2024.
-Please refer to the [AWS SDKs and Tools maintenance policy][aws-sdks-maintenance-policy] for further details.
-
-[**AWS SDK for JavaScript v3**][aws-sdk-js-v3] is the latest and recommended version, 
+The **AWS SDK for JavaScript v3** is the latest and recommended version, 
 which has been GA since December 2020. Here is [why and how you should use
 **AWS SDK for JavaScript v3**][v3-recommended-blog]. You can try our experimental
 migration scripts in [aws-sdk-js-codemod][aws-sdk-js-codemod] to migrate
@@ -47,11 +42,11 @@ require('aws-sdk/lib/maintenance_mode_message').suppress = true;
 ```
 
 [v2-new-issue]: https://github.com/aws/aws-sdk-js/issues/new/choose
+[v2-maintenance-mode]: https://aws.amazon.com/blogs/developer/announcing-end-of-support-for-aws-sdk-for-javascript-v2
 [v3-recommended-blog]: https://aws.amazon.com/blogs/developer/why-and-how-you-should-use-aws-sdk-for-javascript-v3-on-node-js-18/
 [v3-contributing]: https://github.com/aws/aws-sdk-js-v3#giving-feedback-and-contributing
-[aws-sdk-js-v3]: https://github.com/aws/aws-sdk-js-v3
+[aws-sdk-js-v3]: https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html
 [aws-devtools-blog]: https://aws.amazon.com/blogs/developer/
-[aws-sdks-maintenance-policy]: https://docs.aws.amazon.com/sdkref/latest/guide/maint-policy.html
 [open-issue-v2-guidance]: https://github.com/aws/aws-sdk-js/issues/new?assignees=&labels=guidance%2C+needs-triage&template=---questions---help.md&title=
 [aws-sdk-js-codemod]: https://www.npmjs.com/package/aws-sdk-js-codemod
 
