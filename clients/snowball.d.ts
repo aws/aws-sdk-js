@@ -741,7 +741,7 @@ declare namespace Snowball {
      */
     KubernetesVersion?: String;
     /**
-     * The version of EKS Anywhere on the Snow Family device.
+     * The optional version of EKS Anywhere on the Snow Family device.
      */
     EKSAnywhereVersion?: String;
   }

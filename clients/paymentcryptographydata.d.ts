@@ -12,19 +12,19 @@ declare class PaymentCryptographyData extends Service {
   constructor(options?: PaymentCryptographyData.Types.ClientConfiguration)
   config: Config & PaymentCryptographyData.Types.ClientConfiguration;
   /**
-   * Decrypts ciphertext data to plaintext using symmetric, asymmetric, or DUKPT data encryption key. For more information, see Decrypt data in the Amazon Web Services Payment Cryptography User Guide. You can use an encryption key generated within Amazon Web Services Payment Cryptography, or you can import your own encryption key by calling ImportKey. For this operation, the key must have KeyModesOfUse set to Decrypt. In asymmetric decryption, Amazon Web Services Payment Cryptography decrypts the ciphertext using the private component of the asymmetric encryption key pair. For data encryption outside of Amazon Web Services Payment Cryptography, you can export the public component of the asymmetric key pair by calling GetPublicCertificate. For symmetric and DUKPT decryption, Amazon Web Services Payment Cryptography supports TDES and AES algorithms. For asymmetric decryption, Amazon Web Services Payment Cryptography supports RSA. When you use DUKPT, for TDES algorithm, the ciphertext data length must be a multiple of 16 bytes. For AES algorithm, the ciphertext data length must be a multiple of 32 bytes. For information about valid keys for this operation, see Understanding key attributes and Key types for specific data operations in the Amazon Web Services Payment Cryptography User Guide.   Cross-account use: This operation can't be used across different Amazon Web Services accounts.  Related operations:     EncryptData     GetPublicCertificate     ImportKey   
+   * Decrypts ciphertext data to plaintext using a symmetric (TDES, AES), asymmetric (RSA), or derived (DUKPT or EMV) encryption key scheme. For more information, see Decrypt data in the Amazon Web Services Payment Cryptography User Guide. You can use an encryption key generated within Amazon Web Services Payment Cryptography, or you can import your own encryption key by calling ImportKey. For this operation, the key must have KeyModesOfUse set to Decrypt. In asymmetric decryption, Amazon Web Services Payment Cryptography decrypts the ciphertext using the private component of the asymmetric encryption key pair. For data encryption outside of Amazon Web Services Payment Cryptography, you can export the public component of the asymmetric key pair by calling GetPublicCertificate. For symmetric and DUKPT decryption, Amazon Web Services Payment Cryptography supports TDES and AES algorithms. For EMV decryption, Amazon Web Services Payment Cryptography supports TDES algorithms. For asymmetric decryption, Amazon Web Services Payment Cryptography supports RSA.  When you use TDES or TDES DUKPT, the ciphertext data length must be a multiple of 8 bytes. For AES or AES DUKPT, the ciphertext data length must be a multiple of 16 bytes. For RSA, it sould be equal to the key size unless padding is enabled. For information about valid keys for this operation, see Understanding key attributes and Key types for specific data operations in the Amazon Web Services Payment Cryptography User Guide.   Cross-account use: This operation can't be used across different Amazon Web Services accounts.  Related operations:     EncryptData     GetPublicCertificate     ImportKey   
    */
   decryptData(params: PaymentCryptographyData.Types.DecryptDataInput, callback?: (err: AWSError, data: PaymentCryptographyData.Types.DecryptDataOutput) => void): Request<PaymentCryptographyData.Types.DecryptDataOutput, AWSError>;
   /**
-   * Decrypts ciphertext data to plaintext using symmetric, asymmetric, or DUKPT data encryption key. For more information, see Decrypt data in the Amazon Web Services Payment Cryptography User Guide. You can use an encryption key generated within Amazon Web Services Payment Cryptography, or you can import your own encryption key by calling ImportKey. For this operation, the key must have KeyModesOfUse set to Decrypt. In asymmetric decryption, Amazon Web Services Payment Cryptography decrypts the ciphertext using the private component of the asymmetric encryption key pair. For data encryption outside of Amazon Web Services Payment Cryptography, you can export the public component of the asymmetric key pair by calling GetPublicCertificate. For symmetric and DUKPT decryption, Amazon Web Services Payment Cryptography supports TDES and AES algorithms. For asymmetric decryption, Amazon Web Services Payment Cryptography supports RSA. When you use DUKPT, for TDES algorithm, the ciphertext data length must be a multiple of 16 bytes. For AES algorithm, the ciphertext data length must be a multiple of 32 bytes. For information about valid keys for this operation, see Understanding key attributes and Key types for specific data operations in the Amazon Web Services Payment Cryptography User Guide.   Cross-account use: This operation can't be used across different Amazon Web Services accounts.  Related operations:     EncryptData     GetPublicCertificate     ImportKey   
+   * Decrypts ciphertext data to plaintext using a symmetric (TDES, AES), asymmetric (RSA), or derived (DUKPT or EMV) encryption key scheme. For more information, see Decrypt data in the Amazon Web Services Payment Cryptography User Guide. You can use an encryption key generated within Amazon Web Services Payment Cryptography, or you can import your own encryption key by calling ImportKey. For this operation, the key must have KeyModesOfUse set to Decrypt. In asymmetric decryption, Amazon Web Services Payment Cryptography decrypts the ciphertext using the private component of the asymmetric encryption key pair. For data encryption outside of Amazon Web Services Payment Cryptography, you can export the public component of the asymmetric key pair by calling GetPublicCertificate. For symmetric and DUKPT decryption, Amazon Web Services Payment Cryptography supports TDES and AES algorithms. For EMV decryption, Amazon Web Services Payment Cryptography supports TDES algorithms. For asymmetric decryption, Amazon Web Services Payment Cryptography supports RSA.  When you use TDES or TDES DUKPT, the ciphertext data length must be a multiple of 8 bytes. For AES or AES DUKPT, the ciphertext data length must be a multiple of 16 bytes. For RSA, it sould be equal to the key size unless padding is enabled. For information about valid keys for this operation, see Understanding key attributes and Key types for specific data operations in the Amazon Web Services Payment Cryptography User Guide.   Cross-account use: This operation can't be used across different Amazon Web Services accounts.  Related operations:     EncryptData     GetPublicCertificate     ImportKey   
    */
   decryptData(callback?: (err: AWSError, data: PaymentCryptographyData.Types.DecryptDataOutput) => void): Request<PaymentCryptographyData.Types.DecryptDataOutput, AWSError>;
   /**
-   * Encrypts plaintext data to ciphertext using symmetric, asymmetric, or DUKPT data encryption key. For more information, see Encrypt data in the Amazon Web Services Payment Cryptography User Guide. You can generate an encryption key within Amazon Web Services Payment Cryptography by calling CreateKey. You can import your own encryption key by calling ImportKey. For this operation, the key must have KeyModesOfUse set to Encrypt. In asymmetric encryption, plaintext is encrypted using public component. You can import the public component of an asymmetric key pair created outside Amazon Web Services Payment Cryptography by calling ImportKey).  for symmetric and DUKPT encryption, Amazon Web Services Payment Cryptography supports TDES and AES algorithms. For asymmetric encryption, Amazon Web Services Payment Cryptography supports RSA. To encrypt using DUKPT, you must already have a DUKPT key in your account with KeyModesOfUse set to DeriveKey, or you can generate a new DUKPT key by calling CreateKey. For information about valid keys for this operation, see Understanding key attributes and Key types for specific data operations in the Amazon Web Services Payment Cryptography User Guide.  Cross-account use: This operation can't be used across different Amazon Web Services accounts.  Related operations:     DecryptData     GetPublicCertificate     ImportKey     ReEncryptData   
+   * Encrypts plaintext data to ciphertext using a symmetric (TDES, AES), asymmetric (RSA), or derived (DUKPT or EMV) encryption key scheme. For more information, see Encrypt data in the Amazon Web Services Payment Cryptography User Guide. You can generate an encryption key within Amazon Web Services Payment Cryptography by calling CreateKey. You can import your own encryption key by calling ImportKey. For this operation, the key must have KeyModesOfUse set to Encrypt. In asymmetric encryption, plaintext is encrypted using public component. You can import the public component of an asymmetric key pair created outside Amazon Web Services Payment Cryptography by calling ImportKey.  For symmetric and DUKPT encryption, Amazon Web Services Payment Cryptography supports TDES and AES algorithms. For EMV encryption, Amazon Web Services Payment Cryptography supports TDES algorithms.For asymmetric encryption, Amazon Web Services Payment Cryptography supports RSA.  When you use TDES or TDES DUKPT, the plaintext data length must be a multiple of 8 bytes. For AES or AES DUKPT, the plaintext data length must be a multiple of 16 bytes. For RSA, it sould be equal to the key size unless padding is enabled. To encrypt using DUKPT, you must already have a BDK (Base Derivation Key) key in your account with KeyModesOfUse set to DeriveKey, or you can generate a new DUKPT key by calling CreateKey. To encrypt using EMV, you must already have an IMK (Issuer Master Key) key in your account with KeyModesOfUse set to DeriveKey. For information about valid keys for this operation, see Understanding key attributes and Key types for specific data operations in the Amazon Web Services Payment Cryptography User Guide.  Cross-account use: This operation can't be used across different Amazon Web Services accounts.  Related operations:     DecryptData     GetPublicCertificate     ImportKey     ReEncryptData   
    */
   encryptData(params: PaymentCryptographyData.Types.EncryptDataInput, callback?: (err: AWSError, data: PaymentCryptographyData.Types.EncryptDataOutput) => void): Request<PaymentCryptographyData.Types.EncryptDataOutput, AWSError>;
   /**
-   * Encrypts plaintext data to ciphertext using symmetric, asymmetric, or DUKPT data encryption key. For more information, see Encrypt data in the Amazon Web Services Payment Cryptography User Guide. You can generate an encryption key within Amazon Web Services Payment Cryptography by calling CreateKey. You can import your own encryption key by calling ImportKey. For this operation, the key must have KeyModesOfUse set to Encrypt. In asymmetric encryption, plaintext is encrypted using public component. You can import the public component of an asymmetric key pair created outside Amazon Web Services Payment Cryptography by calling ImportKey).  for symmetric and DUKPT encryption, Amazon Web Services Payment Cryptography supports TDES and AES algorithms. For asymmetric encryption, Amazon Web Services Payment Cryptography supports RSA. To encrypt using DUKPT, you must already have a DUKPT key in your account with KeyModesOfUse set to DeriveKey, or you can generate a new DUKPT key by calling CreateKey. For information about valid keys for this operation, see Understanding key attributes and Key types for specific data operations in the Amazon Web Services Payment Cryptography User Guide.  Cross-account use: This operation can't be used across different Amazon Web Services accounts.  Related operations:     DecryptData     GetPublicCertificate     ImportKey     ReEncryptData   
+   * Encrypts plaintext data to ciphertext using a symmetric (TDES, AES), asymmetric (RSA), or derived (DUKPT or EMV) encryption key scheme. For more information, see Encrypt data in the Amazon Web Services Payment Cryptography User Guide. You can generate an encryption key within Amazon Web Services Payment Cryptography by calling CreateKey. You can import your own encryption key by calling ImportKey. For this operation, the key must have KeyModesOfUse set to Encrypt. In asymmetric encryption, plaintext is encrypted using public component. You can import the public component of an asymmetric key pair created outside Amazon Web Services Payment Cryptography by calling ImportKey.  For symmetric and DUKPT encryption, Amazon Web Services Payment Cryptography supports TDES and AES algorithms. For EMV encryption, Amazon Web Services Payment Cryptography supports TDES algorithms.For asymmetric encryption, Amazon Web Services Payment Cryptography supports RSA.  When you use TDES or TDES DUKPT, the plaintext data length must be a multiple of 8 bytes. For AES or AES DUKPT, the plaintext data length must be a multiple of 16 bytes. For RSA, it sould be equal to the key size unless padding is enabled. To encrypt using DUKPT, you must already have a BDK (Base Derivation Key) key in your account with KeyModesOfUse set to DeriveKey, or you can generate a new DUKPT key by calling CreateKey. To encrypt using EMV, you must already have an IMK (Issuer Master Key) key in your account with KeyModesOfUse set to DeriveKey. For information about valid keys for this operation, see Understanding key attributes and Key types for specific data operations in the Amazon Web Services Payment Cryptography User Guide.  Cross-account use: This operation can't be used across different Amazon Web Services accounts.  Related operations:     DecryptData     GetPublicCertificate     ImportKey     ReEncryptData   
    */
   encryptData(callback?: (err: AWSError, data: PaymentCryptographyData.Types.EncryptDataOutput) => void): Request<PaymentCryptographyData.Types.EncryptDataOutput, AWSError>;
   /**
@@ -36,11 +36,11 @@ declare class PaymentCryptographyData extends Service {
    */
   generateCardValidationData(callback?: (err: AWSError, data: PaymentCryptographyData.Types.GenerateCardValidationDataOutput) => void): Request<PaymentCryptographyData.Types.GenerateCardValidationDataOutput, AWSError>;
   /**
-   * Generates a Message Authentication Code (MAC) cryptogram within Amazon Web Services Payment Cryptography.  You can use this operation when keys won't be shared but mutual data is present on both ends for validation. In this case, known data values are used to generate a MAC on both ends for comparision without sending or receiving data in ciphertext or plaintext. You can use this operation to generate a DUPKT, HMAC or EMV MAC by setting generation attributes and algorithm to the associated values. The MAC generation encryption key must have valid values for KeyUsage such as TR31_M7_HMAC_KEY for HMAC generation, and they key must have KeyModesOfUse set to Generate and Verify. For information about valid keys for this operation, see Understanding key attributes and Key types for specific data operations in the Amazon Web Services Payment Cryptography User Guide.   Cross-account use: This operation can't be used across different Amazon Web Services accounts.  Related operations:     VerifyMac   
+   * Generates a Message Authentication Code (MAC) cryptogram within Amazon Web Services Payment Cryptography.  You can use this operation to authenticate card-related data by using known data values to generate MAC for data validation between the sending and receiving parties. This operation uses message data, a secret encryption key and MAC algorithm to generate a unique MAC value for transmission. The receiving party of the MAC must use the same message data, secret encryption key and MAC algorithm to reproduce another MAC value for comparision. You can use this operation to generate a DUPKT, CMAC, HMAC or EMV MAC by setting generation attributes and algorithm to the associated values. The MAC generation encryption key must have valid values for KeyUsage such as TR31_M7_HMAC_KEY for HMAC generation, and they key must have KeyModesOfUse set to Generate and Verify. For information about valid keys for this operation, see Understanding key attributes and Key types for specific data operations in the Amazon Web Services Payment Cryptography User Guide.   Cross-account use: This operation can't be used across different Amazon Web Services accounts.  Related operations:     VerifyMac   
    */
   generateMac(params: PaymentCryptographyData.Types.GenerateMacInput, callback?: (err: AWSError, data: PaymentCryptographyData.Types.GenerateMacOutput) => void): Request<PaymentCryptographyData.Types.GenerateMacOutput, AWSError>;
   /**
-   * Generates a Message Authentication Code (MAC) cryptogram within Amazon Web Services Payment Cryptography.  You can use this operation when keys won't be shared but mutual data is present on both ends for validation. In this case, known data values are used to generate a MAC on both ends for comparision without sending or receiving data in ciphertext or plaintext. You can use this operation to generate a DUPKT, HMAC or EMV MAC by setting generation attributes and algorithm to the associated values. The MAC generation encryption key must have valid values for KeyUsage such as TR31_M7_HMAC_KEY for HMAC generation, and they key must have KeyModesOfUse set to Generate and Verify. For information about valid keys for this operation, see Understanding key attributes and Key types for specific data operations in the Amazon Web Services Payment Cryptography User Guide.   Cross-account use: This operation can't be used across different Amazon Web Services accounts.  Related operations:     VerifyMac   
+   * Generates a Message Authentication Code (MAC) cryptogram within Amazon Web Services Payment Cryptography.  You can use this operation to authenticate card-related data by using known data values to generate MAC for data validation between the sending and receiving parties. This operation uses message data, a secret encryption key and MAC algorithm to generate a unique MAC value for transmission. The receiving party of the MAC must use the same message data, secret encryption key and MAC algorithm to reproduce another MAC value for comparision. You can use this operation to generate a DUPKT, CMAC, HMAC or EMV MAC by setting generation attributes and algorithm to the associated values. The MAC generation encryption key must have valid values for KeyUsage such as TR31_M7_HMAC_KEY for HMAC generation, and they key must have KeyModesOfUse set to Generate and Verify. For information about valid keys for this operation, see Understanding key attributes and Key types for specific data operations in the Amazon Web Services Payment Cryptography User Guide.   Cross-account use: This operation can't be used across different Amazon Web Services accounts.  Related operations:     VerifyMac   
    */
   generateMac(callback?: (err: AWSError, data: PaymentCryptographyData.Types.GenerateMacOutput) => void): Request<PaymentCryptographyData.Types.GenerateMacOutput, AWSError>;
   /**
@@ -60,11 +60,11 @@ declare class PaymentCryptographyData extends Service {
    */
   reEncryptData(callback?: (err: AWSError, data: PaymentCryptographyData.Types.ReEncryptDataOutput) => void): Request<PaymentCryptographyData.Types.ReEncryptDataOutput, AWSError>;
   /**
-   * Translates encrypted PIN block from and to ISO 9564 formats 0,1,3,4. For more information, see Translate PIN data in the Amazon Web Services Payment Cryptography User Guide. PIN block translation involves changing the encrytion of PIN block from one encryption key to another encryption key and changing PIN block format from one to another without PIN block data leaving Amazon Web Services Payment Cryptography. The encryption key transformation can be from PEK (Pin Encryption Key) to BDK (Base Derivation Key) for DUKPT or from BDK for DUKPT to PEK. Amazon Web Services Payment Cryptography supports TDES and AES key derivation type for DUKPT tranlations. You can use this operation for P2PE (Point to Point Encryption) use cases where the encryption keys should change but the processing system either does not need to, or is not permitted to, decrypt the data. The allowed combinations of PIN block format translations are guided by PCI. It is important to note that not all encrypted PIN block formats (example, format 1) require PAN (Primary Account Number) as input. And as such, PIN block format that requires PAN (example, formats 0,3,4) cannot be translated to a format (format 1) that does not require a PAN for generation.  For information about valid keys for this operation, see Understanding key attributes and Key types for specific data operations in the Amazon Web Services Payment Cryptography User Guide.  At this time, Amazon Web Services Payment Cryptography does not support translations to PIN format 4.   Cross-account use: This operation can't be used across different Amazon Web Services accounts.  Related operations:     GeneratePinData     VerifyPinData   
+   * Translates encrypted PIN block from and to ISO 9564 formats 0,1,3,4. For more information, see Translate PIN data in the Amazon Web Services Payment Cryptography User Guide. PIN block translation involves changing the encrytion of PIN block from one encryption key to another encryption key and changing PIN block format from one to another without PIN block data leaving Amazon Web Services Payment Cryptography. The encryption key transformation can be from PEK (Pin Encryption Key) to BDK (Base Derivation Key) for DUKPT or from BDK for DUKPT to PEK. Amazon Web Services Payment Cryptography supports TDES and AES key derivation type for DUKPT translations.  The allowed combinations of PIN block format translations are guided by PCI. It is important to note that not all encrypted PIN block formats (example, format 1) require PAN (Primary Account Number) as input. And as such, PIN block format that requires PAN (example, formats 0,3,4) cannot be translated to a format (format 1) that does not require a PAN for generation.  For information about valid keys for this operation, see Understanding key attributes and Key types for specific data operations in the Amazon Web Services Payment Cryptography User Guide.  Amazon Web Services Payment Cryptography currently supports ISO PIN block 4 translation for PIN block built using legacy PAN length. That is, PAN is the right most 12 digits excluding the check digits.   Cross-account use: This operation can't be used across different Amazon Web Services accounts.  Related operations:     GeneratePinData     VerifyPinData   
    */
   translatePinData(params: PaymentCryptographyData.Types.TranslatePinDataInput, callback?: (err: AWSError, data: PaymentCryptographyData.Types.TranslatePinDataOutput) => void): Request<PaymentCryptographyData.Types.TranslatePinDataOutput, AWSError>;
   /**
-   * Translates encrypted PIN block from and to ISO 9564 formats 0,1,3,4. For more information, see Translate PIN data in the Amazon Web Services Payment Cryptography User Guide. PIN block translation involves changing the encrytion of PIN block from one encryption key to another encryption key and changing PIN block format from one to another without PIN block data leaving Amazon Web Services Payment Cryptography. The encryption key transformation can be from PEK (Pin Encryption Key) to BDK (Base Derivation Key) for DUKPT or from BDK for DUKPT to PEK. Amazon Web Services Payment Cryptography supports TDES and AES key derivation type for DUKPT tranlations. You can use this operation for P2PE (Point to Point Encryption) use cases where the encryption keys should change but the processing system either does not need to, or is not permitted to, decrypt the data. The allowed combinations of PIN block format translations are guided by PCI. It is important to note that not all encrypted PIN block formats (example, format 1) require PAN (Primary Account Number) as input. And as such, PIN block format that requires PAN (example, formats 0,3,4) cannot be translated to a format (format 1) that does not require a PAN for generation.  For information about valid keys for this operation, see Understanding key attributes and Key types for specific data operations in the Amazon Web Services Payment Cryptography User Guide.  At this time, Amazon Web Services Payment Cryptography does not support translations to PIN format 4.   Cross-account use: This operation can't be used across different Amazon Web Services accounts.  Related operations:     GeneratePinData     VerifyPinData   
+   * Translates encrypted PIN block from and to ISO 9564 formats 0,1,3,4. For more information, see Translate PIN data in the Amazon Web Services Payment Cryptography User Guide. PIN block translation involves changing the encrytion of PIN block from one encryption key to another encryption key and changing PIN block format from one to another without PIN block data leaving Amazon Web Services Payment Cryptography. The encryption key transformation can be from PEK (Pin Encryption Key) to BDK (Base Derivation Key) for DUKPT or from BDK for DUKPT to PEK. Amazon Web Services Payment Cryptography supports TDES and AES key derivation type for DUKPT translations.  The allowed combinations of PIN block format translations are guided by PCI. It is important to note that not all encrypted PIN block formats (example, format 1) require PAN (Primary Account Number) as input. And as such, PIN block format that requires PAN (example, formats 0,3,4) cannot be translated to a format (format 1) that does not require a PAN for generation.  For information about valid keys for this operation, see Understanding key attributes and Key types for specific data operations in the Amazon Web Services Payment Cryptography User Guide.  Amazon Web Services Payment Cryptography currently supports ISO PIN block 4 translation for PIN block built using legacy PAN length. That is, PAN is the right most 12 digits excluding the check digits.   Cross-account use: This operation can't be used across different Amazon Web Services accounts.  Related operations:     GeneratePinData     VerifyPinData   
    */
   translatePinData(callback?: (err: AWSError, data: PaymentCryptographyData.Types.TranslatePinDataOutput) => void): Request<PaymentCryptographyData.Types.TranslatePinDataOutput, AWSError>;
   /**
@@ -84,11 +84,11 @@ declare class PaymentCryptographyData extends Service {
    */
   verifyCardValidationData(callback?: (err: AWSError, data: PaymentCryptographyData.Types.VerifyCardValidationDataOutput) => void): Request<PaymentCryptographyData.Types.VerifyCardValidationDataOutput, AWSError>;
   /**
-   * Verifies a Message Authentication Code (MAC).  You can use this operation when keys won't be shared but mutual data is present on both ends for validation. In this case, known data values are used to generate a MAC on both ends for verification without sending or receiving data in ciphertext or plaintext. You can use this operation to verify a DUPKT, HMAC or EMV MAC by setting generation attributes and algorithm to the associated values. Use the same encryption key for MAC verification as you use for GenerateMac.  For information about valid keys for this operation, see Understanding key attributes and Key types for specific data operations in the Amazon Web Services Payment Cryptography User Guide.   Cross-account use: This operation can't be used across different Amazon Web Services accounts.  Related operations:     GenerateMac   
+   * Verifies a Message Authentication Code (MAC).  You can use this operation to verify MAC for message data authentication such as . In this operation, you must use the same message data, secret encryption key and MAC algorithm that was used to generate MAC. You can use this operation to verify a DUPKT, CMAC, HMAC or EMV MAC by setting generation attributes and algorithm to the associated values.  For information about valid keys for this operation, see Understanding key attributes and Key types for specific data operations in the Amazon Web Services Payment Cryptography User Guide.   Cross-account use: This operation can't be used across different Amazon Web Services accounts.  Related operations:     GenerateMac   
    */
   verifyMac(params: PaymentCryptographyData.Types.VerifyMacInput, callback?: (err: AWSError, data: PaymentCryptographyData.Types.VerifyMacOutput) => void): Request<PaymentCryptographyData.Types.VerifyMacOutput, AWSError>;
   /**
-   * Verifies a Message Authentication Code (MAC).  You can use this operation when keys won't be shared but mutual data is present on both ends for validation. In this case, known data values are used to generate a MAC on both ends for verification without sending or receiving data in ciphertext or plaintext. You can use this operation to verify a DUPKT, HMAC or EMV MAC by setting generation attributes and algorithm to the associated values. Use the same encryption key for MAC verification as you use for GenerateMac.  For information about valid keys for this operation, see Understanding key attributes and Key types for specific data operations in the Amazon Web Services Payment Cryptography User Guide.   Cross-account use: This operation can't be used across different Amazon Web Services accounts.  Related operations:     GenerateMac   
+   * Verifies a Message Authentication Code (MAC).  You can use this operation to verify MAC for message data authentication such as . In this operation, you must use the same message data, secret encryption key and MAC algorithm that was used to generate MAC. You can use this operation to verify a DUPKT, CMAC, HMAC or EMV MAC by setting generation attributes and algorithm to the associated values.  For information about valid keys for this operation, see Understanding key attributes and Key types for specific data operations in the Amazon Web Services Payment Cryptography User Guide.   Cross-account use: This operation can't be used across different Amazon Web Services accounts.  Related operations:     GenerateMac   
    */
   verifyMac(callback?: (err: AWSError, data: PaymentCryptographyData.Types.VerifyMacOutput) => void): Request<PaymentCryptographyData.Types.VerifyMacOutput, AWSError>;
   /**
@@ -257,11 +257,11 @@ declare namespace PaymentCryptographyData {
      */
     KeyArn: KeyArn;
     /**
-     * The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or "00" or "01" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.
+     * The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.
      */
     KeyCheckValue: KeyCheckValue;
     /**
-     * The decrypted plaintext data.
+     * The decrypted plaintext data in hexBinary format.
      */
     PlainText: HexEvenLengthBetween16And4096;
   }
@@ -314,7 +314,7 @@ declare namespace PaymentCryptographyData {
      */
     DukptKeyVariant?: DukptKeyVariant;
     /**
-     * An input to cryptographic primitive used to provide the intial state. Typically the InitializationVector must have a random or psuedo-random value, but sometimes it only needs to be unpredictable or unique. If you don't provide a value, Amazon Web Services Payment Cryptography generates a random value.
+     * An input used to provide the intial state. If no value is provided, Amazon Web Services Payment Cryptography defaults it to zero.
      */
     InitializationVector?: HexLength16Or32;
     /**
@@ -322,7 +322,7 @@ declare namespace PaymentCryptographyData {
      */
     KeySerialNumber: HexLengthBetween10And24;
     /**
-     * The block cipher mode of operation. Block ciphers are designed to encrypt a block of data of fixed size, for example, 128 bits. The size of the input block is usually same as the size of the encrypted output block, while the key length can be different. A mode of operation describes how to repeatedly apply a cipher's single-block operation to securely transform amounts of data larger than a block. The default is CBC.
+     * The block cipher method to use for encryption. The default is CBC.
      */
     Mode?: DukptEncryptionMode;
   }
@@ -364,6 +364,34 @@ declare namespace PaymentCryptographyData {
      */
     ServiceCode: NumberLengthEquals3;
   }
+  export interface EmvEncryptionAttributes {
+    /**
+     * An input used to provide the intial state. If no value is provided, Amazon Web Services Payment Cryptography defaults it to zero.
+     */
+    InitializationVector?: HexLength16Or32;
+    /**
+     * The EMV derivation mode to use for ICC master key derivation as per EMV version 4.3 book 2.
+     */
+    MajorKeyDerivationMode: EmvMajorKeyDerivationMode;
+    /**
+     * The block cipher method to use for encryption.
+     */
+    Mode?: EmvEncryptionMode;
+    /**
+     * A number that identifies and differentiates payment cards with the same Primary Account Number (PAN).
+     */
+    PanSequenceNumber: HexLengthEquals2;
+    /**
+     * The Primary Account Number (PAN), a unique identifier for a payment credit or debit card and associates the card to a specific account holder.
+     */
+    PrimaryAccountNumber: NumberLengthBetween12And19;
+    /**
+     * The derivation value used to derive the ICC session key. It is typically the application transaction counter value padded with zeros or previous ARQC value padded with zeros as per EMV version 4.3 book 2.
+     */
+    SessionDerivationData: HexLengthEquals16;
+  }
+  export type EmvEncryptionMode = "ECB"|"CBC"|string;
+  export type EmvMajorKeyDerivationMode = "EMV_OPTION_A"|"EMV_OPTION_B"|string;
   export interface EncryptDataInput {
     /**
      * The encryption key type and attributes for plaintext encryption.
@@ -374,7 +402,7 @@ declare namespace PaymentCryptographyData {
      */
     KeyIdentifier: KeyArnOrKeyAliasType;
     /**
-     * The plaintext to be encrypted.
+     * The plaintext to be encrypted.  For encryption using asymmetric keys, plaintext data length is constrained by encryption key strength that you define in KeyAlgorithm and padding type that you define in AsymmetricEncryptionAttributes. For more information, see Encrypt data in the Amazon Web Services Payment Cryptography User Guide. 
      */
     PlainText: HexEvenLengthBetween16And4064;
   }
@@ -388,13 +416,17 @@ declare namespace PaymentCryptographyData {
      */
     KeyArn: KeyArn;
     /**
-     * The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or "00" or "01" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.
+     * The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.
      */
     KeyCheckValue?: KeyCheckValue;
   }
   export interface EncryptionDecryptionAttributes {
     Asymmetric?: AsymmetricEncryptionAttributes;
     Dukpt?: DukptEncryptionAttributes;
+    /**
+     * Parameters for plaintext encryption using EMV keys.
+     */
+    Emv?: EmvEncryptionAttributes;
     /**
      * Parameters that are required to perform encryption and decryption using symmetric keys.
      */
@@ -425,7 +457,7 @@ declare namespace PaymentCryptographyData {
      */
     KeyArn: KeyArn;
     /**
-     * The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or "00" or "01" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.
+     * The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.
      */
     KeyCheckValue: KeyCheckValue;
     /**
@@ -447,7 +479,7 @@ declare namespace PaymentCryptographyData {
      */
     MacLength?: IntegerRangeBetween4And16;
     /**
-     * The data for which a MAC is under generation.
+     * The data for which a MAC is under generation. This value must be hexBinary.
      */
     MessageData: HexEvenLengthBetween2And4096;
   }
@@ -457,7 +489,7 @@ declare namespace PaymentCryptographyData {
      */
     KeyArn: KeyArn;
     /**
-     * The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or "00" or "01" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.
+     * The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.
      */
     KeyCheckValue: KeyCheckValue;
     /**
@@ -501,7 +533,7 @@ declare namespace PaymentCryptographyData {
      */
     EncryptionKeyArn: KeyArn;
     /**
-     * The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or "00" or "01" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.
+     * The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.
      */
     EncryptionKeyCheckValue: KeyCheckValue;
     /**
@@ -509,7 +541,7 @@ declare namespace PaymentCryptographyData {
      */
     GenerationKeyArn: KeyArn;
     /**
-     * The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or "00" or "01" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.
+     * The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.
      */
     GenerationKeyCheckValue: KeyCheckValue;
     /**
@@ -676,7 +708,7 @@ declare namespace PaymentCryptographyData {
      */
     DukptIso9797Algorithm1?: MacAlgorithmDukpt;
     /**
-     * Parameters that are required for MAC generation or verification using DUKPT ISO 9797 algorithm2.
+     * Parameters that are required for MAC generation or verification using DUKPT ISO 9797 algorithm3.
      */
     DukptIso9797Algorithm3?: MacAlgorithmDukpt;
     /**
@@ -772,7 +804,7 @@ declare namespace PaymentCryptographyData {
      */
     KeyArn: KeyArn;
     /**
-     * The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or "00" or "01" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.
+     * The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.
      */
     KeyCheckValue: KeyCheckValue;
   }
@@ -884,11 +916,11 @@ declare namespace PaymentCryptographyData {
   }
   export interface SymmetricEncryptionAttributes {
     /**
-     * An input to cryptographic primitive used to provide the intial state. The InitializationVector is typically required have a random or psuedo-random value, but sometimes it only needs to be unpredictable or unique. If a value is not provided, Amazon Web Services Payment Cryptography generates a random value.
+     * An input used to provide the intial state. If no value is provided, Amazon Web Services Payment Cryptography defaults it to zero.
      */
     InitializationVector?: HexLength16Or32;
     /**
-     * The block cipher mode of operation. Block ciphers are designed to encrypt a block of data of fixed size (for example, 128 bits). The size of the input block is usually same as the size of the encrypted output block, while the key length can be different. A mode of operation describes how to repeatedly apply a cipher's single-block operation to securely transform amounts of data larger than a block.
+     * The block cipher method to use for encryption.
      */
     Mode: EncryptionMode;
     /**
@@ -902,7 +934,7 @@ declare namespace PaymentCryptographyData {
      */
     EncryptedPinBlock: HexEvenLengthBetween16And32;
     /**
-     * The attributes and values to use for incoming DUKPT encryption key for PIN block tranlation.
+     * The attributes and values to use for incoming DUKPT encryption key for PIN block translation.
      */
     IncomingDukptAttributes?: DukptDerivationAttributes;
     /**
@@ -910,7 +942,7 @@ declare namespace PaymentCryptographyData {
      */
     IncomingKeyIdentifier: KeyArnOrKeyAliasType;
     /**
-     * The format of the incoming PIN block data for tranlation within Amazon Web Services Payment Cryptography.
+     * The format of the incoming PIN block data for translation within Amazon Web Services Payment Cryptography.
      */
     IncomingTranslationAttributes: TranslationIsoFormats;
     /**
@@ -922,7 +954,7 @@ declare namespace PaymentCryptographyData {
      */
     OutgoingKeyIdentifier: KeyArnOrKeyAliasType;
     /**
-     * The format of the outgoing PIN block data after tranlation by Amazon Web Services Payment Cryptography.
+     * The format of the outgoing PIN block data after translation by Amazon Web Services Payment Cryptography.
      */
     OutgoingTranslationAttributes: TranslationIsoFormats;
   }
@@ -932,11 +964,11 @@ declare namespace PaymentCryptographyData {
      */
     KeyArn: KeyArn;
     /**
-     * The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or "00" or "01" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.
+     * The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.
      */
     KeyCheckValue: KeyCheckValue;
     /**
-     * The ougoing encrypted PIN block data after tranlation.
+     * The outgoing encrypted PIN block data after translation.
      */
     PinBlock: HexLengthBetween16And32;
   }
@@ -1002,7 +1034,7 @@ declare namespace PaymentCryptographyData {
      */
     KeyArn: KeyArn;
     /**
-     * The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or "00" or "01" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.
+     * The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.
      */
     KeyCheckValue: KeyCheckValue;
   }
@@ -1030,7 +1062,7 @@ declare namespace PaymentCryptographyData {
      */
     KeyArn: KeyArn;
     /**
-     * The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or "00" or "01" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.
+     * The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.
      */
     KeyCheckValue: KeyCheckValue;
   }
@@ -1048,7 +1080,7 @@ declare namespace PaymentCryptographyData {
      */
     MacLength?: IntegerRangeBetween4And16;
     /**
-     * The data on for which MAC is under verification.
+     * The data on for which MAC is under verification. This value must be hexBinary.
      */
     MessageData: HexEvenLengthBetween2And4096;
     /**
@@ -1062,7 +1094,7 @@ declare namespace PaymentCryptographyData {
      */
     KeyArn: KeyArn;
     /**
-     * The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or "00" or "01" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.
+     * The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.
      */
     KeyCheckValue: KeyCheckValue;
   }
@@ -1106,7 +1138,7 @@ declare namespace PaymentCryptographyData {
      */
     EncryptionKeyArn: KeyArn;
     /**
-     * The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or "00" or "01" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.
+     * The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.
      */
     EncryptionKeyCheckValue: KeyCheckValue;
     /**
@@ -1114,7 +1146,7 @@ declare namespace PaymentCryptographyData {
      */
     VerificationKeyArn: KeyArn;
     /**
-     * The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or "00" or "01" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.
+     * The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.
      */
     VerificationKeyCheckValue: KeyCheckValue;
   }
