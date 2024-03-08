@@ -36,11 +36,11 @@ declare class GuardDuty extends Service {
    */
   archiveFindings(callback?: (err: AWSError, data: GuardDuty.Types.ArchiveFindingsResponse) => void): Request<GuardDuty.Types.ArchiveFindingsResponse, AWSError>;
   /**
-   * Creates a single Amazon GuardDuty detector. A detector is a resource that represents the GuardDuty service. To start using GuardDuty, you must create a detector in each Region where you enable the service. You can have only one detector per account per Region. All data sources are enabled in a new detector by default. There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
+   * Creates a single GuardDuty detector. A detector is a resource that represents the GuardDuty service. To start using GuardDuty, you must create a detector in each Region where you enable the service. You can have only one detector per account per Region. All data sources are enabled in a new detector by default.   When you don't specify any features, with an exception to RUNTIME_MONITORING, all the optional features are enabled by default.   When you specify some of the features, any feature that is not specified in the API call gets enabled by default, with an exception to RUNTIME_MONITORING.    Specifying both EKS Runtime Monitoring (EKS_RUNTIME_MONITORING) and Runtime Monitoring (RUNTIME_MONITORING) will cause an error. You can add only one of these two features because Runtime Monitoring already includes the threat detection for Amazon EKS resources. For more information, see Runtime Monitoring. There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
    */
   createDetector(params: GuardDuty.Types.CreateDetectorRequest, callback?: (err: AWSError, data: GuardDuty.Types.CreateDetectorResponse) => void): Request<GuardDuty.Types.CreateDetectorResponse, AWSError>;
   /**
-   * Creates a single Amazon GuardDuty detector. A detector is a resource that represents the GuardDuty service. To start using GuardDuty, you must create a detector in each Region where you enable the service. You can have only one detector per account per Region. All data sources are enabled in a new detector by default. There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
+   * Creates a single GuardDuty detector. A detector is a resource that represents the GuardDuty service. To start using GuardDuty, you must create a detector in each Region where you enable the service. You can have only one detector per account per Region. All data sources are enabled in a new detector by default.   When you don't specify any features, with an exception to RUNTIME_MONITORING, all the optional features are enabled by default.   When you specify some of the features, any feature that is not specified in the API call gets enabled by default, with an exception to RUNTIME_MONITORING.    Specifying both EKS Runtime Monitoring (EKS_RUNTIME_MONITORING) and Runtime Monitoring (RUNTIME_MONITORING) will cause an error. You can add only one of these two features because Runtime Monitoring already includes the threat detection for Amazon EKS resources. For more information, see Runtime Monitoring. There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
    */
   createDetector(callback?: (err: AWSError, data: GuardDuty.Types.CreateDetectorResponse) => void): Request<GuardDuty.Types.CreateDetectorResponse, AWSError>;
   /**
@@ -316,7 +316,7 @@ declare class GuardDuty extends Service {
    */
   getMembers(callback?: (err: AWSError, data: GuardDuty.Types.GetMembersResponse) => void): Request<GuardDuty.Types.GetMembersResponse, AWSError>;
   /**
-   * Retrieves how many active member accounts in your Amazon Web Services organization have each feature enabled within GuardDuty. Only a delegated GuardDuty administrator of an organization can run this API. When you create a new Amazon Web Services organization, it might take up to 24 hours to generate the statistics for the entire organization.
+   * Retrieves how many active member accounts have each feature enabled within GuardDuty. Only a delegated GuardDuty administrator of an organization can run this API. When you create a new organization, it might take up to 24 hours to generate the statistics for the entire organization.
    */
   getOrganizationStatistics(callback?: (err: AWSError, data: GuardDuty.Types.GetOrganizationStatisticsResponse) => void): Request<GuardDuty.Types.GetOrganizationStatisticsResponse, AWSError>;
   /**
@@ -440,11 +440,11 @@ declare class GuardDuty extends Service {
    */
   listThreatIntelSets(callback?: (err: AWSError, data: GuardDuty.Types.ListThreatIntelSetsResponse) => void): Request<GuardDuty.Types.ListThreatIntelSetsResponse, AWSError>;
   /**
-   * Initiates the malware scan. Invoking this API will automatically create the Service-linked role  in the corresponding account.
+   * Initiates the malware scan. Invoking this API will automatically create the Service-linked role in the corresponding account. When the malware scan starts, you can use the associated scan ID to track the status of the scan. For more information, see DescribeMalwareScans.
    */
   startMalwareScan(params: GuardDuty.Types.StartMalwareScanRequest, callback?: (err: AWSError, data: GuardDuty.Types.StartMalwareScanResponse) => void): Request<GuardDuty.Types.StartMalwareScanResponse, AWSError>;
   /**
-   * Initiates the malware scan. Invoking this API will automatically create the Service-linked role  in the corresponding account.
+   * Initiates the malware scan. Invoking this API will automatically create the Service-linked role in the corresponding account. When the malware scan starts, you can use the associated scan ID to track the status of the scan. For more information, see DescribeMalwareScans.
    */
   startMalwareScan(callback?: (err: AWSError, data: GuardDuty.Types.StartMalwareScanResponse) => void): Request<GuardDuty.Types.StartMalwareScanResponse, AWSError>;
   /**
@@ -488,11 +488,11 @@ declare class GuardDuty extends Service {
    */
   untagResource(callback?: (err: AWSError, data: GuardDuty.Types.UntagResourceResponse) => void): Request<GuardDuty.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates the GuardDuty detector specified by the detectorId. There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
+   * Updates the GuardDuty detector specified by the detector ID. Specifying both EKS Runtime Monitoring (EKS_RUNTIME_MONITORING) and Runtime Monitoring (RUNTIME_MONITORING) will cause an error. You can add only one of these two features because Runtime Monitoring already includes the threat detection for Amazon EKS resources. For more information, see Runtime Monitoring. There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
    */
   updateDetector(params: GuardDuty.Types.UpdateDetectorRequest, callback?: (err: AWSError, data: GuardDuty.Types.UpdateDetectorResponse) => void): Request<GuardDuty.Types.UpdateDetectorResponse, AWSError>;
   /**
-   * Updates the GuardDuty detector specified by the detectorId. There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
+   * Updates the GuardDuty detector specified by the detector ID. Specifying both EKS Runtime Monitoring (EKS_RUNTIME_MONITORING) and Runtime Monitoring (RUNTIME_MONITORING) will cause an error. You can add only one of these two features because Runtime Monitoring already includes the threat detection for Amazon EKS resources. For more information, see Runtime Monitoring. There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
    */
   updateDetector(callback?: (err: AWSError, data: GuardDuty.Types.UpdateDetectorResponse) => void): Request<GuardDuty.Types.UpdateDetectorResponse, AWSError>;
   /**
@@ -528,19 +528,19 @@ declare class GuardDuty extends Service {
    */
   updateMalwareScanSettings(callback?: (err: AWSError, data: GuardDuty.Types.UpdateMalwareScanSettingsResponse) => void): Request<GuardDuty.Types.UpdateMalwareScanSettingsResponse, AWSError>;
   /**
-   * Contains information on member accounts to be updated. There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
+   * Contains information on member accounts to be updated. Specifying both EKS Runtime Monitoring (EKS_RUNTIME_MONITORING) and Runtime Monitoring (RUNTIME_MONITORING) will cause an error. You can add only one of these two features because Runtime Monitoring already includes the threat detection for Amazon EKS resources. For more information, see Runtime Monitoring. There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
    */
   updateMemberDetectors(params: GuardDuty.Types.UpdateMemberDetectorsRequest, callback?: (err: AWSError, data: GuardDuty.Types.UpdateMemberDetectorsResponse) => void): Request<GuardDuty.Types.UpdateMemberDetectorsResponse, AWSError>;
   /**
-   * Contains information on member accounts to be updated. There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
+   * Contains information on member accounts to be updated. Specifying both EKS Runtime Monitoring (EKS_RUNTIME_MONITORING) and Runtime Monitoring (RUNTIME_MONITORING) will cause an error. You can add only one of these two features because Runtime Monitoring already includes the threat detection for Amazon EKS resources. For more information, see Runtime Monitoring. There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
    */
   updateMemberDetectors(callback?: (err: AWSError, data: GuardDuty.Types.UpdateMemberDetectorsResponse) => void): Request<GuardDuty.Types.UpdateMemberDetectorsResponse, AWSError>;
   /**
-   * Configures the delegated administrator account with the provided values. You must provide a value for either autoEnableOrganizationMembers or autoEnable, but not both.  There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
+   * Configures the delegated administrator account with the provided values. You must provide a value for either autoEnableOrganizationMembers or autoEnable, but not both.  Specifying both EKS Runtime Monitoring (EKS_RUNTIME_MONITORING) and Runtime Monitoring (RUNTIME_MONITORING) will cause an error. You can add only one of these two features because Runtime Monitoring already includes the threat detection for Amazon EKS resources. For more information, see Runtime Monitoring. There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
    */
   updateOrganizationConfiguration(params: GuardDuty.Types.UpdateOrganizationConfigurationRequest, callback?: (err: AWSError, data: GuardDuty.Types.UpdateOrganizationConfigurationResponse) => void): Request<GuardDuty.Types.UpdateOrganizationConfigurationResponse, AWSError>;
   /**
-   * Configures the delegated administrator account with the provided values. You must provide a value for either autoEnableOrganizationMembers or autoEnable, but not both.  There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
+   * Configures the delegated administrator account with the provided values. You must provide a value for either autoEnableOrganizationMembers or autoEnable, but not both.  Specifying both EKS Runtime Monitoring (EKS_RUNTIME_MONITORING) and Runtime Monitoring (RUNTIME_MONITORING) will cause an error. You can add only one of these two features because Runtime Monitoring already includes the threat detection for Amazon EKS resources. For more information, see Runtime Monitoring. There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
    */
   updateOrganizationConfiguration(callback?: (err: AWSError, data: GuardDuty.Types.UpdateOrganizationConfigurationResponse) => void): Request<GuardDuty.Types.UpdateOrganizationConfigurationResponse, AWSError>;
   /**
@@ -1606,7 +1606,7 @@ declare namespace GuardDuty {
      */
     NextToken?: String;
     /**
-     * Indicates the auto-enablement configuration of GuardDuty for the member accounts in the organization.    NEW: Indicates that when a new account joins the organization, they will have GuardDuty enabled automatically.     ALL: Indicates that all accounts in the organization have GuardDuty enabled automatically. This includes NEW accounts that join the organization and accounts that may have been suspended or removed from the organization in GuardDuty.    NONE: Indicates that GuardDuty will not be automatically enabled for any account in the organization. The administrator must manage GuardDuty for each account in the organization individually.  
+     * Indicates the auto-enablement configuration of GuardDuty or any of the corresponding protection plans for the member accounts in the organization.    NEW: Indicates that when a new account joins the organization, they will have GuardDuty or any of the corresponding protection plans enabled automatically.     ALL: Indicates that all accounts in the organization have GuardDuty and any of the corresponding protection plans enabled automatically. This includes NEW accounts that join the organization and accounts that may have been suspended or removed from the organization in GuardDuty.    NONE: Indicates that GuardDuty or any of the corresponding protection plans will not be automatically enabled for any account in the organization. The administrator must manage GuardDuty for each account in the organization individually. When you update the auto-enable setting from ALL or NEW to NONE, this action doesn't disable the corresponding option for your existing accounts. This configuration will apply to the new accounts that join the organization. After you update the auto-enable settings, no new account will have the corresponding option as enabled.  
      */
     AutoEnableOrganizationMembers?: AutoEnableMembers;
   }
@@ -4712,7 +4712,7 @@ declare namespace GuardDuty {
      */
     Features?: OrganizationFeaturesConfigurations;
     /**
-     * Indicates the auto-enablement configuration of GuardDuty for the member accounts in the organization. You must provide a value for either autoEnableOrganizationMembers or autoEnable.  Use one of the following configuration values for autoEnableOrganizationMembers:    NEW: Indicates that when a new account joins the organization, they will have GuardDuty enabled automatically.     ALL: Indicates that all accounts in the organization have GuardDuty enabled automatically. This includes NEW accounts that join the organization and accounts that may have been suspended or removed from the organization in GuardDuty. It may take up to 24 hours to update the configuration for all the member accounts.    NONE: Indicates that GuardDuty will not be automatically enabled for any account in the organization. The administrator must manage GuardDuty for each account in the organization individually.  
+     * Indicates the auto-enablement configuration of GuardDuty for the member accounts in the organization. You must provide a value for either autoEnableOrganizationMembers or autoEnable.  Use one of the following configuration values for autoEnableOrganizationMembers:    NEW: Indicates that when a new account joins the organization, they will have GuardDuty enabled automatically.     ALL: Indicates that all accounts in the organization have GuardDuty enabled automatically. This includes NEW accounts that join the organization and accounts that may have been suspended or removed from the organization in GuardDuty. It may take up to 24 hours to update the configuration for all the member accounts.    NONE: Indicates that GuardDuty will not be automatically enabled for any account in the organization. The administrator must manage GuardDuty for each account in the organization individually. When you update the auto-enable setting from ALL or NEW to NONE, this action doesn't disable the corresponding option for your existing accounts. This configuration will apply to the new accounts that join the organization. After you update the auto-enable settings, no new account will have the corresponding option as enabled.  
      */
     AutoEnableOrganizationMembers?: AutoEnableMembers;
   }
@@ -4798,7 +4798,7 @@ declare namespace GuardDuty {
     Total?: Total;
   }
   export type UsageDataSourceResultList = UsageDataSourceResult[];
-  export type UsageFeature = "FLOW_LOGS"|"CLOUD_TRAIL"|"DNS_LOGS"|"S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|"LAMBDA_NETWORK_LOGS"|"EKS_RUNTIME_MONITORING"|"FARGATE_RUNTIME_MONITORING"|"EC2_RUNTIME_MONITORING"|string;
+  export type UsageFeature = "FLOW_LOGS"|"CLOUD_TRAIL"|"DNS_LOGS"|"S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|"LAMBDA_NETWORK_LOGS"|"EKS_RUNTIME_MONITORING"|"FARGATE_RUNTIME_MONITORING"|"EC2_RUNTIME_MONITORING"|"RDS_DBI_PROTECTION_PROVISIONED"|"RDS_DBI_PROTECTION_SERVERLESS"|string;
   export type UsageFeatureList = UsageFeature[];
   export interface UsageFeatureResult {
     /**

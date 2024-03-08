@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1573.0-->
+<!--LATEST=2.1574.0-->
 <!--ENTRYINSERT-->
+
+## 2.1574.0
+* feature: Batch: This release adds JobStateTimeLimitActions setting to the Job Queue API. It allows you to configure an action Batch can take for a blocking job in front of the queue after the defined period of time. The new parameter applies for ECS, EKS, and FARGATE Job Queues.
+* feature: CloudTrail: Added exceptions to CreateTrail, DescribeTrails, and ListImportFailures APIs.
+* feature: CognitoIdentityServiceProvider: Add ConcurrentModificationException to SetUserPoolMfaConfig
+* feature: GuardDuty: Add RDS Provisioned and Serverless Usage types
+* feature: Support: Update maintenance mode message to share upcoming end-of-support
+* feature: Transfer: Added DES_EDE3_CBC to the list of supported encryption algorithms for messages sent with an AS2 connector.
 
 ## 2.1573.0
 * feature: AppConfig: AWS AppConfig now supports dynamic parameters, which enhance the functionality of AppConfig Extensions by allowing you to provide parameter values to your Extensions at the time you deploy your configuration.

@@ -29,11 +29,11 @@ declare class Transfer extends Service {
    */
   createAgreement(callback?: (err: AWSError, data: Transfer.Types.CreateAgreementResponse) => void): Request<Transfer.Types.CreateAgreementResponse, AWSError>;
   /**
-   * Creates the connector, which captures the parameters for a connection for the AS2 or SFTP protocol. For AS2, the connector is required for sending files to an externally hosted AS2 server. For SFTP, the connector is required when sending files to an SFTP server or receiving files from an SFTP server. For more details about connectors, see Create AS2 connectors and Create SFTP connectors.  You must specify exactly one configuration object: either for AS2 (As2Config) or SFTP (SftpConfig). 
+   * Creates the connector, which captures the parameters for a connection for the AS2 or SFTP protocol. For AS2, the connector is required for sending files to an externally hosted AS2 server. For SFTP, the connector is required when sending files to an SFTP server or receiving files from an SFTP server. For more details about connectors, see Configure AS2 connectors and Create SFTP connectors.  You must specify exactly one configuration object: either for AS2 (As2Config) or SFTP (SftpConfig). 
    */
   createConnector(params: Transfer.Types.CreateConnectorRequest, callback?: (err: AWSError, data: Transfer.Types.CreateConnectorResponse) => void): Request<Transfer.Types.CreateConnectorResponse, AWSError>;
   /**
-   * Creates the connector, which captures the parameters for a connection for the AS2 or SFTP protocol. For AS2, the connector is required for sending files to an externally hosted AS2 server. For SFTP, the connector is required when sending files to an SFTP server or receiving files from an SFTP server. For more details about connectors, see Create AS2 connectors and Create SFTP connectors.  You must specify exactly one configuration object: either for AS2 (As2Config) or SFTP (SftpConfig). 
+   * Creates the connector, which captures the parameters for a connection for the AS2 or SFTP protocol. For AS2, the connector is required for sending files to an externally hosted AS2 server. For SFTP, the connector is required when sending files to an SFTP server or receiving files from an SFTP server. For more details about connectors, see Configure AS2 connectors and Create SFTP connectors.  You must specify exactly one configuration object: either for AS2 (As2Config) or SFTP (SftpConfig). 
    */
   createConnector(callback?: (err: AWSError, data: Transfer.Types.CreateConnectorResponse) => void): Request<Transfer.Types.CreateConnectorResponse, AWSError>;
   /**
@@ -477,11 +477,11 @@ declare class Transfer extends Service {
    */
   updateServer(callback?: (err: AWSError, data: Transfer.Types.UpdateServerResponse) => void): Request<Transfer.Types.UpdateServerResponse, AWSError>;
   /**
-   * Assigns new properties to a user. Parameters you pass modify any or all of the following: the home directory, role, and policy for the UserName and ServerId you specify. The response returns the ServerId and the UserName for the updated user.
+   * Assigns new properties to a user. Parameters you pass modify any or all of the following: the home directory, role, and policy for the UserName and ServerId you specify. The response returns the ServerId and the UserName for the updated user. In the console, you can select Restricted when you create or update a user. This ensures that the user can't access anything outside of their home directory. The programmatic way to configure this behavior is to update the user. Set their HomeDirectoryType to LOGICAL, and specify HomeDirectoryMappings with Entry as root (/) and Target as their home directory. For example, if the user's home directory is /test/admin-user, the following command updates the user so that their configuration in the console shows the Restricted flag as selected.   aws transfer update-user --server-id &lt;server-id&gt; --user-name admin-user --home-directory-type LOGICAL --home-directory-mappings "[{\"Entry\":\"/\", \"Target\":\"/test/admin-user\"}]" 
    */
   updateUser(params: Transfer.Types.UpdateUserRequest, callback?: (err: AWSError, data: Transfer.Types.UpdateUserResponse) => void): Request<Transfer.Types.UpdateUserResponse, AWSError>;
   /**
-   * Assigns new properties to a user. Parameters you pass modify any or all of the following: the home directory, role, and policy for the UserName and ServerId you specify. The response returns the ServerId and the UserName for the updated user.
+   * Assigns new properties to a user. Parameters you pass modify any or all of the following: the home directory, role, and policy for the UserName and ServerId you specify. The response returns the ServerId and the UserName for the updated user. In the console, you can select Restricted when you create or update a user. This ensures that the user can't access anything outside of their home directory. The programmatic way to configure this behavior is to update the user. Set their HomeDirectoryType to LOGICAL, and specify HomeDirectoryMappings with Entry as root (/) and Target as their home directory. For example, if the user's home directory is /test/admin-user, the following command updates the user so that their configuration in the console shows the Restricted flag as selected.   aws transfer update-user --server-id &lt;server-id&gt; --user-name admin-user --home-directory-type LOGICAL --home-directory-mappings "[{\"Entry\":\"/\", \"Target\":\"/test/admin-user\"}]" 
    */
   updateUser(callback?: (err: AWSError, data: Transfer.Types.UpdateUserResponse) => void): Request<Transfer.Types.UpdateUserResponse, AWSError>;
   /**
@@ -525,7 +525,7 @@ declare namespace Transfer {
      */
     Compression?: CompressionEnum;
     /**
-     * The algorithm that is used to encrypt the file.  You can only specify NONE if the URL for your connector uses HTTPS. This ensures that no traffic is sent in clear text. 
+     * The algorithm that is used to encrypt the file. Note the following:   Do not use the DES_EDE3_CBC algorithm unless you must support a legacy client that requires it, as it is a weak encryption algorithm.   You can only specify NONE if the URL for your connector uses HTTPS. Using HTTPS ensures that no traffic is sent in clear text.  
      */
     EncryptionAlgorithm?: EncryptionAlg;
     /**
@@ -1623,11 +1623,11 @@ declare namespace Transfer {
   }
   export type EfsFileSystemId = string;
   export type EfsPath = string;
-  export type EncryptionAlg = "AES128_CBC"|"AES192_CBC"|"AES256_CBC"|"NONE"|string;
+  export type EncryptionAlg = "AES128_CBC"|"AES192_CBC"|"AES256_CBC"|"DES_EDE3_CBC"|"NONE"|string;
   export type EncryptionType = "PGP"|string;
   export interface EndpointDetails {
     /**
-     * A list of address allocation IDs that are required to attach an Elastic IP address to your server's endpoint.  This property can only be set when EndpointType is set to VPC and it is only valid in the UpdateServer API. 
+     * A list of address allocation IDs that are required to attach an Elastic IP address to your server's endpoint. An address allocation ID corresponds to the allocation ID of an Elastic IP address. This value can be retrieved from the allocationId field from the Amazon EC2 Address data type. One way to retrieve this value is by calling the EC2 DescribeAddresses API. This parameter is optional. Set this parameter if you want to make your VPC endpoint public-facing. For details, see Create an internet-facing endpoint for your server.  This property can only be set as follows:    EndpointType must be set to VPC    The Transfer Family server must be offline.   You cannot set this parameter for Transfer Family servers that use the FTP protocol.   The server must already have SubnetIds populated (SubnetIds and AddressAllocationIds cannot be updated simultaneously).    AddressAllocationIds can't contain duplicates, and must be equal in length to SubnetIds. For example, if you have three subnet IDs, you must also specify three address allocation IDs.   Call the UpdateServer API to set or change this parameter.   
      */
     AddressAllocationIds?: AddressAllocationIds;
     /**
@@ -2548,7 +2548,7 @@ declare namespace Transfer {
      */
     UserSecretId?: SecretId;
     /**
-     * The public portion of the host key, or keys, that are used to identify the external server to which you are connecting. You can use the ssh-keyscan command against the SFTP server to retrieve the necessary key. The three standard SSH public key format elements are &lt;key type&gt;, &lt;body base64&gt;, and an optional &lt;comment&gt;, with spaces between each element. Specify only the &lt;key type&gt; and &lt;body base64&gt;: do not enter the &lt;comment&gt; portion of the key. For the trusted host key, Transfer Family accepts RSA and ECDSA keys.   For RSA keys, the &lt;key type&gt; string is ssh-rsa.   For ECDSA keys, the &lt;key type&gt; string is either ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, or ecdsa-sha2-nistp521, depending on the size of the key you generated.  
+     * The public portion of the host key, or keys, that are used to identify the external server to which you are connecting. You can use the ssh-keyscan command against the SFTP server to retrieve the necessary key. The three standard SSH public key format elements are &lt;key type&gt;, &lt;body base64&gt;, and an optional &lt;comment&gt;, with spaces between each element. Specify only the &lt;key type&gt; and &lt;body base64&gt;: do not enter the &lt;comment&gt; portion of the key. For the trusted host key, Transfer Family accepts RSA and ECDSA keys.   For RSA keys, the &lt;key type&gt; string is ssh-rsa.   For ECDSA keys, the &lt;key type&gt; string is either ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, or ecdsa-sha2-nistp521, depending on the size of the key you generated.   Run this command to retrieve the SFTP server host key, where your SFTP server name is ftp.host.com.  ssh-keyscan ftp.host.com  This prints the public host key to standard output.  ftp.host.com ssh-rsa AAAAB3Nza...&lt;long-string-for-public-key  Copy and paste this string into the TrustedHostKeys field for the create-connector command or into the Trusted host keys field in the console.
      */
     TrustedHostKeys?: SftpConnectorTrustedHostKeyList;
   }

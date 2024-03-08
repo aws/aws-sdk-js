@@ -833,6 +833,10 @@ declare namespace Batch {
      * The tags that you apply to the job queue to help you categorize and organize your resources. Each tag consists of a key and an optional value. For more information, see Tagging your Batch resources in Batch User Guide.
      */
     tags?: TagrisTagsMap;
+    /**
+     * The set of actions that Batch performs on jobs that remain at the head of the job queue in the specified state longer than specified times. Batch will perform each action after maxTimeSeconds has passed.
+     */
+    jobStateTimeLimitActions?: JobStateTimeLimitActions;
   }
   export interface CreateJobQueueResponse {
     /**
@@ -1740,7 +1744,7 @@ declare namespace Batch {
      */
     attempts?: AttemptDetails;
     /**
-     * A short, human-readable string to provide more details for the current status of the job.
+     * A short, human-readable string to provide more details for the current status of the job.    CAPACITY:INSUFFICIENT_INSTANCE_CAPACITY - All compute environments have insufficient capacity to service the job.    MISCONFIGURATION:COMPUTE_ENVIRONMENT_MAX_RESOURCE - All compute environments have a maxVcpu setting that is smaller than the job requirements.    MISCONFIGURATION:JOB_RESOURCE_REQUIREMENT - All compute environments have no connected instances that meet the job requirements.    MISCONFIGURATION:SERVICE_ROLE_PERMISSIONS - All compute environments have problems with the service role permissions.  
      */
     statusReason?: String;
     /**
@@ -1863,8 +1867,33 @@ declare namespace Batch {
      * The tags that are applied to the job queue. For more information, see Tagging your Batch resources in Batch User Guide.
      */
     tags?: TagrisTagsMap;
+    /**
+     * The set of actions that Batch perform on jobs that remain at the head of the job queue in the specified state longer than specified times. Batch will perform each action after maxTimeSeconds has passed.
+     */
+    jobStateTimeLimitActions?: JobStateTimeLimitActions;
   }
   export type JobQueueDetailList = JobQueueDetail[];
+  export interface JobStateTimeLimitAction {
+    /**
+     * The reason to log for the action being taken.
+     */
+    reason: String;
+    /**
+     * The state of the job needed to trigger the action. The only supported value is "RUNNABLE".
+     */
+    state: JobStateTimeLimitActionsState;
+    /**
+     * The approximate amount of time, in seconds, that must pass with the job in the specified state before the action is taken. The minimum value is 600 (10 minutes) and the maximum value is 86,400 (24 hours).
+     */
+    maxTimeSeconds: Integer;
+    /**
+     * The action to take when a job is at the head of the job queue in the specified state for the specified period of time. The only supported value is "CANCEL", which will cancel the job.
+     */
+    action: JobStateTimeLimitActionsAction;
+  }
+  export type JobStateTimeLimitActions = JobStateTimeLimitAction[];
+  export type JobStateTimeLimitActionsAction = "CANCEL"|string;
+  export type JobStateTimeLimitActionsState = "RUNNABLE"|string;
   export type JobStatus = "SUBMITTED"|"PENDING"|"RUNNABLE"|"STARTING"|"RUNNING"|"SUCCEEDED"|"FAILED"|string;
   export interface JobSummary {
     /**
@@ -2486,7 +2515,7 @@ declare namespace Batch {
      */
     environment?: EnvironmentVariables;
     /**
-     * If the essential parameter of a container is marked as true, and that container fails or stops for any reason, all other containers that are part of the task are stopped. If the essential parameter of a container is marked as false, its failure doesn't affect the rest of the containers in a task. If this parameter is omitted, a container is assumed to be essential. All tasks must have at least one essential container. If you have an application that's composed of multiple containers, group containers that are used for a common purpose into components, and separate the different components into multiple task definitions. For more information, see Application Architecture in the Amazon Elastic Container Service Developer Guide.
+     * If the essential parameter of a container is marked as true, and that container fails or stops for any reason, all other containers that are part of the task are stopped. If the essential parameter of a container is marked as false, its failure doesn't affect the rest of the containers in a task. If this parameter is omitted, a container is assumed to be essential. All jobs must have at least one essential container. If you have an application that's composed of multiple containers, group containers that are used for a common purpose into components, and separate the different components into multiple task definitions. For more information, see Application Architecture in the Amazon Elastic Container Service Developer Guide.
      */
     essential?: Boolean;
     /**
@@ -2586,7 +2615,7 @@ declare namespace Batch {
      */
     environment?: EnvironmentVariables;
     /**
-     * If the essential parameter of a container is marked as true, and that container fails or stops for any reason, all other containers that are part of the task are stopped. If the essential parameter of a container is marked as false, its failure doesn't affect the rest of the containers in a task. If this parameter is omitted, a container is assumed to be essential. All tasks must have at least one essential container. If you have an application that's composed of multiple containers, group containers that are used for a common purpose into components, and separate the different components into multiple task definitions. For more information, see Application Architecture in the Amazon Elastic Container Service Developer Guide.
+     * If the essential parameter of a container is marked as true, and that container fails or stops for any reason, all other containers that are part of the task are stopped. If the essential parameter of a container is marked as false, its failure doesn't affect the rest of the containers in a task. If this parameter is omitted, a container is assumed to be essential. All jobs must have at least one essential container. If you have an application that's composed of multiple containers, group containers that are used for a common purpose into components, and separate the different components into multiple task definitions. For more information, see Application Architecture in the Amazon Elastic Container Service Developer Guide.
      */
     essential?: Boolean;
     /**
@@ -2755,6 +2784,10 @@ declare namespace Batch {
      * Details the set of compute environments mapped to a job queue and their order relative to each other. This is one of the parameters used by the job scheduler to determine which compute environment runs a given job. Compute environments must be in the VALID state before you can associate them with a job queue. All of the compute environments must be either EC2 (EC2 or SPOT) or Fargate (FARGATE or FARGATE_SPOT). EC2 and Fargate compute environments can't be mixed.  All compute environments that are associated with a job queue must share the same architecture. Batch doesn't support mixing compute environment architecture types in a single job queue. 
      */
     computeEnvironmentOrder?: ComputeEnvironmentOrders;
+    /**
+     * The set of actions that Batch perform on jobs that remain at the head of the job queue in the specified state longer than specified times. Batch will perform each action after maxTimeSeconds has passed.
+     */
+    jobStateTimeLimitActions?: JobStateTimeLimitActions;
   }
   export interface UpdateJobQueueResponse {
     /**
