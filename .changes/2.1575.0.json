@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeStarconnections",
+        "description": "Added a sync configuration enum to disable publishing of deployment status to source providers (PublishDeploymentStatus). Added a sync configuration enum (TriggerStackUpdateOn) to only trigger changes."
+    },
+    {
+        "type": "feature",
+        "category": "MediaPackageV2",
+        "description": "This release enables customers to safely update their MediaPackage v2 channel groups, channels and origin endpoints using entity tags."
+    }
+]

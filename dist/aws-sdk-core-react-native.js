@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1574.0',
+	  VERSION: '2.1575.0',
 
 	  /**
 	   * @api private
@@ -10135,9 +10135,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var $TypeError = __webpack_require__(64);
 	var $floor = GetIntrinsic('%Math.floor%');
 
-	/** @typedef {(...args: unknown[]) => unknown} Func */
-
-	/** @type {<T extends Func = Func>(fn: T, length: number, loose?: boolean) => T} */
+	/** @type {import('.')} */
 	module.exports = function setFunctionLength(fn, length) {
 		if (typeof fn !== 'function') {
 			throw new $TypeError('`fn` is not a function');
@@ -10361,6 +10359,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var callBound = __webpack_require__(57);
 	var gOPD = __webpack_require__(75);
 
+	/** @type {(O: object) => string} */
 	var $toString = callBound('Object.prototype.toString');
 	var hasToStringTag = __webpack_require__(55)();
 
@@ -10370,7 +10369,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var $slice = callBound('String.prototype.slice');
 	var getPrototypeOf = Object.getPrototypeOf; // require('getprototypeof');
 
-	var $indexOf = callBound('Array.prototype.indexOf', true) || /** @type {(array: readonly unknown[], value: unknown) => keyof array} */ function indexOf(array, value) {
+	/** @type {<T = unknown>(array: readonly T[], value: unknown) => number} */
+	var $indexOf = callBound('Array.prototype.indexOf', true) || function indexOf(array, value) {
 		for (var i = 0; i < array.length; i += 1) {
 			if (array[i] === value) {
 				return i;
@@ -10379,9 +10379,8 @@ return /******/ (function(modules) { // webpackBootstrap
 		return -1;
 	};
 
-	/** @typedef {Int8Array | Uint8Array | Uint8ClampedArray | Int16Array | Uint16Array | Int32Array | Uint32Array | Float32Array | Float64Array | BigInt64Array | BigUint64Array} TypedArray */
-	/** @typedef {'Int8Array' | 'Uint8Array' | 'Uint8ClampedArray' | 'Int16Array' | 'Uint16Array' | 'Int32Array' | 'Uint32Array' | 'Float32Array' | 'Float64Array' | 'BigInt64Array' | 'BigUint64Array'} TypedArrayName */
-	/** @type {{ [k in `\$${TypedArrayName}`]?: (receiver: TypedArray) => string | typeof Uint8Array.prototype.slice.call | typeof Uint8Array.prototype.set.call } & { __proto__: null }} */
+	/** @typedef {(receiver: import('.').TypedArray) => string | typeof Uint8Array.prototype.slice.call | typeof Uint8Array.prototype.set.call} Getter */
+	/** @type {{ [k in `\$${import('.').TypedArrayName}`]?: Getter } & { __proto__: null }} */
 	var cache = { __proto__: null };
 	if (hasToStringTag && gOPD && getPrototypeOf) {
 		forEach(typedArrays, function (typedArray) {
@@ -10410,13 +10409,14 @@ return /******/ (function(modules) { // webpackBootstrap
 		});
 	}
 
-	/** @type {import('.')} */
+	/** @type {(value: object) => false | import('.').TypedArrayName} */
 	var tryTypedArrays = function tryAllTypedArrays(value) {
-		/** @type {ReturnType<tryAllTypedArrays>} */ var found = false;
+		/** @type {ReturnType<typeof tryAllTypedArrays>} */ var found = false;
 		forEach(
 			// eslint-disable-next-line no-extra-parens
-			/** @type {Record<`\$${TypedArrayName}`, typeof cache>} */ /** @type {any} */ (cache),
-			/** @type {(getter: typeof cache, name: `\$${TypedArrayName}`) => void} */ function (getter, typedArray) {
+			/** @type {Record<`\$${TypedArrayName}`, Getter>} */ /** @type {any} */ (cache),
+			/** @type {(getter: Getter, name: `\$${import('.').TypedArrayName}`) => void} */
+			function (getter, typedArray) {
 				if (!found) {
 					try {
 					// @ts-expect-error TODO: fix
@@ -10430,16 +10430,16 @@ return /******/ (function(modules) { // webpackBootstrap
 		return found;
 	};
 
-	/** @type {import('.')} */
+	/** @type {(value: object) => false | import('.').TypedArrayName} */
 	var trySlices = function tryAllSlices(value) {
-		/** @type {ReturnType<tryAllSlices>} */ var found = false;
+		/** @type {ReturnType<typeof tryAllSlices>} */ var found = false;
 		forEach(
 			// eslint-disable-next-line no-extra-parens
-			/** @type {any} */ (cache),
-			/** @type {(getter: typeof cache, name: `\$${TypedArrayName}`) => void} */ function (getter, name) {
+			/** @type {Record<`\$${TypedArrayName}`, Getter>} */ /** @type {any} */ (cache),
+			/** @type {(getter: typeof cache, name: `\$${import('.').TypedArrayName}`) => void} */ function (getter, name) {
 				if (!found) {
 					try {
-					// @ts-expect-error TODO: fix
+						// @ts-expect-error TODO: fix
 						getter(value);
 						found = $slice(name, 1);
 					} catch (e) { /**/ }
@@ -10453,6 +10453,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = function whichTypedArray(value) {
 		if (!value || typeof value !== 'object') { return false; }
 		if (!hasToStringTag) {
+			/** @type {string} */
 			var tag = $slice($toString(value), 8, -1);
 			if ($indexOf(typedArrays, tag) > -1) {
 				return tag;

@@ -299,6 +299,10 @@ declare namespace MediaPackageV2 {
      */
     ModifiedAt: Timestamp;
     /**
+     * The current Entity Tag (ETag) associated with this resource. The entity tag can be used to safely make concurrent updates to the resource.
+     */
+    ETag?: EntityTag;
+    /**
      * The description for your channel group.
      */
     Description?: ResourceDescription;
@@ -355,6 +359,10 @@ declare namespace MediaPackageV2 {
      */
     Description?: ResourceDescription;
     IngestEndpoints?: IngestEndpointList;
+    /**
+     * The current Entity Tag (ETag) associated with this resource. The entity tag can be used to safely make concurrent updates to the resource.
+     */
+    ETag?: EntityTag;
     /**
      * The comma-separated list of tag key:value pairs assigned to the channel.
      */
@@ -503,6 +511,10 @@ declare namespace MediaPackageV2 {
      */
     LowLatencyHlsManifests?: GetLowLatencyHlsManifests;
     /**
+     * The current Entity Tag (ETag) associated with this resource. The entity tag can be used to safely make concurrent updates to the resource.
+     */
+    ETag?: EntityTag;
+    /**
      * The comma-separated list of tag key:value pairs assigned to the origin endpoint.
      */
     Tags?: TagMap;
@@ -612,6 +624,7 @@ declare namespace MediaPackageV2 {
      */
     CmafEncryptionMethod?: CmafEncryptionMethod;
   }
+  export type EntityTag = string;
   export interface FilterConfiguration {
     /**
      * Optionally specify one or more manifest filters for all of your manifest egress requests. When you include a manifest filter, note that you cannot use an identical manifest filter query parameter for this manifest's endpoint URL.
@@ -663,6 +676,10 @@ declare namespace MediaPackageV2 {
      * The description for your channel group.
      */
     Description?: ResourceDescription;
+    /**
+     * The current Entity Tag (ETag) associated with this resource. The entity tag can be used to safely make concurrent updates to the resource.
+     */
+    ETag?: EntityTag;
     /**
      * The comma-separated list of tag key:value pairs assigned to the channel group.
      */
@@ -728,6 +745,10 @@ declare namespace MediaPackageV2 {
      */
     Description?: ResourceDescription;
     IngestEndpoints?: IngestEndpointList;
+    /**
+     * The current Entity Tag (ETag) associated with this resource. The entity tag can be used to safely make concurrent updates to the resource.
+     */
+    ETag?: EntityTag;
     /**
      * The comma-separated list of tag key:value pairs assigned to the channel.
      */
@@ -875,6 +896,10 @@ declare namespace MediaPackageV2 {
      * A low-latency HLS manifest configuration.
      */
     LowLatencyHlsManifests?: GetLowLatencyHlsManifests;
+    /**
+     * The current Entity Tag (ETag) associated with this resource. The entity tag can be used to safely make concurrent updates to the resource.
+     */
+    ETag?: EntityTag;
     /**
      * The comma-separated list of tag key:value pairs assigned to the origin endpoint.
      */
@@ -1196,6 +1221,10 @@ declare namespace MediaPackageV2 {
      */
     ChannelGroupName: ResourceName;
     /**
+     * The expected current Entity Tag (ETag) for the resource. If the specified ETag does not match the resource's current entity tag, the update request will be rejected.
+     */
+    ETag?: EntityTag;
+    /**
      * Any descriptive information that you want to add to the channel group for future identification purposes.
      */
     Description?: ResourceDescription;
@@ -1226,6 +1255,10 @@ declare namespace MediaPackageV2 {
      */
     Description?: ResourceDescription;
     /**
+     * The current Entity Tag (ETag) associated with this resource. The entity tag can be used to safely make concurrent updates to the resource.
+     */
+    ETag?: EntityTag;
+    /**
      * The comma-separated list of tag key:value pairs assigned to the channel group.
      */
     Tags?: TagMap;
@@ -1239,6 +1272,10 @@ declare namespace MediaPackageV2 {
      * The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group. 
      */
     ChannelName: ResourceName;
+    /**
+     * The expected current Entity Tag (ETag) for the resource. If the specified ETag does not match the resource's current entity tag, the update request will be rejected.
+     */
+    ETag?: EntityTag;
     /**
      * Any descriptive information that you want to add to the channel for future identification purposes.
      */
@@ -1270,6 +1307,10 @@ declare namespace MediaPackageV2 {
      */
     Description?: ResourceDescription;
     IngestEndpoints?: IngestEndpointList;
+    /**
+     * The current Entity Tag (ETag) associated with this resource. The entity tag can be used to safely make concurrent updates to the resource.
+     */
+    ETag?: EntityTag;
     /**
      * The comma-separated list of tag key:value pairs assigned to the channel.
      */
@@ -1312,6 +1353,10 @@ declare namespace MediaPackageV2 {
      * A low-latency HLS manifest configuration.
      */
     LowLatencyHlsManifests?: CreateLowLatencyHlsManifests;
+    /**
+     * The expected current Entity Tag (ETag) for the resource. If the specified ETag does not match the resource's current entity tag, the update request will be rejected.
+     */
+    ETag?: EntityTag;
   }
   export type UpdateOriginEndpointRequestStartoverWindowSecondsInteger = number;
   export interface UpdateOriginEndpointResponse {
@@ -1363,6 +1408,10 @@ declare namespace MediaPackageV2 {
      * A low-latency HLS manifest configuration.
      */
     LowLatencyHlsManifests?: GetLowLatencyHlsManifests;
+    /**
+     * The current Entity Tag (ETag) associated with this resource. The entity tag can be used to safely make concurrent updates to the resource.
+     */
+    ETag?: EntityTag;
     /**
      * The comma-separated list of tag key:value pairs assigned to the origin endpoint.
      */

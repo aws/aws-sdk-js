@@ -377,6 +377,14 @@ declare namespace CodeStarconnections {
      * The type of sync configuration.
      */
     SyncType: SyncConfigurationType;
+    /**
+     * Whether to enable or disable publishing of deployment status to source providers.
+     */
+    PublishDeploymentStatus?: PublishDeploymentStatus;
+    /**
+     * When to trigger Git sync to begin the stack update.
+     */
+    TriggerResourceUpdateOn?: TriggerResourceUpdateOn;
   }
   export interface CreateSyncConfigurationOutput {
     /**
@@ -725,6 +733,7 @@ declare namespace CodeStarconnections {
   export type OwnerId = string;
   export type Parent = string;
   export type ProviderType = "Bitbucket"|"GitHub"|"GitHubEnterpriseServer"|"GitLab"|"GitLabSelfManaged"|string;
+  export type PublishDeploymentStatus = "ENABLED"|"DISABLED"|string;
   export type RepositoryLinkArn = string;
   export type RepositoryLinkId = string;
   export interface RepositoryLinkInfo {
@@ -990,6 +999,14 @@ declare namespace CodeStarconnections {
      * The type of sync for a specific sync configuration.
      */
     SyncType: SyncConfigurationType;
+    /**
+     * Whether to enable or disable publishing of deployment status to source providers.
+     */
+    PublishDeploymentStatus?: PublishDeploymentStatus;
+    /**
+     * When to trigger Git sync to begin the stack update.
+     */
+    TriggerResourceUpdateOn?: TriggerResourceUpdateOn;
   }
   export type SyncConfigurationList = SyncConfiguration[];
   export type SyncConfigurationType = "CFN_STACK_SYNC"|string;
@@ -1022,6 +1039,7 @@ declare namespace CodeStarconnections {
   export type Target = string;
   export type Timestamp = Date;
   export type TlsCertificate = string;
+  export type TriggerResourceUpdateOn = "ANY_CHANGE"|"FILE_CHANGE"|string;
   export type Type = string;
   export interface UntagResourceInput {
     /**
@@ -1128,6 +1146,14 @@ declare namespace CodeStarconnections {
      * The sync type for the sync configuration to be updated.
      */
     SyncType: SyncConfigurationType;
+    /**
+     * Whether to enable or disable publishing of deployment status to source providers.
+     */
+    PublishDeploymentStatus?: PublishDeploymentStatus;
+    /**
+     * When to trigger Git sync to begin the stack update.
+     */
+    TriggerResourceUpdateOn?: TriggerResourceUpdateOn;
   }
   export interface UpdateSyncConfigurationOutput {
     /**

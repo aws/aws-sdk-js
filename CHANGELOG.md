@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1574.0-->
+<!--LATEST=2.1575.0-->
 <!--ENTRYINSERT-->
+
+## 2.1575.0
+* feature: CodeStarconnections: Added a sync configuration enum to disable publishing of deployment status to source providers (PublishDeploymentStatus). Added a sync configuration enum (TriggerStackUpdateOn) to only trigger changes.
+* feature: MediaPackageV2: This release enables customers to safely update their MediaPackage v2 channel groups, channels and origin endpoints using entity tags.
 
 ## 2.1574.0
 * feature: Batch: This release adds JobStateTimeLimitActions setting to the Job Queue API. It allows you to configure an action Batch can take for a blocking job in front of the queue after the defined period of time. The new parameter applies for ECS, EKS, and FARGATE Job Queues.
