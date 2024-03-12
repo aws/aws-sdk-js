@@ -3394,6 +3394,13 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     TargetKafkaClusterAlias?: __string;
   }
+  export interface ReplicationStartingPosition {
+    /**
+     * The type of replication starting position.
+     */
+    Type?: ReplicationStartingPositionType;
+  }
+  export type ReplicationStartingPositionType = "LATEST"|"EARLIEST"|string;
   export interface ReplicationStateInfo {
     /**
      * Code that describes the current state of the replicator.
@@ -3506,6 +3513,10 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      * Whether to periodically check for new topics and partitions.
      */
     DetectAndCopyNewTopics?: __boolean;
+    /**
+     * Configuration for specifying the position in the topics to start replicating from.
+     */
+    StartingPosition?: ReplicationStartingPosition;
     /**
      * List of regular expression patterns indicating the topics that should not be replicated.
      */

@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1575.0-->
+<!--LATEST=2.1576.0-->
 <!--ENTRYINSERT-->
+
+## 2.1576.0
+* feature: Connect: This release increases MaxResults limit to 500 in request for SearchUsers, SearchQueues and SearchRoutingProfiles APIs of Amazon Connect.
+* feature: Kafka: Added support for specifying the starting position of topic replication in MSK-Replicator.
 
 ## 2.1575.0
 * feature: CodeStarconnections: Added a sync configuration enum to disable publishing of deployment status to source providers (PublishDeploymentStatus). Added a sync configuration enum (TriggerStackUpdateOn) to only trigger changes.
