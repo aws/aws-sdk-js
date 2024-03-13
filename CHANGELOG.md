@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1576.0-->
+<!--LATEST=2.1577.0-->
 <!--ENTRYINSERT-->
+
+## 2.1577.0
+* feature: IVSRealTime: adds support for multiple new composition layout configuration options (grid, pip)
+* feature: KinesisAnalyticsV2: Support new RuntimeEnvironmentUpdate parameter within UpdateApplication API allowing callers to change the Flink version upon which their application runs.
+* feature: S3: This release makes the default option for S3 on Outposts request signing to use the SigV4A algorithm when using AWS Common Runtime (CRT).
 
 ## 2.1576.0
 * feature: Connect: This release increases MaxResults limit to 500 in request for SearchUsers, SearchQueues and SearchRoutingProfiles APIs of Amazon Connect.

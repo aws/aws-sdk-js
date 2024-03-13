@@ -663,13 +663,34 @@ declare namespace IVSRealTime {
      * This attribute name identifies the featured slot. A participant with this attribute set to "true" (as a string value) in ParticipantTokenConfiguration is placed in the featured slot.
      */
     featuredParticipantAttribute?: AttributeKey;
+    /**
+     * Specifies the spacing between participant tiles in pixels. Default: 2.
+     */
+    gridGap?: GridGap;
+    /**
+     * Determines whether to omit participants with stopped video in the composition. Default: false.
+     */
+    omitStoppedVideo?: OmitStoppedVideo;
+    /**
+     * Sets the non-featured participant display mode. Default: VIDEO.
+     */
+    videoAspectRatio?: VideoAspectRatio;
+    /**
+     * Defines how video fits within the participant tile. When not set, videoFillMode defaults to COVER fill mode for participants in the grid and to CONTAIN fill mode for featured participants.
+     */
+    videoFillMode?: VideoFillMode;
   }
+  export type GridGap = number;
   export type Height = number;
   export interface LayoutConfiguration {
     /**
      * Configuration related to grid layout. Default: Grid layout.
      */
     grid?: GridConfiguration;
+    /**
+     * Configuration related to PiP layout.
+     */
+    pip?: PipConfiguration;
   }
   export interface ListCompositionsRequest {
     /**
@@ -874,6 +895,7 @@ declare namespace IVSRealTime {
   export type MaxStageResults = number;
   export type MaxStageSessionResults = number;
   export type MaxStorageConfigurationResults = number;
+  export type OmitStoppedVideo = boolean;
   export type PaginationToken = string;
   export interface Participant {
     /**
@@ -1010,6 +1032,53 @@ declare namespace IVSRealTime {
   export type ParticipantTokenList = ParticipantToken[];
   export type ParticipantTokenString = string;
   export type ParticipantTokenUserId = string;
+  export type PipBehavior = "STATIC"|"DYNAMIC"|string;
+  export interface PipConfiguration {
+    /**
+     * This attribute name identifies the featured slot. A participant with this attribute set to "true" (as a string value) in ParticipantTokenConfiguration is placed in the featured slot.
+     */
+    featuredParticipantAttribute?: AttributeKey;
+    /**
+     * Specifies the spacing between participant tiles in pixels. Default: 0.
+     */
+    gridGap?: GridGap;
+    /**
+     * Determines whether to omit participants with stopped video in the composition. Default: false.
+     */
+    omitStoppedVideo?: OmitStoppedVideo;
+    /**
+     * Defines PiP behavior when all participants have left. Default: STATIC.
+     */
+    pipBehavior?: PipBehavior;
+    /**
+     * Specifies the height of the PiP window in pixels. When this is not set explicitly, pipHeight’s value will be based on the size of the composition and the aspect ratio of the participant’s video.
+     */
+    pipHeight?: PipHeight;
+    /**
+     * Sets the PiP window’s offset position in pixels from the closest edges determined by PipPosition. Default: 0.
+     */
+    pipOffset?: PipOffset;
+    /**
+     * Identifies the PiP slot. A participant with this attribute set to "true" (as a string value) in ParticipantTokenConfiguration is placed in the PiP slot.
+     */
+    pipParticipantAttribute?: AttributeKey;
+    /**
+     * Determines the corner position of the PiP window. Default: BOTTOM_RIGHT.
+     */
+    pipPosition?: PipPosition;
+    /**
+     * Specifies the width of the PiP window in pixels. When this is not set explicitly, pipWidth’s value will be based on the size of the composition and the aspect ratio of the participant’s video.
+     */
+    pipWidth?: PipWidth;
+    /**
+     * Defines how video fits within the participant tile. Default: COVER. 
+     */
+    videoFillMode?: VideoFillMode;
+  }
+  export type PipHeight = number;
+  export type PipOffset = number;
+  export type PipPosition = "TOP_LEFT"|"TOP_RIGHT"|"BOTTOM_LEFT"|"BOTTOM_RIGHT"|string;
+  export type PipWidth = number;
   export type Published = boolean;
   export interface RecordingConfiguration {
     /**
@@ -1255,6 +1324,8 @@ declare namespace IVSRealTime {
      */
     width?: Width;
   }
+  export type VideoAspectRatio = "AUTO"|"VIDEO"|"SQUARE"|"PORTRAIT"|string;
+  export type VideoFillMode = "FILL"|"COVER"|"CONTAIN"|string;
   export type Width = number;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
