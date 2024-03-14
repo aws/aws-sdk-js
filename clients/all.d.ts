@@ -375,3 +375,4 @@ export import NetworkMonitor = require('./networkmonitor');
 export import SupplyChain = require('./supplychain');
 export import Artifact = require('./artifact');
 export import Chatbot = require('./chatbot');
+export import TimestreamInfluxDB = require('./timestreaminfluxdb');

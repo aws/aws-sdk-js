@@ -12,19 +12,19 @@ declare class Fis extends Service {
   constructor(options?: Fis.Types.ClientConfiguration)
   config: Config & Fis.Types.ClientConfiguration;
   /**
-   * Creates an experiment template.  An experiment template includes the following components:    Targets: A target can be a specific resource in your Amazon Web Services environment, or one or more resources that match criteria that you specify, for example, resources that have specific tags.    Actions: The actions to carry out on the target. You can specify multiple actions, the duration of each action, and when to start each action during an experiment.    Stop conditions: If a stop condition is triggered while an experiment is running, the experiment is automatically stopped. You can define a stop condition as a CloudWatch alarm.   For more information, see experiment templates in the Fault Injection Simulator User Guide.
+   * Creates an experiment template.  An experiment template includes the following components:    Targets: A target can be a specific resource in your Amazon Web Services environment, or one or more resources that match criteria that you specify, for example, resources that have specific tags.    Actions: The actions to carry out on the target. You can specify multiple actions, the duration of each action, and when to start each action during an experiment.    Stop conditions: If a stop condition is triggered while an experiment is running, the experiment is automatically stopped. You can define a stop condition as a CloudWatch alarm.   For more information, see experiment templates in the Fault Injection Service User Guide.
    */
   createExperimentTemplate(params: Fis.Types.CreateExperimentTemplateRequest, callback?: (err: AWSError, data: Fis.Types.CreateExperimentTemplateResponse) => void): Request<Fis.Types.CreateExperimentTemplateResponse, AWSError>;
   /**
-   * Creates an experiment template.  An experiment template includes the following components:    Targets: A target can be a specific resource in your Amazon Web Services environment, or one or more resources that match criteria that you specify, for example, resources that have specific tags.    Actions: The actions to carry out on the target. You can specify multiple actions, the duration of each action, and when to start each action during an experiment.    Stop conditions: If a stop condition is triggered while an experiment is running, the experiment is automatically stopped. You can define a stop condition as a CloudWatch alarm.   For more information, see experiment templates in the Fault Injection Simulator User Guide.
+   * Creates an experiment template.  An experiment template includes the following components:    Targets: A target can be a specific resource in your Amazon Web Services environment, or one or more resources that match criteria that you specify, for example, resources that have specific tags.    Actions: The actions to carry out on the target. You can specify multiple actions, the duration of each action, and when to start each action during an experiment.    Stop conditions: If a stop condition is triggered while an experiment is running, the experiment is automatically stopped. You can define a stop condition as a CloudWatch alarm.   For more information, see experiment templates in the Fault Injection Service User Guide.
    */
   createExperimentTemplate(callback?: (err: AWSError, data: Fis.Types.CreateExperimentTemplateResponse) => void): Request<Fis.Types.CreateExperimentTemplateResponse, AWSError>;
   /**
-   * Creates a target account configuration for the experiment template. A target account configuration is required when accountTargeting of experimentOptions is set to multi-account. For more information, see experiment options in the Fault Injection Simulator User Guide. 
+   * Creates a target account configuration for the experiment template. A target account configuration is required when accountTargeting of experimentOptions is set to multi-account. For more information, see experiment options in the Fault Injection Service User Guide. 
    */
   createTargetAccountConfiguration(params: Fis.Types.CreateTargetAccountConfigurationRequest, callback?: (err: AWSError, data: Fis.Types.CreateTargetAccountConfigurationResponse) => void): Request<Fis.Types.CreateTargetAccountConfigurationResponse, AWSError>;
   /**
-   * Creates a target account configuration for the experiment template. A target account configuration is required when accountTargeting of experimentOptions is set to multi-account. For more information, see experiment options in the Fault Injection Simulator User Guide. 
+   * Creates a target account configuration for the experiment template. A target account configuration is required when accountTargeting of experimentOptions is set to multi-account. For more information, see experiment options in the Fault Injection Service User Guide. 
    */
   createTargetAccountConfiguration(callback?: (err: AWSError, data: Fis.Types.CreateTargetAccountConfigurationResponse) => void): Request<Fis.Types.CreateTargetAccountConfigurationResponse, AWSError>;
   /**
@@ -212,6 +212,10 @@ declare namespace Fis {
      */
     id?: ActionId;
     /**
+     * The Amazon Resource Name (ARN) of the action.
+     */
+    arn?: ResourceArn;
+    /**
      * The description for the action.
      */
     description?: ActionDescription;
@@ -250,6 +254,10 @@ declare namespace Fis {
      */
     id?: ActionId;
     /**
+     * The Amazon Resource Name (ARN) of the action.
+     */
+    arn?: ResourceArn;
+    /**
      * The description for the action.
      */
     description?: ActionDescription;
@@ -271,6 +279,7 @@ declare namespace Fis {
   }
   export type ActionTargetMap = {[key: string]: ActionTarget};
   export type ActionTargetName = string;
+  export type ActionsMode = "skip-all"|"run-all"|string;
   export type ClientToken = string;
   export type CloudWatchLogGroupArn = string;
   export interface CreateExperimentTemplateActionInput {
@@ -412,7 +421,7 @@ declare namespace Fis {
      */
     experimentTemplateId: ExperimentTemplateId;
     /**
-     * The AWS account ID of the target account.
+     * The Amazon Web Services account ID of the target account.
      */
     accountId: TargetAccountId;
     /**
@@ -449,7 +458,7 @@ declare namespace Fis {
      */
     experimentTemplateId: ExperimentTemplateId;
     /**
-     * The AWS account ID of the target account.
+     * The Amazon Web Services account ID of the target account.
      */
     accountId: TargetAccountId;
   }
@@ -465,6 +474,10 @@ declare namespace Fis {
      * The ID of the experiment.
      */
     id?: ExperimentId;
+    /**
+     * The Amazon Resource Name (ARN) of the experiment.
+     */
+    arn?: ResourceArn;
     /**
      * The ID of the experiment template.
      */
@@ -607,6 +620,10 @@ declare namespace Fis {
      * The empty target resolution mode for an experiment.
      */
     emptyTargetResolutionMode?: EmptyTargetResolutionMode;
+    /**
+     * The actions mode of the experiment that is set from the StartExperiment API command.
+     */
+    actionsMode?: ActionsMode;
   }
   export interface ExperimentS3LogConfiguration {
     /**
@@ -648,6 +665,10 @@ declare namespace Fis {
      */
     id?: ExperimentId;
     /**
+     * The Amazon Resource Name (ARN) of the experiment.
+     */
+    arn?: ResourceArn;
+    /**
      * The ID of the experiment template.
      */
     experimentTemplateId?: ExperimentTemplateId;
@@ -663,6 +684,10 @@ declare namespace Fis {
      * The tags for the experiment.
      */
     tags?: TagMap;
+    /**
+     * The experiment options for the experiment.
+     */
+    experimentOptions?: ExperimentOptions;
   }
   export type ExperimentSummaryList = ExperimentSummary[];
   export interface ExperimentTarget {
@@ -697,7 +722,7 @@ declare namespace Fis {
      */
     roleArn?: RoleArn;
     /**
-     * The AWS account ID of the target account.
+     * The Amazon Web Services account ID of the target account.
      */
     accountId?: TargetAccountId;
     /**
@@ -712,7 +737,7 @@ declare namespace Fis {
      */
     roleArn?: RoleArn;
     /**
-     * The AWS account ID of the target account.
+     * The Amazon Web Services account ID of the target account.
      */
     accountId?: TargetAccountId;
     /**
@@ -745,6 +770,10 @@ declare namespace Fis {
      * The ID of the experiment template.
      */
     id?: ExperimentTemplateId;
+    /**
+     * The Amazon Resource Name (ARN) of the experiment template.
+     */
+    arn?: ResourceArn;
     /**
      * The description for the experiment template.
      */
@@ -897,6 +926,10 @@ declare namespace Fis {
      */
     id?: ExperimentTemplateId;
     /**
+     * The Amazon Resource Name (ARN) of the experiment template.
+     */
+    arn?: ResourceArn;
+    /**
      * The description of the experiment template.
      */
     description?: ExperimentTemplateDescription;
@@ -1001,7 +1034,7 @@ declare namespace Fis {
      */
     experimentId: ExperimentId;
     /**
-     * The AWS account ID of the target account.
+     * The Amazon Web Services account ID of the target account.
      */
     accountId: TargetAccountId;
   }
@@ -1029,7 +1062,7 @@ declare namespace Fis {
      */
     experimentTemplateId: ExperimentTemplateId;
     /**
-     * The AWS account ID of the target account.
+     * The Amazon Web Services account ID of the target account.
      */
     accountId: TargetAccountId;
   }
@@ -1153,6 +1186,10 @@ declare namespace Fis {
      * The token for the next page of results.
      */
     nextToken?: NextToken;
+    /**
+     * The ID of the experiment template.
+     */
+    experimentTemplateId?: ExperimentTemplateId;
   }
   export interface ListExperimentsResponse {
     /**
@@ -1244,6 +1281,12 @@ declare namespace Fis {
   export type RoleArn = string;
   export type S3BucketName = string;
   export type S3ObjectKey = string;
+  export interface StartExperimentExperimentOptionsInput {
+    /**
+     * Specifies the actions mode for experiment options.
+     */
+    actionsMode?: ActionsMode;
+  }
   export interface StartExperimentRequest {
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
@@ -1253,6 +1296,10 @@ declare namespace Fis {
      * The ID of the experiment template.
      */
     experimentTemplateId: ExperimentTemplateId;
+    /**
+     * The experiment options for running the experiment.
+     */
+    experimentOptions?: StartExperimentExperimentOptionsInput;
     /**
      * The tags to apply to the experiment.
      */
@@ -1300,7 +1347,7 @@ declare namespace Fis {
      */
     roleArn?: RoleArn;
     /**
-     * The AWS account ID of the target account.
+     * The Amazon Web Services account ID of the target account.
      */
     accountId?: TargetAccountId;
     /**
@@ -1316,7 +1363,7 @@ declare namespace Fis {
      */
     roleArn?: RoleArn;
     /**
-     * The AWS account ID of the target account.
+     * The Amazon Web Services account ID of the target account.
      */
     accountId?: TargetAccountId;
     /**
@@ -1510,7 +1557,7 @@ declare namespace Fis {
      */
     experimentTemplateId: ExperimentTemplateId;
     /**
-     * The AWS account ID of the target account.
+     * The Amazon Web Services account ID of the target account.
      */
     accountId: TargetAccountId;
     /**

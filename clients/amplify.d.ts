@@ -20,11 +20,11 @@ declare class Amplify extends Service {
    */
   createApp(callback?: (err: AWSError, data: Amplify.Types.CreateAppResult) => void): Request<Amplify.Types.CreateAppResult, AWSError>;
   /**
-   * Creates a new backend environment for an Amplify app. 
+   * Creates a new backend environment for an Amplify app.  This API is available only to Amplify Gen 1 applications where the backend is created using Amplify Studio or the Amplify command line interface (CLI). This API isn’t available to applications created using the Amplify Gen 2 public preview. When you deploy an application with Amplify Gen 2, you provision the app's backend infrastructure using Typescript code.
    */
   createBackendEnvironment(params: Amplify.Types.CreateBackendEnvironmentRequest, callback?: (err: AWSError, data: Amplify.Types.CreateBackendEnvironmentResult) => void): Request<Amplify.Types.CreateBackendEnvironmentResult, AWSError>;
   /**
-   * Creates a new backend environment for an Amplify app. 
+   * Creates a new backend environment for an Amplify app.  This API is available only to Amplify Gen 1 applications where the backend is created using Amplify Studio or the Amplify command line interface (CLI). This API isn’t available to applications created using the Amplify Gen 2 public preview. When you deploy an application with Amplify Gen 2, you provision the app's backend infrastructure using Typescript code.
    */
   createBackendEnvironment(callback?: (err: AWSError, data: Amplify.Types.CreateBackendEnvironmentResult) => void): Request<Amplify.Types.CreateBackendEnvironmentResult, AWSError>;
   /**
@@ -68,11 +68,11 @@ declare class Amplify extends Service {
    */
   deleteApp(callback?: (err: AWSError, data: Amplify.Types.DeleteAppResult) => void): Request<Amplify.Types.DeleteAppResult, AWSError>;
   /**
-   * Deletes a backend environment for an Amplify app. 
+   * Deletes a backend environment for an Amplify app.  This API is available only to Amplify Gen 1 applications where the backend was created using Amplify Studio or the Amplify command line interface (CLI). This API isn’t available to applications created using the Amplify Gen 2 public preview. When you deploy an application with Amplify Gen 2, you provision the app's backend infrastructure using Typescript code.
    */
   deleteBackendEnvironment(params: Amplify.Types.DeleteBackendEnvironmentRequest, callback?: (err: AWSError, data: Amplify.Types.DeleteBackendEnvironmentResult) => void): Request<Amplify.Types.DeleteBackendEnvironmentResult, AWSError>;
   /**
-   * Deletes a backend environment for an Amplify app. 
+   * Deletes a backend environment for an Amplify app.  This API is available only to Amplify Gen 1 applications where the backend was created using Amplify Studio or the Amplify command line interface (CLI). This API isn’t available to applications created using the Amplify Gen 2 public preview. When you deploy an application with Amplify Gen 2, you provision the app's backend infrastructure using Typescript code.
    */
   deleteBackendEnvironment(callback?: (err: AWSError, data: Amplify.Types.DeleteBackendEnvironmentResult) => void): Request<Amplify.Types.DeleteBackendEnvironmentResult, AWSError>;
   /**
@@ -132,11 +132,11 @@ declare class Amplify extends Service {
    */
   getArtifactUrl(callback?: (err: AWSError, data: Amplify.Types.GetArtifactUrlResult) => void): Request<Amplify.Types.GetArtifactUrlResult, AWSError>;
   /**
-   * Returns a backend environment for an Amplify app. 
+   * Returns a backend environment for an Amplify app.  This API is available only to Amplify Gen 1 applications where the backend was created using Amplify Studio or the Amplify command line interface (CLI). This API isn’t available to applications created using the Amplify Gen 2 public preview. When you deploy an application with Amplify Gen 2, you provision the app's backend infrastructure using Typescript code.
    */
   getBackendEnvironment(params: Amplify.Types.GetBackendEnvironmentRequest, callback?: (err: AWSError, data: Amplify.Types.GetBackendEnvironmentResult) => void): Request<Amplify.Types.GetBackendEnvironmentResult, AWSError>;
   /**
-   * Returns a backend environment for an Amplify app. 
+   * Returns a backend environment for an Amplify app.  This API is available only to Amplify Gen 1 applications where the backend was created using Amplify Studio or the Amplify command line interface (CLI). This API isn’t available to applications created using the Amplify Gen 2 public preview. When you deploy an application with Amplify Gen 2, you provision the app's backend infrastructure using Typescript code.
    */
   getBackendEnvironment(callback?: (err: AWSError, data: Amplify.Types.GetBackendEnvironmentResult) => void): Request<Amplify.Types.GetBackendEnvironmentResult, AWSError>;
   /**
@@ -188,11 +188,11 @@ declare class Amplify extends Service {
    */
   listArtifacts(callback?: (err: AWSError, data: Amplify.Types.ListArtifactsResult) => void): Request<Amplify.Types.ListArtifactsResult, AWSError>;
   /**
-   * Lists the backend environments for an Amplify app. 
+   * Lists the backend environments for an Amplify app.  This API is available only to Amplify Gen 1 applications where the backend was created using Amplify Studio or the Amplify command line interface (CLI). This API isn’t available to applications created using the Amplify Gen 2 public preview. When you deploy an application with Amplify Gen 2, you provision the app's backend infrastructure using Typescript code.
    */
   listBackendEnvironments(params: Amplify.Types.ListBackendEnvironmentsRequest, callback?: (err: AWSError, data: Amplify.Types.ListBackendEnvironmentsResult) => void): Request<Amplify.Types.ListBackendEnvironmentsResult, AWSError>;
   /**
-   * Lists the backend environments for an Amplify app. 
+   * Lists the backend environments for an Amplify app.  This API is available only to Amplify Gen 1 applications where the backend was created using Amplify Studio or the Amplify command line interface (CLI). This API isn’t available to applications created using the Amplify Gen 2 public preview. When you deploy an application with Amplify Gen 2, you provision the app's backend infrastructure using Typescript code.
    */
   listBackendEnvironments(callback?: (err: AWSError, data: Amplify.Types.ListBackendEnvironmentsResult) => void): Request<Amplify.Types.ListBackendEnvironmentsResult, AWSError>;
   /**

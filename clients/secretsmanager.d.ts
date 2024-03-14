@@ -60,11 +60,11 @@ declare class SecretsManager extends Service {
    */
   describeSecret(callback?: (err: AWSError, data: SecretsManager.Types.DescribeSecretResponse) => void): Request<SecretsManager.Types.DescribeSecretResponse, AWSError>;
   /**
-   * Generates a random password. We recommend that you specify the maximum length and include every character type that the system you are generating a password for can support. By default, Secrets Manager uses uppercase and lowercase letters, numbers, and the following characters in passwords: !\"#$%&amp;'()*+,-./:;&lt;=&gt;?@[\\]^_`{|}~  Secrets Manager generates a CloudTrail log entry when you call this action. Do not include sensitive information in request parameters because it might be logged. For more information, see Logging Secrets Manager events with CloudTrail.  Required permissions:  secretsmanager:GetRandomPassword. For more information, see  IAM policy actions for Secrets Manager and Authentication and access control in Secrets Manager. 
+   * Generates a random password. We recommend that you specify the maximum length and include every character type that the system you are generating a password for can support. By default, Secrets Manager uses uppercase and lowercase letters, numbers, and the following characters in passwords: !\"#$%&amp;'()*+,-./:;&lt;=&gt;?@[\\]^_`{|}~  Secrets Manager generates a CloudTrail log entry when you call this action.  Required permissions:  secretsmanager:GetRandomPassword. For more information, see  IAM policy actions for Secrets Manager and Authentication and access control in Secrets Manager. 
    */
   getRandomPassword(params: SecretsManager.Types.GetRandomPasswordRequest, callback?: (err: AWSError, data: SecretsManager.Types.GetRandomPasswordResponse) => void): Request<SecretsManager.Types.GetRandomPasswordResponse, AWSError>;
   /**
-   * Generates a random password. We recommend that you specify the maximum length and include every character type that the system you are generating a password for can support. By default, Secrets Manager uses uppercase and lowercase letters, numbers, and the following characters in passwords: !\"#$%&amp;'()*+,-./:;&lt;=&gt;?@[\\]^_`{|}~  Secrets Manager generates a CloudTrail log entry when you call this action. Do not include sensitive information in request parameters because it might be logged. For more information, see Logging Secrets Manager events with CloudTrail.  Required permissions:  secretsmanager:GetRandomPassword. For more information, see  IAM policy actions for Secrets Manager and Authentication and access control in Secrets Manager. 
+   * Generates a random password. We recommend that you specify the maximum length and include every character type that the system you are generating a password for can support. By default, Secrets Manager uses uppercase and lowercase letters, numbers, and the following characters in passwords: !\"#$%&amp;'()*+,-./:;&lt;=&gt;?@[\\]^_`{|}~  Secrets Manager generates a CloudTrail log entry when you call this action.  Required permissions:  secretsmanager:GetRandomPassword. For more information, see  IAM policy actions for Secrets Manager and Authentication and access control in Secrets Manager. 
    */
   getRandomPassword(callback?: (err: AWSError, data: SecretsManager.Types.GetRandomPasswordResponse) => void): Request<SecretsManager.Types.GetRandomPasswordResponse, AWSError>;
   /**
@@ -224,7 +224,7 @@ declare namespace SecretsManager {
      */
     Filters?: FiltersListType;
     /**
-     * The number of results to include in the response. If there are more results available, in the response, Secrets Manager includes NextToken. To get the next results, call BatchGetSecretValue again with the value from NextToken.
+     * The number of results to include in the response. If there are more results available, in the response, Secrets Manager includes NextToken. To get the next results, call BatchGetSecretValue again with the value from NextToken. To use this parameter, you must also use the Filters parameter.
      */
     MaxResults?: MaxResultsBatchType;
     /**
@@ -423,7 +423,7 @@ declare namespace SecretsManager {
      */
     DeletedDate?: DeletedDateType;
     /**
-     * The next rotation is scheduled to occur on or before this date. If the secret isn't configured for rotation or rotation has been disabled, Secrets Manager returns null. If rotation fails, Secrets Manager retries the entire rotation process multiple times. If rotation is unsuccessful, this date may be in the past.
+     * The next rotation is scheduled to occur on or before this date. If the secret isn't configured for rotation or rotation has been disabled, Secrets Manager returns null. If rotation fails, Secrets Manager retries the entire rotation process multiple times. If rotation is unsuccessful, this date may be in the past. This date represents the latest date that rotation will occur, but it is not an approximate rotation date. In some cases, for example if you turn off automatic rotation and then turn it back on, the next rotation may occur much sooner than this date.
      */
     NextRotationDate?: NextRotationDateType;
     /**

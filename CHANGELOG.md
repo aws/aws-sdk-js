@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1577.0-->
+<!--LATEST=2.1578.0-->
 <!--ENTRYINSERT-->
+
+## 2.1578.0
+* bugfix: IoTRoborunner: Deprecate IoTRoborunner
+* feature: EC2InstanceConnect: This release includes a new exception type "SerialConsoleSessionUnsupportedException" for SendSerialConsoleSSHPublicKey API.
+* feature: Fis: This release adds support for previewing target resources before running a FIS experiment. It also adds resource ARNs for actions, experiments, and experiment templates to API responses.
+* feature: TimestreamInfluxDB: This is the initial SDK release for Amazon Timestream for InfluxDB. Amazon Timestream for InfluxDB is a new time-series database engine that makes it easy for application developers and DevOps teams to run InfluxDB databases on AWS for near real-time time-series applications using open source APIs.
 
 ## 2.1577.0
 * feature: IVSRealTime: adds support for multiple new composition layout configuration options (grid, pip)

@@ -1408,5 +1408,9 @@
   },
   "chatbot": {
     "name": "Chatbot"
+  },
+  "timestreaminfluxdb": {
+    "prefix": "timestream-influxdb",
+    "name": "TimestreamInfluxDB"
   }
 }

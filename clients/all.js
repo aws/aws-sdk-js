@@ -376,5 +376,6 @@ module.exports = {
   NetworkMonitor: require('./networkmonitor'),
   SupplyChain: require('./supplychain'),
   Artifact: require('./artifact'),
-  Chatbot: require('./chatbot')
+  Chatbot: require('./chatbot'),
+  TimestreamInfluxDB: require('./timestreaminfluxdb')
 };

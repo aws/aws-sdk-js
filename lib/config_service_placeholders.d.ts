@@ -377,6 +377,7 @@ export abstract class ConfigurationServicePlaceholders {
   supplychain?: AWS.SupplyChain.Types.ClientConfiguration;
   artifact?: AWS.Artifact.Types.ClientConfiguration;
   chatbot?: AWS.Chatbot.Types.ClientConfiguration;
+  timestreaminfluxdb?: AWS.TimestreamInfluxDB.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -756,4 +757,5 @@ export interface ConfigurationServiceApiVersions {
   supplychain?: AWS.SupplyChain.Types.apiVersion;
   artifact?: AWS.Artifact.Types.apiVersion;
   chatbot?: AWS.Chatbot.Types.apiVersion;
+  timestreaminfluxdb?: AWS.TimestreamInfluxDB.Types.apiVersion;
 }
