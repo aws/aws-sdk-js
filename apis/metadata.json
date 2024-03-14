@@ -1210,10 +1210,6 @@
     "prefix": "chime-sdk-voice",
     "name": "ChimeSDKVoice"
   },
-  "iotroborunner": {
-    "prefix": "iot-roborunner",
-    "name": "IoTRoboRunner"
-  },
   "ssmsap": {
     "prefix": "ssm-sap",
     "name": "SsmSap"

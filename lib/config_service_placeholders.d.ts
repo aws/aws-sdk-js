@@ -320,7 +320,6 @@ export abstract class ConfigurationServicePlaceholders {
   resourceexplorer2?: AWS.ResourceExplorer2.Types.ClientConfiguration;
   scheduler?: AWS.Scheduler.Types.ClientConfiguration;
   chimesdkvoice?: AWS.ChimeSDKVoice.Types.ClientConfiguration;
-  iotroborunner?: AWS.IoTRoboRunner.Types.ClientConfiguration;
   ssmsap?: AWS.SsmSap.Types.ClientConfiguration;
   oam?: AWS.OAM.Types.ClientConfiguration;
   arczonalshift?: AWS.ARCZonalShift.Types.ClientConfiguration;
@@ -700,7 +699,6 @@ export interface ConfigurationServiceApiVersions {
   resourceexplorer2?: AWS.ResourceExplorer2.Types.apiVersion;
   scheduler?: AWS.Scheduler.Types.apiVersion;
   chimesdkvoice?: AWS.ChimeSDKVoice.Types.apiVersion;
-  iotroborunner?: AWS.IoTRoboRunner.Types.apiVersion;
   ssmsap?: AWS.SsmSap.Types.apiVersion;
   oam?: AWS.OAM.Types.apiVersion;
   arczonalshift?: AWS.ARCZonalShift.Types.apiVersion;
