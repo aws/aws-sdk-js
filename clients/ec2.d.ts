@@ -25247,6 +25247,14 @@ declare namespace EC2 {
      * Describes the supported NitroTPM versions for the instance type.
      */
     NitroTpmInfo?: NitroTpmInfo;
+    /**
+     * Describes the media accelerator settings for the instance type.
+     */
+    MediaAcceleratorInfo?: MediaAcceleratorInfo;
+    /**
+     * Describes the Neuron accelerator settings for the instance type.
+     */
+    NeuronInfo?: NeuronInfo;
   }
   export interface InstanceTypeInfoFromInstanceRequirements {
     /**
@@ -27778,6 +27786,45 @@ declare namespace EC2 {
   export type MaximumIops = number;
   export type MaximumNetworkCards = number;
   export type MaximumThroughputInMBps = number;
+  export interface MediaAcceleratorInfo {
+    /**
+     * Describes the media accelerators for the instance type.
+     */
+    Accelerators?: MediaDeviceInfoList;
+    /**
+     * The total size of the memory for the media accelerators for the instance type, in MiB.
+     */
+    TotalMediaMemoryInMiB?: TotalMediaMemory;
+  }
+  export type MediaDeviceCount = number;
+  export interface MediaDeviceInfo {
+    /**
+     * The number of media accelerators for the instance type.
+     */
+    Count?: MediaDeviceCount;
+    /**
+     * The name of the media accelerator.
+     */
+    Name?: MediaDeviceName;
+    /**
+     * The manufacturer of the media accelerator.
+     */
+    Manufacturer?: MediaDeviceManufacturerName;
+    /**
+     * Describes the memory available to the media accelerator.
+     */
+    MemoryInfo?: MediaDeviceMemoryInfo;
+  }
+  export type MediaDeviceInfoList = MediaDeviceInfo[];
+  export type MediaDeviceManufacturerName = string;
+  export interface MediaDeviceMemoryInfo {
+    /**
+     * The size of the memory available to each media accelerator, in MiB.
+     */
+    SizeInMiB?: MediaDeviceMemorySize;
+  }
+  export type MediaDeviceMemorySize = number;
+  export type MediaDeviceName = string;
   export type MembershipType = "static"|"igmp"|string;
   export interface MemoryGiBPerVCpu {
     /**
@@ -30924,6 +30971,56 @@ declare namespace EC2 {
   export type NetworkInterfaceType = "interface"|"natGateway"|"efa"|"trunk"|"load_balancer"|"network_load_balancer"|"vpc_endpoint"|"branch"|"transit_gateway"|"lambda"|"quicksight"|"global_accelerator_managed"|"api_gateway_managed"|"gateway_load_balancer"|"gateway_load_balancer_endpoint"|"iot_rules_managed"|"aws_codestar_connections_managed"|string;
   export type NetworkNodesList = String[];
   export type NetworkPerformance = string;
+  export type NeuronDeviceCoreCount = number;
+  export interface NeuronDeviceCoreInfo {
+    /**
+     * The number of cores available to the neuron accelerator.
+     */
+    Count?: NeuronDeviceCoreCount;
+    /**
+     * The version of the neuron accelerator.
+     */
+    Version?: NeuronDeviceCoreVersion;
+  }
+  export type NeuronDeviceCoreVersion = number;
+  export type NeuronDeviceCount = number;
+  export interface NeuronDeviceInfo {
+    /**
+     * The number of neuron accelerators for the instance type.
+     */
+    Count?: NeuronDeviceCount;
+    /**
+     * The name of the neuron accelerator.
+     */
+    Name?: NeuronDeviceName;
+    /**
+     * Describes the cores available to each neuron accelerator.
+     */
+    CoreInfo?: NeuronDeviceCoreInfo;
+    /**
+     * Describes the memory available to each neuron accelerator.
+     */
+    MemoryInfo?: NeuronDeviceMemoryInfo;
+  }
+  export type NeuronDeviceInfoList = NeuronDeviceInfo[];
+  export interface NeuronDeviceMemoryInfo {
+    /**
+     * The size of the memory available to the neuron accelerator, in MiB.
+     */
+    SizeInMiB?: NeuronDeviceMemorySize;
+  }
+  export type NeuronDeviceMemorySize = number;
+  export type NeuronDeviceName = string;
+  export interface NeuronInfo {
+    /**
+     * Describes the neuron accelerators for the instance type.
+     */
+    NeuronDevices?: NeuronDeviceInfoList;
+    /**
+     * The total size of the memory for the neuron accelerators for the instance type, in MiB.
+     */
+    TotalNeuronDeviceMemoryInMiB?: TotalNeuronMemory;
+  }
   export interface NewDhcpConfiguration {
     Key?: String;
     Values?: ValueStringList;
@@ -35768,7 +35865,7 @@ declare namespace EC2 {
      */
     IamFleetRole: String;
     /**
-     * The launch specifications for the Spot Fleet request. If you specify LaunchSpecifications, you can't specify LaunchTemplateConfigs. If you include On-Demand capacity in your request, you must use LaunchTemplateConfigs.
+     * The launch specifications for the Spot Fleet request. If you specify LaunchSpecifications, you can't specify LaunchTemplateConfigs. If you include On-Demand capacity in your request, you must use LaunchTemplateConfigs.  If an AMI specified in a launch specification is deregistered or disabled, no new instances can be launched from the AMI. For fleets of type maintain, the target capacity will not be maintained. 
      */
     LaunchSpecifications?: LaunchSpecsList;
     /**
@@ -36829,6 +36926,8 @@ declare namespace EC2 {
      */
     Max?: Double;
   }
+  export type TotalMediaMemory = number;
+  export type TotalNeuronMemory = number;
   export type TpmSupportValues = "v2.0"|string;
   export type TrafficDirection = "ingress"|"egress"|string;
   export interface TrafficMirrorFilter {

@@ -648,11 +648,11 @@ declare class Backup extends Service {
    */
   startRestoreJob(callback?: (err: AWSError, data: Backup.Types.StartRestoreJobOutput) => void): Request<Backup.Types.StartRestoreJobOutput, AWSError>;
   /**
-   * Attempts to cancel a job to create a one-time backup of a resource. This action is not supported for the following services: Amazon FSx for Windows File Server, Amazon FSx for Lustre, FSx for ONTAP , Amazon FSx for OpenZFS, Amazon DocumentDB (with MongoDB compatibility), Amazon RDS, Amazon Aurora, and Amazon Neptune.
+   * Attempts to cancel a job to create a one-time backup of a resource. This action is not supported for the following services: Amazon FSx for Windows File Server, Amazon FSx for Lustre, Amazon FSx for NetApp ONTAP , Amazon FSx for OpenZFS, Amazon DocumentDB (with MongoDB compatibility), Amazon RDS, Amazon Aurora, and Amazon Neptune.
    */
   stopBackupJob(params: Backup.Types.StopBackupJobInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Attempts to cancel a job to create a one-time backup of a resource. This action is not supported for the following services: Amazon FSx for Windows File Server, Amazon FSx for Lustre, FSx for ONTAP , Amazon FSx for OpenZFS, Amazon DocumentDB (with MongoDB compatibility), Amazon RDS, Amazon Aurora, and Amazon Neptune.
+   * Attempts to cancel a job to create a one-time backup of a resource. This action is not supported for the following services: Amazon FSx for Windows File Server, Amazon FSx for Lustre, Amazon FSx for NetApp ONTAP , Amazon FSx for OpenZFS, Amazon DocumentDB (with MongoDB compatibility), Amazon RDS, Amazon Aurora, and Amazon Neptune.
    */
   stopBackupJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -2408,7 +2408,7 @@ declare namespace Backup {
      */
     ControlInputParameters?: ControlInputParameters;
     /**
-     * The scope of a control. The control scope defines what the control will evaluate. Three examples of control scopes are: a specific backup plan, all backup plans with a specific tag, or all backup plans.
+     * The scope of a control. The control scope defines what the control will evaluate. Three examples of control scopes are: a specific backup plan, all backup plans with a specific tag, or all backup plans. For more information, see  ControlScope. 
      */
     ControlScope?: ControlScope;
   }
@@ -2783,7 +2783,7 @@ declare namespace Backup {
      */
     AccountId?: AccountId;
     /**
-     * This parameter returns the job count for jobs with the specified state. The the value ANY returns count of all states.  AGGREGATE_ALL aggregates job counts for all states and returns the sum.
+     * This parameter returns the job count for jobs with the specified state. The the value ANY returns count of all states.  AGGREGATE_ALL aggregates job counts for all states and returns the sum.  Completed with issues is a status found only in the Backup console. For API, this status refers to jobs with a state of COMPLETED and a MessageCategory with a value other than SUCCESS; that is, the status is completed but comes with a status message. To obtain the job count for Completed with issues, run two GET requests, and subtract the second, smaller number: GET /audit/backup-job-summaries?AggregationPeriod=FOURTEEN_DAYS&amp;State=COMPLETED GET /audit/backup-job-summaries?AggregationPeriod=FOURTEEN_DAYS&amp;MessageCategory=SUCCESS&amp;State=COMPLETED
      */
     State?: BackupJobStatus;
     /**
@@ -2835,7 +2835,7 @@ declare namespace Backup {
      */
     ByResourceArn?: ARN;
     /**
-     * Returns only backup jobs that are in the specified state.
+     * Returns only backup jobs that are in the specified state.  Completed with issues is a status found only in the Backup console. For API, this status refers to jobs with a state of COMPLETED and a MessageCategory with a value other than SUCCESS; that is, the status is completed but comes with a status message. To obtain the job count for Completed with issues, run two GET requests, and subtract the second, smaller number: GET /backup-jobs/?state=COMPLETED GET /backup-jobs/?messageCategory=SUCCESS&amp;state=COMPLETED
      */
     ByState?: BackupJobState;
     /**
@@ -3291,6 +3291,10 @@ declare namespace Backup {
      * The maximum number of items to be returned.  Amazon RDS requires a value of at least 20. 
      */
     MaxResults?: MaxResults;
+    /**
+     * This attribute filters recovery points based on ownership. If this is set to TRUE, the response will contain recovery points associated with the selected resources that are managed by Backup. If this is set to FALSE, the response will contain all recovery points associated with the selected resource. Type: Boolean
+     */
+    ManagedByAWSBackupOnly?: boolean;
   }
   export interface ListRecoveryPointsByResourceOutput {
     /**
@@ -3794,6 +3798,10 @@ declare namespace Backup {
      * This is the non-unique name of the resource that belongs to the specified backup.
      */
     ResourceName?: string;
+    /**
+     * This is the type of vault in which the described recovery point is stored.
+     */
+    VaultType?: VaultType;
   }
   export type RecoveryPointByResourceList = RecoveryPointByResource[];
   export interface RecoveryPointCreator {

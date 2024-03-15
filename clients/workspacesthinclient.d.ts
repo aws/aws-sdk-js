@@ -813,10 +813,6 @@ declare namespace WorkSpacesThinClient {
      * An option to define if software updates should be applied within a maintenance window.
      */
     softwareSetUpdateSchedule?: SoftwareSetUpdateSchedule;
-    /**
-     * The Amazon Resource Name (ARN) of the Key Management Service key to use for the update.
-     */
-    kmsKeyArn?: KmsKeyArn;
   }
   export interface UpdateDeviceResponse {
     /**

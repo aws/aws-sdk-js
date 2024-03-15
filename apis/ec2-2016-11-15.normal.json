@@ -39921,6 +39921,16 @@
           "shape": "NitroTpmInfo",
           "documentation": "<p>Describes the supported NitroTPM versions for the instance type.</p>",
           "locationName": "nitroTpmInfo"
+        },
+        "MediaAcceleratorInfo": {
+          "shape": "MediaAcceleratorInfo",
+          "documentation": "<p>Describes the media accelerator settings for the instance type.</p>",
+          "locationName": "mediaAcceleratorInfo"
+        },
+        "NeuronInfo": {
+          "shape": "NeuronInfo",
+          "documentation": "<p>Describes the Neuron accelerator settings for the instance type.</p>",
+          "locationName": "neuronInfo"
         }
       },
       "documentation": "<p>Describes the instance type.</p>"
@@ -44364,6 +44374,78 @@
     },
     "MaximumThroughputInMBps": {
       "type": "double"
+    },
+    "MediaAcceleratorInfo": {
+      "type": "structure",
+      "members": {
+        "Accelerators": {
+          "shape": "MediaDeviceInfoList",
+          "documentation": "<p>Describes the media accelerators for the instance type.</p>",
+          "locationName": "accelerators"
+        },
+        "TotalMediaMemoryInMiB": {
+          "shape": "TotalMediaMemory",
+          "documentation": "<p>The total size of the memory for the media accelerators for the instance type, in MiB.</p>",
+          "locationName": "totalMediaMemoryInMiB"
+        }
+      },
+      "documentation": "<p>Describes the media accelerators for the instance type.</p>"
+    },
+    "MediaDeviceCount": {
+      "type": "integer"
+    },
+    "MediaDeviceInfo": {
+      "type": "structure",
+      "members": {
+        "Count": {
+          "shape": "MediaDeviceCount",
+          "documentation": "<p>The number of media accelerators for the instance type.</p>",
+          "locationName": "count"
+        },
+        "Name": {
+          "shape": "MediaDeviceName",
+          "documentation": "<p>The name of the media accelerator.</p>",
+          "locationName": "name"
+        },
+        "Manufacturer": {
+          "shape": "MediaDeviceManufacturerName",
+          "documentation": "<p>The manufacturer of the media accelerator.</p>",
+          "locationName": "manufacturer"
+        },
+        "MemoryInfo": {
+          "shape": "MediaDeviceMemoryInfo",
+          "documentation": "<p>Describes the memory available to the media accelerator.</p>",
+          "locationName": "memoryInfo"
+        }
+      },
+      "documentation": "<p>Describes the media accelerators for the instance type.</p>"
+    },
+    "MediaDeviceInfoList": {
+      "type": "list",
+      "member": {
+        "shape": "MediaDeviceInfo",
+        "locationName": "item"
+      }
+    },
+    "MediaDeviceManufacturerName": {
+      "type": "string"
+    },
+    "MediaDeviceMemoryInfo": {
+      "type": "structure",
+      "members": {
+        "SizeInMiB": {
+          "shape": "MediaDeviceMemorySize",
+          "documentation": "<p>The size of the memory available to each media accelerator, in MiB.</p>",
+          "locationName": "sizeInMiB"
+        }
+      },
+      "documentation": "<p>Describes the memory available to the media accelerator.</p>"
+    },
+    "MediaDeviceMemorySize": {
+      "type": "integer"
+    },
+    "MediaDeviceName": {
+      "type": "string"
     },
     "MembershipType": {
       "type": "string",
@@ -48932,6 +49014,97 @@
     },
     "NetworkPerformance": {
       "type": "string"
+    },
+    "NeuronDeviceCoreCount": {
+      "type": "integer"
+    },
+    "NeuronDeviceCoreInfo": {
+      "type": "structure",
+      "members": {
+        "Count": {
+          "shape": "NeuronDeviceCoreCount",
+          "documentation": "<p>The number of cores available to the neuron accelerator.</p>",
+          "locationName": "count"
+        },
+        "Version": {
+          "shape": "NeuronDeviceCoreVersion",
+          "documentation": "<p>The version of the neuron accelerator.</p>",
+          "locationName": "version"
+        }
+      },
+      "documentation": "<p>Describes the cores available to the neuron accelerator.</p>"
+    },
+    "NeuronDeviceCoreVersion": {
+      "type": "integer"
+    },
+    "NeuronDeviceCount": {
+      "type": "integer"
+    },
+    "NeuronDeviceInfo": {
+      "type": "structure",
+      "members": {
+        "Count": {
+          "shape": "NeuronDeviceCount",
+          "documentation": "<p>The number of neuron accelerators for the instance type.</p>",
+          "locationName": "count"
+        },
+        "Name": {
+          "shape": "NeuronDeviceName",
+          "documentation": "<p>The name of the neuron accelerator.</p>",
+          "locationName": "name"
+        },
+        "CoreInfo": {
+          "shape": "NeuronDeviceCoreInfo",
+          "documentation": "<p>Describes the cores available to each neuron accelerator.</p>",
+          "locationName": "coreInfo"
+        },
+        "MemoryInfo": {
+          "shape": "NeuronDeviceMemoryInfo",
+          "documentation": "<p>Describes the memory available to each neuron accelerator.</p>",
+          "locationName": "memoryInfo"
+        }
+      },
+      "documentation": "<p>Describes the neuron accelerators for the instance type.</p>"
+    },
+    "NeuronDeviceInfoList": {
+      "type": "list",
+      "member": {
+        "shape": "NeuronDeviceInfo",
+        "locationName": "item"
+      }
+    },
+    "NeuronDeviceMemoryInfo": {
+      "type": "structure",
+      "members": {
+        "SizeInMiB": {
+          "shape": "NeuronDeviceMemorySize",
+          "documentation": "<p>The size of the memory available to the neuron accelerator, in MiB.</p>",
+          "locationName": "sizeInMiB"
+        }
+      },
+      "documentation": "<p>Describes the memory available to the neuron accelerator.</p>"
+    },
+    "NeuronDeviceMemorySize": {
+      "type": "integer"
+    },
+    "NeuronDeviceName": {
+      "type": "string"
+    },
+    "NeuronInfo": {
+      "type": "structure",
+      "members": {
+        "NeuronDevices": {
+          "shape": "NeuronDeviceInfoList",
+          "documentation": "<p>Describes the neuron accelerators for the instance type.</p>",
+          "locationName": "neuronDevices"
+        },
+        "TotalNeuronDeviceMemoryInMiB": {
+          "shape": "TotalNeuronMemory",
+          "documentation": "<p>The total size of the memory for the neuron accelerators for the instance type, in MiB.</p>",
+          "locationName": "totalNeuronDeviceMemoryInMiB"
+        }
+      },
+      "documentation": "<p>Describes the neuron accelerators for the instance type.</p>"
     },
     "NewDhcpConfiguration": {
       "type": "structure",
@@ -56831,7 +57004,7 @@
         },
         "LaunchSpecifications": {
           "shape": "LaunchSpecsList",
-          "documentation": "<p>The launch specifications for the Spot Fleet request. If you specify <code>LaunchSpecifications</code>, you can't specify <code>LaunchTemplateConfigs</code>. If you include On-Demand capacity in your request, you must use <code>LaunchTemplateConfigs</code>.</p>",
+          "documentation": "<p>The launch specifications for the Spot Fleet request. If you specify <code>LaunchSpecifications</code>, you can't specify <code>LaunchTemplateConfigs</code>. If you include On-Demand capacity in your request, you must use <code>LaunchTemplateConfigs</code>.</p> <note> <p>If an AMI specified in a launch specification is deregistered or disabled, no new instances can be launched from the AMI. For fleets of type <code>maintain</code>, the target capacity will not be maintained.</p> </note>",
           "locationName": "launchSpecifications"
         },
         "LaunchTemplateConfigs": {
@@ -58695,6 +58868,12 @@
         }
       },
       "documentation": "<p>The minimum and maximum amount of total local storage, in GB.</p>"
+    },
+    "TotalMediaMemory": {
+      "type": "integer"
+    },
+    "TotalNeuronMemory": {
+      "type": "integer"
     },
     "TpmSupportValues": {
       "type": "string",

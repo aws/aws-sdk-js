@@ -2477,7 +2477,15 @@ declare namespace Connect {
      */
     Value?: InstanceAttributeValue;
   }
+  export interface AttributeAndCondition {
+    /**
+     * A leaf node condition which can be used to specify a tag condition.
+     */
+    TagConditions?: TagAndConditionList;
+    HierarchyGroupCondition?: HierarchyGroupCondition;
+  }
   export type AttributeName = string;
+  export type AttributeOrConditionList = AttributeAndCondition[];
   export type AttributeValue = string;
   export type Attributes = {[key: string]: AttributeValue};
   export type AttributesList = Attribute[];
@@ -3097,6 +3105,18 @@ declare namespace Connect {
      */
     TagCondition?: TagCondition;
   }
+  export interface ControlPlaneUserAttributeFilter {
+    /**
+     * A list of conditions which would be applied together with an OR condition.
+     */
+    OrConditions?: AttributeOrConditionList;
+    /**
+     * A list of conditions which would be applied together with an AND condition.
+     */
+    AndCondition?: AttributeAndCondition;
+    TagCondition?: TagCondition;
+    HierarchyGroupCondition?: HierarchyGroupCondition;
+  }
   export interface CreateAgentStatusRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
@@ -3663,6 +3683,14 @@ declare namespace Connect {
      * This API is in preview release for Amazon Connect and is subject to change. A list of third-party applications that the security profile will give access to.
      */
     Applications?: Applications;
+    /**
+     * The list of resources that a security profile applies hierarchy restrictions to in Amazon Connect. Following are acceptable ResourceNames: User.
+     */
+    HierarchyRestrictedResources?: HierarchyRestrictedResourceList;
+    /**
+     * The identifier of the hierarchy group that a security profile uses to restrict access to resources in Amazon Connect.
+     */
+    AllowedAccessControlHierarchyGroupId?: HierarchyGroupId;
   }
   export interface CreateSecurityProfileResponse {
     /**
@@ -6139,6 +6167,8 @@ declare namespace Connect {
      */
     LevelFive?: HierarchyGroupSummaryReference;
   }
+  export type HierarchyRestrictedResourceList = HierarchyRestrictedResourceName[];
+  export type HierarchyRestrictedResourceName = string;
   export interface HierarchyStructure {
     /**
      * Information about level one.
@@ -9888,6 +9918,14 @@ declare namespace Connect {
      * The Amazon Web Services Region where this resource was last modified.
      */
     LastModifiedRegion?: RegionName;
+    /**
+     * The list of resources that a security profile applies hierarchy restrictions to in Amazon Connect. Following are acceptable ResourceNames: User.
+     */
+    HierarchyRestrictedResources?: HierarchyRestrictedResourceList;
+    /**
+     * The identifier of the hierarchy group that a security profile uses to restrict access to resources in Amazon Connect.
+     */
+    AllowedAccessControlHierarchyGroupId?: HierarchyGroupId;
   }
   export type SecurityProfileDescription = string;
   export type SecurityProfileId = string;
@@ -11604,6 +11642,14 @@ declare namespace Connect {
      * This API is in preview release for Amazon Connect and is subject to change. A list of the third-party application's metadata.
      */
     Applications?: Applications;
+    /**
+     * The list of resources that a security profile applies hierarchy restrictions to in Amazon Connect. Following are acceptable ResourceNames: User.
+     */
+    HierarchyRestrictedResources?: HierarchyRestrictedResourceList;
+    /**
+     * The identifier of the hierarchy group that a security profile uses to restrict access to resources in Amazon Connect.
+     */
+    AllowedAccessControlHierarchyGroupId?: HierarchyGroupId;
   }
   export interface UpdateTaskTemplateRequest {
     /**
@@ -12124,6 +12170,10 @@ declare namespace Connect {
   }
   export interface UserSearchFilter {
     TagFilter?: ControlPlaneTagFilter;
+    /**
+     * An object that can be used to specify Tag conditions or Hierarchy Group conditions inside the SearchFilter. This accepts an OR of AND (List of List) input where:   The top level list specifies conditions that need to be applied with OR operator.   The inner list specifies conditions that need to be applied with AND operator.    Only one field can be populated. This object can’t be used along with TagFilter. Request can either contain TagFilter or UserAttributeFilter if SearchFilter is specified, combination of both is not supported and such request will throw AccessDeniedException. 
+     */
+    UserAttributeFilter?: ControlPlaneUserAttributeFilter;
   }
   export interface UserSearchSummary {
     /**

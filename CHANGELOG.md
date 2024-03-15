@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1578.0-->
+<!--LATEST=2.1579.0-->
 <!--ENTRYINSERT-->
+
+## 2.1579.0
+* feature: Backup: This release introduces a boolean attribute ManagedByAWSBackupOnly as part of ListRecoveryPointsByResource api to filter the recovery points based on ownership. This attribute can be used to filter out the recovery points protected by AWSBackup.
+* feature: CodeBuild: AWS CodeBuild now supports overflow behavior on Reserved Capacity.
+* feature: Connect: This release adds Hierarchy based Access Control fields to Security Profile public APIs and adds support for UserAttributeFilter to SearchUsers API.
+* feature: EC2: Add media accelerator and neuron device information on the describe instance types API.
+* feature: KinesisAnalyticsV2: Support for Flink 1.18 in Managed Service for Apache Flink
+* feature: SageMaker: Adds m6i, m6id, m7i, c6i, c6id, c7i, r6i r6id, r7i, p5 instance type support to Sagemaker Notebook Instances and miscellaneous wording fixes for previous Sagemaker documentation.
+* feature: WorkSpacesThinClient: Removed unused parameter kmsKeyArn from UpdateDeviceRequest
 
 ## 2.1578.0
 * bugfix: IoTRoborunner: Deprecate IoTRoborunner

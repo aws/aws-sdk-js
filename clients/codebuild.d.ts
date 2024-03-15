@@ -1047,6 +1047,10 @@ declare namespace CodeBuild {
      */
     scalingConfiguration?: ScalingConfigurationInput;
     /**
+     * The compute fleet overflow behavior.   For overflow behavior QUEUE, your overflow builds need to wait on the existing fleet instance to become available.   For overflow behavior ON_DEMAND, your overflow builds run on CodeBuild on-demand.  
+     */
+    overflowBehavior?: FleetOverflowBehavior;
+    /**
      * A list of tag key and value pairs associated with this compute fleet. These tags are available for use by Amazon Web Services services that support CodeBuild build project tags.
      */
     tags?: TagList;
@@ -1470,6 +1474,10 @@ declare namespace CodeBuild {
      */
     scalingConfiguration?: ScalingConfigurationOutput;
     /**
+     * The compute fleet overflow behavior.   For overflow behavior QUEUE, your overflow builds need to wait on the existing fleet instance to become available.   For overflow behavior ON_DEMAND, your overflow builds run on CodeBuild on-demand.  
+     */
+    overflowBehavior?: FleetOverflowBehavior;
+    /**
      * A list of tag key and value pairs associated with this compute fleet. These tags are available for use by Amazon Web Services services that support CodeBuild build project tags.
      */
     tags?: TagList;
@@ -1479,6 +1487,7 @@ declare namespace CodeBuild {
   export type FleetContextCode = "CREATE_FAILED"|"UPDATE_FAILED"|string;
   export type FleetName = string;
   export type FleetNames = NonEmptyString[];
+  export type FleetOverflowBehavior = "QUEUE"|"ON_DEMAND"|string;
   export type FleetScalingMetricType = "FLEET_UTILIZATION_RATE"|string;
   export type FleetScalingType = "TARGET_TRACKING_SCALING"|string;
   export type FleetSortByType = "NAME"|"CREATED_TIME"|"LAST_MODIFIED_TIME"|string;
@@ -3008,6 +3017,10 @@ declare namespace CodeBuild {
      * The scaling configuration of the compute fleet.
      */
     scalingConfiguration?: ScalingConfigurationInput;
+    /**
+     * The compute fleet overflow behavior.   For overflow behavior QUEUE, your overflow builds need to wait on the existing fleet instance to become available.   For overflow behavior ON_DEMAND, your overflow builds run on CodeBuild on-demand.  
+     */
+    overflowBehavior?: FleetOverflowBehavior;
     /**
      * A list of tag key and value pairs associated with this compute fleet. These tags are available for use by Amazon Web Services services that support CodeBuild build project tags.
      */
