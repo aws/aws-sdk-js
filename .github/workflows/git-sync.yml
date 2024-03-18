@@ -5,6 +5,7 @@ on:
     branches: [ master ]
   workflow_dispatch:
 
+permissions: {}
 jobs:
   git-sync:
     runs-on: ubuntu-latest
