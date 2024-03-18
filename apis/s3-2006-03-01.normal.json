@@ -5606,7 +5606,8 @@
       "members": {
         "LegalHold": {
           "shape": "ObjectLockLegalHold",
-          "documentation": "<p>The current legal hold status for the specified object.</p>"
+          "documentation": "<p>The current legal hold status for the specified object.</p>",
+          "locationName": "LegalHold"
         }
       },
       "payload": "LegalHold"
@@ -6061,7 +6062,8 @@
       "members": {
         "Retention": {
           "shape": "ObjectLockRetention",
-          "documentation": "<p>The container element for an object's retention settings.</p>"
+          "documentation": "<p>The container element for an object's retention settings.</p>",
+          "locationName": "Retention"
         }
       },
       "payload": "Retention"

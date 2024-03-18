@@ -444,6 +444,44 @@ declare namespace MediaTailor {
     ResourceArn: __string;
   }
   export type AlertCategory = "SCHEDULING_ERROR"|"PLAYBACK_WARNING"|"INFO"|string;
+  export interface AlternateMedia {
+    /**
+     * Ad break configuration parameters defined in AlternateMedia.
+     */
+    AdBreaks?: __listOfAdBreak;
+    ClipRange?: ClipRange;
+    /**
+     * The duration of the alternateMedia in milliseconds.
+     */
+    DurationMillis?: __long;
+    /**
+     * The name of the live source for alternateMedia.
+     */
+    LiveSourceName?: __string;
+    /**
+     * The date and time that the alternateMedia is scheduled to start, in epoch milliseconds.
+     */
+    ScheduledStartTimeMillis?: __long;
+    /**
+     * The name of the source location for alternateMedia.
+     */
+    SourceLocationName?: __string;
+    /**
+     * The name of the VOD source for alternateMedia.
+     */
+    VodSourceName?: __string;
+  }
+  export interface AudienceMedia {
+    /**
+     * The list of AlternateMedia defined in AudienceMedia.
+     */
+    AlternateMedia?: __listOfAlternateMedia;
+    /**
+     * The Audience defined in AudienceMedia.
+     */
+    Audience?: __string;
+  }
+  export type Audiences = String[];
   export interface AvailMatchingCriteria {
     /**
      * The dynamic variable(s) that MediaTailor should use as avail matching criteria. MediaTailor only places the prefetched ads into the avail if the avail matches the criteria defined by the dynamic variable. For information about dynamic variables, see Using dynamic ad variables in the MediaTailor User Guide. You can include up to 100 dynamic variables.
@@ -494,6 +532,10 @@ declare namespace MediaTailor {
      */
     Arn: __string;
     /**
+     * The list of audiences defined in channel.
+     */
+    Audiences?: Audiences;
+    /**
      * The name of the channel.
      */
     ChannelName: __string;
@@ -539,7 +581,11 @@ declare namespace MediaTailor {
     /**
      * The end offset of the clip range, in milliseconds, starting from the beginning of the VOD source associated with the program.
      */
-    EndOffsetMillis: __long;
+    EndOffsetMillis?: __long;
+    /**
+     * The start offset of the clip range, in milliseconds. This offset truncates the start at the number of milliseconds into the duration of the VOD source.
+     */
+    StartOffsetMillis?: __long;
   }
   export type ConfigurationAliasesRequest = {[key: string]: __mapOf__string};
   export type ConfigurationAliasesResponse = {[key: string]: __mapOf__string};
@@ -585,6 +631,10 @@ declare namespace MediaTailor {
   }
   export interface CreateChannelRequest {
     /**
+     * The list of audiences defined in channel.
+     */
+    Audiences?: Audiences;
+    /**
      * The name of the channel.
      */
     ChannelName: __string;
@@ -618,6 +668,10 @@ declare namespace MediaTailor {
      * The Amazon Resource Name (ARN) to assign to the channel.
      */
     Arn?: __string;
+    /**
+     * The list of audiences defined in channel.
+     */
+    Audiences?: Audiences;
     /**
      * The name to assign to the channel.
      */
@@ -761,6 +815,10 @@ declare namespace MediaTailor {
      */
     AdBreaks?: __listOfAdBreak;
     /**
+     * The list of AudienceMedia defined in program.
+     */
+    AudienceMedia?: __listOfAudienceMedia;
+    /**
      * The name of the channel for this Program.
      */
     ChannelName: __string;
@@ -794,6 +852,10 @@ declare namespace MediaTailor {
      * The ARN to assign to the program.
      */
     Arn?: __string;
+    /**
+     * The list of AudienceMedia defined in program.
+     */
+    AudienceMedia?: __listOfAudienceMedia;
     /**
      * The name to assign to the channel for this program.
      */
@@ -1083,6 +1145,10 @@ declare namespace MediaTailor {
      */
     Arn?: __string;
     /**
+     * The list of audiences defined in channel.
+     */
+    Audiences?: Audiences;
+    /**
      * The name of the channel.
      */
     ChannelName?: __string;
@@ -1186,6 +1252,10 @@ declare namespace MediaTailor {
      * The ARN of the program.
      */
     Arn?: __string;
+    /**
+     * The list of AudienceMedia defined in program.
+     */
+    AudienceMedia?: __listOfAudienceMedia;
     /**
      * The name of the channel that the program belongs to.
      */
@@ -1325,6 +1395,10 @@ declare namespace MediaTailor {
     Policy?: __string;
   }
   export interface GetChannelScheduleRequest {
+    /**
+     * The single audience for GetChannelScheduleRequest.
+     */
+    Audience?: __string;
     /**
      * The name of the channel associated with this Channel Schedule.
      */
@@ -2124,6 +2198,10 @@ declare namespace MediaTailor {
      */
     Arn: __string;
     /**
+     * The list of audiences defined in ScheduleEntry.
+     */
+    Audiences?: Audiences;
+    /**
      * The name of the channel that uses this schedule.
      */
     ChannelName: __string;
@@ -2152,7 +2230,7 @@ declare namespace MediaTailor {
      */
     VodSourceName?: __string;
   }
-  export type ScheduleEntryType = "PROGRAM"|"FILLER_SLATE"|string;
+  export type ScheduleEntryType = "PROGRAM"|"FILLER_SLATE"|"ALTERNATE_MEDIA"|string;
   export interface SecretsManagerAccessTokenConfiguration {
     /**
      * The name of the HTTP header used to supply the access token in requests to the source location.
@@ -2353,6 +2431,10 @@ declare namespace MediaTailor {
   }
   export interface UpdateChannelRequest {
     /**
+     * The list of audiences defined in channel.
+     */
+    Audiences?: Audiences;
+    /**
      * The name of the channel.
      */
     ChannelName: __string;
@@ -2374,6 +2456,10 @@ declare namespace MediaTailor {
      * The Amazon Resource Name (ARN) associated with the channel.
      */
     Arn?: __string;
+    /**
+     * The list of audiences defined in channel.
+     */
+    Audiences?: Audiences;
     /**
      * The name of the channel.
      */
@@ -2465,6 +2551,10 @@ declare namespace MediaTailor {
      */
     AdBreaks?: __listOfAdBreak;
     /**
+     * The list of AudienceMedia defined in program.
+     */
+    AudienceMedia?: __listOfAudienceMedia;
+    /**
      * The name of the channel for this Program.
      */
     ChannelName: __string;
@@ -2486,6 +2576,10 @@ declare namespace MediaTailor {
      * The ARN to assign to the program.
      */
     Arn?: __string;
+    /**
+     * The list of AudienceMedia defined in program.
+     */
+    AudienceMedia?: __listOfAudienceMedia;
     /**
      * The name to assign to the channel for this program.
      */
@@ -2683,6 +2777,8 @@ declare namespace MediaTailor {
   export type __integerMin1Max100 = number;
   export type __listOfAdBreak = AdBreak[];
   export type __listOfAlert = Alert[];
+  export type __listOfAlternateMedia = AlternateMedia[];
+  export type __listOfAudienceMedia = AudienceMedia[];
   export type __listOfAvailMatchingCriteria = AvailMatchingCriteria[];
   export type __listOfChannel = Channel[];
   export type __listOfLiveSource = LiveSource[];

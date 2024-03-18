@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1579.0-->
+<!--LATEST=2.1580.0-->
 <!--ENTRYINSERT-->
+
+## 2.1580.0
+* feature: CloudFormation: This release supports for a new API ListStackSetAutoDeploymentTargets, which provider auto-deployment configuration as a describable resource. Customers can now view the specific combinations of regions and OUs that are being auto-deployed.
+* feature: KMS: Adds the ability to use the default policy name by omitting the policyName parameter in calls to PutKeyPolicy and GetKeyPolicy
+* feature: MediaTailor: This release adds support to allow customers to show different content within a channel depending on metadata associated with the viewer.
+* feature: RDS: This release launches the ModifyIntegration API and support for data filtering for zero-ETL Integrations.
+* feature: S3: Fix two issues with response root node names.
 
 ## 2.1579.0
 * feature: Backup: This release introduces a boolean attribute ManagedByAWSBackupOnly as part of ListRecoveryPointsByResource api to filter the recovery points based on ownership. This attribute can be used to filter out the recovery points protected by AWSBackup.

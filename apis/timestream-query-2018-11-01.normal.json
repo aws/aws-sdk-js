@@ -317,7 +317,7 @@
           "shape": "InvalidEndpointException"
         }
       ],
-      "documentation": "<p>A synchronous operation that allows you to submit a query with parameters to be stored by Timestream for later running. Timestream only supports using this operation with the <code>PrepareQueryRequest$ValidateOnly</code> set to <code>true</code>. </p>",
+      "documentation": "<p>A synchronous operation that allows you to submit a query with parameters to be stored by Timestream for later running. Timestream only supports using this operation with <code>ValidateOnly</code> set to <code>true</code>. </p>",
       "endpointdiscovery": {
         "required": true
       },
@@ -1702,7 +1702,7 @@
       "members": {
         "ScalarType": {
           "shape": "ScalarType",
-          "documentation": "<p>Indicates if the column is of type string, integer, Boolean, double, timestamp, date, time. </p>"
+          "documentation": "<p>Indicates if the column is of type string, integer, Boolean, double, timestamp, date, time. For more information, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/supported-data-types.html\">Supported data types</a>.</p>"
         },
         "ArrayColumnInfo": {
           "shape": "ColumnInfo",

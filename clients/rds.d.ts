@@ -1022,6 +1022,14 @@ declare class RDS extends Service {
    */
   modifyGlobalCluster(callback?: (err: AWSError, data: RDS.Types.ModifyGlobalClusterResult) => void): Request<RDS.Types.ModifyGlobalClusterResult, AWSError>;
   /**
+   * Modifies a zero-ETL integration with Amazon Redshift.  Currently, you can only modify integrations that have Aurora MySQL source DB clusters. Integrations with Aurora PostgreSQL and RDS sources currently don't support modifying the integration. 
+   */
+  modifyIntegration(params: RDS.Types.ModifyIntegrationMessage, callback?: (err: AWSError, data: RDS.Types.Integration) => void): Request<RDS.Types.Integration, AWSError>;
+  /**
+   * Modifies a zero-ETL integration with Amazon Redshift.  Currently, you can only modify integrations that have Aurora MySQL source DB clusters. Integrations with Aurora PostgreSQL and RDS sources currently don't support modifying the integration. 
+   */
+  modifyIntegration(callback?: (err: AWSError, data: RDS.Types.Integration) => void): Request<RDS.Types.Integration, AWSError>;
+  /**
    * Modifies an existing option group.
    */
   modifyOptionGroup(params: RDS.Types.ModifyOptionGroupMessage, callback?: (err: AWSError, data: RDS.Types.ModifyOptionGroupResult) => void): Request<RDS.Types.ModifyOptionGroupResult, AWSError>;
@@ -2978,6 +2986,14 @@ declare namespace RDS {
      */
     AdditionalEncryptionContext?: EncryptionContextMap;
     Tags?: TagList;
+    /**
+     * Data filtering options for the integration. For more information, see Data filtering for Aurora zero-ETL integrations with Amazon Redshift.  Valid for: Integrations with Aurora MySQL source DB clusters only
+     */
+    DataFilter?: DataFilter;
+    /**
+     * A description of the integration.
+     */
+    Description?: IntegrationDescription;
   }
   export interface CreateOptionGroupMessage {
     /**
@@ -5204,6 +5220,7 @@ declare namespace RDS {
     DBSubnetGroups?: DBSubnetGroups;
   }
   export type DBSubnetGroups = DBSubnetGroup[];
+  export type DataFilter = string;
   export type DatabaseArn = string;
   export interface DeleteBlueGreenDeploymentRequest {
     /**
@@ -7109,8 +7126,17 @@ declare namespace RDS {
      * Any errors associated with the integration.
      */
     Errors?: IntegrationErrorList;
+    /**
+     * Data filters for the integration. These filters determine which tables from the source database are sent to the target Amazon Redshift data warehouse. 
+     */
+    DataFilter?: DataFilter;
+    /**
+     * A description of the integration.
+     */
+    Description?: IntegrationDescription;
   }
   export type IntegrationArn = string;
+  export type IntegrationDescription = string;
   export interface IntegrationError {
     /**
      * The error code associated with the integration.
@@ -8009,6 +8035,24 @@ declare namespace RDS {
   }
   export interface ModifyGlobalClusterResult {
     GlobalCluster?: GlobalCluster;
+  }
+  export interface ModifyIntegrationMessage {
+    /**
+     * The unique identifier of the integration to modify.
+     */
+    IntegrationIdentifier: IntegrationIdentifier;
+    /**
+     * A new name for the integration.
+     */
+    IntegrationName?: IntegrationName;
+    /**
+     * A new data filter for the integration. For more information, see Data filtering for Aurora zero-ETL integrations with Amazon Redshift.
+     */
+    DataFilter?: DataFilter;
+    /**
+     * A new description for the integration.
+     */
+    Description?: IntegrationDescription;
   }
   export interface ModifyOptionGroupMessage {
     /**

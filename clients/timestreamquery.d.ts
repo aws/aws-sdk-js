@@ -76,11 +76,11 @@ declare class TimestreamQuery extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: TimestreamQuery.Types.ListTagsForResourceResponse) => void): Request<TimestreamQuery.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * A synchronous operation that allows you to submit a query with parameters to be stored by Timestream for later running. Timestream only supports using this operation with the PrepareQueryRequest$ValidateOnly set to true. 
+   * A synchronous operation that allows you to submit a query with parameters to be stored by Timestream for later running. Timestream only supports using this operation with ValidateOnly set to true. 
    */
   prepareQuery(params: TimestreamQuery.Types.PrepareQueryRequest, callback?: (err: AWSError, data: TimestreamQuery.Types.PrepareQueryResponse) => void): Request<TimestreamQuery.Types.PrepareQueryResponse, AWSError>;
   /**
-   * A synchronous operation that allows you to submit a query with parameters to be stored by Timestream for later running. Timestream only supports using this operation with the PrepareQueryRequest$ValidateOnly set to true. 
+   * A synchronous operation that allows you to submit a query with parameters to be stored by Timestream for later running. Timestream only supports using this operation with ValidateOnly set to true. 
    */
   prepareQuery(callback?: (err: AWSError, data: TimestreamQuery.Types.PrepareQueryResponse) => void): Request<TimestreamQuery.Types.PrepareQueryResponse, AWSError>;
   /**
@@ -807,7 +807,7 @@ declare namespace TimestreamQuery {
   }
   export interface Type {
     /**
-     * Indicates if the column is of type string, integer, Boolean, double, timestamp, date, time. 
+     * Indicates if the column is of type string, integer, Boolean, double, timestamp, date, time. For more information, see Supported data types.
      */
     ScalarType?: ScalarType;
     /**

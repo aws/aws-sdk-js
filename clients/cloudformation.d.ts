@@ -461,6 +461,14 @@ declare class CloudFormation extends Service {
    */
   listStackResources(callback?: (err: AWSError, data: CloudFormation.Types.ListStackResourcesOutput) => void): Request<CloudFormation.Types.ListStackResourcesOutput, AWSError>;
   /**
+   * Returns summary information about deployment targets for a stack set.
+   */
+  listStackSetAutoDeploymentTargets(params: CloudFormation.Types.ListStackSetAutoDeploymentTargetsInput, callback?: (err: AWSError, data: CloudFormation.Types.ListStackSetAutoDeploymentTargetsOutput) => void): Request<CloudFormation.Types.ListStackSetAutoDeploymentTargetsOutput, AWSError>;
+  /**
+   * Returns summary information about deployment targets for a stack set.
+   */
+  listStackSetAutoDeploymentTargets(callback?: (err: AWSError, data: CloudFormation.Types.ListStackSetAutoDeploymentTargetsOutput) => void): Request<CloudFormation.Types.ListStackSetAutoDeploymentTargetsOutput, AWSError>;
+  /**
    * Returns summary information about the results of a stack set operation.
    */
   listStackSetOperationResults(params: CloudFormation.Types.ListStackSetOperationResultsInput, callback?: (err: AWSError, data: CloudFormation.Types.ListStackSetOperationResultsOutput) => void): Request<CloudFormation.Types.ListStackSetOperationResultsOutput, AWSError>;
@@ -1176,7 +1184,7 @@ declare namespace CloudFormation {
      */
     NotificationARNs?: NotificationARNs;
     /**
-     * In some cases, you must explicitly acknowledge that your stack template contains certain capabilities in order for CloudFormation to create the stack.    CAPABILITY_IAM and CAPABILITY_NAMED_IAM  Some stack templates might include resources that can affect permissions in your Amazon Web Services account; for example, by creating new Identity and Access Management (IAM) users. For those stacks, you must explicitly acknowledge this by specifying one of these capabilities. The following IAM resources require you to specify either the CAPABILITY_IAM or CAPABILITY_NAMED_IAM capability.   If you have IAM resources, you can specify either capability.   If you have IAM resources with custom names, you must specify CAPABILITY_NAMED_IAM.   If you don't specify either of these capabilities, CloudFormation returns an InsufficientCapabilities error.   If your stack template contains these resources, we recommend that you review all permissions associated with them and edit their permissions if necessary.     AWS::IAM::AccessKey AWS::IAM::AccessKey      AWS::IAM::Group       AWS::IAM::InstanceProfile       AWS::IAM::Policy       AWS::IAM::Role       AWS::IAM::User       AWS::IAM::UserToGroupAddition     For more information, see Acknowledging IAM Resources in CloudFormation Templates.    CAPABILITY_AUTO_EXPAND  Some template contain macros. Macros perform custom processing on templates; this can include simple actions like find-and-replace operations, all the way to extensive transformations of entire templates. Because of this, users typically create a change set from the processed template, so that they can review the changes resulting from the macros before actually creating the stack. If your stack template contains one or more macros, and you choose to create a stack directly from the processed template, without first reviewing the resulting changes in a change set, you must acknowledge this capability. This includes the  AWS::Include  and  AWS::Serverless  transforms, which are macros hosted by CloudFormation. If you want to create a stack from a stack template that contains macros and nested stacks, you must create the stack directly from the template using this capability.  You should only create stacks directly from a stack template that contains macros if you know what processing the macro performs. Each macro relies on an underlying Lambda service function for processing stack templates. Be aware that the Lambda function owner can update the function operation without CloudFormation being notified.  For more information, see Using CloudFormation macros to perform custom processing on templates.    Only one of the Capabilities and ResourceType parameters can be specified. 
+     * In some cases, you must explicitly acknowledge that your stack template contains certain capabilities in order for CloudFormation to create the stack.    CAPABILITY_IAM and CAPABILITY_NAMED_IAM  Some stack templates might include resources that can affect permissions in your Amazon Web Services account; for example, by creating new Identity and Access Management (IAM) users. For those stacks, you must explicitly acknowledge this by specifying one of these capabilities. The following IAM resources require you to specify either the CAPABILITY_IAM or CAPABILITY_NAMED_IAM capability.   If you have IAM resources, you can specify either capability.   If you have IAM resources with custom names, you must specify CAPABILITY_NAMED_IAM.   If you don't specify either of these capabilities, CloudFormation returns an InsufficientCapabilities error.   If your stack template contains these resources, we recommend that you review all permissions associated with them and edit their permissions if necessary.     AWS::IAM::AccessKey       AWS::IAM::Group       AWS::IAM::InstanceProfile       AWS::IAM::Policy       AWS::IAM::Role       AWS::IAM::User       AWS::IAM::UserToGroupAddition     For more information, see Acknowledging IAM Resources in CloudFormation Templates.    CAPABILITY_AUTO_EXPAND  Some template contain macros. Macros perform custom processing on templates; this can include simple actions like find-and-replace operations, all the way to extensive transformations of entire templates. Because of this, users typically create a change set from the processed template, so that they can review the changes resulting from the macros before actually creating the stack. If your stack template contains one or more macros, and you choose to create a stack directly from the processed template, without first reviewing the resulting changes in a change set, you must acknowledge this capability. This includes the  AWS::Include  and  AWS::Serverless  transforms, which are macros hosted by CloudFormation. If you want to create a stack from a stack template that contains macros and nested stacks, you must create the stack directly from the template using this capability.  You should only create stacks directly from a stack template that contains macros if you know what processing the macro performs. Each macro relies on an underlying Lambda service function for processing stack templates. Be aware that the Lambda function owner can update the function operation without CloudFormation being notified.  For more information, see Using CloudFormation macros to perform custom processing on templates.    Only one of the Capabilities and ResourceType parameters can be specified. 
      */
     Capabilities?: Capabilities;
     /**
@@ -2730,6 +2738,34 @@ declare namespace CloudFormation {
      */
     NextToken?: NextToken;
   }
+  export interface ListStackSetAutoDeploymentTargetsInput {
+    /**
+     * The name or unique ID of the stack set that you want to get automatic deployment targets for.
+     */
+    StackSetName: StackSetNameOrId;
+    /**
+     * A string that identifies the next page of stack set deployment targets that you want to retrieve.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a NextToken value that you can assign to the NextToken request parameter to get the next set of results.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account. By default, SELF is specified. Use SELF for StackSets with self-managed permissions.   If you are signed in to the management account, specify SELF.   If you are signed in to a delegated administrator account, specify DELEGATED_ADMIN. Your Amazon Web Services account must be registered as a delegated administrator in the management account. For more information, see Register a delegated administrator in the CloudFormation User Guide.  
+     */
+    CallAs?: CallAs;
+  }
+  export interface ListStackSetAutoDeploymentTargetsOutput {
+    /**
+     * An array of summaries of the deployment targets for the stack set.
+     */
+    Summaries?: StackSetAutoDeploymentTargetSummaries;
+    /**
+     * If the request doesn't return all the remaining results, NextToken is set to a token. To retrieve the next set of results, call  ListStackSetAutoDeploymentTargets  again and use that value for the NextToken parameter. If the request returns all results, NextToken is set to an empty string.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListStackSetOperationResultsInput {
     /**
      * The name or unique ID of the stack set that you want to get operation results for.
@@ -3885,7 +3921,7 @@ declare namespace CloudFormation {
   }
   export interface StackInstanceComprehensiveStatus {
     /**
-     *    CANCELLED: The operation in the specified account and Region has been canceled. This is either because a user has stopped the stack set operation, or because the failure tolerance of the stack set operation has been exceeded.    FAILED: The operation in the specified account and Region failed. If the stack set operation fails in enough accounts within a Region, the failure tolerance for the stack set operation as a whole might be exceeded.    INOPERABLE: A DeleteStackInstances operation has failed and left the stack in an unstable state. Stacks in this state are excluded from further UpdateStackSet operations. You might need to perform a DeleteStackInstances operation, with RetainStacks set to true, to delete the stack instance, and then delete the stack manually.    PENDING: The operation in the specified account and Region has yet to start.    RUNNING: The operation in the specified account and Region is currently in progress.    SKIPPED_SUSPENDED_ACCOUNT: The operation in the specified account and Region has been skipped because the account was suspended at the time of the operation.    SUCCEEDED: The operation in the specified account and Region completed successfully.  
+     *    CANCELLED: The operation in the specified account and Region has been canceled. This is either because a user has stopped the stack set operation, or because the failure tolerance of the stack set operation has been exceeded.    FAILED: The operation in the specified account and Region failed. If the stack set operation fails in enough accounts within a Region, the failure tolerance for the stack set operation as a whole might be exceeded.    FAILED_IMPORT: The import of the stack instance in the specified account and Region failed and left the stack in an unstable state. Once the issues causing the failure are fixed, the import operation can be retried. If enough stack set operations fail in enough accounts within a Region, the failure tolerance for the stack set operation as a whole might be exceeded.    INOPERABLE: A DeleteStackInstances operation has failed and left the stack in an unstable state. Stacks in this state are excluded from further UpdateStackSet operations. You might need to perform a DeleteStackInstances operation, with RetainStacks set to true, to delete the stack instance, and then delete the stack manually.    PENDING: The operation in the specified account and Region has yet to start.    RUNNING: The operation in the specified account and Region is currently in progress.    SKIPPED_SUSPENDED_ACCOUNT: The operation in the specified account and Region has been skipped because the account was suspended at the time of the operation.    SUCCEEDED: The operation in the specified account and Region completed successfully.  
      */
     DetailedStatus?: StackInstanceDetailedStatus;
   }
@@ -4264,6 +4300,17 @@ declare namespace CloudFormation {
     Regions?: RegionList;
   }
   export type StackSetARN = string;
+  export type StackSetAutoDeploymentTargetSummaries = StackSetAutoDeploymentTargetSummary[];
+  export interface StackSetAutoDeploymentTargetSummary {
+    /**
+     * The organization root ID or organizational unit (OU) IDs where the stack set is targeted.
+     */
+    OrganizationalUnitId?: OrganizationalUnitId;
+    /**
+     * The list of Regions targeted for this organization or OU.
+     */
+    Regions?: RegionList;
+  }
   export interface StackSetDriftDetectionDetails {
     /**
      * Status of the stack set's actual configuration compared to its expected template and parameter configuration. A stack set is considered to have drifted if one or more of its stack instances have drifted from their expected template and parameter configuration.    DRIFTED: One or more of the stack instances belonging to the stack set stack differs from the expected template and parameter configuration. A stack instance is considered to have drifted if one or more of the resources in the associated stack have drifted.    NOT_CHECKED: CloudFormation hasn't checked the stack set for drift.    IN_SYNC: All of the stack instances belonging to the stack set stack match from the expected template and parameter configuration.  
