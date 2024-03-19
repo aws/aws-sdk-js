@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1580.0-->
+<!--LATEST=2.1581.0-->
 <!--ENTRYINSERT-->
+
+## 2.1581.0
+* feature: CloudWatchLogs: Update LogSamples field in Anomaly model to be a list of LogEvent
+* feature: EC2: This release adds the new DescribeMacHosts API operation for getting information about EC2 Mac Dedicated Hosts. Users can now see the latest macOS versions that their underlying Apple Mac can support without needing to be updated.
+* feature: Finspace: Adding new attributes readWrite and onDemand to dataview models for Database Maintenance operations.
+* feature: ManagedBlockchainQuery: Introduces a new API for Amazon Managed Blockchain Query: ListFilteredTransactionEvents.
 
 ## 2.1580.0
 * feature: CloudFormation: This release supports for a new API ListStackSetAutoDeploymentTargets, which provider auto-deployment configuration as a describable resource. Customers can now view the specific combinations of regions and OUs that are being auto-deployed.

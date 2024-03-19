@@ -828,7 +828,7 @@ declare namespace Finspace {
      */
     dataviewName: KxDataviewName;
     /**
-     * The number of availability zones you want to assign per cluster. This can be one of the following     SINGLE – Assigns one availability zone per cluster.    MULTI – Assigns all the availability zones per cluster.  
+     * The number of availability zones you want to assign per volume. Currently, FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
      */
     azMode: KxAzMode;
     /**
@@ -847,6 +847,10 @@ declare namespace Finspace {
      * The option to specify whether you want to apply all the future additions and corrections automatically to the dataview, when you ingest new changesets. The default value is false.
      */
     autoUpdate?: booleanValue;
+    /**
+     *  The option to specify whether you want to make the dataview writable to perform database maintenance. The following are some considerations related to writable dataviews.&#x2028;&#x2028;   You cannot create partial writable dataviews. When you create writeable dataviews you must provide the entire database path.   You cannot perform updates on a writeable dataview. Hence, autoUpdate must be set as False if readWrite is True for a dataview.   You must also use a unique volume for creating a writeable dataview. So, if you choose a volume that is already in use by another dataview, the dataview creation fails.   Once you create a dataview as writeable, you cannot change it to read-only. So, you cannot update the readWrite parameter later.  
+     */
+    readWrite?: booleanValue;
     /**
      * A description of the dataview.
      */
@@ -874,7 +878,7 @@ declare namespace Finspace {
      */
     environmentId?: EnvironmentId;
     /**
-     * The number of availability zones you want to assign per cluster. This can be one of the following     SINGLE – Assigns one availability zone per cluster.    MULTI – Assigns all the availability zones per cluster.  
+     * The number of availability zones you want to assign per volume. Currently, FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
      */
     azMode?: KxAzMode;
     /**
@@ -897,6 +901,10 @@ declare namespace Finspace {
      * The option to select whether you want to apply all the future additions and corrections automatically to the dataview when you ingest new changesets. The default value is false.
      */
     autoUpdate?: booleanValue;
+    /**
+     * Returns True if the dataview is created as writeable and False otherwise. 
+     */
+    readWrite?: booleanValue;
     /**
      *  The timestamp at which the dataview was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
      */
@@ -976,7 +984,7 @@ declare namespace Finspace {
      */
     scalingGroupName: KxScalingGroupName;
     /**
-     *  The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed. 
+     *  The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed. You can add one of the following values:    kx.sg.4xlarge – The host type with a configuration of 108 GiB memory and 16 vCPUs.    kx.sg.8xlarge – The host type with a configuration of 216 GiB memory and 32 vCPUs.    kx.sg.16xlarge – The host type with a configuration of 432 GiB memory and 64 vCPUs.    kx.sg.32xlarge – The host type with a configuration of 864 GiB memory and 128 vCPUs.    kx.sg1.16xlarge – The host type with a configuration of 1949 GiB memory and 64 vCPUs.    kx.sg1.24xlarge – The host type with a configuration of 2948 GiB memory and 96 vCPUs.  
      */
     hostType: KxHostType;
     /**
@@ -1084,7 +1092,7 @@ declare namespace Finspace {
      */
     nas1Configuration?: KxNAS1Configuration;
     /**
-     * The number of availability zones you want to assign per cluster. Currently, FinSpace only support SINGLE for volumes.
+     * The number of availability zones you want to assign per volume. Currently, FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
      */
     azMode: KxAzMode;
     /**
@@ -1126,7 +1134,7 @@ declare namespace Finspace {
      */
     statusReason?: KxVolumeStatusReason;
     /**
-     * The number of availability zones you want to assign per cluster. Currently, FinSpace only support SINGLE for volumes.
+     * The number of availability zones you want to assign per volume. Currently, FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
      */
     azMode?: KxAzMode;
     /**
@@ -1639,7 +1647,7 @@ declare namespace Finspace {
      */
     dataviewName?: KxDataviewName;
     /**
-     * The number of availability zones you want to assign per cluster. This can be one of the following     SINGLE – Assigns one availability zone per cluster.    MULTI – Assigns all the availability zones per cluster.  
+     * The number of availability zones you want to assign per volume. Currently, FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
      */
     azMode?: KxAzMode;
     /**
@@ -1666,6 +1674,10 @@ declare namespace Finspace {
      * The option to specify whether you want to apply all the future additions and corrections automatically to the dataview when new changesets are ingested. The default value is false.
      */
     autoUpdate?: booleanValue;
+    /**
+     * Returns True if the dataview is created as writeable and False otherwise. 
+     */
+    readWrite?: booleanValue;
     /**
      * A unique identifier for the kdb environment, from where you want to retrieve the dataview details.
      */
@@ -1780,7 +1792,7 @@ declare namespace Finspace {
      */
     scalingGroupArn?: arn;
     /**
-     *  The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed. 
+     *  The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed. It can have one of the following values:    kx.sg.4xlarge – The host type with a configuration of 108 GiB memory and 16 vCPUs.    kx.sg.8xlarge – The host type with a configuration of 216 GiB memory and 32 vCPUs.    kx.sg.16xlarge – The host type with a configuration of 432 GiB memory and 64 vCPUs.    kx.sg.32xlarge – The host type with a configuration of 864 GiB memory and 128 vCPUs.    kx.sg1.16xlarge – The host type with a configuration of 1949 GiB memory and 64 vCPUs.    kx.sg1.24xlarge – The host type with a configuration of 2948 GiB memory and 96 vCPUs.  
      */
     hostType?: KxHostType;
     /**
@@ -1884,7 +1896,7 @@ declare namespace Finspace {
      */
     description?: Description;
     /**
-     * The number of availability zones you want to assign per cluster. Currently, FinSpace only support SINGLE for volumes.
+     * The number of availability zones you want to assign per volume. Currently, FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
      */
     azMode?: KxAzMode;
     /**
@@ -2158,7 +2170,7 @@ declare namespace Finspace {
      */
     dataviewName?: KxDataviewName;
     /**
-     * The number of availability zones you want to assign per cluster. This can be one of the following     SINGLE – Assigns one availability zone per cluster.    MULTI – Assigns all the availability zones per cluster.  
+     * The number of availability zones you want to assign per volume. Currently, FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
      */
     azMode?: KxAzMode;
     /**
@@ -2190,6 +2202,10 @@ declare namespace Finspace {
      */
     autoUpdate?: booleanValue;
     /**
+     *  Returns True if the dataview is created as writeable and False otherwise. 
+     */
+    readWrite?: booleanValue;
+    /**
      *  The timestamp at which the dataview list entry was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
      */
     createdTimestamp?: Timestamp;
@@ -2212,6 +2228,10 @@ declare namespace Finspace {
      *  The name of the volume where you want to add data. 
      */
     volumeName: KxVolumeName;
+    /**
+     * Enables on-demand caching on the selected database path when a particular file or a column of the database is accessed. When on demand caching is True, dataviews perform minimal loading of files on the filesystem as needed. When it is set to False, everything is cached. The default value is False. 
+     */
+    onDemand?: booleanValue;
   }
   export type KxDataviewSegmentConfigurationList = KxDataviewSegmentConfiguration[];
   export type KxDataviewStatus = "CREATING"|"ACTIVE"|"UPDATING"|"FAILED"|"DELETING"|string;
@@ -2347,7 +2367,7 @@ declare namespace Finspace {
      */
     scalingGroupName?: KxScalingGroupName;
     /**
-     *  The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed. 
+     *  The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed. You can add one of the following values:    kx.sg.4xlarge – The host type with a configuration of 108 GiB memory and 16 vCPUs.    kx.sg.8xlarge – The host type with a configuration of 216 GiB memory and 32 vCPUs.    kx.sg.16xlarge – The host type with a configuration of 432 GiB memory and 64 vCPUs.    kx.sg.32xlarge – The host type with a configuration of 864 GiB memory and 128 vCPUs.    kx.sg1.16xlarge – The host type with a configuration of 1949 GiB memory and 64 vCPUs.    kx.sg1.24xlarge – The host type with a configuration of 2948 GiB memory and 96 vCPUs.  
      */
     hostType?: KxHostType;
     /**
@@ -2447,7 +2467,7 @@ declare namespace Finspace {
      */
     statusReason?: KxVolumeStatusReason;
     /**
-     *  The number of availability zones assigned to the volume. Currently, only SINGLE is supported. 
+     * The number of availability zones you want to assign per volume. Currently, FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
      */
     azMode?: KxAzMode;
     /**
@@ -3018,7 +3038,7 @@ declare namespace Finspace {
      */
     dataviewName?: KxDataviewName;
     /**
-     * The number of availability zones you want to assign per cluster. This can be one of the following     SINGLE – Assigns one availability zone per cluster.    MULTI – Assigns all the availability zones per cluster.  
+     * The number of availability zones you want to assign per volume. Currently, FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
      */
     azMode?: KxAzMode;
     /**
@@ -3045,6 +3065,10 @@ declare namespace Finspace {
      * The option to specify whether you want to apply all the future additions and corrections automatically to the dataview when new changesets are ingested. The default value is false.
      */
     autoUpdate?: booleanValue;
+    /**
+     * Returns True if the dataview is created as writeable and False otherwise. 
+     */
+    readWrite?: booleanValue;
     /**
      * A description of the dataview.
      */
@@ -3316,7 +3340,7 @@ declare namespace Finspace {
      */
     createdTimestamp?: Timestamp;
     /**
-     * The number of availability zones you want to assign per cluster. Currently, FinSpace only support SINGLE for volumes.
+     * The number of availability zones you want to assign per volume. Currently, FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
      */
     azMode?: KxAzMode;
     /**

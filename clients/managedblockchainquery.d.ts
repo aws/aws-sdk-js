@@ -52,6 +52,14 @@ declare class ManagedBlockchainQuery extends Service {
    */
   listAssetContracts(callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.ListAssetContractsOutput) => void): Request<ManagedBlockchainQuery.Types.ListAssetContractsOutput, AWSError>;
   /**
+   * Lists all the transaction events for an address on the blockchain.  This operation is only supported on the Bitcoin networks. 
+   */
+  listFilteredTransactionEvents(params: ManagedBlockchainQuery.Types.ListFilteredTransactionEventsInput, callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.ListFilteredTransactionEventsOutput) => void): Request<ManagedBlockchainQuery.Types.ListFilteredTransactionEventsOutput, AWSError>;
+  /**
+   * Lists all the transaction events for an address on the blockchain.  This operation is only supported on the Bitcoin networks. 
+   */
+  listFilteredTransactionEvents(callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.ListFilteredTransactionEventsOutput) => void): Request<ManagedBlockchainQuery.Types.ListFilteredTransactionEventsOutput, AWSError>;
+  /**
    * This action returns the following for a given blockchain network:   Lists all token balances owned by an address (either a contract address or a wallet address).   Lists all token balances for all tokens created by a contract.   Lists all token balances for a given token.    You must always specify the network property of the tokenFilter when using this operation. 
    */
   listTokenBalances(params: ManagedBlockchainQuery.Types.ListTokenBalancesInput, callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.ListTokenBalancesOutput) => void): Request<ManagedBlockchainQuery.Types.ListTokenBalancesOutput, AWSError>;
@@ -60,23 +68,30 @@ declare class ManagedBlockchainQuery extends Service {
    */
   listTokenBalances(callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.ListTokenBalancesOutput) => void): Request<ManagedBlockchainQuery.Types.ListTokenBalancesOutput, AWSError>;
   /**
-   * An array of TransactionEvent objects. Each object contains details about the transaction event.  This action will return transaction details for all transactions that are confirmed on the blockchain, even if they have not reached finality.  
+   * Lists all the transaction events for a transaction   This action will return transaction details for all transactions that are confirmed on the blockchain, even if they have not reached finality.  
    */
   listTransactionEvents(params: ManagedBlockchainQuery.Types.ListTransactionEventsInput, callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.ListTransactionEventsOutput) => void): Request<ManagedBlockchainQuery.Types.ListTransactionEventsOutput, AWSError>;
   /**
-   * An array of TransactionEvent objects. Each object contains details about the transaction event.  This action will return transaction details for all transactions that are confirmed on the blockchain, even if they have not reached finality.  
+   * Lists all the transaction events for a transaction   This action will return transaction details for all transactions that are confirmed on the blockchain, even if they have not reached finality.  
    */
   listTransactionEvents(callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.ListTransactionEventsOutput) => void): Request<ManagedBlockchainQuery.Types.ListTransactionEventsOutput, AWSError>;
   /**
-   * Lists all of the transactions on a given wallet address or to a specific contract.
+   * Lists all the transaction events for a transaction.
    */
   listTransactions(params: ManagedBlockchainQuery.Types.ListTransactionsInput, callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.ListTransactionsOutput) => void): Request<ManagedBlockchainQuery.Types.ListTransactionsOutput, AWSError>;
   /**
-   * Lists all of the transactions on a given wallet address or to a specific contract.
+   * Lists all the transaction events for a transaction.
    */
   listTransactions(callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.ListTransactionsOutput) => void): Request<ManagedBlockchainQuery.Types.ListTransactionsOutput, AWSError>;
 }
 declare namespace ManagedBlockchainQuery {
+  export interface AddressIdentifierFilter {
+    /**
+     * The container for the recipient address of the transaction. 
+     */
+    transactionEventToAddress: AddressIdentifierFilterTransactionEventToAddressList;
+  }
+  export type AddressIdentifierFilterTransactionEventToAddressList = ChainAddress[];
   export interface AssetContract {
     /**
      * The container for the contract identifier containing its blockchain network and address.
@@ -149,6 +164,7 @@ declare namespace ManagedBlockchainQuery {
      */
     time?: Timestamp;
   }
+  export type Boolean = boolean;
   export type ChainAddress = string;
   export type ConfirmationStatus = "FINAL"|"NONFINAL"|string;
   export interface ConfirmationStatusFilter {
@@ -246,7 +262,7 @@ declare namespace ManagedBlockchainQuery {
   }
   export interface GetTransactionInput {
     /**
-     * The hash of the transaction. It is generated whenever a transaction is verified and added to the blockchain.
+     * The hash of a transaction. It is generated when a transaction is created.
      */
     transactionHash: QueryTransactionHash;
     /**
@@ -271,7 +287,7 @@ declare namespace ManagedBlockchainQuery {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of contracts to list. Default:100   Even if additional results can be retrieved, the request can return less results than maxResults or an empty array of results. To retrieve the next set of results, make another request with the returned nextToken value. The value of nextToken is null when there are no more results to return 
+     * The maximum number of contracts to list. Default: 100   Even if additional results can be retrieved, the request can return less results than maxResults or an empty array of results. To retrieve the next set of results, make another request with the returned nextToken value. The value of nextToken is null when there are no more results to return 
      */
     maxResults?: ListAssetContractsInputMaxResultsInteger;
   }
@@ -286,6 +302,59 @@ declare namespace ManagedBlockchainQuery {
      */
     nextToken?: NextToken;
   }
+  export interface ListFilteredTransactionEventsInput {
+    /**
+     * The blockchain network where the transaction occurred. Valid Values: BITCOIN_MAINNET | BITCOIN_TESTNET 
+     */
+    network: String;
+    /**
+     * This is the unique public address on the blockchain for which the transaction events are being requested.
+     */
+    addressIdentifierFilter: AddressIdentifierFilter;
+    /**
+     * This container specifies the time frame for the transaction events returned in the response.
+     */
+    timeFilter?: TimeFilter;
+    /**
+     * This container specifies filtering attributes related to BITCOIN_VOUT event types
+     */
+    voutFilter?: VoutFilter;
+    confirmationStatusFilter?: ConfirmationStatusFilter;
+    /**
+     * The order by which the results will be sorted.
+     */
+    sort?: ListFilteredTransactionEventsSort;
+    /**
+     * The pagination token that indicates the next set of results to retrieve.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of transaction events to list. Default: 100   Even if additional results can be retrieved, the request can return less results than maxResults or an empty array of results. To retrieve the next set of results, make another request with the returned nextToken value. The value of nextToken is null when there are no more results to return 
+     */
+    maxResults?: ListFilteredTransactionEventsInputMaxResultsInteger;
+  }
+  export type ListFilteredTransactionEventsInputMaxResultsInteger = number;
+  export interface ListFilteredTransactionEventsOutput {
+    /**
+     * The transaction events returned by the request.
+     */
+    events: TransactionEventList;
+    /**
+     * The pagination token that indicates the next set of results to retrieve.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListFilteredTransactionEventsSort {
+    /**
+     * Container on how the results will be sorted by?
+     */
+    sortBy?: ListFilteredTransactionEventsSortBy;
+    /**
+     * The container for the sort order for ListFilteredTransactionEvents. The SortOrder field only accepts the values ASCENDING and DESCENDING. Not providing SortOrder will default to ASCENDING.
+     */
+    sortOrder?: SortOrder;
+  }
+  export type ListFilteredTransactionEventsSortBy = "blockchainInstant"|string;
   export interface ListTokenBalancesInput {
     /**
      * The contract or wallet address on the blockchain network by which to filter the request. You must specify the address property of the ownerFilter when listing balances of tokens owned by the address.
@@ -300,7 +369,7 @@ declare namespace ManagedBlockchainQuery {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of token balances to return. Default:100   Even if additional results can be retrieved, the request can return less results than maxResults or an empty array of results. To retrieve the next set of results, make another request with the returned nextToken value. The value of nextToken is null when there are no more results to return 
+     * The maximum number of token balances to return. Default: 100   Even if additional results can be retrieved, the request can return less results than maxResults or an empty array of results. To retrieve the next set of results, make another request with the returned nextToken value. The value of nextToken is null when there are no more results to return 
      */
     maxResults?: ListTokenBalancesInputMaxResultsInteger;
   }
@@ -317,9 +386,13 @@ declare namespace ManagedBlockchainQuery {
   }
   export interface ListTransactionEventsInput {
     /**
-     * The hash of the transaction. It is generated whenever a transaction is verified and added to the blockchain.
+     * The hash of a transaction. It is generated when a transaction is created.
      */
-    transactionHash: QueryTransactionHash;
+    transactionHash?: QueryTransactionHash;
+    /**
+     * The identifier of a Bitcoin transaction. It is generated when a transaction is created.   transactionId is only supported on the Bitcoin networks. 
+     */
+    transactionId?: QueryTransactionId;
     /**
      * The blockchain network where the transaction events occurred.
      */
@@ -329,7 +402,7 @@ declare namespace ManagedBlockchainQuery {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of transaction events to list. Default:100   Even if additional results can be retrieved, the request can return less results than maxResults or an empty array of results. To retrieve the next set of results, make another request with the returned nextToken value. The value of nextToken is null when there are no more results to return 
+     * The maximum number of transaction events to list. Default: 100   Even if additional results can be retrieved, the request can return less results than maxResults or an empty array of results. To retrieve the next set of results, make another request with the returned nextToken value. The value of nextToken is null when there are no more results to return 
      */
     maxResults?: ListTransactionEventsInputMaxResultsInteger;
   }
@@ -356,7 +429,7 @@ declare namespace ManagedBlockchainQuery {
     fromBlockchainInstant?: BlockchainInstant;
     toBlockchainInstant?: BlockchainInstant;
     /**
-     * The order by which the results will be sorted. If ASCENNDING is selected, the results will be ordered by fromTime. 
+     * The order by which the results will be sorted. 
      */
     sort?: ListTransactionsSort;
     /**
@@ -364,11 +437,11 @@ declare namespace ManagedBlockchainQuery {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of transactions to list. Default:100   Even if additional results can be retrieved, the request can return less results than maxResults or an empty array of results. To retrieve the next set of results, make another request with the returned nextToken value. The value of nextToken is null when there are no more results to return 
+     * The maximum number of transactions to list. Default: 100   Even if additional results can be retrieved, the request can return less results than maxResults or an empty array of results. To retrieve the next set of results, make another request with the returned nextToken value. The value of nextToken is null when there are no more results to return 
      */
     maxResults?: ListTransactionsInputMaxResultsInteger;
     /**
-     * This filter is used to include transactions in the response that haven't reached  finality . Transactions that have reached finiality are always part of the response.
+     * This filter is used to include transactions in the response that haven't reached  finality . Transactions that have reached finality are always part of the response.
      */
     confirmationStatusFilter?: ConfirmationStatusFilter;
   }
@@ -413,8 +486,13 @@ declare namespace ManagedBlockchainQuery {
   export type QueryTokenStandard = "ERC20"|"ERC721"|"ERC1155"|string;
   export type QueryTransactionEventType = "ERC20_TRANSFER"|"ERC20_MINT"|"ERC20_BURN"|"ERC20_DEPOSIT"|"ERC20_WITHDRAWAL"|"ERC721_TRANSFER"|"ERC1155_TRANSFER"|"BITCOIN_VIN"|"BITCOIN_VOUT"|"INTERNAL_ETH_TRANSFER"|"ETH_TRANSFER"|string;
   export type QueryTransactionHash = string;
+  export type QueryTransactionId = string;
   export type SortOrder = "ASCENDING"|"DESCENDING"|string;
   export type String = string;
+  export interface TimeFilter {
+    from?: BlockchainInstant;
+    to?: BlockchainInstant;
+  }
   export type Timestamp = Date;
   export interface TokenBalance {
     /**
@@ -477,7 +555,7 @@ declare namespace ManagedBlockchainQuery {
      */
     blockHash?: BlockHash;
     /**
-     * The hash of the transaction. It is generated whenever a transaction is verified and added to the blockchain.
+     * The hash of a transaction. It is generated when a transaction is created.
      */
     transactionHash: QueryTransactionHash;
     /**
@@ -537,7 +615,7 @@ declare namespace ManagedBlockchainQuery {
      */
     transactionFee?: String;
     /**
-     * The unique identifier of the transaction. It is generated whenever a transaction is verified and added to the blockchain.
+     * The identifier of a Bitcoin transaction. It is generated when a transaction is created.
      */
     transactionId?: String;
     /**
@@ -555,7 +633,7 @@ declare namespace ManagedBlockchainQuery {
      */
     network: QueryNetwork;
     /**
-     * The hash of the transaction. It is generated whenever a transaction is verified and added to the blockchain.
+     * The hash of a transaction. It is generated when a transaction is created.
      */
     transactionHash: QueryTransactionHash;
     /**
@@ -575,7 +653,7 @@ declare namespace ManagedBlockchainQuery {
      */
     value?: String;
     /**
-     * The blockchain address. for the contract
+     * The blockchain address for the contract
      */
     contractAddress?: ChainAddress;
     /**
@@ -583,18 +661,39 @@ declare namespace ManagedBlockchainQuery {
      */
     tokenId?: QueryTokenId;
     /**
-     * The unique identifier of the transaction. It is generated whenever a transaction is verified and added to the blockchain.
+     * The identifier of a Bitcoin transaction. It is generated when a transaction is created.
      */
     transactionId?: String;
     /**
-     * The position of the vout in the transaction output list.
+     * The position of the transaction output in the transaction output list.
      */
     voutIndex?: Integer;
+    /**
+     * Specifies if the transaction output is spent or unspent. This is only returned for BITCOIN_VOUT event types.  This is only returned for BITCOIN_VOUT event types. 
+     */
+    voutSpent?: Boolean;
+    /**
+     * The transactionId that created the spent transaction output.  This is only returned for BITCOIN_VIN event types. 
+     */
+    spentVoutTransactionId?: String;
+    /**
+     * The transactionHash that created the spent transaction output.  This is only returned for BITCOIN_VIN event types. 
+     */
+    spentVoutTransactionHash?: String;
+    /**
+     * The position of the spent transaction output in the output list of the creating transaction.  This is only returned for BITCOIN_VIN event types. 
+     */
+    spentVoutIndex?: Integer;
+    blockchainInstant?: BlockchainInstant;
+    /**
+     * This container specifies whether the transaction has reached Finality.
+     */
+    confirmationStatus?: ConfirmationStatus;
   }
   export type TransactionEventList = TransactionEvent[];
   export interface TransactionOutputItem {
     /**
-     * The hash of the transaction. It is generated whenever a transaction is verified and added to the blockchain.
+     * The hash of a transaction. It is generated when a transaction is created.
      */
     transactionHash: QueryTransactionHash;
     /**
@@ -611,6 +710,12 @@ declare namespace ManagedBlockchainQuery {
     confirmationStatus?: ConfirmationStatus;
   }
   export type TransactionOutputList = TransactionOutputItem[];
+  export interface VoutFilter {
+    /**
+     * Specifies if the transaction output is spent or unspent.
+     */
+    voutSpent: Boolean;
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

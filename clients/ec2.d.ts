@@ -2349,6 +2349,14 @@ declare class EC2 extends Service {
    */
   describeLockedSnapshots(callback?: (err: AWSError, data: EC2.Types.DescribeLockedSnapshotsResult) => void): Request<EC2.Types.DescribeLockedSnapshotsResult, AWSError>;
   /**
+   * Describes the specified EC2 Mac Dedicated Host or all of your EC2 Mac Dedicated Hosts.
+   */
+  describeMacHosts(params: EC2.Types.DescribeMacHostsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeMacHostsResult) => void): Request<EC2.Types.DescribeMacHostsResult, AWSError>;
+  /**
+   * Describes the specified EC2 Mac Dedicated Host or all of your EC2 Mac Dedicated Hosts.
+   */
+  describeMacHosts(callback?: (err: AWSError, data: EC2.Types.DescribeMacHostsResult) => void): Request<EC2.Types.DescribeMacHostsResult, AWSError>;
+  /**
    * Describes your managed prefix lists and any Amazon Web Services-managed prefix lists. To view the entries for your prefix list, use GetManagedPrefixListEntries.
    */
   describeManagedPrefixLists(params: EC2.Types.DescribeManagedPrefixListsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeManagedPrefixListsResult) => void): Request<EC2.Types.DescribeManagedPrefixListsResult, AWSError>;
@@ -15837,6 +15845,35 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export interface DescribeMacHostsRequest {
+    /**
+     * The filters.    availability-zone - The Availability Zone of the EC2 Mac Dedicated Host.    instance-type - The instance type size that the EC2 Mac Dedicated Host is configured to support.  
+     */
+    Filters?: FilterList;
+    /**
+     *  The IDs of the EC2 Mac Dedicated Hosts. 
+     */
+    HostIds?: RequestHostIdList;
+    /**
+     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned nextToken value. This value can be between 5 and 500. If maxResults is given a larger value than 500, you receive an error.
+     */
+    MaxResults?: DescribeMacHostsRequestMaxResults;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: String;
+  }
+  export type DescribeMacHostsRequestMaxResults = number;
+  export interface DescribeMacHostsResult {
+    /**
+     *  Information about the EC2 Mac Dedicated Hosts. 
+     */
+    MacHosts?: MacHostList;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: String;
+  }
   export interface DescribeManagedPrefixListsRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -27718,6 +27755,18 @@ declare namespace EC2 {
   export type LockedSnapshotsInfoList = LockedSnapshotsInfo[];
   export type LogDestinationType = "cloud-watch-logs"|"s3"|"kinesis-data-firehose"|string;
   export type Long = number;
+  export interface MacHost {
+    /**
+     *  The EC2 Mac Dedicated Host ID. 
+     */
+    HostId?: DedicatedHostId;
+    /**
+     *  The latest macOS versions that the EC2 Mac Dedicated Host can launch without being upgraded. 
+     */
+    MacOSLatestSupportedVersions?: MacOSVersionStringList;
+  }
+  export type MacHostList = MacHost[];
+  export type MacOSVersionStringList = String[];
   export interface MaintenanceDetails {
     /**
      * Verify existence of a pending maintenance.

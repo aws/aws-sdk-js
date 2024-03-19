@@ -4019,6 +4019,20 @@
       },
       "documentation": "<p>Describes the lock status for a snapshot.</p>"
     },
+    "DescribeMacHosts": {
+      "name": "DescribeMacHosts",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeMacHostsRequest"
+      },
+      "output": {
+        "shape": "DescribeMacHostsResult"
+      },
+      "documentation": "<p>Describes the specified EC2 Mac Dedicated Host or all of your EC2 Mac Dedicated Hosts.</p>"
+    },
     "DescribeManagedPrefixLists": {
       "name": "DescribeManagedPrefixLists",
       "http": {
@@ -24692,6 +24706,49 @@
         }
       }
     },
+    "DescribeMacHostsRequest": {
+      "type": "structure",
+      "members": {
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>The filters.</p> <ul> <li> <p> <code>availability-zone</code> - The Availability Zone of the EC2 Mac Dedicated Host.</p> </li> <li> <p> <code>instance-type</code> - The instance type size that the EC2 Mac Dedicated Host is configured to support.</p> </li> </ul>",
+          "locationName": "Filter"
+        },
+        "HostIds": {
+          "shape": "RequestHostIdList",
+          "documentation": "<p> The IDs of the EC2 Mac Dedicated Hosts. </p>",
+          "locationName": "HostId"
+        },
+        "MaxResults": {
+          "shape": "DescribeMacHostsRequestMaxResults",
+          "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned <code>nextToken</code> value. This value can be between 5 and 500. If <code>maxResults</code> is given a larger value than 500, you receive an error.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results.</p>"
+        }
+      }
+    },
+    "DescribeMacHostsRequestMaxResults": {
+      "type": "integer",
+      "max": 500,
+      "min": 5
+    },
+    "DescribeMacHostsResult": {
+      "type": "structure",
+      "members": {
+        "MacHosts": {
+          "shape": "MacHostList",
+          "documentation": "<p> Information about the EC2 Mac Dedicated Hosts. </p>",
+          "locationName": "macHostSet"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results.</p>",
+          "locationName": "nextToken"
+        }
+      }
+    },
     "DescribeManagedPrefixListsRequest": {
       "type": "structure",
       "members": {
@@ -44251,6 +44308,36 @@
     },
     "Long": {
       "type": "long"
+    },
+    "MacHost": {
+      "type": "structure",
+      "members": {
+        "HostId": {
+          "shape": "DedicatedHostId",
+          "documentation": "<p> The EC2 Mac Dedicated Host ID. </p>",
+          "locationName": "hostId"
+        },
+        "MacOSLatestSupportedVersions": {
+          "shape": "MacOSVersionStringList",
+          "documentation": "<p> The latest macOS versions that the EC2 Mac Dedicated Host can launch without being upgraded. </p>",
+          "locationName": "macOSLatestSupportedVersionSet"
+        }
+      },
+      "documentation": "<p> Information about the EC2 Mac Dedicated Host. </p>"
+    },
+    "MacHostList": {
+      "type": "list",
+      "member": {
+        "shape": "MacHost",
+        "locationName": "item"
+      }
+    },
+    "MacOSVersionStringList": {
+      "type": "list",
+      "member": {
+        "shape": "String",
+        "locationName": "item"
+      }
     },
     "MaintenanceDetails": {
       "type": "structure",
