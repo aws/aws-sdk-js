@@ -264,7 +264,11 @@ declare namespace ManagedBlockchainQuery {
     /**
      * The hash of a transaction. It is generated when a transaction is created.
      */
-    transactionHash: QueryTransactionHash;
+    transactionHash?: QueryTransactionHash;
+    /**
+     * The identifier of a Bitcoin transaction. It is generated when a transaction is created.   transactionId is only supported on the Bitcoin networks. 
+     */
+    transactionId?: QueryTransactionId;
     /**
      * The blockchain network where the transaction occurred.
      */
@@ -696,6 +700,10 @@ declare namespace ManagedBlockchainQuery {
      * The hash of a transaction. It is generated when a transaction is created.
      */
     transactionHash: QueryTransactionHash;
+    /**
+     * The identifier of a Bitcoin transaction. It is generated when a transaction is created.
+     */
+    transactionId?: QueryTransactionId;
     /**
      * The blockchain network where the transaction occurred.
      */

@@ -702,13 +702,16 @@
     "GetTransactionInput": {
       "type": "structure",
       "required": [
-        "transactionHash",
         "network"
       ],
       "members": {
         "transactionHash": {
           "shape": "QueryTransactionHash",
           "documentation": "<p>The hash of a transaction. It is generated when a transaction is created.</p>"
+        },
+        "transactionId": {
+          "shape": "QueryTransactionId",
+          "documentation": "<p>The identifier of a Bitcoin transaction. It is generated when a transaction is created.</p> <note> <p> <code>transactionId</code> is only supported on the Bitcoin networks.</p> </note>"
         },
         "network": {
           "shape": "QueryNetwork",
@@ -1405,6 +1408,10 @@
         "transactionHash": {
           "shape": "QueryTransactionHash",
           "documentation": "<p>The hash of a transaction. It is generated when a transaction is created.</p>"
+        },
+        "transactionId": {
+          "shape": "QueryTransactionId",
+          "documentation": "<p>The identifier of a Bitcoin transaction. It is generated when a transaction is created.</p>"
         },
         "network": {
           "shape": "QueryNetwork",

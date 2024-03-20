@@ -710,6 +710,14 @@ declare namespace AccessAnalyzer {
      * The access control configuration is for an Amazon S3 directory bucket.
      */
     s3ExpressDirectoryBucket?: S3ExpressDirectoryBucketConfiguration;
+    /**
+     * The access control configuration is for a DynamoDB stream.
+     */
+    dynamodbStream?: DynamodbStreamConfiguration;
+    /**
+     * The access control configuration is for a DynamoDB table or index.
+     */
+    dynamodbTable?: DynamodbTableConfiguration;
   }
   export type ConfigurationsMap = {[key: string]: Configuration};
   export type ConfigurationsMapKey = string;
@@ -825,6 +833,20 @@ declare namespace AccessAnalyzer {
      */
     clientToken?: String;
   }
+  export interface DynamodbStreamConfiguration {
+    /**
+     * The proposed resource policy defining who can access or manage the DynamoDB stream.
+     */
+    streamPolicy?: DynamodbStreamPolicy;
+  }
+  export type DynamodbStreamPolicy = string;
+  export interface DynamodbTableConfiguration {
+    /**
+     * The proposed resource policy defining who can access or manage the DynamoDB table.
+     */
+    tablePolicy?: DynamodbTablePolicy;
+  }
+  export type DynamodbTablePolicy = string;
   export type EbsGroup = string;
   export type EbsGroupList = EbsGroup[];
   export interface EbsSnapshotConfiguration {
@@ -1776,7 +1798,7 @@ declare namespace AccessAnalyzer {
   export type ReasonSummaryList = ReasonSummary[];
   export type RegionList = String[];
   export type ResourceArn = string;
-  export type ResourceType = "AWS::S3::Bucket"|"AWS::IAM::Role"|"AWS::SQS::Queue"|"AWS::Lambda::Function"|"AWS::Lambda::LayerVersion"|"AWS::KMS::Key"|"AWS::SecretsManager::Secret"|"AWS::EFS::FileSystem"|"AWS::EC2::Snapshot"|"AWS::ECR::Repository"|"AWS::RDS::DBSnapshot"|"AWS::RDS::DBClusterSnapshot"|"AWS::SNS::Topic"|"AWS::S3Express::DirectoryBucket"|string;
+  export type ResourceType = "AWS::S3::Bucket"|"AWS::IAM::Role"|"AWS::SQS::Queue"|"AWS::Lambda::Function"|"AWS::Lambda::LayerVersion"|"AWS::KMS::Key"|"AWS::SecretsManager::Secret"|"AWS::EFS::FileSystem"|"AWS::EC2::Snapshot"|"AWS::ECR::Repository"|"AWS::RDS::DBSnapshot"|"AWS::RDS::DBClusterSnapshot"|"AWS::SNS::Topic"|"AWS::S3Express::DirectoryBucket"|"AWS::DynamoDB::Table"|"AWS::DynamoDB::Stream"|string;
   export type RetiringPrincipal = string;
   export type RoleArn = string;
   export interface S3AccessPointConfiguration {
@@ -2141,7 +2163,7 @@ declare namespace AccessAnalyzer {
      */
     validatePolicyResourceType?: ValidatePolicyResourceType;
   }
-  export type ValidatePolicyResourceType = "AWS::S3::Bucket"|"AWS::S3::AccessPoint"|"AWS::S3::MultiRegionAccessPoint"|"AWS::S3ObjectLambda::AccessPoint"|"AWS::IAM::AssumeRolePolicyDocument"|string;
+  export type ValidatePolicyResourceType = "AWS::S3::Bucket"|"AWS::S3::AccessPoint"|"AWS::S3::MultiRegionAccessPoint"|"AWS::S3ObjectLambda::AccessPoint"|"AWS::IAM::AssumeRolePolicyDocument"|"AWS::DynamoDB::Table"|string;
   export interface ValidatePolicyResponse {
     /**
      * The list of findings in a policy returned by IAM Access Analyzer based on its suite of policy checks.

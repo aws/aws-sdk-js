@@ -28,11 +28,11 @@ declare class SavingsPlans extends Service {
    */
   deleteQueuedSavingsPlan(callback?: (err: AWSError, data: SavingsPlans.Types.DeleteQueuedSavingsPlanResponse) => void): Request<SavingsPlans.Types.DeleteQueuedSavingsPlanResponse, AWSError>;
   /**
-   * Describes the specified Savings Plans rates.
+   * Describes the rates for the specified Savings Plan.
    */
   describeSavingsPlanRates(params: SavingsPlans.Types.DescribeSavingsPlanRatesRequest, callback?: (err: AWSError, data: SavingsPlans.Types.DescribeSavingsPlanRatesResponse) => void): Request<SavingsPlans.Types.DescribeSavingsPlanRatesResponse, AWSError>;
   /**
-   * Describes the specified Savings Plans rates.
+   * Describes the rates for the specified Savings Plan.
    */
   describeSavingsPlanRates(callback?: (err: AWSError, data: SavingsPlans.Types.DescribeSavingsPlanRatesResponse) => void): Request<SavingsPlans.Types.DescribeSavingsPlanRatesResponse, AWSError>;
   /**
@@ -44,19 +44,19 @@ declare class SavingsPlans extends Service {
    */
   describeSavingsPlans(callback?: (err: AWSError, data: SavingsPlans.Types.DescribeSavingsPlansResponse) => void): Request<SavingsPlans.Types.DescribeSavingsPlansResponse, AWSError>;
   /**
-   * Describes the specified Savings Plans offering rates.
+   * Describes the offering rates for the specified Savings Plans.
    */
   describeSavingsPlansOfferingRates(params: SavingsPlans.Types.DescribeSavingsPlansOfferingRatesRequest, callback?: (err: AWSError, data: SavingsPlans.Types.DescribeSavingsPlansOfferingRatesResponse) => void): Request<SavingsPlans.Types.DescribeSavingsPlansOfferingRatesResponse, AWSError>;
   /**
-   * Describes the specified Savings Plans offering rates.
+   * Describes the offering rates for the specified Savings Plans.
    */
   describeSavingsPlansOfferingRates(callback?: (err: AWSError, data: SavingsPlans.Types.DescribeSavingsPlansOfferingRatesResponse) => void): Request<SavingsPlans.Types.DescribeSavingsPlansOfferingRatesResponse, AWSError>;
   /**
-   * Describes the specified Savings Plans offerings.
+   * Describes the offerings for the specified Savings Plans.
    */
   describeSavingsPlansOfferings(params: SavingsPlans.Types.DescribeSavingsPlansOfferingsRequest, callback?: (err: AWSError, data: SavingsPlans.Types.DescribeSavingsPlansOfferingsResponse) => void): Request<SavingsPlans.Types.DescribeSavingsPlansOfferingsResponse, AWSError>;
   /**
-   * Describes the specified Savings Plans offerings.
+   * Describes the offerings for the specified Savings Plans.
    */
   describeSavingsPlansOfferings(callback?: (err: AWSError, data: SavingsPlans.Types.DescribeSavingsPlansOfferingsResponse) => void): Request<SavingsPlans.Types.DescribeSavingsPlansOfferingsResponse, AWSError>;
   /**
@@ -67,6 +67,14 @@ declare class SavingsPlans extends Service {
    * Lists the tags for the specified resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: SavingsPlans.Types.ListTagsForResourceResponse) => void): Request<SavingsPlans.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Returns the specified Savings Plan.
+   */
+  returnSavingsPlan(params: SavingsPlans.Types.ReturnSavingsPlanRequest, callback?: (err: AWSError, data: SavingsPlans.Types.ReturnSavingsPlanResponse) => void): Request<SavingsPlans.Types.ReturnSavingsPlanResponse, AWSError>;
+  /**
+   * Returns the specified Savings Plan.
+   */
+  returnSavingsPlan(callback?: (err: AWSError, data: SavingsPlans.Types.ReturnSavingsPlanResponse) => void): Request<SavingsPlans.Types.ReturnSavingsPlanResponse, AWSError>;
   /**
    * Adds the specified tags to the specified resource.
    */
@@ -93,19 +101,19 @@ declare namespace SavingsPlans {
      */
     savingsPlanOfferingId: SavingsPlanOfferingId;
     /**
-     * The hourly commitment, in USD. This is a value between 0.001 and 1 million. You cannot specify more than five digits after the decimal point.
+     * The hourly commitment, in the same currency of the savingsPlanOfferingId. This is a value between 0.001 and 1 million. You cannot specify more than five digits after the decimal point.
      */
     commitment: Amount;
     /**
-     * The up-front payment amount. This is a whole number between 50 and 99 percent of the total value of the Savings Plan. This parameter is supported only if the payment option is Partial Upfront.
+     * The up-front payment amount. This is a whole number between 50 and 99 percent of the total value of the Savings Plan. This parameter is only supported if the payment option is Partial Upfront.
      */
     upfrontPaymentAmount?: Amount;
     /**
-     * The time at which to purchase the Savings Plan, in UTC format (YYYY-MM-DDTHH:MM:SSZ).
+     * The purchase time of the Savings Plan in UTC format (YYYY-MM-DDTHH:MM:SSZ).
      */
     purchaseTime?: DateTime;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
     clientToken?: ClientToken;
     /**
@@ -154,11 +162,11 @@ declare namespace SavingsPlans {
      */
     savingsPlanId?: SavingsPlanId;
     /**
-     * Information about the Savings Plans rates.
+     * Information about the Savings Plan rates.
      */
     searchResults?: SavingsPlanRateList;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
     nextToken?: PaginationToken;
   }
@@ -176,7 +184,7 @@ declare namespace SavingsPlans {
      */
     savingsPlanTypes?: SavingsPlanTypeList;
     /**
-     * The AWS products.
+     * The Amazon Web Services products.
      */
     products?: SavingsPlanProductTypeList;
     /**
@@ -188,7 +196,7 @@ declare namespace SavingsPlans {
      */
     usageTypes?: SavingsPlanRateUsageTypeList;
     /**
-     * The specific AWS operation for the line item in the billing report.
+     * The specific Amazon Web Services operation for the line item in the billing report.
      */
     operations?: SavingsPlanRateOperationList;
     /**
@@ -228,11 +236,11 @@ declare namespace SavingsPlans {
      */
     productType?: SavingsPlanProductType;
     /**
-     * The plan type.
+     * The plan types.
      */
     planTypes?: SavingsPlanTypeList;
     /**
-     * The durations, in seconds.
+     * The duration, in seconds.
      */
     durations?: DurationsList;
     /**
@@ -252,7 +260,7 @@ declare namespace SavingsPlans {
      */
     usageTypes?: SavingsPlanUsageTypeList;
     /**
-     * The specific AWS operation for the line item in the billing report.
+     * The specific Amazon Web Services operation for the line item in the billing report.
      */
     operations?: SavingsPlanOperationList;
     /**
@@ -296,7 +304,7 @@ declare namespace SavingsPlans {
      */
     maxResults?: MaxResults;
     /**
-     * The states.
+     * The current states of the Savings Plans.
      */
     states?: SavingsPlanStateList;
     /**
@@ -361,6 +369,22 @@ declare namespace SavingsPlans {
     planDescription?: SavingsPlanDescription;
   }
   export type Region = string;
+  export interface ReturnSavingsPlanRequest {
+    /**
+     * The ID of the Savings Plan.
+     */
+    savingsPlanId: SavingsPlanId;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    clientToken?: ClientToken;
+  }
+  export interface ReturnSavingsPlanResponse {
+    /**
+     * The ID of the Savings Plan.
+     */
+    savingsPlanId?: SavingsPlanId;
+  }
   export interface SavingsPlan {
     /**
      * The ID of the offering.
@@ -387,11 +411,11 @@ declare namespace SavingsPlans {
      */
     end?: String;
     /**
-     * The state.
+     * The current state.
      */
     state?: SavingsPlanState;
     /**
-     * The AWS Region.
+     * The Amazon Web Services Region.
      */
     region?: Region;
     /**
@@ -415,7 +439,7 @@ declare namespace SavingsPlans {
      */
     currency?: CurrencyCode;
     /**
-     * The hourly commitment, in USD.
+     * The hourly commitment amount in the specified currency.
      */
     commitment?: Amount;
     /**
@@ -434,6 +458,10 @@ declare namespace SavingsPlans {
      * One or more tags.
      */
     tags?: TagMap;
+    /**
+     * The time until when a return for the Savings Plan can be requested. If the Savings Plan is not returnable, the field reflects the Savings Plan start time.
+     */
+    returnableUntil?: String;
   }
   export type SavingsPlanArn = string;
   export type SavingsPlanArnList = SavingsPlanArn[];
@@ -491,7 +519,7 @@ declare namespace SavingsPlans {
      */
     usageType?: SavingsPlanUsageType;
     /**
-     * The specific AWS operation for the line item in the billing report.
+     * The specific Amazon Web Services operation for the line item in the billing report.
      */
     operation?: SavingsPlanOperation;
     /**
@@ -550,7 +578,7 @@ declare namespace SavingsPlans {
      */
     usageType?: SavingsPlanRateUsageType;
     /**
-     * The specific AWS operation for the line item in the billing report.
+     * The specific Amazon Web Services operation for the line item in the billing report.
      */
     operation?: SavingsPlanRateOperation;
     /**
@@ -614,7 +642,7 @@ declare namespace SavingsPlans {
      */
     usageType?: SavingsPlanRateUsageType;
     /**
-     * The specific AWS operation for the line item in the billing report.
+     * The specific Amazon Web Services operation for the line item in the billing report.
      */
     operation?: SavingsPlanRateOperation;
     /**
@@ -658,7 +686,7 @@ declare namespace SavingsPlans {
   export type SavingsPlanRateUsageTypeList = SavingsPlanRateUsageType[];
   export type SavingsPlanServiceCode = string;
   export type SavingsPlanServiceCodeList = SavingsPlanServiceCode[];
-  export type SavingsPlanState = "payment-pending"|"payment-failed"|"active"|"retired"|"queued"|"queued-deleted"|string;
+  export type SavingsPlanState = "payment-pending"|"payment-failed"|"active"|"retired"|"queued"|"queued-deleted"|"pending-return"|"returned"|string;
   export type SavingsPlanStateList = SavingsPlanState[];
   export type SavingsPlanType = "Compute"|"EC2Instance"|"SageMaker"|string;
   export type SavingsPlanTypeList = SavingsPlanType[];
