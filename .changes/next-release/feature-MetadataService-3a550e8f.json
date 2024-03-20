@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "MetadataService",
+  "description": "Update AWS.MetadataService to expose the fetchMetadataToken function."
+}
