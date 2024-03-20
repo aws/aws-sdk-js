@@ -1324,6 +1324,65 @@ const exp = require('constants');
         });
       });
 
+      it('will use credential_process in the base profile', function(done) {
+        var mock = [
+          '[default]',
+          'role_arn = arn',
+          'source_profile = base',
+          '[base]',
+          'credential_process=federated_cli_mock',
+        ].join('\n');
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
+
+        var child_process = require('child_process');
+        mockProcess = '{"Version": 1,"AccessKeyId": "akid","SecretAccessKey": "secret","SessionToken": "session","Expiration": ""}';
+        helpers.spyOn(child_process, 'exec').andCallFake(function (_, _, cb) {
+          cb(undefined, mockProcess, undefined);
+        });
+
+        var expiration = new Date(Date.now() + 1000);
+        var STSPrototype = (new STS()).constructor.prototype;
+        var spy = helpers.spyOn(STSPrototype, 'assumeRole').andCallFake(
+          function(roleParams, callback) {
+            if (this.config.credentials.accessKeyId === 'akid' &&
+                this.config.credentials.secretAccessKey === 'secret' &&
+                this.config.credentials.sessionToken === 'session') {
+              callback(null, {
+                Credentials: {
+                  AccessKeyId: 'KEY',
+                  SecretAccessKey: 'SECRET',
+                  SessionToken: 'TOKEN',
+                  Expiration: expiration
+                }
+              });
+            }
+            callback(new Error('INVALID CREDENTIAL'));
+          }
+        );
+
+        var creds = new AWS.SharedIniFileCredentials({
+          callback: function (err) {
+            expect(err).to.be.null;
+            expect(spy.calls.length).to.equal(2);
+            expect(spy.calls[0].arguments[0].RoleArn).to.equal('arn');
+            expect(spy.calls[0].object.config.credentials.profile).to.equal('base');
+            expect(spy.calls[0].object.config.credentials.accessKeyId).to.be.undefined;
+            expect(spy.calls[0].object.config.credentials.secretAccessKey).to.be.undefined;
+            expect(spy.calls[0].object.config.credentials.sessionToken).to.be.undefined;
+            expect(spy.calls[1].arguments[0].RoleArn).to.equal('arn');
+            expect(spy.calls[1].object.config.credentials.profile).to.equal('base');
+            expect(spy.calls[1].object.config.credentials.accessKeyId).to.equal('akid');
+            expect(spy.calls[1].object.config.credentials.secretAccessKey).to.equal('secret');
+            expect(spy.calls[1].object.config.credentials.sessionToken).to.equal('session');
+            expect(creds.accessKeyId).to.equal('KEY');
+            expect(creds.secretAccessKey).to.equal('SECRET');
+            expect(creds.sessionToken).to.equal('TOKEN');
+            expect(creds.expireTime).to.equal(expiration);
+            done();
+          }
+        });
+      });
+
       describe('mfa serial callback', function() {
 
         beforeEach(function() {
