@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1582.0-->
+<!--LATEST=2.1583.0-->
 <!--ENTRYINSERT-->
+
+## 2.1583.0
+* feature: CodeArtifact: This release adds Package groups to CodeArtifact so you can more conveniently configure package origin controls for multiple packages.
 
 ## 2.1582.0
 * feature: AccessAnalyzer: This release adds support for policy validation and external access findings for DynamoDB tables and streams. IAM Access Analyzer helps you author functional and secure resource-based policies and identify cross-account access. Updated service API, documentation, and paginators.

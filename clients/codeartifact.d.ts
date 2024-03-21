@@ -37,6 +37,14 @@ declare class CodeArtifact extends Service {
    */
   createDomain(callback?: (err: AWSError, data: CodeArtifact.Types.CreateDomainResult) => void): Request<CodeArtifact.Types.CreateDomainResult, AWSError>;
   /**
+   *  Creates a package group. For more information about creating package groups, including example CLI commands, see Create a package group in the CodeArtifact User Guide. 
+   */
+  createPackageGroup(params: CodeArtifact.Types.CreatePackageGroupRequest, callback?: (err: AWSError, data: CodeArtifact.Types.CreatePackageGroupResult) => void): Request<CodeArtifact.Types.CreatePackageGroupResult, AWSError>;
+  /**
+   *  Creates a package group. For more information about creating package groups, including example CLI commands, see Create a package group in the CodeArtifact User Guide. 
+   */
+  createPackageGroup(callback?: (err: AWSError, data: CodeArtifact.Types.CreatePackageGroupResult) => void): Request<CodeArtifact.Types.CreatePackageGroupResult, AWSError>;
+  /**
    *  Creates a repository. 
    */
   createRepository(params: CodeArtifact.Types.CreateRepositoryRequest, callback?: (err: AWSError, data: CodeArtifact.Types.CreateRepositoryResult) => void): Request<CodeArtifact.Types.CreateRepositoryResult, AWSError>;
@@ -68,6 +76,14 @@ declare class CodeArtifact extends Service {
    * Deletes a package and all associated package versions. A deleted package cannot be restored. To delete one or more package versions, use the DeletePackageVersions API.
    */
   deletePackage(callback?: (err: AWSError, data: CodeArtifact.Types.DeletePackageResult) => void): Request<CodeArtifact.Types.DeletePackageResult, AWSError>;
+  /**
+   * Deletes a package group. Deleting a package group does not delete packages or package versions associated with the package group. When a package group is deleted, the direct child package groups will become children of the package group's direct parent package group. Therefore, if any of the child groups are inheriting any settings from the parent, those settings could change.
+   */
+  deletePackageGroup(params: CodeArtifact.Types.DeletePackageGroupRequest, callback?: (err: AWSError, data: CodeArtifact.Types.DeletePackageGroupResult) => void): Request<CodeArtifact.Types.DeletePackageGroupResult, AWSError>;
+  /**
+   * Deletes a package group. Deleting a package group does not delete packages or package versions associated with the package group. When a package group is deleted, the direct child package groups will become children of the package group's direct parent package group. Therefore, if any of the child groups are inheriting any settings from the parent, those settings could change.
+   */
+  deletePackageGroup(callback?: (err: AWSError, data: CodeArtifact.Types.DeletePackageGroupResult) => void): Request<CodeArtifact.Types.DeletePackageGroupResult, AWSError>;
   /**
    *  Deletes one or more versions of a package. A deleted package version cannot be restored in your repository. If you want to remove a package version from your repository and be able to restore it later, set its status to Archived. Archived packages cannot be downloaded from a repository and don't show up with list package APIs (for example, ListPackageVersions), but you can restore them using UpdatePackageVersionsStatus. 
    */
@@ -109,6 +125,14 @@ declare class CodeArtifact extends Service {
    */
   describePackage(callback?: (err: AWSError, data: CodeArtifact.Types.DescribePackageResult) => void): Request<CodeArtifact.Types.DescribePackageResult, AWSError>;
   /**
+   * Returns a PackageGroupDescription object that contains information about the requested package group.
+   */
+  describePackageGroup(params: CodeArtifact.Types.DescribePackageGroupRequest, callback?: (err: AWSError, data: CodeArtifact.Types.DescribePackageGroupResult) => void): Request<CodeArtifact.Types.DescribePackageGroupResult, AWSError>;
+  /**
+   * Returns a PackageGroupDescription object that contains information about the requested package group.
+   */
+  describePackageGroup(callback?: (err: AWSError, data: CodeArtifact.Types.DescribePackageGroupResult) => void): Request<CodeArtifact.Types.DescribePackageGroupResult, AWSError>;
+  /**
    *  Returns a PackageVersionDescription object that contains information about the requested package version. 
    */
   describePackageVersion(params: CodeArtifact.Types.DescribePackageVersionRequest, callback?: (err: AWSError, data: CodeArtifact.Types.DescribePackageVersionResult) => void): Request<CodeArtifact.Types.DescribePackageVersionResult, AWSError>;
@@ -140,6 +164,14 @@ declare class CodeArtifact extends Service {
    *  Deletes the assets in package versions and sets the package versions' status to Disposed. A disposed package version cannot be restored in your repository because its assets are deleted.   To view all disposed package versions in a repository, use ListPackageVersions and set the status parameter to Disposed.   To view information about a disposed package version, use DescribePackageVersion. 
    */
   disposePackageVersions(callback?: (err: AWSError, data: CodeArtifact.Types.DisposePackageVersionsResult) => void): Request<CodeArtifact.Types.DisposePackageVersionsResult, AWSError>;
+  /**
+   * Returns the most closely associated package group to the specified package. This API does not require that the package exist in any repository in the domain. As such, GetAssociatedPackageGroup can be used to see which package group's origin configuration applies to a package before that package is in a repository. This can be helpful to check if public packages are blocked without ingesting them. For information package group association and matching, see Package group definition syntax and matching behavior in the CodeArtifact User Guide.
+   */
+  getAssociatedPackageGroup(params: CodeArtifact.Types.GetAssociatedPackageGroupRequest, callback?: (err: AWSError, data: CodeArtifact.Types.GetAssociatedPackageGroupResult) => void): Request<CodeArtifact.Types.GetAssociatedPackageGroupResult, AWSError>;
+  /**
+   * Returns the most closely associated package group to the specified package. This API does not require that the package exist in any repository in the domain. As such, GetAssociatedPackageGroup can be used to see which package group's origin configuration applies to a package before that package is in a repository. This can be helpful to check if public packages are blocked without ingesting them. For information package group association and matching, see Package group definition syntax and matching behavior in the CodeArtifact User Guide.
+   */
+  getAssociatedPackageGroup(callback?: (err: AWSError, data: CodeArtifact.Types.GetAssociatedPackageGroupResult) => void): Request<CodeArtifact.Types.GetAssociatedPackageGroupResult, AWSError>;
   /**
    *  Generates a temporary authorization token for accessing repositories in the domain. This API requires the codeartifact:GetAuthorizationToken and sts:GetServiceBearerToken permissions. For more information about authorization tokens, see CodeArtifact authentication and tokens.   CodeArtifact authorization tokens are valid for a period of 12 hours when created with the login command. You can call login periodically to refresh the token. When you create an authorization token with the GetAuthorizationToken API, you can set a custom authorization period, up to a maximum of 12 hours, with the durationSeconds parameter. The authorization period begins after login or GetAuthorizationToken is called. If login or GetAuthorizationToken is called while assuming a role, the token lifetime is independent of the maximum session duration of the role. For example, if you call sts assume-role and specify a session duration of 15 minutes, then generate a CodeArtifact authorization token, the token will be valid for the full authorization period even though this is longer than the 15-minute session duration. See Using IAM Roles for more information on controlling session duration.  
    */
@@ -173,11 +205,11 @@ declare class CodeArtifact extends Service {
    */
   getPackageVersionReadme(callback?: (err: AWSError, data: CodeArtifact.Types.GetPackageVersionReadmeResult) => void): Request<CodeArtifact.Types.GetPackageVersionReadmeResult, AWSError>;
   /**
-   *  Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each package format:     maven     npm     nuget     pypi   
+   *  Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each package format:     generic     maven     npm     nuget     pypi     swift   
    */
   getRepositoryEndpoint(params: CodeArtifact.Types.GetRepositoryEndpointRequest, callback?: (err: AWSError, data: CodeArtifact.Types.GetRepositoryEndpointResult) => void): Request<CodeArtifact.Types.GetRepositoryEndpointResult, AWSError>;
   /**
-   *  Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each package format:     maven     npm     nuget     pypi   
+   *  Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each package format:     generic     maven     npm     nuget     pypi     swift   
    */
   getRepositoryEndpoint(callback?: (err: AWSError, data: CodeArtifact.Types.GetRepositoryEndpointResult) => void): Request<CodeArtifact.Types.GetRepositoryEndpointResult, AWSError>;
   /**
@@ -189,6 +221,22 @@ declare class CodeArtifact extends Service {
    */
   getRepositoryPermissionsPolicy(callback?: (err: AWSError, data: CodeArtifact.Types.GetRepositoryPermissionsPolicyResult) => void): Request<CodeArtifact.Types.GetRepositoryPermissionsPolicyResult, AWSError>;
   /**
+   * Lists the repositories in the added repositories list of the specified restriction type for a package group. For more information about restriction types and added repository lists, see Package group origin controls in the CodeArtifact User Guide. 
+   */
+  listAllowedRepositoriesForGroup(params: CodeArtifact.Types.ListAllowedRepositoriesForGroupRequest, callback?: (err: AWSError, data: CodeArtifact.Types.ListAllowedRepositoriesForGroupResult) => void): Request<CodeArtifact.Types.ListAllowedRepositoriesForGroupResult, AWSError>;
+  /**
+   * Lists the repositories in the added repositories list of the specified restriction type for a package group. For more information about restriction types and added repository lists, see Package group origin controls in the CodeArtifact User Guide. 
+   */
+  listAllowedRepositoriesForGroup(callback?: (err: AWSError, data: CodeArtifact.Types.ListAllowedRepositoriesForGroupResult) => void): Request<CodeArtifact.Types.ListAllowedRepositoriesForGroupResult, AWSError>;
+  /**
+   * Returns a list of packages associated with the requested package group. For information package group association and matching, see Package group definition syntax and matching behavior in the CodeArtifact User Guide.
+   */
+  listAssociatedPackages(params: CodeArtifact.Types.ListAssociatedPackagesRequest, callback?: (err: AWSError, data: CodeArtifact.Types.ListAssociatedPackagesResult) => void): Request<CodeArtifact.Types.ListAssociatedPackagesResult, AWSError>;
+  /**
+   * Returns a list of packages associated with the requested package group. For information package group association and matching, see Package group definition syntax and matching behavior in the CodeArtifact User Guide.
+   */
+  listAssociatedPackages(callback?: (err: AWSError, data: CodeArtifact.Types.ListAssociatedPackagesResult) => void): Request<CodeArtifact.Types.ListAssociatedPackagesResult, AWSError>;
+  /**
    *  Returns a list of DomainSummary objects for all domains owned by the Amazon Web Services account that makes this call. Each returned DomainSummary object contains information about a domain. 
    */
   listDomains(params: CodeArtifact.Types.ListDomainsRequest, callback?: (err: AWSError, data: CodeArtifact.Types.ListDomainsResult) => void): Request<CodeArtifact.Types.ListDomainsResult, AWSError>;
@@ -196,6 +244,14 @@ declare class CodeArtifact extends Service {
    *  Returns a list of DomainSummary objects for all domains owned by the Amazon Web Services account that makes this call. Each returned DomainSummary object contains information about a domain. 
    */
   listDomains(callback?: (err: AWSError, data: CodeArtifact.Types.ListDomainsResult) => void): Request<CodeArtifact.Types.ListDomainsResult, AWSError>;
+  /**
+   * Returns a list of package groups in the requested domain.
+   */
+  listPackageGroups(params: CodeArtifact.Types.ListPackageGroupsRequest, callback?: (err: AWSError, data: CodeArtifact.Types.ListPackageGroupsResult) => void): Request<CodeArtifact.Types.ListPackageGroupsResult, AWSError>;
+  /**
+   * Returns a list of package groups in the requested domain.
+   */
+  listPackageGroups(callback?: (err: AWSError, data: CodeArtifact.Types.ListPackageGroupsResult) => void): Request<CodeArtifact.Types.ListPackageGroupsResult, AWSError>;
   /**
    *  Returns a list of AssetSummary objects for assets in a package version. 
    */
@@ -244,6 +300,14 @@ declare class CodeArtifact extends Service {
    *  Returns a list of RepositorySummary objects. Each RepositorySummary contains information about a repository in the specified domain and that matches the input parameters. 
    */
   listRepositoriesInDomain(callback?: (err: AWSError, data: CodeArtifact.Types.ListRepositoriesInDomainResult) => void): Request<CodeArtifact.Types.ListRepositoriesInDomainResult, AWSError>;
+  /**
+   * Returns a list of direct children of the specified package group. For information package group hierarchy, see Package group definition syntax and matching behavior in the CodeArtifact User Guide.
+   */
+  listSubPackageGroups(params: CodeArtifact.Types.ListSubPackageGroupsRequest, callback?: (err: AWSError, data: CodeArtifact.Types.ListSubPackageGroupsResult) => void): Request<CodeArtifact.Types.ListSubPackageGroupsResult, AWSError>;
+  /**
+   * Returns a list of direct children of the specified package group. For information package group hierarchy, see Package group definition syntax and matching behavior in the CodeArtifact User Guide.
+   */
+  listSubPackageGroups(callback?: (err: AWSError, data: CodeArtifact.Types.ListSubPackageGroupsResult) => void): Request<CodeArtifact.Types.ListSubPackageGroupsResult, AWSError>;
   /**
    * Gets information about Amazon Web Services tags for a specified Amazon Resource Name (ARN) in CodeArtifact.
    */
@@ -300,6 +364,22 @@ declare class CodeArtifact extends Service {
    * Removes tags from a resource in CodeArtifact.
    */
   untagResource(callback?: (err: AWSError, data: CodeArtifact.Types.UntagResourceResult) => void): Request<CodeArtifact.Types.UntagResourceResult, AWSError>;
+  /**
+   * Updates a package group. This API cannot be used to update a package group's origin configuration or pattern. To update a package group's origin configuration, use UpdatePackageGroupOriginConfiguration.
+   */
+  updatePackageGroup(params: CodeArtifact.Types.UpdatePackageGroupRequest, callback?: (err: AWSError, data: CodeArtifact.Types.UpdatePackageGroupResult) => void): Request<CodeArtifact.Types.UpdatePackageGroupResult, AWSError>;
+  /**
+   * Updates a package group. This API cannot be used to update a package group's origin configuration or pattern. To update a package group's origin configuration, use UpdatePackageGroupOriginConfiguration.
+   */
+  updatePackageGroup(callback?: (err: AWSError, data: CodeArtifact.Types.UpdatePackageGroupResult) => void): Request<CodeArtifact.Types.UpdatePackageGroupResult, AWSError>;
+  /**
+   * Updates the package origin configuration for a package group. The package origin configuration determines how new versions of a package can be added to a repository. You can allow or block direct publishing of new package versions, or ingestion and retaining of new package versions from an external connection or upstream source. For more information about package group origin controls and configuration, see Package group origin controls in the CodeArtifact User Guide.
+   */
+  updatePackageGroupOriginConfiguration(params: CodeArtifact.Types.UpdatePackageGroupOriginConfigurationRequest, callback?: (err: AWSError, data: CodeArtifact.Types.UpdatePackageGroupOriginConfigurationResult) => void): Request<CodeArtifact.Types.UpdatePackageGroupOriginConfigurationResult, AWSError>;
+  /**
+   * Updates the package origin configuration for a package group. The package origin configuration determines how new versions of a package can be added to a repository. You can allow or block direct publishing of new package versions, or ingestion and retaining of new package versions from an external connection or upstream source. For more information about package group origin controls and configuration, see Package group origin controls in the CodeArtifact User Guide.
+   */
+  updatePackageGroupOriginConfiguration(callback?: (err: AWSError, data: CodeArtifact.Types.UpdatePackageGroupOriginConfigurationResult) => void): Request<CodeArtifact.Types.UpdatePackageGroupOriginConfigurationResult, AWSError>;
   /**
    *  Updates the status of one or more versions of a package. Using UpdatePackageVersionsStatus, you can update the status of package versions to Archived, Published, or Unlisted. To set the status of a package version to Disposed, use DisposePackageVersions. 
    */
@@ -364,6 +444,25 @@ declare namespace CodeArtifact {
      */
     repository?: RepositoryDescription;
   }
+  export interface AssociatedPackage {
+    /**
+     * A format that specifies the type of the associated package.
+     */
+    format?: PackageFormat;
+    /**
+     * The namespace of the associated package. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm or Swift package version is its scope.    The namespace of a generic package is its namespace.    Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
+     */
+    namespace?: PackageNamespace;
+    /**
+     *  The name of the associated package. 
+     */
+    package?: PackageName;
+    /**
+     * Describes the strength of the association between the package and package group. A strong match can be thought of as an exact match, and a weak match can be thought of as a variation match, for example, the package name matches a variation of the package group pattern. For more information about package group pattern matching, including strong and weak matches, see Package group definition syntax and matching behavior in the CodeArtifact User Guide.
+     */
+    associationType?: PackageGroupAssociationType;
+  }
+  export type AssociatedPackageList = AssociatedPackage[];
   export type AuthorizationTokenDurationSeconds = number;
   export type BooleanOptional = boolean;
   export interface CopyPackageVersionsRequest {
@@ -388,7 +487,7 @@ declare namespace CodeArtifact {
      */
     format: PackageFormat;
     /**
-     * The namespace of the package versions to be copied. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId. The namespace is required when copying Maven package versions.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
+     * The namespace of the package versions to be copied. The package component that specifies its namespace depends on its type. For example:  The namespace is required when copying package versions of the following formats:   Maven   Swift   generic       The namespace of a Maven package version is its groupId.     The namespace of an npm or Swift package version is its scope.    The namespace of a generic package is its namespace.    Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -442,6 +541,38 @@ declare namespace CodeArtifact {
      */
     domain?: DomainDescription;
   }
+  export interface CreatePackageGroupRequest {
+    /**
+     *  The name of the domain in which you want to create a package group. 
+     */
+    domain: DomainName;
+    /**
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
+     */
+    domainOwner?: AccountId;
+    /**
+     * The pattern of the package group to create. The pattern is also the identifier of the package group. 
+     */
+    packageGroup: PackageGroupPattern;
+    /**
+     *  The contact information for the created package group. 
+     */
+    contactInfo?: PackageGroupContactInfo;
+    /**
+     *  A description of the package group. 
+     */
+    description?: Description;
+    /**
+     * One or more tag key-value pairs for the package group.
+     */
+    tags?: TagList;
+  }
+  export interface CreatePackageGroupResult {
+    /**
+     *  Information about the created package group after processing the request. 
+     */
+    packageGroup?: PackageGroupDescription;
+  }
   export interface CreateRepositoryRequest {
     /**
      *  The name of the domain that contains the created repository. 
@@ -452,7 +583,7 @@ declare namespace CodeArtifact {
      */
     domainOwner?: AccountId;
     /**
-     *  The name of the repository to create. 
+     * The name of the repository to create. 
      */
     repository: RepositoryName;
     /**
@@ -510,6 +641,26 @@ declare namespace CodeArtifact {
      */
     domain?: DomainDescription;
   }
+  export interface DeletePackageGroupRequest {
+    /**
+     *  The domain that contains the package group to be deleted. 
+     */
+    domain: DomainName;
+    /**
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
+     */
+    domainOwner?: AccountId;
+    /**
+     * The pattern of the package group to be deleted.
+     */
+    packageGroup: String;
+  }
+  export interface DeletePackageGroupResult {
+    /**
+     *  Information about the deleted package group after processing the request. 
+     */
+    packageGroup?: PackageGroupDescription;
+  }
   export interface DeletePackageRequest {
     /**
      * The name of the domain that contains the package to delete.
@@ -528,7 +679,7 @@ declare namespace CodeArtifact {
      */
     format: PackageFormat;
     /**
-     * The namespace of the package to delete. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package is its groupId. The namespace is required when deleting Maven package versions.     The namespace of an npm package is its scope.    Python and NuGet packages do not contain corresponding components, packages of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
+     * The namespace of the package to delete. The package component that specifies its namespace depends on its type. For example:  The namespace is required when deleting packages of the following formats:   Maven   Swift   generic       The namespace of a Maven package version is its groupId.     The namespace of an npm or Swift package version is its scope.    The namespace of a generic package is its namespace.    Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -557,7 +708,7 @@ declare namespace CodeArtifact {
      */
     format: PackageFormat;
     /**
-     * The namespace of the package versions to be deleted. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId. The namespace is required when deleting Maven package versions.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
+     * The namespace of the package versions to be deleted. The package component that specifies its namespace depends on its type. For example:  The namespace is required when deleting package versions of the following formats:   Maven   Swift   generic       The namespace of a Maven package version is its groupId.     The namespace of an npm or Swift package version is its scope.    The namespace of a generic package is its namespace.    Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -640,6 +791,26 @@ declare namespace CodeArtifact {
   export interface DescribeDomainResult {
     domain?: DomainDescription;
   }
+  export interface DescribePackageGroupRequest {
+    /**
+     *  The name of the domain that contains the package group. 
+     */
+    domain: DomainName;
+    /**
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
+     */
+    domainOwner?: AccountId;
+    /**
+     * The pattern of the requested package group.
+     */
+    packageGroup: PackageGroupPattern;
+  }
+  export interface DescribePackageGroupResult {
+    /**
+     * A PackageGroupDescription object that contains information about the requested package group.
+     */
+    packageGroup?: PackageGroupDescription;
+  }
   export interface DescribePackageRequest {
     /**
      * The name of the domain that contains the repository that contains the package.
@@ -658,7 +829,7 @@ declare namespace CodeArtifact {
      */
     format: PackageFormat;
     /**
-     * The namespace of the requested package. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package is its groupId. The namespace is required when requesting Maven packages.     The namespace of an npm package is its scope.     Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
+     * The namespace of the requested package. The package component that specifies its namespace depends on its type. For example:  The namespace is required when requesting packages of the following formats:   Maven   Swift   generic       The namespace of a Maven package version is its groupId.     The namespace of an npm or Swift package version is its scope.    The namespace of a generic package is its namespace.    Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -690,7 +861,7 @@ declare namespace CodeArtifact {
      */
     format: PackageFormat;
     /**
-     * The namespace of the requested package version. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
+     * The namespace of the requested package version. The package component that specifies its namespace depends on its type. For example:  The namespace is required when requesting package versions of the following formats:   Maven   Swift   generic       The namespace of a Maven package version is its groupId.     The namespace of an npm or Swift package version is its scope.    The namespace of a generic package is its namespace.    Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -771,7 +942,7 @@ declare namespace CodeArtifact {
      */
     format: PackageFormat;
     /**
-     * The namespace of the package versions to be disposed. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
+     * The namespace of the package versions to be disposed. The package component that specifies its namespace depends on its type. For example:  The namespace is required when disposing package versions of the following formats:   Maven   Swift   generic       The namespace of a Maven package version is its groupId.     The namespace of an npm or Swift package version is its scope.    The namespace of a generic package is its namespace.    Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -881,6 +1052,38 @@ declare namespace CodeArtifact {
   export type ErrorMessage = string;
   export type ExternalConnectionName = string;
   export type ExternalConnectionStatus = "Available"|string;
+  export interface GetAssociatedPackageGroupRequest {
+    /**
+     *  The name of the domain that contains the package from which to get the associated package group. 
+     */
+    domain: DomainName;
+    /**
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
+     */
+    domainOwner?: AccountId;
+    /**
+     *  The format of the package from which to get the associated package group. 
+     */
+    format: PackageFormat;
+    /**
+     * The namespace of the package from which to get the associated package group. The package component that specifies its namespace depends on its type. For example:  The namespace is required when getting associated package groups from packages of the following formats:   Maven   Swift   generic       The namespace of a Maven package version is its groupId.     The namespace of an npm or Swift package version is its scope.    The namespace of a generic package is its namespace.    Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
+     */
+    namespace?: PackageNamespace;
+    /**
+     *  The package from which to get the associated package group. 
+     */
+    package: PackageName;
+  }
+  export interface GetAssociatedPackageGroupResult {
+    /**
+     * The package group that is associated with the requested package.
+     */
+    packageGroup?: PackageGroupDescription;
+    /**
+     * Describes the strength of the association between the package and package group. A strong match is also known as an exact match, and a weak match is known as a relative match.
+     */
+    associationType?: PackageGroupAssociationType;
+  }
   export interface GetAuthorizationTokenRequest {
     /**
      *  The name of the domain that is in scope for the generated authorization token. 
@@ -939,7 +1142,7 @@ declare namespace CodeArtifact {
      */
     format: PackageFormat;
     /**
-     * The namespace of the package version with the requested asset file. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
+     * The namespace of the package version with the requested asset file. The package component that specifies its namespace depends on its type. For example:  The namespace is required when requesting assets from package versions of the following formats:   Maven   Swift   generic       The namespace of a Maven package version is its groupId.     The namespace of an npm or Swift package version is its scope.    The namespace of a generic package is its namespace.    Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -995,7 +1198,7 @@ declare namespace CodeArtifact {
      */
     format: PackageFormat;
     /**
-     * The namespace of the package version with the requested readme file. The package version component that specifies its namespace depends on its type. For example:    The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
+     * The namespace of the package version with the requested readme file. The package component that specifies its namespace depends on its type. For example:  The namespace is required when requesting the readme from package versions of the following formats:   Maven   Swift   generic       The namespace of a Maven package version is its groupId.     The namespace of an npm or Swift package version is its scope.    The namespace of a generic package is its namespace.    Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1013,7 +1216,7 @@ declare namespace CodeArtifact {
      */
     format?: PackageFormat;
     /**
-     * The namespace of the package version with the requested readme file. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
+     * The namespace of the package version with the requested readme file. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm or Swift package version is its scope.    The namespace of a generic package is its namespace.    Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1091,6 +1294,79 @@ declare namespace CodeArtifact {
     url?: String;
   }
   export type LicenseInfoList = LicenseInfo[];
+  export type ListAllowedRepositoriesForGroupMaxResults = number;
+  export interface ListAllowedRepositoriesForGroupRequest {
+    /**
+     *  The name of the domain that contains the package group from which to list allowed repositories. 
+     */
+    domain: DomainName;
+    /**
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
+     */
+    domainOwner?: AccountId;
+    /**
+     * The pattern of the package group from which to list allowed repositories.
+     */
+    packageGroup: PackageGroupPattern;
+    /**
+     * The origin configuration restriction type of which to list allowed repositories.
+     */
+    originRestrictionType: PackageGroupOriginRestrictionType;
+    /**
+     *  The maximum number of results to return per page. 
+     */
+    maxResults?: ListAllowedRepositoriesForGroupMaxResults;
+    /**
+     *  The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. 
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListAllowedRepositoriesForGroupResult {
+    /**
+     * The list of allowed repositories for the package group and origin configuration restriction type.
+     */
+    allowedRepositories?: RepositoryNameList;
+    /**
+     *  The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. 
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListAssociatedPackagesRequest {
+    /**
+     *  The name of the domain that contains the package group from which to list associated packages. 
+     */
+    domain: DomainName;
+    /**
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
+     */
+    domainOwner?: AccountId;
+    /**
+     *  The pattern of the package group from which to list associated packages. 
+     */
+    packageGroup: PackageGroupPattern;
+    /**
+     *  The maximum number of results to return per page. 
+     */
+    maxResults?: ListPackagesMaxResults;
+    /**
+     *  The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. 
+     */
+    nextToken?: PaginationToken;
+    /**
+     *  When this flag is included, ListAssociatedPackages will return a list of packages that would be associated with a package group, even if it does not exist. 
+     */
+    preview?: BooleanOptional;
+  }
+  export interface ListAssociatedPackagesResult {
+    /**
+     *  The list of packages associated with the requested package group. 
+     */
+    packages?: AssociatedPackageList;
+    /**
+     *  The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. 
+     */
+    nextToken?: PaginationToken;
+  }
   export type ListDomainsMaxResults = number;
   export interface ListDomainsRequest {
     /**
@@ -1107,6 +1383,39 @@ declare namespace CodeArtifact {
      *  The returned list of DomainSummary objects. 
      */
     domains?: DomainSummaryList;
+    /**
+     *  The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. 
+     */
+    nextToken?: PaginationToken;
+  }
+  export type ListPackageGroupsMaxResults = number;
+  export interface ListPackageGroupsRequest {
+    /**
+     *  The domain for which you want to list package groups. 
+     */
+    domain: DomainName;
+    /**
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
+     */
+    domainOwner?: AccountId;
+    /**
+     *  The maximum number of results to return per page. 
+     */
+    maxResults?: ListPackageGroupsMaxResults;
+    /**
+     *  The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. 
+     */
+    nextToken?: PaginationToken;
+    /**
+     *  A prefix for which to search package groups. When included, ListPackageGroups will return only package groups with patterns that match the prefix. 
+     */
+    prefix?: PackageGroupPatternPrefix;
+  }
+  export interface ListPackageGroupsResult {
+    /**
+     *  The list of package groups in the requested domain. 
+     */
+    packageGroups?: PackageGroupSummaryList;
     /**
      *  The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. 
      */
@@ -1131,7 +1440,7 @@ declare namespace CodeArtifact {
      */
     format: PackageFormat;
     /**
-     * The namespace of the package version that contains the requested package version assets. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
+     * The namespace of the package version that contains the requested package version assets. The package component that specifies its namespace depends on its type. For example:  The namespace is required requesting assets from package versions of the following formats:   Maven   Swift   generic       The namespace of a Maven package version is its groupId.     The namespace of an npm or Swift package version is its scope.    The namespace of a generic package is its namespace.    Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1157,7 +1466,7 @@ declare namespace CodeArtifact {
      */
     format?: PackageFormat;
     /**
-     * The namespace of the package version that contains the requested package version assets. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
+     * The namespace of the package version that contains the requested package version assets. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm or Swift package version is its scope.    The namespace of a generic package is its namespace.    Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1199,7 +1508,7 @@ declare namespace CodeArtifact {
      */
     format: PackageFormat;
     /**
-     * The namespace of the package version with the requested dependencies. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
+     * The namespace of the package version with the requested dependencies. The package component that specifies its namespace depends on its type. For example:  The namespace is required when listing dependencies from package versions of the following formats:   Maven   Swift   generic       The namespace of a Maven package version is its groupId.     The namespace of an npm or Swift package version is its scope.    The namespace of a generic package is its namespace.    Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1221,7 +1530,7 @@ declare namespace CodeArtifact {
      */
     format?: PackageFormat;
     /**
-     * The namespace of the package version that contains the returned dependencies. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
+     * The namespace of the package version that contains the returned dependencies. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm or Swift package version is its scope.    The namespace of a generic package is its namespace.    Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1264,7 +1573,7 @@ declare namespace CodeArtifact {
      */
     format: PackageFormat;
     /**
-     * The namespace of the package that contains the requested package versions. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
+     * The namespace of the package that contains the requested package versions. The package component that specifies its namespace depends on its type. For example:  The namespace is required when deleting package versions of the following formats:   Maven   Swift   generic       The namespace of a Maven package version is its groupId.     The namespace of an npm or Swift package version is its scope.    The namespace of a generic package is its namespace.    Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1302,7 +1611,7 @@ declare namespace CodeArtifact {
      */
     format?: PackageFormat;
     /**
-     * The namespace of the package that contains the requested package versions. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.   
+     * The namespace of the package that contains the requested package versions. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm or Swift package version is its scope.    The namespace of a generic package is its namespace.    Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1337,7 +1646,7 @@ declare namespace CodeArtifact {
      */
     format?: PackageFormat;
     /**
-     * The namespace prefix used to filter requested packages. Only packages with a namespace that starts with the provided string value are returned. Note that although this option is called --namespace and not --namespace-prefix, it has prefix-matching behavior. Each package format uses namespace as follows:    The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
+     * The namespace prefix used to filter requested packages. Only packages with a namespace that starts with the provided string value are returned. Note that although this option is called --namespace and not --namespace-prefix, it has prefix-matching behavior. Each package format uses namespace as follows:    The namespace of a Maven package version is its groupId.     The namespace of an npm or Swift package version is its scope.    The namespace of a generic package is its namespace.    Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1433,6 +1742,38 @@ declare namespace CodeArtifact {
      */
     nextToken?: PaginationToken;
   }
+  export interface ListSubPackageGroupsRequest {
+    /**
+     *  The name of the domain which contains the package group from which to list sub package groups. 
+     */
+    domain: DomainName;
+    /**
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
+     */
+    domainOwner?: AccountId;
+    /**
+     *  The pattern of the package group from which to list sub package groups. 
+     */
+    packageGroup: PackageGroupPattern;
+    /**
+     *  The maximum number of results to return per page. 
+     */
+    maxResults?: ListPackageGroupsMaxResults;
+    /**
+     *  The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. 
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListSubPackageGroupsResult {
+    /**
+     *  A list of sub package groups for the requested package group. 
+     */
+    packageGroups?: PackageGroupSummaryList;
+    /**
+     *  If there are additional results, this is the token for the next set of results. 
+     */
+    nextToken?: PaginationToken;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource to get tags for.
@@ -1447,9 +1788,10 @@ declare namespace CodeArtifact {
   }
   export type Long = number;
   export type LongOptional = number;
+  export type OriginRestrictions = {[key: string]: PackageGroupOriginRestrictionMode};
   export interface PackageDependency {
     /**
-     * The namespace of the package that this package depends on. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.   
+     * The namespace of the package that this package depends on. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm or Swift package version is its scope.    The namespace of a generic package is its namespace.    Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1472,7 +1814,7 @@ declare namespace CodeArtifact {
      */
     format?: PackageFormat;
     /**
-     * The namespace of the package. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
+     * The namespace of the package. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm or Swift package version is its scope.    The namespace of a generic package is its namespace.    Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1485,6 +1827,138 @@ declare namespace CodeArtifact {
     originConfiguration?: PackageOriginConfiguration;
   }
   export type PackageFormat = "npm"|"pypi"|"maven"|"nuget"|"generic"|"swift"|string;
+  export interface PackageGroupAllowedRepository {
+    /**
+     *  The name of the allowed repository. 
+     */
+    repositoryName?: RepositoryName;
+    /**
+     * The origin configuration restriction type of the allowed repository.
+     */
+    originRestrictionType?: PackageGroupOriginRestrictionType;
+  }
+  export type PackageGroupAllowedRepositoryList = PackageGroupAllowedRepository[];
+  export type PackageGroupAllowedRepositoryUpdate = {[key: string]: RepositoryNameList};
+  export type PackageGroupAllowedRepositoryUpdateType = "ADDED"|"REMOVED"|string;
+  export type PackageGroupAllowedRepositoryUpdates = {[key: string]: PackageGroupAllowedRepositoryUpdate};
+  export type PackageGroupAssociationType = "STRONG"|"WEAK"|string;
+  export type PackageGroupContactInfo = string;
+  export interface PackageGroupDescription {
+    /**
+     *  The ARN of the package group. 
+     */
+    arn?: Arn;
+    /**
+     *  The pattern of the package group. The pattern determines which packages are associated with the package group. 
+     */
+    pattern?: PackageGroupPattern;
+    /**
+     *  The name of the domain that contains the package group. 
+     */
+    domainName?: DomainName;
+    /**
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
+     */
+    domainOwner?: AccountId;
+    /**
+     * A timestamp that represents the date and time the package group was created.
+     */
+    createdTime?: Timestamp;
+    /**
+     *  The contact information of the package group. 
+     */
+    contactInfo?: PackageGroupContactInfo;
+    /**
+     *  The description of the package group. 
+     */
+    description?: Description;
+    /**
+     * The package group origin configuration that determines how package versions can enter repositories.
+     */
+    originConfiguration?: PackageGroupOriginConfiguration;
+    /**
+     *  The direct parent package group of the package group. 
+     */
+    parent?: PackageGroupReference;
+  }
+  export interface PackageGroupOriginConfiguration {
+    /**
+     * The origin configuration settings that determine how package versions can enter repositories.
+     */
+    restrictions?: PackageGroupOriginRestrictions;
+  }
+  export interface PackageGroupOriginRestriction {
+    /**
+     * The package group origin restriction setting. If the value of mode is ALLOW, ALLOW_SPECIFIC_REPOSITORIES, or BLOCK, then the value of effectiveMode is the same. Otherwise, when the value is INHERIT, then the value of effectiveMode is the value of mode of the first parent group which does not have a value of INHERIT.
+     */
+    mode?: PackageGroupOriginRestrictionMode;
+    /**
+     * The effective package group origin restriction setting. If the value of mode is ALLOW, ALLOW_SPECIFIC_REPOSITORIES, or BLOCK, then the value of effectiveMode is the same. Otherwise, when the value of mode is INHERIT, then the value of effectiveMode is the value of mode of the first parent group which does not have a value of INHERIT.
+     */
+    effectiveMode?: PackageGroupOriginRestrictionMode;
+    /**
+     * The parent package group that the package group origin restrictions are inherited from.
+     */
+    inheritedFrom?: PackageGroupReference;
+    /**
+     * The number of repositories in the allowed repository list.
+     */
+    repositoriesCount?: LongOptional;
+  }
+  export type PackageGroupOriginRestrictionMode = "ALLOW"|"ALLOW_SPECIFIC_REPOSITORIES"|"BLOCK"|"INHERIT"|string;
+  export type PackageGroupOriginRestrictionType = "EXTERNAL_UPSTREAM"|"INTERNAL_UPSTREAM"|"PUBLISH"|string;
+  export type PackageGroupOriginRestrictions = {[key: string]: PackageGroupOriginRestriction};
+  export type PackageGroupPattern = string;
+  export type PackageGroupPatternPrefix = string;
+  export interface PackageGroupReference {
+    /**
+     *  The ARN of the package group. 
+     */
+    arn?: Arn;
+    /**
+     *  The pattern of the package group. The pattern determines which packages are associated with the package group, and is also the identifier of the package group. 
+     */
+    pattern?: PackageGroupPattern;
+  }
+  export interface PackageGroupSummary {
+    /**
+     *  The ARN of the package group. 
+     */
+    arn?: Arn;
+    /**
+     *  The pattern of the package group. The pattern determines which packages are associated with the package group. 
+     */
+    pattern?: PackageGroupPattern;
+    /**
+     *  The domain that contains the package group. 
+     */
+    domainName?: DomainName;
+    /**
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
+     */
+    domainOwner?: AccountId;
+    /**
+     * A timestamp that represents the date and time the repository was created.
+     */
+    createdTime?: Timestamp;
+    /**
+     *  The contact information of the package group. 
+     */
+    contactInfo?: PackageGroupContactInfo;
+    /**
+     *  The description of the package group. 
+     */
+    description?: Description;
+    /**
+     * Details about the package origin configuration of a package group.
+     */
+    originConfiguration?: PackageGroupOriginConfiguration;
+    /**
+     *  The direct parent package group of the package group. 
+     */
+    parent?: PackageGroupReference;
+  }
+  export type PackageGroupSummaryList = PackageGroupSummary[];
   export type PackageName = string;
   export type PackageNamespace = string;
   export interface PackageOriginConfiguration {
@@ -1509,7 +1983,7 @@ declare namespace CodeArtifact {
      */
     format?: PackageFormat;
     /**
-     * The namespace of the package. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
+     * The namespace of the package. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm or Swift package version is its scope.    The namespace of a generic package is its namespace.    Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1529,7 +2003,7 @@ declare namespace CodeArtifact {
      */
     format?: PackageFormat;
     /**
-     * The namespace of the package version. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
+     * The namespace of the package version. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm or Swift package version is its scope.    The namespace of a generic package is its namespace.    Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1745,7 +2219,7 @@ declare namespace CodeArtifact {
      */
     format: PackageFormat;
     /**
-     * The namespace of the package to be updated. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
+     * The namespace of the package to be updated. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm or Swift package version is its scope.    The namespace of a generic package is its namespace.    Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1845,6 +2319,7 @@ declare namespace CodeArtifact {
   }
   export type RepositoryExternalConnectionInfoList = RepositoryExternalConnectionInfo[];
   export type RepositoryName = string;
+  export type RepositoryNameList = RepositoryName[];
   export interface RepositorySummary {
     /**
      *  The name of the repository. 
@@ -1943,6 +2418,70 @@ declare namespace CodeArtifact {
   }
   export interface UntagResourceResult {
   }
+  export interface UpdatePackageGroupOriginConfigurationRequest {
+    /**
+     *  The name of the domain which contains the package group for which to update the origin configuration. 
+     */
+    domain: DomainName;
+    /**
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
+     */
+    domainOwner?: AccountId;
+    /**
+     *  The pattern of the package group for which to update the origin configuration. 
+     */
+    packageGroup: PackageGroupPattern;
+    /**
+     *  The origin configuration settings that determine how package versions can enter repositories. 
+     */
+    restrictions?: OriginRestrictions;
+    /**
+     * The repository name and restrictions to add to the allowed repository list of the specified package group.
+     */
+    addAllowedRepositories?: PackageGroupAllowedRepositoryList;
+    /**
+     * The repository name and restrictions to remove from the allowed repository list of the specified package group.
+     */
+    removeAllowedRepositories?: PackageGroupAllowedRepositoryList;
+  }
+  export interface UpdatePackageGroupOriginConfigurationResult {
+    /**
+     *  The package group and information about it after processing the request. 
+     */
+    packageGroup?: PackageGroupDescription;
+    /**
+     * Information about the updated allowed repositories after processing the request.
+     */
+    allowedRepositoryUpdates?: PackageGroupAllowedRepositoryUpdates;
+  }
+  export interface UpdatePackageGroupRequest {
+    /**
+     *  The name of the domain which contains the package group to be updated. 
+     */
+    domain: DomainName;
+    /**
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
+     */
+    domainOwner?: AccountId;
+    /**
+     *  The pattern of the package group to be updated. 
+     */
+    packageGroup: PackageGroupPattern;
+    /**
+     *  Contact information which you want to update the requested package group with. 
+     */
+    contactInfo?: PackageGroupContactInfo;
+    /**
+     *  The description you want to update the requested package group with. 
+     */
+    description?: Description;
+  }
+  export interface UpdatePackageGroupResult {
+    /**
+     *  The package group and information about it after the request has been processed. 
+     */
+    packageGroup?: PackageGroupDescription;
+  }
   export interface UpdatePackageVersionsStatusRequest {
     /**
      *  The name of the domain that contains the repository that contains the package versions with a status to be updated. 
@@ -1961,7 +2500,7 @@ declare namespace CodeArtifact {
      */
     format: PackageFormat;
     /**
-     * The namespace of the package version to be updated. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
+     * The namespace of the package version to be updated. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm or Swift package version is its scope.    The namespace of a generic package is its namespace.    Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
