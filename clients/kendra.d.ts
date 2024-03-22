@@ -164,11 +164,11 @@ declare class Kendra extends Service {
    */
   deleteFaq(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an existing Amazon Kendra index. An exception is not thrown if the index is already being deleted. While the index is being deleted, the Status field returned by a call to the DescribeIndex API is set to DELETING.
+   * Deletes an Amazon Kendra index. An exception is not thrown if the index is already being deleted. While the index is being deleted, the Status field returned by a call to the DescribeIndex API is set to DELETING.
    */
   deleteIndex(params: Kendra.Types.DeleteIndexRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an existing Amazon Kendra index. An exception is not thrown if the index is already being deleted. While the index is being deleted, the Status field returned by a call to the DescribeIndex API is set to DELETING.
+   * Deletes an Amazon Kendra index. An exception is not thrown if the index is already being deleted. While the index is being deleted, the Status field returned by a call to the DescribeIndex API is set to DELETING.
    */
   deleteIndex(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -188,11 +188,11 @@ declare class Kendra extends Service {
    */
   deleteQuerySuggestionsBlockList(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an existing Amazon Kendra thesaurus. 
+   * Deletes an Amazon Kendra thesaurus. 
    */
   deleteThesaurus(params: Kendra.Types.DeleteThesaurusRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an existing Amazon Kendra thesaurus. 
+   * Deletes an Amazon Kendra thesaurus. 
    */
   deleteThesaurus(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -236,11 +236,11 @@ declare class Kendra extends Service {
    */
   describeFeaturedResultsSet(callback?: (err: AWSError, data: Kendra.Types.DescribeFeaturedResultsSetResponse) => void): Request<Kendra.Types.DescribeFeaturedResultsSetResponse, AWSError>;
   /**
-   * Gets information about an existing Amazon Kendra index.
+   * Gets information about an Amazon Kendra index.
    */
   describeIndex(params: Kendra.Types.DescribeIndexRequest, callback?: (err: AWSError, data: Kendra.Types.DescribeIndexResponse) => void): Request<Kendra.Types.DescribeIndexResponse, AWSError>;
   /**
-   * Gets information about an existing Amazon Kendra index.
+   * Gets information about an Amazon Kendra index.
    */
   describeIndex(callback?: (err: AWSError, data: Kendra.Types.DescribeIndexResponse) => void): Request<Kendra.Types.DescribeIndexResponse, AWSError>;
   /**
@@ -268,11 +268,11 @@ declare class Kendra extends Service {
    */
   describeQuerySuggestionsConfig(callback?: (err: AWSError, data: Kendra.Types.DescribeQuerySuggestionsConfigResponse) => void): Request<Kendra.Types.DescribeQuerySuggestionsConfigResponse, AWSError>;
   /**
-   * Gets information about an existing Amazon Kendra thesaurus.
+   * Gets information about an Amazon Kendra thesaurus.
    */
   describeThesaurus(params: Kendra.Types.DescribeThesaurusRequest, callback?: (err: AWSError, data: Kendra.Types.DescribeThesaurusResponse) => void): Request<Kendra.Types.DescribeThesaurusResponse, AWSError>;
   /**
-   * Gets information about an existing Amazon Kendra thesaurus.
+   * Gets information about an Amazon Kendra thesaurus.
    */
   describeThesaurus(callback?: (err: AWSError, data: Kendra.Types.DescribeThesaurusResponse) => void): Request<Kendra.Types.DescribeThesaurusResponse, AWSError>;
   /**
@@ -484,11 +484,11 @@ declare class Kendra extends Service {
    */
   updateAccessControlConfiguration(callback?: (err: AWSError, data: Kendra.Types.UpdateAccessControlConfigurationResponse) => void): Request<Kendra.Types.UpdateAccessControlConfigurationResponse, AWSError>;
   /**
-   * Updates an existing Amazon Kendra data source connector.
+   * Updates an Amazon Kendra data source connector.
    */
   updateDataSource(params: Kendra.Types.UpdateDataSourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates an existing Amazon Kendra data source connector.
+   * Updates an Amazon Kendra data source connector.
    */
   updateDataSource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -508,11 +508,11 @@ declare class Kendra extends Service {
    */
   updateFeaturedResultsSet(callback?: (err: AWSError, data: Kendra.Types.UpdateFeaturedResultsSetResponse) => void): Request<Kendra.Types.UpdateFeaturedResultsSetResponse, AWSError>;
   /**
-   * Updates an existing Amazon Kendra index.
+   * Updates an Amazon Kendra index.
    */
   updateIndex(params: Kendra.Types.UpdateIndexRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates an existing Amazon Kendra index.
+   * Updates an Amazon Kendra index.
    */
   updateIndex(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1526,7 +1526,7 @@ declare namespace Kendra {
      */
     UserContextPolicy?: UserContextPolicy;
     /**
-     * Gets users and groups from IAM Identity Center identity source. To configure this, see UserGroupResolutionConfiguration.
+     * Gets users and groups from IAM Identity Center identity source. To configure this, see UserGroupResolutionConfiguration. This is useful for user context filtering, where search results are filtered based on the user or their group access to documents.
      */
     UserGroupResolutionConfiguration?: UserGroupResolutionConfiguration;
   }
@@ -1628,7 +1628,7 @@ declare namespace Kendra {
   }
   export interface DataSourceConfiguration {
     /**
-     * Provides the configuration information to connect to an Amazon S3 bucket as your data source.
+     * Provides the configuration information to connect to an Amazon S3 bucket as your data source.  Amazon Kendra now supports an upgraded Amazon S3 connector. You must now use the TemplateConfiguration object instead of the S3DataSourceConfiguration object to configure your connector. Connectors configured using the older console and API architecture will continue to function as configured. However, you won't be able to edit or update them. If you want to edit or update your connector configuration, you must create a new connector. We recommended migrating your connector workflow to the upgraded version. Support for connectors configured using the older architecture is scheduled to end by June 2024. 
      */
     S3Configuration?: S3DataSourceConfiguration;
     /**
@@ -1665,11 +1665,11 @@ declare namespace Kendra {
      */
     WorkDocsConfiguration?: WorkDocsConfiguration;
     /**
-     * Provides the configuration information to connect to Amazon FSx as your data source.
+     * Provides the configuration information to connect to Amazon FSx as your data source.  Amazon Kendra now supports an upgraded Amazon FSx Windows connector. You must now use the TemplateConfiguration object instead of the FsxConfiguration object to configure your connector. Connectors configured using the older console and API architecture will continue to function as configured. However, you won't be able to edit or update them. If you want to edit or update your connector configuration, you must create a new connector. We recommended migrating your connector workflow to the upgraded version. Support for connectors configured using the older architecture is scheduled to end by June 2024. 
      */
     FsxConfiguration?: FsxConfiguration;
     /**
-     * Provides the configuration information to connect to Slack as your data source.
+     * Provides the configuration information to connect to Slack as your data source.  Amazon Kendra now supports an upgraded Slack connector. You must now use the TemplateConfiguration object instead of the SlackConfiguration object to configure your connector. Connectors configured using the older console and API architecture will continue to function as configured. However, you won't be able to edit or update them. If you want to edit or update your connector configuration, you must create a new connector. We recommended migrating your connector workflow to the upgraded version. Support for connectors configured using the older architecture is scheduled to end by June 2024. 
      */
     SlackConfiguration?: SlackConfiguration;
     /**
@@ -1685,11 +1685,11 @@ declare namespace Kendra {
      */
     JiraConfiguration?: JiraConfiguration;
     /**
-     * Provides the configuration information to connect to GitHub as your data source.
+     * Provides the configuration information to connect to GitHub as your data source.  Amazon Kendra now supports an upgraded GitHub connector. You must now use the TemplateConfiguration object instead of the GitHubConfiguration object to configure your connector. Connectors configured using the older console and API architecture will continue to function as configured. However, you won’t be able to edit or update them. If you want to edit or update your connector configuration, you must create a new connector. We recommended migrating your connector workflow to the upgraded version. Support for connectors configured using the older architecture is scheduled to end by June 2024. 
      */
     GitHubConfiguration?: GitHubConfiguration;
     /**
-     * Provides the configuration information to connect to Alfresco as your data source. Support for AlfrescoConfiguration ended May 2023. We recommend migrating to or using the Alfresco data source template schema / TemplateConfiguration API.
+     * Provides the configuration information to connect to Alfresco as your data source.  Support for AlfrescoConfiguration ended May 2023. We recommend migrating to or using the Alfresco data source template schema / TemplateConfiguration API. 
      */
     AlfrescoConfiguration?: AlfrescoConfiguration;
     /**
@@ -2242,11 +2242,11 @@ declare namespace Kendra {
      */
     Edition?: IndexEdition;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role that gives Amazon Kendra permission to write to your Amazon Cloudwatch logs.
+     * The Amazon Resource Name (ARN) of the IAM role that gives Amazon Kendra permission to write to your Amazon CloudWatch logs.
      */
     RoleArn?: RoleArn;
     /**
-     * The identifier of the KMScustomer master key (CMK) that is used to encrypt your data. Amazon Kendra doesn't support asymmetric CMKs.
+     * The identifier of the KMS customer master key (CMK) that is used to encrypt your data. Amazon Kendra doesn't support asymmetric CMKs.
      */
     ServerSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
     /**
@@ -2262,7 +2262,7 @@ declare namespace Kendra {
      */
     CreatedAt?: Timestamp;
     /**
-     * The Unix when the index was last updated.
+     * The Unix timestamp when the index was last updated.
      */
     UpdatedAt?: Timestamp;
     /**
@@ -2290,7 +2290,7 @@ declare namespace Kendra {
      */
     UserContextPolicy?: UserContextPolicy;
     /**
-     * Whether you have enabled the configuration for fetching access levels of groups and users from an IAM Identity Center identity source.
+     * Whether you have enabled IAM Identity Center identity source for your users and groups. This is useful for user context filtering, where search results are filtered based on the user or their group access to documents.
      */
     UserGroupResolutionConfiguration?: UserGroupResolutionConfiguration;
   }
@@ -3958,7 +3958,7 @@ declare namespace Kendra {
      */
     HostUrl: Url;
     /**
-     * The name of the organization of the GitHub Enterprise Server (in-premise) account you want to connect to. You can find your organization name by logging into GitHub desktop and selecting Your organizations under your profile picture dropdown.
+     * The name of the organization of the GitHub Enterprise Server (on-premises) account you want to connect to. You can find your organization name by logging into GitHub desktop and selecting Your organizations under your profile picture dropdown.
      */
     OrganizationName: OrganizationName;
     /**
@@ -4107,7 +4107,7 @@ declare namespace Kendra {
      */
     IndexId: IndexId;
     /**
-     * The input query text for the search. Amazon Kendra truncates queries at 30 token words, which excludes punctuation and stop words. Truncation still applies if you use Boolean or more advanced, complex queries. 
+     * The input query text for the search. Amazon Kendra truncates queries at 30 token words, which excludes punctuation and stop words. Truncation still applies if you use Boolean or more advanced, complex queries. For example, Timeoff AND October AND Category:HR is counted as 3 tokens: timeoff, october, hr. For more information, see Searching with advanced query syntax in the Amazon Kendra Developer Guide. 
      */
     QueryText?: QueryText;
     /**
@@ -4196,7 +4196,7 @@ declare namespace Kendra {
   export type QueryResultFormat = "TABLE"|"TEXT"|string;
   export interface QueryResultItem {
     /**
-     * The identifier for the query result.
+     * The unique identifier for the query result item id (Id) and the query result item document id (DocumentId) combined. The value of this field changes with every request, even when you have the same documents.
      */
     Id?: ResultId;
     /**
@@ -4337,7 +4337,7 @@ declare namespace Kendra {
   export type ReadAccessType = "ALLOW"|"DENY"|string;
   export interface Relevance {
     /**
-     * Indicates that this field determines how "fresh" a document is. For example, if document 1 was created on November 5, and document 2 was created on October 31, document 1 is "fresher" than document 2. You can only set the Freshness field on one DATE type field. Only applies to DATE fields.
+     * Indicates that this field determines how "fresh" a document is. For example, if document 1 was created on November 5, and document 2 was created on October 31, document 1 is "fresher" than document 2. Only applies to DATE fields.
      */
     Freshness?: DocumentMetadataBoolean;
     /**
@@ -4349,11 +4349,11 @@ declare namespace Kendra {
      */
     Duration?: Duration;
     /**
-     * Determines how values should be interpreted. When the RankOrder field is ASCENDING, higher numbers are better. For example, a document with a rating score of 10 is higher ranking than a document with a rating score of 1. When the RankOrder field is DESCENDING, lower numbers are better. For example, in a task tracking application, a priority 1 task is more important than a priority 5 task. Only applies to LONG and DOUBLE fields.
+     * Determines how values should be interpreted. When the RankOrder field is ASCENDING, higher numbers are better. For example, a document with a rating score of 10 is higher ranking than a document with a rating score of 1. When the RankOrder field is DESCENDING, lower numbers are better. For example, in a task tracking application, a priority 1 task is more important than a priority 5 task. Only applies to LONG fields.
      */
     RankOrder?: Order;
     /**
-     * A list of values that should be given a different boost when they appear in the result list. For example, if you are boosting a field called "department," query terms that match the department field are boosted in the result. However, you can add entries from the department field to boost documents with those values higher.  For example, you can add entries to the map with names of departments. If you add "HR",5 and "Legal",3 those departments are given special attention when they appear in the metadata of a document. When those terms appear they are given the specified importance instead of the regular importance for the boost.
+     * A list of values that should be given a different boost when they appear in the result list. For example, if you are boosting a field called "department", query terms that match the department field are boosted in the result. However, you can add entries from the department field to boost documents with those values higher.  For example, you can add entries to the map with names of departments. If you add "HR",5 and "Legal",3 those departments are given special attention when they appear in the metadata of a document. When those terms appear they are given the specified importance instead of the regular importance for the boost.
      */
     ValueImportanceMap?: ValueImportanceMap;
   }
@@ -4378,7 +4378,7 @@ declare namespace Kendra {
      */
     IndexId: IndexId;
     /**
-     * The input query text to retrieve relevant passages for the search. Amazon Kendra truncates queries at 30 token words, which excludes punctuation and stop words. Truncation still applies if you use Boolean or more advanced, complex queries.
+     * The input query text to retrieve relevant passages for the search. Amazon Kendra truncates queries at 30 token words, which excludes punctuation and stop words. Truncation still applies if you use Boolean or more advanced, complex queries. For example, Timeoff AND October AND Category:HR is counted as 3 tokens: timeoff, october, hr. For more information, see Searching with advanced query syntax in the Amazon Kendra Developer Guide. 
      */
     QueryText: QueryText;
     /**
@@ -4459,11 +4459,11 @@ declare namespace Kendra {
      */
     InclusionPrefixes?: DataSourceInclusionsExclusionsStrings;
     /**
-     * A list of glob patterns for documents that should be indexed. If a document that matches an inclusion pattern also matches an exclusion pattern, the document is not indexed. Some examples are:    *.txt will include all text files in a directory (files with the extension .txt).    ***.txt will include all text files in a directory and its subdirectories.    *tax* will include all files in a directory that contain 'tax' in the file name, such as 'tax', 'taxes', 'income_tax'.  
+     * A list of glob patterns (patterns that can expand a wildcard pattern into a list of path names that match the given pattern) for certain file names and file types to include in your index. If a document matches both an inclusion and exclusion prefix or pattern, the exclusion prefix takes precendence and the document is not indexed. Examples of glob patterns include:    /myapp/config/*—All files inside config directory.    ***.png—All .png files in all directories.    ***.{png, ico, md}—All .png, .ico or .md files in all directories.    /myapp/src/***.ts—All .ts files inside src directory (and all its subdirectories).    **!(*.module).ts—All .ts files but not .module.ts    *.png , *.jpg—All PNG and JPEG image files in a directory (files with the extensions .png and .jpg).    *internal*—All files in a directory that contain 'internal' in the file name, such as 'internal', 'internal_only', 'company_internal'.    ***internal*—All internal-related files in a directory and its subdirectories.   For more examples, see Use of Exclude and Include Filters in the Amazon Web Services CLI Command Reference.
      */
     InclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     /**
-     * A list of glob patterns for documents that should not be indexed. If a document that matches an inclusion prefix or inclusion pattern also matches an exclusion pattern, the document is not indexed. Some examples are:    *.png , *.jpg will exclude all PNG and JPEG image files in a directory (files with the extensions .png and .jpg).    *internal* will exclude all files in a directory that contain 'internal' in the file name, such as 'internal', 'internal_only', 'company_internal'.    ***internal* will exclude all internal-related files in a directory and its subdirectories.  
+     * A list of glob patterns (patterns that can expand a wildcard pattern into a list of path names that match the given pattern) for certain file names and file types to exclude from your index. If a document matches both an inclusion and exclusion prefix or pattern, the exclusion prefix takes precendence and the document is not indexed. Examples of glob patterns include:    /myapp/config/*—All files inside config directory.    ***.png—All .png files in all directories.    ***.{png, ico, md}—All .png, .ico or .md files in all directories.    /myapp/src/***.ts—All .ts files inside src directory (and all its subdirectories).    **!(*.module).ts—All .ts files but not .module.ts    *.png , *.jpg—All PNG and JPEG image files in a directory (files with the extensions .png and .jpg).    *internal*—All files in a directory that contain 'internal' in the file name, such as 'internal', 'internal_only', 'company_internal'.    ***internal*—All internal-related files in a directory and its subdirectories.   For more examples, see Use of Exclude and Include Filters in the Amazon Web Services CLI Command Reference.
      */
     ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     DocumentsMetadataConfiguration?: DocumentsMetadataConfiguration;
@@ -5357,7 +5357,7 @@ declare namespace Kendra {
      */
     Id: IndexId;
     /**
-     * The name of the index you want to update.
+     * A new name for the index.
      */
     Name?: IndexName;
     /**
@@ -5385,7 +5385,7 @@ declare namespace Kendra {
      */
     UserContextPolicy?: UserContextPolicy;
     /**
-     * Enables fetching access levels of groups and users from an IAM Identity Center identity source. To configure this, see UserGroupResolutionConfiguration.
+     * Gets users and groups from IAM Identity Center identity source. To configure this, see UserGroupResolutionConfiguration. This is useful for user context filtering, where search results are filtered based on the user or their group access to documents.
      */
     UserGroupResolutionConfiguration?: UserGroupResolutionConfiguration;
   }

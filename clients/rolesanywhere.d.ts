@@ -132,11 +132,11 @@ declare class RolesAnywhere extends Service {
    */
   getTrustAnchor(callback?: (err: AWSError, data: RolesAnywhere.Types.TrustAnchorDetailResponse) => void): Request<RolesAnywhere.Types.TrustAnchorDetailResponse, AWSError>;
   /**
-   * Imports the certificate revocation list (CRL). A CRL is a list of certificates that have been revoked by the issuing certificate Authority (CA). IAM Roles Anywhere validates against the CRL before issuing credentials.   Required permissions:  rolesanywhere:ImportCrl. 
+   * Imports the certificate revocation list (CRL). A CRL is a list of certificates that have been revoked by the issuing certificate Authority (CA).In order to be properly imported, a CRL must be in PEM format. IAM Roles Anywhere validates against the CRL before issuing credentials.   Required permissions:  rolesanywhere:ImportCrl. 
    */
   importCrl(params: RolesAnywhere.Types.ImportCrlRequest, callback?: (err: AWSError, data: RolesAnywhere.Types.CrlDetailResponse) => void): Request<RolesAnywhere.Types.CrlDetailResponse, AWSError>;
   /**
-   * Imports the certificate revocation list (CRL). A CRL is a list of certificates that have been revoked by the issuing certificate Authority (CA). IAM Roles Anywhere validates against the CRL before issuing credentials.   Required permissions:  rolesanywhere:ImportCrl. 
+   * Imports the certificate revocation list (CRL). A CRL is a list of certificates that have been revoked by the issuing certificate Authority (CA).In order to be properly imported, a CRL must be in PEM format. IAM Roles Anywhere validates against the CRL before issuing credentials.   Required permissions:  rolesanywhere:ImportCrl. 
    */
   importCrl(callback?: (err: AWSError, data: RolesAnywhere.Types.CrlDetailResponse) => void): Request<RolesAnywhere.Types.CrlDetailResponse, AWSError>;
   /**
@@ -242,7 +242,7 @@ declare namespace RolesAnywhere {
   export type Boolean = boolean;
   export interface CreateProfileRequest {
     /**
-     *  The number of seconds the vended session credentials are valid for. 
+     *  Used to determine how long sessions vended using this profile are valid for. See the Expiration section of the CreateSession API documentation page for more details. 
      */
     durationSeconds?: CreateProfileRequestDurationSecondsInteger;
     /**
@@ -541,7 +541,7 @@ declare namespace RolesAnywhere {
      */
     createdBy?: String;
     /**
-     *  The number of seconds the vended session credentials are valid for. 
+     *  Used to determine how long sessions vended using this profile are valid for. See the Expiration section of the CreateSession API documentation page for more details. 
      */
     durationSeconds?: Integer;
     /**
@@ -837,7 +837,7 @@ declare namespace RolesAnywhere {
   export type UpdateCrlRequestCrlDataBlob = Buffer|Uint8Array|Blob|string;
   export interface UpdateProfileRequest {
     /**
-     *  The number of seconds the vended session credentials are valid for. 
+     *  Used to determine how long sessions vended using this profile are valid for. See the Expiration section of the CreateSession API documentation page for more details. 
      */
     durationSeconds?: UpdateProfileRequestDurationSecondsInteger;
     /**

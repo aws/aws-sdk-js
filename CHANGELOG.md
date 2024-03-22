@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1583.0-->
+<!--LATEST=2.1584.0-->
 <!--ENTRYINSERT-->
+
+## 2.1584.0
+* feature: Kendra: Documentation update, March 2024. Corrects some docs for Amazon Kendra.
+* feature: Pricing: Add ResourceNotFoundException to ListPriceLists and GetPriceListFileUrl APIs
+* feature: RolesAnywhere: This release relaxes constraints on the durationSeconds request parameter for the *Profile APIs that support it. This parameter can now take on values that go up to 43200.
+* feature: SecurityHub: Added new resource detail object to ASFF, including resource for LastKnownExploitAt
 
 ## 2.1583.0
 * feature: CodeArtifact: This release adds Package groups to CodeArtifact so you can more conveniently configure package origin controls for multiple packages.
