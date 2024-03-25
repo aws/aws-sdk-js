@@ -3533,6 +3533,14 @@ declare class EC2 extends Service {
    */
   getImageBlockPublicAccessState(callback?: (err: AWSError, data: EC2.Types.GetImageBlockPublicAccessStateResult) => void): Request<EC2.Types.GetImageBlockPublicAccessStateResult, AWSError>;
   /**
+   * Gets the default instance metadata service (IMDS) settings that are set at the account level in the specified Amazon Web Services&#x2028; Region. For more information, see Order of precedence for instance metadata options in the Amazon EC2 User Guide.
+   */
+  getInstanceMetadataDefaults(params: EC2.Types.GetInstanceMetadataDefaultsRequest, callback?: (err: AWSError, data: EC2.Types.GetInstanceMetadataDefaultsResult) => void): Request<EC2.Types.GetInstanceMetadataDefaultsResult, AWSError>;
+  /**
+   * Gets the default instance metadata service (IMDS) settings that are set at the account level in the specified Amazon Web Services&#x2028; Region. For more information, see Order of precedence for instance metadata options in the Amazon EC2 User Guide.
+   */
+  getInstanceMetadataDefaults(callback?: (err: AWSError, data: EC2.Types.GetInstanceMetadataDefaultsResult) => void): Request<EC2.Types.GetInstanceMetadataDefaultsResult, AWSError>;
+  /**
    * Returns a list of instance types with the specified instance attributes. You can use the response to preview the instance types without launching instances. Note that the response does not consider capacity. When you specify multiple parameters, you get instance types that satisfy all of the specified parameters. If you specify multiple values for a parameter, you get instance types that satisfy any of the specified values. For more information, see Preview instance types with specified attributes, Attribute-based instance type selection for EC2 Fleet, Attribute-based instance type selection for Spot Fleet, and Spot placement score in the Amazon EC2 User Guide, and Creating an Auto Scaling group using attribute-based instance type selection in the Amazon EC2 Auto Scaling User Guide.
    */
   getInstanceTypesFromInstanceRequirements(params: EC2.Types.GetInstanceTypesFromInstanceRequirementsRequest, callback?: (err: AWSError, data: EC2.Types.GetInstanceTypesFromInstanceRequirementsResult) => void): Request<EC2.Types.GetInstanceTypesFromInstanceRequirementsResult, AWSError>;
@@ -4020,6 +4028,14 @@ declare class EC2 extends Service {
    * Modifies the recovery behavior of your instance to disable simplified automatic recovery or set the recovery behavior to default. The default configuration will not enable simplified automatic recovery for an unsupported instance type. For more information, see Simplified automatic recovery.
    */
   modifyInstanceMaintenanceOptions(callback?: (err: AWSError, data: EC2.Types.ModifyInstanceMaintenanceOptionsResult) => void): Request<EC2.Types.ModifyInstanceMaintenanceOptionsResult, AWSError>;
+  /**
+   * Modifies the default instance metadata service (IMDS) settings at the account level in the specified Amazon Web Services&#x2028; Region.  To remove a parameter's account-level default setting, specify no-preference. At instance launch, the value will come from the AMI, or from the launch parameter if specified. For more information, see Order of precedence for instance metadata options in the Amazon EC2 User Guide. 
+   */
+  modifyInstanceMetadataDefaults(params: EC2.Types.ModifyInstanceMetadataDefaultsRequest, callback?: (err: AWSError, data: EC2.Types.ModifyInstanceMetadataDefaultsResult) => void): Request<EC2.Types.ModifyInstanceMetadataDefaultsResult, AWSError>;
+  /**
+   * Modifies the default instance metadata service (IMDS) settings at the account level in the specified Amazon Web Services&#x2028; Region.  To remove a parameter's account-level default setting, specify no-preference. At instance launch, the value will come from the AMI, or from the launch parameter if specified. For more information, see Order of precedence for instance metadata options in the Amazon EC2 User Guide. 
+   */
+  modifyInstanceMetadataDefaults(callback?: (err: AWSError, data: EC2.Types.ModifyInstanceMetadataDefaultsResult) => void): Request<EC2.Types.ModifyInstanceMetadataDefaultsResult, AWSError>;
   /**
    * Modify the instance metadata parameters on a running or stopped instance. When you modify the parameters on a stopped instance, they are applied when the instance is started. When you modify the parameters on a running instance, the API responds with a state of “pending”. After the parameter modifications are successfully applied to the instance, the state of the modifications changes from “pending” to “applied” in subsequent describe-instances API calls. For more information, see Instance metadata and user data in the Amazon EC2 User Guide.
    */
@@ -7221,6 +7237,7 @@ declare namespace EC2 {
   export type BootModeTypeList = BootModeType[];
   export type BootModeValues = "legacy-bios"|"uefi"|"uefi-preferred"|string;
   export type BoxedDouble = number;
+  export type BoxedInteger = number;
   export type BundleId = string;
   export type BundleIdStringList = BundleId[];
   export interface BundleInstanceRequest {
@@ -12061,6 +12078,8 @@ declare namespace EC2 {
   export type DedicatedHostFlag = boolean;
   export type DedicatedHostId = string;
   export type DedicatedHostIdList = DedicatedHostId[];
+  export type DefaultInstanceMetadataEndpointState = "disabled"|"enabled"|"no-preference"|string;
+  export type DefaultInstanceMetadataTagsState = "disabled"|"enabled"|"no-preference"|string;
   export type DefaultNetworkCardIndex = number;
   export type DefaultRouteTableAssociationValue = "enable"|"disable"|string;
   export type DefaultRouteTablePropagationValue = "enable"|"disable"|string;
@@ -21627,6 +21646,18 @@ declare namespace EC2 {
      */
     ImageBlockPublicAccessState?: String;
   }
+  export interface GetInstanceMetadataDefaultsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface GetInstanceMetadataDefaultsResult {
+    /**
+     * The account-level default IMDS settings.
+     */
+    AccountLevel?: InstanceMetadataDefaultsResponse;
+  }
   export interface GetInstanceTypesFromInstanceRequirementsRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -23131,7 +23162,7 @@ declare namespace EC2 {
      */
     Hypervisor?: HypervisorType;
     /**
-     * The Amazon Web Services account alias (for example, amazon, self) or the Amazon Web Services account ID of the AMI owner.
+     * The owner alias (amazon | aws-marketplace).
      */
     ImageOwnerAlias?: String;
     /**
@@ -24478,14 +24509,32 @@ declare namespace EC2 {
     SpotOptions?: SpotMarketOptions;
   }
   export type InstanceMatchCriteria = "open"|"targeted"|string;
-  export type InstanceMetadataEndpointState = "disabled"|"enabled"|string;
-  export interface InstanceMetadataOptionsRequest {
+  export interface InstanceMetadataDefaultsResponse {
     /**
-     * Indicates whether IMDSv2 is required.    optional - IMDSv2 is optional. You can choose whether to send a session token in your instance metadata retrieval requests. If you retrieve IAM role credentials without a session token, you receive the IMDSv1 role credentials. If you retrieve IAM role credentials using a valid session token, you receive the IMDSv2 role credentials.    required - IMDSv2 is required. You must send a session token in your instance metadata retrieval requests. With this option, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.   Default: If the value of ImdsSupport for the Amazon Machine Image (AMI) for your instance is v2.0, the default is required.
+     * Indicates whether IMDSv2 is required.    optional – IMDSv2 is optional, which means that you can use either IMDSv2 or IMDSv1.    required – IMDSv2 is required, which means that IMDSv1 is disabled, and you must use IMDSv2.  
      */
     HttpTokens?: HttpTokensState;
     /**
-     * The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Default: 1 Possible values: Integers from 1 to 64
+     * The maximum number of hops that the metadata token can travel.
+     */
+    HttpPutResponseHopLimit?: BoxedInteger;
+    /**
+     * Indicates whether the IMDS endpoint for an instance is enabled or disabled. When disabled, the instance metadata can't be accessed.
+     */
+    HttpEndpoint?: InstanceMetadataEndpointState;
+    /**
+     * Indicates whether access to instance tags from the instance metadata is enabled or disabled. For more information, see Work with instance tags using the instance metadata in the Amazon EC2 User Guide.
+     */
+    InstanceMetadataTags?: InstanceMetadataTagsState;
+  }
+  export type InstanceMetadataEndpointState = "disabled"|"enabled"|string;
+  export interface InstanceMetadataOptionsRequest {
+    /**
+     * Indicates whether IMDSv2 is required.    optional - IMDSv2 is optional, which means that you can use either IMDSv2 or IMDSv1.    required - IMDSv2 is required, which means that IMDSv1 is disabled, and you must use IMDSv2.   Default:   If the value of ImdsSupport for the Amazon Machine Image (AMI) for your instance is v2.0 and the account level default is set to no-preference, the default is required.   If the value of ImdsSupport for the Amazon Machine Image (AMI) for your instance is v2.0, but the account level default is set to V1 or V2, the default is optional.   The default value can also be affected by other combinations of parameters. For more information, see Order of precedence for instance metadata options in the Amazon EC2 User Guide.
+     */
+    HttpTokens?: HttpTokensState;
+    /**
+     * The maximum number of hops that the metadata token can travel. Possible values: Integers from 1 to 64
      */
     HttpPutResponseHopLimit?: Integer;
     /**
@@ -24507,11 +24556,11 @@ declare namespace EC2 {
      */
     State?: InstanceMetadataOptionsState;
     /**
-     * Indicates whether IMDSv2 is required.    optional - IMDSv2 is optional. You can choose whether to send a session token in your instance metadata retrieval requests. If you retrieve IAM role credentials without a session token, you receive the IMDSv1 role credentials. If you retrieve IAM role credentials using a valid session token, you receive the IMDSv2 role credentials.    required - IMDSv2 is required. You must send a session token in your instance metadata retrieval requests. With this option, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.  
+     * Indicates whether IMDSv2 is required.    optional - IMDSv2 is optional, which means that you can use either IMDSv2 or IMDSv1.    required - IMDSv2 is required, which means that IMDSv1 is disabled, and you must use IMDSv2.  
      */
     HttpTokens?: HttpTokensState;
     /**
-     * The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Default: 1  Possible values: Integers from 1 to 64 
+     * The maximum number of hops that the metadata token can travel. Possible values: Integers from 1 to 64 
      */
     HttpPutResponseHopLimit?: Integer;
     /**
@@ -27922,6 +27971,7 @@ declare namespace EC2 {
     Max?: Integer;
   }
   export type MemorySize = number;
+  export type MetadataDefaultHttpTokensState = "optional"|"required"|"no-preference"|string;
   export interface MetricPoint {
     /**
      * The start date for the metric point. The starting date for the metric point. The starting time must be formatted as yyyy-mm-ddThh:mm:ss. For example, 2022-06-10T12:00:00.000Z.
@@ -28529,13 +28579,41 @@ declare namespace EC2 {
      */
     AutoRecovery?: InstanceAutoRecoveryState;
   }
+  export interface ModifyInstanceMetadataDefaultsRequest {
+    /**
+     * Indicates whether IMDSv2 is required.    optional – IMDSv2 is optional, which means that you can use either IMDSv2 or IMDSv1.    required – IMDSv2 is required, which means that IMDSv1 is disabled, and you must use IMDSv2.  
+     */
+    HttpTokens?: MetadataDefaultHttpTokensState;
+    /**
+     * The maximum number of hops that the metadata token can travel. Minimum: 1  Maximum: 64 
+     */
+    HttpPutResponseHopLimit?: BoxedInteger;
+    /**
+     * Enables or disables the IMDS endpoint on an instance. When disabled, the instance metadata can't be accessed.
+     */
+    HttpEndpoint?: DefaultInstanceMetadataEndpointState;
+    /**
+     * Enables or disables access to an instance's tags from the instance metadata. For more information, see Work with instance tags using the instance metadata in the Amazon EC2 User Guide.
+     */
+    InstanceMetadataTags?: DefaultInstanceMetadataTagsState;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ModifyInstanceMetadataDefaultsResult {
+    /**
+     * If the request succeeds, the response returns true. If the request fails, no response is returned, and instead an error message is returned.
+     */
+    Return?: Boolean;
+  }
   export interface ModifyInstanceMetadataOptionsRequest {
     /**
      * The ID of the instance.
      */
     InstanceId: InstanceId;
     /**
-     * Indicates whether IMDSv2 is required.    optional - IMDSv2 is optional. You can choose whether to send a session token in your instance metadata retrieval requests. If you retrieve IAM role credentials without a session token, you receive the IMDSv1 role credentials. If you retrieve IAM role credentials using a valid session token, you receive the IMDSv2 role credentials.    required - IMDSv2 is required. You must send a session token in your instance metadata retrieval requests. With this option, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.   Default: If the value of ImdsSupport for the Amazon Machine Image (AMI) for your instance is v2.0, the default is required.
+     * Indicates whether IMDSv2 is required.    optional - IMDSv2 is optional. You can choose whether to send a session token in your instance metadata retrieval requests. If you retrieve IAM role credentials without a session token, you receive the IMDSv1 role credentials. If you retrieve IAM role credentials using a valid session token, you receive the IMDSv2 role credentials.    required - IMDSv2 is required. You must send a session token in your instance metadata retrieval requests. With this option, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.   Default:   If the value of ImdsSupport for the Amazon Machine Image (AMI) for your instance is v2.0 and the account level default is set to no-preference, the default is required.   If the value of ImdsSupport for the Amazon Machine Image (AMI) for your instance is v2.0, but the account level default is set to V1 or V2, the default is optional.   The default value can also be affected by other combinations of parameters. For more information, see Order of precedence for instance metadata options in the Amazon EC2 User Guide.
      */
     HttpTokens?: HttpTokensState;
     /**
@@ -35026,7 +35104,7 @@ declare namespace EC2 {
      */
     Filters: FilterList;
     /**
-     * The maximum number of routes to return.
+     * The maximum number of routes to return. If a value is not provided, the default is 1000.
      */
     MaxResults?: TransitGatewayMaxResults;
     /**

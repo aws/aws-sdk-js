@@ -416,7 +416,7 @@ declare namespace CodeBuild {
   export type ArtifactNamespace = "NONE"|"BUILD_ID"|string;
   export type ArtifactPackaging = "NONE"|"ZIP"|string;
   export type ArtifactsType = "CODEPIPELINE"|"S3"|"NO_ARTIFACTS"|string;
-  export type AuthType = "OAUTH"|"BASIC_AUTH"|"PERSONAL_ACCESS_TOKEN"|string;
+  export type AuthType = "OAUTH"|"BASIC_AUTH"|"PERSONAL_ACCESS_TOKEN"|"CODECONNECTIONS"|string;
   export interface BatchDeleteBuildsInput {
     /**
      * The IDs of the builds to delete.
@@ -1493,7 +1493,7 @@ declare namespace CodeBuild {
   export type FleetSortByType = "NAME"|"CREATED_TIME"|"LAST_MODIFIED_TIME"|string;
   export interface FleetStatus {
     /**
-     * The status code of the compute fleet. Valid values include:    CREATING: The compute fleet is being created.    UPDATING: The compute fleet is being updated.    ROTATING: The compute fleet is being rotated.    DELETING: The compute fleet is being deleted.    CREATE_FAILED: The compute fleet has failed to create.    UPDATE_ROLLBACK_FAILED: The compute fleet has failed to update and could not rollback to previous state.    ACTIVE: The compute fleet has succeeded and is active.  
+     * The status code of the compute fleet. Valid values include:    CREATING: The compute fleet is being created.    UPDATING: The compute fleet is being updated.    ROTATING: The compute fleet is being rotated.    PENDING_DELETION: The compute fleet is pending deletion.    DELETING: The compute fleet is being deleted.    CREATE_FAILED: The compute fleet has failed to create.    UPDATE_ROLLBACK_FAILED: The compute fleet has failed to update and could not rollback to previous state.    ACTIVE: The compute fleet has succeeded and is active.  
      */
     statusCode?: FleetStatusCode;
     /**
@@ -2251,11 +2251,11 @@ declare namespace CodeBuild {
   export type ProjectSortByType = "NAME"|"CREATED_TIME"|"LAST_MODIFIED_TIME"|string;
   export interface ProjectSource {
     /**
-     * The type of repository that contains the source code to be built. Valid values include:    BITBUCKET: The source code is in a Bitbucket repository.    CODECOMMIT: The source code is in an CodeCommit repository.    CODEPIPELINE: The source code settings are specified in the source action of a pipeline in CodePipeline.    GITHUB: The source code is in a GitHub or GitHub Enterprise Cloud repository.    GITHUB_ENTERPRISE: The source code is in a GitHub Enterprise Server repository.    NO_SOURCE: The project does not have input source code.    S3: The source code is in an Amazon S3 bucket.  
+     * The type of repository that contains the source code to be built. Valid values include:    BITBUCKET: The source code is in a Bitbucket repository.    CODECOMMIT: The source code is in an CodeCommit repository.    CODEPIPELINE: The source code settings are specified in the source action of a pipeline in CodePipeline.    GITHUB: The source code is in a GitHub repository.    GITHUB_ENTERPRISE: The source code is in a GitHub Enterprise Server repository.    GITLAB: The source code is in a GitLab repository.    GITLAB_SELF_MANAGED: The source code is in a self-managed GitLab repository.    NO_SOURCE: The project does not have input source code.    S3: The source code is in an Amazon S3 bucket.  
      */
     type: SourceType;
     /**
-     * Information about the location of the source code to be built. Valid values include:   For source code settings that are specified in the source action of a pipeline in CodePipeline, location should not be specified. If it is specified, CodePipeline ignores it. This is because CodePipeline uses the settings in a pipeline's source action instead of this value.   For source code in an CodeCommit repository, the HTTPS clone URL to the repository that contains the source code and the buildspec file (for example, https://git-codecommit.&lt;region-ID&gt;.amazonaws.com/v1/repos/&lt;repo-name&gt;).   For source code in an Amazon S3 input bucket, one of the following.    The path to the ZIP file that contains the source code (for example, &lt;bucket-name&gt;/&lt;path&gt;/&lt;object-name&gt;.zip).    The path to the folder that contains the source code (for example, &lt;bucket-name&gt;/&lt;path-to-source-code&gt;/&lt;folder&gt;/).      For source code in a GitHub repository, the HTTPS clone URL to the repository that contains the source and the buildspec file. You must connect your Amazon Web Services account to your GitHub account. Use the CodeBuild console to start creating a build project. When you use the console to connect (or reconnect) with GitHub, on the GitHub Authorize application page, for Organization access, choose Request access next to each repository you want to allow CodeBuild to have access to, and then choose Authorize application. (After you have connected to your GitHub account, you do not need to finish creating the build project. You can leave the CodeBuild console.) To instruct CodeBuild to use this connection, in the source object, set the auth object's type value to OAUTH.   For source code in a Bitbucket repository, the HTTPS clone URL to the repository that contains the source and the buildspec file. You must connect your Amazon Web Services account to your Bitbucket account. Use the CodeBuild console to start creating a build project. When you use the console to connect (or reconnect) with Bitbucket, on the Bitbucket Confirm access to your account page, choose Grant access. (After you have connected to your Bitbucket account, you do not need to finish creating the build project. You can leave the CodeBuild console.) To instruct CodeBuild to use this connection, in the source object, set the auth object's type value to OAUTH.    If you specify CODEPIPELINE for the Type property, don't specify this property. For all of the other types, you must specify Location. 
+     * Information about the location of the source code to be built. Valid values include:   For source code settings that are specified in the source action of a pipeline in CodePipeline, location should not be specified. If it is specified, CodePipeline ignores it. This is because CodePipeline uses the settings in a pipeline's source action instead of this value.   For source code in an CodeCommit repository, the HTTPS clone URL to the repository that contains the source code and the buildspec file (for example, https://git-codecommit.&lt;region-ID&gt;.amazonaws.com/v1/repos/&lt;repo-name&gt;).   For source code in an Amazon S3 input bucket, one of the following.    The path to the ZIP file that contains the source code (for example, &lt;bucket-name&gt;/&lt;path&gt;/&lt;object-name&gt;.zip).    The path to the folder that contains the source code (for example, &lt;bucket-name&gt;/&lt;path-to-source-code&gt;/&lt;folder&gt;/).      For source code in a GitHub repository, the HTTPS clone URL to the repository that contains the source and the buildspec file. You must connect your Amazon Web Services account to your GitHub account. Use the CodeBuild console to start creating a build project. When you use the console to connect (or reconnect) with GitHub, on the GitHub Authorize application page, for Organization access, choose Request access next to each repository you want to allow CodeBuild to have access to, and then choose Authorize application. (After you have connected to your GitHub account, you do not need to finish creating the build project. You can leave the CodeBuild console.) To instruct CodeBuild to use this connection, in the source object, set the auth object's type value to OAUTH.   For source code in an GitLab or self-managed GitLab repository, the HTTPS clone URL to the repository that contains the source and the buildspec file. You must connect your Amazon Web Services account to your GitLab account. Use the CodeBuild console to start creating a build project. When you use the console to connect (or reconnect) with GitLab, on the Connections Authorize application page, choose Authorize. Then on the CodeStar Connections Create GitLab connection page, choose Connect to GitLab. (After you have connected to your GitLab account, you do not need to finish creating the build project. You can leave the CodeBuild console.) To instruct CodeBuild to override the default connection and use this connection instead, set the auth object's type value to CODECONNECTIONS in the source object.   For source code in a Bitbucket repository, the HTTPS clone URL to the repository that contains the source and the buildspec file. You must connect your Amazon Web Services account to your Bitbucket account. Use the CodeBuild console to start creating a build project. When you use the console to connect (or reconnect) with Bitbucket, on the Bitbucket Confirm access to your account page, choose Grant access. (After you have connected to your Bitbucket account, you do not need to finish creating the build project. You can leave the CodeBuild console.) To instruct CodeBuild to use this connection, in the source object, set the auth object's type value to OAUTH.    If you specify CODEPIPELINE for the Type property, don't specify this property. For all of the other types, you must specify Location. 
      */
     location?: String;
     /**
@@ -2275,7 +2275,7 @@ declare namespace CodeBuild {
      */
     auth?: SourceAuth;
     /**
-     *  Set to true to report the status of a build's start and finish to your source provider. This option is valid only when your source provider is GitHub, GitHub Enterprise, or Bitbucket. If this is set and you use a different source provider, an invalidInputException is thrown.  To be able to report the build status to the source provider, the user associated with the source provider must have write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see Source provider access in the CodeBuild User Guide. The status of a build triggered by a webhook is always reported to your source provider.  If your project's builds are triggered by a webhook, you must push a new commit to the repo for a change to this property to take effect.
+     *  Set to true to report the status of a build's start and finish to your source provider. This option is valid only when your source provider is GitHub, GitHub Enterprise, GitLab, GitLab Self Managed, or Bitbucket. If this is set and you use a different source provider, an invalidInputException is thrown.  To be able to report the build status to the source provider, the user associated with the source provider must have write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see Source provider access in the CodeBuild User Guide. The status of a build triggered by a webhook is always reported to your source provider.  If your project's builds are triggered by a webhook, you must push a new commit to the repo for a change to this property to take effect.
      */
     reportBuildStatus?: WrapperBoolean;
     /**
@@ -2297,7 +2297,7 @@ declare namespace CodeBuild {
      */
     sourceIdentifier: String;
     /**
-     * The source version for the corresponding source identifier. If specified, must be one of:   For CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example, pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon S3: the version ID of the object that represents the build input ZIP file to use.    For more information, see Source Version Sample with CodeBuild in the CodeBuild User Guide. 
+     * The source version for the corresponding source identifier. If specified, must be one of:   For CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub or GitLab: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example, pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon S3: the version ID of the object that represents the build input ZIP file to use.    For more information, see Source Version Sample with CodeBuild in the CodeBuild User Guide. 
      */
     sourceVersion: String;
   }
@@ -2591,12 +2591,12 @@ declare namespace CodeBuild {
   export type SecurityGroupIds = NonEmptyString[];
   export type SensitiveNonEmptyString = string;
   export type SensitiveString = string;
-  export type ServerType = "GITHUB"|"BITBUCKET"|"GITHUB_ENTERPRISE"|string;
+  export type ServerType = "GITHUB"|"BITBUCKET"|"GITHUB_ENTERPRISE"|"GITLAB"|"GITLAB_SELF_MANAGED"|string;
   export type SharedResourceSortByType = "ARN"|"MODIFIED_TIME"|string;
   export type SortOrderType = "ASCENDING"|"DESCENDING"|string;
   export interface SourceAuth {
     /**
-     *   This data type is deprecated and is no longer accurate or used.   The authorization type to use. The only valid value is OAUTH, which represents the OAuth authorization type.
+     * The authorization type to use. Valid options are OAUTH or CODECONNECTIONS.
      */
     type: SourceAuthType;
     /**
@@ -2604,23 +2604,27 @@ declare namespace CodeBuild {
      */
     resource?: String;
   }
-  export type SourceAuthType = "OAUTH"|string;
+  export type SourceAuthType = "OAUTH"|"CODECONNECTIONS"|string;
   export interface SourceCredentialsInfo {
     /**
      *  The Amazon Resource Name (ARN) of the token. 
      */
     arn?: NonEmptyString;
     /**
-     *  The type of source provider. The valid options are GITHUB, GITHUB_ENTERPRISE, or BITBUCKET. 
+     *  The type of source provider. The valid options are GITHUB, GITHUB_ENTERPRISE, GITLAB, GITLAB_SELF_MANAGED, or BITBUCKET. 
      */
     serverType?: ServerType;
     /**
-     *  The type of authentication used by the credentials. Valid options are OAUTH, BASIC_AUTH, or PERSONAL_ACCESS_TOKEN. 
+     *  The type of authentication used by the credentials. Valid options are OAUTH, BASIC_AUTH, PERSONAL_ACCESS_TOKEN, or CODECONNECTIONS. 
      */
     authType?: AuthType;
+    /**
+     * The connection ARN if your serverType type is GITLAB or GITLAB_SELF_MANAGED and your authType is CODECONNECTIONS.
+     */
+    resource?: String;
   }
   export type SourceCredentialsInfos = SourceCredentialsInfo[];
-  export type SourceType = "CODECOMMIT"|"CODEPIPELINE"|"GITHUB"|"S3"|"BITBUCKET"|"GITHUB_ENTERPRISE"|"NO_SOURCE"|string;
+  export type SourceType = "CODECOMMIT"|"CODEPIPELINE"|"GITHUB"|"GITLAB"|"GITLAB_SELF_MANAGED"|"S3"|"BITBUCKET"|"GITHUB_ENTERPRISE"|"NO_SOURCE"|string;
   export interface StartBuildBatchInput {
     /**
      * The name of the project.

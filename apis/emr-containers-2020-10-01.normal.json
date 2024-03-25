@@ -2204,7 +2204,7 @@
       "value": {
         "shape": "TemplateParameterConfiguration"
       },
-      "max": 20
+      "max": 100
     },
     "TemplateParameterDataType": {
       "type": "string",
@@ -2221,7 +2221,7 @@
       "value": {
         "shape": "String1024"
       },
-      "max": 20
+      "max": 100
     },
     "TemplateParameterName": {
       "type": "string",

@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1584.0-->
+<!--LATEST=2.1585.0-->
 <!--ENTRYINSERT-->
+
+## 2.1585.0
+* feature: CodeBuild: Supporting GitLab and GitLab Self Managed as source types in AWS CodeBuild.
+* feature: EC2: Added support for ModifyInstanceMetadataDefaults and GetInstanceMetadataDefaults to set Instance Metadata Service account defaults
+* feature: EMRcontainers: This release increases the number of supported job template parameters from 20 to 100.
+* feature: GlobalAccelerator: AWS Global Accelerator now supports cross-account sharing for bring your own IP addresses.
+* feature: MediaLive: Exposing TileMedia H265 options
+* feature: SageMaker: Introduced support for the following new instance types on SageMaker Studio for JupyterLab and CodeEditor applications: m6i, m6id, m7i, c6i, c6id, c7i, r6i, r6id, r7i, and p5
 
 ## 2.1584.0
 * feature: Kendra: Documentation update, March 2024. Corrects some docs for Amazon Kendra.
