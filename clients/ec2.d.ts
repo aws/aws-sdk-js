@@ -31149,7 +31149,13 @@ declare namespace EC2 {
     TotalNeuronDeviceMemoryInMiB?: TotalNeuronMemory;
   }
   export interface NewDhcpConfiguration {
+    /**
+     * The name of a DHCP option.
+     */
     Key?: String;
+    /**
+     * The values for the DHCP option.
+     */
     Values?: ValueStringList;
   }
   export type NewDhcpConfigurationList = NewDhcpConfiguration[];
@@ -35104,7 +35110,7 @@ declare namespace EC2 {
      */
     Filters: FilterList;
     /**
-     * The maximum number of routes to return. If a value is not provided, the default is 1000.
+     * The maximum number of routes to return.
      */
     MaxResults?: TransitGatewayMaxResults;
     /**

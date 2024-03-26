@@ -100,6 +100,14 @@ declare class Finspace extends Service {
    */
   deleteKxCluster(callback?: (err: AWSError, data: Finspace.Types.DeleteKxClusterResponse) => void): Request<Finspace.Types.DeleteKxClusterResponse, AWSError>;
   /**
+   * Deletes the specified nodes from a cluster. 
+   */
+  deleteKxClusterNode(params: Finspace.Types.DeleteKxClusterNodeRequest, callback?: (err: AWSError, data: Finspace.Types.DeleteKxClusterNodeResponse) => void): Request<Finspace.Types.DeleteKxClusterNodeResponse, AWSError>;
+  /**
+   * Deletes the specified nodes from a cluster. 
+   */
+  deleteKxClusterNode(callback?: (err: AWSError, data: Finspace.Types.DeleteKxClusterNodeResponse) => void): Request<Finspace.Types.DeleteKxClusterNodeResponse, AWSError>;
+  /**
    * Deletes the specified database and all of its associated data. This action is irreversible. You must copy any data out of the database before deleting it if the data is to be retained.
    */
   deleteKxDatabase(params: Finspace.Types.DeleteKxDatabaseRequest, callback?: (err: AWSError, data: Finspace.Types.DeleteKxDatabaseResponse) => void): Request<Finspace.Types.DeleteKxDatabaseResponse, AWSError>;
@@ -543,7 +551,7 @@ declare namespace Finspace {
      */
     databaseName: DatabaseName;
     /**
-     * A list of change request objects that are run in order. A change request object consists of changeType , s3Path, and dbPath. A changeType can has the following values:    PUT – Adds or updates files in a database.   DELETE – Deletes files in a database.   All the change requests require a mandatory dbPath attribute that defines the path within the database directory. All database paths must start with a leading / and end with a trailing /. The s3Path attribute defines the s3 source file path and is required for a PUT change type. The s3path must end with a trailing / if it is a directory and must end without a trailing / if it is a file.  Here are few examples of how you can use the change request object:   This request adds a single sym file at database root location.   { "changeType": "PUT", "s3Path":"s3://bucket/db/sym", "dbPath":"/"}    This request adds files in the given s3Path under the 2020.01.02 partition of the database.  { "changeType": "PUT", "s3Path":"s3://bucket/db/2020.01.02/", "dbPath":"/2020.01.02/"}    This request adds files in the given s3Path under the taq table partition of the database.  [ { "changeType": "PUT", "s3Path":"s3://bucket/db/2020.01.02/taq/", "dbPath":"/2020.01.02/taq/"}]    This request deletes the 2020.01.02 partition of the database.  [{ "changeType": "DELETE", "dbPath": "/2020.01.02/"} ]    The DELETE request allows you to delete the existing files under the 2020.01.02 partition of the database, and the PUT request adds a new taq table under it.  [ {"changeType": "DELETE", "dbPath":"/2020.01.02/"}, {"changeType": "PUT", "s3Path":"s3://bucket/db/2020.01.02/taq/", "dbPath":"/2020.01.02/taq/"}]   
+     * A list of change request objects that are run in order. A change request object consists of changeType , s3Path, and dbPath. A changeType can have the following values:    PUT – Adds or updates files in a database.   DELETE – Deletes files in a database.   All the change requests require a mandatory dbPath attribute that defines the path within the database directory. All database paths must start with a leading / and end with a trailing /. The s3Path attribute defines the s3 source file path and is required for a PUT change type. The s3path must end with a trailing / if it is a directory and must end without a trailing / if it is a file.  Here are few examples of how you can use the change request object:   This request adds a single sym file at database root location.   { "changeType": "PUT", "s3Path":"s3://bucket/db/sym", "dbPath":"/"}    This request adds files in the given s3Path under the 2020.01.02 partition of the database.  { "changeType": "PUT", "s3Path":"s3://bucket/db/2020.01.02/", "dbPath":"/2020.01.02/"}    This request adds files in the given s3Path under the taq table partition of the database.  [ { "changeType": "PUT", "s3Path":"s3://bucket/db/2020.01.02/taq/", "dbPath":"/2020.01.02/taq/"}]    This request deletes the 2020.01.02 partition of the database.  [{ "changeType": "DELETE", "dbPath": "/2020.01.02/"} ]    The DELETE request allows you to delete the existing files under the 2020.01.02 partition of the database, and the PUT request adds a new taq table under it.  [ {"changeType": "DELETE", "dbPath":"/2020.01.02/"}, {"changeType": "PUT", "s3Path":"s3://bucket/db/2020.01.02/taq/", "dbPath":"/2020.01.02/taq/"}]   
      */
     changeRequests: ChangeRequests;
     /**
@@ -1174,6 +1182,22 @@ declare namespace Finspace {
     environmentId: IdType;
   }
   export interface DeleteEnvironmentResponse {
+  }
+  export interface DeleteKxClusterNodeRequest {
+    /**
+     * A unique identifier for the kdb environment.
+     */
+    environmentId: KxEnvironmentId;
+    /**
+     * The name of the cluster, for which you want to delete the nodes.
+     */
+    clusterName: KxClusterName;
+    /**
+     * A unique identifier for the node that you want to delete.
+     */
+    nodeId: KxClusterNodeIdString;
+  }
+  export interface DeleteKxClusterNodeResponse {
   }
   export interface DeleteKxClusterRequest {
     /**
@@ -2324,7 +2348,7 @@ declare namespace Finspace {
      */
     type?: KxNAS1Type;
     /**
-     *  The size of the network attached storage.
+     *  The size of the network attached storage. For storage type SSD_1000 and SSD_250 you can select the minimum size as 1200 GB or increments of 2400 GB. For storage type HDD_12 you can select the minimum size as 6000 GB or increments of 6000 GB.
      */
     size?: KxNAS1Size;
   }
@@ -2343,7 +2367,12 @@ declare namespace Finspace {
      * The time when a particular node is started. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
      */
     launchTime?: Timestamp;
+    /**
+     *  Specifies the status of the cluster nodes.     RUNNING – The node is actively serving.    PROVISIONING – The node is being prepared.  
+     */
+    status?: KxNodeStatus;
   }
+  export type KxNodeStatus = "RUNNING"|"PROVISIONING"|string;
   export type KxNodeSummaries = KxNode[];
   export interface KxSavedownStorageConfiguration {
     /**

@@ -228,6 +228,14 @@ declare class CostExplorer extends Service {
    */
   getUsageForecast(callback?: (err: AWSError, data: CostExplorer.Types.GetUsageForecastResponse) => void): Request<CostExplorer.Types.GetUsageForecastResponse, AWSError>;
   /**
+   *  Retrieves a list of your historical cost allocation tag backfill requests. 
+   */
+  listCostAllocationTagBackfillHistory(params: CostExplorer.Types.ListCostAllocationTagBackfillHistoryRequest, callback?: (err: AWSError, data: CostExplorer.Types.ListCostAllocationTagBackfillHistoryResponse) => void): Request<CostExplorer.Types.ListCostAllocationTagBackfillHistoryResponse, AWSError>;
+  /**
+   *  Retrieves a list of your historical cost allocation tag backfill requests. 
+   */
+  listCostAllocationTagBackfillHistory(callback?: (err: AWSError, data: CostExplorer.Types.ListCostAllocationTagBackfillHistoryResponse) => void): Request<CostExplorer.Types.ListCostAllocationTagBackfillHistoryResponse, AWSError>;
+  /**
    * Get a list of cost allocation tags. All inputs in the API are optional and serve as filters. By default, all cost allocation tags are returned. 
    */
   listCostAllocationTags(params: CostExplorer.Types.ListCostAllocationTagsRequest, callback?: (err: AWSError, data: CostExplorer.Types.ListCostAllocationTagsResponse) => void): Request<CostExplorer.Types.ListCostAllocationTagsResponse, AWSError>;
@@ -267,6 +275,14 @@ declare class CostExplorer extends Service {
    * Modifies the feedback property of a given cost anomaly. 
    */
   provideAnomalyFeedback(callback?: (err: AWSError, data: CostExplorer.Types.ProvideAnomalyFeedbackResponse) => void): Request<CostExplorer.Types.ProvideAnomalyFeedbackResponse, AWSError>;
+  /**
+   *  Request a cost allocation tag backfill. This will backfill the activation status (either active or inactive) for all tag keys from para:BackfillFrom up to the when this request is made. You can request a backfill once every 24 hours. 
+   */
+  startCostAllocationTagBackfill(params: CostExplorer.Types.StartCostAllocationTagBackfillRequest, callback?: (err: AWSError, data: CostExplorer.Types.StartCostAllocationTagBackfillResponse) => void): Request<CostExplorer.Types.StartCostAllocationTagBackfillResponse, AWSError>;
+  /**
+   *  Request a cost allocation tag backfill. This will backfill the activation status (either active or inactive) for all tag keys from para:BackfillFrom up to the when this request is made. You can request a backfill once every 24 hours. 
+   */
+  startCostAllocationTagBackfill(callback?: (err: AWSError, data: CostExplorer.Types.StartCostAllocationTagBackfillResponse) => void): Request<CostExplorer.Types.StartCostAllocationTagBackfillResponse, AWSError>;
   /**
    * Requests a Savings Plans recommendation generation. This enables you to calculate a fresh set of Savings Plans recommendations that takes your latest usage data and current Savings Plans inventory into account. You can refresh Savings Plans recommendations up to three times daily for a consolidated billing family.   StartSavingsPlansPurchaseRecommendationGeneration has no request syntax because no input parameters are needed to support this operation. 
    */
@@ -489,6 +505,30 @@ declare namespace CostExplorer {
      */
     LastUsedDate?: ZonedDateTime;
   }
+  export interface CostAllocationTagBackfillRequest {
+    /**
+     *  The date the backfill starts from. 
+     */
+    BackfillFrom?: ZonedDateTime;
+    /**
+     *  The time when the backfill was requested. 
+     */
+    RequestedAt?: ZonedDateTime;
+    /**
+     *  The backfill completion time. 
+     */
+    CompletedAt?: ZonedDateTime;
+    /**
+     *  The status of the cost allocation tag backfill request. 
+     */
+    BackfillStatus?: CostAllocationTagBackfillStatus;
+    /**
+     *  The time when the backfill status was last updated. 
+     */
+    LastUpdatedAt?: ZonedDateTime;
+  }
+  export type CostAllocationTagBackfillRequestList = CostAllocationTagBackfillRequest[];
+  export type CostAllocationTagBackfillStatus = "SUCCEEDED"|"PROCESSING"|"FAILED"|string;
   export type CostAllocationTagKeyList = TagKey[];
   export type CostAllocationTagList = CostAllocationTag[];
   export type CostAllocationTagStatus = "Active"|"Inactive"|string;
@@ -2027,6 +2067,26 @@ declare namespace CostExplorer {
   }
   export type Key = string;
   export type Keys = Key[];
+  export interface ListCostAllocationTagBackfillHistoryRequest {
+    /**
+     *  The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size. 
+     */
+    NextToken?: NextPageToken;
+    /**
+     *  The maximum number of objects that are returned for this request. 
+     */
+    MaxResults?: CostAllocationTagsMaxResults;
+  }
+  export interface ListCostAllocationTagBackfillHistoryResponse {
+    /**
+     *  The list of historical cost allocation tag backfill requests. 
+     */
+    BackfillRequests?: CostAllocationTagBackfillRequestList;
+    /**
+     *  The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size. 
+     */
+    NextToken?: NextPageToken;
+  }
   export interface ListCostAllocationTagsRequest {
     /**
      * The status of cost allocation tag keys that are returned for this request. 
@@ -3127,6 +3187,18 @@ declare namespace CostExplorer {
   export type SortDefinitionKey = string;
   export type SortDefinitions = SortDefinition[];
   export type SortOrder = "ASCENDING"|"DESCENDING"|string;
+  export interface StartCostAllocationTagBackfillRequest {
+    /**
+     *  The date you want the backfill to start from. The date can only be a first day of the month (a billing start date). Dates can't precede the previous twelve months, or in the future.
+     */
+    BackfillFrom: ZonedDateTime;
+  }
+  export interface StartCostAllocationTagBackfillResponse {
+    /**
+     *  An object containing detailed metadata of your new backfill request. 
+     */
+    BackfillRequest?: CostAllocationTagBackfillRequest;
+  }
   export interface StartSavingsPlansPurchaseRecommendationGenerationRequest {
   }
   export interface StartSavingsPlansPurchaseRecommendationGenerationResponse {

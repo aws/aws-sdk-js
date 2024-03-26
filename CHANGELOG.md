@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1585.0-->
+<!--LATEST=2.1586.0-->
 <!--ENTRYINSERT-->
+
+## 2.1586.0
+* feature: BedrockAgentRuntime: This release adds support to customize prompts sent through the RetrieveAndGenerate API in Agents for Amazon Bedrock.
+* feature: CostExplorer: Adds support for backfill of cost allocation tags, with new StartCostAllocationTagBackfill and ListCostAllocationTagBackfillHistory API.
+* feature: EC2: Documentation updates for Elastic Compute Cloud (EC2).
+* feature: Finspace: Add new operation delete-kx-cluster-node and add status parameter to list-kx-cluster-node operation.
 
 ## 2.1585.0
 * feature: CodeBuild: Supporting GitLab and GitLab Self Managed as source types in AWS CodeBuild.

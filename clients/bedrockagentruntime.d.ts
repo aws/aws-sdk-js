@@ -29,11 +29,11 @@ declare class BedrockAgentRuntime extends Service {
    */
   retrieve(callback?: (err: AWSError, data: BedrockAgentRuntime.Types.RetrieveResponse) => void): Request<BedrockAgentRuntime.Types.RetrieveResponse, AWSError>;
   /**
-   * Queries a knowledge base and generates responses based on the retrieved results. The response cites up to five sources but only selects the ones that are relevant to the query.  The numberOfResults field is currently unsupported for RetrieveAndGenerate. Don't include it in the vectorSearchConfiguration object. 
+   * Queries a knowledge base and generates responses based on the retrieved results. The response cites up to five sources but only selects the ones that are relevant to the query.
    */
   retrieveAndGenerate(params: BedrockAgentRuntime.Types.RetrieveAndGenerateRequest, callback?: (err: AWSError, data: BedrockAgentRuntime.Types.RetrieveAndGenerateResponse) => void): Request<BedrockAgentRuntime.Types.RetrieveAndGenerateResponse, AWSError>;
   /**
-   * Queries a knowledge base and generates responses based on the retrieved results. The response cites up to five sources but only selects the ones that are relevant to the query.  The numberOfResults field is currently unsupported for RetrieveAndGenerate. Don't include it in the vectorSearchConfiguration object. 
+   * Queries a knowledge base and generates responses based on the retrieved results. The response cites up to five sources but only selects the ones that are relevant to the query.
    */
   retrieveAndGenerate(callback?: (err: AWSError, data: BedrockAgentRuntime.Types.RetrieveAndGenerateResponse) => void): Request<BedrockAgentRuntime.Types.RetrieveAndGenerateResponse, AWSError>;
 }
@@ -137,6 +137,12 @@ declare namespace BedrockAgentRuntime {
      */
     textResponsePart?: TextResponsePart;
   }
+  export interface GenerationConfiguration {
+    /**
+     * Contains the template for the prompt that's sent to the model for response generation.
+     */
+    promptTemplate?: PromptTemplate;
+  }
   export interface InferenceConfiguration {
     /**
      * The maximum number of tokens allowed in the generated response.
@@ -208,7 +214,7 @@ declare namespace BedrockAgentRuntime {
      */
     sessionId: SessionId;
     /**
-     * Contains parameters that specify various attributes of the session.
+     * Contains parameters that specify various attributes of the session. For more information, see Control session context.
      */
     sessionState?: SessionState;
   }
@@ -254,7 +260,7 @@ declare namespace BedrockAgentRuntime {
   export type KnowledgeBaseQueryTextString = string;
   export interface KnowledgeBaseRetrievalConfiguration {
     /**
-     * Contains details about how the results from the vector search should be returned.
+     * Contains details about how the results from the vector search should be returned. For more information, see Query configurations.
      */
     vectorSearchConfiguration: KnowledgeBaseVectorSearchConfiguration;
   }
@@ -275,6 +281,10 @@ declare namespace BedrockAgentRuntime {
   export type KnowledgeBaseRetrievalResults = KnowledgeBaseRetrievalResult[];
   export interface KnowledgeBaseRetrieveAndGenerateConfiguration {
     /**
+     * Contains configurations for response generation based on the knowwledge base query results.
+     */
+    generationConfiguration?: GenerationConfiguration;
+    /**
      * The unique identifier of the knowledge base that is queried and the foundation model used for generation.
      */
     knowledgeBaseId: KnowledgeBaseId;
@@ -289,7 +299,7 @@ declare namespace BedrockAgentRuntime {
   }
   export interface KnowledgeBaseVectorSearchConfiguration {
     /**
-     * The number of results to return.  The numberOfResults field is currently unsupported for RetrieveAndGenerate. Don't include it in this field if you are sending a RetrieveAndGenerate request. 
+     * The number of source chunks to retrieve.
      */
     numberOfResults?: KnowledgeBaseVectorSearchConfigurationNumberOfResultsInteger;
     /**
@@ -461,6 +471,12 @@ declare namespace BedrockAgentRuntime {
     modelInvocationOutput?: PreProcessingModelInvocationOutput;
   }
   export type PromptSessionAttributesMap = {[key: string]: String};
+  export interface PromptTemplate {
+    /**
+     * The template for the prompt that's sent to the model for response generation. You can include prompt placeholders, which become replaced before the prompt is sent to the model to provide instructions and context to the model. In addition, you can include XML tags to delineate meaningful sections of the prompt template. For more information, see the following resources:    Knowledge base prompt templates     Use XML tags with Anthropic Claude models   
+     */
+    textPromptTemplate?: TextPromptTemplate;
+  }
   export type PromptText = string;
   export type PromptType = "PRE_PROCESSING"|"ORCHESTRATION"|"KNOWLEDGE_BASE_RESPONSE_GENERATION"|"POST_PROCESSING"|string;
   export interface Rationale {
@@ -542,11 +558,11 @@ declare namespace BedrockAgentRuntime {
   }
   export interface RetrieveAndGenerateRequest {
     /**
-     * Contains the query made to the knowledge base.
+     * Contains the query to be made to the knowledge base.
      */
     input: RetrieveAndGenerateInput;
     /**
-     * Contains details about the resource being queried and the foundation model used for generation.
+     * Contains configurations for the knowledge base query and retrieval process. For more information, see Query configurations.
      */
     retrieveAndGenerateConfiguration?: RetrieveAndGenerateConfiguration;
     /**
@@ -589,11 +605,11 @@ declare namespace BedrockAgentRuntime {
      */
     nextToken?: NextToken;
     /**
-     * Contains details about how the results should be returned.
+     * Contains configurations for the knowledge base query and retrieval process. For more information, see Query configurations.
      */
     retrievalConfiguration?: KnowledgeBaseRetrievalConfiguration;
     /**
-     * The query to send the knowledge base.
+     * Contains the query to send the knowledge base.
      */
     retrievalQuery: KnowledgeBaseQuery;
   }
@@ -650,6 +666,7 @@ declare namespace BedrockAgentRuntime {
   export type StopSequences = String[];
   export type String = string;
   export type Temperature = number;
+  export type TextPromptTemplate = string;
   export interface TextResponsePart {
     /**
      * Contains information about where the text with a citation begins and ends in the generated output.
