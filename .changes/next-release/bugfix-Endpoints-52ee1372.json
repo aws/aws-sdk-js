@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Endpoints",
+  "description": "Add endpoint override for eu-isoe-* region"
+}
