@@ -12,490 +12,805 @@ declare class BedrockAgent extends Service {
   constructor(options?: BedrockAgent.Types.ClientConfiguration)
   config: Config & BedrockAgent.Types.ClientConfiguration;
   /**
-   * Associate a Knowledge Base to an existing Amazon Bedrock Agent
+   * Associates a knowledge base with an agent. If a knowledge base is associated and its indexState is set to Enabled, the agent queries the knowledge base for information to augment its response to the user.
    */
   associateAgentKnowledgeBase(params: BedrockAgent.Types.AssociateAgentKnowledgeBaseRequest, callback?: (err: AWSError, data: BedrockAgent.Types.AssociateAgentKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.AssociateAgentKnowledgeBaseResponse, AWSError>;
   /**
-   * Associate a Knowledge Base to an existing Amazon Bedrock Agent
+   * Associates a knowledge base with an agent. If a knowledge base is associated and its indexState is set to Enabled, the agent queries the knowledge base for information to augment its response to the user.
    */
   associateAgentKnowledgeBase(callback?: (err: AWSError, data: BedrockAgent.Types.AssociateAgentKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.AssociateAgentKnowledgeBaseResponse, AWSError>;
   /**
-   * Creates an Amazon Bedrock Agent
+   * Creates an agent that orchestrates interactions between foundation models, data sources, software applications, user conversations, and APIs to carry out tasks to help customers.   Specify the following fields for security purposes.    agentResourceRoleArn – The ARN of the role with permissions to create an agent.   (Optional) customerEncryptionKeyArn – The ARN of a KMS key to encrypt the creation of the agent.   (Optional) idleSessionTTLinSeconds – Specify the number of seconds for which the agent should maintain session information. After this time expires, the subsequent InvokeAgent request begins a new session.     To override the default prompt behavior for agent orchestration and to use advanced prompts, include a promptOverrideConfiguration object. For more information, see Advanced prompts.   If you agent fails to be created, the response returns a list of failureReasons alongside a list of recommendedActions for you to troubleshoot.  
    */
   createAgent(params: BedrockAgent.Types.CreateAgentRequest, callback?: (err: AWSError, data: BedrockAgent.Types.CreateAgentResponse) => void): Request<BedrockAgent.Types.CreateAgentResponse, AWSError>;
   /**
-   * Creates an Amazon Bedrock Agent
+   * Creates an agent that orchestrates interactions between foundation models, data sources, software applications, user conversations, and APIs to carry out tasks to help customers.   Specify the following fields for security purposes.    agentResourceRoleArn – The ARN of the role with permissions to create an agent.   (Optional) customerEncryptionKeyArn – The ARN of a KMS key to encrypt the creation of the agent.   (Optional) idleSessionTTLinSeconds – Specify the number of seconds for which the agent should maintain session information. After this time expires, the subsequent InvokeAgent request begins a new session.     To override the default prompt behavior for agent orchestration and to use advanced prompts, include a promptOverrideConfiguration object. For more information, see Advanced prompts.   If you agent fails to be created, the response returns a list of failureReasons alongside a list of recommendedActions for you to troubleshoot.  
    */
   createAgent(callback?: (err: AWSError, data: BedrockAgent.Types.CreateAgentResponse) => void): Request<BedrockAgent.Types.CreateAgentResponse, AWSError>;
   /**
-   * Creates an Action Group for existing Amazon Bedrock Agent
+   * Creates an action group for an agent. An action group represents the actions that an agent can carry out for the customer by defining the APIs that an agent can call and the logic for calling them. To allow your agent to request the user for additional information when trying to complete a task, add an action group with the parentActionGroupSignature field set to AMAZON.UserInput. You must leave the description, apiSchema, and actionGroupExecutor fields blank for this action group. During orchestration, if your agent determines that it needs to invoke an API in an action group, but doesn't have enough information to complete the API request, it will invoke this action group instead and return an Observation reprompting the user for more information.
    */
   createAgentActionGroup(params: BedrockAgent.Types.CreateAgentActionGroupRequest, callback?: (err: AWSError, data: BedrockAgent.Types.CreateAgentActionGroupResponse) => void): Request<BedrockAgent.Types.CreateAgentActionGroupResponse, AWSError>;
   /**
-   * Creates an Action Group for existing Amazon Bedrock Agent
+   * Creates an action group for an agent. An action group represents the actions that an agent can carry out for the customer by defining the APIs that an agent can call and the logic for calling them. To allow your agent to request the user for additional information when trying to complete a task, add an action group with the parentActionGroupSignature field set to AMAZON.UserInput. You must leave the description, apiSchema, and actionGroupExecutor fields blank for this action group. During orchestration, if your agent determines that it needs to invoke an API in an action group, but doesn't have enough information to complete the API request, it will invoke this action group instead and return an Observation reprompting the user for more information.
    */
   createAgentActionGroup(callback?: (err: AWSError, data: BedrockAgent.Types.CreateAgentActionGroupResponse) => void): Request<BedrockAgent.Types.CreateAgentActionGroupResponse, AWSError>;
   /**
-   * Creates an Alias for an existing Amazon Bedrock Agent
+   * Creates an alias of an agent that can be used to deploy the agent.
    */
   createAgentAlias(params: BedrockAgent.Types.CreateAgentAliasRequest, callback?: (err: AWSError, data: BedrockAgent.Types.CreateAgentAliasResponse) => void): Request<BedrockAgent.Types.CreateAgentAliasResponse, AWSError>;
   /**
-   * Creates an Alias for an existing Amazon Bedrock Agent
+   * Creates an alias of an agent that can be used to deploy the agent.
    */
   createAgentAlias(callback?: (err: AWSError, data: BedrockAgent.Types.CreateAgentAliasResponse) => void): Request<BedrockAgent.Types.CreateAgentAliasResponse, AWSError>;
   /**
-   * Create a new data source
+   * Sets up a data source to be added to a knowledge base.  You can't change the chunkingConfiguration after you create the data source. 
    */
   createDataSource(params: BedrockAgent.Types.CreateDataSourceRequest, callback?: (err: AWSError, data: BedrockAgent.Types.CreateDataSourceResponse) => void): Request<BedrockAgent.Types.CreateDataSourceResponse, AWSError>;
   /**
-   * Create a new data source
+   * Sets up a data source to be added to a knowledge base.  You can't change the chunkingConfiguration after you create the data source. 
    */
   createDataSource(callback?: (err: AWSError, data: BedrockAgent.Types.CreateDataSourceResponse) => void): Request<BedrockAgent.Types.CreateDataSourceResponse, AWSError>;
   /**
-   * Create a new knowledge base
+   * Creates a knowledge base that contains data sources from which information can be queried and used by LLMs. To create a knowledge base, you must first set up your data sources and configure a supported vector store. For more information, see Set up your data for ingestion.  If you prefer to let Amazon Bedrock create and manage a vector store for you in Amazon OpenSearch Service, use the console. For more information, see Create a knowledge base.    Provide the name and an optional description.   Provide the ARN with permissions to create a knowledge base in the roleArn field.   Provide the embedding model to use in the embeddingModelArn field in the knowledgeBaseConfiguration object.   Provide the configuration for your vector store in the storageConfiguration object.   For an Amazon OpenSearch Service database, use the opensearchServerlessConfiguration object. For more information, see Create a vector store in Amazon OpenSearch Service.   For an Amazon Aurora database, use the RdsConfiguration object. For more information, see Create a vector store in Amazon Aurora.   For a Pinecone database, use the pineconeConfiguration object. For more information, see Create a vector store in Pinecone.   For a Redis Enterprise Cloud database, use the redisEnterpriseCloudConfiguration object. For more information, see Create a vector store in Redis Enterprise Cloud.    
    */
   createKnowledgeBase(params: BedrockAgent.Types.CreateKnowledgeBaseRequest, callback?: (err: AWSError, data: BedrockAgent.Types.CreateKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.CreateKnowledgeBaseResponse, AWSError>;
   /**
-   * Create a new knowledge base
+   * Creates a knowledge base that contains data sources from which information can be queried and used by LLMs. To create a knowledge base, you must first set up your data sources and configure a supported vector store. For more information, see Set up your data for ingestion.  If you prefer to let Amazon Bedrock create and manage a vector store for you in Amazon OpenSearch Service, use the console. For more information, see Create a knowledge base.    Provide the name and an optional description.   Provide the ARN with permissions to create a knowledge base in the roleArn field.   Provide the embedding model to use in the embeddingModelArn field in the knowledgeBaseConfiguration object.   Provide the configuration for your vector store in the storageConfiguration object.   For an Amazon OpenSearch Service database, use the opensearchServerlessConfiguration object. For more information, see Create a vector store in Amazon OpenSearch Service.   For an Amazon Aurora database, use the RdsConfiguration object. For more information, see Create a vector store in Amazon Aurora.   For a Pinecone database, use the pineconeConfiguration object. For more information, see Create a vector store in Pinecone.   For a Redis Enterprise Cloud database, use the redisEnterpriseCloudConfiguration object. For more information, see Create a vector store in Redis Enterprise Cloud.    
    */
   createKnowledgeBase(callback?: (err: AWSError, data: BedrockAgent.Types.CreateKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.CreateKnowledgeBaseResponse, AWSError>;
   /**
-   * Deletes an Agent for existing Amazon Bedrock Agent
+   * Deletes an agent.
    */
   deleteAgent(params: BedrockAgent.Types.DeleteAgentRequest, callback?: (err: AWSError, data: BedrockAgent.Types.DeleteAgentResponse) => void): Request<BedrockAgent.Types.DeleteAgentResponse, AWSError>;
   /**
-   * Deletes an Agent for existing Amazon Bedrock Agent
+   * Deletes an agent.
    */
   deleteAgent(callback?: (err: AWSError, data: BedrockAgent.Types.DeleteAgentResponse) => void): Request<BedrockAgent.Types.DeleteAgentResponse, AWSError>;
   /**
-   * Deletes an Action Group for existing Amazon Bedrock Agent.
+   * Deletes an action group in an agent.
    */
   deleteAgentActionGroup(params: BedrockAgent.Types.DeleteAgentActionGroupRequest, callback?: (err: AWSError, data: BedrockAgent.Types.DeleteAgentActionGroupResponse) => void): Request<BedrockAgent.Types.DeleteAgentActionGroupResponse, AWSError>;
   /**
-   * Deletes an Action Group for existing Amazon Bedrock Agent.
+   * Deletes an action group in an agent.
    */
   deleteAgentActionGroup(callback?: (err: AWSError, data: BedrockAgent.Types.DeleteAgentActionGroupResponse) => void): Request<BedrockAgent.Types.DeleteAgentActionGroupResponse, AWSError>;
   /**
-   * Deletes an Alias for a Amazon Bedrock Agent
+   * Deletes an alias of an agent.
    */
   deleteAgentAlias(params: BedrockAgent.Types.DeleteAgentAliasRequest, callback?: (err: AWSError, data: BedrockAgent.Types.DeleteAgentAliasResponse) => void): Request<BedrockAgent.Types.DeleteAgentAliasResponse, AWSError>;
   /**
-   * Deletes an Alias for a Amazon Bedrock Agent
+   * Deletes an alias of an agent.
    */
   deleteAgentAlias(callback?: (err: AWSError, data: BedrockAgent.Types.DeleteAgentAliasResponse) => void): Request<BedrockAgent.Types.DeleteAgentAliasResponse, AWSError>;
   /**
-   * Deletes an Agent version for existing Amazon Bedrock Agent
+   * Deletes a version of an agent.
    */
   deleteAgentVersion(params: BedrockAgent.Types.DeleteAgentVersionRequest, callback?: (err: AWSError, data: BedrockAgent.Types.DeleteAgentVersionResponse) => void): Request<BedrockAgent.Types.DeleteAgentVersionResponse, AWSError>;
   /**
-   * Deletes an Agent version for existing Amazon Bedrock Agent
+   * Deletes a version of an agent.
    */
   deleteAgentVersion(callback?: (err: AWSError, data: BedrockAgent.Types.DeleteAgentVersionResponse) => void): Request<BedrockAgent.Types.DeleteAgentVersionResponse, AWSError>;
   /**
-   * Delete an existing data source
+   * Deletes a data source from a knowledge base.
    */
   deleteDataSource(params: BedrockAgent.Types.DeleteDataSourceRequest, callback?: (err: AWSError, data: BedrockAgent.Types.DeleteDataSourceResponse) => void): Request<BedrockAgent.Types.DeleteDataSourceResponse, AWSError>;
   /**
-   * Delete an existing data source
+   * Deletes a data source from a knowledge base.
    */
   deleteDataSource(callback?: (err: AWSError, data: BedrockAgent.Types.DeleteDataSourceResponse) => void): Request<BedrockAgent.Types.DeleteDataSourceResponse, AWSError>;
   /**
-   * Delete an existing knowledge base
+   * Deletes a knowledge base. Before deleting a knowledge base, you should disassociate the knowledge base from any agents that it is associated with by making a DisassociateAgentKnowledgeBase request.
    */
   deleteKnowledgeBase(params: BedrockAgent.Types.DeleteKnowledgeBaseRequest, callback?: (err: AWSError, data: BedrockAgent.Types.DeleteKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.DeleteKnowledgeBaseResponse, AWSError>;
   /**
-   * Delete an existing knowledge base
+   * Deletes a knowledge base. Before deleting a knowledge base, you should disassociate the knowledge base from any agents that it is associated with by making a DisassociateAgentKnowledgeBase request.
    */
   deleteKnowledgeBase(callback?: (err: AWSError, data: BedrockAgent.Types.DeleteKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.DeleteKnowledgeBaseResponse, AWSError>;
   /**
-   * Disassociate an existing Knowledge Base from an Amazon Bedrock Agent
+   * Disassociates a knowledge base from an agent.
    */
   disassociateAgentKnowledgeBase(params: BedrockAgent.Types.DisassociateAgentKnowledgeBaseRequest, callback?: (err: AWSError, data: BedrockAgent.Types.DisassociateAgentKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.DisassociateAgentKnowledgeBaseResponse, AWSError>;
   /**
-   * Disassociate an existing Knowledge Base from an Amazon Bedrock Agent
+   * Disassociates a knowledge base from an agent.
    */
   disassociateAgentKnowledgeBase(callback?: (err: AWSError, data: BedrockAgent.Types.DisassociateAgentKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.DisassociateAgentKnowledgeBaseResponse, AWSError>;
   /**
-   * Gets an Agent for existing Amazon Bedrock Agent
+   * Gets information about an agent.
    */
   getAgent(params: BedrockAgent.Types.GetAgentRequest, callback?: (err: AWSError, data: BedrockAgent.Types.GetAgentResponse) => void): Request<BedrockAgent.Types.GetAgentResponse, AWSError>;
   /**
-   * Gets an Agent for existing Amazon Bedrock Agent
+   * Gets information about an agent.
    */
   getAgent(callback?: (err: AWSError, data: BedrockAgent.Types.GetAgentResponse) => void): Request<BedrockAgent.Types.GetAgentResponse, AWSError>;
   /**
-   * Gets an Action Group for existing Amazon Bedrock Agent Version
+   * Gets information about an action group for an agent.
    */
   getAgentActionGroup(params: BedrockAgent.Types.GetAgentActionGroupRequest, callback?: (err: AWSError, data: BedrockAgent.Types.GetAgentActionGroupResponse) => void): Request<BedrockAgent.Types.GetAgentActionGroupResponse, AWSError>;
   /**
-   * Gets an Action Group for existing Amazon Bedrock Agent Version
+   * Gets information about an action group for an agent.
    */
   getAgentActionGroup(callback?: (err: AWSError, data: BedrockAgent.Types.GetAgentActionGroupResponse) => void): Request<BedrockAgent.Types.GetAgentActionGroupResponse, AWSError>;
   /**
-   * Describes an Alias for a Amazon Bedrock Agent
+   * Gets information about an alias of an agent.
    */
   getAgentAlias(params: BedrockAgent.Types.GetAgentAliasRequest, callback?: (err: AWSError, data: BedrockAgent.Types.GetAgentAliasResponse) => void): Request<BedrockAgent.Types.GetAgentAliasResponse, AWSError>;
   /**
-   * Describes an Alias for a Amazon Bedrock Agent
+   * Gets information about an alias of an agent.
    */
   getAgentAlias(callback?: (err: AWSError, data: BedrockAgent.Types.GetAgentAliasResponse) => void): Request<BedrockAgent.Types.GetAgentAliasResponse, AWSError>;
   /**
-   * Gets a knowledge base associated to an existing Amazon Bedrock Agent Version
+   * Gets information about a knowledge base associated with an agent.
    */
   getAgentKnowledgeBase(params: BedrockAgent.Types.GetAgentKnowledgeBaseRequest, callback?: (err: AWSError, data: BedrockAgent.Types.GetAgentKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.GetAgentKnowledgeBaseResponse, AWSError>;
   /**
-   * Gets a knowledge base associated to an existing Amazon Bedrock Agent Version
+   * Gets information about a knowledge base associated with an agent.
    */
   getAgentKnowledgeBase(callback?: (err: AWSError, data: BedrockAgent.Types.GetAgentKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.GetAgentKnowledgeBaseResponse, AWSError>;
   /**
-   * Gets an Agent version for existing Amazon Bedrock Agent
+   * Gets details about a version of an agent.
    */
   getAgentVersion(params: BedrockAgent.Types.GetAgentVersionRequest, callback?: (err: AWSError, data: BedrockAgent.Types.GetAgentVersionResponse) => void): Request<BedrockAgent.Types.GetAgentVersionResponse, AWSError>;
   /**
-   * Gets an Agent version for existing Amazon Bedrock Agent
+   * Gets details about a version of an agent.
    */
   getAgentVersion(callback?: (err: AWSError, data: BedrockAgent.Types.GetAgentVersionResponse) => void): Request<BedrockAgent.Types.GetAgentVersionResponse, AWSError>;
   /**
-   * Get an existing data source
+   * Gets information about a data source.
    */
   getDataSource(params: BedrockAgent.Types.GetDataSourceRequest, callback?: (err: AWSError, data: BedrockAgent.Types.GetDataSourceResponse) => void): Request<BedrockAgent.Types.GetDataSourceResponse, AWSError>;
   /**
-   * Get an existing data source
+   * Gets information about a data source.
    */
   getDataSource(callback?: (err: AWSError, data: BedrockAgent.Types.GetDataSourceResponse) => void): Request<BedrockAgent.Types.GetDataSourceResponse, AWSError>;
   /**
-   * Get an ingestion job
+   * Gets information about a ingestion job, in which a data source is added to a knowledge base.
    */
   getIngestionJob(params: BedrockAgent.Types.GetIngestionJobRequest, callback?: (err: AWSError, data: BedrockAgent.Types.GetIngestionJobResponse) => void): Request<BedrockAgent.Types.GetIngestionJobResponse, AWSError>;
   /**
-   * Get an ingestion job
+   * Gets information about a ingestion job, in which a data source is added to a knowledge base.
    */
   getIngestionJob(callback?: (err: AWSError, data: BedrockAgent.Types.GetIngestionJobResponse) => void): Request<BedrockAgent.Types.GetIngestionJobResponse, AWSError>;
   /**
-   * Get an existing knowledge base
+   * Gets information about a knoweldge base.
    */
   getKnowledgeBase(params: BedrockAgent.Types.GetKnowledgeBaseRequest, callback?: (err: AWSError, data: BedrockAgent.Types.GetKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.GetKnowledgeBaseResponse, AWSError>;
   /**
-   * Get an existing knowledge base
+   * Gets information about a knoweldge base.
    */
   getKnowledgeBase(callback?: (err: AWSError, data: BedrockAgent.Types.GetKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.GetKnowledgeBaseResponse, AWSError>;
   /**
-   * Lists an Action Group for existing Amazon Bedrock Agent Version
+   * Lists the action groups for an agent and information about each one.
    */
   listAgentActionGroups(params: BedrockAgent.Types.ListAgentActionGroupsRequest, callback?: (err: AWSError, data: BedrockAgent.Types.ListAgentActionGroupsResponse) => void): Request<BedrockAgent.Types.ListAgentActionGroupsResponse, AWSError>;
   /**
-   * Lists an Action Group for existing Amazon Bedrock Agent Version
+   * Lists the action groups for an agent and information about each one.
    */
   listAgentActionGroups(callback?: (err: AWSError, data: BedrockAgent.Types.ListAgentActionGroupsResponse) => void): Request<BedrockAgent.Types.ListAgentActionGroupsResponse, AWSError>;
   /**
-   * Lists all the Aliases for an Amazon Bedrock Agent
+   * Lists the aliases of an agent and information about each one.
    */
   listAgentAliases(params: BedrockAgent.Types.ListAgentAliasesRequest, callback?: (err: AWSError, data: BedrockAgent.Types.ListAgentAliasesResponse) => void): Request<BedrockAgent.Types.ListAgentAliasesResponse, AWSError>;
   /**
-   * Lists all the Aliases for an Amazon Bedrock Agent
+   * Lists the aliases of an agent and information about each one.
    */
   listAgentAliases(callback?: (err: AWSError, data: BedrockAgent.Types.ListAgentAliasesResponse) => void): Request<BedrockAgent.Types.ListAgentAliasesResponse, AWSError>;
   /**
-   * List of Knowledge Bases associated to an existing Amazon Bedrock Agent Version
+   * Lists knowledge bases associated with an agent and information about each one.
    */
   listAgentKnowledgeBases(params: BedrockAgent.Types.ListAgentKnowledgeBasesRequest, callback?: (err: AWSError, data: BedrockAgent.Types.ListAgentKnowledgeBasesResponse) => void): Request<BedrockAgent.Types.ListAgentKnowledgeBasesResponse, AWSError>;
   /**
-   * List of Knowledge Bases associated to an existing Amazon Bedrock Agent Version
+   * Lists knowledge bases associated with an agent and information about each one.
    */
   listAgentKnowledgeBases(callback?: (err: AWSError, data: BedrockAgent.Types.ListAgentKnowledgeBasesResponse) => void): Request<BedrockAgent.Types.ListAgentKnowledgeBasesResponse, AWSError>;
   /**
-   * Lists Agent Versions
+   * Lists the versions of an agent and information about each version.
    */
   listAgentVersions(params: BedrockAgent.Types.ListAgentVersionsRequest, callback?: (err: AWSError, data: BedrockAgent.Types.ListAgentVersionsResponse) => void): Request<BedrockAgent.Types.ListAgentVersionsResponse, AWSError>;
   /**
-   * Lists Agent Versions
+   * Lists the versions of an agent and information about each version.
    */
   listAgentVersions(callback?: (err: AWSError, data: BedrockAgent.Types.ListAgentVersionsResponse) => void): Request<BedrockAgent.Types.ListAgentVersionsResponse, AWSError>;
   /**
-   * Lists Agents
+   * Lists the agents belonging to an account and information about each agent.
    */
   listAgents(params: BedrockAgent.Types.ListAgentsRequest, callback?: (err: AWSError, data: BedrockAgent.Types.ListAgentsResponse) => void): Request<BedrockAgent.Types.ListAgentsResponse, AWSError>;
   /**
-   * Lists Agents
+   * Lists the agents belonging to an account and information about each agent.
    */
   listAgents(callback?: (err: AWSError, data: BedrockAgent.Types.ListAgentsResponse) => void): Request<BedrockAgent.Types.ListAgentsResponse, AWSError>;
   /**
-   * List data sources
+   * Lists the data sources in a knowledge base and information about each one.
    */
   listDataSources(params: BedrockAgent.Types.ListDataSourcesRequest, callback?: (err: AWSError, data: BedrockAgent.Types.ListDataSourcesResponse) => void): Request<BedrockAgent.Types.ListDataSourcesResponse, AWSError>;
   /**
-   * List data sources
+   * Lists the data sources in a knowledge base and information about each one.
    */
   listDataSources(callback?: (err: AWSError, data: BedrockAgent.Types.ListDataSourcesResponse) => void): Request<BedrockAgent.Types.ListDataSourcesResponse, AWSError>;
   /**
-   * List ingestion jobs
+   * Lists the ingestion jobs for a data source and information about each of them.
    */
   listIngestionJobs(params: BedrockAgent.Types.ListIngestionJobsRequest, callback?: (err: AWSError, data: BedrockAgent.Types.ListIngestionJobsResponse) => void): Request<BedrockAgent.Types.ListIngestionJobsResponse, AWSError>;
   /**
-   * List ingestion jobs
+   * Lists the ingestion jobs for a data source and information about each of them.
    */
   listIngestionJobs(callback?: (err: AWSError, data: BedrockAgent.Types.ListIngestionJobsResponse) => void): Request<BedrockAgent.Types.ListIngestionJobsResponse, AWSError>;
   /**
-   * List Knowledge Bases
+   * Lists the knowledge bases in an account and information about each of them.
    */
   listKnowledgeBases(params: BedrockAgent.Types.ListKnowledgeBasesRequest, callback?: (err: AWSError, data: BedrockAgent.Types.ListKnowledgeBasesResponse) => void): Request<BedrockAgent.Types.ListKnowledgeBasesResponse, AWSError>;
   /**
-   * List Knowledge Bases
+   * Lists the knowledge bases in an account and information about each of them.
    */
   listKnowledgeBases(callback?: (err: AWSError, data: BedrockAgent.Types.ListKnowledgeBasesResponse) => void): Request<BedrockAgent.Types.ListKnowledgeBasesResponse, AWSError>;
   /**
-   * List tags for a resource
+   * List all the tags for the resource you specify.
    */
   listTagsForResource(params: BedrockAgent.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: BedrockAgent.Types.ListTagsForResourceResponse) => void): Request<BedrockAgent.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * List tags for a resource
+   * List all the tags for the resource you specify.
    */
   listTagsForResource(callback?: (err: AWSError, data: BedrockAgent.Types.ListTagsForResourceResponse) => void): Request<BedrockAgent.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Prepares an existing Amazon Bedrock Agent to receive runtime requests
+   * Creates a DRAFT version of the agent that can be used for internal testing.
    */
   prepareAgent(params: BedrockAgent.Types.PrepareAgentRequest, callback?: (err: AWSError, data: BedrockAgent.Types.PrepareAgentResponse) => void): Request<BedrockAgent.Types.PrepareAgentResponse, AWSError>;
   /**
-   * Prepares an existing Amazon Bedrock Agent to receive runtime requests
+   * Creates a DRAFT version of the agent that can be used for internal testing.
    */
   prepareAgent(callback?: (err: AWSError, data: BedrockAgent.Types.PrepareAgentResponse) => void): Request<BedrockAgent.Types.PrepareAgentResponse, AWSError>;
   /**
-   * Start a new ingestion job
+   * Begins an ingestion job, in which a data source is added to a knowledge base.
    */
   startIngestionJob(params: BedrockAgent.Types.StartIngestionJobRequest, callback?: (err: AWSError, data: BedrockAgent.Types.StartIngestionJobResponse) => void): Request<BedrockAgent.Types.StartIngestionJobResponse, AWSError>;
   /**
-   * Start a new ingestion job
+   * Begins an ingestion job, in which a data source is added to a knowledge base.
    */
   startIngestionJob(callback?: (err: AWSError, data: BedrockAgent.Types.StartIngestionJobResponse) => void): Request<BedrockAgent.Types.StartIngestionJobResponse, AWSError>;
   /**
-   * Tag a resource
+   * Associate tags with a resource. For more information, see Tagging resources in the Amazon Bedrock User Guide.
    */
   tagResource(params: BedrockAgent.Types.TagResourceRequest, callback?: (err: AWSError, data: BedrockAgent.Types.TagResourceResponse) => void): Request<BedrockAgent.Types.TagResourceResponse, AWSError>;
   /**
-   * Tag a resource
+   * Associate tags with a resource. For more information, see Tagging resources in the Amazon Bedrock User Guide.
    */
   tagResource(callback?: (err: AWSError, data: BedrockAgent.Types.TagResourceResponse) => void): Request<BedrockAgent.Types.TagResourceResponse, AWSError>;
   /**
-   * Untag a resource
+   * Remove tags from a resource.
    */
   untagResource(params: BedrockAgent.Types.UntagResourceRequest, callback?: (err: AWSError, data: BedrockAgent.Types.UntagResourceResponse) => void): Request<BedrockAgent.Types.UntagResourceResponse, AWSError>;
   /**
-   * Untag a resource
+   * Remove tags from a resource.
    */
   untagResource(callback?: (err: AWSError, data: BedrockAgent.Types.UntagResourceResponse) => void): Request<BedrockAgent.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates an existing Amazon Bedrock Agent
+   * Updates the configuration of an agent.
    */
   updateAgent(params: BedrockAgent.Types.UpdateAgentRequest, callback?: (err: AWSError, data: BedrockAgent.Types.UpdateAgentResponse) => void): Request<BedrockAgent.Types.UpdateAgentResponse, AWSError>;
   /**
-   * Updates an existing Amazon Bedrock Agent
+   * Updates the configuration of an agent.
    */
   updateAgent(callback?: (err: AWSError, data: BedrockAgent.Types.UpdateAgentResponse) => void): Request<BedrockAgent.Types.UpdateAgentResponse, AWSError>;
   /**
-   * Updates an existing Action Group for Amazon Bedrock Agent
+   * Updates the configuration for an action group for an agent.
    */
   updateAgentActionGroup(params: BedrockAgent.Types.UpdateAgentActionGroupRequest, callback?: (err: AWSError, data: BedrockAgent.Types.UpdateAgentActionGroupResponse) => void): Request<BedrockAgent.Types.UpdateAgentActionGroupResponse, AWSError>;
   /**
-   * Updates an existing Action Group for Amazon Bedrock Agent
+   * Updates the configuration for an action group for an agent.
    */
   updateAgentActionGroup(callback?: (err: AWSError, data: BedrockAgent.Types.UpdateAgentActionGroupResponse) => void): Request<BedrockAgent.Types.UpdateAgentActionGroupResponse, AWSError>;
   /**
-   * Updates an existing Alias for an Amazon Bedrock Agent
+   * Updates configurations for an alias of an agent.
    */
   updateAgentAlias(params: BedrockAgent.Types.UpdateAgentAliasRequest, callback?: (err: AWSError, data: BedrockAgent.Types.UpdateAgentAliasResponse) => void): Request<BedrockAgent.Types.UpdateAgentAliasResponse, AWSError>;
   /**
-   * Updates an existing Alias for an Amazon Bedrock Agent
+   * Updates configurations for an alias of an agent.
    */
   updateAgentAlias(callback?: (err: AWSError, data: BedrockAgent.Types.UpdateAgentAliasResponse) => void): Request<BedrockAgent.Types.UpdateAgentAliasResponse, AWSError>;
   /**
-   * Updates an existing Knowledge Base associated to an Amazon Bedrock Agent
+   * Updates the configuration for a knowledge base that has been associated with an agent.
    */
   updateAgentKnowledgeBase(params: BedrockAgent.Types.UpdateAgentKnowledgeBaseRequest, callback?: (err: AWSError, data: BedrockAgent.Types.UpdateAgentKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.UpdateAgentKnowledgeBaseResponse, AWSError>;
   /**
-   * Updates an existing Knowledge Base associated to an Amazon Bedrock Agent
+   * Updates the configuration for a knowledge base that has been associated with an agent.
    */
   updateAgentKnowledgeBase(callback?: (err: AWSError, data: BedrockAgent.Types.UpdateAgentKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.UpdateAgentKnowledgeBaseResponse, AWSError>;
   /**
-   * Update an existing data source
+   * Updates configurations for a data source.  You can't change the chunkingConfiguration after you create the data source. Specify the existing chunkingConfiguration. 
    */
   updateDataSource(params: BedrockAgent.Types.UpdateDataSourceRequest, callback?: (err: AWSError, data: BedrockAgent.Types.UpdateDataSourceResponse) => void): Request<BedrockAgent.Types.UpdateDataSourceResponse, AWSError>;
   /**
-   * Update an existing data source
+   * Updates configurations for a data source.  You can't change the chunkingConfiguration after you create the data source. Specify the existing chunkingConfiguration. 
    */
   updateDataSource(callback?: (err: AWSError, data: BedrockAgent.Types.UpdateDataSourceResponse) => void): Request<BedrockAgent.Types.UpdateDataSourceResponse, AWSError>;
   /**
-   * Update an existing knowledge base
+   * Updates the configuration of a knowledge base with the fields that you specify. Because all fields will be overwritten, you must include the same values for fields that you want to keep the same. You can change the following fields:    name     description     roleArn    You can't change the knowledgeBaseConfiguration or storageConfiguration fields, so you must specify the same configurations as when you created the knowledge base. You can send a GetKnowledgeBase request and copy the same configurations.
    */
   updateKnowledgeBase(params: BedrockAgent.Types.UpdateKnowledgeBaseRequest, callback?: (err: AWSError, data: BedrockAgent.Types.UpdateKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.UpdateKnowledgeBaseResponse, AWSError>;
   /**
-   * Update an existing knowledge base
+   * Updates the configuration of a knowledge base with the fields that you specify. Because all fields will be overwritten, you must include the same values for fields that you want to keep the same. You can change the following fields:    name     description     roleArn    You can't change the knowledgeBaseConfiguration or storageConfiguration fields, so you must specify the same configurations as when you created the knowledge base. You can send a GetKnowledgeBase request and copy the same configurations.
    */
   updateKnowledgeBase(callback?: (err: AWSError, data: BedrockAgent.Types.UpdateKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.UpdateKnowledgeBaseResponse, AWSError>;
 }
 declare namespace BedrockAgent {
   export interface APISchema {
-    s3?: S3Identifier;
+    /**
+     * The JSON or YAML-formatted payload defining the OpenAPI schema for the action group. For more information, see Action group OpenAPI schemas.
+     */
     payload?: Payload;
+    /**
+     * Contains details about the S3 object containing the OpenAPI schema for the action group. For more information, see Action group OpenAPI schemas.
+     */
+    s3?: S3Identifier;
   }
   export interface ActionGroupExecutor {
+    /**
+     * The ARN of the Lambda function containing the business logic that is carried out upon invoking the action.
+     */
     lambda?: LambdaArn;
   }
   export type ActionGroupSignature = "AMAZON.UserInput"|string;
   export type ActionGroupState = "ENABLED"|"DISABLED"|string;
   export type ActionGroupSummaries = ActionGroupSummary[];
   export interface ActionGroupSummary {
+    /**
+     * The unique identifier of the action group.
+     */
     actionGroupId: Id;
+    /**
+     * The name of the action group.
+     */
     actionGroupName: Name;
+    /**
+     * Specifies whether the action group is available for the agent to invoke or not when sending an InvokeAgent request.
+     */
     actionGroupState: ActionGroupState;
+    /**
+     * The description of the action group.
+     */
     description?: Description;
+    /**
+     * The time at which the action group was last updated.
+     */
     updatedAt: DateTimestamp;
   }
   export interface Agent {
-    agentId: Id;
-    agentName: Name;
+    /**
+     * The ARN of the agent.
+     */
     agentArn: AgentArn;
-    agentVersion: DraftVersion;
-    clientToken?: ClientToken;
-    instruction?: Instruction;
-    agentStatus: AgentStatus;
-    foundationModel?: ModelIdentifier;
-    description?: Description;
-    idleSessionTTLInSeconds: SessionTTL;
+    /**
+     * The unique identifier of the agent.
+     */
+    agentId: Id;
+    /**
+     * The name of the agent.
+     */
+    agentName: Name;
+    /**
+     * The ARN of the IAM role with permissions to call API operations on the agent. The ARN must begin with AmazonBedrockExecutionRoleForAgents_.
+     */
     agentResourceRoleArn: AgentRoleArn;
-    customerEncryptionKeyArn?: KmsKeyArn;
+    /**
+     * The status of the agent and whether it is ready for use. The following statuses are possible:   CREATING – The agent is being created.   PREPARING – The agent is being prepared.   PREPARED – The agent is prepared and ready to be invoked.   NOT_PREPARED – The agent has been created but not yet prepared.   FAILED – The agent API operation failed.   UPDATING – The agent is being updated.   DELETING – The agent is being deleted.  
+     */
+    agentStatus: AgentStatus;
+    /**
+     * The version of the agent.
+     */
+    agentVersion: DraftVersion;
+    /**
+     * A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see Ensuring idempotency.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The time at which the agent was created.
+     */
     createdAt: DateTimestamp;
-    updatedAt: DateTimestamp;
-    preparedAt?: DateTimestamp;
+    /**
+     * The ARN of the KMS key that encrypts the agent.
+     */
+    customerEncryptionKeyArn?: KmsKeyArn;
+    /**
+     * The description of the agent.
+     */
+    description?: Description;
+    /**
+     * Contains reasons that the agent-related API that you invoked failed.
+     */
     failureReasons?: FailureReasons;
-    recommendedActions?: RecommendedActions;
+    /**
+     * The foundation model used for orchestration by the agent.
+     */
+    foundationModel?: ModelIdentifier;
+    /**
+     * The number of seconds for which Amazon Bedrock keeps information about a user's conversation with the agent. A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Bedrock deletes any data provided before the timeout.
+     */
+    idleSessionTTLInSeconds: SessionTTL;
+    /**
+     * Instructions that tell the agent what it should do and how it should interact with users.
+     */
+    instruction?: Instruction;
+    /**
+     * The time at which the agent was last prepared.
+     */
+    preparedAt?: DateTimestamp;
+    /**
+     * Contains configurations to override prompt templates in different parts of an agent sequence. For more information, see Advanced prompts.
+     */
     promptOverrideConfiguration?: PromptOverrideConfiguration;
+    /**
+     * Contains recommended actions to take for the agent-related API that you invoked to succeed.
+     */
+    recommendedActions?: RecommendedActions;
+    /**
+     * The time at which the agent was last updated.
+     */
+    updatedAt: DateTimestamp;
   }
   export interface AgentActionGroup {
-    agentId: Id;
-    agentVersion: Version;
-    actionGroupId: Id;
-    actionGroupName: Name;
-    clientToken?: ClientToken;
-    description?: Description;
-    createdAt: DateTimestamp;
-    updatedAt: DateTimestamp;
-    parentActionSignature?: ActionGroupSignature;
+    /**
+     * The ARN of the Lambda function containing the business logic that is carried out upon invoking the action.
+     */
     actionGroupExecutor?: ActionGroupExecutor;
-    apiSchema?: APISchema;
+    /**
+     * The unique identifier of the action group.
+     */
+    actionGroupId: Id;
+    /**
+     * The name of the action group.
+     */
+    actionGroupName: Name;
+    /**
+     * Specifies whether the action group is available for the agent to invoke or not when sending an InvokeAgent request.
+     */
     actionGroupState: ActionGroupState;
+    /**
+     * The unique identifier of the agent to which the action group belongs.
+     */
+    agentId: Id;
+    /**
+     * The version of the agent to which the action group belongs.
+     */
+    agentVersion: Version;
+    /**
+     * Contains either details about the S3 object containing the OpenAPI schema for the action group or the JSON or YAML-formatted payload defining the schema. For more information, see Action group OpenAPI schemas.
+     */
+    apiSchema?: APISchema;
+    /**
+     * A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see Ensuring idempotency.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The time at which the action group was created.
+     */
+    createdAt: DateTimestamp;
+    /**
+     * The description of the action group.
+     */
+    description?: Description;
+    /**
+     * If this field is set as AMAZON.UserInput, the agent can request the user for additional information when trying to complete a task. The description, apiSchema, and actionGroupExecutor fields must be blank for this action group. During orchestration, if the agent determines that it needs to invoke an API in an action group, but doesn't have enough information to complete the API request, it will invoke this action group instead and return an Observation reprompting the user for more information.
+     */
+    parentActionSignature?: ActionGroupSignature;
+    /**
+     * The time at which the action group was last updated.
+     */
+    updatedAt: DateTimestamp;
   }
   export interface AgentAlias {
-    agentId: Id;
-    agentAliasId: AgentAliasId;
-    agentAliasName: Name;
+    /**
+     * The ARN of the alias of the agent.
+     */
     agentAliasArn: AgentAliasArn;
-    clientToken?: ClientToken;
-    description?: Description;
-    routingConfiguration: AgentAliasRoutingConfiguration;
-    createdAt: DateTimestamp;
-    updatedAt: DateTimestamp;
+    /**
+     * Contains details about the history of the alias.
+     */
     agentAliasHistoryEvents?: AgentAliasHistoryEvents;
+    /**
+     * The unique identifier of the alias of the agent.
+     */
+    agentAliasId: AgentAliasId;
+    /**
+     * The name of the alias of the agent.
+     */
+    agentAliasName: Name;
+    /**
+     * The status of the alias of the agent and whether it is ready for use. The following statuses are possible:   CREATING – The agent alias is being created.   PREPARED – The agent alias is finished being created or updated and is ready to be invoked.   FAILED – The agent alias API operation failed.   UPDATING – The agent alias is being updated.   DELETING – The agent alias is being deleted.  
+     */
     agentAliasStatus: AgentAliasStatus;
+    /**
+     * The unique identifier of the agent.
+     */
+    agentId: Id;
+    /**
+     * A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see Ensuring idempotency.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The time at which the alias of the agent was created.
+     */
+    createdAt: DateTimestamp;
+    /**
+     * The description of the alias of the agent.
+     */
+    description?: Description;
+    /**
+     * Contains details about the routing configuration of the alias.
+     */
+    routingConfiguration: AgentAliasRoutingConfiguration;
+    /**
+     * The time at which the alias was last updated.
+     */
+    updatedAt: DateTimestamp;
   }
   export type AgentAliasArn = string;
   export interface AgentAliasHistoryEvent {
-    routingConfiguration?: AgentAliasRoutingConfiguration;
+    /**
+     * The date that the alias stopped being associated to the version in the routingConfiguration object
+     */
     endDate?: DateTimestamp;
+    /**
+     * Contains details about the version of the agent with which the alias is associated.
+     */
+    routingConfiguration?: AgentAliasRoutingConfiguration;
+    /**
+     * The date that the alias began being associated to the version in the routingConfiguration object.
+     */
     startDate?: DateTimestamp;
   }
   export type AgentAliasHistoryEvents = AgentAliasHistoryEvent[];
   export type AgentAliasId = string;
   export type AgentAliasRoutingConfiguration = AgentAliasRoutingConfigurationListItem[];
   export interface AgentAliasRoutingConfigurationListItem {
+    /**
+     * The version of the agent with which the alias is associated.
+     */
     agentVersion: Version;
   }
   export type AgentAliasStatus = "CREATING"|"PREPARED"|"FAILED"|"UPDATING"|"DELETING"|string;
   export type AgentAliasSummaries = AgentAliasSummary[];
   export interface AgentAliasSummary {
+    /**
+     * Contains details about 
+     */
     agentAliasId: AgentAliasId;
+    /**
+     * The name of the alias.
+     */
     agentAliasName: Name;
-    description?: Description;
-    routingConfiguration?: AgentAliasRoutingConfiguration;
+    /**
+     * The status of the alias.
+     */
     agentAliasStatus: AgentAliasStatus;
+    /**
+     * The time at which the alias of the agent was created.
+     */
     createdAt: DateTimestamp;
+    /**
+     * The description of the alias.
+     */
+    description?: Description;
+    /**
+     * Contains details about the version of the agent with which the alias is associated.
+     */
+    routingConfiguration?: AgentAliasRoutingConfiguration;
+    /**
+     * The time at which the alias was last updated.
+     */
     updatedAt: DateTimestamp;
   }
   export type AgentArn = string;
   export interface AgentKnowledgeBase {
+    /**
+     * The unique identifier of the agent with which the knowledge base is associated.
+     */
     agentId: Id;
+    /**
+     * The version of the agent with which the knowledge base is associated.
+     */
     agentVersion: Version;
-    knowledgeBaseId: Id;
-    description: Description;
+    /**
+     * The time at which the association between the agent and the knowledge base was created.
+     */
     createdAt: DateTimestamp;
-    updatedAt: DateTimestamp;
+    /**
+     * The description of the association between the agent and the knowledge base.
+     */
+    description: Description;
+    /**
+     * The unique identifier of the association between the agent and the knowledge base.
+     */
+    knowledgeBaseId: Id;
+    /**
+     * Specifies whether to use the knowledge base or not when sending an InvokeAgent request.
+     */
     knowledgeBaseState: KnowledgeBaseState;
+    /**
+     * The time at which the association between the agent and the knowledge base was last updated.
+     */
+    updatedAt: DateTimestamp;
   }
   export type AgentKnowledgeBaseSummaries = AgentKnowledgeBaseSummary[];
   export interface AgentKnowledgeBaseSummary {
-    knowledgeBaseId: Id;
+    /**
+     * The description of the knowledge base associated with an agent.
+     */
     description?: Description;
+    /**
+     * The unique identifier of the knowledge base associated with an agent.
+     */
+    knowledgeBaseId: Id;
+    /**
+     * Specifies whether the agent uses the knowledge base or not when sending an InvokeAgent request.
+     */
     knowledgeBaseState: KnowledgeBaseState;
+    /**
+     * The time at which the knowledge base associated with an agent was last updated.
+     */
     updatedAt: DateTimestamp;
   }
   export type AgentRoleArn = string;
   export type AgentStatus = "CREATING"|"PREPARING"|"PREPARED"|"NOT_PREPARED"|"DELETING"|"FAILED"|"VERSIONING"|"UPDATING"|string;
   export type AgentSummaries = AgentSummary[];
   export interface AgentSummary {
+    /**
+     * The unique identifier of the agent.
+     */
     agentId: Id;
+    /**
+     * The name of the agent.
+     */
     agentName: Name;
+    /**
+     * The status of the agent.
+     */
     agentStatus: AgentStatus;
+    /**
+     * The description of the agent.
+     */
     description?: Description;
-    updatedAt: DateTimestamp;
+    /**
+     * The latest version of the agent.
+     */
     latestAgentVersion?: Version;
+    /**
+     * The time at which the agent was last updated.
+     */
+    updatedAt: DateTimestamp;
   }
   export interface AgentVersion {
-    agentId: Id;
-    agentName: Name;
+    /**
+     * The ARN of the agent that the version belongs to.
+     */
     agentArn: AgentArn;
-    version: NumericalVersion;
-    instruction?: Instruction;
-    agentStatus: AgentStatus;
-    foundationModel?: ModelIdentifier;
-    description?: Description;
-    idleSessionTTLInSeconds: SessionTTL;
+    /**
+     * The unique identifier of the agent that the version belongs to.
+     */
+    agentId: Id;
+    /**
+     * The name of the agent that the version belongs to.
+     */
+    agentName: Name;
+    /**
+     * The ARN of the IAM role with permissions to invoke API operations on the agent. The ARN must begin with AmazonBedrockExecutionRoleForAgents_.
+     */
     agentResourceRoleArn: AgentRoleArn;
-    customerEncryptionKeyArn?: KmsKeyArn;
+    /**
+     * The status of the agent that the version belongs to.
+     */
+    agentStatus: AgentStatus;
+    /**
+     * The time at which the version was created.
+     */
     createdAt: DateTimestamp;
-    updatedAt: DateTimestamp;
+    /**
+     * The ARN of the KMS key that encrypts the agent.
+     */
+    customerEncryptionKeyArn?: KmsKeyArn;
+    /**
+     * The description of the version.
+     */
+    description?: Description;
+    /**
+     * A list of reasons that the API operation on the version failed.
+     */
     failureReasons?: FailureReasons;
-    recommendedActions?: RecommendedActions;
+    /**
+     * The foundation model that the version invokes.
+     */
+    foundationModel?: ModelIdentifier;
+    /**
+     * The number of seconds for which Amazon Bedrock keeps information about a user's conversation with the agent. A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Bedrock deletes any data provided before the timeout.
+     */
+    idleSessionTTLInSeconds: SessionTTL;
+    /**
+     * The instructions provided to the agent.
+     */
+    instruction?: Instruction;
+    /**
+     * Contains configurations to override prompt templates in different parts of an agent sequence. For more information, see Advanced prompts.
+     */
     promptOverrideConfiguration?: PromptOverrideConfiguration;
+    /**
+     * A list of recommended actions to take for the failed API operation on the version to succeed.
+     */
+    recommendedActions?: RecommendedActions;
+    /**
+     * The time at which the version was last updated.
+     */
+    updatedAt: DateTimestamp;
+    /**
+     * The version number.
+     */
+    version: NumericalVersion;
   }
   export type AgentVersionSummaries = AgentVersionSummary[];
   export interface AgentVersionSummary {
+    /**
+     * The name of the agent to which the version belongs.
+     */
     agentName: Name;
+    /**
+     * The status of the agent to which the version belongs.
+     */
     agentStatus: AgentStatus;
+    /**
+     * The version of the agent.
+     */
     agentVersion: Version;
+    /**
+     * The time at which the version was created.
+     */
     createdAt: DateTimestamp;
-    updatedAt: DateTimestamp;
+    /**
+     * The description of the version of the agent.
+     */
     description?: Description;
+    /**
+     * The time at which the version was last updated.
+     */
+    updatedAt: DateTimestamp;
   }
   export interface AssociateAgentKnowledgeBaseRequest {
     /**
-     * Id generated at the server side when an Agent is created
+     * The unique identifier of the agent with which you want to associate the knowledge base.
      */
     agentId: Id;
     /**
-     * Draft Version of the Agent.
+     * The version of the agent with which you want to associate the knowledge base.
      */
     agentVersion: DraftVersion;
-    knowledgeBaseId: Id;
+    /**
+     * A description of what the agent should use the knowledge base for.
+     */
     description: Description;
+    /**
+     * The unique identifier of the knowledge base to associate with the agent.
+     */
+    knowledgeBaseId: Id;
+    /**
+     * Specifies whether to use the knowledge base or not when sending an InvokeAgent request.
+     */
     knowledgeBaseState?: KnowledgeBaseState;
   }
   export interface AssociateAgentKnowledgeBaseResponse {
+    /**
+     * Contains details about the knowledge base that has been associated with the agent.
+     */
     agentKnowledgeBase: AgentKnowledgeBase;
   }
   export type BasePromptTemplate = string;
   export type BedrockEmbeddingModelArn = string;
   export type Boolean = boolean;
   export interface ChunkingConfiguration {
+    /**
+     * Knowledge base can split your source data into chunks. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried. You have the following options for chunking your data. If you opt for NONE, then you may want to pre-process your files by splitting them up such that each file corresponds to a chunk.    FIXED_SIZE – Amazon Bedrock splits your source data into chunks of the approximate size that you set in the fixedSizeChunkingConfiguration.    NONE – Amazon Bedrock treats each file as one chunk. If you choose this option, you may want to pre-process your documents by splitting them into separate files.  
+     */
     chunkingStrategy: ChunkingStrategy;
+    /**
+     * Configurations for when you choose fixed-size chunking. If you set the chunkingStrategy as NONE, exclude this field.
+     */
     fixedSizeChunkingConfiguration?: FixedSizeChunkingConfiguration;
   }
   export type ChunkingStrategy = "FIXED_SIZE"|"NONE"|string;
@@ -503,121 +818,298 @@ declare namespace BedrockAgent {
   export type ColumnName = string;
   export interface CreateAgentActionGroupRequest {
     /**
-     * Id generated at the server side when an Agent is created
+     * The ARN of the Lambda function containing the business logic that is carried out upon invoking the action.
+     */
+    actionGroupExecutor?: ActionGroupExecutor;
+    /**
+     * The name to give the action group.
+     */
+    actionGroupName: Name;
+    /**
+     * Specifies whether the action group is available for the agent to invoke or not when sending an InvokeAgent request.
+     */
+    actionGroupState?: ActionGroupState;
+    /**
+     * The unique identifier of the agent for which to create the action group.
      */
     agentId: Id;
     /**
-     * Draft Version of the Agent.
+     * The version of the agent for which to create the action group.
      */
     agentVersion: DraftVersion;
-    actionGroupName: Name;
-    clientToken?: ClientToken;
-    description?: Description;
-    parentActionGroupSignature?: ActionGroupSignature;
-    actionGroupExecutor?: ActionGroupExecutor;
+    /**
+     * Contains either details about the S3 object containing the OpenAPI schema for the action group or the JSON or YAML-formatted payload defining the schema. For more information, see Action group OpenAPI schemas.
+     */
     apiSchema?: APISchema;
-    actionGroupState?: ActionGroupState;
+    /**
+     * A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see Ensuring idempotency.
+     */
+    clientToken?: ClientToken;
+    /**
+     * A description of the action group.
+     */
+    description?: Description;
+    /**
+     * To allow your agent to request the user for additional information when trying to complete a task, set this field to AMAZON.UserInput. You must leave the description, apiSchema, and actionGroupExecutor fields blank for this action group. During orchestration, if your agent determines that it needs to invoke an API in an action group, but doesn't have enough information to complete the API request, it will invoke this action group instead and return an Observation reprompting the user for more information.
+     */
+    parentActionGroupSignature?: ActionGroupSignature;
   }
   export interface CreateAgentActionGroupResponse {
+    /**
+     * Contains details about the action group that was created.
+     */
     agentActionGroup: AgentActionGroup;
   }
   export interface CreateAgentAliasRequest {
     /**
-     * Id generated at the server side when an Agent is created
+     * The name of the alias.
+     */
+    agentAliasName: Name;
+    /**
+     * The unique identifier of the agent.
      */
     agentId: Id;
-    agentAliasName: Name;
+    /**
+     * A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see Ensuring idempotency.
+     */
     clientToken?: ClientToken;
+    /**
+     * A description of the alias of the agent.
+     */
     description?: Description;
+    /**
+     * Contains details about the routing configuration of the alias.
+     */
     routingConfiguration?: AgentAliasRoutingConfiguration;
+    /**
+     * Any tags that you want to attach to the alias of the agent.
+     */
     tags?: TagsMap;
   }
   export interface CreateAgentAliasResponse {
+    /**
+     * Contains details about the alias that was created.
+     */
     agentAlias: AgentAlias;
   }
   export interface CreateAgentRequest {
+    /**
+     * A name for the agent that you create.
+     */
     agentName: Name;
-    clientToken?: ClientToken;
-    instruction?: Instruction;
-    foundationModel?: ModelIdentifier;
-    description?: Description;
-    idleSessionTTLInSeconds?: SessionTTL;
+    /**
+     * The ARN of the IAM role with permissions to create the agent. The ARN must begin with AmazonBedrockExecutionRoleForAgents_.
+     */
     agentResourceRoleArn: AgentRoleArn;
+    /**
+     * A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see Ensuring idempotency.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The ARN of the KMS key with which to encrypt the agent.
+     */
     customerEncryptionKeyArn?: KmsKeyArn;
-    tags?: TagsMap;
+    /**
+     * A description of the agent.
+     */
+    description?: Description;
+    /**
+     * The foundation model to be used for orchestration by the agent you create.
+     */
+    foundationModel?: ModelIdentifier;
+    /**
+     * The number of seconds for which Amazon Bedrock keeps information about a user's conversation with the agent. A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Bedrock deletes any data provided before the timeout.
+     */
+    idleSessionTTLInSeconds?: SessionTTL;
+    /**
+     * Instructions that tell the agent what it should do and how it should interact with users.
+     */
+    instruction?: Instruction;
+    /**
+     * Contains configurations to override prompts in different parts of an agent sequence. For more information, see Advanced prompts.
+     */
     promptOverrideConfiguration?: PromptOverrideConfiguration;
+    /**
+     * Any tags that you want to attach to the agent.
+     */
+    tags?: TagsMap;
   }
   export interface CreateAgentResponse {
+    /**
+     * Contains details about the agent created.
+     */
     agent: Agent;
   }
   export interface CreateDataSourceRequest {
-    knowledgeBaseId: Id;
+    /**
+     * A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see Ensuring idempotency.
+     */
     clientToken?: ClientToken;
-    name: Name;
-    description?: Description;
+    /**
+     * Contains metadata about where the data source is stored.
+     */
     dataSourceConfiguration: DataSourceConfiguration;
+    /**
+     * A description of the data source.
+     */
+    description?: Description;
+    /**
+     * The unique identifier of the knowledge base to which to add the data source.
+     */
+    knowledgeBaseId: Id;
+    /**
+     * The name of the data source.
+     */
+    name: Name;
+    /**
+     * Contains details about the server-side encryption for the data source.
+     */
     serverSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
+    /**
+     * Contains details about how to ingest the documents in the data source.
+     */
     vectorIngestionConfiguration?: VectorIngestionConfiguration;
   }
   export interface CreateDataSourceResponse {
+    /**
+     * Contains details about the data source.
+     */
     dataSource: DataSource;
   }
   export interface CreateKnowledgeBaseRequest {
+    /**
+     * A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see Ensuring idempotency.
+     */
     clientToken?: ClientToken;
-    name: Name;
+    /**
+     * A description of the knowledge base.
+     */
     description?: Description;
-    roleArn: KnowledgeBaseRoleArn;
+    /**
+     * Contains details about the embeddings model used for the knowledge base.
+     */
     knowledgeBaseConfiguration: KnowledgeBaseConfiguration;
+    /**
+     * A name for the knowledge base.
+     */
+    name: Name;
+    /**
+     * The ARN of the IAM role with permissions to create the knowledge base.
+     */
+    roleArn: KnowledgeBaseRoleArn;
+    /**
+     * Contains details about the configuration of the vector database used for the knowledge base.
+     */
     storageConfiguration: StorageConfiguration;
+    /**
+     * Specify the key-value pairs for the tags that you want to attach to your knowledge base in this object.
+     */
     tags?: TagsMap;
   }
   export interface CreateKnowledgeBaseResponse {
+    /**
+     * Contains details about the knowledge base.
+     */
     knowledgeBase: KnowledgeBase;
   }
   export type CreationMode = "DEFAULT"|"OVERRIDDEN"|string;
   export interface DataSource {
-    knowledgeBaseId: Id;
-    dataSourceId: Id;
-    name: Name;
-    status: DataSourceStatus;
-    description?: Description;
-    dataSourceConfiguration: DataSourceConfiguration;
-    serverSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
-    vectorIngestionConfiguration?: VectorIngestionConfiguration;
+    /**
+     * The time at which the data source was created.
+     */
     createdAt: DateTimestamp;
+    /**
+     * Contains details about how the data source is stored.
+     */
+    dataSourceConfiguration: DataSourceConfiguration;
+    /**
+     * The unique identifier of the data source.
+     */
+    dataSourceId: Id;
+    /**
+     * The description of the data source.
+     */
+    description?: Description;
+    /**
+     * The unique identifier of the knowledge base to which the data source belongs.
+     */
+    knowledgeBaseId: Id;
+    /**
+     * The name of the data source.
+     */
+    name: Name;
+    /**
+     * Contains details about the configuration of the server-side encryption.
+     */
+    serverSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
+    /**
+     * The status of the data source. The following statuses are possible:   Available – The data source has been created and is ready for ingestion into the knowledge base.   Deleting – The data source is being deleted.  
+     */
+    status: DataSourceStatus;
+    /**
+     * The time at which the data source was last updated.
+     */
     updatedAt: DateTimestamp;
+    /**
+     * Contains details about how to ingest the documents in the data source.
+     */
+    vectorIngestionConfiguration?: VectorIngestionConfiguration;
   }
   export interface DataSourceConfiguration {
-    type: DataSourceType;
+    /**
+     * Contains details about the configuration of the S3 object containing the data source.
+     */
     s3Configuration?: S3DataSourceConfiguration;
+    /**
+     * The type of storage for the data source.
+     */
+    type: DataSourceType;
   }
   export type DataSourceStatus = "AVAILABLE"|"DELETING"|string;
   export type DataSourceSummaries = DataSourceSummary[];
   export interface DataSourceSummary {
-    knowledgeBaseId: Id;
+    /**
+     * The unique identifier of the data source.
+     */
     dataSourceId: Id;
-    name: Name;
-    status: DataSourceStatus;
+    /**
+     * The description of the data source.
+     */
     description?: Description;
+    /**
+     * The unique identifier of the knowledge base to which the data source belongs.
+     */
+    knowledgeBaseId: Id;
+    /**
+     * The name of the data source.
+     */
+    name: Name;
+    /**
+     * The status of the data source.
+     */
+    status: DataSourceStatus;
+    /**
+     * The time at which the data source was last updated.
+     */
     updatedAt: DateTimestamp;
   }
   export type DataSourceType = "S3"|string;
   export type DateTimestamp = Date;
   export interface DeleteAgentActionGroupRequest {
     /**
-     * Id generated at the server side when an Agent is created
-     */
-    agentId: Id;
-    /**
-     * Draft Version of the Agent.
-     */
-    agentVersion: DraftVersion;
-    /**
-     * Id generated at the server side when an Agent ActionGroup is created
+     * The unique identifier of the action group to delete.
      */
     actionGroupId: Id;
     /**
-     * Skips checking if resource is in use when set to true. Defaults to false
+     * The unique identifier of the agent that the action group belongs to.
+     */
+    agentId: Id;
+    /**
+     * The version of the agent that the action group belongs to.
+     */
+    agentVersion: DraftVersion;
+    /**
+     * By default, this value is false and deletion is stopped if the resource is in use. If you set it to true, the resource will be deleted even if the resource is in use.
      */
     skipResourceInUseCheck?: Boolean;
   }
@@ -625,77 +1117,128 @@ declare namespace BedrockAgent {
   }
   export interface DeleteAgentAliasRequest {
     /**
-     * Id generated at the server side when an Agent is created
-     */
-    agentId: Id;
-    /**
-     * Id generated at the server side when an Agent Alias is created
+     * The unique identifier of the alias to delete.
      */
     agentAliasId: AgentAliasId;
+    /**
+     * The unique identifier of the agent that the alias belongs to.
+     */
+    agentId: Id;
   }
   export interface DeleteAgentAliasResponse {
-    agentId: Id;
+    /**
+     * The unique identifier of the alias that was deleted.
+     */
     agentAliasId: AgentAliasId;
+    /**
+     * The status of the alias.
+     */
     agentAliasStatus: AgentAliasStatus;
+    /**
+     * The unique identifier of the agent that the alias belongs to.
+     */
+    agentId: Id;
   }
   export interface DeleteAgentRequest {
     /**
-     * Id generated at the server side when an Agent is created
+     * The unique identifier of the agent to delete.
      */
     agentId: Id;
     /**
-     * Skips checking if resource is in use when set to true. Defaults to false
+     * By default, this value is false and deletion is stopped if the resource is in use. If you set it to true, the resource will be deleted even if the resource is in use.
      */
     skipResourceInUseCheck?: Boolean;
   }
   export interface DeleteAgentResponse {
+    /**
+     * The unique identifier of the agent that was deleted.
+     */
     agentId: Id;
+    /**
+     * The status of the agent.
+     */
     agentStatus: AgentStatus;
   }
   export interface DeleteAgentVersionRequest {
     /**
-     * Id generated at the server side when an Agent is created
+     * The unique identifier of the agent that the version belongs to.
      */
     agentId: Id;
+    /**
+     * The version of the agent to delete.
+     */
     agentVersion: NumericalVersion;
     /**
-     * Skips checking if resource is in use when set to true. Defaults to false
+     * By default, this value is false and deletion is stopped if the resource is in use. If you set it to true, the resource will be deleted even if the resource is in use.
      */
     skipResourceInUseCheck?: Boolean;
   }
   export interface DeleteAgentVersionResponse {
+    /**
+     * The unique identifier of the agent that the version belongs to.
+     */
     agentId: Id;
-    agentVersion: NumericalVersion;
+    /**
+     * The status of the agent version.
+     */
     agentStatus: AgentStatus;
+    /**
+     * The version that was deleted.
+     */
+    agentVersion: NumericalVersion;
   }
   export interface DeleteDataSourceRequest {
-    knowledgeBaseId: Id;
+    /**
+     * The unique identifier of the data source to delete.
+     */
     dataSourceId: Id;
+    /**
+     * The unique identifier of the knowledge base from which to delete the data source.
+     */
+    knowledgeBaseId: Id;
   }
   export interface DeleteDataSourceResponse {
-    knowledgeBaseId: Id;
+    /**
+     * The unique identifier of the data source that was deleted.
+     */
     dataSourceId: Id;
+    /**
+     * The unique identifier of the knowledge base to which the data source that was deleted belonged.
+     */
+    knowledgeBaseId: Id;
+    /**
+     * The status of the data source.
+     */
     status: DataSourceStatus;
   }
   export interface DeleteKnowledgeBaseRequest {
+    /**
+     * The unique identifier of the knowledge base to delete.
+     */
     knowledgeBaseId: Id;
   }
   export interface DeleteKnowledgeBaseResponse {
+    /**
+     * The unique identifier of the knowledge base that was deleted.
+     */
     knowledgeBaseId: Id;
+    /**
+     * The status of the knowledge base and whether it has been successfully deleted.
+     */
     status: KnowledgeBaseStatus;
   }
   export type Description = string;
   export interface DisassociateAgentKnowledgeBaseRequest {
     /**
-     * Id generated at the server side when an Agent is created
+     * The unique identifier of the agent from which to disassociate the knowledge base.
      */
     agentId: Id;
     /**
-     * Draft Version of the Agent.
+     * The version of the agent from which to disassociate the knowledge base.
      */
     agentVersion: DraftVersion;
     /**
-     * Id generated at the server side when a Knowledge Base is associated to an Agent
+     * The unique identifier of the knowledge base to disassociate.
      */
     knowledgeBaseId: Id;
   }
@@ -707,11 +1250,11 @@ declare namespace BedrockAgent {
   export type FieldName = string;
   export interface FixedSizeChunkingConfiguration {
     /**
-     * The maximum number of tokens per chunk.
+     * The maximum number of tokens to include in a chunk.
      */
     maxTokens: FixedSizeChunkingConfigurationMaxTokensInteger;
     /**
-     * The overlap percentage between adjacent chunks.
+     * The percentage of overlap between adjacent chunks of a data source.
      */
     overlapPercentage: FixedSizeChunkingConfigurationOverlapPercentageInteger;
   }
@@ -719,113 +1262,209 @@ declare namespace BedrockAgent {
   export type FixedSizeChunkingConfigurationOverlapPercentageInteger = number;
   export interface GetAgentActionGroupRequest {
     /**
-     * Id generated at the server side when an Agent is created
+     * The unique identifier of the action group for which to get information.
+     */
+    actionGroupId: Id;
+    /**
+     * The unique identifier of the agent that the action group belongs to.
      */
     agentId: Id;
     /**
-     * Version number generated when a version is created
+     * The version of the agent that the action group belongs to.
      */
     agentVersion: Version;
-    /**
-     * Id generated at the server side when an Agent Action Group is created
-     */
-    actionGroupId: Id;
   }
   export interface GetAgentActionGroupResponse {
+    /**
+     * Contains details about the action group.
+     */
     agentActionGroup: AgentActionGroup;
   }
   export interface GetAgentAliasRequest {
     /**
-     * Id generated at the server side when an Agent is created
-     */
-    agentId: Id;
-    /**
-     * Id generated at the server side when an Agent Alias is created
+     * The unique identifier of the alias for which to get information.
      */
     agentAliasId: AgentAliasId;
+    /**
+     * The unique identifier of the agent to which the alias to get information belongs.
+     */
+    agentId: Id;
   }
   export interface GetAgentAliasResponse {
+    /**
+     * Contains information about the alias.
+     */
     agentAlias: AgentAlias;
   }
   export interface GetAgentKnowledgeBaseRequest {
     /**
-     * Id generated at the server side when an Agent is created
+     * The unique identifier of the agent with which the knowledge base is associated.
      */
     agentId: Id;
     /**
-     * Version number generated when a version is created
+     * The version of the agent with which the knowledge base is associated.
      */
     agentVersion: Version;
     /**
-     * Id generated at the server side when a Knowledge Base is associated
+     * The unique identifier of the knowledge base associated with the agent.
      */
     knowledgeBaseId: Id;
   }
   export interface GetAgentKnowledgeBaseResponse {
+    /**
+     * Contains details about a knowledge base attached to an agent.
+     */
     agentKnowledgeBase: AgentKnowledgeBase;
   }
   export interface GetAgentRequest {
     /**
-     * Id generated at the server side when an Agent is created
+     * The unique identifier of the agent.
      */
     agentId: Id;
   }
   export interface GetAgentResponse {
+    /**
+     * Contains details about the agent.
+     */
     agent: Agent;
   }
   export interface GetAgentVersionRequest {
     /**
-     * Id generated at the server side when an Agent is created
+     * The unique identifier of the agent.
      */
     agentId: Id;
+    /**
+     * The version of the agent.
+     */
     agentVersion: NumericalVersion;
   }
   export interface GetAgentVersionResponse {
+    /**
+     * Contains details about the version of the agent.
+     */
     agentVersion: AgentVersion;
   }
   export interface GetDataSourceRequest {
-    knowledgeBaseId: Id;
+    /**
+     * The unique identifier of the data source.
+     */
     dataSourceId: Id;
+    /**
+     * The unique identifier of the knowledge base that the data source was added to.
+     */
+    knowledgeBaseId: Id;
   }
   export interface GetDataSourceResponse {
+    /**
+     * Contains details about the data source.
+     */
     dataSource: DataSource;
   }
   export interface GetIngestionJobRequest {
-    knowledgeBaseId: Id;
+    /**
+     * The unique identifier of the data source in the ingestion job.
+     */
     dataSourceId: Id;
+    /**
+     * The unique identifier of the ingestion job.
+     */
     ingestionJobId: Id;
+    /**
+     * The unique identifier of the knowledge base for which the ingestion job applies.
+     */
+    knowledgeBaseId: Id;
   }
   export interface GetIngestionJobResponse {
+    /**
+     * Contains details about the ingestion job.
+     */
     ingestionJob: IngestionJob;
   }
   export interface GetKnowledgeBaseRequest {
+    /**
+     * The unique identifier of the knowledge base for which to get information.
+     */
     knowledgeBaseId: Id;
   }
   export interface GetKnowledgeBaseResponse {
+    /**
+     * Contains details about the knowledge base.
+     */
     knowledgeBase: KnowledgeBase;
   }
   export type Id = string;
   export interface InferenceConfiguration {
-    temperature?: Temperature;
-    topP?: TopP;
-    topK?: TopK;
+    /**
+     * The maximum number of tokens to allow in the generated response.
+     */
     maximumLength?: MaximumLength;
+    /**
+     * A list of stop sequences. A stop sequence is a sequence of characters that causes the model to stop generating the response.
+     */
     stopSequences?: StopSequences;
+    /**
+     * The likelihood of the model selecting higher-probability options while generating a response. A lower value makes the model more likely to choose higher-probability options, while a higher value makes the model more likely to choose lower-probability options.
+     */
+    temperature?: Temperature;
+    /**
+     * While generating a response, the model determines the probability of the following token at each point of generation. The value that you set for topK is the number of most-likely candidates from which the model chooses the next token in the sequence. For example, if you set topK to 50, the model selects the next token from among the top 50 most likely choices.
+     */
+    topK?: TopK;
+    /**
+     * While generating a response, the model determines the probability of the following token at each point of generation. The value that you set for Top P determines the number of most-likely candidates from which the model chooses the next token in the sequence. For example, if you set topP to 80, the model only selects the next token from the top 80% of the probability distribution of next tokens.
+     */
+    topP?: TopP;
   }
   export interface IngestionJob {
-    knowledgeBaseId: Id;
+    /**
+     * The unique identifier of the ingested data source.
+     */
     dataSourceId: Id;
-    ingestionJobId: Id;
+    /**
+     * The description of the ingestion job.
+     */
     description?: Description;
-    status: IngestionJobStatus;
-    statistics?: IngestionJobStatistics;
+    /**
+     * A list of reasons that the ingestion job failed.
+     */
     failureReasons?: FailureReasons;
+    /**
+     * The unique identifier of the ingestion job.
+     */
+    ingestionJobId: Id;
+    /**
+     * The unique identifier of the knowledge base to which the data source is being added.
+     */
+    knowledgeBaseId: Id;
+    /**
+     * The time at which the ingestion job started.
+     */
     startedAt: DateTimestamp;
+    /**
+     * Contains statistics about the ingestion job.
+     */
+    statistics?: IngestionJobStatistics;
+    /**
+     * The status of the ingestion job.
+     */
+    status: IngestionJobStatus;
+    /**
+     * The time at which the ingestion job was last updated.
+     */
     updatedAt: DateTimestamp;
   }
   export interface IngestionJobFilter {
+    /**
+     * The attribute by which to filter the results.
+     */
     attribute: IngestionJobFilterAttribute;
+    /**
+     * The operation to carry out between the attribute and the values.
+     */
     operator: IngestionJobFilterOperator;
+    /**
+     * A list of values for the attribute.
+     */
     values: IngestionJobFilterValues;
   }
   export type IngestionJobFilterAttribute = "STATUS"|string;
@@ -834,62 +1473,139 @@ declare namespace BedrockAgent {
   export type IngestionJobFilterValues = IngestionJobFilterValue[];
   export type IngestionJobFilters = IngestionJobFilter[];
   export interface IngestionJobSortBy {
+    /**
+     * The attribute by which to sort the results.
+     */
     attribute: IngestionJobSortByAttribute;
+    /**
+     * The order by which to sort the results.
+     */
     order: SortOrder;
   }
   export type IngestionJobSortByAttribute = "STATUS"|"STARTED_AT"|string;
   export interface IngestionJobStatistics {
     /**
-     * Number of scanned documents
-     */
-    numberOfDocumentsScanned?: PrimitiveLong;
-    /**
-     * Number of indexed documents
-     */
-    numberOfNewDocumentsIndexed?: PrimitiveLong;
-    /**
-     * Number of modified documents indexed
-     */
-    numberOfModifiedDocumentsIndexed?: PrimitiveLong;
-    /**
-     * Number of deleted documents
+     * The number of source documents that was deleted.
      */
     numberOfDocumentsDeleted?: PrimitiveLong;
     /**
-     * Number of failed documents
+     * The number of source documents that failed to be ingested.
      */
     numberOfDocumentsFailed?: PrimitiveLong;
+    /**
+     * The total number of source documents that were scanned. Includes new, updated, and unchanged documents.
+     */
+    numberOfDocumentsScanned?: PrimitiveLong;
+    /**
+     * The number of metadata files that were updated or deleted.
+     */
+    numberOfMetadataDocumentsModified?: PrimitiveLong;
+    /**
+     * The total number of metadata files that were scanned. Includes new, updated, and unchanged files.
+     */
+    numberOfMetadataDocumentsScanned?: PrimitiveLong;
+    /**
+     * The number of modified source documents in the data source that were successfully indexed.
+     */
+    numberOfModifiedDocumentsIndexed?: PrimitiveLong;
+    /**
+     * The number of new source documents in the data source that were successfully indexed.
+     */
+    numberOfNewDocumentsIndexed?: PrimitiveLong;
   }
   export type IngestionJobStatus = "STARTING"|"IN_PROGRESS"|"COMPLETE"|"FAILED"|string;
   export type IngestionJobSummaries = IngestionJobSummary[];
   export interface IngestionJobSummary {
-    knowledgeBaseId: Id;
+    /**
+     * The unique identifier of the data source in the ingestion job.
+     */
     dataSourceId: Id;
-    ingestionJobId: Id;
+    /**
+     * The description of the ingestion job.
+     */
     description?: Description;
-    status: IngestionJobStatus;
+    /**
+     * The unique identifier of the ingestion job.
+     */
+    ingestionJobId: Id;
+    /**
+     * The unique identifier of the knowledge base to which the data source is added.
+     */
+    knowledgeBaseId: Id;
+    /**
+     * The time at which the ingestion job was started.
+     */
     startedAt: DateTimestamp;
-    updatedAt: DateTimestamp;
+    /**
+     * Contains statistics for the ingestion job.
+     */
     statistics?: IngestionJobStatistics;
+    /**
+     * The status of the ingestion job.
+     */
+    status: IngestionJobStatus;
+    /**
+     * The time at which the ingestion job was last updated.
+     */
+    updatedAt: DateTimestamp;
   }
   export type Instruction = string;
   export type KmsKeyArn = string;
   export interface KnowledgeBase {
-    knowledgeBaseId: Id;
-    name: Name;
-    knowledgeBaseArn: KnowledgeBaseArn;
-    description?: Description;
-    roleArn: KnowledgeBaseRoleArn;
-    knowledgeBaseConfiguration: KnowledgeBaseConfiguration;
-    storageConfiguration: StorageConfiguration;
-    status: KnowledgeBaseStatus;
+    /**
+     * The time at which the knowledge base was created.
+     */
     createdAt: DateTimestamp;
-    updatedAt: DateTimestamp;
+    /**
+     * The description of the knowledge base.
+     */
+    description?: Description;
+    /**
+     * A list of reasons that the API operation on the knowledge base failed.
+     */
     failureReasons?: FailureReasons;
+    /**
+     * The ARN of the knowledge base.
+     */
+    knowledgeBaseArn: KnowledgeBaseArn;
+    /**
+     * Contains details about the embeddings configuration of the knowledge base.
+     */
+    knowledgeBaseConfiguration: KnowledgeBaseConfiguration;
+    /**
+     * The unique identifier of the knowledge base.
+     */
+    knowledgeBaseId: Id;
+    /**
+     * The name of the knowledge base.
+     */
+    name: Name;
+    /**
+     * The ARN of the IAM role with permissions to invoke API operations on the knowledge base. The ARN must begin with AmazonBedrockExecutionRoleForKnowledgeBase_.
+     */
+    roleArn: KnowledgeBaseRoleArn;
+    /**
+     * The status of the knowledge base. The following statuses are possible:   CREATING – The knowledge base is being created.   ACTIVE – The knowledge base is ready to be queried.   DELETING – The knowledge base is being deleted.   UPDATING – The knowledge base is being updated.   FAILED – The knowledge base API operation failed.  
+     */
+    status: KnowledgeBaseStatus;
+    /**
+     * Contains details about the storage configuration of the knowledge base.
+     */
+    storageConfiguration: StorageConfiguration;
+    /**
+     * The time at which the knowledge base was last updated.
+     */
+    updatedAt: DateTimestamp;
   }
   export type KnowledgeBaseArn = string;
   export interface KnowledgeBaseConfiguration {
+    /**
+     * The type of data that the data source is converted into for the knowledge base.
+     */
     type: KnowledgeBaseType;
+    /**
+     * Contains details about the embeddings model that'sused to convert the data source.
+     */
     vectorKnowledgeBaseConfiguration?: VectorKnowledgeBaseConfiguration;
   }
   export type KnowledgeBaseRoleArn = string;
@@ -898,111 +1614,243 @@ declare namespace BedrockAgent {
   export type KnowledgeBaseStorageType = "OPENSEARCH_SERVERLESS"|"PINECONE"|"REDIS_ENTERPRISE_CLOUD"|"RDS"|string;
   export type KnowledgeBaseSummaries = KnowledgeBaseSummary[];
   export interface KnowledgeBaseSummary {
-    knowledgeBaseId: Id;
-    name: Name;
+    /**
+     * The description of the knowledge base.
+     */
     description?: Description;
+    /**
+     * The unique identifier of the knowledge base.
+     */
+    knowledgeBaseId: Id;
+    /**
+     * The name of the knowledge base.
+     */
+    name: Name;
+    /**
+     * The status of the knowledge base.
+     */
     status: KnowledgeBaseStatus;
+    /**
+     * The time at which the knowledge base was last updated.
+     */
     updatedAt: DateTimestamp;
   }
   export type KnowledgeBaseType = "VECTOR"|string;
   export type LambdaArn = string;
   export interface ListAgentActionGroupsRequest {
     /**
-     * Id generated at the server side when an Agent is Listed
+     * The unique identifier of the agent.
      */
     agentId: Id;
     /**
-     * Id generated at the server side when an Agent is Listed
+     * The version of the agent.
      */
     agentVersion: Version;
+    /**
+     * The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the nextToken field when making another request to return the next batch of results.
+     */
     maxResults?: MaxResults;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, enter the token returned in the nextToken field in the response in this field to return the next batch of results.
+     */
     nextToken?: NextToken;
   }
   export interface ListAgentActionGroupsResponse {
+    /**
+     * A list of objects, each of which contains information about an action group.
+     */
     actionGroupSummaries: ActionGroupSummaries;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, use this token when making another request in the nextToken field to return the next batch of results.
+     */
     nextToken?: NextToken;
   }
   export interface ListAgentAliasesRequest {
     /**
-     * Id generated at the server side when an Agent is created
+     * The unique identifier of the agent.
      */
     agentId: Id;
+    /**
+     * The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the nextToken field when making another request to return the next batch of results.
+     */
     maxResults?: MaxResults;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, enter the token returned in the nextToken field in the response in this field to return the next batch of results.
+     */
     nextToken?: NextToken;
   }
   export interface ListAgentAliasesResponse {
+    /**
+     * A list of objects, each of which contains information about an alias of the agent.
+     */
     agentAliasSummaries: AgentAliasSummaries;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, use this token when making another request in the nextToken field to return the next batch of results.
+     */
     nextToken?: NextToken;
   }
   export interface ListAgentKnowledgeBasesRequest {
     /**
-     * Id generated at the server side when an Agent is created
+     * The unique identifier of the agent for which to return information about knowledge bases associated with it.
      */
     agentId: Id;
     /**
-     * Version number generated when a version is created
+     * The version of the agent for which to return information about knowledge bases associated with it.
      */
     agentVersion: Version;
+    /**
+     * The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the nextToken field when making another request to return the next batch of results.
+     */
     maxResults?: MaxResults;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, enter the token returned in the nextToken field in the response in this field to return the next batch of results.
+     */
     nextToken?: NextToken;
   }
   export interface ListAgentKnowledgeBasesResponse {
+    /**
+     * A list of objects, each of which contains information about a knowledge base associated with the agent.
+     */
     agentKnowledgeBaseSummaries: AgentKnowledgeBaseSummaries;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, use this token when making another request in the nextToken field to return the next batch of results.
+     */
     nextToken?: NextToken;
   }
   export interface ListAgentVersionsRequest {
     /**
-     * Id generated at the server side when an Agent is created
+     * The unique identifier of the agent.
      */
     agentId: Id;
+    /**
+     * The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the nextToken field when making another request to return the next batch of results.
+     */
     maxResults?: MaxResults;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, enter the token returned in the nextToken field in the response in this field to return the next batch of results.
+     */
     nextToken?: NextToken;
   }
   export interface ListAgentVersionsResponse {
+    /**
+     * A list of objects, each of which contains information about a version of the agent.
+     */
     agentVersionSummaries: AgentVersionSummaries;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, use this token when making another request in the nextToken field to return the next batch of results.
+     */
     nextToken?: NextToken;
   }
   export interface ListAgentsRequest {
+    /**
+     * The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the nextToken field when making another request to return the next batch of results.
+     */
     maxResults?: MaxResults;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, enter the token returned in the nextToken field in the response in this field to return the next batch of results.
+     */
     nextToken?: NextToken;
   }
   export interface ListAgentsResponse {
+    /**
+     * A list of objects, each of which contains information about an agent.
+     */
     agentSummaries: AgentSummaries;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, use this token when making another request in the nextToken field to return the next batch of results.
+     */
     nextToken?: NextToken;
   }
   export interface ListDataSourcesRequest {
+    /**
+     * The unique identifier of the knowledge base for which to return a list of information.
+     */
     knowledgeBaseId: Id;
+    /**
+     * The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the nextToken field when making another request to return the next batch of results.
+     */
     maxResults?: MaxResults;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, enter the token returned in the nextToken field in the response in this field to return the next batch of results.
+     */
     nextToken?: NextToken;
   }
   export interface ListDataSourcesResponse {
+    /**
+     * A list of objects, each of which contains information about a data source.
+     */
     dataSourceSummaries: DataSourceSummaries;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, use this token when making another request in the nextToken field to return the next batch of results.
+     */
     nextToken?: NextToken;
   }
   export interface ListIngestionJobsRequest {
-    knowledgeBaseId: Id;
+    /**
+     * The unique identifier of the data source for which to return ingestion jobs.
+     */
     dataSourceId: Id;
+    /**
+     * Contains a definition of a filter for which to filter the results.
+     */
     filters?: IngestionJobFilters;
-    sortBy?: IngestionJobSortBy;
+    /**
+     * The unique identifier of the knowledge base for which to return ingestion jobs.
+     */
+    knowledgeBaseId: Id;
+    /**
+     * The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the nextToken field when making another request to return the next batch of results.
+     */
     maxResults?: MaxResults;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, enter the token returned in the nextToken field in the response in this field to return the next batch of results.
+     */
     nextToken?: NextToken;
+    /**
+     * Contains details about how to sort the results.
+     */
+    sortBy?: IngestionJobSortBy;
   }
   export interface ListIngestionJobsResponse {
+    /**
+     * A list of objects, each of which contains information about an ingestion job.
+     */
     ingestionJobSummaries: IngestionJobSummaries;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, use this token when making another request in the nextToken field to return the next batch of results.
+     */
     nextToken?: NextToken;
   }
   export interface ListKnowledgeBasesRequest {
+    /**
+     * The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the nextToken field when making another request to return the next batch of results.
+     */
     maxResults?: MaxResults;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, enter the token returned in the nextToken field in the response in this field to return the next batch of results.
+     */
     nextToken?: NextToken;
   }
   export interface ListKnowledgeBasesResponse {
+    /**
+     * A list of objects, each of which contains information about a knowledge base.
+     */
     knowledgeBaseSummaries: KnowledgeBaseSummaries;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, use this token when making another request in the nextToken field to return the next batch of results.
+     */
     nextToken?: NextToken;
   }
   export interface ListTagsForResourceRequest {
+    /**
+     * The ARN of the resource for which to list tags.
+     */
     resourceArn: TaggableResourcesArn;
   }
   export interface ListTagsForResourceResponse {
+    /**
+     * The key-value pairs for the tags associated with the resource.
+     */
     tags?: TagsMap;
   }
   export type MaxResults = number;
@@ -1013,96 +1861,228 @@ declare namespace BedrockAgent {
   export type NumericalVersion = string;
   export type OpenSearchServerlessCollectionArn = string;
   export interface OpenSearchServerlessConfiguration {
+    /**
+     * The ARN of the OpenSearch Service vector store.
+     */
     collectionArn: OpenSearchServerlessCollectionArn;
-    vectorIndexName: OpenSearchServerlessIndexName;
+    /**
+     * Contains the names of the fields to which to map information about the vector store.
+     */
     fieldMapping: OpenSearchServerlessFieldMapping;
+    /**
+     * The name of the vector store.
+     */
+    vectorIndexName: OpenSearchServerlessIndexName;
   }
   export interface OpenSearchServerlessFieldMapping {
-    vectorField: FieldName;
-    textField: FieldName;
+    /**
+     * The name of the field in which Amazon Bedrock stores metadata about the vector store.
+     */
     metadataField: FieldName;
+    /**
+     * The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+     */
+    textField: FieldName;
+    /**
+     * The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
+     */
+    vectorField: FieldName;
   }
   export type OpenSearchServerlessIndexName = string;
   export type Payload = string;
   export interface PineconeConfiguration {
+    /**
+     * The endpoint URL for your index management page.
+     */
     connectionString: PineconeConnectionString;
+    /**
+     * The ARN of the secret that you created in Secrets Manager that is linked to your Pinecone API key.
+     */
     credentialsSecretArn: SecretArn;
-    namespace?: PineconeNamespace;
+    /**
+     * Contains the names of the fields to which to map information about the vector store.
+     */
     fieldMapping: PineconeFieldMapping;
+    /**
+     * The namespace to be used to write new data to your database.
+     */
+    namespace?: PineconeNamespace;
   }
   export type PineconeConnectionString = string;
   export interface PineconeFieldMapping {
-    textField: FieldName;
+    /**
+     * The name of the field in which Amazon Bedrock stores metadata about the vector store.
+     */
     metadataField: FieldName;
+    /**
+     * The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+     */
+    textField: FieldName;
   }
   export type PineconeNamespace = string;
   export interface PrepareAgentRequest {
     /**
-     * Id generated at the server side when an Agent is created
+     * The unique identifier of the agent for which to create a DRAFT version.
      */
     agentId: Id;
   }
   export interface PrepareAgentResponse {
+    /**
+     * The unique identifier of the agent for which the DRAFT version was created.
+     */
     agentId: Id;
+    /**
+     * The status of the DRAFT version and whether it is ready for use.
+     */
     agentStatus: AgentStatus;
+    /**
+     * The version of the agent.
+     */
     agentVersion: Version;
+    /**
+     * The time at which the DRAFT version of the agent was last prepared.
+     */
     preparedAt: DateTimestamp;
   }
   export type PrimitiveLong = number;
   export interface PromptConfiguration {
-    promptType?: PromptType;
-    promptCreationMode?: CreationMode;
-    promptState?: PromptState;
+    /**
+     * Defines the prompt template with which to replace the default prompt template. You can use placeholder variables in the base prompt template to customize the prompt. For more information, see Prompt template placeholder variables.
+     */
     basePromptTemplate?: BasePromptTemplate;
+    /**
+     * Contains inference parameters to use when the agent invokes a foundation model in the part of the agent sequence defined by the promptType. For more information, see Inference parameters for foundation models.
+     */
     inferenceConfiguration?: InferenceConfiguration;
+    /**
+     * Specifies whether to override the default parser Lambda function when parsing the raw foundation model output in the part of the agent sequence defined by the promptType. If you set the field as OVERRIDEN, the overrideLambda field in the PromptOverrideConfiguration must be specified with the ARN of a Lambda function.
+     */
     parserMode?: CreationMode;
+    /**
+     * Specifies whether to override the default prompt template for this promptType. Set this value to OVERRIDDEN to use the prompt that you provide in the basePromptTemplate. If you leave it as DEFAULT, the agent uses a default prompt template.
+     */
+    promptCreationMode?: CreationMode;
+    /**
+     * Specifies whether to allow the agent to carry out the step specified in the promptType. If you set this value to DISABLED, the agent skips that step. The default state for each promptType is as follows.    PRE_PROCESSING – ENABLED     ORCHESTRATION – ENABLED     KNOWLEDGE_BASE_RESPONSE_GENERATION – ENABLED     POST_PROCESSING – DISABLED   
+     */
+    promptState?: PromptState;
+    /**
+     * The step in the agent sequence that this prompt configuration applies to.
+     */
+    promptType?: PromptType;
   }
   export type PromptConfigurations = PromptConfiguration[];
   export interface PromptOverrideConfiguration {
-    promptConfigurations: PromptConfigurations;
+    /**
+     * The ARN of the Lambda function to use when parsing the raw foundation model output in parts of the agent sequence. If you specify this field, at least one of the promptConfigurations must contain a parserMode value that is set to OVERRIDDEN.
+     */
     overrideLambda?: LambdaArn;
+    /**
+     * Contains configurations to override a prompt template in one part of an agent sequence. For more information, see Advanced prompts.
+     */
+    promptConfigurations: PromptConfigurations;
   }
   export type PromptState = "ENABLED"|"DISABLED"|string;
   export type PromptType = "PRE_PROCESSING"|"ORCHESTRATION"|"POST_PROCESSING"|"KNOWLEDGE_BASE_RESPONSE_GENERATION"|string;
   export type RdsArn = string;
   export interface RdsConfiguration {
-    resourceArn: RdsArn;
+    /**
+     * The ARN of the secret that you created in Secrets Manager that is linked to your Amazon RDS database.
+     */
     credentialsSecretArn: SecretArn;
+    /**
+     * The name of your Amazon RDS database.
+     */
     databaseName: RdsDatabaseName;
-    tableName: RdsTableName;
+    /**
+     * Contains the names of the fields to which to map information about the vector store.
+     */
     fieldMapping: RdsFieldMapping;
+    /**
+     * The ARN of the vector store.
+     */
+    resourceArn: RdsArn;
+    /**
+     * The name of the table in the database.
+     */
+    tableName: RdsTableName;
   }
   export type RdsDatabaseName = string;
   export interface RdsFieldMapping {
-    primaryKeyField: ColumnName;
-    vectorField: ColumnName;
-    textField: ColumnName;
+    /**
+     * The name of the field in which Amazon Bedrock stores metadata about the vector store.
+     */
     metadataField: ColumnName;
+    /**
+     * The name of the field in which Amazon Bedrock stores the ID for each entry.
+     */
+    primaryKeyField: ColumnName;
+    /**
+     * The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+     */
+    textField: ColumnName;
+    /**
+     * The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
+     */
+    vectorField: ColumnName;
   }
   export type RdsTableName = string;
   export type RecommendedAction = string;
   export type RecommendedActions = RecommendedAction[];
   export interface RedisEnterpriseCloudConfiguration {
-    endpoint: RedisEnterpriseCloudEndpoint;
-    vectorIndexName: RedisEnterpriseCloudIndexName;
+    /**
+     * The ARN of the secret that you created in Secrets Manager that is linked to your Redis Enterprise Cloud database.
+     */
     credentialsSecretArn: SecretArn;
+    /**
+     * The endpoint URL of the Redis Enterprise Cloud database.
+     */
+    endpoint: RedisEnterpriseCloudEndpoint;
+    /**
+     * Contains the names of the fields to which to map information about the vector store.
+     */
     fieldMapping: RedisEnterpriseCloudFieldMapping;
+    /**
+     * The name of the vector index.
+     */
+    vectorIndexName: RedisEnterpriseCloudIndexName;
   }
   export type RedisEnterpriseCloudEndpoint = string;
   export interface RedisEnterpriseCloudFieldMapping {
-    vectorField: FieldName;
-    textField: FieldName;
+    /**
+     * The name of the field in which Amazon Bedrock stores metadata about the vector store.
+     */
     metadataField: FieldName;
+    /**
+     * The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+     */
+    textField: FieldName;
+    /**
+     * The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
+     */
+    vectorField: FieldName;
   }
   export type RedisEnterpriseCloudIndexName = string;
   export type S3BucketArn = string;
   export type S3BucketName = string;
   export interface S3DataSourceConfiguration {
+    /**
+     * The ARN of the bucket that contains the data source.
+     */
     bucketArn: S3BucketArn;
+    /**
+     * A list of S3 prefixes that define the object containing the data sources. For more information, see Organizing objects using prefixes.
+     */
     inclusionPrefixes?: S3Prefixes;
   }
   export interface S3Identifier {
+    /**
+     * The name of the S3 bucket.
+     */
     s3BucketName?: S3BucketName;
+    /**
+     * The S3 object key containing the resource.
+     */
     s3ObjectKey?: S3ObjectKey;
   }
   export type S3ObjectKey = string;
@@ -1110,32 +2090,71 @@ declare namespace BedrockAgent {
   export type S3Prefixes = S3Prefix[];
   export type SecretArn = string;
   export interface ServerSideEncryptionConfiguration {
+    /**
+     * The ARN of the KMS key used to encrypt the resource.
+     */
     kmsKeyArn?: KmsKeyArn;
   }
   export type SessionTTL = number;
   export type SortOrder = "ASCENDING"|"DESCENDING"|string;
   export interface StartIngestionJobRequest {
-    knowledgeBaseId: Id;
-    dataSourceId: Id;
+    /**
+     * A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see Ensuring idempotency.
+     */
     clientToken?: ClientToken;
+    /**
+     * The unique identifier of the data source to ingest.
+     */
+    dataSourceId: Id;
+    /**
+     * A description of the ingestion job.
+     */
     description?: Description;
+    /**
+     * The unique identifier of the knowledge base to which to add the data source.
+     */
+    knowledgeBaseId: Id;
   }
   export interface StartIngestionJobResponse {
+    /**
+     * An object containing information about the ingestion job.
+     */
     ingestionJob: IngestionJob;
   }
   export type StopSequences = String[];
   export interface StorageConfiguration {
-    type: KnowledgeBaseStorageType;
+    /**
+     * Contains the storage configuration of the knowledge base in Amazon OpenSearch Service.
+     */
     opensearchServerlessConfiguration?: OpenSearchServerlessConfiguration;
+    /**
+     * Contains the storage configuration of the knowledge base in Pinecone.
+     */
     pineconeConfiguration?: PineconeConfiguration;
-    redisEnterpriseCloudConfiguration?: RedisEnterpriseCloudConfiguration;
+    /**
+     * Contains details about the storage configuration of the knowledge base in Amazon RDS. For more information, see Create a vector index in Amazon RDS.
+     */
     rdsConfiguration?: RdsConfiguration;
+    /**
+     * Contains the storage configuration of the knowledge base in Redis Enterprise Cloud.
+     */
+    redisEnterpriseCloudConfiguration?: RedisEnterpriseCloudConfiguration;
+    /**
+     * The vector store service in which the knowledge base is stored.
+     */
+    type: KnowledgeBaseStorageType;
   }
   export type String = string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export interface TagResourceRequest {
+    /**
+     * The ARN of the resource to tag.
+     */
     resourceArn: TaggableResourcesArn;
+    /**
+     * An object containing key-value pairs that define the tags to attach to the resource.
+     */
     tags: TagsMap;
   }
   export interface TagResourceResponse {
@@ -1147,113 +2166,239 @@ declare namespace BedrockAgent {
   export type TopK = number;
   export type TopP = number;
   export interface UntagResourceRequest {
+    /**
+     * The ARN of the resource from which to remove tags.
+     */
     resourceArn: TaggableResourcesArn;
+    /**
+     * A list of keys of the tags to remove from the resource.
+     */
     tagKeys: TagKeyList;
   }
   export interface UntagResourceResponse {
   }
   export interface UpdateAgentActionGroupRequest {
     /**
-     * Id generated at the server side when an Agent is created
+     * The ARN of the Lambda function containing the business logic that is carried out upon invoking the action.
+     */
+    actionGroupExecutor?: ActionGroupExecutor;
+    /**
+     * The unique identifier of the action group.
+     */
+    actionGroupId: Id;
+    /**
+     * Specifies a new name for the action group.
+     */
+    actionGroupName: Name;
+    /**
+     * Specifies whether the action group is available for the agent to invoke or not when sending an InvokeAgent request.
+     */
+    actionGroupState?: ActionGroupState;
+    /**
+     * The unique identifier of the agent for which to update the action group.
      */
     agentId: Id;
     /**
-     * Draft Version of the Agent.
+     * The unique identifier of the agent version for which to update the action group.
      */
     agentVersion: DraftVersion;
     /**
-     * Id generated at the server side when an Action Group is created under Agent
+     * Contains either details about the S3 object containing the OpenAPI schema for the action group or the JSON or YAML-formatted payload defining the schema. For more information, see Action group OpenAPI schemas.
      */
-    actionGroupId: Id;
-    actionGroupName: Name;
-    description?: Description;
-    parentActionGroupSignature?: ActionGroupSignature;
-    actionGroupExecutor?: ActionGroupExecutor;
-    actionGroupState?: ActionGroupState;
     apiSchema?: APISchema;
+    /**
+     * Specifies a new name for the action group.
+     */
+    description?: Description;
+    /**
+     * To allow your agent to request the user for additional information when trying to complete a task, set this field to AMAZON.UserInput. You must leave the description, apiSchema, and actionGroupExecutor fields blank for this action group. During orchestration, if your agent determines that it needs to invoke an API in an action group, but doesn't have enough information to complete the API request, it will invoke this action group instead and return an Observation reprompting the user for more information.
+     */
+    parentActionGroupSignature?: ActionGroupSignature;
   }
   export interface UpdateAgentActionGroupResponse {
+    /**
+     * Contains details about the action group that was updated.
+     */
     agentActionGroup: AgentActionGroup;
   }
   export interface UpdateAgentAliasRequest {
     /**
-     * Id generated at the server side when an Agent is created
+     * The unique identifier of the alias.
+     */
+    agentAliasId: AgentAliasId;
+    /**
+     * Specifies a new name for the alias.
+     */
+    agentAliasName: Name;
+    /**
+     * The unique identifier of the agent.
      */
     agentId: Id;
     /**
-     * Id generated at the server side when an Agent Alias is created
+     * Specifies a new description for the alias.
      */
-    agentAliasId: AgentAliasId;
-    agentAliasName: Name;
     description?: Description;
+    /**
+     * Contains details about the routing configuration of the alias.
+     */
     routingConfiguration?: AgentAliasRoutingConfiguration;
   }
   export interface UpdateAgentAliasResponse {
+    /**
+     * Contains details about the alias that was updated.
+     */
     agentAlias: AgentAlias;
   }
   export interface UpdateAgentKnowledgeBaseRequest {
     /**
-     * Id generated at the server side when an Agent is created
+     * The unique identifier of the agent associated with the knowledge base that you want to update.
      */
     agentId: Id;
     /**
-     * Draft Version of the Agent.
+     * The version of the agent associated with the knowledge base that you want to update.
      */
     agentVersion: DraftVersion;
     /**
-     * Id generated at the server side when a Knowledge Base is associated to an Agent
+     * Specifies a new description for the knowledge base associated with an agent.
+     */
+    description?: Description;
+    /**
+     * The unique identifier of the knowledge base that has been associated with an agent.
      */
     knowledgeBaseId: Id;
-    description?: Description;
+    /**
+     * Specifies whether the agent uses the knowledge base or not when sending an InvokeAgent request.
+     */
     knowledgeBaseState?: KnowledgeBaseState;
   }
   export interface UpdateAgentKnowledgeBaseResponse {
+    /**
+     * Contains details about the knowledge base that has been associated with an agent.
+     */
     agentKnowledgeBase: AgentKnowledgeBase;
   }
   export interface UpdateAgentRequest {
     /**
-     * Id generated at the server side when an Agent is created
+     * The unique identifier of the agent.
      */
     agentId: Id;
+    /**
+     * Specifies a new name for the agent.
+     */
     agentName: Name;
-    instruction?: Instruction;
-    foundationModel?: ModelIdentifier;
-    description?: Description;
-    idleSessionTTLInSeconds?: SessionTTL;
+    /**
+     * The ARN of the IAM role with permissions to update the agent. The ARN must begin with AmazonBedrockExecutionRoleForAgents_.
+     */
     agentResourceRoleArn: AgentRoleArn;
+    /**
+     * The ARN of the KMS key with which to encrypt the agent.
+     */
     customerEncryptionKeyArn?: KmsKeyArn;
+    /**
+     * Specifies a new description of the agent.
+     */
+    description?: Description;
+    /**
+     * Specifies a new foundation model to be used for orchestration by the agent.
+     */
+    foundationModel: ModelIdentifier;
+    /**
+     * The number of seconds for which Amazon Bedrock keeps information about a user's conversation with the agent. A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Bedrock deletes any data provided before the timeout.
+     */
+    idleSessionTTLInSeconds?: SessionTTL;
+    /**
+     * Specifies new instructions that tell the agent what it should do and how it should interact with users.
+     */
+    instruction?: Instruction;
+    /**
+     * Contains configurations to override prompts in different parts of an agent sequence. For more information, see Advanced prompts.
+     */
     promptOverrideConfiguration?: PromptOverrideConfiguration;
   }
   export interface UpdateAgentResponse {
+    /**
+     * Contains details about the agent that was updated.
+     */
     agent: Agent;
   }
   export interface UpdateDataSourceRequest {
-    knowledgeBaseId: Id;
-    dataSourceId: Id;
-    name: Name;
-    description?: Description;
+    /**
+     * Contains details about the storage configuration of the data source.
+     */
     dataSourceConfiguration: DataSourceConfiguration;
+    /**
+     * The unique identifier of the data source.
+     */
+    dataSourceId: Id;
+    /**
+     * Specifies a new description for the data source.
+     */
+    description?: Description;
+    /**
+     * The unique identifier of the knowledge base to which the data source belongs.
+     */
+    knowledgeBaseId: Id;
+    /**
+     * Specifies a new name for the data source.
+     */
+    name: Name;
+    /**
+     * Contains details about server-side encryption of the data source.
+     */
     serverSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
+    /**
+     * Contains details about how to ingest the documents in the data source.
+     */
     vectorIngestionConfiguration?: VectorIngestionConfiguration;
   }
   export interface UpdateDataSourceResponse {
+    /**
+     * Contains details about the data source.
+     */
     dataSource: DataSource;
   }
   export interface UpdateKnowledgeBaseRequest {
-    knowledgeBaseId: Id;
-    name: Name;
+    /**
+     * Specifies a new description for the knowledge base.
+     */
     description?: Description;
-    roleArn: KnowledgeBaseRoleArn;
+    /**
+     * Specifies the configuration for the embeddings model used for the knowledge base. You must use the same configuration as when the knowledge base was created.
+     */
     knowledgeBaseConfiguration: KnowledgeBaseConfiguration;
+    /**
+     * The unique identifier of the knowledge base to update.
+     */
+    knowledgeBaseId: Id;
+    /**
+     * Specifies a new name for the knowledge base.
+     */
+    name: Name;
+    /**
+     * Specifies a different Amazon Resource Name (ARN) of the IAM role with permissions to modify the knowledge base.
+     */
+    roleArn: KnowledgeBaseRoleArn;
+    /**
+     * Specifies the configuration for the vector store used for the knowledge base. You must use the same configuration as when the knowledge base was created.
+     */
     storageConfiguration: StorageConfiguration;
   }
   export interface UpdateKnowledgeBaseResponse {
+    /**
+     * Contains details about the knowledge base.
+     */
     knowledgeBase: KnowledgeBase;
   }
   export interface VectorIngestionConfiguration {
+    /**
+     * Details about how to chunk the documents in the data source. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried.
+     */
     chunkingConfiguration?: ChunkingConfiguration;
   }
   export interface VectorKnowledgeBaseConfiguration {
+    /**
+     * The ARN of the model used to create vector embeddings for the knowledge base.
+     */
     embeddingModelArn: BedrockEmbeddingModelArn;
   }
   export type Version = string;

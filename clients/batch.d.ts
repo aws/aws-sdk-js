@@ -1383,6 +1383,10 @@ declare namespace Batch {
      */
     privileged?: Boolean;
     /**
+     * Whether or not a container or a Kubernetes pod is allowed to gain more privileges than its parent process. The default value is false.
+     */
+    allowPrivilegeEscalation?: Boolean;
+    /**
      * When this parameter is true, the container is given read-only access to its root file system. The default value is false. This parameter maps to ReadOnlyRootFilesystem policy in the Volumes and file systems pod security policies in the Kubernetes documentation.
      */
     readOnlyRootFilesystem?: Boolean;
@@ -1445,6 +1449,10 @@ declare namespace Batch {
      */
     dnsPolicy?: String;
     /**
+     * References a Kubernetes secret resource. This object must start and end with an alphanumeric character, is required to be lowercase, can include periods (.) and hyphens (-), and can't contain more than 253 characters.  ImagePullSecret$name is required when this object is used.
+     */
+    imagePullSecrets?: ImagePullSecrets;
+    /**
      * The properties of the container that's used on the Amazon EKS pod.
      */
     containers?: EksContainers;
@@ -1478,6 +1486,10 @@ declare namespace Batch {
      * The DNS policy for the pod. The default value is ClusterFirst. If the hostNetwork parameter is not specified, the default is ClusterFirstWithHostNet. ClusterFirst indicates that any DNS query that does not match the configured cluster domain suffix is forwarded to the upstream nameserver inherited from the node. If no value was specified for dnsPolicy in the RegisterJobDefinition API operation, then no value will be returned for dnsPolicy by either of DescribeJobDefinitions or DescribeJobs API operations. The pod spec setting will contain either ClusterFirst or ClusterFirstWithHostNet, depending on the value of the hostNetwork parameter. For more information, see Pod's DNS policy in the Kubernetes documentation. Valid values: Default | ClusterFirst | ClusterFirstWithHostNet 
      */
     dnsPolicy?: String;
+    /**
+     * Displays the reference pointer to the Kubernetes secret resource.
+     */
+    imagePullSecrets?: ImagePullSecrets;
     /**
      * The properties of the container that's used on the Amazon EKS pod.
      */
@@ -1623,6 +1635,13 @@ declare namespace Batch {
     sourcePath?: String;
   }
   export type ImageIdOverride = string;
+  export interface ImagePullSecret {
+    /**
+     * Provides a unique identifier for the ImagePullSecret. This object is required when EksPodProperties$imagePullSecrets is used.
+     */
+    name: String;
+  }
+  export type ImagePullSecrets = ImagePullSecret[];
   export type ImageType = string;
   export type Integer = number;
   export type JQState = "ENABLED"|"DISABLED"|string;

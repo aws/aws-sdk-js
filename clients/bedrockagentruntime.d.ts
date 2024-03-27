@@ -29,11 +29,11 @@ declare class BedrockAgentRuntime extends Service {
    */
   retrieve(callback?: (err: AWSError, data: BedrockAgentRuntime.Types.RetrieveResponse) => void): Request<BedrockAgentRuntime.Types.RetrieveResponse, AWSError>;
   /**
-   * Queries a knowledge base and generates responses based on the retrieved results. The response cites up to five sources but only selects the ones that are relevant to the query.
+   * Queries a knowledge base and generates responses based on the retrieved results. The response only cites sources that are relevant to the query.
    */
   retrieveAndGenerate(params: BedrockAgentRuntime.Types.RetrieveAndGenerateRequest, callback?: (err: AWSError, data: BedrockAgentRuntime.Types.RetrieveAndGenerateResponse) => void): Request<BedrockAgentRuntime.Types.RetrieveAndGenerateResponse, AWSError>;
   /**
-   * Queries a knowledge base and generates responses based on the retrieved results. The response cites up to five sources but only selects the ones that are relevant to the query.
+   * Queries a knowledge base and generates responses based on the retrieved results. The response only cites sources that are relevant to the query.
    */
   retrieveAndGenerate(callback?: (err: AWSError, data: BedrockAgentRuntime.Types.RetrieveAndGenerateResponse) => void): Request<BedrockAgentRuntime.Types.RetrieveAndGenerateResponse, AWSError>;
 }
@@ -123,6 +123,19 @@ declare namespace BedrockAgentRuntime {
      * The unique identifier of the trace.
      */
     traceId?: TraceId;
+  }
+  export interface FilterAttribute {
+    /**
+     * The name that the metadata attribute must match.
+     */
+    key: FilterKey;
+    /**
+     * The value to whcih to compare the value of the metadata attribute.
+     */
+    value: FilterValue;
+  }
+  export type FilterKey = string;
+  export interface FilterValue {
   }
   export interface FinalResponse {
     /**
@@ -274,6 +287,10 @@ declare namespace BedrockAgentRuntime {
      */
     location?: RetrievalResultLocation;
     /**
+     * Contains metadata attributes and their values for the file in the data source. For more information, see Metadata and filtering.
+     */
+    metadata?: RetrievalResultMetadata;
+    /**
      * The level of relevance of the result to the query.
      */
     score?: Double;
@@ -298,6 +315,10 @@ declare namespace BedrockAgentRuntime {
     retrievalConfiguration?: KnowledgeBaseRetrievalConfiguration;
   }
   export interface KnowledgeBaseVectorSearchConfiguration {
+    /**
+     * Specifies the filters to use on the metadata in the knowledge base data sources before returning results. For more information, see Query configurations.
+     */
+    filter?: RetrievalFilter;
     /**
      * The number of source chunks to retrieve.
      */
@@ -510,6 +531,53 @@ declare namespace BedrockAgentRuntime {
     message?: NonBlankString;
   }
   export type ResponseStream = EventStream<{accessDeniedException?:AccessDeniedException,badGatewayException?:BadGatewayException,chunk?:PayloadPart,conflictException?:ConflictException,dependencyFailedException?:DependencyFailedException,internalServerException?:InternalServerException,resourceNotFoundException?:ResourceNotFoundException,serviceQuotaExceededException?:ServiceQuotaExceededException,throttlingException?:ThrottlingException,trace?:TracePart,validationException?:ValidationException}>;
+  export interface RetrievalFilter {
+    /**
+     * Knowledge base data sources whose metadata attributes fulfill all the filter conditions inside this list are returned.
+     */
+    andAll?: RetrievalFilterList;
+    /**
+     * Knowledge base data sources that contain a metadata attribute whose name matches the key and whose value matches the value in this object are returned.
+     */
+    equals?: FilterAttribute;
+    /**
+     * Knowledge base data sources that contain a metadata attribute whose name matches the key and whose value is greater than the value in this object are returned.
+     */
+    greaterThan?: FilterAttribute;
+    /**
+     * Knowledge base data sources that contain a metadata attribute whose name matches the key and whose value is greater than or equal to the value in this object are returned.
+     */
+    greaterThanOrEquals?: FilterAttribute;
+    /**
+     * Knowledge base data sources that contain a metadata attribute whose name matches the key and whose value is in the list specified in the value in this object are returned.
+     */
+    in?: FilterAttribute;
+    /**
+     * Knowledge base data sources that contain a metadata attribute whose name matches the key and whose value is less than the value in this object are returned.
+     */
+    lessThan?: FilterAttribute;
+    /**
+     * Knowledge base data sources that contain a metadata attribute whose name matches the key and whose value is less than or equal to the value in this object are returned.
+     */
+    lessThanOrEquals?: FilterAttribute;
+    /**
+     * Knowledge base data sources that contain a metadata attribute whose name matches the key and whose value doesn't match the value in this object are returned.
+     */
+    notEquals?: FilterAttribute;
+    /**
+     * Knowledge base data sources that contain a metadata attribute whose name matches the key and whose value isn't in the list specified in the value in this object are returned.
+     */
+    notIn?: FilterAttribute;
+    /**
+     * Knowledge base data sources whose metadata attributes fulfill at least one of the filter conditions inside this list are returned.
+     */
+    orAll?: RetrievalFilterList;
+    /**
+     * Knowledge base data sources that contain a metadata attribute whose name matches the key and whose value starts with the value in this object are returned. This filter is currently only supported for Amazon OpenSearch Serverless vector stores.
+     */
+    startsWith?: FilterAttribute;
+  }
+  export type RetrievalFilterList = RetrievalFilter[];
   export interface RetrievalResultContent {
     /**
      * The cited text from the data source.
@@ -527,6 +595,10 @@ declare namespace BedrockAgentRuntime {
     type: RetrievalResultLocationType;
   }
   export type RetrievalResultLocationType = "S3"|string;
+  export type RetrievalResultMetadata = {[key: string]: RetrievalResultMetadataValue};
+  export type RetrievalResultMetadataKey = string;
+  export interface RetrievalResultMetadataValue {
+  }
   export interface RetrievalResultS3Location {
     /**
      * The S3 URI of the data source.
@@ -632,6 +704,10 @@ declare namespace BedrockAgentRuntime {
      * Contains information about the location of the data source.
      */
     location?: RetrievalResultLocation;
+    /**
+     * Contains metadata attributes and their values for the file in the data source. For more information, see Metadata and filtering.
+     */
+    metadata?: RetrievalResultMetadata;
   }
   export type RetrievedReferences = RetrievedReference[];
   export type SearchType = "HYBRID"|"SEMANTIC"|string;

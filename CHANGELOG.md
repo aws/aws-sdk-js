@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1586.0-->
+<!--LATEST=2.1587.0-->
 <!--ENTRYINSERT-->
+
+## 2.1587.0
+* bugfix: Endpoints: Add endpoint override for eu-isoe-* region
+* feature: Batch: This feature allows AWS Batch to support configuration of imagePullSecrets and allowPrivilegeEscalation for jobs running on EKS
+* feature: BedrockAgent: This changes introduces metadata documents statistics and also updates the documentation for bedrock agent.
+* feature: BedrockAgentRuntime: This release introduces filtering support on Retrieve and RetrieveAndGenerate APIs.
+* feature: ElastiCache: Added minimum capacity to  Amazon ElastiCache Serverless. This feature allows customer to ensure minimum capacity even without current load
 
 ## 2.1586.0
 * feature: BedrockAgentRuntime: This release adds support to customize prompts sent through the RetrieveAndGenerate API in Agents for Amazon Bedrock.

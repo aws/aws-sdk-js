@@ -1827,7 +1827,11 @@ declare namespace ElastiCache {
     /**
      * The upper limit for data storage the cache is set to use.
      */
-    Maximum: IntegerOptional;
+    Maximum?: IntegerOptional;
+    /**
+     * The lower limit for data storage the cache is set to use.
+     */
+    Minimum?: IntegerOptional;
     /**
      * The unit that the storage is measured in, in GB.
      */
@@ -2516,7 +2520,11 @@ declare namespace ElastiCache {
     /**
      * The configuration for the maximum number of ECPUs the cache can consume per second.
      */
-    Maximum: IntegerOptional;
+    Maximum?: IntegerOptional;
+    /**
+     * The configuration for the minimum number of ECPUs the cache should be able consume per second.
+     */
+    Minimum?: IntegerOptional;
   }
   export interface Endpoint {
     /**
