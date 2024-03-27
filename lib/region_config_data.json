@@ -6,6 +6,7 @@
     "cn-*/*": {
       "endpoint": "{service}.{region}.amazonaws.com.cn"
     },
+    "eu-isoe-*/*": "euIsoe",
     "us-iso-*/*": "usIso",
     "us-isob-*/*": "usIsob",
     "*/budgets": "globalSSL",
@@ -242,6 +243,9 @@
     "s3signature": {
       "endpoint": "{service}.{region}.amazonaws.com",
       "signatureVersion": "s3"
+    },
+    "euIsoe": {
+      "endpoint": "{service}.{region}.cloud.adc-e.uk"
     },
     "usIso": {
       "endpoint": "{service}.{region}.c2s.ic.gov"
