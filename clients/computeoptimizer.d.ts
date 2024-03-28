@@ -407,15 +407,15 @@ declare namespace ComputeOptimizer {
      */
     veryLow?: VeryLow;
   }
-  export type CustomizableMetricHeadroom = "PERCENT_30"|"PERCENT_20"|"PERCENT_0"|string;
-  export type CustomizableMetricName = "CpuUtilization"|string;
+  export type CustomizableMetricHeadroom = "PERCENT_30"|"PERCENT_20"|"PERCENT_10"|"PERCENT_0"|string;
+  export type CustomizableMetricName = "CpuUtilization"|"MemoryUtilization"|string;
   export interface CustomizableMetricParameters {
     /**
-     *  The threshold value used for the specified metric parameter. 
+     *  The threshold value used for the specified metric parameter.   You can only specify the threshold value for CPU utilization. 
      */
     threshold?: CustomizableMetricThreshold;
     /**
-     *  The headroom threshold value in percentage used for the specified metric parameter. 
+     *  The headroom value in percentage used for the specified metric parameter.  The following lists the valid values for CPU and memory utilization.   CPU utilization: PERCENT_30 | PERCENT_20 | PERCENT_0    Memory utilization: PERCENT_30 | PERCENT_20 | PERCENT_10   
      */
     headroom?: CustomizableMetricHeadroom;
   }
@@ -769,7 +769,7 @@ declare namespace ComputeOptimizer {
      */
     lookBackPeriod?: LookBackPeriodPreference;
     /**
-     *  The resource’s CPU utilization threshold preferences, such as threshold and headroom, that are used to generate rightsizing recommendations.   This preference is only available for the Amazon EC2 instance resource type. 
+     *  The resource’s CPU and memory utilization preferences, such as threshold and headroom, that are used to generate rightsizing recommendations.   This preference is only available for the Amazon EC2 instance resource type. 
      */
     utilizationPreferences?: UtilizationPreferences;
     /**
@@ -1294,7 +1294,7 @@ declare namespace ComputeOptimizer {
      */
     lookBackPeriod?: LookBackPeriodPreference;
     /**
-     *  The resource’s CPU utilization threshold preferences, such as threshold and headroom, that were used to generate rightsizing recommendations. It considers all applicable preferences that you set at the resource, account, and organization level.  To validate that the preference is applied to your last generated set of recommendations, review the effectiveRecommendationPreferences value in the response of the GetAutoScalingGroupRecommendations or GetEC2InstanceRecommendations actions.
+     *  The resource’s CPU and memory utilization preferences, such as threshold and headroom, that were used to generate rightsizing recommendations. It considers all applicable preferences that you set at the resource, account, and organization level.  To validate that the preference is applied to your last generated set of recommendations, review the effectiveRecommendationPreferences value in the response of the GetAutoScalingGroupRecommendations or GetEC2InstanceRecommendations actions.
      */
     utilizationPreferences?: UtilizationPreferences;
     /**
@@ -2078,7 +2078,7 @@ declare namespace ComputeOptimizer {
      */
     lookBackPeriod?: LookBackPeriodPreference;
     /**
-     *  The preference to control the resource’s CPU utilization thresholds - threshold and headroom. When this preference isn't specified, we use the following default values:     P99_5 for threshold    PERCENT_17 for headroom    You can only set this preference for the Amazon EC2 instance resource type. 
+     *  The preference to control the resource’s CPU utilization threshold, CPU utilization headroom, and memory utilization headroom. When this preference isn't specified, we use the following default values.  CPU utilization:    P99_5 for threshold    PERCENT_20 for headroom   Memory utilization:    PERCENT_20 for headroom      You can only set CPU and memory utilization preferences for the Amazon EC2 instance resource type.   The threshold setting isn’t available for memory utilization.   
      */
     utilizationPreferences?: UtilizationPreferences;
     /**
@@ -2170,7 +2170,7 @@ declare namespace ComputeOptimizer {
      */
     lookBackPeriod?: LookBackPeriodPreference;
     /**
-     *  The preference to control the resource’s CPU utilization thresholds - threshold and headroom. If the preference isn’t set, this object is null.   This preference is only available for the Amazon EC2 instance resource type. 
+     *  The preference to control the resource’s CPU utilization threshold, CPU utilization headroom, and memory utilization headroom. If the preference isn’t set, this object is null.   This preference is only available for the Amazon EC2 instance resource type. 
      */
     utilizationPreferences?: UtilizationPreferences;
     /**
@@ -2387,7 +2387,7 @@ declare namespace ComputeOptimizer {
   export type UtilizationMetrics = UtilizationMetric[];
   export interface UtilizationPreference {
     /**
-     *  The name of the resource utilization metric name to customize.   Compute Optimizer only supports CpuUtilization. 
+     *  The name of the resource utilization metric name to customize. 
      */
     metricName?: CustomizableMetricName;
     /**

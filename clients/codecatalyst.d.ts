@@ -400,7 +400,7 @@ declare namespace CodeCatalyst {
      */
     persistentStorage: PersistentStorageConfiguration;
     /**
-     * The name of the connection to use connect to a Amazon VPC.
+     * The name of the connection that will be used to connect to Amazon VPC, if any.
      */
     vpcConnectionName?: NameString;
   }
@@ -1066,6 +1066,14 @@ declare namespace CodeCatalyst {
      * The display name of the Amazon Web Services account used for billing for the space.
      */
     awsAccountName?: NameString;
+    /**
+     * The type of the billing plan that the space will be changed to at the start of the next billing cycle. This applies only to changes that reduce the functionality available for the space. Billing plan changes that increase functionality are applied immediately. For more information, see Pricing.
+     */
+    pendingSubscriptionType?: String;
+    /**
+     * The day and time the pending change will be applied to the space, in coordinated universal time (UTC) timestamp format as specified in RFC 3339.
+     */
+    pendingSubscriptionStartTime?: SyntheticTimestamp_date_time;
   }
   export interface GetUserDetailsRequest {
     /**

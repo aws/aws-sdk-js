@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1587.0-->
+<!--LATEST=2.1588.0-->
 <!--ENTRYINSERT-->
+
+## 2.1588.0
+* feature: CodeCatalyst: This release adds support for understanding pending changes to subscriptions by including two new response parameters for the GetSubscription API for Amazon CodeCatalyst.
+* feature: ComputeOptimizer: This release enables AWS Compute Optimizer to analyze and generate recommendations with a new customization preference, Memory Utilization.
+* feature: EC2: Amazon EC2 C7gd, M7gd and R7gd metal instances with up to 3.8 TB of local NVMe-based SSD block-level storage have up to 45% improved real-time NVMe storage performance than comparable Graviton2-based instances.
+* feature: EKS: Add multiple customer error code to handle customer caused failure when managing EKS node groups
+* feature: GuardDuty: Add EC2 support for GuardDuty Runtime Monitoring auto management.
+* feature: OAM: This release adds support for sharing AWS::InternetMonitor::Monitor resources.
+* feature: QuickSight: Amazon QuickSight: Adds support for setting up VPC Endpoint restrictions for accessing QuickSight Website.
 
 ## 2.1587.0
 * bugfix: Endpoints: Add endpoint override for eu-isoe-* region

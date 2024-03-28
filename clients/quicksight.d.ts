@@ -1260,11 +1260,11 @@ declare class QuickSight extends Service {
    */
   updateIdentityPropagationConfig(callback?: (err: AWSError, data: QuickSight.Types.UpdateIdentityPropagationConfigResponse) => void): Request<QuickSight.Types.UpdateIdentityPropagationConfigResponse, AWSError>;
   /**
-   * Updates the content and status of IP rules. To use this operation, you must provide the entire map of rules. You can use the DescribeIpRestriction operation to get the current rule map.
+   * Updates the content and status of IP rules. Traffic from a source is allowed when the source satisfies either the IpRestrictionRule, VpcIdRestrictionRule, or VpcEndpointIdRestrictionRule. To use this operation, you must provide the entire map of rules. You can use the DescribeIpRestriction operation to get the current rule map.
    */
   updateIpRestriction(params: QuickSight.Types.UpdateIpRestrictionRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateIpRestrictionResponse) => void): Request<QuickSight.Types.UpdateIpRestrictionResponse, AWSError>;
   /**
-   * Updates the content and status of IP rules. To use this operation, you must provide the entire map of rules. You can use the DescribeIpRestriction operation to get the current rule map.
+   * Updates the content and status of IP rules. Traffic from a source is allowed when the source satisfies either the IpRestrictionRule, VpcIdRestrictionRule, or VpcEndpointIdRestrictionRule. To use this operation, you must provide the entire map of rules. You can use the DescribeIpRestriction operation to get the current rule map.
    */
   updateIpRestriction(callback?: (err: AWSError, data: QuickSight.Types.UpdateIpRestrictionResponse) => void): Request<QuickSight.Types.UpdateIpRestrictionResponse, AWSError>;
   /**
@@ -8004,6 +8004,14 @@ declare namespace QuickSight {
      */
     IpRestrictionRuleMap?: IpRestrictionRuleMap;
     /**
+     * A map of allowed VPC IDs and their rule descriptions.
+     */
+    VpcIdRestrictionRuleMap?: VpcIdRestrictionRuleMap;
+    /**
+     * A map of allowed VPC endpoint IDs and their rule descriptions.
+     */
+    VpcEndpointIdRestrictionRuleMap?: VpcEndpointIdRestrictionRuleMap;
+    /**
      * A value that specifies whether IP rules are turned on.
      */
     Enabled?: NullableBoolean;
@@ -9859,7 +9867,7 @@ declare namespace QuickSight {
      */
     SessionTags?: SessionTagList;
     /**
-     * The Amazon Resource Names (ARNs) for the Amazon QuickSight resources that the user is authorized to access during the lifetime of the session. If you choose Dashboard embedding experience, pass the list of dashboard ARNs in the account that you want the user to be able to view. Currently, you can pass up to 25 dashboard ARNs in each API call.
+     * The Amazon Resource Names (ARNs) for the Amazon QuickSight resources that the user is authorized to access during the lifetime of the session. If you choose Dashboard embedding experience, pass the list of dashboard ARNs in the account that you want the user to be able to view. If you want to make changes to the theme of your embedded content, pass a list of theme ARNs that the anonymous users need access to. Currently, you can pass up to 25 theme ARNs in each API call.
      */
     AuthorizedResourceArns: ArnList;
     /**
@@ -18790,6 +18798,14 @@ declare namespace QuickSight {
      */
     IpRestrictionRuleMap?: IpRestrictionRuleMap;
     /**
+     * A map of VPC IDs and their corresponding rules. When you configure this parameter, traffic from all VPC endpoints that are present in the specified VPC is allowed.
+     */
+    VpcIdRestrictionRuleMap?: VpcIdRestrictionRuleMap;
+    /**
+     * A map of allowed VPC endpoint IDs and their corresponding rule descriptions.
+     */
+    VpcEndpointIdRestrictionRuleMap?: VpcEndpointIdRestrictionRuleMap;
+    /**
      * A value that specifies whether IP rules are turned on.
      */
     Enabled?: NullableBoolean;
@@ -19763,6 +19779,12 @@ declare namespace QuickSight {
      */
     VpcConnectionArn: Arn;
   }
+  export type VpcEndpointId = string;
+  export type VpcEndpointIdRestrictionRuleDescription = string;
+  export type VpcEndpointIdRestrictionRuleMap = {[key: string]: VpcEndpointIdRestrictionRuleDescription};
+  export type VpcId = string;
+  export type VpcIdRestrictionRuleDescription = string;
+  export type VpcIdRestrictionRuleMap = {[key: string]: VpcIdRestrictionRuleDescription};
   export type Warehouse = string;
   export interface WaterfallChartAggregatedFieldWells {
     /**
