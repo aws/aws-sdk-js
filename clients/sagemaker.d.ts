@@ -3008,6 +3008,10 @@ declare namespace SageMaker {
      * The configuration for the file system and the runtime, such as the environment variables and entry point.
      */
     JupyterLabAppImageConfig?: JupyterLabAppImageConfig;
+    /**
+     * The configuration for the file system and the runtime, such as the environment variables and entry point.
+     */
+    CodeEditorAppImageConfig?: CodeEditorAppImageConfig;
   }
   export type AppImageConfigList = AppImageConfigDetails[];
   export type AppImageConfigName = string;
@@ -4316,8 +4320,16 @@ declare namespace SageMaker {
     ClusterStatus: ClusterStatus;
   }
   export type ClusterThreadsPerCore = number;
+  export interface CodeEditorAppImageConfig {
+    FileSystemConfig?: FileSystemConfig;
+    ContainerConfig?: ContainerConfig;
+  }
   export interface CodeEditorAppSettings {
     DefaultResourceSpec?: ResourceSpec;
+    /**
+     * A list of custom SageMaker images that are configured to run as a Code Editor app.
+     */
+    CustomImages?: CustomImages;
     /**
      * The Amazon Resource Name (ARN) of the Code Editor application lifecycle configuration.
      */
@@ -4707,6 +4719,10 @@ declare namespace SageMaker {
      * The JupyterLabAppImageConfig. You can only specify one image kernel in the AppImageConfig API. This kernel is shown to users before the image starts. After the image runs, all kernels are visible in JupyterLab.
      */
     JupyterLabAppImageConfig?: JupyterLabAppImageConfig;
+    /**
+     * The CodeEditorAppImageConfig. You can only specify one image kernel in the AppImageConfig API. This kernel is shown to users before the image starts. After the image runs, all kernels are visible in Code Editor.
+     */
+    CodeEditorAppImageConfig?: CodeEditorAppImageConfig;
   }
   export interface CreateAppImageConfigResponse {
     /**
@@ -7649,6 +7665,10 @@ declare namespace SageMaker {
      * The configuration of the JupyterLab app.
      */
     JupyterLabAppImageConfig?: JupyterLabAppImageConfig;
+    /**
+     * The configuration of the Code Editor app.
+     */
+    CodeEditorAppImageConfig?: CodeEditorAppImageConfig;
   }
   export interface DescribeAppRequest {
     /**
@@ -23175,6 +23195,10 @@ declare namespace SageMaker {
      * The JupyterLab app running on the image.
      */
     JupyterLabAppImageConfig?: JupyterLabAppImageConfig;
+    /**
+     * The Code Editor app running on the image.
+     */
+    CodeEditorAppImageConfig?: CodeEditorAppImageConfig;
   }
   export interface UpdateAppImageConfigResponse {
     /**

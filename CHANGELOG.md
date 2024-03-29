@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1588.0-->
+<!--LATEST=2.1589.0-->
 <!--ENTRYINSERT-->
+
+## 2.1589.0
+* feature: B2bi: Supporting new EDI X12 transaction sets for X12 versions 4010, 4030, and 5010.
+* feature: CodeBuild: Add new fleet status code for Reserved Capacity.
+* feature: CodeConnections: Duplicating the CodeStar Connections service into the new, rebranded AWS CodeConnections service.
+* feature: InternetMonitor: This release adds support to allow customers to track cross account monitors through ListMonitor, GetMonitor, ListHealthEvents, GetHealthEvent, StartQuery APIs.
+* feature: IoTWireless: Add support for retrieving key historical and live metrics for LoRaWAN devices and gateways
+* feature: MarketplaceCatalog: This release enhances the ListEntities API to support ResaleAuthorizationId filter and sort for OfferEntity in the request and the addition of a ResaleAuthorizationId field in the response of OfferSummary.
+* feature: SageMaker: This release adds support for custom images for the CodeEditor App on SageMaker Studio
 
 ## 2.1588.0
 * feature: CodeCatalyst: This release adds support for understanding pending changes to subscriptions by including two new response parameters for the GetSubscription API for Amazon CodeCatalyst.

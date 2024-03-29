@@ -1505,7 +1505,7 @@ declare namespace CodeBuild {
      */
     message?: String;
   }
-  export type FleetStatusCode = "CREATING"|"UPDATING"|"ROTATING"|"DELETING"|"CREATE_FAILED"|"UPDATE_ROLLBACK_FAILED"|"ACTIVE"|string;
+  export type FleetStatusCode = "CREATING"|"UPDATING"|"ROTATING"|"PENDING_DELETION"|"DELETING"|"CREATE_FAILED"|"UPDATE_ROLLBACK_FAILED"|"ACTIVE"|string;
   export type Fleets = Fleet[];
   export interface GetReportGroupTrendInput {
     /**

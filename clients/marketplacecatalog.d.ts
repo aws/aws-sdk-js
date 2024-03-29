@@ -947,6 +947,10 @@ declare namespace MarketplaceCatalog {
      */
     ProductId?: OfferProductIdFilter;
     /**
+     * Allows filtering on the ResaleAuthorizationId of an offer.  Not all offers have a ResaleAuthorizationId. The response will only include offers for which you have permissions. 
+     */
+    ResaleAuthorizationId?: OfferResaleAuthorizationIdFilter;
+    /**
      * Allows filtering on the ReleaseDate of an offer.
      */
     ReleaseDate?: OfferReleaseDateFilter;
@@ -1023,6 +1027,14 @@ declare namespace MarketplaceCatalog {
      */
     BeforeValue?: DateTimeISO8601;
   }
+  export interface OfferResaleAuthorizationIdFilter {
+    /**
+     * Allows filtering on the ResaleAuthorizationId of an offer with list input.
+     */
+    ValueList?: OfferResaleAuthorizationIdFilterValueList;
+  }
+  export type OfferResaleAuthorizationIdFilterValueList = OfferResaleAuthorizationIdString[];
+  export type OfferResaleAuthorizationIdString = string;
   export interface OfferSort {
     /**
      * Allows to sort offers.
@@ -1033,7 +1045,7 @@ declare namespace MarketplaceCatalog {
      */
     SortOrder?: SortOrder;
   }
-  export type OfferSortBy = "EntityId"|"Name"|"ProductId"|"ReleaseDate"|"AvailabilityEndDate"|"BuyerAccounts"|"State"|"Targeting"|"LastModifiedDate"|string;
+  export type OfferSortBy = "EntityId"|"Name"|"ProductId"|"ResaleAuthorizationId"|"ReleaseDate"|"AvailabilityEndDate"|"BuyerAccounts"|"State"|"Targeting"|"LastModifiedDate"|string;
   export interface OfferStateFilter {
     /**
      * Allows filtering on the State of an offer with list input.
@@ -1051,6 +1063,10 @@ declare namespace MarketplaceCatalog {
      * The product ID of the offer.
      */
     ProductId?: OfferProductIdString;
+    /**
+     * The ResaleAuthorizationId of the offer.
+     */
+    ResaleAuthorizationId?: OfferResaleAuthorizationIdString;
     /**
      * The release date of the offer.
      */

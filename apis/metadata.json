@@ -1412,5 +1412,8 @@
   "timestreaminfluxdb": {
     "prefix": "timestream-influxdb",
     "name": "TimestreamInfluxDB"
+  },
+  "codeconnections": {
+    "name": "CodeConnections"
   }
 }

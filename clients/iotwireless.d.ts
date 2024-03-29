@@ -356,6 +356,22 @@ declare class IoTWireless extends Service {
    */
   getLogLevelsByResourceTypes(callback?: (err: AWSError, data: IoTWireless.Types.GetLogLevelsByResourceTypesResponse) => void): Request<IoTWireless.Types.GetLogLevelsByResourceTypesResponse, AWSError>;
   /**
+   * Get the metric configuration status for this account.
+   */
+  getMetricConfiguration(params: IoTWireless.Types.GetMetricConfigurationRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetMetricConfigurationResponse) => void): Request<IoTWireless.Types.GetMetricConfigurationResponse, AWSError>;
+  /**
+   * Get the metric configuration status for this account.
+   */
+  getMetricConfiguration(callback?: (err: AWSError, data: IoTWireless.Types.GetMetricConfigurationResponse) => void): Request<IoTWireless.Types.GetMetricConfigurationResponse, AWSError>;
+  /**
+   * Get metrics.
+   */
+  getMetrics(params: IoTWireless.Types.GetMetricsRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetMetricsResponse) => void): Request<IoTWireless.Types.GetMetricsResponse, AWSError>;
+  /**
+   * Get metrics.
+   */
+  getMetrics(callback?: (err: AWSError, data: IoTWireless.Types.GetMetricsResponse) => void): Request<IoTWireless.Types.GetMetricsResponse, AWSError>;
+  /**
    * Gets information about a multicast group.
    */
   getMulticastGroup(params: IoTWireless.Types.GetMulticastGroupRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetMulticastGroupResponse) => void): Request<IoTWireless.Types.GetMulticastGroupResponse, AWSError>;
@@ -812,6 +828,14 @@ declare class IoTWireless extends Service {
    */
   updateLogLevelsByResourceTypes(callback?: (err: AWSError, data: IoTWireless.Types.UpdateLogLevelsByResourceTypesResponse) => void): Request<IoTWireless.Types.UpdateLogLevelsByResourceTypesResponse, AWSError>;
   /**
+   * Update the metric configuration.
+   */
+  updateMetricConfiguration(params: IoTWireless.Types.UpdateMetricConfigurationRequest, callback?: (err: AWSError, data: IoTWireless.Types.UpdateMetricConfigurationResponse) => void): Request<IoTWireless.Types.UpdateMetricConfigurationResponse, AWSError>;
+  /**
+   * Update the metric configuration.
+   */
+  updateMetricConfiguration(callback?: (err: AWSError, data: IoTWireless.Types.UpdateMetricConfigurationResponse) => void): Request<IoTWireless.Types.UpdateMetricConfigurationResponse, AWSError>;
+  /**
    * Updates properties of a multicast group session.
    */
   updateMulticastGroup(params: IoTWireless.Types.UpdateMulticastGroupRequest, callback?: (err: AWSError, data: IoTWireless.Types.UpdateMulticastGroupResponse) => void): Request<IoTWireless.Types.UpdateMulticastGroupResponse, AWSError>;
@@ -926,6 +950,7 @@ declare namespace IoTWireless {
   }
   export type AckModeRetryDurationSecs = number;
   export type AddGwMetadata = boolean;
+  export type AggregationPeriod = "OneHour"|"OneDay"|"OneWeek"|string;
   export type AmazonId = string;
   export type AmazonResourceName = string;
   export type ApId = string;
@@ -1031,6 +1056,7 @@ declare namespace IoTWireless {
   export interface AssociateWirelessGatewayWithThingResponse {
   }
   export type AutoCreateTasks = boolean;
+  export type Avg = number;
   export type BCCH = number;
   export type BSIC = number;
   export type BaseLat = number;
@@ -1682,6 +1708,19 @@ declare namespace IoTWireless {
   }
   export type DeviceState = "Provisioned"|"RegisteredNotSeen"|"RegisteredReachable"|"RegisteredUnreachable"|string;
   export type DeviceTypeId = string;
+  export interface Dimension {
+    /**
+     * The name of the dimension.
+     */
+    name?: DimensionName;
+    /**
+     * The dimension's value.
+     */
+    value?: DimensionValue;
+  }
+  export type DimensionName = "DeviceId"|"GatewayId"|string;
+  export type DimensionValue = string;
+  export type Dimensions = Dimension[];
   export interface DisassociateAwsAccountFromPartnerAccountRequest {
     /**
      * The partner account ID to disassociate from the AWS account.
@@ -1970,6 +2009,26 @@ declare namespace IoTWireless {
     DefaultLogLevel?: LogLevel;
     WirelessGatewayLogOptions?: WirelessGatewayLogOptionList;
     WirelessDeviceLogOptions?: WirelessDeviceLogOptionList;
+  }
+  export interface GetMetricConfigurationRequest {
+  }
+  export interface GetMetricConfigurationResponse {
+    /**
+     * The account's configuration status for summary metric aggregation.
+     */
+    SummaryMetric?: SummaryMetricConfiguration;
+  }
+  export interface GetMetricsRequest {
+    /**
+     * The list of queries to retrieve summary metrics.
+     */
+    SummaryMetricQueries?: SummaryMetricQueries;
+  }
+  export interface GetMetricsResponse {
+    /**
+     * The list of retrieved metrics.
+     */
+    SummaryMetricQueryResults?: SummaryMetricQueryResults;
   }
   export interface GetMulticastGroupRequest {
     Id: MulticastGroupId;
@@ -3508,6 +3567,7 @@ declare namespace IoTWireless {
   export type MNC = number;
   export type MacAddress = string;
   export type MacVersion = string;
+  export type Max = number;
   export type MaxAllowedSignature = number;
   export type MaxDutyCycle = number;
   export type MaxEirp = number;
@@ -3525,6 +3585,43 @@ declare namespace IoTWireless {
   }
   export type MessageId = string;
   export type MessageType = "CUSTOM_COMMAND_ID_NOTIFY"|"CUSTOM_COMMAND_ID_GET"|"CUSTOM_COMMAND_ID_SET"|"CUSTOM_COMMAND_ID_RESP"|string;
+  export type MetricName = "DeviceRSSI"|"DeviceSNR"|"DeviceUplinkCount"|"DeviceDownlinkCount"|"DeviceUplinkLostCount"|"DeviceUplinkLostRate"|"DeviceJoinRequestCount"|"DeviceJoinAcceptCount"|"DeviceRoamingUplinkCount"|"DeviceRoamingDownlinkCount"|"GatewayUpTime"|"GatewayDownTime"|"GatewayRSSI"|"GatewaySNR"|"GatewayUplinkCount"|"GatewayDownlinkCount"|"GatewayJoinRequestCount"|"GatewayJoinAcceptCount"|"AwsAccountUplinkCount"|"AwsAccountDownlinkCount"|"AwsAccountUplinkLostCount"|"AwsAccountUplinkLostRate"|"AwsAccountJoinRequestCount"|"AwsAccountJoinAcceptCount"|"AwsAccountRoamingUplinkCount"|"AwsAccountRoamingDownlinkCount"|"AwsAccountDeviceCount"|"AwsAccountGatewayCount"|"AwsAccountActiveDeviceCount"|"AwsAccountActiveGatewayCount"|string;
+  export type MetricQueryEndTimestamp = Date;
+  export type MetricQueryError = string;
+  export type MetricQueryId = string;
+  export type MetricQueryStartTimestamp = Date;
+  export type MetricQueryStatus = "Succeeded"|"Failed"|string;
+  export type MetricQueryTimestamp = Date;
+  export type MetricQueryTimestamps = MetricQueryTimestamp[];
+  export interface MetricQueryValue {
+    /**
+     * The minimum of the values of the all data points collected during the period.
+     */
+    Min?: Min;
+    /**
+     * The maximum of the values of the all data points collected during the period.
+     */
+    Max?: Max;
+    /**
+     * The sum of the values of the all data points collected during the period.
+     */
+    Sum?: Sum;
+    /**
+     * The average of the values of the all data points collected during the period.
+     */
+    Avg?: Avg;
+    /**
+     * The standard deviation of the values of the all data points collected during the period.
+     */
+    Std?: Std;
+    /**
+     * The 90th percentile of the values of the all data points collected during the period.
+     */
+    P90?: P90;
+  }
+  export type MetricQueryValues = MetricQueryValue[];
+  export type MetricUnit = string;
+  export type Min = number;
   export type MinGwDiversity = number;
   export type Model = string;
   export type MulticastDeviceStatus = string;
@@ -3577,11 +3674,11 @@ declare namespace IoTWireless {
      */
     AppKey?: AppKey;
     /**
-     * The AppEUI value.
+     * The AppEUI value. You specify this value when using LoRaWAN versions v1.0.2 or v1.0.3.
      */
     AppEui?: AppEui;
     /**
-     * The JoinEUI value.
+     * The JoinEUI value. You specify this value instead of the AppEUI when using LoRaWAN version v1.0.4.
      */
     JoinEui?: JoinEui;
     /**
@@ -3603,6 +3700,7 @@ declare namespace IoTWireless {
      */
     JoinEui?: JoinEui;
   }
+  export type P90 = number;
   export type PCI = number;
   export type PSC = number;
   export type PackageVersion = string;
@@ -4131,8 +4229,91 @@ declare namespace IoTWireless {
   }
   export type Station = string;
   export type StatusReason = string;
+  export type Std = number;
   export type SubBand = number;
   export type SubBands = SubBand[];
+  export type Sum = number;
+  export interface SummaryMetricConfiguration {
+    /**
+     * The configuration of summary metric.
+     */
+    Status?: SummaryMetricConfigurationStatus;
+  }
+  export type SummaryMetricConfigurationStatus = "Enabled"|"Disabled"|string;
+  export type SummaryMetricQueries = SummaryMetricQuery[];
+  export interface SummaryMetricQuery {
+    /**
+     * The id of the query.
+     */
+    QueryId?: MetricQueryId;
+    /**
+     * The name of the metric.
+     */
+    MetricName?: MetricName;
+    /**
+     * The dimensions of the metric.
+     */
+    Dimensions?: Dimensions;
+    /**
+     * The aggregation period of the metric.
+     */
+    AggregationPeriod?: AggregationPeriod;
+    /**
+     * The start timestamp for summary metric query.
+     */
+    StartTimestamp?: MetricQueryStartTimestamp;
+    /**
+     * The end timestamp for summary metric query.
+     */
+    EndTimestamp?: MetricQueryEndTimestamp;
+  }
+  export interface SummaryMetricQueryResult {
+    /**
+     * The id of the query.
+     */
+    QueryId?: MetricQueryId;
+    /**
+     * The status of the metric query.
+     */
+    QueryStatus?: MetricQueryStatus;
+    /**
+     * The error message for the summary metric query.
+     */
+    Error?: MetricQueryError;
+    /**
+     * The name of the metric.
+     */
+    MetricName?: MetricName;
+    /**
+     * The dimensions of the metric.
+     */
+    Dimensions?: Dimensions;
+    /**
+     * The aggregation period of the metric.
+     */
+    AggregationPeriod?: AggregationPeriod;
+    /**
+     * The start timestamp for summary metric query.
+     */
+    StartTimestamp?: MetricQueryStartTimestamp;
+    /**
+     * The end timestamp for summary metric query.
+     */
+    EndTimestamp?: MetricQueryEndTimestamp;
+    /**
+     * The timestamp of each aggregation result.
+     */
+    Timestamps?: MetricQueryTimestamps;
+    /**
+     * The list of aggregated metrics.
+     */
+    Values?: MetricQueryValues;
+    /**
+     * The units of measurement to be used for interpreting the aggregation result.
+     */
+    Unit?: MetricUnit;
+  }
+  export type SummaryMetricQueryResults = SummaryMetricQueryResult[];
   export type SupportedRfRegion = "EU868"|"US915"|"AU915"|"AS923-1"|"AS923-2"|"AS923-3"|"AS923-4"|"EU433"|"CN470"|"CN779"|"RU864"|"KR920"|"IN865"|string;
   export type Supports32BitFCnt = boolean;
   export type SupportsClassB = boolean;
@@ -4368,6 +4549,14 @@ declare namespace IoTWireless {
     WirelessGatewayLogOptions?: WirelessGatewayLogOptionList;
   }
   export interface UpdateLogLevelsByResourceTypesResponse {
+  }
+  export interface UpdateMetricConfigurationRequest {
+    /**
+     * The value to be used to set summary metric configuration.
+     */
+    SummaryMetric?: SummaryMetricConfiguration;
+  }
+  export interface UpdateMetricConfigurationResponse {
   }
   export interface UpdateMulticastGroupRequest {
     Id: MulticastGroupId;

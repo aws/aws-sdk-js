@@ -1363,11 +1363,11 @@ declare namespace B2bi {
      */
     transactionSet?: X12TransactionSet;
     /**
-     * Returns the version to use for the specified X12 transaction set. Supported versions are 4010, 4030, and 5010.
+     * Returns the version to use for the specified X12 transaction set.  &lt;/p&gt; 
      */
     version?: X12Version;
   }
-  export type X12TransactionSet = "X12_110"|"X12_180"|"X12_204"|"X12_210"|"X12_214"|"X12_215"|"X12_310"|"X12_315"|"X12_322"|"X12_404"|"X12_410"|"X12_820"|"X12_824"|"X12_830"|"X12_846"|"X12_850"|"X12_852"|"X12_855"|"X12_856"|"X12_860"|"X12_861"|"X12_864"|"X12_940"|"X12_990"|"X12_997"|string;
+  export type X12TransactionSet = "X12_110"|"X12_180"|"X12_204"|"X12_210"|"X12_211"|"X12_214"|"X12_215"|"X12_259"|"X12_260"|"X12_266"|"X12_269"|"X12_270"|"X12_271"|"X12_274"|"X12_275"|"X12_276"|"X12_277"|"X12_278"|"X12_310"|"X12_315"|"X12_322"|"X12_404"|"X12_410"|"X12_417"|"X12_421"|"X12_426"|"X12_810"|"X12_820"|"X12_824"|"X12_830"|"X12_832"|"X12_834"|"X12_835"|"X12_837"|"X12_844"|"X12_846"|"X12_849"|"X12_850"|"X12_852"|"X12_855"|"X12_856"|"X12_860"|"X12_861"|"X12_864"|"X12_865"|"X12_869"|"X12_870"|"X12_940"|"X12_945"|"X12_990"|"X12_997"|"X12_999"|string;
   export type X12Version = "VERSION_4010"|"VERSION_4030"|"VERSION_5010"|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

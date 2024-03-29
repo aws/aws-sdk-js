@@ -125,6 +125,7 @@ declare class InternetMonitor extends Service {
   updateMonitor(callback?: (err: AWSError, data: InternetMonitor.Types.UpdateMonitorOutput) => void): Request<InternetMonitor.Types.UpdateMonitorOutput, AWSError>;
 }
 declare namespace InternetMonitor {
+  export type AccountId = string;
   export type Arn = string;
   export interface AvailabilityMeasurement {
     /**
@@ -140,6 +141,7 @@ declare namespace InternetMonitor {
      */
     PercentOfClientLocationImpacted?: Double;
   }
+  export type Boolean = boolean;
   export interface CreateMonitorInput {
     /**
      * The name of the monitor. 
@@ -218,6 +220,10 @@ declare namespace InternetMonitor {
      * The internally-generated identifier of a health event. Because EventID contains the forward slash (“/”) character, you must URL-encode the EventID field in the request URL.
      */
     EventId: HealthEventName;
+    /**
+     * TBD 
+     */
+    LinkedAccountId?: AccountId;
   }
   export interface GetHealthEventOutput {
     /**
@@ -270,6 +276,10 @@ declare namespace InternetMonitor {
      * The name of the monitor.
      */
     MonitorName: ResourceName;
+    /**
+     * TBD 
+     */
+    LinkedAccountId?: AccountId;
   }
   export interface GetMonitorOutput {
     /**
@@ -546,6 +556,10 @@ declare namespace InternetMonitor {
      * The status of a health event.
      */
     EventStatus?: HealthEventStatus;
+    /**
+     * TBD 
+     */
+    LinkedAccountId?: AccountId;
   }
   export interface ListHealthEventsOutput {
     /**
@@ -570,6 +584,10 @@ declare namespace InternetMonitor {
      * The status of a monitor. This includes the status of the data processing for the monitor and the status of the monitor itself. For information about the statuses for a monitor, see  Monitor.
      */
     MonitorStatus?: String;
+    /**
+     * TBD 
+     */
+    IncludeLinkedAccounts?: Boolean;
   }
   export interface ListMonitorsOutput {
     /**
@@ -747,6 +765,10 @@ declare namespace InternetMonitor {
      * The FilterParameters field that you use with Amazon CloudWatch Internet Monitor queries is a string the defines how you want a query to be filtered. The filter parameters that you can specify depend on the query type, since each query type returns a different set of Internet Monitor data. For more information about specifying filter parameters, see Using the Amazon CloudWatch Internet Monitor query interface in the Amazon CloudWatch Internet Monitor User Guide.
      */
     FilterParameters?: FilterParameters;
+    /**
+     * TBD 
+     */
+    LinkedAccountId?: AccountId;
   }
   export interface StartQueryOutput {
     /**

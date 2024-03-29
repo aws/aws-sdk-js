@@ -2753,6 +2753,7 @@
         "CREATING",
         "UPDATING",
         "ROTATING",
+        "PENDING_DELETION",
         "DELETING",
         "CREATE_FAILED",
         "UPDATE_ROLLBACK_FAILED",
