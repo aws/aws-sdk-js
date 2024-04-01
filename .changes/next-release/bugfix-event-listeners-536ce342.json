@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "event listeners",
-  "description": "Configures the endpoint path for redirect requests, instead of just the hostname, allowing for proper redirects."
-}

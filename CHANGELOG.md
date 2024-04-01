@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1589.0-->
+<!--LATEST=2.1590.0-->
 <!--ENTRYINSERT-->
+
+## 2.1590.0
+* bugfix: event listeners: Configures the endpoint path for redirect requests, instead of just the hostname, allowing for proper redirects.
+* feature: CloudWatch: This release adds support for CloudWatch Anomaly Detection on cross-account metrics. SingleMetricAnomalyDetector and MetricDataQuery inputs to Anomaly Detection APIs now take an optional AccountId field.
+* feature: DataZone: This release supports the feature of AI recommendations for descriptions to enrich the business data catalog in Amazon DataZone.
+* feature: Deadline: AWS Deadline Cloud is a new fully managed service that helps customers set up, deploy, and scale rendering projects in minutes, so they can improve the efficiency of their rendering pipelines and take on more projects.
+* feature: Lightsail: This release adds support to upgrade the TLS version of the distribution.
 
 ## 2.1589.0
 * feature: B2bi: Supporting new EDI X12 transaction sets for X12 versions 4010, 4030, and 5010.

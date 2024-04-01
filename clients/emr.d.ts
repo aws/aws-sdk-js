@@ -761,7 +761,7 @@ declare namespace EMR {
      */
     Id?: ClusterId;
     /**
-     * The name of the cluster.
+     * The name of the cluster. This parameter can't contain the characters &lt;, &gt;, $, |, or ` (backtick).
      */
     Name?: String;
     /**
@@ -2278,7 +2278,7 @@ declare namespace EMR {
      */
     Placement?: PlacementType;
     /**
-     * Specifies whether the cluster should remain available after completing all steps. Defaults to true. For more information about configuring cluster termination, see Control Cluster Termination in the EMR Management Guide.
+     * Specifies whether the cluster should remain available after completing all steps. Defaults to false. For more information about configuring cluster termination, see Control Cluster Termination in the EMR Management Guide.
      */
     KeepJobFlowAliveWhenNoSteps?: Boolean;
     /**

@@ -1415,5 +1415,8 @@
   },
   "codeconnections": {
     "name": "CodeConnections"
+  },
+  "deadline": {
+    "name": "Deadline"
   }
 }

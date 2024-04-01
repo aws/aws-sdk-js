@@ -378,5 +378,6 @@ module.exports = {
   Artifact: require('./artifact'),
   Chatbot: require('./chatbot'),
   TimestreamInfluxDB: require('./timestreaminfluxdb'),
-  CodeConnections: require('./codeconnections')
+  CodeConnections: require('./codeconnections'),
+  Deadline: require('./deadline')
 };

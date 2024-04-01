@@ -377,3 +377,4 @@ export import Artifact = require('./artifact');
 export import Chatbot = require('./chatbot');
 export import TimestreamInfluxDB = require('./timestreaminfluxdb');
 export import CodeConnections = require('./codeconnections');
+export import Deadline = require('./deadline');

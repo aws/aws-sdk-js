@@ -28,6 +28,14 @@ declare class DataZone extends Service {
    */
   acceptSubscriptionRequest(callback?: (err: AWSError, data: DataZone.Types.AcceptSubscriptionRequestOutput) => void): Request<DataZone.Types.AcceptSubscriptionRequestOutput, AWSError>;
   /**
+   * Cancels the metadata generation run.
+   */
+  cancelMetadataGenerationRun(params: DataZone.Types.CancelMetadataGenerationRunInput, callback?: (err: AWSError, data: DataZone.Types.CancelMetadataGenerationRunOutput) => void): Request<DataZone.Types.CancelMetadataGenerationRunOutput, AWSError>;
+  /**
+   * Cancels the metadata generation run.
+   */
+  cancelMetadataGenerationRun(callback?: (err: AWSError, data: DataZone.Types.CancelMetadataGenerationRunOutput) => void): Request<DataZone.Types.CancelMetadataGenerationRunOutput, AWSError>;
+  /**
    * Cancels the subscription to the specified asset.
    */
   cancelSubscription(params: DataZone.Types.CancelSubscriptionInput, callback?: (err: AWSError, data: DataZone.Types.CancelSubscriptionOutput) => void): Request<DataZone.Types.CancelSubscriptionOutput, AWSError>;
@@ -124,11 +132,11 @@ declare class DataZone extends Service {
    */
   createGroupProfile(callback?: (err: AWSError, data: DataZone.Types.CreateGroupProfileOutput) => void): Request<DataZone.Types.CreateGroupProfileOutput, AWSError>;
   /**
-   * 
+   * Publishes a listing (a record of an asset at a given time) or removes a listing from the catalog. 
    */
   createListingChangeSet(params: DataZone.Types.CreateListingChangeSetInput, callback?: (err: AWSError, data: DataZone.Types.CreateListingChangeSetOutput) => void): Request<DataZone.Types.CreateListingChangeSetOutput, AWSError>;
   /**
-   * 
+   * Publishes a listing (a record of an asset at a given time) or removes a listing from the catalog. 
    */
   createListingChangeSet(callback?: (err: AWSError, data: DataZone.Types.CreateListingChangeSetOutput) => void): Request<DataZone.Types.CreateListingChangeSetOutput, AWSError>;
   /**
@@ -260,11 +268,11 @@ declare class DataZone extends Service {
    */
   deleteGlossaryTerm(callback?: (err: AWSError, data: DataZone.Types.DeleteGlossaryTermOutput) => void): Request<DataZone.Types.DeleteGlossaryTermOutput, AWSError>;
   /**
-   * 
+   * Deletes a listing (a record of an asset at a given time).
    */
   deleteListing(params: DataZone.Types.DeleteListingInput, callback?: (err: AWSError, data: DataZone.Types.DeleteListingOutput) => void): Request<DataZone.Types.DeleteListingOutput, AWSError>;
   /**
-   * 
+   * Deletes a listing (a record of an asset at a given time).
    */
   deleteListing(callback?: (err: AWSError, data: DataZone.Types.DeleteListingOutput) => void): Request<DataZone.Types.DeleteListingOutput, AWSError>;
   /**
@@ -420,13 +428,21 @@ declare class DataZone extends Service {
    */
   getIamPortalLoginUrl(callback?: (err: AWSError, data: DataZone.Types.GetIamPortalLoginUrlOutput) => void): Request<DataZone.Types.GetIamPortalLoginUrlOutput, AWSError>;
   /**
-   * 
+   * Gets a listing (a record of an asset at a given time).
    */
   getListing(params: DataZone.Types.GetListingInput, callback?: (err: AWSError, data: DataZone.Types.GetListingOutput) => void): Request<DataZone.Types.GetListingOutput, AWSError>;
   /**
-   * 
+   * Gets a listing (a record of an asset at a given time).
    */
   getListing(callback?: (err: AWSError, data: DataZone.Types.GetListingOutput) => void): Request<DataZone.Types.GetListingOutput, AWSError>;
+  /**
+   * Gets a metadata generation run in Amazon DataZone.
+   */
+  getMetadataGenerationRun(params: DataZone.Types.GetMetadataGenerationRunInput, callback?: (err: AWSError, data: DataZone.Types.GetMetadataGenerationRunOutput) => void): Request<DataZone.Types.GetMetadataGenerationRunOutput, AWSError>;
+  /**
+   * Gets a metadata generation run in Amazon DataZone.
+   */
+  getMetadataGenerationRun(callback?: (err: AWSError, data: DataZone.Types.GetMetadataGenerationRunOutput) => void): Request<DataZone.Types.GetMetadataGenerationRunOutput, AWSError>;
   /**
    * Gets a project in Amazon DataZone.
    */
@@ -548,6 +564,14 @@ declare class DataZone extends Service {
    */
   listEnvironments(callback?: (err: AWSError, data: DataZone.Types.ListEnvironmentsOutput) => void): Request<DataZone.Types.ListEnvironmentsOutput, AWSError>;
   /**
+   * Lists all metadata generation runs.
+   */
+  listMetadataGenerationRuns(params: DataZone.Types.ListMetadataGenerationRunsInput, callback?: (err: AWSError, data: DataZone.Types.ListMetadataGenerationRunsOutput) => void): Request<DataZone.Types.ListMetadataGenerationRunsOutput, AWSError>;
+  /**
+   * Lists all metadata generation runs.
+   */
+  listMetadataGenerationRuns(callback?: (err: AWSError, data: DataZone.Types.ListMetadataGenerationRunsOutput) => void): Request<DataZone.Types.ListMetadataGenerationRunsOutput, AWSError>;
+  /**
    * Lists all Amazon DataZone notifications.
    */
   listNotifications(params: DataZone.Types.ListNotificationsInput, callback?: (err: AWSError, data: DataZone.Types.ListNotificationsOutput) => void): Request<DataZone.Types.ListNotificationsOutput, AWSError>;
@@ -660,11 +684,11 @@ declare class DataZone extends Service {
    */
   searchGroupProfiles(callback?: (err: AWSError, data: DataZone.Types.SearchGroupProfilesOutput) => void): Request<DataZone.Types.SearchGroupProfilesOutput, AWSError>;
   /**
-   * Searches listings in Amazon DataZone.
+   * Searches listings (records of an asset at a given time) in Amazon DataZone.
    */
   searchListings(params: DataZone.Types.SearchListingsInput, callback?: (err: AWSError, data: DataZone.Types.SearchListingsOutput) => void): Request<DataZone.Types.SearchListingsOutput, AWSError>;
   /**
-   * Searches listings in Amazon DataZone.
+   * Searches listings (records of an asset at a given time) in Amazon DataZone.
    */
   searchListings(callback?: (err: AWSError, data: DataZone.Types.SearchListingsOutput) => void): Request<DataZone.Types.SearchListingsOutput, AWSError>;
   /**
@@ -691,6 +715,14 @@ declare class DataZone extends Service {
    * Start the run of the specified data source in Amazon DataZone.
    */
   startDataSourceRun(callback?: (err: AWSError, data: DataZone.Types.StartDataSourceRunOutput) => void): Request<DataZone.Types.StartDataSourceRunOutput, AWSError>;
+  /**
+   * Starts the metadata generation run.
+   */
+  startMetadataGenerationRun(params: DataZone.Types.StartMetadataGenerationRunInput, callback?: (err: AWSError, data: DataZone.Types.StartMetadataGenerationRunOutput) => void): Request<DataZone.Types.StartMetadataGenerationRunOutput, AWSError>;
+  /**
+   * Starts the metadata generation run.
+   */
+  startMetadataGenerationRun(callback?: (err: AWSError, data: DataZone.Types.StartMetadataGenerationRunOutput) => void): Request<DataZone.Types.StartMetadataGenerationRunOutput, AWSError>;
   /**
    * Tags a resource in Amazon DataZone.
    */
@@ -807,18 +839,22 @@ declare class DataZone extends Service {
 declare namespace DataZone {
   export interface AcceptChoice {
     /**
+     * The edit of the prediction.
+     */
+    editedValue?: EditedValue;
+    /**
      * Specifies the prediction (aka, the automatically generated piece of metadata) that can be accepted.
      */
     predictionChoice?: Integer;
     /**
      * Specifies the target (for example, a column name) where a prediction can be accepted.
      */
-    predictionTarget?: String;
+    predictionTarget: String;
   }
   export type AcceptChoices = AcceptChoice[];
   export interface AcceptPredictionsInput {
     /**
-     * 
+     * Specifies the prediction (aka, the automatically generated piece of metadata) and the target (for example, a column name) that can be accepted.
      */
     acceptChoices?: AcceptChoices;
     /**
@@ -834,25 +870,25 @@ declare namespace DataZone {
      */
     domainIdentifier: DomainId;
     /**
-     * 
+     * The identifier of the asset.
      */
     identifier: AssetIdentifier;
     /**
-     * 
+     * The revision that is to be made to the asset.
      */
     revision?: Revision;
   }
   export interface AcceptPredictionsOutput {
     /**
-     * 
+     * The ID of the asset.
      */
     assetId: AssetId;
     /**
-     * 
+     * The identifier of the Amazon DataZone domain.
      */
     domainId: DomainId;
     /**
-     * 
+     * The revision that is to be made to the asset.
      */
     revision: Revision;
   }
@@ -1204,6 +1240,18 @@ declare namespace DataZone {
      */
     enabled?: Boolean;
   }
+  export interface CancelMetadataGenerationRunInput {
+    /**
+     * The ID of the Amazon DataZone domain in which the metadata generation run is to be cancelled.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The ID of the metadata generation run.
+     */
+    identifier: MetadataGenerationRunIdentifier;
+  }
+  export interface CancelMetadataGenerationRunOutput {
+  }
   export interface CancelSubscriptionInput {
     /**
      * The unique identifier of the Amazon DataZone domain where the subscription request is being cancelled.
@@ -1308,7 +1356,7 @@ declare namespace DataZone {
      */
     domainIdentifier: DomainId;
     /**
-     * 
+     * The external identifier of the asset.
      */
     externalIdentifier?: ExternalIdentifier;
     /**
@@ -1358,7 +1406,7 @@ declare namespace DataZone {
      */
     domainId: DomainId;
     /**
-     * 
+     * The external identifier of the asset.
      */
     externalIdentifier?: ExternalIdentifier;
     /**
@@ -1382,7 +1430,7 @@ declare namespace DataZone {
      */
     id: AssetId;
     /**
-     * 
+     * The details of an asset published in an Amazon DataZone catalog.
      */
     listing?: AssetListingDetails;
     /**
@@ -1470,7 +1518,7 @@ declare namespace DataZone {
      */
     domainId: DomainId;
     /**
-     * 
+     * The external identifier of the asset.
      */
     externalIdentifier?: ExternalIdentifier;
     /**
@@ -1494,7 +1542,7 @@ declare namespace DataZone {
      */
     id: AssetId;
     /**
-     * 
+     * The details of an asset published in an Amazon DataZone catalog. 
      */
     listing?: AssetListingDetails;
     /**
@@ -2216,41 +2264,41 @@ declare namespace DataZone {
   }
   export interface CreateListingChangeSetInput {
     /**
-     * 
+     * Specifies whether to publish or unpublish a listing.
      */
     action: ChangeAction;
     /**
-     * 
+     * A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.
      */
     clientToken?: ClientToken;
     /**
-     * 
+     * The ID of the Amazon DataZone domain.
      */
     domainIdentifier: DomainId;
     /**
-     * 
+     * The ID of the asset.
      */
     entityIdentifier: EntityId;
     /**
-     * 
+     * The revision of an asset.
      */
     entityRevision?: Revision;
     /**
-     * 
+     * The type of an entity.
      */
     entityType: EntityType;
   }
   export interface CreateListingChangeSetOutput {
     /**
-     * 
+     * The ID of the listing (a record of an asset at a given time).
      */
     listingId: ListingId;
     /**
-     * 
+     * The revision of a listing.
      */
     listingRevision: Revision;
     /**
-     * 
+     * Specifies the status of the listing.
      */
     status: ListingStatus;
   }
@@ -2310,7 +2358,7 @@ declare namespace DataZone {
      */
     domainId: DomainId;
     /**
-     * Reasons for failed project deletion
+     * Specifies the error message that is returned if the operation cannot be successfully completed.
      */
     failureReasons?: FailureReasons;
     /**
@@ -2330,7 +2378,7 @@ declare namespace DataZone {
      */
     name: ProjectName;
     /**
-     * Status of the project
+     * The status of the Amazon DataZone project that was created.
      */
     projectStatus?: ProjectStatus;
   }
@@ -2420,7 +2468,7 @@ declare namespace DataZone {
      */
     requestReason: RequestReason;
     /**
-     * 
+     * The published asset for which the subscription grant is to be created.
      */
     subscribedListings: SubscribedListingInputs;
     /**
@@ -2462,7 +2510,7 @@ declare namespace DataZone {
      */
     status: SubscriptionRequestStatus;
     /**
-     * 
+     * The published asset for which the subscription grant is to be created.
      */
     subscribedListings: CreateSubscriptionRequestOutputSubscribedListingsList;
     /**
@@ -3012,7 +3060,7 @@ declare namespace DataZone {
      */
     identifier: DomainId;
     /**
-     * Optional flag to delete all child entities within the domain
+     * Specifies the optional flag to delete all child entities within the domain.
      */
     skipDeletionCheck?: Boolean;
   }
@@ -3092,11 +3140,11 @@ declare namespace DataZone {
   }
   export interface DeleteListingInput {
     /**
-     * 
+     * The ID of the Amazon DataZone domain.
      */
     domainIdentifier: DomainId;
     /**
-     * 
+     * The ID of the listing to be deleted.
      */
     identifier: ListingId;
   }
@@ -3112,7 +3160,7 @@ declare namespace DataZone {
      */
     identifier: ProjectId;
     /**
-     * Optional flag to asynchronously delete child entities within the project
+     * Specifies the optional flag to delete all child entities within the project.
      */
     skipDeletionCheck?: Boolean;
   }
@@ -3311,6 +3359,7 @@ declare namespace DataZone {
      */
     status: DomainStatus;
   }
+  export type EditedValue = string;
   export type EnableSetting = "ENABLED"|"DISABLED"|string;
   export type EnabledRegionList = RegionName[];
   export type EntityId = string;
@@ -3717,7 +3766,7 @@ declare namespace DataZone {
      */
     domainId: DomainId;
     /**
-     * 
+     * The external ID of the asset.
      */
     externalIdentifier?: ExternalIdentifier;
     /**
@@ -3741,7 +3790,7 @@ declare namespace DataZone {
      */
     id: AssetId;
     /**
-     * 
+     * The listing of the asset.
      */
     listing?: AssetListingDetails;
     /**
@@ -3909,7 +3958,7 @@ declare namespace DataZone {
      */
     publishOnImport?: Boolean;
     /**
-     * 
+     * The recommendation configuration of the data source.
      */
     recommendation?: RecommendationConfiguration;
     /**
@@ -4523,21 +4572,21 @@ declare namespace DataZone {
   }
   export interface GetListingInput {
     /**
-     * 
+     * The ID of the Amazon DataZone domain.
      */
     domainIdentifier: DomainId;
     /**
-     * 
+     * The ID of the listing.
      */
     identifier: ListingId;
     /**
-     * 
+     * The revision of the listing.
      */
     listingRevision?: Revision;
   }
   export interface GetListingOutput {
     /**
-     * 
+     * The timestamp of when the listing was created.
      */
     createdAt?: CreatedAt;
     /**
@@ -4545,31 +4594,31 @@ declare namespace DataZone {
      */
     createdBy?: CreatedBy;
     /**
-     * 
+     * The description of the listing.
      */
     description?: Description;
     /**
-     * 
+     * The ID of the Amazon DataZone domain.
      */
     domainId: DomainId;
     /**
-     * 
+     * The ID of the listing.
      */
     id: ListingId;
     /**
-     * 
+     * The details of a listing.
      */
     item?: ListingItem;
     /**
-     * 
+     * The revision of a listing.
      */
     listingRevision: Revision;
     /**
-     * 
+     * The name of the listing.
      */
     name?: ListingName;
     /**
-     * 
+     * The status of the listing.
      */
     status?: ListingStatus;
     /**
@@ -4580,6 +4629,50 @@ declare namespace DataZone {
      * The Amazon DataZone user who updated the listing.
      */
     updatedBy?: UpdatedBy;
+  }
+  export interface GetMetadataGenerationRunInput {
+    /**
+     * The ID of the Amazon DataZone domain the metadata generation run of which you want to get.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The identifier of the metadata generation run.
+     */
+    identifier: MetadataGenerationRunIdentifier;
+  }
+  export interface GetMetadataGenerationRunOutput {
+    /**
+     * The timestamp of when the metadata generation run was start.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The Amazon DataZone user who started the metadata generation run.
+     */
+    createdBy?: CreatedBy;
+    /**
+     * The ID of the Amazon DataZone domain the metadata generation run of which you want to get.
+     */
+    domainId: DomainId;
+    /**
+     * The ID of the metadata generation run.
+     */
+    id: MetadataGenerationRunIdentifier;
+    /**
+     * The ID of the project that owns the assets for which you're running metadata generation.
+     */
+    owningProjectId: ProjectId;
+    /**
+     * The status of the metadata generation run.
+     */
+    status?: MetadataGenerationRunStatus;
+    /**
+     * The asset for which you're generating metadata.
+     */
+    target?: MetadataGenerationRunTarget;
+    /**
+     * The type of metadata generation run.
+     */
+    type?: MetadataGenerationRunType;
   }
   export interface GetProjectInput {
     /**
@@ -4609,7 +4702,7 @@ declare namespace DataZone {
      */
     domainId: DomainId;
     /**
-     * Reasons for failed project deletion
+     * Specifies the error message that is returned if the operation cannot be successfully completed.
      */
     failureReasons?: FailureReasons;
     /**
@@ -4629,7 +4722,7 @@ declare namespace DataZone {
      */
     name: ProjectName;
     /**
-     * Status of the project
+     * The status of the project.
      */
     projectStatus?: ProjectStatus;
   }
@@ -4725,7 +4818,7 @@ declare namespace DataZone {
      */
     status: SubscriptionStatus;
     /**
-     * 
+     * The details of the published asset for which the subscription grant is created.
      */
     subscribedListing: SubscribedListing;
     /**
@@ -5398,7 +5491,7 @@ declare namespace DataZone {
      */
     maxResults?: MaxResults;
     /**
-     * 
+     * The name of the environment.
      */
     name?: String;
     /**
@@ -5425,6 +5518,38 @@ declare namespace DataZone {
     items: EnvironmentSummaries;
     /**
      * When the number of environments is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of environments, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListEnvironments to list the next set of environments.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListMetadataGenerationRunsInput {
+    /**
+     * The ID of the Amazon DataZone domain where you want to list metadata generation runs.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The maximum number of metadata generation runs to return in a single call to ListMetadataGenerationRuns. When the number of metadata generation runs to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListMetadataGenerationRuns to list the next set of revisions.
+     */
+    maxResults?: MaxResults;
+    /**
+     * When the number of metadata generation runs is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of metadata generation runs, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListMetadataGenerationRuns to list the next set of revisions.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The status of the metadata generation runs.
+     */
+    status?: MetadataGenerationRunStatus;
+    /**
+     * The type of the metadata generation runs.
+     */
+    type?: MetadataGenerationRunType;
+  }
+  export interface ListMetadataGenerationRunsOutput {
+    /**
+     * The results of the ListMetadataGenerationRuns action.
+     */
+    items?: MetadataGenerationRuns;
+    /**
+     * When the number of metadata generation runs is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of metadata generation runs, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListMetadataGenerationRuns to list the next set of revisions.
      */
     nextToken?: PaginationToken;
   }
@@ -5522,7 +5647,7 @@ declare namespace DataZone {
      */
     maxResults?: MaxResults;
     /**
-     * 
+     * The name of the project.
      */
     name?: ProjectName;
     /**
@@ -5793,10 +5918,63 @@ declare namespace DataZone {
     user?: UserDetails;
   }
   export type Message = string;
+  export type MetadataGenerationRunIdentifier = string;
+  export interface MetadataGenerationRunItem {
+    /**
+     * The timestamp at which the metadata generation run was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The user who created the metadata generation run.
+     */
+    createdBy?: CreatedBy;
+    /**
+     * The ID of the Amazon DataZone domain in which the metadata generation run was created.
+     */
+    domainId: DomainId;
+    /**
+     * The ID of the metadata generation run.
+     */
+    id: MetadataGenerationRunIdentifier;
+    /**
+     * The ID of the project that owns the asset for which the metadata generation was ran.
+     */
+    owningProjectId: ProjectId;
+    /**
+     * The status of the metadata generation run.
+     */
+    status?: MetadataGenerationRunStatus;
+    /**
+     * The asset for which metadata was generated.
+     */
+    target?: MetadataGenerationRunTarget;
+    /**
+     * The type of the metadata generation run.
+     */
+    type?: MetadataGenerationRunType;
+  }
+  export type MetadataGenerationRunStatus = "SUBMITTED"|"IN_PROGRESS"|"CANCELED"|"SUCCEEDED"|"FAILED"|string;
+  export interface MetadataGenerationRunTarget {
+    /**
+     * The ID of the metadata generation run's target.
+     */
+    identifier: String;
+    /**
+     * The revision of the asset for which metadata was generated.
+     */
+    revision?: Revision;
+    /**
+     * The type of the asset for which metadata was generated.
+     */
+    type: MetadataGenerationTargetType;
+  }
+  export type MetadataGenerationRunType = "BUSINESS_DESCRIPTIONS"|string;
+  export type MetadataGenerationRuns = MetadataGenerationRunItem[];
+  export type MetadataGenerationTargetType = "ASSET"|string;
   export type MetadataMap = {[key: string]: String};
   export interface Model {
     /**
-     * 
+     * Indicates the smithy model of the API.
      */
     smithy?: Smithy;
   }
@@ -5876,11 +6054,11 @@ declare namespace DataZone {
   }
   export interface ProjectDeletionError {
     /**
-     * Project Deletion Error Code
+     * The code of the project deletion error.
      */
     code?: String;
     /**
-     * Project Deletion Error Message
+     * The message of the project deletion error.
      */
     message?: String;
   }
@@ -5917,7 +6095,7 @@ declare namespace DataZone {
      */
     domainId: DomainId;
     /**
-     * Reasons for failed project deletion
+     * Specifies the error message that is returned if the operation cannot be successfully completed.
      */
     failureReasons?: FailureReasons;
     /**
@@ -5929,7 +6107,7 @@ declare namespace DataZone {
      */
     name: ProjectName;
     /**
-     * Status of the project
+     * The status of the project.
      */
     projectStatus?: ProjectStatus;
     /**
@@ -6087,7 +6265,7 @@ declare namespace DataZone {
     /**
      * Specifies the target (for example, a column name) where a prediction can be rejected.
      */
-    predictionTarget?: String;
+    predictionTarget: String;
   }
   export type RejectChoices = RejectChoice[];
   export interface RejectPredictionsInput {
@@ -6104,29 +6282,29 @@ declare namespace DataZone {
      */
     identifier: AssetIdentifier;
     /**
-     * 
+     * Specifies the prediction (aka, the automatically generated piece of metadata) and the target (for example, a column name) that can be rejected.
      */
     rejectChoices?: RejectChoices;
     /**
-     * 
+     * Specifies the rule (or the conditions) under which a prediction can be rejected.
      */
     rejectRule?: RejectRule;
     /**
-     * 
+     * The revision that is to be made to the asset.
      */
     revision?: Revision;
   }
   export interface RejectPredictionsOutput {
     /**
-     * 
+     * The ID of the asset.
      */
     assetId: AssetId;
     /**
-     * 
+     * The revision that is to be made to the asset.
      */
     assetRevision: Revision;
     /**
-     * 
+     * The ID of the Amazon DataZone domain.
      */
     domainId: DomainId;
   }
@@ -6403,7 +6581,7 @@ declare namespace DataZone {
      */
     owningProjectIdentifier?: ProjectId;
     /**
-     * 
+     * The details of the search.
      */
     searchIn?: SearchInList;
     /**
@@ -6460,7 +6638,7 @@ declare namespace DataZone {
      */
     nextToken?: PaginationToken;
     /**
-     * 
+     * The details of the search.
      */
     searchIn?: SearchInList;
     /**
@@ -6530,7 +6708,7 @@ declare namespace DataZone {
      */
     filters?: FilterClause;
     /**
-     * 
+     * Specifies whether the search is managed.
      */
     managed: Boolean;
     /**
@@ -6542,7 +6720,7 @@ declare namespace DataZone {
      */
     nextToken?: PaginationToken;
     /**
-     * 
+     * The details of the search.
      */
     searchIn?: SearchInList;
     /**
@@ -6711,6 +6889,58 @@ declare namespace DataZone {
      * The timestamp of when the data source run was updated.
      */
     updatedAt: DateTime;
+  }
+  export interface StartMetadataGenerationRunInput {
+    /**
+     * A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The ID of the Amazon DataZone domain where you want to start a metadata generation run.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The ID of the project that owns the asset for which you want to start a metadata generation run.
+     */
+    owningProjectIdentifier: ProjectId;
+    /**
+     * The asset for which you want to start a metadata generation run.
+     */
+    target: MetadataGenerationRunTarget;
+    /**
+     * The type of the metadata generation run.
+     */
+    type: MetadataGenerationRunType;
+  }
+  export interface StartMetadataGenerationRunOutput {
+    /**
+     * The timestamp at which the metadata generation run was started.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The ID of the user who started the metadata generation run.
+     */
+    createdBy?: CreatedBy;
+    /**
+     * The ID of the Amazon DataZone domain in which the metadata generation run was started.
+     */
+    domainId: DomainId;
+    /**
+     * The ID of the metadata generation run.
+     */
+    id: MetadataGenerationRunIdentifier;
+    /**
+     * The ID of the project that owns the asset for which the metadata generation run was started.
+     */
+    owningProjectId?: ProjectId;
+    /**
+     * The status of the metadata generation run.
+     */
+    status?: MetadataGenerationRunStatus;
+    /**
+     * The type of the metadata generation run.
+     */
+    type?: MetadataGenerationRunType;
   }
   export type String = string;
   export interface SubscribedAsset {
@@ -7683,7 +7913,7 @@ declare namespace DataZone {
      */
     domainId: DomainId;
     /**
-     * Reasons for failed project deletion
+     * Specifies the error message that is returned if the operation cannot be successfully completed.
      */
     failureReasons?: FailureReasons;
     /**
@@ -7703,7 +7933,7 @@ declare namespace DataZone {
      */
     name: ProjectName;
     /**
-     * Status of the project
+     * The status of the project.
      */
     projectStatus?: ProjectStatus;
   }
@@ -7735,7 +7965,7 @@ declare namespace DataZone {
   }
   export interface UpdateSubscriptionGrantStatusOutput {
     /**
-     * 
+     * The details of the asset for which the subscription grant is created.
      */
     assets?: SubscribedAssets;
     /**

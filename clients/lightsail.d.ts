@@ -2795,6 +2795,14 @@ declare namespace Lightsail {
      * The tag keys and optional values to add to the distribution during create. Use the TagResource action to tag a resource after it's created.
      */
     tags?: TagList;
+    /**
+     * The name of the SSL/TLS certificate that you want to attach to the distribution. Use the GetCertificates action to get a list of certificate names that you can specify.
+     */
+    certificateName?: ResourceName;
+    /**
+     * The minimum TLS protocol version for the SSL/TLS certificate.
+     */
+    viewerMinimumTlsProtocolVersion?: ViewerMinimumTlsProtocolVersionEnum;
   }
   export interface CreateDistributionResult {
     /**
@@ -5322,6 +5330,10 @@ declare namespace Lightsail {
      * The protocol that your Amazon Lightsail distribution uses when establishing a connection with your origin to pull content.
      */
     protocolPolicy?: OriginProtocolPolicyEnum;
+    /**
+     * The amount of time, in seconds, that the distribution waits for a response after forwarding a request to the origin. The minimum timeout is 1 second, the maximum is 60 seconds, and the default (if you don't specify otherwise) is 30 seconds.
+     */
+    responseTimeout?: integer;
   }
   export interface Instance {
     /**
@@ -5848,6 +5860,10 @@ declare namespace Lightsail {
      * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Amazon Lightsail Developer Guide.
      */
     tags?: TagList;
+    /**
+     * The minimum TLS protocol version that the distribution can use to communicate with viewers.
+     */
+    viewerMinimumTlsProtocolVersion?: string;
   }
   export interface LoadBalancer {
     /**
@@ -6301,6 +6317,10 @@ declare namespace Lightsail {
      * The protocol that your Amazon Lightsail distribution uses when establishing a connection with your origin to pull content.
      */
     protocolPolicy?: OriginProtocolPolicyEnum;
+    /**
+     * The amount of time, in seconds, that the distribution waits for a response after forwarding a request to the origin. The minimum timeout is 1 second, the maximum is 60 seconds, and the default (if you don't specify otherwise) is 30 seconds.
+     */
+    responseTimeout?: integer;
   }
   export type OriginProtocolPolicyEnum = "http-only"|"https-only"|string;
   export type PartnerIdList = NonEmptyString[];
@@ -7531,6 +7551,18 @@ declare namespace Lightsail {
      * Indicates whether to enable the distribution.
      */
     isEnabled?: boolean;
+    /**
+     * Use this parameter to update the minimum TLS protocol version for the SSL/TLS certificate that's attached to the distribution.
+     */
+    viewerMinimumTlsProtocolVersion?: ViewerMinimumTlsProtocolVersionEnum;
+    /**
+     * The name of the SSL/TLS certificate that you want to attach to the distribution. Only certificates with a status of ISSUED can be attached to a distribution. Use the GetCertificates action to get a list of certificate names that you can specify.
+     */
+    certificateName?: ResourceName;
+    /**
+     * Indicates whether the default SSL/TLS certificate is attached to the distribution. The default value is true. When true, the distribution uses the default domain name such as d111111abcdef8.cloudfront.net.  Set this value to false to attach a new certificate to the distribution.
+     */
+    useDefaultCertificate?: boolean;
   }
   export interface UpdateDistributionResult {
     /**
@@ -7670,6 +7702,7 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
+  export type ViewerMinimumTlsProtocolVersionEnum = "TLSv1.1_2016"|"TLSv1.2_2018"|"TLSv1.2_2019"|"TLSv1.2_2021"|string;
   export type double = number;
   export type float = number;
   export type integer = number;
