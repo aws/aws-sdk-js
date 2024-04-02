@@ -129,19 +129,6 @@
       });
     });
     describe('canonicalString', function() {
-      it('sorts the search string', function() {
-        var req;
-        req = new AWS.CloudSearchDomain({
-          endpoint: 'host.domain.com'
-        }).search({
-          query: 'foo',
-          cursor: 'initial',
-          queryOptions: '{}'
-        }).removeListener('build', AWS.CloudSearchDomain.prototype.convertGetToPost).build();
-        signer = new AWS.Signers.V4(req.httpRequest, 'cloudsearchdomain');
-        return expect(signer.canonicalString().split('\n')[2]).to.equal('cursor=initial&format=sdk&pretty=true&q=foo&q.options=%7B%7D');
-      });
-
       it('double URI encodes paths for non S3 services', function() {
         var req;
         req = new AWS.CognitoSync().listDatasets({

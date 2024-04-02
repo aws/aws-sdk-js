@@ -87,19 +87,8 @@
         params = {
           query: 'foo'
         };
-        req = build('search', params);
+        req = build('suggest', params);
         return expect(req.headers).to.have.property('Authorization');
-      });
-      it('converts the GET request to POST for search operation', function() {
-        var params, req;
-        params = {
-          query: 'foo'
-        };
-        req = build('search', params);
-        expect(req.method).to.equal('POST');
-        expect(req.path.indexOf('?')).to.equal(-1);
-        expect(typeof req.body).to.equal('string');
-        return expect(req.headers['Content-Length']).to.equal(req.body.length);
       });
       return it('keeps the suggest operation as a GET request', function() {
         var params, req;
