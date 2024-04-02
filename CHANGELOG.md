@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1590.0-->
+<!--LATEST=2.1591.0-->
 <!--ENTRYINSERT-->
+
+## 2.1591.0
+* feature: Glue: Adding View related fields to responses of read-only Table APIs.
+* feature: RolesAnywhere: This release increases the limit on the roleArns request parameter for the *Profile APIs that support it. This parameter can now take up to 250 role ARNs.
 
 ## 2.1590.0
 * bugfix: event listeners: Configures the endpoint path for redirect requests, instead of just the hostname, allowing for proper redirects.

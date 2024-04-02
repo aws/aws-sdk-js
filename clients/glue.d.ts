@@ -8330,9 +8330,17 @@ declare namespace Glue {
      */
     QueryAuthorizationId?: HashString;
     /**
+     * Specifies whether the view supports the SQL dialects of one or more different query engines and can therefore be read by those engines.
+     */
+    IsMultiDialectView?: Boolean;
+    /**
      * The resource ARN of the parent resource extracted from the request.
      */
     ResourceArn?: ArnString;
+    /**
+     * A flag that instructs the engine not to push user-provided operations into the logical plan of the view during query planning. However, if set this flag does not guarantee that the engine will comply. Refer to the engine's documentation to understand the guarantees provided, if any.
+     */
+    IsProtected?: Boolean;
     /**
      * The Lake Formation data permissions of the caller on the table. Used to authorize the call when no view context is found.
      */
@@ -13075,6 +13083,14 @@ declare namespace Glue {
      * A FederatedTable structure that references an entity outside the Glue Data Catalog.
      */
     FederatedTable?: FederatedTable;
+    /**
+     * A structure that contains all the information that defines the view, including the dialect or dialects for the view, and the query.
+     */
+    ViewDefinition?: ViewDefinition;
+    /**
+     * Specifies whether the view supports the SQL dialects of one or more different query engines and can therefore be read by those engines.
+     */
+    IsMultiDialectView?: NullableBoolean;
   }
   export interface TableError {
     /**
@@ -14356,8 +14372,50 @@ declare namespace Glue {
   export type VersionLongNumber = number;
   export type VersionString = string;
   export type VersionsString = string;
+  export interface ViewDefinition {
+    /**
+     * You can set this flag as true to instruct the engine not to push user-provided operations into the logical plan of the view during query planning. However, setting this flag does not guarantee that the engine will comply. Refer to the engine's documentation to understand the guarantees provided, if any.
+     */
+    IsProtected?: NullableBoolean;
+    /**
+     * The definer of a view in SQL.
+     */
+    Definer?: ArnString;
+    /**
+     * A list of table Amazon Resource Names (ARNs).
+     */
+    SubObjects?: ViewSubObjectsList;
+    /**
+     * A list of representations.
+     */
+    Representations?: ViewRepresentationList;
+  }
   export type ViewDialect = "REDSHIFT"|"ATHENA"|"SPARK"|string;
   export type ViewDialectVersionString = string;
+  export interface ViewRepresentation {
+    /**
+     * The dialect of the query engine.
+     */
+    Dialect?: ViewDialect;
+    /**
+     * The version of the dialect of the query engine. For example, 3.0.0.
+     */
+    DialectVersion?: ViewDialectVersionString;
+    /**
+     * The SELECT query provided by the customer during CREATE VIEW DDL. This SQL is not used during a query on a view (ViewExpandedText is used instead). ViewOriginalText is used for cases like SHOW CREATE VIEW where users want to see the original DDL command that created the view.
+     */
+    ViewOriginalText?: ViewTextString;
+    /**
+     * The expanded SQL for the view. This SQL is used by engines while processing a query on a view. Engines may perform operations during view creation to transform ViewOriginalText to ViewExpandedText. For example:   Fully qualify identifiers: SELECT * from table1 → SELECT * from db1.table1   
+     */
+    ViewExpandedText?: ViewTextString;
+    /**
+     * Dialects marked as stale are no longer valid and must be updated before they can be queried in their respective query engines.
+     */
+    IsStale?: NullableBoolean;
+  }
+  export type ViewRepresentationList = ViewRepresentation[];
+  export type ViewSubObjectsList = ArnString[];
   export type ViewTextString = string;
   export type WorkerType = "Standard"|"G.1X"|"G.2X"|"G.025X"|"G.4X"|"G.8X"|"Z.2X"|string;
   export interface Workflow {

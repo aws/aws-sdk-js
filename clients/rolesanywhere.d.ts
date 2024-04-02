@@ -242,7 +242,7 @@ declare namespace RolesAnywhere {
   export type Boolean = boolean;
   export interface CreateProfileRequest {
     /**
-     *  Used to determine how long sessions vended using this profile are valid for. See the Expiration section of the CreateSession API documentation page for more details. 
+     *  Used to determine how long sessions vended using this profile are valid for. See the Expiration section of the CreateSession API documentation page for more details. In requests, if this value is not provided, the default value will be 3600. 
      */
     durationSeconds?: CreateProfileRequestDurationSecondsInteger;
     /**
@@ -541,7 +541,7 @@ declare namespace RolesAnywhere {
      */
     createdBy?: String;
     /**
-     *  Used to determine how long sessions vended using this profile are valid for. See the Expiration section of the CreateSession API documentation page for more details. 
+     *  Used to determine how long sessions vended using this profile are valid for. See the Expiration section of the CreateSession API documentation page for more details. In requests, if this value is not provided, the default value will be 3600. 
      */
     durationSeconds?: Integer;
     /**
@@ -837,7 +837,7 @@ declare namespace RolesAnywhere {
   export type UpdateCrlRequestCrlDataBlob = Buffer|Uint8Array|Blob|string;
   export interface UpdateProfileRequest {
     /**
-     *  Used to determine how long sessions vended using this profile are valid for. See the Expiration section of the CreateSession API documentation page for more details. 
+     *  Used to determine how long sessions vended using this profile are valid for. See the Expiration section of the CreateSession API documentation page for more details. In requests, if this value is not provided, the default value will be 3600. 
      */
     durationSeconds?: UpdateProfileRequestDurationSecondsInteger;
     /**
