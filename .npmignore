@@ -9,6 +9,7 @@
 .npmignore
 .tesselinclude
 .vscode/
+.idea
 apis/*.normal.json
 appveyor.yml
 bower.json
