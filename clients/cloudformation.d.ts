@@ -3147,6 +3147,7 @@ declare namespace CloudFormation {
      */
     Value: Value;
   }
+  export type PolicyAction = "Delete"|"Retain"|"Snapshot"|"ReplaceAndDelete"|"ReplaceAndRetain"|"ReplaceAndSnapshot"|string;
   export type PrivateTypeArn = string;
   export type Properties = string;
   export type PropertyDescription = string;
@@ -3317,6 +3318,10 @@ declare namespace CloudFormation {
   export type RequiresRecreation = "Never"|"Conditionally"|"Always"|string;
   export type ResourceAttribute = "Properties"|"Metadata"|"CreationPolicy"|"UpdatePolicy"|"DeletionPolicy"|"UpdateReplacePolicy"|"Tags"|string;
   export interface ResourceChange {
+    /**
+     * The action that will be taken on the physical resource when the change set is executed.    Delete The resource will be deleted.    Retain The resource will be retained.    Snapshot The resource will have a snapshot taken.    ReplaceAndDelete The resource will be replaced and then deleted.    ReplaceAndRetain The resource will be replaced and then retained.    ReplaceAndSnapshot The resource will be replaced and then have a snapshot taken.  
+     */
+    PolicyAction?: PolicyAction;
     /**
      * The action that CloudFormation takes on the resource, such as Add (adds a new resource), Modify (changes a resource), Remove (deletes a resource), Import (imports a resource), or Dynamic (exact action for the resource can't be determined).
      */

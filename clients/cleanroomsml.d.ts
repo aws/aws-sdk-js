@@ -28,11 +28,11 @@ declare class CleanRoomsML extends Service {
    */
   createConfiguredAudienceModel(callback?: (err: AWSError, data: CleanRoomsML.Types.CreateConfiguredAudienceModelResponse) => void): Request<CleanRoomsML.Types.CreateConfiguredAudienceModelResponse, AWSError>;
   /**
-   * Defines the information necessary to create a training dataset, or seed audience. In Clean Rooms ML, the TrainingDataset is metadata that points to a Glue table, which is read only during AudienceModel creation.
+   * Defines the information necessary to create a training dataset. In Clean Rooms ML, the TrainingDataset is metadata that points to a Glue table, which is read only during AudienceModel creation.
    */
   createTrainingDataset(params: CleanRoomsML.Types.CreateTrainingDatasetRequest, callback?: (err: AWSError, data: CleanRoomsML.Types.CreateTrainingDatasetResponse) => void): Request<CleanRoomsML.Types.CreateTrainingDatasetResponse, AWSError>;
   /**
-   * Defines the information necessary to create a training dataset, or seed audience. In Clean Rooms ML, the TrainingDataset is metadata that points to a Glue table, which is read only during AudienceModel creation.
+   * Defines the information necessary to create a training dataset. In Clean Rooms ML, the TrainingDataset is metadata that points to a Glue table, which is read only during AudienceModel creation.
    */
   createTrainingDataset(callback?: (err: AWSError, data: CleanRoomsML.Types.CreateTrainingDatasetResponse) => void): Request<CleanRoomsML.Types.CreateTrainingDatasetResponse, AWSError>;
   /**
@@ -257,7 +257,7 @@ declare namespace CleanRoomsML {
   export type AudienceGenerationJobArn = string;
   export interface AudienceGenerationJobDataSource {
     /**
-     * The Amazon S3 bucket where the training data for the configured audience is stored.
+     * Defines the Amazon S3 bucket where the seed audience for the generating audience is stored. A valid data source is a JSON line file in the following format:  {"user_id": "111111"}   {"user_id": "222222"}   ... 
      */
     dataSource: S3ConfigMap;
     /**
@@ -307,22 +307,6 @@ declare namespace CleanRoomsML {
   }
   export type AudienceModelArn = string;
   export type AudienceModelList = AudienceModelSummary[];
-  export interface AudienceModelMetric {
-    /**
-     * The number of users that were used to generate these model metrics.
-     */
-    forTopKItemPredictions: Integer;
-    /**
-     * The audience model metric.
-     */
-    type: AudienceModelMetricType;
-    /**
-     * The value of the audience model metric
-     */
-    value: Double;
-  }
-  export type AudienceModelMetricType = "NORMALIZED_DISCOUNTED_CUMULATIVE_GAIN"|"MEAN_RECIPROCAL_RANK"|"PRECISION"|"RECALL"|string;
-  export type AudienceModelMetrics = AudienceModelMetric[];
   export type AudienceModelStatus = "CREATE_PENDING"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"ACTIVE"|"DELETE_PENDING"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|string;
   export interface AudienceModelSummary {
     /**
@@ -355,6 +339,10 @@ declare namespace CleanRoomsML {
     updateTime: SyntheticTimestamp_date_time;
   }
   export interface AudienceQualityMetrics {
+    /**
+     * The recall score of the generated audience. Recall is the percentage of the most similar users (by default, the most similar 20%) from a sample of the training data that are included in the seed audience by the audience generation job. Values range from 0-1, larger values indicate a better audience. A recall value approximately equal to the maximum bin size indicates that the audience model is equivalent to random selection. 
+     */
+    recallMetric?: Double;
     /**
      * The relevance scores of the generated audience.
      */
@@ -455,7 +443,7 @@ declare namespace CleanRoomsML {
      */
     name: NameString;
     /**
-     * The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50.   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8.   Maximum value length - 256 Unicode characters in UTF-8.   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.  
+     * The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50.   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8.   Maximum value length - 256 Unicode characters in UTF-8.   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.  
      */
     tags?: TagMap;
     /**
@@ -495,7 +483,7 @@ declare namespace CleanRoomsML {
      */
     description?: ResourceDescription;
     /**
-     * The minimum number of users from the seed audience that must match with users in the training data of the audience model.
+     * The minimum number of users from the seed audience that must match with users in the training data of the audience model. The default value is 500.
      */
     minMatchingSeedSize?: MinMatchingSeedSize;
     /**
@@ -511,7 +499,7 @@ declare namespace CleanRoomsML {
      */
     sharedAudienceMetrics: MetricsList;
     /**
-     * The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50.   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8.   Maximum value length - 256 Unicode characters in UTF-8.   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.  
+     * The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50.   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8.   Maximum value length - 256 Unicode characters in UTF-8.   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.  
      */
     tags?: TagMap;
   }
@@ -642,7 +630,7 @@ declare namespace CleanRoomsML {
      */
     includeSeedInOutput?: Boolean;
     /**
-     * The relevance scores for different audience sizes. 
+     * The relevance scores for different audience sizes and the recall score of the generated audience. 
      */
     metrics?: AudienceQualityMetrics;
     /**
@@ -697,10 +685,6 @@ declare namespace CleanRoomsML {
      * The KMS key ARN used for the audience model.
      */
     kmsKeyArn?: KmsKeyArn;
-    /**
-     * Accuracy metrics for the model.
-     */
-    metrics?: AudienceModelMetrics;
     /**
      * The name of the audience model.
      */
@@ -876,7 +860,6 @@ declare namespace CleanRoomsML {
   export type GlueTableName = string;
   export type Hash = string;
   export type IamRoleArn = string;
-  export type Integer = number;
   export type KmsKeyArn = string;
   export interface ListAudienceExportJobsRequest {
     /**
@@ -1095,7 +1078,7 @@ declare namespace CleanRoomsML {
      */
     seedAudience: AudienceGenerationJobDataSource;
     /**
-     * The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50.   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8.   Maximum value length - 256 Unicode characters in UTF-8.   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.  
+     * The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50.   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8.   Maximum value length - 256 Unicode characters in UTF-8.   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.  
      */
     tags?: TagMap;
   }
@@ -1127,7 +1110,7 @@ declare namespace CleanRoomsML {
      */
     resourceArn: TaggableArn;
     /**
-     * The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50.   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8.   Maximum value length - 256 Unicode characters in UTF-8.   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.  
+     * The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50.   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8.   Maximum value length - 256 Unicode characters in UTF-8.   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.  
      */
     tags: TagMap;
   }

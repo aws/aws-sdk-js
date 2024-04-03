@@ -205,11 +205,11 @@ declare class Transfer extends Service {
    */
   describeProfile(callback?: (err: AWSError, data: Transfer.Types.DescribeProfileResponse) => void): Request<Transfer.Types.DescribeProfileResponse, AWSError>;
   /**
-   * Describes the security policy that is attached to your file transfer protocol-enabled server. The response contains a description of the security policy's properties. For more information about security policies, see Working with security policies.
+   * Describes the security policy that is attached to your server or SFTP connector. The response contains a description of the security policy's properties. For more information about security policies, see Working with security policies for servers or Working with security policies for SFTP connectors.
    */
   describeSecurityPolicy(params: Transfer.Types.DescribeSecurityPolicyRequest, callback?: (err: AWSError, data: Transfer.Types.DescribeSecurityPolicyResponse) => void): Request<Transfer.Types.DescribeSecurityPolicyResponse, AWSError>;
   /**
-   * Describes the security policy that is attached to your file transfer protocol-enabled server. The response contains a description of the security policy's properties. For more information about security policies, see Working with security policies.
+   * Describes the security policy that is attached to your server or SFTP connector. The response contains a description of the security policy's properties. For more information about security policies, see Working with security policies for servers or Working with security policies for SFTP connectors.
    */
   describeSecurityPolicy(callback?: (err: AWSError, data: Transfer.Types.DescribeSecurityPolicyResponse) => void): Request<Transfer.Types.DescribeSecurityPolicyResponse, AWSError>;
   /**
@@ -317,11 +317,11 @@ declare class Transfer extends Service {
    */
   listProfiles(callback?: (err: AWSError, data: Transfer.Types.ListProfilesResponse) => void): Request<Transfer.Types.ListProfilesResponse, AWSError>;
   /**
-   * Lists the security policies that are attached to your file transfer protocol-enabled servers.
+   * Lists the security policies that are attached to your servers and SFTP connectors. For more information about security policies, see Working with security policies for servers or Working with security policies for SFTP connectors.
    */
   listSecurityPolicies(params: Transfer.Types.ListSecurityPoliciesRequest, callback?: (err: AWSError, data: Transfer.Types.ListSecurityPoliciesResponse) => void): Request<Transfer.Types.ListSecurityPoliciesResponse, AWSError>;
   /**
-   * Lists the security policies that are attached to your file transfer protocol-enabled servers.
+   * Lists the security policies that are attached to your servers and SFTP connectors. For more information about security policies, see Working with security policies for servers or Working with security policies for SFTP connectors.
    */
   listSecurityPolicies(callback?: (err: AWSError, data: Transfer.Types.ListSecurityPoliciesResponse) => void): Request<Transfer.Types.ListSecurityPoliciesResponse, AWSError>;
   /**
@@ -562,6 +562,7 @@ declare namespace Transfer {
   export type CertificateUsageType = "SIGNING"|"ENCRYPTION"|string;
   export type CompressionEnum = "ZLIB"|"DISABLED"|string;
   export type ConnectorId = string;
+  export type ConnectorSecurityPolicyName = string;
   export interface CopyStepDetails {
     /**
      * The name of the step, used as an identifier.
@@ -686,6 +687,10 @@ declare namespace Transfer {
      * A structure that contains the parameters for an SFTP connector object.
      */
     SftpConfig?: SftpConnectorConfig;
+    /**
+     * Specifies the name of the security policy for the connector.
+     */
+    SecurityPolicyName?: ConnectorSecurityPolicyName;
   }
   export interface CreateConnectorResponse {
     /**
@@ -767,7 +772,7 @@ declare namespace Transfer {
      */
     ProtocolDetails?: ProtocolDetails;
     /**
-     * Specifies the name of the security policy that is attached to the server.
+     * Specifies the name of the security policy for the server.
      */
     SecurityPolicyName?: SecurityPolicyName;
     /**
@@ -1117,7 +1122,7 @@ declare namespace Transfer {
   }
   export interface DescribeSecurityPolicyRequest {
     /**
-     * Specifies the name of the security policy that is attached to the server.
+     * Specify the text name of the security policy for which you want the details.
      */
     SecurityPolicyName: SecurityPolicyName;
   }
@@ -1335,6 +1340,10 @@ declare namespace Transfer {
      * The list of egress IP addresses of this connector. These IP addresses are assigned automatically when you create the connector.
      */
     ServiceManagedEgressIpAddresses?: ServiceManagedEgressIpAddresses;
+    /**
+     * The text name of the security policy for the specified connector.
+     */
+    SecurityPolicyName?: ConnectorSecurityPolicyName;
   }
   export interface DescribedExecution {
     /**
@@ -1425,29 +1434,41 @@ declare namespace Transfer {
   }
   export interface DescribedSecurityPolicy {
     /**
-     * Specifies whether this policy enables Federal Information Processing Standards (FIPS).
+     * Specifies whether this policy enables Federal Information Processing Standards (FIPS). This parameter applies to both server and connector security policies.
      */
     Fips?: Fips;
     /**
-     * Specifies the name of the security policy that is attached to the server.
+     * The text name of the specified security policy.
      */
     SecurityPolicyName: SecurityPolicyName;
     /**
-     * Specifies the enabled Secure Shell (SSH) cipher encryption algorithms in the security policy that is attached to the server.
+     * Lists the enabled Secure Shell (SSH) cipher encryption algorithms in the security policy that is attached to the server or connector. This parameter applies to both server and connector security policies.
      */
     SshCiphers?: SecurityPolicyOptions;
     /**
-     * Specifies the enabled SSH key exchange (KEX) encryption algorithms in the security policy that is attached to the server.
+     * Lists the enabled SSH key exchange (KEX) encryption algorithms in the security policy that is attached to the server or connector. This parameter applies to both server and connector security policies.
      */
     SshKexs?: SecurityPolicyOptions;
     /**
-     * Specifies the enabled SSH message authentication code (MAC) encryption algorithms in the security policy that is attached to the server.
+     * Lists the enabled SSH message authentication code (MAC) encryption algorithms in the security policy that is attached to the server or connector. This parameter applies to both server and connector security policies.
      */
     SshMacs?: SecurityPolicyOptions;
     /**
-     * Specifies the enabled Transport Layer Security (TLS) cipher encryption algorithms in the security policy that is attached to the server.
+     * Lists the enabled Transport Layer Security (TLS) cipher encryption algorithms in the security policy that is attached to the server.  This parameter only applies to security policies for servers. 
      */
     TlsCiphers?: SecurityPolicyOptions;
+    /**
+     * Lists the host key algorithms for the security policy.  This parameter only applies to security policies for connectors. 
+     */
+    SshHostKeyAlgorithms?: SecurityPolicyOptions;
+    /**
+     * The resource type to which the security policy applies, either server or connector.
+     */
+    Type?: SecurityPolicyResourceType;
+    /**
+     * Lists the file transfer protocols that the security policy applies to.
+     */
+    Protocols?: SecurityPolicyProtocols;
   }
   export interface DescribedServer {
     /**
@@ -1503,7 +1524,7 @@ declare namespace Transfer {
      */
     Protocols?: Protocols;
     /**
-     * Specifies the name of the security policy that is attached to the server.
+     * Specifies the name of the security policy for the server.
      */
     SecurityPolicyName?: SecurityPolicyName;
     /**
@@ -2510,6 +2531,9 @@ declare namespace Transfer {
   export type SecurityPolicyNames = SecurityPolicyName[];
   export type SecurityPolicyOption = string;
   export type SecurityPolicyOptions = SecurityPolicyOption[];
+  export type SecurityPolicyProtocol = "SFTP"|"FTPS"|string;
+  export type SecurityPolicyProtocols = SecurityPolicyProtocol[];
+  export type SecurityPolicyResourceType = "SERVER"|"CONNECTOR"|string;
   export interface SendWorkflowStepStateRequest {
     /**
      * A unique identifier for the workflow.
@@ -2862,6 +2886,10 @@ declare namespace Transfer {
      * A structure that contains the parameters for an SFTP connector object.
      */
     SftpConfig?: SftpConnectorConfig;
+    /**
+     * Specifies the name of the security policy for the connector.
+     */
+    SecurityPolicyName?: ConnectorSecurityPolicyName;
   }
   export interface UpdateConnectorResponse {
     /**
@@ -2951,7 +2979,7 @@ declare namespace Transfer {
      */
     Protocols?: Protocols;
     /**
-     * Specifies the name of the security policy that is attached to the server.
+     * Specifies the name of the security policy for the server.
      */
     SecurityPolicyName?: SecurityPolicyName;
     /**

@@ -316,6 +316,14 @@ declare class DataZone extends Service {
    */
   deleteSubscriptionTarget(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes the specified time series form for the specified asset. 
+   */
+  deleteTimeSeriesDataPoints(params: DataZone.Types.DeleteTimeSeriesDataPointsInput, callback?: (err: AWSError, data: DataZone.Types.DeleteTimeSeriesDataPointsOutput) => void): Request<DataZone.Types.DeleteTimeSeriesDataPointsOutput, AWSError>;
+  /**
+   * Deletes the specified time series form for the specified asset. 
+   */
+  deleteTimeSeriesDataPoints(callback?: (err: AWSError, data: DataZone.Types.DeleteTimeSeriesDataPointsOutput) => void): Request<DataZone.Types.DeleteTimeSeriesDataPointsOutput, AWSError>;
+  /**
    * Gets an Amazon DataZone asset.
    */
   getAsset(params: DataZone.Types.GetAssetInput, callback?: (err: AWSError, data: DataZone.Types.GetAssetOutput) => void): Request<DataZone.Types.GetAssetOutput, AWSError>;
@@ -484,6 +492,14 @@ declare class DataZone extends Service {
    */
   getSubscriptionTarget(callback?: (err: AWSError, data: DataZone.Types.GetSubscriptionTargetOutput) => void): Request<DataZone.Types.GetSubscriptionTargetOutput, AWSError>;
   /**
+   * Gets the existing data point for the asset.
+   */
+  getTimeSeriesDataPoint(params: DataZone.Types.GetTimeSeriesDataPointInput, callback?: (err: AWSError, data: DataZone.Types.GetTimeSeriesDataPointOutput) => void): Request<DataZone.Types.GetTimeSeriesDataPointOutput, AWSError>;
+  /**
+   * Gets the existing data point for the asset.
+   */
+  getTimeSeriesDataPoint(callback?: (err: AWSError, data: DataZone.Types.GetTimeSeriesDataPointOutput) => void): Request<DataZone.Types.GetTimeSeriesDataPointOutput, AWSError>;
+  /**
    * Gets a user profile in Amazon DataZone.
    */
   getUserProfile(params: DataZone.Types.GetUserProfileInput, callback?: (err: AWSError, data: DataZone.Types.GetUserProfileOutput) => void): Request<DataZone.Types.GetUserProfileOutput, AWSError>;
@@ -635,6 +651,22 @@ declare class DataZone extends Service {
    * Lists tags for the specified resource in Amazon DataZone.
    */
   listTagsForResource(callback?: (err: AWSError, data: DataZone.Types.ListTagsForResourceResponse) => void): Request<DataZone.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists time series data points.
+   */
+  listTimeSeriesDataPoints(params: DataZone.Types.ListTimeSeriesDataPointsInput, callback?: (err: AWSError, data: DataZone.Types.ListTimeSeriesDataPointsOutput) => void): Request<DataZone.Types.ListTimeSeriesDataPointsOutput, AWSError>;
+  /**
+   * Lists time series data points.
+   */
+  listTimeSeriesDataPoints(callback?: (err: AWSError, data: DataZone.Types.ListTimeSeriesDataPointsOutput) => void): Request<DataZone.Types.ListTimeSeriesDataPointsOutput, AWSError>;
+  /**
+   * Posts time series data points to Amazon DataZone for the specified asset.
+   */
+  postTimeSeriesDataPoints(params: DataZone.Types.PostTimeSeriesDataPointsInput, callback?: (err: AWSError, data: DataZone.Types.PostTimeSeriesDataPointsOutput) => void): Request<DataZone.Types.PostTimeSeriesDataPointsOutput, AWSError>;
+  /**
+   * Posts time series data points to Amazon DataZone for the specified asset.
+   */
+  postTimeSeriesDataPoints(callback?: (err: AWSError, data: DataZone.Types.PostTimeSeriesDataPointsOutput) => void): Request<DataZone.Types.PostTimeSeriesDataPointsOutput, AWSError>;
   /**
    * Writes the configuration for the specified environment blueprint in Amazon DataZone.
    */
@@ -1037,6 +1069,10 @@ declare namespace DataZone {
      */
     formsOutput?: FormOutputList;
     /**
+     * The latest time series data points forms included in the additional attributes of an asset.
+     */
+    latestTimeSeriesDataPointFormsOutput?: TimeSeriesDataPointSummaryFormOutputList;
+    /**
      * The read-only forms included in the additional attributes of an inventory asset.
      */
     readOnlyFormsOutput?: FormOutputList;
@@ -1066,6 +1102,10 @@ declare namespace DataZone {
      * The glossary terms attached to an asset published in an Amazon DataZone catalog. 
      */
     glossaryTerms?: DetailedGlossaryTerms;
+    /**
+     * The latest time series data points forms included in the additional attributes of an asset.
+     */
+    latestTimeSeriesDataPointForms?: TimeSeriesDataPointSummaryFormOutputList;
     /**
      * The identifier of the project where an asset published in an Amazon DataZone catalog exists. 
      */
@@ -1140,6 +1180,10 @@ declare namespace DataZone {
      * The metadata forms that form additional attributes of the metadata asset.
      */
     forms?: Forms;
+    /**
+     * The latest time series data points forms included in the additional attributes of an asset.
+     */
+    latestTimeSeriesDataPointForms?: TimeSeriesDataPointSummaryFormOutputList;
   }
   export type AssetName = string;
   export interface AssetRevision {
@@ -1430,6 +1474,10 @@ declare namespace DataZone {
      */
     id: AssetId;
     /**
+     * The latest data point that was imported into the time series form for the asset. 
+     */
+    latestTimeSeriesDataPointFormsOutput?: TimeSeriesDataPointSummaryFormOutputList;
+    /**
      * The details of an asset published in an Amazon DataZone catalog.
      */
     listing?: AssetListingDetails;
@@ -1541,6 +1589,10 @@ declare namespace DataZone {
      * The unique identifier of the asset revision.
      */
     id: AssetId;
+    /**
+     * The latest data point that was imported into the time series form for the asset. 
+     */
+    latestTimeSeriesDataPointFormsOutput?: TimeSeriesDataPointSummaryFormOutputList;
     /**
      * The details of an asset published in an Amazon DataZone catalog. 
      */
@@ -2278,7 +2330,7 @@ declare namespace DataZone {
     /**
      * The ID of the asset.
      */
-    entityIdentifier: EntityId;
+    entityIdentifier: EntityIdentifier;
     /**
      * The revision of an asset.
      */
@@ -2701,6 +2753,7 @@ declare namespace DataZone {
   export type CustomParameterKeyNameString = string;
   export type CustomParameterList = CustomParameter[];
   export type DataAssetActivityStatus = "FAILED"|"PUBLISHING_FAILED"|"SUCCEEDED_CREATED"|"SUCCEEDED_UPDATED"|"SKIPPED_ALREADY_IMPORTED"|"SKIPPED_ARCHIVED"|"SKIPPED_NO_ACCESS"|"UNCHANGED"|string;
+  export type DataPointIdentifier = string;
   export type DataProductDescription = string;
   export type DataProductId = string;
   export interface DataProductItem {
@@ -3262,6 +3315,30 @@ declare namespace DataZone {
      */
     identifier: SubscriptionTargetId;
   }
+  export interface DeleteTimeSeriesDataPointsInput {
+    /**
+     * A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The ID of the Amazon DataZone domain that houses the asset for which you want to delete a time series form.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The ID of the asset for which you want to delete a time series form.
+     */
+    entityIdentifier: EntityIdentifier;
+    /**
+     * The type of the asset for which you want to delete a time series form.
+     */
+    entityType: TimeSeriesEntityType;
+    /**
+     * The name of the time series form that you want to delete.
+     */
+    formName: TimeSeriesFormName;
+  }
+  export interface DeleteTimeSeriesDataPointsOutput {
+  }
   export interface Deployment {
     /**
      * The identifier of the last deployment of the environment.
@@ -3363,6 +3440,7 @@ declare namespace DataZone {
   export type EnableSetting = "ENABLED"|"DISABLED"|string;
   export type EnabledRegionList = RegionName[];
   export type EntityId = string;
+  export type EntityIdentifier = string;
   export type EntityType = "ASSET"|string;
   export type EnvironmentActionList = ConfigurableEnvironmentAction[];
   export interface EnvironmentBlueprintConfigurationItem {
@@ -3789,6 +3867,10 @@ declare namespace DataZone {
      * The ID of the asset.
      */
     id: AssetId;
+    /**
+     * The latest data point that was imported into the time series form for the asset. 
+     */
+    latestTimeSeriesDataPointFormsOutput?: TimeSeriesDataPointSummaryFormOutputList;
     /**
      * The listing of the asset.
      */
@@ -4976,6 +5058,50 @@ declare namespace DataZone {
      */
     updatedBy?: UpdatedBy;
   }
+  export interface GetTimeSeriesDataPointInput {
+    /**
+     * The ID of the Amazon DataZone domain that houses the asset for which you want to get the data point.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The ID of the asset for which you want to get the data point.
+     */
+    entityIdentifier: EntityIdentifier;
+    /**
+     * The type of the asset for which you want to get the data point.
+     */
+    entityType: TimeSeriesEntityType;
+    /**
+     * The name of the time series form that houses the data point that you want to get.
+     */
+    formName: TimeSeriesFormName;
+    /**
+     * The ID of the data point that you want to get.
+     */
+    identifier: TimeSeriesDataPointIdentifier;
+  }
+  export interface GetTimeSeriesDataPointOutput {
+    /**
+     * The ID of the Amazon DataZone domain that houses the asset data point that you want to get.
+     */
+    domainId?: DomainId;
+    /**
+     * The ID of the asset for which you want to get the data point.
+     */
+    entityId?: EntityId;
+    /**
+     * The type of the asset for which you want to get the data point.
+     */
+    entityType?: TimeSeriesEntityType;
+    /**
+     * The time series form that houses the data point that you want to get.
+     */
+    form?: TimeSeriesDataPointFormOutput;
+    /**
+     * The name of the time series form that houses the data point that you want to get.
+     */
+    formName?: TimeSeriesFormName;
+  }
   export interface GetUserProfileInput {
     /**
      * the ID of the Amazon DataZone domain the data portal of which you want to get.
@@ -5111,6 +5237,10 @@ declare namespace DataZone {
   export type GlossaryTerms = GlossaryTermId[];
   export interface GlueRunConfigurationInput {
     /**
+     * Specifies whether to automatically import data quality metrics as part of the data source run.
+     */
+    autoImportDataQualityResult?: Boolean;
+    /**
      * The data access role included in the configuration details of the Amazon Web Services Glue data source.
      */
     dataAccessRole?: GlueRunConfigurationInputDataAccessRoleString;
@@ -5125,6 +5255,10 @@ declare namespace DataZone {
      * The Amazon Web Services account ID included in the configuration details of the Amazon Web Services Glue data source. 
      */
     accountId?: GlueRunConfigurationOutputAccountIdString;
+    /**
+     * Specifies whether to automatically import data quality metrics as part of the data source run.
+     */
+    autoImportDataQualityResult?: Boolean;
     /**
      * The data access role included in the configuration details of the Amazon Web Services Glue data source. 
      */
@@ -5865,6 +5999,50 @@ declare namespace DataZone {
      */
     tags?: Tags;
   }
+  export interface ListTimeSeriesDataPointsInput {
+    /**
+     * The ID of the Amazon DataZone domain that houses the assets for which you want to list time series data points.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The timestamp at which the data points that you wanted to list ended.
+     */
+    endedAt?: Timestamp;
+    /**
+     * The ID of the asset for which you want to list data points.
+     */
+    entityIdentifier: EntityIdentifier;
+    /**
+     * The type of the asset for which you want to list data points.
+     */
+    entityType: TimeSeriesEntityType;
+    /**
+     * The name of the time series data points form.
+     */
+    formName: TimeSeriesFormName;
+    /**
+     * The maximum number of data points to return in a single call to ListTimeSeriesDataPoints. When the number of data points to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListTimeSeriesDataPoints to list the next set of data points.
+     */
+    maxResults?: MaxResults;
+    /**
+     * When the number of data points is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of data points, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListTimeSeriesDataPoints to list the next set of data points.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The timestamp at which the data points that you want to list started.
+     */
+    startedAt?: Timestamp;
+  }
+  export interface ListTimeSeriesDataPointsOutput {
+    /**
+     * The results of the ListTimeSeriesDataPoints action. 
+     */
+    items?: TimeSeriesDataPointSummaryFormOutputList;
+    /**
+     * When the number of data points is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of data points, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListTimeSeriesDataPoints to list the next set of data points.
+     */
+    nextToken?: PaginationToken;
+  }
   export type ListingId = string;
   export interface ListingItem {
     /**
@@ -6045,6 +6223,46 @@ declare namespace DataZone {
   export type NotificationType = "TASK"|"EVENT"|string;
   export type NotificationsList = NotificationOutput[];
   export type PaginationToken = string;
+  export interface PostTimeSeriesDataPointsInput {
+    /**
+     * A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The ID of the Amazon DataZone domain in which you want to post time series data points.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The ID of the asset for which you want to post time series data points.
+     */
+    entityIdentifier: EntityIdentifier;
+    /**
+     * The type of the asset for which you want to post data points.
+     */
+    entityType: TimeSeriesEntityType;
+    /**
+     * The forms that contain the data points that you want to post.
+     */
+    forms: TimeSeriesDataPointFormInputList;
+  }
+  export interface PostTimeSeriesDataPointsOutput {
+    /**
+     * The ID of the Amazon DataZone domain in which you want to post time series data points.
+     */
+    domainId?: DomainId;
+    /**
+     * The ID of the asset for which you want to post time series data points.
+     */
+    entityId?: EntityId;
+    /**
+     * The type of the asset for which you want to post data points.
+     */
+    entityType?: TimeSeriesEntityType;
+    /**
+     * The forms that contain the data points that you have posted.
+     */
+    forms?: TimeSeriesDataPointFormOutputList;
+  }
   export type PredictionChoices = Integer[];
   export interface PredictionConfiguration {
     /**
@@ -6678,7 +6896,7 @@ declare namespace DataZone {
      */
     totalMatchCount?: Integer;
   }
-  export type SearchOutputAdditionalAttribute = "FORMS"|string;
+  export type SearchOutputAdditionalAttribute = "FORMS"|"TIME_SERIES_DATA_POINT_FORMS"|string;
   export type SearchOutputAdditionalAttributes = SearchOutputAdditionalAttribute[];
   export interface SearchResultItem {
     /**
@@ -7329,6 +7547,89 @@ declare namespace DataZone {
   }
   export type TermRelationsClassifiesList = GlossaryTermId[];
   export type TermRelationsIsAList = GlossaryTermId[];
+  export interface TimeSeriesDataPointFormInput {
+    /**
+     * The content of the time series data points form.
+     */
+    content?: TimeSeriesDataPointFormInputContentString;
+    /**
+     * The name of the time series data points form.
+     */
+    formName: TimeSeriesFormName;
+    /**
+     * The timestamp of the time series data points form.
+     */
+    timestamp: Timestamp;
+    /**
+     * The ID of the type of the time series data points form.
+     */
+    typeIdentifier: FormTypeIdentifier;
+    /**
+     * The revision type of the time series data points form.
+     */
+    typeRevision?: Revision;
+  }
+  export type TimeSeriesDataPointFormInputContentString = string;
+  export type TimeSeriesDataPointFormInputList = TimeSeriesDataPointFormInput[];
+  export interface TimeSeriesDataPointFormOutput {
+    /**
+     * The content of the time series data points form.
+     */
+    content?: TimeSeriesDataPointFormOutputContentString;
+    /**
+     * The name of the time series data points form.
+     */
+    formName: TimeSeriesFormName;
+    /**
+     * The ID of the time series data points form.
+     */
+    id?: DataPointIdentifier;
+    /**
+     * The timestamp of the time series data points form.
+     */
+    timestamp: Timestamp;
+    /**
+     * The ID of the type of the time series data points form.
+     */
+    typeIdentifier: FormTypeIdentifier;
+    /**
+     * The revision type of the time series data points form.
+     */
+    typeRevision?: Revision;
+  }
+  export type TimeSeriesDataPointFormOutputContentString = string;
+  export type TimeSeriesDataPointFormOutputList = TimeSeriesDataPointFormOutput[];
+  export type TimeSeriesDataPointIdentifier = string;
+  export interface TimeSeriesDataPointSummaryFormOutput {
+    /**
+     * The content of the summary of the time series data points form.
+     */
+    contentSummary?: TimeSeriesDataPointSummaryFormOutputContentSummaryString;
+    /**
+     * The name of the time series data points summary form.
+     */
+    formName: TimeSeriesFormName;
+    /**
+     * The ID of the time series data points summary form.
+     */
+    id?: DataPointIdentifier;
+    /**
+     * The timestamp of the time series data points summary form.
+     */
+    timestamp: Timestamp;
+    /**
+     * The type ID of the time series data points summary form.
+     */
+    typeIdentifier: FormTypeIdentifier;
+    /**
+     * The type revision of the time series data points summary form.
+     */
+    typeRevision?: Revision;
+  }
+  export type TimeSeriesDataPointSummaryFormOutputContentSummaryString = string;
+  export type TimeSeriesDataPointSummaryFormOutputList = TimeSeriesDataPointSummaryFormOutput[];
+  export type TimeSeriesEntityType = "ASSET"|"LISTING"|string;
+  export type TimeSeriesFormName = string;
   export type Timestamp = Date;
   export type Timezone = "UTC"|"AFRICA_JOHANNESBURG"|"AMERICA_MONTREAL"|"AMERICA_SAO_PAULO"|"ASIA_BAHRAIN"|"ASIA_BANGKOK"|"ASIA_CALCUTTA"|"ASIA_DUBAI"|"ASIA_HONG_KONG"|"ASIA_JAKARTA"|"ASIA_KUALA_LUMPUR"|"ASIA_SEOUL"|"ASIA_SHANGHAI"|"ASIA_SINGAPORE"|"ASIA_TAIPEI"|"ASIA_TOKYO"|"AUSTRALIA_MELBOURNE"|"AUSTRALIA_SYDNEY"|"CANADA_CENTRAL"|"CET"|"CST6CDT"|"ETC_GMT"|"ETC_GMT0"|"ETC_GMT_ADD_0"|"ETC_GMT_ADD_1"|"ETC_GMT_ADD_10"|"ETC_GMT_ADD_11"|"ETC_GMT_ADD_12"|"ETC_GMT_ADD_2"|"ETC_GMT_ADD_3"|"ETC_GMT_ADD_4"|"ETC_GMT_ADD_5"|"ETC_GMT_ADD_6"|"ETC_GMT_ADD_7"|"ETC_GMT_ADD_8"|"ETC_GMT_ADD_9"|"ETC_GMT_NEG_0"|"ETC_GMT_NEG_1"|"ETC_GMT_NEG_10"|"ETC_GMT_NEG_11"|"ETC_GMT_NEG_12"|"ETC_GMT_NEG_13"|"ETC_GMT_NEG_14"|"ETC_GMT_NEG_2"|"ETC_GMT_NEG_3"|"ETC_GMT_NEG_4"|"ETC_GMT_NEG_5"|"ETC_GMT_NEG_6"|"ETC_GMT_NEG_7"|"ETC_GMT_NEG_8"|"ETC_GMT_NEG_9"|"EUROPE_DUBLIN"|"EUROPE_LONDON"|"EUROPE_PARIS"|"EUROPE_STOCKHOLM"|"EUROPE_ZURICH"|"ISRAEL"|"MEXICO_GENERAL"|"MST7MDT"|"PACIFIC_AUCKLAND"|"US_CENTRAL"|"US_EASTERN"|"US_MOUNTAIN"|"US_PACIFIC"|string;
   export type Title = string;

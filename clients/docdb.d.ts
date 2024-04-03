@@ -437,6 +437,14 @@ declare class DocDB extends Service {
    */
   stopDBCluster(callback?: (err: AWSError, data: DocDB.Types.StopDBClusterResult) => void): Request<DocDB.Types.StopDBClusterResult, AWSError>;
   /**
+   * Switches over the specified secondary Amazon DocumentDB cluster to be the new primary Amazon DocumentDB cluster in the global database cluster.
+   */
+  switchoverGlobalCluster(params: DocDB.Types.SwitchoverGlobalClusterMessage, callback?: (err: AWSError, data: DocDB.Types.SwitchoverGlobalClusterResult) => void): Request<DocDB.Types.SwitchoverGlobalClusterResult, AWSError>;
+  /**
+   * Switches over the specified secondary Amazon DocumentDB cluster to be the new primary Amazon DocumentDB cluster in the global database cluster.
+   */
+  switchoverGlobalCluster(callback?: (err: AWSError, data: DocDB.Types.SwitchoverGlobalClusterResult) => void): Request<DocDB.Types.SwitchoverGlobalClusterResult, AWSError>;
+  /**
    * Waits for the dBInstanceAvailable state by periodically calling the underlying DocDB.describeDBInstancesoperation every 30 seconds (at most 60 times).
    */
   waitFor(state: "dBInstanceAvailable", params: DocDB.Types.DescribeDBInstancesMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: DocDB.Types.DBInstanceMessage) => void): Request<DocDB.Types.DBInstanceMessage, AWSError>;
@@ -2740,6 +2748,19 @@ declare namespace DocDB {
   }
   export type SubnetIdentifierList = String[];
   export type SubnetList = Subnet[];
+  export interface SwitchoverGlobalClusterMessage {
+    /**
+     * The identifier of the Amazon DocumentDB global database cluster to switch over. The identifier is the unique key assigned by the user when the cluster is created. In other words, it's the name of the global cluster. This parameter isn’t case-sensitive. Constraints:   Must match the identifier of an existing global cluster (Amazon DocumentDB global database).   Minimum length of 1. Maximum length of 255.   Pattern: [A-Za-z][0-9A-Za-z-:._]* 
+     */
+    GlobalClusterIdentifier: GlobalClusterIdentifier;
+    /**
+     * The identifier of the secondary Amazon DocumentDB cluster to promote to the new primary for the global database cluster. Use the Amazon Resource Name (ARN) for the identifier so that Amazon DocumentDB can locate the cluster in its Amazon Web Services region. Constraints:   Must match the identifier of an existing secondary cluster.   Minimum length of 1. Maximum length of 255.   Pattern: [A-Za-z][0-9A-Za-z-:._]* 
+     */
+    TargetDbClusterIdentifier: String;
+  }
+  export interface SwitchoverGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
+  }
   export type TStamp = Date;
   export interface Tag {
     /**

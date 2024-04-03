@@ -1,6 +1,17 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1591.0-->
+<!--LATEST=2.1592.0-->
 <!--ENTRYINSERT-->
+
+## 2.1592.0
+* feature: CleanRoomsML: The release includes a public SDK for AWS Clean Rooms ML APIs, making them globally available to developers worldwide.
+* feature: CloudFormation: This release would return a new field - PolicyAction in cloudformation's existed DescribeChangeSetResponse, showing actions we are going to apply on the physical resource (e.g., Delete, Retain) according to the user's template
+* feature: DataZone: This release supports the feature of dataQuality to enrich asset with dataQualityResult in Amazon DataZone.
+* feature: DocDB: This release adds Global Cluster Switchover capability which enables you to change your global cluster's primary AWS Region, the region that serves writes, while preserving the replication between all regions in the global cluster.
+* feature: GroundStation: This release adds visibilityStartTime and visibilityEndTime to DescribeContact and ListContacts responses.
+* feature: Lambda: Add Ruby 3.3 (ruby3.3) support to AWS Lambda
+* feature: MediaLive: Cmaf Ingest outputs are now supported in Media Live
+* feature: MedicalImaging: SearchImageSets API now supports following enhancements - Additional support for searching on UpdatedAt and SeriesInstanceUID - Support for searching existing filters between dates/times - Support for sorting the search result by Ascending/Descending - Additional parameters returned in the response
+* feature: Transfer: Add ability to specify Security Policies for SFTP Connectors
 
 ## 2.1591.0
 * feature: Glue: Adding View related fields to responses of read-only Table APIs.

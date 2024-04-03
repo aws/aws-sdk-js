@@ -844,6 +844,14 @@ Note that this field and audioType are both ignored if inputType is broadcasterM
      * Used for MS Smooth and Apple HLS outputs. Indicates the name displayed by the player (eg. English, or Director Commentary).
      */
     StreamName?: __string;
+    /**
+     * Identifies the DASH roles to assign to this audio output. Applies only when the audio output is configured for DVB DASH accessibility signaling.
+     */
+    AudioDashRoles?: __listOfDashRoleAudio;
+    /**
+     * Identifies DVB DASH accessibility signaling in this audio output. Used in Microsoft Smooth Streaming outputs to signal accessibility information to packagers.
+     */
+    DvbDashAccessibility?: DvbDashAccessibility;
   }
   export type AudioDescriptionAudioTypeControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string;
   export type AudioDescriptionLanguageCodeControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string;
@@ -1301,6 +1309,14 @@ Alternate rendition that the client will not try to play back by default. Repres
      * Name of the caption description.  Used to associate a caption description with an output.  Names must be unique within an event.
      */
     Name: __string;
+    /**
+     * Identifies the DASH roles to assign to this captions output. Applies only when the captions output is configured for DVB DASH accessibility signaling.
+     */
+    CaptionDashRoles?: __listOfDashRoleCaption;
+    /**
+     * Identifies DVB DASH accessibility signaling in this captions output. Used in Microsoft Smooth Streaming outputs to signal accessibility information to packagers.
+     */
+    DvbDashAccessibility?: DvbDashAccessibility;
   }
   export interface CaptionDestinationSettings {
     AribDestinationSettings?: AribDestinationSettings;
@@ -5872,6 +5888,7 @@ the timestamps will be in Coordinated Universal Time (UTC)
     MultiplexGroupSettings?: MultiplexGroupSettings;
     RtmpGroupSettings?: RtmpGroupSettings;
     UdpGroupSettings?: UdpGroupSettings;
+    CmafIngestGroupSettings?: CmafIngestGroupSettings;
   }
   export interface OutputLocationRef {
     DestinationRefId?: __string;
@@ -5889,6 +5906,7 @@ the timestamps will be in Coordinated Universal Time (UTC)
     MultiplexOutputSettings?: MultiplexOutputSettings;
     RtmpOutputSettings?: RtmpOutputSettings;
     UdpOutputSettings?: UdpOutputSettings;
+    CmafIngestOutputSettings?: CmafIngestOutputSettings;
   }
   export interface PassThroughSettings {
   }
@@ -7497,6 +7515,7 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
   export type __integerMin0Max100000000 = number;
   export type __integerMin0Max128 = number;
   export type __integerMin0Max15 = number;
+  export type __integerMin0Max2000 = number;
   export type __integerMin0Max255 = number;
   export type __integerMin0Max30 = number;
   export type __integerMin0Max32768 = number;
@@ -7733,6 +7752,46 @@ one destination per packager.
   export type H265TreeblockSize = "AUTO"|"TREE_SIZE_32X32"|string;
   export type __integerMin256Max3840 = number;
   export type __integerMin64Max2160 = number;
+  export interface CmafIngestGroupSettings {
+    /**
+     * A HTTP destination for the tracks
+     */
+    Destination: OutputLocationRef;
+    /**
+     * If set to passthrough, Nielsen inaudible tones for media tracking will be detected in the input audio and an equivalent ID3 tag will be inserted in the output.
+     */
+    NielsenId3Behavior?: CmafNielsenId3Behavior;
+    /**
+     * Type of scte35 track to add. none or scte35WithoutSegmentation
+     */
+    Scte35Type?: Scte35Type;
+    /**
+     * The nominal duration of segments. The units are specified in SegmentLengthUnits. The segments will end on the next keyframe after the specified duration, so the actual segment length might be longer, and it might be a fraction of the units.
+     */
+    SegmentLength?: __integerMin1;
+    /**
+     * Time unit for segment length parameter.
+     */
+    SegmentLengthUnits?: CmafIngestSegmentLengthUnits;
+    /**
+     * Number of milliseconds to delay the output from the second pipeline.
+     */
+    SendDelayMs?: __integerMin0Max2000;
+  }
+  export interface CmafIngestOutputSettings {
+    /**
+     * String concatenated to the end of the destination filename.  Required for multiple outputs of the same type.
+     */
+    NameModifier?: __string;
+  }
+  export type CmafIngestSegmentLengthUnits = "MILLISECONDS"|"SECONDS"|string;
+  export type CmafNielsenId3Behavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
+  export type DashRoleAudio = "ALTERNATE"|"COMMENTARY"|"DESCRIPTION"|"DUB"|"EMERGENCY"|"ENHANCED-AUDIO-INTELLIGIBILITY"|"KARAOKE"|"MAIN"|"SUPPLEMENTARY"|string;
+  export type DashRoleCaption = "ALTERNATE"|"CAPTION"|"COMMENTARY"|"DESCRIPTION"|"DUB"|"EASYREADER"|"EMERGENCY"|"FORCED-SUBTITLE"|"KARAOKE"|"MAIN"|"METADATA"|"SUBTITLE"|"SUPPLEMENTARY"|string;
+  export type DvbDashAccessibility = "DVBDASH_1_VISUALLY_IMPAIRED"|"DVBDASH_2_HARD_OF_HEARING"|"DVBDASH_3_SUPPLEMENTAL_COMMENTARY"|"DVBDASH_4_DIRECTORS_COMMENTARY"|"DVBDASH_5_EDUCATIONAL_NOTES"|"DVBDASH_6_MAIN_PROGRAM"|"DVBDASH_7_CLEAN_FEED"|string;
+  export type __listOfDashRoleAudio = DashRoleAudio[];
+  export type __listOfDashRoleCaption = DashRoleCaption[];
+  export type Scte35Type = "NONE"|"SCTE_35_WITHOUT_SEGMENTATION"|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

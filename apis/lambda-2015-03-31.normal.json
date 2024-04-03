@@ -2871,7 +2871,7 @@
         },
         "ImageConfig": {
           "shape": "ImageConfig",
-          "documentation": "<p>Container image <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-images.html#configuration-images-settings\">configuration values</a> that override the values in the container image Dockerfile.</p>"
+          "documentation": "<p>Container image <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms\">configuration values</a> that override the values in the container image Dockerfile.</p>"
         },
         "CodeSigningConfigArn": {
           "shape": "CodeSigningConfigArn",
@@ -6050,6 +6050,7 @@
         "python3.10",
         "java17",
         "ruby3.2",
+        "ruby3.3",
         "python3.11",
         "nodejs20.x",
         "provided.al2023",
@@ -6705,7 +6706,7 @@
         },
         "ImageConfig": {
           "shape": "ImageConfig",
-          "documentation": "<p> <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html\">Container image configuration values</a> that override the values in the container image Docker file.</p>"
+          "documentation": "<p> <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms\">Container image configuration values</a> that override the values in the container image Docker file.</p>"
         },
         "EphemeralStorage": {
           "shape": "EphemeralStorage",

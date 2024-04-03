@@ -45,11 +45,11 @@ declare class MedicalImaging extends Service {
    */
   deleteImageSet(callback?: (err: AWSError, data: MedicalImaging.Types.DeleteImageSetResponse) => void): Request<MedicalImaging.Types.DeleteImageSetResponse, AWSError>;
   /**
-   * Get the import job properties to learn more about the job or job progress.
+   * Get the import job properties to learn more about the job or job progress.  The jobStatus refers to the execution of the import job. Therefore, an import job can return a jobStatus as COMPLETED even if validation issues are discovered during the import process. If a jobStatus returns as COMPLETED, we still recommend you review the output manifests written to S3, as they provide details on the success or failure of individual P10 object imports. 
    */
   getDICOMImportJob(params: MedicalImaging.Types.GetDICOMImportJobRequest, callback?: (err: AWSError, data: MedicalImaging.Types.GetDICOMImportJobResponse) => void): Request<MedicalImaging.Types.GetDICOMImportJobResponse, AWSError>;
   /**
-   * Get the import job properties to learn more about the job or job progress.
+   * Get the import job properties to learn more about the job or job progress.  The jobStatus refers to the execution of the import job. Therefore, an import job can return a jobStatus as COMPLETED even if validation issues are discovered during the import process. If a jobStatus returns as COMPLETED, we still recommend you review the output manifests written to S3, as they provide details on the success or failure of individual P10 object imports. 
    */
   getDICOMImportJob(callback?: (err: AWSError, data: MedicalImaging.Types.GetDICOMImportJobResponse) => void): Request<MedicalImaging.Types.GetDICOMImportJobResponse, AWSError>;
   /**
@@ -387,6 +387,10 @@ declare namespace MedicalImaging {
   export type DICOMPatientId = string;
   export type DICOMPatientName = string;
   export type DICOMPatientSex = string;
+  export type DICOMSeriesBodyPart = string;
+  export type DICOMSeriesInstanceUID = string;
+  export type DICOMSeriesModality = string;
+  export type DICOMSeriesNumber = number;
   export type DICOMStudyDate = string;
   export interface DICOMStudyDateAndTime {
     /**
@@ -420,15 +424,15 @@ declare namespace MedicalImaging {
      */
     DICOMPatientSex?: DICOMPatientSex;
     /**
-     * The DICOM provided identifier for studyInstanceUid.&gt;
+     * The DICOM provided identifier for the Study Instance UID.
      */
     DICOMStudyInstanceUID?: DICOMStudyInstanceUID;
     /**
-     * The DICOM provided studyId.
+     * The DICOM provided identifier for the Study ID.
      */
     DICOMStudyId?: DICOMStudyId;
     /**
-     * The description of the study.
+     * The DICOM provided Study Description.
      */
     DICOMStudyDescription?: DICOMStudyDescription;
     /**
@@ -443,6 +447,22 @@ declare namespace MedicalImaging {
      * The accession number for the DICOM study.
      */
     DICOMAccessionNumber?: DICOMAccessionNumber;
+    /**
+     * The DICOM provided identifier for the Series Instance UID.
+     */
+    DICOMSeriesInstanceUID?: DICOMSeriesInstanceUID;
+    /**
+     * The DICOM provided identifier for the series Modality.
+     */
+    DICOMSeriesModality?: DICOMSeriesModality;
+    /**
+     * The DICOM provided identifier for the series Body Part Examined.
+     */
+    DICOMSeriesBodyPart?: DICOMSeriesBodyPart;
+    /**
+     * The DICOM provided identifier for the Series Number.
+     */
+    DICOMSeriesNumber?: DICOMSeriesNumber;
     /**
      * The study date.
      */
@@ -903,9 +923,17 @@ declare namespace MedicalImaging {
      */
     DICOMStudyInstanceUID?: DICOMStudyInstanceUID;
     /**
+     * The Series Instance UID input for search.
+     */
+    DICOMSeriesInstanceUID?: DICOMSeriesInstanceUID;
+    /**
      * The created at time of the image set provided for search.
      */
     createdAt?: _Date;
+    /**
+     * The timestamp input for search.
+     */
+    updatedAt?: _Date;
     /**
      * The aggregated structure containing DICOM study date and study time for search.
      */
@@ -916,6 +944,10 @@ declare namespace MedicalImaging {
      * The filters for the search criteria.
      */
     filters?: SearchCriteriaFiltersList;
+    /**
+     * The sort input for search criteria.
+     */
+    sort?: Sort;
   }
   export type SearchCriteriaFiltersList = SearchFilter[];
   export interface SearchFilter {
@@ -954,10 +986,26 @@ declare namespace MedicalImaging {
      */
     imageSetsMetadataSummaries: ImageSetsMetadataSummaries;
     /**
+     * The sort order for image set search results.
+     */
+    sort?: Sort;
+    /**
      * The token for pagination results.
      */
     nextToken?: NextToken;
   }
+  export interface Sort {
+    /**
+     * The sort order for search criteria.
+     */
+    sortOrder: SortOrder;
+    /**
+     * The sort field for search criteria.
+     */
+    sortField: SortField;
+  }
+  export type SortField = "updatedAt"|"createdAt"|"DICOMStudyDateAndTime"|string;
+  export type SortOrder = "ASC"|"DESC"|string;
   export interface StartDICOMImportJobRequest {
     /**
      * The import job name.
