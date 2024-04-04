@@ -447,6 +447,10 @@ declare namespace IVS {
      */
     recordingConfigurationArn?: ChannelRecordingConfigurationArn;
     /**
+     * Specifies the endpoint and optional passphrase for streaming with the SRT protocol.
+     */
+    srt?: Srt;
+    /**
      * Tags attached to the resource. Array of 1-50 maps, each of the form string:string (key:value). See Tagging Amazon Web Services Resources for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.
      */
     tags?: Tags;
@@ -512,7 +516,7 @@ declare namespace IVS {
      */
     authorized?: Boolean;
     /**
-     * Whether the channel allows insecure RTMP ingest. Default: false.
+     * Whether the channel allows insecure RTMP and SRT ingest. Default: false.
      */
     insecureIngest?: Boolean;
     /**
@@ -1164,6 +1168,18 @@ declare namespace IVS {
      */
     bucketName: S3DestinationBucketName;
   }
+  export interface Srt {
+    /**
+     * The endpoint to be used when streaming with IVS using the SRT protocol.
+     */
+    endpoint?: SrtEndpoint;
+    /**
+     * Auto-generated passphrase to enable encryption. This field is applicable only if the end user has not enabled the insecureIngest option for the channel.
+     */
+    passphrase?: SrtPassphrase;
+  }
+  export type SrtEndpoint = string;
+  export type SrtPassphrase = string;
   export interface StartViewerSessionRevocationRequest {
     /**
      * The ARN of the channel associated with the viewer session to revoke.
@@ -1421,7 +1437,7 @@ declare namespace IVS {
      */
     authorized?: Boolean;
     /**
-     * Whether the channel allows insecure RTMP ingest. Default: false.
+     * Whether the channel allows insecure RTMP and SRT ingest. Default: false.
      */
     insecureIngest?: Boolean;
     /**

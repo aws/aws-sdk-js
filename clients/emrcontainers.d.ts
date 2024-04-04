@@ -175,6 +175,7 @@ declare class EMRcontainers extends Service {
 declare namespace EMRcontainers {
   export type ACMCertArn = string;
   export type Base64Encoded = string;
+  export type Boolean = boolean;
   export interface CancelJobRunRequest {
     /**
      * The ID of the job run to cancel.
@@ -947,6 +948,10 @@ declare namespace EMRcontainers {
      * The token for the next set of virtual clusters to return. 
      */
     nextToken?: NextToken;
+    /**
+     * Optional Boolean that specifies whether the operation should return the virtual clusters that have the access entry integration enabled or disabled. If not specified, the operation returns all applicable virtual clusters.
+     */
+    eksAccessEntryIntegrated?: Boolean;
   }
   export interface ListVirtualClustersResponse {
     /**

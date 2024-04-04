@@ -271,11 +271,11 @@ declare namespace VerifiedPermissions {
      */
     principal?: EntityIdentifier;
     /**
-     * Specifies the requested action to be authorized. For example, is the principal authorized to perform this action on the resource?
+     * Specifies the requested action to be authorized. For example, PhotoFlash::ReadPhoto.
      */
     action?: ActionIdentifier;
     /**
-     * Specifies the resource for which the authorization decision is to be made.
+     * Specifies the resource that you want an authorization decision for. For example, PhotoFlash::Photo.
      */
     resource?: EntityIdentifier;
     /**
@@ -304,7 +304,7 @@ declare namespace VerifiedPermissions {
      */
     determiningPolicies: DeterminingPolicyList;
     /**
-     * Errors that occurred while making an authorization decision, for example, a policy references an Entity or entity Attribute that does not exist in the slice.
+     * Errors that occurred while making an authorization decision. For example, a policy might reference an entity or attribute that doesn't exist in the request.
      */
     errors: EvaluationErrorList;
   }
@@ -313,6 +313,24 @@ declare namespace VerifiedPermissions {
   export type BooleanAttribute = boolean;
   export type ClientId = string;
   export type ClientIds = ClientId[];
+  export interface CognitoGroupConfiguration {
+    /**
+     * The name of the schema entity type that's mapped to the user pool group. Defaults to AWS::CognitoGroup.
+     */
+    groupEntityType: GroupEntityType;
+  }
+  export interface CognitoGroupConfigurationDetail {
+    /**
+     * The name of the schema entity type that's mapped to the user pool group. Defaults to AWS::CognitoGroup.
+     */
+    groupEntityType?: GroupEntityType;
+  }
+  export interface CognitoGroupConfigurationItem {
+    /**
+     * The name of the schema entity type that's mapped to the user pool group. Defaults to AWS::CognitoGroup.
+     */
+    groupEntityType?: GroupEntityType;
+  }
   export interface CognitoUserPoolConfiguration {
     /**
      * The Amazon Resource Name (ARN) of the Amazon Cognito user pool that contains the identities to be authorized. Example: "UserPoolArn": "arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5" 
@@ -322,6 +340,10 @@ declare namespace VerifiedPermissions {
      * The unique application client IDs that are associated with the specified Amazon Cognito user pool. Example: "ClientIds": ["&amp;ExampleCogClientId;"] 
      */
     clientIds?: ClientIds;
+    /**
+     * The type of entity that a policy store maps to groups from an Amazon Cognito user pool identity source.
+     */
+    groupConfiguration?: CognitoGroupConfiguration;
   }
   export interface CognitoUserPoolConfigurationDetail {
     /**
@@ -336,6 +358,10 @@ declare namespace VerifiedPermissions {
      * The OpenID Connect (OIDC) issuer ID of the Amazon Cognito user pool that contains the identities to be authorized. Example: "issuer": "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_1a2b3c4d5" 
      */
     issuer: Issuer;
+    /**
+     * The type of entity that a policy store maps to groups from an Amazon Cognito user pool identity source.
+     */
+    groupConfiguration?: CognitoGroupConfigurationDetail;
   }
   export interface CognitoUserPoolConfigurationItem {
     /**
@@ -350,22 +376,26 @@ declare namespace VerifiedPermissions {
      * The OpenID Connect (OIDC) issuer ID of the Amazon Cognito user pool that contains the identities to be authorized. Example: "issuer": "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_1a2b3c4d5" 
      */
     issuer: Issuer;
+    /**
+     * The type of entity that a policy store maps to groups from an Amazon Cognito user pool identity source.
+     */
+    groupConfiguration?: CognitoGroupConfigurationItem;
   }
   export interface Configuration {
     /**
-     * Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of authenticated identities as entities. It specifies the Amazon Resource Name (ARN) of a Amazon Cognito user pool and one or more application client IDs. Example: "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds": ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}} 
+     * Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of authenticated identities as entities. It specifies the Amazon Resource Name (ARN) of a Amazon Cognito user pool and one or more application client IDs. Example: "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds": ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType": "MyCorp::Group"}}} 
      */
     cognitoUserPoolConfiguration?: CognitoUserPoolConfiguration;
   }
   export interface ConfigurationDetail {
     /**
-     * Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of authenticated identities as entities. It specifies the Amazon Resource Name (ARN) of a Amazon Cognito user pool and one or more application client IDs. Example: "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds": ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}} 
+     * Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of authenticated identities as entities. It specifies the Amazon Resource Name (ARN) of a Amazon Cognito user pool, the policy store entity that you want to assign to user groups, and one or more application client IDs. Example: "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds": ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType": "MyCorp::Group"}}} 
      */
     cognitoUserPoolConfiguration?: CognitoUserPoolConfigurationDetail;
   }
   export interface ConfigurationItem {
     /**
-     * Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of authenticated identities as entities. It specifies the Amazon Resource Name (ARN) of a Amazon Cognito user pool and one or more application client IDs. Example: "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds": ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}} 
+     * Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of authenticated identities as entities. It specifies the Amazon Resource Name (ARN) of a Amazon Cognito user pool, the policy store entity that you want to assign to user groups, and one or more application client IDs. Example: "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds": ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType": "MyCorp::Group"}}} 
      */
     cognitoUserPoolConfiguration?: CognitoUserPoolConfigurationItem;
   }
@@ -808,6 +838,7 @@ declare namespace VerifiedPermissions {
      */
     namespaces?: NamespaceList;
   }
+  export type GroupEntityType = string;
   export type IdempotencyToken = string;
   export interface IdentitySourceDetails {
     /**
@@ -967,6 +998,10 @@ declare namespace VerifiedPermissions {
      * Errors that occurred while making an authorization decision. For example, a policy references an entity or entity attribute that does not exist in the slice.
      */
     errors: EvaluationErrorList;
+    /**
+     * The identifier of the principal in the ID or access token.
+     */
+    principal?: EntityIdentifier;
   }
   export type Issuer = string;
   export interface ListIdentitySourcesInput {
@@ -1325,6 +1360,12 @@ declare namespace VerifiedPermissions {
   }
   export type TimestampFormat = Date;
   export type Token = string;
+  export interface UpdateCognitoGroupConfiguration {
+    /**
+     * The name of the schema entity type that's mapped to the user pool group. Defaults to AWS::CognitoGroup.
+     */
+    groupEntityType: GroupEntityType;
+  }
   export interface UpdateCognitoUserPoolConfiguration {
     /**
      * The Amazon Resource Name (ARN) of the Amazon Cognito user pool associated with this identity source.
@@ -1334,6 +1375,10 @@ declare namespace VerifiedPermissions {
      * The client ID of an app client that is configured for the specified Amazon Cognito user pool.
      */
     clientIds?: ClientIds;
+    /**
+     * The configuration of the user groups from an Amazon Cognito user pool identity source.
+     */
+    groupConfiguration?: UpdateCognitoGroupConfiguration;
   }
   export interface UpdateConfiguration {
     /**

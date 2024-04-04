@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1592.0-->
+<!--LATEST=2.1593.0-->
 <!--ENTRYINSERT-->
+
+## 2.1593.0
+* feature: B2bi: Adding support for X12 5010 HIPAA EDI version and associated transaction sets.
+* feature: CleanRooms: Feature: New schemaStatusDetails field to the existing Schema object that displays a status on Schema API responses to show whether a schema is queryable or not. New BatchGetSchemaAnalysisRule API to retrieve multiple schemaAnalysisRules using a single API call.
+* feature: EC2: Amazon EC2 G6 instances powered by NVIDIA L4 Tensor Core GPUs can be used for a wide range of graphics-intensive and machine learning use cases. Gr6 instances also feature NVIDIA L4 GPUs and can be used for graphics workloads with higher memory requirements.
+* feature: EMRcontainers: This release adds support for integration with EKS AccessEntry APIs to enable automatic Cluster Access for EMR on EKS.
+* feature: IVS: API update to include an SRT ingest endpoint and passphrase for all channels.
+* feature: VerifiedPermissions: Adds GroupConfiguration field to Identity Source API's
 
 ## 2.1592.0
 * feature: CleanRoomsML: The release includes a public SDK for AWS Clean Rooms ML APIs, making them globally available to developers worldwide.
