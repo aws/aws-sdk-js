@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1593.0-->
+<!--LATEST=2.1594.0-->
 <!--ENTRYINSERT-->
+
+## 2.1594.0
+* feature: QuickSight: Adding IAMIdentityCenterInstanceArn parameter to CreateAccountSubscription
+* feature: ResourceGroups: Added a new QueryErrorCode RESOURCE_TYPE_NOT_SUPPORTED that is returned by the ListGroupResources operation if the group query contains unsupported resource types.
+* feature: VerifiedPermissions: Adding BatchIsAuthorizedWithToken API which supports multiple authorization requests against a PolicyStore given a bearer token.
 
 ## 2.1593.0
 * feature: B2bi: Adding support for X12 5010 HIPAA EDI version and associated transaction sets.

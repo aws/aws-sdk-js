@@ -20,6 +20,14 @@ declare class VerifiedPermissions extends Service {
    */
   batchIsAuthorized(callback?: (err: AWSError, data: VerifiedPermissions.Types.BatchIsAuthorizedOutput) => void): Request<VerifiedPermissions.Types.BatchIsAuthorizedOutput, AWSError>;
   /**
+   * Makes a series of decisions about multiple authorization requests for one token. The principal in this request comes from an external identity source in the form of an identity or access token, formatted as a JSON web token (JWT). The information in the parameters can also define additional context that Verified Permissions can include in the evaluations. The request is evaluated against all policies in the specified policy store that match the entities that you provide in the entities declaration and in the token. The result of the decisions is a series of Allow or Deny responses, along with the IDs of the policies that produced each decision. The entities of a BatchIsAuthorizedWithToken API request can contain up to 100 resources and up to 99 user groups. The requests of a BatchIsAuthorizedWithToken API request can contain up to 30 requests.  The BatchIsAuthorizedWithToken operation doesn't have its own IAM permission. To authorize this operation for Amazon Web Services principals, include the permission verifiedpermissions:IsAuthorizedWithToken in their IAM policies. 
+   */
+  batchIsAuthorizedWithToken(params: VerifiedPermissions.Types.BatchIsAuthorizedWithTokenInput, callback?: (err: AWSError, data: VerifiedPermissions.Types.BatchIsAuthorizedWithTokenOutput) => void): Request<VerifiedPermissions.Types.BatchIsAuthorizedWithTokenOutput, AWSError>;
+  /**
+   * Makes a series of decisions about multiple authorization requests for one token. The principal in this request comes from an external identity source in the form of an identity or access token, formatted as a JSON web token (JWT). The information in the parameters can also define additional context that Verified Permissions can include in the evaluations. The request is evaluated against all policies in the specified policy store that match the entities that you provide in the entities declaration and in the token. The result of the decisions is a series of Allow or Deny responses, along with the IDs of the policies that produced each decision. The entities of a BatchIsAuthorizedWithToken API request can contain up to 100 resources and up to 99 user groups. The requests of a BatchIsAuthorizedWithToken API request can contain up to 30 requests.  The BatchIsAuthorizedWithToken operation doesn't have its own IAM permission. To authorize this operation for Amazon Web Services principals, include the permission verifiedpermissions:IsAuthorizedWithToken in their IAM policies. 
+   */
+  batchIsAuthorizedWithToken(callback?: (err: AWSError, data: VerifiedPermissions.Types.BatchIsAuthorizedWithTokenOutput) => void): Request<VerifiedPermissions.Types.BatchIsAuthorizedWithTokenOutput, AWSError>;
+  /**
    * Creates a reference to an Amazon Cognito user pool as an external identity provider (IdP).  After you create an identity source, you can use the identities provided by the IdP as proxies for the principal in authorization queries that use the IsAuthorizedWithToken operation. These identities take the form of tokens that contain claims about the user, such as IDs, attributes and group memberships. Amazon Cognito provides both identity tokens and access tokens, and Verified Permissions can use either or both. Any combination of identity and access tokens results in the same Cedar principal. Verified Permissions automatically translates the information about the identities into the standard Cedar attributes that can be evaluated by your policies. Because the Amazon Cognito identity and access tokens can contain different information, the tokens you choose to use determine which principal attributes are available to access when evaluating Cedar policies.  If you delete a Amazon Cognito user pool or user, tokens from that deleted pool or that deleted user continue to be usable until they expire.   To reference a user from this identity source in your Cedar policies, use the following syntax.  IdentityType::"&lt;CognitoUserPoolIdentifier&gt;|&lt;CognitoClientId&gt;  Where IdentityType is the string that you provide to the PrincipalEntityType parameter for this operation. The CognitoUserPoolId and CognitoClientId are defined by the Amazon Cognito user pool.   Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations. 
    */
   createIdentitySource(params: VerifiedPermissions.Types.CreateIdentitySourceInput, callback?: (err: AWSError, data: VerifiedPermissions.Types.CreateIdentitySourceOutput) => void): Request<VerifiedPermissions.Types.CreateIdentitySourceOutput, AWSError>;
@@ -132,11 +140,11 @@ declare class VerifiedPermissions extends Service {
    */
   isAuthorized(callback?: (err: AWSError, data: VerifiedPermissions.Types.IsAuthorizedOutput) => void): Request<VerifiedPermissions.Types.IsAuthorizedOutput, AWSError>;
   /**
-   * Makes an authorization decision about a service request described in the parameters. The principal in this request comes from an external identity source in the form of an identity token formatted as a JSON web token (JWT). The information in the parameters can also define additional context that Verified Permissions can include in the evaluation. The request is evaluated against all matching policies in the specified policy store. The result of the decision is either Allow or Deny, along with a list of the policies that resulted in the decision.  If you specify the identityToken parameter, then this operation derives the principal from that token. You must not also include that principal in the entities parameter or the operation fails and reports a conflict between the two entity sources. If you provide only an accessToken, then you can include the entity as part of the entities parameter to provide additional attributes.  At this time, Verified Permissions accepts tokens from only Amazon Cognito. Verified Permissions validates each token that is specified in a request by checking its expiration date and its signature.  If you delete a Amazon Cognito user pool or user, tokens from that deleted pool or that deleted user continue to be usable until they expire. 
+   * Makes an authorization decision about a service request described in the parameters. The principal in this request comes from an external identity source in the form of an identity token formatted as a JSON web token (JWT). The information in the parameters can also define additional context that Verified Permissions can include in the evaluation. The request is evaluated against all matching policies in the specified policy store. The result of the decision is either Allow or Deny, along with a list of the policies that resulted in the decision. At this time, Verified Permissions accepts tokens from only Amazon Cognito. Verified Permissions validates each token that is specified in a request by checking its expiration date and its signature.  If you delete a Amazon Cognito user pool or user, tokens from that deleted pool or that deleted user continue to be usable until they expire. 
    */
   isAuthorizedWithToken(params: VerifiedPermissions.Types.IsAuthorizedWithTokenInput, callback?: (err: AWSError, data: VerifiedPermissions.Types.IsAuthorizedWithTokenOutput) => void): Request<VerifiedPermissions.Types.IsAuthorizedWithTokenOutput, AWSError>;
   /**
-   * Makes an authorization decision about a service request described in the parameters. The principal in this request comes from an external identity source in the form of an identity token formatted as a JSON web token (JWT). The information in the parameters can also define additional context that Verified Permissions can include in the evaluation. The request is evaluated against all matching policies in the specified policy store. The result of the decision is either Allow or Deny, along with a list of the policies that resulted in the decision.  If you specify the identityToken parameter, then this operation derives the principal from that token. You must not also include that principal in the entities parameter or the operation fails and reports a conflict between the two entity sources. If you provide only an accessToken, then you can include the entity as part of the entities parameter to provide additional attributes.  At this time, Verified Permissions accepts tokens from only Amazon Cognito. Verified Permissions validates each token that is specified in a request by checking its expiration date and its signature.  If you delete a Amazon Cognito user pool or user, tokens from that deleted pool or that deleted user continue to be usable until they expire. 
+   * Makes an authorization decision about a service request described in the parameters. The principal in this request comes from an external identity source in the form of an identity token formatted as a JSON web token (JWT). The information in the parameters can also define additional context that Verified Permissions can include in the evaluation. The request is evaluated against all matching policies in the specified policy store. The result of the decision is either Allow or Deny, along with a list of the policies that resulted in the decision. At this time, Verified Permissions accepts tokens from only Amazon Cognito. Verified Permissions validates each token that is specified in a request by checking its expiration date and its signature.  If you delete a Amazon Cognito user pool or user, tokens from that deleted pool or that deleted user continue to be usable until they expire. 
    */
   isAuthorizedWithToken(callback?: (err: AWSError, data: VerifiedPermissions.Types.IsAuthorizedWithTokenOutput) => void): Request<VerifiedPermissions.Types.IsAuthorizedWithTokenOutput, AWSError>;
   /**
@@ -309,6 +317,72 @@ declare namespace VerifiedPermissions {
     errors: EvaluationErrorList;
   }
   export type BatchIsAuthorizedOutputList = BatchIsAuthorizedOutputItem[];
+  export interface BatchIsAuthorizedWithTokenInput {
+    /**
+     * Specifies the ID of the policy store. Policies in this policy store will be used to make an authorization decision for the input.
+     */
+    policyStoreId: PolicyStoreId;
+    /**
+     * Specifies an identity (ID) token for the principal that you want to authorize in each request. This token is provided to you by the identity provider (IdP) associated with the specified identity source. You must specify either an accessToken, an identityToken, or both. Must be an ID token. Verified Permissions returns an error if the token_use claim in the submitted token isn't id.
+     */
+    identityToken?: Token;
+    /**
+     * Specifies an access token for the principal that you want to authorize in each request. This token is provided to you by the identity provider (IdP) associated with the specified identity source. You must specify either an accessToken, an identityToken, or both. Must be an access token. Verified Permissions returns an error if the token_use claim in the submitted token isn't access.
+     */
+    accessToken?: Token;
+    /**
+     * Specifies the list of resources and their associated attributes that Verified Permissions can examine when evaluating the policies.   You can't include principals in this parameter, only resource and action entities. This parameter can't include any entities of a type that matches the user or group entity types that you defined in your identity source.   The BatchIsAuthorizedWithToken operation takes principal attributes from  only  the identityToken or accessToken passed to the operation.   For action entities, you can include only their Identifier and EntityType.    
+     */
+    entities?: EntitiesDefinition;
+    /**
+     * An array of up to 30 requests that you want Verified Permissions to evaluate.
+     */
+    requests: BatchIsAuthorizedWithTokenInputList;
+  }
+  export interface BatchIsAuthorizedWithTokenInputItem {
+    /**
+     * Specifies the requested action to be authorized. For example, PhotoFlash::ReadPhoto.
+     */
+    action?: ActionIdentifier;
+    /**
+     * Specifies the resource that you want an authorization decision for. For example, PhotoFlash::Photo.
+     */
+    resource?: EntityIdentifier;
+    /**
+     * Specifies additional context that can be used to make more granular authorization decisions.
+     */
+    context?: ContextDefinition;
+  }
+  export type BatchIsAuthorizedWithTokenInputList = BatchIsAuthorizedWithTokenInputItem[];
+  export interface BatchIsAuthorizedWithTokenOutput {
+    /**
+     * The identifier of the principal in the ID or access token.
+     */
+    principal?: EntityIdentifier;
+    /**
+     * A series of Allow or Deny decisions for each request, and the policies that produced them.
+     */
+    results: BatchIsAuthorizedWithTokenOutputList;
+  }
+  export interface BatchIsAuthorizedWithTokenOutputItem {
+    /**
+     * The authorization request that initiated the decision.
+     */
+    request: BatchIsAuthorizedWithTokenInputItem;
+    /**
+     * An authorization decision that indicates if the authorization request should be allowed or denied.
+     */
+    decision: Decision;
+    /**
+     * The list of determining policies used to make the authorization decision. For example, if there are two matching policies, where one is a forbid and the other is a permit, then the forbid policy will be the determining policy. In the case of multiple matching permit policies then there would be multiple determining policies. In the case that no policies match, and hence the response is DENY, there would be no determining policies.
+     */
+    determiningPolicies: DeterminingPolicyList;
+    /**
+     * Errors that occurred while making an authorization decision. For example, a policy might reference an entity or attribute that doesn't exist in the request.
+     */
+    errors: EvaluationErrorList;
+  }
+  export type BatchIsAuthorizedWithTokenOutputList = BatchIsAuthorizedWithTokenOutputItem[];
   export type Boolean = boolean;
   export type BooleanAttribute = boolean;
   export type ClientId = string;
@@ -341,7 +415,7 @@ declare namespace VerifiedPermissions {
      */
     clientIds?: ClientIds;
     /**
-     * The type of entity that a policy store maps to groups from an Amazon Cognito user pool identity source.
+     * The configuration of the user groups from an Amazon Cognito user pool identity source.
      */
     groupConfiguration?: CognitoGroupConfiguration;
   }
@@ -359,7 +433,7 @@ declare namespace VerifiedPermissions {
      */
     issuer: Issuer;
     /**
-     * The type of entity that a policy store maps to groups from an Amazon Cognito user pool identity source.
+     * The configuration of the user groups from an Amazon Cognito user pool identity source.
      */
     groupConfiguration?: CognitoGroupConfigurationDetail;
   }
@@ -377,7 +451,7 @@ declare namespace VerifiedPermissions {
      */
     issuer: Issuer;
     /**
-     * The type of entity that a policy store maps to groups from an Amazon Cognito user pool identity source.
+     * The configuration of the user groups from an Amazon Cognito user pool identity source.
      */
     groupConfiguration?: CognitoGroupConfigurationItem;
   }
@@ -389,13 +463,13 @@ declare namespace VerifiedPermissions {
   }
   export interface ConfigurationDetail {
     /**
-     * Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of authenticated identities as entities. It specifies the Amazon Resource Name (ARN) of a Amazon Cognito user pool, the policy store entity that you want to assign to user groups, and one or more application client IDs. Example: "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds": ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType": "MyCorp::Group"}}} 
+     * Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of authenticated identities as entities. It specifies the Amazon Resource Name (ARN) of a Amazon Cognito user pool and one or more application client IDs. Example: "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds": ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType": "MyCorp::Group"}}} 
      */
     cognitoUserPoolConfiguration?: CognitoUserPoolConfigurationDetail;
   }
   export interface ConfigurationItem {
     /**
-     * Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of authenticated identities as entities. It specifies the Amazon Resource Name (ARN) of a Amazon Cognito user pool, the policy store entity that you want to assign to user groups, and one or more application client IDs. Example: "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds": ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType": "MyCorp::Group"}}} 
+     * Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of authenticated identities as entities. It specifies the Amazon Resource Name (ARN) of a Amazon Cognito user pool and one or more application client IDs. Example: "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds": ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType": "MyCorp::Group"}}} 
      */
     cognitoUserPoolConfiguration?: CognitoUserPoolConfigurationItem;
   }
@@ -981,7 +1055,7 @@ declare namespace VerifiedPermissions {
      */
     context?: ContextDefinition;
     /**
-     * Specifies the list of resources and their associated attributes that Verified Permissions can examine when evaluating the policies.   You can include only resource and action entities in this parameter; you can't include principals.   The IsAuthorizedWithToken operation takes principal attributes from  only  the identityToken or accessToken passed to the operation.   For action entities, you can include only their Identifier and EntityType.    
+     * Specifies the list of resources and their associated attributes that Verified Permissions can examine when evaluating the policies.   You can't include principals in this parameter, only resource and action entities. This parameter can't include any entities of a type that matches the user or group entity types that you defined in your identity source.   The IsAuthorizedWithToken operation takes principal attributes from  only  the identityToken or accessToken passed to the operation.   For action entities, you can include only their Identifier and EntityType.    
      */
     entities?: EntitiesDefinition;
   }

@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "Adding IAMIdentityCenterInstanceArn parameter to CreateAccountSubscription"
+    },
+    {
+        "type": "feature",
+        "category": "ResourceGroups",
+        "description": "Added a new QueryErrorCode RESOURCE_TYPE_NOT_SUPPORTED that is returned by the ListGroupResources operation if the group query contains unsupported resource types."
+    },
+    {
+        "type": "feature",
+        "category": "VerifiedPermissions",
+        "description": "Adding BatchIsAuthorizedWithToken API which supports multiple authorization requests against a PolicyStore given a bearer token."
+    }
+]

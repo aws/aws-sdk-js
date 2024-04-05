@@ -3766,6 +3766,10 @@ declare namespace QuickSight {
      * A 10-digit phone number for the author of the Amazon QuickSight account to use for future communications. This field is required if ENTERPPRISE_AND_Q is the selected edition of the new Amazon QuickSight account.
      */
     ContactNumber?: String;
+    /**
+     * The Amazon Resource Name (ARN) for the IAM Identity Center instance.
+     */
+    IAMIdentityCenterInstanceArn?: String;
   }
   export interface CreateAccountSubscriptionResponse {
     /**
@@ -9208,7 +9212,7 @@ declare namespace QuickSight {
      */
     SelectedSheets?: SelectedSheetsFilterScopeConfiguration;
     /**
-     * The configuration for applying a filter to all sheets.
+     * The configuration that applies a filter to all sheets. When you choose AllSheets as the value for a FilterScopeConfiguration, this filter is applied to all visuals of all sheets in an Analysis, Dashboard, or Template. The AllSheetsFilterScopeConfiguration is chosen.
      */
     AllSheets?: AllSheetsFilterScopeConfiguration;
   }
