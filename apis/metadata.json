@@ -1418,5 +1418,8 @@
   },
   "deadline": {
     "name": "Deadline"
+  },
+  "controlcatalog": {
+    "name": "ControlCatalog"
   }
 }

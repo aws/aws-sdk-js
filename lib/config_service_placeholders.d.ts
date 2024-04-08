@@ -380,6 +380,7 @@ export abstract class ConfigurationServicePlaceholders {
   timestreaminfluxdb?: AWS.TimestreamInfluxDB.Types.ClientConfiguration;
   codeconnections?: AWS.CodeConnections.Types.ClientConfiguration;
   deadline?: AWS.Deadline.Types.ClientConfiguration;
+  controlcatalog?: AWS.ControlCatalog.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -762,4 +763,5 @@ export interface ConfigurationServiceApiVersions {
   timestreaminfluxdb?: AWS.TimestreamInfluxDB.Types.apiVersion;
   codeconnections?: AWS.CodeConnections.Types.apiVersion;
   deadline?: AWS.Deadline.Types.apiVersion;
+  controlcatalog?: AWS.ControlCatalog.Types.apiVersion;
 }

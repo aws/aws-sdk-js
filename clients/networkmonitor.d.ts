@@ -114,7 +114,7 @@ declare namespace NetworkMonitor {
   export type Arn = string;
   export interface CreateMonitorInput {
     /**
-     * The name identifying the monitor. It can contain only letters, underscores (_), or dashes (-), and can be up to 255 characters.
+     * The name identifying the monitor. It can contain only letters, underscores (_), or dashes (-), and can be up to 200 characters.
      */
     monitorName: ResourceName;
     /**
@@ -148,7 +148,7 @@ declare namespace NetworkMonitor {
      */
     state: MonitorState;
     /**
-     * The number of seconds that metrics are aggregated by and sent to Amazon CloudWatch. This will be either 30 or 60. 
+     * The number of seconds that metrics are aggregated by and sent to Amazon CloudWatch. This must be either 30 or 60. 
      */
     aggregationPeriod?: AggregationPeriod;
     /**
@@ -162,7 +162,7 @@ declare namespace NetworkMonitor {
      */
     sourceArn: Arn;
     /**
-     * The destination IP address. This will be either IPV4 or IPV6.
+     * The destination IP address. This must be either IPV4 or IPV6.
      */
     destination: Destination;
     /**
@@ -170,11 +170,11 @@ declare namespace NetworkMonitor {
      */
     destinationPort?: Port;
     /**
-     * The protocol used for the network traffic between the source and destination. This will be either TCP or ICMP.
+     * The protocol used for the network traffic between the source and destination. This must be either TCP or ICMP.
      */
     protocol: Protocol;
     /**
-     * The size of the packets sent between the source and destination. This will be a number between 56 and 8500.
+     * The size of the packets sent between the source and destination. This must be a number between 56 and 8500.
      */
     packetSize?: PacketSize;
     /**
@@ -215,7 +215,7 @@ declare namespace NetworkMonitor {
      */
     sourceArn: Arn;
     /**
-     * The destination IP address for the monitor. This will be either an IPv4 or IPv6 address.
+     * The destination IP address for the monitor. This must be either an IPv4 or IPv6 address.
      */
     destination: Destination;
     /**
@@ -223,11 +223,11 @@ declare namespace NetworkMonitor {
      */
     destinationPort?: Port;
     /**
-     * The protocol used for the network traffic between the source and destination. This will be either TCP or ICMP.
+     * The protocol used for the network traffic between the source and destination. This must be either TCP or ICMP.
      */
     protocol: Protocol;
     /**
-     * The size of the packets sent between the source and destination. This will be a number between 56 and 8500.
+     * The size of the packets sent between the source and destination. This must be a number between 56 and 8500.
      */
     packetSize?: PacketSize;
     /**
@@ -340,7 +340,7 @@ declare namespace NetworkMonitor {
      */
     sourceArn: Arn;
     /**
-     * The destination IP address for the monitor. This will be either an IPv4 or IPv6 address.
+     * The destination IP address for the monitor. This must be either an IPv4 or IPv6 address.
      */
     destination: Destination;
     /**
@@ -348,11 +348,11 @@ declare namespace NetworkMonitor {
      */
     destinationPort?: Port;
     /**
-     * The protocol used for the network traffic between the source and destination. This will be either TCP or ICMP.
+     * The protocol used for the network traffic between the source and destination. This must be either TCP or ICMP.
      */
     protocol: Protocol;
     /**
-     * The size of the packets sent between the source and destination. This will be a number between 56 and 8500.
+     * The size of the packets sent between the source and destination. This must be a number between 56 and 8500.
      */
     packetSize?: PacketSize;
     /**
@@ -507,7 +507,7 @@ declare namespace NetworkMonitor {
      */
     sourceArn: Arn;
     /**
-     * The destination IP address. This will be either IPV4 or IPV6.
+     * The destination IP address. This must be either IPV4 or IPV6.
      */
     destination: Destination;
     /**
@@ -515,11 +515,11 @@ declare namespace NetworkMonitor {
      */
     destinationPort?: Port;
     /**
-     * The protocol used for the network traffic between the source and destination. This will be either TCP or ICMP.
+     * The protocol used for the network traffic between the source and destination. This must be either TCP or ICMP.
      */
     protocol: Protocol;
     /**
-     * The size of the packets sent between the source and destination. This will be a number between 56 and 8500.
+     * The size of the packets sent between the source and destination. This must be a number between 56 and 8500.
      */
     packetSize?: PacketSize;
     /**
@@ -640,7 +640,7 @@ declare namespace NetworkMonitor {
      */
     destination: Destination;
     /**
-     * The updated destination port. This will be a number between 1 and 65536.
+     * The updated destination port. This must be a number between 1 and 65536.
      */
     destinationPort?: Port;
     /**
@@ -652,7 +652,7 @@ declare namespace NetworkMonitor {
      */
     packetSize?: PacketSize;
     /**
-     * The updated IP address family. This will be either IPV4 or IPV6.
+     * The updated IP address family. This must be either IPV4 or IPV6.
      */
     addressFamily?: AddressFamily;
     /**

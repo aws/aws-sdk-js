@@ -379,5 +379,6 @@ module.exports = {
   Chatbot: require('./chatbot'),
   TimestreamInfluxDB: require('./timestreaminfluxdb'),
   CodeConnections: require('./codeconnections'),
-  Deadline: require('./deadline')
+  Deadline: require('./deadline'),
+  ControlCatalog: require('./controlcatalog')
 };

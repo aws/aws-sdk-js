@@ -516,11 +516,11 @@ declare class Mgn extends Service {
    */
   updateConnector(callback?: (err: AWSError, data: Mgn.Types.Connector) => void): Request<Mgn.Types.Connector, AWSError>;
   /**
-   * Updates multiple LaunchConfigurations by Source Server ID.
+   * Updates multiple LaunchConfigurations by Source Server ID.  bootMode valid values are LEGACY_BIOS | UEFI  
    */
   updateLaunchConfiguration(params: Mgn.Types.UpdateLaunchConfigurationRequest, callback?: (err: AWSError, data: Mgn.Types.LaunchConfiguration) => void): Request<Mgn.Types.LaunchConfiguration, AWSError>;
   /**
-   * Updates multiple LaunchConfigurations by Source Server ID.
+   * Updates multiple LaunchConfigurations by Source Server ID.  bootMode valid values are LEGACY_BIOS | UEFI  
    */
   updateLaunchConfiguration(callback?: (err: AWSError, data: Mgn.Types.LaunchConfiguration) => void): Request<Mgn.Types.LaunchConfiguration, AWSError>;
   /**
@@ -575,7 +575,7 @@ declare class Mgn extends Service {
 declare namespace Mgn {
   export type ARN = string;
   export type AccountID = string;
-  export type ActionCategory = "DISASTER_RECOVERY"|"OPERATING_SYSTEM"|"LICENSE_AND_SUBSCRIPTION"|"VALIDATION"|"OBSERVABILITY"|"SECURITY"|"NETWORKING"|"CONFIGURATION"|"BACKUP"|"OTHER"|string;
+  export type ActionCategory = "DISASTER_RECOVERY"|"OPERATING_SYSTEM"|"LICENSE_AND_SUBSCRIPTION"|"VALIDATION"|"OBSERVABILITY"|"REFACTORING"|"SECURITY"|"NETWORKING"|"CONFIGURATION"|"BACKUP"|"OTHER"|string;
   export type ActionDescription = string;
   export type ActionID = string;
   export type ActionIDs = ActionID[];
@@ -703,7 +703,7 @@ declare namespace Mgn {
   }
   export type BandwidthThrottling = number;
   export type Boolean = boolean;
-  export type BootMode = "LEGACY_BIOS"|"UEFI"|string;
+  export type BootMode = "LEGACY_BIOS"|"UEFI"|"USE_SOURCE"|string;
   export type BoundedString = string;
   export interface CPU {
     /**
