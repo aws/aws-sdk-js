@@ -2136,7 +2136,7 @@ declare namespace RDS {
      */
     EnableCloudwatchLogsExports?: LogTypeList;
     /**
-     * The DB engine mode of the DB cluster, either provisioned or serverless. The serverless engine mode only applies for Aurora Serverless v1 DB clusters. For information about limitations and requirements for Serverless DB clusters, see the following sections in the Amazon Aurora User Guide:    Limitations of Aurora Serverless v1     Requirements for Aurora Serverless v2    Valid for Cluster Type: Aurora DB clusters only
+     * The DB engine mode of the DB cluster, either provisioned or serverless. The serverless engine mode only applies for Aurora Serverless v1 DB clusters. Aurora Serverless v2 DB clusters use the provisioned engine mode. For information about limitations and requirements for Serverless DB clusters, see the following sections in the Amazon Aurora User Guide:    Limitations of Aurora Serverless v1     Requirements for Aurora Serverless v2    Valid for Cluster Type: Aurora DB clusters only
      */
     EngineMode?: String;
     /**
@@ -2718,6 +2718,10 @@ declare namespace RDS {
      * Whether to upgrade the storage file system configuration on the read replica. This option migrates the read replica from the old storage file system layout to the preferred layout.
      */
     UpgradeStorageConfig?: BooleanOptional;
+    /**
+     * The CA certificate identifier to use for the read replica's server certificate. This setting doesn't apply to RDS Custom DB instances. For more information, see Using SSL/TLS to encrypt a connection to a DB instance in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB cluster in the Amazon Aurora User Guide.
+     */
+    CACertificateIdentifier?: String;
     /**
      * The ID of the region that contains the source for the read replica.
      */
@@ -9769,6 +9773,10 @@ declare namespace RDS {
      * Specifies whether to enable a dedicated log volume (DLV) for the DB instance.
      */
     DedicatedLogVolume?: BooleanOptional;
+    /**
+     * The CA certificate identifier to use for the DB instance's server certificate. This setting doesn't apply to RDS Custom DB instances. For more information, see Using SSL/TLS to encrypt a connection to a DB instance in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB cluster in the Amazon Aurora User Guide.
+     */
+    CACertificateIdentifier?: String;
   }
   export interface RestoreDBInstanceFromDBSnapshotResult {
     DBInstance?: DBInstance;
@@ -9970,6 +9978,10 @@ declare namespace RDS {
      * Specifies whether to enable a dedicated log volume (DLV) for the DB instance.
      */
     DedicatedLogVolume?: BooleanOptional;
+    /**
+     * The CA certificate identifier to use for the DB instance's server certificate. This setting doesn't apply to RDS Custom DB instances. For more information, see Using SSL/TLS to encrypt a connection to a DB instance in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB cluster in the Amazon Aurora User Guide.
+     */
+    CACertificateIdentifier?: String;
   }
   export interface RestoreDBInstanceFromS3Result {
     DBInstance?: DBInstance;
@@ -10148,6 +10160,10 @@ declare namespace RDS {
      * Specifies whether to enable a dedicated log volume (DLV) for the DB instance.
      */
     DedicatedLogVolume?: BooleanOptional;
+    /**
+     * The CA certificate identifier to use for the DB instance's server certificate. This setting doesn't apply to RDS Custom DB instances. For more information, see Using SSL/TLS to encrypt a connection to a DB instance in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB cluster in the Amazon Aurora User Guide.
+     */
+    CACertificateIdentifier?: String;
   }
   export interface RestoreDBInstanceToPointInTimeResult {
     DBInstance?: DBInstance;

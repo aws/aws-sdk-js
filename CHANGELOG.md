@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1595.0-->
+<!--LATEST=2.1596.0-->
 <!--ENTRYINSERT-->
+
+## 2.1596.0
+* feature: CodeBuild: Add new webhook filter types for GitHub webhooks
+* feature: MediaConvert: This release includes support for bringing your own fonts to use for burn-in or DVB-Sub captioning workflows.
+* feature: Pinpoint: The OrchestrationSendingRoleArn has been added to the email channel and is used to send emails from campaigns or journeys.
+* feature: RDS: This release adds support for specifying the CA certificate to use for the new db instance when restoring from db snapshot, restoring from s3, restoring to point in time, and creating a db instance read replica.
 
 ## 2.1595.0
 * feature: ControlCatalog: This is the initial SDK release for AWS Control Catalog, a central catalog for AWS managed controls. This release includes 3 new APIs - ListDomains, ListObjectives, and ListCommonControls - that vend high-level data to categorize controls across the AWS platform.
