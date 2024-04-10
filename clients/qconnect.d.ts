@@ -28,11 +28,11 @@ declare class QConnect extends Service {
    */
   createAssistantAssociation(callback?: (err: AWSError, data: QConnect.Types.CreateAssistantAssociationResponse) => void): Request<QConnect.Types.CreateAssistantAssociationResponse, AWSError>;
   /**
-   * Creates Amazon Q content. Before to calling this API, use StartContentUpload to upload an asset.
+   * Creates Amazon Q in Connect content. Before to calling this API, use StartContentUpload to upload an asset.
    */
   createContent(params: QConnect.Types.CreateContentRequest, callback?: (err: AWSError, data: QConnect.Types.CreateContentResponse) => void): Request<QConnect.Types.CreateContentResponse, AWSError>;
   /**
-   * Creates Amazon Q content. Before to calling this API, use StartContentUpload to upload an asset.
+   * Creates Amazon Q in Connect content. Before to calling this API, use StartContentUpload to upload an asset.
    */
   createContent(callback?: (err: AWSError, data: QConnect.Types.CreateContentResponse) => void): Request<QConnect.Types.CreateContentResponse, AWSError>;
   /**
@@ -44,19 +44,19 @@ declare class QConnect extends Service {
    */
   createKnowledgeBase(callback?: (err: AWSError, data: QConnect.Types.CreateKnowledgeBaseResponse) => void): Request<QConnect.Types.CreateKnowledgeBaseResponse, AWSError>;
   /**
-   * Creates an Amazon Q quick response.
+   * Creates an Amazon Q in Connect quick response.
    */
   createQuickResponse(params: QConnect.Types.CreateQuickResponseRequest, callback?: (err: AWSError, data: QConnect.Types.CreateQuickResponseResponse) => void): Request<QConnect.Types.CreateQuickResponseResponse, AWSError>;
   /**
-   * Creates an Amazon Q quick response.
+   * Creates an Amazon Q in Connect quick response.
    */
   createQuickResponse(callback?: (err: AWSError, data: QConnect.Types.CreateQuickResponseResponse) => void): Request<QConnect.Types.CreateQuickResponseResponse, AWSError>;
   /**
-   * Creates a session. A session is a contextual container used for generating recommendations. Amazon Connect creates a new Amazon Q session for each contact on which Amazon Q is enabled.
+   * Creates a session. A session is a contextual container used for generating recommendations. Amazon Connect creates a new Amazon Q in Connect session for each contact on which Amazon Q in Connect is enabled.
    */
   createSession(params: QConnect.Types.CreateSessionRequest, callback?: (err: AWSError, data: QConnect.Types.CreateSessionResponse) => void): Request<QConnect.Types.CreateSessionResponse, AWSError>;
   /**
-   * Creates a session. A session is a contextual container used for generating recommendations. Amazon Connect creates a new Amazon Q session for each contact on which Amazon Q is enabled.
+   * Creates a session. A session is a contextual container used for generating recommendations. Amazon Connect creates a new Amazon Q in Connect session for each contact on which Amazon Q in Connect is enabled.
    */
   createSession(callback?: (err: AWSError, data: QConnect.Types.CreateSessionResponse) => void): Request<QConnect.Types.CreateSessionResponse, AWSError>;
   /**
@@ -164,11 +164,11 @@ declare class QConnect extends Service {
    */
   getQuickResponse(callback?: (err: AWSError, data: QConnect.Types.GetQuickResponseResponse) => void): Request<QConnect.Types.GetQuickResponseResponse, AWSError>;
   /**
-   * Retrieves recommendations for the specified session. To avoid retrieving the same recommendations in subsequent calls, use NotifyRecommendationsReceived. This API supports long-polling behavior with the waitTimeSeconds parameter. Short poll is the default behavior and only returns recommendations already available. To perform a manual query against an assistant, use QueryAssistant.
+   *  This API will be discontinued starting June 1, 2024. To receive generative responses after March 1, 2024, you will need to create a new Assistant in the Amazon Connect console and integrate the Amazon Q in Connect JavaScript library (amazon-q-connectjs) into your applications.  Retrieves recommendations for the specified session. To avoid retrieving the same recommendations in subsequent calls, use NotifyRecommendationsReceived. This API supports long-polling behavior with the waitTimeSeconds parameter. Short poll is the default behavior and only returns recommendations already available. To perform a manual query against an assistant, use QueryAssistant.
    */
   getRecommendations(params: QConnect.Types.GetRecommendationsRequest, callback?: (err: AWSError, data: QConnect.Types.GetRecommendationsResponse) => void): Request<QConnect.Types.GetRecommendationsResponse, AWSError>;
   /**
-   * Retrieves recommendations for the specified session. To avoid retrieving the same recommendations in subsequent calls, use NotifyRecommendationsReceived. This API supports long-polling behavior with the waitTimeSeconds parameter. Short poll is the default behavior and only returns recommendations already available. To perform a manual query against an assistant, use QueryAssistant.
+   *  This API will be discontinued starting June 1, 2024. To receive generative responses after March 1, 2024, you will need to create a new Assistant in the Amazon Connect console and integrate the Amazon Q in Connect JavaScript library (amazon-q-connectjs) into your applications.  Retrieves recommendations for the specified session. To avoid retrieving the same recommendations in subsequent calls, use NotifyRecommendationsReceived. This API supports long-polling behavior with the waitTimeSeconds parameter. Short poll is the default behavior and only returns recommendations already available. To perform a manual query against an assistant, use QueryAssistant.
    */
   getRecommendations(callback?: (err: AWSError, data: QConnect.Types.GetRecommendationsResponse) => void): Request<QConnect.Types.GetRecommendationsResponse, AWSError>;
   /**
@@ -252,11 +252,11 @@ declare class QConnect extends Service {
    */
   putFeedback(callback?: (err: AWSError, data: QConnect.Types.PutFeedbackResponse) => void): Request<QConnect.Types.PutFeedbackResponse, AWSError>;
   /**
-   * Performs a manual search against the specified assistant. To retrieve recommendations for an assistant, use GetRecommendations. 
+   *  This API will be discontinued starting June 1, 2024. To receive generative responses after March 1, 2024, you will need to create a new Assistant in the Amazon Connect console and integrate the Amazon Q in Connect JavaScript library (amazon-q-connectjs) into your applications.  Performs a manual search against the specified assistant. To retrieve recommendations for an assistant, use GetRecommendations. 
    */
   queryAssistant(params: QConnect.Types.QueryAssistantRequest, callback?: (err: AWSError, data: QConnect.Types.QueryAssistantResponse) => void): Request<QConnect.Types.QueryAssistantResponse, AWSError>;
   /**
-   * Performs a manual search against the specified assistant. To retrieve recommendations for an assistant, use GetRecommendations. 
+   *  This API will be discontinued starting June 1, 2024. To receive generative responses after March 1, 2024, you will need to create a new Assistant in the Amazon Connect console and integrate the Amazon Q in Connect JavaScript library (amazon-q-connectjs) into your applications.  Performs a manual search against the specified assistant. To retrieve recommendations for an assistant, use GetRecommendations. 
    */
   queryAssistant(callback?: (err: AWSError, data: QConnect.Types.QueryAssistantResponse) => void): Request<QConnect.Types.QueryAssistantResponse, AWSError>;
   /**
@@ -276,11 +276,11 @@ declare class QConnect extends Service {
    */
   searchContent(callback?: (err: AWSError, data: QConnect.Types.SearchContentResponse) => void): Request<QConnect.Types.SearchContentResponse, AWSError>;
   /**
-   * Searches existing Amazon Q quick responses in an Amazon Q knowledge base.
+   * Searches existing Amazon Q in Connect quick responses in an Amazon Q in Connect knowledge base.
    */
   searchQuickResponses(params: QConnect.Types.SearchQuickResponsesRequest, callback?: (err: AWSError, data: QConnect.Types.SearchQuickResponsesResponse) => void): Request<QConnect.Types.SearchQuickResponsesResponse, AWSError>;
   /**
-   * Searches existing Amazon Q quick responses in an Amazon Q knowledge base.
+   * Searches existing Amazon Q in Connect quick responses in an Amazon Q in Connect knowledge base.
    */
   searchQuickResponses(callback?: (err: AWSError, data: QConnect.Types.SearchQuickResponsesResponse) => void): Request<QConnect.Types.SearchQuickResponsesResponse, AWSError>;
   /**
@@ -300,11 +300,11 @@ declare class QConnect extends Service {
    */
   startContentUpload(callback?: (err: AWSError, data: QConnect.Types.StartContentUploadResponse) => void): Request<QConnect.Types.StartContentUploadResponse, AWSError>;
   /**
-   * Start an asynchronous job to import Amazon Q resources from an uploaded source file. Before calling this API, use StartContentUpload to upload an asset that contains the resource data.   For importing Amazon Q quick responses, you need to upload a csv file including the quick responses. For information about how to format the csv file for importing quick responses, see Import quick responses.  
+   * Start an asynchronous job to import Amazon Q in Connect resources from an uploaded source file. Before calling this API, use StartContentUpload to upload an asset that contains the resource data.   For importing Amazon Q in Connect quick responses, you need to upload a csv file including the quick responses. For information about how to format the csv file for importing quick responses, see Import quick responses.  
    */
   startImportJob(params: QConnect.Types.StartImportJobRequest, callback?: (err: AWSError, data: QConnect.Types.StartImportJobResponse) => void): Request<QConnect.Types.StartImportJobResponse, AWSError>;
   /**
-   * Start an asynchronous job to import Amazon Q resources from an uploaded source file. Before calling this API, use StartContentUpload to upload an asset that contains the resource data.   For importing Amazon Q quick responses, you need to upload a csv file including the quick responses. For information about how to format the csv file for importing quick responses, see Import quick responses.  
+   * Start an asynchronous job to import Amazon Q in Connect resources from an uploaded source file. Before calling this API, use StartContentUpload to upload an asset that contains the resource data.   For importing Amazon Q in Connect quick responses, you need to upload a csv file including the quick responses. For information about how to format the csv file for importing quick responses, see Import quick responses.  
    */
   startImportJob(callback?: (err: AWSError, data: QConnect.Types.StartImportJobResponse) => void): Request<QConnect.Types.StartImportJobResponse, AWSError>;
   /**
@@ -332,37 +332,46 @@ declare class QConnect extends Service {
    */
   updateContent(callback?: (err: AWSError, data: QConnect.Types.UpdateContentResponse) => void): Request<QConnect.Types.UpdateContentResponse, AWSError>;
   /**
-   * Updates the template URI of a knowledge base. This is only supported for knowledge bases of type EXTERNAL. Include a single variable in ${variable} format; this interpolated by Amazon Q using ingested content. For example, if you ingest a Salesforce article, it has an Id value, and you can set the template URI to https://myInstanceName.lightning.force.com/lightning/r/Knowledge__kav/*${Id}*view. 
+   * Updates the template URI of a knowledge base. This is only supported for knowledge bases of type EXTERNAL. Include a single variable in ${variable} format; this interpolated by Amazon Q in Connect using ingested content. For example, if you ingest a Salesforce article, it has an Id value, and you can set the template URI to https://myInstanceName.lightning.force.com/lightning/r/Knowledge__kav/*${Id}*view. 
    */
   updateKnowledgeBaseTemplateUri(params: QConnect.Types.UpdateKnowledgeBaseTemplateUriRequest, callback?: (err: AWSError, data: QConnect.Types.UpdateKnowledgeBaseTemplateUriResponse) => void): Request<QConnect.Types.UpdateKnowledgeBaseTemplateUriResponse, AWSError>;
   /**
-   * Updates the template URI of a knowledge base. This is only supported for knowledge bases of type EXTERNAL. Include a single variable in ${variable} format; this interpolated by Amazon Q using ingested content. For example, if you ingest a Salesforce article, it has an Id value, and you can set the template URI to https://myInstanceName.lightning.force.com/lightning/r/Knowledge__kav/*${Id}*view. 
+   * Updates the template URI of a knowledge base. This is only supported for knowledge bases of type EXTERNAL. Include a single variable in ${variable} format; this interpolated by Amazon Q in Connect using ingested content. For example, if you ingest a Salesforce article, it has an Id value, and you can set the template URI to https://myInstanceName.lightning.force.com/lightning/r/Knowledge__kav/*${Id}*view. 
    */
   updateKnowledgeBaseTemplateUri(callback?: (err: AWSError, data: QConnect.Types.UpdateKnowledgeBaseTemplateUriResponse) => void): Request<QConnect.Types.UpdateKnowledgeBaseTemplateUriResponse, AWSError>;
   /**
-   * Updates an existing Amazon Q quick response.
+   * Updates an existing Amazon Q in Connect quick response.
    */
   updateQuickResponse(params: QConnect.Types.UpdateQuickResponseRequest, callback?: (err: AWSError, data: QConnect.Types.UpdateQuickResponseResponse) => void): Request<QConnect.Types.UpdateQuickResponseResponse, AWSError>;
   /**
-   * Updates an existing Amazon Q quick response.
+   * Updates an existing Amazon Q in Connect quick response.
    */
   updateQuickResponse(callback?: (err: AWSError, data: QConnect.Types.UpdateQuickResponseResponse) => void): Request<QConnect.Types.UpdateQuickResponseResponse, AWSError>;
+  /**
+   * Updates a session. A session is a contextual container used for generating recommendations. Amazon Connect updates the existing Amazon Q in Connect session for each contact on which Amazon Q in Connect is enabled.
+   */
+  updateSession(params: QConnect.Types.UpdateSessionRequest, callback?: (err: AWSError, data: QConnect.Types.UpdateSessionResponse) => void): Request<QConnect.Types.UpdateSessionResponse, AWSError>;
+  /**
+   * Updates a session. A session is a contextual container used for generating recommendations. Amazon Connect updates the existing Amazon Q in Connect session for each contact on which Amazon Q in Connect is enabled.
+   */
+  updateSession(callback?: (err: AWSError, data: QConnect.Types.UpdateSessionResponse) => void): Request<QConnect.Types.UpdateSessionResponse, AWSError>;
 }
 declare namespace QConnect {
+  export type AndConditions = TagCondition[];
   export interface AppIntegrationsConfiguration {
     /**
      * The Amazon Resource Name (ARN) of the AppIntegrations DataIntegration to use for ingesting content.    For  Salesforce, your AppIntegrations DataIntegration must have an ObjectConfiguration if objectFields is not provided, including at least Id, ArticleNumber, VersionNumber, Title, PublishStatus, and IsDeleted as source fields.     For  ServiceNow, your AppIntegrations DataIntegration must have an ObjectConfiguration if objectFields is not provided, including at least number, short_description, sys_mod_count, workflow_state, and active as source fields.     For  Zendesk, your AppIntegrations DataIntegration must have an ObjectConfiguration if objectFields is not provided, including at least id, title, updated_at, and draft as source fields.     For SharePoint, your AppIntegrations DataIntegration must have a FileConfiguration, including only file extensions that are among docx, pdf, html, htm, and txt.     For Amazon S3, the ObjectConfiguration and FileConfiguration of your AppIntegrations DataIntegration must be null. The SourceURI of your DataIntegration must use the following format: s3://your_s3_bucket_name.  The bucket policy of the corresponding S3 bucket must allow the Amazon Web Services principal app-integrations.amazonaws.com to perform s3:ListBucket, s3:GetObject, and s3:GetBucketLocation against the bucket.   
      */
     appIntegrationArn: GenericArn;
     /**
-     * The fields from the source that are made available to your agents in Amazon Q. Optional if ObjectConfiguration is included in the provided DataIntegration.     For  Salesforce, you must include at least Id, ArticleNumber, VersionNumber, Title, PublishStatus, and IsDeleted.    For  ServiceNow, you must include at least number, short_description, sys_mod_count, workflow_state, and active.    For  Zendesk, you must include at least id, title, updated_at, and draft.    Make sure to include additional fields. These fields are indexed and used to source recommendations. 
+     * The fields from the source that are made available to your agents in Amazon Q in Connect. Optional if ObjectConfiguration is included in the provided DataIntegration.     For  Salesforce, you must include at least Id, ArticleNumber, VersionNumber, Title, PublishStatus, and IsDeleted.    For  ServiceNow, you must include at least number, short_description, sys_mod_count, workflow_state, and active.    For  Zendesk, you must include at least id, title, updated_at, and draft.    Make sure to include additional fields. These fields are indexed and used to source recommendations. 
      */
     objectFields?: ObjectFieldsList;
   }
   export type Arn = string;
   export interface AssistantAssociationData {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Q assistant.
+     * The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.
      */
     assistantArn: Arn;
     /**
@@ -374,7 +383,7 @@ declare namespace QConnect {
      */
     assistantAssociationId: Uuid;
     /**
-     * The identifier of the Amazon Q assistant.
+     * The identifier of the Amazon Q in Connect assistant.
      */
     assistantId: Uuid;
     /**
@@ -392,7 +401,7 @@ declare namespace QConnect {
   }
   export interface AssistantAssociationInputData {
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it.
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base.
      */
     knowledgeBaseId?: Uuid;
   }
@@ -404,7 +413,7 @@ declare namespace QConnect {
   }
   export interface AssistantAssociationSummary {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Q assistant.
+     * The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.
      */
     assistantArn: Arn;
     /**
@@ -416,7 +425,7 @@ declare namespace QConnect {
      */
     assistantAssociationId: Uuid;
     /**
-     * The identifier of the Amazon Q assistant.
+     * The identifier of the Amazon Q in Connect assistant.
      */
     assistantId: Uuid;
     /**
@@ -435,22 +444,22 @@ declare namespace QConnect {
   export type AssistantAssociationSummaryList = AssistantAssociationSummary[];
   export interface AssistantCapabilityConfiguration {
     /**
-     * The type of Amazon Q assistant capability. 
+     * The type of Amazon Q in Connect assistant capability. 
      */
     type?: AssistantCapabilityType;
   }
   export type AssistantCapabilityType = "V1"|"V2"|string;
   export interface AssistantData {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Q assistant.
+     * The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.
      */
     assistantArn: Arn;
     /**
-     * The identifier of the Amazon Q assistant.
+     * The identifier of the Amazon Q in Connect assistant.
      */
     assistantId: Uuid;
     /**
-     * The configuration information for the Amazon Q assistant capability. 
+     * The configuration information for the Amazon Q in Connect assistant capability. 
      */
     capabilityConfiguration?: AssistantCapabilityConfiguration;
     /**
@@ -458,7 +467,7 @@ declare namespace QConnect {
      */
     description?: Description;
     /**
-     * The configuration information for the Amazon Q assistant integration.
+     * The configuration information for the Amazon Q in Connect assistant integration.
      */
     integrationConfiguration?: AssistantIntegrationConfiguration;
     /**
@@ -466,7 +475,7 @@ declare namespace QConnect {
      */
     name: Name;
     /**
-     * The configuration information for the customer managed key used for encryption.  This KMS key must have a policy that allows kms:CreateGrant, kms:DescribeKey, kms:Decrypt, and kms:GenerateDataKey* permissions to the IAM identity using the key to invoke Amazon Q. To use Amazon Q with chat, the key policy must also allow kms:Decrypt, kms:GenerateDataKey*, and kms:DescribeKey permissions to the connect.amazonaws.com service principal.  For more information about setting up a customer managed key for Amazon Q, see Enable Amazon Q in Connect for your instance.
+     * The configuration information for the customer managed key used for encryption.  This KMS key must have a policy that allows kms:CreateGrant, kms:DescribeKey, kms:Decrypt, and kms:GenerateDataKey* permissions to the IAM identity using the key to invoke Amazon Q in Connect. To use Amazon Q in Connect with chat, the key policy must also allow kms:Decrypt, kms:GenerateDataKey*, and kms:DescribeKey permissions to the connect.amazonaws.com service principal.  For more information about setting up a customer managed key for Amazon Q in Connect, see Enable Amazon Q in Connect for your instance.
      */
     serverSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
     /**
@@ -492,15 +501,15 @@ declare namespace QConnect {
   export type AssistantStatus = "CREATE_IN_PROGRESS"|"CREATE_FAILED"|"ACTIVE"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|"DELETED"|string;
   export interface AssistantSummary {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Q assistant.
+     * The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.
      */
     assistantArn: Arn;
     /**
-     * The identifier of the Amazon Q assistant.
+     * The identifier of the Amazon Q in Connect assistant.
      */
     assistantId: Uuid;
     /**
-     * The configuration information for the Amazon Q assistant capability. 
+     * The configuration information for the Amazon Q in Connect assistant capability. 
      */
     capabilityConfiguration?: AssistantCapabilityConfiguration;
     /**
@@ -508,7 +517,7 @@ declare namespace QConnect {
      */
     description?: Description;
     /**
-     * The configuration information for the Amazon Q assistant integration.
+     * The configuration information for the Amazon Q in Connect assistant integration.
      */
     integrationConfiguration?: AssistantIntegrationConfiguration;
     /**
@@ -516,7 +525,7 @@ declare namespace QConnect {
      */
     name: Name;
     /**
-     * The configuration information for the customer managed key used for encryption.  This KMS key must have a policy that allows kms:CreateGrant, kms:DescribeKey, kms:Decrypt, and kms:GenerateDataKey* permissions to the IAM identity using the key to invoke Amazon Q. To use Amazon Q with chat, the key policy must also allow kms:Decrypt, kms:GenerateDataKey*, and kms:DescribeKey permissions to the connect.amazonaws.com service principal.  For more information about setting up a customer managed key for Amazon Q, see Enable Amazon Q in Connect for your instance.
+     * The configuration information for the customer managed key used for encryption.  This KMS key must have a policy that allows kms:CreateGrant, kms:DescribeKey, kms:Decrypt, and kms:GenerateDataKey* permissions to the IAM identity using the key to invoke Amazon Q in Connect. To use Amazon Q in Connect with chat, the key policy must also allow kms:Decrypt, kms:GenerateDataKey*, and kms:DescribeKey permissions to the connect.amazonaws.com service principal.  For more information about setting up a customer managed key for Amazon Q in Connect, see Enable Amazon Q in Connect for your instance.
      */
     serverSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
     /**
@@ -572,7 +581,7 @@ declare namespace QConnect {
      */
     knowledgeBaseArn: Arn;
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it.
+     * The identifier of the knowledge base.
      */
     knowledgeBaseId: Uuid;
     /**
@@ -580,7 +589,7 @@ declare namespace QConnect {
      */
     linkOutUri?: Uri;
     /**
-     * A key/value map to store attributes without affecting tagging or recommendations. For example, when synchronizing data between an external system and Amazon Q, you can store an external version identifier as metadata to utilize for determining drift.
+     * A key/value map to store attributes without affecting tagging or recommendations. For example, when synchronizing data between an external system and Amazon Q in Connect, you can store an external version identifier as metadata to utilize for determining drift.
      */
     metadata: ContentMetadata;
     /**
@@ -643,7 +652,7 @@ declare namespace QConnect {
      */
     knowledgeBaseArn?: Arn;
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it.
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base.
      */
     knowledgeBaseId?: Uuid;
   }
@@ -666,11 +675,11 @@ declare namespace QConnect {
      */
     knowledgeBaseArn: Arn;
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it.
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base.
      */
     knowledgeBaseId: Uuid;
     /**
-     * A key/value map to store attributes without affecting tagging or recommendations. For example, when synchronizing data between an external system and Amazon Q, you can store an external version identifier as metadata to utilize for determining drift.
+     * A key/value map to store attributes without affecting tagging or recommendations. For example, when synchronizing data between an external system and Amazon Q in Connect, you can store an external version identifier as metadata to utilize for determining drift.
      */
     metadata: ContentMetadata;
     /**
@@ -699,7 +708,7 @@ declare namespace QConnect {
   export type ContentType = string;
   export interface CreateAssistantAssociationRequest {
     /**
-     * The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     assistantId: UuidOrArn;
     /**
@@ -739,7 +748,7 @@ declare namespace QConnect {
      */
     name: Name;
     /**
-     * The configuration information for the customer managed key used for encryption.  The customer managed key must have a policy that allows kms:CreateGrant,  kms:DescribeKey, kms:Decrypt, and kms:GenerateDataKey* permissions to the IAM identity using the key to invoke Amazon Q. To use Amazon Q with chat, the key policy must also allow kms:Decrypt, kms:GenerateDataKey*, and kms:DescribeKey permissions to the connect.amazonaws.com service principal.  For more information about setting up a customer managed key for Amazon Q, see Enable Amazon Q in Connect for your instance.
+     * The configuration information for the customer managed key used for encryption.  The customer managed key must have a policy that allows kms:CreateGrant,  kms:DescribeKey, kms:Decrypt, and kms:GenerateDataKey* permissions to the IAM identity using the key to invoke Amazon Q in Connect. To use Amazon Q in Connect with chat, the key policy must also allow kms:Decrypt, kms:GenerateDataKey*, and kms:DescribeKey permissions to the connect.amazonaws.com service principal.  For more information about setting up a customer managed key for Amazon Q in Connect, see Enable Amazon Q in Connect for your instance.
      */
     serverSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
     /**
@@ -763,11 +772,11 @@ declare namespace QConnect {
      */
     clientToken?: NonEmptyString;
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     knowledgeBaseId: UuidOrArn;
     /**
-     * A key/value map to store attributes without affecting tagging or recommendations. For example, when synchronizing data between an external system and Amazon Q, you can store an external version identifier as metadata to utilize for determining drift.
+     * A key/value map to store attributes without affecting tagging or recommendations. For example, when synchronizing data between an external system and Amazon Q in Connect, you can store an external version identifier as metadata to utilize for determining drift.
      */
     metadata?: ContentMetadata;
     /**
@@ -819,7 +828,7 @@ declare namespace QConnect {
      */
     renderingConfiguration?: RenderingConfiguration;
     /**
-     * The configuration information for the customer managed key used for encryption.  This KMS key must have a policy that allows kms:CreateGrant, kms:DescribeKey, kms:Decrypt, and kms:GenerateDataKey* permissions to the IAM identity using the key to invoke Amazon Q. For more information about setting up a customer managed key for Amazon Q, see Enable Amazon Q in Connect for your instance.
+     * The configuration information for the customer managed key used for encryption.  This KMS key must have a policy that allows kms:CreateGrant, kms:DescribeKey, kms:Decrypt, and kms:GenerateDataKey* permissions to the IAM identity using the key to invoke Amazon Q in Connect. For more information about setting up a customer managed key for Amazon Q in Connect, see Enable Amazon Q in Connect for your instance.
      */
     serverSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
     /**
@@ -867,7 +876,7 @@ declare namespace QConnect {
      */
     isActive?: Boolean;
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     knowledgeBaseId: UuidOrArn;
     /**
@@ -895,7 +904,7 @@ declare namespace QConnect {
   }
   export interface CreateSessionRequest {
     /**
-     * The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     assistantId: UuidOrArn;
     /**
@@ -910,6 +919,10 @@ declare namespace QConnect {
      * The name of the session.
      */
     name: Name;
+    /**
+     * An object that can be used to specify Tag conditions. 
+     */
+    tagFilter?: TagFilter;
     /**
      * The tags used to organize, track, or control access for this resource.
      */
@@ -959,7 +972,7 @@ declare namespace QConnect {
      */
     assistantAssociationId: UuidOrArn;
     /**
-     * The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     assistantId: UuidOrArn;
   }
@@ -967,7 +980,7 @@ declare namespace QConnect {
   }
   export interface DeleteAssistantRequest {
     /**
-     * The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     assistantId: UuidOrArn;
   }
@@ -979,7 +992,7 @@ declare namespace QConnect {
      */
     contentId: UuidOrArn;
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     knowledgeBaseId: UuidOrArn;
   }
@@ -991,7 +1004,7 @@ declare namespace QConnect {
      */
     importJobId: Uuid;
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it.
+     * The identifier of the knowledge base.
      */
     knowledgeBaseId: UuidOrArn;
   }
@@ -1007,7 +1020,7 @@ declare namespace QConnect {
   }
   export interface DeleteQuickResponseRequest {
     /**
-     * The knowledge base from which the quick response is deleted. The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it.
+     * The knowledge base from which the quick response is deleted. The identifier of the knowledge base.
      */
     knowledgeBaseId: UuidOrArn;
     /**
@@ -1107,7 +1120,7 @@ declare namespace QConnect {
      */
     assistantAssociationId: UuidOrArn;
     /**
-     * The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     assistantId: UuidOrArn;
   }
@@ -1119,7 +1132,7 @@ declare namespace QConnect {
   }
   export interface GetAssistantRequest {
     /**
-     * The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     assistantId: UuidOrArn;
   }
@@ -1135,7 +1148,7 @@ declare namespace QConnect {
      */
     contentId: UuidOrArn;
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     knowledgeBaseId: UuidOrArn;
   }
@@ -1151,7 +1164,7 @@ declare namespace QConnect {
      */
     contentId: UuidOrArn;
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     knowledgeBaseId: UuidOrArn;
   }
@@ -1179,7 +1192,7 @@ declare namespace QConnect {
   }
   export interface GetKnowledgeBaseRequest {
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     knowledgeBaseId: UuidOrArn;
   }
@@ -1207,7 +1220,7 @@ declare namespace QConnect {
   }
   export interface GetRecommendationsRequest {
     /**
-     * The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     assistantId: UuidOrArn;
     /**
@@ -1235,7 +1248,7 @@ declare namespace QConnect {
   }
   export interface GetSessionRequest {
     /**
-     * The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     assistantId: UuidOrArn;
     /**
@@ -1251,11 +1264,11 @@ declare namespace QConnect {
   }
   export interface GroupingConfiguration {
     /**
-     * The criteria used for grouping Amazon Q users. The following is the list of supported criteria values.    RoutingProfileArn: Grouping the users by their Amazon Connect routing profile ARN. User should have SearchRoutingProfile and DescribeRoutingProfile permissions when setting criteria to this value.  
+     * The criteria used for grouping Amazon Q in Connect users. The following is the list of supported criteria values.    RoutingProfileArn: Grouping the users by their Amazon Connect routing profile ARN. User should have SearchRoutingProfile and DescribeRoutingProfile permissions when setting criteria to this value.  
      */
     criteria?: GroupingCriteria;
     /**
-     * The list of values that define different groups of Amazon Q users.   When setting criteria to RoutingProfileArn, you need to provide a list of ARNs of Amazon Connect routing profiles as values of this parameter.  
+     * The list of values that define different groups of Amazon Q in Connect users.   When setting criteria to RoutingProfileArn, you need to provide a list of ARNs of Amazon Connect routing profiles as values of this parameter.  
      */
     values?: GroupingValues;
   }
@@ -1298,7 +1311,7 @@ declare namespace QConnect {
      */
     knowledgeBaseArn: Arn;
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it.
+     * The identifier of the knowledge base.
      */
     knowledgeBaseId: Uuid;
     /**
@@ -1306,7 +1319,7 @@ declare namespace QConnect {
      */
     lastModifiedTime: SyntheticTimestamp_epoch_seconds;
     /**
-     * The metadata fields of the imported Amazon Q resources.
+     * The metadata fields of the imported Amazon Q in Connect resources.
      */
     metadata?: ContentMetadata;
     /**
@@ -1350,7 +1363,7 @@ declare namespace QConnect {
      */
     knowledgeBaseArn: Arn;
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it.
+     * The identifier of the knowledge base.
      */
     knowledgeBaseId: Uuid;
     /**
@@ -1358,7 +1371,7 @@ declare namespace QConnect {
      */
     lastModifiedTime: SyntheticTimestamp_epoch_seconds;
     /**
-     * The metadata fields of the imported Amazon Q resources.
+     * The metadata fields of the imported Amazon Q in Connect resources.
      */
     metadata?: ContentMetadata;
     /**
@@ -1377,7 +1390,7 @@ declare namespace QConnect {
      */
     knowledgeBaseArn?: Arn;
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it.
+     * The identifier of the knowledge base.
      */
     knowledgeBaseId?: Uuid;
   }
@@ -1391,7 +1404,7 @@ declare namespace QConnect {
      */
     knowledgeBaseArn: Arn;
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it.
+     * The identifier of the knowledge base.
      */
     knowledgeBaseId: Uuid;
     /**
@@ -1411,7 +1424,7 @@ declare namespace QConnect {
      */
     renderingConfiguration?: RenderingConfiguration;
     /**
-     * The configuration information for the customer managed key used for encryption.  This KMS key must have a policy that allows kms:CreateGrant, kms:DescribeKey, kms:Decrypt, and kms:GenerateDataKey* permissions to the IAM identity using the key to invoke Amazon Q.  For more information about setting up a customer managed key for Amazon Q, see Enable Amazon Q in Connect for your instance.
+     * The configuration information for the customer managed key used for encryption.  This KMS key must have a policy that allows kms:CreateGrant, kms:DescribeKey, kms:Decrypt, and kms:GenerateDataKey* permissions to the IAM identity using the key to invoke Amazon Q in Connect.  For more information about setting up a customer managed key for Amazon Q in Connect, see Enable Amazon Q in Connect for your instance.
      */
     serverSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
     /**
@@ -1439,7 +1452,7 @@ declare namespace QConnect {
      */
     knowledgeBaseArn: Arn;
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it.
+     * The identifier of the knowledge base.
      */
     knowledgeBaseId: Uuid;
     /**
@@ -1455,7 +1468,7 @@ declare namespace QConnect {
      */
     renderingConfiguration?: RenderingConfiguration;
     /**
-     * The configuration information for the customer managed key used for encryption.  This KMS key must have a policy that allows kms:CreateGrant, kms:DescribeKey, kms:Decrypt, and kms:GenerateDataKey* permissions to the IAM identity using the key to invoke Amazon Q.  For more information about setting up a customer managed key for Amazon Q, see Enable Amazon Q in Connect for your instance.
+     * The configuration information for the customer managed key used for encryption.  This KMS key must have a policy that allows kms:CreateGrant, kms:DescribeKey, kms:Decrypt, and kms:GenerateDataKey* permissions to the IAM identity using the key to invoke Amazon Q in Connect.  For more information about setting up a customer managed key for Amazon Q in Connect, see Enable Amazon Q in Connect for your instance.
      */
     serverSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
     /**
@@ -1475,7 +1488,7 @@ declare namespace QConnect {
   export type LanguageCode = string;
   export interface ListAssistantAssociationsRequest {
     /**
-     * The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     assistantId: UuidOrArn;
     /**
@@ -1519,7 +1532,7 @@ declare namespace QConnect {
   }
   export interface ListContentsRequest {
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     knowledgeBaseId: UuidOrArn;
     /**
@@ -1543,7 +1556,7 @@ declare namespace QConnect {
   }
   export interface ListImportJobsRequest {
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     knowledgeBaseId: UuidOrArn;
     /**
@@ -1587,7 +1600,7 @@ declare namespace QConnect {
   }
   export interface ListQuickResponsesRequest {
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     knowledgeBaseId: UuidOrArn;
     /**
@@ -1640,7 +1653,7 @@ declare namespace QConnect {
   export type NotifyRecommendationsReceivedErrorMessage = string;
   export interface NotifyRecommendationsReceivedRequest {
     /**
-     * The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     assistantId: UuidOrArn;
     /**
@@ -1663,11 +1676,22 @@ declare namespace QConnect {
     recommendationIds?: RecommendationIdList;
   }
   export type ObjectFieldsList = NonEmptyString[];
+  export interface OrCondition {
+    /**
+     * A list of conditions which would be applied together with an AND condition.
+     */
+    andConditions?: AndConditions;
+    /**
+     * A leaf node condition which can be used to specify a tag condition.
+     */
+    tagCondition?: TagCondition;
+  }
+  export type OrConditions = OrCondition[];
   export type Order = "ASC"|"DESC"|string;
   export type Priority = "HIGH"|"MEDIUM"|"LOW"|string;
   export interface PutFeedbackRequest {
     /**
-     * The identifier of the Amazon Q assistant.
+     * The identifier of the Amazon Q in Connect assistant.
      */
     assistantId: UuidOrArn;
     /**
@@ -1685,11 +1709,11 @@ declare namespace QConnect {
   }
   export interface PutFeedbackResponse {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Q assistant.
+     * The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.
      */
     assistantArn: UuidOrArn;
     /**
-     * The identifier of the Amazon Q assistant.
+     * The identifier of the Amazon Q in Connect assistant.
      */
     assistantId: Uuid;
     /**
@@ -1707,7 +1731,7 @@ declare namespace QConnect {
   }
   export interface QueryAssistantRequest {
     /**
-     * The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     assistantId: UuidOrArn;
     /**
@@ -1727,7 +1751,7 @@ declare namespace QConnect {
      */
     queryText: QueryText;
     /**
-     * The identifier of the Amazon Q session. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the Amazon Q in Connect session. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     sessionId?: UuidOrArn;
   }
@@ -1818,7 +1842,7 @@ declare namespace QConnect {
      */
     knowledgeBaseArn: Arn;
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     knowledgeBaseId: Uuid;
     /**
@@ -1980,7 +2004,7 @@ declare namespace QConnect {
      */
     knowledgeBaseArn: Arn;
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     knowledgeBaseId: Uuid;
     /**
@@ -2048,7 +2072,7 @@ declare namespace QConnect {
      */
     knowledgeBaseArn: Arn;
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it.
+     * The identifier of the knowledge base.
      */
     knowledgeBaseId: Uuid;
     /**
@@ -2158,7 +2182,7 @@ declare namespace QConnect {
   export type RelevanceScore = number;
   export interface RemoveKnowledgeBaseTemplateUriRequest {
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     knowledgeBaseId: UuidOrArn;
   }
@@ -2194,7 +2218,7 @@ declare namespace QConnect {
   }
   export interface SearchContentRequest {
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     knowledgeBaseId: UuidOrArn;
     /**
@@ -2260,7 +2284,7 @@ declare namespace QConnect {
   }
   export interface SearchSessionsRequest {
     /**
-     * The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     assistantId: UuidOrArn;
     /**
@@ -2289,7 +2313,7 @@ declare namespace QConnect {
   export type SensitiveString = string;
   export interface ServerSideEncryptionConfiguration {
     /**
-     * The customer managed key used for encryption. For more information about setting up a customer managed key for Amazon Q, see Enable Amazon Q in Connect for your instance. For information about valid ID values, see Key identifiers (KeyId).
+     * The customer managed key used for encryption. For more information about setting up a customer managed key for Amazon Q in Connect, see Enable Amazon Q in Connect for your instance. For information about valid ID values, see Key identifiers (KeyId).
      */
     kmsKeyId?: NonEmptyString;
   }
@@ -2315,6 +2339,10 @@ declare namespace QConnect {
      */
     sessionId: Uuid;
     /**
+     * An object that can be used to specify Tag conditions.
+     */
+    tagFilter?: TagFilter;
+    /**
      * The tags used to organize, track, or control access for this resource.
      */
     tags?: Tags;
@@ -2328,11 +2356,11 @@ declare namespace QConnect {
   export type SessionSummaries = SessionSummary[];
   export interface SessionSummary {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Q assistant.
+     * The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.
      */
     assistantArn: Arn;
     /**
-     * The identifier of the Amazon Q assistant.
+     * The identifier of the Amazon Q in Connect assistant.
      */
     assistantId: Uuid;
     /**
@@ -2376,7 +2404,7 @@ declare namespace QConnect {
      */
     contentType: ContentType;
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     knowledgeBaseId: UuidOrArn;
     /**
@@ -2416,11 +2444,11 @@ declare namespace QConnect {
      */
     importJobType: ImportJobType;
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.   For importing Amazon Q quick responses, this should be a QUICK_RESPONSES type knowledge base.  
+     * The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.   For importing Amazon Q in Connect quick responses, this should be a QUICK_RESPONSES type knowledge base.  
      */
     knowledgeBaseId: UuidOrArn;
     /**
-     * The metadata fields of the imported Amazon Q resources.
+     * The metadata fields of the imported Amazon Q in Connect resources.
      */
     metadata?: ContentMetadata;
     /**
@@ -2435,6 +2463,30 @@ declare namespace QConnect {
     importJob?: ImportJobData;
   }
   export type SyntheticTimestamp_epoch_seconds = Date;
+  export interface TagCondition {
+    /**
+     * The tag key in the tag condition.
+     */
+    key: TagKey;
+    /**
+     * The tag value in the tag condition.
+     */
+    value?: TagValue;
+  }
+  export interface TagFilter {
+    /**
+     * A list of conditions which would be applied together with an AND condition.
+     */
+    andConditions?: AndConditions;
+    /**
+     * A list of conditions which would be applied together with an OR condition.
+     */
+    orConditions?: OrConditions;
+    /**
+     * A leaf node condition which can be used to specify a tag condition.
+     */
+    tagCondition?: TagCondition;
+  }
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export interface TagResourceRequest {
@@ -2475,11 +2527,11 @@ declare namespace QConnect {
      */
     contentId: UuidOrArn;
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base. Can be either the ID or the ARN
      */
     knowledgeBaseId: UuidOrArn;
     /**
-     * A key/value map to store attributes without affecting tagging or recommendations. For example, when synchronizing data between an external system and Amazon Q, you can store an external version identifier as metadata to utilize for determining drift.
+     * A key/value map to store attributes without affecting tagging or recommendations. For example, when synchronizing data between an external system and Amazon Q in Connect, you can store an external version identifier as metadata to utilize for determining drift.
      */
     metadata?: ContentMetadata;
     /**
@@ -2511,7 +2563,7 @@ declare namespace QConnect {
   }
   export interface UpdateKnowledgeBaseTemplateUriRequest {
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     knowledgeBaseId: UuidOrArn;
     /**
@@ -2551,7 +2603,7 @@ declare namespace QConnect {
      */
     isActive?: Boolean;
     /**
-     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     knowledgeBaseId: UuidOrArn;
     /**
@@ -2588,6 +2640,27 @@ declare namespace QConnect {
      * The quick response.
      */
     quickResponse?: QuickResponseData;
+  }
+  export interface UpdateSessionRequest {
+    /**
+     * The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     */
+    assistantId: UuidOrArn;
+    /**
+     * The description.
+     */
+    description?: Description;
+    /**
+     * The identifier of the session. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     */
+    sessionId: UuidOrArn;
+    /**
+     * An object that can be used to specify Tag conditions.
+     */
+    tagFilter?: TagFilter;
+  }
+  export interface UpdateSessionResponse {
+    session?: SessionData;
   }
   export type UploadId = string;
   export type Uri = string;

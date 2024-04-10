@@ -321,7 +321,7 @@ declare namespace WorkSpacesThinClient {
     /**
      * The tag keys and optional values for the resource.
      */
-    tags?: EmbeddedTag;
+    tags?: TagsMap;
   }
   export type DeviceId = string;
   export type DeviceList = DeviceSummary[];
@@ -389,20 +389,6 @@ declare namespace WorkSpacesThinClient {
      * The Amazon Resource Name (ARN) of the device.
      */
     arn?: Arn;
-    /**
-     * The tag keys and optional values for the resource.
-     */
-    tags?: EmbeddedTag;
-  }
-  export interface EmbeddedTag {
-    /**
-     * The Amazon Resource Name (ARN) of a resource to tag.
-     */
-    resourceArn?: String;
-    /**
-     * The internal ID of a resource to tag.
-     */
-    internalId?: String;
   }
   export interface Environment {
     /**
@@ -480,7 +466,7 @@ declare namespace WorkSpacesThinClient {
     /**
      * The tag keys and optional values for the resource.
      */
-    tags?: EmbeddedTag;
+    tags?: TagsMap;
   }
   export type EnvironmentId = string;
   export type EnvironmentList = EnvironmentSummary[];
@@ -543,10 +529,6 @@ declare namespace WorkSpacesThinClient {
      * The Amazon Resource Name (ARN) of the environment.
      */
     arn?: Arn;
-    /**
-     * The tag keys and optional values for the resource.
-     */
-    tags?: EmbeddedTag;
   }
   export interface GetDeviceRequest {
     /**
@@ -733,6 +715,10 @@ declare namespace WorkSpacesThinClient {
      * The Amazon Resource Name (ARN) of the software set.
      */
     arn?: Arn;
+    /**
+     * The tag keys and optional values for the resource.
+     */
+    tags?: TagsMap;
   }
   export type SoftwareSetId = string;
   export type SoftwareSetIdOrEmptyString = string;

@@ -389,10 +389,16 @@
           "shape": "ValidationException"
         },
         {
+          "shape": "AccessDeniedException"
+        },
+        {
           "shape": "ResourceNotFoundException"
         },
         {
-          "shape": "InternalServiceException"
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
         }
       ],
       "documentation": "<p>Returns a list of tags for a resource.</p>",
@@ -418,10 +424,19 @@
           "shape": "ValidationException"
         },
         {
+          "shape": "AccessDeniedException"
+        },
+        {
           "shape": "ResourceNotFoundException"
         },
         {
-          "shape": "InternalServiceException"
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
         }
       ],
       "documentation": "<p>Assigns one or more tags (key-value pairs) to the specified resource.</p>",
@@ -447,10 +462,19 @@
           "shape": "ValidationException"
         },
         {
+          "shape": "AccessDeniedException"
+        },
+        {
           "shape": "ResourceNotFoundException"
         },
         {
-          "shape": "InternalServiceException"
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
         }
       ],
       "documentation": "<p>Removes a tag or tags from a resource.</p>",
@@ -845,7 +869,7 @@
           "documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service key used to encrypt the device.</p>"
         },
         "tags": {
-          "shape": "EmbeddedTag",
+          "shape": "TagsMap",
           "documentation": "<p>The tag keys and optional values for the resource.</p>"
         }
       },
@@ -945,28 +969,9 @@
         "arn": {
           "shape": "Arn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the device.</p>"
-        },
-        "tags": {
-          "shape": "EmbeddedTag",
-          "documentation": "<p>The tag keys and optional values for the resource.</p>"
         }
       },
       "documentation": "<p>Describes a thin client device.</p>"
-    },
-    "EmbeddedTag": {
-      "type": "structure",
-      "members": {
-        "resourceArn": {
-          "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) of a resource to tag.</p>"
-        },
-        "internalId": {
-          "shape": "String",
-          "documentation": "<p>The internal ID of a resource to tag.</p>"
-        }
-      },
-      "documentation": "<p>The resource and internal ID of a resource to tag.</p>",
-      "sensitive": true
     },
     "Environment": {
       "type": "structure",
@@ -1044,7 +1049,7 @@
           "documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service key used to encrypt the environment.</p>"
         },
         "tags": {
-          "shape": "EmbeddedTag",
+          "shape": "TagsMap",
           "documentation": "<p>The tag keys and optional values for the resource.</p>"
         }
       },
@@ -1131,10 +1136,6 @@
         "arn": {
           "shape": "Arn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the environment.</p>"
-        },
-        "tags": {
-          "shape": "EmbeddedTag",
-          "documentation": "<p>The tag keys and optional values for the resource.</p>"
         }
       },
       "documentation": "<p>Describes an environment.</p>"
@@ -1446,6 +1447,10 @@
         "arn": {
           "shape": "Arn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the software set.</p>"
+        },
+        "tags": {
+          "shape": "TagsMap",
+          "documentation": "<p>The tag keys and optional values for the resource.</p>"
         }
       },
       "documentation": "<p>Describes a software set.</p>"

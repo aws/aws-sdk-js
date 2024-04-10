@@ -27,6 +27,14 @@ declare class SupplyChain extends Service {
    * Get status and details of a BillOfMaterialsImportJob.
    */
   getBillOfMaterialsImportJob(callback?: (err: AWSError, data: SupplyChain.Types.GetBillOfMaterialsImportJobResponse) => void): Request<SupplyChain.Types.GetBillOfMaterialsImportJobResponse, AWSError>;
+  /**
+   * Send transactional data events with real-time data for analysis or monitoring.
+   */
+  sendDataIntegrationEvent(params: SupplyChain.Types.SendDataIntegrationEventRequest, callback?: (err: AWSError, data: SupplyChain.Types.SendDataIntegrationEventResponse) => void): Request<SupplyChain.Types.SendDataIntegrationEventResponse, AWSError>;
+  /**
+   * Send transactional data events with real-time data for analysis or monitoring.
+   */
+  sendDataIntegrationEvent(callback?: (err: AWSError, data: SupplyChain.Types.SendDataIntegrationEventResponse) => void): Request<SupplyChain.Types.SendDataIntegrationEventResponse, AWSError>;
 }
 declare namespace SupplyChain {
   export interface BillOfMaterialsImportJob {
@@ -74,6 +82,9 @@ declare namespace SupplyChain {
      */
     jobId: UUID;
   }
+  export type DataIntegrationEventData = string;
+  export type DataIntegrationEventGroupId = string;
+  export type DataIntegrationEventType = "scn.data.forecast"|"scn.data.inventorylevel"|"scn.data.inboundorder"|"scn.data.inboundorderline"|"scn.data.inboundorderlineschedule"|"scn.data.outboundorderline"|"scn.data.outboundshipment"|"scn.data.processheader"|"scn.data.processoperation"|"scn.data.processproduct"|"scn.data.reservation"|"scn.data.shipment"|"scn.data.shipmentstop"|"scn.data.shipmentstoporder"|"scn.data.supplyplan"|string;
   export interface GetBillOfMaterialsImportJobRequest {
     /**
      * The AWS Supply Chain instance identifier.
@@ -90,7 +101,40 @@ declare namespace SupplyChain {
      */
     job: BillOfMaterialsImportJob;
   }
+  export interface SendDataIntegrationEventRequest {
+    /**
+     * The AWS Supply Chain instance identifier.
+     */
+    instanceId: UUID;
+    /**
+     * The data event type.
+     */
+    eventType: DataIntegrationEventType;
+    /**
+     * The data payload of the event.
+     */
+    data: DataIntegrationEventData;
+    /**
+     * Event identifier (for example, orderId for InboundOrder) used for data sharing or partitioning.
+     */
+    eventGroupId: DataIntegrationEventGroupId;
+    /**
+     * The event timestamp (in epoch seconds).
+     */
+    eventTimestamp?: SyntheticTimestamp_epoch_seconds;
+    /**
+     * The idempotent client token.
+     */
+    clientToken?: ClientToken;
+  }
+  export interface SendDataIntegrationEventResponse {
+    /**
+     * The unique event identifier.
+     */
+    eventId: UUID;
+  }
   export type String = string;
+  export type SyntheticTimestamp_epoch_seconds = Date;
   export type UUID = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

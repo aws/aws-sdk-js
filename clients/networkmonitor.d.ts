@@ -12,51 +12,51 @@ declare class NetworkMonitor extends Service {
   constructor(options?: NetworkMonitor.Types.ClientConfiguration)
   config: Config & NetworkMonitor.Types.ClientConfiguration;
   /**
-   * Creates a monitor between a source subnet and destination IP address. Within a monitor you'll create one or more probes that monitor network traffic between your source Amazon Web Services VPC subnets and your destination IP addresses. Each probe then aggregates and sends metrics to Amazon CloudWatch.
+   * Creates a monitor between a source subnet and destination IP address. Within a monitor you'll create one or more probes that monitor network traffic between your source Amazon Web Services VPC subnets and your destination IP addresses. Each probe then aggregates and sends metrics to Amazon CloudWatch. You can also create a monitor with probes using this command. For each probe, you define the following:    source—The subnet IDs where the probes will be created.    destination— The target destination IP address for the probe.    destinationPort—Required only if the protocol is TCP.    protocol—The communication protocol between the source and destination. This will be either TCP or ICMP.    packetSize—The size of the packets. This must be a number between 56 and 8500.   (Optional) tags —Key-value pairs created and assigned to the probe.  
    */
   createMonitor(params: NetworkMonitor.Types.CreateMonitorInput, callback?: (err: AWSError, data: NetworkMonitor.Types.CreateMonitorOutput) => void): Request<NetworkMonitor.Types.CreateMonitorOutput, AWSError>;
   /**
-   * Creates a monitor between a source subnet and destination IP address. Within a monitor you'll create one or more probes that monitor network traffic between your source Amazon Web Services VPC subnets and your destination IP addresses. Each probe then aggregates and sends metrics to Amazon CloudWatch.
+   * Creates a monitor between a source subnet and destination IP address. Within a monitor you'll create one or more probes that monitor network traffic between your source Amazon Web Services VPC subnets and your destination IP addresses. Each probe then aggregates and sends metrics to Amazon CloudWatch. You can also create a monitor with probes using this command. For each probe, you define the following:    source—The subnet IDs where the probes will be created.    destination— The target destination IP address for the probe.    destinationPort—Required only if the protocol is TCP.    protocol—The communication protocol between the source and destination. This will be either TCP or ICMP.    packetSize—The size of the packets. This must be a number between 56 and 8500.   (Optional) tags —Key-value pairs created and assigned to the probe.  
    */
   createMonitor(callback?: (err: AWSError, data: NetworkMonitor.Types.CreateMonitorOutput) => void): Request<NetworkMonitor.Types.CreateMonitorOutput, AWSError>;
   /**
-   * Create a probe within a monitor. Once you create a probe, and it begins monitoring your network traffic, you'll incur billing charges for that probe. 
+   * Create a probe within a monitor. Once you create a probe, and it begins monitoring your network traffic, you'll incur billing charges for that probe. This action requires the monitorName parameter. Run ListMonitors to get a list of monitor names. Note the name of the monitorName you want to create the probe for.
    */
   createProbe(params: NetworkMonitor.Types.CreateProbeInput, callback?: (err: AWSError, data: NetworkMonitor.Types.CreateProbeOutput) => void): Request<NetworkMonitor.Types.CreateProbeOutput, AWSError>;
   /**
-   * Create a probe within a monitor. Once you create a probe, and it begins monitoring your network traffic, you'll incur billing charges for that probe. 
+   * Create a probe within a monitor. Once you create a probe, and it begins monitoring your network traffic, you'll incur billing charges for that probe. This action requires the monitorName parameter. Run ListMonitors to get a list of monitor names. Note the name of the monitorName you want to create the probe for.
    */
   createProbe(callback?: (err: AWSError, data: NetworkMonitor.Types.CreateProbeOutput) => void): Request<NetworkMonitor.Types.CreateProbeOutput, AWSError>;
   /**
-   * Deletes a specified monitor.
+   * Deletes a specified monitor. This action requires the monitorName parameter. Run ListMonitors to get a list of monitor names. 
    */
   deleteMonitor(params: NetworkMonitor.Types.DeleteMonitorInput, callback?: (err: AWSError, data: NetworkMonitor.Types.DeleteMonitorOutput) => void): Request<NetworkMonitor.Types.DeleteMonitorOutput, AWSError>;
   /**
-   * Deletes a specified monitor.
+   * Deletes a specified monitor. This action requires the monitorName parameter. Run ListMonitors to get a list of monitor names. 
    */
   deleteMonitor(callback?: (err: AWSError, data: NetworkMonitor.Types.DeleteMonitorOutput) => void): Request<NetworkMonitor.Types.DeleteMonitorOutput, AWSError>;
   /**
-   * Deletes the specified monitor. Once a probe is deleted you'll no longer incur any billing fees for that probe.
+   * Deletes the specified probe. Once a probe is deleted you'll no longer incur any billing fees for that probe. This action requires both the monitorName and probeId parameters. Run ListMonitors to get a list of monitor names. Run GetMonitor to get a list of probes and probe IDs. You can only delete a single probe at a time using this action. 
    */
   deleteProbe(params: NetworkMonitor.Types.DeleteProbeInput, callback?: (err: AWSError, data: NetworkMonitor.Types.DeleteProbeOutput) => void): Request<NetworkMonitor.Types.DeleteProbeOutput, AWSError>;
   /**
-   * Deletes the specified monitor. Once a probe is deleted you'll no longer incur any billing fees for that probe.
+   * Deletes the specified probe. Once a probe is deleted you'll no longer incur any billing fees for that probe. This action requires both the monitorName and probeId parameters. Run ListMonitors to get a list of monitor names. Run GetMonitor to get a list of probes and probe IDs. You can only delete a single probe at a time using this action. 
    */
   deleteProbe(callback?: (err: AWSError, data: NetworkMonitor.Types.DeleteProbeOutput) => void): Request<NetworkMonitor.Types.DeleteProbeOutput, AWSError>;
   /**
-   * Returns details about a specific monitor.
+   * Returns details about a specific monitor.  This action requires the monitorName parameter. Run ListMonitors to get a list of monitor names. 
    */
   getMonitor(params: NetworkMonitor.Types.GetMonitorInput, callback?: (err: AWSError, data: NetworkMonitor.Types.GetMonitorOutput) => void): Request<NetworkMonitor.Types.GetMonitorOutput, AWSError>;
   /**
-   * Returns details about a specific monitor.
+   * Returns details about a specific monitor.  This action requires the monitorName parameter. Run ListMonitors to get a list of monitor names. 
    */
   getMonitor(callback?: (err: AWSError, data: NetworkMonitor.Types.GetMonitorOutput) => void): Request<NetworkMonitor.Types.GetMonitorOutput, AWSError>;
   /**
-   * Returns the details about a probe. You'll need both the monitorName and probeId. 
+   * Returns the details about a probe. This action requires both the monitorName and probeId parameters. Run ListMonitors to get a list of monitor names. Run GetMonitor to get a list of probes and probe IDs. 
    */
   getProbe(params: NetworkMonitor.Types.GetProbeInput, callback?: (err: AWSError, data: NetworkMonitor.Types.GetProbeOutput) => void): Request<NetworkMonitor.Types.GetProbeOutput, AWSError>;
   /**
-   * Returns the details about a probe. You'll need both the monitorName and probeId. 
+   * Returns the details about a probe. This action requires both the monitorName and probeId parameters. Run ListMonitors to get a list of monitor names. Run GetMonitor to get a list of probes and probe IDs. 
    */
   getProbe(callback?: (err: AWSError, data: NetworkMonitor.Types.GetProbeOutput) => void): Request<NetworkMonitor.Types.GetProbeOutput, AWSError>;
   /**
@@ -92,19 +92,19 @@ declare class NetworkMonitor extends Service {
    */
   untagResource(callback?: (err: AWSError, data: NetworkMonitor.Types.UntagResourceOutput) => void): Request<NetworkMonitor.Types.UntagResourceOutput, AWSError>;
   /**
-   * Updates the aggregationPeriod for a monitor. Monitors support an aggregationPeriod of either 30 or 60 seconds.
+   * Updates the aggregationPeriod for a monitor. Monitors support an aggregationPeriod of either 30 or 60 seconds. This action requires the monitorName and probeId parameter. Run ListMonitors to get a list of monitor names. 
    */
   updateMonitor(params: NetworkMonitor.Types.UpdateMonitorInput, callback?: (err: AWSError, data: NetworkMonitor.Types.UpdateMonitorOutput) => void): Request<NetworkMonitor.Types.UpdateMonitorOutput, AWSError>;
   /**
-   * Updates the aggregationPeriod for a monitor. Monitors support an aggregationPeriod of either 30 or 60 seconds.
+   * Updates the aggregationPeriod for a monitor. Monitors support an aggregationPeriod of either 30 or 60 seconds. This action requires the monitorName and probeId parameter. Run ListMonitors to get a list of monitor names. 
    */
   updateMonitor(callback?: (err: AWSError, data: NetworkMonitor.Types.UpdateMonitorOutput) => void): Request<NetworkMonitor.Types.UpdateMonitorOutput, AWSError>;
   /**
-   * Updates a monitor probe. This action requires both the monitorName and probeId parameters. Run ListMonitors to get a list of monitor names. Run GetMonitor to get a list of probes and probe IDs. 
+   * Updates a monitor probe. This action requires both the monitorName and probeId parameters. Run ListMonitors to get a list of monitor names. Run GetMonitor to get a list of probes and probe IDs.  You can update the following para create a monitor with probes using this command. For each probe, you define the following:    state—The state of the probe.    destination— The target destination IP address for the probe.    destinationPort—Required only if the protocol is TCP.    protocol—The communication protocol between the source and destination. This will be either TCP or ICMP.    packetSize—The size of the packets. This must be a number between 56 and 8500.   (Optional) tags —Key-value pairs created and assigned to the probe.  
    */
   updateProbe(params: NetworkMonitor.Types.UpdateProbeInput, callback?: (err: AWSError, data: NetworkMonitor.Types.UpdateProbeOutput) => void): Request<NetworkMonitor.Types.UpdateProbeOutput, AWSError>;
   /**
-   * Updates a monitor probe. This action requires both the monitorName and probeId parameters. Run ListMonitors to get a list of monitor names. Run GetMonitor to get a list of probes and probe IDs. 
+   * Updates a monitor probe. This action requires both the monitorName and probeId parameters. Run ListMonitors to get a list of monitor names. Run GetMonitor to get a list of probes and probe IDs.  You can update the following para create a monitor with probes using this command. For each probe, you define the following:    state—The state of the probe.    destination— The target destination IP address for the probe.    destinationPort—Required only if the protocol is TCP.    protocol—The communication protocol between the source and destination. This will be either TCP or ICMP.    packetSize—The size of the packets. This must be a number between 56 and 8500.   (Optional) tags —Key-value pairs created and assigned to the probe.  
    */
   updateProbe(callback?: (err: AWSError, data: NetworkMonitor.Types.UpdateProbeOutput) => void): Request<NetworkMonitor.Types.UpdateProbeOutput, AWSError>;
 }
@@ -122,7 +122,7 @@ declare namespace NetworkMonitor {
      */
     probes?: CreateMonitorProbeInputList;
     /**
-     * The time, in seconds, that metrics are aggregated and sent to Amazon CloudWatch. Valid values are either 30 or 60. 
+     * The time, in seconds, that metrics are aggregated and sent to Amazon CloudWatch. Valid values are either 30 or 60. 60 is the default if no period is chosen.
      */
     aggregationPeriod?: AggregationPeriod;
     /**
@@ -148,7 +148,7 @@ declare namespace NetworkMonitor {
      */
     state: MonitorState;
     /**
-     * The number of seconds that metrics are aggregated by and sent to Amazon CloudWatch. This must be either 30 or 60. 
+     * The number of seconds that metrics are aggregated by and sent to Amazon CloudWatch. This will be either 30 or 60. 
      */
     aggregationPeriod?: AggregationPeriod;
     /**
@@ -185,7 +185,7 @@ declare namespace NetworkMonitor {
   export type CreateMonitorProbeInputList = CreateMonitorProbeInput[];
   export interface CreateProbeInput {
     /**
-     * The name of the monitor to associated with the probe. To get a list of available monitors, use ListMonitors.
+     * The name of the monitor to associated with the probe. 
      */
     monitorName: ResourceName;
     /**
@@ -257,7 +257,7 @@ declare namespace NetworkMonitor {
   }
   export interface DeleteMonitorInput {
     /**
-     * The name of the monitor to delete. Use the ListMonitors action to get a list of your current monitors. 
+     * The name of the monitor to delete. 
      */
     monitorName: ResourceName;
   }
@@ -265,11 +265,11 @@ declare namespace NetworkMonitor {
   }
   export interface DeleteProbeInput {
     /**
-     * The name of the monitor to delete. For a list of the available monitors, use the ListMonitors action.
+     * The name of the monitor to delete. 
      */
     monitorName: ResourceName;
     /**
-     * The ID of the probe to delete. Run GetMonitor to get a lst of all probes and probe IDs associated with the monitor.
+     * The ID of the probe to delete. 
      */
     probeId: ProbeId;
   }
@@ -288,11 +288,11 @@ declare namespace NetworkMonitor {
      */
     monitorArn: MonitorArn;
     /**
-     * The name of the monitor. To get a list of the current monitors and their names, use the ListMonitors action.
+     * The name of the monitor. 
      */
     monitorName: ResourceName;
     /**
-     * Returns a list of the state of each monitor. 
+     * Lists the status of the state of each monitor. 
      */
     state: MonitorState;
     /**
@@ -562,7 +562,7 @@ declare namespace NetworkMonitor {
   }
   export interface UpdateMonitorInput {
     /**
-     * The name of the monitor to update. Run ListMonitors to get a list of monitor names.
+     * The name of the monitor to update. 
      */
     monitorName: ResourceName;
     /**
@@ -598,7 +598,7 @@ declare namespace NetworkMonitor {
      */
     monitorName: ResourceName;
     /**
-     * Run GetMonitor to get a list of probes and probe IDs.
+     * The ID of the probe to update.
      */
     probeId: ProbeId;
     /**

@@ -1966,7 +1966,7 @@ declare namespace Connect {
      */
     ActionType: ActionType;
   }
-  export type ActionType = "CREATE_TASK"|"ASSIGN_CONTACT_CATEGORY"|"GENERATE_EVENTBRIDGE_EVENT"|"SEND_NOTIFICATION"|"CREATE_CASE"|"UPDATE_CASE"|"END_ASSOCIATED_TASKS"|string;
+  export type ActionType = "CREATE_TASK"|"ASSIGN_CONTACT_CATEGORY"|"GENERATE_EVENTBRIDGE_EVENT"|"SEND_NOTIFICATION"|"CREATE_CASE"|"UPDATE_CASE"|"END_ASSOCIATED_TASKS"|"SUBMIT_AUTO_EVALUATION"|string;
   export interface ActivateEvaluationFormRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
@@ -3680,7 +3680,7 @@ declare namespace Connect {
      */
     TagRestrictedResources?: TagRestrictedResourceList;
     /**
-     * This API is in preview release for Amazon Connect and is subject to change. A list of third-party applications that the security profile will give access to.
+     * A list of third-party applications that the security profile will give access to.
      */
     Applications?: Applications;
     /**
@@ -5188,6 +5188,7 @@ declare namespace Connect {
     ScoringStrategy?: EvaluationFormScoringStrategy;
   }
   export type EvaluationFormDescription = string;
+  export type EvaluationFormId = string;
   export interface EvaluationFormItem {
     /**
      * The information of the section.
@@ -7579,7 +7580,7 @@ declare namespace Connect {
   }
   export interface ListSecurityProfileApplicationsResponse {
     /**
-     * This API is in preview release for Amazon Connect and is subject to change. A list of the third-party application's metadata.
+     * A list of the third-party application's metadata.
      */
     Applications?: Applications;
     /**
@@ -9294,6 +9295,10 @@ declare namespace Connect {
      * Information about the end associated tasks action. Supported only for TriggerEventSource values: OnCaseUpdate.
      */
     EndAssociatedTasksAction?: EndAssociatedTasksActionDefinition;
+    /**
+     * Information about the submit automated evaluation action.
+     */
+    SubmitAutoEvaluationAction?: SubmitAutoEvaluationActionDefinition;
   }
   export type RuleActions = RuleAction[];
   export type RuleFunction = string;
@@ -10500,6 +10505,12 @@ declare namespace Connect {
     Value?: ReferenceValue;
   }
   export type Subject = string;
+  export interface SubmitAutoEvaluationActionDefinition {
+    /**
+     * The identifier of the auto-evaluation enabled form.
+     */
+    EvaluationFormId: EvaluationFormId;
+  }
   export interface SubmitContactEvaluationRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
@@ -11639,7 +11650,7 @@ declare namespace Connect {
      */
     TagRestrictedResources?: TagRestrictedResourceList;
     /**
-     * This API is in preview release for Amazon Connect and is subject to change. A list of the third-party application's metadata.
+     * A list of the third-party application's metadata.
      */
     Applications?: Applications;
     /**

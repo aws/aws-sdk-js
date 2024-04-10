@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1596.0-->
+<!--LATEST=2.1597.0-->
 <!--ENTRYINSERT-->
+
+## 2.1597.0
+* feature: CleanRooms: AWS Clean Rooms Differential Privacy is now fully available. Differential privacy protects against user-identification attempts.
+* feature: Connect: This release adds new Submit Auto Evaluation Action for Amazon Connect Rules.
+* feature: QConnect: This release adds a new QiC public API updateSession and updates an existing QiC public API createSession
+* feature: Rekognition: Added support for ContentType to content moderation detections.
+* feature: SupplyChain: This release includes API SendDataIntegrationEvent for AWS Supply Chain
+* feature: WorkSpacesThinClient: Adding tags field to SoftwareSet. Removing tags fields from Summary objects. Changing the list of exceptions in tagging APIs. Fixing an issue where the SDK returns empty tags in Get APIs.
 
 ## 2.1596.0
 * feature: CodeBuild: Add new webhook filter types for GitHub webhooks

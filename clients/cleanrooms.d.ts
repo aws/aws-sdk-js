@@ -746,6 +746,10 @@ declare namespace CleanRooms {
      * The parameters of the analysis template.
      */
     analysisParameters?: AnalysisParameterList;
+    /**
+     * Information about the validations performed on the analysis template.
+     */
+    validations?: AnalysisTemplateValidationStatusDetailList;
   }
   export type AnalysisTemplateArn = string;
   export type AnalysisTemplateArnList = AnalysisTemplateArn[];
@@ -795,6 +799,30 @@ declare namespace CleanRooms {
   }
   export type AnalysisTemplateSummaryList = AnalysisTemplateSummary[];
   export type AnalysisTemplateText = string;
+  export type AnalysisTemplateValidationStatus = "VALID"|"INVALID"|"UNABLE_TO_VALIDATE"|string;
+  export interface AnalysisTemplateValidationStatusDetail {
+    /**
+     * The type of validation that was performed.
+     */
+    type: AnalysisTemplateValidationType;
+    /**
+     * The status of the validation.
+     */
+    status: AnalysisTemplateValidationStatus;
+    /**
+     * The reasons for the validation results.
+     */
+    reasons?: AnalysisTemplateValidationStatusReasonList;
+  }
+  export type AnalysisTemplateValidationStatusDetailList = AnalysisTemplateValidationStatusDetail[];
+  export interface AnalysisTemplateValidationStatusReason {
+    /**
+     * The validation message.
+     */
+    message: String;
+  }
+  export type AnalysisTemplateValidationStatusReasonList = AnalysisTemplateValidationStatusReason[];
+  export type AnalysisTemplateValidationType = "DIFFERENTIAL_PRIVACY"|string;
   export interface BatchGetCollaborationAnalysisTemplateError {
     /**
      * The Amazon Resource Name (ARN) of the analysis template.
@@ -1013,6 +1041,10 @@ declare namespace CleanRooms {
      * The analysis parameters that have been specified in the analysis template.
      */
     analysisParameters?: AnalysisParameterList;
+    /**
+     * The validations that were performed.
+     */
+    validations?: AnalysisTemplateValidationStatusDetailList;
   }
   export type CollaborationAnalysisTemplateList = CollaborationAnalysisTemplate[];
   export interface CollaborationAnalysisTemplateSummary {
