@@ -281,8 +281,48 @@ declare namespace Batch {
      * A short, human-readable string to provide additional details for the current status of the job attempt.
      */
     statusReason?: String;
+    /**
+     * The properties for a task definition that describes the container and volume definitions of an Amazon ECS task.
+     */
+    taskProperties?: ListAttemptEcsTaskDetails;
   }
   export type AttemptDetails = AttemptDetail[];
+  export interface AttemptEcsTaskDetails {
+    /**
+     * The Amazon Resource Name (ARN) of the container instance that hosts the task.
+     */
+    containerInstanceArn?: String;
+    /**
+     * The ARN of the Amazon ECS task.
+     */
+    taskArn?: String;
+    /**
+     * A list of containers that are included in the taskProperties list.
+     */
+    containers?: ListAttemptTaskContainerDetails;
+  }
+  export interface AttemptTaskContainerDetails {
+    /**
+     * The exit code for the container’s attempt. A non-zero exit code is considered failed.
+     */
+    exitCode?: Integer;
+    /**
+     * The name of a container.
+     */
+    name?: String;
+    /**
+     * A short (255 max characters) string that's easy to understand and provides additional details for a running or stopped container.
+     */
+    reason?: String;
+    /**
+     * The name of the Amazon CloudWatch Logs log stream that's associated with the container. The log group for Batch jobs is /aws/batch/job. Each container attempt receives a log stream name when they reach the RUNNING status.
+     */
+    logStreamName?: String;
+    /**
+     * The network interfaces that are associated with the job attempt.
+     */
+    networkInterfaces?: NetworkInterfaceList;
+  }
   export type Boolean = boolean;
   export type CEState = "ENABLED"|"DISABLED"|string;
   export type CEStatus = "CREATING"|"UPDATING"|"DELETING"|"DELETED"|"VALID"|"INVALID"|string;
@@ -1186,6 +1226,10 @@ declare namespace Batch {
   }
   export interface EksAttemptContainerDetail {
     /**
+     * The name of a container.
+     */
+    name?: String;
+    /**
      * The exit code returned for the job attempt. A non-zero exit code is considered failed.
      */
     exitCode?: Integer;
@@ -1449,7 +1493,7 @@ declare namespace Batch {
      */
     dnsPolicy?: String;
     /**
-     * References a Kubernetes secret resource. This object must start and end with an alphanumeric character, is required to be lowercase, can include periods (.) and hyphens (-), and can't contain more than 253 characters.  ImagePullSecret$name is required when this object is used.
+     * References a Kubernetes secret resource. It holds a list of secrets. These secrets help to gain access to pull an images from a private registry.  ImagePullSecret$name is required when this object is used.
      */
     imagePullSecrets?: ImagePullSecrets;
     /**
@@ -1487,7 +1531,7 @@ declare namespace Batch {
      */
     dnsPolicy?: String;
     /**
-     * Displays the reference pointer to the Kubernetes secret resource.
+     * Displays the reference pointer to the Kubernetes secret resource. These secrets help to gain access to pull an images from a private registry.
      */
     imagePullSecrets?: ImagePullSecrets;
     /**
@@ -1898,7 +1942,7 @@ declare namespace Batch {
      */
     reason: String;
     /**
-     * The state of the job needed to trigger the action. The only supported value is "RUNNABLE".
+     * The state of the job needed to trigger the action. The only supported value is RUNNABLE.
      */
     state: JobStateTimeLimitActionsState;
     /**
@@ -1906,7 +1950,7 @@ declare namespace Batch {
      */
     maxTimeSeconds: Integer;
     /**
-     * The action to take when a job is at the head of the job queue in the specified state for the specified period of time. The only supported value is "CANCEL", which will cancel the job.
+     * The action to take when a job is at the head of the job queue in the specified state for the specified period of time. The only supported value is CANCEL, which will cancel the job.
      */
     action: JobStateTimeLimitActionsAction;
   }
@@ -2032,6 +2076,8 @@ declare namespace Batch {
      */
     swappiness?: Integer;
   }
+  export type ListAttemptEcsTaskDetails = AttemptEcsTaskDetails[];
+  export type ListAttemptTaskContainerDetails = AttemptTaskContainerDetails[];
   export type ListEcsTaskDetails = EcsTaskDetails[];
   export type ListEcsTaskProperties = EcsTaskProperties[];
   export type ListJobsFilterList = KeyValuesPair[];

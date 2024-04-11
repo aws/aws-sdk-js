@@ -397,9 +397,13 @@ declare namespace CloudWatch {
      */
     Configuration?: AnomalyDetectorConfiguration;
     /**
-     * The current status of the anomaly detector's training. The possible values are TRAINED | PENDING_TRAINING | TRAINED_INSUFFICIENT_DATA 
+     * The current status of the anomaly detector's training.
      */
     StateValue?: AnomalyDetectorStateValue;
+    /**
+     * This object includes parameters that you can use to provide information about your metric to CloudWatch to help it build more accurate anomaly detection models. Currently, it includes the PeriodicSpikes parameter.
+     */
+    MetricCharacteristics?: MetricCharacteristics;
     /**
      * The CloudWatch metric and statistic for this anomaly detector.
      */
@@ -1567,6 +1571,12 @@ declare namespace CloudWatch {
     StateTransitionedTimestamp?: Timestamp;
   }
   export type MetricAlarms = MetricAlarm[];
+  export interface MetricCharacteristics {
+    /**
+     * Set this parameter to true if values for this metric consistently include spikes that should not be considered to be anomalies. With this set to true, CloudWatch will expect to see spikes that occurred consistently during the model training period, and won't flag future similar spikes as anomalies.
+     */
+    PeriodicSpikes?: PeriodicSpikes;
+  }
   export type MetricData = MetricDatum[];
   export type MetricDataQueries = MetricDataQuery[];
   export interface MetricDataQuery {
@@ -1790,6 +1800,7 @@ declare namespace CloudWatch {
     FailureDescription?: FailureDescription;
   }
   export type Period = number;
+  export type PeriodicSpikes = boolean;
   export interface PutAnomalyDetectorInput {
     /**
      * The namespace of the metric to create the anomaly detection model for.
@@ -1811,6 +1822,10 @@ declare namespace CloudWatch {
      * The configuration specifies details about how the anomaly detection model is to be trained, including time ranges to exclude when training and updating the model. You can specify as many as 10 time ranges. The configuration can also include the time zone to use for the metric.
      */
     Configuration?: AnomalyDetectorConfiguration;
+    /**
+     * Use this object to include parameters to provide information about your metric to CloudWatch to help it build more accurate anomaly detection models. Currently, it includes the PeriodicSpikes parameter.
+     */
+    MetricCharacteristics?: MetricCharacteristics;
     /**
      * A single metric anomaly detector to be created. When using SingleMetricAnomalyDetector, you cannot include the following parameters in the same operation:    Dimensions     MetricName     Namespace     Stat    the MetricMathAnomalyDetector parameters of PutAnomalyDetectorInput    Instead, specify the single metric anomaly detector attributes as part of the property SingleMetricAnomalyDetector.
      */

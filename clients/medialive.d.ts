@@ -534,6 +534,222 @@ declare class MediaLive extends Service {
    */
   restartChannelPipelines(callback?: (err: AWSError, data: MediaLive.Types.RestartChannelPipelinesResponse) => void): Request<MediaLive.Types.RestartChannelPipelinesResponse, AWSError>;
   /**
+   * Creates a cloudwatch alarm template to dynamically generate cloudwatch metric alarms on targeted resource types.
+   */
+  createCloudWatchAlarmTemplate(params: MediaLive.Types.CreateCloudWatchAlarmTemplateRequest, callback?: (err: AWSError, data: MediaLive.Types.CreateCloudWatchAlarmTemplateResponse) => void): Request<MediaLive.Types.CreateCloudWatchAlarmTemplateResponse, AWSError>;
+  /**
+   * Creates a cloudwatch alarm template to dynamically generate cloudwatch metric alarms on targeted resource types.
+   */
+  createCloudWatchAlarmTemplate(callback?: (err: AWSError, data: MediaLive.Types.CreateCloudWatchAlarmTemplateResponse) => void): Request<MediaLive.Types.CreateCloudWatchAlarmTemplateResponse, AWSError>;
+  /**
+   * Creates a cloudwatch alarm template group to group your cloudwatch alarm templates and to attach to signal maps for dynamically creating alarms.
+   */
+  createCloudWatchAlarmTemplateGroup(params: MediaLive.Types.CreateCloudWatchAlarmTemplateGroupRequest, callback?: (err: AWSError, data: MediaLive.Types.CreateCloudWatchAlarmTemplateGroupResponse) => void): Request<MediaLive.Types.CreateCloudWatchAlarmTemplateGroupResponse, AWSError>;
+  /**
+   * Creates a cloudwatch alarm template group to group your cloudwatch alarm templates and to attach to signal maps for dynamically creating alarms.
+   */
+  createCloudWatchAlarmTemplateGroup(callback?: (err: AWSError, data: MediaLive.Types.CreateCloudWatchAlarmTemplateGroupResponse) => void): Request<MediaLive.Types.CreateCloudWatchAlarmTemplateGroupResponse, AWSError>;
+  /**
+   * Creates an eventbridge rule template to monitor events and send notifications to your targeted resources.
+   */
+  createEventBridgeRuleTemplate(params: MediaLive.Types.CreateEventBridgeRuleTemplateRequest, callback?: (err: AWSError, data: MediaLive.Types.CreateEventBridgeRuleTemplateResponse) => void): Request<MediaLive.Types.CreateEventBridgeRuleTemplateResponse, AWSError>;
+  /**
+   * Creates an eventbridge rule template to monitor events and send notifications to your targeted resources.
+   */
+  createEventBridgeRuleTemplate(callback?: (err: AWSError, data: MediaLive.Types.CreateEventBridgeRuleTemplateResponse) => void): Request<MediaLive.Types.CreateEventBridgeRuleTemplateResponse, AWSError>;
+  /**
+   * Creates an eventbridge rule template group to group your eventbridge rule templates and to attach to signal maps for dynamically creating notification rules.
+   */
+  createEventBridgeRuleTemplateGroup(params: MediaLive.Types.CreateEventBridgeRuleTemplateGroupRequest, callback?: (err: AWSError, data: MediaLive.Types.CreateEventBridgeRuleTemplateGroupResponse) => void): Request<MediaLive.Types.CreateEventBridgeRuleTemplateGroupResponse, AWSError>;
+  /**
+   * Creates an eventbridge rule template group to group your eventbridge rule templates and to attach to signal maps for dynamically creating notification rules.
+   */
+  createEventBridgeRuleTemplateGroup(callback?: (err: AWSError, data: MediaLive.Types.CreateEventBridgeRuleTemplateGroupResponse) => void): Request<MediaLive.Types.CreateEventBridgeRuleTemplateGroupResponse, AWSError>;
+  /**
+   * Initiates the creation of a new signal map. Will discover a new mediaResourceMap based on the provided discoveryEntryPointArn.
+   */
+  createSignalMap(params: MediaLive.Types.CreateSignalMapRequest, callback?: (err: AWSError, data: MediaLive.Types.CreateSignalMapResponse) => void): Request<MediaLive.Types.CreateSignalMapResponse, AWSError>;
+  /**
+   * Initiates the creation of a new signal map. Will discover a new mediaResourceMap based on the provided discoveryEntryPointArn.
+   */
+  createSignalMap(callback?: (err: AWSError, data: MediaLive.Types.CreateSignalMapResponse) => void): Request<MediaLive.Types.CreateSignalMapResponse, AWSError>;
+  /**
+   * Deletes a cloudwatch alarm template.
+   */
+  deleteCloudWatchAlarmTemplate(params: MediaLive.Types.DeleteCloudWatchAlarmTemplateRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a cloudwatch alarm template.
+   */
+  deleteCloudWatchAlarmTemplate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a cloudwatch alarm template group. You must detach this group from all signal maps and ensure its existing templates are moved to another group or deleted.
+   */
+  deleteCloudWatchAlarmTemplateGroup(params: MediaLive.Types.DeleteCloudWatchAlarmTemplateGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a cloudwatch alarm template group. You must detach this group from all signal maps and ensure its existing templates are moved to another group or deleted.
+   */
+  deleteCloudWatchAlarmTemplateGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an eventbridge rule template.
+   */
+  deleteEventBridgeRuleTemplate(params: MediaLive.Types.DeleteEventBridgeRuleTemplateRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an eventbridge rule template.
+   */
+  deleteEventBridgeRuleTemplate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an eventbridge rule template group. You must detach this group from all signal maps and ensure its existing templates are moved to another group or deleted.
+   */
+  deleteEventBridgeRuleTemplateGroup(params: MediaLive.Types.DeleteEventBridgeRuleTemplateGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an eventbridge rule template group. You must detach this group from all signal maps and ensure its existing templates are moved to another group or deleted.
+   */
+  deleteEventBridgeRuleTemplateGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified signal map.
+   */
+  deleteSignalMap(params: MediaLive.Types.DeleteSignalMapRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified signal map.
+   */
+  deleteSignalMap(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Retrieves the specified cloudwatch alarm template.
+   */
+  getCloudWatchAlarmTemplate(params: MediaLive.Types.GetCloudWatchAlarmTemplateRequest, callback?: (err: AWSError, data: MediaLive.Types.GetCloudWatchAlarmTemplateResponse) => void): Request<MediaLive.Types.GetCloudWatchAlarmTemplateResponse, AWSError>;
+  /**
+   * Retrieves the specified cloudwatch alarm template.
+   */
+  getCloudWatchAlarmTemplate(callback?: (err: AWSError, data: MediaLive.Types.GetCloudWatchAlarmTemplateResponse) => void): Request<MediaLive.Types.GetCloudWatchAlarmTemplateResponse, AWSError>;
+  /**
+   * Retrieves the specified cloudwatch alarm template group.
+   */
+  getCloudWatchAlarmTemplateGroup(params: MediaLive.Types.GetCloudWatchAlarmTemplateGroupRequest, callback?: (err: AWSError, data: MediaLive.Types.GetCloudWatchAlarmTemplateGroupResponse) => void): Request<MediaLive.Types.GetCloudWatchAlarmTemplateGroupResponse, AWSError>;
+  /**
+   * Retrieves the specified cloudwatch alarm template group.
+   */
+  getCloudWatchAlarmTemplateGroup(callback?: (err: AWSError, data: MediaLive.Types.GetCloudWatchAlarmTemplateGroupResponse) => void): Request<MediaLive.Types.GetCloudWatchAlarmTemplateGroupResponse, AWSError>;
+  /**
+   * Retrieves the specified eventbridge rule template.
+   */
+  getEventBridgeRuleTemplate(params: MediaLive.Types.GetEventBridgeRuleTemplateRequest, callback?: (err: AWSError, data: MediaLive.Types.GetEventBridgeRuleTemplateResponse) => void): Request<MediaLive.Types.GetEventBridgeRuleTemplateResponse, AWSError>;
+  /**
+   * Retrieves the specified eventbridge rule template.
+   */
+  getEventBridgeRuleTemplate(callback?: (err: AWSError, data: MediaLive.Types.GetEventBridgeRuleTemplateResponse) => void): Request<MediaLive.Types.GetEventBridgeRuleTemplateResponse, AWSError>;
+  /**
+   * Retrieves the specified eventbridge rule template group.
+   */
+  getEventBridgeRuleTemplateGroup(params: MediaLive.Types.GetEventBridgeRuleTemplateGroupRequest, callback?: (err: AWSError, data: MediaLive.Types.GetEventBridgeRuleTemplateGroupResponse) => void): Request<MediaLive.Types.GetEventBridgeRuleTemplateGroupResponse, AWSError>;
+  /**
+   * Retrieves the specified eventbridge rule template group.
+   */
+  getEventBridgeRuleTemplateGroup(callback?: (err: AWSError, data: MediaLive.Types.GetEventBridgeRuleTemplateGroupResponse) => void): Request<MediaLive.Types.GetEventBridgeRuleTemplateGroupResponse, AWSError>;
+  /**
+   * Retrieves the specified signal map.
+   */
+  getSignalMap(params: MediaLive.Types.GetSignalMapRequest, callback?: (err: AWSError, data: MediaLive.Types.GetSignalMapResponse) => void): Request<MediaLive.Types.GetSignalMapResponse, AWSError>;
+  /**
+   * Retrieves the specified signal map.
+   */
+  getSignalMap(callback?: (err: AWSError, data: MediaLive.Types.GetSignalMapResponse) => void): Request<MediaLive.Types.GetSignalMapResponse, AWSError>;
+  /**
+   * Lists cloudwatch alarm template groups.
+   */
+  listCloudWatchAlarmTemplateGroups(params: MediaLive.Types.ListCloudWatchAlarmTemplateGroupsRequest, callback?: (err: AWSError, data: MediaLive.Types.ListCloudWatchAlarmTemplateGroupsResponse) => void): Request<MediaLive.Types.ListCloudWatchAlarmTemplateGroupsResponse, AWSError>;
+  /**
+   * Lists cloudwatch alarm template groups.
+   */
+  listCloudWatchAlarmTemplateGroups(callback?: (err: AWSError, data: MediaLive.Types.ListCloudWatchAlarmTemplateGroupsResponse) => void): Request<MediaLive.Types.ListCloudWatchAlarmTemplateGroupsResponse, AWSError>;
+  /**
+   * Lists cloudwatch alarm templates.
+   */
+  listCloudWatchAlarmTemplates(params: MediaLive.Types.ListCloudWatchAlarmTemplatesRequest, callback?: (err: AWSError, data: MediaLive.Types.ListCloudWatchAlarmTemplatesResponse) => void): Request<MediaLive.Types.ListCloudWatchAlarmTemplatesResponse, AWSError>;
+  /**
+   * Lists cloudwatch alarm templates.
+   */
+  listCloudWatchAlarmTemplates(callback?: (err: AWSError, data: MediaLive.Types.ListCloudWatchAlarmTemplatesResponse) => void): Request<MediaLive.Types.ListCloudWatchAlarmTemplatesResponse, AWSError>;
+  /**
+   * Lists eventbridge rule template groups.
+   */
+  listEventBridgeRuleTemplateGroups(params: MediaLive.Types.ListEventBridgeRuleTemplateGroupsRequest, callback?: (err: AWSError, data: MediaLive.Types.ListEventBridgeRuleTemplateGroupsResponse) => void): Request<MediaLive.Types.ListEventBridgeRuleTemplateGroupsResponse, AWSError>;
+  /**
+   * Lists eventbridge rule template groups.
+   */
+  listEventBridgeRuleTemplateGroups(callback?: (err: AWSError, data: MediaLive.Types.ListEventBridgeRuleTemplateGroupsResponse) => void): Request<MediaLive.Types.ListEventBridgeRuleTemplateGroupsResponse, AWSError>;
+  /**
+   * Lists eventbridge rule templates.
+   */
+  listEventBridgeRuleTemplates(params: MediaLive.Types.ListEventBridgeRuleTemplatesRequest, callback?: (err: AWSError, data: MediaLive.Types.ListEventBridgeRuleTemplatesResponse) => void): Request<MediaLive.Types.ListEventBridgeRuleTemplatesResponse, AWSError>;
+  /**
+   * Lists eventbridge rule templates.
+   */
+  listEventBridgeRuleTemplates(callback?: (err: AWSError, data: MediaLive.Types.ListEventBridgeRuleTemplatesResponse) => void): Request<MediaLive.Types.ListEventBridgeRuleTemplatesResponse, AWSError>;
+  /**
+   * Lists signal maps.
+   */
+  listSignalMaps(params: MediaLive.Types.ListSignalMapsRequest, callback?: (err: AWSError, data: MediaLive.Types.ListSignalMapsResponse) => void): Request<MediaLive.Types.ListSignalMapsResponse, AWSError>;
+  /**
+   * Lists signal maps.
+   */
+  listSignalMaps(callback?: (err: AWSError, data: MediaLive.Types.ListSignalMapsResponse) => void): Request<MediaLive.Types.ListSignalMapsResponse, AWSError>;
+  /**
+   * Initiates a deployment to delete the monitor of the specified signal map.
+   */
+  startDeleteMonitorDeployment(params: MediaLive.Types.StartDeleteMonitorDeploymentRequest, callback?: (err: AWSError, data: MediaLive.Types.StartDeleteMonitorDeploymentResponse) => void): Request<MediaLive.Types.StartDeleteMonitorDeploymentResponse, AWSError>;
+  /**
+   * Initiates a deployment to delete the monitor of the specified signal map.
+   */
+  startDeleteMonitorDeployment(callback?: (err: AWSError, data: MediaLive.Types.StartDeleteMonitorDeploymentResponse) => void): Request<MediaLive.Types.StartDeleteMonitorDeploymentResponse, AWSError>;
+  /**
+   * Initiates a deployment to deploy the latest monitor of the specified signal map.
+   */
+  startMonitorDeployment(params: MediaLive.Types.StartMonitorDeploymentRequest, callback?: (err: AWSError, data: MediaLive.Types.StartMonitorDeploymentResponse) => void): Request<MediaLive.Types.StartMonitorDeploymentResponse, AWSError>;
+  /**
+   * Initiates a deployment to deploy the latest monitor of the specified signal map.
+   */
+  startMonitorDeployment(callback?: (err: AWSError, data: MediaLive.Types.StartMonitorDeploymentResponse) => void): Request<MediaLive.Types.StartMonitorDeploymentResponse, AWSError>;
+  /**
+   * Initiates an update for the specified signal map. Will discover a new signal map if a changed discoveryEntryPointArn is provided.
+   */
+  startUpdateSignalMap(params: MediaLive.Types.StartUpdateSignalMapRequest, callback?: (err: AWSError, data: MediaLive.Types.StartUpdateSignalMapResponse) => void): Request<MediaLive.Types.StartUpdateSignalMapResponse, AWSError>;
+  /**
+   * Initiates an update for the specified signal map. Will discover a new signal map if a changed discoveryEntryPointArn is provided.
+   */
+  startUpdateSignalMap(callback?: (err: AWSError, data: MediaLive.Types.StartUpdateSignalMapResponse) => void): Request<MediaLive.Types.StartUpdateSignalMapResponse, AWSError>;
+  /**
+   * Updates the specified cloudwatch alarm template.
+   */
+  updateCloudWatchAlarmTemplate(params: MediaLive.Types.UpdateCloudWatchAlarmTemplateRequest, callback?: (err: AWSError, data: MediaLive.Types.UpdateCloudWatchAlarmTemplateResponse) => void): Request<MediaLive.Types.UpdateCloudWatchAlarmTemplateResponse, AWSError>;
+  /**
+   * Updates the specified cloudwatch alarm template.
+   */
+  updateCloudWatchAlarmTemplate(callback?: (err: AWSError, data: MediaLive.Types.UpdateCloudWatchAlarmTemplateResponse) => void): Request<MediaLive.Types.UpdateCloudWatchAlarmTemplateResponse, AWSError>;
+  /**
+   * Updates the specified cloudwatch alarm template group.
+   */
+  updateCloudWatchAlarmTemplateGroup(params: MediaLive.Types.UpdateCloudWatchAlarmTemplateGroupRequest, callback?: (err: AWSError, data: MediaLive.Types.UpdateCloudWatchAlarmTemplateGroupResponse) => void): Request<MediaLive.Types.UpdateCloudWatchAlarmTemplateGroupResponse, AWSError>;
+  /**
+   * Updates the specified cloudwatch alarm template group.
+   */
+  updateCloudWatchAlarmTemplateGroup(callback?: (err: AWSError, data: MediaLive.Types.UpdateCloudWatchAlarmTemplateGroupResponse) => void): Request<MediaLive.Types.UpdateCloudWatchAlarmTemplateGroupResponse, AWSError>;
+  /**
+   * Updates the specified eventbridge rule template.
+   */
+  updateEventBridgeRuleTemplate(params: MediaLive.Types.UpdateEventBridgeRuleTemplateRequest, callback?: (err: AWSError, data: MediaLive.Types.UpdateEventBridgeRuleTemplateResponse) => void): Request<MediaLive.Types.UpdateEventBridgeRuleTemplateResponse, AWSError>;
+  /**
+   * Updates the specified eventbridge rule template.
+   */
+  updateEventBridgeRuleTemplate(callback?: (err: AWSError, data: MediaLive.Types.UpdateEventBridgeRuleTemplateResponse) => void): Request<MediaLive.Types.UpdateEventBridgeRuleTemplateResponse, AWSError>;
+  /**
+   * Updates the specified eventbridge rule template group.
+   */
+  updateEventBridgeRuleTemplateGroup(params: MediaLive.Types.UpdateEventBridgeRuleTemplateGroupRequest, callback?: (err: AWSError, data: MediaLive.Types.UpdateEventBridgeRuleTemplateGroupResponse) => void): Request<MediaLive.Types.UpdateEventBridgeRuleTemplateGroupResponse, AWSError>;
+  /**
+   * Updates the specified eventbridge rule template group.
+   */
+  updateEventBridgeRuleTemplateGroup(callback?: (err: AWSError, data: MediaLive.Types.UpdateEventBridgeRuleTemplateGroupResponse) => void): Request<MediaLive.Types.UpdateEventBridgeRuleTemplateGroupResponse, AWSError>;
+  /**
    * Waits for the channelCreated state by periodically calling the underlying MediaLive.describeChanneloperation every 3 seconds (at most 5 times). Wait until a channel has been created
    */
   waitFor(state: "channelCreated", params: MediaLive.Types.DescribeChannelRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MediaLive.Types.DescribeChannelResponse) => void): Request<MediaLive.Types.DescribeChannelResponse, AWSError>;
@@ -621,6 +837,38 @@ declare class MediaLive extends Service {
    * Waits for the multiplexDeleted state by periodically calling the underlying MediaLive.describeMultiplexoperation every 5 seconds (at most 20 times). Wait until a multiplex has been deleted
    */
   waitFor(state: "multiplexDeleted", callback?: (err: AWSError, data: MediaLive.Types.DescribeMultiplexResponse) => void): Request<MediaLive.Types.DescribeMultiplexResponse, AWSError>;
+  /**
+   * Waits for the signalMapCreated state by periodically calling the underlying MediaLive.getSignalMapoperation every 5 seconds (at most 60 times). Wait until a signal map has been created
+   */
+  waitFor(state: "signalMapCreated", params: MediaLive.Types.GetSignalMapRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MediaLive.Types.GetSignalMapResponse) => void): Request<MediaLive.Types.GetSignalMapResponse, AWSError>;
+  /**
+   * Waits for the signalMapCreated state by periodically calling the underlying MediaLive.getSignalMapoperation every 5 seconds (at most 60 times). Wait until a signal map has been created
+   */
+  waitFor(state: "signalMapCreated", callback?: (err: AWSError, data: MediaLive.Types.GetSignalMapResponse) => void): Request<MediaLive.Types.GetSignalMapResponse, AWSError>;
+  /**
+   * Waits for the signalMapMonitorDeleted state by periodically calling the underlying MediaLive.getSignalMapoperation every 5 seconds (at most 120 times). Wait until a signal map's monitor has been deleted
+   */
+  waitFor(state: "signalMapMonitorDeleted", params: MediaLive.Types.GetSignalMapRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MediaLive.Types.GetSignalMapResponse) => void): Request<MediaLive.Types.GetSignalMapResponse, AWSError>;
+  /**
+   * Waits for the signalMapMonitorDeleted state by periodically calling the underlying MediaLive.getSignalMapoperation every 5 seconds (at most 120 times). Wait until a signal map's monitor has been deleted
+   */
+  waitFor(state: "signalMapMonitorDeleted", callback?: (err: AWSError, data: MediaLive.Types.GetSignalMapResponse) => void): Request<MediaLive.Types.GetSignalMapResponse, AWSError>;
+  /**
+   * Waits for the signalMapMonitorDeployed state by periodically calling the underlying MediaLive.getSignalMapoperation every 5 seconds (at most 120 times). Wait until a signal map's monitor has been deployed
+   */
+  waitFor(state: "signalMapMonitorDeployed", params: MediaLive.Types.GetSignalMapRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MediaLive.Types.GetSignalMapResponse) => void): Request<MediaLive.Types.GetSignalMapResponse, AWSError>;
+  /**
+   * Waits for the signalMapMonitorDeployed state by periodically calling the underlying MediaLive.getSignalMapoperation every 5 seconds (at most 120 times). Wait until a signal map's monitor has been deployed
+   */
+  waitFor(state: "signalMapMonitorDeployed", callback?: (err: AWSError, data: MediaLive.Types.GetSignalMapResponse) => void): Request<MediaLive.Types.GetSignalMapResponse, AWSError>;
+  /**
+   * Waits for the signalMapUpdated state by periodically calling the underlying MediaLive.getSignalMapoperation every 5 seconds (at most 60 times). Wait until a signal map has been updated
+   */
+  waitFor(state: "signalMapUpdated", params: MediaLive.Types.GetSignalMapRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MediaLive.Types.GetSignalMapResponse) => void): Request<MediaLive.Types.GetSignalMapResponse, AWSError>;
+  /**
+   * Waits for the signalMapUpdated state by periodically calling the underlying MediaLive.getSignalMapoperation every 5 seconds (at most 60 times). Wait until a signal map has been updated
+   */
+  waitFor(state: "signalMapUpdated", callback?: (err: AWSError, data: MediaLive.Types.GetSignalMapResponse) => void): Request<MediaLive.Types.GetSignalMapResponse, AWSError>;
 }
 declare namespace MediaLive {
   export type AacCodingMode = "AD_RECEIVER_MIX"|"CODING_MODE_1_0"|"CODING_MODE_1_1"|"CODING_MODE_2_0"|"CODING_MODE_5_1"|string;
@@ -7497,6 +7745,7 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
     StyleControl?: WebvttDestinationStyleControl;
   }
   export type WebvttDestinationStyleControl = "NO_STYLE_DATA"|"PASSTHROUGH"|string;
+  export type __boolean = boolean;
   export type __double = number;
   export type __doubleMin0 = number;
   export type __doubleMin0Max1 = number;
@@ -7792,6 +8041,1176 @@ one destination per packager.
   export type __listOfDashRoleAudio = DashRoleAudio[];
   export type __listOfDashRoleCaption = DashRoleCaption[];
   export type Scte35Type = "NONE"|"SCTE_35_WITHOUT_SEGMENTATION"|string;
+  export type CloudWatchAlarmTemplateComparisonOperator = "GreaterThanOrEqualToThreshold"|"GreaterThanThreshold"|"LessThanThreshold"|"LessThanOrEqualToThreshold"|string;
+  export interface CloudWatchAlarmTemplateGroupSummary {
+    /**
+     * A cloudwatch alarm template group's ARN (Amazon Resource Name)
+     */
+    Arn: __stringPatternArnMedialiveCloudwatchAlarmTemplateGroup;
+    CreatedAt: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A cloudwatch alarm template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    Id: __stringMin7Max11PatternAws097;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+    /**
+     * The number of templates in a group.
+     */
+    TemplateCount: __integer;
+  }
+  export type CloudWatchAlarmTemplateStatistic = "SampleCount"|"Average"|"Sum"|"Minimum"|"Maximum"|string;
+  export interface CloudWatchAlarmTemplateSummary {
+    /**
+     * A cloudwatch alarm template's ARN (Amazon Resource Name)
+     */
+    Arn: __stringPatternArnMedialiveCloudwatchAlarmTemplate;
+    ComparisonOperator: CloudWatchAlarmTemplateComparisonOperator;
+    CreatedAt: __timestampIso8601;
+    /**
+     * The number of datapoints within the evaluation period that must be breaching to trigger the alarm.
+     */
+    DatapointsToAlarm?: __integerMin1;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * The number of periods over which data is compared to the specified threshold.
+     */
+    EvaluationPeriods: __integerMin1;
+    /**
+     * A cloudwatch alarm template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    GroupId: __stringMin7Max11PatternAws097;
+    /**
+     * A cloudwatch alarm template's id. AWS provided templates have ids that start with `aws-`
+     */
+    Id: __stringMin7Max11PatternAws097;
+    /**
+     * The name of the metric associated with the alarm. Must be compatible with targetResourceType.
+     */
+    MetricName: __stringMax64;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name: __stringMin1Max255PatternS;
+    /**
+     * The period, in seconds, over which the specified statistic is applied.
+     */
+    Period: __integerMin10Max86400;
+    Statistic: CloudWatchAlarmTemplateStatistic;
+    Tags?: TagMap;
+    TargetResourceType: CloudWatchAlarmTemplateTargetResourceType;
+    /**
+     * The threshold value to compare with the specified statistic.
+     */
+    Threshold: __double;
+    TreatMissingData: CloudWatchAlarmTemplateTreatMissingData;
+  }
+  export type CloudWatchAlarmTemplateTargetResourceType = "CLOUDFRONT_DISTRIBUTION"|"MEDIALIVE_MULTIPLEX"|"MEDIALIVE_CHANNEL"|"MEDIALIVE_INPUT_DEVICE"|"MEDIAPACKAGE_CHANNEL"|"MEDIAPACKAGE_ORIGIN_ENDPOINT"|"MEDIACONNECT_FLOW"|"S3_BUCKET"|string;
+  export type CloudWatchAlarmTemplateTreatMissingData = "notBreaching"|"breaching"|"ignore"|"missing"|string;
+  export interface CreateCloudWatchAlarmTemplateGroupRequest {
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export interface CreateCloudWatchAlarmTemplateGroupResponse {
+    /**
+     * A cloudwatch alarm template group's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveCloudwatchAlarmTemplateGroup;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A cloudwatch alarm template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export interface CreateCloudWatchAlarmTemplateRequest {
+    ComparisonOperator: CloudWatchAlarmTemplateComparisonOperator;
+    /**
+     * The number of datapoints within the evaluation period that must be breaching to trigger the alarm.
+     */
+    DatapointsToAlarm?: __integerMin1;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * The number of periods over which data is compared to the specified threshold.
+     */
+    EvaluationPeriods: __integerMin1;
+    /**
+     * A cloudwatch alarm template group's identifier. Can be either be its id or current name.
+     */
+    GroupIdentifier: __stringPatternS;
+    /**
+     * The name of the metric associated with the alarm. Must be compatible with targetResourceType.
+     */
+    MetricName: __stringMax64;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name: __stringMin1Max255PatternS;
+    /**
+     * The period, in seconds, over which the specified statistic is applied.
+     */
+    Period: __integerMin10Max86400;
+    Statistic: CloudWatchAlarmTemplateStatistic;
+    Tags?: TagMap;
+    TargetResourceType: CloudWatchAlarmTemplateTargetResourceType;
+    /**
+     * The threshold value to compare with the specified statistic.
+     */
+    Threshold: __double;
+    TreatMissingData: CloudWatchAlarmTemplateTreatMissingData;
+  }
+  export interface CreateCloudWatchAlarmTemplateResponse {
+    /**
+     * A cloudwatch alarm template's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveCloudwatchAlarmTemplate;
+    ComparisonOperator?: CloudWatchAlarmTemplateComparisonOperator;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * The number of datapoints within the evaluation period that must be breaching to trigger the alarm.
+     */
+    DatapointsToAlarm?: __integerMin1;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * The number of periods over which data is compared to the specified threshold.
+     */
+    EvaluationPeriods?: __integerMin1;
+    /**
+     * A cloudwatch alarm template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    GroupId?: __stringMin7Max11PatternAws097;
+    /**
+     * A cloudwatch alarm template's id. AWS provided templates have ids that start with `aws-`
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    /**
+     * The name of the metric associated with the alarm. Must be compatible with targetResourceType.
+     */
+    MetricName?: __stringMax64;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    /**
+     * The period, in seconds, over which the specified statistic is applied.
+     */
+    Period?: __integerMin10Max86400;
+    Statistic?: CloudWatchAlarmTemplateStatistic;
+    Tags?: TagMap;
+    TargetResourceType?: CloudWatchAlarmTemplateTargetResourceType;
+    /**
+     * The threshold value to compare with the specified statistic.
+     */
+    Threshold?: __double;
+    TreatMissingData?: CloudWatchAlarmTemplateTreatMissingData;
+  }
+  export interface CreateEventBridgeRuleTemplateGroupRequest {
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export interface CreateEventBridgeRuleTemplateGroupResponse {
+    /**
+     * An eventbridge rule template group's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveEventbridgeRuleTemplateGroup;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * An eventbridge rule template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export interface CreateEventBridgeRuleTemplateRequest {
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    EventTargets?: __listOfEventBridgeRuleTemplateTarget;
+    EventType: EventBridgeRuleTemplateEventType;
+    /**
+     * An eventbridge rule template group's identifier. Can be either be its id or current name.
+     */
+    GroupIdentifier: __stringPatternS;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export interface CreateEventBridgeRuleTemplateResponse {
+    /**
+     * An eventbridge rule template's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveEventbridgeRuleTemplate;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    EventTargets?: __listOfEventBridgeRuleTemplateTarget;
+    EventType?: EventBridgeRuleTemplateEventType;
+    /**
+     * An eventbridge rule template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    GroupId?: __stringMin7Max11PatternAws097;
+    /**
+     * An eventbridge rule template's id. AWS provided templates have ids that start with `aws-`
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export interface CreateSignalMapRequest {
+    CloudWatchAlarmTemplateGroupIdentifiers?: __listOf__stringPatternS;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A top-level supported AWS resource ARN to discovery a signal map from.
+     */
+    DiscoveryEntryPointArn: __stringMin1Max2048;
+    EventBridgeRuleTemplateGroupIdentifiers?: __listOf__stringPatternS;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export interface CreateSignalMapResponse {
+    /**
+     * A signal map's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveSignalMap;
+    CloudWatchAlarmTemplateGroupIds?: __listOf__stringMin7Max11PatternAws097;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A top-level supported AWS resource ARN to discovery a signal map from.
+     */
+    DiscoveryEntryPointArn?: __stringMin1Max2048;
+    /**
+     * Error message associated with a failed creation or failed update attempt of a signal map.
+     */
+    ErrorMessage?: __stringMin1Max2048;
+    EventBridgeRuleTemplateGroupIds?: __listOf__stringMin7Max11PatternAws097;
+    FailedMediaResourceMap?: FailedMediaResourceMap;
+    /**
+     * A signal map's id.
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    LastDiscoveredAt?: __timestampIso8601;
+    LastSuccessfulMonitorDeployment?: SuccessfulMonitorDeployment;
+    MediaResourceMap?: MediaResourceMap;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * If true, there are pending monitor changes for this signal map that can be deployed.
+     */
+    MonitorChangesPendingDeployment?: __boolean;
+    MonitorDeployment?: MonitorDeployment;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Status?: SignalMapStatus;
+    Tags?: TagMap;
+  }
+  export interface DeleteCloudWatchAlarmTemplateGroupRequest {
+    /**
+     * A cloudwatch alarm template group's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export interface DeleteCloudWatchAlarmTemplateRequest {
+    /**
+     * A cloudwatch alarm template's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export interface DeleteEventBridgeRuleTemplateGroupRequest {
+    /**
+     * An eventbridge rule template group's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export interface DeleteEventBridgeRuleTemplateRequest {
+    /**
+     * An eventbridge rule template's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export interface DeleteSignalMapRequest {
+    /**
+     * A signal map's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export type EventBridgeRuleTemplateEventType = "MEDIALIVE_MULTIPLEX_ALERT"|"MEDIALIVE_MULTIPLEX_STATE_CHANGE"|"MEDIALIVE_CHANNEL_ALERT"|"MEDIALIVE_CHANNEL_INPUT_CHANGE"|"MEDIALIVE_CHANNEL_STATE_CHANGE"|"MEDIAPACKAGE_INPUT_NOTIFICATION"|"MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION"|"MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION"|"SIGNAL_MAP_ACTIVE_ALARM"|"MEDIACONNECT_ALERT"|"MEDIACONNECT_SOURCE_HEALTH"|"MEDIACONNECT_OUTPUT_HEALTH"|"MEDIACONNECT_FLOW_STATUS_CHANGE"|string;
+  export interface EventBridgeRuleTemplateGroupSummary {
+    /**
+     * An eventbridge rule template group's ARN (Amazon Resource Name)
+     */
+    Arn: __stringPatternArnMedialiveEventbridgeRuleTemplateGroup;
+    CreatedAt: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * An eventbridge rule template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    Id: __stringMin7Max11PatternAws097;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+    /**
+     * The number of templates in a group.
+     */
+    TemplateCount: __integer;
+  }
+  export interface EventBridgeRuleTemplateSummary {
+    /**
+     * An eventbridge rule template's ARN (Amazon Resource Name)
+     */
+    Arn: __stringPatternArnMedialiveEventbridgeRuleTemplate;
+    CreatedAt: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * The number of targets configured to send matching events.
+     */
+    EventTargetCount: __integerMax5;
+    EventType: EventBridgeRuleTemplateEventType;
+    /**
+     * An eventbridge rule template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    GroupId: __stringMin7Max11PatternAws097;
+    /**
+     * An eventbridge rule template's id. AWS provided templates have ids that start with `aws-`
+     */
+    Id: __stringMin7Max11PatternAws097;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export interface EventBridgeRuleTemplateTarget {
+    /**
+     * Target ARNs must be either an SNS topic or CloudWatch log group.
+     */
+    Arn: __stringMin1Max2048PatternArn;
+  }
+  export type FailedMediaResourceMap = {[key: string]: MediaResource};
+  export interface GetCloudWatchAlarmTemplateGroupRequest {
+    /**
+     * A cloudwatch alarm template group's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export interface GetCloudWatchAlarmTemplateGroupResponse {
+    /**
+     * A cloudwatch alarm template group's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveCloudwatchAlarmTemplateGroup;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A cloudwatch alarm template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export interface GetCloudWatchAlarmTemplateRequest {
+    /**
+     * A cloudwatch alarm template's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export interface GetCloudWatchAlarmTemplateResponse {
+    /**
+     * A cloudwatch alarm template's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveCloudwatchAlarmTemplate;
+    ComparisonOperator?: CloudWatchAlarmTemplateComparisonOperator;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * The number of datapoints within the evaluation period that must be breaching to trigger the alarm.
+     */
+    DatapointsToAlarm?: __integerMin1;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * The number of periods over which data is compared to the specified threshold.
+     */
+    EvaluationPeriods?: __integerMin1;
+    /**
+     * A cloudwatch alarm template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    GroupId?: __stringMin7Max11PatternAws097;
+    /**
+     * A cloudwatch alarm template's id. AWS provided templates have ids that start with `aws-`
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    /**
+     * The name of the metric associated with the alarm. Must be compatible with targetResourceType.
+     */
+    MetricName?: __stringMax64;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    /**
+     * The period, in seconds, over which the specified statistic is applied.
+     */
+    Period?: __integerMin10Max86400;
+    Statistic?: CloudWatchAlarmTemplateStatistic;
+    Tags?: TagMap;
+    TargetResourceType?: CloudWatchAlarmTemplateTargetResourceType;
+    /**
+     * The threshold value to compare with the specified statistic.
+     */
+    Threshold?: __double;
+    TreatMissingData?: CloudWatchAlarmTemplateTreatMissingData;
+  }
+  export interface GetEventBridgeRuleTemplateGroupRequest {
+    /**
+     * An eventbridge rule template group's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export interface GetEventBridgeRuleTemplateGroupResponse {
+    /**
+     * An eventbridge rule template group's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveEventbridgeRuleTemplateGroup;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * An eventbridge rule template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export interface GetEventBridgeRuleTemplateRequest {
+    /**
+     * An eventbridge rule template's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export interface GetEventBridgeRuleTemplateResponse {
+    /**
+     * An eventbridge rule template's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveEventbridgeRuleTemplate;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    EventTargets?: __listOfEventBridgeRuleTemplateTarget;
+    EventType?: EventBridgeRuleTemplateEventType;
+    /**
+     * An eventbridge rule template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    GroupId?: __stringMin7Max11PatternAws097;
+    /**
+     * An eventbridge rule template's id. AWS provided templates have ids that start with `aws-`
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export interface GetSignalMapRequest {
+    /**
+     * A signal map's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export interface GetSignalMapResponse {
+    /**
+     * A signal map's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveSignalMap;
+    CloudWatchAlarmTemplateGroupIds?: __listOf__stringMin7Max11PatternAws097;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A top-level supported AWS resource ARN to discovery a signal map from.
+     */
+    DiscoveryEntryPointArn?: __stringMin1Max2048;
+    /**
+     * Error message associated with a failed creation or failed update attempt of a signal map.
+     */
+    ErrorMessage?: __stringMin1Max2048;
+    EventBridgeRuleTemplateGroupIds?: __listOf__stringMin7Max11PatternAws097;
+    FailedMediaResourceMap?: FailedMediaResourceMap;
+    /**
+     * A signal map's id.
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    LastDiscoveredAt?: __timestampIso8601;
+    LastSuccessfulMonitorDeployment?: SuccessfulMonitorDeployment;
+    MediaResourceMap?: MediaResourceMap;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * If true, there are pending monitor changes for this signal map that can be deployed.
+     */
+    MonitorChangesPendingDeployment?: __boolean;
+    MonitorDeployment?: MonitorDeployment;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Status?: SignalMapStatus;
+    Tags?: TagMap;
+  }
+  export interface ListCloudWatchAlarmTemplateGroupsRequest {
+    MaxResults?: MaxResults;
+    /**
+     * A token used to retrieve the next set of results in paginated list responses.
+     */
+    NextToken?: __string;
+    /**
+     * Represents the scope of a resource, with options for all scopes, AWS provided resources, or local resources.
+     */
+    Scope?: __string;
+    /**
+     * A signal map's identifier. Can be either be its id or current name.
+     */
+    SignalMapIdentifier?: __string;
+  }
+  export interface ListCloudWatchAlarmTemplateGroupsResponse {
+    CloudWatchAlarmTemplateGroups?: __listOfCloudWatchAlarmTemplateGroupSummary;
+    /**
+     * A token used to retrieve the next set of results in paginated list responses.
+     */
+    NextToken?: __stringMin1Max2048;
+  }
+  export interface ListCloudWatchAlarmTemplatesRequest {
+    /**
+     * A cloudwatch alarm template group's identifier. Can be either be its id or current name.
+     */
+    GroupIdentifier?: __string;
+    MaxResults?: MaxResults;
+    /**
+     * A token used to retrieve the next set of results in paginated list responses.
+     */
+    NextToken?: __string;
+    /**
+     * Represents the scope of a resource, with options for all scopes, AWS provided resources, or local resources.
+     */
+    Scope?: __string;
+    /**
+     * A signal map's identifier. Can be either be its id or current name.
+     */
+    SignalMapIdentifier?: __string;
+  }
+  export interface ListCloudWatchAlarmTemplatesResponse {
+    CloudWatchAlarmTemplates?: __listOfCloudWatchAlarmTemplateSummary;
+    /**
+     * A token used to retrieve the next set of results in paginated list responses.
+     */
+    NextToken?: __stringMin1Max2048;
+  }
+  export interface ListEventBridgeRuleTemplateGroupsRequest {
+    MaxResults?: MaxResults;
+    /**
+     * A token used to retrieve the next set of results in paginated list responses.
+     */
+    NextToken?: __string;
+    /**
+     * A signal map's identifier. Can be either be its id or current name.
+     */
+    SignalMapIdentifier?: __string;
+  }
+  export interface ListEventBridgeRuleTemplateGroupsResponse {
+    EventBridgeRuleTemplateGroups?: __listOfEventBridgeRuleTemplateGroupSummary;
+    /**
+     * A token used to retrieve the next set of results in paginated list responses.
+     */
+    NextToken?: __stringMin1Max2048;
+  }
+  export interface ListEventBridgeRuleTemplatesRequest {
+    /**
+     * An eventbridge rule template group's identifier. Can be either be its id or current name.
+     */
+    GroupIdentifier?: __string;
+    MaxResults?: MaxResults;
+    /**
+     * A token used to retrieve the next set of results in paginated list responses.
+     */
+    NextToken?: __string;
+    /**
+     * A signal map's identifier. Can be either be its id or current name.
+     */
+    SignalMapIdentifier?: __string;
+  }
+  export interface ListEventBridgeRuleTemplatesResponse {
+    EventBridgeRuleTemplates?: __listOfEventBridgeRuleTemplateSummary;
+    /**
+     * A token used to retrieve the next set of results in paginated list responses.
+     */
+    NextToken?: __stringMin1Max2048;
+  }
+  export interface ListSignalMapsRequest {
+    /**
+     * A cloudwatch alarm template group's identifier. Can be either be its id or current name.
+     */
+    CloudWatchAlarmTemplateGroupIdentifier?: __string;
+    /**
+     * An eventbridge rule template group's identifier. Can be either be its id or current name.
+     */
+    EventBridgeRuleTemplateGroupIdentifier?: __string;
+    MaxResults?: MaxResults;
+    /**
+     * A token used to retrieve the next set of results in paginated list responses.
+     */
+    NextToken?: __string;
+  }
+  export interface ListSignalMapsResponse {
+    /**
+     * A token used to retrieve the next set of results in paginated list responses.
+     */
+    NextToken?: __stringMin1Max2048;
+    SignalMaps?: __listOfSignalMapSummary;
+  }
+  export interface MediaResource {
+    Destinations?: __listOfMediaResourceNeighbor;
+    /**
+     * The logical name of an AWS media resource.
+     */
+    Name?: __stringMin1Max256;
+    Sources?: __listOfMediaResourceNeighbor;
+  }
+  export type MediaResourceMap = {[key: string]: MediaResource};
+  export interface MediaResourceNeighbor {
+    /**
+     * The ARN of a resource used in AWS media workflows.
+     */
+    Arn: __stringMin1Max2048PatternArn;
+    /**
+     * The logical name of an AWS media resource.
+     */
+    Name?: __stringMin1Max256;
+  }
+  export interface MonitorDeployment {
+    /**
+     * URI associated with a signal map's monitor deployment.
+     */
+    DetailsUri?: __stringMin1Max2048;
+    /**
+     * Error message associated with a failed monitor deployment of a signal map.
+     */
+    ErrorMessage?: __stringMin1Max2048;
+    Status: SignalMapMonitorDeploymentStatus;
+  }
+  export type SignalMapMonitorDeploymentStatus = "NOT_DEPLOYED"|"DRY_RUN_DEPLOYMENT_COMPLETE"|"DRY_RUN_DEPLOYMENT_FAILED"|"DRY_RUN_DEPLOYMENT_IN_PROGRESS"|"DEPLOYMENT_COMPLETE"|"DEPLOYMENT_FAILED"|"DEPLOYMENT_IN_PROGRESS"|"DELETE_COMPLETE"|"DELETE_FAILED"|"DELETE_IN_PROGRESS"|string;
+  export type SignalMapStatus = "CREATE_IN_PROGRESS"|"CREATE_COMPLETE"|"CREATE_FAILED"|"UPDATE_IN_PROGRESS"|"UPDATE_COMPLETE"|"UPDATE_REVERTED"|"UPDATE_FAILED"|"READY"|"NOT_READY"|string;
+  export interface SignalMapSummary {
+    /**
+     * A signal map's ARN (Amazon Resource Name)
+     */
+    Arn: __stringPatternArnMedialiveSignalMap;
+    CreatedAt: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A signal map's id.
+     */
+    Id: __stringMin7Max11PatternAws097;
+    ModifiedAt?: __timestampIso8601;
+    MonitorDeploymentStatus: SignalMapMonitorDeploymentStatus;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name: __stringMin1Max255PatternS;
+    Status: SignalMapStatus;
+    Tags?: TagMap;
+  }
+  export interface StartDeleteMonitorDeploymentRequest {
+    /**
+     * A signal map's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export interface StartDeleteMonitorDeploymentResponse {
+    /**
+     * A signal map's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveSignalMap;
+    CloudWatchAlarmTemplateGroupIds?: __listOf__stringMin7Max11PatternAws097;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A top-level supported AWS resource ARN to discovery a signal map from.
+     */
+    DiscoveryEntryPointArn?: __stringMin1Max2048;
+    /**
+     * Error message associated with a failed creation or failed update attempt of a signal map.
+     */
+    ErrorMessage?: __stringMin1Max2048;
+    EventBridgeRuleTemplateGroupIds?: __listOf__stringMin7Max11PatternAws097;
+    FailedMediaResourceMap?: FailedMediaResourceMap;
+    /**
+     * A signal map's id.
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    LastDiscoveredAt?: __timestampIso8601;
+    LastSuccessfulMonitorDeployment?: SuccessfulMonitorDeployment;
+    MediaResourceMap?: MediaResourceMap;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * If true, there are pending monitor changes for this signal map that can be deployed.
+     */
+    MonitorChangesPendingDeployment?: __boolean;
+    MonitorDeployment?: MonitorDeployment;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Status?: SignalMapStatus;
+    Tags?: TagMap;
+  }
+  export interface StartMonitorDeploymentRequest {
+    DryRun?: __boolean;
+    /**
+     * A signal map's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export interface StartMonitorDeploymentResponse {
+    /**
+     * A signal map's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveSignalMap;
+    CloudWatchAlarmTemplateGroupIds?: __listOf__stringMin7Max11PatternAws097;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A top-level supported AWS resource ARN to discovery a signal map from.
+     */
+    DiscoveryEntryPointArn?: __stringMin1Max2048;
+    /**
+     * Error message associated with a failed creation or failed update attempt of a signal map.
+     */
+    ErrorMessage?: __stringMin1Max2048;
+    EventBridgeRuleTemplateGroupIds?: __listOf__stringMin7Max11PatternAws097;
+    FailedMediaResourceMap?: FailedMediaResourceMap;
+    /**
+     * A signal map's id.
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    LastDiscoveredAt?: __timestampIso8601;
+    LastSuccessfulMonitorDeployment?: SuccessfulMonitorDeployment;
+    MediaResourceMap?: MediaResourceMap;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * If true, there are pending monitor changes for this signal map that can be deployed.
+     */
+    MonitorChangesPendingDeployment?: __boolean;
+    MonitorDeployment?: MonitorDeployment;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Status?: SignalMapStatus;
+    Tags?: TagMap;
+  }
+  export interface StartUpdateSignalMapRequest {
+    CloudWatchAlarmTemplateGroupIdentifiers?: __listOf__stringPatternS;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A top-level supported AWS resource ARN to discovery a signal map from.
+     */
+    DiscoveryEntryPointArn?: __stringMin1Max2048;
+    EventBridgeRuleTemplateGroupIdentifiers?: __listOf__stringPatternS;
+    /**
+     * If true, will force a rediscovery of a signal map if an unchanged discoveryEntryPointArn is provided.
+     */
+    ForceRediscovery?: __boolean;
+    /**
+     * A signal map's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+  }
+  export interface StartUpdateSignalMapResponse {
+    /**
+     * A signal map's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveSignalMap;
+    CloudWatchAlarmTemplateGroupIds?: __listOf__stringMin7Max11PatternAws097;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A top-level supported AWS resource ARN to discovery a signal map from.
+     */
+    DiscoveryEntryPointArn?: __stringMin1Max2048;
+    /**
+     * Error message associated with a failed creation or failed update attempt of a signal map.
+     */
+    ErrorMessage?: __stringMin1Max2048;
+    EventBridgeRuleTemplateGroupIds?: __listOf__stringMin7Max11PatternAws097;
+    FailedMediaResourceMap?: FailedMediaResourceMap;
+    /**
+     * A signal map's id.
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    LastDiscoveredAt?: __timestampIso8601;
+    LastSuccessfulMonitorDeployment?: SuccessfulMonitorDeployment;
+    MediaResourceMap?: MediaResourceMap;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * If true, there are pending monitor changes for this signal map that can be deployed.
+     */
+    MonitorChangesPendingDeployment?: __boolean;
+    MonitorDeployment?: MonitorDeployment;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Status?: SignalMapStatus;
+    Tags?: TagMap;
+  }
+  export interface SuccessfulMonitorDeployment {
+    /**
+     * URI associated with a signal map's monitor deployment.
+     */
+    DetailsUri: __stringMin1Max2048;
+    Status: SignalMapMonitorDeploymentStatus;
+  }
+  export type TagMap = {[key: string]: __string};
+  export interface UpdateCloudWatchAlarmTemplateGroupRequest {
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A cloudwatch alarm template group's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export interface UpdateCloudWatchAlarmTemplateGroupResponse {
+    /**
+     * A cloudwatch alarm template group's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveCloudwatchAlarmTemplateGroup;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * A cloudwatch alarm template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export interface UpdateCloudWatchAlarmTemplateRequest {
+    ComparisonOperator?: CloudWatchAlarmTemplateComparisonOperator;
+    /**
+     * The number of datapoints within the evaluation period that must be breaching to trigger the alarm.
+     */
+    DatapointsToAlarm?: __integerMin1;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * The number of periods over which data is compared to the specified threshold.
+     */
+    EvaluationPeriods?: __integerMin1;
+    /**
+     * A cloudwatch alarm template group's identifier. Can be either be its id or current name.
+     */
+    GroupIdentifier?: __stringPatternS;
+    /**
+     * A cloudwatch alarm template's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+    /**
+     * The name of the metric associated with the alarm. Must be compatible with targetResourceType.
+     */
+    MetricName?: __stringMax64;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    /**
+     * The period, in seconds, over which the specified statistic is applied.
+     */
+    Period?: __integerMin10Max86400;
+    Statistic?: CloudWatchAlarmTemplateStatistic;
+    TargetResourceType?: CloudWatchAlarmTemplateTargetResourceType;
+    /**
+     * The threshold value to compare with the specified statistic.
+     */
+    Threshold?: __double;
+    TreatMissingData?: CloudWatchAlarmTemplateTreatMissingData;
+  }
+  export interface UpdateCloudWatchAlarmTemplateResponse {
+    /**
+     * A cloudwatch alarm template's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveCloudwatchAlarmTemplate;
+    ComparisonOperator?: CloudWatchAlarmTemplateComparisonOperator;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * The number of datapoints within the evaluation period that must be breaching to trigger the alarm.
+     */
+    DatapointsToAlarm?: __integerMin1;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * The number of periods over which data is compared to the specified threshold.
+     */
+    EvaluationPeriods?: __integerMin1;
+    /**
+     * A cloudwatch alarm template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    GroupId?: __stringMin7Max11PatternAws097;
+    /**
+     * A cloudwatch alarm template's id. AWS provided templates have ids that start with `aws-`
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    /**
+     * The name of the metric associated with the alarm. Must be compatible with targetResourceType.
+     */
+    MetricName?: __stringMax64;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    /**
+     * The period, in seconds, over which the specified statistic is applied.
+     */
+    Period?: __integerMin10Max86400;
+    Statistic?: CloudWatchAlarmTemplateStatistic;
+    Tags?: TagMap;
+    TargetResourceType?: CloudWatchAlarmTemplateTargetResourceType;
+    /**
+     * The threshold value to compare with the specified statistic.
+     */
+    Threshold?: __double;
+    TreatMissingData?: CloudWatchAlarmTemplateTreatMissingData;
+  }
+  export interface UpdateEventBridgeRuleTemplateGroupRequest {
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * An eventbridge rule template group's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+  }
+  export interface UpdateEventBridgeRuleTemplateGroupResponse {
+    /**
+     * An eventbridge rule template group's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveEventbridgeRuleTemplateGroup;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    /**
+     * An eventbridge rule template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export interface UpdateEventBridgeRuleTemplateRequest {
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    EventTargets?: __listOfEventBridgeRuleTemplateTarget;
+    EventType?: EventBridgeRuleTemplateEventType;
+    /**
+     * An eventbridge rule template group's identifier. Can be either be its id or current name.
+     */
+    GroupIdentifier?: __stringPatternS;
+    /**
+     * An eventbridge rule template's identifier. Can be either be its id or current name.
+     */
+    Identifier: __string;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+  }
+  export interface UpdateEventBridgeRuleTemplateResponse {
+    /**
+     * An eventbridge rule template's ARN (Amazon Resource Name)
+     */
+    Arn?: __stringPatternArnMedialiveEventbridgeRuleTemplate;
+    CreatedAt?: __timestampIso8601;
+    /**
+     * A resource's optional description.
+     */
+    Description?: __stringMin0Max1024;
+    EventTargets?: __listOfEventBridgeRuleTemplateTarget;
+    EventType?: EventBridgeRuleTemplateEventType;
+    /**
+     * An eventbridge rule template group's id. AWS provided template groups have ids that start with `aws-`
+     */
+    GroupId?: __stringMin7Max11PatternAws097;
+    /**
+     * An eventbridge rule template's id. AWS provided templates have ids that start with `aws-`
+     */
+    Id?: __stringMin7Max11PatternAws097;
+    ModifiedAt?: __timestampIso8601;
+    /**
+     * A resource's name. Names must be unique within the scope of a resource type in a specific region.
+     */
+    Name?: __stringMin1Max255PatternS;
+    Tags?: TagMap;
+  }
+  export type __integerMax5 = number;
+  export type __integerMin10Max86400 = number;
+  export type __listOfCloudWatchAlarmTemplateGroupSummary = CloudWatchAlarmTemplateGroupSummary[];
+  export type __listOfCloudWatchAlarmTemplateSummary = CloudWatchAlarmTemplateSummary[];
+  export type __listOfEventBridgeRuleTemplateGroupSummary = EventBridgeRuleTemplateGroupSummary[];
+  export type __listOfEventBridgeRuleTemplateSummary = EventBridgeRuleTemplateSummary[];
+  export type __listOfEventBridgeRuleTemplateTarget = EventBridgeRuleTemplateTarget[];
+  export type __listOfMediaResourceNeighbor = MediaResourceNeighbor[];
+  export type __listOfSignalMapSummary = SignalMapSummary[];
+  export type __listOf__stringMin7Max11PatternAws097 = __stringMin7Max11PatternAws097[];
+  export type __listOf__stringPatternS = __stringPatternS[];
+  export type __stringMax64 = string;
+  export type __stringMin0Max1024 = string;
+  export type __stringMin1Max2048 = string;
+  export type __stringMin1Max2048PatternArn = string;
+  export type __stringMin1Max255PatternS = string;
+  export type __stringMin7Max11PatternAws097 = string;
+  export type __stringPatternArnMedialiveCloudwatchAlarmTemplate = string;
+  export type __stringPatternArnMedialiveCloudwatchAlarmTemplateGroup = string;
+  export type __stringPatternArnMedialiveEventbridgeRuleTemplate = string;
+  export type __stringPatternArnMedialiveEventbridgeRuleTemplateGroup = string;
+  export type __stringPatternArnMedialiveSignalMap = string;
+  export type __stringPatternS = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

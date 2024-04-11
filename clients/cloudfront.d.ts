@@ -94,11 +94,11 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   createFunction(callback?: (err: AWSError, data: CloudFront.Types.CreateFunctionResult) => void): Request<CloudFront.Types.CreateFunctionResult, AWSError>;
   /**
-   * Create a new invalidation.
+   * Create a new invalidation. For more information, see Invalidating files in the Amazon CloudFront Developer Guide.
    */
   createInvalidation(params: CloudFront.Types.CreateInvalidationRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateInvalidationResult) => void): Request<CloudFront.Types.CreateInvalidationResult, AWSError>;
   /**
-   * Create a new invalidation.
+   * Create a new invalidation. For more information, see Invalidating files in the Amazon CloudFront Developer Guide.
    */
   createInvalidation(callback?: (err: AWSError, data: CloudFront.Types.CreateInvalidationResult) => void): Request<CloudFront.Types.CreateInvalidationResult, AWSError>;
   /**
@@ -110,11 +110,11 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   createKeyGroup(callback?: (err: AWSError, data: CloudFront.Types.CreateKeyGroupResult) => void): Request<CloudFront.Types.CreateKeyGroupResult, AWSError>;
   /**
-   * Specifies the Key Value Store resource to add to your account. In your account, the Key Value Store names must be unique. You can also import Key Value Store data in JSON format from an S3 bucket by providing a valid ImportSource that you own.
+   * Specifies the key value store resource to add to your account. In your account, the key value store names must be unique. You can also import key value store data in JSON format from an S3 bucket by providing a valid ImportSource that you own.
    */
   createKeyValueStore(params: CloudFront.Types.CreateKeyValueStoreRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateKeyValueStoreResult) => void): Request<CloudFront.Types.CreateKeyValueStoreResult, AWSError>;
   /**
-   * Specifies the Key Value Store resource to add to your account. In your account, the Key Value Store names must be unique. You can also import Key Value Store data in JSON format from an S3 bucket by providing a valid ImportSource that you own.
+   * Specifies the key value store resource to add to your account. In your account, the key value store names must be unique. You can also import key value store data in JSON format from an S3 bucket by providing a valid ImportSource that you own.
    */
   createKeyValueStore(callback?: (err: AWSError, data: CloudFront.Types.CreateKeyValueStoreResult) => void): Request<CloudFront.Types.CreateKeyValueStoreResult, AWSError>;
   /**
@@ -246,11 +246,11 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   deleteKeyGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Specifies the Key Value Store to delete.
+   * Specifies the key value store to delete.
    */
   deleteKeyValueStore(params: CloudFront.Types.DeleteKeyValueStoreRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Specifies the Key Value Store to delete.
+   * Specifies the key value store to delete.
    */
   deleteKeyValueStore(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -318,11 +318,11 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   describeFunction(callback?: (err: AWSError, data: CloudFront.Types.DescribeFunctionResult) => void): Request<CloudFront.Types.DescribeFunctionResult, AWSError>;
   /**
-   * Specifies the Key Value Store and its configuration.
+   * Specifies the key value store and its configuration.
    */
   describeKeyValueStore(params: CloudFront.Types.DescribeKeyValueStoreRequest, callback?: (err: AWSError, data: CloudFront.Types.DescribeKeyValueStoreResult) => void): Request<CloudFront.Types.DescribeKeyValueStoreResult, AWSError>;
   /**
-   * Specifies the Key Value Store and its configuration.
+   * Specifies the key value store and its configuration.
    */
   describeKeyValueStore(callback?: (err: AWSError, data: CloudFront.Types.DescribeKeyValueStoreResult) => void): Request<CloudFront.Types.DescribeKeyValueStoreResult, AWSError>;
   /**
@@ -678,11 +678,11 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   listKeyGroups(callback?: (err: AWSError, data: CloudFront.Types.ListKeyGroupsResult) => void): Request<CloudFront.Types.ListKeyGroupsResult, AWSError>;
   /**
-   * Specifies the Key Value Stores to list.
+   * Specifies the key value stores to list.
    */
   listKeyValueStores(params: CloudFront.Types.ListKeyValueStoresRequest, callback?: (err: AWSError, data: CloudFront.Types.ListKeyValueStoresResult) => void): Request<CloudFront.Types.ListKeyValueStoresResult, AWSError>;
   /**
-   * Specifies the Key Value Stores to list.
+   * Specifies the key value stores to list.
    */
   listKeyValueStores(callback?: (err: AWSError, data: CloudFront.Types.ListKeyValueStoresResult) => void): Request<CloudFront.Types.ListKeyValueStoresResult, AWSError>;
   /**
@@ -846,11 +846,11 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   updateKeyGroup(callback?: (err: AWSError, data: CloudFront.Types.UpdateKeyGroupResult) => void): Request<CloudFront.Types.UpdateKeyGroupResult, AWSError>;
   /**
-   * Specifies the Key Value Store to update.
+   * Specifies the key value store to update.
    */
   updateKeyValueStore(params: CloudFront.Types.UpdateKeyValueStoreRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateKeyValueStoreResult) => void): Request<CloudFront.Types.UpdateKeyValueStoreResult, AWSError>;
   /**
-   * Specifies the Key Value Store to update.
+   * Specifies the key value store to update.
    */
   updateKeyValueStore(callback?: (err: AWSError, data: CloudFront.Types.UpdateKeyValueStoreResult) => void): Request<CloudFront.Types.UpdateKeyValueStoreResult, AWSError>;
   /**
@@ -1397,7 +1397,7 @@ declare namespace CloudFront {
   }
   export interface ContinuousDeploymentSingleWeightConfig {
     /**
-     * The percentage of traffic to send to a staging distribution, expressed as a decimal number between 0 and .15.
+     * The percentage of traffic to send to a staging distribution, expressed as a decimal number between 0 and 0.15. For example, a value of 0.10 means 10% of traffic is sent to the staging distribution.
      */
     Weight: float;
     SessionStickinessConfig?: SessionStickinessConfig;
@@ -1666,11 +1666,11 @@ declare namespace CloudFront {
   }
   export interface CreateKeyValueStoreRequest {
     /**
-     * The name of the Key Value Store. The maximum length of the name is 32 characters.
+     * The name of the key value store. The minimum length is 1 character and the maximum length is 64 characters.
      */
     Name: KeyValueStoreName;
     /**
-     * The comment of the Key Value Store.
+     * The comment of the key value store.
      */
     Comment?: KeyValueStoreComment;
     /**
@@ -1680,15 +1680,15 @@ declare namespace CloudFront {
   }
   export interface CreateKeyValueStoreResult {
     /**
-     * The resulting Key Value Store.
+     * The resulting key value store.
      */
     KeyValueStore?: KeyValueStore;
     /**
-     * The ETag in the resulting Key Value Store.
+     * The ETag in the resulting key value store.
      */
     ETag?: string;
     /**
-     * The location of the resulting Key Value Store.
+     * The location of the resulting key value store.
      */
     Location?: string;
   }
@@ -1782,7 +1782,7 @@ declare namespace CloudFront {
      */
     Name: string;
     /**
-     * The sampling rate for this real-time log configuration. The sampling rate determines the percentage of viewer requests that are represented in the real-time log data. You must provide an integer between 1 and 100, inclusive.
+     * The sampling rate for this real-time log configuration. You can specify a whole number between 1 and 100 (inclusive) to determine the percentage of viewer requests that are represented in the real-time log data.
      */
     SamplingRate: long;
   }
@@ -1948,7 +1948,7 @@ declare namespace CloudFront {
      */
     LambdaFunctionAssociations?: LambdaFunctionAssociations;
     /**
-     * A list of CloudFront functions that are associated with this cache behavior. CloudFront functions must be published to the LIVE stage to associate them with a cache behavior.
+     * A list of CloudFront functions that are associated with this cache behavior. Your functions must be published to the LIVE stage to associate them with a cache behavior.
      */
     FunctionAssociations?: FunctionAssociations;
     /**
@@ -2070,11 +2070,11 @@ declare namespace CloudFront {
   }
   export interface DeleteKeyValueStoreRequest {
     /**
-     * The name of the Key Value Store.
+     * The name of the key value store.
      */
     Name: KeyValueStoreName;
     /**
-     * The Key Value Store to delete, if a match occurs.
+     * The key value store to delete, if a match occurs.
      */
     IfMatch: string;
   }
@@ -2168,17 +2168,17 @@ declare namespace CloudFront {
   }
   export interface DescribeKeyValueStoreRequest {
     /**
-     * The name of the Key Value Store.
+     * The name of the key value store.
      */
     Name: KeyValueStoreName;
   }
   export interface DescribeKeyValueStoreResult {
     /**
-     * The resulting Key Value Store.
+     * The resulting key value store.
      */
     KeyValueStore?: KeyValueStore;
     /**
-     * The ETag of the resulting Key Value Store.
+     * The ETag of the resulting key value store.
      */
     ETag?: string;
   }
@@ -2282,11 +2282,11 @@ declare namespace CloudFront {
      */
     Restrictions?: Restrictions;
     /**
-     * A unique identifier that specifies the WAF web ACL, if any, to associate with this distribution. To specify a web ACL created using the latest version of WAF, use the ACL ARN, for example arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/473e64fd-f30b-4765-81a0-62ad96dd167a. To specify a web ACL created using WAF Classic, use the ACL ID, for example 473e64fd-f30b-4765-81a0-62ad96dd167a. WAF is a web application firewall that lets you monitor the HTTP and HTTPS requests that are forwarded to CloudFront, and lets you control access to your content. Based on conditions that you specify, such as the IP addresses that requests originate from or the values of query strings, CloudFront responds to requests either with the requested content or with an HTTP 403 status code (Forbidden). You can also configure CloudFront to return a custom error page when a request is blocked. For more information about WAF, see the WAF Developer Guide.
+     * A unique identifier that specifies the WAF web ACL, if any, to associate with this distribution. To specify a web ACL created using the latest version of WAF, use the ACL ARN, for example arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111. To specify a web ACL created using WAF Classic, use the ACL ID, for example a1b2c3d4-5678-90ab-cdef-EXAMPLE11111. WAF is a web application firewall that lets you monitor the HTTP and HTTPS requests that are forwarded to CloudFront, and lets you control access to your content. Based on conditions that you specify, such as the IP addresses that requests originate from or the values of query strings, CloudFront responds to requests either with the requested content or with an HTTP 403 status code (Forbidden). You can also configure CloudFront to return a custom error page when a request is blocked. For more information about WAF, see the WAF Developer Guide.
      */
     WebACLId?: string;
     /**
-     * (Optional) Specify the maximum HTTP version(s) that you want viewers to use to communicate with CloudFront. The default value for new web distributions is http2. Viewers that don't support HTTP/2 automatically use an earlier HTTP version. For viewers and CloudFront to use HTTP/2, viewers must support TLSv1.2 or later, and must support Server Name Indication (SNI). For viewers and CloudFront to use HTTP/3, viewers must support TLSv1.3 and Server Name Indication (SNI). CloudFront supports HTTP/3 connection migration to allow the viewer to switch networks without losing connection. For more information about connection migration, see Connection Migration at RFC 9000. For more information about supported TLSv1.3 ciphers, see Supported protocols and ciphers between viewers and CloudFront.
+     * (Optional) Specify the HTTP version(s) that you want viewers to use to communicate with CloudFront. The default value for new web distributions is http2. Viewers that don't support HTTP/2 automatically use an earlier HTTP version. For viewers and CloudFront to use HTTP/2, viewers must support TLSv1.2 or later, and must support Server Name Indication (SNI). For viewers and CloudFront to use HTTP/3, viewers must support TLSv1.3 and Server Name Indication (SNI). CloudFront supports HTTP/3 connection migration to allow the viewer to switch networks without losing connection. For more information about connection migration, see Connection Migration at RFC 9000. For more information about supported TLSv1.3 ciphers, see Supported protocols and ciphers between viewers and CloudFront.
      */
     HttpVersion?: HttpVersion;
     /**
@@ -2447,7 +2447,7 @@ declare namespace CloudFront {
      */
     AliasICPRecordals?: AliasICPRecordals;
     /**
-     * Whether the primary distribution has a staging distribution enabled.
+     * A Boolean that indicates whether this is a staging distribution. When this value is true, this is a staging distribution. When this value is false, this is not a staging distribution.
      */
     Staging: boolean;
   }
@@ -2685,7 +2685,7 @@ declare namespace CloudFront {
      */
     Quantity: integer;
     /**
-     * The CloudFront functions that are associated with a cache behavior in a CloudFront distribution. CloudFront functions must be published to the LIVE stage to associate them with a cache behavior.
+     * The CloudFront functions that are associated with a cache behavior in a CloudFront distribution. Your functions must be published to the LIVE stage to associate them with a cache behavior.
      */
     Items?: FunctionAssociationList;
   }
@@ -2700,7 +2700,7 @@ declare namespace CloudFront {
      */
     Runtime: FunctionRuntime;
     /**
-     * The configuration for the Key Value Store associations.
+     * The configuration for the key value store associations.
      */
     KeyValueStoreAssociations?: KeyValueStoreAssociations;
   }
@@ -3243,11 +3243,11 @@ declare namespace CloudFront {
   export type ICPRecordalStatus = "APPROVED"|"SUSPENDED"|"PENDING"|string;
   export interface ImportSource {
     /**
-     * The source type of the import source for the Key Value Store.
+     * The source type of the import source for the key value store.
      */
     SourceType: ImportSourceType;
     /**
-     * The Amazon Resource Name (ARN) of the import source for the Key Value Store.
+     * The Amazon Resource Name (ARN) of the import source for the key value store.
      */
     SourceARN: string;
   }
@@ -3396,64 +3396,64 @@ declare namespace CloudFront {
   }
   export interface KeyValueStore {
     /**
-     * The name of the Key Value Store.
+     * The name of the key value store.
      */
     Name: string;
     /**
-     * The unique Id for the Key Value Store.
+     * The unique Id for the key value store.
      */
     Id: string;
     /**
-     * A comment for the Key Value Store.
+     * A comment for the key value store.
      */
     Comment: string;
     /**
-     * The Amazon Resource Name (ARN) of the Key Value Store.
+     * The Amazon Resource Name (ARN) of the key value store.
      */
     ARN: string;
     /**
-     * The status of the Key Value Store.
+     * The status of the key value store.
      */
     Status?: string;
     /**
-     * The last-modified time of the Key Value Store.
+     * The last-modified time of the key value store.
      */
     LastModifiedTime: timestamp;
   }
   export type KeyValueStoreARN = string;
   export interface KeyValueStoreAssociation {
     /**
-     * The Amazon Resource Name (ARN) of the Key Value Store association.
+     * The Amazon Resource Name (ARN) of the key value store association.
      */
     KeyValueStoreARN: KeyValueStoreARN;
   }
   export type KeyValueStoreAssociationList = KeyValueStoreAssociation[];
   export interface KeyValueStoreAssociations {
     /**
-     * The quantity of Key Value Store associations.
+     * The quantity of key value store associations.
      */
     Quantity: integer;
     /**
-     * The items of the Key Value Store association.
+     * The items of the key value store association.
      */
     Items?: KeyValueStoreAssociationList;
   }
   export type KeyValueStoreComment = string;
   export interface KeyValueStoreList {
     /**
-     * The next marker associated with the Key Value Store list.
+     * The next marker associated with the key value store list.
      */
     NextMarker?: string;
     /**
-     * The maximum number of items in the Key Value Store list.
+     * The maximum number of items in the key value store list.
      */
     MaxItems: integer;
     /**
-     * The quantity of the Key Value Store list.
+     * The quantity of the key value store list.
      */
     Quantity: integer;
     /**
-     * The items of the Key Value Store list.
+     * The items of the key value store list.
      */
     Items?: KeyValueStoreSummaryList;
   }
@@ -3676,7 +3676,7 @@ declare namespace CloudFront {
      */
     MaxItems?: string;
     /**
-     * The ID of the WAF web ACL that you want to list the associated distributions. If you specify "null" for the ID, the request returns a list of the distributions that aren't associated with a web ACL.
+     * The ID of the WAF web ACL that you want to list the associated distributions. If you specify "null" for the ID, the request returns a list of the distributions that aren't associated with a web ACL.  For WAFV2, this is the ARN of the web ACL, such as arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111. For WAF Classic, this is the ID of the web ACL, such as a1b2c3d4-5678-90ab-cdef-EXAMPLE11111.
      */
     WebACLId: string;
   }
@@ -3792,21 +3792,21 @@ declare namespace CloudFront {
   }
   export interface ListKeyValueStoresRequest {
     /**
-     * The marker associated with the Key Value Stores list.
+     * The marker associated with the key value stores list.
      */
     Marker?: string;
     /**
-     * The maximum number of items in the Key Value Stores list.
+     * The maximum number of items in the key value stores list.
      */
     MaxItems?: string;
     /**
-     * The status of the request for the Key Value Stores list.
+     * The status of the request for the key value stores list.
      */
     Status?: string;
   }
   export interface ListKeyValueStoresResult {
     /**
-     * The resulting Key Value Stores list.
+     * The resulting key value stores list.
      */
     KeyValueStoreList?: KeyValueStoreList;
   }
@@ -4008,7 +4008,7 @@ declare namespace CloudFront {
   }
   export interface OriginAccessControlConfig {
     /**
-     * A name to identify the origin access control.
+     * A name to identify the origin access control. You can specify up to 64 characters.
      */
     Name: string;
     /**
@@ -4054,7 +4054,7 @@ declare namespace CloudFront {
      */
     Items?: OriginAccessControlSummaryList;
   }
-  export type OriginAccessControlOriginTypes = "s3"|"mediastore"|string;
+  export type OriginAccessControlOriginTypes = "s3"|"mediastore"|"mediapackagev2"|"lambda"|string;
   export type OriginAccessControlSigningBehaviors = "never"|"always"|"no-override"|string;
   export type OriginAccessControlSigningProtocols = "sigv4"|string;
   export interface OriginAccessControlSummary {
@@ -4733,7 +4733,7 @@ declare namespace CloudFront {
      */
     ContentTypeOptions?: ResponseHeadersPolicyContentTypeOptions;
     /**
-     * Determines whether CloudFront includes the Strict-Transport-Security HTTP response header and the header's value. For more information about the Strict-Transport-Security HTTP response header, see Strict-Transport-Security in the MDN Web Docs.
+     * Determines whether CloudFront includes the Strict-Transport-Security HTTP response header and the header's value. For more information about the Strict-Transport-Security HTTP response header, see Security headers in the Amazon CloudFront Developer Guide and Strict-Transport-Security in the MDN Web Docs.
      */
     StrictTransportSecurity?: ResponseHeadersPolicyStrictTransportSecurity;
   }
@@ -4813,7 +4813,7 @@ declare namespace CloudFront {
   }
   export interface S3OriginConfig {
     /**
-     * The CloudFront origin access identity to associate with the origin. Use an origin access identity to configure the origin so that viewers can only access objects in an Amazon S3 bucket through CloudFront. The format of the value is: origin-access-identity/cloudfront/ID-of-origin-access-identity  where  ID-of-origin-access-identity  is the value that CloudFront returned in the ID element when you created the origin access identity. If you want viewers to be able to access objects using either the CloudFront URL or the Amazon S3 URL, specify an empty OriginAccessIdentity element. To delete the origin access identity from an existing distribution, update the distribution configuration and include an empty OriginAccessIdentity element. To replace the origin access identity, update the distribution configuration and specify the new origin access identity. For more information about the origin access identity, see Serving Private Content through CloudFront in the Amazon CloudFront Developer Guide.
+     *  If you're using origin access control (OAC) instead of origin access identity, specify an empty OriginAccessIdentity element. For more information, see Restricting access to an Amazon Web Services in the Amazon CloudFront Developer Guide.  The CloudFront origin access identity to associate with the origin. Use an origin access identity to configure the origin so that viewers can only access objects in an Amazon S3 bucket through CloudFront. The format of the value is:  origin-access-identity/cloudfront/ID-of-origin-access-identity  The  ID-of-origin-access-identity  is the value that CloudFront returned in the ID element when you created the origin access identity. If you want viewers to be able to access objects using either the CloudFront URL or the Amazon S3 URL, specify an empty OriginAccessIdentity element. To delete the origin access identity from an existing distribution, update the distribution configuration and include an empty OriginAccessIdentity element. To replace the origin access identity, update the distribution configuration and specify the new origin access identity. For more information about the origin access identity, see Serving Private Content through CloudFront in the Amazon CloudFront Developer Guide.
      */
     OriginAccessIdentity: string;
   }
@@ -4825,7 +4825,7 @@ declare namespace CloudFront {
      */
     IdleTTL: integer;
     /**
-     * The maximum amount of time to consider requests from the viewer as being part of the same session. Allowed values are 300–3600 seconds (5–60 minutes). The value must be less than or equal to IdleTTL.
+     * The maximum amount of time to consider requests from the viewer as being part of the same session. Allowed values are 300–3600 seconds (5–60 minutes). The value must be greater than or equal to IdleTTL.
      */
     MaximumTTL: integer;
   }
@@ -5379,25 +5379,25 @@ declare namespace CloudFront {
   }
   export interface UpdateKeyValueStoreRequest {
     /**
-     * The name of the Key Value Store to update.
+     * The name of the key value store to update.
      */
     Name: KeyValueStoreName;
     /**
-     * The comment of the Key Value Store to update.
+     * The comment of the key value store to update.
      */
     Comment: KeyValueStoreComment;
     /**
-     * The Key Value Store to update, if a match occurs.
+     * The key value store to update, if a match occurs.
      */
     IfMatch: string;
   }
   export interface UpdateKeyValueStoreResult {
     /**
-     * The resulting Key Value Store to update.
+     * The resulting key value store to update.
      */
     KeyValueStore?: KeyValueStore;
     /**
-     * The ETag of the resulting Key Value Store.
+     * The ETag of the resulting key value store.
      */
     ETag?: string;
   }

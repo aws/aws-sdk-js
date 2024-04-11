@@ -14,11 +14,11 @@ declare class Omics extends Service {
   constructor(options?: Omics.Types.ClientConfiguration)
   config: Config & Omics.Types.ClientConfiguration;
   /**
-   *  Stops a multipart upload. 
+   * Stops a multipart upload.
    */
   abortMultipartReadSetUpload(params: Omics.Types.AbortMultipartReadSetUploadRequest, callback?: (err: AWSError, data: Omics.Types.AbortMultipartReadSetUploadResponse) => void): Request<Omics.Types.AbortMultipartReadSetUploadResponse, AWSError>;
   /**
-   *  Stops a multipart upload. 
+   * Stops a multipart upload.
    */
   abortMultipartReadSetUpload(callback?: (err: AWSError, data: Omics.Types.AbortMultipartReadSetUploadResponse) => void): Request<Omics.Types.AbortMultipartReadSetUploadResponse, AWSError>;
   /**
@@ -62,11 +62,11 @@ declare class Omics extends Service {
    */
   cancelVariantImportJob(callback?: (err: AWSError, data: Omics.Types.CancelVariantImportResponse) => void): Request<Omics.Types.CancelVariantImportResponse, AWSError>;
   /**
-   *  Concludes a multipart upload once you have uploaded all the components. 
+   * Concludes a multipart upload once you have uploaded all the components.
    */
   completeMultipartReadSetUpload(params: Omics.Types.CompleteMultipartReadSetUploadRequest, callback?: (err: AWSError, data: Omics.Types.CompleteMultipartReadSetUploadResponse) => void): Request<Omics.Types.CompleteMultipartReadSetUploadResponse, AWSError>;
   /**
-   *  Concludes a multipart upload once you have uploaded all the components. 
+   * Concludes a multipart upload once you have uploaded all the components.
    */
   completeMultipartReadSetUpload(callback?: (err: AWSError, data: Omics.Types.CompleteMultipartReadSetUploadResponse) => void): Request<Omics.Types.CompleteMultipartReadSetUploadResponse, AWSError>;
   /**
@@ -86,11 +86,11 @@ declare class Omics extends Service {
    */
   createAnnotationStoreVersion(callback?: (err: AWSError, data: Omics.Types.CreateAnnotationStoreVersionResponse) => void): Request<Omics.Types.CreateAnnotationStoreVersionResponse, AWSError>;
   /**
-   *  Begins a multipart read set upload. 
+   * Begins a multipart read set upload.
    */
   createMultipartReadSetUpload(params: Omics.Types.CreateMultipartReadSetUploadRequest, callback?: (err: AWSError, data: Omics.Types.CreateMultipartReadSetUploadResponse) => void): Request<Omics.Types.CreateMultipartReadSetUploadResponse, AWSError>;
   /**
-   *  Begins a multipart read set upload. 
+   * Begins a multipart read set upload.
    */
   createMultipartReadSetUpload(callback?: (err: AWSError, data: Omics.Types.CreateMultipartReadSetUploadResponse) => void): Request<Omics.Types.CreateMultipartReadSetUploadResponse, AWSError>;
   /**
@@ -406,11 +406,11 @@ declare class Omics extends Service {
    */
   listAnnotationStores(callback?: (err: AWSError, data: Omics.Types.ListAnnotationStoresResponse) => void): Request<Omics.Types.ListAnnotationStoresResponse, AWSError>;
   /**
-   *  Lists multipart read set uploads and for in progress uploads. Once the upload is completed, a read set is created and the upload will no longer be returned in the respone. 
+   * Lists multipart read set uploads and for in progress uploads. Once the upload is completed, a read set is created and the upload will no longer be returned in the response.
    */
   listMultipartReadSetUploads(params: Omics.Types.ListMultipartReadSetUploadsRequest, callback?: (err: AWSError, data: Omics.Types.ListMultipartReadSetUploadsResponse) => void): Request<Omics.Types.ListMultipartReadSetUploadsResponse, AWSError>;
   /**
-   *  Lists multipart read set uploads and for in progress uploads. Once the upload is completed, a read set is created and the upload will no longer be returned in the respone. 
+   * Lists multipart read set uploads and for in progress uploads. Once the upload is completed, a read set is created and the upload will no longer be returned in the response.
    */
   listMultipartReadSetUploads(callback?: (err: AWSError, data: Omics.Types.ListMultipartReadSetUploadsResponse) => void): Request<Omics.Types.ListMultipartReadSetUploadsResponse, AWSError>;
   /**
@@ -438,11 +438,11 @@ declare class Omics extends Service {
    */
   listReadSetImportJobs(callback?: (err: AWSError, data: Omics.Types.ListReadSetImportJobsResponse) => void): Request<Omics.Types.ListReadSetImportJobsResponse, AWSError>;
   /**
-   *  This operation will list all parts in a requested multipart upload for a sequence store. 
+   * This operation will list all parts in a requested multipart upload for a sequence store.
    */
   listReadSetUploadParts(params: Omics.Types.ListReadSetUploadPartsRequest, callback?: (err: AWSError, data: Omics.Types.ListReadSetUploadPartsResponse) => void): Request<Omics.Types.ListReadSetUploadPartsResponse, AWSError>;
   /**
-   *  This operation will list all parts in a requested multipart upload for a sequence store. 
+   * This operation will list all parts in a requested multipart upload for a sequence store.
    */
   listReadSetUploadParts(callback?: (err: AWSError, data: Omics.Types.ListReadSetUploadPartsResponse) => void): Request<Omics.Types.ListReadSetUploadPartsResponse, AWSError>;
   /**
@@ -662,11 +662,11 @@ declare class Omics extends Service {
    */
   updateWorkflow(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  This operation uploads a specific part of a read set. If you upload a new part using a previously used part number, the previously uploaded part will be overwritten. 
+   * This operation uploads a specific part of a read set. If you upload a new part using a previously used part number, the previously uploaded part will be overwritten.
    */
   uploadReadSetPart(params: Omics.Types.UploadReadSetPartRequest, callback?: (err: AWSError, data: Omics.Types.UploadReadSetPartResponse) => void): Request<Omics.Types.UploadReadSetPartResponse, AWSError>;
   /**
-   *  This operation uploads a specific part of a read set. If you upload a new part using a previously used part number, the previously uploaded part will be overwritten. 
+   * This operation uploads a specific part of a read set. If you upload a new part using a previously used part number, the previously uploaded part will be overwritten.
    */
   uploadReadSetPart(callback?: (err: AWSError, data: Omics.Types.UploadReadSetPartResponse) => void): Request<Omics.Types.UploadReadSetPartResponse, AWSError>;
   /**
@@ -809,11 +809,11 @@ declare class Omics extends Service {
 declare namespace Omics {
   export interface AbortMultipartReadSetUploadRequest {
     /**
-     *  The sequence store ID for the store involved in the multipart upload. 
+     * The sequence store ID for the store involved in the multipart upload.
      */
     sequenceStoreId: SequenceStoreId;
     /**
-     *  The ID for the multipart upload. 
+     * The ID for the multipart upload.
      */
     uploadId: UploadId;
   }
@@ -1094,21 +1094,21 @@ declare namespace Omics {
   export type CommentChar = string;
   export interface CompleteMultipartReadSetUploadRequest {
     /**
-     *  The sequence store ID for the store involved in the multipart upload. 
+     * The sequence store ID for the store involved in the multipart upload.
      */
     sequenceStoreId: SequenceStoreId;
     /**
-     *  The ID for the multipart upload. 
+     * The ID for the multipart upload.
      */
     uploadId: UploadId;
     /**
-     *  The individual uploads or parts of a multipart upload. 
+     * The individual uploads or parts of a multipart upload.
      */
     parts: CompleteReadSetUploadPartList;
   }
   export interface CompleteMultipartReadSetUploadResponse {
     /**
-     *  The read set ID created for an uploaded read set. 
+     * The read set ID created for an uploaded read set.
      */
     readSetId: ReadSetId;
   }
@@ -1125,8 +1125,9 @@ declare namespace Omics {
     /**
      *  A unique identifier used to confirm that parts are being added to the correct upload. 
      */
-    checksum: String;
+    checksum: CompleteReadSetUploadPartListItemChecksumString;
   }
+  export type CompleteReadSetUploadPartListItemChecksumString = string;
   export type CompleteReadSetUploadPartListItemPartNumberInteger = number;
   export type CompletionTime = Date;
   export interface CreateAnnotationStoreRequest {
@@ -1251,89 +1252,89 @@ declare namespace Omics {
   }
   export interface CreateMultipartReadSetUploadRequest {
     /**
-     *  The sequence store ID for the store that is the destination of the multipart uploads. 
+     * The sequence store ID for the store that is the destination of the multipart uploads.
      */
     sequenceStoreId: SequenceStoreId;
     /**
-     *  An idempotency token that can be used to avoid triggering multiple multipart uploads. 
+     * An idempotency token that can be used to avoid triggering multiple multipart uploads.
      */
     clientToken?: ClientToken;
     /**
-     *  The type of file being uploaded. 
+     * The type of file being uploaded.
      */
     sourceFileType: FileType;
     /**
-     *  The source's subject ID. 
+     * The source's subject ID.
      */
     subjectId: SubjectId;
     /**
-     *  The source's sample ID. 
+     * The source's sample ID.
      */
     sampleId: SampleId;
     /**
-     *  Where the source originated. 
+     * Where the source originated.
      */
     generatedFrom?: GeneratedFrom;
     /**
-     *  The ARN of the reference. 
+     * The ARN of the reference.
      */
     referenceArn?: ReferenceArn;
     /**
-     *  The name of the read set. 
+     * The name of the read set.
      */
     name: ReadSetName;
     /**
-     *  The description of the read set. 
+     * The description of the read set.
      */
     description?: ReadSetDescription;
     /**
-     *  Any tags to add to the read set. 
+     * Any tags to add to the read set.
      */
     tags?: TagMap;
   }
   export interface CreateMultipartReadSetUploadResponse {
     /**
-     *  The sequence store ID for the store that the read set will be created in. 
+     * The sequence store ID for the store that the read set will be created in.
      */
     sequenceStoreId: SequenceStoreId;
     /**
-     *  he ID for the initiated multipart upload. 
+     * The ID for the initiated multipart upload.
      */
     uploadId: UploadId;
     /**
-     *  The file type of the read set source. 
+     * The file type of the read set source.
      */
     sourceFileType: FileType;
     /**
-     *  The source's subject ID. 
+     * The source's subject ID.
      */
     subjectId: SubjectId;
     /**
-     *  The source's sample ID. 
+     * The source's sample ID.
      */
     sampleId: SampleId;
     /**
-     *  The source of the read set. 
+     * The source of the read set.
      */
     generatedFrom?: GeneratedFrom;
     /**
-     *  The read set source's reference ARN. 
+     * The read set source's reference ARN.
      */
     referenceArn: ReferenceArn;
     /**
-     *  The name of the read set. 
+     * The name of the read set.
      */
     name?: ReadSetName;
     /**
-     *  The description of the read set. 
+     * The description of the read set.
      */
     description?: ReadSetDescription;
     /**
-     *  The tags to add to the read set. 
+     * The tags to add to the read set.
      */
     tags?: TagMap;
     /**
-     *  The creation time of the multipart upload. 
+     * The creation time of the multipart upload.
      */
     creationTime: SyntheticTimestamp_date_time;
   }
@@ -1411,7 +1412,7 @@ declare namespace Omics {
      */
     requestId: RunGroupRequestId;
     /**
-     *  The maximum GPUs that can be used by a run group. 
+     * The maximum GPUs that can be used by a run group.
      */
     maxGpus?: CreateRunGroupRequestMaxGpusInteger;
   }
@@ -1455,9 +1456,13 @@ declare namespace Omics {
      */
     clientToken?: ClientToken;
     /**
-     *  An S3 location that is used to store files that have failed a direct upload. 
+     * An S3 location that is used to store files that have failed a direct upload.
      */
     fallbackLocation?: S3Destination;
+    /**
+     * The ETag algorithm family to use for ingested read sets.
+     */
+    eTagAlgorithmFamily?: ETagAlgorithmFamily;
   }
   export interface CreateSequenceStoreResponse {
     /**
@@ -1485,9 +1490,13 @@ declare namespace Omics {
      */
     creationTime: SyntheticTimestamp_date_time;
     /**
-     *  An S3 location that is used to store files that have failed a direct upload. 
+     * An S3 location that is used to store files that have failed a direct upload.
      */
     fallbackLocation?: S3Destination;
+    /**
+     * The algorithm family of the ETag.
+     */
+    eTagAlgorithmFamily?: ETagAlgorithmFamily;
   }
   export interface CreateShareRequest {
     /**
@@ -1603,7 +1612,7 @@ declare namespace Omics {
      */
     requestId: WorkflowRequestId;
     /**
-     *  The computational accelerator specified to run the workflow. 
+     * The computational accelerator specified to run the workflow.
      */
     accelerators?: Accelerators;
   }
@@ -1741,19 +1750,20 @@ declare namespace Omics {
   export type Description = string;
   export interface ETag {
     /**
-     *  The algorithm used to calculate the read set’s ETag(s). 
+     * The algorithm used to calculate the read set’s ETag(s).
      */
     algorithm?: ETagAlgorithm;
     /**
-     *  The ETag hash calculated on Source1 of the read set. 
+     * The ETag hash calculated on Source1 of the read set.
      */
     source1?: String;
     /**
-     *  The ETag hash calculated on Source2 of the read set. 
+     * The ETag hash calculated on Source2 of the read set.
      */
     source2?: String;
   }
-  export type ETagAlgorithm = "FASTQ_MD5up"|"BAM_MD5up"|"CRAM_MD5up"|string;
+  export type ETagAlgorithm = "FASTQ_MD5up"|"BAM_MD5up"|"CRAM_MD5up"|"FASTQ_SHA256up"|"BAM_SHA256up"|"CRAM_SHA256up"|"FASTQ_SHA512up"|"BAM_SHA512up"|"CRAM_SHA512up"|string;
+  export type ETagAlgorithmFamily = "MD5up"|"SHA256up"|"SHA512up"|string;
   export type Encoding = string;
   export type EncryptionType = "KMS"|string;
   export type EngineLogStream = string;
@@ -1835,6 +1845,10 @@ declare namespace Omics {
      * The file's content length.
      */
     contentLength?: FileInformationContentLengthLong;
+    /**
+     * The S3 URI metadata of a sequence store.
+     */
+    s3Access?: ReadSetS3Access;
   }
   export type FileInformationContentLengthLong = number;
   export type FileInformationPartSizeLong = number;
@@ -1917,7 +1931,7 @@ declare namespace Omics {
     runLeftNormalization: RunLeftNormalization;
     formatOptions: FormatOptions;
     /**
-     *  The annotation schema generated by the parsed annotation data. 
+     * The annotation schema generated by the parsed annotation data.
      */
     annotationFields?: AnnotationFieldMap;
   }
@@ -2245,7 +2259,7 @@ declare namespace Omics {
      */
     files?: ReadSetFiles;
     /**
-     *  The status message for a read set. It provides more detail as to why the read set has a status. 
+     * The status message for a read set. It provides more detail as to why the read set has a status. 
      */
     statusMessage?: ReadSetStatusMessage;
     /**
@@ -2253,7 +2267,7 @@ declare namespace Omics {
      */
     creationType?: CreationType;
     /**
-     *  The entity tag (ETag) is a hash of the object meant to represent its semantic content. 
+     * The entity tag (ETag) is a hash of the object meant to represent its semantic content.
      */
     etag?: ETag;
   }
@@ -2479,7 +2493,7 @@ declare namespace Omics {
      */
     tags?: TagMap;
     /**
-     *  The maximum GPUs that can be used by a run group. 
+     * The maximum GPUs that can be used by a run group.
      */
     maxGpus?: GetRunGroupResponseMaxGpusInteger;
   }
@@ -2591,7 +2605,7 @@ declare namespace Omics {
      */
     tags?: TagMap;
     /**
-     *  The computational accelerator used to run the workflow. 
+     * The computational accelerator used to run the workflow.
      */
     accelerators?: Accelerators;
     /**
@@ -2599,19 +2613,19 @@ declare namespace Omics {
      */
     retentionMode?: RunRetentionMode;
     /**
-     *  The reason a run has failed. 
+     * The reason a run has failed.
      */
     failureReason?: RunFailureReason;
     /**
-     *  The location of the run log. 
+     * The location of the run log.
      */
     logLocation?: RunLogLocation;
     /**
-     *  The universally unique identifier for a run. 
+     * The universally unique identifier for a run.
      */
     uuid?: RunUuid;
     /**
-     *  The destination for workflow outputs. 
+     * The destination for workflow outputs.
      */
     runOutputUri?: RunOutputUri;
   }
@@ -2669,15 +2683,15 @@ declare namespace Omics {
      */
     logStream?: TaskLogStream;
     /**
-     *  The number of Graphics Processing Units (GPU) specified in the task. 
+     * The number of Graphics Processing Units (GPU) specified in the task.
      */
     gpus?: GetRunTaskResponseGpusInteger;
     /**
-     *  The instance type for a task. 
+     * The instance type for a task.
      */
     instanceType?: TaskInstanceType;
     /**
-     *  The reason a task has failed. 
+     * The reason a task has failed.
      */
     failureReason?: TaskFailureReason;
   }
@@ -2716,9 +2730,17 @@ declare namespace Omics {
      */
     creationTime: SyntheticTimestamp_date_time;
     /**
-     *  An S3 location that is used to store files that have failed a direct upload. 
+     * An S3 location that is used to store files that have failed a direct upload.
      */
     fallbackLocation?: S3Destination;
+    /**
+     * The S3 metadata of a sequence store, including the ARN and S3 URI of the S3 bucket.
+     */
+    s3Access?: SequenceStoreS3Access;
+    /**
+     * The algorithm family of the ETag.
+     */
+    eTagAlgorithmFamily?: ETagAlgorithmFamily;
   }
   export interface GetShareRequest {
     /**
@@ -2780,7 +2802,7 @@ declare namespace Omics {
      */
     runLeftNormalization: RunLeftNormalization;
     /**
-     *  The annotation schema generated by the parsed annotation data. 
+     * The annotation schema generated by the parsed annotation data.
      */
     annotationFields?: AnnotationFieldMap;
   }
@@ -2916,11 +2938,11 @@ declare namespace Omics {
      */
     tags?: TagMap;
     /**
-     *  Gets metadata for workflow. 
+     * Gets metadata for workflow.
      */
     metadata?: WorkflowMetadata;
     /**
-     *  The computational accelerator specified to run the workflow. 
+     * The computational accelerator specified to run the workflow. 
      */
     accelerators?: Accelerators;
   }
@@ -3204,26 +3226,26 @@ declare namespace Omics {
   }
   export interface ListMultipartReadSetUploadsRequest {
     /**
-     *  The Sequence Store ID used for the multipart uploads. 
+     * The Sequence Store ID used for the multipart uploads.
      */
     sequenceStoreId: SequenceStoreId;
     /**
-     *  The maximum number of multipart uploads returned in a page. 
+     * The maximum number of multipart uploads returned in a page.
      */
     maxResults?: ListMultipartReadSetUploadsRequestMaxResultsInteger;
     /**
-     *  Next token returned in the response of a previous ListMultipartReadSetUploads call. Used to get the next page of results. 
+     * Next token returned in the response of a previous ListMultipartReadSetUploads call. Used to get the next page of results.
      */
     nextToken?: NextToken;
   }
   export type ListMultipartReadSetUploadsRequestMaxResultsInteger = number;
   export interface ListMultipartReadSetUploadsResponse {
     /**
-     *  Next token returned in the response of a previous ListMultipartReadSetUploads call. Used to get the next page of results. 
+     * Next token returned in the response of a previous ListMultipartReadSetUploads call. Used to get the next page of results.
      */
     nextToken?: NextToken;
     /**
-     *  An array of multipart uploads. 
+     * An array of multipart uploads.
      */
     uploads?: MultipartReadSetUploadList;
   }
@@ -3316,38 +3338,38 @@ declare namespace Omics {
   }
   export interface ListReadSetUploadPartsRequest {
     /**
-     *  The Sequence Store ID used for the multipart uploads. 
+     * The Sequence Store ID used for the multipart uploads.
      */
     sequenceStoreId: SequenceStoreId;
     /**
-     *  The ID for the initiated multipart upload. 
+     * The ID for the initiated multipart upload.
      */
     uploadId: UploadId;
     /**
-     *  The source file for the upload part. 
+     * The source file for the upload part.
      */
     partSource: ReadSetPartSource;
     /**
-     *  The maximum number of read set upload parts returned in a page. 
+     * The maximum number of read set upload parts returned in a page.
      */
     maxResults?: ListReadSetUploadPartsRequestMaxResultsInteger;
     /**
-     *  Next token returned in the response of a previous ListReadSetUploadPartsRequest call. Used to get the next page of results. 
+     * Next token returned in the response of a previous ListReadSetUploadPartsRequest call. Used to get the next page of results.
      */
     nextToken?: NextToken;
     /**
-     *  Attributes used to filter for a specific subset of read set part uploads. 
+     * Attributes used to filter for a specific subset of read set part uploads.
      */
     filter?: ReadSetUploadPartListFilter;
   }
   export type ListReadSetUploadPartsRequestMaxResultsInteger = number;
   export interface ListReadSetUploadPartsResponse {
     /**
-     *  Next token returned in the response of a previous ListReadSetUploadParts call. Used to get the next page of results. 
+     * Next token returned in the response of a previous ListReadSetUploadParts call. Used to get the next page of results.
      */
     nextToken?: NextToken;
     /**
-     *  An array of upload parts. 
+     * An array of upload parts.
      */
     parts?: ReadSetUploadPartList;
   }
@@ -3535,7 +3557,7 @@ declare namespace Omics {
      */
     maxResults?: ListRunsRequestMaxResultsInteger;
     /**
-     *  The status of a run. 
+     * The status of a run.
      */
     status?: RunStatus;
   }
@@ -3948,13 +3970,19 @@ declare namespace Omics {
      */
     creationType?: CreationType;
     /**
-     *  The entity tag (ETag) is a hash of the object representing its semantic content. 
+     * The entity tag (ETag) is a hash of the object representing its semantic content.
      */
     etag?: ETag;
   }
   export type ReadSetName = string;
   export type ReadSetPartSource = "SOURCE1"|"SOURCE2"|string;
   export type ReadSetPartStreamingBlob = Buffer|Uint8Array|Blob|string|Readable;
+  export interface ReadSetS3Access {
+    /**
+     * The S3 URI for each read set file.
+     */
+    s3Uri?: S3Uri;
+  }
   export type ReadSetStatus = "ARCHIVED"|"ACTIVATING"|"ACTIVE"|"DELETING"|"DELETED"|"PROCESSING_UPLOAD"|"UPLOAD_FAILED"|string;
   export type ReadSetStatusMessage = string;
   export type ReadSetStreamingBlob = Buffer|Uint8Array|Blob|string|Readable;
@@ -4229,11 +4257,11 @@ declare namespace Omics {
   export type RunLogLevel = "OFF"|"FATAL"|"ERROR"|"ALL"|string;
   export interface RunLogLocation {
     /**
-     *  The log stream ARN for the engine log. 
+     * The log stream ARN for the engine log.
      */
     engineLogStream?: EngineLogStream;
     /**
-     *  The log stream ARN for the run log. 
+     * The log stream ARN for the run log.
      */
     runLogStream?: RunLogStream;
   }
@@ -4253,6 +4281,7 @@ declare namespace Omics {
   export type RunStatusMessage = string;
   export type RunTimestamp = Date;
   export type RunUuid = string;
+  export type S3AccessPointArn = string;
   export type S3Destination = string;
   export type S3Uri = string;
   export type SampleId = string;
@@ -4309,6 +4338,10 @@ declare namespace Omics {
      *  An S3 location that is used to store files that have failed a direct upload. 
      */
     fallbackLocation?: S3Destination;
+    /**
+     * The algorithm family of the ETag.
+     */
+    eTagAlgorithmFamily?: ETagAlgorithmFamily;
   }
   export type SequenceStoreDetailList = SequenceStoreDetail[];
   export interface SequenceStoreFilter {
@@ -4327,6 +4360,16 @@ declare namespace Omics {
   }
   export type SequenceStoreId = string;
   export type SequenceStoreName = string;
+  export interface SequenceStoreS3Access {
+    /**
+     * The S3 URI of the sequence store.
+     */
+    s3Uri?: S3Uri;
+    /**
+     * This is ARN of the access point associated with the S3 bucket storing read sets.
+     */
+    s3AccessPointArn?: S3AccessPointArn;
+  }
   export interface ShareDetails {
     /**
      *  The ID for a share offer for an analytics store . 
@@ -4415,7 +4458,7 @@ declare namespace Omics {
      */
     runLeftNormalization?: RunLeftNormalization;
     /**
-     *  The annotation schema generated by the parsed annotation data. 
+     * The annotation schema generated by the parsed annotation data.
      */
     annotationFields?: AnnotationFieldMap;
   }
@@ -4681,7 +4724,7 @@ declare namespace Omics {
      */
     parameters?: RunParameters;
     /**
-     * A storage capacity for the run in gigabytes.
+     * A storage capacity for the run in gibibytes.
      */
     storageCapacity?: StartRunRequestStorageCapacityInteger;
     /**
@@ -4725,11 +4768,11 @@ declare namespace Omics {
      */
     tags?: TagMap;
     /**
-     *  The universally unique identifier for a run. 
+     * The universally unique identifier for a run.
      */
     uuid?: RunUuid;
     /**
-     *  The destination for workflow outputs. 
+     * The destination for workflow outputs.
      */
     runOutputUri?: RunOutputUri;
   }
@@ -4751,7 +4794,7 @@ declare namespace Omics {
      */
     runLeftNormalization?: RunLeftNormalization;
     /**
-     *  The annotation schema generated by the parsed annotation data. 
+     * The annotation schema generated by the parsed annotation data.
      */
     annotationFields?: AnnotationFieldMap;
   }
@@ -4835,7 +4878,7 @@ declare namespace Omics {
      */
     gpus?: TaskListItemGpusInteger;
     /**
-     *  The instance type for a task. 
+     *  The instance type for a task.
      */
     instanceType?: TaskInstanceType;
   }
@@ -5014,7 +5057,7 @@ declare namespace Omics {
      */
     maxDuration?: UpdateRunGroupRequestMaxDurationInteger;
     /**
-     *  The maximum GPUs that can be used by a run group. 
+     * The maximum GPUs that can be used by a run group.
      */
     maxGpus?: UpdateRunGroupRequestMaxGpusInteger;
   }
@@ -5080,30 +5123,30 @@ declare namespace Omics {
   export type UploadId = string;
   export interface UploadReadSetPartRequest {
     /**
-     *  The Sequence Store ID used for the multipart upload. 
+     * The Sequence Store ID used for the multipart upload.
      */
     sequenceStoreId: SequenceStoreId;
     /**
-     *  The ID for the initiated multipart upload. 
+     * The ID for the initiated multipart upload.
      */
     uploadId: UploadId;
     /**
-     *  The source file for an upload part. 
+     * The source file for an upload part.
      */
     partSource: ReadSetPartSource;
     /**
-     *  The number of the part being uploaded. 
+     * The number of the part being uploaded.
      */
     partNumber: UploadReadSetPartRequestPartNumberInteger;
     /**
-     *  The read set data to upload for a part. 
+     * The read set data to upload for a part.
      */
     payload: ReadSetPartStreamingBlob;
   }
   export type UploadReadSetPartRequestPartNumberInteger = number;
   export interface UploadReadSetPartResponse {
     /**
-     *  An identifier used to confirm that parts are being added to the intended upload. 
+     * An identifier used to confirm that parts are being added to the intended upload.
      */
     checksum: String;
   }
