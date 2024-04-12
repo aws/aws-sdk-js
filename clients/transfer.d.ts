@@ -559,7 +559,7 @@ declare namespace Transfer {
   export type CertificateIds = CertificateId[];
   export type CertificateStatusType = "ACTIVE"|"PENDING_ROTATION"|"INACTIVE"|string;
   export type CertificateType = "CERTIFICATE"|"CERTIFICATE_WITH_PRIVATE_KEY"|string;
-  export type CertificateUsageType = "SIGNING"|"ENCRYPTION"|string;
+  export type CertificateUsageType = "SIGNING"|"ENCRYPTION"|"TLS"|string;
   export type CompressionEnum = "ZLIB"|"DISABLED"|string;
   export type ConnectorId = string;
   export type ConnectorSecurityPolicyName = string;
@@ -1255,7 +1255,7 @@ declare namespace Transfer {
      */
     CertificateId?: CertificateId;
     /**
-     * Specifies whether this certificate is used for signing or encryption.
+     * Specifies how this certificate is used. It can be used in the following ways:    SIGNING: For signing AS2 messages    ENCRYPTION: For encrypting AS2 messages    TLS: For securing AS2 communications sent over HTTPS  
      */
     Usage?: CertificateUsageType;
     /**
@@ -1770,7 +1770,7 @@ declare namespace Transfer {
   export type IdentityProviderType = "SERVICE_MANAGED"|"API_GATEWAY"|"AWS_DIRECTORY_SERVICE"|"AWS_LAMBDA"|string;
   export interface ImportCertificateRequest {
     /**
-     * Specifies whether this certificate is used for signing or encryption.
+     * Specifies how this certificate is used. It can be used in the following ways:    SIGNING: For signing AS2 messages    ENCRYPTION: For encrypting AS2 messages    TLS: For securing AS2 communications sent over HTTPS  
      */
     Usage: CertificateUsageType;
     /**
@@ -2222,7 +2222,7 @@ declare namespace Transfer {
      */
     CertificateId?: CertificateId;
     /**
-     * Specifies whether this certificate is used for signing or encryption.
+     * Specifies how this certificate is used. It can be used in the following ways:    SIGNING: For signing AS2 messages    ENCRYPTION: For encrypting AS2 messages    TLS: For securing AS2 communications sent over HTTPS  
      */
     Usage?: CertificateUsageType;
     /**

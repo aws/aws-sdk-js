@@ -1,6 +1,16 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1598.0-->
+<!--LATEST=2.1599.0-->
 <!--ENTRYINSERT-->
+
+## 2.1599.0
+* feature: CloudFormation: Adding support for the new parameter "IncludePropertyValues" in the CloudFormation DescribeChangeSet API. When this parameter is included, the DescribeChangeSet response will include more detailed information such as before and after values for the resource properties that will change.
+* feature: Glue: Modifying request for GetUnfilteredTableMetadata for view-related fields.
+* feature: HealthLake: Added new CREATE_FAILED status for data stores. Added new errorCause to DescribeFHIRDatastore API and ListFHIRDatastores API response for additional insights into data store creation and deletion workflows.
+* feature: KMS: This feature supports the ability to specify a custom rotation period for automatic key rotations, the ability to perform on-demand key rotations, and visibility into your key material rotations.
+* feature: MediaTailor: Added InsertionMode to PlaybackConfigurations. This setting controls whether players can use stitched or guided ad insertion. The default for players that do not specify an insertion mode is stitched.
+* feature: Outposts: This release adds EXPEDITORS as a valid shipment carrier.
+* feature: Redshift: Adds support for Amazon Redshift DescribeClusterSnapshots API to include Snapshot ARN response field.
+* feature: Transfer: This change releases support for importing self signed certificates to the Transfer Family for sending outbound file transfers over TLS/HTTPS.
 
 ## 2.1598.0
 * feature: Batch: This release adds the task properties field to attempt details and the name field on EKS container detail.

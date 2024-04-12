@@ -6107,6 +6107,10 @@ declare namespace Redshift {
      * The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin credentials secret.
      */
     MasterPasswordSecretKmsKeyId?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the snapshot.
+     */
+    SnapshotArn?: String;
   }
   export type SnapshotAttributeToSortBy = "SOURCE_TYPE"|"TOTAL_SIZE"|"CREATE_TIME"|string;
   export interface SnapshotCopyGrant {

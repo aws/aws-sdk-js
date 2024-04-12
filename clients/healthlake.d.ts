@@ -234,9 +234,13 @@ declare namespace HealthLake {
      * The identity provider that you selected when you created the data store.
      */
     IdentityProviderConfiguration?: IdentityProviderConfiguration;
+    /**
+     * The error cause for the current data store operation.
+     */
+    ErrorCause?: ErrorCause;
   }
   export type DatastorePropertiesList = DatastoreProperties[];
-  export type DatastoreStatus = "CREATING"|"ACTIVE"|"DELETING"|"DELETED"|string;
+  export type DatastoreStatus = "CREATING"|"ACTIVE"|"DELETING"|"DELETED"|"CREATE_FAILED"|string;
   export interface DeleteFHIRDatastoreRequest {
     /**
      *  The AWS-generated ID for the data store to be deleted.
@@ -306,6 +310,18 @@ declare namespace HealthLake {
     ImportJobProperties: ImportJobProperties;
   }
   export type EncryptionKeyID = string;
+  export type ErrorCategory = "RETRYABLE_ERROR"|"NON_RETRYABLE_ERROR"|string;
+  export interface ErrorCause {
+    /**
+     * The text of the error message.
+     */
+    ErrorMessage?: ErrorMessage;
+    /**
+     * The error category of the create/delete data store operation. Possible statuses are RETRYABLE_ERROR or NON_RETRYABLE_ERROR.
+     */
+    ErrorCategory?: ErrorCategory;
+  }
+  export type ErrorMessage = string;
   export interface ExportJobProperties {
     /**
      * The AWS generated ID for an export job.

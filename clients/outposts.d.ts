@@ -949,7 +949,7 @@ declare namespace Outposts {
     MaximumSupportedWeightLbs?: MaximumSupportedWeightLbs;
   }
   export type ServerEndpoint = string;
-  export type ShipmentCarrier = "DHL"|"DBS"|"FEDEX"|"UPS"|string;
+  export type ShipmentCarrier = "DHL"|"DBS"|"FEDEX"|"UPS"|"EXPEDITORS"|string;
   export interface ShipmentInformation {
     /**
      *  The tracking number of the shipment. 

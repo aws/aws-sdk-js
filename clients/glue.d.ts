@@ -1060,11 +1060,11 @@ declare class Glue extends Service {
    */
   getUnfilteredPartitionsMetadata(callback?: (err: AWSError, data: Glue.Types.GetUnfilteredPartitionsMetadataResponse) => void): Request<Glue.Types.GetUnfilteredPartitionsMetadataResponse, AWSError>;
   /**
-   * Retrieves table metadata from the Data Catalog that contains unfiltered metadata. For IAM authorization, the public IAM action associated with this API is glue:GetTable.
+   * Allows a third-party analytical engine to retrieve unfiltered table metadata from the Data Catalog. For IAM authorization, the public IAM action associated with this API is glue:GetTable.
    */
   getUnfilteredTableMetadata(params: Glue.Types.GetUnfilteredTableMetadataRequest, callback?: (err: AWSError, data: Glue.Types.GetUnfilteredTableMetadataResponse) => void): Request<Glue.Types.GetUnfilteredTableMetadataResponse, AWSError>;
   /**
-   * Retrieves table metadata from the Data Catalog that contains unfiltered metadata. For IAM authorization, the public IAM action associated with this API is glue:GetTable.
+   * Allows a third-party analytical engine to retrieve unfiltered table metadata from the Data Catalog. For IAM authorization, the public IAM action associated with this API is glue:GetTable.
    */
   getUnfilteredTableMetadata(callback?: (err: AWSError, data: Glue.Types.GetUnfilteredTableMetadataResponse) => void): Request<Glue.Types.GetUnfilteredTableMetadataResponse, AWSError>;
   /**
@@ -8292,9 +8292,17 @@ declare namespace Glue {
      */
     AuditContext?: AuditContext;
     /**
-     * (Required) A list of supported permission types. 
+     * Indicates the level of filtering a third-party analytical engine is capable of enforcing when calling the GetUnfilteredTableMetadata API operation. Accepted values are:    COLUMN_PERMISSION - Column permissions ensure that users can access only specific columns in the table. If there are particular columns contain sensitive data, data lake administrators can define column filters that exclude access to specific columns.    CELL_FILTER_PERMISSION - Cell-level filtering combines column filtering (include or exclude columns) and row filter expressions to restrict access to individual elements in the table.    NESTED_PERMISSION - Nested permissions combines cell-level filtering and nested column filtering to restrict access to columns and/or nested columns in specific rows based on row filter expressions.    NESTED_CELL_PERMISSION - Nested cell permissions combines nested permission with nested cell-level filtering. This allows different subsets of nested columns to be restricted based on an array of row filter expressions.    Note: Each of these permission types follows a hierarchical order where each subsequent permission type includes all permission of the previous type. Important: If you provide a supported permission type that doesn't match the user's level of permissions on the table, then Lake Formation raises an exception. For example, if the third-party engine calling the GetUnfilteredTableMetadata operation can enforce only column-level filtering, and the user has nested cell filtering applied on the table, Lake Formation throws an exception, and will not return unfiltered table metadata and data access credentials.
      */
     SupportedPermissionTypes: PermissionTypeList;
+    /**
+     * The resource ARN of the view.
+     */
+    ParentResourceArn?: ArnString;
+    /**
+     * The resource ARN of the root view in a chain of nested views.
+     */
+    RootResourceArn?: ArnString;
     /**
      * A structure specifying the dialect and dialect version used by the query engine.
      */
@@ -9334,11 +9342,11 @@ declare namespace Glue {
      */
     StartingPosition?: StartingPosition;
     /**
-     * The maximum time spent in the job executor to fetch a record from the Kinesis data stream per shard, specified in milliseconds (ms). The default value is 1000.
+     * The maximum time spent for the job executor to read records for the current batch from the Kinesis data stream, specified in milliseconds (ms). Multiple GetRecords API calls may be made within this time. The default value is 1000.
      */
     MaxFetchTimeInMs?: BoxedNonNegativeLong;
     /**
-     * The maximum number of records to fetch per shard in the Kinesis data stream. The default value is 100000.
+     * The maximum number of records to fetch per shard in the Kinesis data stream per microbatch. Note: The client can exceed this limit if the streaming job has already read extra records from Kinesis (in the same get-records call). If MaxFetchRecordsPerShard needs to be strict then it needs to be a multiple of MaxRecordPerRead. The default value is 100000.
      */
     MaxFetchRecordsPerShard?: BoxedNonNegativeLong;
     /**

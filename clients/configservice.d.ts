@@ -1056,7 +1056,7 @@ declare namespace ConfigService {
      */
     recordingFrequency?: RecordingFrequency;
     /**
-     * The time when configuration changes for the resource were delivered.
+     * The time when configuration changes for the resource were delivered.  This field is optional and is not guaranteed to be present in a configuration item (CI). If you are using daily recording, this field will be populated. However, if you are using continuous recording, this field will be omitted since the delivery time is instantaneous as the CI is available right away. For more information on daily recording and continuous recording, see Recording Frequency in the Config Developer Guide. 
      */
     configurationItemDeliveryTime?: ConfigurationItemDeliveryTime;
   }
@@ -1482,7 +1482,7 @@ declare namespace ConfigService {
      */
     recordingFrequency?: RecordingFrequency;
     /**
-     * The time when configuration changes for the resource were delivered.
+     * The time when configuration changes for the resource were delivered.  This field is optional and is not guaranteed to be present in a configuration item (CI). If you are using daily recording, this field will be populated. However, if you are using continuous recording, this field will be omitted since the delivery time is instantaneous as the CI is available right away. For more information on daily recording and continuous recording, see Recording Frequency in the Config Developer Guide. 
      */
     configurationItemDeliveryTime?: ConfigurationItemDeliveryTime;
   }
@@ -2082,7 +2082,7 @@ declare namespace ConfigService {
      */
     NextToken?: String;
     /**
-     * The number of rule evaluation results that you want returned. This parameter is required if the rule limit for your account is more than the default of 150 rules. For information about requesting a rule limit increase, see Config Limits in the Amazon Web Services General Reference Guide.
+     * The number of rule evaluation results that you want returned. This parameter is required if the rule limit for your account is more than the default of 1000 rules. For information about requesting a rule limit increase, see Config Limits in the Amazon Web Services General Reference Guide.
      */
     Limit?: RuleLimit;
   }
@@ -4355,7 +4355,7 @@ declare namespace ConfigService {
   }
   export interface ResourceEvaluationFilters {
     /**
-     * Filters all resource evaluations results based on an evaluation mode. the valid value for this API is Proactive.
+     * Filters all resource evaluations results based on an evaluation mode.  Currently, DECTECTIVE is not supported as a valid value. Ignore other documentation stating otherwise. 
      */
     EvaluationMode?: EvaluationMode;
     /**

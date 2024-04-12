@@ -1927,7 +1927,8 @@
       "type": "string",
       "enum": [
         "SIGNING",
-        "ENCRYPTION"
+        "ENCRYPTION",
+        "TLS"
       ]
     },
     "CompressionEnum": {
@@ -2999,7 +3000,7 @@
         },
         "Usage": {
           "shape": "CertificateUsageType",
-          "documentation": "<p>Specifies whether this certificate is used for signing or encryption.</p>"
+          "documentation": "<p>Specifies how this certificate is used. It can be used in the following ways:</p> <ul> <li> <p> <code>SIGNING</code>: For signing AS2 messages</p> </li> <li> <p> <code>ENCRYPTION</code>: For encrypting AS2 messages</p> </li> <li> <p> <code>TLS</code>: For securing AS2 communications sent over HTTPS</p> </li> </ul>"
         },
         "Status": {
           "shape": "CertificateStatusType",
@@ -3776,7 +3777,7 @@
       "members": {
         "Usage": {
           "shape": "CertificateUsageType",
-          "documentation": "<p>Specifies whether this certificate is used for signing or encryption.</p>"
+          "documentation": "<p>Specifies how this certificate is used. It can be used in the following ways:</p> <ul> <li> <p> <code>SIGNING</code>: For signing AS2 messages</p> </li> <li> <p> <code>ENCRYPTION</code>: For encrypting AS2 messages</p> </li> <li> <p> <code>TLS</code>: For securing AS2 communications sent over HTTPS</p> </li> </ul>"
         },
         "Certificate": {
           "shape": "CertificateBodyType",
@@ -4417,7 +4418,7 @@
         },
         "Usage": {
           "shape": "CertificateUsageType",
-          "documentation": "<p>Specifies whether this certificate is used for signing or encryption.</p>"
+          "documentation": "<p>Specifies how this certificate is used. It can be used in the following ways:</p> <ul> <li> <p> <code>SIGNING</code>: For signing AS2 messages</p> </li> <li> <p> <code>ENCRYPTION</code>: For encrypting AS2 messages</p> </li> <li> <p> <code>TLS</code>: For securing AS2 communications sent over HTTPS</p> </li> </ul>"
         },
         "Status": {
           "shape": "CertificateStatusType",

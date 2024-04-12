@@ -814,9 +814,12 @@ declare namespace CloudFormation {
      */
     Arn?: PrivateTypeArn;
   }
+  export type AfterContext = string;
+  export type AfterValue = string;
   export type AllowedValue = string;
   export type AllowedValues = AllowedValue[];
   export type Arn = string;
+  export type AttributeChangeType = "Add"|"Remove"|"Modify"|string;
   export interface AutoDeployment {
     /**
      * If set to true, StackSets automatically deploys additional stack instances to Organizations accounts that are added to a target organization or organizational unit (OU) in the specified Regions. If an account is removed from a target organization or OU, StackSets deletes stack instances from the account in the specified Regions.
@@ -864,6 +867,8 @@ declare namespace CloudFormation {
      */
     TypeConfigurations?: TypeConfigurationDetailsList;
   }
+  export type BeforeContext = string;
+  export type BeforeValue = string;
   export type BoxedInteger = number;
   export type BoxedMaxResults = number;
   export type CallAs = "SELF"|"DELEGATED_ADMIN"|string;
@@ -884,7 +889,7 @@ declare namespace CloudFormation {
   export type CausingEntity = string;
   export interface Change {
     /**
-     * The type of entity that CloudFormation changes. Currently, the only entity type is Resource.
+     * The type of entity that CloudFormation changes.    Resource This change is for a resource.  
      */
     Type?: ChangeType;
     /**
@@ -1564,6 +1569,10 @@ declare namespace CloudFormation {
      * A string (provided by the DescribeChangeSet response output) that identifies the next page of information that you want to retrieve.
      */
     NextToken?: NextToken;
+    /**
+     * If true, the returned changes include detailed changes in the property values.
+     */
+    IncludePropertyValues?: IncludePropertyValues;
   }
   export interface DescribeChangeSetOutput {
     /**
@@ -2459,6 +2468,7 @@ declare namespace CloudFormation {
   export type InProgressStackInstancesCount = number;
   export type InSyncStackInstancesCount = number;
   export type IncludeNestedStacks = boolean;
+  export type IncludePropertyValues = boolean;
   export type IsActivated = boolean;
   export type IsDefaultConfiguration = boolean;
   export type IsDefaultVersion = boolean;
@@ -3358,6 +3368,14 @@ declare namespace CloudFormation {
      * Contains information about the module from which the resource was created, if the resource was created from a module included in the stack template.
      */
     ModuleInfo?: ModuleInfo;
+    /**
+     * An encoded JSON string containing the context of the resource before the change is executed.
+     */
+    BeforeContext?: BeforeContext;
+    /**
+     * An encoded JSON string containing the context of the resource after the change is executed.
+     */
+    AfterContext?: AfterContext;
   }
   export interface ResourceChangeDetail {
     /**
@@ -3442,6 +3460,7 @@ declare namespace CloudFormation {
   export type ResourceIdentifiers = ResourceIdentifierPropertyKey[];
   export type ResourceModel = string;
   export type ResourceProperties = string;
+  export type ResourcePropertyPath = string;
   export type ResourceScanId = string;
   export type ResourceScanStatus = "IN_PROGRESS"|"FAILED"|"COMPLETE"|"EXPIRED"|string;
   export type ResourceScanStatusReason = string;
@@ -3490,6 +3509,22 @@ declare namespace CloudFormation {
      * If the Attribute value is Properties, indicates whether a change to this property causes the resource to be recreated. The value can be Never, Always, or Conditionally. To determine the conditions for a Conditionally recreation, see the update behavior for that property in the CloudFormation User Guide.
      */
     RequiresRecreation?: RequiresRecreation;
+    /**
+     * The property path of the property.
+     */
+    Path?: ResourcePropertyPath;
+    /**
+     * The value of the property before the change is executed. Large values can be truncated.
+     */
+    BeforeValue?: BeforeValue;
+    /**
+     * The value of the property after the change is executed. Large values can be truncated.
+     */
+    AfterValue?: AfterValue;
+    /**
+     * The type of change to be made to the property if the change is executed.    Add The item will be added.    Remove The item will be removed.    Modify The item will be modified.  
+     */
+    AttributeChangeType?: AttributeChangeType;
   }
   export interface ResourceToImport {
     /**
