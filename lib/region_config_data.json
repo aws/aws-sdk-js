@@ -9,6 +9,7 @@
     "eu-isoe-*/*": "euIsoe",
     "us-iso-*/*": "usIso",
     "us-isob-*/*": "usIsob",
+    "us-isof-*/*": "usIsof",
     "*/budgets": "globalSSL",
     "*/cloudfront": "globalSSL",
     "*/sts": "globalSSL",
@@ -252,6 +253,9 @@
     },
     "usIsob": {
       "endpoint": "{service}.{region}.sc2s.sgov.gov"
+    },
+    "usIsof": {
+      "endpoint": "{service}.{region}.csp.hci.ic.gov"
     },
     "fipsStandard": {
       "endpoint": "{service}-fips.{region}.amazonaws.com"
