@@ -132,11 +132,11 @@ declare class IoTWireless extends Service {
    */
   createWirelessDevice(callback?: (err: AWSError, data: IoTWireless.Types.CreateWirelessDeviceResponse) => void): Request<IoTWireless.Types.CreateWirelessDeviceResponse, AWSError>;
   /**
-   * Provisions a wireless gateway.
+   * Provisions a wireless gateway.  When provisioning a wireless gateway, you might run into duplication errors for the following reasons.   If you specify a GatewayEui value that already exists.   If you used a ClientRequestToken with the same parameters within the last 10 minutes.   To avoid this error, make sure that you use unique identifiers and parameters for each request within the specified time period. 
    */
   createWirelessGateway(params: IoTWireless.Types.CreateWirelessGatewayRequest, callback?: (err: AWSError, data: IoTWireless.Types.CreateWirelessGatewayResponse) => void): Request<IoTWireless.Types.CreateWirelessGatewayResponse, AWSError>;
   /**
-   * Provisions a wireless gateway.
+   * Provisions a wireless gateway.  When provisioning a wireless gateway, you might run into duplication errors for the following reasons.   If you specify a GatewayEui value that already exists.   If you used a ClientRequestToken with the same parameters within the last 10 minutes.   To avoid this error, make sure that you use unique identifiers and parameters for each request within the specified time period. 
    */
   createWirelessGateway(callback?: (err: AWSError, data: IoTWireless.Types.CreateWirelessGatewayResponse) => void): Request<IoTWireless.Types.CreateWirelessGatewayResponse, AWSError>;
   /**
@@ -228,11 +228,11 @@ declare class IoTWireless extends Service {
    */
   deleteWirelessDeviceImportTask(callback?: (err: AWSError, data: IoTWireless.Types.DeleteWirelessDeviceImportTaskResponse) => void): Request<IoTWireless.Types.DeleteWirelessDeviceImportTaskResponse, AWSError>;
   /**
-   * Deletes a wireless gateway.
+   * Deletes a wireless gateway.  When deleting a wireless gateway, you might run into duplication errors for the following reasons.   If you specify a GatewayEui value that already exists.   If you used a ClientRequestToken with the same parameters within the last 10 minutes.   To avoid this error, make sure that you use unique identifiers and parameters for each request within the specified time period. 
    */
   deleteWirelessGateway(params: IoTWireless.Types.DeleteWirelessGatewayRequest, callback?: (err: AWSError, data: IoTWireless.Types.DeleteWirelessGatewayResponse) => void): Request<IoTWireless.Types.DeleteWirelessGatewayResponse, AWSError>;
   /**
-   * Deletes a wireless gateway.
+   * Deletes a wireless gateway.  When deleting a wireless gateway, you might run into duplication errors for the following reasons.   If you specify a GatewayEui value that already exists.   If you used a ClientRequestToken with the same parameters within the last 10 minutes.   To avoid this error, make sure that you use unique identifiers and parameters for each request within the specified time period. 
    */
   deleteWirelessGateway(callback?: (err: AWSError, data: IoTWireless.Types.DeleteWirelessGatewayResponse) => void): Request<IoTWireless.Types.DeleteWirelessGatewayResponse, AWSError>;
   /**
@@ -356,19 +356,19 @@ declare class IoTWireless extends Service {
    */
   getLogLevelsByResourceTypes(callback?: (err: AWSError, data: IoTWireless.Types.GetLogLevelsByResourceTypesResponse) => void): Request<IoTWireless.Types.GetLogLevelsByResourceTypesResponse, AWSError>;
   /**
-   * Get the metric configuration status for this account.
+   * Get the metric configuration status for this AWS account.
    */
   getMetricConfiguration(params: IoTWireless.Types.GetMetricConfigurationRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetMetricConfigurationResponse) => void): Request<IoTWireless.Types.GetMetricConfigurationResponse, AWSError>;
   /**
-   * Get the metric configuration status for this account.
+   * Get the metric configuration status for this AWS account.
    */
   getMetricConfiguration(callback?: (err: AWSError, data: IoTWireless.Types.GetMetricConfigurationResponse) => void): Request<IoTWireless.Types.GetMetricConfigurationResponse, AWSError>;
   /**
-   * Get metrics.
+   * Get the summary metrics for this AWS account.
    */
   getMetrics(params: IoTWireless.Types.GetMetricsRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetMetricsResponse) => void): Request<IoTWireless.Types.GetMetricsResponse, AWSError>;
   /**
-   * Get metrics.
+   * Get the summary metrics for this AWS account.
    */
   getMetrics(callback?: (err: AWSError, data: IoTWireless.Types.GetMetricsResponse) => void): Request<IoTWireless.Types.GetMetricsResponse, AWSError>;
   /**
@@ -828,11 +828,11 @@ declare class IoTWireless extends Service {
    */
   updateLogLevelsByResourceTypes(callback?: (err: AWSError, data: IoTWireless.Types.UpdateLogLevelsByResourceTypesResponse) => void): Request<IoTWireless.Types.UpdateLogLevelsByResourceTypesResponse, AWSError>;
   /**
-   * Update the metric configuration.
+   * Update the summary metric configuration.
    */
   updateMetricConfiguration(params: IoTWireless.Types.UpdateMetricConfigurationRequest, callback?: (err: AWSError, data: IoTWireless.Types.UpdateMetricConfigurationResponse) => void): Request<IoTWireless.Types.UpdateMetricConfigurationResponse, AWSError>;
   /**
-   * Update the metric configuration.
+   * Update the summary metric configuration.
    */
   updateMetricConfiguration(callback?: (err: AWSError, data: IoTWireless.Types.UpdateMetricConfigurationResponse) => void): Request<IoTWireless.Types.UpdateMetricConfigurationResponse, AWSError>;
   /**
@@ -979,7 +979,7 @@ declare namespace IoTWireless {
      */
     Sidewalk: SidewalkAccountInfo;
     /**
-     * Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. 
+     * Each resource must have a unique client request token. The client token is used to implement idempotency. It ensures that the request completes no more than one time. If you retry a request with the same token and the same parameters, the request will complete successfully. However, if you try to create a new resource using the same token but different parameters, an HTTP 409 conflict occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. For more information about idempotency, see Ensuring idempotency in Amazon EC2 API requests.
      */
     ClientRequestToken?: ClientRequestToken;
     /**
@@ -1235,7 +1235,7 @@ declare namespace IoTWireless {
      */
     Tags?: TagList;
     /**
-     * Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. 
+     * Each resource must have a unique client request token. The client token is used to implement idempotency. It ensures that the request completes no more than one time. If you retry a request with the same token and the same parameters, the request will complete successfully. However, if you try to create a new resource using the same token but different parameters, an HTTP 409 conflict occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. For more information about idempotency, see Ensuring idempotency in Amazon EC2 API requests.
      */
     ClientRequestToken?: ClientRequestToken;
   }
@@ -1263,7 +1263,7 @@ declare namespace IoTWireless {
      */
     Tags?: TagList;
     /**
-     * Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. 
+     * Each resource must have a unique client request token. The client token is used to implement idempotency. It ensures that the request completes no more than one time. If you retry a request with the same token and the same parameters, the request will complete successfully. However, if you try to create a new resource using the same token but different parameters, an HTTP 409 conflict occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. For more information about idempotency, see Ensuring idempotency in Amazon EC2 API requests.
      */
     ClientRequestToken?: ClientRequestToken;
     /**
@@ -1304,7 +1304,7 @@ declare namespace IoTWireless {
      */
     Description?: Description;
     /**
-     * Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. 
+     * Each resource must have a unique client request token. The client token is used to implement idempotency. It ensures that the request completes no more than one time. If you retry a request with the same token and the same parameters, the request will complete successfully. However, if you try to create a new resource using the same token but different parameters, an HTTP 409 conflict occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. For more information about idempotency, see Ensuring idempotency in Amazon EC2 API requests.
      */
     ClientRequestToken?: ClientRequestToken;
     LoRaWAN: LoRaWANMulticast;
@@ -1354,7 +1354,7 @@ declare namespace IoTWireless {
      */
     Tags?: TagList;
     /**
-     * Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. 
+     * Each resource must have a unique client request token. The client token is used to implement idempotency. It ensures that the request completes no more than one time. If you retry a request with the same token and the same parameters, the request will complete successfully. However, if you try to create a new resource using the same token but different parameters, an HTTP 409 conflict occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. For more information about idempotency, see Ensuring idempotency in Amazon EC2 API requests.
      */
     ClientRequestToken?: ClientRequestToken;
   }
@@ -1386,7 +1386,7 @@ declare namespace IoTWireless {
      */
     DestinationName: DestinationName;
     /**
-     * Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. 
+     * Each resource must have a unique client request token. The client token is used to implement idempotency. It ensures that the request completes no more than one time. If you retry a request with the same token and the same parameters, the request will complete successfully. However, if you try to create a new resource using the same token but different parameters, an HTTP 409 conflict occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. For more information about idempotency, see Ensuring idempotency in Amazon EC2 API requests.
      */
     ClientRequestToken?: ClientRequestToken;
     /**
@@ -1434,7 +1434,7 @@ declare namespace IoTWireless {
      */
     Tags?: TagList;
     /**
-     * Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. 
+     * Each resource must have a unique client request token. The client token is used to implement idempotency. It ensures that the request completes no more than one time. If you retry a request with the same token and the same parameters, the request will complete successfully. However, if you try to create a new resource using the same token but different parameters, an HTTP 409 conflict occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. For more information about idempotency, see Ensuring idempotency in Amazon EC2 API requests.
      */
     ClientRequestToken?: ClientRequestToken;
   }
@@ -1462,7 +1462,7 @@ declare namespace IoTWireless {
      */
     Update?: UpdateWirelessGatewayTaskCreate;
     /**
-     * Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. 
+     * Each resource must have a unique client request token. The client token is used to implement idempotency. It ensures that the request completes no more than one time. If you retry a request with the same token and the same parameters, the request will complete successfully. However, if you try to create a new resource using the same token but different parameters, an HTTP 409 conflict occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. For more information about idempotency, see Ensuring idempotency in Amazon EC2 API requests.
      */
     ClientRequestToken?: ClientRequestToken;
     /**
@@ -1775,6 +1775,7 @@ declare namespace IoTWireless {
   }
   export interface DisassociateWirelessGatewayFromThingResponse {
   }
+  export type DlAllowed = boolean;
   export type DlBucketSize = number;
   export type DlClass = "ClassB"|"ClassC"|string;
   export type DlDr = number;
@@ -2014,19 +2015,19 @@ declare namespace IoTWireless {
   }
   export interface GetMetricConfigurationResponse {
     /**
-     * The account's configuration status for summary metric aggregation.
+     * The configuration status of the AWS account for summary metric aggregation.
      */
     SummaryMetric?: SummaryMetricConfiguration;
   }
   export interface GetMetricsRequest {
     /**
-     * The list of queries to retrieve summary metrics.
+     * The list of queries to retrieve the summary metrics.
      */
     SummaryMetricQueries?: SummaryMetricQueries;
   }
   export interface GetMetricsResponse {
     /**
-     * The list of retrieved metrics.
+     * The list of summary metrics that were retrieved.
      */
     SummaryMetricQueryResults?: SummaryMetricQueryResults;
   }
@@ -2660,6 +2661,7 @@ declare namespace IoTWireless {
   export type HrAllowed = boolean;
   export type IPAddress = string;
   export type ISODateTimeString = string;
+  export type Id = string;
   export type Identifier = string;
   export type IdentifierType = "PartnerAccountId"|"DevEui"|"GatewayEui"|"WirelessDeviceId"|"WirelessGatewayId"|string;
   export type ImportTaskArn = string;
@@ -3142,6 +3144,10 @@ declare namespace IoTWireless {
      * Information about the gateways accessed by the device.
      */
     Gateways?: LoRaWANGatewayMetadataList;
+    /**
+     * Information about the LoRaWAN public network accessed by the device.
+     */
+    PublicGateways?: LoRaWANPublicGatewayMetadataList;
   }
   export interface LoRaWANDeviceProfile {
     /**
@@ -3403,6 +3409,30 @@ declare namespace IoTWireless {
      */
     PingSlotPeriod?: PingSlotPeriod;
   }
+  export interface LoRaWANPublicGatewayMetadata {
+    /**
+     * The ID of the LoRaWAN public network provider.
+     */
+    ProviderNetId?: ProviderNetId;
+    /**
+     * The ID of the gateways that are operated by the network provider.
+     */
+    Id?: Id;
+    /**
+     * The RSSI (received signal strength indicator) value.
+     */
+    Rssi?: Double;
+    /**
+     * The SNR (signal to noise ratio) value.
+     */
+    Snr?: Double;
+    RfRegion?: RfRegion;
+    /**
+     * Boolean that indicates whether downlink is allowed using the network.
+     */
+    DlAllowed?: DlAllowed;
+  }
+  export type LoRaWANPublicGatewayMetadataList = LoRaWANPublicGatewayMetadata[];
   export interface LoRaWANSendDataToDevice {
     FPort?: FPort;
     /**
@@ -3595,27 +3625,27 @@ declare namespace IoTWireless {
   export type MetricQueryTimestamps = MetricQueryTimestamp[];
   export interface MetricQueryValue {
     /**
-     * The minimum of the values of the all data points collected during the period.
+     * The minimum of the values of all data points collected during the aggregation period.
      */
     Min?: Min;
     /**
-     * The maximum of the values of the all data points collected during the period.
+     * The maximum of the values of all the data points collected during the aggregation period.
      */
     Max?: Max;
     /**
-     * The sum of the values of the all data points collected during the period.
+     * The sum of the values of all data points collected during the aggregation period.
      */
     Sum?: Sum;
     /**
-     * The average of the values of the all data points collected during the period.
+     * The average of the values of all data points collected during the aggregation period.
      */
     Avg?: Avg;
     /**
-     * The standard deviation of the values of the all data points collected during the period.
+     * The standard deviation of the values of all data points collected during the aggregation period.
      */
     Std?: Std;
     /**
-     * The 90th percentile of the values of the all data points collected during the period.
+     * The 90th percentile of the values of all data points collected during the aggregation period.
      */
     P90?: P90;
   }
@@ -3777,6 +3807,7 @@ declare namespace IoTWireless {
   export type PrAllowed = boolean;
   export type PresetFreq = number;
   export type PrivateKeysList = CertificateList[];
+  export type ProviderNetId = string;
   export interface ProximityEventConfiguration {
     /**
      * Proximity event configuration object for enabling or disabling Sidewalk related event topics.
@@ -4235,7 +4266,7 @@ declare namespace IoTWireless {
   export type Sum = number;
   export interface SummaryMetricConfiguration {
     /**
-     * The configuration of summary metric.
+     * The status of the configuration of summary metrics.
      */
     Status?: SummaryMetricConfigurationStatus;
   }
@@ -4243,7 +4274,7 @@ declare namespace IoTWireless {
   export type SummaryMetricQueries = SummaryMetricQuery[];
   export interface SummaryMetricQuery {
     /**
-     * The id of the query.
+     * The id of the summary metric query.
      */
     QueryId?: MetricQueryId;
     /**
@@ -4251,37 +4282,37 @@ declare namespace IoTWireless {
      */
     MetricName?: MetricName;
     /**
-     * The dimensions of the metric.
+     * The dimensions of the summary metric.
      */
     Dimensions?: Dimensions;
     /**
-     * The aggregation period of the metric.
+     * The aggregation period of the summary metric.
      */
     AggregationPeriod?: AggregationPeriod;
     /**
-     * The start timestamp for summary metric query.
+     * The start timestamp for the summary metric query.
      */
     StartTimestamp?: MetricQueryStartTimestamp;
     /**
-     * The end timestamp for summary metric query.
+     * The end timestamp for the summary metric query.
      */
     EndTimestamp?: MetricQueryEndTimestamp;
   }
   export interface SummaryMetricQueryResult {
     /**
-     * The id of the query.
+     * The ID of the summary metric results query operation.
      */
     QueryId?: MetricQueryId;
     /**
-     * The status of the metric query.
+     * The status of the summary metric query result.
      */
     QueryStatus?: MetricQueryStatus;
     /**
-     * The error message for the summary metric query.
+     * The error message for the summary metric query result.
      */
     Error?: MetricQueryError;
     /**
-     * The name of the metric.
+     * The name of the summary metric query result.
      */
     MetricName?: MetricName;
     /**
@@ -4293,11 +4324,11 @@ declare namespace IoTWireless {
      */
     AggregationPeriod?: AggregationPeriod;
     /**
-     * The start timestamp for summary metric query.
+     * The start timestamp for the summary metric query.
      */
     StartTimestamp?: MetricQueryStartTimestamp;
     /**
-     * The end timestamp for summary metric query.
+     * The end timestamp for the summary metric query.
      */
     EndTimestamp?: MetricQueryEndTimestamp;
     /**
@@ -4305,7 +4336,7 @@ declare namespace IoTWireless {
      */
     Timestamps?: MetricQueryTimestamps;
     /**
-     * The list of aggregated metrics.
+     * The list of aggregated summary metric query results.
      */
     Values?: MetricQueryValues;
     /**

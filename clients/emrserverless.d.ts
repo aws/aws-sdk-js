@@ -434,6 +434,7 @@ declare namespace EMRServerless {
   export interface DeleteApplicationResponse {
   }
   export type DiskSize = string;
+  export type DiskType = string;
   export type Double = number;
   export type Duration = number;
   export type EncryptionKeyArn = string;
@@ -1031,6 +1032,10 @@ declare namespace EMRServerless {
      * The disk requirements for every worker instance of the worker type.
      */
     disk?: DiskSize;
+    /**
+     * The disk type for every worker instance of the work type. Shuffle optimized disks have higher performance characteristics and are better for shuffle heavy workloads. Default is STANDARD.
+     */
+    diskType?: DiskType;
   }
   export interface WorkerTypeSpecification {
     /**

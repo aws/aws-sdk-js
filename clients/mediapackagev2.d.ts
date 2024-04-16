@@ -205,6 +205,7 @@ declare class MediaPackageV2 extends Service {
   updateOriginEndpoint(callback?: (err: AWSError, data: MediaPackageV2.Types.UpdateOriginEndpointResponse) => void): Request<MediaPackageV2.Types.UpdateOriginEndpointResponse, AWSError>;
 }
 declare namespace MediaPackageV2 {
+  export type AdMarkerDash = "BINARY"|"XML"|string;
   export type AdMarkerHls = "DATERANGE"|string;
   export type Boolean = boolean;
   export interface ChannelGroupListConfiguration {
@@ -368,6 +369,54 @@ declare namespace MediaPackageV2 {
      */
     Tags?: TagMap;
   }
+  export interface CreateDashManifestConfiguration {
+    /**
+     * A short string that's appended to the endpoint URL. The child manifest name creates a unique path to this endpoint.
+     */
+    ManifestName: ManifestName;
+    /**
+     * The total duration (in seconds) of the manifest's content.
+     */
+    ManifestWindowSeconds?: CreateDashManifestConfigurationManifestWindowSecondsInteger;
+    FilterConfiguration?: FilterConfiguration;
+    /**
+     * Minimum amount of time (in seconds) that the player should wait before requesting updates to the manifest.
+     */
+    MinUpdatePeriodSeconds?: CreateDashManifestConfigurationMinUpdatePeriodSecondsInteger;
+    /**
+     * Minimum amount of content (in seconds) that a player must keep available in the buffer.
+     */
+    MinBufferTimeSeconds?: CreateDashManifestConfigurationMinBufferTimeSecondsInteger;
+    /**
+     * The amount of time (in seconds) that the player should be from the end of the manifest.
+     */
+    SuggestedPresentationDelaySeconds?: CreateDashManifestConfigurationSuggestedPresentationDelaySecondsInteger;
+    /**
+     * Determines the type of variable used in the media URL of the SegmentTemplate tag in the manifest. Also specifies if segment timeline information is included in SegmentTimeline or SegmentTemplate. Value description:    NUMBER_WITH_TIMELINE - The $Number$ variable is used in the media URL. The value of this variable is the sequential number of the segment. A full SegmentTimeline object is presented in each SegmentTemplate.  
+     */
+    SegmentTemplateFormat?: DashSegmentTemplateFormat;
+    /**
+     * A list of triggers that controls when AWS Elemental MediaPackage separates the MPEG-DASH manifest into multiple periods. Type ADS to indicate that AWS Elemental MediaPackage must create periods in the output manifest that correspond to SCTE-35 ad markers in the input source. Leave this value empty to indicate that the manifest is contained all in one period. For more information about periods in the DASH manifest, see Multi-period DASH in AWS Elemental MediaPackage.
+     */
+    PeriodTriggers?: DashPeriodTriggers;
+    /**
+     * The SCTE configuration.
+     */
+    ScteDash?: ScteDash;
+    /**
+     * Determines how the DASH manifest signals the DRM content.
+     */
+    DrmSignaling?: DashDrmSignaling;
+    /**
+     * Determines the type of UTC timing included in the DASH Media Presentation Description (MPD).
+     */
+    UtcTiming?: DashUtcTiming;
+  }
+  export type CreateDashManifestConfigurationManifestWindowSecondsInteger = number;
+  export type CreateDashManifestConfigurationMinBufferTimeSecondsInteger = number;
+  export type CreateDashManifestConfigurationMinUpdatePeriodSecondsInteger = number;
+  export type CreateDashManifestConfigurationSuggestedPresentationDelaySecondsInteger = number;
+  export type CreateDashManifests = CreateDashManifestConfiguration[];
   export interface CreateHlsManifestConfiguration {
     /**
      * A short short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. MediaPackage automatically inserts the format extension, such as .m3u8. You can't use the same manifest name if you use HLS manifest and low-latency HLS manifest. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.
@@ -456,6 +505,10 @@ declare namespace MediaPackageV2 {
      */
     LowLatencyHlsManifests?: CreateLowLatencyHlsManifests;
     /**
+     * A DASH manifest configuration.
+     */
+    DashManifests?: CreateDashManifests;
+    /**
      * A comma-separated list of tag key:value pairs that you define. For example:  "Key1": "Value1",   "Key2": "Value2" 
      */
     Tags?: TagMap;
@@ -511,6 +564,10 @@ declare namespace MediaPackageV2 {
      */
     LowLatencyHlsManifests?: GetLowLatencyHlsManifests;
     /**
+     * A DASH manifest configuration.
+     */
+    DashManifests?: GetDashManifests;
+    /**
      * The current Entity Tag (ETag) associated with this resource. The entity tag can be used to safely make concurrent updates to the resource.
      */
     ETag?: EntityTag;
@@ -519,6 +576,22 @@ declare namespace MediaPackageV2 {
      */
     Tags?: TagMap;
   }
+  export type DashDrmSignaling = "INDIVIDUAL"|"REFERENCED"|string;
+  export type DashPeriodTrigger = "AVAILS"|"DRM_KEY_ROTATION"|"SOURCE_CHANGES"|"SOURCE_DISRUPTIONS"|"NONE"|string;
+  export type DashPeriodTriggers = DashPeriodTrigger[];
+  export type DashSegmentTemplateFormat = "NUMBER_WITH_TIMELINE"|string;
+  export interface DashUtcTiming {
+    /**
+     * The UTC timing mode.
+     */
+    TimingMode?: DashUtcTimingMode;
+    /**
+     * The the method that the player uses to synchronize to coordinated universal time (UTC) wall clock time.
+     */
+    TimingSource?: DashUtcTimingTimingSourceString;
+  }
+  export type DashUtcTimingMode = "HTTP_HEAD"|"HTTP_ISO"|"HTTP_XSDATE"|"UTC_DIRECT"|string;
+  export type DashUtcTimingTimingSourceString = string;
   export interface DeleteChannelGroupRequest {
     /**
      * The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.
@@ -754,6 +827,54 @@ declare namespace MediaPackageV2 {
      */
     Tags?: TagMap;
   }
+  export interface GetDashManifestConfiguration {
+    /**
+     * A short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. 
+     */
+    ManifestName: ResourceName;
+    /**
+     * The egress domain URL for stream delivery from MediaPackage.
+     */
+    Url: String;
+    /**
+     * The total duration (in seconds) of the manifest's content.
+     */
+    ManifestWindowSeconds?: Integer;
+    FilterConfiguration?: FilterConfiguration;
+    /**
+     * Minimum amount of time (in seconds) that the player should wait before requesting updates to the manifest.
+     */
+    MinUpdatePeriodSeconds?: Integer;
+    /**
+     * Minimum amount of content (in seconds) that a player must keep available in the buffer.
+     */
+    MinBufferTimeSeconds?: Integer;
+    /**
+     * The amount of time (in seconds) that the player should be from the end of the manifest.
+     */
+    SuggestedPresentationDelaySeconds?: Integer;
+    /**
+     * Determines the type of variable used in the media URL of the SegmentTemplate tag in the manifest. Also specifies if segment timeline information is included in SegmentTimeline or SegmentTemplate. Value description:    NUMBER_WITH_TIMELINE - The $Number$ variable is used in the media URL. The value of this variable is the sequential number of the segment. A full SegmentTimeline object is presented in each SegmentTemplate.  
+     */
+    SegmentTemplateFormat?: DashSegmentTemplateFormat;
+    /**
+     * A list of triggers that controls when AWS Elemental MediaPackage separates the MPEG-DASH manifest into multiple periods. Leave this value empty to indicate that the manifest is contained all in one period. For more information about periods in the DASH manifest, see Multi-period DASH in AWS Elemental MediaPackage.
+     */
+    PeriodTriggers?: DashPeriodTriggers;
+    /**
+     * The SCTE configuration.
+     */
+    ScteDash?: ScteDash;
+    /**
+     * Determines how the DASH manifest signals the DRM content.
+     */
+    DrmSignaling?: DashDrmSignaling;
+    /**
+     * Determines the type of UTC timing included in the DASH Media Presentation Description (MPD).
+     */
+    UtcTiming?: DashUtcTiming;
+  }
+  export type GetDashManifests = GetDashManifestConfiguration[];
   export interface GetHlsManifestConfiguration {
     /**
      * A short short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. MediaPackage automatically inserts the format extension, such as .m3u8. You can't use the same manifest name if you use HLS manifest and low-latency HLS manifest. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.
@@ -904,6 +1025,10 @@ declare namespace MediaPackageV2 {
      * The comma-separated list of tag key:value pairs assigned to the origin endpoint.
      */
     Tags?: TagMap;
+    /**
+     * A DASH manifest configuration.
+     */
+    DashManifests?: GetDashManifests;
   }
   export type IdempotencyToken = string;
   export interface IngestEndpoint {
@@ -962,6 +1087,17 @@ declare namespace MediaPackageV2 {
      */
     NextToken?: String;
   }
+  export interface ListDashManifestConfiguration {
+    /**
+     * A short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. 
+     */
+    ManifestName: ResourceName;
+    /**
+     * The egress domain URL for stream delivery from MediaPackage.
+     */
+    Url?: String;
+  }
+  export type ListDashManifests = ListDashManifestConfiguration[];
   export interface ListHlsManifestConfiguration {
     /**
      * A short short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. MediaPackage automatically inserts the format extension, such as .m3u8. You can't use the same manifest name if you use HLS manifest and low-latency HLS manifest. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.
@@ -1075,6 +1211,10 @@ declare namespace MediaPackageV2 {
      * A low-latency HLS manifest configuration.
      */
     LowLatencyHlsManifests?: ListLowLatencyHlsManifests;
+    /**
+     * A DASH manifest configuration.
+     */
+    DashManifests?: ListDashManifests;
   }
   export type OriginEndpointsList = OriginEndpointListConfiguration[];
   export type PolicyText = string;
@@ -1123,6 +1263,12 @@ declare namespace MediaPackageV2 {
      * The SCTE-35 message types that you want to be treated as ad markers in the output.
      */
     ScteFilter?: ScteFilterList;
+  }
+  export interface ScteDash {
+    /**
+     * Choose how ad markers are included in the packaged content. If you include ad markers in the content stream in your upstream encoders, then you need to inform MediaPackage what to do with the ad markers in the output. Value description:    Binary - The SCTE-35 marker is expressed as a hex-string (Base64 string) rather than full XML.    XML - The SCTE marker is expressed fully in XML.  
+     */
+    AdMarkerDash?: AdMarkerDash;
   }
   export type ScteFilter = "SPLICE_INSERT"|"BREAK"|"PROVIDER_ADVERTISEMENT"|"DISTRIBUTOR_ADVERTISEMENT"|"PROVIDER_PLACEMENT_OPPORTUNITY"|"DISTRIBUTOR_PLACEMENT_OPPORTUNITY"|"PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY"|"DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"|"PROGRAM"|string;
   export type ScteFilterList = ScteFilter[];
@@ -1354,6 +1500,10 @@ declare namespace MediaPackageV2 {
      */
     LowLatencyHlsManifests?: CreateLowLatencyHlsManifests;
     /**
+     * A DASH manifest configuration.
+     */
+    DashManifests?: CreateDashManifests;
+    /**
      * The expected current Entity Tag (ETag) for the resource. If the specified ETag does not match the resource's current entity tag, the update request will be rejected.
      */
     ETag?: EntityTag;
@@ -1416,6 +1566,10 @@ declare namespace MediaPackageV2 {
      * The comma-separated list of tag key:value pairs assigned to the origin endpoint.
      */
     Tags?: TagMap;
+    /**
+     * A DASH manifest configuration.
+     */
+    DashManifests?: GetDashManifests;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

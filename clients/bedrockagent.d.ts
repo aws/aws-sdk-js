@@ -20,11 +20,11 @@ declare class BedrockAgent extends Service {
    */
   associateAgentKnowledgeBase(callback?: (err: AWSError, data: BedrockAgent.Types.AssociateAgentKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.AssociateAgentKnowledgeBaseResponse, AWSError>;
   /**
-   * Creates an agent that orchestrates interactions between foundation models, data sources, software applications, user conversations, and APIs to carry out tasks to help customers.   Specify the following fields for security purposes.    agentResourceRoleArn – The ARN of the role with permissions to create an agent.   (Optional) customerEncryptionKeyArn – The ARN of a KMS key to encrypt the creation of the agent.   (Optional) idleSessionTTLinSeconds – Specify the number of seconds for which the agent should maintain session information. After this time expires, the subsequent InvokeAgent request begins a new session.     To override the default prompt behavior for agent orchestration and to use advanced prompts, include a promptOverrideConfiguration object. For more information, see Advanced prompts.   If you agent fails to be created, the response returns a list of failureReasons alongside a list of recommendedActions for you to troubleshoot.  
+   * Creates an agent that orchestrates interactions between foundation models, data sources, software applications, user conversations, and APIs to carry out tasks to help customers.   Specify the following fields for security purposes.    agentResourceRoleArn – The Amazon Resource Name (ARN) of the role with permissions to invoke API operations on an agent.   (Optional) customerEncryptionKeyArn – The Amazon Resource Name (ARN) of a KMS key to encrypt the creation of the agent.   (Optional) idleSessionTTLinSeconds – Specify the number of seconds for which the agent should maintain session information. After this time expires, the subsequent InvokeAgent request begins a new session.     To override the default prompt behavior for agent orchestration and to use advanced prompts, include a promptOverrideConfiguration object. For more information, see Advanced prompts.   If you agent fails to be created, the response returns a list of failureReasons alongside a list of recommendedActions for you to troubleshoot.  
    */
   createAgent(params: BedrockAgent.Types.CreateAgentRequest, callback?: (err: AWSError, data: BedrockAgent.Types.CreateAgentResponse) => void): Request<BedrockAgent.Types.CreateAgentResponse, AWSError>;
   /**
-   * Creates an agent that orchestrates interactions between foundation models, data sources, software applications, user conversations, and APIs to carry out tasks to help customers.   Specify the following fields for security purposes.    agentResourceRoleArn – The ARN of the role with permissions to create an agent.   (Optional) customerEncryptionKeyArn – The ARN of a KMS key to encrypt the creation of the agent.   (Optional) idleSessionTTLinSeconds – Specify the number of seconds for which the agent should maintain session information. After this time expires, the subsequent InvokeAgent request begins a new session.     To override the default prompt behavior for agent orchestration and to use advanced prompts, include a promptOverrideConfiguration object. For more information, see Advanced prompts.   If you agent fails to be created, the response returns a list of failureReasons alongside a list of recommendedActions for you to troubleshoot.  
+   * Creates an agent that orchestrates interactions between foundation models, data sources, software applications, user conversations, and APIs to carry out tasks to help customers.   Specify the following fields for security purposes.    agentResourceRoleArn – The Amazon Resource Name (ARN) of the role with permissions to invoke API operations on an agent.   (Optional) customerEncryptionKeyArn – The Amazon Resource Name (ARN) of a KMS key to encrypt the creation of the agent.   (Optional) idleSessionTTLinSeconds – Specify the number of seconds for which the agent should maintain session information. After this time expires, the subsequent InvokeAgent request begins a new session.     To override the default prompt behavior for agent orchestration and to use advanced prompts, include a promptOverrideConfiguration object. For more information, see Advanced prompts.   If you agent fails to be created, the response returns a list of failureReasons alongside a list of recommendedActions for you to troubleshoot.  
    */
   createAgent(callback?: (err: AWSError, data: BedrockAgent.Types.CreateAgentResponse) => void): Request<BedrockAgent.Types.CreateAgentResponse, AWSError>;
   /**
@@ -52,11 +52,11 @@ declare class BedrockAgent extends Service {
    */
   createDataSource(callback?: (err: AWSError, data: BedrockAgent.Types.CreateDataSourceResponse) => void): Request<BedrockAgent.Types.CreateDataSourceResponse, AWSError>;
   /**
-   * Creates a knowledge base that contains data sources from which information can be queried and used by LLMs. To create a knowledge base, you must first set up your data sources and configure a supported vector store. For more information, see Set up your data for ingestion.  If you prefer to let Amazon Bedrock create and manage a vector store for you in Amazon OpenSearch Service, use the console. For more information, see Create a knowledge base.    Provide the name and an optional description.   Provide the ARN with permissions to create a knowledge base in the roleArn field.   Provide the embedding model to use in the embeddingModelArn field in the knowledgeBaseConfiguration object.   Provide the configuration for your vector store in the storageConfiguration object.   For an Amazon OpenSearch Service database, use the opensearchServerlessConfiguration object. For more information, see Create a vector store in Amazon OpenSearch Service.   For an Amazon Aurora database, use the RdsConfiguration object. For more information, see Create a vector store in Amazon Aurora.   For a Pinecone database, use the pineconeConfiguration object. For more information, see Create a vector store in Pinecone.   For a Redis Enterprise Cloud database, use the redisEnterpriseCloudConfiguration object. For more information, see Create a vector store in Redis Enterprise Cloud.    
+   * Creates a knowledge base that contains data sources from which information can be queried and used by LLMs. To create a knowledge base, you must first set up your data sources and configure a supported vector store. For more information, see Set up your data for ingestion.  If you prefer to let Amazon Bedrock create and manage a vector store for you in Amazon OpenSearch Service, use the console. For more information, see Create a knowledge base.    Provide the name and an optional description.   Provide the Amazon Resource Name (ARN) with permissions to create a knowledge base in the roleArn field.   Provide the embedding model to use in the embeddingModelArn field in the knowledgeBaseConfiguration object.   Provide the configuration for your vector store in the storageConfiguration object.   For an Amazon OpenSearch Service database, use the opensearchServerlessConfiguration object. For more information, see Create a vector store in Amazon OpenSearch Service.   For an Amazon Aurora database, use the RdsConfiguration object. For more information, see Create a vector store in Amazon Aurora.   For a Pinecone database, use the pineconeConfiguration object. For more information, see Create a vector store in Pinecone.   For a Redis Enterprise Cloud database, use the redisEnterpriseCloudConfiguration object. For more information, see Create a vector store in Redis Enterprise Cloud.    
    */
   createKnowledgeBase(params: BedrockAgent.Types.CreateKnowledgeBaseRequest, callback?: (err: AWSError, data: BedrockAgent.Types.CreateKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.CreateKnowledgeBaseResponse, AWSError>;
   /**
-   * Creates a knowledge base that contains data sources from which information can be queried and used by LLMs. To create a knowledge base, you must first set up your data sources and configure a supported vector store. For more information, see Set up your data for ingestion.  If you prefer to let Amazon Bedrock create and manage a vector store for you in Amazon OpenSearch Service, use the console. For more information, see Create a knowledge base.    Provide the name and an optional description.   Provide the ARN with permissions to create a knowledge base in the roleArn field.   Provide the embedding model to use in the embeddingModelArn field in the knowledgeBaseConfiguration object.   Provide the configuration for your vector store in the storageConfiguration object.   For an Amazon OpenSearch Service database, use the opensearchServerlessConfiguration object. For more information, see Create a vector store in Amazon OpenSearch Service.   For an Amazon Aurora database, use the RdsConfiguration object. For more information, see Create a vector store in Amazon Aurora.   For a Pinecone database, use the pineconeConfiguration object. For more information, see Create a vector store in Pinecone.   For a Redis Enterprise Cloud database, use the redisEnterpriseCloudConfiguration object. For more information, see Create a vector store in Redis Enterprise Cloud.    
+   * Creates a knowledge base that contains data sources from which information can be queried and used by LLMs. To create a knowledge base, you must first set up your data sources and configure a supported vector store. For more information, see Set up your data for ingestion.  If you prefer to let Amazon Bedrock create and manage a vector store for you in Amazon OpenSearch Service, use the console. For more information, see Create a knowledge base.    Provide the name and an optional description.   Provide the Amazon Resource Name (ARN) with permissions to create a knowledge base in the roleArn field.   Provide the embedding model to use in the embeddingModelArn field in the knowledgeBaseConfiguration object.   Provide the configuration for your vector store in the storageConfiguration object.   For an Amazon OpenSearch Service database, use the opensearchServerlessConfiguration object. For more information, see Create a vector store in Amazon OpenSearch Service.   For an Amazon Aurora database, use the RdsConfiguration object. For more information, see Create a vector store in Amazon Aurora.   For a Pinecone database, use the pineconeConfiguration object. For more information, see Create a vector store in Pinecone.   For a Redis Enterprise Cloud database, use the redisEnterpriseCloudConfiguration object. For more information, see Create a vector store in Redis Enterprise Cloud.    
    */
   createKnowledgeBase(callback?: (err: AWSError, data: BedrockAgent.Types.CreateKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.CreateKnowledgeBaseResponse, AWSError>;
   /**
@@ -345,7 +345,7 @@ declare namespace BedrockAgent {
   }
   export interface ActionGroupExecutor {
     /**
-     * The ARN of the Lambda function containing the business logic that is carried out upon invoking the action.
+     * The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action.
      */
     lambda?: LambdaArn;
   }
@@ -376,7 +376,7 @@ declare namespace BedrockAgent {
   }
   export interface Agent {
     /**
-     * The ARN of the agent.
+     * The Amazon Resource Name (ARN) of the agent.
      */
     agentArn: AgentArn;
     /**
@@ -388,7 +388,7 @@ declare namespace BedrockAgent {
      */
     agentName: Name;
     /**
-     * The ARN of the IAM role with permissions to call API operations on the agent. The ARN must begin with AmazonBedrockExecutionRoleForAgents_.
+     * The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API operations on the agent.
      */
     agentResourceRoleArn: AgentRoleArn;
     /**
@@ -408,7 +408,7 @@ declare namespace BedrockAgent {
      */
     createdAt: DateTimestamp;
     /**
-     * The ARN of the KMS key that encrypts the agent.
+     * The Amazon Resource Name (ARN) of the KMS key that encrypts the agent.
      */
     customerEncryptionKeyArn?: KmsKeyArn;
     /**
@@ -450,7 +450,7 @@ declare namespace BedrockAgent {
   }
   export interface AgentActionGroup {
     /**
-     * The ARN of the Lambda function containing the business logic that is carried out upon invoking the action.
+     * The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action.
      */
     actionGroupExecutor?: ActionGroupExecutor;
     /**
@@ -500,7 +500,7 @@ declare namespace BedrockAgent {
   }
   export interface AgentAlias {
     /**
-     * The ARN of the alias of the agent.
+     * The Amazon Resource Name (ARN) of the alias of the agent.
      */
     agentAliasArn: AgentAliasArn;
     /**
@@ -681,7 +681,7 @@ declare namespace BedrockAgent {
   }
   export interface AgentVersion {
     /**
-     * The ARN of the agent that the version belongs to.
+     * The Amazon Resource Name (ARN) of the agent that the version belongs to.
      */
     agentArn: AgentArn;
     /**
@@ -693,7 +693,7 @@ declare namespace BedrockAgent {
      */
     agentName: Name;
     /**
-     * The ARN of the IAM role with permissions to invoke API operations on the agent. The ARN must begin with AmazonBedrockExecutionRoleForAgents_.
+     * The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API operations on the agent.
      */
     agentResourceRoleArn: AgentRoleArn;
     /**
@@ -705,7 +705,7 @@ declare namespace BedrockAgent {
      */
     createdAt: DateTimestamp;
     /**
-     * The ARN of the KMS key that encrypts the agent.
+     * The Amazon Resource Name (ARN) of the KMS key that encrypts the agent.
      */
     customerEncryptionKeyArn?: KmsKeyArn;
     /**
@@ -818,7 +818,7 @@ declare namespace BedrockAgent {
   export type ColumnName = string;
   export interface CreateAgentActionGroupRequest {
     /**
-     * The ARN of the Lambda function containing the business logic that is carried out upon invoking the action.
+     * The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action.
      */
     actionGroupExecutor?: ActionGroupExecutor;
     /**
@@ -898,15 +898,15 @@ declare namespace BedrockAgent {
      */
     agentName: Name;
     /**
-     * The ARN of the IAM role with permissions to create the agent. The ARN must begin with AmazonBedrockExecutionRoleForAgents_.
+     * The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API operations on the agent.
      */
-    agentResourceRoleArn: AgentRoleArn;
+    agentResourceRoleArn?: AgentRoleArn;
     /**
      * A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see Ensuring idempotency.
      */
     clientToken?: ClientToken;
     /**
-     * The ARN of the KMS key with which to encrypt the agent.
+     * The Amazon Resource Name (ARN) of the KMS key with which to encrypt the agent.
      */
     customerEncryptionKeyArn?: KmsKeyArn;
     /**
@@ -994,7 +994,7 @@ declare namespace BedrockAgent {
      */
     name: Name;
     /**
-     * The ARN of the IAM role with permissions to create the knowledge base.
+     * The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API operations on the knowledge base.
      */
     roleArn: KnowledgeBaseRoleArn;
     /**
@@ -1565,7 +1565,7 @@ declare namespace BedrockAgent {
      */
     failureReasons?: FailureReasons;
     /**
-     * The ARN of the knowledge base.
+     * The Amazon Resource Name (ARN) of the knowledge base.
      */
     knowledgeBaseArn: KnowledgeBaseArn;
     /**
@@ -1581,7 +1581,7 @@ declare namespace BedrockAgent {
      */
     name: Name;
     /**
-     * The ARN of the IAM role with permissions to invoke API operations on the knowledge base. The ARN must begin with AmazonBedrockExecutionRoleForKnowledgeBase_.
+     * The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API operations on the knowledge base.
      */
     roleArn: KnowledgeBaseRoleArn;
     /**
@@ -1843,7 +1843,7 @@ declare namespace BedrockAgent {
   }
   export interface ListTagsForResourceRequest {
     /**
-     * The ARN of the resource for which to list tags.
+     * The Amazon Resource Name (ARN) of the resource for which to list tags.
      */
     resourceArn: TaggableResourcesArn;
   }
@@ -1862,7 +1862,7 @@ declare namespace BedrockAgent {
   export type OpenSearchServerlessCollectionArn = string;
   export interface OpenSearchServerlessConfiguration {
     /**
-     * The ARN of the OpenSearch Service vector store.
+     * The Amazon Resource Name (ARN) of the OpenSearch Service vector store.
      */
     collectionArn: OpenSearchServerlessCollectionArn;
     /**
@@ -1896,7 +1896,7 @@ declare namespace BedrockAgent {
      */
     connectionString: PineconeConnectionString;
     /**
-     * The ARN of the secret that you created in Secrets Manager that is linked to your Pinecone API key.
+     * The Amazon Resource Name (ARN) of the secret that you created in Secrets Manager that is linked to your Pinecone API key.
      */
     credentialsSecretArn: SecretArn;
     /**
@@ -1987,7 +1987,7 @@ declare namespace BedrockAgent {
   export type RdsArn = string;
   export interface RdsConfiguration {
     /**
-     * The ARN of the secret that you created in Secrets Manager that is linked to your Amazon RDS database.
+     * The Amazon Resource Name (ARN) of the secret that you created in Secrets Manager that is linked to your Amazon RDS database.
      */
     credentialsSecretArn: SecretArn;
     /**
@@ -1999,7 +1999,7 @@ declare namespace BedrockAgent {
      */
     fieldMapping: RdsFieldMapping;
     /**
-     * The ARN of the vector store.
+     * The Amazon Resource Name (ARN) of the vector store.
      */
     resourceArn: RdsArn;
     /**
@@ -2031,7 +2031,7 @@ declare namespace BedrockAgent {
   export type RecommendedActions = RecommendedAction[];
   export interface RedisEnterpriseCloudConfiguration {
     /**
-     * The ARN of the secret that you created in Secrets Manager that is linked to your Redis Enterprise Cloud database.
+     * The Amazon Resource Name (ARN) of the secret that you created in Secrets Manager that is linked to your Redis Enterprise Cloud database.
      */
     credentialsSecretArn: SecretArn;
     /**
@@ -2067,7 +2067,7 @@ declare namespace BedrockAgent {
   export type S3BucketName = string;
   export interface S3DataSourceConfiguration {
     /**
-     * The ARN of the bucket that contains the data source.
+     * The Amazon Resource Name (ARN) of the bucket that contains the data source.
      */
     bucketArn: S3BucketArn;
     /**
@@ -2091,7 +2091,7 @@ declare namespace BedrockAgent {
   export type SecretArn = string;
   export interface ServerSideEncryptionConfiguration {
     /**
-     * The ARN of the KMS key used to encrypt the resource.
+     * The Amazon Resource Name (ARN) of the KMS key used to encrypt the resource.
      */
     kmsKeyArn?: KmsKeyArn;
   }
@@ -2149,7 +2149,7 @@ declare namespace BedrockAgent {
   export type TagKeyList = TagKey[];
   export interface TagResourceRequest {
     /**
-     * The ARN of the resource to tag.
+     * The Amazon Resource Name (ARN) of the resource to tag.
      */
     resourceArn: TaggableResourcesArn;
     /**
@@ -2167,7 +2167,7 @@ declare namespace BedrockAgent {
   export type TopP = number;
   export interface UntagResourceRequest {
     /**
-     * The ARN of the resource from which to remove tags.
+     * The Amazon Resource Name (ARN) of the resource from which to remove tags.
      */
     resourceArn: TaggableResourcesArn;
     /**
@@ -2179,7 +2179,7 @@ declare namespace BedrockAgent {
   }
   export interface UpdateAgentActionGroupRequest {
     /**
-     * The ARN of the Lambda function containing the business logic that is carried out upon invoking the action.
+     * The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action.
      */
     actionGroupExecutor?: ActionGroupExecutor;
     /**
@@ -2287,11 +2287,11 @@ declare namespace BedrockAgent {
      */
     agentName: Name;
     /**
-     * The ARN of the IAM role with permissions to update the agent. The ARN must begin with AmazonBedrockExecutionRoleForAgents_.
+     * The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API operations on the agent.
      */
     agentResourceRoleArn: AgentRoleArn;
     /**
-     * The ARN of the KMS key with which to encrypt the agent.
+     * The Amazon Resource Name (ARN) of the KMS key with which to encrypt the agent.
      */
     customerEncryptionKeyArn?: KmsKeyArn;
     /**
@@ -2375,7 +2375,7 @@ declare namespace BedrockAgent {
      */
     name: Name;
     /**
-     * Specifies a different Amazon Resource Name (ARN) of the IAM role with permissions to modify the knowledge base.
+     * Specifies a different Amazon Resource Name (ARN) of the IAM role with permissions to invoke API operations on the knowledge base.
      */
     roleArn: KnowledgeBaseRoleArn;
     /**
@@ -2397,7 +2397,7 @@ declare namespace BedrockAgent {
   }
   export interface VectorKnowledgeBaseConfiguration {
     /**
-     * The ARN of the model used to create vector embeddings for the knowledge base.
+     * The Amazon Resource Name (ARN) of the model used to create vector embeddings for the knowledge base.
      */
     embeddingModelArn: BedrockEmbeddingModelArn;
   }

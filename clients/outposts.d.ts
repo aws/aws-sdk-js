@@ -12,6 +12,14 @@ declare class Outposts extends Service {
   constructor(options?: Outposts.Types.ClientConfiguration)
   config: Config & Outposts.Types.ClientConfiguration;
   /**
+   * Cancels the capacity task.
+   */
+  cancelCapacityTask(params: Outposts.Types.CancelCapacityTaskInput, callback?: (err: AWSError, data: Outposts.Types.CancelCapacityTaskOutput) => void): Request<Outposts.Types.CancelCapacityTaskOutput, AWSError>;
+  /**
+   * Cancels the capacity task.
+   */
+  cancelCapacityTask(callback?: (err: AWSError, data: Outposts.Types.CancelCapacityTaskOutput) => void): Request<Outposts.Types.CancelCapacityTaskOutput, AWSError>;
+  /**
    * Cancels the specified order for an Outpost.
    */
   cancelOrder(params: Outposts.Types.CancelOrderInput, callback?: (err: AWSError, data: Outposts.Types.CancelOrderOutput) => void): Request<Outposts.Types.CancelOrderOutput, AWSError>;
@@ -60,6 +68,14 @@ declare class Outposts extends Service {
    */
   deleteSite(callback?: (err: AWSError, data: Outposts.Types.DeleteSiteOutput) => void): Request<Outposts.Types.DeleteSiteOutput, AWSError>;
   /**
+   * Gets details of the specified capacity task.
+   */
+  getCapacityTask(params: Outposts.Types.GetCapacityTaskInput, callback?: (err: AWSError, data: Outposts.Types.GetCapacityTaskOutput) => void): Request<Outposts.Types.GetCapacityTaskOutput, AWSError>;
+  /**
+   * Gets details of the specified capacity task.
+   */
+  getCapacityTask(callback?: (err: AWSError, data: Outposts.Types.GetCapacityTaskOutput) => void): Request<Outposts.Types.GetCapacityTaskOutput, AWSError>;
+  /**
    * Gets information about the specified catalog item.
    */
   getCatalogItem(params: Outposts.Types.GetCatalogItemInput, callback?: (err: AWSError, data: Outposts.Types.GetCatalogItemOutput) => void): Request<Outposts.Types.GetCatalogItemOutput, AWSError>;
@@ -100,6 +116,14 @@ declare class Outposts extends Service {
    */
   getOutpostInstanceTypes(callback?: (err: AWSError, data: Outposts.Types.GetOutpostInstanceTypesOutput) => void): Request<Outposts.Types.GetOutpostInstanceTypesOutput, AWSError>;
   /**
+   * Gets the instance types that an Outpost can support in InstanceTypeCapacity. This will generally include instance types that are not currently configured and therefore cannot be launched with the current Outpost capacity configuration.
+   */
+  getOutpostSupportedInstanceTypes(params: Outposts.Types.GetOutpostSupportedInstanceTypesInput, callback?: (err: AWSError, data: Outposts.Types.GetOutpostSupportedInstanceTypesOutput) => void): Request<Outposts.Types.GetOutpostSupportedInstanceTypesOutput, AWSError>;
+  /**
+   * Gets the instance types that an Outpost can support in InstanceTypeCapacity. This will generally include instance types that are not currently configured and therefore cannot be launched with the current Outpost capacity configuration.
+   */
+  getOutpostSupportedInstanceTypes(callback?: (err: AWSError, data: Outposts.Types.GetOutpostSupportedInstanceTypesOutput) => void): Request<Outposts.Types.GetOutpostSupportedInstanceTypesOutput, AWSError>;
+  /**
    * Gets information about the specified Outpost site.
    */
   getSite(params: Outposts.Types.GetSiteInput, callback?: (err: AWSError, data: Outposts.Types.GetSiteOutput) => void): Request<Outposts.Types.GetSiteOutput, AWSError>;
@@ -123,6 +147,14 @@ declare class Outposts extends Service {
    * Lists the hardware assets for the specified Outpost. Use filters to return specific results. If you specify multiple filters, the results include only the resources that match all of the specified filters. For a filter where you can specify multiple values, the results include items that match any of the values that you specify for the filter.
    */
   listAssets(callback?: (err: AWSError, data: Outposts.Types.ListAssetsOutput) => void): Request<Outposts.Types.ListAssetsOutput, AWSError>;
+  /**
+   * Lists the capacity tasks for your Amazon Web Services account. Use filters to return specific results. If you specify multiple filters, the results include only the resources that match all of the specified filters. For a filter where you can specify multiple values, the results include items that match any of the values that you specify for the filter.
+   */
+  listCapacityTasks(params: Outposts.Types.ListCapacityTasksInput, callback?: (err: AWSError, data: Outposts.Types.ListCapacityTasksOutput) => void): Request<Outposts.Types.ListCapacityTasksOutput, AWSError>;
+  /**
+   * Lists the capacity tasks for your Amazon Web Services account. Use filters to return specific results. If you specify multiple filters, the results include only the resources that match all of the specified filters. For a filter where you can specify multiple values, the results include items that match any of the values that you specify for the filter.
+   */
+  listCapacityTasks(callback?: (err: AWSError, data: Outposts.Types.ListCapacityTasksOutput) => void): Request<Outposts.Types.ListCapacityTasksOutput, AWSError>;
   /**
    * Lists the items in the catalog. Use filters to return specific results. If you specify multiple filters, the results include only the resources that match all of the specified filters. For a filter where you can specify multiple values, the results include items that match any of the values that you specify for the filter.
    */
@@ -163,6 +195,14 @@ declare class Outposts extends Service {
    * Lists the tags for the specified resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: Outposts.Types.ListTagsForResourceResponse) => void): Request<Outposts.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Starts the specified capacity task. You can have one active capacity task for an order.
+   */
+  startCapacityTask(params: Outposts.Types.StartCapacityTaskInput, callback?: (err: AWSError, data: Outposts.Types.StartCapacityTaskOutput) => void): Request<Outposts.Types.StartCapacityTaskOutput, AWSError>;
+  /**
+   * Starts the specified capacity task. You can have one active capacity task for an order.
+   */
+  startCapacityTask(callback?: (err: AWSError, data: Outposts.Types.StartCapacityTaskOutput) => void): Request<Outposts.Types.StartCapacityTaskOutput, AWSError>;
   /**
    *   Amazon Web Services uses this action to install Outpost servers.   Starts the connection required for Outpost server installation.   Use CloudTrail to monitor this action or Amazon Web Services managed policy for Amazon Web Services Outposts to secure it. For more information, see  Amazon Web Services managed policies for Amazon Web Services Outposts and  Logging Amazon Web Services Outposts API calls with Amazon Web Services CloudTrail in the Amazon Web Services Outposts User Guide. 
    */
@@ -311,6 +351,18 @@ declare namespace Outposts {
   export type AvailabilityZoneList = AvailabilityZone[];
   export type CIDR = string;
   export type CIDRList = CIDR[];
+  export interface CancelCapacityTaskInput {
+    /**
+     * ID of the capacity task that you want to cancel.
+     */
+    CapacityTaskId: CapacityTaskId;
+    /**
+     * ID or ARN of the Outpost associated with the capacity task that you want to cancel.
+     */
+    OutpostIdentifier: OutpostIdentifier;
+  }
+  export interface CancelCapacityTaskOutput {
+  }
   export interface CancelOrderInput {
     /**
      *  The ID of the order. 
@@ -318,6 +370,52 @@ declare namespace Outposts {
     OrderId: OrderId;
   }
   export interface CancelOrderOutput {
+  }
+  export interface CapacityTaskFailure {
+    /**
+     * The reason that the specified capacity task failed.
+     */
+    Reason: CapacityTaskStatusReason;
+    /**
+     * The type of failure.
+     */
+    Type?: CapacityTaskFailureType;
+  }
+  export type CapacityTaskFailureType = "UNSUPPORTED_CAPACITY_CONFIGURATION"|string;
+  export type CapacityTaskId = string;
+  export type CapacityTaskList = CapacityTaskSummary[];
+  export type CapacityTaskStatus = "REQUESTED"|"IN_PROGRESS"|"FAILED"|"COMPLETED"|"CANCELLED"|string;
+  export type CapacityTaskStatusList = CapacityTaskStatus[];
+  export type CapacityTaskStatusReason = string;
+  export interface CapacityTaskSummary {
+    /**
+     * The ID of the specified capacity task.
+     */
+    CapacityTaskId?: CapacityTaskId;
+    /**
+     * The ID of the Outpost associated with the specified capacity task.
+     */
+    OutpostId?: OutpostId;
+    /**
+     * The ID of the Amazon Web Services Outposts order of the host associated with the capacity task.
+     */
+    OrderId?: OrderId;
+    /**
+     * The status of the capacity task.
+     */
+    CapacityTaskStatus?: CapacityTaskStatus;
+    /**
+     * The date that the specified capacity task was created.
+     */
+    CreationDate?: ISO8601Timestamp;
+    /**
+     * The date that the specified capacity task successfully ran.
+     */
+    CompletionDate?: ISO8601Timestamp;
+    /**
+     * The date that the specified capacity was last modified.
+     */
+    LastModifiedDate?: ISO8601Timestamp;
   }
   export interface CatalogItem {
     /**
@@ -477,7 +575,7 @@ declare namespace Outposts {
   }
   export interface DeleteOutpostInput {
     /**
-     *  The ID or the Amazon Resource Name (ARN) of the Outpost. 
+     *  The ID or ARN of the Outpost. 
      */
     OutpostId: OutpostId;
   }
@@ -493,6 +591,7 @@ declare namespace Outposts {
   }
   export type DeviceSerialNumber = string;
   export type DistrictOrCounty = string;
+  export type DryRun = boolean;
   export interface EC2Capacity {
     /**
      *  The family of the EC2 capacity. 
@@ -511,6 +610,58 @@ declare namespace Outposts {
   export type EC2FamilyList = Family[];
   export type Family = string;
   export type FiberOpticCableType = "SINGLE_MODE"|"MULTI_MODE"|string;
+  export interface GetCapacityTaskInput {
+    /**
+     * ID of the capacity task.
+     */
+    CapacityTaskId: CapacityTaskId;
+    /**
+     * ID or ARN of the Outpost associated with the specified capacity task.
+     */
+    OutpostIdentifier: OutpostIdentifier;
+  }
+  export interface GetCapacityTaskOutput {
+    /**
+     * ID of the capacity task.
+     */
+    CapacityTaskId?: CapacityTaskId;
+    /**
+     * ID of the Outpost associated with the specified capacity task.
+     */
+    OutpostId?: OutpostId;
+    /**
+     * ID of the Amazon Web Services Outposts order associated with the specified capacity task.
+     */
+    OrderId?: OrderId;
+    /**
+     * List of instance pools requested in the capacity task.
+     */
+    RequestedInstancePools?: RequestedInstancePools;
+    /**
+     * Performs a dry run to determine if you are above or below instance capacity.
+     */
+    DryRun?: DryRun;
+    /**
+     * Status of the capacity task. A capacity task can have one of the following statuses:    REQUESTED - The capacity task was created and is awaiting the next step by Amazon Web Services Outposts.    IN_PROGRESS - The capacity task is running and cannot be cancelled.    WAITING_FOR_EVACUATION - The capacity task requires capacity to run. You must stop the recommended EC2 running instances to free up capacity for the task to run.  
+     */
+    CapacityTaskStatus?: CapacityTaskStatus;
+    /**
+     * Reason why the capacity task failed.
+     */
+    Failed?: CapacityTaskFailure;
+    /**
+     * The date the capacity task was created.
+     */
+    CreationDate?: ISO8601Timestamp;
+    /**
+     * The date the capacity task ran successfully.
+     */
+    CompletionDate?: ISO8601Timestamp;
+    /**
+     * The date the capacity task was last modified.
+     */
+    LastModifiedDate?: ISO8601Timestamp;
+  }
   export interface GetCatalogItemInput {
     /**
      * The ID of the catalog item.
@@ -550,13 +701,13 @@ declare namespace Outposts {
   }
   export interface GetOutpostInput {
     /**
-     *  The ID or the Amazon Resource Name (ARN) of the Outpost. 
+     *  The ID or ARN of the Outpost. 
      */
     OutpostId: OutpostId;
   }
   export interface GetOutpostInstanceTypesInput {
     /**
-     *  The ID or the Amazon Resource Name (ARN) of the Outpost. 
+     *  The ID or ARN of the Outpost. 
      */
     OutpostId: OutpostId;
     NextToken?: Token;
@@ -573,6 +724,22 @@ declare namespace Outposts {
   }
   export interface GetOutpostOutput {
     Outpost?: Outpost;
+  }
+  export interface GetOutpostSupportedInstanceTypesInput {
+    /**
+     * The ID or ARN of the Outpost.
+     */
+    OutpostIdentifier: OutpostIdentifier;
+    /**
+     * The ID for the Amazon Web Services Outposts order.
+     */
+    OrderId: OrderId;
+    MaxResults?: MaxResults1000;
+    NextToken?: Token;
+  }
+  export interface GetOutpostSupportedInstanceTypesOutput {
+    InstanceTypes?: InstanceTypeListDefinition;
+    NextToken?: Token;
   }
   export interface GetSiteAddressInput {
     /**
@@ -610,10 +777,22 @@ declare namespace Outposts {
   export type InstanceFamilies = InstanceFamilyName[];
   export type InstanceFamilyName = string;
   export type InstanceType = string;
+  export interface InstanceTypeCapacity {
+    /**
+     * The instance type of the hosts.
+     */
+    InstanceType: InstanceTypeName;
+    /**
+     * The number of instances for the specified instance type.
+     */
+    Count: InstanceTypeCount;
+  }
+  export type InstanceTypeCount = number;
   export interface InstanceTypeItem {
     InstanceType?: InstanceType;
   }
   export type InstanceTypeListDefinition = InstanceTypeItem[];
+  export type InstanceTypeName = string;
   export type LifeCycleStatus = string;
   export type LifeCycleStatusList = LifeCycleStatus[];
   export interface LineItem {
@@ -698,6 +877,25 @@ declare namespace Outposts {
      * Information about the hardware assets.
      */
     Assets?: AssetListDefinition;
+    NextToken?: Token;
+  }
+  export interface ListCapacityTasksInput {
+    /**
+     * Filters the results by an Outpost ID or an Outpost ARN.
+     */
+    OutpostIdentifierFilter?: OutpostIdentifier;
+    MaxResults?: MaxResults1000;
+    NextToken?: Token;
+    /**
+     * A list of statuses. For example, REQUESTED or WAITING_FOR_EVACUATION.
+     */
+    CapacityTaskStatusFilter?: CapacityTaskStatusList;
+  }
+  export interface ListCapacityTasksOutput {
+    /**
+     * Lists all the capacity tasks.
+     */
+    CapacityTasks?: CapacityTaskList;
     NextToken?: Token;
   }
   export interface ListCatalogItemsInput {
@@ -948,6 +1146,7 @@ declare namespace Outposts {
      */
     MaximumSupportedWeightLbs?: MaximumSupportedWeightLbs;
   }
+  export type RequestedInstancePools = InstanceTypeCapacity[];
   export type ServerEndpoint = string;
   export type ShipmentCarrier = "DHL"|"DBS"|"FEDEX"|"UPS"|"EXPEDITORS"|string;
   export interface ShipmentInformation {
@@ -997,6 +1196,66 @@ declare namespace Outposts {
   export type SiteName = string;
   export type SiteNotes = string;
   export type SkuCode = string;
+  export interface StartCapacityTaskInput {
+    /**
+     * The ID or ARN of the Outposts associated with the specified capacity task.
+     */
+    OutpostIdentifier: OutpostIdentifier;
+    /**
+     * The ID of the Amazon Web Services Outposts order associated with the specified capacity task.
+     */
+    OrderId: OrderId;
+    /**
+     * The instance pools specified in the capacity task.
+     */
+    InstancePools: RequestedInstancePools;
+    /**
+     * You can request a dry run to determine if the instance type and instance size changes is above or below available instance capacity. Requesting a dry run does not make any changes to your plan.
+     */
+    DryRun?: DryRun;
+  }
+  export interface StartCapacityTaskOutput {
+    /**
+     * ID of the capacity task that you want to start.
+     */
+    CapacityTaskId?: CapacityTaskId;
+    /**
+     * ID of the Outpost associated with the capacity task.
+     */
+    OutpostId?: OutpostId;
+    /**
+     * ID of the Amazon Web Services Outposts order of the host associated with the capacity task.
+     */
+    OrderId?: OrderId;
+    /**
+     * List of the instance pools requested in the specified capacity task.
+     */
+    RequestedInstancePools?: RequestedInstancePools;
+    /**
+     * Results of the dry run showing if the specified capacity task is above or below the available instance capacity.
+     */
+    DryRun?: DryRun;
+    /**
+     * Status of the specified capacity task.
+     */
+    CapacityTaskStatus?: CapacityTaskStatus;
+    /**
+     * Reason that the specified capacity task failed.
+     */
+    Failed?: CapacityTaskFailure;
+    /**
+     * Date that the specified capacity task was created.
+     */
+    CreationDate?: ISO8601Timestamp;
+    /**
+     * Date that the specified capacity task ran successfully.
+     */
+    CompletionDate?: ISO8601Timestamp;
+    /**
+     * Date that the specified capacity task was last modified.
+     */
+    LastModifiedDate?: ISO8601Timestamp;
+  }
   export interface StartConnectionRequest {
     /**
      *  The serial number of the dongle. 
@@ -1066,7 +1325,7 @@ declare namespace Outposts {
   }
   export interface UpdateOutpostInput {
     /**
-     *  The ID or the Amazon Resource Name (ARN) of the Outpost. 
+     *  The ID or ARN of the Outpost. 
      */
     OutpostId: OutpostId;
     Name?: OutpostName;

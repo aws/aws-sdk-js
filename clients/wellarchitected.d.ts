@@ -204,6 +204,10 @@ declare class WellArchitected extends Service {
    */
   getConsolidatedReport(callback?: (err: AWSError, data: WellArchitected.Types.GetConsolidatedReportOutput) => void): Request<WellArchitected.Types.GetConsolidatedReportOutput, AWSError>;
   /**
+   * Global settings for all workloads.
+   */
+  getGlobalSettings(callback?: (err: AWSError, data: WellArchitected.Types.GetGlobalSettingsOutput) => void): Request<WellArchitected.Types.GetGlobalSettingsOutput, AWSError>;
+  /**
    * Get an existing lens.
    */
   getLens(params: WellArchitected.Types.GetLensInput, callback?: (err: AWSError, data: WellArchitected.Types.GetLensOutput) => void): Request<WellArchitected.Types.GetLensOutput, AWSError>;
@@ -324,11 +328,11 @@ declare class WellArchitected extends Service {
    */
   listCheckSummaries(callback?: (err: AWSError, data: WellArchitected.Types.ListCheckSummariesOutput) => void): Request<WellArchitected.Types.ListCheckSummariesOutput, AWSError>;
   /**
-   * List lens review improvements.
+   * List the improvements of a particular lens review.
    */
   listLensReviewImprovements(params: WellArchitected.Types.ListLensReviewImprovementsInput, callback?: (err: AWSError, data: WellArchitected.Types.ListLensReviewImprovementsOutput) => void): Request<WellArchitected.Types.ListLensReviewImprovementsOutput, AWSError>;
   /**
-   * List lens review improvements.
+   * List the improvements of a particular lens review.
    */
   listLensReviewImprovements(callback?: (err: AWSError, data: WellArchitected.Types.ListLensReviewImprovementsOutput) => void): Request<WellArchitected.Types.ListLensReviewImprovementsOutput, AWSError>;
   /**
@@ -476,13 +480,21 @@ declare class WellArchitected extends Service {
    */
   updateAnswer(callback?: (err: AWSError, data: WellArchitected.Types.UpdateAnswerOutput) => void): Request<WellArchitected.Types.UpdateAnswerOutput, AWSError>;
   /**
-   * Updates whether the Amazon Web Services account is opted into organization sharing and discovery integration features.
+   * Update whether the Amazon Web Services account is opted into organization sharing and discovery integration features.
    */
   updateGlobalSettings(params: WellArchitected.Types.UpdateGlobalSettingsInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates whether the Amazon Web Services account is opted into organization sharing and discovery integration features.
+   * Update whether the Amazon Web Services account is opted into organization sharing and discovery integration features.
    */
   updateGlobalSettings(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Update integration features.
+   */
+  updateIntegration(params: WellArchitected.Types.UpdateIntegrationInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Update integration features.
+   */
+  updateIntegration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Update lens review for a particular workload.
    */
@@ -573,6 +585,51 @@ declare class WellArchitected extends Service {
   upgradeReviewTemplateLensReview(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace WellArchitected {
+  export interface AccountJiraConfigurationInput {
+    /**
+     * Account-level: Jira issue management status.
+     */
+    IssueManagementStatus?: AccountJiraIssueManagementStatus;
+    /**
+     * Account-level: Jira issue management type.
+     */
+    IssueManagementType?: IssueManagementType;
+    /**
+     * Account-level: Jira project key to sync workloads to.
+     */
+    JiraProjectKey?: JiraProjectKey;
+    /**
+     * Account-level: Configuration status of the Jira integration.
+     */
+    IntegrationStatus?: IntegrationStatusInput;
+  }
+  export interface AccountJiraConfigurationOutput {
+    /**
+     * Account-level: Configuration status of the Jira integration.
+     */
+    IntegrationStatus?: IntegrationStatus;
+    /**
+     * Account-level: Jira issue management status.
+     */
+    IssueManagementStatus?: AccountJiraIssueManagementStatus;
+    /**
+     * Account-level: Jira issue management type.
+     */
+    IssueManagementType?: IssueManagementType;
+    /**
+     * Account-level: Jira subdomain URL.
+     */
+    Subdomain?: Subdomain;
+    /**
+     * Account-level: Jira project key to sync workloads to.
+     */
+    JiraProjectKey?: JiraProjectKey;
+    /**
+     * Account-level: Status message on configuration of the Jira integration.
+     */
+    StatusMessage?: StatusMessage;
+  }
+  export type AccountJiraIssueManagementStatus = "ENABLED"|"DISABLED"|string;
   export type AccountSummary = {[key: string]: CheckStatusCount};
   export type AdditionalResourceType = "HELPFUL_RESOURCE"|"IMPROVEMENT_PLAN"|string;
   export interface AdditionalResources {
@@ -610,6 +667,10 @@ declare namespace WellArchitected {
      * The reason why the question is not applicable to your workload.
      */
     Reason?: AnswerReason;
+    /**
+     * Configuration of the Jira integration.
+     */
+    JiraConfiguration?: JiraConfiguration;
   }
   export type AnswerReason = "OUT_OF_SCOPE"|"BUSINESS_PRIORITIES"|"ARCHITECTURE_CONSTRAINTS"|"OTHER"|"NONE"|string;
   export type AnswerSummaries = AnswerSummary[];
@@ -633,6 +694,10 @@ declare namespace WellArchitected {
      * The type of the question.
      */
     QuestionType?: QuestionType;
+    /**
+     * Configuration of the Jira integration.
+     */
+    JiraConfiguration?: JiraConfiguration;
   }
   export type ApplicationArn = string;
   export interface AssociateLensesInput {
@@ -1005,6 +1070,10 @@ declare namespace WellArchitected {
      * The list of review template ARNs to associate with the workload.
      */
     ReviewTemplateArns?: ReviewTemplateArns;
+    /**
+     * Jira configuration settings when creating a workload.
+     */
+    JiraConfiguration?: WorkloadJiraConfigurationInput;
   }
   export interface CreateWorkloadOutput {
     WorkloadId?: WorkloadId;
@@ -1140,6 +1209,20 @@ declare namespace WellArchitected {
     Metrics?: ConsolidatedReportMetrics;
     NextToken?: NextToken;
     Base64String?: Base64String;
+  }
+  export interface GetGlobalSettingsOutput {
+    /**
+     * Amazon Web Services Organizations sharing status.
+     */
+    OrganizationSharingStatus?: OrganizationSharingStatus;
+    /**
+     * Discovery integration status.
+     */
+    DiscoveryIntegrationStatus?: DiscoveryIntegrationStatus;
+    /**
+     * Jira configuration status.
+     */
+    JiraConfiguration?: AccountJiraConfigurationOutput;
   }
   export interface GetLensInput {
     LensAlias: LensAlias;
@@ -1327,11 +1410,34 @@ declare namespace WellArchitected {
      * The improvement plan details.
      */
     ImprovementPlans?: ChoiceImprovementPlans;
+    /**
+     * Configuration of the Jira integration.
+     */
+    JiraConfiguration?: JiraConfiguration;
   }
   export type IncludeSharedResources = boolean;
+  export type IntegratingService = "JIRA"|string;
+  export type IntegrationStatus = "CONFIGURED"|"NOT_CONFIGURED"|string;
+  export type IntegrationStatusInput = "NOT_CONFIGURED"|string;
   export type IsApplicable = boolean;
   export type IsMajorVersion = boolean;
   export type IsReviewOwnerUpdateAcknowledged = boolean;
+  export type IssueManagementType = "AUTO"|"MANUAL"|string;
+  export interface JiraConfiguration {
+    /**
+     * The URL of the associated Jira issue.
+     */
+    JiraIssueUrl?: JiraIssueUrl;
+    LastSyncedTime?: Timestamp;
+  }
+  export type JiraIssueUrl = string;
+  export type JiraProjectKey = string;
+  export interface JiraSelectedQuestionConfiguration {
+    /**
+     * Selected pillars in the workload.
+     */
+    SelectedPillars?: SelectedPillars;
+  }
   export interface Lens {
     /**
      * The ARN of a lens.
@@ -1392,6 +1498,10 @@ declare namespace WellArchitected {
      */
     LensStatus?: LensStatus;
     PillarReviewSummaries?: PillarReviewSummaries;
+    /**
+     * Jira configuration status of the Lens review.
+     */
+    JiraConfiguration?: JiraSelectedQuestionConfiguration;
     UpdatedAt?: Timestamp;
     Notes?: Notes;
     RiskCounts?: RiskCounts;
@@ -2285,7 +2395,17 @@ declare namespace WellArchitected {
   export type RiskCounts = {[key: string]: Count};
   export type SelectedChoiceIds = ChoiceId[];
   export type SelectedChoices = ChoiceId[];
+  export interface SelectedPillar {
+    PillarId?: PillarId;
+    /**
+     * Selected question IDs in the selected pillar.
+     */
+    SelectedQuestionIds?: SelectedQuestionIds;
+  }
+  export type SelectedPillars = SelectedPillar[];
   export type SelectedProfileChoiceIds = ChoiceId[];
+  export type SelectedQuestionId = string;
+  export type SelectedQuestionIds = SelectedQuestionId[];
   export type ShareId = string;
   export interface ShareInvitation {
     /**
@@ -2355,6 +2475,7 @@ declare namespace WellArchitected {
   export type SharedWith = string;
   export type SharedWithPrefix = string;
   export type StatusMessage = string;
+  export type Subdomain = string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagMap = {[key: string]: TagValue};
@@ -2428,12 +2549,28 @@ declare namespace WellArchitected {
      * The status of discovery support settings.
      */
     DiscoveryIntegrationStatus?: DiscoveryIntegrationStatus;
+    /**
+     * The status of Jira integration settings.
+     */
+    JiraConfiguration?: AccountJiraConfigurationInput;
+  }
+  export interface UpdateIntegrationInput {
+    WorkloadId: WorkloadId;
+    ClientRequestToken: ClientRequestToken;
+    /**
+     * Which integrated service to update.
+     */
+    IntegratingService: IntegratingService;
   }
   export interface UpdateLensReviewInput {
     WorkloadId: WorkloadId;
     LensAlias: LensAlias;
     LensNotes?: Notes;
     PillarNotes?: PillarNotes;
+    /**
+     * Configuration of the Jira integration.
+     */
+    JiraConfiguration?: JiraSelectedQuestionConfiguration;
   }
   export interface UpdateLensReviewOutput {
     WorkloadId?: WorkloadId;
@@ -2577,6 +2714,10 @@ declare namespace WellArchitected {
      * List of AppRegistry application ARNs to associate to the workload.
      */
     Applications?: WorkloadApplications;
+    /**
+     * Configuration of the Jira integration.
+     */
+    JiraConfiguration?: WorkloadJiraConfigurationInput;
   }
   export interface UpdateWorkloadOutput {
     Workload?: Workload;
@@ -2666,6 +2807,10 @@ declare namespace WellArchitected {
      */
     Profiles?: WorkloadProfiles;
     PrioritizedRiskCounts?: RiskCounts;
+    /**
+     * Jira configuration for a specific workload.
+     */
+    JiraConfiguration?: WorkloadJiraConfigurationOutput;
   }
   export type WorkloadAccountIds = AwsAccountId[];
   export type WorkloadApplications = ApplicationArn[];
@@ -2688,6 +2833,39 @@ declare namespace WellArchitected {
   export type WorkloadImprovementStatus = "NOT_APPLICABLE"|"NOT_STARTED"|"IN_PROGRESS"|"COMPLETE"|"RISK_ACKNOWLEDGED"|string;
   export type WorkloadIndustry = string;
   export type WorkloadIndustryType = string;
+  export type WorkloadIssueManagementStatus = "ENABLED"|"DISABLED"|"INHERIT"|string;
+  export interface WorkloadJiraConfigurationInput {
+    /**
+     * Workload-level: Jira issue management status.
+     */
+    IssueManagementStatus?: WorkloadIssueManagementStatus;
+    /**
+     * Workload-level: Jira issue management type.
+     */
+    IssueManagementType?: IssueManagementType;
+    /**
+     * Workload-level: Jira project key to sync workloads to.
+     */
+    JiraProjectKey?: JiraProjectKey;
+  }
+  export interface WorkloadJiraConfigurationOutput {
+    /**
+     * Workload-level: Jira issue management status.
+     */
+    IssueManagementStatus?: WorkloadIssueManagementStatus;
+    /**
+     * Workload-level: Jira issue management type.
+     */
+    IssueManagementType?: IssueManagementType;
+    /**
+     * Workload-level: Jira project key to sync workloads to.
+     */
+    JiraProjectKey?: JiraProjectKey;
+    /**
+     * Workload-level: Status message on configuration of the Jira integration.
+     */
+    StatusMessage?: StatusMessage;
+  }
   export type WorkloadLenses = LensAlias[];
   export type WorkloadName = string;
   export type WorkloadNamePrefix = string;

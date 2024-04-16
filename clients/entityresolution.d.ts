@@ -12,6 +12,14 @@ declare class EntityResolution extends Service {
   constructor(options?: EntityResolution.Types.ClientConfiguration)
   config: Config & EntityResolution.Types.ClientConfiguration;
   /**
+   * Adds a policy statement object. To retrieve a list of existing policy statements, use the GetPolicy API.
+   */
+  addPolicyStatement(params: EntityResolution.Types.AddPolicyStatementInput, callback?: (err: AWSError, data: EntityResolution.Types.AddPolicyStatementOutput) => void): Request<EntityResolution.Types.AddPolicyStatementOutput, AWSError>;
+  /**
+   * Adds a policy statement object. To retrieve a list of existing policy statements, use the GetPolicy API.
+   */
+  addPolicyStatement(callback?: (err: AWSError, data: EntityResolution.Types.AddPolicyStatementOutput) => void): Request<EntityResolution.Types.AddPolicyStatementOutput, AWSError>;
+  /**
    * Creates an IdMappingWorkflow object which stores the configuration of the data processing job to be run. Each IdMappingWorkflow must have a unique workflow name. To modify an existing workflow, use the UpdateIdMappingWorkflow API.
    */
   createIdMappingWorkflow(params: EntityResolution.Types.CreateIdMappingWorkflowInput, callback?: (err: AWSError, data: EntityResolution.Types.CreateIdMappingWorkflowOutput) => void): Request<EntityResolution.Types.CreateIdMappingWorkflowOutput, AWSError>;
@@ -19,6 +27,14 @@ declare class EntityResolution extends Service {
    * Creates an IdMappingWorkflow object which stores the configuration of the data processing job to be run. Each IdMappingWorkflow must have a unique workflow name. To modify an existing workflow, use the UpdateIdMappingWorkflow API.
    */
   createIdMappingWorkflow(callback?: (err: AWSError, data: EntityResolution.Types.CreateIdMappingWorkflowOutput) => void): Request<EntityResolution.Types.CreateIdMappingWorkflowOutput, AWSError>;
+  /**
+   * Creates an ID namespace object which will help customers provide metadata explaining their dataset and how to use it. Each ID namespace must have a unique name. To modify an existing ID namespace, use the UpdateIdNamespace API.
+   */
+  createIdNamespace(params: EntityResolution.Types.CreateIdNamespaceInput, callback?: (err: AWSError, data: EntityResolution.Types.CreateIdNamespaceOutput) => void): Request<EntityResolution.Types.CreateIdNamespaceOutput, AWSError>;
+  /**
+   * Creates an ID namespace object which will help customers provide metadata explaining their dataset and how to use it. Each ID namespace must have a unique name. To modify an existing ID namespace, use the UpdateIdNamespace API.
+   */
+  createIdNamespace(callback?: (err: AWSError, data: EntityResolution.Types.CreateIdNamespaceOutput) => void): Request<EntityResolution.Types.CreateIdNamespaceOutput, AWSError>;
   /**
    * Creates a MatchingWorkflow object which stores the configuration of the data processing job to be run. It is important to note that there should not be a pre-existing MatchingWorkflow with the same name. To modify an existing workflow, utilize the UpdateMatchingWorkflow API.
    */
@@ -44,6 +60,14 @@ declare class EntityResolution extends Service {
    */
   deleteIdMappingWorkflow(callback?: (err: AWSError, data: EntityResolution.Types.DeleteIdMappingWorkflowOutput) => void): Request<EntityResolution.Types.DeleteIdMappingWorkflowOutput, AWSError>;
   /**
+   * Deletes the IdNamespace with a given name.
+   */
+  deleteIdNamespace(params: EntityResolution.Types.DeleteIdNamespaceInput, callback?: (err: AWSError, data: EntityResolution.Types.DeleteIdNamespaceOutput) => void): Request<EntityResolution.Types.DeleteIdNamespaceOutput, AWSError>;
+  /**
+   * Deletes the IdNamespace with a given name.
+   */
+  deleteIdNamespace(callback?: (err: AWSError, data: EntityResolution.Types.DeleteIdNamespaceOutput) => void): Request<EntityResolution.Types.DeleteIdNamespaceOutput, AWSError>;
+  /**
    * Deletes the MatchingWorkflow with a given name. This operation will succeed even if a workflow with the given name does not exist.
    */
   deleteMatchingWorkflow(params: EntityResolution.Types.DeleteMatchingWorkflowInput, callback?: (err: AWSError, data: EntityResolution.Types.DeleteMatchingWorkflowOutput) => void): Request<EntityResolution.Types.DeleteMatchingWorkflowOutput, AWSError>;
@@ -51,6 +75,14 @@ declare class EntityResolution extends Service {
    * Deletes the MatchingWorkflow with a given name. This operation will succeed even if a workflow with the given name does not exist.
    */
   deleteMatchingWorkflow(callback?: (err: AWSError, data: EntityResolution.Types.DeleteMatchingWorkflowOutput) => void): Request<EntityResolution.Types.DeleteMatchingWorkflowOutput, AWSError>;
+  /**
+   * Deletes the policy statement.
+   */
+  deletePolicyStatement(params: EntityResolution.Types.DeletePolicyStatementInput, callback?: (err: AWSError, data: EntityResolution.Types.DeletePolicyStatementOutput) => void): Request<EntityResolution.Types.DeletePolicyStatementOutput, AWSError>;
+  /**
+   * Deletes the policy statement.
+   */
+  deletePolicyStatement(callback?: (err: AWSError, data: EntityResolution.Types.DeletePolicyStatementOutput) => void): Request<EntityResolution.Types.DeletePolicyStatementOutput, AWSError>;
   /**
    * Deletes the SchemaMapping with a given name. This operation will succeed even if a schema with the given name does not exist. This operation will fail if there is a MatchingWorkflow object that references the SchemaMapping in the workflow's InputSourceConfig.
    */
@@ -76,6 +108,14 @@ declare class EntityResolution extends Service {
    */
   getIdMappingWorkflow(callback?: (err: AWSError, data: EntityResolution.Types.GetIdMappingWorkflowOutput) => void): Request<EntityResolution.Types.GetIdMappingWorkflowOutput, AWSError>;
   /**
+   * Returns the IdNamespace with a given name, if it exists.
+   */
+  getIdNamespace(params: EntityResolution.Types.GetIdNamespaceInput, callback?: (err: AWSError, data: EntityResolution.Types.GetIdNamespaceOutput) => void): Request<EntityResolution.Types.GetIdNamespaceOutput, AWSError>;
+  /**
+   * Returns the IdNamespace with a given name, if it exists.
+   */
+  getIdNamespace(callback?: (err: AWSError, data: EntityResolution.Types.GetIdNamespaceOutput) => void): Request<EntityResolution.Types.GetIdNamespaceOutput, AWSError>;
+  /**
    * Returns the corresponding Match ID of a customer record if the record has been processed.
    */
   getMatchId(params: EntityResolution.Types.GetMatchIdInput, callback?: (err: AWSError, data: EntityResolution.Types.GetMatchIdOutput) => void): Request<EntityResolution.Types.GetMatchIdOutput, AWSError>;
@@ -99,6 +139,14 @@ declare class EntityResolution extends Service {
    * Returns the MatchingWorkflow with a given name, if it exists.
    */
   getMatchingWorkflow(callback?: (err: AWSError, data: EntityResolution.Types.GetMatchingWorkflowOutput) => void): Request<EntityResolution.Types.GetMatchingWorkflowOutput, AWSError>;
+  /**
+   * Returns the resource-based policy.
+   */
+  getPolicy(params: EntityResolution.Types.GetPolicyInput, callback?: (err: AWSError, data: EntityResolution.Types.GetPolicyOutput) => void): Request<EntityResolution.Types.GetPolicyOutput, AWSError>;
+  /**
+   * Returns the resource-based policy.
+   */
+  getPolicy(callback?: (err: AWSError, data: EntityResolution.Types.GetPolicyOutput) => void): Request<EntityResolution.Types.GetPolicyOutput, AWSError>;
   /**
    * Returns the ProviderService of a given name.
    */
@@ -131,6 +179,14 @@ declare class EntityResolution extends Service {
    * Returns a list of all the IdMappingWorkflows that have been created for an Amazon Web Services account.
    */
   listIdMappingWorkflows(callback?: (err: AWSError, data: EntityResolution.Types.ListIdMappingWorkflowsOutput) => void): Request<EntityResolution.Types.ListIdMappingWorkflowsOutput, AWSError>;
+  /**
+   * Returns a list of all ID namespaces.
+   */
+  listIdNamespaces(params: EntityResolution.Types.ListIdNamespacesInput, callback?: (err: AWSError, data: EntityResolution.Types.ListIdNamespacesOutput) => void): Request<EntityResolution.Types.ListIdNamespacesOutput, AWSError>;
+  /**
+   * Returns a list of all ID namespaces.
+   */
+  listIdNamespaces(callback?: (err: AWSError, data: EntityResolution.Types.ListIdNamespacesOutput) => void): Request<EntityResolution.Types.ListIdNamespacesOutput, AWSError>;
   /**
    * Lists all jobs for a given workflow.
    */
@@ -172,6 +228,14 @@ declare class EntityResolution extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: EntityResolution.Types.ListTagsForResourceOutput) => void): Request<EntityResolution.Types.ListTagsForResourceOutput, AWSError>;
   /**
+   * Updates the resource-based policy.
+   */
+  putPolicy(params: EntityResolution.Types.PutPolicyInput, callback?: (err: AWSError, data: EntityResolution.Types.PutPolicyOutput) => void): Request<EntityResolution.Types.PutPolicyOutput, AWSError>;
+  /**
+   * Updates the resource-based policy.
+   */
+  putPolicy(callback?: (err: AWSError, data: EntityResolution.Types.PutPolicyOutput) => void): Request<EntityResolution.Types.PutPolicyOutput, AWSError>;
+  /**
    * Starts the IdMappingJob of a workflow. The workflow must have previously been created using the CreateIdMappingWorkflow endpoint.
    */
   startIdMappingJob(params: EntityResolution.Types.StartIdMappingJobInput, callback?: (err: AWSError, data: EntityResolution.Types.StartIdMappingJobOutput) => void): Request<EntityResolution.Types.StartIdMappingJobOutput, AWSError>;
@@ -212,6 +276,14 @@ declare class EntityResolution extends Service {
    */
   updateIdMappingWorkflow(callback?: (err: AWSError, data: EntityResolution.Types.UpdateIdMappingWorkflowOutput) => void): Request<EntityResolution.Types.UpdateIdMappingWorkflowOutput, AWSError>;
   /**
+   * Updates an existing ID namespace.
+   */
+  updateIdNamespace(params: EntityResolution.Types.UpdateIdNamespaceInput, callback?: (err: AWSError, data: EntityResolution.Types.UpdateIdNamespaceOutput) => void): Request<EntityResolution.Types.UpdateIdNamespaceOutput, AWSError>;
+  /**
+   * Updates an existing ID namespace.
+   */
+  updateIdNamespace(callback?: (err: AWSError, data: EntityResolution.Types.UpdateIdNamespaceOutput) => void): Request<EntityResolution.Types.UpdateIdNamespaceOutput, AWSError>;
+  /**
    * Updates an existing MatchingWorkflow. This method is identical to CreateMatchingWorkflow, except it uses an HTTP PUT request instead of a POST request, and the MatchingWorkflow must already exist for the method to succeed.
    */
   updateMatchingWorkflow(params: EntityResolution.Types.UpdateMatchingWorkflowInput, callback?: (err: AWSError, data: EntityResolution.Types.UpdateMatchingWorkflowOutput) => void): Request<EntityResolution.Types.UpdateMatchingWorkflowOutput, AWSError>;
@@ -229,6 +301,46 @@ declare class EntityResolution extends Service {
   updateSchemaMapping(callback?: (err: AWSError, data: EntityResolution.Types.UpdateSchemaMappingOutput) => void): Request<EntityResolution.Types.UpdateSchemaMappingOutput, AWSError>;
 }
 declare namespace EntityResolution {
+  export interface AddPolicyStatementInput {
+    /**
+     * The action that the principal can use on the resource.  For example, entityresolution:GetIdMappingJob, entityresolution:GetMatchingJob.
+     */
+    action: StatementActionList;
+    /**
+     * The Amazon Resource Name (ARN) of the resource that will be accessed by the principal.
+     */
+    arn: VeniceGlobalArn;
+    /**
+     * A set of condition keys that you can use in key policies.
+     */
+    condition?: StatementCondition;
+    /**
+     * Determines whether the permissions specified in the policy are to be allowed (Allow) or denied (Deny).
+     */
+    effect: StatementEffect;
+    /**
+     * The Amazon Web Services service or Amazon Web Services account that can access the resource defined as ARN.
+     */
+    principal: StatementPrincipalList;
+    /**
+     * A statement identifier that differentiates the statement from others in the same policy.
+     */
+    statementId: StatementId;
+  }
+  export interface AddPolicyStatementOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the resource that will be accessed by the principal.
+     */
+    arn: VeniceGlobalArn;
+    /**
+     * The resource-based policy.
+     */
+    policy?: PolicyDocument;
+    /**
+     * A unique identifier for the current revision of the policy.
+     */
+    token: PolicyToken;
+  }
   export type AttributeMatchingModel = "ONE_TO_ONE"|"MANY_TO_MANY"|string;
   export type AttributeName = string;
   export type AwsAccountId = string;
@@ -250,7 +362,7 @@ declare namespace EntityResolution {
     /**
      * A list of IdMappingWorkflowOutputSource objects, each of which contains fields OutputS3Path and Output.
      */
-    outputSourceConfig: IdMappingWorkflowOutputSourceConfig;
+    outputSourceConfig?: IdMappingWorkflowOutputSourceConfig;
     /**
      * The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.
      */
@@ -280,7 +392,7 @@ declare namespace EntityResolution {
     /**
      * A list of IdMappingWorkflowOutputSource objects, each of which contains fields OutputS3Path and Output.
      */
-    outputSourceConfig: IdMappingWorkflowOutputSourceConfig;
+    outputSourceConfig?: IdMappingWorkflowOutputSourceConfig;
     /**
      * The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.
      */
@@ -293,6 +405,78 @@ declare namespace EntityResolution {
      * The name of the workflow.
      */
     workflowName: EntityName;
+  }
+  export interface CreateIdNamespaceInput {
+    /**
+     * The description of the ID namespace.
+     */
+    description?: Description;
+    /**
+     * Determines the properties of IdMappingWorflow where this IdNamespace can be used as a Source or a Target.
+     */
+    idMappingWorkflowProperties?: IdNamespaceIdMappingWorkflowPropertiesList;
+    /**
+     * The name of the ID namespace.
+     */
+    idNamespaceName: EntityName;
+    /**
+     * A list of InputSource objects, which have the fields InputSourceARN and SchemaName.
+     */
+    inputSourceConfig?: IdNamespaceInputSourceConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to access the resources defined in this IdNamespace on your behalf as part of the workflow run.
+     */
+    roleArn?: RoleArn;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    tags?: TagMap;
+    /**
+     * The type of ID namespace. There are two types: SOURCE and TARGET.  The SOURCE contains configurations for sourceId data that will be processed in an ID mapping workflow.  The TARGET contains a configuration of targetId to which all sourceIds will resolve to.
+     */
+    type: IdNamespaceType;
+  }
+  export interface CreateIdNamespaceOutput {
+    /**
+     * The timestamp of when the ID namespace was created.
+     */
+    createdAt: Timestamp;
+    /**
+     * The description of the ID namespace.
+     */
+    description?: Description;
+    /**
+     * Determines the properties of IdMappingWorkflow where this IdNamespace can be used as a Source or a Target.
+     */
+    idMappingWorkflowProperties?: IdNamespaceIdMappingWorkflowPropertiesList;
+    /**
+     * The Amazon Resource Name (ARN) of the ID namespace.
+     */
+    idNamespaceArn: IdNamespaceArn;
+    /**
+     * The name of the ID namespace.
+     */
+    idNamespaceName: EntityName;
+    /**
+     * A list of InputSource objects, which have the fields InputSourceARN and SchemaName.
+     */
+    inputSourceConfig?: IdNamespaceInputSourceConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to access the resources defined in inputSourceConfig on your behalf as part of the workflow run.
+     */
+    roleArn?: RoleArn;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    tags?: TagMap;
+    /**
+     * The type of ID namespace. There are two types: SOURCE and TARGET. The SOURCE contains configurations for sourceId data that will be processed in an ID mapping workflow.  The TARGET contains a configuration of targetId to which all sourceIds will resolve to.
+     */
+    type: IdNamespaceType;
+    /**
+     * The timestamp of when the ID namespace was last updated.
+     */
+    updatedAt: Timestamp;
   }
   export interface CreateMatchingWorkflowInput {
     /**
@@ -410,6 +594,18 @@ declare namespace EntityResolution {
      */
     message: String;
   }
+  export interface DeleteIdNamespaceInput {
+    /**
+     * The name of the ID namespace.
+     */
+    idNamespaceName: EntityName;
+  }
+  export interface DeleteIdNamespaceOutput {
+    /**
+     * A successful operation message.
+     */
+    message: String;
+  }
   export interface DeleteMatchingWorkflowInput {
     /**
      * The name of the workflow to be retrieved.
@@ -421,6 +617,30 @@ declare namespace EntityResolution {
      * A successful operation message.
      */
     message: String;
+  }
+  export interface DeletePolicyStatementInput {
+    /**
+     * The ARN of the resource for which the policy need to be deleted.
+     */
+    arn: VeniceGlobalArn;
+    /**
+     * A statement identifier that differentiates the statement from others in the same policy.
+     */
+    statementId: StatementId;
+  }
+  export interface DeletePolicyStatementOutput {
+    /**
+     * The ARN of the resource for which the policy need to be deleted.
+     */
+    arn: VeniceGlobalArn;
+    /**
+     * The resource-based policy.
+     */
+    policy?: PolicyDocument;
+    /**
+     * A unique identifier for the deleted policy.
+     */
+    token: PolicyToken;
   }
   export interface DeleteSchemaMappingInput {
     /**
@@ -438,6 +658,8 @@ declare namespace EntityResolution {
   export interface Document {
   }
   export type EntityName = string;
+  export type EntityNameOrIdMappingWorkflowArn = string;
+  export type EntityNameOrIdNamespaceArn = string;
   export interface ErrorDetails {
     /**
      * The error message from the job, if there is one.
@@ -453,7 +675,7 @@ declare namespace EntityResolution {
     /**
      * The name of the workflow.
      */
-    workflowName: EntityName;
+    workflowName: EntityNameOrIdMappingWorkflowArn;
   }
   export interface GetIdMappingJobOutput {
     /**
@@ -469,6 +691,10 @@ declare namespace EntityResolution {
      * Metrics associated with the execution, specifically total records processed, unique IDs generated, and records the execution skipped.
      */
     metrics?: IdMappingJobMetrics;
+    /**
+     * A list of OutputSource objects.
+     */
+    outputSourceConfig?: IdMappingJobOutputSourceConfig;
     /**
      * The time at which the job was started.
      */
@@ -504,9 +730,9 @@ declare namespace EntityResolution {
     /**
      * A list of OutputSource objects, each of which contains fields OutputS3Path and KMSArn.
      */
-    outputSourceConfig: IdMappingWorkflowOutputSourceConfig;
+    outputSourceConfig?: IdMappingWorkflowOutputSourceConfig;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to access resources on your behalf.
+     * The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to access Amazon Web Services resources on your behalf.
      */
     roleArn: RoleArn;
     /**
@@ -526,7 +752,59 @@ declare namespace EntityResolution {
      */
     workflowName: EntityName;
   }
+  export interface GetIdNamespaceInput {
+    /**
+     * The name of the ID namespace.
+     */
+    idNamespaceName: EntityNameOrIdNamespaceArn;
+  }
+  export interface GetIdNamespaceOutput {
+    /**
+     * The timestamp of when the ID namespace was created.
+     */
+    createdAt: Timestamp;
+    /**
+     * The description of the ID namespace.
+     */
+    description?: Description;
+    /**
+     * Determines the properties of IdMappingWorkflow where this IdNamespace can be used as a Source or a Target.
+     */
+    idMappingWorkflowProperties?: IdNamespaceIdMappingWorkflowPropertiesList;
+    /**
+     * The Amazon Resource Name (ARN) of the ID namespace.
+     */
+    idNamespaceArn: IdNamespaceArn;
+    /**
+     * The name of the ID namespace.
+     */
+    idNamespaceName: EntityName;
+    /**
+     * A list of InputSource objects, which have the fields InputSourceARN and SchemaName.
+     */
+    inputSourceConfig?: IdNamespaceInputSourceConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to access the resources defined in this IdNamespace on your behalf as part of a workflow run.
+     */
+    roleArn?: RoleArn;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    tags?: TagMap;
+    /**
+     * The type of ID namespace. There are two types: SOURCE and TARGET. The SOURCE contains configurations for sourceId data that will be processed in an ID mapping workflow.  The TARGET contains a configuration of targetId to which all sourceIds will resolve to.
+     */
+    type: IdNamespaceType;
+    /**
+     * The timestamp of when the ID namespace was last updated.
+     */
+    updatedAt: Timestamp;
+  }
   export interface GetMatchIdInput {
+    /**
+     * Normalizes the attributes defined in the schema in the input data. For example, if an attribute has an AttributeType of PHONE_NUMBER, and the data in the input table is in a format of 1234567890, Entity Resolution will normalize this field in the output to (123)-456-7890.
+     */
+    applyNormalization?: Boolean;
     /**
      * The record to fetch the Match ID for.
      */
@@ -541,6 +819,10 @@ declare namespace EntityResolution {
      * The unique identifiers for this group of match records.
      */
     matchId?: String;
+    /**
+     * The rule the record matched on.
+     */
+    matchRule?: String;
   }
   export interface GetMatchingJobInput {
     /**
@@ -569,6 +851,10 @@ declare namespace EntityResolution {
      * Metrics associated with the execution, specifically total records processed, unique IDs generated, and records the execution skipped.
      */
     metrics?: JobMetrics;
+    /**
+     * A list of OutputSource objects.
+     */
+    outputSourceConfig?: JobOutputSourceConfig;
     /**
      * The time at which the job was started.
      */
@@ -610,7 +896,7 @@ declare namespace EntityResolution {
      */
     resolutionTechniques: ResolutionTechniques;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to access resources on your behalf.
+     * The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to access Amazon Web Services resources on your behalf.
      */
     roleArn: String;
     /**
@@ -630,6 +916,26 @@ declare namespace EntityResolution {
      */
     workflowName: EntityName;
   }
+  export interface GetPolicyInput {
+    /**
+     * The Amazon Resource Name (ARN) of the resource for which the policy need to be returned.
+     */
+    arn: VeniceGlobalArn;
+  }
+  export interface GetPolicyOutput {
+    /**
+     * The Entity Resolution resource ARN.
+     */
+    arn: VeniceGlobalArn;
+    /**
+     * The resource-based policy.
+     */
+    policy?: PolicyDocument;
+    /**
+     * A unique identifier for the current revision of the policy.
+     */
+    token: PolicyToken;
+  }
   export interface GetProviderServiceInput {
     /**
      * The name of the provider. This name is typically the company name.
@@ -646,6 +952,10 @@ declare namespace EntityResolution {
      */
     anonymizedOutput: Boolean;
     /**
+     * Input schema for the provider service.
+     */
+    providerComponentSchema?: ProviderComponentSchema;
+    /**
      * The definition of the provider configuration.
      */
     providerConfigurationDefinition?: Document;
@@ -658,9 +968,17 @@ declare namespace EntityResolution {
      */
     providerEntityOutputDefinition: Document;
     /**
+     * The provider configuration required for different ID namespace types.
+     */
+    providerIdNameSpaceConfiguration?: ProviderIdNameSpaceConfiguration;
+    /**
      * The Amazon Web Services accounts and the S3 permissions that are required by some providers to create an S3 bucket for intermediate data storage.
      */
     providerIntermediateDataAccessConfiguration?: ProviderIntermediateDataAccessConfiguration;
+    /**
+     * Provider service job configurations.
+     */
+    providerJobConfiguration?: Document;
     /**
      * The name of the provider. This name is typically the company name.
      */
@@ -736,6 +1054,21 @@ declare namespace EntityResolution {
      */
     totalRecordsProcessed?: Integer;
   }
+  export interface IdMappingJobOutputSource {
+    /**
+     * Customer KMS ARN for encryption at rest. If not provided, system will use an Entity Resolution managed KMS key.
+     */
+    KMSArn?: KMSArn;
+    /**
+     * The S3 path to which Entity Resolution will write the output table.
+     */
+    outputS3Path: S3Path;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to access Amazon Web Services resources on your behalf as part of workflow execution.
+     */
+    roleArn: RoleArn;
+  }
+  export type IdMappingJobOutputSourceConfig = IdMappingJobOutputSource[];
   export interface IdMappingTechniques {
     /**
      * The type of ID mapping.
@@ -744,19 +1077,23 @@ declare namespace EntityResolution {
     /**
      * An object which defines any additional configurations required by the provider service.
      */
-    providerProperties: ProviderProperties;
+    providerProperties?: ProviderProperties;
   }
   export type IdMappingType = "PROVIDER"|string;
   export type IdMappingWorkflowArn = string;
   export interface IdMappingWorkflowInputSource {
     /**
-     * An Gluetable ARN for the input source table.
+     * An Glue table ARN for the input source table.
      */
     inputSourceARN: IdMappingWorkflowInputSourceInputSourceARNString;
     /**
      * The name of the schema to be retrieved.
      */
-    schemaName: EntityName;
+    schemaName?: EntityName;
+    /**
+     * The type of ID namespace. There are two types: SOURCE and TARGET.  The SOURCE contains configurations for sourceId data that will be processed in an ID mapping workflow.  The TARGET contains a configuration of targetId to which all sourceIds will resolve to.
+     */
+    type?: IdNamespaceType;
   }
   export type IdMappingWorkflowInputSourceConfig = IdMappingWorkflowInputSource[];
   export type IdMappingWorkflowInputSourceInputSourceARNString = string;
@@ -790,6 +1127,58 @@ declare namespace EntityResolution {
      */
     workflowName: EntityName;
   }
+  export type IdNamespaceArn = string;
+  export interface IdNamespaceIdMappingWorkflowProperties {
+    /**
+     * The type of ID mapping.
+     */
+    idMappingType: IdMappingType;
+    /**
+     * An object which defines any additional configurations required by the provider service.
+     */
+    providerProperties?: NamespaceProviderProperties;
+  }
+  export type IdNamespaceIdMappingWorkflowPropertiesList = IdNamespaceIdMappingWorkflowProperties[];
+  export interface IdNamespaceInputSource {
+    /**
+     * An Glue table ARN for the input source table.
+     */
+    inputSourceARN: IdNamespaceInputSourceInputSourceARNString;
+    /**
+     * The name of the schema.
+     */
+    schemaName?: EntityName;
+  }
+  export type IdNamespaceInputSourceConfig = IdNamespaceInputSource[];
+  export type IdNamespaceInputSourceInputSourceARNString = string;
+  export type IdNamespaceList = IdNamespaceSummary[];
+  export interface IdNamespaceSummary {
+    /**
+     * The timestamp of when the ID namespace was created.
+     */
+    createdAt: Timestamp;
+    /**
+     * The description of the ID namespace.
+     */
+    description?: Description;
+    /**
+     * The Amazon Resource Name (ARN) of the ID namespace.
+     */
+    idNamespaceArn: IdNamespaceArn;
+    /**
+     * The name of the ID namespace.
+     */
+    idNamespaceName: EntityName;
+    /**
+     * The type of ID namespace. There are two types: SOURCE and TARGET. The SOURCE contains configurations for sourceId data that will be processed in an ID mapping workflow.  The TARGET contains a configuration of targetId to which all sourceIds will resolve to.
+     */
+    type: IdNamespaceType;
+    /**
+     * The timestamp of when the ID namespace was last updated.
+     */
+    updatedAt: Timestamp;
+  }
+  export type IdNamespaceType = "SOURCE"|"TARGET"|string;
   export interface IncrementalRunConfig {
     /**
      * The type of incremental run. It takes only one value: IMMEDIATE.
@@ -840,6 +1229,21 @@ declare namespace EntityResolution {
      */
     totalRecordsProcessed?: Integer;
   }
+  export interface JobOutputSource {
+    /**
+     * Customer KMS ARN for encryption at rest. If not provided, system will use an Entity Resolution managed KMS key.
+     */
+    KMSArn?: KMSArn;
+    /**
+     * The S3 path to which Entity Resolution will write the output table.
+     */
+    outputS3Path: S3Path;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to access Amazon Web Services resources on your behalf as part of workflow execution.
+     */
+    roleArn: RoleArn;
+  }
+  export type JobOutputSourceConfig = JobOutputSource[];
   export type JobStatus = "RUNNING"|"SUCCEEDED"|"FAILED"|"QUEUED"|string;
   export interface JobSummary {
     /**
@@ -872,7 +1276,7 @@ declare namespace EntityResolution {
     /**
      * The name of the workflow to be retrieved.
      */
-    workflowName: EntityName;
+    workflowName: EntityNameOrIdMappingWorkflowArn;
   }
   export type ListIdMappingJobsInputMaxResultsInteger = number;
   export interface ListIdMappingJobsOutput {
@@ -905,6 +1309,27 @@ declare namespace EntityResolution {
      * A list of IdMappingWorkflowSummary objects.
      */
     workflowSummaries?: IdMappingWorkflowList;
+  }
+  export interface ListIdNamespacesInput {
+    /**
+     * The maximum number of IdNamespace objects returned per page.
+     */
+    maxResults?: ListIdNamespacesInputMaxResultsInteger;
+    /**
+     * The pagination token from the previous API call.
+     */
+    nextToken?: NextToken;
+  }
+  export type ListIdNamespacesInputMaxResultsInteger = number;
+  export interface ListIdNamespacesOutput {
+    /**
+     * A list of IdNamespaceSummaries objects.
+     */
+    idNamespaceSummaries?: IdNamespaceList;
+    /**
+     * The pagination token from the previous API call.
+     */
+    nextToken?: NextToken;
   }
   export interface ListMatchingJobsInput {
     /**
@@ -1034,6 +1459,16 @@ declare namespace EntityResolution {
      */
     workflowName: EntityName;
   }
+  export interface NamespaceProviderProperties {
+    /**
+     * An object which defines any additional configurations required by the provider service.
+     */
+    providerConfiguration?: Document;
+    /**
+     * The Amazon Resource Name (ARN) of the provider service.
+     */
+    providerServiceArn: ProviderServiceArn;
+  }
   export type NextToken = string;
   export interface OutputAttribute {
     /**
@@ -1065,11 +1500,37 @@ declare namespace EntityResolution {
   }
   export type OutputSourceConfig = OutputSource[];
   export type OutputSourceOutputList = OutputAttribute[];
+  export type PolicyDocument = string;
+  export type PolicyToken = string;
+  export interface ProviderComponentSchema {
+    /**
+     * The provider schema attributes.
+     */
+    providerSchemaAttributes?: ProviderSchemaAttributes;
+    /**
+     * Input schema for the provider service.
+     */
+    schemas?: Schemas;
+  }
   export interface ProviderEndpointConfiguration {
     /**
      * The identifiers of the provider service, from Data Exchange.
      */
     marketplaceConfiguration?: ProviderMarketplaceConfiguration;
+  }
+  export interface ProviderIdNameSpaceConfiguration {
+    /**
+     * The description of the ID namespace.
+     */
+    description?: String;
+    /**
+     * Configurations required for the source ID namespace.
+     */
+    providerSourceConfigurationDefinition?: Document;
+    /**
+     * Configurations required for the target ID namespace.
+     */
+    providerTargetConfigurationDefinition?: Document;
   }
   export interface ProviderIntermediateDataAccessConfiguration {
     /**
@@ -1113,6 +1574,25 @@ declare namespace EntityResolution {
      */
     providerServiceArn: ProviderServiceArn;
   }
+  export interface ProviderSchemaAttribute {
+    /**
+     * The field name.
+     */
+    fieldName: AttributeName;
+    /**
+     * The hashing attribute of the provider schema.
+     */
+    hashing?: Boolean;
+    /**
+     * The sub type of the provider schema attribute.
+     */
+    subType?: AttributeName;
+    /**
+     * The type of the provider schema attribute.
+     */
+    type: SchemaAttributeType;
+  }
+  export type ProviderSchemaAttributes = ProviderSchemaAttribute[];
   export type ProviderServiceArn = string;
   export type ProviderServiceDisplayName = string;
   export type ProviderServiceList = ProviderServiceSummary[];
@@ -1138,6 +1618,34 @@ declare namespace EntityResolution {
      */
     providerServiceType: ServiceType;
   }
+  export interface PutPolicyInput {
+    /**
+     * The Amazon Resource Name (ARN) of the resource for which the policy needs to be updated.
+     */
+    arn: VeniceGlobalArn;
+    /**
+     * The resource-based policy.
+     */
+    policy: PolicyDocument;
+    /**
+     * A unique identifier for the current revision of the policy.
+     */
+    token?: PolicyToken;
+  }
+  export interface PutPolicyOutput {
+    /**
+     * The Entity Resolution resource ARN.
+     */
+    arn: VeniceGlobalArn;
+    /**
+     * The resource-based policy.
+     */
+    policy?: PolicyDocument;
+    /**
+     * A unique identifier for the current revision of the policy.
+     */
+    token: PolicyToken;
+  }
   export type RecordAttributeMap = {[key: string]: RecordAttributeMapValueString};
   export type RecordAttributeMapKeyString = string;
   export type RecordAttributeMapValueString = string;
@@ -1148,7 +1656,7 @@ declare namespace EntityResolution {
      */
     providerProperties?: ProviderProperties;
     /**
-     * The type of matching. There are two types of matching: RULE_MATCHING and ML_MATCHING.
+     * The type of matching. There are three types of matching: RULE_MATCHING, ML_MATCHING, and PROVIDER.
      */
     resolutionType: ResolutionType;
     /**
@@ -1189,11 +1697,11 @@ declare namespace EntityResolution {
      */
     fieldName: AttributeName;
     /**
-     * Instruct Entity Resolution to combine several columns into a unified column with the identical attribute type. For example, when working with columns such as first_name, middle_name, and last_name, assigning them a common GroupName will prompt Entity Resolution to concatenate them into a single value.
+     * A string that instructs Entity Resolution to combine several columns into a unified column with the identical attribute type.  For example, when working with columns such as first_name, middle_name, and last_name, assigning them a common groupName will prompt Entity Resolution to concatenate them into a single value.
      */
     groupName?: AttributeName;
     /**
-     * A key that allows grouping of multiple input attributes into a unified matching group. For example, let's consider a scenario where the source table contains various addresses, such as business_address and shipping_address. By assigning the MatchKey Address to both attributes, Entity Resolution will match records across these fields to create a consolidated matching group. If no MatchKey is specified for a column, it won't be utilized for matching purposes but will still be included in the output table.
+     * A key that allows grouping of multiple input attributes into a unified matching group. For example, consider a scenario where the source table contains various addresses, such as business_address and shipping_address. By assigning a matchKey called address to both attributes, Entity Resolution will match records across these fields to create a consolidated matching group. If no matchKey is specified for a column, it won't be utilized for matching purposes but will still be included in the output table.
      */
     matchKey?: AttributeName;
     /**
@@ -1206,6 +1714,7 @@ declare namespace EntityResolution {
     type: SchemaAttributeType;
   }
   export type SchemaInputAttributes = SchemaInputAttribute[];
+  export type SchemaList = String[];
   export type SchemaMappingArn = string;
   export type SchemaMappingList = SchemaMappingSummary[];
   export interface SchemaMappingSummary {
@@ -1230,18 +1739,27 @@ declare namespace EntityResolution {
      */
     updatedAt: Timestamp;
   }
+  export type Schemas = SchemaList[];
   export type ServiceType = "ASSIGNMENT"|"ID_MAPPING"|string;
   export interface StartIdMappingJobInput {
     /**
+     * A list of OutputSource objects.
+     */
+    outputSourceConfig?: IdMappingJobOutputSourceConfig;
+    /**
      * The name of the ID mapping job to be retrieved.
      */
-    workflowName: EntityName;
+    workflowName: EntityNameOrIdMappingWorkflowArn;
   }
   export interface StartIdMappingJobOutput {
     /**
      * The ID of the job.
      */
     jobId: JobId;
+    /**
+     * A list of OutputSource objects.
+     */
+    outputSourceConfig?: IdMappingJobOutputSourceConfig;
   }
   export interface StartMatchingJobInput {
     /**
@@ -1255,6 +1773,13 @@ declare namespace EntityResolution {
      */
     jobId: JobId;
   }
+  export type StatementAction = string;
+  export type StatementActionList = StatementAction[];
+  export type StatementCondition = string;
+  export type StatementEffect = "Allow"|"Deny"|string;
+  export type StatementId = string;
+  export type StatementPrincipal = string;
+  export type StatementPrincipalList = StatementPrincipal[];
   export type String = string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
@@ -1301,9 +1826,9 @@ declare namespace EntityResolution {
     /**
      * A list of OutputSource objects, each of which contains fields OutputS3Path and KMSArn.
      */
-    outputSourceConfig: IdMappingWorkflowOutputSourceConfig;
+    outputSourceConfig?: IdMappingWorkflowOutputSourceConfig;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to access resources on your behalf.
+     * The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to access Amazon Web Services resources on your behalf.
      */
     roleArn: RoleArn;
     /**
@@ -1327,19 +1852,79 @@ declare namespace EntityResolution {
     /**
      * A list of OutputSource objects, each of which contains fields OutputS3Path and KMSArn.
      */
-    outputSourceConfig: IdMappingWorkflowOutputSourceConfig;
+    outputSourceConfig?: IdMappingWorkflowOutputSourceConfig;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to access resources on your behalf.
+     * The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to access Amazon Web Services resources on your behalf.
      */
     roleArn: RoleArn;
     /**
-     * The Amazon Resource Name (ARN) of the workflow role. Entity Resolution assumes this role to access resources on your behalf.
+     * The Amazon Resource Name (ARN) of the workflow role. Entity Resolution assumes this role to access Amazon Web Services resources on your behalf.
      */
     workflowArn: IdMappingWorkflowArn;
     /**
      * The name of the workflow.
      */
     workflowName: EntityName;
+  }
+  export interface UpdateIdNamespaceInput {
+    /**
+     * The description of the ID namespace.
+     */
+    description?: Description;
+    /**
+     * Determines the properties of IdMappingWorkflow where this IdNamespace can be used as a Source or a Target.
+     */
+    idMappingWorkflowProperties?: IdNamespaceIdMappingWorkflowPropertiesList;
+    /**
+     * The name of the ID namespace.
+     */
+    idNamespaceName: EntityName;
+    /**
+     * A list of InputSource objects, which have the fields InputSourceARN and SchemaName.
+     */
+    inputSourceConfig?: IdNamespaceInputSourceConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to access the resources defined in this IdNamespace on your behalf as part of a workflow run.
+     */
+    roleArn?: RoleArn;
+  }
+  export interface UpdateIdNamespaceOutput {
+    /**
+     * The timestamp of when the ID namespace was created.
+     */
+    createdAt: Timestamp;
+    /**
+     * The description of the ID namespace.
+     */
+    description?: Description;
+    /**
+     * Determines the properties of IdMappingWorkflow where this IdNamespace can be used as a Source or a Target.
+     */
+    idMappingWorkflowProperties?: IdNamespaceIdMappingWorkflowPropertiesList;
+    /**
+     * The Amazon Resource Name (ARN) of the ID namespace.
+     */
+    idNamespaceArn: IdNamespaceArn;
+    /**
+     * The name of the ID namespace.
+     */
+    idNamespaceName: EntityName;
+    /**
+     * A list of InputSource objects, which have the fields InputSourceARN and SchemaName.
+     */
+    inputSourceConfig?: IdNamespaceInputSourceConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to access the resources defined in this IdNamespace on your behalf as part of a workflow run.
+     */
+    roleArn?: RoleArn;
+    /**
+     * The type of ID namespace. There are two types: SOURCE and TARGET. The SOURCE contains configurations for sourceId data that will be processed in an ID mapping workflow.  The TARGET contains a configuration of targetId to which all sourceIds will resolve to.
+     */
+    type: IdNamespaceType;
+    /**
+     * The timestamp of when the ID namespace was last updated.
+     */
+    updatedAt: Timestamp;
   }
   export interface UpdateMatchingWorkflowInput {
     /**

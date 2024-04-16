@@ -682,10 +682,14 @@ declare namespace LakeFormation {
      * A list of the account IDs of Amazon Web Services accounts of third-party applications that are allowed to access data managed by Lake Formation.
      */
     ExternalFiltering?: ExternalFilteringConfiguration;
+    /**
+     * A list of Amazon Web Services account IDs and/or Amazon Web Services organization/organizational unit ARNs that are allowed to access data managed by Lake Formation.  If the ShareRecipients list includes valid values, a resource share is created with the principals you want to have access to the resources. If the ShareRecipients value is null or the list is empty, no resource share is created.
+     */
+    ShareRecipients?: DataLakePrincipalList;
   }
   export interface CreateLakeFormationIdentityCenterConfigurationResponse {
     /**
-     * The Amazon Resource Name (ARN) of the integrated application.
+     * The Amazon Resource Name (ARN) of the Lake Formation application integrated with IAM Identity Center.
      */
     ApplicationArn?: ApplicationArn;
   }
@@ -930,13 +934,21 @@ declare namespace LakeFormation {
      */
     InstanceArn?: IdentityCenterInstanceArn;
     /**
-     * The Amazon Resource Name (ARN) of the integrated application.
+     * The Amazon Resource Name (ARN) of the Lake Formation application integrated with IAM Identity Center.
      */
     ApplicationArn?: ApplicationArn;
     /**
      * Indicates if external filtering is enabled.
      */
     ExternalFiltering?: ExternalFilteringConfiguration;
+    /**
+     * A list of Amazon Web Services account IDs or Amazon Web Services organization/organizational unit ARNs that are allowed to access data managed by Lake Formation.  If the ShareRecipients list includes valid values, a resource share is created with the principals you want to have access to the resources as the ShareRecipients. If the ShareRecipients value is null or the list is empty, no resource share is created.
+     */
+    ShareRecipients?: DataLakePrincipalList;
+    /**
+     * The Amazon Resource Name (ARN) of the RAM share.
+     */
+    ResourceShare?: RAMResourceShareArn;
   }
   export interface DescribeResourceRequest {
     /**
@@ -2264,6 +2276,10 @@ declare namespace LakeFormation {
      * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, view definitions, and other control information to manage your Lake Formation environment.
      */
     CatalogId?: CatalogIdString;
+    /**
+     * A list of Amazon Web Services account IDs or Amazon Web Services organization/organizational unit ARNs that are allowed to access to access data managed by Lake Formation.  If the ShareRecipients list includes valid values, then the resource share is updated with the principals you want to have access to the resources. If the ShareRecipients value is null, both the list of share recipients and the resource share remain unchanged. If the ShareRecipients value is an empty list, then the existing share recipients list will be cleared, and the resource share will be deleted.
+     */
+    ShareRecipients?: DataLakePrincipalList;
     /**
      * Allows to enable or disable the IAM Identity Center connection.
      */

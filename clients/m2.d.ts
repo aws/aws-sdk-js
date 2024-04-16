@@ -168,6 +168,14 @@ declare class M2 extends Service {
    */
   listBatchJobExecutions(callback?: (err: AWSError, data: M2.Types.ListBatchJobExecutionsResponse) => void): Request<M2.Types.ListBatchJobExecutionsResponse, AWSError>;
   /**
+   * Lists all the job steps for JCL files to restart a batch job. This is only applicable for Micro Focus engine with versions 8.0.6 and above.
+   */
+  listBatchJobRestartPoints(params: M2.Types.ListBatchJobRestartPointsRequest, callback?: (err: AWSError, data: M2.Types.ListBatchJobRestartPointsResponse) => void): Request<M2.Types.ListBatchJobRestartPointsResponse, AWSError>;
+  /**
+   * Lists all the job steps for JCL files to restart a batch job. This is only applicable for Micro Focus engine with versions 8.0.6 and above.
+   */
+  listBatchJobRestartPoints(callback?: (err: AWSError, data: M2.Types.ListBatchJobRestartPointsResponse) => void): Request<M2.Types.ListBatchJobRestartPointsResponse, AWSError>;
+  /**
    * Lists the data set imports for the specified application.
    */
   listDataSetImportHistory(params: M2.Types.ListDataSetImportHistoryRequest, callback?: (err: AWSError, data: M2.Types.ListDataSetImportHistoryResponse) => void): Request<M2.Types.ListDataSetImportHistoryResponse, AWSError>;
@@ -382,7 +390,7 @@ declare namespace M2 {
     scriptBatchJobDefinition?: ScriptBatchJobDefinition;
   }
   export type BatchJobDefinitions = BatchJobDefinition[];
-  export type BatchJobExecutionStatus = "Submitting"|"Holding"|"Dispatching"|"Running"|"Cancelling"|"Cancelled"|"Succeeded"|"Failed"|"Succeeded With Warning"|string;
+  export type BatchJobExecutionStatus = "Submitting"|"Holding"|"Dispatching"|"Running"|"Cancelling"|"Cancelled"|"Succeeded"|"Failed"|"Purged"|"Succeeded With Warning"|string;
   export interface BatchJobExecutionSummary {
     /**
      * The unique identifier of the application that hosts this batch job.
@@ -432,6 +440,10 @@ declare namespace M2 {
      */
     fileBatchJobIdentifier?: FileBatchJobIdentifier;
     /**
+     * Specifies the required information for restart, including execution ID and jobsteprestartmarker.
+     */
+    restartBatchJobIdentifier?: RestartBatchJobIdentifier;
+    /**
      * Specifies an Amazon S3 location that identifies the batch jobs that you want to run. Use this identifier to run ad hoc batch jobs.
      */
     s3BatchJobIdentifier?: S3BatchJobIdentifier;
@@ -441,6 +453,7 @@ declare namespace M2 {
     scriptBatchJobIdentifier?: ScriptBatchJobIdentifier;
   }
   export type BatchJobParametersMap = {[key: string]: BatchParamValue};
+  export type BatchJobStepList = JobStep[];
   export type BatchJobType = "VSE"|"JES2"|"JES3"|string;
   export type BatchParamKey = string;
   export type BatchParamValue = string;
@@ -1128,6 +1141,10 @@ declare namespace M2 {
      */
     jobName?: String100;
     /**
+     * The restart steps information for the most recent restart operation.
+     */
+    jobStepRestartMarker?: JobStepRestartMarker;
+    /**
      * The type of job.
      */
     jobType?: BatchJobType;
@@ -1385,6 +1402,50 @@ declare namespace M2 {
      */
     scriptName?: String;
   }
+  export interface JobStep {
+    /**
+     * The name of a procedure step.
+     */
+    procStepName?: String;
+    /**
+     * The number of a procedure step.
+     */
+    procStepNumber?: Integer;
+    /**
+     * The condition code of a step.
+     */
+    stepCondCode?: String;
+    /**
+     * The name of a step.
+     */
+    stepName?: String;
+    /**
+     * The number of a step.
+     */
+    stepNumber?: Integer;
+    /**
+     * Specifies if a step can be restarted or not.
+     */
+    stepRestartable?: Boolean;
+  }
+  export interface JobStepRestartMarker {
+    /**
+     * The procedure step name that a job was restarted from.
+     */
+    fromProcStep?: String;
+    /**
+     * The step name that a batch job restart was from.
+     */
+    fromStep: String;
+    /**
+     * The procedure step name that a batch job was restarted to.
+     */
+    toProcStep?: String;
+    /**
+     * The step name that a job was restarted to.
+     */
+    toStep?: String;
+  }
   export interface ListApplicationVersionsRequest {
     /**
      * The unique identifier of the application.
@@ -1508,6 +1569,22 @@ declare namespace M2 {
      * A pagination token that's returned when the response doesn't contain all batch job executions.
      */
     nextToken?: NextToken;
+  }
+  export interface ListBatchJobRestartPointsRequest {
+    /**
+     * The unique identifier of the application.
+     */
+    applicationId: Identifier;
+    /**
+     * The unique identifier of each batch job execution.
+     */
+    executionId: Identifier;
+  }
+  export interface ListBatchJobRestartPointsResponse {
+    /**
+     * Returns all the batch job steps and related information for a batch job that previously ran.
+     */
+    batchJobSteps?: BatchJobStepList;
   }
   export interface ListDataSetImportHistoryRequest {
     /**
@@ -1756,6 +1833,16 @@ declare namespace M2 {
      * The minimum record length of a record.
      */
     min: Integer;
+  }
+  export interface RestartBatchJobIdentifier {
+    /**
+     * The executionId from the StartBatchJob response when the job ran for the first time.
+     */
+    executionId: Identifier;
+    /**
+     * The restart step information for the most recent restart operation.
+     */
+    jobStepRestartMarker: JobStepRestartMarker;
   }
   export interface S3BatchJobIdentifier {
     /**
