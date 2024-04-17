@@ -405,11 +405,11 @@ declare class EC2 extends Service {
    */
   cancelReservedInstancesListing(callback?: (err: AWSError, data: EC2.Types.CancelReservedInstancesListingResult) => void): Request<EC2.Types.CancelReservedInstancesListingResult, AWSError>;
   /**
-   * Cancels the specified Spot Fleet requests. After you cancel a Spot Fleet request, the Spot Fleet launches no new instances. You must also specify whether a canceled Spot Fleet request should terminate its instances. If you choose to terminate the instances, the Spot Fleet request enters the cancelled_terminating state. Otherwise, the Spot Fleet request enters the cancelled_running state and the instances continue to run until they are interrupted or you terminate them manually.
+   * Cancels the specified Spot Fleet requests. After you cancel a Spot Fleet request, the Spot Fleet launches no new instances. You must also specify whether a canceled Spot Fleet request should terminate its instances. If you choose to terminate the instances, the Spot Fleet request enters the cancelled_terminating state. Otherwise, the Spot Fleet request enters the cancelled_running state and the instances continue to run until they are interrupted or you terminate them manually.  Restrictions    You can delete up to 100 fleets in a single request. If you exceed the specified number, no fleets are deleted.  
    */
   cancelSpotFleetRequests(params: EC2.Types.CancelSpotFleetRequestsRequest, callback?: (err: AWSError, data: EC2.Types.CancelSpotFleetRequestsResponse) => void): Request<EC2.Types.CancelSpotFleetRequestsResponse, AWSError>;
   /**
-   * Cancels the specified Spot Fleet requests. After you cancel a Spot Fleet request, the Spot Fleet launches no new instances. You must also specify whether a canceled Spot Fleet request should terminate its instances. If you choose to terminate the instances, the Spot Fleet request enters the cancelled_terminating state. Otherwise, the Spot Fleet request enters the cancelled_running state and the instances continue to run until they are interrupted or you terminate them manually.
+   * Cancels the specified Spot Fleet requests. After you cancel a Spot Fleet request, the Spot Fleet launches no new instances. You must also specify whether a canceled Spot Fleet request should terminate its instances. If you choose to terminate the instances, the Spot Fleet request enters the cancelled_terminating state. Otherwise, the Spot Fleet request enters the cancelled_running state and the instances continue to run until they are interrupted or you terminate them manually.  Restrictions    You can delete up to 100 fleets in a single request. If you exceed the specified number, no fleets are deleted.  
    */
   cancelSpotFleetRequests(callback?: (err: AWSError, data: EC2.Types.CancelSpotFleetRequestsResponse) => void): Request<EC2.Types.CancelSpotFleetRequestsResponse, AWSError>;
   /**
@@ -1173,11 +1173,11 @@ declare class EC2 extends Service {
    */
   deleteEgressOnlyInternetGateway(callback?: (err: AWSError, data: EC2.Types.DeleteEgressOnlyInternetGatewayResult) => void): Request<EC2.Types.DeleteEgressOnlyInternetGatewayResult, AWSError>;
   /**
-   * Deletes the specified EC2 Fleets. After you delete an EC2 Fleet, it launches no new instances. You must also specify whether a deleted EC2 Fleet should terminate its instances. If you choose to terminate the instances, the EC2 Fleet enters the deleted_terminating state. Otherwise, the EC2 Fleet enters the deleted_running state, and the instances continue to run until they are interrupted or you terminate them manually. For instant fleets, EC2 Fleet must terminate the instances when the fleet is deleted. A deleted instant fleet with running instances is not supported.  Restrictions    You can delete up to 25 instant fleets in a single request. If you exceed this number, no instant fleets are deleted and an error is returned. There is no restriction on the number of fleets of type maintain or request that can be deleted in a single request.   Up to 1000 instances can be terminated in a single request to delete instant fleets.   For more information, see Delete an EC2 Fleet in the Amazon EC2 User Guide.
+   * Deletes the specified EC2 Fleets. After you delete an EC2 Fleet, it launches no new instances. You must also specify whether a deleted EC2 Fleet should terminate its instances. If you choose to terminate the instances, the EC2 Fleet enters the deleted_terminating state. Otherwise, the EC2 Fleet enters the deleted_running state, and the instances continue to run until they are interrupted or you terminate them manually. For instant fleets, EC2 Fleet must terminate the instances when the fleet is deleted. Up to 1000 instances can be terminated in a single request to delete instant fleets. A deleted instant fleet with running instances is not supported.  Restrictions    You can delete up to 25 fleets of type instant in a single request.   You can delete up to 100 fleets of type maintain or request in a single request.   You can delete up to 125 fleets in a single request, provided you do not exceed the quota for each fleet type, as specified above.   If you exceed the specified number of fleets to delete, no fleets are deleted.   For more information, see Delete an EC2 Fleet in the Amazon EC2 User Guide.
    */
   deleteFleets(params: EC2.Types.DeleteFleetsRequest, callback?: (err: AWSError, data: EC2.Types.DeleteFleetsResult) => void): Request<EC2.Types.DeleteFleetsResult, AWSError>;
   /**
-   * Deletes the specified EC2 Fleets. After you delete an EC2 Fleet, it launches no new instances. You must also specify whether a deleted EC2 Fleet should terminate its instances. If you choose to terminate the instances, the EC2 Fleet enters the deleted_terminating state. Otherwise, the EC2 Fleet enters the deleted_running state, and the instances continue to run until they are interrupted or you terminate them manually. For instant fleets, EC2 Fleet must terminate the instances when the fleet is deleted. A deleted instant fleet with running instances is not supported.  Restrictions    You can delete up to 25 instant fleets in a single request. If you exceed this number, no instant fleets are deleted and an error is returned. There is no restriction on the number of fleets of type maintain or request that can be deleted in a single request.   Up to 1000 instances can be terminated in a single request to delete instant fleets.   For more information, see Delete an EC2 Fleet in the Amazon EC2 User Guide.
+   * Deletes the specified EC2 Fleets. After you delete an EC2 Fleet, it launches no new instances. You must also specify whether a deleted EC2 Fleet should terminate its instances. If you choose to terminate the instances, the EC2 Fleet enters the deleted_terminating state. Otherwise, the EC2 Fleet enters the deleted_running state, and the instances continue to run until they are interrupted or you terminate them manually. For instant fleets, EC2 Fleet must terminate the instances when the fleet is deleted. Up to 1000 instances can be terminated in a single request to delete instant fleets. A deleted instant fleet with running instances is not supported.  Restrictions    You can delete up to 25 fleets of type instant in a single request.   You can delete up to 100 fleets of type maintain or request in a single request.   You can delete up to 125 fleets in a single request, provided you do not exceed the quota for each fleet type, as specified above.   If you exceed the specified number of fleets to delete, no fleets are deleted.   For more information, see Delete an EC2 Fleet in the Amazon EC2 User Guide.
    */
   deleteFleets(callback?: (err: AWSError, data: EC2.Types.DeleteFleetsResult) => void): Request<EC2.Types.DeleteFleetsResult, AWSError>;
   /**
@@ -2181,19 +2181,19 @@ declare class EC2 extends Service {
    */
   describeInstanceTopology(callback?: (err: AWSError, data: EC2.Types.DescribeInstanceTopologyResult) => void): Request<EC2.Types.DescribeInstanceTopologyResult, AWSError>;
   /**
-   * Returns a list of all instance types offered. The results can be filtered by location (Region or Availability Zone). If no location is specified, the instance types offered in the current Region are returned.
+   * Lists the instance types that are offered for the specified location. If no location is specified, the default is to list the instance types that are offered in the current Region.
    */
   describeInstanceTypeOfferings(params: EC2.Types.DescribeInstanceTypeOfferingsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeInstanceTypeOfferingsResult) => void): Request<EC2.Types.DescribeInstanceTypeOfferingsResult, AWSError>;
   /**
-   * Returns a list of all instance types offered. The results can be filtered by location (Region or Availability Zone). If no location is specified, the instance types offered in the current Region are returned.
+   * Lists the instance types that are offered for the specified location. If no location is specified, the default is to list the instance types that are offered in the current Region.
    */
   describeInstanceTypeOfferings(callback?: (err: AWSError, data: EC2.Types.DescribeInstanceTypeOfferingsResult) => void): Request<EC2.Types.DescribeInstanceTypeOfferingsResult, AWSError>;
   /**
-   * Describes the details of the instance types that are offered in a location. The results can be filtered by the attributes of the instance types.
+   * Describes the specified instance types. By default, all instance types for the current Region are described. Alternatively, you can filter the results.
    */
   describeInstanceTypes(params: EC2.Types.DescribeInstanceTypesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeInstanceTypesResult) => void): Request<EC2.Types.DescribeInstanceTypesResult, AWSError>;
   /**
-   * Describes the details of the instance types that are offered in a location. The results can be filtered by the attributes of the instance types.
+   * Describes the specified instance types. By default, all instance types for the current Region are described. Alternatively, you can filter the results.
    */
   describeInstanceTypes(callback?: (err: AWSError, data: EC2.Types.DescribeInstanceTypesResult) => void): Request<EC2.Types.DescribeInstanceTypesResult, AWSError>;
   /**
@@ -3469,11 +3469,11 @@ declare class EC2 extends Service {
    */
   getConsoleOutput(callback?: (err: AWSError, data: EC2.Types.GetConsoleOutputResult) => void): Request<EC2.Types.GetConsoleOutputResult, AWSError>;
   /**
-   * Retrieve a JPG-format screenshot of a running instance to help with troubleshooting. The returned content is Base64-encoded.
+   * Retrieve a JPG-format screenshot of a running instance to help with troubleshooting. The returned content is Base64-encoded. For more information, see Instance console output in the Amazon EC2 User Guide.
    */
   getConsoleScreenshot(params: EC2.Types.GetConsoleScreenshotRequest, callback?: (err: AWSError, data: EC2.Types.GetConsoleScreenshotResult) => void): Request<EC2.Types.GetConsoleScreenshotResult, AWSError>;
   /**
-   * Retrieve a JPG-format screenshot of a running instance to help with troubleshooting. The returned content is Base64-encoded.
+   * Retrieve a JPG-format screenshot of a running instance to help with troubleshooting. The returned content is Base64-encoded. For more information, see Instance console output in the Amazon EC2 User Guide.
    */
   getConsoleScreenshot(callback?: (err: AWSError, data: EC2.Types.GetConsoleScreenshotResult) => void): Request<EC2.Types.GetConsoleScreenshotResult, AWSError>;
   /**
@@ -4029,11 +4029,11 @@ declare class EC2 extends Service {
    */
   modifyInstanceMaintenanceOptions(callback?: (err: AWSError, data: EC2.Types.ModifyInstanceMaintenanceOptionsResult) => void): Request<EC2.Types.ModifyInstanceMaintenanceOptionsResult, AWSError>;
   /**
-   * Modifies the default instance metadata service (IMDS) settings at the account level in the specified Amazon Web Services&#x2028; Region.  To remove a parameter's account-level default setting, specify no-preference. At instance launch, the value will come from the AMI, or from the launch parameter if specified. For more information, see Order of precedence for instance metadata options in the Amazon EC2 User Guide. 
+   * Modifies the default instance metadata service (IMDS) settings at the account level in the specified Amazon Web Services&#x2028; Region.  To remove a parameter's account-level default setting, specify no-preference. If an account-level setting is cleared with no-preference, then the instance launch considers the other instance metadata settings. For more information, see Order of precedence for instance metadata options in the Amazon EC2 User Guide. 
    */
   modifyInstanceMetadataDefaults(params: EC2.Types.ModifyInstanceMetadataDefaultsRequest, callback?: (err: AWSError, data: EC2.Types.ModifyInstanceMetadataDefaultsResult) => void): Request<EC2.Types.ModifyInstanceMetadataDefaultsResult, AWSError>;
   /**
-   * Modifies the default instance metadata service (IMDS) settings at the account level in the specified Amazon Web Services&#x2028; Region.  To remove a parameter's account-level default setting, specify no-preference. At instance launch, the value will come from the AMI, or from the launch parameter if specified. For more information, see Order of precedence for instance metadata options in the Amazon EC2 User Guide. 
+   * Modifies the default instance metadata service (IMDS) settings at the account level in the specified Amazon Web Services&#x2028; Region.  To remove a parameter's account-level default setting, specify no-preference. If an account-level setting is cleared with no-preference, then the instance launch considers the other instance metadata settings. For more information, see Order of precedence for instance metadata options in the Amazon EC2 User Guide. 
    */
   modifyInstanceMetadataDefaults(callback?: (err: AWSError, data: EC2.Types.ModifyInstanceMetadataDefaultsResult) => void): Request<EC2.Types.ModifyInstanceMetadataDefaultsResult, AWSError>;
   /**
@@ -7523,7 +7523,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The IDs of the Spot Fleet requests.
+     * The IDs of the Spot Fleet requests. Constraint: You can specify up to 100 IDs in a single request.
      */
     SpotFleetRequestIds: SpotFleetRequestIdList;
     /**
@@ -12256,7 +12256,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The IDs of the EC2 Fleets.
+     * The IDs of the EC2 Fleets. Constraints: In a single request, you can specify up to 25 instant fleet IDs and up to 100 maintain or request fleet IDs. 
      */
     FleetIds: FleetIdSet;
     /**
@@ -15182,11 +15182,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The location type.
+     * The location type.    availability-zone - The Availability Zone. When you specify a location filter, it must be an Availability Zone for the current Region.    availability-zone-id - The AZ ID. When you specify a location filter, it must be an AZ ID for the current Region.    outpost - The Outpost ARN. When you specify a location filter, it must be an Outpost ARN for the current Region.    region - The current Region. If you specify a location filter, it must match the current Region.  
      */
     LocationType?: LocationType;
     /**
-     * One or more filters. Filter names and values are case-sensitive.    location - This depends on the location type. For example, if the location type is region (default), the location is the Region code (for example, us-east-2.)    instance-type - The instance type. For example, c5.2xlarge.  
+     * One or more filters. Filter names and values are case-sensitive.    instance-type - The instance type. For a list of possible values, see Instance.    location - The location. For a list of possible identifiers, see Regions and Zones.  
      */
     Filters?: FilterList;
     /**
@@ -15200,7 +15200,7 @@ declare namespace EC2 {
   }
   export interface DescribeInstanceTypeOfferingsResult {
     /**
-     * The instance types offered.
+     * The instance types offered in the location.
      */
     InstanceTypeOfferings?: InstanceTypeOfferingsList;
     /**
@@ -15214,7 +15214,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The instance types. For more information, see Instance types in the Amazon EC2 User Guide.
+     * The instance types.
      */
     InstanceTypes?: RequestInstanceTypeList;
     /**
@@ -15232,7 +15232,7 @@ declare namespace EC2 {
   }
   export interface DescribeInstanceTypesResult {
     /**
-     * The instance type. For more information, see Instance types in the Amazon EC2 User Guide.
+     * The instance type.
      */
     InstanceTypes?: InstanceTypeInfoList;
     /**
@@ -28585,7 +28585,7 @@ declare namespace EC2 {
      */
     HttpTokens?: MetadataDefaultHttpTokensState;
     /**
-     * The maximum number of hops that the metadata token can travel. Minimum: 1  Maximum: 64 
+     * The maximum number of hops that the metadata token can travel. To indicate no preference, specify -1. Possible values: Integers from 1 to 64, and -1 to indicate no preference
      */
     HttpPutResponseHopLimit?: BoxedInteger;
     /**
@@ -33082,7 +33082,7 @@ declare namespace EC2 {
      */
     BlockDeviceMappings?: LaunchTemplateBlockDeviceMappingRequestList;
     /**
-     * One or more network interfaces. If you specify a network interface, you must specify any security groups and subnets as part of the network interface.
+     * The network interfaces for the instance.
      */
     NetworkInterfaces?: LaunchTemplateInstanceNetworkInterfaceSpecificationRequestList;
     /**
@@ -33134,11 +33134,11 @@ declare namespace EC2 {
      */
     ElasticInferenceAccelerators?: LaunchTemplateElasticInferenceAcceleratorList;
     /**
-     * One or more security group IDs. You can create a security group using CreateSecurityGroup.
+     * The IDs of the security groups. If you specify a network interface, you must specify any security groups as part of the network interface instead of using this parameter.
      */
     SecurityGroupIds?: SecurityGroupIdStringList;
     /**
-     * One or more security group names. For a nondefault VPC, you must use security group IDs instead.
+     * The names of the security groups. For a nondefault VPC, you must use security group IDs instead. If you specify a network interface, you must specify any security groups as part of the network interface instead of using this parameter.
      */
     SecurityGroups?: SecurityGroupStringList;
     /**
@@ -34494,15 +34494,15 @@ declare namespace EC2 {
      */
     RamdiskId?: RamdiskId;
     /**
-     * The IDs of the security groups. You can create a security group using CreateSecurityGroup. If you specify a network interface, you must specify any security groups as part of the network interface.
+     * The IDs of the security groups. You can create a security group using CreateSecurityGroup. If you specify a network interface, you must specify any security groups as part of the network interface instead of using this parameter.
      */
     SecurityGroupIds?: SecurityGroupIdStringList;
     /**
-     * [Default VPC] The names of the security groups. If you specify a network interface, you must specify any security groups as part of the network interface. Default: Amazon EC2 uses the default security group.
+     * [Default VPC] The names of the security groups. If you specify a network interface, you must specify any security groups as part of the network interface instead of using this parameter. Default: Amazon EC2 uses the default security group.
      */
     SecurityGroups?: SecurityGroupStringList;
     /**
-     * The ID of the subnet to launch the instance into. If you specify a network interface, you must specify any subnets as part of the network interface.
+     * The ID of the subnet to launch the instance into. If you specify a network interface, you must specify any subnets as part of the network interface instead of using this parameter.
      */
     SubnetId?: SubnetId;
     /**
@@ -34538,7 +34538,7 @@ declare namespace EC2 {
      */
     InstanceInitiatedShutdownBehavior?: ShutdownBehavior;
     /**
-     * The network interfaces to associate with the instance. If you specify a network interface, you must specify any security groups and subnets as part of the network interface.
+     * The network interfaces to associate with the instance.
      */
     NetworkInterfaces?: InstanceNetworkInterfaceSpecificationList;
     /**
@@ -34546,11 +34546,11 @@ declare namespace EC2 {
      */
     PrivateIpAddress?: String;
     /**
-     * Deprecated.  Amazon Elastic Graphics reached end of life on January 8, 2024. For workloads that require graphics acceleration, we recommend that you use Amazon EC2 G4ad, G4dn, or G5 instances. 
+     * An elastic GPU to associate with the instance.  Amazon Elastic Graphics reached end of life on January 8, 2024. 
      */
     ElasticGpuSpecification?: ElasticGpuSpecifications;
     /**
-     * An elastic inference accelerator to associate with the instance. Elastic inference accelerators are a resource you can attach to your Amazon EC2 instances to accelerate your Deep Learning (DL) inference workloads. You cannot specify accelerators from different generations in the same request.  Starting April 15, 2023, Amazon Web Services will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. 
+     * An elastic inference accelerator to associate with the instance.  Amazon Elastic Inference (EI) is no longer available to new customers. For more information, see Amazon Elastic Inference FAQs. 
      */
     ElasticInferenceAccelerators?: ElasticInferenceAccelerators;
     /**
@@ -35110,7 +35110,7 @@ declare namespace EC2 {
      */
     Filters: FilterList;
     /**
-     * The maximum number of routes to return.
+     * The maximum number of routes to return. If a value is not provided, the default is 1000.
      */
     MaxResults?: TransitGatewayMaxResults;
     /**
@@ -35856,7 +35856,7 @@ declare namespace EC2 {
   }
   export interface SpotFleetLaunchSpecification {
     /**
-     * The security groups.
+     * The security groups. If you specify a network interface, you must specify any security groups as part of the network interface instead of using this parameter.
      */
     SecurityGroups?: GroupIdentifierList;
     /**
@@ -35896,7 +35896,7 @@ declare namespace EC2 {
      */
     Monitoring?: SpotFleetMonitoring;
     /**
-     * One or more network interfaces. If you specify a network interface, you must specify subnet IDs and security group IDs using the network interface.   SpotFleetLaunchSpecification currently does not support Elastic Fabric Adapter (EFA). To specify an EFA, you must use LaunchTemplateConfig. 
+     * The network interfaces.   SpotFleetLaunchSpecification does not support Elastic Fabric Adapter (EFA). You must use LaunchTemplateConfig instead. 
      */
     NetworkInterfaces?: InstanceNetworkInterfaceSpecificationList;
     /**
@@ -35912,7 +35912,7 @@ declare namespace EC2 {
      */
     SpotPrice?: String;
     /**
-     * The IDs of the subnets in which to launch the instances. To specify multiple subnets, separate them using commas; for example, "subnet-1234abcdeexample1, subnet-0987cdef6example2".
+     * The IDs of the subnets in which to launch the instances. To specify multiple subnets, separate them using commas; for example, "subnet-1234abcdeexample1, subnet-0987cdef6example2". If you specify a network interface, you must specify any subnets as part of the network interface instead of using this parameter.
      */
     SubnetId?: SubnetId;
     /**

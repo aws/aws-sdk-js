@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Endpoints",
-  "description": "Add endpoint override for us-isof-* region"
-}

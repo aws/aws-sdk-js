@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1600.0-->
+<!--LATEST=2.1601.0-->
 <!--ENTRYINSERT-->
+
+## 2.1601.0
+* bugfix: Endpoints: Add endpoint override for us-isof-* region
+* feature: EC2: Documentation updates for Elastic Compute Cloud (EC2).
+* feature: QBusiness: This release adds support for IAM Identity Center (IDC) as the identity gateway for Q Business. It also allows users to provide an explicit intent for Q Business to identify how the Chat request should be handled.
 
 ## 2.1600.0
 * feature: BedrockAgent: For Create Agent API, the agentResourceRoleArn parameter is no longer required.

@@ -12,67 +12,67 @@ declare class QBusiness extends Service {
   constructor(options?: QBusiness.Types.ClientConfiguration)
   config: Config & QBusiness.Types.ClientConfiguration;
   /**
-   * Asynchronously deletes one or more documents added using the BatchPutDocument API from an Amazon Q index. You can see the progress of the deletion, and any error messages related to the process, by using CloudWatch.
+   * Asynchronously deletes one or more documents added using the BatchPutDocument API from an Amazon Q Business index. You can see the progress of the deletion, and any error messages related to the process, by using CloudWatch.
    */
   batchDeleteDocument(params: QBusiness.Types.BatchDeleteDocumentRequest, callback?: (err: AWSError, data: QBusiness.Types.BatchDeleteDocumentResponse) => void): Request<QBusiness.Types.BatchDeleteDocumentResponse, AWSError>;
   /**
-   * Asynchronously deletes one or more documents added using the BatchPutDocument API from an Amazon Q index. You can see the progress of the deletion, and any error messages related to the process, by using CloudWatch.
+   * Asynchronously deletes one or more documents added using the BatchPutDocument API from an Amazon Q Business index. You can see the progress of the deletion, and any error messages related to the process, by using CloudWatch.
    */
   batchDeleteDocument(callback?: (err: AWSError, data: QBusiness.Types.BatchDeleteDocumentResponse) => void): Request<QBusiness.Types.BatchDeleteDocumentResponse, AWSError>;
   /**
-   * Adds one or more documents to an Amazon Q index. You use this API to:   ingest your structured and unstructured documents and documents stored in an Amazon S3 bucket into an Amazon Q index.   add custom attributes to documents in an Amazon Q index.   attach an access control list to the documents added to an Amazon Q index.   You can see the progress of the deletion, and any error messages related to the process, by using CloudWatch.
+   * Adds one or more documents to an Amazon Q Business index. You use this API to:   ingest your structured and unstructured documents and documents stored in an Amazon S3 bucket into an Amazon Q Business index.   add custom attributes to documents in an Amazon Q Business index.   attach an access control list to the documents added to an Amazon Q Business index.   You can see the progress of the deletion, and any error messages related to the process, by using CloudWatch.
    */
   batchPutDocument(params: QBusiness.Types.BatchPutDocumentRequest, callback?: (err: AWSError, data: QBusiness.Types.BatchPutDocumentResponse) => void): Request<QBusiness.Types.BatchPutDocumentResponse, AWSError>;
   /**
-   * Adds one or more documents to an Amazon Q index. You use this API to:   ingest your structured and unstructured documents and documents stored in an Amazon S3 bucket into an Amazon Q index.   add custom attributes to documents in an Amazon Q index.   attach an access control list to the documents added to an Amazon Q index.   You can see the progress of the deletion, and any error messages related to the process, by using CloudWatch.
+   * Adds one or more documents to an Amazon Q Business index. You use this API to:   ingest your structured and unstructured documents and documents stored in an Amazon S3 bucket into an Amazon Q Business index.   add custom attributes to documents in an Amazon Q Business index.   attach an access control list to the documents added to an Amazon Q Business index.   You can see the progress of the deletion, and any error messages related to the process, by using CloudWatch.
    */
   batchPutDocument(callback?: (err: AWSError, data: QBusiness.Types.BatchPutDocumentResponse) => void): Request<QBusiness.Types.BatchPutDocumentResponse, AWSError>;
   /**
-   * Starts or continues a non-streaming Amazon Q conversation.
+   * Starts or continues a non-streaming Amazon Q Business conversation.
    */
   chatSync(params: QBusiness.Types.ChatSyncInput, callback?: (err: AWSError, data: QBusiness.Types.ChatSyncOutput) => void): Request<QBusiness.Types.ChatSyncOutput, AWSError>;
   /**
-   * Starts or continues a non-streaming Amazon Q conversation.
+   * Starts or continues a non-streaming Amazon Q Business conversation.
    */
   chatSync(callback?: (err: AWSError, data: QBusiness.Types.ChatSyncOutput) => void): Request<QBusiness.Types.ChatSyncOutput, AWSError>;
   /**
-   * Creates an Amazon Q application.
+   * Creates an Amazon Q Business application.
    */
   createApplication(params: QBusiness.Types.CreateApplicationRequest, callback?: (err: AWSError, data: QBusiness.Types.CreateApplicationResponse) => void): Request<QBusiness.Types.CreateApplicationResponse, AWSError>;
   /**
-   * Creates an Amazon Q application.
+   * Creates an Amazon Q Business application.
    */
   createApplication(callback?: (err: AWSError, data: QBusiness.Types.CreateApplicationResponse) => void): Request<QBusiness.Types.CreateApplicationResponse, AWSError>;
   /**
-   * Creates a data source connector for an Amazon Q application.  CreateDataSource is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised.
+   * Creates a data source connector for an Amazon Q Business application.  CreateDataSource is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised.
    */
   createDataSource(params: QBusiness.Types.CreateDataSourceRequest, callback?: (err: AWSError, data: QBusiness.Types.CreateDataSourceResponse) => void): Request<QBusiness.Types.CreateDataSourceResponse, AWSError>;
   /**
-   * Creates a data source connector for an Amazon Q application.  CreateDataSource is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised.
+   * Creates a data source connector for an Amazon Q Business application.  CreateDataSource is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised.
    */
   createDataSource(callback?: (err: AWSError, data: QBusiness.Types.CreateDataSourceResponse) => void): Request<QBusiness.Types.CreateDataSourceResponse, AWSError>;
   /**
-   * Creates an Amazon Q index. To determine if index creation has completed, check the Status field returned from a call to DescribeIndex. The Status field is set to ACTIVE when the index is ready to use. Once the index is active, you can index your documents using the  BatchPutDocument  API or the  CreateDataSource  API.
+   * Creates an Amazon Q Business index. To determine if index creation has completed, check the Status field returned from a call to DescribeIndex. The Status field is set to ACTIVE when the index is ready to use. Once the index is active, you can index your documents using the  BatchPutDocument  API or the  CreateDataSource  API.
    */
   createIndex(params: QBusiness.Types.CreateIndexRequest, callback?: (err: AWSError, data: QBusiness.Types.CreateIndexResponse) => void): Request<QBusiness.Types.CreateIndexResponse, AWSError>;
   /**
-   * Creates an Amazon Q index. To determine if index creation has completed, check the Status field returned from a call to DescribeIndex. The Status field is set to ACTIVE when the index is ready to use. Once the index is active, you can index your documents using the  BatchPutDocument  API or the  CreateDataSource  API.
+   * Creates an Amazon Q Business index. To determine if index creation has completed, check the Status field returned from a call to DescribeIndex. The Status field is set to ACTIVE when the index is ready to use. Once the index is active, you can index your documents using the  BatchPutDocument  API or the  CreateDataSource  API.
    */
   createIndex(callback?: (err: AWSError, data: QBusiness.Types.CreateIndexResponse) => void): Request<QBusiness.Types.CreateIndexResponse, AWSError>;
   /**
-   * Creates an Amazon Q plugin.
+   * Creates an Amazon Q Business plugin.
    */
   createPlugin(params: QBusiness.Types.CreatePluginRequest, callback?: (err: AWSError, data: QBusiness.Types.CreatePluginResponse) => void): Request<QBusiness.Types.CreatePluginResponse, AWSError>;
   /**
-   * Creates an Amazon Q plugin.
+   * Creates an Amazon Q Business plugin.
    */
   createPlugin(callback?: (err: AWSError, data: QBusiness.Types.CreatePluginResponse) => void): Request<QBusiness.Types.CreatePluginResponse, AWSError>;
   /**
-   * Adds a retriever to your Amazon Q application.
+   * Adds a retriever to your Amazon Q Business application.
    */
   createRetriever(params: QBusiness.Types.CreateRetrieverRequest, callback?: (err: AWSError, data: QBusiness.Types.CreateRetrieverResponse) => void): Request<QBusiness.Types.CreateRetrieverResponse, AWSError>;
   /**
-   * Adds a retriever to your Amazon Q application.
+   * Adds a retriever to your Amazon Q Business application.
    */
   createRetriever(callback?: (err: AWSError, data: QBusiness.Types.CreateRetrieverResponse) => void): Request<QBusiness.Types.CreateRetrieverResponse, AWSError>;
   /**
@@ -84,43 +84,43 @@ declare class QBusiness extends Service {
    */
   createUser(callback?: (err: AWSError, data: QBusiness.Types.CreateUserResponse) => void): Request<QBusiness.Types.CreateUserResponse, AWSError>;
   /**
-   * Creates an Amazon Q web experience.
+   * Creates an Amazon Q Business web experience.
    */
   createWebExperience(params: QBusiness.Types.CreateWebExperienceRequest, callback?: (err: AWSError, data: QBusiness.Types.CreateWebExperienceResponse) => void): Request<QBusiness.Types.CreateWebExperienceResponse, AWSError>;
   /**
-   * Creates an Amazon Q web experience.
+   * Creates an Amazon Q Business web experience.
    */
   createWebExperience(callback?: (err: AWSError, data: QBusiness.Types.CreateWebExperienceResponse) => void): Request<QBusiness.Types.CreateWebExperienceResponse, AWSError>;
   /**
-   * Deletes an Amazon Q application.
+   * Deletes an Amazon Q Business application.
    */
   deleteApplication(params: QBusiness.Types.DeleteApplicationRequest, callback?: (err: AWSError, data: QBusiness.Types.DeleteApplicationResponse) => void): Request<QBusiness.Types.DeleteApplicationResponse, AWSError>;
   /**
-   * Deletes an Amazon Q application.
+   * Deletes an Amazon Q Business application.
    */
   deleteApplication(callback?: (err: AWSError, data: QBusiness.Types.DeleteApplicationResponse) => void): Request<QBusiness.Types.DeleteApplicationResponse, AWSError>;
   /**
-   * Deletes chat controls configured for an existing Amazon Q application.
+   * Deletes chat controls configured for an existing Amazon Q Business application.
    */
   deleteChatControlsConfiguration(params: QBusiness.Types.DeleteChatControlsConfigurationRequest, callback?: (err: AWSError, data: QBusiness.Types.DeleteChatControlsConfigurationResponse) => void): Request<QBusiness.Types.DeleteChatControlsConfigurationResponse, AWSError>;
   /**
-   * Deletes chat controls configured for an existing Amazon Q application.
+   * Deletes chat controls configured for an existing Amazon Q Business application.
    */
   deleteChatControlsConfiguration(callback?: (err: AWSError, data: QBusiness.Types.DeleteChatControlsConfigurationResponse) => void): Request<QBusiness.Types.DeleteChatControlsConfigurationResponse, AWSError>;
   /**
-   * Deletes an Amazon Q web experience conversation.
+   * Deletes an Amazon Q Business web experience conversation.
    */
   deleteConversation(params: QBusiness.Types.DeleteConversationRequest, callback?: (err: AWSError, data: QBusiness.Types.DeleteConversationResponse) => void): Request<QBusiness.Types.DeleteConversationResponse, AWSError>;
   /**
-   * Deletes an Amazon Q web experience conversation.
+   * Deletes an Amazon Q Business web experience conversation.
    */
   deleteConversation(callback?: (err: AWSError, data: QBusiness.Types.DeleteConversationResponse) => void): Request<QBusiness.Types.DeleteConversationResponse, AWSError>;
   /**
-   * Deletes an Amazon Q data source connector. While the data source is being deleted, the Status field returned by a call to the DescribeDataSource API is set to DELETING. 
+   * Deletes an Amazon Q Business data source connector. While the data source is being deleted, the Status field returned by a call to the DescribeDataSource API is set to DELETING. 
    */
   deleteDataSource(params: QBusiness.Types.DeleteDataSourceRequest, callback?: (err: AWSError, data: QBusiness.Types.DeleteDataSourceResponse) => void): Request<QBusiness.Types.DeleteDataSourceResponse, AWSError>;
   /**
-   * Deletes an Amazon Q data source connector. While the data source is being deleted, the Status field returned by a call to the DescribeDataSource API is set to DELETING. 
+   * Deletes an Amazon Q Business data source connector. While the data source is being deleted, the Status field returned by a call to the DescribeDataSource API is set to DELETING. 
    */
   deleteDataSource(callback?: (err: AWSError, data: QBusiness.Types.DeleteDataSourceResponse) => void): Request<QBusiness.Types.DeleteDataSourceResponse, AWSError>;
   /**
@@ -132,27 +132,27 @@ declare class QBusiness extends Service {
    */
   deleteGroup(callback?: (err: AWSError, data: QBusiness.Types.DeleteGroupResponse) => void): Request<QBusiness.Types.DeleteGroupResponse, AWSError>;
   /**
-   * Deletes an Amazon Q index.
+   * Deletes an Amazon Q Business index.
    */
   deleteIndex(params: QBusiness.Types.DeleteIndexRequest, callback?: (err: AWSError, data: QBusiness.Types.DeleteIndexResponse) => void): Request<QBusiness.Types.DeleteIndexResponse, AWSError>;
   /**
-   * Deletes an Amazon Q index.
+   * Deletes an Amazon Q Business index.
    */
   deleteIndex(callback?: (err: AWSError, data: QBusiness.Types.DeleteIndexResponse) => void): Request<QBusiness.Types.DeleteIndexResponse, AWSError>;
   /**
-   * Deletes an Amazon Q plugin.
+   * Deletes an Amazon Q Business plugin.
    */
   deletePlugin(params: QBusiness.Types.DeletePluginRequest, callback?: (err: AWSError, data: QBusiness.Types.DeletePluginResponse) => void): Request<QBusiness.Types.DeletePluginResponse, AWSError>;
   /**
-   * Deletes an Amazon Q plugin.
+   * Deletes an Amazon Q Business plugin.
    */
   deletePlugin(callback?: (err: AWSError, data: QBusiness.Types.DeletePluginResponse) => void): Request<QBusiness.Types.DeletePluginResponse, AWSError>;
   /**
-   * Deletes the retriever used by an Amazon Q application.
+   * Deletes the retriever used by an Amazon Q Business application.
    */
   deleteRetriever(params: QBusiness.Types.DeleteRetrieverRequest, callback?: (err: AWSError, data: QBusiness.Types.DeleteRetrieverResponse) => void): Request<QBusiness.Types.DeleteRetrieverResponse, AWSError>;
   /**
-   * Deletes the retriever used by an Amazon Q application.
+   * Deletes the retriever used by an Amazon Q Business application.
    */
   deleteRetriever(callback?: (err: AWSError, data: QBusiness.Types.DeleteRetrieverResponse) => void): Request<QBusiness.Types.DeleteRetrieverResponse, AWSError>;
   /**
@@ -164,35 +164,35 @@ declare class QBusiness extends Service {
    */
   deleteUser(callback?: (err: AWSError, data: QBusiness.Types.DeleteUserResponse) => void): Request<QBusiness.Types.DeleteUserResponse, AWSError>;
   /**
-   * Deletes an Amazon Q web experience.
+   * Deletes an Amazon Q Business web experience.
    */
   deleteWebExperience(params: QBusiness.Types.DeleteWebExperienceRequest, callback?: (err: AWSError, data: QBusiness.Types.DeleteWebExperienceResponse) => void): Request<QBusiness.Types.DeleteWebExperienceResponse, AWSError>;
   /**
-   * Deletes an Amazon Q web experience.
+   * Deletes an Amazon Q Business web experience.
    */
   deleteWebExperience(callback?: (err: AWSError, data: QBusiness.Types.DeleteWebExperienceResponse) => void): Request<QBusiness.Types.DeleteWebExperienceResponse, AWSError>;
   /**
-   * Gets information about an existing Amazon Q application.
+   * Gets information about an existing Amazon Q Business application.
    */
   getApplication(params: QBusiness.Types.GetApplicationRequest, callback?: (err: AWSError, data: QBusiness.Types.GetApplicationResponse) => void): Request<QBusiness.Types.GetApplicationResponse, AWSError>;
   /**
-   * Gets information about an existing Amazon Q application.
+   * Gets information about an existing Amazon Q Business application.
    */
   getApplication(callback?: (err: AWSError, data: QBusiness.Types.GetApplicationResponse) => void): Request<QBusiness.Types.GetApplicationResponse, AWSError>;
   /**
-   * Gets information about an chat controls configured for an existing Amazon Q application.
+   * Gets information about an chat controls configured for an existing Amazon Q Business application.
    */
   getChatControlsConfiguration(params: QBusiness.Types.GetChatControlsConfigurationRequest, callback?: (err: AWSError, data: QBusiness.Types.GetChatControlsConfigurationResponse) => void): Request<QBusiness.Types.GetChatControlsConfigurationResponse, AWSError>;
   /**
-   * Gets information about an chat controls configured for an existing Amazon Q application.
+   * Gets information about an chat controls configured for an existing Amazon Q Business application.
    */
   getChatControlsConfiguration(callback?: (err: AWSError, data: QBusiness.Types.GetChatControlsConfigurationResponse) => void): Request<QBusiness.Types.GetChatControlsConfigurationResponse, AWSError>;
   /**
-   * Gets information about an existing Amazon Q data source connector.
+   * Gets information about an existing Amazon Q Business data source connector.
    */
   getDataSource(params: QBusiness.Types.GetDataSourceRequest, callback?: (err: AWSError, data: QBusiness.Types.GetDataSourceResponse) => void): Request<QBusiness.Types.GetDataSourceResponse, AWSError>;
   /**
-   * Gets information about an existing Amazon Q data source connector.
+   * Gets information about an existing Amazon Q Business data source connector.
    */
   getDataSource(callback?: (err: AWSError, data: QBusiness.Types.GetDataSourceResponse) => void): Request<QBusiness.Types.GetDataSourceResponse, AWSError>;
   /**
@@ -204,27 +204,27 @@ declare class QBusiness extends Service {
    */
   getGroup(callback?: (err: AWSError, data: QBusiness.Types.GetGroupResponse) => void): Request<QBusiness.Types.GetGroupResponse, AWSError>;
   /**
-   * Gets information about an existing Amazon Q index.
+   * Gets information about an existing Amazon Q Business index.
    */
   getIndex(params: QBusiness.Types.GetIndexRequest, callback?: (err: AWSError, data: QBusiness.Types.GetIndexResponse) => void): Request<QBusiness.Types.GetIndexResponse, AWSError>;
   /**
-   * Gets information about an existing Amazon Q index.
+   * Gets information about an existing Amazon Q Business index.
    */
   getIndex(callback?: (err: AWSError, data: QBusiness.Types.GetIndexResponse) => void): Request<QBusiness.Types.GetIndexResponse, AWSError>;
   /**
-   * Gets information about an existing Amazon Q plugin.
+   * Gets information about an existing Amazon Q Business plugin.
    */
   getPlugin(params: QBusiness.Types.GetPluginRequest, callback?: (err: AWSError, data: QBusiness.Types.GetPluginResponse) => void): Request<QBusiness.Types.GetPluginResponse, AWSError>;
   /**
-   * Gets information about an existing Amazon Q plugin.
+   * Gets information about an existing Amazon Q Business plugin.
    */
   getPlugin(callback?: (err: AWSError, data: QBusiness.Types.GetPluginResponse) => void): Request<QBusiness.Types.GetPluginResponse, AWSError>;
   /**
-   * Gets information about an existing retriever used by an Amazon Q application.
+   * Gets information about an existing retriever used by an Amazon Q Business application.
    */
   getRetriever(params: QBusiness.Types.GetRetrieverRequest, callback?: (err: AWSError, data: QBusiness.Types.GetRetrieverResponse) => void): Request<QBusiness.Types.GetRetrieverResponse, AWSError>;
   /**
-   * Gets information about an existing retriever used by an Amazon Q application.
+   * Gets information about an existing retriever used by an Amazon Q Business application.
    */
   getRetriever(callback?: (err: AWSError, data: QBusiness.Types.GetRetrieverResponse) => void): Request<QBusiness.Types.GetRetrieverResponse, AWSError>;
   /**
@@ -236,43 +236,43 @@ declare class QBusiness extends Service {
    */
   getUser(callback?: (err: AWSError, data: QBusiness.Types.GetUserResponse) => void): Request<QBusiness.Types.GetUserResponse, AWSError>;
   /**
-   * Gets information about an existing Amazon Q web experience.
+   * Gets information about an existing Amazon Q Business web experience.
    */
   getWebExperience(params: QBusiness.Types.GetWebExperienceRequest, callback?: (err: AWSError, data: QBusiness.Types.GetWebExperienceResponse) => void): Request<QBusiness.Types.GetWebExperienceResponse, AWSError>;
   /**
-   * Gets information about an existing Amazon Q web experience.
+   * Gets information about an existing Amazon Q Business web experience.
    */
   getWebExperience(callback?: (err: AWSError, data: QBusiness.Types.GetWebExperienceResponse) => void): Request<QBusiness.Types.GetWebExperienceResponse, AWSError>;
   /**
-   * Lists Amazon Q applications.
+   * Lists Amazon Q Business applications.
    */
   listApplications(params: QBusiness.Types.ListApplicationsRequest, callback?: (err: AWSError, data: QBusiness.Types.ListApplicationsResponse) => void): Request<QBusiness.Types.ListApplicationsResponse, AWSError>;
   /**
-   * Lists Amazon Q applications.
+   * Lists Amazon Q Business applications.
    */
   listApplications(callback?: (err: AWSError, data: QBusiness.Types.ListApplicationsResponse) => void): Request<QBusiness.Types.ListApplicationsResponse, AWSError>;
   /**
-   * Lists one or more Amazon Q conversations.
+   * Lists one or more Amazon Q Business conversations.
    */
   listConversations(params: QBusiness.Types.ListConversationsRequest, callback?: (err: AWSError, data: QBusiness.Types.ListConversationsResponse) => void): Request<QBusiness.Types.ListConversationsResponse, AWSError>;
   /**
-   * Lists one or more Amazon Q conversations.
+   * Lists one or more Amazon Q Business conversations.
    */
   listConversations(callback?: (err: AWSError, data: QBusiness.Types.ListConversationsResponse) => void): Request<QBusiness.Types.ListConversationsResponse, AWSError>;
   /**
-   * Get information about an Amazon Q data source connector synchronization.
+   * Get information about an Amazon Q Business data source connector synchronization.
    */
   listDataSourceSyncJobs(params: QBusiness.Types.ListDataSourceSyncJobsRequest, callback?: (err: AWSError, data: QBusiness.Types.ListDataSourceSyncJobsResponse) => void): Request<QBusiness.Types.ListDataSourceSyncJobsResponse, AWSError>;
   /**
-   * Get information about an Amazon Q data source connector synchronization.
+   * Get information about an Amazon Q Business data source connector synchronization.
    */
   listDataSourceSyncJobs(callback?: (err: AWSError, data: QBusiness.Types.ListDataSourceSyncJobsResponse) => void): Request<QBusiness.Types.ListDataSourceSyncJobsResponse, AWSError>;
   /**
-   * Lists the Amazon Q data source connectors that you have created.
+   * Lists the Amazon Q Business data source connectors that you have created.
    */
   listDataSources(params: QBusiness.Types.ListDataSourcesRequest, callback?: (err: AWSError, data: QBusiness.Types.ListDataSourcesResponse) => void): Request<QBusiness.Types.ListDataSourcesResponse, AWSError>;
   /**
-   * Lists the Amazon Q data source connectors that you have created.
+   * Lists the Amazon Q Business data source connectors that you have created.
    */
   listDataSources(callback?: (err: AWSError, data: QBusiness.Types.ListDataSourcesResponse) => void): Request<QBusiness.Types.ListDataSourcesResponse, AWSError>;
   /**
@@ -292,147 +292,147 @@ declare class QBusiness extends Service {
    */
   listGroups(callback?: (err: AWSError, data: QBusiness.Types.ListGroupsResponse) => void): Request<QBusiness.Types.ListGroupsResponse, AWSError>;
   /**
-   * Lists the Amazon Q indices you have created.
+   * Lists the Amazon Q Business indices you have created.
    */
   listIndices(params: QBusiness.Types.ListIndicesRequest, callback?: (err: AWSError, data: QBusiness.Types.ListIndicesResponse) => void): Request<QBusiness.Types.ListIndicesResponse, AWSError>;
   /**
-   * Lists the Amazon Q indices you have created.
+   * Lists the Amazon Q Business indices you have created.
    */
   listIndices(callback?: (err: AWSError, data: QBusiness.Types.ListIndicesResponse) => void): Request<QBusiness.Types.ListIndicesResponse, AWSError>;
   /**
-   * Gets a list of messages associated with an Amazon Q web experience.
+   * Gets a list of messages associated with an Amazon Q Business web experience.
    */
   listMessages(params: QBusiness.Types.ListMessagesRequest, callback?: (err: AWSError, data: QBusiness.Types.ListMessagesResponse) => void): Request<QBusiness.Types.ListMessagesResponse, AWSError>;
   /**
-   * Gets a list of messages associated with an Amazon Q web experience.
+   * Gets a list of messages associated with an Amazon Q Business web experience.
    */
   listMessages(callback?: (err: AWSError, data: QBusiness.Types.ListMessagesResponse) => void): Request<QBusiness.Types.ListMessagesResponse, AWSError>;
   /**
-   * Lists configured Amazon Q plugins.
+   * Lists configured Amazon Q Business plugins.
    */
   listPlugins(params: QBusiness.Types.ListPluginsRequest, callback?: (err: AWSError, data: QBusiness.Types.ListPluginsResponse) => void): Request<QBusiness.Types.ListPluginsResponse, AWSError>;
   /**
-   * Lists configured Amazon Q plugins.
+   * Lists configured Amazon Q Business plugins.
    */
   listPlugins(callback?: (err: AWSError, data: QBusiness.Types.ListPluginsResponse) => void): Request<QBusiness.Types.ListPluginsResponse, AWSError>;
   /**
-   * Lists the retriever used by an Amazon Q application.
+   * Lists the retriever used by an Amazon Q Business application.
    */
   listRetrievers(params: QBusiness.Types.ListRetrieversRequest, callback?: (err: AWSError, data: QBusiness.Types.ListRetrieversResponse) => void): Request<QBusiness.Types.ListRetrieversResponse, AWSError>;
   /**
-   * Lists the retriever used by an Amazon Q application.
+   * Lists the retriever used by an Amazon Q Business application.
    */
   listRetrievers(callback?: (err: AWSError, data: QBusiness.Types.ListRetrieversResponse) => void): Request<QBusiness.Types.ListRetrieversResponse, AWSError>;
   /**
-   * Gets a list of tags associated with a specified resource. Amazon Q applications and data sources can have tags associated with them.
+   * Gets a list of tags associated with a specified resource. Amazon Q Business applications and data sources can have tags associated with them.
    */
   listTagsForResource(params: QBusiness.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: QBusiness.Types.ListTagsForResourceResponse) => void): Request<QBusiness.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Gets a list of tags associated with a specified resource. Amazon Q applications and data sources can have tags associated with them.
+   * Gets a list of tags associated with a specified resource. Amazon Q Business applications and data sources can have tags associated with them.
    */
   listTagsForResource(callback?: (err: AWSError, data: QBusiness.Types.ListTagsForResourceResponse) => void): Request<QBusiness.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists one or more Amazon Q Web Experiences.
+   * Lists one or more Amazon Q Business Web Experiences.
    */
   listWebExperiences(params: QBusiness.Types.ListWebExperiencesRequest, callback?: (err: AWSError, data: QBusiness.Types.ListWebExperiencesResponse) => void): Request<QBusiness.Types.ListWebExperiencesResponse, AWSError>;
   /**
-   * Lists one or more Amazon Q Web Experiences.
+   * Lists one or more Amazon Q Business Web Experiences.
    */
   listWebExperiences(callback?: (err: AWSError, data: QBusiness.Types.ListWebExperiencesResponse) => void): Request<QBusiness.Types.ListWebExperiencesResponse, AWSError>;
   /**
-   * Enables your end user to to provide feedback on their Amazon Q generated chat responses.
+   * Enables your end user to provide feedback on their Amazon Q Business generated chat responses.
    */
   putFeedback(params: QBusiness.Types.PutFeedbackRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Enables your end user to to provide feedback on their Amazon Q generated chat responses.
+   * Enables your end user to provide feedback on their Amazon Q Business generated chat responses.
    */
   putFeedback(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Create, or updates, a mapping of users—who have access to a document—to groups. You can also map sub groups to groups. For example, the group "Company Intellectual Property Teams" includes sub groups "Research" and "Engineering". These sub groups include their own list of users or people who work in these teams. Only users who work in research and engineering, and therefore belong in the intellectual property group, can see top-secret company documents in their Amazon Q chat results.
+   * Create, or updates, a mapping of users—who have access to a document—to groups. You can also map sub groups to groups. For example, the group "Company Intellectual Property Teams" includes sub groups "Research" and "Engineering". These sub groups include their own list of users or people who work in these teams. Only users who work in research and engineering, and therefore belong in the intellectual property group, can see top-secret company documents in their Amazon Q Business chat results.
    */
   putGroup(params: QBusiness.Types.PutGroupRequest, callback?: (err: AWSError, data: QBusiness.Types.PutGroupResponse) => void): Request<QBusiness.Types.PutGroupResponse, AWSError>;
   /**
-   * Create, or updates, a mapping of users—who have access to a document—to groups. You can also map sub groups to groups. For example, the group "Company Intellectual Property Teams" includes sub groups "Research" and "Engineering". These sub groups include their own list of users or people who work in these teams. Only users who work in research and engineering, and therefore belong in the intellectual property group, can see top-secret company documents in their Amazon Q chat results.
+   * Create, or updates, a mapping of users—who have access to a document—to groups. You can also map sub groups to groups. For example, the group "Company Intellectual Property Teams" includes sub groups "Research" and "Engineering". These sub groups include their own list of users or people who work in these teams. Only users who work in research and engineering, and therefore belong in the intellectual property group, can see top-secret company documents in their Amazon Q Business chat results.
    */
   putGroup(callback?: (err: AWSError, data: QBusiness.Types.PutGroupResponse) => void): Request<QBusiness.Types.PutGroupResponse, AWSError>;
   /**
-   * Starts a data source connector synchronization job. If a synchronization job is already in progress, Amazon Q returns a ConflictException.
+   * Starts a data source connector synchronization job. If a synchronization job is already in progress, Amazon Q Business returns a ConflictException.
    */
   startDataSourceSyncJob(params: QBusiness.Types.StartDataSourceSyncJobRequest, callback?: (err: AWSError, data: QBusiness.Types.StartDataSourceSyncJobResponse) => void): Request<QBusiness.Types.StartDataSourceSyncJobResponse, AWSError>;
   /**
-   * Starts a data source connector synchronization job. If a synchronization job is already in progress, Amazon Q returns a ConflictException.
+   * Starts a data source connector synchronization job. If a synchronization job is already in progress, Amazon Q Business returns a ConflictException.
    */
   startDataSourceSyncJob(callback?: (err: AWSError, data: QBusiness.Types.StartDataSourceSyncJobResponse) => void): Request<QBusiness.Types.StartDataSourceSyncJobResponse, AWSError>;
   /**
-   * Stops an Amazon Q data source connector synchronization job already in progress.
+   * Stops an Amazon Q Business data source connector synchronization job already in progress.
    */
   stopDataSourceSyncJob(params: QBusiness.Types.StopDataSourceSyncJobRequest, callback?: (err: AWSError, data: QBusiness.Types.StopDataSourceSyncJobResponse) => void): Request<QBusiness.Types.StopDataSourceSyncJobResponse, AWSError>;
   /**
-   * Stops an Amazon Q data source connector synchronization job already in progress.
+   * Stops an Amazon Q Business data source connector synchronization job already in progress.
    */
   stopDataSourceSyncJob(callback?: (err: AWSError, data: QBusiness.Types.StopDataSourceSyncJobResponse) => void): Request<QBusiness.Types.StopDataSourceSyncJobResponse, AWSError>;
   /**
-   * Adds the specified tag to the specified Amazon Q application or data source resource. If the tag already exists, the existing value is replaced with the new value.
+   * Adds the specified tag to the specified Amazon Q Business application or data source resource. If the tag already exists, the existing value is replaced with the new value.
    */
   tagResource(params: QBusiness.Types.TagResourceRequest, callback?: (err: AWSError, data: QBusiness.Types.TagResourceResponse) => void): Request<QBusiness.Types.TagResourceResponse, AWSError>;
   /**
-   * Adds the specified tag to the specified Amazon Q application or data source resource. If the tag already exists, the existing value is replaced with the new value.
+   * Adds the specified tag to the specified Amazon Q Business application or data source resource. If the tag already exists, the existing value is replaced with the new value.
    */
   tagResource(callback?: (err: AWSError, data: QBusiness.Types.TagResourceResponse) => void): Request<QBusiness.Types.TagResourceResponse, AWSError>;
   /**
-   * Removes a tag from an Amazon Q application or a data source.
+   * Removes a tag from an Amazon Q Business application or a data source.
    */
   untagResource(params: QBusiness.Types.UntagResourceRequest, callback?: (err: AWSError, data: QBusiness.Types.UntagResourceResponse) => void): Request<QBusiness.Types.UntagResourceResponse, AWSError>;
   /**
-   * Removes a tag from an Amazon Q application or a data source.
+   * Removes a tag from an Amazon Q Business application or a data source.
    */
   untagResource(callback?: (err: AWSError, data: QBusiness.Types.UntagResourceResponse) => void): Request<QBusiness.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates an existing Amazon Q application.
+   * Updates an existing Amazon Q Business application.
    */
   updateApplication(params: QBusiness.Types.UpdateApplicationRequest, callback?: (err: AWSError, data: QBusiness.Types.UpdateApplicationResponse) => void): Request<QBusiness.Types.UpdateApplicationResponse, AWSError>;
   /**
-   * Updates an existing Amazon Q application.
+   * Updates an existing Amazon Q Business application.
    */
   updateApplication(callback?: (err: AWSError, data: QBusiness.Types.UpdateApplicationResponse) => void): Request<QBusiness.Types.UpdateApplicationResponse, AWSError>;
   /**
-   * Updates an set of chat controls configured for an existing Amazon Q application.
+   * Updates an set of chat controls configured for an existing Amazon Q Business application.
    */
   updateChatControlsConfiguration(params: QBusiness.Types.UpdateChatControlsConfigurationRequest, callback?: (err: AWSError, data: QBusiness.Types.UpdateChatControlsConfigurationResponse) => void): Request<QBusiness.Types.UpdateChatControlsConfigurationResponse, AWSError>;
   /**
-   * Updates an set of chat controls configured for an existing Amazon Q application.
+   * Updates an set of chat controls configured for an existing Amazon Q Business application.
    */
   updateChatControlsConfiguration(callback?: (err: AWSError, data: QBusiness.Types.UpdateChatControlsConfigurationResponse) => void): Request<QBusiness.Types.UpdateChatControlsConfigurationResponse, AWSError>;
   /**
-   * Updates an existing Amazon Q data source connector.
+   * Updates an existing Amazon Q Business data source connector.
    */
   updateDataSource(params: QBusiness.Types.UpdateDataSourceRequest, callback?: (err: AWSError, data: QBusiness.Types.UpdateDataSourceResponse) => void): Request<QBusiness.Types.UpdateDataSourceResponse, AWSError>;
   /**
-   * Updates an existing Amazon Q data source connector.
+   * Updates an existing Amazon Q Business data source connector.
    */
   updateDataSource(callback?: (err: AWSError, data: QBusiness.Types.UpdateDataSourceResponse) => void): Request<QBusiness.Types.UpdateDataSourceResponse, AWSError>;
   /**
-   * Updates an Amazon Q index.
+   * Updates an Amazon Q Business index.
    */
   updateIndex(params: QBusiness.Types.UpdateIndexRequest, callback?: (err: AWSError, data: QBusiness.Types.UpdateIndexResponse) => void): Request<QBusiness.Types.UpdateIndexResponse, AWSError>;
   /**
-   * Updates an Amazon Q index.
+   * Updates an Amazon Q Business index.
    */
   updateIndex(callback?: (err: AWSError, data: QBusiness.Types.UpdateIndexResponse) => void): Request<QBusiness.Types.UpdateIndexResponse, AWSError>;
   /**
-   * Updates an Amazon Q plugin.
+   * Updates an Amazon Q Business plugin.
    */
   updatePlugin(params: QBusiness.Types.UpdatePluginRequest, callback?: (err: AWSError, data: QBusiness.Types.UpdatePluginResponse) => void): Request<QBusiness.Types.UpdatePluginResponse, AWSError>;
   /**
-   * Updates an Amazon Q plugin.
+   * Updates an Amazon Q Business plugin.
    */
   updatePlugin(callback?: (err: AWSError, data: QBusiness.Types.UpdatePluginResponse) => void): Request<QBusiness.Types.UpdatePluginResponse, AWSError>;
   /**
-   * Updates the retriever used for your Amazon Q application.
+   * Updates the retriever used for your Amazon Q Business application.
    */
   updateRetriever(params: QBusiness.Types.UpdateRetrieverRequest, callback?: (err: AWSError, data: QBusiness.Types.UpdateRetrieverResponse) => void): Request<QBusiness.Types.UpdateRetrieverResponse, AWSError>;
   /**
-   * Updates the retriever used for your Amazon Q application.
+   * Updates the retriever used for your Amazon Q Business application.
    */
   updateRetriever(callback?: (err: AWSError, data: QBusiness.Types.UpdateRetrieverResponse) => void): Request<QBusiness.Types.UpdateRetrieverResponse, AWSError>;
   /**
@@ -444,11 +444,11 @@ declare class QBusiness extends Service {
    */
   updateUser(callback?: (err: AWSError, data: QBusiness.Types.UpdateUserResponse) => void): Request<QBusiness.Types.UpdateUserResponse, AWSError>;
   /**
-   * Updates an Amazon Q web experience. 
+   * Updates an Amazon Q Business web experience. 
    */
   updateWebExperience(params: QBusiness.Types.UpdateWebExperienceRequest, callback?: (err: AWSError, data: QBusiness.Types.UpdateWebExperienceResponse) => void): Request<QBusiness.Types.UpdateWebExperienceResponse, AWSError>;
   /**
-   * Updates an Amazon Q web experience. 
+   * Updates an Amazon Q Business web experience. 
    */
   updateWebExperience(callback?: (err: AWSError, data: QBusiness.Types.UpdateWebExperienceResponse) => void): Request<QBusiness.Types.UpdateWebExperienceResponse, AWSError>;
 }
@@ -476,7 +476,7 @@ declare namespace QBusiness {
   export type AccessControls = AccessControl[];
   export interface ActionExecution {
     /**
-     * A mapping of field names to the field values in input that an end user provides to Amazon Q requests to perform their plugin action. 
+     * A mapping of field names to the field values in input that an end user provides to Amazon Q Business requests to perform their plugin action. 
      */
     payload: ActionExecutionPayload;
     /**
@@ -502,7 +502,7 @@ declare namespace QBusiness {
   }
   export interface ActionReview {
     /**
-     * Field values that an end user needs to provide to Amazon Q for Amazon Q to perform the requested plugin action.
+     * Field values that an end user needs to provide to Amazon Q Business for Amazon Q Business to perform the requested plugin action.
      */
     payload?: ActionReviewPayload;
     /**
@@ -521,7 +521,7 @@ declare namespace QBusiness {
   export type ActionReviewPayload = {[key: string]: ActionReviewPayloadField};
   export interface ActionReviewPayloadField {
     /**
-     * Information about the field values that an end user can use to provide to Amazon Q for Amazon Q to perform the requested plugin action.
+     * Information about the field values that an end user can use to provide to Amazon Q Business for Amazon Q Business to perform the requested plugin action.
      */
     allowedValues?: ActionReviewPayloadFieldAllowedValues;
     /**
@@ -559,23 +559,23 @@ declare namespace QBusiness {
   export type AmazonResourceName = string;
   export interface Application {
     /**
-     * The identifier for the Amazon Q application.
+     * The identifier for the Amazon Q Business application.
      */
     applicationId?: ApplicationId;
     /**
-     * The Unix timestamp when the Amazon Q application was created.
+     * The Unix timestamp when the Amazon Q Business application was created.
      */
     createdAt?: Timestamp;
     /**
-     * The name of the Amazon Q application.
+     * The name of the Amazon Q Business application.
      */
     displayName?: ApplicationName;
     /**
-     * The status of the Amazon Q application. The application is ready to use when the status is ACTIVE.
+     * The status of the Amazon Q Business application. The application is ready to use when the status is ACTIVE.
      */
     status?: ApplicationStatus;
     /**
-     * The Unix timestamp when the Amazon Q application was last updated. 
+     * The Unix timestamp when the Amazon Q Business application was last updated. 
      */
     updatedAt?: Timestamp;
   }
@@ -589,6 +589,12 @@ declare namespace QBusiness {
      * Information about whether file upload during chat functionality is activated for your application.
      */
     attachmentsControlMode?: AttachmentsControlMode;
+  }
+  export interface AppliedCreatorModeConfiguration {
+    /**
+     *  Information about whether creator mode is enabled or disabled for an Amazon Q Business application. 
+     */
+    creatorModeControl: CreatorModeControl;
   }
   export interface AttachmentInput {
     /**
@@ -631,31 +637,31 @@ declare namespace QBusiness {
      */
     andAllFilters?: AttributeFilters;
     /**
-     * Returns true when a document contains all the specified document attributes or metadata fields.
+     * Returns true when a document contains all the specified document attributes or metadata fields. Supported for the following document attribute value types: stringListValue.
      */
     containsAll?: DocumentAttribute;
     /**
-     * Returns true when a document contains any of the specified document attributes or metadata fields.
+     * Returns true when a document contains any of the specified document attributes or metadata fields. Supported for the following document attribute value types: dateValue, longValue, stringListValue and stringValue.
      */
     containsAny?: DocumentAttribute;
     /**
-     * Performs an equals operation on two document attributes or metadata fields.
+     * Performs an equals operation on two document attributes or metadata fields. Supported for the following document attribute value types: dateValue, longValue, stringListValue and stringValue.
      */
     equalsTo?: DocumentAttribute;
     /**
-     * Performs a greater than operation on two document attributes or metadata fields. Use with a document attribute of type Date or Long.
+     * Performs a greater than operation on two document attributes or metadata fields. Supported for the following document attribute value types: dateValue and longValue.
      */
     greaterThan?: DocumentAttribute;
     /**
-     * Performs a greater or equals than operation on two document attributes or metadata fields. Use with a document attribute of type Date or Long. 
+     * Performs a greater or equals than operation on two document attributes or metadata fields. Supported for the following document attribute value types: dateValue and longValue. 
      */
     greaterThanOrEquals?: DocumentAttribute;
     /**
-     * Performs a less than operation on two document attributes or metadata fields. Use with a document attribute of type Date or Long.
+     * Performs a less than operation on two document attributes or metadata fields. Supported for the following document attribute value types: dateValue and longValue.
      */
     lessThan?: DocumentAttribute;
     /**
-     * Performs a less than or equals operation on two document attributes or metadata fields. Use with a document attribute of type Date or Long. 
+     * Performs a less than or equals operation on two document attributes or metadata fields.Supported for the following document attribute value type: dateValue and longValue. 
      */
     lessThanOrEquals?: DocumentAttribute;
     /**
@@ -672,7 +678,7 @@ declare namespace QBusiness {
   export type AttributeValueOperator = "DELETE"|string;
   export interface BasicAuthConfiguration {
     /**
-     * The ARN of an IAM role used by Amazon Q to access the basic authentication credentials stored in a Secrets Manager secret.
+     * The ARN of an IAM role used by Amazon Q Business to access the basic authentication credentials stored in a Secrets Manager secret.
      */
     roleArn: RoleArn;
     /**
@@ -682,7 +688,7 @@ declare namespace QBusiness {
   }
   export interface BatchDeleteDocumentRequest {
     /**
-     * The identifier of the Amazon Q application.
+     * The identifier of the Amazon Q Business application.
      */
     applicationId: ApplicationId;
     /**
@@ -690,23 +696,23 @@ declare namespace QBusiness {
      */
     dataSourceSyncId?: ExecutionId;
     /**
-     * Documents deleted from the Amazon Q index.
+     * Documents deleted from the Amazon Q Business index.
      */
     documents: DeleteDocuments;
     /**
-     * The identifier of the Amazon Q index that contains the documents to delete.
+     * The identifier of the Amazon Q Business index that contains the documents to delete.
      */
     indexId: IndexId;
   }
   export interface BatchDeleteDocumentResponse {
     /**
-     * A list of documents that couldn't be removed from the Amazon Q index. Each entry contains an error message that indicates why the document couldn't be removed from the index. 
+     * A list of documents that couldn't be removed from the Amazon Q Business index. Each entry contains an error message that indicates why the document couldn't be removed from the index. 
      */
     failedDocuments?: FailedDocuments;
   }
   export interface BatchPutDocumentRequest {
     /**
-     * The identifier of the Amazon Q application.
+     * The identifier of the Amazon Q Business application.
      */
     applicationId: ApplicationId;
     /**
@@ -718,7 +724,7 @@ declare namespace QBusiness {
      */
     documents: Documents;
     /**
-     * The identifier of the Amazon Q index to add the documents to. 
+     * The identifier of the Amazon Q Business index to add the documents to. 
      */
     indexId: IndexId;
     /**
@@ -728,7 +734,7 @@ declare namespace QBusiness {
   }
   export interface BatchPutDocumentResponse {
     /**
-     *  A list of documents that were not added to the Amazon Q index because the document failed a validation check. Each document contains an error message that indicates why the document couldn't be added to the index. 
+     *  A list of documents that were not added to the Amazon Q Business index because the document failed a validation check. Each document contains an error message that indicates why the document couldn't be added to the index. 
      */
     failedDocuments?: FailedDocuments;
   }
@@ -737,7 +743,7 @@ declare namespace QBusiness {
   export type BlockedPhrases = BlockedPhrase[];
   export interface BlockedPhrasesConfiguration {
     /**
-     * A list of phrases blocked from a Amazon Q web experience chat.
+     * A list of phrases blocked from a Amazon Q Business web experience chat.
      */
     blockedPhrases?: BlockedPhrases;
     /**
@@ -747,11 +753,11 @@ declare namespace QBusiness {
   }
   export interface BlockedPhrasesConfigurationUpdate {
     /**
-     * Creates or updates a blocked phrases configuration in your Amazon Q application.
+     * Creates or updates a blocked phrases configuration in your Amazon Q Business application.
      */
     blockedPhrasesToCreateOrUpdate?: BlockedPhrases;
     /**
-     * Deletes a blocked phrases configuration in your Amazon Q application.
+     * Deletes a blocked phrases configuration in your Amazon Q Business application.
      */
     blockedPhrasesToDelete?: BlockedPhrases;
     /**
@@ -761,13 +767,20 @@ declare namespace QBusiness {
   }
   export type Boolean = boolean;
   export type BoostingDurationInSeconds = number;
+  export type ChatMode = "RETRIEVAL_MODE"|"CREATOR_MODE"|"PLUGIN_MODE"|string;
+  export interface ChatModeConfiguration {
+    /**
+     * Configuration information required to invoke chat in PLUGIN_MODE.
+     */
+    pluginConfiguration?: PluginConfiguration;
+  }
   export interface ChatSyncInput {
     /**
-     * A request from an end user to perform an Amazon Q plugin action.
+     * A request from an end user to perform an Amazon Q Business plugin action.
      */
     actionExecution?: ActionExecution;
     /**
-     * The identifier of the Amazon Q application linked to the Amazon Q conversation.
+     * The identifier of the Amazon Q Business application linked to the Amazon Q Business conversation.
      */
     applicationId: ApplicationId;
     /**
@@ -775,15 +788,23 @@ declare namespace QBusiness {
      */
     attachments?: AttachmentsInput;
     /**
-     * Enables filtering of Amazon Q web experience responses based on document attributes or metadata fields.
+     * Enables filtering of Amazon Q Business web experience responses based on document attributes or metadata fields.
      */
     attributeFilter?: AttributeFilter;
+    /**
+     * The chat modes available in an Amazon Q Business web experience.    RETRIEVAL_MODE - The default chat mode for an Amazon Q Business application. When this mode is enabled, Amazon Q Business generates responses only from data sources connected to an Amazon Q Business application.    CREATOR_MODE - By selecting this mode, users can choose to generate responses only from the LLM knowledge, without consulting connected data sources, for a chat request.    PLUGIN_MODE - By selecting this mode, users can choose to use plugins in chat.   For more information, see Admin controls and guardrails, Plugins, and Conversation settings.
+     */
+    chatMode?: ChatMode;
+    /**
+     * The chat mode configuration for an Amazon Q Business application.
+     */
+    chatModeConfiguration?: ChatModeConfiguration;
     /**
      * A token that you provide to identify a chat request.
      */
     clientToken?: ClientToken;
     /**
-     * The identifier of the Amazon Q conversation.
+     * The identifier of the Amazon Q Business conversation.
      */
     conversationId?: ConversationId;
     /**
@@ -797,7 +818,7 @@ declare namespace QBusiness {
     /**
      * The identifier of the user attached to the chat input.
      */
-    userId: UserId;
+    userId?: UserId;
     /**
      * A end user message in a conversation.
      */
@@ -805,11 +826,11 @@ declare namespace QBusiness {
   }
   export interface ChatSyncOutput {
     /**
-     * A request from Amazon Q to the end user for information Amazon Q needs to successfully complete a requested plugin action.
+     * A request from Amazon Q Business to the end user for information Amazon Q Business needs to successfully complete a requested plugin action.
      */
     actionReview?: ActionReview;
     /**
-     * The identifier of the Amazon Q conversation.
+     * The identifier of the Amazon Q Business conversation.
      */
     conversationId?: ConversationId;
     /**
@@ -825,11 +846,11 @@ declare namespace QBusiness {
      */
     systemMessage?: String;
     /**
-     * The identifier of an Amazon Q AI generated message within the conversation.
+     * The identifier of an Amazon Q Business AI generated message within the conversation.
      */
     systemMessageId?: MessageId;
     /**
-     * The identifier of an Amazon Q end user text input message within the conversation.
+     * The identifier of an Amazon Q Business end user text input message within the conversation.
      */
     userMessageId?: MessageId;
   }
@@ -842,14 +863,14 @@ declare namespace QBusiness {
   }
   export interface ContentRetrievalRule {
     /**
-     * Specifies data sources in a Amazon Q application to use for content generation.
+     * Specifies data sources in a Amazon Q Business application to use for content generation.
      */
     eligibleDataSources?: EligibleDataSources;
   }
   export type ContentType = "PDF"|"HTML"|"MS_WORD"|"PLAIN_TEXT"|"PPT"|"RTF"|"XML"|"XSLT"|"MS_EXCEL"|"CSV"|"JSON"|"MD"|string;
   export interface Conversation {
     /**
-     * The identifier of the Amazon Q conversation.
+     * The identifier of the Amazon Q Business conversation.
      */
     conversationId?: ConversationId;
     /**
@@ -870,43 +891,47 @@ declare namespace QBusiness {
      */
     attachmentsConfiguration?: AttachmentsConfiguration;
     /**
-     * A token that you provide to identify the request to create your Amazon Q application.
+     * A token that you provide to identify the request to create your Amazon Q Business application.
      */
     clientToken?: ClientToken;
     /**
-     * A description for the Amazon Q application. 
+     * A description for the Amazon Q Business application. 
      */
     description?: Description;
     /**
-     * A name for the Amazon Q application. 
+     * A name for the Amazon Q Business application. 
      */
     displayName: ApplicationName;
     /**
-     * The identifier of the KMS key that is used to encrypt your data. Amazon Q doesn't support asymmetric keys.
+     * The identifier of the KMS key that is used to encrypt your data. Amazon Q Business doesn't support asymmetric keys.
      */
     encryptionConfiguration?: EncryptionConfiguration;
+    /**
+     *  The Amazon Resource Name (ARN) of the IAM Identity Center instance you are either creating for—or connecting to—your Amazon Q Business application.
+     */
+    identityCenterInstanceArn?: InstanceArn;
     /**
      *  The Amazon Resource Name (ARN) of an IAM role with permissions to access your Amazon CloudWatch logs and metrics.
      */
     roleArn: RoleArn;
     /**
-     * A list of key-value pairs that identify or categorize your Amazon Q application. You can also use tags to help control access to the application. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @.
+     * A list of key-value pairs that identify or categorize your Amazon Q Business application. You can also use tags to help control access to the application. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @.
      */
     tags?: Tags;
   }
   export interface CreateApplicationResponse {
     /**
-     *  The Amazon Resource Name (ARN) of the Amazon Q application. 
+     *  The Amazon Resource Name (ARN) of the Amazon Q Business application. 
      */
     applicationArn?: ApplicationArn;
     /**
-     * The identifier of the Amazon Q application.
+     * The identifier of the Amazon Q Business application.
      */
     applicationId?: ApplicationId;
   }
   export interface CreateDataSourceRequest {
     /**
-     *  The identifier of the Amazon Q application the data source will be attached to.
+     *  The identifier of the Amazon Q Business application the data source will be attached to.
      */
     applicationId: ApplicationId;
     /**
@@ -935,7 +960,7 @@ declare namespace QBusiness {
      */
     roleArn?: RoleArn;
     /**
-     * Sets the frequency for Amazon Q to check the documents in your data source repository and update your index. If you don't set a schedule, Amazon Q won't periodically update the index. Specify a cron- format schedule string or an empty string to indicate that the index is updated on demand. You can't specify the Schedule parameter when the Type parameter is set to CUSTOM. If you do, you receive a ValidationException exception. 
+     * Sets the frequency for Amazon Q Business to check the documents in your data source repository and update your index. If you don't set a schedule, Amazon Q Business won't periodically update the index. Specify a cron- format schedule string or an empty string to indicate that the index is updated on demand. You can't specify the Schedule parameter when the Type parameter is set to CUSTOM. If you do, you receive a ValidationException exception. 
      */
     syncSchedule?: SyncSchedule;
     /**
@@ -943,13 +968,13 @@ declare namespace QBusiness {
      */
     tags?: Tags;
     /**
-     * Configuration information for an Amazon VPC (Virtual Private Cloud) to connect to your data source. For more information, see Using Amazon VPC with Amazon Q connectors.
+     * Configuration information for an Amazon VPC (Virtual Private Cloud) to connect to your data source. For more information, see Using Amazon VPC with Amazon Q Business connectors.
      */
     vpcConfiguration?: DataSourceVpcConfiguration;
   }
   export interface CreateDataSourceResponse {
     /**
-     *  The Amazon Resource Name (ARN) of a data source in an Amazon Q application. 
+     *  The Amazon Resource Name (ARN) of a data source in an Amazon Q Business application. 
      */
     dataSourceArn?: DataSourceArn;
     /**
@@ -959,7 +984,7 @@ declare namespace QBusiness {
   }
   export interface CreateIndexRequest {
     /**
-     * The identifier of the Amazon Q application using the index.
+     * The identifier of the Amazon Q Business application using the index.
      */
     applicationId: ApplicationId;
     /**
@@ -971,11 +996,11 @@ declare namespace QBusiness {
      */
     clientToken?: ClientToken;
     /**
-     * A description for the Amazon Q index.
+     * A description for the Amazon Q Business index.
      */
     description?: Description;
     /**
-     * A name for the Amazon Q index.
+     * A name for the Amazon Q Business index.
      */
     displayName: IndexName;
     /**
@@ -985,11 +1010,11 @@ declare namespace QBusiness {
   }
   export interface CreateIndexResponse {
     /**
-     *  The Amazon Resource Name (ARN) of an Amazon Q index.
+     *  The Amazon Resource Name (ARN) of an Amazon Q Business index.
      */
     indexArn?: IndexArn;
     /**
-     * The identifier for the Amazon Q index.
+     * The identifier for the Amazon Q Business index.
      */
     indexId?: IndexId;
   }
@@ -1000,7 +1025,7 @@ declare namespace QBusiness {
     applicationId: ApplicationId;
     authConfiguration: PluginAuthConfiguration;
     /**
-     * A token that you provide to identify the request to create your Amazon Q plugin.
+     * A token that you provide to identify the request to create your Amazon Q Business plugin.
      */
     clientToken?: ClientToken;
     /**
@@ -1032,11 +1057,11 @@ declare namespace QBusiness {
   }
   export interface CreateRetrieverRequest {
     /**
-     * The identifier of your Amazon Q application.
+     * The identifier of your Amazon Q Business application.
      */
     applicationId: ApplicationId;
     /**
-     * A token that you provide to identify the request to create your Amazon Q application retriever.
+     * A token that you provide to identify the request to create your Amazon Q Business application retriever.
      */
     clientToken?: ClientToken;
     configuration: RetrieverConfiguration;
@@ -1045,7 +1070,7 @@ declare namespace QBusiness {
      */
     displayName: RetrieverName;
     /**
-     * The ARN of an IAM role used by Amazon Q to access the basic authentication credentials stored in a Secrets Manager secret.
+     * The ARN of an IAM role used by Amazon Q Business to access the basic authentication credentials stored in a Secrets Manager secret.
      */
     roleArn?: RoleArn;
     /**
@@ -1073,7 +1098,7 @@ declare namespace QBusiness {
      */
     applicationId: ApplicationId;
     /**
-     * A token that you provide to identify the request to create your Amazon Q user mapping.
+     * A token that you provide to identify the request to create your Amazon Q Business user mapping.
      */
     clientToken?: ClientToken;
     /**
@@ -1090,67 +1115,78 @@ declare namespace QBusiness {
   }
   export interface CreateWebExperienceRequest {
     /**
-     * The identifier of the Amazon Q web experience.
+     * The identifier of the Amazon Q Business web experience.
      */
     applicationId: ApplicationId;
     /**
-     * A token you provide to identify a request to create an Amazon Q web experience. 
+     * A token you provide to identify a request to create an Amazon Q Business web experience. 
      */
     clientToken?: ClientToken;
+    /**
+     * The Amazon Resource Name (ARN) of the service role attached to your web experience.
+     */
+    roleArn?: RoleArn;
     /**
      * Determines whether sample prompts are enabled in the web experience for an end user.
      */
     samplePromptsControlMode?: WebExperienceSamplePromptsControlMode;
     /**
-     * A subtitle to personalize your Amazon Q web experience.
+     * A subtitle to personalize your Amazon Q Business web experience.
      */
     subtitle?: WebExperienceSubtitle;
     /**
-     * A list of key-value pairs that identify or categorize your Amazon Q web experience. You can also use tags to help control access to the web experience. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @.
+     * A list of key-value pairs that identify or categorize your Amazon Q Business web experience. You can also use tags to help control access to the web experience. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @.
      */
     tags?: Tags;
     /**
-     * The title for your Amazon Q web experience.
+     * The title for your Amazon Q Business web experience.
      */
     title?: WebExperienceTitle;
     /**
-     * The customized welcome message for end users of an Amazon Q web experience.
+     * The customized welcome message for end users of an Amazon Q Business web experience.
      */
     welcomeMessage?: WebExperienceWelcomeMessage;
   }
   export interface CreateWebExperienceResponse {
     /**
-     *  The Amazon Resource Name (ARN) of an Amazon Q web experience.
+     *  The Amazon Resource Name (ARN) of an Amazon Q Business web experience.
      */
     webExperienceArn?: WebExperienceArn;
     /**
-     * The identifier of the Amazon Q web experience.
+     * The identifier of the Amazon Q Business web experience.
      */
     webExperienceId?: WebExperienceId;
   }
+  export interface CreatorModeConfiguration {
+    /**
+     * Status information about whether CREATOR_MODE has been enabled or disabled. The default status is DISABLED.
+     */
+    creatorModeControl: CreatorModeControl;
+  }
+  export type CreatorModeControl = "ENABLED"|"DISABLED"|string;
   export interface DataSource {
     /**
-     * The Unix timestamp when the Amazon Q data source was created.
+     * The Unix timestamp when the Amazon Q Business data source was created.
      */
     createdAt?: Timestamp;
     /**
-     * The identifier of the Amazon Q data source.
+     * The identifier of the Amazon Q Business data source.
      */
     dataSourceId?: DataSourceId;
     /**
-     * The name of the Amazon Q data source.
+     * The name of the Amazon Q Business data source.
      */
     displayName?: DataSourceName;
     /**
-     * The status of the Amazon Q data source.
+     * The status of the Amazon Q Business data source.
      */
     status?: DataSourceStatus;
     /**
-     * The type of the Amazon Q data source.
+     * The type of the Amazon Q Business data source.
      */
     type?: String;
     /**
-     * The Unix timestamp when the Amazon Q data source was last updated. 
+     * The Unix timestamp when the Amazon Q Business data source was last updated. 
      */
     updatedAt?: Timestamp;
   }
@@ -1218,7 +1254,7 @@ declare namespace QBusiness {
   export type DataSourceUserId = string;
   export interface DataSourceVpcConfiguration {
     /**
-     * A list of identifiers of security groups within your Amazon VPC. The security groups should enable Amazon Q to connect to the data source.
+     * A list of identifiers of security groups within your Amazon VPC. The security groups should enable Amazon Q Business to connect to the data source.
      */
     securityGroupIds: SecurityGroupIds;
     /**
@@ -1239,7 +1275,7 @@ declare namespace QBusiness {
   }
   export interface DeleteApplicationRequest {
     /**
-     * The identifier of the Amazon Q application.
+     * The identifier of the Amazon Q Business application.
      */
     applicationId: ApplicationId;
   }
@@ -1255,23 +1291,23 @@ declare namespace QBusiness {
   }
   export interface DeleteConversationRequest {
     /**
-     * The identifier of the Amazon Q application associated with the conversation.
+     * The identifier of the Amazon Q Business application associated with the conversation.
      */
     applicationId: ApplicationId;
     /**
-     * The identifier of the Amazon Q web experience conversation being deleted.
+     * The identifier of the Amazon Q Business web experience conversation being deleted.
      */
     conversationId: ConversationId;
     /**
      * The identifier of the user who is deleting the conversation.
      */
-    userId: UserId;
+    userId?: UserId;
   }
   export interface DeleteConversationResponse {
   }
   export interface DeleteDataSourceRequest {
     /**
-     * The identifier of the Amazon Q application used with the data source connector.
+     * The identifier of the Amazon Q Business application used with the data source connector.
      */
     applicationId: ApplicationId;
     /**
@@ -1314,11 +1350,11 @@ declare namespace QBusiness {
   }
   export interface DeleteIndexRequest {
     /**
-     * The identifier of the Amazon Q application the Amazon Q index is linked to.
+     * The identifier of the Amazon Q Business application the Amazon Q Business index is linked to.
      */
     applicationId: ApplicationId;
     /**
-     * The identifier of the Amazon Q index.
+     * The identifier of the Amazon Q Business index.
      */
     indexId: IndexId;
   }
@@ -1326,7 +1362,7 @@ declare namespace QBusiness {
   }
   export interface DeletePluginRequest {
     /**
-     * The identifier the application attached to the Amazon Q plugin.
+     * The identifier the application attached to the Amazon Q Business plugin.
      */
     applicationId: ApplicationId;
     /**
@@ -1338,7 +1374,7 @@ declare namespace QBusiness {
   }
   export interface DeleteRetrieverRequest {
     /**
-     * The identifier of the Amazon Q application using the retriever.
+     * The identifier of the Amazon Q Business application using the retriever.
      */
     applicationId: ApplicationId;
     /**
@@ -1362,11 +1398,11 @@ declare namespace QBusiness {
   }
   export interface DeleteWebExperienceRequest {
     /**
-     * The identifier of the Amazon Q application linked to the Amazon Q web experience.
+     * The identifier of the Amazon Q Business application linked to the Amazon Q Business web experience.
      */
     applicationId: ApplicationId;
     /**
-     * The identifier of the Amazon Q web experience being deleted.
+     * The identifier of the Amazon Q Business web experience being deleted.
      */
     webExperienceId: WebExperienceId;
   }
@@ -1379,7 +1415,7 @@ declare namespace QBusiness {
      */
     accessConfiguration?: AccessConfiguration;
     /**
-     * Custom attributes to apply to the document for refining Amazon Q web experience responses.
+     * Custom attributes to apply to the document for refining Amazon Q Business web experience responses.
      */
     attributes?: DocumentAttributes;
     /**
@@ -1435,7 +1471,7 @@ declare namespace QBusiness {
   export type DocumentAttributeBoostingOverrideMap = {[key: string]: DocumentAttributeBoostingConfiguration};
   export interface DocumentAttributeCondition {
     /**
-     * The identifier of the document attribute used for the condition. For example, 'Source_URI' could be an identifier for the attribute or metadata field that contains source URIs associated with the documents. Amazon Q currently doesn't support _document_body as an attribute key used for the condition.
+     * The identifier of the document attribute used for the condition. For example, 'Source_URI' could be an identifier for the attribute or metadata field that contains source URIs associated with the documents. Amazon Q Business currently doesn't support _document_body as an attribute key used for the condition.
      */
     key: DocumentAttributeKey;
     /**
@@ -1494,7 +1530,7 @@ declare namespace QBusiness {
   export type DocumentAttributes = DocumentAttribute[];
   export interface DocumentContent {
     /**
-     * The contents of the document. Documents passed to the blob parameter must be base64 encoded. Your code might not need to encode the document file bytes if you're using an Amazon Web Services SDK to call Amazon Q APIs. If you are calling the Amazon Q endpoint directly using REST, you must base64 encode the contents before sending.
+     * The contents of the document. Documents passed to the blob parameter must be base64 encoded. Your code might not need to encode the document file bytes if you're using an Amazon Web Services SDK to call Amazon Q Business APIs. If you are calling the Amazon Q Business endpoint directly using REST, you must base64 encode the contents before sending.
      */
     blob?: _Blob;
     /**
@@ -1529,7 +1565,7 @@ declare namespace QBusiness {
   export type DocumentEnrichmentConditionOperator = "GREATER_THAN"|"GREATER_THAN_OR_EQUALS"|"LESS_THAN"|"LESS_THAN_OR_EQUALS"|"EQUALS"|"NOT_EQUALS"|"CONTAINS"|"NOT_CONTAINS"|"EXISTS"|"NOT_EXISTS"|"BEGINS_WITH"|string;
   export interface DocumentEnrichmentConfiguration {
     /**
-     * Configuration information to alter document attributes or metadata fields and content when ingesting documents into Amazon Q.
+     * Configuration information to alter document attributes or metadata fields and content when ingesting documents into Amazon Q Business.
      */
     inlineConfigurations?: InlineDocumentEnrichmentConfigurations;
     postExtractionHookConfiguration?: HookConfiguration;
@@ -1551,7 +1587,7 @@ declare namespace QBusiness {
   export type EligibleDataSources = EligibleDataSource[];
   export interface EncryptionConfiguration {
     /**
-     * The identifier of the KMS key. Amazon Q doesn't support asymmetric keys.
+     * The identifier of the KMS key. Amazon Q Business doesn't support asymmetric keys.
      */
     kmsKeyId?: KmsKeyId;
   }
@@ -1572,7 +1608,7 @@ declare namespace QBusiness {
   export type ExecutionId = string;
   export interface FailedDocument {
     /**
-     * The identifier of the Amazon Q data source connector that contains the failed document.
+     * The identifier of the Amazon Q Business data source connector that contains the failed document.
      */
     dataSourceId?: DataSourceId;
     /**
@@ -1580,24 +1616,24 @@ declare namespace QBusiness {
      */
     error?: ErrorDetail;
     /**
-     * The identifier of the document that couldn't be removed from the Amazon Q index.
+     * The identifier of the document that couldn't be removed from the Amazon Q Business index.
      */
     id?: DocumentId;
   }
   export type FailedDocuments = FailedDocument[];
   export interface GetApplicationRequest {
     /**
-     * The identifier of the Amazon Q application.
+     * The identifier of the Amazon Q Business application.
      */
     applicationId: ApplicationId;
   }
   export interface GetApplicationResponse {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Q application.
+     * The Amazon Resource Name (ARN) of the Amazon Q Business application.
      */
     applicationArn?: ApplicationArn;
     /**
-     * The identifier of the Amazon Q application.
+     * The identifier of the Amazon Q Business application.
      */
     applicationId?: ApplicationId;
     /**
@@ -1605,19 +1641,19 @@ declare namespace QBusiness {
      */
     attachmentsConfiguration?: AppliedAttachmentsConfiguration;
     /**
-     * The Unix timestamp when the Amazon Q application was last updated.
+     * The Unix timestamp when the Amazon Q Business application was last updated.
      */
     createdAt?: Timestamp;
     /**
-     * A description for the Amazon Q application.
+     * A description for the Amazon Q Business application.
      */
     description?: Description;
     /**
-     * The name of the Amazon Q application.
+     * The name of the Amazon Q Business application.
      */
     displayName?: ApplicationName;
     /**
-     * The identifier of the Amazon Web Services KMS key that is used to encrypt your data. Amazon Q doesn't support asymmetric keys.
+     * The identifier of the Amazon Web Services KMS key that is used to encrypt your data. Amazon Q Business doesn't support asymmetric keys.
      */
     encryptionConfiguration?: EncryptionConfiguration;
     /**
@@ -1625,15 +1661,19 @@ declare namespace QBusiness {
      */
     error?: ErrorDetail;
     /**
+     * The Amazon Resource Name (ARN) of the AWS IAM Identity Center instance attached to your Amazon Q Business application.
+     */
+    identityCenterApplicationArn?: IdcApplicationArn;
+    /**
      * The Amazon Resource Name (ARN) of the IAM with permissions to access your CloudWatch logs and metrics.
      */
     roleArn?: RoleArn;
     /**
-     * The status of the Amazon Q application.
+     * The status of the Amazon Q Business application.
      */
     status?: ApplicationStatus;
     /**
-     * The Unix timestamp when the Amazon Q application was last updated.
+     * The Unix timestamp when the Amazon Q Business application was last updated.
      */
     updatedAt?: Timestamp;
   }
@@ -1647,7 +1687,7 @@ declare namespace QBusiness {
      */
     maxResults?: MaxResultsIntegerForGetTopicConfigurations;
     /**
-     * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q returns a pagination token in the response. You can use this pagination token to retrieve the next set of Amazon Q chat controls configured.
+     * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response. You can use this pagination token to retrieve the next set of Amazon Q Business chat controls configured.
      */
     nextToken?: NextToken;
   }
@@ -1657,21 +1697,25 @@ declare namespace QBusiness {
      */
     blockedPhrases?: BlockedPhrasesConfiguration;
     /**
-     * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q returns a pagination token in the response. You can use this pagination token to retrieve the next set of Amazon Q chat controls configured.
+     * The configuration details for CREATOR_MODE.
+     */
+    creatorModeConfiguration?: AppliedCreatorModeConfiguration;
+    /**
+     * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response. You can use this pagination token to retrieve the next set of Amazon Q Business chat controls configured.
      */
     nextToken?: NextToken;
     /**
-     * The response scope configured for a Amazon Q application. This determines whether your application uses its retrieval augmented generation (RAG) system to generate answers only from your enterprise data, or also uses the large language models (LLM) knowledge to respons to end user questions in chat.
+     * The response scope configured for a Amazon Q Business application. This determines whether your application uses its retrieval augmented generation (RAG) system to generate answers only from your enterprise data, or also uses the large language models (LLM) knowledge to respons to end user questions in chat.
      */
     responseScope?: ResponseScope;
     /**
-     * The topic specific controls configured for a Amazon Q application.
+     * The topic specific controls configured for a Amazon Q Business application.
      */
     topicConfigurations?: TopicConfigurations;
   }
   export interface GetDataSourceRequest {
     /**
-     * The identifier of the Amazon Q application.
+     * The identifier of the Amazon Q Business application.
      */
     applicationId: ApplicationId;
     /**
@@ -1685,7 +1729,7 @@ declare namespace QBusiness {
   }
   export interface GetDataSourceResponse {
     /**
-     * The identifier of the Amazon Q application.
+     * The identifier of the Amazon Q Business application.
      */
     applicationId?: ApplicationId;
     /**
@@ -1730,7 +1774,7 @@ declare namespace QBusiness {
      */
     status?: DataSourceStatus;
     /**
-     * The schedule for Amazon Q to update the index.
+     * The schedule for Amazon Q Business to update the index.
      */
     syncSchedule?: SyncSchedule;
     /**
@@ -1776,33 +1820,33 @@ declare namespace QBusiness {
   }
   export interface GetIndexRequest {
     /**
-     * The identifier of the Amazon Q application connected to the index.
+     * The identifier of the Amazon Q Business application connected to the index.
      */
     applicationId: ApplicationId;
     /**
-     * The identifier of the Amazon Q index you want information on.
+     * The identifier of the Amazon Q Business index you want information on.
      */
     indexId: IndexId;
   }
   export interface GetIndexResponse {
     /**
-     * The identifier of the Amazon Q application associated with the index.
+     * The identifier of the Amazon Q Business application associated with the index.
      */
     applicationId?: ApplicationId;
     /**
-     * The storage capacity units chosen for your Amazon Q index.
+     * The storage capacity units chosen for your Amazon Q Business index.
      */
     capacityConfiguration?: IndexCapacityConfiguration;
     /**
-     * The Unix timestamp when the Amazon Q index was created.
+     * The Unix timestamp when the Amazon Q Business index was created.
      */
     createdAt?: Timestamp;
     /**
-     * The description for the Amazon Q index.
+     * The description for the Amazon Q Business index.
      */
     description?: Description;
     /**
-     * The name of the Amazon Q index.
+     * The name of the Amazon Q Business index.
      */
     displayName?: IndexName;
     /**
@@ -1814,11 +1858,11 @@ declare namespace QBusiness {
      */
     error?: ErrorDetail;
     /**
-     *  The Amazon Resource Name (ARN) of the Amazon Q index. 
+     *  The Amazon Resource Name (ARN) of the Amazon Q Business index. 
      */
     indexArn?: IndexArn;
     /**
-     * The identifier of the Amazon Q index.
+     * The identifier of the Amazon Q Business index.
      */
     indexId?: IndexId;
     /**
@@ -1830,7 +1874,7 @@ declare namespace QBusiness {
      */
     status?: IndexStatus;
     /**
-     * The Unix timestamp when the Amazon Q index was last updated.
+     * The Unix timestamp when the Amazon Q Business index was last updated.
      */
     updatedAt?: Timestamp;
   }
@@ -1885,7 +1929,7 @@ declare namespace QBusiness {
   }
   export interface GetRetrieverRequest {
     /**
-     * The identifier of the Amazon Q application using the retriever.
+     * The identifier of the Amazon Q Business application using the retriever.
      */
     applicationId: ApplicationId;
     /**
@@ -1895,7 +1939,7 @@ declare namespace QBusiness {
   }
   export interface GetRetrieverResponse {
     /**
-     * The identifier of the Amazon Q application using the retriever. 
+     * The identifier of the Amazon Q Business application using the retriever. 
      */
     applicationId?: ApplicationId;
     configuration?: RetrieverConfiguration;
@@ -1950,21 +1994,21 @@ declare namespace QBusiness {
   }
   export interface GetWebExperienceRequest {
     /**
-     * The identifier of the Amazon Q application linked to the web experience.
+     * The identifier of the Amazon Q Business application linked to the web experience.
      */
     applicationId: ApplicationId;
     /**
-     * The identifier of the Amazon Q web experience. 
+     * The identifier of the Amazon Q Business web experience. 
      */
     webExperienceId: WebExperienceId;
   }
   export interface GetWebExperienceResponse {
     /**
-     * The identifier of the Amazon Q application linked to the web experience.
+     * The identifier of the Amazon Q Business application linked to the web experience.
      */
     applicationId?: ApplicationId;
     /**
-     * The authentication configuration information for your Amazon Q web experience.
+     * The authentication configuration information for your Amazon Q Business web experience.
      */
     authenticationConfiguration?: WebExperienceAuthConfiguration;
     /**
@@ -1972,7 +2016,7 @@ declare namespace QBusiness {
      */
     createdAt?: Timestamp;
     /**
-     * The endpoint of your Amazon Q web experience.
+     * The endpoint of your Amazon Q Business web experience.
      */
     defaultEndpoint?: Url;
     /**
@@ -1980,19 +2024,23 @@ declare namespace QBusiness {
      */
     error?: ErrorDetail;
     /**
+     *  The Amazon Resource Name (ARN) of the service role attached to your web experience.
+     */
+    roleArn?: RoleArn;
+    /**
      * Determines whether sample prompts are enabled in the web experience for an end user.
      */
     samplePromptsControlMode?: WebExperienceSamplePromptsControlMode;
     /**
-     * The current status of the Amazon Q web experience. When the Status field value is FAILED, the ErrorMessage field contains a description of the error that caused the data source connector to fail. 
+     * The current status of the Amazon Q Business web experience. When the Status field value is FAILED, the ErrorMessage field contains a description of the error that caused the data source connector to fail. 
      */
     status?: WebExperienceStatus;
     /**
-     * The subtitle for your Amazon Q web experience. 
+     * The subtitle for your Amazon Q Business web experience. 
      */
     subtitle?: WebExperienceSubtitle;
     /**
-     * The title for your Amazon Q web experience. 
+     * The title for your Amazon Q Business web experience. 
      */
     title?: WebExperienceTitle;
     /**
@@ -2000,15 +2048,15 @@ declare namespace QBusiness {
      */
     updatedAt?: Timestamp;
     /**
-     * The Amazon Resource Name (ARN) of the role with the permission to access the Amazon Q web experience and required resources.
+     * The Amazon Resource Name (ARN) of the role with the permission to access the Amazon Q Business web experience and required resources.
      */
     webExperienceArn?: WebExperienceArn;
     /**
-     * The identifier of the Amazon Q web experience.
+     * The identifier of the Amazon Q Business web experience.
      */
     webExperienceId?: WebExperienceId;
     /**
-     * The customized welcome message for end users of an Amazon Q web experience.
+     * The customized welcome message for end users of an Amazon Q Business web experience.
      */
     welcomeMessage?: WebExperienceWelcomeMessage;
   }
@@ -2030,7 +2078,7 @@ declare namespace QBusiness {
      */
     errorDetail?: ErrorDetail;
     /**
-     * The Unix timestamp when the Amazon Q application was last updated.
+     * The Unix timestamp when the Amazon Q Business application was last updated.
      */
     lastUpdatedAt?: Timestamp;
     /**
@@ -2048,7 +2096,7 @@ declare namespace QBusiness {
   export type GroupSummaryList = GroupSummary[];
   export interface HookConfiguration {
     /**
-     * The condition used for when a Lambda function should be invoked. For example, you can specify a condition that if there are empty date-time values, then Amazon Q should invoke a function that inserts the current date-time.
+     * The condition used for when a Lambda function should be invoked. For example, you can specify a condition that if there are empty date-time values, then Amazon Q Business should invoke a function that inserts the current date-time.
      */
     invocationCondition?: DocumentAttributeCondition;
     /**
@@ -2064,6 +2112,7 @@ declare namespace QBusiness {
      */
     s3BucketName?: S3BucketName;
   }
+  export type IdcApplicationArn = string;
   export interface Index {
     /**
      * The Unix timestamp when the index was created.
@@ -2089,7 +2138,7 @@ declare namespace QBusiness {
   export type IndexArn = string;
   export interface IndexCapacityConfiguration {
     /**
-     * The number of storage units configured for an Amazon Q index.
+     * The number of storage units configured for an Amazon Q Business index.
      */
     units?: IndexCapacityInteger;
   }
@@ -2115,6 +2164,7 @@ declare namespace QBusiness {
     target?: DocumentAttributeTarget;
   }
   export type InlineDocumentEnrichmentConfigurations = InlineDocumentEnrichmentConfiguration[];
+  export type InstanceArn = string;
   export type Integer = number;
   export interface KendraIndexConfiguration {
     /**
@@ -2127,55 +2177,55 @@ declare namespace QBusiness {
   export type LambdaArn = string;
   export interface ListApplicationsRequest {
     /**
-     * The maximum number of Amazon Q applications to return.
+     * The maximum number of Amazon Q Business applications to return.
      */
     maxResults?: MaxResultsIntegerForListApplications;
     /**
-     * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q returns a pagination token in the response. You can use this pagination token to retrieve the next set of Amazon Q applications.
+     * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response. You can use this pagination token to retrieve the next set of Amazon Q Business applications.
      */
     nextToken?: NextToken;
   }
   export interface ListApplicationsResponse {
     /**
-     * An array of summary information on the configuration of one or more Amazon Q applications.
+     * An array of summary information on the configuration of one or more Amazon Q Business applications.
      */
     applications?: Applications;
     /**
-     * If the response is truncated, Amazon Q returns this token. You can use this token in a subsequent request to retrieve the next set of applications.
+     * If the response is truncated, Amazon Q Business returns this token. You can use this token in a subsequent request to retrieve the next set of applications.
      */
     nextToken?: NextToken;
   }
   export interface ListConversationsRequest {
     /**
-     * The identifier of the Amazon Q application.
+     * The identifier of the Amazon Q Business application.
      */
     applicationId: ApplicationId;
     /**
-     * The maximum number of Amazon Q conversations to return.
+     * The maximum number of Amazon Q Business conversations to return.
      */
     maxResults?: MaxResultsIntegerForListConversations;
     /**
-     * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q returns a pagination token in the response. You can use this pagination token to retrieve the next set of Amazon Q conversations.
+     * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response. You can use this pagination token to retrieve the next set of Amazon Q Business conversations.
      */
     nextToken?: NextToken;
     /**
-     * The identifier of the user involved in the Amazon Q web experience conversation. 
+     * The identifier of the user involved in the Amazon Q Business web experience conversation. 
      */
-    userId: UserId;
+    userId?: UserId;
   }
   export interface ListConversationsResponse {
     /**
-     * An array of summary information on the configuration of one or more Amazon Q web experiences.
+     * An array of summary information on the configuration of one or more Amazon Q Business web experiences.
      */
     conversations?: Conversations;
     /**
-     * If the response is truncated, Amazon Q returns this token, which you can use in a later request to list the next set of messages.
+     * If the response is truncated, Amazon Q Business returns this token, which you can use in a later request to list the next set of messages.
      */
     nextToken?: NextToken;
   }
   export interface ListDataSourceSyncJobsRequest {
     /**
-     * The identifier of the Amazon Q application connected to the data source.
+     * The identifier of the Amazon Q Business application connected to the data source.
      */
     applicationId: ApplicationId;
     /**
@@ -2187,7 +2237,7 @@ declare namespace QBusiness {
      */
     endTime?: Timestamp;
     /**
-     * The identifier of the index used with the Amazon Q data source connector.
+     * The identifier of the index used with the Amazon Q Business data source connector.
      */
     indexId: IndexId;
     /**
@@ -2195,7 +2245,7 @@ declare namespace QBusiness {
      */
     maxResults?: MaxResultsIntegerForListDataSourcesSyncJobs;
     /**
-     * If the maxResults response was incpmplete because there is more data to retriever, Amazon Q returns a pagination token in the response. You can use this pagination token to retrieve the next set of responses.
+     * If the maxResults response was incpmplete because there is more data to retriever, Amazon Q Business returns a pagination token in the response. You can use this pagination token to retrieve the next set of responses.
      */
     nextToken?: NextToken;
     /**
@@ -2213,13 +2263,13 @@ declare namespace QBusiness {
      */
     history?: DataSourceSyncJobs;
     /**
-     * If the response is truncated, Amazon Q returns this token. You can use this token in any subsequent request to retrieve the next set of jobs.
+     * If the response is truncated, Amazon Q Business returns this token. You can use this token in any subsequent request to retrieve the next set of jobs.
      */
     nextToken?: NextToken;
   }
   export interface ListDataSourcesRequest {
     /**
-     * The identifier of the Amazon Q application linked to the data source connectors.
+     * The identifier of the Amazon Q Business application linked to the data source connectors.
      */
     applicationId: ApplicationId;
     /**
@@ -2231,7 +2281,7 @@ declare namespace QBusiness {
      */
     maxResults?: MaxResultsIntegerForListDataSources;
     /**
-     * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q returns a pagination token in the response. You can use this pagination token to retrieve the next set of Amazon Q data source connectors.
+     * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response. You can use this pagination token to retrieve the next set of Amazon Q Business data source connectors.
      */
     nextToken?: NextToken;
   }
@@ -2241,7 +2291,7 @@ declare namespace QBusiness {
      */
     dataSources?: DataSources;
     /**
-     * If the response is truncated, Amazon Q returns this token. You can use this token in a subsequent request to retrieve the next set of data source connectors.
+     * If the response is truncated, Amazon Q Business returns this token. You can use this token in a subsequent request to retrieve the next set of data source connectors.
      */
     nextToken?: NextToken;
   }
@@ -2263,7 +2313,7 @@ declare namespace QBusiness {
      */
     maxResults?: MaxResultsIntegerForListDocuments;
     /**
-     * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q returns a pagination token in the response. You can use this pagination token to retrieve the next set of documents.
+     * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response. You can use this pagination token to retrieve the next set of documents.
      */
     nextToken?: NextToken;
   }
@@ -2273,7 +2323,7 @@ declare namespace QBusiness {
      */
     documentDetailList?: DocumentDetailList;
     /**
-     * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q returns a pagination token in the response. You can use this pagination token to retrieve the next set of documents.
+     * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response. You can use this pagination token to retrieve the next set of documents.
      */
     nextToken?: NextToken;
   }
@@ -2295,7 +2345,7 @@ declare namespace QBusiness {
      */
     maxResults?: MaxResultsIntegerForListGroupsRequest;
     /**
-     * If the previous response was incomplete (because there is more data to retrieve), Amazon Q returns a pagination token in the response. You can use this pagination token to retrieve the next set of groups that are mapped to users.
+     * If the previous response was incomplete (because there is more data to retrieve), Amazon Q Business returns a pagination token in the response. You can use this pagination token to retrieve the next set of groups that are mapped to users.
      */
     nextToken?: NextToken;
     /**
@@ -2309,13 +2359,13 @@ declare namespace QBusiness {
      */
     items?: GroupSummaryList;
     /**
-     * If the response is truncated, Amazon Q returns this token that you can use in the subsequent request to retrieve the next set of groups that are mapped to users.
+     * If the response is truncated, Amazon Q Business returns this token that you can use in the subsequent request to retrieve the next set of groups that are mapped to users.
      */
     nextToken?: NextToken;
   }
   export interface ListIndicesRequest {
     /**
-     * The identifier of the Amazon Q application connected to the index.
+     * The identifier of the Amazon Q Business application connected to the index.
      */
     applicationId: ApplicationId;
     /**
@@ -2323,7 +2373,7 @@ declare namespace QBusiness {
      */
     maxResults?: MaxResultsIntegerForListIndices;
     /**
-     * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q returns a pagination token in the response. You can use this pagination token to retrieve the next set of Amazon Q indices.
+     * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response. You can use this pagination token to retrieve the next set of Amazon Q Business indices.
      */
     nextToken?: NextToken;
   }
@@ -2333,17 +2383,17 @@ declare namespace QBusiness {
      */
     indices?: Indices;
     /**
-     * If the response is truncated, Amazon Q returns this token that you can use in the subsequent request to retrieve the next set of indexes.
+     * If the response is truncated, Amazon Q Business returns this token that you can use in the subsequent request to retrieve the next set of indexes.
      */
     nextToken?: NextToken;
   }
   export interface ListMessagesRequest {
     /**
-     * The identifier for the Amazon Q application.
+     * The identifier for the Amazon Q Business application.
      */
     applicationId: ApplicationId;
     /**
-     * The identifier of the Amazon Q web experience conversation.
+     * The identifier of the Amazon Q Business web experience conversation.
      */
     conversationId: ConversationId;
     /**
@@ -2351,13 +2401,13 @@ declare namespace QBusiness {
      */
     maxResults?: MaxResultsIntegerForListMessages;
     /**
-     * If the number of retrievers returned exceeds maxResults, Amazon Q returns a next token as a pagination token to retrieve the next set of messages.
+     * If the number of retrievers returned exceeds maxResults, Amazon Q Business returns a next token as a pagination token to retrieve the next set of messages.
      */
     nextToken?: NextToken;
     /**
-     * The identifier of the user involved in the Amazon Q web experience conversation.
+     * The identifier of the user involved in the Amazon Q Business web experience conversation.
      */
-    userId: UserId;
+    userId?: UserId;
   }
   export interface ListMessagesResponse {
     /**
@@ -2365,7 +2415,7 @@ declare namespace QBusiness {
      */
     messages?: Messages;
     /**
-     * If the response is truncated, Amazon Q returns this token, which you can use in a later request to list the next set of messages.
+     * If the response is truncated, Amazon Q Business returns this token, which you can use in a later request to list the next set of messages.
      */
     nextToken?: NextToken;
   }
@@ -2379,13 +2429,13 @@ declare namespace QBusiness {
      */
     maxResults?: MaxResultsIntegerForListPlugins;
     /**
-     * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q returns a pagination token in the response. You can use this pagination token to retrieve the next set of plugins.
+     * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response. You can use this pagination token to retrieve the next set of plugins.
      */
     nextToken?: NextToken;
   }
   export interface ListPluginsResponse {
     /**
-     * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q returns a pagination token in the response. You can use this pagination token to retrieve the next set of plugins.
+     * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response. You can use this pagination token to retrieve the next set of plugins.
      */
     nextToken?: NextToken;
     /**
@@ -2395,7 +2445,7 @@ declare namespace QBusiness {
   }
   export interface ListRetrieversRequest {
     /**
-     * The identifier of the Amazon Q application using the retriever.
+     * The identifier of the Amazon Q Business application using the retriever.
      */
     applicationId: ApplicationId;
     /**
@@ -2403,13 +2453,13 @@ declare namespace QBusiness {
      */
     maxResults?: MaxResultsIntegerForListRetrieversRequest;
     /**
-     * If the number of retrievers returned exceeds maxResults, Amazon Q returns a next token as a pagination token to retrieve the next set of retrievers.
+     * If the number of retrievers returned exceeds maxResults, Amazon Q Business returns a next token as a pagination token to retrieve the next set of retrievers.
      */
     nextToken?: NextToken;
   }
   export interface ListRetrieversResponse {
     /**
-     * If the response is truncated, Amazon Q returns this token, which you can use in a later request to list the next set of retrievers.
+     * If the response is truncated, Amazon Q Business returns this token, which you can use in a later request to list the next set of retrievers.
      */
     nextToken?: NextToken;
     /**
@@ -2419,37 +2469,37 @@ declare namespace QBusiness {
   }
   export interface ListTagsForResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Q application or data source to get a list of tags for.
+     * The Amazon Resource Name (ARN) of the Amazon Q Business application or data source to get a list of tags for.
      */
     resourceARN: AmazonResourceName;
   }
   export interface ListTagsForResourceResponse {
     /**
-     * A list of tags associated with the Amazon Q application or data source.
+     * A list of tags associated with the Amazon Q Business application or data source.
      */
     tags?: Tags;
   }
   export interface ListWebExperiencesRequest {
     /**
-     * The identifier of the Amazon Q application linked to the listed web experiences.
+     * The identifier of the Amazon Q Business application linked to the listed web experiences.
      */
     applicationId: ApplicationId;
     /**
-     * The maximum number of Amazon Q Web Experiences to return.
+     * The maximum number of Amazon Q Business Web Experiences to return.
      */
     maxResults?: MaxResultsIntegerForListWebExperiencesRequest;
     /**
-     * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q returns a pagination token in the response. You can use this pagination token to retrieve the next set of Amazon Q conversations.
+     * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response. You can use this pagination token to retrieve the next set of Amazon Q Business conversations.
      */
     nextToken?: NextToken;
   }
   export interface ListWebExperiencesResponse {
     /**
-     * If the response is truncated, Amazon Q returns this token, which you can use in a later request to list the next set of messages.
+     * If the response is truncated, Amazon Q Business returns this token, which you can use in a later request to list the next set of messages.
      */
     nextToken?: NextToken;
     /**
-     * An array of summary information for one or more Amazon Q experiences.
+     * An array of summary information for one or more Amazon Q Business experiences.
      */
     webExperiences?: WebExperiences;
   }
@@ -2494,27 +2544,27 @@ declare namespace QBusiness {
     actionExecution?: ActionExecution;
     actionReview?: ActionReview;
     /**
-     * A file directly uploaded into an Amazon Q web experience chat.
+     * A file directly uploaded into an Amazon Q Business web experience chat.
      */
     attachments?: AttachmentsOutput;
     /**
-     * The content of the Amazon Q web experience message.
+     * The content of the Amazon Q Business web experience message.
      */
     body?: MessageBody;
     /**
-     * The identifier of the Amazon Q web experience message.
+     * The identifier of the Amazon Q Business web experience message.
      */
     messageId?: String;
     /**
-     * The source documents used to generate Amazon Q web experience message.
+     * The source documents used to generate Amazon Q Business web experience message.
      */
     sourceAttribution?: SourceAttributions;
     /**
-     * The timestamp of the first Amazon Q web experience message.
+     * The timestamp of the first Amazon Q Business web experience message.
      */
     time?: Timestamp;
     /**
-     * The type of Amazon Q message, whether HUMAN or AI generated.
+     * The type of Amazon Q Business message, whether HUMAN or AI generated.
      */
     type?: MessageType;
   }
@@ -2546,11 +2596,11 @@ declare namespace QBusiness {
   export type MetricValue = string;
   export interface NativeIndexConfiguration {
     /**
-     * Overrides the default boosts applied by Amazon Q to supported document attribute data types.
+     * Overrides the default boosts applied by Amazon Q Business to supported document attribute data types.
      */
     boostingOverride?: DocumentAttributeBoostingOverrideMap;
     /**
-     * The identifier for the Amazon Q index.
+     * The identifier for the Amazon Q Business index.
      */
     indexId: IndexId;
   }
@@ -2568,7 +2618,7 @@ declare namespace QBusiness {
   export type NumberAttributeBoostingType = "PRIORITIZE_LARGER_VALUES"|"PRIORITIZE_SMALLER_VALUES"|string;
   export interface OAuth2ClientCredentialConfiguration {
     /**
-     * The ARN of an IAM role used by Amazon Q to access the OAuth 2.0 authentication credentials stored in a Secrets Manager secret.
+     * The ARN of an IAM role used by Amazon Q Business to access the OAuth 2.0 authentication credentials stored in a Secrets Manager secret.
      */
     roleArn: RoleArn;
     /**
@@ -2616,6 +2666,12 @@ declare namespace QBusiness {
      * Information about the OAuth 2.0 authentication credential/token used to configure a plugin.
      */
     oAuth2ClientCredentialConfiguration?: OAuth2ClientCredentialConfiguration;
+  }
+  export interface PluginConfiguration {
+    /**
+     *  The identifier of the plugin you want to use.
+     */
+    pluginId: PluginId;
   }
   export type PluginId = string;
   export type PluginName = string;
@@ -2685,7 +2741,7 @@ declare namespace QBusiness {
     /**
      * The identifier of the user giving the feedback.
      */
-    userId: UserId;
+    userId?: UserId;
   }
   export interface PutGroupRequest {
     /**
@@ -2716,7 +2772,7 @@ declare namespace QBusiness {
   export type ResponseScope = "ENTERPRISE_CONTENT_ONLY"|"EXTENDED_KNOWLEDGE_ENABLED"|string;
   export interface Retriever {
     /**
-     * The identifier of the Amazon Q application using the retriever.
+     * The identifier of the Amazon Q Business application using the retriever.
      */
     applicationId?: ApplicationId;
     /**
@@ -2724,7 +2780,7 @@ declare namespace QBusiness {
      */
     displayName?: RetrieverName;
     /**
-     * The identifier of the retriever used by your Amazon Q application.
+     * The identifier of the retriever used by your Amazon Q Business application.
      */
     retrieverId?: RetrieverId;
     /**
@@ -2739,11 +2795,11 @@ declare namespace QBusiness {
   export type RetrieverArn = string;
   export interface RetrieverConfiguration {
     /**
-     * Provides information on how the Amazon Kendra index used as a retriever for your Amazon Q application is configured.
+     * Provides information on how the Amazon Kendra index used as a retriever for your Amazon Q Business application is configured.
      */
     kendraIndexConfiguration?: KendraIndexConfiguration;
     /**
-     * Provides information on how a Amazon Q index used as a retriever for your Amazon Q application is configured.
+     * Provides information on how a Amazon Q Business index used as a retriever for your Amazon Q Business application is configured.
      */
     nativeIndexConfiguration?: NativeIndexConfiguration;
   }
@@ -2773,7 +2829,7 @@ declare namespace QBusiness {
   }
   export interface RuleConfiguration {
     /**
-     * A rule for configuring how Amazon Q responds when it encounters a a blocked topic.
+     * A rule for configuring how Amazon Q Business responds when it encounters a a blocked topic.
      */
     contentBlockerRule?: ContentBlockerRule;
     contentRetrievalRule?: ContentRetrievalRule;
@@ -2799,7 +2855,7 @@ declare namespace QBusiness {
      */
     metadataXML: SamlMetadataXML;
     /**
-     * The Amazon Resource Name (ARN) of an IAM role assumed by users when they authenticate into their Amazon Q web experience, containing the relevant Amazon Q permissions for conversing with Amazon Q.
+     * The Amazon Resource Name (ARN) of an IAM role assumed by users when they authenticate into their Amazon Q Business web experience, containing the relevant Amazon Q Business permissions for conversing with Amazon Q Business.
      */
     roleArn: RoleArn;
     /**
@@ -2817,7 +2873,7 @@ declare namespace QBusiness {
   export type SecurityGroupIds = SecurityGroupId[];
   export interface SourceAttribution {
     /**
-     * The number attached to a citation in an Amazon Q generated response.
+     * The number attached to a citation in an Amazon Q Business generated response.
      */
     citationNumber?: Integer;
     /**
@@ -2829,22 +2885,22 @@ declare namespace QBusiness {
      */
     textMessageSegments?: TextSegmentList;
     /**
-     * The title of the document which is the source for the Amazon Q generated response. 
+     * The title of the document which is the source for the Amazon Q Business generated response. 
      */
     title?: String;
     /**
-     * The Unix timestamp when the Amazon Q application was last updated.
+     * The Unix timestamp when the Amazon Q Business application was last updated.
      */
     updatedAt?: Timestamp;
     /**
-     * The URL of the document which is the source for the Amazon Q generated response. 
+     * The URL of the document which is the source for the Amazon Q Business generated response. 
      */
     url?: String;
   }
   export type SourceAttributions = SourceAttribution[];
   export interface StartDataSourceSyncJobRequest {
     /**
-     * The identifier of Amazon Q application the data source is connected to.
+     * The identifier of Amazon Q Business application the data source is connected to.
      */
     applicationId: ApplicationId;
     /**
@@ -2865,7 +2921,7 @@ declare namespace QBusiness {
   export type Status = "ENABLED"|"DISABLED"|string;
   export interface StopDataSourceSyncJobRequest {
     /**
-     * The identifier of the Amazon Q application that the data source is connected to.
+     * The identifier of the Amazon Q Business application that the data source is connected to.
      */
     applicationId: ApplicationId;
     /**
@@ -2873,7 +2929,7 @@ declare namespace QBusiness {
      */
     dataSourceId: DataSourceId;
     /**
-     * The identifier of the index used with the Amazon Q data source connector.
+     * The identifier of the index used with the Amazon Q Business data source connector.
      */
     indexId: IndexId;
   }
@@ -2905,7 +2961,7 @@ declare namespace QBusiness {
   export type SystemMessageOverride = string;
   export interface Tag {
     /**
-     *  The key for the tag. Keys are not case sensitive and must be unique for the Amazon Q application or data source.
+     *  The key for the tag. Keys are not case sensitive and must be unique for the Amazon Q Business application or data source.
      */
     key: TagKey;
     /**
@@ -2917,11 +2973,11 @@ declare namespace QBusiness {
   export type TagKeys = TagKey[];
   export interface TagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Q application or data source to tag.
+     * The Amazon Resource Name (ARN) of the Amazon Q Business application or data source to tag.
      */
     resourceARN: AmazonResourceName;
     /**
-     * A list of tag keys to add to the Amazon Q application or data source. If a tag already exists, the existing value is replaced with the new value.
+     * A list of tag keys to add to the Amazon Q Business application or data source. If a tag already exists, the existing value is replaced with the new value.
      */
     tags: Tags;
   }
@@ -2975,11 +3031,11 @@ declare namespace QBusiness {
   export type TopicDescription = string;
   export interface UntagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Q application, or data source to remove the tag from.
+     * The Amazon Resource Name (ARN) of the Amazon Q Business application, or data source to remove the tag from.
      */
     resourceARN: AmazonResourceName;
     /**
-     * A list of tag keys to remove from the Amazon Q application or data source. If a tag key does not exist on the resource, it is ignored.
+     * A list of tag keys to remove from the Amazon Q Business application or data source. If a tag key does not exist on the resource, it is ignored.
      */
     tagKeys: TagKeys;
   }
@@ -2987,7 +3043,7 @@ declare namespace QBusiness {
   }
   export interface UpdateApplicationRequest {
     /**
-     * The identifier of the Amazon Q application.
+     * The identifier of the Amazon Q Business application.
      */
     applicationId: ApplicationId;
     /**
@@ -2995,15 +3051,15 @@ declare namespace QBusiness {
      */
     attachmentsConfiguration?: AttachmentsConfiguration;
     /**
-     * A description for the Amazon Q application.
+     * A description for the Amazon Q Business application.
      */
     description?: Description;
     /**
-     * A name for the Amazon Q application.
+     * A name for the Amazon Q Business application.
      */
     displayName?: ApplicationName;
     /**
-     * An Amazon Web Services Identity and Access Management (IAM) role that gives Amazon Q permission to access Amazon CloudWatch logs and metrics.
+     * An Amazon Web Services Identity and Access Management (IAM) role that gives Amazon Q Business permission to access Amazon CloudWatch logs and metrics.
      */
     roleArn?: RoleArn;
   }
@@ -3019,9 +3075,13 @@ declare namespace QBusiness {
      */
     blockedPhrasesConfigurationUpdate?: BlockedPhrasesConfigurationUpdate;
     /**
-     * A token that you provide to identify the request to update a Amazon Q application chat configuration.
+     * A token that you provide to identify the request to update a Amazon Q Business application chat configuration.
      */
     clientToken?: ClientToken;
+    /**
+     * The configuration details for CREATOR_MODE.
+     */
+    creatorModeConfiguration?: CreatorModeConfiguration;
     /**
      * The response scope configured for your application. This determines whether your application uses its retrieval augmented generation (RAG) system to generate answers only from your enterprise data, or also uses the large language models (LLM) knowledge to respons to end user questions in chat.
      */
@@ -3039,7 +3099,7 @@ declare namespace QBusiness {
   }
   export interface UpdateDataSourceRequest {
     /**
-     *  The identifier of the Amazon Q application the data source is attached to.
+     *  The identifier of the Amazon Q Business application the data source is attached to.
      */
     applicationId: ApplicationId;
     configuration?: DataSourceConfiguration;
@@ -3074,19 +3134,19 @@ declare namespace QBusiness {
   }
   export interface UpdateIndexRequest {
     /**
-     * The identifier of the Amazon Q application connected to the index.
+     * The identifier of the Amazon Q Business application connected to the index.
      */
     applicationId: ApplicationId;
     /**
-     * The storage capacity units you want to provision for your Amazon Q index. You can add and remove capacity to fit your usage needs.
+     * The storage capacity units you want to provision for your Amazon Q Business index. You can add and remove capacity to fit your usage needs.
      */
     capacityConfiguration?: IndexCapacityConfiguration;
     /**
-     * The description of the Amazon Q index.
+     * The description of the Amazon Q Business index.
      */
     description?: Description;
     /**
-     * The name of the Amazon Q index.
+     * The name of the Amazon Q Business index.
      */
     displayName?: ApplicationName;
     /**
@@ -3094,7 +3154,7 @@ declare namespace QBusiness {
      */
     documentAttributeConfigurations?: DocumentAttributeConfigurations;
     /**
-     * The identifier of the Amazon Q index.
+     * The identifier of the Amazon Q Business index.
      */
     indexId: IndexId;
   }
@@ -3130,7 +3190,7 @@ declare namespace QBusiness {
   }
   export interface UpdateRetrieverRequest {
     /**
-     * The identifier of your Amazon Q application.
+     * The identifier of your Amazon Q Business application.
      */
     applicationId: ApplicationId;
     configuration?: RetrieverConfiguration;
@@ -3183,11 +3243,11 @@ declare namespace QBusiness {
   }
   export interface UpdateWebExperienceRequest {
     /**
-     * The identifier of the Amazon Q application attached to the web experience.
+     * The identifier of the Amazon Q Business application attached to the web experience.
      */
     applicationId: ApplicationId;
     /**
-     * The authentication configuration of the Amazon Q web experience.
+     * The authentication configuration of the Amazon Q Business web experience.
      */
     authenticationConfiguration?: WebExperienceAuthConfiguration;
     /**
@@ -3195,19 +3255,19 @@ declare namespace QBusiness {
      */
     samplePromptsControlMode?: WebExperienceSamplePromptsControlMode;
     /**
-     * The subtitle of the Amazon Q web experience.
+     * The subtitle of the Amazon Q Business web experience.
      */
     subtitle?: WebExperienceSubtitle;
     /**
-     * The title of the Amazon Q web experience.
+     * The title of the Amazon Q Business web experience.
      */
     title?: WebExperienceTitle;
     /**
-     * The identifier of the Amazon Q web experience.
+     * The identifier of the Amazon Q Business web experience.
      */
     webExperienceId: WebExperienceId;
     /**
-     * A customized welcome message for an end user in an Amazon Q web experience.
+     * A customized welcome message for an end user in an Amazon Q Business web experience.
      */
     welcomeMessage?: WebExperienceWelcomeMessage;
   }
@@ -3245,23 +3305,23 @@ declare namespace QBusiness {
   }
   export interface WebExperience {
     /**
-     * The Unix timestamp when the Amazon Q application was last updated.
+     * The Unix timestamp when the Amazon Q Business application was last updated.
      */
     createdAt?: Timestamp;
     /**
-     * The endpoint URLs for your Amazon Q web experience. The URLs are unique and fully hosted by Amazon Web Services.
+     * The endpoint URLs for your Amazon Q Business web experience. The URLs are unique and fully hosted by Amazon Web Services.
      */
     defaultEndpoint?: Url;
     /**
-     * The status of your Amazon Q web experience.
+     * The status of your Amazon Q Business web experience.
      */
     status?: WebExperienceStatus;
     /**
-     * The Unix timestamp when your Amazon Q web experience was updated.
+     * The Unix timestamp when your Amazon Q Business web experience was updated.
      */
     updatedAt?: Timestamp;
     /**
-     * The identifier of your Amazon Q web experience.
+     * The identifier of your Amazon Q Business web experience.
      */
     webExperienceId?: WebExperienceId;
   }
