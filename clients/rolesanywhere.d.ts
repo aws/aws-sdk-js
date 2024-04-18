@@ -28,6 +28,14 @@ declare class RolesAnywhere extends Service {
    */
   createTrustAnchor(callback?: (err: AWSError, data: RolesAnywhere.Types.TrustAnchorDetailResponse) => void): Request<RolesAnywhere.Types.TrustAnchorDetailResponse, AWSError>;
   /**
+   * Delete an entry from the attribute mapping rules enforced by a given profile.
+   */
+  deleteAttributeMapping(params: RolesAnywhere.Types.DeleteAttributeMappingRequest, callback?: (err: AWSError, data: RolesAnywhere.Types.DeleteAttributeMappingResponse) => void): Request<RolesAnywhere.Types.DeleteAttributeMappingResponse, AWSError>;
+  /**
+   * Delete an entry from the attribute mapping rules enforced by a given profile.
+   */
+  deleteAttributeMapping(callback?: (err: AWSError, data: RolesAnywhere.Types.DeleteAttributeMappingResponse) => void): Request<RolesAnywhere.Types.DeleteAttributeMappingResponse, AWSError>;
+  /**
    * Deletes a certificate revocation list (CRL).  Required permissions:  rolesanywhere:DeleteCrl. 
    */
   deleteCrl(params: RolesAnywhere.Types.ScalarCrlRequest, callback?: (err: AWSError, data: RolesAnywhere.Types.CrlDetailResponse) => void): Request<RolesAnywhere.Types.CrlDetailResponse, AWSError>;
@@ -180,6 +188,14 @@ declare class RolesAnywhere extends Service {
    */
   listTrustAnchors(callback?: (err: AWSError, data: RolesAnywhere.Types.ListTrustAnchorsResponse) => void): Request<RolesAnywhere.Types.ListTrustAnchorsResponse, AWSError>;
   /**
+   * Put an entry in the attribute mapping rules that will be enforced by a given profile. A mapping specifies a certificate field and one or more specifiers that have contextual meanings.
+   */
+  putAttributeMapping(params: RolesAnywhere.Types.PutAttributeMappingRequest, callback?: (err: AWSError, data: RolesAnywhere.Types.PutAttributeMappingResponse) => void): Request<RolesAnywhere.Types.PutAttributeMappingResponse, AWSError>;
+  /**
+   * Put an entry in the attribute mapping rules that will be enforced by a given profile. A mapping specifies a certificate field and one or more specifiers that have contextual meanings.
+   */
+  putAttributeMapping(callback?: (err: AWSError, data: RolesAnywhere.Types.PutAttributeMappingResponse) => void): Request<RolesAnywhere.Types.PutAttributeMappingResponse, AWSError>;
+  /**
    * Attaches a list of notification settings to a trust anchor. A notification setting includes information such as event name, threshold, status of the notification setting, and the channel to notify.  Required permissions:  rolesanywhere:PutNotificationSettings. 
    */
   putNotificationSettings(params: RolesAnywhere.Types.PutNotificationSettingsRequest, callback?: (err: AWSError, data: RolesAnywhere.Types.PutNotificationSettingsResponse) => void): Request<RolesAnywhere.Types.PutNotificationSettingsResponse, AWSError>;
@@ -238,8 +254,20 @@ declare class RolesAnywhere extends Service {
 }
 declare namespace RolesAnywhere {
   export type AmazonResourceName = string;
+  export interface AttributeMapping {
+    /**
+     * Fields (x509Subject, x509Issuer and x509SAN) within X.509 certificates.
+     */
+    certificateField?: CertificateField;
+    /**
+     * A list of mapping entries for every supported specifier or sub-field.
+     */
+    mappingRules?: MappingRules;
+  }
+  export type AttributeMappings = AttributeMapping[];
   export type _Blob = Buffer|Uint8Array|Blob|string;
   export type Boolean = boolean;
+  export type CertificateField = "x509Subject"|"x509Issuer"|"x509SAN"|string;
   export interface CreateProfileRequest {
     /**
      *  Used to determine how long sessions vended using this profile are valid for. See the Expiration section of the CreateSession API documentation page for more details. In requests, if this value is not provided, the default value will be 3600. 
@@ -365,6 +393,26 @@ declare namespace RolesAnywhere {
     crl: CrlDetail;
   }
   export type CrlDetails = CrlDetail[];
+  export interface DeleteAttributeMappingRequest {
+    /**
+     * Fields (x509Subject, x509Issuer and x509SAN) within X.509 certificates.
+     */
+    certificateField: CertificateField;
+    /**
+     * The unique identifier of the profile.
+     */
+    profileId: Uuid;
+    /**
+     * A list of specifiers of a certificate field; for example, CN, OU, UID from a Subject.
+     */
+    specifiers?: SpecifierList;
+  }
+  export interface DeleteAttributeMappingResponse {
+    /**
+     * The state of the profile after a read or write operation.
+     */
+    profile: ProfileDetail;
+  }
   export interface ImportCrlRequest {
     /**
      * The x509 v3 specified certificate revocation list (CRL).
@@ -472,6 +520,14 @@ declare namespace RolesAnywhere {
   }
   export type ManagedPolicyList = ManagedPolicyListMemberString[];
   export type ManagedPolicyListMemberString = string;
+  export interface MappingRule {
+    /**
+     * Specifier within a certificate field, such as CN, OU, or UID from the Subject field.
+     */
+    specifier: MappingRuleSpecifierString;
+  }
+  export type MappingRuleSpecifierString = string;
+  export type MappingRules = MappingRule[];
   export type NotificationChannel = "ALL"|string;
   export type NotificationEvent = "CA_CERTIFICATE_EXPIRY"|"END_ENTITY_CERTIFICATE_EXPIRY"|string;
   export interface NotificationSetting {
@@ -533,6 +589,10 @@ declare namespace RolesAnywhere {
   export type ProfileArn = string;
   export interface ProfileDetail {
     /**
+     * A mapping applied to the authenticating end-entity certificate.
+     */
+    attributeMappings?: AttributeMappings;
+    /**
      * The ISO-8601 timestamp when the profile was created. 
      */
     createdAt?: SyntheticTimestamp_date_time;
@@ -588,6 +648,26 @@ declare namespace RolesAnywhere {
     profile?: ProfileDetail;
   }
   export type ProfileDetails = ProfileDetail[];
+  export interface PutAttributeMappingRequest {
+    /**
+     * Fields (x509Subject, x509Issuer and x509SAN) within X.509 certificates.
+     */
+    certificateField: CertificateField;
+    /**
+     * A list of mapping entries for every supported specifier or sub-field.
+     */
+    mappingRules: MappingRules;
+    /**
+     * The unique identifier of the profile.
+     */
+    profileId: Uuid;
+  }
+  export interface PutAttributeMappingResponse {
+    /**
+     * The state of the profile after a read or write operation.
+     */
+    profile: ProfileDetail;
+  }
   export interface PutNotificationSettingsRequest {
     /**
      * A list of notification settings to be associated to the trust anchor.
@@ -662,6 +742,7 @@ declare namespace RolesAnywhere {
     x509CertificateData?: SourceDataX509CertificateDataString;
   }
   export type SourceDataX509CertificateDataString = string;
+  export type SpecifierList = String[];
   export type String = string;
   export interface SubjectDetail {
     /**

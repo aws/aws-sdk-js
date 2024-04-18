@@ -669,6 +669,10 @@ declare namespace Drs {
      * AWS Availability zone into which data is being replicated.
      */
     stagingAvailabilityZone?: AwsAvailabilityZone;
+    /**
+     * The ARN of the staging Outpost
+     */
+    stagingOutpostArn?: OutpostARN;
   }
   export interface DataReplicationInfoReplicatedDisk {
     /**
@@ -1591,6 +1595,7 @@ declare namespace Drs {
     fullString?: BoundedString;
   }
   export type OriginEnvironment = "ON_PREMISES"|"AWS"|string;
+  export type OutpostARN = string;
   export type PITPolicy = PITPolicyRule[];
   export interface PITPolicyRule {
     /**
@@ -1768,6 +1773,10 @@ declare namespace Drs {
      */
     recoveryInstanceProperties?: RecoveryInstanceProperties;
     /**
+     * The ARN of the source Outpost
+     */
+    sourceOutpostArn?: OutpostARN;
+    /**
      * The Source Server ID that this Recovery Instance is associated with.
      */
     sourceServerID?: SourceServerID;
@@ -1815,6 +1824,10 @@ declare namespace Drs {
      * AWS Availability zone into which data is being replicated.
      */
     stagingAvailabilityZone?: AwsAvailabilityZone;
+    /**
+     * The ARN of the staging Outpost
+     */
+    stagingOutpostArn?: OutpostARN;
   }
   export interface RecoveryInstanceDataReplicationInfoReplicatedDisk {
     /**
@@ -2204,6 +2217,10 @@ declare namespace Drs {
      * AWS Region for an EC2-originated Source Server.
      */
     originRegion?: AwsRegion;
+    /**
+     * The ARN of the source Outpost
+     */
+    sourceOutpostArn?: OutpostARN;
   }
   export interface SourceNetwork {
     /**
@@ -2814,7 +2831,7 @@ declare namespace Drs {
      */
     useDedicatedReplicationServer?: Boolean;
   }
-  export type VolumeStatus = "REGULAR"|"CONTAINS_MARKETPLACE_PRODUCT_CODES"|"MISSING_VOLUME_ATTRIBUTES"|"MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE"|string;
+  export type VolumeStatus = "REGULAR"|"CONTAINS_MARKETPLACE_PRODUCT_CODES"|"MISSING_VOLUME_ATTRIBUTES"|"MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE"|"PENDING"|string;
   export type VolumeToConversionMap = {[key: string]: ConversionMap};
   export type VolumeToProductCodes = {[key: string]: ProductCodes};
   export type VolumeToSizeMap = {[key: string]: PositiveInteger};

@@ -3604,7 +3604,7 @@ declare namespace SageMaker {
     Mode: AutotuneMode;
   }
   export type AutotuneMode = "Enabled"|string;
-  export type AwsManagedHumanLoopRequestSource = "AWS/Rekognition/DetectModerationLabels/Image/V3"|"AWS/Textract/AnalyzeDocument/Forms/V1"|"AWS/Textract/AnalyzeExpense"|"AWS/Handshake/VerifyIdentity"|"AWS/Bedrock/ModelEvaluation"|string;
+  export type AwsManagedHumanLoopRequestSource = "AWS/Rekognition/DetectModerationLabels/Image/V3"|"AWS/Textract/AnalyzeDocument/Forms/V1"|string;
   export type BacktestResultsLocation = string;
   export type BaseModelName = string;
   export interface BatchDataCaptureConfig {
@@ -4232,11 +4232,11 @@ declare namespace SageMaker {
   export type ClusterInstanceType = "ml.p4d.24xlarge"|"ml.p4de.24xlarge"|"ml.p5.48xlarge"|"ml.trn1.32xlarge"|"ml.trn1n.32xlarge"|"ml.g5.xlarge"|"ml.g5.2xlarge"|"ml.g5.4xlarge"|"ml.g5.8xlarge"|"ml.g5.12xlarge"|"ml.g5.16xlarge"|"ml.g5.24xlarge"|"ml.g5.48xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.12xlarge"|"ml.c5.18xlarge"|"ml.c5.24xlarge"|"ml.c5n.large"|"ml.c5n.2xlarge"|"ml.c5n.4xlarge"|"ml.c5n.9xlarge"|"ml.c5n.18xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.8xlarge"|"ml.m5.12xlarge"|"ml.m5.16xlarge"|"ml.m5.24xlarge"|"ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|string;
   export interface ClusterLifeCycleConfig {
     /**
-     * An Amazon S3 bucket path where your LifeCycle scripts are stored.
+     * An Amazon S3 bucket path where your lifecycle scripts are stored.  Make sure that the S3 bucket path starts with s3://sagemaker-. The IAM role for SageMaker HyperPod has the managed  AmazonSageMakerClusterInstanceRolePolicy  attached, which allows access to S3 buckets with the specific prefix sagemaker-. 
      */
     SourceS3Uri: S3Uri;
     /**
-     * The directory of the LifeCycle script under SourceS3Uri. This LifeCycle script runs during cluster creation.
+     * The file name of the entrypoint script of lifecycle scripts under SourceS3Uri. This entrypoint script runs during cluster creation.
      */
     OnCreate: ClusterLifeCycleConfigFileName;
   }
@@ -5294,11 +5294,11 @@ declare namespace SageMaker {
   }
   export interface CreateFeatureGroupRequest {
     /**
-     * The name of the FeatureGroup. The name must be unique within an Amazon Web Services Region in an Amazon Web Services account. The name:   Must start and end with an alphanumeric character.   Can only include alphanumeric characters, underscores, and hyphens. Spaces are not allowed.  
+     * The name of the FeatureGroup. The name must be unique within an Amazon Web Services Region in an Amazon Web Services account. The name:   Must start with an alphanumeric character.   Can only include alphanumeric characters, underscores, and hyphens. Spaces are not allowed.  
      */
     FeatureGroupName: FeatureGroupName;
     /**
-     * The name of the Feature whose value uniquely identifies a Record defined in the FeatureStore. Only the latest record per identifier value will be stored in the OnlineStore. RecordIdentifierFeatureName must be one of feature definitions' names. You use the RecordIdentifierFeatureName to access data in a FeatureStore. This name:   Must start and end with an alphanumeric character.   Can only contains alphanumeric characters, hyphens, underscores. Spaces are not allowed.   
+     * The name of the Feature whose value uniquely identifies a Record defined in the FeatureStore. Only the latest record per identifier value will be stored in the OnlineStore. RecordIdentifierFeatureName must be one of feature definitions' names. You use the RecordIdentifierFeatureName to access data in a FeatureStore. This name:   Must start with an alphanumeric character.   Can only contains alphanumeric characters, hyphens, underscores. Spaces are not allowed.   
      */
     RecordIdentifierFeatureName: FeatureName;
     /**
@@ -11956,7 +11956,7 @@ declare namespace SageMaker {
   export type FeatureAdditions = FeatureDefinition[];
   export interface FeatureDefinition {
     /**
-     * The name of a feature. The type must be a string. FeatureName cannot be any of the following: is_deleted, write_time, api_invocation_time. The name:   Must start and end with an alphanumeric character.   Can only include alphanumeric characters, underscores, and hyphens. Spaces are not allowed.  
+     * The name of a feature. The type must be a string. FeatureName cannot be any of the following: is_deleted, write_time, api_invocation_time. The name:   Must start with an alphanumeric character.   Can only include alphanumeric characters, underscores, and hyphens. Spaces are not allowed.  
      */
     FeatureName: FeatureName;
     /**

@@ -347,6 +347,8 @@ declare namespace EMRServerless {
      */
     monitoringConfiguration?: MonitoringConfiguration;
   }
+  export type ConfigurationPropertyKey = string;
+  export type ConfigurationPropertyValue = string;
   export type CpuSize = string;
   export interface CreateApplicationRequest {
     /**
@@ -791,6 +793,10 @@ declare namespace EMRServerless {
      * The Amazon CloudWatch configuration for monitoring logs. You can configure your jobs to send log information to CloudWatch.
      */
     cloudWatchLoggingConfiguration?: CloudWatchLoggingConfiguration;
+    /**
+     * The monitoring configuration object you can configure to send metrics to Amazon Managed Service for Prometheus for a job run.
+     */
+    prometheusMonitoringConfiguration?: PrometheusMonitoringConfiguration;
   }
   export interface NetworkConfiguration {
     /**
@@ -803,6 +809,13 @@ declare namespace EMRServerless {
     securityGroupIds?: SecurityGroupIds;
   }
   export type NextToken = string;
+  export interface PrometheusMonitoringConfiguration {
+    /**
+     * The remote write URL in the Amazon Managed Service for Prometheus workspace to send metrics to.
+     */
+    remoteWriteUrl?: PrometheusUrlString;
+  }
+  export type PrometheusUrlString = string;
   export type Query = string;
   export type ReleaseLabel = string;
   export type RequestIdentityUserArn = string;
@@ -833,7 +846,7 @@ declare namespace EMRServerless {
   }
   export type SecurityGroupIds = SecurityGroupString[];
   export type SecurityGroupString = string;
-  export type SensitivePropertiesMap = {[key: string]: String1024};
+  export type SensitivePropertiesMap = {[key: string]: ConfigurationPropertyValue};
   export interface SparkSubmit {
     /**
      * The entry point for the Spark submit job run.

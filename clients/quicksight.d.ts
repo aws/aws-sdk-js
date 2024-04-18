@@ -1100,11 +1100,11 @@ declare class QuickSight extends Service {
    */
   startAssetBundleImportJob(callback?: (err: AWSError, data: QuickSight.Types.StartAssetBundleImportJobResponse) => void): Request<QuickSight.Types.StartAssetBundleImportJobResponse, AWSError>;
   /**
-   * Starts an asynchronous job that generates a dashboard snapshot. You can request one of the following format configurations per API call.   1 paginated PDF   1 Excel workbook   5 CSVs   Poll job descriptions with a DescribeDashboardSnapshotJob API call. Once the job succeeds, use the DescribeDashboardSnapshotJobResult API to obtain the download URIs that the job generates.
+   * Starts an asynchronous job that generates a snapshot of a dashboard's output. You can request one or several of the following format configurations in each API call.   1 Paginated PDF   1 Excel workbook that includes up to 5 table or pivot table visuals   5 CSVs from table or pivot table visuals   The status of a submitted job can be polled with the DescribeDashboardSnapshotJob API. When you call the DescribeDashboardSnapshotJob API, check the JobStatus field in the response. Once the job reaches a COMPLETED or FAILED status, use the DescribeDashboardSnapshotJobResult API to obtain the URLs for the generated files. If the job fails, the DescribeDashboardSnapshotJobResult API returns detailed information about the error that occurred.  StartDashboardSnapshotJob API throttling  Amazon QuickSight utilizes API throttling to create a more consistent user experience within a time span for customers when they call the StartDashboardSnapshotJob. By default, 12 jobs can run simlutaneously in one Amazon Web Services account and users can submit up 10 API requests per second before an account is throttled. If an overwhelming number of API requests are made by the same user in a short period of time, Amazon QuickSight throttles the API calls to maintin an optimal experience and reliability for all Amazon QuickSight users.  Common throttling scenarios  The following list provides information about the most commin throttling scenarios that can occur.    A large number of SnapshotExport API jobs are running simultaneously on an Amazon Web Services account. When a new StartDashboardSnapshotJob is created and there are already 12 jobs with the RUNNING status, the new job request fails and returns a LimitExceededException error. Wait for a current job to comlpete before you resubmit the new job.    A large number of API requests are submitted on an Amazon Web Services account. When a user makes more than 10 API calls to the Amazon QuickSight API in one second, a ThrottlingException is returned.   If your use case requires a higher throttling limit, contact your account admin or Amazon Web ServicesSupport to explore options to tailor a more optimal expereince for your account.  Best practices to handle throttling  If your use case projects high levels of API traffic, try to reduce the degree of frequency and parallelism of API calls as much as you can to avoid throttling. You can also perform a timing test to calculate an estimate for the total processing time of your projected load that stays within the throttling limits of the Amazon QuickSight APIs. For example, if your projected traffic is 100 snapshot jobs before 12:00 PM per day, start 12 jobs in parallel and measure the amount of time it takes to proccess all 12 jobs. Once you obtain the result, multiply the duration by 9, for example (12 minutes * 9 = 108 minutes). Use the new result to determine the latest time at which the jobs need to be started to meet your target deadline. The time that it takes to process a job can be impacted by the following factors:   The dataset type (Direct Query or SPICE).   The size of the dataset.   The complexity of the calculated fields that are used in the dashboard.   The number of visuals that are on a sheet.   The types of visuals that are on the sheet.   The number of formats and snapshots that are requested in the job configuration.   The size of the generated snapshots.  
    */
   startDashboardSnapshotJob(params: QuickSight.Types.StartDashboardSnapshotJobRequest, callback?: (err: AWSError, data: QuickSight.Types.StartDashboardSnapshotJobResponse) => void): Request<QuickSight.Types.StartDashboardSnapshotJobResponse, AWSError>;
   /**
-   * Starts an asynchronous job that generates a dashboard snapshot. You can request one of the following format configurations per API call.   1 paginated PDF   1 Excel workbook   5 CSVs   Poll job descriptions with a DescribeDashboardSnapshotJob API call. Once the job succeeds, use the DescribeDashboardSnapshotJobResult API to obtain the download URIs that the job generates.
+   * Starts an asynchronous job that generates a snapshot of a dashboard's output. You can request one or several of the following format configurations in each API call.   1 Paginated PDF   1 Excel workbook that includes up to 5 table or pivot table visuals   5 CSVs from table or pivot table visuals   The status of a submitted job can be polled with the DescribeDashboardSnapshotJob API. When you call the DescribeDashboardSnapshotJob API, check the JobStatus field in the response. Once the job reaches a COMPLETED or FAILED status, use the DescribeDashboardSnapshotJobResult API to obtain the URLs for the generated files. If the job fails, the DescribeDashboardSnapshotJobResult API returns detailed information about the error that occurred.  StartDashboardSnapshotJob API throttling  Amazon QuickSight utilizes API throttling to create a more consistent user experience within a time span for customers when they call the StartDashboardSnapshotJob. By default, 12 jobs can run simlutaneously in one Amazon Web Services account and users can submit up 10 API requests per second before an account is throttled. If an overwhelming number of API requests are made by the same user in a short period of time, Amazon QuickSight throttles the API calls to maintin an optimal experience and reliability for all Amazon QuickSight users.  Common throttling scenarios  The following list provides information about the most commin throttling scenarios that can occur.    A large number of SnapshotExport API jobs are running simultaneously on an Amazon Web Services account. When a new StartDashboardSnapshotJob is created and there are already 12 jobs with the RUNNING status, the new job request fails and returns a LimitExceededException error. Wait for a current job to comlpete before you resubmit the new job.    A large number of API requests are submitted on an Amazon Web Services account. When a user makes more than 10 API calls to the Amazon QuickSight API in one second, a ThrottlingException is returned.   If your use case requires a higher throttling limit, contact your account admin or Amazon Web ServicesSupport to explore options to tailor a more optimal expereince for your account.  Best practices to handle throttling  If your use case projects high levels of API traffic, try to reduce the degree of frequency and parallelism of API calls as much as you can to avoid throttling. You can also perform a timing test to calculate an estimate for the total processing time of your projected load that stays within the throttling limits of the Amazon QuickSight APIs. For example, if your projected traffic is 100 snapshot jobs before 12:00 PM per day, start 12 jobs in parallel and measure the amount of time it takes to proccess all 12 jobs. Once you obtain the result, multiply the duration by 9, for example (12 minutes * 9 = 108 minutes). Use the new result to determine the latest time at which the jobs need to be started to meet your target deadline. The time that it takes to process a job can be impacted by the following factors:   The dataset type (Direct Query or SPICE).   The size of the dataset.   The complexity of the calculated fields that are used in the dashboard.   The number of visuals that are on a sheet.   The types of visuals that are on the sheet.   The number of formats and snapshots that are requested in the job configuration.   The size of the generated snapshots.  
    */
   startDashboardSnapshotJob(callback?: (err: AWSError, data: QuickSight.Types.StartDashboardSnapshotJobResponse) => void): Request<QuickSight.Types.StartDashboardSnapshotJobResponse, AWSError>;
   /**
@@ -1842,7 +1842,7 @@ declare namespace QuickSight {
     Properties: AssetBundleExportJobDataSourcePropertyToOverrideList;
   }
   export type AssetBundleExportJobDataSourceOverridePropertiesList = AssetBundleExportJobDataSourceOverrideProperties[];
-  export type AssetBundleExportJobDataSourcePropertyToOverride = "Name"|"DisableSsl"|"SecretArn"|"Username"|"Password"|"Domain"|"WorkGroup"|"Host"|"Port"|"Database"|"DataSetName"|"Catalog"|"InstanceId"|"ClusterId"|"ManifestFileLocation"|"Warehouse"|"RoleArn"|string;
+  export type AssetBundleExportJobDataSourcePropertyToOverride = "Name"|"DisableSsl"|"SecretArn"|"Username"|"Password"|"Domain"|"WorkGroup"|"Host"|"Port"|"Database"|"DataSetName"|"Catalog"|"InstanceId"|"ClusterId"|"ManifestFileLocation"|"Warehouse"|"RoleArn"|"ProductType"|string;
   export type AssetBundleExportJobDataSourcePropertyToOverrideList = AssetBundleExportJobDataSourcePropertyToOverride[];
   export interface AssetBundleExportJobError {
     /**
@@ -2341,6 +2341,17 @@ declare namespace QuickSight {
     Tags: TagList;
   }
   export type AssetBundleImportJobVPCConnectionOverrideTagsList = AssetBundleImportJobVPCConnectionOverrideTags[];
+  export interface AssetBundleImportJobWarning {
+    /**
+     * The ARN of the resource that the warning occurred for.
+     */
+    Arn?: Arn;
+    /**
+     * A description of the warning that occurred during an Asset Bundle import job.
+     */
+    Message?: NonEmptyString;
+  }
+  export type AssetBundleImportJobWarningList = AssetBundleImportJobWarning[];
   export interface AssetBundleImportSource {
     /**
      * The bytes of the base64 encoded asset bundle import zip file. This file can't exceed 20 MB. If you are calling the API operations from the Amazon Web Services SDK for Java, JavaScript, Python, or PHP, the SDK encodes base64 automatically to allow the direct setting of the zip file's bytes. If you are using an SDK for a different language or receiving related errors, try to base64 encode your data.
@@ -3092,6 +3103,10 @@ declare namespace QuickSight {
      * The configuration for a CategoryFilter.
      */
     Configuration: CategoryFilterConfiguration;
+    /**
+     * The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.
+     */
+    DefaultFilterControlConfiguration?: DefaultFilterControlConfiguration;
   }
   export interface CategoryFilterConfiguration {
     /**
@@ -6272,6 +6287,84 @@ declare namespace QuickSight {
     CustomValue?: SensitiveDouble;
   }
   export type DefaultAggregation = "SUM"|"MAX"|"MIN"|"COUNT"|"DISTINCT_COUNT"|"AVERAGE"|"MEDIAN"|"STDEV"|"STDEVP"|"VAR"|"VARP"|string;
+  export interface DefaultDateTimePickerControlOptions {
+    /**
+     * The date time picker type of the DefaultDateTimePickerControlOptions. Choose one of the following options:    SINGLE_VALUED: The filter condition is a fixed date.    DATE_RANGE: The filter condition is a date time range.  
+     */
+    Type?: SheetControlDateTimePickerType;
+    /**
+     * The display options of a control.
+     */
+    DisplayOptions?: DateTimePickerControlDisplayOptions;
+  }
+  export interface DefaultFilterControlConfiguration {
+    /**
+     * The title of the DefaultFilterControlConfiguration. This title is shared by all controls that are tied to this filter.
+     */
+    Title: SheetControlTitle;
+    /**
+     * The control option for the DefaultFilterControlConfiguration.
+     */
+    ControlOptions: DefaultFilterControlOptions;
+  }
+  export interface DefaultFilterControlOptions {
+    /**
+     * The default options that correspond to the filter control type of a DateTimePicker.
+     */
+    DefaultDateTimePickerOptions?: DefaultDateTimePickerControlOptions;
+    /**
+     * The default options that correspond to the List filter control type.
+     */
+    DefaultListOptions?: DefaultFilterListControlOptions;
+    /**
+     * The default options that correspond to the Dropdown filter control type.
+     */
+    DefaultDropdownOptions?: DefaultFilterDropDownControlOptions;
+    /**
+     * The default options that correspond to the TextField filter control type.
+     */
+    DefaultTextFieldOptions?: DefaultTextFieldControlOptions;
+    /**
+     * The default options that correspond to the TextArea filter control type.
+     */
+    DefaultTextAreaOptions?: DefaultTextAreaControlOptions;
+    /**
+     * The default options that correspond to the Slider filter control type.
+     */
+    DefaultSliderOptions?: DefaultSliderControlOptions;
+    /**
+     * The default options that correspond to the RelativeDateTime filter control type.
+     */
+    DefaultRelativeDateTimeOptions?: DefaultRelativeDateTimeControlOptions;
+  }
+  export interface DefaultFilterDropDownControlOptions {
+    /**
+     * The display options of a control.
+     */
+    DisplayOptions?: DropDownControlDisplayOptions;
+    /**
+     * The type of the FilterDropDownControl. Choose one of the following options:    MULTI_SELECT: The user can select multiple entries from a dropdown menu.    SINGLE_SELECT: The user can select a single entry from a dropdown menu.  
+     */
+    Type?: SheetControlListType;
+    /**
+     * A list of selectable values that are used in a control.
+     */
+    SelectableValues?: FilterSelectableValues;
+  }
+  export interface DefaultFilterListControlOptions {
+    /**
+     * The display options of a control.
+     */
+    DisplayOptions?: ListControlDisplayOptions;
+    /**
+     * The type of the DefaultFilterListControlOptions. Choose one of the following options:    MULTI_SELECT: The user can select multiple entries from the list.    SINGLE_SELECT: The user can select a single entry from the list.  
+     */
+    Type?: SheetControlListType;
+    /**
+     * A list of selectable values that are used in a control.
+     */
+    SelectableValues?: FilterSelectableValues;
+  }
   export interface DefaultFormatting {
     /**
      * The display format. Valid values for this structure are AUTO, PERCENT, CURRENCY, NUMBER, DATE, and STRING.
@@ -6324,11 +6417,55 @@ declare namespace QuickSight {
      */
     SectionBased?: DefaultSectionBasedLayoutConfiguration;
   }
+  export interface DefaultRelativeDateTimeControlOptions {
+    /**
+     * The display options of a control.
+     */
+    DisplayOptions?: RelativeDateTimeControlDisplayOptions;
+  }
   export interface DefaultSectionBasedLayoutConfiguration {
     /**
      * Determines the screen canvas size options for a section-based layout.
      */
     CanvasSizeOptions: SectionBasedLayoutCanvasSizeOptions;
+  }
+  export interface DefaultSliderControlOptions {
+    /**
+     * The display options of a control.
+     */
+    DisplayOptions?: SliderControlDisplayOptions;
+    /**
+     * The type of the DefaultSliderControlOptions. Choose one of the following options:    SINGLE_POINT: Filter against(equals) a single data point.    RANGE: Filter data that is in a specified range.  
+     */
+    Type?: SheetControlSliderType;
+    /**
+     * The larger value that is displayed at the right of the slider.
+     */
+    MaximumValue: Double;
+    /**
+     * The smaller value that is displayed at the left of the slider.
+     */
+    MinimumValue: Double;
+    /**
+     * The number of increments that the slider bar is divided into.
+     */
+    StepSize: Double;
+  }
+  export interface DefaultTextAreaControlOptions {
+    /**
+     * The delimiter that is used to separate the lines in text.
+     */
+    Delimiter?: TextAreaControlDelimiter;
+    /**
+     * The display options of a control.
+     */
+    DisplayOptions?: TextAreaControlDisplayOptions;
+  }
+  export interface DefaultTextFieldControlOptions {
+    /**
+     * The display options of a control.
+     */
+    DisplayOptions?: TextFieldControlDisplayOptions;
   }
   export interface DeleteAccountCustomizationRequest {
     /**
@@ -7390,6 +7527,10 @@ declare namespace QuickSight {
      * An optional validation strategy override for all analyses and dashboards to be applied to the resource configuration before import.
      */
     OverrideValidationStrategy?: AssetBundleImportJobOverrideValidationStrategy;
+    /**
+     * An array of warning records that describe all permitted errors that are encountered during the import job.
+     */
+    Warnings?: AssetBundleImportJobWarningList;
   }
   export interface DescribeDashboardDefinitionRequest {
     /**
@@ -9034,8 +9175,26 @@ declare namespace QuickSight {
      * A control from a date filter that is used to specify the relative date.
      */
     RelativeDateTime?: FilterRelativeDateTimeControl;
+    /**
+     * A control from a filter that is scoped across more than one sheet. This represents your filter control on a sheet
+     */
+    CrossSheet?: FilterCrossSheetControl;
   }
   export type FilterControlList = FilterControl[];
+  export interface FilterCrossSheetControl {
+    /**
+     * The ID of the FilterCrossSheetControl.
+     */
+    FilterControlId: ShortRestrictiveResourceId;
+    /**
+     * The source filter ID of the FilterCrossSheetControl.
+     */
+    SourceFilterId: ShortRestrictiveResourceId;
+    /**
+     * The values that are displayed in a control can be configured to only show values that are valid based on what's selected in other controls.
+     */
+    CascadingControlConfiguration?: CascadingControlConfiguration;
+  }
   export interface FilterDateTimePickerControl {
     /**
      * The ID of the FilterDateTimePickerControl.
@@ -9054,7 +9213,7 @@ declare namespace QuickSight {
      */
     DisplayOptions?: DateTimePickerControlDisplayOptions;
     /**
-     * The date time picker type of a FilterDateTimePickerControl. Choose one of the following options:    SINGLE_VALUED: The filter condition is a fixed date.    DATE_RANGE: The filter condition is a date time range.  
+     * The type of the FilterDropDownControl. Choose one of the following options:    MULTI_SELECT: The user can select multiple entries from a dropdown menu.    SINGLE_SELECT: The user can select a single entry from a dropdown menu.  
      */
     Type?: SheetControlDateTimePickerType;
   }
@@ -9148,7 +9307,7 @@ declare namespace QuickSight {
      */
     DisplayOptions?: ListControlDisplayOptions;
     /**
-     * The type of FilterListControl. Choose one of the following options:    MULTI_SELECT: The user can select multiple entries from the list.    SINGLE_SELECT: The user can select a single entry from the list.  
+     * The type of the FilterListControl. Choose one of the following options:    MULTI_SELECT: The user can select multiple entries from the list.    SINGLE_SELECT: The user can select a single entry from the list.  
      */
     Type?: SheetControlListType;
     /**
@@ -9240,15 +9399,15 @@ declare namespace QuickSight {
      */
     DisplayOptions?: SliderControlDisplayOptions;
     /**
-     * The type of FilterSliderControl. Choose one of the following options:    SINGLE_POINT: Filter against(equals) a single data point.    RANGE: Filter data that is in a specified range.  
+     * The type of the FilterSliderControl. Choose one of the following options:    SINGLE_POINT: Filter against(equals) a single data point.    RANGE: Filter data that is in a specified range.  
      */
     Type?: SheetControlSliderType;
     /**
-     * The smaller value that is displayed at the left of the slider.
+     * The larger value that is displayed at the right of the slider.
      */
     MaximumValue: Double;
     /**
-     * The larger value that is displayed at the right of the slider.
+     * The smaller value that is displayed at the left of the slider.
      */
     MinimumValue: Double;
     /**
@@ -12867,6 +13026,10 @@ declare namespace QuickSight {
      * This option determines how null values should be treated when filtering data.    ALL_VALUES: Include null values in filtered results.    NULLS_ONLY: Only include null values in filtered results.    NON_NULLS_ONLY: Exclude null values from filtered results.  
      */
     NullOption: FilterNullOption;
+    /**
+     * The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.
+     */
+    DefaultFilterControlConfiguration?: DefaultFilterControlConfiguration;
   }
   export type NumericEqualityMatchOperator = "EQUALS"|"DOES_NOT_EQUAL"|string;
   export type NumericFilterSelectAllOptions = "FILTER_ALL_VALUES"|string;
@@ -12921,6 +13084,10 @@ declare namespace QuickSight {
      * This option determines how null values should be treated when filtering data.    ALL_VALUES: Include null values in filtered results.    NULLS_ONLY: Only include null values in filtered results.    NON_NULLS_ONLY: Exclude null values from filtered results.  
      */
     NullOption: FilterNullOption;
+    /**
+     * The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.
+     */
+    DefaultFilterControlConfiguration?: DefaultFilterControlConfiguration;
   }
   export interface NumericRangeFilterValue {
     /**
@@ -13256,11 +13423,11 @@ declare namespace QuickSight {
      */
     DisplayOptions?: SliderControlDisplayOptions;
     /**
-     * The smaller value that is displayed at the left of the slider.
+     * The larger value that is displayed at the right of the slider.
      */
     MaximumValue: Double;
     /**
-     * The larger value that is displayed at the right of the slider.
+     * The smaller value that is displayed at the left of the slider.
      */
     MinimumValue: Double;
     /**
@@ -14596,6 +14763,10 @@ declare namespace QuickSight {
      * The configuration for the exclude period of the filter.
      */
     ExcludePeriodConfiguration?: ExcludePeriodConfiguration;
+    /**
+     * The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.
+     */
+    DefaultFilterControlConfiguration?: DefaultFilterControlConfiguration;
   }
   export type RelativeFontSize = "EXTRA_SMALL"|"SMALL"|"MEDIUM"|"LARGE"|"EXTRA_LARGE"|string;
   export interface RenameColumnOperation {
@@ -17104,6 +17275,10 @@ declare namespace QuickSight {
      * The rolling date input for the TimeEquality filter. This field is mutually exclusive to Value and ParameterName.
      */
     RollingDate?: RollingDateConfiguration;
+    /**
+     * The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.
+     */
+    DefaultFilterControlConfiguration?: DefaultFilterControlConfiguration;
   }
   export type TimeGranularity = "YEAR"|"QUARTER"|"MONTH"|"WEEK"|"DAY"|"HOUR"|"MINUTE"|"SECOND"|"MILLISECOND"|string;
   export interface TimeRangeDrillDownFilter {
@@ -17161,6 +17336,10 @@ declare namespace QuickSight {
      * The level of time precision that is used to aggregate DateTime values.
      */
     TimeGranularity?: TimeGranularity;
+    /**
+     * The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.
+     */
+    DefaultFilterControlConfiguration?: DefaultFilterControlConfiguration;
   }
   export interface TimeRangeFilterValue {
     /**
@@ -17230,6 +17409,10 @@ declare namespace QuickSight {
      * The parameter whose value should be used for the filter value.
      */
     ParameterName?: ParameterName;
+    /**
+     * The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.
+     */
+    DefaultFilterControlConfiguration?: DefaultFilterControlConfiguration;
   }
   export interface TopBottomMoversComputation {
     /**

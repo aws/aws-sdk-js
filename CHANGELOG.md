@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1601.0-->
+<!--LATEST=2.1602.0-->
 <!--ENTRYINSERT-->
+
+## 2.1602.0
+* feature: Drs: Outpost ARN added to Source Server and Recovery Instance
+* feature: EMRServerless: This release adds the capability to publish detailed Spark engine metrics to Amazon Managed Service for Prometheus (AMP) for  enhanced monitoring for Spark jobs.
+* feature: GuardDuty: Added IPv6Address fields for local and remote IP addresses
+* feature: QuickSight: This release adds support for the Cross Sheet Filter and Control features, and support for warnings in asset imports for any permitted errors encountered during execution
+* feature: RolesAnywhere: This release introduces the PutAttributeMapping and DeleteAttributeMapping APIs. IAM Roles Anywhere now provides the capability to define a set of mapping rules, allowing customers to specify which data is extracted from their X.509 end-entity certificates.
+* feature: SageMaker: Removed deprecated enum values and updated API documentation.
+* feature: WorkSpaces: Adds new APIs for managing and sharing WorkSpaces BYOL configuration across accounts.
 
 ## 2.1601.0
 * bugfix: Endpoints: Add endpoint override for us-isof-* region

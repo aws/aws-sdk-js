@@ -12,6 +12,14 @@ declare class WorkSpaces extends Service {
   constructor(options?: WorkSpaces.Types.ClientConfiguration)
   config: Config & WorkSpaces.Types.ClientConfiguration;
   /**
+   * Accepts the account link invitation.  There's currently no unlinking capability after you accept the account linking invitation. 
+   */
+  acceptAccountLinkInvitation(params: WorkSpaces.Types.AcceptAccountLinkInvitationRequest, callback?: (err: AWSError, data: WorkSpaces.Types.AcceptAccountLinkInvitationResult) => void): Request<WorkSpaces.Types.AcceptAccountLinkInvitationResult, AWSError>;
+  /**
+   * Accepts the account link invitation.  There's currently no unlinking capability after you accept the account linking invitation. 
+   */
+  acceptAccountLinkInvitation(callback?: (err: AWSError, data: WorkSpaces.Types.AcceptAccountLinkInvitationResult) => void): Request<WorkSpaces.Types.AcceptAccountLinkInvitationResult, AWSError>;
+  /**
    * Associates the specified connection alias with the specified directory to enable cross-Region redirection. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.  Before performing this operation, call  DescribeConnectionAliases to make sure that the current state of the connection alias is CREATED. 
    */
   associateConnectionAlias(params: WorkSpaces.Types.AssociateConnectionAliasRequest, callback?: (err: AWSError, data: WorkSpaces.Types.AssociateConnectionAliasResult) => void): Request<WorkSpaces.Types.AssociateConnectionAliasResult, AWSError>;
@@ -51,6 +59,14 @@ declare class WorkSpaces extends Service {
    * Copies the specified image from the specified Region to the current Region. For more information about copying images, see  Copy a Custom WorkSpaces Image. In the China (Ningxia) Region, you can copy images only within the same Region. In Amazon Web Services GovCloud (US), to copy images to and from other Regions, contact Amazon Web Services Support.  Before copying a shared image, be sure to verify that it has been shared from the correct Amazon Web Services account. To determine if an image has been shared and to see the ID of the Amazon Web Services account that owns an image, use the DescribeWorkSpaceImages and DescribeWorkspaceImagePermissions API operations.  
    */
   copyWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.CopyWorkspaceImageResult) => void): Request<WorkSpaces.Types.CopyWorkspaceImageResult, AWSError>;
+  /**
+   * Creates the account link invitation.
+   */
+  createAccountLinkInvitation(params: WorkSpaces.Types.CreateAccountLinkInvitationRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateAccountLinkInvitationResult) => void): Request<WorkSpaces.Types.CreateAccountLinkInvitationResult, AWSError>;
+  /**
+   * Creates the account link invitation.
+   */
+  createAccountLinkInvitation(callback?: (err: AWSError, data: WorkSpaces.Types.CreateAccountLinkInvitationResult) => void): Request<WorkSpaces.Types.CreateAccountLinkInvitationResult, AWSError>;
   /**
    * Creates a client-add-in for Amazon Connect within a directory. You can create only one Amazon Connect client add-in within a directory. This client add-in allows WorkSpaces users to seamlessly connect to Amazon Connect.
    */
@@ -123,6 +139,14 @@ declare class WorkSpaces extends Service {
    * Creates one or more WorkSpaces. This operation is asynchronous and returns before the WorkSpaces are created.    The MANUAL running mode value is only supported by Amazon WorkSpaces Core. Contact your account team to be allow-listed to use this value. For more information, see Amazon WorkSpaces Core.   You don't need to specify the PCOIP protocol for Linux bundles because WSP is the default protocol for those bundles.   User-decoupled WorkSpaces are only supported by Amazon WorkSpaces Core.   
    */
   createWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspacesResult) => void): Request<WorkSpaces.Types.CreateWorkspacesResult, AWSError>;
+  /**
+   * Deletes the account link invitation.
+   */
+  deleteAccountLinkInvitation(params: WorkSpaces.Types.DeleteAccountLinkInvitationRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteAccountLinkInvitationResult) => void): Request<WorkSpaces.Types.DeleteAccountLinkInvitationResult, AWSError>;
+  /**
+   * Deletes the account link invitation.
+   */
+  deleteAccountLinkInvitation(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteAccountLinkInvitationResult) => void): Request<WorkSpaces.Types.DeleteAccountLinkInvitationResult, AWSError>;
   /**
    * Deletes customized client branding. Client branding allows you to customize your WorkSpace's client login portal. You can tailor your login portal company logo, the support email address, support link, link to reset password, and a custom message for users trying to sign in. After you delete your customized client branding, your login portal reverts to the default client branding.
    */
@@ -388,6 +412,14 @@ declare class WorkSpaces extends Service {
    */
   disassociateWorkspaceApplication(callback?: (err: AWSError, data: WorkSpaces.Types.DisassociateWorkspaceApplicationResult) => void): Request<WorkSpaces.Types.DisassociateWorkspaceApplicationResult, AWSError>;
   /**
+   * Retrieves account link information.
+   */
+  getAccountLink(params: WorkSpaces.Types.GetAccountLinkRequest, callback?: (err: AWSError, data: WorkSpaces.Types.GetAccountLinkResult) => void): Request<WorkSpaces.Types.GetAccountLinkResult, AWSError>;
+  /**
+   * Retrieves account link information.
+   */
+  getAccountLink(callback?: (err: AWSError, data: WorkSpaces.Types.GetAccountLinkResult) => void): Request<WorkSpaces.Types.GetAccountLinkResult, AWSError>;
+  /**
    * Imports client branding. Client branding allows you to customize your WorkSpace's client login portal. You can tailor your login portal company logo, the support email address, support link, link to reset password, and a custom message for users trying to sign in. After you import client branding, the default branding experience for the specified platform type is replaced with the imported experience    You must specify at least one platform type when importing client branding.   You can import up to 6 MB of data with each request. If your request exceeds this limit, you can import client branding for different platform types using separate requests.   In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify only one parameter for each platform type, but not both.   Imported data can take up to a minute to appear in the WorkSpaces client.   
    */
   importClientBranding(params: WorkSpaces.Types.ImportClientBrandingRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ImportClientBrandingResult) => void): Request<WorkSpaces.Types.ImportClientBrandingResult, AWSError>;
@@ -403,6 +435,14 @@ declare class WorkSpaces extends Service {
    * Imports the specified Windows 10 or 11 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that is in your Amazon Web Services account, and you must own the image. For more information about creating BYOL images, see  Bring Your Own Windows Desktop Licenses.
    */
   importWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.ImportWorkspaceImageResult) => void): Request<WorkSpaces.Types.ImportWorkspaceImageResult, AWSError>;
+  /**
+   * Lists all account links.
+   */
+  listAccountLinks(params: WorkSpaces.Types.ListAccountLinksRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ListAccountLinksResult) => void): Request<WorkSpaces.Types.ListAccountLinksResult, AWSError>;
+  /**
+   * Lists all account links.
+   */
+  listAccountLinks(callback?: (err: AWSError, data: WorkSpaces.Types.ListAccountLinksResult) => void): Request<WorkSpaces.Types.ListAccountLinksResult, AWSError>;
   /**
    * Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable Bring Your Own License (BYOL).  This operation can be run only by Amazon Web Services accounts that are enabled for BYOL. If your account isn't enabled for BYOL, you'll receive an AccessDeniedException error. The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.
    */
@@ -516,6 +556,14 @@ declare class WorkSpaces extends Service {
    */
   registerWorkspaceDirectory(callback?: (err: AWSError, data: WorkSpaces.Types.RegisterWorkspaceDirectoryResult) => void): Request<WorkSpaces.Types.RegisterWorkspaceDirectoryResult, AWSError>;
   /**
+   * Rejects the account link invitation.
+   */
+  rejectAccountLinkInvitation(params: WorkSpaces.Types.RejectAccountLinkInvitationRequest, callback?: (err: AWSError, data: WorkSpaces.Types.RejectAccountLinkInvitationResult) => void): Request<WorkSpaces.Types.RejectAccountLinkInvitationResult, AWSError>;
+  /**
+   * Rejects the account link invitation.
+   */
+  rejectAccountLinkInvitation(callback?: (err: AWSError, data: WorkSpaces.Types.RejectAccountLinkInvitationResult) => void): Request<WorkSpaces.Types.RejectAccountLinkInvitationResult, AWSError>;
+  /**
    * Restores the specified WorkSpace to its last known healthy state. You cannot restore a WorkSpace unless its state is  AVAILABLE, ERROR, UNHEALTHY, or STOPPED. Restoring a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see Restore a WorkSpace. This operation is asynchronous and returns before the WorkSpace is completely restored.
    */
   restoreWorkspace(params: WorkSpaces.Types.RestoreWorkspaceRequest, callback?: (err: AWSError, data: WorkSpaces.Types.RestoreWorkspaceResult) => void): Request<WorkSpaces.Types.RestoreWorkspaceResult, AWSError>;
@@ -598,7 +646,43 @@ declare class WorkSpaces extends Service {
 }
 declare namespace WorkSpaces {
   export type ARN = string;
+  export interface AcceptAccountLinkInvitationRequest {
+    /**
+     * The identifier of the account link.
+     */
+    LinkId: LinkId;
+    /**
+     * A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent creation.
+     */
+    ClientToken?: ClientToken;
+  }
+  export interface AcceptAccountLinkInvitationResult {
+    /**
+     * Information about the account link.
+     */
+    AccountLink?: AccountLink;
+  }
   export type AccessPropertyValue = "ALLOW"|"DENY"|string;
+  export interface AccountLink {
+    /**
+     * The identifier of the account link.
+     */
+    AccountLinkId?: LinkId;
+    /**
+     * The status of the account link.
+     */
+    AccountLinkStatus?: AccountLinkStatusEnum;
+    /**
+     * The identifier of the source account.
+     */
+    SourceAccountId?: AwsAccount;
+    /**
+     * The identifier of the target account.
+     */
+    TargetAccountId?: AwsAccount;
+  }
+  export type AccountLinkList = AccountLink[];
+  export type AccountLinkStatusEnum = "LINKED"|"LINKING_FAILED"|"LINK_NOT_FOUND"|"PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT"|"REJECTED"|string;
   export interface AccountModification {
     /**
      * The state of the modification to the configuration of BYOL.
@@ -812,6 +896,7 @@ declare namespace WorkSpaces {
      */
     ClientProperties?: ClientProperties;
   }
+  export type ClientToken = string;
   export type ClientUrl = string;
   export type Compute = "VALUE"|"STANDARD"|"PERFORMANCE"|"POWER"|"GRAPHICS"|"POWERPRO"|"GRAPHICSPRO"|"GRAPHICS_G4DN"|"GRAPHICSPRO_G4DN"|string;
   export type ComputeList = Compute[];
@@ -927,6 +1012,22 @@ declare namespace WorkSpaces {
      * The identifier of the image.
      */
     ImageId?: WorkspaceImageId;
+  }
+  export interface CreateAccountLinkInvitationRequest {
+    /**
+     * The identifier of the target account.
+     */
+    TargetAccountId: AwsAccount;
+    /**
+     * A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent creation.
+     */
+    ClientToken?: ClientToken;
+  }
+  export interface CreateAccountLinkInvitationResult {
+    /**
+     * Information about the account link.
+     */
+    AccountLink?: AccountLink;
   }
   export interface CreateConnectClientAddInRequest {
     /**
@@ -1147,6 +1248,7 @@ declare namespace WorkSpaces {
      */
     RecoverySnapshotTime?: Timestamp;
   }
+  export type DedicatedTenancyAccountType = "SOURCE_ACCOUNT"|"TARGET_ACCOUNT"|string;
   export type DedicatedTenancyCidrRangeList = DedicatedTenancyManagementCidrRange[];
   export type DedicatedTenancyManagementCidrRange = string;
   export type DedicatedTenancyModificationStateEnum = "PENDING"|"COMPLETED"|"FAILED"|string;
@@ -1228,6 +1330,22 @@ declare namespace WorkSpaces {
   export type DeletableCertificateBasedAuthProperty = "CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARN"|string;
   export type DeletableSamlPropertiesList = DeletableSamlProperty[];
   export type DeletableSamlProperty = "SAML_PROPERTIES_USER_ACCESS_URL"|"SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME"|string;
+  export interface DeleteAccountLinkInvitationRequest {
+    /**
+     * The identifier of the account link.
+     */
+    LinkId: LinkId;
+    /**
+     * A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent creation.
+     */
+    ClientToken?: ClientToken;
+  }
+  export interface DeleteAccountLinkInvitationResult {
+    /**
+     * Information about the account link.
+     */
+    AccountLink?: AccountLink;
+  }
   export interface DeleteClientBrandingRequest {
     /**
      * The directory identifier of the WorkSpace for which you want to delete client branding.
@@ -1347,6 +1465,10 @@ declare namespace WorkSpaces {
      * The IP address range, specified as an IPv4 CIDR block, used for the management network interface. The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.
      */
     DedicatedTenancyManagementCidrRange?: DedicatedTenancyManagementCidrRange;
+    /**
+     * The type of linked account.
+     */
+    DedicatedTenancyAccountType?: DedicatedTenancyAccountType;
   }
   export interface DescribeApplicationAssociationsRequest {
     /**
@@ -1908,6 +2030,22 @@ declare namespace WorkSpaces {
      */
     ErrorMessage?: Description;
   }
+  export interface GetAccountLinkRequest {
+    /**
+     * The identifier of the account to link.
+     */
+    LinkId?: LinkId;
+    /**
+     * The identifier of the account link
+     */
+    LinkedAccountId?: AwsAccount;
+  }
+  export interface GetAccountLinkResult {
+    /**
+     * The account link of the account link to retrieve.
+     */
+    AccountLink?: AccountLink;
+  }
   export type ImageAssociatedResourceType = "APPLICATION"|string;
   export type ImageAssociatedResourceTypeList = ImageAssociatedResourceType[];
   export interface ImagePermission {
@@ -2120,6 +2258,32 @@ declare namespace WorkSpaces {
   }
   export type IpRuleList = IpRuleItem[];
   export type Limit = number;
+  export type LinkId = string;
+  export type LinkStatusFilterList = AccountLinkStatusEnum[];
+  export interface ListAccountLinksRequest {
+    /**
+     * Filters the account based on their link status.
+     */
+    LinkStatusFilter?: LinkStatusFilterList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of accounts to return.
+     */
+    MaxResults?: Limit;
+  }
+  export interface ListAccountLinksResult {
+    /**
+     * Information about the account links.
+     */
+    AccountLinks?: AccountLinkList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: PaginationToken;
+  }
   export interface ListAvailableManagementCidrRangesRequest {
     /**
      * The IP address range to search. Specify an IP address range that is compatible with your network and in CIDR notation (that is, specify the range as an IPv4 CIDR block).
@@ -2402,6 +2566,22 @@ declare namespace WorkSpaces {
   export interface RegisterWorkspaceDirectoryResult {
   }
   export type RegistrationCode = string;
+  export interface RejectAccountLinkInvitationRequest {
+    /**
+     * The identifier of the account link
+     */
+    LinkId: LinkId;
+    /**
+     * The client token of the account link invitation to reject.
+     */
+    ClientToken?: ClientToken;
+  }
+  export interface RejectAccountLinkInvitationResult {
+    /**
+     * Information about the account link.
+     */
+    AccountLink?: AccountLink;
+  }
   export interface RelatedWorkspaceProperties {
     /**
      * The identifier of the related WorkSpace.
