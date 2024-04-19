@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1602.0-->
+<!--LATEST=2.1603.0-->
 <!--ENTRYINSERT-->
+
+## 2.1603.0
+* feature: Glue: Adding RowFilter in the response for GetUnfilteredTableMetadata API
+* feature: InternetMonitor: This update introduces the GetInternetEvent and ListInternetEvents APIs, which provide access to internet events displayed on the Amazon CloudWatch Internet Weather Map.
+* feature: Personalize: This releases auto training capability while creating a solution and automatically syncing latest solution versions when creating/updating a campaign
 
 ## 2.1602.0
 * feature: Drs: Outpost ARN added to Source Server and Recovery Instance

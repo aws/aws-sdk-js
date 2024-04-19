@@ -28,13 +28,21 @@ declare class InternetMonitor extends Service {
    */
   deleteMonitor(callback?: (err: AWSError, data: InternetMonitor.Types.DeleteMonitorOutput) => void): Request<InternetMonitor.Types.DeleteMonitorOutput, AWSError>;
   /**
-   * Gets information the Amazon CloudWatch Internet Monitor has created and stored about a health event for a specified monitor. This information includes the impacted locations, and all the information related to the event, by location. The information returned includes the impact on performance, availability, and round-trip time, information about the network providers (ASNs), the event type, and so on. Information rolled up at the global traffic level is also returned, including the impact type and total traffic impact.
+   * Gets information that Amazon CloudWatch Internet Monitor has created and stored about a health event for a specified monitor. This information includes the impacted locations, and all the information related to the event, by location. The information returned includes the impact on performance, availability, and round-trip time, information about the network providers (ASNs), the event type, and so on. Information rolled up at the global traffic level is also returned, including the impact type and total traffic impact.
    */
   getHealthEvent(params: InternetMonitor.Types.GetHealthEventInput, callback?: (err: AWSError, data: InternetMonitor.Types.GetHealthEventOutput) => void): Request<InternetMonitor.Types.GetHealthEventOutput, AWSError>;
   /**
-   * Gets information the Amazon CloudWatch Internet Monitor has created and stored about a health event for a specified monitor. This information includes the impacted locations, and all the information related to the event, by location. The information returned includes the impact on performance, availability, and round-trip time, information about the network providers (ASNs), the event type, and so on. Information rolled up at the global traffic level is also returned, including the impact type and total traffic impact.
+   * Gets information that Amazon CloudWatch Internet Monitor has created and stored about a health event for a specified monitor. This information includes the impacted locations, and all the information related to the event, by location. The information returned includes the impact on performance, availability, and round-trip time, information about the network providers (ASNs), the event type, and so on. Information rolled up at the global traffic level is also returned, including the impact type and total traffic impact.
    */
   getHealthEvent(callback?: (err: AWSError, data: InternetMonitor.Types.GetHealthEventOutput) => void): Request<InternetMonitor.Types.GetHealthEventOutput, AWSError>;
+  /**
+   * Gets information that Amazon CloudWatch Internet Monitor has generated about an internet event. Internet Monitor displays information about recent global health events, called internet events, on a global outages map that is available to all Amazon Web Services customers.  The information returned here includes the impacted location, when the event started and (if the event is over) ended, the type of event (PERFORMANCE or AVAILABILITY), and the status (ACTIVE or RESOLVED).
+   */
+  getInternetEvent(params: InternetMonitor.Types.GetInternetEventInput, callback?: (err: AWSError, data: InternetMonitor.Types.GetInternetEventOutput) => void): Request<InternetMonitor.Types.GetInternetEventOutput, AWSError>;
+  /**
+   * Gets information that Amazon CloudWatch Internet Monitor has generated about an internet event. Internet Monitor displays information about recent global health events, called internet events, on a global outages map that is available to all Amazon Web Services customers.  The information returned here includes the impacted location, when the event started and (if the event is over) ended, the type of event (PERFORMANCE or AVAILABILITY), and the status (ACTIVE or RESOLVED).
+   */
+  getInternetEvent(callback?: (err: AWSError, data: InternetMonitor.Types.GetInternetEventOutput) => void): Request<InternetMonitor.Types.GetInternetEventOutput, AWSError>;
   /**
    * Gets information about a monitor in Amazon CloudWatch Internet Monitor based on a monitor name. The information returned includes the Amazon Resource Name (ARN), create time, modified time, resources included in the monitor, and status information.
    */
@@ -60,13 +68,21 @@ declare class InternetMonitor extends Service {
    */
   getQueryStatus(callback?: (err: AWSError, data: InternetMonitor.Types.GetQueryStatusOutput) => void): Request<InternetMonitor.Types.GetQueryStatusOutput, AWSError>;
   /**
-   * Lists all health events for a monitor in Amazon CloudWatch Internet Monitor. Returns information for health events including the event start and end time and the status.  Health events that have start times during the time frame that is requested are not included in the list of health events. 
+   * Lists all health events for a monitor in Amazon CloudWatch Internet Monitor. Returns information for health events including the event start and end times, and the status.  Health events that have start times during the time frame that is requested are not included in the list of health events. 
    */
   listHealthEvents(params: InternetMonitor.Types.ListHealthEventsInput, callback?: (err: AWSError, data: InternetMonitor.Types.ListHealthEventsOutput) => void): Request<InternetMonitor.Types.ListHealthEventsOutput, AWSError>;
   /**
-   * Lists all health events for a monitor in Amazon CloudWatch Internet Monitor. Returns information for health events including the event start and end time and the status.  Health events that have start times during the time frame that is requested are not included in the list of health events. 
+   * Lists all health events for a monitor in Amazon CloudWatch Internet Monitor. Returns information for health events including the event start and end times, and the status.  Health events that have start times during the time frame that is requested are not included in the list of health events. 
    */
   listHealthEvents(callback?: (err: AWSError, data: InternetMonitor.Types.ListHealthEventsOutput) => void): Request<InternetMonitor.Types.ListHealthEventsOutput, AWSError>;
+  /**
+   * Lists internet events that cause performance or availability issues for client locations. Amazon CloudWatch Internet Monitor displays information about recent global health events, called internet events, on a global outages map that is available to all Amazon Web Services customers.  You can constrain the list of internet events returned by providing a start time and end time to define a total time frame for events you want to list. Both start time and end time specify the time when an event started. End time is optional. If you don't include it, the default end time is the current time. You can also limit the events returned to a specific status (ACTIVE or RESOLVED) or type (PERFORMANCE or AVAILABILITY).
+   */
+  listInternetEvents(params: InternetMonitor.Types.ListInternetEventsInput, callback?: (err: AWSError, data: InternetMonitor.Types.ListInternetEventsOutput) => void): Request<InternetMonitor.Types.ListInternetEventsOutput, AWSError>;
+  /**
+   * Lists internet events that cause performance or availability issues for client locations. Amazon CloudWatch Internet Monitor displays information about recent global health events, called internet events, on a global outages map that is available to all Amazon Web Services customers.  You can constrain the list of internet events returned by providing a start time and end time to define a total time frame for events you want to list. Both start time and end time specify the time when an event started. End time is optional. If you don't include it, the default end time is the current time. You can also limit the events returned to a specific status (ACTIVE or RESOLVED) or type (PERFORMANCE or AVAILABILITY).
+   */
+  listInternetEvents(callback?: (err: AWSError, data: InternetMonitor.Types.ListInternetEventsOutput) => void): Request<InternetMonitor.Types.ListInternetEventsOutput, AWSError>;
   /**
    * Lists all of your monitors for Amazon CloudWatch Internet Monitor and their statuses, along with the Amazon Resource Name (ARN) and name of each monitor.
    */
@@ -142,6 +158,40 @@ declare namespace InternetMonitor {
     PercentOfClientLocationImpacted?: Double;
   }
   export type Boolean = boolean;
+  export interface ClientLocation {
+    /**
+     * The name of the internet service provider (ISP) or network (ASN).
+     */
+    ASName: String;
+    /**
+     * The Autonomous System Number (ASN) of the network at an impacted location.
+     */
+    ASNumber: Long;
+    /**
+     * The name of the country where the internet event is located.
+     */
+    Country: String;
+    /**
+     * The subdivision location where the health event is located. The subdivision usually maps to states in most countries (including the United States). For United Kingdom, it maps to a country (England, Scotland, Wales) or province (Northern Ireland).
+     */
+    Subdivision?: String;
+    /**
+     * The metro area where the health event is located. Metro indicates a metropolitan region in the United States, such as the region around New York City. In non-US countries, this is a second-level subdivision. For example, in the United Kingdom, it could be a county, a London borough, a unitary authority, council area, and so on.
+     */
+    Metro?: String;
+    /**
+     * The name of the city where the internet event is located.
+     */
+    City: String;
+    /**
+     * The latitude where the internet event is located.
+     */
+    Latitude: Double;
+    /**
+     * The longitude where the internet event is located.
+     */
+    Longitude: Double;
+  }
   export interface CreateMonitorInput {
     /**
      * The name of the monitor. 
@@ -221,7 +271,7 @@ declare namespace InternetMonitor {
      */
     EventId: HealthEventName;
     /**
-     * TBD 
+     * The account ID for an account that you've set up cross-account sharing for in Amazon CloudWatch Internet Monitor. You configure cross-account sharing by using Amazon CloudWatch Observability Access Manager. For more information, see Internet Monitor cross-account observability in the Amazon CloudWatch Internet Monitor User Guide.
      */
     LinkedAccountId?: AccountId;
   }
@@ -271,13 +321,49 @@ declare namespace InternetMonitor {
      */
     HealthScoreThreshold?: Percentage;
   }
+  export interface GetInternetEventInput {
+    /**
+     * The EventId of the internet event to return information for. 
+     */
+    EventId: InternetEventId;
+  }
+  export interface GetInternetEventOutput {
+    /**
+     * The internally-generated identifier of an internet event.
+     */
+    EventId: InternetEventId;
+    /**
+     * The Amazon Resource Name (ARN) of the internet event.
+     */
+    EventArn: Arn;
+    /**
+     * The time when the internet event started.
+     */
+    StartedAt: SyntheticTimestamp_date_time;
+    /**
+     * The time when the internet event ended. If the event hasn't ended yet, this value is empty.
+     */
+    EndedAt?: SyntheticTimestamp_date_time;
+    /**
+     * The impacted location, such as a city, where clients access Amazon Web Services application resources.
+     */
+    ClientLocation: ClientLocation;
+    /**
+     * The type of network impairment.
+     */
+    EventType: InternetEventType;
+    /**
+     * The status of the internet event.
+     */
+    EventStatus: InternetEventStatus;
+  }
   export interface GetMonitorInput {
     /**
      * The name of the monitor.
      */
     MonitorName: ResourceName;
     /**
-     * TBD 
+     * The account ID for an account that you've set up cross-account sharing for in Amazon CloudWatch Internet Monitor. You configure cross-account sharing by using Amazon CloudWatch Observability Access Manager. For more information, see Internet Monitor cross-account observability in the Amazon CloudWatch Internet Monitor User Guide.
      */
     LinkedAccountId?: AccountId;
   }
@@ -413,7 +499,7 @@ declare namespace InternetMonitor {
      */
     ImpactedLocations: ImpactedLocationsList;
     /**
-     * Health event list member.
+     * The status of a health event.
      */
     Status: HealthEventStatus;
     /**
@@ -453,7 +539,7 @@ declare namespace InternetMonitor {
   }
   export interface ImpactedLocation {
     /**
-     * The name of the network at an impacted location.
+     * The name of the internet service provider (ISP) or network (ASN).
      */
     ASName: String;
     /**
@@ -514,6 +600,41 @@ declare namespace InternetMonitor {
     Ipv4Prefixes?: Ipv4PrefixList;
   }
   export type ImpactedLocationsList = ImpactedLocation[];
+  export type InternetEventId = string;
+  export type InternetEventMaxResults = number;
+  export type InternetEventStatus = "ACTIVE"|"RESOLVED"|string;
+  export interface InternetEventSummary {
+    /**
+     * The internally-generated identifier of an internet event.
+     */
+    EventId: InternetEventId;
+    /**
+     * The Amazon Resource Name (ARN) of the internet event.
+     */
+    EventArn: Arn;
+    /**
+     * The time when an internet event started.
+     */
+    StartedAt: SyntheticTimestamp_date_time;
+    /**
+     * The time when an internet event ended. If the event hasn't ended yet, this value is empty.
+     */
+    EndedAt?: SyntheticTimestamp_date_time;
+    /**
+     * The impacted location, such as a city, that Amazon Web Services clients access application resources from.
+     */
+    ClientLocation: ClientLocation;
+    /**
+     * The type of network impairment.
+     */
+    EventType: InternetEventType;
+    /**
+     * The status of an internet event.
+     */
+    EventStatus: InternetEventStatus;
+  }
+  export type InternetEventType = "AVAILABILITY"|"PERFORMANCE"|string;
+  export type InternetEventsList = InternetEventSummary[];
   export interface InternetHealth {
     /**
      * Availability in Internet Monitor represents the estimated percentage of traffic that is not seeing an availability drop. For example, an availability score of 99% for an end user and service location pair is equivalent to 1% of the traffic experiencing an availability drop for that pair. For more information, see How Internet Monitor calculates performance and availability scores in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
@@ -557,7 +678,7 @@ declare namespace InternetMonitor {
      */
     EventStatus?: HealthEventStatus;
     /**
-     * TBD 
+     * The account ID for an account that you've set up cross-account sharing for in Amazon CloudWatch Internet Monitor. You configure cross-account sharing by using Amazon CloudWatch Observability Access Manager. For more information, see Internet Monitor cross-account observability in the Amazon CloudWatch Internet Monitor User Guide.
      */
     LinkedAccountId?: AccountId;
   }
@@ -566,6 +687,42 @@ declare namespace InternetMonitor {
      * A list of health events.
      */
     HealthEvents: HealthEventList;
+    /**
+     * The token for the next set of results. You receive this token from a previous call.
+     */
+    NextToken?: String;
+  }
+  export interface ListInternetEventsInput {
+    /**
+     * The token for the next set of results. You receive this token from a previous call.
+     */
+    NextToken?: String;
+    /**
+     * The number of query results that you want to return with this call.
+     */
+    MaxResults?: InternetEventMaxResults;
+    /**
+     * The start time of the time window that you want to get a list of internet events for.
+     */
+    StartTime?: SyntheticTimestamp_date_time;
+    /**
+     * The end time of the time window that you want to get a list of internet events for.
+     */
+    EndTime?: SyntheticTimestamp_date_time;
+    /**
+     * The status of an internet event.
+     */
+    EventStatus?: String;
+    /**
+     * The type of network impairment.
+     */
+    EventType?: String;
+  }
+  export interface ListInternetEventsOutput {
+    /**
+     * A set of internet events returned for the list operation.
+     */
+    InternetEvents: InternetEventsList;
     /**
      * The token for the next set of results. You receive this token from a previous call.
      */
@@ -585,7 +742,7 @@ declare namespace InternetMonitor {
      */
     MonitorStatus?: String;
     /**
-     * TBD 
+     * A boolean option that you can set to TRUE to include monitors for linked accounts in a list of monitors, when you've set up cross-account sharing in Amazon CloudWatch Internet Monitor. You configure cross-account sharing by using Amazon CloudWatch Observability Access Manager. For more information, see Internet Monitor cross-account observability in the Amazon CloudWatch Internet Monitor User Guide.
      */
     IncludeLinkedAccounts?: Boolean;
   }
@@ -654,7 +811,7 @@ declare namespace InternetMonitor {
   export type MonitorProcessingStatusCode = "OK"|"INACTIVE"|"COLLECTING_DATA"|"INSUFFICIENT_DATA"|"FAULT_SERVICE"|"FAULT_ACCESS_CLOUDWATCH"|string;
   export interface Network {
     /**
-     * The internet provider name or network name.
+     * The name of the internet service provider (ISP) or network (ASN).
      */
     ASName: String;
     /**
@@ -672,7 +829,7 @@ declare namespace InternetMonitor {
      */
     AsPath: NetworkList;
     /**
-     * Type of network impairment.
+     * The type of network impairment.
      */
     NetworkEventType: TriangulationEventType;
   }
@@ -766,7 +923,7 @@ declare namespace InternetMonitor {
      */
     FilterParameters?: FilterParameters;
     /**
-     * TBD 
+     * The account ID for an account that you've set up cross-account sharing for in Amazon CloudWatch Internet Monitor. You configure cross-account sharing by using Amazon CloudWatch Observability Access Manager. For more information, see Internet Monitor cross-account observability in the Amazon CloudWatch Internet Monitor User Guide.
      */
     LinkedAccountId?: AccountId;
   }

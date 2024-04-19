@@ -8353,6 +8353,10 @@ declare namespace Glue {
      * The Lake Formation data permissions of the caller on the table. Used to authorize the call when no view context is found.
      */
     Permissions?: PermissionList;
+    /**
+     * The filter that applies to the table. For example when applying the filter in SQL, it would go in the WHERE clause and can be evaluated by using an AND operator with any other predicates applied by the user querying the table.
+     */
+    RowFilter?: PredicateString;
   }
   export interface GetUserDefinedFunctionRequest {
     /**
