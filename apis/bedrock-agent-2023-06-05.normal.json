@@ -1417,6 +1417,10 @@
     "ActionGroupExecutor": {
       "type": "structure",
       "members": {
+        "customControl": {
+          "shape": "CustomControlMethod",
+          "documentation": "<p>To return the action group invocation results directly in the <code>InvokeAgent</code> response, specify <code>RETURN_CONTROL</code>.</p>"
+        },
         "lambda": {
           "shape": "LambdaArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action.</p>"
@@ -1618,6 +1622,10 @@
         "description": {
           "shape": "Description",
           "documentation": "<p>The description of the action group.</p>"
+        },
+        "functionSchema": {
+          "shape": "FunctionSchema",
+          "documentation": "<p>Defines functions that each define parameters that the agent needs to invoke from the user. Each function represents an action in an action group.</p>"
         },
         "parentActionSignature": {
           "shape": "ActionGroupSignature",
@@ -2224,6 +2232,10 @@
           "shape": "Description",
           "documentation": "<p>A description of the action group.</p>"
         },
+        "functionSchema": {
+          "shape": "FunctionSchema",
+          "documentation": "<p>Contains details about the function schema for the action group or the JSON or YAML-formatted payload defining the schema.</p>"
+        },
         "parentActionGroupSignature": {
           "shape": "ActionGroupSignature",
           "documentation": "<p>To allow your agent to request the user for additional information when trying to complete a task, set this field to <code>AMAZON.UserInput</code>. You must leave the <code>description</code>, <code>apiSchema</code>, and <code>actionGroupExecutor</code> fields blank for this action group.</p> <p>During orchestration, if your agent determines that it needs to invoke an API in an action group, but doesn't have enough information to complete the API request, it will invoke this action group instead and return an <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html\">Observation</a> reprompting the user for more information.</p>"
@@ -2461,6 +2473,12 @@
       "enum": [
         "DEFAULT",
         "OVERRIDDEN"
+      ]
+    },
+    "CustomControlMethod": {
+      "type": "string",
+      "enum": [
+        "RETURN_CONTROL"
       ]
     },
     "DataSource": {
@@ -2927,6 +2945,49 @@
       "max": 99,
       "min": 1
     },
+    "Function": {
+      "type": "structure",
+      "required": [
+        "name"
+      ],
+      "members": {
+        "description": {
+          "shape": "FunctionDescription",
+          "documentation": "<p>A description of the function and its purpose.</p>"
+        },
+        "name": {
+          "shape": "Name",
+          "documentation": "<p>A name for the function.</p>"
+        },
+        "parameters": {
+          "shape": "ParameterMap",
+          "documentation": "<p>The parameters that the agent elicits from the user to fulfill the function.</p>"
+        }
+      },
+      "documentation": "<p>Defines parameters that the agent needs to invoke from the user to complete the function. Corresponds to an action in an action group.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax\">CreateAgentActionGroup request</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax\">CreateAgentActionGroup response</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax\">UpdateAgentActionGroup request</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax\">UpdateAgentActionGroup response</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax\">GetAgentActionGroup response</a> </p> </li> </ul>"
+    },
+    "FunctionDescription": {
+      "type": "string",
+      "max": 1200,
+      "min": 1
+    },
+    "FunctionSchema": {
+      "type": "structure",
+      "members": {
+        "functions": {
+          "shape": "Functions",
+          "documentation": "<p>A list of functions that each define an action in the action group.</p>"
+        }
+      },
+      "documentation": "<p>Defines functions that each define parameters that the agent needs to invoke from the user. Each function represents an action in an action group.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax\">CreateAgentActionGroup request</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax\">CreateAgentActionGroup response</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax\">UpdateAgentActionGroup request</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax\">UpdateAgentActionGroup response</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax\">GetAgentActionGroup response</a> </p> </li> </ul>",
+      "union": true
+    },
+    "Functions": {
+      "type": "list",
+      "member": {
+        "shape": "Function"
+      }
+    },
     "GetAgentActionGroupRequest": {
       "type": "structure",
       "required": [
@@ -3276,7 +3337,7 @@
           "documentation": "<p>The time at which the ingestion job was last updated.</p>"
         }
       },
-      "documentation": "<p>Contains details about an ingestion job, which converts a data source to embeddings for a vector store in knowledge base.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_StartIngestionJob.html#API_agent_StartIngestionJob_ResponseSyntax\">StartIngestionJob response</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetIngestionJob.html#API_agent_GetIngestionJob_ResponseSyntax\">GetIngestionJob response</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListIngestionJob.html#API_agent_ListIngestionJob_ResponseSyntax\">ListIngestionJob response</a> </p> </li> </ul>"
+      "documentation": "<p>Contains details about an ingestion job, which converts a data source to embeddings for a vector store in knowledge base.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_StartIngestionJob.html#API_agent_StartIngestionJob_ResponseSyntax\">StartIngestionJob response</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetIngestionJob.html#API_agent_GetIngestionJob_ResponseSyntax\">GetIngestionJob response</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListIngestionJobs.html#API_agent_ListIngestionJobs_ResponseSyntax\">ListIngestionJob response</a> </p> </li> </ul>"
     },
     "IngestionJobFilter": {
       "type": "structure",
@@ -4061,6 +4122,41 @@
       "min": 0,
       "pattern": "^.*$"
     },
+    "ParameterDescription": {
+      "type": "string",
+      "max": 500,
+      "min": 1
+    },
+    "ParameterDetail": {
+      "type": "structure",
+      "required": [
+        "type"
+      ],
+      "members": {
+        "description": {
+          "shape": "ParameterDescription",
+          "documentation": "<p>A description of the parameter. Helps the foundation model determine how to elicit the parameters from the user.</p>"
+        },
+        "required": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the parameter is required for the agent to complete the function for action group invocation.</p>"
+        },
+        "type": {
+          "shape": "Type",
+          "documentation": "<p>The data type of the parameter.</p>"
+        }
+      },
+      "documentation": "<p>Contains details about a parameter in a function for an action group.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax\">CreateAgentActionGroup request</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax\">CreateAgentActionGroup response</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax\">UpdateAgentActionGroup request</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax\">UpdateAgentActionGroup response</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax\">GetAgentActionGroup response</a> </p> </li> </ul>"
+    },
+    "ParameterMap": {
+      "type": "map",
+      "key": {
+        "shape": "Name"
+      },
+      "value": {
+        "shape": "ParameterDetail"
+      }
+    },
     "Payload": {
       "type": "string",
       "sensitive": true
@@ -4638,6 +4734,16 @@
       "max": 1,
       "min": 0
     },
+    "Type": {
+      "type": "string",
+      "enum": [
+        "string",
+        "number",
+        "integer",
+        "boolean",
+        "array"
+      ]
+    },
     "UntagResourceRequest": {
       "type": "structure",
       "required": [
@@ -4709,6 +4815,10 @@
         "description": {
           "shape": "Description",
           "documentation": "<p>Specifies a new name for the action group.</p>"
+        },
+        "functionSchema": {
+          "shape": "FunctionSchema",
+          "documentation": "<p>Contains details about the function schema for the action group or the JSON or YAML-formatted payload defining the schema.</p>"
         },
         "parentActionGroupSignature": {
           "shape": "ActionGroupSignature",

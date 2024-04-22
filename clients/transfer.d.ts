@@ -365,11 +365,19 @@ declare class Transfer extends Service {
    */
   sendWorkflowStepState(callback?: (err: AWSError, data: Transfer.Types.SendWorkflowStepStateResponse) => void): Request<Transfer.Types.SendWorkflowStepStateResponse, AWSError>;
   /**
-   * Begins a file transfer between local Amazon Web Services storage and a remote AS2 or SFTP server.   For an AS2 connector, you specify the ConnectorId and one or more SendFilePaths to identify the files you want to transfer.   For an SFTP connector, the file transfer can be either outbound or inbound. In both cases, you specify the ConnectorId. Depending on the direction of the transfer, you also specify the following items:   If you are transferring file from a partner's SFTP server to Amazon Web Services storage, you specify one or more RetreiveFilePaths to identify the files you want to transfer, and a LocalDirectoryPath to specify the destination folder.   If you are transferring file to a partner's SFTP server from Amazon Web Services storage, you specify one or more SendFilePaths to identify the files you want to transfer, and a RemoteDirectoryPath to specify the destination folder.    
+   * Retrieves a list of the contents of a directory from a remote SFTP server. You specify the connector ID, the output path, and the remote directory path. You can also specify the optional MaxItems value to control the maximum number of items that are listed from the remote directory. This API returns a list of all files and directories in the remote directory (up to the maximum value), but does not return files or folders in sub-directories. That is, it only returns a list of files and directories one-level deep. After you receive the listing file, you can provide the files that you want to transfer to the RetrieveFilePaths parameter of the StartFileTransfer API call. The naming convention for the output file is  connector-ID-listing-ID.json. The output file contains the following information:    filePath: the complete path of a remote file, relative to the directory of the listing request for your SFTP connector on the remote server.    modifiedTimestamp: the last time the file was modified, in UTC time format. This field is optional. If the remote file attributes don't contain a timestamp, it is omitted from the file listing.    size: the size of the file, in bytes. This field is optional. If the remote file attributes don't contain a file size, it is omitted from the file listing.    path: the complete path of a remote directory, relative to the directory of the listing request for your SFTP connector on the remote server.    truncated: a flag indicating whether the list output contains all of the items contained in the remote directory or not. If your Truncated output value is true, you can increase the value provided in the optional max-items input attribute to be able to list more items (up to the maximum allowed list size of 10,000 items).  
+   */
+  startDirectoryListing(params: Transfer.Types.StartDirectoryListingRequest, callback?: (err: AWSError, data: Transfer.Types.StartDirectoryListingResponse) => void): Request<Transfer.Types.StartDirectoryListingResponse, AWSError>;
+  /**
+   * Retrieves a list of the contents of a directory from a remote SFTP server. You specify the connector ID, the output path, and the remote directory path. You can also specify the optional MaxItems value to control the maximum number of items that are listed from the remote directory. This API returns a list of all files and directories in the remote directory (up to the maximum value), but does not return files or folders in sub-directories. That is, it only returns a list of files and directories one-level deep. After you receive the listing file, you can provide the files that you want to transfer to the RetrieveFilePaths parameter of the StartFileTransfer API call. The naming convention for the output file is  connector-ID-listing-ID.json. The output file contains the following information:    filePath: the complete path of a remote file, relative to the directory of the listing request for your SFTP connector on the remote server.    modifiedTimestamp: the last time the file was modified, in UTC time format. This field is optional. If the remote file attributes don't contain a timestamp, it is omitted from the file listing.    size: the size of the file, in bytes. This field is optional. If the remote file attributes don't contain a file size, it is omitted from the file listing.    path: the complete path of a remote directory, relative to the directory of the listing request for your SFTP connector on the remote server.    truncated: a flag indicating whether the list output contains all of the items contained in the remote directory or not. If your Truncated output value is true, you can increase the value provided in the optional max-items input attribute to be able to list more items (up to the maximum allowed list size of 10,000 items).  
+   */
+  startDirectoryListing(callback?: (err: AWSError, data: Transfer.Types.StartDirectoryListingResponse) => void): Request<Transfer.Types.StartDirectoryListingResponse, AWSError>;
+  /**
+   * Begins a file transfer between local Amazon Web Services storage and a remote AS2 or SFTP server.   For an AS2 connector, you specify the ConnectorId and one or more SendFilePaths to identify the files you want to transfer.   For an SFTP connector, the file transfer can be either outbound or inbound. In both cases, you specify the ConnectorId. Depending on the direction of the transfer, you also specify the following items:   If you are transferring file from a partner's SFTP server to Amazon Web Services storage, you specify one or more RetrieveFilePaths to identify the files you want to transfer, and a LocalDirectoryPath to specify the destination folder.   If you are transferring file to a partner's SFTP server from Amazon Web Services storage, you specify one or more SendFilePaths to identify the files you want to transfer, and a RemoteDirectoryPath to specify the destination folder.    
    */
   startFileTransfer(params: Transfer.Types.StartFileTransferRequest, callback?: (err: AWSError, data: Transfer.Types.StartFileTransferResponse) => void): Request<Transfer.Types.StartFileTransferResponse, AWSError>;
   /**
-   * Begins a file transfer between local Amazon Web Services storage and a remote AS2 or SFTP server.   For an AS2 connector, you specify the ConnectorId and one or more SendFilePaths to identify the files you want to transfer.   For an SFTP connector, the file transfer can be either outbound or inbound. In both cases, you specify the ConnectorId. Depending on the direction of the transfer, you also specify the following items:   If you are transferring file from a partner's SFTP server to Amazon Web Services storage, you specify one or more RetreiveFilePaths to identify the files you want to transfer, and a LocalDirectoryPath to specify the destination folder.   If you are transferring file to a partner's SFTP server from Amazon Web Services storage, you specify one or more SendFilePaths to identify the files you want to transfer, and a RemoteDirectoryPath to specify the destination folder.    
+   * Begins a file transfer between local Amazon Web Services storage and a remote AS2 or SFTP server.   For an AS2 connector, you specify the ConnectorId and one or more SendFilePaths to identify the files you want to transfer.   For an SFTP connector, the file transfer can be either outbound or inbound. In both cases, you specify the ConnectorId. Depending on the direction of the transfer, you also specify the following items:   If you are transferring file from a partner's SFTP server to Amazon Web Services storage, you specify one or more RetrieveFilePaths to identify the files you want to transfer, and a LocalDirectoryPath to specify the destination folder.   If you are transferring file to a partner's SFTP server from Amazon Web Services storage, you specify one or more SendFilePaths to identify the files you want to transfer, and a RemoteDirectoryPath to specify the destination folder.    
    */
   startFileTransfer(callback?: (err: AWSError, data: Transfer.Types.StartFileTransferResponse) => void): Request<Transfer.Types.StartFileTransferResponse, AWSError>;
   /**
@@ -1255,7 +1263,7 @@ declare namespace Transfer {
      */
     CertificateId?: CertificateId;
     /**
-     * Specifies how this certificate is used. It can be used in the following ways:    SIGNING: For signing AS2 messages    ENCRYPTION: For encrypting AS2 messages    TLS: For securing AS2 communications sent over HTTPS  
+     * Specifies whether this certificate is used for signing or encryption.
      */
     Usage?: CertificateUsageType;
     /**
@@ -1770,7 +1778,7 @@ declare namespace Transfer {
   export type IdentityProviderType = "SERVICE_MANAGED"|"API_GATEWAY"|"AWS_DIRECTORY_SERVICE"|"AWS_LAMBDA"|string;
   export interface ImportCertificateRequest {
     /**
-     * Specifies how this certificate is used. It can be used in the following ways:    SIGNING: For signing AS2 messages    ENCRYPTION: For encrypting AS2 messages    TLS: For securing AS2 communications sent over HTTPS  
+     * Specifies whether this certificate is used for signing or encryption.
      */
     Usage: CertificateUsageType;
     /**
@@ -2222,7 +2230,7 @@ declare namespace Transfer {
      */
     CertificateId?: CertificateId;
     /**
-     * Specifies how this certificate is used. It can be used in the following ways:    SIGNING: For signing AS2 messages    ENCRYPTION: For encrypting AS2 messages    TLS: For securing AS2 communications sent over HTTPS  
+     * Specifies whether this certificate is used for signing or encryption.
      */
     Usage?: CertificateUsageType;
     /**
@@ -2404,6 +2412,7 @@ declare namespace Transfer {
     Arn?: Arn;
   }
   export type ListedWorkflows = ListedWorkflow[];
+  export type ListingId = string;
   export type LogGroupName = string;
   export interface LoggingConfiguration {
     /**
@@ -2418,6 +2427,7 @@ declare namespace Transfer {
   export type MapEntry = string;
   export type MapTarget = string;
   export type MapType = "FILE"|"DIRECTORY"|string;
+  export type MaxItems = number;
   export type MaxResults = number;
   export type MdnResponse = "SYNC"|"NONE"|string;
   export type MdnSigningAlg = "SHA256"|"SHA384"|"SHA512"|"SHA1"|"NONE"|"DEFAULT"|string;
@@ -2427,6 +2437,7 @@ declare namespace Transfer {
   export type NullableRole = string;
   export type OnPartialUploadWorkflowDetails = WorkflowDetail[];
   export type OnUploadWorkflowDetails = WorkflowDetail[];
+  export type OutputFileName = string;
   export type OverwriteExisting = "TRUE"|"FALSE"|string;
   export type PassiveIp = string;
   export type Policy = string;
@@ -2599,6 +2610,34 @@ declare namespace Transfer {
   export type SshPublicKeyCount = number;
   export type SshPublicKeyId = string;
   export type SshPublicKeys = SshPublicKey[];
+  export interface StartDirectoryListingRequest {
+    /**
+     * The unique identifier for the connector.
+     */
+    ConnectorId: ConnectorId;
+    /**
+     * Specifies the directory on the remote SFTP server for which you want to list its contents.
+     */
+    RemoteDirectoryPath: FilePath;
+    /**
+     * An optional parameter where you can specify the maximum number of file/directory names to retrieve. The default value is 1,000.
+     */
+    MaxItems?: MaxItems;
+    /**
+     * Specifies the path (bucket and prefix) in Amazon S3 storage to store the results of the directory listing.
+     */
+    OutputDirectoryPath: FilePath;
+  }
+  export interface StartDirectoryListingResponse {
+    /**
+     * Returns a unique identifier for the directory listing call.
+     */
+    ListingId: ListingId;
+    /**
+     * Returns the file name where the results are stored. This is a combination of the connector ID and the listing ID: &lt;connector-id&gt;-&lt;listing-id&gt;.json.
+     */
+    OutputFileName: OutputFileName;
+  }
   export interface StartFileTransferRequest {
     /**
      * The unique identifier for the connector.

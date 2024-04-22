@@ -380,5 +380,6 @@ module.exports = {
   TimestreamInfluxDB: require('./timestreaminfluxdb'),
   CodeConnections: require('./codeconnections'),
   Deadline: require('./deadline'),
-  ControlCatalog: require('./controlcatalog')
+  ControlCatalog: require('./controlcatalog'),
+  Route53Profiles: require('./route53profiles')
 };

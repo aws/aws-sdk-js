@@ -1421,5 +1421,8 @@
   },
   "controlcatalog": {
     "name": "ControlCatalog"
+  },
+  "route53profiles": {
+    "name": "Route53Profiles"
   }
 }

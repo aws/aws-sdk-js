@@ -13,11 +13,11 @@ declare class BedrockAgentRuntime extends Service {
   constructor(options?: BedrockAgentRuntime.Types.ClientConfiguration)
   config: Config & BedrockAgentRuntime.Types.ClientConfiguration;
   /**
-   * Sends a prompt for the agent to process and respond to.  The CLI doesn't support InvokeAgent.    To continue the same conversation with an agent, use the same sessionId value in the request.   To activate trace enablement, turn enableTrace to true. Trace enablement helps you follow the agent's reasoning process that led it to the information it processed, the actions it took, and the final result it yielded. For more information, see Trace enablement.   End a conversation by setting endSession to true.   Include attributes for the session or prompt in the sessionState object.   The response is returned in the bytes field of the chunk object.   The attribution object contains citations for parts of the response.   If you set enableTrace to true in the request, you can trace the agent's steps and reasoning process that led it to the response.   Errors are also surfaced in the response.  
+   * Sends a prompt for the agent to process and respond to. Use return control event type for function calling.  The CLI doesn't support InvokeAgent.    To continue the same conversation with an agent, use the same sessionId value in the request.   To activate trace enablement, turn enableTrace to true. Trace enablement helps you follow the agent's reasoning process that led it to the information it processed, the actions it took, and the final result it yielded. For more information, see Trace enablement.   End a conversation by setting endSession to true.   In the sessionState object, you can include attributes for the session or prompt or parameters returned from the action group.   Use return control event type for function calling.   The response is returned in the bytes field of the chunk object.   The attribution object contains citations for parts of the response.   If you set enableTrace to true in the request, you can trace the agent's steps and reasoning process that led it to the response.   Errors are also surfaced in the response.  
    */
   invokeAgent(params: BedrockAgentRuntime.Types.InvokeAgentRequest, callback?: (err: AWSError, data: BedrockAgentRuntime.Types.InvokeAgentResponse) => void): Request<BedrockAgentRuntime.Types.InvokeAgentResponse, AWSError>;
   /**
-   * Sends a prompt for the agent to process and respond to.  The CLI doesn't support InvokeAgent.    To continue the same conversation with an agent, use the same sessionId value in the request.   To activate trace enablement, turn enableTrace to true. Trace enablement helps you follow the agent's reasoning process that led it to the information it processed, the actions it took, and the final result it yielded. For more information, see Trace enablement.   End a conversation by setting endSession to true.   Include attributes for the session or prompt in the sessionState object.   The response is returned in the bytes field of the chunk object.   The attribution object contains citations for parts of the response.   If you set enableTrace to true in the request, you can trace the agent's steps and reasoning process that led it to the response.   Errors are also surfaced in the response.  
+   * Sends a prompt for the agent to process and respond to. Use return control event type for function calling.  The CLI doesn't support InvokeAgent.    To continue the same conversation with an agent, use the same sessionId value in the request.   To activate trace enablement, turn enableTrace to true. Trace enablement helps you follow the agent's reasoning process that led it to the information it processed, the actions it took, and the final result it yielded. For more information, see Trace enablement.   End a conversation by setting endSession to true.   In the sessionState object, you can include attributes for the session or prompt or parameters returned from the action group.   Use return control event type for function calling.   The response is returned in the bytes field of the chunk object.   The attribution object contains citations for parts of the response.   If you set enableTrace to true in the request, you can trace the agent's steps and reasoning process that led it to the response.   Errors are also surfaced in the response.  
    */
   invokeAgent(callback?: (err: AWSError, data: BedrockAgentRuntime.Types.InvokeAgentResponse) => void): Request<BedrockAgentRuntime.Types.InvokeAgentResponse, AWSError>;
   /**
@@ -51,6 +51,10 @@ declare namespace BedrockAgentRuntime {
      */
     apiPath?: ApiPath;
     /**
+     * The function in the action group to call.
+     */
+    function?: Function;
+    /**
      * The parameters in the Lambda input event.
      */
     parameters?: Parameters;
@@ -73,7 +77,78 @@ declare namespace BedrockAgentRuntime {
   export type ActionGroupOutputString = string;
   export type AgentAliasId = string;
   export type AgentId = string;
+  export type AgentVersion = string;
+  export type ApiContentMap = {[key: string]: PropertyParameters};
+  export interface ApiInvocationInput {
+    /**
+     * The action group that the API operation belongs to.
+     */
+    actionGroup: String;
+    /**
+     * The path to the API operation.
+     */
+    apiPath?: ApiPath;
+    /**
+     * The HTTP method of the API operation.
+     */
+    httpMethod?: String;
+    /**
+     * The parameters to provide for the API request, as the agent elicited from the user.
+     */
+    parameters?: ApiParameters;
+    /**
+     * The request body to provide for the API request, as the agent elicited from the user.
+     */
+    requestBody?: ApiRequestBody;
+  }
+  export interface ApiParameter {
+    /**
+     * The name of the parameter.
+     */
+    name?: String;
+    /**
+     * The data type for the parameter.
+     */
+    type?: String;
+    /**
+     * The value of the parameter.
+     */
+    value?: String;
+  }
+  export type ApiParameters = ApiParameter[];
   export type ApiPath = string;
+  export interface ApiRequestBody {
+    /**
+     * The content of the request body. The key of the object in this field is a media type defining the format of the request body.
+     */
+    content?: ApiContentMap;
+  }
+  export interface ApiResult {
+    /**
+     * The action group that the API operation belongs to.
+     */
+    actionGroup: String;
+    /**
+     * The path to the API operation.
+     */
+    apiPath?: ApiPath;
+    /**
+     * The HTTP method for the API operation.
+     */
+    httpMethod?: String;
+    /**
+     * http status code from API execution response (for example: 200, 400, 500).
+     */
+    httpStatusCode?: Integer;
+    /**
+     * The response body from the API operation. The key of the object is the content type. The response may be returned directly or from the Lambda function.
+     */
+    responseBody?: ResponseBody;
+    /**
+     * Controls the final response state returned to end user when API/Function execution failed. When this state is FAILURE, the request would fail with dependency failure exception. When this state is REPROMPT, the API/function response will be sent to model for re-prompt
+     */
+    responseState?: ResponseState;
+  }
   export interface Attribution {
     /**
      * A list of citations and related information for a part of an agent response.
@@ -102,6 +177,12 @@ declare namespace BedrockAgentRuntime {
   export type Citations = Citation[];
   export interface ConflictException {
     message?: NonBlankString;
+  }
+  export interface ContentBody {
+    /**
+     * The body of the API response.
+     */
+    body?: String;
   }
   export type ContentMap = {[key: string]: Parameters};
   export type CreationMode = "DEFAULT"|"OVERRIDDEN"|string;
@@ -144,6 +225,54 @@ declare namespace BedrockAgentRuntime {
     text?: FinalResponseString;
   }
   export type FinalResponseString = string;
+  export type Function = string;
+  export interface FunctionInvocationInput {
+    /**
+     * The action group that the function belongs to.
+     */
+    actionGroup: String;
+    /**
+     * The name of the function.
+     */
+    function?: String;
+    /**
+     * A list of parameters of the function.
+     */
+    parameters?: FunctionParameters;
+  }
+  export interface FunctionParameter {
+    /**
+     * The name of the parameter.
+     */
+    name?: String;
+    /**
+     * The data type of the parameter.
+     */
+    type?: String;
+    /**
+     * The value of the parameter.
+     */
+    value?: String;
+  }
+  export type FunctionParameters = FunctionParameter[];
+  export interface FunctionResult {
+    /**
+     * The action group that the function belongs to.
+     */
+    actionGroup: String;
+    /**
+     * The name of the function that was called.
+     */
+    function?: String;
+    /**
+     * The response from the function call using the parameters. The response may be returned directly or from the Lambda function.
+     */
+    responseBody?: ResponseBody;
+    /**
+     * Controls the final response state returned to end user when API/Function execution failed. When this state is FAILURE, the request would fail with dependency failure exception. When this state is REPROMPT, the API/function response will be sent to model for re-prompt
+     */
+    responseState?: ResponseState;
+  }
   export interface GeneratedResponsePart {
     /**
      * Contains metadata about a textual part of the generated response that is accompanied by a citation.
@@ -179,6 +308,7 @@ declare namespace BedrockAgentRuntime {
     topP?: TopP;
   }
   export type InputText = string;
+  export type Integer = number;
   export interface InternalServerException {
     message?: NonBlankString;
   }
@@ -199,6 +329,27 @@ declare namespace BedrockAgentRuntime {
      * The unique identifier of the trace.
      */
     traceId?: TraceId;
+  }
+  export interface InvocationInputMember {
+    /**
+     * Contains information about the API operation that the agent predicts should be called.
+     */
+    apiInvocationInput?: ApiInvocationInput;
+    /**
+     * Contains information about the function that the agent predicts should be called.
+     */
+    functionInvocationInput?: FunctionInvocationInput;
+  }
+  export type InvocationInputs = InvocationInputMember[];
+  export interface InvocationResultMember {
+    /**
+     * The result from the API response from the action group invocation.
+     */
+    apiResult?: ApiResult;
+    /**
+     * The result from the function from the action group invocation.
+     */
+    functionResult?: FunctionResult;
   }
   export type InvocationType = "ACTION_GROUP"|"KNOWLEDGE_BASE"|"FINISH"|string;
   export interface InvokeAgentRequest {
@@ -221,7 +372,7 @@ declare namespace BedrockAgentRuntime {
     /**
      * The prompt text to send the agent.
      */
-    inputText: InputText;
+    inputText?: InputText;
     /**
      * The unique identifier of the session. Use the same value across requests to continue the same conversation.
      */
@@ -423,6 +574,7 @@ declare namespace BedrockAgentRuntime {
      */
     value?: String;
   }
+  export type ParameterList = Parameter[];
   export type Parameters = Parameter[];
   export type PartBody = Buffer|Uint8Array|Blob|string;
   export interface PayloadPart {
@@ -500,6 +652,12 @@ declare namespace BedrockAgentRuntime {
   }
   export type PromptText = string;
   export type PromptType = "PRE_PROCESSING"|"ORCHESTRATION"|"KNOWLEDGE_BASE_RESPONSE_GENERATION"|"POST_PROCESSING"|string;
+  export interface PropertyParameters {
+    /**
+     * A list of parameters in the request body.
+     */
+    properties?: ParameterList;
+  }
   export interface Rationale {
     /**
      * The reasoning or thought process of the agent, based on the input.
@@ -530,7 +688,9 @@ declare namespace BedrockAgentRuntime {
   export interface ResourceNotFoundException {
     message?: NonBlankString;
   }
-  export type ResponseStream = EventStream<{accessDeniedException?:AccessDeniedException,badGatewayException?:BadGatewayException,chunk?:PayloadPart,conflictException?:ConflictException,dependencyFailedException?:DependencyFailedException,internalServerException?:InternalServerException,resourceNotFoundException?:ResourceNotFoundException,serviceQuotaExceededException?:ServiceQuotaExceededException,throttlingException?:ThrottlingException,trace?:TracePart,validationException?:ValidationException}>;
+  export type ResponseBody = {[key: string]: ContentBody};
+  export type ResponseState = "FAILURE"|"REPROMPT"|string;
+  export type ResponseStream = EventStream<{accessDeniedException?:AccessDeniedException,badGatewayException?:BadGatewayException,chunk?:PayloadPart,conflictException?:ConflictException,dependencyFailedException?:DependencyFailedException,internalServerException?:InternalServerException,resourceNotFoundException?:ResourceNotFoundException,returnControl?:ReturnControlPayload,serviceQuotaExceededException?:ServiceQuotaExceededException,throttlingException?:ThrottlingException,trace?:TracePart,validationException?:ValidationException}>;
   export interface RetrievalFilter {
     /**
      * Knowledge base data sources whose metadata attributes fulfill all the filter conditions inside this list are returned.
@@ -710,6 +870,17 @@ declare namespace BedrockAgentRuntime {
     metadata?: RetrievalResultMetadata;
   }
   export type RetrievedReferences = RetrievedReference[];
+  export type ReturnControlInvocationResults = InvocationResultMember[];
+  export interface ReturnControlPayload {
+    /**
+     * The identifier of the action group invocation.
+     */
+    invocationId?: String;
+    /**
+     * A list of objects that contain information about the parameters and inputs that need to be sent into the API operation or function, based on what the agent determines from its session with the user.
+     */
+    invocationInputs?: InvocationInputs;
+  }
   export type SearchType = "HYBRID"|"SEMANTIC"|string;
   export interface ServiceQuotaExceededException {
     message?: NonBlankString;
@@ -718,9 +889,17 @@ declare namespace BedrockAgentRuntime {
   export type SessionId = string;
   export interface SessionState {
     /**
+     * The identifier of the invocation.
+     */
+    invocationId?: String;
+    /**
      * Contains attributes that persist across a prompt and the values of those attributes. These attributes replace the $prompt_session_attributes$ placeholder variable in the orchestration prompt template. For more information, see Prompt template placeholder variables.
      */
     promptSessionAttributes?: PromptSessionAttributesMap;
+    /**
+     * Contains information about the results from the action group invocation.
+     */
+    returnControlInvocationResults?: ReturnControlInvocationResults;
     /**
      * Contains attributes that persist across a session and the values of those attributes.
      */
@@ -787,6 +966,10 @@ declare namespace BedrockAgentRuntime {
      * The unique identifier of the agent.
      */
     agentId?: AgentId;
+    /**
+     * The version of the agent.
+     */
+    agentVersion?: AgentVersion;
     /**
      * The unique identifier of the session with the agent.
      */

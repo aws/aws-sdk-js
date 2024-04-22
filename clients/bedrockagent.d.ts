@@ -345,6 +345,10 @@ declare namespace BedrockAgent {
   }
   export interface ActionGroupExecutor {
     /**
+     * To return the action group invocation results directly in the InvokeAgent response, specify RETURN_CONTROL.
+     */
+    customControl?: CustomControlMethod;
+    /**
      * The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action.
      */
     lambda?: LambdaArn;
@@ -489,6 +493,10 @@ declare namespace BedrockAgent {
      * The description of the action group.
      */
     description?: Description;
+    /**
+     * Defines functions that each define parameters that the agent needs to invoke from the user. Each function represents an action in an action group.
+     */
+    functionSchema?: FunctionSchema;
     /**
      * If this field is set as AMAZON.UserInput, the agent can request the user for additional information when trying to complete a task. The description, apiSchema, and actionGroupExecutor fields must be blank for this action group. During orchestration, if the agent determines that it needs to invoke an API in an action group, but doesn't have enough information to complete the API request, it will invoke this action group instead and return an Observation reprompting the user for more information.
      */
@@ -850,6 +858,10 @@ declare namespace BedrockAgent {
      */
     description?: Description;
     /**
+     * Contains details about the function schema for the action group or the JSON or YAML-formatted payload defining the schema.
+     */
+    functionSchema?: FunctionSchema;
+    /**
      * To allow your agent to request the user for additional information when trying to complete a task, set this field to AMAZON.UserInput. You must leave the description, apiSchema, and actionGroupExecutor fields blank for this action group. During orchestration, if your agent determines that it needs to invoke an API in an action group, but doesn't have enough information to complete the API request, it will invoke this action group instead and return an Observation reprompting the user for more information.
      */
     parentActionGroupSignature?: ActionGroupSignature;
@@ -1013,6 +1025,7 @@ declare namespace BedrockAgent {
     knowledgeBase: KnowledgeBase;
   }
   export type CreationMode = "DEFAULT"|"OVERRIDDEN"|string;
+  export type CustomControlMethod = "RETURN_CONTROL"|string;
   export interface DataSource {
     /**
      * The time at which the data source was created.
@@ -1260,6 +1273,28 @@ declare namespace BedrockAgent {
   }
   export type FixedSizeChunkingConfigurationMaxTokensInteger = number;
   export type FixedSizeChunkingConfigurationOverlapPercentageInteger = number;
+  export interface Function {
+    /**
+     * A description of the function and its purpose.
+     */
+    description?: FunctionDescription;
+    /**
+     * A name for the function.
+     */
+    name: Name;
+    /**
+     * The parameters that the agent elicits from the user to fulfill the function.
+     */
+    parameters?: ParameterMap;
+  }
+  export type FunctionDescription = string;
+  export interface FunctionSchema {
+    /**
+     * A list of functions that each define an action in the action group.
+     */
+    functions?: Functions;
+  }
+  export type Functions = Function[];
   export interface GetAgentActionGroupRequest {
     /**
      * The unique identifier of the action group for which to get information.
@@ -1889,6 +1924,22 @@ declare namespace BedrockAgent {
     vectorField: FieldName;
   }
   export type OpenSearchServerlessIndexName = string;
+  export type ParameterDescription = string;
+  export interface ParameterDetail {
+    /**
+     * A description of the parameter. Helps the foundation model determine how to elicit the parameters from the user.
+     */
+    description?: ParameterDescription;
+    /**
+     * Whether the parameter is required for the agent to complete the function for action group invocation.
+     */
+    required?: Boolean;
+    /**
+     * The data type of the parameter.
+     */
+    type: Type;
+  }
+  export type ParameterMap = {[key: string]: ParameterDetail};
   export type Payload = string;
   export interface PineconeConfiguration {
     /**
@@ -2165,6 +2216,7 @@ declare namespace BedrockAgent {
   export type Temperature = number;
   export type TopK = number;
   export type TopP = number;
+  export type Type = "string"|"number"|"integer"|"boolean"|"array"|string;
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource from which to remove tags.
@@ -2210,6 +2262,10 @@ declare namespace BedrockAgent {
      * Specifies a new name for the action group.
      */
     description?: Description;
+    /**
+     * Contains details about the function schema for the action group or the JSON or YAML-formatted payload defining the schema.
+     */
+    functionSchema?: FunctionSchema;
     /**
      * To allow your agent to request the user for additional information when trying to complete a task, set this field to AMAZON.UserInput. You must leave the description, apiSchema, and actionGroupExecutor fields blank for this action group. During orchestration, if your agent determines that it needs to invoke an API in an action group, but doesn't have enough information to complete the API request, it will invoke this action group instead and return an Observation reprompting the user for more information.
      */

@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1603.0-->
+<!--LATEST=2.1604.0-->
 <!--ENTRYINSERT-->
+
+## 2.1604.0
+* feature: BedrockAgent: Releasing the support for simplified configuration and return of control
+* feature: BedrockAgentRuntime: Releasing the support for simplified configuration and return of control
+* feature: PaymentCryptography: Adding support to TR-31/TR-34 exports for optional headers, allowing customers to add additional metadata (such as key version and KSN) when exporting keys from the service.
+* feature: Route53Profiles: Route 53 Profiles allows you to apply a central DNS configuration across many VPCs regardless of account.
+* feature: SageMaker: This release adds support for Real-Time Collaboration and Shared Space for JupyterLab App on SageMaker Studio.
+* feature: Transfer: Adding new API to support remote directory listing using SFTP connector
 
 ## 2.1603.0
 * feature: Glue: Adding RowFilter in the response for GetUnfilteredTableMetadata API

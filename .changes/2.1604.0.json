@@ -1,0 +1,32 @@
+[
+    {
+        "type": "feature",
+        "category": "BedrockAgent",
+        "description": "Releasing the support for simplified configuration and return of control"
+    },
+    {
+        "type": "feature",
+        "category": "BedrockAgentRuntime",
+        "description": "Releasing the support for simplified configuration and return of control"
+    },
+    {
+        "type": "feature",
+        "category": "PaymentCryptography",
+        "description": "Adding support to TR-31/TR-34 exports for optional headers, allowing customers to add additional metadata (such as key version and KSN) when exporting keys from the service."
+    },
+    {
+        "type": "feature",
+        "category": "Route53Profiles",
+        "description": "Route 53 Profiles allows you to apply a central DNS configuration across many VPCs regardless of account."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "This release adds support for Real-Time Collaboration and Shared Space for JupyterLab App on SageMaker Studio."
+    },
+    {
+        "type": "feature",
+        "category": "Transfer",
+        "description": "Adding new API to support remote directory listing using SFTP connector"
+    }
+]

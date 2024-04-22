@@ -6967,11 +6967,11 @@ declare namespace SageMaker {
   export type DebugRuleEvaluationStatuses = DebugRuleEvaluationStatus[];
   export interface DefaultEbsStorageSettings {
     /**
-     * The default size of the EBS storage volume for a private space.
+     * The default size of the EBS storage volume for a space.
      */
     DefaultEbsVolumeSizeInGb: SpaceEbsVolumeSizeInGb;
     /**
-     * The maximum size of the EBS storage volume for a private space.
+     * The maximum size of the EBS storage volume for a space.
      */
     MaximumEbsVolumeSizeInGb: SpaceEbsVolumeSizeInGb;
   }
@@ -6987,10 +6987,17 @@ declare namespace SageMaker {
     SecurityGroups?: SecurityGroupIds;
     JupyterServerAppSettings?: JupyterServerAppSettings;
     KernelGatewayAppSettings?: KernelGatewayAppSettings;
+    JupyterLabAppSettings?: JupyterLabAppSettings;
+    SpaceStorageSettings?: DefaultSpaceStorageSettings;
+    CustomPosixUserConfig?: CustomPosixUserConfig;
+    /**
+     * The settings for assigning a custom file system to a domain. Permitted users can access this file system in Amazon SageMaker Studio.
+     */
+    CustomFileSystemConfigs?: CustomFileSystemConfigs;
   }
   export interface DefaultSpaceStorageSettings {
     /**
-     * The default EBS storage settings for a private space.
+     * The default EBS storage settings for a space.
      */
     DefaultEbsStorageSettings?: DefaultEbsStorageSettings;
   }
@@ -11359,7 +11366,7 @@ declare namespace SageMaker {
   }
   export interface EbsStorageSettings {
     /**
-     * The size of an EBS storage volume for a private space.
+     * The size of an EBS storage volume for a space.
      */
     EbsVolumeSizeInGb: SpaceEbsVolumeSizeInGb;
   }
@@ -19284,13 +19291,13 @@ declare namespace SageMaker {
   export type OutputParameterList = OutputParameter[];
   export interface OwnershipSettings {
     /**
-     * The user profile who is the owner of the private space.
+     * The user profile who is the owner of the space.
      */
     OwnerUserProfileName: UserProfileName;
   }
   export interface OwnershipSettingsSummary {
     /**
-     * The user profile who is the owner of the private space.
+     * The user profile who is the owner of the space.
      */
     OwnerUserProfileName?: UserProfileName;
   }
@@ -21612,7 +21619,7 @@ declare namespace SageMaker {
      */
     AppType?: AppType;
     /**
-     * The storage settings for a private space.
+     * The storage settings for a space.
      */
     SpaceStorageSettings?: SpaceStorageSettings;
     /**
@@ -21626,7 +21633,7 @@ declare namespace SageMaker {
      */
     AppType?: AppType;
     /**
-     * The storage settings for a private space.
+     * The storage settings for a space.
      */
     SpaceStorageSettings?: SpaceStorageSettings;
   }
@@ -21646,7 +21653,7 @@ declare namespace SageMaker {
   export type SpaceStatus = "Deleting"|"Failed"|"InService"|"Pending"|"Updating"|"Update_Failed"|"Delete_Failed"|string;
   export interface SpaceStorageSettings {
     /**
-     * A collection of EBS storage settings for a private space.
+     * A collection of EBS storage settings for a space.
      */
     EbsStorageSettings?: EbsStorageSettings;
   }
@@ -24197,7 +24204,7 @@ declare namespace SageMaker {
      */
     JupyterLabAppSettings?: JupyterLabAppSettings;
     /**
-     * The storage settings for a private space.
+     * The storage settings for a space.
      */
     SpaceStorageSettings?: DefaultSpaceStorageSettings;
     /**

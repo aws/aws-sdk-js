@@ -381,6 +381,7 @@ export abstract class ConfigurationServicePlaceholders {
   codeconnections?: AWS.CodeConnections.Types.ClientConfiguration;
   deadline?: AWS.Deadline.Types.ClientConfiguration;
   controlcatalog?: AWS.ControlCatalog.Types.ClientConfiguration;
+  route53profiles?: AWS.Route53Profiles.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -764,4 +765,5 @@ export interface ConfigurationServiceApiVersions {
   codeconnections?: AWS.CodeConnections.Types.apiVersion;
   deadline?: AWS.Deadline.Types.apiVersion;
   controlcatalog?: AWS.ControlCatalog.Types.apiVersion;
+  route53profiles?: AWS.Route53Profiles.Types.apiVersion;
 }
