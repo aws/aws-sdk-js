@@ -373,6 +373,35 @@
       "type": "boolean",
       "box": true
     },
+    "ByteContentBlob": {
+      "type": "blob",
+      "max": 10485760,
+      "min": 1,
+      "sensitive": true
+    },
+    "ByteContentDoc": {
+      "type": "structure",
+      "required": [
+        "contentType",
+        "data",
+        "identifier"
+      ],
+      "members": {
+        "contentType": {
+          "shape": "ContentType",
+          "documentation": "<p>The MIME type of the document contained in the wrapper object.</p>"
+        },
+        "data": {
+          "shape": "ByteContentBlob",
+          "documentation": "<p>The byte value of the file to upload, encoded as a Base-64 string.</p>"
+        },
+        "identifier": {
+          "shape": "Identifier",
+          "documentation": "<p>The file name of the document contained in the wrapper object.</p>"
+        }
+      },
+      "documentation": "<p>This property contains the document to chat with, along with its attributes.</p>"
+    },
     "Citation": {
       "type": "structure",
       "members": {
@@ -426,6 +455,10 @@
         "shape": "Parameters"
       }
     },
+    "ContentType": {
+      "type": "string",
+      "pattern": "[a-z]{1,20}/.{1,20}"
+    },
     "CreationMode": {
       "type": "string",
       "enum": [
@@ -454,6 +487,74 @@
     "Double": {
       "type": "double",
       "box": true
+    },
+    "ExternalSource": {
+      "type": "structure",
+      "required": [
+        "sourceType"
+      ],
+      "members": {
+        "byteContent": {
+          "shape": "ByteContentDoc",
+          "documentation": "<p>The identifier, contentType, and data of the external source wrapper object.</p>"
+        },
+        "s3Location": {
+          "shape": "S3ObjectDoc",
+          "documentation": "<p>The S3 location of the external source wrapper object.</p>"
+        },
+        "sourceType": {
+          "shape": "ExternalSourceType",
+          "documentation": "<p>The source type of the external source wrapper object.</p>"
+        }
+      },
+      "documentation": "<p>The unique external source of the content contained in the wrapper object.</p>"
+    },
+    "ExternalSourceType": {
+      "type": "string",
+      "enum": [
+        "S3",
+        "BYTE_CONTENT"
+      ]
+    },
+    "ExternalSources": {
+      "type": "list",
+      "member": {
+        "shape": "ExternalSource"
+      },
+      "max": 1,
+      "min": 1
+    },
+    "ExternalSourcesGenerationConfiguration": {
+      "type": "structure",
+      "members": {
+        "promptTemplate": {
+          "shape": "PromptTemplate",
+          "documentation": "<p>Contain the textPromptTemplate string for the external source wrapper object.</p>"
+        }
+      },
+      "documentation": "<p>Contains the generation configuration of the external source wrapper object.</p>"
+    },
+    "ExternalSourcesRetrieveAndGenerateConfiguration": {
+      "type": "structure",
+      "required": [
+        "modelArn",
+        "sources"
+      ],
+      "members": {
+        "generationConfiguration": {
+          "shape": "ExternalSourcesGenerationConfiguration",
+          "documentation": "<p>The prompt used with the external source wrapper object with the retrieveAndGenerate function.</p>"
+        },
+        "modelArn": {
+          "shape": "BedrockModelArn",
+          "documentation": "<p>The modelArn used with the external source wrapper object in the retrieveAndGenerate function.</p>"
+        },
+        "sources": {
+          "shape": "ExternalSources",
+          "documentation": "<p>The document used with the external source wrapper object in the retrieveAndGenerate function.</p>"
+        }
+      },
+      "documentation": "<p>The configurations of the external source wrapper object in the retrieveAndGenerate function.</p>"
     },
     "FailureReasonString": {
       "type": "string",
@@ -609,6 +710,12 @@
         }
       },
       "documentation": "<p>Contains configurations for response generation based on the knowledge base query results.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax\">RetrieveAndGenerate request</a> </p> </li> </ul>"
+    },
+    "Identifier": {
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "sensitive": true
     },
     "InferenceConfiguration": {
       "type": "structure",
@@ -1517,6 +1624,10 @@
         "type"
       ],
       "members": {
+        "externalSourcesConfiguration": {
+          "shape": "ExternalSourcesRetrieveAndGenerateConfiguration",
+          "documentation": "<p>The configuration used with the external source wrapper object in the retrieveAndGenerate function.</p>"
+        },
         "knowledgeBaseConfiguration": {
           "shape": "KnowledgeBaseRetrieveAndGenerateConfiguration",
           "documentation": "<p>Contains details about the resource being queried.</p>"
@@ -1622,7 +1733,8 @@
     "RetrieveAndGenerateType": {
       "type": "string",
       "enum": [
-        "KNOWLEDGE_BASE"
+        "KNOWLEDGE_BASE",
+        "EXTERNAL_SOURCES"
       ]
     },
     "RetrieveRequest": {
@@ -1715,6 +1827,25 @@
       "documentation": "<p>Contains information to return from the action group that the agent has predicted to invoke.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax\">Retrieve response</a> </p> </li> </ul>",
       "event": true,
       "sensitive": true
+    },
+    "S3ObjectDoc": {
+      "type": "structure",
+      "required": [
+        "uri"
+      ],
+      "members": {
+        "uri": {
+          "shape": "S3Uri",
+          "documentation": "<p>The file location of the S3 wrapper object.</p>"
+        }
+      },
+      "documentation": "<p>The unique wrapper object of the document from the S3 location.</p>"
+    },
+    "S3Uri": {
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "pattern": "^s3://[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]/.{1,1024}$"
     },
     "SearchType": {
       "type": "string",

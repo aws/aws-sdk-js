@@ -164,6 +164,21 @@ declare namespace BedrockAgentRuntime {
   }
   export type BedrockModelArn = string;
   export type Boolean = boolean;
+  export type ByteContentBlob = Buffer|Uint8Array|Blob|string;
+  export interface ByteContentDoc {
+    /**
+     * The MIME type of the document contained in the wrapper object.
+     */
+    contentType: ContentType;
+    /**
+     * The byte value of the file to upload, encoded as a Base-64 string.
+     */
+    data: ByteContentBlob;
+    /**
+     * The file name of the document contained in the wrapper object.
+     */
+    identifier: Identifier;
+  }
   export interface Citation {
     /**
      * Contains the generated response and metadata 
@@ -185,6 +200,7 @@ declare namespace BedrockAgentRuntime {
     body?: String;
   }
   export type ContentMap = {[key: string]: Parameters};
+  export type ContentType = string;
   export type CreationMode = "DEFAULT"|"OVERRIDDEN"|string;
   export interface DependencyFailedException {
     message?: NonBlankString;
@@ -194,6 +210,42 @@ declare namespace BedrockAgentRuntime {
     resourceName?: NonBlankString;
   }
   export type Double = number;
+  export interface ExternalSource {
+    /**
+     * The identifier, contentType, and data of the external source wrapper object.
+     */
+    byteContent?: ByteContentDoc;
+    /**
+     * The S3 location of the external source wrapper object.
+     */
+    s3Location?: S3ObjectDoc;
+    /**
+     * The source type of the external source wrapper object.
+     */
+    sourceType: ExternalSourceType;
+  }
+  export type ExternalSourceType = "S3"|"BYTE_CONTENT"|string;
+  export type ExternalSources = ExternalSource[];
+  export interface ExternalSourcesGenerationConfiguration {
+    /**
+     * Contain the textPromptTemplate string for the external source wrapper object.
+     */
+    promptTemplate?: PromptTemplate;
+  }
+  export interface ExternalSourcesRetrieveAndGenerateConfiguration {
+    /**
+     * The prompt used with the external source wrapper object with the retrieveAndGenerate function.
+     */
+    generationConfiguration?: ExternalSourcesGenerationConfiguration;
+    /**
+     * The modelArn used with the external source wrapper object in the retrieveAndGenerate function.
+     */
+    modelArn: BedrockModelArn;
+    /**
+     * The document used with the external source wrapper object in the retrieveAndGenerate function.
+     */
+    sources: ExternalSources;
+  }
   export type FailureReasonString = string;
   export interface FailureTrace {
     /**
@@ -285,6 +337,7 @@ declare namespace BedrockAgentRuntime {
      */
     promptTemplate?: PromptTemplate;
   }
+  export type Identifier = string;
   export interface InferenceConfiguration {
     /**
      * The maximum number of tokens allowed in the generated response.
@@ -767,6 +820,10 @@ declare namespace BedrockAgentRuntime {
   }
   export interface RetrieveAndGenerateConfiguration {
     /**
+     * The configuration used with the external source wrapper object in the retrieveAndGenerate function.
+     */
+    externalSourcesConfiguration?: ExternalSourcesRetrieveAndGenerateConfiguration;
+    /**
      * Contains details about the resource being queried.
      */
     knowledgeBaseConfiguration?: KnowledgeBaseRetrieveAndGenerateConfiguration;
@@ -826,7 +883,7 @@ declare namespace BedrockAgentRuntime {
      */
     kmsKeyArn: KmsKeyArn;
   }
-  export type RetrieveAndGenerateType = "KNOWLEDGE_BASE"|string;
+  export type RetrieveAndGenerateType = "KNOWLEDGE_BASE"|"EXTERNAL_SOURCES"|string;
   export interface RetrieveRequest {
     /**
      * The unique identifier of the knowledge base to query.
@@ -881,6 +938,13 @@ declare namespace BedrockAgentRuntime {
      */
     invocationInputs?: InvocationInputs;
   }
+  export interface S3ObjectDoc {
+    /**
+     * The file location of the S3 wrapper object.
+     */
+    uri: S3Uri;
+  }
+  export type S3Uri = string;
   export type SearchType = "HYBRID"|"SEMANTIC"|string;
   export interface ServiceQuotaExceededException {
     message?: NonBlankString;

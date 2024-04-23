@@ -2151,6 +2151,12 @@
       "type": "boolean",
       "box": true
     },
+    "BucketOwnerAccountId": {
+      "type": "string",
+      "max": 12,
+      "min": 12,
+      "pattern": "^[0-9]{12}$"
+    },
     "ChunkingConfiguration": {
       "type": "structure",
       "required": [
@@ -2376,6 +2382,10 @@
           "documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
           "idempotencyToken": true
         },
+        "dataDeletionPolicy": {
+          "shape": "DataDeletionPolicy",
+          "documentation": "<p>The deletion policy for the requested data source</p>"
+        },
         "dataSourceConfiguration": {
           "shape": "DataSourceConfiguration",
           "documentation": "<p>Contains metadata about where the data source is stored.</p>"
@@ -2481,6 +2491,13 @@
         "RETURN_CONTROL"
       ]
     },
+    "DataDeletionPolicy": {
+      "type": "string",
+      "enum": [
+        "RETAIN",
+        "DELETE"
+      ]
+    },
     "DataSource": {
       "type": "structure",
       "required": [
@@ -2497,6 +2514,10 @@
           "shape": "DateTimestamp",
           "documentation": "<p>The time at which the data source was created.</p>"
         },
+        "dataDeletionPolicy": {
+          "shape": "DataDeletionPolicy",
+          "documentation": "<p>The deletion policy for the data source.</p>"
+        },
         "dataSourceConfiguration": {
           "shape": "DataSourceConfiguration",
           "documentation": "<p>Contains details about how the data source is stored.</p>"
@@ -2508,6 +2529,10 @@
         "description": {
           "shape": "Description",
           "documentation": "<p>The description of the data source.</p>"
+        },
+        "failureReasons": {
+          "shape": "FailureReasons",
+          "documentation": "<p>The details of the failure reasons related to the data source.</p>"
         },
         "knowledgeBaseId": {
           "shape": "Id",
@@ -2557,7 +2582,8 @@
       "type": "string",
       "enum": [
         "AVAILABLE",
-        "DELETING"
+        "DELETING",
+        "DELETE_UNSUCCESSFUL"
       ]
     },
     "DataSourceSummaries": {
@@ -3632,7 +3658,8 @@
         "ACTIVE",
         "DELETING",
         "UPDATING",
-        "FAILED"
+        "FAILED",
+        "DELETE_UNSUCCESSFUL"
       ]
     },
     "KnowledgeBaseStorageType": {
@@ -4509,6 +4536,10 @@
           "shape": "S3BucketArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the bucket that contains the data source.</p>"
         },
+        "bucketOwnerAccountId": {
+          "shape": "BucketOwnerAccountId",
+          "documentation": "<p>The account ID for the owner of the S3 bucket.</p>"
+        },
         "inclusionPrefixes": {
           "shape": "S3Prefixes",
           "documentation": "<p>A list of S3 prefixes that define the object containing the data sources. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html\">Organizing objects using prefixes</a>.</p>"
@@ -5002,6 +5033,10 @@
         "name"
       ],
       "members": {
+        "dataDeletionPolicy": {
+          "shape": "DataDeletionPolicy",
+          "documentation": "<p>The data deletion policy of the updated data source.</p>"
+        },
         "dataSourceConfiguration": {
           "shape": "DataSourceConfiguration",
           "documentation": "<p>Contains details about the storage configuration of the data source.</p>"

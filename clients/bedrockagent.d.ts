@@ -811,6 +811,7 @@ declare namespace BedrockAgent {
   export type BasePromptTemplate = string;
   export type BedrockEmbeddingModelArn = string;
   export type Boolean = boolean;
+  export type BucketOwnerAccountId = string;
   export interface ChunkingConfiguration {
     /**
      * Knowledge base can split your source data into chunks. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried. You have the following options for chunking your data. If you opt for NONE, then you may want to pre-process your files by splitting them up such that each file corresponds to a chunk.    FIXED_SIZE – Amazon Bedrock splits your source data into chunks of the approximate size that you set in the fixedSizeChunkingConfiguration.    NONE – Amazon Bedrock treats each file as one chunk. If you choose this option, you may want to pre-process your documents by splitting them into separate files.  
@@ -958,6 +959,10 @@ declare namespace BedrockAgent {
      */
     clientToken?: ClientToken;
     /**
+     * The deletion policy for the requested data source
+     */
+    dataDeletionPolicy?: DataDeletionPolicy;
+    /**
      * Contains metadata about where the data source is stored.
      */
     dataSourceConfiguration: DataSourceConfiguration;
@@ -1026,11 +1031,16 @@ declare namespace BedrockAgent {
   }
   export type CreationMode = "DEFAULT"|"OVERRIDDEN"|string;
   export type CustomControlMethod = "RETURN_CONTROL"|string;
+  export type DataDeletionPolicy = "RETAIN"|"DELETE"|string;
   export interface DataSource {
     /**
      * The time at which the data source was created.
      */
     createdAt: DateTimestamp;
+    /**
+     * The deletion policy for the data source.
+     */
+    dataDeletionPolicy?: DataDeletionPolicy;
     /**
      * Contains details about how the data source is stored.
      */
@@ -1043,6 +1053,10 @@ declare namespace BedrockAgent {
      * The description of the data source.
      */
     description?: Description;
+    /**
+     * The details of the failure reasons related to the data source.
+     */
+    failureReasons?: FailureReasons;
     /**
      * The unique identifier of the knowledge base to which the data source belongs.
      */
@@ -1078,7 +1092,7 @@ declare namespace BedrockAgent {
      */
     type: DataSourceType;
   }
-  export type DataSourceStatus = "AVAILABLE"|"DELETING"|string;
+  export type DataSourceStatus = "AVAILABLE"|"DELETING"|"DELETE_UNSUCCESSFUL"|string;
   export type DataSourceSummaries = DataSourceSummary[];
   export interface DataSourceSummary {
     /**
@@ -1645,7 +1659,7 @@ declare namespace BedrockAgent {
   }
   export type KnowledgeBaseRoleArn = string;
   export type KnowledgeBaseState = "ENABLED"|"DISABLED"|string;
-  export type KnowledgeBaseStatus = "CREATING"|"ACTIVE"|"DELETING"|"UPDATING"|"FAILED"|string;
+  export type KnowledgeBaseStatus = "CREATING"|"ACTIVE"|"DELETING"|"UPDATING"|"FAILED"|"DELETE_UNSUCCESSFUL"|string;
   export type KnowledgeBaseStorageType = "OPENSEARCH_SERVERLESS"|"PINECONE"|"REDIS_ENTERPRISE_CLOUD"|"RDS"|string;
   export type KnowledgeBaseSummaries = KnowledgeBaseSummary[];
   export interface KnowledgeBaseSummary {
@@ -2122,6 +2136,10 @@ declare namespace BedrockAgent {
      */
     bucketArn: S3BucketArn;
     /**
+     * The account ID for the owner of the S3 bucket.
+     */
+    bucketOwnerAccountId?: BucketOwnerAccountId;
+    /**
      * A list of S3 prefixes that define the object containing the data sources. For more information, see Organizing objects using prefixes.
      */
     inclusionPrefixes?: S3Prefixes;
@@ -2378,6 +2396,10 @@ declare namespace BedrockAgent {
     agent: Agent;
   }
   export interface UpdateDataSourceRequest {
+    /**
+     * The data deletion policy of the updated data source.
+     */
+    dataDeletionPolicy?: DataDeletionPolicy;
     /**
      * Contains details about the storage configuration of the data source.
      */

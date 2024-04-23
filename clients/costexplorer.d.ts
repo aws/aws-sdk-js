@@ -108,11 +108,11 @@ declare class CostExplorer extends Service {
    */
   getCostAndUsage(callback?: (err: AWSError, data: CostExplorer.Types.GetCostAndUsageResponse) => void): Request<CostExplorer.Types.GetCostAndUsageResponse, AWSError>;
   /**
-   * Retrieves cost and usage metrics with resources for your account. You can specify which cost and usage-related metric, such as BlendedCosts or UsageQuantity, that you want the request to return. You can also filter and group your data by various dimensions, such as SERVICE or AZ, in a specific time range. For a complete list of valid dimensions, see the GetDimensionValues operation. Management account in an organization in Organizations have access to all member accounts. This API is currently available for the Amazon Elastic Compute Cloud – Compute service only.  This is an opt-in only feature. You can enable this feature from the Cost Explorer Settings page. For information about how to access the Settings page, see Controlling Access for Cost Explorer in the Billing and Cost Management User Guide. 
+   * Retrieves cost and usage metrics with resources for your account. You can specify which cost and usage-related metric, such as BlendedCosts or UsageQuantity, that you want the request to return. You can also filter and group your data by various dimensions, such as SERVICE or AZ, in a specific time range. For a complete list of valid dimensions, see the GetDimensionValues operation. Management account in an organization in Organizations have access to all member accounts. Hourly granularity is only available for EC2-Instances (Elastic Compute Cloud) resource-level data. All other resource-level data is available at daily granularity.  This is an opt-in only feature. You can enable this feature from the Cost Explorer Settings page. For information about how to access the Settings page, see Controlling Access for Cost Explorer in the Billing and Cost Management User Guide. 
    */
   getCostAndUsageWithResources(params: CostExplorer.Types.GetCostAndUsageWithResourcesRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetCostAndUsageWithResourcesResponse) => void): Request<CostExplorer.Types.GetCostAndUsageWithResourcesResponse, AWSError>;
   /**
-   * Retrieves cost and usage metrics with resources for your account. You can specify which cost and usage-related metric, such as BlendedCosts or UsageQuantity, that you want the request to return. You can also filter and group your data by various dimensions, such as SERVICE or AZ, in a specific time range. For a complete list of valid dimensions, see the GetDimensionValues operation. Management account in an organization in Organizations have access to all member accounts. This API is currently available for the Amazon Elastic Compute Cloud – Compute service only.  This is an opt-in only feature. You can enable this feature from the Cost Explorer Settings page. For information about how to access the Settings page, see Controlling Access for Cost Explorer in the Billing and Cost Management User Guide. 
+   * Retrieves cost and usage metrics with resources for your account. You can specify which cost and usage-related metric, such as BlendedCosts or UsageQuantity, that you want the request to return. You can also filter and group your data by various dimensions, such as SERVICE or AZ, in a specific time range. For a complete list of valid dimensions, see the GetDimensionValues operation. Management account in an organization in Organizations have access to all member accounts. Hourly granularity is only available for EC2-Instances (Elastic Compute Cloud) resource-level data. All other resource-level data is available at daily granularity.  This is an opt-in only feature. You can enable this feature from the Cost Explorer Settings page. For information about how to access the Settings page, see Controlling Access for Cost Explorer in the Billing and Cost Management User Guide. 
    */
   getCostAndUsageWithResources(callback?: (err: AWSError, data: CostExplorer.Types.GetCostAndUsageWithResourcesResponse) => void): Request<CostExplorer.Types.GetCostAndUsageWithResourcesResponse, AWSError>;
   /**
@@ -2678,13 +2678,17 @@ declare namespace CostExplorer {
   export type ReservationPurchaseRecommendationDetails = ReservationPurchaseRecommendationDetail[];
   export interface ReservationPurchaseRecommendationMetadata {
     /**
-     * The ID for this specific recommendation.
+     * The ID for the recommendation.
      */
     RecommendationId?: GenericString;
     /**
-     * The timestamp for when Amazon Web Services made this recommendation.
+     * The timestamp for when Amazon Web Services made the recommendation.
      */
     GenerationTimestamp?: GenericString;
+    /**
+     * Additional metadata that might be applicable to the recommendation.
+     */
+    AdditionalMetadata?: GenericString;
   }
   export interface ReservationPurchaseRecommendationSummary {
     /**
@@ -2806,15 +2810,15 @@ declare namespace CostExplorer {
   export type RightsizingRecommendationList = RightsizingRecommendation[];
   export interface RightsizingRecommendationMetadata {
     /**
-     * The ID for this specific recommendation.
+     * The ID for the recommendation.
      */
     RecommendationId?: GenericString;
     /**
-     * The timestamp for when Amazon Web Services made this recommendation.
+     * The timestamp for when Amazon Web Services made the recommendation.
      */
     GenerationTimestamp?: GenericString;
     /**
-     * The number of days of previous usage that Amazon Web Services considers when making this recommendation.
+     * The number of days of previous usage that Amazon Web Services considers when making the recommendation.
      */
     LookbackPeriodInDays?: LookbackPeriodInDays;
     /**
