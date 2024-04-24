@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1605.0-->
+<!--LATEST=2.1606.0-->
 <!--ENTRYINSERT-->
+
+## 2.1606.0
+* feature: DataSync: This change allows users to disable and enable the schedules associated with their tasks.
+* feature: EC2: Launching capability for customers to enable or disable automatic assignment of public IPv4 addresses to their network interface
+* feature: EMRcontainers: EMRonEKS Service support for SecurityConfiguration enforcement for Spark Jobs.
+* feature: EntityResolution: Support Batch Unique IDs Deletion.
+* feature: GameLift: Amazon GameLift releases container fleets support for public preview. Deploy Linux-based containerized game server software for hosting on Amazon GameLift.
+* feature: SSM: Add SSM DescribeInstanceProperties API to public AWS SDK.
 
 ## 2.1605.0
 * feature: Bedrock: This release introduces Model Evaluation and Guardrails for Amazon Bedrock.

@@ -20,6 +20,14 @@ declare class EntityResolution extends Service {
    */
   addPolicyStatement(callback?: (err: AWSError, data: EntityResolution.Types.AddPolicyStatementOutput) => void): Request<EntityResolution.Types.AddPolicyStatementOutput, AWSError>;
   /**
+   * Deletes multiple unique IDs in a matching workflow.
+   */
+  batchDeleteUniqueId(params: EntityResolution.Types.BatchDeleteUniqueIdInput, callback?: (err: AWSError, data: EntityResolution.Types.BatchDeleteUniqueIdOutput) => void): Request<EntityResolution.Types.BatchDeleteUniqueIdOutput, AWSError>;
+  /**
+   * Deletes multiple unique IDs in a matching workflow.
+   */
+  batchDeleteUniqueId(callback?: (err: AWSError, data: EntityResolution.Types.BatchDeleteUniqueIdOutput) => void): Request<EntityResolution.Types.BatchDeleteUniqueIdOutput, AWSError>;
+  /**
    * Creates an IdMappingWorkflow object which stores the configuration of the data processing job to be run. Each IdMappingWorkflow must have a unique workflow name. To modify an existing workflow, use the UpdateIdMappingWorkflow API.
    */
   createIdMappingWorkflow(params: EntityResolution.Types.CreateIdMappingWorkflowInput, callback?: (err: AWSError, data: EntityResolution.Types.CreateIdMappingWorkflowOutput) => void): Request<EntityResolution.Types.CreateIdMappingWorkflowOutput, AWSError>;
@@ -345,6 +353,39 @@ declare namespace EntityResolution {
   export type AttributeName = string;
   export type AwsAccountId = string;
   export type AwsAccountIdList = AwsAccountId[];
+  export interface BatchDeleteUniqueIdInput {
+    /**
+     * The input source for the batch delete unique ID operation.
+     */
+    inputSource?: BatchDeleteUniqueIdInputInputSourceString;
+    /**
+     * The unique IDs to delete.
+     */
+    uniqueIds: UniqueIdList;
+    /**
+     * The name of the workflow.
+     */
+    workflowName: EntityName;
+  }
+  export type BatchDeleteUniqueIdInputInputSourceString = string;
+  export interface BatchDeleteUniqueIdOutput {
+    /**
+     * The unique IDs that were deleted.
+     */
+    deleted: DeletedUniqueIdList;
+    /**
+     * The unique IDs that were disconnected.
+     */
+    disconnectedUniqueIds: DisconnectedUniqueIdsList;
+    /**
+     *  The errors from deleting multiple unique IDs.
+     */
+    errors: DeleteUniqueIdErrorsList;
+    /**
+     * The status of the batch delete unique ID operation.
+     */
+    status: DeleteUniqueIdStatus;
+  }
   export type Boolean = boolean;
   export interface CreateIdMappingWorkflowInput {
     /**
@@ -654,7 +695,28 @@ declare namespace EntityResolution {
      */
     message: String;
   }
+  export interface DeleteUniqueIdError {
+    /**
+     *  The error type for the batch delete unique ID operation.
+     */
+    errorType: DeleteUniqueIdErrorType;
+    /**
+     * The unique ID that could not be deleted.
+     */
+    uniqueId: UniqueId;
+  }
+  export type DeleteUniqueIdErrorType = "SERVICE_ERROR"|"VALIDATION_ERROR"|string;
+  export type DeleteUniqueIdErrorsList = DeleteUniqueIdError[];
+  export type DeleteUniqueIdStatus = "COMPLETED"|"ACCEPTED"|string;
+  export interface DeletedUniqueId {
+    /**
+     *  The unique ID of the deleted item.
+     */
+    uniqueId: UniqueId;
+  }
+  export type DeletedUniqueIdList = DeletedUniqueId[];
   export type Description = string;
+  export type DisconnectedUniqueIdsList = UniqueId[];
   export interface Document {
   }
   export type EntityName = string;
@@ -1798,6 +1860,8 @@ declare namespace EntityResolution {
   }
   export type TagValue = string;
   export type Timestamp = Date;
+  export type UniqueId = string;
+  export type UniqueIdList = UniqueId[];
   export interface UntagResourceInput {
     /**
      * The ARN of the resource for which you want to untag.

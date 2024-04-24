@@ -16227,6 +16227,10 @@ declare namespace EC2 {
      * Indicates whether source/destination checking is enabled.
      */
     SourceDestCheck?: AttributeBooleanValue;
+    /**
+     * Indicates whether to assign a public IPv4 address to a network interface. This option can be enabled for any network interface but will only apply to the primary network interface (eth0).
+     */
+    AssociatePublicIpAddress?: Boolean;
   }
   export type DescribeNetworkInterfacePermissionsMaxResults = number;
   export interface DescribeNetworkInterfacePermissionsRequest {
@@ -29048,6 +29052,10 @@ declare namespace EC2 {
      * A connection tracking specification.
      */
     ConnectionTrackingSpecification?: ConnectionTrackingSpecificationRequest;
+    /**
+     * Indicates whether to assign a public IPv4 address to a network interface. This option can be enabled for any network interface but will only apply to the primary network interface (eth0).
+     */
+    AssociatePublicIpAddress?: Boolean;
   }
   export interface ModifyPrivateDnsNameOptionsRequest {
     /**
@@ -31062,7 +31070,7 @@ declare namespace EC2 {
     DeleteOnTermination?: Boolean;
   }
   export type NetworkInterfaceAttachmentId = string;
-  export type NetworkInterfaceAttribute = "description"|"groupSet"|"sourceDestCheck"|"attachment"|string;
+  export type NetworkInterfaceAttribute = "description"|"groupSet"|"sourceDestCheck"|"attachment"|"associatePublicIpAddress"|string;
   export interface NetworkInterfaceCount {
     /**
      * The minimum number of network interfaces. If this parameter is not specified, there is no minimum limit.

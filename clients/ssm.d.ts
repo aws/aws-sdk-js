@@ -373,6 +373,14 @@ declare class SSM extends Service {
    */
   describeInstancePatches(callback?: (err: AWSError, data: SSM.Types.DescribeInstancePatchesResult) => void): Request<SSM.Types.DescribeInstancePatchesResult, AWSError>;
   /**
+   * An API operation used by the Systems Manager console to display information about Systems Manager managed nodes.
+   */
+  describeInstanceProperties(params: SSM.Types.DescribeInstancePropertiesRequest, callback?: (err: AWSError, data: SSM.Types.DescribeInstancePropertiesResult) => void): Request<SSM.Types.DescribeInstancePropertiesResult, AWSError>;
+  /**
+   * An API operation used by the Systems Manager console to display information about Systems Manager managed nodes.
+   */
+  describeInstanceProperties(callback?: (err: AWSError, data: SSM.Types.DescribeInstancePropertiesResult) => void): Request<SSM.Types.DescribeInstancePropertiesResult, AWSError>;
+  /**
    * Describes a specific delete inventory operation.
    */
   describeInventoryDeletions(params: SSM.Types.DescribeInventoryDeletionsRequest, callback?: (err: AWSError, data: SSM.Types.DescribeInventoryDeletionsResult) => void): Request<SSM.Types.DescribeInventoryDeletionsResult, AWSError>;
@@ -1245,6 +1253,7 @@ declare namespace SSM {
   export type AllowedPattern = string;
   export type ApplyOnlyAtCronInterval = boolean;
   export type ApproveAfterDays = number;
+  export type Architecture = string;
   export interface AssociateOpsItemRelatedItemRequest {
     /**
      * The ID of the OpsItem to which you want to associate a resource as a related item.
@@ -2735,7 +2744,7 @@ declare namespace SSM {
      */
     Attachments?: AttachmentsSourceList;
     /**
-     * A name for the SSM document.  You can't use the following strings as document name prefixes. These are reserved by Amazon Web Services for use as document name prefixes:    aws     amazon     amzn    
+     * A name for the SSM document.  You can't use the following strings as document name prefixes. These are reserved by Amazon Web Services for use as document name prefixes:    aws     amazon     amzn     AWSEC2     AWSConfigRemediation     AWSSupport    
      */
     Name: DocumentName;
     /**
@@ -2779,7 +2788,7 @@ declare namespace SSM {
      */
     Description?: MaintenanceWindowDescription;
     /**
-     * The date and time, in ISO-8601 Extended format, for when you want the maintenance window to become active. StartDate allows you to delay activation of the maintenance window until the specified future date.
+     * The date and time, in ISO-8601 Extended format, for when you want the maintenance window to become active. StartDate allows you to delay activation of the maintenance window until the specified future date.  When using a rate schedule, if you provide a start date that occurs in the past, the current date and time are used as the start date.  
      */
     StartDate?: MaintenanceWindowStringDateTime;
     /**
@@ -3675,6 +3684,35 @@ declare namespace SSM {
     Patches?: PatchComplianceDataList;
     /**
      * The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+     */
+    NextToken?: NextToken;
+  }
+  export type DescribeInstancePropertiesMaxResults = number;
+  export interface DescribeInstancePropertiesRequest {
+    /**
+     * An array of instance property filters.
+     */
+    InstancePropertyFilterList?: InstancePropertyFilterList;
+    /**
+     * The request filters to use with the operator.
+     */
+    FiltersWithOperator?: InstancePropertyStringFilterList;
+    /**
+     * The maximum number of items to return for the call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: DescribeInstancePropertiesMaxResults;
+    /**
+     * The token provided by a previous request to use to return the next set of properties.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeInstancePropertiesResult {
+    /**
+     * Properties for the managed instances.
+     */
+    InstanceProperties?: InstanceProperties;
+    /**
+     * The token for the next set of properties to return. Use this token to get the next set of results.
      */
     NextToken?: NextToken;
   }
@@ -5397,7 +5435,7 @@ declare namespace SSM {
   }
   export interface GetParametersRequest {
     /**
-     * The names or Amazon Resource Names (ARNs) of the parameters that you want to query. For parameters shared with you from another account, you must use the full ARNs. To query by parameter label, use "Name": "name:label". To query by parameter version, use "Name": "name:version". For more information about shared parameters, see Working with shared parameters in the Amazon Web Services Systems Manager User Guide.
+     * The names or Amazon Resource Names (ARNs) of the parameters that you want to query. For parameters shared with you from another account, you must use the full ARNs. To query by parameter label, use "Name": "name:label". To query by parameter version, use "Name": "name:version".  The results for GetParameters requests are listed in alphabetical order in query responses.  For information about shared parameters, see Working with shared parameters in the Amazon Web Services Systems Manager User Guide.
      */
     Names: ParameterNameList;
     /**
@@ -5773,6 +5811,7 @@ declare namespace SSM {
   }
   export type InstanceInformationStringFilterKey = string;
   export type InstanceInformationStringFilterList = InstanceInformationStringFilter[];
+  export type InstanceName = string;
   export interface InstancePatchState {
     /**
      * The ID of the managed node the high-level patch compliance information was collected for.
@@ -5884,7 +5923,145 @@ declare namespace SSM {
   export type InstancePatchStateList = InstancePatchState[];
   export type InstancePatchStateOperatorType = "Equal"|"NotEqual"|"LessThan"|"GreaterThan"|string;
   export type InstancePatchStatesList = InstancePatchState[];
+  export type InstanceProperties = InstanceProperty[];
+  export interface InstanceProperty {
+    /**
+     * The value of the EC2 Name tag associated with the node. If a Name tag hasn't been applied to the node, this value is blank.
+     */
+    Name?: InstanceName;
+    /**
+     * The ID of the managed node.
+     */
+    InstanceId?: InstanceId;
+    /**
+     * The instance type of the managed node. For example, t3.large.
+     */
+    InstanceType?: InstanceType;
+    /**
+     * The instance profile attached to the node. If an instance profile isn't attached to the node, this value is blank.
+     */
+    InstanceRole?: InstanceRole;
+    /**
+     * The name of the key pair associated with the node. If a key pair isnt't associated with the node, this value is blank.
+     */
+    KeyName?: KeyName;
+    /**
+     * The current state of the node.
+     */
+    InstanceState?: InstanceState;
+    /**
+     * The CPU architecture of the node. For example, x86_64.
+     */
+    Architecture?: Architecture;
+    /**
+     * The public IPv4 address assigned to the node. If a public IPv4 address isn't assigned to the node, this value is blank.
+     */
+    IPAddress?: IPAddress;
+    /**
+     * The timestamp for when the node was launched.
+     */
+    LaunchTime?: DateTime;
+    /**
+     * Connection status of the SSM Agent on the managed node.
+     */
+    PingStatus?: PingStatus;
+    /**
+     * The date and time when the SSM Agent last pinged the Systems Manager service.
+     */
+    LastPingDateTime?: DateTime;
+    /**
+     * The version of SSM Agent running on your managed node.
+     */
+    AgentVersion?: Version;
+    /**
+     * The operating system platform type of the managed node. For example, Windows.
+     */
+    PlatformType?: PlatformType;
+    /**
+     * The name of the operating system platform running on your managed node.
+     */
+    PlatformName?: PlatformName;
+    /**
+     * The version of the OS platform running on your managed node.
+     */
+    PlatformVersion?: PlatformVersion;
+    /**
+     * The activation ID created by Systems Manager when the server or virtual machine (VM) was registered
+     */
+    ActivationId?: ActivationId;
+    /**
+     * The IAM role used in the hybrid activation to register the node with Systems Manager.
+     */
+    IamRole?: IamRole;
+    /**
+     * The date the node was registered with Systems Manager.
+     */
+    RegistrationDate?: DateTime;
+    /**
+     * The type of managed node.
+     */
+    ResourceType?: String;
+    /**
+     * The fully qualified host name of the managed node.
+     */
+    ComputerName?: ComputerName;
+    /**
+     * The status of the State Manager association applied to the managed node.
+     */
+    AssociationStatus?: StatusName;
+    /**
+     * The date the association was last run.
+     */
+    LastAssociationExecutionDate?: DateTime;
+    /**
+     * The last date the association was successfully run.
+     */
+    LastSuccessfulAssociationExecutionDate?: DateTime;
+    AssociationOverview?: InstanceAggregatedAssociationOverview;
+    /**
+     * The ID of the source resource.
+     */
+    SourceId?: SourceId;
+    /**
+     * The type of the source resource.
+     */
+    SourceType?: SourceType;
+  }
+  export interface InstancePropertyFilter {
+    /**
+     * The name of the filter.
+     */
+    key: InstancePropertyFilterKey;
+    /**
+     * The filter values.
+     */
+    valueSet: InstancePropertyFilterValueSet;
+  }
+  export type InstancePropertyFilterKey = "InstanceIds"|"AgentVersion"|"PingStatus"|"PlatformTypes"|"DocumentName"|"ActivationIds"|"IamRole"|"ResourceType"|"AssociationStatus"|string;
+  export type InstancePropertyFilterList = InstancePropertyFilter[];
+  export type InstancePropertyFilterOperator = "Equal"|"NotEqual"|"BeginWith"|"LessThan"|"GreaterThan"|string;
+  export type InstancePropertyFilterValue = string;
+  export type InstancePropertyFilterValueSet = InstancePropertyFilterValue[];
+  export interface InstancePropertyStringFilter {
+    /**
+     * The filter key name to describe your managed nodes.
+     */
+    Key: InstancePropertyStringFilterKey;
+    /**
+     * The filter key name to describe your managed nodes.
+     */
+    Values: InstancePropertyFilterValueSet;
+    /**
+     * The operator used by the filter call.
+     */
+    Operator?: InstancePropertyFilterOperator;
+  }
+  export type InstancePropertyStringFilterKey = string;
+  export type InstancePropertyStringFilterList = InstancePropertyStringFilter[];
+  export type InstanceRole = string;
+  export type InstanceState = string;
   export type InstanceTagName = string;
+  export type InstanceType = string;
   export type InstancesCount = number;
   export type Integer = number;
   export interface InventoryAggregator {
@@ -6106,6 +6283,7 @@ declare namespace SSM {
   export type InvocationTraceOutput = string;
   export type IsSubTypeSchema = boolean;
   export type KeyList = TagKey[];
+  export type KeyName = string;
   export interface LabelParameterVersionRequest {
     /**
      * The parameter name on which you want to attach one or more labels.  You can't enter the Amazon Resource Name (ARN) for a parameter, only the parameter name itself. 
@@ -8115,8 +8293,10 @@ declare namespace SSM {
   export type PatchVendor = string;
   export type PatchVersion = string;
   export type PingStatus = "Online"|"ConnectionLost"|"Inactive"|string;
+  export type PlatformName = string;
   export type PlatformType = "Windows"|"Linux"|"MacOS"|string;
   export type PlatformTypeList = PlatformType[];
+  export type PlatformVersion = string;
   export type Policy = string;
   export type PolicyHash = string;
   export type PolicyId = string;
@@ -8361,7 +8541,7 @@ declare namespace SSM {
      */
     TaskArn: MaintenanceWindowTaskArn;
     /**
-     * The Amazon Resource Name (ARN) of the IAM service role for Amazon Web Services Systems Manager to assume when running a maintenance window task. If you do not specify a service role ARN, Systems Manager uses your account's service-linked role. If no service-linked role for Systems Manager exists in your account, it is created when you run RegisterTaskWithMaintenanceWindow. For more information, see Using service-linked roles for Systems Manager in the in the Amazon Web Services Systems Manager User Guide:
+     * The Amazon Resource Name (ARN) of the IAM service role for Amazon Web Services Systems Manager to assume when running a maintenance window task. If you do not specify a service role ARN, Systems Manager uses a service-linked role in your account. If no appropriate service-linked role for Systems Manager exists in your account, it is created when you run RegisterTaskWithMaintenanceWindow. However, for an improved security posture, we strongly recommend creating a custom policy and custom service role for running your maintenance window tasks. The policy can be crafted to provide only the permissions needed for your particular maintenance window tasks. For more information, see Setting up maintenance windows in the in the Amazon Web Services Systems Manager User Guide.
      */
     ServiceRoleArn?: ServiceRole;
     /**
@@ -9628,7 +9808,7 @@ declare namespace SSM {
      */
     Description?: MaintenanceWindowDescription;
     /**
-     * The date and time, in ISO-8601 Extended format, for when you want the maintenance window to become active. StartDate allows you to delay activation of the maintenance window until the specified future date.
+     * The date and time, in ISO-8601 Extended format, for when you want the maintenance window to become active. StartDate allows you to delay activation of the maintenance window until the specified future date.  When using a rate schedule, if you provide a start date that occurs in the past, the current date and time are used as the start date.  
      */
     StartDate?: MaintenanceWindowStringDateTime;
     /**
@@ -9792,7 +9972,7 @@ declare namespace SSM {
      */
     TaskArn?: MaintenanceWindowTaskArn;
     /**
-     * The Amazon Resource Name (ARN) of the IAM service role for Amazon Web Services Systems Manager to assume when running a maintenance window task. If you do not specify a service role ARN, Systems Manager uses your account's service-linked role. If no service-linked role for Systems Manager exists in your account, it is created when you run RegisterTaskWithMaintenanceWindow. For more information, see Using service-linked roles for Systems Manager in the in the Amazon Web Services Systems Manager User Guide:
+     * The Amazon Resource Name (ARN) of the IAM service role for Amazon Web Services Systems Manager to assume when running a maintenance window task. If you do not specify a service role ARN, Systems Manager uses a service-linked role in your account. If no appropriate service-linked role for Systems Manager exists in your account, it is created when you run RegisterTaskWithMaintenanceWindow. However, for an improved security posture, we strongly recommend creating a custom policy and custom service role for running your maintenance window tasks. The policy can be crafted to provide only the permissions needed for your particular maintenance window tasks. For more information, see Setting up maintenance windows in the in the Amazon Web Services Systems Manager User Guide.
      */
     ServiceRoleArn?: ServiceRole;
     /**

@@ -36,6 +36,14 @@ declare class EMRcontainers extends Service {
    */
   createManagedEndpoint(callback?: (err: AWSError, data: EMRcontainers.Types.CreateManagedEndpointResponse) => void): Request<EMRcontainers.Types.CreateManagedEndpointResponse, AWSError>;
   /**
+   * Creates a security configuration. Security configurations in Amazon EMR on EKS are templates for different security setups. You can use security configurations to configure the Lake Formation integration setup. You can also create a security configuration to re-use a security setup each time you create a virtual cluster.
+   */
+  createSecurityConfiguration(params: EMRcontainers.Types.CreateSecurityConfigurationRequest, callback?: (err: AWSError, data: EMRcontainers.Types.CreateSecurityConfigurationResponse) => void): Request<EMRcontainers.Types.CreateSecurityConfigurationResponse, AWSError>;
+  /**
+   * Creates a security configuration. Security configurations in Amazon EMR on EKS are templates for different security setups. You can use security configurations to configure the Lake Formation integration setup. You can also create a security configuration to re-use a security setup each time you create a virtual cluster.
+   */
+  createSecurityConfiguration(callback?: (err: AWSError, data: EMRcontainers.Types.CreateSecurityConfigurationResponse) => void): Request<EMRcontainers.Types.CreateSecurityConfigurationResponse, AWSError>;
+  /**
    * Creates a virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, describe, list and delete virtual clusters. They do not consume any additional resource in your system. A single virtual cluster maps to a single Kubernetes namespace. Given this relationship, you can model virtual clusters the same way you model Kubernetes namespaces to meet your requirements.
    */
   createVirtualCluster(params: EMRcontainers.Types.CreateVirtualClusterRequest, callback?: (err: AWSError, data: EMRcontainers.Types.CreateVirtualClusterResponse) => void): Request<EMRcontainers.Types.CreateVirtualClusterResponse, AWSError>;
@@ -92,6 +100,14 @@ declare class EMRcontainers extends Service {
    */
   describeManagedEndpoint(callback?: (err: AWSError, data: EMRcontainers.Types.DescribeManagedEndpointResponse) => void): Request<EMRcontainers.Types.DescribeManagedEndpointResponse, AWSError>;
   /**
+   * Displays detailed information about a specified security configuration. Security configurations in Amazon EMR on EKS are templates for different security setups. You can use security configurations to configure the Lake Formation integration setup. You can also create a security configuration to re-use a security setup each time you create a virtual cluster.
+   */
+  describeSecurityConfiguration(params: EMRcontainers.Types.DescribeSecurityConfigurationRequest, callback?: (err: AWSError, data: EMRcontainers.Types.DescribeSecurityConfigurationResponse) => void): Request<EMRcontainers.Types.DescribeSecurityConfigurationResponse, AWSError>;
+  /**
+   * Displays detailed information about a specified security configuration. Security configurations in Amazon EMR on EKS are templates for different security setups. You can use security configurations to configure the Lake Formation integration setup. You can also create a security configuration to re-use a security setup each time you create a virtual cluster.
+   */
+  describeSecurityConfiguration(callback?: (err: AWSError, data: EMRcontainers.Types.DescribeSecurityConfigurationResponse) => void): Request<EMRcontainers.Types.DescribeSecurityConfigurationResponse, AWSError>;
+  /**
    * Displays detailed information about a specified virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, describe, list and delete virtual clusters. They do not consume any additional resource in your system. A single virtual cluster maps to a single Kubernetes namespace. Given this relationship, you can model virtual clusters the same way you model Kubernetes namespaces to meet your requirements.
    */
   describeVirtualCluster(params: EMRcontainers.Types.DescribeVirtualClusterRequest, callback?: (err: AWSError, data: EMRcontainers.Types.DescribeVirtualClusterResponse) => void): Request<EMRcontainers.Types.DescribeVirtualClusterResponse, AWSError>;
@@ -131,6 +147,14 @@ declare class EMRcontainers extends Service {
    * Lists managed endpoints based on a set of parameters. A managed endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual cluster.
    */
   listManagedEndpoints(callback?: (err: AWSError, data: EMRcontainers.Types.ListManagedEndpointsResponse) => void): Request<EMRcontainers.Types.ListManagedEndpointsResponse, AWSError>;
+  /**
+   * Lists security configurations based on a set of parameters. Security configurations in Amazon EMR on EKS are templates for different security setups. You can use security configurations to configure the Lake Formation integration setup. You can also create a security configuration to re-use a security setup each time you create a virtual cluster.
+   */
+  listSecurityConfigurations(params: EMRcontainers.Types.ListSecurityConfigurationsRequest, callback?: (err: AWSError, data: EMRcontainers.Types.ListSecurityConfigurationsResponse) => void): Request<EMRcontainers.Types.ListSecurityConfigurationsResponse, AWSError>;
+  /**
+   * Lists security configurations based on a set of parameters. Security configurations in Amazon EMR on EKS are templates for different security setups. You can use security configurations to configure the Lake Formation integration setup. You can also create a security configuration to re-use a security setup each time you create a virtual cluster.
+   */
+  listSecurityConfigurations(callback?: (err: AWSError, data: EMRcontainers.Types.ListSecurityConfigurationsResponse) => void): Request<EMRcontainers.Types.ListSecurityConfigurationsResponse, AWSError>;
   /**
    * Lists the tags assigned to the resources.
    */
@@ -174,6 +198,16 @@ declare class EMRcontainers extends Service {
 }
 declare namespace EMRcontainers {
   export type ACMCertArn = string;
+  export interface AuthorizationConfiguration {
+    /**
+     * Lake Formation related configuration inputs for the security configuration.
+     */
+    lakeFormationConfiguration?: LakeFormationConfiguration;
+    /**
+     * Encryption-related configuration input for the security configuration.
+     */
+    encryptionConfiguration?: EncryptionConfiguration;
+  }
   export type Base64Encoded = string;
   export type Boolean = boolean;
   export interface CancelJobRunRequest {
@@ -206,6 +240,7 @@ declare namespace EMRcontainers {
      */
     certificateData?: Base64Encoded;
   }
+  export type CertificateProviderType = "PEM"|string;
   export type ClientToken = string;
   export interface CloudWatchMonitoringConfiguration {
     /**
@@ -370,6 +405,38 @@ declare namespace EMRcontainers {
      */
     virtualClusterId?: ResourceIdString;
   }
+  export interface CreateSecurityConfigurationRequest {
+    /**
+     * The client idempotency token to use when creating the security configuration.
+     */
+    clientToken: ClientToken;
+    /**
+     * The name of the security configuration.
+     */
+    name: ResourceNameString;
+    /**
+     * Security configuration input for the request.
+     */
+    securityConfigurationData: SecurityConfigurationData;
+    /**
+     * The tags to add to the security configuration.
+     */
+    tags?: TagMap;
+  }
+  export interface CreateSecurityConfigurationResponse {
+    /**
+     * The ID of the security configuration.
+     */
+    id?: ResourceIdString;
+    /**
+     * The name of the security configuration.
+     */
+    name?: ResourceNameString;
+    /**
+     * The ARN (Amazon Resource Name) of the security configuration.
+     */
+    arn?: SecurityConfigurationArn;
+  }
   export interface CreateVirtualClusterRequest {
     /**
      * The specified name of the virtual cluster.
@@ -387,6 +454,10 @@ declare namespace EMRcontainers {
      * The tags assigned to the virtual cluster.
      */
     tags?: TagMap;
+    /**
+     * The ID of the security configuration.
+     */
+    securityConfigurationId?: ResourceIdString;
   }
   export interface CreateVirtualClusterResponse {
     /**
@@ -498,6 +569,18 @@ declare namespace EMRcontainers {
      */
     endpoint?: Endpoint;
   }
+  export interface DescribeSecurityConfigurationRequest {
+    /**
+     * The ID of the security configuration.
+     */
+    id: ResourceIdString;
+  }
+  export interface DescribeSecurityConfigurationResponse {
+    /**
+     * Details of the security configuration.
+     */
+    securityConfiguration?: SecurityConfiguration;
+  }
   export interface DescribeVirtualClusterRequest {
     /**
      * The ID of the virtual cluster that will be described.
@@ -515,6 +598,12 @@ declare namespace EMRcontainers {
      * The namespaces of the Amazon EKS cluster.
      */
     namespace?: KubernetesNamespace;
+  }
+  export interface EncryptionConfiguration {
+    /**
+     * In-transit encryption-related input for the security configuration.
+     */
+    inTransitEncryptionConfiguration?: InTransitEncryptionConfiguration;
   }
   export interface Endpoint {
     /**
@@ -645,6 +734,12 @@ declare namespace EMRcontainers {
     expiresAt?: _Date;
   }
   export type IAMRoleArn = string;
+  export interface InTransitEncryptionConfiguration {
+    /**
+     * TLS certificate-related configuration input for the security configuration.
+     */
+    tlsCertificateConfiguration?: TLSCertificateConfiguration;
+  }
   export type JavaInteger = number;
   export type JobArn = string;
   export interface JobDriver {
@@ -799,6 +894,20 @@ declare namespace EMRcontainers {
   export type JobTemplates = JobTemplate[];
   export type KmsKeyArn = string;
   export type KubernetesNamespace = string;
+  export interface LakeFormationConfiguration {
+    /**
+     * The session tag to authorize Amazon EMR on EKS for API calls to Lake Formation.
+     */
+    authorizedSessionTagValue?: SessionTagValue;
+    /**
+     * The namespace input of the system job.
+     */
+    secureNamespaceInfo?: SecureNamespaceInfo;
+    /**
+     * The query engine IAM role ARN that is tied to the secure Spark job. The QueryEngine role assumes the JobExecutionRole to execute all the Lake Formation calls.
+     */
+    queryEngineRoleArn?: IAMRoleArn;
+  }
   export interface ListJobRunsRequest {
     /**
      * The ID of the virtual cluster for which to list the job run. 
@@ -904,6 +1013,34 @@ declare namespace EMRcontainers {
     endpoints?: Endpoints;
     /**
      *  The token for the next set of endpoints to return. 
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListSecurityConfigurationsRequest {
+    /**
+     * The date and time after which the security configuration was created.
+     */
+    createdAfter?: _Date;
+    /**
+     * The date and time before which the security configuration was created.
+     */
+    createdBefore?: _Date;
+    /**
+     * The maximum number of security configurations the operation can list.
+     */
+    maxResults?: JavaInteger;
+    /**
+     * The token for the next set of security configurations to return.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListSecurityConfigurationsResponse {
+    /**
+     * The list of returned security configurations.
+     */
+    securityConfigurations?: SecurityConfigurations;
+    /**
+     * The token for the next set of security configurations to return.
      */
     nextToken?: NextToken;
   }
@@ -1052,7 +1189,57 @@ declare namespace EMRcontainers {
      */
     logUri: UriString;
   }
+  export type SecretsManagerArn = string;
+  export interface SecureNamespaceInfo {
+    /**
+     * The ID of the Amazon EKS cluster where Amazon EMR on EKS jobs run.
+     */
+    clusterId?: ClusterId;
+    /**
+     * The namespace of the Amazon EKS cluster where the system jobs run.
+     */
+    namespace?: KubernetesNamespace;
+  }
+  export interface SecurityConfiguration {
+    /**
+     * The ID of the security configuration.
+     */
+    id?: ResourceIdString;
+    /**
+     * The name of the security configuration.
+     */
+    name?: ResourceNameString;
+    /**
+     * The ARN (Amazon Resource Name) of the security configuration.
+     */
+    arn?: SecurityConfigurationArn;
+    /**
+     * The date and time that the job run was created.
+     */
+    createdAt?: _Date;
+    /**
+     * The user who created the job run.
+     */
+    createdBy?: RequestIdentityUserArn;
+    /**
+     * Security configuration inputs for the request.
+     */
+    securityConfigurationData?: SecurityConfigurationData;
+    /**
+     * The tags to assign to the security configuration.
+     */
+    tags?: TagMap;
+  }
+  export type SecurityConfigurationArn = string;
+  export interface SecurityConfigurationData {
+    /**
+     * Authorization-related configuration input for the security configuration.
+     */
+    authorizationConfiguration?: AuthorizationConfiguration;
+  }
+  export type SecurityConfigurations = SecurityConfiguration[];
   export type SensitivePropertiesMap = {[key: string]: String1024};
+  export type SessionTagValue = string;
   export interface SparkSqlJobDriver {
     /**
      * The SQL file to be executed.
@@ -1149,6 +1336,20 @@ declare namespace EMRcontainers {
   export type String256 = string;
   export type StringEmpty256 = string;
   export type SubnetIds = String256[];
+  export interface TLSCertificateConfiguration {
+    /**
+     * The TLS certificate type. Acceptable values: PEM or Custom.
+     */
+    certificateProviderType?: CertificateProviderType;
+    /**
+     * Secrets Manager ARN that contains the public TLS certificate contents, used for communication between the user job and the system job.
+     */
+    publicCertificateSecretArn?: SecretsManagerArn;
+    /**
+     * Secrets Manager ARN that contains the private TLS certificate contents, used for communication between the user job and the system job.
+     */
+    privateCertificateSecretArn?: SecretsManagerArn;
+  }
   export type TagKeyList = String128[];
   export type TagMap = {[key: string]: StringEmpty256};
   export interface TagResourceRequest {
@@ -1221,6 +1422,10 @@ declare namespace EMRcontainers {
      * The assigned tags of the virtual cluster.
      */
     tags?: TagMap;
+    /**
+     * The ID of the security configuration.
+     */
+    securityConfigurationId?: ResourceIdString;
   }
   export type VirtualClusterArn = string;
   export type VirtualClusterState = "RUNNING"|"TERMINATING"|"TERMINATED"|"ARRESTED"|string;

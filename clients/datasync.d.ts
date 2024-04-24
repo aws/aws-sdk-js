@@ -124,11 +124,11 @@ declare class DataSync extends Service {
    */
   createLocationSmb(callback?: (err: AWSError, data: DataSync.Types.CreateLocationSmbResponse) => void): Request<DataSync.Types.CreateLocationSmbResponse, AWSError>;
   /**
-   * Configures a transfer task, which defines where and how DataSync moves your data. A task includes a source location, destination location, and the options for how and when you want to transfer your data (such as bandwidth limits, scheduling, among other options).  If you're planning to transfer data to or from an Amazon S3 location, review how DataSync can affect your S3 request charges and the DataSync pricing page before you begin. 
+   * Configures a task, which defines where and how DataSync transfers your data. A task includes a source location, destination location, and transfer options (such as bandwidth limits, scheduling, and more).  If you're planning to transfer data to or from an Amazon S3 location, review how DataSync can affect your S3 request charges and the DataSync pricing page before you begin. 
    */
   createTask(params: DataSync.Types.CreateTaskRequest, callback?: (err: AWSError, data: DataSync.Types.CreateTaskResponse) => void): Request<DataSync.Types.CreateTaskResponse, AWSError>;
   /**
-   * Configures a transfer task, which defines where and how DataSync moves your data. A task includes a source location, destination location, and the options for how and when you want to transfer your data (such as bandwidth limits, scheduling, among other options).  If you're planning to transfer data to or from an Amazon S3 location, review how DataSync can affect your S3 request charges and the DataSync pricing page before you begin. 
+   * Configures a task, which defines where and how DataSync transfers your data. A task includes a source location, destination location, and transfer options (such as bandwidth limits, scheduling, and more).  If you're planning to transfer data to or from an Amazon S3 location, review how DataSync can affect your S3 request charges and the DataSync pricing page before you begin. 
    */
   createTask(callback?: (err: AWSError, data: DataSync.Types.CreateTaskResponse) => void): Request<DataSync.Types.CreateTaskResponse, AWSError>;
   /**
@@ -284,11 +284,11 @@ declare class DataSync extends Service {
    */
   describeStorageSystemResources(callback?: (err: AWSError, data: DataSync.Types.DescribeStorageSystemResourcesResponse) => void): Request<DataSync.Types.DescribeStorageSystemResourcesResponse, AWSError>;
   /**
-   * Provides information about an DataSync transfer task.
+   * Provides information about a task, which defines where and how DataSync transfers your data.
    */
   describeTask(params: DataSync.Types.DescribeTaskRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeTaskResponse) => void): Request<DataSync.Types.DescribeTaskResponse, AWSError>;
   /**
-   * Provides information about an DataSync transfer task.
+   * Provides information about a task, which defines where and how DataSync transfers your data.
    */
   describeTask(callback?: (err: AWSError, data: DataSync.Types.DescribeTaskResponse) => void): Request<DataSync.Types.DescribeTaskResponse, AWSError>;
   /**
@@ -476,11 +476,11 @@ declare class DataSync extends Service {
    */
   updateStorageSystem(callback?: (err: AWSError, data: DataSync.Types.UpdateStorageSystemResponse) => void): Request<DataSync.Types.UpdateStorageSystemResponse, AWSError>;
   /**
-   * Updates the configuration of an DataSync transfer task.
+   * Updates the configuration of a task, which defines where and how DataSync transfers your data.
    */
   updateTask(params: DataSync.Types.UpdateTaskRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateTaskResponse) => void): Request<DataSync.Types.UpdateTaskResponse, AWSError>;
   /**
-   * Updates the configuration of an DataSync transfer task.
+   * Updates the configuration of a task, which defines where and how DataSync transfers your data.
    */
   updateTask(callback?: (err: AWSError, data: DataSync.Types.UpdateTaskResponse) => void): Request<DataSync.Types.UpdateTaskResponse, AWSError>;
   /**
@@ -1026,39 +1026,39 @@ declare namespace DataSync {
   }
   export interface CreateTaskRequest {
     /**
-     * The Amazon Resource Name (ARN) of the source location for the task.
+     * Specifies the ARN of your transfer's source location.
      */
     SourceLocationArn: LocationArn;
     /**
-     * The Amazon Resource Name (ARN) of an Amazon Web Services storage resource's location. 
+     * Specifies the ARN of your transfer's destination location. 
      */
     DestinationLocationArn: LocationArn;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that is used to monitor and log events in the task. 
+     * Specifies the Amazon Resource Name (ARN) of an Amazon CloudWatch log group for monitoring your task.
      */
     CloudWatchLogGroupArn?: LogGroupArn;
     /**
-     * The name of a task. This value is a text reference that is used to identify the task in the console. 
+     * Specifies the name of your task.
      */
     Name?: TagValue;
     /**
-     * Specifies the configuration options for a task. Some options include preserving file or object metadata and verifying data integrity. You can also override these options before starting an individual run of a task (also known as a task execution). For more information, see StartTaskExecution.
+     * Specifies your task's settings, such as preserving file metadata, verifying data integrity, among other options.
      */
     Options?: Options;
     /**
-     * Specifies a list of filter rules that exclude specific data during your transfer. For more information and examples, see Filtering data transferred by DataSync.
+     * Specifies exclude filters that define the files, objects, and folders in your source location that you don't want DataSync to transfer. For more information and examples, see Specifying what DataSync transfers by using filters.
      */
     Excludes?: FilterList;
     /**
-     * Specifies a schedule used to periodically transfer files from a source to a destination location. The schedule should be specified in UTC time. For more information, see Scheduling your task.
+     * Specifies a schedule for when you want your task to run. For more information, see Scheduling your task.
      */
     Schedule?: TaskSchedule;
     /**
-     * Specifies the tags that you want to apply to the Amazon Resource Name (ARN) representing the task.  Tags are key-value pairs that help you manage, filter, and search for your DataSync resources.
+     * Specifies the tags that you want to apply to your task.  Tags are key-value pairs that help you manage, filter, and search for your DataSync resources.
      */
     Tags?: InputTagList;
     /**
-     * Specifies a list of filter rules that include specific data during your transfer. For more information and examples, see Filtering data transferred by DataSync.
+     * Specifies include filters define the files, objects, and folders in your source location that you want DataSync to transfer. For more information and examples, see Specifying what DataSync transfers by using filters.
      */
     Includes?: FilterList;
     /**
@@ -1765,65 +1765,65 @@ declare namespace DataSync {
   }
   export interface DescribeTaskRequest {
     /**
-     * Specifies the Amazon Resource Name (ARN) of the transfer task.
+     * Specifies the Amazon Resource Name (ARN) of the transfer task that you want information about.
      */
     TaskArn: TaskArn;
   }
   export interface DescribeTaskResponse {
     /**
-     * The Amazon Resource Name (ARN) of the task that was described.
+     * The ARN of your task.
      */
     TaskArn?: TaskArn;
     /**
-     * The status of the task that was described. For detailed information about task execution statuses, see Understanding Task Statuses in the DataSync User Guide.
+     * The status of your task. For information about what each status means, see Task statuses.
      */
     Status?: TaskStatus;
     /**
-     * The name of the task that was described.
+     * The name of your task.
      */
     Name?: TagValue;
     /**
-     * The Amazon Resource Name (ARN) of the task execution that is transferring files.
+     * The ARN of the most recent task execution.
      */
     CurrentTaskExecutionArn?: TaskExecutionArn;
     /**
-     * The Amazon Resource Name (ARN) of the source file system's location.
+     * The ARN of your transfer's source location.
      */
     SourceLocationArn?: LocationArn;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Web Services storage resource's location.
+     * The ARN of your transfer's destination location.
      */
     DestinationLocationArn?: LocationArn;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that was used to monitor and log events in the task. For more information on these groups, see Working with Log Groups and Log Streams in the Amazon CloudWatch User Guide.
+     * The Amazon Resource Name (ARN) of an Amazon CloudWatch log group for monitoring your task. For more information, see Monitoring DataSync with Amazon CloudWatch.
      */
     CloudWatchLogGroupArn?: LogGroupArn;
     /**
-     * The Amazon Resource Names (ARNs) of the network interfaces created for your source location. For more information, see Network interface requirements.
+     * The ARNs of the network interfaces that DataSync created for your source location.
      */
     SourceNetworkInterfaceArns?: SourceNetworkInterfaceArns;
     /**
-     * The Amazon Resource Names (ARNs) of the network interfaces created for your destination location. For more information, see Network interface requirements.
+     * The ARNs of the network interfaces that DataSync created for your destination location.
      */
     DestinationNetworkInterfaceArns?: DestinationNetworkInterfaceArns;
     /**
-     * The configuration options that control the behavior of the StartTaskExecution operation. Some options include preserving file or object metadata and verifying data integrity. You can override these options for each task execution. For more information, see StartTaskExecution.
+     * The task's settings. For example, what file metadata gets preserved, how data integrity gets verified at the end of your transfer, bandwidth limits, among other options.
      */
     Options?: Options;
     /**
-     * A list of filter rules that exclude specific data during your transfer. For more information and examples, see Filtering data transferred by DataSync.
+     * The exclude filters that define the files, objects, and folders in your source location that you don't want DataSync to transfer. For more information and examples, see Specifying what DataSync transfers by using filters.
      */
     Excludes?: FilterList;
     /**
-     * The schedule used to periodically transfer files from a source to a destination location.
+     * The schedule for when you want your task to run. For more information, see Scheduling your task.
      */
     Schedule?: TaskSchedule;
     /**
-     * Errors that DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.
+     * If there's an issue with your task, you can use the error code to help you troubleshoot the problem. For more information, see Troubleshooting issues with DataSync transfers.
      */
     ErrorCode?: string;
     /**
-     * Detailed description of an error that was encountered during the task execution. You can use this information to help troubleshoot issues. 
+     * If there's an issue with your task, you can use the error details to help you troubleshoot the problem. For more information, see Troubleshooting issues with DataSync transfers.
      */
     ErrorDetail?: string;
     /**
@@ -1831,17 +1831,21 @@ declare namespace DataSync {
      */
     CreationTime?: Time;
     /**
-     * A list of filter rules that include specific data during your transfer. For more information and examples, see Filtering data transferred by DataSync.
+     * The include filters that define the files, objects, and folders in your source location that you want DataSync to transfer. For more information and examples, see Specifying what DataSync transfers by using filters.
      */
     Includes?: FilterList;
     /**
-     * The configuration of the manifest that lists the files or objects to transfer. For more information, see Specifying what DataSync transfers by using a manifest.
+     * The configuration of the manifest that lists the files or objects that you want DataSync to transfer. For more information, see Specifying what DataSync transfers by using a manifest.
      */
     ManifestConfig?: ManifestConfig;
     /**
-     * The configuration of your task report, which provides detailed information about for your DataSync transfer. For more information, see Creating a task report.
+     * The configuration of your task report, which provides detailed information about your DataSync transfer. For more information, see Monitoring your DataSync transfers with task reports.
      */
     TaskReportConfig?: TaskReportConfig;
+    /**
+     * The details about your task schedule.
+     */
+    ScheduleDetails?: TaskScheduleDetails;
   }
   export type DestinationNetworkInterfaceArns = NetworkInterfaceArn[];
   export type DiscoveryAgentArnList = AgentArn[];
@@ -2481,7 +2485,7 @@ declare namespace DataSync {
   export type Operator = "Equals"|"NotEquals"|"In"|"LessThanOrEqual"|"LessThan"|"GreaterThanOrEqual"|"GreaterThan"|"Contains"|"NotContains"|"BeginsWith"|string;
   export interface Options {
     /**
-     * Specifies how and when DataSync checks the integrity of your data during a transfer.    ONLY_FILES_TRANSFERRED (recommended) - DataSync calculates the checksum of transferred files and metadata at the source location. At the end of the transfer, DataSync then compares this checksum to the checksum calculated on those files at the destination. We recommend this option when transferring to S3 Glacier Flexible Retrieval or S3 Glacier Deep Archive storage classes. For more information, see Storage class considerations with Amazon S3 locations.    POINT_IN_TIME_CONSISTENT (default) - At the end of the transfer, DataSync scans the entire source and destination to verify that both locations are fully synchronized. You can't use this option when transferring to S3 Glacier Flexible Retrieval or S3 Glacier Deep Archive storage classes. For more information, see Storage class considerations with Amazon S3 locations.    NONE - DataSync doesn't run additional verification at the end of the transfer. All data transmissions are still integrity-checked with checksum verification during the transfer.  
+     * Specifies how and when DataSync checks the integrity of your data during a transfer.    ONLY_FILES_TRANSFERRED (recommended) - DataSync calculates the checksum of transferred files and metadata at the source location. At the end of the transfer, DataSync then compares this checksum to the checksum calculated on those files at the destination. We recommend this option when transferring to S3 Glacier Flexible Retrieval or S3 Glacier Deep Archive storage classes. For more information, see Storage class considerations with Amazon S3 locations.    POINT_IN_TIME_CONSISTENT (default) - At the end of the transfer, DataSync scans the entire source and destination to verify that both locations are fully synchronized. If you use a manifest, DataSync only scans and verifies what's listed in the manifest. You can't use this option when transferring to S3 Glacier Flexible Retrieval or S3 Glacier Deep Archive storage classes. For more information, see Storage class considerations with Amazon S3 locations.    NONE - DataSync doesn't run additional verification at the end of the transfer. All data transmissions are still integrity-checked with checksum verification during the transfer.  
      */
     VerifyMode?: VerifyMode;
     /**
@@ -2562,7 +2566,7 @@ declare namespace DataSync {
   export type PhaseStatus = "PENDING"|"SUCCESS"|"ERROR"|string;
   export interface Platform {
     /**
-     * The version of the DataSync agent.  On December 7, 2023, we discontinued version 1 DataSync agents. Check the DataSync console to see if you have affected agents. If you do, replace those agents or delete them if they aren't in use. If you need more help, contact Amazon Web Services Support. 
+     * The version of the DataSync agent.
      */
     Version?: AgentVersion;
   }
@@ -2754,7 +2758,10 @@ declare namespace DataSync {
   export type S3ObjectVersionId = string;
   export type S3StorageClass = "STANDARD"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"GLACIER"|"DEEP_ARCHIVE"|"OUTPOSTS"|"GLACIER_INSTANT_RETRIEVAL"|string;
   export type S3Subdirectory = string;
+  export type ScheduleDisabledBy = "USER"|"SERVICE"|string;
+  export type ScheduleDisabledReason = string;
   export type ScheduleExpressionCron = string;
+  export type ScheduleStatus = "ENABLED"|"DISABLED"|string;
   export type SecretsManagerArn = string;
   export type ServerHostname = string;
   export type SmbDomain = string;
@@ -2989,9 +2996,27 @@ declare namespace DataSync {
   }
   export interface TaskSchedule {
     /**
-     * A cron expression that specifies when DataSync initiates a scheduled transfer from a source to a destination location. 
+     * Specifies your task schedule by using a cron expression in UTC time. For information about cron expression syntax, see the  Amazon EventBridge User Guide .
      */
     ScheduleExpression: ScheduleExpressionCron;
+    /**
+     * Specifies whether to enable or disable your task schedule. Your schedule is enabled by default, but there can be situations where you need to disable it. For example, you might need to pause a recurring transfer or fix an issue with your task or perform maintenance on your storage system. DataSync might disable your schedule automatically if your task fails repeatedly with the same error. For more information, see TaskScheduleDetails.
+     */
+    Status?: ScheduleStatus;
+  }
+  export interface TaskScheduleDetails {
+    /**
+     * Indicates the last time the status of your task schedule changed. For example, if DataSync automatically disables your schedule because of a repeated error, you can see when the schedule was disabled.
+     */
+    StatusUpdateTime?: Time;
+    /**
+     * Provides a reason if the task schedule is disabled. If your schedule is disabled by USER, you see a Manually disabled by user. message. If your schedule is disabled by SERVICE, you see an error message to help you understand why the task keeps failing. For information on resolving DataSync errors, see Troubleshooting issues with DataSync transfers.
+     */
+    DisabledReason?: ScheduleDisabledReason;
+    /**
+     * Indicates how your task schedule was disabled.    USER - Your schedule was manually disabled by using the UpdateTask operation or DataSync console.    SERVICE - Your schedule was automatically disabled by DataSync because the task failed repeatedly with the same error.  
+     */
+    DisabledBy?: ScheduleDisabledBy;
   }
   export type TaskStatus = "AVAILABLE"|"CREATING"|"QUEUED"|"RUNNING"|"UNAVAILABLE"|string;
   export interface Throughput {
@@ -3258,28 +3283,28 @@ declare namespace DataSync {
   }
   export interface UpdateTaskRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource name of the task to update.
+     * Specifies the ARN of the task that you want to update.
      */
     TaskArn: TaskArn;
     Options?: Options;
     /**
-     * Specifies a list of filter rules that exclude specific data during your transfer. For more information and examples, see Filtering data transferred by DataSync.
+     * Specifies exclude filters that define the files, objects, and folders in your source location that you don't want DataSync to transfer. For more information and examples, see Specifying what DataSync transfers by using filters.
      */
     Excludes?: FilterList;
     /**
-     * Specifies a schedule used to periodically transfer files from a source to a destination location. You can configure your task to execute hourly, daily, weekly or on specific days of the week. You control when in the day or hour you want the task to execute. The time you specify is UTC time. For more information, see Scheduling your task.
+     * Specifies a schedule for when you want your task to run. For more information, see Scheduling your task.
      */
     Schedule?: TaskSchedule;
     /**
-     * The name of the task to update.
+     * Specifies the name of your task.
      */
     Name?: TagValue;
     /**
-     * The Amazon Resource Name (ARN) of the resource name of the Amazon CloudWatch log group.
+     * Specifies the Amazon Resource Name (ARN) of an Amazon CloudWatch log group for monitoring your task.
      */
     CloudWatchLogGroupArn?: LogGroupArn;
     /**
-     * Specifies a list of filter rules that include specific data during your transfer. For more information and examples, see Filtering data transferred by DataSync.
+     * Specifies include filters define the files, objects, and folders in your source location that you want DataSync to transfer. For more information and examples, see Specifying what DataSync transfers by using filters.
      */
     Includes?: FilterList;
     /**
