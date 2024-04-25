@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1606.0-->
+<!--LATEST=2.1607.0-->
 <!--ENTRYINSERT-->
+
+## 2.1607.0
+* feature: AppSync: UpdateGraphQLAPI documentation update and datasource introspection secret arn update
+* feature: FMS: AWS Firewall Manager adds support for network ACL policies to manage Amazon Virtual Private Cloud (VPC) network access control lists (ACLs) for accounts in your organization.
+* feature: IVS: Bug Fix: IVS does not support arns with the `svs` prefix
+* feature: IVSRealTime: Bug Fix: IVS Real Time does not support ARNs using the `svs` prefix.
+* feature: StepFunctions: Add new ValidateStateMachineDefinition operation, which performs syntax checking on the definition of a Amazon States Language (ASL) state machine.
 
 ## 2.1606.0
 * feature: DataSync: This change allows users to disable and enable the schedules associated with their tasks.

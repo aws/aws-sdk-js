@@ -313,7 +313,7 @@ declare namespace IVS {
   }
   export interface BatchError {
     /**
-     * Channel ARN.
+     * ARN of an IVS resource; e.g., channel.
      */
     arn?: ResourceArn;
     /**

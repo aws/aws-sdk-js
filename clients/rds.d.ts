@@ -2464,7 +2464,7 @@ declare namespace RDS {
      */
     PromotionTier?: IntegerOptional;
     /**
-     * The time zone of the DB instance. The time zone parameter is currently supported only by Microsoft SQL Server.
+     * The time zone of the DB instance. The time zone parameter is currently supported only by RDS for Db2 and RDS for SQL Server.
      */
     Timezone?: String;
     /**
@@ -4196,7 +4196,7 @@ declare namespace RDS {
      */
     DBInstanceArn?: String;
     /**
-     * The time zone of the DB instance. In most cases, the Timezone element is empty. Timezone content appears only for Microsoft SQL Server DB instances that were created with a time zone specified.
+     * The time zone of the DB instance. In most cases, the Timezone element is empty. Timezone content appears only for RDS for Db2 and RDS for SQL Server DB instances that were created with a time zone specified.
      */
     Timezone?: String;
     /**
@@ -7582,7 +7582,7 @@ declare namespace RDS {
      */
     DBInstanceClass?: String;
     /**
-     * The new DB subnet group for the DB instance. You can use this parameter to move your DB instance to a different VPC. If your DB instance isn't in a VPC, you can also use this parameter to move your DB instance into a VPC. For more information, see Working with a DB instance in a VPC in the Amazon RDS User Guide. Changing the subnet group causes an outage during the change. The change is applied during the next maintenance window, unless you enable ApplyImmediately. This parameter doesn't apply to RDS Custom DB instances. Constraints:   If supplied, must match existing DB subnet group.   Example: mydbsubnetgroup 
+     * The new DB subnet group for the DB instance. You can use this parameter to move your DB instance to a different VPC. If your DB instance isn't in a VPC, you can also use this parameter to move your DB instance into a VPC. For more information, see Working with a DB instance in a VPC in the Amazon RDS User Guide. Changing the subnet group causes an outage during the change. The change is applied during the next maintenance window, unless you enable ApplyImmediately. This setting doesn't apply to RDS Custom DB instances. Constraints:   If supplied, must match existing DB subnet group.   Example: mydbsubnetgroup 
      */
     DBSubnetGroupName?: String;
     /**
@@ -7746,7 +7746,7 @@ declare namespace RDS {
      */
     UseDefaultProcessorFeatures?: BooleanOptional;
     /**
-     * Specifies whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection isn't enabled. For more information, see  Deleting a DB Instance.
+     * Specifies whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection isn't enabled. For more information, see  Deleting a DB Instance. This setting doesn't apply to Amazon Aurora DB instances. You can enable or disable deletion protection for the DB cluster. For more information, see ModifyDBCluster. DB instances in a DB cluster can be deleted even when deletion protection is enabled for the DB cluster.
      */
     DeletionProtection?: BooleanOptional;
     /**

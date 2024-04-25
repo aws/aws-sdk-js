@@ -2822,7 +2822,7 @@ declare namespace AppSync {
     /**
      * The new authentication type for the GraphqlApi object.
      */
-    authenticationType?: AuthenticationType;
+    authenticationType: AuthenticationType;
     /**
      * The new Amazon Cognito user pool configuration for the ~GraphqlApi object.
      */

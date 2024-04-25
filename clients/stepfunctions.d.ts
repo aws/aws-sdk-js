@@ -299,6 +299,14 @@ declare class StepFunctions extends Service {
    * Updates the configuration of an existing state machine alias by modifying its description or routingConfiguration. You must specify at least one of the description or routingConfiguration parameters to update a state machine alias.   UpdateStateMachineAlias is an idempotent API. Step Functions bases the idempotency check on the stateMachineAliasArn, description, and routingConfiguration parameters. Requests with the same parameters return an idempotent response.   This operation is eventually consistent. All StartExecution requests made within a few seconds use the latest alias configuration. Executions started immediately after calling UpdateStateMachineAlias may use the previous routing configuration.   Related operations:     CreateStateMachineAlias     DescribeStateMachineAlias     ListStateMachineAliases     DeleteStateMachineAlias   
    */
   updateStateMachineAlias(callback?: (err: AWSError, data: StepFunctions.Types.UpdateStateMachineAliasOutput) => void): Request<StepFunctions.Types.UpdateStateMachineAliasOutput, AWSError>;
+  /**
+   * Validates the syntax of a state machine definition. You can validate that a state machine definition is correct without creating a state machine resource. Step Functions will implicitly perform the same syntax check when you invoke CreateStateMachine and UpdateStateMachine. State machine definitions are specified using a JSON-based, structured language. For more information on Amazon States Language see Amazon States Language (ASL).  Suggested uses for ValidateStateMachineDefinition:   Integrate automated checks into your code review or Continuous Integration (CI) process to validate state machine definitions before starting deployments.   Run the validation from a Git pre-commit hook to check your state machine definitions before committing them to your source repository.    Errors found in the state machine definition will be returned in the response as a list of diagnostic elements, rather than raise an exception. 
+   */
+  validateStateMachineDefinition(params: StepFunctions.Types.ValidateStateMachineDefinitionInput, callback?: (err: AWSError, data: StepFunctions.Types.ValidateStateMachineDefinitionOutput) => void): Request<StepFunctions.Types.ValidateStateMachineDefinitionOutput, AWSError>;
+  /**
+   * Validates the syntax of a state machine definition. You can validate that a state machine definition is correct without creating a state machine resource. Step Functions will implicitly perform the same syntax check when you invoke CreateStateMachine and UpdateStateMachine. State machine definitions are specified using a JSON-based, structured language. For more information on Amazon States Language see Amazon States Language (ASL).  Suggested uses for ValidateStateMachineDefinition:   Integrate automated checks into your code review or Continuous Integration (CI) process to validate state machine definitions before starting deployments.   Run the validation from a Git pre-commit hook to check your state machine definitions before committing them to your source repository.    Errors found in the state machine definition will be returned in the response as a list of diagnostic elements, rather than raise an exception. 
+   */
+  validateStateMachineDefinition(callback?: (err: AWSError, data: StepFunctions.Types.ValidateStateMachineDefinitionOutput) => void): Request<StepFunctions.Types.ValidateStateMachineDefinitionOutput, AWSError>;
 }
 declare namespace StepFunctions {
   export interface ActivityFailedEventDetails {
@@ -2252,6 +2260,50 @@ declare namespace StepFunctions {
      */
     stateMachineVersionArn?: Arn;
   }
+  export type ValidateStateMachineDefinitionCode = string;
+  export interface ValidateStateMachineDefinitionDiagnostic {
+    /**
+     * A value of ERROR means that you cannot create or update a state machine with this definition.
+     */
+    severity: ValidateStateMachineDefinitionSeverity;
+    /**
+     * Identifying code for the diagnostic.
+     */
+    code: ValidateStateMachineDefinitionCode;
+    /**
+     * Message describing the diagnostic condition.
+     */
+    message: ValidateStateMachineDefinitionMessage;
+    /**
+     * Location of the issue in the state machine, if available. For errors specific to a field, the location could be in the format: /States/&lt;StateName&gt;/&lt;FieldName&gt;, for example: /States/FailState/ErrorPath.
+     */
+    location?: ValidateStateMachineDefinitionLocation;
+  }
+  export type ValidateStateMachineDefinitionDiagnosticList = ValidateStateMachineDefinitionDiagnostic[];
+  export interface ValidateStateMachineDefinitionInput {
+    /**
+     * The Amazon States Language definition of the state machine. For more information, see Amazon States Language (ASL).
+     */
+    definition: Definition;
+    /**
+     * The target type of state machine for this definition. The default is STANDARD.
+     */
+    type?: StateMachineType;
+  }
+  export type ValidateStateMachineDefinitionLocation = string;
+  export type ValidateStateMachineDefinitionMessage = string;
+  export interface ValidateStateMachineDefinitionOutput {
+    /**
+     * The result value will be OK when no syntax errors are found, or FAIL if the workflow definition does not pass verification.
+     */
+    result: ValidateStateMachineDefinitionResultCode;
+    /**
+     * If the result is OK, this field will be empty. When there are errors, this field will contain an array of Diagnostic objects to help you troubleshoot.
+     */
+    diagnostics: ValidateStateMachineDefinitionDiagnosticList;
+  }
+  export type ValidateStateMachineDefinitionResultCode = "OK"|"FAIL"|string;
+  export type ValidateStateMachineDefinitionSeverity = "ERROR"|string;
   export type VersionDescription = string;
   export type VersionWeight = number;
   export type includedDetails = boolean;

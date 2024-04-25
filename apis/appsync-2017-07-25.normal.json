@@ -5,6 +5,9 @@
     "endpointPrefix": "appsync",
     "jsonVersion": "1.1",
     "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
     "serviceAbbreviation": "AWSAppSync",
     "serviceFullName": "AWS AppSync",
     "serviceId": "AppSync",
@@ -4967,7 +4970,7 @@
       "type": "string",
       "max": 2048,
       "min": 20,
-      "pattern": "^arn:[a-z-]*:secretsmanager:[a-z0-9-]*:\\d{12}:secret:[0-9A-Za-z_/-]*$"
+      "pattern": "^arn:[a-z-]*:secretsmanager:[a-z0-9-]*:\\d{12}:secret:[0-9A-Za-z_/+=.@!-]*$"
     },
     "RdsHttpEndpointConfig": {
       "type": "structure",
@@ -5744,7 +5747,8 @@
       "type": "structure",
       "required": [
         "apiId",
-        "name"
+        "name",
+        "authenticationType"
       ],
       "members": {
         "apiId": {

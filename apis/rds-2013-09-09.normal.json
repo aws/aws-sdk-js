@@ -4,6 +4,9 @@
     "apiVersion": "2013-09-09",
     "endpointPrefix": "rds",
     "protocol": "query",
+    "protocols": [
+      "query"
+    ],
     "serviceAbbreviation": "Amazon RDS",
     "serviceFullName": "Amazon Relational Database Service",
     "serviceId": "RDS",
