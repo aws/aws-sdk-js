@@ -276,6 +276,14 @@ declare class CodePipeline extends Service {
    */
   retryStageExecution(callback?: (err: AWSError, data: CodePipeline.Types.RetryStageExecutionOutput) => void): Request<CodePipeline.Types.RetryStageExecutionOutput, AWSError>;
   /**
+   * Rolls back a stage execution.
+   */
+  rollbackStage(params: CodePipeline.Types.RollbackStageInput, callback?: (err: AWSError, data: CodePipeline.Types.RollbackStageOutput) => void): Request<CodePipeline.Types.RollbackStageOutput, AWSError>;
+  /**
+   * Rolls back a stage execution.
+   */
+  rollbackStage(callback?: (err: AWSError, data: CodePipeline.Types.RollbackStageOutput) => void): Request<CodePipeline.Types.RollbackStageOutput, AWSError>;
+  /**
    * Starts the specified pipeline. Specifically, it begins processing the latest commit to the source location specified as part of the pipeline.
    */
   startPipelineExecution(params: CodePipeline.Types.StartPipelineExecutionInput, callback?: (err: AWSError, data: CodePipeline.Types.StartPipelineExecutionOutput) => void): Request<CodePipeline.Types.StartPipelineExecutionOutput, AWSError>;
@@ -1193,6 +1201,7 @@ declare namespace CodePipeline {
      */
     triggerDetail?: TriggerDetail;
   }
+  export type ExecutionType = "STANDARD"|"ROLLBACK"|string;
   export interface ExecutorConfiguration {
     /**
      * Details about the Lambda executor of the action type.
@@ -1206,6 +1215,12 @@ declare namespace CodePipeline {
   export type ExecutorType = "JobWorker"|"Lambda"|string;
   export type ExternalExecutionId = string;
   export type ExternalExecutionSummary = string;
+  export interface FailureConditions {
+    /**
+     * The specified result for when the failure conditions are met, such as rolling back the stage.
+     */
+    result?: Result;
+  }
   export interface FailureDetails {
     /**
      * The type of the failure.
@@ -1589,6 +1604,10 @@ declare namespace CodePipeline {
      */
     maxResults?: MaxResults;
     /**
+     * The pipeline execution to filter on.
+     */
+    filter?: PipelineExecutionFilter;
+    /**
      * The token that was returned from the previous ListPipelineExecutions call, which can be used to return the next set of pipeline executions in the list.
      */
     nextToken?: NextToken;
@@ -1818,6 +1837,20 @@ declare namespace CodePipeline {
      * The method that the pipeline will use to handle multiple executions. The default mode is SUPERSEDED.
      */
     executionMode?: ExecutionMode;
+    /**
+     * The type of the pipeline execution.
+     */
+    executionType?: ExecutionType;
+    /**
+     * The metadata about the execution pertaining to stage rollback.
+     */
+    rollbackMetadata?: PipelineRollbackMetadata;
+  }
+  export interface PipelineExecutionFilter {
+    /**
+     * Filter for pipeline executions where the stage was successful in the current pipeline version.
+     */
+    succeededInStage?: SucceededInStageFilter;
   }
   export type PipelineExecutionId = string;
   export type PipelineExecutionStatus = "Cancelled"|"InProgress"|"Stopped"|"Stopping"|"Succeeded"|"Superseded"|"Failed"|string;
@@ -1831,6 +1864,10 @@ declare namespace CodePipeline {
      * The status of the pipeline execution.   InProgress: The pipeline execution is currently running.   Stopped: The pipeline execution was manually stopped. For more information, see Stopped Executions.   Stopping: The pipeline execution received a request to be manually stopped. Depending on the selected stop mode, the execution is either completing or abandoning in-progress actions. For more information, see Stopped Executions.   Succeeded: The pipeline execution was completed successfully.    Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution advanced and continued through the pipeline instead. For more information, see Superseded Executions.   Failed: The pipeline execution was not completed successfully.  
      */
     status?: PipelineExecutionStatus;
+    /**
+     * Status summary for the pipeline.
+     */
+    statusSummary?: PipelineExecutionStatusSummary;
     /**
      * The date and time when the pipeline execution began, in timestamp format.
      */
@@ -1855,6 +1892,14 @@ declare namespace CodePipeline {
      * The method that the pipeline will use to handle multiple executions. The default mode is SUPERSEDED.
      */
     executionMode?: ExecutionMode;
+    /**
+     * Type of the pipeline execution.
+     */
+    executionType?: ExecutionType;
+    /**
+     * The metadata for the stage execution to be rolled back.
+     */
+    rollbackMetadata?: PipelineRollbackMetadata;
   }
   export type PipelineExecutionSummaryList = PipelineExecutionSummary[];
   export type PipelineList = PipelineSummary[];
@@ -1877,6 +1922,12 @@ declare namespace CodePipeline {
     pollingDisabledAt?: Timestamp;
   }
   export type PipelineName = string;
+  export interface PipelineRollbackMetadata {
+    /**
+     * The pipeline execution ID to which the stage will be rolled back.
+     */
+    rollbackTargetPipelineExecutionId?: PipelineExecutionId;
+  }
   export type PipelineStageDeclarationList = StageDeclaration[];
   export interface PipelineSummary {
     /**
@@ -2149,6 +2200,7 @@ declare namespace CodePipeline {
   }
   export type ResolvedPipelineVariableList = ResolvedPipelineVariable[];
   export type ResourceArn = string;
+  export type Result = "ROLLBACK"|string;
   export interface RetryStageExecutionInput {
     /**
      * The name of the pipeline that contains the failed stage.
@@ -2177,6 +2229,26 @@ declare namespace CodePipeline {
   export type RevisionChangeIdentifier = string;
   export type RevisionSummary = string;
   export type RoleArn = string;
+  export interface RollbackStageInput {
+    /**
+     * The name of the pipeline for which the stage will be rolled back. 
+     */
+    pipelineName: PipelineName;
+    /**
+     * The name of the stage in the pipeline to be rolled back. 
+     */
+    stageName: StageName;
+    /**
+     * The pipeline execution ID for the stage to be rolled back to. 
+     */
+    targetPipelineExecutionId: PipelineExecutionId;
+  }
+  export interface RollbackStageOutput {
+    /**
+     * The execution ID of the pipeline execution for the stage that has been rolled back.
+     */
+    pipelineExecutionId: PipelineExecutionId;
+  }
   export interface S3ArtifactLocation {
     /**
      * The name of the S3 bucket.
@@ -2260,6 +2332,10 @@ declare namespace CodePipeline {
      * The actions included in a stage.
      */
     actions: StageActionDeclarationList;
+    /**
+     * The method to use when a stage has not completed successfully. For example, configuring this field for rollback will roll back a failed stage automatically to the last successful pipeline execution in the stage.
+     */
+    onFailure?: FailureConditions;
   }
   export interface StageExecution {
     /**
@@ -2270,6 +2346,10 @@ declare namespace CodePipeline {
      * The status of the stage, or for a completed stage, the last status of the stage.  A status of cancelled means that the pipeline’s definition was updated before the stage execution could be completed. 
      */
     status: StageExecutionStatus;
+    /**
+     * The type of pipeline execution for the stage, such as a rollback pipeline execution.
+     */
+    type?: ExecutionType;
   }
   export type StageExecutionList = StageExecution[];
   export type StageExecutionStatus = "Cancelled"|"InProgress"|"Failed"|"Stopped"|"Stopping"|"Succeeded"|string;
@@ -2357,6 +2437,12 @@ declare namespace CodePipeline {
   }
   export type StopPipelineExecutionReason = string;
   export type String = string;
+  export interface SucceededInStageFilter {
+    /**
+     * The name of the stage for filtering for pipeline executions where the stage was successful in the current pipeline version.
+     */
+    stageName?: StageName;
+  }
   export interface Tag {
     /**
      * The tag's key.
@@ -2464,7 +2550,7 @@ declare namespace CodePipeline {
     disabledReason?: DisabledReason;
   }
   export type TriggerDetail = string;
-  export type TriggerType = "CreatePipeline"|"StartPipelineExecution"|"PollForSourceChanges"|"Webhook"|"CloudWatchEvent"|"PutActionRevision"|"WebhookV2"|string;
+  export type TriggerType = "CreatePipeline"|"StartPipelineExecution"|"PollForSourceChanges"|"Webhook"|"CloudWatchEvent"|"PutActionRevision"|"WebhookV2"|"ManualRollback"|"AutomatedRollback"|string;
   export interface UntagResourceInput {
     /**
      *  The Amazon Resource Name (ARN) of the resource to remove tags from.

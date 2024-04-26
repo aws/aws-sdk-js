@@ -3967,6 +3967,10 @@ declare namespace RDS {
      */
     CustomDBEngineVersionManifest?: CustomDBEngineVersionManifest;
     /**
+     * Indicates whether the DB engine version supports Aurora Limitless Database.
+     */
+    SupportsLimitlessDatabase?: Boolean;
+    /**
      * Indicates whether the engine version supports rotating the server certificate without rebooting the DB instance.
      */
     SupportsCertificateRotationWithoutRestart?: BooleanOptional;
@@ -10717,6 +10721,10 @@ declare namespace RDS {
      * Indicates whether you can use Babelfish for Aurora PostgreSQL with the target engine version.
      */
     SupportsBabelfish?: BooleanOptional;
+    /**
+     * Indicates whether the DB engine version supports Aurora Limitless Database.
+     */
+    SupportsLimitlessDatabase?: BooleanOptional;
     /**
      * Indicates whether the target engine version supports forwarding write operations from reader DB instances to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances. Valid for: Aurora DB clusters only
      */

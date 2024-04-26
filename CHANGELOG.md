@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1607.0-->
+<!--LATEST=2.1608.0-->
 <!--ENTRYINSERT-->
+
+## 2.1608.0
+* feature: CodePipeline: Add ability to manually and automatically roll back a pipeline stage to a previously successful execution.
+* feature: CognitoIdentityServiceProvider: Add LimitExceededException to SignUp errors
+* feature: ConnectCampaigns: This release adds support for specifying if Answering Machine should wait for prompt sound.
+* feature: MarketplaceEntitlementService: Releasing minor endpoint updates.
+* feature: OAM: This release introduces support for Source Accounts to define which Metrics and Logs to share with the Monitoring Account
+* feature: RDS: SupportsLimitlessDatabase field added to describe-db-engine-versions to indicate whether the DB engine version supports Aurora Limitless Database.
+* feature: Support: Releasing minor endpoint updates.
 
 ## 2.1607.0
 * feature: AppSync: UpdateGraphQLAPI documentation update and datasource introspection secret arn update

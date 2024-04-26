@@ -1102,7 +1102,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserCreateDate?: DateType;
     /**
-     * The date and time, in ISO 8601 format, when the item was modified.
+     * The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a human-readable format like ISO 8601 or a Java Date object.
      */
     UserLastModifiedDate?: DateType;
     /**
@@ -1564,7 +1564,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     EventType?: EventType;
     /**
-     * The date and time, in ISO 8601 format, when the item was created.
+     * The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a human-readable format like ISO 8601 or a Java Date object.
      */
     CreationDate?: DateType;
     /**
@@ -1885,7 +1885,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: UserPoolIdType;
     /**
-     * A unique resource server identifier for the resource server. This could be an HTTPS endpoint where the resource server is located, such as https://my-weather-api.example.com.
+     * A unique resource server identifier for the resource server. The identifier can be an API friendly name like solar-system-data. You can also set an API URL like https://solar-system-data-api.example.com as your identifier. Amazon Cognito represents scopes in the access token in the format $resource-server-identifier/$scope. Longer scope-identifier strings increase the size of your access tokens.
      */
     Identifier: ResourceServerIdentifierType;
     /**
@@ -1977,7 +1977,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     LogoutURLs?: LogoutURLsListType;
     /**
-     * The default redirect URI. Must be in the CallbackURLs list. A redirect URI must:   Be an absolute URI.   Be registered with the authorization server.   Not include a fragment component.   See OAuth 2.0 - Redirection Endpoint. Amazon Cognito requires HTTPS over HTTP except for http://localhost for testing purposes only. App callback URLs such as myapp://example are also supported.
+     * The default redirect URI. In app clients with one assigned IdP, replaces redirect_uri in authentication requests. Must be in the CallbackURLs list. A redirect URI must:   Be an absolute URI.   Be registered with the authorization server.   Not include a fragment component.   For more information, see Default redirect URI. Amazon Cognito requires HTTPS over HTTP except for http://localhost for testing purposes only. App callback URLs such as myapp://example are also supported.
      */
     DefaultRedirectURI?: RedirectUrlType;
     /**
@@ -2272,7 +2272,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: UserPoolIdType;
     /**
-     * The identifier for the resource server
+     * A unique resource server identifier for the resource server. The identifier can be an API friendly name like solar-system-data. You can also set an API URL like https://solar-system-data-api.example.com as your identifier. Amazon Cognito represents scopes in the access token in the format $resource-server-identifier/$scope. Longer scope-identifier strings increase the size of your access tokens.
      */
     Identifier: ResourceServerIdentifierType;
   }
@@ -2393,7 +2393,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     DeviceCreateDate?: DateType;
     /**
-     * The date and time, in ISO 8601 format, when the item was modified.
+     * The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a human-readable format like ISO 8601 or a Java Date object.
      */
     DeviceLastModifiedDate?: DateType;
     /**
@@ -2775,11 +2775,11 @@ declare namespace CognitoIdentityServiceProvider {
      */
     Precedence?: PrecedenceType;
     /**
-     * The date and time, in ISO 8601 format, when the item was modified.
+     * The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a human-readable format like ISO 8601 or a Java Date object.
      */
     LastModifiedDate?: DateType;
     /**
-     * The date and time, in ISO 8601 format, when the item was created.
+     * The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a human-readable format like ISO 8601 or a Java Date object.
      */
     CreationDate?: DateType;
   }
@@ -2822,11 +2822,11 @@ declare namespace CognitoIdentityServiceProvider {
      */
     IdpIdentifiers?: IdpIdentifiersListType;
     /**
-     * The date and time, in ISO 8601 format, when the item was modified.
+     * The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a human-readable format like ISO 8601 or a Java Date object.
      */
     LastModifiedDate?: DateType;
     /**
-     * The date and time, in ISO 8601 format, when the item was created.
+     * The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a human-readable format like ISO 8601 or a Java Date object.
      */
     CreationDate?: DateType;
   }
@@ -3353,7 +3353,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     LastModifiedDate?: DateType;
     /**
-     * The date and time, in ISO 8601 format, when the item was created.
+     * The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a human-readable format like ISO 8601 or a Java Date object.
      */
     CreationDate?: DateType;
   }
@@ -3445,7 +3445,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId?: UserPoolIdType;
     /**
-     * The identifier for the resource server.
+     * A unique resource server identifier for the resource server. The identifier can be an API friendly name like solar-system-data. You can also set an API URL like https://solar-system-data-api.example.com as your identifier. Amazon Cognito represents scopes in the access token in the format $resource-server-identifier/$scope. Longer scope-identifier strings increase the size of your access tokens.
      */
     Identifier?: ResourceServerIdentifierType;
     /**
@@ -3544,7 +3544,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     RiskExceptionConfiguration?: RiskExceptionConfigurationType;
     /**
-     * The date and time, in ISO 8601 format, when the item was modified.
+     * The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a human-readable format like ISO 8601 or a Java Date object.
      */
     LastModifiedDate?: DateType;
   }
@@ -3931,11 +3931,11 @@ declare namespace CognitoIdentityServiceProvider {
      */
     CSSVersion?: CSSVersionType;
     /**
-     * The date and time, in ISO 8601 format, when the item was modified.
+     * The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a human-readable format like ISO 8601 or a Java Date object.
      */
     LastModifiedDate?: DateType;
     /**
-     * The date and time, in ISO 8601 format, when the item was created.
+     * The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a human-readable format like ISO 8601 or a Java Date object.
      */
     CreationDate?: DateType;
   }
@@ -4053,7 +4053,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: UserPoolIdType;
     /**
-     * The identifier for the resource server.
+     * A unique resource server identifier for the resource server. The identifier can be an API friendly name like solar-system-data. You can also set an API URL like https://solar-system-data-api.example.com as your identifier. Amazon Cognito represents scopes in the access token in the format $resource-server-identifier/$scope. Longer scope-identifier strings increase the size of your access tokens.
      */
     Identifier: ResourceServerIdentifierType;
     /**
@@ -4325,7 +4325,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     PreSignedUrl?: PreSignedUrlType;
     /**
-     * The date and time, in ISO 8601 format, when the item was created.
+     * The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a human-readable format like ISO 8601 or a Java Date object.
      */
     CreationDate?: DateType;
     /**
@@ -4402,11 +4402,11 @@ declare namespace CognitoIdentityServiceProvider {
      */
     ClientSecret?: ClientSecretType;
     /**
-     * The date and time, in ISO 8601 format, when the item was modified.
+     * The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a human-readable format like ISO 8601 or a Java Date object.
      */
     LastModifiedDate?: DateType;
     /**
-     * The date and time, in ISO 8601 format, when the item was created.
+     * The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a human-readable format like ISO 8601 or a Java Date object.
      */
     CreationDate?: DateType;
     /**
@@ -4504,11 +4504,11 @@ declare namespace CognitoIdentityServiceProvider {
      */
     Status?: StatusType;
     /**
-     * The date and time, in ISO 8601 format, when the item was modified.
+     * The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a human-readable format like ISO 8601 or a Java Date object.
      */
     LastModifiedDate?: DateType;
     /**
-     * The date and time, in ISO 8601 format, when the item was created.
+     * The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a human-readable format like ISO 8601 or a Java Date object.
      */
     CreationDate?: DateType;
   }
@@ -4550,11 +4550,11 @@ declare namespace CognitoIdentityServiceProvider {
      */
     Status?: StatusType;
     /**
-     * The date and time, in ISO 8601 format, when the item was modified.
+     * The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a human-readable format like ISO 8601 or a Java Date object.
      */
     LastModifiedDate?: DateType;
     /**
-     * The date and time, in ISO 8601 format, when the item was created.
+     * The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a human-readable format like ISO 8601 or a Java Date object.
      */
     CreationDate?: DateType;
     /**
@@ -4673,7 +4673,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserCreateDate?: DateType;
     /**
-     * The date and time, in ISO 8601 format, when the item was modified.
+     * The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a human-readable format like ISO 8601 or a Java Date object.
      */
     UserLastModifiedDate?: DateType;
     /**

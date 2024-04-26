@@ -197,6 +197,10 @@ declare namespace ConnectCampaigns {
      * Enable or disable answering machine detection
      */
     enableAnswerMachineDetection: Boolean;
+    /**
+     * Enable or disable await answer machine prompt
+     */
+    awaitAnswerMachinePrompt?: Boolean;
   }
   export type Arn = string;
   export type AttributeName = string;

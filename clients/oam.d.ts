@@ -12,19 +12,19 @@ declare class OAM extends Service {
   constructor(options?: OAM.Types.ClientConfiguration)
   config: Config & OAM.Types.ClientConfiguration;
   /**
-   * Creates a link between a source account and a sink that you have created in a monitoring account. Before you create a link, you must create a sink in the monitoring account and create a sink policy in that account. The sink policy must permit the source account to link to it. You can grant permission to source accounts by granting permission to an entire organization or to individual accounts. For more information, see CreateSink and PutSinkPolicy. Each monitoring account can be linked to as many as 100,000 source accounts. Each source account can be linked to as many as five monitoring accounts.
+   * Creates a link between a source account and a sink that you have created in a monitoring account. After the link is created, data is sent from the source account to the monitoring account. When you create a link, you can optionally specify filters that specify which metric namespaces and which log groups are shared from the source account to the monitoring account. Before you create a link, you must create a sink in the monitoring account and create a sink policy in that account. The sink policy must permit the source account to link to it. You can grant permission to source accounts by granting permission to an entire organization or to individual accounts. For more information, see CreateSink and PutSinkPolicy. Each monitoring account can be linked to as many as 100,000 source accounts. Each source account can be linked to as many as five monitoring accounts.
    */
   createLink(params: OAM.Types.CreateLinkInput, callback?: (err: AWSError, data: OAM.Types.CreateLinkOutput) => void): Request<OAM.Types.CreateLinkOutput, AWSError>;
   /**
-   * Creates a link between a source account and a sink that you have created in a monitoring account. Before you create a link, you must create a sink in the monitoring account and create a sink policy in that account. The sink policy must permit the source account to link to it. You can grant permission to source accounts by granting permission to an entire organization or to individual accounts. For more information, see CreateSink and PutSinkPolicy. Each monitoring account can be linked to as many as 100,000 source accounts. Each source account can be linked to as many as five monitoring accounts.
+   * Creates a link between a source account and a sink that you have created in a monitoring account. After the link is created, data is sent from the source account to the monitoring account. When you create a link, you can optionally specify filters that specify which metric namespaces and which log groups are shared from the source account to the monitoring account. Before you create a link, you must create a sink in the monitoring account and create a sink policy in that account. The sink policy must permit the source account to link to it. You can grant permission to source accounts by granting permission to an entire organization or to individual accounts. For more information, see CreateSink and PutSinkPolicy. Each monitoring account can be linked to as many as 100,000 source accounts. Each source account can be linked to as many as five monitoring accounts.
    */
   createLink(callback?: (err: AWSError, data: OAM.Types.CreateLinkOutput) => void): Request<OAM.Types.CreateLinkOutput, AWSError>;
   /**
-   * Use this to create a sink in the current account, so that it can be used as a monitoring account in CloudWatch cross-account observability. A sink is a resource that represents an attachment point in a monitoring account. Source accounts can link to the sink to send observability data. After you create a sink, you must create a sink policy that allows source accounts to attach to it. For more information, see PutSinkPolicy. Each account can contain one sink. If you delete a sink, you can then create a new one in that account.
+   * Use this to create a sink in the current account, so that it can be used as a monitoring account in CloudWatch cross-account observability. A sink is a resource that represents an attachment point in a monitoring account. Source accounts can link to the sink to send observability data. After you create a sink, you must create a sink policy that allows source accounts to attach to it. For more information, see PutSinkPolicy. Each account can contain one sink per Region. If you delete a sink, you can then create a new one in that Region.
    */
   createSink(params: OAM.Types.CreateSinkInput, callback?: (err: AWSError, data: OAM.Types.CreateSinkOutput) => void): Request<OAM.Types.CreateSinkOutput, AWSError>;
   /**
-   * Use this to create a sink in the current account, so that it can be used as a monitoring account in CloudWatch cross-account observability. A sink is a resource that represents an attachment point in a monitoring account. Source accounts can link to the sink to send observability data. After you create a sink, you must create a sink policy that allows source accounts to attach to it. For more information, see PutSinkPolicy. Each account can contain one sink. If you delete a sink, you can then create a new one in that account.
+   * Use this to create a sink in the current account, so that it can be used as a monitoring account in CloudWatch cross-account observability. A sink is a resource that represents an attachment point in a monitoring account. Source accounts can link to the sink to send observability data. After you create a sink, you must create a sink policy that allows source accounts to attach to it. For more information, see PutSinkPolicy. Each account can contain one sink per Region. If you delete a sink, you can then create a new one in that Region.
    */
   createSink(callback?: (err: AWSError, data: OAM.Types.CreateSinkOutput) => void): Request<OAM.Types.CreateSinkOutput, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class OAM extends Service {
    */
   untagResource(callback?: (err: AWSError, data: OAM.Types.UntagResourceOutput) => void): Request<OAM.Types.UntagResourceOutput, AWSError>;
   /**
-   * Use this operation to change what types of data are shared from a source account to its linked monitoring account sink. You can't change the sink or change the monitoring account with this operation. To update the list of tags associated with the sink, use TagResource.
+   * Use this operation to change what types of data are shared from a source account to its linked monitoring account sink. You can't change the sink or change the monitoring account with this operation. When you update a link, you can optionally specify filters that specify which metric namespaces and which log groups are shared from the source account to the monitoring account. To update the list of tags associated with the sink, use TagResource.
    */
   updateLink(params: OAM.Types.UpdateLinkInput, callback?: (err: AWSError, data: OAM.Types.UpdateLinkOutput) => void): Request<OAM.Types.UpdateLinkOutput, AWSError>;
   /**
-   * Use this operation to change what types of data are shared from a source account to its linked monitoring account sink. You can't change the sink or change the monitoring account with this operation. To update the list of tags associated with the sink, use TagResource.
+   * Use this operation to change what types of data are shared from a source account to its linked monitoring account sink. You can't change the sink or change the monitoring account with this operation. When you update a link, you can optionally specify filters that specify which metric namespaces and which log groups are shared from the source account to the monitoring account. To update the list of tags associated with the sink, use TagResource.
    */
   updateLink(callback?: (err: AWSError, data: OAM.Types.UpdateLinkOutput) => void): Request<OAM.Types.UpdateLinkOutput, AWSError>;
 }
@@ -139,6 +139,10 @@ declare namespace OAM {
      * Specify a friendly human-readable name to use to identify this source account when you are viewing data from it in the monitoring account. You can use a custom label or use the following variables:    $AccountName is the name of the account    $AccountEmail is the globally unique email address of the account    $AccountEmailNoDomain is the email address of the account without the domain name  
      */
     LabelTemplate: LabelTemplate;
+    /**
+     * Use this structure to optionally create filters that specify that only some metric namespaces or log groups are to be shared from the source account to the monitoring account.
+     */
+    LinkConfiguration?: LinkConfiguration;
     /**
      * An array of strings that define which types of data that the source account shares with the monitoring account.
      */
@@ -169,6 +173,10 @@ declare namespace OAM {
      * The exact label template that you specified, with the variables not resolved.
      */
     LabelTemplate?: String;
+    /**
+     * This structure includes filters that specify which metric namespaces and which log groups are shared from the source account to the monitoring account.
+     */
+    LinkConfiguration?: LinkConfiguration;
     /**
      * The resource types supported by this link.
      */
@@ -250,6 +258,10 @@ declare namespace OAM {
      */
     LabelTemplate?: String;
     /**
+     * This structure includes filters that specify which metric namespaces and which log groups are shared from the source account to the monitoring account.
+     */
+    LinkConfiguration?: LinkConfiguration;
+    /**
      * The resource types supported by this link.
      */
     ResourceTypes?: ResourceTypesOutput;
@@ -294,6 +306,10 @@ declare namespace OAM {
   }
   export interface GetSinkPolicyOutput {
     /**
+     * The policy that you specified, in JSON format.
+     */
+    Policy?: String;
+    /**
      * The ARN of the sink.
      */
     SinkArn?: String;
@@ -301,12 +317,18 @@ declare namespace OAM {
      * The random ID string that Amazon Web Services generated as part of the sink ARN.
      */
     SinkId?: String;
-    /**
-     * The policy that you specified, in JSON format.
-     */
-    Policy?: String;
   }
   export type LabelTemplate = string;
+  export interface LinkConfiguration {
+    /**
+     * Use this structure to filter which log groups are to send log events from the source account to the monitoring account.
+     */
+    LogGroupConfiguration?: LogGroupConfiguration;
+    /**
+     * Use this structure to filter which metric namespaces are to be shared from the source account to the monitoring account.
+     */
+    MetricConfiguration?: MetricConfiguration;
+  }
   export interface ListAttachedLinksInput {
     /**
      * Limits the number of returned links to the specified number.
@@ -439,18 +461,36 @@ declare namespace OAM {
      */
     Tags?: TagMapOutput;
   }
+  export interface LogGroupConfiguration {
+    /**
+     * Use this field to specify which log groups are to share their log events with the monitoring account. Use the term LogGroupName and one or more of the following operands. Use single quotation marks (') around log group names. The matching of log group names is case sensitive. Each filter has a limit of five conditional operands. Conditional operands are AND and OR.    = and !=     AND     OR     LIKE and NOT LIKE. These can be used only as prefix searches. Include a % at the end of the string that you want to search for and include.    IN and NOT IN, using parentheses ( )    Examples:    LogGroupName IN ('This-Log-Group', 'Other-Log-Group') includes only the log groups with names This-Log-Group and Other-Log-Group.    LogGroupName NOT IN ('Private-Log-Group', 'Private-Log-Group-2') includes all log groups except the log groups with names Private-Log-Group and Private-Log-Group-2.    LogGroupName LIKE 'aws/lambda/%' OR LogGroupName LIKE 'AWSLogs%' includes all log groups that have names that start with aws/lambda/ or AWSLogs.    If you are updating a link that uses filters, you can specify * as the only value for the filter parameter to delete the filter and share all log groups with the monitoring account. 
+     */
+    Filter: LogsFilter;
+  }
+  export type LogsFilter = string;
+  export interface MetricConfiguration {
+    /**
+     * Use this field to specify which metrics are to be shared with the monitoring account. Use the term Namespace and one or more of the following operands. Use single quotation marks (') around namespace names. The matching of namespace names is case sensitive. Each filter has a limit of five conditional operands. Conditional operands are AND and OR.    = and !=     AND     OR     LIKE and NOT LIKE. These can be used only as prefix searches. Include a % at the end of the string that you want to search for and include.    IN and NOT IN, using parentheses ( )    Examples:    Namespace NOT LIKE 'AWS/%' includes only namespaces that don't start with AWS/, such as custom namespaces.    Namespace IN ('AWS/EC2', 'AWS/ELB', 'AWS/S3') includes only the metrics in the EC2, Elastic Load Balancing, and Amazon S3 namespaces.     Namespace = 'AWS/EC2' OR Namespace NOT LIKE 'AWS/%' includes only the EC2 namespace and your custom namespaces.    If you are updating a link that uses filters, you can specify * as the only value for the filter parameter to delete the filter and share all metric namespaces with the monitoring account. 
+     */
+    Filter: MetricsFilter;
+  }
+  export type MetricsFilter = string;
   export type NextToken = string;
   export interface PutSinkPolicyInput {
-    /**
-     * The ARN of the sink to attach this policy to.
-     */
-    SinkIdentifier: ResourceIdentifier;
     /**
      * The JSON policy to use. If you are updating an existing policy, the entire existing policy is replaced by what you specify here. The policy must be in JSON string format with quotation marks escaped and no newlines. For examples of different types of policies, see the Examples section on this page.
      */
     Policy: SinkPolicy;
+    /**
+     * The ARN of the sink to attach this policy to.
+     */
+    SinkIdentifier: ResourceIdentifier;
   }
   export interface PutSinkPolicyOutput {
+    /**
+     * The policy that you specified.
+     */
+    Policy?: String;
     /**
      * The ARN of the sink.
      */
@@ -459,10 +499,6 @@ declare namespace OAM {
      * The random ID string that Amazon Web Services generated as part of the sink ARN.
      */
     SinkId?: String;
-    /**
-     * The policy that you specified.
-     */
-    Policy?: String;
   }
   export type ResourceIdentifier = string;
   export type ResourceType = "AWS::CloudWatch::Metric"|"AWS::Logs::LogGroup"|"AWS::XRay::Trace"|"AWS::ApplicationInsights::Application"|"AWS::InternetMonitor::Monitor"|string;
@@ -506,6 +542,10 @@ declare namespace OAM {
      */
     Identifier: ResourceIdentifier;
     /**
+     * Use this structure to filter which metric namespaces and which log groups are to be shared from the source account to the monitoring account.
+     */
+    LinkConfiguration?: LinkConfiguration;
+    /**
      * An array of strings that define which types of data that the source account will send to the monitoring account. Your input here replaces the current set of data types that are shared.
      */
     ResourceTypes: ResourceTypesInput;
@@ -527,6 +567,10 @@ declare namespace OAM {
      * The exact label template that was specified when the link was created, with the template variables not resolved.
      */
     LabelTemplate?: LabelTemplate;
+    /**
+     * This structure includes filters that specify which metric namespaces and which log groups are shared from the source account to the monitoring account.
+     */
+    LinkConfiguration?: LinkConfiguration;
     /**
      * The resource types now supported by this link.
      */
