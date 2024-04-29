@@ -1675,6 +1675,10 @@ declare namespace Inspector2 {
      */
     resourceType?: CoverageStringFilterList;
     /**
+     * The filter to search for Amazon EC2 instance coverage by scan mode. Valid values are EC2_SSM_AGENT_BASED and EC2_HYBRID.
+     */
+    scanMode?: CoverageStringFilterList;
+    /**
      * The scan status code to filter on. Valid values are: ValidationException, InternalServerException, ResourceNotFoundException, BadRequestException, and ThrottlingException.
      */
     scanStatusCode?: CoverageStringFilterList;
@@ -1738,6 +1742,10 @@ declare namespace Inspector2 {
      * The type of the covered resource.
      */
     resourceType: CoverageResourceType;
+    /**
+     * The scan method that is applied to the instance.
+     */
+    scanMode?: ScanMode;
     /**
      * The status of the scan covering the resource.
      */
@@ -2079,6 +2087,18 @@ declare namespace Inspector2 {
     accountId: AccountId;
   }
   export type Double = number;
+  export interface Ec2Configuration {
+    /**
+     * The scan method that is applied to the instance.
+     */
+    scanMode: Ec2ScanMode;
+  }
+  export interface Ec2ConfigurationState {
+    /**
+     * An object that contains details about the state of the Amazon EC2 scan mode.
+     */
+    scanModeState?: Ec2ScanModeState;
+  }
   export type Ec2DeepInspectionStatus = "ACTIVATED"|"DEACTIVATED"|"PENDING"|"FAILED"|string;
   export interface Ec2InstanceAggregation {
     /**
@@ -2152,6 +2172,18 @@ declare namespace Inspector2 {
     tags?: TagMap;
   }
   export type Ec2Platform = "WINDOWS"|"LINUX"|"UNKNOWN"|"MACOS"|string;
+  export type Ec2ScanMode = "EC2_SSM_AGENT_BASED"|"EC2_HYBRID"|string;
+  export interface Ec2ScanModeState {
+    /**
+     * The scan method that is applied to the instance.
+     */
+    scanMode?: Ec2ScanMode;
+    /**
+     * The status of the Amazon EC2 scan mode setting.
+     */
+    scanModeStatus?: Ec2ScanModeStatus;
+  }
+  export type Ec2ScanModeStatus = "SUCCESS"|"PENDING"|string;
   export interface EcrConfiguration {
     /**
      * The rescan duration configured for image pull date.
@@ -2608,7 +2640,7 @@ declare namespace Inspector2 {
      */
     inspectorScoreDetails?: InspectorScoreDetails;
     /**
-     * The date and time that the finding was last observed.
+     *  The date and time the finding was last observed. This timestamp for this field remains unchanged until a finding is updated. 
      */
     lastObservedAt: DateTimeTimestamp;
     /**
@@ -2804,7 +2836,7 @@ declare namespace Inspector2 {
      */
     status?: CisReportStatus;
     /**
-     *  The URL where the CIS scan report PDF can be downloaded. 
+     *  The URL where a PDF of the CIS scan report can be downloaded. 
      */
     url?: String;
   }
@@ -2856,6 +2888,10 @@ declare namespace Inspector2 {
   export interface GetConfigurationRequest {
   }
   export interface GetConfigurationResponse {
+    /**
+     * Specifies how the Amazon EC2 automated scan mode is currently configured for your environment.
+     */
+    ec2Configuration?: Ec2ConfigurationState;
     /**
      * Specifies how the ECR automated re-scan duration is currently configured for your environment.
      */
@@ -4123,6 +4159,7 @@ declare namespace Inspector2 {
   export type RuleId = string;
   export type Runtime = "NODEJS"|"NODEJS_12_X"|"NODEJS_14_X"|"NODEJS_16_X"|"JAVA_8"|"JAVA_8_AL2"|"JAVA_11"|"PYTHON_3_7"|"PYTHON_3_8"|"PYTHON_3_9"|"UNSUPPORTED"|"NODEJS_18_X"|"GO_1_X"|"JAVA_17"|"PYTHON_3_10"|string;
   export type SbomReportFormat = "CYCLONEDX_1_4"|"SPDX_2_3"|string;
+  export type ScanMode = "EC2_SSM_AGENT_BASED"|"EC2_AGENTLESS"|string;
   export interface ScanStatus {
     /**
      * The scan status. Possible return values and descriptions are:   PENDING_INITIAL_SCAN - This resource has been identified for scanning, results will be available soon.  ACCESS_DENIED - Resource access policy restricting Amazon Inspector access. Please update the IAM policy.  INTERNAL_ERROR - Amazon Inspector has encountered an internal error for this resource. Amazon Inspector service will automatically resolve the issue and resume the scanning. No action required from the user.  UNMANAGED_EC2_INSTANCE - The EC2 instance is not managed by SSM, please use the following SSM automation to remediate the issue: https://docs.aws.amazon.com/systems-manager-automation-runbooks/latest/userguide/automation-awssupport-troubleshoot-managed-instance.html. Once the instance becomes managed by SSM, Inspector will automatically begin scanning this instance.   UNSUPPORTED_OS - Amazon Inspector does not support this OS, architecture, or image manifest type at this time. To see a complete list of supported operating systems see: https://docs.aws.amazon.com/inspector/latest/user/supported.html.  SCAN_ELIGIBILITY_EXPIRED - The configured scan duration has lapsed for this image.  RESOURCE_TERMINATED - This resource has been terminated. The findings and coverage associated with this resource are in the process of being cleaned up.  SUCCESSFUL - The scan was successful.  NO_RESOURCES_FOUND - Reserved for future use.  IMAGE_SIZE_EXCEEDED - Reserved for future use.  SCAN_FREQUENCY_MANUAL - This image will not be covered by Amazon Inspector due to the repository scan frequency configuration.  SCAN_FREQUENCY_SCAN_ON_PUSH - This image will be scanned one time and will not new findings because of the scan frequency configuration.  EC2_INSTANCE_STOPPED - This EC2 instance is in a stopped state, therefore, Amazon Inspector will pause scanning. The existing findings will continue to exist until the instance is terminated. Once the instance is re-started, Inspector will automatically start scanning the instance again. Please note that you will not be charged for this instance while it’s in a stopped state.  PENDING_DISABLE - This resource is pending cleanup during disablement. The customer will not be billed while a resource is in the pending disable status.  NO INVENTORY - Amazon Inspector couldn’t find software application inventory to scan for vulnerabilities. This might be caused due to required Amazon Inspector associations being deleted or failing to run on your resource. Please verify the status of InspectorInventoryCollection-do-not-delete association in the SSM console for the resource. Additionally, you can verify the instance’s inventory in the SSM Fleet Manager console.  STALE_INVENTORY - Amazon Inspector wasn’t able to collect an updated software application inventory in the last 7 days. Please confirm the required Amazon Inspector associations still exist and you can still see an updated inventory in the SSM console.  EXCLUDED_BY_TAG - This resource was not scanned because it has been excluded by a tag.  UNSUPPORTED_RUNTIME - The function was not scanned because it has an unsupported runtime. To see a complete list of supported runtimes see: https://docs.aws.amazon.com/inspector/latest/user/supported.html.  UNSUPPORTED_MEDIA_TYPE - The ECR image has an unsupported media type.  UNSUPPORTED_CONFIG_FILE - Reserved for future use.  DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED - The instance has exceeded the 5000 package limit for Amazon Inspector Deep inspection. To resume Deep inspection for this instance you can try to adjust the custom paths associated with the account.  DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED - The SSM agent couldn't send inventory to Amazon Inspector because the SSM quota for Inventory data collected per instance per day has already been reached for this instance.  DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED - Amazon Inspector failed to extract the package inventory because the package collection time exceeding the maximum threshold of 15 minutes.  DEEP_INSPECTION_NO_INVENTORY The Amazon Inspector plugin hasn't yet been able to collect an inventory of packages for this instance. This is usually the result of a pending scan, however, if this status persists after 6 hours, use SSM to ensure that the required Amazon Inspector associations exist and are running for the instance. 
@@ -4563,9 +4600,13 @@ declare namespace Inspector2 {
   }
   export interface UpdateConfigurationRequest {
     /**
+     * Specifies how the Amazon EC2 automated scan will be updated for your environment.
+     */
+    ec2Configuration?: Ec2Configuration;
+    /**
      * Specifies how the ECR automated re-scan will be updated for your environment.
      */
-    ecrConfiguration: EcrConfiguration;
+    ecrConfiguration?: EcrConfiguration;
   }
   export interface UpdateConfigurationResponse {
   }

@@ -1297,7 +1297,7 @@ declare namespace Amplify {
     /**
      * The maximum number of records to list in a single response. 
      */
-    maxResults?: MaxResults;
+    maxResults?: MaxResultsForListApps;
   }
   export interface ListAppsResult {
     /**
@@ -1484,6 +1484,7 @@ declare namespace Amplify {
   export type LogUrl = string;
   export type MD5Hash = string;
   export type MaxResults = number;
+  export type MaxResultsForListApps = number;
   export type Name = string;
   export type NextToken = string;
   export type OauthToken = string;

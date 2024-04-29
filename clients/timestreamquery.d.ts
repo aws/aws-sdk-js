@@ -36,6 +36,14 @@ declare class TimestreamQuery extends Service {
    */
   deleteScheduledQuery(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Describes the settings for your account that include the query pricing model and the configured maximum TCUs the service can use for your query workload. You're charged only for the duration of compute units used for your workloads.
+   */
+  describeAccountSettings(params: TimestreamQuery.Types.DescribeAccountSettingsRequest, callback?: (err: AWSError, data: TimestreamQuery.Types.DescribeAccountSettingsResponse) => void): Request<TimestreamQuery.Types.DescribeAccountSettingsResponse, AWSError>;
+  /**
+   * Describes the settings for your account that include the query pricing model and the configured maximum TCUs the service can use for your query workload. You're charged only for the duration of compute units used for your workloads.
+   */
+  describeAccountSettings(callback?: (err: AWSError, data: TimestreamQuery.Types.DescribeAccountSettingsResponse) => void): Request<TimestreamQuery.Types.DescribeAccountSettingsResponse, AWSError>;
+  /**
    * DescribeEndpoints returns a list of available endpoints to make Timestream API calls against. This API is available through both Write and Query. Because the Timestream SDKs are designed to transparently work with the service’s architecture, including the management and mapping of the service endpoints, it is not recommended that you use this API unless:   You are using VPC endpoints (Amazon Web Services PrivateLink) with Timestream     Your application uses a programming language that does not yet have SDK support   You require better control over the client-side implementation   For detailed information on how and when to use and implement DescribeEndpoints, see The Endpoint Discovery Pattern.
    */
   describeEndpoints(params: TimestreamQuery.Types.DescribeEndpointsRequest, callback?: (err: AWSError, data: TimestreamQuery.Types.DescribeEndpointsResponse) => void): Request<TimestreamQuery.Types.DescribeEndpointsResponse, AWSError>;
@@ -107,6 +115,14 @@ declare class TimestreamQuery extends Service {
    * Removes the association of tags from a Timestream query resource.
    */
   untagResource(callback?: (err: AWSError, data: TimestreamQuery.Types.UntagResourceResponse) => void): Request<TimestreamQuery.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Transitions your account to use TCUs for query pricing and modifies the maximum query compute units that you've configured. If you reduce the value of MaxQueryTCU to a desired configuration, the new value can take up to 24 hours to be effective.  After you've transitioned your account to use TCUs for query pricing, you can't transition to using bytes scanned for query pricing. 
+   */
+  updateAccountSettings(params: TimestreamQuery.Types.UpdateAccountSettingsRequest, callback?: (err: AWSError, data: TimestreamQuery.Types.UpdateAccountSettingsResponse) => void): Request<TimestreamQuery.Types.UpdateAccountSettingsResponse, AWSError>;
+  /**
+   * Transitions your account to use TCUs for query pricing and modifies the maximum query compute units that you've configured. If you reduce the value of MaxQueryTCU to a desired configuration, the new value can take up to 24 hours to be effective.  After you've transitioned your account to use TCUs for query pricing, you can't transition to using bytes scanned for query pricing. 
+   */
+  updateAccountSettings(callback?: (err: AWSError, data: TimestreamQuery.Types.UpdateAccountSettingsResponse) => void): Request<TimestreamQuery.Types.UpdateAccountSettingsResponse, AWSError>;
   /**
    * Update a scheduled query.
    */
@@ -220,6 +236,18 @@ declare namespace TimestreamQuery {
      */
     ScheduledQueryArn: AmazonResourceName;
   }
+  export interface DescribeAccountSettingsRequest {
+  }
+  export interface DescribeAccountSettingsResponse {
+    /**
+     * The maximum number of Timestream compute units (TCUs) the service will use at any point in time to serve your queries.
+     */
+    MaxQueryTCU?: MaxQueryCapacity;
+    /**
+     * The pricing model for queries in your account.
+     */
+    QueryPricingModel?: QueryPricingModel;
+  }
   export interface DescribeEndpointsRequest {
   }
   export interface DescribeEndpointsResponse {
@@ -305,6 +333,10 @@ declare namespace TimestreamQuery {
      */
     BytesMetered?: Long;
     /**
+     * Bytes scanned for a single scheduled query run.
+     */
+    CumulativeBytesScanned?: Long;
+    /**
      * The number of records ingested for a single scheduled query run. 
      */
     RecordsIngested?: Long;
@@ -358,6 +390,7 @@ declare namespace TimestreamQuery {
     NextToken?: NextTagsForResourceResultsToken;
   }
   export type Long = number;
+  export type MaxQueryCapacity = number;
   export type MaxQueryResults = number;
   export type MaxScheduledQueriesResults = number;
   export type MaxTagsForResourceResult = number;
@@ -453,6 +486,7 @@ declare namespace TimestreamQuery {
     Parameters: ParameterMappingList;
   }
   export type QueryId = string;
+  export type QueryPricingModel = "BYTES_SCANNED"|"COMPUTE_UNITS"|string;
   export interface QueryRequest {
     /**
      *  The query to be run by Timestream. 
@@ -834,6 +868,26 @@ declare namespace TimestreamQuery {
     TagKeys: TagKeyList;
   }
   export interface UntagResourceResponse {
+  }
+  export interface UpdateAccountSettingsRequest {
+    /**
+     * The maximum number of compute units the service will use at any point in time to serve your queries. To run queries, you must set a minimum capacity of 4 TCU. You can set the maximum number of TCU in multiples of 4, for example, 4, 8, 16, 32, and so on. The maximum value supported for MaxQueryTCU is 1000. To request an increase to this soft limit, contact Amazon Web Services Support. For information about the default quota for maxQueryTCU, see Default quotas.
+     */
+    MaxQueryTCU?: MaxQueryCapacity;
+    /**
+     * The pricing model for queries in an account.
+     */
+    QueryPricingModel?: QueryPricingModel;
+  }
+  export interface UpdateAccountSettingsResponse {
+    /**
+     * The configured maximum number of compute units the service will use at any point in time to serve your queries.
+     */
+    MaxQueryTCU?: MaxQueryCapacity;
+    /**
+     * The pricing model for an account.
+     */
+    QueryPricingModel?: QueryPricingModel;
   }
   export interface UpdateScheduledQueryRequest {
     /**

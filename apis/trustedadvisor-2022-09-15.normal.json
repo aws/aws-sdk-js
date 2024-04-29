@@ -12,6 +12,39 @@
     "uid": "trustedadvisor-2022-09-15"
   },
   "operations": {
+    "BatchUpdateRecommendationResourceExclusion": {
+      "name": "BatchUpdateRecommendationResourceExclusion",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v1/batch-update-recommendation-resource-exclusion",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "BatchUpdateRecommendationResourceExclusionRequest"
+      },
+      "output": {
+        "shape": "BatchUpdateRecommendationResourceExclusionResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Update one or more exclusion status for a list of recommendation resources</p>",
+      "idempotent": true
+    },
     "GetOrganizationRecommendation": {
       "name": "GetOrganizationRecommendation",
       "http": {
@@ -289,7 +322,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Update the lifecyle of a Recommendation within an Organization. This API only supports prioritized recommendations. </p>",
+      "documentation": "<p>Update the lifecycle of a Recommendation within an Organization. This API only supports prioritized recommendations. </p>",
       "idempotent": true
     },
     "UpdateRecommendationLifecycle": {
@@ -389,6 +422,34 @@
         "shape": "AccountRecommendationLifecycleSummary"
       }
     },
+    "BatchUpdateRecommendationResourceExclusionRequest": {
+      "type": "structure",
+      "required": [
+        "recommendationResourceExclusions"
+      ],
+      "members": {
+        "recommendationResourceExclusions": {
+          "shape": "RecommendationResourceExclusionList",
+          "documentation": "<p>A list of recommendation resource ARNs and exclusion status to update</p>"
+        }
+      }
+    },
+    "BatchUpdateRecommendationResourceExclusionResponse": {
+      "type": "structure",
+      "required": [
+        "batchUpdateRecommendationResourceExclusionErrors"
+      ],
+      "members": {
+        "batchUpdateRecommendationResourceExclusionErrors": {
+          "shape": "UpdateRecommendationResourceExclusionErrorList",
+          "documentation": "<p>A list of recommendation resource ARNs whose exclusion status failed to update, if any</p>"
+        }
+      }
+    },
+    "Boolean": {
+      "type": "boolean",
+      "box": true
+    },
     "CheckArn": {
       "type": "string",
       "max": 2048,
@@ -458,6 +519,13 @@
     "Double": {
       "type": "double",
       "box": true
+    },
+    "ExclusionStatus": {
+      "type": "string",
+      "enum": [
+        "excluded",
+        "included"
+      ]
     },
     "GetOrganizationRecommendationRequest": {
       "type": "structure",
@@ -654,6 +722,12 @@
           "location": "querystring",
           "locationName": "affectedAccountId"
         },
+        "exclusionStatus": {
+          "shape": "ExclusionStatus",
+          "documentation": "<p>The exclusion status of the resource</p>",
+          "location": "querystring",
+          "locationName": "exclusionStatus"
+        },
         "maxResults": {
           "shape": "ListOrganizationRecommendationResourcesRequestMaxResultsInteger",
           "documentation": "<p>The maximum number of results to return per page.</p>",
@@ -821,6 +895,12 @@
         "recommendationIdentifier"
       ],
       "members": {
+        "exclusionStatus": {
+          "shape": "ExclusionStatus",
+          "documentation": "<p>The exclusion status of the resource</p>",
+          "location": "querystring",
+          "locationName": "exclusionStatus"
+        },
         "maxResults": {
           "shape": "ListRecommendationResourcesRequestMaxResultsInteger",
           "documentation": "<p>The maximum number of results to return per page.</p>",
@@ -1123,6 +1203,10 @@
         "awsResourceId": {
           "shape": "String",
           "documentation": "<p>The AWS resource identifier</p>"
+        },
+        "exclusionStatus": {
+          "shape": "ExclusionStatus",
+          "documentation": "<p>The exclusion status of the Recommendation Resource</p>"
         },
         "id": {
           "shape": "String",
@@ -1428,6 +1512,32 @@
       "min": 20,
       "pattern": "^arn:[\\w-]+:trustedadvisor::\\d{12}:recommendation-resource\\/[\\w-]+\\/[\\w-]+$"
     },
+    "RecommendationResourceExclusion": {
+      "type": "structure",
+      "required": [
+        "arn",
+        "isExcluded"
+      ],
+      "members": {
+        "arn": {
+          "shape": "RecommendationResourceArn",
+          "documentation": "<p>The ARN of the Recommendation Resource</p>"
+        },
+        "isExcluded": {
+          "shape": "Boolean",
+          "documentation": "<p>The exclusion status</p>"
+        }
+      },
+      "documentation": "<p>The request entry for Recommendation Resource exclusion. Each entry is a combination of Recommendation Resource ARN and corresponding exclusion status</p>"
+    },
+    "RecommendationResourceExclusionList": {
+      "type": "list",
+      "member": {
+        "shape": "RecommendationResourceExclusion"
+      },
+      "max": 100,
+      "min": 1
+    },
     "RecommendationResourceSummary": {
       "type": "structure",
       "required": [
@@ -1448,6 +1558,10 @@
         "awsResourceId": {
           "shape": "String",
           "documentation": "<p>The AWS resource identifier</p>"
+        },
+        "exclusionStatus": {
+          "shape": "ExclusionStatus",
+          "documentation": "<p>The exclusion status of the Recommendation Resource</p>"
         },
         "id": {
           "shape": "String",
@@ -1724,6 +1838,30 @@
         "not_applicable",
         "other"
       ]
+    },
+    "UpdateRecommendationResourceExclusionError": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "shape": "RecommendationResourceArn",
+          "documentation": "<p>The ARN of the Recommendation Resource</p>"
+        },
+        "errorCode": {
+          "shape": "String",
+          "documentation": "<p>The error code</p>"
+        },
+        "errorMessage": {
+          "shape": "String",
+          "documentation": "<p>The error message</p>"
+        }
+      },
+      "documentation": "<p>The error entry for Recommendation Resource exclusion. Each entry is a combination of Recommendation Resource ARN, error code and error message</p>"
+    },
+    "UpdateRecommendationResourceExclusionErrorList": {
+      "type": "list",
+      "member": {
+        "shape": "UpdateRecommendationResourceExclusionError"
+      }
     }
   },
   "documentation": "<p>TrustedAdvisor Public API</p>"

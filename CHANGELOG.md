@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1608.0-->
+<!--LATEST=2.1609.0-->
 <!--ENTRYINSERT-->
+
+## 2.1609.0
+* feature: Amplify: Updating max results limit for listing any resources (Job, Artifacts, Branch, BackendResources, DomainAssociation) to 50 with the exception of list apps that where max results can be up to 100.
+* feature: ConnectCases: This feature releases DeleteField, DeletedLayout, and DeleteTemplate API's
+* feature: Inspector2: Update Inspector2 to include new Agentless API parameters.
+* feature: TimestreamQuery: This change allows users to update and describe account settings associated with their accounts.
+* feature: TranscribeService: This update provides error messaging for generative call summarization in Transcribe Call Analytics
+* feature: TrustedAdvisor: This release adds the BatchUpdateRecommendationResourceExclusion API to support batch updates of Recommendation Resource exclusion statuses and introduces a new exclusion status filter to the ListRecommendationResources and ListOrganizationRecommendationResources APIs.
 
 ## 2.1608.0
 * feature: CodePipeline: Add ability to manually and automatically roll back a pipeline stage to a previously successful execution.

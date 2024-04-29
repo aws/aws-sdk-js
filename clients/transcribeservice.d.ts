@@ -378,6 +378,7 @@ declare namespace TranscribeService {
   export type BaseModelName = "NarrowBand"|"WideBand"|string;
   export type Boolean = boolean;
   export type CLMLanguageCode = "en-US"|"hi-IN"|"es-US"|"en-GB"|"en-AU"|"de-DE"|"ja-JP"|string;
+  export type CallAnalyticsFeature = "GENERATIVE_SUMMARIZATION"|string;
   export interface CallAnalyticsJob {
     /**
      * The name of the Call Analytics job. Job names are case sensitive and must be unique within an Amazon Web Services account.
@@ -387,6 +388,10 @@ declare namespace TranscribeService {
      * Provides the status of the specified Call Analytics job. If the status is COMPLETED, the job is finished and you can find the results at the location specified in TranscriptFileUri (or RedactedTranscriptFileUri, if you requested transcript redaction). If the status is FAILED, FailureReason provides details on why your transcription job failed.
      */
     CallAnalyticsJobStatus?: CallAnalyticsJobStatus;
+    /**
+     * Provides detailed information about a call analytics job, including information about skipped analytics features.
+     */
+    CallAnalyticsJobDetails?: CallAnalyticsJobDetails;
     /**
      * The language code used to create your Call Analytics job. For a list of supported languages and their associated language codes, refer to the Supported languages table. If you do not know the language spoken in your media file, you can omit this field and let Amazon Transcribe automatically identify the language of your media. To improve the accuracy of language identification, you can include several language codes and Amazon Transcribe chooses the closest match for your transcription.
      */
@@ -436,6 +441,12 @@ declare namespace TranscribeService {
      * Indicates which speaker is on which channel.
      */
     ChannelDefinitions?: ChannelDefinitions;
+  }
+  export interface CallAnalyticsJobDetails {
+    /**
+     * Contains information about any skipped analytics features during the analysis of a call analytics job. This array lists all the analytics features that were skipped, along with their corresponding reason code and message.
+     */
+    Skipped?: CallAnalyticsSkippedFeatureList;
   }
   export type CallAnalyticsJobName = string;
   export interface CallAnalyticsJobSettings {
@@ -497,10 +508,30 @@ declare namespace TranscribeService {
      */
     CallAnalyticsJobStatus?: CallAnalyticsJobStatus;
     /**
+     * Provides detailed information about a call analytics job, including information about skipped analytics features.
+     */
+    CallAnalyticsJobDetails?: CallAnalyticsJobDetails;
+    /**
      * If CallAnalyticsJobStatus is FAILED, FailureReason contains information about why the Call Analytics job failed. See also: Common Errors.
      */
     FailureReason?: FailureReason;
   }
+  export interface CallAnalyticsSkippedFeature {
+    /**
+     * Indicates the type of analytics feature that was skipped during the analysis of a call analytics job.
+     */
+    Feature?: CallAnalyticsFeature;
+    /**
+     * Provides a code indicating the reason why a specific analytics feature was skipped during the analysis of a call analytics job.
+     */
+    ReasonCode?: CallAnalyticsSkippedReasonCode;
+    /**
+     * Contains additional information or a message explaining why a specific analytics feature was skipped during the analysis of a call analytics job.
+     */
+    Message?: String;
+  }
+  export type CallAnalyticsSkippedFeatureList = CallAnalyticsSkippedFeature[];
+  export type CallAnalyticsSkippedReasonCode = "INSUFFICIENT_CONVERSATION_CONTENT"|"FAILED_SAFETY_GUIDELINES"|string;
   export type CategoryName = string;
   export interface CategoryProperties {
     /**
@@ -2015,6 +2046,7 @@ declare namespace TranscribeService {
      */
     TranscriptionJob?: TranscriptionJob;
   }
+  export type String = string;
   export type StringTargetList = NonEmptyString[];
   export type SubtitleFileUris = Uri[];
   export type SubtitleFormat = "vtt"|"srt"|string;

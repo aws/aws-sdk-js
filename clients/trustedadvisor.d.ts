@@ -12,6 +12,14 @@ declare class TrustedAdvisor extends Service {
   constructor(options?: TrustedAdvisor.Types.ClientConfiguration)
   config: Config & TrustedAdvisor.Types.ClientConfiguration;
   /**
+   * Update one or more exclusion status for a list of recommendation resources
+   */
+  batchUpdateRecommendationResourceExclusion(params: TrustedAdvisor.Types.BatchUpdateRecommendationResourceExclusionRequest, callback?: (err: AWSError, data: TrustedAdvisor.Types.BatchUpdateRecommendationResourceExclusionResponse) => void): Request<TrustedAdvisor.Types.BatchUpdateRecommendationResourceExclusionResponse, AWSError>;
+  /**
+   * Update one or more exclusion status for a list of recommendation resources
+   */
+  batchUpdateRecommendationResourceExclusion(callback?: (err: AWSError, data: TrustedAdvisor.Types.BatchUpdateRecommendationResourceExclusionResponse) => void): Request<TrustedAdvisor.Types.BatchUpdateRecommendationResourceExclusionResponse, AWSError>;
+  /**
    * Get a specific recommendation within an AWS Organizations organization. This API supports only prioritized recommendations. 
    */
   getOrganizationRecommendation(params: TrustedAdvisor.Types.GetOrganizationRecommendationRequest, callback?: (err: AWSError, data: TrustedAdvisor.Types.GetOrganizationRecommendationResponse) => void): Request<TrustedAdvisor.Types.GetOrganizationRecommendationResponse, AWSError>;
@@ -76,11 +84,11 @@ declare class TrustedAdvisor extends Service {
    */
   listRecommendations(callback?: (err: AWSError, data: TrustedAdvisor.Types.ListRecommendationsResponse) => void): Request<TrustedAdvisor.Types.ListRecommendationsResponse, AWSError>;
   /**
-   * Update the lifecyle of a Recommendation within an Organization. This API only supports prioritized recommendations. 
+   * Update the lifecycle of a Recommendation within an Organization. This API only supports prioritized recommendations. 
    */
   updateOrganizationRecommendationLifecycle(params: TrustedAdvisor.Types.UpdateOrganizationRecommendationLifecycleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Update the lifecyle of a Recommendation within an Organization. This API only supports prioritized recommendations. 
+   * Update the lifecycle of a Recommendation within an Organization. This API only supports prioritized recommendations. 
    */
   updateOrganizationRecommendationLifecycle(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -131,6 +139,19 @@ declare namespace TrustedAdvisor {
     updatedOnBehalfOfJobTitle?: String;
   }
   export type AccountRecommendationLifecycleSummaryList = AccountRecommendationLifecycleSummary[];
+  export interface BatchUpdateRecommendationResourceExclusionRequest {
+    /**
+     * A list of recommendation resource ARNs and exclusion status to update
+     */
+    recommendationResourceExclusions: RecommendationResourceExclusionList;
+  }
+  export interface BatchUpdateRecommendationResourceExclusionResponse {
+    /**
+     * A list of recommendation resource ARNs whose exclusion status failed to update, if any
+     */
+    batchUpdateRecommendationResourceExclusionErrors: UpdateRecommendationResourceExclusionErrorList;
+  }
+  export type Boolean = boolean;
   export type CheckArn = string;
   export type CheckIdentifier = string;
   export interface CheckSummary {
@@ -169,6 +190,7 @@ declare namespace TrustedAdvisor {
   }
   export type CheckSummaryList = CheckSummary[];
   export type Double = number;
+  export type ExclusionStatus = "excluded"|"included"|string;
   export interface GetOrganizationRecommendationRequest {
     /**
      * The Recommendation identifier
@@ -269,6 +291,10 @@ declare namespace TrustedAdvisor {
      */
     affectedAccountId?: AccountId;
     /**
+     * The exclusion status of the resource
+     */
+    exclusionStatus?: ExclusionStatus;
+    /**
      * The maximum number of results to return per page.
      */
     maxResults?: ListOrganizationRecommendationResourcesRequestMaxResultsInteger;
@@ -358,6 +384,10 @@ declare namespace TrustedAdvisor {
   }
   export type ListOrganizationRecommendationsResponseNextTokenString = string;
   export interface ListRecommendationResourcesRequest {
+    /**
+     * The exclusion status of the resource
+     */
+    exclusionStatus?: ExclusionStatus;
     /**
      * The maximum number of results to return per page.
      */
@@ -549,6 +579,10 @@ declare namespace TrustedAdvisor {
      * The AWS resource identifier
      */
     awsResourceId: String;
+    /**
+     * The exclusion status of the Recommendation Resource
+     */
+    exclusionStatus?: ExclusionStatus;
     /**
      * The ID of the Recommendation Resource
      */
@@ -744,6 +778,17 @@ declare namespace TrustedAdvisor {
   }
   export type RecommendationRegionCode = string;
   export type RecommendationResourceArn = string;
+  export interface RecommendationResourceExclusion {
+    /**
+     * The ARN of the Recommendation Resource
+     */
+    arn: RecommendationResourceArn;
+    /**
+     * The exclusion status
+     */
+    isExcluded: Boolean;
+  }
+  export type RecommendationResourceExclusionList = RecommendationResourceExclusion[];
   export interface RecommendationResourceSummary {
     /**
      * The ARN of the Recommendation Resource
@@ -753,6 +798,10 @@ declare namespace TrustedAdvisor {
      * The AWS resource identifier
      */
     awsResourceId: String;
+    /**
+     * The exclusion status of the Recommendation Resource
+     */
+    exclusionStatus?: ExclusionStatus;
     /**
      * The ID of the Recommendation Resource
      */
@@ -899,6 +948,21 @@ declare namespace TrustedAdvisor {
   }
   export type UpdateRecommendationLifecycleStage = "pending_response"|"in_progress"|"dismissed"|"resolved"|string;
   export type UpdateRecommendationLifecycleStageReasonCode = "non_critical_account"|"temporary_account"|"valid_business_case"|"other_methods_available"|"low_priority"|"not_applicable"|"other"|string;
+  export interface UpdateRecommendationResourceExclusionError {
+    /**
+     * The ARN of the Recommendation Resource
+     */
+    arn?: RecommendationResourceArn;
+    /**
+     * The error code
+     */
+    errorCode?: String;
+    /**
+     * The error message
+     */
+    errorMessage?: String;
+  }
+  export type UpdateRecommendationResourceExclusionErrorList = UpdateRecommendationResourceExclusionError[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
