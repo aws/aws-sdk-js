@@ -36,11 +36,11 @@ declare class ChimeSDKVoice extends Service {
    */
   batchDeletePhoneNumber(callback?: (err: AWSError, data: ChimeSDKVoice.Types.BatchDeletePhoneNumberResponse) => void): Request<ChimeSDKVoice.Types.BatchDeletePhoneNumberResponse, AWSError>;
   /**
-   * Updates one or more phone numbers.
+   * Updates phone number product types, calling names, or phone number names. You can update one attribute at a time for each UpdatePhoneNumberRequestItem. For example, you can update the product type, the calling name, or phone name.   You cannot have a duplicate phoneNumberId in a request. 
    */
   batchUpdatePhoneNumber(params: ChimeSDKVoice.Types.BatchUpdatePhoneNumberRequest, callback?: (err: AWSError, data: ChimeSDKVoice.Types.BatchUpdatePhoneNumberResponse) => void): Request<ChimeSDKVoice.Types.BatchUpdatePhoneNumberResponse, AWSError>;
   /**
-   * Updates one or more phone numbers.
+   * Updates phone number product types, calling names, or phone number names. You can update one attribute at a time for each UpdatePhoneNumberRequestItem. For example, you can update the product type, the calling name, or phone name.   You cannot have a duplicate phoneNumberId in a request. 
    */
   batchUpdatePhoneNumber(callback?: (err: AWSError, data: ChimeSDKVoice.Types.BatchUpdatePhoneNumberResponse) => void): Request<ChimeSDKVoice.Types.BatchUpdatePhoneNumberResponse, AWSError>;
   /**
@@ -284,11 +284,11 @@ declare class ChimeSDKVoice extends Service {
    */
   getSipMediaApplication(callback?: (err: AWSError, data: ChimeSDKVoice.Types.GetSipMediaApplicationResponse) => void): Request<ChimeSDKVoice.Types.GetSipMediaApplicationResponse, AWSError>;
   /**
-   * Gets the Alexa Skill configuration for the SIP media application.
+   * Gets the Alexa Skill configuration for the SIP media application.  Due to changes made by the Amazon Alexa service, this API is no longer available for use. For more information, refer to the Alexa Smart Properties page. 
    */
   getSipMediaApplicationAlexaSkillConfiguration(params: ChimeSDKVoice.Types.GetSipMediaApplicationAlexaSkillConfigurationRequest, callback?: (err: AWSError, data: ChimeSDKVoice.Types.GetSipMediaApplicationAlexaSkillConfigurationResponse) => void): Request<ChimeSDKVoice.Types.GetSipMediaApplicationAlexaSkillConfigurationResponse, AWSError>;
   /**
-   * Gets the Alexa Skill configuration for the SIP media application.
+   * Gets the Alexa Skill configuration for the SIP media application.  Due to changes made by the Amazon Alexa service, this API is no longer available for use. For more information, refer to the Alexa Smart Properties page. 
    */
   getSipMediaApplicationAlexaSkillConfiguration(callback?: (err: AWSError, data: ChimeSDKVoice.Types.GetSipMediaApplicationAlexaSkillConfigurationResponse) => void): Request<ChimeSDKVoice.Types.GetSipMediaApplicationAlexaSkillConfigurationResponse, AWSError>;
   /**
@@ -512,11 +512,11 @@ declare class ChimeSDKVoice extends Service {
    */
   listVoiceProfiles(callback?: (err: AWSError, data: ChimeSDKVoice.Types.ListVoiceProfilesResponse) => void): Request<ChimeSDKVoice.Types.ListVoiceProfilesResponse, AWSError>;
   /**
-   * Updates the Alexa Skill configuration for the SIP media application.
+   * Updates the Alexa Skill configuration for the SIP media application.  Due to changes made by the Amazon Alexa service, this API is no longer available for use. For more information, refer to the Alexa Smart Properties page. 
    */
   putSipMediaApplicationAlexaSkillConfiguration(params: ChimeSDKVoice.Types.PutSipMediaApplicationAlexaSkillConfigurationRequest, callback?: (err: AWSError, data: ChimeSDKVoice.Types.PutSipMediaApplicationAlexaSkillConfigurationResponse) => void): Request<ChimeSDKVoice.Types.PutSipMediaApplicationAlexaSkillConfigurationResponse, AWSError>;
   /**
-   * Updates the Alexa Skill configuration for the SIP media application.
+   * Updates the Alexa Skill configuration for the SIP media application.  Due to changes made by the Amazon Alexa service, this API is no longer available for use. For more information, refer to the Alexa Smart Properties page. 
    */
   putSipMediaApplicationAlexaSkillConfiguration(callback?: (err: AWSError, data: ChimeSDKVoice.Types.PutSipMediaApplicationAlexaSkillConfigurationResponse) => void): Request<ChimeSDKVoice.Types.PutSipMediaApplicationAlexaSkillConfigurationResponse, AWSError>;
   /**
@@ -656,11 +656,11 @@ declare class ChimeSDKVoice extends Service {
    */
   updateGlobalSettings(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates phone number details, such as product type or calling name, for the specified phone number ID. You can update one phone number detail at a time. For example, you can update either the product type or the calling name in one action. For numbers outside the U.S., you must use the Amazon Chime SDK SIP Media Application Dial-In product type. Updates to outbound calling names can take 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.
+   * Updates phone number details, such as product type, calling name, or phone number name for the specified phone number ID. You can update one phone number detail at a time. For example, you can update either the product type, calling name, or phone number name in one action. For numbers outside the U.S., you must use the Amazon Chime SDK SIP Media Application Dial-In product type. Updates to outbound calling names can take 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.
    */
   updatePhoneNumber(params: ChimeSDKVoice.Types.UpdatePhoneNumberRequest, callback?: (err: AWSError, data: ChimeSDKVoice.Types.UpdatePhoneNumberResponse) => void): Request<ChimeSDKVoice.Types.UpdatePhoneNumberResponse, AWSError>;
   /**
-   * Updates phone number details, such as product type or calling name, for the specified phone number ID. You can update one phone number detail at a time. For example, you can update either the product type or the calling name in one action. For numbers outside the U.S., you must use the Amazon Chime SDK SIP Media Application Dial-In product type. Updates to outbound calling names can take 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.
+   * Updates phone number details, such as product type, calling name, or phone number name for the specified phone number ID. You can update one phone number detail at a time. For example, you can update either the product type, calling name, or phone number name in one action. For numbers outside the U.S., you must use the Amazon Chime SDK SIP Media Application Dial-In product type. Updates to outbound calling names can take 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.
    */
   updatePhoneNumber(callback?: (err: AWSError, data: ChimeSDKVoice.Types.UpdatePhoneNumberResponse) => void): Request<ChimeSDKVoice.Types.UpdatePhoneNumberResponse, AWSError>;
   /**
@@ -2747,7 +2747,7 @@ declare namespace ChimeSDKVoice {
      */
     CallingName?: CallingName;
     /**
-     * Specifies the name assigned to one or more phone numbers.
+     * Specifies the updated name assigned to one or more phone numbers.
      */
     Name?: PhoneNumberName;
   }

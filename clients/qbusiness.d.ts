@@ -36,11 +36,11 @@ declare class QBusiness extends Service {
    */
   chatSync(callback?: (err: AWSError, data: QBusiness.Types.ChatSyncOutput) => void): Request<QBusiness.Types.ChatSyncOutput, AWSError>;
   /**
-   * Creates an Amazon Q Business application.
+   * Creates an Amazon Q Business application.  There are new tiers for Amazon Q Business. Not all features in Amazon Q Business Pro are also available in Amazon Q Business Lite. For information on what's included in Amazon Q Business Lite and what's included in Amazon Q Business Pro, see Amazon Q Business tiers. You must use the Amazon Q Business console to assign subscription tiers to users. 
    */
   createApplication(params: QBusiness.Types.CreateApplicationRequest, callback?: (err: AWSError, data: QBusiness.Types.CreateApplicationResponse) => void): Request<QBusiness.Types.CreateApplicationResponse, AWSError>;
   /**
-   * Creates an Amazon Q Business application.
+   * Creates an Amazon Q Business application.  There are new tiers for Amazon Q Business. Not all features in Amazon Q Business Pro are also available in Amazon Q Business Lite. For information on what's included in Amazon Q Business Lite and what's included in Amazon Q Business Pro, see Amazon Q Business tiers. You must use the Amazon Q Business console to assign subscription tiers to users. 
    */
   createApplication(callback?: (err: AWSError, data: QBusiness.Types.CreateApplicationResponse) => void): Request<QBusiness.Types.CreateApplicationResponse, AWSError>;
   /**
@@ -453,6 +453,17 @@ declare class QBusiness extends Service {
   updateWebExperience(callback?: (err: AWSError, data: QBusiness.Types.UpdateWebExperienceResponse) => void): Request<QBusiness.Types.UpdateWebExperienceResponse, AWSError>;
 }
 declare namespace QBusiness {
+  export interface APISchema {
+    /**
+     * The JSON or YAML-formatted payload defining the OpenAPI schema for a custom plugin. 
+     */
+    payload?: Payload;
+    /**
+     * Contains details about the S3 object containing the OpenAPI schema for a custom plugin. The schema could be in either JSON or YAML format.
+     */
+    s3?: S3;
+  }
+  export type APISchemaType = "OPEN_API_V3"|string;
   export interface AccessConfiguration {
     /**
      * A list of AccessControlList objects.
@@ -465,16 +476,20 @@ declare namespace QBusiness {
   }
   export interface AccessControl {
     /**
-     * Describes the member relation within a principal list.
-     */
-    memberRelation?: MemberRelation;
-    /**
      * Contains a list of principals, where a principal can be either a USER or a GROUP. Each principal can be have the following type of document access: ALLOW or DENY.
      */
     principals: Principals;
+    /**
+     * Describes the member relation within a principal list.
+     */
+    memberRelation?: MemberRelation;
   }
   export type AccessControls = AccessControl[];
   export interface ActionExecution {
+    /**
+     * The identifier of the plugin the action is attached to.
+     */
+    pluginId: PluginId;
     /**
      * A mapping of field names to the field values in input that an end user provides to Amazon Q Business requests to perform their plugin action. 
      */
@@ -483,10 +498,6 @@ declare namespace QBusiness {
      * A string used to retain information about the hierarchical contexts within an action execution event payload.
      */
     payloadFieldNameSeparator: ActionPayloadFieldNameSeparator;
-    /**
-     * The identifier of the plugin the action is attached to.
-     */
-    pluginId: PluginId;
   }
   export type ActionExecutionPayload = {[key: string]: ActionExecutionPayloadField};
   export interface ActionExecutionPayloadField {
@@ -502,14 +513,6 @@ declare namespace QBusiness {
   }
   export interface ActionReview {
     /**
-     * Field values that an end user needs to provide to Amazon Q Business for Amazon Q Business to perform the requested plugin action.
-     */
-    payload?: ActionReviewPayload;
-    /**
-     * A string used to retain information about the hierarchical contexts within an action review payload.
-     */
-    payloadFieldNameSeparator?: ActionPayloadFieldNameSeparator;
-    /**
      * The identifier of the plugin associated with the action review.
      */
     pluginId?: PluginId;
@@ -517,13 +520,17 @@ declare namespace QBusiness {
      * The type of plugin.
      */
     pluginType?: PluginType;
+    /**
+     * Field values that an end user needs to provide to Amazon Q Business for Amazon Q Business to perform the requested plugin action.
+     */
+    payload?: ActionReviewPayload;
+    /**
+     * A string used to retain information about the hierarchical contexts within an action review payload.
+     */
+    payloadFieldNameSeparator?: ActionPayloadFieldNameSeparator;
   }
   export type ActionReviewPayload = {[key: string]: ActionReviewPayloadField};
   export interface ActionReviewPayloadField {
-    /**
-     * Information about the field values that an end user can use to provide to Amazon Q Business for Amazon Q Business to perform the requested plugin action.
-     */
-    allowedValues?: ActionReviewPayloadFieldAllowedValues;
     /**
      *  The name of the field. 
      */
@@ -533,9 +540,9 @@ declare namespace QBusiness {
      */
     displayOrder?: Integer;
     /**
-     * Information about whether the field is required.
+     * The field level description of each action review input field. This could be an explanation of the field. In the Amazon Q Business web experience, these descriptions could be used to display as tool tips to help users understand the field. 
      */
-    required?: Boolean;
+    displayDescription?: String;
     /**
      * The type of field. 
      */
@@ -544,20 +551,36 @@ declare namespace QBusiness {
      * The field value.
      */
     value?: ActionPayloadFieldValue;
+    /**
+     * Information about the field values that an end user can use to provide to Amazon Q Business for Amazon Q Business to perform the requested plugin action.
+     */
+    allowedValues?: ActionReviewPayloadFieldAllowedValues;
+    /**
+     * The expected data format for the action review input field value. For example, in PTO request, from and to would be of datetime allowed format. 
+     */
+    allowedFormat?: String;
+    /**
+     * Information about whether the field is required.
+     */
+    required?: Boolean;
   }
   export interface ActionReviewPayloadFieldAllowedValue {
-    /**
-     * The name of the field.
-     */
-    displayValue?: ActionPayloadFieldValue;
     /**
      * The field value.
      */
     value?: ActionPayloadFieldValue;
+    /**
+     * The name of the field.
+     */
+    displayValue?: ActionPayloadFieldValue;
   }
   export type ActionReviewPayloadFieldAllowedValues = ActionReviewPayloadFieldAllowedValue[];
   export type AmazonResourceName = string;
   export interface Application {
+    /**
+     * The name of the Amazon Q Business application.
+     */
+    displayName?: ApplicationName;
     /**
      * The identifier for the Amazon Q Business application.
      */
@@ -567,17 +590,13 @@ declare namespace QBusiness {
      */
     createdAt?: Timestamp;
     /**
-     * The name of the Amazon Q Business application.
+     * The Unix timestamp when the Amazon Q Business application was last updated. 
      */
-    displayName?: ApplicationName;
+    updatedAt?: Timestamp;
     /**
      * The status of the Amazon Q Business application. The application is ready to use when the status is ACTIVE.
      */
     status?: ApplicationStatus;
-    /**
-     * The Unix timestamp when the Amazon Q Business application was last updated. 
-     */
-    updatedAt?: Timestamp;
   }
   export type ApplicationArn = string;
   export type ApplicationId = string;
@@ -598,20 +617,16 @@ declare namespace QBusiness {
   }
   export interface AttachmentInput {
     /**
-     * The data contained within the uploaded file.
-     */
-    data: _Blob;
-    /**
      * The name of the file.
      */
     name: AttachmentName;
+    /**
+     * The data contained within the uploaded file.
+     */
+    data: _Blob;
   }
   export type AttachmentName = string;
   export interface AttachmentOutput {
-    /**
-     * An error associated with a file uploaded during chat.
-     */
-    error?: ErrorDetail;
     /**
      * The name of a file uploaded during chat.
      */
@@ -620,6 +635,10 @@ declare namespace QBusiness {
      * The status of a file uploaded during chat.
      */
     status?: AttachmentStatus;
+    /**
+     * An error associated with a file uploaded during chat.
+     */
+    error?: ErrorDetail;
   }
   export type AttachmentStatus = "FAILED"|"SUCCEEDED"|string;
   export interface AttachmentsConfiguration {
@@ -637,6 +656,18 @@ declare namespace QBusiness {
      */
     andAllFilters?: AttributeFilters;
     /**
+     *  Performs a logical OR operation on all supplied filters. 
+     */
+    orAllFilters?: AttributeFilters;
+    /**
+     * Performs a logical NOT operation on all supplied filters. 
+     */
+    notFilter?: AttributeFilter;
+    /**
+     * Performs an equals operation on two document attributes or metadata fields. Supported for the following document attribute value types: dateValue, longValue, stringListValue and stringValue.
+     */
+    equalsTo?: DocumentAttribute;
+    /**
      * Returns true when a document contains all the specified document attributes or metadata fields. Supported for the following document attribute value types: stringListValue.
      */
     containsAll?: DocumentAttribute;
@@ -644,10 +675,6 @@ declare namespace QBusiness {
      * Returns true when a document contains any of the specified document attributes or metadata fields. Supported for the following document attribute value types: dateValue, longValue, stringListValue and stringValue.
      */
     containsAny?: DocumentAttribute;
-    /**
-     * Performs an equals operation on two document attributes or metadata fields. Supported for the following document attribute value types: dateValue, longValue, stringListValue and stringValue.
-     */
-    equalsTo?: DocumentAttribute;
     /**
      * Performs a greater than operation on two document attributes or metadata fields. Supported for the following document attribute value types: dateValue and longValue.
      */
@@ -664,27 +691,34 @@ declare namespace QBusiness {
      * Performs a less than or equals operation on two document attributes or metadata fields.Supported for the following document attribute value type: dateValue and longValue. 
      */
     lessThanOrEquals?: DocumentAttribute;
-    /**
-     * Performs a logical NOT operation on all supplied filters. 
-     */
-    notFilter?: AttributeFilter;
-    /**
-     *  Performs a logical OR operation on all supplied filters. 
-     */
-    orAllFilters?: AttributeFilters;
   }
   export type AttributeFilters = AttributeFilter[];
   export type AttributeType = "STRING"|"STRING_LIST"|"NUMBER"|"DATE"|string;
   export type AttributeValueOperator = "DELETE"|string;
-  export interface BasicAuthConfiguration {
+  export interface AuthChallengeRequest {
     /**
-     * The ARN of an IAM role used by Amazon Q Business to access the basic authentication credentials stored in a Secrets Manager secret.
+     * The URL sent by Amazon Q Business to the third party authentication server to authenticate a custom plugin user through an OAuth protocol.
      */
-    roleArn: RoleArn;
+    authorizationUrl: Url;
+  }
+  export interface AuthChallengeResponse {
+    /**
+     * The mapping of key-value pairs in an authentication challenge response.
+     */
+    responseMap: AuthorizationResponseMap;
+  }
+  export type AuthResponseKey = string;
+  export type AuthResponseValue = string;
+  export type AuthorizationResponseMap = {[key: string]: AuthResponseValue};
+  export interface BasicAuthConfiguration {
     /**
      * The ARN of the Secrets Manager secret that stores the basic authentication credentials used for plugin configuration..
      */
     secretArn: SecretArn;
+    /**
+     * The ARN of an IAM role used by Amazon Q Business to access the basic authentication credentials stored in a Secrets Manager secret.
+     */
+    roleArn: RoleArn;
   }
   export interface BatchDeleteDocumentRequest {
     /**
@@ -692,17 +726,17 @@ declare namespace QBusiness {
      */
     applicationId: ApplicationId;
     /**
-     * The identifier of the data source sync during which the documents were deleted.
+     * The identifier of the Amazon Q Business index that contains the documents to delete.
      */
-    dataSourceSyncId?: ExecutionId;
+    indexId: IndexId;
     /**
      * Documents deleted from the Amazon Q Business index.
      */
     documents: DeleteDocuments;
     /**
-     * The identifier of the Amazon Q Business index that contains the documents to delete.
+     * The identifier of the data source sync during which the documents were deleted.
      */
-    indexId: IndexId;
+    dataSourceSyncId?: ExecutionId;
   }
   export interface BatchDeleteDocumentResponse {
     /**
@@ -716,21 +750,21 @@ declare namespace QBusiness {
      */
     applicationId: ApplicationId;
     /**
-     * The identifier of the data source sync during which the documents were added.
+     * The identifier of the Amazon Q Business index to add the documents to. 
      */
-    dataSourceSyncId?: ExecutionId;
+    indexId: IndexId;
     /**
      * One or more documents to add to the index.
      */
     documents: Documents;
     /**
-     * The identifier of the Amazon Q Business index to add the documents to. 
-     */
-    indexId: IndexId;
-    /**
      * The Amazon Resource Name (ARN) of an IAM role with permission to access your S3 bucket.
      */
     roleArn?: RoleArn;
+    /**
+     * The identifier of the data source sync during which the documents were added.
+     */
+    dataSourceSyncId?: ExecutionId;
   }
   export interface BatchPutDocumentResponse {
     /**
@@ -776,23 +810,47 @@ declare namespace QBusiness {
   }
   export interface ChatSyncInput {
     /**
-     * A request from an end user to perform an Amazon Q Business plugin action.
-     */
-    actionExecution?: ActionExecution;
-    /**
      * The identifier of the Amazon Q Business application linked to the Amazon Q Business conversation.
      */
     applicationId: ApplicationId;
+    /**
+     * The identifier of the user attached to the chat input.
+     */
+    userId?: UserId;
+    /**
+     * The groups that a user associated with the chat input belongs to.
+     */
+    userGroups?: UserGroups;
+    /**
+     * A end user message in a conversation.
+     */
+    userMessage?: UserMessage;
     /**
      * A list of files uploaded directly during chat. You can upload a maximum of 5 files of upto 10 MB each.
      */
     attachments?: AttachmentsInput;
     /**
+     * A request from an end user to perform an Amazon Q Business plugin action.
+     */
+    actionExecution?: ActionExecution;
+    /**
+     * An authentication verification event response by a third party authentication server to Amazon Q Business.
+     */
+    authChallengeResponse?: AuthChallengeResponse;
+    /**
+     * The identifier of the Amazon Q Business conversation.
+     */
+    conversationId?: ConversationId;
+    /**
+     * The identifier of the previous end user text input message in a conversation.
+     */
+    parentMessageId?: MessageId;
+    /**
      * Enables filtering of Amazon Q Business web experience responses based on document attributes or metadata fields.
      */
     attributeFilter?: AttributeFilter;
     /**
-     * The chat modes available in an Amazon Q Business web experience.    RETRIEVAL_MODE - The default chat mode for an Amazon Q Business application. When this mode is enabled, Amazon Q Business generates responses only from data sources connected to an Amazon Q Business application.    CREATOR_MODE - By selecting this mode, users can choose to generate responses only from the LLM knowledge, without consulting connected data sources, for a chat request.    PLUGIN_MODE - By selecting this mode, users can choose to use plugins in chat.   For more information, see Admin controls and guardrails, Plugins, and Conversation settings.
+     * The chat modes available to an Amazon Q Business end user.    RETRIEVAL_MODE - The default chat mode for an Amazon Q Business application. When this mode is enabled, Amazon Q Business generates responses only from data sources connected to an Amazon Q Business application.    CREATOR_MODE - By selecting this mode, users can choose to generate responses only from the LLM knowledge, without consulting connected data sources, for a chat request.    PLUGIN_MODE - By selecting this mode, users can choose to use plugins in chat.   For more information, see Admin controls and guardrails, Plugins, and Conversation settings.
      */
     chatMode?: ChatMode;
     /**
@@ -803,44 +861,12 @@ declare namespace QBusiness {
      * A token that you provide to identify a chat request.
      */
     clientToken?: ClientToken;
-    /**
-     * The identifier of the Amazon Q Business conversation.
-     */
-    conversationId?: ConversationId;
-    /**
-     * The identifier of the previous end user text input message in a conversation.
-     */
-    parentMessageId?: MessageId;
-    /**
-     * The groups that a user associated with the chat input belongs to.
-     */
-    userGroups?: UserGroups;
-    /**
-     * The identifier of the user attached to the chat input.
-     */
-    userId?: UserId;
-    /**
-     * A end user message in a conversation.
-     */
-    userMessage?: UserMessage;
   }
   export interface ChatSyncOutput {
     /**
-     * A request from Amazon Q Business to the end user for information Amazon Q Business needs to successfully complete a requested plugin action.
-     */
-    actionReview?: ActionReview;
-    /**
      * The identifier of the Amazon Q Business conversation.
      */
     conversationId?: ConversationId;
-    /**
-     * A list of files which failed to upload during chat.
-     */
-    failedAttachments?: AttachmentsOutput;
-    /**
-     * The source documents used to generate the conversation response.
-     */
-    sourceAttributions?: SourceAttributions;
     /**
      * An AI-generated message in a conversation.
      */
@@ -853,6 +879,22 @@ declare namespace QBusiness {
      * The identifier of an Amazon Q Business end user text input message within the conversation.
      */
     userMessageId?: MessageId;
+    /**
+     * A request from Amazon Q Business to the end user for information Amazon Q Business needs to successfully complete a requested plugin action.
+     */
+    actionReview?: ActionReview;
+    /**
+     * An authentication verification event activated by an end user request to use a custom plugin.
+     */
+    authChallengeRequest?: AuthChallengeRequest;
+    /**
+     * The source documents used to generate the conversation response.
+     */
+    sourceAttributions?: SourceAttributions;
+    /**
+     * A list of files which failed to upload during chat.
+     */
+    failedAttachments?: AttachmentsOutput;
   }
   export type ClientToken = string;
   export interface ContentBlockerRule {
@@ -874,60 +916,60 @@ declare namespace QBusiness {
      */
     conversationId?: ConversationId;
     /**
-     * The start time of the conversation.
-     */
-    startTime?: Timestamp;
-    /**
      * The title of the conversation.
      */
     title?: ConversationTitle;
+    /**
+     * The start time of the conversation.
+     */
+    startTime?: Timestamp;
   }
   export type ConversationId = string;
   export type ConversationTitle = string;
   export type Conversations = Conversation[];
   export interface CreateApplicationRequest {
     /**
-     * An option to allow end users to upload files directly during chat.
-     */
-    attachmentsConfiguration?: AttachmentsConfiguration;
-    /**
-     * A token that you provide to identify the request to create your Amazon Q Business application.
-     */
-    clientToken?: ClientToken;
-    /**
-     * A description for the Amazon Q Business application. 
-     */
-    description?: Description;
-    /**
      * A name for the Amazon Q Business application. 
      */
     displayName: ApplicationName;
     /**
-     * The identifier of the KMS key that is used to encrypt your data. Amazon Q Business doesn't support asymmetric keys.
+     *  The Amazon Resource Name (ARN) of an IAM role with permissions to access your Amazon CloudWatch logs and metrics.
      */
-    encryptionConfiguration?: EncryptionConfiguration;
+    roleArn?: RoleArn;
     /**
      *  The Amazon Resource Name (ARN) of the IAM Identity Center instance you are either creating for—or connecting to—your Amazon Q Business application.
      */
     identityCenterInstanceArn?: InstanceArn;
     /**
-     *  The Amazon Resource Name (ARN) of an IAM role with permissions to access your Amazon CloudWatch logs and metrics.
+     * A description for the Amazon Q Business application. 
      */
-    roleArn: RoleArn;
+    description?: Description;
+    /**
+     * The identifier of the KMS key that is used to encrypt your data. Amazon Q Business doesn't support asymmetric keys.
+     */
+    encryptionConfiguration?: EncryptionConfiguration;
     /**
      * A list of key-value pairs that identify or categorize your Amazon Q Business application. You can also use tags to help control access to the application. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @.
      */
     tags?: Tags;
+    /**
+     * A token that you provide to identify the request to create your Amazon Q Business application.
+     */
+    clientToken?: ClientToken;
+    /**
+     * An option to allow end users to upload files directly during chat.
+     */
+    attachmentsConfiguration?: AttachmentsConfiguration;
   }
   export interface CreateApplicationResponse {
-    /**
-     *  The Amazon Resource Name (ARN) of the Amazon Q Business application. 
-     */
-    applicationArn?: ApplicationArn;
     /**
      * The identifier of the Amazon Q Business application.
      */
     applicationId?: ApplicationId;
+    /**
+     *  The Amazon Resource Name (ARN) of the Amazon Q Business application. 
+     */
+    applicationArn?: ApplicationArn;
   }
   export interface CreateDataSourceRequest {
     /**
@@ -935,58 +977,74 @@ declare namespace QBusiness {
      */
     applicationId: ApplicationId;
     /**
-     * A token you provide to identify a request to create a data source connector. Multiple calls to the CreateDataSource API with the same client token will create only one data source connector. 
+     * The identifier of the index that you want to use with the data source connector.
      */
-    clientToken?: ClientToken;
+    indexId: IndexId;
+    /**
+     * A name for the data source connector.
+     */
+    displayName: DataSourceName;
     /**
      * Configuration information to connect to your data source repository. For configuration templates for your specific data source, see Supported connectors.
      */
     configuration: DataSourceConfiguration;
     /**
+     * Configuration information for an Amazon VPC (Virtual Private Cloud) to connect to your data source. For more information, see Using Amazon VPC with Amazon Q Business connectors.
+     */
+    vpcConfiguration?: DataSourceVpcConfiguration;
+    /**
      * A description for the data source connector.
      */
     description?: Description;
-    /**
-     * A name for the data source connector.
-     */
-    displayName: DataSourceName;
-    documentEnrichmentConfiguration?: DocumentEnrichmentConfiguration;
-    /**
-     * The identifier of the index that you want to use with the data source connector.
-     */
-    indexId: IndexId;
-    /**
-     * The Amazon Resource Name (ARN) of an IAM role with permission to access the data source and required resources.
-     */
-    roleArn?: RoleArn;
-    /**
-     * Sets the frequency for Amazon Q Business to check the documents in your data source repository and update your index. If you don't set a schedule, Amazon Q Business won't periodically update the index. Specify a cron- format schedule string or an empty string to indicate that the index is updated on demand. You can't specify the Schedule parameter when the Type parameter is set to CUSTOM. If you do, you receive a ValidationException exception. 
-     */
-    syncSchedule?: SyncSchedule;
     /**
      * A list of key-value pairs that identify or categorize the data source connector. You can also use tags to help control access to the data source connector. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @.
      */
     tags?: Tags;
     /**
-     * Configuration information for an Amazon VPC (Virtual Private Cloud) to connect to your data source. For more information, see Using Amazon VPC with Amazon Q Business connectors.
+     * Sets the frequency for Amazon Q Business to check the documents in your data source repository and update your index. If you don't set a schedule, Amazon Q Business won't periodically update the index. Specify a cron- format schedule string or an empty string to indicate that the index is updated on demand. You can't specify the Schedule parameter when the Type parameter is set to CUSTOM. If you do, you receive a ValidationException exception. 
      */
-    vpcConfiguration?: DataSourceVpcConfiguration;
+    syncSchedule?: SyncSchedule;
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role with permission to access the data source and required resources.
+     */
+    roleArn?: RoleArn;
+    /**
+     * A token you provide to identify a request to create a data source connector. Multiple calls to the CreateDataSource API with the same client token will create only one data source connector. 
+     */
+    clientToken?: ClientToken;
+    documentEnrichmentConfiguration?: DocumentEnrichmentConfiguration;
   }
   export interface CreateDataSourceResponse {
-    /**
-     *  The Amazon Resource Name (ARN) of a data source in an Amazon Q Business application. 
-     */
-    dataSourceArn?: DataSourceArn;
     /**
      * The identifier of the data source connector.
      */
     dataSourceId?: DataSourceId;
+    /**
+     *  The Amazon Resource Name (ARN) of a data source in an Amazon Q Business application. 
+     */
+    dataSourceArn?: DataSourceArn;
   }
   export interface CreateIndexRequest {
     /**
      * The identifier of the Amazon Q Business application using the index.
      */
     applicationId: ApplicationId;
+    /**
+     * A name for the Amazon Q Business index.
+     */
+    displayName: IndexName;
+    /**
+     * The index type that's suitable for your needs. For more information on what's included in each type of index or index tier, see Amazon Q Business tiers.
+     */
+    type?: IndexType;
+    /**
+     * A description for the Amazon Q Business index.
+     */
+    description?: Description;
+    /**
+     * A list of key-value pairs that identify or categorize the index. You can also use tags to help control access to the index. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @.
+     */
+    tags?: Tags;
     /**
      * The capacity units you want to provision for your index. You can add and remove capacity to fit your usage needs.
      */
@@ -995,65 +1053,61 @@ declare namespace QBusiness {
      * A token that you provide to identify the request to create an index. Multiple calls to the CreateIndex API with the same client token will create only one index.
      */
     clientToken?: ClientToken;
-    /**
-     * A description for the Amazon Q Business index.
-     */
-    description?: Description;
-    /**
-     * A name for the Amazon Q Business index.
-     */
-    displayName: IndexName;
-    /**
-     * A list of key-value pairs that identify or categorize the index. You can also use tags to help control access to the index. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @.
-     */
-    tags?: Tags;
   }
   export interface CreateIndexResponse {
-    /**
-     *  The Amazon Resource Name (ARN) of an Amazon Q Business index.
-     */
-    indexArn?: IndexArn;
     /**
      * The identifier for the Amazon Q Business index.
      */
     indexId?: IndexId;
+    /**
+     *  The Amazon Resource Name (ARN) of an Amazon Q Business index.
+     */
+    indexArn?: IndexArn;
   }
   export interface CreatePluginRequest {
     /**
      * The identifier of the application that will contain the plugin.
      */
     applicationId: ApplicationId;
-    authConfiguration: PluginAuthConfiguration;
-    /**
-     * A token that you provide to identify the request to create your Amazon Q Business plugin.
-     */
-    clientToken?: ClientToken;
     /**
      * A the name for your plugin.
      */
     displayName: PluginName;
     /**
+     * The type of plugin you want to create.
+     */
+    type: PluginType;
+    authConfiguration: PluginAuthConfiguration;
+    /**
      * The source URL used for plugin configuration.
      */
-    serverUrl: Url;
+    serverUrl?: Url;
+    /**
+     * Contains configuration for a custom plugin.
+     */
+    customPluginConfiguration?: CustomPluginConfiguration;
     /**
      * A list of key-value pairs that identify or categorize the data source connector. You can also use tags to help control access to the data source connector. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @.
      */
     tags?: Tags;
     /**
-     * The type of plugin you want to create.
+     * A token that you provide to identify the request to create your Amazon Q Business plugin.
      */
-    type: PluginType;
+    clientToken?: ClientToken;
   }
   export interface CreatePluginResponse {
+    /**
+     * The identifier of the plugin created.
+     */
+    pluginId?: PluginId;
     /**
      * The Amazon Resource Name (ARN) of a plugin.
      */
     pluginArn?: PluginArn;
     /**
-     * The identifier of the plugin created.
+     * The current status of a plugin. A plugin is modified asynchronously.
      */
-    pluginId?: PluginId;
+    buildStatus?: PluginBuildStatus;
   }
   export interface CreateRetrieverRequest {
     /**
@@ -1061,36 +1115,36 @@ declare namespace QBusiness {
      */
     applicationId: ApplicationId;
     /**
-     * A token that you provide to identify the request to create your Amazon Q Business application retriever.
+     * The type of retriever you are using.
      */
-    clientToken?: ClientToken;
-    configuration: RetrieverConfiguration;
+    type: RetrieverType;
     /**
      * The name of your retriever.
      */
     displayName: RetrieverName;
+    configuration: RetrieverConfiguration;
     /**
      * The ARN of an IAM role used by Amazon Q Business to access the basic authentication credentials stored in a Secrets Manager secret.
      */
     roleArn?: RoleArn;
     /**
+     * A token that you provide to identify the request to create your Amazon Q Business application retriever.
+     */
+    clientToken?: ClientToken;
+    /**
      * A list of key-value pairs that identify or categorize the retriever. You can also use tags to help control access to the retriever. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @.
      */
     tags?: Tags;
-    /**
-     * The type of retriever you are using.
-     */
-    type: RetrieverType;
   }
   export interface CreateRetrieverResponse {
-    /**
-     * The Amazon Resource Name (ARN) of an IAM role associated with a retriever.
-     */
-    retrieverArn?: RetrieverArn;
     /**
      * The identifier of the retriever you are using.
      */
     retrieverId?: RetrieverId;
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role associated with a retriever.
+     */
+    retrieverArn?: RetrieverArn;
   }
   export interface CreateUserRequest {
     /**
@@ -1098,17 +1152,17 @@ declare namespace QBusiness {
      */
     applicationId: ApplicationId;
     /**
-     * A token that you provide to identify the request to create your Amazon Q Business user mapping.
+     * The user emails attached to a user mapping.
      */
-    clientToken?: ClientToken;
+    userId: String;
     /**
      * The list of user aliases in the mapping.
      */
     userAliases?: CreateUserRequestUserAliasesList;
     /**
-     * The user emails attached to a user mapping.
+     * A token that you provide to identify the request to create your Amazon Q Business user mapping.
      */
-    userId: String;
+    clientToken?: ClientToken;
   }
   export type CreateUserRequestUserAliasesList = UserAlias[];
   export interface CreateUserResponse {
@@ -1119,43 +1173,43 @@ declare namespace QBusiness {
      */
     applicationId: ApplicationId;
     /**
-     * A token you provide to identify a request to create an Amazon Q Business web experience. 
+     * The title for your Amazon Q Business web experience.
      */
-    clientToken?: ClientToken;
-    /**
-     * The Amazon Resource Name (ARN) of the service role attached to your web experience.
-     */
-    roleArn?: RoleArn;
-    /**
-     * Determines whether sample prompts are enabled in the web experience for an end user.
-     */
-    samplePromptsControlMode?: WebExperienceSamplePromptsControlMode;
+    title?: WebExperienceTitle;
     /**
      * A subtitle to personalize your Amazon Q Business web experience.
      */
     subtitle?: WebExperienceSubtitle;
     /**
+     * The customized welcome message for end users of an Amazon Q Business web experience.
+     */
+    welcomeMessage?: WebExperienceWelcomeMessage;
+    /**
+     * Determines whether sample prompts are enabled in the web experience for an end user.
+     */
+    samplePromptsControlMode?: WebExperienceSamplePromptsControlMode;
+    /**
+     * The Amazon Resource Name (ARN) of the service role attached to your web experience.
+     */
+    roleArn?: RoleArn;
+    /**
      * A list of key-value pairs that identify or categorize your Amazon Q Business web experience. You can also use tags to help control access to the web experience. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @.
      */
     tags?: Tags;
     /**
-     * The title for your Amazon Q Business web experience.
+     * A token you provide to identify a request to create an Amazon Q Business web experience. 
      */
-    title?: WebExperienceTitle;
-    /**
-     * The customized welcome message for end users of an Amazon Q Business web experience.
-     */
-    welcomeMessage?: WebExperienceWelcomeMessage;
+    clientToken?: ClientToken;
   }
   export interface CreateWebExperienceResponse {
-    /**
-     *  The Amazon Resource Name (ARN) of an Amazon Q Business web experience.
-     */
-    webExperienceArn?: WebExperienceArn;
     /**
      * The identifier of the Amazon Q Business web experience.
      */
     webExperienceId?: WebExperienceId;
+    /**
+     *  The Amazon Resource Name (ARN) of an Amazon Q Business web experience.
+     */
+    webExperienceArn?: WebExperienceArn;
   }
   export interface CreatorModeConfiguration {
     /**
@@ -1164,31 +1218,45 @@ declare namespace QBusiness {
     creatorModeControl: CreatorModeControl;
   }
   export type CreatorModeControl = "ENABLED"|"DISABLED"|string;
+  export interface CustomPluginConfiguration {
+    /**
+     * A description for your custom plugin configuration.
+     */
+    description: PluginDescription;
+    /**
+     * The type of OpenAPI schema to use.
+     */
+    apiSchemaType: APISchemaType;
+    /**
+     * Contains either details about the S3 object containing the OpenAPI schema for the action group or the JSON or YAML-formatted payload defining the schema.
+     */
+    apiSchema: APISchema;
+  }
   export interface DataSource {
-    /**
-     * The Unix timestamp when the Amazon Q Business data source was created.
-     */
-    createdAt?: Timestamp;
-    /**
-     * The identifier of the Amazon Q Business data source.
-     */
-    dataSourceId?: DataSourceId;
     /**
      * The name of the Amazon Q Business data source.
      */
     displayName?: DataSourceName;
     /**
-     * The status of the Amazon Q Business data source.
+     * The identifier of the Amazon Q Business data source.
      */
-    status?: DataSourceStatus;
+    dataSourceId?: DataSourceId;
     /**
      * The type of the Amazon Q Business data source.
      */
     type?: String;
     /**
+     * The Unix timestamp when the Amazon Q Business data source was created.
+     */
+    createdAt?: Timestamp;
+    /**
      * The Unix timestamp when the Amazon Q Business data source was last updated. 
      */
     updatedAt?: Timestamp;
+    /**
+     * The status of the Amazon Q Business data source.
+     */
+    status?: DataSourceStatus;
   }
   export type DataSourceArn = string;
   export interface DataSourceConfiguration {
@@ -1199,39 +1267,43 @@ declare namespace QBusiness {
   export type DataSourceStatus = "PENDING_CREATION"|"CREATING"|"ACTIVE"|"DELETING"|"FAILED"|"UPDATING"|string;
   export interface DataSourceSyncJob {
     /**
-     * If the reason that the synchronization failed is due to an error with the underlying data source, this field contains a code that identifies the error.
-     */
-    dataSourceErrorCode?: String;
-    /**
-     * The Unix timestamp when the synchronization job completed.
-     */
-    endTime?: Timestamp;
-    /**
-     * If the Status field is set to FAILED, the ErrorCode field indicates the reason the synchronization failed. 
-     */
-    error?: ErrorDetail;
-    /**
      * The identifier of a data source synchronization job.
      */
     executionId?: ExecutionId;
-    /**
-     * Maps a batch delete document request to a specific data source sync job. This is optional and should only be supplied when documents are deleted by a data source connector.
-     */
-    metrics?: DataSourceSyncJobMetrics;
     /**
      * The Unix time stamp when the data source synchronization job started.
      */
     startTime?: Timestamp;
     /**
+     * The Unix timestamp when the synchronization job completed.
+     */
+    endTime?: Timestamp;
+    /**
      * The status of the synchronization job. When the Status field is set to SUCCEEDED, the synchronization job is done. If the status code is FAILED, the ErrorCode and ErrorMessage fields give you the reason for the failure.
      */
     status?: DataSourceSyncJobStatus;
+    /**
+     * If the Status field is set to FAILED, the ErrorCode field indicates the reason the synchronization failed. 
+     */
+    error?: ErrorDetail;
+    /**
+     * If the reason that the synchronization failed is due to an error with the underlying data source, this field contains a code that identifies the error.
+     */
+    dataSourceErrorCode?: String;
+    /**
+     * Maps a batch delete document request to a specific data source sync job. This is optional and should only be supplied when documents are deleted by a data source connector.
+     */
+    metrics?: DataSourceSyncJobMetrics;
   }
   export interface DataSourceSyncJobMetrics {
     /**
      * The current count of documents added from the data source during the data source sync.
      */
     documentsAdded?: MetricValue;
+    /**
+     * The current count of documents modified in the data source during the data source sync.
+     */
+    documentsModified?: MetricValue;
     /**
      * The current count of documents deleted from the data source during the data source sync.
      */
@@ -1240,10 +1312,6 @@ declare namespace QBusiness {
      * The current count of documents that failed to sync from the data source during the data source sync.
      */
     documentsFailed?: MetricValue;
-    /**
-     * The current count of documents modified in the data source during the data source sync.
-     */
-    documentsModified?: MetricValue;
     /**
      * The current count of documents crawled by the ongoing sync job in the data source.
      */
@@ -1254,24 +1322,24 @@ declare namespace QBusiness {
   export type DataSourceUserId = string;
   export interface DataSourceVpcConfiguration {
     /**
-     * A list of identifiers of security groups within your Amazon VPC. The security groups should enable Amazon Q Business to connect to the data source.
-     */
-    securityGroupIds: SecurityGroupIds;
-    /**
      * A list of identifiers for subnets within your Amazon VPC. The subnets should be able to connect to each other in the VPC, and they should have outgoing access to the Internet through a NAT device.
      */
     subnetIds: SubnetIds;
+    /**
+     * A list of identifiers of security groups within your Amazon VPC. The security groups should enable Amazon Q Business to connect to the data source.
+     */
+    securityGroupIds: SecurityGroupIds;
   }
   export type DataSources = DataSource[];
   export interface DateAttributeBoostingConfiguration {
     /**
-     * Specifies the duration, in seconds, of a boost applies to a DATE type document attribute.
-     */
-    boostingDurationInSeconds?: BoostingDurationInSeconds;
-    /**
      * Specifies how much a document attribute is boosted.
      */
     boostingLevel: DocumentAttributeBoostingLevel;
+    /**
+     * Specifies the duration, in seconds, of a boost applies to a DATE type document attribute.
+     */
+    boostingDurationInSeconds?: BoostingDurationInSeconds;
   }
   export interface DeleteApplicationRequest {
     /**
@@ -1291,13 +1359,13 @@ declare namespace QBusiness {
   }
   export interface DeleteConversationRequest {
     /**
-     * The identifier of the Amazon Q Business application associated with the conversation.
-     */
-    applicationId: ApplicationId;
-    /**
      * The identifier of the Amazon Q Business web experience conversation being deleted.
      */
     conversationId: ConversationId;
+    /**
+     * The identifier of the Amazon Q Business application associated with the conversation.
+     */
+    applicationId: ApplicationId;
     /**
      * The identifier of the user who is deleting the conversation.
      */
@@ -1311,13 +1379,13 @@ declare namespace QBusiness {
      */
     applicationId: ApplicationId;
     /**
-     * The identifier of the data source connector that you want to delete. 
-     */
-    dataSourceId: DataSourceId;
-    /**
      * The identifier of the index used with the data source connector.
      */
     indexId: IndexId;
+    /**
+     * The identifier of the data source connector that you want to delete. 
+     */
+    dataSourceId: DataSourceId;
   }
   export interface DeleteDataSourceResponse {
   }
@@ -1334,17 +1402,17 @@ declare namespace QBusiness {
      */
     applicationId: ApplicationId;
     /**
-     * The identifier of the data source linked to the group A group can be tied to multiple data sources. You can delete a group from accessing documents in a certain data source. For example, the groups "Research", "Engineering", and "Sales and Marketing" are all tied to the company's documents stored in the data sources Confluence and Salesforce. You want to delete "Research" and "Engineering" groups from Salesforce, so that these groups cannot access customer-related documents stored in Salesforce. Only "Sales and Marketing" should access documents in the Salesforce data source.
+     * The identifier of the index you want to delete the group from.
      */
-    dataSourceId?: DataSourceId;
+    indexId: IndexId;
     /**
      * The name of the group you want to delete.
      */
     groupName: GroupName;
     /**
-     * The identifier of the index you want to delete the group from.
+     * The identifier of the data source linked to the group A group can be tied to multiple data sources. You can delete a group from accessing documents in a certain data source. For example, the groups "Research", "Engineering", and "Sales and Marketing" are all tied to the company's documents stored in the data sources Confluence and Salesforce. You want to delete "Research" and "Engineering" groups from Salesforce, so that these groups cannot access customer-related documents stored in Salesforce. Only "Sales and Marketing" should access documents in the Salesforce data source.
      */
-    indexId: IndexId;
+    dataSourceId?: DataSourceId;
   }
   export interface DeleteGroupResponse {
   }
@@ -1411,9 +1479,9 @@ declare namespace QBusiness {
   export type Description = string;
   export interface Document {
     /**
-     * Configuration information for access permission to a document.
+     * The identifier of the document.
      */
-    accessConfiguration?: AccessConfiguration;
+    id: DocumentId;
     /**
      * Custom attributes to apply to the document for refining Amazon Q Business web experience responses.
      */
@@ -1427,17 +1495,17 @@ declare namespace QBusiness {
      */
     contentType?: ContentType;
     /**
-     * The configuration information for altering document metadata and content during the document ingestion process.
-     */
-    documentEnrichmentConfiguration?: DocumentEnrichmentConfiguration;
-    /**
-     * The identifier of the document.
-     */
-    id: DocumentId;
-    /**
      * The title of the document.
      */
     title?: Title;
+    /**
+     * Configuration information for access permission to a document.
+     */
+    accessConfiguration?: AccessConfiguration;
+    /**
+     * The configuration information for altering document metadata and content during the document ingestion process.
+     */
+    documentEnrichmentConfiguration?: DocumentEnrichmentConfiguration;
   }
   export interface DocumentAttribute {
     /**
@@ -1451,10 +1519,6 @@ declare namespace QBusiness {
   }
   export interface DocumentAttributeBoostingConfiguration {
     /**
-     * Provides information on boosting DATE type document attributes.
-     */
-    dateConfiguration?: DateAttributeBoostingConfiguration;
-    /**
      * Provides information on boosting NUMBER type document attributes.
      */
     numberConfiguration?: NumberAttributeBoostingConfiguration;
@@ -1462,6 +1526,10 @@ declare namespace QBusiness {
      * Provides information on boosting STRING type document attributes.
      */
     stringConfiguration?: StringAttributeBoostingConfiguration;
+    /**
+     * Provides information on boosting DATE type document attributes.
+     */
+    dateConfiguration?: DateAttributeBoostingConfiguration;
     /**
      * Provides information on boosting STRING_LIST type document attributes.
      */
@@ -1475,7 +1543,7 @@ declare namespace QBusiness {
      */
     key: DocumentAttributeKey;
     /**
-     * The identifier of the document attribute used for the condition. For example, 'Source_URI' could be an identifier for the attribute or metadata field that contains source URIs associated with the documents. Amazon Kendra currently does not support _document_body as an attribute key used for the condition.
+     * The identifier of the document attribute used for the condition. For example, 'Source_URI' could be an identifier for the attribute or metadata field that contains source URIs associated with the documents. Amazon Q Business currently does not support _document_body as an attribute key used for the condition.
      */
     operator: DocumentEnrichmentConditionOperator;
     value?: DocumentAttributeValue;
@@ -1484,47 +1552,47 @@ declare namespace QBusiness {
     /**
      * The name of the document attribute.
      */
-    name?: String;
-    /**
-     * Information about whether the document attribute can be used by an end user to search for information on their web experience.
-     */
-    search?: Status;
+    name?: DocumentMetadataConfigurationName;
     /**
      * The type of document attribute.
      */
     type?: AttributeType;
+    /**
+     * Information about whether the document attribute can be used by an end user to search for information on their web experience.
+     */
+    search?: Status;
   }
   export type DocumentAttributeConfigurations = DocumentAttributeConfiguration[];
   export type DocumentAttributeKey = string;
   export type DocumentAttributeStringListValue = String[];
   export interface DocumentAttributeTarget {
     /**
-     *  TRUE to delete the existing target value for your specified target attribute key. You cannot create a target value and set this to TRUE.
-     */
-    attributeValueOperator?: AttributeValueOperator;
-    /**
      * The identifier of the target document attribute or metadata field. For example, 'Department' could be an identifier for the target attribute or metadata field that includes the department names associated with the documents.
      */
     key: DocumentAttributeKey;
     value?: DocumentAttributeValue;
+    /**
+     *  TRUE to delete the existing target value for your specified target attribute key. You cannot create a target value and set this to TRUE.
+     */
+    attributeValueOperator?: AttributeValueOperator;
   }
   export interface DocumentAttributeValue {
     /**
-     * A date expressed as an ISO 8601 string. It's important for the time zone to be included in the ISO 8601 date-time format. For example, 2012-03-25T12:30:10+01:00 is the ISO 8601 date-time format for March 25th 2012 at 12:30PM (plus 10 seconds) in Central European Time. 
+     * A string.
      */
-    dateValue?: Timestamp;
-    /**
-     * A long integer value. 
-     */
-    longValue?: Long;
+    stringValue?: DocumentAttributeValueStringValueString;
     /**
      * A list of strings.
      */
     stringListValue?: DocumentAttributeStringListValue;
     /**
-     * A string.
+     * A long integer value. 
      */
-    stringValue?: DocumentAttributeValueStringValueString;
+    longValue?: Long;
+    /**
+     * A date expressed as an ISO 8601 string. It's important for the time zone to be included in the ISO 8601 date-time format. For example, 2012-03-25T12:30:10+01:00 is the ISO 8601 date-time format for March 25th 2012 at 12:30PM (plus 10 seconds) in Central European Time. 
+     */
+    dateValue?: Timestamp;
   }
   export type DocumentAttributeValueStringValueString = string;
   export type DocumentAttributes = DocumentAttribute[];
@@ -1542,21 +1610,21 @@ declare namespace QBusiness {
   export type DocumentDetailList = DocumentDetails[];
   export interface DocumentDetails {
     /**
-     * The timestamp for when the document was created.
-     */
-    createdAt?: Timestamp;
-    /**
      * The identifier of the document.
      */
     documentId?: DocumentId;
+    /**
+     * The current status of the document.
+     */
+    status?: DocumentStatus;
     /**
      * An error message associated with the document.
      */
     error?: ErrorDetail;
     /**
-     * The current status of the document.
+     * The timestamp for when the document was created.
      */
-    status?: DocumentStatus;
+    createdAt?: Timestamp;
     /**
      * The timestamp for when the document was last updated.
      */
@@ -1568,21 +1636,22 @@ declare namespace QBusiness {
      * Configuration information to alter document attributes or metadata fields and content when ingesting documents into Amazon Q Business.
      */
     inlineConfigurations?: InlineDocumentEnrichmentConfigurations;
-    postExtractionHookConfiguration?: HookConfiguration;
     preExtractionHookConfiguration?: HookConfiguration;
+    postExtractionHookConfiguration?: HookConfiguration;
   }
   export type DocumentId = string;
+  export type DocumentMetadataConfigurationName = string;
   export type DocumentStatus = "RECEIVED"|"PROCESSING"|"INDEXED"|"UPDATED"|"FAILED"|"DELETING"|"DELETED"|"DOCUMENT_FAILED_TO_INDEX"|string;
   export type Documents = Document[];
   export interface EligibleDataSource {
     /**
-     * The identifier of the data source.
-     */
-    dataSourceId?: DataSourceId;
-    /**
      * The identifier of the index the data source is attached to.
      */
     indexId?: IndexId;
+    /**
+     * The identifier of the data source.
+     */
+    dataSourceId?: DataSourceId;
   }
   export type EligibleDataSources = EligibleDataSource[];
   export interface EncryptionConfiguration {
@@ -1594,13 +1663,13 @@ declare namespace QBusiness {
   export type ErrorCode = "InternalError"|"InvalidRequest"|"ResourceInactive"|"ResourceNotFound"|string;
   export interface ErrorDetail {
     /**
-     * The code associated with the data source sync error.
-     */
-    errorCode?: ErrorCode;
-    /**
      * The message explaining the data source sync error.
      */
     errorMessage?: ErrorMessage;
+    /**
+     * The code associated with the data source sync error.
+     */
+    errorCode?: ErrorCode;
   }
   export type ErrorMessage = string;
   export type ExampleChatMessage = string;
@@ -1608,17 +1677,17 @@ declare namespace QBusiness {
   export type ExecutionId = string;
   export interface FailedDocument {
     /**
-     * The identifier of the Amazon Q Business data source connector that contains the failed document.
+     * The identifier of the document that couldn't be removed from the Amazon Q Business index.
      */
-    dataSourceId?: DataSourceId;
+    id?: DocumentId;
     /**
      * An explanation for why the document couldn't be removed from the index.
      */
     error?: ErrorDetail;
     /**
-     * The identifier of the document that couldn't be removed from the Amazon Q Business index.
+     * The identifier of the Amazon Q Business data source connector that contains the failed document.
      */
-    id?: DocumentId;
+    dataSourceId?: DataSourceId;
   }
   export type FailedDocuments = FailedDocument[];
   export interface GetApplicationRequest {
@@ -1629,37 +1698,17 @@ declare namespace QBusiness {
   }
   export interface GetApplicationResponse {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Q Business application.
+     * The name of the Amazon Q Business application.
      */
-    applicationArn?: ApplicationArn;
+    displayName?: ApplicationName;
     /**
      * The identifier of the Amazon Q Business application.
      */
     applicationId?: ApplicationId;
     /**
-     * Settings for whether end users can upload files directly during chat.
+     * The Amazon Resource Name (ARN) of the Amazon Q Business application.
      */
-    attachmentsConfiguration?: AppliedAttachmentsConfiguration;
-    /**
-     * The Unix timestamp when the Amazon Q Business application was last updated.
-     */
-    createdAt?: Timestamp;
-    /**
-     * A description for the Amazon Q Business application.
-     */
-    description?: Description;
-    /**
-     * The name of the Amazon Q Business application.
-     */
-    displayName?: ApplicationName;
-    /**
-     * The identifier of the Amazon Web Services KMS key that is used to encrypt your data. Amazon Q Business doesn't support asymmetric keys.
-     */
-    encryptionConfiguration?: EncryptionConfiguration;
-    /**
-     * If the Status field is set to ERROR, the ErrorMessage field contains a description of the error that caused the synchronization to fail.
-     */
-    error?: ErrorDetail;
+    applicationArn?: ApplicationArn;
     /**
      * The Amazon Resource Name (ARN) of the AWS IAM Identity Center instance attached to your Amazon Q Business application.
      */
@@ -1673,9 +1722,29 @@ declare namespace QBusiness {
      */
     status?: ApplicationStatus;
     /**
+     * A description for the Amazon Q Business application.
+     */
+    description?: Description;
+    /**
+     * The identifier of the Amazon Web Services KMS key that is used to encrypt your data. Amazon Q Business doesn't support asymmetric keys.
+     */
+    encryptionConfiguration?: EncryptionConfiguration;
+    /**
+     * The Unix timestamp when the Amazon Q Business application was last updated.
+     */
+    createdAt?: Timestamp;
+    /**
      * The Unix timestamp when the Amazon Q Business application was last updated.
      */
     updatedAt?: Timestamp;
+    /**
+     * If the Status field is set to ERROR, the ErrorMessage field contains a description of the error that caused the synchronization to fail.
+     */
+    error?: ErrorDetail;
+    /**
+     * Settings for whether end users can upload files directly during chat.
+     */
+    attachmentsConfiguration?: AppliedAttachmentsConfiguration;
   }
   export interface GetChatControlsConfigurationRequest {
     /**
@@ -1693,9 +1762,17 @@ declare namespace QBusiness {
   }
   export interface GetChatControlsConfigurationResponse {
     /**
+     * The response scope configured for a Amazon Q Business application. This determines whether your application uses its retrieval augmented generation (RAG) system to generate answers only from your enterprise data, or also uses the large language models (LLM) knowledge to respons to end user questions in chat.
+     */
+    responseScope?: ResponseScope;
+    /**
      * The phrases blocked from chat by your chat control configuration.
      */
     blockedPhrases?: BlockedPhrasesConfiguration;
+    /**
+     * The topic specific controls configured for a Amazon Q Business application.
+     */
+    topicConfigurations?: TopicConfigurations;
     /**
      * The configuration details for CREATOR_MODE.
      */
@@ -1704,14 +1781,6 @@ declare namespace QBusiness {
      * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response. You can use this pagination token to retrieve the next set of Amazon Q Business chat controls configured.
      */
     nextToken?: NextToken;
-    /**
-     * The response scope configured for a Amazon Q Business application. This determines whether your application uses its retrieval augmented generation (RAG) system to generate answers only from your enterprise data, or also uses the large language models (LLM) knowledge to respons to end user questions in chat.
-     */
-    responseScope?: ResponseScope;
-    /**
-     * The topic specific controls configured for a Amazon Q Business application.
-     */
-    topicConfigurations?: TopicConfigurations;
   }
   export interface GetDataSourceRequest {
     /**
@@ -1719,13 +1788,13 @@ declare namespace QBusiness {
      */
     applicationId: ApplicationId;
     /**
-     * The identifier of the data source connector.
-     */
-    dataSourceId: DataSourceId;
-    /**
      * The identfier of the index used with the data source connector.
      */
     indexId: IndexId;
+    /**
+     * The identifier of the data source connector.
+     */
+    dataSourceId: DataSourceId;
   }
   export interface GetDataSourceResponse {
     /**
@@ -1733,42 +1802,45 @@ declare namespace QBusiness {
      */
     applicationId?: ApplicationId;
     /**
-     * The details of how the data source connector is configured.
+     * The identifier of the index linked to the data source connector.
      */
-    configuration?: DataSourceConfiguration;
-    /**
-     * The Unix timestamp when the data source connector was created.
-     */
-    createdAt?: Timestamp;
-    /**
-     * The Amazon Resource Name (ARN) of the data source.
-     */
-    dataSourceArn?: DataSourceArn;
+    indexId?: IndexId;
     /**
      * The identifier of the data source connector.
      */
     dataSourceId?: DataSourceId;
     /**
-     * The description for the data source connector.
+     * The Amazon Resource Name (ARN) of the data source.
      */
-    description?: Description;
+    dataSourceArn?: DataSourceArn;
     /**
      * The name for the data source connector.
      */
     displayName?: DataSourceName;
-    documentEnrichmentConfiguration?: DocumentEnrichmentConfiguration;
     /**
-     * When the Status field value is FAILED, the ErrorMessage field contains a description of the error that caused the data source connector to fail.
+     * The type of the data source connector. For example, S3.
      */
-    error?: ErrorDetail;
+    type?: String;
     /**
-     * The identifier of the index linked to the data source connector.
+     * The details of how the data source connector is configured.
      */
-    indexId?: IndexId;
+    configuration?: DataSourceConfiguration;
     /**
-     * The Amazon Resource Name (ARN) of the role with permission to access the data source and required resources.
+     * Configuration information for an Amazon VPC (Virtual Private Cloud) to connect to your data source.
      */
-    roleArn?: RoleArn;
+    vpcConfiguration?: DataSourceVpcConfiguration;
+    /**
+     * The Unix timestamp when the data source connector was created.
+     */
+    createdAt?: Timestamp;
+    /**
+     * The Unix timestamp when the data source connector was last updated.
+     */
+    updatedAt?: Timestamp;
+    /**
+     * The description for the data source connector.
+     */
+    description?: Description;
     /**
      * The current status of the data source connector. When the Status field value is FAILED, the ErrorMessage field contains a description of the error that caused the data source connector to fail.
      */
@@ -1778,17 +1850,14 @@ declare namespace QBusiness {
      */
     syncSchedule?: SyncSchedule;
     /**
-     * The type of the data source connector. For example, S3.
+     * The Amazon Resource Name (ARN) of the role with permission to access the data source and required resources.
      */
-    type?: String;
+    roleArn?: RoleArn;
     /**
-     * The Unix timestamp when the data source connector was last updated.
+     * When the Status field value is FAILED, the ErrorMessage field contains a description of the error that caused the data source connector to fail.
      */
-    updatedAt?: Timestamp;
-    /**
-     * Configuration information for an Amazon VPC (Virtual Private Cloud) to connect to your data source.
-     */
-    vpcConfiguration?: DataSourceVpcConfiguration;
+    error?: ErrorDetail;
+    documentEnrichmentConfiguration?: DocumentEnrichmentConfiguration;
   }
   export interface GetGroupRequest {
     /**
@@ -1796,17 +1865,17 @@ declare namespace QBusiness {
      */
     applicationId: ApplicationId;
     /**
-     * The identifier of the data source the group is attached to.
+     * The identifier of the index the group is attached to.
      */
-    dataSourceId?: DataSourceId;
+    indexId: IndexId;
     /**
      * The name of the group.
      */
     groupName: GroupName;
     /**
-     * The identifier of the index the group is attached to.
+     * The identifier of the data source the group is attached to.
      */
-    indexId: IndexId;
+    dataSourceId?: DataSourceId;
   }
   export interface GetGroupResponse {
     /**
@@ -1834,21 +1903,41 @@ declare namespace QBusiness {
      */
     applicationId?: ApplicationId;
     /**
-     * The storage capacity units chosen for your Amazon Q Business index.
+     * The identifier of the Amazon Q Business index.
      */
-    capacityConfiguration?: IndexCapacityConfiguration;
+    indexId?: IndexId;
     /**
-     * The Unix timestamp when the Amazon Q Business index was created.
+     * The name of the Amazon Q Business index.
      */
-    createdAt?: Timestamp;
+    displayName?: IndexName;
+    /**
+     * The type of index attached to your Amazon Q Business application.
+     */
+    type?: IndexType;
+    /**
+     *  The Amazon Resource Name (ARN) of the Amazon Q Business index. 
+     */
+    indexArn?: IndexArn;
+    /**
+     * The current status of the index. When the value is ACTIVE, the index is ready for use. If the Status field value is FAILED, the ErrorMessage field contains a message that explains why.
+     */
+    status?: IndexStatus;
     /**
      * The description for the Amazon Q Business index.
      */
     description?: Description;
     /**
-     * The name of the Amazon Q Business index.
+     * The Unix timestamp when the Amazon Q Business index was created.
      */
-    displayName?: IndexName;
+    createdAt?: Timestamp;
+    /**
+     * The Unix timestamp when the Amazon Q Business index was last updated.
+     */
+    updatedAt?: Timestamp;
+    /**
+     * The storage capacity units chosen for your Amazon Q Business index.
+     */
+    capacityConfiguration?: IndexCapacityConfiguration;
     /**
      * Configuration information for document attributes or metadata. Document metadata are fields associated with your documents. For example, the company department name associated with each document. For more information, see Understanding document attributes.
      */
@@ -1858,25 +1947,9 @@ declare namespace QBusiness {
      */
     error?: ErrorDetail;
     /**
-     *  The Amazon Resource Name (ARN) of the Amazon Q Business index. 
-     */
-    indexArn?: IndexArn;
-    /**
-     * The identifier of the Amazon Q Business index.
-     */
-    indexId?: IndexId;
-    /**
      * Provides information about the number of documents indexed.
      */
     indexStatistics?: IndexStatistics;
-    /**
-     * The current status of the index. When the value is ACTIVE, the index is ready for use. If the Status field value is FAILED, the ErrorMessage field contains a message that explains why.
-     */
-    status?: IndexStatus;
-    /**
-     * The Unix timestamp when the Amazon Q Business index was last updated.
-     */
-    updatedAt?: Timestamp;
   }
   export interface GetPluginRequest {
     /**
@@ -1893,35 +1966,43 @@ declare namespace QBusiness {
      * The identifier of the application which contains the plugin.
      */
     applicationId?: ApplicationId;
-    authConfiguration?: PluginAuthConfiguration;
-    /**
-     * The timestamp for when the plugin was created.
-     */
-    createdAt?: Timestamp;
-    /**
-     * The name of the plugin.
-     */
-    displayName?: PluginName;
-    /**
-     * The Amazon Resource Name (ARN) of the role with permission to access resources needed to create the plugin.
-     */
-    pluginArn?: PluginArn;
     /**
      * The identifier of the plugin.
      */
     pluginId?: PluginId;
     /**
+     * The name of the plugin.
+     */
+    displayName?: PluginName;
+    /**
+     * The type of the plugin.
+     */
+    type?: PluginType;
+    /**
      * The source URL used for plugin configuration.
      */
     serverUrl?: Url;
+    authConfiguration?: PluginAuthConfiguration;
+    /**
+     * Configuration information required to create a custom plugin.
+     */
+    customPluginConfiguration?: CustomPluginConfiguration;
+    /**
+     * The current status of a plugin. A plugin is modified asynchronously.
+     */
+    buildStatus?: PluginBuildStatus;
+    /**
+     * The Amazon Resource Name (ARN) of the role with permission to access resources needed to create the plugin.
+     */
+    pluginArn?: PluginArn;
     /**
      * The current state of the plugin.
      */
     state?: PluginState;
     /**
-     * The type of the plugin.
+     * The timestamp for when the plugin was created.
      */
-    type?: PluginType;
+    createdAt?: Timestamp;
     /**
      * The timestamp for when the plugin was last updated.
      */
@@ -1942,35 +2023,35 @@ declare namespace QBusiness {
      * The identifier of the Amazon Q Business application using the retriever. 
      */
     applicationId?: ApplicationId;
-    configuration?: RetrieverConfiguration;
-    /**
-     * The Unix timestamp when the retriever was created.
-     */
-    createdAt?: Timestamp;
-    /**
-     * The name of the retriever.
-     */
-    displayName?: RetrieverName;
-    /**
-     * The Amazon Resource Name (ARN) of the IAM role associated with the retriever.
-     */
-    retrieverArn?: RetrieverArn;
     /**
      * The identifier of the retriever.
      */
     retrieverId?: RetrieverId;
     /**
-     * The Amazon Resource Name (ARN) of the role with the permission to access the retriever and required resources.
+     * The Amazon Resource Name (ARN) of the IAM role associated with the retriever.
      */
-    roleArn?: RoleArn;
+    retrieverArn?: RetrieverArn;
+    /**
+     * The type of the retriever.
+     */
+    type?: RetrieverType;
     /**
      * The status of the retriever.
      */
     status?: RetrieverStatus;
     /**
-     * The type of the retriever.
+     * The name of the retriever.
      */
-    type?: RetrieverType;
+    displayName?: RetrieverName;
+    configuration?: RetrieverConfiguration;
+    /**
+     * The Amazon Resource Name (ARN) of the role with the permission to access the retriever and required resources.
+     */
+    roleArn?: RoleArn;
+    /**
+     * The Unix timestamp when the retriever was created.
+     */
+    createdAt?: Timestamp;
     /**
      * The Unix timestamp when the retriever was last updated.
      */
@@ -2008,57 +2089,57 @@ declare namespace QBusiness {
      */
     applicationId?: ApplicationId;
     /**
-     * The authentication configuration information for your Amazon Q Business web experience.
+     * The identifier of the Amazon Q Business web experience.
      */
-    authenticationConfiguration?: WebExperienceAuthConfiguration;
-    /**
-     * The Unix timestamp when the retriever was created.
-     */
-    createdAt?: Timestamp;
-    /**
-     * The endpoint of your Amazon Q Business web experience.
-     */
-    defaultEndpoint?: Url;
-    /**
-     * When the Status field value is FAILED, the ErrorMessage field contains a description of the error that caused the data source connector to fail.
-     */
-    error?: ErrorDetail;
-    /**
-     *  The Amazon Resource Name (ARN) of the service role attached to your web experience.
-     */
-    roleArn?: RoleArn;
-    /**
-     * Determines whether sample prompts are enabled in the web experience for an end user.
-     */
-    samplePromptsControlMode?: WebExperienceSamplePromptsControlMode;
-    /**
-     * The current status of the Amazon Q Business web experience. When the Status field value is FAILED, the ErrorMessage field contains a description of the error that caused the data source connector to fail. 
-     */
-    status?: WebExperienceStatus;
-    /**
-     * The subtitle for your Amazon Q Business web experience. 
-     */
-    subtitle?: WebExperienceSubtitle;
-    /**
-     * The title for your Amazon Q Business web experience. 
-     */
-    title?: WebExperienceTitle;
-    /**
-     * The Unix timestamp when the data source connector was last updated.
-     */
-    updatedAt?: Timestamp;
+    webExperienceId?: WebExperienceId;
     /**
      * The Amazon Resource Name (ARN) of the role with the permission to access the Amazon Q Business web experience and required resources.
      */
     webExperienceArn?: WebExperienceArn;
     /**
-     * The identifier of the Amazon Q Business web experience.
+     * The endpoint of your Amazon Q Business web experience.
      */
-    webExperienceId?: WebExperienceId;
+    defaultEndpoint?: Url;
+    /**
+     * The current status of the Amazon Q Business web experience. When the Status field value is FAILED, the ErrorMessage field contains a description of the error that caused the data source connector to fail. 
+     */
+    status?: WebExperienceStatus;
+    /**
+     * The Unix timestamp when the Amazon Q Business web experience was last created.
+     */
+    createdAt?: Timestamp;
+    /**
+     * The Unix timestamp when the Amazon Q Business web experience was last updated.
+     */
+    updatedAt?: Timestamp;
+    /**
+     * The title for your Amazon Q Business web experience. 
+     */
+    title?: WebExperienceTitle;
+    /**
+     * The subtitle for your Amazon Q Business web experience. 
+     */
+    subtitle?: WebExperienceSubtitle;
     /**
      * The customized welcome message for end users of an Amazon Q Business web experience.
      */
     welcomeMessage?: WebExperienceWelcomeMessage;
+    /**
+     * Determines whether sample prompts are enabled in the web experience for an end user.
+     */
+    samplePromptsControlMode?: WebExperienceSamplePromptsControlMode;
+    /**
+     *  The Amazon Resource Name (ARN) of the service role attached to your web experience.
+     */
+    roleArn?: RoleArn;
+    /**
+     * The authentication configuration information for your Amazon Q Business web experience.
+     */
+    authenticationConfiguration?: WebExperienceAuthConfiguration;
+    /**
+     * When the Status field value is FAILED, the ErrorMessage field contains a description of the error that caused the data source connector to fail.
+     */
+    error?: ErrorDetail;
   }
   export interface GroupMembers {
     /**
@@ -2074,17 +2155,17 @@ declare namespace QBusiness {
   export type GroupStatus = "FAILED"|"SUCCEEDED"|"PROCESSING"|"DELETING"|"DELETED"|string;
   export interface GroupStatusDetail {
     /**
-     * The details of an error associated a group status.
+     * The status of a group.
      */
-    errorDetail?: ErrorDetail;
+    status?: GroupStatus;
     /**
      * The Unix timestamp when the Amazon Q Business application was last updated.
      */
     lastUpdatedAt?: Timestamp;
     /**
-     * The status of a group.
+     * The details of an error associated a group status.
      */
-    status?: GroupStatus;
+    errorDetail?: ErrorDetail;
   }
   export type GroupStatusDetails = GroupStatusDetail[];
   export interface GroupSummary {
@@ -2104,20 +2185,16 @@ declare namespace QBusiness {
      */
     lambdaArn?: LambdaArn;
     /**
-     * The Amazon Resource Name (ARN) of a role with permission to run PreExtractionHookConfiguration and PostExtractionHookConfiguration for altering document metadata and content during the document ingestion process.
-     */
-    roleArn?: RoleArn;
-    /**
      * Stores the original, raw documents or the structured, parsed documents before and after altering them. For more information, see Data contracts for Lambda functions.
      */
     s3BucketName?: S3BucketName;
+    /**
+     * The Amazon Resource Name (ARN) of a role with permission to run PreExtractionHookConfiguration and PostExtractionHookConfiguration for altering document metadata and content during the document ingestion process.
+     */
+    roleArn?: RoleArn;
   }
   export type IdcApplicationArn = string;
   export interface Index {
-    /**
-     * The Unix timestamp when the index was created.
-     */
-    createdAt?: Timestamp;
     /**
      * The name of the index.
      */
@@ -2127,13 +2204,17 @@ declare namespace QBusiness {
      */
     indexId?: IndexId;
     /**
-     * The current status of the index. When the status is ACTIVE, the index is ready.
+     * The Unix timestamp when the index was created.
      */
-    status?: IndexStatus;
+    createdAt?: Timestamp;
     /**
      * The Unix timestamp when the index was last updated.
      */
     updatedAt?: Timestamp;
+    /**
+     * The current status of the index. When the status is ACTIVE, the index is ready.
+     */
+    status?: IndexStatus;
   }
   export type IndexArn = string;
   export interface IndexCapacityConfiguration {
@@ -2152,16 +2233,17 @@ declare namespace QBusiness {
     textDocumentStatistics?: TextDocumentStatistics;
   }
   export type IndexStatus = "CREATING"|"ACTIVE"|"DELETING"|"FAILED"|"UPDATING"|string;
+  export type IndexType = "ENTERPRISE"|"STARTER"|string;
   export type IndexedTextBytes = number;
   export type IndexedTextDocument = number;
   export type Indices = Index[];
   export interface InlineDocumentEnrichmentConfiguration {
     condition?: DocumentAttributeCondition;
+    target?: DocumentAttributeTarget;
     /**
      *  TRUE to delete content if the condition used for the target attribute is met.
      */
     documentContentOperator?: DocumentContentOperator;
-    target?: DocumentAttributeTarget;
   }
   export type InlineDocumentEnrichmentConfigurations = InlineDocumentEnrichmentConfiguration[];
   export type InstanceArn = string;
@@ -2177,23 +2259,23 @@ declare namespace QBusiness {
   export type LambdaArn = string;
   export interface ListApplicationsRequest {
     /**
-     * The maximum number of Amazon Q Business applications to return.
-     */
-    maxResults?: MaxResultsIntegerForListApplications;
-    /**
      * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response. You can use this pagination token to retrieve the next set of Amazon Q Business applications.
      */
     nextToken?: NextToken;
+    /**
+     * The maximum number of Amazon Q Business applications to return.
+     */
+    maxResults?: MaxResultsIntegerForListApplications;
   }
   export interface ListApplicationsResponse {
-    /**
-     * An array of summary information on the configuration of one or more Amazon Q Business applications.
-     */
-    applications?: Applications;
     /**
      * If the response is truncated, Amazon Q Business returns this token. You can use this token in a subsequent request to retrieve the next set of applications.
      */
     nextToken?: NextToken;
+    /**
+     * An array of summary information on the configuration of one or more Amazon Q Business applications.
+     */
+    applications?: Applications;
   }
   export interface ListConversationsRequest {
     /**
@@ -2201,57 +2283,57 @@ declare namespace QBusiness {
      */
     applicationId: ApplicationId;
     /**
-     * The maximum number of Amazon Q Business conversations to return.
+     * The identifier of the user involved in the Amazon Q Business web experience conversation. 
      */
-    maxResults?: MaxResultsIntegerForListConversations;
+    userId?: UserId;
     /**
      * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response. You can use this pagination token to retrieve the next set of Amazon Q Business conversations.
      */
     nextToken?: NextToken;
     /**
-     * The identifier of the user involved in the Amazon Q Business web experience conversation. 
+     * The maximum number of Amazon Q Business conversations to return.
      */
-    userId?: UserId;
+    maxResults?: MaxResultsIntegerForListConversations;
   }
   export interface ListConversationsResponse {
-    /**
-     * An array of summary information on the configuration of one or more Amazon Q Business web experiences.
-     */
-    conversations?: Conversations;
     /**
      * If the response is truncated, Amazon Q Business returns this token, which you can use in a later request to list the next set of messages.
      */
     nextToken?: NextToken;
+    /**
+     * An array of summary information on the configuration of one or more Amazon Q Business web experiences.
+     */
+    conversations?: Conversations;
   }
   export interface ListDataSourceSyncJobsRequest {
-    /**
-     * The identifier of the Amazon Q Business application connected to the data source.
-     */
-    applicationId: ApplicationId;
     /**
      *  The identifier of the data source connector.
      */
     dataSourceId: DataSourceId;
     /**
-     *  The end time of the data source connector sync.
+     * The identifier of the Amazon Q Business application connected to the data source.
      */
-    endTime?: Timestamp;
+    applicationId: ApplicationId;
     /**
      * The identifier of the index used with the Amazon Q Business data source connector.
      */
     indexId: IndexId;
     /**
-     * The maximum number of synchronization jobs to return in the response.
-     */
-    maxResults?: MaxResultsIntegerForListDataSourcesSyncJobs;
-    /**
      * If the maxResults response was incpmplete because there is more data to retriever, Amazon Q Business returns a pagination token in the response. You can use this pagination token to retrieve the next set of responses.
      */
     nextToken?: NextToken;
     /**
+     * The maximum number of synchronization jobs to return in the response.
+     */
+    maxResults?: MaxResultsIntegerForListDataSourcesSyncJobs;
+    /**
      *  The start time of the data source connector sync. 
      */
     startTime?: Timestamp;
+    /**
+     *  The end time of the data source connector sync.
+     */
+    endTime?: Timestamp;
     /**
      * Only returns synchronization jobs with the Status field equal to the specified status.
      */
@@ -2277,13 +2359,13 @@ declare namespace QBusiness {
      */
     indexId: IndexId;
     /**
-     * The maximum number of data source connectors to return.
-     */
-    maxResults?: MaxResultsIntegerForListDataSources;
-    /**
      * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response. You can use this pagination token to retrieve the next set of Amazon Q Business data source connectors.
      */
     nextToken?: NextToken;
+    /**
+     * The maximum number of data source connectors to return.
+     */
+    maxResults?: MaxResultsIntegerForListDataSources;
   }
   export interface ListDataSourcesResponse {
     /**
@@ -2301,21 +2383,21 @@ declare namespace QBusiness {
      */
     applicationId: ApplicationId;
     /**
-     * The identifier of the data sources the documents are attached to.
-     */
-    dataSourceIds?: DataSourceIds;
-    /**
      * The identifier of the index the documents are attached to.
      */
     indexId: IndexId;
     /**
-     * The maximum number of documents to return.
+     * The identifier of the data sources the documents are attached to.
      */
-    maxResults?: MaxResultsIntegerForListDocuments;
+    dataSourceIds?: DataSourceIds;
     /**
      * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response. You can use this pagination token to retrieve the next set of documents.
      */
     nextToken?: NextToken;
+    /**
+     * The maximum number of documents to return.
+     */
+    maxResults?: MaxResultsIntegerForListDocuments;
   }
   export interface ListDocumentsResponse {
     /**
@@ -2333,35 +2415,35 @@ declare namespace QBusiness {
      */
     applicationId: ApplicationId;
     /**
-     * The identifier of the data source for getting a list of groups mapped to users.
-     */
-    dataSourceId?: DataSourceId;
-    /**
      * The identifier of the index for getting a list of groups mapped to users.
      */
     indexId: IndexId;
     /**
-     * The maximum number of returned groups that are mapped to users.
+     * The timestamp identifier used for the latest PUT or DELETE action for mapping users to their groups.
      */
-    maxResults?: MaxResultsIntegerForListGroupsRequest;
+    updatedEarlierThan: Timestamp;
+    /**
+     * The identifier of the data source for getting a list of groups mapped to users.
+     */
+    dataSourceId?: DataSourceId;
     /**
      * If the previous response was incomplete (because there is more data to retrieve), Amazon Q Business returns a pagination token in the response. You can use this pagination token to retrieve the next set of groups that are mapped to users.
      */
     nextToken?: NextToken;
     /**
-     * The timestamp identifier used for the latest PUT or DELETE action for mapping users to their groups.
+     * The maximum number of returned groups that are mapped to users.
      */
-    updatedEarlierThan: Timestamp;
+    maxResults?: MaxResultsIntegerForListGroupsRequest;
   }
   export interface ListGroupsResponse {
-    /**
-     * Summary information for list of groups that are mapped to users.
-     */
-    items?: GroupSummaryList;
     /**
      * If the response is truncated, Amazon Q Business returns this token that you can use in the subsequent request to retrieve the next set of groups that are mapped to users.
      */
     nextToken?: NextToken;
+    /**
+     * Summary information for list of groups that are mapped to users.
+     */
+    items?: GroupSummaryList;
   }
   export interface ListIndicesRequest {
     /**
@@ -2369,45 +2451,45 @@ declare namespace QBusiness {
      */
     applicationId: ApplicationId;
     /**
-     * The maximum number of indices to return.
-     */
-    maxResults?: MaxResultsIntegerForListIndices;
-    /**
      * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response. You can use this pagination token to retrieve the next set of Amazon Q Business indices.
      */
     nextToken?: NextToken;
+    /**
+     * The maximum number of indices to return.
+     */
+    maxResults?: MaxResultsIntegerForListIndices;
   }
   export interface ListIndicesResponse {
-    /**
-     * An array of information on the items in one or more indexes.
-     */
-    indices?: Indices;
     /**
      * If the response is truncated, Amazon Q Business returns this token that you can use in the subsequent request to retrieve the next set of indexes.
      */
     nextToken?: NextToken;
+    /**
+     * An array of information on the items in one or more indexes.
+     */
+    indices?: Indices;
   }
   export interface ListMessagesRequest {
-    /**
-     * The identifier for the Amazon Q Business application.
-     */
-    applicationId: ApplicationId;
     /**
      * The identifier of the Amazon Q Business web experience conversation.
      */
     conversationId: ConversationId;
     /**
-     * The maximum number of messages to return.
+     * The identifier for the Amazon Q Business application.
      */
-    maxResults?: MaxResultsIntegerForListMessages;
+    applicationId: ApplicationId;
+    /**
+     * The identifier of the user involved in the Amazon Q Business web experience conversation.
+     */
+    userId?: UserId;
     /**
      * If the number of retrievers returned exceeds maxResults, Amazon Q Business returns a next token as a pagination token to retrieve the next set of messages.
      */
     nextToken?: NextToken;
     /**
-     * The identifier of the user involved in the Amazon Q Business web experience conversation.
+     * The maximum number of messages to return.
      */
-    userId?: UserId;
+    maxResults?: MaxResultsIntegerForListMessages;
   }
   export interface ListMessagesResponse {
     /**
@@ -2425,13 +2507,13 @@ declare namespace QBusiness {
      */
     applicationId: ApplicationId;
     /**
-     * The maximum number of documents to return.
-     */
-    maxResults?: MaxResultsIntegerForListPlugins;
-    /**
      * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response. You can use this pagination token to retrieve the next set of plugins.
      */
     nextToken?: NextToken;
+    /**
+     * The maximum number of documents to return.
+     */
+    maxResults?: MaxResultsIntegerForListPlugins;
   }
   export interface ListPluginsResponse {
     /**
@@ -2449,23 +2531,23 @@ declare namespace QBusiness {
      */
     applicationId: ApplicationId;
     /**
-     * The maximum number of retrievers returned.
-     */
-    maxResults?: MaxResultsIntegerForListRetrieversRequest;
-    /**
      * If the number of retrievers returned exceeds maxResults, Amazon Q Business returns a next token as a pagination token to retrieve the next set of retrievers.
      */
     nextToken?: NextToken;
+    /**
+     * The maximum number of retrievers returned.
+     */
+    maxResults?: MaxResultsIntegerForListRetrieversRequest;
   }
   export interface ListRetrieversResponse {
-    /**
-     * If the response is truncated, Amazon Q Business returns this token, which you can use in a later request to list the next set of retrievers.
-     */
-    nextToken?: NextToken;
     /**
      * An array of summary information for one or more retrievers.
      */
     retrievers?: Retrievers;
+    /**
+     * If the response is truncated, Amazon Q Business returns this token, which you can use in a later request to list the next set of retrievers.
+     */
+    nextToken?: NextToken;
   }
   export interface ListTagsForResourceRequest {
     /**
@@ -2485,23 +2567,23 @@ declare namespace QBusiness {
      */
     applicationId: ApplicationId;
     /**
-     * The maximum number of Amazon Q Business Web Experiences to return.
-     */
-    maxResults?: MaxResultsIntegerForListWebExperiencesRequest;
-    /**
      * If the maxResults response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response. You can use this pagination token to retrieve the next set of Amazon Q Business conversations.
      */
     nextToken?: NextToken;
+    /**
+     * The maximum number of Amazon Q Business Web Experiences to return.
+     */
+    maxResults?: MaxResultsIntegerForListWebExperiencesRequest;
   }
   export interface ListWebExperiencesResponse {
-    /**
-     * If the response is truncated, Amazon Q Business returns this token, which you can use in a later request to list the next set of messages.
-     */
-    nextToken?: NextToken;
     /**
      * An array of summary information for one or more Amazon Q Business experiences.
      */
     webExperiences?: WebExperiences;
+    /**
+     * If the response is truncated, Amazon Q Business returns this token, which you can use in a later request to list the next set of messages.
+     */
+    nextToken?: NextToken;
   }
   export type Long = number;
   export type MaxResultsIntegerForGetTopicConfigurations = number;
@@ -2530,35 +2612,25 @@ declare namespace QBusiness {
   export type MemberRelation = "AND"|"OR"|string;
   export interface MemberUser {
     /**
-     * The type of the user.
-     */
-    type?: MembershipType;
-    /**
      * The identifier of the user you want to map to a group.
      */
     userId: DataSourceUserId;
+    /**
+     * The type of the user.
+     */
+    type?: MembershipType;
   }
   export type MemberUsers = MemberUser[];
   export type MembershipType = "INDEX"|"DATASOURCE"|string;
   export interface Message {
-    actionExecution?: ActionExecution;
-    actionReview?: ActionReview;
-    /**
-     * A file directly uploaded into an Amazon Q Business web experience chat.
-     */
-    attachments?: AttachmentsOutput;
-    /**
-     * The content of the Amazon Q Business web experience message.
-     */
-    body?: MessageBody;
     /**
      * The identifier of the Amazon Q Business web experience message.
      */
     messageId?: String;
     /**
-     * The source documents used to generate Amazon Q Business web experience message.
+     * The content of the Amazon Q Business web experience message.
      */
-    sourceAttribution?: SourceAttributions;
+    body?: MessageBody;
     /**
      * The timestamp of the first Amazon Q Business web experience message.
      */
@@ -2567,6 +2639,16 @@ declare namespace QBusiness {
      * The type of Amazon Q Business message, whether HUMAN or AI generated.
      */
     type?: MessageType;
+    /**
+     * A file directly uploaded into an Amazon Q Business web experience chat.
+     */
+    attachments?: AttachmentsOutput;
+    /**
+     * The source documents used to generate Amazon Q Business web experience message.
+     */
+    sourceAttribution?: SourceAttributions;
+    actionReview?: ActionReview;
+    actionExecution?: ActionExecution;
   }
   export type MessageBody = string;
   export type MessageId = string;
@@ -2575,36 +2657,38 @@ declare namespace QBusiness {
   export type MessageUsefulnessComment = string;
   export interface MessageUsefulnessFeedback {
     /**
-     * A comment given by an end user on the usefulness of an AI-generated chat message.
+     * The usefulness value assigned by an end user to a message.
      */
-    comment?: MessageUsefulnessComment;
+    usefulness: MessageUsefulness;
     /**
      * The reason for a usefulness rating.
      */
     reason?: MessageUsefulnessReason;
     /**
+     * A comment given by an end user on the usefulness of an AI-generated chat message.
+     */
+    comment?: MessageUsefulnessComment;
+    /**
      * The timestamp for when the feedback was submitted.
      */
     submittedAt: Timestamp;
-    /**
-     * The usefulness value assigned by an end user to a message.
-     */
-    usefulness: MessageUsefulness;
   }
   export type MessageUsefulnessReason = "NOT_FACTUALLY_CORRECT"|"HARMFUL_OR_UNSAFE"|"INCORRECT_OR_MISSING_SOURCES"|"NOT_HELPFUL"|"FACTUALLY_CORRECT"|"COMPLETE"|"RELEVANT_SOURCES"|"HELPFUL"|"NOT_BASED_ON_DOCUMENTS"|"NOT_COMPLETE"|"NOT_CONCISE"|"OTHER"|string;
   export type Messages = Message[];
   export type MetricValue = string;
   export interface NativeIndexConfiguration {
     /**
-     * Overrides the default boosts applied by Amazon Q Business to supported document attribute data types.
-     */
-    boostingOverride?: DocumentAttributeBoostingOverrideMap;
-    /**
      * The identifier for the Amazon Q Business index.
      */
     indexId: IndexId;
+    /**
+     * Overrides the default boosts applied by Amazon Q Business to supported document attribute data types.
+     */
+    boostingOverride?: DocumentAttributeBoostingOverrideMap;
   }
   export type NextToken = string;
+  export interface NoAuthConfiguration {
+  }
   export interface NumberAttributeBoostingConfiguration {
     /**
      * Specifies the duration, in seconds, of a boost applies to a NUMBER type document attribute.
@@ -2618,27 +2702,28 @@ declare namespace QBusiness {
   export type NumberAttributeBoostingType = "PRIORITIZE_LARGER_VALUES"|"PRIORITIZE_SMALLER_VALUES"|string;
   export interface OAuth2ClientCredentialConfiguration {
     /**
-     * The ARN of an IAM role used by Amazon Q Business to access the OAuth 2.0 authentication credentials stored in a Secrets Manager secret.
-     */
-    roleArn: RoleArn;
-    /**
      * The ARN of the Secrets Manager secret that stores the OAuth 2.0 credentials/token used for plugin configuration.
      */
     secretArn: SecretArn;
+    /**
+     * The ARN of an IAM role used by Amazon Q Business to access the OAuth 2.0 authentication credentials stored in a Secrets Manager secret.
+     */
+    roleArn: RoleArn;
   }
+  export type Payload = string;
   export interface Plugin {
     /**
-     * The timestamp for when the plugin was created.
+     * The identifier of the plugin.
      */
-    createdAt?: Timestamp;
+    pluginId?: PluginId;
     /**
      * The name of the plugin.
      */
     displayName?: PluginName;
     /**
-     * The identifier of the plugin.
+     * The type of the plugin.
      */
-    pluginId?: PluginId;
+    type?: PluginType;
     /**
      * The plugin server URL used for configuration.
      */
@@ -2648,9 +2733,13 @@ declare namespace QBusiness {
      */
     state?: PluginState;
     /**
-     * The type of the plugin.
+     * The status of the plugin.
      */
-    type?: PluginType;
+    buildStatus?: PluginBuildStatus;
+    /**
+     * The timestamp for when the plugin was created.
+     */
+    createdAt?: Timestamp;
     /**
      * The timestamp for when the plugin was last updated.
      */
@@ -2666,29 +2755,39 @@ declare namespace QBusiness {
      * Information about the OAuth 2.0 authentication credential/token used to configure a plugin.
      */
     oAuth2ClientCredentialConfiguration?: OAuth2ClientCredentialConfiguration;
+    /**
+     * Information about invoking a custom plugin without any authentication.
+     */
+    noAuthConfiguration?: NoAuthConfiguration;
   }
+  export type PluginBuildStatus = "READY"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|string;
   export interface PluginConfiguration {
     /**
      *  The identifier of the plugin you want to use.
      */
     pluginId: PluginId;
   }
+  export type PluginDescription = string;
   export type PluginId = string;
   export type PluginName = string;
   export type PluginState = "ENABLED"|"DISABLED"|string;
-  export type PluginType = "SERVICE_NOW"|"SALESFORCE"|"JIRA"|"ZENDESK"|string;
+  export type PluginType = "SERVICE_NOW"|"SALESFORCE"|"JIRA"|"ZENDESK"|"CUSTOM"|string;
   export type Plugins = Plugin[];
   export interface Principal {
-    /**
-     *  The group associated with the principal.
-     */
-    group?: PrincipalGroup;
     /**
      * The user associated with the principal.
      */
     user?: PrincipalUser;
+    /**
+     *  The group associated with the principal.
+     */
+    group?: PrincipalGroup;
   }
   export interface PrincipalGroup {
+    /**
+     * The name of the group.
+     */
+    name?: GroupName;
     /**
      * Provides information about whether to allow or deny access to the principal.
      */
@@ -2697,20 +2796,16 @@ declare namespace QBusiness {
      * The type of group.
      */
     membershipType?: MembershipType;
-    /**
-     * The name of the group.
-     */
-    name?: GroupName;
   }
   export interface PrincipalUser {
-    /**
-     * Provides information about whether to allow or deny access to the principal.
-     */
-    access: ReadAccessType;
     /**
      *  The identifier of the user. 
      */
     id?: UserId;
+    /**
+     * Provides information about whether to allow or deny access to the principal.
+     */
+    access: ReadAccessType;
     /**
      * The type of group.
      */
@@ -2723,25 +2818,25 @@ declare namespace QBusiness {
      */
     applicationId: ApplicationId;
     /**
+     * The identifier of the user giving the feedback.
+     */
+    userId?: UserId;
+    /**
      * The identifier of the conversation the feedback is attached to.
      */
     conversationId: ConversationId;
-    /**
-     * The timestamp for when the feedback was recorded.
-     */
-    messageCopiedAt?: Timestamp;
     /**
      * The identifier of the chat message that the feedback was given for.
      */
     messageId: SystemMessageId;
     /**
+     * The timestamp for when the feedback was recorded.
+     */
+    messageCopiedAt?: Timestamp;
+    /**
      * The feedback usefulness value given by the user to the chat message.
      */
     messageUsefulness?: MessageUsefulnessFeedback;
-    /**
-     * The identifier of the user giving the feedback.
-     */
-    userId?: UserId;
   }
   export interface PutGroupRequest {
     /**
@@ -2749,22 +2844,22 @@ declare namespace QBusiness {
      */
     applicationId: ApplicationId;
     /**
-     * The identifier of the data source for which you want to map users to their groups. This is useful if a group is tied to multiple data sources, but you only want the group to access documents of a certain data source. For example, the groups "Research", "Engineering", and "Sales and Marketing" are all tied to the company's documents stored in the data sources Confluence and Salesforce. However, "Sales and Marketing" team only needs access to customer-related documents stored in Salesforce.
+     * The identifier of the index in which you want to map users to their groups.
      */
-    dataSourceId?: DataSourceId;
-    groupMembers: GroupMembers;
+    indexId: IndexId;
     /**
      * The list that contains your users or sub groups that belong the same group. For example, the group "Company" includes the user "CEO" and the sub groups "Research", "Engineering", and "Sales and Marketing". If you have more than 1000 users and/or sub groups for a single group, you need to provide the path to the S3 file that lists your users and sub groups for a group. Your sub groups can contain more than 1000 users, but the list of sub groups that belong to a group (and/or users) must be no more than 1000.
      */
     groupName: GroupName;
     /**
-     * The identifier of the index in which you want to map users to their groups.
+     * The identifier of the data source for which you want to map users to their groups. This is useful if a group is tied to multiple data sources, but you only want the group to access documents of a certain data source. For example, the groups "Research", "Engineering", and "Sales and Marketing" are all tied to the company's documents stored in the data sources Confluence and Salesforce. However, "Sales and Marketing" team only needs access to customer-related documents stored in Salesforce.
      */
-    indexId: IndexId;
+    dataSourceId?: DataSourceId;
     /**
      * The type of the group.
      */
     type: MembershipType;
+    groupMembers: GroupMembers;
   }
   export interface PutGroupResponse {
   }
@@ -2776,32 +2871,32 @@ declare namespace QBusiness {
      */
     applicationId?: ApplicationId;
     /**
-     * The name of your retriever.
-     */
-    displayName?: RetrieverName;
-    /**
      * The identifier of the retriever used by your Amazon Q Business application.
      */
     retrieverId?: RetrieverId;
+    /**
+     * The type of your retriever.
+     */
+    type?: RetrieverType;
     /**
      * The status of your retriever.
      */
     status?: RetrieverStatus;
     /**
-     * The type of your retriever.
+     * The name of your retriever.
      */
-    type?: RetrieverType;
+    displayName?: RetrieverName;
   }
   export type RetrieverArn = string;
   export interface RetrieverConfiguration {
     /**
-     * Provides information on how the Amazon Kendra index used as a retriever for your Amazon Q Business application is configured.
-     */
-    kendraIndexConfiguration?: KendraIndexConfiguration;
-    /**
      * Provides information on how a Amazon Q Business index used as a retriever for your Amazon Q Business application is configured.
      */
     nativeIndexConfiguration?: NativeIndexConfiguration;
+    /**
+     * Provides information on how the Amazon Kendra index used as a retriever for your Amazon Q Business application is configured.
+     */
+    kendraIndexConfiguration?: KendraIndexConfiguration;
   }
   export type RetrieverId = string;
   export type RetrieverName = string;
@@ -2811,21 +2906,21 @@ declare namespace QBusiness {
   export type RoleArn = string;
   export interface Rule {
     /**
-     * Users and groups to be excluded from a rule.
-     */
-    excludedUsersAndGroups?: UsersAndGroups;
-    /**
      * Users and groups to be included in a rule.
      */
     includedUsersAndGroups?: UsersAndGroups;
     /**
-     * The configuration information for a rule.
+     * Users and groups to be excluded from a rule.
      */
-    ruleConfiguration?: RuleConfiguration;
+    excludedUsersAndGroups?: UsersAndGroups;
     /**
      * The type of rule.
      */
     ruleType: RuleType;
+    /**
+     * The configuration information for a rule.
+     */
+    ruleConfiguration?: RuleConfiguration;
   }
   export interface RuleConfiguration {
     /**
@@ -2859,54 +2954,61 @@ declare namespace QBusiness {
      */
     roleArn: RoleArn;
     /**
-     * The group attribute name in your IdP that maps to user groups.
-     */
-    userGroupAttribute?: SamlAttribute;
-    /**
      * The user attribute name in your IdP that maps to the user email.
      */
     userIdAttribute: SamlAttribute;
+    /**
+     * The group attribute name in your IdP that maps to user groups.
+     */
+    userGroupAttribute?: SamlAttribute;
   }
   export type SamlMetadataXML = string;
   export type SecretArn = string;
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
+  export interface SnippetExcerpt {
+    /**
+     * The relevant text excerpt from a source that was used to generate a citation text segment in an Amazon Q chat response.
+     */
+    text?: SnippetExcerptText;
+  }
+  export type SnippetExcerptText = string;
   export interface SourceAttribution {
-    /**
-     * The number attached to a citation in an Amazon Q Business generated response.
-     */
-    citationNumber?: Integer;
-    /**
-     * The content extract from the document on which the generated response is based. 
-     */
-    snippet?: String;
-    /**
-     * A text extract from a source document that is used for source attribution.
-     */
-    textMessageSegments?: TextSegmentList;
     /**
      * The title of the document which is the source for the Amazon Q Business generated response. 
      */
     title?: String;
     /**
-     * The Unix timestamp when the Amazon Q Business application was last updated.
+     * The content extract from the document on which the generated response is based. 
      */
-    updatedAt?: Timestamp;
+    snippet?: String;
     /**
      * The URL of the document which is the source for the Amazon Q Business generated response. 
      */
     url?: String;
+    /**
+     * The number attached to a citation in an Amazon Q Business generated response.
+     */
+    citationNumber?: Integer;
+    /**
+     * The Unix timestamp when the Amazon Q Business application was last updated.
+     */
+    updatedAt?: Timestamp;
+    /**
+     * A text extract from a source document that is used for source attribution.
+     */
+    textMessageSegments?: TextSegmentList;
   }
   export type SourceAttributions = SourceAttribution[];
   export interface StartDataSourceSyncJobRequest {
     /**
-     * The identifier of Amazon Q Business application the data source is connected to.
-     */
-    applicationId: ApplicationId;
-    /**
      *  The identifier of the data source connector. 
      */
     dataSourceId: DataSourceId;
+    /**
+     * The identifier of Amazon Q Business application the data source is connected to.
+     */
+    applicationId: ApplicationId;
     /**
      * The identifier of the index used with the data source connector.
      */
@@ -2921,13 +3023,13 @@ declare namespace QBusiness {
   export type Status = "ENABLED"|"DISABLED"|string;
   export interface StopDataSourceSyncJobRequest {
     /**
-     * The identifier of the Amazon Q Business application that the data source is connected to.
-     */
-    applicationId: ApplicationId;
-    /**
      *  The identifier of the data source connector. 
      */
     dataSourceId: DataSourceId;
+    /**
+     * The identifier of the Amazon Q Business application that the data source is connected to.
+     */
+    applicationId: ApplicationId;
     /**
      * The identifier of the index used with the Amazon Q Business data source connector.
      */
@@ -2938,13 +3040,13 @@ declare namespace QBusiness {
   export type String = string;
   export interface StringAttributeBoostingConfiguration {
     /**
-     * Specifies specific values of a STRING type document attribute being boosted.
-     */
-    attributeValueBoosting?: StringAttributeValueBoosting;
-    /**
      * Specifies how much a document attribute is boosted.
      */
     boostingLevel: DocumentAttributeBoostingLevel;
+    /**
+     * Specifies specific values of a STRING type document attribute being boosted.
+     */
+    attributeValueBoosting?: StringAttributeValueBoosting;
   }
   export type StringAttributeValueBoosting = {[key: string]: StringAttributeValueBoostingLevel};
   export type StringAttributeValueBoostingLevel = "LOW"|"MEDIUM"|"HIGH"|"VERY_HIGH"|string;
@@ -3004,11 +3106,19 @@ declare namespace QBusiness {
      * The zero-based location in the response string where the source attribution ends.
      */
     endOffset?: Integer;
+    /**
+     * The relevant text excerpt from a source that was used to generate a citation text segment in an Amazon Q Business chat response.
+     */
+    snippetExcerpt?: SnippetExcerpt;
   }
   export type TextSegmentList = TextSegment[];
   export type Timestamp = Date;
   export type Title = string;
   export interface TopicConfiguration {
+    /**
+     * A name for your topic control configuration.
+     */
+    name: TopicConfigurationName;
     /**
      * A description for your topic control configuration. Use this to outline how the large language model (LLM) should use this topic control configuration.
      */
@@ -3017,10 +3127,6 @@ declare namespace QBusiness {
      * A list of example phrases that you expect the end user to use in relation to the topic.
      */
     exampleChatMessages?: ExampleChatMessages;
-    /**
-     * A name for your topic control configuration.
-     */
-    name: TopicConfigurationName;
     /**
      * Rules defined for a topic configuration.
      */
@@ -3047,21 +3153,25 @@ declare namespace QBusiness {
      */
     applicationId: ApplicationId;
     /**
-     * An option to allow end users to upload files directly during chat.
+     *  The Amazon Resource Name (ARN) of the IAM Identity Center instance you are either creating for—or connecting to—your Amazon Q Business application.
      */
-    attachmentsConfiguration?: AttachmentsConfiguration;
-    /**
-     * A description for the Amazon Q Business application.
-     */
-    description?: Description;
+    identityCenterInstanceArn?: InstanceArn;
     /**
      * A name for the Amazon Q Business application.
      */
     displayName?: ApplicationName;
     /**
+     * A description for the Amazon Q Business application.
+     */
+    description?: Description;
+    /**
      * An Amazon Web Services Identity and Access Management (IAM) role that gives Amazon Q Business permission to access Amazon CloudWatch logs and metrics.
      */
     roleArn?: RoleArn;
+    /**
+     * An option to allow end users to upload files directly during chat.
+     */
+    attachmentsConfiguration?: AttachmentsConfiguration;
   }
   export interface UpdateApplicationResponse {
   }
@@ -3071,21 +3181,17 @@ declare namespace QBusiness {
      */
     applicationId: ApplicationId;
     /**
-     * The phrases blocked from chat by your chat control configuration.
-     */
-    blockedPhrasesConfigurationUpdate?: BlockedPhrasesConfigurationUpdate;
-    /**
      * A token that you provide to identify the request to update a Amazon Q Business application chat configuration.
      */
     clientToken?: ClientToken;
     /**
-     * The configuration details for CREATOR_MODE.
-     */
-    creatorModeConfiguration?: CreatorModeConfiguration;
-    /**
      * The response scope configured for your application. This determines whether your application uses its retrieval augmented generation (RAG) system to generate answers only from your enterprise data, or also uses the large language models (LLM) knowledge to respons to end user questions in chat.
      */
     responseScope?: ResponseScope;
+    /**
+     * The phrases blocked from chat by your chat control configuration.
+     */
+    blockedPhrasesConfigurationUpdate?: BlockedPhrasesConfigurationUpdate;
     /**
      * The configured topic specific chat controls you want to update.
      */
@@ -3094,6 +3200,10 @@ declare namespace QBusiness {
      * The configured topic specific chat controls you want to delete.
      */
     topicConfigurationsToDelete?: TopicConfigurations;
+    /**
+     * The configuration details for CREATOR_MODE.
+     */
+    creatorModeConfiguration?: CreatorModeConfiguration;
   }
   export interface UpdateChatControlsConfigurationResponse {
   }
@@ -3102,33 +3212,33 @@ declare namespace QBusiness {
      *  The identifier of the Amazon Q Business application the data source is attached to.
      */
     applicationId: ApplicationId;
-    configuration?: DataSourceConfiguration;
-    /**
-     * The identifier of the data source connector.
-     */
-    dataSourceId: DataSourceId;
-    /**
-     * The description of the data source connector.
-     */
-    description?: Description;
-    /**
-     * A name of the data source connector.
-     */
-    displayName?: DataSourceName;
-    documentEnrichmentConfiguration?: DocumentEnrichmentConfiguration;
     /**
      * The identifier of the index attached to the data source connector.
      */
     indexId: IndexId;
     /**
-     * The Amazon Resource Name (ARN) of an IAM role with permission to access the data source and required resources.
+     * The identifier of the data source connector.
      */
-    roleArn?: RoleArn;
+    dataSourceId: DataSourceId;
+    /**
+     * A name of the data source connector.
+     */
+    displayName?: DataSourceName;
+    configuration?: DataSourceConfiguration;
+    vpcConfiguration?: DataSourceVpcConfiguration;
+    /**
+     * The description of the data source connector.
+     */
+    description?: Description;
     /**
      * The chosen update frequency for your data source.
      */
     syncSchedule?: SyncSchedule;
-    vpcConfiguration?: DataSourceVpcConfiguration;
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role with permission to access the data source and required resources.
+     */
+    roleArn?: RoleArn;
+    documentEnrichmentConfiguration?: DocumentEnrichmentConfiguration;
   }
   export interface UpdateDataSourceResponse {
   }
@@ -3138,25 +3248,25 @@ declare namespace QBusiness {
      */
     applicationId: ApplicationId;
     /**
-     * The storage capacity units you want to provision for your Amazon Q Business index. You can add and remove capacity to fit your usage needs.
+     * The identifier of the Amazon Q Business index.
      */
-    capacityConfiguration?: IndexCapacityConfiguration;
-    /**
-     * The description of the Amazon Q Business index.
-     */
-    description?: Description;
+    indexId: IndexId;
     /**
      * The name of the Amazon Q Business index.
      */
     displayName?: ApplicationName;
     /**
+     * The description of the Amazon Q Business index.
+     */
+    description?: Description;
+    /**
+     * The storage capacity units you want to provision for your Amazon Q Business index. You can add and remove capacity to fit your usage needs.
+     */
+    capacityConfiguration?: IndexCapacityConfiguration;
+    /**
      * Configuration information for document metadata or fields. Document metadata are fields or attributes associated with your documents. For example, the company department name associated with each document. For more information, see Understanding document attributes.
      */
     documentAttributeConfigurations?: DocumentAttributeConfigurations;
-    /**
-     * The identifier of the Amazon Q Business index.
-     */
-    indexId: IndexId;
   }
   export interface UpdateIndexResponse {
   }
@@ -3166,25 +3276,29 @@ declare namespace QBusiness {
      */
     applicationId: ApplicationId;
     /**
-     * The authentication configuration the plugin is using.
+     * The identifier of the plugin.
      */
-    authConfiguration?: PluginAuthConfiguration;
+    pluginId: PluginId;
     /**
      * The name of the plugin.
      */
     displayName?: PluginName;
     /**
-     * The identifier of the plugin.
+     * The status of the plugin. 
      */
-    pluginId: PluginId;
+    state?: PluginState;
     /**
      * The source URL used for plugin configuration.
      */
     serverUrl?: Url;
     /**
-     * The status of the plugin. 
+     * The configuration for a custom plugin.
      */
-    state?: PluginState;
+    customPluginConfiguration?: CustomPluginConfiguration;
+    /**
+     * The authentication configuration the plugin is using.
+     */
+    authConfiguration?: PluginAuthConfiguration;
   }
   export interface UpdatePluginResponse {
   }
@@ -3193,15 +3307,15 @@ declare namespace QBusiness {
      * The identifier of your Amazon Q Business application.
      */
     applicationId: ApplicationId;
+    /**
+     * The identifier of your retriever.
+     */
+    retrieverId: RetrieverId;
     configuration?: RetrieverConfiguration;
     /**
      * The name of your retriever.
      */
     displayName?: RetrieverName;
-    /**
-     * The identifier of your retriever.
-     */
-    retrieverId: RetrieverId;
     /**
      * The Amazon Resource Name (ARN) of an IAM role with permission to access the retriever and required resources. 
      */
@@ -3215,17 +3329,17 @@ declare namespace QBusiness {
      */
     applicationId: ApplicationId;
     /**
-     * The user aliases attached to the user id that are to be deleted.
+     * The email id attached to the user.
      */
-    userAliasesToDelete?: UserAliases;
+    userId: String;
     /**
      * The user aliases attached to the user id that are to be updated.
      */
     userAliasesToUpdate?: UserAliases;
     /**
-     * The email id attached to the user.
+     * The user aliases attached to the user id that are to be deleted.
      */
-    userId: String;
+    userAliasesToDelete?: UserAliases;
   }
   export interface UpdateUserResponse {
     /**
@@ -3233,13 +3347,13 @@ declare namespace QBusiness {
      */
     userAliasesAdded?: UserAliases;
     /**
-     * The user aliases that have been deleted from a user id.
-     */
-    userAliasesDeleted?: UserAliases;
-    /**
      * The user aliases attached to a user id that have been updated.
      */
     userAliasesUpdated?: UserAliases;
+    /**
+     * The user aliases that have been deleted from a user id.
+     */
+    userAliasesDeleted?: UserAliases;
   }
   export interface UpdateWebExperienceRequest {
     /**
@@ -3247,42 +3361,46 @@ declare namespace QBusiness {
      */
     applicationId: ApplicationId;
     /**
+     * The identifier of the Amazon Q Business web experience.
+     */
+    webExperienceId: WebExperienceId;
+    /**
+     * The Amazon Resource Name (ARN) of the role with permission to access the Amazon Q Business web experience and required resources.
+     */
+    roleArn?: RoleArn;
+    /**
      * The authentication configuration of the Amazon Q Business web experience.
      */
     authenticationConfiguration?: WebExperienceAuthConfiguration;
-    /**
-     * Determines whether sample prompts are enabled in the web experience for an end user.
-     */
-    samplePromptsControlMode?: WebExperienceSamplePromptsControlMode;
-    /**
-     * The subtitle of the Amazon Q Business web experience.
-     */
-    subtitle?: WebExperienceSubtitle;
     /**
      * The title of the Amazon Q Business web experience.
      */
     title?: WebExperienceTitle;
     /**
-     * The identifier of the Amazon Q Business web experience.
+     * The subtitle of the Amazon Q Business web experience.
      */
-    webExperienceId: WebExperienceId;
+    subtitle?: WebExperienceSubtitle;
     /**
      * A customized welcome message for an end user in an Amazon Q Business web experience.
      */
     welcomeMessage?: WebExperienceWelcomeMessage;
+    /**
+     * Determines whether sample prompts are enabled in the web experience for an end user.
+     */
+    samplePromptsControlMode?: WebExperienceSamplePromptsControlMode;
   }
   export interface UpdateWebExperienceResponse {
   }
   export type Url = string;
   export interface UserAlias {
     /**
-     * The identifier of the data source that the user aliases are associated with.
-     */
-    dataSourceId?: DataSourceId;
-    /**
      * The identifier of the index that the user aliases are associated with.
      */
     indexId?: IndexId;
+    /**
+     * The identifier of the data source that the user aliases are associated with.
+     */
+    dataSourceId?: DataSourceId;
     /**
      * The identifier of the user id associated with the user aliases.
      */
@@ -3295,19 +3413,27 @@ declare namespace QBusiness {
   export type UserMessage = string;
   export interface UsersAndGroups {
     /**
-     * The user groups associated with a topic control rule.
-     */
-    userGroups?: UserGroups;
-    /**
      * The user ids associated with a topic control rule.
      */
     userIds?: UserIds;
+    /**
+     * The user groups associated with a topic control rule.
+     */
+    userGroups?: UserGroups;
   }
   export interface WebExperience {
+    /**
+     * The identifier of your Amazon Q Business web experience.
+     */
+    webExperienceId?: WebExperienceId;
     /**
      * The Unix timestamp when the Amazon Q Business application was last updated.
      */
     createdAt?: Timestamp;
+    /**
+     * The Unix timestamp when your Amazon Q Business web experience was updated.
+     */
+    updatedAt?: Timestamp;
     /**
      * The endpoint URLs for your Amazon Q Business web experience. The URLs are unique and fully hosted by Amazon Web Services.
      */
@@ -3316,14 +3442,6 @@ declare namespace QBusiness {
      * The status of your Amazon Q Business web experience.
      */
     status?: WebExperienceStatus;
-    /**
-     * The Unix timestamp when your Amazon Q Business web experience was updated.
-     */
-    updatedAt?: Timestamp;
-    /**
-     * The identifier of your Amazon Q Business web experience.
-     */
-    webExperienceId?: WebExperienceId;
   }
   export type WebExperienceArn = string;
   export interface WebExperienceAuthConfiguration {

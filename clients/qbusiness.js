@@ -9,6 +9,7 @@ Object.defineProperty(apiLoader.services['qbusiness'], '2023-11-27', {
   get: function get() {
     var model = require('../apis/qbusiness-2023-11-27.min.json');
     model.paginators = require('../apis/qbusiness-2023-11-27.paginators.json').pagination;
+    model.waiters = require('../apis/qbusiness-2023-11-27.waiters2.json').waiters;
     return model;
   },
   enumerable: true,

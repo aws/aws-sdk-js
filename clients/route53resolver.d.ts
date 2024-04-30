@@ -737,7 +737,11 @@ declare namespace Route53Resolver {
      */
     Name: Name;
     /**
-     *  The DNS query type you want the rule to evaluate. Allowed values are;     A: Returns an IPv4 address.   AAAA: Returns an Ipv6 address.   CAA: Restricts CAs that can create SSL/TLS certifications for the domain.   CNAME: Returns another domain name.   DS: Record that identifies the DNSSEC signing key of a delegated zone.   MX: Specifies mail servers.   NAPTR: Regular-expression-based rewriting of domain names.   NS: Authoritative name servers.   PTR: Maps an IP address to a domain name.   SOA: Start of authority record for the zone.   SPF: Lists the servers authorized to send emails from a domain.   SRV: Application specific values that identify servers.   TXT: Verifies email senders and application-specific values.  
+     *  How you want the the rule to evaluate DNS redirection in the DNS redirection chain, such as CNAME, DNAME, ot ALIAS.   Inspect_Redirection_Domain (Default) inspects all domains in the redirection chain. The individual domains in the redirection chain must be added to the allow domain list.  Trust_Redirection_Domain  inspects only the first domain in the redirection chain. You don't need to add the subsequent domains in the redirection list to the domain alloww list.
+     */
+    FirewallDomainRedirectionAction?: FirewallDomainRedirectionAction;
+    /**
+     *  The DNS query type you want the rule to evaluate. Allowed values are;     A: Returns an IPv4 address.   AAAA: Returns an Ipv6 address.   CAA: Restricts CAs that can create SSL/TLS certifications for the domain.   CNAME: Returns another domain name.   DS: Record that identifies the DNSSEC signing key of a delegated zone.   MX: Specifies mail servers.   NAPTR: Regular-expression-based rewriting of domain names.   NS: Authoritative name servers.   PTR: Maps an IP address to a domain name.   SOA: Start of authority record for the zone.   SPF: Lists the servers authorized to send emails from a domain.   SRV: Application specific values that identify servers.   TXT: Verifies email senders and application-specific values.   A query type you define by using the DNS type ID, for example 28 for AAAA. The values must be defined as TYPENUMBER, where the NUMBER can be 1-65334, for example, TYPE28. For more information, see List of DNS record types.  
      */
     Qtype?: Qtype;
   }
@@ -789,7 +793,7 @@ declare namespace Route53Resolver {
      */
     Name?: Name;
     /**
-     * The ID of one or more security groups that you want to use to control access to this VPC. The security group that you specify must include one or more inbound rules (for inbound Resolver endpoints) or outbound rules (for outbound Resolver endpoints). Inbound and outbound rules must allow TCP and UDP access. For inbound access, open port 53. For outbound access, open the port that you're using for DNS queries on your network.
+     * The ID of one or more security groups that you want to use to control access to this VPC. The security group that you specify must include one or more inbound rules (for inbound Resolver endpoints) or outbound rules (for outbound Resolver endpoints). Inbound and outbound rules must allow TCP and UDP access. For inbound access, open port 53. For outbound access, open the port that you're using for DNS queries on your network. Some security group rules will cause your connection to be tracked. For outbound resolver endpoint, it can potentially impact the maximum queries per second from outbound endpoint to your target name server. For inbound resolver endpoint, it can bring down the overall maximum queries per second per IP address to as low as 1500. To avoid connection tracking caused by security group, see Untracked connections.
      */
     SecurityGroupIds: SecurityGroupIds;
     /**
@@ -922,7 +926,7 @@ declare namespace Route53Resolver {
      */
     FirewallDomainListId: ResourceId;
     /**
-     *  The DNS query type that the rule you are deleting evaluates. Allowed values are;     A: Returns an IPv4 address.   AAAA: Returns an Ipv6 address.   CAA: Restricts CAs that can create SSL/TLS certifications for the domain.   CNAME: Returns another domain name.   DS: Record that identifies the DNSSEC signing key of a delegated zone.   MX: Specifies mail servers.   NAPTR: Regular-expression-based rewriting of domain names.   NS: Authoritative name servers.   PTR: Maps an IP address to a domain name.   SOA: Start of authority record for the zone.   SPF: Lists the servers authorized to send emails from a domain.   SRV: Application specific values that identify servers.   TXT: Verifies email senders and application-specific values.  
+     *  The DNS query type that the rule you are deleting evaluates. Allowed values are;     A: Returns an IPv4 address.   AAAA: Returns an Ipv6 address.   CAA: Restricts CAs that can create SSL/TLS certifications for the domain.   CNAME: Returns another domain name.   DS: Record that identifies the DNSSEC signing key of a delegated zone.   MX: Specifies mail servers.   NAPTR: Regular-expression-based rewriting of domain names.   NS: Authoritative name servers.   PTR: Maps an IP address to a domain name.   SOA: Start of authority record for the zone.   SPF: Lists the servers authorized to send emails from a domain.   SRV: Application specific values that identify servers.   TXT: Verifies email senders and application-specific values.   A query type you define by using the DNS type ID, for example 28 for AAAA. The values must be defined as TYPENUMBER, where the NUMBER can be 1-65334, for example, TYPE28. For more information, see List of DNS record types.  
      */
     Qtype?: Qtype;
   }
@@ -1144,6 +1148,7 @@ declare namespace Route53Resolver {
   export type FirewallDomainListMetadataList = FirewallDomainListMetadata[];
   export type FirewallDomainListStatus = "COMPLETE"|"COMPLETE_IMPORT_FAILED"|"IMPORTING"|"DELETING"|"UPDATING"|string;
   export type FirewallDomainName = string;
+  export type FirewallDomainRedirectionAction = "INSPECT_REDIRECTION_DOMAIN"|"TRUST_REDIRECTION_DOMAIN"|string;
   export type FirewallDomainUpdateOperation = "ADD"|"REMOVE"|"REPLACE"|string;
   export type FirewallDomains = FirewallDomainName[];
   export type FirewallFailOpenStatus = "ENABLED"|"DISABLED"|"USE_LOCAL_RESOURCE_SETTING"|string;
@@ -1197,7 +1202,11 @@ declare namespace Route53Resolver {
      */
     ModificationTime?: Rfc3339TimeString;
     /**
-     *  The DNS query type you want the rule to evaluate. Allowed values are;     A: Returns an IPv4 address.   AAAA: Returns an Ipv6 address.   CAA: Restricts CAs that can create SSL/TLS certifications for the domain.   CNAME: Returns another domain name.   DS: Record that identifies the DNSSEC signing key of a delegated zone.   MX: Specifies mail servers.   NAPTR: Regular-expression-based rewriting of domain names.   NS: Authoritative name servers.   PTR: Maps an IP address to a domain name.   SOA: Start of authority record for the zone.   SPF: Lists the servers authorized to send emails from a domain.   SRV: Application specific values that identify servers.   TXT: Verifies email senders and application-specific values.  
+     *  How you want the the rule to evaluate DNS redirection in the DNS redirection chain, such as CNAME, DNAME, ot ALIAS.   Inspect_Redirection_Domain (Default) inspects all domains in the redirection chain. The individual domains in the redirection chain must be added to the allow domain list.  Trust_Redirection_Domain  inspects only the first domain in the redirection chain. You don't need to add the subsequent domains in the domain in the redirection list to the domain alloww list.
+     */
+    FirewallDomainRedirectionAction?: FirewallDomainRedirectionAction;
+    /**
+     *  The DNS query type you want the rule to evaluate. Allowed values are;     A: Returns an IPv4 address.   AAAA: Returns an Ipv6 address.   CAA: Restricts CAs that can create SSL/TLS certifications for the domain.   CNAME: Returns another domain name.   DS: Record that identifies the DNSSEC signing key of a delegated zone.   MX: Specifies mail servers.   NAPTR: Regular-expression-based rewriting of domain names.   NS: Authoritative name servers.   PTR: Maps an IP address to a domain name.   SOA: Start of authority record for the zone.   SPF: Lists the servers authorized to send emails from a domain.   SRV: Application specific values that identify servers.   TXT: Verifies email senders and application-specific values.   A query type you define by using the DNS type ID, for example 28 for AAAA. The values must be defined as TYPENUMBER, where the NUMBER can be 1-65334, for example, TYPE28. For more information, see List of DNS record types.  
      */
     Qtype?: Qtype;
   }
@@ -2637,7 +2646,11 @@ declare namespace Route53Resolver {
      */
     Name?: Name;
     /**
-     *  The DNS query type you want the rule to evaluate. Allowed values are;     A: Returns an IPv4 address.   AAAA: Returns an Ipv6 address.   CAA: Restricts CAs that can create SSL/TLS certifications for the domain.   CNAME: Returns another domain name.   DS: Record that identifies the DNSSEC signing key of a delegated zone.   MX: Specifies mail servers.   NAPTR: Regular-expression-based rewriting of domain names.   NS: Authoritative name servers.   PTR: Maps an IP address to a domain name.   SOA: Start of authority record for the zone.   SPF: Lists the servers authorized to send emails from a domain.   SRV: Application specific values that identify servers.   TXT: Verifies email senders and application-specific values.  
+     *  How you want the the rule to evaluate DNS redirection in the DNS redirection chain, such as CNAME, DNAME, ot ALIAS.   Inspect_Redirection_Domain (Default) inspects all domains in the redirection chain. The individual domains in the redirection chain must be added to the allow domain list.  Trust_Redirection_Domain  inspects only the first domain in the redirection chain. You don't need to add the subsequent domains in the domain in the redirection list to the domain alloww list.
+     */
+    FirewallDomainRedirectionAction?: FirewallDomainRedirectionAction;
+    /**
+     *  The DNS query type you want the rule to evaluate. Allowed values are;     A: Returns an IPv4 address.   AAAA: Returns an Ipv6 address.   CAA: Restricts CAs that can create SSL/TLS certifications for the domain.   CNAME: Returns another domain name.   DS: Record that identifies the DNSSEC signing key of a delegated zone.   MX: Specifies mail servers.   NAPTR: Regular-expression-based rewriting of domain names.   NS: Authoritative name servers.   PTR: Maps an IP address to a domain name.   SOA: Start of authority record for the zone.   SPF: Lists the servers authorized to send emails from a domain.   SRV: Application specific values that identify servers.   TXT: Verifies email senders and application-specific values.   A query type you define by using the DNS type ID, for example 28 for AAAA. The values must be defined as TYPENUMBER, where the NUMBER can be 1-65334, for example, TYPE28. For more information, see List of DNS record types.  
      */
     Qtype?: Qtype;
   }

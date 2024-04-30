@@ -20,6 +20,14 @@ declare class PinpointSMSVoiceV2 extends Service {
    */
   associateOriginationIdentity(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.AssociateOriginationIdentityResult) => void): Request<PinpointSMSVoiceV2.Types.AssociateOriginationIdentityResult, AWSError>;
   /**
+   * Associate a protect configuration with a configuration set. This replaces the configuration sets current protect configuration. A configuration set can only be associated with one protect configuration at a time. A protect configuration can be associated with multiple configuration sets.
+   */
+  associateProtectConfiguration(params: PinpointSMSVoiceV2.Types.AssociateProtectConfigurationRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.AssociateProtectConfigurationResult) => void): Request<PinpointSMSVoiceV2.Types.AssociateProtectConfigurationResult, AWSError>;
+  /**
+   * Associate a protect configuration with a configuration set. This replaces the configuration sets current protect configuration. A configuration set can only be associated with one protect configuration at a time. A protect configuration can be associated with multiple configuration sets.
+   */
+  associateProtectConfiguration(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.AssociateProtectConfigurationResult) => void): Request<PinpointSMSVoiceV2.Types.AssociateProtectConfigurationResult, AWSError>;
+  /**
    * Creates a new configuration set. After you create the configuration set, you can add one or more event destinations to it. A configuration set is a set of rules that you apply to the SMS and voice messages that you send. When you send a message, you can optionally specify a single configuration set.
    */
   createConfigurationSet(params: PinpointSMSVoiceV2.Types.CreateConfigurationSetRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.CreateConfigurationSetResult) => void): Request<PinpointSMSVoiceV2.Types.CreateConfigurationSetResult, AWSError>;
@@ -51,6 +59,14 @@ declare class PinpointSMSVoiceV2 extends Service {
    * Creates a new pool and associates the specified origination identity to the pool. A pool can include one or more phone numbers and SenderIds that are associated with your Amazon Web Services account. The new pool inherits its configuration from the specified origination identity. This includes keywords, message type, opt-out list, two-way configuration, and self-managed opt-out configuration. Deletion protection isn't inherited from the origination identity and defaults to false. If the origination identity is a phone number and is already associated with another pool, an error is returned. A sender ID can be associated with multiple pools.
    */
   createPool(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.CreatePoolResult) => void): Request<PinpointSMSVoiceV2.Types.CreatePoolResult, AWSError>;
+  /**
+   * Create a new protect configuration. By default all country rule sets for each capability are set to ALLOW. Update the country rule sets using UpdateProtectConfigurationCountryRuleSet. A protect configurations name is stored as a Tag with the key set to Name and value as the name of the protect configuration.
+   */
+  createProtectConfiguration(params: PinpointSMSVoiceV2.Types.CreateProtectConfigurationRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.CreateProtectConfigurationResult) => void): Request<PinpointSMSVoiceV2.Types.CreateProtectConfigurationResult, AWSError>;
+  /**
+   * Create a new protect configuration. By default all country rule sets for each capability are set to ALLOW. Update the country rule sets using UpdateProtectConfigurationCountryRuleSet. A protect configurations name is stored as a Tag with the key set to Name and value as the name of the protect configuration.
+   */
+  createProtectConfiguration(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.CreateProtectConfigurationResult) => void): Request<PinpointSMSVoiceV2.Types.CreateProtectConfigurationResult, AWSError>;
   /**
    * Creates a new registration based on the RegistrationType field. 
    */
@@ -92,6 +108,14 @@ declare class PinpointSMSVoiceV2 extends Service {
    */
   createVerifiedDestinationNumber(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.CreateVerifiedDestinationNumberResult) => void): Request<PinpointSMSVoiceV2.Types.CreateVerifiedDestinationNumberResult, AWSError>;
   /**
+   * Removes the current account default protect configuration.
+   */
+  deleteAccountDefaultProtectConfiguration(params: PinpointSMSVoiceV2.Types.DeleteAccountDefaultProtectConfigurationRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DeleteAccountDefaultProtectConfigurationResult) => void): Request<PinpointSMSVoiceV2.Types.DeleteAccountDefaultProtectConfigurationResult, AWSError>;
+  /**
+   * Removes the current account default protect configuration.
+   */
+  deleteAccountDefaultProtectConfiguration(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DeleteAccountDefaultProtectConfigurationResult) => void): Request<PinpointSMSVoiceV2.Types.DeleteAccountDefaultProtectConfigurationResult, AWSError>;
+  /**
    * Deletes an existing configuration set. A configuration set is a set of rules that you apply to voice and SMS messages that you send. In a configuration set, you can specify a destination for specific types of events related to voice and SMS messages. 
    */
   deleteConfigurationSet(params: PinpointSMSVoiceV2.Types.DeleteConfigurationSetRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DeleteConfigurationSetResult) => void): Request<PinpointSMSVoiceV2.Types.DeleteConfigurationSetResult, AWSError>;
@@ -132,6 +156,14 @@ declare class PinpointSMSVoiceV2 extends Service {
    */
   deleteKeyword(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DeleteKeywordResult) => void): Request<PinpointSMSVoiceV2.Types.DeleteKeywordResult, AWSError>;
   /**
+   * Deletes an account-level monthly spending limit override for sending multimedia messages (MMS). Deleting a spend limit override will set the EnforcedLimit to equal the MaxLimit, which is controlled by Amazon Web Services. For more information on spend limits (quotas) see Quotas for Server Migration Service in the Server Migration Service User Guide.
+   */
+  deleteMediaMessageSpendLimitOverride(params: PinpointSMSVoiceV2.Types.DeleteMediaMessageSpendLimitOverrideRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DeleteMediaMessageSpendLimitOverrideResult) => void): Request<PinpointSMSVoiceV2.Types.DeleteMediaMessageSpendLimitOverrideResult, AWSError>;
+  /**
+   * Deletes an account-level monthly spending limit override for sending multimedia messages (MMS). Deleting a spend limit override will set the EnforcedLimit to equal the MaxLimit, which is controlled by Amazon Web Services. For more information on spend limits (quotas) see Quotas for Server Migration Service in the Server Migration Service User Guide.
+   */
+  deleteMediaMessageSpendLimitOverride(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DeleteMediaMessageSpendLimitOverrideResult) => void): Request<PinpointSMSVoiceV2.Types.DeleteMediaMessageSpendLimitOverrideResult, AWSError>;
+  /**
    * Deletes an existing opt-out list. All opted out phone numbers in the opt-out list are deleted. If the specified opt-out list name doesn't exist or is in-use by an origination phone number or pool, an error is returned.
    */
   deleteOptOutList(params: PinpointSMSVoiceV2.Types.DeleteOptOutListRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DeleteOptOutListResult) => void): Request<PinpointSMSVoiceV2.Types.DeleteOptOutListResult, AWSError>;
@@ -155,6 +187,14 @@ declare class PinpointSMSVoiceV2 extends Service {
    * Deletes an existing pool. Deleting a pool disassociates all origination identities from that pool. If the pool status isn't active or if deletion protection is enabled, an error is returned. A pool is a collection of phone numbers and SenderIds. A pool can include one or more phone numbers and SenderIds that are associated with your Amazon Web Services account.
    */
   deletePool(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DeletePoolResult) => void): Request<PinpointSMSVoiceV2.Types.DeletePoolResult, AWSError>;
+  /**
+   * Permanently delete the protect configuration. The protect configuration must have deletion protection disabled and must not be associated as the account default protect configuration or associated with a configuration set.
+   */
+  deleteProtectConfiguration(params: PinpointSMSVoiceV2.Types.DeleteProtectConfigurationRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DeleteProtectConfigurationResult) => void): Request<PinpointSMSVoiceV2.Types.DeleteProtectConfigurationResult, AWSError>;
+  /**
+   * Permanently delete the protect configuration. The protect configuration must have deletion protection disabled and must not be associated as the account default protect configuration or associated with a configuration set.
+   */
+  deleteProtectConfiguration(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DeleteProtectConfigurationResult) => void): Request<PinpointSMSVoiceV2.Types.DeleteProtectConfigurationResult, AWSError>;
   /**
    * Permanently delete an existing registration from your account.
    */
@@ -268,6 +308,14 @@ declare class PinpointSMSVoiceV2 extends Service {
    */
   describePools(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DescribePoolsResult) => void): Request<PinpointSMSVoiceV2.Types.DescribePoolsResult, AWSError>;
   /**
+   * Retrieves the protect configurations that match any of filters. If a filter isn’t provided then all protect configurations are returned.
+   */
+  describeProtectConfigurations(params: PinpointSMSVoiceV2.Types.DescribeProtectConfigurationsRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DescribeProtectConfigurationsResult) => void): Request<PinpointSMSVoiceV2.Types.DescribeProtectConfigurationsResult, AWSError>;
+  /**
+   * Retrieves the protect configurations that match any of filters. If a filter isn’t provided then all protect configurations are returned.
+   */
+  describeProtectConfigurations(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DescribeProtectConfigurationsResult) => void): Request<PinpointSMSVoiceV2.Types.DescribeProtectConfigurationsResult, AWSError>;
+  /**
    * Retrieves the specified registration attachments or all registration attachments associated with your Amazon Web Services account.
    */
   describeRegistrationAttachments(params: PinpointSMSVoiceV2.Types.DescribeRegistrationAttachmentsRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DescribeRegistrationAttachmentsResult) => void): Request<PinpointSMSVoiceV2.Types.DescribeRegistrationAttachmentsResult, AWSError>;
@@ -356,6 +404,14 @@ declare class PinpointSMSVoiceV2 extends Service {
    */
   disassociateOriginationIdentity(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DisassociateOriginationIdentityResult) => void): Request<PinpointSMSVoiceV2.Types.DisassociateOriginationIdentityResult, AWSError>;
   /**
+   * Disassociate a protect configuration from a configuration set.
+   */
+  disassociateProtectConfiguration(params: PinpointSMSVoiceV2.Types.DisassociateProtectConfigurationRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DisassociateProtectConfigurationResult) => void): Request<PinpointSMSVoiceV2.Types.DisassociateProtectConfigurationResult, AWSError>;
+  /**
+   * Disassociate a protect configuration from a configuration set.
+   */
+  disassociateProtectConfiguration(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DisassociateProtectConfigurationResult) => void): Request<PinpointSMSVoiceV2.Types.DisassociateProtectConfigurationResult, AWSError>;
+  /**
    * Discard the current version of the registration.
    */
   discardRegistrationVersion(params: PinpointSMSVoiceV2.Types.DiscardRegistrationVersionRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DiscardRegistrationVersionResult) => void): Request<PinpointSMSVoiceV2.Types.DiscardRegistrationVersionResult, AWSError>;
@@ -363,6 +419,14 @@ declare class PinpointSMSVoiceV2 extends Service {
    * Discard the current version of the registration.
    */
   discardRegistrationVersion(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DiscardRegistrationVersionResult) => void): Request<PinpointSMSVoiceV2.Types.DiscardRegistrationVersionResult, AWSError>;
+  /**
+   * Retrieve the CountryRuleSet for the specified NumberCapability from a protect configuration.
+   */
+  getProtectConfigurationCountryRuleSet(params: PinpointSMSVoiceV2.Types.GetProtectConfigurationCountryRuleSetRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.GetProtectConfigurationCountryRuleSetResult) => void): Request<PinpointSMSVoiceV2.Types.GetProtectConfigurationCountryRuleSetResult, AWSError>;
+  /**
+   * Retrieve the CountryRuleSet for the specified NumberCapability from a protect configuration.
+   */
+  getProtectConfigurationCountryRuleSet(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.GetProtectConfigurationCountryRuleSetResult) => void): Request<PinpointSMSVoiceV2.Types.GetProtectConfigurationCountryRuleSetResult, AWSError>;
   /**
    * Lists all associated origination identities in your pool. If you specify filters, the output includes information for only those origination identities that meet the filter criteria.
    */
@@ -452,6 +516,14 @@ declare class PinpointSMSVoiceV2 extends Service {
    */
   sendDestinationNumberVerificationCode(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.SendDestinationNumberVerificationCodeResult) => void): Request<PinpointSMSVoiceV2.Types.SendDestinationNumberVerificationCodeResult, AWSError>;
   /**
+   * Creates a new multimedia message (MMS) and sends it to a recipient's phone number. 
+   */
+  sendMediaMessage(params: PinpointSMSVoiceV2.Types.SendMediaMessageRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.SendMediaMessageResult) => void): Request<PinpointSMSVoiceV2.Types.SendMediaMessageResult, AWSError>;
+  /**
+   * Creates a new multimedia message (MMS) and sends it to a recipient's phone number. 
+   */
+  sendMediaMessage(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.SendMediaMessageResult) => void): Request<PinpointSMSVoiceV2.Types.SendMediaMessageResult, AWSError>;
+  /**
    * Creates a new text message and sends it to a recipient's phone number. SMS throughput limits are measured in Message Parts per Second (MPS). Your MPS limit depends on the destination country of your messages, as well as the type of phone number (origination number) that you use to send the message. For more information, see Message Parts per Second (MPS) limits in the Amazon Pinpoint User Guide.
    */
   sendTextMessage(params: PinpointSMSVoiceV2.Types.SendTextMessageRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.SendTextMessageResult) => void): Request<PinpointSMSVoiceV2.Types.SendTextMessageResult, AWSError>;
@@ -468,6 +540,14 @@ declare class PinpointSMSVoiceV2 extends Service {
    */
   sendVoiceMessage(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.SendVoiceMessageResult) => void): Request<PinpointSMSVoiceV2.Types.SendVoiceMessageResult, AWSError>;
   /**
+   * Set a protect configuration as your account default. You can only have one account default protect configuration at a time. The current account default protect configuration is replaced with the provided protect configuration.
+   */
+  setAccountDefaultProtectConfiguration(params: PinpointSMSVoiceV2.Types.SetAccountDefaultProtectConfigurationRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.SetAccountDefaultProtectConfigurationResult) => void): Request<PinpointSMSVoiceV2.Types.SetAccountDefaultProtectConfigurationResult, AWSError>;
+  /**
+   * Set a protect configuration as your account default. You can only have one account default protect configuration at a time. The current account default protect configuration is replaced with the provided protect configuration.
+   */
+  setAccountDefaultProtectConfiguration(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.SetAccountDefaultProtectConfigurationResult) => void): Request<PinpointSMSVoiceV2.Types.SetAccountDefaultProtectConfigurationResult, AWSError>;
+  /**
    * Sets the default message type on a configuration set. Choose the category of SMS messages that you plan to send from this account. If you send account-related messages or time-sensitive messages such as one-time passcodes, choose Transactional. If you plan to send messages that contain marketing material or other promotional content, choose Promotional. This setting applies to your entire Amazon Web Services account.
    */
   setDefaultMessageType(params: PinpointSMSVoiceV2.Types.SetDefaultMessageTypeRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.SetDefaultMessageTypeResult) => void): Request<PinpointSMSVoiceV2.Types.SetDefaultMessageTypeResult, AWSError>;
@@ -483,6 +563,14 @@ declare class PinpointSMSVoiceV2 extends Service {
    * Sets default sender ID on a configuration set. When sending a text message to a destination country that supports sender IDs, the default sender ID on the configuration set specified will be used if no dedicated origination phone numbers or registered sender IDs are available in your account.
    */
   setDefaultSenderId(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.SetDefaultSenderIdResult) => void): Request<PinpointSMSVoiceV2.Types.SetDefaultSenderIdResult, AWSError>;
+  /**
+   * Sets an account level monthly spend limit override for sending MMS messages. The requested spend limit must be less than or equal to the MaxLimit, which is set by Amazon Web Services. 
+   */
+  setMediaMessageSpendLimitOverride(params: PinpointSMSVoiceV2.Types.SetMediaMessageSpendLimitOverrideRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.SetMediaMessageSpendLimitOverrideResult) => void): Request<PinpointSMSVoiceV2.Types.SetMediaMessageSpendLimitOverrideResult, AWSError>;
+  /**
+   * Sets an account level monthly spend limit override for sending MMS messages. The requested spend limit must be less than or equal to the MaxLimit, which is set by Amazon Web Services. 
+   */
+  setMediaMessageSpendLimitOverride(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.SetMediaMessageSpendLimitOverrideResult) => void): Request<PinpointSMSVoiceV2.Types.SetMediaMessageSpendLimitOverrideResult, AWSError>;
   /**
    * Sets an account level monthly spend limit override for sending text messages. The requested spend limit must be less than or equal to the MaxLimit, which is set by Amazon Web Services. 
    */
@@ -548,6 +636,22 @@ declare class PinpointSMSVoiceV2 extends Service {
    */
   updatePool(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.UpdatePoolResult) => void): Request<PinpointSMSVoiceV2.Types.UpdatePoolResult, AWSError>;
   /**
+   * Update the setting for an existing protect configuration.
+   */
+  updateProtectConfiguration(params: PinpointSMSVoiceV2.Types.UpdateProtectConfigurationRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.UpdateProtectConfigurationResult) => void): Request<PinpointSMSVoiceV2.Types.UpdateProtectConfigurationResult, AWSError>;
+  /**
+   * Update the setting for an existing protect configuration.
+   */
+  updateProtectConfiguration(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.UpdateProtectConfigurationResult) => void): Request<PinpointSMSVoiceV2.Types.UpdateProtectConfigurationResult, AWSError>;
+  /**
+   * Update a country rule set to ALLOW or BLOCK messages to be sent to the specified destination counties. You can update one or multiple countries at a time. The updates are only applied to the specified NumberCapability type.
+   */
+  updateProtectConfigurationCountryRuleSet(params: PinpointSMSVoiceV2.Types.UpdateProtectConfigurationCountryRuleSetRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.UpdateProtectConfigurationCountryRuleSetResult) => void): Request<PinpointSMSVoiceV2.Types.UpdateProtectConfigurationCountryRuleSetResult, AWSError>;
+  /**
+   * Update a country rule set to ALLOW or BLOCK messages to be sent to the specified destination counties. You can update one or multiple countries at a time. The updates are only applied to the specified NumberCapability type.
+   */
+  updateProtectConfigurationCountryRuleSet(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.UpdateProtectConfigurationCountryRuleSetResult) => void): Request<PinpointSMSVoiceV2.Types.UpdateProtectConfigurationCountryRuleSetResult, AWSError>;
+  /**
    * Updates the configuration of an existing sender ID.
    */
   updateSenderId(params: PinpointSMSVoiceV2.Types.UpdateSenderIdRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.UpdateSenderIdResult) => void): Request<PinpointSMSVoiceV2.Types.UpdateSenderIdResult, AWSError>;
@@ -576,7 +680,7 @@ declare namespace PinpointSMSVoiceV2 {
     Value: String;
   }
   export type AccountAttributeList = AccountAttribute[];
-  export type AccountAttributeName = "ACCOUNT_TIER"|string;
+  export type AccountAttributeName = "ACCOUNT_TIER"|"DEFAULT_PROTECT_CONFIGURATION_ID"|string;
   export interface AccountLimit {
     /**
      * The name of the attribute to apply the account limit to.
@@ -634,6 +738,34 @@ declare namespace PinpointSMSVoiceV2 {
      */
     IsoCountryCode?: IsoCountryCode;
   }
+  export interface AssociateProtectConfigurationRequest {
+    /**
+     * The unique identifier for the protect configuration.
+     */
+    ProtectConfigurationId: ProtectConfigurationIdOrArn;
+    /**
+     * The name of the ConfigurationSet.
+     */
+    ConfigurationSetName: ConfigurationSetNameOrArn;
+  }
+  export interface AssociateProtectConfigurationResult {
+    /**
+     * The Amazon Resource Name (ARN) of the configuration set.
+     */
+    ConfigurationSetArn: String;
+    /**
+     * The name of the ConfigurationSet.
+     */
+    ConfigurationSetName: ConfigurationSetName;
+    /**
+     * The Amazon Resource Name (ARN) of the protect configuration.
+     */
+    ProtectConfigurationArn: ProtectConfigurationArn;
+    /**
+     * The unique identifier for the protect configuration.
+     */
+    ProtectConfigurationId: ProtectConfigurationId;
+  }
   export type AttachmentBody = Buffer|Uint8Array|Blob|string;
   export type AttachmentStatus = "UPLOAD_IN_PROGRESS"|"UPLOAD_COMPLETE"|"UPLOAD_FAILED"|"DELETED"|string;
   export type AttachmentUploadErrorReason = "INTERNAL_ERROR"|string;
@@ -642,7 +774,7 @@ declare namespace PinpointSMSVoiceV2 {
   export type ClientToken = string;
   export interface CloudWatchLogsDestination {
     /**
-     * The Amazon Resource Name (ARN) of an Amazon Identity and Access Management (IAM) role that is able to write event data to an Amazon CloudWatch destination.
+     * The Amazon Resource Name (ARN) of an Identity and Access Management role that is able to write event data to an Amazon CloudWatch destination.
      */
     IamRoleArn: IamRoleArn;
     /**
@@ -661,7 +793,7 @@ declare namespace PinpointSMSVoiceV2 {
     Values: FilterValueList;
   }
   export type ConfigurationSetFilterList = ConfigurationSetFilter[];
-  export type ConfigurationSetFilterName = "event-destination-name"|"matching-event-types"|"default-message-type"|"default-sender-id"|string;
+  export type ConfigurationSetFilterName = "event-destination-name"|"matching-event-types"|"default-message-type"|"default-sender-id"|"protect-configuration-id"|string;
   export interface ConfigurationSetInformation {
     /**
      * The Resource Name (ARN) of the ConfigurationSet.
@@ -687,6 +819,10 @@ declare namespace PinpointSMSVoiceV2 {
      * The time when the ConfigurationSet was created, in UNIX epoch time format.
      */
     CreatedTimestamp: Timestamp;
+    /**
+     * The unique identifier for the protect configuration.
+     */
+    ProtectConfigurationId?: ProtectConfigurationIdOrArn;
   }
   export type ConfigurationSetInformationList = ConfigurationSetInformation[];
   export type ConfigurationSetName = string;
@@ -741,7 +877,7 @@ declare namespace PinpointSMSVoiceV2 {
      */
     MatchingEventTypes: EventTypeList;
     /**
-     * An object that contains information about an event destination for logging to Amazon CloudWatch logs.
+     * An object that contains information about an event destination for logging to Amazon CloudWatch Logs.
      */
     CloudWatchLogsDestination?: CloudWatchLogsDestination;
     /**
@@ -882,6 +1018,46 @@ declare namespace PinpointSMSVoiceV2 {
      * The time when the pool was created, in UNIX epoch time format.
      */
     CreatedTimestamp?: Timestamp;
+  }
+  export interface CreateProtectConfigurationRequest {
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don't specify a client token, a randomly generated token is used for the request to ensure idempotency.
+     */
+    ClientToken?: ClientToken;
+    /**
+     * When set to true deletion protection is enabled. By default this is set to false. 
+     */
+    DeletionProtectionEnabled?: Boolean;
+    /**
+     * An array of key and value pair tags that are associated with the resource.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateProtectConfigurationResult {
+    /**
+     * The Amazon Resource Name (ARN) of the protect configuration.
+     */
+    ProtectConfigurationArn: ProtectConfigurationArn;
+    /**
+     * The unique identifier for the protect configuration.
+     */
+    ProtectConfigurationId: ProtectConfigurationId;
+    /**
+     * The time when the protect configuration was created, in UNIX epoch time format.
+     */
+    CreatedTimestamp: Timestamp;
+    /**
+     * This is true if the protect configuration is set as your account default protect configuration.
+     */
+    AccountDefault: PrimitiveBoolean;
+    /**
+     * When set to true deletion protection is enabled. By default this is set to false. 
+     */
+    DeletionProtectionEnabled: PrimitiveBoolean;
+    /**
+     * An array of key and value pair tags that are associated with the resource.
+     */
+    Tags?: TagList;
   }
   export interface CreateRegistrationAssociationRequest {
     /**
@@ -1083,6 +1259,18 @@ declare namespace PinpointSMSVoiceV2 {
      */
     CreatedTimestamp: Timestamp;
   }
+  export interface DeleteAccountDefaultProtectConfigurationRequest {
+  }
+  export interface DeleteAccountDefaultProtectConfigurationResult {
+    /**
+     * The Amazon Resource Name (ARN) of the account default protect configuration.
+     */
+    DefaultProtectConfigurationArn: ProtectConfigurationArn;
+    /**
+     * The unique identifier of the account default protect configuration.
+     */
+    DefaultProtectConfigurationId: ProtectConfigurationId;
+  }
   export interface DeleteConfigurationSetRequest {
     /**
      * The name of the configuration set or the configuration set ARN that you want to delete. The ConfigurationSetName and ConfigurationSetArn can be found using the DescribeConfigurationSets action.
@@ -1211,6 +1399,14 @@ declare namespace PinpointSMSVoiceV2 {
      */
     KeywordAction?: KeywordAction;
   }
+  export interface DeleteMediaMessageSpendLimitOverrideRequest {
+  }
+  export interface DeleteMediaMessageSpendLimitOverrideResult {
+    /**
+     * The current monthly limit, in US dollars.
+     */
+    MonthlyLimit?: MonthlyLimit;
+  }
   export interface DeleteOptOutListRequest {
     /**
      * The OptOutListName or OptOutListArn of the OptOutList to delete. You can use DescribeOptOutLists to find the values for OptOutListName and OptOutListArn.
@@ -1314,6 +1510,34 @@ declare namespace PinpointSMSVoiceV2 {
      * The time when the pool was created, in UNIX epoch time format.
      */
     CreatedTimestamp?: Timestamp;
+  }
+  export interface DeleteProtectConfigurationRequest {
+    /**
+     * The unique identifier for the protect configuration.
+     */
+    ProtectConfigurationId: ProtectConfigurationIdOrArn;
+  }
+  export interface DeleteProtectConfigurationResult {
+    /**
+     * The Amazon Resource Name (ARN) of the protect configuration.
+     */
+    ProtectConfigurationArn: ProtectConfigurationArn;
+    /**
+     * The unique identifier for the protect configuration.
+     */
+    ProtectConfigurationId: ProtectConfigurationId;
+    /**
+     * The time when the protect configuration was created, in UNIX epoch time format.
+     */
+    CreatedTimestamp: Timestamp;
+    /**
+     * This is true if the protect configuration is set as your account default protect configuration.
+     */
+    AccountDefault: PrimitiveBoolean;
+    /**
+     * The status of deletion protection for the protect configuration. When set to true deletion protection is enabled. By default this is set to false. 
+     */
+    DeletionProtectionEnabled: PrimitiveBoolean;
   }
   export interface DeleteRegistrationAttachmentRequest {
     /**
@@ -1696,6 +1920,34 @@ declare namespace PinpointSMSVoiceV2 {
      */
     NextToken?: NextToken;
   }
+  export interface DescribeProtectConfigurationsRequest {
+    /**
+     * An array of protect configuration identifiers to search for.
+     */
+    ProtectConfigurationIds?: ProtectConfigurationIdList;
+    /**
+     * An array of ProtectConfigurationFilter objects to filter the results.
+     */
+    Filters?: ProtectConfigurationFilterList;
+    /**
+     * The token to be used for the next set of paginated results. You don't need to supply a value for this field in the initial request.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return per each request.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface DescribeProtectConfigurationsResult {
+    /**
+     * An array of ProtectConfigurationInformation objects that contain the details for the request. 
+     */
+    ProtectConfigurations?: ProtectConfigurationInformationList;
+    /**
+     * The token to be used for the next set of paginated results. You don't need to supply a value for this field in the initial request.
+     */
+    NextToken?: NextToken;
+  }
   export interface DescribeRegistrationAttachmentsRequest {
     /**
      * The unique identifier of registration attachments to find. This is an array of RegistrationAttachmentId.
@@ -2060,6 +2312,34 @@ declare namespace PinpointSMSVoiceV2 {
      */
     IsoCountryCode?: IsoCountryCode;
   }
+  export interface DisassociateProtectConfigurationRequest {
+    /**
+     * The unique identifier for the protect configuration.
+     */
+    ProtectConfigurationId: ProtectConfigurationIdOrArn;
+    /**
+     * The name of the ConfigurationSet.
+     */
+    ConfigurationSetName: ConfigurationSetNameOrArn;
+  }
+  export interface DisassociateProtectConfigurationResult {
+    /**
+     * The Amazon Resource Name (ARN) of the configuration set.
+     */
+    ConfigurationSetArn: String;
+    /**
+     * The name of the ConfigurationSet.
+     */
+    ConfigurationSetName: ConfigurationSetName;
+    /**
+     * The Amazon Resource Name (ARN) of the protect configuration.
+     */
+    ProtectConfigurationArn: ProtectConfigurationArn;
+    /**
+     * The unique identifier for the protect configuration.
+     */
+    ProtectConfigurationId: ProtectConfigurationId;
+  }
   export interface DiscardRegistrationVersionRequest {
     /**
      * The unique identifier for the registration.
@@ -2116,7 +2396,7 @@ declare namespace PinpointSMSVoiceV2 {
   }
   export type EventDestinationList = EventDestination[];
   export type EventDestinationName = string;
-  export type EventType = "ALL"|"TEXT_ALL"|"TEXT_SENT"|"TEXT_PENDING"|"TEXT_QUEUED"|"TEXT_SUCCESSFUL"|"TEXT_DELIVERED"|"TEXT_INVALID"|"TEXT_INVALID_MESSAGE"|"TEXT_UNREACHABLE"|"TEXT_CARRIER_UNREACHABLE"|"TEXT_BLOCKED"|"TEXT_CARRIER_BLOCKED"|"TEXT_SPAM"|"TEXT_UNKNOWN"|"TEXT_TTL_EXPIRED"|"VOICE_ALL"|"VOICE_INITIATED"|"VOICE_RINGING"|"VOICE_ANSWERED"|"VOICE_COMPLETED"|"VOICE_BUSY"|"VOICE_NO_ANSWER"|"VOICE_FAILED"|"VOICE_TTL_EXPIRED"|string;
+  export type EventType = "ALL"|"TEXT_ALL"|"TEXT_SENT"|"TEXT_PENDING"|"TEXT_QUEUED"|"TEXT_SUCCESSFUL"|"TEXT_DELIVERED"|"TEXT_INVALID"|"TEXT_INVALID_MESSAGE"|"TEXT_UNREACHABLE"|"TEXT_CARRIER_UNREACHABLE"|"TEXT_BLOCKED"|"TEXT_CARRIER_BLOCKED"|"TEXT_SPAM"|"TEXT_UNKNOWN"|"TEXT_TTL_EXPIRED"|"VOICE_ALL"|"VOICE_INITIATED"|"VOICE_RINGING"|"VOICE_ANSWERED"|"VOICE_COMPLETED"|"VOICE_BUSY"|"VOICE_NO_ANSWER"|"VOICE_FAILED"|"VOICE_TTL_EXPIRED"|"MEDIA_ALL"|"MEDIA_PENDING"|"MEDIA_QUEUED"|"MEDIA_SUCCESSFUL"|"MEDIA_DELIVERED"|"MEDIA_INVALID"|"MEDIA_INVALID_MESSAGE"|"MEDIA_UNREACHABLE"|"MEDIA_CARRIER_UNREACHABLE"|"MEDIA_BLOCKED"|"MEDIA_CARRIER_BLOCKED"|"MEDIA_SPAM"|"MEDIA_UNKNOWN"|"MEDIA_TTL_EXPIRED"|"MEDIA_FILE_INACCESSIBLE"|"MEDIA_FILE_TYPE_UNSUPPORTED"|"MEDIA_FILE_SIZE_EXCEEDED"|string;
   export type EventTypeList = EventType[];
   export type FieldPath = string;
   export type FieldPathList = FieldPath[];
@@ -2124,6 +2404,34 @@ declare namespace PinpointSMSVoiceV2 {
   export type FieldType = "SELECT"|"TEXT"|"ATTACHMENT"|string;
   export type FilterValue = string;
   export type FilterValueList = FilterValue[];
+  export interface GetProtectConfigurationCountryRuleSetRequest {
+    /**
+     * The unique identifier for the protect configuration.
+     */
+    ProtectConfigurationId: ProtectConfigurationIdOrArn;
+    /**
+     * The capability type to return the CountryRuleSet for. Valid values are SMS, VOICE, or MMS.
+     */
+    NumberCapability: NumberCapability;
+  }
+  export interface GetProtectConfigurationCountryRuleSetResult {
+    /**
+     * The Amazon Resource Name (ARN) of the protect configuration.
+     */
+    ProtectConfigurationArn: ProtectConfigurationArn;
+    /**
+     * The unique identifier for the protect configuration.
+     */
+    ProtectConfigurationId: ProtectConfigurationId;
+    /**
+     * The capability type associated with the returned ProtectConfigurationCountryRuleSetInformation objects.
+     */
+    NumberCapability: NumberCapability;
+    /**
+     * A map of ProtectConfigurationCountryRuleSetInformation objects that contain the details for the requested NumberCapability. The Key is the two-letter ISO country code. For a list of supported ISO country codes, see Supported countries and regions (SMS channel) in the Amazon Pinpoint SMS user guide.
+     */
+    CountryRuleSet: ProtectConfigurationCountryRuleSet;
+  }
   export type IamRoleArn = string;
   export type Integer = number;
   export type IsoCountryCode = string;
@@ -2160,7 +2468,7 @@ declare namespace PinpointSMSVoiceV2 {
   export type KeywordMessage = string;
   export interface KinesisFirehoseDestination {
     /**
-     * The ARN of an Amazon Identity and Access Management (IAM) role that is able to write event data to an Amazon Firehose destination.
+     * The ARN of an Identity and Access Management role that is able to write event data to an Amazon Kinesis Data Firehose destination.
      */
     IamRoleArn: IamRoleArn;
     /**
@@ -2264,12 +2572,15 @@ declare namespace PinpointSMSVoiceV2 {
   export type LogGroupArn = string;
   export type MaxPrice = string;
   export type MaxResults = number;
+  export type MediaMessageOriginationIdentity = string;
+  export type MediaUrlList = MediaUrlValue[];
+  export type MediaUrlValue = string;
   export type MessageType = "TRANSACTIONAL"|"PROMOTIONAL"|string;
   export type MessageTypeList = MessageType[];
   export type MonthlyLimit = number;
   export type NextToken = string;
   export type NonEmptyTagList = Tag[];
-  export type NumberCapability = "SMS"|"VOICE"|string;
+  export type NumberCapability = "SMS"|"VOICE"|"MMS"|string;
   export type NumberCapabilityList = NumberCapability[];
   export type NumberStatus = "PENDING"|"ACTIVE"|"ASSOCIATING"|"DISASSOCIATING"|"DELETED"|string;
   export type NumberType = "SHORT_CODE"|"LONG_CODE"|"TOLL_FREE"|"TEN_DLC"|"SIMULATOR"|string;
@@ -2514,6 +2825,53 @@ declare namespace PinpointSMSVoiceV2 {
   export type PoolStatus = "CREATING"|"ACTIVE"|"DELETING"|string;
   export type PrimitiveBoolean = boolean;
   export type PrimitiveLong = number;
+  export type ProtectConfigurationArn = string;
+  export type ProtectConfigurationCountryRuleSet = {[key: string]: ProtectConfigurationCountryRuleSetInformation};
+  export interface ProtectConfigurationCountryRuleSetInformation {
+    /**
+     * The types of protection that can be used.
+     */
+    ProtectStatus: ProtectStatus;
+  }
+  export interface ProtectConfigurationFilter {
+    /**
+     * The name of the attribute to filter on.
+     */
+    Name: ProtectConfigurationFilterName;
+    /**
+     * An array of values to filter for.
+     */
+    Values: FilterValueList;
+  }
+  export type ProtectConfigurationFilterList = ProtectConfigurationFilter[];
+  export type ProtectConfigurationFilterName = "account-default"|"deletion-protection-enabled"|string;
+  export type ProtectConfigurationId = string;
+  export type ProtectConfigurationIdList = ProtectConfigurationIdOrArn[];
+  export type ProtectConfigurationIdOrArn = string;
+  export interface ProtectConfigurationInformation {
+    /**
+     * The Amazon Resource Name (ARN) of the protect configuration.
+     */
+    ProtectConfigurationArn: ProtectConfigurationArn;
+    /**
+     * The unique identifier for the protect configuration.
+     */
+    ProtectConfigurationId: ProtectConfigurationId;
+    /**
+     * The time when the protect configuration was created, in UNIX epoch time format.
+     */
+    CreatedTimestamp: Timestamp;
+    /**
+     * This is true if the protect configuration is set as your account default protect configuration.
+     */
+    AccountDefault: PrimitiveBoolean;
+    /**
+     * The status of deletion protection for the protect configuration. When set to true deletion protection is enabled. By default this is set to false. 
+     */
+    DeletionProtectionEnabled: PrimitiveBoolean;
+  }
+  export type ProtectConfigurationInformationList = ProtectConfigurationInformation[];
+  export type ProtectStatus = "ALLOW"|"BLOCK"|string;
   export interface PutKeywordRequest {
     /**
      * The origination identity to use such as a PhoneNumberId, PhoneNumberArn, SenderId or SenderIdArn. You can use DescribePhoneNumbers get the values for PhoneNumberId and PhoneNumberArn while DescribeSenderIds can be used to get the values for SenderId and SenderIdArn.
@@ -3392,6 +3750,54 @@ declare namespace PinpointSMSVoiceV2 {
      */
     MessageId: String;
   }
+  export interface SendMediaMessageRequest {
+    /**
+     * The destination phone number in E.164 format.
+     */
+    DestinationPhoneNumber: PhoneNumber;
+    /**
+     * The origination identity of the message. This can be either the PhoneNumber, PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn, PoolId, or PoolArn.
+     */
+    OriginationIdentity: MediaMessageOriginationIdentity;
+    /**
+     * The text body of the message.
+     */
+    MessageBody?: TextMessageBody;
+    /**
+     * An array of URLs to each media file to send.  The media files have to be stored in a publicly available S3 bucket. Supported media file formats are listed in MMS file types, size and character limits. For more information on creating an S3 bucket and managing objects, see Creating a bucket and Uploading objects in the S3 user guide.
+     */
+    MediaUrls?: MediaUrlList;
+    /**
+     * The name of the configuration set to use. This can be either the ConfigurationSetName or ConfigurationSetArn.
+     */
+    ConfigurationSetName?: ConfigurationSetNameOrArn;
+    /**
+     * The maximum amount that you want to spend, in US dollars, per each MMS message.
+     */
+    MaxPrice?: MaxPrice;
+    /**
+     * How long the text message is valid for. By default this is 72 hours.
+     */
+    TimeToLive?: TimeToLive;
+    /**
+     * You can specify custom data in this field. If you do, that data is logged to the event destination.
+     */
+    Context?: ContextMap;
+    /**
+     * When set to true, the message is checked and validated, but isn't sent to the end recipient.
+     */
+    DryRun?: PrimitiveBoolean;
+    /**
+     * The unique identifier of the protect configuration to use.
+     */
+    ProtectConfigurationId?: ProtectConfigurationIdOrArn;
+  }
+  export interface SendMediaMessageResult {
+    /**
+     * The unique identifier for the message.
+     */
+    MessageId?: String;
+  }
   export interface SendTextMessageRequest {
     /**
      * The destination phone number in E.164 format.
@@ -3437,6 +3843,10 @@ declare namespace PinpointSMSVoiceV2 {
      * When set to true, the message is checked and validated, but isn't sent to the end recipient.
      */
     DryRun?: PrimitiveBoolean;
+    /**
+     * The unique identifier for the protect configuration.
+     */
+    ProtectConfigurationId?: ProtectConfigurationIdOrArn;
   }
   export interface SendTextMessageResult {
     /**
@@ -3485,6 +3895,10 @@ declare namespace PinpointSMSVoiceV2 {
      * When set to true, the message is checked and validated, but isn't sent to the end recipient.
      */
     DryRun?: PrimitiveBoolean;
+    /**
+     * The unique identifier for the protect configuration.
+     */
+    ProtectConfigurationId?: ProtectConfigurationIdOrArn;
   }
   export interface SendVoiceMessageResult {
     /**
@@ -3552,6 +3966,22 @@ declare namespace PinpointSMSVoiceV2 {
   export type SenderIdInformationList = SenderIdInformation[];
   export type SenderIdList = SenderIdAndCountry[];
   export type SenderIdOrArn = string;
+  export interface SetAccountDefaultProtectConfigurationRequest {
+    /**
+     * The unique identifier for the protect configuration.
+     */
+    ProtectConfigurationId: ProtectConfigurationIdOrArn;
+  }
+  export interface SetAccountDefaultProtectConfigurationResult {
+    /**
+     * The Amazon Resource Name (ARN) of the account default protect configuration.
+     */
+    DefaultProtectConfigurationArn: ProtectConfigurationArn;
+    /**
+     * The unique identifier of the account default protect configuration.
+     */
+    DefaultProtectConfigurationId: ProtectConfigurationId;
+  }
   export interface SetDefaultMessageTypeRequest {
     /**
      * The configuration set to update with a new default message type. This field can be the ConsigurationSetName or ConfigurationSetArn.
@@ -3599,6 +4029,18 @@ declare namespace PinpointSMSVoiceV2 {
      * The default sender ID to set for the ConfigurationSet.
      */
     SenderId?: SenderId;
+  }
+  export interface SetMediaMessageSpendLimitOverrideRequest {
+    /**
+     * The new monthly limit to enforce on text messages.
+     */
+    MonthlyLimit: MonthlyLimit;
+  }
+  export interface SetMediaMessageSpendLimitOverrideResult {
+    /**
+     * The current monthly limit to enforce on sending text messages.
+     */
+    MonthlyLimit?: MonthlyLimit;
   }
   export interface SetTextMessageSpendLimitOverrideRequest {
     /**
@@ -3650,7 +4092,7 @@ declare namespace PinpointSMSVoiceV2 {
     Overridden: PrimitiveBoolean;
   }
   export type SpendLimitList = SpendLimit[];
-  export type SpendLimitName = "TEXT_MESSAGE_MONTHLY_SPEND_LIMIT"|"VOICE_MESSAGE_MONTHLY_SPEND_LIMIT"|string;
+  export type SpendLimitName = "TEXT_MESSAGE_MONTHLY_SPEND_LIMIT"|"VOICE_MESSAGE_MONTHLY_SPEND_LIMIT"|"MEDIA_MESSAGE_MONTHLY_SPEND_LIMIT"|string;
   export type String = string;
   export type StringList = String[];
   export type StringMap = {[key: string]: String};
@@ -3986,6 +4428,70 @@ declare namespace PinpointSMSVoiceV2 {
      * The time when the pool was created, in UNIX epoch time format.
      */
     CreatedTimestamp?: Timestamp;
+  }
+  export interface UpdateProtectConfigurationCountryRuleSetRequest {
+    /**
+     * The unique identifier for the protect configuration.
+     */
+    ProtectConfigurationId: ProtectConfigurationIdOrArn;
+    /**
+     * The number capability to apply the CountryRuleSetUpdates updates to.
+     */
+    NumberCapability: NumberCapability;
+    /**
+     * A map of ProtectConfigurationCountryRuleSetInformation objects that contain the details for the requested NumberCapability. The Key is the two-letter ISO country code. For a list of supported ISO country codes, see Supported countries and regions (SMS channel) in the Amazon Pinpoint SMS user guide.
+     */
+    CountryRuleSetUpdates: ProtectConfigurationCountryRuleSet;
+  }
+  export interface UpdateProtectConfigurationCountryRuleSetResult {
+    /**
+     * The Amazon Resource Name (ARN) of the protect configuration.
+     */
+    ProtectConfigurationArn: ProtectConfigurationArn;
+    /**
+     * The unique identifier for the protect configuration.
+     */
+    ProtectConfigurationId: ProtectConfigurationId;
+    /**
+     * The number capability that was updated
+     */
+    NumberCapability: NumberCapability;
+    /**
+     * An array of ProtectConfigurationCountryRuleSetInformation containing the rules for the NumberCapability.
+     */
+    CountryRuleSet: ProtectConfigurationCountryRuleSet;
+  }
+  export interface UpdateProtectConfigurationRequest {
+    /**
+     * The unique identifier for the protect configuration.
+     */
+    ProtectConfigurationId: ProtectConfigurationIdOrArn;
+    /**
+     * When set to true deletion protection is enabled. By default this is set to false. 
+     */
+    DeletionProtectionEnabled?: Boolean;
+  }
+  export interface UpdateProtectConfigurationResult {
+    /**
+     * The Amazon Resource Name (ARN) of the protect configuration.
+     */
+    ProtectConfigurationArn: ProtectConfigurationArn;
+    /**
+     * The unique identifier for the protect configuration.
+     */
+    ProtectConfigurationId: ProtectConfigurationId;
+    /**
+     * The time when the protect configuration was created, in UNIX epoch time format.
+     */
+    CreatedTimestamp: Timestamp;
+    /**
+     * This is true if the protect configuration is set as your account default protect configuration.
+     */
+    AccountDefault: PrimitiveBoolean;
+    /**
+     * The status of deletion protection for the protect configuration. When set to true deletion protection is enabled. By default this is set to false. 
+     */
+    DeletionProtectionEnabled: PrimitiveBoolean;
   }
   export interface UpdateSenderIdRequest {
     /**

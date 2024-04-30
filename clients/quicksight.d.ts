@@ -1292,6 +1292,14 @@ declare class QuickSight extends Service {
    */
   updateRoleCustomPermission(callback?: (err: AWSError, data: QuickSight.Types.UpdateRoleCustomPermissionResponse) => void): Request<QuickSight.Types.UpdateRoleCustomPermissionResponse, AWSError>;
   /**
+   * Updates the SPICE capacity configuration for a Amazon QuickSight account.
+   */
+  updateSPICECapacityConfiguration(params: QuickSight.Types.UpdateSPICECapacityConfigurationRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateSPICECapacityConfigurationResponse) => void): Request<QuickSight.Types.UpdateSPICECapacityConfigurationResponse, AWSError>;
+  /**
+   * Updates the SPICE capacity configuration for a Amazon QuickSight account.
+   */
+  updateSPICECapacityConfiguration(callback?: (err: AWSError, data: QuickSight.Types.UpdateSPICECapacityConfigurationResponse) => void): Request<QuickSight.Types.UpdateSPICECapacityConfigurationResponse, AWSError>;
+  /**
    * Updates a template from an existing Amazon QuickSight analysis or another template.
    */
   updateTemplate(params: QuickSight.Types.UpdateTemplateRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateTemplateResponse) => void): Request<QuickSight.Types.UpdateTemplateResponse, AWSError>;
@@ -1703,10 +1711,20 @@ declare namespace QuickSight {
      * The Q search bar that you want to use for anonymous user embedding.
      */
     QSearchBar?: AnonymousUserQSearchBarEmbeddingConfiguration;
+    /**
+     * The Generative Q&amp;A experience that you want to use for anonymous user embedding.
+     */
+    GenerativeQnA?: AnonymousUserGenerativeQnAEmbeddingConfiguration;
+  }
+  export interface AnonymousUserGenerativeQnAEmbeddingConfiguration {
+    /**
+     * The Amazon QuickSight Q topic ID of the new reader experience topic that you want the anonymous user to see first. This ID is included in the output URL. When the URL in response is accessed, Amazon QuickSight renders the Generative Q&amp;A experience with this new reader experience topic pre selected. The Amazon Resource Name (ARN) of this Q new reader experience topic must be included in the AuthorizedResourceArns parameter. Otherwise, the request fails with an InvalidParameterValueException error.
+     */
+    InitialTopicId: RestrictiveResourceId;
   }
   export interface AnonymousUserQSearchBarEmbeddingConfiguration {
     /**
-     * The QuickSight Q topic ID of the topic that you want the anonymous user to see first. This ID is included in the output URL. When the URL in response is accessed, Amazon QuickSight renders the Q search bar with this topic pre-selected. The Amazon Resource Name (ARN) of this Q topic must be included in the AuthorizedResourceArns parameter. Otherwise, the request will fail with InvalidParameterValueException.
+     * The Amazon QuickSight Q topic ID of the legacy topic that you want the anonymous user to see first. This ID is included in the output URL. When the URL in response is accessed, Amazon QuickSight renders the Q search bar with this legacy topic pre-selected. The Amazon Resource Name (ARN) of this Q legacy topic must be included in the AuthorizedResourceArns parameter. Otherwise, the request fails with an InvalidParameterValueException error.
      */
     InitialTopicId: RestrictiveResourceId;
   }
@@ -3724,7 +3742,7 @@ declare namespace QuickSight {
     /**
      * The edition of Amazon QuickSight that you want your account to have. Currently, you can choose from ENTERPRISE or ENTERPRISE_AND_Q. If you choose ENTERPRISE_AND_Q, the following parameters are required:    FirstName     LastName     EmailAddress     ContactNumber   
      */
-    Edition: Edition;
+    Edition?: Edition;
     /**
      * The method that you want to use to authenticate your Amazon QuickSight account. If you choose ACTIVE_DIRECTORY, provide an ActiveDirectoryName and an AdminGroup associated with your Active Directory. If you choose IAM_IDENTITY_CENTER, provide an AdminGroup associated with your IAM Identity Center account.
      */
@@ -3754,7 +3772,7 @@ declare namespace QuickSight {
      */
     DirectoryId?: String;
     /**
-     * The admin group associated with your Active Directory or IAM Identity Center account. This field is required if ACTIVE_DIRECTORY or IAM_IDENTITY_CENTER is the selected authentication method of the new Amazon QuickSight account. For more information about using IAM Identity Center in Amazon QuickSight, see Using IAM Identity Center with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide. For more information about using Active Directory in Amazon QuickSight, see Using Active Directory with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide.
+     * The admin group associated with your Active Directory or IAM Identity Center account. Either this field or the AdminProGroup field is required if ACTIVE_DIRECTORY or IAM_IDENTITY_CENTER is the selected authentication method of the new Amazon QuickSight account. For more information about using IAM Identity Center in Amazon QuickSight, see Using IAM Identity Center with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide. For more information about using Active Directory in Amazon QuickSight, see Using Active Directory with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide.
      */
     AdminGroup?: GroupsList;
     /**
@@ -3765,6 +3783,18 @@ declare namespace QuickSight {
      * The reader group associated with your Active Directory or IAM Identity Center account. For more information about using IAM Identity Center in Amazon QuickSight, see Using IAM Identity Center with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide. For more information about using Active Directory in Amazon QuickSight, see Using Active Directory with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide.
      */
     ReaderGroup?: GroupsList;
+    /**
+     * The admin pro group associated with your Active Directory or IAM Identity Center account. Either this field or the AdminGroup field is required if ACTIVE_DIRECTORY or IAM_IDENTITY_CENTER is the selected authentication method of the new Amazon QuickSight account. For more information about using IAM Identity Center in Amazon QuickSight, see Using IAM Identity Center with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide. For more information about using Active Directory in Amazon QuickSight, see Using Active Directory with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide.
+     */
+    AdminProGroup?: GroupsList;
+    /**
+     * The author pro group associated with your Active Directory or IAM Identity Center account. For more information about using IAM Identity Center in Amazon QuickSight, see Using IAM Identity Center with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide. For more information about using Active Directory in Amazon QuickSight, see Using Active Directory with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide.
+     */
+    AuthorProGroup?: GroupsList;
+    /**
+     * The reader pro group associated with your Active Directory or IAM Identity Center account. For more information about using IAM Identity Center in Amazon QuickSight, see Using IAM Identity Center with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide. For more information about using Active Directory in Amazon QuickSight, see Using Active Directory with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide.
+     */
+    ReaderProGroup?: GroupsList;
     /**
      * The first name of the author of the Amazon QuickSight account to use for future communications. This field is required if ENTERPPRISE_AND_Q is the selected edition of the new Amazon QuickSight account.
      */
@@ -9901,6 +9931,16 @@ declare namespace QuickSight {
      */
     ForegroundColor?: ConditionalFormattingColor;
   }
+  export interface GaugeChartColorConfiguration {
+    /**
+     * The foreground color configuration of a GaugeChartVisual.
+     */
+    ForegroundColor?: HexColor;
+    /**
+     * The background color configuration of a GaugeChartVisual.
+     */
+    BackgroundColor?: HexColor;
+  }
   export interface GaugeChartConditionalFormatting {
     /**
      * Conditional formatting options of a GaugeChartVisual.
@@ -9939,6 +9979,10 @@ declare namespace QuickSight {
      * The visual palette configuration of a GaugeChartVisual.
      */
     VisualPalette?: VisualPalette;
+    /**
+     * The color configuration of a GaugeChartVisual.
+     */
+    ColorConfiguration?: GaugeChartColorConfiguration;
     /**
      * The general visual interactions setup for a visual.
      */
@@ -10074,7 +10118,7 @@ declare namespace QuickSight {
      */
     UserArn: Arn;
     /**
-     * The experience you are embedding. For registered users, you can embed Amazon QuickSight dashboards, Amazon QuickSight visuals, the Amazon QuickSight Q search bar, or the entire Amazon QuickSight console.
+     * The experience that you want to embed. For registered users, you can embed Amazon QuickSight dashboards, Amazon QuickSight visuals, the Amazon QuickSight Q search bar, the Amazon QuickSight Generative Q&amp;A experience, or the entire Amazon QuickSight console.
      */
     ExperienceConfiguration: RegisteredUserEmbeddingExperienceConfiguration;
     /**
@@ -10084,7 +10128,7 @@ declare namespace QuickSight {
   }
   export interface GenerateEmbedUrlForRegisteredUserResponse {
     /**
-     * The embed URL for the Amazon QuickSight dashboard, visual, Q search bar, or console.
+     * The embed URL for the Amazon QuickSight dashboard, visual, Q search bar, Generative Q&amp;A experience, or console.
      */
     EmbedUrl: EmbeddingUrl;
     /**
@@ -14128,6 +14172,7 @@ declare namespace QuickSight {
   export type ProjectedColumnList = String[];
   export type PropertyRole = "PRIMARY"|"ID"|string;
   export type PropertyUsage = "INHERIT"|"DIMENSION"|"MEASURE"|string;
+  export type PurchaseMode = "MANUAL"|"AUTO_PURCHASE"|string;
   export interface PutDataSetRefreshPropertiesRequest {
     /**
      * The Amazon Web Services account ID.
@@ -14546,7 +14591,7 @@ declare namespace QuickSight {
   export type RefreshSchedules = RefreshSchedule[];
   export interface RegisterUserRequest {
     /**
-     * Amazon QuickSight supports several ways of managing the identity of users. This parameter accepts two values:    IAM: A user whose identity maps to an existing IAM user or role.     QUICKSIGHT: A user whose identity is owned and managed internally by Amazon QuickSight.   
+     * The identity type that your Amazon QuickSight account uses to manage the identity of users.
      */
     IdentityType: IdentityType;
     /**
@@ -14578,7 +14623,7 @@ declare namespace QuickSight {
      */
     UserName?: UserName;
     /**
-     * (Enterprise edition only) The name of the custom permissions profile that you want to assign to this user. Customized permissions allows you to control a user's access by restricting access the following operations:   Create and update data sources   Create and update datasets   Create and update email reports   Subscribe to email reports   To add custom permissions to an existing user, use  UpdateUser  instead. A set of custom permissions includes any combination of these restrictions. Currently, you need to create the profile names for custom permission sets by using the Amazon QuickSight console. Then, you use the RegisterUser API operation to assign the named set of permissions to a Amazon QuickSight user.  Amazon QuickSight custom permissions are applied through IAM policies. Therefore, they override the permissions typically granted by assigning Amazon QuickSight users to one of the default security cohorts in Amazon QuickSight (admin, author, reader). This feature is available only to Amazon QuickSight Enterprise edition subscriptions.
+     * (Enterprise edition only) The name of the custom permissions profile that you want to assign to this user. Customized permissions allows you to control a user's access by restricting access the following operations:   Create and update data sources   Create and update datasets   Create and update email reports   Subscribe to email reports   To add custom permissions to an existing user, use  UpdateUser  instead. A set of custom permissions includes any combination of these restrictions. Currently, you need to create the profile names for custom permission sets by using the Amazon QuickSight console. Then, you use the RegisterUser API operation to assign the named set of permissions to a Amazon QuickSight user.  Amazon QuickSight custom permissions are applied through IAM policies. Therefore, they override the permissions typically granted by assigning Amazon QuickSight users to one of the default security cohorts in Amazon QuickSight (admin, author, reader, admin pro, author pro, reader pro). This feature is available only to Amazon QuickSight Enterprise edition subscriptions.
      */
     CustomPermissionsName?: RoleName;
     /**
@@ -14665,10 +14710,20 @@ declare namespace QuickSight {
      * The type of embedding experience. In this case, Amazon QuickSight visuals.
      */
     DashboardVisual?: RegisteredUserDashboardVisualEmbeddingConfiguration;
+    /**
+     * The configuration details for embedding the Generative Q&amp;A experience. For more information about embedding the Generative Q&amp;A experience, see Embedding Overview in the Amazon QuickSight User Guide.
+     */
+    GenerativeQnA?: RegisteredUserGenerativeQnAEmbeddingConfiguration;
+  }
+  export interface RegisteredUserGenerativeQnAEmbeddingConfiguration {
+    /**
+     * The ID of the new Q reader experience topic that you want to make the starting topic in the Generative Q&amp;A experience. You can find a topic ID by navigating to the Topics pane in the Amazon QuickSight application and opening a topic. The ID is in the URL for the topic that you open. If you don't specify an initial topic or you specify a legacy topic, a list of all shared new reader experience topics is shown in the Generative Q&amp;A experience for your readers. When you select an initial new reader experience topic, you can specify whether or not readers are allowed to select other new reader experience topics from the available ones in the list.
+     */
+    InitialTopicId?: RestrictiveResourceId;
   }
   export interface RegisteredUserQSearchBarEmbeddingConfiguration {
     /**
-     * The ID of the Q topic that you want to make the starting topic in the Q search bar. You can find a topic ID by navigating to the Topics pane in the Amazon QuickSight application and opening a topic. The ID is in the URL for the topic that you open. If you don't specify an initial topic, a list of all shared topics is shown in the Q bar for your readers. When you select an initial topic, you can specify whether or not readers are allowed to select other topics from the available ones in the list.
+     * The ID of the legacy Q topic that you want to use as the starting topic in the Q search bar. To locate the topic ID of the topic that you want to use, open the Amazon QuickSight console, navigate to the Topics pane, and choose thre topic that you want to use. The TopicID is located in the URL of the topic that opens. When you select an initial topic, you can specify whether or not readers are allowed to select other topics from the list of available topics. If you don't specify an initial topic or if you specify a new reader experience topic, a list of all shared legacy topics is shown in the Q bar. 
      */
     InitialTopicId?: RestrictiveResourceId;
   }
@@ -14823,7 +14878,7 @@ declare namespace QuickSight {
     RequestId?: String;
   }
   export type RestrictiveResourceId = string;
-  export type Role = "ADMIN"|"AUTHOR"|"READER"|string;
+  export type Role = "ADMIN"|"AUTHOR"|"READER"|"ADMIN_PRO"|"AUTHOR_PRO"|"READER_PRO"|string;
   export type RoleArn = string;
   export type RoleName = string;
   export type RoleSessionName = string;
@@ -17885,6 +17940,10 @@ declare namespace QuickSight {
      * The name of the topic.
      */
     Name?: ResourceName;
+    /**
+     * The user experience version of the topic.
+     */
+    UserExperienceVersion?: TopicUserExperienceVersion;
   }
   export type TopicTimeGranularity = "SECOND"|"MINUTE"|"HOUR"|"DAY"|"WEEK"|"MONTH"|"QUARTER"|"YEAR"|string;
   export type TopicUserExperienceVersion = "LEGACY"|"NEW_READER_EXPERIENCE"|string;
@@ -19093,6 +19152,26 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
   }
+  export interface UpdateSPICECapacityConfigurationRequest {
+    /**
+     * The ID of the Amazon Web Services account that contains the SPICE configuration that you want to update.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * Determines how SPICE capacity can be purchased. The following options are available.     MANUAL: SPICE capacity can only be purchased manually.    AUTO_PURCHASE: Extra SPICE capacity is automatically purchased on your behalf as needed. SPICE capacity can also be purchased manually with this option.  
+     */
+    PurchaseMode: PurchaseMode;
+  }
+  export interface UpdateSPICECapacityConfigurationResponse {
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
   export interface UpdateTemplateAliasRequest {
     /**
      * The ID of the Amazon Web Services account that contains the template alias that you're updating.
@@ -19479,7 +19558,7 @@ declare namespace QuickSight {
      */
     Email: String;
     /**
-     * The Amazon QuickSight role of the user. The role can be one of the following default security cohorts:    READER: A user who has read-only access to dashboards.    AUTHOR: A user who can create data sources, datasets, analyses, and dashboards.    ADMIN: A user who is an author, who can also manage Amazon QuickSight settings.   The name of the Amazon QuickSight role is invisible to the user except for the console screens dealing with permissions.
+     * The Amazon QuickSight role of the user. The role can be one of the following default security cohorts:    READER: A user who has read-only access to dashboards.    AUTHOR: A user who can create data sources, datasets, analyses, and dashboards.    ADMIN: A user who is an author, who can also manage Amazon QuickSight settings.    READER_PRO: Reader Pro adds Generative BI capabilities to the Reader role. Reader Pros have access to Amazon Q Business, can build stories with Amazon Q, and can generate executive summaries from dashboards.    AUTHOR_PRO: Author Pro adds Generative BI capabilities to the Author role. Author Pros can author dashboards with natural language with Amazon Q, build stories with Amazon Q, create Topics for Q&amp;A, and generate executive summaries from dashboards.    ADMIN_PRO: Admin Pros are Author Pros who can also manage Amazon QuickSight administrative settings. Admin Pro users are billed at Author Pro pricing.   The name of the Amazon QuickSight role is invisible to the user except for the console screens dealing with permissions.
      */
     Role: UserRole;
     /**
@@ -19609,7 +19688,7 @@ declare namespace QuickSight {
      */
     Email?: String;
     /**
-     * The Amazon QuickSight role for the user. The user role can be one of the following:.    READER: A user who has read-only access to dashboards.    AUTHOR: A user who can create data sources, datasets, analyses, and dashboards.    ADMIN: A user who is an author, who can also manage Amazon Amazon QuickSight settings.    RESTRICTED_READER: This role isn't currently available for use.    RESTRICTED_AUTHOR: This role isn't currently available for use.  
+     * The Amazon QuickSight role for the user. The user role can be one of the following:.    READER: A user who has read-only access to dashboards.    AUTHOR: A user who can create data sources, datasets, analyses, and dashboards.    ADMIN: A user who is an author, who can also manage Amazon Amazon QuickSight settings.    READER_PRO: Reader Pro adds Generative BI capabilities to the Reader role. Reader Pros have access to Amazon Q Business, can build stories with Amazon Q, and can generate executive summaries from dashboards.    AUTHOR_PRO: Author Pro adds Generative BI capabilities to the Author role. Author Pros can author dashboards with natural language with Amazon Q, build stories with Amazon Q, create Topics for Q&amp;A, and generate executive summaries from dashboards.    ADMIN_PRO: Admin Pros are Author Pros who can also manage Amazon QuickSight administrative settings. Admin Pro users are billed at Author Pro pricing.    RESTRICTED_READER: This role isn't currently available for use.    RESTRICTED_AUTHOR: This role isn't currently available for use.  
      */
     Role?: UserRole;
     /**
@@ -19643,7 +19722,7 @@ declare namespace QuickSight {
   }
   export type UserList = User[];
   export type UserName = string;
-  export type UserRole = "ADMIN"|"AUTHOR"|"READER"|"RESTRICTED_AUTHOR"|"RESTRICTED_READER"|string;
+  export type UserRole = "ADMIN"|"AUTHOR"|"READER"|"RESTRICTED_AUTHOR"|"RESTRICTED_READER"|"ADMIN_PRO"|"AUTHOR_PRO"|"READER_PRO"|string;
   export interface VPCConnection {
     /**
      * The ID of the VPC connection that you're creating. This ID is a unique identifier for each Amazon Web Services Region in an Amazon Web Services account.

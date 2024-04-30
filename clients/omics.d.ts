@@ -22,11 +22,11 @@ declare class Omics extends Service {
    */
   abortMultipartReadSetUpload(callback?: (err: AWSError, data: Omics.Types.AbortMultipartReadSetUploadResponse) => void): Request<Omics.Types.AbortMultipartReadSetUploadResponse, AWSError>;
   /**
-   *  Accepts a share for an analytics store. 
+   * Accept a resource share request.
    */
   acceptShare(params: Omics.Types.AcceptShareRequest, callback?: (err: AWSError, data: Omics.Types.AcceptShareResponse) => void): Request<Omics.Types.AcceptShareResponse, AWSError>;
   /**
-   *  Accepts a share for an analytics store. 
+   * Accept a resource share request.
    */
   acceptShare(callback?: (err: AWSError, data: Omics.Types.AcceptShareResponse) => void): Request<Omics.Types.AcceptShareResponse, AWSError>;
   /**
@@ -118,11 +118,11 @@ declare class Omics extends Service {
    */
   createSequenceStore(callback?: (err: AWSError, data: Omics.Types.CreateSequenceStoreResponse) => void): Request<Omics.Types.CreateSequenceStoreResponse, AWSError>;
   /**
-   *  Creates a share offer that can be accepted outside the account by a subscriber. The share is created by the owner and accepted by the principal subscriber. 
+   * Creates a cross-account shared resource. The resource owner makes an offer to share the resource with the principal subscriber (an AWS user with a different account than the resource owner). The following resources support cross-account sharing:   Healthomics variant stores   Healthomics annotation stores   Private workflows  
    */
   createShare(params: Omics.Types.CreateShareRequest, callback?: (err: AWSError, data: Omics.Types.CreateShareResponse) => void): Request<Omics.Types.CreateShareResponse, AWSError>;
   /**
-   *  Creates a share offer that can be accepted outside the account by a subscriber. The share is created by the owner and accepted by the principal subscriber. 
+   * Creates a cross-account shared resource. The resource owner makes an offer to share the resource with the principal subscriber (an AWS user with a different account than the resource owner). The following resources support cross-account sharing:   Healthomics variant stores   Healthomics annotation stores   Private workflows  
    */
   createShare(callback?: (err: AWSError, data: Omics.Types.CreateShareResponse) => void): Request<Omics.Types.CreateShareResponse, AWSError>;
   /**
@@ -198,11 +198,11 @@ declare class Omics extends Service {
    */
   deleteSequenceStore(callback?: (err: AWSError, data: Omics.Types.DeleteSequenceStoreResponse) => void): Request<Omics.Types.DeleteSequenceStoreResponse, AWSError>;
   /**
-   *  Deletes a share of an analytics store. 
+   * Deletes a resource share. If you are the resource owner, the subscriber will no longer have access to the shared resource. If you are the subscriber, this operation deletes your access to the share.
    */
   deleteShare(params: Omics.Types.DeleteShareRequest, callback?: (err: AWSError, data: Omics.Types.DeleteShareResponse) => void): Request<Omics.Types.DeleteShareResponse, AWSError>;
   /**
-   *  Deletes a share of an analytics store. 
+   * Deletes a resource share. If you are the resource owner, the subscriber will no longer have access to the shared resource. If you are the subscriber, this operation deletes your access to the share.
    */
   deleteShare(callback?: (err: AWSError, data: Omics.Types.DeleteShareResponse) => void): Request<Omics.Types.DeleteShareResponse, AWSError>;
   /**
@@ -318,11 +318,11 @@ declare class Omics extends Service {
    */
   getReferenceStore(callback?: (err: AWSError, data: Omics.Types.GetReferenceStoreResponse) => void): Request<Omics.Types.GetReferenceStoreResponse, AWSError>;
   /**
-   * Gets information about a workflow run.
+   * Gets information about a workflow run. If a workflow is shared with you, you cannot export information about the run.
    */
   getRun(params: Omics.Types.GetRunRequest, callback?: (err: AWSError, data: Omics.Types.GetRunResponse) => void): Request<Omics.Types.GetRunResponse, AWSError>;
   /**
-   * Gets information about a workflow run.
+   * Gets information about a workflow run. If a workflow is shared with you, you cannot export information about the run.
    */
   getRun(callback?: (err: AWSError, data: Omics.Types.GetRunResponse) => void): Request<Omics.Types.GetRunResponse, AWSError>;
   /**
@@ -350,11 +350,11 @@ declare class Omics extends Service {
    */
   getSequenceStore(callback?: (err: AWSError, data: Omics.Types.GetSequenceStoreResponse) => void): Request<Omics.Types.GetSequenceStoreResponse, AWSError>;
   /**
-   *  Retrieves the metadata for a share. 
+   * Retrieves the metadata for the specified resource share.
    */
   getShare(params: Omics.Types.GetShareRequest, callback?: (err: AWSError, data: Omics.Types.GetShareResponse) => void): Request<Omics.Types.GetShareResponse, AWSError>;
   /**
-   *  Retrieves the metadata for a share. 
+   * Retrieves the metadata for the specified resource share.
    */
   getShare(callback?: (err: AWSError, data: Omics.Types.GetShareResponse) => void): Request<Omics.Types.GetShareResponse, AWSError>;
   /**
@@ -374,11 +374,11 @@ declare class Omics extends Service {
    */
   getVariantStore(callback?: (err: AWSError, data: Omics.Types.GetVariantStoreResponse) => void): Request<Omics.Types.GetVariantStoreResponse, AWSError>;
   /**
-   * Gets information about a workflow.
+   * Gets information about a workflow. If a workflow is shared with you, you cannot export the workflow.
    */
   getWorkflow(params: Omics.Types.GetWorkflowRequest, callback?: (err: AWSError, data: Omics.Types.GetWorkflowResponse) => void): Request<Omics.Types.GetWorkflowResponse, AWSError>;
   /**
-   * Gets information about a workflow.
+   * Gets information about a workflow. If a workflow is shared with you, you cannot export the workflow.
    */
   getWorkflow(callback?: (err: AWSError, data: Omics.Types.GetWorkflowResponse) => void): Request<Omics.Types.GetWorkflowResponse, AWSError>;
   /**
@@ -510,11 +510,11 @@ declare class Omics extends Service {
    */
   listSequenceStores(callback?: (err: AWSError, data: Omics.Types.ListSequenceStoresResponse) => void): Request<Omics.Types.ListSequenceStoresResponse, AWSError>;
   /**
-   *  Lists all shares associated with an account. 
+   * Retrieves the resource shares associated with an account. Use the filter parameter to retrieve a specific subset of the shares.
    */
   listShares(params: Omics.Types.ListSharesRequest, callback?: (err: AWSError, data: Omics.Types.ListSharesResponse) => void): Request<Omics.Types.ListSharesResponse, AWSError>;
   /**
-   *  Lists all shares associated with an account. 
+   * Retrieves the resource shares associated with an account. Use the filter parameter to retrieve a specific subset of the shares.
    */
   listShares(callback?: (err: AWSError, data: Omics.Types.ListSharesResponse) => void): Request<Omics.Types.ListSharesResponse, AWSError>;
   /**
@@ -590,11 +590,11 @@ declare class Omics extends Service {
    */
   startReferenceImportJob(callback?: (err: AWSError, data: Omics.Types.StartReferenceImportJobResponse) => void): Request<Omics.Types.StartReferenceImportJobResponse, AWSError>;
   /**
-   * Starts a workflow run. To duplicate a run, specify the run's ID and a role ARN. The remaining parameters are copied from the previous run. The total number of runs in your account is subject to a quota per Region. To avoid needing to delete runs manually, you can set the retention mode to REMOVE. Runs with this setting are deleted automatically when the run quoata is exceeded.
+   * Starts a workflow run. To duplicate a run, specify the run's ID and a role ARN. The remaining parameters are copied from the previous run. StartRun will not support re-run for a workflow that is shared with you. The total number of runs in your account is subject to a quota per Region. To avoid needing to delete runs manually, you can set the retention mode to REMOVE. Runs with this setting are deleted automatically when the run quoata is exceeded. By default, the run uses STATIC storage. For STATIC storage, set the storageCapacity field. You can set the storage type to DYNAMIC. You do not set storageCapacity, because HealthOmics dynamically scales the storage up or down as required. For more information about static and dynamic storage, see Running workflows in the AWS HealthOmics User Guide.
    */
   startRun(params: Omics.Types.StartRunRequest, callback?: (err: AWSError, data: Omics.Types.StartRunResponse) => void): Request<Omics.Types.StartRunResponse, AWSError>;
   /**
-   * Starts a workflow run. To duplicate a run, specify the run's ID and a role ARN. The remaining parameters are copied from the previous run. The total number of runs in your account is subject to a quota per Region. To avoid needing to delete runs manually, you can set the retention mode to REMOVE. Runs with this setting are deleted automatically when the run quoata is exceeded.
+   * Starts a workflow run. To duplicate a run, specify the run's ID and a role ARN. The remaining parameters are copied from the previous run. StartRun will not support re-run for a workflow that is shared with you. The total number of runs in your account is subject to a quota per Region. To avoid needing to delete runs manually, you can set the retention mode to REMOVE. Runs with this setting are deleted automatically when the run quoata is exceeded. By default, the run uses STATIC storage. For STATIC storage, set the storageCapacity field. You can set the storage type to DYNAMIC. You do not set storageCapacity, because HealthOmics dynamically scales the storage up or down as required. For more information about static and dynamic storage, see Running workflows in the AWS HealthOmics User Guide.
    */
   startRun(callback?: (err: AWSError, data: Omics.Types.StartRunResponse) => void): Request<Omics.Types.StartRunResponse, AWSError>;
   /**
@@ -822,13 +822,13 @@ declare namespace Omics {
   export type Accelerators = "GPU"|string;
   export interface AcceptShareRequest {
     /**
-     *  The ID for a share offer for analytics store data. 
+     * The ID of the resource share.
      */
     shareId: String;
   }
   export interface AcceptShareResponse {
     /**
-     *  The status of an analytics store share. 
+     * The status of the resource share.
      */
     status?: ShareStatus;
   }
@@ -1500,29 +1500,29 @@ declare namespace Omics {
   }
   export interface CreateShareRequest {
     /**
-     *  The resource ARN for the analytics store to be shared. 
+     * The ARN of the resource to be shared.
      */
     resourceArn: String;
     /**
-     *  The principal subscriber is the account being given access to the analytics store data through the share offer. 
+     * The principal subscriber is the account being offered shared access to the resource. 
      */
     principalSubscriber: String;
     /**
-     *  A name given to the share. 
+     * A name that the owner defines for the share.
      */
     shareName?: ShareName;
   }
   export interface CreateShareResponse {
     /**
-     *  An ID generated for the share. 
+     * The ID that HealthOmics generates for the share.
      */
     shareId?: String;
     /**
-     *  The status of a share. 
+     * The status of the share.
      */
     status?: ShareStatus;
     /**
-     *  A name given to the share. 
+     * The name of the share.
      */
     shareName?: ShareName;
   }
@@ -1600,7 +1600,7 @@ declare namespace Omics {
      */
     parameterTemplate?: WorkflowParameterTemplate;
     /**
-     * A storage capacity for the workflow in gibibytes.
+     * The storage capacity for the workflow in gibibytes.
      */
     storageCapacity?: CreateWorkflowRequestStorageCapacityInteger;
     /**
@@ -1715,13 +1715,13 @@ declare namespace Omics {
   }
   export interface DeleteShareRequest {
     /**
-     *  The ID for the share request to be deleted. 
+     * The ID for the resource share to be deleted.
      */
     shareId: String;
   }
   export interface DeleteShareResponse {
     /**
-     *  The status of the share being deleted. 
+     * The status of the share being deleted.
      */
     status?: ShareStatus;
   }
@@ -1856,13 +1856,17 @@ declare namespace Omics {
   export type FileType = "FASTQ"|"BAM"|"CRAM"|"UBAM"|string;
   export interface Filter {
     /**
-     *  The Amazon Resource Number (Arn) for an analytics store. 
+     * Filter based on the Amazon Resource Number (ARN) of the resource. You can specify up to 10 values.
      */
     resourceArns?: ArnList;
     /**
-     *  The status of an annotation store version. 
+     * Filter based on the resource status. You can specify up to 10 values.
      */
     status?: StatusList;
+    /**
+     * The type of resources to be filtered. You can specify one or more of the resource types.
+     */
+    type?: TypeList;
   }
   export interface FormatOptions {
     /**
@@ -2565,7 +2569,7 @@ declare namespace Omics {
      */
     parameters?: RunParameters;
     /**
-     * The run's storage capacity in gigabytes.
+     * The run's storage capacity in gibibytes. For dynamic storage, after the run has completed, this value is the maximum amount of storage used during the run.
      */
     storageCapacity?: GetRunResponseStorageCapacityInteger;
     /**
@@ -2628,6 +2632,14 @@ declare namespace Omics {
      * The destination for workflow outputs.
      */
     runOutputUri?: RunOutputUri;
+    /**
+     * The run's storage type.
+     */
+    storageType?: StorageType;
+    /**
+     * The ID of the workflow owner.
+     */
+    workflowOwnerId?: WorkflowOwnerId;
   }
   export type GetRunResponsePriorityInteger = number;
   export type GetRunResponseStorageCapacityInteger = number;
@@ -2744,13 +2756,13 @@ declare namespace Omics {
   }
   export interface GetShareRequest {
     /**
-     *  The generated ID for a share. 
+     * The ID of the share.
      */
     shareId: String;
   }
   export interface GetShareResponse {
     /**
-     *  An analytic store share details object. contains status, resourceArn, ownerId, etc. 
+     * A resource share details object. The object includes the status, the resourceArn, and ownerId.
      */
     share?: ShareDetails;
   }
@@ -2875,6 +2887,10 @@ declare namespace Omics {
      * The export format for the workflow.
      */
     export?: WorkflowExportList;
+    /**
+     * The ID of the workflow owner.
+     */
+    workflowOwnerId?: WorkflowOwnerId;
   }
   export interface GetWorkflowResponse {
     /**
@@ -2922,7 +2938,7 @@ declare namespace Omics {
      */
     parameterTemplate?: WorkflowParameterTemplate;
     /**
-     * The workflow's storage capacity in gigabytes.
+     * The workflow's storage capacity in gibibytes.
      */
     storageCapacity?: GetWorkflowResponseStorageCapacityInteger;
     /**
@@ -3153,7 +3169,7 @@ declare namespace Omics {
   }
   export interface ListAnnotationStoreVersionsFilter {
     /**
-     *  The status of an annotation store version. 
+     * The status of an annotation store version.
      */
     status?: VersionStatus;
   }
@@ -3599,25 +3615,25 @@ declare namespace Omics {
   }
   export interface ListSharesRequest {
     /**
-     *  The account that owns the analytics store shared. 
+     * The account that owns the resource shares.
      */
     resourceOwner: ResourceOwner;
     /**
-     *  Attributes used to filter for a specific subset of shares. 
+     * Attributes that you use to filter for a specific subset of resource shares.
      */
     filter?: Filter;
     /**
-     *  Next token returned in the response of a previous ListReadSetUploadPartsRequest call. Used to get the next page of results. 
+     * Next token returned in the response of a previous ListReadSetUploadPartsRequest call. Used to get the next page of results.
      */
     nextToken?: String;
     /**
-     *  The maximum number of shares to return in one page of results. 
+     * The maximum number of shares to return in one page of results.
      */
     maxResults?: Integer;
   }
   export interface ListSharesResponse {
     /**
-     *  The shares available and their meta details. 
+     * The shares available and their metadata details.
      */
     shares: ShareDetailsList;
     /**
@@ -3717,11 +3733,11 @@ declare namespace Omics {
   }
   export interface ListWorkflowsRequest {
     /**
-     * The workflows' type.
+     * Filter the list by workflow type.
      */
     type?: WorkflowType;
     /**
-     * The workflows' name.
+     * Filter the list by workflow name.
      */
     name?: WorkflowName;
     /**
@@ -3736,7 +3752,7 @@ declare namespace Omics {
   export type ListWorkflowsRequestMaxResultsInteger = number;
   export interface ListWorkflowsResponse {
     /**
-     * The workflows' items.
+     * A list of workflow items.
      */
     items?: WorkflowList;
     /**
@@ -4235,7 +4251,7 @@ declare namespace Omics {
      */
     priority?: RunListItemPriorityInteger;
     /**
-     * The run's storage capacity.
+     * The run's storage capacity in gibibytes. For dynamic storage, after the run has completed, this value is the maximum amount of storage used during the run.
      */
     storageCapacity?: RunListItemStorageCapacityInteger;
     /**
@@ -4250,6 +4266,10 @@ declare namespace Omics {
      * When the run stopped.
      */
     stopTime?: RunTimestamp;
+    /**
+     * The run's storage type.
+     */
+    storageType?: StorageType;
   }
   export type RunListItemPriorityInteger = number;
   export type RunListItemStorageCapacityInteger = number;
@@ -4372,44 +4392,49 @@ declare namespace Omics {
   }
   export interface ShareDetails {
     /**
-     *  The ID for a share offer for an analytics store . 
+     * The ID of the resource share.
      */
     shareId?: String;
     /**
-     *  The resource Arn of the analytics store being shared. 
+     * The Arn of the shared resource. 
      */
     resourceArn?: String;
     /**
-     *  The principal subscriber is the account the analytics store data is being shared with. 
+     * The ID of the shared resource. 
+     */
+    resourceId?: String;
+    /**
+     * The principal subscriber is the account that is sharing the resource.
      */
     principalSubscriber?: String;
     /**
-     *  The account ID for the data owner. The owner creates the share offer. 
+     * The account ID for the data owner. The owner creates the resource share.
      */
     ownerId?: String;
     /**
-     *  The status of a share. 
+     * The status of the share.
      */
     status?: ShareStatus;
     /**
-     *  The status message for a share. It provides more details on the status of the share. 
+     * The status message for a resource share. It provides additional details about the share status.
      */
     statusMessage?: StatusMessage;
     /**
-     *  The name of the share. 
+     * The name of the resource share.
      */
     shareName?: ShareName;
     /**
-     *  The timestamp for when the share was created. 
+     * The timestamp of when the resource share was created.
      */
     creationTime?: CreationTime;
     /**
-     *  The timestamp of the share update. 
+     * The timestamp of the resource share update.
      */
     updateTime?: UpdateTime;
   }
   export type ShareDetailsList = ShareDetails[];
   export type ShareName = string;
+  export type ShareResourceType = "VARIANT_STORE"|"ANNOTATION_STORE"|"WORKFLOW"|string;
   export type ShareStatus = "PENDING"|"ACTIVATING"|"ACTIVE"|"DELETING"|"DELETED"|"FAILED"|string;
   export interface SourceFiles {
     /**
@@ -4724,7 +4749,7 @@ declare namespace Omics {
      */
     parameters?: RunParameters;
     /**
-     * A storage capacity for the run in gibibytes.
+     * A storage capacity for the run in gibibytes. This field is not required if the storage type is dynamic (the system ignores any value that you enter).
      */
     storageCapacity?: StartRunRequestStorageCapacityInteger;
     /**
@@ -4747,6 +4772,14 @@ declare namespace Omics {
      * The retention mode for the run.
      */
     retentionMode?: RunRetentionMode;
+    /**
+     * The run's storage type. By default, the run uses STATIC storage type, which allocates a fixed amount of storage. If you set the storage type to DYNAMIC, HealthOmics dynamically scales the storage up or down, based on file system utilization.
+     */
+    storageType?: StorageType;
+    /**
+     * The ID of the workflow owner. 
+     */
+    workflowOwnerId?: WorkflowOwnerId;
   }
   export type StartRunRequestPriorityInteger = number;
   export type StartRunRequestStorageCapacityInteger = number;
@@ -4806,6 +4839,7 @@ declare namespace Omics {
   }
   export type StatusList = ShareStatus[];
   export type StatusMessage = string;
+  export type StorageType = "STATIC"|"DYNAMIC"|string;
   export type StoreFormat = "GFF"|"TSV"|"VCF"|string;
   export type StoreName = string;
   export interface StoreOptions {
@@ -4927,6 +4961,7 @@ declare namespace Omics {
     schema?: TsvVersionOptionsSchemaList;
   }
   export type TsvVersionOptionsSchemaList = SchemaItem[];
+  export type TypeList = ShareResourceType[];
   export interface UntagResourceRequest {
     /**
      * The resource's ARN.
@@ -5337,6 +5372,7 @@ declare namespace Omics {
   export type WorkflowMetadataKey = string;
   export type WorkflowMetadataValue = string;
   export type WorkflowName = string;
+  export type WorkflowOwnerId = string;
   export interface WorkflowParameter {
     /**
      * The parameter's description.

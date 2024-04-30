@@ -1,6 +1,18 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1609.0-->
+<!--LATEST=2.1610.0-->
 <!--ENTRYINSERT-->
+
+## 2.1610.0
+* feature: ChimeSDKVoice: Due to changes made by the Amazon Alexa service, GetSipMediaApplicationAlexaSkillConfiguration and PutSipMediaApplicationAlexaSkillConfiguration APIs are no longer available for use. For more information, refer to the Alexa Smart Properties page.
+* feature: CodeArtifact: Add support for the Ruby package format.
+* feature: FMS: AWS Firewall Manager now supports the network firewall service stream exception policy feature for accounts within your organization.
+* feature: Omics: Add support for workflow sharing and dynamic run storage
+* feature: OpenSearch: This release enables customers to create Route53 A and AAAA alias record types to point custom endpoint domain to OpenSearch domain's dualstack search endpoint.
+* feature: PinpointSMSVoiceV2: Amazon Pinpoint has added two new features Multimedia services (MMS) and protect configurations. Use the three new MMS APIs to send media messages to a mobile phone which includes image, audio, text, or video files. Use the ten new protect configurations APIs to block messages to specific countries.
+* feature: QBusiness: Updates API to latest version.
+* feature: QuickSight: New Q embedding supporting Generative Q&A
+* feature: Route53Resolver: Release of FirewallDomainRedirectionAction parameter on the Route 53 DNS Firewall Rule.  This allows customers to configure a DNS Firewall rule to inspect all the domains in the DNS redirection chain (default) , such as CNAME, ALIAS, DNAME, etc., or just the first domain and trust the rest.
+* feature: SageMaker: Amazon SageMaker Training now supports the use of attribute-based access control (ABAC) roles for training job execution roles. Amazon SageMaker Inference now supports G6 instance types.
 
 ## 2.1609.0
 * feature: Amplify: Updating max results limit for listing any resources (Job, Artifacts, Branch, BackendResources, DomainAssociation) to 50 with the exception of list apps that where max results can be up to 100.
