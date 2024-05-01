@@ -959,7 +959,7 @@ declare namespace BedrockAgent {
      */
     clientToken?: ClientToken;
     /**
-     * The deletion policy for the requested data source
+     * The data deletion policy assigned to the data source.
      */
     dataDeletionPolicy?: DataDeletionPolicy;
     /**
@@ -1038,7 +1038,7 @@ declare namespace BedrockAgent {
      */
     createdAt: DateTimestamp;
     /**
-     * The deletion policy for the data source.
+     * The data deletion policy for a data source.
      */
     dataDeletionPolicy?: DataDeletionPolicy;
     /**
@@ -1054,7 +1054,7 @@ declare namespace BedrockAgent {
      */
     description?: Description;
     /**
-     * The details of the failure reasons related to the data source.
+     * The detailed reasons on the failure to delete a data source.
      */
     failureReasons?: FailureReasons;
     /**
@@ -1660,7 +1660,7 @@ declare namespace BedrockAgent {
   export type KnowledgeBaseRoleArn = string;
   export type KnowledgeBaseState = "ENABLED"|"DISABLED"|string;
   export type KnowledgeBaseStatus = "CREATING"|"ACTIVE"|"DELETING"|"UPDATING"|"FAILED"|"DELETE_UNSUCCESSFUL"|string;
-  export type KnowledgeBaseStorageType = "OPENSEARCH_SERVERLESS"|"PINECONE"|"REDIS_ENTERPRISE_CLOUD"|"RDS"|string;
+  export type KnowledgeBaseStorageType = "OPENSEARCH_SERVERLESS"|"PINECONE"|"REDIS_ENTERPRISE_CLOUD"|"RDS"|"MONGO_DB_ATLAS"|string;
   export type KnowledgeBaseSummaries = KnowledgeBaseSummary[];
   export interface KnowledgeBaseSummary {
     /**
@@ -1905,6 +1905,55 @@ declare namespace BedrockAgent {
   export type MaxResults = number;
   export type MaximumLength = number;
   export type ModelIdentifier = string;
+  export type MongoDbAtlasCollectionName = string;
+  export interface MongoDbAtlasConfiguration {
+    /**
+     * The collection name of the knowledge base in MongoDB Atlas.
+     */
+    collectionName: MongoDbAtlasCollectionName;
+    /**
+     * The Amazon Resource Name (ARN) of the secret that you created in Secrets Manager that contains user credentials for your MongoDB Atlas cluster.
+     */
+    credentialsSecretArn: SecretArn;
+    /**
+     * The database name in your MongoDB Atlas cluster for your knowledge base.
+     */
+    databaseName: MongoDbAtlasDatabaseName;
+    /**
+     * The endpoint URL of your MongoDB Atlas cluster for your knowledge base.
+     */
+    endpoint: MongoDbAtlasEndpoint;
+    /**
+     * The name of the VPC endpoint service in your account that is connected to your MongoDB Atlas cluster.
+     */
+    endpointServiceName?: MongoDbAtlasEndpointServiceName;
+    /**
+     * Contains the names of the fields to which to map information about the vector store.
+     */
+    fieldMapping: MongoDbAtlasFieldMapping;
+    /**
+     * The name of the MongoDB Atlas vector search index.
+     */
+    vectorIndexName: MongoDbAtlasIndexName;
+  }
+  export type MongoDbAtlasDatabaseName = string;
+  export type MongoDbAtlasEndpoint = string;
+  export type MongoDbAtlasEndpointServiceName = string;
+  export interface MongoDbAtlasFieldMapping {
+    /**
+     * The name of the field in which Amazon Bedrock stores metadata about the vector store.
+     */
+    metadataField: FieldName;
+    /**
+     * The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+     */
+    textField: FieldName;
+    /**
+     * The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
+     */
+    vectorField: FieldName;
+  }
+  export type MongoDbAtlasIndexName = string;
   export type Name = string;
   export type NextToken = string;
   export type NumericalVersion = string;
@@ -2136,7 +2185,7 @@ declare namespace BedrockAgent {
      */
     bucketArn: S3BucketArn;
     /**
-     * The account ID for the owner of the S3 bucket.
+     * The bucket account owner ID for the S3 bucket.
      */
     bucketOwnerAccountId?: BucketOwnerAccountId;
     /**
@@ -2192,6 +2241,10 @@ declare namespace BedrockAgent {
   }
   export type StopSequences = String[];
   export interface StorageConfiguration {
+    /**
+     * Contains the storage configuration of the knowledge base in MongoDB Atlas.
+     */
+    mongoDbAtlasConfiguration?: MongoDbAtlasConfiguration;
     /**
      * Contains the storage configuration of the knowledge base in Amazon OpenSearch Service.
      */
@@ -2397,7 +2450,7 @@ declare namespace BedrockAgent {
   }
   export interface UpdateDataSourceRequest {
     /**
-     * The data deletion policy of the updated data source.
+     * The data deletion policy assigned to the data source.
      */
     dataDeletionPolicy?: DataDeletionPolicy;
     /**

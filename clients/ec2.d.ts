@@ -1573,11 +1573,11 @@ declare class EC2 extends Service {
    */
   deleteTransitGatewayRoute(callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayRouteResult) => void): Request<EC2.Types.DeleteTransitGatewayRouteResult, AWSError>;
   /**
-   * Deletes the specified transit gateway route table. You must disassociate the route table from any transit gateway route tables before you can delete it.
+   * Deletes the specified transit gateway route table. If there are any route tables associated with the transit gateway route table, you must first run DisassociateRouteTable before you can delete the transit gateway route table. This removes any route tables associated with the transit gateway route table.
    */
   deleteTransitGatewayRouteTable(params: EC2.Types.DeleteTransitGatewayRouteTableRequest, callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayRouteTableResult) => void): Request<EC2.Types.DeleteTransitGatewayRouteTableResult, AWSError>;
   /**
-   * Deletes the specified transit gateway route table. You must disassociate the route table from any transit gateway route tables before you can delete it.
+   * Deletes the specified transit gateway route table. If there are any route tables associated with the transit gateway route table, you must first run DisassociateRouteTable before you can delete the transit gateway route table. This removes any route tables associated with the transit gateway route table.
    */
   deleteTransitGatewayRouteTable(callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayRouteTableResult) => void): Request<EC2.Types.DeleteTransitGatewayRouteTableResult, AWSError>;
   /**
@@ -17621,7 +17621,7 @@ declare namespace EC2 {
      */
     TransitGatewayIds?: TransitGatewayIdStringList;
     /**
-     * One or more filters. The possible values are:    options.propagation-default-route-table-id - The ID of the default propagation route table.    options.amazon-side-asn - The private ASN for the Amazon side of a BGP session.    options.association-default-route-table-id - The ID of the default association route table.    options.auto-accept-shared-attachments - Indicates whether there is automatic acceptance of attachment requests (enable | disable).    options.default-route-table-association - Indicates whether resource attachments are automatically associated with the default association route table (enable | disable).    options.default-route-table-propagation - Indicates whether resource attachments automatically propagate routes to the default propagation route table (enable | disable).    options.dns-support - Indicates whether DNS support is enabled (enable | disable).    options.vpn-ecmp-support - Indicates whether Equal Cost Multipath Protocol support is enabled (enable | disable).    owner-id - The ID of the Amazon Web Services account that owns the transit gateway.    state - The state of the transit gateway (available | deleted | deleting | modifying | pending).    transit-gateway-id - The ID of the transit gateway.  
+     * One or more filters. The possible values are:    options.propagation-default-route-table-id - The ID of the default propagation route table.    options.amazon-side-asn - The private ASN for the Amazon side of a BGP session.    options.association-default-route-table-id - The ID of the default association route table.    options.auto-accept-shared-attachments - Indicates whether there is automatic acceptance of attachment requests (enable | disable).    options.default-route-table-association - Indicates whether resource attachments are automatically associated with the default association route table (enable | disable).    options.default-route-table-propagation - Indicates whether resource attachments automatically propagate routes to the default propagation route table (enable | disable).    options.dns-support - Indicates whether DNS support is enabled (enable | disable).    options.vpn-ecmp-support - Indicates whether Equal Cost Multipath Protocol support is enabled (enable | disable).    owner-id - The ID of the Amazon Web Services account that owns the transit gateway.    state - The state of the transit gateway (available | deleted | deleting | modifying | pending).    transit-gateway-id - The ID of the transit gateway.    tag-key - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.  
      */
     Filters?: FilterList;
     /**
@@ -27038,7 +27038,7 @@ declare namespace EC2 {
      */
     Description?: String;
     /**
-     * The device index for the network interface attachment.
+     * The device index for the network interface attachment. Each network interface requires a device index. If you create a launch template that includes secondary network interfaces but not a primary network interface, then you must add a primary network interface as a launch parameter when you launch an instance from the template.
      */
     DeviceIndex?: Integer;
     /**
@@ -39277,7 +39277,7 @@ declare namespace EC2 {
   export type VirtualizationTypeSet = VirtualizationType[];
   export interface Volume {
     /**
-     * Information about the volume attachments.
+     *  This parameter is not returned by CreateVolume.  Information about the volume attachments.
      */
     Attachments?: VolumeAttachmentList;
     /**
@@ -39329,7 +39329,7 @@ declare namespace EC2 {
      */
     VolumeType?: VolumeType;
     /**
-     * Indicates whether the volume was created using fast snapshot restore.
+     *  This parameter is not returned by CreateVolume.  Indicates whether the volume was created using fast snapshot restore.
      */
     FastRestored?: Boolean;
     /**
@@ -39341,7 +39341,7 @@ declare namespace EC2 {
      */
     Throughput?: Integer;
     /**
-     * Reserved for future use.
+     *  This parameter is not returned by CreateVolume.  Reserved for future use.
      */
     SseType?: SSEType;
   }

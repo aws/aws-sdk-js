@@ -596,11 +596,11 @@ declare class SecurityHub extends Service {
    */
   updateFindingAggregator(callback?: (err: AWSError, data: SecurityHub.Types.UpdateFindingAggregatorResponse) => void): Request<SecurityHub.Types.UpdateFindingAggregatorResponse, AWSError>;
   /**
-   *  UpdateFindings is deprecated. Instead of UpdateFindings, use BatchUpdateFindings. Updates the Note and RecordState of the Security Hub-aggregated findings that the filter attributes specify. Any member account that can view the finding also sees the update to the finding.
+   *  UpdateFindings is a deprecated operation. Instead of UpdateFindings, use the BatchUpdateFindings operation. Updates the Note and RecordState of the Security Hub-aggregated findings that the filter attributes specify. Any member account that can view the finding also sees the update to the finding. Finding updates made with UpdateFindings might not be persisted if the same finding is later updated by the finding provider through the BatchImportFindings operation.
    */
   updateFindings(params: SecurityHub.Types.UpdateFindingsRequest, callback?: (err: AWSError, data: SecurityHub.Types.UpdateFindingsResponse) => void): Request<SecurityHub.Types.UpdateFindingsResponse, AWSError>;
   /**
-   *  UpdateFindings is deprecated. Instead of UpdateFindings, use BatchUpdateFindings. Updates the Note and RecordState of the Security Hub-aggregated findings that the filter attributes specify. Any member account that can view the finding also sees the update to the finding.
+   *  UpdateFindings is a deprecated operation. Instead of UpdateFindings, use the BatchUpdateFindings operation. Updates the Note and RecordState of the Security Hub-aggregated findings that the filter attributes specify. Any member account that can view the finding also sees the update to the finding. Finding updates made with UpdateFindings might not be persisted if the same finding is later updated by the finding provider through the BatchImportFindings operation.
    */
   updateFindings(callback?: (err: AWSError, data: SecurityHub.Types.UpdateFindingsResponse) => void): Request<SecurityHub.Types.UpdateFindingsResponse, AWSError>;
   /**
@@ -15747,7 +15747,7 @@ declare namespace SecurityHub {
   export type StandardsSubscriptions = StandardsSubscription[];
   export interface StartConfigurationPolicyAssociationRequest {
     /**
-     *  The Amazon Resource Name (ARN) or universally unique identifier (UUID) of the configuration policy. 
+     *  The Amazon Resource Name (ARN) of a configuration policy, the universally unique identifier (UUID) of a configuration policy, or a value of SELF_MANAGED_SECURITY_HUB for a self-managed configuration. 
      */
     ConfigurationPolicyIdentifier: NonEmptyString;
     /**
@@ -15791,7 +15791,7 @@ declare namespace SecurityHub {
      */
     Target?: Target;
     /**
-     *  The Amazon Resource Name (ARN) or universally unique identifier (UUID) of the configuration policy. 
+     *  The Amazon Resource Name (ARN) of a configuration policy, the universally unique identifier (UUID) of a configuration policy, or a value of SELF_MANAGED_SECURITY_HUB for a self-managed configuration. 
      */
     ConfigurationPolicyIdentifier: NonEmptyString;
   }
