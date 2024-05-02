@@ -1652,7 +1652,7 @@
       "members": {
         "parameterKey": {
           "shape": "ParameterKey",
-          "documentation": "<p>The key of the parameter. The options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>, <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\">Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
+          "documentation": "<p>The key of the parameter. The options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>, <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\">Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
         },
         "parameterValue": {
           "shape": "ParameterValue",
@@ -2053,7 +2053,7 @@
         },
         "configParameters": {
           "shape": "ConfigParameterList",
-          "documentation": "<p>An array of parameters to set for advanced control over a database. The options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>, <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\"> Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
+          "documentation": "<p>An array of parameters to set for advanced control over a database. The options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>, <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\"> Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
         },
         "enhancedVpcRouting": {
           "shape": "Boolean",
@@ -2903,7 +2903,7 @@
         },
         "scheduledActions": {
           "shape": "ScheduledActionsList",
-          "documentation": "<p>All of the returned scheduled action objects.</p>"
+          "documentation": "<p>All of the returned scheduled action association objects.</p>"
         }
       }
     },
@@ -3599,6 +3599,20 @@
       "documentation": "<p>The schedule of when Amazon Redshift Serverless should run the scheduled action.</p>",
       "union": true
     },
+    "ScheduledActionAssociation": {
+      "type": "structure",
+      "members": {
+        "namespaceName": {
+          "shape": "NamespaceName",
+          "documentation": "<p>Name of associated Amazon Redshift Serverless namespace.</p>"
+        },
+        "scheduledActionName": {
+          "shape": "ScheduledActionName",
+          "documentation": "<p>Name of associated scheduled action.</p>"
+        }
+      },
+      "documentation": "<p>Contains names of objects associated with a scheduled action.</p>"
+    },
     "ScheduledActionName": {
       "type": "string",
       "max": 60,
@@ -3657,7 +3671,7 @@
     "ScheduledActionsList": {
       "type": "list",
       "member": {
-        "shape": "ScheduledActionName"
+        "shape": "ScheduledActionAssociation"
       }
     },
     "SecurityGroupId": {
@@ -4287,7 +4301,7 @@
         },
         "configParameters": {
           "shape": "ConfigParameterList",
-          "documentation": "<p>An array of parameters to set for advanced control over a database. The options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>, <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\"> Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
+          "documentation": "<p>An array of parameters to set for advanced control over a database. The options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>, <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\"> Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
         },
         "enhancedVpcRouting": {
           "shape": "Boolean",
@@ -4464,7 +4478,7 @@
         },
         "configParameters": {
           "shape": "ConfigParameterList",
-          "documentation": "<p>An array of parameters to set for advanced control over a database. The options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>, <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\"> Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
+          "documentation": "<p>An array of parameters to set for advanced control over a database. The options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>, <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\"> Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
         },
         "creationDate": {
           "shape": "SyntheticTimestamp_date_time",
@@ -4512,7 +4526,7 @@
         },
         "publiclyAccessible": {
           "shape": "Boolean",
-          "documentation": "<p>A value that specifies whether the workgroup can be accessible from a public network</p>"
+          "documentation": "<p>A value that specifies whether the workgroup can be accessible from a public network.</p>"
         },
         "securityGroupIds": {
           "shape": "SecurityGroupIdList",

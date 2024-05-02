@@ -247,11 +247,11 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   getItem(callback?: (err: AWSError, data: DynamoDB.Types.GetItemOutput) => void): Request<DynamoDB.Types.GetItemOutput, AWSError>;
   /**
-   * Returns the resource-based policy document attached to the resource, which can be a table or stream, in JSON format.  GetResourcePolicy follows an  eventually consistent  model. The following list describes the outcomes when you issue the GetResourcePolicy request immediately after issuing another request:   If you issue a GetResourcePolicy request immediately after a PutResourcePolicy request, DynamoDB might return a PolicyNotFoundException.   If you issue a GetResourcePolicyrequest immediately after a DeleteResourcePolicy request, DynamoDB might return the policy that was present before the deletion request.   If you issue a GetResourcePolicy request immediately after a CreateTable request, which includes a resource-based policy, DynamoDB might return a ResourceNotFoundException or a PolicyNotFoundException.   Because GetResourcePolicy uses an eventually consistent query, the metadata for your policy or table might not be available at that moment. Wait for a few seconds, and then retry the GetResourcePolicy request. After a GetResourcePolicy request returns a policy created using the PutResourcePolicy request, you can assume the policy will start getting applied in the authorization of requests to the resource. Because this process is eventually consistent, it will take some time to apply the policy to all requests to a resource. Policies that you attach while creating a table using the CreateTable request will always be applied to all requests for that table.
+   * Returns the resource-based policy document attached to the resource, which can be a table or stream, in JSON format.  GetResourcePolicy follows an  eventually consistent  model. The following list describes the outcomes when you issue the GetResourcePolicy request immediately after issuing another request:   If you issue a GetResourcePolicy request immediately after a PutResourcePolicy request, DynamoDB might return a PolicyNotFoundException.   If you issue a GetResourcePolicyrequest immediately after a DeleteResourcePolicy request, DynamoDB might return the policy that was present before the deletion request.   If you issue a GetResourcePolicy request immediately after a CreateTable request, which includes a resource-based policy, DynamoDB might return a ResourceNotFoundException or a PolicyNotFoundException.   Because GetResourcePolicy uses an eventually consistent query, the metadata for your policy or table might not be available at that moment. Wait for a few seconds, and then retry the GetResourcePolicy request. After a GetResourcePolicy request returns a policy created using the PutResourcePolicy request, the policy will be applied in the authorization of requests to the resource. Because this process is eventually consistent, it will take some time to apply the policy to all requests to a resource. Policies that you attach while creating a table using the CreateTable request will always be applied to all requests for that table.
    */
   getResourcePolicy(params: DynamoDB.Types.GetResourcePolicyInput, callback?: (err: AWSError, data: DynamoDB.Types.GetResourcePolicyOutput) => void): Request<DynamoDB.Types.GetResourcePolicyOutput, AWSError>;
   /**
-   * Returns the resource-based policy document attached to the resource, which can be a table or stream, in JSON format.  GetResourcePolicy follows an  eventually consistent  model. The following list describes the outcomes when you issue the GetResourcePolicy request immediately after issuing another request:   If you issue a GetResourcePolicy request immediately after a PutResourcePolicy request, DynamoDB might return a PolicyNotFoundException.   If you issue a GetResourcePolicyrequest immediately after a DeleteResourcePolicy request, DynamoDB might return the policy that was present before the deletion request.   If you issue a GetResourcePolicy request immediately after a CreateTable request, which includes a resource-based policy, DynamoDB might return a ResourceNotFoundException or a PolicyNotFoundException.   Because GetResourcePolicy uses an eventually consistent query, the metadata for your policy or table might not be available at that moment. Wait for a few seconds, and then retry the GetResourcePolicy request. After a GetResourcePolicy request returns a policy created using the PutResourcePolicy request, you can assume the policy will start getting applied in the authorization of requests to the resource. Because this process is eventually consistent, it will take some time to apply the policy to all requests to a resource. Policies that you attach while creating a table using the CreateTable request will always be applied to all requests for that table.
+   * Returns the resource-based policy document attached to the resource, which can be a table or stream, in JSON format.  GetResourcePolicy follows an  eventually consistent  model. The following list describes the outcomes when you issue the GetResourcePolicy request immediately after issuing another request:   If you issue a GetResourcePolicy request immediately after a PutResourcePolicy request, DynamoDB might return a PolicyNotFoundException.   If you issue a GetResourcePolicyrequest immediately after a DeleteResourcePolicy request, DynamoDB might return the policy that was present before the deletion request.   If you issue a GetResourcePolicy request immediately after a CreateTable request, which includes a resource-based policy, DynamoDB might return a ResourceNotFoundException or a PolicyNotFoundException.   Because GetResourcePolicy uses an eventually consistent query, the metadata for your policy or table might not be available at that moment. Wait for a few seconds, and then retry the GetResourcePolicy request. After a GetResourcePolicy request returns a policy created using the PutResourcePolicy request, the policy will be applied in the authorization of requests to the resource. Because this process is eventually consistent, it will take some time to apply the policy to all requests to a resource. Policies that you attach while creating a table using the CreateTable request will always be applied to all requests for that table.
    */
   getResourcePolicy(callback?: (err: AWSError, data: DynamoDB.Types.GetResourcePolicyOutput) => void): Request<DynamoDB.Types.GetResourcePolicyOutput, AWSError>;
   /**
@@ -327,11 +327,11 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   putItem(callback?: (err: AWSError, data: DynamoDB.Types.PutItemOutput) => void): Request<DynamoDB.Types.PutItemOutput, AWSError>;
   /**
-   * Attaches a resource-based policy document to the resource, which can be a table or stream. When you attach a resource-based policy using this API, the policy application is  eventually consistent .  PutResourcePolicy is an idempotent operation; running it multiple times on the same resource using the same policy document will return the same revision ID. If you specify an ExpectedRevisionId which doesn't match the current policy's RevisionId, the PolicyNotFoundException will be returned.   PutResourcePolicy is an asynchronous operation. If you issue a GetResourcePolicy request immediately after a PutResourcePolicy request, DynamoDB might return your previous policy, if there was one, or return the PolicyNotFoundException. This is because GetResourcePolicy uses an eventually consistent query, and the metadata for your policy or table might not be available at that moment. Wait for a few seconds, and then try the GetResourcePolicy request again. 
+   * Attaches a resource-based policy document to the resource, which can be a table or stream. When you attach a resource-based policy using this API, the policy application is  eventually consistent .  PutResourcePolicy is an idempotent operation; running it multiple times on the same resource using the same policy document will return the same revision ID. If you specify an ExpectedRevisionId that doesn't match the current policy's RevisionId, the PolicyNotFoundException will be returned.   PutResourcePolicy is an asynchronous operation. If you issue a GetResourcePolicy request immediately after a PutResourcePolicy request, DynamoDB might return your previous policy, if there was one, or return the PolicyNotFoundException. This is because GetResourcePolicy uses an eventually consistent query, and the metadata for your policy or table might not be available at that moment. Wait for a few seconds, and then try the GetResourcePolicy request again. 
    */
   putResourcePolicy(params: DynamoDB.Types.PutResourcePolicyInput, callback?: (err: AWSError, data: DynamoDB.Types.PutResourcePolicyOutput) => void): Request<DynamoDB.Types.PutResourcePolicyOutput, AWSError>;
   /**
-   * Attaches a resource-based policy document to the resource, which can be a table or stream. When you attach a resource-based policy using this API, the policy application is  eventually consistent .  PutResourcePolicy is an idempotent operation; running it multiple times on the same resource using the same policy document will return the same revision ID. If you specify an ExpectedRevisionId which doesn't match the current policy's RevisionId, the PolicyNotFoundException will be returned.   PutResourcePolicy is an asynchronous operation. If you issue a GetResourcePolicy request immediately after a PutResourcePolicy request, DynamoDB might return your previous policy, if there was one, or return the PolicyNotFoundException. This is because GetResourcePolicy uses an eventually consistent query, and the metadata for your policy or table might not be available at that moment. Wait for a few seconds, and then try the GetResourcePolicy request again. 
+   * Attaches a resource-based policy document to the resource, which can be a table or stream. When you attach a resource-based policy using this API, the policy application is  eventually consistent .  PutResourcePolicy is an idempotent operation; running it multiple times on the same resource using the same policy document will return the same revision ID. If you specify an ExpectedRevisionId that doesn't match the current policy's RevisionId, the PolicyNotFoundException will be returned.   PutResourcePolicy is an asynchronous operation. If you issue a GetResourcePolicy request immediately after a PutResourcePolicy request, DynamoDB might return your previous policy, if there was one, or return the PolicyNotFoundException. This is because GetResourcePolicy uses an eventually consistent query, and the metadata for your policy or table might not be available at that moment. Wait for a few seconds, and then try the GetResourcePolicy request again. 
    */
   putResourcePolicy(callback?: (err: AWSError, data: DynamoDB.Types.PutResourcePolicyOutput) => void): Request<DynamoDB.Types.PutResourcePolicyOutput, AWSError>;
   /**
@@ -1058,6 +1058,10 @@ declare namespace DynamoDB {
      * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Service, Account, and Table Quotas in the Amazon DynamoDB Developer Guide.
      */
     ProvisionedThroughput?: ProvisionedThroughput;
+    /**
+     * The maximum number of read and write units for the global secondary index being created. If you use this parameter, you must specify MaxReadRequestUnits, MaxWriteRequestUnits, or both.
+     */
+    OnDemandThroughput?: OnDemandThroughput;
   }
   export interface CreateGlobalTableInput {
     /**
@@ -1094,6 +1098,10 @@ declare namespace DynamoDB {
      * Replica-specific provisioned throughput. If not specified, uses the source table's provisioned throughput settings.
      */
     ProvisionedThroughputOverride?: ProvisionedThroughputOverride;
+    /**
+     * The maximum on-demand throughput settings for the specified replica table being created. You can only modify MaxReadRequestUnits, because you can't modify MaxWriteRequestUnits for individual replica tables. 
+     */
+    OnDemandThroughputOverride?: OnDemandThroughputOverride;
     /**
      * Replica-specific global secondary index settings.
      */
@@ -1153,9 +1161,13 @@ declare namespace DynamoDB {
      */
     DeletionProtectionEnabled?: DeletionProtectionEnabled;
     /**
-     * An Amazon Web Services resource-based policy document in JSON format that will be attached to the table. When you attach a resource-based policy while creating a table, the policy creation is strongly consistent. The maximum size supported for a resource-based policy document is 20 KB. DynamoDB counts whitespaces when calculating the size of a policy against this limit. You can’t request an increase for this limit. For a full list of all considerations that you should keep in mind while attaching a resource-based policy, see Resource-based policy considerations.
+     * An Amazon Web Services resource-based policy document in JSON format that will be attached to the table. When you attach a resource-based policy while creating a table, the policy application is strongly consistent. The maximum size supported for a resource-based policy document is 20 KB. DynamoDB counts whitespaces when calculating the size of a policy against this limit. For a full list of all considerations that apply for resource-based policies, see Resource-based policy considerations.
      */
     ResourcePolicy?: ResourcePolicy;
+    /**
+     * Sets the maximum number of read and write units for the specified table in on-demand capacity mode. If you use this parameter, you must specify MaxReadRequestUnits, MaxWriteRequestUnits, or both.
+     */
+    OnDemandThroughput?: OnDemandThroughput;
   }
   export interface CreateTableOutput {
     /**
@@ -1308,7 +1320,7 @@ declare namespace DynamoDB {
   }
   export interface DeleteResourcePolicyOutput {
     /**
-     * A unique string that represents the revision ID of the policy. If you are comparing revision IDs, make sure to always use string comparison logic. This value will be empty if you make a request against a resource without a policy.
+     * A unique string that represents the revision ID of the policy. If you're comparing revision IDs, make sure to always use string comparison logic. This value will be empty if you make a request against a resource without a policy.
      */
     RevisionId?: PolicyRevisionId;
   }
@@ -1873,7 +1885,7 @@ declare namespace DynamoDB {
      */
     Policy?: ResourcePolicy;
     /**
-     * A unique string that represents the revision ID of the policy. If you are comparing revision IDs, make sure to always use string comparison logic.
+     * A unique string that represents the revision ID of the policy. If you're comparing revision IDs, make sure to always use string comparison logic.
      */
     RevisionId?: PolicyRevisionId;
   }
@@ -1894,6 +1906,10 @@ declare namespace DynamoDB {
      * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Service, Account, and Table Quotas in the Amazon DynamoDB Developer Guide.
      */
     ProvisionedThroughput?: ProvisionedThroughput;
+    /**
+     * The maximum number of read and write units for the specified global secondary index. If you use this parameter, you must specify MaxReadRequestUnits, MaxWriteRequestUnits, or both.
+     */
+    OnDemandThroughput?: OnDemandThroughput;
   }
   export interface GlobalSecondaryIndexAutoScalingUpdate {
     /**
@@ -1940,6 +1956,10 @@ declare namespace DynamoDB {
      * The Amazon Resource Name (ARN) that uniquely identifies the index.
      */
     IndexArn?: String;
+    /**
+     * The maximum number of read and write units for the specified global secondary index. If you use this parameter, you must specify MaxReadRequestUnits, MaxWriteRequestUnits, or both.
+     */
+    OnDemandThroughput?: OnDemandThroughput;
   }
   export type GlobalSecondaryIndexDescriptionList = GlobalSecondaryIndexDescription[];
   export interface GlobalSecondaryIndexInfo {
@@ -1959,6 +1979,7 @@ declare namespace DynamoDB {
      * Represents the provisioned throughput settings for the specified global secondary index. 
      */
     ProvisionedThroughput?: ProvisionedThroughput;
+    OnDemandThroughput?: OnDemandThroughput;
   }
   export type GlobalSecondaryIndexList = GlobalSecondaryIndex[];
   export interface GlobalSecondaryIndexUpdate {
@@ -2565,6 +2586,22 @@ declare namespace DynamoDB {
   export type NullAttributeValue = boolean;
   export type NumberAttributeValue = string;
   export type NumberSetAttributeValue = NumberAttributeValue[];
+  export interface OnDemandThroughput {
+    /**
+     * Maximum number of read request units for the specified table. To specify a maximum OnDemandThroughput on your table, set the value of MaxReadRequestUnits as greater than or equal to 1. To remove the maximum OnDemandThroughput that is currently set on your table, set the value of MaxReadRequestUnits to -1.
+     */
+    MaxReadRequestUnits?: LongObject;
+    /**
+     * Maximum number of write request units for the specified table. To specify a maximum OnDemandThroughput on your table, set the value of MaxWriteRequestUnits as greater than or equal to 1. To remove the maximum OnDemandThroughput that is currently set on your table, set the value of MaxWriteRequestUnits to -1.
+     */
+    MaxWriteRequestUnits?: LongObject;
+  }
+  export interface OnDemandThroughputOverride {
+    /**
+     * Maximum number of read request units for the specified replica table.
+     */
+    MaxReadRequestUnits?: LongObject;
+  }
   export interface ParameterizedStatement {
     /**
      *  A PartiQL statement that uses parameters. 
@@ -2756,11 +2793,11 @@ declare namespace DynamoDB {
      */
     ResourceArn: ResourceArnString;
     /**
-     * An Amazon Web Services resource-based policy document in JSON format. The maximum size supported for a resource-based policy document is 20 KB. DynamoDB counts whitespaces when calculating the size of a policy against this limit. For a full list of all considerations that you should keep in mind while attaching a resource-based policy, see Resource-based policy considerations.
+     * An Amazon Web Services resource-based policy document in JSON format.   The maximum size supported for a resource-based policy document is 20 KB. DynamoDB counts whitespaces when calculating the size of a policy against this limit.   Within a resource-based policy, if the action for a DynamoDB service-linked role (SLR) to replicate data for a global table is denied, adding or deleting a replica will fail with an error.   For a full list of all considerations that apply while attaching a resource-based policy, see Resource-based policy considerations.
      */
     Policy: ResourcePolicy;
     /**
-     * A string value that you can use to conditionally update your policy. You can provide the revision ID of your existing policy to make mutating requests against that policy. When you provide an expected revision ID, if the revision ID of the existing policy on the resource doesn't match or if there's no policy attached to the resource, your request will be rejected with a PolicyNotFoundException. To conditionally put a policy when no policy exists for the resource, specify NO_POLICY for the revision ID.
+     * A string value that you can use to conditionally update your policy. You can provide the revision ID of your existing policy to make mutating requests against that policy.  When you provide an expected revision ID, if the revision ID of the existing policy on the resource doesn't match or if there's no policy attached to the resource, your request will be rejected with a PolicyNotFoundException.  To conditionally attach a policy when no policy exists for the resource, specify NO_POLICY for the revision ID.
      */
     ExpectedRevisionId?: PolicyRevisionId;
     /**
@@ -2770,7 +2807,7 @@ declare namespace DynamoDB {
   }
   export interface PutResourcePolicyOutput {
     /**
-     * A unique string that represents the revision ID of the policy. If you are comparing revision IDs, make sure to always use string comparison logic.
+     * A unique string that represents the revision ID of the policy. If you're comparing revision IDs, make sure to always use string comparison logic.
      */
     RevisionId?: PolicyRevisionId;
   }
@@ -2925,6 +2962,10 @@ declare namespace DynamoDB {
      */
     ProvisionedThroughputOverride?: ProvisionedThroughputOverride;
     /**
+     * Overrides the maximum on-demand throughput settings for the specified replica table.
+     */
+    OnDemandThroughputOverride?: OnDemandThroughputOverride;
+    /**
      * Replica-specific global secondary index settings.
      */
     GlobalSecondaryIndexes?: ReplicaGlobalSecondaryIndexDescriptionList;
@@ -2944,6 +2985,10 @@ declare namespace DynamoDB {
      * Replica table GSI-specific provisioned throughput. If not specified, uses the source table GSI's read capacity settings.
      */
     ProvisionedThroughputOverride?: ProvisionedThroughputOverride;
+    /**
+     * Overrides the maximum on-demand throughput settings for the specified global secondary index in the specified replica table.
+     */
+    OnDemandThroughputOverride?: OnDemandThroughputOverride;
   }
   export interface ReplicaGlobalSecondaryIndexAutoScalingDescription {
     /**
@@ -2975,6 +3020,10 @@ declare namespace DynamoDB {
      * If not described, uses the source table GSI's read capacity settings.
      */
     ProvisionedThroughputOverride?: ProvisionedThroughputOverride;
+    /**
+     * Overrides the maximum on-demand throughput for the specified global secondary index in the specified replica table.
+     */
+    OnDemandThroughputOverride?: OnDemandThroughputOverride;
   }
   export type ReplicaGlobalSecondaryIndexDescriptionList = ReplicaGlobalSecondaryIndexDescription[];
   export type ReplicaGlobalSecondaryIndexList = ReplicaGlobalSecondaryIndex[];
@@ -3155,6 +3204,7 @@ declare namespace DynamoDB {
      * Provisioned throughput settings for the restored table.
      */
     ProvisionedThroughputOverride?: ProvisionedThroughput;
+    OnDemandThroughputOverride?: OnDemandThroughput;
     /**
      * The new server-side encryption settings for the restored table.
      */
@@ -3203,6 +3253,7 @@ declare namespace DynamoDB {
      * Provisioned throughput settings for the restored table.
      */
     ProvisionedThroughputOverride?: ProvisionedThroughput;
+    OnDemandThroughputOverride?: OnDemandThroughput;
     /**
      * The new server-side encryption settings for the restored table.
      */
@@ -3391,6 +3442,7 @@ declare namespace DynamoDB {
      * Read IOPs and Write IOPS on the table when the backup was created.
      */
     ProvisionedThroughput: ProvisionedThroughput;
+    OnDemandThroughput?: OnDemandThroughput;
     /**
      * Number of items in the table. Note that this is an approximate value. 
      */
@@ -3483,6 +3535,7 @@ declare namespace DynamoDB {
      */
     BillingMode?: BillingMode;
     ProvisionedThroughput?: ProvisionedThroughput;
+    OnDemandThroughput?: OnDemandThroughput;
     SSESpecification?: SSESpecification;
     /**
      *  The Global Secondary Indexes (GSI) of the table to be created as part of the import operation. 
@@ -3582,6 +3635,10 @@ declare namespace DynamoDB {
      * Indicates whether deletion protection is enabled (true) or disabled (false) on the table.
      */
     DeletionProtectionEnabled?: DeletionProtectionEnabled;
+    /**
+     * The maximum number of read and write units for the specified on-demand table. If you use this parameter, you must specify MaxReadRequestUnits, MaxWriteRequestUnits, or both.
+     */
+    OnDemandThroughput?: OnDemandThroughput;
   }
   export type TableId = string;
   export type TableName = string;
@@ -3800,7 +3857,11 @@ declare namespace DynamoDB {
     /**
      * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Service, Account, and Table Quotas in the Amazon DynamoDB Developer Guide.
      */
-    ProvisionedThroughput: ProvisionedThroughput;
+    ProvisionedThroughput?: ProvisionedThroughput;
+    /**
+     * Updates the maximum number of read and write units for the specified global secondary index. If you use this parameter, you must specify MaxReadRequestUnits, MaxWriteRequestUnits, or both.
+     */
+    OnDemandThroughput?: OnDemandThroughput;
   }
   export interface UpdateGlobalTableInput {
     /**
@@ -3971,6 +4032,10 @@ declare namespace DynamoDB {
      */
     ProvisionedThroughputOverride?: ProvisionedThroughputOverride;
     /**
+     * Overrides the maximum on-demand throughput for the replica table.
+     */
+    OnDemandThroughputOverride?: OnDemandThroughputOverride;
+    /**
      * Replica-specific global secondary index settings.
      */
     GlobalSecondaryIndexes?: ReplicaGlobalSecondaryIndexList;
@@ -4020,6 +4085,10 @@ declare namespace DynamoDB {
      * Indicates whether deletion protection is to be enabled (true) or disabled (false) on the table.
      */
     DeletionProtectionEnabled?: DeletionProtectionEnabled;
+    /**
+     * Updates the maximum number of read and write units for the specified table in on-demand capacity mode. If you use this parameter, you must specify MaxReadRequestUnits, MaxWriteRequestUnits, or both.
+     */
+    OnDemandThroughput?: OnDemandThroughput;
   }
   export interface UpdateTableOutput {
     /**

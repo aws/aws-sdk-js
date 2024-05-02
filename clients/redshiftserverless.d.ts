@@ -477,7 +477,7 @@ declare namespace RedshiftServerless {
   export type Boolean = boolean;
   export interface ConfigParameter {
     /**
-     * The key of the parameter. The options are auto_mv, datestyle, enable_case_sensitive_identifier, enable_user_activity_logging, query_group, search_path, require_ssl, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see Query monitoring metrics for Amazon Redshift Serverless.
+     * The key of the parameter. The options are auto_mv, datestyle, enable_case_sensitive_identifier, enable_user_activity_logging, query_group, search_path, require_ssl, use_fips_ssl, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see Query monitoring metrics for Amazon Redshift Serverless.
      */
     parameterKey?: ParameterKey;
     /**
@@ -767,7 +767,7 @@ declare namespace RedshiftServerless {
      */
     baseCapacity?: Integer;
     /**
-     * An array of parameters to set for advanced control over a database. The options are auto_mv, datestyle, enable_case_sensitive_identifier, enable_user_activity_logging, query_group, search_path, require_ssl, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see  Query monitoring metrics for Amazon Redshift Serverless.
+     * An array of parameters to set for advanced control over a database. The options are auto_mv, datestyle, enable_case_sensitive_identifier, enable_user_activity_logging, query_group, search_path, require_ssl, use_fips_ssl, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see  Query monitoring metrics for Amazon Redshift Serverless.
      */
     configParameters?: ConfigParameterList;
     /**
@@ -1313,7 +1313,7 @@ declare namespace RedshiftServerless {
      */
     nextToken?: PaginationToken;
     /**
-     * All of the returned scheduled action objects.
+     * All of the returned scheduled action association objects.
      */
     scheduledActions?: ScheduledActionsList;
   }
@@ -1784,6 +1784,16 @@ declare namespace RedshiftServerless {
      */
     cron?: String;
   }
+  export interface ScheduledActionAssociation {
+    /**
+     * Name of associated Amazon Redshift Serverless namespace.
+     */
+    namespaceName?: NamespaceName;
+    /**
+     * Name of associated scheduled action.
+     */
+    scheduledActionName?: ScheduledActionName;
+  }
   export type ScheduledActionName = string;
   export interface ScheduledActionResponse {
     /**
@@ -1828,7 +1838,7 @@ declare namespace RedshiftServerless {
     state?: State;
     targetAction?: TargetAction;
   }
-  export type ScheduledActionsList = ScheduledActionName[];
+  export type ScheduledActionsList = ScheduledActionAssociation[];
   export type SecurityGroupId = string;
   export type SecurityGroupIdList = SecurityGroupId[];
   export interface Snapshot {
@@ -2252,7 +2262,7 @@ declare namespace RedshiftServerless {
      */
     baseCapacity?: Integer;
     /**
-     * An array of parameters to set for advanced control over a database. The options are auto_mv, datestyle, enable_case_sensitive_identifier, enable_user_activity_logging, query_group, search_path, require_ssl, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see  Query monitoring metrics for Amazon Redshift Serverless.
+     * An array of parameters to set for advanced control over a database. The options are auto_mv, datestyle, enable_case_sensitive_identifier, enable_user_activity_logging, query_group, search_path, require_ssl, use_fips_ssl, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see  Query monitoring metrics for Amazon Redshift Serverless.
      */
     configParameters?: ConfigParameterList;
     /**
@@ -2359,7 +2369,7 @@ declare namespace RedshiftServerless {
      */
     baseCapacity?: Integer;
     /**
-     * An array of parameters to set for advanced control over a database. The options are auto_mv, datestyle, enable_case_sensitive_identifier, enable_user_activity_logging, query_group, search_path, require_ssl, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see  Query monitoring metrics for Amazon Redshift Serverless.
+     * An array of parameters to set for advanced control over a database. The options are auto_mv, datestyle, enable_case_sensitive_identifier, enable_user_activity_logging, query_group, search_path, require_ssl, use_fips_ssl, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see  Query monitoring metrics for Amazon Redshift Serverless.
      */
     configParameters?: ConfigParameterList;
     /**
@@ -2407,7 +2417,7 @@ declare namespace RedshiftServerless {
      */
     port?: Integer;
     /**
-     * A value that specifies whether the workgroup can be accessible from a public network
+     * A value that specifies whether the workgroup can be accessible from a public network.
      */
     publiclyAccessible?: Boolean;
     /**

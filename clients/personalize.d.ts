@@ -36,6 +36,14 @@ declare class Personalize extends Service {
    */
   createCampaign(callback?: (err: AWSError, data: Personalize.Types.CreateCampaignResponse) => void): Request<Personalize.Types.CreateCampaignResponse, AWSError>;
   /**
+   * Creates a batch job that deletes all references to specific users from an Amazon Personalize dataset group in batches. You specify the users to delete in a CSV file of userIds in an Amazon S3 bucket. After a job completes, Amazon Personalize no longer trains on the users’ data and no longer considers the users when generating user segments. For more information about creating a data deletion job, see Deleting users.   Your input file must be a CSV file with a single USER_ID column that lists the users IDs. For more information about preparing the CSV file, see Preparing your data deletion file and uploading it to Amazon S3.   To give Amazon Personalize permission to access your input CSV file of userIds, you must specify an IAM service role that has permission to read from the data source. This role needs GetObject and ListBucket permissions for the bucket and its content. These permissions are the same as importing data. For information on granting access to your Amazon S3 bucket, see Giving Amazon Personalize Access to Amazon S3 Resources.     After you create a job, it can take up to a day to delete all references to the users from datasets and models. Until the job completes, Amazon Personalize continues to use the data when training. And if you use a User Segmentation recipe, the users might appear in user segments.   Status  A data deletion job can have one of the following statuses:   PENDING &gt; IN_PROGRESS &gt; COMPLETED -or- FAILED   To get the status of the data deletion job, call DescribeDataDeletionJob API operation and specify the Amazon Resource Name (ARN) of the job. If the status is FAILED, the response includes a failureReason key, which describes why the job failed.  Related APIs     ListDataDeletionJobs     DescribeDataDeletionJob   
+   */
+  createDataDeletionJob(params: Personalize.Types.CreateDataDeletionJobRequest, callback?: (err: AWSError, data: Personalize.Types.CreateDataDeletionJobResponse) => void): Request<Personalize.Types.CreateDataDeletionJobResponse, AWSError>;
+  /**
+   * Creates a batch job that deletes all references to specific users from an Amazon Personalize dataset group in batches. You specify the users to delete in a CSV file of userIds in an Amazon S3 bucket. After a job completes, Amazon Personalize no longer trains on the users’ data and no longer considers the users when generating user segments. For more information about creating a data deletion job, see Deleting users.   Your input file must be a CSV file with a single USER_ID column that lists the users IDs. For more information about preparing the CSV file, see Preparing your data deletion file and uploading it to Amazon S3.   To give Amazon Personalize permission to access your input CSV file of userIds, you must specify an IAM service role that has permission to read from the data source. This role needs GetObject and ListBucket permissions for the bucket and its content. These permissions are the same as importing data. For information on granting access to your Amazon S3 bucket, see Giving Amazon Personalize Access to Amazon S3 Resources.     After you create a job, it can take up to a day to delete all references to the users from datasets and models. Until the job completes, Amazon Personalize continues to use the data when training. And if you use a User Segmentation recipe, the users might appear in user segments.   Status  A data deletion job can have one of the following statuses:   PENDING &gt; IN_PROGRESS &gt; COMPLETED -or- FAILED   To get the status of the data deletion job, call DescribeDataDeletionJob API operation and specify the Amazon Resource Name (ARN) of the job. If the status is FAILED, the response includes a failureReason key, which describes why the job failed.  Related APIs     ListDataDeletionJobs     DescribeDataDeletionJob   
+   */
+  createDataDeletionJob(callback?: (err: AWSError, data: Personalize.Types.CreateDataDeletionJobResponse) => void): Request<Personalize.Types.CreateDataDeletionJobResponse, AWSError>;
+  /**
    * Creates an empty dataset and adds it to the specified dataset group. Use CreateDatasetImportJob to import your training data to a dataset. There are 5 types of datasets:   Item interactions   Items   Users   Action interactions   Actions   Each dataset type has an associated schema with required field types. Only the Item interactions dataset is required in order to train a model (also referred to as creating a solution). A dataset can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   DELETE PENDING &gt; DELETE IN_PROGRESS   To get the status of the dataset, call DescribeDataset.  Related APIs     CreateDatasetGroup     ListDatasets     DescribeDataset     DeleteDataset   
    */
   createDataset(params: Personalize.Types.CreateDatasetRequest, callback?: (err: AWSError, data: Personalize.Types.CreateDatasetResponse) => void): Request<Personalize.Types.CreateDatasetResponse, AWSError>;
@@ -228,6 +236,14 @@ declare class Personalize extends Service {
    */
   describeCampaign(callback?: (err: AWSError, data: Personalize.Types.DescribeCampaignResponse) => void): Request<Personalize.Types.DescribeCampaignResponse, AWSError>;
   /**
+   * Describes the data deletion job created by CreateDataDeletionJob, including the job status.
+   */
+  describeDataDeletionJob(params: Personalize.Types.DescribeDataDeletionJobRequest, callback?: (err: AWSError, data: Personalize.Types.DescribeDataDeletionJobResponse) => void): Request<Personalize.Types.DescribeDataDeletionJobResponse, AWSError>;
+  /**
+   * Describes the data deletion job created by CreateDataDeletionJob, including the job status.
+   */
+  describeDataDeletionJob(callback?: (err: AWSError, data: Personalize.Types.DescribeDataDeletionJobResponse) => void): Request<Personalize.Types.DescribeDataDeletionJobResponse, AWSError>;
+  /**
    * Describes the given dataset. For more information on datasets, see CreateDataset.
    */
   describeDataset(params: Personalize.Types.DescribeDatasetRequest, callback?: (err: AWSError, data: Personalize.Types.DescribeDatasetResponse) => void): Request<Personalize.Types.DescribeDatasetResponse, AWSError>;
@@ -363,6 +379,14 @@ declare class Personalize extends Service {
    * Returns a list of campaigns that use the given solution. When a solution is not specified, all the campaigns associated with the account are listed. The response provides the properties for each campaign, including the Amazon Resource Name (ARN). For more information on campaigns, see CreateCampaign.
    */
   listCampaigns(callback?: (err: AWSError, data: Personalize.Types.ListCampaignsResponse) => void): Request<Personalize.Types.ListCampaignsResponse, AWSError>;
+  /**
+   * Returns a list of data deletion jobs for a dataset group ordered by creation time, with the most recent first. When a dataset group is not specified, all the data deletion jobs associated with the account are listed. The response provides the properties for each job, including the Amazon Resource Name (ARN). For more information on data deletion jobs, see Deleting users.
+   */
+  listDataDeletionJobs(params: Personalize.Types.ListDataDeletionJobsRequest, callback?: (err: AWSError, data: Personalize.Types.ListDataDeletionJobsResponse) => void): Request<Personalize.Types.ListDataDeletionJobsResponse, AWSError>;
+  /**
+   * Returns a list of data deletion jobs for a dataset group ordered by creation time, with the most recent first. When a dataset group is not specified, all the data deletion jobs associated with the account are listed. The response provides the properties for each job, including the Amazon Resource Name (ARN). For more information on data deletion jobs, see Deleting users.
+   */
+  listDataDeletionJobs(callback?: (err: AWSError, data: Personalize.Types.ListDataDeletionJobsResponse) => void): Request<Personalize.Types.ListDataDeletionJobsResponse, AWSError>;
   /**
    * Returns a list of dataset export jobs that use the given dataset. When a dataset is not specified, all the dataset export jobs associated with the account are listed. The response provides the properties for each dataset export job, including the Amazon Resource Name (ARN). For more information on dataset export jobs, see CreateDatasetExportJob. For more information on datasets, see CreateDataset.
    */
@@ -1090,6 +1114,34 @@ declare namespace Personalize {
      */
     campaignArn?: Arn;
   }
+  export interface CreateDataDeletionJobRequest {
+    /**
+     * The name for the data deletion job.
+     */
+    jobName: Name;
+    /**
+     * The Amazon Resource Name (ARN) of the dataset group that has the datasets you want to delete records from.
+     */
+    datasetGroupArn: Arn;
+    /**
+     * The Amazon S3 bucket that contains the list of userIds of the users to delete.
+     */
+    dataSource: DataSource;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role that has permissions to read from the Amazon S3 data source.
+     */
+    roleArn: RoleArn;
+    /**
+     * A list of tags to apply to the data deletion job.
+     */
+    tags?: Tags;
+  }
+  export interface CreateDataDeletionJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the data deletion job.
+     */
+    dataDeletionJobArn?: Arn;
+  }
   export interface CreateDatasetExportJobRequest {
     /**
      * The name for the dataset export job.
@@ -1406,9 +1458,79 @@ declare namespace Personalize {
      */
     solutionVersionArn?: Arn;
   }
+  export interface DataDeletionJob {
+    /**
+     * The name of the data deletion job.
+     */
+    jobName?: Name;
+    /**
+     * The Amazon Resource Name (ARN) of the data deletion job.
+     */
+    dataDeletionJobArn?: Arn;
+    /**
+     * The Amazon Resource Name (ARN) of the dataset group the job deletes records from.
+     */
+    datasetGroupArn?: Arn;
+    dataSource?: DataSource;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role that has permissions to read from the Amazon S3 data source.
+     */
+    roleArn?: RoleArn;
+    /**
+     * The status of the data deletion job. A data deletion job can have one of the following statuses:   PENDING &gt; IN_PROGRESS &gt; COMPLETED -or- FAILED  
+     */
+    status?: Status;
+    /**
+     * The number of records deleted by a COMPLETED job.
+     */
+    numDeleted?: Integer;
+    /**
+     * The creation date and time (in Unix time) of the data deletion job.
+     */
+    creationDateTime?: _Date;
+    /**
+     * The date and time (in Unix time) the data deletion job was last updated.
+     */
+    lastUpdatedDateTime?: _Date;
+    /**
+     * If a data deletion job fails, provides the reason why.
+     */
+    failureReason?: FailureReason;
+  }
+  export interface DataDeletionJobSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the data deletion job.
+     */
+    dataDeletionJobArn?: Arn;
+    /**
+     * The Amazon Resource Name (ARN) of the dataset group the job deleted records from.
+     */
+    datasetGroupArn?: Arn;
+    /**
+     * The name of the data deletion job.
+     */
+    jobName?: Name;
+    /**
+     * The status of the data deletion job. A data deletion job can have one of the following statuses:   PENDING &gt; IN_PROGRESS &gt; COMPLETED -or- FAILED  
+     */
+    status?: Status;
+    /**
+     * The creation date and time (in Unix time) of the data deletion job.
+     */
+    creationDateTime?: _Date;
+    /**
+     * The date and time (in Unix time) the data deletion job was last updated.
+     */
+    lastUpdatedDateTime?: _Date;
+    /**
+     * If a data deletion job fails, provides the reason why.
+     */
+    failureReason?: FailureReason;
+  }
+  export type DataDeletionJobs = DataDeletionJobSummary[];
   export interface DataSource {
     /**
-     * The path to the Amazon S3 bucket where the data that you want to upload to your dataset is stored. For example:   s3://bucket-name/folder-name/ 
+     * For dataset import jobs, the path to the Amazon S3 bucket where the data that you want to upload to your dataset is stored. For data deletion jobs, the path to the Amazon S3 bucket that stores the list of records to delete.   For example:   s3://bucket-name/folder-name/fileName.csv  If your CSV files are in a folder in your Amazon S3 bucket and you want your import job or data deletion job to consider multiple files, you can specify the path to the folder. With a data deletion job, Amazon Personalize uses all files in the folder and any sub folder. Use the following syntax with a / after the folder name:  s3://bucket-name/folder-name/ 
      */
     dataLocation?: S3Location;
   }
@@ -1940,6 +2062,18 @@ declare namespace Personalize {
      */
     campaign?: Campaign;
   }
+  export interface DescribeDataDeletionJobRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the data deletion job.
+     */
+    dataDeletionJobArn: Arn;
+  }
+  export interface DescribeDataDeletionJobResponse {
+    /**
+     * Information about the data deletion job, including the status. The status is one of the following values:   PENDING   IN_PROGRESS   COMPLETED   FAILED  
+     */
+    dataDeletionJob?: DataDeletionJob;
+  }
   export interface DescribeDatasetExportJobRequest {
     /**
      * The Amazon Resource Name (ARN) of the dataset export job to describe.
@@ -2333,6 +2467,7 @@ declare namespace Personalize {
   export type HyperParameters = {[key: string]: ParameterValue};
   export type ImportMode = "FULL"|"INCREMENTAL"|string;
   export type IngestionMode = "BULK"|"PUT"|"ALL"|string;
+  export type Integer = number;
   export interface IntegerHyperParameterRange {
     /**
      * The name of the hyperparameter.
@@ -2421,6 +2556,30 @@ declare namespace Personalize {
     campaigns?: Campaigns;
     /**
      * A token for getting the next set of campaigns (if they exist).
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListDataDeletionJobsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the dataset group to list data deletion jobs for.
+     */
+    datasetGroupArn?: Arn;
+    /**
+     * A token returned from the previous call to ListDataDeletionJobs for getting the next set of jobs (if they exist).
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of data deletion jobs to return.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListDataDeletionJobsResponse {
+    /**
+     * The list of data deletion jobs.
+     */
+    dataDeletionJobs?: DataDeletionJobs;
+    /**
+     * A token for getting the next set of data deletion jobs (if they exist).
      */
     nextToken?: NextToken;
   }

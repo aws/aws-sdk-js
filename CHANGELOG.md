@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1611.0-->
+<!--LATEST=2.1612.0-->
 <!--ENTRYINSERT-->
+
+## 2.1612.0
+* feature: DynamoDB: This release adds support to specify an optional, maximum OnDemandThroughput for DynamoDB tables and global secondary indexes in the CreateTable or UpdateTable APIs. You can also override the OnDemandThroughput settings by calling the ImportTable, RestoreFromPointInTime, or RestoreFromBackup APIs.
+* feature: EC2: This release includes a new API for retrieving the public endorsement key of the EC2 instance's Nitro Trusted Platform Module (NitroTPM).
+* feature: Personalize: This releases ability to delete users and their data, including their metadata and interactions data, from a dataset group.
+* feature: RedshiftServerless: Update Redshift Serverless List Scheduled Actions Output Response to include Namespace Name.
 
 ## 2.1611.0
 * feature: BedrockAgent: This release adds support for using MongoDB Atlas as a vector store when creating a knowledge base.

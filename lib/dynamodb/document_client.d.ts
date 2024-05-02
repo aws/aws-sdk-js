@@ -655,6 +655,10 @@ export namespace DocumentClient {
      * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Service, Account, and Table Quotas in the Amazon DynamoDB Developer Guide.
      */
     ProvisionedThroughput?: ProvisionedThroughput;
+    /**
+     * The maximum number of read and write units for the global secondary index being created. If you use this parameter, you must specify MaxReadRequestUnits, MaxWriteRequestUnits, or both.
+     */
+    OnDemandThroughput?: OnDemandThroughput;
   }
   export interface CreateGlobalTableInput {
     /**
@@ -691,6 +695,10 @@ export namespace DocumentClient {
      * Replica-specific provisioned throughput. If not specified, uses the source table's provisioned throughput settings.
      */
     ProvisionedThroughputOverride?: ProvisionedThroughputOverride;
+    /**
+     * The maximum on-demand throughput settings for the specified replica table being created. You can only modify MaxReadRequestUnits, because you can't modify MaxWriteRequestUnits for individual replica tables. 
+     */
+    OnDemandThroughputOverride?: OnDemandThroughputOverride;
     /**
      * Replica-specific global secondary index settings.
      */
@@ -750,9 +758,13 @@ export namespace DocumentClient {
      */
     DeletionProtectionEnabled?: DeletionProtectionEnabled;
     /**
-     * An Amazon Web Services resource-based policy document in JSON format that will be attached to the table. When you attach a resource-based policy while creating a table, the policy creation is strongly consistent. The maximum size supported for a resource-based policy document is 20 KB. DynamoDB counts whitespaces when calculating the size of a policy against this limit. You can’t request an increase for this limit. For a full list of all considerations that you should keep in mind while attaching a resource-based policy, see Resource-based policy considerations.
+     * An Amazon Web Services resource-based policy document in JSON format that will be attached to the table. When you attach a resource-based policy while creating a table, the policy application is strongly consistent. The maximum size supported for a resource-based policy document is 20 KB. DynamoDB counts whitespaces when calculating the size of a policy against this limit. For a full list of all considerations that apply for resource-based policies, see Resource-based policy considerations.
      */
     ResourcePolicy?: ResourcePolicy;
+    /**
+     * Sets the maximum number of read and write units for the specified table in on-demand capacity mode. If you use this parameter, you must specify MaxReadRequestUnits, MaxWriteRequestUnits, or both.
+     */
+    OnDemandThroughput?: OnDemandThroughput;
   }
   export interface CreateTableOutput {
     /**
@@ -905,7 +917,7 @@ export namespace DocumentClient {
   }
   export interface DeleteResourcePolicyOutput {
     /**
-     * A unique string that represents the revision ID of the policy. If you are comparing revision IDs, make sure to always use string comparison logic. This value will be empty if you make a request against a resource without a policy.
+     * A unique string that represents the revision ID of the policy. If you're comparing revision IDs, make sure to always use string comparison logic. This value will be empty if you make a request against a resource without a policy.
      */
     RevisionId?: PolicyRevisionId;
   }
@@ -1470,7 +1482,7 @@ export namespace DocumentClient {
      */
     Policy?: ResourcePolicy;
     /**
-     * A unique string that represents the revision ID of the policy. If you are comparing revision IDs, make sure to always use string comparison logic.
+     * A unique string that represents the revision ID of the policy. If you're comparing revision IDs, make sure to always use string comparison logic.
      */
     RevisionId?: PolicyRevisionId;
   }
@@ -1491,6 +1503,10 @@ export namespace DocumentClient {
      * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Service, Account, and Table Quotas in the Amazon DynamoDB Developer Guide.
      */
     ProvisionedThroughput?: ProvisionedThroughput;
+    /**
+     * The maximum number of read and write units for the specified global secondary index. If you use this parameter, you must specify MaxReadRequestUnits, MaxWriteRequestUnits, or both.
+     */
+    OnDemandThroughput?: OnDemandThroughput;
   }
   export interface GlobalSecondaryIndexAutoScalingUpdate {
     /**
@@ -1537,6 +1553,10 @@ export namespace DocumentClient {
      * The Amazon Resource Name (ARN) that uniquely identifies the index.
      */
     IndexArn?: String;
+    /**
+     * The maximum number of read and write units for the specified global secondary index. If you use this parameter, you must specify MaxReadRequestUnits, MaxWriteRequestUnits, or both.
+     */
+    OnDemandThroughput?: OnDemandThroughput;
   }
   export type GlobalSecondaryIndexDescriptionList = GlobalSecondaryIndexDescription[];
   export interface GlobalSecondaryIndexInfo {
@@ -1556,6 +1576,7 @@ export namespace DocumentClient {
      * Represents the provisioned throughput settings for the specified global secondary index. 
      */
     ProvisionedThroughput?: ProvisionedThroughput;
+    OnDemandThroughput?: OnDemandThroughput;
   }
   export type GlobalSecondaryIndexList = GlobalSecondaryIndex[];
   export interface GlobalSecondaryIndexUpdate {
@@ -2162,6 +2183,22 @@ export namespace DocumentClient {
   export type NullAttributeValue = boolean;
   export type NumberAttributeValue = string;
   export type NumberSetAttributeValue = NumberAttributeValue[];
+  export interface OnDemandThroughput {
+    /**
+     * Maximum number of read request units for the specified table. To specify a maximum OnDemandThroughput on your table, set the value of MaxReadRequestUnits as greater than or equal to 1. To remove the maximum OnDemandThroughput that is currently set on your table, set the value of MaxReadRequestUnits to -1.
+     */
+    MaxReadRequestUnits?: LongObject;
+    /**
+     * Maximum number of write request units for the specified table. To specify a maximum OnDemandThroughput on your table, set the value of MaxWriteRequestUnits as greater than or equal to 1. To remove the maximum OnDemandThroughput that is currently set on your table, set the value of MaxWriteRequestUnits to -1.
+     */
+    MaxWriteRequestUnits?: LongObject;
+  }
+  export interface OnDemandThroughputOverride {
+    /**
+     * Maximum number of read request units for the specified replica table.
+     */
+    MaxReadRequestUnits?: LongObject;
+  }
   export interface ParameterizedStatement {
     /**
      *  A PartiQL statement that uses parameters. 
@@ -2353,11 +2390,11 @@ export namespace DocumentClient {
      */
     ResourceArn: ResourceArnString;
     /**
-     * An Amazon Web Services resource-based policy document in JSON format. The maximum size supported for a resource-based policy document is 20 KB. DynamoDB counts whitespaces when calculating the size of a policy against this limit. For a full list of all considerations that you should keep in mind while attaching a resource-based policy, see Resource-based policy considerations.
+     * An Amazon Web Services resource-based policy document in JSON format.   The maximum size supported for a resource-based policy document is 20 KB. DynamoDB counts whitespaces when calculating the size of a policy against this limit.   Within a resource-based policy, if the action for a DynamoDB service-linked role (SLR) to replicate data for a global table is denied, adding or deleting a replica will fail with an error.   For a full list of all considerations that apply while attaching a resource-based policy, see Resource-based policy considerations.
      */
     Policy: ResourcePolicy;
     /**
-     * A string value that you can use to conditionally update your policy. You can provide the revision ID of your existing policy to make mutating requests against that policy. When you provide an expected revision ID, if the revision ID of the existing policy on the resource doesn't match or if there's no policy attached to the resource, your request will be rejected with a PolicyNotFoundException. To conditionally put a policy when no policy exists for the resource, specify NO_POLICY for the revision ID.
+     * A string value that you can use to conditionally update your policy. You can provide the revision ID of your existing policy to make mutating requests against that policy.  When you provide an expected revision ID, if the revision ID of the existing policy on the resource doesn't match or if there's no policy attached to the resource, your request will be rejected with a PolicyNotFoundException.  To conditionally attach a policy when no policy exists for the resource, specify NO_POLICY for the revision ID.
      */
     ExpectedRevisionId?: PolicyRevisionId;
     /**
@@ -2367,7 +2404,7 @@ export namespace DocumentClient {
   }
   export interface PutResourcePolicyOutput {
     /**
-     * A unique string that represents the revision ID of the policy. If you are comparing revision IDs, make sure to always use string comparison logic.
+     * A unique string that represents the revision ID of the policy. If you're comparing revision IDs, make sure to always use string comparison logic.
      */
     RevisionId?: PolicyRevisionId;
   }
@@ -2522,6 +2559,10 @@ export namespace DocumentClient {
      */
     ProvisionedThroughputOverride?: ProvisionedThroughputOverride;
     /**
+     * Overrides the maximum on-demand throughput settings for the specified replica table.
+     */
+    OnDemandThroughputOverride?: OnDemandThroughputOverride;
+    /**
      * Replica-specific global secondary index settings.
      */
     GlobalSecondaryIndexes?: ReplicaGlobalSecondaryIndexDescriptionList;
@@ -2541,6 +2582,10 @@ export namespace DocumentClient {
      * Replica table GSI-specific provisioned throughput. If not specified, uses the source table GSI's read capacity settings.
      */
     ProvisionedThroughputOverride?: ProvisionedThroughputOverride;
+    /**
+     * Overrides the maximum on-demand throughput settings for the specified global secondary index in the specified replica table.
+     */
+    OnDemandThroughputOverride?: OnDemandThroughputOverride;
   }
   export interface ReplicaGlobalSecondaryIndexAutoScalingDescription {
     /**
@@ -2572,6 +2617,10 @@ export namespace DocumentClient {
      * If not described, uses the source table GSI's read capacity settings.
      */
     ProvisionedThroughputOverride?: ProvisionedThroughputOverride;
+    /**
+     * Overrides the maximum on-demand throughput for the specified global secondary index in the specified replica table.
+     */
+    OnDemandThroughputOverride?: OnDemandThroughputOverride;
   }
   export type ReplicaGlobalSecondaryIndexDescriptionList = ReplicaGlobalSecondaryIndexDescription[];
   export type ReplicaGlobalSecondaryIndexList = ReplicaGlobalSecondaryIndex[];
@@ -2752,6 +2801,7 @@ export namespace DocumentClient {
      * Provisioned throughput settings for the restored table.
      */
     ProvisionedThroughputOverride?: ProvisionedThroughput;
+    OnDemandThroughputOverride?: OnDemandThroughput;
     /**
      * The new server-side encryption settings for the restored table.
      */
@@ -2800,6 +2850,7 @@ export namespace DocumentClient {
      * Provisioned throughput settings for the restored table.
      */
     ProvisionedThroughputOverride?: ProvisionedThroughput;
+    OnDemandThroughputOverride?: OnDemandThroughput;
     /**
      * The new server-side encryption settings for the restored table.
      */
@@ -2988,6 +3039,7 @@ export namespace DocumentClient {
      * Read IOPs and Write IOPS on the table when the backup was created.
      */
     ProvisionedThroughput: ProvisionedThroughput;
+    OnDemandThroughput?: OnDemandThroughput;
     /**
      * Number of items in the table. Note that this is an approximate value. 
      */
@@ -3080,6 +3132,7 @@ export namespace DocumentClient {
      */
     BillingMode?: BillingMode;
     ProvisionedThroughput?: ProvisionedThroughput;
+    OnDemandThroughput?: OnDemandThroughput;
     SSESpecification?: SSESpecification;
     /**
      *  The Global Secondary Indexes (GSI) of the table to be created as part of the import operation. 
@@ -3179,6 +3232,10 @@ export namespace DocumentClient {
      * Indicates whether deletion protection is enabled (true) or disabled (false) on the table.
      */
     DeletionProtectionEnabled?: DeletionProtectionEnabled;
+    /**
+     * The maximum number of read and write units for the specified on-demand table. If you use this parameter, you must specify MaxReadRequestUnits, MaxWriteRequestUnits, or both.
+     */
+    OnDemandThroughput?: OnDemandThroughput;
   }
   export type TableId = string;
   export type TableName = string;
@@ -3397,7 +3454,11 @@ export namespace DocumentClient {
     /**
      * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Service, Account, and Table Quotas in the Amazon DynamoDB Developer Guide.
      */
-    ProvisionedThroughput: ProvisionedThroughput;
+    ProvisionedThroughput?: ProvisionedThroughput;
+    /**
+     * Updates the maximum number of read and write units for the specified global secondary index. If you use this parameter, you must specify MaxReadRequestUnits, MaxWriteRequestUnits, or both.
+     */
+    OnDemandThroughput?: OnDemandThroughput;
   }
   export interface UpdateGlobalTableInput {
     /**
@@ -3568,6 +3629,10 @@ export namespace DocumentClient {
      */
     ProvisionedThroughputOverride?: ProvisionedThroughputOverride;
     /**
+     * Overrides the maximum on-demand throughput for the replica table.
+     */
+    OnDemandThroughputOverride?: OnDemandThroughputOverride;
+    /**
      * Replica-specific global secondary index settings.
      */
     GlobalSecondaryIndexes?: ReplicaGlobalSecondaryIndexList;
@@ -3617,6 +3682,10 @@ export namespace DocumentClient {
      * Indicates whether deletion protection is to be enabled (true) or disabled (false) on the table.
      */
     DeletionProtectionEnabled?: DeletionProtectionEnabled;
+    /**
+     * Updates the maximum number of read and write units for the specified table in on-demand capacity mode. If you use this parameter, you must specify MaxReadRequestUnits, MaxWriteRequestUnits, or both.
+     */
+    OnDemandThroughput?: OnDemandThroughput;
   }
   export interface UpdateTableOutput {
     /**

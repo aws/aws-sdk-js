@@ -3557,6 +3557,14 @@ declare class EC2 extends Service {
    */
   getInstanceMetadataDefaults(callback?: (err: AWSError, data: EC2.Types.GetInstanceMetadataDefaultsResult) => void): Request<EC2.Types.GetInstanceMetadataDefaultsResult, AWSError>;
   /**
+   * Gets the public endorsement key associated with the Nitro Trusted Platform Module (NitroTPM) for the specified instance.
+   */
+  getInstanceTpmEkPub(params: EC2.Types.GetInstanceTpmEkPubRequest, callback?: (err: AWSError, data: EC2.Types.GetInstanceTpmEkPubResult) => void): Request<EC2.Types.GetInstanceTpmEkPubResult, AWSError>;
+  /**
+   * Gets the public endorsement key associated with the Nitro Trusted Platform Module (NitroTPM) for the specified instance.
+   */
+  getInstanceTpmEkPub(callback?: (err: AWSError, data: EC2.Types.GetInstanceTpmEkPubResult) => void): Request<EC2.Types.GetInstanceTpmEkPubResult, AWSError>;
+  /**
    * Returns a list of instance types with the specified instance attributes. You can use the response to preview the instance types without launching instances. Note that the response does not consider capacity. When you specify multiple parameters, you get instance types that satisfy all of the specified parameters. If you specify multiple values for a parameter, you get instance types that satisfy any of the specified values. For more information, see Preview instance types with specified attributes, Attribute-based instance type selection for EC2 Fleet, Attribute-based instance type selection for Spot Fleet, and Spot placement score in the Amazon EC2 User Guide, and Creating an Auto Scaling group using attribute-based instance type selection in the Amazon EC2 Auto Scaling User Guide.
    */
   getInstanceTypesFromInstanceRequirements(params: EC2.Types.GetInstanceTypesFromInstanceRequirementsRequest, callback?: (err: AWSError, data: EC2.Types.GetInstanceTypesFromInstanceRequirementsResult) => void): Request<EC2.Types.GetInstanceTypesFromInstanceRequirementsResult, AWSError>;
@@ -19555,6 +19563,9 @@ declare namespace EC2 {
   export type EgressOnlyInternetGatewayList = EgressOnlyInternetGateway[];
   export type EipAllocationPublicIp = string;
   export type EipAssociationIdList = ElasticIpAssociationId[];
+  export type EkPubKeyFormat = "der"|"tpmt"|string;
+  export type EkPubKeyType = "rsa-2048"|"ecc-sec-p384"|string;
+  export type EkPubKeyValue = string;
   export interface ElasticGpuAssociation {
     /**
      * The ID of the Elastic Graphics accelerator.
@@ -21713,6 +21724,42 @@ declare namespace EC2 {
      * The account-level default IMDS settings.
      */
     AccountLevel?: InstanceMetadataDefaultsResponse;
+  }
+  export interface GetInstanceTpmEkPubRequest {
+    /**
+     * The ID of the instance for which to get the public endorsement key.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The required public endorsement key type.
+     */
+    KeyType: EkPubKeyType;
+    /**
+     * The required public endorsement key format. Specify der for a DER-encoded public key that is compatible with OpenSSL. Specify tpmt for a TPM 2.0 format that is compatible with tpm2-tools. The returned key is base64 encoded.
+     */
+    KeyFormat: EkPubKeyFormat;
+    /**
+     * Specify this parameter to verify whether the request will succeed, without actually making the request. If the request will succeed, the response is DryRunOperation. Otherwise, the response is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface GetInstanceTpmEkPubResult {
+    /**
+     * The ID of the instance.
+     */
+    InstanceId?: InstanceId;
+    /**
+     * The public endorsement key type.
+     */
+    KeyType?: EkPubKeyType;
+    /**
+     * The public endorsement key format.
+     */
+    KeyFormat?: EkPubKeyFormat;
+    /**
+     * The public endorsement key material.
+     */
+    KeyValue?: EkPubKeyValue;
   }
   export interface GetInstanceTypesFromInstanceRequirementsRequest {
     /**
