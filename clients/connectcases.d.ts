@@ -681,11 +681,11 @@ declare namespace ConnectCases {
   }
   export interface DeleteFieldRequest {
     /**
-     * The unique identifier of the Cases domain. 
+     * The unique identifier of the Cases domain.
      */
     domainId: DomainId;
     /**
-     * The unique identifier of a field.
+     * Unique identifier of the field.
      */
     fieldId: FieldId;
   }
@@ -693,7 +693,7 @@ declare namespace ConnectCases {
   }
   export interface DeleteLayoutRequest {
     /**
-     * The unique identifier of the Cases domain. 
+     * The unique identifier of the Cases domain.
      */
     domainId: DomainId;
     /**
@@ -705,7 +705,7 @@ declare namespace ConnectCases {
   }
   export interface DeleteTemplateRequest {
     /**
-     * The unique identifier of the Cases domain. 
+     * The unique identifier of the Cases domain.
      */
     domainId: DomainId;
     /**
@@ -914,6 +914,19 @@ declare namespace ConnectCases {
     userArnValue?: String;
   }
   export type FieldValueUnionStringValueString = string;
+  export type FileArn = string;
+  export interface FileContent {
+    /**
+     * The Amazon Resource Name (ARN) of a File in Amazon Connect.
+     */
+    fileArn: FileArn;
+  }
+  export interface FileFilter {
+    /**
+     * The Amazon Resource Name (ARN) of the file.
+     */
+    fileArn?: FileArn;
+  }
   export interface GetCaseAuditEventsRequest {
     /**
      * A unique identifier of the case.
@@ -1028,11 +1041,11 @@ declare namespace ConnectCases {
   }
   export interface GetFieldResponse {
     /**
-     * The timestamp for when the resource was created.
+     * Timestamp at which the resource was created.
      */
     createdTime?: CreatedTime;
     /**
-     * Indicates whether the resource has been deleted.
+     * Denotes whether or not the resource has been deleted.
      */
     deleted?: Deleted;
     /**
@@ -1048,7 +1061,7 @@ declare namespace ConnectCases {
      */
     fieldId: FieldId;
     /**
-     * The timestamp for when the resource was created or last modified.
+     * Timestamp at which the resource was created or last modified.
      */
     lastModifiedTime?: LastModifiedTime;
     /**
@@ -1084,15 +1097,15 @@ declare namespace ConnectCases {
      */
     content: LayoutContent;
     /**
-     * The timestamp for when the resource was created.
+     * Timestamp at which the resource was created.
      */
     createdTime?: CreatedTime;
     /**
-     * Indicates whether the resource has been deleted.
+     * Denotes whether or not the resource has been deleted.
      */
     deleted?: Deleted;
     /**
-     * The timestamp for when the resource was created or last modified.
+     * Timestamp at which the resource was created or last modified.
      */
     lastModifiedTime?: LastModifiedTime;
     /**
@@ -1124,11 +1137,11 @@ declare namespace ConnectCases {
   }
   export interface GetTemplateResponse {
     /**
-     * The timestamp for when the resource was created.
+     * Timestamp at which the resource was created.
      */
     createdTime?: CreatedTime;
     /**
-     * Indicates whether the resource has been deleted.
+     * Denotes whether or not the resource has been deleted.
      */
     deleted?: Deleted;
     /**
@@ -1136,7 +1149,7 @@ declare namespace ConnectCases {
      */
     description?: TemplateDescription;
     /**
-     * The timestamp for when the resource was created or last modified.
+     * Timestamp at which the resource was created or last modified.
      */
     lastModifiedTime?: LastModifiedTime;
     /**
@@ -1401,6 +1414,10 @@ declare namespace ConnectCases {
      * Represents the content of a contact to be returned to agents.
      */
     contact?: ContactContent;
+    /**
+     * Represents the content of a File to be returned to agents.
+     */
+    file?: FileContent;
   }
   export interface RelatedItemEventIncludedData {
     /**
@@ -1418,8 +1435,12 @@ declare namespace ConnectCases {
      * Object representing a contact in Amazon Connect as an API request field.
      */
     contact?: Contact;
+    /**
+     * A file of related items.
+     */
+    file?: FileContent;
   }
-  export type RelatedItemType = "Contact"|"Comment"|string;
+  export type RelatedItemType = "Contact"|"Comment"|"File"|string;
   export interface RelatedItemTypeFilter {
     /**
      * A filter for related items of type Comment.
@@ -1429,6 +1450,10 @@ declare namespace ConnectCases {
      * A filter for related items of type Contact.
      */
     contact?: ContactFilter;
+    /**
+     * A filter for related items of this type of File.
+     */
+    file?: FileFilter;
   }
   export interface RequiredField {
     /**

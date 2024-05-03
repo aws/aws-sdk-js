@@ -888,6 +888,10 @@ declare namespace SESV2 {
      * The ReplacementEmailContent associated with a BulkEmailEntry.
      */
     ReplacementEmailContent?: ReplacementEmailContent;
+    /**
+     * The list of message headers associated with the BulkEmailEntry data type.   Headers Not Present in BulkEmailEntry: If a header is specified in  Template  but not in BulkEmailEntry, the header from Template will be added to the outgoing email.   Headers Present in BulkEmailEntry: If a header is specified in BulkEmailEntry, it takes precedence over any header of the same name specified in  Template :   If the header is also defined within Template, the value from BulkEmailEntry will replace the header's value in the email.   If the header is not defined within Template, it will simply be added to the email as specified in BulkEmailEntry.    
+     */
+    ReplacementHeaders?: MessageHeaderList;
   }
   export type BulkEmailEntryList = BulkEmailEntry[];
   export interface BulkEmailEntryResult {

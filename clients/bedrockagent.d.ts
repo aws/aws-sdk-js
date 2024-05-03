@@ -454,7 +454,7 @@ declare namespace BedrockAgent {
   }
   export interface AgentActionGroup {
     /**
-     * The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action.
+     * The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action or the custom control method for handling the information elicited from the user.
      */
     actionGroupExecutor?: ActionGroupExecutor;
     /**
@@ -544,6 +544,10 @@ declare namespace BedrockAgent {
      */
     description?: Description;
     /**
+     * Information on the failure of Provisioned Throughput assigned to an agent alias.
+     */
+    failureReasons?: FailureReasons;
+    /**
      * Contains details about the routing configuration of the alias.
      */
     routingConfiguration: AgentAliasRoutingConfiguration;
@@ -574,7 +578,11 @@ declare namespace BedrockAgent {
     /**
      * The version of the agent with which the alias is associated.
      */
-    agentVersion: Version;
+    agentVersion?: Version;
+    /**
+     * Information on the Provisioned Throughput assigned to an agent alias.
+     */
+    provisionedThroughput?: ProvisionedModelIdentifier;
   }
   export type AgentAliasStatus = "CREATING"|"PREPARED"|"FAILED"|"UPDATING"|"DELETING"|string;
   export type AgentAliasSummaries = AgentAliasSummary[];
@@ -827,7 +835,7 @@ declare namespace BedrockAgent {
   export type ColumnName = string;
   export interface CreateAgentActionGroupRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action.
+     * The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action or the custom control method for handling the information elicited from the user.
      */
     actionGroupExecutor?: ActionGroupExecutor;
     /**
@@ -2098,6 +2106,7 @@ declare namespace BedrockAgent {
   }
   export type PromptState = "ENABLED"|"DISABLED"|string;
   export type PromptType = "PRE_PROCESSING"|"ORCHESTRATION"|"POST_PROCESSING"|"KNOWLEDGE_BASE_RESPONSE_GENERATION"|string;
+  export type ProvisionedModelIdentifier = string;
   export type RdsArn = string;
   export interface RdsConfiguration {
     /**
@@ -2450,7 +2459,7 @@ declare namespace BedrockAgent {
   }
   export interface UpdateDataSourceRequest {
     /**
-     * The data deletion policy assigned to the data source.
+     * The data deletion policy of the updated data source.
      */
     dataDeletionPolicy?: DataDeletionPolicy;
     /**

@@ -1108,6 +1108,7 @@ declare namespace Inspector2 {
   }
   export type CisNumberFilterList = CisNumberFilter[];
   export type CisOwnerId = string;
+  export type CisReportFormat = "PDF"|"CSV"|string;
   export type CisReportStatus = "SUCCEEDED"|"FAILED"|"IN_PROGRESS"|string;
   export type CisResultStatus = "PASSED"|"FAILED"|"SKIPPED"|string;
   export type CisResultStatusComparison = "EQUALS"|string;
@@ -2822,6 +2823,10 @@ declare namespace Inspector2 {
   export type FunctionName = string;
   export interface GetCisScanReportRequest {
     /**
+     *  The format of the report. Valid values are PDF and CSV. If no value is specified, the report format defaults to PDF. 
+     */
+    reportFormat?: CisReportFormat;
+    /**
      * The scan ARN.
      */
     scanArn: CisScanArn;
@@ -2836,7 +2841,7 @@ declare namespace Inspector2 {
      */
     status?: CisReportStatus;
     /**
-     *  The URL where a PDF of the CIS scan report can be downloaded. 
+     *  The URL where a PDF or CSV of the CIS scan report can be downloaded. 
      */
     url?: String;
   }
