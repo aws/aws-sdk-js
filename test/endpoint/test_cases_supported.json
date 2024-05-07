@@ -3456,38 +3456,6 @@
     "hostname": "healthlake-fips.us-east-1.api.aws"
   },
   {
-    "endpointPrefix": "honeycode",
-    "clientName": "Honeycode",
-    "region": "us-west-2",
-    "useFipsEndpoint": false,
-    "useDualstackEndpoint": false,
-    "hostname": "honeycode.us-west-2.amazonaws.com"
-  },
-  {
-    "endpointPrefix": "honeycode",
-    "clientName": "Honeycode",
-    "region": "us-west-2",
-    "useFipsEndpoint": false,
-    "useDualstackEndpoint": true,
-    "hostname": "honeycode.us-west-2.api.aws"
-  },
-  {
-    "endpointPrefix": "honeycode",
-    "clientName": "Honeycode",
-    "region": "us-west-2",
-    "useFipsEndpoint": true,
-    "useDualstackEndpoint": false,
-    "hostname": "honeycode-fips.us-west-2.amazonaws.com"
-  },
-  {
-    "endpointPrefix": "honeycode",
-    "clientName": "Honeycode",
-    "region": "us-west-2",
-    "useFipsEndpoint": true,
-    "useDualstackEndpoint": true,
-    "hostname": "honeycode-fips.us-west-2.api.aws"
-  },
-  {
     "endpointPrefix": "iam",
     "clientName": "IAM",
     "region": "aws-global",
