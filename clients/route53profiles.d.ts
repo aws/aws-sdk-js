@@ -12,11 +12,11 @@ declare class Route53Profiles extends Service {
   constructor(options?: Route53Profiles.Types.ClientConfiguration)
   config: Config & Route53Profiles.Types.ClientConfiguration;
   /**
-   *  Associates a Route 53 Profiles profile with a VPC. A VPC can have only one Profile associated with it, but a Profile can be associated with up to 5000 VPCs. 
+   *  Associates a Route 53 Profiles profile with a VPC. A VPC can have only one Profile associated with it, but a Profile can be associated with 1000 of VPCs (and you can request a higher quota). For more information, see https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities. 
    */
   associateProfile(params: Route53Profiles.Types.AssociateProfileRequest, callback?: (err: AWSError, data: Route53Profiles.Types.AssociateProfileResponse) => void): Request<Route53Profiles.Types.AssociateProfileResponse, AWSError>;
   /**
-   *  Associates a Route 53 Profiles profile with a VPC. A VPC can have only one Profile associated with it, but a Profile can be associated with up to 5000 VPCs. 
+   *  Associates a Route 53 Profiles profile with a VPC. A VPC can have only one Profile associated with it, but a Profile can be associated with 1000 of VPCs (and you can request a higher quota). For more information, see https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities. 
    */
   associateProfile(callback?: (err: AWSError, data: Route53Profiles.Types.AssociateProfileResponse) => void): Request<Route53Profiles.Types.AssociateProfileResponse, AWSError>;
   /**
@@ -181,7 +181,7 @@ declare namespace Route53Profiles {
      */
     ResourceArn: Arn;
     /**
-     *  If you are adding a DNS Firewall rule group, include also a priority in this format:   Key=FirewallRuleGroupPriority,Value=100 
+     *  If you are adding a DNS Firewall rule group, include also a priority. The priority indicates the processing order for the rule groups, starting with the priority assinged the lowest value.  The allowed values for priority are between 100 and 9900.
      */
     ResourceProperties?: ResourceProperties;
   }
@@ -585,7 +585,7 @@ declare namespace Route53Profiles {
      */
     ProfileResourceAssociationId: ResourceId;
     /**
-     *  If you are adding a DNS Firewall rule group, include also a priority in this format:  Key=FirewallRuleGroupPriority,Value=100. 
+     *  If you are adding a DNS Firewall rule group, include also a priority. The priority indicates the processing order for the rule groups, starting with the priority assinged the lowest value.  The allowed values for priority are between 100 and 9900.
      */
     ResourceProperties?: ResourceProperties;
   }

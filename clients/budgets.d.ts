@@ -164,6 +164,30 @@ declare class Budgets extends Service {
    */
   executeBudgetAction(callback?: (err: AWSError, data: Budgets.Types.ExecuteBudgetActionResponse) => void): Request<Budgets.Types.ExecuteBudgetActionResponse, AWSError>;
   /**
+   * Lists tags associated with a budget or budget action resource.
+   */
+  listTagsForResource(params: Budgets.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Budgets.Types.ListTagsForResourceResponse) => void): Request<Budgets.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists tags associated with a budget or budget action resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Budgets.Types.ListTagsForResourceResponse) => void): Request<Budgets.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Creates tags for a budget or budget action resource.
+   */
+  tagResource(params: Budgets.Types.TagResourceRequest, callback?: (err: AWSError, data: Budgets.Types.TagResourceResponse) => void): Request<Budgets.Types.TagResourceResponse, AWSError>;
+  /**
+   * Creates tags for a budget or budget action resource.
+   */
+  tagResource(callback?: (err: AWSError, data: Budgets.Types.TagResourceResponse) => void): Request<Budgets.Types.TagResourceResponse, AWSError>;
+  /**
+   * Deletes tags associated with a budget or budget action resource.
+   */
+  untagResource(params: Budgets.Types.UntagResourceRequest, callback?: (err: AWSError, data: Budgets.Types.UntagResourceResponse) => void): Request<Budgets.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Deletes tags associated with a budget or budget action resource.
+   */
+  untagResource(callback?: (err: AWSError, data: Budgets.Types.UntagResourceResponse) => void): Request<Budgets.Types.UntagResourceResponse, AWSError>;
+  /**
    * Updates a budget. You can change every part of a budget except for the budgetName and the calculatedSpend. When you modify a budget, the calculatedSpend drops to zero until Amazon Web Services has new usage data to use for forecasting.  Only one of BudgetLimit or PlannedBudgetLimits can be present in the syntax at one time. Use the syntax that matches your case. The Request Syntax section shows the BudgetLimit syntax. For PlannedBudgetLimits, see the Examples section.  
    */
   updateBudget(params: Budgets.Types.UpdateBudgetRequest, callback?: (err: AWSError, data: Budgets.Types.UpdateBudgetResponse) => void): Request<Budgets.Types.UpdateBudgetResponse, AWSError>;
@@ -264,6 +288,7 @@ declare namespace Budgets {
   export type ActionType = "APPLY_IAM_POLICY"|"APPLY_SCP_POLICY"|"RUN_SSM_DOCUMENTS"|string;
   export type Actions = Action[];
   export type AdjustmentPeriod = number;
+  export type AmazonResourceName = string;
   export type ApprovalModel = "AUTOMATIC"|"MANUAL"|string;
   export interface AutoAdjustData {
     /**
@@ -294,7 +319,7 @@ declare namespace Budgets {
      */
     PlannedBudgetLimits?: PlannedBudgetLimits;
     /**
-     * The cost filters, such as Region, Service, member account, Tag, or Cost Category, that are applied to a budget. Amazon Web Services Budgets supports the following services as a Service filter for RI budgets:   Amazon EC2   Amazon Redshift   Amazon Relational Database Service   Amazon ElastiCache   Amazon OpenSearch Service  
+     * The cost filters, such as Region, Service, LinkedAccount, Tag, or CostCategory, that are applied to a budget. Amazon Web Services Budgets supports the following services as a Service filter for RI budgets:   Amazon EC2   Amazon Redshift   Amazon Relational Database Service   Amazon ElastiCache   Amazon OpenSearch Service  
      */
     CostFilters?: CostFilters;
     /**
@@ -443,6 +468,10 @@ declare namespace Budgets {
      */
     ApprovalModel: ApprovalModel;
     Subscribers: Subscribers;
+    /**
+     * An optional list of tags to associate with the specified budget action. Each tag consists of a key and a value, and each key must be unique for the resource.
+     */
+    ResourceTags?: ResourceTagList;
   }
   export interface CreateBudgetActionResponse {
     AccountId: AccountId;
@@ -465,6 +494,10 @@ declare namespace Budgets {
      * A notification that you want to associate with a budget. A budget can have up to five notifications, and each notification can have one SNS subscriber and up to 10 email subscribers. If you include notifications and subscribers in your CreateBudget call, Amazon Web Services creates the notifications and subscribers for you.
      */
     NotificationsWithSubscribers?: NotificationWithSubscribersList;
+    /**
+     * An optional list of tags to associate with the specified budget. Each tag consists of a key and a value, and each key must be unique for the resource.
+     */
+    ResourceTags?: ResourceTagList;
   }
   export interface CreateBudgetResponse {
   }
@@ -836,6 +869,18 @@ declare namespace Budgets {
   }
   export type InstanceId = string;
   export type InstanceIds = InstanceId[];
+  export interface ListTagsForResourceRequest {
+    /**
+     * The unique identifier for the resource.
+     */
+    ResourceARN: AmazonResourceName;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The tags associated with the resource.
+     */
+    ResourceTags?: ResourceTagList;
+  }
   export type MaxResults = number;
   export type MaxResultsBudgetNotifications = number;
   export type MaxResultsDescribeBudgets = number;
@@ -882,6 +927,20 @@ declare namespace Budgets {
   export type PolicyArn = string;
   export type PolicyId = string;
   export type Region = string;
+  export interface ResourceTag {
+    /**
+     * The key that's associated with the tag.
+     */
+    Key: ResourceTagKey;
+    /**
+     * The value that's associated with the tag.
+     */
+    Value: ResourceTagValue;
+  }
+  export type ResourceTagKey = string;
+  export type ResourceTagKeyList = ResourceTagKey[];
+  export type ResourceTagList = ResourceTag[];
+  export type ResourceTagValue = string;
   export type Role = string;
   export type RoleArn = string;
   export type Roles = Role[];
@@ -932,6 +991,18 @@ declare namespace Budgets {
   export type SubscriberAddress = string;
   export type Subscribers = Subscriber[];
   export type SubscriptionType = "SNS"|"EMAIL"|string;
+  export interface TagResourceRequest {
+    /**
+     * The unique identifier for the resource.
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     * The tags associated with the resource.
+     */
+    ResourceTags: ResourceTagList;
+  }
+  export interface TagResourceResponse {
+  }
   export type TargetId = string;
   export type TargetIds = TargetId[];
   export type ThresholdType = "PERCENTAGE"|"ABSOLUTE_VALUE"|string;
@@ -947,6 +1018,18 @@ declare namespace Budgets {
   }
   export type TimeUnit = "DAILY"|"MONTHLY"|"QUARTERLY"|"ANNUALLY"|string;
   export type UnitValue = string;
+  export interface UntagResourceRequest {
+    /**
+     * The unique identifier for the resource.
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     * The key that's associated with the tag.
+     */
+    ResourceTagKeys: ResourceTagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateBudgetActionRequest {
     AccountId: AccountId;
     BudgetName: BudgetName;

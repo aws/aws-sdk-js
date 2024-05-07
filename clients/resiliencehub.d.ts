@@ -220,6 +220,14 @@ declare class Resiliencehub extends Service {
    */
   listAppAssessmentComplianceDrifts(callback?: (err: AWSError, data: Resiliencehub.Types.ListAppAssessmentComplianceDriftsResponse) => void): Request<Resiliencehub.Types.ListAppAssessmentComplianceDriftsResponse, AWSError>;
   /**
+   * Indicates the list of resource drifts that were detected while running an assessment.
+   */
+  listAppAssessmentResourceDrifts(params: Resiliencehub.Types.ListAppAssessmentResourceDriftsRequest, callback?: (err: AWSError, data: Resiliencehub.Types.ListAppAssessmentResourceDriftsResponse) => void): Request<Resiliencehub.Types.ListAppAssessmentResourceDriftsResponse, AWSError>;
+  /**
+   * Indicates the list of resource drifts that were detected while running an assessment.
+   */
+  listAppAssessmentResourceDrifts(callback?: (err: AWSError, data: Resiliencehub.Types.ListAppAssessmentResourceDriftsResponse) => void): Request<Resiliencehub.Types.ListAppAssessmentResourceDriftsResponse, AWSError>;
+  /**
    * Lists the assessments for an Resilience Hub application. You can use request parameters to refine the results for the response object.
    */
   listAppAssessments(params: Resiliencehub.Types.ListAppAssessmentsRequest, callback?: (err: AWSError, data: Resiliencehub.Types.ListAppAssessmentsResponse) => void): Request<Resiliencehub.Types.ListAppAssessmentsResponse, AWSError>;
@@ -1672,7 +1680,7 @@ declare namespace Resiliencehub {
      */
     policy: ResiliencyPolicy;
   }
-  export type DifferenceType = "NotEqual"|string;
+  export type DifferenceType = "NotEqual"|"Added"|"Removed"|string;
   export interface DisruptionCompliance {
     /**
      * The Recovery Point Objective (RPO) that is achievable, in seconds.
@@ -1721,7 +1729,7 @@ declare namespace Resiliencehub {
   export type DocumentName = string;
   export type Double = number;
   export type DriftStatus = "NotChecked"|"NotDetected"|"Detected"|string;
-  export type DriftType = "ApplicationCompliance"|string;
+  export type DriftType = "ApplicationCompliance"|"AppComponentResiliencyComplianceStatus"|string;
   export type EksNamespace = string;
   export type EksNamespaceList = EksNamespace[];
   export interface EksSource {
@@ -1880,6 +1888,30 @@ declare namespace Resiliencehub {
      * Token number of the next application to be checked for compliance and regulatory requirements from the list of applications.
      */
     nextToken?: NextToken;
+  }
+  export interface ListAppAssessmentResourceDriftsRequest {
+    /**
+     * Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the Amazon Web Services General Reference guide.
+     */
+    assessmentArn: Arn;
+    /**
+     * Indicates the maximum number of drift results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
+     */
+    maxResults?: MaxResults;
+    /**
+     * Null, or the token from a previous call to get the next set of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListAppAssessmentResourceDriftsResponse {
+    /**
+     * Null, or the token from a previous call to get the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * Indicates all the resource drifts detected for an assessed entity.
+     */
+    resourceDrifts: ResourceDriftList;
   }
   export interface ListAppAssessmentsRequest {
     /**
@@ -2177,7 +2209,7 @@ declare namespace Resiliencehub {
     /**
      * Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the Amazon Web Services General Reference guide.
      */
-    assessmentArn: Arn;
+    assessmentArn?: Arn;
     /**
      * Maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
      */
@@ -2425,7 +2457,7 @@ declare namespace Resiliencehub {
      */
     resourceName?: EntityName;
     /**
-     * The type of resource.
+     * Type of resource.
      */
     resourceType: String255;
     /**
@@ -2739,6 +2771,29 @@ declare namespace Resiliencehub {
      */
     status: ResourceResolutionStatusType;
   }
+  export interface ResourceDrift {
+    /**
+     * Amazon Resource Name (ARN) of the application whose resources have drifted. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the Amazon Web Services General Reference guide.
+     */
+    appArn?: Arn;
+    /**
+     * Version of the application whose resources have drifted.
+     */
+    appVersion?: EntityVersion;
+    /**
+     * Indicates if the resource was added or removed.
+     */
+    diffType?: DifferenceType;
+    /**
+     * Reference identifier of the resource drift.
+     */
+    referenceId?: EntityId;
+    /**
+     * Identifier of the drifted resource.
+     */
+    resourceIdentifier?: ResourceIdentifier;
+  }
+  export type ResourceDriftList = ResourceDrift[];
   export interface ResourceError {
     /**
      * Identifier of the logical resource. 
@@ -2764,23 +2819,33 @@ declare namespace Resiliencehub {
      */
     resourceErrors?: ResourceErrorList;
   }
+  export interface ResourceIdentifier {
+    /**
+     * Logical identifier of the drifted resource.
+     */
+    logicalResourceId?: LogicalResourceId;
+    /**
+     * Type of the drifted resource.
+     */
+    resourceType?: String255;
+  }
   export type ResourceImportStatusType = "Pending"|"InProgress"|"Failed"|"Success"|string;
   export type ResourceImportStrategyType = "AddOnly"|"ReplaceAll"|string;
   export interface ResourceMapping {
     /**
-     * The name of the application this resource is mapped to.
+     * Name of the application this resource is mapped to when the mappingType is AppRegistryApp.
      */
     appRegistryAppName?: EntityName;
     /**
-     * Name of the Amazon Elastic Kubernetes Service cluster and namespace this resource belongs to.  This parameter accepts values in "eks-cluster/namespace" format. 
+     * Name of the Amazon Elastic Kubernetes Service cluster and namespace that this resource is mapped to when the mappingType is EKS.  This parameter accepts values in "eks-cluster/namespace" format. 
      */
     eksSourceName?: String255;
     /**
-     * The name of the CloudFormation stack this resource is mapped to.
+     * Name of the CloudFormation stack this resource is mapped to when the mappingType is CfnStack.
      */
     logicalStackName?: String255;
     /**
-     * Specifies the type of resource mapping.  AppRegistryApp  The resource is mapped to another application. The name of the application is contained in the appRegistryAppName property.  CfnStack  The resource is mapped to a CloudFormation stack. The name of the CloudFormation stack is contained in the logicalStackName property.  Resource  The resource is mapped to another resource. The name of the resource is contained in the resourceName property.  ResourceGroup  The resource is mapped to Resource Groups. The name of the resource group is contained in the resourceGroupName property.  
+     * Specifies the type of resource mapping.
      */
     mappingType: ResourceMappingType;
     /**
@@ -2788,15 +2853,15 @@ declare namespace Resiliencehub {
      */
     physicalResourceId: PhysicalResourceId;
     /**
-     * Name of the resource group that the resource is mapped to.
+     * Name of the Resource Groups that this resource is mapped to when the mappingType is ResourceGroup.
      */
     resourceGroupName?: EntityName;
     /**
-     * Name of the resource that the resource is mapped to.
+     * Name of the resource that this resource is mapped to when the mappingType is Resource.
      */
     resourceName?: EntityName;
     /**
-     *  The short name of the Terraform source. 
+     * Name of the Terraform source that this resource is mapped to when the mappingType is Terraform.
      */
     terraformSourceName?: String255;
   }
@@ -2817,19 +2882,19 @@ declare namespace Resiliencehub {
   export type S3Url = string;
   export interface ScoringComponentResiliencyScore {
     /**
-     * Number of recommendations that were excluded from the assessment. For example, if the Excluded count for Resilience Hub recommended Amazon CloudWatch alarms is 7, it indicates that 7 Amazon CloudWatch alarms are excluded from the assessment.
+     * Number of recommendations that were excluded from the assessment. For example, if the excludedCount for Alarms coverage scoring component is 7, it indicates that 7 Amazon CloudWatch alarms are excluded from the assessment.
      */
     excludedCount?: Long;
     /**
-     * Number of issues that must be resolved to obtain the maximum possible score for the scoring component. For SOPs, alarms, and FIS experiments, these are the number of recommendations that must be implemented. For compliance, it is the number of Application Components that has breached the resiliency policy. For example, if the Outstanding count for Resilience Hub recommended Amazon CloudWatch alarms is 5, it indicates that 5 Amazon CloudWatch alarms must be fixed to achieve the maximum possible score.
+     * Number of recommendations that must be implemented to obtain the maximum possible score for the scoring component. For SOPs, alarms, and tests, these are the number of recommendations that must be implemented. For compliance, these are the number of Application Components that have breached the resiliency policy. For example, if the outstandingCount for Alarms coverage scoring component is 5, it indicates that 5 Amazon CloudWatch alarms need to be implemented to achieve the maximum possible score.
      */
     outstandingCount?: Long;
     /**
-     * Maximum possible score that can be obtained for the scoring component. If the Possible score is 20 points, it indicates the maximum possible score you can achieve for your application when you run a new assessment after implementing all the Resilience Hub recommendations.
+     * Maximum possible score that can be obtained for the scoring component.  For example, if the possibleScore is 20 points, it indicates the maximum possible score you can achieve for the scoring component when you run a new assessment after implementing all the Resilience Hub recommendations.
      */
     possibleScore?: Double;
     /**
-     * Resiliency score of your application.
+     * Resiliency score points given for the scoring component. The score is always less than or equal to the possibleScore.
      */
     score?: Double;
   }

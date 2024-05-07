@@ -466,7 +466,7 @@ declare namespace B2bi {
      */
     fileFormat: FileFormat;
     /**
-     * Specifies the name of the mapping template for the transformer. This template is used to convert the input document into the correct set of objects.
+     * Specifies the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.
      */
     mappingTemplate: MappingTemplate;
     /**
@@ -504,7 +504,7 @@ declare namespace B2bi {
      */
     fileFormat: FileFormat;
     /**
-     * Returns the name of the mapping template for the transformer. This template is used to convert the input document into the correct set of objects.
+     * Returns the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.
      */
     mappingTemplate: MappingTemplate;
     /**
@@ -760,7 +760,7 @@ declare namespace B2bi {
      */
     fileFormat: FileFormat;
     /**
-     * Returns the name of the mapping template for the transformer. This template is used to convert the input document into the correct set of objects.
+     * Returns the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.
      */
     mappingTemplate: MappingTemplate;
     /**
@@ -1024,7 +1024,7 @@ declare namespace B2bi {
      */
     inputFileContent: TestMappingInputFileContent;
     /**
-     * Specifies the name of the mapping template for the transformer. This template is used to convert the input document into the correct set of objects.
+     * Specifies the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.
      */
     mappingTemplate: MappingTemplate;
     /**
@@ -1079,7 +1079,7 @@ declare namespace B2bi {
      */
     fileFormat: FileFormat;
     /**
-     * Returns the name of the mapping template for the transformer. This template is used to convert the input document into the correct set of objects.
+     * Returns the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.
      */
     mappingTemplate: MappingTemplate;
     /**
@@ -1299,7 +1299,7 @@ declare namespace B2bi {
      */
     fileFormat?: FileFormat;
     /**
-     * Specifies the name of the mapping template for the transformer. This template is used to convert the input document into the correct set of objects.
+     * Specifies the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.
      */
     mappingTemplate?: MappingTemplate;
     /**
@@ -1333,7 +1333,7 @@ declare namespace B2bi {
      */
     fileFormat: FileFormat;
     /**
-     * Returns the name of the mapping template for the transformer. This template is used to convert the input document into the correct set of objects.
+     * Returns the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.
      */
     mappingTemplate: MappingTemplate;
     /**

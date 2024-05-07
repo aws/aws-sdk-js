@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1614.0-->
+<!--LATEST=2.1615.0-->
 <!--ENTRYINSERT-->
+
+## 2.1615.0
+* feature: Budgets: This release adds tag support for budgets and budget actions.
+* feature: Resiliencehub: AWS Resilience Hub has expanded its drift detection capabilities by introducing a new type of drift detection - application resource drift. This new enhancement detects changes, such as the addition or deletion of resources within the application's input sources.
 
 ## 2.1614.0
 * feature: MediaLive: AWS Elemental MediaLive now supports configuring how SCTE 35 passthrough triggers segment breaks in HLS and MediaPackage output groups. Previously, messages triggered breaks in all these output groups. The new option is to trigger segment breaks only in groups that have SCTE 35 passthrough enabled.
