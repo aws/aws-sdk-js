@@ -544,9 +544,6 @@
     "name": "ResourceGroups",
     "cors": true
   },
-  "alexaforbusiness": {
-    "name": "AlexaForBusiness"
-  },
   "cloud9": {
     "name": "Cloud9"
   },
