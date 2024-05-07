@@ -126,7 +126,6 @@ export abstract class ConfigurationServicePlaceholders {
   sagemaker?: AWS.SageMaker.Types.ClientConfiguration;
   translate?: AWS.Translate.Types.ClientConfiguration;
   resourcegroups?: AWS.ResourceGroups.Types.ClientConfiguration;
-  alexaforbusiness?: AWS.AlexaForBusiness.Types.ClientConfiguration;
   cloud9?: AWS.Cloud9.Types.ClientConfiguration;
   serverlessapplicationrepository?: AWS.ServerlessApplicationRepository.Types.ClientConfiguration;
   servicediscovery?: AWS.ServiceDiscovery.Types.ClientConfiguration;
