@@ -56,38 +56,6 @@
     "hostname": "api.tunneling.iot-fips.ca-central-1.amazonaws.com"
   },
   {
-    "endpointPrefix": "a4b",
-    "clientName": "AlexaForBusiness",
-    "region": "us-east-1",
-    "useFipsEndpoint": false,
-    "useDualstackEndpoint": false,
-    "hostname": "a4b.us-east-1.amazonaws.com"
-  },
-  {
-    "endpointPrefix": "a4b",
-    "clientName": "AlexaForBusiness",
-    "region": "us-east-1",
-    "useFipsEndpoint": false,
-    "useDualstackEndpoint": true,
-    "hostname": "a4b.us-east-1.api.aws"
-  },
-  {
-    "endpointPrefix": "a4b",
-    "clientName": "AlexaForBusiness",
-    "region": "us-east-1",
-    "useFipsEndpoint": true,
-    "useDualstackEndpoint": false,
-    "hostname": "a4b-fips.us-east-1.amazonaws.com"
-  },
-  {
-    "endpointPrefix": "a4b",
-    "clientName": "AlexaForBusiness",
-    "region": "us-east-1",
-    "useFipsEndpoint": true,
-    "useDualstackEndpoint": true,
-    "hostname": "a4b-fips.us-east-1.api.aws"
-  },
-  {
     "endpointPrefix": "access-analyzer",
     "clientName": "AccessAnalyzer",
     "region": "af-south-1",
