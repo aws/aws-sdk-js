@@ -223,7 +223,6 @@ export abstract class ConfigurationServicePlaceholders {
   iotsitewise?: AWS.IoTSiteWise.Types.ClientConfiguration;
   macie2?: AWS.Macie2.Types.ClientConfiguration;
   codeartifact?: AWS.CodeArtifact.Types.ClientConfiguration;
-  honeycode?: AWS.Honeycode.Types.ClientConfiguration;
   ivs?: AWS.IVS.Types.ClientConfiguration;
   braket?: AWS.Braket.Types.ClientConfiguration;
   identitystore?: AWS.IdentityStore.Types.ClientConfiguration;
@@ -603,7 +602,6 @@ export interface ConfigurationServiceApiVersions {
   iotsitewise?: AWS.IoTSiteWise.Types.apiVersion;
   macie2?: AWS.Macie2.Types.apiVersion;
   codeartifact?: AWS.CodeArtifact.Types.apiVersion;
-  honeycode?: AWS.Honeycode.Types.apiVersion;
   ivs?: AWS.IVS.Types.apiVersion;
   braket?: AWS.Braket.Types.apiVersion;
   identitystore?: AWS.IdentityStore.Types.apiVersion;
