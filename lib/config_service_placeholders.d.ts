@@ -506,7 +506,6 @@ export interface ConfigurationServiceApiVersions {
   sagemaker?: AWS.SageMaker.Types.apiVersion;
   translate?: AWS.Translate.Types.apiVersion;
   resourcegroups?: AWS.ResourceGroups.Types.apiVersion;
-  alexaforbusiness?: AWS.AlexaForBusiness.Types.apiVersion;
   cloud9?: AWS.Cloud9.Types.apiVersion;
   serverlessapplicationrepository?: AWS.ServerlessApplicationRepository.Types.apiVersion;
   servicediscovery?: AWS.ServiceDiscovery.Types.apiVersion;

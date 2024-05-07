@@ -124,7 +124,6 @@ export import SageMakerRuntime = require('./sagemakerruntime');
 export import SageMaker = require('./sagemaker');
 export import Translate = require('./translate');
 export import ResourceGroups = require('./resourcegroups');
-export import AlexaForBusiness = require('./alexaforbusiness');
 export import Cloud9 = require('./cloud9');
 export import ServerlessApplicationRepository = require('./serverlessapplicationrepository');
 export import ServiceDiscovery = require('./servicediscovery');
