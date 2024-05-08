@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1615.0-->
+<!--LATEST=2.1616.0-->
 <!--ENTRYINSERT-->
+
+## 2.1616.0
+* bugfix: Alexa for Business: Deprecates Alexa for Business
+* bugfix: Honeycode: Deprecate Honeycode
+* feature: CognitoIdentityServiceProvider: Add EXTERNAL_PROVIDER enum value to UserStatusType.
+* feature: EC2: Adding Precision Hardware Clock (PHC) to public API DescribeInstanceTypes
+* feature: ECR: This release adds pull through cache rules support for GitLab container registry in Amazon ECR.
+* feature: Polly: Add new engine - generative - that builds the most expressive conversational voices.
+* feature: SQS: This release adds MessageSystemAttributeNames to ReceiveMessageRequest to replace AttributeNames.
 
 ## 2.1615.0
 * feature: Budgets: This release adds tag support for budgets and budget actions.

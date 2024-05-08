@@ -5,6 +5,9 @@
     "endpointPrefix": "cognito-idp",
     "jsonVersion": "1.1",
     "protocol": "json",
+    "protocols": [
+      "json"
+    ],
     "serviceFullName": "Amazon Cognito Identity Provider",
     "serviceId": "Cognito Identity Provider",
     "signatureVersion": "v4",
@@ -10270,7 +10273,8 @@
         "COMPROMISED",
         "UNKNOWN",
         "RESET_REQUIRED",
-        "FORCE_CHANGE_PASSWORD"
+        "FORCE_CHANGE_PASSWORD",
+        "EXTERNAL_PROVIDER"
       ]
     },
     "UserType": {

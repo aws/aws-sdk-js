@@ -1607,7 +1607,7 @@ declare namespace FMS {
      */
     FirstEntries?: NetworkAclEntries;
     /**
-     * Applies only when remediation is enabled for the policy as a whole. Firewall Manager uses this setting when it finds policy violations that involve conflicts between the custom entries and the policy entries.  If forced remediation is disabled, Firewall Manager marks the network ACL as noncompliant and does not try to remediate. For more information about the remediation behavior, see Network access control list (ACL) policies in the Firewall Manager Developer Guide.
+     * Applies only when remediation is enabled for the policy as a whole. Firewall Manager uses this setting when it finds policy violations that involve conflicts between the custom entries and the policy entries.  If forced remediation is disabled, Firewall Manager marks the network ACL as noncompliant and does not try to remediate. For more information about the remediation behavior, see Remediation for managed network ACLs in the Firewall Manager Developer Guide.
      */
     ForceRemediateForFirstEntries: BooleanObject;
     /**
@@ -1615,7 +1615,7 @@ declare namespace FMS {
      */
     LastEntries?: NetworkAclEntries;
     /**
-     * Applies only when remediation is enabled for the policy as a whole. Firewall Manager uses this setting when it finds policy violations that involve conflicts between the custom entries and the policy entries.  If forced remediation is disabled, Firewall Manager marks the network ACL as noncompliant and does not try to remediate. For more information about the remediation behavior, see Network access control list (ACL) policies in the Firewall Manager Developer Guide.
+     * Applies only when remediation is enabled for the policy as a whole. Firewall Manager uses this setting when it finds policy violations that involve conflicts between the custom entries and the policy entries.  If forced remediation is disabled, Firewall Manager marks the network ACL as noncompliant and does not try to remediate. For more information about the remediation behavior, see Remediation for managed network ACLs in the Firewall Manager Developer Guide.
      */
     ForceRemediateForLastEntries: BooleanObject;
   }
@@ -2043,7 +2043,7 @@ declare namespace FMS {
      */
     ResourceSetIds?: ResourceSetIds;
     /**
-     * The definition of the Network Firewall firewall policy.
+     * Your description of the Firewall Manager policy.
      */
     PolicyDescription?: ResourceDescription;
     /**
@@ -2525,7 +2525,7 @@ declare namespace FMS {
      */
     Key: ResourceTagKey;
     /**
-     * The resource tag value.
+     * The resource tag value. To specify an empty string value, either don't provide this or specify it as "". 
      */
     Value?: ResourceTagValue;
   }

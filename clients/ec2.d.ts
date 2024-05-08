@@ -25456,6 +25456,10 @@ declare namespace EC2 {
      * Describes the Neuron accelerator settings for the instance type.
      */
     NeuronInfo?: NeuronInfo;
+    /**
+     * Indicates whether a local Precision Time Protocol (PTP) hardware clock (PHC) is supported.
+     */
+    PhcSupport?: PhcSupport;
   }
   export interface InstanceTypeInfoFromInstanceRequirements {
     /**
@@ -31746,6 +31750,7 @@ declare namespace EC2 {
      */
     Value?: String;
   }
+  export type PhcSupport = "unsupported"|"supported"|string;
   export interface Placement {
     /**
      * The Availability Zone of the instance. If not specified, an Availability Zone will be automatically chosen for you based on the load balancing criteria for the Region. This parameter is not supported for CreateFleet.

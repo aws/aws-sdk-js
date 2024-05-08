@@ -4658,7 +4658,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     AccountRecoverySetting?: AccountRecoverySettingType;
   }
-  export type UserStatusType = "UNCONFIRMED"|"CONFIRMED"|"ARCHIVED"|"COMPROMISED"|"UNKNOWN"|"RESET_REQUIRED"|"FORCE_CHANGE_PASSWORD"|string;
+  export type UserStatusType = "UNCONFIRMED"|"CONFIRMED"|"ARCHIVED"|"COMPROMISED"|"UNKNOWN"|"RESET_REQUIRED"|"FORCE_CHANGE_PASSWORD"|"EXTERNAL_PROVIDER"|string;
   export interface UserType {
     /**
      * The user name of the user you want to describe.

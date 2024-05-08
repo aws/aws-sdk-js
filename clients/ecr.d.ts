@@ -577,7 +577,7 @@ declare namespace ECR {
      */
     ecrRepositoryPrefix: PullThroughCacheRuleRepositoryPrefix;
     /**
-     * The registry URL of the upstream public registry to use as the source for the pull through cache rule. The following is the syntax to use for each supported upstream registry.   Amazon ECR Public (ecr-public) - public.ecr.aws    Docker Hub (docker-hub) - registry-1.docker.io    Quay (quay) - quay.io    Kubernetes (k8s) - registry.k8s.io    GitHub Container Registry (github-container-registry) - ghcr.io    Microsoft Azure Container Registry (azure-container-registry) - &lt;custom&gt;.azurecr.io   
+     * The registry URL of the upstream public registry to use as the source for the pull through cache rule. The following is the syntax to use for each supported upstream registry.   Amazon ECR Public (ecr-public) - public.ecr.aws    Docker Hub (docker-hub) - registry-1.docker.io    Quay (quay) - quay.io    Kubernetes (k8s) - registry.k8s.io    GitHub Container Registry (github-container-registry) - ghcr.io    Microsoft Azure Container Registry (azure-container-registry) - &lt;custom&gt;.azurecr.io    GitLab Container Registry (gitlab-container-registry) - registry.gitlab.com   
      */
     upstreamRegistryUrl: Url;
     /**
@@ -2288,7 +2288,7 @@ declare namespace ECR {
      */
     lastByteReceived?: PartSize;
   }
-  export type UpstreamRegistry = "ecr-public"|"quay"|"k8s"|"docker-hub"|"github-container-registry"|"azure-container-registry"|string;
+  export type UpstreamRegistry = "ecr-public"|"quay"|"k8s"|"docker-hub"|"github-container-registry"|"azure-container-registry"|"gitlab-container-registry"|string;
   export type Url = string;
   export interface ValidatePullThroughCacheRuleRequest {
     /**
