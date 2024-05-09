@@ -232,6 +232,7 @@ declare namespace VerifiedPermissions {
      */
     actionId: ActionId;
   }
+  export type ActionIdentifierList = ActionIdentifier[];
   export type ActionType = string;
   export interface AttributeValue {
     /**
@@ -415,7 +416,7 @@ declare namespace VerifiedPermissions {
      */
     clientIds?: ClientIds;
     /**
-     * The configuration of the user groups from an Amazon Cognito user pool identity source.
+     * The type of entity that a policy store maps to groups from an Amazon Cognito user pool identity source.
      */
     groupConfiguration?: CognitoGroupConfiguration;
   }
@@ -433,7 +434,7 @@ declare namespace VerifiedPermissions {
      */
     issuer: Issuer;
     /**
-     * The configuration of the user groups from an Amazon Cognito user pool identity source.
+     * The type of entity that a policy store maps to groups from an Amazon Cognito user pool identity source.
      */
     groupConfiguration?: CognitoGroupConfigurationDetail;
   }
@@ -451,7 +452,7 @@ declare namespace VerifiedPermissions {
      */
     issuer: Issuer;
     /**
-     * The configuration of the user groups from an Amazon Cognito user pool identity source.
+     * The type of entity that a policy store maps to groups from an Amazon Cognito user pool identity source.
      */
     groupConfiguration?: CognitoGroupConfigurationItem;
   }
@@ -463,13 +464,13 @@ declare namespace VerifiedPermissions {
   }
   export interface ConfigurationDetail {
     /**
-     * Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of authenticated identities as entities. It specifies the Amazon Resource Name (ARN) of a Amazon Cognito user pool and one or more application client IDs. Example: "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds": ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType": "MyCorp::Group"}}} 
+     * Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of authenticated identities as entities. It specifies the Amazon Resource Name (ARN) of a Amazon Cognito user pool, the policy store entity that you want to assign to user groups, and one or more application client IDs. Example: "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds": ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType": "MyCorp::Group"}}} 
      */
     cognitoUserPoolConfiguration?: CognitoUserPoolConfigurationDetail;
   }
   export interface ConfigurationItem {
     /**
-     * Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of authenticated identities as entities. It specifies the Amazon Resource Name (ARN) of a Amazon Cognito user pool and one or more application client IDs. Example: "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds": ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType": "MyCorp::Group"}}} 
+     * Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of authenticated identities as entities. It specifies the Amazon Resource Name (ARN) of a Amazon Cognito user pool, the policy store entity that you want to assign to user groups, and one or more application client IDs. Example: "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds": ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType": "MyCorp::Group"}}} 
      */
     cognitoUserPoolConfiguration?: CognitoUserPoolConfigurationItem;
   }
@@ -552,6 +553,10 @@ declare namespace VerifiedPermissions {
      */
     resource?: EntityIdentifier;
     /**
+     * The action that a policy permits or forbids. For example, {"actions": [{"actionId": "ViewPhoto", "actionType": "PhotoFlash::Action"}, {"entityID": "SharePhoto", "entityType": "PhotoFlash::Action"}]}.
+     */
+    actions?: ActionIdentifierList;
+    /**
      * The date and time the policy was originally created.
      */
     createdDate: TimestampFormat;
@@ -559,6 +564,10 @@ declare namespace VerifiedPermissions {
      * The date and time the policy was last updated.
      */
     lastUpdatedDate: TimestampFormat;
+    /**
+     * The effect of the decision that a policy returns to an authorization request. For example, "effect": "Permit".
+     */
+    effect?: PolicyEffect;
   }
   export interface CreatePolicyStoreInput {
     /**
@@ -804,6 +813,10 @@ declare namespace VerifiedPermissions {
      */
     resource?: EntityIdentifier;
     /**
+     * The action that a policy permits or forbids. For example, {"actions": [{"actionId": "ViewPhoto", "actionType": "PhotoFlash::Action"}, {"entityID": "SharePhoto", "entityType": "PhotoFlash::Action"}]}.
+     */
+    actions?: ActionIdentifierList;
+    /**
      * The definition of the requested policy.
      */
     definition: PolicyDefinitionDetail;
@@ -815,6 +828,10 @@ declare namespace VerifiedPermissions {
      * The date and time that the policy was last updated.
      */
     lastUpdatedDate: TimestampFormat;
+    /**
+     * The effect of the decision that a policy returns to an authorization request. For example, "effect": "Permit".
+     */
+    effect?: PolicyEffect;
   }
   export interface GetPolicyStoreInput {
     /**
@@ -1088,7 +1105,7 @@ declare namespace VerifiedPermissions {
      */
     nextToken?: NextToken;
     /**
-     * Specifies the total number of results that you want included in each response. If additional items exist beyond the number you specify, the NextToken response element is returned with a value (not null). Include the specified value as the NextToken request parameter in the next call to the operation to get the next set of results. Note that the service might return fewer results than the maximum even when there are more results available. You should check NextToken after every operation to ensure that you receive all of the results. If you do not specify this parameter, the operation defaults to 10 identity sources per response. You can specify a maximum of 200 identity sources per response.
+     * Specifies the total number of results that you want included in each response. If additional items exist beyond the number you specify, the NextToken response element is returned with a value (not null). Include the specified value as the NextToken request parameter in the next call to the operation to get the next set of results. Note that the service might return fewer results than the maximum even when there are more results available. You should check NextToken after every operation to ensure that you receive all of the results. If you do not specify this parameter, the operation defaults to 10 identity sources per response. You can specify a maximum of 50 identity sources per response.
      */
     maxResults?: ListIdentitySourcesMaxResults;
     /**
@@ -1216,6 +1233,7 @@ declare namespace VerifiedPermissions {
      */
     templateLinked?: TemplateLinkedPolicyDefinitionItem;
   }
+  export type PolicyEffect = "Permit"|"Forbid"|string;
   export interface PolicyFilter {
     /**
      * Filters the output to only policies that reference the specified principal.
@@ -1257,6 +1275,10 @@ declare namespace VerifiedPermissions {
      */
     resource?: EntityIdentifier;
     /**
+     * The action that a policy permits or forbids. For example, {"actions": [{"actionId": "ViewPhoto", "actionType": "PhotoFlash::Action"}, {"entityID": "SharePhoto", "entityType": "PhotoFlash::Action"}]}.
+     */
+    actions?: ActionIdentifierList;
+    /**
      * The policy definition of an item in the list of policies returned.
      */
     definition: PolicyDefinitionItem;
@@ -1268,6 +1290,10 @@ declare namespace VerifiedPermissions {
      * The date and time the policy was most recently updated.
      */
     lastUpdatedDate: TimestampFormat;
+    /**
+     * The effect of the decision that a policy returns to an authorization request. For example, "effect": "Permit".
+     */
+    effect?: PolicyEffect;
   }
   export type PolicyList = PolicyItem[];
   export type PolicyStatement = string;
@@ -1538,6 +1564,10 @@ declare namespace VerifiedPermissions {
      */
     resource?: EntityIdentifier;
     /**
+     * The action that a policy permits or forbids. For example, {"actions": [{"actionId": "ViewPhoto", "actionType": "PhotoFlash::Action"}, {"entityID": "SharePhoto", "entityType": "PhotoFlash::Action"}]}.
+     */
+    actions?: ActionIdentifierList;
+    /**
      * The date and time that the policy was originally created.
      */
     createdDate: TimestampFormat;
@@ -1545,6 +1575,10 @@ declare namespace VerifiedPermissions {
      * The date and time that the policy was most recently updated.
      */
     lastUpdatedDate: TimestampFormat;
+    /**
+     * The effect of the decision that a policy returns to an authorization request. For example, "effect": "Permit".
+     */
+    effect?: PolicyEffect;
   }
   export interface UpdatePolicyStoreInput {
     /**

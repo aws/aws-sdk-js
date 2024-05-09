@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1616.0-->
+<!--LATEST=2.1617.0-->
 <!--ENTRYINSERT-->
+
+## 2.1617.0
+* feature: BedrockAgentRuntime: This release adds support to provide guardrail configuration and modify inference parameters that are then used in RetrieveAndGenerate API in Agents for Amazon Bedrock.
+* feature: Pinpoint: This release adds support for specifying email message headers for Email Templates, Campaigns, Journeys and Send Messages.
+* feature: SsmSap: Added support for application-aware start/stop of SAP applications running on EC2 instances, with SSM for SAP
+* feature: VerifiedPermissions: Adds policy effect and actions fields to Policy API's.
 
 ## 2.1616.0
 * bugfix: Alexa for Business: Deprecates Alexa for Business

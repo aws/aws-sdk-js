@@ -13,11 +13,11 @@ declare class BedrockAgentRuntime extends Service {
   constructor(options?: BedrockAgentRuntime.Types.ClientConfiguration)
   config: Config & BedrockAgentRuntime.Types.ClientConfiguration;
   /**
-   * Sends a prompt for the agent to process and respond to. Use return control event type for function calling.  The CLI doesn't support InvokeAgent.    To continue the same conversation with an agent, use the same sessionId value in the request.   To activate trace enablement, turn enableTrace to true. Trace enablement helps you follow the agent's reasoning process that led it to the information it processed, the actions it took, and the final result it yielded. For more information, see Trace enablement.   End a conversation by setting endSession to true.   In the sessionState object, you can include attributes for the session or prompt or parameters returned from the action group.   Use return control event type for function calling.   The response is returned in the bytes field of the chunk object.   The attribution object contains citations for parts of the response.   If you set enableTrace to true in the request, you can trace the agent's steps and reasoning process that led it to the response.   Errors are also surfaced in the response.  
+   *  The CLI doesn't support InvokeAgent.  Sends a prompt for the agent to process and respond to. Note the following fields for the request:   To continue the same conversation with an agent, use the same sessionId value in the request.   To activate trace enablement, turn enableTrace to true. Trace enablement helps you follow the agent's reasoning process that led it to the information it processed, the actions it took, and the final result it yielded. For more information, see Trace enablement.   End a conversation by setting endSession to true.   In the sessionState object, you can include attributes for the session or prompt or, if you configured an action group to return control, results from invocation of the action group.   The response is returned in the bytes field of the chunk object.   The attribution object contains citations for parts of the response.   If you set enableTrace to true in the request, you can trace the agent's steps and reasoning process that led it to the response.   If the action predicted was configured to return control, the response returns parameters for the action, elicited from the user, in the returnControl field.   Errors are also surfaced in the response.  
    */
   invokeAgent(params: BedrockAgentRuntime.Types.InvokeAgentRequest, callback?: (err: AWSError, data: BedrockAgentRuntime.Types.InvokeAgentResponse) => void): Request<BedrockAgentRuntime.Types.InvokeAgentResponse, AWSError>;
   /**
-   * Sends a prompt for the agent to process and respond to. Use return control event type for function calling.  The CLI doesn't support InvokeAgent.    To continue the same conversation with an agent, use the same sessionId value in the request.   To activate trace enablement, turn enableTrace to true. Trace enablement helps you follow the agent's reasoning process that led it to the information it processed, the actions it took, and the final result it yielded. For more information, see Trace enablement.   End a conversation by setting endSession to true.   In the sessionState object, you can include attributes for the session or prompt or parameters returned from the action group.   Use return control event type for function calling.   The response is returned in the bytes field of the chunk object.   The attribution object contains citations for parts of the response.   If you set enableTrace to true in the request, you can trace the agent's steps and reasoning process that led it to the response.   Errors are also surfaced in the response.  
+   *  The CLI doesn't support InvokeAgent.  Sends a prompt for the agent to process and respond to. Note the following fields for the request:   To continue the same conversation with an agent, use the same sessionId value in the request.   To activate trace enablement, turn enableTrace to true. Trace enablement helps you follow the agent's reasoning process that led it to the information it processed, the actions it took, and the final result it yielded. For more information, see Trace enablement.   End a conversation by setting endSession to true.   In the sessionState object, you can include attributes for the session or prompt or, if you configured an action group to return control, results from invocation of the action group.   The response is returned in the bytes field of the chunk object.   The attribution object contains citations for parts of the response.   If you set enableTrace to true in the request, you can trace the agent's steps and reasoning process that led it to the response.   If the action predicted was configured to return control, the response returns parameters for the action, elicited from the user, in the returnControl field.   Errors are also surfaced in the response.  
    */
   invokeAgent(callback?: (err: AWSError, data: BedrockAgentRuntime.Types.InvokeAgentResponse) => void): Request<BedrockAgentRuntime.Types.InvokeAgentResponse, AWSError>;
   /**
@@ -75,6 +75,10 @@ declare namespace BedrockAgentRuntime {
   }
   export type ActionGroupName = string;
   export type ActionGroupOutputString = string;
+  export type AdditionalModelRequestFields = {[key: string]: AdditionalModelRequestFieldsValue};
+  export type AdditionalModelRequestFieldsKey = string;
+  export interface AdditionalModelRequestFieldsValue {
+  }
   export type AgentAliasId = string;
   export type AgentId = string;
   export type AgentVersion = string;
@@ -141,7 +145,7 @@ declare namespace BedrockAgentRuntime {
      */
     httpStatusCode?: Integer;
     /**
-     * The response body from the API operation. The key of the object is the content type. The response may be returned directly or from the Lambda function.
+     * The response body from the API operation. The key of the object is the content type (currently, only TEXT is supported). The response may be returned directly or from the Lambda function.
      */
     responseBody?: ResponseBody;
     /**
@@ -227,6 +231,18 @@ declare namespace BedrockAgentRuntime {
   export type ExternalSourceType = "S3"|"BYTE_CONTENT"|string;
   export type ExternalSources = ExternalSource[];
   export interface ExternalSourcesGenerationConfiguration {
+    /**
+     *  Additional model parameters and their corresponding values not included in the textInferenceConfig structure for an external source. Takes in custom model parameters specific to the language model being used. 
+     */
+    additionalModelRequestFields?: AdditionalModelRequestFields;
+    /**
+     * The configuration details for the guardrail.
+     */
+    guardrailConfiguration?: GuardrailConfiguration;
+    /**
+     *  Configuration settings for inference when using RetrieveAndGenerate to generate responses while using an external source.
+     */
+    inferenceConfig?: InferenceConfig;
     /**
      * Contain the textPromptTemplate string for the external source wrapper object.
      */
@@ -317,7 +333,7 @@ declare namespace BedrockAgentRuntime {
      */
     function?: String;
     /**
-     * The response from the function call using the parameters. The response may be returned directly or from the Lambda function.
+     * The response from the function call using the parameters. The key of the object is the content type (currently, only TEXT is supported). The response may be returned directly or from the Lambda function.
      */
     responseBody?: ResponseBody;
     /**
@@ -333,11 +349,42 @@ declare namespace BedrockAgentRuntime {
   }
   export interface GenerationConfiguration {
     /**
+     *  Additional model parameters and corresponding values not included in the textInferenceConfig structure for a knowledge base. This allows users to provide custom model parameters specific to the language model being used. 
+     */
+    additionalModelRequestFields?: AdditionalModelRequestFields;
+    /**
+     * The configuration details for the guardrail.
+     */
+    guardrailConfiguration?: GuardrailConfiguration;
+    /**
+     *  Configuration settings for inference when using RetrieveAndGenerate to generate responses while using a knowledge base as a source. 
+     */
+    inferenceConfig?: InferenceConfig;
+    /**
      * Contains the template for the prompt that's sent to the model for response generation.
      */
     promptTemplate?: PromptTemplate;
   }
+  export type GuadrailAction = "INTERVENED"|"NONE"|string;
+  export interface GuardrailConfiguration {
+    /**
+     * The unique identifier for the guardrail.
+     */
+    guardrailId: GuardrailConfigurationGuardrailIdString;
+    /**
+     * The version of the guardrail.
+     */
+    guardrailVersion: GuardrailConfigurationGuardrailVersionString;
+  }
+  export type GuardrailConfigurationGuardrailIdString = string;
+  export type GuardrailConfigurationGuardrailVersionString = string;
   export type Identifier = string;
+  export interface InferenceConfig {
+    /**
+     *  Configuration settings specific to text generation while generating responses using RetrieveAndGenerate. 
+     */
+    textInferenceConfig?: TextInferenceConfig;
+  }
   export interface InferenceConfiguration {
     /**
      * The maximum number of tokens allowed in the generated response.
@@ -423,7 +470,7 @@ declare namespace BedrockAgentRuntime {
      */
     endSession?: Boolean;
     /**
-     * The prompt text to send the agent.
+     * The prompt text to send the agent.  If you include returnControlInvocationResults in the sessionState field, the inputText field will be ignored. 
      */
     inputText?: InputText;
     /**
@@ -431,7 +478,7 @@ declare namespace BedrockAgentRuntime {
      */
     sessionId: SessionId;
     /**
-     * Contains parameters that specify various attributes of the session. For more information, see Control session context.
+     * Contains parameters that specify various attributes of the session. For more information, see Control session context.  If you include returnControlInvocationResults in the sessionState field, the inputText field will be ignored. 
      */
     sessionState?: SessionState;
   }
@@ -534,6 +581,7 @@ declare namespace BedrockAgentRuntime {
   }
   export type KnowledgeBaseVectorSearchConfigurationNumberOfResultsInteger = number;
   export type LambdaArn = string;
+  export type MaxTokens = number;
   export type MaximumLength = number;
   export type MimeType = string;
   export interface ModelInvocationInput {
@@ -711,6 +759,8 @@ declare namespace BedrockAgentRuntime {
      */
     properties?: ParameterList;
   }
+  export type RAGStopSequences = RAGStopSequencesMemberString[];
+  export type RAGStopSequencesMemberString = string;
   export interface Rationale {
     /**
      * The reasoning or thought process of the agent, based on the input.
@@ -869,6 +919,10 @@ declare namespace BedrockAgentRuntime {
      */
     citations?: Citations;
     /**
+     * Specifies if there is a guardrail intervention in the response.
+     */
+    guardrailAction?: GuadrailAction;
+    /**
      * Contains the response generated from querying the knowledge base.
      */
     output: RetrieveAndGenerateOutput;
@@ -953,7 +1007,7 @@ declare namespace BedrockAgentRuntime {
   export type SessionId = string;
   export interface SessionState {
     /**
-     * The identifier of the invocation.
+     * The identifier of the invocation of an action. This value must match the invocationId returned in the InvokeAgent response for the action whose results are provided in the returnControlInvocationResults field. For more information, see Return control to the agent developer and Control session context.
      */
     invocationId?: String;
     /**
@@ -961,7 +1015,7 @@ declare namespace BedrockAgentRuntime {
      */
     promptSessionAttributes?: PromptSessionAttributesMap;
     /**
-     * Contains information about the results from the action group invocation.
+     * Contains information about the results from the action group invocation. For more information, see Return control to the agent developer and Control session context.  If you include this field, the inputText field will be ignored. 
      */
     returnControlInvocationResults?: ReturnControlInvocationResults;
     /**
@@ -985,6 +1039,24 @@ declare namespace BedrockAgentRuntime {
   export type StopSequences = String[];
   export type String = string;
   export type Temperature = number;
+  export interface TextInferenceConfig {
+    /**
+     * The maximum number of tokens to generate in the output text. Do not use the minimum of 0 or the maximum of 65536. The limit values described here are arbitary values, for actual values consult the limits defined by your specific model.
+     */
+    maxTokens?: MaxTokens;
+    /**
+     * A list of sequences of characters that, if generated, will cause the model to stop generating further tokens. Do not use a minimum length of 1 or a maximum length of 1000. The limit values described here are arbitary values, for actual values consult the limits defined by your specific model.
+     */
+    stopSequences?: RAGStopSequences;
+    /**
+     *  Controls the random-ness of text generated by the language model, influencing how much the model sticks to the most predictable next words versus exploring more surprising options. A lower temperature value (e.g. 0.2 or 0.3) makes model outputs more deterministic or predictable, while a higher temperature (e.g. 0.8 or 0.9) makes the outputs more creative or unpredictable. 
+     */
+    temperature?: Temperature;
+    /**
+     *  A probability distribution threshold which controls what the model considers for the set of possible next tokens. The model will only consider the top p% of the probability distribution when generating the next token. 
+     */
+    topP?: TopP;
+  }
   export type TextPromptTemplate = string;
   export interface TextResponsePart {
     /**

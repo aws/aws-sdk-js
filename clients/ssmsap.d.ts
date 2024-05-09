@@ -92,6 +92,14 @@ declare class SsmSap extends Service {
    */
   listDatabases(callback?: (err: AWSError, data: SsmSap.Types.ListDatabasesOutput) => void): Request<SsmSap.Types.ListDatabasesOutput, AWSError>;
   /**
+   * Returns a list of operations events. Available parameters include OperationID, as well as optional parameters MaxResults, NextToken, and Filters.
+   */
+  listOperationEvents(params: SsmSap.Types.ListOperationEventsInput, callback?: (err: AWSError, data: SsmSap.Types.ListOperationEventsOutput) => void): Request<SsmSap.Types.ListOperationEventsOutput, AWSError>;
+  /**
+   * Returns a list of operations events. Available parameters include OperationID, as well as optional parameters MaxResults, NextToken, and Filters.
+   */
+  listOperationEvents(callback?: (err: AWSError, data: SsmSap.Types.ListOperationEventsOutput) => void): Request<SsmSap.Types.ListOperationEventsOutput, AWSError>;
+  /**
    * Lists the operations performed by AWS Systems Manager for SAP.
    */
   listOperations(params: SsmSap.Types.ListOperationsInput, callback?: (err: AWSError, data: SsmSap.Types.ListOperationsOutput) => void): Request<SsmSap.Types.ListOperationsOutput, AWSError>;
@@ -124,6 +132,14 @@ declare class SsmSap extends Service {
    */
   registerApplication(callback?: (err: AWSError, data: SsmSap.Types.RegisterApplicationOutput) => void): Request<SsmSap.Types.RegisterApplicationOutput, AWSError>;
   /**
+   * Request is an operation which starts an application. Parameter ApplicationId is required.
+   */
+  startApplication(params: SsmSap.Types.StartApplicationInput, callback?: (err: AWSError, data: SsmSap.Types.StartApplicationOutput) => void): Request<SsmSap.Types.StartApplicationOutput, AWSError>;
+  /**
+   * Request is an operation which starts an application. Parameter ApplicationId is required.
+   */
+  startApplication(callback?: (err: AWSError, data: SsmSap.Types.StartApplicationOutput) => void): Request<SsmSap.Types.StartApplicationOutput, AWSError>;
+  /**
    * Refreshes a registered application.
    */
   startApplicationRefresh(params: SsmSap.Types.StartApplicationRefreshInput, callback?: (err: AWSError, data: SsmSap.Types.StartApplicationRefreshOutput) => void): Request<SsmSap.Types.StartApplicationRefreshOutput, AWSError>;
@@ -131,6 +147,14 @@ declare class SsmSap extends Service {
    * Refreshes a registered application.
    */
   startApplicationRefresh(callback?: (err: AWSError, data: SsmSap.Types.StartApplicationRefreshOutput) => void): Request<SsmSap.Types.StartApplicationRefreshOutput, AWSError>;
+  /**
+   * Request is an operation to stop an application. Parameter ApplicationId is required. Parameters StopConnectedEntity and IncludeEc2InstanceShutdown are optional.
+   */
+  stopApplication(params: SsmSap.Types.StopApplicationInput, callback?: (err: AWSError, data: SsmSap.Types.StopApplicationOutput) => void): Request<SsmSap.Types.StopApplicationOutput, AWSError>;
+  /**
+   * Request is an operation to stop an application. Parameter ApplicationId is required. Parameters StopConnectedEntity and IncludeEc2InstanceShutdown are optional.
+   */
+  stopApplication(callback?: (err: AWSError, data: SsmSap.Types.StopApplicationOutput) => void): Request<SsmSap.Types.StopApplicationOutput, AWSError>;
   /**
    * Creates tag for a resource by specifying the ARN.
    */
@@ -380,6 +404,7 @@ declare namespace SsmSap {
   }
   export type ComponentSummaryList = ComponentSummary[];
   export type ComponentType = "HANA"|"HANA_NODE"|"ABAP"|"ASCS"|"DIALOG"|"WEBDISP"|"WD"|"ERS"|string;
+  export type ConnectedEntityType = "DBMS"|string;
   export type CredentialType = "ADMIN"|string;
   export interface Database {
     /**
@@ -672,7 +697,7 @@ declare namespace SsmSap {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. 
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
      */
     MaxResults?: MaxResults;
     /**
@@ -737,6 +762,34 @@ declare namespace SsmSap {
      * The SAP HANA databases of an application.
      */
     Databases?: DatabaseSummaryList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListOperationEventsInput {
+    /**
+     * The ID of the operation.
+     */
+    OperationId: OperationId;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. If you do not specify a value for MaxResults, the request returns 50 items per page by default.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+    /**
+     * Optionally specify filters to narrow the returned operation event items. Valid filter names include status, resourceID, and resourceType. The valid operator for all three filters is Equals.
+     */
+    Filters?: FilterList;
+  }
+  export interface ListOperationEventsOutput {
+    /**
+     * A returned list of operation events that meet the filter criteria.
+     */
+    OperationEvents?: OperationEventList;
     /**
      * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
@@ -830,6 +883,31 @@ declare namespace SsmSap {
      */
     LastUpdatedTime?: Timestamp;
   }
+  export interface OperationEvent {
+    /**
+     * A description of the operation event. For example, "Stop the EC2 instance i-abcdefgh987654321".
+     */
+    Description?: String;
+    /**
+     * The resource involved in the operations event. Contains ResourceArn ARN and ResourceType.
+     */
+    Resource?: Resource;
+    /**
+     * The status of the operation event. The possible statuses are: IN_PROGRESS, COMPLETED, and FAILED.
+     */
+    Status?: OperationEventStatus;
+    /**
+     * The status message relating to a specific operation event.
+     */
+    StatusMessage?: String;
+    /**
+     * The timestamp of the specified operation event.
+     */
+    Timestamp?: Timestamp;
+  }
+  export type OperationEventList = OperationEvent[];
+  export type OperationEventResourceType = string;
+  export type OperationEventStatus = "IN_PROGRESS"|"COMPLETED"|"FAILED"|string;
   export type OperationId = string;
   export type OperationIdList = OperationId[];
   export type OperationList = Operation[];
@@ -925,12 +1003,34 @@ declare namespace SsmSap {
      */
     EnqueueReplication?: Boolean;
   }
+  export interface Resource {
+    /**
+     * The Amazon Resource Name (ARN) of the source resource. Example of ResourceArn: "arn:aws:ec2:us-east-1:111111111111:instance/i-abcdefgh987654321"
+     */
+    ResourceArn?: Arn;
+    /**
+     * The resource type. Example of ResourceType: "AWS::SystemsManagerSAP::Component" or "AWS::EC2::Instance".
+     */
+    ResourceType?: OperationEventResourceType;
+  }
   export type ResourceId = string;
   export type ResourceType = string;
   export type SAPInstanceNumber = string;
   export type SID = string;
   export type SecretId = string;
   export type SsmSapArn = string;
+  export interface StartApplicationInput {
+    /**
+     * The ID of the application.
+     */
+    ApplicationId: ApplicationId;
+  }
+  export interface StartApplicationOutput {
+    /**
+     * The ID of the operation.
+     */
+    OperationId?: OperationId;
+  }
   export interface StartApplicationRefreshInput {
     /**
      * The ID of the application.
@@ -938,6 +1038,26 @@ declare namespace SsmSap {
     ApplicationId: ApplicationId;
   }
   export interface StartApplicationRefreshOutput {
+    /**
+     * The ID of the operation.
+     */
+    OperationId?: OperationId;
+  }
+  export interface StopApplicationInput {
+    /**
+     * The ID of the application.
+     */
+    ApplicationId: ApplicationId;
+    /**
+     * Specify the ConnectedEntityType. Accepted type is DBMS. If this parameter is included, the connected DBMS (Database Management System) will be stopped.
+     */
+    StopConnectedEntity?: ConnectedEntityType;
+    /**
+     * Boolean. If included and if set to True, the StopApplication operation will shut down the associated Amazon EC2 instance in addition to the application.
+     */
+    IncludeEc2InstanceShutdown?: Boolean;
+  }
+  export interface StopApplicationOutput {
     /**
      * The ID of the operation.
      */
