@@ -44,11 +44,11 @@ declare class GreengrassV2 extends Service {
    */
   cancelDeployment(callback?: (err: AWSError, data: GreengrassV2.Types.CancelDeploymentResponse) => void): Request<GreengrassV2.Types.CancelDeploymentResponse, AWSError>;
   /**
-   * Creates a component. Components are software that run on Greengrass core devices. After you develop and test a component on your core device, you can use this operation to upload your component to IoT Greengrass. Then, you can deploy the component to other core devices. You can use this operation to do the following:    Create components from recipes  Create a component from a recipe, which is a file that defines the component's metadata, parameters, dependencies, lifecycle, artifacts, and platform capability. For more information, see IoT Greengrass component recipe reference in the IoT Greengrass V2 Developer Guide. To create a component from a recipe, specify inlineRecipe when you call this operation.    Create components from Lambda functions  Create a component from an Lambda function that runs on IoT Greengrass. This creates a recipe and artifacts from the Lambda function's deployment package. You can use this operation to migrate Lambda functions from IoT Greengrass V1 to IoT Greengrass V2. This function only accepts Lambda functions that use the following runtimes:   Python 2.7 – python2.7    Python 3.7 – python3.7    Python 3.8 – python3.8    Python 3.9 – python3.9    Java 8 – java8    Java 11 – java11    Node.js 10 – nodejs10.x    Node.js 12 – nodejs12.x    Node.js 14 – nodejs14.x    To create a component from a Lambda function, specify lambdaFunction when you call this operation.  IoT Greengrass currently supports Lambda functions on only Linux core devices.   
+   * Creates a component. Components are software that run on Greengrass core devices. After you develop and test a component on your core device, you can use this operation to upload your component to IoT Greengrass. Then, you can deploy the component to other core devices. You can use this operation to do the following:    Create components from recipes  Create a component from a recipe, which is a file that defines the component's metadata, parameters, dependencies, lifecycle, artifacts, and platform capability. For more information, see IoT Greengrass component recipe reference in the IoT Greengrass V2 Developer Guide. To create a component from a recipe, specify inlineRecipe when you call this operation.    Create components from Lambda functions  Create a component from an Lambda function that runs on IoT Greengrass. This creates a recipe and artifacts from the Lambda function's deployment package. You can use this operation to migrate Lambda functions from IoT Greengrass V1 to IoT Greengrass V2. This function accepts Lambda functions in all supported versions of Python, Node.js, and Java runtimes. IoT Greengrass doesn't apply any additional restrictions on deprecated Lambda runtime versions. To create a component from a Lambda function, specify lambdaFunction when you call this operation.  IoT Greengrass currently supports Lambda functions on only Linux core devices.   
    */
   createComponentVersion(params: GreengrassV2.Types.CreateComponentVersionRequest, callback?: (err: AWSError, data: GreengrassV2.Types.CreateComponentVersionResponse) => void): Request<GreengrassV2.Types.CreateComponentVersionResponse, AWSError>;
   /**
-   * Creates a component. Components are software that run on Greengrass core devices. After you develop and test a component on your core device, you can use this operation to upload your component to IoT Greengrass. Then, you can deploy the component to other core devices. You can use this operation to do the following:    Create components from recipes  Create a component from a recipe, which is a file that defines the component's metadata, parameters, dependencies, lifecycle, artifacts, and platform capability. For more information, see IoT Greengrass component recipe reference in the IoT Greengrass V2 Developer Guide. To create a component from a recipe, specify inlineRecipe when you call this operation.    Create components from Lambda functions  Create a component from an Lambda function that runs on IoT Greengrass. This creates a recipe and artifacts from the Lambda function's deployment package. You can use this operation to migrate Lambda functions from IoT Greengrass V1 to IoT Greengrass V2. This function only accepts Lambda functions that use the following runtimes:   Python 2.7 – python2.7    Python 3.7 – python3.7    Python 3.8 – python3.8    Python 3.9 – python3.9    Java 8 – java8    Java 11 – java11    Node.js 10 – nodejs10.x    Node.js 12 – nodejs12.x    Node.js 14 – nodejs14.x    To create a component from a Lambda function, specify lambdaFunction when you call this operation.  IoT Greengrass currently supports Lambda functions on only Linux core devices.   
+   * Creates a component. Components are software that run on Greengrass core devices. After you develop and test a component on your core device, you can use this operation to upload your component to IoT Greengrass. Then, you can deploy the component to other core devices. You can use this operation to do the following:    Create components from recipes  Create a component from a recipe, which is a file that defines the component's metadata, parameters, dependencies, lifecycle, artifacts, and platform capability. For more information, see IoT Greengrass component recipe reference in the IoT Greengrass V2 Developer Guide. To create a component from a recipe, specify inlineRecipe when you call this operation.    Create components from Lambda functions  Create a component from an Lambda function that runs on IoT Greengrass. This creates a recipe and artifacts from the Lambda function's deployment package. You can use this operation to migrate Lambda functions from IoT Greengrass V1 to IoT Greengrass V2. This function accepts Lambda functions in all supported versions of Python, Node.js, and Java runtimes. IoT Greengrass doesn't apply any additional restrictions on deprecated Lambda runtime versions. To create a component from a Lambda function, specify lambdaFunction when you call this operation.  IoT Greengrass currently supports Lambda functions on only Linux core devices.   
    */
   createComponentVersion(callback?: (err: AWSError, data: GreengrassV2.Types.CreateComponentVersionResponse) => void): Request<GreengrassV2.Types.CreateComponentVersionResponse, AWSError>;
   /**
@@ -418,7 +418,7 @@ declare namespace GreengrassV2 {
     /**
      * The version of the component.
      */
-    componentVersion?: ComponentVersionString;
+    componentVersion: ComponentVersionString;
     /**
      * The configuration updates to deploy for the component. You can define reset updates and merge updates. A reset updates the keys that you specify to the default configuration for the component. A merge updates the core device's component configuration with the keys and values that you specify. The IoT Greengrass Core software applies reset updates before it applies merge updates. For more information, see Update component configurations in the IoT Greengrass V2 Developer Guide.
      */
@@ -905,6 +905,14 @@ declare namespace GreengrassV2 {
      * The name of the artifact. You can use the GetComponent operation to download the component recipe, which includes the URI of the artifact. The artifact name is the section of the URI after the scheme. For example, in the artifact URI greengrass:SomeArtifact.zip, the artifact name is SomeArtifact.zip.
      */
     artifactName: NonEmptyString;
+    /**
+     * Specifies the endpoint to use when getting Amazon S3 pre-signed URLs. All Amazon Web Services Regions except US East (N. Virginia) use REGIONAL in all cases. In the US East (N. Virginia) Region the default is GLOBAL, but you can change it to REGIONAL with this parameter.
+     */
+    s3EndpointType?: S3EndpointType;
+    /**
+     * Determines if the Amazon S3 URL returned is a FIPS pre-signed URL endpoint. Specify fips if you want the returned Amazon S3 pre-signed URL to point to an Amazon S3 FIPS endpoint. If you don't specify a value, the default is standard.
+     */
+    iotEndpointType?: IotEndpointType;
   }
   export interface GetComponentVersionArtifactResponse {
     /**
@@ -1070,7 +1078,7 @@ declare namespace GreengrassV2 {
      */
     lastReportedTimestamp?: Timestamp;
     /**
-     * The most recent deployment source that brought the component to the Greengrass core device. For a thing group deployment or thing deployment, the source will be the The ID of the deployment. and for local deployments it will be LOCAL.  Any deployment will attempt to reinstall currently broken components on the device, which will update the last installation source. 
+     * The most recent deployment source that brought the component to the Greengrass core device. For a thing group deployment or thing deployment, the source will be the ID of the last deployment that contained the component. For local deployments it will be LOCAL.  Any deployment will attempt to reinstall currently broken components on the device, which will update the last installation source. 
      */
     lastInstallationSource?: NonEmptyString;
     /**
@@ -1160,6 +1168,7 @@ declare namespace GreengrassV2 {
     inProgressTimeoutInMinutes?: IoTJobInProgressTimeoutInMinutes;
   }
   export type IoTThingName = string;
+  export type IotEndpointType = "fips"|"standard"|string;
   export type IsLatestForTarget = boolean;
   export type IsRoot = boolean;
   export interface LambdaContainerParams {
@@ -1429,7 +1438,7 @@ declare namespace GreengrassV2 {
      */
     parentTargetArn?: ThingGroupARN;
     /**
-     * The maximum number of results to be returned per paginated request.
+     * The maximum number of results to be returned per paginated request. Default: 50 
      */
     maxResults?: DefaultMaxResults;
     /**
@@ -1566,6 +1575,7 @@ declare namespace GreengrassV2 {
     message?: NonEmptyString;
   }
   export type ResolvedComponentVersionsList = ResolvedComponentVersion[];
+  export type S3EndpointType = "REGIONAL"|"GLOBAL"|string;
   export type String = string;
   export type StringMap = {[key: string]: NonEmptyString};
   export interface SystemResourceLimits {

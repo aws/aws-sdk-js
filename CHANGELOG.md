@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1617.0-->
+<!--LATEST=2.1618.0-->
 <!--ENTRYINSERT-->
+
+## 2.1618.0
+* feature: Discovery: add v2 smoke tests and smithy smokeTests trait for SDK testing
+* feature: GreengrassV2: Mark ComponentVersion in ComponentDeploymentSpecification as required.
+* feature: SSOOIDC: Updated request parameters for PKCE support.
+* feature: SageMaker: Introduced support for G6 instance types on Sagemaker Notebook Instances and on SageMaker Studio for JupyterLab and CodeEditor applications.
 
 ## 2.1617.0
 * feature: BedrockAgentRuntime: This release adds support to provide guardrail configuration and modify inference parameters that are then used in RetrieveAndGenerate API in Agents for Amazon Bedrock.
