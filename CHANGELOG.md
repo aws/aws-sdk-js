@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1618.0-->
+<!--LATEST=2.1619.0-->
 <!--ENTRYINSERT-->
+
+## 2.1619.0
+* feature: EventBridge: Amazon EventBridge introduces KMS customer-managed key (CMK) encryption support for custom and partner events published on EventBridge Event Bus (including default bus) and UpdateEventBus API.
+* feature: VPCLattice: This release adds TLS Passthrough support. It also increases max number of target group per rule to 10.
 
 ## 2.1618.0
 * feature: Discovery: add v2 smoke tests and smithy smokeTests trait for SDK testing
