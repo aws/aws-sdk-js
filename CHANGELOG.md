@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1619.0-->
+<!--LATEST=2.1620.0-->
 <!--ENTRYINSERT-->
+
+## 2.1620.0
+* feature: Connect: Amazon Connect provides enhanced search capabilities for flows & flow modules on the Connect admin website and programmatically using APIs. You can search for flows and flow modules by name, description, type, status, and tags, to filter and identify a specific flow in your Connect instances.
+* feature: S3: Updated a few x-id in the http uri traits
 
 ## 2.1619.0
 * feature: EventBridge: Amazon EventBridge introduces KMS customer-managed key (CMK) encryption support for custom and partner events published on EventBridge Event Bus (including default bus) and UpdateEventBus API.
