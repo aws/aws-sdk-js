@@ -796,49 +796,57 @@ declare namespace BedrockAgentRuntime {
   export type ResponseStream = EventStream<{accessDeniedException?:AccessDeniedException,badGatewayException?:BadGatewayException,chunk?:PayloadPart,conflictException?:ConflictException,dependencyFailedException?:DependencyFailedException,internalServerException?:InternalServerException,resourceNotFoundException?:ResourceNotFoundException,returnControl?:ReturnControlPayload,serviceQuotaExceededException?:ServiceQuotaExceededException,throttlingException?:ThrottlingException,trace?:TracePart,validationException?:ValidationException}>;
   export interface RetrievalFilter {
     /**
-     * Knowledge base data sources whose metadata attributes fulfill all the filter conditions inside this list are returned.
+     * Knowledge base data sources are returned if their metadata attributes fulfill all the filter conditions inside this list.
      */
     andAll?: RetrievalFilterList;
     /**
-     * Knowledge base data sources that contain a metadata attribute whose name matches the key and whose value matches the value in this object are returned.
+     * Knowledge base data sources are returned if they contain a metadata attribute whose name matches the key and whose value matches the value in this object. The following example would return data sources with an animal attribute whose value is cat:  "equals": { "key": "animal", "value": "cat" } 
      */
     equals?: FilterAttribute;
     /**
-     * Knowledge base data sources that contain a metadata attribute whose name matches the key and whose value is greater than the value in this object are returned.
+     * Knowledge base data sources are returned if they contain a metadata attribute whose name matches the key and whose value is greater than the value in this object. The following example would return data sources with an year attribute whose value is greater than 1989:  "greaterThan": { "key": "year", "value": 1989 } 
      */
     greaterThan?: FilterAttribute;
     /**
-     * Knowledge base data sources that contain a metadata attribute whose name matches the key and whose value is greater than or equal to the value in this object are returned.
+     * Knowledge base data sources are returned if they contain a metadata attribute whose name matches the key and whose value is greater than or equal to the value in this object. The following example would return data sources with an year attribute whose value is greater than or equal to 1989:  "greaterThanOrEquals": { "key": "year", "value": 1989 } 
      */
     greaterThanOrEquals?: FilterAttribute;
     /**
-     * Knowledge base data sources that contain a metadata attribute whose name matches the key and whose value is in the list specified in the value in this object are returned.
+     * Knowledge base data sources are returned if they contain a metadata attribute whose name matches the key and whose value is in the list specified in the value in this object. The following example would return data sources with an animal attribute that is either cat or dog:  "in": { "key": "animal", "value": ["cat", "dog"] } 
      */
     in?: FilterAttribute;
     /**
-     * Knowledge base data sources that contain a metadata attribute whose name matches the key and whose value is less than the value in this object are returned.
+     * Knowledge base data sources are returned if they contain a metadata attribute whose name matches the key and whose value is less than the value in this object. The following example would return data sources with an year attribute whose value is less than to 1989.  "lessThan": { "key": "year", "value": 1989 } 
      */
     lessThan?: FilterAttribute;
     /**
-     * Knowledge base data sources that contain a metadata attribute whose name matches the key and whose value is less than or equal to the value in this object are returned.
+     * Knowledge base data sources are returned if they contain a metadata attribute whose name matches the key and whose value is less than or equal to the value in this object. The following example would return data sources with an year attribute whose value is less than or equal to 1989.  "lessThanOrEquals": { "key": "year", "value": 1989 } 
      */
     lessThanOrEquals?: FilterAttribute;
     /**
-     * Knowledge base data sources that contain a metadata attribute whose name matches the key and whose value doesn't match the value in this object are returned.
+     * Knowledge base data sources are returned if they contain a metadata attribute whose name matches the key and whose value is a list that contains the value as one of its members. The following example would return data sources with an animals attribute that is a list containing a cat member (for example ["dog", "cat"]).  "listContains": { "key": "animals", "value": "cat" } 
+     */
+    listContains?: FilterAttribute;
+    /**
+     * Knowledge base data sources that contain a metadata attribute whose name matches the key and whose value doesn't match the value in this object are returned. The following example would return data sources that don't contain an animal attribute whose value is cat.  "notEquals": { "key": "animal", "value": "cat" } 
      */
     notEquals?: FilterAttribute;
     /**
-     * Knowledge base data sources that contain a metadata attribute whose name matches the key and whose value isn't in the list specified in the value in this object are returned.
+     * Knowledge base data sources are returned if they contain a metadata attribute whose name matches the key and whose value isn't in the list specified in the value in this object. The following example would return data sources whose animal attribute is neither cat nor dog.  "notIn": { "key": "animal", "value": ["cat", "dog"] } 
      */
     notIn?: FilterAttribute;
     /**
-     * Knowledge base data sources whose metadata attributes fulfill at least one of the filter conditions inside this list are returned.
+     * Knowledge base data sources are returned if their metadata attributes fulfill at least one of the filter conditions inside this list.
      */
     orAll?: RetrievalFilterList;
     /**
-     * Knowledge base data sources that contain a metadata attribute whose name matches the key and whose value starts with the value in this object are returned. This filter is currently only supported for Amazon OpenSearch Serverless vector stores.
+     * Knowledge base data sources are returned if they contain a metadata attribute whose name matches the key and whose value starts with the value in this object. This filter is currently only supported for Amazon OpenSearch Serverless vector stores. The following example would return data sources with an animal attribute starts with ca (for example, cat or camel).  "startsWith": { "key": "animal", "value": "ca" } 
      */
     startsWith?: FilterAttribute;
+    /**
+     * Knowledge base data sources are returned if they contain a metadata attribute whose name matches the key and whose value is one of the following:   A string that contains the value as a substring. The following example would return data sources with an animal attribute that contains the substring at (for example cat).  "stringContains": { "key": "animal", "value": "at" }    A list with a member that contains the value as a substring. The following example would return data sources with an animals attribute that is a list containing a member that contains the substring at (for example ["dog", "cat"]).  "stringContains": { "key": "animals", "value": "at" }   
+     */
+    stringContains?: FilterAttribute;
   }
   export type RetrievalFilterList = RetrievalFilter[];
   export interface RetrievalResultContent {

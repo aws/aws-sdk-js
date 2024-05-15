@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1620.0-->
+<!--LATEST=2.1621.0-->
 <!--ENTRYINSERT-->
+
+## 2.1621.0
+* feature: BedrockAgentRuntime: Updating Bedrock Knowledge Base Metadata & Filters feature with two new filters listContains and stringContains
+* feature: CodeBuild: CodeBuild Reserved Capacity VPC Support
+* feature: DataSync: Task executions now display a CANCELLING status when an execution is in the process of being cancelled.
+* feature: Grafana: This release adds new ServiceAccount and ServiceAccountToken APIs.
+* feature: MedicalImaging: Added support for importing medical imaging data from Amazon S3 buckets across accounts and regions.
 
 ## 2.1620.0
 * feature: Connect: Amazon Connect provides enhanced search capabilities for flows & flow modules on the Connect admin website and programmatically using APIs. You can search for flows and flow modules by name, description, type, status, and tags, to filter and identify a specific flow in your Connect instances.

@@ -12,11 +12,11 @@ declare class Grafana extends Service {
   constructor(options?: Grafana.Types.ClientConfiguration)
   config: Config & Grafana.Types.ClientConfiguration;
   /**
-   * Assigns a Grafana Enterprise license to a workspace. Upgrading to Grafana Enterprise incurs additional fees. For more information, see Upgrade a workspace to Grafana Enterprise.
+   * Assigns a Grafana Enterprise license to a workspace. To upgrade, you must use ENTERPRISE for the licenseType, and pass in a valid Grafana Labs token for the grafanaToken. Upgrading to Grafana Enterprise incurs additional fees. For more information, see Upgrade a workspace to Grafana Enterprise.
    */
   associateLicense(params: Grafana.Types.AssociateLicenseRequest, callback?: (err: AWSError, data: Grafana.Types.AssociateLicenseResponse) => void): Request<Grafana.Types.AssociateLicenseResponse, AWSError>;
   /**
-   * Assigns a Grafana Enterprise license to a workspace. Upgrading to Grafana Enterprise incurs additional fees. For more information, see Upgrade a workspace to Grafana Enterprise.
+   * Assigns a Grafana Enterprise license to a workspace. To upgrade, you must use ENTERPRISE for the licenseType, and pass in a valid Grafana Labs token for the grafanaToken. Upgrading to Grafana Enterprise incurs additional fees. For more information, see Upgrade a workspace to Grafana Enterprise.
    */
   associateLicense(callback?: (err: AWSError, data: Grafana.Types.AssociateLicenseResponse) => void): Request<Grafana.Types.AssociateLicenseResponse, AWSError>;
   /**
@@ -28,13 +28,29 @@ declare class Grafana extends Service {
    */
   createWorkspace(callback?: (err: AWSError, data: Grafana.Types.CreateWorkspaceResponse) => void): Request<Grafana.Types.CreateWorkspaceResponse, AWSError>;
   /**
-   * Creates a Grafana API key for the workspace. This key can be used to authenticate requests sent to the workspace's HTTP API. See https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html for available APIs and example requests.
+   * Creates a Grafana API key for the workspace. This key can be used to authenticate requests sent to the workspace's HTTP API. See https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html for available APIs and example requests.  In workspaces compatible with Grafana version 9 or above, use workspace service accounts instead of API keys. API keys will be removed in a future release. 
    */
   createWorkspaceApiKey(params: Grafana.Types.CreateWorkspaceApiKeyRequest, callback?: (err: AWSError, data: Grafana.Types.CreateWorkspaceApiKeyResponse) => void): Request<Grafana.Types.CreateWorkspaceApiKeyResponse, AWSError>;
   /**
-   * Creates a Grafana API key for the workspace. This key can be used to authenticate requests sent to the workspace's HTTP API. See https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html for available APIs and example requests.
+   * Creates a Grafana API key for the workspace. This key can be used to authenticate requests sent to the workspace's HTTP API. See https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html for available APIs and example requests.  In workspaces compatible with Grafana version 9 or above, use workspace service accounts instead of API keys. API keys will be removed in a future release. 
    */
   createWorkspaceApiKey(callback?: (err: AWSError, data: Grafana.Types.CreateWorkspaceApiKeyResponse) => void): Request<Grafana.Types.CreateWorkspaceApiKeyResponse, AWSError>;
+  /**
+   * Creates a service account for the workspace. A service account can be used to call Grafana HTTP APIs, and run automated workloads. After creating the service account with the correct GrafanaRole for your use case, use CreateWorkspaceServiceAccountToken to create a token that can be used to authenticate and authorize Grafana HTTP API calls. You can only create service accounts for workspaces that are compatible with Grafana version 9 and above.  For more information about service accounts, see Service accounts in the Amazon Managed Grafana User Guide. For more information about the Grafana HTTP APIs, see Using Grafana HTTP APIs in the Amazon Managed Grafana User Guide. 
+   */
+  createWorkspaceServiceAccount(params: Grafana.Types.CreateWorkspaceServiceAccountRequest, callback?: (err: AWSError, data: Grafana.Types.CreateWorkspaceServiceAccountResponse) => void): Request<Grafana.Types.CreateWorkspaceServiceAccountResponse, AWSError>;
+  /**
+   * Creates a service account for the workspace. A service account can be used to call Grafana HTTP APIs, and run automated workloads. After creating the service account with the correct GrafanaRole for your use case, use CreateWorkspaceServiceAccountToken to create a token that can be used to authenticate and authorize Grafana HTTP API calls. You can only create service accounts for workspaces that are compatible with Grafana version 9 and above.  For more information about service accounts, see Service accounts in the Amazon Managed Grafana User Guide. For more information about the Grafana HTTP APIs, see Using Grafana HTTP APIs in the Amazon Managed Grafana User Guide. 
+   */
+  createWorkspaceServiceAccount(callback?: (err: AWSError, data: Grafana.Types.CreateWorkspaceServiceAccountResponse) => void): Request<Grafana.Types.CreateWorkspaceServiceAccountResponse, AWSError>;
+  /**
+   * Creates a token that can be used to authenticate and authorize Grafana HTTP API operations for the given workspace service account. The service account acts as a user for the API operations, and defines the permissions that are used by the API.  When you create the service account token, you will receive a key that is used when calling Grafana APIs. Do not lose this key, as it will not be retrievable again. If you do lose the key, you can delete the token and recreate it to receive a new key. This will disable the initial key.  Service accounts are only available for workspaces that are compatible with Grafana version 9 and above.
+   */
+  createWorkspaceServiceAccountToken(params: Grafana.Types.CreateWorkspaceServiceAccountTokenRequest, callback?: (err: AWSError, data: Grafana.Types.CreateWorkspaceServiceAccountTokenResponse) => void): Request<Grafana.Types.CreateWorkspaceServiceAccountTokenResponse, AWSError>;
+  /**
+   * Creates a token that can be used to authenticate and authorize Grafana HTTP API operations for the given workspace service account. The service account acts as a user for the API operations, and defines the permissions that are used by the API.  When you create the service account token, you will receive a key that is used when calling Grafana APIs. Do not lose this key, as it will not be retrievable again. If you do lose the key, you can delete the token and recreate it to receive a new key. This will disable the initial key.  Service accounts are only available for workspaces that are compatible with Grafana version 9 and above.
+   */
+  createWorkspaceServiceAccountToken(callback?: (err: AWSError, data: Grafana.Types.CreateWorkspaceServiceAccountTokenResponse) => void): Request<Grafana.Types.CreateWorkspaceServiceAccountTokenResponse, AWSError>;
   /**
    * Deletes an Amazon Managed Grafana workspace.
    */
@@ -44,13 +60,29 @@ declare class Grafana extends Service {
    */
   deleteWorkspace(callback?: (err: AWSError, data: Grafana.Types.DeleteWorkspaceResponse) => void): Request<Grafana.Types.DeleteWorkspaceResponse, AWSError>;
   /**
-   * Deletes a Grafana API key for the workspace.
+   * Deletes a Grafana API key for the workspace.  In workspaces compatible with Grafana version 9 or above, use workspace service accounts instead of API keys. API keys will be removed in a future release. 
    */
   deleteWorkspaceApiKey(params: Grafana.Types.DeleteWorkspaceApiKeyRequest, callback?: (err: AWSError, data: Grafana.Types.DeleteWorkspaceApiKeyResponse) => void): Request<Grafana.Types.DeleteWorkspaceApiKeyResponse, AWSError>;
   /**
-   * Deletes a Grafana API key for the workspace.
+   * Deletes a Grafana API key for the workspace.  In workspaces compatible with Grafana version 9 or above, use workspace service accounts instead of API keys. API keys will be removed in a future release. 
    */
   deleteWorkspaceApiKey(callback?: (err: AWSError, data: Grafana.Types.DeleteWorkspaceApiKeyResponse) => void): Request<Grafana.Types.DeleteWorkspaceApiKeyResponse, AWSError>;
+  /**
+   * Deletes a workspace service account from the workspace. This will delete any tokens created for the service account, as well. If the tokens are currently in use, the will fail to authenticate / authorize after they are deleted. Service accounts are only available for workspaces that are compatible with Grafana version 9 and above.
+   */
+  deleteWorkspaceServiceAccount(params: Grafana.Types.DeleteWorkspaceServiceAccountRequest, callback?: (err: AWSError, data: Grafana.Types.DeleteWorkspaceServiceAccountResponse) => void): Request<Grafana.Types.DeleteWorkspaceServiceAccountResponse, AWSError>;
+  /**
+   * Deletes a workspace service account from the workspace. This will delete any tokens created for the service account, as well. If the tokens are currently in use, the will fail to authenticate / authorize after they are deleted. Service accounts are only available for workspaces that are compatible with Grafana version 9 and above.
+   */
+  deleteWorkspaceServiceAccount(callback?: (err: AWSError, data: Grafana.Types.DeleteWorkspaceServiceAccountResponse) => void): Request<Grafana.Types.DeleteWorkspaceServiceAccountResponse, AWSError>;
+  /**
+   * Deletes a token for the workspace service account. This will disable the key associated with the token. If any automation is currently using the key, it will no longer be authenticated or authorized to perform actions with the Grafana HTTP APIs. Service accounts are only available for workspaces that are compatible with Grafana version 9 and above.
+   */
+  deleteWorkspaceServiceAccountToken(params: Grafana.Types.DeleteWorkspaceServiceAccountTokenRequest, callback?: (err: AWSError, data: Grafana.Types.DeleteWorkspaceServiceAccountTokenResponse) => void): Request<Grafana.Types.DeleteWorkspaceServiceAccountTokenResponse, AWSError>;
+  /**
+   * Deletes a token for the workspace service account. This will disable the key associated with the token. If any automation is currently using the key, it will no longer be authenticated or authorized to perform actions with the Grafana HTTP APIs. Service accounts are only available for workspaces that are compatible with Grafana version 9 and above.
+   */
+  deleteWorkspaceServiceAccountToken(callback?: (err: AWSError, data: Grafana.Types.DeleteWorkspaceServiceAccountTokenResponse) => void): Request<Grafana.Types.DeleteWorkspaceServiceAccountTokenResponse, AWSError>;
   /**
    * Displays information about one Amazon Managed Grafana workspace.
    */
@@ -107,6 +139,22 @@ declare class Grafana extends Service {
    * Lists available versions of Grafana. These are available when calling CreateWorkspace. Optionally, include a workspace to list the versions to which it can be upgraded.
    */
   listVersions(callback?: (err: AWSError, data: Grafana.Types.ListVersionsResponse) => void): Request<Grafana.Types.ListVersionsResponse, AWSError>;
+  /**
+   * Returns a list of tokens for a workspace service account.  This does not return the key for each token. You cannot access keys after they are created. To create a new key, delete the token and recreate it.  Service accounts are only available for workspaces that are compatible with Grafana version 9 and above.
+   */
+  listWorkspaceServiceAccountTokens(params: Grafana.Types.ListWorkspaceServiceAccountTokensRequest, callback?: (err: AWSError, data: Grafana.Types.ListWorkspaceServiceAccountTokensResponse) => void): Request<Grafana.Types.ListWorkspaceServiceAccountTokensResponse, AWSError>;
+  /**
+   * Returns a list of tokens for a workspace service account.  This does not return the key for each token. You cannot access keys after they are created. To create a new key, delete the token and recreate it.  Service accounts are only available for workspaces that are compatible with Grafana version 9 and above.
+   */
+  listWorkspaceServiceAccountTokens(callback?: (err: AWSError, data: Grafana.Types.ListWorkspaceServiceAccountTokensResponse) => void): Request<Grafana.Types.ListWorkspaceServiceAccountTokensResponse, AWSError>;
+  /**
+   * Returns a list of service accounts for a workspace. Service accounts are only available for workspaces that are compatible with Grafana version 9 and above.
+   */
+  listWorkspaceServiceAccounts(params: Grafana.Types.ListWorkspaceServiceAccountsRequest, callback?: (err: AWSError, data: Grafana.Types.ListWorkspaceServiceAccountsResponse) => void): Request<Grafana.Types.ListWorkspaceServiceAccountsResponse, AWSError>;
+  /**
+   * Returns a list of service accounts for a workspace. Service accounts are only available for workspaces that are compatible with Grafana version 9 and above.
+   */
+  listWorkspaceServiceAccounts(callback?: (err: AWSError, data: Grafana.Types.ListWorkspaceServiceAccountsResponse) => void): Request<Grafana.Types.ListWorkspaceServiceAccountsResponse, AWSError>;
   /**
    * Returns a list of Amazon Managed Grafana workspaces in the account, with some information about each workspace. For more complete information about one workspace, use DescribeWorkspace.
    */
@@ -199,7 +247,7 @@ declare namespace Grafana {
   }
   export interface AssociateLicenseRequest {
     /**
-     * A token from Grafana Labs that ties your Amazon Web Services account with a Grafana Labs account. For more information, see Register with Grafana Labs.
+     * A token from Grafana Labs that ties your Amazon Web Services account with a Grafana Labs account. For more information, see Link your account with Grafana Labs.
      */
     grafanaToken?: GrafanaToken;
     /**
@@ -257,7 +305,7 @@ declare namespace Grafana {
      */
     keyName: ApiKeyName;
     /**
-     * Specifies the permission level of the key.  Valid values: VIEWER|EDITOR|ADMIN 
+     * Specifies the permission level of the key.  Valid values: ADMIN|EDITOR|VIEWER 
      */
     keyRole: String;
     /**
@@ -302,7 +350,7 @@ declare namespace Grafana {
      */
     configuration?: OverridableConfigurationJson;
     /**
-     * Specifies the version of Grafana to support in the new workspace. If not specified, defaults to the latest version (for example, 9.4). To get a list of supported versions, use the ListVersions operation.
+     * Specifies the version of Grafana to support in the new workspace. If not specified, defaults to the latest version (for example, 10.4). To get a list of supported versions, use the ListVersions operation.
      */
     grafanaVersion?: GrafanaVersion;
     /**
@@ -360,6 +408,71 @@ declare namespace Grafana {
      */
     workspace: WorkspaceDescription;
   }
+  export interface CreateWorkspaceServiceAccountRequest {
+    /**
+     * The permission level to use for this service account.  For more information about the roles and the permissions each has, see User roles in the Amazon Managed Grafana User Guide. 
+     */
+    grafanaRole: Role;
+    /**
+     * A name for the service account. The name must be unique within the workspace, as it determines the ID associated with the service account.
+     */
+    name: ServiceAccountName;
+    /**
+     * The ID of the workspace within which to create the service account.
+     */
+    workspaceId: WorkspaceId;
+  }
+  export interface CreateWorkspaceServiceAccountResponse {
+    /**
+     * The permission level given to the service account.
+     */
+    grafanaRole: Role;
+    /**
+     * The ID of the service account.
+     */
+    id: String;
+    /**
+     * The name of the service account.
+     */
+    name: String;
+    /**
+     * The workspace with which the service account is associated.
+     */
+    workspaceId: WorkspaceId;
+  }
+  export interface CreateWorkspaceServiceAccountTokenRequest {
+    /**
+     * A name for the token to create.
+     */
+    name: ServiceAccountTokenName;
+    /**
+     * Sets how long the token will be valid, in seconds. You can set the time up to 30 days in the future.
+     */
+    secondsToLive: CreateWorkspaceServiceAccountTokenRequestSecondsToLiveInteger;
+    /**
+     * The ID of the service account for which to create a token.
+     */
+    serviceAccountId: String;
+    /**
+     * The ID of the workspace the service account resides within.
+     */
+    workspaceId: WorkspaceId;
+  }
+  export type CreateWorkspaceServiceAccountTokenRequestSecondsToLiveInteger = number;
+  export interface CreateWorkspaceServiceAccountTokenResponse {
+    /**
+     * The ID of the service account where the token was created.
+     */
+    serviceAccountId: String;
+    /**
+     * Information about the created token, including the key. Be sure to store the key securely.
+     */
+    serviceAccountToken: ServiceAccountTokenSummaryWithKey;
+    /**
+     * The ID of the workspace where the token was created.
+     */
+    workspaceId: WorkspaceId;
+  }
   export type DataSourceType = "AMAZON_OPENSEARCH_SERVICE"|"CLOUDWATCH"|"PROMETHEUS"|"XRAY"|"TIMESTREAM"|"SITEWISE"|"ATHENA"|"REDSHIFT"|"TWINMAKER"|string;
   export type DataSourceTypesList = DataSourceType[];
   export interface DeleteWorkspaceApiKeyRequest {
@@ -393,6 +506,54 @@ declare namespace Grafana {
      * A structure containing information about the workspace that was deleted.
      */
     workspace: WorkspaceDescription;
+  }
+  export interface DeleteWorkspaceServiceAccountRequest {
+    /**
+     * The ID of the service account to delete.
+     */
+    serviceAccountId: String;
+    /**
+     * The ID of the workspace where the service account resides.
+     */
+    workspaceId: WorkspaceId;
+  }
+  export interface DeleteWorkspaceServiceAccountResponse {
+    /**
+     * The ID of the service account deleted.
+     */
+    serviceAccountId: String;
+    /**
+     * The ID of the workspace where the service account was deleted.
+     */
+    workspaceId: WorkspaceId;
+  }
+  export interface DeleteWorkspaceServiceAccountTokenRequest {
+    /**
+     * The ID of the service account from which to delete the token.
+     */
+    serviceAccountId: String;
+    /**
+     * The ID of the token to delete.
+     */
+    tokenId: String;
+    /**
+     * The ID of the workspace from which to delete the token.
+     */
+    workspaceId: WorkspaceId;
+  }
+  export interface DeleteWorkspaceServiceAccountTokenResponse {
+    /**
+     * The ID of the service account where the token was deleted.
+     */
+    serviceAccountId: String;
+    /**
+     * The ID of the token that was deleted.
+     */
+    tokenId: String;
+    /**
+     * The ID of the workspace where the token was deleted.
+     */
+    workspaceId: WorkspaceId;
   }
   export interface DescribeWorkspaceAuthenticationRequest {
     /**
@@ -542,6 +703,72 @@ declare namespace Grafana {
      */
     nextToken?: PaginationToken;
   }
+  export interface ListWorkspaceServiceAccountTokensRequest {
+    /**
+     * The maximum number of tokens to include in the results.
+     */
+    maxResults?: ListWorkspaceServiceAccountTokensRequestMaxResultsInteger;
+    /**
+     * The token for the next set of service accounts to return. (You receive this token from a previous ListWorkspaceServiceAccountTokens operation.)
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The ID of the service account for which to return tokens.
+     */
+    serviceAccountId: String;
+    /**
+     * The ID of the workspace for which to return tokens.
+     */
+    workspaceId: WorkspaceId;
+  }
+  export type ListWorkspaceServiceAccountTokensRequestMaxResultsInteger = number;
+  export interface ListWorkspaceServiceAccountTokensResponse {
+    /**
+     * The token to use when requesting the next set of service accounts.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The ID of the service account where the tokens reside.
+     */
+    serviceAccountId: String;
+    /**
+     * An array of structures containing information about the tokens.
+     */
+    serviceAccountTokens: ServiceAccountTokenList;
+    /**
+     * The ID of the workspace where the tokens reside.
+     */
+    workspaceId: WorkspaceId;
+  }
+  export interface ListWorkspaceServiceAccountsRequest {
+    /**
+     * The maximum number of service accounts to include in the results.
+     */
+    maxResults?: ListWorkspaceServiceAccountsRequestMaxResultsInteger;
+    /**
+     * The token for the next set of service accounts to return. (You receive this token from a previous ListWorkspaceServiceAccounts operation.)
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The workspace for which to list service accounts.
+     */
+    workspaceId: WorkspaceId;
+  }
+  export type ListWorkspaceServiceAccountsRequestMaxResultsInteger = number;
+  export interface ListWorkspaceServiceAccountsResponse {
+    /**
+     * The token to use when requesting the next set of service accounts.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * An array of structures containing information about the service accounts.
+     */
+    serviceAccounts: ServiceAccountList;
+    /**
+     * The workspace to which the service accounts are associated.
+     */
+    workspaceId: WorkspaceId;
+  }
   export interface ListWorkspacesRequest {
     /**
      * The maximum number of workspaces to include in the results.
@@ -644,6 +871,65 @@ declare namespace Grafana {
   export type SamlConfigurationStatus = "CONFIGURED"|"NOT_CONFIGURED"|string;
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
+  export type ServiceAccountList = ServiceAccountSummary[];
+  export type ServiceAccountName = string;
+  export interface ServiceAccountSummary {
+    /**
+     * The role of the service account, which sets the permission level used when calling Grafana APIs.
+     */
+    grafanaRole: Role;
+    /**
+     * The unique ID of the service account.
+     */
+    id: String;
+    /**
+     * Returns true if the service account is disabled. Service accounts can be disabled and enabled in the Amazon Managed Grafana console.
+     */
+    isDisabled: String;
+    /**
+     * The name of the service account.
+     */
+    name: String;
+  }
+  export type ServiceAccountTokenKey = string;
+  export type ServiceAccountTokenList = ServiceAccountTokenSummary[];
+  export type ServiceAccountTokenName = string;
+  export interface ServiceAccountTokenSummary {
+    /**
+     * When the service account token was created.
+     */
+    createdAt: Timestamp;
+    /**
+     * When the service account token will expire.
+     */
+    expiresAt: Timestamp;
+    /**
+     * The unique ID of the service account token.
+     */
+    id: String;
+    /**
+     * The last time the token was used to authorize a Grafana HTTP API.
+     */
+    lastUsedAt?: Timestamp;
+    /**
+     * The name of the service account token.
+     */
+    name: String;
+  }
+  export interface ServiceAccountTokenSummaryWithKey {
+    /**
+     * The unique ID of the service account token.
+     */
+    id: String;
+    /**
+     * The key for the service account token. Used when making calls to the Grafana HTTP APIs to authenticate and authorize the requests.
+     */
+    key: ServiceAccountTokenKey;
+    /**
+     * The name of the service account token.
+     */
+    name: String;
+  }
   export type SsoId = string;
   export type StackSetName = string;
   export type String = string;
@@ -888,7 +1174,7 @@ declare namespace Grafana {
      */
     freeTrialExpiration?: Timestamp;
     /**
-     * The token that ties this workspace to a Grafana Labs account. For more information, see Register with Grafana Labs.
+     * The token that ties this workspace to a Grafana Labs account. For more information, see Link your account with Grafana Labs.
      */
     grafanaToken?: GrafanaToken;
     /**
@@ -978,7 +1264,7 @@ declare namespace Grafana {
      */
     endpoint: Endpoint;
     /**
-     * The token that ties this workspace to a Grafana Labs account. For more information, see Register with Grafana Labs.
+     * The token that ties this workspace to a Grafana Labs account. For more information, see Link your account with Grafana Labs.
      */
     grafanaToken?: GrafanaToken;
     /**

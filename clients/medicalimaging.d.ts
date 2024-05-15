@@ -117,11 +117,11 @@ declare class MedicalImaging extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: MedicalImaging.Types.ListTagsForResourceResponse) => void): Request<MedicalImaging.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Search image sets based on defined input attributes.   SearchImageSets accepts a single search query parameter and returns a paginated response of all image sets that have the matching criteria. All range queries must be input as (lowerBound, upperBound).  SearchImageSets uses the updatedAt field for sorting in decreasing order from latest to oldest. 
+   * Search image sets based on defined input attributes.   SearchImageSets accepts a single search query parameter and returns a paginated response of all image sets that have the matching criteria. All date range queries must be input as (lowerBound, upperBound). By default, SearchImageSets uses the updatedAt field for sorting in descending order from newest to oldest. 
    */
   searchImageSets(params: MedicalImaging.Types.SearchImageSetsRequest, callback?: (err: AWSError, data: MedicalImaging.Types.SearchImageSetsResponse) => void): Request<MedicalImaging.Types.SearchImageSetsResponse, AWSError>;
   /**
-   * Search image sets based on defined input attributes.   SearchImageSets accepts a single search query parameter and returns a paginated response of all image sets that have the matching criteria. All range queries must be input as (lowerBound, upperBound).  SearchImageSets uses the updatedAt field for sorting in decreasing order from latest to oldest. 
+   * Search image sets based on defined input attributes.   SearchImageSets accepts a single search query parameter and returns a paginated response of all image sets that have the matching criteria. All date range queries must be input as (lowerBound, upperBound). By default, SearchImageSets uses the updatedAt field for sorting in descending order from newest to oldest. 
    */
   searchImageSets(callback?: (err: AWSError, data: MedicalImaging.Types.SearchImageSetsResponse) => void): Request<MedicalImaging.Types.SearchImageSetsResponse, AWSError>;
   /**
@@ -159,6 +159,7 @@ declare class MedicalImaging extends Service {
 }
 declare namespace MedicalImaging {
   export type Arn = string;
+  export type AwsAccountId = string;
   export type ClientToken = string;
   export interface CopyDestinationImageSet {
     /**
@@ -1031,6 +1032,10 @@ declare namespace MedicalImaging {
      * The output prefix of the S3 bucket to upload the results of the DICOM import job.
      */
     outputS3Uri: S3Uri;
+    /**
+     * The account ID of the source S3 bucket owner.
+     */
+    inputOwnerAccountId?: AwsAccountId;
   }
   export interface StartDICOMImportJobResponse {
     /**

@@ -624,7 +624,7 @@ declare namespace CodeBuild {
      */
     logs?: LogsLocation;
     /**
-     * How long, in minutes, for CodeBuild to wait before timing out this build if it does not get marked as completed.
+     * How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before timing out this build if it does not get marked as completed.
      */
     timeoutInMinutes?: WrapperInt;
     /**
@@ -1047,9 +1047,14 @@ declare namespace CodeBuild {
      */
     scalingConfiguration?: ScalingConfigurationInput;
     /**
-     * The compute fleet overflow behavior.   For overflow behavior QUEUE, your overflow builds need to wait on the existing fleet instance to become available.   For overflow behavior ON_DEMAND, your overflow builds run on CodeBuild on-demand.  
+     * The compute fleet overflow behavior.   For overflow behavior QUEUE, your overflow builds need to wait on the existing fleet instance to become available.   For overflow behavior ON_DEMAND, your overflow builds run on CodeBuild on-demand.  If you choose to set your overflow behavior to on-demand while creating a VPC-connected fleet, make sure that you add the required VPC permissions to your project service role. For more information, see Example policy statement to allow CodeBuild access to Amazon Web Services services required to create a VPC network interface.   
      */
     overflowBehavior?: FleetOverflowBehavior;
+    vpcConfig?: VpcConfig;
+    /**
+     * The service role associated with the compute fleet.
+     */
+    fleetServiceRole?: NonEmptyString;
     /**
      * A list of tag key and value pairs associated with this compute fleet. These tags are available for use by Amazon Web Services services that support CodeBuild build project tags.
      */
@@ -1079,7 +1084,7 @@ declare namespace CodeBuild {
      */
     secondarySources?: ProjectSources;
     /**
-     * A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:    For CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon S3: the version ID of the object that represents the build input ZIP file to use.   If sourceVersion is specified at the build level, then that version takes precedence over this sourceVersion (at the project level).  For more information, see Source Version Sample with CodeBuild in the CodeBuild User Guide. 
+     * A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:    For CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For GitLab: the commit ID, branch, or Git tag to use.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon S3: the version ID of the object that represents the build input ZIP file to use.   If sourceVersion is specified at the build level, then that version takes precedence over this sourceVersion (at the project level).  For more information, see Source Version Sample with CodeBuild in the CodeBuild User Guide. 
      */
     sourceVersion?: String;
     /**
@@ -1123,7 +1128,7 @@ declare namespace CodeBuild {
      */
     tags?: TagList;
     /**
-     * VpcConfig enables CodeBuild to access resources in an Amazon VPC.
+     * VpcConfig enables CodeBuild to access resources in an Amazon VPC.  If you're using compute fleets during project creation, do not provide vpcConfig. 
      */
     vpcConfig?: VpcConfig;
     /**
@@ -1474,9 +1479,14 @@ declare namespace CodeBuild {
      */
     scalingConfiguration?: ScalingConfigurationOutput;
     /**
-     * The compute fleet overflow behavior.   For overflow behavior QUEUE, your overflow builds need to wait on the existing fleet instance to become available.   For overflow behavior ON_DEMAND, your overflow builds run on CodeBuild on-demand.  
+     * The compute fleet overflow behavior.   For overflow behavior QUEUE, your overflow builds need to wait on the existing fleet instance to become available.   For overflow behavior ON_DEMAND, your overflow builds run on CodeBuild on-demand.  If you choose to set your overflow behavior to on-demand while creating a VPC-connected fleet, make sure that you add the required VPC permissions to your project service role. For more information, see Example policy statement to allow CodeBuild access to Amazon Web Services services required to create a VPC network interface.   
      */
     overflowBehavior?: FleetOverflowBehavior;
+    vpcConfig?: VpcConfig;
+    /**
+     * The service role associated with the compute fleet.
+     */
+    fleetServiceRole?: NonEmptyString;
     /**
      * A list of tag key and value pairs associated with this compute fleet. These tags are available for use by Amazon Web Services services that support CodeBuild build project tags.
      */
@@ -1484,7 +1494,7 @@ declare namespace CodeBuild {
   }
   export type FleetArns = NonEmptyString[];
   export type FleetCapacity = number;
-  export type FleetContextCode = "CREATE_FAILED"|"UPDATE_FAILED"|string;
+  export type FleetContextCode = "CREATE_FAILED"|"UPDATE_FAILED"|"ACTION_REQUIRED"|string;
   export type FleetName = string;
   export type FleetNames = NonEmptyString[];
   export type FleetOverflowBehavior = "QUEUE"|"ON_DEMAND"|string;
@@ -1559,7 +1569,7 @@ declare namespace CodeBuild {
      */
     username?: NonEmptyString;
     /**
-     *  For GitHub or GitHub Enterprise, this is the personal access token. For Bitbucket, this is either the access token or the app password. 
+     *  For GitHub or GitHub Enterprise, this is the personal access token. For Bitbucket, this is either the access token or the app password. For the authType CODECONNECTIONS, this is the connectionArn.
      */
     token: SensitiveNonEmptyString;
     /**
@@ -1567,7 +1577,7 @@ declare namespace CodeBuild {
      */
     serverType: ServerType;
     /**
-     *  The type of authentication used to connect to a GitHub, GitHub Enterprise, or Bitbucket repository. An OAUTH connection is not supported by the API and must be created using the CodeBuild console. 
+     *  The type of authentication used to connect to a GitHub, GitHub Enterprise, GitLab, GitLab Self Managed, or Bitbucket repository. An OAUTH connection is not supported by the API and must be created using the CodeBuild console. Note that CODECONNECTIONS is only valid for GitLab and GitLab Self Managed.
      */
     authType: AuthType;
     /**
@@ -2000,7 +2010,7 @@ declare namespace CodeBuild {
      */
     secondarySources?: ProjectSources;
     /**
-     * A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:   For CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon S3: the version ID of the object that represents the build input ZIP file to use.   If sourceVersion is specified at the build level, then that version takes precedence over this sourceVersion (at the project level).  For more information, see Source Version Sample with CodeBuild in the CodeBuild User Guide. 
+     * A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:   For CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For GitLab: the commit ID, branch, or Git tag to use.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon S3: the version ID of the object that represents the build input ZIP file to use.   If sourceVersion is specified at the build level, then that version takes precedence over this sourceVersion (at the project level).  For more information, see Source Version Sample with CodeBuild in the CodeBuild User Guide. 
      */
     sourceVersion?: String;
     /**
@@ -2297,7 +2307,7 @@ declare namespace CodeBuild {
      */
     sourceIdentifier: String;
     /**
-     * The source version for the corresponding source identifier. If specified, must be one of:   For CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub or GitLab: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example, pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon S3: the version ID of the object that represents the build input ZIP file to use.    For more information, see Source Version Sample with CodeBuild in the CodeBuild User Guide. 
+     * The source version for the corresponding source identifier. If specified, must be one of:   For CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example, pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For GitLab: the commit ID, branch, or Git tag to use.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon S3: the version ID of the object that represents the build input ZIP file to use.    For more information, see Source Version Sample with CodeBuild in the CodeBuild User Guide. 
      */
     sourceVersion: String;
   }
@@ -2771,7 +2781,7 @@ declare namespace CodeBuild {
      */
     secondarySourcesVersionOverride?: ProjectSecondarySourceVersions;
     /**
-     * The version of the build input to be built, for this build only. If not specified, the latest version is used. If specified, the contents depends on the source provider:  CodeCommit  The commit ID, branch, or Git tag to use.  GitHub  The commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.  Bitbucket  The commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.  Amazon S3  The version ID of the object that represents the build input ZIP file to use.   If sourceVersion is specified at the project level, then this sourceVersion (at the build level) takes precedence.  For more information, see Source Version Sample with CodeBuild in the CodeBuild User Guide. 
+     * The version of the build input to be built, for this build only. If not specified, the latest version is used. If specified, the contents depends on the source provider:  CodeCommit  The commit ID, branch, or Git tag to use.  GitHub  The commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.  GitLab  The commit ID, branch, or Git tag to use.  Bitbucket  The commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.  Amazon S3  The version ID of the object that represents the build input ZIP file to use.   If sourceVersion is specified at the project level, then this sourceVersion (at the build level) takes precedence.  For more information, see Source Version Sample with CodeBuild in the CodeBuild User Guide. 
      */
     sourceVersion?: String;
     /**
@@ -2795,7 +2805,7 @@ declare namespace CodeBuild {
      */
     sourceLocationOverride?: String;
     /**
-     * An authorization type for this build that overrides the one defined in the build project. This override applies only if the build project's source is BitBucket or GitHub.
+     * An authorization type for this build that overrides the one defined in the build project. This override applies only if the build project's source is BitBucket, GitHub, GitLab, or GitLab Self Managed.
      */
     sourceAuthOverride?: SourceAuth;
     /**
@@ -3022,9 +3032,14 @@ declare namespace CodeBuild {
      */
     scalingConfiguration?: ScalingConfigurationInput;
     /**
-     * The compute fleet overflow behavior.   For overflow behavior QUEUE, your overflow builds need to wait on the existing fleet instance to become available.   For overflow behavior ON_DEMAND, your overflow builds run on CodeBuild on-demand.  
+     * The compute fleet overflow behavior.   For overflow behavior QUEUE, your overflow builds need to wait on the existing fleet instance to become available.   For overflow behavior ON_DEMAND, your overflow builds run on CodeBuild on-demand.  If you choose to set your overflow behavior to on-demand while creating a VPC-connected fleet, make sure that you add the required VPC permissions to your project service role. For more information, see Example policy statement to allow CodeBuild access to Amazon Web Services services required to create a VPC network interface.   
      */
     overflowBehavior?: FleetOverflowBehavior;
+    vpcConfig?: VpcConfig;
+    /**
+     * The service role associated with the compute fleet.
+     */
+    fleetServiceRole?: NonEmptyString;
     /**
      * A list of tag key and value pairs associated with this compute fleet. These tags are available for use by Amazon Web Services services that support CodeBuild build project tags.
      */
@@ -3054,7 +3069,7 @@ declare namespace CodeBuild {
      */
     secondarySources?: ProjectSources;
     /**
-     *  A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:    For CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon S3: the version ID of the object that represents the build input ZIP file to use.    If sourceVersion is specified at the build level, then that version takes precedence over this sourceVersion (at the project level).   For more information, see Source Version Sample with CodeBuild in the CodeBuild User Guide. 
+     *  A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:    For CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For GitLab: the commit ID, branch, or Git tag to use.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon S3: the version ID of the object that represents the build input ZIP file to use.    If sourceVersion is specified at the build level, then that version takes precedence over this sourceVersion (at the project level).   For more information, see Source Version Sample with CodeBuild in the CodeBuild User Guide. 
      */
     sourceVersion?: String;
     /**

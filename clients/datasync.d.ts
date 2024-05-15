@@ -2939,7 +2939,7 @@ declare namespace DataSync {
      */
     ErrorDetail?: string;
   }
-  export type TaskExecutionStatus = "QUEUED"|"LAUNCHING"|"PREPARING"|"TRANSFERRING"|"VERIFYING"|"SUCCESS"|"ERROR"|string;
+  export type TaskExecutionStatus = "QUEUED"|"CANCELLING"|"LAUNCHING"|"PREPARING"|"TRANSFERRING"|"VERIFYING"|"SUCCESS"|"ERROR"|string;
   export interface TaskFilter {
     /**
      * The name of the filter being used. Each API call supports a list of filters that are available for it. For example, LocationId for ListTasks.
