@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1621.0-->
+<!--LATEST=2.1622.0-->
 <!--ENTRYINSERT-->
+
+## 2.1622.0
+* feature: ACMPCA: This release adds support for waiters to fail on AccessDeniedException when having insufficient permissions
+* feature: Kafka: AWS MSK support for Broker Removal.
+* feature: MWAA: Amazon MWAA now supports Airflow web server auto scaling to automatically handle increased demand from REST APIs, Command Line Interface (CLI), or more Airflow User Interface (UI) users. Customers can specify maximum and minimum web server instances during environment creation and update workflow.
+* feature: QuickSight: This release adds DescribeKeyRegistration and UpdateKeyRegistration APIs to manage QuickSight Customer Managed Keys (CMK).
+* feature: SageMaker: Introduced WorkerAccessConfiguration to SageMaker Workteam. This allows customers to configure resource access for workers in a workteam.
 
 ## 2.1621.0
 * feature: BedrockAgentRuntime: Updating Bedrock Knowledge Base Metadata & Filters feature with two new filters listContains and stringContains

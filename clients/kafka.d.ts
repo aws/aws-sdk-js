@@ -644,6 +644,20 @@ declare namespace Kafka {
     UnprocessedScramSecrets?: __listOfUnprocessedScramSecret;
   }
   export type BrokerAZDistribution = "DEFAULT"|string;
+  export interface BrokerCountUpdateInfo {
+    /**
+     * 
+            Kafka Broker IDs of brokers being created.
+         
+     */
+    CreatedBrokerIds?: __listOf__double;
+    /**
+     * 
+            Kafka Broker IDs of brokers being deleted.
+         
+     */
+    DeletedBrokerIds?: __listOf__double;
+  }
   export interface BrokerEBSVolumeInfo {
     /**
      * 
@@ -3073,6 +3087,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     StorageMode?: StorageMode;
+    /**
+     * 
+            Describes brokers being changed during a broker count update.
+         
+     */
+    BrokerCountUpdateInfo?: BrokerCountUpdateInfo;
   }
   export interface NodeExporter {
     /**
@@ -4149,6 +4169,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
   export type __listOfReplicatorSummary = ReplicatorSummary[];
   export type __listOfVpcConnection = VpcConnection[];
   export type __listOfUnprocessedScramSecret = UnprocessedScramSecret[];
+  export type __listOf__double = __double[];
   export type __listOf__string = __string[];
   export type __long = number;
   export type __mapOf__string = {[key: string]: __string};

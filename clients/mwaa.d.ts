@@ -126,85 +126,77 @@ declare namespace MWAA {
   }
   export interface CreateEnvironmentInput {
     /**
-     * A list of key-value pairs containing the Apache Airflow configuration options you want to attach to your environment. For more information, see Apache Airflow configuration options.
+     * The name of the Amazon MWAA environment. For example, MyMWAAEnvironment.
      */
-    AirflowConfigurationOptions?: AirflowConfigurationOptions;
-    /**
-     * The Apache Airflow version for your environment. If no value is specified, it defaults to the latest version. For more information, see Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (MWAA). Valid values: 1.10.12, 2.0.2, 2.2.2, 2.4.3, 2.5.1, 2.6.3, 2.7.2 2.8.1 
-     */
-    AirflowVersion?: AirflowVersion;
-    /**
-     * The relative path to the DAGs folder on your Amazon S3 bucket. For example, dags. For more information, see Adding or updating DAGs.
-     */
-    DagS3Path: RelativePath;
-    /**
-     * Defines whether the VPC endpoints configured for the environment are created, and managed, by the customer or by Amazon MWAA. If set to SERVICE, Amazon MWAA will create and manage the required VPC endpoints in your VPC. If set to CUSTOMER, you must create, and manage, the VPC endpoints for your VPC. If you choose to create an environment in a shared VPC, you must set this value to CUSTOMER. In a shared VPC deployment, the environment will remain in PENDING status until you create the VPC endpoints. If you do not take action to create the endpoints within 72 hours, the status will change to CREATE_FAILED. You can delete the failed environment and create a new one.
-     */
-    EndpointManagement?: EndpointManagement;
-    /**
-     * The environment class type. Valid values: mw1.small, mw1.medium, mw1.large. For more information, see Amazon MWAA environment class.
-     */
-    EnvironmentClass?: EnvironmentClass;
+    Name: EnvironmentName;
     /**
      * The Amazon Resource Name (ARN) of the execution role for your environment. An execution role is an Amazon Web Services Identity and Access Management (IAM) role that grants MWAA permission to access Amazon Web Services services and resources used by your environment. For example, arn:aws:iam::123456789:role/my-execution-role. For more information, see Amazon MWAA Execution role.
      */
     ExecutionRoleArn: IamRoleArn;
     /**
-     * The Amazon Web Services Key Management Service (KMS) key to encrypt the data in your environment. You can use an Amazon Web Services owned CMK, or a Customer managed CMK (advanced). For more information, see Create an Amazon MWAA environment.
+     * The Amazon Resource Name (ARN) of the Amazon S3 bucket where your DAG code and supporting files are stored. For example, arn:aws:s3:::my-airflow-bucket-unique-name. For more information, see Create an Amazon S3 bucket for Amazon MWAA.
      */
-    KmsKey?: KmsKey;
+    SourceBucketArn: S3BucketArn;
     /**
-     * Defines the Apache Airflow logs to send to CloudWatch Logs.
+     * The relative path to the DAGs folder on your Amazon S3 bucket. For example, dags. For more information, see Adding or updating DAGs.
      */
-    LoggingConfiguration?: LoggingConfigurationInput;
-    /**
-     * The maximum number of workers that you want to run in your environment. MWAA scales the number of Apache Airflow workers up to the number you specify in the MaxWorkers field. For example, 20. When there are no more tasks running, and no more in the queue, MWAA disposes of the extra workers leaving the one worker that is included with your environment, or the number you specify in MinWorkers.
-     */
-    MaxWorkers?: MaxWorkers;
-    /**
-     * The minimum number of workers that you want to run in your environment. MWAA scales the number of Apache Airflow workers up to the number you specify in the MaxWorkers field. When there are no more tasks running, and no more in the queue, MWAA disposes of the extra workers leaving the worker count you specify in the MinWorkers field. For example, 2.
-     */
-    MinWorkers?: MinWorkers;
-    /**
-     * The name of the Amazon MWAA environment. For example, MyMWAAEnvironment.
-     */
-    Name: EnvironmentName;
+    DagS3Path: RelativePath;
     /**
      * The VPC networking components used to secure and enable network traffic between the Amazon Web Services resources for your environment. For more information, see About networking on Amazon MWAA.
      */
     NetworkConfiguration: NetworkConfiguration;
     /**
-     * The version of the plugins.zip file on your Amazon S3 bucket. You must specify a version each time a plugins.zip file is updated. For more information, see How S3 Versioning works.
-     */
-    PluginsS3ObjectVersion?: S3ObjectVersion;
-    /**
      * The relative path to the plugins.zip file on your Amazon S3 bucket. For example, plugins.zip. If specified, then the plugins.zip version is required. For more information, see Installing custom plugins.
      */
     PluginsS3Path?: RelativePath;
     /**
-     * The version of the requirements.txt file on your Amazon S3 bucket. You must specify a version each time a requirements.txt file is updated. For more information, see How S3 Versioning works.
+     * The version of the plugins.zip file on your Amazon S3 bucket. You must specify a version each time a plugins.zip file is updated. For more information, see How S3 Versioning works.
      */
-    RequirementsS3ObjectVersion?: S3ObjectVersion;
+    PluginsS3ObjectVersion?: S3ObjectVersion;
     /**
      * The relative path to the requirements.txt file on your Amazon S3 bucket. For example, requirements.txt. If specified, then a version is required. For more information, see Installing Python dependencies.
      */
     RequirementsS3Path?: RelativePath;
     /**
-     * The number of Apache Airflow schedulers to run in your environment. Valid values:   v2 - Accepts between 2 to 5. Defaults to 2.   v1 - Accepts 1.  
+     * The version of the requirements.txt file on your Amazon S3 bucket. You must specify a version each time a requirements.txt file is updated. For more information, see How S3 Versioning works.
      */
-    Schedulers?: Schedulers;
+    RequirementsS3ObjectVersion?: S3ObjectVersion;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon S3 bucket where your DAG code and supporting files are stored. For example, arn:aws:s3:::my-airflow-bucket-unique-name. For more information, see Create an Amazon S3 bucket for Amazon MWAA.
+     * The relative path to the startup shell script in your Amazon S3 bucket. For example, s3://mwaa-environment/startup.sh.  Amazon MWAA runs the script as your environment starts, and before running the Apache Airflow process. You can use this script to install dependencies, modify Apache Airflow configuration options, and set environment variables. For more information, see Using a startup script. 
      */
-    SourceBucketArn: S3BucketArn;
+    StartupScriptS3Path?: RelativePath;
     /**
      * The version of the startup shell script in your Amazon S3 bucket. You must specify the version ID that Amazon S3 assigns to the file every time you update the script.   Version IDs are Unicode, UTF-8 encoded, URL-ready, opaque strings that are no more than 1,024 bytes long. The following is an example:   3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo   For more information, see Using a startup script. 
      */
     StartupScriptS3ObjectVersion?: S3ObjectVersion;
     /**
-     * The relative path to the startup shell script in your Amazon S3 bucket. For example, s3://mwaa-environment/startup.sh.  Amazon MWAA runs the script as your environment starts, and before running the Apache Airflow process. You can use this script to install dependencies, modify Apache Airflow configuration options, and set environment variables. For more information, see Using a startup script. 
+     * A list of key-value pairs containing the Apache Airflow configuration options you want to attach to your environment. For more information, see Apache Airflow configuration options.
      */
-    StartupScriptS3Path?: RelativePath;
+    AirflowConfigurationOptions?: AirflowConfigurationOptions;
+    /**
+     * The environment class type. Valid values: mw1.small, mw1.medium, mw1.large, mw1.xlarge, and mw1.2xlarge. For more information, see Amazon MWAA environment class.
+     */
+    EnvironmentClass?: EnvironmentClass;
+    /**
+     * The maximum number of workers that you want to run in your environment. MWAA scales the number of Apache Airflow workers up to the number you specify in the MaxWorkers field. For example, 20. When there are no more tasks running, and no more in the queue, MWAA disposes of the extra workers leaving the one worker that is included with your environment, or the number you specify in MinWorkers.
+     */
+    MaxWorkers?: MaxWorkers;
+    /**
+     * The Amazon Web Services Key Management Service (KMS) key to encrypt the data in your environment. You can use an Amazon Web Services owned CMK, or a Customer managed CMK (advanced). For more information, see Create an Amazon MWAA environment.
+     */
+    KmsKey?: KmsKey;
+    /**
+     * The Apache Airflow version for your environment. If no value is specified, it defaults to the latest version. For more information, see Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (MWAA). Valid values: 1.10.12, 2.0.2, 2.2.2, 2.4.3, 2.5.1, 2.6.3, 2.7.2 2.8.1 
+     */
+    AirflowVersion?: AirflowVersion;
+    /**
+     * Defines the Apache Airflow logs to send to CloudWatch Logs.
+     */
+    LoggingConfiguration?: LoggingConfigurationInput;
+    /**
+     * The day and time of the week in Coordinated Universal Time (UTC) 24-hour standard time to start weekly maintenance updates of your environment in the following format: DAY:HH:MM. For example: TUE:03:30. You can specify a start time in 30 minute increments only.
+     */
+    WeeklyMaintenanceWindowStart?: WeeklyMaintenanceWindowStart;
     /**
      * The key-value tag pairs you want to associate to your environment. For example, "Environment": "Staging". For more information, see Tagging Amazon Web Services resources.
      */
@@ -214,9 +206,25 @@ declare namespace MWAA {
      */
     WebserverAccessMode?: WebserverAccessMode;
     /**
-     * The day and time of the week in Coordinated Universal Time (UTC) 24-hour standard time to start weekly maintenance updates of your environment in the following format: DAY:HH:MM. For example: TUE:03:30. You can specify a start time in 30 minute increments only.
+     * The minimum number of workers that you want to run in your environment. MWAA scales the number of Apache Airflow workers up to the number you specify in the MaxWorkers field. When there are no more tasks running, and no more in the queue, MWAA disposes of the extra workers leaving the worker count you specify in the MinWorkers field. For example, 2.
      */
-    WeeklyMaintenanceWindowStart?: WeeklyMaintenanceWindowStart;
+    MinWorkers?: MinWorkers;
+    /**
+     * The number of Apache Airflow schedulers to run in your environment. Valid values:   v2 - Accepts between 2 to 5. Defaults to 2.   v1 - Accepts 1.  
+     */
+    Schedulers?: Schedulers;
+    /**
+     * Defines whether the VPC endpoints configured for the environment are created, and managed, by the customer or by Amazon MWAA. If set to SERVICE, Amazon MWAA will create and manage the required VPC endpoints in your VPC. If set to CUSTOMER, you must create, and manage, the VPC endpoints for your VPC. If you choose to create an environment in a shared VPC, you must set this value to CUSTOMER. In a shared VPC deployment, the environment will remain in PENDING status until you create the VPC endpoints. If you do not take action to create the endpoints within 72 hours, the status will change to CREATE_FAILED. You can delete the failed environment and create a new one.
+     */
+    EndpointManagement?: EndpointManagement;
+    /**
+     *  The minimum number of web servers that you want to run in your environment. Amazon MWAA scales the number of Apache Airflow web servers up to the number you specify for MaxWebservers when you interact with your Apache Airflow environment using Apache Airflow REST API, or the Apache Airflow CLI. As the transaction-per-second rate, and the network load, decrease, Amazon MWAA disposes of the additional web servers, and scales down to the number set in MinxWebserers.  Valid values: Accepts between 2 and 5. Defaults to 2.
+     */
+    MinWebservers?: MinWebservers;
+    /**
+     *  The maximum number of web servers that you want to run in your environment. Amazon MWAA scales the number of Apache Airflow web servers up to the number you specify for MaxWebservers when you interact with your Apache Airflow environment using Apache Airflow REST API, or the Apache Airflow CLI. For example, in scenarios where your workload requires network calls to the Apache Airflow REST API with a high transaction-per-second (TPS) rate, Amazon MWAA will increase the number of web servers up to the number set in MaxWebserers. As TPS rates decrease Amazon MWAA disposes of the additional web servers, and scales down to the number set in MinxWebserers.  Valid values: Accepts between 2 and 5. Defaults to 2.
+     */
+    MaxWebservers?: MaxWebservers;
   }
   export interface CreateEnvironmentOutput {
     /**
@@ -232,21 +240,21 @@ declare namespace MWAA {
   }
   export interface CreateWebLoginTokenResponse {
     /**
-     * The user name of the Apache Airflow identity creating the web login token.
+     * An Airflow web server login token.
      */
-    AirflowIdentity?: AirflowIdentity;
-    /**
-     * The name of the IAM identity creating the web login token. This might be an IAM user, or an assumed or federated identity. For example, assumed-role/Admin/your-name.
-     */
-    IamIdentity?: IamIdentity;
+    WebToken?: Token;
     /**
      * The Airflow web server hostname for the environment.
      */
     WebServerHostname?: Hostname;
     /**
-     * An Airflow web server login token.
+     * The name of the IAM identity creating the web login token. This might be an IAM user, or an assumed or federated identity. For example, assumed-role/Admin/your-name.
      */
-    WebToken?: Token;
+    IamIdentity?: IamIdentity;
+    /**
+     * The user name of the Apache Airflow identity creating the web login token.
+     */
+    AirflowIdentity?: AirflowIdentity;
   }
   export type CreatedAt = Date;
   export interface DeleteEnvironmentInput {
@@ -272,113 +280,101 @@ declare namespace MWAA {
   export type EndpointManagement = "CUSTOMER"|"SERVICE"|string;
   export interface Environment {
     /**
-     * A list of key-value pairs containing the Apache Airflow configuration options attached to your environment. For more information, see Apache Airflow configuration options.
+     * The name of the Amazon MWAA environment. For example, MyMWAAEnvironment.
      */
-    AirflowConfigurationOptions?: AirflowConfigurationOptions;
+    Name?: EnvironmentName;
     /**
-     * The Apache Airflow version on your environment. Valid values: 1.10.12, 2.0.2, 2.2.2, 2.4.3, 2.5.1, 2.6.3, 2.7.2.
+     * The status of the Amazon MWAA environment. Valid values:    CREATING - Indicates the request to create the environment is in progress.    CREATING_SNAPSHOT - Indicates the request to update environment details, or upgrade the environment version, is in progress and Amazon MWAA is creating a storage volume snapshot of the Amazon RDS database cluster associated with the environment. A database snapshot is a backup created at a specific point in time. Amazon MWAA uses snapshots to recover environment metadata if the process to update or upgrade an environment fails.    CREATE_FAILED - Indicates the request to create the environment failed, and the environment could not be created.    AVAILABLE - Indicates the request was successful and the environment is ready to use.    PENDING - Indicates the request was successful, but the process to create the environment is paused until you create the required VPC endpoints in your VPC. After you create the VPC endpoints, the process resumes.    UPDATING - Indicates the request to update the environment is in progress.    ROLLING_BACK - Indicates the request to update environment details, or upgrade the environment version, failed and Amazon MWAA is restoring the environment using the latest storage volume snapshot.    DELETING - Indicates the request to delete the environment is in progress.    DELETED - Indicates the request to delete the environment is complete, and the environment has been deleted.    UNAVAILABLE - Indicates the request failed, but the environment did not return to its previous state and is not stable.    UPDATE_FAILED - Indicates the request to update the environment failed, and the environment was restored to its previous state successfully and is ready to use.    MAINTENANCE - Indicates that the environment is undergoing maintenance. Depending on the type of work Amazon MWAA is performing, your environment might become unavailable during this process. After all operations are done, your environment will return to its status prior to mainteneace operations.    We recommend reviewing our troubleshooting guide for a list of common errors and their solutions. For more information, see Amazon MWAA troubleshooting.
      */
-    AirflowVersion?: AirflowVersion;
+    Status?: EnvironmentStatus;
     /**
      * The Amazon Resource Name (ARN) of the Amazon MWAA environment.
      */
     Arn?: EnvironmentArn;
     /**
-     * The queue ARN for the environment's Celery Executor. Amazon MWAA uses a Celery Executor to distribute tasks across multiple workers. When you create an environment in a shared VPC, you must provide access to the Celery Executor queue from your VPC.
-     */
-    CeleryExecutorQueue?: CeleryExecutorQueue;
-    /**
      * The day and time the environment was created.
      */
     CreatedAt?: CreatedAt;
     /**
-     * The relative path to the DAGs folder in your Amazon S3 bucket. For example, s3://mwaa-environment/dags. For more information, see Adding or updating DAGs.
+     * The Apache Airflow web server host name for the Amazon MWAA environment. For more information, see Accessing the Apache Airflow UI.
      */
-    DagS3Path?: RelativePath;
-    /**
-     * The VPC endpoint for the environment's Amazon RDS database.
-     */
-    DatabaseVpcEndpointService?: VpcEndpointServiceName;
-    /**
-     * Defines whether the VPC endpoints configured for the environment are created, and managed, by the customer or by Amazon MWAA. If set to SERVICE, Amazon MWAA will create and manage the required VPC endpoints in your VPC. If set to CUSTOMER, you must create, and manage, the VPC endpoints in your VPC.
-     */
-    EndpointManagement?: EndpointManagement;
-    /**
-     * The environment class type. Valid values: mw1.small, mw1.medium, mw1.large. For more information, see Amazon MWAA environment class.
-     */
-    EnvironmentClass?: EnvironmentClass;
+    WebserverUrl?: WebserverUrl;
     /**
      * The Amazon Resource Name (ARN) of the execution role in IAM that allows MWAA to access Amazon Web Services resources in your environment. For example, arn:aws:iam::123456789:role/my-execution-role. For more information, see Amazon MWAA Execution role.
      */
     ExecutionRoleArn?: IamRoleArn;
     /**
+     * The Amazon Resource Name (ARN) for the service-linked role of the environment. For more information, see Amazon MWAA Service-linked role.
+     */
+    ServiceRoleArn?: IamRoleArn;
+    /**
      * The KMS encryption key used to encrypt the data in your environment.
      */
     KmsKey?: KmsKey;
     /**
-     * The status of the last update on the environment.
+     * The Apache Airflow version on your environment. Valid values: 1.10.12, 2.0.2, 2.2.2, 2.4.3, 2.5.1, 2.6.3, 2.7.2, 2.8.1.
      */
-    LastUpdate?: LastUpdate;
-    /**
-     * The Apache Airflow logs published to CloudWatch Logs.
-     */
-    LoggingConfiguration?: LoggingConfiguration;
-    /**
-     * The maximum number of workers that run in your environment. For example, 20.
-     */
-    MaxWorkers?: MaxWorkers;
-    /**
-     * The minimum number of workers that run in your environment. For example, 2.
-     */
-    MinWorkers?: MinWorkers;
-    /**
-     * The name of the Amazon MWAA environment. For example, MyMWAAEnvironment.
-     */
-    Name?: EnvironmentName;
-    /**
-     * Describes the VPC networking components used to secure and enable network traffic between the Amazon Web Services resources for your environment. For more information, see About networking on Amazon MWAA.
-     */
-    NetworkConfiguration?: NetworkConfiguration;
-    /**
-     * The version of the plugins.zip file in your Amazon S3 bucket. You must specify the version ID that Amazon S3 assigns to the file.  Version IDs are Unicode, UTF-8 encoded, URL-ready, opaque strings that are no more than 1,024 bytes long. The following is an example:   3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo  For more information, see Installing custom plugins.
-     */
-    PluginsS3ObjectVersion?: S3ObjectVersion;
-    /**
-     * The relative path to the file in your Amazon S3 bucket. For example, s3://mwaa-environment/plugins.zip. For more information, see Installing custom plugins.
-     */
-    PluginsS3Path?: RelativePath;
-    /**
-     * The version of the requirements.txt  file on your Amazon S3 bucket. You must specify the version ID that Amazon S3 assigns to the file.  Version IDs are Unicode, UTF-8 encoded, URL-ready, opaque strings that are no more than 1,024 bytes long. The following is an example:   3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo   For more information, see Installing Python dependencies. 
-     */
-    RequirementsS3ObjectVersion?: S3ObjectVersion;
-    /**
-     * The relative path to the requirements.txt file in your Amazon S3 bucket. For example, s3://mwaa-environment/requirements.txt. For more information, see Installing Python dependencies.
-     */
-    RequirementsS3Path?: RelativePath;
-    /**
-     * The number of Apache Airflow schedulers that run in your Amazon MWAA environment.
-     */
-    Schedulers?: Schedulers;
-    /**
-     * The Amazon Resource Name (ARN) for the service-linked role of the environment. For more information, see Amazon MWAA Service-linked role.
-     */
-    ServiceRoleArn?: IamRoleArn;
+    AirflowVersion?: AirflowVersion;
     /**
      * The Amazon Resource Name (ARN) of the Amazon S3 bucket where your DAG code and supporting files are stored. For example, arn:aws:s3:::my-airflow-bucket-unique-name. For more information, see Create an Amazon S3 bucket for Amazon MWAA.
      */
     SourceBucketArn?: S3BucketArn;
     /**
-     * The version of the startup shell script in your Amazon S3 bucket. You must specify the version ID that Amazon S3 assigns to the file.  Version IDs are Unicode, UTF-8 encoded, URL-ready, opaque strings that are no more than 1,024 bytes long. The following is an example:   3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo   For more information, see Using a startup script. 
+     * The relative path to the DAGs folder in your Amazon S3 bucket. For example, s3://mwaa-environment/dags. For more information, see Adding or updating DAGs.
      */
-    StartupScriptS3ObjectVersion?: String;
+    DagS3Path?: RelativePath;
+    /**
+     * The relative path to the file in your Amazon S3 bucket. For example, s3://mwaa-environment/plugins.zip. For more information, see Installing custom plugins.
+     */
+    PluginsS3Path?: RelativePath;
+    /**
+     * The version of the plugins.zip file in your Amazon S3 bucket. You must specify the version ID that Amazon S3 assigns to the file.  Version IDs are Unicode, UTF-8 encoded, URL-ready, opaque strings that are no more than 1,024 bytes long. The following is an example:   3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo  For more information, see Installing custom plugins.
+     */
+    PluginsS3ObjectVersion?: S3ObjectVersion;
+    /**
+     * The relative path to the requirements.txt file in your Amazon S3 bucket. For example, s3://mwaa-environment/requirements.txt. For more information, see Installing Python dependencies.
+     */
+    RequirementsS3Path?: RelativePath;
+    /**
+     * The version of the requirements.txt  file on your Amazon S3 bucket. You must specify the version ID that Amazon S3 assigns to the file.  Version IDs are Unicode, UTF-8 encoded, URL-ready, opaque strings that are no more than 1,024 bytes long. The following is an example:   3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo   For more information, see Installing Python dependencies. 
+     */
+    RequirementsS3ObjectVersion?: S3ObjectVersion;
     /**
      * The relative path to the startup shell script in your Amazon S3 bucket. For example, s3://mwaa-environment/startup.sh.  Amazon MWAA runs the script as your environment starts, and before running the Apache Airflow process. You can use this script to install dependencies, modify Apache Airflow configuration options, and set environment variables. For more information, see Using a startup script. 
      */
     StartupScriptS3Path?: String;
     /**
-     * The status of the Amazon MWAA environment. Valid values:    CREATING - Indicates the request to create the environment is in progress.    CREATING_SNAPSHOT - Indicates the request to update environment details, or upgrade the environment version, is in progress and Amazon MWAA is creating a storage volume snapshot of the Amazon RDS database cluster associated with the environment. A database snapshot is a backup created at a specific point in time. Amazon MWAA uses snapshots to recover environment metadata if the process to update or upgrade an environment fails.    CREATE_FAILED - Indicates the request to create the environment failed, and the environment could not be created.    AVAILABLE - Indicates the request was successful and the environment is ready to use.    PENDING - Indicates the request was successful, but the process to create the environment is paused until you create the required VPC endpoints in your VPC. After you create the VPC endpoints, the process resumes.    UPDATING - Indicates the request to update the environment is in progress.    ROLLING_BACK - Indicates the request to update environment details, or upgrade the environment version, failed and Amazon MWAA is restoring the environment using the latest storage volume snapshot.    DELETING - Indicates the request to delete the environment is in progress.    DELETED - Indicates the request to delete the environment is complete, and the environment has been deleted.    UNAVAILABLE - Indicates the request failed, but the environment did not return to its previous state and is not stable.    UPDATE_FAILED - Indicates the request to update the environment failed, and the environment was restored to its previous state successfully and is ready to use.    MAINTENANCE - Indicates that the environment is undergoing maintenance. Depending on the type of work Amazon MWAA is performing, your environment might become unavailable during this process. After all operations are done, your environment will return to its status prior to mainteneace operations.    We recommend reviewing our troubleshooting guide for a list of common errors and their solutions. For more information, see Amazon MWAA troubleshooting.
+     * The version of the startup shell script in your Amazon S3 bucket. You must specify the version ID that Amazon S3 assigns to the file.  Version IDs are Unicode, UTF-8 encoded, URL-ready, opaque strings that are no more than 1,024 bytes long. The following is an example:   3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo   For more information, see Using a startup script. 
      */
-    Status?: EnvironmentStatus;
+    StartupScriptS3ObjectVersion?: String;
+    /**
+     * A list of key-value pairs containing the Apache Airflow configuration options attached to your environment. For more information, see Apache Airflow configuration options.
+     */
+    AirflowConfigurationOptions?: AirflowConfigurationOptions;
+    /**
+     * The environment class type. Valid values: mw1.small, mw1.medium, mw1.large, mw1.xlarge, and mw1.2xlarge. For more information, see Amazon MWAA environment class.
+     */
+    EnvironmentClass?: EnvironmentClass;
+    /**
+     * The maximum number of workers that run in your environment. For example, 20.
+     */
+    MaxWorkers?: MaxWorkers;
+    /**
+     * Describes the VPC networking components used to secure and enable network traffic between the Amazon Web Services resources for your environment. For more information, see About networking on Amazon MWAA.
+     */
+    NetworkConfiguration?: NetworkConfiguration;
+    /**
+     * The Apache Airflow logs published to CloudWatch Logs.
+     */
+    LoggingConfiguration?: LoggingConfiguration;
+    /**
+     * The status of the last update on the environment.
+     */
+    LastUpdate?: LastUpdate;
+    /**
+     * The day and time of the week in Coordinated Universal Time (UTC) 24-hour standard time that weekly maintenance updates are scheduled. For example: TUE:03:30.
+     */
+    WeeklyMaintenanceWindowStart?: WeeklyMaintenanceWindowStart;
     /**
      * The key-value tag pairs associated to your environment. For example, "Environment": "Staging". For more information, see Tagging Amazon Web Services resources.
      */
@@ -388,17 +384,37 @@ declare namespace MWAA {
      */
     WebserverAccessMode?: WebserverAccessMode;
     /**
-     * The Apache Airflow web server host name for the Amazon MWAA environment. For more information, see Accessing the Apache Airflow UI.
+     * The minimum number of workers that run in your environment. For example, 2.
      */
-    WebserverUrl?: WebserverUrl;
+    MinWorkers?: MinWorkers;
+    /**
+     * The number of Apache Airflow schedulers that run in your Amazon MWAA environment.
+     */
+    Schedulers?: Schedulers;
     /**
      * The VPC endpoint for the environment's web server.
      */
     WebserverVpcEndpointService?: VpcEndpointServiceName;
     /**
-     * The day and time of the week in Coordinated Universal Time (UTC) 24-hour standard time that weekly maintenance updates are scheduled. For example: TUE:03:30.
+     * The VPC endpoint for the environment's Amazon RDS database.
      */
-    WeeklyMaintenanceWindowStart?: WeeklyMaintenanceWindowStart;
+    DatabaseVpcEndpointService?: VpcEndpointServiceName;
+    /**
+     * The queue ARN for the environment's Celery Executor. Amazon MWAA uses a Celery Executor to distribute tasks across multiple workers. When you create an environment in a shared VPC, you must provide access to the Celery Executor queue from your VPC.
+     */
+    CeleryExecutorQueue?: CeleryExecutorQueue;
+    /**
+     * Defines whether the VPC endpoints configured for the environment are created, and managed, by the customer or by Amazon MWAA. If set to SERVICE, Amazon MWAA will create and manage the required VPC endpoints in your VPC. If set to CUSTOMER, you must create, and manage, the VPC endpoints in your VPC.
+     */
+    EndpointManagement?: EndpointManagement;
+    /**
+     *  The minimum number of web servers that you want to run in your environment. Amazon MWAA scales the number of Apache Airflow web servers up to the number you specify for MaxWebservers when you interact with your Apache Airflow environment using Apache Airflow REST API, or the Apache Airflow CLI. As the transaction-per-second rate, and the network load, decrease, Amazon MWAA disposes of the additional web servers, and scales down to the number set in MinxWebserers.  Valid values: Accepts between 2 and 5. Defaults to 2.
+     */
+    MinWebservers?: MinWebservers;
+    /**
+     *  The maximum number of web servers that you want to run in your environment. Amazon MWAA scales the number of Apache Airflow web servers up to the number you specify for MaxWebservers when you interact with your Apache Airflow environment using Apache Airflow REST API, or the Apache Airflow CLI. For example, in scenarios where your workload requires network calls to the Apache Airflow REST API with a high transaction-per-second (TPS) rate, Amazon MWAA will increase the number of web servers up to the number set in MaxWebserers. As TPS rates decrease Amazon MWAA disposes of the additional web servers, and scales down to the number set in MinxWebserers.  Valid values: Accepts between 2 and 5. Defaults to 2.
+     */
+    MaxWebservers?: MaxWebservers;
   }
   export type EnvironmentArn = string;
   export type EnvironmentClass = string;
@@ -426,6 +442,10 @@ declare namespace MWAA {
   export type KmsKey = string;
   export interface LastUpdate {
     /**
+     * The status of the last update on the environment.
+     */
+    Status?: UpdateStatus;
+    /**
      * The day and time of the last update on the environment.
      */
     CreatedAt?: UpdateCreatedAt;
@@ -437,20 +457,16 @@ declare namespace MWAA {
      * The source of the last update to the environment. Includes internal processes by Amazon MWAA, such as an environment maintenance update.
      */
     Source?: UpdateSource;
-    /**
-     * The status of the last update on the environment.
-     */
-    Status?: UpdateStatus;
   }
   export interface ListEnvironmentsInput {
-    /**
-     * The maximum number of results to retrieve per page. For example, 5 environments per page.
-     */
-    MaxResults?: ListEnvironmentsInputMaxResultsInteger;
     /**
      * Retrieves the next page of the results.
      */
     NextToken?: NextToken;
+    /**
+     * The maximum number of results to retrieve per page. For example, 5 environments per page.
+     */
+    MaxResults?: ListEnvironmentsInputMaxResultsInteger;
   }
   export type ListEnvironmentsInputMaxResultsInteger = number;
   export interface ListEnvironmentsOutput {
@@ -485,10 +501,6 @@ declare namespace MWAA {
      */
     SchedulerLogs?: ModuleLoggingConfiguration;
     /**
-     * The Airflow task logs published to CloudWatch Logs and the log level.
-     */
-    TaskLogs?: ModuleLoggingConfiguration;
-    /**
      * The Airflow web server logs published to CloudWatch Logs and the log level.
      */
     WebserverLogs?: ModuleLoggingConfiguration;
@@ -496,6 +508,10 @@ declare namespace MWAA {
      * The Airflow worker logs published to CloudWatch Logs and the log level.
      */
     WorkerLogs?: ModuleLoggingConfiguration;
+    /**
+     * The Airflow task logs published to CloudWatch Logs and the log level.
+     */
+    TaskLogs?: ModuleLoggingConfiguration;
   }
   export interface LoggingConfigurationInput {
     /**
@@ -507,10 +523,6 @@ declare namespace MWAA {
      */
     SchedulerLogs?: ModuleLoggingConfigurationInput;
     /**
-     * Publishes Airflow task logs to CloudWatch Logs.
-     */
-    TaskLogs?: ModuleLoggingConfigurationInput;
-    /**
      * Publishes Airflow web server logs to CloudWatch Logs.
      */
     WebserverLogs?: ModuleLoggingConfigurationInput;
@@ -518,43 +530,45 @@ declare namespace MWAA {
      * Publishes Airflow worker logs to CloudWatch Logs.
      */
     WorkerLogs?: ModuleLoggingConfigurationInput;
+    /**
+     * Publishes Airflow task logs to CloudWatch Logs.
+     */
+    TaskLogs?: ModuleLoggingConfigurationInput;
   }
   export type LoggingEnabled = boolean;
   export type LoggingLevel = "CRITICAL"|"ERROR"|"WARNING"|"INFO"|"DEBUG"|string;
+  export type MaxWebservers = number;
   export type MaxWorkers = number;
   export type MetricData = MetricDatum[];
   export interface MetricDatum {
-    /**
-     *  Internal only. The dimensions associated with the metric.
-     */
-    Dimensions?: Dimensions;
     /**
      *  Internal only. The name of the metric.
      */
     MetricName: String;
     /**
-     *  Internal only. The statistical values for the metric.
-     */
-    StatisticValues?: StatisticSet;
-    /**
      *  Internal only. The time the metric data was received.
      */
     Timestamp: Timestamp;
+    /**
+     *  Internal only. The dimensions associated with the metric.
+     */
+    Dimensions?: Dimensions;
+    /**
+     *  Internal only. The value for the metric.
+     */
+    Value?: Double;
     /**
      *  Internal only. The unit used to store the metric.
      */
     Unit?: Unit;
     /**
-     *  Internal only. The value for the metric.
+     *  Internal only. The statistical values for the metric.
      */
-    Value?: Double;
+    StatisticValues?: StatisticSet;
   }
+  export type MinWebservers = number;
   export type MinWorkers = number;
   export interface ModuleLoggingConfiguration {
-    /**
-     * The Amazon Resource Name (ARN) for the CloudWatch Logs group where the Apache Airflow log type (e.g. DagProcessingLogs) is published. For example, arn:aws:logs:us-east-1:123456789012:log-group:airflow-MyMWAAEnvironment-MwaaEnvironment-DAGProcessing:*.
-     */
-    CloudWatchLogGroupArn?: CloudWatchLogGroupArn;
     /**
      * Indicates whether the Apache Airflow log type (e.g. DagProcessingLogs) is enabled.
      */
@@ -563,6 +577,10 @@ declare namespace MWAA {
      * The Apache Airflow log level for the log type (e.g. DagProcessingLogs). 
      */
     LogLevel?: LoggingLevel;
+    /**
+     * The Amazon Resource Name (ARN) for the CloudWatch Logs group where the Apache Airflow log type (e.g. DagProcessingLogs) is published. For example, arn:aws:logs:us-east-1:123456789012:log-group:airflow-MyMWAAEnvironment-MwaaEnvironment-DAGProcessing:*.
+     */
+    CloudWatchLogGroupArn?: CloudWatchLogGroupArn;
   }
   export interface ModuleLoggingConfigurationInput {
     /**
@@ -576,13 +594,13 @@ declare namespace MWAA {
   }
   export interface NetworkConfiguration {
     /**
-     * A list of security group IDs. For more information, see Security in your VPC on Amazon MWAA.
-     */
-    SecurityGroupIds?: SecurityGroupList;
-    /**
      * A list of subnet IDs. For more information, see About networking on Amazon MWAA.
      */
     SubnetIds?: SubnetList;
+    /**
+     * A list of security group IDs. For more information, see Security in your VPC on Amazon MWAA.
+     */
+    SecurityGroupIds?: SecurityGroupList;
   }
   export type NextToken = string;
   export interface PublishMetricsInput {
@@ -605,14 +623,6 @@ declare namespace MWAA {
   export type SecurityGroupList = SecurityGroupId[];
   export interface StatisticSet {
     /**
-     *  Internal only. The maximum value of the sample set.
-     */
-    Maximum?: Double;
-    /**
-     *  Internal only. The minimum value of the sample set.
-     */
-    Minimum?: Double;
-    /**
      *  Internal only. The number of samples used for the statistic set.
      */
     SampleCount?: Integer;
@@ -620,6 +630,14 @@ declare namespace MWAA {
      *  Internal only. The sum of values for the sample set.
      */
     Sum?: Double;
+    /**
+     *  Internal only. The minimum value of the sample set.
+     */
+    Minimum?: Double;
+    /**
+     *  Internal only. The maximum value of the sample set.
+     */
+    Maximum?: Double;
   }
   export type String = string;
   export type SubnetId = string;
@@ -658,85 +676,93 @@ declare namespace MWAA {
   export type UpdateCreatedAt = Date;
   export interface UpdateEnvironmentInput {
     /**
-     * A list of key-value pairs containing the Apache Airflow configuration options you want to attach to your environment. For more information, see Apache Airflow configuration options.
+     * The name of your Amazon MWAA environment. For example, MyMWAAEnvironment.
      */
-    AirflowConfigurationOptions?: AirflowConfigurationOptions;
-    /**
-     * The Apache Airflow version for your environment. To upgrade your environment, specify a newer version of Apache Airflow supported by Amazon MWAA. Before you upgrade an environment, make sure your requirements, DAGs, plugins, and other resources used in your workflows are compatible with the new Apache Airflow version. For more information about updating your resources, see Upgrading an Amazon MWAA environment. Valid values: 1.10.12, 2.0.2, 2.2.2, 2.4.3, 2.5.1, 2.6.3, 2.7.2.
-     */
-    AirflowVersion?: AirflowVersion;
-    /**
-     * The relative path to the DAGs folder on your Amazon S3 bucket. For example, dags. For more information, see Adding or updating DAGs.
-     */
-    DagS3Path?: RelativePath;
-    /**
-     * The environment class type. Valid values: mw1.small, mw1.medium, mw1.large. For more information, see Amazon MWAA environment class.
-     */
-    EnvironmentClass?: EnvironmentClass;
+    Name: EnvironmentName;
     /**
      * The Amazon Resource Name (ARN) of the execution role in IAM that allows MWAA to access Amazon Web Services resources in your environment. For example, arn:aws:iam::123456789:role/my-execution-role. For more information, see Amazon MWAA Execution role.
      */
     ExecutionRoleArn?: IamRoleArn;
     /**
-     * The Apache Airflow log types to send to CloudWatch Logs.
+     * The Apache Airflow version for your environment. To upgrade your environment, specify a newer version of Apache Airflow supported by Amazon MWAA. Before you upgrade an environment, make sure your requirements, DAGs, plugins, and other resources used in your workflows are compatible with the new Apache Airflow version. For more information about updating your resources, see Upgrading an Amazon MWAA environment. Valid values: 1.10.12, 2.0.2, 2.2.2, 2.4.3, 2.5.1, 2.6.3, 2.7.2, 2.8.1.
      */
-    LoggingConfiguration?: LoggingConfigurationInput;
-    /**
-     * The maximum number of workers that you want to run in your environment. MWAA scales the number of Apache Airflow workers up to the number you specify in the MaxWorkers field. For example, 20. When there are no more tasks running, and no more in the queue, MWAA disposes of the extra workers leaving the one worker that is included with your environment, or the number you specify in MinWorkers.
-     */
-    MaxWorkers?: MaxWorkers;
-    /**
-     * The minimum number of workers that you want to run in your environment. MWAA scales the number of Apache Airflow workers up to the number you specify in the MaxWorkers field. When there are no more tasks running, and no more in the queue, MWAA disposes of the extra workers leaving the worker count you specify in the MinWorkers field. For example, 2.
-     */
-    MinWorkers?: MinWorkers;
-    /**
-     * The name of your Amazon MWAA environment. For example, MyMWAAEnvironment.
-     */
-    Name: EnvironmentName;
-    /**
-     * The VPC networking components used to secure and enable network traffic between the Amazon Web Services resources for your environment. For more information, see About networking on Amazon MWAA.
-     */
-    NetworkConfiguration?: UpdateNetworkConfigurationInput;
-    /**
-     * The version of the plugins.zip file on your Amazon S3 bucket. You must specify a version each time a plugins.zip file is updated. For more information, see How S3 Versioning works.
-     */
-    PluginsS3ObjectVersion?: S3ObjectVersion;
-    /**
-     * The relative path to the plugins.zip file on your Amazon S3 bucket. For example, plugins.zip. If specified, then the plugins.zip version is required. For more information, see Installing custom plugins.
-     */
-    PluginsS3Path?: RelativePath;
-    /**
-     * The version of the requirements.txt file on your Amazon S3 bucket. You must specify a version each time a requirements.txt file is updated. For more information, see How S3 Versioning works.
-     */
-    RequirementsS3ObjectVersion?: S3ObjectVersion;
-    /**
-     * The relative path to the requirements.txt file on your Amazon S3 bucket. For example, requirements.txt. If specified, then a file version is required. For more information, see Installing Python dependencies.
-     */
-    RequirementsS3Path?: RelativePath;
-    /**
-     * The number of Apache Airflow schedulers to run in your Amazon MWAA environment.
-     */
-    Schedulers?: Schedulers;
+    AirflowVersion?: AirflowVersion;
     /**
      * The Amazon Resource Name (ARN) of the Amazon S3 bucket where your DAG code and supporting files are stored. For example, arn:aws:s3:::my-airflow-bucket-unique-name. For more information, see Create an Amazon S3 bucket for Amazon MWAA.
      */
     SourceBucketArn?: S3BucketArn;
     /**
-     *  The version of the startup shell script in your Amazon S3 bucket. You must specify the version ID that Amazon S3 assigns to the file every time you update the script.   Version IDs are Unicode, UTF-8 encoded, URL-ready, opaque strings that are no more than 1,024 bytes long. The following is an example:   3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo   For more information, see Using a startup script. 
+     * The relative path to the DAGs folder on your Amazon S3 bucket. For example, dags. For more information, see Adding or updating DAGs.
      */
-    StartupScriptS3ObjectVersion?: S3ObjectVersion;
+    DagS3Path?: RelativePath;
+    /**
+     * The relative path to the plugins.zip file on your Amazon S3 bucket. For example, plugins.zip. If specified, then the plugins.zip version is required. For more information, see Installing custom plugins.
+     */
+    PluginsS3Path?: RelativePath;
+    /**
+     * The version of the plugins.zip file on your Amazon S3 bucket. You must specify a version each time a plugins.zip file is updated. For more information, see How S3 Versioning works.
+     */
+    PluginsS3ObjectVersion?: S3ObjectVersion;
+    /**
+     * The relative path to the requirements.txt file on your Amazon S3 bucket. For example, requirements.txt. If specified, then a file version is required. For more information, see Installing Python dependencies.
+     */
+    RequirementsS3Path?: RelativePath;
+    /**
+     * The version of the requirements.txt file on your Amazon S3 bucket. You must specify a version each time a requirements.txt file is updated. For more information, see How S3 Versioning works.
+     */
+    RequirementsS3ObjectVersion?: S3ObjectVersion;
     /**
      * The relative path to the startup shell script in your Amazon S3 bucket. For example, s3://mwaa-environment/startup.sh.  Amazon MWAA runs the script as your environment starts, and before running the Apache Airflow process. You can use this script to install dependencies, modify Apache Airflow configuration options, and set environment variables. For more information, see Using a startup script. 
      */
     StartupScriptS3Path?: RelativePath;
     /**
-     * The Apache Airflow Web server access mode. For more information, see Apache Airflow access modes.
+     *  The version of the startup shell script in your Amazon S3 bucket. You must specify the version ID that Amazon S3 assigns to the file every time you update the script.   Version IDs are Unicode, UTF-8 encoded, URL-ready, opaque strings that are no more than 1,024 bytes long. The following is an example:   3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo   For more information, see Using a startup script. 
      */
-    WebserverAccessMode?: WebserverAccessMode;
+    StartupScriptS3ObjectVersion?: S3ObjectVersion;
+    /**
+     * A list of key-value pairs containing the Apache Airflow configuration options you want to attach to your environment. For more information, see Apache Airflow configuration options.
+     */
+    AirflowConfigurationOptions?: AirflowConfigurationOptions;
+    /**
+     * The environment class type. Valid values: mw1.small, mw1.medium, mw1.large, mw1.xlarge, and mw1.2xlarge. For more information, see Amazon MWAA environment class.
+     */
+    EnvironmentClass?: EnvironmentClass;
+    /**
+     * The maximum number of workers that you want to run in your environment. MWAA scales the number of Apache Airflow workers up to the number you specify in the MaxWorkers field. For example, 20. When there are no more tasks running, and no more in the queue, MWAA disposes of the extra workers leaving the one worker that is included with your environment, or the number you specify in MinWorkers.
+     */
+    MaxWorkers?: MaxWorkers;
+    /**
+     * The VPC networking components used to secure and enable network traffic between the Amazon Web Services resources for your environment. For more information, see About networking on Amazon MWAA.
+     */
+    NetworkConfiguration?: UpdateNetworkConfigurationInput;
+    /**
+     * The Apache Airflow log types to send to CloudWatch Logs.
+     */
+    LoggingConfiguration?: LoggingConfigurationInput;
     /**
      * The day and time of the week in Coordinated Universal Time (UTC) 24-hour standard time to start weekly maintenance updates of your environment in the following format: DAY:HH:MM. For example: TUE:03:30. You can specify a start time in 30 minute increments only.
      */
     WeeklyMaintenanceWindowStart?: WeeklyMaintenanceWindowStart;
+    /**
+     * The Apache Airflow Web server access mode. For more information, see Apache Airflow access modes.
+     */
+    WebserverAccessMode?: WebserverAccessMode;
+    /**
+     * The minimum number of workers that you want to run in your environment. MWAA scales the number of Apache Airflow workers up to the number you specify in the MaxWorkers field. When there are no more tasks running, and no more in the queue, MWAA disposes of the extra workers leaving the worker count you specify in the MinWorkers field. For example, 2.
+     */
+    MinWorkers?: MinWorkers;
+    /**
+     * The number of Apache Airflow schedulers to run in your Amazon MWAA environment.
+     */
+    Schedulers?: Schedulers;
+    /**
+     *  The minimum number of web servers that you want to run in your environment. Amazon MWAA scales the number of Apache Airflow web servers up to the number you specify for MaxWebservers when you interact with your Apache Airflow environment using Apache Airflow REST API, or the Apache Airflow CLI. As the transaction-per-second rate, and the network load, decrease, Amazon MWAA disposes of the additional web servers, and scales down to the number set in MinxWebserers.  Valid values: Accepts between 2 and 5. Defaults to 2.
+     */
+    MinWebservers?: MinWebservers;
+    /**
+     *  The maximum number of web servers that you want to run in your environment. Amazon MWAA scales the number of Apache Airflow web servers up to the number you specify for MaxWebservers when you interact with your Apache Airflow environment using Apache Airflow REST API, or the Apache Airflow CLI. For example, in scenarios where your workload requires network calls to the Apache Airflow REST API with a high transaction-per-second (TPS) rate, Amazon MWAA will increase the number of web servers up to the number set in MaxWebserers. As TPS rates decrease Amazon MWAA disposes of the additional web servers, and scales down to the number set in MinxWebserers.  Valid values: Accepts between 2 and 5. Defaults to 2.
+     */
+    MaxWebservers?: MaxWebservers;
   }
   export interface UpdateEnvironmentOutput {
     /**

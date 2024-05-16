@@ -421,11 +421,11 @@ declare class SageMaker extends Service {
    */
   createProject(callback?: (err: AWSError, data: SageMaker.Types.CreateProjectOutput) => void): Request<SageMaker.Types.CreateProjectOutput, AWSError>;
   /**
-   * Creates a space used for real time collaboration in a domain.
+   * Creates a private space or a space used for real time collaboration in a domain.
    */
   createSpace(params: SageMaker.Types.CreateSpaceRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateSpaceResponse) => void): Request<SageMaker.Types.CreateSpaceResponse, AWSError>;
   /**
-   * Creates a space used for real time collaboration in a domain.
+   * Creates a private space or a space used for real time collaboration in a domain.
    */
   createSpace(callback?: (err: AWSError, data: SageMaker.Types.CreateSpaceResponse) => void): Request<SageMaker.Types.CreateSpaceResponse, AWSError>;
   /**
@@ -6675,6 +6675,10 @@ declare namespace SageMaker {
      */
     NotificationConfiguration?: NotificationConfiguration;
     /**
+     * Use this optional parameter to constrain access to an Amazon S3 resource based on the IP address using supported IAM global condition keys. The Amazon S3 resource is accessed in the worker portal using a Amazon S3 presigned URL.
+     */
+    WorkerAccessConfiguration?: WorkerAccessConfiguration;
+    /**
      * An array of key-value pairs. For more information, see Resource Tag and Using Cost Allocation Tags in the  Amazon Web Services Billing and Cost Management User Guide.
      */
     Tags?: TagList;
@@ -11612,6 +11616,7 @@ declare namespace SageMaker {
   export interface EnableSagemakerServicecatalogPortfolioOutput {
   }
   export type EnableSessionTagChaining = boolean;
+  export type EnabledOrDisabled = "Enabled"|"Disabled"|string;
   export interface Endpoint {
     /**
      * The name of the endpoint.
@@ -13122,6 +13127,16 @@ declare namespace SageMaker {
      */
     SourceIdentity?: String;
   }
+  export interface IamPolicyConstraints {
+    /**
+     * When SourceIp is Enabled the worker's IP address when a task is rendered in the worker portal is added to the IAM policy as a Condition used to generate the Amazon S3 presigned URL. This IP address is checked by Amazon S3 and must match in order for the Amazon S3 resource to be rendered in the worker portal.
+     */
+    SourceIp?: EnabledOrDisabled;
+    /**
+     * When VpcSourceIp is Enabled the worker's IP address when a task is rendered in private worker portal inside the VPC is added to the IAM policy as a Condition used to generate the Amazon S3 presigned URL. To render the task successfully Amazon S3 checks that the presigned URL is being accessed over an Amazon S3 VPC Endpoint, and that the worker's IP address matches the IP address in the IAM policy. To learn more about configuring private worker portal, see Use Amazon VPC mode from a private worker portal.
+     */
+    VpcSourceIp?: EnabledOrDisabled;
+  }
   export type IdempotencyToken = string;
   export interface IdentityProviderOAuthSetting {
     /**
@@ -14267,7 +14282,7 @@ declare namespace SageMaker {
      */
     NextToken?: NextToken;
     /**
-     * The total number of items to return in the response. If the total number of items available is more than the value specified, a NextToken is provided in the response. To resume pagination, provide the NextToken value in the as part of a subsequent call. The default value is 10.
+     * This parameter defines the maximum number of results that can be returned in a single response. The MaxResults parameter is an upper bound, not a target. If there are more results available than the value specified, a NextToken is provided in the response. The NextToken indicates that the user should get the next set of results by providing this token as a part of a subsequent call. The default value for MaxResults is 10.
      */
     MaxResults?: MaxResults;
     /**
@@ -14853,7 +14868,7 @@ declare namespace SageMaker {
      */
     NextToken?: NextToken;
     /**
-     * The total number of items to return in the response. If the total number of items available is more than the value specified, a NextToken is provided in the response. To resume pagination, provide the NextToken value in the as part of a subsequent call. The default value is 10.
+     * This parameter defines the maximum number of results that can be returned in a single response. The MaxResults parameter is an upper bound, not a target. If there are more results available than the value specified, a NextToken is provided in the response. The NextToken indicates that the user should get the next set of results by providing this token as a part of a subsequent call. The default value for MaxResults is 10.
      */
     MaxResults?: MaxResults;
   }
@@ -16883,7 +16898,7 @@ declare namespace SageMaker {
      */
     NextToken?: NextToken;
     /**
-     * The total number of items to return in the response. If the total number of items available is more than the value specified, a NextToken is provided in the response. To resume pagination, provide the NextToken value in the as part of a subsequent call. The default value is 10.
+     * This parameter defines the maximum number of results that can be returned in a single response. The MaxResults parameter is an upper bound, not a target. If there are more results available than the value specified, a NextToken is provided in the response. The NextToken indicates that the user should get the next set of results by providing this token as a part of a subsequent call. The default value for MaxResults is 10.
      */
     MaxResults?: MaxResults;
     /**
@@ -17289,7 +17304,7 @@ declare namespace SageMaker {
      */
     NextToken?: NextToken;
     /**
-     * The total number of items to return in the response. If the total number of items available is more than the value specified, a NextToken is provided in the response. To resume pagination, provide the NextToken value in the as part of a subsequent call. The default value is 10.
+     * This parameter defines the maximum number of results that can be returned in a single response. The MaxResults parameter is an upper bound, not a target. If there are more results available than the value specified, a NextToken is provided in the response. The NextToken indicates that the user should get the next set of results by providing this token as a part of a subsequent call. The default value for MaxResults is 10.
      */
     MaxResults?: MaxResults;
     /**
@@ -21169,6 +21184,12 @@ declare namespace SageMaker {
   export type S3ModelDataType = "S3Prefix"|"S3Object"|string;
   export type S3ModelUri = string;
   export type S3OutputPath = string;
+  export interface S3Presign {
+    /**
+     * Use this parameter to specify the allowed request source. Possible sources are either SourceIp or VpcSourceIp.
+     */
+    IamPolicyConstraints?: IamPolicyConstraints;
+  }
   export interface S3StorageConfig {
     /**
      * The S3 URI, or location in Amazon S3, of OfflineStore. S3 URIs have a format similar to the following: s3://example-bucket/prefix/.
@@ -24116,6 +24137,10 @@ declare namespace SageMaker {
      * Configures SNS topic notifications for available or expiring work items
      */
     NotificationConfiguration?: NotificationConfiguration;
+    /**
+     * Use this optional parameter to constrain access to an Amazon S3 resource based on the IP address using supported IAM global condition keys. The Amazon S3 resource is accessed in the worker portal using a Amazon S3 presigned URL.
+     */
+    WorkerAccessConfiguration?: WorkerAccessConfiguration;
   }
   export interface UpdateWorkteamResponse {
     /**
@@ -24318,6 +24343,12 @@ declare namespace SageMaker {
      */
     ReusedByJob?: TrainingJobName;
   }
+  export interface WorkerAccessConfiguration {
+    /**
+     * Defines any Amazon S3 resource constraints.
+     */
+    S3Presign?: S3Presign;
+  }
   export interface Workforce {
     /**
      * The name of the private workforce.
@@ -24458,6 +24489,10 @@ declare namespace SageMaker {
      * Configures SNS notifications of available or expiring work items for work teams.
      */
     NotificationConfiguration?: NotificationConfiguration;
+    /**
+     * Describes any access constraints that have been defined for Amazon S3 resources.
+     */
+    WorkerAccessConfiguration?: WorkerAccessConfiguration;
   }
   export type WorkteamArn = string;
   export type WorkteamName = string;

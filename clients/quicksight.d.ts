@@ -612,6 +612,14 @@ declare class QuickSight extends Service {
    */
   describeIpRestriction(callback?: (err: AWSError, data: QuickSight.Types.DescribeIpRestrictionResponse) => void): Request<QuickSight.Types.DescribeIpRestrictionResponse, AWSError>;
   /**
+   * Describes all customer managed key registrations in a Amazon QuickSight account.
+   */
+  describeKeyRegistration(params: QuickSight.Types.DescribeKeyRegistrationRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeKeyRegistrationResponse) => void): Request<QuickSight.Types.DescribeKeyRegistrationResponse, AWSError>;
+  /**
+   * Describes all customer managed key registrations in a Amazon QuickSight account.
+   */
+  describeKeyRegistration(callback?: (err: AWSError, data: QuickSight.Types.DescribeKeyRegistrationResponse) => void): Request<QuickSight.Types.DescribeKeyRegistrationResponse, AWSError>;
+  /**
    * Describes the current namespace.
    */
   describeNamespace(params: QuickSight.Types.DescribeNamespaceRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeNamespaceResponse) => void): Request<QuickSight.Types.DescribeNamespaceResponse, AWSError>;
@@ -1267,6 +1275,14 @@ declare class QuickSight extends Service {
    * Updates the content and status of IP rules. Traffic from a source is allowed when the source satisfies either the IpRestrictionRule, VpcIdRestrictionRule, or VpcEndpointIdRestrictionRule. To use this operation, you must provide the entire map of rules. You can use the DescribeIpRestriction operation to get the current rule map.
    */
   updateIpRestriction(callback?: (err: AWSError, data: QuickSight.Types.UpdateIpRestrictionResponse) => void): Request<QuickSight.Types.UpdateIpRestrictionResponse, AWSError>;
+  /**
+   * Updates a customer managed key in a Amazon QuickSight account.
+   */
+  updateKeyRegistration(params: QuickSight.Types.UpdateKeyRegistrationRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateKeyRegistrationResponse) => void): Request<QuickSight.Types.UpdateKeyRegistrationResponse, AWSError>;
+  /**
+   * Updates a customer managed key in a Amazon QuickSight account.
+   */
+  updateKeyRegistration(callback?: (err: AWSError, data: QuickSight.Types.UpdateKeyRegistrationResponse) => void): Request<QuickSight.Types.UpdateKeyRegistrationResponse, AWSError>;
   /**
    * Use the UpdatePublicSharingSettings operation to turn on or turn off the public sharing settings of an Amazon QuickSight dashboard. To use this operation, turn on session capacity pricing for your Amazon QuickSight account. Before you can turn on public sharing on your account, make sure to give public sharing permissions to an administrative user in the Identity and Access Management (IAM) console. For more information on using IAM with Amazon QuickSight, see Using Amazon QuickSight with IAM in the Amazon QuickSight User Guide.
    */
@@ -8199,6 +8215,34 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
   }
+  export interface DescribeKeyRegistrationRequest {
+    /**
+     * The ID of the Amazon Web Services account that contains the customer managed key registration that you want to describe.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * Determines whether the request returns the default key only.
+     */
+    DefaultKeyOnly?: Boolean;
+  }
+  export interface DescribeKeyRegistrationResponse {
+    /**
+     * The ID of the Amazon Web Services account that contains the customer managed key registration specified in the request.
+     */
+    AwsAccountId?: AwsAccountId;
+    /**
+     * A list of RegisteredCustomerManagedKey objects in a Amazon QuickSight account.
+     */
+    KeyRegistration?: KeyRegistration;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: NonEmptyString;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
   export interface DescribeNamespaceRequest {
     /**
      * The ID for the Amazon Web Services account that contains the Amazon QuickSight namespace that you want to describe.
@@ -8944,6 +8988,25 @@ declare namespace QuickSight {
     AvailabilityStatus?: DashboardBehavior;
   }
   export type Expression = string;
+  export type FailedKeyRegistrationEntries = FailedKeyRegistrationEntry[];
+  export interface FailedKeyRegistrationEntry {
+    /**
+     * The ARN of the KMS key that failed to update.
+     */
+    KeyArn?: String;
+    /**
+     * A message that provides information about why a FailedKeyRegistrationEntry error occurred.
+     */
+    Message: NonEmptyString;
+    /**
+     * The HTTP status of a FailedKeyRegistrationEntry error.
+     */
+    StatusCode: StatusCode;
+    /**
+     * A boolean that indicates whether a FailedKeyRegistrationEntry resulted from user error. If the value of this property is True, the error was caused by user error. If the value of this property is False, the error occurred on the backend. If your job continues fail and with a False SenderFault value, contact Amazon Web Services Support.
+     */
+    SenderFault: Boolean;
+  }
   export interface FieldBasedTooltip {
     /**
      * The visibility of Show aggregations.
@@ -11260,6 +11323,7 @@ declare namespace QuickSight {
     Type: KPIVisualStandardLayoutType;
   }
   export type KPIVisualStandardLayoutType = "CLASSIC"|"VERTICAL"|string;
+  export type KeyRegistration = RegisteredCustomerManagedKey[];
   export interface LabelOptions {
     /**
      * Determines whether or not the label is visible.
@@ -14391,7 +14455,7 @@ declare namespace QuickSight {
     /**
      * The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of AutoCreateDatabaseUser to True to create a new user with PUBLIC permissions.
      */
-    DatabaseUser: DatabaseUser;
+    DatabaseUser?: DatabaseUser;
     /**
      * A list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the DatabaseUser. If you choose to include this parameter, the RoleArn must grant access to redshift:JoinGroup.
      */
@@ -14599,7 +14663,7 @@ declare namespace QuickSight {
      */
     Email: String;
     /**
-     * The Amazon QuickSight role for the user. The user role can be one of the following:    READER: A user who has read-only access to dashboards.    AUTHOR: A user who can create data sources, datasets, analyses, and dashboards.    ADMIN: A user who is an author, who can also manage Amazon QuickSight settings.    RESTRICTED_READER: This role isn't currently available for use.    RESTRICTED_AUTHOR: This role isn't currently available for use.  
+     * The Amazon QuickSight role for the user. The user role can be one of the following:    READER: A user who has read-only access to dashboards.    AUTHOR: A user who can create data sources, datasets, analyses, and dashboards.    ADMIN: A user who is an author, who can also manage Amazon QuickSight settings.    READER_PRO: Reader Pro adds Generative BI capabilities to the Reader role. Reader Pros have access to Amazon Q in Amazon QuickSight, can build stories with Amazon Q, and can generate executive summaries from dashboards.    AUTHOR_PRO: Author Pro adds Generative BI capabilities to the Author role. Author Pros can author dashboards with natural language with Amazon Q, build stories with Amazon Q, create Topics for Q&amp;A, and generate executive summaries from dashboards.    ADMIN_PRO: Admin Pros are Author Pros who can also manage Amazon QuickSight administrative settings. Admin Pro users are billed at Author Pro pricing.    RESTRICTED_READER: This role isn't currently available for use.    RESTRICTED_AUTHOR: This role isn't currently available for use.  
      */
     UserRole: UserRole;
     /**
@@ -14660,6 +14724,16 @@ declare namespace QuickSight {
      * The HTTP status of the request.
      */
     Status?: StatusCode;
+  }
+  export interface RegisteredCustomerManagedKey {
+    /**
+     * The ARN of the KMS key that is registered to a Amazon QuickSight account for encryption and decryption use.
+     */
+    KeyArn?: String;
+    /**
+     * Indicates whether a RegisteredCustomerManagedKey is set as the default key for encryption and decryption use.
+     */
+    DefaultKey?: Boolean;
   }
   export interface RegisteredUserConsoleFeatureConfigurations {
     /**
@@ -16422,6 +16496,17 @@ declare namespace QuickSight {
      * The style targets options for subtotals.
      */
     StyleTargets?: TableStyleTargetList;
+  }
+  export type SuccessfulKeyRegistrationEntries = SuccessfulKeyRegistrationEntry[];
+  export interface SuccessfulKeyRegistrationEntry {
+    /**
+     * The ARN of the KMS key that is associated with the SuccessfulKeyRegistrationEntry entry.
+     */
+    KeyArn: String;
+    /**
+     * The HTTP status of a SuccessfulKeyRegistrationEntry entry.
+     */
+    StatusCode: StatusCode;
   }
   export type Suffix = string;
   export type Synonyms = LimitedString[];
@@ -19070,6 +19155,30 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
   }
+  export interface UpdateKeyRegistrationRequest {
+    /**
+     * The ID of the Amazon Web Services account that contains the customer managed key registration that you want to update.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * A list of RegisteredCustomerManagedKey objects to be updated to the Amazon QuickSight account.
+     */
+    KeyRegistration: KeyRegistration;
+  }
+  export interface UpdateKeyRegistrationResponse {
+    /**
+     * A list of all customer managed key registrations that failed to update.
+     */
+    FailedKeyRegistration?: FailedKeyRegistrationEntries;
+    /**
+     * A list of all customer managed key registrations that were successfully updated.
+     */
+    SuccessfulKeyRegistration?: SuccessfulKeyRegistrationEntries;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: NonEmptyString;
+  }
   export type UpdateLinkPermissionList = ResourcePermission[];
   export interface UpdatePublicSharingSettingsRequest {
     /**
@@ -19558,7 +19667,7 @@ declare namespace QuickSight {
      */
     Email: String;
     /**
-     * The Amazon QuickSight role of the user. The role can be one of the following default security cohorts:    READER: A user who has read-only access to dashboards.    AUTHOR: A user who can create data sources, datasets, analyses, and dashboards.    ADMIN: A user who is an author, who can also manage Amazon QuickSight settings.    READER_PRO: Reader Pro adds Generative BI capabilities to the Reader role. Reader Pros have access to Amazon Q Business, can build stories with Amazon Q, and can generate executive summaries from dashboards.    AUTHOR_PRO: Author Pro adds Generative BI capabilities to the Author role. Author Pros can author dashboards with natural language with Amazon Q, build stories with Amazon Q, create Topics for Q&amp;A, and generate executive summaries from dashboards.    ADMIN_PRO: Admin Pros are Author Pros who can also manage Amazon QuickSight administrative settings. Admin Pro users are billed at Author Pro pricing.   The name of the Amazon QuickSight role is invisible to the user except for the console screens dealing with permissions.
+     * The Amazon QuickSight role of the user. The role can be one of the following default security cohorts:    READER: A user who has read-only access to dashboards.    AUTHOR: A user who can create data sources, datasets, analyses, and dashboards.    ADMIN: A user who is an author, who can also manage Amazon QuickSight settings.    READER_PRO: Reader Pro adds Generative BI capabilities to the Reader role. Reader Pros have access to Amazon Q in Amazon QuickSight, can build stories with Amazon Q, and can generate executive summaries from dashboards.    AUTHOR_PRO: Author Pro adds Generative BI capabilities to the Author role. Author Pros can author dashboards with natural language with Amazon Q, build stories with Amazon Q, create Topics for Q&amp;A, and generate executive summaries from dashboards.    ADMIN_PRO: Admin Pros are Author Pros who can also manage Amazon QuickSight administrative settings. Admin Pro users are billed at Author Pro pricing.   The name of the Amazon QuickSight role is invisible to the user except for the console screens dealing with permissions.
      */
     Role: UserRole;
     /**
@@ -19688,7 +19797,7 @@ declare namespace QuickSight {
      */
     Email?: String;
     /**
-     * The Amazon QuickSight role for the user. The user role can be one of the following:.    READER: A user who has read-only access to dashboards.    AUTHOR: A user who can create data sources, datasets, analyses, and dashboards.    ADMIN: A user who is an author, who can also manage Amazon Amazon QuickSight settings.    READER_PRO: Reader Pro adds Generative BI capabilities to the Reader role. Reader Pros have access to Amazon Q Business, can build stories with Amazon Q, and can generate executive summaries from dashboards.    AUTHOR_PRO: Author Pro adds Generative BI capabilities to the Author role. Author Pros can author dashboards with natural language with Amazon Q, build stories with Amazon Q, create Topics for Q&amp;A, and generate executive summaries from dashboards.    ADMIN_PRO: Admin Pros are Author Pros who can also manage Amazon QuickSight administrative settings. Admin Pro users are billed at Author Pro pricing.    RESTRICTED_READER: This role isn't currently available for use.    RESTRICTED_AUTHOR: This role isn't currently available for use.  
+     * The Amazon QuickSight role for the user. The user role can be one of the following:.    READER: A user who has read-only access to dashboards.    AUTHOR: A user who can create data sources, datasets, analyses, and dashboards.    ADMIN: A user who is an author, who can also manage Amazon Amazon QuickSight settings.    READER_PRO: Reader Pro adds Generative BI capabilities to the Reader role. Reader Pros have access to Amazon Q in Amazon QuickSight, can build stories with Amazon Q, and can generate executive summaries from dashboards.    AUTHOR_PRO: Author Pro adds Generative BI capabilities to the Author role. Author Pros can author dashboards with natural language with Amazon Q, build stories with Amazon Q, create Topics for Q&amp;A, and generate executive summaries from dashboards.    ADMIN_PRO: Admin Pros are Author Pros who can also manage Amazon QuickSight administrative settings. Admin Pro users are billed at Author Pro pricing.    RESTRICTED_READER: This role isn't currently available for use.    RESTRICTED_AUTHOR: This role isn't currently available for use.  
      */
     Role?: UserRole;
     /**
