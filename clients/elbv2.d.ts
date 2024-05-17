@@ -729,7 +729,7 @@ declare namespace ELBv2 {
      */
     Type?: LoadBalancerTypeEnum;
     /**
-     * The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses). 
+     * Note: Internal load balancers must use the ipv4 IP address type. [Application Load Balancers] The IP address type. The possible values are ipv4 (for only IPv4 addresses), dualstack (for IPv4 and IPv6 addresses), and dualstack-without-public-ipv4 (for IPv6 only public addresses, with private IPv4 and IPv6 addresses). [Network Load Balancers] The IP address type. The possible values are ipv4 (for only IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses). You can’t specify dualstack for a load balancer with a UDP or TCP_UDP listener. [Gateway Load Balancers] The IP address type. The possible values are ipv4 (for only IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses).
      */
     IpAddressType?: IpAddressType;
     /**
@@ -1366,7 +1366,7 @@ declare namespace ELBv2 {
   export type IPv6Address = string;
   export type IgnoreClientCertificateExpiry = boolean;
   export type IpAddress = string;
-  export type IpAddressType = "ipv4"|"dualstack"|string;
+  export type IpAddressType = "ipv4"|"dualstack"|"dualstack-without-public-ipv4"|string;
   export type IsDefault = boolean;
   export interface Limit {
     /**
@@ -1468,7 +1468,7 @@ declare namespace ELBv2 {
      */
     SecurityGroups?: SecurityGroups;
     /**
-     * The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses).
+     * [Application Load Balancers] The type of IP addresses used for public or private connections by the subnets attached to your load balancer. The possible values are ipv4 (for only IPv4 addresses), dualstack (for IPv4 and IPv6 addresses), and dualstack-without-public-ipv4 (for IPv6 only public addresses, with private IPv4 and IPv6 addresses). [Network Load Balancers and Gateway Load Balancers] The type of IP addresses used for public or private connections by the subnets attached to your load balancer. The possible values are ipv4 (for only IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses).
      */
     IpAddressType?: IpAddressType;
     /**
@@ -1943,7 +1943,7 @@ declare namespace ELBv2 {
      */
     LoadBalancerArn: LoadBalancerArn;
     /**
-     * The IP address type. The possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses). You can’t specify dualstack for a load balancer with a UDP or TCP_UDP listener.
+     * Note: Internal load balancers must use the ipv4 IP address type. [Application Load Balancers] The IP address type. The possible values are ipv4 (for only IPv4 addresses), dualstack (for IPv4 and IPv6 addresses), and dualstack-without-public-ipv4 (for IPv6 only public addresses, with private IPv4 and IPv6 addresses). [Network Load Balancers] The IP address type. The possible values are ipv4 (for only IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses). You can’t specify dualstack for a load balancer with a UDP or TCP_UDP listener. [Gateway Load Balancers] The IP address type. The possible values are ipv4 (for only IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses).
      */
     IpAddressType: IpAddressType;
   }
@@ -2003,7 +2003,7 @@ declare namespace ELBv2 {
      */
     SubnetMappings?: SubnetMappings;
     /**
-     * [Network Load Balancers] The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses). You can’t specify dualstack for a load balancer with a UDP or TCP_UDP listener. [Gateway Load Balancers] The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses).
+     * [Application Load Balancers] The IP address type. The possible values are ipv4 (for only IPv4 addresses), dualstack (for IPv4 and IPv6 addresses), and dualstack-without-public-ipv4 (for IPv6 only public addresses, with private IPv4 and IPv6 addresses). [Network Load Balancers] The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses). You can’t specify dualstack for a load balancer with a UDP or TCP_UDP listener. [Gateway Load Balancers] The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses).
      */
     IpAddressType?: IpAddressType;
   }
@@ -2013,7 +2013,7 @@ declare namespace ELBv2 {
      */
     AvailabilityZones?: AvailabilityZones;
     /**
-     * [Network Load Balancers] The IP address type. [Gateway Load Balancers] The IP address type.
+     * [Application Load Balancers] The IP address type. [Network Load Balancers] The IP address type. [Gateway Load Balancers] The IP address type.
      */
     IpAddressType?: IpAddressType;
   }

@@ -1263,7 +1263,7 @@ declare namespace Transfer {
      */
     CertificateId?: CertificateId;
     /**
-     * Specifies whether this certificate is used for signing or encryption.
+     * Specifies how this certificate is used. It can be used in the following ways:    SIGNING: For signing AS2 messages    ENCRYPTION: For encrypting AS2 messages    TLS: For securing AS2 communications sent over HTTPS  
      */
     Usage?: CertificateUsageType;
     /**
@@ -1492,7 +1492,7 @@ declare namespace Transfer {
      */
     ProtocolDetails?: ProtocolDetails;
     /**
-     * Specifies the domain of the storage system that is used for file transfers.
+     * Specifies the domain of the storage system that is used for file transfers. There are two domains available: Amazon Simple Storage Service (Amazon S3) and Amazon Elastic File System (Amazon EFS). The default value is S3.
      */
     Domain?: Domain;
     /**
@@ -1778,7 +1778,7 @@ declare namespace Transfer {
   export type IdentityProviderType = "SERVICE_MANAGED"|"API_GATEWAY"|"AWS_DIRECTORY_SERVICE"|"AWS_LAMBDA"|string;
   export interface ImportCertificateRequest {
     /**
-     * Specifies whether this certificate is used for signing or encryption.
+     * Specifies how this certificate is used. It can be used in the following ways:    SIGNING: For signing AS2 messages    ENCRYPTION: For encrypting AS2 messages    TLS: For securing AS2 communications sent over HTTPS  
      */
     Usage: CertificateUsageType;
     /**
@@ -2230,7 +2230,7 @@ declare namespace Transfer {
      */
     CertificateId?: CertificateId;
     /**
-     * Specifies whether this certificate is used for signing or encryption.
+     * Specifies how this certificate is used. It can be used in the following ways:    SIGNING: For signing AS2 messages    ENCRYPTION: For encrypting AS2 messages    TLS: For securing AS2 communications sent over HTTPS  
      */
     Usage?: CertificateUsageType;
     /**
@@ -2341,7 +2341,7 @@ declare namespace Transfer {
      */
     Arn: Arn;
     /**
-     * Specifies the domain of the storage system that is used for file transfers.
+     * Specifies the domain of the storage system that is used for file transfers. There are two domains available: Amazon Simple Storage Service (Amazon S3) and Amazon Elastic File System (Amazon EFS). The default value is S3.
      */
     Domain?: Domain;
     /**

@@ -624,7 +624,7 @@ declare namespace CodeBuild {
      */
     logs?: LogsLocation;
     /**
-     * How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before timing out this build if it does not get marked as completed.
+     * How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to wait before timing out this build if it does not get marked as completed.
      */
     timeoutInMinutes?: WrapperInt;
     /**
@@ -936,6 +936,7 @@ declare namespace CodeBuild {
      */
     secondaryArtifacts?: ResolvedSecondaryArtifacts;
   }
+  export type BuildTimeOut = number;
   export type Builds = Build[];
   export type BuildsNotDeleted = BuildNotDeleted[];
   export type CacheMode = "LOCAL_DOCKER_LAYER_CACHE"|"LOCAL_SOURCE_CACHE"|"LOCAL_CUSTOM_CACHE"|string;
@@ -1112,9 +1113,9 @@ declare namespace CodeBuild {
      */
     serviceRole: NonEmptyString;
     /**
-     * How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before it times out any build that has not been marked as completed. The default is 60 minutes.
+     * How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to wait before it times out any build that has not been marked as completed. The default is 60 minutes.
      */
-    timeoutInMinutes?: TimeOut;
+    timeoutInMinutes?: BuildTimeOut;
     /**
      * The number of minutes a build is allowed to be queued before it times out. 
      */
@@ -2038,9 +2039,9 @@ declare namespace CodeBuild {
      */
     serviceRole?: NonEmptyString;
     /**
-     * How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before timing out any related build that did not get marked as completed. The default is 60 minutes.
+     * How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to wait before timing out any related build that did not get marked as completed. The default is 60 minutes.
      */
-    timeoutInMinutes?: TimeOut;
+    timeoutInMinutes?: BuildTimeOut;
     /**
      * The number of minutes a build is allowed to be queued before it times out. 
      */
@@ -2727,7 +2728,7 @@ declare namespace CodeBuild {
     /**
      * Overrides the build timeout specified in the batch build project.
      */
-    buildTimeoutInMinutesOverride?: TimeOut;
+    buildTimeoutInMinutesOverride?: BuildTimeOut;
     /**
      * The number of minutes a batch build is allowed to be queued before it times out.
      */
@@ -2861,9 +2862,9 @@ declare namespace CodeBuild {
      */
     privilegedModeOverride?: WrapperBoolean;
     /**
-     * The number of build timeout minutes, from 5 to 480 (8 hours), that overrides, for this build only, the latest setting already defined in the build project.
+     * The number of build timeout minutes, from 5 to 2160 (36 hours), that overrides, for this build only, the latest setting already defined in the build project.
      */
-    timeoutInMinutesOverride?: TimeOut;
+    timeoutInMinutesOverride?: BuildTimeOut;
     /**
      *  The number of minutes a build is allowed to be queued before it times out. 
      */
@@ -3097,9 +3098,9 @@ declare namespace CodeBuild {
      */
     serviceRole?: NonEmptyString;
     /**
-     * The replacement value in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before timing out any related build that did not get marked as completed.
+     * The replacement value in minutes, from 5 to 2160 (36 hours), for CodeBuild to wait before timing out any related build that did not get marked as completed.
      */
-    timeoutInMinutes?: TimeOut;
+    timeoutInMinutes?: BuildTimeOut;
     /**
      *  The number of minutes a build is allowed to be queued before it times out. 
      */

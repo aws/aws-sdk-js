@@ -181,6 +181,14 @@ declare class LakeFormation extends Service {
    */
   getDataCellsFilter(callback?: (err: AWSError, data: LakeFormation.Types.GetDataCellsFilterResponse) => void): Request<LakeFormation.Types.GetDataCellsFilterResponse, AWSError>;
   /**
+   * Returns the identity of the invoking principal.
+   */
+  getDataLakePrincipal(params: LakeFormation.Types.GetDataLakePrincipalRequest, callback?: (err: AWSError, data: LakeFormation.Types.GetDataLakePrincipalResponse) => void): Request<LakeFormation.Types.GetDataLakePrincipalResponse, AWSError>;
+  /**
+   * Returns the identity of the invoking principal.
+   */
+  getDataLakePrincipal(callback?: (err: AWSError, data: LakeFormation.Types.GetDataLakePrincipalResponse) => void): Request<LakeFormation.Types.GetDataLakePrincipalResponse, AWSError>;
+  /**
    * Retrieves the list of the data lake administrators of a Lake Formation-managed data lake. 
    */
   getDataLakeSettings(params: LakeFormation.Types.GetDataLakeSettingsRequest, callback?: (err: AWSError, data: LakeFormation.Types.GetDataLakeSettingsResponse) => void): Request<LakeFormation.Types.GetDataLakeSettingsResponse, AWSError>;
@@ -1068,6 +1076,14 @@ declare namespace LakeFormation {
      */
     DataCellsFilter?: DataCellsFilter;
   }
+  export interface GetDataLakePrincipalRequest {
+  }
+  export interface GetDataLakePrincipalResponse {
+    /**
+     * A unique identifier of the invoking principal.
+     */
+    Identity?: IdentityString;
+  }
   export interface GetDataLakeSettingsRequest {
     /**
      * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. 
@@ -1418,6 +1434,7 @@ declare namespace LakeFormation {
   export type IAMSAMLProviderArn = string;
   export type Identifier = string;
   export type IdentityCenterInstanceArn = string;
+  export type IdentityString = string;
   export type Integer = number;
   export type KeyString = string;
   export interface LFTag {

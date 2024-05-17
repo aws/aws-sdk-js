@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1622.0-->
+<!--LATEST=2.1623.0-->
 <!--ENTRYINSERT-->
+
+## 2.1623.0
+* feature: ApplicationAutoScaling: add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: CodeBuild: Aws CodeBuild now supports 36 hours build timeout
+* feature: ELBv2: This release adds dualstack-without-public-ipv4 IP address type for ALB.
+* feature: LakeFormation: Introduces a new API, GetDataLakePrincipal, that returns the identity of the invoking principal
+* feature: Transfer: Enable use of CloudFormation traits in Smithy model to improve generated CloudFormation schema from the Smithy API model.
 
 ## 2.1622.0
 * feature: ACMPCA: This release adds support for waiters to fail on AccessDeniedException when having insufficient permissions
