@@ -428,6 +428,10 @@ declare namespace BedrockAgent {
      */
     foundationModel?: ModelIdentifier;
     /**
+     * The guardrails configuration assigned to the agent.
+     */
+    guardrailConfiguration?: GuardrailConfiguration;
+    /**
      * The number of seconds for which Amazon Bedrock keeps information about a user's conversation with the agent. A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Bedrock deletes any data provided before the timeout.
      */
     idleSessionTTLInSeconds: SessionTTL;
@@ -687,6 +691,10 @@ declare namespace BedrockAgent {
      */
     description?: Description;
     /**
+     * The details of the guardrails configuration in the agent summary.
+     */
+    guardrailConfiguration?: GuardrailConfiguration;
+    /**
      * The latest version of the agent.
      */
     latestAgentVersion?: Version;
@@ -737,6 +745,10 @@ declare namespace BedrockAgent {
      */
     foundationModel?: ModelIdentifier;
     /**
+     * The guardrails configuration assigned to the agent version.
+     */
+    guardrailConfiguration?: GuardrailConfiguration;
+    /**
      * The number of seconds for which Amazon Bedrock keeps information about a user's conversation with the agent. A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Bedrock deletes any data provided before the timeout.
      */
     idleSessionTTLInSeconds: SessionTTL;
@@ -783,6 +795,10 @@ declare namespace BedrockAgent {
      * The description of the version of the agent.
      */
     description?: Description;
+    /**
+     * The details of the guardrails configuration in the agent version summary.
+     */
+    guardrailConfiguration?: GuardrailConfiguration;
     /**
      * The time at which the version was last updated.
      */
@@ -938,6 +954,10 @@ declare namespace BedrockAgent {
      * The foundation model to be used for orchestration by the agent you create.
      */
     foundationModel?: ModelIdentifier;
+    /**
+     * The unique Guardrail configuration assigned to the agent when it is created.
+     */
+    guardrailConfiguration?: GuardrailConfiguration;
     /**
      * The number of seconds for which Amazon Bedrock keeps information about a user's conversation with the agent. A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Bedrock deletes any data provided before the timeout.
      */
@@ -1449,6 +1469,18 @@ declare namespace BedrockAgent {
      */
     knowledgeBase: KnowledgeBase;
   }
+  export interface GuardrailConfiguration {
+    /**
+     * The guardrails identifier assigned to the guardrails configuration.
+     */
+    guardrailIdentifier?: GuardrailIdentifier;
+    /**
+     * The guardrails version assigned to the guardrails configuration.
+     */
+    guardrailVersion?: GuardrailVersion;
+  }
+  export type GuardrailIdentifier = string;
+  export type GuardrailVersion = string;
   export type Id = string;
   export interface InferenceConfiguration {
     /**
@@ -2069,7 +2101,7 @@ declare namespace BedrockAgent {
   export type PrimitiveLong = number;
   export interface PromptConfiguration {
     /**
-     * Defines the prompt template with which to replace the default prompt template. You can use placeholder variables in the base prompt template to customize the prompt. For more information, see Prompt template placeholder variables.
+     * Defines the prompt template with which to replace the default prompt template. You can use placeholder variables in the base prompt template to customize the prompt. For more information, see Prompt template placeholder variables. For more information, see Configure the prompt templates.
      */
     basePromptTemplate?: BasePromptTemplate;
     /**
@@ -2096,7 +2128,7 @@ declare namespace BedrockAgent {
   export type PromptConfigurations = PromptConfiguration[];
   export interface PromptOverrideConfiguration {
     /**
-     * The ARN of the Lambda function to use when parsing the raw foundation model output in parts of the agent sequence. If you specify this field, at least one of the promptConfigurations must contain a parserMode value that is set to OVERRIDDEN.
+     * The ARN of the Lambda function to use when parsing the raw foundation model output in parts of the agent sequence. If you specify this field, at least one of the promptConfigurations must contain a parserMode value that is set to OVERRIDDEN. For more information, see Parser Lambda function in Agents for Amazon Bedrock.
      */
     overrideLambda?: LambdaArn;
     /**
@@ -2438,6 +2470,10 @@ declare namespace BedrockAgent {
      * Specifies a new foundation model to be used for orchestration by the agent.
      */
     foundationModel: ModelIdentifier;
+    /**
+     * The unique Guardrail configuration assigned to the agent when it is updated.
+     */
+    guardrailConfiguration?: GuardrailConfiguration;
     /**
      * The number of seconds for which Amazon Bedrock keeps information about a user's conversation with the agent. A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Bedrock deletes any data provided before the timeout.
      */

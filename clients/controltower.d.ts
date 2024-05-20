@@ -28,11 +28,11 @@ declare class ControlTower extends Service {
    */
   deleteLandingZone(callback?: (err: AWSError, data: ControlTower.Types.DeleteLandingZoneOutput) => void): Request<ControlTower.Types.DeleteLandingZoneOutput, AWSError>;
   /**
-   * Disable an EnabledBaseline resource on the specified Target. This API starts an asynchronous operation to remove all resources deployed as part of the baseline enablement. The resource will vary depending on the enabled baseline.
+   * Disable an EnabledBaseline resource on the specified Target. This API starts an asynchronous operation to remove all resources deployed as part of the baseline enablement. The resource will vary depending on the enabled baseline. For usage examples, see  the Amazon Web Services Control Tower User Guide .
    */
   disableBaseline(params: ControlTower.Types.DisableBaselineInput, callback?: (err: AWSError, data: ControlTower.Types.DisableBaselineOutput) => void): Request<ControlTower.Types.DisableBaselineOutput, AWSError>;
   /**
-   * Disable an EnabledBaseline resource on the specified Target. This API starts an asynchronous operation to remove all resources deployed as part of the baseline enablement. The resource will vary depending on the enabled baseline.
+   * Disable an EnabledBaseline resource on the specified Target. This API starts an asynchronous operation to remove all resources deployed as part of the baseline enablement. The resource will vary depending on the enabled baseline. For usage examples, see  the Amazon Web Services Control Tower User Guide .
    */
   disableBaseline(callback?: (err: AWSError, data: ControlTower.Types.DisableBaselineOutput) => void): Request<ControlTower.Types.DisableBaselineOutput, AWSError>;
   /**
@@ -44,11 +44,11 @@ declare class ControlTower extends Service {
    */
   disableControl(callback?: (err: AWSError, data: ControlTower.Types.DisableControlOutput) => void): Request<ControlTower.Types.DisableControlOutput, AWSError>;
   /**
-   * Enable (apply) a Baseline to a Target. This API starts an asynchronous operation to deploy resources specified by the Baseline to the specified Target.
+   * Enable (apply) a Baseline to a Target. This API starts an asynchronous operation to deploy resources specified by the Baseline to the specified Target. For usage examples, see  the Amazon Web Services Control Tower User Guide .
    */
   enableBaseline(params: ControlTower.Types.EnableBaselineInput, callback?: (err: AWSError, data: ControlTower.Types.EnableBaselineOutput) => void): Request<ControlTower.Types.EnableBaselineOutput, AWSError>;
   /**
-   * Enable (apply) a Baseline to a Target. This API starts an asynchronous operation to deploy resources specified by the Baseline to the specified Target.
+   * Enable (apply) a Baseline to a Target. This API starts an asynchronous operation to deploy resources specified by the Baseline to the specified Target. For usage examples, see  the Amazon Web Services Control Tower User Guide .
    */
   enableBaseline(callback?: (err: AWSError, data: ControlTower.Types.EnableBaselineOutput) => void): Request<ControlTower.Types.EnableBaselineOutput, AWSError>;
   /**
@@ -60,19 +60,19 @@ declare class ControlTower extends Service {
    */
   enableControl(callback?: (err: AWSError, data: ControlTower.Types.EnableControlOutput) => void): Request<ControlTower.Types.EnableControlOutput, AWSError>;
   /**
-   * Retrieve details about an existing Baseline resource by specifying its identifier.
+   * Retrieve details about an existing Baseline resource by specifying its identifier. For usage examples, see  the Amazon Web Services Control Tower User Guide .
    */
   getBaseline(params: ControlTower.Types.GetBaselineInput, callback?: (err: AWSError, data: ControlTower.Types.GetBaselineOutput) => void): Request<ControlTower.Types.GetBaselineOutput, AWSError>;
   /**
-   * Retrieve details about an existing Baseline resource by specifying its identifier.
+   * Retrieve details about an existing Baseline resource by specifying its identifier. For usage examples, see  the Amazon Web Services Control Tower User Guide .
    */
   getBaseline(callback?: (err: AWSError, data: ControlTower.Types.GetBaselineOutput) => void): Request<ControlTower.Types.GetBaselineOutput, AWSError>;
   /**
-   * Returns the details of an asynchronous baseline operation, as initiated by any of these APIs: EnableBaseline, DisableBaseline, UpdateEnabledBaseline, ResetEnabledBaseline. A status message is displayed in case of operation failure.
+   * Returns the details of an asynchronous baseline operation, as initiated by any of these APIs: EnableBaseline, DisableBaseline, UpdateEnabledBaseline, ResetEnabledBaseline. A status message is displayed in case of operation failure. For usage examples, see  the Amazon Web Services Control Tower User Guide .
    */
   getBaselineOperation(params: ControlTower.Types.GetBaselineOperationInput, callback?: (err: AWSError, data: ControlTower.Types.GetBaselineOperationOutput) => void): Request<ControlTower.Types.GetBaselineOperationOutput, AWSError>;
   /**
-   * Returns the details of an asynchronous baseline operation, as initiated by any of these APIs: EnableBaseline, DisableBaseline, UpdateEnabledBaseline, ResetEnabledBaseline. A status message is displayed in case of operation failure.
+   * Returns the details of an asynchronous baseline operation, as initiated by any of these APIs: EnableBaseline, DisableBaseline, UpdateEnabledBaseline, ResetEnabledBaseline. A status message is displayed in case of operation failure. For usage examples, see  the Amazon Web Services Control Tower User Guide .
    */
   getBaselineOperation(callback?: (err: AWSError, data: ControlTower.Types.GetBaselineOperationOutput) => void): Request<ControlTower.Types.GetBaselineOperationOutput, AWSError>;
   /**
@@ -108,27 +108,35 @@ declare class ControlTower extends Service {
    */
   getLandingZone(callback?: (err: AWSError, data: ControlTower.Types.GetLandingZoneOutput) => void): Request<ControlTower.Types.GetLandingZoneOutput, AWSError>;
   /**
-   * Returns the status of the specified landing zone operation. Details for an operation are available for 60 days.
+   * Returns the status of the specified landing zone operation. Details for an operation are available for 90 days.
    */
   getLandingZoneOperation(params: ControlTower.Types.GetLandingZoneOperationInput, callback?: (err: AWSError, data: ControlTower.Types.GetLandingZoneOperationOutput) => void): Request<ControlTower.Types.GetLandingZoneOperationOutput, AWSError>;
   /**
-   * Returns the status of the specified landing zone operation. Details for an operation are available for 60 days.
+   * Returns the status of the specified landing zone operation. Details for an operation are available for 90 days.
    */
   getLandingZoneOperation(callback?: (err: AWSError, data: ControlTower.Types.GetLandingZoneOperationOutput) => void): Request<ControlTower.Types.GetLandingZoneOperationOutput, AWSError>;
   /**
-   * Returns a summary list of all available baselines.
+   * Returns a summary list of all available baselines. For usage examples, see  the Amazon Web Services Control Tower User Guide .
    */
   listBaselines(params: ControlTower.Types.ListBaselinesInput, callback?: (err: AWSError, data: ControlTower.Types.ListBaselinesOutput) => void): Request<ControlTower.Types.ListBaselinesOutput, AWSError>;
   /**
-   * Returns a summary list of all available baselines.
+   * Returns a summary list of all available baselines. For usage examples, see  the Amazon Web Services Control Tower User Guide .
    */
   listBaselines(callback?: (err: AWSError, data: ControlTower.Types.ListBaselinesOutput) => void): Request<ControlTower.Types.ListBaselinesOutput, AWSError>;
   /**
-   * Returns a list of summaries describing EnabledBaseline resources. You can filter the list by the corresponding Baseline or Target of the EnabledBaseline resources.
+   * Provides a list of operations in progress or queued.
+   */
+  listControlOperations(params: ControlTower.Types.ListControlOperationsInput, callback?: (err: AWSError, data: ControlTower.Types.ListControlOperationsOutput) => void): Request<ControlTower.Types.ListControlOperationsOutput, AWSError>;
+  /**
+   * Provides a list of operations in progress or queued.
+   */
+  listControlOperations(callback?: (err: AWSError, data: ControlTower.Types.ListControlOperationsOutput) => void): Request<ControlTower.Types.ListControlOperationsOutput, AWSError>;
+  /**
+   * Returns a list of summaries describing EnabledBaseline resources. You can filter the list by the corresponding Baseline or Target of the EnabledBaseline resources. For usage examples, see  the Amazon Web Services Control Tower User Guide .
    */
   listEnabledBaselines(params: ControlTower.Types.ListEnabledBaselinesInput, callback?: (err: AWSError, data: ControlTower.Types.ListEnabledBaselinesOutput) => void): Request<ControlTower.Types.ListEnabledBaselinesOutput, AWSError>;
   /**
-   * Returns a list of summaries describing EnabledBaseline resources. You can filter the list by the corresponding Baseline or Target of the EnabledBaseline resources.
+   * Returns a list of summaries describing EnabledBaseline resources. You can filter the list by the corresponding Baseline or Target of the EnabledBaseline resources. For usage examples, see  the Amazon Web Services Control Tower User Guide .
    */
   listEnabledBaselines(callback?: (err: AWSError, data: ControlTower.Types.ListEnabledBaselinesOutput) => void): Request<ControlTower.Types.ListEnabledBaselinesOutput, AWSError>;
   /**
@@ -156,11 +164,11 @@ declare class ControlTower extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: ControlTower.Types.ListTagsForResourceOutput) => void): Request<ControlTower.Types.ListTagsForResourceOutput, AWSError>;
   /**
-   * Re-enables an EnabledBaseline resource. For example, this API can re-apply the existing Baseline after a new member account is moved to the target OU.
+   * Re-enables an EnabledBaseline resource. For example, this API can re-apply the existing Baseline after a new member account is moved to the target OU. For usage examples, see  the Amazon Web Services Control Tower User Guide .
    */
   resetEnabledBaseline(params: ControlTower.Types.ResetEnabledBaselineInput, callback?: (err: AWSError, data: ControlTower.Types.ResetEnabledBaselineOutput) => void): Request<ControlTower.Types.ResetEnabledBaselineOutput, AWSError>;
   /**
-   * Re-enables an EnabledBaseline resource. For example, this API can re-apply the existing Baseline after a new member account is moved to the target OU.
+   * Re-enables an EnabledBaseline resource. For example, this API can re-apply the existing Baseline after a new member account is moved to the target OU. For usage examples, see  the Amazon Web Services Control Tower User Guide .
    */
   resetEnabledBaseline(callback?: (err: AWSError, data: ControlTower.Types.ResetEnabledBaselineOutput) => void): Request<ControlTower.Types.ResetEnabledBaselineOutput, AWSError>;
   /**
@@ -188,11 +196,11 @@ declare class ControlTower extends Service {
    */
   untagResource(callback?: (err: AWSError, data: ControlTower.Types.UntagResourceOutput) => void): Request<ControlTower.Types.UntagResourceOutput, AWSError>;
   /**
-   * Updates an EnabledBaseline resource's applied parameters or version.
+   * Updates an EnabledBaseline resource's applied parameters or version. For usage examples, see  the Amazon Web Services Control Tower User Guide .
    */
   updateEnabledBaseline(params: ControlTower.Types.UpdateEnabledBaselineInput, callback?: (err: AWSError, data: ControlTower.Types.UpdateEnabledBaselineOutput) => void): Request<ControlTower.Types.UpdateEnabledBaselineOutput, AWSError>;
   /**
-   * Updates an EnabledBaseline resource's applied parameters or version.
+   * Updates an EnabledBaseline resource's applied parameters or version. For usage examples, see  the Amazon Web Services Control Tower User Guide .
    */
   updateEnabledBaseline(callback?: (err: AWSError, data: ControlTower.Types.UpdateEnabledBaselineOutput) => void): Request<ControlTower.Types.UpdateEnabledBaselineOutput, AWSError>;
   /**
@@ -260,11 +268,24 @@ declare namespace ControlTower {
   export type BaselineVersion = string;
   export type Baselines = BaselineSummary[];
   export type ControlIdentifier = string;
+  export type ControlIdentifiers = ControlIdentifier[];
   export interface ControlOperation {
+    /**
+     * The controlIdentifier of the control for the operation.
+     */
+    controlIdentifier?: ControlIdentifier;
+    /**
+     * The controlIdentifier of the enabled control.
+     */
+    enabledControlIdentifier?: Arn;
     /**
      * The time that the operation finished.
      */
     endTime?: SyntheticTimestamp_date_time;
+    /**
+     * The identifier of the specified operation.
+     */
+    operationIdentifier?: OperationIdentifier;
     /**
      * One of ENABLE_CONTROL or DISABLE_CONTROL.
      */
@@ -281,12 +302,79 @@ declare namespace ControlTower {
      * If the operation result is FAILED, this string contains a message explaining why the operation failed.
      */
     statusMessage?: String;
+    /**
+     * The target upon which the control operation is working.
+     */
+    targetIdentifier?: TargetIdentifier;
+  }
+  export interface ControlOperationFilter {
+    /**
+     * The set of controlIdentifier returned by the filter.
+     */
+    controlIdentifiers?: ControlIdentifiers;
+    /**
+     * The set of ControlOperation objects returned by the filter.
+     */
+    controlOperationTypes?: ControlOperationTypes;
+    /**
+     * The set controlIdentifier of enabled controls selected by the filter.
+     */
+    enabledControlIdentifiers?: EnabledControlIdentifiers;
+    /**
+     * Lists the status of control operations.
+     */
+    statuses?: ControlOperationStatuses;
+    /**
+     * The set of targetIdentifier objects returned by the filter.
+     */
+    targetIdentifiers?: TargetIdentifiers;
   }
   export type ControlOperationStatus = "SUCCEEDED"|"FAILED"|"IN_PROGRESS"|string;
+  export type ControlOperationStatuses = ControlOperationStatus[];
+  export interface ControlOperationSummary {
+    /**
+     * The controlIdentifier of a control.
+     */
+    controlIdentifier?: ControlIdentifier;
+    /**
+     * The controlIdentifier of an enabled control.
+     */
+    enabledControlIdentifier?: Arn;
+    /**
+     * The time at which the control operation was completed.
+     */
+    endTime?: SyntheticTimestamp_date_time;
+    /**
+     * The unique identifier of a control operation.
+     */
+    operationIdentifier?: OperationIdentifier;
+    /**
+     * The type of operation.
+     */
+    operationType?: ControlOperationType;
+    /**
+     * The time at which a control operation began.
+     */
+    startTime?: SyntheticTimestamp_date_time;
+    /**
+     * The status of the specified control operation.
+     */
+    status?: ControlOperationStatus;
+    /**
+     * A speficic message displayed as part of the control status.
+     */
+    statusMessage?: String;
+    /**
+     * The unique identifier of the target of a control operation.
+     */
+    targetIdentifier?: TargetIdentifier;
+  }
   export type ControlOperationType = "ENABLE_CONTROL"|"DISABLE_CONTROL"|"UPDATE_ENABLED_CONTROL"|string;
+  export type ControlOperationTypes = ControlOperationType[];
+  export type ControlOperations = ControlOperationSummary[];
   export interface CreateLandingZoneInput {
     /**
-     * The manifest.yaml file is a text file that describes your Amazon Web Services resources. For examples, review The manifest file. 
+     * The manifest JSON file is a text file that describes your Amazon Web Services resources. For examples, review Launch your landing zone. 
      */
     manifest: Manifest;
     /**
@@ -357,6 +445,7 @@ declare namespace ControlTower {
      */
     driftStatus?: DriftStatus;
   }
+  export type DriftStatuses = DriftStatus[];
   export interface EnableBaselineInput {
     /**
      * The ARN of the baseline to be enabled.
@@ -526,6 +615,21 @@ declare namespace ControlTower {
      */
     targetRegions?: TargetRegions;
   }
+  export interface EnabledControlFilter {
+    /**
+     * The set of controlIdentifier returned by the filter. 
+     */
+    controlIdentifiers?: ControlIdentifiers;
+    /**
+     * A list of DriftStatus items.
+     */
+    driftStatuses?: DriftStatuses;
+    /**
+     * A list of EnablementStatus items.
+     */
+    statuses?: EnablementStatuses;
+  }
+  export type EnabledControlIdentifiers = Arn[];
   export interface EnabledControlParameter {
     /**
      * The key of a key/value pair.
@@ -582,6 +686,7 @@ declare namespace ControlTower {
      */
     status?: EnablementStatus;
   }
+  export type EnablementStatuses = EnablementStatus[];
   export interface GetBaselineInput {
     /**
      * The ARN of the Baseline resource to be retrieved.
@@ -688,7 +793,7 @@ declare namespace ControlTower {
      */
     latestAvailableVersion?: LandingZoneVersion;
     /**
-     * The landing zone manifest.yaml text file that specifies the landing zone configurations. 
+     * The landing zone manifest JSON text file that specifies the landing zone configurations. 
      */
     manifest: Manifest;
     /**
@@ -760,6 +865,32 @@ declare namespace ControlTower {
      */
     nextToken?: String;
   }
+  export interface ListControlOperationsInput {
+    /**
+     * An input filter for the ListControlOperations API that lets you select the types of control operations to view.
+     */
+    filter?: ControlOperationFilter;
+    /**
+     * The maximum number of results to be shown.
+     */
+    maxResults?: ListControlOperationsMaxResults;
+    /**
+     * A pagination token.
+     */
+    nextToken?: ListControlOperationsNextToken;
+  }
+  export type ListControlOperationsMaxResults = number;
+  export type ListControlOperationsNextToken = string;
+  export interface ListControlOperationsOutput {
+    /**
+     * Returns a list of output from control operations. PLACEHOLDER 
+     */
+    controlOperations: ControlOperations;
+    /**
+     * A pagination token.
+     */
+    nextToken?: ListControlOperationsNextToken;
+  }
   export interface ListEnabledBaselinesInput {
     /**
      * A filter applied on the ListEnabledBaseline operation. Allowed filters are baselineIdentifiers and targetIdentifiers. The filter can be applied for either, or both.
@@ -788,6 +919,10 @@ declare namespace ControlTower {
   }
   export interface ListEnabledControlsInput {
     /**
+     * An input filter for the ListCEnabledControls API that lets you select the types of control operations to view.
+     */
+    filter?: EnabledControlFilter;
+    /**
      * How many results to return per API call.
      */
     maxResults?: MaxResults;
@@ -798,7 +933,7 @@ declare namespace ControlTower {
     /**
      * The ARN of the organizational unit. For information on how to find the targetIdentifier, see the overview page.
      */
-    targetIdentifier: TargetIdentifier;
+    targetIdentifier?: TargetIdentifier;
   }
   export interface ListEnabledControlsOutput {
     /**
@@ -898,6 +1033,7 @@ declare namespace ControlTower {
   }
   export type TagValue = string;
   export type TargetIdentifier = string;
+  export type TargetIdentifiers = TargetIdentifier[];
   export type TargetRegions = Region[];
   export type Timestamp = Date;
   export interface UntagResourceInput {
@@ -954,7 +1090,7 @@ declare namespace ControlTower {
      */
     landingZoneIdentifier: String;
     /**
-     * The manifest.yaml file is a text file that describes your Amazon Web Services resources. For examples, review The manifest file.
+     * The manifest JSON file is a text file that describes your Amazon Web Services resources. For examples, review Launch your landing zone. 
      */
     manifest: Manifest;
     /**

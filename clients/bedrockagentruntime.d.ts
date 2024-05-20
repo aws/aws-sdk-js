@@ -366,6 +366,26 @@ declare namespace BedrockAgentRuntime {
     promptTemplate?: PromptTemplate;
   }
   export type GuadrailAction = "INTERVENED"|"NONE"|string;
+  export type GuardrailAction = "INTERVENED"|"NONE"|string;
+  export interface GuardrailAssessment {
+    /**
+     * Content policy details of the Guardrail.
+     */
+    contentPolicy?: GuardrailContentPolicyAssessment;
+    /**
+     * Sensitive Information policy details of Guardrail.
+     */
+    sensitiveInformationPolicy?: GuardrailSensitiveInformationPolicyAssessment;
+    /**
+     * Topic policy details of the Guardrail.
+     */
+    topicPolicy?: GuardrailTopicPolicyAssessment;
+    /**
+     * Word policy details of the Guardrail.
+     */
+    wordPolicy?: GuardrailWordPolicyAssessment;
+  }
+  export type GuardrailAssessmentList = GuardrailAssessment[];
   export interface GuardrailConfiguration {
     /**
      * The unique identifier for the guardrail.
@@ -378,6 +398,155 @@ declare namespace BedrockAgentRuntime {
   }
   export type GuardrailConfigurationGuardrailIdString = string;
   export type GuardrailConfigurationGuardrailVersionString = string;
+  export interface GuardrailContentFilter {
+    /**
+     * The action placed on the content by the Guardrail filter.
+     */
+    action?: GuardrailContentPolicyAction;
+    /**
+     * The confidence level regarding the content detected in the filter by the Guardrail.
+     */
+    confidence?: GuardrailContentFilterConfidence;
+    /**
+     * The type of content detected in the filter by the Guardrail.
+     */
+    type?: GuardrailContentFilterType;
+  }
+  export type GuardrailContentFilterConfidence = "NONE"|"LOW"|"MEDIUM"|"HIGH"|string;
+  export type GuardrailContentFilterList = GuardrailContentFilter[];
+  export type GuardrailContentFilterType = "INSULTS"|"HATE"|"SEXUAL"|"VIOLENCE"|"MISCONDUCT"|"PROMPT_ATTACK"|string;
+  export type GuardrailContentPolicyAction = "BLOCKED"|string;
+  export interface GuardrailContentPolicyAssessment {
+    /**
+     * The filter details of the policy assessment used in the Guardrails filter.
+     */
+    filters?: GuardrailContentFilterList;
+  }
+  export interface GuardrailCustomWord {
+    /**
+     * The action details for the custom word filter in the Guardrail.
+     */
+    action?: GuardrailWordPolicyAction;
+    /**
+     * The match details for the custom word filter in the Guardrail.
+     */
+    match?: String;
+  }
+  export type GuardrailCustomWordList = GuardrailCustomWord[];
+  export interface GuardrailManagedWord {
+    /**
+     * The action details for the managed word filter in the Guardrail.
+     */
+    action?: GuardrailWordPolicyAction;
+    /**
+     * The match details for the managed word filter in the Guardrail.
+     */
+    match?: String;
+    /**
+     * The type details for the managed word filter in the Guardrail.
+     */
+    type?: GuardrailManagedWordType;
+  }
+  export type GuardrailManagedWordList = GuardrailManagedWord[];
+  export type GuardrailManagedWordType = "PROFANITY"|string;
+  export interface GuardrailPiiEntityFilter {
+    /**
+     * The action of the Guardrail filter to identify and remove PII.
+     */
+    action?: GuardrailSensitiveInformationPolicyAction;
+    /**
+     * The match to settings in the Guardrail filter to identify and remove PII.
+     */
+    match?: String;
+    /**
+     * The type of PII the Guardrail filter has identified and removed.
+     */
+    type?: GuardrailPiiEntityType;
+  }
+  export type GuardrailPiiEntityFilterList = GuardrailPiiEntityFilter[];
+  export type GuardrailPiiEntityType = "ADDRESS"|"AGE"|"AWS_ACCESS_KEY"|"AWS_SECRET_KEY"|"CA_HEALTH_NUMBER"|"CA_SOCIAL_INSURANCE_NUMBER"|"CREDIT_DEBIT_CARD_CVV"|"CREDIT_DEBIT_CARD_EXPIRY"|"CREDIT_DEBIT_CARD_NUMBER"|"DRIVER_ID"|"EMAIL"|"INTERNATIONAL_BANK_ACCOUNT_NUMBER"|"IP_ADDRESS"|"LICENSE_PLATE"|"MAC_ADDRESS"|"NAME"|"PASSWORD"|"PHONE"|"PIN"|"SWIFT_CODE"|"UK_NATIONAL_HEALTH_SERVICE_NUMBER"|"UK_NATIONAL_INSURANCE_NUMBER"|"UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"|"URL"|"USERNAME"|"US_BANK_ACCOUNT_NUMBER"|"US_BANK_ROUTING_NUMBER"|"US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"|"US_PASSPORT_NUMBER"|"US_SOCIAL_SECURITY_NUMBER"|"VEHICLE_IDENTIFICATION_NUMBER"|string;
+  export interface GuardrailRegexFilter {
+    /**
+     * The action details for the regex filter used in the Guardrail.
+     */
+    action?: GuardrailSensitiveInformationPolicyAction;
+    /**
+     * The match details for the regex filter used in the Guardrail.
+     */
+    match?: String;
+    /**
+     * The name details for the regex filter used in the Guardrail.
+     */
+    name?: String;
+    /**
+     * The regex details for the regex filter used in the Guardrail.
+     */
+    regex?: String;
+  }
+  export type GuardrailRegexFilterList = GuardrailRegexFilter[];
+  export type GuardrailSensitiveInformationPolicyAction = "BLOCKED"|"ANONYMIZED"|string;
+  export interface GuardrailSensitiveInformationPolicyAssessment {
+    /**
+     * The details of the PII entities used in the sensitive policy assessment for the Guardrail.
+     */
+    piiEntities?: GuardrailPiiEntityFilterList;
+    /**
+     * The details of the regexes used in the sensitive policy assessment for the Guardrail.
+     */
+    regexes?: GuardrailRegexFilterList;
+  }
+  export interface GuardrailTopic {
+    /**
+     * The action details on a specific topic in the Guardrail.
+     */
+    action?: GuardrailTopicPolicyAction;
+    /**
+     * The name details on a specific topic in the Guardrail.
+     */
+    name?: String;
+    /**
+     * The type details on a specific topic in the Guardrail.
+     */
+    type?: GuardrailTopicType;
+  }
+  export type GuardrailTopicList = GuardrailTopic[];
+  export type GuardrailTopicPolicyAction = "BLOCKED"|string;
+  export interface GuardrailTopicPolicyAssessment {
+    /**
+     * The topic details of the policy assessment used in the Guardrail.
+     */
+    topics?: GuardrailTopicList;
+  }
+  export type GuardrailTopicType = "DENY"|string;
+  export interface GuardrailTrace {
+    /**
+     * The trace action details used with the Guardrail.
+     */
+    action?: GuardrailAction;
+    /**
+     * The details of the input assessments used in the Guardrail Trace.
+     */
+    inputAssessments?: GuardrailAssessmentList;
+    /**
+     * The details of the output assessments used in the Guardrail Trace.
+     */
+    outputAssessments?: GuardrailAssessmentList;
+    /**
+     * The details of the trace Id used in the Guardrail Trace.
+     */
+    traceId?: TraceId;
+  }
+  export type GuardrailWordPolicyAction = "BLOCKED"|string;
+  export interface GuardrailWordPolicyAssessment {
+    /**
+     * The custom word details for words defined in the Guardrail filter.
+     */
+    customWords?: GuardrailCustomWordList;
+    /**
+     * The managed word lists for words defined in the Guardrail filter.
+     */
+    managedWordLists?: GuardrailManagedWordList;
+  }
   export type Identifier = string;
   export interface InferenceConfig {
     /**
@@ -1086,6 +1255,10 @@ declare namespace BedrockAgentRuntime {
      * Contains information about the failure of the interaction.
      */
     failureTrace?: FailureTrace;
+    /**
+     * The trace details for a trace defined in the Guardrail filter.
+     */
+    guardrailTrace?: GuardrailTrace;
     /**
      * Details about the orchestration step, in which the agent determines the order in which actions are executed and which knowledge bases are retrieved.
      */

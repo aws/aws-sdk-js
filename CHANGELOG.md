@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1623.0-->
+<!--LATEST=2.1624.0-->
 <!--ENTRYINSERT-->
+
+## 2.1624.0
+* feature: BedrockAgent: This release adds support for using Guardrails with Bedrock Agents.
+* feature: BedrockAgentRuntime: This release adds support for using Guardrails with Bedrock Agents.
+* feature: ControlTower: Added ListControlOperations API and filtering support for ListEnabledControls API. Updates also includes added metadata for enabled controls and control operations.
+* feature: OSIS: Add support for creating an OpenSearch Ingestion pipeline that is attached to a provided VPC. Add information about the destinations of an OpenSearch Ingestion pipeline to the GetPipeline and ListPipelines APIs.
+* feature: RDS: This release adds support for EngineLifecycleSupport on DBInstances, DBClusters, and GlobalClusters.
+* feature: SecretsManager: add v2 smoke tests and smithy smokeTests trait for SDK testing
 
 ## 2.1623.0
 * feature: ApplicationAutoScaling: add v2 smoke tests and smithy smokeTests trait for SDK testing.

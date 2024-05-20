@@ -4,6 +4,9 @@
     "apiVersion": "2022-01-01",
     "endpointPrefix": "osis",
     "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
     "serviceFullName": "Amazon OpenSearch Ingestion",
     "serviceId": "OSIS",
     "signatureVersion": "v4",
@@ -23,6 +26,9 @@
         "shape": "CreatePipelineResponse"
       },
       "errors": [
+        {
+          "shape": "DisabledOperationException"
+        },
         {
           "shape": "LimitExceededException"
         },
@@ -58,6 +64,9 @@
       },
       "errors": [
         {
+          "shape": "DisabledOperationException"
+        },
+        {
           "shape": "ValidationException"
         },
         {
@@ -89,6 +98,9 @@
       },
       "errors": [
         {
+          "shape": "DisabledOperationException"
+        },
+        {
           "shape": "ValidationException"
         },
         {
@@ -116,6 +128,9 @@
         "shape": "GetPipelineBlueprintResponse"
       },
       "errors": [
+        {
+          "shape": "DisabledOperationException"
+        },
         {
           "shape": "AccessDeniedException"
         },
@@ -145,6 +160,9 @@
       },
       "errors": [
         {
+          "shape": "DisabledOperationException"
+        },
+        {
           "shape": "ValidationException"
         },
         {
@@ -172,6 +190,9 @@
         "shape": "ListPipelineBlueprintsResponse"
       },
       "errors": [
+        {
+          "shape": "DisabledOperationException"
+        },
         {
           "shape": "ValidationException"
         },
@@ -201,6 +222,9 @@
       },
       "errors": [
         {
+          "shape": "DisabledOperationException"
+        },
+        {
           "shape": "ValidationException"
         },
         {
@@ -229,6 +253,9 @@
       },
       "errors": [
         {
+          "shape": "DisabledOperationException"
+        },
+        {
           "shape": "ValidationException"
         },
         {
@@ -256,6 +283,9 @@
         "shape": "StartPipelineResponse"
       },
       "errors": [
+        {
+          "shape": "DisabledOperationException"
+        },
         {
           "shape": "AccessDeniedException"
         },
@@ -288,6 +318,9 @@
       },
       "errors": [
         {
+          "shape": "DisabledOperationException"
+        },
+        {
           "shape": "AccessDeniedException"
         },
         {
@@ -318,6 +351,9 @@
         "shape": "TagResourceResponse"
       },
       "errors": [
+        {
+          "shape": "DisabledOperationException"
+        },
         {
           "shape": "LimitExceededException"
         },
@@ -350,6 +386,9 @@
       },
       "errors": [
         {
+          "shape": "DisabledOperationException"
+        },
+        {
           "shape": "ValidationException"
         },
         {
@@ -377,6 +416,9 @@
         "shape": "UpdatePipelineResponse"
       },
       "errors": [
+        {
+          "shape": "DisabledOperationException"
+        },
         {
           "shape": "ValidationException"
         },
@@ -409,6 +451,9 @@
       },
       "errors": [
         {
+          "shape": "DisabledOperationException"
+        },
+        {
           "shape": "AccessDeniedException"
         },
         {
@@ -422,6 +467,10 @@
     }
   },
   "shapes": {
+    "BlueprintFormat": {
+      "type": "string",
+      "pattern": "(YAML|JSON)"
+    },
     "Boolean": {
       "type": "boolean"
     },
@@ -436,7 +485,7 @@
           "documentation": "<p>Whether persistent buffering should be enabled.</p>"
         }
       },
-      "documentation": "<p>Options that specify the configuration of a persistent buffer. To configure how OpenSearch Ingestion encrypts this data, set the EncryptionAtRestOptions.</p>"
+      "documentation": "<p>Options that specify the configuration of a persistent buffer. To configure how OpenSearch Ingestion encrypts this data, set the <code>EncryptionAtRestOptions</code>. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/osis-features-overview.html#persistent-buffering\">Persistent buffering</a>.</p>"
     },
     "ChangeProgressStage": {
       "type": "structure",
@@ -512,6 +561,10 @@
         "FAILED"
       ]
     },
+    "CidrBlock": {
+      "type": "string",
+      "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/(3[0-2]|[12]?[0-9])$"
+    },
     "CloudWatchLogDestination": {
       "type": "structure",
       "required": [
@@ -520,7 +573,7 @@
       "members": {
         "LogGroup": {
           "shape": "LogGroup",
-          "documentation": "<p>The name of the CloudWatch Logs group to send pipeline logs to. You can specify an existing log group or create a new one. For example, <code>/aws/OpenSearchService/IngestionService/my-pipeline</code>.</p>"
+          "documentation": "<p>The name of the CloudWatch Logs group to send pipeline logs to. You can specify an existing log group or create a new one. For example, <code>/aws/vendedlogs/OpenSearchService/pipelines</code>.</p>"
         }
       },
       "documentation": "<p>The destination for OpenSearch Ingestion logs sent to Amazon CloudWatch.</p>"
@@ -607,10 +660,10 @@
       "members": {
         "KmsKeyArn": {
           "shape": "KmsKeyArn",
-          "documentation": "<p>The ARN of the KMS key used to encrypt data-at-rest in OpenSearch Ingestion. By default, data is encrypted using an AWS owned key.</p>"
+          "documentation": "<p>The ARN of the KMS key used to encrypt buffer data. By default, data is encrypted using an Amazon Web Services owned key.</p>"
         }
       },
-      "documentation": "<p>Options to control how OpenSearch encrypts all data-at-rest.</p>"
+      "documentation": "<p>Options to control how OpenSearch encrypts buffer data.</p>"
     },
     "GetPipelineBlueprintRequest": {
       "type": "structure",
@@ -623,6 +676,12 @@
           "documentation": "<p>The name of the blueprint to retrieve.</p>",
           "location": "uri",
           "locationName": "BlueprintName"
+        },
+        "Format": {
+          "shape": "BlueprintFormat",
+          "documentation": "<p>The format format of the blueprint to retrieve.</p>",
+          "location": "querystring",
+          "locationName": "format"
         }
       }
     },
@@ -632,6 +691,10 @@
         "Blueprint": {
           "shape": "PipelineBlueprint",
           "documentation": "<p>The requested blueprint in YAML format.</p>"
+        },
+        "Format": {
+          "shape": "String",
+          "documentation": "<p>The format of the blueprint.</p>"
         }
       }
     },
@@ -666,7 +729,7 @@
       "members": {
         "PipelineName": {
           "shape": "PipelineName",
-          "documentation": "<p>The name of the pipeline to get information about.</p>",
+          "documentation": "<p>The name of the pipeline.</p>",
           "location": "uri",
           "locationName": "PipelineName"
         }
@@ -851,7 +914,11 @@
         },
         "ServiceVpcEndpoints": {
           "shape": "ServiceVpcEndpointsList",
-          "documentation": "<p>A list of VPC endpoints that OpenSearch Ingestion has created to other AWS services.</p>"
+          "documentation": "<p>A list of VPC endpoints that OpenSearch Ingestion has created to other Amazon Web Services services.</p>"
+        },
+        "Destinations": {
+          "shape": "PipelineDestinationList",
+          "documentation": "<p>Destinations to which the pipeline writes data.</p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -876,6 +943,22 @@
         "PipelineConfigurationBody": {
           "shape": "String",
           "documentation": "<p>The YAML configuration of the blueprint.</p>"
+        },
+        "DisplayName": {
+          "shape": "String",
+          "documentation": "<p>The display name of the blueprint.</p>"
+        },
+        "DisplayDescription": {
+          "shape": "String",
+          "documentation": "<p>A description of the blueprint.</p>"
+        },
+        "Service": {
+          "shape": "String",
+          "documentation": "<p>The name of the service that the blueprint is associated with.</p>"
+        },
+        "UseCase": {
+          "shape": "String",
+          "documentation": "<p>The use case that the blueprint relates to.</p>"
         }
       },
       "documentation": "<p>Container for information about an OpenSearch Ingestion blueprint.</p>"
@@ -886,6 +969,22 @@
         "BlueprintName": {
           "shape": "String",
           "documentation": "<p>The name of the blueprint.</p>"
+        },
+        "DisplayName": {
+          "shape": "String",
+          "documentation": "<p>The display name of the blueprint.</p>"
+        },
+        "DisplayDescription": {
+          "shape": "String",
+          "documentation": "<p>A description of the blueprint.</p>"
+        },
+        "Service": {
+          "shape": "String",
+          "documentation": "<p>The name of the service that the blueprint is associated with.</p>"
+        },
+        "UseCase": {
+          "shape": "String",
+          "documentation": "<p>The use case that the blueprint relates to.</p>"
         }
       },
       "documentation": "<p>A summary of an OpenSearch Ingestion blueprint.</p>"
@@ -900,6 +999,26 @@
       "type": "string",
       "max": 24000,
       "min": 1
+    },
+    "PipelineDestination": {
+      "type": "structure",
+      "members": {
+        "ServiceName": {
+          "shape": "String",
+          "documentation": "<p>The name of the service receiving data from the pipeline.</p>"
+        },
+        "Endpoint": {
+          "shape": "String",
+          "documentation": "<p>The endpoint receiving data from the pipeline.</p>"
+        }
+      },
+      "documentation": "<p>An object representing the destination of a pipeline.</p>"
+    },
+    "PipelineDestinationList": {
+      "type": "list",
+      "member": {
+        "shape": "PipelineDestination"
+      }
     },
     "PipelineName": {
       "type": "string",
@@ -966,6 +1085,10 @@
           "shape": "Timestamp",
           "documentation": "<p>The date and time when the pipeline was last updated.</p>"
         },
+        "Destinations": {
+          "shape": "PipelineDestinationList",
+          "documentation": "<p>A list of destinations to which the pipeline writes data.</p>"
+        },
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>A list of tags associated with the given pipeline.</p>"
@@ -1006,7 +1129,7 @@
         },
         "VpcEndpointId": {
           "shape": "String",
-          "documentation": "<p>The ID of the VPC endpoint that was created.</p>"
+          "documentation": "<p>The unique identifier of the VPC endpoint that was created.</p>"
         }
       },
       "documentation": "<p>A container for information about VPC endpoints that were created to other services</p>"
@@ -1257,6 +1380,23 @@
         "shape": "ValidationMessage"
       }
     },
+    "VpcAttachmentOptions": {
+      "type": "structure",
+      "required": [
+        "AttachToVpc"
+      ],
+      "members": {
+        "AttachToVpc": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether a VPC is attached to the pipeline.</p>"
+        },
+        "CidrBlock": {
+          "shape": "CidrBlock",
+          "documentation": "<p>The CIDR block to be reserved for OpenSearch Ingestion to create elastic network interfaces (ENIs).</p>"
+        }
+      },
+      "documentation": "<p>Options for attaching a VPC to pipeline.</p>"
+    },
     "VpcEndpoint": {
       "type": "structure",
       "members": {
@@ -1300,6 +1440,10 @@
         "SecurityGroupIds": {
           "shape": "SecurityGroupIds",
           "documentation": "<p>A list of security groups associated with the VPC endpoint.</p>"
+        },
+        "VpcAttachmentOptions": {
+          "shape": "VpcAttachmentOptions",
+          "documentation": "<p>Options for attaching a VPC to a pipeline.</p>"
         }
       },
       "documentation": "<p>Options that specify the subnets and security groups for an OpenSearch Ingestion VPC endpoint.</p>"

@@ -125,6 +125,7 @@ declare class OSIS extends Service {
   validatePipeline(callback?: (err: AWSError, data: OSIS.Types.ValidatePipelineResponse) => void): Request<OSIS.Types.ValidatePipelineResponse, AWSError>;
 }
 declare namespace OSIS {
+  export type BlueprintFormat = string;
   export type Boolean = boolean;
   export interface BufferOptions {
     /**
@@ -172,9 +173,10 @@ declare namespace OSIS {
   }
   export type ChangeProgressStatusList = ChangeProgressStatus[];
   export type ChangeProgressStatuses = "PENDING"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|string;
+  export type CidrBlock = string;
   export interface CloudWatchLogDestination {
     /**
-     * The name of the CloudWatch Logs group to send pipeline logs to. You can specify an existing log group or create a new one. For example, /aws/OpenSearchService/IngestionService/my-pipeline.
+     * The name of the CloudWatch Logs group to send pipeline logs to. You can specify an existing log group or create a new one. For example, /aws/vendedlogs/OpenSearchService/pipelines.
      */
     LogGroup: LogGroup;
   }
@@ -232,7 +234,7 @@ declare namespace OSIS {
   }
   export interface EncryptionAtRestOptions {
     /**
-     * The ARN of the KMS key used to encrypt data-at-rest in OpenSearch Ingestion. By default, data is encrypted using an AWS owned key.
+     * The ARN of the KMS key used to encrypt buffer data. By default, data is encrypted using an Amazon Web Services owned key.
      */
     KmsKeyArn: KmsKeyArn;
   }
@@ -241,12 +243,20 @@ declare namespace OSIS {
      * The name of the blueprint to retrieve.
      */
     BlueprintName: String;
+    /**
+     * The format format of the blueprint to retrieve.
+     */
+    Format?: BlueprintFormat;
   }
   export interface GetPipelineBlueprintResponse {
     /**
      * The requested blueprint in YAML format.
      */
     Blueprint?: PipelineBlueprint;
+    /**
+     * The format of the blueprint.
+     */
+    Format?: String;
   }
   export interface GetPipelineChangeProgressRequest {
     /**
@@ -262,7 +272,7 @@ declare namespace OSIS {
   }
   export interface GetPipelineRequest {
     /**
-     * The name of the pipeline to get information about.
+     * The name of the pipeline.
      */
     PipelineName: PipelineName;
   }
@@ -380,9 +390,13 @@ declare namespace OSIS {
     BufferOptions?: BufferOptions;
     EncryptionAtRestOptions?: EncryptionAtRestOptions;
     /**
-     * A list of VPC endpoints that OpenSearch Ingestion has created to other AWS services.
+     * A list of VPC endpoints that OpenSearch Ingestion has created to other Amazon Web Services services.
      */
     ServiceVpcEndpoints?: ServiceVpcEndpointsList;
+    /**
+     * Destinations to which the pipeline writes data.
+     */
+    Destinations?: PipelineDestinationList;
     /**
      * A list of tags associated with the given pipeline.
      */
@@ -398,15 +412,58 @@ declare namespace OSIS {
      * The YAML configuration of the blueprint.
      */
     PipelineConfigurationBody?: String;
+    /**
+     * The display name of the blueprint.
+     */
+    DisplayName?: String;
+    /**
+     * A description of the blueprint.
+     */
+    DisplayDescription?: String;
+    /**
+     * The name of the service that the blueprint is associated with.
+     */
+    Service?: String;
+    /**
+     * The use case that the blueprint relates to.
+     */
+    UseCase?: String;
   }
   export interface PipelineBlueprintSummary {
     /**
      * The name of the blueprint.
      */
     BlueprintName?: String;
+    /**
+     * The display name of the blueprint.
+     */
+    DisplayName?: String;
+    /**
+     * A description of the blueprint.
+     */
+    DisplayDescription?: String;
+    /**
+     * The name of the service that the blueprint is associated with.
+     */
+    Service?: String;
+    /**
+     * The use case that the blueprint relates to.
+     */
+    UseCase?: String;
   }
   export type PipelineBlueprintsSummaryList = PipelineBlueprintSummary[];
   export type PipelineConfigurationBody = string;
+  export interface PipelineDestination {
+    /**
+     * The name of the service receiving data from the pipeline.
+     */
+    ServiceName?: String;
+    /**
+     * The endpoint receiving data from the pipeline.
+     */
+    Endpoint?: String;
+  }
+  export type PipelineDestinationList = PipelineDestination[];
   export type PipelineName = string;
   export type PipelineStatus = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"CREATE_FAILED"|"UPDATE_FAILED"|"STARTING"|"START_FAILED"|"STOPPING"|"STOPPED"|string;
   export interface PipelineStatusReason {
@@ -446,6 +503,10 @@ declare namespace OSIS {
      */
     LastUpdatedAt?: Timestamp;
     /**
+     * A list of destinations to which the pipeline writes data.
+     */
+    Destinations?: PipelineDestinationList;
+    /**
      * A list of tags associated with the given pipeline.
      */
     Tags?: TagList;
@@ -460,7 +521,7 @@ declare namespace OSIS {
      */
     ServiceName?: VpcEndpointServiceName;
     /**
-     * The ID of the VPC endpoint that was created.
+     * The unique identifier of the VPC endpoint that was created.
      */
     VpcEndpointId?: String;
   }
@@ -584,6 +645,16 @@ declare namespace OSIS {
     Message?: String;
   }
   export type ValidationMessageList = ValidationMessage[];
+  export interface VpcAttachmentOptions {
+    /**
+     * Whether a VPC is attached to the pipeline.
+     */
+    AttachToVpc: Boolean;
+    /**
+     * The CIDR block to be reserved for OpenSearch Ingestion to create elastic network interfaces (ENIs).
+     */
+    CidrBlock?: CidrBlock;
+  }
   export interface VpcEndpoint {
     /**
      * The unique identifier of the endpoint.
@@ -609,6 +680,10 @@ declare namespace OSIS {
      * A list of security groups associated with the VPC endpoint.
      */
     SecurityGroupIds?: SecurityGroupIds;
+    /**
+     * Options for attaching a VPC to a pipeline.
+     */
+    VpcAttachmentOptions?: VpcAttachmentOptions;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

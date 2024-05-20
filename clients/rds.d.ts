@@ -2040,7 +2040,7 @@ declare namespace RDS {
   }
   export interface CreateDBClusterMessage {
     /**
-     * A list of Availability Zones (AZs) where DB instances in the DB cluster can be created. For information on Amazon Web Services Regions and Availability Zones, see Choosing the Regions and Availability Zones in the Amazon Aurora User Guide. Valid for Cluster Type: Aurora DB clusters only
+     * A list of Availability Zones (AZs) where you specifically want to create DB instances in the DB cluster. For information on AZs, see Availability Zones in the Amazon Aurora User Guide. Valid for Cluster Type: Aurora DB clusters only Constraints:   Can't specify more than three AZs.  
      */
     AvailabilityZones?: AvailabilityZones;
     /**
@@ -2072,7 +2072,7 @@ declare namespace RDS {
      */
     DBSubnetGroupName?: String;
     /**
-     * The database engine to use for this DB cluster. Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters Valid Values: aurora-mysql | aurora-postgresql | mysql | postgres 
+     * The database engine to use for this DB cluster. Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters Valid Values:    aurora-mysql     aurora-postgresql     mysql     postgres     neptune - For information about using Amazon Neptune, see the  Amazon Neptune User Guide .  
      */
     Engine: String;
     /**
@@ -2248,6 +2248,10 @@ declare namespace RDS {
      * The CA certificate identifier to use for the DB cluster's server certificate. For more information, see Using SSL/TLS to encrypt a connection to a DB instance in the Amazon RDS User Guide. Valid for Cluster Type: Multi-AZ DB clusters
      */
     CACertificateIdentifier?: String;
+    /**
+     * The life cycle type for this DB cluster.  By default, this value is set to open-source-rds-extended-support, which enrolls your DB cluster into Amazon RDS Extended Support. At the end of standard support, you can avoid charges for Extended Support by setting the value to open-source-rds-extended-support-disabled. In this case, creating the DB cluster will fail if the DB major version is past its end of standard support date.  You can use this setting to enroll your DB cluster into Amazon RDS Extended Support. With RDS Extended Support, you can run the selected major engine version on your DB cluster past the end of standard support for that engine version. For more information, see the following sections:   Amazon Aurora (PostgreSQL only) - Using Amazon RDS Extended Support in the Amazon Aurora User Guide    Amazon RDS - Using Amazon RDS Extended Support in the Amazon RDS User Guide    Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters Valid Values: open-source-rds-extended-support | open-source-rds-extended-support-disabled  Default: open-source-rds-extended-support 
+     */
+    EngineLifecycleSupport?: String;
     /**
      * The ID of the region that contains the source for the read replica.
      */
@@ -2543,6 +2547,10 @@ declare namespace RDS {
      * Specifies whether to use the multi-tenant configuration or the single-tenant configuration (default). This parameter only applies to RDS for Oracle container database (CDB) engines. Note the following restrictions:    The DB engine that you specify in the request must support the multi-tenant configuration. If you attempt to enable the multi-tenant configuration on a DB engine that doesn't support it, the request fails.   If you specify the multi-tenant configuration when you create your DB instance, you can't later modify this DB instance to use the single-tenant configuration.  
      */
     MultiTenant?: BooleanOptional;
+    /**
+     * The life cycle type for this DB instance.  By default, this value is set to open-source-rds-extended-support, which enrolls your DB instance into Amazon RDS Extended Support. At the end of standard support, you can avoid charges for Extended Support by setting the value to open-source-rds-extended-support-disabled. In this case, creating the DB instance will fail if the DB major version is past its end of standard support date.  This setting applies only to RDS for MySQL and RDS for PostgreSQL. For Amazon Aurora DB instances, the life cycle type is managed by the DB cluster. You can use this setting to enroll your DB instance into Amazon RDS Extended Support. With RDS Extended Support, you can run the selected major engine version on your DB instance past the end of standard support for that engine version. For more information, see Using Amazon RDS Extended Support in the Amazon RDS User Guide. Valid Values: open-source-rds-extended-support | open-source-rds-extended-support-disabled  Default: open-source-rds-extended-support 
+     */
+    EngineLifecycleSupport?: String;
   }
   export interface CreateDBInstanceReadReplicaMessage {
     /**
@@ -2915,7 +2923,7 @@ declare namespace RDS {
      */
     SnsTopicArn: String;
     /**
-     * The type of source that is generating the events. For example, if you want to be notified of events generated by a DB instance, you set this parameter to db-instance. For RDS Proxy events, specify db-proxy. If this value isn't specified, all events are returned. Valid Values: db-instance | db-cluster | db-parameter-group | db-security-group | db-snapshot | db-cluster-snapshot | db-proxy 
+     * The type of source that is generating the events. For example, if you want to be notified of events generated by a DB instance, you set this parameter to db-instance. For RDS Proxy events, specify db-proxy. If this value isn't specified, all events are returned. Valid Values: db-instance | db-cluster | db-parameter-group | db-security-group | db-snapshot | db-cluster-snapshot | db-proxy | zero-etl | custom-engine-version | blue-green-deployment  
      */
     SourceType?: String;
     /**
@@ -2952,6 +2960,10 @@ declare namespace RDS {
      * The engine version to use for this global database cluster. Constraints:   Can't be specified if SourceDBClusterIdentifier is specified. In this case, Amazon Aurora uses the engine version of the source DB cluster.  
      */
     EngineVersion?: String;
+    /**
+     * The life cycle type for this global database cluster.  By default, this value is set to open-source-rds-extended-support, which enrolls your global cluster into Amazon RDS Extended Support. At the end of standard support, you can avoid charges for Extended Support by setting the value to open-source-rds-extended-support-disabled. In this case, creating the global cluster will fail if the DB major version is past its end of standard support date.  This setting only applies to Aurora PostgreSQL-based global databases. You can use this setting to enroll your global cluster into Amazon RDS Extended Support. With RDS Extended Support, you can run the selected major engine version on your global cluster past the end of standard support for that engine version. For more information, see Using Amazon RDS Extended Support in the Amazon Aurora User Guide. Valid Values: open-source-rds-extended-support | open-source-rds-extended-support-disabled  Default: open-source-rds-extended-support 
+     */
+    EngineLifecycleSupport?: String;
     /**
      * Specifies whether to enable deletion protection for the new global database cluster. The global database can't be deleted when deletion protection is enabled.
      */
@@ -3373,6 +3385,10 @@ declare namespace RDS {
      */
     StorageThroughput?: IntegerOptional;
     CertificateDetails?: CertificateDetails;
+    /**
+     * The life cycle type for the DB cluster. For more information, see CreateDBCluster.
+     */
+    EngineLifecycleSupport?: String;
   }
   export interface DBClusterAutomatedBackup {
     /**
@@ -4336,6 +4352,10 @@ declare namespace RDS {
      * Specifies whether the DB instance is in the multi-tenant configuration (TRUE) or the single-tenant configuration (FALSE).
      */
     MultiTenant?: BooleanOptional;
+    /**
+     * The life cycle type for the DB instance. For more information, see CreateDBInstance.
+     */
+    EngineLifecycleSupport?: String;
   }
   export interface DBInstanceAutomatedBackup {
     /**
@@ -7026,6 +7046,10 @@ declare namespace RDS {
      */
     EngineVersion?: String;
     /**
+     * The life cycle type for the global cluster. For more information, see CreateGlobalCluster.
+     */
+    EngineLifecycleSupport?: String;
+    /**
      * The default database name within the new global database cluster.
      */
     DatabaseName?: String;
@@ -8004,7 +8028,7 @@ declare namespace RDS {
      */
     SnsTopicArn?: String;
     /**
-     * The type of source that is generating the events. For example, if you want to be notified of events generated by a DB instance, you would set this parameter to db-instance. For RDS Proxy events, specify db-proxy. If this value isn't specified, all events are returned. Valid Values: db-instance | db-cluster | db-parameter-group | db-security-group | db-snapshot | db-cluster-snapshot | db-proxy 
+     * The type of source that is generating the events. For example, if you want to be notified of events generated by a DB instance, you would set this parameter to db-instance. For RDS Proxy events, specify db-proxy. If this value isn't specified, all events are returned. Valid Values: db-instance | db-cluster | db-parameter-group | db-security-group | db-snapshot | db-cluster-snapshot | db-proxy | zero-etl | custom-engine-version | blue-green-deployment  
      */
     SourceType?: String;
     /**
@@ -8627,7 +8651,7 @@ declare namespace RDS {
   }
   export interface PendingMaintenanceAction {
     /**
-     * The type of pending maintenance action that is available for the resource. Valid actions are system-update, db-upgrade, hardware-maintenance, and ca-certificate-rotation.
+     * The type of pending maintenance action that is available for the resource.  For more information about maintenance actions, see Maintaining a DB instance. Valid Values: system-update | db-upgrade | hardware-maintenance | ca-certificate-rotation 
      */
     Action?: String;
     /**
@@ -9382,6 +9406,10 @@ declare namespace RDS {
      * Specifies the storage type to be associated with the DB cluster. Valid Values: aurora, aurora-iopt1  Default: aurora  Valid for: Aurora DB clusters only
      */
     StorageType?: String;
+    /**
+     * The life cycle type for this DB cluster.  By default, this value is set to open-source-rds-extended-support, which enrolls your DB cluster into Amazon RDS Extended Support. At the end of standard support, you can avoid charges for Extended Support by setting the value to open-source-rds-extended-support-disabled. In this case, RDS automatically upgrades your restored DB cluster to a higher engine version, if the major engine version is past its end of standard support date.  You can use this setting to enroll your DB cluster into Amazon RDS Extended Support. With RDS Extended Support, you can run the selected major engine version on your DB cluster past the end of standard support for that engine version. For more information, see the following sections:   Amazon Aurora (PostgreSQL only) - Using Amazon RDS Extended Support in the Amazon Aurora User Guide    Amazon RDS - Using Amazon RDS Extended Support in the Amazon RDS User Guide    Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters Valid Values: open-source-rds-extended-support | open-source-rds-extended-support-disabled  Default: open-source-rds-extended-support 
+     */
+    EngineLifecycleSupport?: String;
   }
   export interface RestoreDBClusterFromS3Result {
     DBCluster?: DBCluster;
@@ -9500,6 +9528,10 @@ declare namespace RDS {
      * Reserved for future use.
      */
     RdsCustomClusterConfiguration?: RdsCustomClusterConfiguration;
+    /**
+     * The life cycle type for this DB cluster.  By default, this value is set to open-source-rds-extended-support, which enrolls your DB cluster into Amazon RDS Extended Support. At the end of standard support, you can avoid charges for Extended Support by setting the value to open-source-rds-extended-support-disabled. In this case, RDS automatically upgrades your restored DB cluster to a higher engine version, if the major engine version is past its end of standard support date.  You can use this setting to enroll your DB cluster into Amazon RDS Extended Support. With RDS Extended Support, you can run the selected major engine version on your DB cluster past the end of standard support for that engine version. For more information, see the following sections:   Amazon Aurora (PostgreSQL only) - Using Amazon RDS Extended Support in the Amazon Aurora User Guide    Amazon RDS - Using Amazon RDS Extended Support in the Amazon RDS User Guide    Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters Valid Values: open-source-rds-extended-support | open-source-rds-extended-support-disabled  Default: open-source-rds-extended-support 
+     */
+    EngineLifecycleSupport?: String;
   }
   export interface RestoreDBClusterFromSnapshotResult {
     DBCluster?: DBCluster;
@@ -9615,6 +9647,10 @@ declare namespace RDS {
      * Reserved for future use.
      */
     RdsCustomClusterConfiguration?: RdsCustomClusterConfiguration;
+    /**
+     * The life cycle type for this DB cluster.  By default, this value is set to open-source-rds-extended-support, which enrolls your DB cluster into Amazon RDS Extended Support. At the end of standard support, you can avoid charges for Extended Support by setting the value to open-source-rds-extended-support-disabled. In this case, RDS automatically upgrades your restored DB cluster to a higher engine version, if the major engine version is past its end of standard support date.  You can use this setting to enroll your DB cluster into Amazon RDS Extended Support. With RDS Extended Support, you can run the selected major engine version on your DB cluster past the end of standard support for that engine version. For more information, see the following sections:   Amazon Aurora (PostgreSQL only) - Using Amazon RDS Extended Support in the Amazon Aurora User Guide    Amazon RDS - Using Amazon RDS Extended Support in the Amazon RDS User Guide    Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters Valid Values: open-source-rds-extended-support | open-source-rds-extended-support-disabled  Default: open-source-rds-extended-support 
+     */
+    EngineLifecycleSupport?: String;
   }
   export interface RestoreDBClusterToPointInTimeResult {
     DBCluster?: DBCluster;
@@ -9781,6 +9817,10 @@ declare namespace RDS {
      * The CA certificate identifier to use for the DB instance's server certificate. This setting doesn't apply to RDS Custom DB instances. For more information, see Using SSL/TLS to encrypt a connection to a DB instance in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB cluster in the Amazon Aurora User Guide.
      */
     CACertificateIdentifier?: String;
+    /**
+     * The life cycle type for this DB instance.  By default, this value is set to open-source-rds-extended-support, which enrolls your DB instance into Amazon RDS Extended Support. At the end of standard support, you can avoid charges for Extended Support by setting the value to open-source-rds-extended-support-disabled. In this case, RDS automatically upgrades your restored DB instance to a higher engine version, if the major engine version is past its end of standard support date.  You can use this setting to enroll your DB instance into Amazon RDS Extended Support. With RDS Extended Support, you can run the selected major engine version on your DB instance past the end of standard support for that engine version. For more information, see Using Amazon RDS Extended Support in the Amazon RDS User Guide. This setting applies only to RDS for MySQL and RDS for PostgreSQL. For Amazon Aurora DB instances, the life cycle type is managed by the DB cluster. Valid Values: open-source-rds-extended-support | open-source-rds-extended-support-disabled  Default: open-source-rds-extended-support 
+     */
+    EngineLifecycleSupport?: String;
   }
   export interface RestoreDBInstanceFromDBSnapshotResult {
     DBInstance?: DBInstance;
@@ -9986,6 +10026,10 @@ declare namespace RDS {
      * The CA certificate identifier to use for the DB instance's server certificate. This setting doesn't apply to RDS Custom DB instances. For more information, see Using SSL/TLS to encrypt a connection to a DB instance in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB cluster in the Amazon Aurora User Guide.
      */
     CACertificateIdentifier?: String;
+    /**
+     * The life cycle type for this DB instance.  By default, this value is set to open-source-rds-extended-support, which enrolls your DB instance into Amazon RDS Extended Support. At the end of standard support, you can avoid charges for Extended Support by setting the value to open-source-rds-extended-support-disabled. In this case, RDS automatically upgrades your restored DB instance to a higher engine version, if the major engine version is past its end of standard support date.  You can use this setting to enroll your DB instance into Amazon RDS Extended Support. With RDS Extended Support, you can run the selected major engine version on your DB instance past the end of standard support for that engine version. For more information, see Using Amazon RDS Extended Support in the Amazon RDS User Guide. This setting applies only to RDS for MySQL and RDS for PostgreSQL. For Amazon Aurora DB instances, the life cycle type is managed by the DB cluster. Valid Values: open-source-rds-extended-support | open-source-rds-extended-support-disabled  Default: open-source-rds-extended-support 
+     */
+    EngineLifecycleSupport?: String;
   }
   export interface RestoreDBInstanceFromS3Result {
     DBInstance?: DBInstance;
@@ -10168,6 +10212,10 @@ declare namespace RDS {
      * The CA certificate identifier to use for the DB instance's server certificate. This setting doesn't apply to RDS Custom DB instances. For more information, see Using SSL/TLS to encrypt a connection to a DB instance in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB cluster in the Amazon Aurora User Guide.
      */
     CACertificateIdentifier?: String;
+    /**
+     * The life cycle type for this DB instance.  By default, this value is set to open-source-rds-extended-support, which enrolls your DB instance into Amazon RDS Extended Support. At the end of standard support, you can avoid charges for Extended Support by setting the value to open-source-rds-extended-support-disabled. In this case, RDS automatically upgrades your restored DB instance to a higher engine version, if the major engine version is past its end of standard support date.  You can use this setting to enroll your DB instance into Amazon RDS Extended Support. With RDS Extended Support, you can run the selected major engine version on your DB instance past the end of standard support for that engine version. For more information, see Using Amazon RDS Extended Support in the Amazon RDS User Guide. This setting applies only to RDS for MySQL and RDS for PostgreSQL. For Amazon Aurora DB instances, the life cycle type is managed by the DB cluster. Valid Values: open-source-rds-extended-support | open-source-rds-extended-support-disabled  Default: open-source-rds-extended-support 
+     */
+    EngineLifecycleSupport?: String;
   }
   export interface RestoreDBInstanceToPointInTimeResult {
     DBInstance?: DBInstance;
@@ -10698,7 +10746,7 @@ declare namespace RDS {
      */
     Description?: String;
     /**
-     * Indicates whether the target version is applied to any source DB instances that have AutoMinorVersionUpgrade set to true.
+     * Indicates whether the target version is applied to any source DB instances that have AutoMinorVersionUpgrade set to true. This parameter is dynamic, and is set by RDS.
      */
     AutoUpgrade?: Boolean;
     /**

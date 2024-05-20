@@ -395,7 +395,7 @@ declare namespace SecretsManager {
      */
     KmsKeyId?: KmsKeyIdType;
     /**
-     * Specifies whether automatic rotation is turned on for this secret. If the secret has never been configured for rotation, Secrets Manager returns null. To turn on rotation, use RotateSecret. To turn off rotation, use CancelRotateSecret.
+     * Specifies whether automatic rotation is turned on for this secret. To turn on rotation, use RotateSecret. To turn off rotation, use CancelRotateSecret.
      */
     RotationEnabled?: RotationEnabledType;
     /**
@@ -536,7 +536,7 @@ declare namespace SecretsManager {
   }
   export interface GetSecretValueRequest {
     /**
-     * The ARN or name of the secret to retrieve. To retrieve a secret from another account, you must use an ARN. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN. See Finding a secret from a partial ARN.
+     * The ARN or name of the secret to retrieve. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN. See Finding a secret from a partial ARN.
      */
     SecretId: SecretIdType;
     /**
@@ -1130,7 +1130,7 @@ declare namespace SecretsManager {
   }
   export interface ValidateResourcePolicyRequest {
     /**
-     * The ARN or name of the secret with the resource-based policy you want to validate.
+     * This field is reserved for internal use.
      */
     SecretId?: SecretIdType;
     /**
