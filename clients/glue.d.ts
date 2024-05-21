@@ -4344,6 +4344,10 @@ declare namespace Glue {
      * The details for a source control configuration for a job, allowing synchronization of job artifacts to or from a remote repository.
      */
     SourceControlDetails?: SourceControlDetails;
+    /**
+     * This field specifies a day of the week and hour for a maintenance window for streaming jobs. Glue periodically performs maintenance activities. During these maintenance windows, Glue will need to restart your streaming jobs. Glue will restart the job within 3 hours of the specified maintenance window. For instance, if you set up the maintenance window for Monday at 10:00AM GMT, your jobs will be restarted between 10:00AM GMT to 1:00PM GMT.
+     */
+    MaintenanceWindow?: MaintenanceWindow;
   }
   export interface CreateJobResponse {
     /**
@@ -8928,6 +8932,10 @@ declare namespace Glue {
      * The details for a source control configuration for a job, allowing synchronization of job artifacts to or from a remote repository.
      */
     SourceControlDetails?: SourceControlDetails;
+    /**
+     * This field specifies a day of the week and hour for a maintenance window for streaming jobs. Glue periodically performs maintenance activities. During these maintenance windows, Glue will need to restart your streaming jobs. Glue will restart the job within 3 hours of the specified maintenance window. For instance, if you set up the maintenance window for Monday at 10:00AM GMT, your jobs will be restarted between 10:00AM GMT to 1:00PM GMT.
+     */
+    MaintenanceWindow?: MaintenanceWindow;
   }
   export interface JobBookmarkEntry {
     /**
@@ -9055,7 +9063,7 @@ declare namespace Glue {
      */
     ExecutionTime?: ExecutionTime;
     /**
-     * The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. This value overrides the timeout value set in the parent job. Streaming jobs do not have a timeout. The default for non-streaming jobs is 2,880 minutes (48 hours).
+     * The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. This value overrides the timeout value set in the parent job. The maximum value for timeout for batch jobs is 7 days or 10080 minutes. The default is 2880 minutes (48 hours) for batch jobs. Any existing Glue jobs that have a greater timeout value are defaulted to 7 days. For instance you have specified a timeout of 20 days for a batch job, it will be stopped on the 7th day. Streaming jobs must have timeout values less than 7 days or 10080 minutes. When the value is left blank, the job will be restarted after 7 days based if you have not setup a maintenance window. If you have setup maintenance window, it will be restarted during the maintenance window after 7 days.
      */
     Timeout?: Timeout;
     /**
@@ -9087,16 +9095,20 @@ declare namespace Glue {
      */
     GlueVersion?: GlueVersionString;
     /**
-     * This field populates only for Auto Scaling job runs, and represents the total time each executor ran during the lifecycle of a job run in seconds, multiplied by a DPU factor (1 for G.1X, 2 for G.2X, or 0.25 for G.025X workers). This value may be different than the executionEngineRuntime * MaxCapacity as in the case of Auto Scaling jobs, as the number of executors running at a given time may be less than the MaxCapacity. Therefore, it is possible that the value of DPUSeconds is less than executionEngineRuntime * MaxCapacity.
+     * This field can be set for either job runs with execution class FLEX or when Auto Scaling is enabled, and represents the total time each executor ran during the lifecycle of a job run in seconds, multiplied by a DPU factor (1 for G.1X, 2 for G.2X, or 0.25 for G.025X workers). This value may be different than the executionEngineRuntime * MaxCapacity as in the case of Auto Scaling jobs, as the number of executors running at a given time may be less than the MaxCapacity. Therefore, it is possible that the value of DPUSeconds is less than executionEngineRuntime * MaxCapacity.
      */
     DPUSeconds?: NullableDouble;
     /**
      * Indicates whether the job is run with a standard or flexible execution class. The standard execution-class is ideal for time-sensitive workloads that require fast job startup and dedicated resources. The flexible execution class is appropriate for time-insensitive jobs whose start and completion times may vary.  Only jobs with Glue version 3.0 and above and command type glueetl will be allowed to set ExecutionClass to FLEX. The flexible execution class is available for Spark jobs.
      */
     ExecutionClass?: ExecutionClass;
+    /**
+     * This field specifies a day of the week and hour for a maintenance window for streaming jobs. Glue periodically performs maintenance activities. During these maintenance windows, Glue will need to restart your streaming jobs. Glue will restart the job within 3 hours of the specified maintenance window. For instance, if you set up the maintenance window for Monday at 10:00AM GMT, your jobs will be restarted between 10:00AM GMT to 1:00PM GMT.
+     */
+    MaintenanceWindow?: MaintenanceWindow;
   }
   export type JobRunList = JobRun[];
-  export type JobRunState = "STARTING"|"RUNNING"|"STOPPING"|"STOPPED"|"SUCCEEDED"|"FAILED"|"TIMEOUT"|"ERROR"|"WAITING"|string;
+  export type JobRunState = "STARTING"|"RUNNING"|"STOPPING"|"STOPPED"|"SUCCEEDED"|"FAILED"|"TIMEOUT"|"ERROR"|"WAITING"|"EXPIRED"|string;
   export interface JobUpdate {
     /**
      * Description of the job being defined.
@@ -9178,6 +9190,10 @@ declare namespace Glue {
      * The details for a source control configuration for a job, allowing synchronization of job artifacts to or from a remote repository.
      */
     SourceControlDetails?: SourceControlDetails;
+    /**
+     * This field specifies a day of the week and hour for a maintenance window for streaming jobs. Glue periodically performs maintenance activities. During these maintenance windows, Glue will need to restart your streaming jobs. Glue will restart the job within 3 hours of the specified maintenance window. For instance, if you set up the maintenance window for Monday at 10:00AM GMT, your jobs will be restarted between 10:00AM GMT to 1:00PM GMT.
+     */
+    MaintenanceWindow?: MaintenanceWindow;
   }
   export interface Join {
     /**
@@ -10138,6 +10154,7 @@ declare namespace Glue {
     KmsKeyId?: NameString;
   }
   export type MLUserDataEncryptionModeString = "DISABLED"|"SSE-KMS"|string;
+  export type MaintenanceWindow = string;
   export type ManyInputs = NodeId[];
   export type MapValue = {[key: string]: GenericString};
   export interface Mapping {

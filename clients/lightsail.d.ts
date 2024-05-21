@@ -1655,7 +1655,7 @@ declare namespace Lightsail {
   export type BehaviorEnum = "dont-cache"|"cache"|string;
   export interface Blueprint {
     /**
-     * The ID for the virtual private server image (app_wordpress_4_4 or app_lamp_7_0).
+     * The ID for the virtual private server image (app_wordpress_x_x or app_lamp_x_x).
      */
     blueprintId?: NonEmptyString;
     /**
@@ -1844,11 +1844,11 @@ declare namespace Lightsail {
      */
     diskSizeInGb?: integer;
     /**
-     * The bundle ID (micro_1_0).
+     * The bundle ID (micro_x_x).
      */
     bundleId?: NonEmptyString;
     /**
-     * The Amazon EC2 instance type (t2.micro).
+     * The instance type (micro).
      */
     instanceType?: string;
     /**
@@ -2912,7 +2912,7 @@ declare namespace Lightsail {
      */
     instanceSnapshotName?: ResourceName;
     /**
-     * The bundle of specification information for your virtual private server (or instance), including the pricing plan (micro_1_0).
+     * The bundle of specification information for your virtual private server (or instance), including the pricing plan (micro_x_x).
      */
     bundleId: NonEmptyString;
     /**
@@ -2932,7 +2932,7 @@ declare namespace Lightsail {
      */
     addOns?: AddOnRequestList;
     /**
-     * The IP address type for the instance. The possible values are ipv4 for IPv4 only, and dualstack for IPv4 and IPv6. The default value is dualstack.
+     * The IP address type for the instance. The possible values are ipv4 for IPv4 only, ipv6 for IPv6 only, and dualstack for IPv4 and IPv6. The default value is dualstack.
      */
     ipAddressType?: IpAddressType;
     /**
@@ -2968,11 +2968,11 @@ declare namespace Lightsail {
      */
     customImageName?: ResourceName;
     /**
-     * The ID for a virtual private server image (app_wordpress_4_4 or app_lamp_7_0). Use the get blueprints operation to return a list of available images (or blueprints).  Use active blueprints when creating new instances. Inactive blueprints are listed to support customers with existing instances and are not necessarily available to create new instances. Blueprints are marked inactive when they become outdated due to operating system updates or new application releases. 
+     * The ID for a virtual private server image (app_wordpress_x_x or app_lamp_x_x). Use the get blueprints operation to return a list of available images (or blueprints).  Use active blueprints when creating new instances. Inactive blueprints are listed to support customers with existing instances and are not necessarily available to create new instances. Blueprints are marked inactive when they become outdated due to operating system updates or new application releases. 
      */
     blueprintId: NonEmptyString;
     /**
-     * The bundle of specification information for your virtual private server (or instance), including the pricing plan (micro_1_0).
+     * The bundle of specification information for your virtual private server (or instance), including the pricing plan (medium_x_x).
      */
     bundleId: NonEmptyString;
     /**
@@ -2992,7 +2992,7 @@ declare namespace Lightsail {
      */
     addOns?: AddOnRequestList;
     /**
-     * The IP address type for the instance. The possible values are ipv4 for IPv4 only, and dualstack for IPv4 and IPv6. The default value is dualstack.
+     * The IP address type for the instance. The possible values are ipv4 for IPv4 only, ipv6 for IPv6 only, and dualstack for IPv4 and IPv6. The default value is dualstack.
      */
     ipAddressType?: IpAddressType;
   }
@@ -3060,7 +3060,7 @@ declare namespace Lightsail {
      */
     tags?: TagList;
     /**
-     * The IP address type for the load balancer. The possible values are ipv4 for IPv4 only, and dualstack for IPv4 and IPv6. The default value is dualstack.
+     * The IP address type for the load balancer. The possible values are ipv4 for IPv4 only, ipv6 for IPv6 only, and dualstack for IPv4 and IPv6. The default value is dualstack.
      */
     ipAddressType?: IpAddressType;
     /**
@@ -5337,7 +5337,7 @@ declare namespace Lightsail {
   }
   export interface Instance {
     /**
-     * The name the user gave the instance (Amazon_Linux-1GB-Ohio-1).
+     * The name the user gave the instance (Amazon_Linux_2023-1).
      */
     name?: ResourceName;
     /**
@@ -5365,15 +5365,15 @@ declare namespace Lightsail {
      */
     tags?: TagList;
     /**
-     * The blueprint ID (os_amlinux_2016_03).
+     * The blueprint ID (amazon_linux_2023).
      */
     blueprintId?: NonEmptyString;
     /**
-     * The friendly name of the blueprint (Amazon Linux).
+     * The friendly name of the blueprint (Amazon Linux 2023).
      */
     blueprintName?: NonEmptyString;
     /**
-     * The bundle for the instance (micro_1_0).
+     * The bundle for the instance (micro_x_x).
      */
     bundleId?: NonEmptyString;
     /**
@@ -5397,7 +5397,7 @@ declare namespace Lightsail {
      */
     ipv6Addresses?: Ipv6AddressList;
     /**
-     * The IP address type of the instance. The possible values are ipv4 for IPv4 only, and dualstack for IPv4 and IPv6.
+     * The IP address type of the instance. The possible values are ipv4 for IPv4 only, ipv6 for IPv6 only, and dualstack for IPv4 and IPv6.
      */
     ipAddressType?: IpAddressType;
     /**
@@ -5573,7 +5573,7 @@ declare namespace Lightsail {
      */
     toPort?: Port;
     /**
-     * The IP protocol name. The name can be one of the following:    tcp - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn't require reliable data stream service, use UDP instead.    all - All transport layer protocol types. For more general information, see Transport layer on Wikipedia.    udp - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don't require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.    icmp - Internet Control Message Protocol (ICMP) is used to send error messages and operational information indicating success or failure when communicating with an instance. For example, an error is indicated when an instance could not be reached. When you specify icmp as the protocol, you must specify the ICMP type using the fromPort parameter, and ICMP code using the toPort parameter.  
+     * The IP protocol name. The name can be one of the following:    tcp - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn't require reliable data stream service, use UDP instead.    all - All transport layer protocol types. For more general information, see Transport layer on Wikipedia.    udp - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don't require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.    icmp - Internet Control Message Protocol (ICMP) is used to send error messages and operational information indicating success or failure when communicating with an instance. For example, an error is indicated when an instance could not be reached. When you specify icmp as the protocol, you must specify the ICMP type using the fromPort parameter, and ICMP code using the toPort parameter.    icmp6 - Internet Control Message Protocol (ICMP) for IPv6. When you specify icmp6 as the protocol, you must specify the ICMP type using the fromPort parameter, and ICMP code using the toPort parameter.  
      */
     protocol?: NetworkProtocol;
     /**
@@ -5616,7 +5616,7 @@ declare namespace Lightsail {
      */
     toPort?: Port;
     /**
-     * The IP protocol name. The name can be one of the following:    tcp - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn't require reliable data stream service, use UDP instead.    all - All transport layer protocol types. For more general information, see Transport layer on Wikipedia.    udp - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don't require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.    icmp - Internet Control Message Protocol (ICMP) is used to send error messages and operational information indicating success or failure when communicating with an instance. For example, an error is indicated when an instance could not be reached. When you specify icmp as the protocol, you must specify the ICMP type using the fromPort parameter, and ICMP code using the toPort parameter.  
+     * The IP protocol name. The name can be one of the following:    tcp - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn't require reliable data stream service, use UDP instead.    all - All transport layer protocol types. For more general information, see Transport layer on Wikipedia.    udp - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don't require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.    icmp - Internet Control Message Protocol (ICMP) is used to send error messages and operational information indicating success or failure when communicating with an instance. For example, an error is indicated when an instance could not be reached. When you specify icmp as the protocol, you must specify the ICMP type using the fromPort parameter, and ICMP code using the toPort parameter.    icmp6 - Internet Control Message Protocol (ICMP) for IPv6. When you specify icmp6 as the protocol, you must specify the ICMP type using the fromPort parameter, and ICMP code using the toPort parameter.  
      */
     protocol?: NetworkProtocol;
     /**
@@ -5687,11 +5687,11 @@ declare namespace Lightsail {
      */
     fromInstanceArn?: NonEmptyString;
     /**
-     * The blueprint ID from which you created the snapshot (os_debian_8_3). A blueprint is a virtual private server (or instance) image used to create instances quickly.
+     * The blueprint ID from which you created the snapshot (amazon_linux_2023). A blueprint is a virtual private server (or instance) image used to create instances quickly.
      */
     fromBlueprintId?: string;
     /**
-     * The bundle ID from which you created the snapshot (micro_1_0).
+     * The bundle ID from which you created the snapshot (micro_x_x).
      */
     fromBundleId?: string;
     /**
@@ -5705,11 +5705,11 @@ declare namespace Lightsail {
   }
   export interface InstanceSnapshotInfo {
     /**
-     * The bundle ID from which the source instance was created (micro_1_0).
+     * The bundle ID from which the source instance was created (micro_x_x).
      */
     fromBundleId?: NonEmptyString;
     /**
-     * The blueprint ID from which the source instance (os_debian_8_3).
+     * The blueprint ID from which the source instance (amazon_linux_2023).
      */
     fromBlueprintId?: NonEmptyString;
     /**
@@ -5730,7 +5730,7 @@ declare namespace Lightsail {
     name?: string;
   }
   export type IpAddress = string;
-  export type IpAddressType = "dualstack"|"ipv4"|string;
+  export type IpAddressType = "dualstack"|"ipv4"|"ipv6"|string;
   export type Ipv6Address = string;
   export type Ipv6AddressList = Ipv6Address[];
   export interface IsVpcPeeredRequest {
@@ -5931,7 +5931,7 @@ declare namespace Lightsail {
      */
     configurationOptions?: LoadBalancerConfigurationOptions;
     /**
-     * The IP address type of the load balancer. The possible values are ipv4 for IPv4 only, and dualstack for IPv4 and IPv6.
+     * The IP address type of the load balancer. The possible values are ipv4 for IPv4 only, ipv6 for IPv6 only, and dualstack for IPv4 and IPv6.
      */
     ipAddressType?: IpAddressType;
     /**
@@ -6228,7 +6228,7 @@ declare namespace Lightsail {
     message?: string;
   }
   export type NameServersUpdateStateCode = "SUCCEEDED"|"PENDING"|"FAILED"|"STARTED"|string;
-  export type NetworkProtocol = "tcp"|"all"|"udp"|"icmp"|string;
+  export type NetworkProtocol = "tcp"|"all"|"udp"|"icmp"|"icmpv6"|string;
   export type NonEmptyString = string;
   export type NotificationTriggerList = AlarmState[];
   export interface OpenInstancePublicPortsRequest {
@@ -6383,7 +6383,7 @@ declare namespace Lightsail {
      */
     toPort?: Port;
     /**
-     * The IP protocol name. The name can be one of the following:    tcp - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn't require reliable data stream service, use UDP instead.    all - All transport layer protocol types. For more general information, see Transport layer on Wikipedia.    udp - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don't require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.    icmp - Internet Control Message Protocol (ICMP) is used to send error messages and operational information indicating success or failure when communicating with an instance. For example, an error is indicated when an instance could not be reached. When you specify icmp as the protocol, you must specify the ICMP type using the fromPort parameter, and ICMP code using the toPort parameter.  
+     * The IP protocol name. The name can be one of the following:    tcp - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn't require reliable data stream service, use UDP instead.    all - All transport layer protocol types. For more general information, see Transport layer on Wikipedia.    udp - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don't require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.    icmp - Internet Control Message Protocol (ICMP) is used to send error messages and operational information indicating success or failure when communicating with an instance. For example, an error is indicated when an instance could not be reached. When you specify icmp as the protocol, you must specify the ICMP type using the fromPort parameter, and ICMP code using the toPort parameter.    icmp6 - Internet Control Message Protocol (ICMP) for IPv6. When you specify icmp6 as the protocol, you must specify the ICMP type using the fromPort parameter, and ICMP code using the toPort parameter.  
      */
     protocol?: NetworkProtocol;
     /**
@@ -7062,9 +7062,13 @@ declare namespace Lightsail {
      */
     resourceName: ResourceName;
     /**
-     * The IP address type to set for the specified resource. The possible values are ipv4 for IPv4 only, and dualstack for IPv4 and IPv6.
+     * The IP address type to set for the specified resource. The possible values are ipv4 for IPv4 only, ipv6 for IPv6 only, and dualstack for IPv4 and IPv6.
      */
     ipAddressType: IpAddressType;
+    /**
+     * Required parameter to accept the instance bundle update when changing to, and from, IPv6-only.  An instance bundle will change when switching from dual-stack or ipv4, to ipv6. It also changes when switching from ipv6, to dual-stack or ipv4. You must include this parameter in the command to update the bundle. For example, if you switch from dual-stack to ipv6, the bundle will be updated, and billing for the IPv6-only instance bundle begins immediately. 
+     */
+    acceptBundleUpdate?: boolean;
   }
   export interface SetIpAddressTypeResult {
     /**

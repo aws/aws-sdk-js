@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1624.0-->
+<!--LATEST=2.1625.0-->
 <!--ENTRYINSERT-->
+
+## 2.1625.0
+* feature: CloudFront: Model update; no change to SDK functionality.
+* feature: Glue: Add Maintenance window to CreateJob and UpdateJob APIs and JobRun response. Add a new Job Run State for EXPIRED.
+* feature: Lightsail: This release adds support for Amazon Lightsail instances to switch between dual-stack or IPv4 only and IPv6-only public IP address types.
+* feature: MailManager: This release includes a new Amazon SES feature called Mail Manager, which is a set of email gateway capabilities designed to help customers strengthen their organization's email infrastructure, simplify email workflow management, and streamline email compliance control.
+* feature: PI: Performance Insights added a new input parameter called AuthorizedActions to support the fine-grained access feature. Performance Insights also restricted the acceptable input characters.
+* feature: StorageGateway: Added new SMBSecurityStrategy enum named MandatoryEncryptionNoAes128, new mode enforces encryption and disables AES 128-bit algorithums.
 
 ## 2.1624.0
 * feature: BedrockAgent: This release adds support for using Guardrails with Bedrock Agents.

@@ -379,5 +379,6 @@ module.exports = {
   CodeConnections: require('./codeconnections'),
   Deadline: require('./deadline'),
   ControlCatalog: require('./controlcatalog'),
-  Route53Profiles: require('./route53profiles')
+  Route53Profiles: require('./route53profiles'),
+  MailManager: require('./mailmanager')
 };

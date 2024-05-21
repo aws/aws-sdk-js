@@ -743,7 +743,7 @@ declare namespace StorageGateway {
      */
     GatewayName: GatewayName;
     /**
-     * A value that indicates the time zone you want to set for the gateway. The time zone is of the format "GMT-hr:mm" or "GMT+hr:mm". For example, GMT-4:00 indicates the time is 4 hours behind GMT. GMT+2:00 indicates the time is 2 hours ahead of GMT. The time zone is used, for example, for scheduling snapshots and your gateway's maintenance schedule.
+     * A value that indicates the time zone you want to set for the gateway. The time zone is of the format "GMT", "GMT-hr:mm", or "GMT+hr:mm". For example, GMT indicates Greenwich Mean Time without any offset. GMT-4:00 indicates the time is 4 hours behind GMT. GMT+2:00 indicates the time is 2 hours ahead of GMT. The time zone is used, for example, for scheduling snapshots and your gateway's maintenance schedule.
      */
     GatewayTimezone: GatewayTimezone;
     /**
@@ -751,7 +751,7 @@ declare namespace StorageGateway {
      */
     GatewayRegion: RegionId;
     /**
-     * A value that defines the type of gateway to activate. The type specified is critical to all later functions of the gateway and cannot be changed after activation. The default value is CACHED. Valid Values: STORED | CACHED | VTL | VTL_SNOW | FILE_S3 | FILE_FSX_SMB 
+     * A value that defines the type of gateway to activate. The type specified is critical to all later functions of the gateway and cannot be changed after activation. The default value is CACHED. Valid Values: STORED | CACHED | VTL | FILE_S3 | FILE_FSX_SMB 
      */
     GatewayType?: GatewayType;
     /**
@@ -1853,7 +1853,7 @@ declare namespace StorageGateway {
      */
     CloudWatchLogGroupARN?: CloudWatchLogGroupARN;
     /**
-     * The type of hardware or software platform on which the gateway is running.
+     * The type of hardware or software platform on which the gateway is running.  Tape Gateway is no longer available on Snow Family devices. 
      */
     HostEnvironment?: HostEnvironment;
     /**
@@ -1953,7 +1953,7 @@ declare namespace StorageGateway {
      */
     SMBGuestPasswordSet?: Boolean;
     /**
-     * The type of security strategy that was specified for file gateway.    ClientSpecified: If you use this option, requests are established based on what is negotiated by the client. This option is recommended when you want to maximize compatibility across different clients in your environment. Only supported for S3 File Gateways.    MandatorySigning: If you use this option, file gateway only allows connections from SMBv2 or SMBv3 clients that have signing enabled. This option works with SMB clients on Microsoft Windows Vista, Windows Server 2008 or newer.    MandatoryEncryption: If you use this option, file gateway only allows connections from SMBv3 clients that have encryption enabled. This option is highly recommended for environments that handle sensitive data. This option works with SMB clients on Microsoft Windows 8, Windows Server 2012 or newer.  
+     * The type of security strategy that was specified for file gateway.    ClientSpecified: If you choose this option, requests are established based on what is negotiated by the client. This option is recommended when you want to maximize compatibility across different clients in your environment. Supported only for S3 File Gateway.    MandatorySigning: If you use this option, File Gateway only allows connections from SMBv2 or SMBv3 clients that have signing turned on. This option works with SMB clients on Microsoft Windows Vista, Windows Server 2008, or later.     MandatoryEncryption: If you use this option, File Gateway only allows connections from SMBv3 clients that have encryption turned on. Both 256-bit and 128-bit algorithms are allowed. This option is recommended for environments that handle sensitive data. It works with SMB clients on Microsoft Windows 8, Windows Server 2012, or later.    EnforceEncryption: If you use this option, File Gateway only allows connections from SMBv3 clients that use 256-bit AES encryption algorithms. 128-bit algorithms are not allowed. This option is recommended for environments that handle sensitive data. It works with SMB clients on Microsoft Windows 8, Windows Server 2012, or later.  
      */
     SMBSecurityStrategy?: SMBSecurityStrategy;
     /**
@@ -2362,7 +2362,7 @@ declare namespace StorageGateway {
      */
     Ec2InstanceRegion?: Ec2InstanceRegion;
     /**
-     * The type of hardware or software platform on which the gateway is running.
+     * The type of hardware or software platform on which the gateway is running.  Tape Gateway is no longer available on Snow Family devices. 
      */
     HostEnvironment?: HostEnvironment;
     /**
@@ -2802,7 +2802,7 @@ declare namespace StorageGateway {
      */
     FileShareARN: FileShareARN;
     /**
-     * A comma-separated list of the paths of folders to refresh in the cache. The default is ["/"]. The default refreshes objects and folders at the root of the Amazon S3 bucket. If Recursive is set to true, the entire S3 bucket that the file share has access to is refreshed.
+     * A comma-separated list of the paths of folders to refresh in the cache. The default is ["/"]. The default refreshes objects and folders at the root of the Amazon S3 bucket. If Recursive is set to true, the entire S3 bucket that the file share has access to is refreshed. Do not include / when specifying folder names. For example, you would specify samplefolder rather than samplefolder/.
      */
     FolderList?: FolderList;
     /**
@@ -2969,7 +2969,7 @@ declare namespace StorageGateway {
      */
     GatewayAdmins?: UserList;
   }
-  export type SMBSecurityStrategy = "ClientSpecified"|"MandatorySigning"|"MandatoryEncryption"|string;
+  export type SMBSecurityStrategy = "ClientSpecified"|"MandatorySigning"|"MandatoryEncryption"|"MandatoryEncryptionNoAes128"|string;
   export interface SetLocalConsolePasswordInput {
     GatewayARN: GatewayARN;
     /**

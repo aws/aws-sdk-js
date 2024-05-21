@@ -378,3 +378,4 @@ export import CodeConnections = require('./codeconnections');
 export import Deadline = require('./deadline');
 export import ControlCatalog = require('./controlcatalog');
 export import Route53Profiles = require('./route53profiles');
+export import MailManager = require('./mailmanager');

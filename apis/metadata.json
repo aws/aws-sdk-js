@@ -1418,5 +1418,8 @@
   },
   "route53profiles": {
     "name": "Route53Profiles"
+  },
+  "mailmanager": {
+    "name": "MailManager"
   }
 }

@@ -380,6 +380,7 @@ export abstract class ConfigurationServicePlaceholders {
   deadline?: AWS.Deadline.Types.ClientConfiguration;
   controlcatalog?: AWS.ControlCatalog.Types.ClientConfiguration;
   route53profiles?: AWS.Route53Profiles.Types.ClientConfiguration;
+  mailmanager?: AWS.MailManager.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -762,4 +763,5 @@ export interface ConfigurationServiceApiVersions {
   deadline?: AWS.Deadline.Types.apiVersion;
   controlcatalog?: AWS.ControlCatalog.Types.apiVersion;
   route53profiles?: AWS.Route53Profiles.Types.apiVersion;
+  mailmanager?: AWS.MailManager.Types.apiVersion;
 }
