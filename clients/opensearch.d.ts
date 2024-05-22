@@ -1321,9 +1321,14 @@ declare namespace OpenSearch {
      * A description of the data source.
      */
     Description?: DataSourceDescription;
+    /**
+     * The status of the data source.
+     */
+    Status?: DataSourceStatus;
   }
   export type DataSourceList = DataSourceDetails[];
   export type DataSourceName = string;
+  export type DataSourceStatus = "ACTIVE"|"DISABLED"|string;
   export interface DataSourceType {
     /**
      * An Amazon S3 data source.
@@ -2052,7 +2057,7 @@ declare namespace OpenSearch {
      */
     Endpoints?: EndpointsMap;
     /**
-     * The DualStack Hosted Zone Id for the domain. 
+     * The dual stack hosted zone ID for the domain. 
      */
     DomainEndpointV2HostedZoneId?: HostedZoneId;
     /**
@@ -2318,6 +2323,10 @@ declare namespace OpenSearch {
      * A description of the data source.
      */
     Description?: DataSourceDescription;
+    /**
+     * The status of the data source response.
+     */
+    Status?: DataSourceStatus;
   }
   export interface GetDomainMaintenanceStatusRequest {
     /**
@@ -3579,6 +3588,10 @@ declare namespace OpenSearch {
      * A new description of the data source.
      */
     Description?: DataSourceDescription;
+    /**
+     * The status of the data source update request.
+     */
+    Status?: DataSourceStatus;
   }
   export interface UpdateDataSourceResponse {
     /**

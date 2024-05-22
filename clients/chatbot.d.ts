@@ -164,6 +164,30 @@ declare class Chatbot extends Service {
    */
   listMicrosoftTeamsUserIdentities(callback?: (err: AWSError, data: Chatbot.Types.ListMicrosoftTeamsUserIdentitiesResult) => void): Request<Chatbot.Types.ListMicrosoftTeamsUserIdentitiesResult, AWSError>;
   /**
+   * Retrieves the list of tags applied to a configuration.
+   */
+  listTagsForResource(params: Chatbot.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Chatbot.Types.ListTagsForResourceResponse) => void): Request<Chatbot.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Retrieves the list of tags applied to a configuration.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Chatbot.Types.ListTagsForResourceResponse) => void): Request<Chatbot.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Applies the supplied tags to a configuration.
+   */
+  tagResource(params: Chatbot.Types.TagResourceRequest, callback?: (err: AWSError, data: Chatbot.Types.TagResourceResponse) => void): Request<Chatbot.Types.TagResourceResponse, AWSError>;
+  /**
+   * Applies the supplied tags to a configuration.
+   */
+  tagResource(callback?: (err: AWSError, data: Chatbot.Types.TagResourceResponse) => void): Request<Chatbot.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes the supplied tags from a configuration
+   */
+  untagResource(params: Chatbot.Types.UntagResourceRequest, callback?: (err: AWSError, data: Chatbot.Types.UntagResourceResponse) => void): Request<Chatbot.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes the supplied tags from a configuration
+   */
+  untagResource(callback?: (err: AWSError, data: Chatbot.Types.UntagResourceResponse) => void): Request<Chatbot.Types.UntagResourceResponse, AWSError>;
+  /**
    * Update Chatbot account level preferences
    */
   updateAccountPreferences(params: Chatbot.Types.UpdateAccountPreferencesRequest, callback?: (err: AWSError, data: Chatbot.Types.UpdateAccountPreferencesResult) => void): Request<Chatbot.Types.UpdateAccountPreferencesResult, AWSError>;
@@ -207,6 +231,7 @@ declare namespace Chatbot {
      */
     TrainingDataCollectionEnabled?: BooleanAccountPreference;
   }
+  export type AmazonResourceName = string;
   export type Arn = string;
   export type AwsUserIdentity = string;
   export type BooleanAccountPreference = boolean;
@@ -236,6 +261,10 @@ declare namespace Chatbot {
      * Specifies the logging level for this configuration. This property affects the log entries pushed to Amazon CloudWatch Logs.Logging levels include ERROR, INFO, or NONE.
      */
     LoggingLevel?: CustomerCwLogLevel;
+    /**
+     * A list of tags applied to the configuration.
+     */
+    Tags?: Tags;
   }
   export type ChimeWebhookConfigurationList = ChimeWebhookConfiguration[];
   export type ChimeWebhookDescription = string;
@@ -281,6 +310,10 @@ declare namespace Chatbot {
      * Logging levels include ERROR, INFO, or NONE.
      */
     LoggingLevel?: CustomerCwLogLevel;
+    /**
+     * A list of tags to apply to the configuration.
+     */
+    Tags?: Tags;
   }
   export interface CreateChimeWebhookConfigurationResult {
     /**
@@ -325,6 +358,10 @@ declare namespace Chatbot {
      * Enables use of a user role requirement in your chat configuration.
      */
     UserAuthorizationRequired?: BooleanAccountPreference;
+    /**
+     * A list of tags to apply to the configuration.
+     */
+    Tags?: Tags;
   }
   export interface CreateSlackChannelConfigurationResult {
     /**
@@ -377,6 +414,10 @@ declare namespace Chatbot {
      * Enables use of a user role requirement in your chat configuration.
      */
     UserAuthorizationRequired?: BooleanAccountPreference;
+    /**
+     * A list of tags to apply to the configuration.
+     */
+    Tags?: Tags;
   }
   export interface CreateTeamsChannelConfigurationResult {
     /**
@@ -611,6 +652,18 @@ declare namespace Chatbot {
      */
     NextToken?: PaginationToken;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The ARN of the configuration.
+     */
+    ResourceARN: AmazonResourceName;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * A list of tags applied to the configuration.
+     */
+    Tags?: TagList;
+  }
   export interface ListTeamsChannelConfigurationsRequest {
     /**
      * The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
@@ -682,6 +735,10 @@ declare namespace Chatbot {
      * Enables use of a user role requirement in your chat configuration.
      */
     UserAuthorizationRequired?: BooleanAccountPreference;
+    /**
+     * A list of tags applied to the configuration.
+     */
+    Tags?: Tags;
   }
   export type SlackChannelConfigurationList = SlackChannelConfiguration[];
   export type SlackChannelDisplayName = string;
@@ -725,6 +782,33 @@ declare namespace Chatbot {
   export type SlackWorkspacesList = SlackWorkspace[];
   export type SnsTopicArnList = Arn[];
   export type String = string;
+  export interface Tag {
+    /**
+     * The tag key.
+     */
+    TagKey: TagKey;
+    /**
+     * The tag value.
+     */
+    TagValue: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The ARN of the configuration.
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     * A list of tags to apply to the configuration.
+     */
+    Tags: TagList;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
+  export type Tags = Tag[];
   export type TeamChannelConfigurationsList = TeamsChannelConfiguration[];
   export type TeamName = string;
   export interface TeamsChannelConfiguration {
@@ -776,6 +860,10 @@ declare namespace Chatbot {
      * Enables use of a user role requirement in your chat configuration.
      */
     UserAuthorizationRequired?: BooleanAccountPreference;
+    /**
+     * A list of tags applied to the configuration.
+     */
+    Tags?: Tags;
   }
   export type TeamsChannelId = string;
   export type TeamsChannelName = string;
@@ -811,6 +899,18 @@ declare namespace Chatbot {
     TeamsTenantId?: UUID;
   }
   export type UUID = string;
+  export interface UntagResourceRequest {
+    /**
+     * The ARN of the configuration.
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     * A list of tag keys to remove from the configuration.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateAccountPreferencesRequest {
     /**
      * Enables use of a user role requirement in your chat configuration.

@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1625.0',
+	  VERSION: '2.1626.0',
 
 	  /**
 	   * @api private
@@ -2949,7 +2949,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var memberRules = rules.member || {};
 
 	  if (list.length === 0) {
-	    fn.call(this, name, null);
+	    if (rules.api.protocol !== 'ec2') {
+	      fn.call(this, name, null);
+	    }
 	    return;
 	  }
 

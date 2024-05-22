@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1625.0-->
+<!--LATEST=2.1626.0-->
 <!--ENTRYINSERT-->
+
+## 2.1626.0
+* bugfix: EC2: do not serialize empty lists for EC2
+* feature: Chatbot: This change adds support for tagging Chatbot configurations.
+* feature: CloudFormation: Added DeletionMode FORCE_DELETE_STACK for deleting a stack that is stuck in DELETE_FAILED state due to resource deletion failure.
+* feature: KMS: This release includes feature to import customer's asymmetric (RSA, ECC and SM2) and HMAC keys into KMS in China.
+* feature: OpenSearch: This release adds support for enabling or disabling a data source configured as part of Zero-ETL integration with Amazon S3, by setting its status.
+* feature: WAFV2: You can now use Security Lake to collect web ACL traffic data.
 
 ## 2.1625.0
 * feature: CloudFront: Model update; no change to SDK functionality.
