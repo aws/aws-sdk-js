@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "EC2",
+  "description": "do not serialize empty lists for EC2"
+}
