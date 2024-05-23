@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1626.0',
+	  VERSION: '2.1627.0',
 
 	  /**
 	   * @api private
@@ -3594,6 +3594,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	var AWS = __webpack_require__(1);
 	var util = __webpack_require__(2);
 	var Rest = __webpack_require__(26);
 	var Json = __webpack_require__(18);
@@ -3671,7 +3672,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var body = resp.httpResponse.body;
 	    if (payloadMember.isEventStream) {
 	      parser = new JsonParser();
-	      resp.data[payload] = util.createEventStream(
+	      resp.data[rules.payload] = util.createEventStream(
 	        AWS.HttpClient.streamsApiVersion === 2 ? resp.httpResponse.stream : body,
 	        parser,
 	        payloadMember

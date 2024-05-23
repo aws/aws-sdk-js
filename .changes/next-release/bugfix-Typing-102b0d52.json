@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Typing",
-  "description": "Align the typing for constructor param of TokenFileWebIdentityCredentials with STS client"
-}

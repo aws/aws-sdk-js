@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1626.0-->
+<!--LATEST=2.1627.0-->
 <!--ENTRYINSERT-->
+
+## 2.1627.0
+* bugfix: SSO: fix sso credential resolution failure when sso-session access token requires a refresh
+* bugfix: Typing: Align the typing for constructor param of TokenFileWebIdentityCredentials with STS client
+* bugfix: rest-json: use rules.payload when extracting data for event stream
+* feature: EMRServerless: This release adds the capability to run interactive workloads using Apache Livy Endpoint.
+* feature: MetadataService: Update AWS.MetadataService to expose the fetchMetadataToken function.
 
 ## 2.1626.0
 * bugfix: EC2: do not serialize empty lists for EC2

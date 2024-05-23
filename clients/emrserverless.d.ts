@@ -211,6 +211,10 @@ declare namespace EMRServerless {
      */
     runtimeConfiguration?: ConfigurationList;
     monitoringConfiguration?: MonitoringConfiguration;
+    /**
+     * The interactive configuration object that enables the interactive use cases for an application.
+     */
+    interactiveConfiguration?: InteractiveConfiguration;
   }
   export type ApplicationArn = string;
   export type ApplicationId = string;
@@ -411,6 +415,10 @@ declare namespace EMRServerless {
      * The configuration setting for monitoring.
      */
     monitoringConfiguration?: MonitoringConfiguration;
+    /**
+     * The interactive configuration object that enables the interactive use cases to use when running an application.
+     */
+    interactiveConfiguration?: InteractiveConfiguration;
   }
   export interface CreateApplicationResponse {
     /**
@@ -535,6 +543,16 @@ declare namespace EMRServerless {
   }
   export type InitialCapacityConfigMap = {[key: string]: InitialCapacityConfig};
   export type Integer = number;
+  export interface InteractiveConfiguration {
+    /**
+     * Enables you to connect an application to Amazon EMR Studio to run interactive workloads in a notebook.
+     */
+    studioEnabled?: Boolean;
+    /**
+     * Enables an Apache Livy endpoint that you can connect to and run interactive jobs.
+     */
+    livyEndpointEnabled?: Boolean;
+  }
   export type JobArn = string;
   export interface JobDriver {
     /**
@@ -1010,6 +1028,10 @@ declare namespace EMRServerless {
      * The key-value pairs that specify worker type to WorkerTypeSpecificationInput. This parameter must contain all valid worker types for a Spark or Hive application. Valid worker types include Driver and Executor for Spark applications and HiveDriver and TezTask for Hive applications. You can either set image details in this parameter for each worker type, or in imageConfiguration for all worker types.
      */
     workerTypeSpecifications?: WorkerTypeSpecificationInputMap;
+    /**
+     * The interactive configuration object that contains new interactive use cases when the application is updated.
+     */
+    interactiveConfiguration?: InteractiveConfiguration;
     /**
      * The Amazon EMR release label for the application. You can change the release label to use a different release of Amazon EMR.
      */
