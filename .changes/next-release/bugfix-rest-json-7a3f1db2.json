@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "rest-json",
+  "description": "use rules.payload when extracting data for event stream"
+}
