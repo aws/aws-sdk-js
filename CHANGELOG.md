@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1627.0-->
+<!--LATEST=2.1628.0-->
 <!--ENTRYINSERT-->
+
+## 2.1628.0
+* feature: IoTFleetWise: AWS IoT FleetWise now supports listing vehicles with attributes filter, ListVehicles API is updated to support additional attributes filter.
 
 ## 2.1627.0
 * bugfix: SSO: fix sso credential resolution failure when sso-session access token requires a refresh

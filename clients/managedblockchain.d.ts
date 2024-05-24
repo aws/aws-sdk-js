@@ -326,7 +326,7 @@ declare namespace ManagedBlockchain {
      */
     Tags?: InputTagMap;
     /**
-     * The blockchain network that the Accessor token is created for.  We recommend using the appropriate networkType value for the blockchain network that you are creating the Accessor token for. You cannnot use the value ETHEREUM_MAINNET_AND_GOERLI to specify a networkType for your Accessor token. The default value of ETHEREUM_MAINNET_AND_GOERLI is only applied:   when the CreateAccessor action does not set a networkType.   to all existing Accessor tokens that were created before the networkType property was introduced.    
+     * The blockchain network that the Accessor token is created for.    Use the actual networkType value for the blockchain network that you are creating the Accessor token for.   With the shut down of the Ethereum Goerli and Polygon Mumbai Testnet networks the following networkType values are no longer available for selection and use.    ETHEREUM_MAINNET_AND_GOERLI     ETHEREUM_GOERLI     POLYGON_MUMBAI    However, your existing Accessor tokens with these networkType values will remain unchanged.   
      */
     NetworkType?: AccessorNetworkType;
   }
@@ -422,7 +422,7 @@ declare namespace ManagedBlockchain {
      */
     ClientRequestToken: ClientRequestTokenString;
     /**
-     * The unique identifier of the network for the node. Ethereum public networks have the following NetworkIds:    n-ethereum-mainnet     n-ethereum-goerli   
+     * The unique identifier of the network for the node. Ethereum public networks have the following NetworkIds:    n-ethereum-mainnet   
      */
     NetworkId: ResourceIdString;
     /**
@@ -498,7 +498,7 @@ declare namespace ManagedBlockchain {
   }
   export interface DeleteNodeInput {
     /**
-     * The unique identifier of the network that the node is on. Ethereum public networks have the following NetworkIds:    n-ethereum-mainnet     n-ethereum-goerli   
+     * The unique identifier of the network that the node is on. Ethereum public networks have the following NetworkIds:    n-ethereum-mainnet   
      */
     NetworkId: ResourceIdString;
     /**
@@ -1050,7 +1050,7 @@ declare namespace ManagedBlockchain {
   }
   export interface NetworkEthereumAttributes {
     /**
-     * The Ethereum CHAIN_ID associated with the Ethereum network. Chain IDs are as follows:   mainnet = 1    goerli = 5   
+     * The Ethereum CHAIN_ID associated with the Ethereum network. Chain IDs are as follows:   mainnet = 1   
      */
     ChainId?: String;
   }

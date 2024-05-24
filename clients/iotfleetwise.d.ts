@@ -733,7 +733,7 @@ declare namespace IoTFleetWise {
      */
     description?: description;
     /**
-     * (Optional) The Amazon Resource Name (ARN) of the signal catalog to associate with the campaign. 
+     * The Amazon Resource Name (ARN) of the signal catalog to associate with the campaign. 
      */
     signalCatalogArn: arn;
     /**
@@ -1954,6 +1954,14 @@ declare namespace IoTFleetWise {
      */
     modelManifestArn?: arn;
     /**
+     * The fully qualified names of the attributes. For example, the fully qualified name of an attribute might be Vehicle.Body.Engine.Type.
+     */
+    attributeNames?: attributeNamesList;
+    /**
+     * Static information about a vehicle attribute value in string format. For example:  "1.3 L R2" 
+     */
+    attributeValues?: attributeValuesList;
+    /**
      * A pagination token for the next set of results. If the results of a search are large, only a portion of the results are returned, and a nextToken pagination token is returned in the response. To retrieve the next set of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value. 
      */
     nextToken?: nextToken;
@@ -2839,7 +2847,9 @@ declare namespace IoTFleetWise {
   }
   export type arn = string;
   export type attributeName = string;
+  export type attributeNamesList = attributeName[];
   export type attributeValue = string;
+  export type attributeValuesList = attributeValue[];
   export type attributesMap = {[key: string]: attributeValue};
   export type campaignName = string;
   export type campaignSummaries = CampaignSummary[];
