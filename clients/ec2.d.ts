@@ -9140,7 +9140,7 @@ declare namespace EC2 {
   }
   export interface CreateCustomerGatewayRequest {
     /**
-     * For devices that support BGP, the customer gateway's BGP ASN. Default: 65000
+     * For customer gateway devices that support BGP, specify the device's ASN. You must specify either BgpAsn or BgpAsnExtended when creating the customer gateway. If the ASN is larger than 2,147,483,647, you must use BgpAsnExtended. Default: 65000 Valid values: 1 to 2,147,483,647 
      */
     BgpAsn?: Integer;
     /**
@@ -9164,13 +9164,17 @@ declare namespace EC2 {
      */
     DeviceName?: String;
     /**
-     *  IPv4 address for the customer gateway device's outside interface. The address must be static. 
+     * IPv4 address for the customer gateway device's outside interface. The address must be static. If OutsideIpAddressType in your VPN connection options is set to PrivateIpv4, you can use an RFC6598 or RFC1918 private IPv4 address. If OutsideIpAddressType is set to PublicIpv4, you can use a public IPv4 address. 
      */
     IpAddress?: String;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * For customer gateway devices that support BGP, specify the device's ASN. You must specify either BgpAsn or BgpAsnExtended when creating the customer gateway. If the ASN is larger than 2,147,483,647, you must use BgpAsnExtended. Valid values: 2,147,483,648 to 4,294,967,295 
+     */
+    BgpAsnExtended?: Long;
   }
   export interface CreateCustomerGatewayResult {
     /**
@@ -12002,7 +12006,7 @@ declare namespace EC2 {
   export type CurrentGenerationFlag = boolean;
   export interface CustomerGateway {
     /**
-     * The customer gateway's Border Gateway Protocol (BGP) Autonomous System Number (ASN).
+     * The customer gateway device's Border Gateway Protocol (BGP) Autonomous System Number (ASN). Valid values: 1 to 2,147,483,647 
      */
     BgpAsn?: String;
     /**
@@ -12010,7 +12014,7 @@ declare namespace EC2 {
      */
     CustomerGatewayId?: String;
     /**
-     * The IP address of the customer gateway device's outside interface.
+     *  IPv4 address for the customer gateway device's outside interface. The address must be static. If OutsideIpAddressType in your VPN connection options is set to PrivateIpv4, you can use an RFC6598 or RFC1918 private IPv4 address. If OutsideIpAddressType is set to PublicIpv4, you can use a public IPv4 address. 
      */
     IpAddress?: String;
     /**
@@ -12033,6 +12037,10 @@ declare namespace EC2 {
      * Any tags assigned to the customer gateway.
      */
     Tags?: TagList;
+    /**
+     * The customer gateway device's Border Gateway Protocol (BGP) Autonomous System Number (ASN). Valid values: 2,147,483,648 to 4,294,967,295 
+     */
+    BgpAsnExtended?: String;
   }
   export type CustomerGatewayId = string;
   export type CustomerGatewayIdStringList = CustomerGatewayId[];

@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1628.0-->
+<!--LATEST=2.1629.0-->
 <!--ENTRYINSERT-->
+
+## 2.1629.0
+* feature: EC2: Providing support to accept BgpAsnExtended attribute
+* feature: Kafka: Adds ControllerNodeInfo in ListNodes response to support Raft mode for MSK
+* feature: SWF: This release adds new APIs for deleting activity type and workflow type resources.
 
 ## 2.1628.0
 * feature: IoTFleetWise: AWS IoT FleetWise now supports listing vehicles with attributes filter, ListVehicles API is updated to support additional attributes filter.

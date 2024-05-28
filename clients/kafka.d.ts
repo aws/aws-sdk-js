@@ -1949,6 +1949,14 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     OperationType?: __string;
   }
+  export interface ControllerNodeInfo {
+    /**
+     * 
+            Endpoints for accessing the Controller.
+         
+     */
+    Endpoints?: __listOf__string;
+  }
   export type CustomerActionStatus = "CRITICAL_ACTION_REQUIRED"|"ACTION_RECOMMENDED"|"NONE"|string;
   export interface DeleteClusterRequest {
     /**
@@ -3334,6 +3342,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     BrokerNodeInfo?: BrokerNodeInfo;
+    /**
+     * 
+            The ControllerNodeInfo.
+         
+     */
+    ControllerNodeInfo?: ControllerNodeInfo;
     /**
      * 
             The instance type.
