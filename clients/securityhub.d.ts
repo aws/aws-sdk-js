@@ -15903,7 +15903,7 @@ declare namespace SecurityHub {
      */
     RootId?: NonEmptyString;
   }
-  export type TargetType = "ACCOUNT"|"ORGANIZATIONAL_UNIT"|string;
+  export type TargetType = "ACCOUNT"|"ORGANIZATIONAL_UNIT"|"ROOT"|string;
   export interface Threat {
     /**
      * The name of the threat.  Length Constraints: Minimum of 1 length. Maximum of 128 length.

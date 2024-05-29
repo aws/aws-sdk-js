@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1629.0-->
+<!--LATEST=2.1630.0-->
 <!--ENTRYINSERT-->
+
+## 2.1630.0
+* feature: Athena: Throwing validation errors on CreateNotebook with Name containing `/`,`:`,`\`
+* feature: CodeBuild: AWS CodeBuild now supports manually creating GitHub webhooks
+* feature: Connect: This release includes changes to DescribeContact API's response by including ConnectedToSystemTimestamp, RoutingCriteria, Customer, Campaign, AnsweringMachineDetectionStatus, CustomerVoiceActivity, QualityMetrics, DisconnectDetails, and SegmentAttributes information from a contact in Amazon Connect.
+* feature: Glue: Add optional field JobMode to CreateJob and UpdateJob APIs.
+* feature: SecurityHub: Add ROOT type for TargetType model
 
 ## 2.1629.0
 * feature: EC2: Providing support to accept BgpAsnExtended attribute

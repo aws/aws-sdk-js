@@ -1053,7 +1053,7 @@ declare namespace CodeBuild {
     overflowBehavior?: FleetOverflowBehavior;
     vpcConfig?: VpcConfig;
     /**
-     * The service role associated with the compute fleet.
+     * The service role associated with the compute fleet. For more information, see  Allow a user to add a permission policy for a fleet service role in the CodeBuild User Guide.
      */
     fleetServiceRole?: NonEmptyString;
     /**
@@ -1200,6 +1200,10 @@ declare namespace CodeBuild {
      * Specifies the type of build this webhook will trigger.
      */
     buildType?: WebhookBuildType;
+    /**
+     * If manualCreation is true, CodeBuild doesn't create a webhook in GitHub and instead returns payloadUrl and secret values for the webhook. The payloadUrl and secret values in the output can be used to manually create a webhook within GitHub.  manualCreation is only available for GitHub webhooks. 
+     */
+    manualCreation?: WrapperBoolean;
   }
   export interface CreateWebhookOutput {
     /**
@@ -1485,7 +1489,7 @@ declare namespace CodeBuild {
     overflowBehavior?: FleetOverflowBehavior;
     vpcConfig?: VpcConfig;
     /**
-     * The service role associated with the compute fleet.
+     * The service role associated with the compute fleet. For more information, see  Allow a user to add a permission policy for a fleet service role in the CodeBuild User Guide.
      */
     fleetServiceRole?: NonEmptyString;
     /**
@@ -3038,7 +3042,7 @@ declare namespace CodeBuild {
     overflowBehavior?: FleetOverflowBehavior;
     vpcConfig?: VpcConfig;
     /**
-     * The service role associated with the compute fleet.
+     * The service role associated with the compute fleet. For more information, see  Allow a user to add a permission policy for a fleet service role in the CodeBuild User Guide.
      */
     fleetServiceRole?: NonEmptyString;
     /**
@@ -3251,6 +3255,10 @@ declare namespace CodeBuild {
      * Specifies the type of build this webhook will trigger.
      */
     buildType?: WebhookBuildType;
+    /**
+     * If manualCreation is true, CodeBuild doesn't create a webhook in GitHub and instead returns payloadUrl and secret values for the webhook. The payloadUrl and secret values in the output can be used to manually create a webhook within GitHub.  manualCreation is only available for GitHub webhooks. 
+     */
+    manualCreation?: WrapperBoolean;
     /**
      * A timestamp that indicates the last time a repository's secret token was modified. 
      */

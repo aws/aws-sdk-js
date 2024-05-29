@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "Athena",
+        "description": "Throwing validation errors on CreateNotebook with Name containing `/`,`:`,`\\`"
+    },
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "AWS CodeBuild now supports manually creating GitHub webhooks"
+    },
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "This release includes changes to DescribeContact API's response by including ConnectedToSystemTimestamp, RoutingCriteria, Customer, Campaign, AnsweringMachineDetectionStatus, CustomerVoiceActivity, QualityMetrics, DisconnectDetails, and SegmentAttributes information from a contact in Amazon Connect."
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "Add optional field JobMode to CreateJob and UpdateJob APIs."
+    },
+    {
+        "type": "feature",
+        "category": "SecurityHub",
+        "description": "Add ROOT type for TargetType model"
+    }
+]

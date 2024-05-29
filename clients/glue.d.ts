@@ -4261,6 +4261,10 @@ declare namespace Glue {
      */
     Name: NameString;
     /**
+     * A mode that describes how a job was created. Valid values are:    SCRIPT - The job was created using the Glue Studio script editor.    VISUAL - The job was created using the Glue Studio visual editor.    NOTEBOOK - The job was created using an interactive sessions notebook.   When the JobMode field is missing or null, SCRIPT is assigned as the default value.
+     */
+    JobMode?: JobMode;
+    /**
      * Description of the job being defined.
      */
     Description?: DescriptionString;
@@ -8845,6 +8849,10 @@ declare namespace Glue {
      */
     Name?: NameString;
     /**
+     * A mode that describes how a job was created. Valid values are:    SCRIPT - The job was created using the Glue Studio script editor.    VISUAL - The job was created using the Glue Studio visual editor.    NOTEBOOK - The job was created using an interactive sessions notebook.   When the JobMode field is missing or null, SCRIPT is assigned as the default value.
+     */
+    JobMode?: JobMode;
+    /**
      * A description of the job.
      */
     Description?: DescriptionString;
@@ -8997,6 +9005,7 @@ declare namespace Glue {
     Runtime?: RuntimeNameString;
   }
   export type JobList = Job[];
+  export type JobMode = "SCRIPT"|"VISUAL"|"NOTEBOOK"|string;
   export type JobName = string;
   export type JobNameList = NameString[];
   export interface JobNodeDetails {
@@ -9026,6 +9035,10 @@ declare namespace Glue {
      * The name of the job definition being used in this run.
      */
     JobName?: NameString;
+    /**
+     * A mode that describes how a job was created. Valid values are:    SCRIPT - The job was created using the Glue Studio script editor.    VISUAL - The job was created using the Glue Studio visual editor.    NOTEBOOK - The job was created using an interactive sessions notebook.   When the JobMode field is missing or null, SCRIPT is assigned as the default value.
+     */
+    JobMode?: JobMode;
     /**
      * The date and time at which this job run was started.
      */
@@ -9110,6 +9123,10 @@ declare namespace Glue {
   export type JobRunList = JobRun[];
   export type JobRunState = "STARTING"|"RUNNING"|"STOPPING"|"STOPPED"|"SUCCEEDED"|"FAILED"|"TIMEOUT"|"ERROR"|"WAITING"|"EXPIRED"|string;
   export interface JobUpdate {
+    /**
+     * A mode that describes how a job was created. Valid values are:    SCRIPT - The job was created using the Glue Studio script editor.    VISUAL - The job was created using the Glue Studio visual editor.    NOTEBOOK - The job was created using an interactive sessions notebook.   When the JobMode field is missing or null, SCRIPT is assigned as the default value.
+     */
+    JobMode?: JobMode;
     /**
      * Description of the job being defined.
      */

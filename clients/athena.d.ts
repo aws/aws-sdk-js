@@ -252,11 +252,11 @@ declare class Athena extends Service {
    */
   getQueryResults(callback?: (err: AWSError, data: Athena.Types.GetQueryResultsOutput) => void): Request<Athena.Types.GetQueryResultsOutput, AWSError>;
   /**
-   * Returns query execution runtime statistics related to a single execution of a query if you have access to the workgroup in which the query ran. Query execution runtime statistics are returned only when QueryExecutionStatus$State is in a SUCCEEDED or FAILED state. Stage-level input and output row count and data size statistics are not shown when a query has row-level filters defined in Lake Formation.
+   * Returns query execution runtime statistics related to a single execution of a query if you have access to the workgroup in which the query ran. Statistics from the Timeline section of the response object are available as soon as QueryExecutionStatus$State is in a SUCCEEDED or FAILED state. The remaining non-timeline statistics in the response (like stage-level input and output row count and data size) are updated asynchronously and may not be available immediately after a query completes. The non-timeline statistics are also not included when a query has row-level filters defined in Lake Formation.
    */
   getQueryRuntimeStatistics(params: Athena.Types.GetQueryRuntimeStatisticsInput, callback?: (err: AWSError, data: Athena.Types.GetQueryRuntimeStatisticsOutput) => void): Request<Athena.Types.GetQueryRuntimeStatisticsOutput, AWSError>;
   /**
-   * Returns query execution runtime statistics related to a single execution of a query if you have access to the workgroup in which the query ran. Query execution runtime statistics are returned only when QueryExecutionStatus$State is in a SUCCEEDED or FAILED state. Stage-level input and output row count and data size statistics are not shown when a query has row-level filters defined in Lake Formation.
+   * Returns query execution runtime statistics related to a single execution of a query if you have access to the workgroup in which the query ran. Statistics from the Timeline section of the response object are available as soon as QueryExecutionStatus$State is in a SUCCEEDED or FAILED state. The remaining non-timeline statistics in the response (like stage-level input and output row count and data size) are updated asynchronously and may not be available immediately after a query completes. The non-timeline statistics are also not included when a query has row-level filters defined in Lake Formation.
    */
   getQueryRuntimeStatistics(callback?: (err: AWSError, data: Athena.Types.GetQueryRuntimeStatisticsOutput) => void): Request<Athena.Types.GetQueryRuntimeStatisticsOutput, AWSError>;
   /**
@@ -2392,7 +2392,7 @@ declare namespace Athena {
   export type QueryString = string;
   export interface ResultConfiguration {
     /**
-     * The location in Amazon S3 where your query and calculation results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration. If none of them is set, Athena issues an error that no output location is provided. For more information, see Working with query results, recent queries, and output files. If workgroup settings override client-side settings, then the query uses the settings specified for the workgroup. See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
+     * The location in Amazon S3 where your query and calculation results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration. If none of them is set, Athena issues an error that no output location is provided. If workgroup settings override client-side settings, then the query uses the settings specified for the workgroup. See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
      */
     OutputLocation?: ResultOutputLocation;
     /**
@@ -2410,7 +2410,7 @@ declare namespace Athena {
   }
   export interface ResultConfigurationUpdates {
     /**
-     * The location in Amazon S3 where your query and calculation results are stored, such as s3://path/to/query/bucket/. For more information, see Working with query results, recent queries, and output files. If workgroup settings override client-side settings, then the query uses the location for the query results and the encryption configuration that are specified for the workgroup. The "workgroup settings override" is specified in EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
+     * The location in Amazon S3 where your query and calculation results are stored, such as s3://path/to/query/bucket/. If workgroup settings override client-side settings, then the query uses the location for the query results and the encryption configuration that are specified for the workgroup. The "workgroup settings override" is specified in EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
      */
     OutputLocation?: ResultOutputLocation;
     /**
@@ -2985,7 +2985,7 @@ declare namespace Athena {
   }
   export interface WorkGroupConfiguration {
     /**
-     * The configuration for the workgroup, which includes the location in Amazon S3 where query and calculation results are stored and the encryption option, if any, used for query and calculation results. To run the query, you must specify the query results location using one of the ways: either in the workgroup using this setting, or for individual queries (client-side), using ResultConfiguration$OutputLocation. If none of them is set, Athena issues an error that no output location is provided. For more information, see Working with query results, recent queries, and output files.
+     * The configuration for the workgroup, which includes the location in Amazon S3 where query and calculation results are stored and the encryption option, if any, used for query and calculation results. To run the query, you must specify the query results location using one of the ways: either in the workgroup using this setting, or for individual queries (client-side), using ResultConfiguration$OutputLocation. If none of them is set, Athena issues an error that no output location is provided.
      */
     ResultConfiguration?: ResultConfiguration;
     /**

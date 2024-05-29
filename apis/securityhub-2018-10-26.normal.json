@@ -22767,7 +22767,8 @@
       "type": "string",
       "enum": [
         "ACCOUNT",
-        "ORGANIZATIONAL_UNIT"
+        "ORGANIZATIONAL_UNIT",
+        "ROOT"
       ]
     },
     "Threat": {

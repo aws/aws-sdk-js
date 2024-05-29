@@ -172,11 +172,11 @@ declare class Connect extends Service {
    */
   batchPutContact(callback?: (err: AWSError, data: Connect.Types.BatchPutContactResponse) => void): Request<Connect.Types.BatchPutContactResponse, AWSError>;
   /**
-   * Claims an available phone number to your Amazon Connect instance or traffic distribution group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created. For more information about how to use this operation, see Claim a phone number in your country and Claim phone numbers to traffic distribution groups in the Amazon Connect Administrator Guide.   You can call the SearchAvailablePhoneNumbers API for available phone numbers that you can claim. Call the DescribePhoneNumber API to verify the status of a previous ClaimPhoneNumber operation.  If you plan to claim and release numbers frequently during a 30 day period, contact us for a service quota exception. Otherwise, it is possible you will be blocked from claiming and releasing any more numbers until 30 days past the oldest number released has expired. By default you can claim and release up to 200% of your maximum number of active phone numbers during any 30 day period. If you claim and release phone numbers using the UI or API during a rolling 30 day cycle that exceeds 200% of your phone number service level quota, you will be blocked from claiming any more numbers until 30 days past the oldest number released has expired.  For example, if you already have 99 claimed numbers and a service level quota of 99 phone numbers, and in any 30 day period you release 99, claim 99, and then release 99, you will have exceeded the 200% limit. At that point you are blocked from claiming any more numbers until you open an Amazon Web Services support ticket.
+   * Claims an available phone number to your Amazon Connect instance or traffic distribution group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created. For more information about how to use this operation, see Claim a phone number in your country and Claim phone numbers to traffic distribution groups in the Amazon Connect Administrator Guide.   You can call the SearchAvailablePhoneNumbers API for available phone numbers that you can claim. Call the DescribePhoneNumber API to verify the status of a previous ClaimPhoneNumber operation.  If you plan to claim and release numbers frequently, contact us for a service quota exception. Otherwise, it is possible you will be blocked from claiming and releasing any more numbers until up to 180 days past the oldest number released has expired. By default you can claim and release up to 200% of your maximum number of active phone numbers. If you claim and release phone numbers using the UI or API during a rolling 180 day cycle that exceeds 200% of your phone number service level quota, you will be blocked from claiming any more numbers until 180 days past the oldest number released has expired.  For example, if you already have 99 claimed numbers and a service level quota of 99 phone numbers, and in any 180 day period you release 99, claim 99, and then release 99, you will have exceeded the 200% limit. At that point you are blocked from claiming any more numbers until you open an Amazon Web Services support ticket.
    */
   claimPhoneNumber(params: Connect.Types.ClaimPhoneNumberRequest, callback?: (err: AWSError, data: Connect.Types.ClaimPhoneNumberResponse) => void): Request<Connect.Types.ClaimPhoneNumberResponse, AWSError>;
   /**
-   * Claims an available phone number to your Amazon Connect instance or traffic distribution group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created. For more information about how to use this operation, see Claim a phone number in your country and Claim phone numbers to traffic distribution groups in the Amazon Connect Administrator Guide.   You can call the SearchAvailablePhoneNumbers API for available phone numbers that you can claim. Call the DescribePhoneNumber API to verify the status of a previous ClaimPhoneNumber operation.  If you plan to claim and release numbers frequently during a 30 day period, contact us for a service quota exception. Otherwise, it is possible you will be blocked from claiming and releasing any more numbers until 30 days past the oldest number released has expired. By default you can claim and release up to 200% of your maximum number of active phone numbers during any 30 day period. If you claim and release phone numbers using the UI or API during a rolling 30 day cycle that exceeds 200% of your phone number service level quota, you will be blocked from claiming any more numbers until 30 days past the oldest number released has expired.  For example, if you already have 99 claimed numbers and a service level quota of 99 phone numbers, and in any 30 day period you release 99, claim 99, and then release 99, you will have exceeded the 200% limit. At that point you are blocked from claiming any more numbers until you open an Amazon Web Services support ticket.
+   * Claims an available phone number to your Amazon Connect instance or traffic distribution group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created. For more information about how to use this operation, see Claim a phone number in your country and Claim phone numbers to traffic distribution groups in the Amazon Connect Administrator Guide.   You can call the SearchAvailablePhoneNumbers API for available phone numbers that you can claim. Call the DescribePhoneNumber API to verify the status of a previous ClaimPhoneNumber operation.  If you plan to claim and release numbers frequently, contact us for a service quota exception. Otherwise, it is possible you will be blocked from claiming and releasing any more numbers until up to 180 days past the oldest number released has expired. By default you can claim and release up to 200% of your maximum number of active phone numbers. If you claim and release phone numbers using the UI or API during a rolling 180 day cycle that exceeds 200% of your phone number service level quota, you will be blocked from claiming any more numbers until 180 days past the oldest number released has expired.  For example, if you already have 99 claimed numbers and a service level quota of 99 phone numbers, and in any 180 day period you release 99, claim 99, and then release 99, you will have exceeded the 200% limit. At that point you are blocked from claiming any more numbers until you open an Amazon Web Services support ticket.
    */
   claimPhoneNumber(callback?: (err: AWSError, data: Connect.Types.ClaimPhoneNumberResponse) => void): Request<Connect.Types.ClaimPhoneNumberResponse, AWSError>;
   /**
@@ -1348,11 +1348,11 @@ declare class Connect extends Service {
    */
   putUserStatus(callback?: (err: AWSError, data: Connect.Types.PutUserStatusResponse) => void): Request<Connect.Types.PutUserStatusResponse, AWSError>;
   /**
-   * Releases a phone number previously claimed to an Amazon Connect instance or traffic distribution group. You can call this API only in the Amazon Web Services Region where the number was claimed.  To release phone numbers from a traffic distribution group, use the ReleasePhoneNumber API, not the Amazon Connect admin website. After releasing a phone number, the phone number enters into a cooldown period of 30 days. It cannot be searched for or claimed again until the period has ended. If you accidentally release a phone number, contact Amazon Web Services Support.  If you plan to claim and release numbers frequently during a 30 day period, contact us for a service quota exception. Otherwise, it is possible you will be blocked from claiming and releasing any more numbers until 30 days past the oldest number released has expired. By default you can claim and release up to 200% of your maximum number of active phone numbers during any 30 day period. If you claim and release phone numbers using the UI or API during a rolling 30 day cycle that exceeds 200% of your phone number service level quota, you will be blocked from claiming any more numbers until 30 days past the oldest number released has expired.  For example, if you already have 99 claimed numbers and a service level quota of 99 phone numbers, and in any 30 day period you release 99, claim 99, and then release 99, you will have exceeded the 200% limit. At that point you are blocked from claiming any more numbers until you open an Amazon Web Services support ticket.
+   * Releases a phone number previously claimed to an Amazon Connect instance or traffic distribution group. You can call this API only in the Amazon Web Services Region where the number was claimed.  To release phone numbers from a traffic distribution group, use the ReleasePhoneNumber API, not the Amazon Connect admin website. After releasing a phone number, the phone number enters into a cooldown period for up to 180 days. It cannot be searched for or claimed again until the period has ended. If you accidentally release a phone number, contact Amazon Web Services Support.  If you plan to claim and release numbers frequently, contact us for a service quota exception. Otherwise, it is possible you will be blocked from claiming and releasing any more numbers until up to 180 days past the oldest number released has expired. By default you can claim and release up to 200% of your maximum number of active phone numbers. If you claim and release phone numbers using the UI or API during a rolling 180 day cycle that exceeds 200% of your phone number service level quota, you will be blocked from claiming any more numbers until 180 days past the oldest number released has expired.  For example, if you already have 99 claimed numbers and a service level quota of 99 phone numbers, and in any 180 day period you release 99, claim 99, and then release 99, you will have exceeded the 200% limit. At that point you are blocked from claiming any more numbers until you open an Amazon Web Services support ticket.
    */
   releasePhoneNumber(params: Connect.Types.ReleasePhoneNumberRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Releases a phone number previously claimed to an Amazon Connect instance or traffic distribution group. You can call this API only in the Amazon Web Services Region where the number was claimed.  To release phone numbers from a traffic distribution group, use the ReleasePhoneNumber API, not the Amazon Connect admin website. After releasing a phone number, the phone number enters into a cooldown period of 30 days. It cannot be searched for or claimed again until the period has ended. If you accidentally release a phone number, contact Amazon Web Services Support.  If you plan to claim and release numbers frequently during a 30 day period, contact us for a service quota exception. Otherwise, it is possible you will be blocked from claiming and releasing any more numbers until 30 days past the oldest number released has expired. By default you can claim and release up to 200% of your maximum number of active phone numbers during any 30 day period. If you claim and release phone numbers using the UI or API during a rolling 30 day cycle that exceeds 200% of your phone number service level quota, you will be blocked from claiming any more numbers until 30 days past the oldest number released has expired.  For example, if you already have 99 claimed numbers and a service level quota of 99 phone numbers, and in any 30 day period you release 99, claim 99, and then release 99, you will have exceeded the 200% limit. At that point you are blocked from claiming any more numbers until you open an Amazon Web Services support ticket.
+   * Releases a phone number previously claimed to an Amazon Connect instance or traffic distribution group. You can call this API only in the Amazon Web Services Region where the number was claimed.  To release phone numbers from a traffic distribution group, use the ReleasePhoneNumber API, not the Amazon Connect admin website. After releasing a phone number, the phone number enters into a cooldown period for up to 180 days. It cannot be searched for or claimed again until the period has ended. If you accidentally release a phone number, contact Amazon Web Services Support.  If you plan to claim and release numbers frequently, contact us for a service quota exception. Otherwise, it is possible you will be blocked from claiming and releasing any more numbers until up to 180 days past the oldest number released has expired. By default you can claim and release up to 200% of your maximum number of active phone numbers. If you claim and release phone numbers using the UI or API during a rolling 180 day cycle that exceeds 200% of your phone number service level quota, you will be blocked from claiming any more numbers until 180 days past the oldest number released has expired.  For example, if you already have 99 claimed numbers and a service level quota of 99 phone numbers, and in any 180 day period you release 99, claim 99, and then release 99, you will have exceeded the 200% limit. At that point you are blocked from claiming any more numbers until you open an Amazon Web Services support ticket.
    */
   releasePhoneNumber(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1564,11 +1564,11 @@ declare class Connect extends Service {
    */
   startWebRTCContact(callback?: (err: AWSError, data: Connect.Types.StartWebRTCContactResponse) => void): Request<Connect.Types.StartWebRTCContactResponse, AWSError>;
   /**
-   * Ends the specified contact. Use this API to stop queued callbacks. It does not work for voice contacts that use the following initiation methods:   DISCONNECT   TRANSFER   QUEUE_TRANSFER   Chat and task contacts can be terminated in any state, regardless of initiation method.
+   * Ends the specified contact. Use this API to stop queued callbacks. It does not work for voice contacts that use the following initiation methods:   DISCONNECT   TRANSFER   QUEUE_TRANSFER   EXTERNAL_OUTBOUND   MONITOR   Chat and task contacts can be terminated in any state, regardless of initiation method.
    */
   stopContact(params: Connect.Types.StopContactRequest, callback?: (err: AWSError, data: Connect.Types.StopContactResponse) => void): Request<Connect.Types.StopContactResponse, AWSError>;
   /**
-   * Ends the specified contact. Use this API to stop queued callbacks. It does not work for voice contacts that use the following initiation methods:   DISCONNECT   TRANSFER   QUEUE_TRANSFER   Chat and task contacts can be terminated in any state, regardless of initiation method.
+   * Ends the specified contact. Use this API to stop queued callbacks. It does not work for voice contacts that use the following initiation methods:   DISCONNECT   TRANSFER   QUEUE_TRANSFER   EXTERNAL_OUTBOUND   MONITOR   Chat and task contacts can be terminated in any state, regardless of initiation method.
    */
   stopContact(callback?: (err: AWSError, data: Connect.Types.StopContactResponse) => void): Request<Connect.Types.StopContactResponse, AWSError>;
   /**
@@ -1716,11 +1716,11 @@ declare class Connect extends Service {
    */
   updateContactFlowName(callback?: (err: AWSError, data: Connect.Types.UpdateContactFlowNameResponse) => void): Request<Connect.Types.UpdateContactFlowNameResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Updates routing priority and age on the contact (QueuePriority and QueueTimeAdjustmentInSeconds). These properties can be used to change a customer's position in the queue. For example, you can move a contact to the back of the queue by setting a lower routing priority relative to other contacts in queue; or you can move a contact to the front of the queue by increasing the routing age which will make the contact look artificially older and therefore higher up in the first-in-first-out routing order. Note that adjusting the routing age of a contact affects only its position in queue, and not its actual queue wait time as reported through metrics. These properties can also be updated by using the Set routing priority / age flow block.
+   * Updates routing priority and age on the contact (QueuePriority and QueueTimeAdjustmentInSeconds). These properties can be used to change a customer's position in the queue. For example, you can move a contact to the back of the queue by setting a lower routing priority relative to other contacts in queue; or you can move a contact to the front of the queue by increasing the routing age which will make the contact look artificially older and therefore higher up in the first-in-first-out routing order. Note that adjusting the routing age of a contact affects only its position in queue, and not its actual queue wait time as reported through metrics. These properties can also be updated by using the Set routing priority / age flow block.  Either QueuePriority or QueueTimeAdjustmentInSeconds should be provided within the request body, but not both. 
    */
   updateContactRoutingData(params: Connect.Types.UpdateContactRoutingDataRequest, callback?: (err: AWSError, data: Connect.Types.UpdateContactRoutingDataResponse) => void): Request<Connect.Types.UpdateContactRoutingDataResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Updates routing priority and age on the contact (QueuePriority and QueueTimeAdjustmentInSeconds). These properties can be used to change a customer's position in the queue. For example, you can move a contact to the back of the queue by setting a lower routing priority relative to other contacts in queue; or you can move a contact to the front of the queue by increasing the routing age which will make the contact look artificially older and therefore higher up in the first-in-first-out routing order. Note that adjusting the routing age of a contact affects only its position in queue, and not its actual queue wait time as reported through metrics. These properties can also be updated by using the Set routing priority / age flow block.
+   * Updates routing priority and age on the contact (QueuePriority and QueueTimeAdjustmentInSeconds). These properties can be used to change a customer's position in the queue. For example, you can move a contact to the back of the queue by setting a lower routing priority relative to other contacts in queue; or you can move a contact to the front of the queue by increasing the routing age which will make the contact look artificially older and therefore higher up in the first-in-first-out routing order. Note that adjusting the routing age of a contact affects only its position in queue, and not its actual queue wait time as reported through metrics. These properties can also be updated by using the Set routing priority / age flow block.  Either QueuePriority or QueueTimeAdjustmentInSeconds should be provided within the request body, but not both. 
    */
   updateContactRoutingData(callback?: (err: AWSError, data: Connect.Types.UpdateContactRoutingDataResponse) => void): Request<Connect.Types.UpdateContactRoutingDataResponse, AWSError>;
   /**
@@ -2088,6 +2088,12 @@ declare namespace Connect {
   }
   export type AgentContactReferenceList = AgentContactReference[];
   export type AgentFirstName = string;
+  export interface AgentHierarchyGroup {
+    /**
+     * The Amazon Resource Name (ARN) of the group.
+     */
+    Arn?: ARN;
+  }
   export interface AgentHierarchyGroups {
     /**
      * The identifiers for level 1 hierarchy groups.
@@ -2123,9 +2129,24 @@ declare namespace Connect {
      * Agent pause duration for a contact in seconds.
      */
     AgentPauseDurationInSeconds?: AgentPauseDurationInSeconds;
+    /**
+     * The agent hierarchy groups for the agent.
+     */
+    HierarchyGroups?: HierarchyGroups;
+    /**
+     * Information regarding Agent’s device.
+     */
+    DeviceInfo?: DeviceInfo;
+    Capabilities?: ParticipantCapabilities;
   }
   export type AgentLastName = string;
   export type AgentPauseDurationInSeconds = number;
+  export interface AgentQualityMetrics {
+    /**
+     * Information about the audio quality of the Agent
+     */
+    Audio?: AudioQualityMetricsInfo;
+  }
   export type AgentResourceId = string;
   export type AgentResourceIdList = AgentResourceId[];
   export interface AgentStatus {
@@ -2262,6 +2283,7 @@ declare namespace Connect {
      */
     AwaitAnswerMachinePrompt?: Boolean;
   }
+  export type AnsweringMachineDetectionStatus = "ANSWERED"|"UNDETECTED"|"ERROR"|"HUMAN_ANSWERED"|"SIT_TONE_DETECTED"|"SIT_TONE_BUSY"|"SIT_TONE_INVALID_NUMBER"|"FAX_MACHINE_DETECTED"|"VOICEMAIL_BEEP"|"VOICEMAIL_NO_BEEP"|"AMD_UNRESOLVED"|"AMD_UNANSWERED"|"AMD_ERROR"|"AMD_NOT_APPLICABLE"|string;
   export interface Application {
     /**
      * Namespace of the application that you want to give access to.
@@ -2598,6 +2620,24 @@ declare namespace Connect {
     TagConditions?: TagAndConditionList;
     HierarchyGroupCondition?: HierarchyGroupCondition;
   }
+  export interface AttributeCondition {
+    /**
+     * The name of predefined attribute.
+     */
+    Name?: PredefinedAttributeName;
+    /**
+     * The value of predefined attribute.
+     */
+    Value?: ProficiencyValue;
+    /**
+     * The proficiency level of the condition.
+     */
+    ProficiencyLevel?: ProficiencyLevel;
+    /**
+     * The operator of the condition.
+     */
+    ComparisonOperator?: ComparisonOperator;
+  }
   export type AttributeName = string;
   export type AttributeOrConditionList = AttributeAndCondition[];
   export type AttributeValue = string;
@@ -2609,6 +2649,17 @@ declare namespace Connect {
      */
     EchoReduction?: MeetingFeatureStatus;
   }
+  export interface AudioQualityMetricsInfo {
+    /**
+     * Number measuring the estimated quality of the media connection.
+     */
+    QualityScore?: AudioQualityScore;
+    /**
+     * List of potential issues causing degradation of quality on a media connection. If the service did not detect any potential quality issues the list is empty. Valid values: HighPacketLoss | HighRoundTripTime | HighJitterBuffer 
+     */
+    PotentialQualityIssues?: PotentialAudioQualityIssues;
+  }
+  export type AudioQualityScore = number;
   export type AutoAccept = boolean;
   export interface AvailableNumberSummary {
     /**
@@ -2884,6 +2935,7 @@ declare namespace Connect {
   export type ClientToken = string;
   export type CommonNameLength127 = string;
   export type Comparison = "LT"|string;
+  export type ComparisonOperator = string;
   export interface CompleteAttachedFileUploadRequest {
     /**
      * The unique identifier of the Connect instance.
@@ -3004,6 +3056,39 @@ declare namespace Connect {
      * Tags associated with the contact. This contains both Amazon Web Services generated and user-defined tags.
      */
     Tags?: ContactTagMap;
+    /**
+     * The timestamp when customer endpoint connected to Amazon Connect.
+     */
+    ConnectedToSystemTimestamp?: timestamp;
+    /**
+     * Latest routing criteria on the contact.
+     */
+    RoutingCriteria?: RoutingCriteria;
+    /**
+     * Information about the Customer on the contact.
+     */
+    Customer?: Customer;
+    Campaign?: Campaign;
+    /**
+     * Indicates how an outbound campaign call is actually disposed if the contact is connected to Amazon Connect.
+     */
+    AnsweringMachineDetectionStatus?: AnsweringMachineDetectionStatus;
+    /**
+     * Information about customer’s voice activity.
+     */
+    CustomerVoiceActivity?: CustomerVoiceActivity;
+    /**
+     * Information about the quality of the participant's media connection.
+     */
+    QualityMetrics?: QualityMetrics;
+    /**
+     * Information about the call disconnect experience.
+     */
+    DisconnectDetails?: DisconnectDetails;
+    /**
+     * A set of system defined key-value pairs stored on individual contact segments using an attribute map. The attributes are standard Amazon Connect attributes and can be accessed in flows. Attribute keys can include only alphanumeric, -, and _ characters. This field can be used to show channel subtype. For example, connect:Guide or connect:SMS.
+     */
+    SegmentAttributes?: SegmentAttributes;
   }
   export interface ContactAnalysis {
     /**
@@ -4277,6 +4362,29 @@ declare namespace Connect {
   }
   export type CurrentMetricSortCriteriaMaxOne = CurrentMetricSortCriteria[];
   export type CurrentMetrics = CurrentMetric[];
+  export interface Customer {
+    /**
+     * Information regarding Customer’s device.
+     */
+    DeviceInfo?: DeviceInfo;
+    Capabilities?: ParticipantCapabilities;
+  }
+  export interface CustomerQualityMetrics {
+    /**
+     * Information about the audio quality of the Customer
+     */
+    Audio?: AudioQualityMetricsInfo;
+  }
+  export interface CustomerVoiceActivity {
+    /**
+     * Timestamp that measures the beginning of the customer greeting from an outbound voice call.
+     */
+    GreetingStartTimestamp?: timestamp;
+    /**
+     * Timestamp that measures the end of the customer greeting from an outbound voice call.
+     */
+    GreetingEndTimestamp?: timestamp;
+  }
   export type DataSetId = string;
   export type DataSetIds = DataSetId[];
   export interface DateReference {
@@ -4986,6 +5094,20 @@ declare namespace Connect {
   export type Description = string;
   export type Description250 = string;
   export type DestinationId = string;
+  export interface DeviceInfo {
+    /**
+     * Name of the platform that the participant used for the call.
+     */
+    PlatformName?: PlatformName;
+    /**
+     * Version of the platform that the participant used for the call.
+     */
+    PlatformVersion?: PlatformVersion;
+    /**
+     * Operating system that the participant used for the call.
+     */
+    OperatingSystem?: OperatingSystem;
+  }
   export interface Dimensions {
     /**
      * Information about the queue for which metrics are returned.
@@ -5175,6 +5297,12 @@ declare namespace Connect {
      */
     UserProficiencies: UserProficiencyDisassociateList;
   }
+  export interface DisconnectDetails {
+    /**
+     * Indicates the potential disconnection issues for a call. This field is not populated if the service does not detect potential issues.
+     */
+    PotentialDisconnectIssue?: PotentialDisconnectIssue;
+  }
   export interface DisconnectReason {
     /**
      * A code that indicates how the contact was terminated.
@@ -5221,6 +5349,7 @@ declare namespace Connect {
      */
     UrlExpiry?: ISO8601Datetime;
   }
+  export type DurationInSeconds = number;
   export type Email = string;
   export interface EmailReference {
     /**
@@ -5803,6 +5932,31 @@ declare namespace Connect {
   }
   export type EventBridgeActionName = string;
   export type EventSourceName = "OnPostCallAnalysisAvailable"|"OnRealTimeCallAnalysisAvailable"|"OnRealTimeChatAnalysisAvailable"|"OnPostChatAnalysisAvailable"|"OnZendeskTicketCreate"|"OnZendeskTicketStatusUpdate"|"OnSalesforceCaseCreate"|"OnContactEvaluationSubmit"|"OnMetricDataUpdate"|"OnCaseCreate"|"OnCaseUpdate"|string;
+  export interface Expiry {
+    /**
+     * The number of seconds to wait before expiring the routing step.
+     */
+    DurationInSeconds?: DurationInSeconds;
+    /**
+     * The timestamp indicating when the routing step expires.
+     */
+    ExpiryTimestamp?: timestamp;
+  }
+  export interface Expression {
+    /**
+     * An object to specify the predefined attribute condition.
+     */
+    AttributeCondition?: AttributeCondition;
+    /**
+     * List of routing expressions which will be AND-ed together.
+     */
+    AndExpression?: Expressions;
+    /**
+     * List of routing expressions which will be OR-ed together.
+     */
+    OrExpression?: Expressions;
+  }
+  export type Expressions = Expression[];
   export interface FailedRequest {
     /**
      * Request identifier provided in the API call in the ContactDataRequest to create a contact.
@@ -6413,6 +6567,28 @@ declare namespace Connect {
      */
     Arn?: ARN;
   }
+  export interface HierarchyGroups {
+    /**
+     * The group at level one of the agent hierarchy.
+     */
+    Level1?: AgentHierarchyGroup;
+    /**
+     * The group at level two of the agent hierarchy.
+     */
+    Level2?: AgentHierarchyGroup;
+    /**
+     * The group at level three of the agent hierarchy.
+     */
+    Level3?: AgentHierarchyGroup;
+    /**
+     * The group at level four of the agent hierarchy.
+     */
+    Level4?: AgentHierarchyGroup;
+    /**
+     * The group at level five of the agent hierarchy.
+     */
+    Level5?: AgentHierarchyGroup;
+  }
   export interface HierarchyLevel {
     /**
      * The identifier of the hierarchy level.
@@ -6720,6 +6896,7 @@ declare namespace Connect {
     PhoneNumberArn?: ARN;
   }
   export type InboundCallsEnabled = boolean;
+  export type Index = number;
   export type InitiationMethodList = ContactInitiationMethod[];
   export interface Instance {
     /**
@@ -8463,6 +8640,7 @@ declare namespace Connect {
      */
     Label: NumericQuestionPropertyAutomationLabel;
   }
+  export type OperatingSystem = string;
   export type Origin = string;
   export type OriginsList = Origin[];
   export interface OutboundCallerConfig {
@@ -8625,6 +8803,11 @@ declare namespace Connect {
   export type PhoneNumberWorkflowMessage = string;
   export type PhoneNumberWorkflowStatus = "CLAIMED"|"IN_PROGRESS"|"FAILED"|string;
   export type PhoneType = "SOFT_PHONE"|"DESK_PHONE"|string;
+  export type PlatformName = string;
+  export type PlatformVersion = string;
+  export type PotentialAudioQualityIssue = string;
+  export type PotentialAudioQualityIssues = PotentialAudioQualityIssue[];
+  export type PotentialDisconnectIssue = string;
   export interface PredefinedAttribute {
     /**
      * The name of the predefined attribute.
@@ -8683,6 +8866,7 @@ declare namespace Connect {
   export type Prefix = string;
   export type Priority = number;
   export type ProficiencyLevel = number;
+  export type ProficiencyValue = string;
   export interface Prompt {
     /**
      * The Amazon Resource Name (ARN) of the prompt.
@@ -8774,6 +8958,16 @@ declare namespace Connect {
     AgentStatusId: AgentStatusId;
   }
   export interface PutUserStatusResponse {
+  }
+  export interface QualityMetrics {
+    /**
+     * Information about the quality of Agent media connection.
+     */
+    Agent?: AgentQualityMetrics;
+    /**
+     * Information about the quality of Customer media connection.
+     */
+    Customer?: CustomerQualityMetrics;
   }
   export interface Queue {
     /**
@@ -9367,6 +9561,21 @@ declare namespace Connect {
   }
   export interface ResumeContactResponse {
   }
+  export interface RoutingCriteria {
+    /**
+     * List of routing steps. When Amazon Connect does not find an available agent meeting the requirements in a step for a given step duration, the routing criteria will move on to the next step sequentially until a join is completed with an agent. When all steps are exhausted, the contact will be offered to any agent in the queue.
+     */
+    Steps?: Steps;
+    /**
+     * The timestamp indicating when the routing criteria is set to active. A routing criteria is activated when contact is transferred to a queue. ActivationTimestamp will be set on routing criteria for contacts in agent queue even though Routing criteria is never activated for contacts in agent queue.
+     */
+    ActivationTimestamp?: timestamp;
+    /**
+     * Information about the index of the routing criteria.
+     */
+    Index?: Index;
+  }
+  export type RoutingCriteriaStepStatus = "ACTIVE"|"INACTIVE"|"JOINED"|"EXPIRED"|string;
   export type RoutingExpression = string;
   export type RoutingExpressions = RoutingExpression[];
   export interface RoutingProfile {
@@ -10884,6 +11093,21 @@ declare namespace Connect {
     ParticipantToken?: ParticipantToken;
   }
   export type Statistic = "SUM"|"MAX"|"AVG"|string;
+  export interface Step {
+    /**
+     * An object to specify the expiration of a routing step.
+     */
+    Expiry?: Expiry;
+    /**
+     * A tagged union to specify expression for a routing step.
+     */
+    Expression?: Expression;
+    /**
+     * Represents status of the Routing step.
+     */
+    Status?: RoutingCriteriaStepStatus;
+  }
+  export type Steps = Step[];
   export interface StopContactRecordingRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
