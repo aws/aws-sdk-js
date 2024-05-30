@@ -2518,6 +2518,7 @@ declare namespace Connect {
      */
     UserProficiencies: UserProficiencyList;
   }
+  export type AssociatedQueueIdList = QueueId[];
   export type AssociationId = string;
   export interface AttachedFile {
     /**
@@ -9635,6 +9636,10 @@ declare namespace Connect {
      * Whether this a default routing profile.
      */
     IsDefault?: Boolean;
+    /**
+     * The IDs of the associated queue.
+     */
+    AssociatedQueueIds?: AssociatedQueueIdList;
   }
   export type RoutingProfileDescription = string;
   export type RoutingProfileId = string;
@@ -9714,7 +9719,7 @@ declare namespace Connect {
      */
     AndConditions?: RoutingProfileSearchConditionList;
     /**
-     * A leaf node condition which can be used to specify a string condition.  The currently supported values for FieldName are name, description, and resourceID. 
+     * A leaf node condition which can be used to specify a string condition.  The currently supported values for FieldName are associatedQueueIds, name, description, and resourceID. 
      */
     StringCondition?: StringCondition;
   }

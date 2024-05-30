@@ -1,0 +1,37 @@
+[
+    {
+        "type": "feature",
+        "category": "ACM",
+        "description": "add v2 smoke tests and smithy smokeTests trait for SDK testing."
+    },
+    {
+        "type": "feature",
+        "category": "BedrockAgent",
+        "description": "With this release, Knowledge bases for Bedrock adds support for Titan Text Embedding v2."
+    },
+    {
+        "type": "feature",
+        "category": "BedrockRuntime",
+        "description": "This release adds Converse and ConverseStream APIs to Bedrock Runtime"
+    },
+    {
+        "type": "feature",
+        "category": "CloudTrail",
+        "description": "CloudTrail Lake returns PartitionKeys in the GetEventDataStore API response. Events are grouped into partitions based on these keys for better query performance. For example, the calendarday key groups events by day, while combining the calendarday key with the hour key groups them by day and hour."
+    },
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "Adding associatedQueueIds as a SearchCriteria and response field to the SearchRoutingProfiles API"
+    },
+    {
+        "type": "feature",
+        "category": "EMRServerless",
+        "description": "The release adds support for spark structured streaming."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Adds Model Card information as a new component to Model Package. Autopilot launches algorithm selection for TimeSeries modality to generate AutoML candidates per algorithm."
+    }
+]

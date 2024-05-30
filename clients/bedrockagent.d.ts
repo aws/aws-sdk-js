@@ -834,6 +834,12 @@ declare namespace BedrockAgent {
   }
   export type BasePromptTemplate = string;
   export type BedrockEmbeddingModelArn = string;
+  export interface BedrockEmbeddingModelConfiguration {
+    /**
+     * The dimensions details for the vector configuration used on the Bedrock embeddings model.
+     */
+    dimensions?: Dimensions;
+  }
   export type Boolean = boolean;
   export type BucketOwnerAccountId = string;
   export interface ChunkingConfiguration {
@@ -1283,6 +1289,7 @@ declare namespace BedrockAgent {
     status: KnowledgeBaseStatus;
   }
   export type Description = string;
+  export type Dimensions = number;
   export interface DisassociateAgentKnowledgeBaseRequest {
     /**
      * The unique identifier of the agent from which to disassociate the knowledge base.
@@ -1300,6 +1307,12 @@ declare namespace BedrockAgent {
   export interface DisassociateAgentKnowledgeBaseResponse {
   }
   export type DraftVersion = string;
+  export interface EmbeddingModelConfiguration {
+    /**
+     * The vector configuration details on the Bedrock embeddings model.
+     */
+    bedrockEmbeddingModelConfiguration?: BedrockEmbeddingModelConfiguration;
+  }
   export type FailureReason = string;
   export type FailureReasons = FailureReason[];
   export type FieldName = string;
@@ -2576,6 +2589,10 @@ declare namespace BedrockAgent {
      * The Amazon Resource Name (ARN) of the model used to create vector embeddings for the knowledge base.
      */
     embeddingModelArn: BedrockEmbeddingModelArn;
+    /**
+     * The embeddings model configuration details for the vector model used in Knowledge Base.
+     */
+    embeddingModelConfiguration?: EmbeddingModelConfiguration;
   }
   export type Version = string;
   /**

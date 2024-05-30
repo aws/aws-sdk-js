@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1630.0-->
+<!--LATEST=2.1631.0-->
 <!--ENTRYINSERT-->
+
+## 2.1631.0
+* feature: ACM: add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: BedrockAgent: With this release, Knowledge bases for Bedrock adds support for Titan Text Embedding v2.
+* feature: BedrockRuntime: This release adds Converse and ConverseStream APIs to Bedrock Runtime
+* feature: CloudTrail: CloudTrail Lake returns PartitionKeys in the GetEventDataStore API response. Events are grouped into partitions based on these keys for better query performance. For example, the calendarday key groups events by day, while combining the calendarday key with the hour key groups them by day and hour.
+* feature: Connect: Adding associatedQueueIds as a SearchCriteria and response field to the SearchRoutingProfiles API
+* feature: EMRServerless: The release adds support for spark structured streaming.
+* feature: SageMaker: Adds Model Card information as a new component to Model Package. Autopilot launches algorithm selection for TimeSeries modality to generate AutoML candidates per algorithm.
 
 ## 2.1630.0
 * feature: Athena: Throwing validation errors on CreateNotebook with Name containing `/`,`:`,`\`

@@ -1213,11 +1213,11 @@ declare class SageMaker extends Service {
    */
   describeModelExplainabilityJobDefinition(callback?: (err: AWSError, data: SageMaker.Types.DescribeModelExplainabilityJobDefinitionResponse) => void): Request<SageMaker.Types.DescribeModelExplainabilityJobDefinitionResponse, AWSError>;
   /**
-   * Returns a description of the specified model package, which is used to create SageMaker models or list them on Amazon Web Services Marketplace. To create models in SageMaker, buyers can subscribe to model packages listed on Amazon Web Services Marketplace.
+   * Returns a description of the specified model package, which is used to create SageMaker models or list them on Amazon Web Services Marketplace.  If you provided a KMS Key ID when you created your model package, you will see the KMS Decrypt API call in your CloudTrail logs when you use this API.  To create models in SageMaker, buyers can subscribe to model packages listed on Amazon Web Services Marketplace.
    */
   describeModelPackage(params: SageMaker.Types.DescribeModelPackageInput, callback?: (err: AWSError, data: SageMaker.Types.DescribeModelPackageOutput) => void): Request<SageMaker.Types.DescribeModelPackageOutput, AWSError>;
   /**
-   * Returns a description of the specified model package, which is used to create SageMaker models or list them on Amazon Web Services Marketplace. To create models in SageMaker, buyers can subscribe to model packages listed on Amazon Web Services Marketplace.
+   * Returns a description of the specified model package, which is used to create SageMaker models or list them on Amazon Web Services Marketplace.  If you provided a KMS Key ID when you created your model package, you will see the KMS Decrypt API call in your CloudTrail logs when you use this API.  To create models in SageMaker, buyers can subscribe to model packages listed on Amazon Web Services Marketplace.
    */
   describeModelPackage(callback?: (err: AWSError, data: SageMaker.Types.DescribeModelPackageOutput) => void): Request<SageMaker.Types.DescribeModelPackageOutput, AWSError>;
   /**
@@ -3229,10 +3229,10 @@ declare namespace SageMaker {
   export type AttributeNames = AttributeName[];
   export type AuthMode = "SSO"|"IAM"|string;
   export type AutoGenerateEndpointName = boolean;
-  export type AutoMLAlgorithm = "xgboost"|"linear-learner"|"mlp"|"lightgbm"|"catboost"|"randomforest"|"extra-trees"|"nn-torch"|"fastai"|string;
+  export type AutoMLAlgorithm = "xgboost"|"linear-learner"|"mlp"|"lightgbm"|"catboost"|"randomforest"|"extra-trees"|"nn-torch"|"fastai"|"cnn-qr"|"deepar"|"prophet"|"npts"|"arima"|"ets"|string;
   export interface AutoMLAlgorithmConfig {
     /**
-     * The selection of algorithms run on a dataset to train the model candidates of an Autopilot job.   Selected algorithms must belong to the list corresponding to the training mode set in AutoMLJobConfig.Mode (ENSEMBLING or HYPERPARAMETER_TUNING). Choose a minimum of 1 algorithm.     In ENSEMBLING mode:   "catboost"   "extra-trees"   "fastai"   "lightgbm"   "linear-learner"   "nn-torch"   "randomforest"   "xgboost"     In HYPERPARAMETER_TUNING mode:   "linear-learner"   "mlp"   "xgboost"    
+     * The selection of algorithms trained on your dataset to generate the model candidates for an Autopilot job.    For the tabular problem type TabularJobConfig:   Selected algorithms must belong to the list corresponding to the training mode set in AutoMLJobConfig.Mode (ENSEMBLING or HYPERPARAMETER_TUNING). Choose a minimum of 1 algorithm.    In ENSEMBLING mode:   "catboost"   "extra-trees"   "fastai"   "lightgbm"   "linear-learner"   "nn-torch"   "randomforest"   "xgboost"     In HYPERPARAMETER_TUNING mode:   "linear-learner"   "mlp"   "xgboost"        For the time-series forecasting problem type TimeSeriesForecastingJobConfig:    Choose your algorithms from this list.   "cnn-qr"   "deepar"   "prophet"   "arima"   "npts"   "ets"      
      */
     AutoMLAlgorithms: AutoMLAlgorithms;
   }
@@ -3291,7 +3291,7 @@ declare namespace SageMaker {
      */
     FeatureSpecificationS3Uri?: S3Uri;
     /**
-     * Stores the configuration information for the selection of algorithms used to train the model candidates. The list of available algorithms to choose from depends on the training mode set in  AutoMLJobConfig.Mode .    AlgorithmsConfig should not be set in AUTO training mode.   When AlgorithmsConfig is provided, one AutoMLAlgorithms attribute must be set and one only. If the list of algorithms provided as values for AutoMLAlgorithms is empty, AutoMLCandidateGenerationConfig uses the full set of algorithms for the given training mode.   When AlgorithmsConfig is not provided, AutoMLCandidateGenerationConfig uses the full set of algorithms for the given training mode.   For the list of all algorithms per training mode, see  AutoMLAlgorithmConfig. For more information on each algorithm, see the Algorithm support section in Autopilot developer guide.
+     * Stores the configuration information for the selection of algorithms trained on tabular data. The list of available algorithms to choose from depends on the training mode set in  TabularJobConfig.Mode .    AlgorithmsConfig should not be set if the training mode is set on AUTO.   When AlgorithmsConfig is provided, one AutoMLAlgorithms attribute must be set and one only. If the list of algorithms provided as values for AutoMLAlgorithms is empty, CandidateGenerationConfig uses the full set of algorithms for the given training mode.   When AlgorithmsConfig is not provided, CandidateGenerationConfig uses the full set of algorithms for the given training mode.   For the list of all algorithms per problem type and training mode, see  AutoMLAlgorithmConfig. For more information on each algorithm, see the Algorithm support section in Autopilot developer guide.
      */
     AlgorithmsConfig?: AutoMLAlgorithmsConfig;
   }
@@ -3808,7 +3808,7 @@ declare namespace SageMaker {
   export type CandidateDefinitionNotebookLocation = string;
   export interface CandidateGenerationConfig {
     /**
-     * Stores the configuration information for the selection of algorithms used to train model candidates on tabular data. The list of available algorithms to choose from depends on the training mode set in  TabularJobConfig.Mode .    AlgorithmsConfig should not be set in AUTO training mode.   When AlgorithmsConfig is provided, one AutoMLAlgorithms attribute must be set and one only. If the list of algorithms provided as values for AutoMLAlgorithms is empty, CandidateGenerationConfig uses the full set of algorithms for the given training mode.   When AlgorithmsConfig is not provided, CandidateGenerationConfig uses the full set of algorithms for the given training mode.   For the list of all algorithms per problem type and training mode, see  AutoMLAlgorithmConfig. For more information on each algorithm, see the Algorithm support section in Autopilot developer guide.
+     * Your Autopilot job trains a default set of algorithms on your dataset. For tabular and time-series data, you can customize the algorithm list by selecting a subset of algorithms for your problem type.  AlgorithmsConfig stores the customized selection of algorithms to train on your data.    For the tabular problem type TabularJobConfig, the list of available algorithms to choose from depends on the training mode set in  AutoMLJobConfig.Mode .    AlgorithmsConfig should not be set when the training mode AutoMLJobConfig.Mode is set to AUTO.   When AlgorithmsConfig is provided, one AutoMLAlgorithms attribute must be set and one only. If the list of algorithms provided as values for AutoMLAlgorithms is empty, CandidateGenerationConfig uses the full set of algorithms for the given training mode.   When AlgorithmsConfig is not provided, CandidateGenerationConfig uses the full set of algorithms for the given training mode.   For the list of all algorithms per training mode, see  AlgorithmConfig. For more information on each algorithm, see the Algorithm support section in the Autopilot developer guide.    For the time-series forecasting problem type TimeSeriesForecastingJobConfig, choose your algorithms from the list provided in  AlgorithmConfig. For more information on each algorithm, see the Algorithms support for time-series forecasting section in the Autopilot developer guide.   When AlgorithmsConfig is provided, one AutoMLAlgorithms attribute must be set and one only. If the list of algorithms provided as values for AutoMLAlgorithms is empty, CandidateGenerationConfig uses the full set of algorithms for time-series forecasting.   When AlgorithmsConfig is not provided, CandidateGenerationConfig uses the full set of algorithms for time-series forecasting.    
      */
     AlgorithmsConfig?: AutoMLAlgorithmsConfig;
   }
@@ -5978,6 +5978,14 @@ declare namespace SageMaker {
      * The URI of the source for the model package. If you want to clone a model package, set it to the model package Amazon Resource Name (ARN). If you want to register a model, set it to the model ARN.
      */
     SourceUri?: ModelPackageSourceUri;
+    /**
+     * The KMS Key ID (KMSKeyId) used for encryption of model package information.
+     */
+    SecurityConfig?: ModelPackageSecurityConfig;
+    /**
+     * The model card associated with the model package. Since ModelPackageModelCard is tied to a model package, it is a specific usage of a model card and its schema is simplified compared to the schema of ModelCard. The ModelPackageModelCard schema does not include model_package_details, and model_overview is composed of the model_creator and model_artifact properties. For more information about the model card associated with the model package, see View the Details of a Model Version.
+     */
+    ModelCard?: ModelPackageModelCard;
   }
   export interface CreateModelPackageOutput {
     /**
@@ -9910,6 +9918,14 @@ declare namespace SageMaker {
      * The URI of the source for the model package.
      */
     SourceUri?: ModelPackageSourceUri;
+    /**
+     * The KMS Key ID (KMSKeyId) used for encryption of model package information.
+     */
+    SecurityConfig?: ModelPackageSecurityConfig;
+    /**
+     * The model card associated with the model package. Since ModelPackageModelCard is tied to a model package, it is a specific usage of a model card and its schema is simplified compared to the schema of ModelCard. The ModelPackageModelCard schema does not include model_package_details, and model_overview is composed of the model_creator and model_artifact properties. For more information about the model card associated with the model package, see View the Details of a Model Version.
+     */
+    ModelCard?: ModelPackageModelCard;
   }
   export interface DescribeModelQualityJobDefinitionRequest {
     /**
@@ -14282,7 +14298,7 @@ declare namespace SageMaker {
      */
     NextToken?: NextToken;
     /**
-     * This parameter defines the maximum number of results that can be returned in a single response. The MaxResults parameter is an upper bound, not a target. If there are more results available than the value specified, a NextToken is provided in the response. The NextToken indicates that the user should get the next set of results by providing this token as a part of a subsequent call. The default value for MaxResults is 10.
+     * This parameter defines the maximum number of results that can be return in a single response. The MaxResults parameter is an upper bound, not a target. If there are more results available than the value specified, a NextToken is provided in the response. The NextToken indicates that the user should get the next set of results by providing this token as a part of a subsequent call. The default value for MaxResults is 10.
      */
     MaxResults?: MaxResults;
     /**
@@ -14868,7 +14884,7 @@ declare namespace SageMaker {
      */
     NextToken?: NextToken;
     /**
-     * This parameter defines the maximum number of results that can be returned in a single response. The MaxResults parameter is an upper bound, not a target. If there are more results available than the value specified, a NextToken is provided in the response. The NextToken indicates that the user should get the next set of results by providing this token as a part of a subsequent call. The default value for MaxResults is 10.
+     * This parameter defines the maximum number of results that can be return in a single response. The MaxResults parameter is an upper bound, not a target. If there are more results available than the value specified, a NextToken is provided in the response. The NextToken indicates that the user should get the next set of results by providing this token as a part of a subsequent call. The default value for MaxResults is 10.
      */
     MaxResults?: MaxResults;
   }
@@ -16898,7 +16914,7 @@ declare namespace SageMaker {
      */
     NextToken?: NextToken;
     /**
-     * This parameter defines the maximum number of results that can be returned in a single response. The MaxResults parameter is an upper bound, not a target. If there are more results available than the value specified, a NextToken is provided in the response. The NextToken indicates that the user should get the next set of results by providing this token as a part of a subsequent call. The default value for MaxResults is 10.
+     * This parameter defines the maximum number of results that can be return in a single response. The MaxResults parameter is an upper bound, not a target. If there are more results available than the value specified, a NextToken is provided in the response. The NextToken indicates that the user should get the next set of results by providing this token as a part of a subsequent call. The default value for MaxResults is 10.
      */
     MaxResults?: MaxResults;
     /**
@@ -17304,7 +17320,7 @@ declare namespace SageMaker {
      */
     NextToken?: NextToken;
     /**
-     * This parameter defines the maximum number of results that can be returned in a single response. The MaxResults parameter is an upper bound, not a target. If there are more results available than the value specified, a NextToken is provided in the response. The NextToken indicates that the user should get the next set of results by providing this token as a part of a subsequent call. The default value for MaxResults is 10.
+     * This parameter defines the maximum number of results that can be return in a single response. The MaxResults parameter is an upper bound, not a target. If there are more results available than the value specified, a NextToken is provided in the response. The NextToken indicates that the user should get the next set of results by providing this token as a part of a subsequent call. The default value for MaxResults is 10.
      */
     MaxResults?: MaxResults;
     /**
@@ -18190,6 +18206,8 @@ declare namespace SageMaker {
      * The URI of the source for the model package.
      */
     SourceUri?: ModelPackageSourceUri;
+    SecurityConfig?: ModelPackageSecurityConfig;
+    ModelCard?: ModelPackageModelCard;
     /**
      * A list of the tags associated with the model package. For more information, see Tagging Amazon Web Services resources in the Amazon Web Services General Reference Guide.
      */
@@ -18314,6 +18332,22 @@ declare namespace SageMaker {
     ModelPackageGroupStatus: ModelPackageGroupStatus;
   }
   export type ModelPackageGroupSummaryList = ModelPackageGroupSummary[];
+  export interface ModelPackageModelCard {
+    /**
+     * The content of the model card.
+     */
+    ModelCardContent?: ModelCardContent;
+    /**
+     * The approval status of the model card within your organization. Different organizations might have different criteria for model card review and approval.    Draft: The model card is a work in progress.    PendingReview: The model card is pending review.    Approved: The model card is approved.    Archived: The model card is archived. No more updates can be made to the model card content. If you try to update the model card content, you will receive the message Model Card is in Archived state.  
+     */
+    ModelCardStatus?: ModelCardStatus;
+  }
+  export interface ModelPackageSecurityConfig {
+    /**
+     * The KMS Key ID (KMSKeyId) used for encryption of model package information.
+     */
+    KmsKeyId: KmsKeyId;
+  }
   export type ModelPackageSortBy = "Name"|"CreationTime"|string;
   export type ModelPackageSourceUri = string;
   export type ModelPackageStatus = "Pending"|"InProgress"|"Completed"|"Failed"|"Deleting"|string;
@@ -22232,6 +22266,7 @@ declare namespace SageMaker {
      * The collection of holiday featurization attributes used to incorporate national holiday information into your forecasting model.
      */
     HolidayConfig?: HolidayConfig;
+    CandidateGenerationConfig?: CandidateGenerationConfig;
   }
   export interface TimeSeriesForecastingSettings {
     /**
@@ -23745,6 +23780,10 @@ declare namespace SageMaker {
      * The URI of the source for the model package.
      */
     SourceUri?: ModelPackageSourceUri;
+    /**
+     * The model card associated with the model package. Since ModelPackageModelCard is tied to a model package, it is a specific usage of a model card and its schema is simplified compared to the schema of ModelCard. The ModelPackageModelCard schema does not include model_package_details, and model_overview is composed of the model_creator and model_artifact properties. For more information about the model card associated with the model package, see View the Details of a Model Version.
+     */
+    ModelCard?: ModelPackageModelCard;
   }
   export interface UpdateModelPackageOutput {
     /**

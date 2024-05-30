@@ -68,6 +68,14 @@ declare class EMRServerless extends Service {
    */
   listApplications(callback?: (err: AWSError, data: EMRServerless.Types.ListApplicationsResponse) => void): Request<EMRServerless.Types.ListApplicationsResponse, AWSError>;
   /**
+   * Lists all attempt of a job run.
+   */
+  listJobRunAttempts(params: EMRServerless.Types.ListJobRunAttemptsRequest, callback?: (err: AWSError, data: EMRServerless.Types.ListJobRunAttemptsResponse) => void): Request<EMRServerless.Types.ListJobRunAttemptsResponse, AWSError>;
+  /**
+   * Lists all attempt of a job run.
+   */
+  listJobRunAttempts(callback?: (err: AWSError, data: EMRServerless.Types.ListJobRunAttemptsResponse) => void): Request<EMRServerless.Types.ListJobRunAttemptsResponse, AWSError>;
+  /**
    * Lists job runs based on a set of parameters.
    */
   listJobRuns(params: EMRServerless.Types.ListJobRunsRequest, callback?: (err: AWSError, data: EMRServerless.Types.ListJobRunsResponse) => void): Request<EMRServerless.Types.ListJobRunsResponse, AWSError>;
@@ -265,6 +273,7 @@ declare namespace EMRServerless {
     architecture?: Architecture;
   }
   export type Architecture = "ARM64"|"X86_64"|string;
+  export type AttemptNumber = number;
   export interface AutoStartConfig {
     /**
      * Enables the application to automatically start on job submission. Defaults to true.
@@ -473,6 +482,10 @@ declare namespace EMRServerless {
      * The ID of the job run.
      */
     jobRunId: JobRunId;
+    /**
+     * An optimal parameter that indicates the amount of attempts for the job. If not specified, this value defaults to the attempt of the latest job.
+     */
+    attempt?: AttemptNumber;
   }
   export interface GetDashboardForJobRunResponse {
     /**
@@ -489,6 +502,10 @@ declare namespace EMRServerless {
      * The ID of the job run.
      */
     jobRunId: JobRunId;
+    /**
+     * An optimal parameter that indicates the amount of attempts for the job. If not specified, this value defaults to the attempt of the latest job.
+     */
+    attempt?: AttemptNumber;
   }
   export interface GetJobRunResponse {
     /**
@@ -638,8 +655,92 @@ declare namespace EMRServerless {
      * The aggregate vCPU, memory, and storage that Amazon Web Services has billed for the job run. The billed resources include a 1-minute minimum usage for workers, plus additional storage over 20 GB per worker. Note that billed resources do not include usage for idle pre-initialized workers.
      */
     billedResourceUtilization?: ResourceUtilization;
+    /**
+     * The mode of the job run.
+     */
+    mode?: JobRunMode;
+    /**
+     * The retry policy of the job run.
+     */
+    retryPolicy?: RetryPolicy;
+    /**
+     * The attempt of the job run.
+     */
+    attempt?: AttemptNumber;
+    /**
+     * The date and time of when the job run attempt was created.
+     */
+    attemptCreatedAt?: _Date;
+    /**
+     * The date and time of when the job run attempt was last updated.
+     */
+    attemptUpdatedAt?: _Date;
   }
+  export interface JobRunAttemptSummary {
+    /**
+     * The ID of the application the job is running on.
+     */
+    applicationId: ApplicationId;
+    /**
+     * The ID of the job run attempt.
+     */
+    id: JobRunId;
+    /**
+     * The name of the job run attempt.
+     */
+    name?: String256;
+    /**
+     * The mode of the job run attempt.
+     */
+    mode?: JobRunMode;
+    /**
+     * The Amazon Resource Name (ARN) of the job run.
+     */
+    arn: JobArn;
+    /**
+     * The user who created the job run.
+     */
+    createdBy: RequestIdentityUserArn;
+    /**
+     * The date and time of when the job run was created.
+     */
+    jobCreatedAt: _Date;
+    /**
+     * The date and time when the job run attempt was created.
+     */
+    createdAt: _Date;
+    /**
+     * The date and time of when the job run attempt was last updated.
+     */
+    updatedAt: _Date;
+    /**
+     * The Amazon Resource Name (ARN) of the execution role of the job run..
+     */
+    executionRole: IAMRoleArn;
+    /**
+     * The state of the job run attempt.
+     */
+    state: JobRunState;
+    /**
+     * The state details of the job run attempt.
+     */
+    stateDetails: String256;
+    /**
+     * The Amazon EMR release label of the job run attempt.
+     */
+    releaseLabel: ReleaseLabel;
+    /**
+     * The type of the job run, such as Spark or Hive.
+     */
+    type?: JobRunType;
+    /**
+     * The attempt number of the job run execution.
+     */
+    attempt?: AttemptNumber;
+  }
+  export type JobRunAttempts = JobRunAttemptSummary[];
   export type JobRunId = string;
+  export type JobRunMode = "BATCH"|"STREAMING"|string;
   export type JobRunState = "SUBMITTED"|"PENDING"|"SCHEDULED"|"RUNNING"|"SUCCESS"|"FAILED"|"CANCELLING"|"CANCELLED"|string;
   export type JobRunStateSet = JobRunState[];
   export interface JobRunSummary {
@@ -655,6 +756,10 @@ declare namespace EMRServerless {
      * The optional job run name. This doesn't have to be unique.
      */
     name?: String256;
+    /**
+     * The mode of the job run.
+     */
+    mode?: JobRunMode;
     /**
      * The ARN of the job run.
      */
@@ -691,6 +796,18 @@ declare namespace EMRServerless {
      * The type of job run, such as Spark or Hive.
      */
     type?: JobRunType;
+    /**
+     * The attempt number of the job run execution.
+     */
+    attempt?: AttemptNumber;
+    /**
+     * The date and time of when the job run attempt was created.
+     */
+    attemptCreatedAt?: _Date;
+    /**
+     * The date and time of when the job run attempt was last updated.
+     */
+    attemptUpdatedAt?: _Date;
   }
   export type JobRunType = string;
   export type JobRuns = JobRunSummary[];
@@ -714,6 +831,35 @@ declare namespace EMRServerless {
      * The output lists the specified applications.
      */
     applications: ApplicationList;
+    /**
+     * The output displays the token for the next set of application results. This is required for pagination and is available as a response of the previous request.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListJobRunAttemptsRequest {
+    /**
+     * The ID of the application for which to list job runs.
+     */
+    applicationId: ApplicationId;
+    /**
+     * The ID of the job run to list.
+     */
+    jobRunId: JobRunId;
+    /**
+     * The token for the next set of job run attempt results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of job run attempts to list.
+     */
+    maxResults?: ListJobRunAttemptsRequestMaxResultsInteger;
+  }
+  export type ListJobRunAttemptsRequestMaxResultsInteger = number;
+  export interface ListJobRunAttemptsResponse {
+    /**
+     * The array of the listed job run attempt objects.
+     */
+    jobRunAttempts: JobRunAttempts;
     /**
      * The output displays the token for the next set of application results. This is required for pagination and is available as a response of the previous request.
      */
@@ -744,6 +890,10 @@ declare namespace EMRServerless {
      * An optional filter for job run states. Note that if this filter contains multiple states, the resulting list will be grouped by the state.
      */
     states?: JobRunStateSet;
+    /**
+     * The mode of the job runs to list.
+     */
+    mode?: JobRunMode;
   }
   export type ListJobRunsRequestMaxResultsInteger = number;
   export interface ListJobRunsResponse {
@@ -852,6 +1002,17 @@ declare namespace EMRServerless {
      */
     storageGBHour?: Double;
   }
+  export interface RetryPolicy {
+    /**
+     * Maximum number of attempts for the job run. This parameter is only applicable for BATCH mode.
+     */
+    maxAttempts?: AttemptNumber;
+    /**
+     * Maximum number of failed attempts per hour. This [arameter is only applicable for STREAMING mode.
+     */
+    maxFailedAttemptsPerHour?: RetryPolicyMaxFailedAttemptsPerHourInteger;
+  }
+  export type RetryPolicyMaxFailedAttemptsPerHourInteger = number;
   export interface S3MonitoringConfiguration {
     /**
      * The Amazon S3 destination URI for log publishing.
@@ -921,6 +1082,14 @@ declare namespace EMRServerless {
      * The optional job run name. This doesn't have to be unique.
      */
     name?: String256;
+    /**
+     * The mode of the job run when it starts.
+     */
+    mode?: JobRunMode;
+    /**
+     * The retry policy when job run starts.
+     */
+    retryPolicy?: RetryPolicy;
   }
   export interface StartJobRunResponse {
     /**
