@@ -12,35 +12,35 @@ declare class CodeGuruSecurity extends Service {
   constructor(options?: CodeGuruSecurity.Types.ClientConfiguration)
   config: Config & CodeGuruSecurity.Types.ClientConfiguration;
   /**
-   * Returns a list of all requested findings.
+   * Returns a list of requested findings from standard scans.
    */
   batchGetFindings(params: CodeGuruSecurity.Types.BatchGetFindingsRequest, callback?: (err: AWSError, data: CodeGuruSecurity.Types.BatchGetFindingsResponse) => void): Request<CodeGuruSecurity.Types.BatchGetFindingsResponse, AWSError>;
   /**
-   * Returns a list of all requested findings.
+   * Returns a list of requested findings from standard scans.
    */
   batchGetFindings(callback?: (err: AWSError, data: CodeGuruSecurity.Types.BatchGetFindingsResponse) => void): Request<CodeGuruSecurity.Types.BatchGetFindingsResponse, AWSError>;
   /**
-   * Use to create a scan using code uploaded to an S3 bucket.
+   * Use to create a scan using code uploaded to an Amazon S3 bucket.
    */
   createScan(params: CodeGuruSecurity.Types.CreateScanRequest, callback?: (err: AWSError, data: CodeGuruSecurity.Types.CreateScanResponse) => void): Request<CodeGuruSecurity.Types.CreateScanResponse, AWSError>;
   /**
-   * Use to create a scan using code uploaded to an S3 bucket.
+   * Use to create a scan using code uploaded to an Amazon S3 bucket.
    */
   createScan(callback?: (err: AWSError, data: CodeGuruSecurity.Types.CreateScanResponse) => void): Request<CodeGuruSecurity.Types.CreateScanResponse, AWSError>;
   /**
-   * Generates a pre-signed URL and request headers used to upload a code resource. You can upload your code resource to the URL and add the request headers using any HTTP client.
+   * Generates a pre-signed URL, request headers used to upload a code resource, and code artifact identifier for the uploaded resource. You can upload your code resource to the URL with the request headers using any HTTP client.
    */
   createUploadUrl(params: CodeGuruSecurity.Types.CreateUploadUrlRequest, callback?: (err: AWSError, data: CodeGuruSecurity.Types.CreateUploadUrlResponse) => void): Request<CodeGuruSecurity.Types.CreateUploadUrlResponse, AWSError>;
   /**
-   * Generates a pre-signed URL and request headers used to upload a code resource. You can upload your code resource to the URL and add the request headers using any HTTP client.
+   * Generates a pre-signed URL, request headers used to upload a code resource, and code artifact identifier for the uploaded resource. You can upload your code resource to the URL with the request headers using any HTTP client.
    */
   createUploadUrl(callback?: (err: AWSError, data: CodeGuruSecurity.Types.CreateUploadUrlResponse) => void): Request<CodeGuruSecurity.Types.CreateUploadUrlResponse, AWSError>;
   /**
-   * Use to get account level configuration.
+   * Use to get the encryption configuration for an account.
    */
   getAccountConfiguration(params: CodeGuruSecurity.Types.GetAccountConfigurationRequest, callback?: (err: AWSError, data: CodeGuruSecurity.Types.GetAccountConfigurationResponse) => void): Request<CodeGuruSecurity.Types.GetAccountConfigurationResponse, AWSError>;
   /**
-   * Use to get account level configuration.
+   * Use to get the encryption configuration for an account.
    */
   getAccountConfiguration(callback?: (err: AWSError, data: CodeGuruSecurity.Types.GetAccountConfigurationResponse) => void): Request<CodeGuruSecurity.Types.GetAccountConfigurationResponse, AWSError>;
   /**
@@ -52,11 +52,11 @@ declare class CodeGuruSecurity extends Service {
    */
   getFindings(callback?: (err: AWSError, data: CodeGuruSecurity.Types.GetFindingsResponse) => void): Request<CodeGuruSecurity.Types.GetFindingsResponse, AWSError>;
   /**
-   * Returns top level metrics about an account from a specified date, including number of open findings, the categories with most findings, the scans with most open findings, and scans with most open critical findings. 
+   * Returns a summary of metrics for an account from a specified date, including number of open findings, the categories with most findings, the scans with most open findings, and scans with most open critical findings. 
    */
   getMetricsSummary(params: CodeGuruSecurity.Types.GetMetricsSummaryRequest, callback?: (err: AWSError, data: CodeGuruSecurity.Types.GetMetricsSummaryResponse) => void): Request<CodeGuruSecurity.Types.GetMetricsSummaryResponse, AWSError>;
   /**
-   * Returns top level metrics about an account from a specified date, including number of open findings, the categories with most findings, the scans with most open findings, and scans with most open critical findings. 
+   * Returns a summary of metrics for an account from a specified date, including number of open findings, the categories with most findings, the scans with most open findings, and scans with most open critical findings. 
    */
   getMetricsSummary(callback?: (err: AWSError, data: CodeGuruSecurity.Types.GetMetricsSummaryResponse) => void): Request<CodeGuruSecurity.Types.GetMetricsSummaryResponse, AWSError>;
   /**
@@ -76,11 +76,11 @@ declare class CodeGuruSecurity extends Service {
    */
   listFindingsMetrics(callback?: (err: AWSError, data: CodeGuruSecurity.Types.ListFindingsMetricsResponse) => void): Request<CodeGuruSecurity.Types.ListFindingsMetricsResponse, AWSError>;
   /**
-   * Returns a list of all the standard scans in an account. Does not return express scans.
+   * Returns a list of all scans in an account. Does not return EXPRESS scans.
    */
   listScans(params: CodeGuruSecurity.Types.ListScansRequest, callback?: (err: AWSError, data: CodeGuruSecurity.Types.ListScansResponse) => void): Request<CodeGuruSecurity.Types.ListScansResponse, AWSError>;
   /**
-   * Returns a list of all the standard scans in an account. Does not return express scans.
+   * Returns a list of all scans in an account. Does not return EXPRESS scans.
    */
   listScans(callback?: (err: AWSError, data: CodeGuruSecurity.Types.ListScansResponse) => void): Request<CodeGuruSecurity.Types.ListScansResponse, AWSError>;
   /**
@@ -108,34 +108,34 @@ declare class CodeGuruSecurity extends Service {
    */
   untagResource(callback?: (err: AWSError, data: CodeGuruSecurity.Types.UntagResourceResponse) => void): Request<CodeGuruSecurity.Types.UntagResourceResponse, AWSError>;
   /**
-   * Use to update account-level configuration with an encryption key.
+   * Use to update the encryption configuration for an account.
    */
   updateAccountConfiguration(params: CodeGuruSecurity.Types.UpdateAccountConfigurationRequest, callback?: (err: AWSError, data: CodeGuruSecurity.Types.UpdateAccountConfigurationResponse) => void): Request<CodeGuruSecurity.Types.UpdateAccountConfigurationResponse, AWSError>;
   /**
-   * Use to update account-level configuration with an encryption key.
+   * Use to update the encryption configuration for an account.
    */
   updateAccountConfiguration(callback?: (err: AWSError, data: CodeGuruSecurity.Types.UpdateAccountConfigurationResponse) => void): Request<CodeGuruSecurity.Types.UpdateAccountConfigurationResponse, AWSError>;
 }
 declare namespace CodeGuruSecurity {
   export interface AccountFindingsMetric {
     /**
-     * The number of closed findings of each severity in an account on the specified date.
+     * The number of closed findings of each severity on the specified date.
      */
     closedFindings?: FindingMetricsValuePerSeverity;
     /**
-     * The date from which the finding metrics were retrieved.
+     * The date from which the findings metrics were retrieved.
      */
     date?: Timestamp;
     /**
-     * The average time it takes to close findings of each severity in days.
+     * The average time in days it takes to close findings of each severity as of a specified date.
      */
     meanTimeToClose?: FindingMetricsValuePerSeverity;
     /**
-     * The number of new findings of each severity in account on the specified date.
+     * The number of new findings of each severity on the specified date.
      */
     newFindings?: FindingMetricsValuePerSeverity;
     /**
-     * The number of open findings of each severity in an account as of the specified date.
+     * The number of open findings of each severity as of the specified date.
      */
     openFindings?: FindingMetricsValuePerSeverity;
   }
@@ -171,7 +171,7 @@ declare namespace CodeGuruSecurity {
      */
     failedFindings: BatchGetFindingsErrors;
     /**
-     *  A list of all requested findings.
+     *  A list of all findings which were successfully fetched.
      */
     findings: Findings;
   }
@@ -208,11 +208,11 @@ declare namespace CodeGuruSecurity {
      */
     clientToken?: ClientToken;
     /**
-     * The identifier for an input resource used to create a scan.
+     * The identifier for the resource object to be scanned.
      */
     resourceId: ResourceId;
     /**
-     * The unique name that CodeGuru Security uses to track revisions across multiple scans of the same resource. Only allowed for a STANDARD scan type. If not specified, it will be auto generated. 
+     * The unique name that CodeGuru Security uses to track revisions across multiple scans of the same resource. Only allowed for a STANDARD scan type. 
      */
     scanName: ScanName;
     /**
@@ -254,7 +254,7 @@ declare namespace CodeGuruSecurity {
   }
   export interface CreateUploadUrlResponse {
     /**
-     * The identifier for the uploaded code resource. 
+     * The identifier for the uploaded code resource. Pass this to CreateScan to use the uploaded resources.
      */
     codeArtifactId: Uuid;
     /**
@@ -262,7 +262,7 @@ declare namespace CodeGuruSecurity {
      */
     requestHeaders: RequestHeaderMap;
     /**
-     * A pre-signed S3 URL. You can upload the code file you want to scan and add the required requestHeaders using any HTTP client.
+     * A pre-signed S3 URL. You can upload the code file you want to scan with the required requestHeaders using any HTTP client.
      */
     s3Url: S3Url;
   }
@@ -270,11 +270,12 @@ declare namespace CodeGuruSecurity {
   export type Double = number;
   export interface EncryptionConfig {
     /**
-     * The KMS key ARN to use for encryption. This must be provided as a header when uploading your code resource.
+     * The KMS key ARN that is used for encryption. If an AWS-managed key is used for encryption, returns empty.
      */
     kmsKeyArn?: KmsKeyArn;
   }
   export type ErrorCode = "DUPLICATE_IDENTIFIER"|"ITEM_DOES_NOT_EXIST"|"INTERNAL_ERROR"|"INVALID_FINDING_ID"|"INVALID_SCAN_NAME"|string;
+  export type ErrorMessage = string;
   export interface FilePath {
     /**
      * A list of CodeLine objects that describe where the security vulnerability appears in your code.
@@ -319,7 +320,7 @@ declare namespace CodeGuruSecurity {
      */
     detectorTags?: DetectorTags;
     /**
-     * The identifier for the component that generated a finding such as AWSCodeGuruSecurity or AWSInspector.
+     * The identifier for the component that generated a finding such as AmazonCodeGuruSecurity.
      */
     generatorId?: String;
     /**
@@ -339,7 +340,7 @@ declare namespace CodeGuruSecurity {
      */
     ruleId?: String;
     /**
-     * The severity of the finding.
+     * The severity of the finding. Severity can be critical, high, medium, low, or informational. For information on severity levels, see Finding severity in the Amazon CodeGuru Security User Guide.
      */
     severity?: Severity;
     /**
@@ -376,23 +377,23 @@ declare namespace CodeGuruSecurity {
   export type FindingIdentifiers = FindingIdentifier[];
   export interface FindingMetricsValuePerSeverity {
     /**
-     * The severity of the finding is critical and should be addressed immediately.
+     * A numeric value corresponding to a critical finding.
      */
     critical?: Double;
     /**
-     * The severity of the finding is high and should be addressed as a near-term priority.
+     * A numeric value corresponding to a high severity finding.
      */
     high?: Double;
     /**
-     * The finding is related to quality or readability improvements and not considered actionable.
+     * A numeric value corresponding to an informational finding.
      */
     info?: Double;
     /**
-     * The severity of the finding is low and does require action on its own.
+     * A numeric value corresponding to a low severity finding.
      */
     low?: Double;
     /**
-     * The severity of the finding is medium and should be addressed as a mid-term priority.
+     * A numeric value corresponding to a medium severity finding.
      */
     medium?: Double;
   }
@@ -402,13 +403,13 @@ declare namespace CodeGuruSecurity {
   }
   export interface GetAccountConfigurationResponse {
     /**
-     * An EncryptionConfig object that contains the KMS key ARN to use for encryption. By default, CodeGuru Security uses an AWS-managed key for encryption. To specify your own key, call UpdateAccountConfiguration.
+     * An EncryptionConfig object that contains the KMS key ARN that is used for encryption. By default, CodeGuru Security uses an AWS-managed key for encryption. To specify your own key, call UpdateAccountConfiguration. If you do not specify a customer-managed key, returns empty.
      */
     encryptionConfig: EncryptionConfig;
   }
   export interface GetFindingsRequest {
     /**
-     * The maximum number of results to return in the response. Use this parameter when paginating results. If additional results exist beyond the number you specify, the nextToken element is returned in the response. Use nextToken in a subsequent request to retrieve additional results.
+     * The maximum number of results to return in the response. Use this parameter when paginating results. If additional results exist beyond the number you specify, the nextToken element is returned in the response. Use nextToken in a subsequent request to retrieve additional results. If not specified, returns 1000 results.
      */
     maxResults?: GetFindingsRequestMaxResultsInteger;
     /**
@@ -437,7 +438,7 @@ declare namespace CodeGuruSecurity {
   }
   export interface GetMetricsSummaryRequest {
     /**
-     * The date you want to retrieve summary metrics from, rounded to the nearest day. The date must be within the past two years since metrics data is only stored for two years. If a date outside of this range is passed, the response will be empty.
+     * The date you want to retrieve summary metrics from, rounded to the nearest day. The date must be within the past two years.
      */
     date: Timestamp;
   }
@@ -467,6 +468,10 @@ declare namespace CodeGuruSecurity {
      */
     createdAt: Timestamp;
     /**
+     * Details about the error that causes a scan to fail to be retrieved.
+     */
+    errorMessage?: ErrorMessage;
+    /**
      * The number of times a scan has been re-run on a revised resource.
      */
     numberOfRevisions?: Long;
@@ -483,7 +488,7 @@ declare namespace CodeGuruSecurity {
      */
     scanNameArn?: ScanNameArn;
     /**
-     * The current state of the scan. Pass either InProgress, Successful, or Failed.
+     * The current state of the scan. Returns either InProgress, Successful, or Failed.
      */
     scanState: ScanState;
     /**
@@ -497,11 +502,11 @@ declare namespace CodeGuruSecurity {
   export type KmsKeyArn = string;
   export interface ListFindingsMetricsRequest {
     /**
-     * The end date of the interval which you want to retrieve metrics from.
+     * The end date of the interval which you want to retrieve metrics from. Round to the nearest day.
      */
     endDate: Timestamp;
     /**
-     * The maximum number of results to return in the response. Use this parameter when paginating results. If additional results exist beyond the number you specify, the nextToken element is returned in the response. Use nextToken in a subsequent request to retrieve additional results.
+     * The maximum number of results to return in the response. Use this parameter when paginating results. If additional results exist beyond the number you specify, the nextToken element is returned in the response. Use nextToken in a subsequent request to retrieve additional results. If not specified, returns 1000 results.
      */
     maxResults?: ListFindingsMetricsRequestMaxResultsInteger;
     /**
@@ -509,7 +514,7 @@ declare namespace CodeGuruSecurity {
      */
     nextToken?: NextToken;
     /**
-     * The start date of the interval which you want to retrieve metrics from.
+     * The start date of the interval which you want to retrieve metrics from. Rounds to the nearest day.
      */
     startDate: Timestamp;
   }
@@ -526,7 +531,7 @@ declare namespace CodeGuruSecurity {
   }
   export interface ListScansRequest {
     /**
-     * The maximum number of results to return in the response. Use this parameter when paginating results. If additional results exist beyond the number you specify, the nextToken element is returned in the response. Use nextToken in a subsequent request to retrieve additional results.
+     * The maximum number of results to return in the response. Use this parameter when paginating results. If additional results exist beyond the number you specify, the nextToken element is returned in the response. Use nextToken in a subsequent request to retrieve additional results. If not specified, returns 100 results.
      */
     maxResults?: ListScansRequestMaxResultsInteger;
     /**
@@ -547,7 +552,7 @@ declare namespace CodeGuruSecurity {
   }
   export interface ListTagsForResourceRequest {
     /**
-     * The ARN of the ScanName object. You can retrieve this ARN by calling ListScans or GetScan.
+     * The ARN of the ScanName object. You can retrieve this ARN by calling CreateScan, ListScans, or GetScan.
      */
     resourceArn: ScanNameArn;
   }
@@ -560,7 +565,7 @@ declare namespace CodeGuruSecurity {
   export type Long = number;
   export interface MetricsSummary {
     /**
-     * A list of CategoryWithFindingNum objects for the top 5 finding categories with the most open findings in an account.
+     * A list of CategoryWithFindingNum objects for the top 5 finding categories with the most findings.
      */
     categoriesWithMostFindings?: CategoriesWithMostFindings;
     /**
@@ -568,15 +573,15 @@ declare namespace CodeGuruSecurity {
      */
     date?: Timestamp;
     /**
-     * The number of open findings of each severity in an account.
+     * The number of open findings of each severity.
      */
     openFindings?: FindingMetricsValuePerSeverity;
     /**
-     * A list of ScanNameWithFindingNum objects for the top 3 scans with the most number of open findings in an account.
+     * A list of ScanNameWithFindingNum objects for the top 3 scans with the most number of open critical findings.
      */
     scansWithMostOpenCriticalFindings?: ScansWithMostOpenCriticalFindings;
     /**
-     * A list of ScanNameWithFindingNum objects for the top 3 scans with the most number of open critical findings in an account.
+     * A list of ScanNameWithFindingNum objects for the top 3 scans with the most number of open findings.
      */
     scansWithMostOpenFindings?: ScansWithMostOpenFindings;
   }
@@ -606,17 +611,17 @@ declare namespace CodeGuruSecurity {
   export type RequestHeaderMap = {[key: string]: HeaderValue};
   export interface Resource {
     /**
-     * The identifier for the resource.
+     * The scanName of the scan that was run on the resource.
      */
     id?: String;
     /**
-     * The identifier for a section of the resource, such as an AWS Lambda layer.
+     * The identifier for a section of the resource.
      */
     subResourceId?: String;
   }
   export interface ResourceId {
     /**
-     * The identifier for the code file uploaded to the resource where a finding was detected.
+     * The identifier for the code file uploaded to the resource object. Returned by CreateUploadUrl when you upload resources to be scanned.
      */
     codeArtifactId?: Uuid;
   }
@@ -625,7 +630,7 @@ declare namespace CodeGuruSecurity {
   export type ScanNameArn = string;
   export interface ScanNameWithFindingNum {
     /**
-     * The number of open findings generated by a scan.
+     * The number of findings generated by a scan.
      */
     findingNumber?: Integer;
     /**
@@ -669,7 +674,7 @@ declare namespace CodeGuruSecurity {
   export type String = string;
   export interface SuggestedFix {
     /**
-     * The suggested code to add to your file. 
+     * The suggested code fix. If applicable, includes code patch to replace your source code. 
      */
     code?: String;
     /**
@@ -683,7 +688,7 @@ declare namespace CodeGuruSecurity {
   export type TagMap = {[key: string]: TagValue};
   export interface TagResourceRequest {
     /**
-     * The ARN of the ScanName object. You can retrieve this ARN by calling ListScans or GetScan.
+     * The ARN of the ScanName object. You can retrieve this ARN by calling CreateScan, ListScans, or GetScan.
      */
     resourceArn: ScanNameArn;
     /**
@@ -697,7 +702,7 @@ declare namespace CodeGuruSecurity {
   export type Timestamp = Date;
   export interface UntagResourceRequest {
     /**
-     * The ARN of the ScanName object. You can retrieve this ARN by calling ListScans or GetScan.
+     * The ARN of the ScanName object. You can retrieve this ARN by calling CreateScan, ListScans, or GetScan.
      */
     resourceArn: ScanNameArn;
     /**
@@ -709,13 +714,13 @@ declare namespace CodeGuruSecurity {
   }
   export interface UpdateAccountConfigurationRequest {
     /**
-     * The KMS key ARN you want to use for encryption. Defaults to service-side encryption if missing.
+     * The customer-managed KMS key ARN you want to use for encryption. If not specified, CodeGuru Security will use an AWS-managed key for encryption. If you previously specified a customer-managed KMS key and want CodeGuru Security to use an AWS-managed key for encryption instead, pass nothing.
      */
     encryptionConfig: EncryptionConfig;
   }
   export interface UpdateAccountConfigurationResponse {
     /**
-     * An EncryptionConfig object that contains the KMS key ARN to use for encryption.
+     * An EncryptionConfig object that contains the KMS key ARN that is used for encryption. If you did not specify a customer-managed KMS key in the request, returns empty. 
      */
     encryptionConfig: EncryptionConfig;
   }
@@ -730,7 +735,7 @@ declare namespace CodeGuruSecurity {
      */
     id?: String;
     /**
-     *  The number of times the vulnerability appears in your code.
+     * The number of times the vulnerability appears in your code.
      */
     itemCount?: Integer;
     /**

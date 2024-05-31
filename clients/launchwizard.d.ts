@@ -44,6 +44,14 @@ declare class LaunchWizard extends Service {
    */
   getWorkload(callback?: (err: AWSError, data: LaunchWizard.Types.GetWorkloadOutput) => void): Request<LaunchWizard.Types.GetWorkloadOutput, AWSError>;
   /**
+   * Returns details for a given workload and deployment pattern, including the available specifications. You can use the ListWorkloads operation to discover the available workload names and the ListWorkloadDeploymentPatterns operation to discover the available deployment pattern names of a given workload.
+   */
+  getWorkloadDeploymentPattern(params: LaunchWizard.Types.GetWorkloadDeploymentPatternInput, callback?: (err: AWSError, data: LaunchWizard.Types.GetWorkloadDeploymentPatternOutput) => void): Request<LaunchWizard.Types.GetWorkloadDeploymentPatternOutput, AWSError>;
+  /**
+   * Returns details for a given workload and deployment pattern, including the available specifications. You can use the ListWorkloads operation to discover the available workload names and the ListWorkloadDeploymentPatterns operation to discover the available deployment pattern names of a given workload.
+   */
+  getWorkloadDeploymentPattern(callback?: (err: AWSError, data: LaunchWizard.Types.GetWorkloadDeploymentPatternOutput) => void): Request<LaunchWizard.Types.GetWorkloadDeploymentPatternOutput, AWSError>;
+  /**
    * Lists the events of a deployment.
    */
   listDeploymentEvents(params: LaunchWizard.Types.ListDeploymentEventsInput, callback?: (err: AWSError, data: LaunchWizard.Types.ListDeploymentEventsOutput) => void): Request<LaunchWizard.Types.ListDeploymentEventsOutput, AWSError>;
@@ -60,23 +68,48 @@ declare class LaunchWizard extends Service {
    */
   listDeployments(callback?: (err: AWSError, data: LaunchWizard.Types.ListDeploymentsOutput) => void): Request<LaunchWizard.Types.ListDeploymentsOutput, AWSError>;
   /**
-   * Lists the workload deployment patterns.
+   * Lists the tags associated with a specified resource.
+   */
+  listTagsForResource(params: LaunchWizard.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: LaunchWizard.Types.ListTagsForResourceOutput) => void): Request<LaunchWizard.Types.ListTagsForResourceOutput, AWSError>;
+  /**
+   * Lists the tags associated with a specified resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: LaunchWizard.Types.ListTagsForResourceOutput) => void): Request<LaunchWizard.Types.ListTagsForResourceOutput, AWSError>;
+  /**
+   * Lists the workload deployment patterns for a given workload name. You can use the ListWorkloads operation to discover the available workload names.
    */
   listWorkloadDeploymentPatterns(params: LaunchWizard.Types.ListWorkloadDeploymentPatternsInput, callback?: (err: AWSError, data: LaunchWizard.Types.ListWorkloadDeploymentPatternsOutput) => void): Request<LaunchWizard.Types.ListWorkloadDeploymentPatternsOutput, AWSError>;
   /**
-   * Lists the workload deployment patterns.
+   * Lists the workload deployment patterns for a given workload name. You can use the ListWorkloads operation to discover the available workload names.
    */
   listWorkloadDeploymentPatterns(callback?: (err: AWSError, data: LaunchWizard.Types.ListWorkloadDeploymentPatternsOutput) => void): Request<LaunchWizard.Types.ListWorkloadDeploymentPatternsOutput, AWSError>;
   /**
-   * Lists the workloads.
+   * Lists the available workload names. You can use the ListWorkloadDeploymentPatterns operation to discover the available deployment patterns for a given workload.
    */
   listWorkloads(params: LaunchWizard.Types.ListWorkloadsInput, callback?: (err: AWSError, data: LaunchWizard.Types.ListWorkloadsOutput) => void): Request<LaunchWizard.Types.ListWorkloadsOutput, AWSError>;
   /**
-   * Lists the workloads.
+   * Lists the available workload names. You can use the ListWorkloadDeploymentPatterns operation to discover the available deployment patterns for a given workload.
    */
   listWorkloads(callback?: (err: AWSError, data: LaunchWizard.Types.ListWorkloadsOutput) => void): Request<LaunchWizard.Types.ListWorkloadsOutput, AWSError>;
+  /**
+   * Adds the specified tags to the given resource.
+   */
+  tagResource(params: LaunchWizard.Types.TagResourceInput, callback?: (err: AWSError, data: LaunchWizard.Types.TagResourceOutput) => void): Request<LaunchWizard.Types.TagResourceOutput, AWSError>;
+  /**
+   * Adds the specified tags to the given resource.
+   */
+  tagResource(callback?: (err: AWSError, data: LaunchWizard.Types.TagResourceOutput) => void): Request<LaunchWizard.Types.TagResourceOutput, AWSError>;
+  /**
+   * Removes the specified tags from the given resource.
+   */
+  untagResource(params: LaunchWizard.Types.UntagResourceInput, callback?: (err: AWSError, data: LaunchWizard.Types.UntagResourceOutput) => void): Request<LaunchWizard.Types.UntagResourceOutput, AWSError>;
+  /**
+   * Removes the specified tags from the given resource.
+   */
+  untagResource(callback?: (err: AWSError, data: LaunchWizard.Types.UntagResourceOutput) => void): Request<LaunchWizard.Types.UntagResourceOutput, AWSError>;
 }
 declare namespace LaunchWizard {
+  export type AllowedValues = ValueString[];
   export type Boolean = boolean;
   export interface CreateDeploymentInput {
     /**
@@ -92,11 +125,15 @@ declare namespace LaunchWizard {
      */
     name: DeploymentName;
     /**
-     * The settings specified for the deployment. For more information on the specifications required for creating a deployment, see Workload specifications.
+     * The settings specified for the deployment. These settings define how to deploy and configure your resources created by the deployment. For more information about the specifications required for creating a deployment for a SAP workload, see SAP deployment specifications. To retrieve the specifications required to create a deployment for other workloads, use the  GetWorkloadDeploymentPattern  operation.
      */
     specifications: DeploymentSpecifications;
     /**
-     * The name of the workload. You can use the  ListWorkloadDeploymentPatterns  operation to discover supported values for this parameter.
+     * The tags to add to the deployment.
+     */
+    tags?: Tags;
+    /**
+     * The name of the workload. You can use the  ListWorkloads  operation to discover supported values for this parameter.
      */
     workloadName: WorkloadName;
   }
@@ -122,6 +159,20 @@ declare namespace LaunchWizard {
      */
     statusReason?: String;
   }
+  export interface DeploymentConditionalField {
+    /**
+     * The comparator of the condition. Valid values: Equal | NotEqual 
+     */
+    comparator?: String;
+    /**
+     * The name of the deployment condition.
+     */
+    name?: String;
+    /**
+     * The value of the condition.
+     */
+    value?: String;
+  }
   export interface DeploymentData {
     /**
      * The time the deployment was created.
@@ -131,6 +182,10 @@ declare namespace LaunchWizard {
      * The time the deployment was deleted.
      */
     deletedAt?: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the deployment.
+     */
+    deploymentArn?: String;
     /**
      * The ID of the deployment.
      */
@@ -148,13 +203,17 @@ declare namespace LaunchWizard {
      */
     resourceGroup?: String;
     /**
-     * The specifications of the deployment. For more information on specifications for each deployment, see Workload specifications.
+     * The settings specified for the deployment. These settings define how to deploy and configure your resources created by the deployment. For more information about the specifications required for creating a deployment for a SAP workload, see SAP deployment specifications. To retrieve the specifications required to create a deployment for other workloads, use the  GetWorkloadDeploymentPattern  operation.
      */
     specifications?: DeploymentSpecifications;
     /**
      * The status of the deployment.
      */
     status?: DeploymentStatus;
+    /**
+     * Information about the tags attached to a deployment.
+     */
+    tags?: Tags;
     /**
      * The name of the workload.
      */
@@ -228,6 +287,29 @@ declare namespace LaunchWizard {
   export type DeploymentName = string;
   export type DeploymentPatternName = string;
   export type DeploymentSpecifications = {[key: string]: ValueString};
+  export type DeploymentSpecificationsData = DeploymentSpecificationsField[];
+  export interface DeploymentSpecificationsField {
+    /**
+     * The allowed values of the deployment specification.
+     */
+    allowedValues?: AllowedValues;
+    /**
+     * The conditionals used for the deployment specification.
+     */
+    conditionals?: SpecificationsConditionalData;
+    /**
+     * The description of the deployment specification.
+     */
+    description?: String;
+    /**
+     * The name of the deployment specification.
+     */
+    name?: String;
+    /**
+     * Indicates if the deployment specification is required.
+     */
+    required?: String;
+  }
   export type DeploymentStatus = "COMPLETED"|"CREATING"|"DELETE_IN_PROGRESS"|"DELETE_INITIATING"|"DELETE_FAILED"|"DELETED"|"FAILED"|"IN_PROGRESS"|"VALIDATING"|string;
   export type EventStatus = "CANCELED"|"CANCELING"|"COMPLETED"|"CREATED"|"FAILED"|"IN_PROGRESS"|"PENDING"|"TIMED_OUT"|string;
   export interface GetDeploymentInput {
@@ -241,6 +323,22 @@ declare namespace LaunchWizard {
      * An object that details the deployment.
      */
     deployment?: DeploymentData;
+  }
+  export interface GetWorkloadDeploymentPatternInput {
+    /**
+     * The name of the deployment pattern.
+     */
+    deploymentPatternName: DeploymentPatternName;
+    /**
+     * The name of the workload.
+     */
+    workloadName: WorkloadName;
+  }
+  export interface GetWorkloadDeploymentPatternOutput {
+    /**
+     * Details about the workload deployment pattern.
+     */
+    workloadDeploymentPattern?: WorkloadDeploymentPatternData;
   }
   export interface GetWorkloadInput {
     /**
@@ -281,7 +379,7 @@ declare namespace LaunchWizard {
   }
   export interface ListDeploymentsInput {
     /**
-     * Filters to scope the results. The following filters are supported:    WORKLOAD_NAME     DEPLOYMENT_STATUS   
+     * Filters to scope the results. The following filters are supported:    WORKLOAD_NAME - The name used in deployments.    DEPLOYMENT_STATUS - COMPLETED | CREATING | DELETE_IN_PROGRESS | DELETE_INITIATING | DELETE_FAILED | DELETED | FAILED | IN_PROGRESS | VALIDATING   
      */
     filters?: DeploymentFilterList;
     /**
@@ -302,6 +400,18 @@ declare namespace LaunchWizard {
      * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     nextToken?: NextToken;
+  }
+  export interface ListTagsForResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    resourceArn: String;
+  }
+  export interface ListTagsForResourceOutput {
+    /**
+     * Information about the tags.
+     */
+    tags?: Tags;
   }
   export interface ListWorkloadDeploymentPatternsInput {
     /**
@@ -352,8 +462,37 @@ declare namespace LaunchWizard {
   export type MaxWorkloadDeploymentPatternResults = number;
   export type MaxWorkloadResults = number;
   export type NextToken = string;
+  export type SpecificationsConditionalData = DeploymentConditionalField[];
   export type String = string;
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export interface TagResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    resourceArn: String;
+    /**
+     * One or more tags to attach to the resource.
+     */
+    tags: Tags;
+  }
+  export interface TagResourceOutput {
+  }
+  export type TagValue = string;
+  export type Tags = {[key: string]: TagValue};
   export type Timestamp = Date;
+  export interface UntagResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    resourceArn: String;
+    /**
+     * Keys identifying the tags to remove.
+     */
+    tagKeys: TagKeyList;
+  }
+  export interface UntagResourceOutput {
+  }
   export type ValueString = string;
   export interface WorkloadData {
     /**
@@ -396,6 +535,40 @@ declare namespace LaunchWizard {
     workloadName?: WorkloadName;
   }
   export type WorkloadDataSummaryList = WorkloadDataSummary[];
+  export interface WorkloadDeploymentPatternData {
+    /**
+     * The name of the deployment pattern.
+     */
+    deploymentPatternName?: DeploymentPatternName;
+    /**
+     * The description of the deployment pattern.
+     */
+    description?: String;
+    /**
+     * The display name of the deployment pattern.
+     */
+    displayName?: String;
+    /**
+     * The settings specified for the deployment. These settings define how to deploy and configure your resources created by the deployment. For more information about the specifications required for creating a deployment for a SAP workload, see SAP deployment specifications. To retrieve the specifications required to create a deployment for other workloads, use the  GetWorkloadDeploymentPattern  operation.
+     */
+    specifications?: DeploymentSpecificationsData;
+    /**
+     * The status of the deployment pattern.
+     */
+    status?: WorkloadDeploymentPatternStatus;
+    /**
+     * The status message of the deployment pattern.
+     */
+    statusMessage?: String;
+    /**
+     * The workload name of the deployment pattern.
+     */
+    workloadName?: WorkloadName;
+    /**
+     * The workload version name of the deployment pattern.
+     */
+    workloadVersionName?: WorkloadVersionName;
+  }
   export interface WorkloadDeploymentPatternDataSummary {
     /**
      * The name of a workload deployment pattern.

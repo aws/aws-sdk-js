@@ -5,6 +5,9 @@
     "endpointPrefix": "codeguru-security",
     "jsonVersion": "1.1",
     "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
     "serviceFullName": "Amazon CodeGuru Security",
     "serviceId": "CodeGuru Security",
     "signatureVersion": "v4",
@@ -39,7 +42,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Returns a list of all requested findings.</p>"
+      "documentation": "<p>Returns a list of requested findings from standard scans.</p>"
     },
     "CreateScan": {
       "name": "CreateScan",
@@ -74,7 +77,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Use to create a scan using code uploaded to an S3 bucket.</p>"
+      "documentation": "<p>Use to create a scan using code uploaded to an Amazon S3 bucket.</p>"
     },
     "CreateUploadUrl": {
       "name": "CreateUploadUrl",
@@ -103,7 +106,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Generates a pre-signed URL and request headers used to upload a code resource.</p> <p>You can upload your code resource to the URL and add the request headers using any HTTP client.</p>"
+      "documentation": "<p>Generates a pre-signed URL, request headers used to upload a code resource, and code artifact identifier for the uploaded resource.</p> <p>You can upload your code resource to the URL with the request headers using any HTTP client.</p>"
     },
     "GetAccountConfiguration": {
       "name": "GetAccountConfiguration",
@@ -132,7 +135,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Use to get account level configuration.</p>"
+      "documentation": "<p>Use to get the encryption configuration for an account.</p>"
     },
     "GetFindings": {
       "name": "GetFindings",
@@ -196,7 +199,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Returns top level metrics about an account from a specified date, including number of open findings, the categories with most findings, the scans with most open findings, and scans with most open critical findings. </p>"
+      "documentation": "<p>Returns a summary of metrics for an account from a specified date, including number of open findings, the categories with most findings, the scans with most open findings, and scans with most open critical findings. </p>"
     },
     "GetScan": {
       "name": "GetScan",
@@ -220,6 +223,9 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
         },
         {
           "shape": "AccessDeniedException"
@@ -283,7 +289,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Returns a list of all the standard scans in an account. Does not return express scans.</p>"
+      "documentation": "<p>Returns a list of all scans in an account. Does not return <code>EXPRESS</code> scans.</p>"
     },
     "ListTagsForResource": {
       "name": "ListTagsForResource",
@@ -421,7 +427,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Use to update account-level configuration with an encryption key.</p>"
+      "documentation": "<p>Use to update the encryption configuration for an account.</p>"
     }
   },
   "shapes": {
@@ -430,26 +436,26 @@
       "members": {
         "closedFindings": {
           "shape": "FindingMetricsValuePerSeverity",
-          "documentation": "<p>The number of closed findings of each severity in an account on the specified date.</p>"
+          "documentation": "<p>The number of closed findings of each severity on the specified date.</p>"
         },
         "date": {
           "shape": "Timestamp",
-          "documentation": "<p>The date from which the finding metrics were retrieved.</p>"
+          "documentation": "<p>The date from which the findings metrics were retrieved.</p>"
         },
         "meanTimeToClose": {
           "shape": "FindingMetricsValuePerSeverity",
-          "documentation": "<p>The average time it takes to close findings of each severity in days.</p>"
+          "documentation": "<p>The average time in days it takes to close findings of each severity as of a specified date.</p>"
         },
         "newFindings": {
           "shape": "FindingMetricsValuePerSeverity",
-          "documentation": "<p>The number of new findings of each severity in account on the specified date.</p>"
+          "documentation": "<p>The number of new findings of each severity on the specified date.</p>"
         },
         "openFindings": {
           "shape": "FindingMetricsValuePerSeverity",
-          "documentation": "<p>The number of open findings of each severity in an account as of the specified date.</p>"
+          "documentation": "<p>The number of open findings of each severity as of the specified date.</p>"
         }
       },
-      "documentation": "<p>A summary of findings metrics in an account.</p>"
+      "documentation": "<p>A summary of findings metrics for an account on a specified date.</p>"
     },
     "AnalysisType": {
       "type": "string",
@@ -517,7 +523,7 @@
         },
         "findings": {
           "shape": "Findings",
-          "documentation": "<p> A list of all requested findings.</p>"
+          "documentation": "<p> A list of all findings which were successfully fetched.</p>"
         }
       }
     },
@@ -587,11 +593,11 @@
         },
         "resourceId": {
           "shape": "ResourceId",
-          "documentation": "<p>The identifier for an input resource used to create a scan.</p>"
+          "documentation": "<p>The identifier for the resource object to be scanned.</p>"
         },
         "scanName": {
           "shape": "ScanName",
-          "documentation": "<p>The unique name that CodeGuru Security uses to track revisions across multiple scans of the same resource. Only allowed for a <code>STANDARD</code> scan type. If not specified, it will be auto generated. </p>"
+          "documentation": "<p>The unique name that CodeGuru Security uses to track revisions across multiple scans of the same resource. Only allowed for a <code>STANDARD</code> scan type. </p>"
         },
         "scanType": {
           "shape": "ScanType",
@@ -656,7 +662,7 @@
       "members": {
         "codeArtifactId": {
           "shape": "Uuid",
-          "documentation": "<p>The identifier for the uploaded code resource. </p>"
+          "documentation": "<p>The identifier for the uploaded code resource. Pass this to <code>CreateScan</code> to use the uploaded resources.</p>"
         },
         "requestHeaders": {
           "shape": "RequestHeaderMap",
@@ -664,7 +670,7 @@
         },
         "s3Url": {
           "shape": "S3Url",
-          "documentation": "<p>A pre-signed S3 URL. You can upload the code file you want to scan and add the required <code>requestHeaders</code> using any HTTP client.</p>"
+          "documentation": "<p>A pre-signed S3 URL. You can upload the code file you want to scan with the required <code>requestHeaders</code> using any HTTP client.</p>"
         }
       }
     },
@@ -683,10 +689,10 @@
       "members": {
         "kmsKeyArn": {
           "shape": "KmsKeyArn",
-          "documentation": "<p>The KMS key ARN to use for encryption. This must be provided as a header when uploading your code resource.</p>"
+          "documentation": "<p>The KMS key ARN that is used for encryption. If an AWS-managed key is used for encryption, returns empty.</p>"
         }
       },
-      "documentation": "<p>Information about account-level configuration.</p>"
+      "documentation": "<p>Information about the encryption configuration for an account. Required to call <code>UpdateAccountConfiguration</code>.</p>"
     },
     "ErrorCode": {
       "type": "string",
@@ -697,6 +703,10 @@
         "INVALID_FINDING_ID",
         "INVALID_SCAN_NAME"
       ]
+    },
+    "ErrorMessage": {
+      "type": "string",
+      "min": 1
     },
     "FilePath": {
       "type": "structure",
@@ -749,7 +759,7 @@
         },
         "generatorId": {
           "shape": "String",
-          "documentation": "<p>The identifier for the component that generated a finding such as AWSCodeGuruSecurity or AWSInspector.</p>"
+          "documentation": "<p>The identifier for the component that generated a finding such as AmazonCodeGuruSecurity.</p>"
         },
         "id": {
           "shape": "String",
@@ -769,7 +779,7 @@
         },
         "severity": {
           "shape": "Severity",
-          "documentation": "<p>The severity of the finding.</p>"
+          "documentation": "<p>The severity of the finding. Severity can be critical, high, medium, low, or informational. For information on severity levels, see <a href=\"https://docs.aws.amazon.com/codeguru/latest/security-ug/findings-overview.html#severity-distribution\">Finding severity</a> in the <i>Amazon CodeGuru Security User Guide</i>.</p>"
         },
         "status": {
           "shape": "Status",
@@ -825,26 +835,26 @@
       "members": {
         "critical": {
           "shape": "Double",
-          "documentation": "<p>The severity of the finding is critical and should be addressed immediately.</p>"
+          "documentation": "<p>A numeric value corresponding to a critical finding.</p>"
         },
         "high": {
           "shape": "Double",
-          "documentation": "<p>The severity of the finding is high and should be addressed as a near-term priority.</p>"
+          "documentation": "<p>A numeric value corresponding to a high severity finding.</p>"
         },
         "info": {
           "shape": "Double",
-          "documentation": "<p>The finding is related to quality or readability improvements and not considered actionable.</p>"
+          "documentation": "<p>A numeric value corresponding to an informational finding.</p>"
         },
         "low": {
           "shape": "Double",
-          "documentation": "<p>The severity of the finding is low and does require action on its own.</p>"
+          "documentation": "<p>A numeric value corresponding to a low severity finding.</p>"
         },
         "medium": {
           "shape": "Double",
-          "documentation": "<p>The severity of the finding is medium and should be addressed as a mid-term priority.</p>"
+          "documentation": "<p>A numeric value corresponding to a medium severity finding.</p>"
         }
       },
-      "documentation": "<p>The severity of the issue in the code that generated a finding.</p>"
+      "documentation": "<p>A numeric value corresponding to the severity of a finding, such as the number of open findings or the average time it takes to close findings of a given severity.</p>"
     },
     "Findings": {
       "type": "list",
@@ -870,7 +880,7 @@
       "members": {
         "encryptionConfig": {
           "shape": "EncryptionConfig",
-          "documentation": "<p>An <code>EncryptionConfig</code> object that contains the KMS key ARN to use for encryption. By default, CodeGuru Security uses an AWS-managed key for encryption. To specify your own key, call <code>UpdateAccountConfiguration</code>.</p>"
+          "documentation": "<p>An <code>EncryptionConfig</code> object that contains the KMS key ARN that is used for encryption. By default, CodeGuru Security uses an AWS-managed key for encryption. To specify your own key, call <code>UpdateAccountConfiguration</code>. If you do not specify a customer-managed key, returns empty.</p>"
         }
       }
     },
@@ -882,7 +892,7 @@
       "members": {
         "maxResults": {
           "shape": "GetFindingsRequestMaxResultsInteger",
-          "documentation": "<p>The maximum number of results to return in the response. Use this parameter when paginating results. If additional results exist beyond the number you specify, the <code>nextToken</code> element is returned in the response. Use <code>nextToken</code> in a subsequent request to retrieve additional results.</p>",
+          "documentation": "<p>The maximum number of results to return in the response. Use this parameter when paginating results. If additional results exist beyond the number you specify, the <code>nextToken</code> element is returned in the response. Use <code>nextToken</code> in a subsequent request to retrieve additional results. If not specified, returns 1000 results.</p>",
           "location": "querystring",
           "locationName": "maxResults"
         },
@@ -909,7 +919,7 @@
     "GetFindingsRequestMaxResultsInteger": {
       "type": "integer",
       "box": true,
-      "max": 100,
+      "max": 1000,
       "min": 1
     },
     "GetFindingsResponse": {
@@ -933,7 +943,7 @@
       "members": {
         "date": {
           "shape": "Timestamp",
-          "documentation": "<p>The date you want to retrieve summary metrics from, rounded to the nearest day. The date must be within the past two years since metrics data is only stored for two years. If a date outside of this range is passed, the response will be empty.</p>",
+          "documentation": "<p>The date you want to retrieve summary metrics from, rounded to the nearest day. The date must be within the past two years.</p>",
           "location": "querystring",
           "locationName": "date"
         }
@@ -986,6 +996,10 @@
           "shape": "Timestamp",
           "documentation": "<p>The time the scan was created.</p>"
         },
+        "errorMessage": {
+          "shape": "ErrorMessage",
+          "documentation": "<p>Details about the error that causes a scan to fail to be retrieved.</p>"
+        },
         "numberOfRevisions": {
           "shape": "Long",
           "documentation": "<p>The number of times a scan has been re-run on a revised resource.</p>"
@@ -1004,7 +1018,7 @@
         },
         "scanState": {
           "shape": "ScanState",
-          "documentation": "<p>The current state of the scan. Pass either <code>InProgress</code>, <code>Successful</code>, or <code>Failed</code>.</p>"
+          "documentation": "<p>The current state of the scan. Returns either <code>InProgress</code>, <code>Successful</code>, or <code>Failed</code>.</p>"
         },
         "updatedAt": {
           "shape": "Timestamp",
@@ -1039,13 +1053,13 @@
       "members": {
         "endDate": {
           "shape": "Timestamp",
-          "documentation": "<p>The end date of the interval which you want to retrieve metrics from.</p>",
+          "documentation": "<p>The end date of the interval which you want to retrieve metrics from. Round to the nearest day.</p>",
           "location": "querystring",
           "locationName": "endDate"
         },
         "maxResults": {
           "shape": "ListFindingsMetricsRequestMaxResultsInteger",
-          "documentation": "<p>The maximum number of results to return in the response. Use this parameter when paginating results. If additional results exist beyond the number you specify, the <code>nextToken</code> element is returned in the response. Use <code>nextToken</code> in a subsequent request to retrieve additional results.</p>",
+          "documentation": "<p>The maximum number of results to return in the response. Use this parameter when paginating results. If additional results exist beyond the number you specify, the <code>nextToken</code> element is returned in the response. Use <code>nextToken</code> in a subsequent request to retrieve additional results. If not specified, returns 1000 results.</p>",
           "location": "querystring",
           "locationName": "maxResults"
         },
@@ -1057,7 +1071,7 @@
         },
         "startDate": {
           "shape": "Timestamp",
-          "documentation": "<p>The start date of the interval which you want to retrieve metrics from.</p>",
+          "documentation": "<p>The start date of the interval which you want to retrieve metrics from. Rounds to the nearest day.</p>",
           "location": "querystring",
           "locationName": "startDate"
         }
@@ -1087,7 +1101,7 @@
       "members": {
         "maxResults": {
           "shape": "ListScansRequestMaxResultsInteger",
-          "documentation": "<p>The maximum number of results to return in the response. Use this parameter when paginating results. If additional results exist beyond the number you specify, the <code>nextToken</code> element is returned in the response. Use <code>nextToken</code> in a subsequent request to retrieve additional results.</p>",
+          "documentation": "<p>The maximum number of results to return in the response. Use this parameter when paginating results. If additional results exist beyond the number you specify, the <code>nextToken</code> element is returned in the response. Use <code>nextToken</code> in a subsequent request to retrieve additional results. If not specified, returns 100 results.</p>",
           "location": "querystring",
           "locationName": "maxResults"
         },
@@ -1126,7 +1140,7 @@
       "members": {
         "resourceArn": {
           "shape": "ScanNameArn",
-          "documentation": "<p>The ARN of the <code>ScanName</code> object. You can retrieve this ARN by calling <code>ListScans</code> or <code>GetScan</code>.</p>",
+          "documentation": "<p>The ARN of the <code>ScanName</code> object. You can retrieve this ARN by calling <code>CreateScan</code>, <code>ListScans</code>, or <code>GetScan</code>.</p>",
           "location": "uri",
           "locationName": "resourceArn"
         }
@@ -1150,7 +1164,7 @@
       "members": {
         "categoriesWithMostFindings": {
           "shape": "CategoriesWithMostFindings",
-          "documentation": "<p>A list of <code>CategoryWithFindingNum</code> objects for the top 5 finding categories with the most open findings in an account.</p>"
+          "documentation": "<p>A list of <code>CategoryWithFindingNum</code> objects for the top 5 finding categories with the most findings.</p>"
         },
         "date": {
           "shape": "Timestamp",
@@ -1158,18 +1172,18 @@
         },
         "openFindings": {
           "shape": "FindingMetricsValuePerSeverity",
-          "documentation": "<p>The number of open findings of each severity in an account.</p>"
+          "documentation": "<p>The number of open findings of each severity.</p>"
         },
         "scansWithMostOpenCriticalFindings": {
           "shape": "ScansWithMostOpenCriticalFindings",
-          "documentation": "<p>A list of <code>ScanNameWithFindingNum</code> objects for the top 3 scans with the most number of open findings in an account.</p>"
+          "documentation": "<p>A list of <code>ScanNameWithFindingNum</code> objects for the top 3 scans with the most number of open critical findings.</p>"
         },
         "scansWithMostOpenFindings": {
           "shape": "ScansWithMostOpenFindings",
-          "documentation": "<p>A list of <code>ScanNameWithFindingNum</code> objects for the top 3 scans with the most number of open critical findings in an account.</p>"
+          "documentation": "<p>A list of <code>ScanNameWithFindingNum</code> objects for the top 3 scans with the most number of open findings.</p>"
         }
       },
-      "documentation": "<p>Information about summary metrics in an account.</p>"
+      "documentation": "<p>A summary of metrics for an account as of a specified date.</p>"
     },
     "NextToken": {
       "type": "string",
@@ -1232,24 +1246,24 @@
       "members": {
         "id": {
           "shape": "String",
-          "documentation": "<p>The identifier for the resource.</p>"
+          "documentation": "<p>The <code>scanName</code> of the scan that was run on the resource.</p>"
         },
         "subResourceId": {
           "shape": "String",
-          "documentation": "<p>The identifier for a section of the resource, such as an AWS Lambda layer.</p>"
+          "documentation": "<p>The identifier for a section of the resource.</p>"
         }
       },
-      "documentation": "<p>Information about a resource, such as an Amazon S3 bucket or AWS Lambda function, that contains a finding.</p>"
+      "documentation": "<p>Information about a resource that contains a finding.</p>"
     },
     "ResourceId": {
       "type": "structure",
       "members": {
         "codeArtifactId": {
           "shape": "Uuid",
-          "documentation": "<p>The identifier for the code file uploaded to the resource where a finding was detected.</p>"
+          "documentation": "<p>The identifier for the code file uploaded to the resource object. Returned by <code>CreateUploadUrl</code> when you upload resources to be scanned.</p>"
         }
       },
-      "documentation": "<p>The identifier for a resource object that contains resources where a finding was detected.</p>",
+      "documentation": "<p>The identifier for a resource object that contains resources to scan. Specifying a codeArtifactId is required to create a scan.</p>",
       "union": true
     },
     "S3Url": {
@@ -1274,14 +1288,14 @@
       "members": {
         "findingNumber": {
           "shape": "Integer",
-          "documentation": "<p>The number of open findings generated by a scan.</p>"
+          "documentation": "<p>The number of findings generated by a scan.</p>"
         },
         "scanName": {
           "shape": "String",
           "documentation": "<p>The name of the scan.</p>"
         }
       },
-      "documentation": "<p>Information about a scan with open findings.</p>"
+      "documentation": "<p>Information about the number of findings generated by a scan.</p>"
     },
     "ScanState": {
       "type": "string",
@@ -1382,7 +1396,7 @@
       "members": {
         "code": {
           "shape": "String",
-          "documentation": "<p>The suggested code to add to your file. </p>"
+          "documentation": "<p>The suggested code fix. If applicable, includes code patch to replace your source code. </p>"
         },
         "description": {
           "shape": "String",
@@ -1430,7 +1444,7 @@
       "members": {
         "resourceArn": {
           "shape": "ScanNameArn",
-          "documentation": "<p>The ARN of the <code>ScanName</code> object. You can retrieve this ARN by calling <code>ListScans</code> or <code>GetScan</code>.</p>",
+          "documentation": "<p>The ARN of the <code>ScanName</code> object. You can retrieve this ARN by calling <code>CreateScan</code>, <code>ListScans</code>, or <code>GetScan</code>.</p>",
           "location": "uri",
           "locationName": "resourceArn"
         },
@@ -1461,7 +1475,7 @@
       "members": {
         "resourceArn": {
           "shape": "ScanNameArn",
-          "documentation": "<p>The ARN of the <code>ScanName</code> object. You can retrieve this ARN by calling <code>ListScans</code> or <code>GetScan</code>.</p>",
+          "documentation": "<p>The ARN of the <code>ScanName</code> object. You can retrieve this ARN by calling <code>CreateScan</code>, <code>ListScans</code>, or <code>GetScan</code>.</p>",
           "location": "uri",
           "locationName": "resourceArn"
         },
@@ -1485,7 +1499,7 @@
       "members": {
         "encryptionConfig": {
           "shape": "EncryptionConfig",
-          "documentation": "<p>The KMS key ARN you want to use for encryption. Defaults to service-side encryption if missing.</p>"
+          "documentation": "<p>The customer-managed KMS key ARN you want to use for encryption. If not specified, CodeGuru Security will use an AWS-managed key for encryption. If you previously specified a customer-managed KMS key and want CodeGuru Security to use an AWS-managed key for encryption instead, pass nothing.</p>"
         }
       }
     },
@@ -1497,7 +1511,7 @@
       "members": {
         "encryptionConfig": {
           "shape": "EncryptionConfig",
-          "documentation": "<p>An <code>EncryptionConfig</code> object that contains the KMS key ARN to use for encryption.</p>"
+          "documentation": "<p>An <code>EncryptionConfig</code> object that contains the KMS key ARN that is used for encryption. If you did not specify a customer-managed KMS key in the request, returns empty. </p>"
         }
       }
     },
@@ -1518,7 +1532,9 @@
         },
         "itemCount": {
           "shape": "Integer",
-          "documentation": "<p> The number of times the vulnerability appears in your code.</p>"
+          "documentation": "<p>The number of times the vulnerability appears in your code.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "This shape is not used."
         },
         "referenceUrls": {
           "shape": "ReferenceUrls",

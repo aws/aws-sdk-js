@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1631.0-->
+<!--LATEST=2.1632.0-->
 <!--ENTRYINSERT-->
+
+## 2.1632.0
+* feature: CodeGuruSecurity: This release includes minor model updates and documentation updates.
+* feature: LaunchWizard: This release adds support for describing workload deployment specifications, deploying additional workload types, and managing tags for Launch Wizard resources with API operations.
 
 ## 2.1631.0
 * feature: ACM: add v2 smoke tests and smithy smokeTests trait for SDK testing.
