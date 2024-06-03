@@ -2453,7 +2453,7 @@ declare namespace IoTTwinMaker {
     areAllPropertyValuesReturned?: Boolean;
   }
   export type PropertyTableValue = {[key: string]: DataValue};
-  export type PropertyUpdateType = "UPDATE"|"DELETE"|"CREATE"|string;
+  export type PropertyUpdateType = "UPDATE"|"DELETE"|"CREATE"|"RESET_VALUE"|string;
   export interface PropertyValue {
     /**
      * The timestamp of a value for a time series property.

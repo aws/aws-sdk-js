@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1632.0-->
+<!--LATEST=2.1633.0-->
 <!--ENTRYINSERT-->
+
+## 2.1633.0
+* feature: Batch: This release adds support for the AWS Batch GetJobQueueSnapshot API operation.
+* feature: EKS: Adds support for EKS add-ons pod identity associations integration
+* feature: IoTTwinMaker: Support RESET_VALUE UpdateType for PropertyUpdates to reset property value to default or null
 
 ## 2.1632.0
 * feature: CodeGuruSecurity: This release includes minor model updates and documentation updates.
