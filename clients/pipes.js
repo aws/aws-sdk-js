@@ -9,6 +9,7 @@ Object.defineProperty(apiLoader.services['pipes'], '2015-10-07', {
   get: function get() {
     var model = require('../apis/pipes-2015-10-07.min.json');
     model.paginators = require('../apis/pipes-2015-10-07.paginators.json').pagination;
+    model.waiters = require('../apis/pipes-2015-10-07.waiters2.json').waiters;
     return model;
   },
   enumerable: true,

@@ -381,6 +381,7 @@ export abstract class ConfigurationServicePlaceholders {
   controlcatalog?: AWS.ControlCatalog.Types.ClientConfiguration;
   route53profiles?: AWS.Route53Profiles.Types.ClientConfiguration;
   mailmanager?: AWS.MailManager.Types.ClientConfiguration;
+  taxsettings?: AWS.TaxSettings.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -764,4 +765,5 @@ export interface ConfigurationServiceApiVersions {
   controlcatalog?: AWS.ControlCatalog.Types.apiVersion;
   route53profiles?: AWS.Route53Profiles.Types.apiVersion;
   mailmanager?: AWS.MailManager.Types.apiVersion;
+  taxsettings?: AWS.TaxSettings.Types.apiVersion;
 }

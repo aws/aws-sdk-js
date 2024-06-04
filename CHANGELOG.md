@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1633.0-->
+<!--LATEST=2.1634.0-->
 <!--ENTRYINSERT-->
+
+## 2.1634.0
+* feature: EC2: U7i instances with up to 32 TiB of DDR5 memory and 896 vCPUs are now available. C7i-flex instances are launched and are lower-priced variants of the Amazon EC2 C7i instances that offer a baseline level of CPU performance with the ability to scale up to the full compute performance 95% of the time.
+* feature: Pipes: This release adds Timestream for LiveAnalytics as a supported target in EventBridge Pipes
+* feature: SageMaker: Extend DescribeClusterNode response with private DNS hostname and IP address, and placement information about availability zone and availability zone ID.
+* feature: TaxSettings: Initial release of AWS Tax Settings API
 
 ## 2.1633.0
 * feature: Batch: This release adds support for the AWS Batch GetJobQueueSnapshot API operation.

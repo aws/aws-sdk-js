@@ -380,5 +380,6 @@ module.exports = {
   Deadline: require('./deadline'),
   ControlCatalog: require('./controlcatalog'),
   Route53Profiles: require('./route53profiles'),
-  MailManager: require('./mailmanager')
+  MailManager: require('./mailmanager'),
+  TaxSettings: require('./taxsettings')
 };

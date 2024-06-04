@@ -1421,5 +1421,8 @@
   },
   "mailmanager": {
     "name": "MailManager"
+  },
+  "taxsettings": {
+    "name": "TaxSettings"
   }
 }

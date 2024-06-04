@@ -99,17 +99,17 @@ declare namespace Pipes {
   export type AssignPublicIp = "ENABLED"|"DISABLED"|string;
   export interface AwsVpcConfiguration {
     /**
-     * Specifies whether the task's elastic network interface receives a public IP address. You can specify ENABLED only when LaunchType in EcsParameters is set to FARGATE.
+     * Specifies the subnets associated with the task. These subnets must all be in the same VPC. You can specify as many as 16 subnets.
      */
-    AssignPublicIp?: AssignPublicIp;
+    Subnets: Subnets;
     /**
      * Specifies the security groups associated with the task. These security groups must all be in the same VPC. You can specify as many as five security groups. If you do not specify a security group, the default security group for the VPC is used.
      */
     SecurityGroups?: SecurityGroups;
     /**
-     * Specifies the subnets associated with the task. These subnets must all be in the same VPC. You can specify as many as 16 subnets.
+     * Specifies whether the task's elastic network interface receives a public IP address. You can specify ENABLED only when LaunchType in EcsParameters is set to FARGATE.
      */
-    Subnets: Subnets;
+    AssignPublicIp?: AssignPublicIp;
   }
   export interface BatchArrayProperties {
     /**
@@ -184,10 +184,6 @@ declare namespace Pipes {
   export type CapacityProviderStrategy = CapacityProviderStrategyItem[];
   export interface CapacityProviderStrategyItem {
     /**
-     * The base value designates how many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. If no value is specified, the default value of 0 is used. 
-     */
-    base?: CapacityProviderStrategyItemBase;
-    /**
      * The short name of the capacity provider.
      */
     capacityProvider: CapacityProvider;
@@ -195,6 +191,10 @@ declare namespace Pipes {
      * The weight value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The weight value is taken into consideration after the base value, if defined, is satisfied.
      */
     weight?: CapacityProviderStrategyItemWeight;
+    /**
+     * The base value designates how many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. If no value is specified, the default value of 0 is used. 
+     */
+    base?: CapacityProviderStrategyItemBase;
   }
   export type CapacityProviderStrategyItemBase = number;
   export type CapacityProviderStrategyItemWeight = number;
@@ -213,6 +213,10 @@ declare namespace Pipes {
   }
   export interface CreatePipeRequest {
     /**
+     * The name of the pipe.
+     */
+    Name: PipeName;
+    /**
      * A description of the pipe.
      */
     Description?: PipeDescription;
@@ -220,26 +224,6 @@ declare namespace Pipes {
      * The state the pipe should be in.
      */
     DesiredState?: RequestedPipeState;
-    /**
-     * The ARN of the enrichment resource.
-     */
-    Enrichment?: OptionalArn;
-    /**
-     * The parameters required to set up enrichment on your pipe.
-     */
-    EnrichmentParameters?: PipeEnrichmentParameters;
-    /**
-     * The logging configuration settings for the pipe.
-     */
-    LogConfiguration?: PipeLogConfigurationParameters;
-    /**
-     * The name of the pipe.
-     */
-    Name: PipeName;
-    /**
-     * The ARN of the role that allows the pipe to send data to the target.
-     */
-    RoleArn: RoleArn;
     /**
      * The ARN of the source resource.
      */
@@ -249,9 +233,13 @@ declare namespace Pipes {
      */
     SourceParameters?: PipeSourceParameters;
     /**
-     * The list of key-value pairs to associate with the pipe.
+     * The ARN of the enrichment resource.
      */
-    Tags?: TagMap;
+    Enrichment?: OptionalArn;
+    /**
+     * The parameters required to set up enrichment on your pipe.
+     */
+    EnrichmentParameters?: PipeEnrichmentParameters;
     /**
      * The ARN of the target resource.
      */
@@ -260,6 +248,18 @@ declare namespace Pipes {
      * The parameters required to set up a target for your pipe. For more information about pipe target parameters, including how to use dynamic path parameters, see Target parameters in the Amazon EventBridge User Guide.
      */
     TargetParameters?: PipeTargetParameters;
+    /**
+     * The ARN of the role that allows the pipe to send data to the target.
+     */
+    RoleArn: RoleArn;
+    /**
+     * The list of key-value pairs to associate with the pipe.
+     */
+    Tags?: TagMap;
+    /**
+     * The logging configuration settings for the pipe.
+     */
+    LogConfiguration?: PipeLogConfigurationParameters;
   }
   export interface CreatePipeResponse {
     /**
@@ -267,25 +267,25 @@ declare namespace Pipes {
      */
     Arn?: PipeArn;
     /**
-     * The time the pipe was created.
+     * The name of the pipe.
      */
-    CreationTime?: Timestamp;
-    /**
-     * The state the pipe is in.
-     */
-    CurrentState?: PipeState;
+    Name?: PipeName;
     /**
      * The state the pipe should be in.
      */
     DesiredState?: RequestedPipeState;
     /**
+     * The state the pipe is in.
+     */
+    CurrentState?: PipeState;
+    /**
+     * The time the pipe was created.
+     */
+    CreationTime?: Timestamp;
+    /**
      * When the pipe was last updated, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
      */
     LastModifiedTime?: Timestamp;
-    /**
-     * The name of the pipe.
-     */
-    Name?: PipeName;
   }
   export type Database = string;
   export type DbUser = string;
@@ -307,25 +307,25 @@ declare namespace Pipes {
      */
     Arn?: PipeArn;
     /**
-     * The time the pipe was created.
+     * The name of the pipe.
      */
-    CreationTime?: Timestamp;
-    /**
-     * The state the pipe is in.
-     */
-    CurrentState?: PipeState;
+    Name?: PipeName;
     /**
      * The state the pipe should be in.
      */
     DesiredState?: RequestedPipeStateDescribeResponse;
     /**
+     * The state the pipe is in.
+     */
+    CurrentState?: PipeState;
+    /**
+     * The time the pipe was created.
+     */
+    CreationTime?: Timestamp;
+    /**
      * When the pipe was last updated, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
      */
     LastModifiedTime?: Timestamp;
-    /**
-     * The name of the pipe.
-     */
-    Name?: PipeName;
   }
   export interface DescribePipeRequest {
     /**
@@ -339,13 +339,9 @@ declare namespace Pipes {
      */
     Arn?: PipeArn;
     /**
-     * The time the pipe was created.
+     * The name of the pipe.
      */
-    CreationTime?: Timestamp;
-    /**
-     * The state the pipe is in.
-     */
-    CurrentState?: PipeState;
+    Name?: PipeName;
     /**
      * A description of the pipe.
      */
@@ -355,29 +351,13 @@ declare namespace Pipes {
      */
     DesiredState?: RequestedPipeStateDescribeResponse;
     /**
-     * The ARN of the enrichment resource.
+     * The state the pipe is in.
      */
-    Enrichment?: OptionalArn;
+    CurrentState?: PipeState;
     /**
-     * The parameters required to set up enrichment on your pipe.
+     * The reason the pipe is in its current state.
      */
-    EnrichmentParameters?: PipeEnrichmentParameters;
-    /**
-     * When the pipe was last updated, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
-     */
-    LastModifiedTime?: Timestamp;
-    /**
-     * The logging configuration settings for the pipe.
-     */
-    LogConfiguration?: PipeLogConfiguration;
-    /**
-     * The name of the pipe.
-     */
-    Name?: PipeName;
-    /**
-     * The ARN of the role that allows the pipe to send data to the target.
-     */
-    RoleArn?: RoleArn;
+    StateReason?: PipeStateReason;
     /**
      * The ARN of the source resource.
      */
@@ -387,13 +367,13 @@ declare namespace Pipes {
      */
     SourceParameters?: PipeSourceParameters;
     /**
-     * The reason the pipe is in its current state.
+     * The ARN of the enrichment resource.
      */
-    StateReason?: PipeStateReason;
+    Enrichment?: OptionalArn;
     /**
-     * The list of key-value pairs to associate with the pipe.
+     * The parameters required to set up enrichment on your pipe.
      */
-    Tags?: TagMap;
+    EnrichmentParameters?: PipeEnrichmentParameters;
     /**
      * The ARN of the target resource.
      */
@@ -402,7 +382,45 @@ declare namespace Pipes {
      * The parameters required to set up a target for your pipe. For more information about pipe target parameters, including how to use dynamic path parameters, see Target parameters in the Amazon EventBridge User Guide.
      */
     TargetParameters?: PipeTargetParameters;
+    /**
+     * The ARN of the role that allows the pipe to send data to the target.
+     */
+    RoleArn?: RoleArn;
+    /**
+     * The list of key-value pairs to associate with the pipe.
+     */
+    Tags?: TagMap;
+    /**
+     * The time the pipe was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * When the pipe was last updated, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The logging configuration settings for the pipe.
+     */
+    LogConfiguration?: PipeLogConfiguration;
   }
+  export interface DimensionMapping {
+    /**
+     * Dynamic path to the dimension value in the source event.
+     */
+    DimensionValue: DimensionValue;
+    /**
+     * The data type of the dimension for the time-series data.
+     */
+    DimensionValueType: DimensionValueType;
+    /**
+     * The metadata attributes of the time series. For example, the name and Availability Zone of an Amazon EC2 instance or the name of the manufacturer of a wind turbine are dimensions.
+     */
+    DimensionName: DimensionName;
+  }
+  export type DimensionMappings = DimensionMapping[];
+  export type DimensionName = string;
+  export type DimensionValue = string;
+  export type DimensionValueType = "VARCHAR"|string;
   export type DynamoDBStreamStartPosition = "TRIM_HORIZON"|"LATEST"|string;
   export interface EcsContainerOverride {
     /**
@@ -523,6 +541,7 @@ declare namespace Pipes {
   }
   export type EndpointString = string;
   export type EphemeralStorageSize = number;
+  export type EpochTimeUnit = "MILLISECONDS"|"SECONDS"|"MICROSECONDS"|"NANOSECONDS"|string;
   export type EventBridgeDetailType = string;
   export type EventBridgeEndpointId = string;
   export type EventBridgeEventResourceList = ArnOrJsonPath[];
@@ -544,13 +563,13 @@ declare namespace Pipes {
   export type FirehoseArn = string;
   export interface FirehoseLogDestination {
     /**
-     * The Amazon Resource Name (ARN) of the Kinesis Data Firehose delivery stream to which EventBridge delivers the pipe log records.
+     * The Amazon Resource Name (ARN) of the Firehose delivery stream to which EventBridge delivers the pipe log records.
      */
     DeliveryStreamArn?: FirehoseArn;
   }
   export interface FirehoseLogDestinationParameters {
     /**
-     * Specifies the Amazon Resource Name (ARN) of the Kinesis Data Firehose delivery stream to which EventBridge delivers the pipe log records.
+     * Specifies the Amazon Resource Name (ARN) of the Firehose delivery stream to which EventBridge delivers the pipe log records.
      */
     DeliveryStreamArn: FirehoseArn;
   }
@@ -573,25 +592,17 @@ declare namespace Pipes {
   export type LimitMin1 = number;
   export interface ListPipesRequest {
     /**
-     * The state the pipe is in.
+     * A value that will return a subset of the pipes associated with this account. For example, "NamePrefix": "ABC" will return all endpoints with "ABC" in the name.
      */
-    CurrentState?: PipeState;
+    NamePrefix?: PipeName;
     /**
      * The state the pipe should be in.
      */
     DesiredState?: RequestedPipeState;
     /**
-     * The maximum number of pipes to include in the response.
+     * The state the pipe is in.
      */
-    Limit?: LimitMax100;
-    /**
-     * A value that will return a subset of the pipes associated with this account. For example, "NamePrefix": "ABC" will return all endpoints with "ABC" in the name.
-     */
-    NamePrefix?: PipeName;
-    /**
-     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.
-     */
-    NextToken?: NextToken;
+    CurrentState?: PipeState;
     /**
      * The prefix matching the pipe source.
      */
@@ -600,16 +611,24 @@ declare namespace Pipes {
      * The prefix matching the pipe target.
      */
     TargetPrefix?: ResourceArn;
-  }
-  export interface ListPipesResponse {
     /**
      * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.
      */
     NextToken?: NextToken;
     /**
+     * The maximum number of pipes to include in the response.
+     */
+    Limit?: LimitMax100;
+  }
+  export interface ListPipesResponse {
+    /**
      * The pipes returned by the call.
      */
     Pipes?: PipeList;
+    /**
+     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.
+     */
+    NextToken?: NextToken;
   }
   export interface ListTagsForResourceRequest {
     /**
@@ -636,18 +655,49 @@ declare namespace Pipes {
     /**
      * The ARN of the Secrets Manager secret.
      */
-    ClientCertificateTlsAuth?: SecretManagerArn;
+    SaslScram512Auth?: SecretManagerArn;
     /**
      * The ARN of the Secrets Manager secret.
      */
-    SaslScram512Auth?: SecretManagerArn;
+    ClientCertificateTlsAuth?: SecretManagerArn;
   }
   export type MSKStartPosition = "TRIM_HORIZON"|"LATEST"|string;
   export type MaximumBatchingWindowInSeconds = number;
   export type MaximumRecordAgeInSeconds = number;
   export type MaximumRetryAttemptsESM = number;
+  export type MeasureName = string;
+  export type MeasureValue = string;
+  export type MeasureValueType = "DOUBLE"|"BIGINT"|"VARCHAR"|"BOOLEAN"|"TIMESTAMP"|string;
   export type MessageDeduplicationId = string;
   export type MessageGroupId = string;
+  export interface MultiMeasureAttributeMapping {
+    /**
+     * Dynamic path to the measurement attribute in the source event.
+     */
+    MeasureValue: MeasureValue;
+    /**
+     * Data type of the measurement attribute in the source event.
+     */
+    MeasureValueType: MeasureValueType;
+    /**
+     * Target measure name to be used.
+     */
+    MultiMeasureAttributeName: MultiMeasureAttributeName;
+  }
+  export type MultiMeasureAttributeMappings = MultiMeasureAttributeMapping[];
+  export type MultiMeasureAttributeName = string;
+  export interface MultiMeasureMapping {
+    /**
+     * The name of the multiple measurements per record (multi-measure).
+     */
+    MultiMeasureName: MultiMeasureName;
+    /**
+     * Mappings that represent multiple source event fields mapped to measures in the same Timestream for LiveAnalytics record.
+     */
+    MultiMeasureAttributeMappings: MultiMeasureAttributeMappings;
+  }
+  export type MultiMeasureMappings = MultiMeasureMapping[];
+  export type MultiMeasureName = string;
   export interface NetworkConfiguration {
     /**
      * Use this structure to specify the VPC subnets and security groups for the task, and whether a public IP address is to be used. This structure is relevant only for ECS tasks that use the awsvpc network mode.
@@ -661,57 +711,57 @@ declare namespace Pipes {
   export type PathParameterList = PathParameter[];
   export interface Pipe {
     /**
+     * The name of the pipe.
+     */
+    Name?: PipeName;
+    /**
      * The ARN of the pipe.
      */
     Arn?: PipeArn;
-    /**
-     * The time the pipe was created.
-     */
-    CreationTime?: Timestamp;
-    /**
-     * The state the pipe is in.
-     */
-    CurrentState?: PipeState;
     /**
      * The state the pipe should be in.
      */
     DesiredState?: RequestedPipeState;
     /**
-     * The ARN of the enrichment resource.
+     * The state the pipe is in.
      */
-    Enrichment?: OptionalArn;
-    /**
-     * When the pipe was last updated, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
-     */
-    LastModifiedTime?: Timestamp;
-    /**
-     * The name of the pipe.
-     */
-    Name?: PipeName;
-    /**
-     * The ARN of the source resource.
-     */
-    Source?: ArnOrUrl;
+    CurrentState?: PipeState;
     /**
      * The reason the pipe is in its current state.
      */
     StateReason?: PipeStateReason;
     /**
+     * The time the pipe was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * When the pipe was last updated, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The ARN of the source resource.
+     */
+    Source?: ArnOrUrl;
+    /**
      * The ARN of the target resource.
      */
     Target?: Arn;
+    /**
+     * The ARN of the enrichment resource.
+     */
+    Enrichment?: OptionalArn;
   }
   export type PipeArn = string;
   export type PipeDescription = string;
   export interface PipeEnrichmentHttpParameters {
     /**
-     * The headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
-     */
-    HeaderParameters?: HeaderParametersMap;
-    /**
      * The path parameter values to be used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*").
      */
     PathParameterValues?: PathParameterList;
+    /**
+     * The headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
+     */
+    HeaderParameters?: HeaderParametersMap;
     /**
      * The query string keys/values that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
      */
@@ -719,77 +769,77 @@ declare namespace Pipes {
   }
   export interface PipeEnrichmentParameters {
     /**
-     * Contains the HTTP parameters to use when the target is a API Gateway REST endpoint or EventBridge ApiDestination. If you specify an API Gateway REST API or EventBridge ApiDestination as a target, you can use this parameter to specify headers, path parameters, and query string keys/values as part of your target invoking request. If you're using ApiDestinations, the corresponding Connection can also have these values configured. In case of any conflicting keys, values from the Connection take precedence.
-     */
-    HttpParameters?: PipeEnrichmentHttpParameters;
-    /**
      * Valid JSON text passed to the enrichment. In this case, nothing from the event itself is passed to the enrichment. For more information, see The JavaScript Object Notation (JSON) Data Interchange Format. To remove an input template, specify an empty string.
      */
     InputTemplate?: InputTemplate;
+    /**
+     * Contains the HTTP parameters to use when the target is a API Gateway REST endpoint or EventBridge ApiDestination. If you specify an API Gateway REST API or EventBridge ApiDestination as a target, you can use this parameter to specify headers, path parameters, and query string keys/values as part of your target invoking request. If you're using ApiDestinations, the corresponding Connection can also have these values configured. In case of any conflicting keys, values from the Connection take precedence.
+     */
+    HttpParameters?: PipeEnrichmentHttpParameters;
   }
   export type PipeList = Pipe[];
   export interface PipeLogConfiguration {
+    /**
+     * The Amazon S3 logging configuration settings for the pipe.
+     */
+    S3LogDestination?: S3LogDestination;
+    /**
+     * The Amazon Data Firehose logging configuration settings for the pipe.
+     */
+    FirehoseLogDestination?: FirehoseLogDestination;
     /**
      * The Amazon CloudWatch Logs logging configuration settings for the pipe.
      */
     CloudwatchLogsLogDestination?: CloudwatchLogsLogDestination;
     /**
-     * The Amazon Kinesis Data Firehose logging configuration settings for the pipe.
-     */
-    FirehoseLogDestination?: FirehoseLogDestination;
-    /**
-     * Whether the execution data (specifically, the payload, awsRequest, and awsResponse fields) is included in the log messages for this pipe. This applies to all log destinations for the pipe. For more information, see Including execution data in logs in the Amazon EventBridge User Guide.
-     */
-    IncludeExecutionData?: IncludeExecutionData;
-    /**
      * The level of logging detail to include. This applies to all log destinations for the pipe.
      */
     Level?: LogLevel;
     /**
-     * The Amazon S3 logging configuration settings for the pipe.
+     * Whether the execution data (specifically, the payload, awsRequest, and awsResponse fields) is included in the log messages for this pipe. This applies to all log destinations for the pipe. For more information, see Including execution data in logs in the Amazon EventBridge User Guide.
      */
-    S3LogDestination?: S3LogDestination;
+    IncludeExecutionData?: IncludeExecutionData;
   }
   export interface PipeLogConfigurationParameters {
+    /**
+     * The Amazon S3 logging configuration settings for the pipe.
+     */
+    S3LogDestination?: S3LogDestinationParameters;
+    /**
+     * The Amazon Data Firehose logging configuration settings for the pipe.
+     */
+    FirehoseLogDestination?: FirehoseLogDestinationParameters;
     /**
      * The Amazon CloudWatch Logs logging configuration settings for the pipe.
      */
     CloudwatchLogsLogDestination?: CloudwatchLogsLogDestinationParameters;
     /**
-     * The Amazon Kinesis Data Firehose logging configuration settings for the pipe.
-     */
-    FirehoseLogDestination?: FirehoseLogDestinationParameters;
-    /**
-     * Specify ON to include the execution data (specifically, the payload and awsRequest fields) in the log messages for this pipe. This applies to all log destinations for the pipe. For more information, see Including execution data in logs in the Amazon EventBridge User Guide. The default is OFF.
-     */
-    IncludeExecutionData?: IncludeExecutionData;
-    /**
      * The level of logging detail to include. This applies to all log destinations for the pipe. For more information, see Specifying EventBridge Pipes log level in the Amazon EventBridge User Guide.
      */
     Level: LogLevel;
     /**
-     * The Amazon S3 logging configuration settings for the pipe.
+     * Specify ALL to include the execution data (specifically, the payload, awsRequest, and awsResponse fields) in the log messages for this pipe. This applies to all log destinations for the pipe. For more information, see Including execution data in logs in the Amazon EventBridge User Guide. By default, execution data is not included.
      */
-    S3LogDestination?: S3LogDestinationParameters;
+    IncludeExecutionData?: IncludeExecutionData;
   }
   export type PipeName = string;
   export interface PipeSourceActiveMQBrokerParameters {
-    /**
-     * The maximum number of records to include in each batch.
-     */
-    BatchSize?: LimitMax10000;
     /**
      * The credentials needed to access the resource.
      */
     Credentials: MQBrokerAccessCredentials;
     /**
-     * The maximum length of a time to wait for events.
-     */
-    MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
-    /**
      * The name of the destination queue to consume.
      */
     QueueName: MQBrokerQueueName;
+    /**
+     * The maximum number of records to include in each batch.
+     */
+    BatchSize?: LimitMax10000;
+    /**
+     * The maximum length of a time to wait for events.
+     */
+    MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
   }
   export interface PipeSourceDynamoDBStreamParameters {
     /**
@@ -800,6 +850,10 @@ declare namespace Pipes {
      * Define the target queue to send dead-letter queue events to.
      */
     DeadLetterConfig?: DeadLetterConfig;
+    /**
+     * (Streams only) Define how to handle item process failures. AUTOMATIC_BISECT halves each batch and retry each half until all the records are processed or there is one failed message left in the batch.
+     */
+    OnPartialBatchItemFailure?: OnPartialBatchItemFailureStreams;
     /**
      * The maximum length of a time to wait for events.
      */
@@ -812,10 +866,6 @@ declare namespace Pipes {
      * (Streams only) Discard records after the specified number of retries. The default value is -1, which sets the maximum number of retries to infinite. When MaximumRetryAttempts is infinite, EventBridge retries failed records until the record expires in the event source.
      */
     MaximumRetryAttempts?: MaximumRetryAttemptsESM;
-    /**
-     * (Streams only) Define how to handle item process failures. AUTOMATIC_BISECT halves each batch and retry each half until all the records are processed or there is one failed message left in the batch.
-     */
-    OnPartialBatchItemFailure?: OnPartialBatchItemFailureStreams;
     /**
      * (Streams only) The number of batches to process concurrently from each shard. The default value is 1.
      */
@@ -835,6 +885,10 @@ declare namespace Pipes {
      */
     DeadLetterConfig?: DeadLetterConfig;
     /**
+     * (Streams only) Define how to handle item process failures. AUTOMATIC_BISECT halves each batch and retry each half until all the records are processed or there is one failed message left in the batch.
+     */
+    OnPartialBatchItemFailure?: OnPartialBatchItemFailureStreams;
+    /**
      * The maximum length of a time to wait for events.
      */
     MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
@@ -846,10 +900,6 @@ declare namespace Pipes {
      * (Streams only) Discard records after the specified number of retries. The default value is -1, which sets the maximum number of retries to infinite. When MaximumRetryAttempts is infinite, EventBridge retries failed records until the record expires in the event source.
      */
     MaximumRetryAttempts?: MaximumRetryAttemptsESM;
-    /**
-     * (Streams only) Define how to handle item process failures. AUTOMATIC_BISECT halves each batch and retry each half until all the records are processed or there is one failed message left in the batch.
-     */
-    OnPartialBatchItemFailure?: OnPartialBatchItemFailureStreams;
     /**
      * (Streams only) The number of batches to process concurrently from each shard. The default value is 1.
      */
@@ -865,9 +915,21 @@ declare namespace Pipes {
   }
   export interface PipeSourceManagedStreamingKafkaParameters {
     /**
+     * The name of the topic that the pipe will read from.
+     */
+    TopicName: KafkaTopicName;
+    /**
+     * (Streams only) The position in a stream from which to start reading.
+     */
+    StartingPosition?: MSKStartPosition;
+    /**
      * The maximum number of records to include in each batch.
      */
     BatchSize?: LimitMax10000;
+    /**
+     * The maximum length of a time to wait for events.
+     */
+    MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
     /**
      * The name of the destination queue to consume.
      */
@@ -876,28 +938,8 @@ declare namespace Pipes {
      * The credentials needed to access the resource.
      */
     Credentials?: MSKAccessCredentials;
-    /**
-     * The maximum length of a time to wait for events.
-     */
-    MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
-    /**
-     * (Streams only) The position in a stream from which to start reading.
-     */
-    StartingPosition?: MSKStartPosition;
-    /**
-     * The name of the topic that the pipe will read from.
-     */
-    TopicName: KafkaTopicName;
   }
   export interface PipeSourceParameters {
-    /**
-     * The parameters for using an Active MQ broker as a source.
-     */
-    ActiveMQBrokerParameters?: PipeSourceActiveMQBrokerParameters;
-    /**
-     * The parameters for using a DynamoDB stream as a source.
-     */
-    DynamoDBStreamParameters?: PipeSourceDynamoDBStreamParameters;
     /**
      * The collection of event patterns used to filter events. To remove a filter, specify a FilterCriteria object with an empty array of Filter objects. For more information, see Events and Event Patterns in the Amazon EventBridge User Guide.
      */
@@ -907,35 +949,35 @@ declare namespace Pipes {
      */
     KinesisStreamParameters?: PipeSourceKinesisStreamParameters;
     /**
-     * The parameters for using an MSK stream as a source.
+     * The parameters for using a DynamoDB stream as a source.
      */
-    ManagedStreamingKafkaParameters?: PipeSourceManagedStreamingKafkaParameters;
+    DynamoDBStreamParameters?: PipeSourceDynamoDBStreamParameters;
+    /**
+     * The parameters for using a Amazon SQS stream as a source.
+     */
+    SqsQueueParameters?: PipeSourceSqsQueueParameters;
+    /**
+     * The parameters for using an Active MQ broker as a source.
+     */
+    ActiveMQBrokerParameters?: PipeSourceActiveMQBrokerParameters;
     /**
      * The parameters for using a Rabbit MQ broker as a source.
      */
     RabbitMQBrokerParameters?: PipeSourceRabbitMQBrokerParameters;
     /**
-     * The parameters for using a self-managed Apache Kafka stream as a source.
+     * The parameters for using an MSK stream as a source.
+     */
+    ManagedStreamingKafkaParameters?: PipeSourceManagedStreamingKafkaParameters;
+    /**
+     * The parameters for using a self-managed Apache Kafka stream as a source. A self managed cluster refers to any Apache Kafka cluster not hosted by Amazon Web Services. This includes both clusters you manage yourself, as well as those hosted by a third-party provider, such as Confluent Cloud, CloudKarafka, or Redpanda. For more information, see Apache Kafka streams as a source in the Amazon EventBridge User Guide.
      */
     SelfManagedKafkaParameters?: PipeSourceSelfManagedKafkaParameters;
-    /**
-     * The parameters for using a Amazon SQS stream as a source.
-     */
-    SqsQueueParameters?: PipeSourceSqsQueueParameters;
   }
   export interface PipeSourceRabbitMQBrokerParameters {
-    /**
-     * The maximum number of records to include in each batch.
-     */
-    BatchSize?: LimitMax10000;
     /**
      * The credentials needed to access the resource.
      */
     Credentials: MQBrokerAccessCredentials;
-    /**
-     * The maximum length of a time to wait for events.
-     */
-    MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
     /**
      * The name of the destination queue to consume.
      */
@@ -944,8 +986,24 @@ declare namespace Pipes {
      * The name of the virtual host associated with the source broker.
      */
     VirtualHost?: URI;
+    /**
+     * The maximum number of records to include in each batch.
+     */
+    BatchSize?: LimitMax10000;
+    /**
+     * The maximum length of a time to wait for events.
+     */
+    MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
   }
   export interface PipeSourceSelfManagedKafkaParameters {
+    /**
+     * The name of the topic that the pipe will read from.
+     */
+    TopicName: KafkaTopicName;
+    /**
+     * (Streams only) The position in a stream from which to start reading.
+     */
+    StartingPosition?: SelfManagedKafkaStartPosition;
     /**
      * An array of server URLs.
      */
@@ -955,6 +1013,10 @@ declare namespace Pipes {
      */
     BatchSize?: LimitMax10000;
     /**
+     * The maximum length of a time to wait for events.
+     */
+    MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
+    /**
      * The name of the destination queue to consume.
      */
     ConsumerGroupID?: URI;
@@ -963,21 +1025,9 @@ declare namespace Pipes {
      */
     Credentials?: SelfManagedKafkaAccessConfigurationCredentials;
     /**
-     * The maximum length of a time to wait for events.
-     */
-    MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
-    /**
      * The ARN of the Secrets Manager secret used for certification.
      */
     ServerRootCaCertificate?: SecretManagerArn;
-    /**
-     * (Streams only) The position in a stream from which to start reading.
-     */
-    StartingPosition?: SelfManagedKafkaStartPosition;
-    /**
-     * The name of the topic that the pipe will read from.
-     */
-    TopicName: KafkaTopicName;
     /**
      * This structure specifies the VPC subnets and security groups for the stream, and whether a public IP address is to be used.
      */
@@ -997,9 +1047,21 @@ declare namespace Pipes {
   export type PipeStateReason = string;
   export interface PipeTargetBatchJobParameters {
     /**
+     * The job definition used by this job. This value can be one of name, name:revision, or the Amazon Resource Name (ARN) for the job definition. If name is specified without a revision then the latest active revision is used.
+     */
+    JobDefinition: String;
+    /**
+     * The name of the job. It can be up to 128 letters long. The first character must be alphanumeric, can contain uppercase and lowercase letters, numbers, hyphens (-), and underscores (_).
+     */
+    JobName: String;
+    /**
      * The array properties for the submitted job, such as the size of the array. The array size can be between 2 and 10,000. If you specify array properties for a job, it becomes an array job. This parameter is used only if the target is an Batch job.
      */
     ArrayProperties?: BatchArrayProperties;
+    /**
+     * The retry strategy to use for failed jobs. When a retry strategy is specified here, it overrides the retry strategy defined in the job definition.
+     */
+    RetryStrategy?: BatchRetryStrategy;
     /**
      * The overrides that are sent to a container.
      */
@@ -1009,21 +1071,9 @@ declare namespace Pipes {
      */
     DependsOn?: BatchDependsOn;
     /**
-     * The job definition used by this job. This value can be one of name, name:revision, or the Amazon Resource Name (ARN) for the job definition. If name is specified without a revision then the latest active revision is used.
-     */
-    JobDefinition: String;
-    /**
-     * The name of the job. It can be up to 128 letters long. The first character must be alphanumeric, can contain uppercase and lowercase letters, numbers, hyphens (-), and underscores (_).
-     */
-    JobName: String;
-    /**
      * Additional parameters passed to the job that replace parameter substitution placeholders that are set in the job definition. Parameters are specified as a key and value pair mapping. Parameters included here override any corresponding parameter defaults from the job definition.
      */
     Parameters?: BatchParametersMap;
-    /**
-     * The retry strategy to use for failed jobs. When a retry strategy is specified here, it overrides the retry strategy defined in the job definition.
-     */
-    RetryStrategy?: BatchRetryStrategy;
   }
   export interface PipeTargetCloudWatchLogsParameters {
     /**
@@ -1037,6 +1087,30 @@ declare namespace Pipes {
   }
   export interface PipeTargetEcsTaskParameters {
     /**
+     * The ARN of the task definition to use if the event target is an Amazon ECS task. 
+     */
+    TaskDefinitionArn: ArnOrJsonPath;
+    /**
+     * The number of tasks to create based on TaskDefinition. The default is 1.
+     */
+    TaskCount?: LimitMin1;
+    /**
+     * Specifies the launch type on which your task is running. The launch type that you specify here must match one of the launch type (compatibilities) of the target task. The FARGATE value is supported only in the Regions where Fargate with Amazon ECS is supported. For more information, see Fargate on Amazon ECS in the Amazon Elastic Container Service Developer Guide.
+     */
+    LaunchType?: LaunchType;
+    /**
+     * Use this structure if the Amazon ECS task uses the awsvpc network mode. This structure specifies the VPC subnets and security groups associated with the task, and whether a public IP address is to be used. This structure is required if LaunchType is FARGATE because the awsvpc mode is required for Fargate tasks. If you specify NetworkConfiguration when the target ECS task does not use the awsvpc network mode, the task fails.
+     */
+    NetworkConfiguration?: NetworkConfiguration;
+    /**
+     * Specifies the platform version for the task. Specify only the numeric portion of the platform version, such as 1.1.0. This structure is used only if LaunchType is FARGATE. For more information about valid platform versions, see Fargate Platform Versions in the Amazon Elastic Container Service Developer Guide.
+     */
+    PlatformVersion?: String;
+    /**
+     * Specifies an Amazon ECS task group for the task. The maximum length is 255 characters.
+     */
+    Group?: String;
+    /**
      * The capacity provider strategy to use for the task. If a capacityProviderStrategy is specified, the launchType parameter must be omitted. If no capacityProviderStrategy or launchType is specified, the defaultCapacityProviderStrategy for the cluster is used. 
      */
     CapacityProviderStrategy?: CapacityProviderStrategy;
@@ -1049,22 +1123,6 @@ declare namespace Pipes {
      */
     EnableExecuteCommand?: Boolean;
     /**
-     * Specifies an Amazon ECS task group for the task. The maximum length is 255 characters.
-     */
-    Group?: String;
-    /**
-     * Specifies the launch type on which your task is running. The launch type that you specify here must match one of the launch type (compatibilities) of the target task. The FARGATE value is supported only in the Regions where Fargate with Amazon ECS is supported. For more information, see Fargate on Amazon ECS in the Amazon Elastic Container Service Developer Guide.
-     */
-    LaunchType?: LaunchType;
-    /**
-     * Use this structure if the Amazon ECS task uses the awsvpc network mode. This structure specifies the VPC subnets and security groups associated with the task, and whether a public IP address is to be used. This structure is required if LaunchType is FARGATE because the awsvpc mode is required for Fargate tasks. If you specify NetworkConfiguration when the target ECS task does not use the awsvpc network mode, the task fails.
-     */
-    NetworkConfiguration?: NetworkConfiguration;
-    /**
-     * The overrides that are associated with a task.
-     */
-    Overrides?: EcsTaskOverride;
-    /**
      * An array of placement constraint objects to use for the task. You can specify up to 10 constraints per task (including constraints in the task definition and those specified at runtime).
      */
     PlacementConstraints?: PlacementConstraints;
@@ -1072,10 +1130,6 @@ declare namespace Pipes {
      * The placement strategy objects to use for the task. You can specify a maximum of five strategy rules per task. 
      */
     PlacementStrategy?: PlacementStrategies;
-    /**
-     * Specifies the platform version for the task. Specify only the numeric portion of the platform version, such as 1.1.0. This structure is used only if LaunchType is FARGATE. For more information about valid platform versions, see Fargate Platform Versions in the Amazon Elastic Container Service Developer Guide.
-     */
-    PlatformVersion?: String;
     /**
      * Specifies whether to propagate the tags from the task definition to the task. If no value is specified, the tags are not propagated. Tags can only be propagated to the task during task creation. To add tags to a task after task creation, use the TagResource API action. 
      */
@@ -1085,35 +1139,31 @@ declare namespace Pipes {
      */
     ReferenceId?: ReferenceId;
     /**
+     * The overrides that are associated with a task.
+     */
+    Overrides?: EcsTaskOverride;
+    /**
      * The metadata that you apply to the task to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. To learn more, see RunTask in the Amazon ECS API Reference.
      */
     Tags?: TagList;
-    /**
-     * The number of tasks to create based on TaskDefinition. The default is 1.
-     */
-    TaskCount?: LimitMin1;
-    /**
-     * The ARN of the task definition to use if the event target is an Amazon ECS task. 
-     */
-    TaskDefinitionArn: ArnOrJsonPath;
   }
   export interface PipeTargetEventBridgeEventBusParameters {
-    /**
-     * A free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.
-     */
-    DetailType?: EventBridgeDetailType;
     /**
      * The URL subdomain of the endpoint. For example, if the URL for Endpoint is https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is abcde.veo.
      */
     EndpointId?: EventBridgeEndpointId;
     /**
-     * Amazon Web Services resources, identified by Amazon Resource Name (ARN), which the event primarily concerns. Any number, including zero, may be present.
+     * A free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.
      */
-    Resources?: EventBridgeEventResourceList;
+    DetailType?: EventBridgeDetailType;
     /**
      * The source of the event.
      */
     Source?: EventBridgeEventSource;
+    /**
+     * Amazon Web Services resources, identified by Amazon Resource Name (ARN), which the event primarily concerns. Any number, including zero, may be present.
+     */
+    Resources?: EventBridgeEventResourceList;
     /**
      * The time stamp of the event, per RFC3339. If no time stamp is provided, the time stamp of the PutEvents call is used.
      */
@@ -1121,13 +1171,13 @@ declare namespace Pipes {
   }
   export interface PipeTargetHttpParameters {
     /**
-     * The headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
-     */
-    HeaderParameters?: HeaderParametersMap;
-    /**
      * The path parameter values to be used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*").
      */
     PathParameterValues?: PathParameterList;
+    /**
+     * The headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
+     */
+    HeaderParameters?: HeaderParametersMap;
     /**
      * The query string keys/values that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
      */
@@ -1148,37 +1198,37 @@ declare namespace Pipes {
   }
   export interface PipeTargetParameters {
     /**
-     * The parameters for using an Batch job as a target.
-     */
-    BatchJobParameters?: PipeTargetBatchJobParameters;
-    /**
-     * The parameters for using an CloudWatch Logs log stream as a target.
-     */
-    CloudWatchLogsParameters?: PipeTargetCloudWatchLogsParameters;
-    /**
-     * The parameters for using an Amazon ECS task as a target.
-     */
-    EcsTaskParameters?: PipeTargetEcsTaskParameters;
-    /**
-     * The parameters for using an EventBridge event bus as a target.
-     */
-    EventBridgeEventBusParameters?: PipeTargetEventBridgeEventBusParameters;
-    /**
-     * These are custom parameter to be used when the target is an API Gateway REST APIs or EventBridge ApiDestinations.
-     */
-    HttpParameters?: PipeTargetHttpParameters;
-    /**
      * Valid JSON text passed to the target. In this case, nothing from the event itself is passed to the target. For more information, see The JavaScript Object Notation (JSON) Data Interchange Format. To remove an input template, specify an empty string.
      */
     InputTemplate?: InputTemplate;
+    /**
+     * The parameters for using a Lambda function as a target.
+     */
+    LambdaFunctionParameters?: PipeTargetLambdaFunctionParameters;
+    /**
+     * The parameters for using a Step Functions state machine as a target.
+     */
+    StepFunctionStateMachineParameters?: PipeTargetStateMachineParameters;
     /**
      * The parameters for using a Kinesis stream as a target.
      */
     KinesisStreamParameters?: PipeTargetKinesisStreamParameters;
     /**
-     * The parameters for using a Lambda function as a target.
+     * The parameters for using an Amazon ECS task as a target.
      */
-    LambdaFunctionParameters?: PipeTargetLambdaFunctionParameters;
+    EcsTaskParameters?: PipeTargetEcsTaskParameters;
+    /**
+     * The parameters for using an Batch job as a target.
+     */
+    BatchJobParameters?: PipeTargetBatchJobParameters;
+    /**
+     * The parameters for using a Amazon SQS stream as a target.
+     */
+    SqsQueueParameters?: PipeTargetSqsQueueParameters;
+    /**
+     * These are custom parameter to be used when the target is an API Gateway REST APIs or EventBridge ApiDestinations.
+     */
+    HttpParameters?: PipeTargetHttpParameters;
     /**
      * These are custom parameters to be used when the target is a Amazon Redshift cluster to invoke the Amazon Redshift Data API BatchExecuteStatement.
      */
@@ -1188,15 +1238,23 @@ declare namespace Pipes {
      */
     SageMakerPipelineParameters?: PipeTargetSageMakerPipelineParameters;
     /**
-     * The parameters for using a Amazon SQS stream as a target.
+     * The parameters for using an EventBridge event bus as a target.
      */
-    SqsQueueParameters?: PipeTargetSqsQueueParameters;
+    EventBridgeEventBusParameters?: PipeTargetEventBridgeEventBusParameters;
     /**
-     * The parameters for using a Step Functions state machine as a target.
+     * The parameters for using an CloudWatch Logs log stream as a target.
      */
-    StepFunctionStateMachineParameters?: PipeTargetStateMachineParameters;
+    CloudWatchLogsParameters?: PipeTargetCloudWatchLogsParameters;
+    /**
+     * The parameters for using a Timestream for LiveAnalytics table as a target.
+     */
+    TimestreamParameters?: PipeTargetTimestreamParameters;
   }
   export interface PipeTargetRedshiftDataParameters {
+    /**
+     * The name or ARN of the secret that enables access to the database. Required when authenticating using Secrets Manager.
+     */
+    SecretManagerArn?: SecretManagerArnOrJsonPath;
     /**
      * The name of the database. Required when authenticating using temporary credentials.
      */
@@ -1206,14 +1264,6 @@ declare namespace Pipes {
      */
     DbUser?: DbUser;
     /**
-     * The name or ARN of the secret that enables access to the database. Required when authenticating using Secrets Manager.
-     */
-    SecretManagerArn?: SecretManagerArnOrJsonPath;
-    /**
-     * The SQL statement text to run.
-     */
-    Sqls: Sqls;
-    /**
      * The name of the SQL statement. You can name the SQL statement when you create it to identify the query.
      */
     StatementName?: StatementName;
@@ -1221,6 +1271,10 @@ declare namespace Pipes {
      * Indicates whether to send an event back to EventBridge after the SQL statement runs.
      */
     WithEvent?: Boolean;
+    /**
+     * The SQL statement text to run.
+     */
+    Sqls: Sqls;
   }
   export interface PipeTargetSageMakerPipelineParameters {
     /**
@@ -1230,13 +1284,13 @@ declare namespace Pipes {
   }
   export interface PipeTargetSqsQueueParameters {
     /**
-     * This parameter applies only to FIFO (first-in-first-out) queues. The token used for deduplication of sent messages.
-     */
-    MessageDeduplicationId?: MessageDeduplicationId;
-    /**
      * The FIFO message group ID to use as the target.
      */
     MessageGroupId?: MessageGroupId;
+    /**
+     * This parameter applies only to FIFO (first-in-first-out) queues. The token used for deduplication of sent messages.
+     */
+    MessageDeduplicationId?: MessageDeduplicationId;
   }
   export interface PipeTargetStateMachineParameters {
     /**
@@ -1244,15 +1298,49 @@ declare namespace Pipes {
      */
     InvocationType?: PipeTargetInvocationType;
   }
-  export interface PlacementConstraint {
+  export interface PipeTargetTimestreamParameters {
     /**
-     * A cluster query language expression to apply to the constraint. You cannot specify an expression if the constraint type is distinctInstance. To learn more, see Cluster Query Language in the Amazon Elastic Container Service Developer Guide. 
+     * Dynamic path to the source data field that represents the time value for your data.
      */
-    expression?: PlacementConstraintExpression;
+    TimeValue: TimeValue;
+    /**
+     * The granularity of the time units used. Default is MILLISECONDS. Required if TimeFieldType is specified as EPOCH.
+     */
+    EpochTimeUnit?: EpochTimeUnit;
+    /**
+     * The type of time value used. The default is EPOCH.
+     */
+    TimeFieldType?: TimeFieldType;
+    /**
+     * How to format the timestamps. For example, YYYY-MM-DDThh:mm:ss.sssTZD. Required if TimeFieldType is specified as TIMESTAMP_FORMAT.
+     */
+    TimestampFormat?: TimestampFormat;
+    /**
+     * 64 bit version value or source data field that represents the version value for your data. Write requests with a higher version number will update the existing measure values of the record and version. In cases where the measure value is the same, the version will still be updated.  Default value is 1.  Timestream for LiveAnalytics does not support updating partial measure values in a record. Write requests for duplicate data with a higher version number will update the existing measure value and version. In cases where the measure value is the same, Version will still be updated. Default value is 1.   Version must be 1 or greater, or you will receive a ValidationException error. 
+     */
+    VersionValue: VersionValue;
+    /**
+     * Map source data to dimensions in the target Timestream for LiveAnalytics table. For more information, see Amazon Timestream for LiveAnalytics concepts 
+     */
+    DimensionMappings: DimensionMappings;
+    /**
+     * Mappings of single source data fields to individual records in the specified Timestream for LiveAnalytics table.
+     */
+    SingleMeasureMappings?: SingleMeasureMappings;
+    /**
+     * Maps multiple measures from the source event to the same record in the specified Timestream for LiveAnalytics table.
+     */
+    MultiMeasureMappings?: MultiMeasureMappings;
+  }
+  export interface PlacementConstraint {
     /**
      * The type of constraint. Use distinctInstance to ensure that each task in a particular group is running on a different container instance. Use memberOf to restrict the selection to a group of valid candidates. 
      */
     type?: PlacementConstraintType;
+    /**
+     * A cluster query language expression to apply to the constraint. You cannot specify an expression if the constraint type is distinctInstance. To learn more, see Cluster Query Language in the Amazon Elastic Container Service Developer Guide. 
+     */
+    expression?: PlacementConstraintExpression;
   }
   export type PlacementConstraintExpression = string;
   export type PlacementConstraintType = "distinctInstance"|"memberOf"|string;
@@ -1260,13 +1348,13 @@ declare namespace Pipes {
   export type PlacementStrategies = PlacementStrategy[];
   export interface PlacementStrategy {
     /**
-     * The field to apply the placement strategy against. For the spread placement strategy, valid values are instanceId (or host, which has the same effect), or any platform or custom attribute that is applied to a container instance, such as attribute:ecs.availability-zone. For the binpack placement strategy, valid values are cpu and memory. For the random placement strategy, this field is not used. 
-     */
-    field?: PlacementStrategyField;
-    /**
      * The type of placement strategy. The random placement strategy randomly places tasks on available candidates. The spread placement strategy spreads placement across available candidates evenly based on the field parameter. The binpack strategy places tasks on available candidates that have the least available amount of the resource that is specified with the field parameter. For example, if you binpack on memory, a task is placed on the instance with the least amount of remaining memory (but still enough to run the task). 
      */
     type?: PlacementStrategyType;
+    /**
+     * The field to apply the placement strategy against. For the spread placement strategy, valid values are instanceId (or host, which has the same effect), or any platform or custom attribute that is applied to a container instance, such as attribute:ecs.availability-zone. For the binpack placement strategy, valid values are cpu and memory. For the random placement strategy, this field is not used. 
+     */
+    field?: PlacementStrategyField;
   }
   export type PlacementStrategyField = string;
   export type PlacementStrategyType = "random"|"spread"|"binpack"|string;
@@ -1285,6 +1373,10 @@ declare namespace Pipes {
      */
     BucketName?: String;
     /**
+     * The prefix text with which to begin Amazon S3 log object names. For more information, see Organizing objects using prefixes in the Amazon Simple Storage Service User Guide.
+     */
+    Prefix?: String;
+    /**
      * The Amazon Web Services account that owns the Amazon S3 bucket to which EventBridge delivers the log records for the pipe.
      */
     BucketOwner?: String;
@@ -1292,10 +1384,6 @@ declare namespace Pipes {
      * The format EventBridge uses for the log records.    json: JSON     plain: Plain text    w3c: W3C extended logging file format   
      */
     OutputFormat?: S3OutputFormat;
-    /**
-     * The prefix text with which to begin Amazon S3 log object names. For more information, see Organizing objects using prefixes in the Amazon Simple Storage Service User Guide.
-     */
-    Prefix?: String;
   }
   export interface S3LogDestinationParameters {
     /**
@@ -1346,7 +1434,7 @@ declare namespace Pipes {
     /**
      * The ARN of the Secrets Manager secret.
      */
-    ClientCertificateTlsAuth?: SecretManagerArn;
+    SaslScram512Auth?: SecretManagerArn;
     /**
      * The ARN of the Secrets Manager secret.
      */
@@ -1354,19 +1442,34 @@ declare namespace Pipes {
     /**
      * The ARN of the Secrets Manager secret.
      */
-    SaslScram512Auth?: SecretManagerArn;
+    ClientCertificateTlsAuth?: SecretManagerArn;
   }
   export interface SelfManagedKafkaAccessConfigurationVpc {
-    /**
-     * Specifies the security groups associated with the stream. These security groups must all be in the same VPC. You can specify as many as five security groups. If you do not specify a security group, the default security group for the VPC is used.
-     */
-    SecurityGroup?: SecurityGroupIds;
     /**
      * Specifies the subnets associated with the stream. These subnets must all be in the same VPC. You can specify as many as 16 subnets.
      */
     Subnets?: SubnetIds;
+    /**
+     * Specifies the security groups associated with the stream. These security groups must all be in the same VPC. You can specify as many as five security groups. If you do not specify a security group, the default security group for the VPC is used.
+     */
+    SecurityGroup?: SecurityGroupIds;
   }
   export type SelfManagedKafkaStartPosition = "TRIM_HORIZON"|"LATEST"|string;
+  export interface SingleMeasureMapping {
+    /**
+     * Dynamic path of the source field to map to the measure in the record.
+     */
+    MeasureValue: MeasureValue;
+    /**
+     * Data type of the source field.
+     */
+    MeasureValueType: MeasureValueType;
+    /**
+     * Target measure name for the measurement attribute in the Timestream table.
+     */
+    MeasureName: MeasureName;
+  }
+  export type SingleMeasureMappings = SingleMeasureMapping[];
   export type Sql = string;
   export type Sqls = Sql[];
   export interface StartPipeRequest {
@@ -1381,25 +1484,25 @@ declare namespace Pipes {
      */
     Arn?: PipeArn;
     /**
-     * The time the pipe was created.
+     * The name of the pipe.
      */
-    CreationTime?: Timestamp;
-    /**
-     * The state the pipe is in.
-     */
-    CurrentState?: PipeState;
+    Name?: PipeName;
     /**
      * The state the pipe should be in.
      */
     DesiredState?: RequestedPipeState;
     /**
+     * The state the pipe is in.
+     */
+    CurrentState?: PipeState;
+    /**
+     * The time the pipe was created.
+     */
+    CreationTime?: Timestamp;
+    /**
      * When the pipe was last updated, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
      */
     LastModifiedTime?: Timestamp;
-    /**
-     * The name of the pipe.
-     */
-    Name?: PipeName;
   }
   export type StatementName = string;
   export interface StopPipeRequest {
@@ -1414,25 +1517,25 @@ declare namespace Pipes {
      */
     Arn?: PipeArn;
     /**
-     * The time the pipe was created.
+     * The name of the pipe.
      */
-    CreationTime?: Timestamp;
-    /**
-     * The state the pipe is in.
-     */
-    CurrentState?: PipeState;
+    Name?: PipeName;
     /**
      * The state the pipe should be in.
      */
     DesiredState?: RequestedPipeState;
     /**
+     * The state the pipe is in.
+     */
+    CurrentState?: PipeState;
+    /**
+     * The time the pipe was created.
+     */
+    CreationTime?: Timestamp;
+    /**
      * When the pipe was last updated, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
      */
     LastModifiedTime?: Timestamp;
-    /**
-     * The name of the pipe.
-     */
-    Name?: PipeName;
   }
   export type String = string;
   export type StringList = String[];
@@ -1467,7 +1570,10 @@ declare namespace Pipes {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export type TimeFieldType = "EPOCH"|"TIMESTAMP_FORMAT"|string;
+  export type TimeValue = string;
   export type Timestamp = Date;
+  export type TimestampFormat = string;
   export type URI = string;
   export interface UntagResourceRequest {
     /**
@@ -1483,6 +1589,10 @@ declare namespace Pipes {
   }
   export interface UpdatePipeRequest {
     /**
+     * The name of the pipe.
+     */
+    Name: PipeName;
+    /**
      * A description of the pipe.
      */
     Description?: PipeDescription;
@@ -1490,6 +1600,10 @@ declare namespace Pipes {
      * The state the pipe should be in.
      */
     DesiredState?: RequestedPipeState;
+    /**
+     * The parameters required to set up a source for your pipe.
+     */
+    SourceParameters?: UpdatePipeSourceParameters;
     /**
      * The ARN of the enrichment resource.
      */
@@ -1499,22 +1613,6 @@ declare namespace Pipes {
      */
     EnrichmentParameters?: PipeEnrichmentParameters;
     /**
-     * The logging configuration settings for the pipe.
-     */
-    LogConfiguration?: PipeLogConfigurationParameters;
-    /**
-     * The name of the pipe.
-     */
-    Name: PipeName;
-    /**
-     * The ARN of the role that allows the pipe to send data to the target.
-     */
-    RoleArn: RoleArn;
-    /**
-     * The parameters required to set up a source for your pipe.
-     */
-    SourceParameters?: UpdatePipeSourceParameters;
-    /**
      * The ARN of the target resource.
      */
     Target?: Arn;
@@ -1522,6 +1620,14 @@ declare namespace Pipes {
      * The parameters required to set up a target for your pipe. For more information about pipe target parameters, including how to use dynamic path parameters, see Target parameters in the Amazon EventBridge User Guide.
      */
     TargetParameters?: PipeTargetParameters;
+    /**
+     * The ARN of the role that allows the pipe to send data to the target.
+     */
+    RoleArn: RoleArn;
+    /**
+     * The logging configuration settings for the pipe.
+     */
+    LogConfiguration?: PipeLogConfigurationParameters;
   }
   export interface UpdatePipeResponse {
     /**
@@ -1529,35 +1635,35 @@ declare namespace Pipes {
      */
     Arn?: PipeArn;
     /**
-     * The time the pipe was created.
+     * The name of the pipe.
      */
-    CreationTime?: Timestamp;
-    /**
-     * The state the pipe is in.
-     */
-    CurrentState?: PipeState;
+    Name?: PipeName;
     /**
      * The state the pipe should be in.
      */
     DesiredState?: RequestedPipeState;
     /**
+     * The state the pipe is in.
+     */
+    CurrentState?: PipeState;
+    /**
+     * The time the pipe was created.
+     */
+    CreationTime?: Timestamp;
+    /**
      * When the pipe was last updated, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
      */
     LastModifiedTime?: Timestamp;
-    /**
-     * The name of the pipe.
-     */
-    Name?: PipeName;
   }
   export interface UpdatePipeSourceActiveMQBrokerParameters {
-    /**
-     * The maximum number of records to include in each batch.
-     */
-    BatchSize?: LimitMax10000;
     /**
      * The credentials needed to access the resource.
      */
     Credentials: MQBrokerAccessCredentials;
+    /**
+     * The maximum number of records to include in each batch.
+     */
+    BatchSize?: LimitMax10000;
     /**
      * The maximum length of a time to wait for events.
      */
@@ -1573,6 +1679,10 @@ declare namespace Pipes {
      */
     DeadLetterConfig?: DeadLetterConfig;
     /**
+     * (Streams only) Define how to handle item process failures. AUTOMATIC_BISECT halves each batch and retry each half until all the records are processed or there is one failed message left in the batch.
+     */
+    OnPartialBatchItemFailure?: OnPartialBatchItemFailureStreams;
+    /**
      * The maximum length of a time to wait for events.
      */
     MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
@@ -1584,10 +1694,6 @@ declare namespace Pipes {
      * (Streams only) Discard records after the specified number of retries. The default value is -1, which sets the maximum number of retries to infinite. When MaximumRetryAttempts is infinite, EventBridge retries failed records until the record expires in the event source.
      */
     MaximumRetryAttempts?: MaximumRetryAttemptsESM;
-    /**
-     * (Streams only) Define how to handle item process failures. AUTOMATIC_BISECT halves each batch and retry each half until all the records are processed or there is one failed message left in the batch.
-     */
-    OnPartialBatchItemFailure?: OnPartialBatchItemFailureStreams;
     /**
      * (Streams only) The number of batches to process concurrently from each shard. The default value is 1.
      */
@@ -1603,6 +1709,10 @@ declare namespace Pipes {
      */
     DeadLetterConfig?: DeadLetterConfig;
     /**
+     * (Streams only) Define how to handle item process failures. AUTOMATIC_BISECT halves each batch and retry each half until all the records are processed or there is one failed message left in the batch.
+     */
+    OnPartialBatchItemFailure?: OnPartialBatchItemFailureStreams;
+    /**
      * The maximum length of a time to wait for events.
      */
     MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
@@ -1614,10 +1724,6 @@ declare namespace Pipes {
      * (Streams only) Discard records after the specified number of retries. The default value is -1, which sets the maximum number of retries to infinite. When MaximumRetryAttempts is infinite, EventBridge retries failed records until the record expires in the event source.
      */
     MaximumRetryAttempts?: MaximumRetryAttemptsESM;
-    /**
-     * (Streams only) Define how to handle item process failures. AUTOMATIC_BISECT halves each batch and retry each half until all the records are processed or there is one failed message left in the batch.
-     */
-    OnPartialBatchItemFailure?: OnPartialBatchItemFailureStreams;
     /**
      * (Streams only) The number of batches to process concurrently from each shard. The default value is 1.
      */
@@ -1639,14 +1745,6 @@ declare namespace Pipes {
   }
   export interface UpdatePipeSourceParameters {
     /**
-     * The parameters for using an Active MQ broker as a source.
-     */
-    ActiveMQBrokerParameters?: UpdatePipeSourceActiveMQBrokerParameters;
-    /**
-     * The parameters for using a DynamoDB stream as a source.
-     */
-    DynamoDBStreamParameters?: UpdatePipeSourceDynamoDBStreamParameters;
-    /**
      * The collection of event patterns used to filter events. To remove a filter, specify a FilterCriteria object with an empty array of Filter objects. For more information, see Events and Event Patterns in the Amazon EventBridge User Guide.
      */
     FilterCriteria?: FilterCriteria;
@@ -1655,31 +1753,39 @@ declare namespace Pipes {
      */
     KinesisStreamParameters?: UpdatePipeSourceKinesisStreamParameters;
     /**
-     * The parameters for using an MSK stream as a source.
+     * The parameters for using a DynamoDB stream as a source.
      */
-    ManagedStreamingKafkaParameters?: UpdatePipeSourceManagedStreamingKafkaParameters;
+    DynamoDBStreamParameters?: UpdatePipeSourceDynamoDBStreamParameters;
+    /**
+     * The parameters for using a Amazon SQS stream as a source.
+     */
+    SqsQueueParameters?: UpdatePipeSourceSqsQueueParameters;
+    /**
+     * The parameters for using an Active MQ broker as a source.
+     */
+    ActiveMQBrokerParameters?: UpdatePipeSourceActiveMQBrokerParameters;
     /**
      * The parameters for using a Rabbit MQ broker as a source.
      */
     RabbitMQBrokerParameters?: UpdatePipeSourceRabbitMQBrokerParameters;
     /**
-     * The parameters for using a self-managed Apache Kafka stream as a source.
+     * The parameters for using an MSK stream as a source.
+     */
+    ManagedStreamingKafkaParameters?: UpdatePipeSourceManagedStreamingKafkaParameters;
+    /**
+     * The parameters for using a self-managed Apache Kafka stream as a source. A self managed cluster refers to any Apache Kafka cluster not hosted by Amazon Web Services. This includes both clusters you manage yourself, as well as those hosted by a third-party provider, such as Confluent Cloud, CloudKarafka, or Redpanda. For more information, see Apache Kafka streams as a source in the Amazon EventBridge User Guide.
      */
     SelfManagedKafkaParameters?: UpdatePipeSourceSelfManagedKafkaParameters;
-    /**
-     * The parameters for using a Amazon SQS stream as a source.
-     */
-    SqsQueueParameters?: UpdatePipeSourceSqsQueueParameters;
   }
   export interface UpdatePipeSourceRabbitMQBrokerParameters {
-    /**
-     * The maximum number of records to include in each batch.
-     */
-    BatchSize?: LimitMax10000;
     /**
      * The credentials needed to access the resource.
      */
     Credentials: MQBrokerAccessCredentials;
+    /**
+     * The maximum number of records to include in each batch.
+     */
+    BatchSize?: LimitMax10000;
     /**
      * The maximum length of a time to wait for events.
      */
@@ -1691,13 +1797,13 @@ declare namespace Pipes {
      */
     BatchSize?: LimitMax10000;
     /**
-     * The credentials needed to access the resource.
-     */
-    Credentials?: SelfManagedKafkaAccessConfigurationCredentials;
-    /**
      * The maximum length of a time to wait for events.
      */
     MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
+    /**
+     * The credentials needed to access the resource.
+     */
+    Credentials?: SelfManagedKafkaAccessConfigurationCredentials;
     /**
      * The ARN of the Secrets Manager secret used for certification.
      */
@@ -1717,6 +1823,7 @@ declare namespace Pipes {
      */
     MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
   }
+  export type VersionValue = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

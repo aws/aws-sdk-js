@@ -957,11 +957,11 @@ declare class SageMaker extends Service {
    */
   describeCluster(callback?: (err: AWSError, data: SageMaker.Types.DescribeClusterResponse) => void): Request<SageMaker.Types.DescribeClusterResponse, AWSError>;
   /**
-   * Retrieves information of an instance (also called a node interchangeably) of a SageMaker HyperPod cluster.
+   * Retrieves information of a node (also called a instance interchangeably) of a SageMaker HyperPod cluster.
    */
   describeClusterNode(params: SageMaker.Types.DescribeClusterNodeRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeClusterNodeResponse) => void): Request<SageMaker.Types.DescribeClusterNodeResponse, AWSError>;
   /**
-   * Retrieves information of an instance (also called a node interchangeably) of a SageMaker HyperPod cluster.
+   * Retrieves information of a node (also called a instance interchangeably) of a SageMaker HyperPod cluster.
    */
   describeClusterNode(callback?: (err: AWSError, data: SageMaker.Types.DescribeClusterNodeResponse) => void): Request<SageMaker.Types.DescribeClusterNodeResponse, AWSError>;
   /**
@@ -4158,6 +4158,8 @@ declare namespace SageMaker {
   export type ClientSecret = string;
   export type ClientToken = string;
   export type ClusterArn = string;
+  export type ClusterAvailabilityZone = string;
+  export type ClusterAvailabilityZoneId = string;
   export type ClusterInstanceCount = number;
   export interface ClusterInstanceGroupDetails {
     /**
@@ -4218,6 +4220,16 @@ declare namespace SageMaker {
     ThreadsPerCore?: ClusterThreadsPerCore;
   }
   export type ClusterInstanceGroupSpecifications = ClusterInstanceGroupSpecification[];
+  export interface ClusterInstancePlacement {
+    /**
+     * The Availability Zone where the node in the SageMaker HyperPod cluster is launched.
+     */
+    AvailabilityZone?: ClusterAvailabilityZone;
+    /**
+     * The unique identifier (ID) of the Availability Zone where the node in the SageMaker HyperPod cluster is launched.
+     */
+    AvailabilityZoneId?: ClusterAvailabilityZoneId;
+  }
   export type ClusterInstanceStatus = "Running"|"Failure"|"Pending"|"ShuttingDown"|"SystemUpdating"|string;
   export interface ClusterInstanceStatusDetails {
     /**
@@ -4272,6 +4284,18 @@ declare namespace SageMaker {
      * The number of threads per CPU core you specified under CreateCluster.
      */
     ThreadsPerCore?: ClusterThreadsPerCore;
+    /**
+     * The private primary IP address of the SageMaker HyperPod cluster node.
+     */
+    PrivatePrimaryIp?: ClusterPrivatePrimaryIp;
+    /**
+     * The private DNS hostname of the SageMaker HyperPod cluster node.
+     */
+    PrivateDnsHostname?: ClusterPrivateDnsHostname;
+    /**
+     * The placement details of the SageMaker HyperPod cluster node.
+     */
+    Placement?: ClusterInstancePlacement;
   }
   export type ClusterNodeId = string;
   export type ClusterNodeSummaries = ClusterNodeSummary[];
@@ -4298,6 +4322,8 @@ declare namespace SageMaker {
     InstanceStatus: ClusterInstanceStatusDetails;
   }
   export type ClusterNonNegativeInstanceCount = number;
+  export type ClusterPrivateDnsHostname = string;
+  export type ClusterPrivatePrimaryIp = string;
   export type ClusterSortBy = "CREATION_TIME"|"NAME"|string;
   export type ClusterStatus = "Creating"|"Deleting"|"Failed"|"InService"|"RollingBack"|"SystemUpdating"|"Updating"|string;
   export type ClusterSummaries = ClusterSummary[];
@@ -7995,17 +8021,17 @@ declare namespace SageMaker {
   }
   export interface DescribeClusterNodeRequest {
     /**
-     * The string name or the Amazon Resource Name (ARN) of the SageMaker HyperPod cluster in which the instance is.
+     * The string name or the Amazon Resource Name (ARN) of the SageMaker HyperPod cluster in which the node is.
      */
     ClusterName: ClusterNameOrArn;
     /**
-     * The ID of the instance.
+     * The ID of the SageMaker HyperPod cluster node.
      */
     NodeId: ClusterNodeId;
   }
   export interface DescribeClusterNodeResponse {
     /**
-     * The details of the instance.
+     * The details of the SageMaker HyperPod cluster node.
      */
     NodeDetails: ClusterNodeDetails;
   }
