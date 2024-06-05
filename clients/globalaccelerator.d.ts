@@ -1885,6 +1885,10 @@ declare namespace GlobalAccelerator {
      */
     IpAddressType?: IpAddressType;
     /**
+     * The IP addresses for an accelerator.
+     */
+    IpAddresses?: IpAddresses;
+    /**
      * Indicates whether an accelerator is enabled. The value is true or false. The default value is true.  If the value is set to true, the accelerator cannot be deleted. If set to false, the accelerator can be deleted.
      */
     Enabled?: GenericBoolean;
@@ -1964,6 +1968,10 @@ declare namespace GlobalAccelerator {
      * The IP address type that an accelerator supports. For a custom routing accelerator, the value must be IPV4.
      */
     IpAddressType?: IpAddressType;
+    /**
+     * The IP addresses for an accelerator.
+     */
+    IpAddresses?: IpAddresses;
     /**
      * Indicates whether an accelerator is enabled. The value is true or false. The default value is true.  If the value is set to true, the accelerator cannot be deleted. If set to false, the accelerator can be deleted.
      */

@@ -1717,6 +1717,7 @@ declare class Glue extends Service {
   updateWorkflow(callback?: (err: AWSError, data: Glue.Types.UpdateWorkflowResponse) => void): Request<Glue.Types.UpdateWorkflowResponse, AWSError>;
 }
 declare namespace Glue {
+  export type AWSManagedClientApplicationReference = string;
   export type AccountId = string;
   export interface Action {
     /**
@@ -1983,6 +1984,46 @@ declare namespace Glue {
   }
   export type AuditContextString = string;
   export type AuthTokenString = string;
+  export interface AuthenticationConfiguration {
+    /**
+     * A structure containing the authentication configuration.
+     */
+    AuthenticationType?: AuthenticationType;
+    /**
+     * The secret manager ARN to store credentials.
+     */
+    SecretArn?: SecretArn;
+    /**
+     * The properties for OAuth2 authentication.
+     */
+    OAuth2Properties?: OAuth2Properties;
+  }
+  export interface AuthenticationConfigurationInput {
+    /**
+     * A structure containing the authentication configuration in the CreateConnection request.
+     */
+    AuthenticationType?: AuthenticationType;
+    /**
+     * The secret manager ARN to store credentials in the CreateConnection request.
+     */
+    SecretArn?: SecretArn;
+    /**
+     * The properties for OAuth2 authentication in the CreateConnection request.
+     */
+    OAuth2Properties?: OAuth2PropertiesInput;
+  }
+  export type AuthenticationType = "BASIC"|"OAUTH2"|"CUSTOM"|string;
+  export type AuthorizationCode = string;
+  export interface AuthorizationCodeProperties {
+    /**
+     * An authorization code to be used in the third leg of the AUTHORIZATION_CODE grant workflow. This is a single-use code which becomes invalid once exchanged for an access token, thus it is acceptable to have this value as a request parameter.
+     */
+    AuthorizationCode?: AuthorizationCode;
+    /**
+     * The redirect URI where the user gets redirected to by authorization server when issuing an authorization code. The URI is subsequently used when the authorization code is exchanged for an access token.
+     */
+    RedirectUri?: RedirectUri;
+  }
   export interface BackfillError {
     /**
      * The error code for an error that occurred when registering partition indexes for an existing table.
@@ -3505,25 +3546,41 @@ declare namespace Glue {
      */
     ConnectionProperties?: ConnectionProperties;
     /**
-     * A map of physical connection requirements, such as virtual private cloud (VPC) and SecurityGroup, that are needed to make this connection successfully.
+     * The physical connection requirements, such as virtual private cloud (VPC) and SecurityGroup, that are needed to make this connection successfully.
      */
     PhysicalConnectionRequirements?: PhysicalConnectionRequirements;
     /**
-     * The time that this connection definition was created.
+     * The timestamp of the time that this connection definition was created.
      */
     CreationTime?: Timestamp;
     /**
-     * The last time that this connection definition was updated.
+     * The timestamp of the last time the connection definition was updated.
      */
     LastUpdatedTime?: Timestamp;
     /**
      * The user, group, or role that last updated this connection definition.
      */
     LastUpdatedBy?: NameString;
+    /**
+     * The status of the connection. Can be one of: READY, IN_PROGRESS, or FAILED.
+     */
+    Status?: ConnectionStatus;
+    /**
+     * The reason for the connection status.
+     */
+    StatusReason?: LongValueString;
+    /**
+     * A timestamp of the time this connection was last validated.
+     */
+    LastConnectionValidationTime?: Timestamp;
+    /**
+     * The authentication properties of the connection.
+     */
+    AuthenticationConfiguration?: AuthenticationConfiguration;
   }
   export interface ConnectionInput {
     /**
-     * The name of the connection. Connection will not function as expected without a name.
+     * The name of the connection.
      */
     Name: NameString;
     /**
@@ -3531,7 +3588,7 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * The type of the connection. Currently, these types are supported:    JDBC - Designates a connection to a database through Java Database Connectivity (JDBC).  JDBC Connections use the following ConnectionParameters.   Required: All of (HOST, PORT, JDBC_ENGINE) or JDBC_CONNECTION_URL.   Required: All of (USERNAME, PASSWORD) or SECRET_ID.   Optional: JDBC_ENFORCE_SSL, CUSTOM_JDBC_CERT, CUSTOM_JDBC_CERT_STRING, SKIP_CUSTOM_JDBC_CERT_VALIDATION. These parameters are used to configure SSL with JDBC.      KAFKA - Designates a connection to an Apache Kafka streaming platform.  KAFKA Connections use the following ConnectionParameters.   Required: KAFKA_BOOTSTRAP_SERVERS.   Optional: KAFKA_SSL_ENABLED, KAFKA_CUSTOM_CERT, KAFKA_SKIP_CUSTOM_CERT_VALIDATION. These parameters are used to configure SSL with KAFKA.   Optional: KAFKA_CLIENT_KEYSTORE, KAFKA_CLIENT_KEYSTORE_PASSWORD, KAFKA_CLIENT_KEY_PASSWORD, ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD, ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD. These parameters are used to configure TLS client configuration with SSL in KAFKA.   Optional: KAFKA_SASL_MECHANISM. Can be specified as SCRAM-SHA-512, GSSAPI, or AWS_MSK_IAM.   Optional: KAFKA_SASL_SCRAM_USERNAME, KAFKA_SASL_SCRAM_PASSWORD, ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD. These parameters are used to configure SASL/SCRAM-SHA-512 authentication with KAFKA.   Optional: KAFKA_SASL_GSSAPI_KEYTAB, KAFKA_SASL_GSSAPI_KRB5_CONF, KAFKA_SASL_GSSAPI_SERVICE, KAFKA_SASL_GSSAPI_PRINCIPAL. These parameters are used to configure SASL/GSSAPI authentication with KAFKA.      MONGODB - Designates a connection to a MongoDB document database.  MONGODB Connections use the following ConnectionParameters.   Required: CONNECTION_URL.   Required: All of (USERNAME, PASSWORD) or SECRET_ID.      NETWORK - Designates a network connection to a data source within an Amazon Virtual Private Cloud environment (Amazon VPC).  NETWORK Connections do not require ConnectionParameters. Instead, provide a PhysicalConnectionRequirements.    MARKETPLACE - Uses configuration settings contained in a connector purchased from Amazon Web Services Marketplace to read from and write to data stores that are not natively supported by Glue.  MARKETPLACE Connections use the following ConnectionParameters.   Required: CONNECTOR_TYPE, CONNECTOR_URL, CONNECTOR_CLASS_NAME, CONNECTION_URL.   Required for JDBC CONNECTOR_TYPE connections: All of (USERNAME, PASSWORD) or SECRET_ID.      CUSTOM - Uses configuration settings contained in a custom connector to read from and write to data stores that are not natively supported by Glue.    SFTP is not supported. For more information about how optional ConnectionProperties are used to configure features in Glue, consult Glue connection properties. For more information about how optional ConnectionProperties are used to configure features in Glue Studio, consult Using connectors and connections.
+     * The type of the connection. Currently, these types are supported:    JDBC - Designates a connection to a database through Java Database Connectivity (JDBC).  JDBC Connections use the following ConnectionParameters.   Required: All of (HOST, PORT, JDBC_ENGINE) or JDBC_CONNECTION_URL.   Required: All of (USERNAME, PASSWORD) or SECRET_ID.   Optional: JDBC_ENFORCE_SSL, CUSTOM_JDBC_CERT, CUSTOM_JDBC_CERT_STRING, SKIP_CUSTOM_JDBC_CERT_VALIDATION. These parameters are used to configure SSL with JDBC.      KAFKA - Designates a connection to an Apache Kafka streaming platform.  KAFKA Connections use the following ConnectionParameters.   Required: KAFKA_BOOTSTRAP_SERVERS.   Optional: KAFKA_SSL_ENABLED, KAFKA_CUSTOM_CERT, KAFKA_SKIP_CUSTOM_CERT_VALIDATION. These parameters are used to configure SSL with KAFKA.   Optional: KAFKA_CLIENT_KEYSTORE, KAFKA_CLIENT_KEYSTORE_PASSWORD, KAFKA_CLIENT_KEY_PASSWORD, ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD, ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD. These parameters are used to configure TLS client configuration with SSL in KAFKA.   Optional: KAFKA_SASL_MECHANISM. Can be specified as SCRAM-SHA-512, GSSAPI, or AWS_MSK_IAM.   Optional: KAFKA_SASL_SCRAM_USERNAME, KAFKA_SASL_SCRAM_PASSWORD, ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD. These parameters are used to configure SASL/SCRAM-SHA-512 authentication with KAFKA.   Optional: KAFKA_SASL_GSSAPI_KEYTAB, KAFKA_SASL_GSSAPI_KRB5_CONF, KAFKA_SASL_GSSAPI_SERVICE, KAFKA_SASL_GSSAPI_PRINCIPAL. These parameters are used to configure SASL/GSSAPI authentication with KAFKA.      MONGODB - Designates a connection to a MongoDB document database.  MONGODB Connections use the following ConnectionParameters.   Required: CONNECTION_URL.   Required: All of (USERNAME, PASSWORD) or SECRET_ID.      SALESFORCE - Designates a connection to Salesforce using OAuth authencation.   Requires the AuthenticationConfiguration member to be configured.      NETWORK - Designates a network connection to a data source within an Amazon Virtual Private Cloud environment (Amazon VPC).  NETWORK Connections do not require ConnectionParameters. Instead, provide a PhysicalConnectionRequirements.    MARKETPLACE - Uses configuration settings contained in a connector purchased from Amazon Web Services Marketplace to read from and write to data stores that are not natively supported by Glue.  MARKETPLACE Connections use the following ConnectionParameters.   Required: CONNECTOR_TYPE, CONNECTOR_URL, CONNECTOR_CLASS_NAME, CONNECTION_URL.   Required for JDBC CONNECTOR_TYPE connections: All of (USERNAME, PASSWORD) or SECRET_ID.      CUSTOM - Uses configuration settings contained in a custom connector to read from and write to data stores that are not natively supported by Glue.    SFTP is not supported. For more information about how optional ConnectionProperties are used to configure features in Glue, consult Glue connection properties. For more information about how optional ConnectionProperties are used to configure features in Glue Studio, consult Using connectors and connections.
      */
     ConnectionType: ConnectionType;
     /**
@@ -3543,9 +3600,17 @@ declare namespace Glue {
      */
     ConnectionProperties: ConnectionProperties;
     /**
-     * A map of physical connection requirements, such as virtual private cloud (VPC) and SecurityGroup, that are needed to successfully make this connection.
+     * The physical connection requirements, such as virtual private cloud (VPC) and SecurityGroup, that are needed to successfully make this connection.
      */
     PhysicalConnectionRequirements?: PhysicalConnectionRequirements;
+    /**
+     * The authentication properties of the connection. Used for a Salesforce connection.
+     */
+    AuthenticationConfiguration?: AuthenticationConfigurationInput;
+    /**
+     * A flag to validate the credentials during create connection. Used for a Salesforce connection. Default is true. 
+     */
+    ValidateCredentials?: Boolean;
   }
   export type ConnectionList = Connection[];
   export type ConnectionName = string;
@@ -3560,8 +3625,9 @@ declare namespace Glue {
     AwsKmsKeyId?: NameString;
   }
   export type ConnectionProperties = {[key: string]: ValueString};
-  export type ConnectionPropertyKey = "HOST"|"PORT"|"USERNAME"|"PASSWORD"|"ENCRYPTED_PASSWORD"|"JDBC_DRIVER_JAR_URI"|"JDBC_DRIVER_CLASS_NAME"|"JDBC_ENGINE"|"JDBC_ENGINE_VERSION"|"CONFIG_FILES"|"INSTANCE_ID"|"JDBC_CONNECTION_URL"|"JDBC_ENFORCE_SSL"|"CUSTOM_JDBC_CERT"|"SKIP_CUSTOM_JDBC_CERT_VALIDATION"|"CUSTOM_JDBC_CERT_STRING"|"CONNECTION_URL"|"KAFKA_BOOTSTRAP_SERVERS"|"KAFKA_SSL_ENABLED"|"KAFKA_CUSTOM_CERT"|"KAFKA_SKIP_CUSTOM_CERT_VALIDATION"|"KAFKA_CLIENT_KEYSTORE"|"KAFKA_CLIENT_KEYSTORE_PASSWORD"|"KAFKA_CLIENT_KEY_PASSWORD"|"ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD"|"ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD"|"SECRET_ID"|"CONNECTOR_URL"|"CONNECTOR_TYPE"|"CONNECTOR_CLASS_NAME"|"KAFKA_SASL_MECHANISM"|"KAFKA_SASL_PLAIN_USERNAME"|"KAFKA_SASL_PLAIN_PASSWORD"|"ENCRYPTED_KAFKA_SASL_PLAIN_PASSWORD"|"KAFKA_SASL_SCRAM_USERNAME"|"KAFKA_SASL_SCRAM_PASSWORD"|"KAFKA_SASL_SCRAM_SECRETS_ARN"|"ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD"|"KAFKA_SASL_GSSAPI_KEYTAB"|"KAFKA_SASL_GSSAPI_KRB5_CONF"|"KAFKA_SASL_GSSAPI_SERVICE"|"KAFKA_SASL_GSSAPI_PRINCIPAL"|string;
-  export type ConnectionType = "JDBC"|"SFTP"|"MONGODB"|"KAFKA"|"NETWORK"|"MARKETPLACE"|"CUSTOM"|string;
+  export type ConnectionPropertyKey = "HOST"|"PORT"|"USERNAME"|"PASSWORD"|"ENCRYPTED_PASSWORD"|"JDBC_DRIVER_JAR_URI"|"JDBC_DRIVER_CLASS_NAME"|"JDBC_ENGINE"|"JDBC_ENGINE_VERSION"|"CONFIG_FILES"|"INSTANCE_ID"|"JDBC_CONNECTION_URL"|"JDBC_ENFORCE_SSL"|"CUSTOM_JDBC_CERT"|"SKIP_CUSTOM_JDBC_CERT_VALIDATION"|"CUSTOM_JDBC_CERT_STRING"|"CONNECTION_URL"|"KAFKA_BOOTSTRAP_SERVERS"|"KAFKA_SSL_ENABLED"|"KAFKA_CUSTOM_CERT"|"KAFKA_SKIP_CUSTOM_CERT_VALIDATION"|"KAFKA_CLIENT_KEYSTORE"|"KAFKA_CLIENT_KEYSTORE_PASSWORD"|"KAFKA_CLIENT_KEY_PASSWORD"|"ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD"|"ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD"|"SECRET_ID"|"CONNECTOR_URL"|"CONNECTOR_TYPE"|"CONNECTOR_CLASS_NAME"|"KAFKA_SASL_MECHANISM"|"KAFKA_SASL_PLAIN_USERNAME"|"KAFKA_SASL_PLAIN_PASSWORD"|"ENCRYPTED_KAFKA_SASL_PLAIN_PASSWORD"|"KAFKA_SASL_SCRAM_USERNAME"|"KAFKA_SASL_SCRAM_PASSWORD"|"KAFKA_SASL_SCRAM_SECRETS_ARN"|"ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD"|"KAFKA_SASL_GSSAPI_KEYTAB"|"KAFKA_SASL_GSSAPI_KRB5_CONF"|"KAFKA_SASL_GSSAPI_SERVICE"|"KAFKA_SASL_GSSAPI_PRINCIPAL"|"ROLE_ARN"|string;
+  export type ConnectionStatus = "READY"|"IN_PROGRESS"|"FAILED"|string;
+  export type ConnectionType = "JDBC"|"SFTP"|"MONGODB"|"KAFKA"|"NETWORK"|"MARKETPLACE"|"CUSTOM"|"SALESFORCE"|string;
   export interface ConnectionsList {
     /**
      * A list of connections used by the job.
@@ -3918,6 +3984,10 @@ declare namespace Glue {
     Tags?: TagsMap;
   }
   export interface CreateConnectionResponse {
+    /**
+     * The status of the connection creation request. The request can take some time for certain authentication types, for example when creating an OAuth connection with token exchange over VPC.
+     */
+    CreateConnectionStatus?: ConnectionStatus;
   }
   export interface CreateCrawlerRequest {
     /**
@@ -4305,7 +4375,7 @@ declare namespace Glue {
      */
     AllocatedCapacity?: IntegerValue;
     /**
-     * The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
+     * The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours) for batch jobs. Streaming jobs must have timeout values less than 7 days or 10080 minutes. When the value is left blank, the job will be restarted after 7 days based if you have not setup a maintenance window. If you have setup maintenance window, it will be restarted during the maintenance window after 7 days.
      */
     Timeout?: Timeout;
     /**
@@ -8901,7 +8971,7 @@ declare namespace Glue {
      */
     AllocatedCapacity?: IntegerValue;
     /**
-     * The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
+     * The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours) for batch jobs. Streaming jobs must have timeout values less than 7 days or 10080 minutes. When the value is left blank, the job will be restarted after 7 days based if you have not setup a maintenance window. If you have setup maintenance window, it will be restarted during the maintenance window after 7 days.
      */
     Timeout?: Timeout;
     /**
@@ -9076,7 +9146,7 @@ declare namespace Glue {
      */
     ExecutionTime?: ExecutionTime;
     /**
-     * The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. This value overrides the timeout value set in the parent job. The maximum value for timeout for batch jobs is 7 days or 10080 minutes. The default is 2880 minutes (48 hours) for batch jobs. Any existing Glue jobs that have a greater timeout value are defaulted to 7 days. For instance you have specified a timeout of 20 days for a batch job, it will be stopped on the 7th day. Streaming jobs must have timeout values less than 7 days or 10080 minutes. When the value is left blank, the job will be restarted after 7 days based if you have not setup a maintenance window. If you have setup maintenance window, it will be restarted during the maintenance window after 7 days.
+     * The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. This value overrides the timeout value set in the parent job. Streaming jobs must have timeout values less than 7 days or 10080 minutes. When the value is left blank, the job will be restarted after 7 days based if you have not setup a maintenance window. If you have setup maintenance window, it will be restarted during the maintenance window after 7 days.
      */
     Timeout?: Timeout;
     /**
@@ -9168,7 +9238,7 @@ declare namespace Glue {
      */
     AllocatedCapacity?: IntegerValue;
     /**
-     * The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
+     * The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours) for batch jobs. Streaming jobs must have timeout values less than 7 days or 10080 minutes. When the value is left blank, the job will be restarted after 7 days based if you have not setup a maintenance window. If you have setup maintenance window, it will be restarted during the maintenance window after 7 days.
      */
     Timeout?: Timeout;
     /**
@@ -10082,6 +10152,7 @@ declare namespace Glue {
     NumberOfDistinctValues: NonNegativeLong;
   }
   export type LongValue = number;
+  export type LongValueString = string;
   export interface MLTransform {
     /**
      * The unique transform ID that is generated for the machine learning transform. The ID is guaranteed to be unique and does not change.
@@ -10451,6 +10522,57 @@ declare namespace Glue {
   export type NullableDouble = number;
   export type NullableInteger = number;
   export type NullableString = string;
+  export interface OAuth2ClientApplication {
+    /**
+     * The client application clientID if the ClientAppType is USER_MANAGED.
+     */
+    UserManagedClientApplicationClientId?: UserManagedClientApplicationClientId;
+    /**
+     * The reference to the SaaS-side client app that is Amazon Web Services managed.
+     */
+    AWSManagedClientApplicationReference?: AWSManagedClientApplicationReference;
+  }
+  export type OAuth2GrantType = "AUTHORIZATION_CODE"|"CLIENT_CREDENTIALS"|"JWT_BEARER"|string;
+  export interface OAuth2Properties {
+    /**
+     * The OAuth2 grant type. For example, AUTHORIZATION_CODE, JWT_BEARER, or CLIENT_CREDENTIALS.
+     */
+    OAuth2GrantType?: OAuth2GrantType;
+    /**
+     * The client application type. For example, AWS_MANAGED or USER_MANAGED.
+     */
+    OAuth2ClientApplication?: OAuth2ClientApplication;
+    /**
+     * The URL of the provider's authentication server, to exchange an authorization code for an access token.
+     */
+    TokenUrl?: TokenUrl;
+    /**
+     * A map of parameters that are added to the token GET request.
+     */
+    TokenUrlParametersMap?: TokenUrlParametersMap;
+  }
+  export interface OAuth2PropertiesInput {
+    /**
+     * The OAuth2 grant type in the CreateConnection request. For example, AUTHORIZATION_CODE, JWT_BEARER, or CLIENT_CREDENTIALS.
+     */
+    OAuth2GrantType?: OAuth2GrantType;
+    /**
+     * The client application type in the CreateConnection request. For example, AWS_MANAGED or USER_MANAGED.
+     */
+    OAuth2ClientApplication?: OAuth2ClientApplication;
+    /**
+     * The URL of the provider's authentication server, to exchange an authorization code for an access token.
+     */
+    TokenUrl?: TokenUrl;
+    /**
+     * A map of parameters that are added to the token GET request.
+     */
+    TokenUrlParametersMap?: TokenUrlParametersMap;
+    /**
+     * The set of properties required for the the OAuth2 AUTHORIZATION_CODE grant type.
+     */
+    AuthorizationCodeProperties?: AuthorizationCodeProperties;
+  }
   export type OneInput = NodeId[];
   export interface OpenTableFormatInput {
     /**
@@ -10704,7 +10826,7 @@ declare namespace Glue {
      */
     SecurityGroupIdList?: SecurityGroupIdList;
     /**
-     * The connection's Availability Zone. This field is redundant because the specified subnet implies the Availability Zone to be used. Currently the field must be populated, but it will be deprecated in the future.
+     * The connection's Availability Zone.
      */
     AvailabilityZone?: NameString;
   }
@@ -11002,6 +11124,7 @@ declare namespace Glue {
      */
     RecrawlBehavior?: RecrawlBehavior;
   }
+  export type RedirectUri = string;
   export interface RedshiftSource {
     /**
      * The name of the Amazon Redshift data store.
@@ -12053,6 +12176,7 @@ declare namespace Glue {
      */
     TableList?: TableList;
   }
+  export type SecretArn = string;
   export interface SecurityConfiguration {
     /**
      * The name of the security configuration.
@@ -12714,7 +12838,7 @@ declare namespace Glue {
      */
     AllocatedCapacity?: IntegerValue;
     /**
-     * The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. This value overrides the timeout value set in the parent job. Streaming jobs do not have a timeout. The default for non-streaming jobs is 2,880 minutes (48 hours).
+     * The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. This value overrides the timeout value set in the parent job.  Streaming jobs must have timeout values less than 7 days or 10080 minutes. When the value is left blank, the job will be restarted after 7 days based if you have not setup a maintenance window. If you have setup maintenance window, it will be restarted during the maintenance window after 7 days.
      */
     Timeout?: Timeout;
     /**
@@ -13417,6 +13541,10 @@ declare namespace Glue {
   export type Timestamp = Date;
   export type TimestampValue = Date;
   export type Token = string;
+  export type TokenUrl = string;
+  export type TokenUrlParameterKey = string;
+  export type TokenUrlParameterValue = string;
+  export type TokenUrlParametersMap = {[key: string]: TokenUrlParameterValue};
   export type Topk = number;
   export type TotalSegmentsInteger = number;
   export type TransactionIdString = string;
@@ -14412,6 +14540,7 @@ declare namespace Glue {
     ResourceUris?: ResourceUriList;
   }
   export type UserDefinedFunctionList = UserDefinedFunction[];
+  export type UserManagedClientApplicationClientId = string;
   export type ValueString = string;
   export type ValueStringList = ValueString[];
   export type VersionId = number;
@@ -14452,7 +14581,7 @@ declare namespace Glue {
      */
     ViewOriginalText?: ViewTextString;
     /**
-     * The expanded SQL for the view. This SQL is used by engines while processing a query on a view. Engines may perform operations during view creation to transform ViewOriginalText to ViewExpandedText. For example:   Fully qualify identifiers: SELECT * from table1 → SELECT * from db1.table1   
+     * The expanded SQL for the view. This SQL is used by engines while processing a query on a view. Engines may perform operations during view creation to transform ViewOriginalText to ViewExpandedText. For example:   Fully qualified identifiers: SELECT * from table1 -&gt; SELECT * from db1.table1   
      */
     ViewExpandedText?: ViewTextString;
     /**
