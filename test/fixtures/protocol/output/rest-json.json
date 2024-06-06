@@ -845,6 +845,82 @@
     ]
   },
   {
+    "description": "Union output, ignore __type before",
+    "metadata": {
+      "protocol": "json"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "Str": {
+            "shape": "StringType"
+          }
+        },
+        "union": true
+      },
+      "StringType": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "Str": "foo"
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"__type\": \"com.foo#OutputShape\", \"Str\": \"foo\"}"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Union output, ignore __type after",
+    "metadata": {
+      "protocol": "json"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "Str": {
+            "shape": "StringType"
+          }
+        },
+        "union": true
+      },
+      "StringType": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "Str": "foo"
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"Str\": \"foo\", \"__type\": \"com.foo#OutputShape\"}"
+        }
+      }
+    ]
+  },
+  {
     "description": "Modeled exceptions",
     "metadata": {
       "protocol": "rest-json"
