@@ -161,6 +161,56 @@
     ]
   },
   {
+    "description": "Querystring list of integers",
+    "metadata": {
+      "protocol": "rest-json",
+      "apiVersion": "2014-01-01"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "Items": {
+            "shape": "IntegerList",
+            "location": "querystring",
+            "locationName": "item"
+          }
+        }
+      },
+      "IntegerList": {
+        "type": "list",
+        "member": {
+          "shape": "Integer"
+        }
+      },
+      "Integer": {
+        "type": "integer"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "http": {
+            "method": "GET",
+            "requestUri": "/path"
+          },
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "Items": [1, 2, 3]
+        },
+        "serialized": {
+          "body": "",
+          "uri": "/path?item=1&item=2&item=3",
+          "headers": {}
+        }
+      }
+    ]
+  },
+  {
     "description": "String to string maps in querystring",
     "metadata": {
       "protocol": "rest-json",
