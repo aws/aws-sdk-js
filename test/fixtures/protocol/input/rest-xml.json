@@ -820,6 +820,74 @@
     ]
   },
   {
+    "description": "Header map with list values",
+    "metadata": {
+      "protocol": "rest-xml",
+      "apiVersion": "2014-01-01"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "foo": {
+            "shape": "FooShape"
+          }
+        }
+      },
+      "FooShape": {
+        "type": "map",
+        "location": "headers",
+        "locationName": "x-foo-",
+        "key": {
+          "shape": "FooKeyValue"
+        },
+        "value": {
+          "shape": "FooKeyValues"
+        }
+      },
+      "FooKeyValues": {
+        "type": "list",
+        "member": {
+          "shape": "FooKeyValue"
+        }
+      },
+      "FooKeyValue": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
+          "input": {
+            "shape": "InputShape",
+            "locationName": "OperationRequest",
+            "xmlNamespace": {"uri": "https://foo/"}
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "foo": {
+            "a": ["a", "b", "c"],
+            "c": ["x", "y", "z"]
+          }
+        },
+        "serialized": {
+          "method": "POST",
+          "body": "",
+          "uri": "/",
+          "headers": {
+            "x-foo-a": "a,b,c",
+            "x-foo-c": "x,y,z"
+          }
+        }
+      }
+    ]
+  },
+  {
     "description": "Querystring list of strings",
     "metadata": {
       "protocol": "rest-xml",
@@ -1760,6 +1828,11 @@
             "location": "header",
             "locationName": "x-amz-enum"
           },
+          "HeaderEnums": {
+            "shape": "EnumList",
+            "location": "header",
+            "locationName": "x-amz-enums"
+          },
           "FooEnum": {
             "shape": "EnumType"
           },
@@ -1805,7 +1878,8 @@
           "name": "OperationName"
         },
         "params": {
-          "HeaderEnum": "baz",
+          "HeaderEnum": "bar",
+          "HeaderEnums": ["foo","bar"],
           "FooEnum": "foo",
           "URIFooEnum": "bar",
           "ListEnums": ["foo", "", "bar"],
@@ -1813,7 +1887,7 @@
         },
         "serialized": {
           "uri": "/Enum/bar?ListEnums=0&ListEnums=&ListEnums=1",
-          "headers": {"x-amz-enum": "baz"},
+          "headers": {"x-amz-enum": "bar", "x-amz-enums": "foo,bar"},
           "body": "<InputShape><FooEnum>foo</FooEnum><ListEnums><member>foo</member><member></member><member>bar</member></ListEnums></InputShape>"
         }
       },
@@ -1913,6 +1987,125 @@
           "uri": "/path",
           "body": "<MemberRefOpRequest><Name>myname</Name></MemberRefOpRequest>",
           "host": "foo-myname.service.region.amazonaws.com"
+        }
+      }
+    ]
+  },
+  {
+    "description": "List of strings in header",
+    "metadata": {
+      "protocol": "rest-xml",
+      "apiVersion": "2014-01-01"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "ListParam": {
+            "shape": "ListShape",
+            "location": "header",
+            "locationName": "x-amz-list-param"
+          }
+        }
+      },
+      "ListShape": {
+        "type": "list",
+        "member": {
+          "shape": "StringType"
+        }
+      },
+      "StringType": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "http": {
+            "method": "POST",
+            "requestUri": "/2014-01-01/example"
+          },
+          "input": {
+            "shape": "InputShape",
+            "locationName": "OperationRequest",
+            "xmlNamespace": {"uri": "https://foo/"}
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "ListParam": [
+            "one",
+            "two",
+            "three"
+          ]
+        },
+        "serialized": {
+          "method": "POST",
+          "body": "",
+          "uri": "/2014-01-01/example",
+          "headers": {
+            "x-amz-list-param": "one,two,three"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "description": "List of enums in header",
+    "metadata": {
+      "protocol": "rest-xml",
+      "apiVersion": "2014-01-01"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "ListParam": {
+            "shape": "ListShape",
+            "location": "header",
+            "locationName": "x-amz-list-param"
+          }
+        }
+      },
+      "ListShape": {
+        "type": "list",
+        "member": {
+          "shape": "EnumType"
+        }
+      },
+      "EnumType": {
+        "type": "string",
+        "enum": ["one", "two", "three"]
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "http": {
+            "method": "POST",
+            "requestUri": "/2014-01-01/example"
+          },
+          "input": {
+            "shape": "InputShape",
+            "locationName": "OperationRequest",
+            "xmlNamespace": {"uri": "https://foo/"}
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "ListParam": [
+            "one",
+            "two",
+            "three"
+          ]
+        },
+        "serialized": {
+          "method": "POST",
+          "body": "",
+          "uri": "/2014-01-01/example",
+          "headers": {
+            "x-amz-list-param": "one,two,three"
+          }
         }
       }
     ]
