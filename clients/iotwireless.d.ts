@@ -1875,7 +1875,7 @@ declare namespace IoTWireless {
   export type FirmwareUpdateRole = string;
   export type FragmentIntervalMS = number;
   export type FragmentSizeBytes = number;
-  export type FuotaDeviceStatus = "Initial"|"Package_Not_Supported"|"FragAlgo_unsupported"|"Not_enough_memory"|"FragIndex_unsupported"|"Wrong_descriptor"|"SessionCnt_replay"|"MissingFrag"|"MemoryError"|"MICError"|"Successful"|string;
+  export type FuotaDeviceStatus = "Initial"|"Package_Not_Supported"|"FragAlgo_unsupported"|"Not_enough_memory"|"FragIndex_unsupported"|"Wrong_descriptor"|"SessionCnt_replay"|"MissingFrag"|"MemoryError"|"MICError"|"Successful"|"Device_exist_in_conflict_fuota_task"|string;
   export interface FuotaTask {
     Id?: FuotaTaskId;
     Arn?: FuotaTaskArn;

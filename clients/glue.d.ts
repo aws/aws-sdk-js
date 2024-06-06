@@ -13344,6 +13344,10 @@ declare namespace Glue {
      * A TableIdentifier structure that describes a target table for resource linking.
      */
     TargetTable?: TableIdentifier;
+    /**
+     * A structure that contains all the information that defines the view, including the dialect or dialects for the view, and the query.
+     */
+    ViewDefinition?: ViewDefinitionInput;
   }
   export type TableList = Table[];
   export type TableName = string;
@@ -14390,6 +14394,14 @@ declare namespace Glue {
      * The version ID at which to update the table contents. 
      */
     VersionId?: VersionString;
+    /**
+     * The operation to be performed when updating the view.
+     */
+    ViewUpdateAction?: ViewUpdateAction;
+    /**
+     * A flag that can be set to true to ignore matching storage descriptor and subobject matching requirements.
+     */
+    Force?: Boolean;
   }
   export interface UpdateTableResponse {
   }
@@ -14565,6 +14577,24 @@ declare namespace Glue {
      */
     Representations?: ViewRepresentationList;
   }
+  export interface ViewDefinitionInput {
+    /**
+     * You can set this flag as true to instruct the engine not to push user-provided operations into the logical plan of the view during query planning. However, setting this flag does not guarantee that the engine will comply. Refer to the engine's documentation to understand the guarantees provided, if any.
+     */
+    IsProtected?: NullableBoolean;
+    /**
+     * The definer of a view in SQL.
+     */
+    Definer?: ArnString;
+    /**
+     * A list of structures that contains the dialect of the view, and the query that defines the view.
+     */
+    Representations?: ViewRepresentationInputList;
+    /**
+     * A list of base table ARNs that make up the view.
+     */
+    SubObjects?: ViewSubObjectsList;
+  }
   export type ViewDialect = "REDSHIFT"|"ATHENA"|"SPARK"|string;
   export type ViewDialectVersionString = string;
   export interface ViewRepresentation {
@@ -14585,13 +14615,41 @@ declare namespace Glue {
      */
     ViewExpandedText?: ViewTextString;
     /**
+     * The name of the connection to be used to validate the specific representation of the view.
+     */
+    ValidationConnection?: NameString;
+    /**
      * Dialects marked as stale are no longer valid and must be updated before they can be queried in their respective query engines.
      */
     IsStale?: NullableBoolean;
   }
+  export interface ViewRepresentationInput {
+    /**
+     * A parameter that specifies the engine type of a specific representation.
+     */
+    Dialect?: ViewDialect;
+    /**
+     * A parameter that specifies the version of the engine of a specific representation.
+     */
+    DialectVersion?: ViewDialectVersionString;
+    /**
+     * A string that represents the original SQL query that describes the view.
+     */
+    ViewOriginalText?: ViewTextString;
+    /**
+     * The name of the connection to be used to validate the specific representation of the view.
+     */
+    ValidationConnection?: NameString;
+    /**
+     * A string that represents the SQL query that describes the view with expanded resource ARNs
+     */
+    ViewExpandedText?: ViewTextString;
+  }
+  export type ViewRepresentationInputList = ViewRepresentationInput[];
   export type ViewRepresentationList = ViewRepresentation[];
   export type ViewSubObjectsList = ArnString[];
   export type ViewTextString = string;
+  export type ViewUpdateAction = "ADD"|"REPLACE"|"ADD_OR_REPLACE"|"DROP"|string;
   export type WorkerType = "Standard"|"G.1X"|"G.2X"|"G.025X"|"G.4X"|"G.8X"|"Z.2X"|string;
   export interface Workflow {
     /**

@@ -12,6 +12,14 @@ declare class Account extends Service {
   constructor(options?: Account.Types.ClientConfiguration)
   config: Config & Account.Types.ClientConfiguration;
   /**
+   * Accepts the request that originated from StartPrimaryEmailUpdate to update the primary email address (also known as the root user email address) for the specified account.
+   */
+  acceptPrimaryEmailUpdate(params: Account.Types.AcceptPrimaryEmailUpdateRequest, callback?: (err: AWSError, data: Account.Types.AcceptPrimaryEmailUpdateResponse) => void): Request<Account.Types.AcceptPrimaryEmailUpdateResponse, AWSError>;
+  /**
+   * Accepts the request that originated from StartPrimaryEmailUpdate to update the primary email address (also known as the root user email address) for the specified account.
+   */
+  acceptPrimaryEmailUpdate(callback?: (err: AWSError, data: Account.Types.AcceptPrimaryEmailUpdateResponse) => void): Request<Account.Types.AcceptPrimaryEmailUpdateResponse, AWSError>;
+  /**
    * Deletes the specified alternate contact from an Amazon Web Services account. For complete details about how to use the alternate contact operations, see Access or updating the alternate contacts.  Before you can update the alternate contact information for an Amazon Web Services account that is managed by Organizations, you must first enable integration between Amazon Web Services Account Management and Organizations. For more information, see Enabling trusted access for Amazon Web Services Account Management. 
    */
   deleteAlternateContact(params: Account.Types.DeleteAlternateContactRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -20,11 +28,11 @@ declare class Account extends Service {
    */
   deleteAlternateContact(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Disables (opts-out) a particular Region for an account.
+   * Disables (opts-out) a particular Region for an account.  The act of disabling a Region will remove all IAM access to any resources that reside in that Region. 
    */
   disableRegion(params: Account.Types.DisableRegionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Disables (opts-out) a particular Region for an account.
+   * Disables (opts-out) a particular Region for an account.  The act of disabling a Region will remove all IAM access to any resources that reside in that Region. 
    */
   disableRegion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -51,6 +59,14 @@ declare class Account extends Service {
    * Retrieves the primary contact information of an Amazon Web Services account. For complete details about how to use the primary contact operations, see Update the primary and alternate contact information.
    */
   getContactInformation(callback?: (err: AWSError, data: Account.Types.GetContactInformationResponse) => void): Request<Account.Types.GetContactInformationResponse, AWSError>;
+  /**
+   * Retrieves the primary email address for the specified account.
+   */
+  getPrimaryEmail(params: Account.Types.GetPrimaryEmailRequest, callback?: (err: AWSError, data: Account.Types.GetPrimaryEmailResponse) => void): Request<Account.Types.GetPrimaryEmailResponse, AWSError>;
+  /**
+   * Retrieves the primary email address for the specified account.
+   */
+  getPrimaryEmail(callback?: (err: AWSError, data: Account.Types.GetPrimaryEmailResponse) => void): Request<Account.Types.GetPrimaryEmailResponse, AWSError>;
   /**
    * Retrieves the opt-in status of a particular Region.
    */
@@ -83,8 +99,36 @@ declare class Account extends Service {
    * Updates the primary contact information of an Amazon Web Services account. For complete details about how to use the primary contact operations, see Update the primary and alternate contact information.
    */
   putContactInformation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Starts the process to update the primary email address for the specified account.
+   */
+  startPrimaryEmailUpdate(params: Account.Types.StartPrimaryEmailUpdateRequest, callback?: (err: AWSError, data: Account.Types.StartPrimaryEmailUpdateResponse) => void): Request<Account.Types.StartPrimaryEmailUpdateResponse, AWSError>;
+  /**
+   * Starts the process to update the primary email address for the specified account.
+   */
+  startPrimaryEmailUpdate(callback?: (err: AWSError, data: Account.Types.StartPrimaryEmailUpdateResponse) => void): Request<Account.Types.StartPrimaryEmailUpdateResponse, AWSError>;
 }
 declare namespace Account {
+  export interface AcceptPrimaryEmailUpdateRequest {
+    /**
+     * Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. To use this parameter, the caller must be an identity in the organization's management account or a delegated administrator account. The specified account ID must be a member account in the same organization. The organization must have all features enabled, and the organization must have trusted access enabled for the Account Management service, and optionally a delegated admin account assigned. This operation can only be called from the management account or the delegated administrator account of an organization for a member account.  The management account can't specify its own AccountId. 
+     */
+    AccountId: AccountId;
+    /**
+     * The OTP code sent to the PrimaryEmail specified on the StartPrimaryEmailUpdate API call.
+     */
+    Otp: Otp;
+    /**
+     * The new primary email address for use with the specified account. This must match the PrimaryEmail from the StartPrimaryEmailUpdate API call.
+     */
+    PrimaryEmail: PrimaryEmailAddress;
+  }
+  export interface AcceptPrimaryEmailUpdateResponse {
+    /**
+     * Retrieves the status of the accepted primary email update request.
+     */
+    Status?: PrimaryEmailUpdateStatus;
+  }
   export type AccountId = string;
   export type AddressLine = string;
   export interface AlternateContact {
@@ -154,7 +198,7 @@ declare namespace Account {
      */
     PostalCode: PostalCode;
     /**
-     * The state or region of the primary contact address. This field is required in selected countries.
+     * The state or region of the primary contact address. If the mailing address is within the United States (US), the value in this field can be either a two character state code (for example, NJ) or the full state name (for example, New Jersey). This field is required in the following countries: US, CA, GB, DE, JP, IN, and BR.
      */
     StateOrRegion?: StateOrRegion;
     /**
@@ -176,7 +220,7 @@ declare namespace Account {
   }
   export interface DisableRegionRequest {
     /**
-     * Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don't specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the organization's management account or a delegated administrator account. The specified account ID must also be a member account in the same organization. The organization must have all features enabled, and the organization must have trusted access enabled for the Account Management service, and optionally a delegated admin account assigned.  The management account can't specify its own AccountId. It must call the operation in standalone context by not including the AccountId parameter.  To call this operation on an account that is not a member of an organization, don't specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.
+     * Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don't specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the organization's management account or a delegated administrator account. The specified account ID must be a member account in the same organization. The organization must have all features enabled, and the organization must have trusted access enabled for the Account Management service, and optionally a delegated admin account assigned.  The management account can't specify its own AccountId. It must call the operation in standalone context by not including the AccountId parameter.  To call this operation on an account that is not a member of an organization, don't specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.
      */
     AccountId?: AccountId;
     /**
@@ -188,7 +232,7 @@ declare namespace Account {
   export type EmailAddress = string;
   export interface EnableRegionRequest {
     /**
-     * Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don't specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the organization's management account or a delegated administrator account. The specified account ID must also be a member account in the same organization. The organization must have all features enabled, and the organization must have trusted access enabled for the Account Management service, and optionally a delegated admin account assigned.  The management account can't specify its own AccountId. It must call the operation in standalone context by not including the AccountId parameter.  To call this operation on an account that is not a member of an organization, don't specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.
+     * Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don't specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the organization's management account or a delegated administrator account. The specified account ID must be a member account in the same organization. The organization must have all features enabled, and the organization must have trusted access enabled for the Account Management service, and optionally a delegated admin account assigned.  The management account can't specify its own AccountId. It must call the operation in standalone context by not including the AccountId parameter.  To call this operation on an account that is not a member of an organization, don't specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.
      */
     AccountId?: AccountId;
     /**
@@ -215,7 +259,7 @@ declare namespace Account {
   }
   export interface GetContactInformationRequest {
     /**
-     * Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don't specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the organization's management account or a delegated administrator account. The specified account ID must also be a member account in the same organization. The organization must have all features enabled, and the organization must have trusted access enabled for the Account Management service, and optionally a delegated admin account assigned.  The management account can't specify its own AccountId. It must call the operation in standalone context by not including the AccountId parameter.  To call this operation on an account that is not a member of an organization, don't specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.
+     * Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don't specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the organization's management account or a delegated administrator account. The specified account ID must be a member account in the same organization. The organization must have all features enabled, and the organization must have trusted access enabled for the Account Management service, and optionally a delegated admin account assigned.  The management account can't specify its own AccountId. It must call the operation in standalone context by not including the AccountId parameter.  To call this operation on an account that is not a member of an organization, don't specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.
      */
     AccountId?: AccountId;
   }
@@ -225,9 +269,21 @@ declare namespace Account {
      */
     ContactInformation?: ContactInformation;
   }
+  export interface GetPrimaryEmailRequest {
+    /**
+     * Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. To use this parameter, the caller must be an identity in the organization's management account or a delegated administrator account. The specified account ID must be a member account in the same organization. The organization must have all features enabled, and the organization must have trusted access enabled for the Account Management service, and optionally a delegated admin account assigned. This operation can only be called from the management account or the delegated administrator account of an organization for a member account.  The management account can't specify its own AccountId. 
+     */
+    AccountId: AccountId;
+  }
+  export interface GetPrimaryEmailResponse {
+    /**
+     * Retrieves the primary email address associated with the specified account.
+     */
+    PrimaryEmail?: PrimaryEmailAddress;
+  }
   export interface GetRegionOptStatusRequest {
     /**
-     * Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don't specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the organization's management account or a delegated administrator account. The specified account ID must also be a member account in the same organization. The organization must have all features enabled, and the organization must have trusted access enabled for the Account Management service, and optionally a delegated admin account assigned.  The management account can't specify its own AccountId. It must call the operation in standalone context by not including the AccountId parameter.  To call this operation on an account that is not a member of an organization, don't specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.
+     * Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don't specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the organization's management account or a delegated administrator account. The specified account ID must be a member account in the same organization. The organization must have all features enabled, and the organization must have trusted access enabled for the Account Management service, and optionally a delegated admin account assigned.  The management account can't specify its own AccountId. It must call the operation in standalone context by not including the AccountId parameter.  To call this operation on an account that is not a member of an organization, don't specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.
      */
     AccountId?: AccountId;
     /**
@@ -247,7 +303,7 @@ declare namespace Account {
   }
   export interface ListRegionsRequest {
     /**
-     * Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don't specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the organization's management account or a delegated administrator account. The specified account ID must also be a member account in the same organization. The organization must have all features enabled, and the organization must have trusted access enabled for the Account Management service, and optionally a delegated admin account assigned.  The management account can't specify its own AccountId. It must call the operation in standalone context by not including the AccountId parameter.  To call this operation on an account that is not a member of an organization, don't specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.
+     * Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don't specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the organization's management account or a delegated administrator account. The specified account ID must be a member account in the same organization. The organization must have all features enabled, and the organization must have trusted access enabled for the Account Management service, and optionally a delegated admin account assigned.  The management account can't specify its own AccountId. It must call the operation in standalone context by not including the AccountId parameter.  To call this operation on an account that is not a member of an organization, don't specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.
      */
     AccountId?: AccountId;
     /**
@@ -276,8 +332,11 @@ declare namespace Account {
     Regions?: RegionOptList;
   }
   export type Name = string;
+  export type Otp = string;
   export type PhoneNumber = string;
   export type PostalCode = string;
+  export type PrimaryEmailAddress = string;
+  export type PrimaryEmailUpdateStatus = "PENDING"|"ACCEPTED"|string;
   export interface PutAlternateContactRequest {
     /**
      * Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the organization's management account or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have all features enabled, and the organization must have trusted access enabled for the Account Management service, and optionally a delegated admin account assigned.  The management account can't specify its own AccountId; it must call the operation in standalone context by not including the AccountId parameter.  To call this operation on an account that is not a member of an organization, then don't specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.
@@ -306,7 +365,7 @@ declare namespace Account {
   }
   export interface PutContactInformationRequest {
     /**
-     * Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don't specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the organization's management account or a delegated administrator account. The specified account ID must also be a member account in the same organization. The organization must have all features enabled, and the organization must have trusted access enabled for the Account Management service, and optionally a delegated admin account assigned.  The management account can't specify its own AccountId. It must call the operation in standalone context by not including the AccountId parameter.  To call this operation on an account that is not a member of an organization, don't specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.
+     * Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don't specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the organization's management account or a delegated administrator account. The specified account ID must be a member account in the same organization. The organization must have all features enabled, and the organization must have trusted access enabled for the Account Management service, and optionally a delegated admin account assigned.  The management account can't specify its own AccountId. It must call the operation in standalone context by not including the AccountId parameter.  To call this operation on an account that is not a member of an organization, don't specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.
      */
     AccountId?: AccountId;
     /**
@@ -328,6 +387,22 @@ declare namespace Account {
   export type RegionOptList = Region[];
   export type RegionOptStatus = "ENABLED"|"ENABLING"|"DISABLING"|"DISABLED"|"ENABLED_BY_DEFAULT"|string;
   export type RegionOptStatusList = RegionOptStatus[];
+  export interface StartPrimaryEmailUpdateRequest {
+    /**
+     * Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. To use this parameter, the caller must be an identity in the organization's management account or a delegated administrator account. The specified account ID must be a member account in the same organization. The organization must have all features enabled, and the organization must have trusted access enabled for the Account Management service, and optionally a delegated admin account assigned. This operation can only be called from the management account or the delegated administrator account of an organization for a member account.  The management account can't specify its own AccountId. 
+     */
+    AccountId: AccountId;
+    /**
+     * The new primary email address (also known as the root user email address) to use in the specified account.
+     */
+    PrimaryEmail: PrimaryEmailAddress;
+  }
+  export interface StartPrimaryEmailUpdateResponse {
+    /**
+     * The status of the primary email update request.
+     */
+    Status?: PrimaryEmailUpdateStatus;
+  }
   export type StateOrRegion = string;
   export type String = string;
   export type Title = string;

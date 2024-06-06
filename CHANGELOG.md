@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1635.0-->
+<!--LATEST=2.1636.0-->
 <!--ENTRYINSERT-->
+
+## 2.1636.0
+* feature: Account: This release adds 3 new APIs (AcceptPrimaryEmailUpdate, GetPrimaryEmail, and StartPrimaryEmailUpdate) used to centrally manage the root user email address of member accounts within an AWS organization.
+* feature: FSx: This release adds support to increase metadata performance on FSx for Lustre file systems beyond the default level provisioned when a file system is created. This can be done by specifying MetadataConfiguration during the creation of Persistent_2 file systems or by updating it on demand.
+* feature: Firehose: Adds integration with Secrets Manager for Redshift, Splunk, HttpEndpoint, and Snowflake destinations
+* feature: Glue: This release adds support for creating and updating Glue Data Catalog Views.
+* feature: IoTWireless: Adds support for wireless device to be in Conflict FUOTA Device Status due to a FUOTA Task, so it couldn't be attached to a new one.
+* feature: Location: Added two new APIs, VerifyDevicePosition and ForecastGeofenceEvents. Added support for putting larger geofences up to 100,000 vertices with Geobuf fields.
+* feature: StorageGateway: Adds SoftwareUpdatePreferences to DescribeMaintenanceStartTime and UpdateMaintenanceStartTime, a structure which contains AutomaticUpdatePolicy.
 
 ## 2.1635.0
 * feature: GlobalAccelerator: This release contains a new optional ip-addresses input field for the update accelerator and update custom routing accelerator apis. This input enables consumers to replace IPv4 addresses on existing accelerators with addresses provided in the input.
