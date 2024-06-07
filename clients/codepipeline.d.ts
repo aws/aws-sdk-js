@@ -156,11 +156,11 @@ declare class CodePipeline extends Service {
    */
   listActionTypes(callback?: (err: AWSError, data: CodePipeline.Types.ListActionTypesOutput) => void): Request<CodePipeline.Types.ListActionTypesOutput, AWSError>;
   /**
-   * Gets a summary of the most recent executions for a pipeline.
+   * Gets a summary of the most recent executions for a pipeline.  When applying the filter for pipeline executions that have succeeded in the stage, the operation returns all executions in the current pipeline version beginning on February 1, 2024. 
    */
   listPipelineExecutions(params: CodePipeline.Types.ListPipelineExecutionsInput, callback?: (err: AWSError, data: CodePipeline.Types.ListPipelineExecutionsOutput) => void): Request<CodePipeline.Types.ListPipelineExecutionsOutput, AWSError>;
   /**
-   * Gets a summary of the most recent executions for a pipeline.
+   * Gets a summary of the most recent executions for a pipeline.  When applying the filter for pipeline executions that have succeeded in the stage, the operation returns all executions in the current pipeline version beginning on February 1, 2024. 
    */
   listPipelineExecutions(callback?: (err: AWSError, data: CodePipeline.Types.ListPipelineExecutionsOutput) => void): Request<CodePipeline.Types.ListPipelineExecutionsOutput, AWSError>;
   /**
@@ -1552,7 +1552,7 @@ declare namespace CodePipeline {
      */
     filter?: ActionExecutionFilter;
     /**
-     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned nextToken value. Action execution history is retained for up to 12 months, based on action execution start times. Default value is 100.   Detailed execution history is available for executions run on or after February 21, 2019. 
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned nextToken value. Action execution history is retained for up to 12 months, based on action execution start times. Default value is 100. 
      */
     maxResults?: MaxResults;
     /**
@@ -2310,7 +2310,7 @@ declare namespace CodePipeline {
     revisionValue: Revision;
   }
   export type SourceRevisionOverrideList = SourceRevisionOverride[];
-  export type SourceRevisionType = "COMMIT_ID"|"IMAGE_DIGEST"|"S3_OBJECT_VERSION_ID"|string;
+  export type SourceRevisionType = "COMMIT_ID"|"IMAGE_DIGEST"|"S3_OBJECT_VERSION_ID"|"S3_OBJECT_KEY"|string;
   export type StageActionDeclarationList = ActionDeclaration[];
   export type StageBlockerDeclarationList = BlockerDeclaration[];
   export interface StageContext {

@@ -284,11 +284,11 @@ declare class AuditManager extends Service {
    */
   getOrganizationAdminAccount(callback?: (err: AWSError, data: AuditManager.Types.GetOrganizationAdminAccountResponse) => void): Request<AuditManager.Types.GetOrganizationAdminAccountResponse, AWSError>;
   /**
-   * Gets a list of all of the Amazon Web Services that you can choose to include in your assessment. When you create an assessment, specify which of these services you want to include to narrow the assessment's scope.
+   * Gets a list of the Amazon Web Services from which Audit Manager can collect evidence.  Audit Manager defines which Amazon Web Services are in scope for an assessment. Audit Manager infers this scope by examining the assessment’s controls and their data sources, and then mapping this information to one or more of the corresponding Amazon Web Services that are in this list.  For information about why it's no longer possible to specify services in scope manually, see I can't edit the services in scope for my assessment in the Troubleshooting section of the Audit Manager user guide. 
    */
   getServicesInScope(params: AuditManager.Types.GetServicesInScopeRequest, callback?: (err: AWSError, data: AuditManager.Types.GetServicesInScopeResponse) => void): Request<AuditManager.Types.GetServicesInScopeResponse, AWSError>;
   /**
-   * Gets a list of all of the Amazon Web Services that you can choose to include in your assessment. When you create an assessment, specify which of these services you want to include to narrow the assessment's scope.
+   * Gets a list of the Amazon Web Services from which Audit Manager can collect evidence.  Audit Manager defines which Amazon Web Services are in scope for an assessment. Audit Manager infers this scope by examining the assessment’s controls and their data sources, and then mapping this information to one or more of the corresponding Amazon Web Services that are in this list.  For information about why it's no longer possible to specify services in scope manually, see I can't edit the services in scope for my assessment in the Troubleshooting section of the Audit Manager user guide. 
    */
   getServicesInScope(callback?: (err: AWSError, data: AuditManager.Types.GetServicesInScopeResponse) => void): Request<AuditManager.Types.GetServicesInScopeResponse, AWSError>;
   /**
@@ -340,19 +340,19 @@ declare class AuditManager extends Service {
    */
   listAssessments(callback?: (err: AWSError, data: AuditManager.Types.ListAssessmentsResponse) => void): Request<AuditManager.Types.ListAssessmentsResponse, AWSError>;
   /**
-   * Lists the latest analytics data for control domains across all of your active assessments.   A control domain is listed only if at least one of the controls within that domain collected evidence on the lastUpdated date of controlDomainInsights. If this condition isn’t met, no data is listed for that control domain. 
+   * Lists the latest analytics data for control domains across all of your active assessments.  Audit Manager supports the control domains that are provided by Amazon Web Services Control Catalog. For information about how to find a list of available control domains, see  ListDomains  in the Amazon Web Services Control Catalog API Reference.  A control domain is listed only if at least one of the controls within that domain collected evidence on the lastUpdated date of controlDomainInsights. If this condition isn’t met, no data is listed for that control domain. 
    */
   listControlDomainInsights(params: AuditManager.Types.ListControlDomainInsightsRequest, callback?: (err: AWSError, data: AuditManager.Types.ListControlDomainInsightsResponse) => void): Request<AuditManager.Types.ListControlDomainInsightsResponse, AWSError>;
   /**
-   * Lists the latest analytics data for control domains across all of your active assessments.   A control domain is listed only if at least one of the controls within that domain collected evidence on the lastUpdated date of controlDomainInsights. If this condition isn’t met, no data is listed for that control domain. 
+   * Lists the latest analytics data for control domains across all of your active assessments.  Audit Manager supports the control domains that are provided by Amazon Web Services Control Catalog. For information about how to find a list of available control domains, see  ListDomains  in the Amazon Web Services Control Catalog API Reference.  A control domain is listed only if at least one of the controls within that domain collected evidence on the lastUpdated date of controlDomainInsights. If this condition isn’t met, no data is listed for that control domain. 
    */
   listControlDomainInsights(callback?: (err: AWSError, data: AuditManager.Types.ListControlDomainInsightsResponse) => void): Request<AuditManager.Types.ListControlDomainInsightsResponse, AWSError>;
   /**
-   * Lists analytics data for control domains within a specified active assessment.  A control domain is listed only if at least one of the controls within that domain collected evidence on the lastUpdated date of controlDomainInsights. If this condition isn’t met, no data is listed for that domain. 
+   * Lists analytics data for control domains within a specified active assessment. Audit Manager supports the control domains that are provided by Amazon Web Services Control Catalog. For information about how to find a list of available control domains, see  ListDomains  in the Amazon Web Services Control Catalog API Reference.  A control domain is listed only if at least one of the controls within that domain collected evidence on the lastUpdated date of controlDomainInsights. If this condition isn’t met, no data is listed for that domain. 
    */
   listControlDomainInsightsByAssessment(params: AuditManager.Types.ListControlDomainInsightsByAssessmentRequest, callback?: (err: AWSError, data: AuditManager.Types.ListControlDomainInsightsByAssessmentResponse) => void): Request<AuditManager.Types.ListControlDomainInsightsByAssessmentResponse, AWSError>;
   /**
-   * Lists analytics data for control domains within a specified active assessment.  A control domain is listed only if at least one of the controls within that domain collected evidence on the lastUpdated date of controlDomainInsights. If this condition isn’t met, no data is listed for that domain. 
+   * Lists analytics data for control domains within a specified active assessment. Audit Manager supports the control domains that are provided by Amazon Web Services Control Catalog. For information about how to find a list of available control domains, see  ListDomains  in the Amazon Web Services Control Catalog API Reference.  A control domain is listed only if at least one of the controls within that domain collected evidence on the lastUpdated date of controlDomainInsights. If this condition isn’t met, no data is listed for that domain. 
    */
   listControlDomainInsightsByAssessment(callback?: (err: AWSError, data: AuditManager.Types.ListControlDomainInsightsByAssessmentResponse) => void): Request<AuditManager.Types.ListControlDomainInsightsByAssessmentResponse, AWSError>;
   /**
@@ -372,11 +372,11 @@ declare class AuditManager extends Service {
    */
   listControls(callback?: (err: AWSError, data: AuditManager.Types.ListControlsResponse) => void): Request<AuditManager.Types.ListControlsResponse, AWSError>;
   /**
-   *  Returns a list of keywords that are pre-mapped to the specified control data source. 
+   * Returns a list of keywords that are pre-mapped to the specified control data source.
    */
   listKeywordsForDataSource(params: AuditManager.Types.ListKeywordsForDataSourceRequest, callback?: (err: AWSError, data: AuditManager.Types.ListKeywordsForDataSourceResponse) => void): Request<AuditManager.Types.ListKeywordsForDataSourceResponse, AWSError>;
   /**
-   *  Returns a list of keywords that are pre-mapped to the specified control data source. 
+   * Returns a list of keywords that are pre-mapped to the specified control data source.
    */
   listKeywordsForDataSource(callback?: (err: AWSError, data: AuditManager.Types.ListKeywordsForDataSourceResponse) => void): Request<AuditManager.Types.ListKeywordsForDataSourceResponse, AWSError>;
   /**
@@ -1273,7 +1273,12 @@ declare namespace AuditManager {
      *  The tags associated with the control. 
      */
     tags?: TagMap;
+    /**
+     * The state of the control. The END_OF_SUPPORT state is applicable to standard controls only. This state indicates that the standard control can still be used to collect evidence, but Audit Manager is no longer updating or maintaining that control.
+     */
+    state?: ControlState;
   }
+  export type ControlCatalogId = string;
   export interface ControlComment {
     /**
      *  The name of the user who authored the comment. 
@@ -1291,15 +1296,16 @@ declare namespace AuditManager {
   export type ControlCommentBody = string;
   export type ControlComments = ControlComment[];
   export type ControlDescription = string;
+  export type ControlDomainId = string;
   export interface ControlDomainInsights {
     /**
      * The name of the control domain. 
      */
-    name?: NonEmptyString;
+    name?: String;
     /**
-     * The unique identifier for the control domain. 
+     * The unique identifier for the control domain. Audit Manager supports the control domains that are provided by Amazon Web Services Control Catalog. For information about how to find a list of available control domains, see  ListDomains  in the Amazon Web Services Control Catalog API Reference.
      */
-    id?: UUID;
+    id?: ControlDomainId;
     /**
      * The number of controls in the control domain that collected non-compliant evidence on the lastUpdated date. 
      */
@@ -1324,11 +1330,11 @@ declare namespace AuditManager {
     /**
      * The name of the assessment control. 
      */
-    name?: NonEmptyString;
+    name?: String;
     /**
      * The unique identifier for the assessment control. 
      */
-    id?: UUID;
+    id?: ControlDomainId;
     /**
      * A breakdown of the compliance check status for the evidence that’s associated with the assessment control. 
      */
@@ -1346,11 +1352,11 @@ declare namespace AuditManager {
     /**
      * The name of the control. 
      */
-    name?: NonEmptyString;
+    name?: String;
     /**
      * The unique identifier for the control. 
      */
-    id?: UUID;
+    id?: ControlDomainId;
     /**
      * A breakdown of the compliance check status for the evidence that’s associated with the control. 
      */
@@ -1374,11 +1380,11 @@ declare namespace AuditManager {
      */
     sourceDescription?: SourceDescription;
     /**
-     *  The setup option for the data source. This option reflects if the evidence collection is automated or manual. 
+     * The setup option for the data source. This option reflects if the evidence collection method is automated or manual. If you don’t provide a value for sourceSetUpOption, Audit Manager automatically infers and populates the correct value based on the sourceType that you specify.
      */
     sourceSetUpOption?: SourceSetUpOption;
     /**
-     *  Specifies one of the five data source types for evidence collection. 
+     *  Specifies which type of data source is used to collect evidence.    The source can be an individual data source type, such as AWS_Cloudtrail, AWS_Config, AWS_Security_Hub, AWS_API_Call, or MANUAL.    The source can also be a managed grouping of data sources, such as a Core_Control or a Common_Control.  
      */
     sourceType?: SourceType;
     sourceKeyword?: SourceKeyword;
@@ -1441,8 +1447,9 @@ declare namespace AuditManager {
   export type ControlSets = ControlSet[];
   export type ControlSetsCount = number;
   export type ControlSources = string;
+  export type ControlState = "ACTIVE"|"END_OF_SUPPORT"|string;
   export type ControlStatus = "UNDER_REVIEW"|"REVIEWED"|"INACTIVE"|string;
-  export type ControlType = "Standard"|"Custom"|string;
+  export type ControlType = "Standard"|"Custom"|"Core"|string;
   export type Controls = Control[];
   export type ControlsCount = number;
   export interface CreateAssessmentFrameworkControl {
@@ -1555,11 +1562,11 @@ declare namespace AuditManager {
      */
     sourceDescription?: SourceDescription;
     /**
-     *  The setup option for the data source, which reflects if the evidence collection is automated or manual. 
+     * The setup option for the data source. This option reflects if the evidence collection method is automated or manual. If you don’t provide a value for sourceSetUpOption, Audit Manager automatically infers and populates the correct value based on the sourceType that you specify.
      */
     sourceSetUpOption?: SourceSetUpOption;
     /**
-     *  Specifies one of the five types of data sources for evidence collection. 
+     *  Specifies which type of data source is used to collect evidence.    The source can be an individual data source type, such as AWS_Cloudtrail, AWS_Config, AWS_Security_Hub, AWS_API_Call, or MANUAL.    The source can also be a managed grouping of data sources, such as a Core_Control or a Common_Control.  
      */
     sourceType?: SourceType;
     sourceKeyword?: SourceKeyword;
@@ -1629,6 +1636,7 @@ declare namespace AuditManager {
   }
   export type CreateDelegationRequests = CreateDelegationRequest[];
   export type CreatedBy = string;
+  export type DataSourceType = "AWS_Cloudtrail"|"AWS_Config"|"AWS_Security_Hub"|"AWS_API_Call"|"MANUAL"|string;
   export interface DefaultExportDestination {
     /**
      * The destination type, such as Amazon S3.
@@ -2365,9 +2373,9 @@ declare namespace AuditManager {
   export type LastUpdatedBy = string;
   export interface ListAssessmentControlInsightsByControlDomainRequest {
     /**
-     * The unique identifier for the control domain. 
+     * The unique identifier for the control domain.  Audit Manager supports the control domains that are provided by Amazon Web Services Control Catalog. For information about how to find a list of available control domains, see  ListDomains  in the Amazon Web Services Control Catalog API Reference.
      */
-    controlDomainId: UUID;
+    controlDomainId: ControlDomainId;
     /**
      * The unique identifier for the active assessment. 
      */
@@ -2530,9 +2538,9 @@ declare namespace AuditManager {
   }
   export interface ListControlInsightsByControlDomainRequest {
     /**
-     * The unique identifier for the control domain. 
+     * The unique identifier for the control domain.  Audit Manager supports the control domains that are provided by Amazon Web Services Control Catalog. For information about how to find a list of available control domains, see  ListDomains  in the Amazon Web Services Control Catalog API Reference.
      */
-    controlDomainId: UUID;
+    controlDomainId: ControlDomainId;
     /**
      * The pagination token that's used to fetch the next set of results. 
      */
@@ -2554,17 +2562,21 @@ declare namespace AuditManager {
   }
   export interface ListControlsRequest {
     /**
-     *  The type of control, such as a standard control or a custom control. 
+     * A filter that narrows the list of controls to a specific type. 
      */
     controlType: ControlType;
     /**
-     *  The pagination token that's used to fetch the next set of results. 
+     * The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
     /**
-     *  Represents the maximum number of results on a page or for an API request call. 
+     * The maximum number of results on a page or for an API request call. 
      */
     maxResults?: MaxResults;
+    /**
+     * A filter that narrows the list of controls to a specific resource from the Amazon Web Services Control Catalog.  To use this parameter, specify the ARN of the Control Catalog resource. You can specify either a control domain, a control objective, or a common control. For information about how to find the ARNs for these resources, see  ListDomains ,  ListObjectives , and  ListCommonControls .  You can only filter by one Control Catalog resource at a time. Specifying multiple resource ARNs isn’t currently supported. If you want to filter by more than one ARN, we recommend that you run the ListControls operation separately for each ARN.   Alternatively, specify UNCATEGORIZED to list controls that aren't mapped to a Control Catalog resource. For example, this operation might return a list of custom controls that don't belong to any control domain or control objective.
+     */
+    controlCatalogId?: ControlCatalogId;
   }
   export interface ListControlsResponse {
     /**
@@ -2572,15 +2584,15 @@ declare namespace AuditManager {
      */
     controlMetadataList?: ControlMetadataList;
     /**
-     *  The pagination token that's used to fetch the next set of results. 
+     * The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
   }
   export interface ListKeywordsForDataSourceRequest {
     /**
-     *  The control mapping data source that the keywords apply to. 
+     * The control mapping data source that the keywords apply to. 
      */
-    source: SourceType;
+    source: DataSourceType;
     /**
      *  The pagination token that's used to fetch the next set of results. 
      */
@@ -2592,7 +2604,7 @@ declare namespace AuditManager {
   }
   export interface ListKeywordsForDataSourceResponse {
     /**
-     *  The list of keywords for the event mapping source. 
+     * The list of keywords for the control mapping source.
      */
     keywords?: Keywords;
     /**
@@ -2757,7 +2769,7 @@ declare namespace AuditManager {
      */
     awsAccounts?: AWSAccounts;
     /**
-     *  The Amazon Web Services services that are included in the scope of the assessment. 
+     *  The Amazon Web Services services that are included in the scope of the assessment.   This API parameter is no longer supported. If you use this parameter to specify one or more Amazon Web Services, Audit Manager ignores this input. Instead, the value for awsServices will show as empty. 
      */
     awsServices?: AWSServices;
   }
@@ -2834,7 +2846,7 @@ declare namespace AuditManager {
   }
   export type SourceName = string;
   export type SourceSetUpOption = "System_Controls_Mapping"|"Procedural_Controls_Mapping"|string;
-  export type SourceType = "AWS_Cloudtrail"|"AWS_Config"|"AWS_Security_Hub"|"AWS_API_Call"|"MANUAL"|string;
+  export type SourceType = "AWS_Cloudtrail"|"AWS_Config"|"AWS_Security_Hub"|"AWS_API_Call"|"MANUAL"|"Common_Control"|"Core_Control"|string;
   export interface StartAssessmentFrameworkShareRequest {
     /**
      *  The unique identifier for the custom framework to be shared. 

@@ -28,11 +28,11 @@ declare class VerifiedPermissions extends Service {
    */
   batchIsAuthorizedWithToken(callback?: (err: AWSError, data: VerifiedPermissions.Types.BatchIsAuthorizedWithTokenOutput) => void): Request<VerifiedPermissions.Types.BatchIsAuthorizedWithTokenOutput, AWSError>;
   /**
-   * Creates a reference to an Amazon Cognito user pool as an external identity provider (IdP).  After you create an identity source, you can use the identities provided by the IdP as proxies for the principal in authorization queries that use the IsAuthorizedWithToken operation. These identities take the form of tokens that contain claims about the user, such as IDs, attributes and group memberships. Amazon Cognito provides both identity tokens and access tokens, and Verified Permissions can use either or both. Any combination of identity and access tokens results in the same Cedar principal. Verified Permissions automatically translates the information about the identities into the standard Cedar attributes that can be evaluated by your policies. Because the Amazon Cognito identity and access tokens can contain different information, the tokens you choose to use determine which principal attributes are available to access when evaluating Cedar policies.  If you delete a Amazon Cognito user pool or user, tokens from that deleted pool or that deleted user continue to be usable until they expire.   To reference a user from this identity source in your Cedar policies, use the following syntax.  IdentityType::"&lt;CognitoUserPoolIdentifier&gt;|&lt;CognitoClientId&gt;  Where IdentityType is the string that you provide to the PrincipalEntityType parameter for this operation. The CognitoUserPoolId and CognitoClientId are defined by the Amazon Cognito user pool.   Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations. 
+   * Adds an identity source to a policy store–an Amazon Cognito user pool or OpenID Connect (OIDC) identity provider (IdP).  After you create an identity source, you can use the identities provided by the IdP as proxies for the principal in authorization queries that use the IsAuthorizedWithToken or BatchIsAuthorizedWithToken API operations. These identities take the form of tokens that contain claims about the user, such as IDs, attributes and group memberships. Identity sources provide identity (ID) tokens and access tokens. Verified Permissions derives information about your user and session from token claims. Access tokens provide action context to your policies, and ID tokens provide principal Attributes.  Tokens from an identity source user continue to be usable until they expire. Token revocation and resource deletion have no effect on the validity of a token in your policy store   To reference a user from this identity source in your Cedar policies, refer to the following syntax examples.   Amazon Cognito user pool: Namespace::[Entity type]::[User pool ID]|[user principal attribute], for example MyCorp::User::us-east-1_EXAMPLE|a1b2c3d4-5678-90ab-cdef-EXAMPLE11111.   OpenID Connect (OIDC) provider: Namespace::[Entity type]::[principalIdClaim]|[user principal attribute], for example MyCorp::User::MyOIDCProvider|a1b2c3d4-5678-90ab-cdef-EXAMPLE22222.     Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations. 
    */
   createIdentitySource(params: VerifiedPermissions.Types.CreateIdentitySourceInput, callback?: (err: AWSError, data: VerifiedPermissions.Types.CreateIdentitySourceOutput) => void): Request<VerifiedPermissions.Types.CreateIdentitySourceOutput, AWSError>;
   /**
-   * Creates a reference to an Amazon Cognito user pool as an external identity provider (IdP).  After you create an identity source, you can use the identities provided by the IdP as proxies for the principal in authorization queries that use the IsAuthorizedWithToken operation. These identities take the form of tokens that contain claims about the user, such as IDs, attributes and group memberships. Amazon Cognito provides both identity tokens and access tokens, and Verified Permissions can use either or both. Any combination of identity and access tokens results in the same Cedar principal. Verified Permissions automatically translates the information about the identities into the standard Cedar attributes that can be evaluated by your policies. Because the Amazon Cognito identity and access tokens can contain different information, the tokens you choose to use determine which principal attributes are available to access when evaluating Cedar policies.  If you delete a Amazon Cognito user pool or user, tokens from that deleted pool or that deleted user continue to be usable until they expire.   To reference a user from this identity source in your Cedar policies, use the following syntax.  IdentityType::"&lt;CognitoUserPoolIdentifier&gt;|&lt;CognitoClientId&gt;  Where IdentityType is the string that you provide to the PrincipalEntityType parameter for this operation. The CognitoUserPoolId and CognitoClientId are defined by the Amazon Cognito user pool.   Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations. 
+   * Adds an identity source to a policy store–an Amazon Cognito user pool or OpenID Connect (OIDC) identity provider (IdP).  After you create an identity source, you can use the identities provided by the IdP as proxies for the principal in authorization queries that use the IsAuthorizedWithToken or BatchIsAuthorizedWithToken API operations. These identities take the form of tokens that contain claims about the user, such as IDs, attributes and group memberships. Identity sources provide identity (ID) tokens and access tokens. Verified Permissions derives information about your user and session from token claims. Access tokens provide action context to your policies, and ID tokens provide principal Attributes.  Tokens from an identity source user continue to be usable until they expire. Token revocation and resource deletion have no effect on the validity of a token in your policy store   To reference a user from this identity source in your Cedar policies, refer to the following syntax examples.   Amazon Cognito user pool: Namespace::[Entity type]::[User pool ID]|[user principal attribute], for example MyCorp::User::us-east-1_EXAMPLE|a1b2c3d4-5678-90ab-cdef-EXAMPLE11111.   OpenID Connect (OIDC) provider: Namespace::[Entity type]::[principalIdClaim]|[user principal attribute], for example MyCorp::User::MyOIDCProvider|a1b2c3d4-5678-90ab-cdef-EXAMPLE22222.     Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations. 
    */
   createIdentitySource(callback?: (err: AWSError, data: VerifiedPermissions.Types.CreateIdentitySourceOutput) => void): Request<VerifiedPermissions.Types.CreateIdentitySourceOutput, AWSError>;
   /**
@@ -140,11 +140,11 @@ declare class VerifiedPermissions extends Service {
    */
   isAuthorized(callback?: (err: AWSError, data: VerifiedPermissions.Types.IsAuthorizedOutput) => void): Request<VerifiedPermissions.Types.IsAuthorizedOutput, AWSError>;
   /**
-   * Makes an authorization decision about a service request described in the parameters. The principal in this request comes from an external identity source in the form of an identity token formatted as a JSON web token (JWT). The information in the parameters can also define additional context that Verified Permissions can include in the evaluation. The request is evaluated against all matching policies in the specified policy store. The result of the decision is either Allow or Deny, along with a list of the policies that resulted in the decision. At this time, Verified Permissions accepts tokens from only Amazon Cognito. Verified Permissions validates each token that is specified in a request by checking its expiration date and its signature.  If you delete a Amazon Cognito user pool or user, tokens from that deleted pool or that deleted user continue to be usable until they expire. 
+   * Makes an authorization decision about a service request described in the parameters. The principal in this request comes from an external identity source in the form of an identity token formatted as a JSON web token (JWT). The information in the parameters can also define additional context that Verified Permissions can include in the evaluation. The request is evaluated against all matching policies in the specified policy store. The result of the decision is either Allow or Deny, along with a list of the policies that resulted in the decision. At this time, Verified Permissions accepts tokens from only Amazon Cognito. Verified Permissions validates each token that is specified in a request by checking its expiration date and its signature.  Tokens from an identity source user continue to be usable until they expire. Token revocation and resource deletion have no effect on the validity of a token in your policy store 
    */
   isAuthorizedWithToken(params: VerifiedPermissions.Types.IsAuthorizedWithTokenInput, callback?: (err: AWSError, data: VerifiedPermissions.Types.IsAuthorizedWithTokenOutput) => void): Request<VerifiedPermissions.Types.IsAuthorizedWithTokenOutput, AWSError>;
   /**
-   * Makes an authorization decision about a service request described in the parameters. The principal in this request comes from an external identity source in the form of an identity token formatted as a JSON web token (JWT). The information in the parameters can also define additional context that Verified Permissions can include in the evaluation. The request is evaluated against all matching policies in the specified policy store. The result of the decision is either Allow or Deny, along with a list of the policies that resulted in the decision. At this time, Verified Permissions accepts tokens from only Amazon Cognito. Verified Permissions validates each token that is specified in a request by checking its expiration date and its signature.  If you delete a Amazon Cognito user pool or user, tokens from that deleted pool or that deleted user continue to be usable until they expire. 
+   * Makes an authorization decision about a service request described in the parameters. The principal in this request comes from an external identity source in the form of an identity token formatted as a JSON web token (JWT). The information in the parameters can also define additional context that Verified Permissions can include in the evaluation. The request is evaluated against all matching policies in the specified policy store. The result of the decision is either Allow or Deny, along with a list of the policies that resulted in the decision. At this time, Verified Permissions accepts tokens from only Amazon Cognito. Verified Permissions validates each token that is specified in a request by checking its expiration date and its signature.  Tokens from an identity source user continue to be usable until they expire. Token revocation and resource deletion have no effect on the validity of a token in your policy store 
    */
   isAuthorizedWithToken(callback?: (err: AWSError, data: VerifiedPermissions.Types.IsAuthorizedWithTokenOutput) => void): Request<VerifiedPermissions.Types.IsAuthorizedWithTokenOutput, AWSError>;
   /**
@@ -188,11 +188,11 @@ declare class VerifiedPermissions extends Service {
    */
   putSchema(callback?: (err: AWSError, data: VerifiedPermissions.Types.PutSchemaOutput) => void): Request<VerifiedPermissions.Types.PutSchemaOutput, AWSError>;
   /**
-   * Updates the specified identity source to use a new identity provider (IdP) source, or to change the mapping of identities from the IdP to a different principal entity type.  Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations. 
+   * Updates the specified identity source to use a new identity provider (IdP), or to change the mapping of identities from the IdP to a different principal entity type.  Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations. 
    */
   updateIdentitySource(params: VerifiedPermissions.Types.UpdateIdentitySourceInput, callback?: (err: AWSError, data: VerifiedPermissions.Types.UpdateIdentitySourceOutput) => void): Request<VerifiedPermissions.Types.UpdateIdentitySourceOutput, AWSError>;
   /**
-   * Updates the specified identity source to use a new identity provider (IdP) source, or to change the mapping of identities from the IdP to a different principal entity type.  Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations. 
+   * Updates the specified identity source to use a new identity provider (IdP), or to change the mapping of identities from the IdP to a different principal entity type.  Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations. 
    */
   updateIdentitySource(callback?: (err: AWSError, data: VerifiedPermissions.Types.UpdateIdentitySourceOutput) => void): Request<VerifiedPermissions.Types.UpdateIdentitySourceOutput, AWSError>;
   /**
@@ -260,6 +260,8 @@ declare namespace VerifiedPermissions {
      */
     record?: RecordAttribute;
   }
+  export type Audience = string;
+  export type Audiences = Audience[];
   export interface BatchIsAuthorizedInput {
     /**
      * Specifies the ID of the policy store. Policies in this policy store will be used to make the authorization decisions for the input.
@@ -386,6 +388,7 @@ declare namespace VerifiedPermissions {
   export type BatchIsAuthorizedWithTokenOutputList = BatchIsAuthorizedWithTokenOutputItem[];
   export type Boolean = boolean;
   export type BooleanAttribute = boolean;
+  export type Claim = string;
   export type ClientId = string;
   export type ClientIds = ClientId[];
   export interface CognitoGroupConfiguration {
@@ -461,18 +464,30 @@ declare namespace VerifiedPermissions {
      * Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of authenticated identities as entities. It specifies the Amazon Resource Name (ARN) of a Amazon Cognito user pool and one or more application client IDs. Example: "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds": ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType": "MyCorp::Group"}}} 
      */
     cognitoUserPoolConfiguration?: CognitoUserPoolConfiguration;
+    /**
+     * Contains configuration details of an OpenID Connect (OIDC) identity provider, or identity source, that Verified Permissions can use to generate entities from authenticated identities. It specifies the issuer URL, token type that you want to use, and policy store entity details. Example:"configuration":{"openIdConnectConfiguration":{"issuer":"https://auth.example.com","tokenSelection":{"accessTokenOnly":{"audiences":["https://myapp.example.com","https://myapp2.example.com"],"principalIdClaim":"sub"}},"entityIdPrefix":"MyOIDCProvider","groupConfiguration":{"groupClaim":"groups","groupEntityType":"MyCorp::UserGroup"}}} 
+     */
+    openIdConnectConfiguration?: OpenIdConnectConfiguration;
   }
   export interface ConfigurationDetail {
     /**
      * Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of authenticated identities as entities. It specifies the Amazon Resource Name (ARN) of a Amazon Cognito user pool, the policy store entity that you want to assign to user groups, and one or more application client IDs. Example: "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds": ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType": "MyCorp::Group"}}} 
      */
     cognitoUserPoolConfiguration?: CognitoUserPoolConfigurationDetail;
+    /**
+     * Contains configuration details of an OpenID Connect (OIDC) identity provider, or identity source, that Verified Permissions can use to generate entities from authenticated identities. It specifies the issuer URL, token type that you want to use, and policy store entity details. Example:"configuration":{"openIdConnectConfiguration":{"issuer":"https://auth.example.com","tokenSelection":{"accessTokenOnly":{"audiences":["https://myapp.example.com","https://myapp2.example.com"],"principalIdClaim":"sub"}},"entityIdPrefix":"MyOIDCProvider","groupConfiguration":{"groupClaim":"groups","groupEntityType":"MyCorp::UserGroup"}}} 
+     */
+    openIdConnectConfiguration?: OpenIdConnectConfigurationDetail;
   }
   export interface ConfigurationItem {
     /**
      * Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of authenticated identities as entities. It specifies the Amazon Resource Name (ARN) of a Amazon Cognito user pool, the policy store entity that you want to assign to user groups, and one or more application client IDs. Example: "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds": ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType": "MyCorp::Group"}}} 
      */
     cognitoUserPoolConfiguration?: CognitoUserPoolConfigurationItem;
+    /**
+     * Contains configuration details of an OpenID Connect (OIDC) identity provider, or identity source, that Verified Permissions can use to generate entities from authenticated identities. It specifies the issuer URL, token type that you want to use, and policy store entity details. Example:"configuration":{"openIdConnectConfiguration":{"issuer":"https://auth.example.com","tokenSelection":{"accessTokenOnly":{"audiences":["https://myapp.example.com","https://myapp2.example.com"],"principalIdClaim":"sub"}},"entityIdPrefix":"MyOIDCProvider","groupConfiguration":{"groupClaim":"groups","groupEntityType":"MyCorp::UserGroup"}}} 
+     */
+    openIdConnectConfiguration?: OpenIdConnectConfigurationItem;
   }
   export interface ContextDefinition {
     /**
@@ -491,7 +506,7 @@ declare namespace VerifiedPermissions {
      */
     policyStoreId: PolicyStoreId;
     /**
-     * Specifies the details required to communicate with the identity provider (IdP) associated with this identity source.  At this time, the only valid member of this structure is a Amazon Cognito user pool configuration. You must specify a UserPoolArn, and optionally, a ClientId. 
+     * Specifies the details required to communicate with the identity provider (IdP) associated with this identity source.
      */
     configuration: Configuration;
     /**
@@ -698,6 +713,7 @@ declare namespace VerifiedPermissions {
   }
   export type EntityAttributes = {[key: string]: AttributeValue};
   export type EntityId = string;
+  export type EntityIdPrefix = string;
   export interface EntityIdentifier {
     /**
      * The type of an entity. Example: "entityType":"typeName" 
@@ -718,7 +734,7 @@ declare namespace VerifiedPermissions {
      */
     attributes?: EntityAttributes;
     /**
-     * The parents in the hierarchy that contains the entity.
+     * The parent entities in the hierarchy that contains the entity. A principal or resource entity can be defined with at most 99 transitive parents per authorization request.  A transitive parent is an entity in the hierarchy of entities including all direct parents, and parents of parents. For example, a user can be a member of 91 groups if one of those groups is a member of eight groups, for a total of 100: one entity, 91 entity parents, and eight parents of parents. 
      */
     parents?: ParentList;
   }
@@ -1201,6 +1217,180 @@ declare namespace VerifiedPermissions {
   export type Namespace = string;
   export type NamespaceList = Namespace[];
   export type NextToken = string;
+  export interface OpenIdConnectAccessTokenConfiguration {
+    /**
+     * The claim that determines the principal in OIDC access tokens. For example, sub.
+     */
+    principalIdClaim?: Claim;
+    /**
+     * The access token aud claim values that you want to accept in your policy store. For example, https://myapp.example.com, https://myapp2.example.com.
+     */
+    audiences?: Audiences;
+  }
+  export interface OpenIdConnectAccessTokenConfigurationDetail {
+    /**
+     * The claim that determines the principal in OIDC access tokens. For example, sub.
+     */
+    principalIdClaim?: Claim;
+    /**
+     * The access token aud claim values that you want to accept in your policy store. For example, https://myapp.example.com, https://myapp2.example.com.
+     */
+    audiences?: Audiences;
+  }
+  export interface OpenIdConnectAccessTokenConfigurationItem {
+    /**
+     * The claim that determines the principal in OIDC access tokens. For example, sub.
+     */
+    principalIdClaim?: Claim;
+    /**
+     * The access token aud claim values that you want to accept in your policy store. For example, https://myapp.example.com, https://myapp2.example.com.
+     */
+    audiences?: Audiences;
+  }
+  export interface OpenIdConnectConfiguration {
+    /**
+     * The issuer URL of an OIDC identity provider. This URL must have an OIDC discovery endpoint at the path .well-known/openid-configuration.
+     */
+    issuer: Issuer;
+    /**
+     * A descriptive string that you want to prefix to user entities from your OIDC identity provider. For example, if you set an entityIdPrefix of MyOIDCProvider, you can reference principals in your policies in the format MyCorp::User::MyOIDCProvider|Carlos.
+     */
+    entityIdPrefix?: EntityIdPrefix;
+    /**
+     * The claim in OIDC identity provider tokens that indicates a user's group membership, and the entity type that you want to map it to. For example, this object can map the contents of a groups claim to MyCorp::UserGroup.
+     */
+    groupConfiguration?: OpenIdConnectGroupConfiguration;
+    /**
+     * The token type that you want to process from your OIDC identity provider. Your policy store can process either identity (ID) or access tokens from a given OIDC identity source.
+     */
+    tokenSelection: OpenIdConnectTokenSelection;
+  }
+  export interface OpenIdConnectConfigurationDetail {
+    /**
+     * The issuer URL of an OIDC identity provider. This URL must have an OIDC discovery endpoint at the path .well-known/openid-configuration.
+     */
+    issuer: Issuer;
+    /**
+     * A descriptive string that you want to prefix to user entities from your OIDC identity provider. For example, if you set an entityIdPrefix of MyOIDCProvider, you can reference principals in your policies in the format MyCorp::User::MyOIDCProvider|Carlos.
+     */
+    entityIdPrefix?: EntityIdPrefix;
+    /**
+     * The claim in OIDC identity provider tokens that indicates a user's group membership, and the entity type that you want to map it to. For example, this object can map the contents of a groups claim to MyCorp::UserGroup.
+     */
+    groupConfiguration?: OpenIdConnectGroupConfigurationDetail;
+    /**
+     * The token type that you want to process from your OIDC identity provider. Your policy store can process either identity (ID) or access tokens from a given OIDC identity source.
+     */
+    tokenSelection: OpenIdConnectTokenSelectionDetail;
+  }
+  export interface OpenIdConnectConfigurationItem {
+    /**
+     * The issuer URL of an OIDC identity provider. This URL must have an OIDC discovery endpoint at the path .well-known/openid-configuration.
+     */
+    issuer: Issuer;
+    /**
+     * A descriptive string that you want to prefix to user entities from your OIDC identity provider. For example, if you set an entityIdPrefix of MyOIDCProvider, you can reference principals in your policies in the format MyCorp::User::MyOIDCProvider|Carlos.
+     */
+    entityIdPrefix?: EntityIdPrefix;
+    /**
+     * The claim in OIDC identity provider tokens that indicates a user's group membership, and the entity type that you want to map it to. For example, this object can map the contents of a groups claim to MyCorp::UserGroup.
+     */
+    groupConfiguration?: OpenIdConnectGroupConfigurationItem;
+    /**
+     * The token type that you want to process from your OIDC identity provider. Your policy store can process either identity (ID) or access tokens from a given OIDC identity source.
+     */
+    tokenSelection: OpenIdConnectTokenSelectionItem;
+  }
+  export interface OpenIdConnectGroupConfiguration {
+    /**
+     * The token claim that you want Verified Permissions to interpret as group membership. For example, groups.
+     */
+    groupClaim: Claim;
+    /**
+     * The policy store entity type that you want to map your users' group claim to. For example, MyCorp::UserGroup. A group entity type is an entity that can have a user entity type as a member.
+     */
+    groupEntityType: GroupEntityType;
+  }
+  export interface OpenIdConnectGroupConfigurationDetail {
+    /**
+     * The token claim that you want Verified Permissions to interpret as group membership. For example, groups.
+     */
+    groupClaim: Claim;
+    /**
+     * The policy store entity type that you want to map your users' group claim to. For example, MyCorp::UserGroup. A group entity type is an entity that can have a user entity type as a member.
+     */
+    groupEntityType: GroupEntityType;
+  }
+  export interface OpenIdConnectGroupConfigurationItem {
+    /**
+     * The token claim that you want Verified Permissions to interpret as group membership. For example, groups.
+     */
+    groupClaim: Claim;
+    /**
+     * The policy store entity type that you want to map your users' group claim to. For example, MyCorp::UserGroup. A group entity type is an entity that can have a user entity type as a member.
+     */
+    groupEntityType: GroupEntityType;
+  }
+  export interface OpenIdConnectIdentityTokenConfiguration {
+    /**
+     * The claim that determines the principal in OIDC access tokens. For example, sub.
+     */
+    principalIdClaim?: Claim;
+    /**
+     * The ID token audience, or client ID, claim values that you want to accept in your policy store from an OIDC identity provider. For example, 1example23456789, 2example10111213.
+     */
+    clientIds?: ClientIds;
+  }
+  export interface OpenIdConnectIdentityTokenConfigurationDetail {
+    /**
+     * The claim that determines the principal in OIDC access tokens. For example, sub.
+     */
+    principalIdClaim?: Claim;
+    /**
+     * The ID token audience, or client ID, claim values that you want to accept in your policy store from an OIDC identity provider. For example, 1example23456789, 2example10111213.
+     */
+    clientIds?: ClientIds;
+  }
+  export interface OpenIdConnectIdentityTokenConfigurationItem {
+    /**
+     * The claim that determines the principal in OIDC access tokens. For example, sub.
+     */
+    principalIdClaim?: Claim;
+    /**
+     * The ID token audience, or client ID, claim values that you want to accept in your policy store from an OIDC identity provider. For example, 1example23456789, 2example10111213.
+     */
+    clientIds?: ClientIds;
+  }
+  export interface OpenIdConnectTokenSelection {
+    /**
+     * The OIDC configuration for processing access tokens. Contains allowed audience claims, for example https://auth.example.com, and the claim that you want to map to the principal, for example sub.
+     */
+    accessTokenOnly?: OpenIdConnectAccessTokenConfiguration;
+    /**
+     * The OIDC configuration for processing identity (ID) tokens. Contains allowed client ID claims, for example 1example23456789, and the claim that you want to map to the principal, for example sub.
+     */
+    identityTokenOnly?: OpenIdConnectIdentityTokenConfiguration;
+  }
+  export interface OpenIdConnectTokenSelectionDetail {
+    /**
+     * The OIDC configuration for processing access tokens. Contains allowed audience claims, for example https://auth.example.com, and the claim that you want to map to the principal, for example sub.
+     */
+    accessTokenOnly?: OpenIdConnectAccessTokenConfigurationDetail;
+    /**
+     * The OIDC configuration for processing identity (ID) tokens. Contains allowed client ID claims, for example 1example23456789, and the claim that you want to map to the principal, for example sub.
+     */
+    identityTokenOnly?: OpenIdConnectIdentityTokenConfigurationDetail;
+  }
+  export interface OpenIdConnectTokenSelectionItem {
+    /**
+     * The OIDC configuration for processing access tokens. Contains allowed audience claims, for example https://auth.example.com, and the claim that you want to map to the principal, for example sub.
+     */
+    accessTokenOnly?: OpenIdConnectAccessTokenConfigurationItem;
+    /**
+     * The OIDC configuration for processing identity (ID) tokens. Contains allowed client ID claims, for example 1example23456789, and the claim that you want to map to the principal, for example sub.
+     */
+    identityTokenOnly?: OpenIdConnectIdentityTokenConfigurationItem;
+  }
   export type OpenIdIssuer = "COGNITO"|string;
   export type ParentList = EntityIdentifier[];
   export interface PolicyDefinition {
@@ -1485,6 +1675,10 @@ declare namespace VerifiedPermissions {
      * Contains configuration details of a Amazon Cognito user pool.
      */
     cognitoUserPoolConfiguration?: UpdateCognitoUserPoolConfiguration;
+    /**
+     * Contains configuration details of an OpenID Connect (OIDC) identity provider, or identity source, that Verified Permissions can use to generate entities from authenticated identities. It specifies the issuer URL, token type that you want to use, and policy store entity details.
+     */
+    openIdConnectConfiguration?: UpdateOpenIdConnectConfiguration;
   }
   export interface UpdateIdentitySourceInput {
     /**
@@ -1521,6 +1715,64 @@ declare namespace VerifiedPermissions {
      * The ID of the policy store that contains the updated identity source.
      */
     policyStoreId: PolicyStoreId;
+  }
+  export interface UpdateOpenIdConnectAccessTokenConfiguration {
+    /**
+     * The claim that determines the principal in OIDC access tokens. For example, sub.
+     */
+    principalIdClaim?: Claim;
+    /**
+     * The access token aud claim values that you want to accept in your policy store. For example, https://myapp.example.com, https://myapp2.example.com.
+     */
+    audiences?: Audiences;
+  }
+  export interface UpdateOpenIdConnectConfiguration {
+    /**
+     * The issuer URL of an OIDC identity provider. This URL must have an OIDC discovery endpoint at the path .well-known/openid-configuration.
+     */
+    issuer: Issuer;
+    /**
+     * A descriptive string that you want to prefix to user entities from your OIDC identity provider. For example, if you set an entityIdPrefix of MyOIDCProvider, you can reference principals in your policies in the format MyCorp::User::MyOIDCProvider|Carlos.
+     */
+    entityIdPrefix?: EntityIdPrefix;
+    /**
+     * The claim in OIDC identity provider tokens that indicates a user's group membership, and the entity type that you want to map it to. For example, this object can map the contents of a groups claim to MyCorp::UserGroup.
+     */
+    groupConfiguration?: UpdateOpenIdConnectGroupConfiguration;
+    /**
+     * The token type that you want to process from your OIDC identity provider. Your policy store can process either identity (ID) or access tokens from a given OIDC identity source.
+     */
+    tokenSelection: UpdateOpenIdConnectTokenSelection;
+  }
+  export interface UpdateOpenIdConnectGroupConfiguration {
+    /**
+     * The token claim that you want Verified Permissions to interpret as group membership. For example, groups.
+     */
+    groupClaim: Claim;
+    /**
+     * The policy store entity type that you want to map your users' group claim to. For example, MyCorp::UserGroup. A group entity type is an entity that can have a user entity type as a member.
+     */
+    groupEntityType: GroupEntityType;
+  }
+  export interface UpdateOpenIdConnectIdentityTokenConfiguration {
+    /**
+     * The claim that determines the principal in OIDC access tokens. For example, sub.
+     */
+    principalIdClaim?: Claim;
+    /**
+     * The ID token audience, or client ID, claim values that you want to accept in your policy store from an OIDC identity provider. For example, 1example23456789, 2example10111213.
+     */
+    clientIds?: ClientIds;
+  }
+  export interface UpdateOpenIdConnectTokenSelection {
+    /**
+     * The OIDC configuration for processing access tokens. Contains allowed audience claims, for example https://auth.example.com, and the claim that you want to map to the principal, for example sub.
+     */
+    accessTokenOnly?: UpdateOpenIdConnectAccessTokenConfiguration;
+    /**
+     * The OIDC configuration for processing identity (ID) tokens. Contains allowed client ID claims, for example 1example23456789, and the claim that you want to map to the principal, for example sub.
+     */
+    identityTokenOnly?: UpdateOpenIdConnectIdentityTokenConfiguration;
   }
   export interface UpdatePolicyDefinition {
     /**

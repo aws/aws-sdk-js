@@ -340,7 +340,7 @@ declare namespace B2bi {
     /**
      * Specifies a list of the capabilities associated with this partnership.
      */
-    capabilities?: PartnershipCapabilities;
+    capabilities: PartnershipCapabilities;
     /**
      * Reserved for future use.
      */
