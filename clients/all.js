@@ -381,5 +381,6 @@ module.exports = {
   ControlCatalog: require('./controlcatalog'),
   Route53Profiles: require('./route53profiles'),
   MailManager: require('./mailmanager'),
-  TaxSettings: require('./taxsettings')
+  TaxSettings: require('./taxsettings'),
+  ApplicationSignals: require('./applicationsignals')
 };

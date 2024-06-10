@@ -1424,5 +1424,9 @@
   },
   "taxsettings": {
     "name": "TaxSettings"
+  },
+  "applicationsignals": {
+    "prefix": "application-signals",
+    "name": "ApplicationSignals"
   }
 }

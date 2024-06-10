@@ -380,3 +380,4 @@ export import ControlCatalog = require('./controlcatalog');
 export import Route53Profiles = require('./route53profiles');
 export import MailManager = require('./mailmanager');
 export import TaxSettings = require('./taxsettings');
+export import ApplicationSignals = require('./applicationsignals');

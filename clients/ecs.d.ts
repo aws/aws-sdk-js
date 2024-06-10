@@ -341,11 +341,11 @@ declare class ECS extends Service {
    */
   startTask(callback?: (err: AWSError, data: ECS.Types.StartTaskResponse) => void): Request<ECS.Types.StartTaskResponse, AWSError>;
   /**
-   * Stops a running task. Any tags associated with the task will be deleted. When StopTask is called on a task, the equivalent of docker stop is issued to the containers running in the task. This results in a SIGTERM value and a default 30-second timeout, after which the SIGKILL value is sent and the containers are forcibly stopped. If the container handles the SIGTERM value gracefully and exits within 30 seconds from receiving it, no SIGKILL value is sent.  The default 30-second timeout can be configured on the Amazon ECS container agent with the ECS_CONTAINER_STOP_TIMEOUT variable. For more information, see Amazon ECS Container Agent Configuration in the Amazon Elastic Container Service Developer Guide. 
+   * Stops a running task. Any tags associated with the task will be deleted. When StopTask is called on a task, the equivalent of docker stop is issued to the containers running in the task. This results in a SIGTERM value and a default 30-second timeout, after which the SIGKILL value is sent and the containers are forcibly stopped. If the container handles the SIGTERM value gracefully and exits within 30 seconds from receiving it, no SIGKILL value is sent. For Windows containers, POSIX signals do not work and runtime stops the container by sending a CTRL_SHUTDOWN_EVENT. For more information, see Unable to react to graceful shutdown of (Windows) container #25982 on GitHub.  The default 30-second timeout can be configured on the Amazon ECS container agent with the ECS_CONTAINER_STOP_TIMEOUT variable. For more information, see Amazon ECS Container Agent Configuration in the Amazon Elastic Container Service Developer Guide. 
    */
   stopTask(params: ECS.Types.StopTaskRequest, callback?: (err: AWSError, data: ECS.Types.StopTaskResponse) => void): Request<ECS.Types.StopTaskResponse, AWSError>;
   /**
-   * Stops a running task. Any tags associated with the task will be deleted. When StopTask is called on a task, the equivalent of docker stop is issued to the containers running in the task. This results in a SIGTERM value and a default 30-second timeout, after which the SIGKILL value is sent and the containers are forcibly stopped. If the container handles the SIGTERM value gracefully and exits within 30 seconds from receiving it, no SIGKILL value is sent.  The default 30-second timeout can be configured on the Amazon ECS container agent with the ECS_CONTAINER_STOP_TIMEOUT variable. For more information, see Amazon ECS Container Agent Configuration in the Amazon Elastic Container Service Developer Guide. 
+   * Stops a running task. Any tags associated with the task will be deleted. When StopTask is called on a task, the equivalent of docker stop is issued to the containers running in the task. This results in a SIGTERM value and a default 30-second timeout, after which the SIGKILL value is sent and the containers are forcibly stopped. If the container handles the SIGTERM value gracefully and exits within 30 seconds from receiving it, no SIGKILL value is sent. For Windows containers, POSIX signals do not work and runtime stops the container by sending a CTRL_SHUTDOWN_EVENT. For more information, see Unable to react to graceful shutdown of (Windows) container #25982 on GitHub.  The default 30-second timeout can be configured on the Amazon ECS container agent with the ECS_CONTAINER_STOP_TIMEOUT variable. For more information, see Amazon ECS Container Agent Configuration in the Amazon Elastic Container Service Developer Guide. 
    */
   stopTask(callback?: (err: AWSError, data: ECS.Types.StopTaskResponse) => void): Request<ECS.Types.StopTaskResponse, AWSError>;
   /**
@@ -720,6 +720,10 @@ declare namespace ECS {
      * The details of the execute command configuration.
      */
     executeCommandConfiguration?: ExecuteCommandConfiguration;
+    /**
+     * The details of the managed storage configuration.
+     */
+    managedStorageConfiguration?: ManagedStorageConfiguration;
   }
   export type ClusterField = "ATTACHMENTS"|"CONFIGURATIONS"|"SETTINGS"|"STATISTICS"|"TAGS"|string;
   export type ClusterFieldList = ClusterField[];
@@ -1564,6 +1568,10 @@ declare namespace ECS {
      * The details of the volume that was configuredAtLaunch. You can configure different settings like the size, throughput, volumeType, and ecryption in ServiceManagedEBSVolumeConfiguration. The name of the volume must match the name from the task definition.
      */
     volumeConfigurations?: ServiceVolumeConfigurations;
+    /**
+     * The Fargate ephemeral storage settings for the deployment.
+     */
+    fargateEphemeralStorage?: DeploymentEphemeralStorage;
   }
   export interface DeploymentAlarms {
     /**
@@ -1614,6 +1622,12 @@ declare namespace ECS {
     type: DeploymentControllerType;
   }
   export type DeploymentControllerType = "ECS"|"CODE_DEPLOY"|"EXTERNAL"|string;
+  export interface DeploymentEphemeralStorage {
+    /**
+     * Specify an Key Management Service key ID to encrypt the ephemeral storage for deployment.
+     */
+    kmsKeyId?: String;
+  }
   export type DeploymentRolloutState = "COMPLETED"|"FAILED"|"IN_PROGRESS"|string;
   export type Deployments = Deployment[];
   export interface DeregisterContainerInstanceRequest {
@@ -2656,6 +2670,16 @@ declare namespace ECS {
   export type ManagedScalingStatus = "ENABLED"|"DISABLED"|string;
   export type ManagedScalingStepSize = number;
   export type ManagedScalingTargetCapacity = number;
+  export interface ManagedStorageConfiguration {
+    /**
+     * Specify a Key Management Service key ID to encrypt the managed storage.
+     */
+    kmsKeyId?: String;
+    /**
+     * Specify the Key Management Service key ID for the Fargate ephemeral storage.
+     */
+    fargateEphemeralStorageKmsKeyId?: String;
+  }
   export type ManagedTerminationProtection = "ENABLED"|"DISABLED"|string;
   export interface MountPoint {
     /**
@@ -3001,7 +3025,7 @@ declare namespace ECS {
      */
     ephemeralStorage?: EphemeralStorage;
     /**
-     * The operating system that your tasks definitions run on. A platform family is specified only for tasks using the Fargate launch type.  When you specify a task definition in a service, this value must match the runtimePlatform value of the service.
+     * The operating system that your tasks definitions run on. A platform family is specified only for tasks using the Fargate launch type. 
      */
     runtimePlatform?: RuntimePlatform;
   }
@@ -3050,11 +3074,11 @@ declare namespace ECS {
   }
   export interface ResourceRequirement {
     /**
-     * The value for the specified resource type. If the GPU type is used, the value is the number of physical GPUs the Amazon ECS container agent reserves for the container. The number of GPUs that's reserved for all containers in a task can't exceed the number of available GPUs on the container instance that the task is launched on. If the InferenceAccelerator type is used, the value matches the deviceName for an InferenceAccelerator specified in a task definition.
+     * The value for the specified resource type. When the type is GPU, the value is the number of physical GPUs the Amazon ECS container agent reserves for the container. The number of GPUs that's reserved for all containers in a task can't exceed the number of available GPUs on the container instance that the task is launched on. When the type is InferenceAccelerator, the value matches the deviceName for an InferenceAccelerator specified in a task definition.
      */
     value: String;
     /**
-     * The type of resource to assign to a container. The supported values are GPU or InferenceAccelerator.
+     * The type of resource to assign to a container. 
      */
     type: ResourceType;
   }
@@ -3896,6 +3920,10 @@ declare namespace ECS {
      * The ephemeral storage settings for the task.
      */
     ephemeralStorage?: EphemeralStorage;
+    /**
+     * The Fargate ephemeral storage settings for the task.
+     */
+    fargateEphemeralStorage?: TaskEphemeralStorage;
   }
   export interface TaskDefinition {
     /**
@@ -4012,6 +4040,16 @@ declare namespace ECS {
   export type TaskDefinitionPlacementConstraintType = "memberOf"|string;
   export type TaskDefinitionPlacementConstraints = TaskDefinitionPlacementConstraint[];
   export type TaskDefinitionStatus = "ACTIVE"|"INACTIVE"|"DELETE_IN_PROGRESS"|string;
+  export interface TaskEphemeralStorage {
+    /**
+     * The total amount, in GiB, of the ephemeral storage to set for the task. The minimum supported value is 20 GiB and the maximum supported value is&#x2028; 200 GiB.
+     */
+    sizeInGiB?: Integer;
+    /**
+     * Specify an Key Management Service key ID to encrypt the ephemeral storage for the task.
+     */
+    kmsKeyId?: String;
+  }
   export type TaskField = "TAGS"|string;
   export type TaskFieldList = TaskField[];
   export type TaskFilesystemType = "ext3"|"ext4"|"xfs"|string;
@@ -4194,6 +4232,10 @@ declare namespace ECS {
      * The metadata that you apply to the task set to help you categorize and organize them. Each tag consists of a key and an optional value. You define both. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8   Maximum value length - 256 Unicode characters in UTF-8   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case-sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.  
      */
     tags?: Tags;
+    /**
+     * The Fargate ephemeral storage settings for the task set.
+     */
+    fargateEphemeralStorage?: DeploymentEphemeralStorage;
   }
   export type TaskSetField = "TAGS"|string;
   export type TaskSetFieldList = TaskSetField[];

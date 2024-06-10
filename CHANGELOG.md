@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1637.0-->
+<!--LATEST=2.1638.0-->
 <!--ENTRYINSERT-->
+
+## 2.1638.0
+* feature: ApplicationSignals: This is the initial SDK release for Amazon CloudWatch Application Signals. Amazon CloudWatch Application Signals provides curated application performance monitoring for developers to monitor and troubleshoot application health using pre-built dashboards and Service Level Objectives.
+* feature: ECS: This release introduces a new cluster configuration to support the customer-managed keys for ECS managed storage encryption.
+* feature: Imagebuilder: This release updates the regex pattern for Image Builder ARNs.
 
 ## 2.1637.0
 * feature: AuditManager: New feature: common controls. When creating custom controls, you can now use pre-grouped AWS data sources based on common compliance themes. Also, the awsServices parameter is deprecated because we now manage services in scope for you. If used, the input is ignored and an empty list is returned.
