@@ -3228,6 +3228,9 @@ declare namespace SageMaker {
   export type AttributeName = string;
   export type AttributeNames = AttributeName[];
   export type AuthMode = "SSO"|"IAM"|string;
+  export type AuthenticationRequestExtraParams = {[key: string]: AuthenticationRequestExtraParamsValue};
+  export type AuthenticationRequestExtraParamsKey = string;
+  export type AuthenticationRequestExtraParamsValue = string;
   export type AutoGenerateEndpointName = boolean;
   export type AutoMLAlgorithm = "xgboost"|"linear-learner"|"mlp"|"lightgbm"|"catboost"|"randomforest"|"extra-trees"|"nn-torch"|"fastai"|"cnn-qr"|"deepar"|"prophet"|"npts"|"arima"|"ets"|string;
   export interface AutoMLAlgorithmConfig {
@@ -16203,6 +16206,10 @@ declare namespace SageMaker {
      * The sort order for results. The default is Ascending.
      */
     SortOrder?: SortOrder;
+    /**
+     * A filter that returns either model groups shared with you or model groups in your own account. When the value is CrossAccount, the results show the resources made discoverable to you from other accounts. When the value is SameAccount or null, the results show resources from your account. The default is SameAccount.
+     */
+    CrossAccountFilterOption?: CrossAccountFilterOption;
   }
   export interface ListModelPackageGroupsOutput {
     /**
@@ -19247,6 +19254,14 @@ declare namespace SageMaker {
      * The OIDC IdP JSON Web Key Set (Jwks) URI used to configure your private workforce.
      */
     JwksUri: OidcEndpoint;
+    /**
+     * An array of string identifiers used to refer to the specific pieces of user data or claims that the client application wants to access.
+     */
+    Scope?: Scope;
+    /**
+     * A string to string map of identifiers specific to the custom identity provider (IdP) being used.
+     */
+    AuthenticationRequestExtraParams?: AuthenticationRequestExtraParams;
   }
   export interface OidcConfigForResponse {
     /**
@@ -19277,6 +19292,14 @@ declare namespace SageMaker {
      * The OIDC IdP JSON Web Key Set (Jwks) URI used to configure your private workforce.
      */
     JwksUri?: OidcEndpoint;
+    /**
+     * An array of string identifiers used to refer to the specific pieces of user data or claims that the client application wants to access.
+     */
+    Scope?: Scope;
+    /**
+     * A string to string map of identifiers specific to the custom identity provider (IdP) being used.
+     */
+    AuthenticationRequestExtraParams?: AuthenticationRequestExtraParams;
   }
   export type OidcEndpoint = string;
   export interface OidcMemberDefinition {
@@ -21318,6 +21341,7 @@ declare namespace SageMaker {
   }
   export type ScheduleExpression = string;
   export type ScheduleStatus = "Pending"|"Failed"|"Scheduled"|"Stopped"|string;
+  export type Scope = string;
   export interface SearchExpression {
     /**
      * A list of filter objects.

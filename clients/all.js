@@ -382,5 +382,6 @@ module.exports = {
   Route53Profiles: require('./route53profiles'),
   MailManager: require('./mailmanager'),
   TaxSettings: require('./taxsettings'),
-  ApplicationSignals: require('./applicationsignals')
+  ApplicationSignals: require('./applicationsignals'),
+  PcaConnectorScep: require('./pcaconnectorscep')
 };

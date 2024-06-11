@@ -1428,5 +1428,9 @@
   "applicationsignals": {
     "prefix": "application-signals",
     "name": "ApplicationSignals"
+  },
+  "pcaconnectorscep": {
+    "prefix": "pca-connector-scep",
+    "name": "PcaConnectorScep"
   }
 }

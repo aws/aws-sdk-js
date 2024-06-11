@@ -60,6 +60,14 @@ declare class GuardDuty extends Service {
    */
   createIPSet(callback?: (err: AWSError, data: GuardDuty.Types.CreateIPSetResponse) => void): Request<GuardDuty.Types.CreateIPSetResponse, AWSError>;
   /**
+   * Creates a new Malware Protection plan for the protected resource. When you create a Malware Protection plan, the Amazon Web Services service terms for GuardDuty Malware Protection apply. For more information, see Amazon Web Services service terms for GuardDuty Malware Protection.
+   */
+  createMalwareProtectionPlan(params: GuardDuty.Types.CreateMalwareProtectionPlanRequest, callback?: (err: AWSError, data: GuardDuty.Types.CreateMalwareProtectionPlanResponse) => void): Request<GuardDuty.Types.CreateMalwareProtectionPlanResponse, AWSError>;
+  /**
+   * Creates a new Malware Protection plan for the protected resource. When you create a Malware Protection plan, the Amazon Web Services service terms for GuardDuty Malware Protection apply. For more information, see Amazon Web Services service terms for GuardDuty Malware Protection.
+   */
+  createMalwareProtectionPlan(callback?: (err: AWSError, data: GuardDuty.Types.CreateMalwareProtectionPlanResponse) => void): Request<GuardDuty.Types.CreateMalwareProtectionPlanResponse, AWSError>;
+  /**
    * Creates member accounts of the current Amazon Web Services account by specifying a list of Amazon Web Services account IDs. This step is a prerequisite for managing the associated member accounts either by invitation or through an organization. As a delegated administrator, using CreateMembers will enable GuardDuty in the added member accounts, with the exception of the organization delegated administrator account. A delegated administrator must enable GuardDuty prior to being added as a member. When you use CreateMembers as an Organizations delegated administrator, GuardDuty applies your organization's auto-enable settings to the member accounts in this request, irrespective of the accounts being new or existing members. For more information about the existing auto-enable settings for your organization, see DescribeOrganizationConfiguration. If you disassociate a member account that was added by invitation, the member account details obtained from this API, including the associated email addresses, will be retained. This is done so that the delegated administrator can invoke the InviteMembers API without the need to invoke the CreateMembers API again. To remove the details associated with a member account, the delegated administrator must invoke the DeleteMembers API.  When the member accounts added through Organizations are later disassociated, you (administrator) can't invite them by calling the InviteMembers API. You can create an association with these member accounts again only by calling the CreateMembers API.
    */
   createMembers(params: GuardDuty.Types.CreateMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.CreateMembersResponse) => void): Request<GuardDuty.Types.CreateMembersResponse, AWSError>;
@@ -131,6 +139,14 @@ declare class GuardDuty extends Service {
    * Deletes invitations sent to the current member account by Amazon Web Services accounts specified by their account IDs.
    */
   deleteInvitations(callback?: (err: AWSError, data: GuardDuty.Types.DeleteInvitationsResponse) => void): Request<GuardDuty.Types.DeleteInvitationsResponse, AWSError>;
+  /**
+   * Deletes the Malware Protection plan ID associated with the Malware Protection plan resource. Use this API only when you no longer want to protect the resource associated with this Malware Protection plan ID.
+   */
+  deleteMalwareProtectionPlan(params: GuardDuty.Types.DeleteMalwareProtectionPlanRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the Malware Protection plan ID associated with the Malware Protection plan resource. Use this API only when you no longer want to protect the resource associated with this Malware Protection plan ID.
+   */
+  deleteMalwareProtectionPlan(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes GuardDuty member accounts (to the current GuardDuty administrator account) specified by the account IDs. With autoEnableOrganizationMembers configuration for your organization set to ALL, you'll receive an error if you attempt to disable GuardDuty for a member account in your organization.
    */
@@ -284,6 +300,14 @@ declare class GuardDuty extends Service {
    */
   getInvitationsCount(callback?: (err: AWSError, data: GuardDuty.Types.GetInvitationsCountResponse) => void): Request<GuardDuty.Types.GetInvitationsCountResponse, AWSError>;
   /**
+   * Retrieves the Malware Protection plan details associated with a Malware Protection plan ID.
+   */
+  getMalwareProtectionPlan(params: GuardDuty.Types.GetMalwareProtectionPlanRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetMalwareProtectionPlanResponse) => void): Request<GuardDuty.Types.GetMalwareProtectionPlanResponse, AWSError>;
+  /**
+   * Retrieves the Malware Protection plan details associated with a Malware Protection plan ID.
+   */
+  getMalwareProtectionPlan(callback?: (err: AWSError, data: GuardDuty.Types.GetMalwareProtectionPlanResponse) => void): Request<GuardDuty.Types.GetMalwareProtectionPlanResponse, AWSError>;
+  /**
    * Returns the details of the malware scan settings. There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
    */
   getMalwareScanSettings(params: GuardDuty.Types.GetMalwareScanSettingsRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetMalwareScanSettingsResponse) => void): Request<GuardDuty.Types.GetMalwareScanSettingsResponse, AWSError>;
@@ -399,6 +423,14 @@ declare class GuardDuty extends Service {
    * Lists all GuardDuty membership invitations that were sent to the current Amazon Web Services account.
    */
   listInvitations(callback?: (err: AWSError, data: GuardDuty.Types.ListInvitationsResponse) => void): Request<GuardDuty.Types.ListInvitationsResponse, AWSError>;
+  /**
+   * Lists the Malware Protection plan IDs associated with the protected resources in your Amazon Web Services account.
+   */
+  listMalwareProtectionPlans(params: GuardDuty.Types.ListMalwareProtectionPlansRequest, callback?: (err: AWSError, data: GuardDuty.Types.ListMalwareProtectionPlansResponse) => void): Request<GuardDuty.Types.ListMalwareProtectionPlansResponse, AWSError>;
+  /**
+   * Lists the Malware Protection plan IDs associated with the protected resources in your Amazon Web Services account.
+   */
+  listMalwareProtectionPlans(callback?: (err: AWSError, data: GuardDuty.Types.ListMalwareProtectionPlansResponse) => void): Request<GuardDuty.Types.ListMalwareProtectionPlansResponse, AWSError>;
   /**
    * Lists details about all member accounts for the current GuardDuty administrator account.
    */
@@ -519,6 +551,14 @@ declare class GuardDuty extends Service {
    * Updates the IPSet specified by the IPSet ID.
    */
   updateIPSet(callback?: (err: AWSError, data: GuardDuty.Types.UpdateIPSetResponse) => void): Request<GuardDuty.Types.UpdateIPSetResponse, AWSError>;
+  /**
+   * Updates an existing Malware Protection plan resource.
+   */
+  updateMalwareProtectionPlan(params: GuardDuty.Types.UpdateMalwareProtectionPlanRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates an existing Malware Protection plan resource.
+   */
+  updateMalwareProtectionPlan(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates the malware scan settings. There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
    */
@@ -1261,6 +1301,34 @@ declare namespace GuardDuty {
      */
     IpSetId: String;
   }
+  export interface CreateMalwareProtectionPlanRequest {
+    /**
+     * The idempotency token for the create request.
+     */
+    ClientToken?: ClientToken;
+    /**
+     * IAM role with permissions required to scan and add tags to the associated protected resource.
+     */
+    Role: String;
+    /**
+     * Information about the protected resource that is associated with the created Malware Protection plan. Presently, S3Bucket is the only supported protected resource.
+     */
+    ProtectedResource: CreateProtectedResource;
+    /**
+     * Information about whether the tags will be added to the S3 object after scanning.
+     */
+    Actions?: MalwareProtectionPlanActions;
+    /**
+     * Tags added to the Malware Protection plan resource. 
+     */
+    Tags?: TagMap;
+  }
+  export interface CreateMalwareProtectionPlanResponse {
+    /**
+     * A unique identifier associated with the Malware Protection plan resource.
+     */
+    MalwareProtectionPlanId?: String;
+  }
   export interface CreateMembersRequest {
     /**
      * The unique ID of the detector of the GuardDuty account that you want to associate member accounts with.
@@ -1276,6 +1344,12 @@ declare namespace GuardDuty {
      * A list of objects that include the accountIds of the unprocessed accounts and a result string that explains why each was unprocessed.
      */
     UnprocessedAccounts: UnprocessedAccounts;
+  }
+  export interface CreateProtectedResource {
+    /**
+     * Information about the protected S3 bucket resource.
+     */
+    S3Bucket?: CreateS3BucketResource;
   }
   export interface CreatePublishingDestinationRequest {
     /**
@@ -1300,6 +1374,16 @@ declare namespace GuardDuty {
      * The ID of the publishing destination that is created.
      */
     DestinationId: String;
+  }
+  export interface CreateS3BucketResource {
+    /**
+     * Name of the S3 bucket.
+     */
+    BucketName?: String;
+    /**
+     * Information about the specified object prefixes. The S3 object will be scanned only if it belongs to any of the specified object prefixes.
+     */
+    ObjectPrefixes?: MalwareProtectionPlanObjectPrefixesList;
   }
   export interface CreateSampleFindingsRequest {
     /**
@@ -1497,6 +1581,12 @@ declare namespace GuardDuty {
      * A list of objects that contain the unprocessed account and a result string that explains why it was unprocessed.
      */
     UnprocessedAccounts: UnprocessedAccounts;
+  }
+  export interface DeleteMalwareProtectionPlanRequest {
+    /**
+     * A unique identifier associated with Malware Protection plan resource.
+     */
+    MalwareProtectionPlanId: String;
   }
   export interface DeleteMembersRequest {
     /**
@@ -2317,6 +2407,46 @@ declare namespace GuardDuty {
      */
     InvitationsCount?: Integer;
   }
+  export interface GetMalwareProtectionPlanRequest {
+    /**
+     * A unique identifier associated with Malware Protection plan resource.
+     */
+    MalwareProtectionPlanId: String;
+  }
+  export interface GetMalwareProtectionPlanResponse {
+    /**
+     * Amazon Resource Name (ARN) of the protected resource.
+     */
+    Arn?: String;
+    /**
+     * IAM role that includes the permissions required to scan and add tags to the associated protected resource.
+     */
+    Role?: String;
+    /**
+     * Information about the protected resource that is associated with the created Malware Protection plan. Presently, S3Bucket is the only supported protected resource.
+     */
+    ProtectedResource?: CreateProtectedResource;
+    /**
+     * Information about whether the tags will be added to the S3 object after scanning.
+     */
+    Actions?: MalwareProtectionPlanActions;
+    /**
+     * The timestamp when the Malware Protection plan resource was created.
+     */
+    CreatedAt?: Timestamp;
+    /**
+     * Malware Protection plan status.
+     */
+    Status?: MalwareProtectionPlanStatus;
+    /**
+     * Information about the issue code and message associated to the status of your Malware Protection plan.
+     */
+    StatusReasons?: MalwareProtectionPlanStatusReasonsList;
+    /**
+     * Tags added to the Malware Protection plan resource.
+     */
+    Tags?: TagMap;
+  }
   export interface GetMalwareScanSettingsRequest {
     /**
      * The unique ID of the detector that the scan setting is associated with.
@@ -2626,6 +2756,17 @@ declare namespace GuardDuty {
   export type IpSetStatus = "INACTIVE"|"ACTIVATING"|"ACTIVE"|"DEACTIVATING"|"ERROR"|"DELETE_PENDING"|"DELETED"|string;
   export type Ipv6Addresses = String[];
   export type Issues = String[];
+  export interface ItemPath {
+    /**
+     * The nested item path where the infected file was found.
+     */
+    NestedItemPath?: String;
+    /**
+     * The hash value of the infected resource.
+     */
+    Hash?: String;
+  }
+  export type ItemPaths = ItemPath[];
   export interface KubernetesApiCallAction {
     /**
      * The Kubernetes API request URI.
@@ -3056,6 +3197,22 @@ declare namespace GuardDuty {
      */
     NextToken?: String;
   }
+  export interface ListMalwareProtectionPlansRequest {
+    /**
+     * You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
+     */
+    NextToken?: String;
+  }
+  export interface ListMalwareProtectionPlansResponse {
+    /**
+     * A list of unique identifiers associated with each Malware Protection plan.
+     */
+    MalwareProtectionPlans?: MalwareProtectionPlansSummary;
+    /**
+     * You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
+     */
+    NextToken?: String;
+  }
   export interface ListMembersRequest {
     /**
      * The unique ID of the detector the member is associated with.
@@ -3227,6 +3384,45 @@ declare namespace GuardDuty {
      * Describes whether Malware Protection for EC2 instances with findings is enabled as a data source.
      */
     ScanEc2InstanceWithFindings?: DataSourceFreeTrial;
+  }
+  export interface MalwareProtectionPlanActions {
+    /**
+     * Indicates whether the scanned S3 object will have tags about the scan result.
+     */
+    Tagging?: MalwareProtectionPlanTaggingAction;
+  }
+  export type MalwareProtectionPlanObjectPrefixesList = String[];
+  export type MalwareProtectionPlanStatus = "ACTIVE"|"WARNING"|"ERROR"|string;
+  export interface MalwareProtectionPlanStatusReason {
+    /**
+     * Issue code.
+     */
+    Code?: String;
+    /**
+     * Issue message that specifies the reason. For information about potential troubleshooting steps, see Troubleshooting Malware Protection for S3 status issues in the GuardDuty User Guide.
+     */
+    Message?: String;
+  }
+  export type MalwareProtectionPlanStatusReasonsList = MalwareProtectionPlanStatusReason[];
+  export interface MalwareProtectionPlanSummary {
+    /**
+     * A unique identifier associated with Malware Protection plan.
+     */
+    MalwareProtectionPlanId?: String;
+  }
+  export interface MalwareProtectionPlanTaggingAction {
+    /**
+     * Indicates whether or not the tags will added.
+     */
+    Status?: MalwareProtectionPlanTaggingActionStatus;
+  }
+  export type MalwareProtectionPlanTaggingActionStatus = "ENABLED"|"DISABLED"|string;
+  export type MalwareProtectionPlansSummary = MalwareProtectionPlanSummary[];
+  export interface MalwareScanDetails {
+    /**
+     * Information about the detected threats associated with the generated GuardDuty finding.
+     */
+    Threats?: Threats;
   }
   export type ManagementType = "AUTO_MANAGED"|"MANUAL"|"DISABLED"|string;
   export type MapEquals = ScanConditionPair[];
@@ -3958,7 +4154,7 @@ declare namespace GuardDuty {
   export type ResourceArn = string;
   export interface ResourceDetails {
     /**
-     * InstanceArn that was scanned in the scan entry.
+     * Instance ARN that was scanned in the scan entry.
      */
     InstanceArn?: InstanceArn;
   }
@@ -4109,6 +4305,10 @@ declare namespace GuardDuty {
      * Describes the public access policies that apply to the S3 bucket.
      */
     PublicAccess?: PublicAccess;
+    /**
+     * Information about the S3 object that was scanned.
+     */
+    S3ObjectDetails?: S3ObjectDetails;
   }
   export type S3BucketDetails = S3BucketDetail[];
   export interface S3LogsConfiguration {
@@ -4123,6 +4323,29 @@ declare namespace GuardDuty {
      */
     Status: DataSourceStatus;
   }
+  export interface S3ObjectDetail {
+    /**
+     * Amazon Resource Name (ARN) of the S3 object.
+     */
+    ObjectArn?: String;
+    /**
+     * Key of the S3 object.
+     */
+    Key?: String;
+    /**
+     * The entity tag is a hash of the S3 object. The ETag reflects changes only to the contents of an object, and not its metadata.
+     */
+    ETag?: String;
+    /**
+     * Hash of the threat detected in this finding.
+     */
+    Hash?: String;
+    /**
+     * Version ID of the object.
+     */
+    VersionId?: String;
+  }
+  export type S3ObjectDetails = S3ObjectDetail[];
   export interface Scan {
     /**
      * The unique ID of the detector that the request is associated with.
@@ -4239,7 +4462,7 @@ declare namespace GuardDuty {
      */
     FilePath?: String;
     /**
-     * EBS volume Arn details of the infected file.
+     * EBS volume ARN details of the infected file.
      */
     VolumeArn?: String;
     /**
@@ -4387,6 +4610,10 @@ declare namespace GuardDuty {
      * Contains information about the detected unusual behavior.
      */
     Detection?: Detection;
+    /**
+     * Returns details from the malware scan that generated a GuardDuty finding.
+     */
+    MalwareScanDetails?: MalwareScanDetails;
   }
   export interface ServiceAdditionalInfo {
     /**
@@ -4484,6 +4711,20 @@ declare namespace GuardDuty {
   }
   export type TagValue = string;
   export type Tags = Tag[];
+  export interface Threat {
+    /**
+     * Name of the detected threat that caused GuardDuty to generate this finding.
+     */
+    Name?: String;
+    /**
+     * Source of the threat that generated this finding.
+     */
+    Source?: String;
+    /**
+     * Information about the nested item path and hash of the protected resource.
+     */
+    ItemPaths?: ItemPaths;
+  }
   export interface ThreatDetectedByName {
     /**
      * Total number of infected files identified.
@@ -4521,6 +4762,7 @@ declare namespace GuardDuty {
   }
   export type ThreatIntelligenceDetails = ThreatIntelligenceDetail[];
   export type ThreatNames = String[];
+  export type Threats = Threat[];
   export interface ThreatsDetectedItemCount {
     /**
      * Total number of infected files.
@@ -4686,6 +4928,24 @@ declare namespace GuardDuty {
   }
   export interface UpdateIPSetResponse {
   }
+  export interface UpdateMalwareProtectionPlanRequest {
+    /**
+     * A unique identifier associated with the Malware Protection plan.
+     */
+    MalwareProtectionPlanId: String;
+    /**
+     * IAM role with permissions required to scan and add tags to the associated protected resource.
+     */
+    Role?: String;
+    /**
+     * Information about whether the tags will be added to the S3 object after scanning.
+     */
+    Actions?: MalwareProtectionPlanActions;
+    /**
+     * Information about the protected resource that is associated with the created Malware Protection plan. Presently, S3Bucket is the only supported protected resource.
+     */
+    ProtectedResource?: UpdateProtectedResource;
+  }
   export interface UpdateMalwareScanSettingsRequest {
     /**
      * The unique ID of the detector that specifies the GuardDuty service where you want to update scan settings.
@@ -4750,6 +5010,12 @@ declare namespace GuardDuty {
   }
   export interface UpdateOrganizationConfigurationResponse {
   }
+  export interface UpdateProtectedResource {
+    /**
+     * Information about the protected S3 bucket resource.
+     */
+    S3Bucket?: UpdateS3BucketResource;
+  }
   export interface UpdatePublishingDestinationRequest {
     /**
      * The ID of the detector associated with the publishing destinations to update.
@@ -4765,6 +5031,12 @@ declare namespace GuardDuty {
     DestinationProperties?: DestinationProperties;
   }
   export interface UpdatePublishingDestinationResponse {
+  }
+  export interface UpdateS3BucketResource {
+    /**
+     * Information about the specified object prefixes. The S3 object will be scanned only if it belongs to any of the specified object prefixes.
+     */
+    ObjectPrefixes?: MalwareProtectionPlanObjectPrefixesList;
   }
   export interface UpdateThreatIntelSetRequest {
     /**
@@ -4909,7 +5181,7 @@ declare namespace GuardDuty {
   }
   export interface VolumeDetail {
     /**
-     * EBS volume Arn information.
+     * EBS volume ARN information.
      */
     VolumeArn?: String;
     /**
@@ -4929,11 +5201,11 @@ declare namespace GuardDuty {
      */
     EncryptionType?: String;
     /**
-     * Snapshot Arn of the EBS volume.
+     * Snapshot ARN of the EBS volume.
      */
     SnapshotArn?: String;
     /**
-     * KMS key Arn used to encrypt the EBS volume.
+     * KMS key ARN used to encrypt the EBS volume.
      */
     KmsKeyArn?: String;
   }

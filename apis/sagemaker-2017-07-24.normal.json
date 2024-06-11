@@ -6994,6 +6994,26 @@
         "IAM"
       ]
     },
+    "AuthenticationRequestExtraParams": {
+      "type": "map",
+      "key": {
+        "shape": "AuthenticationRequestExtraParamsKey"
+      },
+      "value": {
+        "shape": "AuthenticationRequestExtraParamsValue"
+      },
+      "max": 10
+    },
+    "AuthenticationRequestExtraParamsKey": {
+      "type": "string",
+      "max": 512,
+      "pattern": ".*"
+    },
+    "AuthenticationRequestExtraParamsValue": {
+      "type": "string",
+      "max": 512,
+      "pattern": ".*"
+    },
     "AutoGenerateEndpointName": {
       "type": "boolean"
     },
@@ -27268,6 +27288,10 @@
         "SortOrder": {
           "shape": "SortOrder",
           "documentation": "<p>The sort order for results. The default is <code>Ascending</code>.</p>"
+        },
+        "CrossAccountFilterOption": {
+          "shape": "CrossAccountFilterOption",
+          "documentation": "<p>A filter that returns either model groups shared with you or model groups in your own account. When the value is <code>CrossAccount</code>, the results show the resources made discoverable to you from other accounts. When the value is <code>SameAccount</code> or <code>null</code>, the results show resources from your account. The default is <code>SameAccount</code>.</p>"
         }
       }
     },
@@ -32075,6 +32099,14 @@
         "JwksUri": {
           "shape": "OidcEndpoint",
           "documentation": "<p>The OIDC IdP JSON Web Key Set (Jwks) URI used to configure your private workforce.</p>"
+        },
+        "Scope": {
+          "shape": "Scope",
+          "documentation": "<p>An array of string identifiers used to refer to the specific pieces of user data or claims that the client application wants to access.</p>"
+        },
+        "AuthenticationRequestExtraParams": {
+          "shape": "AuthenticationRequestExtraParams",
+          "documentation": "<p>A string to string map of identifiers specific to the custom identity provider (IdP) being used.</p>"
         }
       },
       "documentation": "<p>Use this parameter to configure your OIDC Identity Provider (IdP).</p>"
@@ -32109,6 +32141,14 @@
         "JwksUri": {
           "shape": "OidcEndpoint",
           "documentation": "<p>The OIDC IdP JSON Web Key Set (Jwks) URI used to configure your private workforce.</p>"
+        },
+        "Scope": {
+          "shape": "Scope",
+          "documentation": "<p>An array of string identifiers used to refer to the specific pieces of user data or claims that the client application wants to access.</p>"
+        },
+        "AuthenticationRequestExtraParams": {
+          "shape": "AuthenticationRequestExtraParams",
+          "documentation": "<p>A string to string map of identifiers specific to the custom identity provider (IdP) being used.</p>"
         }
       },
       "documentation": "<p>Your OIDC IdP workforce configuration.</p>"
@@ -36009,6 +36049,11 @@
         "Scheduled",
         "Stopped"
       ]
+    },
+    "Scope": {
+      "type": "string",
+      "max": 1024,
+      "pattern": "^[!#-\\[\\]-~]+( [!#-\\[\\]-~]+)*$"
     },
     "SearchExpression": {
       "type": "structure",

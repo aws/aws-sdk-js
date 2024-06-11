@@ -44,6 +44,14 @@ declare class AccessAnalyzer extends Service {
    */
   checkNoNewAccess(callback?: (err: AWSError, data: AccessAnalyzer.Types.CheckNoNewAccessResponse) => void): Request<AccessAnalyzer.Types.CheckNoNewAccessResponse, AWSError>;
   /**
+   * Checks whether a resource policy can grant public access to the specified resource type.
+   */
+  checkNoPublicAccess(params: AccessAnalyzer.Types.CheckNoPublicAccessRequest, callback?: (err: AWSError, data: AccessAnalyzer.Types.CheckNoPublicAccessResponse) => void): Request<AccessAnalyzer.Types.CheckNoPublicAccessResponse, AWSError>;
+  /**
+   * Checks whether a resource policy can grant public access to the specified resource type.
+   */
+  checkNoPublicAccess(callback?: (err: AWSError, data: AccessAnalyzer.Types.CheckNoPublicAccessResponse) => void): Request<AccessAnalyzer.Types.CheckNoPublicAccessResponse, AWSError>;
+  /**
    * Creates an access preview that allows you to preview IAM Access Analyzer findings for your resource before deploying resource permissions.
    */
   createAccessPreview(params: AccessAnalyzer.Types.CreateAccessPreviewRequest, callback?: (err: AWSError, data: AccessAnalyzer.Types.CreateAccessPreviewResponse) => void): Request<AccessAnalyzer.Types.CreateAccessPreviewResponse, AWSError>;
@@ -84,6 +92,14 @@ declare class AccessAnalyzer extends Service {
    */
   deleteArchiveRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Creates a recommendation for an unused permissions finding.
+   */
+  generateFindingRecommendation(params: AccessAnalyzer.Types.GenerateFindingRecommendationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Creates a recommendation for an unused permissions finding.
+   */
+  generateFindingRecommendation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Retrieves information about an access preview for the specified analyzer.
    */
   getAccessPreview(params: AccessAnalyzer.Types.GetAccessPreviewRequest, callback?: (err: AWSError, data: AccessAnalyzer.Types.GetAccessPreviewResponse) => void): Request<AccessAnalyzer.Types.GetAccessPreviewResponse, AWSError>;
@@ -123,6 +139,14 @@ declare class AccessAnalyzer extends Service {
    * Retrieves information about the specified finding. GetFinding and GetFindingV2 both use access-analyzer:GetFinding in the Action element of an IAM policy statement. You must have permission to perform the access-analyzer:GetFinding action.
    */
   getFinding(callback?: (err: AWSError, data: AccessAnalyzer.Types.GetFindingResponse) => void): Request<AccessAnalyzer.Types.GetFindingResponse, AWSError>;
+  /**
+   * Retrieves information about a finding recommendation for the specified analyzer.
+   */
+  getFindingRecommendation(params: AccessAnalyzer.Types.GetFindingRecommendationRequest, callback?: (err: AWSError, data: AccessAnalyzer.Types.GetFindingRecommendationResponse) => void): Request<AccessAnalyzer.Types.GetFindingRecommendationResponse, AWSError>;
+  /**
+   * Retrieves information about a finding recommendation for the specified analyzer.
+   */
+  getFindingRecommendation(callback?: (err: AWSError, data: AccessAnalyzer.Types.GetFindingRecommendationResponse) => void): Request<AccessAnalyzer.Types.GetFindingRecommendationResponse, AWSError>;
   /**
    * Retrieves information about the specified finding. GetFinding and GetFindingV2 both use access-analyzer:GetFinding in the Action element of an IAM policy statement. You must have permission to perform the access-analyzer:GetFinding action.
    */
@@ -273,11 +297,16 @@ declare namespace AccessAnalyzer {
     /**
      * A list of actions for the access permissions. Any strings that can be used as an action in an IAM policy can be used in the list of actions to check.
      */
-    actions: AccessActionsList;
+    actions?: AccessActionsList;
+    /**
+     * A list of resources for the access permissions. Any strings that can be used as a resource in an IAM policy can be used in the list of resources to check.
+     */
+    resources?: AccessResourcesList;
   }
   export type AccessActionsList = Action[];
   export type AccessCheckPolicyDocument = string;
   export type AccessCheckPolicyType = "IDENTITY_POLICY"|"RESOURCE_POLICY"|string;
+  export type AccessCheckResourceType = "AWS::DynamoDB::Table"|"AWS::DynamoDB::Stream"|"AWS::EFS::FileSystem"|"AWS::OpenSearchService::Domain"|"AWS::Kinesis::Stream"|"AWS::Kinesis::StreamConsumer"|"AWS::KMS::Key"|"AWS::Lambda::Function"|"AWS::S3::Bucket"|"AWS::S3::AccessPoint"|"AWS::S3Express::DirectoryBucket"|"AWS::S3::Glacier"|"AWS::S3Outposts::Bucket"|"AWS::S3Outposts::AccessPoint"|"AWS::SecretsManager::Secret"|"AWS::SNS::Topic"|"AWS::SQS::Queue"|"AWS::IAM::AssumeRolePolicyDocument"|string;
   export type AccessPointArn = string;
   export type AccessPointPolicy = string;
   export interface AccessPreview {
@@ -399,6 +428,7 @@ declare namespace AccessAnalyzer {
     statusReason?: AccessPreviewStatusReason;
   }
   export type AccessPreviewsList = AccessPreviewSummary[];
+  export type AccessResourcesList = Resource[];
   export type AclCanonicalId = string;
   export interface AclGrantee {
     /**
@@ -574,7 +604,7 @@ declare namespace AccessAnalyzer {
      */
     policyDocument: AccessCheckPolicyDocument;
     /**
-     * An access object containing the permissions that shouldn't be granted by the specified policy.
+     * An access object containing the permissions that shouldn't be granted by the specified policy. If only actions are specified, IAM Access Analyzer checks for access of the actions on all resources in the policy. If only resources are specified, then IAM Access Analyzer checks which actions have access to the specified resources. If both actions and resources are specified, then IAM Access Analyzer checks which of the specified actions have access to the specified resources.
      */
     access: CheckAccessNotGrantedRequestAccessList;
     /**
@@ -627,6 +657,31 @@ declare namespace AccessAnalyzer {
     reasons?: ReasonSummaryList;
   }
   export type CheckNoNewAccessResult = "PASS"|"FAIL"|string;
+  export interface CheckNoPublicAccessRequest {
+    /**
+     * The JSON policy document to evaluate for public access.
+     */
+    policyDocument: AccessCheckPolicyDocument;
+    /**
+     * The type of resource to evaluate for public access. For example, to check for public access to Amazon S3 buckets, you can choose AWS::S3::Bucket for the resource type. For resource types not supported as valid values, IAM Access Analyzer will return an error.
+     */
+    resourceType: AccessCheckResourceType;
+  }
+  export interface CheckNoPublicAccessResponse {
+    /**
+     * The result of the check for public access to the specified resource type. If the result is PASS, the policy doesn't allow public access to the specified resource type. If the result is FAIL, the policy might allow public access to the specified resource type.
+     */
+    result?: CheckNoPublicAccessResult;
+    /**
+     * The message indicating whether the specified policy allows public access to resources.
+     */
+    message?: String;
+    /**
+     * A list of reasons why the specified resource policy grants public access for the resource type.
+     */
+    reasons?: ReasonSummaryList;
+  }
+  export type CheckNoPublicAccessResult = "PASS"|"FAIL"|string;
   export type CloudTrailArn = string;
   export interface CloudTrailDetails {
     /**
@@ -1114,6 +1169,17 @@ declare namespace AccessAnalyzer {
   export type FindingType = "ExternalAccess"|"UnusedIAMRole"|"UnusedIAMUserAccessKey"|"UnusedIAMUserPassword"|"UnusedPermission"|string;
   export type FindingsList = FindingSummary[];
   export type FindingsListV2 = FindingSummaryV2[];
+  export interface GenerateFindingRecommendationRequest {
+    /**
+     * The ARN of the analyzer used to generate the finding recommendation.
+     */
+    analyzerArn: AnalyzerArn;
+    /**
+     * The unique ID for the finding recommendation.
+     */
+    id: GenerateFindingRecommendationRequestIdString;
+  }
+  export type GenerateFindingRecommendationRequestIdString = string;
   export interface GeneratedPolicy {
     /**
      * The text to use as the content for the new policy. The policy is created using the CreatePolicy action.
@@ -1201,6 +1267,60 @@ declare namespace AccessAnalyzer {
   }
   export interface GetArchiveRuleResponse {
     archiveRule: ArchiveRuleSummary;
+  }
+  export interface GetFindingRecommendationRequest {
+    /**
+     * The ARN of the analyzer used to generate the finding recommendation.
+     */
+    analyzerArn: AnalyzerArn;
+    /**
+     * The unique ID for the finding recommendation.
+     */
+    id: GetFindingRecommendationRequestIdString;
+    /**
+     * The maximum number of results to return in the response.
+     */
+    maxResults?: GetFindingRecommendationRequestMaxResultsInteger;
+    /**
+     * A token used for pagination of results returned.
+     */
+    nextToken?: Token;
+  }
+  export type GetFindingRecommendationRequestIdString = string;
+  export type GetFindingRecommendationRequestMaxResultsInteger = number;
+  export interface GetFindingRecommendationResponse {
+    /**
+     * The time at which the retrieval of the finding recommendation was started.
+     */
+    startedAt: Timestamp;
+    /**
+     * The time at which the retrieval of the finding recommendation was completed.
+     */
+    completedAt?: Timestamp;
+    /**
+     * A token used for pagination of results returned.
+     */
+    nextToken?: Token;
+    /**
+     * Detailed information about the reason that the retrieval of a recommendation for the finding failed.
+     */
+    error?: RecommendationError;
+    /**
+     * The ARN of the resource of the finding.
+     */
+    resourceArn: ResourceArn;
+    /**
+     * A group of recommended steps for the finding.
+     */
+    recommendedSteps?: RecommendedStepList;
+    /**
+     * The type of recommendation for the finding.
+     */
+    recommendationType: RecommendationType;
+    /**
+     * The status of the retrieval of the finding recommendation.
+     */
+    status: Status;
   }
   export interface GetFindingRequest {
     /**
@@ -1796,7 +1916,27 @@ declare namespace AccessAnalyzer {
     statementId?: String;
   }
   export type ReasonSummaryList = ReasonSummary[];
+  export interface RecommendationError {
+    /**
+     * The error code for a failed retrieval of a recommendation for a finding.
+     */
+    code: String;
+    /**
+     * The error message for a failed retrieval of a recommendation for a finding.
+     */
+    message: String;
+  }
+  export type RecommendationType = "UnusedPermissionRecommendation"|string;
+  export type RecommendedRemediationAction = "CREATE_POLICY"|"DETACH_POLICY"|string;
+  export interface RecommendedStep {
+    /**
+     * A recommended step for an unused permissions finding.
+     */
+    unusedPermissionsRecommendedStep?: UnusedPermissionsRecommendedStep;
+  }
+  export type RecommendedStepList = RecommendedStep[];
   export type RegionList = String[];
+  export type Resource = string;
   export type ResourceArn = string;
   export type ResourceType = "AWS::S3::Bucket"|"AWS::IAM::Role"|"AWS::SQS::Queue"|"AWS::Lambda::Function"|"AWS::Lambda::LayerVersion"|"AWS::KMS::Key"|"AWS::SecretsManager::Secret"|"AWS::EFS::FileSystem"|"AWS::EC2::Snapshot"|"AWS::ECR::Repository"|"AWS::RDS::DBSnapshot"|"AWS::RDS::DBClusterSnapshot"|"AWS::SNS::Topic"|"AWS::S3Express::DirectoryBucket"|"AWS::DynamoDB::Table"|"AWS::DynamoDB::Stream"|string;
   export type RetiringPrincipal = string;
@@ -1944,6 +2084,7 @@ declare namespace AccessAnalyzer {
      */
     resourceOwnerAccount?: String;
   }
+  export type Status = "SUCCEEDED"|"FAILED"|"IN_PROGRESS"|string;
   export interface StatusReason {
     /**
      * The reason code for the current status of the analyzer.
@@ -2069,9 +2210,27 @@ declare namespace AccessAnalyzer {
      */
     serviceNamespace: String;
     /**
-     * The time at which the permission last accessed.
+     * The time at which the permission was last accessed.
      */
     lastAccessed?: Timestamp;
+  }
+  export interface UnusedPermissionsRecommendedStep {
+    /**
+     * The time at which the existing policy for the unused permissions finding was last updated.
+     */
+    policyUpdatedAt?: Timestamp;
+    /**
+     * A recommendation of whether to create or detach a policy for an unused permissions finding.
+     */
+    recommendedAction: RecommendedRemediationAction;
+    /**
+     * If the recommended action for the unused permissions finding is to replace the existing policy, the contents of the recommended policy to replace the policy specified in the existingPolicyId field.
+     */
+    recommendedPolicy?: String;
+    /**
+     * If the recommended action for the unused permissions finding is to detach a policy, the ID of an existing policy to be detached.
+     */
+    existingPolicyId?: String;
   }
   export interface UpdateArchiveRuleRequest {
     /**

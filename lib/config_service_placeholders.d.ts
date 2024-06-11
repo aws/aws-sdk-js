@@ -383,6 +383,7 @@ export abstract class ConfigurationServicePlaceholders {
   mailmanager?: AWS.MailManager.Types.ClientConfiguration;
   taxsettings?: AWS.TaxSettings.Types.ClientConfiguration;
   applicationsignals?: AWS.ApplicationSignals.Types.ClientConfiguration;
+  pcaconnectorscep?: AWS.PcaConnectorScep.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -768,4 +769,5 @@ export interface ConfigurationServiceApiVersions {
   mailmanager?: AWS.MailManager.Types.apiVersion;
   taxsettings?: AWS.TaxSettings.Types.apiVersion;
   applicationsignals?: AWS.ApplicationSignals.Types.apiVersion;
+  pcaconnectorscep?: AWS.PcaConnectorScep.Types.apiVersion;
 }
