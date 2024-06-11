@@ -693,7 +693,6 @@ export interface ConfigurationServiceApiVersions {
   redshiftserverless?: AWS.RedshiftServerless.Types.apiVersion;
   rolesanywhere?: AWS.RolesAnywhere.Types.apiVersion;
   licensemanagerusersubscriptions?: AWS.LicenseManagerUserSubscriptions.Types.apiVersion;
-  backupstorage?: AWS.BackupStorage.Types.apiVersion;
   privatenetworks?: AWS.PrivateNetworks.Types.apiVersion;
   supportapp?: AWS.SupportApp.Types.apiVersion;
   controltower?: AWS.ControlTower.Types.apiVersion;
