@@ -382,5 +382,6 @@ module.exports = {
   MailManager: require('./mailmanager'),
   TaxSettings: require('./taxsettings'),
   ApplicationSignals: require('./applicationsignals'),
-  PcaConnectorScep: require('./pcaconnectorscep')
+  PcaConnectorScep: require('./pcaconnectorscep'),
+  AppTest: require('./apptest')
 };

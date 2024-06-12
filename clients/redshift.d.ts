@@ -1001,11 +1001,11 @@ declare class Redshift extends Service {
    */
   resetClusterParameterGroup(callback?: (err: AWSError, data: Redshift.Types.ClusterParameterGroupNameMessage) => void): Request<Redshift.Types.ClusterParameterGroupNameMessage, AWSError>;
   /**
-   * Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method.  Elastic resize operations have the following restrictions:   You can only resize clusters of the following types:   dc1.large (if your cluster is in a VPC)   dc1.8xlarge (if your cluster is in a VPC)   dc2.large   dc2.8xlarge   ds2.xlarge   ds2.8xlarge   ra3.xlplus   ra3.4xlarge   ra3.16xlarge     The type of nodes that you add must match the node type for the cluster.  
+   * Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method.  Elastic resize operations have the following restrictions:   You can only resize clusters of the following types:   dc2.large   dc2.8xlarge   ra3.xlplus   ra3.4xlarge   ra3.16xlarge     The type of nodes that you add must match the node type for the cluster.  
    */
   resizeCluster(params: Redshift.Types.ResizeClusterMessage, callback?: (err: AWSError, data: Redshift.Types.ResizeClusterResult) => void): Request<Redshift.Types.ResizeClusterResult, AWSError>;
   /**
-   * Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method.  Elastic resize operations have the following restrictions:   You can only resize clusters of the following types:   dc1.large (if your cluster is in a VPC)   dc1.8xlarge (if your cluster is in a VPC)   dc2.large   dc2.8xlarge   ds2.xlarge   ds2.8xlarge   ra3.xlplus   ra3.4xlarge   ra3.16xlarge     The type of nodes that you add must match the node type for the cluster.  
+   * Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method.  Elastic resize operations have the following restrictions:   You can only resize clusters of the following types:   dc2.large   dc2.8xlarge   ra3.xlplus   ra3.4xlarge   ra3.16xlarge     The type of nodes that you add must match the node type for the cluster.  
    */
   resizeCluster(callback?: (err: AWSError, data: Redshift.Types.ResizeClusterResult) => void): Request<Redshift.Types.ResizeClusterResult, AWSError>;
   /**
@@ -1988,7 +1988,7 @@ declare namespace Redshift {
      */
     ClusterType?: String;
     /**
-     * The node type to be provisioned for the cluster. For information about node types, go to  Working with Clusters in the Amazon Redshift Cluster Management Guide.  Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.xlplus | ra3.4xlarge | ra3.16xlarge 
+     * The node type to be provisioned for the cluster. For information about node types, go to  Working with Clusters in the Amazon Redshift Cluster Management Guide.  Valid Values: dc2.large | dc2.8xlarge | ra3.xlplus | ra3.4xlarge | ra3.16xlarge 
      */
     NodeType: String;
     /**
@@ -2032,7 +2032,7 @@ declare namespace Redshift {
      */
     ManualSnapshotRetentionPeriod?: IntegerOptional;
     /**
-     * The port number on which the cluster accepts incoming connections. The cluster is accessible only via the JDBC and ODBC connection strings. Part of the connection string requires the port on which the cluster will listen for incoming connections. Default: 5439  Valid Values:    For clusters with ra3 nodes - Select a port within the ranges 5431-5455 or 8191-8215. (If you have an existing cluster with ra3 nodes, it isn't required that you change the port to these ranges.)   For clusters with ds2 or dc2 nodes - Select a port within the range 1150-65535.  
+     * The port number on which the cluster accepts incoming connections. The cluster is accessible only via the JDBC and ODBC connection strings. Part of the connection string requires the port on which the cluster will listen for incoming connections. Default: 5439  Valid Values:    For clusters with ra3 nodes - Select a port within the ranges 5431-5455 or 8191-8215. (If you have an existing cluster with ra3 nodes, it isn't required that you change the port to these ranges.)   For clusters with dc2 nodes - Select a port within the range 1150-65535.  
      */
     Port?: IntegerOptional;
     /**
@@ -4465,7 +4465,7 @@ declare namespace Redshift {
      */
     ClusterType?: String;
     /**
-     * The new node type of the cluster. If you specify a new node type, you must also specify the number of nodes parameter.  For more information about resizing clusters, go to Resizing Clusters in Amazon Redshift in the Amazon Redshift Cluster Management Guide. Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.xlplus | ra3.4xlarge | ra3.16xlarge 
+     * The new node type of the cluster. If you specify a new node type, you must also specify the number of nodes parameter.  For more information about resizing clusters, go to Resizing Clusters in Amazon Redshift in the Amazon Redshift Cluster Management Guide. Valid Values: dc2.large | dc2.8xlarge | ra3.xlplus | ra3.4xlarge | ra3.16xlarge 
      */
     NodeType?: String;
     /**
@@ -4553,7 +4553,7 @@ declare namespace Redshift {
      */
     AvailabilityZone?: String;
     /**
-     * The option to change the port of an Amazon Redshift cluster. Valid Values:    For clusters with ra3 nodes - Select a port within the ranges 5431-5455 or 8191-8215. (If you have an existing cluster with ra3 nodes, it isn't required that you change the port to these ranges.)   For clusters with ds2 or dc2 nodes - Select a port within the range 1150-65535.  
+     * The option to change the port of an Amazon Redshift cluster. Valid Values:    For clusters with ra3 nodes - Select a port within the ranges 5431-5455 or 8191-8215. (If you have an existing cluster with ra3 nodes, it isn't required that you change the port to these ranges.)   For clusters with dc2 nodes - Select a port within the range 1150-65535.  
      */
     Port?: IntegerOptional;
     /**
@@ -4838,7 +4838,7 @@ declare namespace Redshift {
   export type NetworkInterfaceList = NetworkInterface[];
   export interface NodeConfigurationOption {
     /**
-     * The node type, such as, "ds2.8xlarge".
+     * The node type, such as, "ra3.4xlarge".
      */
     NodeType?: String;
     /**
@@ -5332,7 +5332,7 @@ declare namespace Redshift {
      */
     SourceReservedNodeId?: String;
     /**
-     * The source reserved-node type, for example ds2.xlarge.
+     * The source reserved-node type, for example ra3.4xlarge.
      */
     SourceReservedNodeType?: String;
     /**
@@ -5567,7 +5567,7 @@ declare namespace Redshift {
      */
     SnapshotClusterIdentifier?: String;
     /**
-     * The port number on which the cluster accepts connections. Default: The same port as the original cluster. Valid values: For clusters with ds2 or dc2 nodes, must be within the range 1150-65535. For clusters with ra3 nodes, must be within the ranges 5431-5455 or 8191-8215.
+     * The port number on which the cluster accepts connections. Default: The same port as the original cluster. Valid values: For clusters with DC2 nodes, must be within the range 1150-65535. For clusters with ra3 nodes, must be within the ranges 5431-5455 or 8191-8215.
      */
     Port?: IntegerOptional;
     /**
@@ -5631,7 +5631,7 @@ declare namespace Redshift {
      */
     KmsKeyId?: String;
     /**
-     * The node type that the restored cluster will be provisioned with. Default: The node type of the cluster from which the snapshot was taken. You can modify this if you are using any DS node type. In that case, you can choose to restore into another DS node type of the same size. For example, you can restore ds1.8xlarge into ds2.8xlarge, or ds1.xlarge into ds2.xlarge. If you have a DC instance type, you must restore into that same instance type and size. In other words, you can only restore a dc1.large instance type into another dc1.large instance type or dc2.large instance type. You can't restore dc1.8xlarge to dc2.8xlarge. First restore to a dc1.8xlarge cluster, then resize to a dc2.8large cluster. For more information about node types, see  About Clusters and Nodes in the Amazon Redshift Cluster Management Guide. 
+     * The node type that the restored cluster will be provisioned with. If you have a DC instance type, you must restore into that same instance type and size. In other words, you can only restore a dc2.large node type into another dc2 type. For more information about node types, see  About Clusters and Nodes in the Amazon Redshift Cluster Management Guide. 
      */
     NodeType?: String;
     /**
@@ -5708,23 +5708,23 @@ declare namespace Redshift {
      */
     Status?: String;
     /**
-     * The number of megabytes per second being transferred from the backup storage. Returns the average rate for a completed backup. This field is only updated when you restore to DC2 and DS2 node types. 
+     * The number of megabytes per second being transferred from the backup storage. Returns the average rate for a completed backup. This field is only updated when you restore to DC2 node types. 
      */
     CurrentRestoreRateInMegaBytesPerSecond?: Double;
     /**
-     * The size of the set of snapshot data used to restore the cluster. This field is only updated when you restore to DC2 and DS2 node types. 
+     * The size of the set of snapshot data used to restore the cluster. This field is only updated when you restore to DC2 node types. 
      */
     SnapshotSizeInMegaBytes?: Long;
     /**
-     * The number of megabytes that have been transferred from snapshot storage. This field is only updated when you restore to DC2 and DS2 node types. 
+     * The number of megabytes that have been transferred from snapshot storage. This field is only updated when you restore to DC2 node types. 
      */
     ProgressInMegaBytes?: Long;
     /**
-     * The amount of time an in-progress restore has been running, or the amount of time it took a completed restore to finish. This field is only updated when you restore to DC2 and DS2 node types. 
+     * The amount of time an in-progress restore has been running, or the amount of time it took a completed restore to finish. This field is only updated when you restore to DC2 node types. 
      */
     ElapsedTimeInSeconds?: Long;
     /**
-     * The estimate of the time remaining before the restore will complete. Returns 0 for a completed restore. This field is only updated when you restore to DC2 and DS2 node types. 
+     * The estimate of the time remaining before the restore will complete. Returns 0 for a completed restore. This field is only updated when you restore to DC2 node types. 
      */
     EstimatedTimeToCompletionInSeconds?: Long;
   }
@@ -5870,7 +5870,7 @@ declare namespace Redshift {
      */
     ScheduledActionName?: String;
     /**
-     * A JSON format string of the Amazon Redshift API operation with input parameters.  "{\"ResizeCluster\":{\"NodeType\":\"ds2.8xlarge\",\"ClusterIdentifier\":\"my-test-cluster\",\"NumberOfNodes\":3}}". 
+     * A JSON format string of the Amazon Redshift API operation with input parameters.  "{\"ResizeCluster\":{\"NodeType\":\"ra3.4xlarge\",\"ClusterIdentifier\":\"my-test-cluster\",\"NumberOfNodes\":3}}". 
      */
     TargetAction?: ScheduledActionType;
     /**

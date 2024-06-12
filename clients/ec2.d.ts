@@ -2677,6 +2677,14 @@ declare class EC2 extends Service {
    */
   describeTags(callback?: (err: AWSError, data: EC2.Types.DescribeTagsResult) => void): Request<EC2.Types.DescribeTagsResult, AWSError>;
   /**
+   * Describe traffic mirror filters that determine the traffic that is mirrored.
+   */
+  describeTrafficMirrorFilterRules(params: EC2.Types.DescribeTrafficMirrorFilterRulesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeTrafficMirrorFilterRulesResult) => void): Request<EC2.Types.DescribeTrafficMirrorFilterRulesResult, AWSError>;
+  /**
+   * Describe traffic mirror filters that determine the traffic that is mirrored.
+   */
+  describeTrafficMirrorFilterRules(callback?: (err: AWSError, data: EC2.Types.DescribeTrafficMirrorFilterRulesResult) => void): Request<EC2.Types.DescribeTrafficMirrorFilterRulesResult, AWSError>;
+  /**
    * Describes one or more Traffic Mirror filters.
    */
   describeTrafficMirrorFilters(params: EC2.Types.DescribeTrafficMirrorFiltersRequest, callback?: (err: AWSError, data: EC2.Types.DescribeTrafficMirrorFiltersResult) => void): Request<EC2.Types.DescribeTrafficMirrorFiltersResult, AWSError>;
@@ -10905,6 +10913,10 @@ declare namespace EC2 {
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
      */
     ClientToken?: String;
+    /**
+     * Traffic Mirroring tags specifications.
+     */
+    TagSpecifications?: TagSpecificationList;
   }
   export interface CreateTrafficMirrorFilterRuleResult {
     /**
@@ -10938,7 +10950,7 @@ declare namespace EC2 {
      */
     SessionNumber: Integer;
     /**
-     * The VXLAN ID for the Traffic Mirror session. For more information about the VXLAN protocol, see RFC 7348. If you do not specify a VirtualNetworkId, an account-wide unique id is chosen at random.
+     * The VXLAN ID for the Traffic Mirror session. For more information about the VXLAN protocol, see RFC 7348. If you do not specify a VirtualNetworkId, an account-wide unique ID is chosen at random.
      */
     VirtualNetworkId?: Integer;
     /**
@@ -17246,6 +17258,42 @@ declare namespace EC2 {
      * The tags.
      */
     Tags?: TagDescriptionList;
+  }
+  export interface DescribeTrafficMirrorFilterRulesRequest {
+    /**
+     * Traffic filter rule IDs.
+     */
+    TrafficMirrorFilterRuleIds?: TrafficMirrorFilterRuleIdList;
+    /**
+     * Traffic filter ID.
+     */
+    TrafficMirrorFilterId?: TrafficMirrorFilterId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * Traffic mirror filters.    traffic-mirror-filter-rule-id: The ID of the Traffic Mirror rule.    traffic-mirror-filter-id: The ID of the filter that this rule is associated with.    rule-number: The number of the Traffic Mirror rule.    rule-action: The action taken on the filtered traffic. Possible actions are accept and reject.    traffic-direction: The traffic direction. Possible directions are ingress and egress.    protocol: The protocol, for example UDP, assigned to the Traffic Mirror rule.    source-cidr-block: The source CIDR block assigned to the Traffic Mirror rule.    destination-cidr-block: The destination CIDR block assigned to the Traffic Mirror rule.    description: The description of the Traffic Mirror rule.  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: TrafficMirroringMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeTrafficMirrorFilterRulesResult {
+    /**
+     * Traffic mirror rules.
+     */
+    TrafficMirrorFilterRules?: TrafficMirrorFilterRuleSet;
+    /**
+     * The token to use to retrieve the next page of results. The value is null when there are no more results to return.
+     */
+    NextToken?: String;
   }
   export interface DescribeTrafficMirrorFiltersRequest {
     /**
@@ -29392,7 +29440,7 @@ declare namespace EC2 {
   }
   export interface ModifyTrafficMirrorFilterRuleResult {
     /**
-     * Modifies a Traffic Mirror rule.
+     *  Tags are not returned for ModifyTrafficMirrorFilterRule.  A Traffic Mirror rule.
      */
     TrafficMirrorFilterRule?: TrafficMirrorFilterRule;
   }
@@ -33959,7 +34007,7 @@ declare namespace EC2 {
      */
     ResourceTypes?: ValueStringList;
   }
-  export type ResourceType = "capacity-reservation"|"client-vpn-endpoint"|"customer-gateway"|"carrier-gateway"|"coip-pool"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"instance-event-window"|"internet-gateway"|"ipam"|"ipam-pool"|"ipam-scope"|"ipv4pool-ec2"|"ipv6pool-ec2"|"key-pair"|"launch-template"|"local-gateway"|"local-gateway-route-table"|"local-gateway-virtual-interface"|"local-gateway-virtual-interface-group"|"local-gateway-route-table-vpc-association"|"local-gateway-route-table-virtual-interface-group-association"|"natgateway"|"network-acl"|"network-interface"|"network-insights-analysis"|"network-insights-path"|"network-insights-access-scope"|"network-insights-access-scope-analysis"|"placement-group"|"prefix-list"|"replace-root-volume-task"|"reserved-instances"|"route-table"|"security-group"|"security-group-rule"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"subnet-cidr-reservation"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-connect-peer"|"transit-gateway-multicast-domain"|"transit-gateway-policy-table"|"transit-gateway-route-table"|"transit-gateway-route-table-announcement"|"volume"|"vpc"|"vpc-endpoint"|"vpc-endpoint-connection"|"vpc-endpoint-service"|"vpc-endpoint-service-permission"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|"capacity-reservation-fleet"|"traffic-mirror-filter-rule"|"vpc-endpoint-connection-device-type"|"verified-access-instance"|"verified-access-group"|"verified-access-endpoint"|"verified-access-policy"|"verified-access-trust-provider"|"vpn-connection-device-type"|"vpc-block-public-access-exclusion"|"ipam-resource-discovery"|"ipam-resource-discovery-association"|"instance-connect-endpoint"|string;
+  export type ResourceType = "capacity-reservation"|"client-vpn-endpoint"|"customer-gateway"|"carrier-gateway"|"coip-pool"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"instance-event-window"|"internet-gateway"|"ipam"|"ipam-pool"|"ipam-scope"|"ipv4pool-ec2"|"ipv6pool-ec2"|"key-pair"|"launch-template"|"local-gateway"|"local-gateway-route-table"|"local-gateway-virtual-interface"|"local-gateway-virtual-interface-group"|"local-gateway-route-table-vpc-association"|"local-gateway-route-table-virtual-interface-group-association"|"natgateway"|"network-acl"|"network-interface"|"network-insights-analysis"|"network-insights-path"|"network-insights-access-scope"|"network-insights-access-scope-analysis"|"placement-group"|"prefix-list"|"replace-root-volume-task"|"reserved-instances"|"route-table"|"security-group"|"security-group-rule"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"subnet-cidr-reservation"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-connect-peer"|"transit-gateway-multicast-domain"|"transit-gateway-policy-table"|"transit-gateway-route-table"|"transit-gateway-route-table-announcement"|"volume"|"vpc"|"vpc-endpoint"|"vpc-endpoint-connection"|"vpc-endpoint-service"|"vpc-endpoint-service-permission"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|"capacity-reservation-fleet"|"traffic-mirror-filter-rule"|"vpc-endpoint-connection-device-type"|"verified-access-instance"|"verified-access-group"|"verified-access-endpoint"|"verified-access-policy"|"verified-access-trust-provider"|"vpn-connection-device-type"|"vpc-block-public-access-exclusion"|"vpc-encryption-control"|"ipam-resource-discovery"|"ipam-resource-discovery-association"|"instance-connect-endpoint"|string;
   export interface ResponseError {
     /**
      * The error code.
@@ -37268,11 +37316,17 @@ declare namespace EC2 {
      * The description of the Traffic Mirror rule.
      */
     Description?: String;
+    /**
+     * Tags on Traffic Mirroring filter rules.
+     */
+    Tags?: TagList;
   }
   export type TrafficMirrorFilterRuleField = "destination-port-range"|"source-port-range"|"protocol"|"description"|string;
   export type TrafficMirrorFilterRuleFieldList = TrafficMirrorFilterRuleField[];
+  export type TrafficMirrorFilterRuleIdList = TrafficMirrorFilterRuleIdWithResolver[];
   export type TrafficMirrorFilterRuleIdWithResolver = string;
   export type TrafficMirrorFilterRuleList = TrafficMirrorFilterRule[];
+  export type TrafficMirrorFilterRuleSet = TrafficMirrorFilterRule[];
   export type TrafficMirrorFilterSet = TrafficMirrorFilter[];
   export type TrafficMirrorNetworkService = "amazon-dns"|string;
   export type TrafficMirrorNetworkServiceList = TrafficMirrorNetworkService[];

@@ -36,11 +36,11 @@ declare class SESV2 extends Service {
    */
   createConfigurationSet(callback?: (err: AWSError, data: SESV2.Types.CreateConfigurationSetResponse) => void): Request<SESV2.Types.CreateConfigurationSetResponse, AWSError>;
   /**
-   * Create an event destination. Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon SNS to receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage. A single configuration set can include more than one event destination.
+   * Create an event destination. Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon EventBridge and associate a rule to send the event to the specified target. A single configuration set can include more than one event destination.
    */
   createConfigurationSetEventDestination(params: SESV2.Types.CreateConfigurationSetEventDestinationRequest, callback?: (err: AWSError, data: SESV2.Types.CreateConfigurationSetEventDestinationResponse) => void): Request<SESV2.Types.CreateConfigurationSetEventDestinationResponse, AWSError>;
   /**
-   * Create an event destination. Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon SNS to receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage. A single configuration set can include more than one event destination.
+   * Create an event destination. Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon EventBridge and associate a rule to send the event to the specified target. A single configuration set can include more than one event destination.
    */
   createConfigurationSetEventDestination(callback?: (err: AWSError, data: SESV2.Types.CreateConfigurationSetEventDestinationResponse) => void): Request<SESV2.Types.CreateConfigurationSetEventDestinationResponse, AWSError>;
   /**
@@ -132,11 +132,11 @@ declare class SESV2 extends Service {
    */
   deleteConfigurationSet(callback?: (err: AWSError, data: SESV2.Types.DeleteConfigurationSetResponse) => void): Request<SESV2.Types.DeleteConfigurationSetResponse, AWSError>;
   /**
-   * Delete an event destination.  Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon SNS to receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage.
+   * Delete an event destination.  Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon EventBridge and associate a rule to send the event to the specified target.
    */
   deleteConfigurationSetEventDestination(params: SESV2.Types.DeleteConfigurationSetEventDestinationRequest, callback?: (err: AWSError, data: SESV2.Types.DeleteConfigurationSetEventDestinationResponse) => void): Request<SESV2.Types.DeleteConfigurationSetEventDestinationResponse, AWSError>;
   /**
-   * Delete an event destination.  Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon SNS to receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage.
+   * Delete an event destination.  Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon EventBridge and associate a rule to send the event to the specified target.
    */
   deleteConfigurationSetEventDestination(callback?: (err: AWSError, data: SESV2.Types.DeleteConfigurationSetEventDestinationResponse) => void): Request<SESV2.Types.DeleteConfigurationSetEventDestinationResponse, AWSError>;
   /**
@@ -228,11 +228,11 @@ declare class SESV2 extends Service {
    */
   getConfigurationSet(callback?: (err: AWSError, data: SESV2.Types.GetConfigurationSetResponse) => void): Request<SESV2.Types.GetConfigurationSetResponse, AWSError>;
   /**
-   * Retrieve a list of event destinations that are associated with a configuration set.  Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon SNS to receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage.
+   * Retrieve a list of event destinations that are associated with a configuration set.  Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon EventBridge and associate a rule to send the event to the specified target.
    */
   getConfigurationSetEventDestinations(params: SESV2.Types.GetConfigurationSetEventDestinationsRequest, callback?: (err: AWSError, data: SESV2.Types.GetConfigurationSetEventDestinationsResponse) => void): Request<SESV2.Types.GetConfigurationSetEventDestinationsResponse, AWSError>;
   /**
-   * Retrieve a list of event destinations that are associated with a configuration set.  Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon SNS to receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage.
+   * Retrieve a list of event destinations that are associated with a configuration set.  Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon EventBridge and associate a rule to send the event to the specified target.
    */
   getConfigurationSetEventDestinations(callback?: (err: AWSError, data: SESV2.Types.GetConfigurationSetEventDestinationsResponse) => void): Request<SESV2.Types.GetConfigurationSetEventDestinationsResponse, AWSError>;
   /**
@@ -700,11 +700,11 @@ declare class SESV2 extends Service {
    */
   untagResource(callback?: (err: AWSError, data: SESV2.Types.UntagResourceResponse) => void): Request<SESV2.Types.UntagResourceResponse, AWSError>;
   /**
-   * Update the configuration of an event destination for a configuration set.  Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon SNS to receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage.
+   * Update the configuration of an event destination for a configuration set.  Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon EventBridge and associate a rule to send the event to the specified target.
    */
   updateConfigurationSetEventDestination(params: SESV2.Types.UpdateConfigurationSetEventDestinationRequest, callback?: (err: AWSError, data: SESV2.Types.UpdateConfigurationSetEventDestinationResponse) => void): Request<SESV2.Types.UpdateConfigurationSetEventDestinationResponse, AWSError>;
   /**
-   * Update the configuration of an event destination for a configuration set.  Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon SNS to receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage.
+   * Update the configuration of an event destination for a configuration set.  Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon EventBridge and associate a rule to send the event to the specified target.
    */
   updateConfigurationSetEventDestination(callback?: (err: AWSError, data: SESV2.Types.UpdateConfigurationSetEventDestinationResponse) => void): Request<SESV2.Types.UpdateConfigurationSetEventDestinationResponse, AWSError>;
   /**
@@ -1721,6 +1721,12 @@ declare namespace SESV2 {
   export type ErrorMessage = string;
   export type Esp = string;
   export type Esps = Esp[];
+  export interface EventBridgeDestination {
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon EventBridge bus to publish email events to. Only the default bus is supported. 
+     */
+    EventBusArn: AmazonResourceName;
+  }
   export interface EventDestination {
     /**
      * A name that identifies the event destination.
@@ -1743,9 +1749,13 @@ declare namespace SESV2 {
      */
     CloudWatchDestination?: CloudWatchDestination;
     /**
-     * An object that defines an Amazon SNS destination for email events. You can use Amazon SNS to send notification when certain email events occur.
+     * An object that defines an Amazon SNS destination for email events. You can use Amazon SNS to send notifications when certain email events occur.
      */
     SnsDestination?: SnsDestination;
+    /**
+     * An object that defines an Amazon EventBridge destination for email events. You can use Amazon EventBridge to send notifications when certain email events occur.
+     */
+    EventBridgeDestination?: EventBridgeDestination;
     /**
      * An object that defines an Amazon Pinpoint project destination for email events. You can send email event data to a Amazon Pinpoint project to view metrics using the Transactional Messaging dashboards that are built in to Amazon Pinpoint. For more information, see Transactional Messaging Charts in the Amazon Pinpoint User Guide.
      */
@@ -1769,9 +1779,13 @@ declare namespace SESV2 {
      */
     CloudWatchDestination?: CloudWatchDestination;
     /**
-     * An object that defines an Amazon SNS destination for email events. You can use Amazon SNS to send notification when certain email events occur.
+     * An object that defines an Amazon SNS destination for email events. You can use Amazon SNS to send notifications when certain email events occur.
      */
     SnsDestination?: SnsDestination;
+    /**
+     * An object that defines an Amazon EventBridge destination for email events. You can use Amazon EventBridge to send notifications when certain email events occur.
+     */
+    EventBridgeDestination?: EventBridgeDestination;
     /**
      * An object that defines an Amazon Pinpoint project destination for email events. You can send email event data to a Amazon Pinpoint project to view metrics using the Transactional Messaging dashboards that are built in to Amazon Pinpoint. For more information, see Transactional Messaging Charts in the Amazon Pinpoint User Guide.
      */

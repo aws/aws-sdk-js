@@ -1,0 +1,1917 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2022-12-06",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "apptest",
+    "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
+    "serviceFullName": "AWS Mainframe Modernization Application Testing",
+    "serviceId": "AppTest",
+    "signatureVersion": "v4",
+    "signingName": "apptest",
+    "uid": "apptest-2022-12-06"
+  },
+  "operations": {
+    "CreateTestCase": {
+      "http": {
+        "requestUri": "/testcase",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name",
+          "steps"
+        ],
+        "members": {
+          "name": {},
+          "description": {},
+          "steps": {
+            "shape": "S4"
+          },
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "tags": {
+            "shape": "S1c"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "testCaseId",
+          "testCaseVersion"
+        ],
+        "members": {
+          "testCaseId": {},
+          "testCaseVersion": {
+            "type": "integer"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "CreateTestConfiguration": {
+      "http": {
+        "requestUri": "/testconfiguration",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name",
+          "resources"
+        ],
+        "members": {
+          "name": {},
+          "description": {},
+          "resources": {
+            "shape": "S1j"
+          },
+          "properties": {
+            "shape": "S1n"
+          },
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "tags": {
+            "shape": "S1c"
+          },
+          "serviceSettings": {
+            "shape": "S1s"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "testConfigurationId",
+          "testConfigurationVersion"
+        ],
+        "members": {
+          "testConfigurationId": {},
+          "testConfigurationVersion": {
+            "type": "integer"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "CreateTestSuite": {
+      "http": {
+        "requestUri": "/testsuite",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name",
+          "testCases"
+        ],
+        "members": {
+          "name": {},
+          "description": {},
+          "beforeSteps": {
+            "shape": "S4"
+          },
+          "afterSteps": {
+            "shape": "S4"
+          },
+          "testCases": {
+            "shape": "S1v"
+          },
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "tags": {
+            "shape": "S1c"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "testSuiteId",
+          "testSuiteVersion"
+        ],
+        "members": {
+          "testSuiteId": {},
+          "testSuiteVersion": {
+            "type": "integer"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "DeleteTestCase": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/testcases/{testCaseId}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "testCaseId"
+        ],
+        "members": {
+          "testCaseId": {
+            "location": "uri",
+            "locationName": "testCaseId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "DeleteTestConfiguration": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/testconfigurations/{testConfigurationId}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "testConfigurationId"
+        ],
+        "members": {
+          "testConfigurationId": {
+            "location": "uri",
+            "locationName": "testConfigurationId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "DeleteTestRun": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/testruns/{testRunId}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "testRunId"
+        ],
+        "members": {
+          "testRunId": {
+            "location": "uri",
+            "locationName": "testRunId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "DeleteTestSuite": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/testsuites/{testSuiteId}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "testSuiteId"
+        ],
+        "members": {
+          "testSuiteId": {
+            "location": "uri",
+            "locationName": "testSuiteId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "GetTestCase": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/testcases/{testCaseId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "testCaseId"
+        ],
+        "members": {
+          "testCaseId": {
+            "location": "uri",
+            "locationName": "testCaseId"
+          },
+          "testCaseVersion": {
+            "location": "querystring",
+            "locationName": "testCaseVersion",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "testCaseId",
+          "testCaseArn",
+          "name",
+          "latestVersion",
+          "testCaseVersion",
+          "status",
+          "creationTime",
+          "lastUpdateTime",
+          "steps"
+        ],
+        "members": {
+          "testCaseId": {},
+          "testCaseArn": {},
+          "name": {},
+          "description": {},
+          "latestVersion": {
+            "type": "structure",
+            "required": [
+              "version",
+              "status"
+            ],
+            "members": {
+              "version": {
+                "type": "integer"
+              },
+              "status": {},
+              "statusReason": {}
+            }
+          },
+          "testCaseVersion": {
+            "type": "integer"
+          },
+          "status": {},
+          "statusReason": {},
+          "creationTime": {
+            "type": "timestamp"
+          },
+          "lastUpdateTime": {
+            "type": "timestamp"
+          },
+          "steps": {
+            "shape": "S4"
+          },
+          "tags": {
+            "shape": "S1c"
+          }
+        }
+      }
+    },
+    "GetTestConfiguration": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/testconfigurations/{testConfigurationId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "testConfigurationId"
+        ],
+        "members": {
+          "testConfigurationId": {
+            "location": "uri",
+            "locationName": "testConfigurationId"
+          },
+          "testConfigurationVersion": {
+            "location": "querystring",
+            "locationName": "testConfigurationVersion",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "testConfigurationId",
+          "name",
+          "testConfigurationArn",
+          "latestVersion",
+          "testConfigurationVersion",
+          "status",
+          "creationTime",
+          "lastUpdateTime",
+          "resources",
+          "properties"
+        ],
+        "members": {
+          "testConfigurationId": {},
+          "name": {},
+          "testConfigurationArn": {},
+          "latestVersion": {
+            "type": "structure",
+            "required": [
+              "version",
+              "status"
+            ],
+            "members": {
+              "version": {
+                "type": "integer"
+              },
+              "status": {},
+              "statusReason": {}
+            }
+          },
+          "testConfigurationVersion": {
+            "type": "integer"
+          },
+          "status": {},
+          "statusReason": {},
+          "creationTime": {
+            "type": "timestamp"
+          },
+          "lastUpdateTime": {
+            "type": "timestamp"
+          },
+          "description": {},
+          "resources": {
+            "shape": "S1j"
+          },
+          "properties": {
+            "shape": "S1n"
+          },
+          "tags": {
+            "shape": "S1c"
+          },
+          "serviceSettings": {
+            "shape": "S1s"
+          }
+        }
+      }
+    },
+    "GetTestRunStep": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/testruns/{testRunId}/steps/{stepName}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "testRunId",
+          "stepName"
+        ],
+        "members": {
+          "testRunId": {
+            "location": "uri",
+            "locationName": "testRunId"
+          },
+          "stepName": {
+            "location": "uri",
+            "locationName": "stepName"
+          },
+          "testCaseId": {
+            "location": "querystring",
+            "locationName": "testCaseId"
+          },
+          "testSuiteId": {
+            "location": "querystring",
+            "locationName": "testSuiteId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "stepName",
+          "testRunId",
+          "status",
+          "runStartTime"
+        ],
+        "members": {
+          "stepName": {},
+          "testRunId": {},
+          "testCaseId": {},
+          "testCaseVersion": {
+            "type": "integer"
+          },
+          "testSuiteId": {},
+          "testSuiteVersion": {
+            "type": "integer"
+          },
+          "beforeStep": {
+            "type": "boolean"
+          },
+          "afterStep": {
+            "type": "boolean"
+          },
+          "status": {},
+          "statusReason": {},
+          "runStartTime": {
+            "type": "timestamp"
+          },
+          "runEndTime": {
+            "type": "timestamp"
+          },
+          "stepRunSummary": {
+            "type": "structure",
+            "members": {
+              "mainframeAction": {
+                "type": "structure",
+                "members": {
+                  "batch": {
+                    "type": "structure",
+                    "required": [
+                      "stepInput"
+                    ],
+                    "members": {
+                      "stepInput": {
+                        "type": "structure",
+                        "required": [
+                          "resource",
+                          "batchJobName"
+                        ],
+                        "members": {
+                          "resource": {
+                            "shape": "S2n"
+                          },
+                          "batchJobName": {},
+                          "batchJobParameters": {
+                            "shape": "Sk"
+                          },
+                          "exportDataSetNames": {
+                            "shape": "Sm"
+                          },
+                          "properties": {
+                            "shape": "Ss"
+                          }
+                        }
+                      },
+                      "stepOutput": {
+                        "type": "structure",
+                        "members": {
+                          "dataSetExportLocation": {},
+                          "dmsOutputLocation": {},
+                          "dataSetDetails": {
+                            "shape": "Sx"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "tn3270": {
+                    "type": "structure",
+                    "required": [
+                      "stepInput"
+                    ],
+                    "members": {
+                      "stepInput": {
+                        "type": "structure",
+                        "required": [
+                          "resource",
+                          "script"
+                        ],
+                        "members": {
+                          "resource": {
+                            "shape": "S2n"
+                          },
+                          "script": {
+                            "type": "structure",
+                            "required": [
+                              "scriptLocation",
+                              "type"
+                            ],
+                            "members": {
+                              "scriptLocation": {},
+                              "type": {}
+                            }
+                          },
+                          "exportDataSetNames": {
+                            "shape": "Sm"
+                          },
+                          "properties": {
+                            "shape": "Ss"
+                          }
+                        }
+                      },
+                      "stepOutput": {
+                        "type": "structure",
+                        "required": [
+                          "scriptOutputLocation"
+                        ],
+                        "members": {
+                          "dataSetExportLocation": {},
+                          "dmsOutputLocation": {},
+                          "dataSetDetails": {
+                            "shape": "Sx"
+                          },
+                          "scriptOutputLocation": {}
+                        }
+                      }
+                    }
+                  }
+                },
+                "union": true
+              },
+              "compareAction": {
+                "type": "structure",
+                "required": [
+                  "type"
+                ],
+                "members": {
+                  "type": {
+                    "type": "structure",
+                    "members": {
+                      "fileType": {
+                        "type": "structure",
+                        "members": {
+                          "datasets": {
+                            "type": "structure",
+                            "required": [
+                              "stepInput"
+                            ],
+                            "members": {
+                              "stepInput": {
+                                "type": "structure",
+                                "required": [
+                                  "sourceLocation",
+                                  "targetLocation",
+                                  "sourceDataSets",
+                                  "targetDataSets"
+                                ],
+                                "members": {
+                                  "sourceLocation": {},
+                                  "targetLocation": {},
+                                  "sourceDataSets": {
+                                    "shape": "Sx"
+                                  },
+                                  "targetDataSets": {
+                                    "shape": "Sx"
+                                  }
+                                }
+                              },
+                              "stepOutput": {
+                                "type": "structure",
+                                "required": [
+                                  "comparisonOutputLocation",
+                                  "comparisonStatus"
+                                ],
+                                "members": {
+                                  "comparisonOutputLocation": {},
+                                  "comparisonStatus": {}
+                                }
+                              }
+                            }
+                          },
+                          "databaseCDC": {
+                            "type": "structure",
+                            "required": [
+                              "stepInput"
+                            ],
+                            "members": {
+                              "stepInput": {
+                                "type": "structure",
+                                "required": [
+                                  "sourceLocation",
+                                  "targetLocation",
+                                  "sourceMetadata",
+                                  "targetMetadata"
+                                ],
+                                "members": {
+                                  "sourceLocation": {},
+                                  "targetLocation": {},
+                                  "outputLocation": {},
+                                  "sourceMetadata": {
+                                    "shape": "S14"
+                                  },
+                                  "targetMetadata": {
+                                    "shape": "S17"
+                                  }
+                                }
+                              },
+                              "stepOutput": {
+                                "type": "structure",
+                                "required": [
+                                  "comparisonOutputLocation",
+                                  "comparisonStatus"
+                                ],
+                                "members": {
+                                  "comparisonOutputLocation": {},
+                                  "comparisonStatus": {}
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "union": true
+                      }
+                    },
+                    "union": true
+                  }
+                }
+              },
+              "resourceAction": {
+                "type": "structure",
+                "members": {
+                  "cloudFormation": {
+                    "type": "structure",
+                    "members": {
+                      "createCloudformation": {
+                        "type": "structure",
+                        "required": [
+                          "stepInput"
+                        ],
+                        "members": {
+                          "stepInput": {
+                            "type": "structure",
+                            "required": [
+                              "templateLocation"
+                            ],
+                            "members": {
+                              "templateLocation": {},
+                              "parameters": {
+                                "shape": "S1n"
+                              }
+                            }
+                          },
+                          "stepOutput": {
+                            "type": "structure",
+                            "required": [
+                              "stackId"
+                            ],
+                            "members": {
+                              "stackId": {},
+                              "exports": {
+                                "shape": "S1n"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "deleteCloudformation": {
+                        "type": "structure",
+                        "required": [
+                          "stepInput"
+                        ],
+                        "members": {
+                          "stepInput": {
+                            "type": "structure",
+                            "required": [
+                              "stackId"
+                            ],
+                            "members": {
+                              "stackId": {}
+                            }
+                          },
+                          "stepOutput": {
+                            "type": "structure",
+                            "members": {}
+                          }
+                        }
+                      }
+                    },
+                    "union": true
+                  },
+                  "m2ManagedApplication": {
+                    "type": "structure",
+                    "required": [
+                      "stepInput"
+                    ],
+                    "members": {
+                      "stepInput": {
+                        "type": "structure",
+                        "required": [
+                          "applicationId",
+                          "runtime",
+                          "actionType"
+                        ],
+                        "members": {
+                          "applicationId": {},
+                          "runtime": {},
+                          "vpcEndpointServiceName": {},
+                          "listenerPort": {
+                            "type": "integer"
+                          },
+                          "actionType": {},
+                          "properties": {
+                            "shape": "Sb"
+                          }
+                        }
+                      },
+                      "stepOutput": {
+                        "type": "structure",
+                        "members": {
+                          "importDataSetSummary": {
+                            "shape": "S1n"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "m2NonManagedApplication": {
+                    "type": "structure",
+                    "required": [
+                      "stepInput"
+                    ],
+                    "members": {
+                      "stepInput": {
+                        "type": "structure",
+                        "required": [
+                          "vpcEndpointServiceName",
+                          "listenerPort",
+                          "runtime",
+                          "actionType"
+                        ],
+                        "members": {
+                          "vpcEndpointServiceName": {},
+                          "listenerPort": {
+                            "type": "integer"
+                          },
+                          "runtime": {},
+                          "webAppName": {},
+                          "actionType": {}
+                        }
+                      },
+                      "stepOutput": {
+                        "type": "structure",
+                        "members": {}
+                      }
+                    }
+                  }
+                },
+                "union": true
+              }
+            },
+            "union": true
+          }
+        }
+      }
+    },
+    "GetTestSuite": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/testsuites/{testSuiteId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "testSuiteId"
+        ],
+        "members": {
+          "testSuiteId": {
+            "location": "uri",
+            "locationName": "testSuiteId"
+          },
+          "testSuiteVersion": {
+            "location": "querystring",
+            "locationName": "testSuiteVersion",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "testSuiteId",
+          "name",
+          "latestVersion",
+          "testSuiteVersion",
+          "testSuiteArn",
+          "creationTime",
+          "lastUpdateTime",
+          "beforeSteps",
+          "afterSteps",
+          "testCases"
+        ],
+        "members": {
+          "testSuiteId": {},
+          "name": {},
+          "latestVersion": {
+            "type": "structure",
+            "required": [
+              "version",
+              "status"
+            ],
+            "members": {
+              "version": {
+                "type": "integer"
+              },
+              "status": {},
+              "statusReason": {}
+            }
+          },
+          "testSuiteVersion": {
+            "type": "integer"
+          },
+          "status": {},
+          "statusReason": {},
+          "testSuiteArn": {},
+          "creationTime": {
+            "type": "timestamp"
+          },
+          "lastUpdateTime": {
+            "type": "timestamp"
+          },
+          "description": {},
+          "beforeSteps": {
+            "shape": "S4"
+          },
+          "afterSteps": {
+            "shape": "S4"
+          },
+          "testCases": {
+            "shape": "S1v"
+          },
+          "tags": {
+            "shape": "S1c"
+          }
+        }
+      }
+    },
+    "ListTagsForResource": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn"
+        ],
+        "members": {
+          "resourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "tags"
+        ],
+        "members": {
+          "tags": {
+            "shape": "S1c"
+          }
+        }
+      }
+    },
+    "ListTestCases": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/testcases",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "testCaseIds": {
+            "location": "querystring",
+            "locationName": "testCaseIds",
+            "type": "list",
+            "member": {}
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "testCases"
+        ],
+        "members": {
+          "testCases": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "testCaseId",
+                "testCaseArn",
+                "name",
+                "latestVersion",
+                "status",
+                "creationTime",
+                "lastUpdateTime"
+              ],
+              "members": {
+                "testCaseId": {},
+                "testCaseArn": {},
+                "name": {},
+                "statusReason": {},
+                "latestVersion": {
+                  "type": "integer"
+                },
+                "status": {},
+                "creationTime": {
+                  "type": "timestamp"
+                },
+                "lastUpdateTime": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListTestConfigurations": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/testconfigurations",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "testConfigurationIds": {
+            "location": "querystring",
+            "locationName": "testConfigurationIds",
+            "type": "list",
+            "member": {}
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "testConfigurations"
+        ],
+        "members": {
+          "testConfigurations": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "testConfigurationId",
+                "name",
+                "latestVersion",
+                "testConfigurationArn",
+                "status",
+                "creationTime",
+                "lastUpdateTime"
+              ],
+              "members": {
+                "testConfigurationId": {},
+                "name": {},
+                "statusReason": {},
+                "latestVersion": {
+                  "type": "integer"
+                },
+                "testConfigurationArn": {},
+                "status": {},
+                "creationTime": {
+                  "type": "timestamp"
+                },
+                "lastUpdateTime": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListTestRunSteps": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/testruns/{testRunId}/steps",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "testRunId"
+        ],
+        "members": {
+          "testRunId": {
+            "location": "uri",
+            "locationName": "testRunId"
+          },
+          "testCaseId": {
+            "location": "querystring",
+            "locationName": "testCaseId"
+          },
+          "testSuiteId": {
+            "location": "querystring",
+            "locationName": "testSuiteId"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "testRunSteps"
+        ],
+        "members": {
+          "testRunSteps": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "stepName",
+                "testRunId",
+                "status",
+                "runStartTime"
+              ],
+              "members": {
+                "stepName": {},
+                "testRunId": {},
+                "testCaseId": {},
+                "testCaseVersion": {
+                  "type": "integer"
+                },
+                "testSuiteId": {},
+                "testSuiteVersion": {
+                  "type": "integer"
+                },
+                "beforeStep": {
+                  "type": "boolean"
+                },
+                "afterStep": {
+                  "type": "boolean"
+                },
+                "status": {},
+                "statusReason": {},
+                "runStartTime": {
+                  "type": "timestamp"
+                },
+                "runEndTime": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListTestRunTestCases": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/testruns/{testRunId}/testcases",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "testRunId"
+        ],
+        "members": {
+          "testRunId": {
+            "location": "uri",
+            "locationName": "testRunId"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "testRunTestCases"
+        ],
+        "members": {
+          "testRunTestCases": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "testCaseId",
+                "testCaseVersion",
+                "testRunId",
+                "status",
+                "runStartTime"
+              ],
+              "members": {
+                "testCaseId": {},
+                "testCaseVersion": {
+                  "type": "integer"
+                },
+                "testRunId": {},
+                "status": {},
+                "statusReason": {},
+                "runStartTime": {
+                  "type": "timestamp"
+                },
+                "runEndTime": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListTestRuns": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/testruns",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "testSuiteId": {
+            "location": "querystring",
+            "locationName": "testSuiteId"
+          },
+          "testRunIds": {
+            "location": "querystring",
+            "locationName": "testrunIds",
+            "type": "list",
+            "member": {}
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "testRuns"
+        ],
+        "members": {
+          "testRuns": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "testRunId",
+                "testRunArn",
+                "testSuiteId",
+                "testSuiteVersion",
+                "status",
+                "runStartTime"
+              ],
+              "members": {
+                "testRunId": {},
+                "testRunArn": {},
+                "testSuiteId": {},
+                "testSuiteVersion": {
+                  "type": "integer"
+                },
+                "testConfigurationId": {},
+                "testConfigurationVersion": {
+                  "type": "integer"
+                },
+                "status": {},
+                "statusReason": {},
+                "runStartTime": {
+                  "type": "timestamp"
+                },
+                "runEndTime": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListTestSuites": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/testsuites",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "testSuiteIds": {
+            "location": "querystring",
+            "locationName": "testSuiteIds",
+            "type": "list",
+            "member": {}
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "testSuites"
+        ],
+        "members": {
+          "testSuites": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "testSuiteId",
+                "name",
+                "latestVersion",
+                "testSuiteArn",
+                "status",
+                "creationTime",
+                "lastUpdateTime"
+              ],
+              "members": {
+                "testSuiteId": {},
+                "name": {},
+                "statusReason": {},
+                "latestVersion": {
+                  "type": "integer"
+                },
+                "testSuiteArn": {},
+                "status": {},
+                "creationTime": {
+                  "type": "timestamp"
+                },
+                "lastUpdateTime": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "StartTestRun": {
+      "http": {
+        "requestUri": "/testrun",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "testSuiteId"
+        ],
+        "members": {
+          "testSuiteId": {},
+          "testConfigurationId": {},
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "tags": {
+            "shape": "S1c"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "testRunId",
+          "testRunStatus"
+        ],
+        "members": {
+          "testRunId": {},
+          "testRunStatus": {}
+        }
+      }
+    },
+    "TagResource": {
+      "http": {
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn",
+          "tags"
+        ],
+        "members": {
+          "resourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          },
+          "tags": {
+            "shape": "S1c"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UntagResource": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn",
+          "tagKeys"
+        ],
+        "members": {
+          "resourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          },
+          "tagKeys": {
+            "location": "querystring",
+            "locationName": "tagKeys",
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "UpdateTestCase": {
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/testcases/{testCaseId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "testCaseId"
+        ],
+        "members": {
+          "testCaseId": {
+            "location": "uri",
+            "locationName": "testCaseId"
+          },
+          "description": {},
+          "steps": {
+            "shape": "S4"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "testCaseId",
+          "testCaseVersion"
+        ],
+        "members": {
+          "testCaseId": {},
+          "testCaseVersion": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "UpdateTestConfiguration": {
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/testconfigurations/{testConfigurationId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "testConfigurationId"
+        ],
+        "members": {
+          "testConfigurationId": {
+            "location": "uri",
+            "locationName": "testConfigurationId"
+          },
+          "description": {},
+          "resources": {
+            "shape": "S1j"
+          },
+          "properties": {
+            "shape": "S1n"
+          },
+          "serviceSettings": {
+            "shape": "S1s"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "testConfigurationId",
+          "testConfigurationVersion"
+        ],
+        "members": {
+          "testConfigurationId": {},
+          "testConfigurationVersion": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "UpdateTestSuite": {
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/testsuites/{testSuiteId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "testSuiteId"
+        ],
+        "members": {
+          "testSuiteId": {
+            "location": "uri",
+            "locationName": "testSuiteId"
+          },
+          "description": {},
+          "beforeSteps": {
+            "shape": "S4"
+          },
+          "afterSteps": {
+            "shape": "S4"
+          },
+          "testCases": {
+            "shape": "S1v"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "testSuiteId"
+        ],
+        "members": {
+          "testSuiteId": {},
+          "testSuiteVersion": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  },
+  "shapes": {
+    "S4": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "name",
+          "action"
+        ],
+        "members": {
+          "name": {},
+          "description": {},
+          "action": {
+            "type": "structure",
+            "members": {
+              "resourceAction": {
+                "type": "structure",
+                "members": {
+                  "m2ManagedApplicationAction": {
+                    "type": "structure",
+                    "required": [
+                      "resource",
+                      "actionType"
+                    ],
+                    "members": {
+                      "resource": {},
+                      "actionType": {},
+                      "properties": {
+                        "shape": "Sb"
+                      }
+                    }
+                  },
+                  "m2NonManagedApplicationAction": {
+                    "type": "structure",
+                    "required": [
+                      "resource",
+                      "actionType"
+                    ],
+                    "members": {
+                      "resource": {},
+                      "actionType": {}
+                    }
+                  },
+                  "cloudFormationAction": {
+                    "type": "structure",
+                    "required": [
+                      "resource"
+                    ],
+                    "members": {
+                      "resource": {},
+                      "actionType": {}
+                    }
+                  }
+                },
+                "union": true
+              },
+              "mainframeAction": {
+                "type": "structure",
+                "required": [
+                  "resource",
+                  "actionType"
+                ],
+                "members": {
+                  "resource": {},
+                  "actionType": {
+                    "type": "structure",
+                    "members": {
+                      "batch": {
+                        "type": "structure",
+                        "required": [
+                          "batchJobName"
+                        ],
+                        "members": {
+                          "batchJobName": {},
+                          "batchJobParameters": {
+                            "shape": "Sk"
+                          },
+                          "exportDataSetNames": {
+                            "shape": "Sm"
+                          }
+                        }
+                      },
+                      "tn3270": {
+                        "type": "structure",
+                        "required": [
+                          "script"
+                        ],
+                        "members": {
+                          "script": {
+                            "type": "structure",
+                            "required": [
+                              "scriptLocation",
+                              "type"
+                            ],
+                            "members": {
+                              "scriptLocation": {},
+                              "type": {}
+                            }
+                          },
+                          "exportDataSetNames": {
+                            "shape": "Sm"
+                          }
+                        }
+                      }
+                    },
+                    "union": true
+                  },
+                  "properties": {
+                    "shape": "Ss"
+                  }
+                }
+              },
+              "compareAction": {
+                "type": "structure",
+                "required": [
+                  "input"
+                ],
+                "members": {
+                  "input": {
+                    "type": "structure",
+                    "members": {
+                      "file": {
+                        "type": "structure",
+                        "required": [
+                          "sourceLocation",
+                          "targetLocation",
+                          "fileMetadata"
+                        ],
+                        "members": {
+                          "sourceLocation": {},
+                          "targetLocation": {},
+                          "fileMetadata": {
+                            "type": "structure",
+                            "members": {
+                              "dataSets": {
+                                "shape": "Sx"
+                              },
+                              "databaseCDC": {
+                                "type": "structure",
+                                "required": [
+                                  "sourceMetadata",
+                                  "targetMetadata"
+                                ],
+                                "members": {
+                                  "sourceMetadata": {
+                                    "shape": "S14"
+                                  },
+                                  "targetMetadata": {
+                                    "shape": "S17"
+                                  }
+                                }
+                              }
+                            },
+                            "union": true
+                          }
+                        }
+                      }
+                    },
+                    "union": true
+                  },
+                  "output": {
+                    "type": "structure",
+                    "members": {
+                      "file": {
+                        "type": "structure",
+                        "members": {
+                          "fileLocation": {}
+                        }
+                      }
+                    },
+                    "union": true
+                  }
+                }
+              }
+            },
+            "union": true
+          }
+        }
+      }
+    },
+    "Sb": {
+      "type": "structure",
+      "members": {
+        "forceStop": {
+          "type": "boolean"
+        },
+        "importDataSetLocation": {}
+      }
+    },
+    "Sk": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "Sm": {
+      "type": "list",
+      "member": {}
+    },
+    "Ss": {
+      "type": "structure",
+      "members": {
+        "dmsTaskArn": {}
+      }
+    },
+    "Sx": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "type",
+          "name",
+          "ccsid",
+          "format",
+          "length"
+        ],
+        "members": {
+          "type": {},
+          "name": {},
+          "ccsid": {},
+          "format": {},
+          "length": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "S14": {
+      "type": "structure",
+      "required": [
+        "type",
+        "captureTool"
+      ],
+      "members": {
+        "type": {},
+        "captureTool": {}
+      }
+    },
+    "S17": {
+      "type": "structure",
+      "required": [
+        "type",
+        "captureTool"
+      ],
+      "members": {
+        "type": {},
+        "captureTool": {}
+      }
+    },
+    "S1c": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "S1j": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "name",
+          "type"
+        ],
+        "members": {
+          "name": {},
+          "type": {
+            "type": "structure",
+            "members": {
+              "cloudFormation": {
+                "type": "structure",
+                "required": [
+                  "templateLocation"
+                ],
+                "members": {
+                  "templateLocation": {},
+                  "parameters": {
+                    "shape": "S1n"
+                  }
+                }
+              },
+              "m2ManagedApplication": {
+                "type": "structure",
+                "required": [
+                  "applicationId",
+                  "runtime"
+                ],
+                "members": {
+                  "applicationId": {},
+                  "runtime": {},
+                  "vpcEndpointServiceName": {},
+                  "listenerPort": {}
+                }
+              },
+              "m2NonManagedApplication": {
+                "type": "structure",
+                "required": [
+                  "vpcEndpointServiceName",
+                  "listenerPort",
+                  "runtime"
+                ],
+                "members": {
+                  "vpcEndpointServiceName": {},
+                  "listenerPort": {},
+                  "runtime": {},
+                  "webAppName": {}
+                }
+              }
+            },
+            "union": true
+          }
+        }
+      }
+    },
+    "S1n": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "S1s": {
+      "type": "structure",
+      "members": {
+        "kmsKeyId": {}
+      }
+    },
+    "S1v": {
+      "type": "structure",
+      "members": {
+        "sequential": {
+          "type": "list",
+          "member": {}
+        }
+      },
+      "union": true
+    },
+    "S2n": {
+      "type": "structure",
+      "members": {
+        "m2ManagedApplication": {
+          "type": "structure",
+          "required": [
+            "applicationId",
+            "runtime"
+          ],
+          "members": {
+            "applicationId": {},
+            "runtime": {},
+            "listenerPort": {
+              "type": "integer"
+            }
+          }
+        },
+        "m2NonManagedApplication": {
+          "type": "structure",
+          "required": [
+            "vpcEndpointServiceName",
+            "listenerPort",
+            "runtime"
+          ],
+          "members": {
+            "vpcEndpointServiceName": {},
+            "listenerPort": {
+              "type": "integer"
+            },
+            "runtime": {},
+            "webAppName": {}
+          }
+        }
+      },
+      "union": true
+    }
+  }
+}

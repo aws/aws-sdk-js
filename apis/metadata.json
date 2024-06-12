@@ -1429,5 +1429,8 @@
   "pcaconnectorscep": {
     "prefix": "pca-connector-scep",
     "name": "PcaConnectorScep"
+  },
+  "apptest": {
+    "name": "AppTest"
   }
 }

@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1639.0-->
+<!--LATEST=2.1640.0-->
 <!--ENTRYINSERT-->
+
+## 2.1640.0
+* bugfix: BackupStorage: Deprecate BackupStorage
+* feature: AppTest: AWS Mainframe Modernization Application Testing is an AWS Mainframe Modernization service feature that automates functional equivalence testing for mainframe application modernization and migration to AWS, and regression testing.
+* feature: EC2: Tagging support for Traffic Mirroring FilterRule resource
+* feature: OSIS: SDK changes for self-managed vpc endpoint to OpenSearch ingestion pipelines.
+* feature: SESV2: This release adds support for Amazon EventBridge as an email sending events destination.
+* feature: SecretsManager: Introducing RotationToken parameter for PutSecretValue API
+* feature: SecurityLake: This release updates request validation regex to account for non-commercial aws partitions.
 
 ## 2.1639.0
 * feature: AccessAnalyzer: IAM Access Analyzer now provides policy recommendations to help resolve unused permissions for IAM roles and users. Additionally, IAM Access Analyzer now extends its custom policy checks to detect when IAM policies grant public access or access to critical resources ahead of deployments.

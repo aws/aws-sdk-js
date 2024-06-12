@@ -10,7 +10,10 @@
     "serviceFullName": "Amazon OpenSearch Ingestion",
     "serviceId": "OSIS",
     "signatureVersion": "v4",
-    "uid": "osis-2022-01-01"
+    "uid": "osis-2022-01-01",
+    "auth": [
+      "aws.auth#sigv4"
+    ]
   },
   "operations": {
     "CreatePipeline": {
@@ -912,6 +915,10 @@
         "EncryptionAtRestOptions": {
           "shape": "EncryptionAtRestOptions"
         },
+        "VpcEndpointService": {
+          "shape": "String",
+          "documentation": "<p>The VPC endpoint service name for the pipeline.</p>"
+        },
         "ServiceVpcEndpoints": {
           "shape": "ServiceVpcEndpointsList",
           "documentation": "<p>A list of VPC endpoints that OpenSearch Ingestion has created to other Amazon Web Services services.</p>"
@@ -1415,6 +1422,13 @@
       },
       "documentation": "<p>An OpenSearch Ingestion-managed VPC endpoint that will access one or more pipelines.</p>"
     },
+    "VpcEndpointManagement": {
+      "type": "string",
+      "enum": [
+        "CUSTOMER",
+        "SERVICE"
+      ]
+    },
     "VpcEndpointServiceName": {
       "type": "string",
       "enum": [
@@ -1444,6 +1458,10 @@
         "VpcAttachmentOptions": {
           "shape": "VpcAttachmentOptions",
           "documentation": "<p>Options for attaching a VPC to a pipeline.</p>"
+        },
+        "VpcEndpointManagement": {
+          "shape": "VpcEndpointManagement",
+          "documentation": "<p>Defines whether you or Amazon OpenSearch Ingestion service create and manage the VPC endpoint configured for the pipeline.</p>"
         }
       },
       "documentation": "<p>Options that specify the subnets and security groups for an OpenSearch Ingestion VPC endpoint.</p>"

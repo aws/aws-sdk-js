@@ -383,6 +383,7 @@ export abstract class ConfigurationServicePlaceholders {
   taxsettings?: AWS.TaxSettings.Types.ClientConfiguration;
   applicationsignals?: AWS.ApplicationSignals.Types.ClientConfiguration;
   pcaconnectorscep?: AWS.PcaConnectorScep.Types.ClientConfiguration;
+  apptest?: AWS.AppTest.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -768,4 +769,5 @@ export interface ConfigurationServiceApiVersions {
   taxsettings?: AWS.TaxSettings.Types.apiVersion;
   applicationsignals?: AWS.ApplicationSignals.Types.apiVersion;
   pcaconnectorscep?: AWS.PcaConnectorScep.Types.apiVersion;
+  apptest?: AWS.AppTest.Types.apiVersion;
 }

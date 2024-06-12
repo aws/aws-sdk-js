@@ -390,6 +390,10 @@ declare namespace OSIS {
     BufferOptions?: BufferOptions;
     EncryptionAtRestOptions?: EncryptionAtRestOptions;
     /**
+     * The VPC endpoint service name for the pipeline.
+     */
+    VpcEndpointService?: String;
+    /**
      * A list of VPC endpoints that OpenSearch Ingestion has created to other Amazon Web Services services.
      */
     ServiceVpcEndpoints?: ServiceVpcEndpointsList;
@@ -669,6 +673,7 @@ declare namespace OSIS {
      */
     VpcOptions?: VpcOptions;
   }
+  export type VpcEndpointManagement = "CUSTOMER"|"SERVICE"|string;
   export type VpcEndpointServiceName = "OPENSEARCH_SERVERLESS"|string;
   export type VpcEndpointsList = VpcEndpoint[];
   export interface VpcOptions {
@@ -684,6 +689,10 @@ declare namespace OSIS {
      * Options for attaching a VPC to a pipeline.
      */
     VpcAttachmentOptions?: VpcAttachmentOptions;
+    /**
+     * Defines whether you or Amazon OpenSearch Ingestion service create and manage the VPC endpoint configured for the pipeline.
+     */
+    VpcEndpointManagement?: VpcEndpointManagement;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
