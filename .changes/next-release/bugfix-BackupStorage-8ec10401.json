@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "BackupStorage",
+  "description": "Deprecate BackupStorage"
+}

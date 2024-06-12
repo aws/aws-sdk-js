@@ -308,7 +308,6 @@ export abstract class ConfigurationServicePlaceholders {
   redshiftserverless?: AWS.RedshiftServerless.Types.ClientConfiguration;
   rolesanywhere?: AWS.RolesAnywhere.Types.ClientConfiguration;
   licensemanagerusersubscriptions?: AWS.LicenseManagerUserSubscriptions.Types.ClientConfiguration;
-  backupstorage?: AWS.BackupStorage.Types.ClientConfiguration;
   privatenetworks?: AWS.PrivateNetworks.Types.ClientConfiguration;
   supportapp?: AWS.SupportApp.Types.ClientConfiguration;
   controltower?: AWS.ControlTower.Types.ClientConfiguration;
@@ -694,7 +693,6 @@ export interface ConfigurationServiceApiVersions {
   redshiftserverless?: AWS.RedshiftServerless.Types.apiVersion;
   rolesanywhere?: AWS.RolesAnywhere.Types.apiVersion;
   licensemanagerusersubscriptions?: AWS.LicenseManagerUserSubscriptions.Types.apiVersion;
-  backupstorage?: AWS.BackupStorage.Types.apiVersion;
   privatenetworks?: AWS.PrivateNetworks.Types.apiVersion;
   supportapp?: AWS.SupportApp.Types.apiVersion;
   controltower?: AWS.ControlTower.Types.apiVersion;
