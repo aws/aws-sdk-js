@@ -9,9 +9,9 @@ var allowlist = {
         262
     ],
     '/credentials/cognito_identity_credentials.js': [
-        78,
-        79,
-        109
+        87,
+        88,
+        118
     ],
     '/credentials/shared_ini_file_credentials.js': [
         4,
