@@ -257,6 +257,10 @@ declare namespace MediaPackageV2 {
      * Any descriptive information that you want to add to the channel for future identification purposes.
      */
     Description?: ResourceDescription;
+    /**
+     * The input type will be an immutable field which will be used to define whether the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default to HLS to preserve current behavior. The allowed values are:    HLS - The HLS streaming specification (which defines M3U8 manifests and TS segments).    CMAF - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).  
+     */
+    InputType?: InputType;
   }
   export type CmafEncryptionMethod = "CENC"|"CBCS"|string;
   export type ContainerType = "TS"|"CMAF"|string;
@@ -326,6 +330,10 @@ declare namespace MediaPackageV2 {
      */
     ClientToken?: IdempotencyToken;
     /**
+     * The input type will be an immutable field which will be used to define whether the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default to HLS to preserve current behavior. The allowed values are:    HLS - The HLS streaming specification (which defines M3U8 manifests and TS segments).    CMAF - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).  
+     */
+    InputType?: InputType;
+    /**
      * Enter any descriptive text that helps you to identify the channel.
      */
     Description?: ResourceDescription;
@@ -360,6 +368,10 @@ declare namespace MediaPackageV2 {
      */
     Description?: ResourceDescription;
     IngestEndpoints?: IngestEndpointList;
+    /**
+     * The input type will be an immutable field which will be used to define whether the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default to HLS to preserve current behavior. The allowed values are:    HLS - The HLS streaming specification (which defines M3U8 manifests and TS segments).    CMAF - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).  
+     */
+    InputType?: InputType;
     /**
      * The current Entity Tag (ETag) associated with this resource. The entity tag can be used to safely make concurrent updates to the resource.
      */
@@ -509,6 +521,10 @@ declare namespace MediaPackageV2 {
      */
     DashManifests?: CreateDashManifests;
     /**
+     * The failover settings for the endpoint.
+     */
+    ForceEndpointErrorConfiguration?: ForceEndpointErrorConfiguration;
+    /**
      * A comma-separated list of tag key:value pairs that you define. For example:  "Key1": "Value1",   "Key2": "Value2" 
      */
     Tags?: TagMap;
@@ -567,6 +583,10 @@ declare namespace MediaPackageV2 {
      * A DASH manifest configuration.
      */
     DashManifests?: GetDashManifests;
+    /**
+     * The failover settings for the endpoint.
+     */
+    ForceEndpointErrorConfiguration?: ForceEndpointErrorConfiguration;
     /**
      * The current Entity Tag (ETag) associated with this resource. The entity tag can be used to safely make concurrent updates to the resource.
      */
@@ -697,6 +717,8 @@ declare namespace MediaPackageV2 {
      */
     CmafEncryptionMethod?: CmafEncryptionMethod;
   }
+  export type EndpointErrorCondition = "STALE_MANIFEST"|"INCOMPLETE_MANIFEST"|"MISSING_DRM_KEY"|"SLATE_INPUT"|string;
+  export type EndpointErrorConditions = EndpointErrorCondition[];
   export type EntityTag = string;
   export interface FilterConfiguration {
     /**
@@ -718,6 +740,12 @@ declare namespace MediaPackageV2 {
   }
   export type FilterConfigurationManifestFilterString = string;
   export type FilterConfigurationTimeDelaySecondsInteger = number;
+  export interface ForceEndpointErrorConfiguration {
+    /**
+     * The failover conditions for the endpoint. The options are:    STALE_MANIFEST - The manifest stalled and there are no new segments or parts.    INCOMPLETE_MANIFEST - There is a gap in the manifest.    MISSING_DRM_KEY - Key rotation is enabled but we're unable to fetch the key for the current key period.    SLATE_INPUT - The segments which contain slate content are considered to be missing content.  
+     */
+    EndpointErrorConditions?: EndpointErrorConditions;
+  }
   export interface GetChannelGroupRequest {
     /**
      * The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.
@@ -818,6 +846,10 @@ declare namespace MediaPackageV2 {
      */
     Description?: ResourceDescription;
     IngestEndpoints?: IngestEndpointList;
+    /**
+     * The input type will be an immutable field which will be used to define whether the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default to HLS to preserve current behavior. The allowed values are:    HLS - The HLS streaming specification (which defines M3U8 manifests and TS segments).    CMAF - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).  
+     */
+    InputType?: InputType;
     /**
      * The current Entity Tag (ETag) associated with this resource. The entity tag can be used to safely make concurrent updates to the resource.
      */
@@ -1018,6 +1050,14 @@ declare namespace MediaPackageV2 {
      */
     LowLatencyHlsManifests?: GetLowLatencyHlsManifests;
     /**
+     * A DASH manifest configuration.
+     */
+    DashManifests?: GetDashManifests;
+    /**
+     * The failover settings for the endpoint.
+     */
+    ForceEndpointErrorConfiguration?: ForceEndpointErrorConfiguration;
+    /**
      * The current Entity Tag (ETag) associated with this resource. The entity tag can be used to safely make concurrent updates to the resource.
      */
     ETag?: EntityTag;
@@ -1025,10 +1065,6 @@ declare namespace MediaPackageV2 {
      * The comma-separated list of tag key:value pairs assigned to the origin endpoint.
      */
     Tags?: TagMap;
-    /**
-     * A DASH manifest configuration.
-     */
-    DashManifests?: GetDashManifests;
   }
   export type IdempotencyToken = string;
   export interface IngestEndpoint {
@@ -1042,6 +1078,7 @@ declare namespace MediaPackageV2 {
     Url?: String;
   }
   export type IngestEndpointList = IngestEndpoint[];
+  export type InputType = "HLS"|"CMAF"|string;
   export type Integer = number;
   export interface ListChannelGroupsRequest {
     /**
@@ -1215,6 +1252,10 @@ declare namespace MediaPackageV2 {
      * A DASH manifest configuration.
      */
     DashManifests?: ListDashManifests;
+    /**
+     * The failover settings for the endpoint.
+     */
+    ForceEndpointErrorConfiguration?: ForceEndpointErrorConfiguration;
   }
   export type OriginEndpointsList = OriginEndpointListConfiguration[];
   export type PolicyText = string;
@@ -1454,6 +1495,10 @@ declare namespace MediaPackageV2 {
     Description?: ResourceDescription;
     IngestEndpoints?: IngestEndpointList;
     /**
+     * The input type will be an immutable field which will be used to define whether the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default to HLS to preserve current behavior. The allowed values are:    HLS - The HLS streaming specification (which defines M3U8 manifests and TS segments).    CMAF - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).  
+     */
+    InputType?: InputType;
+    /**
      * The current Entity Tag (ETag) associated with this resource. The entity tag can be used to safely make concurrent updates to the resource.
      */
     ETag?: EntityTag;
@@ -1503,6 +1548,10 @@ declare namespace MediaPackageV2 {
      * A DASH manifest configuration.
      */
     DashManifests?: CreateDashManifests;
+    /**
+     * The failover settings for the endpoint.
+     */
+    ForceEndpointErrorConfiguration?: ForceEndpointErrorConfiguration;
     /**
      * The expected current Entity Tag (ETag) for the resource. If the specified ETag does not match the resource's current entity tag, the update request will be rejected.
      */
@@ -1558,6 +1607,10 @@ declare namespace MediaPackageV2 {
      * A low-latency HLS manifest configuration.
      */
     LowLatencyHlsManifests?: GetLowLatencyHlsManifests;
+    /**
+     * The failover settings for the endpoint.
+     */
+    ForceEndpointErrorConfiguration?: ForceEndpointErrorConfiguration;
     /**
      * The current Entity Tag (ETag) associated with this resource. The entity tag can be used to safely make concurrent updates to the resource.
      */

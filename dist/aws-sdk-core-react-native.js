@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1640.0',
+	  VERSION: '2.1641.0',
 
 	  /**
 	   * @api private

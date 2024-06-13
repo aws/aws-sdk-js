@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1640.0-->
+<!--LATEST=2.1641.0-->
 <!--ENTRYINSERT-->
+
+## 2.1641.0
+* feature: CloudHSMV2: Added support for hsm type hsm2m.medium. Added supported for creating a cluster in FIPS or NON_FIPS mode.
+* feature: Glue: This release adds support for configuration of evaluation method for composite rules in Glue Data Quality rulesets.
+* feature: IoTWireless: Add RoamingDeviceSNR and RoamingDeviceRSSI to Customer Metrics.
+* feature: KMS: This feature allows customers to use their keys stored in KMS to derive a shared secret which can then be used to establish a secured channel for communication, provide proof of possession, or establish trust with other parties.
+* feature: MediaPackageV2: This release adds support for CMAF ingest (DASH-IF live media ingest protocol interface 1)
 
 ## 2.1640.0
 * bugfix: BackupStorage: Deprecate BackupStorage

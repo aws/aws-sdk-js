@@ -178,6 +178,14 @@ declare namespace CloudHSMV2 {
      * The list of tags for the backup.
      */
     TagList?: TagList;
+    /**
+     * The HSM type of the cluster that was backed up.
+     */
+    HsmType?: HsmType;
+    /**
+     * The mode of the cluster that was backed up.
+     */
+    Mode?: ClusterMode;
   }
   export type BackupId = string;
   export type BackupPolicy = "DEFAULT"|string;
@@ -281,8 +289,13 @@ declare namespace CloudHSMV2 {
      * The list of tags for the cluster.
      */
     TagList?: TagList;
+    /**
+     * The mode of the cluster.
+     */
+    Mode?: ClusterMode;
   }
   export type ClusterId = string;
+  export type ClusterMode = "FIPS"|"NON_FIPS"|string;
   export type ClusterState = "CREATE_IN_PROGRESS"|"UNINITIALIZED"|"INITIALIZE_IN_PROGRESS"|"INITIALIZED"|"ACTIVE"|"UPDATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"DELETED"|"DEGRADED"|string;
   export type Clusters = Cluster[];
   export type ClustersMaxSize = number;
@@ -312,7 +325,7 @@ declare namespace CloudHSMV2 {
      */
     BackupRetentionPolicy?: BackupRetentionPolicy;
     /**
-     * The type of HSM to use in the cluster. Currently the only allowed value is hsm1.medium.
+     * The type of HSM to use in the cluster. The allowed values are hsm1.medium and hsm2m.medium.
      */
     HsmType: HsmType;
     /**
@@ -327,6 +340,10 @@ declare namespace CloudHSMV2 {
      * Tags to apply to the CloudHSM cluster during creation.
      */
     TagList?: TagList;
+    /**
+     * The mode to use in the cluster. The allowed values are FIPS and NON_FIPS.
+     */
+    Mode?: ClusterMode;
   }
   export interface CreateClusterResponse {
     /**

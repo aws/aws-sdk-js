@@ -5031,6 +5031,7 @@ declare namespace Glue {
   export type CustomEntityTypes = CustomEntityType[];
   export type CustomPatterns = string;
   export type DQAdditionalOptions = {[key: string]: GenericString};
+  export type DQCompositeRuleEvaluationMethod = "COLUMN"|"ROW"|string;
   export type DQDLAliases = {[key: string]: EnclosedInStringProperty};
   export type DQDLString = string;
   export interface DQResultsPublishingOptions {
@@ -5107,6 +5108,10 @@ declare namespace Glue {
      * Prefix for Amazon S3 to store results.
      */
     ResultsS3Prefix?: UriString;
+    /**
+     * Set the evaluation method for composite rules in the ruleset to ROW/COLUMN
+     */
+    CompositeRuleEvaluationMethod?: DQCompositeRuleEvaluationMethod;
   }
   export interface DataQualityMetricValues {
     /**
@@ -7142,7 +7147,7 @@ declare namespace Glue {
      */
     ExecutionTime?: ExecutionTime;
     /**
-     * A list of ruleset names for the run.
+     * A list of ruleset names for the run. Currently, this parameter takes only one Ruleset name.
      */
     RulesetNames?: RulesetNames;
     /**
