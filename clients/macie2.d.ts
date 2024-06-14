@@ -29,6 +29,14 @@ declare class Macie2 extends Service {
    */
   batchGetCustomDataIdentifiers(callback?: (err: AWSError, data: Macie2.Types.BatchGetCustomDataIdentifiersResponse) => void): Request<Macie2.Types.BatchGetCustomDataIdentifiersResponse, AWSError>;
   /**
+   * Changes the status of automated sensitive data discovery for one or more accounts.
+   */
+  batchUpdateAutomatedDiscoveryAccounts(params: Macie2.Types.BatchUpdateAutomatedDiscoveryAccountsRequest, callback?: (err: AWSError, data: Macie2.Types.BatchUpdateAutomatedDiscoveryAccountsResponse) => void): Request<Macie2.Types.BatchUpdateAutomatedDiscoveryAccountsResponse, AWSError>;
+  /**
+   * Changes the status of automated sensitive data discovery for one or more accounts.
+   */
+  batchUpdateAutomatedDiscoveryAccounts(callback?: (err: AWSError, data: Macie2.Types.BatchUpdateAutomatedDiscoveryAccountsResponse) => void): Request<Macie2.Types.BatchUpdateAutomatedDiscoveryAccountsResponse, AWSError>;
+  /**
    * Creates and defines the settings for an allow list.
    */
   createAllowList(params: Macie2.Types.CreateAllowListRequest, callback?: (err: AWSError, data: Macie2.Types.CreateAllowListResponse) => void): Request<Macie2.Types.CreateAllowListResponse, AWSError>;
@@ -229,11 +237,11 @@ declare class Macie2 extends Service {
    */
   getAllowList(callback?: (err: AWSError, data: Macie2.Types.GetAllowListResponse) => void): Request<Macie2.Types.GetAllowListResponse, AWSError>;
   /**
-   * Retrieves the configuration settings and status of automated sensitive data discovery for an account.
+   * Retrieves the configuration settings and status of automated sensitive data discovery for an organization or standalone account.
    */
   getAutomatedDiscoveryConfiguration(params: Macie2.Types.GetAutomatedDiscoveryConfigurationRequest, callback?: (err: AWSError, data: Macie2.Types.GetAutomatedDiscoveryConfigurationResponse) => void): Request<Macie2.Types.GetAutomatedDiscoveryConfigurationResponse, AWSError>;
   /**
-   * Retrieves the configuration settings and status of automated sensitive data discovery for an account.
+   * Retrieves the configuration settings and status of automated sensitive data discovery for an organization or standalone account.
    */
   getAutomatedDiscoveryConfiguration(callback?: (err: AWSError, data: Macie2.Types.GetAutomatedDiscoveryConfigurationResponse) => void): Request<Macie2.Types.GetAutomatedDiscoveryConfigurationResponse, AWSError>;
   /**
@@ -397,6 +405,14 @@ declare class Macie2 extends Service {
    */
   listAllowLists(callback?: (err: AWSError, data: Macie2.Types.ListAllowListsResponse) => void): Request<Macie2.Types.ListAllowListsResponse, AWSError>;
   /**
+   * Retrieves the status of automated sensitive data discovery for one or more accounts.
+   */
+  listAutomatedDiscoveryAccounts(params: Macie2.Types.ListAutomatedDiscoveryAccountsRequest, callback?: (err: AWSError, data: Macie2.Types.ListAutomatedDiscoveryAccountsResponse) => void): Request<Macie2.Types.ListAutomatedDiscoveryAccountsResponse, AWSError>;
+  /**
+   * Retrieves the status of automated sensitive data discovery for one or more accounts.
+   */
+  listAutomatedDiscoveryAccounts(callback?: (err: AWSError, data: Macie2.Types.ListAutomatedDiscoveryAccountsResponse) => void): Request<Macie2.Types.ListAutomatedDiscoveryAccountsResponse, AWSError>;
+  /**
    * Retrieves a subset of information about one or more classification jobs.
    */
   listClassificationJobs(params: Macie2.Types.ListClassificationJobsRequest, callback?: (err: AWSError, data: Macie2.Types.ListClassificationJobsResponse) => void): Request<Macie2.Types.ListClassificationJobsResponse, AWSError>;
@@ -437,11 +453,11 @@ declare class Macie2 extends Service {
    */
   listFindingsFilters(callback?: (err: AWSError, data: Macie2.Types.ListFindingsFiltersResponse) => void): Request<Macie2.Types.ListFindingsFiltersResponse, AWSError>;
   /**
-   * Retrieves information about the Amazon Macie membership invitations that were received by an account.
+   * Retrieves information about Amazon Macie membership invitations that were received by an account.
    */
   listInvitations(params: Macie2.Types.ListInvitationsRequest, callback?: (err: AWSError, data: Macie2.Types.ListInvitationsResponse) => void): Request<Macie2.Types.ListInvitationsResponse, AWSError>;
   /**
-   * Retrieves information about the Amazon Macie membership invitations that were received by an account.
+   * Retrieves information about Amazon Macie membership invitations that were received by an account.
    */
   listInvitations(callback?: (err: AWSError, data: Macie2.Types.ListInvitationsResponse) => void): Request<Macie2.Types.ListInvitationsResponse, AWSError>;
   /**
@@ -469,11 +485,11 @@ declare class Macie2 extends Service {
    */
   listOrganizationAdminAccounts(callback?: (err: AWSError, data: Macie2.Types.ListOrganizationAdminAccountsResponse) => void): Request<Macie2.Types.ListOrganizationAdminAccountsResponse, AWSError>;
   /**
-   * Retrieves information about objects that were selected from an S3 bucket for automated sensitive data discovery.
+   * Retrieves information about objects that Amazon Macie selected from an S3 bucket for automated sensitive data discovery.
    */
   listResourceProfileArtifacts(params: Macie2.Types.ListResourceProfileArtifactsRequest, callback?: (err: AWSError, data: Macie2.Types.ListResourceProfileArtifactsResponse) => void): Request<Macie2.Types.ListResourceProfileArtifactsResponse, AWSError>;
   /**
-   * Retrieves information about objects that were selected from an S3 bucket for automated sensitive data discovery.
+   * Retrieves information about objects that Amazon Macie selected from an S3 bucket for automated sensitive data discovery.
    */
   listResourceProfileArtifacts(callback?: (err: AWSError, data: Macie2.Types.ListResourceProfileArtifactsResponse) => void): Request<Macie2.Types.ListResourceProfileArtifactsResponse, AWSError>;
   /**
@@ -501,11 +517,11 @@ declare class Macie2 extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Macie2.Types.ListTagsForResourceResponse) => void): Request<Macie2.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Creates or updates the configuration settings for storing data classification results.
+   * Adds or updates the configuration settings for storing data classification results.
    */
   putClassificationExportConfiguration(params: Macie2.Types.PutClassificationExportConfigurationRequest, callback?: (err: AWSError, data: Macie2.Types.PutClassificationExportConfigurationResponse) => void): Request<Macie2.Types.PutClassificationExportConfigurationResponse, AWSError>;
   /**
-   * Creates or updates the configuration settings for storing data classification results.
+   * Adds or updates the configuration settings for storing data classification results.
    */
   putClassificationExportConfiguration(callback?: (err: AWSError, data: Macie2.Types.PutClassificationExportConfigurationResponse) => void): Request<Macie2.Types.PutClassificationExportConfigurationResponse, AWSError>;
   /**
@@ -533,11 +549,11 @@ declare class Macie2 extends Service {
    */
   tagResource(callback?: (err: AWSError, data: Macie2.Types.TagResourceResponse) => void): Request<Macie2.Types.TagResourceResponse, AWSError>;
   /**
-   * Tests a custom data identifier.
+   * Tests criteria for a custom data identifier.
    */
   testCustomDataIdentifier(params: Macie2.Types.TestCustomDataIdentifierRequest, callback?: (err: AWSError, data: Macie2.Types.TestCustomDataIdentifierResponse) => void): Request<Macie2.Types.TestCustomDataIdentifierResponse, AWSError>;
   /**
-   * Tests a custom data identifier.
+   * Tests criteria for a custom data identifier.
    */
   testCustomDataIdentifier(callback?: (err: AWSError, data: Macie2.Types.TestCustomDataIdentifierResponse) => void): Request<Macie2.Types.TestCustomDataIdentifierResponse, AWSError>;
   /**
@@ -557,11 +573,11 @@ declare class Macie2 extends Service {
    */
   updateAllowList(callback?: (err: AWSError, data: Macie2.Types.UpdateAllowListResponse) => void): Request<Macie2.Types.UpdateAllowListResponse, AWSError>;
   /**
-   * Enables or disables automated sensitive data discovery for an account.
+   * Changes the configuration settings and status of automated sensitive data discovery for an organization or standalone account.
    */
   updateAutomatedDiscoveryConfiguration(params: Macie2.Types.UpdateAutomatedDiscoveryConfigurationRequest, callback?: (err: AWSError, data: Macie2.Types.UpdateAutomatedDiscoveryConfigurationResponse) => void): Request<Macie2.Types.UpdateAutomatedDiscoveryConfigurationResponse, AWSError>;
   /**
-   * Enables or disables automated sensitive data discovery for an account.
+   * Changes the configuration settings and status of automated sensitive data discovery for an organization or standalone account.
    */
   updateAutomatedDiscoveryConfiguration(callback?: (err: AWSError, data: Macie2.Types.UpdateAutomatedDiscoveryConfigurationResponse) => void): Request<Macie2.Types.UpdateAutomatedDiscoveryConfigurationResponse, AWSError>;
   /**
@@ -795,6 +811,40 @@ declare namespace Macie2 {
      */
     sessionContext?: SessionContext;
   }
+  export type AutoEnableMode = "ALL"|"NEW"|"NONE"|string;
+  export interface AutomatedDiscoveryAccount {
+    /**
+     * The Amazon Web Services account ID for the account.
+     */
+    accountId?: __string;
+    /**
+     * The current status of automated sensitive data discovery for the account. Possible values are: ENABLED, perform automated sensitive data discovery activities for the account; and, DISABLED, don't perform automated sensitive data discovery activities for the account.
+     */
+    status?: AutomatedDiscoveryAccountStatus;
+  }
+  export type AutomatedDiscoveryAccountStatus = "ENABLED"|"DISABLED"|string;
+  export interface AutomatedDiscoveryAccountUpdate {
+    /**
+     * The Amazon Web Services account ID for the account.
+     */
+    accountId?: __string;
+    /**
+     * The new status of automated sensitive data discovery for the account. Valid values are: ENABLED, perform automated sensitive data discovery activities for the account; and, DISABLED, don't perform automated sensitive data discovery activities for the account.
+     */
+    status?: AutomatedDiscoveryAccountStatus;
+  }
+  export interface AutomatedDiscoveryAccountUpdateError {
+    /**
+     * The Amazon Web Services account ID for the account that the request applied to.
+     */
+    accountId?: __string;
+    /**
+     * The error code for the error that caused the request to fail for the account (accountId). Possible values are: ACCOUNT_NOT_FOUND, the account doesn’t exist or you're not the Amazon Macie administrator for the account; and, ACCOUNT_PAUSED, Macie isn’t enabled for the account in the current Amazon Web Services Region.
+     */
+    errorCode?: AutomatedDiscoveryAccountUpdateErrorCode;
+  }
+  export type AutomatedDiscoveryAccountUpdateErrorCode = "ACCOUNT_PAUSED"|"ACCOUNT_NOT_FOUND"|string;
+  export type AutomatedDiscoveryMonitoringStatus = "MONITORED"|"NOT_MONITORED"|string;
   export type AutomatedDiscoveryStatus = "ENABLED"|"DISABLED"|string;
   export type AvailabilityCode = "AVAILABLE"|"UNAVAILABLE"|string;
   export interface AwsAccount {
@@ -854,6 +904,18 @@ declare namespace Macie2 {
      * An array of custom data identifier IDs, one for each custom data identifier that was specified in the request but doesn't correlate to an existing custom data identifier.
      */
     notFoundIdentifierIds?: __listOf__string;
+  }
+  export interface BatchUpdateAutomatedDiscoveryAccountsRequest {
+    /**
+     * An array of objects, one for each account to change the status of automated sensitive data discovery for. Each object specifies the Amazon Web Services account ID for an account and a new status for that account.
+     */
+    accounts?: __listOfAutomatedDiscoveryAccountUpdate;
+  }
+  export interface BatchUpdateAutomatedDiscoveryAccountsResponse {
+    /**
+     * An array of objects, one for each account whose status wasn’t changed. Each object identifies the account and explains why the status of automated sensitive data discovery wasn’t changed for the account. This value is null if the request succeeded for all specified accounts.
+     */
+    errors?: __listOfAutomatedDiscoveryAccountUpdateError;
   }
   export interface BlockPublicAccess {
     /**
@@ -996,6 +1058,10 @@ declare namespace Macie2 {
      */
     allowsUnencryptedObjectUploads?: AllowsUnencryptedObjectUploads;
     /**
+     * Specifies whether automated sensitive data discovery is currently configured to analyze objects in the bucket. Possible values are: MONITORED, the bucket is included in analyses; and, NOT_MONITORED, the bucket is excluded from analyses. If automated sensitive data discovery is disabled for your account, this value is NOT_MONITORED.
+     */
+    automatedDiscoveryMonitoringStatus?: AutomatedDiscoveryMonitoringStatus;
+    /**
      * The Amazon Resource Name (ARN) of the bucket.
      */
     bucketArn?: __string;
@@ -1024,11 +1090,11 @@ declare namespace Macie2 {
      */
     errorMessage?: __string;
     /**
-     * Specifies whether any one-time or recurring classification jobs are configured to analyze data in the bucket, and, if so, the details of the job that ran most recently.
+     * Specifies whether any one-time or recurring classification jobs are configured to analyze objects in the bucket, and, if so, the details of the job that ran most recently.
      */
     jobDetails?: JobDetails;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently analyzed data in the bucket while performing automated sensitive data discovery for your account. This value is null if automated sensitive data discovery is currently disabled for your account.
+     * The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently analyzed objects in the bucket while performing automated sensitive data discovery. This value is null if automated sensitive data discovery is disabled for your account.
      */
     lastAutomatedDiscoveryTime?: __timestampIso8601;
     /**
@@ -1056,7 +1122,7 @@ declare namespace Macie2 {
      */
     replicationDetails?: ReplicationDetails;
     /**
-     * The sensitivity score for the bucket, ranging from -1 (classification error) to 100 (sensitive). This value is null if automated sensitive data discovery is currently disabled for your account.
+     * The sensitivity score for the bucket, ranging from -1 (classification error) to 100 (sensitive).If automated sensitive data discovery has never been enabled for your account or it’s been disabled for your organization or your standalone account for more than 30 days, possible values are: 1, the bucket is empty; or, 50, the bucket stores objects but it’s been excluded from recent analyses.
      */
     sensitivityScore?: __integer;
     /**
@@ -1311,7 +1377,7 @@ declare namespace Macie2 {
      */
     initialRun?: __boolean;
     /**
-     * The schedule for running the job. Valid values are: ONE_TIME - Run the job only once. If you specify this value, don't specify a value for the scheduleFrequency property. SCHEDULED - Run the job on a daily, weekly, or monthly basis. If you specify this value, use the scheduleFrequency property to define the recurrence pattern for the job.
+     * The schedule for running the job. Valid values are: ONE_TIME - Run the job only once. If you specify this value, don't specify a value for the scheduleFrequency property. SCHEDULED - Run the job on a daily, weekly, or monthly basis. If you specify this value, use the scheduleFrequency property to specify the recurrence pattern for the job.
      */
     jobType: JobType;
     /**
@@ -1319,7 +1385,7 @@ declare namespace Macie2 {
      */
     managedDataIdentifierIds?: __listOf__string;
     /**
-     * The selection type to apply when determining which managed data identifiers the job uses to analyze data. Valid values are: ALL - Use all managed data identifiers. If you specify this value, don't specify any values for the managedDataIdentifierIds property. EXCLUDE - Use all managed data identifiers except the ones specified by the managedDataIdentifierIds property. INCLUDE - Use only the managed data identifiers specified by the managedDataIdentifierIds property. NONE - Don't use any managed data identifiers. If you specify this value, specify at least one value for the customDataIdentifierIds property and don't specify any values for the managedDataIdentifierIds property. RECOMMENDED (default) - Use the recommended set of managed data identifiers. If you specify this value, don't specify any values for the managedDataIdentifierIds property. If you don't specify a value for this property, the job uses the recommended set of managed data identifiers. If the job is a recurring job and you specify ALL or EXCLUDE, each job run automatically uses new managed data identifiers that are released. If you don't specify a value for this property or you specify RECOMMENDED for a recurring job, each job run automatically uses all the managed data identifiers that are in the recommended set when the run starts. For information about individual managed data identifiers or to determine which ones are in the recommended set, see Using managed data identifiers and Recommended managed data identifiers in the Amazon Macie User Guide.
+     * The selection type to apply when determining which managed data identifiers the job uses to analyze data. Valid values are: ALL - Use all managed data identifiers. If you specify this value, don't specify any values for the managedDataIdentifierIds property. EXCLUDE - Use all managed data identifiers except the ones specified by the managedDataIdentifierIds property. INCLUDE - Use only the managed data identifiers specified by the managedDataIdentifierIds property. NONE - Don't use any managed data identifiers. If you specify this value, specify at least one value for the customDataIdentifierIds property and don't specify any values for the managedDataIdentifierIds property. RECOMMENDED (default) - Use the recommended set of managed data identifiers. If you specify this value, don't specify any values for the managedDataIdentifierIds property. If you don't specify a value for this property, the job uses the recommended set of managed data identifiers. If the job is a recurring job and you specify ALL or EXCLUDE, each job run automatically uses new managed data identifiers that are released. If you don't specify a value for this property or you specify RECOMMENDED for a recurring job, each job run automatically uses all the managed data identifiers that are in the recommended set when the run starts. To learn about individual managed data identifiers or determine which ones are in the recommended set, see Using managed data identifiers or Recommended managed data identifiers in the Amazon Macie User Guide.
      */
     managedDataIdentifierSelector?: ManagedDataIdentifierSelector;
     /**
@@ -1696,7 +1762,7 @@ declare namespace Macie2 {
   }
   export interface DescribeClassificationJobResponse {
     /**
-     * An array of unique identifiers, one for each allow list that the job uses when it analyzes data.
+     * An array of unique identifiers, one for each allow list that the job is configured to use when it analyzes data.
      */
     allowListIds?: __listOf__string;
     /**
@@ -1708,7 +1774,7 @@ declare namespace Macie2 {
      */
     createdAt?: __timestampIso8601;
     /**
-     * An array of unique identifiers, one for each custom data identifier that the job uses when it analyzes data. This value is null if the job uses only managed data identifiers to analyze data.
+     * An array of unique identifiers, one for each custom data identifier that the job is configured to use when it analyzes data. This value is null if the job is configured to use only managed data identifiers to analyze data.
      */
     customDataIdentifierIds?: __listOf__string;
     /**
@@ -1748,7 +1814,7 @@ declare namespace Macie2 {
      */
     managedDataIdentifierIds?: __listOf__string;
     /**
-     * The selection type that determines which managed data identifiers the job uses when it analyzes data. Possible values are: ALL - Use all managed data identifiers. EXCLUDE - Use all managed data identifiers except the ones specified by the managedDataIdentifierIds property. INCLUDE - Use only the managed data identifiers specified by the managedDataIdentifierIds property. NONE - Don't use any managed data identifiers. Use only custom data identifiers (customDataIdentifierIds). RECOMMENDED (default) - Use the recommended set of managed data identifiers. If this value is null, the job uses the recommended set of managed data identifiers. If the job is a recurring job and this value is ALL or EXCLUDE, each job run automatically uses new managed data identifiers that are released. If this value is null or RECOMMENDED for a recurring job, each job run uses all the managed data identifiers that are in the recommended set when the run starts. For information about individual managed data identifiers or to determine which ones are in the recommended set, see Using managed data identifiers and Recommended managed data identifiers in the Amazon Macie User Guide.
+     * The selection type that determines which managed data identifiers the job uses when it analyzes data. Possible values are: ALL - Use all managed data identifiers. EXCLUDE - Use all managed data identifiers except the ones specified by the managedDataIdentifierIds property. INCLUDE - Use only the managed data identifiers specified by the managedDataIdentifierIds property. NONE - Don't use any managed data identifiers. Use only custom data identifiers (customDataIdentifierIds). RECOMMENDED (default) - Use the recommended set of managed data identifiers. If this value is null, the job uses the recommended set of managed data identifiers. If the job is a recurring job and this value is ALL or EXCLUDE, each job run automatically uses new managed data identifiers that are released. If this value is null or RECOMMENDED for a recurring job, each job run uses all the managed data identifiers that are in the recommended set when the run starts. To learn about individual managed data identifiers or determine which ones are in the recommended set, see Using managed data identifiers or Recommended managed data identifiers in the Amazon Macie User Guide.
      */
     managedDataIdentifierSelector?: ManagedDataIdentifierSelector;
     /**
@@ -1772,7 +1838,7 @@ declare namespace Macie2 {
      */
     statistics?: Statistics;
     /**
-     * A map of key-value pairs that specifies which tags (keys and values) are associated with the classification job.
+     * A map of key-value pairs that specifies which tags (keys and values) are associated with the job.
      */
     tags?: TagMap;
     /**
@@ -2002,11 +2068,11 @@ declare namespace Macie2 {
      */
     domainDetails?: DomainDetails;
     /**
-     * The IP address of the device that the entity used to perform the action on the affected resource. This object also provides information such as the owner and geographic location for the IP address.
+     * The IP address and related details about the device that the entity used to perform the action on the affected resource. The details can include information such as the owner and geographic location of the IP address.
      */
     ipAddressDetails?: IpAddressDetails;
     /**
-     * The type and other characteristics of the entity that performed the action on the affected resource.
+     * The type and other characteristics of the entity that performed the action on the affected resource. This value is null if the action was performed by an anonymous (unauthenticated) entity.
      */
     userIdentity?: UserIdentity;
   }
@@ -2109,27 +2175,31 @@ declare namespace Macie2 {
   }
   export interface GetAutomatedDiscoveryConfigurationResponse {
     /**
-     * The unique identifier for the classification scope that's used when performing automated sensitive data discovery for the account. The classification scope specifies S3 buckets to exclude from automated sensitive data discovery.
+     * Specifies whether automated sensitive data discovery is enabled automatically for accounts in the organization. Possible values are: ALL, enable it for all existing accounts and new member accounts; NEW, enable it only for new member accounts; and, NONE, don't enable it for any accounts.
+     */
+    autoEnableOrganizationMembers?: AutoEnableMode;
+    /**
+     * The unique identifier for the classification scope that's used when performing automated sensitive data discovery. The classification scope specifies S3 buckets to exclude from analyses.
      */
     classificationScopeId?: ClassificationScopeId;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when automated sensitive data discovery was most recently disabled for the account. This value is null if automated sensitive data discovery wasn't enabled and subsequently disabled for the account.
+     * The date and time, in UTC and extended ISO 8601 format, when automated sensitive data discovery was most recently disabled. This value is null if automated sensitive data discovery is currently enabled.
      */
     disabledAt?: Timestamp;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when automated sensitive data discovery was initially enabled for the account. This value is null if automated sensitive data discovery has never been enabled for the account.
+     * The date and time, in UTC and extended ISO 8601 format, when automated sensitive data discovery was initially enabled. This value is null if automated sensitive data discovery has never been enabled.
      */
     firstEnabledAt?: Timestamp;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when automated sensitive data discovery was most recently enabled or disabled for the account.
+     * The date and time, in UTC and extended ISO 8601 format, when the configuration settings or status of automated sensitive data discovery was most recently changed.
      */
     lastUpdatedAt?: Timestamp;
     /**
-     * The unique identifier for the sensitivity inspection template that's used when performing automated sensitive data discovery for the account. The template specifies which allow lists, custom data identifiers, and managed data identifiers to use when analyzing data.
+     * The unique identifier for the sensitivity inspection template that's used when performing automated sensitive data discovery. The template specifies which allow lists, custom data identifiers, and managed data identifiers to use when analyzing data.
      */
     sensitivityInspectionTemplateId?: SensitivityInspectionTemplateId;
     /**
-     * The current status of the automated sensitive data discovery configuration for the account. Possible values are: ENABLED, use the specified settings to perform automated sensitive data discovery activities for the account; and, DISABLED, don't perform automated sensitive data discovery activities for the account.
+     * The current status of automated sensitive data discovery for the organization or account. Possible values are: ENABLED, use the specified settings to perform automated sensitive data discovery activities; and, DISABLED, don't perform automated sensitive data discovery activities.
      */
     status?: AutomatedDiscoveryStatus;
   }
@@ -2537,11 +2607,11 @@ declare namespace Macie2 {
      */
     description?: __string;
     /**
-     *  The managed data identifiers that are explicitly excluded (not used) when analyzing data.
+     *  The managed data identifiers that are explicitly excluded (not used) when performing automated sensitive data discovery.
      */
     excludes?: SensitivityInspectionTemplateExcludes;
     /**
-     * The allow lists, custom data identifiers, and managed data identifiers that are explicitly included (used) when analyzing data.
+     * The allow lists, custom data identifiers, and managed data identifiers that are explicitly included (used) when performing automated sensitive data discovery.
      */
     includes?: SensitivityInspectionTemplateIncludes;
     /**
@@ -2723,15 +2793,15 @@ declare namespace Macie2 {
   export type JobComparator = "EQ"|"GT"|"GTE"|"LT"|"LTE"|"NE"|"CONTAINS"|"STARTS_WITH"|string;
   export interface JobDetails {
     /**
-     * Specifies whether any one-time or recurring jobs are configured to analyze data in the bucket. Possible values are: TRUE - The bucket is explicitly included in the bucket definition (S3BucketDefinitionForJob) for one or more jobs and at least one of those jobs has a status other than CANCELLED. Or the bucket matched the bucket criteria (S3BucketCriteriaForJob) for at least one job that previously ran. FALSE - The bucket isn't explicitly included in the bucket definition (S3BucketDefinitionForJob) for any jobs, all the jobs that explicitly include the bucket in their bucket definitions have a status of CANCELLED, or the bucket didn't match the bucket criteria (S3BucketCriteriaForJob) for any jobs that previously ran. UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve job data for the bucket.
+     * Specifies whether any one-time or recurring jobs are configured to analyze objects in the bucket. Possible values are: TRUE - The bucket is explicitly included in the bucket definition (S3BucketDefinitionForJob) for one or more jobs and at least one of those jobs has a status other than CANCELLED. Or the bucket matched the bucket criteria (S3BucketCriteriaForJob) for at least one job that previously ran. FALSE - The bucket isn't explicitly included in the bucket definition (S3BucketDefinitionForJob) for any jobs, all the jobs that explicitly include the bucket in their bucket definitions have a status of CANCELLED, or the bucket didn't match the bucket criteria (S3BucketCriteriaForJob) for any jobs that previously ran. UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve job data for the bucket.
      */
     isDefinedInJob?: IsDefinedInJob;
     /**
-     * Specifies whether any recurring jobs are configured to analyze data in the bucket. Possible values are: TRUE - The bucket is explicitly included in the bucket definition (S3BucketDefinitionForJob) for one or more recurring jobs or the bucket matches the bucket criteria (S3BucketCriteriaForJob) for one or more recurring jobs. At least one of those jobs has a status other than CANCELLED. FALSE - The bucket isn't explicitly included in the bucket definition (S3BucketDefinitionForJob) for any recurring jobs, the bucket doesn't match the bucket criteria (S3BucketCriteriaForJob) for any recurring jobs, or all the recurring jobs that are configured to analyze data in the bucket have a status of CANCELLED. UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve job data for the bucket.
+     * Specifies whether any recurring jobs are configured to analyze objects in the bucket. Possible values are: TRUE - The bucket is explicitly included in the bucket definition (S3BucketDefinitionForJob) for one or more recurring jobs or the bucket matches the bucket criteria (S3BucketCriteriaForJob) for one or more recurring jobs. At least one of those jobs has a status other than CANCELLED. FALSE - The bucket isn't explicitly included in the bucket definition (S3BucketDefinitionForJob) for any recurring jobs, the bucket doesn't match the bucket criteria (S3BucketCriteriaForJob) for any recurring jobs, or all the recurring jobs that are configured to analyze data in the bucket have a status of CANCELLED. UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve job data for the bucket.
      */
     isMonitoredByJob?: IsMonitoredByJob;
     /**
-     * The unique identifier for the job that ran most recently and is configured to analyze data in the bucket, either the latest run of a recurring job or the only run of a one-time job. This value is typically null if the value for the isDefinedInJob property is FALSE or UNKNOWN.
+     * The unique identifier for the job that ran most recently and is configured to analyze objects in the bucket, either the latest run of a recurring job or the only run of a one-time job. This value is typically null if the value for the isDefinedInJob property is FALSE or UNKNOWN.
      */
     lastJobId?: __string;
     /**
@@ -2842,6 +2912,30 @@ declare namespace Macie2 {
      * An array of objects, one for each allow list.
      */
     allowLists?: __listOfAllowListSummary;
+    /**
+     * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
+     */
+    nextToken?: __string;
+  }
+  export interface ListAutomatedDiscoveryAccountsRequest {
+    /**
+     * The Amazon Web Services account ID for each account, for as many as 50 accounts. To retrieve the status for multiple accounts, append the accountIds parameter and argument for each account, separated by an ampersand (&amp;). To retrieve the status for all the accounts in an organization, omit this parameter.
+     */
+    accountIds?: __listOf__string;
+    /**
+     * The maximum number of items to include in each page of a paginated response.
+     */
+    maxResults?: MaxResults;
+    /**
+     * The nextToken string that specifies which page of results to return in a paginated response.
+     */
+    nextToken?: __string;
+  }
+  export interface ListAutomatedDiscoveryAccountsResponse {
+    /**
+     * An array of objects, one for each account specified in the request. Each object specifies the Amazon Web Services account ID for an account and the current status of automated sensitive data discovery for that account.
+     */
+    items?: __listOfAutomatedDiscoveryAccount;
     /**
      * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
      */
@@ -3173,6 +3267,10 @@ declare namespace Macie2 {
      */
     accountId?: __string;
     /**
+     * Specifies whether automated sensitive data discovery is currently configured to analyze objects in the bucket. Possible values are: MONITORED, the bucket is included in analyses; and, NOT_MONITORED, the bucket is excluded from analyses. If automated sensitive data discovery is disabled for your account, this value is NOT_MONITORED.
+     */
+    automatedDiscoveryMonitoringStatus?: AutomatedDiscoveryMonitoringStatus;
+    /**
      * The name of the bucket.
      */
     bucketName?: __string;
@@ -3197,7 +3295,7 @@ declare namespace Macie2 {
      */
     jobDetails?: JobDetails;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently analyzed data in the bucket while performing automated sensitive data discovery for your account. This value is null if automated sensitive data discovery is currently disabled for your account.
+     * The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently analyzed objects in the bucket while performing automated sensitive data discovery. This value is null if automated sensitive data discovery is disabled for your account.
      */
     lastAutomatedDiscoveryTime?: __timestampIso8601;
     /**
@@ -3209,7 +3307,7 @@ declare namespace Macie2 {
      */
     objectCountByEncryptionType?: ObjectCountByEncryptionType;
     /**
-     * The current sensitivity score for the bucket, ranging from -1 (classification error) to 100 (sensitive). This value is null if automated sensitive data discovery is currently disabled for your account.
+     * The sensitivity score for the bucket, ranging from -1 (classification error) to 100 (sensitive).If automated sensitive data discovery has never been enabled for your account or it’s been disabled for your organization or your standalone account for more than 30 days, possible values are: 1, the bucket is empty; or, 50, the bucket stores objects but it’s been excluded from recent analyses.
      */
     sensitivityScore?: __integer;
     /**
@@ -3615,7 +3713,7 @@ declare namespace Macie2 {
   }
   export interface S3Destination {
     /**
-     * The name of the bucket.
+     * The name of the bucket. This must be the name of an existing general purpose bucket.
      */
     bucketName: __string;
     /**
@@ -3777,11 +3875,11 @@ declare namespace Macie2 {
      */
     key?: SearchResourcesSimpleCriterionKey;
     /**
-     * An array that lists one or more values to use in the condition. If you specify multiple values, Amazon Macie uses OR logic to join the values. Valid values for each supported property (key) are: ACCOUNT_ID - A string that represents the unique identifier for the Amazon Web Services account that owns the resource. S3_BUCKET_EFFECTIVE_PERMISSION - A string that represents an enumerated value that Macie defines for the BucketPublicAccess.effectivePermission property of an S3 bucket. S3_BUCKET_NAME - A string that represents the name of an S3 bucket. S3_BUCKET_SHARED_ACCESS - A string that represents an enumerated value that Macie defines for the BucketMetadata.sharedAccess property of an S3 bucket. Values are case sensitive. Also, Macie doesn't support use of partial values or wildcard characters in values.
+     * An array that lists one or more values to use in the condition. If you specify multiple values, Amazon Macie uses OR logic to join the values. Valid values for each supported property (key) are: ACCOUNT_ID - A string that represents the unique identifier for the Amazon Web Services account that owns the resource. AUTOMATED_DISCOVERY_MONITORING_STATUS - A string that represents an enumerated value that Macie defines for the BucketMetadata.automatedDiscoveryMonitoringStatus property of an S3 bucket. S3_BUCKET_EFFECTIVE_PERMISSION - A string that represents an enumerated value that Macie defines for the BucketPublicAccess.effectivePermission property of an S3 bucket. S3_BUCKET_NAME - A string that represents the name of an S3 bucket. S3_BUCKET_SHARED_ACCESS - A string that represents an enumerated value that Macie defines for the BucketMetadata.sharedAccess property of an S3 bucket. Values are case sensitive. Also, Macie doesn't support use of partial values or wildcard characters in values.
      */
     values?: __listOf__string;
   }
-  export type SearchResourcesSimpleCriterionKey = "ACCOUNT_ID"|"S3_BUCKET_NAME"|"S3_BUCKET_EFFECTIVE_PERMISSION"|"S3_BUCKET_SHARED_ACCESS"|string;
+  export type SearchResourcesSimpleCriterionKey = "ACCOUNT_ID"|"S3_BUCKET_NAME"|"S3_BUCKET_EFFECTIVE_PERMISSION"|"S3_BUCKET_SHARED_ACCESS"|"AUTOMATED_DISCOVERY_MONITORING_STATUS"|string;
   export type SearchResourcesSortAttributeName = "ACCOUNT_ID"|"RESOURCE_NAME"|"S3_CLASSIFIABLE_OBJECT_COUNT"|"S3_CLASSIFIABLE_SIZE_IN_BYTES"|string;
   export interface SearchResourcesSortCriteria {
     /**
@@ -4189,7 +4287,11 @@ declare namespace Macie2 {
   }
   export interface UpdateAutomatedDiscoveryConfigurationRequest {
     /**
-     * The new status of automated sensitive data discovery for the account. Valid values are: ENABLED, start or resume automated sensitive data discovery activities for the account; and, DISABLED, stop performing automated sensitive data discovery activities for the account. When you enable automated sensitive data discovery for the first time, Amazon Macie uses default configuration settings to determine which data sources to analyze and which managed data identifiers to use. To change these settings, use the UpdateClassificationScope and UpdateSensitivityInspectionTemplate operations, respectively. If you change the settings and subsequently disable the configuration, Amazon Macie retains your changes.
+     * Specifies whether to automatically enable automated sensitive data discovery for accounts in the organization. Valid values are: ALL (default), enable it for all existing accounts and new member accounts; NEW, enable it only for new member accounts; and, NONE, don't enable it for any accounts. If you specify NEW or NONE, automated sensitive data discovery continues to be enabled for any existing accounts that it's currently enabled for. To enable or disable it for individual member accounts, specify NEW or NONE, and then enable or disable it for each account by using the BatchUpdateAutomatedDiscoveryAccounts operation.
+     */
+    autoEnableOrganizationMembers?: AutoEnableMode;
+    /**
+     * The new status of automated sensitive data discovery for the organization or account. Valid values are: ENABLED, start or resume all automated sensitive data discovery activities; and, DISABLED, stop performing all automated sensitive data discovery activities. If you specify DISABLED for an administrator account, you also disable automated sensitive data discovery for all member accounts in the organization.
      */
     status: AutomatedDiscoveryStatus;
   }
@@ -4285,7 +4387,7 @@ declare namespace Macie2 {
   }
   export interface UpdateOrganizationConfigurationRequest {
     /**
-     * Specifies whether to enable Amazon Macie automatically for an account when the account is added to the organization in Organizations.
+     * Specifies whether to enable Amazon Macie automatically for accounts that are added to the organization in Organizations.
      */
     autoEnable: __boolean;
   }
@@ -4351,7 +4453,7 @@ declare namespace Macie2 {
      */
     description?: __string;
     /**
-     *  The managed data identifiers to explicitly exclude (not use) when analyzing data. To exclude an allow list or custom data identifier that's currently included by the template, update the values for the SensitivityInspectionTemplateIncludes.allowListIds and SensitivityInspectionTemplateIncludes.customDataIdentifierIds properties, respectively.
+     *  The managed data identifiers to explicitly exclude (not use) when performing automated sensitive data discovery. To exclude an allow list or custom data identifier that's currently included by the template, update the values for the SensitivityInspectionTemplateIncludes.allowListIds and SensitivityInspectionTemplateIncludes.customDataIdentifierIds properties, respectively.
      */
     excludes?: SensitivityInspectionTemplateExcludes;
     /**
@@ -4359,7 +4461,7 @@ declare namespace Macie2 {
      */
     id: __string;
     /**
-     * The allow lists, custom data identifiers, and managed data identifiers to explicitly include (use) when analyzing data.
+     * The allow lists, custom data identifiers, and managed data identifiers to explicitly include (use) when performing automated sensitive data discovery.
      */
     includes?: SensitivityInspectionTemplateIncludes;
   }
@@ -4389,7 +4491,7 @@ declare namespace Macie2 {
      */
     accountId?: __string;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when the free trial of automated sensitive data discovery started for the account. If the account is a member account in an organization, this value is the same as the value for the organization's Amazon Macie administrator account.
+     * The date and time, in UTC and extended ISO 8601 format, when the free trial of automated sensitive data discovery started for the account. This value is null if automated sensitive data discovery hasn't been enabled for the account.
      */
     automatedDiscoveryFreeTrialStartDate?: __timestampIso8601;
     /**
@@ -4513,6 +4615,9 @@ declare namespace Macie2 {
   export type __integer = number;
   export type __listOfAdminAccount = AdminAccount[];
   export type __listOfAllowListSummary = AllowListSummary[];
+  export type __listOfAutomatedDiscoveryAccount = AutomatedDiscoveryAccount[];
+  export type __listOfAutomatedDiscoveryAccountUpdate = AutomatedDiscoveryAccountUpdate[];
+  export type __listOfAutomatedDiscoveryAccountUpdateError = AutomatedDiscoveryAccountUpdateError[];
   export type __listOfBatchGetCustomDataIdentifierSummary = BatchGetCustomDataIdentifierSummary[];
   export type __listOfBucketMetadata = BucketMetadata[];
   export type __listOfClassificationScopeSummary = ClassificationScopeSummary[];

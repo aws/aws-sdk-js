@@ -28,6 +28,14 @@ declare class DataZone extends Service {
    */
   acceptSubscriptionRequest(callback?: (err: AWSError, data: DataZone.Types.AcceptSubscriptionRequestOutput) => void): Request<DataZone.Types.AcceptSubscriptionRequestOutput, AWSError>;
   /**
+   * Associates the environment role in Amazon DataZone.
+   */
+  associateEnvironmentRole(params: DataZone.Types.AssociateEnvironmentRoleInput, callback?: (err: AWSError, data: DataZone.Types.AssociateEnvironmentRoleOutput) => void): Request<DataZone.Types.AssociateEnvironmentRoleOutput, AWSError>;
+  /**
+   * Associates the environment role in Amazon DataZone.
+   */
+  associateEnvironmentRole(callback?: (err: AWSError, data: DataZone.Types.AssociateEnvironmentRoleOutput) => void): Request<DataZone.Types.AssociateEnvironmentRoleOutput, AWSError>;
+  /**
    * Cancels the metadata generation run.
    */
   cancelMetadataGenerationRun(params: DataZone.Types.CancelMetadataGenerationRunInput, callback?: (err: AWSError, data: DataZone.Types.CancelMetadataGenerationRunOutput) => void): Request<DataZone.Types.CancelMetadataGenerationRunOutput, AWSError>;
@@ -91,6 +99,14 @@ declare class DataZone extends Service {
    * Create an Amazon DataZone environment.
    */
   createEnvironment(callback?: (err: AWSError, data: DataZone.Types.CreateEnvironmentOutput) => void): Request<DataZone.Types.CreateEnvironmentOutput, AWSError>;
+  /**
+   * Creates an action for the environment, for example, creates a console link for an analytics tool that is available in this environment.
+   */
+  createEnvironmentAction(params: DataZone.Types.CreateEnvironmentActionInput, callback?: (err: AWSError, data: DataZone.Types.CreateEnvironmentActionOutput) => void): Request<DataZone.Types.CreateEnvironmentActionOutput, AWSError>;
+  /**
+   * Creates an action for the environment, for example, creates a console link for an analytics tool that is available in this environment.
+   */
+  createEnvironmentAction(callback?: (err: AWSError, data: DataZone.Types.CreateEnvironmentActionOutput) => void): Request<DataZone.Types.CreateEnvironmentActionOutput, AWSError>;
   /**
    * Creates an Amazon DataZone environment profile.
    */
@@ -228,6 +244,14 @@ declare class DataZone extends Service {
    */
   deleteEnvironment(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes an action for the environment, for example, deletes a console link for an analytics tool that is available in this environment.
+   */
+  deleteEnvironmentAction(params: DataZone.Types.DeleteEnvironmentActionInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an action for the environment, for example, deletes a console link for an analytics tool that is available in this environment.
+   */
+  deleteEnvironmentAction(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes the blueprint configuration in Amazon DataZone.
    */
   deleteEnvironmentBlueprintConfiguration(params: DataZone.Types.DeleteEnvironmentBlueprintConfigurationInput, callback?: (err: AWSError, data: DataZone.Types.DeleteEnvironmentBlueprintConfigurationOutput) => void): Request<DataZone.Types.DeleteEnvironmentBlueprintConfigurationOutput, AWSError>;
@@ -324,6 +348,14 @@ declare class DataZone extends Service {
    */
   deleteTimeSeriesDataPoints(callback?: (err: AWSError, data: DataZone.Types.DeleteTimeSeriesDataPointsOutput) => void): Request<DataZone.Types.DeleteTimeSeriesDataPointsOutput, AWSError>;
   /**
+   * Disassociates the environment role in Amazon DataZone.
+   */
+  disassociateEnvironmentRole(params: DataZone.Types.DisassociateEnvironmentRoleInput, callback?: (err: AWSError, data: DataZone.Types.DisassociateEnvironmentRoleOutput) => void): Request<DataZone.Types.DisassociateEnvironmentRoleOutput, AWSError>;
+  /**
+   * Disassociates the environment role in Amazon DataZone.
+   */
+  disassociateEnvironmentRole(callback?: (err: AWSError, data: DataZone.Types.DisassociateEnvironmentRoleOutput) => void): Request<DataZone.Types.DisassociateEnvironmentRoleOutput, AWSError>;
+  /**
    * Gets an Amazon DataZone asset.
    */
   getAsset(params: DataZone.Types.GetAssetInput, callback?: (err: AWSError, data: DataZone.Types.GetAssetOutput) => void): Request<DataZone.Types.GetAssetOutput, AWSError>;
@@ -371,6 +403,14 @@ declare class DataZone extends Service {
    * Gets an Amazon DataZone environment.
    */
   getEnvironment(callback?: (err: AWSError, data: DataZone.Types.GetEnvironmentOutput) => void): Request<DataZone.Types.GetEnvironmentOutput, AWSError>;
+  /**
+   * Gets the specified environment action.
+   */
+  getEnvironmentAction(params: DataZone.Types.GetEnvironmentActionInput, callback?: (err: AWSError, data: DataZone.Types.GetEnvironmentActionOutput) => void): Request<DataZone.Types.GetEnvironmentActionOutput, AWSError>;
+  /**
+   * Gets the specified environment action.
+   */
+  getEnvironmentAction(callback?: (err: AWSError, data: DataZone.Types.GetEnvironmentActionOutput) => void): Request<DataZone.Types.GetEnvironmentActionOutput, AWSError>;
   /**
    * Gets an Amazon DataZone blueprint.
    */
@@ -547,6 +587,14 @@ declare class DataZone extends Service {
    * Lists Amazon DataZone domains.
    */
   listDomains(callback?: (err: AWSError, data: DataZone.Types.ListDomainsOutput) => void): Request<DataZone.Types.ListDomainsOutput, AWSError>;
+  /**
+   * Lists existing environment actions.
+   */
+  listEnvironmentActions(params: DataZone.Types.ListEnvironmentActionsInput, callback?: (err: AWSError, data: DataZone.Types.ListEnvironmentActionsOutput) => void): Request<DataZone.Types.ListEnvironmentActionsOutput, AWSError>;
+  /**
+   * Lists existing environment actions.
+   */
+  listEnvironmentActions(callback?: (err: AWSError, data: DataZone.Types.ListEnvironmentActionsOutput) => void): Request<DataZone.Types.ListEnvironmentActionsOutput, AWSError>;
   /**
    * Lists blueprint configurations for a Amazon DataZone environment.
    */
@@ -796,6 +844,14 @@ declare class DataZone extends Service {
    */
   updateEnvironment(callback?: (err: AWSError, data: DataZone.Types.UpdateEnvironmentOutput) => void): Request<DataZone.Types.UpdateEnvironmentOutput, AWSError>;
   /**
+   * Updates an environment action.
+   */
+  updateEnvironmentAction(params: DataZone.Types.UpdateEnvironmentActionInput, callback?: (err: AWSError, data: DataZone.Types.UpdateEnvironmentActionOutput) => void): Request<DataZone.Types.UpdateEnvironmentActionOutput, AWSError>;
+  /**
+   * Updates an environment action.
+   */
+  updateEnvironmentAction(callback?: (err: AWSError, data: DataZone.Types.UpdateEnvironmentActionOutput) => void): Request<DataZone.Types.UpdateEnvironmentActionOutput, AWSError>;
+  /**
    * Updates the specified environment profile in Amazon DataZone.
    */
   updateEnvironmentProfile(params: DataZone.Types.UpdateEnvironmentProfileInput, callback?: (err: AWSError, data: DataZone.Types.UpdateEnvironmentProfileOutput) => void): Request<DataZone.Types.UpdateEnvironmentProfileOutput, AWSError>;
@@ -1002,6 +1058,12 @@ declare namespace DataZone {
   export type AcceptSubscriptionRequestOutputSubscribedListingsList = SubscribedListing[];
   export type AcceptSubscriptionRequestOutputSubscribedPrincipalsList = SubscribedPrincipal[];
   export type ActionLink = string;
+  export interface ActionParameters {
+    /**
+     * The console link specified as part of the environment action.
+     */
+    awsConsoleLink?: AwsConsoleLinkParameters;
+  }
   export type ApplicableAssetTypes = TypeName[];
   export type AssetId = string;
   export type AssetIdentifier = string;
@@ -1271,11 +1333,33 @@ declare namespace DataZone {
      */
     updatedBy?: UpdatedBy;
   }
+  export interface AssociateEnvironmentRoleInput {
+    /**
+     * The ID of the Amazon DataZone domain in which the environment role is associated.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The ID of the Amazon DataZone environment.
+     */
+    environmentIdentifier: EnvironmentId;
+    /**
+     * The ARN of the environment role.
+     */
+    environmentRoleArn: String;
+  }
+  export interface AssociateEnvironmentRoleOutput {
+  }
   export type Attribute = string;
   export type AuthType = "IAM_IDC"|"DISABLED"|string;
   export type AuthorizedPrincipalIdentifier = string;
   export type AuthorizedPrincipalIdentifiers = AuthorizedPrincipalIdentifier[];
   export type AwsAccountId = string;
+  export interface AwsConsoleLinkParameters {
+    /**
+     * The URI of the console link specified as part of the environment action.
+     */
+    uri?: String;
+  }
   export type AwsRegion = string;
   export type Boolean = boolean;
   export interface BusinessNameGenerationConfiguration {
@@ -1906,6 +1990,54 @@ declare namespace DataZone {
      */
     tags?: Tags;
   }
+  export interface CreateEnvironmentActionInput {
+    /**
+     * The description of the environment action that is being created in the environment.
+     */
+    description?: String;
+    /**
+     * The ID of the Amazon DataZone domain in which the environment action is created.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The ID of the environment in which the environment action is created.
+     */
+    environmentIdentifier: EnvironmentId;
+    /**
+     * The name of the environment action.
+     */
+    name: String;
+    /**
+     * The parameters of the environment action.
+     */
+    parameters: ActionParameters;
+  }
+  export interface CreateEnvironmentActionOutput {
+    /**
+     * The description of the environment action.
+     */
+    description?: String;
+    /**
+     * The ID of the domain in which the environment action is created.
+     */
+    domainId: DomainId;
+    /**
+     * The ID of the environment in which the environment is created.
+     */
+    environmentId: EnvironmentId;
+    /**
+     * The ID of the environment action.
+     */
+    id: EnvironmentActionId;
+    /**
+     * The name of the environment action.
+     */
+    name: String;
+    /**
+     * The parameters of the environment action.
+     */
+    parameters: ActionParameters;
+  }
   export interface CreateEnvironmentInput {
     /**
      * The description of the Amazon DataZone environment.
@@ -1915,6 +2047,18 @@ declare namespace DataZone {
      * The identifier of the Amazon DataZone domain in which the environment is created.
      */
     domainIdentifier: DomainId;
+    /**
+     * The ID of the account in which the environment is being created.
+     */
+    environmentAccountIdentifier?: String;
+    /**
+     * The region of the account in which the environment is being created.
+     */
+    environmentAccountRegion?: String;
+    /**
+     * The ID of the blueprint with which the environment is being created.
+     */
+    environmentBlueprintIdentifier?: String;
     /**
      * The identifier of the environment profile that is used to create this Amazon DataZone environment.
      */
@@ -1976,7 +2120,7 @@ declare namespace DataZone {
     /**
      * The ID of the environment profile with which this Amazon DataZone environment was created.
      */
-    environmentProfileId: EnvironmentProfileId;
+    environmentProfileId?: EnvironmentProfileId;
     /**
      * The glossary terms that can be used in this Amazon DataZone environment.
      */
@@ -3024,6 +3168,10 @@ declare namespace DataZone {
      * The identifier of the data source that is deleted.
      */
     identifier: DataSourceId;
+    /**
+     * Specifies that the granted permissions are retained in case of a self-subscribe functionality failure for a data source.
+     */
+    retainPermissionsOnRevokeFailure?: Boolean;
   }
   export interface DeleteDataSourceOutput {
     /**
@@ -3087,9 +3235,17 @@ declare namespace DataZone {
      */
     publishOnImport?: Boolean;
     /**
+     * Specifies that the granted permissions are retained in case of a self-subscribe functionality failure for a data source.
+     */
+    retainPermissionsOnRevokeFailure?: Boolean;
+    /**
      * The schedule of runs for this data source.
      */
     schedule?: ScheduleConfiguration;
+    /**
+     * Specifies the status of the self-granting functionality.
+     */
+    selfGrantStatus?: SelfGrantStatusOutput;
     /**
      * The status of this data source.
      */
@@ -3122,6 +3278,20 @@ declare namespace DataZone {
      * The status of the domain.
      */
     status: DomainStatus;
+  }
+  export interface DeleteEnvironmentActionInput {
+    /**
+     * The ID of the Amazon DataZone domain in which an environment action is deleted.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The ID of the environment where an environment action is deleted.
+     */
+    environmentIdentifier: EnvironmentId;
+    /**
+     * The ID of the environment action that is deleted.
+     */
+    identifier: String;
   }
   export interface DeleteEnvironmentBlueprintConfigurationInput {
     /**
@@ -3393,6 +3563,22 @@ declare namespace DataZone {
     shortDescription?: ShortDescription;
   }
   export type DetailedGlossaryTerms = DetailedGlossaryTerm[];
+  export interface DisassociateEnvironmentRoleInput {
+    /**
+     * The ID of the Amazon DataZone domain in which an environment role is disassociated.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The ID of the environment.
+     */
+    environmentIdentifier: EnvironmentId;
+    /**
+     * The ARN of the environment role.
+     */
+    environmentRoleArn: String;
+  }
+  export interface DisassociateEnvironmentRoleOutput {
+  }
   export type DomainDescription = string;
   export type DomainId = string;
   export type DomainName = string;
@@ -3442,7 +3628,34 @@ declare namespace DataZone {
   export type EntityId = string;
   export type EntityIdentifier = string;
   export type EntityType = "ASSET"|string;
+  export type EnvironmentActionId = string;
   export type EnvironmentActionList = ConfigurableEnvironmentAction[];
+  export interface EnvironmentActionSummary {
+    /**
+     * The environment action description.
+     */
+    description?: String;
+    /**
+     * The Amazon DataZone domain ID of the environment action.
+     */
+    domainId: DomainId;
+    /**
+     * The environment ID of the environment action.
+     */
+    environmentId: EnvironmentId;
+    /**
+     * The ID of the environment action.
+     */
+    id: EnvironmentActionId;
+    /**
+     * The name of the environment action.
+     */
+    name: String;
+    /**
+     * The parameters of the environment action.
+     */
+    parameters: ActionParameters;
+  }
   export interface EnvironmentBlueprintConfigurationItem {
     /**
      * The timestamp of when an environment blueprint was created.
@@ -3613,7 +3826,7 @@ declare namespace DataZone {
     /**
      * The identifier of the environment profile with which the environment was created.
      */
-    environmentProfileId: EnvironmentProfileId;
+    environmentProfileId?: EnvironmentProfileId;
     /**
      * The identifier of the environment.
      */
@@ -4048,6 +4261,10 @@ declare namespace DataZone {
      */
     schedule?: ScheduleConfiguration;
     /**
+     * Specifies the status of the self-granting functionality.
+     */
+    selfGrantStatus?: SelfGrantStatusOutput;
+    /**
      * The status of the data source.
      */
     status?: DataSourceStatus;
@@ -4179,6 +4396,46 @@ declare namespace DataZone {
      * The tags specified for the Amazon DataZone domain.
      */
     tags?: Tags;
+  }
+  export interface GetEnvironmentActionInput {
+    /**
+     * The ID of the Amazon DataZone domain in which the GetEnvironmentAction API is invoked. 
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The environment ID of the environment action.
+     */
+    environmentIdentifier: EnvironmentId;
+    /**
+     * The ID of the environment action
+     */
+    identifier: String;
+  }
+  export interface GetEnvironmentActionOutput {
+    /**
+     * The description of the environment action.
+     */
+    description?: String;
+    /**
+     * The ID of the Amazon DataZone domain in which the environment action lives.
+     */
+    domainId: DomainId;
+    /**
+     * The environment ID of the environment action.
+     */
+    environmentId: EnvironmentId;
+    /**
+     * The ID of the environment action.
+     */
+    id: EnvironmentActionId;
+    /**
+     * The name of the environment action.
+     */
+    name: String;
+    /**
+     * The parameters of the environment action.
+     */
+    parameters: ActionParameters;
   }
   export interface GetEnvironmentBlueprintConfigurationInput {
     /**
@@ -4326,7 +4583,7 @@ declare namespace DataZone {
     /**
      * The ID of the environment profile with which the environment is created.
      */
-    environmentProfileId: EnvironmentProfileId;
+    environmentProfileId?: EnvironmentProfileId;
     /**
      * The business glossary terms that can be used in this environment.
      */
@@ -5275,6 +5532,12 @@ declare namespace DataZone {
   export type GlueRunConfigurationOutputAccountIdString = string;
   export type GlueRunConfigurationOutputDataAccessRoleString = string;
   export type GlueRunConfigurationOutputRegionString = string;
+  export interface GlueSelfGrantStatusOutput {
+    /**
+     * The details for the self granting status for a Glue data source.
+     */
+    selfGrantStatusDetails: SelfGrantStatusDetails;
+  }
   export interface GrantedEntity {
     /**
      * The listing for which a subscription is granted.
@@ -5496,6 +5759,35 @@ declare namespace DataZone {
     items: DomainSummaries;
     /**
      * When the number of domains is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of domains, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListDomains to list the next set of domains.
+     */
+    nextToken?: PaginationToken;
+  }
+  export type ListEnvironmentActionSummaries = EnvironmentActionSummary[];
+  export interface ListEnvironmentActionsInput {
+    /**
+     * The ID of the Amazon DataZone domain in which the environment actions are listed.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The ID of the envrironment whose environment actions are listed.
+     */
+    environmentIdentifier: EnvironmentId;
+    /**
+     * The maximum number of environment actions to return in a single call to ListEnvironmentActions. When the number of environment actions to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListEnvironmentActions to list the next set of environment actions.
+     */
+    maxResults?: MaxResults;
+    /**
+     * When the number of environment actions is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of environment actions, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListEnvironmentActions to list the next set of environment actions.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListEnvironmentActionsOutput {
+    /**
+     * The results of ListEnvironmentActions.
+     */
+    items?: ListEnvironmentActionSummaries;
+    /**
+     * When the number of environment actions is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of environment actions, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListEnvironmentActions to list the next set of environment actions.
      */
     nextToken?: PaginationToken;
   }
@@ -6455,6 +6747,12 @@ declare namespace DataZone {
   export type RedshiftRunConfigurationOutputAccountIdString = string;
   export type RedshiftRunConfigurationOutputDataAccessRoleString = string;
   export type RedshiftRunConfigurationOutputRegionString = string;
+  export interface RedshiftSelfGrantStatusOutput {
+    /**
+     * The details for the self granting status for an Amazon Redshift data source.
+     */
+    selfGrantStatusDetails: SelfGrantStatusDetails;
+  }
   export interface RedshiftServerlessStorage {
     /**
      * The name of the Amazon Redshift Serverless workgroup.
@@ -7010,6 +7308,38 @@ declare namespace DataZone {
      * When the number of results is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of results, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to SearchUserProfiles to list the next set of results.
      */
     nextToken?: PaginationToken;
+  }
+  export type SelfGrantStatus = "GRANT_PENDING"|"REVOKE_PENDING"|"GRANT_IN_PROGRESS"|"REVOKE_IN_PROGRESS"|"GRANTED"|"GRANT_FAILED"|"REVOKE_FAILED"|string;
+  export interface SelfGrantStatusDetail {
+    /**
+     * The name of the database used for the data source.
+     */
+    databaseName: SelfGrantStatusDetailDatabaseNameString;
+    /**
+     * The reason for why the operation failed.
+     */
+    failureCause?: String;
+    /**
+     * The name of the schema used in the data source.
+     */
+    schemaName?: SelfGrantStatusDetailSchemaNameString;
+    /**
+     * The self granting status of the data source.
+     */
+    status: SelfGrantStatus;
+  }
+  export type SelfGrantStatusDetailDatabaseNameString = string;
+  export type SelfGrantStatusDetailSchemaNameString = string;
+  export type SelfGrantStatusDetails = SelfGrantStatusDetail[];
+  export interface SelfGrantStatusOutput {
+    /**
+     * The details for the self granting status for a Glue data source.
+     */
+    glueSelfGrantStatus?: GlueSelfGrantStatusOutput;
+    /**
+     * The details for the self granting status for an Amazon Redshift data source.
+     */
+    redshiftSelfGrantStatus?: RedshiftSelfGrantStatusOutput;
   }
   export type ShortDescription = string;
   export interface SingleSignOn {
@@ -7696,6 +8026,10 @@ declare namespace DataZone {
      */
     recommendation?: RecommendationConfiguration;
     /**
+     * Specifies that the granted permissions are retained in case of a self-subscribe functionality failure for a data source.
+     */
+    retainPermissionsOnRevokeFailure?: Boolean;
+    /**
      * The schedule to be updated as part of the UpdateDataSource action.
      */
     schedule?: ScheduleConfiguration;
@@ -7766,9 +8100,17 @@ declare namespace DataZone {
      */
     recommendation?: RecommendationConfiguration;
     /**
+     * Specifies that the granted permissions are retained in case of a self-subscribe functionality failure for a data source.
+     */
+    retainPermissionsOnRevokeFailure?: Boolean;
+    /**
      * The schedule to be updated as part of the UpdateDataSource action.
      */
     schedule?: ScheduleConfiguration;
+    /**
+     * Specifies the status of the self-granting functionality.
+     */
+    selfGrantStatus?: SelfGrantStatusOutput;
     /**
      * The status to be updated as part of the UpdateDataSource action.
      */
@@ -7834,6 +8176,58 @@ declare namespace DataZone {
      */
     singleSignOn?: SingleSignOn;
   }
+  export interface UpdateEnvironmentActionInput {
+    /**
+     * The description of the environment action.
+     */
+    description?: String;
+    /**
+     * The domain ID of the environment action.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The environment ID of the environment action.
+     */
+    environmentIdentifier: EnvironmentId;
+    /**
+     * The ID of the environment action.
+     */
+    identifier: String;
+    /**
+     * The name of the environment action.
+     */
+    name?: String;
+    /**
+     * The parameters of the environment action.
+     */
+    parameters?: ActionParameters;
+  }
+  export interface UpdateEnvironmentActionOutput {
+    /**
+     * The description of the environment action.
+     */
+    description?: String;
+    /**
+     * The domain ID of the environment action.
+     */
+    domainId: DomainId;
+    /**
+     * The environment ID of the environment action.
+     */
+    environmentId: EnvironmentId;
+    /**
+     * The ID of the environment action.
+     */
+    id: EnvironmentActionId;
+    /**
+     * The name of the environment action.
+     */
+    name: String;
+    /**
+     * The parameters of the environment action.
+     */
+    parameters: ActionParameters;
+  }
   export interface UpdateEnvironmentInput {
     /**
      * The description to be updated as part of the UpdateEnvironment action.
@@ -7896,7 +8290,7 @@ declare namespace DataZone {
     /**
      * The profile identifier of the environment.
      */
-    environmentProfileId: EnvironmentProfileId;
+    environmentProfileId?: EnvironmentProfileId;
     /**
      * The glossary terms to be updated as part of the UpdateEnvironment action.
      */

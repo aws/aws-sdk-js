@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1641.0-->
+<!--LATEST=2.1642.0-->
 <!--ENTRYINSERT-->
+
+## 2.1642.0
+* feature: DataZone: This release introduces a new default service blueprint for custom environment creation.
+* feature: Macie2: This release adds support for managing the status of automated sensitive data discovery for individual accounts in an organization, and determining whether individual S3 buckets are included in the scope of the analyses.
+* feature: MediaConvert: This release adds the ability to search for historical job records within the management console using a search box and/or via the SDK/CLI with partial string matching search on input file name.
+* feature: Route53Domains: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
 
 ## 2.1641.0
 * feature: CloudHSMV2: Added support for hsm type hsm2m.medium. Added supported for creating a cluster in FIPS or NON_FIPS mode.

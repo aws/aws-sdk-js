@@ -92,11 +92,11 @@ declare class MediaConvert extends Service {
    */
   deleteQueue(callback?: (err: AWSError, data: MediaConvert.Types.DeleteQueueResponse) => void): Request<MediaConvert.Types.DeleteQueueResponse, AWSError>;
   /**
-   * Send an request with an empty body to the regional API endpoint to get your account API endpoint.
+   * Send a request with an empty body to the regional API endpoint to get your account API endpoint. Note that DescribeEndpoints is no longer required. We recommend that you send your requests directly to the regional endpoint instead.
    */
   describeEndpoints(params: MediaConvert.Types.DescribeEndpointsRequest, callback?: (err: AWSError, data: MediaConvert.Types.DescribeEndpointsResponse) => void): Request<MediaConvert.Types.DescribeEndpointsResponse, AWSError>;
   /**
-   * Send an request with an empty body to the regional API endpoint to get your account API endpoint.
+   * Send a request with an empty body to the regional API endpoint to get your account API endpoint. Note that DescribeEndpoints is no longer required. We recommend that you send your requests directly to the regional endpoint instead.
    */
   describeEndpoints(callback?: (err: AWSError, data: MediaConvert.Types.DescribeEndpointsResponse) => void): Request<MediaConvert.Types.DescribeEndpointsResponse, AWSError>;
   /**
@@ -195,6 +195,14 @@ declare class MediaConvert extends Service {
    * Create or change your policy. For more information about policies, see the user guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
    */
   putPolicy(callback?: (err: AWSError, data: MediaConvert.Types.PutPolicyResponse) => void): Request<MediaConvert.Types.PutPolicyResponse, AWSError>;
+  /**
+   * Retrieve a JSON array that includes job details for up to twenty of your most recent jobs. Optionally filter results further according to input file, queue, or status. To retrieve the twenty next most recent jobs, use the nextToken string returned with the array.
+   */
+  searchJobs(params: MediaConvert.Types.SearchJobsRequest, callback?: (err: AWSError, data: MediaConvert.Types.SearchJobsResponse) => void): Request<MediaConvert.Types.SearchJobsResponse, AWSError>;
+  /**
+   * Retrieve a JSON array that includes job details for up to twenty of your most recent jobs. Optionally filter results further according to input file, queue, or status. To retrieve the twenty next most recent jobs, use the nextToken string returned with the array.
+   */
+  searchJobs(callback?: (err: AWSError, data: MediaConvert.Types.SearchJobsResponse) => void): Request<MediaConvert.Types.SearchJobsResponse, AWSError>;
   /**
    * Add tags to a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
    */
@@ -5432,6 +5440,42 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
      * Set Framerate to make sure that the captions and the video are synchronized in the output. Specify a frame rate that matches the frame rate of the associated video. If the video frame rate is 29.97, choose 29.97 dropframe only if the video has video_insertion=true and drop_frame_timecode=true; otherwise, choose 29.97 non-dropframe.
      */
     Framerate?: SccDestinationFramerate;
+  }
+  export interface SearchJobsRequest {
+    /**
+     * Optional. Provide your input file URL or your partial input file name. The maximum length for an input file is 300 characters.
+     */
+    InputFile?: __string;
+    /**
+     * Optional. Number of jobs, up to twenty, that will be returned at one time.
+     */
+    MaxResults?: __integerMin1Max20;
+    /**
+     * Optional. Use this string, provided with the response to a previous request, to request the next batch of jobs.
+     */
+    NextToken?: __string;
+    /**
+     * Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.
+     */
+    Order?: Order;
+    /**
+     * Optional. Provide a queue name, or a queue ARN, to return only jobs from that queue.
+     */
+    Queue?: __string;
+    /**
+     * Optional. A job's status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED, or ERROR.
+     */
+    Status?: JobStatus;
+  }
+  export interface SearchJobsResponse {
+    /**
+     * List of jobs.
+     */
+    Jobs?: __listOfJob;
+    /**
+     * Use this string to request the next batch of jobs.
+     */
+    NextToken?: __string;
   }
   export type SimulateReservedQueue = "DISABLED"|"ENABLED"|string;
   export interface SpekeKeyProvider {
