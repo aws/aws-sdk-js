@@ -348,6 +348,14 @@ declare class Glue extends Service {
    */
   createTrigger(callback?: (err: AWSError, data: Glue.Types.CreateTriggerResponse) => void): Request<Glue.Types.CreateTriggerResponse, AWSError>;
   /**
+   * Creates an Glue usage profile.
+   */
+  createUsageProfile(params: Glue.Types.CreateUsageProfileRequest, callback?: (err: AWSError, data: Glue.Types.CreateUsageProfileResponse) => void): Request<Glue.Types.CreateUsageProfileResponse, AWSError>;
+  /**
+   * Creates an Glue usage profile.
+   */
+  createUsageProfile(callback?: (err: AWSError, data: Glue.Types.CreateUsageProfileResponse) => void): Request<Glue.Types.CreateUsageProfileResponse, AWSError>;
+  /**
    * Creates a new function definition in the Data Catalog.
    */
   createUserDefinedFunction(params: Glue.Types.CreateUserDefinedFunctionRequest, callback?: (err: AWSError, data: Glue.Types.CreateUserDefinedFunctionResponse) => void): Request<Glue.Types.CreateUserDefinedFunctionResponse, AWSError>;
@@ -555,6 +563,14 @@ declare class Glue extends Service {
    * Deletes a specified trigger. If the trigger is not found, no exception is thrown.
    */
   deleteTrigger(callback?: (err: AWSError, data: Glue.Types.DeleteTriggerResponse) => void): Request<Glue.Types.DeleteTriggerResponse, AWSError>;
+  /**
+   * Deletes the Glue specified usage profile.
+   */
+  deleteUsageProfile(params: Glue.Types.DeleteUsageProfileRequest, callback?: (err: AWSError, data: Glue.Types.DeleteUsageProfileResponse) => void): Request<Glue.Types.DeleteUsageProfileResponse, AWSError>;
+  /**
+   * Deletes the Glue specified usage profile.
+   */
+  deleteUsageProfile(callback?: (err: AWSError, data: Glue.Types.DeleteUsageProfileResponse) => void): Request<Glue.Types.DeleteUsageProfileResponse, AWSError>;
   /**
    * Deletes an existing function definition from the Data Catalog.
    */
@@ -796,11 +812,11 @@ declare class Glue extends Service {
    */
   getJobBookmark(callback?: (err: AWSError, data: Glue.Types.GetJobBookmarkResponse) => void): Request<Glue.Types.GetJobBookmarkResponse, AWSError>;
   /**
-   * Retrieves the metadata for a given job run.
+   * Retrieves the metadata for a given job run. Job run history is accessible for 90 days for your workflow and job run.
    */
   getJobRun(params: Glue.Types.GetJobRunRequest, callback?: (err: AWSError, data: Glue.Types.GetJobRunResponse) => void): Request<Glue.Types.GetJobRunResponse, AWSError>;
   /**
-   * Retrieves the metadata for a given job run.
+   * Retrieves the metadata for a given job run. Job run history is accessible for 90 days for your workflow and job run.
    */
   getJobRun(callback?: (err: AWSError, data: Glue.Types.GetJobRunResponse) => void): Request<Glue.Types.GetJobRunResponse, AWSError>;
   /**
@@ -1068,6 +1084,14 @@ declare class Glue extends Service {
    */
   getUnfilteredTableMetadata(callback?: (err: AWSError, data: Glue.Types.GetUnfilteredTableMetadataResponse) => void): Request<Glue.Types.GetUnfilteredTableMetadataResponse, AWSError>;
   /**
+   * Retrieves information about the specified Glue usage profile.
+   */
+  getUsageProfile(params: Glue.Types.GetUsageProfileRequest, callback?: (err: AWSError, data: Glue.Types.GetUsageProfileResponse) => void): Request<Glue.Types.GetUsageProfileResponse, AWSError>;
+  /**
+   * Retrieves information about the specified Glue usage profile.
+   */
+  getUsageProfile(callback?: (err: AWSError, data: Glue.Types.GetUsageProfileResponse) => void): Request<Glue.Types.GetUsageProfileResponse, AWSError>;
+  /**
    * Retrieves a specified function definition from the Data Catalog.
    */
   getUserDefinedFunction(params: Glue.Types.GetUserDefinedFunctionRequest, callback?: (err: AWSError, data: Glue.Types.GetUserDefinedFunctionResponse) => void): Request<Glue.Types.GetUserDefinedFunctionResponse, AWSError>;
@@ -1092,11 +1116,11 @@ declare class Glue extends Service {
    */
   getWorkflow(callback?: (err: AWSError, data: Glue.Types.GetWorkflowResponse) => void): Request<Glue.Types.GetWorkflowResponse, AWSError>;
   /**
-   * Retrieves the metadata for a given workflow run. 
+   * Retrieves the metadata for a given workflow run. Job run history is accessible for 90 days for your workflow and job run.
    */
   getWorkflowRun(params: Glue.Types.GetWorkflowRunRequest, callback?: (err: AWSError, data: Glue.Types.GetWorkflowRunResponse) => void): Request<Glue.Types.GetWorkflowRunResponse, AWSError>;
   /**
-   * Retrieves the metadata for a given workflow run. 
+   * Retrieves the metadata for a given workflow run. Job run history is accessible for 90 days for your workflow and job run.
    */
   getWorkflowRun(callback?: (err: AWSError, data: Glue.Types.GetWorkflowRunResponse) => void): Request<Glue.Types.GetWorkflowRunResponse, AWSError>;
   /**
@@ -1275,6 +1299,14 @@ declare class Glue extends Service {
    * Retrieves the names of all trigger resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
   listTriggers(callback?: (err: AWSError, data: Glue.Types.ListTriggersResponse) => void): Request<Glue.Types.ListTriggersResponse, AWSError>;
+  /**
+   * List all the Glue usage profiles.
+   */
+  listUsageProfiles(params: Glue.Types.ListUsageProfilesRequest, callback?: (err: AWSError, data: Glue.Types.ListUsageProfilesResponse) => void): Request<Glue.Types.ListUsageProfilesResponse, AWSError>;
+  /**
+   * List all the Glue usage profiles.
+   */
+  listUsageProfiles(callback?: (err: AWSError, data: Glue.Types.ListUsageProfilesResponse) => void): Request<Glue.Types.ListUsageProfilesResponse, AWSError>;
   /**
    * Lists names of workflows created in the account.
    */
@@ -1700,6 +1732,14 @@ declare class Glue extends Service {
    */
   updateTrigger(callback?: (err: AWSError, data: Glue.Types.UpdateTriggerResponse) => void): Request<Glue.Types.UpdateTriggerResponse, AWSError>;
   /**
+   * Update an Glue usage profile.
+   */
+  updateUsageProfile(params: Glue.Types.UpdateUsageProfileRequest, callback?: (err: AWSError, data: Glue.Types.UpdateUsageProfileResponse) => void): Request<Glue.Types.UpdateUsageProfileResponse, AWSError>;
+  /**
+   * Update an Glue usage profile.
+   */
+  updateUsageProfile(callback?: (err: AWSError, data: Glue.Types.UpdateUsageProfileResponse) => void): Request<Glue.Types.UpdateUsageProfileResponse, AWSError>;
+  /**
    * Updates an existing function definition in the Data Catalog.
    */
   updateUserDefinedFunction(params: Glue.Types.UpdateUserDefinedFunctionRequest, callback?: (err: AWSError, data: Glue.Types.UpdateUserDefinedFunctionResponse) => void): Request<Glue.Types.UpdateUserDefinedFunctionResponse, AWSError>;
@@ -1780,6 +1820,7 @@ declare namespace Glue {
     AggFunc: AggFunction;
   }
   export type AggregateOperations = AggregateOperation[];
+  export type AllowedValuesStringList = ConfigValueString[];
   export interface AmazonRedshiftAdvancedOption {
     /**
      * The key for the additional connection option.
@@ -3506,6 +3547,26 @@ declare namespace Glue {
     CrawlState?: CrawlState;
   }
   export type ConditionList = Condition[];
+  export type ConfigValueString = string;
+  export type ConfigurationMap = {[key: string]: ConfigurationObject};
+  export interface ConfigurationObject {
+    /**
+     * A default value for the parameter.
+     */
+    DefaultValue?: ConfigValueString;
+    /**
+     * A list of allowed values for the parameter.
+     */
+    AllowedValues?: AllowedValuesStringList;
+    /**
+     * A minimum allowed value for the parameter.
+     */
+    MinValue?: ConfigValueString;
+    /**
+     * A maximum allowed value for the parameter.
+     */
+    MaxValue?: ConfigValueString;
+  }
   export interface ConfusionMatrix {
     /**
      * The number of matches in the data that the transform correctly found, in the confusion matrix for your transform.
@@ -4871,6 +4932,30 @@ declare namespace Glue {
      */
     Name?: NameString;
   }
+  export interface CreateUsageProfileRequest {
+    /**
+     * The name of the usage profile.
+     */
+    Name: NameString;
+    /**
+     * A description of the usage profile.
+     */
+    Description?: DescriptionString;
+    /**
+     * A ProfileConfiguration object specifying the job and session values for the profile.
+     */
+    Configuration: ProfileConfiguration;
+    /**
+     * A list of tags applied to the usage profile.
+     */
+    Tags?: TagsMap;
+  }
+  export interface CreateUsageProfileResponse {
+    /**
+     * The name of the usage profile that was created.
+     */
+    Name?: NameString;
+  }
   export interface CreateUserDefinedFunctionRequest {
     /**
      * The ID of the Data Catalog in which to create the function. If none is provided, the Amazon Web Services account ID is used by default.
@@ -5912,6 +5997,14 @@ declare namespace Glue {
      * The name of the trigger that was deleted.
      */
     Name?: NameString;
+  }
+  export interface DeleteUsageProfileRequest {
+    /**
+     * The name of the usage profile to delete.
+     */
+    Name: NameString;
+  }
+  export interface DeleteUsageProfileResponse {
   }
   export interface DeleteUserDefinedFunctionRequest {
     /**
@@ -8441,6 +8534,34 @@ declare namespace Glue {
      */
     RowFilter?: PredicateString;
   }
+  export interface GetUsageProfileRequest {
+    /**
+     * The name of the usage profile to retrieve.
+     */
+    Name: NameString;
+  }
+  export interface GetUsageProfileResponse {
+    /**
+     * The name of the usage profile.
+     */
+    Name?: NameString;
+    /**
+     * A description of the usage profile.
+     */
+    Description?: DescriptionString;
+    /**
+     * A ProfileConfiguration object specifying the job and session values for the profile.
+     */
+    Configuration?: ProfileConfiguration;
+    /**
+     * The date and time when the usage profile was created.
+     */
+    CreatedOn?: TimestampValue;
+    /**
+     * The date and time when the usage profile was last modified.
+     */
+    LastModifiedOn?: TimestampValue;
+  }
   export interface GetUserDefinedFunctionRequest {
     /**
      * The ID of the Data Catalog where the function to be retrieved is located. If none is provided, the Amazon Web Services account ID is used by default.
@@ -9019,6 +9140,10 @@ declare namespace Glue {
      * This field specifies a day of the week and hour for a maintenance window for streaming jobs. Glue periodically performs maintenance activities. During these maintenance windows, Glue will need to restart your streaming jobs. Glue will restart the job within 3 hours of the specified maintenance window. For instance, if you set up the maintenance window for Monday at 10:00AM GMT, your jobs will be restarted between 10:00AM GMT to 1:00PM GMT.
      */
     MaintenanceWindow?: MaintenanceWindow;
+    /**
+     * The name of an Glue usage profile associated with the job.
+     */
+    ProfileName?: NameString;
   }
   export interface JobBookmarkEntry {
     /**
@@ -9194,6 +9319,10 @@ declare namespace Glue {
      * This field specifies a day of the week and hour for a maintenance window for streaming jobs. Glue periodically performs maintenance activities. During these maintenance windows, Glue will need to restart your streaming jobs. Glue will restart the job within 3 hours of the specified maintenance window. For instance, if you set up the maintenance window for Monday at 10:00AM GMT, your jobs will be restarted between 10:00AM GMT to 1:00PM GMT.
      */
     MaintenanceWindow?: MaintenanceWindow;
+    /**
+     * The name of an Glue usage profile associated with the job run.
+     */
+    ProfileName?: NameString;
   }
   export type JobRunList = JobRun[];
   export type JobRunState = "STARTING"|"RUNNING"|"STOPPING"|"STOPPED"|"SUCCEEDED"|"FAILED"|"TIMEOUT"|"ERROR"|"WAITING"|"EXPIRED"|string;
@@ -10096,6 +10225,26 @@ declare namespace Glue {
      */
     NextToken?: GenericString;
   }
+  export interface ListUsageProfilesRequest {
+    /**
+     * A continuation token, included if this is a continuation call.
+     */
+    NextToken?: OrchestrationToken;
+    /**
+     * The maximum number of usage profiles to return in a single response.
+     */
+    MaxResults?: OrchestrationPageSize200;
+  }
+  export interface ListUsageProfilesResponse {
+    /**
+     * A list of usage profile (UsageProfileDefinition) objects.
+     */
+    Profiles?: UsageProfileDefinitionList;
+    /**
+     * A continuation token, present if the current list segment is not the last.
+     */
+    NextToken?: OrchestrationToken;
+  }
   export interface ListWorkflowsRequest {
     /**
      * A continuation token, if this is a continuation request.
@@ -10907,6 +11056,16 @@ declare namespace Glue {
   export type PrincipalPermissionsList = PrincipalPermissions[];
   export type PrincipalType = "USER"|"ROLE"|"GROUP"|string;
   export type Prob = number;
+  export interface ProfileConfiguration {
+    /**
+     * A key-value map of configuration parameters for Glue sessions. 
+     */
+    SessionConfiguration?: ConfigurationMap;
+    /**
+     * A key-value map of configuration parameters for Glue jobs. 
+     */
+    JobConfiguration?: ConfigurationMap;
+  }
   export interface PropertyPredicate {
     /**
      * The key of the property.
@@ -12328,6 +12487,10 @@ declare namespace Glue {
      * The number of minutes when idle before the session times out.
      */
     IdleTimeout?: IdleTimeout;
+    /**
+     * The name of an Glue usage profile associated with the session.
+     */
+    ProfileName?: NameString;
   }
   export interface SessionCommand {
     /**
@@ -14426,6 +14589,26 @@ declare namespace Glue {
      */
     Trigger?: Trigger;
   }
+  export interface UpdateUsageProfileRequest {
+    /**
+     * The name of the usage profile.
+     */
+    Name: NameString;
+    /**
+     * A description of the usage profile.
+     */
+    Description?: DescriptionString;
+    /**
+     * A ProfileConfiguration object specifying the job and session values for the profile.
+     */
+    Configuration: ProfileConfiguration;
+  }
+  export interface UpdateUsageProfileResponse {
+    /**
+     * The name of the usage profile that was updated.
+     */
+    Name?: NameString;
+  }
   export interface UpdateUserDefinedFunctionRequest {
     /**
      * The ID of the Data Catalog where the function to be updated is located. If none is provided, the Amazon Web Services account ID is used by default.
@@ -14500,6 +14683,25 @@ declare namespace Glue {
     UpsertKeys?: EnclosedInStringPropertiesMinOne;
   }
   export type UriString = string;
+  export interface UsageProfileDefinition {
+    /**
+     * The name of the usage profile.
+     */
+    Name?: NameString;
+    /**
+     * A description of the usage profile.
+     */
+    Description?: DescriptionString;
+    /**
+     * The date and time when the usage profile was created.
+     */
+    CreatedOn?: TimestampValue;
+    /**
+     * The date and time when the usage profile was last modified.
+     */
+    LastModifiedOn?: TimestampValue;
+  }
+  export type UsageProfileDefinitionList = UsageProfileDefinition[];
   export interface UserDefinedFunction {
     /**
      * The name of the function.

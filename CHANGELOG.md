@@ -1,6 +1,16 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1642.0-->
+<!--LATEST=2.1643.0-->
 <!--ENTRYINSERT-->
+
+## 2.1643.0
+* feature: Batch: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: CodeBuild: AWS CodeBuild now supports global and organization GitHub webhooks
+* feature: CognitoIdentityServiceProvider: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: DirectoryService: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: EFS: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: Glue: This release introduces a new feature, Usage profiles. Usage profiles allow the AWS Glue admin to create different profiles for various classes of users within the account, enforcing limits and defaults for jobs and sessions.
+* feature: MediaConvert: This release includes support for creating I-frame only video segments for DASH trick play.
+* feature: WAF: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
 
 ## 2.1642.0
 * feature: DataZone: This release introduces a new default service blueprint for custom environment creation.

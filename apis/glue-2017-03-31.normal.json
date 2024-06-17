@@ -1318,6 +1318,40 @@
       ],
       "documentation": "<p>Creates a new trigger.</p>"
     },
+    "CreateUsageProfile": {
+      "name": "CreateUsageProfile",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateUsageProfileRequest"
+      },
+      "output": {
+        "shape": "CreateUsageProfileResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "AlreadyExistsException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "ResourceNumberLimitExceededException"
+        },
+        {
+          "shape": "OperationNotSupportedException"
+        }
+      ],
+      "documentation": "<p>Creates an Glue usage profile.</p>"
+    },
     "CreateUserDefinedFunction": {
       "name": "CreateUserDefinedFunction",
       "http": {
@@ -2075,6 +2109,34 @@
         }
       ],
       "documentation": "<p>Deletes a specified trigger. If the trigger is not found, no exception is thrown.</p>"
+    },
+    "DeleteUsageProfile": {
+      "name": "DeleteUsageProfile",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteUsageProfileRequest"
+      },
+      "output": {
+        "shape": "DeleteUsageProfileResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "OperationNotSupportedException"
+        }
+      ],
+      "documentation": "<p>Deletes the Glue specified usage profile.</p>"
     },
     "DeleteUserDefinedFunction": {
       "name": "DeleteUserDefinedFunction",
@@ -2894,7 +2956,7 @@
           "shape": "OperationTimeoutException"
         }
       ],
-      "documentation": "<p>Retrieves the metadata for a given job run.</p>"
+      "documentation": "<p>Retrieves the metadata for a given job run. Job run history is accessible for 90 days for your workflow and job run.</p>"
     },
     "GetJobRuns": {
       "name": "GetJobRuns",
@@ -3916,6 +3978,37 @@
       ],
       "documentation": "<p>Allows a third-party analytical engine to retrieve unfiltered table metadata from the Data Catalog.</p> <p>For IAM authorization, the public IAM action associated with this API is <code>glue:GetTable</code>.</p>"
     },
+    "GetUsageProfile": {
+      "name": "GetUsageProfile",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetUsageProfileRequest"
+      },
+      "output": {
+        "shape": "GetUsageProfileResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "OperationNotSupportedException"
+        }
+      ],
+      "documentation": "<p>Retrieves information about the specified Glue usage profile.</p>"
+    },
     "GetUserDefinedFunction": {
       "name": "GetUserDefinedFunction",
       "http": {
@@ -4032,7 +4125,7 @@
           "shape": "OperationTimeoutException"
         }
       ],
-      "documentation": "<p>Retrieves the metadata for a given workflow run. </p>"
+      "documentation": "<p>Retrieves the metadata for a given workflow run. Job run history is accessible for 90 days for your workflow and job run.</p>"
     },
     "GetWorkflowRunProperties": {
       "name": "GetWorkflowRunProperties",
@@ -4610,6 +4703,34 @@
         }
       ],
       "documentation": "<p>Retrieves the names of all trigger resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names.</p> <p>This operation takes the optional <code>Tags</code> field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.</p>"
+    },
+    "ListUsageProfiles": {
+      "name": "ListUsageProfiles",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListUsageProfilesRequest"
+      },
+      "output": {
+        "shape": "ListUsageProfilesResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "OperationNotSupportedException"
+        }
+      ],
+      "documentation": "<p>List all the Glue usage profiles.</p>"
     },
     "ListWorkflows": {
       "name": "ListWorkflows",
@@ -6265,6 +6386,40 @@
       ],
       "documentation": "<p>Updates a trigger definition.</p>"
     },
+    "UpdateUsageProfile": {
+      "name": "UpdateUsageProfile",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateUsageProfileRequest"
+      },
+      "output": {
+        "shape": "UpdateUsageProfileResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "OperationNotSupportedException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        }
+      ],
+      "documentation": "<p>Update an Glue usage profile.</p>"
+    },
     "UpdateUserDefinedFunction": {
       "name": "UpdateUserDefinedFunction",
       "http": {
@@ -6482,6 +6637,12 @@
       },
       "max": 30,
       "min": 1
+    },
+    "AllowedValuesStringList": {
+      "type": "list",
+      "member": {
+        "shape": "ConfigValueString"
+      }
     },
     "AmazonRedshiftAdvancedOption": {
       "type": "structure",
@@ -9136,6 +9297,43 @@
         "shape": "Condition"
       }
     },
+    "ConfigValueString": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9_.-]+"
+    },
+    "ConfigurationMap": {
+      "type": "map",
+      "key": {
+        "shape": "NameString"
+      },
+      "value": {
+        "shape": "ConfigurationObject"
+      }
+    },
+    "ConfigurationObject": {
+      "type": "structure",
+      "members": {
+        "DefaultValue": {
+          "shape": "ConfigValueString",
+          "documentation": "<p>A default value for the parameter.</p>"
+        },
+        "AllowedValues": {
+          "shape": "AllowedValuesStringList",
+          "documentation": "<p>A list of allowed values for the parameter.</p>"
+        },
+        "MinValue": {
+          "shape": "ConfigValueString",
+          "documentation": "<p>A minimum allowed value for the parameter.</p>"
+        },
+        "MaxValue": {
+          "shape": "ConfigValueString",
+          "documentation": "<p>A maximum allowed value for the parameter.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the values that an admin sets for each job or session parameter configured in a Glue usage profile.</p>"
+    },
     "ConfusionMatrix": {
       "type": "structure",
       "members": {
@@ -10972,6 +11170,40 @@
         }
       }
     },
+    "CreateUsageProfileRequest": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "Configuration"
+      ],
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the usage profile.</p>"
+        },
+        "Description": {
+          "shape": "DescriptionString",
+          "documentation": "<p>A description of the usage profile.</p>"
+        },
+        "Configuration": {
+          "shape": "ProfileConfiguration",
+          "documentation": "<p>A <code>ProfileConfiguration</code> object specifying the job and session values for the profile.</p>"
+        },
+        "Tags": {
+          "shape": "TagsMap",
+          "documentation": "<p>A list of tags applied to the usage profile.</p>"
+        }
+      }
+    },
+    "CreateUsageProfileResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the usage profile that was created.</p>"
+        }
+      }
+    },
     "CreateUserDefinedFunctionRequest": {
       "type": "structure",
       "required": [
@@ -12646,6 +12878,22 @@
           "documentation": "<p>The name of the trigger that was deleted.</p>"
         }
       }
+    },
+    "DeleteUsageProfileRequest": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the usage profile to delete.</p>"
+        }
+      }
+    },
+    "DeleteUsageProfileResponse": {
+      "type": "structure",
+      "members": {}
     },
     "DeleteUserDefinedFunctionRequest": {
       "type": "structure",
@@ -16200,6 +16448,43 @@
         }
       }
     },
+    "GetUsageProfileRequest": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the usage profile to retrieve.</p>"
+        }
+      }
+    },
+    "GetUsageProfileResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the usage profile.</p>"
+        },
+        "Description": {
+          "shape": "DescriptionString",
+          "documentation": "<p>A description of the usage profile.</p>"
+        },
+        "Configuration": {
+          "shape": "ProfileConfiguration",
+          "documentation": "<p>A <code>ProfileConfiguration</code> object specifying the job and session values for the profile.</p>"
+        },
+        "CreatedOn": {
+          "shape": "TimestampValue",
+          "documentation": "<p>The date and time when the usage profile was created.</p>"
+        },
+        "LastModifiedOn": {
+          "shape": "TimestampValue",
+          "documentation": "<p>The date and time when the usage profile was last modified.</p>"
+        }
+      }
+    },
     "GetUserDefinedFunctionRequest": {
       "type": "structure",
       "required": [
@@ -17127,6 +17412,10 @@
         "MaintenanceWindow": {
           "shape": "MaintenanceWindow",
           "documentation": "<p>This field specifies a day of the week and hour for a maintenance window for streaming jobs. Glue periodically performs maintenance activities. During these maintenance windows, Glue will need to restart your streaming jobs.</p> <p>Glue will restart the job within 3 hours of the specified maintenance window. For instance, if you set up the maintenance window for Monday at 10:00AM GMT, your jobs will be restarted between 10:00AM GMT to 1:00PM GMT.</p>"
+        },
+        "ProfileName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of an Glue usage profile associated with the job.</p>"
         }
       },
       "documentation": "<p>Specifies a job definition.</p>"
@@ -17349,6 +17638,10 @@
         "MaintenanceWindow": {
           "shape": "MaintenanceWindow",
           "documentation": "<p>This field specifies a day of the week and hour for a maintenance window for streaming jobs. Glue periodically performs maintenance activities. During these maintenance windows, Glue will need to restart your streaming jobs.</p> <p>Glue will restart the job within 3 hours of the specified maintenance window. For instance, if you set up the maintenance window for Monday at 10:00AM GMT, your jobs will be restarted between 10:00AM GMT to 1:00PM GMT.</p>"
+        },
+        "ProfileName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of an Glue usage profile associated with the job run.</p>"
         }
       },
       "documentation": "<p>Contains information about a job run.</p>"
@@ -18543,6 +18836,32 @@
         "NextToken": {
           "shape": "GenericString",
           "documentation": "<p>A continuation token, if the returned list does not contain the last metric available.</p>"
+        }
+      }
+    },
+    "ListUsageProfilesRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "OrchestrationToken",
+          "documentation": "<p>A continuation token, included if this is a continuation call.</p>"
+        },
+        "MaxResults": {
+          "shape": "OrchestrationPageSize200",
+          "documentation": "<p>The maximum number of usage profiles to return in a single response.</p>"
+        }
+      }
+    },
+    "ListUsageProfilesResponse": {
+      "type": "structure",
+      "members": {
+        "Profiles": {
+          "shape": "UsageProfileDefinitionList",
+          "documentation": "<p>A list of usage profile (<code>UsageProfileDefinition</code>) objects.</p>"
+        },
+        "NextToken": {
+          "shape": "OrchestrationToken",
+          "documentation": "<p>A continuation token, present if the current list segment is not the last.</p>"
         }
       }
     },
@@ -20076,6 +20395,20 @@
       "box": true,
       "max": 1,
       "min": 0
+    },
+    "ProfileConfiguration": {
+      "type": "structure",
+      "members": {
+        "SessionConfiguration": {
+          "shape": "ConfigurationMap",
+          "documentation": "<p>A key-value map of configuration parameters for Glue sessions. </p>"
+        },
+        "JobConfiguration": {
+          "shape": "ConfigurationMap",
+          "documentation": "<p>A key-value map of configuration parameters for Glue jobs. </p>"
+        }
+      },
+      "documentation": "<p>Specifies the job and session values that an admin configures in an Glue usage profile.</p>"
     },
     "PropertyPredicate": {
       "type": "structure",
@@ -22134,6 +22467,10 @@
         "IdleTimeout": {
           "shape": "IdleTimeout",
           "documentation": "<p>The number of minutes when idle before the session times out.</p>"
+        },
+        "ProfileName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of an Glue usage profile associated with the session.</p>"
         }
       },
       "documentation": "<p>The period in which a remote Spark runtime environment is running.</p>"
@@ -25246,6 +25583,36 @@
         }
       }
     },
+    "UpdateUsageProfileRequest": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "Configuration"
+      ],
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the usage profile.</p>"
+        },
+        "Description": {
+          "shape": "DescriptionString",
+          "documentation": "<p>A description of the usage profile.</p>"
+        },
+        "Configuration": {
+          "shape": "ProfileConfiguration",
+          "documentation": "<p>A <code>ProfileConfiguration</code> object specifying the job and session values for the profile.</p>"
+        }
+      }
+    },
+    "UpdateUsageProfileResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the usage profile that was updated.</p>"
+        }
+      }
+    },
     "UpdateUserDefinedFunctionRequest": {
       "type": "structure",
       "required": [
@@ -25353,6 +25720,34 @@
     },
     "UriString": {
       "type": "string"
+    },
+    "UsageProfileDefinition": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the usage profile.</p>"
+        },
+        "Description": {
+          "shape": "DescriptionString",
+          "documentation": "<p>A description of the usage profile.</p>"
+        },
+        "CreatedOn": {
+          "shape": "TimestampValue",
+          "documentation": "<p>The date and time when the usage profile was created.</p>"
+        },
+        "LastModifiedOn": {
+          "shape": "TimestampValue",
+          "documentation": "<p>The date and time when the usage profile was last modified.</p>"
+        }
+      },
+      "documentation": "<p>Describes an Glue usage profile.</p>"
+    },
+    "UsageProfileDefinitionList": {
+      "type": "list",
+      "member": {
+        "shape": "UsageProfileDefinition"
+      }
     },
     "UserDefinedFunction": {
       "type": "structure",
