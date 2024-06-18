@@ -293,6 +293,14 @@ declare class SageMaker extends Service {
    */
   createLabelingJob(callback?: (err: AWSError, data: SageMaker.Types.CreateLabelingJobResponse) => void): Request<SageMaker.Types.CreateLabelingJobResponse, AWSError>;
   /**
+   * Creates an MLflow Tracking Server using a general purpose Amazon S3 bucket as the artifact store. For more information, see Create an MLflow Tracking Server.
+   */
+  createMlflowTrackingServer(params: SageMaker.Types.CreateMlflowTrackingServerRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateMlflowTrackingServerResponse) => void): Request<SageMaker.Types.CreateMlflowTrackingServerResponse, AWSError>;
+  /**
+   * Creates an MLflow Tracking Server using a general purpose Amazon S3 bucket as the artifact store. For more information, see Create an MLflow Tracking Server.
+   */
+  createMlflowTrackingServer(callback?: (err: AWSError, data: SageMaker.Types.CreateMlflowTrackingServerResponse) => void): Request<SageMaker.Types.CreateMlflowTrackingServerResponse, AWSError>;
+  /**
    * Creates a model in SageMaker. In the request, you name the model and describe a primary container. For the primary container, you specify the Docker image that contains inference code, artifacts (from prior training), and a custom environment map that the inference code uses when you deploy the model for predictions. Use this API to create a model if you want to use SageMaker hosting services or run a batch transform job. To host your model, you create an endpoint configuration with the CreateEndpointConfig API, and then create an endpoint with the CreateEndpoint API. SageMaker then deploys all of the containers that you defined for the model in the hosting environment.  To run a batch transform using your model, you start a job with the CreateTransformJob API. SageMaker uses your model and your dataset to get inferences which are then saved to a specified S3 location. In the request, you also provide an IAM role that SageMaker can assume to access model artifacts and docker image for deployment on ML compute hosting instances or for batch transform jobs. In addition, you also use the IAM role to manage permissions the inference code needs. For example, if the inference code access any other Amazon Web Services resources, you grant necessary permissions via this role.
    */
   createModel(params: SageMaker.Types.CreateModelInput, callback?: (err: AWSError, data: SageMaker.Types.CreateModelOutput) => void): Request<SageMaker.Types.CreateModelOutput, AWSError>;
@@ -396,6 +404,14 @@ declare class SageMaker extends Service {
    * Creates a URL for a specified UserProfile in a Domain. When accessed in a web browser, the user will be automatically signed in to the domain, and granted access to all of the Apps and files associated with the Domain's Amazon Elastic File System volume. This operation can only be called when the authentication mode equals IAM.  The IAM role or user passed to this API defines the permissions to access the app. Once the presigned URL is created, no additional permission is required to access this URL. IAM authorization policies for this API are also enforced for every HTTP request and WebSocket frame that attempts to connect to the app. You can restrict access to this API and to the URL that it returns to a list of IP addresses, Amazon VPCs or Amazon VPC Endpoints that you specify. For more information, see Connect to Amazon SageMaker Studio Through an Interface VPC Endpoint .  The URL that you get from a call to CreatePresignedDomainUrl has a default timeout of 5 minutes. You can configure this value using ExpiresInSeconds. If you try to use the URL after the timeout limit expires, you are directed to the Amazon Web Services console sign-in page. 
    */
   createPresignedDomainUrl(callback?: (err: AWSError, data: SageMaker.Types.CreatePresignedDomainUrlResponse) => void): Request<SageMaker.Types.CreatePresignedDomainUrlResponse, AWSError>;
+  /**
+   * Returns a presigned URL that you can use to connect to the MLflow UI attached to your tracking server. For more information, see Launch the MLflow UI using a presigned URL.
+   */
+  createPresignedMlflowTrackingServerUrl(params: SageMaker.Types.CreatePresignedMlflowTrackingServerUrlRequest, callback?: (err: AWSError, data: SageMaker.Types.CreatePresignedMlflowTrackingServerUrlResponse) => void): Request<SageMaker.Types.CreatePresignedMlflowTrackingServerUrlResponse, AWSError>;
+  /**
+   * Returns a presigned URL that you can use to connect to the MLflow UI attached to your tracking server. For more information, see Launch the MLflow UI using a presigned URL.
+   */
+  createPresignedMlflowTrackingServerUrl(callback?: (err: AWSError, data: SageMaker.Types.CreatePresignedMlflowTrackingServerUrlResponse) => void): Request<SageMaker.Types.CreatePresignedMlflowTrackingServerUrlResponse, AWSError>;
   /**
    * Returns a URL that you can use to connect to the Jupyter server from a notebook instance. In the SageMaker console, when you choose Open next to a notebook instance, SageMaker opens a new tab showing the Jupyter server home page from the notebook instance. The console uses this API to get the URL and show the page.  The IAM role or user used to call this API defines the permissions to access the notebook instance. Once the presigned URL is created, no additional permission is required to access this URL. IAM authorization policies for this API are also enforced for every HTTP request and WebSocket frame that attempts to connect to the notebook instance. You can restrict access to this API and to the URL that it returns to a list of IP addresses that you specify. Use the NotIpAddress condition operator and the aws:SourceIP condition context key to specify the list of IP addresses that you want to have access to the notebook instance. For more information, see Limit Access to a Notebook Instance by IP Address.  The URL that you get from a call to CreatePresignedNotebookInstanceUrl is valid only for 5 minutes. If you try to use the URL after the 5-minute limit expires, you are directed to the Amazon Web Services console sign-in page. 
    */
@@ -717,6 +733,14 @@ declare class SageMaker extends Service {
    */
   deleteInferenceExperiment(callback?: (err: AWSError, data: SageMaker.Types.DeleteInferenceExperimentResponse) => void): Request<SageMaker.Types.DeleteInferenceExperimentResponse, AWSError>;
   /**
+   * Deletes an MLflow Tracking Server. For more information, see Clean up MLflow resources.
+   */
+  deleteMlflowTrackingServer(params: SageMaker.Types.DeleteMlflowTrackingServerRequest, callback?: (err: AWSError, data: SageMaker.Types.DeleteMlflowTrackingServerResponse) => void): Request<SageMaker.Types.DeleteMlflowTrackingServerResponse, AWSError>;
+  /**
+   * Deletes an MLflow Tracking Server. For more information, see Clean up MLflow resources.
+   */
+  deleteMlflowTrackingServer(callback?: (err: AWSError, data: SageMaker.Types.DeleteMlflowTrackingServerResponse) => void): Request<SageMaker.Types.DeleteMlflowTrackingServerResponse, AWSError>;
+  /**
    * Deletes a model. The DeleteModel API deletes only the model entry that was created in SageMaker when you called the CreateModel API. It does not delete model artifacts, inference code, or the IAM role that you specified when creating the model. 
    */
   deleteModel(params: SageMaker.Types.DeleteModelInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -869,11 +893,11 @@ declare class SageMaker extends Service {
    */
   deleteUserProfile(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Use this operation to delete a workforce. If you want to create a new workforce in an Amazon Web Services Region where a workforce already exists, use this operation to delete the existing workforce and then use CreateWorkforce to create a new workforce.  If a private workforce contains one or more work teams, you must use the DeleteWorkteam operation to delete all work teams before you delete the workforce. If you try to delete a workforce that contains one or more work teams, you will recieve a ResourceInUse error. 
+   * Use this operation to delete a workforce. If you want to create a new workforce in an Amazon Web Services Region where a workforce already exists, use this operation to delete the existing workforce and then use CreateWorkforce to create a new workforce.  If a private workforce contains one or more work teams, you must use the DeleteWorkteam operation to delete all work teams before you delete the workforce. If you try to delete a workforce that contains one or more work teams, you will receive a ResourceInUse error. 
    */
   deleteWorkforce(params: SageMaker.Types.DeleteWorkforceRequest, callback?: (err: AWSError, data: SageMaker.Types.DeleteWorkforceResponse) => void): Request<SageMaker.Types.DeleteWorkforceResponse, AWSError>;
   /**
-   * Use this operation to delete a workforce. If you want to create a new workforce in an Amazon Web Services Region where a workforce already exists, use this operation to delete the existing workforce and then use CreateWorkforce to create a new workforce.  If a private workforce contains one or more work teams, you must use the DeleteWorkteam operation to delete all work teams before you delete the workforce. If you try to delete a workforce that contains one or more work teams, you will recieve a ResourceInUse error. 
+   * Use this operation to delete a workforce. If you want to create a new workforce in an Amazon Web Services Region where a workforce already exists, use this operation to delete the existing workforce and then use CreateWorkforce to create a new workforce.  If a private workforce contains one or more work teams, you must use the DeleteWorkteam operation to delete all work teams before you delete the workforce. If you try to delete a workforce that contains one or more work teams, you will receive a ResourceInUse error. 
    */
   deleteWorkforce(callback?: (err: AWSError, data: SageMaker.Types.DeleteWorkforceResponse) => void): Request<SageMaker.Types.DeleteWorkforceResponse, AWSError>;
   /**
@@ -1173,6 +1197,14 @@ declare class SageMaker extends Service {
    */
   describeLineageGroup(callback?: (err: AWSError, data: SageMaker.Types.DescribeLineageGroupResponse) => void): Request<SageMaker.Types.DescribeLineageGroupResponse, AWSError>;
   /**
+   * Returns information about an MLflow Tracking Server.
+   */
+  describeMlflowTrackingServer(params: SageMaker.Types.DescribeMlflowTrackingServerRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeMlflowTrackingServerResponse) => void): Request<SageMaker.Types.DescribeMlflowTrackingServerResponse, AWSError>;
+  /**
+   * Returns information about an MLflow Tracking Server.
+   */
+  describeMlflowTrackingServer(callback?: (err: AWSError, data: SageMaker.Types.DescribeMlflowTrackingServerResponse) => void): Request<SageMaker.Types.DescribeMlflowTrackingServerResponse, AWSError>;
+  /**
    * Describes a model that you created using the CreateModel API.
    */
   describeModel(params: SageMaker.Types.DescribeModelInput, callback?: (err: AWSError, data: SageMaker.Types.DescribeModelOutput) => void): Request<SageMaker.Types.DescribeModelOutput, AWSError>;
@@ -1373,11 +1405,11 @@ declare class SageMaker extends Service {
    */
   describeWorkforce(callback?: (err: AWSError, data: SageMaker.Types.DescribeWorkforceResponse) => void): Request<SageMaker.Types.DescribeWorkforceResponse, AWSError>;
   /**
-   * Gets information about a specific work team. You can see information such as the create date, the last updated date, membership information, and the work team's Amazon Resource Name (ARN).
+   * Gets information about a specific work team. You can see information such as the creation date, the last updated date, membership information, and the work team's Amazon Resource Name (ARN).
    */
   describeWorkteam(params: SageMaker.Types.DescribeWorkteamRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeWorkteamResponse) => void): Request<SageMaker.Types.DescribeWorkteamResponse, AWSError>;
   /**
-   * Gets information about a specific work team. You can see information such as the create date, the last updated date, membership information, and the work team's Amazon Resource Name (ARN).
+   * Gets information about a specific work team. You can see information such as the creation date, the last updated date, membership information, and the work team's Amazon Resource Name (ARN).
    */
   describeWorkteam(callback?: (err: AWSError, data: SageMaker.Types.DescribeWorkteamResponse) => void): Request<SageMaker.Types.DescribeWorkteamResponse, AWSError>;
   /**
@@ -1773,6 +1805,14 @@ declare class SageMaker extends Service {
    */
   listLineageGroups(callback?: (err: AWSError, data: SageMaker.Types.ListLineageGroupsResponse) => void): Request<SageMaker.Types.ListLineageGroupsResponse, AWSError>;
   /**
+   * Lists all MLflow Tracking Servers.
+   */
+  listMlflowTrackingServers(params: SageMaker.Types.ListMlflowTrackingServersRequest, callback?: (err: AWSError, data: SageMaker.Types.ListMlflowTrackingServersResponse) => void): Request<SageMaker.Types.ListMlflowTrackingServersResponse, AWSError>;
+  /**
+   * Lists all MLflow Tracking Servers.
+   */
+  listMlflowTrackingServers(callback?: (err: AWSError, data: SageMaker.Types.ListMlflowTrackingServersResponse) => void): Request<SageMaker.Types.ListMlflowTrackingServersResponse, AWSError>;
+  /**
    * Lists model bias jobs definitions that satisfy various filters.
    */
   listModelBiasJobDefinitions(params: SageMaker.Types.ListModelBiasJobDefinitionsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListModelBiasJobDefinitionsResponse) => void): Request<SageMaker.Types.ListModelBiasJobDefinitionsResponse, AWSError>;
@@ -2141,6 +2181,14 @@ declare class SageMaker extends Service {
    */
   startInferenceExperiment(callback?: (err: AWSError, data: SageMaker.Types.StartInferenceExperimentResponse) => void): Request<SageMaker.Types.StartInferenceExperimentResponse, AWSError>;
   /**
+   * Programmatically start an MLflow Tracking Server.
+   */
+  startMlflowTrackingServer(params: SageMaker.Types.StartMlflowTrackingServerRequest, callback?: (err: AWSError, data: SageMaker.Types.StartMlflowTrackingServerResponse) => void): Request<SageMaker.Types.StartMlflowTrackingServerResponse, AWSError>;
+  /**
+   * Programmatically start an MLflow Tracking Server.
+   */
+  startMlflowTrackingServer(callback?: (err: AWSError, data: SageMaker.Types.StartMlflowTrackingServerResponse) => void): Request<SageMaker.Types.StartMlflowTrackingServerResponse, AWSError>;
+  /**
    * Starts a previously stopped monitoring schedule.  By default, when you successfully create a new schedule, the status of a monitoring schedule is scheduled. 
    */
   startMonitoringSchedule(params: SageMaker.Types.StartMonitoringScheduleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -2228,6 +2276,14 @@ declare class SageMaker extends Service {
    * Stops a running labeling job. A job that is stopped cannot be restarted. Any results obtained before the job is stopped are placed in the Amazon S3 output bucket.
    */
   stopLabelingJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Programmatically stop an MLflow Tracking Server.
+   */
+  stopMlflowTrackingServer(params: SageMaker.Types.StopMlflowTrackingServerRequest, callback?: (err: AWSError, data: SageMaker.Types.StopMlflowTrackingServerResponse) => void): Request<SageMaker.Types.StopMlflowTrackingServerResponse, AWSError>;
+  /**
+   * Programmatically stop an MLflow Tracking Server.
+   */
+  stopMlflowTrackingServer(callback?: (err: AWSError, data: SageMaker.Types.StopMlflowTrackingServerResponse) => void): Request<SageMaker.Types.StopMlflowTrackingServerResponse, AWSError>;
   /**
    * Stops a previously started monitoring schedule.
    */
@@ -2444,6 +2500,14 @@ declare class SageMaker extends Service {
    *  Updates an inference experiment that you created. The status of the inference experiment has to be either Created, Running. For more information on the status of an inference experiment, see DescribeInferenceExperiment. 
    */
   updateInferenceExperiment(callback?: (err: AWSError, data: SageMaker.Types.UpdateInferenceExperimentResponse) => void): Request<SageMaker.Types.UpdateInferenceExperimentResponse, AWSError>;
+  /**
+   * Updates properties of an existing MLflow Tracking Server.
+   */
+  updateMlflowTrackingServer(params: SageMaker.Types.UpdateMlflowTrackingServerRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateMlflowTrackingServerResponse) => void): Request<SageMaker.Types.UpdateMlflowTrackingServerResponse, AWSError>;
+  /**
+   * Updates properties of an existing MLflow Tracking Server.
+   */
+  updateMlflowTrackingServer(callback?: (err: AWSError, data: SageMaker.Types.UpdateMlflowTrackingServerResponse) => void): Request<SageMaker.Types.UpdateMlflowTrackingServerResponse, AWSError>;
   /**
    * Update an Amazon SageMaker Model Card.  You cannot update both model card content and model card status in a single call. 
    */
@@ -4163,6 +4227,13 @@ declare namespace SageMaker {
   export type ClusterArn = string;
   export type ClusterAvailabilityZone = string;
   export type ClusterAvailabilityZoneId = string;
+  export interface ClusterEbsVolumeConfig {
+    /**
+     * The size in gigabytes (GB) of the additional EBS volume to be attached to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.
+     */
+    VolumeSizeInGB: ClusterEbsVolumeSizeInGB;
+  }
+  export type ClusterEbsVolumeSizeInGB = number;
   export type ClusterInstanceCount = number;
   export interface ClusterInstanceGroupDetails {
     /**
@@ -4193,6 +4264,10 @@ declare namespace SageMaker {
      * The number you specified to TreadsPerCore in CreateCluster for enabling or disabling multithreading. For instance types that support multithreading, you can specify 1 for disabling multithreading and 2 for enabling multithreading. For more information, see the reference table of CPU cores and threads per CPU core per instance type in the Amazon Elastic Compute Cloud User Guide.
      */
     ThreadsPerCore?: ClusterThreadsPerCore;
+    /**
+     * The additional storage configurations for the instances in the SageMaker HyperPod cluster instance group.
+     */
+    InstanceStorageConfigs?: ClusterInstanceStorageConfigs;
   }
   export type ClusterInstanceGroupDetailsList = ClusterInstanceGroupDetails[];
   export type ClusterInstanceGroupName = string;
@@ -4221,6 +4296,10 @@ declare namespace SageMaker {
      * Specifies the value for Threads per core. For instance types that support multithreading, you can specify 1 for disabling multithreading and 2 for enabling multithreading. For instance types that doesn't support multithreading, specify 1. For more information, see the reference table of CPU cores and threads per CPU core per instance type in the Amazon Elastic Compute Cloud User Guide.
      */
     ThreadsPerCore?: ClusterThreadsPerCore;
+    /**
+     * Specifies the additional storage configurations for the instances in the SageMaker HyperPod cluster instance group.
+     */
+    InstanceStorageConfigs?: ClusterInstanceStorageConfigs;
   }
   export type ClusterInstanceGroupSpecifications = ClusterInstanceGroupSpecification[];
   export interface ClusterInstancePlacement {
@@ -4244,6 +4323,13 @@ declare namespace SageMaker {
      */
     Message?: String;
   }
+  export interface ClusterInstanceStorageConfig {
+    /**
+     * Defines the configuration for attaching additional Amazon Elastic Block Store (EBS) volumes to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.
+     */
+    EbsVolumeConfig?: ClusterEbsVolumeConfig;
+  }
+  export type ClusterInstanceStorageConfigs = ClusterInstanceStorageConfig[];
   export type ClusterInstanceType = "ml.p4d.24xlarge"|"ml.p4de.24xlarge"|"ml.p5.48xlarge"|"ml.trn1.32xlarge"|"ml.trn1n.32xlarge"|"ml.g5.xlarge"|"ml.g5.2xlarge"|"ml.g5.4xlarge"|"ml.g5.8xlarge"|"ml.g5.12xlarge"|"ml.g5.16xlarge"|"ml.g5.24xlarge"|"ml.g5.48xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.12xlarge"|"ml.c5.18xlarge"|"ml.c5.24xlarge"|"ml.c5n.large"|"ml.c5n.2xlarge"|"ml.c5n.4xlarge"|"ml.c5n.9xlarge"|"ml.c5n.18xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.8xlarge"|"ml.m5.12xlarge"|"ml.m5.16xlarge"|"ml.m5.24xlarge"|"ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|string;
   export interface ClusterLifeCycleConfig {
     /**
@@ -4287,6 +4373,10 @@ declare namespace SageMaker {
      * The number of threads per CPU core you specified under CreateCluster.
      */
     ThreadsPerCore?: ClusterThreadsPerCore;
+    /**
+     * The configurations of additional storage specified to the instance group where the instance (node) is launched.
+     */
+    InstanceStorageConfigs?: ClusterInstanceStorageConfigs;
     /**
      * The private primary IP address of the SageMaker HyperPod cluster node.
      */
@@ -5739,6 +5829,46 @@ declare namespace SageMaker {
      */
     LabelingJobArn: LabelingJobArn;
   }
+  export interface CreateMlflowTrackingServerRequest {
+    /**
+     * A unique string identifying the tracking server name. This string is part of the tracking server ARN.
+     */
+    TrackingServerName: TrackingServerName;
+    /**
+     * The S3 URI for a general purpose bucket to use as the MLflow Tracking Server artifact store.
+     */
+    ArtifactStoreUri: S3Uri;
+    /**
+     * The size of the tracking server you want to create. You can choose between "Small", "Medium", and "Large". The default MLflow Tracking Server configuration size is "Small". You can choose a size depending on the projected use of the tracking server such as the volume of data logged, number of users, and frequency of use.  We recommend using a small tracking server for teams of up to 25 users, a medium tracking server for teams of up to 50 users, and a large tracking server for teams of up to 100 users. 
+     */
+    TrackingServerSize?: TrackingServerSize;
+    /**
+     * The version of MLflow that the tracking server uses. To see which MLflow versions are available to use, see How it works.
+     */
+    MlflowVersion?: MlflowVersion;
+    /**
+     * The Amazon Resource Name (ARN) for an IAM role in your account that the MLflow Tracking Server uses to access the artifact store in Amazon S3. The role should have AmazonS3FullAccess permissions. For more information on IAM permissions for tracking server creation, see Set up IAM permissions for MLflow.
+     */
+    RoleArn: RoleArn;
+    /**
+     * Whether to enable or disable automatic registration of new MLflow models to the SageMaker Model Registry. To enable automatic model registration, set this value to True. To disable automatic model registration, set this value to False. If not specified, AutomaticModelRegistration defaults to False.
+     */
+    AutomaticModelRegistration?: Boolean;
+    /**
+     * The day and time of the week in Coordinated Universal Time (UTC) 24-hour standard time that weekly maintenance updates are scheduled. For example: TUE:03:30.
+     */
+    WeeklyMaintenanceWindowStart?: WeeklyMaintenanceWindowStart;
+    /**
+     * Tags consisting of key-value pairs used to manage metadata for the tracking server.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateMlflowTrackingServerResponse {
+    /**
+     * The ARN of the tracking server.
+     */
+    TrackingServerArn?: TrackingServerArn;
+  }
   export interface CreateModelBiasJobDefinitionRequest {
     /**
      * The name of the bias job definition. The name must be unique within an Amazon Web Services Region in the Amazon Web Services account.
@@ -6248,6 +6378,26 @@ declare namespace SageMaker {
      * The presigned URL.
      */
     AuthorizedUrl?: PresignedDomainUrl;
+  }
+  export interface CreatePresignedMlflowTrackingServerUrlRequest {
+    /**
+     * The name of the tracking server to connect to your MLflow UI.
+     */
+    TrackingServerName: TrackingServerName;
+    /**
+     * The duration in seconds that your presigned URL is valid. The presigned URL can be used only once.
+     */
+    ExpiresInSeconds?: ExpiresInSeconds;
+    /**
+     * The duration in seconds that your MLflow UI session is valid.
+     */
+    SessionExpirationDurationInSeconds?: SessionExpirationDurationInSeconds;
+  }
+  export interface CreatePresignedMlflowTrackingServerUrlResponse {
+    /**
+     * A presigned URL with an authorization token.
+     */
+    AuthorizedUrl?: TrackingServerUrl;
   }
   export interface CreatePresignedNotebookInstanceUrlInput {
     /**
@@ -7320,6 +7470,18 @@ declare namespace SageMaker {
      * The ARN of the deleted inference experiment.
      */
     InferenceExperimentArn: InferenceExperimentArn;
+  }
+  export interface DeleteMlflowTrackingServerRequest {
+    /**
+     * The name of the the tracking server to delete.
+     */
+    TrackingServerName: TrackingServerName;
+  }
+  export interface DeleteMlflowTrackingServerResponse {
+    /**
+     * A TrackingServerArn object, the ARN of the tracking server that is deleted if successfully found.
+     */
+    TrackingServerArn?: TrackingServerArn;
   }
   export interface DeleteModelBiasJobDefinitionRequest {
     /**
@@ -9576,6 +9738,68 @@ declare namespace SageMaker {
     CreatedBy?: UserContext;
     /**
      * The last modified time of the lineage group.
+     */
+    LastModifiedTime?: Timestamp;
+    LastModifiedBy?: UserContext;
+  }
+  export interface DescribeMlflowTrackingServerRequest {
+    /**
+     * The name of the MLflow Tracking Server to describe.
+     */
+    TrackingServerName: TrackingServerName;
+  }
+  export interface DescribeMlflowTrackingServerResponse {
+    /**
+     * The ARN of the described tracking server.
+     */
+    TrackingServerArn?: TrackingServerArn;
+    /**
+     * The name of the described tracking server.
+     */
+    TrackingServerName?: TrackingServerName;
+    /**
+     * The S3 URI of the general purpose bucket used as the MLflow Tracking Server artifact store.
+     */
+    ArtifactStoreUri?: S3Uri;
+    /**
+     * The size of the described tracking server.
+     */
+    TrackingServerSize?: TrackingServerSize;
+    /**
+     * The MLflow version used for the described tracking server.
+     */
+    MlflowVersion?: MlflowVersion;
+    /**
+     * The Amazon Resource Name (ARN) for an IAM role in your account that the described MLflow Tracking Server uses to access the artifact store in Amazon S3.
+     */
+    RoleArn?: RoleArn;
+    /**
+     * The current creation status of the described MLflow Tracking Server.
+     */
+    TrackingServerStatus?: TrackingServerStatus;
+    /**
+     * Whether the described MLflow Tracking Server is currently active.
+     */
+    IsActive?: IsTrackingServerActive;
+    /**
+     * The URL to connect to the MLflow user interface for the described tracking server.
+     */
+    TrackingServerUrl?: TrackingServerUrl;
+    /**
+     * The day and time of the week when weekly maintenance occurs on the described tracking server.
+     */
+    WeeklyMaintenanceWindowStart?: WeeklyMaintenanceWindowStart;
+    /**
+     * Whether automatic registration of new MLflow models to the SageMaker Model Registry is enabled.
+     */
+    AutomaticModelRegistration?: Boolean;
+    /**
+     * The timestamp of when the described MLflow Tracking Server was created.
+     */
+    CreationTime?: Timestamp;
+    CreatedBy?: UserContext;
+    /**
+     * The timestamp of when the described MLflow Tracking Server was last modified.
      */
     LastModifiedTime?: Timestamp;
     LastModifiedBy?: UserContext;
@@ -13804,6 +14028,7 @@ declare namespace SageMaker {
   export type InvocationsMaxRetries = number;
   export type InvocationsTimeoutInSeconds = number;
   export type IotRoleAlias = string;
+  export type IsTrackingServerActive = "Active"|"Inactive"|string;
   export type ItemIdentifierAttributeName = string;
   export type JobDurationInSeconds = number;
   export type JobReferenceCode = string;
@@ -15925,6 +16150,50 @@ declare namespace SageMaker {
     NextToken?: NextToken;
   }
   export type ListMaxResults = number;
+  export interface ListMlflowTrackingServersRequest {
+    /**
+     * Use the CreatedAfter filter to only list tracking servers created after a specific date and time. Listed tracking servers are shown with a date and time such as "2024-03-16T01:46:56+00:00". The CreatedAfter parameter takes in a Unix timestamp. To convert a date and time into a Unix timestamp, see EpochConverter.
+     */
+    CreatedAfter?: Timestamp;
+    /**
+     * Use the CreatedBefore filter to only list tracking servers created before a specific date and time. Listed tracking servers are shown with a date and time such as "2024-03-16T01:46:56+00:00". The CreatedBefore parameter takes in a Unix timestamp. To convert a date and time into a Unix timestamp, see EpochConverter.
+     */
+    CreatedBefore?: Timestamp;
+    /**
+     * Filter for tracking servers with a specified creation status.
+     */
+    TrackingServerStatus?: TrackingServerStatus;
+    /**
+     * Filter for tracking servers using the specified MLflow version.
+     */
+    MlflowVersion?: MlflowVersion;
+    /**
+     * Filter for trackings servers sorting by name, creation time, or creation status.
+     */
+    SortBy?: SortTrackingServerBy;
+    /**
+     * Change the order of the listed tracking servers. By default, tracking servers are listed in Descending order by creation time. To change the list order, you can specify SortOrder to be Ascending.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of tracking servers to list.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListMlflowTrackingServersResponse {
+    /**
+     * A list of tracking servers according to chosen filters.
+     */
+    TrackingServerSummaries?: TrackingServerSummaryList;
+    /**
+     * If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListModelBiasJobDefinitionsRequest {
     /**
      * Name of the endpoint to monitor for model bias.
@@ -17580,6 +17849,7 @@ declare namespace SageMaker {
     S3Uri: S3Uri;
   }
   export type MinimumInstanceMetadataServiceVersion = string;
+  export type MlflowVersion = string;
   export interface Model {
     /**
      * The name of the model.
@@ -21641,6 +21911,7 @@ declare namespace SageMaker {
   export type SortOrder = "Ascending"|"Descending"|string;
   export type SortPipelineExecutionsBy = "CreationTime"|"PipelineExecutionArn"|string;
   export type SortPipelinesBy = "Name"|"CreationTime"|string;
+  export type SortTrackingServerBy = "Name"|"CreationTime"|"Status"|string;
   export type SortTrialComponentsBy = "Name"|"CreationTime"|string;
   export type SortTrialsBy = "Name"|"CreationTime"|string;
   export interface SourceAlgorithm {
@@ -21817,6 +22088,18 @@ declare namespace SageMaker {
      */
     InferenceExperimentArn: InferenceExperimentArn;
   }
+  export interface StartMlflowTrackingServerRequest {
+    /**
+     * The name of the tracking server to start.
+     */
+    TrackingServerName: TrackingServerName;
+  }
+  export interface StartMlflowTrackingServerResponse {
+    /**
+     * The ARN of the started tracking server.
+     */
+    TrackingServerArn?: TrackingServerArn;
+  }
   export interface StartMonitoringScheduleRequest {
     /**
      * The name of the schedule to start.
@@ -21945,6 +22228,18 @@ declare namespace SageMaker {
      * The name of the labeling job to stop.
      */
     LabelingJobName: LabelingJobName;
+  }
+  export interface StopMlflowTrackingServerRequest {
+    /**
+     * The name of the tracking server to stop.
+     */
+    TrackingServerName: TrackingServerName;
+  }
+  export interface StopMlflowTrackingServerResponse {
+    /**
+     * The ARN of the stopped tracking server.
+     */
+    TrackingServerArn?: TrackingServerArn;
   }
   export interface StopMonitoringScheduleRequest {
     /**
@@ -22345,6 +22640,42 @@ declare namespace SageMaker {
   }
   export type Timestamp = Date;
   export type TimestampAttributeName = string;
+  export type TrackingServerArn = string;
+  export type TrackingServerName = string;
+  export type TrackingServerSize = "Small"|"Medium"|"Large"|string;
+  export type TrackingServerStatus = "Creating"|"Created"|"CreateFailed"|"Updating"|"Updated"|"UpdateFailed"|"Deleting"|"DeleteFailed"|"Stopping"|"Stopped"|"StopFailed"|"Starting"|"Started"|"StartFailed"|"MaintenanceInProgress"|"MaintenanceComplete"|"MaintenanceFailed"|string;
+  export interface TrackingServerSummary {
+    /**
+     * The ARN of a listed tracking server.
+     */
+    TrackingServerArn?: TrackingServerArn;
+    /**
+     * The name of a listed tracking server.
+     */
+    TrackingServerName?: TrackingServerName;
+    /**
+     * The creation time of a listed tracking server.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The last modified time of a listed tracking server.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The creation status of a listed tracking server.
+     */
+    TrackingServerStatus?: TrackingServerStatus;
+    /**
+     * The activity status of a listed tracking server.
+     */
+    IsActive?: IsTrackingServerActive;
+    /**
+     * The MLflow version used for a listed tracking server.
+     */
+    MlflowVersion?: MlflowVersion;
+  }
+  export type TrackingServerSummaryList = TrackingServerSummary[];
+  export type TrackingServerUrl = string;
   export type TrafficDurationInSeconds = number;
   export interface TrafficPattern {
     /**
@@ -23782,6 +24113,34 @@ declare namespace SageMaker {
      */
     InferenceExperimentArn: InferenceExperimentArn;
   }
+  export interface UpdateMlflowTrackingServerRequest {
+    /**
+     * The name of the MLflow Tracking Server to update.
+     */
+    TrackingServerName: TrackingServerName;
+    /**
+     * The new S3 URI for the general purpose bucket to use as the artifact store for the MLflow Tracking Server.
+     */
+    ArtifactStoreUri?: S3Uri;
+    /**
+     * The new size for the MLflow Tracking Server.
+     */
+    TrackingServerSize?: TrackingServerSize;
+    /**
+     * Whether to enable or disable automatic registration of new MLflow models to the SageMaker Model Registry. To enable automatic model registration, set this value to True. To disable automatic model registration, set this value to False. If not specified, AutomaticModelRegistration defaults to False 
+     */
+    AutomaticModelRegistration?: Boolean;
+    /**
+     * The new weekly maintenance window start day and time to update. The maintenance window day and time should be in Coordinated Universal Time (UTC) 24-hour standard time. For example: TUE:03:30.
+     */
+    WeeklyMaintenanceWindowStart?: WeeklyMaintenanceWindowStart;
+  }
+  export interface UpdateMlflowTrackingServerResponse {
+    /**
+     * The ARN of the updated MLflow Tracking Server.
+     */
+    TrackingServerArn?: TrackingServerArn;
+  }
   export interface UpdateModelCardRequest {
     /**
      * The name or Amazon Resource Name (ARN) of the model card to update.
@@ -24437,6 +24796,7 @@ declare namespace SageMaker {
      */
     ReusedByJob?: TrainingJobName;
   }
+  export type WeeklyMaintenanceWindowStart = string;
   export interface WorkerAccessConfiguration {
     /**
      * Defines any Amazon S3 resource constraints.

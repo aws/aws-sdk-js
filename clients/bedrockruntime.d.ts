@@ -13,19 +13,19 @@ declare class BedrockRuntime extends Service {
   constructor(options?: BedrockRuntime.Types.ClientConfiguration)
   config: Config & BedrockRuntime.Types.ClientConfiguration;
   /**
-   * Sends messages to the specified Amazon Bedrock model. Converse provides a consistent interface that works with all models that support messages. This allows you to write code once and use it with different models. Should a model have unique inference parameters, you can also pass those unique parameters to the model. For more information, see Run inference in the Bedrock User Guide. This operation requires permission for the bedrock:InvokeModel action. 
+   * Sends messages to the specified Amazon Bedrock model. Converse provides a consistent interface that works with all models that support messages. This allows you to write code once and use it with different models. Should a model have unique inference parameters, you can also pass those unique parameters to the model. For information about the Converse API, see Use the Converse API in the Amazon Bedrock User Guide. To use a guardrail, see Use a guardrail with the Converse API in the Amazon Bedrock User Guide. To use a tool with a model, see Tool use (Function calling) in the Amazon Bedrock User Guide  For example code, see Converse API examples in the Amazon Bedrock User Guide.  This operation requires permission for the bedrock:InvokeModel action. 
    */
   converse(params: BedrockRuntime.Types.ConverseRequest, callback?: (err: AWSError, data: BedrockRuntime.Types.ConverseResponse) => void): Request<BedrockRuntime.Types.ConverseResponse, AWSError>;
   /**
-   * Sends messages to the specified Amazon Bedrock model. Converse provides a consistent interface that works with all models that support messages. This allows you to write code once and use it with different models. Should a model have unique inference parameters, you can also pass those unique parameters to the model. For more information, see Run inference in the Bedrock User Guide. This operation requires permission for the bedrock:InvokeModel action. 
+   * Sends messages to the specified Amazon Bedrock model. Converse provides a consistent interface that works with all models that support messages. This allows you to write code once and use it with different models. Should a model have unique inference parameters, you can also pass those unique parameters to the model. For information about the Converse API, see Use the Converse API in the Amazon Bedrock User Guide. To use a guardrail, see Use a guardrail with the Converse API in the Amazon Bedrock User Guide. To use a tool with a model, see Tool use (Function calling) in the Amazon Bedrock User Guide  For example code, see Converse API examples in the Amazon Bedrock User Guide.  This operation requires permission for the bedrock:InvokeModel action. 
    */
   converse(callback?: (err: AWSError, data: BedrockRuntime.Types.ConverseResponse) => void): Request<BedrockRuntime.Types.ConverseResponse, AWSError>;
   /**
-   * Sends messages to the specified Amazon Bedrock model and returns the response in a stream. ConverseStream provides a consistent API that works with all Amazon Bedrock models that support messages. This allows you to write code once and use it with different models. Should a model have unique inference parameters, you can also pass those unique parameters to the model. For more information, see Run inference in the Bedrock User Guide. To find out if a model supports streaming, call GetFoundationModel and check the responseStreamingSupported field in the response. For example code, see Invoke model with streaming code example in the Amazon Bedrock User Guide.  This operation requires permission for the bedrock:InvokeModelWithResponseStream action.
+   * Sends messages to the specified Amazon Bedrock model and returns the response in a stream. ConverseStream provides a consistent API that works with all Amazon Bedrock models that support messages. This allows you to write code once and use it with different models. Should a model have unique inference parameters, you can also pass those unique parameters to the model.  To find out if a model supports streaming, call GetFoundationModel and check the responseStreamingSupported field in the response. For information about the Converse API, see Use the Converse API in the Amazon Bedrock User Guide. To use a guardrail, see Use a guardrail with the Converse API in the Amazon Bedrock User Guide. To use a tool with a model, see Tool use (Function calling) in the Amazon Bedrock User Guide  For example code, see Conversation streaming example in the Amazon Bedrock User Guide.  This operation requires permission for the bedrock:InvokeModelWithResponseStream action.
    */
   converseStream(params: BedrockRuntime.Types.ConverseStreamRequest, callback?: (err: AWSError, data: BedrockRuntime.Types.ConverseStreamResponse) => void): Request<BedrockRuntime.Types.ConverseStreamResponse, AWSError>;
   /**
-   * Sends messages to the specified Amazon Bedrock model and returns the response in a stream. ConverseStream provides a consistent API that works with all Amazon Bedrock models that support messages. This allows you to write code once and use it with different models. Should a model have unique inference parameters, you can also pass those unique parameters to the model. For more information, see Run inference in the Bedrock User Guide. To find out if a model supports streaming, call GetFoundationModel and check the responseStreamingSupported field in the response. For example code, see Invoke model with streaming code example in the Amazon Bedrock User Guide.  This operation requires permission for the bedrock:InvokeModelWithResponseStream action.
+   * Sends messages to the specified Amazon Bedrock model and returns the response in a stream. ConverseStream provides a consistent API that works with all Amazon Bedrock models that support messages. This allows you to write code once and use it with different models. Should a model have unique inference parameters, you can also pass those unique parameters to the model.  To find out if a model supports streaming, call GetFoundationModel and check the responseStreamingSupported field in the response. For information about the Converse API, see Use the Converse API in the Amazon Bedrock User Guide. To use a guardrail, see Use a guardrail with the Converse API in the Amazon Bedrock User Guide. To use a tool with a model, see Tool use (Function calling) in the Amazon Bedrock User Guide  For example code, see Conversation streaming example in the Amazon Bedrock User Guide.  This operation requires permission for the bedrock:InvokeModelWithResponseStream action.
    */
   converseStream(callback?: (err: AWSError, data: BedrockRuntime.Types.ConverseStreamResponse) => void): Request<BedrockRuntime.Types.ConverseStreamResponse, AWSError>;
   /**
@@ -68,6 +68,10 @@ declare namespace BedrockRuntime {
      * The result for a tool request that a model makes.
      */
     toolResult?: ToolResultBlock;
+    /**
+     * Contains the content to assess with the guardrail. If you don't specify guardContent in a call to the Converse API, the guardrail (if passed in the Converse API) assesses the entire message. For more information, see Use a guardrail with the Converse API in the Amazon Bedrock User Guide.  &lt;/p&gt; 
+     */
+    guardContent?: GuardrailConverseContentBlock;
   }
   export interface ContentBlockDelta {
     /**
@@ -148,11 +152,15 @@ declare namespace BedrockRuntime {
      */
     toolConfig?: ToolConfiguration;
     /**
+     * Configuration information for a guardrail that you want to use in the request. 
+     */
+    guardrailConfig?: GuardrailConfiguration;
+    /**
      * Additional inference parameters that the model supports, beyond the base set of inference parameters that Converse supports in the inferenceConfig field. For more information, see Model parameters.
      */
     additionalModelRequestFields?: Document;
     /**
-     * Additional model parameters field paths to return in the response. Converse returns the requested fields as a JSON Pointer object in the additionalModelResultFields field. The following is example JSON for additionalModelResponseFieldPaths.  [ "/stop_sequence" ]  For information about the JSON Pointer syntax, see the Internet Engineering Task Force (IETF) documentation.  Converse rejects an empty JSON Pointer or incorrectly structured JSON Pointer with a 400 error code. if the JSON Pointer is valid, but the requested field is not in the model response, it is ignored by Converse.
+     * Additional model parameters field paths to return in the response. Converse returns the requested fields as a JSON Pointer object in the additionalModelResponseFields field. The following is example JSON for additionalModelResponseFieldPaths.  [ "/stop_sequence" ]  For information about the JSON Pointer syntax, see the Internet Engineering Task Force (IETF) documentation.  Converse rejects an empty JSON Pointer or incorrectly structured JSON Pointer with a 400 error code. if the JSON Pointer is valid, but the requested field is not in the model response, it is ignored by Converse.
      */
     additionalModelResponseFieldPaths?: ConverseRequestAdditionalModelResponseFieldPathsList;
   }
@@ -179,6 +187,10 @@ declare namespace BedrockRuntime {
      * Additional fields in the response that are unique to the model. 
      */
     additionalModelResponseFields?: Document;
+    /**
+     * A trace object that contains information about the Guardrail behavior.
+     */
+    trace?: ConverseTrace;
   }
   export interface ConverseStreamMetadataEvent {
     /**
@@ -189,6 +201,10 @@ declare namespace BedrockRuntime {
      * The metrics for the conversation stream metadata event.
      */
     metrics: ConverseStreamMetrics;
+    /**
+     * The trace object in the response from ConverseStream that contains information about the guardrail behavior.
+     */
+    trace?: ConverseStreamTrace;
   }
   export interface ConverseStreamMetrics {
     /**
@@ -219,11 +235,15 @@ declare namespace BedrockRuntime {
      */
     toolConfig?: ToolConfiguration;
     /**
+     * Configuration information for a guardrail that you want to use in the request. 
+     */
+    guardrailConfig?: GuardrailStreamConfiguration;
+    /**
      * Additional inference parameters that the model supports, beyond the base set of inference parameters that ConverseStream supports in the inferenceConfig field.
      */
     additionalModelRequestFields?: Document;
     /**
-     * Additional model parameters field paths to return in the response. ConverseStream returns the requested fields as a JSON Pointer object in the additionalModelResultFields field. The following is example JSON for additionalModelResponseFieldPaths.  [ "/stop_sequence" ]  For information about the JSON Pointer syntax, see the Internet Engineering Task Force (IETF) documentation.  ConverseStream rejects an empty JSON Pointer or incorrectly structured JSON Pointer with a 400 error code. if the JSON Pointer is valid, but the requested field is not in the model response, it is ignored by ConverseStream.
+     * Additional model parameters field paths to return in the response. ConverseStream returns the requested fields as a JSON Pointer object in the additionalModelResponseFields field. The following is example JSON for additionalModelResponseFieldPaths.  [ "/stop_sequence" ]  For information about the JSON Pointer syntax, see the Internet Engineering Task Force (IETF) documentation.  ConverseStream rejects an empty JSON Pointer or incorrectly structured JSON Pointer with a 400 error code. if the JSON Pointer is valid, but the requested field is not in the model response, it is ignored by ConverseStream.
      */
     additionalModelResponseFieldPaths?: ConverseStreamRequestAdditionalModelResponseFieldPathsList;
   }
@@ -235,10 +255,235 @@ declare namespace BedrockRuntime {
      */
     stream?: ConverseStreamOutput;
   }
+  export interface ConverseStreamTrace {
+    /**
+     * The guardrail trace object. 
+     */
+    guardrail?: GuardrailTraceAssessment;
+  }
+  export interface ConverseTrace {
+    /**
+     * The guardrail trace object. 
+     */
+    guardrail?: GuardrailTraceAssessment;
+  }
   export interface Document {
   }
+  export interface GuardrailAssessment {
+    /**
+     * The topic policy.
+     */
+    topicPolicy?: GuardrailTopicPolicyAssessment;
+    /**
+     * The content policy.
+     */
+    contentPolicy?: GuardrailContentPolicyAssessment;
+    /**
+     * The word policy.
+     */
+    wordPolicy?: GuardrailWordPolicyAssessment;
+    /**
+     * The sensitive information policy.
+     */
+    sensitiveInformationPolicy?: GuardrailSensitiveInformationPolicyAssessment;
+  }
+  export type GuardrailAssessmentList = GuardrailAssessment[];
+  export type GuardrailAssessmentListMap = {[key: string]: GuardrailAssessmentList};
+  export type GuardrailAssessmentMap = {[key: string]: GuardrailAssessment};
+  export interface GuardrailConfiguration {
+    /**
+     * The identifier for the guardrail.
+     */
+    guardrailIdentifier: GuardrailIdentifier;
+    /**
+     * The version of the guardrail.
+     */
+    guardrailVersion: GuardrailVersion;
+    /**
+     * The trace behavior for the guardrail.
+     */
+    trace?: GuardrailTrace;
+  }
+  export interface GuardrailContentFilter {
+    /**
+     * The guardrail type.
+     */
+    type: GuardrailContentFilterType;
+    /**
+     * The guardrail confidence.
+     */
+    confidence: GuardrailContentFilterConfidence;
+    /**
+     * The guardrail action.
+     */
+    action: GuardrailContentPolicyAction;
+  }
+  export type GuardrailContentFilterConfidence = "NONE"|"LOW"|"MEDIUM"|"HIGH"|string;
+  export type GuardrailContentFilterList = GuardrailContentFilter[];
+  export type GuardrailContentFilterType = "INSULTS"|"HATE"|"SEXUAL"|"VIOLENCE"|"MISCONDUCT"|"PROMPT_ATTACK"|string;
+  export type GuardrailContentPolicyAction = "BLOCKED"|string;
+  export interface GuardrailContentPolicyAssessment {
+    /**
+     * The content policy filters.
+     */
+    filters: GuardrailContentFilterList;
+  }
+  export interface GuardrailConverseContentBlock {
+    /**
+     * The text to guard.
+     */
+    text?: GuardrailConverseTextBlock;
+  }
+  export interface GuardrailConverseTextBlock {
+    /**
+     * The text that you want to guard.
+     */
+    text: String;
+  }
+  export interface GuardrailCustomWord {
+    /**
+     * The match for the custom word.
+     */
+    match: String;
+    /**
+     * The action for the custom word.
+     */
+    action: GuardrailWordPolicyAction;
+  }
+  export type GuardrailCustomWordList = GuardrailCustomWord[];
   export type GuardrailIdentifier = string;
+  export interface GuardrailManagedWord {
+    /**
+     * The match for the managed word.
+     */
+    match: String;
+    /**
+     * The type for the managed word.
+     */
+    type: GuardrailManagedWordType;
+    /**
+     * The action for the managed word.
+     */
+    action: GuardrailWordPolicyAction;
+  }
+  export type GuardrailManagedWordList = GuardrailManagedWord[];
+  export type GuardrailManagedWordType = "PROFANITY"|string;
+  export type GuardrailOutputText = string;
+  export interface GuardrailPiiEntityFilter {
+    /**
+     * The PII entity filter match.
+     */
+    match: String;
+    /**
+     * The PII entity filter type.
+     */
+    type: GuardrailPiiEntityType;
+    /**
+     * The PII entity filter action.
+     */
+    action: GuardrailSensitiveInformationPolicyAction;
+  }
+  export type GuardrailPiiEntityFilterList = GuardrailPiiEntityFilter[];
+  export type GuardrailPiiEntityType = "ADDRESS"|"AGE"|"AWS_ACCESS_KEY"|"AWS_SECRET_KEY"|"CA_HEALTH_NUMBER"|"CA_SOCIAL_INSURANCE_NUMBER"|"CREDIT_DEBIT_CARD_CVV"|"CREDIT_DEBIT_CARD_EXPIRY"|"CREDIT_DEBIT_CARD_NUMBER"|"DRIVER_ID"|"EMAIL"|"INTERNATIONAL_BANK_ACCOUNT_NUMBER"|"IP_ADDRESS"|"LICENSE_PLATE"|"MAC_ADDRESS"|"NAME"|"PASSWORD"|"PHONE"|"PIN"|"SWIFT_CODE"|"UK_NATIONAL_HEALTH_SERVICE_NUMBER"|"UK_NATIONAL_INSURANCE_NUMBER"|"UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"|"URL"|"USERNAME"|"US_BANK_ACCOUNT_NUMBER"|"US_BANK_ROUTING_NUMBER"|"US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"|"US_PASSPORT_NUMBER"|"US_SOCIAL_SECURITY_NUMBER"|"VEHICLE_IDENTIFICATION_NUMBER"|string;
+  export interface GuardrailRegexFilter {
+    /**
+     * The regex filter name.
+     */
+    name?: String;
+    /**
+     * The regesx filter match.
+     */
+    match?: String;
+    /**
+     * The regex query.
+     */
+    regex?: String;
+    /**
+     * The region filter action.
+     */
+    action: GuardrailSensitiveInformationPolicyAction;
+  }
+  export type GuardrailRegexFilterList = GuardrailRegexFilter[];
+  export type GuardrailSensitiveInformationPolicyAction = "ANONYMIZED"|"BLOCKED"|string;
+  export interface GuardrailSensitiveInformationPolicyAssessment {
+    /**
+     * The PII entities in the assessment.
+     */
+    piiEntities: GuardrailPiiEntityFilterList;
+    /**
+     * The regex queries in the assessment.
+     */
+    regexes: GuardrailRegexFilterList;
+  }
+  export interface GuardrailStreamConfiguration {
+    /**
+     * The identifier for the guardrail.
+     */
+    guardrailIdentifier: GuardrailIdentifier;
+    /**
+     * The version of the guardrail.
+     */
+    guardrailVersion: GuardrailVersion;
+    /**
+     * The trace behavior for the guardrail.
+     */
+    trace?: GuardrailTrace;
+    /**
+     * The processing mode.  The processing mode. For more information, see Configure streaming response behavior in the Amazon Bedrock User Guide. 
+     */
+    streamProcessingMode?: GuardrailStreamProcessingMode;
+  }
+  export type GuardrailStreamProcessingMode = "sync"|"async"|string;
+  export interface GuardrailTopic {
+    /**
+     * The name for the guardrail.
+     */
+    name: String;
+    /**
+     * The type behavior that the guardrail should perform when the model detects the topic.
+     */
+    type: GuardrailTopicType;
+    /**
+     * The action the guardrail should take when it intervenes on a topic.
+     */
+    action: GuardrailTopicPolicyAction;
+  }
+  export type GuardrailTopicList = GuardrailTopic[];
+  export type GuardrailTopicPolicyAction = "BLOCKED"|string;
+  export interface GuardrailTopicPolicyAssessment {
+    /**
+     * The topics in the assessment.
+     */
+    topics: GuardrailTopicList;
+  }
+  export type GuardrailTopicType = "DENY"|string;
+  export type GuardrailTrace = "enabled"|"disabled"|string;
+  export interface GuardrailTraceAssessment {
+    /**
+     * The output from the model.
+     */
+    modelOutput?: ModelOutputs;
+    /**
+     * The input assessment.
+     */
+    inputAssessment?: GuardrailAssessmentMap;
+    /**
+     * the output assessments.
+     */
+    outputAssessments?: GuardrailAssessmentListMap;
+  }
   export type GuardrailVersion = string;
+  export type GuardrailWordPolicyAction = "BLOCKED"|string;
+  export interface GuardrailWordPolicyAssessment {
+    /**
+     * Custom words in the assessment.
+     */
+    customWords: GuardrailCustomWordList;
+    /**
+     * Managed word lists in the assessment.
+     */
+    managedWordLists: GuardrailManagedWordList;
+  }
   export interface ImageBlock {
     /**
      * The format of the image.
@@ -259,7 +504,7 @@ declare namespace BedrockRuntime {
   export type ImageSourceBytesBlob = Buffer|Uint8Array|Blob|string;
   export interface InferenceConfiguration {
     /**
-     * The maximum number of tokens to allow in the generated response. The default value is the maximum allowed value for the model that you are using. For more information, see Inference parameters for foundatio{ "messages": [ { "role": "user", "content": [ { "text": "what's the weather in Queens, NY and Austin, TX?" } ] }, { "role": "assistant", "content": [ { "toolUse": { "toolUseId": "1", "name": "get_weather", "input": { "city": "Queens", "state": "NY" } } }, { "toolUse": { "toolUseId": "2", "name": "get_weather", "input": { "city": "Austin", "state": "TX" } } } ] }, { "role": "user", "content": [ { "toolResult": { "toolUseId": "2", "content": [ { "json": { "weather": "40" } } ] } }, { "text": "..." }, { "toolResult": { "toolUseId": "1", "content": [ { "text": "result text" } ] } } ] } ], "toolConfig": { "tools": [ { "name": "get_weather", "description": "Get weather", "inputSchema": { "type": "object", "properties": { "city": { "type": "string", "description": "City of location" }, "state": { "type": "string", "description": "State of location" } }, "required": ["city", "state"] } } ] } } n models. 
+     * The maximum number of tokens to allow in the generated response. The default value is the maximum allowed value for the model that you are using. For more information, see Inference parameters for foundation models. 
      */
     maxTokens?: InferenceConfigurationMaxTokensInteger;
     /**
@@ -285,11 +530,11 @@ declare namespace BedrockRuntime {
   export type InvokeModelIdentifier = string;
   export interface InvokeModelRequest {
     /**
-     * The prompt and inference parameters in the format specified in the contentType in the header. To see the format and content of the request and response bodies for different models, refer to Inference parameters. For more information, see Run inference in the Bedrock User Guide.
+     * The prompt and inference parameters in the format specified in the contentType in the header. You must provide the body in JSON format. To see the format and content of the request and response bodies for different models, refer to Inference parameters. For more information, see Run inference in the Bedrock User Guide.
      */
     body: Body;
     /**
-     * The MIME type of the input data in the request. The default value is application/json.
+     * The MIME type of the input data in the request. You must specify application/json.
      */
     contentType?: MimeType;
     /**
@@ -325,11 +570,11 @@ declare namespace BedrockRuntime {
   }
   export interface InvokeModelWithResponseStreamRequest {
     /**
-     * The prompt and inference parameters in the format specified in the contentType in the header. To see the format and content of the request and response bodies for different models, refer to Inference parameters. For more information, see Run inference in the Bedrock User Guide.
+     * The prompt and inference parameters in the format specified in the contentType in the header. You must provide the body in JSON format. To see the format and content of the request and response bodies for different models, refer to Inference parameters. For more information, see Run inference in the Bedrock User Guide.
      */
     body: Body;
     /**
-     * The MIME type of the input data in the request. The default value is application/json.
+     * The MIME type of the input data in the request. You must specify application/json.
      */
     contentType?: MimeType;
     /**
@@ -392,6 +637,7 @@ declare namespace BedrockRuntime {
   }
   export type Messages = Message[];
   export type MimeType = string;
+  export type ModelOutputs = GuardrailOutputText[];
   export interface ModelStreamErrorException {
     message?: NonBlankString;
     /**
@@ -424,13 +670,17 @@ declare namespace BedrockRuntime {
     name: ToolName;
   }
   export type StatusCode = number;
-  export type StopReason = "end_turn"|"tool_use"|"max_tokens"|"stop_sequence"|"content_filtered"|string;
+  export type StopReason = "end_turn"|"tool_use"|"max_tokens"|"stop_sequence"|"guardrail_intervened"|"content_filtered"|string;
   export type String = string;
   export interface SystemContentBlock {
     /**
      * A system prompt for the model. 
      */
     text?: NonEmptyString;
+    /**
+     * A content block to assess with the guardrail. Use with the Converse API (Converse and ConverseStream).  For more information, see Use a guardrail with the Converse API in the Amazon Bedrock User Guide.
+     */
+    guardContent?: GuardrailConverseContentBlock;
   }
   export type SystemContentBlocks = SystemContentBlock[];
   export interface ThrottlingException {
@@ -461,7 +711,7 @@ declare namespace BedrockRuntime {
   }
   export interface ToolChoice {
     /**
-     * The Model automatically decides if a tool should be called or to whether to generate text instead.
+     * (Default). The Model automatically decides if a tool should be called or whether to generate text instead. 
      */
     auto?: AutoToolChoice;
     /**
@@ -469,7 +719,7 @@ declare namespace BedrockRuntime {
      */
     any?: AnyToolChoice;
     /**
-     * The Model must request the specified tool.
+     * The Model must request the specified tool. Only supported by Anthropic Claude 3 models. 
      */
     tool?: SpecificToolChoice;
   }

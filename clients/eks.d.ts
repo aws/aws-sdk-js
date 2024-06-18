@@ -1896,7 +1896,33 @@ declare namespace EKS {
      * Metadata that assists with categorization and organization. Each tag consists of a key and an optional value. You define both. Tags don't propagate to any other cluster or Amazon Web Services resources.
      */
     tags?: TagMap;
+    /**
+     * The health status of the Fargate profile. If there are issues with your Fargate profile's health, they are listed here.
+     */
+    health?: FargateProfileHealth;
   }
+  export interface FargateProfileHealth {
+    /**
+     * Any issues that are associated with the Fargate profile.
+     */
+    issues?: FargateProfileIssueList;
+  }
+  export interface FargateProfileIssue {
+    /**
+     * A brief description of the error.
+     */
+    code?: FargateProfileIssueCode;
+    /**
+     * The error message associated with the issue.
+     */
+    message?: String;
+    /**
+     * The Amazon Web Services resources that are affected by this issue.
+     */
+    resourceIds?: StringList;
+  }
+  export type FargateProfileIssueCode = "PodExecutionRoleAlreadyInUse"|"AccessDenied"|"ClusterUnreachable"|"InternalFailure"|string;
+  export type FargateProfileIssueList = FargateProfileIssue[];
   export type FargateProfileLabel = {[key: string]: String};
   export interface FargateProfileSelector {
     /**

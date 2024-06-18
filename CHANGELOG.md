@@ -1,6 +1,18 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1643.0-->
+<!--LATEST=2.1644.0-->
 <!--ENTRYINSERT-->
+
+## 2.1644.0
+* feature: BedrockRuntime: This release adds support for using Guardrails with the Converse and ConverseStream APIs.
+* feature: CloudTrail: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: ConfigService: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: EKS: This release adds support to surface async fargate customer errors from async path to customer through describe-fargate-profile API response.
+* feature: Lightsail: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: Polly: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: Rekognition: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: SageMaker: Launched a new feature in SageMaker to provide managed MLflow Tracking Servers for customers to track ML experiments. This release also adds a new capability of attaching additional storage to SageMaker HyperPod cluster instances.
+* feature: Shield: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: Snowball: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
 
 ## 2.1643.0
 * feature: Batch: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
