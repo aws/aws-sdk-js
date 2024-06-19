@@ -628,6 +628,10 @@ declare namespace OpenSearch {
      */
     SAMLOptions?: SAMLOptionsOutput;
     /**
+     * Container for information about the JWT configuration of the Amazon OpenSearch Service.
+     */
+    JWTOptions?: JWTOptionsOutput;
+    /**
      * Date and time when the migration period will be disabled. Only necessary when enabling fine-grained access control on an existing domain.
      */
     AnonymousAuthDisableDate?: DisableTimestamp;
@@ -653,6 +657,10 @@ declare namespace OpenSearch {
      * Container for information about the SAML configuration for OpenSearch Dashboards.
      */
     SAMLOptions?: SAMLOptionsInput;
+    /**
+     * Container for information about the JWT configuration of the Amazon OpenSearch Service. 
+     */
+    JWTOptions?: JWTOptionsInput;
     /**
      * True to enable a 30-day migration period during which administrators can create role mappings. Only necessary when enabling fine-grained access control on an existing domain.
      */
@@ -2324,7 +2332,7 @@ declare namespace OpenSearch {
      */
     Description?: DataSourceDescription;
     /**
-     * The status of the data source response.
+     * The status of the data source.
      */
     Status?: DataSourceStatus;
   }
@@ -2540,6 +2548,42 @@ declare namespace OpenSearch {
   export type IntegerClass = number;
   export type Issue = string;
   export type Issues = Issue[];
+  export interface JWTOptionsInput {
+    /**
+     * True to enable JWT authentication and authorization for a domain.
+     */
+    Enabled?: Boolean;
+    /**
+     * Element of the JWT assertion to use for the user name.
+     */
+    SubjectKey?: SubjectKey;
+    /**
+     * Element of the JWT assertion to use for roles.
+     */
+    RolesKey?: RolesKey;
+    /**
+     * Element of the JWT assertion used by the cluster to verify JWT signatures.
+     */
+    PublicKey?: String;
+  }
+  export interface JWTOptionsOutput {
+    /**
+     * True if JWT use is enabled.
+     */
+    Enabled?: Boolean;
+    /**
+     * The key used for matching the JWT subject attribute.
+     */
+    SubjectKey?: String;
+    /**
+     * The key used for matching the JWT roles attribute.
+     */
+    RolesKey?: String;
+    /**
+     * The key used to verify the signature of incoming JWT requests.
+     */
+    PublicKey?: String;
+  }
   export type KmsKeyId = string;
   export type LastUpdated = Date;
   export type LimitName = string;
@@ -3276,6 +3320,7 @@ declare namespace OpenSearch {
   export interface RevokeVpcEndpointAccessResponse {
   }
   export type RoleArn = string;
+  export type RolesKey = string;
   export type RollbackOnDisable = "NO_ROLLBACK"|"DEFAULT_ROLLBACK"|string;
   export type S3BucketName = string;
   export interface S3GlueDataCatalog {
@@ -3553,6 +3598,7 @@ declare namespace OpenSearch {
   export type StorageTypeName = string;
   export type String = string;
   export type StringList = String[];
+  export type SubjectKey = string;
   export type TLSSecurityPolicy = "Policy-Min-TLS-1-0-2019-07"|"Policy-Min-TLS-1-2-2019-07"|"Policy-Min-TLS-1-2-PFS-2023-10"|string;
   export interface Tag {
     /**
@@ -3589,7 +3635,7 @@ declare namespace OpenSearch {
      */
     Description?: DataSourceDescription;
     /**
-     * The status of the data source update request.
+     * The status of the data source update.
      */
     Status?: DataSourceStatus;
   }

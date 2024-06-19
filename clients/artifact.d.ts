@@ -143,13 +143,13 @@ declare namespace Artifact {
   }
   export interface ListReportsResponse {
     /**
-     * Pagination token to request the next page of resources.
-     */
-    nextToken?: NextTokenAttribute;
-    /**
      * List of report resources.
      */
     reports?: ReportsList;
+    /**
+     * Pagination token to request the next page of resources.
+     */
+    nextToken?: NextTokenAttribute;
   }
   export type LongStringAttribute = string;
   export type MaxResultsAttribute = number;
@@ -167,92 +167,49 @@ declare namespace Artifact {
   }
   export interface ReportDetail {
     /**
-     * Acceptance type for report.
+     * Unique resource ID for the report resource.
      */
-    acceptanceType?: AcceptanceType;
+    id?: ReportId;
     /**
-     * ARN for the report resource.
+     * Name for the report resource.
      */
-    arn?: LongStringAttribute;
+    name?: ShortStringAttribute;
     /**
-     * Category for the report resource.
+     * Description for the report resource.
      */
-    category?: ShortStringAttribute;
+    description?: LongStringAttribute;
     /**
-     * Associated company name for the report resource.
+     * Timestamp indicating the report resource effective start.
      */
-    companyName?: ShortStringAttribute;
+    periodStart?: TimestampAttribute;
+    /**
+     * Timestamp indicating the report resource effective end.
+     */
+    periodEnd?: TimestampAttribute;
     /**
      * Timestamp indicating when the report resource was created.
      */
     createdAt?: TimestampAttribute;
     /**
-     * Timestamp indicating when the report resource was deleted.
-     */
-    deletedAt?: TimestampAttribute;
-    /**
-     * Description for the report resource.
-     */
-    description?: LongStringAttribute;
-    /**
-     * Unique resource ID for the report resource.
-     */
-    id?: ReportId;
-    /**
      * Timestamp indicating when the report resource was last modified.
      */
     lastModifiedAt?: TimestampAttribute;
     /**
-     * Name for the report resource.
+     * Timestamp indicating when the report resource was deleted.
      */
-    name?: ShortStringAttribute;
-    /**
-     * Timestamp indicating the report resource effective end.
-     */
-    periodEnd?: TimestampAttribute;
-    /**
-     * Timestamp indicating the report resource effective start.
-     */
-    periodStart?: TimestampAttribute;
-    /**
-     * Associated product name for the report resource.
-     */
-    productName?: ShortStringAttribute;
-    /**
-     * Sequence number to enforce optimistic locking.
-     */
-    sequenceNumber?: SequenceNumberAttribute;
-    /**
-     * Series for the report resource.
-     */
-    series?: ShortStringAttribute;
+    deletedAt?: TimestampAttribute;
     /**
      * Current state of the report resource
      */
     state?: PublishedState;
     /**
-     * The message associated with the current upload state.
-     */
-    statusMessage?: StatusMessage;
-    /**
-     * Unique resource ARN for term resource.
-     */
-    termArn?: LongStringAttribute;
-    /**
-     * The current state of the document upload.
-     */
-    uploadState?: UploadState;
-    /**
-     * Version for the report resource.
-     */
-    version?: VersionAttribute;
-  }
-  export type ReportId = string;
-  export interface ReportSummary {
-    /**
      * ARN for the report resource.
      */
     arn?: LongStringAttribute;
+    /**
+     * Series for the report resource.
+     */
+    series?: ShortStringAttribute;
     /**
      * Category for the report resource.
      */
@@ -262,9 +219,36 @@ declare namespace Artifact {
      */
     companyName?: ShortStringAttribute;
     /**
-     * Description for the report resource.
+     * Associated product name for the report resource.
      */
-    description?: LongStringAttribute;
+    productName?: ShortStringAttribute;
+    /**
+     * Unique resource ARN for term resource.
+     */
+    termArn?: LongStringAttribute;
+    /**
+     * Version for the report resource.
+     */
+    version?: VersionAttribute;
+    /**
+     * Acceptance type for report.
+     */
+    acceptanceType?: AcceptanceType;
+    /**
+     * Sequence number to enforce optimistic locking.
+     */
+    sequenceNumber?: SequenceNumberAttribute;
+    /**
+     * The current state of the document upload.
+     */
+    uploadState?: UploadState;
+    /**
+     * The message associated with the current upload state.
+     */
+    statusMessage?: StatusMessage;
+  }
+  export type ReportId = string;
+  export interface ReportSummary {
     /**
      * Unique resource ID for the report resource.
      */
@@ -274,37 +258,57 @@ declare namespace Artifact {
      */
     name?: ShortStringAttribute;
     /**
-     * Timestamp indicating the report resource effective end.
-     */
-    periodEnd?: TimestampAttribute;
-    /**
-     * Timestamp indicating the report resource effective start.
-     */
-    periodStart?: TimestampAttribute;
-    /**
-     * Associated product name for the report resource.
-     */
-    productName?: ShortStringAttribute;
-    /**
-     * Series for the report resource.
-     */
-    series?: ShortStringAttribute;
-    /**
      * Current state of the report resource.
      */
     state?: PublishedState;
     /**
-     * The message associated with the current upload state.
+     * ARN for the report resource.
      */
-    statusMessage?: StatusMessage;
+    arn?: LongStringAttribute;
+    /**
+     * Version for the report resource.
+     */
+    version?: VersionAttribute;
     /**
      * The current state of the document upload.
      */
     uploadState?: UploadState;
     /**
-     * Version for the report resource.
+     * Description for the report resource.
      */
-    version?: VersionAttribute;
+    description?: LongStringAttribute;
+    /**
+     * Timestamp indicating the report resource effective start.
+     */
+    periodStart?: TimestampAttribute;
+    /**
+     * Timestamp indicating the report resource effective end.
+     */
+    periodEnd?: TimestampAttribute;
+    /**
+     * Series for the report resource.
+     */
+    series?: ShortStringAttribute;
+    /**
+     * Category for the report resource.
+     */
+    category?: ShortStringAttribute;
+    /**
+     * Associated company name for the report resource.
+     */
+    companyName?: ShortStringAttribute;
+    /**
+     * Associated product name for the report resource.
+     */
+    productName?: ShortStringAttribute;
+    /**
+     * The message associated with the current upload state.
+     */
+    statusMessage?: StatusMessage;
+    /**
+     * Acceptance type for report.
+     */
+    acceptanceType?: AcceptanceType;
   }
   export type ReportsList = ReportSummary[];
   export type SequenceNumberAttribute = number;

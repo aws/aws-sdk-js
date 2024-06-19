@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1644.0-->
+<!--LATEST=2.1645.0-->
 <!--ENTRYINSERT-->
+
+## 2.1645.0
+* feature: Artifact: This release adds an acceptanceType field to the ReportSummary structure (used in the ListReports API response).
+* feature: Athena: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: CUR: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: DirectConnect: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: ElasticTranscoder: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: OpenSearch: This release enables customers to use JSON Web Tokens (JWT) for authentication on their Amazon OpenSearch Service domains.
 
 ## 2.1644.0
 * feature: BedrockRuntime: This release adds support for using Guardrails with the Converse and ConverseStream APIs.
