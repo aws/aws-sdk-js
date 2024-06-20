@@ -230,6 +230,17 @@ declare class IVSRealTime extends Service {
 }
 declare namespace IVSRealTime {
   export type AttributeKey = string;
+  export interface AutoParticipantRecordingConfiguration {
+    /**
+     * ARN of the StorageConfiguration resource to use for auto participant recording. Default: "" (empty string, no storage configuration is specified). Individual participant recording cannot be started unless a storage configuration is specified, when a Stage is created or updated.
+     */
+    storageConfigurationArn: AutoParticipantRecordingStorageConfigurationArn;
+    /**
+     * Types of media to be recorded. Default: AUDIO_VIDEO.
+     */
+    mediaTypes?: ParticipantRecordingMediaTypeList;
+  }
+  export type AutoParticipantRecordingStorageConfigurationArn = string;
   export type Bitrate = number;
   export type ChannelArn = string;
   export interface ChannelDestinationConfiguration {
@@ -248,33 +259,33 @@ declare namespace IVSRealTime {
      */
     arn: CompositionArn;
     /**
-     * Array of Destination objects. A Composition can contain either one destination (channel or s3) or two (one channel and one s3).
-     */
-    destinations: DestinationList;
-    /**
-     * UTC time of the Composition end. This is an ISO 8601 timestamp; note that this is returned as a string.
-     */
-    endTime?: Time;
-    /**
-     * Layout object to configure composition parameters.
-     */
-    layout: LayoutConfiguration;
-    /**
      * ARN of the stage used as input
      */
     stageArn: StageArn;
-    /**
-     * UTC time of the Composition start. This is an ISO 8601 timestamp; note that this is returned as a string.
-     */
-    startTime?: Time;
     /**
      * State of the Composition.
      */
     state: CompositionState;
     /**
+     * Layout object to configure composition parameters.
+     */
+    layout: LayoutConfiguration;
+    /**
+     * Array of Destination objects. A Composition can contain either one destination (channel or s3) or two (one channel and one s3).
+     */
+    destinations: DestinationList;
+    /**
      * Tags attached to the resource. Array of maps, each of the form string:string (key:value). See Tagging AWS Resources for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.
      */
     tags?: Tags;
+    /**
+     * UTC time of the Composition start. This is an ISO 8601 timestamp; note that this is returned as a string.
+     */
+    startTime?: Time;
+    /**
+     * UTC time of the Composition end. This is an ISO 8601 timestamp; note that this is returned as a string.
+     */
+    endTime?: Time;
   }
   export type CompositionArn = string;
   export type CompositionClientToken = string;
@@ -285,21 +296,13 @@ declare namespace IVSRealTime {
      */
     arn: CompositionArn;
     /**
-     * Array of Destination objects.
-     */
-    destinations: DestinationSummaryList;
-    /**
-     * UTC time of the Composition end. This is an ISO 8601 timestamp; note that this is returned as a string.
-     */
-    endTime?: Time;
-    /**
      * ARN of the attached stage.
      */
     stageArn: StageArn;
     /**
-     * UTC time of the Composition start. This is an ISO 8601 timestamp; note that this is returned as a string.
+     * Array of Destination objects.
      */
-    startTime?: Time;
+    destinations: DestinationSummaryList;
     /**
      * State of the Composition resource.
      */
@@ -308,6 +311,14 @@ declare namespace IVSRealTime {
      * Tags attached to the resource. Array of maps, each of the form string:string (key:value). See Tagging AWS Resources for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.
      */
     tags?: Tags;
+    /**
+     * UTC time of the Composition start. This is an ISO 8601 timestamp; note that this is returned as a string.
+     */
+    startTime?: Time;
+    /**
+     * UTC time of the Composition end. This is an ISO 8601 timestamp; note that this is returned as a string.
+     */
+    endTime?: Time;
   }
   export type CompositionSummaryList = CompositionSummary[];
   export interface CreateEncoderConfigurationRequest {
@@ -316,13 +327,13 @@ declare namespace IVSRealTime {
      */
     name?: EncoderConfigurationName;
     /**
-     * Tags attached to the resource. Array of maps, each of the form string:string (key:value). See Tagging AWS Resources for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.
-     */
-    tags?: Tags;
-    /**
      * Video configuration. Default: video resolution 1280x720, bitrate 2500 kbps, 30 fps.
      */
     video?: Video;
+    /**
+     * Tags attached to the resource. Array of maps, each of the form string:string (key:value). See Tagging AWS Resources for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.
+     */
+    tags?: Tags;
   }
   export interface CreateEncoderConfigurationResponse {
     /**
@@ -332,6 +343,18 @@ declare namespace IVSRealTime {
   }
   export interface CreateParticipantTokenRequest {
     /**
+     * ARN of the stage to which this token is scoped.
+     */
+    stageArn: StageArn;
+    /**
+     * Duration (in minutes), after which the token expires. Default: 720 (12 hours).
+     */
+    duration?: ParticipantTokenDurationMinutes;
+    /**
+     * Name that can be specified to help identify the token. This can be any UTF-8 encoded text. This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information. 
+     */
+    userId?: ParticipantTokenUserId;
+    /**
      * Application-provided attributes to encode into the token and attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total. This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information. 
      */
     attributes?: ParticipantTokenAttributes;
@@ -339,18 +362,6 @@ declare namespace IVSRealTime {
      * Set of capabilities that the user is allowed to perform in the stage. Default: PUBLISH, SUBSCRIBE.
      */
     capabilities?: ParticipantTokenCapabilities;
-    /**
-     * Duration (in minutes), after which the token expires. Default: 720 (12 hours).
-     */
-    duration?: ParticipantTokenDurationMinutes;
-    /**
-     * ARN of the stage to which this token is scoped.
-     */
-    stageArn: StageArn;
-    /**
-     * Name that can be specified to help identify the token. This can be any UTF-8 encoded text. This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information. 
-     */
-    userId?: ParticipantTokenUserId;
   }
   export interface CreateParticipantTokenResponse {
     /**
@@ -371,16 +382,20 @@ declare namespace IVSRealTime {
      * Tags attached to the resource. Array of maps, each of the form string:string (key:value). See Tagging AWS Resources for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there. 
      */
     tags?: Tags;
+    /**
+     * Auto participant recording configuration object attached to the stage.
+     */
+    autoParticipantRecordingConfiguration?: AutoParticipantRecordingConfiguration;
   }
   export interface CreateStageResponse {
-    /**
-     * Participant tokens attached to the stage. These correspond to the participants in the request.
-     */
-    participantTokens?: ParticipantTokenList;
     /**
      * The stage that was created.
      */
     stage?: Stage;
+    /**
+     * Participant tokens attached to the stage. These correspond to the participants in the request.
+     */
+    participantTokens?: ParticipantTokenList;
   }
   export interface CreateStorageConfigurationRequest {
     /**
@@ -428,6 +443,22 @@ declare namespace IVSRealTime {
   }
   export interface Destination {
     /**
+     * Unique identifier for this destination, assigned by IVS.
+     */
+    id: String;
+    /**
+     * State of the Composition Destination.
+     */
+    state: DestinationState;
+    /**
+     * UTC time of the destination start. This is an ISO 8601 timestamp; note that this is returned as a string.
+     */
+    startTime?: Time;
+    /**
+     * UTC time of the destination end. This is an ISO 8601 timestamp; note that this is returned as a string.
+     */
+    endTime?: Time;
+    /**
      * Configuration used to create this destination.
      */
     configuration: DestinationConfiguration;
@@ -435,32 +466,16 @@ declare namespace IVSRealTime {
      * Optional details regarding the status of the destination.
      */
     detail?: DestinationDetail;
-    /**
-     * UTC time of the destination end. This is an ISO 8601 timestamp; note that this is returned as a string.
-     */
-    endTime?: Time;
-    /**
-     * Unique identifier for this destination, assigned by IVS.
-     */
-    id: String;
-    /**
-     * UTC time of the destination start. This is an ISO 8601 timestamp; note that this is returned as a string.
-     */
-    startTime?: Time;
-    /**
-     * State of the Composition Destination.
-     */
-    state: DestinationState;
   }
   export interface DestinationConfiguration {
-    /**
-     * An IVS channel to be used for broadcasting, for server-side composition. Either a channel or an s3 must be specified. 
-     */
-    channel?: ChannelDestinationConfiguration;
     /**
      * Name that can be specified to help identify the destination.
      */
     name?: DestinationConfigurationName;
+    /**
+     * An IVS channel to be used for broadcasting, for server-side composition. Either a channel or an s3 must be specified. 
+     */
+    channel?: ChannelDestinationConfiguration;
     /**
      * An S3 storage configuration to be used for recording video data. Either a channel or an s3 must be specified.
      */
@@ -478,25 +493,29 @@ declare namespace IVSRealTime {
   export type DestinationState = "STARTING"|"ACTIVE"|"STOPPING"|"RECONNECTING"|"FAILED"|"STOPPED"|string;
   export interface DestinationSummary {
     /**
-     * UTC time of the destination end. This is an ISO 8601 timestamp; note that this is returned as a string.
-     */
-    endTime?: Time;
-    /**
      * Unique identifier for this destination, assigned by IVS.
      */
     id: String;
+    /**
+     * State of the Composition Destination.
+     */
+    state: DestinationState;
     /**
      * UTC time of the destination start. This is an ISO 8601 timestamp; note that this is returned as a string.
      */
     startTime?: Time;
     /**
-     * State of the Composition Destination.
+     * UTC time of the destination end. This is an ISO 8601 timestamp; note that this is returned as a string.
      */
-    state: DestinationState;
+    endTime?: Time;
   }
   export type DestinationSummaryList = DestinationSummary[];
   export type DisconnectParticipantReason = string;
   export interface DisconnectParticipantRequest {
+    /**
+     * ARN of the stage to which the participant is attached.
+     */
+    stageArn: StageArn;
     /**
      * Identifier of the participant to be disconnected. This is assigned by IVS and returned by CreateParticipantToken.
      */
@@ -505,10 +524,6 @@ declare namespace IVSRealTime {
      * Description of why this participant is being disconnected.
      */
     reason?: DisconnectParticipantReason;
-    /**
-     * ARN of the stage to which the participant is attached.
-     */
-    stageArn: StageArn;
   }
   export interface DisconnectParticipantResponse {
   }
@@ -522,13 +537,13 @@ declare namespace IVSRealTime {
      */
     name?: EncoderConfigurationName;
     /**
-     * Tags attached to the resource. Array of maps, each of the form string:string (key:value). See Tagging AWS Resources for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.
-     */
-    tags?: Tags;
-    /**
      * Video configuration. Default: video resolution 1280x720, bitrate 2500 kbps, 30 fps
      */
     video?: Video;
+    /**
+     * Tags attached to the resource. Array of maps, each of the form string:string (key:value). See Tagging AWS Resources for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.
+     */
+    tags?: Tags;
   }
   export type EncoderConfigurationArn = string;
   export type EncoderConfigurationArnList = EncoderConfigurationArn[];
@@ -550,14 +565,6 @@ declare namespace IVSRealTime {
   export type EncoderConfigurationSummaryList = EncoderConfigurationSummary[];
   export interface Event {
     /**
-     * If the event is an error event, the error code is provided to give insight into the specific error that occurred. If the event is not an error event, this field is null. INSUFFICIENT_CAPABILITIES indicates that the participant tried to take an action that the participant’s token is not allowed to do. For more information about participant capabilities, see the capabilities field in CreateParticipantToken. QUOTA_EXCEEDED indicates that the number of participants who want to publish/subscribe to a stage exceeds the quota; for more information, see Service Quotas. PUBLISHER_NOT_FOUND indicates that the participant tried to subscribe to a publisher that doesn’t exist. 
-     */
-    errorCode?: EventErrorCode;
-    /**
-     * ISO 8601 timestamp (returned as a string) for when the event occurred.
-     */
-    eventTime?: Time;
-    /**
      * The name of the event.
      */
     name?: EventName;
@@ -566,9 +573,17 @@ declare namespace IVSRealTime {
      */
     participantId?: ParticipantId;
     /**
+     * ISO 8601 timestamp (returned as a string) for when the event occurred.
+     */
+    eventTime?: Time;
+    /**
      * Unique identifier for the remote participant. For a subscribe event, this is the publisher. For a publish or join event, this is null. This is assigned by IVS.
      */
     remoteParticipantId?: ParticipantId;
+    /**
+     * If the event is an error event, the error code is provided to give insight into the specific error that occurred. If the event is not an error event, this field is null. INSUFFICIENT_CAPABILITIES indicates that the participant tried to take an action that the participant’s token is not allowed to do. For more information about participant capabilities, see the capabilities field in CreateParticipantToken. QUOTA_EXCEEDED indicates that the number of participants who want to publish/subscribe to a stage exceeds the quota; for more information, see Service Quotas. PUBLISHER_NOT_FOUND indicates that the participant tried to subscribe to a publisher that doesn’t exist. 
+     */
+    errorCode?: EventErrorCode;
   }
   export type EventErrorCode = "INSUFFICIENT_CAPABILITIES"|"QUOTA_EXCEEDED"|"PUBLISHER_NOT_FOUND"|string;
   export type EventList = Event[];
@@ -600,17 +615,17 @@ declare namespace IVSRealTime {
   }
   export interface GetParticipantRequest {
     /**
-     * Unique identifier for the participant. This is assigned by IVS and returned by CreateParticipantToken.
+     * Stage ARN.
      */
-    participantId: ParticipantId;
+    stageArn: StageArn;
     /**
      * ID of a session within the stage.
      */
     sessionId: StageSessionId;
     /**
-     * Stage ARN.
+     * Unique identifier for the participant. This is assigned by IVS and returned by CreateParticipantToken.
      */
-    stageArn: StageArn;
+    participantId: ParticipantId;
   }
   export interface GetParticipantResponse {
     /**
@@ -632,13 +647,13 @@ declare namespace IVSRealTime {
   }
   export interface GetStageSessionRequest {
     /**
-     * ID of a session within the stage.
-     */
-    sessionId: StageSessionId;
-    /**
      * ARN of the stage for which the information is to be retrieved.
      */
     stageArn: StageArn;
+    /**
+     * ID of a session within the stage.
+     */
+    sessionId: StageSessionId;
   }
   export interface GetStageSessionResponse {
     /**
@@ -664,10 +679,6 @@ declare namespace IVSRealTime {
      */
     featuredParticipantAttribute?: AttributeKey;
     /**
-     * Specifies the spacing between participant tiles in pixels. Default: 2.
-     */
-    gridGap?: GridGap;
-    /**
      * Determines whether to omit participants with stopped video in the composition. Default: false.
      */
     omitStoppedVideo?: OmitStoppedVideo;
@@ -679,6 +690,10 @@ declare namespace IVSRealTime {
      * Defines how video fits within the participant tile. When not set, videoFillMode defaults to COVER fill mode for participants in the grid and to CONTAIN fill mode for featured participants.
      */
     videoFillMode?: VideoFillMode;
+    /**
+     * Specifies the spacing between participant tiles in pixels. Default: 2.
+     */
+    gridGap?: GridGap;
   }
   export type GridGap = number;
   export type Height = number;
@@ -694,21 +709,21 @@ declare namespace IVSRealTime {
   }
   export interface ListCompositionsRequest {
     /**
-     * Filters the Composition list to match the specified EncoderConfiguration attached to at least one of its output.
-     */
-    filterByEncoderConfigurationArn?: EncoderConfigurationArn;
-    /**
      * Filters the Composition list to match the specified Stage ARN.
      */
     filterByStageArn?: StageArn;
     /**
-     * Maximum number of results to return. Default: 100.
+     * Filters the Composition list to match the specified EncoderConfiguration attached to at least one of its output.
      */
-    maxResults?: MaxCompositionResults;
+    filterByEncoderConfigurationArn?: EncoderConfigurationArn;
     /**
      * The first Composition to retrieve. This is used for pagination; see the nextToken response field.
      */
     nextToken?: PaginationToken;
+    /**
+     * Maximum number of results to return. Default: 100.
+     */
+    maxResults?: MaxCompositionResults;
   }
   export interface ListCompositionsResponse {
     /**
@@ -722,13 +737,13 @@ declare namespace IVSRealTime {
   }
   export interface ListEncoderConfigurationsRequest {
     /**
-     * Maximum number of results to return. Default: 100.
-     */
-    maxResults?: MaxEncoderConfigurationResults;
-    /**
      * The first encoder configuration to retrieve. This is used for pagination; see the nextToken response field.
      */
     nextToken?: PaginationToken;
+    /**
+     * Maximum number of results to return. Default: 100.
+     */
+    maxResults?: MaxEncoderConfigurationResults;
   }
   export interface ListEncoderConfigurationsResponse {
     /**
@@ -742,25 +757,25 @@ declare namespace IVSRealTime {
   }
   export interface ListParticipantEventsRequest {
     /**
-     * Maximum number of results to return. Default: 50.
+     * Stage ARN.
      */
-    maxResults?: MaxParticipantEventResults;
-    /**
-     * The first participant event to retrieve. This is used for pagination; see the nextToken response field.
-     */
-    nextToken?: PaginationToken;
-    /**
-     * Unique identifier for this participant. This is assigned by IVS and returned by CreateParticipantToken.
-     */
-    participantId: ParticipantId;
+    stageArn: StageArn;
     /**
      * ID of a session within the stage.
      */
     sessionId: StageSessionId;
     /**
-     * Stage ARN.
+     * Unique identifier for this participant. This is assigned by IVS and returned by CreateParticipantToken.
      */
-    stageArn: StageArn;
+    participantId: ParticipantId;
+    /**
+     * The first participant event to retrieve. This is used for pagination; see the nextToken response field.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * Maximum number of results to return. Default: 50.
+     */
+    maxResults?: MaxParticipantEventResults;
   }
   export interface ListParticipantEventsResponse {
     /**
@@ -774,107 +789,111 @@ declare namespace IVSRealTime {
   }
   export interface ListParticipantsRequest {
     /**
-     * Filters the response list to only show participants who published during the stage session. Only one of filterByUserId, filterByPublished, or filterByState can be provided per request.
+     * Stage ARN.
      */
-    filterByPublished?: Published;
-    /**
-     * Filters the response list to only show participants in the specified state. Only one of filterByUserId, filterByPublished, or filterByState can be provided per request.
-     */
-    filterByState?: ParticipantState;
-    /**
-     * Filters the response list to match the specified user ID. Only one of filterByUserId, filterByPublished, or filterByState can be provided per request. A userId is a customer-assigned name to help identify the token; this can be used to link a participant to a user in the customer’s own systems.
-     */
-    filterByUserId?: UserId;
-    /**
-     * Maximum number of results to return. Default: 50.
-     */
-    maxResults?: MaxParticipantResults;
-    /**
-     * The first participant to retrieve. This is used for pagination; see the nextToken response field.
-     */
-    nextToken?: PaginationToken;
+    stageArn: StageArn;
     /**
      * ID of the session within the stage.
      */
     sessionId: StageSessionId;
     /**
-     * Stage ARN.
+     * Filters the response list to match the specified user ID. Only one of filterByUserId, filterByPublished, filterByState, or filterByRecordingState can be provided per request. A userId is a customer-assigned name to help identify the token; this can be used to link a participant to a user in the customer’s own systems.
      */
-    stageArn: StageArn;
-  }
-  export interface ListParticipantsResponse {
+    filterByUserId?: UserId;
     /**
-     * If there are more participants than maxResults, use nextToken in the request to get the next set.
+     * Filters the response list to only show participants who published during the stage session. Only one of filterByUserId, filterByPublished, filterByState, or filterByRecordingState can be provided per request.
+     */
+    filterByPublished?: Published;
+    /**
+     * Filters the response list to only show participants in the specified state. Only one of filterByUserId, filterByPublished, filterByState, or filterByRecordingState can be provided per request.
+     */
+    filterByState?: ParticipantState;
+    /**
+     * The first participant to retrieve. This is used for pagination; see the nextToken response field.
      */
     nextToken?: PaginationToken;
+    /**
+     * Maximum number of results to return. Default: 50.
+     */
+    maxResults?: MaxParticipantResults;
+    /**
+     * Filters the response list to only show participants with the specified recording state. Only one of filterByUserId, filterByPublished, filterByState, or filterByRecordingState can be provided per request.
+     */
+    filterByRecordingState?: ParticipantRecordingFilterByRecordingState;
+  }
+  export interface ListParticipantsResponse {
     /**
      * List of the matching participants (summary information only).
      */
     participants: ParticipantList;
+    /**
+     * If there are more participants than maxResults, use nextToken in the request to get the next set.
+     */
+    nextToken?: PaginationToken;
   }
   export interface ListStageSessionsRequest {
     /**
-     * Maximum number of results to return. Default: 50.
+     * Stage ARN.
      */
-    maxResults?: MaxStageSessionResults;
+    stageArn: StageArn;
     /**
      * The first stage session to retrieve. This is used for pagination; see the nextToken response field.
      */
     nextToken?: PaginationToken;
     /**
-     * Stage ARN.
+     * Maximum number of results to return. Default: 50.
      */
-    stageArn: StageArn;
+    maxResults?: MaxStageSessionResults;
   }
   export interface ListStageSessionsResponse {
-    /**
-     * If there are more stage sessions than maxResults, use nextToken in the request to get the next set.
-     */
-    nextToken?: PaginationToken;
     /**
      * List of matching stage sessions.
      */
     stageSessions: StageSessionList;
+    /**
+     * If there are more stage sessions than maxResults, use nextToken in the request to get the next set.
+     */
+    nextToken?: PaginationToken;
   }
   export interface ListStagesRequest {
-    /**
-     * Maximum number of results to return. Default: 50.
-     */
-    maxResults?: MaxStageResults;
     /**
      * The first stage to retrieve. This is used for pagination; see the nextToken response field.
      */
     nextToken?: PaginationToken;
+    /**
+     * Maximum number of results to return. Default: 50.
+     */
+    maxResults?: MaxStageResults;
   }
   export interface ListStagesResponse {
-    /**
-     * If there are more stages than maxResults, use nextToken in the request to get the next set.
-     */
-    nextToken?: PaginationToken;
     /**
      * List of the matching stages (summary information only).
      */
     stages: StageSummaryList;
+    /**
+     * If there are more stages than maxResults, use nextToken in the request to get the next set.
+     */
+    nextToken?: PaginationToken;
   }
   export interface ListStorageConfigurationsRequest {
-    /**
-     * Maximum number of storage configurations to return. Default: your service quota or 100, whichever is smaller.
-     */
-    maxResults?: MaxStorageConfigurationResults;
     /**
      * The first storage configuration to retrieve. This is used for pagination; see the nextToken response field.
      */
     nextToken?: PaginationToken;
+    /**
+     * Maximum number of storage configurations to return. Default: your service quota or 100, whichever is smaller.
+     */
+    maxResults?: MaxStorageConfigurationResults;
   }
   export interface ListStorageConfigurationsResponse {
-    /**
-     * If there are more storage configurations than maxResults, use nextToken in the request to get the next set.
-     */
-    nextToken?: PaginationToken;
     /**
      * List of the matching storage configurations.
      */
     storageConfigurations: StorageConfigurationSummaryList;
+    /**
+     * If there are more storage configurations than maxResults, use nextToken in the request to get the next set.
+     */
+    nextToken?: PaginationToken;
   }
   export interface ListTagsForResourceRequest {
     /**
@@ -899,21 +918,29 @@ declare namespace IVSRealTime {
   export type PaginationToken = string;
   export interface Participant {
     /**
-     * Application-provided attributes to encode into the token and attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total. This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.
+     * Unique identifier for this participant, assigned by IVS.
      */
-    attributes?: ParticipantAttributes;
+    participantId?: ParticipantId;
     /**
-     * The participant’s browser.
+     * Customer-assigned name to help identify the token; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text. This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.
      */
-    browserName?: ParticipantClientAttribute;
+    userId?: UserId;
     /**
-     * The participant’s browser version.
+     * Whether the participant is connected to or disconnected from the stage.
      */
-    browserVersion?: ParticipantClientAttribute;
+    state?: ParticipantState;
     /**
      * ISO 8601 timestamp (returned as a string) when the participant first joined the stage session.
      */
     firstJoinTime?: Time;
+    /**
+     * Application-provided attributes to encode into the token and attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total. This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.
+     */
+    attributes?: ParticipantAttributes;
+    /**
+     * Whether the participant ever published to the stage session.
+     */
+    published?: Published;
     /**
      * The participant’s Internet Service Provider.
      */
@@ -927,70 +954,68 @@ declare namespace IVSRealTime {
      */
     osVersion?: ParticipantClientAttribute;
     /**
-     * Unique identifier for this participant, assigned by IVS.
+     * The participant’s browser.
      */
-    participantId?: ParticipantId;
+    browserName?: ParticipantClientAttribute;
     /**
-     * Whether the participant ever published to the stage session.
+     * The participant’s browser version.
      */
-    published?: Published;
+    browserVersion?: ParticipantClientAttribute;
     /**
      * The participant’s SDK version.
      */
     sdkVersion?: ParticipantClientAttribute;
     /**
-     * Whether the participant is connected to or disconnected from the stage.
+     * Name of the S3 bucket to where the participant is being recorded, if individual participant recording is enabled, or "" (empty string), if recording is not enabled.
      */
-    state?: ParticipantState;
+    recordingS3BucketName?: ParticipantRecordingS3BucketName;
     /**
-     * Customer-assigned name to help identify the token; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text. This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.
+     * S3 prefix of the S3 bucket to where the participant is being recorded, if individual participant recording is enabled, or "" (empty string), if recording is not enabled.
      */
-    userId?: UserId;
+    recordingS3Prefix?: ParticipantRecordingS3Prefix;
+    /**
+     * Participant’s recording state.
+     */
+    recordingState?: ParticipantRecordingState;
   }
   export type ParticipantAttributes = {[key: string]: String};
   export type ParticipantClientAttribute = string;
   export type ParticipantId = string;
   export type ParticipantList = ParticipantSummary[];
+  export type ParticipantRecordingFilterByRecordingState = "STARTING"|"ACTIVE"|"STOPPING"|"STOPPED"|"FAILED"|string;
+  export type ParticipantRecordingMediaType = "AUDIO_VIDEO"|"AUDIO_ONLY"|string;
+  export type ParticipantRecordingMediaTypeList = ParticipantRecordingMediaType[];
+  export type ParticipantRecordingS3BucketName = string;
+  export type ParticipantRecordingS3Prefix = string;
+  export type ParticipantRecordingState = "STARTING"|"ACTIVE"|"STOPPING"|"STOPPED"|"FAILED"|"DISABLED"|string;
   export type ParticipantState = "CONNECTED"|"DISCONNECTED"|string;
   export interface ParticipantSummary {
-    /**
-     * ISO 8601 timestamp (returned as a string) when the participant first joined the stage session.
-     */
-    firstJoinTime?: Time;
     /**
      * Unique identifier for this participant, assigned by IVS.
      */
     participantId?: ParticipantId;
     /**
-     * Whether the participant ever published to the stage session.
+     * Customer-assigned name to help identify the token; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text. This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.
      */
-    published?: Published;
+    userId?: UserId;
     /**
      * Whether the participant is connected to or disconnected from the stage.
      */
     state?: ParticipantState;
     /**
-     * Customer-assigned name to help identify the token; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text. This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.
+     * ISO 8601 timestamp (returned as a string) when the participant first joined the stage session.
      */
-    userId?: UserId;
+    firstJoinTime?: Time;
+    /**
+     * Whether the participant ever published to the stage session.
+     */
+    published?: Published;
+    /**
+     * Participant’s recording state.
+     */
+    recordingState?: ParticipantRecordingState;
   }
   export interface ParticipantToken {
-    /**
-     * Application-provided attributes to encode into the token and attach to a stage. This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information. 
-     */
-    attributes?: ParticipantTokenAttributes;
-    /**
-     * Set of capabilities that the user is allowed to perform in the stage.
-     */
-    capabilities?: ParticipantTokenCapabilities;
-    /**
-     * Duration (in minutes), after which the participant token expires. Default: 720 (12 hours).
-     */
-    duration?: ParticipantTokenDurationMinutes;
-    /**
-     * ISO 8601 timestamp (returned as a string) for when this token expires.
-     */
-    expirationTime?: ParticipantTokenExpirationTime;
     /**
      * Unique identifier for this participant token, assigned by IVS.
      */
@@ -1003,19 +1028,27 @@ declare namespace IVSRealTime {
      * Customer-assigned name to help identify the token; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text. This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information. 
      */
     userId?: ParticipantTokenUserId;
+    /**
+     * Application-provided attributes to encode into the token and attach to a stage. This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information. 
+     */
+    attributes?: ParticipantTokenAttributes;
+    /**
+     * Duration (in minutes), after which the participant token expires. Default: 720 (12 hours).
+     */
+    duration?: ParticipantTokenDurationMinutes;
+    /**
+     * Set of capabilities that the user is allowed to perform in the stage.
+     */
+    capabilities?: ParticipantTokenCapabilities;
+    /**
+     * ISO 8601 timestamp (returned as a string) for when this token expires.
+     */
+    expirationTime?: ParticipantTokenExpirationTime;
   }
   export type ParticipantTokenAttributes = {[key: string]: String};
   export type ParticipantTokenCapabilities = ParticipantTokenCapability[];
   export type ParticipantTokenCapability = "PUBLISH"|"SUBSCRIBE"|string;
   export interface ParticipantTokenConfiguration {
-    /**
-     * Application-provided attributes to encode into the corresponding participant token and attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total. This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information. 
-     */
-    attributes?: ParticipantTokenAttributes;
-    /**
-     * Set of capabilities that the user is allowed to perform in the stage.
-     */
-    capabilities?: ParticipantTokenCapabilities;
     /**
      * Duration (in minutes), after which the corresponding participant token expires. Default: 720 (12 hours).
      */
@@ -1024,6 +1057,14 @@ declare namespace IVSRealTime {
      * Customer-assigned name to help identify the token; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text. This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information. 
      */
     userId?: ParticipantTokenUserId;
+    /**
+     * Application-provided attributes to encode into the corresponding participant token and attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total. This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information. 
+     */
+    attributes?: ParticipantTokenAttributes;
+    /**
+     * Set of capabilities that the user is allowed to perform in the stage.
+     */
+    capabilities?: ParticipantTokenCapabilities;
   }
   export type ParticipantTokenConfigurations = ParticipantTokenConfiguration[];
   export type ParticipantTokenDurationMinutes = number;
@@ -1039,29 +1080,29 @@ declare namespace IVSRealTime {
      */
     featuredParticipantAttribute?: AttributeKey;
     /**
+     * Determines whether to omit participants with stopped video in the composition. Default: false.
+     */
+    omitStoppedVideo?: OmitStoppedVideo;
+    /**
+     * Defines how video fits within the participant tile. Default: COVER. 
+     */
+    videoFillMode?: VideoFillMode;
+    /**
      * Specifies the spacing between participant tiles in pixels. Default: 0.
      */
     gridGap?: GridGap;
     /**
-     * Determines whether to omit participants with stopped video in the composition. Default: false.
+     * Identifies the PiP slot. A participant with this attribute set to "true" (as a string value) in ParticipantTokenConfiguration is placed in the PiP slot.
      */
-    omitStoppedVideo?: OmitStoppedVideo;
+    pipParticipantAttribute?: AttributeKey;
     /**
      * Defines PiP behavior when all participants have left. Default: STATIC.
      */
     pipBehavior?: PipBehavior;
     /**
-     * Specifies the height of the PiP window in pixels. When this is not set explicitly, pipHeight’s value will be based on the size of the composition and the aspect ratio of the participant’s video.
-     */
-    pipHeight?: PipHeight;
-    /**
      * Sets the PiP window’s offset position in pixels from the closest edges determined by PipPosition. Default: 0.
      */
     pipOffset?: PipOffset;
-    /**
-     * Identifies the PiP slot. A participant with this attribute set to "true" (as a string value) in ParticipantTokenConfiguration is placed in the PiP slot.
-     */
-    pipParticipantAttribute?: AttributeKey;
     /**
      * Determines the corner position of the PiP window. Default: BOTTOM_RIGHT.
      */
@@ -1071,9 +1112,9 @@ declare namespace IVSRealTime {
      */
     pipWidth?: PipWidth;
     /**
-     * Defines how video fits within the participant tile. Default: COVER. 
+     * Specifies the height of the PiP window in pixels. When this is not set explicitly, pipHeight’s value will be based on the size of the composition and the aspect ratio of the participant’s video.
      */
-    videoFillMode?: VideoFillMode;
+    pipHeight?: PipHeight;
   }
   export type PipHeight = number;
   export type PipOffset = number;
@@ -1091,6 +1132,10 @@ declare namespace IVSRealTime {
   export type S3BucketName = string;
   export interface S3DestinationConfiguration {
     /**
+     * ARN of the StorageConfiguration where recorded videos will be stored.
+     */
+    storageConfigurationArn: StorageConfigurationArn;
+    /**
      * ARNs of the EncoderConfiguration resource. The encoder configuration and stage resources must be in the same AWS account and region. 
      */
     encoderConfigurationArns: EncoderConfigurationArnList;
@@ -1098,10 +1143,6 @@ declare namespace IVSRealTime {
      * Array of maps, each of the form string:string (key:value). This is an optional customer specification, currently used only to specify the recording format for storing a recording in Amazon S3.
      */
     recordingConfiguration?: RecordingConfiguration;
-    /**
-     * ARN of the StorageConfiguration where recorded videos will be stored.
-     */
-    storageConfigurationArn: StorageConfigurationArn;
   }
   export interface S3Detail {
     /**
@@ -1117,10 +1158,6 @@ declare namespace IVSRealTime {
   }
   export interface Stage {
     /**
-     * ID of the active session within the stage.
-     */
-    activeSessionId?: StageSessionId;
-    /**
      * Stage ARN.
      */
     arn: StageArn;
@@ -1129,18 +1166,22 @@ declare namespace IVSRealTime {
      */
     name?: StageName;
     /**
+     * ID of the active session within the stage.
+     */
+    activeSessionId?: StageSessionId;
+    /**
      * Tags attached to the resource. Array of maps, each of the form string:string (key:value). See Tagging AWS Resources for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.
      */
     tags?: Tags;
+    /**
+     * Auto-participant-recording configuration object attached to the stage.
+     */
+    autoParticipantRecordingConfiguration?: AutoParticipantRecordingConfiguration;
   }
   export type StageArn = string;
   export type StageName = string;
   export interface StageSession {
     /**
-     * ISO 8601 timestamp (returned as a string) when the stage session ended. This is null if the stage is active.
-     */
-    endTime?: Time;
-    /**
      * ID of the session within the stage.
      */
     sessionId?: StageSessionId;
@@ -1148,15 +1189,15 @@ declare namespace IVSRealTime {
      *  ISO 8601 timestamp (returned as a string) when this stage session began.
      */
     startTime?: Time;
+    /**
+     * ISO 8601 timestamp (returned as a string) when the stage session ended. This is null if the stage is active.
+     */
+    endTime?: Time;
   }
   export type StageSessionId = string;
   export type StageSessionList = StageSessionSummary[];
   export interface StageSessionSummary {
     /**
-     * ISO 8601 timestamp (returned as a string) when the stage session ended. This is null if the stage is active.
-     */
-    endTime?: Time;
-    /**
      * ID of the session within the stage.
      */
     sessionId?: StageSessionId;
@@ -1164,12 +1205,12 @@ declare namespace IVSRealTime {
      *  ISO 8601 timestamp (returned as a string) when this stage session began.
      */
     startTime?: Time;
+    /**
+     * ISO 8601 timestamp (returned as a string) when the stage session ended. This is null if the stage is active.
+     */
+    endTime?: Time;
   }
   export interface StageSummary {
-    /**
-     * ID of the active session within the stage.
-     */
-    activeSessionId?: StageSessionId;
     /**
      * Stage ARN.
      */
@@ -1178,6 +1219,10 @@ declare namespace IVSRealTime {
      * Stage name.
      */
     name?: StageName;
+    /**
+     * ID of the active session within the stage.
+     */
+    activeSessionId?: StageSessionId;
     /**
      * Tags attached to the resource. Array of maps, each of the form string:string (key:value). See Tagging AWS Resources for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.
      */
@@ -1186,9 +1231,9 @@ declare namespace IVSRealTime {
   export type StageSummaryList = StageSummary[];
   export interface StartCompositionRequest {
     /**
-     * Array of destination configuration.
+     * ARN of the stage to be used for compositing.
      */
-    destinations: DestinationConfigurationList;
+    stageArn: StageArn;
     /**
      * Idempotency token.
      */
@@ -1198,9 +1243,9 @@ declare namespace IVSRealTime {
      */
     layout?: LayoutConfiguration;
     /**
-     * ARN of the stage to be used for compositing.
+     * Array of destination configuration.
      */
-    stageArn: StageArn;
+    destinations: DestinationConfigurationList;
     /**
      * Tags attached to the resource. Array of maps, each of the form string:string (key:value). See Tagging AWS Resources for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.
      */
@@ -1298,6 +1343,10 @@ declare namespace IVSRealTime {
      * Name of the stage to be updated.
      */
     name?: StageName;
+    /**
+     * Auto-participant-recording configuration object to attach to the stage. Auto-participant-recording configuration cannot be updated while recording is active.
+     */
+    autoParticipantRecordingConfiguration?: AutoParticipantRecordingConfiguration;
   }
   export interface UpdateStageResponse {
     /**
@@ -1308,21 +1357,21 @@ declare namespace IVSRealTime {
   export type UserId = string;
   export interface Video {
     /**
-     * Bitrate for generated output, in bps. Default: 2500000.
+     * Video-resolution width. Note that the maximum value is determined by width times height, such that the maximum total pixels is 2073600 (1920x1080 or 1080x1920). Default: 1280.
      */
-    bitrate?: Bitrate;
-    /**
-     * Video frame rate, in fps. Default: 30.
-     */
-    framerate?: Framerate;
+    width?: Width;
     /**
      * Video-resolution height. Note that the maximum value is determined by width times height, such that the maximum total pixels is 2073600 (1920x1080 or 1080x1920). Default: 720.
      */
     height?: Height;
     /**
-     * Video-resolution width. Note that the maximum value is determined by width times height, such that the maximum total pixels is 2073600 (1920x1080 or 1080x1920). Default: 1280.
+     * Video frame rate, in fps. Default: 30.
      */
-    width?: Width;
+    framerate?: Framerate;
+    /**
+     * Bitrate for generated output, in bps. Default: 2500000.
+     */
+    bitrate?: Bitrate;
   }
   export type VideoAspectRatio = "AUTO"|"VIDEO"|"SQUARE"|"PORTRAIT"|string;
   export type VideoFillMode = "FILL"|"COVER"|"CONTAIN"|string;

@@ -76,6 +76,14 @@ declare class ComputeOptimizer extends Service {
    */
   exportLicenseRecommendations(callback?: (err: AWSError, data: ComputeOptimizer.Types.ExportLicenseRecommendationsResponse) => void): Request<ComputeOptimizer.Types.ExportLicenseRecommendationsResponse, AWSError>;
   /**
+   *  Export optimization recommendations for your Amazon Relational Database Service (Amazon RDS).  Recommendations are exported in a comma-separated values (CSV) file, and its metadata in a JavaScript Object Notation (JSON) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see Exporting Recommendations in the Compute Optimizer User Guide. You can have only one Amazon RDS export job in progress per Amazon Web Services Region.
+   */
+  exportRDSDatabaseRecommendations(params: ComputeOptimizer.Types.ExportRDSDatabaseRecommendationsRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.ExportRDSDatabaseRecommendationsResponse) => void): Request<ComputeOptimizer.Types.ExportRDSDatabaseRecommendationsResponse, AWSError>;
+  /**
+   *  Export optimization recommendations for your Amazon Relational Database Service (Amazon RDS).  Recommendations are exported in a comma-separated values (CSV) file, and its metadata in a JavaScript Object Notation (JSON) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see Exporting Recommendations in the Compute Optimizer User Guide. You can have only one Amazon RDS export job in progress per Amazon Web Services Region.
+   */
+  exportRDSDatabaseRecommendations(callback?: (err: AWSError, data: ComputeOptimizer.Types.ExportRDSDatabaseRecommendationsResponse) => void): Request<ComputeOptimizer.Types.ExportRDSDatabaseRecommendationsResponse, AWSError>;
+  /**
    * Returns Auto Scaling group recommendations. Compute Optimizer generates recommendations for Amazon EC2 Auto Scaling groups that meet a specific set of requirements. For more information, see the Supported resources and requirements in the Compute Optimizer User Guide.
    */
   getAutoScalingGroupRecommendations(params: ComputeOptimizer.Types.GetAutoScalingGroupRecommendationsRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.GetAutoScalingGroupRecommendationsResponse) => void): Request<ComputeOptimizer.Types.GetAutoScalingGroupRecommendationsResponse, AWSError>;
@@ -164,6 +172,22 @@ declare class ComputeOptimizer extends Service {
    */
   getLicenseRecommendations(callback?: (err: AWSError, data: ComputeOptimizer.Types.GetLicenseRecommendationsResponse) => void): Request<ComputeOptimizer.Types.GetLicenseRecommendationsResponse, AWSError>;
   /**
+   *  Returns the projected metrics of Amazon RDS recommendations. 
+   */
+  getRDSDatabaseRecommendationProjectedMetrics(params: ComputeOptimizer.Types.GetRDSDatabaseRecommendationProjectedMetricsRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.GetRDSDatabaseRecommendationProjectedMetricsResponse) => void): Request<ComputeOptimizer.Types.GetRDSDatabaseRecommendationProjectedMetricsResponse, AWSError>;
+  /**
+   *  Returns the projected metrics of Amazon RDS recommendations. 
+   */
+  getRDSDatabaseRecommendationProjectedMetrics(callback?: (err: AWSError, data: ComputeOptimizer.Types.GetRDSDatabaseRecommendationProjectedMetricsResponse) => void): Request<ComputeOptimizer.Types.GetRDSDatabaseRecommendationProjectedMetricsResponse, AWSError>;
+  /**
+   *  Returns Amazon RDS recommendations.  Compute Optimizer generates recommendations for Amazon RDS that meet a specific set of requirements. For more information, see the Supported resources and requirements in the Compute Optimizer User Guide.
+   */
+  getRDSDatabaseRecommendations(params: ComputeOptimizer.Types.GetRDSDatabaseRecommendationsRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.GetRDSDatabaseRecommendationsResponse) => void): Request<ComputeOptimizer.Types.GetRDSDatabaseRecommendationsResponse, AWSError>;
+  /**
+   *  Returns Amazon RDS recommendations.  Compute Optimizer generates recommendations for Amazon RDS that meet a specific set of requirements. For more information, see the Supported resources and requirements in the Compute Optimizer User Guide.
+   */
+  getRDSDatabaseRecommendations(callback?: (err: AWSError, data: ComputeOptimizer.Types.GetRDSDatabaseRecommendationsResponse) => void): Request<ComputeOptimizer.Types.GetRDSDatabaseRecommendationsResponse, AWSError>;
+  /**
    * Returns existing recommendation preferences, such as enhanced infrastructure metrics. Use the scope parameter to specify which preferences to return. You can specify to return preferences for an organization, a specific account ID, or a specific EC2 instance or Auto Scaling group Amazon Resource Name (ARN). For more information, see Activating enhanced infrastructure metrics in the Compute Optimizer User Guide.
    */
   getRecommendationPreferences(params: ComputeOptimizer.Types.GetRecommendationPreferencesRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.GetRecommendationPreferencesResponse) => void): Request<ComputeOptimizer.Types.GetRecommendationPreferencesResponse, AWSError>;
@@ -218,6 +242,7 @@ declare namespace ComputeOptimizer {
   export type AccountEnrollmentStatuses = AccountEnrollmentStatus[];
   export type AccountId = string;
   export type AccountIds = AccountId[];
+  export type AllocatedStorage = number;
   export type AutoScalingConfiguration = "TargetTrackingScalingCpu"|"TargetTrackingScalingMemory"|string;
   export type AutoScalingGroupArn = string;
   export type AutoScalingGroupArns = AutoScalingGroupArn[];
@@ -280,6 +305,10 @@ declare namespace ComputeOptimizer {
      */
     currentConfiguration?: AutoScalingGroupConfiguration;
     /**
+     *  Describes the GPU accelerator settings for the current instance type of the Auto Scaling group. 
+     */
+    currentInstanceGpuInfo?: GpuInfo;
+    /**
      * An array of objects that describe the recommendation options for the Auto Scaling group.
      */
     recommendationOptions?: AutoScalingGroupRecommendationOptions;
@@ -299,16 +328,16 @@ declare namespace ComputeOptimizer {
      * The applications that might be running on the instances in the Auto Scaling group as inferred by Compute Optimizer. Compute Optimizer can infer if one of the following applications might be running on the instances:    AmazonEmr - Infers that Amazon EMR might be running on the instances.    ApacheCassandra - Infers that Apache Cassandra might be running on the instances.    ApacheHadoop - Infers that Apache Hadoop might be running on the instances.    Memcached - Infers that Memcached might be running on the instances.    NGINX - Infers that NGINX might be running on the instances.    PostgreSql - Infers that PostgreSQL might be running on the instances.    Redis - Infers that Redis might be running on the instances.    Kafka - Infers that Kafka might be running on the instance.    SQLServer - Infers that SQLServer might be running on the instance.  
      */
     inferredWorkloadTypes?: InferredWorkloadTypes;
-    /**
-     *  Describes the GPU accelerator settings for the current instance type of the Auto Scaling group. 
-     */
-    currentInstanceGpuInfo?: GpuInfo;
   }
   export interface AutoScalingGroupRecommendationOption {
     /**
      * An array of objects that describe an Auto Scaling group configuration.
      */
     configuration?: AutoScalingGroupConfiguration;
+    /**
+     *  Describes the GPU accelerator settings for the recommended instance type of the Auto Scaling group. 
+     */
+    instanceGpuInfo?: GpuInfo;
     /**
      * An array of objects that describe the projected utilization metrics of the Auto Scaling group recommendation option.  The Cpu and Memory metrics are the only projected utilization metrics returned. Additionally, the Memory metric is returned only for resources that have the unified CloudWatch agent installed on them. For more information, see Enabling Memory Utilization with the CloudWatch Agent. 
      */
@@ -326,17 +355,13 @@ declare namespace ComputeOptimizer {
      */
     savingsOpportunity?: SavingsOpportunity;
     /**
-     * The level of effort required to migrate from the current instance type to the recommended instance type. For example, the migration effort is Low if Amazon EMR is the inferred workload type and an Amazon Web Services Graviton instance type is recommended. The migration effort is Medium if a workload type couldn't be inferred but an Amazon Web Services Graviton instance type is recommended. The migration effort is VeryLow if both the current and recommended instance types are of the same CPU architecture.
-     */
-    migrationEffort?: MigrationEffort;
-    /**
-     *  Describes the GPU accelerator settings for the recommended instance type of the Auto Scaling group. 
-     */
-    instanceGpuInfo?: GpuInfo;
-    /**
      *  An object that describes the savings opportunity for the Auto Scaling group recommendation option that includes Savings Plans and Reserved Instances discounts. Savings opportunity includes the estimated monthly savings and percentage. 
      */
     savingsOpportunityAfterDiscounts?: AutoScalingGroupSavingsOpportunityAfterDiscounts;
+    /**
+     * The level of effort required to migrate from the current instance type to the recommended instance type. For example, the migration effort is Low if Amazon EMR is the inferred workload type and an Amazon Web Services Graviton instance type is recommended. The migration effort is Medium if a workload type couldn't be inferred but an Amazon Web Services Graviton instance type is recommended. The migration effort is VeryLow if both the current and recommended instance types are of the same CPU architecture.
+     */
+    migrationEffort?: MigrationEffort;
   }
   export type AutoScalingGroupRecommendationOptions = AutoScalingGroupRecommendationOption[];
   export type AutoScalingGroupRecommendations = AutoScalingGroupRecommendation[];
@@ -387,6 +412,7 @@ declare namespace ComputeOptimizer {
   export type CpuVendorArchitectures = CpuVendorArchitecture[];
   export type CreationTimestamp = Date;
   export type Currency = "USD"|"CNY"|string;
+  export type CurrentDBInstanceClass = string;
   export type CurrentInstanceType = string;
   export type CurrentPerformanceRisk = "VeryLow"|"Low"|"Medium"|"High"|string;
   export interface CurrentPerformanceRiskRatings {
@@ -420,9 +446,32 @@ declare namespace ComputeOptimizer {
     headroom?: CustomizableMetricHeadroom;
   }
   export type CustomizableMetricThreshold = "P90"|"P95"|"P99_5"|string;
+  export type DBInstanceClass = string;
+  export interface DBStorageConfiguration {
+    /**
+     *  The type of RDS storage. 
+     */
+    storageType?: StorageType;
+    /**
+     *  The size of the RDS storage in gigabytes (GB). 
+     */
+    allocatedStorage?: AllocatedStorage;
+    /**
+     *  The provisioned IOPs of the RDS storage. 
+     */
+    iops?: NullableIOPS;
+    /**
+     *  The maximum limit in gibibytes (GiB) to which Amazon RDS can automatically scale the storage of the RDS instance. 
+     */
+    maxAllocatedStorage?: NullableMaxAllocatedStorage;
+    /**
+     *  The storage throughput of the RDS storage. 
+     */
+    storageThroughput?: NullableStorageThroughput;
+  }
   export interface DeleteRecommendationPreferencesRequest {
     /**
-     * The target resource type of the recommendation preference to delete. The Ec2Instance option encompasses standalone instances and instances that are part of Auto Scaling groups. The AutoScalingGroup option encompasses only instances that are part of an Auto Scaling group.  The valid values for this parameter are Ec2Instance and AutoScalingGroup. 
+     * The target resource type of the recommendation preference to delete. The Ec2Instance option encompasses standalone instances and instances that are part of Auto Scaling groups. The AutoScalingGroup option encompasses only instances that are part of an Auto Scaling group.
      */
     resourceType: ResourceType;
     /**
@@ -650,13 +699,13 @@ declare namespace ComputeOptimizer {
      */
     currentPerformanceRisk?: CurrentPerformanceRisk;
     /**
-     *  A list of tags assigned to your Amazon ECS service recommendations. 
-     */
-    tags?: Tags;
-    /**
      *  Describes the effective recommendation preferences for Amazon ECS services. 
      */
     effectiveRecommendationPreferences?: ECSEffectiveRecommendationPreferences;
+    /**
+     *  A list of tags assigned to your Amazon ECS service recommendations. 
+     */
+    tags?: Tags;
   }
   export interface ECSServiceRecommendationFilter {
     /**
@@ -684,6 +733,10 @@ declare namespace ComputeOptimizer {
     cpu?: NullableCpu;
     savingsOpportunity?: SavingsOpportunity;
     /**
+     *  Describes the savings opportunity for Amazon ECS service recommendations or for the recommendation option.  Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts. You can achieve this by implementing a given Compute Optimizer recommendation.
+     */
+    savingsOpportunityAfterDiscounts?: ECSSavingsOpportunityAfterDiscounts;
+    /**
      *  An array of objects that describe the projected utilization metrics of the Amazon ECS service recommendation option. 
      */
     projectedUtilizationMetrics?: ECSServiceProjectedUtilizationMetrics;
@@ -691,10 +744,6 @@ declare namespace ComputeOptimizer {
      *  The CPU and memory size recommendations for the containers within the task of your Amazon ECS service. 
      */
     containerRecommendations?: ContainerRecommendations;
-    /**
-     *  Describes the savings opportunity for Amazon ECS service recommendations or for the recommendation option.  Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts. You can achieve this by implementing a given Compute Optimizer recommendation.
-     */
-    savingsOpportunityAfterDiscounts?: ECSSavingsOpportunityAfterDiscounts;
   }
   export type ECSServiceRecommendationOptions = ECSServiceRecommendationOption[];
   export type ECSServiceRecommendations = ECSServiceRecommendation[];
@@ -749,7 +798,7 @@ declare namespace ComputeOptimizer {
   export type EffectivePreferredResources = EffectivePreferredResource[];
   export interface EffectiveRecommendationPreferences {
     /**
-     * Describes the CPU vendor and architecture for an instance or Auto Scaling group recommendations. For example, when you specify AWS_ARM64 with:   A GetEC2InstanceRecommendations or GetAutoScalingGroupRecommendations request, Compute Optimizer returns recommendations that consist of Graviton2 instance types only.   A GetEC2RecommendationProjectedMetrics request, Compute Optimizer returns projected utilization metrics for Graviton2 instance type recommendations only.   A ExportEC2InstanceRecommendations or ExportAutoScalingGroupRecommendations request, Compute Optimizer exports recommendations that consist of Graviton2 instance types only.  
+     * Describes the CPU vendor and architecture for an instance or Auto Scaling group recommendations. For example, when you specify AWS_ARM64 with:   A GetEC2InstanceRecommendations or GetAutoScalingGroupRecommendations request, Compute Optimizer returns recommendations that consist of Graviton instance types only.   A GetEC2RecommendationProjectedMetrics request, Compute Optimizer returns projected utilization metrics for Graviton instance type recommendations only.   A ExportEC2InstanceRecommendations or ExportAutoScalingGroupRecommendations request, Compute Optimizer exports recommendations that consist of Graviton instance types only.  
      */
     cpuVendorArchitectures?: CpuVendorArchitectures;
     /**
@@ -781,6 +830,8 @@ declare namespace ComputeOptimizer {
      */
     savingsEstimationMode?: InstanceSavingsEstimationMode;
   }
+  export type Engine = string;
+  export type EngineVersion = string;
   export type EnhancedInfrastructureMetrics = "Active"|"Inactive"|string;
   export interface EnrollmentFilter {
     /**
@@ -1010,17 +1061,50 @@ declare namespace ComputeOptimizer {
     jobId?: JobId;
     s3Destination?: S3Destination;
   }
-  export type ExportableAutoScalingGroupField = "AccountId"|"AutoScalingGroupArn"|"AutoScalingGroupName"|"Finding"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsEbsReadOpsPerSecondMaximum"|"UtilizationMetricsEbsWriteOpsPerSecondMaximum"|"UtilizationMetricsEbsReadBytesPerSecondMaximum"|"UtilizationMetricsEbsWriteBytesPerSecondMaximum"|"UtilizationMetricsDiskReadOpsPerSecondMaximum"|"UtilizationMetricsDiskWriteOpsPerSecondMaximum"|"UtilizationMetricsDiskReadBytesPerSecondMaximum"|"UtilizationMetricsDiskWriteBytesPerSecondMaximum"|"UtilizationMetricsNetworkInBytesPerSecondMaximum"|"UtilizationMetricsNetworkOutBytesPerSecondMaximum"|"UtilizationMetricsNetworkPacketsInPerSecondMaximum"|"UtilizationMetricsNetworkPacketsOutPerSecondMaximum"|"LookbackPeriodInDays"|"CurrentConfigurationInstanceType"|"CurrentConfigurationDesiredCapacity"|"CurrentConfigurationMinSize"|"CurrentConfigurationMaxSize"|"CurrentOnDemandPrice"|"CurrentStandardOneYearNoUpfrontReservedPrice"|"CurrentStandardThreeYearNoUpfrontReservedPrice"|"CurrentVCpus"|"CurrentMemory"|"CurrentStorage"|"CurrentNetwork"|"RecommendationOptionsConfigurationInstanceType"|"RecommendationOptionsConfigurationDesiredCapacity"|"RecommendationOptionsConfigurationMinSize"|"RecommendationOptionsConfigurationMaxSize"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"RecommendationOptionsPerformanceRisk"|"RecommendationOptionsOnDemandPrice"|"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice"|"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice"|"RecommendationOptionsVcpus"|"RecommendationOptionsMemory"|"RecommendationOptionsStorage"|"RecommendationOptionsNetwork"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"EffectiveRecommendationPreferencesCpuVendorArchitectures"|"EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics"|"EffectiveRecommendationPreferencesInferredWorkloadTypes"|"InferredWorkloadTypes"|"RecommendationOptionsMigrationEffort"|"CurrentInstanceGpuInfo"|"RecommendationOptionsInstanceGpuInfo"|"UtilizationMetricsGpuPercentageMaximum"|"UtilizationMetricsGpuMemoryPercentageMaximum"|"RecommendationOptionsProjectedUtilizationMetricsGpuPercentageMaximum"|"RecommendationOptionsProjectedUtilizationMetricsGpuMemoryPercentageMaximum"|"EffectiveRecommendationPreferencesSavingsEstimationMode"|"RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts"|"RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"|"EffectiveRecommendationPreferencesPreferredResources"|"EffectiveRecommendationPreferencesLookBackPeriod"|string;
+  export interface ExportRDSDatabaseRecommendationsRequest {
+    /**
+     *  The Amazon Web Services account IDs for the export Amazon RDS recommendations.  If your account is the management account or the delegated administrator of an organization, use this parameter to specify the member account you want to export recommendations to. This parameter can't be specified together with the include member accounts parameter. The parameters are mutually exclusive. If this parameter or the include member accounts parameter is omitted, the recommendations for member accounts aren't included in the export. You can specify multiple account IDs per request.
+     */
+    accountIds?: AccountIds;
+    /**
+     *  An array of objects to specify a filter that exports a more specific set of Amazon RDS recommendations. 
+     */
+    filters?: RDSDBRecommendationFilters;
+    /**
+     * The recommendations data to include in the export file. For more information about the fields that can be exported, see Exported files in the Compute Optimizer User Guide.
+     */
+    fieldsToExport?: ExportableRDSDBFields;
+    s3DestinationConfig: S3DestinationConfig;
+    /**
+     *  The format of the export file.  The CSV file is the only export file format currently supported.
+     */
+    fileFormat?: FileFormat;
+    /**
+     * If your account is the management account or the delegated administrator of an organization, this parameter indicates whether to include recommendations for resources in all member accounts of the organization. The member accounts must also be opted in to Compute Optimizer, and trusted access for Compute Optimizer must be enabled in the organization account. For more information, see Compute Optimizer and Amazon Web Services Organizations trusted access in the Compute Optimizer User Guide. If this parameter is omitted, recommendations for member accounts of the organization aren't included in the export file. If this parameter or the account ID parameter is omitted, recommendations for member accounts aren't included in the export.
+     */
+    includeMemberAccounts?: IncludeMemberAccounts;
+    recommendationPreferences?: RecommendationPreferences;
+  }
+  export interface ExportRDSDatabaseRecommendationsResponse {
+    /**
+     *  The identification number of the export job.  To view the status of an export job, use the DescribeRecommendationExportJobs action and specify the job ID. 
+     */
+    jobId?: JobId;
+    s3Destination?: S3Destination;
+  }
+  export type ExportableAutoScalingGroupField = "AccountId"|"AutoScalingGroupArn"|"AutoScalingGroupName"|"Finding"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsEbsReadOpsPerSecondMaximum"|"UtilizationMetricsEbsWriteOpsPerSecondMaximum"|"UtilizationMetricsEbsReadBytesPerSecondMaximum"|"UtilizationMetricsEbsWriteBytesPerSecondMaximum"|"UtilizationMetricsDiskReadOpsPerSecondMaximum"|"UtilizationMetricsDiskWriteOpsPerSecondMaximum"|"UtilizationMetricsDiskReadBytesPerSecondMaximum"|"UtilizationMetricsDiskWriteBytesPerSecondMaximum"|"UtilizationMetricsNetworkInBytesPerSecondMaximum"|"UtilizationMetricsNetworkOutBytesPerSecondMaximum"|"UtilizationMetricsNetworkPacketsInPerSecondMaximum"|"UtilizationMetricsNetworkPacketsOutPerSecondMaximum"|"LookbackPeriodInDays"|"CurrentConfigurationInstanceType"|"CurrentConfigurationDesiredCapacity"|"CurrentConfigurationMinSize"|"CurrentConfigurationMaxSize"|"CurrentOnDemandPrice"|"CurrentStandardOneYearNoUpfrontReservedPrice"|"CurrentStandardThreeYearNoUpfrontReservedPrice"|"CurrentVCpus"|"CurrentMemory"|"CurrentStorage"|"CurrentNetwork"|"RecommendationOptionsConfigurationInstanceType"|"RecommendationOptionsConfigurationDesiredCapacity"|"RecommendationOptionsConfigurationMinSize"|"RecommendationOptionsConfigurationMaxSize"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"RecommendationOptionsPerformanceRisk"|"RecommendationOptionsOnDemandPrice"|"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice"|"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice"|"RecommendationOptionsVcpus"|"RecommendationOptionsMemory"|"RecommendationOptionsStorage"|"RecommendationOptionsNetwork"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"EffectiveRecommendationPreferencesCpuVendorArchitectures"|"EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics"|"EffectiveRecommendationPreferencesInferredWorkloadTypes"|"EffectiveRecommendationPreferencesPreferredResources"|"EffectiveRecommendationPreferencesLookBackPeriod"|"InferredWorkloadTypes"|"RecommendationOptionsMigrationEffort"|"CurrentInstanceGpuInfo"|"RecommendationOptionsInstanceGpuInfo"|"UtilizationMetricsGpuPercentageMaximum"|"UtilizationMetricsGpuMemoryPercentageMaximum"|"RecommendationOptionsProjectedUtilizationMetricsGpuPercentageMaximum"|"RecommendationOptionsProjectedUtilizationMetricsGpuMemoryPercentageMaximum"|"EffectiveRecommendationPreferencesSavingsEstimationMode"|"RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts"|"RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"|string;
   export type ExportableAutoScalingGroupFields = ExportableAutoScalingGroupField[];
   export type ExportableECSServiceField = "AccountId"|"ServiceArn"|"LookbackPeriodInDays"|"LastRefreshTimestamp"|"LaunchType"|"CurrentPerformanceRisk"|"CurrentServiceConfigurationMemory"|"CurrentServiceConfigurationCpu"|"CurrentServiceConfigurationTaskDefinitionArn"|"CurrentServiceConfigurationAutoScalingConfiguration"|"CurrentServiceContainerConfigurations"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"Finding"|"FindingReasonCodes"|"RecommendationOptionsMemory"|"RecommendationOptionsCpu"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"RecommendationOptionsContainerRecommendations"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"Tags"|"EffectiveRecommendationPreferencesSavingsEstimationMode"|"RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts"|"RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"|string;
   export type ExportableECSServiceFields = ExportableECSServiceField[];
-  export type ExportableInstanceField = "AccountId"|"InstanceArn"|"InstanceName"|"Finding"|"FindingReasonCodes"|"LookbackPeriodInDays"|"CurrentInstanceType"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsEbsReadOpsPerSecondMaximum"|"UtilizationMetricsEbsWriteOpsPerSecondMaximum"|"UtilizationMetricsEbsReadBytesPerSecondMaximum"|"UtilizationMetricsEbsWriteBytesPerSecondMaximum"|"UtilizationMetricsDiskReadOpsPerSecondMaximum"|"UtilizationMetricsDiskWriteOpsPerSecondMaximum"|"UtilizationMetricsDiskReadBytesPerSecondMaximum"|"UtilizationMetricsDiskWriteBytesPerSecondMaximum"|"UtilizationMetricsNetworkInBytesPerSecondMaximum"|"UtilizationMetricsNetworkOutBytesPerSecondMaximum"|"UtilizationMetricsNetworkPacketsInPerSecondMaximum"|"UtilizationMetricsNetworkPacketsOutPerSecondMaximum"|"CurrentOnDemandPrice"|"CurrentStandardOneYearNoUpfrontReservedPrice"|"CurrentStandardThreeYearNoUpfrontReservedPrice"|"CurrentVCpus"|"CurrentMemory"|"CurrentStorage"|"CurrentNetwork"|"RecommendationOptionsInstanceType"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"RecommendationOptionsPlatformDifferences"|"RecommendationOptionsPerformanceRisk"|"RecommendationOptionsVcpus"|"RecommendationOptionsMemory"|"RecommendationOptionsStorage"|"RecommendationOptionsNetwork"|"RecommendationOptionsOnDemandPrice"|"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice"|"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice"|"RecommendationsSourcesRecommendationSourceArn"|"RecommendationsSourcesRecommendationSourceType"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"EffectiveRecommendationPreferencesCpuVendorArchitectures"|"EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics"|"EffectiveRecommendationPreferencesInferredWorkloadTypes"|"InferredWorkloadTypes"|"RecommendationOptionsMigrationEffort"|"EffectiveRecommendationPreferencesExternalMetricsSource"|"InstanceState"|"Tags"|"ExternalMetricStatusCode"|"ExternalMetricStatusReason"|"CurrentInstanceGpuInfo"|"RecommendationOptionsInstanceGpuInfo"|"UtilizationMetricsGpuPercentageMaximum"|"UtilizationMetricsGpuMemoryPercentageMaximum"|"RecommendationOptionsProjectedUtilizationMetricsGpuPercentageMaximum"|"RecommendationOptionsProjectedUtilizationMetricsGpuMemoryPercentageMaximum"|"Idle"|"EffectiveRecommendationPreferencesPreferredResources"|"EffectiveRecommendationPreferencesLookBackPeriod"|"EffectiveRecommendationPreferencesUtilizationPreferences"|"EffectiveRecommendationPreferencesSavingsEstimationMode"|"RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts"|"RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"|string;
+  export type ExportableInstanceField = "AccountId"|"InstanceArn"|"InstanceName"|"Finding"|"FindingReasonCodes"|"LookbackPeriodInDays"|"CurrentInstanceType"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsEbsReadOpsPerSecondMaximum"|"UtilizationMetricsEbsWriteOpsPerSecondMaximum"|"UtilizationMetricsEbsReadBytesPerSecondMaximum"|"UtilizationMetricsEbsWriteBytesPerSecondMaximum"|"UtilizationMetricsDiskReadOpsPerSecondMaximum"|"UtilizationMetricsDiskWriteOpsPerSecondMaximum"|"UtilizationMetricsDiskReadBytesPerSecondMaximum"|"UtilizationMetricsDiskWriteBytesPerSecondMaximum"|"UtilizationMetricsNetworkInBytesPerSecondMaximum"|"UtilizationMetricsNetworkOutBytesPerSecondMaximum"|"UtilizationMetricsNetworkPacketsInPerSecondMaximum"|"UtilizationMetricsNetworkPacketsOutPerSecondMaximum"|"CurrentOnDemandPrice"|"CurrentStandardOneYearNoUpfrontReservedPrice"|"CurrentStandardThreeYearNoUpfrontReservedPrice"|"CurrentVCpus"|"CurrentMemory"|"CurrentStorage"|"CurrentNetwork"|"RecommendationOptionsInstanceType"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"RecommendationOptionsPlatformDifferences"|"RecommendationOptionsPerformanceRisk"|"RecommendationOptionsVcpus"|"RecommendationOptionsMemory"|"RecommendationOptionsStorage"|"RecommendationOptionsNetwork"|"RecommendationOptionsOnDemandPrice"|"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice"|"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice"|"RecommendationsSourcesRecommendationSourceArn"|"RecommendationsSourcesRecommendationSourceType"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"EffectiveRecommendationPreferencesCpuVendorArchitectures"|"EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics"|"EffectiveRecommendationPreferencesInferredWorkloadTypes"|"InferredWorkloadTypes"|"RecommendationOptionsMigrationEffort"|"EffectiveRecommendationPreferencesExternalMetricsSource"|"Tags"|"InstanceState"|"ExternalMetricStatusCode"|"ExternalMetricStatusReason"|"CurrentInstanceGpuInfo"|"RecommendationOptionsInstanceGpuInfo"|"UtilizationMetricsGpuPercentageMaximum"|"UtilizationMetricsGpuMemoryPercentageMaximum"|"RecommendationOptionsProjectedUtilizationMetricsGpuPercentageMaximum"|"RecommendationOptionsProjectedUtilizationMetricsGpuMemoryPercentageMaximum"|"Idle"|"EffectiveRecommendationPreferencesPreferredResources"|"EffectiveRecommendationPreferencesLookBackPeriod"|"EffectiveRecommendationPreferencesUtilizationPreferences"|"EffectiveRecommendationPreferencesSavingsEstimationMode"|"RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts"|"RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"|string;
   export type ExportableInstanceFields = ExportableInstanceField[];
   export type ExportableLambdaFunctionField = "AccountId"|"FunctionArn"|"FunctionVersion"|"Finding"|"FindingReasonCodes"|"NumberOfInvocations"|"UtilizationMetricsDurationMaximum"|"UtilizationMetricsDurationAverage"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsMemoryAverage"|"LookbackPeriodInDays"|"CurrentConfigurationMemorySize"|"CurrentConfigurationTimeout"|"CurrentCostTotal"|"CurrentCostAverage"|"RecommendationOptionsConfigurationMemorySize"|"RecommendationOptionsCostLow"|"RecommendationOptionsCostHigh"|"RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound"|"RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound"|"RecommendationOptionsProjectedUtilizationMetricsDurationExpected"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"Tags"|"EffectiveRecommendationPreferencesSavingsEstimationMode"|"RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts"|"RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"|string;
   export type ExportableLambdaFunctionFields = ExportableLambdaFunctionField[];
   export type ExportableLicenseField = "AccountId"|"ResourceArn"|"LookbackPeriodInDays"|"LastRefreshTimestamp"|"Finding"|"FindingReasonCodes"|"CurrentLicenseConfigurationNumberOfCores"|"CurrentLicenseConfigurationInstanceType"|"CurrentLicenseConfigurationOperatingSystem"|"CurrentLicenseConfigurationLicenseName"|"CurrentLicenseConfigurationLicenseEdition"|"CurrentLicenseConfigurationLicenseModel"|"CurrentLicenseConfigurationLicenseVersion"|"CurrentLicenseConfigurationMetricsSource"|"RecommendationOptionsOperatingSystem"|"RecommendationOptionsLicenseEdition"|"RecommendationOptionsLicenseModel"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"Tags"|string;
   export type ExportableLicenseFields = ExportableLicenseField[];
-  export type ExportableVolumeField = "AccountId"|"VolumeArn"|"Finding"|"UtilizationMetricsVolumeReadOpsPerSecondMaximum"|"UtilizationMetricsVolumeWriteOpsPerSecondMaximum"|"UtilizationMetricsVolumeReadBytesPerSecondMaximum"|"UtilizationMetricsVolumeWriteBytesPerSecondMaximum"|"LookbackPeriodInDays"|"CurrentConfigurationVolumeType"|"CurrentConfigurationVolumeBaselineIOPS"|"CurrentConfigurationVolumeBaselineThroughput"|"CurrentConfigurationVolumeBurstIOPS"|"CurrentConfigurationVolumeBurstThroughput"|"CurrentConfigurationVolumeSize"|"CurrentMonthlyPrice"|"RecommendationOptionsConfigurationVolumeType"|"RecommendationOptionsConfigurationVolumeBaselineIOPS"|"RecommendationOptionsConfigurationVolumeBaselineThroughput"|"RecommendationOptionsConfigurationVolumeBurstIOPS"|"RecommendationOptionsConfigurationVolumeBurstThroughput"|"RecommendationOptionsConfigurationVolumeSize"|"RecommendationOptionsMonthlyPrice"|"RecommendationOptionsPerformanceRisk"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"RootVolume"|"Tags"|"CurrentConfigurationRootVolume"|"EffectiveRecommendationPreferencesSavingsEstimationMode"|"RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts"|"RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"|string;
+  export type ExportableRDSDBField = "ResourceArn"|"AccountId"|"Engine"|"EngineVersion"|"Idle"|"MultiAZDBInstance"|"CurrentDBInstanceClass"|"CurrentStorageConfigurationStorageType"|"CurrentStorageConfigurationAllocatedStorage"|"CurrentStorageConfigurationMaxAllocatedStorage"|"CurrentStorageConfigurationIOPS"|"CurrentStorageConfigurationStorageThroughput"|"CurrentInstanceOnDemandHourlyPrice"|"CurrentStorageOnDemandMonthlyPrice"|"LookbackPeriodInDays"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsEBSVolumeStorageSpaceUtilizationMaximum"|"UtilizationMetricsNetworkReceiveThroughputMaximum"|"UtilizationMetricsNetworkTransmitThroughputMaximum"|"UtilizationMetricsEBSVolumeReadIOPSMaximum"|"UtilizationMetricsEBSVolumeWriteIOPSMaximum"|"UtilizationMetricsEBSVolumeReadThroughputMaximum"|"UtilizationMetricsEBSVolumeWriteThroughputMaximum"|"UtilizationMetricsDatabaseConnectionsMaximum"|"InstanceFinding"|"InstanceFindingReasonCodes"|"StorageFinding"|"StorageFindingReasonCodes"|"InstanceRecommendationOptionsDBInstanceClass"|"InstanceRecommendationOptionsRank"|"InstanceRecommendationOptionsPerformanceRisk"|"InstanceRecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"StorageRecommendationOptionsStorageType"|"StorageRecommendationOptionsAllocatedStorage"|"StorageRecommendationOptionsMaxAllocatedStorage"|"StorageRecommendationOptionsIOPS"|"StorageRecommendationOptionsStorageThroughput"|"StorageRecommendationOptionsRank"|"InstanceRecommendationOptionsInstanceOnDemandHourlyPrice"|"InstanceRecommendationOptionsSavingsOpportunityPercentage"|"InstanceRecommendationOptionsEstimatedMonthlySavingsCurrency"|"InstanceRecommendationOptionsEstimatedMonthlySavingsValue"|"InstanceRecommendationOptionsSavingsOpportunityAfterDiscountsPercentage"|"InstanceRecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts"|"InstanceRecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"|"StorageRecommendationOptionsOnDemandMonthlyPrice"|"StorageRecommendationOptionsSavingsOpportunityPercentage"|"StorageRecommendationOptionsEstimatedMonthlySavingsCurrency"|"StorageRecommendationOptionsEstimatedMonthlySavingsValue"|"StorageRecommendationOptionsSavingsOpportunityAfterDiscountsPercentage"|"StorageRecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts"|"StorageRecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"|"EffectiveRecommendationPreferencesCpuVendorArchitectures"|"EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics"|"EffectiveRecommendationPreferencesLookBackPeriod"|"EffectiveRecommendationPreferencesSavingsEstimationMode"|"LastRefreshTimestamp"|"Tags"|string;
+  export type ExportableRDSDBFields = ExportableRDSDBField[];
+  export type ExportableVolumeField = "AccountId"|"VolumeArn"|"Finding"|"UtilizationMetricsVolumeReadOpsPerSecondMaximum"|"UtilizationMetricsVolumeWriteOpsPerSecondMaximum"|"UtilizationMetricsVolumeReadBytesPerSecondMaximum"|"UtilizationMetricsVolumeWriteBytesPerSecondMaximum"|"LookbackPeriodInDays"|"CurrentConfigurationVolumeType"|"CurrentConfigurationVolumeBaselineIOPS"|"CurrentConfigurationVolumeBaselineThroughput"|"CurrentConfigurationVolumeBurstIOPS"|"CurrentConfigurationVolumeBurstThroughput"|"CurrentConfigurationVolumeSize"|"CurrentMonthlyPrice"|"RecommendationOptionsConfigurationVolumeType"|"RecommendationOptionsConfigurationVolumeBaselineIOPS"|"RecommendationOptionsConfigurationVolumeBaselineThroughput"|"RecommendationOptionsConfigurationVolumeBurstIOPS"|"RecommendationOptionsConfigurationVolumeBurstThroughput"|"RecommendationOptionsConfigurationVolumeSize"|"RecommendationOptionsMonthlyPrice"|"RecommendationOptionsPerformanceRisk"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"Tags"|"RootVolume"|"CurrentConfigurationRootVolume"|"EffectiveRecommendationPreferencesSavingsEstimationMode"|"RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts"|"RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"|string;
   export type ExportableVolumeFields = ExportableVolumeField[];
   export interface ExternalMetricStatus {
     /**
@@ -1418,6 +1502,72 @@ declare namespace ComputeOptimizer {
      */
     errors?: GetRecommendationErrors;
   }
+  export interface GetRDSDatabaseRecommendationProjectedMetricsRequest {
+    /**
+     *  The ARN that identifies the Amazon RDS.   The following is the format of the ARN:   arn:aws:rds:{region}:{accountId}:db:{resourceName} 
+     */
+    resourceArn: ResourceArn;
+    /**
+     *  The statistic of the projected metrics. 
+     */
+    stat: MetricStatistic;
+    /**
+     *  The granularity, in seconds, of the projected metrics data points. 
+     */
+    period: Period;
+    /**
+     *  The timestamp of the first projected metrics data point to return. 
+     */
+    startTime: Timestamp;
+    /**
+     *  The timestamp of the last projected metrics data point to return. 
+     */
+    endTime: Timestamp;
+    recommendationPreferences?: RecommendationPreferences;
+  }
+  export interface GetRDSDatabaseRecommendationProjectedMetricsResponse {
+    /**
+     *  An array of objects that describes the projected metrics. 
+     */
+    recommendedOptionProjectedMetrics?: RDSDatabaseRecommendedOptionProjectedMetrics;
+  }
+  export interface GetRDSDatabaseRecommendationsRequest {
+    /**
+     *  The ARN that identifies the Amazon RDS.   The following is the format of the ARN:   arn:aws:rds:{region}:{accountId}:db:{resourceName}   The following is the format of a DB Cluster ARN:   arn:aws:rds:{region}:{accountId}:cluster:{resourceName} 
+     */
+    resourceArns?: ResourceArns;
+    /**
+     *  The token to advance to the next page of Amazon RDS recommendations. 
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of Amazon RDS recommendations to return with a single request. To retrieve the remaining results, make another request with the returned nextToken value.
+     */
+    maxResults?: MaxResults;
+    /**
+     *  An array of objects to specify a filter that returns a more specific list of Amazon RDS recommendations. 
+     */
+    filters?: RDSDBRecommendationFilters;
+    /**
+     *  Return the Amazon RDS recommendations to the specified Amazon Web Services account IDs.  If your account is the management account or the delegated administrator of an organization, use this parameter to return the Amazon RDS recommendations to specific member accounts. You can only specify one account ID per request.
+     */
+    accountIds?: AccountIds;
+    recommendationPreferences?: RecommendationPreferences;
+  }
+  export interface GetRDSDatabaseRecommendationsResponse {
+    /**
+     *  The token to advance to the next page of Amazon RDS recommendations. 
+     */
+    nextToken?: NextToken;
+    /**
+     *  An array of objects that describe the Amazon RDS recommendations. 
+     */
+    rdsDBRecommendations?: RDSDBRecommendations;
+    /**
+     *  An array of objects that describe errors of the request. 
+     */
+    errors?: GetRecommendationErrors;
+  }
   export interface GetRecommendationError {
     /**
      * The ID of the error.
@@ -1435,7 +1585,7 @@ declare namespace ComputeOptimizer {
   export type GetRecommendationErrors = GetRecommendationError[];
   export interface GetRecommendationPreferencesRequest {
     /**
-     * The target resource type of the recommendation preference for which to return preferences. The Ec2Instance option encompasses standalone instances and instances that are part of Auto Scaling groups. The AutoScalingGroup option encompasses only instances that are part of an Auto Scaling group.  The valid values for this parameter are Ec2Instance and AutoScalingGroup. 
+     * The target resource type of the recommendation preference for which to return preferences. The Ec2Instance option encompasses standalone instances and instances that are part of Auto Scaling groups. The AutoScalingGroup option encompasses only instances that are part of an Auto Scaling group.
      */
     resourceType: ResourceType;
     /**
@@ -1506,6 +1656,7 @@ declare namespace ComputeOptimizer {
   export type Gpus = Gpu[];
   export type High = number;
   export type Identifier = string;
+  export type Idle = "True"|"False"|string;
   export type IncludeMemberAccounts = boolean;
   export interface InferredWorkloadSaving {
     /**
@@ -1553,7 +1704,7 @@ declare namespace ComputeOptimizer {
      */
     currentInstanceType?: CurrentInstanceType;
     /**
-     * The finding classification of the instance. Findings for instances include:     Underprovisioned —An instance is considered under-provisioned when at least one specification of your instance, such as CPU, memory, or network, does not meet the performance requirements of your workload. Under-provisioned instances may lead to poor application performance.     Overprovisioned —An instance is considered over-provisioned when at least one specification of your instance, such as CPU, memory, or network, can be sized down while still meeting the performance requirements of your workload, and no specification is under-provisioned. Over-provisioned instances may lead to unnecessary infrastructure cost.     Optimized —An instance is considered optimized when all specifications of your instance, such as CPU, memory, and network, meet the performance requirements of your workload and is not over provisioned. For optimized resources, Compute Optimizer might recommend a new generation instance type.  
+     * The finding classification of the instance. Findings for instances include:     Underprovisioned —An instance is considered under-provisioned when at least one specification of your instance, such as CPU, memory, or network, does not meet the performance requirements of your workload. Under-provisioned instances may lead to poor application performance.     Overprovisioned —An instance is considered over-provisioned when at least one specification of your instance, such as CPU, memory, or network, can be sized down while still meeting the performance requirements of your workload, and no specification is under-provisioned. Over-provisioned instances may lead to unnecessary infrastructure cost.     Optimized —An instance is considered optimized when all specifications of your instance, such as CPU, memory, and network, meet the performance requirements of your workload and is not over provisioned. For optimized resources, Compute Optimizer might recommend a new generation instance type.    The valid values in your API responses appear as OVER_PROVISIONED, UNDER_PROVISIONED, or OPTIMIZED. 
      */
     finding?: Finding;
     /**
@@ -1621,6 +1772,10 @@ declare namespace ComputeOptimizer {
      */
     instanceType?: InstanceType;
     /**
+     *  Describes the GPU accelerator settings for the recommended instance type. 
+     */
+    instanceGpuInfo?: GpuInfo;
+    /**
      * An array of objects that describe the projected utilization metrics of the instance recommendation option.  The Cpu and Memory metrics are the only projected utilization metrics returned. Additionally, the Memory metric is returned only for resources that have the unified CloudWatch agent installed on them. For more information, see Enabling Memory Utilization with the CloudWatch Agent. 
      */
     projectedUtilizationMetrics?: ProjectedUtilizationMetrics;
@@ -1641,17 +1796,13 @@ declare namespace ComputeOptimizer {
      */
     savingsOpportunity?: SavingsOpportunity;
     /**
-     * The level of effort required to migrate from the current instance type to the recommended instance type. For example, the migration effort is Low if Amazon EMR is the inferred workload type and an Amazon Web Services Graviton instance type is recommended. The migration effort is Medium if a workload type couldn't be inferred but an Amazon Web Services Graviton instance type is recommended. The migration effort is VeryLow if both the current and recommended instance types are of the same CPU architecture.
-     */
-    migrationEffort?: MigrationEffort;
-    /**
-     *  Describes the GPU accelerator settings for the recommended instance type. 
-     */
-    instanceGpuInfo?: GpuInfo;
-    /**
      *  An object that describes the savings opportunity for the instance recommendation option that includes Savings Plans and Reserved Instances discounts. Savings opportunity includes the estimated monthly savings and percentage. 
      */
     savingsOpportunityAfterDiscounts?: InstanceSavingsOpportunityAfterDiscounts;
+    /**
+     * The level of effort required to migrate from the current instance type to the recommended instance type. For example, the migration effort is Low if Amazon EMR is the inferred workload type and an Amazon Web Services Graviton instance type is recommended. The migration effort is Medium if a workload type couldn't be inferred but an Amazon Web Services Graviton instance type is recommended. The migration effort is VeryLow if both the current and recommended instance types are of the same CPU architecture.
+     */
+    migrationEffort?: MigrationEffort;
   }
   export type InstanceRecommendations = InstanceRecommendation[];
   export interface InstanceSavingsEstimationMode {
@@ -1796,13 +1947,13 @@ declare namespace ComputeOptimizer {
      */
     currentPerformanceRisk?: CurrentPerformanceRisk;
     /**
-     *  A list of tags assigned to your Lambda function recommendations. 
-     */
-    tags?: Tags;
-    /**
      *  Describes the effective recommendation preferences for Lambda functions. 
      */
     effectiveRecommendationPreferences?: LambdaEffectiveRecommendationPreferences;
+    /**
+     *  A list of tags assigned to your Lambda function recommendations. 
+     */
+    tags?: Tags;
   }
   export interface LambdaFunctionRecommendationFilter {
     /**
@@ -2008,8 +2159,11 @@ declare namespace ComputeOptimizer {
   export type MinSize = number;
   export type NextToken = string;
   export type NullableCpu = number;
+  export type NullableIOPS = number;
+  export type NullableMaxAllocatedStorage = number;
   export type NullableMemory = number;
   export type NullableMemoryReservation = number;
+  export type NullableStorageThroughput = number;
   export type NumberOfCores = number;
   export type NumberOfInvocations = number;
   export type NumberOfMemberAccountsOptedIn = number;
@@ -2054,7 +2208,7 @@ declare namespace ComputeOptimizer {
   export type ProjectedUtilizationMetrics = UtilizationMetric[];
   export interface PutRecommendationPreferencesRequest {
     /**
-     * The target resource type of the recommendation preference to create. The Ec2Instance option encompasses standalone instances and instances that are part of Auto Scaling groups. The AutoScalingGroup option encompasses only instances that are part of an Auto Scaling group.  The valid values for this parameter are Ec2Instance and AutoScalingGroup. 
+     * The target resource type of the recommendation preference to create. The Ec2Instance option encompasses standalone instances and instances that are part of Auto Scaling groups. The AutoScalingGroup option encompasses only instances that are part of an Auto Scaling group.
      */
     resourceType: ResourceType;
     /**
@@ -2091,6 +2245,252 @@ declare namespace ComputeOptimizer {
     savingsEstimationMode?: SavingsEstimationMode;
   }
   export interface PutRecommendationPreferencesResponse {
+  }
+  export interface RDSDBInstanceRecommendationOption {
+    /**
+     *  Describes the DB instance class recommendation option for your Amazon RDS instance. 
+     */
+    dbInstanceClass?: DBInstanceClass;
+    /**
+     *  An array of objects that describe the projected utilization metrics of the RDS instance recommendation option. 
+     */
+    projectedUtilizationMetrics?: RDSDBProjectedUtilizationMetrics;
+    /**
+     *  The performance risk of the RDS instance recommendation option. 
+     */
+    performanceRisk?: PerformanceRisk;
+    /**
+     *  The rank identifier of the RDS instance recommendation option. 
+     */
+    rank?: Rank;
+    savingsOpportunity?: SavingsOpportunity;
+    /**
+     *  Describes the savings opportunity for Amazon RDS recommendations or for the recommendation option.  Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts. You can achieve this by implementing a given Compute Optimizer recommendation.
+     */
+    savingsOpportunityAfterDiscounts?: RDSInstanceSavingsOpportunityAfterDiscounts;
+  }
+  export type RDSDBInstanceRecommendationOptions = RDSDBInstanceRecommendationOption[];
+  export type RDSDBMetricName = "CPU"|"Memory"|"EBSVolumeStorageSpaceUtilization"|"NetworkReceiveThroughput"|"NetworkTransmitThroughput"|"EBSVolumeReadIOPS"|"EBSVolumeWriteIOPS"|"EBSVolumeReadThroughput"|"EBSVolumeWriteThroughput"|"DatabaseConnections"|string;
+  export type RDSDBMetricStatistic = "Maximum"|"Minimum"|"Average"|string;
+  export type RDSDBProjectedUtilizationMetrics = RDSDBUtilizationMetric[];
+  export interface RDSDBRecommendation {
+    /**
+     *  The ARN of the current Amazon RDS.   The following is the format of the ARN:   arn:aws:rds:{region}:{accountId}:db:{resourceName} 
+     */
+    resourceArn?: ResourceArn;
+    /**
+     *  The Amazon Web Services account ID of the Amazon RDS. 
+     */
+    accountId?: AccountId;
+    /**
+     *  The engine of the RDS instance. 
+     */
+    engine?: Engine;
+    /**
+     *  The database engine version. 
+     */
+    engineVersion?: EngineVersion;
+    /**
+     *  The DB instance class of the current RDS instance. 
+     */
+    currentDBInstanceClass?: CurrentDBInstanceClass;
+    /**
+     *  The configuration of the current RDS storage. 
+     */
+    currentStorageConfiguration?: DBStorageConfiguration;
+    /**
+     *  This indicates if the RDS instance is idle or not. 
+     */
+    idle?: Idle;
+    /**
+     *  The finding classification of an Amazon RDS instance.  Findings for Amazon RDS instance include:     Underprovisioned  — When Compute Optimizer detects that there’s not enough resource specifications, an Amazon RDS is considered under-provisioned.     Overprovisioned  — When Compute Optimizer detects that there’s excessive resource specifications, an Amazon RDS is considered over-provisioned.     Optimized  — When the specifications of your Amazon RDS instance meet the performance requirements of your workload, the service is considered optimized.  
+     */
+    instanceFinding?: RDSInstanceFinding;
+    /**
+     *  The finding classification of Amazon RDS storage.  Findings for Amazon RDS instance include:     Underprovisioned  — When Compute Optimizer detects that there’s not enough storage, an Amazon RDS is considered under-provisioned.     Overprovisioned  — When Compute Optimizer detects that there’s excessive storage, an Amazon RDS is considered over-provisioned.     Optimized  — When the storage of your Amazon RDS meet the performance requirements of your workload, the service is considered optimized.  
+     */
+    storageFinding?: RDSStorageFinding;
+    /**
+     *  The reason for the finding classification of an Amazon RDS instance. 
+     */
+    instanceFindingReasonCodes?: RDSInstanceFindingReasonCodes;
+    /**
+     *  The reason for the finding classification of Amazon RDS storage. 
+     */
+    storageFindingReasonCodes?: RDSStorageFindingReasonCodes;
+    /**
+     *  An array of objects that describe the recommendation options for the Amazon RDS instance. 
+     */
+    instanceRecommendationOptions?: RDSDBInstanceRecommendationOptions;
+    /**
+     *  An array of objects that describe the recommendation options for Amazon RDS storage. 
+     */
+    storageRecommendationOptions?: RDSDBStorageRecommendationOptions;
+    /**
+     *  An array of objects that describe the utilization metrics of the Amazon RDS. 
+     */
+    utilizationMetrics?: RDSDBUtilizationMetrics;
+    /**
+     *  Describes the effective recommendation preferences for Amazon RDS. 
+     */
+    effectiveRecommendationPreferences?: RDSEffectiveRecommendationPreferences;
+    /**
+     *  The number of days the Amazon RDS utilization metrics were analyzed. 
+     */
+    lookbackPeriodInDays?: LookBackPeriodInDays;
+    /**
+     *  The timestamp of when the Amazon RDS recommendation was last generated. 
+     */
+    lastRefreshTimestamp?: LastRefreshTimestamp;
+    /**
+     *  A list of tags assigned to your Amazon RDS recommendations. 
+     */
+    tags?: Tags;
+  }
+  export interface RDSDBRecommendationFilter {
+    /**
+     *  The name of the filter.   Specify Finding to return recommendations with a specific finding classification.  You can filter your Amazon RDS recommendations by tag:key and tag-key tags. A tag:key is a key and value combination of a tag assigned to your Amazon RDS recommendations. Use the tag key in the filter name and the tag value as the filter value. For example, to find all Amazon RDS service recommendations that have a tag with the key of Owner and the value of TeamA, specify tag:Owner for the filter name and TeamA for the filter value. A tag-key is the key of a tag assigned to your Amazon RDS recommendations. Use this filter to find all of your Amazon RDS recommendations that have a tag with a specific key. This doesn’t consider the tag value. For example, you can find your Amazon RDS service recommendations with a tag key value of Owner or without any tag keys assigned.
+     */
+    name?: RDSDBRecommendationFilterName;
+    /**
+     *  The value of the filter. 
+     */
+    values?: FilterValues;
+  }
+  export type RDSDBRecommendationFilterName = "InstanceFinding"|"InstanceFindingReasonCode"|"StorageFinding"|"StorageFindingReasonCode"|"Idle"|string;
+  export type RDSDBRecommendationFilters = RDSDBRecommendationFilter[];
+  export type RDSDBRecommendations = RDSDBRecommendation[];
+  export interface RDSDBStorageRecommendationOption {
+    /**
+     *  The recommended storage configuration. 
+     */
+    storageConfiguration?: DBStorageConfiguration;
+    /**
+     *  The rank identifier of the RDS storage recommendation option. 
+     */
+    rank?: Rank;
+    savingsOpportunity?: SavingsOpportunity;
+    /**
+     *  Describes the savings opportunity for Amazon RDS storage recommendations or for the recommendation option.   Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts. You can achieve this by implementing a given Compute Optimizer recommendation. 
+     */
+    savingsOpportunityAfterDiscounts?: RDSStorageSavingsOpportunityAfterDiscounts;
+  }
+  export type RDSDBStorageRecommendationOptions = RDSDBStorageRecommendationOption[];
+  export interface RDSDBUtilizationMetric {
+    /**
+     *  The name of the utilization metric. 
+     */
+    name?: RDSDBMetricName;
+    /**
+     *  The statistic of the utilization metric.  The Compute Optimizer API, Command Line Interface (CLI), and SDKs return utilization metrics using only the Maximum statistic, which is the highest value observed during the specified period. The Compute Optimizer console displays graphs for some utilization metrics using the Average statistic, which is the value of Sum / SampleCount during the specified period. For more information, see Viewing resource recommendations in the Compute Optimizer User Guide. You can also get averaged utilization metric data for your resources using Amazon CloudWatch. For more information, see the Amazon CloudWatch User Guide.
+     */
+    statistic?: RDSDBMetricStatistic;
+    /**
+     *  The value of the utilization metric. 
+     */
+    value?: MetricValue;
+  }
+  export type RDSDBUtilizationMetrics = RDSDBUtilizationMetric[];
+  export interface RDSDatabaseProjectedMetric {
+    /**
+     *  The name of the projected metric. 
+     */
+    name?: RDSDBMetricName;
+    /**
+     *  The timestamps of the projected metric. 
+     */
+    timestamps?: Timestamps;
+    /**
+     *  The values for the projected metric. 
+     */
+    values?: MetricValues;
+  }
+  export type RDSDatabaseProjectedMetrics = RDSDatabaseProjectedMetric[];
+  export interface RDSDatabaseRecommendedOptionProjectedMetric {
+    /**
+     *  The recommended DB instance class for the Amazon RDS. 
+     */
+    recommendedDBInstanceClass?: RecommendedDBInstanceClass;
+    /**
+     *  The rank identifier of the RDS instance recommendation option. 
+     */
+    rank?: Rank;
+    /**
+     *  An array of objects that describe the projected metric. 
+     */
+    projectedMetrics?: RDSDatabaseProjectedMetrics;
+  }
+  export type RDSDatabaseRecommendedOptionProjectedMetrics = RDSDatabaseRecommendedOptionProjectedMetric[];
+  export interface RDSEffectiveRecommendationPreferences {
+    /**
+     *  Describes the CPU vendor and architecture for Amazon RDS recommendations. 
+     */
+    cpuVendorArchitectures?: CpuVendorArchitectures;
+    /**
+     * Describes the activation status of the enhanced infrastructure metrics preference.  A status of Active confirms that the preference is applied in the latest recommendation refresh, and a status of Inactive confirms that it's not yet applied to recommendations.  For more information, see Enhanced infrastructure metrics in the Compute Optimizer User Guide. 
+     */
+    enhancedInfrastructureMetrics?: EnhancedInfrastructureMetrics;
+    /**
+     *  The number of days the utilization metrics of the Amazon RDS are analyzed. 
+     */
+    lookBackPeriod?: LookBackPeriodPreference;
+    /**
+     *  Describes the savings estimation mode preference applied for calculating savings opportunity for Amazon RDS. 
+     */
+    savingsEstimationMode?: RDSSavingsEstimationMode;
+  }
+  export interface RDSInstanceEstimatedMonthlySavings {
+    /**
+     *  The currency of the estimated monthly savings. 
+     */
+    currency?: Currency;
+    /**
+     *  The value of the estimated monthly savings for Amazon RDS instances. 
+     */
+    value?: Value;
+  }
+  export type RDSInstanceFinding = "Optimized"|"Underprovisioned"|"Overprovisioned"|string;
+  export type RDSInstanceFindingReasonCode = "CPUOverprovisioned"|"NetworkBandwidthOverprovisioned"|"EBSIOPSOverprovisioned"|"EBSThroughputOverprovisioned"|"CPUUnderprovisioned"|"NetworkBandwidthUnderprovisioned"|"EBSThroughputUnderprovisioned"|"NewGenerationDBInstanceClassAvailable"|"NewEngineVersionAvailable"|string;
+  export type RDSInstanceFindingReasonCodes = RDSInstanceFindingReasonCode[];
+  export interface RDSInstanceSavingsOpportunityAfterDiscounts {
+    /**
+     *  The estimated monthly savings possible as a percentage of monthly cost by adopting Compute Optimizer’s Amazon RDS instance recommendations. This includes any applicable Savings Plans discounts. 
+     */
+    savingsOpportunityPercentage?: SavingsOpportunityPercentage;
+    /**
+     *  The estimated monthly savings possible by adopting Compute Optimizer’s Amazon RDS instance recommendations. This includes any applicable Savings Plans discounts. 
+     */
+    estimatedMonthlySavings?: RDSInstanceEstimatedMonthlySavings;
+  }
+  export interface RDSSavingsEstimationMode {
+    /**
+     *  Describes the source for calculating the savings opportunity for Amazon RDS. 
+     */
+    source?: RDSSavingsEstimationModeSource;
+  }
+  export type RDSSavingsEstimationModeSource = "PublicPricing"|"CostExplorerRightsizing"|"CostOptimizationHub"|string;
+  export interface RDSStorageEstimatedMonthlySavings {
+    /**
+     *  The currency of the estimated monthly savings. 
+     */
+    currency?: Currency;
+    /**
+     *  The value of the estimated monthly savings for Amazon RDS storage. 
+     */
+    value?: Value;
+  }
+  export type RDSStorageFinding = "Optimized"|"Underprovisioned"|"Overprovisioned"|string;
+  export type RDSStorageFindingReasonCode = "EBSVolumeAllocatedStorageUnderprovisioned"|"EBSVolumeThroughputUnderprovisioned"|"EBSVolumeIOPSOverprovisioned"|"EBSVolumeThroughputOverprovisioned"|"NewGenerationStorageTypeAvailable"|string;
+  export type RDSStorageFindingReasonCodes = RDSStorageFindingReasonCode[];
+  export interface RDSStorageSavingsOpportunityAfterDiscounts {
+    /**
+     *  The estimated monthly savings possible as a percentage of monthly cost by adopting Compute Optimizer’s Amazon RDS storage recommendations. This includes any applicable Savings Plans discounts. 
+     */
+    savingsOpportunityPercentage?: SavingsOpportunityPercentage;
+    /**
+     *  The estimated monthly savings possible by adopting Compute Optimizer’s Amazon RDS storage recommendations. This includes any applicable Savings Plans discounts. 
+     */
+    estimatedMonthlySavings?: RDSStorageEstimatedMonthlySavings;
   }
   export type Rank = number;
   export type ReasonCodeSummaries = ReasonCodeSummary[];
@@ -2140,7 +2540,7 @@ declare namespace ComputeOptimizer {
   export type RecommendationPreferenceNames = RecommendationPreferenceName[];
   export interface RecommendationPreferences {
     /**
-     * Specifies the CPU vendor and architecture for Amazon EC2 instance and Auto Scaling group recommendations. For example, when you specify AWS_ARM64 with:   A GetEC2InstanceRecommendations or GetAutoScalingGroupRecommendations request, Compute Optimizer returns recommendations that consist of Graviton2 instance types only.   A GetEC2RecommendationProjectedMetrics request, Compute Optimizer returns projected utilization metrics for Graviton2 instance type recommendations only.   A ExportEC2InstanceRecommendations or ExportAutoScalingGroupRecommendations request, Compute Optimizer exports recommendations that consist of Graviton2 instance types only.  
+     * Specifies the CPU vendor and architecture for Amazon EC2 instance and Auto Scaling group recommendations. For example, when you specify AWS_ARM64 with:   A GetEC2InstanceRecommendations or GetAutoScalingGroupRecommendations request, Compute Optimizer returns recommendations that consist of Graviton instance types only.   A GetEC2RecommendationProjectedMetrics request, Compute Optimizer returns projected utilization metrics for Graviton instance type recommendations only.   A ExportEC2InstanceRecommendations or ExportAutoScalingGroupRecommendations request, Compute Optimizer exports recommendations that consist of Graviton instance types only.  
      */
     cpuVendorArchitectures?: CpuVendorArchitectures;
   }
@@ -2194,7 +2594,7 @@ declare namespace ComputeOptimizer {
     recommendationSourceType?: RecommendationSourceType;
   }
   export type RecommendationSourceArn = string;
-  export type RecommendationSourceType = "Ec2Instance"|"AutoScalingGroup"|"EbsVolume"|"LambdaFunction"|"EcsService"|"License"|string;
+  export type RecommendationSourceType = "Ec2Instance"|"AutoScalingGroup"|"EbsVolume"|"LambdaFunction"|"EcsService"|"License"|"RdsDBInstance"|"RdsDBInstanceStorage"|string;
   export type RecommendationSources = RecommendationSource[];
   export type RecommendationSummaries = RecommendationSummary[];
   export interface RecommendationSummary {
@@ -2223,6 +2623,7 @@ declare namespace ComputeOptimizer {
      */
     inferredWorkloadSavings?: InferredWorkloadSavings;
   }
+  export type RecommendedDBInstanceClass = string;
   export type RecommendedInstanceType = string;
   export interface RecommendedOptionProjectedMetric {
     /**
@@ -2241,7 +2642,7 @@ declare namespace ComputeOptimizer {
   export type RecommendedOptionProjectedMetrics = RecommendedOptionProjectedMetric[];
   export type ResourceArn = string;
   export type ResourceArns = ResourceArn[];
-  export type ResourceType = "Ec2Instance"|"AutoScalingGroup"|"EbsVolume"|"LambdaFunction"|"NotApplicable"|"EcsService"|"License"|string;
+  export type ResourceType = "Ec2Instance"|"AutoScalingGroup"|"EbsVolume"|"LambdaFunction"|"NotApplicable"|"EcsService"|"License"|"RdsDBInstance"|string;
   export type RootVolume = boolean;
   export interface S3Destination {
     /**
@@ -2317,6 +2718,7 @@ declare namespace ComputeOptimizer {
   }
   export type Status = "Active"|"Inactive"|"Pending"|"Failed"|string;
   export type StatusReason = string;
+  export type StorageType = string;
   export type Summaries = Summary[];
   export interface Summary {
     /**
@@ -2472,13 +2874,13 @@ declare namespace ComputeOptimizer {
      */
     currentPerformanceRisk?: CurrentPerformanceRisk;
     /**
-     *  A list of tags assigned to your Amazon EBS volume recommendations. 
-     */
-    tags?: Tags;
-    /**
      *  Describes the effective recommendation preferences for Amazon EBS volume. 
      */
     effectiveRecommendationPreferences?: EBSEffectiveRecommendationPreferences;
+    /**
+     *  A list of tags assigned to your Amazon EBS volume recommendations. 
+     */
+    tags?: Tags;
   }
   export interface VolumeRecommendationOption {
     /**

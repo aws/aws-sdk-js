@@ -9,6 +9,7 @@ Object.defineProperty(apiLoader.services['ivsrealtime'], '2020-07-14', {
   get: function get() {
     var model = require('../apis/ivs-realtime-2020-07-14.min.json');
     model.paginators = require('../apis/ivs-realtime-2020-07-14.paginators.json').pagination;
+    model.waiters = require('../apis/ivs-realtime-2020-07-14.waiters2.json').waiters;
     return model;
   },
   enumerable: true,

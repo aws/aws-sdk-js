@@ -75,17 +75,17 @@ declare namespace CostOptimizationHub {
      */
     accountId?: AccountId;
     /**
-     * The time when the account enrollment status was created.
+     * The account enrollment status.
      */
-    createdTimestamp?: Timestamp;
+    status?: EnrollmentStatus;
     /**
      * The time when the account enrollment status was last updated.
      */
     lastUpdatedTimestamp?: Timestamp;
     /**
-     * The account enrollment status.
+     * The time when the account enrollment status was created.
      */
-    status?: EnrollmentStatus;
+    createdTimestamp?: Timestamp;
   }
   export type AccountEnrollmentStatuses = AccountEnrollmentStatus[];
   export type AccountId = string;
@@ -105,21 +105,21 @@ declare namespace CostOptimizationHub {
   export type Boolean = boolean;
   export interface ComputeConfiguration {
     /**
-     * The architecture of the resource.
+     * The number of vCPU cores in the resource.
      */
-    architecture?: String;
+    vCpu?: Double;
     /**
      * The memory size of the resource.
      */
     memorySizeInMB?: Integer;
     /**
+     * The architecture of the resource.
+     */
+    architecture?: String;
+    /**
      * The platform of the resource. The platform is the specific combination of operating system, license model, and software on an instance.
      */
     platform?: String;
-    /**
-     * The number of vCPU cores in the resource.
-     */
-    vCpu?: Double;
   }
   export interface ComputeSavingsPlans {
     /**
@@ -137,19 +137,25 @@ declare namespace CostOptimizationHub {
      */
     accountScope?: String;
     /**
-     * The hourly commitment for the Savings Plans type.
+     * The Savings Plans recommendation term in years.
      */
-    hourlyCommitment?: String;
+    term?: String;
     /**
      * The payment option for the commitment.
      */
     paymentOption?: String;
     /**
-     * The Savings Plans recommendation term in years.
+     * The hourly commitment for the Savings Plans type.
      */
-    term?: String;
+    hourlyCommitment?: String;
   }
   export type Datetime = Date;
+  export interface DbInstanceConfiguration {
+    /**
+     * The DB instance class of the DB instance.
+     */
+    dbInstanceClass?: String;
+  }
   export type Double = number;
   export interface EbsVolume {
     /**
@@ -163,17 +169,17 @@ declare namespace CostOptimizationHub {
   }
   export interface EbsVolumeConfiguration {
     /**
-     * The Amazon Elastic Block Store attachment state.
+     * The disk storage of the Amazon Elastic Block Store volume.
      */
-    attachmentState?: String;
+    storage?: StorageConfiguration;
     /**
      * The Amazon Elastic Block Store performance configuration.
      */
     performance?: BlockStoragePerformanceConfiguration;
     /**
-     * The disk storage of the Amazon Elastic Block Store volume.
+     * The Amazon Elastic Block Store attachment state.
      */
-    storage?: StorageConfiguration;
+    attachmentState?: String;
   }
   export interface Ec2AutoScalingGroup {
     /**
@@ -223,6 +229,14 @@ declare namespace CostOptimizationHub {
      */
     accountScope?: String;
     /**
+     * The Savings Plans recommendation term in years.
+     */
+    term?: String;
+    /**
+     * The payment option for the commitment.
+     */
+    paymentOption?: String;
+    /**
      * The hourly commitment for the Savings Plans type.
      */
     hourlyCommitment?: String;
@@ -231,17 +245,9 @@ declare namespace CostOptimizationHub {
      */
     instanceFamily?: String;
     /**
-     * The payment option for the commitment.
-     */
-    paymentOption?: String;
-    /**
      * The Amazon Web Services Region of the commitment.
      */
     savingsPlansRegion?: String;
-    /**
-     * The Savings Plans recommendation term in years.
-     */
-    term?: String;
   }
   export interface Ec2ReservedInstances {
     /**
@@ -259,25 +265,21 @@ declare namespace CostOptimizationHub {
      */
     accountScope?: String;
     /**
-     * Determines whether the recommendation is for a current generation instance.
+     * The service that you want your recommendations for.
      */
-    currentGeneration?: String;
-    /**
-     * The instance family of the recommended reservation.
-     */
-    instanceFamily?: String;
-    /**
-     * The type of instance that Amazon Web Services recommends.
-     */
-    instanceType?: String;
-    /**
-     * How much purchasing reserved instances costs you on a monthly basis.
-     */
-    monthlyRecurringCost?: String;
+    service?: String;
     /**
      * The number of normalized units that Amazon Web Services recommends that you purchase.
      */
     normalizedUnitsToPurchase?: String;
+    /**
+     * The reserved instances recommendation term in years.
+     */
+    term?: String;
+    /**
+     * The payment option for the commitment.
+     */
+    paymentOption?: String;
     /**
      * The number of instances that Amazon Web Services recommends that you purchase.
      */
@@ -287,37 +289,41 @@ declare namespace CostOptimizationHub {
      */
     offeringClass?: String;
     /**
-     * The payment option for the commitment.
+     * The instance family of the recommended reservation.
      */
-    paymentOption?: String;
+    instanceFamily?: String;
     /**
-     * The platform of the recommended reservation. The platform is the specific combination of operating system, license model, and software on an instance.
+     * The type of instance that Amazon Web Services recommends.
      */
-    platform?: String;
+    instanceType?: String;
     /**
      * The Amazon Web Services Region of the commitment.
      */
     reservedInstancesRegion?: String;
     /**
-     * The service that you want your recommendations for.
+     * Determines whether the recommendation is for a current generation instance.
      */
-    service?: String;
+    currentGeneration?: String;
     /**
-     * Determines whether the recommendation is size flexible.
+     * The platform of the recommended reservation. The platform is the specific combination of operating system, license model, and software on an instance.
      */
-    sizeFlexEligible?: Boolean;
+    platform?: String;
     /**
      * Determines whether the recommended reservation is dedicated or shared.
      */
     tenancy?: String;
     /**
-     * The reserved instances recommendation term in years.
+     * Determines whether the recommendation is size flexible.
      */
-    term?: String;
+    sizeFlexEligible?: Boolean;
     /**
      * How much purchasing this instance costs you upfront.
      */
     upfrontCost?: String;
+    /**
+     * How much purchasing reserved instances costs you on a monthly basis.
+     */
+    monthlyRecurringCost?: String;
   }
   export interface EcsService {
     /**
@@ -351,9 +357,25 @@ declare namespace CostOptimizationHub {
      */
     accountScope?: String;
     /**
-     * Determines whether the recommendation is for a current generation instance.
+     * The service that you want your recommendations for.
      */
-    currentGeneration?: String;
+    service?: String;
+    /**
+     * The number of normalized units that Amazon Web Services recommends that you purchase.
+     */
+    normalizedUnitsToPurchase?: String;
+    /**
+     * The reserved instances recommendation term in years.
+     */
+    term?: String;
+    /**
+     * The payment option for the commitment.
+     */
+    paymentOption?: String;
+    /**
+     * The number of instances that Amazon Web Services recommends that you purchase.
+     */
+    numberOfInstancesToPurchase?: String;
     /**
      * The instance family of the recommended reservation.
      */
@@ -363,90 +385,42 @@ declare namespace CostOptimizationHub {
      */
     instanceType?: String;
     /**
-     * How much purchasing reserved instances costs you on a monthly basis.
-     */
-    monthlyRecurringCost?: String;
-    /**
-     * The number of normalized units that Amazon Web Services recommends that you purchase.
-     */
-    normalizedUnitsToPurchase?: String;
-    /**
-     * The number of instances that Amazon Web Services recommends that you purchase.
-     */
-    numberOfInstancesToPurchase?: String;
-    /**
-     * The payment option for the commitment.
-     */
-    paymentOption?: String;
-    /**
      * The Amazon Web Services Region of the commitment.
      */
     reservedInstancesRegion?: String;
     /**
-     * The service that you want your recommendations for.
+     * Determines whether the recommendation is for a current generation instance.
      */
-    service?: String;
+    currentGeneration?: String;
     /**
      * Determines whether the recommendation is size flexible.
      */
     sizeFlexEligible?: Boolean;
     /**
-     * The reserved instances recommendation term in years.
-     */
-    term?: String;
-    /**
      * How much purchasing this instance costs you upfront.
      */
     upfrontCost?: String;
+    /**
+     * How much purchasing reserved instances costs you on a monthly basis.
+     */
+    monthlyRecurringCost?: String;
   }
   export type EnrollmentStatus = "Active"|"Inactive"|string;
   export interface EstimatedDiscounts {
     /**
-     * Estimated other discounts include all discounts that are not itemized. Itemized discounts include reservedInstanceDiscount and savingsPlansDiscount.
+     * Estimated Savings Plans discounts.
      */
-    otherDiscount?: Double;
+    savingsPlansDiscount?: Double;
     /**
      * Estimated reserved instance discounts.
      */
     reservedInstancesDiscount?: Double;
     /**
-     * Estimated Savings Plans discounts.
+     * Estimated other discounts include all discounts that are not itemized. Itemized discounts include reservedInstanceDiscount and savingsPlansDiscount.
      */
-    savingsPlansDiscount?: Double;
+    otherDiscount?: Double;
   }
   export interface Filter {
-    /**
-     * The account that the recommendation is for.
-     */
-    accountIds?: AccountIdList;
-    /**
-     * The type of action you can take by adopting the recommendation.
-     */
-    actionTypes?: ActionTypeList;
-    /**
-     * The effort required to implement the recommendation.
-     */
-    implementationEfforts?: ImplementationEffortList;
-    /**
-     * The IDs for the recommendations.
-     */
-    recommendationIds?: RecommendationIdList;
-    /**
-     * The Amazon Web Services Region of the resource.
-     */
-    regions?: RegionList;
-    /**
-     * The Amazon Resource Name (ARN) of the recommendation.
-     */
-    resourceArns?: ResourceArnList;
-    /**
-     * The resource ID of the recommendation.
-     */
-    resourceIds?: ResourceIdList;
-    /**
-     * The resource type of the recommendation.
-     */
-    resourceTypes?: ResourceTypeList;
     /**
      * Whether or not implementing the recommendation requires a restart.
      */
@@ -456,21 +430,53 @@ declare namespace CostOptimizationHub {
      */
     rollbackPossible?: Boolean;
     /**
+     * The effort required to implement the recommendation.
+     */
+    implementationEfforts?: ImplementationEffortList;
+    /**
+     * The account that the recommendation is for.
+     */
+    accountIds?: AccountIdList;
+    /**
+     * The Amazon Web Services Region of the resource.
+     */
+    regions?: RegionList;
+    /**
+     * The resource type of the recommendation.
+     */
+    resourceTypes?: ResourceTypeList;
+    /**
+     * The type of action you can take by adopting the recommendation.
+     */
+    actionTypes?: ActionTypeList;
+    /**
      * A list of tags assigned to the recommendation.
      */
     tags?: TagList;
+    /**
+     * The resource ID of the recommendation.
+     */
+    resourceIds?: ResourceIdList;
+    /**
+     * The Amazon Resource Name (ARN) of the recommendation.
+     */
+    resourceArns?: ResourceArnList;
+    /**
+     * The IDs for the recommendations.
+     */
+    recommendationIds?: RecommendationIdList;
   }
   export interface GetPreferencesRequest {
   }
   export interface GetPreferencesResponse {
     /**
-     * Retrieves the status of the "member account discount visibility" preference.
-     */
-    memberAccountDiscountVisibility?: MemberAccountDiscountVisibility;
-    /**
      * Retrieves the status of the "savings estimation mode" preference.
      */
     savingsEstimationMode?: SavingsEstimationMode;
+    /**
+     * Retrieves the status of the "member account discount visibility" preference.
+     */
+    memberAccountDiscountVisibility?: MemberAccountDiscountVisibility;
   }
   export interface GetRecommendationRequest {
     /**
@@ -480,65 +486,45 @@ declare namespace CostOptimizationHub {
   }
   export interface GetRecommendationResponse {
     /**
+     * The ID for the recommendation.
+     */
+    recommendationId?: String;
+    /**
+     * The unique identifier for the resource. This is the same as the Amazon Resource Name (ARN), if available.
+     */
+    resourceId?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    resourceArn?: String;
+    /**
      * The account that the recommendation is for.
      */
     accountId?: String;
-    /**
-     * The type of action you can take by adopting the recommendation.
-     */
-    actionType?: ActionType;
-    /**
-     * The lookback period used to calculate cost impact for a recommendation.
-     */
-    costCalculationLookbackPeriodInDays?: Integer;
     /**
      * The currency code used for the recommendation.
      */
     currencyCode?: String;
     /**
-     * The details for the resource.
+     * The lookback period that's used to generate the recommendation.
      */
-    currentResourceDetails?: ResourceDetails;
+    recommendationLookbackPeriodInDays?: Integer;
     /**
-     * The type of resource.
+     * The lookback period used to calculate cost impact for a recommendation.
      */
-    currentResourceType?: ResourceType;
-    /**
-     * The estimated monthly cost of the recommendation.
-     */
-    estimatedMonthlyCost?: Double;
-    /**
-     * The estimated monthly savings amount for the recommendation.
-     */
-    estimatedMonthlySavings?: Double;
-    /**
-     * The estimated savings amount over the lookback period used to calculate cost impact for a recommendation.
-     */
-    estimatedSavingsOverCostCalculationLookbackPeriod?: Double;
+    costCalculationLookbackPeriodInDays?: Integer;
     /**
      * The estimated savings percentage relative to the total cost over the cost calculation lookback period.
      */
     estimatedSavingsPercentage?: Double;
     /**
-     * The effort required to implement the recommendation.
+     * The estimated savings amount over the lookback period used to calculate cost impact for a recommendation.
      */
-    implementationEffort?: ImplementationEffort;
+    estimatedSavingsOverCostCalculationLookbackPeriod?: Double;
     /**
-     * The time when the recommendation was last generated.
+     * The type of resource.
      */
-    lastRefreshTimestamp?: Datetime;
-    /**
-     * The ID for the recommendation.
-     */
-    recommendationId?: String;
-    /**
-     * The lookback period that's used to generate the recommendation.
-     */
-    recommendationLookbackPeriodInDays?: Integer;
-    /**
-     * The details about the recommended resource.
-     */
-    recommendedResourceDetails?: ResourceDetails;
+    currentResourceType?: ResourceType;
     /**
      * The resource type of the recommendation.
      */
@@ -548,25 +534,45 @@ declare namespace CostOptimizationHub {
      */
     region?: String;
     /**
-     * The Amazon Resource Name (ARN) of the resource.
+     * The source of the recommendation.
      */
-    resourceArn?: String;
+    source?: Source;
     /**
-     * The unique identifier for the resource. This is the same as the Amazon Resource Name (ARN), if available.
+     * The time when the recommendation was last generated.
      */
-    resourceId?: String;
+    lastRefreshTimestamp?: Datetime;
+    /**
+     * The estimated monthly savings amount for the recommendation.
+     */
+    estimatedMonthlySavings?: Double;
+    /**
+     * The estimated monthly cost of the current resource. For Reserved Instances and Savings Plans, it refers to the cost for eligible usage.
+     */
+    estimatedMonthlyCost?: Double;
+    /**
+     * The effort required to implement the recommendation.
+     */
+    implementationEffort?: ImplementationEffort;
     /**
      * Whether or not implementing the recommendation requires a restart.
      */
     restartNeeded?: Boolean;
     /**
+     * The type of action you can take by adopting the recommendation.
+     */
+    actionType?: ActionType;
+    /**
      * Whether or not implementing the recommendation can be rolled back.
      */
     rollbackPossible?: Boolean;
     /**
-     * The source of the recommendation.
+     * The details for the resource.
      */
-    source?: Source;
+    currentResourceDetails?: ResourceDetails;
+    /**
+     * The details about the recommended resource.
+     */
+    recommendedResourceDetails?: ResourceDetails;
     /**
      * A list of tags associated with the resource for which the recommendation exists.
      */
@@ -599,31 +605,31 @@ declare namespace CostOptimizationHub {
   }
   export interface ListEnrollmentStatusesRequest {
     /**
-     * The account ID of a member account in the organization.
-     */
-    accountId?: AccountId;
-    /**
      * Indicates whether to return the enrollment status for the organization.
      */
     includeOrganizationInfo?: PrimitiveBoolean;
     /**
-     * The maximum number of objects that are returned for the request.
+     * The account ID of a member account in the organization.
      */
-    maxResults?: MaxResults;
+    accountId?: AccountId;
     /**
      * The token to retrieve the next set of results.
      */
     nextToken?: String;
+    /**
+     * The maximum number of objects that are returned for the request.
+     */
+    maxResults?: MaxResults;
   }
   export interface ListEnrollmentStatusesResponse {
-    /**
-     * The enrollment status of all member accounts in the organization if the account is the management account.
-     */
-    includeMemberAccounts?: Boolean;
     /**
      * The enrollment status of a specific account ID, including creation and last updated timestamps.
      */
     items?: AccountEnrollmentStatuses;
+    /**
+     * The enrollment status of all member accounts in the organization if the account is the management account.
+     */
+    includeMemberAccounts?: Boolean;
     /**
      * The token to retrieve the next set of results.
      */
@@ -647,21 +653,21 @@ declare namespace CostOptimizationHub {
   export type ListRecommendationSummariesRequestMaxResultsInteger = number;
   export interface ListRecommendationSummariesResponse {
     /**
-     * The currency code used for the recommendation.
-     */
-    currencyCode?: String;
-    /**
      * The total overall savings for the aggregated view.
      */
     estimatedTotalDedupedSavings?: Double;
+    /**
+     * List of all savings recommendations.
+     */
+    items?: RecommendationSummariesList;
     /**
      * The dimension used to group the recommendations by.
      */
     groupBy?: String;
     /**
-     * List of all savings recommendations.
+     * The currency code used for the recommendation.
      */
-    items?: RecommendationSummariesList;
+    currencyCode?: String;
     /**
      * The token to retrieve the next set of results.
      */
@@ -672,6 +678,10 @@ declare namespace CostOptimizationHub {
      * The constraints that you want all returned recommendations to match.
      */
     filter?: Filter;
+    /**
+     * The ordering of recommendations by a dimension.
+     */
+    orderBy?: OrderBy;
     /**
      * List of all recommendations for a resource, or a single recommendation if de-duped by resourceId.
      */
@@ -684,10 +694,6 @@ declare namespace CostOptimizationHub {
      * The token to retrieve the next set of results.
      */
     nextToken?: String;
-    /**
-     * The ordering of recommendations by a dimension.
-     */
-    orderBy?: OrderBy;
   }
   export type ListRecommendationsRequestMaxResultsInteger = number;
   export interface ListRecommendationsResponse {
@@ -718,49 +724,49 @@ declare namespace CostOptimizationHub {
      */
     accountScope?: String;
     /**
-     * Determines whether the recommendation is for a current generation instance.
+     * The service that you want your recommendations for.
      */
-    currentGeneration?: String;
-    /**
-     * The type of instance that Amazon Web Services recommends.
-     */
-    instanceType?: String;
-    /**
-     * How much purchasing reserved instances costs you on a monthly basis.
-     */
-    monthlyRecurringCost?: String;
+    service?: String;
     /**
      * The number of normalized units that Amazon Web Services recommends that you purchase.
      */
     normalizedUnitsToPurchase?: String;
     /**
-     * The number of instances that Amazon Web Services recommends that you purchase.
+     * The reserved instances recommendation term in years.
      */
-    numberOfInstancesToPurchase?: String;
+    term?: String;
     /**
      * The payment option for the commitment.
      */
     paymentOption?: String;
     /**
+     * The number of instances that Amazon Web Services recommends that you purchase.
+     */
+    numberOfInstancesToPurchase?: String;
+    /**
+     * The type of instance that Amazon Web Services recommends.
+     */
+    instanceType?: String;
+    /**
      * The Amazon Web Services Region of the commitment.
      */
     reservedInstancesRegion?: String;
     /**
-     * The service that you want your recommendations for.
+     * Determines whether the recommendation is for a current generation instance.
      */
-    service?: String;
+    currentGeneration?: String;
     /**
      * Determines whether the recommendation is size flexible.
      */
     sizeFlexEligible?: Boolean;
     /**
-     * The reserved instances recommendation term in years.
-     */
-    term?: String;
-    /**
      * How much purchasing this instance costs you upfront.
      */
     upfrontCost?: String;
+    /**
+     * How much purchasing reserved instances costs you on a monthly basis.
+     */
+    monthlyRecurringCost?: String;
   }
   export type Order = "Asc"|"Desc"|string;
   export interface OrderBy {
@@ -774,6 +780,44 @@ declare namespace CostOptimizationHub {
     order?: Order;
   }
   export type PrimitiveBoolean = boolean;
+  export interface RdsDbInstance {
+    /**
+     * The Amazon RDS DB instance configuration used for recommendations.
+     */
+    configuration?: RdsDbInstanceConfiguration;
+    costCalculation?: ResourceCostCalculation;
+  }
+  export interface RdsDbInstanceConfiguration {
+    /**
+     * Details about the instance configuration.
+     */
+    instance?: DbInstanceConfiguration;
+  }
+  export interface RdsDbInstanceStorage {
+    /**
+     * The Amazon RDS DB instance storage configuration used for recommendations.
+     */
+    configuration?: RdsDbInstanceStorageConfiguration;
+    costCalculation?: ResourceCostCalculation;
+  }
+  export interface RdsDbInstanceStorageConfiguration {
+    /**
+     * The storage type to associate with the DB instance.
+     */
+    storageType?: String;
+    /**
+     * The new amount of storage in GB to allocate for the DB instance.
+     */
+    allocatedStorageInGb?: Double;
+    /**
+     * The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for the DB instance.
+     */
+    iops?: Double;
+    /**
+     * The storage throughput for the DB instance.
+     */
+    storageThroughput?: Double;
+  }
   export interface RdsReservedInstances {
     /**
      * The RDS reserved instances configuration used for recommendations.
@@ -790,9 +834,57 @@ declare namespace CostOptimizationHub {
      */
     accountScope?: String;
     /**
+     * The service that you want your recommendations for.
+     */
+    service?: String;
+    /**
+     * The number of normalized units that Amazon Web Services recommends that you purchase.
+     */
+    normalizedUnitsToPurchase?: String;
+    /**
+     * The reserved instances recommendation term in years.
+     */
+    term?: String;
+    /**
+     * The payment option for the commitment.
+     */
+    paymentOption?: String;
+    /**
+     * The number of instances that Amazon Web Services recommends that you purchase.
+     */
+    numberOfInstancesToPurchase?: String;
+    /**
+     * The instance family of the recommended reservation.
+     */
+    instanceFamily?: String;
+    /**
+     * The type of instance that Amazon Web Services recommends.
+     */
+    instanceType?: String;
+    /**
+     * The Amazon Web Services Region of the commitment.
+     */
+    reservedInstancesRegion?: String;
+    /**
+     * Determines whether the recommendation is size flexible.
+     */
+    sizeFlexEligible?: Boolean;
+    /**
      * Determines whether the recommendation is for a current generation instance.
      */
     currentGeneration?: String;
+    /**
+     * How much purchasing this instance costs you upfront.
+     */
+    upfrontCost?: String;
+    /**
+     * How much purchasing this instance costs you on a monthly basis.
+     */
+    monthlyRecurringCost?: String;
+    /**
+     * The license model that the recommended reservation supports.
+     */
+    licenseModel?: String;
     /**
      * The database edition that the recommended reservation supports.
      */
@@ -805,80 +897,36 @@ declare namespace CostOptimizationHub {
      * Determines whether the recommendation is for a reservation in a single Availability Zone or a reservation with a backup in a second Availability Zone.
      */
     deploymentOption?: String;
-    /**
-     * The instance family of the recommended reservation.
-     */
-    instanceFamily?: String;
-    /**
-     * The type of instance that Amazon Web Services recommends.
-     */
-    instanceType?: String;
-    /**
-     * The license model that the recommended reservation supports.
-     */
-    licenseModel?: String;
-    /**
-     * How much purchasing this instance costs you on a monthly basis.
-     */
-    monthlyRecurringCost?: String;
-    /**
-     * The number of normalized units that Amazon Web Services recommends that you purchase.
-     */
-    normalizedUnitsToPurchase?: String;
-    /**
-     * The number of instances that Amazon Web Services recommends that you purchase.
-     */
-    numberOfInstancesToPurchase?: String;
-    /**
-     * The payment option for the commitment.
-     */
-    paymentOption?: String;
-    /**
-     * The Amazon Web Services Region of the commitment.
-     */
-    reservedInstancesRegion?: String;
-    /**
-     * The service that you want your recommendations for.
-     */
-    service?: String;
-    /**
-     * Determines whether the recommendation is size flexible.
-     */
-    sizeFlexEligible?: Boolean;
-    /**
-     * The reserved instances recommendation term in years.
-     */
-    term?: String;
-    /**
-     * How much purchasing this instance costs you upfront.
-     */
-    upfrontCost?: String;
   }
   export interface Recommendation {
+    /**
+     * The ID for the recommendation.
+     */
+    recommendationId?: String;
     /**
      * The account that the recommendation is for.
      */
     accountId?: String;
     /**
-     * The type of tasks that can be carried out by this action.
+     * The Amazon Web Services Region of the resource.
      */
-    actionType?: String;
+    region?: String;
     /**
-     * The currency code used for the recommendation.
+     * The resource ID for the recommendation.
      */
-    currencyCode?: String;
+    resourceId?: String;
     /**
-     * Describes the current resource.
+     * The Amazon Resource Name (ARN) for the recommendation.
      */
-    currentResourceSummary?: String;
+    resourceArn?: String;
     /**
      * The current resource type.
      */
     currentResourceType?: String;
     /**
-     * The estimated monthly cost for the recommendation.
+     * The recommended resource type.
      */
-    estimatedMonthlyCost?: Double;
+    recommendedResourceType?: String;
     /**
      * The estimated monthly savings amount for the recommendation.
      */
@@ -888,49 +936,45 @@ declare namespace CostOptimizationHub {
      */
     estimatedSavingsPercentage?: Double;
     /**
+     * The estimated monthly cost of the current resource. For Reserved Instances and Savings Plans, it refers to the cost for eligible usage.
+     */
+    estimatedMonthlyCost?: Double;
+    /**
+     * The currency code used for the recommendation.
+     */
+    currencyCode?: String;
+    /**
      * The effort required to implement the recommendation.
      */
     implementationEffort?: String;
-    /**
-     * The time when the recommendation was last generated.
-     */
-    lastRefreshTimestamp?: Datetime;
-    /**
-     * The ID for the recommendation.
-     */
-    recommendationId?: String;
-    /**
-     * The lookback period that's used to generate the recommendation.
-     */
-    recommendationLookbackPeriodInDays?: Integer;
-    /**
-     * Describes the recommended resource.
-     */
-    recommendedResourceSummary?: String;
-    /**
-     * The recommended resource type.
-     */
-    recommendedResourceType?: String;
-    /**
-     * The Amazon Web Services Region of the resource.
-     */
-    region?: String;
-    /**
-     * The Amazon Resource Name (ARN) for the recommendation.
-     */
-    resourceArn?: String;
-    /**
-     * The resource ID for the recommendation.
-     */
-    resourceId?: String;
     /**
      * Whether or not implementing the recommendation requires a restart.
      */
     restartNeeded?: Boolean;
     /**
+     * The type of tasks that can be carried out by this action.
+     */
+    actionType?: String;
+    /**
      * Whether or not implementing the recommendation can be rolled back.
      */
     rollbackPossible?: Boolean;
+    /**
+     * Describes the current resource.
+     */
+    currentResourceSummary?: String;
+    /**
+     * Describes the recommended resource.
+     */
+    recommendedResourceSummary?: String;
+    /**
+     * The time when the recommendation was last generated.
+     */
+    lastRefreshTimestamp?: Datetime;
+    /**
+     * The lookback period that's used to generate the recommendation.
+     */
+    recommendationLookbackPeriodInDays?: Integer;
     /**
      * The source of the recommendation.
      */
@@ -945,13 +989,13 @@ declare namespace CostOptimizationHub {
   export type RecommendationSummariesList = RecommendationSummary[];
   export interface RecommendationSummary {
     /**
-     * The estimated total savings resulting from modifications, on a monthly basis.
-     */
-    estimatedMonthlySavings?: Double;
-    /**
      * The grouping of recommendations.
      */
     group?: String;
+    /**
+     * The estimated total savings resulting from modifications, on a monthly basis.
+     */
+    estimatedMonthlySavings?: Double;
     /**
      * The total number of instance recommendations.
      */
@@ -973,9 +1017,25 @@ declare namespace CostOptimizationHub {
      */
     accountScope?: String;
     /**
-     * Determines whether the recommendation is for a current generation instance.
+     * The service that you want your recommendations for.
      */
-    currentGeneration?: String;
+    service?: String;
+    /**
+     * The number of normalized units that Amazon Web Services recommends that you purchase.
+     */
+    normalizedUnitsToPurchase?: String;
+    /**
+     * The reserved instances recommendation term in years.
+     */
+    term?: String;
+    /**
+     * The payment option for the commitment.
+     */
+    paymentOption?: String;
+    /**
+     * The number of instances that Amazon Web Services recommends that you purchase.
+     */
+    numberOfInstancesToPurchase?: String;
     /**
      * The instance family of the recommended reservation.
      */
@@ -985,41 +1045,25 @@ declare namespace CostOptimizationHub {
      */
     instanceType?: String;
     /**
-     * How much purchasing reserved instances costs you on a monthly basis.
-     */
-    monthlyRecurringCost?: String;
-    /**
-     * The number of normalized units that Amazon Web Services recommends that you purchase.
-     */
-    normalizedUnitsToPurchase?: String;
-    /**
-     * The number of instances that Amazon Web Services recommends that you purchase.
-     */
-    numberOfInstancesToPurchase?: String;
-    /**
-     * The payment option for the commitment.
-     */
-    paymentOption?: String;
-    /**
      * The Amazon Web Services Region of the commitment.
      */
     reservedInstancesRegion?: String;
-    /**
-     * The service that you want your recommendations for.
-     */
-    service?: String;
     /**
      * Determines whether the recommendation is size flexible.
      */
     sizeFlexEligible?: Boolean;
     /**
-     * The reserved instances recommendation term in years.
+     * Determines whether the recommendation is for a current generation instance.
      */
-    term?: String;
+    currentGeneration?: String;
     /**
      * How much purchasing this instance costs you upfront.
      */
     upfrontCost?: String;
+    /**
+     * How much purchasing reserved instances costs you on a monthly basis.
+     */
+    monthlyRecurringCost?: String;
   }
   export type RegionList = String[];
   export interface ReservedInstancesCostCalculation {
@@ -1029,10 +1073,6 @@ declare namespace CostOptimizationHub {
     pricing?: ReservedInstancesPricing;
   }
   export interface ReservedInstancesPricing {
-    /**
-     * The estimated cost of your recurring monthly fees for the recommended reserved instance across the month.
-     */
-    estimatedMonthlyAmortizedReservationCost?: Double;
     /**
      * The remaining On-Demand cost estimated to not be covered by the recommended reserved instance, over the length of the lookback period.
      */
@@ -1045,23 +1085,35 @@ declare namespace CostOptimizationHub {
      * The savings percentage relative to the total On-Demand costs that are associated with this instance.
      */
     savingsPercentage?: Double;
+    /**
+     * The estimated cost of your recurring monthly fees for the recommended reserved instance across the month.
+     */
+    estimatedMonthlyAmortizedReservationCost?: Double;
   }
   export type ResourceArnList = String[];
   export interface ResourceCostCalculation {
     /**
-     * Pricing details of the resource recommendation.
-     */
-    pricing?: ResourcePricing;
-    /**
      * Usage details of the resource recommendation.
      */
     usages?: UsageList;
+    /**
+     * Pricing details of the resource recommendation.
+     */
+    pricing?: ResourcePricing;
   }
   export interface ResourceDetails {
     /**
-     * The Compute Savings Plans recommendation details.
+     * The Lambda function recommendation details.
      */
-    computeSavingsPlans?: ComputeSavingsPlans;
+    lambdaFunction?: LambdaFunction;
+    /**
+     * The ECS service recommendation details.
+     */
+    ecsService?: EcsService;
+    /**
+     * The EC2 instance recommendation details.
+     */
+    ec2Instance?: Ec2Instance;
     /**
      * The Amazon Elastic Block Store volume recommendation details.
      */
@@ -1071,66 +1123,66 @@ declare namespace CostOptimizationHub {
      */
     ec2AutoScalingGroup?: Ec2AutoScalingGroup;
     /**
-     * The EC2 instance recommendation details.
-     */
-    ec2Instance?: Ec2Instance;
-    /**
-     * The EC2 instance Savings Plans recommendation details.
-     */
-    ec2InstanceSavingsPlans?: Ec2InstanceSavingsPlans;
-    /**
      * The EC2 reserved instances recommendation details.
      */
     ec2ReservedInstances?: Ec2ReservedInstances;
-    /**
-     * The ECS service recommendation details.
-     */
-    ecsService?: EcsService;
-    /**
-     * The ElastiCache reserved instances recommendation details.
-     */
-    elastiCacheReservedInstances?: ElastiCacheReservedInstances;
-    /**
-     * The Lambda function recommendation details.
-     */
-    lambdaFunction?: LambdaFunction;
-    /**
-     * The OpenSearch reserved instances recommendation details.
-     */
-    openSearchReservedInstances?: OpenSearchReservedInstances;
     /**
      * The RDS reserved instances recommendation details.
      */
     rdsReservedInstances?: RdsReservedInstances;
     /**
+     * The ElastiCache reserved instances recommendation details.
+     */
+    elastiCacheReservedInstances?: ElastiCacheReservedInstances;
+    /**
+     * The OpenSearch reserved instances recommendation details.
+     */
+    openSearchReservedInstances?: OpenSearchReservedInstances;
+    /**
      * The Redshift reserved instances recommendation details.
      */
     redshiftReservedInstances?: RedshiftReservedInstances;
     /**
+     * The EC2 instance Savings Plans recommendation details.
+     */
+    ec2InstanceSavingsPlans?: Ec2InstanceSavingsPlans;
+    /**
+     * The Compute Savings Plans recommendation details.
+     */
+    computeSavingsPlans?: ComputeSavingsPlans;
+    /**
      * The SageMaker Savings Plans recommendation details.
      */
     sageMakerSavingsPlans?: SageMakerSavingsPlans;
+    /**
+     * The DB instance recommendation details.
+     */
+    rdsDbInstance?: RdsDbInstance;
+    /**
+     * The DB instance storage recommendation details.
+     */
+    rdsDbInstanceStorage?: RdsDbInstanceStorage;
   }
   export type ResourceIdList = String[];
   export interface ResourcePricing {
-    /**
-     * The savings estimate incorporating all discounts with Amazon Web Services, such as Reserved Instances and Savings Plans.
-     */
-    estimatedCostAfterDiscounts?: Double;
     /**
      * The savings estimate using Amazon Web Services public pricing without incorporating any discounts.
      */
     estimatedCostBeforeDiscounts?: Double;
     /**
+     * The estimated net unused amortized commitment for the recommendation.
+     */
+    estimatedNetUnusedAmortizedCommitments?: Double;
+    /**
      * The estimated discounts for a recommendation.
      */
     estimatedDiscounts?: EstimatedDiscounts;
     /**
-     * The estimated net unused amortized commitment for the recommendation.
+     * The savings estimate incorporating all discounts with Amazon Web Services, such as Reserved Instances and Savings Plans.
      */
-    estimatedNetUnusedAmortizedCommitments?: Double;
+    estimatedCostAfterDiscounts?: Double;
   }
-  export type ResourceType = "Ec2Instance"|"LambdaFunction"|"EbsVolume"|"EcsService"|"Ec2AutoScalingGroup"|"Ec2InstanceSavingsPlans"|"ComputeSavingsPlans"|"SageMakerSavingsPlans"|"Ec2ReservedInstances"|"RdsReservedInstances"|"OpenSearchReservedInstances"|"RedshiftReservedInstances"|"ElastiCacheReservedInstances"|string;
+  export type ResourceType = "Ec2Instance"|"LambdaFunction"|"EbsVolume"|"EcsService"|"Ec2AutoScalingGroup"|"Ec2InstanceSavingsPlans"|"ComputeSavingsPlans"|"SageMakerSavingsPlans"|"Ec2ReservedInstances"|"RdsReservedInstances"|"OpenSearchReservedInstances"|"RedshiftReservedInstances"|"ElastiCacheReservedInstances"|"RdsDbInstanceStorage"|"RdsDbInstance"|string;
   export type ResourceTypeList = ResourceType[];
   export interface SageMakerSavingsPlans {
     /**
@@ -1148,17 +1200,17 @@ declare namespace CostOptimizationHub {
      */
     accountScope?: String;
     /**
-     * The hourly commitment for the Savings Plans type.
+     * The Savings Plans recommendation term in years.
      */
-    hourlyCommitment?: String;
+    term?: String;
     /**
      * The payment option for the commitment.
      */
     paymentOption?: String;
     /**
-     * The Savings Plans recommendation term in years.
+     * The hourly commitment for the Savings Plans type.
      */
-    term?: String;
+    hourlyCommitment?: String;
   }
   export type SavingsEstimationMode = "BeforeDiscounts"|"AfterDiscounts"|string;
   export interface SavingsPlansCostCalculation {
@@ -1169,32 +1221,32 @@ declare namespace CostOptimizationHub {
   }
   export interface SavingsPlansPricing {
     /**
-     * Estimated monthly commitment for the Savings Plan.
-     */
-    estimatedMonthlyCommitment?: Double;
-    /**
-     * Estimated On-Demand cost you will pay after buying the Savings Plan.
-     */
-    estimatedOnDemandCost?: Double;
-    /**
      * The cost of paying for the recommended Savings Plan monthly.
      */
     monthlySavingsPlansEligibleCost?: Double;
     /**
+     * Estimated monthly commitment for the Savings Plan.
+     */
+    estimatedMonthlyCommitment?: Double;
+    /**
      * Estimated savings as a percentage of your overall costs after buying the Savings Plan.
      */
     savingsPercentage?: Double;
+    /**
+     * Estimated On-Demand cost you will pay after buying the Savings Plan.
+     */
+    estimatedOnDemandCost?: Double;
   }
   export type Source = "ComputeOptimizer"|"CostExplorer"|string;
   export interface StorageConfiguration {
     /**
-     * The storage volume.
-     */
-    sizeInGb?: Double;
-    /**
      * The storage type.
      */
     type?: String;
+    /**
+     * The storage volume.
+     */
+    sizeInGb?: Double;
   }
   export type String = string;
   export interface Tag {
@@ -1211,13 +1263,13 @@ declare namespace CostOptimizationHub {
   export type Timestamp = Date;
   export interface UpdateEnrollmentStatusRequest {
     /**
-     * Indicates whether to enroll member accounts of the organization if the account is the management account.
-     */
-    includeMemberAccounts?: Boolean;
-    /**
      * Sets the account status.
      */
     status: EnrollmentStatus;
+    /**
+     * Indicates whether to enroll member accounts of the organization if the account is the management account.
+     */
+    includeMemberAccounts?: Boolean;
   }
   export interface UpdateEnrollmentStatusResponse {
     /**
@@ -1227,25 +1279,33 @@ declare namespace CostOptimizationHub {
   }
   export interface UpdatePreferencesRequest {
     /**
-     * Sets the "member account discount visibility" preference.
-     */
-    memberAccountDiscountVisibility?: MemberAccountDiscountVisibility;
-    /**
      * Sets the "savings estimation mode" preference.
      */
     savingsEstimationMode?: SavingsEstimationMode;
-  }
-  export interface UpdatePreferencesResponse {
     /**
-     * Shows the status of the "member account discount visibility" preference.
+     * Sets the "member account discount visibility" preference.
      */
     memberAccountDiscountVisibility?: MemberAccountDiscountVisibility;
+  }
+  export interface UpdatePreferencesResponse {
     /**
      * Shows the status of the "savings estimation mode" preference.
      */
     savingsEstimationMode?: SavingsEstimationMode;
+    /**
+     * Shows the status of the "member account discount visibility" preference.
+     */
+    memberAccountDiscountVisibility?: MemberAccountDiscountVisibility;
   }
   export interface Usage {
+    /**
+     * The usage type.
+     */
+    usageType?: String;
+    /**
+     * The usage amount.
+     */
+    usageAmount?: Double;
     /**
      * The operation value.
      */
@@ -1258,14 +1318,6 @@ declare namespace CostOptimizationHub {
      * The usage unit.
      */
     unit?: String;
-    /**
-     * The usage amount.
-     */
-    usageAmount?: Double;
-    /**
-     * The usage type.
-     */
-    usageType?: String;
   }
   export type UsageList = Usage[];
   /**

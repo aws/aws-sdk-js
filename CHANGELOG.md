@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1645.0-->
+<!--LATEST=2.1646.0-->
 <!--ENTRYINSERT-->
+
+## 2.1646.0
+* feature: BedrockRuntime: This release adds document support to Converse and ConverseStream APIs
+* feature: CodeArtifact: Add support for the Cargo package format.
+* feature: ComputeOptimizer: This release enables AWS Compute Optimizer to analyze and generate optimization recommendations for Amazon RDS MySQL and RDS PostgreSQL.
+* feature: CostOptimizationHub: This release enables AWS Cost Optimization Hub to show cost optimization recommendations for Amazon RDS MySQL and RDS PostgreSQL.
+* feature: Glue: Fix Glue paginators for Jobs, JobRuns, Triggers, Blueprints and Workflows.
+* feature: IVSRealTime: IVS Real-Time now offers customers the ability to record individual stage participants to S3.
+* feature: SageMaker: Adds support for model references in Hub service, and adds support for cross-account access of Hubs
 
 ## 2.1645.0
 * feature: Artifact: This release adds an acceptanceType field to the ReportSummary structure (used in the ListReports API response).

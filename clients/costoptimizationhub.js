@@ -9,6 +9,7 @@ Object.defineProperty(apiLoader.services['costoptimizationhub'], '2022-07-26', {
   get: function get() {
     var model = require('../apis/cost-optimization-hub-2022-07-26.min.json');
     model.paginators = require('../apis/cost-optimization-hub-2022-07-26.paginators.json').pagination;
+    model.waiters = require('../apis/cost-optimization-hub-2022-07-26.waiters2.json').waiters;
     return model;
   },
   enumerable: true,

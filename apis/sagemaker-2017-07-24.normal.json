@@ -541,7 +541,32 @@
           "shape": "ResourceLimitExceeded"
         }
       ],
-      "documentation": "<p>Create a hub.</p> <note> <p>Hub APIs are only callable through SageMaker Studio.</p> </note>"
+      "documentation": "<p>Create a hub.</p>"
+    },
+    "CreateHubContentReference": {
+      "name": "CreateHubContentReference",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateHubContentReferenceRequest"
+      },
+      "output": {
+        "shape": "CreateHubContentReferenceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFound"
+        },
+        {
+          "shape": "ResourceInUse"
+        },
+        {
+          "shape": "ResourceLimitExceeded"
+        }
+      ],
+      "documentation": "<p>Create a hub content reference in order to add a model in the JumpStart public hub to a private hub.</p>"
     },
     "CreateHumanTaskUi": {
       "name": "CreateHumanTaskUi",
@@ -1637,7 +1662,7 @@
           "shape": "ResourceNotFound"
         }
       ],
-      "documentation": "<p>Delete a hub.</p> <note> <p>Hub APIs are only callable through SageMaker Studio.</p> </note>"
+      "documentation": "<p>Delete a hub.</p>"
     },
     "DeleteHubContent": {
       "name": "DeleteHubContent",
@@ -1656,7 +1681,23 @@
           "shape": "ResourceNotFound"
         }
       ],
-      "documentation": "<p>Delete the contents of a hub.</p> <note> <p>Hub APIs are only callable through SageMaker Studio.</p> </note>"
+      "documentation": "<p>Delete the contents of a hub.</p>"
+    },
+    "DeleteHubContentReference": {
+      "name": "DeleteHubContentReference",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteHubContentReferenceRequest"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFound"
+        }
+      ],
+      "documentation": "<p>Delete a hub content reference in order to remove a model from a private hub.</p>"
     },
     "DeleteHumanTaskUi": {
       "name": "DeleteHumanTaskUi",
@@ -2587,7 +2628,7 @@
           "shape": "ResourceNotFound"
         }
       ],
-      "documentation": "<p>Describe a hub.</p> <note> <p>Hub APIs are only callable through SageMaker Studio.</p> </note>"
+      "documentation": "<p>Describes a hub.</p>"
     },
     "DescribeHubContent": {
       "name": "DescribeHubContent",
@@ -2606,7 +2647,7 @@
           "shape": "ResourceNotFound"
         }
       ],
-      "documentation": "<p>Describe the content of a hub.</p> <note> <p>Hub APIs are only callable through SageMaker Studio.</p> </note>"
+      "documentation": "<p>Describe the content of a hub.</p>"
     },
     "DescribeHumanTaskUi": {
       "name": "DescribeHumanTaskUi",
@@ -3409,7 +3450,7 @@
           "shape": "ResourceNotFound"
         }
       ],
-      "documentation": "<p>Import hub content.</p> <note> <p>Hub APIs are only callable through SageMaker Studio.</p> </note>"
+      "documentation": "<p>Import hub content.</p>"
     },
     "ListActions": {
       "name": "ListActions",
@@ -3813,7 +3854,7 @@
           "shape": "ResourceNotFound"
         }
       ],
-      "documentation": "<p>List hub content versions.</p> <note> <p>Hub APIs are only callable through SageMaker Studio.</p> </note>"
+      "documentation": "<p>List hub content versions.</p>"
     },
     "ListHubContents": {
       "name": "ListHubContents",
@@ -3832,7 +3873,7 @@
           "shape": "ResourceNotFound"
         }
       ],
-      "documentation": "<p>List the contents of a hub.</p> <note> <p>Hub APIs are only callable through SageMaker Studio.</p> </note>"
+      "documentation": "<p>List the contents of a hub.</p>"
     },
     "ListHubs": {
       "name": "ListHubs",
@@ -3846,7 +3887,7 @@
       "output": {
         "shape": "ListHubsResponse"
       },
-      "documentation": "<p>List all existing hubs.</p> <note> <p>Hub APIs are only callable through SageMaker Studio.</p> </note>"
+      "documentation": "<p>List all existing hubs.</p>"
     },
     "ListHumanTaskUis": {
       "name": "ListHumanTaskUis",
@@ -5420,7 +5461,7 @@
           "shape": "ResourceNotFound"
         }
       ],
-      "documentation": "<p>Update a hub.</p> <note> <p>Hub APIs are only callable through SageMaker Studio.</p> </note>"
+      "documentation": "<p>Update a hub.</p>"
     },
     "UpdateImage": {
       "name": "UpdateImage",
@@ -11198,6 +11239,52 @@
         }
       }
     },
+    "CreateHubContentReferenceRequest": {
+      "type": "structure",
+      "required": [
+        "HubName",
+        "SageMakerPublicHubContentArn"
+      ],
+      "members": {
+        "HubName": {
+          "shape": "HubNameOrArn",
+          "documentation": "<p>The name of the hub to add the hub content reference to.</p>"
+        },
+        "SageMakerPublicHubContentArn": {
+          "shape": "SageMakerPublicHubContentArn",
+          "documentation": "<p>The ARN of the public hub content to reference.</p>"
+        },
+        "HubContentName": {
+          "shape": "HubContentName",
+          "documentation": "<p>The name of the hub content to reference.</p>"
+        },
+        "MinVersion": {
+          "shape": "HubContentVersion",
+          "documentation": "<p>The minimum version of the hub content to reference.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>Any tags associated with the hub content to reference.</p>"
+        }
+      }
+    },
+    "CreateHubContentReferenceResponse": {
+      "type": "structure",
+      "required": [
+        "HubArn",
+        "HubContentArn"
+      ],
+      "members": {
+        "HubArn": {
+          "shape": "HubArn",
+          "documentation": "<p>The ARN of the hub that the hub content reference was added to.</p>"
+        },
+        "HubContentArn": {
+          "shape": "HubContentArn",
+          "documentation": "<p>The ARN of the hub content.</p>"
+        }
+      }
+    },
     "CreateHubRequest": {
       "type": "structure",
       "required": [
@@ -14012,6 +14099,28 @@
       "type": "structure",
       "members": {}
     },
+    "DeleteHubContentReferenceRequest": {
+      "type": "structure",
+      "required": [
+        "HubName",
+        "HubContentType",
+        "HubContentName"
+      ],
+      "members": {
+        "HubName": {
+          "shape": "HubNameOrArn",
+          "documentation": "<p>The name of the hub to delete the hub content reference from.</p>"
+        },
+        "HubContentType": {
+          "shape": "HubContentType",
+          "documentation": "<p>The type of hub content to delete.</p>"
+        },
+        "HubContentName": {
+          "shape": "HubContentName",
+          "documentation": "<p>The name of the hub content to delete.</p>"
+        }
+      }
+    },
     "DeleteHubContentRequest": {
       "type": "structure",
       "required": [
@@ -14022,7 +14131,7 @@
       ],
       "members": {
         "HubName": {
-          "shape": "HubName",
+          "shape": "HubNameOrArn",
           "documentation": "<p>The name of the hub that you want to delete content in.</p>"
         },
         "HubContentType": {
@@ -14046,7 +14155,7 @@
       ],
       "members": {
         "HubName": {
-          "shape": "HubName",
+          "shape": "HubNameOrArn",
           "documentation": "<p>The name of the hub to delete.</p>"
         }
       }
@@ -16390,7 +16499,7 @@
       ],
       "members": {
         "HubName": {
-          "shape": "HubName",
+          "shape": "HubNameOrArn",
           "documentation": "<p>The name of the hub that contains the content to describe.</p>"
         },
         "HubContentType": {
@@ -16466,6 +16575,18 @@
           "shape": "HubContentDocument",
           "documentation": "<p>The hub content document that describes information about the hub content such as type, associated containers, scripts, and more.</p>"
         },
+        "SageMakerPublicHubContentArn": {
+          "shape": "SageMakerPublicHubContentArn",
+          "documentation": "<p>The ARN of the public hub content.</p>"
+        },
+        "ReferenceMinVersion": {
+          "shape": "ReferenceMinVersion",
+          "documentation": "<p>The minimum version of the hub content.</p>"
+        },
+        "SupportStatus": {
+          "shape": "HubContentSupportStatus",
+          "documentation": "<p>The support status of the hub content.</p>"
+        },
         "HubContentSearchKeywords": {
           "shape": "HubContentSearchKeywordList",
           "documentation": "<p>The searchable keywords for the hub content.</p>"
@@ -16495,7 +16616,7 @@
       ],
       "members": {
         "HubName": {
-          "shape": "HubName",
+          "shape": "HubNameOrArn",
           "documentation": "<p>The name of the hub to describe.</p>"
         }
       }
@@ -22052,6 +22173,10 @@
           "shape": "HubContentArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the hub content.</p>"
         },
+        "SageMakerPublicHubContentArn": {
+          "shape": "SageMakerPublicHubContentArn",
+          "documentation": "<p>The ARN of the public hub content.</p>"
+        },
         "HubContentVersion": {
           "shape": "HubContentVersion",
           "documentation": "<p>The version of the hub content.</p>"
@@ -22072,6 +22197,10 @@
           "shape": "HubContentDescription",
           "documentation": "<p>A description of the hub content.</p>"
         },
+        "SupportStatus": {
+          "shape": "HubContentSupportStatus",
+          "documentation": "<p>The support status of the hub content.</p>"
+        },
         "HubContentSearchKeywords": {
           "shape": "HubContentSearchKeywordList",
           "documentation": "<p>The searchable keywords for the hub content.</p>"
@@ -22083,6 +22212,10 @@
         "CreationTime": {
           "shape": "Timestamp",
           "documentation": "<p>The date and time that the hub content was created.</p>"
+        },
+        "OriginalCreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time when the hub content was originally created, before any updates or revisions.</p>"
         }
       },
       "documentation": "<p>Information about hub content.</p>"
@@ -22095,8 +22228,7 @@
     },
     "HubContentMarkdown": {
       "type": "string",
-      "max": 65535,
-      "pattern": ".*"
+      "max": 65535
     },
     "HubContentName": {
       "type": "string",
@@ -22128,11 +22260,19 @@
         "DeleteFailed"
       ]
     },
+    "HubContentSupportStatus": {
+      "type": "string",
+      "enum": [
+        "Supported",
+        "Deprecated"
+      ]
+    },
     "HubContentType": {
       "type": "string",
       "enum": [
         "Model",
-        "Notebook"
+        "Notebook",
+        "ModelReference"
       ]
     },
     "HubContentVersion": {
@@ -22206,6 +22346,10 @@
       "type": "string",
       "max": 63,
       "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"
+    },
+    "HubNameOrArn": {
+      "type": "string",
+      "pattern": "^(arn:[a-z0-9-\\.]{1,63}:sagemaker:\\w+(?:-\\w+)+:(\\d{12}|aws):hub\\/)?[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
     },
     "HubS3StorageConfig": {
       "type": "structure",
@@ -23478,7 +23622,7 @@
           "documentation": "<p>The version of the hub content schema to import.</p>"
         },
         "HubName": {
-          "shape": "HubName",
+          "shape": "HubNameOrArn",
           "documentation": "<p>The name of the hub to import content into.</p>"
         },
         "HubContentDisplayName": {
@@ -23922,6 +24066,19 @@
         "ShadowMode"
       ]
     },
+    "InferenceHubAccessConfig": {
+      "type": "structure",
+      "required": [
+        "HubContentArn"
+      ],
+      "members": {
+        "HubContentArn": {
+          "shape": "HubContentArn",
+          "documentation": "<p>The ARN of the hub content for which deployment access is allowed.</p>"
+        }
+      },
+      "documentation": "<p>Configuration information specifying which hub contents have accessible deployment options.</p>"
+    },
     "InferenceImage": {
       "type": "string",
       "max": 256
@@ -23947,7 +24104,6 @@
     "InferenceRecommendation": {
       "type": "structure",
       "required": [
-        "Metrics",
         "EndpointConfiguration",
         "ModelConfiguration"
       ],
@@ -26517,7 +26673,7 @@
       ],
       "members": {
         "HubName": {
-          "shape": "HubName",
+          "shape": "HubNameOrArn",
           "documentation": "<p>The name of the hub to list the content versions of.</p>"
         },
         "HubContentType": {
@@ -26586,7 +26742,7 @@
       ],
       "members": {
         "HubName": {
-          "shape": "HubName",
+          "shape": "HubNameOrArn",
           "documentation": "<p>The name of the hub to list the contents of.</p>"
         },
         "HubContentType": {
@@ -35578,12 +35734,6 @@
     },
     "RecommendationMetrics": {
       "type": "structure",
-      "required": [
-        "CostPerHour",
-        "CostPerInference",
-        "MaxInvocations",
-        "ModelLatency"
-      ],
       "members": {
         "CostPerHour": {
           "shape": "Float",
@@ -35729,6 +35879,12 @@
       "max": 128,
       "min": 1,
       "pattern": ".*"
+    },
+    "ReferenceMinVersion": {
+      "type": "string",
+      "max": 14,
+      "min": 5,
+      "pattern": "^\\d{1,4}.\\d{1,4}.\\d{1,4}$"
     },
     "RegisterDevicesRequest": {
       "type": "structure",
@@ -36328,6 +36484,10 @@
         "ModelAccessConfig": {
           "shape": "ModelAccessConfig",
           "documentation": "<p>Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the <code>ModelAccessConfig</code>. You are responsible for reviewing and complying with any applicable license terms and making sure they are acceptable for your use case before downloading or using a model.</p>"
+        },
+        "HubAccessConfig": {
+          "shape": "InferenceHubAccessConfig",
+          "documentation": "<p>Configuration information for hub access.</p>"
         }
       },
       "documentation": "<p>Specifies the S3 location of ML model data to deploy.</p>"
@@ -36396,6 +36556,11 @@
       "member": {
         "shape": "SageMakerImageVersionAlias"
       }
+    },
+    "SageMakerPublicHubContentArn": {
+      "type": "string",
+      "max": 255,
+      "pattern": "^arn:[a-z0-9-\\.]{1,63}:sagemaker:\\w+(?:-\\w+)+:aws:hub-content\\/[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}\\/Model\\/[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}$"
     },
     "SagemakerServicecatalogStatus": {
       "type": "string",
@@ -40845,7 +41010,7 @@
       ],
       "members": {
         "HubName": {
-          "shape": "HubName",
+          "shape": "HubNameOrArn",
           "documentation": "<p>The name of the hub to update.</p>"
         },
         "HubDescription": {

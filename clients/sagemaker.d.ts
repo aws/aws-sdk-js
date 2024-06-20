@@ -221,13 +221,21 @@ declare class SageMaker extends Service {
    */
   createFlowDefinition(callback?: (err: AWSError, data: SageMaker.Types.CreateFlowDefinitionResponse) => void): Request<SageMaker.Types.CreateFlowDefinitionResponse, AWSError>;
   /**
-   * Create a hub.  Hub APIs are only callable through SageMaker Studio. 
+   * Create a hub.
    */
   createHub(params: SageMaker.Types.CreateHubRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateHubResponse) => void): Request<SageMaker.Types.CreateHubResponse, AWSError>;
   /**
-   * Create a hub.  Hub APIs are only callable through SageMaker Studio. 
+   * Create a hub.
    */
   createHub(callback?: (err: AWSError, data: SageMaker.Types.CreateHubResponse) => void): Request<SageMaker.Types.CreateHubResponse, AWSError>;
+  /**
+   * Create a hub content reference in order to add a model in the JumpStart public hub to a private hub.
+   */
+  createHubContentReference(params: SageMaker.Types.CreateHubContentReferenceRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateHubContentReferenceResponse) => void): Request<SageMaker.Types.CreateHubContentReferenceResponse, AWSError>;
+  /**
+   * Create a hub content reference in order to add a model in the JumpStart public hub to a private hub.
+   */
+  createHubContentReference(callback?: (err: AWSError, data: SageMaker.Types.CreateHubContentReferenceResponse) => void): Request<SageMaker.Types.CreateHubContentReferenceResponse, AWSError>;
   /**
    * Defines the settings you will use for the human review workflow user interface. Reviewers will see a three-panel interface with an instruction area, the item to review, and an input area.
    */
@@ -669,21 +677,29 @@ declare class SageMaker extends Service {
    */
   deleteFlowDefinition(callback?: (err: AWSError, data: SageMaker.Types.DeleteFlowDefinitionResponse) => void): Request<SageMaker.Types.DeleteFlowDefinitionResponse, AWSError>;
   /**
-   * Delete a hub.  Hub APIs are only callable through SageMaker Studio. 
+   * Delete a hub.
    */
   deleteHub(params: SageMaker.Types.DeleteHubRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete a hub.  Hub APIs are only callable through SageMaker Studio. 
+   * Delete a hub.
    */
   deleteHub(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete the contents of a hub.  Hub APIs are only callable through SageMaker Studio. 
+   * Delete the contents of a hub.
    */
   deleteHubContent(params: SageMaker.Types.DeleteHubContentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete the contents of a hub.  Hub APIs are only callable through SageMaker Studio. 
+   * Delete the contents of a hub.
    */
   deleteHubContent(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete a hub content reference in order to remove a model from a private hub.
+   */
+  deleteHubContentReference(params: SageMaker.Types.DeleteHubContentReferenceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete a hub content reference in order to remove a model from a private hub.
+   */
+  deleteHubContentReference(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Use this operation to delete a human task user interface (worker task template).  To see a list of human task user interfaces (work task templates) in your account, use ListHumanTaskUis. When you delete a worker task template, it no longer appears when you call ListHumanTaskUis.
    */
@@ -1109,19 +1125,19 @@ declare class SageMaker extends Service {
    */
   describeFlowDefinition(callback?: (err: AWSError, data: SageMaker.Types.DescribeFlowDefinitionResponse) => void): Request<SageMaker.Types.DescribeFlowDefinitionResponse, AWSError>;
   /**
-   * Describe a hub.  Hub APIs are only callable through SageMaker Studio. 
+   * Describes a hub.
    */
   describeHub(params: SageMaker.Types.DescribeHubRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeHubResponse) => void): Request<SageMaker.Types.DescribeHubResponse, AWSError>;
   /**
-   * Describe a hub.  Hub APIs are only callable through SageMaker Studio. 
+   * Describes a hub.
    */
   describeHub(callback?: (err: AWSError, data: SageMaker.Types.DescribeHubResponse) => void): Request<SageMaker.Types.DescribeHubResponse, AWSError>;
   /**
-   * Describe the content of a hub.  Hub APIs are only callable through SageMaker Studio. 
+   * Describe the content of a hub.
    */
   describeHubContent(params: SageMaker.Types.DescribeHubContentRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeHubContentResponse) => void): Request<SageMaker.Types.DescribeHubContentResponse, AWSError>;
   /**
-   * Describe the content of a hub.  Hub APIs are only callable through SageMaker Studio. 
+   * Describe the content of a hub.
    */
   describeHubContent(callback?: (err: AWSError, data: SageMaker.Types.DescribeHubContentResponse) => void): Request<SageMaker.Types.DescribeHubContentResponse, AWSError>;
   /**
@@ -1485,11 +1501,11 @@ declare class SageMaker extends Service {
    */
   getSearchSuggestions(callback?: (err: AWSError, data: SageMaker.Types.GetSearchSuggestionsResponse) => void): Request<SageMaker.Types.GetSearchSuggestionsResponse, AWSError>;
   /**
-   * Import hub content.  Hub APIs are only callable through SageMaker Studio. 
+   * Import hub content.
    */
   importHubContent(params: SageMaker.Types.ImportHubContentRequest, callback?: (err: AWSError, data: SageMaker.Types.ImportHubContentResponse) => void): Request<SageMaker.Types.ImportHubContentResponse, AWSError>;
   /**
-   * Import hub content.  Hub APIs are only callable through SageMaker Studio. 
+   * Import hub content.
    */
   importHubContent(callback?: (err: AWSError, data: SageMaker.Types.ImportHubContentResponse) => void): Request<SageMaker.Types.ImportHubContentResponse, AWSError>;
   /**
@@ -1693,27 +1709,27 @@ declare class SageMaker extends Service {
    */
   listFlowDefinitions(callback?: (err: AWSError, data: SageMaker.Types.ListFlowDefinitionsResponse) => void): Request<SageMaker.Types.ListFlowDefinitionsResponse, AWSError>;
   /**
-   * List hub content versions.  Hub APIs are only callable through SageMaker Studio. 
+   * List hub content versions.
    */
   listHubContentVersions(params: SageMaker.Types.ListHubContentVersionsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListHubContentVersionsResponse) => void): Request<SageMaker.Types.ListHubContentVersionsResponse, AWSError>;
   /**
-   * List hub content versions.  Hub APIs are only callable through SageMaker Studio. 
+   * List hub content versions.
    */
   listHubContentVersions(callback?: (err: AWSError, data: SageMaker.Types.ListHubContentVersionsResponse) => void): Request<SageMaker.Types.ListHubContentVersionsResponse, AWSError>;
   /**
-   * List the contents of a hub.  Hub APIs are only callable through SageMaker Studio. 
+   * List the contents of a hub.
    */
   listHubContents(params: SageMaker.Types.ListHubContentsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListHubContentsResponse) => void): Request<SageMaker.Types.ListHubContentsResponse, AWSError>;
   /**
-   * List the contents of a hub.  Hub APIs are only callable through SageMaker Studio. 
+   * List the contents of a hub.
    */
   listHubContents(callback?: (err: AWSError, data: SageMaker.Types.ListHubContentsResponse) => void): Request<SageMaker.Types.ListHubContentsResponse, AWSError>;
   /**
-   * List all existing hubs.  Hub APIs are only callable through SageMaker Studio. 
+   * List all existing hubs.
    */
   listHubs(params: SageMaker.Types.ListHubsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListHubsResponse) => void): Request<SageMaker.Types.ListHubsResponse, AWSError>;
   /**
-   * List all existing hubs.  Hub APIs are only callable through SageMaker Studio. 
+   * List all existing hubs.
    */
   listHubs(callback?: (err: AWSError, data: SageMaker.Types.ListHubsResponse) => void): Request<SageMaker.Types.ListHubsResponse, AWSError>;
   /**
@@ -2453,11 +2469,11 @@ declare class SageMaker extends Service {
    */
   updateFeatureMetadata(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Update a hub.  Hub APIs are only callable through SageMaker Studio. 
+   * Update a hub.
    */
   updateHub(params: SageMaker.Types.UpdateHubRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateHubResponse) => void): Request<SageMaker.Types.UpdateHubResponse, AWSError>;
   /**
-   * Update a hub.  Hub APIs are only callable through SageMaker Studio. 
+   * Update a hub.
    */
   updateHub(callback?: (err: AWSError, data: SageMaker.Types.UpdateHubResponse) => void): Request<SageMaker.Types.UpdateHubResponse, AWSError>;
   /**
@@ -5492,6 +5508,38 @@ declare namespace SageMaker {
      */
     FlowDefinitionArn: FlowDefinitionArn;
   }
+  export interface CreateHubContentReferenceRequest {
+    /**
+     * The name of the hub to add the hub content reference to.
+     */
+    HubName: HubNameOrArn;
+    /**
+     * The ARN of the public hub content to reference.
+     */
+    SageMakerPublicHubContentArn: SageMakerPublicHubContentArn;
+    /**
+     * The name of the hub content to reference.
+     */
+    HubContentName?: HubContentName;
+    /**
+     * The minimum version of the hub content to reference.
+     */
+    MinVersion?: HubContentVersion;
+    /**
+     * Any tags associated with the hub content to reference.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateHubContentReferenceResponse {
+    /**
+     * The ARN of the hub that the hub content reference was added to.
+     */
+    HubArn: HubArn;
+    /**
+     * The ARN of the hub content.
+     */
+    HubContentArn: HubContentArn;
+  }
   export interface CreateHubRequest {
     /**
      * The name of the hub to create.
@@ -7391,11 +7439,25 @@ declare namespace SageMaker {
   }
   export interface DeleteFlowDefinitionResponse {
   }
+  export interface DeleteHubContentReferenceRequest {
+    /**
+     * The name of the hub to delete the hub content reference from.
+     */
+    HubName: HubNameOrArn;
+    /**
+     * The type of hub content to delete.
+     */
+    HubContentType: HubContentType;
+    /**
+     * The name of the hub content to delete.
+     */
+    HubContentName: HubContentName;
+  }
   export interface DeleteHubContentRequest {
     /**
      * The name of the hub that you want to delete content in.
      */
-    HubName: HubName;
+    HubName: HubNameOrArn;
     /**
      * The type of content that you want to delete from a hub.
      */
@@ -7413,7 +7475,7 @@ declare namespace SageMaker {
     /**
      * The name of the hub to delete.
      */
-    HubName: HubName;
+    HubName: HubNameOrArn;
   }
   export interface DeleteHumanTaskUiRequest {
     /**
@@ -9086,7 +9148,7 @@ declare namespace SageMaker {
     /**
      * The name of the hub that contains the content to describe.
      */
-    HubName: HubName;
+    HubName: HubNameOrArn;
     /**
      * The type of content in the hub.
      */
@@ -9146,6 +9208,18 @@ declare namespace SageMaker {
      */
     HubContentDocument: HubContentDocument;
     /**
+     * The ARN of the public hub content.
+     */
+    SageMakerPublicHubContentArn?: SageMakerPublicHubContentArn;
+    /**
+     * The minimum version of the hub content.
+     */
+    ReferenceMinVersion?: ReferenceMinVersion;
+    /**
+     * The support status of the hub content.
+     */
+    SupportStatus?: HubContentSupportStatus;
+    /**
      * The searchable keywords for the hub content.
      */
     HubContentSearchKeywords?: HubContentSearchKeywordList;
@@ -9170,7 +9244,7 @@ declare namespace SageMaker {
     /**
      * The name of the hub to describe.
      */
-    HubName: HubName;
+    HubName: HubNameOrArn;
   }
   export interface DescribeHubResponse {
     /**
@@ -12766,6 +12840,10 @@ declare namespace SageMaker {
      */
     HubContentArn: HubContentArn;
     /**
+     * The ARN of the public hub content.
+     */
+    SageMakerPublicHubContentArn?: SageMakerPublicHubContentArn;
+    /**
      * The version of the hub content.
      */
     HubContentVersion: HubContentVersion;
@@ -12786,6 +12864,10 @@ declare namespace SageMaker {
      */
     HubContentDescription?: HubContentDescription;
     /**
+     * The support status of the hub content.
+     */
+    SupportStatus?: HubContentSupportStatus;
+    /**
      * The searchable keywords for the hub content.
      */
     HubContentSearchKeywords?: HubContentSearchKeywordList;
@@ -12797,6 +12879,10 @@ declare namespace SageMaker {
      * The date and time that the hub content was created.
      */
     CreationTime: Timestamp;
+    /**
+     * The date and time when the hub content was originally created, before any updates or revisions.
+     */
+    OriginalCreationTime?: Timestamp;
   }
   export type HubContentInfoList = HubContentInfo[];
   export type HubContentMarkdown = string;
@@ -12804,7 +12890,8 @@ declare namespace SageMaker {
   export type HubContentSearchKeywordList = HubSearchKeyword[];
   export type HubContentSortBy = "HubContentName"|"CreationTime"|"HubContentStatus"|string;
   export type HubContentStatus = "Available"|"Importing"|"Deleting"|"ImportFailed"|"DeleteFailed"|string;
-  export type HubContentType = "Model"|"Notebook"|string;
+  export type HubContentSupportStatus = "Supported"|"Deprecated"|string;
+  export type HubContentType = "Model"|"Notebook"|"ModelReference"|string;
   export type HubContentVersion = string;
   export type HubDescription = string;
   export type HubDisplayName = string;
@@ -12844,6 +12931,7 @@ declare namespace SageMaker {
   }
   export type HubInfoList = HubInfo[];
   export type HubName = string;
+  export type HubNameOrArn = string;
   export interface HubS3StorageConfig {
     /**
      * The Amazon S3 bucket prefix for hosting hub content.
@@ -13544,7 +13632,7 @@ declare namespace SageMaker {
     /**
      * The name of the hub to import content into.
      */
-    HubName: HubName;
+    HubName: HubNameOrArn;
     /**
      * The display name of the hub content to import.
      */
@@ -13804,6 +13892,12 @@ declare namespace SageMaker {
     RoleArn?: RoleArn;
   }
   export type InferenceExperimentType = "ShadowMode"|string;
+  export interface InferenceHubAccessConfig {
+    /**
+     * The ARN of the hub content for which deployment access is allowed.
+     */
+    HubContentArn: HubContentArn;
+  }
   export type InferenceImage = string;
   export interface InferenceMetrics {
     /**
@@ -13823,7 +13917,7 @@ declare namespace SageMaker {
     /**
      * The metrics used to decide what recommendation to make.
      */
-    Metrics: RecommendationMetrics;
+    Metrics?: RecommendationMetrics;
     /**
      * Defines the endpoint configuration parameters.
      */
@@ -15474,7 +15568,7 @@ declare namespace SageMaker {
     /**
      * The name of the hub to list the content versions of.
      */
-    HubName: HubName;
+    HubName: HubNameOrArn;
     /**
      * The type of hub content to list versions of.
      */
@@ -15530,7 +15624,7 @@ declare namespace SageMaker {
     /**
      * The name of the hub to list the contents of.
      */
-    HubName: HubName;
+    HubName: HubNameOrArn;
     /**
      * The type of hub content to list.
      */
@@ -21190,19 +21284,19 @@ declare namespace SageMaker {
     /**
      * Defines the cost per hour for the instance. 
      */
-    CostPerHour: Float;
+    CostPerHour?: Float;
     /**
      * Defines the cost per inference for the instance .
      */
-    CostPerInference: Float;
+    CostPerInference?: Float;
     /**
      * The expected maximum number of requests per minute for the instance.
      */
-    MaxInvocations: Integer;
+    MaxInvocations?: Integer;
     /**
      * The expected model latency at maximum invocation per minute for the instance.
      */
-    ModelLatency: Integer;
+    ModelLatency?: Integer;
     /**
      * The expected CPU utilization at maximum invocations per minute for the instance.  NaN indicates that the value is not available.
      */
@@ -21245,6 +21339,7 @@ declare namespace SageMaker {
   export type RedshiftResultCompressionType = "None"|"GZIP"|"BZIP2"|"ZSTD"|"SNAPPY"|string;
   export type RedshiftResultFormat = "PARQUET"|"CSV"|string;
   export type RedshiftUserName = string;
+  export type ReferenceMinVersion = string;
   export interface RegisterDevicesRequest {
     /**
      * The name of the fleet.
@@ -21538,6 +21633,10 @@ declare namespace SageMaker {
      * Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the ModelAccessConfig. You are responsible for reviewing and complying with any applicable license terms and making sure they are acceptable for your use case before downloading or using a model.
      */
     ModelAccessConfig?: ModelAccessConfig;
+    /**
+     * Configuration information for hub access.
+     */
+    HubAccessConfig?: InferenceHubAccessConfig;
   }
   export type S3ModelDataType = "S3Prefix"|"S3Object"|string;
   export type S3ModelUri = string;
@@ -21565,6 +21664,7 @@ declare namespace SageMaker {
   export type S3Uri = string;
   export type SageMakerImageVersionAlias = string;
   export type SageMakerImageVersionAliases = SageMakerImageVersionAlias[];
+  export type SageMakerPublicHubContentArn = string;
   export type SagemakerServicecatalogStatus = "Enabled"|"Disabled"|string;
   export type SampleWeightAttributeName = string;
   export type SamplingPercentage = number;
@@ -23941,7 +24041,7 @@ declare namespace SageMaker {
     /**
      * The name of the hub to update.
      */
-    HubName: HubName;
+    HubName: HubNameOrArn;
     /**
      * A description of the updated hub.
      */

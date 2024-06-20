@@ -61,6 +61,10 @@ declare namespace BedrockRuntime {
      */
     image?: ImageBlock;
     /**
+     * A document to include in the message.
+     */
+    document?: DocumentBlock;
+    /**
      * Information about a tool use request from a model. 
      */
     toolUse?: ToolUseBlock;
@@ -269,6 +273,29 @@ declare namespace BedrockRuntime {
   }
   export interface Document {
   }
+  export interface DocumentBlock {
+    /**
+     * The format of a document, or its extension.
+     */
+    format: DocumentFormat;
+    /**
+     * A name for the document.
+     */
+    name: DocumentBlockNameString;
+    /**
+     * Contains the content of the document.
+     */
+    source: DocumentSource;
+  }
+  export type DocumentBlockNameString = string;
+  export type DocumentFormat = "pdf"|"csv"|"doc"|"docx"|"xls"|"xlsx"|"html"|"txt"|"md"|string;
+  export interface DocumentSource {
+    /**
+     * A base64-encoded string of a UTF-8 encoded file, that is the document to include in the message.
+     */
+    bytes?: DocumentSourceBytesBlob;
+  }
+  export type DocumentSourceBytesBlob = Buffer|Uint8Array|Blob|string;
   export interface GuardrailAssessment {
     /**
      * The topic policy.
@@ -768,6 +795,10 @@ declare namespace BedrockRuntime {
      * A tool result that is an image.  This field is only supported by Anthropic Claude 3 models. 
      */
     image?: ImageBlock;
+    /**
+     * A tool result that is a document.
+     */
+    document?: DocumentBlock;
   }
   export type ToolResultContentBlocks = ToolResultContentBlock[];
   export type ToolResultStatus = "success"|"error"|string;
