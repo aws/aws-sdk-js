@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1646.0-->
+<!--LATEST=2.1647.0-->
 <!--ENTRYINSERT-->
+
+## 2.1647.0
+* bugfix: opsworks: delete tests
+* feature: BedrockRuntime: Increases Converse API's document name length
+* feature: CustomerProfiles: This release includes changes to ProfileObjectType APIs, adds functionality top set and get capacity for profile object types.
+* feature: EC2: Fix EC2 multi-protocol info in models.
+* feature: QBusiness: Updates API to latest version.
+* feature: SSM: Add sensitive trait to SSM IPAddress property for CloudTrail redaction
+* feature: WorkSpacesWeb: Added ability to enable DeepLinking functionality on a Portal via UserSettings as well as added support for IdentityProvider resource tagging.
 
 ## 2.1646.0
 * feature: BedrockRuntime: This release adds document support to Converse and ConverseStream APIs

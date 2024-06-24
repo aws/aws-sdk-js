@@ -645,7 +645,7 @@
     },
     "DocumentBlockNameString": {
       "type": "string",
-      "max": 64,
+      "max": 200,
       "min": 1
     },
     "DocumentFormat": {

@@ -1,0 +1,37 @@
+[
+    {
+        "type": "bugfix",
+        "category": "opsworks",
+        "description": "delete tests"
+    },
+    {
+        "type": "feature",
+        "category": "BedrockRuntime",
+        "description": "Increases Converse API's document name length"
+    },
+    {
+        "type": "feature",
+        "category": "CustomerProfiles",
+        "description": "This release includes changes to ProfileObjectType APIs, adds functionality top set and get capacity for profile object types."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Fix EC2 multi-protocol info in models."
+    },
+    {
+        "type": "feature",
+        "category": "QBusiness",
+        "description": "Updates API to latest version."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "Add sensitive trait to SSM IPAddress property for CloudTrail redaction"
+    },
+    {
+        "type": "feature",
+        "category": "WorkSpacesWeb",
+        "description": "Added ability to enable DeepLinking functionality on a Portal via UserSettings as well as added support for IdentityProvider resource tagging."
+    }
+]

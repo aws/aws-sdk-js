@@ -672,7 +672,7 @@ declare namespace QBusiness {
      */
     containsAll?: DocumentAttribute;
     /**
-     * Returns true when a document contains any of the specified document attributes or metadata fields. Supported for the following document attribute value types: dateValue, longValue, stringListValue and stringValue.
+     * Returns true when a document contains any of the specified document attributes or metadata fields. Supported for the following document attribute value types: stringListValue.
      */
     containsAny?: DocumentAttribute;
     /**
@@ -842,7 +842,7 @@ declare namespace QBusiness {
      */
     conversationId?: ConversationId;
     /**
-     * The identifier of the previous end user text input message in a conversation.
+     * The identifier of the previous system message in a conversation.
      */
     parentMessageId?: MessageId;
     /**
@@ -960,6 +960,10 @@ declare namespace QBusiness {
      * An option to allow end users to upload files directly during chat.
      */
     attachmentsConfiguration?: AttachmentsConfiguration;
+    /**
+     * An option to allow end users to create and use Amazon Q Apps in the web experience.
+     */
+    qAppsConfiguration?: QAppsConfiguration;
   }
   export interface CreateApplicationResponse {
     /**
@@ -1034,7 +1038,7 @@ declare namespace QBusiness {
      */
     displayName: IndexName;
     /**
-     * The index type that's suitable for your needs. For more information on what's included in each type of index or index tier, see Amazon Q Business tiers.
+     * The index type that's suitable for your needs. For more information on what's included in each type of index, see Amazon Q Business tiers.
      */
     type?: IndexType;
     /**
@@ -1745,6 +1749,10 @@ declare namespace QBusiness {
      * Settings for whether end users can upload files directly during chat.
      */
     attachmentsConfiguration?: AppliedAttachmentsConfiguration;
+    /**
+     * Settings for whether end users can create and use Amazon Q Apps in the web experience.
+     */
+    qAppsConfiguration?: QAppsConfiguration;
   }
   export interface GetChatControlsConfigurationRequest {
     /**
@@ -2863,6 +2871,13 @@ declare namespace QBusiness {
   }
   export interface PutGroupResponse {
   }
+  export interface QAppsConfiguration {
+    /**
+     * Status information about whether end users can create and use Amazon Q Apps in the web experience.
+     */
+    qAppsControlMode: QAppsControlMode;
+  }
+  export type QAppsControlMode = "ENABLED"|"DISABLED"|string;
   export type ReadAccessType = "ALLOW"|"DENY"|string;
   export type ResponseScope = "ENTERPRISE_CONTENT_ONLY"|"EXTENDED_KNOWLEDGE_ENABLED"|string;
   export interface Retriever {
@@ -3172,6 +3187,10 @@ declare namespace QBusiness {
      * An option to allow end users to upload files directly during chat.
      */
     attachmentsConfiguration?: AttachmentsConfiguration;
+    /**
+     * An option to allow end users to create and use Amazon Q Apps in the web experience.
+     */
+    qAppsConfiguration?: QAppsConfiguration;
   }
   export interface UpdateApplicationResponse {
   }

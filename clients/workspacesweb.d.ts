@@ -763,6 +763,10 @@ declare namespace WorkSpacesWeb {
      * The ARN of the web portal.
      */
     portalArn: ARN;
+    /**
+     * The tags to add to the identity provider resource. A tag is a key-value pair.
+     */
+    tags?: TagList;
   }
   export interface CreateIdentityProviderResponse {
     /**
@@ -796,7 +800,7 @@ declare namespace WorkSpacesWeb {
      */
     ipRules: IpRuleList;
     /**
-     * The tags to add to the browser settings resource. A tag is a key-value pair.
+     * The tags to add to the IP access settings resource. A tag is a key-value pair.
      */
     tags?: TagList;
   }
@@ -939,6 +943,10 @@ declare namespace WorkSpacesWeb {
      * The customer managed key used to encrypt sensitive information in the user settings.
      */
     customerManagedKey?: keyArn;
+    /**
+     * Specifies whether the user can use deep links that open automatically when connecting to a session.
+     */
+    deepLinkAllowed?: EnabledType;
     /**
      * The amount of time that a streaming session remains active after users disconnect.
      */
@@ -1973,6 +1981,10 @@ declare namespace WorkSpacesWeb {
      */
     copyAllowed?: EnabledType;
     /**
+     * Specifies whether the user can use deep links that open automatically when connecting to a session.
+     */
+    deepLinkAllowed?: EnabledType;
+    /**
      * The amount of time that a streaming session remains active after users disconnect.
      */
     disconnectTimeoutInMinutes?: DisconnectTimeoutInMinutes;
@@ -2054,6 +2066,10 @@ declare namespace WorkSpacesWeb {
      */
     customerManagedKey?: keyArn;
     /**
+     * Specifies whether the user can use deep links that open automatically when connecting to a session.
+     */
+    deepLinkAllowed?: EnabledType;
+    /**
      * The amount of time that a streaming session remains active after users disconnect.
      */
     disconnectTimeoutInMinutes?: DisconnectTimeoutInMinutes;
@@ -2092,6 +2108,10 @@ declare namespace WorkSpacesWeb {
      * Specifies whether the user can copy text from the streaming session to the local device.
      */
     copyAllowed?: EnabledType;
+    /**
+     * Specifies whether the user can use deep links that open automatically when connecting to a session.
+     */
+    deepLinkAllowed?: EnabledType;
     /**
      * The amount of time that a streaming session remains active after users disconnect.
      */
