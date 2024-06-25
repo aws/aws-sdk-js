@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1647.0-->
+<!--LATEST=2.1648.0-->
 <!--ENTRYINSERT-->
+
+## 2.1648.0
+* feature: AutoScaling: Doc only update for Auto Scaling's TargetTrackingMetricDataQuery
+* feature: EC2: This release is for the launch of the new u7ib-12tb.224xlarge, R8g, c7gn.metal and mac2-m1ultra.metal instance types
+* feature: NetworkManager: This is model changes & documentation update for the Asynchronous Error Reporting feature for AWS Cloud WAN. This feature allows customers to view errors that occur while their resources are being provisioned, enabling customers to fix their resources without needing external support.
+* feature: WorkSpacesThinClient: This release adds the deviceCreationTags field to CreateEnvironment API input, UpdateEnvironment API input and GetEnvironment API output.
 
 ## 2.1647.0
 * bugfix: opsworks: delete tests
