@@ -52,6 +52,14 @@ declare class IVSRealTime extends Service {
    */
   deleteEncoderConfiguration(callback?: (err: AWSError, data: IVSRealTime.Types.DeleteEncoderConfigurationResponse) => void): Request<IVSRealTime.Types.DeleteEncoderConfigurationResponse, AWSError>;
   /**
+   * Deletes the specified public key used to sign stage participant tokens. This invalidates future participant tokens generated using the key pair’s private key. 
+   */
+  deletePublicKey(params: IVSRealTime.Types.DeletePublicKeyRequest, callback?: (err: AWSError, data: IVSRealTime.Types.DeletePublicKeyResponse) => void): Request<IVSRealTime.Types.DeletePublicKeyResponse, AWSError>;
+  /**
+   * Deletes the specified public key used to sign stage participant tokens. This invalidates future participant tokens generated using the key pair’s private key. 
+   */
+  deletePublicKey(callback?: (err: AWSError, data: IVSRealTime.Types.DeletePublicKeyResponse) => void): Request<IVSRealTime.Types.DeletePublicKeyResponse, AWSError>;
+  /**
    * Shuts down and deletes the specified stage (disconnecting all participants).
    */
   deleteStage(params: IVSRealTime.Types.DeleteStageRequest, callback?: (err: AWSError, data: IVSRealTime.Types.DeleteStageResponse) => void): Request<IVSRealTime.Types.DeleteStageResponse, AWSError>;
@@ -100,6 +108,14 @@ declare class IVSRealTime extends Service {
    */
   getParticipant(callback?: (err: AWSError, data: IVSRealTime.Types.GetParticipantResponse) => void): Request<IVSRealTime.Types.GetParticipantResponse, AWSError>;
   /**
+   * Gets information for the specified public key.
+   */
+  getPublicKey(params: IVSRealTime.Types.GetPublicKeyRequest, callback?: (err: AWSError, data: IVSRealTime.Types.GetPublicKeyResponse) => void): Request<IVSRealTime.Types.GetPublicKeyResponse, AWSError>;
+  /**
+   * Gets information for the specified public key.
+   */
+  getPublicKey(callback?: (err: AWSError, data: IVSRealTime.Types.GetPublicKeyResponse) => void): Request<IVSRealTime.Types.GetPublicKeyResponse, AWSError>;
+  /**
    * Gets information for the specified stage.
    */
   getStage(params: IVSRealTime.Types.GetStageRequest, callback?: (err: AWSError, data: IVSRealTime.Types.GetStageResponse) => void): Request<IVSRealTime.Types.GetStageResponse, AWSError>;
@@ -123,6 +139,14 @@ declare class IVSRealTime extends Service {
    * Gets the storage configuration for the specified ARN.
    */
   getStorageConfiguration(callback?: (err: AWSError, data: IVSRealTime.Types.GetStorageConfigurationResponse) => void): Request<IVSRealTime.Types.GetStorageConfigurationResponse, AWSError>;
+  /**
+   * Import a public key to be used for signing stage participant tokens.
+   */
+  importPublicKey(params: IVSRealTime.Types.ImportPublicKeyRequest, callback?: (err: AWSError, data: IVSRealTime.Types.ImportPublicKeyResponse) => void): Request<IVSRealTime.Types.ImportPublicKeyResponse, AWSError>;
+  /**
+   * Import a public key to be used for signing stage participant tokens.
+   */
+  importPublicKey(callback?: (err: AWSError, data: IVSRealTime.Types.ImportPublicKeyResponse) => void): Request<IVSRealTime.Types.ImportPublicKeyResponse, AWSError>;
   /**
    * Gets summary information about all Compositions in your account, in the AWS region where the API request is processed. 
    */
@@ -155,6 +179,14 @@ declare class IVSRealTime extends Service {
    * Lists all participants in a specified stage session.
    */
   listParticipants(callback?: (err: AWSError, data: IVSRealTime.Types.ListParticipantsResponse) => void): Request<IVSRealTime.Types.ListParticipantsResponse, AWSError>;
+  /**
+   * Gets summary information about all public keys in your account, in the AWS region where the API request is processed.
+   */
+  listPublicKeys(params: IVSRealTime.Types.ListPublicKeysRequest, callback?: (err: AWSError, data: IVSRealTime.Types.ListPublicKeysResponse) => void): Request<IVSRealTime.Types.ListPublicKeysResponse, AWSError>;
+  /**
+   * Gets summary information about all public keys in your account, in the AWS region where the API request is processed.
+   */
+  listPublicKeys(callback?: (err: AWSError, data: IVSRealTime.Types.ListPublicKeysResponse) => void): Request<IVSRealTime.Types.ListPublicKeysResponse, AWSError>;
   /**
    * Gets all sessions for a specified stage.
    */
@@ -232,7 +264,7 @@ declare namespace IVSRealTime {
   export type AttributeKey = string;
   export interface AutoParticipantRecordingConfiguration {
     /**
-     * ARN of the StorageConfiguration resource to use for auto participant recording. Default: "" (empty string, no storage configuration is specified). Individual participant recording cannot be started unless a storage configuration is specified, when a Stage is created or updated.
+     * ARN of the StorageConfiguration resource to use for individual participant recording. Default: "" (empty string, no storage configuration is specified). Individual participant recording cannot be started unless a storage configuration is specified, when a Stage is created or updated.
      */
     storageConfigurationArn: AutoParticipantRecordingStorageConfigurationArn;
     /**
@@ -383,7 +415,7 @@ declare namespace IVSRealTime {
      */
     tags?: Tags;
     /**
-     * Auto participant recording configuration object attached to the stage.
+     * Configuration object for individual participant recording, to attach to the new stage.
      */
     autoParticipantRecordingConfiguration?: AutoParticipantRecordingConfiguration;
   }
@@ -424,6 +456,14 @@ declare namespace IVSRealTime {
     arn: EncoderConfigurationArn;
   }
   export interface DeleteEncoderConfigurationResponse {
+  }
+  export interface DeletePublicKeyRequest {
+    /**
+     * ARN of the public key to be deleted.
+     */
+    arn: PublicKeyArn;
+  }
+  export interface DeletePublicKeyResponse {
   }
   export interface DeleteStageRequest {
     /**
@@ -633,6 +673,18 @@ declare namespace IVSRealTime {
      */
     participant?: Participant;
   }
+  export interface GetPublicKeyRequest {
+    /**
+     * ARN of the public key for which the information is to be retrieved.
+     */
+    arn: PublicKeyArn;
+  }
+  export interface GetPublicKeyResponse {
+    /**
+     * The public key that is returned.
+     */
+    publicKey?: PublicKey;
+  }
   export interface GetStageRequest {
     /**
      * ARN of the stage for which the information is to be retrieved.
@@ -675,7 +727,7 @@ declare namespace IVSRealTime {
   }
   export interface GridConfiguration {
     /**
-     * This attribute name identifies the featured slot. A participant with this attribute set to "true" (as a string value) in ParticipantTokenConfiguration is placed in the featured slot.
+     * This attribute name identifies the featured slot. A participant with this attribute set to "true" (as a string value) in ParticipantTokenConfiguration is placed in the featured slot. Default: "" (no featured participant).
      */
     featuredParticipantAttribute?: AttributeKey;
     /**
@@ -683,11 +735,11 @@ declare namespace IVSRealTime {
      */
     omitStoppedVideo?: OmitStoppedVideo;
     /**
-     * Sets the non-featured participant display mode. Default: VIDEO.
+     * Sets the non-featured participant display mode, to control the aspect ratio of video tiles. VIDEO is 16:9, SQUARE is 1:1, and PORTRAIT is 3:4. Default: VIDEO.
      */
     videoAspectRatio?: VideoAspectRatio;
     /**
-     * Defines how video fits within the participant tile. When not set, videoFillMode defaults to COVER fill mode for participants in the grid and to CONTAIN fill mode for featured participants.
+     * Defines how video content fits within the participant tile: FILL (stretched), COVER (cropped), or CONTAIN (letterboxed). When not set, videoFillMode defaults to COVER fill mode for participants in the grid and to CONTAIN fill mode for featured participants.
      */
     videoFillMode?: VideoFillMode;
     /**
@@ -697,6 +749,26 @@ declare namespace IVSRealTime {
   }
   export type GridGap = number;
   export type Height = number;
+  export interface ImportPublicKeyRequest {
+    /**
+     * The content of the public key to be imported.
+     */
+    publicKeyMaterial: PublicKeyMaterial;
+    /**
+     * Name of the public key to be imported.
+     */
+    name?: PublicKeyName;
+    /**
+     * Tags attached to the resource. Array of maps, each of the form string:string (key:value). See Tagging AWS Resources for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.
+     */
+    tags?: Tags;
+  }
+  export interface ImportPublicKeyResponse {
+    /**
+     * The public key that was imported.
+     */
+    publicKey?: PublicKey;
+  }
   export interface LayoutConfiguration {
     /**
      * Configuration related to grid layout. Default: Grid layout.
@@ -831,6 +903,26 @@ declare namespace IVSRealTime {
      */
     nextToken?: PaginationToken;
   }
+  export interface ListPublicKeysRequest {
+    /**
+     * The first public key to retrieve. This is used for pagination; see the nextToken response field.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * Maximum number of results to return. Default: 50.
+     */
+    maxResults?: MaxPublicKeyResults;
+  }
+  export interface ListPublicKeysResponse {
+    /**
+     * List of the matching public keys (summary information only).
+     */
+    publicKeys: PublicKeyList;
+    /**
+     * If there are more public keys than maxResults, use nextToken in the request to get the next set.
+     */
+    nextToken?: PaginationToken;
+  }
   export interface ListStageSessionsRequest {
     /**
      * Stage ARN.
@@ -911,6 +1003,7 @@ declare namespace IVSRealTime {
   export type MaxEncoderConfigurationResults = number;
   export type MaxParticipantEventResults = number;
   export type MaxParticipantResults = number;
+  export type MaxPublicKeyResults = number;
   export type MaxStageResults = number;
   export type MaxStageSessionResults = number;
   export type MaxStorageConfigurationResults = number;
@@ -970,11 +1063,11 @@ declare namespace IVSRealTime {
      */
     recordingS3BucketName?: ParticipantRecordingS3BucketName;
     /**
-     * S3 prefix of the S3 bucket to where the participant is being recorded, if individual participant recording is enabled, or "" (empty string), if recording is not enabled.
+     * S3 prefix of the S3 bucket where the participant is being recorded, if individual participant recording is enabled, or "" (empty string), if recording is not enabled.
      */
     recordingS3Prefix?: ParticipantRecordingS3Prefix;
     /**
-     * Participant’s recording state.
+     * The participant’s recording state.
      */
     recordingState?: ParticipantRecordingState;
   }
@@ -1011,7 +1104,7 @@ declare namespace IVSRealTime {
      */
     published?: Published;
     /**
-     * Participant’s recording state.
+     * The participant’s recording state.
      */
     recordingState?: ParticipantRecordingState;
   }
@@ -1076,7 +1169,7 @@ declare namespace IVSRealTime {
   export type PipBehavior = "STATIC"|"DYNAMIC"|string;
   export interface PipConfiguration {
     /**
-     * This attribute name identifies the featured slot. A participant with this attribute set to "true" (as a string value) in ParticipantTokenConfiguration is placed in the featured slot.
+     * This attribute name identifies the featured slot. A participant with this attribute set to "true" (as a string value) in ParticipantTokenConfiguration is placed in the featured slot. Default: "" (no featured participant).
      */
     featuredParticipantAttribute?: AttributeKey;
     /**
@@ -1084,7 +1177,7 @@ declare namespace IVSRealTime {
      */
     omitStoppedVideo?: OmitStoppedVideo;
     /**
-     * Defines how video fits within the participant tile. Default: COVER. 
+     * Defines how video content fits within the participant tile: FILL (stretched), COVER (cropped), or CONTAIN (letterboxed). Default: COVER.
      */
     videoFillMode?: VideoFillMode;
     /**
@@ -1092,11 +1185,11 @@ declare namespace IVSRealTime {
      */
     gridGap?: GridGap;
     /**
-     * Identifies the PiP slot. A participant with this attribute set to "true" (as a string value) in ParticipantTokenConfiguration is placed in the PiP slot.
+     * Specifies the participant for the PiP window. A participant with this attribute set to "true" (as a string value) in ParticipantTokenConfiguration is placed in the PiP slot. Default: "" (no PiP participant).
      */
     pipParticipantAttribute?: AttributeKey;
     /**
-     * Defines PiP behavior when all participants have left. Default: STATIC.
+     * Defines PiP behavior when all participants have left: STATIC (maintains original position/size) or DYNAMIC (expands to full composition). Default: STATIC.
      */
     pipBehavior?: PipBehavior;
     /**
@@ -1120,6 +1213,47 @@ declare namespace IVSRealTime {
   export type PipOffset = number;
   export type PipPosition = "TOP_LEFT"|"TOP_RIGHT"|"BOTTOM_LEFT"|"BOTTOM_RIGHT"|string;
   export type PipWidth = number;
+  export interface PublicKey {
+    /**
+     * Public key ARN.
+     */
+    arn?: PublicKeyArn;
+    /**
+     * Public key name.
+     */
+    name?: PublicKeyName;
+    /**
+     * Public key material.
+     */
+    publicKeyMaterial?: PublicKeyMaterial;
+    /**
+     * The public key fingerprint, a short string used to identify or verify the full public key.
+     */
+    fingerprint?: PublicKeyFingerprint;
+    /**
+     * Tags attached to the resource. Array of maps, each of the form string:string (key:value). See Tagging AWS Resources for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.
+     */
+    tags?: Tags;
+  }
+  export type PublicKeyArn = string;
+  export type PublicKeyFingerprint = string;
+  export type PublicKeyList = PublicKeySummary[];
+  export type PublicKeyMaterial = string;
+  export type PublicKeyName = string;
+  export interface PublicKeySummary {
+    /**
+     * Public key ARN.
+     */
+    arn?: PublicKeyArn;
+    /**
+     * Public key name.
+     */
+    name?: PublicKeyName;
+    /**
+     * Tags attached to the resource. Array of maps, each of the form string:string (key:value). See Tagging AWS Resources for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.
+     */
+    tags?: Tags;
+  }
   export type Published = boolean;
   export interface RecordingConfiguration {
     /**
@@ -1174,11 +1308,26 @@ declare namespace IVSRealTime {
      */
     tags?: Tags;
     /**
-     * Auto-participant-recording configuration object attached to the stage.
+     * Configuration object for individual participant recording, attached to the stage.
      */
     autoParticipantRecordingConfiguration?: AutoParticipantRecordingConfiguration;
+    /**
+     * Summary information about various endpoints for a stage.
+     */
+    endpoints?: StageEndpoints;
   }
   export type StageArn = string;
+  export type StageEndpoint = string;
+  export interface StageEndpoints {
+    /**
+     * Events endpoint.
+     */
+    events?: StageEndpoint;
+    /**
+     * WHIP endpoint.
+     */
+    whip?: StageEndpoint;
+  }
   export type StageName = string;
   export interface StageSession {
     /**
@@ -1344,7 +1493,7 @@ declare namespace IVSRealTime {
      */
     name?: StageName;
     /**
-     * Auto-participant-recording configuration object to attach to the stage. Auto-participant-recording configuration cannot be updated while recording is active.
+     * Configuration object for individual participant recording, to attach to the stage. Note that this cannot be updated while recording is active.
      */
     autoParticipantRecordingConfiguration?: AutoParticipantRecordingConfiguration;
   }

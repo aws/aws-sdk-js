@@ -517,6 +517,25 @@ declare class OpenSearch extends Service {
   upgradeDomain(callback?: (err: AWSError, data: OpenSearch.Types.UpgradeDomainResponse) => void): Request<OpenSearch.Types.UpgradeDomainResponse, AWSError>;
 }
 declare namespace OpenSearch {
+  export interface AIMLOptionsInput {
+    /**
+     * Container for parameters required for natural language query generation on the specified domain.
+     */
+    NaturalLanguageQueryGenerationOptions?: NaturalLanguageQueryGenerationOptionsInput;
+  }
+  export interface AIMLOptionsOutput {
+    /**
+     * Container for parameters required for natural language query generation on the specified domain.
+     */
+    NaturalLanguageQueryGenerationOptions?: NaturalLanguageQueryGenerationOptionsOutput;
+  }
+  export interface AIMLOptionsStatus {
+    /**
+     * Machine learning options on the specified domain.
+     */
+    Options?: AIMLOptionsOutput;
+    Status?: OptionStatus;
+  }
   export type ARN = string;
   export type AWSAccount = string;
   export interface AWSDomainInformation {
@@ -1205,6 +1224,10 @@ declare namespace OpenSearch {
      * Software update options for the domain.
      */
     SoftwareUpdateOptions?: SoftwareUpdateOptions;
+    /**
+     * Options for all machine learning features for the specified domain.
+     */
+    AIMLOptions?: AIMLOptionsInput;
   }
   export interface CreateDomainResponse {
     /**
@@ -1864,6 +1887,10 @@ declare namespace OpenSearch {
      * Information about the domain properties that are currently being modified.
      */
     ModifyingProperties?: ModifyingPropertiesList;
+    /**
+     * Container for parameters required to enable all machine learning features.
+     */
+    AIMLOptions?: AIMLOptionsStatus;
   }
   export interface DomainEndpointOptions {
     /**
@@ -2160,6 +2187,10 @@ declare namespace OpenSearch {
      * Information about the domain properties that are currently being modified.
      */
     ModifyingProperties?: ModifyingPropertiesList;
+    /**
+     * Container for parameters required to enable all machine learning features.
+     */
+    AIMLOptions?: AIMLOptionsOutput;
   }
   export type DomainStatusList = DomainStatus[];
   export type Double = number;
@@ -2920,6 +2951,24 @@ declare namespace OpenSearch {
     ValueType?: PropertyValueType;
   }
   export type ModifyingPropertiesList = ModifyingProperties[];
+  export type NaturalLanguageQueryGenerationCurrentState = "NOT_ENABLED"|"ENABLE_COMPLETE"|"ENABLE_IN_PROGRESS"|"ENABLE_FAILED"|"DISABLE_COMPLETE"|"DISABLE_IN_PROGRESS"|"DISABLE_FAILED"|string;
+  export type NaturalLanguageQueryGenerationDesiredState = "ENABLED"|"DISABLED"|string;
+  export interface NaturalLanguageQueryGenerationOptionsInput {
+    /**
+     * The desired state of the natural language query generation feature. Valid values are ENABLED and DISABLED.
+     */
+    DesiredState?: NaturalLanguageQueryGenerationDesiredState;
+  }
+  export interface NaturalLanguageQueryGenerationOptionsOutput {
+    /**
+     * The desired state of the natural language query generation feature. Valid values are ENABLED and DISABLED.
+     */
+    DesiredState?: NaturalLanguageQueryGenerationDesiredState;
+    /**
+     * The current state of the natural language query generation feature, indicating completion, in progress, or failure.
+     */
+    CurrentState?: NaturalLanguageQueryGenerationCurrentState;
+  }
   export type NextToken = string;
   export type NodeId = string;
   export type NodeStatus = "Active"|"StandBy"|"NotAvailable"|string;
@@ -3722,6 +3771,10 @@ declare namespace OpenSearch {
      * Service software update options for the domain.
      */
     SoftwareUpdateOptions?: SoftwareUpdateOptions;
+    /**
+     * Options for all machine learning features for the specified domain.
+     */
+    AIMLOptions?: AIMLOptionsInput;
   }
   export interface UpdateDomainConfigResponse {
     /**

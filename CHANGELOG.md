@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1648.0-->
+<!--LATEST=2.1649.0-->
 <!--ENTRYINSERT-->
+
+## 2.1649.0
+* feature: ControlTower: Added ListLandingZoneOperations API.
+* feature: EKS: Added support for disabling unmanaged addons during cluster creation.
+* feature: IVSRealTime: IVS Real-Time now offers customers the ability to upload public keys for customer vended participant tokens.
+* feature: KinesisAnalyticsV2: This release adds support for new ListApplicationOperations and DescribeApplicationOperation APIs. It adds a new configuration to enable system rollbacks, adds field ApplicationVersionCreateTimestamp for clarity and improves support for pagination for APIs.
+* feature: OpenSearch: This release adds support for enabling or disabling Natural Language Query Processing feature for Amazon OpenSearch Service domains, and provides visibility into the current state of the setup or tear-down.
 
 ## 2.1648.0
 * feature: AutoScaling: Doc only update for Auto Scaling's TargetTrackingMetricDataQuery

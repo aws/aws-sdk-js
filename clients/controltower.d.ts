@@ -36,11 +36,11 @@ declare class ControlTower extends Service {
    */
   disableBaseline(callback?: (err: AWSError, data: ControlTower.Types.DisableBaselineOutput) => void): Request<ControlTower.Types.DisableBaselineOutput, AWSError>;
   /**
-   * This API call turns off a control. It starts an asynchronous operation that deletes AWS resources on the specified organizational unit and the accounts it contains. The resources will vary according to the control that you specify. For usage examples, see  the Amazon Web Services Control Tower User Guide .
+   * This API call turns off a control. It starts an asynchronous operation that deletes Amazon Web Services resources on the specified organizational unit and the accounts it contains. The resources will vary according to the control that you specify. For usage examples, see the  Controls Reference Guide .
    */
   disableControl(params: ControlTower.Types.DisableControlInput, callback?: (err: AWSError, data: ControlTower.Types.DisableControlOutput) => void): Request<ControlTower.Types.DisableControlOutput, AWSError>;
   /**
-   * This API call turns off a control. It starts an asynchronous operation that deletes AWS resources on the specified organizational unit and the accounts it contains. The resources will vary according to the control that you specify. For usage examples, see  the Amazon Web Services Control Tower User Guide .
+   * This API call turns off a control. It starts an asynchronous operation that deletes Amazon Web Services resources on the specified organizational unit and the accounts it contains. The resources will vary according to the control that you specify. For usage examples, see the  Controls Reference Guide .
    */
   disableControl(callback?: (err: AWSError, data: ControlTower.Types.DisableControlOutput) => void): Request<ControlTower.Types.DisableControlOutput, AWSError>;
   /**
@@ -52,11 +52,11 @@ declare class ControlTower extends Service {
    */
   enableBaseline(callback?: (err: AWSError, data: ControlTower.Types.EnableBaselineOutput) => void): Request<ControlTower.Types.EnableBaselineOutput, AWSError>;
   /**
-   * This API call activates a control. It starts an asynchronous operation that creates Amazon Web Services resources on the specified organizational unit and the accounts it contains. The resources created will vary according to the control that you specify. For usage examples, see  the Amazon Web Services Control Tower User Guide .
+   * This API call activates a control. It starts an asynchronous operation that creates Amazon Web Services resources on the specified organizational unit and the accounts it contains. The resources created will vary according to the control that you specify. For usage examples, see the  Controls Reference Guide .
    */
   enableControl(params: ControlTower.Types.EnableControlInput, callback?: (err: AWSError, data: ControlTower.Types.EnableControlOutput) => void): Request<ControlTower.Types.EnableControlOutput, AWSError>;
   /**
-   * This API call activates a control. It starts an asynchronous operation that creates Amazon Web Services resources on the specified organizational unit and the accounts it contains. The resources created will vary according to the control that you specify. For usage examples, see  the Amazon Web Services Control Tower User Guide .
+   * This API call activates a control. It starts an asynchronous operation that creates Amazon Web Services resources on the specified organizational unit and the accounts it contains. The resources created will vary according to the control that you specify. For usage examples, see the  Controls Reference Guide .
    */
   enableControl(callback?: (err: AWSError, data: ControlTower.Types.EnableControlOutput) => void): Request<ControlTower.Types.EnableControlOutput, AWSError>;
   /**
@@ -76,11 +76,11 @@ declare class ControlTower extends Service {
    */
   getBaselineOperation(callback?: (err: AWSError, data: ControlTower.Types.GetBaselineOperationOutput) => void): Request<ControlTower.Types.GetBaselineOperationOutput, AWSError>;
   /**
-   * Returns the status of a particular EnableControl or DisableControl operation. Displays a message in case of error. Details for an operation are available for 90 days. For usage examples, see  the Amazon Web Services Control Tower User Guide .
+   * Returns the status of a particular EnableControl or DisableControl operation. Displays a message in case of error. Details for an operation are available for 90 days. For usage examples, see the  Controls Reference Guide .
    */
   getControlOperation(params: ControlTower.Types.GetControlOperationInput, callback?: (err: AWSError, data: ControlTower.Types.GetControlOperationOutput) => void): Request<ControlTower.Types.GetControlOperationOutput, AWSError>;
   /**
-   * Returns the status of a particular EnableControl or DisableControl operation. Displays a message in case of error. Details for an operation are available for 90 days. For usage examples, see  the Amazon Web Services Control Tower User Guide .
+   * Returns the status of a particular EnableControl or DisableControl operation. Displays a message in case of error. Details for an operation are available for 90 days. For usage examples, see the  Controls Reference Guide .
    */
   getControlOperation(callback?: (err: AWSError, data: ControlTower.Types.GetControlOperationOutput) => void): Request<ControlTower.Types.GetControlOperationOutput, AWSError>;
   /**
@@ -92,11 +92,11 @@ declare class ControlTower extends Service {
    */
   getEnabledBaseline(callback?: (err: AWSError, data: ControlTower.Types.GetEnabledBaselineOutput) => void): Request<ControlTower.Types.GetEnabledBaselineOutput, AWSError>;
   /**
-   * Retrieves details about an enabled control. For usage examples, see  the Amazon Web Services Control Tower User Guide .
+   * Retrieves details about an enabled control. For usage examples, see the  Controls Reference Guide .
    */
   getEnabledControl(params: ControlTower.Types.GetEnabledControlInput, callback?: (err: AWSError, data: ControlTower.Types.GetEnabledControlOutput) => void): Request<ControlTower.Types.GetEnabledControlOutput, AWSError>;
   /**
-   * Retrieves details about an enabled control. For usage examples, see  the Amazon Web Services Control Tower User Guide .
+   * Retrieves details about an enabled control. For usage examples, see the  Controls Reference Guide .
    */
   getEnabledControl(callback?: (err: AWSError, data: ControlTower.Types.GetEnabledControlOutput) => void): Request<ControlTower.Types.GetEnabledControlOutput, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class ControlTower extends Service {
    */
   listBaselines(callback?: (err: AWSError, data: ControlTower.Types.ListBaselinesOutput) => void): Request<ControlTower.Types.ListBaselinesOutput, AWSError>;
   /**
-   * Provides a list of operations in progress or queued.
+   * Provides a list of operations in progress or queued. For usage examples, see ListControlOperation examples.
    */
   listControlOperations(params: ControlTower.Types.ListControlOperationsInput, callback?: (err: AWSError, data: ControlTower.Types.ListControlOperationsOutput) => void): Request<ControlTower.Types.ListControlOperationsOutput, AWSError>;
   /**
-   * Provides a list of operations in progress or queued.
+   * Provides a list of operations in progress or queued. For usage examples, see ListControlOperation examples.
    */
   listControlOperations(callback?: (err: AWSError, data: ControlTower.Types.ListControlOperationsOutput) => void): Request<ControlTower.Types.ListControlOperationsOutput, AWSError>;
   /**
@@ -140,13 +140,21 @@ declare class ControlTower extends Service {
    */
   listEnabledBaselines(callback?: (err: AWSError, data: ControlTower.Types.ListEnabledBaselinesOutput) => void): Request<ControlTower.Types.ListEnabledBaselinesOutput, AWSError>;
   /**
-   * Lists the controls enabled by Amazon Web Services Control Tower on the specified organizational unit and the accounts it contains. For usage examples, see  the Amazon Web Services Control Tower User Guide .
+   * Lists the controls enabled by Amazon Web Services Control Tower on the specified organizational unit and the accounts it contains. For usage examples, see the  Controls Reference Guide .
    */
   listEnabledControls(params: ControlTower.Types.ListEnabledControlsInput, callback?: (err: AWSError, data: ControlTower.Types.ListEnabledControlsOutput) => void): Request<ControlTower.Types.ListEnabledControlsOutput, AWSError>;
   /**
-   * Lists the controls enabled by Amazon Web Services Control Tower on the specified organizational unit and the accounts it contains. For usage examples, see  the Amazon Web Services Control Tower User Guide .
+   * Lists the controls enabled by Amazon Web Services Control Tower on the specified organizational unit and the accounts it contains. For usage examples, see the  Controls Reference Guide .
    */
   listEnabledControls(callback?: (err: AWSError, data: ControlTower.Types.ListEnabledControlsOutput) => void): Request<ControlTower.Types.ListEnabledControlsOutput, AWSError>;
+  /**
+   * Lists all landing zone operations from the past 90 days. Results are sorted by time, with the most recent operation first.
+   */
+  listLandingZoneOperations(params: ControlTower.Types.ListLandingZoneOperationsInput, callback?: (err: AWSError, data: ControlTower.Types.ListLandingZoneOperationsOutput) => void): Request<ControlTower.Types.ListLandingZoneOperationsOutput, AWSError>;
+  /**
+   * Lists all landing zone operations from the past 90 days. Results are sorted by time, with the most recent operation first.
+   */
+  listLandingZoneOperations(callback?: (err: AWSError, data: ControlTower.Types.ListLandingZoneOperationsOutput) => void): Request<ControlTower.Types.ListLandingZoneOperationsOutput, AWSError>;
   /**
    * Returns the landing zone ARN for the landing zone deployed in your managed account. This API also creates an ARN for existing accounts that do not yet have a landing zone ARN.  Returns one landing zone ARN.
    */
@@ -156,11 +164,11 @@ declare class ControlTower extends Service {
    */
   listLandingZones(callback?: (err: AWSError, data: ControlTower.Types.ListLandingZonesOutput) => void): Request<ControlTower.Types.ListLandingZonesOutput, AWSError>;
   /**
-   * Returns a list of tags associated with the resource. For usage examples, see  the Amazon Web Services Control Tower User Guide .
+   * Returns a list of tags associated with the resource. For usage examples, see the  Controls Reference Guide .
    */
   listTagsForResource(params: ControlTower.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: ControlTower.Types.ListTagsForResourceOutput) => void): Request<ControlTower.Types.ListTagsForResourceOutput, AWSError>;
   /**
-   * Returns a list of tags associated with the resource. For usage examples, see  the Amazon Web Services Control Tower User Guide .
+   * Returns a list of tags associated with the resource. For usage examples, see the  Controls Reference Guide .
    */
   listTagsForResource(callback?: (err: AWSError, data: ControlTower.Types.ListTagsForResourceOutput) => void): Request<ControlTower.Types.ListTagsForResourceOutput, AWSError>;
   /**
@@ -172,27 +180,27 @@ declare class ControlTower extends Service {
    */
   resetEnabledBaseline(callback?: (err: AWSError, data: ControlTower.Types.ResetEnabledBaselineOutput) => void): Request<ControlTower.Types.ResetEnabledBaselineOutput, AWSError>;
   /**
-   * This API call resets a landing zone. It starts an asynchronous operation that resets the landing zone to the parameters specified in its original configuration.
+   * This API call resets a landing zone. It starts an asynchronous operation that resets the landing zone to the parameters specified in the original configuration, which you specified in the manifest file. Nothing in the manifest file's original landing zone configuration is changed during the reset process, by default. This API is not the same as a rollback of a landing zone version, which is not a supported operation.
    */
   resetLandingZone(params: ControlTower.Types.ResetLandingZoneInput, callback?: (err: AWSError, data: ControlTower.Types.ResetLandingZoneOutput) => void): Request<ControlTower.Types.ResetLandingZoneOutput, AWSError>;
   /**
-   * This API call resets a landing zone. It starts an asynchronous operation that resets the landing zone to the parameters specified in its original configuration.
+   * This API call resets a landing zone. It starts an asynchronous operation that resets the landing zone to the parameters specified in the original configuration, which you specified in the manifest file. Nothing in the manifest file's original landing zone configuration is changed during the reset process, by default. This API is not the same as a rollback of a landing zone version, which is not a supported operation.
    */
   resetLandingZone(callback?: (err: AWSError, data: ControlTower.Types.ResetLandingZoneOutput) => void): Request<ControlTower.Types.ResetLandingZoneOutput, AWSError>;
   /**
-   * Applies tags to a resource. For usage examples, see  the Amazon Web Services Control Tower User Guide .
+   * Applies tags to a resource. For usage examples, see the  Controls Reference Guide .
    */
   tagResource(params: ControlTower.Types.TagResourceInput, callback?: (err: AWSError, data: ControlTower.Types.TagResourceOutput) => void): Request<ControlTower.Types.TagResourceOutput, AWSError>;
   /**
-   * Applies tags to a resource. For usage examples, see  the Amazon Web Services Control Tower User Guide .
+   * Applies tags to a resource. For usage examples, see the  Controls Reference Guide .
    */
   tagResource(callback?: (err: AWSError, data: ControlTower.Types.TagResourceOutput) => void): Request<ControlTower.Types.TagResourceOutput, AWSError>;
   /**
-   * Removes tags from a resource. For usage examples, see  the Amazon Web Services Control Tower User Guide .
+   * Removes tags from a resource. For usage examples, see the  Controls Reference Guide .
    */
   untagResource(params: ControlTower.Types.UntagResourceInput, callback?: (err: AWSError, data: ControlTower.Types.UntagResourceOutput) => void): Request<ControlTower.Types.UntagResourceOutput, AWSError>;
   /**
-   * Removes tags from a resource. For usage examples, see  the Amazon Web Services Control Tower User Guide .
+   * Removes tags from a resource. For usage examples, see the  Controls Reference Guide .
    */
   untagResource(callback?: (err: AWSError, data: ControlTower.Types.UntagResourceOutput) => void): Request<ControlTower.Types.UntagResourceOutput, AWSError>;
   /**
@@ -204,11 +212,11 @@ declare class ControlTower extends Service {
    */
   updateEnabledBaseline(callback?: (err: AWSError, data: ControlTower.Types.UpdateEnabledBaselineOutput) => void): Request<ControlTower.Types.UpdateEnabledBaselineOutput, AWSError>;
   /**
-   *  Updates the configuration of an already enabled control. If the enabled control shows an EnablementStatus of SUCCEEDED, supply parameters that are different from the currently configured parameters. Otherwise, Amazon Web Services Control Tower will not accept the request. If the enabled control shows an EnablementStatus of FAILED, Amazon Web Services Control Tower will update the control to match any valid parameters that you supply. If the DriftSummary status for the control shows as DRIFTED, you cannot call this API. Instead, you can update the control by calling DisableControl and again calling EnableControl, or you can run an extending governance operation. For usage examples, see  the Amazon Web Services Control Tower User Guide  
+   *  Updates the configuration of an already enabled control. If the enabled control shows an EnablementStatus of SUCCEEDED, supply parameters that are different from the currently configured parameters. Otherwise, Amazon Web Services Control Tower will not accept the request. If the enabled control shows an EnablementStatus of FAILED, Amazon Web Services Control Tower updates the control to match any valid parameters that you supply. If the DriftSummary status for the control shows as DRIFTED, you cannot call this API. Instead, you can update the control by calling DisableControl and again calling EnableControl, or you can run an extending governance operation. For usage examples, see the  Controls Reference Guide . 
    */
   updateEnabledControl(params: ControlTower.Types.UpdateEnabledControlInput, callback?: (err: AWSError, data: ControlTower.Types.UpdateEnabledControlOutput) => void): Request<ControlTower.Types.UpdateEnabledControlOutput, AWSError>;
   /**
-   *  Updates the configuration of an already enabled control. If the enabled control shows an EnablementStatus of SUCCEEDED, supply parameters that are different from the currently configured parameters. Otherwise, Amazon Web Services Control Tower will not accept the request. If the enabled control shows an EnablementStatus of FAILED, Amazon Web Services Control Tower will update the control to match any valid parameters that you supply. If the DriftSummary status for the control shows as DRIFTED, you cannot call this API. Instead, you can update the control by calling DisableControl and again calling EnableControl, or you can run an extending governance operation. For usage examples, see  the Amazon Web Services Control Tower User Guide  
+   *  Updates the configuration of an already enabled control. If the enabled control shows an EnablementStatus of SUCCEEDED, supply parameters that are different from the currently configured parameters. Otherwise, Amazon Web Services Control Tower will not accept the request. If the enabled control shows an EnablementStatus of FAILED, Amazon Web Services Control Tower updates the control to match any valid parameters that you supply. If the DriftSummary status for the control shows as DRIFTED, you cannot call this API. Instead, you can update the control by calling DisableControl and again calling EnableControl, or you can run an extending governance operation. For usage examples, see the  Controls Reference Guide . 
    */
   updateEnabledControl(callback?: (err: AWSError, data: ControlTower.Types.UpdateEnabledControlOutput) => void): Request<ControlTower.Types.UpdateEnabledControlOutput, AWSError>;
   /**
@@ -678,11 +686,11 @@ declare namespace ControlTower {
   export type EnablementStatus = "SUCCEEDED"|"FAILED"|"UNDER_CHANGE"|string;
   export interface EnablementStatusSummary {
     /**
-     * The last operation identifier for the enabled control.
+     * The last operation identifier for the enabled resource.
      */
     lastOperationIdentifier?: OperationIdentifier;
     /**
-     *  The deployment status of the enabled control. Valid values:    SUCCEEDED: The enabledControl configuration was deployed successfully.    UNDER_CHANGE: The enabledControl configuration is changing.     FAILED: The enabledControl configuration failed to deploy.  
+     *  The deployment status of the enabled resource. Valid values:    SUCCEEDED: The EnabledControl or EnabledBaseline configuration was deployed successfully.    UNDER_CHANGE: The EnabledControl or EnabledBaseline configuration is changing.     FAILED: The EnabledControl or EnabledBaseline configuration failed to deploy.  
      */
     status?: EnablementStatus;
   }
@@ -818,6 +826,10 @@ declare namespace ControlTower {
      */
     endTime?: Timestamp;
     /**
+     * The operationIdentifier of the landing zone operation.
+     */
+    operationIdentifier?: OperationIdentifier;
+    /**
      * The landing zone operation type.  Valid values:    DELETE: The DeleteLandingZone operation.     CREATE: The CreateLandingZone operation.     UPDATE: The UpdateLandingZone operation.     RESET: The ResetLandingZone operation.   
      */
     operationType?: LandingZoneOperationType;
@@ -834,8 +846,35 @@ declare namespace ControlTower {
      */
     statusMessage?: String;
   }
+  export interface LandingZoneOperationFilter {
+    /**
+     * The statuses of the set of landing zone operations selected by the filter.
+     */
+    statuses?: LandingZoneOperationStatuses;
+    /**
+     * The set of landing zone operation types selected by the filter.
+     */
+    types?: LandingZoneOperationTypes;
+  }
   export type LandingZoneOperationStatus = "SUCCEEDED"|"FAILED"|"IN_PROGRESS"|string;
+  export type LandingZoneOperationStatuses = LandingZoneOperationStatus[];
+  export interface LandingZoneOperationSummary {
+    /**
+     * The operationIdentifier of the landing zone operation.
+     */
+    operationIdentifier?: OperationIdentifier;
+    /**
+     * The type of the landing zone operation.
+     */
+    operationType?: LandingZoneOperationType;
+    /**
+     * The status of the landing zone operation.
+     */
+    status?: LandingZoneOperationStatus;
+  }
   export type LandingZoneOperationType = "DELETE"|"CREATE"|"UPDATE"|"RESET"|string;
+  export type LandingZoneOperationTypes = LandingZoneOperationType[];
+  export type LandingZoneOperations = LandingZoneOperationSummary[];
   export type LandingZoneStatus = "ACTIVE"|"PROCESSING"|"FAILED"|string;
   export interface LandingZoneSummary {
     /**
@@ -883,7 +922,7 @@ declare namespace ControlTower {
   export type ListControlOperationsNextToken = string;
   export interface ListControlOperationsOutput {
     /**
-     * Returns a list of output from control operations. PLACEHOLDER 
+     * Returns a list of output from control operations. 
      */
     controlOperations: ControlOperations;
     /**
@@ -919,7 +958,7 @@ declare namespace ControlTower {
   }
   export interface ListEnabledControlsInput {
     /**
-     * An input filter for the ListCEnabledControls API that lets you select the types of control operations to view.
+     * An input filter for the ListEnabledControls API that lets you select the types of control operations to view.
      */
     filter?: EnabledControlFilter;
     /**
@@ -940,6 +979,31 @@ declare namespace ControlTower {
      * Lists the controls enabled by Amazon Web Services Control Tower on the specified organizational unit and the accounts it contains.
      */
     enabledControls: EnabledControls;
+    /**
+     * Retrieves the next page of results. If the string is empty, the response is the end of the results.
+     */
+    nextToken?: String;
+  }
+  export interface ListLandingZoneOperationsInput {
+    /**
+     * An input filter for the ListLandingZoneOperations API that lets you select the types of landing zone operations to view.
+     */
+    filter?: LandingZoneOperationFilter;
+    /**
+     * How many results to return per API call.
+     */
+    maxResults?: ListLandingZoneOperationsMaxResults;
+    /**
+     * The token to continue the list from a previous API call with the same parameters.
+     */
+    nextToken?: String;
+  }
+  export type ListLandingZoneOperationsMaxResults = number;
+  export interface ListLandingZoneOperationsOutput {
+    /**
+     * Lists landing zone operations.
+     */
+    landingZoneOperations: LandingZoneOperations;
     /**
      * Retrieves the next page of results. If the string is empty, the response is the end of the results.
      */
@@ -1090,7 +1154,7 @@ declare namespace ControlTower {
      */
     landingZoneIdentifier: String;
     /**
-     * The manifest JSON file is a text file that describes your Amazon Web Services resources. For examples, review Launch your landing zone. 
+     * The manifest file (JSON) is a text file that describes your Amazon Web Services resources. For an example, review Launch your landing zone. The example manifest file contains each of the available parameters. The schema for the landing zone's JSON manifest file is not published, by design.
      */
     manifest: Manifest;
     /**

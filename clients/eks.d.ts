@@ -1183,6 +1183,10 @@ declare namespace EKS {
      * The access configuration for the cluster.
      */
     accessConfig?: CreateAccessConfigRequest;
+    /**
+     * If you set this value to False when creating a cluster, the default networking add-ons will not be installed. The default networking addons include vpc-cni, coredns, and kube-proxy. Use this option when you plan to install third-party alternative add-ons or self-manage the default networking add-ons.
+     */
+    bootstrapSelfManagedAddons?: BoxedBoolean;
   }
   export interface CreateClusterResponse {
     /**
