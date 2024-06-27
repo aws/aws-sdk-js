@@ -1,6 +1,17 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1649.0-->
+<!--LATEST=2.1650.0-->
 <!--ENTRYINSERT-->
+
+## 2.1650.0
+* feature: ApplicationAutoScaling: Amazon WorkSpaces customers can now use Application Auto Scaling to automatically scale the number of virtual desktops in a WorkSpaces pool.
+* feature: ChimeSDKMediaPipelines: Added Amazon Transcribe multi language identification to Chime SDK call analytics. Enabling customers sending single stream audio to generate call recordings using Chime SDK call analytics
+* feature: DataZone: This release supports the data lineage feature of business data catalog in Amazon DataZone.
+* feature: ElastiCache: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: MQ: This release makes the EngineVersion field optional for both broker and configuration and uses the latest available version by default. The AutoMinorVersionUpgrade field is also now optional for broker creation and defaults to 'true'.
+* feature: QConnect: Adds CreateContentAssociation, ListContentAssociations, GetContentAssociation, and DeleteContentAssociation APIs.
+* feature: QuickSight: Adding support for Repeating Sections, Nested Filters
+* feature: SageMaker: Add capability for Admins to customize Studio experience for the user by showing or hiding Apps and MLTools.
+* feature: WorkSpaces: Added support for WorkSpaces Pools.
 
 ## 2.1649.0
 * feature: ControlTower: Added ListLandingZoneOperations API.

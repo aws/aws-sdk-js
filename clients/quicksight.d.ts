@@ -2823,6 +2823,10 @@ declare namespace QuickSight {
      * The configuration of a page break for a section.
      */
     PageBreakConfiguration?: SectionPageBreakConfiguration;
+    /**
+     * Describes the configurations that are required to declare a section as repeating.
+     */
+    RepeatConfiguration?: BodySectionRepeatConfiguration;
   }
   export type BodySectionConfigurationList = BodySectionConfiguration[];
   export interface BodySectionContent {
@@ -2830,6 +2834,58 @@ declare namespace QuickSight {
      * The layout configuration of a body section.
      */
     Layout?: SectionLayoutConfiguration;
+  }
+  export interface BodySectionDynamicCategoryDimensionConfiguration {
+    Column: ColumnIdentifier;
+    /**
+     * Number of values to use from the column for repetition.
+     */
+    Limit?: BodySectionDynamicDimensionLimit;
+    /**
+     * Sort criteria on the column values that you use for repetition. 
+     */
+    SortByMetrics?: BodySectionDynamicDimensionSortConfigurationList;
+  }
+  export type BodySectionDynamicDimensionLimit = number;
+  export type BodySectionDynamicDimensionSortConfigurationList = ColumnSort[];
+  export interface BodySectionDynamicNumericDimensionConfiguration {
+    Column: ColumnIdentifier;
+    /**
+     * Number of values to use from the column for repetition.
+     */
+    Limit?: BodySectionDynamicDimensionLimit;
+    /**
+     * Sort criteria on the column values that you use for repetition. 
+     */
+    SortByMetrics?: BodySectionDynamicDimensionSortConfigurationList;
+  }
+  export interface BodySectionRepeatConfiguration {
+    /**
+     * List of BodySectionRepeatDimensionConfiguration values that describe the dataset column and constraints for the column used to repeat the contents of a section.
+     */
+    DimensionConfigurations?: BodySectionRepeatDimensionConfigurationList;
+    /**
+     * Page break configuration to apply for each repeating instance.
+     */
+    PageBreakConfiguration?: BodySectionRepeatPageBreakConfiguration;
+    /**
+     * List of visuals to exclude from repetition in repeating sections. The visuals will render identically, and ignore the repeating configurations in all repeating instances.
+     */
+    NonRepeatingVisuals?: NonRepeatingVisualsList;
+  }
+  export interface BodySectionRepeatDimensionConfiguration {
+    /**
+     * Describes the Category dataset column and constraints around the dynamic values that will be used in repeating the section contents.
+     */
+    DynamicCategoryDimensionConfiguration?: BodySectionDynamicCategoryDimensionConfiguration;
+    /**
+     * Describes the Numeric dataset column and constraints around the dynamic values used to repeat the contents of a section.
+     */
+    DynamicNumericDimensionConfiguration?: BodySectionDynamicNumericDimensionConfiguration;
+  }
+  export type BodySectionRepeatDimensionConfigurationList = BodySectionRepeatDimensionConfiguration[];
+  export interface BodySectionRepeatPageBreakConfiguration {
+    After?: SectionAfterPageBreak;
   }
   export interface BookmarksConfigurations {
     /**
@@ -3160,6 +3216,11 @@ declare namespace QuickSight {
   export type CategoryFilterMatchOperator = "EQUALS"|"DOES_NOT_EQUAL"|"CONTAINS"|"DOES_NOT_CONTAIN"|"STARTS_WITH"|"ENDS_WITH"|string;
   export type CategoryFilterSelectAllOptions = "FILTER_ALL_VALUES"|string;
   export type CategoryFilterType = "CUSTOM_FILTER"|"CUSTOM_FILTER_LIST"|"FILTER_LIST"|string;
+  export interface CategoryInnerFilter {
+    Column: ColumnIdentifier;
+    Configuration: CategoryFilterConfiguration;
+    DefaultFilterControlConfiguration?: DefaultFilterControlConfiguration;
+  }
   export type CategoryValue = string;
   export type CategoryValueList = CategoryValue[];
   export interface CellValueSynonym {
@@ -9237,6 +9298,10 @@ declare namespace QuickSight {
      * A TopBottomFilter filters data to the top or bottom values for a given column.
      */
     TopBottomFilter?: TopBottomFilter;
+    /**
+     * A NestedFilter filters data with a subset of data that is defined by the nested inner filter.
+     */
+    NestedFilter?: NestedFilter;
   }
   export type FilterClass = "ENFORCED_VALUE_FILTER"|"CONDITIONAL_VALUE_FILTER"|"NAMED_VALUE_FILTER"|string;
   export interface FilterControl {
@@ -10938,6 +11003,12 @@ declare namespace QuickSight {
   export type IngestionStatus = "INITIALIZED"|"QUEUED"|"RUNNING"|"FAILED"|"COMPLETED"|"CANCELLED"|string;
   export type IngestionType = "INCREMENTAL_REFRESH"|"FULL_REFRESH"|string;
   export type Ingestions = Ingestion[];
+  export interface InnerFilter {
+    /**
+     * A CategoryInnerFilter filters text values for the NestedFilter.
+     */
+    CategoryInnerFilter?: CategoryInnerFilter;
+  }
   export interface InputColumn {
     /**
      * The name of this column in the underlying data source.
@@ -12992,6 +13063,24 @@ declare namespace QuickSight {
     DisplayMode: NegativeValueDisplayMode;
   }
   export type NegativeValueDisplayMode = "POSITIVE"|"NEGATIVE"|string;
+  export interface NestedFilter {
+    /**
+     * An identifier that uniquely identifies a filter within a dashboard, analysis, or template.
+     */
+    FilterId: ShortRestrictiveResourceId;
+    /**
+     * The column that the filter is applied to.
+     */
+    Column: ColumnIdentifier;
+    /**
+     * A boolean condition to include or exclude the subset that is defined by the values of the nested inner filter.
+     */
+    IncludeInnerSet: Boolean;
+    /**
+     * The InnerFilter defines the subset of data to be used with the NestedFilter.
+     */
+    InnerFilter: InnerFilter;
+  }
   export interface NetworkInterface {
     /**
      * The subnet ID associated with the network interface.
@@ -13036,6 +13125,7 @@ declare namespace QuickSight {
     IntegerStaticValues?: IntegerDatasetParameterValueList;
   }
   export type NonEmptyString = string;
+  export type NonRepeatingVisualsList = ShortRestrictiveResourceId[];
   export type NullString = string;
   export interface NullValueFormatConfiguration {
     /**

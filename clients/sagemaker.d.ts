@@ -7445,7 +7445,7 @@ declare namespace SageMaker {
      */
     HubName: HubNameOrArn;
     /**
-     * The type of hub content to delete.
+     * The type of hub content reference to delete. The only supported type of hub content reference to delete is ModelReference.
      */
     HubContentType: HubContentType;
     /**
@@ -12805,6 +12805,8 @@ declare namespace SageMaker {
   export type GroupingAttributeName = string;
   export type GroupingAttributeNames = GroupingAttributeName[];
   export type Groups = Group[];
+  export type HiddenAppTypesList = AppType[];
+  export type HiddenMlToolsList = MlTools[];
   export type HolidayConfig = HolidayConfigAttributes[];
   export interface HolidayConfigAttributes {
     /**
@@ -17943,6 +17945,7 @@ declare namespace SageMaker {
     S3Uri: S3Uri;
   }
   export type MinimumInstanceMetadataServiceVersion = string;
+  export type MlTools = "DataWrangler"|"FeatureStore"|"EmrClusters"|"AutoMl"|"Experiments"|"Training"|"ModelEvaluation"|"Pipelines"|"Models"|"JumpStart"|"InferenceRecommender"|"Endpoints"|"Projects"|string;
   export type MlflowVersion = string;
   export interface Model {
     /**
@@ -22441,6 +22444,16 @@ declare namespace SageMaker {
   export type StudioLifecycleConfigSortKey = "CreationTime"|"LastModifiedTime"|"Name"|string;
   export type StudioLifecycleConfigsList = StudioLifecycleConfigDetails[];
   export type StudioWebPortal = "ENABLED"|"DISABLED"|string;
+  export interface StudioWebPortalSettings {
+    /**
+     * The machine learning tools that are hidden from the Studio left navigation pane.
+     */
+    HiddenMlTools?: HiddenMlToolsList;
+    /**
+     * The Applications supported in Studio that are hidden from the Studio left navigation pane.
+     */
+    HiddenAppTypes?: HiddenAppTypesList;
+  }
   export type SubnetId = string;
   export type Subnets = SubnetId[];
   export interface SubscribedWorkteam {
@@ -24812,6 +24825,10 @@ declare namespace SageMaker {
      * The settings for assigning a custom file system to a user profile. Permitted users can access this file system in Amazon SageMaker Studio.
      */
     CustomFileSystemConfigs?: CustomFileSystemConfigs;
+    /**
+     * Studio settings. If these settings are applied on a user level, they take priority over the settings applied on a domain level.
+     */
+    StudioWebPortalSettings?: StudioWebPortalSettings;
   }
   export type UsersPerStep = number;
   export type UtilizationMetric = number;

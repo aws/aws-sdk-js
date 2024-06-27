@@ -36,6 +36,14 @@ declare class QConnect extends Service {
    */
   createContent(callback?: (err: AWSError, data: QConnect.Types.CreateContentResponse) => void): Request<QConnect.Types.CreateContentResponse, AWSError>;
   /**
+   * Creates an association between a content resource in a knowledge base and step-by-step guides. Step-by-step guides offer instructions to agents for resolving common customer issues. You create a content association to integrate Amazon Q in Connect and step-by-step guides.  After you integrate Amazon Q and step-by-step guides, when Amazon Q provides a recommendation to an agent based on the intent that it's detected, it also provides them with the option to start the step-by-step guide that you have associated with the content. Note the following limitations:   You can create only one content association for each content resource in a knowledge base.   You can associate a step-by-step guide with multiple content resources.   For more information, see Integrate Amazon Q in Connect with step-by-step guides in the Amazon Connect Administrator Guide. 
+   */
+  createContentAssociation(params: QConnect.Types.CreateContentAssociationRequest, callback?: (err: AWSError, data: QConnect.Types.CreateContentAssociationResponse) => void): Request<QConnect.Types.CreateContentAssociationResponse, AWSError>;
+  /**
+   * Creates an association between a content resource in a knowledge base and step-by-step guides. Step-by-step guides offer instructions to agents for resolving common customer issues. You create a content association to integrate Amazon Q in Connect and step-by-step guides.  After you integrate Amazon Q and step-by-step guides, when Amazon Q provides a recommendation to an agent based on the intent that it's detected, it also provides them with the option to start the step-by-step guide that you have associated with the content. Note the following limitations:   You can create only one content association for each content resource in a knowledge base.   You can associate a step-by-step guide with multiple content resources.   For more information, see Integrate Amazon Q in Connect with step-by-step guides in the Amazon Connect Administrator Guide. 
+   */
+  createContentAssociation(callback?: (err: AWSError, data: QConnect.Types.CreateContentAssociationResponse) => void): Request<QConnect.Types.CreateContentAssociationResponse, AWSError>;
+  /**
    * Creates a knowledge base.  When using this API, you cannot reuse Amazon AppIntegrations DataIntegrations with external knowledge bases such as Salesforce and ServiceNow. If you do, you'll get an InvalidRequestException error.  For example, you're programmatically managing your external knowledge base, and you want to add or remove one of the fields that is being ingested from Salesforce. Do the following:   Call DeleteKnowledgeBase.   Call DeleteDataIntegration.   Call CreateDataIntegration to recreate the DataIntegration or a create different one.   Call CreateKnowledgeBase.   
    */
   createKnowledgeBase(params: QConnect.Types.CreateKnowledgeBaseRequest, callback?: (err: AWSError, data: QConnect.Types.CreateKnowledgeBaseResponse) => void): Request<QConnect.Types.CreateKnowledgeBaseResponse, AWSError>;
@@ -84,6 +92,14 @@ declare class QConnect extends Service {
    */
   deleteContent(callback?: (err: AWSError, data: QConnect.Types.DeleteContentResponse) => void): Request<QConnect.Types.DeleteContentResponse, AWSError>;
   /**
+   * Deletes the content association.  For more information about content associations--what they are and when they are used--see Integrate Amazon Q in Connect with step-by-step guides in the Amazon Connect Administrator Guide. 
+   */
+  deleteContentAssociation(params: QConnect.Types.DeleteContentAssociationRequest, callback?: (err: AWSError, data: QConnect.Types.DeleteContentAssociationResponse) => void): Request<QConnect.Types.DeleteContentAssociationResponse, AWSError>;
+  /**
+   * Deletes the content association.  For more information about content associations--what they are and when they are used--see Integrate Amazon Q in Connect with step-by-step guides in the Amazon Connect Administrator Guide. 
+   */
+  deleteContentAssociation(callback?: (err: AWSError, data: QConnect.Types.DeleteContentAssociationResponse) => void): Request<QConnect.Types.DeleteContentAssociationResponse, AWSError>;
+  /**
    * Deletes the quick response import job.
    */
   deleteImportJob(params: QConnect.Types.DeleteImportJobRequest, callback?: (err: AWSError, data: QConnect.Types.DeleteImportJobResponse) => void): Request<QConnect.Types.DeleteImportJobResponse, AWSError>;
@@ -131,6 +147,14 @@ declare class QConnect extends Service {
    * Retrieves content, including a pre-signed URL to download the content.
    */
   getContent(callback?: (err: AWSError, data: QConnect.Types.GetContentResponse) => void): Request<QConnect.Types.GetContentResponse, AWSError>;
+  /**
+   * Returns the content association. For more information about content associations--what they are and when they are used--see Integrate Amazon Q in Connect with step-by-step guides in the Amazon Connect Administrator Guide.
+   */
+  getContentAssociation(params: QConnect.Types.GetContentAssociationRequest, callback?: (err: AWSError, data: QConnect.Types.GetContentAssociationResponse) => void): Request<QConnect.Types.GetContentAssociationResponse, AWSError>;
+  /**
+   * Returns the content association. For more information about content associations--what they are and when they are used--see Integrate Amazon Q in Connect with step-by-step guides in the Amazon Connect Administrator Guide.
+   */
+  getContentAssociation(callback?: (err: AWSError, data: QConnect.Types.GetContentAssociationResponse) => void): Request<QConnect.Types.GetContentAssociationResponse, AWSError>;
   /**
    * Retrieves summary information about the content.
    */
@@ -195,6 +219,14 @@ declare class QConnect extends Service {
    * Lists information about assistants.
    */
   listAssistants(callback?: (err: AWSError, data: QConnect.Types.ListAssistantsResponse) => void): Request<QConnect.Types.ListAssistantsResponse, AWSError>;
+  /**
+   * Lists the content associations. For more information about content associations--what they are and when they are used--see Integrate Amazon Q in Connect with step-by-step guides in the Amazon Connect Administrator Guide.
+   */
+  listContentAssociations(params: QConnect.Types.ListContentAssociationsRequest, callback?: (err: AWSError, data: QConnect.Types.ListContentAssociationsResponse) => void): Request<QConnect.Types.ListContentAssociationsResponse, AWSError>;
+  /**
+   * Lists the content associations. For more information about content associations--what they are and when they are used--see Integrate Amazon Q in Connect with step-by-step guides in the Amazon Connect Administrator Guide.
+   */
+  listContentAssociations(callback?: (err: AWSError, data: QConnect.Types.ListContentAssociationsResponse) => void): Request<QConnect.Types.ListContentAssociationsResponse, AWSError>;
   /**
    * Lists the content.
    */
@@ -357,6 +389,12 @@ declare class QConnect extends Service {
   updateSession(callback?: (err: AWSError, data: QConnect.Types.UpdateSessionResponse) => void): Request<QConnect.Types.UpdateSessionResponse, AWSError>;
 }
 declare namespace QConnect {
+  export interface AmazonConnectGuideAssociationData {
+    /**
+     *  The Amazon Resource Name (ARN) of an Amazon Connect flow. Step-by-step guides are a type of flow.
+     */
+    flowId?: GenericArn;
+  }
   export type AndConditions = TagCondition[];
   export interface AppIntegrationsConfiguration {
     /**
@@ -563,6 +601,90 @@ declare namespace QConnect {
   export type ContactAttributeKeys = ContactAttributeKey[];
   export type ContactAttributeValue = string;
   export type ContactAttributes = {[key: string]: ContactAttributeValue};
+  export interface ContentAssociationContents {
+    /**
+     * The data of the step-by-step guide association.
+     */
+    amazonConnectGuideAssociation?: AmazonConnectGuideAssociationData;
+  }
+  export interface ContentAssociationData {
+    /**
+     * The content association.
+     */
+    associationData: ContentAssociationContents;
+    /**
+     * The type of association.
+     */
+    associationType: ContentAssociationType;
+    /**
+     * The Amazon Resource Name (ARN) of the content.
+     */
+    contentArn: Arn;
+    /**
+     * The Amazon Resource Name (ARN) of the content association.
+     */
+    contentAssociationArn: Arn;
+    /**
+     * The identifier of the content association. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     */
+    contentAssociationId: Uuid;
+    /**
+     * The identifier of the content.
+     */
+    contentId: Uuid;
+    /**
+     * The Amazon Resource Name (ARN) of the knowledge base.
+     */
+    knowledgeBaseArn: Arn;
+    /**
+     * The identifier of the knowledge base.
+     */
+    knowledgeBaseId: Uuid;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    tags?: Tags;
+  }
+  export interface ContentAssociationSummary {
+    /**
+     * The content association.
+     */
+    associationData: ContentAssociationContents;
+    /**
+     * The type of association.
+     */
+    associationType: ContentAssociationType;
+    /**
+     * The Amazon Resource Name (ARN) of the content.
+     */
+    contentArn: Arn;
+    /**
+     * The Amazon Resource Name (ARN) of the content association.
+     */
+    contentAssociationArn: Arn;
+    /**
+     * The identifier of the content association. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     */
+    contentAssociationId: Uuid;
+    /**
+     * The identifier of the content.
+     */
+    contentId: Uuid;
+    /**
+     * The Amazon Resource Name (ARN) of the knowledge base.
+     */
+    knowledgeBaseArn: Arn;
+    /**
+     * The identifier of the knowledge base.
+     */
+    knowledgeBaseId: Uuid;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    tags?: Tags;
+  }
+  export type ContentAssociationSummaryList = ContentAssociationSummary[];
+  export type ContentAssociationType = "AMAZON_CONNECT_GUIDE"|string;
   export interface ContentData {
     /**
      * The Amazon Resource Name (ARN) of the content.
@@ -765,6 +887,38 @@ declare namespace QConnect {
      * Information about the assistant.
      */
     assistant?: AssistantData;
+  }
+  export interface CreateContentAssociationRequest {
+    /**
+     * The identifier of the associated resource.
+     */
+    association: ContentAssociationContents;
+    /**
+     * The type of association.
+     */
+    associationType: ContentAssociationType;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The identifier of the content.
+     */
+    contentId: UuidOrArn;
+    /**
+     * The identifier of the knowledge base.
+     */
+    knowledgeBaseId: UuidOrArn;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    tags?: Tags;
+  }
+  export interface CreateContentAssociationResponse {
+    /**
+     * The association between Amazon Q in Connect content and another resource.
+     */
+    contentAssociation?: ContentAssociationData;
   }
   export interface CreateContentRequest {
     /**
@@ -986,6 +1140,22 @@ declare namespace QConnect {
   }
   export interface DeleteAssistantResponse {
   }
+  export interface DeleteContentAssociationRequest {
+    /**
+     * The identifier of the content association. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     */
+    contentAssociationId: UuidOrArn;
+    /**
+     * The identifier of the content.
+     */
+    contentId: UuidOrArn;
+    /**
+     * The identifier of the knowledge base.
+     */
+    knowledgeBaseId: UuidOrArn;
+  }
+  export interface DeleteContentAssociationResponse {
+  }
   export interface DeleteContentRequest {
     /**
      * The identifier of the content. Can be either the ID or the ARN. URLs cannot contain the ARN.
@@ -1142,6 +1312,26 @@ declare namespace QConnect {
      */
     assistant?: AssistantData;
   }
+  export interface GetContentAssociationRequest {
+    /**
+     * The identifier of the content association. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     */
+    contentAssociationId: UuidOrArn;
+    /**
+     * The identifier of the content.
+     */
+    contentId: UuidOrArn;
+    /**
+     * The identifier of the knowledge base.
+     */
+    knowledgeBaseId: UuidOrArn;
+  }
+  export interface GetContentAssociationResponse {
+    /**
+     * The association between Amazon Q in Connect content and another resource.
+     */
+    contentAssociation?: ContentAssociationData;
+  }
   export interface GetContentRequest {
     /**
      * The identifier of the content. Can be either the ID or the ARN. URLs cannot contain the ARN.
@@ -1295,7 +1485,7 @@ declare namespace QConnect {
     createdTime: SyntheticTimestamp_epoch_seconds;
     externalSourceConfiguration?: ExternalSourceConfiguration;
     /**
-     * The link to donwload the information of resource data that failed to be imported.
+     * The link to download the information of resource data that failed to be imported.
      */
     failedRecordReport?: Url;
     /**
@@ -1525,6 +1715,34 @@ declare namespace QConnect {
      * Information about the assistants.
      */
     assistantSummaries: AssistantList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListContentAssociationsRequest {
+    /**
+     * The identifier of the content.
+     */
+    contentId: UuidOrArn;
+    /**
+     * The identifier of the knowledge base.
+     */
+    knowledgeBaseId: UuidOrArn;
+    /**
+     * The maximum number of results to return per page.
+     */
+    maxResults?: MaxResults;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListContentAssociationsResponse {
+    /**
+     * Summary information about content associations.
+     */
+    contentAssociationSummaries: ContentAssociationSummaryList;
     /**
      * If there are additional results, this is the token for the next set of results.
      */
