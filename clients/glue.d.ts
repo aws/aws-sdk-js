@@ -5542,6 +5542,8 @@ declare namespace Glue {
      */
     FederatedDatabase?: FederatedDatabase;
   }
+  export type DatabaseAttributes = "NAME"|string;
+  export type DatabaseAttributesList = DatabaseAttributes[];
   export interface DatabaseIdentifier {
     /**
      * The ID of the Data Catalog in which the database resides.
@@ -7321,6 +7323,10 @@ declare namespace Glue {
      * Allows you to specify that you want to list the databases shared with your account. The allowable values are FEDERATED, FOREIGN or ALL.    If set to FEDERATED, will list the federated databases (referencing an external entity) shared with your account.   If set to FOREIGN, will list the databases shared with your account.    If set to ALL, will list the databases shared with your account, as well as the databases in yor local account.   
      */
     ResourceShareType?: ResourceShareType;
+    /**
+     * Specifies the database fields returned by the GetDatabases call. This parameter doesn’t accept an empty list. The request must include the NAME.
+     */
+    AttributesToGet?: DatabaseAttributesList;
   }
   export interface GetDatabasesResponse {
     /**

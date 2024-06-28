@@ -1,6 +1,16 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1650.0-->
+<!--LATEST=2.1651.0-->
 <!--ENTRYINSERT-->
+
+## 2.1651.0
+* feature: ACMPCA: Added CCPC_LEVEL_1_OR_HIGHER KeyStorageSecurityStandard and SM2 KeyAlgorithm and SM3WITHSM2 SigningAlgorithm for China regions.
+* feature: CloudHSMV2: Added 3 new APIs to support backup sharing: GetResourcePolicy, PutResourcePolicy, and DeleteResourcePolicy. Added BackupArn to the output of the DescribeBackups API. Added support for BackupArn in the CreateCluster API.
+* feature: Connect: This release supports showing PreferredAgentRouting step via DescribeContact API.
+* feature: EMR: This release provides the support for new allocation strategies i.e. CAPACITY_OPTIMIZED_PRIORITIZED for Spot and PRIORITIZED for On-Demand by taking input of priority value for each instance type for instance fleet clusters.
+* feature: Glue: Added AttributesToGet parameter to Glue GetDatabases, allowing caller to limit output to include only the database name.
+* feature: KinesisAnalyticsV2: Support for Flink 1.19 in Managed Service for Apache Flink
+* feature: OpenSearch: This release removes support for enabling or disabling Natural Language Query Processing feature for Amazon OpenSearch Service domains.
+* feature: WorkSpaces: Added support for Red Hat Enterprise Linux 8 on Amazon WorkSpaces Personal.
 
 ## 2.1650.0
 * feature: ApplicationAutoScaling: Amazon WorkSpaces customers can now use Application Auto Scaling to automatically scale the number of virtual desktops in a WorkSpaces pool.

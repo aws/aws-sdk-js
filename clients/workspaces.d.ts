@@ -396,19 +396,19 @@ declare class WorkSpaces extends Service {
    */
   describeWorkspacesConnectionStatus(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesConnectionStatusResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesConnectionStatusResult, AWSError>;
   /**
-   * Retrieves a list that describes the streaming sessions for a specified WorkSpaces pool.
+   * Retrieves a list that describes the streaming sessions for a specified pool.
    */
   describeWorkspacesPoolSessions(params: WorkSpaces.Types.DescribeWorkspacesPoolSessionsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesPoolSessionsResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesPoolSessionsResult, AWSError>;
   /**
-   * Retrieves a list that describes the streaming sessions for a specified WorkSpaces pool.
+   * Retrieves a list that describes the streaming sessions for a specified pool.
    */
   describeWorkspacesPoolSessions(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesPoolSessionsResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesPoolSessionsResult, AWSError>;
   /**
-   * Describes the specified WorkSpaces pool.
+   * Describes the specified WorkSpaces Pools.
    */
   describeWorkspacesPools(params: WorkSpaces.Types.DescribeWorkspacesPoolsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesPoolsResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesPoolsResult, AWSError>;
   /**
-   * Describes the specified WorkSpaces pool.
+   * Describes the specified WorkSpaces Pools.
    */
   describeWorkspacesPools(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesPoolsResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesPoolsResult, AWSError>;
   /**
@@ -620,11 +620,11 @@ declare class WorkSpaces extends Service {
    */
   startWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.StartWorkspacesResult) => void): Request<WorkSpaces.Types.StartWorkspacesResult, AWSError>;
   /**
-   * Starts the specified WorkSpaces pool. You cannot start a WorkSpace pool unless it has a running mode of AutoStop and a state of STOPPED.
+   * Starts the specified pool. You cannot start a pool unless it has a running mode of AutoStop and a state of STOPPED.
    */
   startWorkspacesPool(params: WorkSpaces.Types.StartWorkspacesPoolRequest, callback?: (err: AWSError, data: WorkSpaces.Types.StartWorkspacesPoolResult) => void): Request<WorkSpaces.Types.StartWorkspacesPoolResult, AWSError>;
   /**
-   * Starts the specified WorkSpaces pool. You cannot start a WorkSpace pool unless it has a running mode of AutoStop and a state of STOPPED.
+   * Starts the specified pool. You cannot start a pool unless it has a running mode of AutoStop and a state of STOPPED.
    */
   startWorkspacesPool(callback?: (err: AWSError, data: WorkSpaces.Types.StartWorkspacesPoolResult) => void): Request<WorkSpaces.Types.StartWorkspacesPoolResult, AWSError>;
   /**
@@ -636,11 +636,11 @@ declare class WorkSpaces extends Service {
    */
   stopWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.StopWorkspacesResult) => void): Request<WorkSpaces.Types.StopWorkspacesResult, AWSError>;
   /**
-   * Stops the specifiedWorkSpaces pool. You cannot stop a WorkSpace pool unless it has a running mode of AutoStop and a state of AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.
+   * Stops the specified pool. You cannot stop a WorkSpace pool unless it has a running mode of AutoStop and a state of AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.
    */
   stopWorkspacesPool(params: WorkSpaces.Types.StopWorkspacesPoolRequest, callback?: (err: AWSError, data: WorkSpaces.Types.StopWorkspacesPoolResult) => void): Request<WorkSpaces.Types.StopWorkspacesPoolResult, AWSError>;
   /**
-   * Stops the specifiedWorkSpaces pool. You cannot stop a WorkSpace pool unless it has a running mode of AutoStop and a state of AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.
+   * Stops the specified pool. You cannot stop a WorkSpace pool unless it has a running mode of AutoStop and a state of AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.
    */
   stopWorkspacesPool(callback?: (err: AWSError, data: WorkSpaces.Types.StopWorkspacesPoolResult) => void): Request<WorkSpaces.Types.StopWorkspacesPoolResult, AWSError>;
   /**
@@ -652,19 +652,19 @@ declare class WorkSpaces extends Service {
    */
   terminateWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesResult, AWSError>;
   /**
-   * Terminates the specified WorkSpaces pool.
+   * Terminates the specified pool.
    */
   terminateWorkspacesPool(params: WorkSpaces.Types.TerminateWorkspacesPoolRequest, callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesPoolResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesPoolResult, AWSError>;
   /**
-   * Terminates the specified WorkSpaces pool.
+   * Terminates the specified pool.
    */
   terminateWorkspacesPool(callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesPoolResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesPoolResult, AWSError>;
   /**
-   * Terminates the WorkSpaces pool session.
+   * Terminates the pool session.
    */
   terminateWorkspacesPoolSession(params: WorkSpaces.Types.TerminateWorkspacesPoolSessionRequest, callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesPoolSessionResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesPoolSessionResult, AWSError>;
   /**
-   * Terminates the WorkSpaces pool session.
+   * Terminates the pool session.
    */
   terminateWorkspacesPoolSession(callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesPoolSessionResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesPoolSessionResult, AWSError>;
   /**
@@ -708,11 +708,11 @@ declare class WorkSpaces extends Service {
    */
   updateWorkspaceImagePermission(callback?: (err: AWSError, data: WorkSpaces.Types.UpdateWorkspaceImagePermissionResult) => void): Request<WorkSpaces.Types.UpdateWorkspaceImagePermissionResult, AWSError>;
   /**
-   * Updates the specified WorkSpaces pool.
+   * Updates the specified pool.
    */
   updateWorkspacesPool(params: WorkSpaces.Types.UpdateWorkspacesPoolRequest, callback?: (err: AWSError, data: WorkSpaces.Types.UpdateWorkspacesPoolResult) => void): Request<WorkSpaces.Types.UpdateWorkspacesPoolResult, AWSError>;
   /**
-   * Updates the specified WorkSpaces pool.
+   * Updates the specified pool.
    */
   updateWorkspacesPool(callback?: (err: AWSError, data: WorkSpaces.Types.UpdateWorkspacesPoolResult) => void): Request<WorkSpaces.Types.UpdateWorkspacesPoolResult, AWSError>;
 }
@@ -985,7 +985,7 @@ declare namespace WorkSpaces {
      */
     DesiredUserSessions: DesiredUserSessions;
     /**
-     * The total number of session slots that are available for WorkSpaces pools.
+     * The total number of session slots that are available for a pool of WorkSpaces.
      */
     ActualUserSessions: ActualUserSessions;
     /**
@@ -1358,41 +1358,41 @@ declare namespace WorkSpaces {
   }
   export interface CreateWorkspacesPoolRequest {
     /**
-     * The name of the WorkSpaces pool.
+     * The name of the pool.
      */
     PoolName: WorkspacesPoolName;
     /**
-     * The WorkSpaces pool description.
+     * The pool description.
      */
     Description: UpdateDescription;
     /**
-     * The identifier of the bundle for the WorkSpaces pool.
+     * The identifier of the bundle for the pool.
      */
     BundleId: BundleId;
     /**
-     * The identifier of the directory for the WorkSpaces pool.
+     * The identifier of the directory for the pool.
      */
     DirectoryId: DirectoryId;
     /**
-     * The user capacity of the WorkSpaces pool.
+     * The user capacity of the pool.
      */
     Capacity: Capacity;
     /**
-     * The tags for the WorkSpaces pool.
+     * The tags for the pool.
      */
     Tags?: TagList;
     /**
-     * Indicates the application settings of the WorkSpaces pool.
+     * Indicates the application settings of the pool.
      */
     ApplicationSettings?: ApplicationSettingsRequest;
     /**
-     * Indicates the timeout settings of the WorkSpaces pool.
+     * Indicates the timeout settings of the pool.
      */
     TimeoutSettings?: TimeoutSettings;
   }
   export interface CreateWorkspacesPoolResult {
     /**
-     * Indicates the WorkSpaces pool to create.
+     * Indicates the pool to create.
      */
     WorkspacesPool?: WorkspacesPool;
   }
@@ -2071,7 +2071,7 @@ declare namespace WorkSpaces {
   }
   export interface DescribeWorkspacesPoolSessionsRequest {
     /**
-     * The identifier of the WorkSpaces pool.
+     * The identifier of the pool.
      */
     PoolId: WorkspacesPoolId;
     /**
@@ -2089,7 +2089,7 @@ declare namespace WorkSpaces {
   }
   export interface DescribeWorkspacesPoolSessionsResult {
     /**
-     * Describes the WorkSpaces pool sessions.
+     * Describes the pool sessions.
      */
     Sessions?: WorkspacesPoolSessions;
     /**
@@ -2103,11 +2103,11 @@ declare namespace WorkSpaces {
      */
     Name: DescribeWorkspacesPoolsFilterName;
     /**
-     * The values for filtering WorkSpaces pools.
+     * The values for filtering WorkSpaces Pools.
      */
     Values: DescribeWorkspacesPoolsFilterValues;
     /**
-     * The operator values for filtering WorkSpaces pools.
+     * The operator values for filtering WorkSpaces Pools.
      */
     Operator: DescribeWorkspacesPoolsFilterOperator;
   }
@@ -2118,11 +2118,11 @@ declare namespace WorkSpaces {
   export type DescribeWorkspacesPoolsFilters = DescribeWorkspacesPoolsFilter[];
   export interface DescribeWorkspacesPoolsRequest {
     /**
-     * The identifier of the WorkSpaces pool.
+     * The identifier of the WorkSpaces Pools.
      */
     PoolIds?: WorkspacesPoolIds;
     /**
-     * The filter conditions for the WorkSpaces pool to return.
+     * The filter conditions for the WorkSpaces Pool to return.
      */
     Filters?: DescribeWorkspacesPoolsFilters;
     /**
@@ -2136,7 +2136,7 @@ declare namespace WorkSpaces {
   }
   export interface DescribeWorkspacesPoolsResult {
     /**
-     * Information about the WorkSpaces pools.
+     * Information about the WorkSpaces Pools.
      */
     WorkspacesPools?: WorkspacesPools;
     /**
@@ -2760,7 +2760,7 @@ declare namespace WorkSpaces {
      */
     Type?: OperatingSystemType;
   }
-  export type OperatingSystemName = "AMAZON_LINUX_2"|"UBUNTU_18_04"|"UBUNTU_20_04"|"UBUNTU_22_04"|"UNKNOWN"|"WINDOWS_10"|"WINDOWS_11"|"WINDOWS_7"|"WINDOWS_SERVER_2016"|"WINDOWS_SERVER_2019"|"WINDOWS_SERVER_2022"|string;
+  export type OperatingSystemName = "AMAZON_LINUX_2"|"UBUNTU_18_04"|"UBUNTU_20_04"|"UBUNTU_22_04"|"UNKNOWN"|"WINDOWS_10"|"WINDOWS_11"|"WINDOWS_7"|"WINDOWS_SERVER_2016"|"WINDOWS_SERVER_2019"|"WINDOWS_SERVER_2022"|"RHEL_8"|string;
   export type OperatingSystemNameList = OperatingSystemName[];
   export type OperatingSystemType = "WINDOWS"|"LINUX"|string;
   export type PaginationToken = string;
@@ -3046,7 +3046,7 @@ declare namespace WorkSpaces {
   export type StartWorkspaceRequests = StartRequest[];
   export interface StartWorkspacesPoolRequest {
     /**
-     * The identifier of the WorkSpaces pool.
+     * The identifier of the pool.
      */
     PoolId: WorkspacesPoolId;
   }
@@ -3073,7 +3073,7 @@ declare namespace WorkSpaces {
   export type StopWorkspaceRequests = StopRequest[];
   export interface StopWorkspacesPoolRequest {
     /**
-     * The identifier of the WorkSpaces pool.
+     * The identifier of the pool.
      */
     PoolId: WorkspacesPoolId;
   }
@@ -3147,7 +3147,7 @@ declare namespace WorkSpaces {
   export type TerminateWorkspaceRequests = TerminateRequest[];
   export interface TerminateWorkspacesPoolRequest {
     /**
-     * The identifier of the WorkSpaces pool.
+     * The identifier of the pool.
      */
     PoolId: WorkspacesPoolId;
   }
@@ -3155,7 +3155,7 @@ declare namespace WorkSpaces {
   }
   export interface TerminateWorkspacesPoolSessionRequest {
     /**
-     * The identifier of the WorkSpaces pool session.
+     * The identifier of the pool session.
      */
     SessionId: AmazonUuid;
   }
@@ -3273,11 +3273,11 @@ declare namespace WorkSpaces {
   }
   export interface UpdateWorkspacesPoolRequest {
     /**
-     * The identifier of the specified WorkSpaces pool to update.
+     * The identifier of the specified pool to update.
      */
     PoolId: WorkspacesPoolId;
     /**
-     * Describes the specified WorkSpaces pool to update.
+     * Describes the specified pool to update.
      */
     Description?: UpdateDescription;
     /**
@@ -3289,7 +3289,7 @@ declare namespace WorkSpaces {
      */
     DirectoryId?: DirectoryId;
     /**
-     * The desired capacity for the WorkSpaces pool.
+     * The desired capacity for the pool.
      */
     Capacity?: Capacity;
     /**
@@ -3297,13 +3297,13 @@ declare namespace WorkSpaces {
      */
     ApplicationSettings?: ApplicationSettingsRequest;
     /**
-     * Indicates the timeout settings of the specified WorkSpaces pool.
+     * Indicates the timeout settings of the specified pool.
      */
     TimeoutSettings?: TimeoutSettings;
   }
   export interface UpdateWorkspacesPoolResult {
     /**
-     * Describes the specified WorkSpaces pool.
+     * Describes the specified pool.
      */
     WorkspacesPool?: WorkspacesPool;
   }
@@ -3895,11 +3895,11 @@ declare namespace WorkSpaces {
   export type WorkspacesIpGroupsList = WorkspacesIpGroup[];
   export interface WorkspacesPool {
     /**
-     * The identifier of a WorkSpaces pool.
+     * The identifier of a pool.
      */
     PoolId: WorkspacesPoolId;
     /**
-     * The Amazon Resource Name (ARN) for the WorkSpaces pool.
+     * The Amazon Resource Name (ARN) for the pool.
      */
     PoolArn: ARN;
     /**
@@ -3960,7 +3960,7 @@ declare namespace WorkSpaces {
   export type WorkspacesPoolName = string;
   export interface WorkspacesPoolSession {
     /**
-     * The authentication method. The user is authenticated using a WorkSpaces pool URL (API) or SAML 2.0 federation (SAML).
+     * The authentication method. The user is authenticated using a WorkSpaces Pools URL (API) or SAML 2.0 federation (SAML).
      */
     AuthenticationType?: AuthenticationType;
     /**

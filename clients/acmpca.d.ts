@@ -824,8 +824,8 @@ declare namespace ACMPCA {
      */
     CertificateArn?: Arn;
   }
-  export type KeyAlgorithm = "RSA_2048"|"RSA_4096"|"EC_prime256v1"|"EC_secp384r1"|string;
-  export type KeyStorageSecurityStandard = "FIPS_140_2_LEVEL_2_OR_HIGHER"|"FIPS_140_2_LEVEL_3_OR_HIGHER"|string;
+  export type KeyAlgorithm = "RSA_2048"|"RSA_4096"|"EC_prime256v1"|"EC_secp384r1"|"SM2"|string;
+  export type KeyStorageSecurityStandard = "FIPS_140_2_LEVEL_2_OR_HIGHER"|"FIPS_140_2_LEVEL_3_OR_HIGHER"|"CCPC_LEVEL_1_OR_HIGHER"|string;
   export interface KeyUsage {
     /**
      *  Key can be used for digital signing.
@@ -1062,7 +1062,7 @@ declare namespace ACMPCA {
   export type S3BucketName3To255 = string;
   export type S3Key = string;
   export type S3ObjectAcl = "PUBLIC_READ"|"BUCKET_OWNER_FULL_CONTROL"|string;
-  export type SigningAlgorithm = "SHA256WITHECDSA"|"SHA384WITHECDSA"|"SHA512WITHECDSA"|"SHA256WITHRSA"|"SHA384WITHRSA"|"SHA512WITHRSA"|string;
+  export type SigningAlgorithm = "SHA256WITHECDSA"|"SHA384WITHECDSA"|"SHA512WITHECDSA"|"SHA256WITHRSA"|"SHA384WITHRSA"|"SHA512WITHRSA"|"SM3WITHSM2"|string;
   export type String = string;
   export type String128 = string;
   export type String16 = string;

@@ -2119,6 +2119,10 @@ declare namespace EMR {
      * The custom AMI ID to use for the instance type.
      */
     CustomAmiId?: XmlStringMaxLen256;
+    /**
+     * The priority at which Amazon EMR launches the Amazon EC2 instances with this instance type. Priority starts at 0, which is the highest priority. Amazon EMR considers the highest priority first.
+     */
+    Priority?: NonNegativeDouble;
   }
   export type InstanceTypeConfigList = InstanceTypeConfig[];
   export interface InstanceTypeSpecification {
@@ -2154,6 +2158,10 @@ declare namespace EMR {
      * The custom AMI ID to use for the instance type.
      */
     CustomAmiId?: XmlStringMaxLen256;
+    /**
+     * The priority at which Amazon EMR launches the Amazon EC2 instances with this instance type. Priority starts at 0, which is the highest priority. Amazon EMR considers the highest priority first.
+     */
+    Priority?: NonNegativeDouble;
   }
   export type InstanceTypeSpecificationList = InstanceTypeSpecification[];
   export type Integer = number;
@@ -2913,10 +2921,10 @@ declare namespace EMR {
   }
   export type OnDemandCapacityReservationPreference = "open"|"none"|string;
   export type OnDemandCapacityReservationUsageStrategy = "use-capacity-reservations-first"|string;
-  export type OnDemandProvisioningAllocationStrategy = "lowest-price"|string;
+  export type OnDemandProvisioningAllocationStrategy = "lowest-price"|"prioritized"|string;
   export interface OnDemandProvisioningSpecification {
     /**
-     * Specifies the strategy to use in launching On-Demand instance fleets. Currently, the only option is lowest-price (the default), which launches the lowest price first.
+     * Specifies the strategy to use in launching On-Demand instance fleets. Available options are lowest-price and prioritized. lowest-price specifies to launch the instances with the lowest price first, and prioritized specifies that Amazon EMR should launch the instances with the highest priority first. The default is lowest-price.
      */
     AllocationStrategy: OnDemandProvisioningAllocationStrategy;
     /**
@@ -3436,7 +3444,7 @@ declare namespace EMR {
     Version?: String;
   }
   export type SimplifiedApplicationList = SimplifiedApplication[];
-  export type SpotProvisioningAllocationStrategy = "capacity-optimized"|"price-capacity-optimized"|"lowest-price"|"diversified"|string;
+  export type SpotProvisioningAllocationStrategy = "capacity-optimized"|"price-capacity-optimized"|"lowest-price"|"diversified"|"capacity-optimized-prioritized"|string;
   export interface SpotProvisioningSpecification {
     /**
      * The Spot provisioning timeout period in minutes. If Spot Instances are not provisioned within this time period, the TimeOutAction is taken. Minimum value is 5 and maximum value is 1440. The timeout applies only during initial provisioning, when the cluster is first created.
@@ -3451,7 +3459,7 @@ declare namespace EMR {
      */
     BlockDurationMinutes?: WholeNumber;
     /**
-     * Specifies one of the following strategies to launch Spot Instance fleets: price-capacity-optimized, capacity-optimized, lowest-price, or diversified. For more information on the provisioning strategies, see Allocation strategies for Spot Instances in the Amazon EC2 User Guide for Linux Instances.  When you launch a Spot Instance fleet with the old console, it automatically launches with the capacity-optimized strategy. You can't change the allocation strategy from the old console. 
+     * Specifies one of the following strategies to launch Spot Instance fleets: capacity-optimized, price-capacity-optimized, lowest-price, or diversified, and capacity-optimized-prioritized. For more information on the provisioning strategies, see Allocation strategies for Spot Instances in the Amazon EC2 User Guide for Linux Instances.  When you launch a Spot Instance fleet with the old console, it automatically launches with the capacity-optimized strategy. You can't change the allocation strategy from the old console. 
      */
     AllocationStrategy?: SpotProvisioningAllocationStrategy;
   }
