@@ -1,0 +1,47 @@
+[
+    {
+        "type": "feature",
+        "category": "APIGateway",
+        "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing."
+    },
+    {
+        "type": "feature",
+        "category": "CognitoIdentity",
+        "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing."
+    },
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "Authentication profiles are Amazon Connect resources (in gated preview) that allow you to configure authentication settings for users in your contact center. This release adds support for new ListAuthenticationProfiles, DescribeAuthenticationProfile and UpdateAuthenticationProfile APIs."
+    },
+    {
+        "type": "feature",
+        "category": "DocDB",
+        "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing."
+    },
+    {
+        "type": "feature",
+        "category": "EKS",
+        "description": "Updates EKS managed node groups to support EC2 Capacity Blocks for ML"
+    },
+    {
+        "type": "feature",
+        "category": "PaymentCryptography",
+        "description": "Added further restrictions on logging of potentially sensitive inputs and outputs."
+    },
+    {
+        "type": "feature",
+        "category": "PaymentCryptographyData",
+        "description": "Adding support for dynamic keys for encrypt, decrypt, re-encrypt and translate pin functions.  With this change, customers can use one-time TR-31 keys directly in dataplane operations without the need to first import them into the service."
+    },
+    {
+        "type": "feature",
+        "category": "SWF",
+        "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing."
+    },
+    {
+        "type": "feature",
+        "category": "StepFunctions",
+        "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing."
+    }
+]

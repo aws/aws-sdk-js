@@ -256,6 +256,7 @@ declare namespace PaymentCryptography {
      */
     Key: Key;
   }
+  export type EvenHexLengthBetween16And32 = string;
   export interface ExportAttributes {
     /**
      * Parameter information for IPEK export.
@@ -351,7 +352,7 @@ declare namespace PaymentCryptography {
     /**
      * A random number value that is unique to the TR-34 key block generated using 2 pass. The operation will fail, if a random nonce value is not provided for a TR-34 key block generated using 2 pass.
      */
-    RandomNonce?: HexLength16;
+    RandomNonce?: EvenHexLengthBetween16And32;
     /**
      * Optional metadata for export associated with the key material. This data is signed but transmitted in clear text.
      */
@@ -461,7 +462,6 @@ declare namespace PaymentCryptography {
      */
     KeyCertificateChain: CertificateType;
   }
-  export type HexLength16 = string;
   export type HexLength20Or24 = string;
   export interface ImportKeyCryptogram {
     KeyAttributes: KeyAttributes;
@@ -563,7 +563,7 @@ declare namespace PaymentCryptography {
     /**
      * A random number value that is unique to the TR-34 key block generated using 2 pass. The operation will fail, if a random nonce value is not provided for a TR-34 key block generated using 2 pass.
      */
-    RandomNonce?: HexLength16;
+    RandomNonce?: EvenHexLengthBetween16And32;
   }
   export interface Key {
     /**

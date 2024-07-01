@@ -860,7 +860,7 @@ declare namespace EKS {
   export type BoxedBoolean = boolean;
   export type BoxedInteger = number;
   export type Capacity = number;
-  export type CapacityTypes = "ON_DEMAND"|"SPOT"|string;
+  export type CapacityTypes = "ON_DEMAND"|"SPOT"|"CAPACITY_BLOCK"|string;
   export type Category = "UPGRADE_READINESS"|string;
   export type CategoryList = Category[];
   export interface Certificate {

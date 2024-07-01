@@ -580,6 +580,14 @@ declare class Connect extends Service {
    */
   describeAgentStatus(callback?: (err: AWSError, data: Connect.Types.DescribeAgentStatusResponse) => void): Request<Connect.Types.DescribeAgentStatusResponse, AWSError>;
   /**
+   * This API is in preview release for Amazon Connect and is subject to change. To request access to this API, contact Amazon Web Services Support. Describes the target authentication profile.
+   */
+  describeAuthenticationProfile(params: Connect.Types.DescribeAuthenticationProfileRequest, callback?: (err: AWSError, data: Connect.Types.DescribeAuthenticationProfileResponse) => void): Request<Connect.Types.DescribeAuthenticationProfileResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. To request access to this API, contact Amazon Web Services Support. Describes the target authentication profile.
+   */
+  describeAuthenticationProfile(callback?: (err: AWSError, data: Connect.Types.DescribeAuthenticationProfileResponse) => void): Request<Connect.Types.DescribeAuthenticationProfileResponse, AWSError>;
+  /**
    * This API is in preview release for Amazon Connect and is subject to change. Describes the specified contact.   Contact information remains available in Amazon Connect for 24 months, and then it is deleted. Only data from November 12, 2021, and later is returned by this API. 
    */
   describeContact(params: Connect.Types.DescribeContactRequest, callback?: (err: AWSError, data: Connect.Types.DescribeContactResponse) => void): Request<Connect.Types.DescribeContactResponse, AWSError>;
@@ -995,6 +1003,14 @@ declare class Connect extends Service {
    * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of all approved origins associated with the instance.
    */
   listApprovedOrigins(callback?: (err: AWSError, data: Connect.Types.ListApprovedOriginsResponse) => void): Request<Connect.Types.ListApprovedOriginsResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. To request access to this API, contact Amazon Web Services Support. Provides summary information about the authentication profiles in a specified Amazon Connect instance.
+   */
+  listAuthenticationProfiles(params: Connect.Types.ListAuthenticationProfilesRequest, callback?: (err: AWSError, data: Connect.Types.ListAuthenticationProfilesResponse) => void): Request<Connect.Types.ListAuthenticationProfilesResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. To request access to this API, contact Amazon Web Services Support. Provides summary information about the authentication profiles in a specified Amazon Connect instance.
+   */
+  listAuthenticationProfiles(callback?: (err: AWSError, data: Connect.Types.ListAuthenticationProfilesResponse) => void): Request<Connect.Types.ListAuthenticationProfilesResponse, AWSError>;
   /**
    * This API is in preview release for Amazon Connect and is subject to change. For the specified version of Amazon Lex, returns a paginated list of all the Amazon Lex bots currently associated with the instance. Use this API to returns both Amazon Lex V1 and V2 bots.
    */
@@ -1500,11 +1516,11 @@ declare class Connect extends Service {
    */
   sendChatIntegrationEvent(callback?: (err: AWSError, data: Connect.Types.SendChatIntegrationEventResponse) => void): Request<Connect.Types.SendChatIntegrationEventResponse, AWSError>;
   /**
-   * Provides a pre-signed Amazon S3 URL in response for uploading your content.  You may only use this API to upload attachments to a Connect Case. 
+   * Provides a pre-signed Amazon S3 URL in response for uploading your content.  You may only use this API to upload attachments to an Amazon Connect Case. 
    */
   startAttachedFileUpload(params: Connect.Types.StartAttachedFileUploadRequest, callback?: (err: AWSError, data: Connect.Types.StartAttachedFileUploadResponse) => void): Request<Connect.Types.StartAttachedFileUploadResponse, AWSError>;
   /**
-   * Provides a pre-signed Amazon S3 URL in response for uploading your content.  You may only use this API to upload attachments to a Connect Case. 
+   * Provides a pre-signed Amazon S3 URL in response for uploading your content.  You may only use this API to upload attachments to an Amazon Connect Case. 
    */
   startAttachedFileUpload(callback?: (err: AWSError, data: Connect.Types.StartAttachedFileUploadResponse) => void): Request<Connect.Types.StartAttachedFileUploadResponse, AWSError>;
   /**
@@ -1651,6 +1667,14 @@ declare class Connect extends Service {
    * This API is in preview release for Amazon Connect and is subject to change. Updates agent status.
    */
   updateAgentStatus(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. To request access to this API, contact Amazon Web Services Support. Updates the selected authentication profile.
+   */
+  updateAuthenticationProfile(params: Connect.Types.UpdateAuthenticationProfileRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. To request access to this API, contact Amazon Web Services Support. Updates the selected authentication profile.
+   */
+  updateAuthenticationProfile(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * This API is in preview release for Amazon Connect and is subject to change. Adds or updates user-defined contact information associated with the specified contact. At least one field to be updated must be present in the request.  You can add or update user-defined contact information for both ongoing and completed contacts. 
    */
@@ -2015,6 +2039,7 @@ declare class Connect extends Service {
 declare namespace Connect {
   export type ARN = string;
   export type AWSAccountId = string;
+  export type AccessTokenDuration = number;
   export type ActionSummaries = ActionSummary[];
   export interface ActionSummary {
     /**
@@ -2673,6 +2698,86 @@ declare namespace Connect {
     PotentialQualityIssues?: PotentialAudioQualityIssues;
   }
   export type AudioQualityScore = number;
+  export interface AuthenticationProfile {
+    /**
+     * A unique identifier for the authentication profile. 
+     */
+    Id?: AuthenticationProfileId;
+    /**
+     * The Amazon Resource Name (ARN) for the authentication profile.
+     */
+    Arn?: ARN;
+    /**
+     * The name for the authentication profile.
+     */
+    Name?: AuthenticationProfileName;
+    /**
+     * The description for the authentication profile.
+     */
+    Description?: AuthenticationProfileDescription;
+    /**
+     * A list of IP address range strings that are allowed to access the Amazon Connect instance. For more information about how to configure IP addresses, see Configure IP address based access control in the Amazon Connect Administrator Guide.
+     */
+    AllowedIps?: IpCidrList;
+    /**
+     * A list of IP address range strings that are blocked from accessing the Amazon Connect instance. For more information about how to configure IP addresses, see Configure IP address based access control in the Amazon Connect Administrator Guide.
+     */
+    BlockedIps?: IpCidrList;
+    /**
+     * Shows whether the authentication profile is the default authentication profile for the Amazon Connect instance. The default authentication profile applies to all agents in an Amazon Connect instance, unless overridden by another authentication profile.
+     */
+    IsDefault?: Boolean;
+    /**
+     * The timestamp when the authentication profile was created.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The timestamp when the authentication profile was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Web Services Region where the authentication profile was last modified.
+     */
+    LastModifiedRegion?: RegionName;
+    /**
+     * The short lived session duration configuration for users logged in to Amazon Connect, in minutes. This value determines the maximum possible time before an agent is authenticated. For more information, see Configure the session duration in the Amazon Connect Administrator Guide.
+     */
+    PeriodicSessionDuration?: AccessTokenDuration;
+    /**
+     * The long lived session duration for users logged in to Amazon Connect, in minutes. After this time period, users must log in again. For more information, see Configure the session duration in the Amazon Connect Administrator Guide.
+     */
+    MaxSessionDuration?: RefreshTokenDuration;
+  }
+  export type AuthenticationProfileDescription = string;
+  export type AuthenticationProfileId = string;
+  export type AuthenticationProfileName = string;
+  export interface AuthenticationProfileSummary {
+    /**
+     * The unique identifier of the authentication profile.
+     */
+    Id?: AuthenticationProfileId;
+    /**
+     * The Amazon Resource Name (ARN) of the authentication profile summary.
+     */
+    Arn?: ARN;
+    /**
+     * The name of the authentication profile summary.
+     */
+    Name?: AuthenticationProfileName;
+    /**
+     * Shows whether the authentication profile is the default authentication profile for the Amazon Connect instance. The default authentication profile applies to all agents in an Amazon Connect instance, unless overridden by another authentication profile.
+     */
+    IsDefault?: Boolean;
+    /**
+     * The timestamp when the authentication profile summary was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Web Services Region when the authentication profile summary was last modified.
+     */
+    LastModifiedRegion?: RegionName;
+  }
+  export type AuthenticationProfileSummaryList = AuthenticationProfileSummary[];
   export type AutoAccept = boolean;
   export interface AvailableNumberSummary {
     /**
@@ -2951,7 +3056,7 @@ declare namespace Connect {
   export type ComparisonOperator = string;
   export interface CompleteAttachedFileUploadRequest {
     /**
-     * The unique identifier of the Connect instance.
+     * The unique identifier of the Amazon Connect instance.
      */
     InstanceId: InstanceId;
     /**
@@ -4739,6 +4844,22 @@ declare namespace Connect {
      * The agent status.
      */
     AgentStatus?: AgentStatus;
+  }
+  export interface DescribeAuthenticationProfileRequest {
+    /**
+     * A unique identifier for the authentication profile. 
+     */
+    AuthenticationProfileId: AuthenticationProfileId;
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+  }
+  export interface DescribeAuthenticationProfileResponse {
+    /**
+     * The authentication profile object being described.
+     */
+    AuthenticationProfile?: AuthenticationProfile;
   }
   export interface DescribeContactEvaluationRequest {
     /**
@@ -7101,6 +7222,8 @@ declare namespace Connect {
     Id?: TaskTemplateFieldIdentifier;
   }
   export type InvisibleTaskTemplateFields = InvisibleFieldInfo[];
+  export type IpCidr = string;
+  export type IpCidrList = IpCidr[];
   export type JoinToken = string;
   export type KeyId = string;
   export interface KinesisFirehoseConfig {
@@ -7232,6 +7355,30 @@ declare namespace Connect {
      * The approved origins.
      */
     Origins?: OriginsList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListAuthenticationProfilesRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult1000;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListAuthenticationProfilesResponse {
+    /**
+     * A summary of a given authentication profile.
+     */
+    AuthenticationProfileSummaryList?: AuthenticationProfileSummaryList;
     /**
      * If there are additional results, this is the token for the next set of results.
      */
@@ -9492,6 +9639,7 @@ declare namespace Connect {
   export type ReferenceType = "URL"|"ATTACHMENT"|"NUMBER"|"STRING"|"DATE"|"EMAIL"|string;
   export type ReferenceTypes = ReferenceType[];
   export type ReferenceValue = string;
+  export type RefreshTokenDuration = number;
   export type RegionName = string;
   export type RehydrationType = "ENTIRE_PAST_SESSION"|"FROM_SEGMENT"|string;
   export interface ReleasePhoneNumberRequest {
@@ -10018,7 +10166,7 @@ declare namespace Connect {
   }
   export interface SearchContactFlowsResponse {
     /**
-     * Information about the contact flows.
+     * Information about the flows.
      */
     ContactFlows?: ContactFlowSearchSummaryList;
     /**
@@ -10749,7 +10897,7 @@ declare namespace Connect {
      */
     ClientToken?: ClientToken;
     /**
-     * The unique identifier of the Connect instance.
+     * The unique identifier of the Amazon Connect instance.
      */
     InstanceId: InstanceId;
     /**
@@ -11073,7 +11221,7 @@ declare namespace Connect {
      */
     ClientToken?: ClientToken;
     /**
-     * The identifier of the flow for the call. To see the ContactFlowId in the Amazon Connect admin website, on the navigation menu go to Routing, Contact Flows. Choose the flow. On the flow page, under the name of the flow, choose Show additional flow information. The ContactFlowId is the last part of the ARN, shown here in bold:  arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/846ec553-a005-41c0-8341-xxxxxxxxxxxx 
+     * The identifier of the flow for the call. To see the ContactFlowId in the Amazon Connect admin website, on the navigation menu go to Routing, Flows. Choose the flow. On the flow page, under the name of the flow, choose Show additional flow information. The ContactFlowId is the last part of the ARN, shown here in bold:  arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/846ec553-a005-41c0-8341-xxxxxxxxxxxx 
      */
     ContactFlowId: ContactFlowId;
     /**
@@ -11693,6 +11841,36 @@ declare namespace Connect {
      * A number indicating the reset order of the agent status.
      */
     ResetOrderNumber?: Boolean;
+  }
+  export interface UpdateAuthenticationProfileRequest {
+    /**
+     * A unique identifier for the authentication profile. 
+     */
+    AuthenticationProfileId: AuthenticationProfileId;
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The name for the authentication profile.
+     */
+    Name?: AuthenticationProfileName;
+    /**
+     * The description for the authentication profile.
+     */
+    Description?: AuthenticationProfileDescription;
+    /**
+     * A list of IP address range strings that are allowed to access the instance. For more information on how to configure IP addresses, seeConfigure session timeouts in the Amazon Connect Administrator Guide.
+     */
+    AllowedIps?: IpCidrList;
+    /**
+     * A list of IP address range strings that are blocked from accessing the instance. For more information on how to configure IP addresses, For more information on how to configure IP addresses, see Configure IP-based access control in the Amazon Connect Administrator Guide. 
+     */
+    BlockedIps?: IpCidrList;
+    /**
+     * The short lived session duration configuration for users logged in to Amazon Connect, in minutes. This value determines the maximum possible time before an agent is authenticated. For more information, For more information on how to configure IP addresses, see Configure session timeouts in the Amazon Connect Administrator Guide. 
+     */
+    PeriodicSessionDuration?: AccessTokenDuration;
   }
   export interface UpdateCaseActionDefinition {
     /**

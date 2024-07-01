@@ -1,6 +1,17 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1651.0-->
+<!--LATEST=2.1652.0-->
 <!--ENTRYINSERT-->
+
+## 2.1652.0
+* feature: APIGateway: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: CognitoIdentity: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: Connect: Authentication profiles are Amazon Connect resources (in gated preview) that allow you to configure authentication settings for users in your contact center. This release adds support for new ListAuthenticationProfiles, DescribeAuthenticationProfile and UpdateAuthenticationProfile APIs.
+* feature: DocDB: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: EKS: Updates EKS managed node groups to support EC2 Capacity Blocks for ML
+* feature: PaymentCryptography: Added further restrictions on logging of potentially sensitive inputs and outputs.
+* feature: PaymentCryptographyData: Adding support for dynamic keys for encrypt, decrypt, re-encrypt and translate pin functions.  With this change, customers can use one-time TR-31 keys directly in dataplane operations without the need to first import them into the service.
+* feature: SWF: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: StepFunctions: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
 
 ## 2.1651.0
 * feature: ACMPCA: Added CCPC_LEVEL_1_OR_HIGHER KeyStorageSecurityStandard and SM2 KeyAlgorithm and SM3WITHSM2 SigningAlgorithm for China regions.
