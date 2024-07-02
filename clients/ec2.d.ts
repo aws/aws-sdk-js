@@ -7377,7 +7377,7 @@ declare namespace EC2 {
      */
     StatusMessage?: String;
     /**
-     * The state of the address pool.
+     * The state of the address range.    advertised: The address range is being advertised to the internet by Amazon Web Services.    deprovisioned: The address range is deprovisioned.    failed-deprovision: The request to deprovision the address range was unsuccessful. Ensure that all EIPs from the range have been deallocated and try again.    failed-provision: The request to provision the address range was unsuccessful.    pending-deprovision: You’ve submitted a request to deprovision an address range and it's pending.    pending-provision: You’ve submitted a request to provision an address range and it's pending.    provisioned: The address range is provisioned and can be advertised. The range is not currently advertised.    provisioned-not-publicly-advertisable: The address range is provisioned and cannot be advertised.  
      */
     State?: ByoipCidrState;
     /**
@@ -9546,7 +9546,7 @@ declare namespace EC2 {
      */
     SecurityGroupIds?: SecurityGroupIdStringListRequest;
     /**
-     * Indicates whether your client's IP address is preserved as the source. The value is true or false.   If true, your client's IP address is used when you connect to a resource.   If false, the elastic network interface IP address is used when you connect to a resource.   Default: true 
+     * Indicates whether the client IP address is preserved as the source. The following are the possible values.    true - Use the client IP address as the source.    false - Use the network interface IP address as the source.   Default: false 
      */
     PreserveClientIp?: Boolean;
     /**
@@ -11656,7 +11656,7 @@ declare namespace EC2 {
      */
     KmsKeyId?: KmsKeyId;
     /**
-     * The Amazon Resource Name (ARN) of the Outpost.
+     * The Amazon Resource Name (ARN) of the Outpost on which to create the volume. If you intend to use a volume with an instance running on an outpost, then you must create the volume on the same outpost as the instance. You can't use a volume created in an Amazon Web Services Region with an instance on an Amazon Web Services outpost, or the other way around.
      */
     OutpostArn?: String;
     /**
@@ -18019,7 +18019,7 @@ declare namespace EC2 {
      */
     Filters?: FilterList;
     /**
-     * The volume IDs.
+     * The volume IDs. If not specified, then all volumes are included in the response.
      */
     VolumeIds?: VolumeIdStringList;
     /**
@@ -23157,7 +23157,7 @@ declare namespace EC2 {
   export type HostReservationId = string;
   export type HostReservationIdSet = HostReservationId[];
   export type HostReservationSet = HostReservation[];
-  export type HostTenancy = "dedicated"|"host"|string;
+  export type HostTenancy = "default"|"dedicated"|"host"|string;
   export type HostnameType = "ip-name"|"resource-name"|string;
   export type Hour = number;
   export type HttpTokensState = "optional"|"required"|string;
@@ -25096,7 +25096,7 @@ declare namespace EC2 {
      */
     AllowedInstanceTypes?: AllowedInstanceTypeSet;
     /**
-     * [Price protection] The price protection threshold for Spot Instances, as a percentage of an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. If no current generation C, M, or R instance type matches your attributes, then the identified price is from the lowest priced current generation instance types, and failing that, from the lowest priced previous generation instance types that match your attributes. When Amazon EC2 selects instance types with your attributes, it will exclude instance types whose price exceeds your specified threshold. The parameter accepts an integer, which Amazon EC2 interprets as a percentage. If you set DesiredCapacityType to vcpu or memory-mib, the price protection threshold is based on the per vCPU or per memory price instead of the per instance price.  Only one of SpotMaxPricePercentageOverLowestPrice or MaxSpotPriceAsPercentageOfOptimalOnDemandPrice can be specified. If you don't specify either, Amazon EC2 will automatically apply optimal price protection to consistently select from a wide range of instance types. To indicate no price protection threshold for Spot Instances, meaning you want to consider all instance types that match your attributes, include one of these parameters and specify a high value, such as 999999. 
+     * [Price protection] The price protection threshold for Spot Instances, as a percentage of an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. If no current generation C, M, or R instance type matches your attributes, then the identified price is from the lowest priced current generation instance types, and failing that, from the lowest priced previous generation instance types that match your attributes. When Amazon EC2 selects instance types with your attributes, it will exclude instance types whose price exceeds your specified threshold. The parameter accepts an integer, which Amazon EC2 interprets as a percentage. If you set TargetCapacityUnitType to vcpu or memory-mib, the price protection threshold is based on the per vCPU or per memory price instead of the per instance price.  Only one of SpotMaxPricePercentageOverLowestPrice or MaxSpotPriceAsPercentageOfOptimalOnDemandPrice can be specified. If you don't specify either, Amazon EC2 will automatically apply optimal price protection to consistently select from a wide range of instance types. To indicate no price protection threshold for Spot Instances, meaning you want to consider all instance types that match your attributes, include one of these parameters and specify a high value, such as 999999. 
      */
     MaxSpotPriceAsPercentageOfOptimalOnDemandPrice?: Integer;
   }
@@ -25194,7 +25194,7 @@ declare namespace EC2 {
      */
     AllowedInstanceTypes?: AllowedInstanceTypeSet;
     /**
-     * [Price protection] The price protection threshold for Spot Instances, as a percentage of an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. If no current generation C, M, or R instance type matches your attributes, then the identified price is from the lowest priced current generation instance types, and failing that, from the lowest priced previous generation instance types that match your attributes. When Amazon EC2 selects instance types with your attributes, it will exclude instance types whose price exceeds your specified threshold. The parameter accepts an integer, which Amazon EC2 interprets as a percentage. If you set DesiredCapacityType to vcpu or memory-mib, the price protection threshold is based on the per vCPU or per memory price instead of the per instance price.  Only one of SpotMaxPricePercentageOverLowestPrice or MaxSpotPriceAsPercentageOfOptimalOnDemandPrice can be specified. If you don't specify either, Amazon EC2 will automatically apply optimal price protection to consistently select from a wide range of instance types. To indicate no price protection threshold for Spot Instances, meaning you want to consider all instance types that match your attributes, include one of these parameters and specify a high value, such as 999999. 
+     * [Price protection] The price protection threshold for Spot Instances, as a percentage of an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. If no current generation C, M, or R instance type matches your attributes, then the identified price is from the lowest priced current generation instance types, and failing that, from the lowest priced previous generation instance types that match your attributes. When Amazon EC2 selects instance types with your attributes, it will exclude instance types whose price exceeds your specified threshold. The parameter accepts an integer, which Amazon EC2 interprets as a percentage. If you set TargetCapacityUnitType to vcpu or memory-mib, the price protection threshold is based on the per vCPU or per memory price instead of the per instance price.  Only one of SpotMaxPricePercentageOverLowestPrice or MaxSpotPriceAsPercentageOfOptimalOnDemandPrice can be specified. If you don't specify either, Amazon EC2 will automatically apply optimal price protection to consistently select from a wide range of instance types. To indicate no price protection threshold for Spot Instances, meaning you want to consider all instance types that match your attributes, include one of these parameters and specify a high value, such as 999999. 
      */
     MaxSpotPriceAsPercentageOfOptimalOnDemandPrice?: Integer;
   }
@@ -28622,7 +28622,7 @@ declare namespace EC2 {
      */
     SriovNetSupport?: AttributeValue;
     /**
-     * Changes the instance's user data to the specified value. If you are using an Amazon Web Services SDK or command line tool, base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide base64-encoded text.
+     * Changes the instance's user data to the specified value. User data must be base64-encoded. Depending on the tool or SDK that you're using, the base64-encoding might be performed for you. For more information, see Work with instance user data.
      */
     UserData?: BlobAttributeValue;
     /**
@@ -34686,7 +34686,7 @@ declare namespace EC2 {
      */
     SubnetId?: SubnetId;
     /**
-     * The user data script to make available to the instance. For more information, see Run commands on your Amazon EC2 instance at launch in the Amazon EC2 User Guide. If you are using a command line tool, base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide base64-encoded text. User data is limited to 16 KB.
+     * The user data to make available to the instance. User data must be base64-encoded. Depending on the tool or SDK that you're using, the base64-encoding might be performed for you. For more information, see Work with instance user data.
      */
     UserData?: RunInstancesUserData;
     /**

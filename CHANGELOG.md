@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1652.0-->
+<!--LATEST=2.1653.0-->
 <!--ENTRYINSERT-->
+
+## 2.1653.0
+* feature: EC2: Documentation updates for Elastic Compute Cloud (EC2).
+* feature: FMS: Increases Customer API's ManagedServiceData length
+* feature: S3: Added response overrides to Head Object requests.
 
 ## 2.1652.0
 * feature: APIGateway: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
