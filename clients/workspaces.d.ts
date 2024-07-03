@@ -2942,7 +2942,7 @@ declare namespace WorkSpaces {
     /**
      * The size of the root volume.
      */
-    Capacity?: NonEmptyString;
+    Capacity: NonEmptyString;
   }
   export type RootVolumeSizeGib = number;
   export type RunningMode = "AUTO_STOP"|"ALWAYS_ON"|"MANUAL"|string;
@@ -3330,7 +3330,7 @@ declare namespace WorkSpaces {
     /**
      * The size of the user volume.
      */
-    Capacity?: NonEmptyString;
+    Capacity: NonEmptyString;
   }
   export type UserVolumeSizeGib = number;
   export type VolumeEncryptionKey = string;

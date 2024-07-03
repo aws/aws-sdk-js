@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1653.0-->
+<!--LATEST=2.1654.0-->
 <!--ENTRYINSERT-->
+
+## 2.1654.0
+* feature: Organizations: Added a new reason under ConstraintViolationException in RegisterDelegatedAdministrator API to prevent registering suspended accounts as delegated administrator of a service.
+* feature: Rekognition: This release adds support for tagging projects and datasets with the CreateProject and CreateDataset APIs.
+* feature: WorkSpaces: Fix create workspace bundle RootStorage/UserStorage to accept non null values
 
 ## 2.1653.0
 * feature: EC2: Documentation updates for Elastic Compute Cloud (EC2).

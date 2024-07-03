@@ -6260,6 +6260,9 @@
     },
     "RootStorage": {
       "type": "structure",
+      "required": [
+        "Capacity"
+      ],
       "members": {
         "Capacity": {
           "shape": "NonEmptyString",
@@ -7031,6 +7034,9 @@
     },
     "UserStorage": {
       "type": "structure",
+      "required": [
+        "Capacity"
+      ],
       "members": {
         "Capacity": {
           "shape": "NonEmptyString",
