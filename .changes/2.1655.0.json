@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "ECR",
+        "description": "This release for Amazon ECR makes change to bring the SDK into sync with the API."
+    },
+    {
+        "type": "feature",
+        "category": "PaymentCryptographyData",
+        "description": "Added further restrictions on logging of potentially sensitive inputs and outputs."
+    },
+    {
+        "type": "feature",
+        "category": "QBusiness",
+        "description": "Updates API to latest version."
+    }
+]

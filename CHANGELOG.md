@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1654.0-->
+<!--LATEST=2.1655.0-->
 <!--ENTRYINSERT-->
+
+## 2.1655.0
+* feature: ECR: This release for Amazon ECR makes change to bring the SDK into sync with the API.
+* feature: PaymentCryptographyData: Added further restrictions on logging of potentially sensitive inputs and outputs.
+* feature: QBusiness: Updates API to latest version.
 
 ## 2.1654.0
 * feature: Organizations: Added a new reason under ConstraintViolationException in RegisterDelegatedAdministrator API to prevent registering suspended accounts as delegated administrator of a service.

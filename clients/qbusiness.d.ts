@@ -964,6 +964,10 @@ declare namespace QBusiness {
      * An option to allow end users to create and use Amazon Q Apps in the web experience.
      */
     qAppsConfiguration?: QAppsConfiguration;
+    /**
+     * Configuration information about chat response personalization. For more information, see Personalizing chat responses 
+     */
+    personalizationConfiguration?: PersonalizationConfiguration;
   }
   export interface CreateApplicationResponse {
     /**
@@ -1753,6 +1757,10 @@ declare namespace QBusiness {
      * Settings for whether end users can create and use Amazon Q Apps in the web experience.
      */
     qAppsConfiguration?: QAppsConfiguration;
+    /**
+     * Configuration information about chat response personalization. For more information, see Personalizing chat responses.
+     */
+    personalizationConfiguration?: PersonalizationConfiguration;
   }
   export interface GetChatControlsConfigurationRequest {
     /**
@@ -2719,6 +2727,13 @@ declare namespace QBusiness {
     roleArn: RoleArn;
   }
   export type Payload = string;
+  export interface PersonalizationConfiguration {
+    /**
+     * An option to allow Amazon Q Business to customize chat responses using user specific metadata—specifically, location and job information—in your IAM Identity Center instance.
+     */
+    personalizationControlMode: PersonalizationControlMode;
+  }
+  export type PersonalizationControlMode = "ENABLED"|"DISABLED"|string;
   export interface Plugin {
     /**
      * The identifier of the plugin.
@@ -3191,6 +3206,10 @@ declare namespace QBusiness {
      * An option to allow end users to create and use Amazon Q Apps in the web experience.
      */
     qAppsConfiguration?: QAppsConfiguration;
+    /**
+     * Configuration information about chat response personalization. For more information, see Personalizing chat responses.
+     */
+    personalizationConfiguration?: PersonalizationConfiguration;
   }
   export interface UpdateApplicationResponse {
   }
