@@ -1,6 +1,7 @@
 const helpers = require('./helpers');
 const AWS = helpers.AWS;
 const MockService = helpers.MockService;
+var getEndpointSuffix = require('../lib/region_config').getEndpointSuffix;
 
 describe('region_config.js', function() {
   it('sets endpoint configuration option for default regions', function() {
@@ -133,6 +134,10 @@ describe('region_config.js', function() {
     });
     expect(service.isGlobalEndpoint).to.equal(false);
     expect(service.endpoint.host).to.equal('sts.us-gov-west-1.amazonaws.com');
+  });
+
+  it('resolves the endpoint suffix for eu-isoe-west-1', function() {
+    expect(getEndpointSuffix('eu-isoe-west-1')).to.equal('cloud.adc-e.uk');
   });
 });
 
