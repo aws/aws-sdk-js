@@ -1,6 +1,18 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1655.0-->
+<!--LATEST=2.1656.0-->
 <!--ENTRYINSERT-->
+
+## 2.1656.0
+* feature: CodeDeploy: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: DMS: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: DeviceFarm: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: ES: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: ElasticBeanstalk: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: Firehose: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: GameLift: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: QApps: This is a general availability (GA) release of Amazon Q Apps, a capability of Amazon Q Business. Q Apps leverages data sources your company has provided to enable users to build, share, and customize apps within your organization.
+* feature: Route53Resolver: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: SES: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
 
 ## 2.1655.0
 * feature: ECR: This release for Amazon ECR makes change to bring the SDK into sync with the API.

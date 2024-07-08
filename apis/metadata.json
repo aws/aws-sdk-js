@@ -1432,5 +1432,8 @@
   },
   "apptest": {
     "name": "AppTest"
+  },
+  "qapps": {
+    "name": "QApps"
   }
 }

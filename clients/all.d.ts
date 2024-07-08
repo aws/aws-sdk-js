@@ -382,3 +382,4 @@ export import TaxSettings = require('./taxsettings');
 export import ApplicationSignals = require('./applicationsignals');
 export import PcaConnectorScep = require('./pcaconnectorscep');
 export import AppTest = require('./apptest');
+export import QApps = require('./qapps');
