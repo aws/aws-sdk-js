@@ -397,6 +397,14 @@ declare class SageMaker extends Service {
    */
   createNotebookInstanceLifecycleConfig(callback?: (err: AWSError, data: SageMaker.Types.CreateNotebookInstanceLifecycleConfigOutput) => void): Request<SageMaker.Types.CreateNotebookInstanceLifecycleConfigOutput, AWSError>;
   /**
+   * Creates a job that optimizes a model for inference performance. To create the job, you provide the location of a source model, and you provide the settings for the optimization techniques that you want the job to apply. When the job completes successfully, SageMaker uploads the new optimized model to the output destination that you specify. For more information about how to use this action, and about the supported optimization techniques, see Optimize model inference with Amazon SageMaker.
+   */
+  createOptimizationJob(params: SageMaker.Types.CreateOptimizationJobRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateOptimizationJobResponse) => void): Request<SageMaker.Types.CreateOptimizationJobResponse, AWSError>;
+  /**
+   * Creates a job that optimizes a model for inference performance. To create the job, you provide the location of a source model, and you provide the settings for the optimization techniques that you want the job to apply. When the job completes successfully, SageMaker uploads the new optimized model to the output destination that you specify. For more information about how to use this action, and about the supported optimization techniques, see Optimize model inference with Amazon SageMaker.
+   */
+  createOptimizationJob(callback?: (err: AWSError, data: SageMaker.Types.CreateOptimizationJobResponse) => void): Request<SageMaker.Types.CreateOptimizationJobResponse, AWSError>;
+  /**
    * Creates a pipeline using a JSON pipeline definition.
    */
   createPipeline(params: SageMaker.Types.CreatePipelineRequest, callback?: (err: AWSError, data: SageMaker.Types.CreatePipelineResponse) => void): Request<SageMaker.Types.CreatePipelineResponse, AWSError>;
@@ -844,6 +852,14 @@ declare class SageMaker extends Service {
    * Deletes a notebook instance lifecycle configuration.
    */
   deleteNotebookInstanceLifecycleConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an optimization job.
+   */
+  deleteOptimizationJob(params: SageMaker.Types.DeleteOptimizationJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an optimization job.
+   */
+  deleteOptimizationJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a pipeline if there are no running instances of the pipeline. To delete a pipeline, you must stop all running instances of the pipeline using the StopPipelineExecution API. When you delete a pipeline, all instances of the pipeline are deleted.
    */
@@ -1308,6 +1324,14 @@ declare class SageMaker extends Service {
    * Returns a description of a notebook instance lifecycle configuration. For information about notebook instance lifestyle configurations, see Step 2.1: (Optional) Customize a Notebook Instance.
    */
   describeNotebookInstanceLifecycleConfig(callback?: (err: AWSError, data: SageMaker.Types.DescribeNotebookInstanceLifecycleConfigOutput) => void): Request<SageMaker.Types.DescribeNotebookInstanceLifecycleConfigOutput, AWSError>;
+  /**
+   * Provides the properties of the specified optimization job.
+   */
+  describeOptimizationJob(params: SageMaker.Types.DescribeOptimizationJobRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeOptimizationJobResponse) => void): Request<SageMaker.Types.DescribeOptimizationJobResponse, AWSError>;
+  /**
+   * Provides the properties of the specified optimization job.
+   */
+  describeOptimizationJob(callback?: (err: AWSError, data: SageMaker.Types.DescribeOptimizationJobResponse) => void): Request<SageMaker.Types.DescribeOptimizationJobResponse, AWSError>;
   /**
    * Describes the details of a pipeline.
    */
@@ -1957,6 +1981,14 @@ declare class SageMaker extends Service {
    */
   listNotebookInstances(callback?: (err: AWSError, data: SageMaker.Types.ListNotebookInstancesOutput) => void): Request<SageMaker.Types.ListNotebookInstancesOutput, AWSError>;
   /**
+   * Lists the optimization jobs in your account and their properties.
+   */
+  listOptimizationJobs(params: SageMaker.Types.ListOptimizationJobsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListOptimizationJobsResponse) => void): Request<SageMaker.Types.ListOptimizationJobsResponse, AWSError>;
+  /**
+   * Lists the optimization jobs in your account and their properties.
+   */
+  listOptimizationJobs(callback?: (err: AWSError, data: SageMaker.Types.ListOptimizationJobsResponse) => void): Request<SageMaker.Types.ListOptimizationJobsResponse, AWSError>;
+  /**
    * Gets a list of PipeLineExecutionStep objects.
    */
   listPipelineExecutionSteps(params: SageMaker.Types.ListPipelineExecutionStepsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListPipelineExecutionStepsResponse) => void): Request<SageMaker.Types.ListPipelineExecutionStepsResponse, AWSError>;
@@ -2316,6 +2348,14 @@ declare class SageMaker extends Service {
    * Terminates the ML compute instance. Before terminating the instance, SageMaker disconnects the ML storage volume from it. SageMaker preserves the ML storage volume. SageMaker stops charging you for the ML compute instance when you call StopNotebookInstance. To access data on the ML storage volume for a notebook instance that has been terminated, call the StartNotebookInstance API. StartNotebookInstance launches another ML compute instance, configures it, and attaches the preserved ML storage volume so you can continue your work. 
    */
   stopNotebookInstance(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Ends a running inference optimization job.
+   */
+  stopOptimizationJob(params: SageMaker.Types.StopOptimizationJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Ends a running inference optimization job.
+   */
+  stopOptimizationJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Stops a pipeline execution.  Callback Step  A pipeline execution won't stop while a callback step is running. When you call StopPipelineExecution on a pipeline execution with a running callback step, SageMaker Pipelines sends an additional Amazon SQS message to the specified SQS queue. The body of the SQS message contains a "Status" field which is set to "Stopping". You should add logic to your Amazon SQS message consumer to take any needed action (for example, resource cleanup) upon receipt of the message followed by a call to SendPipelineExecutionStepSuccess or SendPipelineExecutionStepFailure. Only when SageMaker Pipelines receives one of these calls will it stop the pipeline execution.  Lambda Step  A pipeline execution can't be stopped while a lambda step is running because the Lambda function invoked by the lambda step can't be stopped. If you attempt to stop the execution while the Lambda function is running, the pipeline waits for the Lambda function to finish or until the timeout is hit, whichever occurs first, and then stops. If the Lambda function finishes, the pipeline execution status is Stopped. If the timeout is hit the pipeline execution status is Failed.
    */
@@ -2880,6 +2920,15 @@ declare namespace SageMaker {
     SupportedResponseMIMETypes?: ResponseMIMETypes;
   }
   export type AdditionalInferenceSpecifications = AdditionalInferenceSpecificationDefinition[];
+  export type AdditionalModelChannelName = string;
+  export interface AdditionalModelDataSource {
+    /**
+     * A custom name for this AdditionalModelDataSource object.
+     */
+    ChannelName: AdditionalModelChannelName;
+    S3DataSource: S3ModelDataSource;
+  }
+  export type AdditionalModelDataSources = AdditionalModelDataSource[];
   export interface AdditionalS3DataSource {
     /**
      * The data type of the additional data source that you specify for use in inference or training. 
@@ -3023,6 +3072,16 @@ declare namespace SageMaker {
      * An array of AlgorithmValidationProfile objects, each of which specifies a training job and batch transform job that SageMaker runs to validate your algorithm.
      */
     ValidationProfiles: AlgorithmValidationProfiles;
+  }
+  export interface AmazonQSettings {
+    /**
+     * Whether Amazon Q has been enabled within the domain.
+     */
+    Status?: FeatureStatus;
+    /**
+     * The ARN of the Amazon Q profile used within the domain.
+     */
+    QProfileArn?: QProfileArn;
   }
   export interface AnnotationConsolidationConfig {
     /**
@@ -4655,6 +4714,10 @@ declare namespace SageMaker {
      * Specifies the location of ML model data to deploy.  Currently you cannot use ModelDataSource in conjunction with SageMaker batch transform, SageMaker serverless endpoints, SageMaker multi-model endpoints, and SageMaker Marketplace. 
      */
     ModelDataSource?: ModelDataSource;
+    /**
+     * Data sources that are available to your model in addition to the one that you specify for ModelDataSource when you use the CreateModel action.
+     */
+    AdditionalModelDataSources?: AdditionalModelDataSources;
     /**
      * The environment variables to set in the Docker container. The maximum length of each key and value in the Environment map is 1024 bytes. The maximum length of all keys and values in the map, combined, is 32 KB. If you pass multiple containers to a CreateModel request, then the maximum length of all of their maps, combined, is also 32 KB.
      */
@@ -6351,6 +6414,51 @@ declare namespace SageMaker {
      */
     NotebookInstanceArn?: NotebookInstanceArn;
   }
+  export interface CreateOptimizationJobRequest {
+    /**
+     * A custom name for the new optimization job.
+     */
+    OptimizationJobName: EntityName;
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to perform tasks on your behalf.  During model optimization, Amazon SageMaker needs your permission to:   Read input data from an S3 bucket   Write model artifacts to an S3 bucket   Write logs to Amazon CloudWatch Logs   Publish metrics to Amazon CloudWatch   You grant permissions for all of these tasks to an IAM role. To pass this role to Amazon SageMaker, the caller of this API must have the iam:PassRole permission. For more information, see Amazon SageMaker Roles. 
+     */
+    RoleArn: RoleArn;
+    /**
+     * The location of the source model to optimize with an optimization job.
+     */
+    ModelSource: OptimizationJobModelSource;
+    /**
+     * The type of instance that hosts the optimized model that you create with the optimization job.
+     */
+    DeploymentInstanceType: OptimizationJobDeploymentInstanceType;
+    /**
+     * The environment variables to set in the model container.
+     */
+    OptimizationEnvironment?: OptimizationJobEnvironmentVariables;
+    /**
+     * Settings for each of the optimization techniques that the job applies.
+     */
+    OptimizationConfigs: OptimizationConfigs;
+    /**
+     * Details for where to store the optimized model that you create with the optimization job.
+     */
+    OutputConfig: OptimizationJobOutputConfig;
+    StoppingCondition: StoppingCondition;
+    /**
+     * A list of key-value pairs associated with the optimization job. For more information, see Tagging Amazon Web Services resources in the Amazon Web Services General Reference Guide.
+     */
+    Tags?: TagList;
+    /**
+     * A VPC in Amazon VPC that your optimized model has access to.
+     */
+    VpcConfig?: OptimizationVpcConfig;
+  }
+  export interface CreateOptimizationJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the optimization job.
+     */
+    OptimizationJobArn: OptimizationJobArn;
+  }
   export interface CreatePipelineRequest {
     /**
      * The name of the pipeline.
@@ -7610,6 +7718,12 @@ declare namespace SageMaker {
      * The name of the lifecycle configuration to delete.
      */
     NotebookInstanceLifecycleConfigName: NotebookInstanceLifecycleConfigName;
+  }
+  export interface DeleteOptimizationJobRequest {
+    /**
+     * The name that you assigned to the optimization job.
+     */
+    OptimizationJobName: EntityName;
   }
   export interface DeletePipelineRequest {
     /**
@@ -10473,6 +10587,79 @@ declare namespace SageMaker {
      */
     InstanceMetadataServiceConfiguration?: InstanceMetadataServiceConfiguration;
   }
+  export interface DescribeOptimizationJobRequest {
+    /**
+     * The name that you assigned to the optimization job.
+     */
+    OptimizationJobName: EntityName;
+  }
+  export interface DescribeOptimizationJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the optimization job.
+     */
+    OptimizationJobArn: OptimizationJobArn;
+    /**
+     * The current status of the optimization job.
+     */
+    OptimizationJobStatus: OptimizationJobStatus;
+    /**
+     * The time when the optimization job started.
+     */
+    OptimizationStartTime?: Timestamp;
+    /**
+     * The time when the optimization job finished processing.
+     */
+    OptimizationEndTime?: Timestamp;
+    /**
+     * The time when you created the optimization job.
+     */
+    CreationTime: CreationTime;
+    /**
+     * The time when the optimization job was last updated.
+     */
+    LastModifiedTime: LastModifiedTime;
+    /**
+     * If the optimization job status is FAILED, the reason for the failure.
+     */
+    FailureReason?: FailureReason;
+    /**
+     * The name that you assigned to the optimization job.
+     */
+    OptimizationJobName: EntityName;
+    /**
+     * The location of the source model to optimize with an optimization job.
+     */
+    ModelSource: OptimizationJobModelSource;
+    /**
+     * The environment variables to set in the model container.
+     */
+    OptimizationEnvironment?: OptimizationJobEnvironmentVariables;
+    /**
+     * The type of instance that hosts the optimized model that you create with the optimization job.
+     */
+    DeploymentInstanceType: OptimizationJobDeploymentInstanceType;
+    /**
+     * Settings for each of the optimization techniques that the job applies.
+     */
+    OptimizationConfigs: OptimizationConfigs;
+    /**
+     * Details for where to store the optimized model that you create with the optimization job.
+     */
+    OutputConfig: OptimizationJobOutputConfig;
+    /**
+     * Output values produced by an optimization job.
+     */
+    OptimizationOutput?: OptimizationOutput;
+    /**
+     * The ARN of the IAM role that you assigned to the optimization job.
+     */
+    RoleArn: RoleArn;
+    StoppingCondition: StoppingCondition;
+    /**
+     * A VPC in Amazon VPC that your optimized model has access to.
+     */
+    VpcConfig?: OptimizationVpcConfig;
+  }
   export interface DescribePipelineDefinitionForExecutionRequest {
     /**
      * The Amazon Resource Name (ARN) of the pipeline execution.
@@ -11575,6 +11762,10 @@ declare namespace SageMaker {
      * A collection of settings that configure the domain's Docker interaction.
      */
     DockerSettings?: DockerSettings;
+    /**
+     * A collection of settings that configure the Amazon Q experience within the domain. The AuthMode that you use to create the domain must be SSO.
+     */
+    AmazonQSettings?: AmazonQSettings;
   }
   export interface DomainSettingsForUpdate {
     /**
@@ -11593,6 +11784,10 @@ declare namespace SageMaker {
      * A collection of settings that configure the domain's Docker interaction.
      */
     DockerSettings?: DockerSettings;
+    /**
+     * A collection of settings that configure the Amazon Q experience within the domain.
+     */
+    AmazonQSettings?: AmazonQSettings;
   }
   export type DomainStatus = "Deleting"|"Failed"|"InService"|"Pending"|"Updating"|"Update_Failed"|"Delete_Failed"|string;
   export type Double = number;
@@ -17042,6 +17237,63 @@ declare namespace SageMaker {
      */
     NotebookInstances?: NotebookInstanceSummaryList;
   }
+  export interface ListOptimizationJobsRequest {
+    /**
+     * A token that you use to get the next set of results following a truncated response. If the response to the previous request was truncated, that response provides the value for this token.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of optimization jobs to return in the response. The default is 50.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Filters the results to only those optimization jobs that were created after the specified time.
+     */
+    CreationTimeAfter?: CreationTime;
+    /**
+     * Filters the results to only those optimization jobs that were created before the specified time.
+     */
+    CreationTimeBefore?: CreationTime;
+    /**
+     * Filters the results to only those optimization jobs that were updated after the specified time.
+     */
+    LastModifiedTimeAfter?: LastModifiedTime;
+    /**
+     * Filters the results to only those optimization jobs that were updated before the specified time.
+     */
+    LastModifiedTimeBefore?: LastModifiedTime;
+    /**
+     * Filters the results to only those optimization jobs that apply the specified optimization techniques. You can specify either Quantization or Compilation.
+     */
+    OptimizationContains?: NameContains;
+    /**
+     * Filters the results to only those optimization jobs with a name that contains the specified string.
+     */
+    NameContains?: NameContains;
+    /**
+     * Filters the results to only those optimization jobs with the specified status.
+     */
+    StatusEquals?: OptimizationJobStatus;
+    /**
+     * The field by which to sort the optimization jobs in the response. The default is CreationTime 
+     */
+    SortBy?: ListOptimizationJobsSortBy;
+    /**
+     * The sort order for results. The default is Ascending 
+     */
+    SortOrder?: SortOrder;
+  }
+  export interface ListOptimizationJobsResponse {
+    /**
+     * A list of optimization jobs and their properties that matches any of the filters you specified in the request.
+     */
+    OptimizationJobSummaries: OptimizationJobSummaries;
+    /**
+     * The token to use in a subsequent request to get the next set of results following a truncated response.
+     */
+    NextToken?: NextToken;
+  }
+  export type ListOptimizationJobsSortBy = "Name"|"CreationTime"|"Status"|string;
   export interface ListPipelineExecutionStepsRequest {
     /**
      * The Amazon Resource Name (ARN) of the pipeline execution.
@@ -18204,6 +18456,16 @@ declare namespace SageMaker {
      */
     InvocationsMaxRetries?: InvocationsMaxRetries;
   }
+  export interface ModelCompilationConfig {
+    /**
+     * The URI of an LMI DLC in Amazon ECR. SageMaker uses this image to run the optimization.
+     */
+    Image?: OptimizationContainerImage;
+    /**
+     * Environment variables that override the default ones in the model container.
+     */
+    OverrideEnvironment?: OptimizationJobEnvironmentVariables;
+  }
   export type ModelCompressionType = "None"|"Gzip"|string;
   export interface ModelConfiguration {
     /**
@@ -18892,6 +19154,16 @@ declare namespace SageMaker {
      * The ground truth label provided for the model.
      */
     GroundTruthS3Input: MonitoringGroundTruthS3Input;
+  }
+  export interface ModelQuantizationConfig {
+    /**
+     * The URI of an LMI DLC in Amazon ECR. SageMaker uses this image to run the optimization.
+     */
+    Image?: OptimizationContainerImage;
+    /**
+     * Environment variables that override the default ones in the model container.
+     */
+    OverrideEnvironment?: OptimizationJobEnvironmentVariables;
   }
   export interface ModelRegisterSettings {
     /**
@@ -19707,6 +19979,116 @@ declare namespace SageMaker {
   }
   export type OnlineStoreTotalSizeBytes = number;
   export type Operator = "Equals"|"NotEquals"|"GreaterThan"|"GreaterThanOrEqualTo"|"LessThan"|"LessThanOrEqualTo"|"Contains"|"Exists"|"NotExists"|"In"|string;
+  export interface OptimizationConfig {
+    /**
+     * Settings for the model quantization technique that's applied by a model optimization job.
+     */
+    ModelQuantizationConfig?: ModelQuantizationConfig;
+    /**
+     * Settings for the model compilation technique that's applied by a model optimization job.
+     */
+    ModelCompilationConfig?: ModelCompilationConfig;
+  }
+  export type OptimizationConfigs = OptimizationConfig[];
+  export type OptimizationContainerImage = string;
+  export type OptimizationJobArn = string;
+  export type OptimizationJobDeploymentInstanceType = "ml.p4d.24xlarge"|"ml.p4de.24xlarge"|"ml.p5.48xlarge"|"ml.g5.xlarge"|"ml.g5.2xlarge"|"ml.g5.4xlarge"|"ml.g5.8xlarge"|"ml.g5.12xlarge"|"ml.g5.16xlarge"|"ml.g5.24xlarge"|"ml.g5.48xlarge"|"ml.g6.xlarge"|"ml.g6.2xlarge"|"ml.g6.4xlarge"|"ml.g6.8xlarge"|"ml.g6.12xlarge"|"ml.g6.16xlarge"|"ml.g6.24xlarge"|"ml.g6.48xlarge"|"ml.inf2.xlarge"|"ml.inf2.8xlarge"|"ml.inf2.24xlarge"|"ml.inf2.48xlarge"|"ml.trn1.2xlarge"|"ml.trn1.32xlarge"|"ml.trn1n.32xlarge"|string;
+  export type OptimizationJobEnvironmentVariables = {[key: string]: String256};
+  export interface OptimizationJobModelSource {
+    /**
+     * The Amazon S3 location of a source model to optimize with an optimization job.
+     */
+    S3?: OptimizationJobModelSourceS3;
+  }
+  export interface OptimizationJobModelSourceS3 {
+    /**
+     * An Amazon S3 URI that locates a source model to optimize with an optimization job.
+     */
+    S3Uri?: S3Uri;
+    /**
+     * The access configuration settings for the source ML model for an optimization job, where you can accept the model end-user license agreement (EULA).
+     */
+    ModelAccessConfig?: OptimizationModelAccessConfig;
+  }
+  export interface OptimizationJobOutputConfig {
+    /**
+     * The Amazon Resource Name (ARN) of a key in Amazon Web Services KMS. SageMaker uses they key to encrypt the artifacts of the optimized model when SageMaker uploads the model to Amazon S3.
+     */
+    KmsKeyId?: KmsKeyId;
+    /**
+     * The Amazon S3 URI for where to store the optimized model that you create with an optimization job.
+     */
+    S3OutputLocation: S3Uri;
+  }
+  export type OptimizationJobStatus = "INPROGRESS"|"COMPLETED"|"FAILED"|"STARTING"|"STOPPING"|"STOPPED"|string;
+  export type OptimizationJobSummaries = OptimizationJobSummary[];
+  export interface OptimizationJobSummary {
+    /**
+     * The name that you assigned to the optimization job.
+     */
+    OptimizationJobName: EntityName;
+    /**
+     * The Amazon Resource Name (ARN) of the optimization job.
+     */
+    OptimizationJobArn: OptimizationJobArn;
+    /**
+     * The time when you created the optimization job.
+     */
+    CreationTime: CreationTime;
+    /**
+     * The current status of the optimization job.
+     */
+    OptimizationJobStatus: OptimizationJobStatus;
+    /**
+     * The time when the optimization job started.
+     */
+    OptimizationStartTime?: Timestamp;
+    /**
+     * The time when the optimization job finished processing.
+     */
+    OptimizationEndTime?: Timestamp;
+    /**
+     * The time when the optimization job was last updated.
+     */
+    LastModifiedTime?: LastModifiedTime;
+    /**
+     * The type of instance that hosts the optimized model that you create with the optimization job.
+     */
+    DeploymentInstanceType: OptimizationJobDeploymentInstanceType;
+    /**
+     * The optimization techniques that are applied by the optimization job.
+     */
+    OptimizationTypes: OptimizationTypes;
+  }
+  export type OptimizationModelAcceptEula = boolean;
+  export interface OptimizationModelAccessConfig {
+    /**
+     * Specifies agreement to the model end-user license agreement (EULA). The AcceptEula value must be explicitly defined as True in order to accept the EULA that this model requires. You are responsible for reviewing and complying with any applicable license terms and making sure they are acceptable for your use case before downloading or using a model.
+     */
+    AcceptEula: OptimizationModelAcceptEula;
+  }
+  export interface OptimizationOutput {
+    /**
+     * The image that SageMaker recommends that you use to host the optimized model that you created with an optimization job.
+     */
+    RecommendedInferenceImage?: OptimizationContainerImage;
+  }
+  export type OptimizationType = string;
+  export type OptimizationTypes = OptimizationType[];
+  export interface OptimizationVpcConfig {
+    /**
+     * The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.
+     */
+    SecurityGroupIds: OptimizationVpcSecurityGroupIds;
+    /**
+     * The ID of the subnets in the VPC to which you want to connect your optimized model.
+     */
+    Subnets: OptimizationVpcSubnets;
+  }
+  export type OptimizationVpcSecurityGroupId = string;
+  export type OptimizationVpcSecurityGroupIds = OptimizationVpcSecurityGroupId[];
+  export type OptimizationVpcSubnetId = string;
+  export type OptimizationVpcSubnets = OptimizationVpcSubnetId[];
   export type OptionalDouble = number;
   export type OptionalInteger = number;
   export type OptionalVolumeSizeInGB = number;
@@ -20904,6 +21286,7 @@ declare namespace SageMaker {
      */
     ModelPackageGroupArn: ModelPackageGroupArn;
   }
+  export type QProfileArn = string;
   export interface QualityCheckStepMetadata {
     /**
      * The type of the Quality check step.
@@ -22355,6 +22738,12 @@ declare namespace SageMaker {
      * The name of the notebook instance to terminate.
      */
     NotebookInstanceName: NotebookInstanceName;
+  }
+  export interface StopOptimizationJobRequest {
+    /**
+     * The name that you assigned to the optimization job.
+     */
+    OptimizationJobName: EntityName;
   }
   export interface StopPipelineExecutionRequest {
     /**

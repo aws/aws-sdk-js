@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1656.0-->
+<!--LATEST=2.1657.0-->
 <!--ENTRYINSERT-->
+
+## 2.1657.0
+* feature: DataZone: This release deprecates dataProductItem field from SearchInventoryResultItem, along with some unused DataProduct shapes
+* feature: FSx: Adds support for FSx for NetApp ONTAP 2nd Generation file systems, and FSx for OpenZFS Single AZ HA file systems.
+* feature: OpenSearch: This release adds support for enabling or disabling Natural Language Query Processing feature for Amazon OpenSearch Service domains, and provides visibility into the current state of the setup or tear-down.
+* feature: SageMaker: This release 1/ enables optimization jobs that allows customers to perform Ahead-of-time compilation and quantization. 2/ allows customers to control access to Amazon Q integration in SageMaker Studio. 3/ enables AdditionalModelDataSources for CreateModel action.
 
 ## 2.1656.0
 * feature: CodeDeploy: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
