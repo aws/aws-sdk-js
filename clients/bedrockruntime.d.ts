@@ -13,6 +13,14 @@ declare class BedrockRuntime extends Service {
   constructor(options?: BedrockRuntime.Types.ClientConfiguration)
   config: Config & BedrockRuntime.Types.ClientConfiguration;
   /**
+   * The action to apply a guardrail.
+   */
+  applyGuardrail(params: BedrockRuntime.Types.ApplyGuardrailRequest, callback?: (err: AWSError, data: BedrockRuntime.Types.ApplyGuardrailResponse) => void): Request<BedrockRuntime.Types.ApplyGuardrailResponse, AWSError>;
+  /**
+   * The action to apply a guardrail.
+   */
+  applyGuardrail(callback?: (err: AWSError, data: BedrockRuntime.Types.ApplyGuardrailResponse) => void): Request<BedrockRuntime.Types.ApplyGuardrailResponse, AWSError>;
+  /**
    * Sends messages to the specified Amazon Bedrock model. Converse provides a consistent interface that works with all models that support messages. This allows you to write code once and use it with different models. Should a model have unique inference parameters, you can also pass those unique parameters to the model. For information about the Converse API, see Use the Converse API in the Amazon Bedrock User Guide. To use a guardrail, see Use a guardrail with the Converse API in the Amazon Bedrock User Guide. To use a tool with a model, see Tool use (Function calling) in the Amazon Bedrock User Guide  For example code, see Converse API examples in the Amazon Bedrock User Guide.  This operation requires permission for the bedrock:InvokeModel action. 
    */
   converse(params: BedrockRuntime.Types.ConverseRequest, callback?: (err: AWSError, data: BedrockRuntime.Types.ConverseResponse) => void): Request<BedrockRuntime.Types.ConverseResponse, AWSError>;
@@ -48,6 +56,42 @@ declare class BedrockRuntime extends Service {
 declare namespace BedrockRuntime {
   export interface AnyToolChoice {
   }
+  export interface ApplyGuardrailRequest {
+    /**
+     * The guardrail identifier used in the request to apply the guardrail.
+     */
+    guardrailIdentifier: GuardrailIdentifier;
+    /**
+     * The guardrail version used in the request to apply the guardrail.
+     */
+    guardrailVersion: GuardrailVersion;
+    /**
+     * The source of data used in the request to apply the guardrail.
+     */
+    source: GuardrailContentSource;
+    /**
+     * The content details used in the request to apply the guardrail.
+     */
+    content: GuardrailContentBlockList;
+  }
+  export interface ApplyGuardrailResponse {
+    /**
+     * The usage details in the response from the guardrail.
+     */
+    usage: GuardrailUsage;
+    /**
+     * The action taken in the response from the guardrail.
+     */
+    action: GuardrailAction;
+    /**
+     * The output details in the response from the guardrail.
+     */
+    outputs: GuardrailOutputContentList;
+    /**
+     * The assessment details in the response from the guardrail.
+     */
+    assessments: GuardrailAssessmentList;
+  }
   export interface AutoToolChoice {
   }
   export type Body = Buffer|Uint8Array|Blob|string;
@@ -65,7 +109,7 @@ declare namespace BedrockRuntime {
      */
     document?: DocumentBlock;
     /**
-     * Information about a tool use request from a model. 
+     * Information about a tool use request from a model.
      */
     toolUse?: ToolUseBlock;
     /**
@@ -279,7 +323,7 @@ declare namespace BedrockRuntime {
      */
     format: DocumentFormat;
     /**
-     * A name for the document.
+     * A name for the document. The name can only contain the following characters:   Alphanumeric characters   Whitespace characters (no more than one in a row)   Hyphens   Parentheses   Square brackets    This field is vulnerable to prompt injections, because the model might inadvertently interpret it as instructions. Therefore, we recommend that you specify a neutral name. 
      */
     name: DocumentBlockNameString;
     /**
@@ -291,11 +335,12 @@ declare namespace BedrockRuntime {
   export type DocumentFormat = "pdf"|"csv"|"doc"|"docx"|"xls"|"xlsx"|"html"|"txt"|"md"|string;
   export interface DocumentSource {
     /**
-     * A base64-encoded string of a UTF-8 encoded file, that is the document to include in the message.
+     * The raw bytes for the document. If you use an Amazon Web Services SDK, you don't need to encode the bytes in base64.
      */
     bytes?: DocumentSourceBytesBlob;
   }
   export type DocumentSourceBytesBlob = Buffer|Uint8Array|Blob|string;
+  export type GuardrailAction = "NONE"|"GUARDRAIL_INTERVENED"|string;
   export interface GuardrailAssessment {
     /**
      * The topic policy.
@@ -313,6 +358,10 @@ declare namespace BedrockRuntime {
      * The sensitive information policy.
      */
     sensitiveInformationPolicy?: GuardrailSensitiveInformationPolicyAssessment;
+    /**
+     * The contextual grounding policy used for the guardrail assessment.
+     */
+    contextualGroundingPolicy?: GuardrailContextualGroundingPolicyAssessment;
   }
   export type GuardrailAssessmentList = GuardrailAssessment[];
   export type GuardrailAssessmentListMap = {[key: string]: GuardrailAssessmentList};
@@ -331,6 +380,13 @@ declare namespace BedrockRuntime {
      */
     trace?: GuardrailTrace;
   }
+  export interface GuardrailContentBlock {
+    /**
+     * Text within content block to be evaluated by the guardrail.
+     */
+    text?: GuardrailTextBlock;
+  }
+  export type GuardrailContentBlockList = GuardrailContentBlock[];
   export interface GuardrailContentFilter {
     /**
      * The guardrail type.
@@ -355,17 +411,57 @@ declare namespace BedrockRuntime {
      */
     filters: GuardrailContentFilterList;
   }
+  export type GuardrailContentPolicyUnitsProcessed = number;
+  export type GuardrailContentQualifier = "grounding_source"|"query"|"guard_content"|string;
+  export type GuardrailContentQualifierList = GuardrailContentQualifier[];
+  export type GuardrailContentSource = "INPUT"|"OUTPUT"|string;
+  export interface GuardrailContextualGroundingFilter {
+    /**
+     * The contextual grounding filter type.
+     */
+    type: GuardrailContextualGroundingFilterType;
+    /**
+     * The threshold used by contextual grounding filter to determine whether the content is grounded or not.
+     */
+    threshold: GuardrailContextualGroundingFilterThresholdDouble;
+    /**
+     * The score generated by contextual grounding filter.
+     */
+    score: GuardrailContextualGroundingFilterScoreDouble;
+    /**
+     * The action performed by the guardrails contextual grounding filter.
+     */
+    action: GuardrailContextualGroundingPolicyAction;
+  }
+  export type GuardrailContextualGroundingFilterScoreDouble = number;
+  export type GuardrailContextualGroundingFilterThresholdDouble = number;
+  export type GuardrailContextualGroundingFilterType = "GROUNDING"|"RELEVANCE"|string;
+  export type GuardrailContextualGroundingFilters = GuardrailContextualGroundingFilter[];
+  export type GuardrailContextualGroundingPolicyAction = "BLOCKED"|"NONE"|string;
+  export interface GuardrailContextualGroundingPolicyAssessment {
+    /**
+     * The filter details for the guardrails contextual grounding filter.
+     */
+    filters?: GuardrailContextualGroundingFilters;
+  }
+  export type GuardrailContextualGroundingPolicyUnitsProcessed = number;
   export interface GuardrailConverseContentBlock {
     /**
      * The text to guard.
      */
     text?: GuardrailConverseTextBlock;
   }
+  export type GuardrailConverseContentQualifier = "grounding_source"|"query"|"guard_content"|string;
+  export type GuardrailConverseContentQualifierList = GuardrailConverseContentQualifier[];
   export interface GuardrailConverseTextBlock {
     /**
      * The text that you want to guard.
      */
     text: String;
+    /**
+     * The qualifier details for the guardrails contextual grounding filter.
+     */
+    qualifiers?: GuardrailConverseContentQualifierList;
   }
   export interface GuardrailCustomWord {
     /**
@@ -395,6 +491,13 @@ declare namespace BedrockRuntime {
   }
   export type GuardrailManagedWordList = GuardrailManagedWord[];
   export type GuardrailManagedWordType = "PROFANITY"|string;
+  export interface GuardrailOutputContent {
+    /**
+     * The specific text for the output content produced by the guardrail.
+     */
+    text?: GuardrailOutputText;
+  }
+  export type GuardrailOutputContentList = GuardrailOutputContent[];
   export type GuardrailOutputText = string;
   export interface GuardrailPiiEntityFilter {
     /**
@@ -442,6 +545,8 @@ declare namespace BedrockRuntime {
      */
     regexes: GuardrailRegexFilterList;
   }
+  export type GuardrailSensitiveInformationPolicyFreeUnitsProcessed = number;
+  export type GuardrailSensitiveInformationPolicyUnitsProcessed = number;
   export interface GuardrailStreamConfiguration {
     /**
      * The identifier for the guardrail.
@@ -461,6 +566,16 @@ declare namespace BedrockRuntime {
     streamProcessingMode?: GuardrailStreamProcessingMode;
   }
   export type GuardrailStreamProcessingMode = "sync"|"async"|string;
+  export interface GuardrailTextBlock {
+    /**
+     * The input text details to be evaluated by the guardrail.
+     */
+    text: String;
+    /**
+     * The qualifiers describing the text block.
+     */
+    qualifiers?: GuardrailContentQualifierList;
+  }
   export interface GuardrailTopic {
     /**
      * The name for the guardrail.
@@ -483,6 +598,7 @@ declare namespace BedrockRuntime {
      */
     topics: GuardrailTopicList;
   }
+  export type GuardrailTopicPolicyUnitsProcessed = number;
   export type GuardrailTopicType = "DENY"|string;
   export type GuardrailTrace = "enabled"|"disabled"|string;
   export interface GuardrailTraceAssessment {
@@ -499,6 +615,32 @@ declare namespace BedrockRuntime {
      */
     outputAssessments?: GuardrailAssessmentListMap;
   }
+  export interface GuardrailUsage {
+    /**
+     * The topic policy units processed by the guardrail.
+     */
+    topicPolicyUnits: GuardrailTopicPolicyUnitsProcessed;
+    /**
+     * The content policy units processed by the guardrail.
+     */
+    contentPolicyUnits: GuardrailContentPolicyUnitsProcessed;
+    /**
+     * The word policy units processed by the guardrail.
+     */
+    wordPolicyUnits: GuardrailWordPolicyUnitsProcessed;
+    /**
+     * The sensitive information policy units processed by the guardrail.
+     */
+    sensitiveInformationPolicyUnits: GuardrailSensitiveInformationPolicyUnitsProcessed;
+    /**
+     * The sensitive information policy free units processed by the guardrail.
+     */
+    sensitiveInformationPolicyFreeUnits: GuardrailSensitiveInformationPolicyFreeUnitsProcessed;
+    /**
+     * The contextual grounding policy units processed by the guardrail.
+     */
+    contextualGroundingPolicyUnits: GuardrailContextualGroundingPolicyUnitsProcessed;
+  }
   export type GuardrailVersion = string;
   export type GuardrailWordPolicyAction = "BLOCKED"|string;
   export interface GuardrailWordPolicyAssessment {
@@ -511,6 +653,7 @@ declare namespace BedrockRuntime {
      */
     managedWordLists: GuardrailManagedWordList;
   }
+  export type GuardrailWordPolicyUnitsProcessed = number;
   export interface ImageBlock {
     /**
      * The format of the image.
@@ -524,7 +667,7 @@ declare namespace BedrockRuntime {
   export type ImageFormat = "png"|"jpeg"|"gif"|"webp"|string;
   export interface ImageSource {
     /**
-     * The raw image bytes for the image. If you use an AWS SDK, you don't need to base64 encode the image bytes.
+     * The raw image bytes for the image. If you use an AWS SDK, you don't need to encode the image bytes in base64.
      */
     bytes?: ImageSourceBytesBlob;
   }
@@ -642,7 +785,7 @@ declare namespace BedrockRuntime {
      */
     role: ConversationRole;
     /**
-     * The message content.
+     * The message content. Note the following restrictions:   You can include up to 20 images. Each image's size, height, and width must be no more than 3.75 MB, 8000 px, and 8000 px, respectively.   You can include up to five documents. Each document's size must be no more than 4.5 MB.   If you include a ContentBlock with a document field in the array, you must also include a ContentBlock with a text field.   You can only include images and documents if the role is user.  
      */
     content: ContentBlocks;
   }
@@ -705,7 +848,7 @@ declare namespace BedrockRuntime {
      */
     text?: NonEmptyString;
     /**
-     * A content block to assess with the guardrail. Use with the Converse API (Converse and ConverseStream).  For more information, see Use a guardrail with the Converse API in the Amazon Bedrock User Guide.
+     * A content block to assess with the guardrail. Use with the Converse or ConverseStream API operations.  For more information, see Use a guardrail with the Converse API in the Amazon Bedrock User Guide.
      */
     guardContent?: GuardrailConverseContentBlock;
   }

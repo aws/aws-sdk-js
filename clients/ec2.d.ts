@@ -9650,7 +9650,7 @@ declare namespace EC2 {
      */
     IpamScopeId: IpamScopeId;
     /**
-     * In IPAM, the locale is the Amazon Web Services Region where you want to make an IPAM pool available for allocations. Only resources in the same Region as the locale of the pool can get IP address allocations from the pool. You can only allocate a CIDR for a VPC, for example, from an IPAM pool that shares a locale with the VPC’s Region. Note that once you choose a Locale for a pool, you cannot modify it. If you do not choose a locale, resources in Regions others than the IPAM's home region cannot use CIDRs from this pool. Possible values: Any Amazon Web Services Region, such as us-east-1.
+     * In IPAM, the locale is the Amazon Web Services Region or, for IPAM IPv4 pools in the public scope, the network border group for an Amazon Web Services Local Zone where you want to make an IPAM pool available for allocations (supported Local Zones). If you do not choose a locale, resources in Regions others than the IPAM's home region cannot use CIDRs from this pool. Possible values: Any Amazon Web Services Region, such as us-east-1.
      */
     Locale?: String;
     /**
@@ -10405,6 +10405,10 @@ declare namespace EC2 {
      * The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.
      */
     TagSpecifications?: TagSpecificationList;
+    /**
+     * The Availability Zone (AZ) or Local Zone (LZ) network border group that the resource that the IP address is assigned to is in. Defaults to an AZ network border group. For more information on available Local Zones, see Local Zone availability in the Amazon EC2 User Guide.
+     */
+    NetworkBorderGroup?: String;
   }
   export interface CreatePublicIpv4PoolResult {
     /**
@@ -12819,6 +12823,10 @@ declare namespace EC2 {
      * The ID of the public IPv4 pool you want to delete.
      */
     PoolId: Ipv4PoolEc2Id;
+    /**
+     * The Availability Zone (AZ) or Local Zone (LZ) network border group that the resource that the IP address is assigned to is in. Defaults to an AZ network border group. For more information on available Local Zones, see Local Zone availability in the Amazon EC2 User Guide.
+     */
+    NetworkBorderGroup?: String;
   }
   export interface DeletePublicIpv4PoolResult {
     /**
@@ -25860,7 +25868,7 @@ declare namespace EC2 {
      */
     Tags?: IpamPublicAddressTags;
     /**
-     * The network border group that the resource that the IP address is assigned to is in.
+     * The Availability Zone (AZ) or Local Zone (LZ) network border group that the resource that the IP address is assigned to is in. Defaults to an AZ network border group. For more information on available Local Zones, see Local Zone availability in the Amazon EC2 User Guide.
      */
     NetworkBorderGroup?: String;
     /**
@@ -25911,9 +25919,17 @@ declare namespace EC2 {
      */
     VpcId?: String;
     /**
+     * For elastic IP addresses, this is the status of an attached network interface.
+     */
+    NetworkInterfaceAttachmentStatus?: IpamNetworkInterfaceAttachmentStatus;
+    /**
      * The last successful resource discovery time.
      */
     SampleTime?: MillisecondDateTime;
+    /**
+     * The Availability Zone ID.
+     */
+    AvailabilityZoneId?: String;
   }
   export type IpamDiscoveredResourceCidrSet = IpamDiscoveredResourceCidr[];
   export type IpamDiscoveryFailureCode = "assume-role-failure"|"throttling-failure"|"unauthorized-failure"|string;
@@ -25931,6 +25947,7 @@ declare namespace EC2 {
   export type IpamManagementState = "managed"|"unmanaged"|"ignored"|string;
   export type IpamMaxResults = number;
   export type IpamNetmaskLength = number;
+  export type IpamNetworkInterfaceAttachmentStatus = "available"|"in-use"|string;
   export interface IpamOperatingRegion {
     /**
      * The name of the operating Region.
@@ -25973,7 +25990,7 @@ declare namespace EC2 {
      */
     IpamRegion?: String;
     /**
-     * The locale of the IPAM pool. In IPAM, the locale is the Amazon Web Services Region where you want to make an IPAM pool available for allocations. Only resources in the same Region as the locale of the pool can get IP address allocations from the pool. You can only allocate a CIDR for a VPC, for example, from an IPAM pool that shares a locale with the VPC’s Region. Note that once you choose a Locale for a pool, you cannot modify it. If you choose an Amazon Web Services Region for locale that has not been configured as an operating Region for the IPAM, you'll get an error.
+     * The locale of the IPAM pool. In IPAM, the locale is the Amazon Web Services Region or, for IPAM IPv4 pools in the public scope, the network border group for an Amazon Web Services Local Zone where you want to make an IPAM pool available for allocations (supported Local Zones). If you choose an Amazon Web Services Region for locale that has not been configured as an operating Region for the IPAM, you'll get an error.
      */
     Locale?: String;
     /**
@@ -26242,6 +26259,10 @@ declare namespace EC2 {
      * The ID of a VPC.
      */
     VpcId?: String;
+    /**
+     * The Availability Zone ID.
+     */
+    AvailabilityZoneId?: String;
   }
   export type IpamResourceCidrSet = IpamResourceCidr[];
   export interface IpamResourceDiscovery {
@@ -32272,6 +32293,10 @@ declare namespace EC2 {
      * The netmask length of the CIDR you would like to allocate to the public IPv4 pool.
      */
     NetmaskLength: Integer;
+    /**
+     * The Availability Zone (AZ) or Local Zone (LZ) network border group that the resource that the IP address is assigned to is in. Defaults to an AZ network border group. For more information on available Local Zones, see Local Zone availability in the Amazon EC2 User Guide.
+     */
+    NetworkBorderGroup?: String;
   }
   export interface ProvisionPublicIpv4PoolCidrResult {
     /**
