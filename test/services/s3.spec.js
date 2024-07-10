@@ -3944,4 +3944,34 @@ describe('AWS.S3', function() {
       });
     });
   });
+
+  describe('Dot Segment in URI Label', function() {
+    it('S3PreservesLeadingDotSegmentInUriLabel', function(done) {
+      s3 = new AWS.S3({region: 'us-west-2'});
+      helpers.mockHttpResponse(200, {}, '');
+      var request = s3.getObject({
+        Bucket: 'bucket',
+        Key: '../key.txt'
+      });
+      request.send(function(err, data) {
+        expect(err).to.not.exist;
+        expect(request.httpRequest.path).to.equal('/../key.txt');
+        done();
+      });
+    });
+
+    it('S3PreservesEmbeddedDotSegmentInUriLabel', function(done) {
+      s3 = new AWS.S3({region: 'us-west-2'});
+      helpers.mockHttpResponse(200, {}, '');
+      var request = s3.getObject({
+        Bucket: 'bucket',
+        Key: 'foo/../key.txt'
+      });
+      request.send(function(err, data) {
+        expect(err).to.not.exist;
+        expect(request.httpRequest.path).to.equal('/foo/../key.txt');
+        done();
+      });
+    });
+  });
 });
