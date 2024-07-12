@@ -109,11 +109,11 @@ declare class ACMPCA extends Service {
    */
   getPolicy(callback?: (err: AWSError, data: ACMPCA.Types.GetPolicyResponse) => void): Request<ACMPCA.Types.GetPolicyResponse, AWSError>;
   /**
-   * Imports a signed private CA certificate into Amazon Web Services Private CA. This action is used when you are using a chain of trust whose root is located outside Amazon Web Services Private CA. Before you can call this action, the following preparations must in place:   In Amazon Web Services Private CA, call the CreateCertificateAuthority action to create the private CA that you plan to back with the imported certificate.   Call the GetCertificateAuthorityCsr action to generate a certificate signing request (CSR).   Sign the CSR using a root or intermediate CA hosted by either an on-premises PKI hierarchy or by a commercial CA.   Create a certificate chain and copy the signed certificate and the certificate chain to your working directory.   Amazon Web Services Private CA supports three scenarios for installing a CA certificate:   Installing a certificate for a root CA hosted by Amazon Web Services Private CA.   Installing a subordinate CA certificate whose parent authority is hosted by Amazon Web Services Private CA.   Installing a subordinate CA certificate whose parent authority is externally hosted.   The following additional requirements apply when you import a CA certificate.   Only a self-signed certificate can be imported as a root CA.   A self-signed certificate cannot be imported as a subordinate CA.   Your certificate chain must not include the private CA certificate that you are importing.   Your root CA must be the last certificate in your chain. The subordinate certificate, if any, that your root CA signed must be next to last. The subordinate certificate signed by the preceding subordinate CA must come next, and so on until your chain is built.    The chain must be PEM-encoded.   The maximum allowed size of a certificate is 32 KB.   The maximum allowed size of a certificate chain is 2 MB.    Enforcement of Critical Constraints  Amazon Web Services Private CA allows the following extensions to be marked critical in the imported CA certificate or chain.   Authority key identifier   Basic constraints (must be marked critical)   Certificate policies   Extended key usage   Inhibit anyPolicy   Issuer alternative name   Key usage   Name constraints   Policy mappings   Subject alternative name   Subject directory attributes   Subject key identifier   Subject information access   Amazon Web Services Private CA rejects the following extensions when they are marked critical in an imported CA certificate or chain.   Authority information access   CRL distribution points   Freshest CRL   Policy constraints   Amazon Web Services Private Certificate Authority will also reject any other extension marked as critical not contained on the preceding list of allowed extensions.
+   * Imports a signed private CA certificate into Amazon Web Services Private CA. This action is used when you are using a chain of trust whose root is located outside Amazon Web Services Private CA. Before you can call this action, the following preparations must in place:   In Amazon Web Services Private CA, call the CreateCertificateAuthority action to create the private CA that you plan to back with the imported certificate.   Call the GetCertificateAuthorityCsr action to generate a certificate signing request (CSR).   Sign the CSR using a root or intermediate CA hosted by either an on-premises PKI hierarchy or by a commercial CA.   Create a certificate chain and copy the signed certificate and the certificate chain to your working directory.   Amazon Web Services Private CA supports three scenarios for installing a CA certificate:   Installing a certificate for a root CA hosted by Amazon Web Services Private CA.   Installing a subordinate CA certificate whose parent authority is hosted by Amazon Web Services Private CA.   Installing a subordinate CA certificate whose parent authority is externally hosted.   The following additional requirements apply when you import a CA certificate.   Only a self-signed certificate can be imported as a root CA.   A self-signed certificate cannot be imported as a subordinate CA.   Your certificate chain must not include the private CA certificate that you are importing.   Your root CA must be the last certificate in your chain. The subordinate certificate, if any, that your root CA signed must be next to last. The subordinate certificate signed by the preceding subordinate CA must come next, and so on until your chain is built.    The chain must be PEM-encoded.   The maximum allowed size of a certificate is 32 KB.   The maximum allowed size of a certificate chain is 2 MB.    Enforcement of Critical Constraints  Amazon Web Services Private CA allows the following extensions to be marked critical in the imported CA certificate or chain.   Basic constraints (must be marked critical)   Subject alternative names   Key usage   Extended key usage   Authority key identifier   Subject key identifier   Issuer alternative name   Subject directory attributes   Subject information access   Certificate policies   Policy mappings   Inhibit anyPolicy   Amazon Web Services Private CA rejects the following extensions when they are marked critical in an imported CA certificate or chain.   Name constraints   Policy constraints   CRL distribution points   Authority information access   Freshest CRL   Any other extension  
    */
   importCertificateAuthorityCertificate(params: ACMPCA.Types.ImportCertificateAuthorityCertificateRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Imports a signed private CA certificate into Amazon Web Services Private CA. This action is used when you are using a chain of trust whose root is located outside Amazon Web Services Private CA. Before you can call this action, the following preparations must in place:   In Amazon Web Services Private CA, call the CreateCertificateAuthority action to create the private CA that you plan to back with the imported certificate.   Call the GetCertificateAuthorityCsr action to generate a certificate signing request (CSR).   Sign the CSR using a root or intermediate CA hosted by either an on-premises PKI hierarchy or by a commercial CA.   Create a certificate chain and copy the signed certificate and the certificate chain to your working directory.   Amazon Web Services Private CA supports three scenarios for installing a CA certificate:   Installing a certificate for a root CA hosted by Amazon Web Services Private CA.   Installing a subordinate CA certificate whose parent authority is hosted by Amazon Web Services Private CA.   Installing a subordinate CA certificate whose parent authority is externally hosted.   The following additional requirements apply when you import a CA certificate.   Only a self-signed certificate can be imported as a root CA.   A self-signed certificate cannot be imported as a subordinate CA.   Your certificate chain must not include the private CA certificate that you are importing.   Your root CA must be the last certificate in your chain. The subordinate certificate, if any, that your root CA signed must be next to last. The subordinate certificate signed by the preceding subordinate CA must come next, and so on until your chain is built.    The chain must be PEM-encoded.   The maximum allowed size of a certificate is 32 KB.   The maximum allowed size of a certificate chain is 2 MB.    Enforcement of Critical Constraints  Amazon Web Services Private CA allows the following extensions to be marked critical in the imported CA certificate or chain.   Authority key identifier   Basic constraints (must be marked critical)   Certificate policies   Extended key usage   Inhibit anyPolicy   Issuer alternative name   Key usage   Name constraints   Policy mappings   Subject alternative name   Subject directory attributes   Subject key identifier   Subject information access   Amazon Web Services Private CA rejects the following extensions when they are marked critical in an imported CA certificate or chain.   Authority information access   CRL distribution points   Freshest CRL   Policy constraints   Amazon Web Services Private Certificate Authority will also reject any other extension marked as critical not contained on the preceding list of allowed extensions.
+   * Imports a signed private CA certificate into Amazon Web Services Private CA. This action is used when you are using a chain of trust whose root is located outside Amazon Web Services Private CA. Before you can call this action, the following preparations must in place:   In Amazon Web Services Private CA, call the CreateCertificateAuthority action to create the private CA that you plan to back with the imported certificate.   Call the GetCertificateAuthorityCsr action to generate a certificate signing request (CSR).   Sign the CSR using a root or intermediate CA hosted by either an on-premises PKI hierarchy or by a commercial CA.   Create a certificate chain and copy the signed certificate and the certificate chain to your working directory.   Amazon Web Services Private CA supports three scenarios for installing a CA certificate:   Installing a certificate for a root CA hosted by Amazon Web Services Private CA.   Installing a subordinate CA certificate whose parent authority is hosted by Amazon Web Services Private CA.   Installing a subordinate CA certificate whose parent authority is externally hosted.   The following additional requirements apply when you import a CA certificate.   Only a self-signed certificate can be imported as a root CA.   A self-signed certificate cannot be imported as a subordinate CA.   Your certificate chain must not include the private CA certificate that you are importing.   Your root CA must be the last certificate in your chain. The subordinate certificate, if any, that your root CA signed must be next to last. The subordinate certificate signed by the preceding subordinate CA must come next, and so on until your chain is built.    The chain must be PEM-encoded.   The maximum allowed size of a certificate is 32 KB.   The maximum allowed size of a certificate chain is 2 MB.    Enforcement of Critical Constraints  Amazon Web Services Private CA allows the following extensions to be marked critical in the imported CA certificate or chain.   Basic constraints (must be marked critical)   Subject alternative names   Key usage   Extended key usage   Authority key identifier   Subject key identifier   Issuer alternative name   Subject directory attributes   Subject information access   Certificate policies   Policy mappings   Inhibit anyPolicy   Amazon Web Services Private CA rejects the following extensions when they are marked critical in an imported CA certificate or chain.   Name constraints   Policy constraints   CRL distribution points   Authority information access   Freshest CRL   Any other extension  
    */
   importCertificateAuthorityCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -197,29 +197,29 @@ declare class ACMPCA extends Service {
    */
   updateCertificateAuthority(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Waits for the certificateAuthorityCSRCreated state by periodically calling the underlying ACMPCA.getCertificateAuthorityCsroperation every 3 seconds (at most 60 times). Wait until a Certificate Authority CSR is created
-   */
-  waitFor(state: "certificateAuthorityCSRCreated", params: ACMPCA.Types.GetCertificateAuthorityCsrRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ACMPCA.Types.GetCertificateAuthorityCsrResponse) => void): Request<ACMPCA.Types.GetCertificateAuthorityCsrResponse, AWSError>;
-  /**
-   * Waits for the certificateAuthorityCSRCreated state by periodically calling the underlying ACMPCA.getCertificateAuthorityCsroperation every 3 seconds (at most 60 times). Wait until a Certificate Authority CSR is created
-   */
-  waitFor(state: "certificateAuthorityCSRCreated", callback?: (err: AWSError, data: ACMPCA.Types.GetCertificateAuthorityCsrResponse) => void): Request<ACMPCA.Types.GetCertificateAuthorityCsrResponse, AWSError>;
-  /**
-   * Waits for the certificateIssued state by periodically calling the underlying ACMPCA.getCertificateoperation every 1 seconds (at most 60 times). Wait until a certificate is issued
-   */
-  waitFor(state: "certificateIssued", params: ACMPCA.Types.GetCertificateRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ACMPCA.Types.GetCertificateResponse) => void): Request<ACMPCA.Types.GetCertificateResponse, AWSError>;
-  /**
-   * Waits for the certificateIssued state by periodically calling the underlying ACMPCA.getCertificateoperation every 1 seconds (at most 60 times). Wait until a certificate is issued
-   */
-  waitFor(state: "certificateIssued", callback?: (err: AWSError, data: ACMPCA.Types.GetCertificateResponse) => void): Request<ACMPCA.Types.GetCertificateResponse, AWSError>;
-  /**
-   * Waits for the auditReportCreated state by periodically calling the underlying ACMPCA.describeCertificateAuthorityAuditReportoperation every 3 seconds (at most 60 times). Wait until a Audit Report is created
+   * Waits for the auditReportCreated state by periodically calling the underlying ACMPCA.describeCertificateAuthorityAuditReportoperation every 3 seconds (at most 40 times). Wait until a Audit Report is created
    */
   waitFor(state: "auditReportCreated", params: ACMPCA.Types.DescribeCertificateAuthorityAuditReportRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ACMPCA.Types.DescribeCertificateAuthorityAuditReportResponse) => void): Request<ACMPCA.Types.DescribeCertificateAuthorityAuditReportResponse, AWSError>;
   /**
-   * Waits for the auditReportCreated state by periodically calling the underlying ACMPCA.describeCertificateAuthorityAuditReportoperation every 3 seconds (at most 60 times). Wait until a Audit Report is created
+   * Waits for the auditReportCreated state by periodically calling the underlying ACMPCA.describeCertificateAuthorityAuditReportoperation every 3 seconds (at most 40 times). Wait until a Audit Report is created
    */
   waitFor(state: "auditReportCreated", callback?: (err: AWSError, data: ACMPCA.Types.DescribeCertificateAuthorityAuditReportResponse) => void): Request<ACMPCA.Types.DescribeCertificateAuthorityAuditReportResponse, AWSError>;
+  /**
+   * Waits for the certificateAuthorityCSRCreated state by periodically calling the underlying ACMPCA.getCertificateAuthorityCsroperation every 3 seconds (at most 40 times). Wait until a Certificate Authority CSR is created
+   */
+  waitFor(state: "certificateAuthorityCSRCreated", params: ACMPCA.Types.GetCertificateAuthorityCsrRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ACMPCA.Types.GetCertificateAuthorityCsrResponse) => void): Request<ACMPCA.Types.GetCertificateAuthorityCsrResponse, AWSError>;
+  /**
+   * Waits for the certificateAuthorityCSRCreated state by periodically calling the underlying ACMPCA.getCertificateAuthorityCsroperation every 3 seconds (at most 40 times). Wait until a Certificate Authority CSR is created
+   */
+  waitFor(state: "certificateAuthorityCSRCreated", callback?: (err: AWSError, data: ACMPCA.Types.GetCertificateAuthorityCsrResponse) => void): Request<ACMPCA.Types.GetCertificateAuthorityCsrResponse, AWSError>;
+  /**
+   * Waits for the certificateIssued state by periodically calling the underlying ACMPCA.getCertificateoperation every 1 seconds (at most 120 times). Wait until a certificate is issued
+   */
+  waitFor(state: "certificateIssued", params: ACMPCA.Types.GetCertificateRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ACMPCA.Types.GetCertificateResponse) => void): Request<ACMPCA.Types.GetCertificateResponse, AWSError>;
+  /**
+   * Waits for the certificateIssued state by periodically calling the underlying ACMPCA.getCertificateoperation every 1 seconds (at most 120 times). Wait until a certificate is issued
+   */
+  waitFor(state: "certificateIssued", callback?: (err: AWSError, data: ACMPCA.Types.GetCertificateResponse) => void): Request<ACMPCA.Types.GetCertificateResponse, AWSError>;
 }
 declare namespace ACMPCA {
   export type ASN1PrintableString64 = string;
@@ -758,7 +758,7 @@ declare namespace ACMPCA {
   }
   export interface GetPolicyRequest {
     /**
-     * The Amazon Resource Number (ARN) of the private CA that will have its policy retrieved. You can find the CA's ARN by calling the ListCertificateAuthorities action. 
+     * The Amazon Resource Number (ARN) of the private CA that will have its policy retrieved. You can find the CA's ARN by calling the ListCertificateAuthorities action.  &lt;/p&gt; 
      */
     ResourceArn: Arn;
   }
@@ -866,13 +866,13 @@ declare namespace ACMPCA {
   }
   export interface ListCertificateAuthoritiesRequest {
     /**
-     * Use this parameter when paginating results in a subsequent request after you receive a response with truncated results. Set it to the value of the NextToken parameter from the response you just received.
-     */
-    NextToken?: NextToken;
-    /**
      * Use this parameter when paginating results to specify the maximum number of items to return in the response on each page. If additional items exist beyond the number you specify, the NextToken element is sent in the response. Use this NextToken value in a subsequent request to retrieve additional items. Although the maximum value is 1000, the action only returns a maximum of 100 items.
      */
     MaxResults?: MaxResults;
+    /**
+     * Use this parameter when paginating results in a subsequent request after you receive a response with truncated results. Set it to the value of the NextToken parameter from the response you just received.
+     */
+    NextToken?: NextToken;
     /**
      * Use this parameter to filter the returned set of certificate authorities based on their owner. The default is SELF.
      */
@@ -880,61 +880,61 @@ declare namespace ACMPCA {
   }
   export interface ListCertificateAuthoritiesResponse {
     /**
-     * Summary information about each certificate authority you have created.
-     */
-    CertificateAuthorities?: CertificateAuthorities;
-    /**
      * When the list is truncated, this value is present and should be used for the NextToken parameter in a subsequent pagination request.
      */
     NextToken?: NextToken;
+    /**
+     * Summary information about each certificate authority you have created.
+     */
+    CertificateAuthorities?: CertificateAuthorities;
   }
   export interface ListPermissionsRequest {
     /**
-     * The Amazon Resource Number (ARN) of the private CA to inspect. You can find the ARN by calling the ListCertificateAuthorities action. This must be of the form: arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012 You can get a private CA's ARN by running the ListCertificateAuthorities action.
+     * When paginating results, use this parameter to specify the maximum number of items to return in the response. If additional items exist beyond the number you specify, the NextToken element is sent in the response. Use this NextToken value in a subsequent request to retrieve additional items.
      */
-    CertificateAuthorityArn: Arn;
+    MaxResults?: MaxResults;
     /**
      * When paginating results, use this parameter in a subsequent request after you receive a response with truncated results. Set it to the value of NextToken from the response you just received.
      */
     NextToken?: NextToken;
     /**
-     * When paginating results, use this parameter to specify the maximum number of items to return in the response. If additional items exist beyond the number you specify, the NextToken element is sent in the response. Use this NextToken value in a subsequent request to retrieve additional items.
+     * The Amazon Resource Number (ARN) of the private CA to inspect. You can find the ARN by calling the ListCertificateAuthorities action. This must be of the form: arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012 You can get a private CA's ARN by running the ListCertificateAuthorities action.
      */
-    MaxResults?: MaxResults;
+    CertificateAuthorityArn: Arn;
   }
   export interface ListPermissionsResponse {
-    /**
-     * Summary information about each permission assigned by the specified private CA, including the action enabled, the policy provided, and the time of creation.
-     */
-    Permissions?: PermissionList;
     /**
      * When the list is truncated, this value is present and should be used for the NextToken parameter in a subsequent pagination request. 
      */
     NextToken?: NextToken;
+    /**
+     * Summary information about each permission assigned by the specified private CA, including the action enabled, the policy provided, and the time of creation.
+     */
+    Permissions?: PermissionList;
   }
   export interface ListTagsRequest {
     /**
-     * The Amazon Resource Name (ARN) that was returned when you called the CreateCertificateAuthority action. This must be of the form:   arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012  
+     * Use this parameter when paginating results to specify the maximum number of items to return in the response. If additional items exist beyond the number you specify, the NextToken element is sent in the response. Use this NextToken value in a subsequent request to retrieve additional items.
      */
-    CertificateAuthorityArn: Arn;
+    MaxResults?: MaxResults;
     /**
      * Use this parameter when paginating results in a subsequent request after you receive a response with truncated results. Set it to the value of NextToken from the response you just received.
      */
     NextToken?: NextToken;
     /**
-     * Use this parameter when paginating results to specify the maximum number of items to return in the response. If additional items exist beyond the number you specify, the NextToken element is sent in the response. Use this NextToken value in a subsequent request to retrieve additional items.
+     * The Amazon Resource Name (ARN) that was returned when you called the CreateCertificateAuthority action. This must be of the form:   arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012  
      */
-    MaxResults?: MaxResults;
+    CertificateAuthorityArn: Arn;
   }
   export interface ListTagsResponse {
-    /**
-     * The tags associated with your private CA.
-     */
-    Tags?: TagList;
     /**
      * When the list is truncated, this value is present and should be used for the NextToken parameter in a subsequent pagination request. 
      */
     NextToken?: NextToken;
+    /**
+     * The tags associated with your private CA.
+     */
+    Tags?: TagList;
   }
   export type MaxResults = number;
   export type NextToken = string;

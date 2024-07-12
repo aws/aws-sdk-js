@@ -1,6 +1,19 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1658.0-->
+<!--LATEST=2.1659.0-->
 <!--ENTRYINSERT-->
+
+## 2.1659.0
+* bugfix: s3: update s3 status 200 error classification
+* feature: ACMPCA: Minor refactoring of C2J model for AWS Private CA
+* feature: ARCZonalShift: Adds the option to subscribe to get notifications when a zonal autoshift occurs in a region.
+* feature: AutoScaling: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: CodeBuild: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: DynamoDB: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: GlobalAccelerator: This feature adds exceptions to the Customer API to avoid throwing Internal Service errors
+* feature: Pinpoint: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: QuickSight: Vega ally control options and Support for Reviewed Answers in Topics
+* feature: RDS: Update path for CreateDBCluster resource identifier, and Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: SNS: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
 
 ## 2.1658.0
 * feature: Batch: This feature allows AWS Batch Jobs with EKS container orchestration type to be run as Multi-Node Parallel Jobs.
