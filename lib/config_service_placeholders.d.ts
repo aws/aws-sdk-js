@@ -1,4 +1,4 @@
-import * as AWS from "../clients/all";
+import * as AWS from '../clients/all';
 export abstract class ConfigurationServicePlaceholders {
   acm?: AWS.ACM.Types.ClientConfiguration;
   apigateway?: AWS.APIGateway.Types.ClientConfiguration;
