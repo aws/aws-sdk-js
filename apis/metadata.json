@@ -468,9 +468,6 @@
   "glue": {
     "name": "Glue"
   },
-  "mobile": {
-    "name": "Mobile"
-  },
   "pricing": {
     "name": "Pricing",
     "cors": true

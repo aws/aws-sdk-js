@@ -106,7 +106,6 @@ module.exports = {
   MigrationHub: require('./migrationhub'),
   CloudHSMV2: require('./cloudhsmv2'),
   Glue: require('./glue'),
-  Mobile: require('./mobile'),
   Pricing: require('./pricing'),
   CostExplorer: require('./costexplorer'),
   MediaConvert: require('./mediaconvert'),
