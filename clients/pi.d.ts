@@ -287,7 +287,7 @@ declare namespace PI {
      */
     PartitionBy?: DimensionGroup;
     /**
-     * One or more filters to apply in the request. Restrictions:   Any number of filters by the same dimension, as specified in the GroupBy or Partition parameters.   A single filter for any other dimension in this dimension group.  
+     * One or more filters to apply in the request. Restrictions:   Any number of filters by the same dimension, as specified in the GroupBy or Partition parameters.   A single filter for any other dimension in this dimension group.    The db.sql.db_id filter isn't available for RDS for SQL Server DB instances. 
      */
     Filter?: MetricQueryFilterMap;
     /**
@@ -740,7 +740,7 @@ declare namespace PI {
      */
     GroupBy?: DimensionGroup;
     /**
-     * One or more filters to apply in the request. Restrictions:   Any number of filters by the same dimension, as specified in the GroupBy parameter.   A single filter for any other dimension in this dimension group.  
+     * One or more filters to apply in the request. Restrictions:   Any number of filters by the same dimension, as specified in the GroupBy parameter.   A single filter for any other dimension in this dimension group.    The db.sql.db_id filter isn't available for RDS for SQL Server DB instances. 
      */
     Filter?: MetricQueryFilterMap;
   }

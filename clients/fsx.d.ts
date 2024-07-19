@@ -390,7 +390,7 @@ declare namespace FSx {
   export interface AdministrativeAction {
     AdministrativeActionType?: AdministrativeActionType;
     /**
-     * The percentage-complete status of a STORAGE_OPTIMIZATION administrative action. Does not apply to any other administrative action type.
+     * The percentage-complete status of a STORAGE_OPTIMIZATION or DOWNLOAD_DATA_FROM_BACKUP administrative action. Does not apply to any other administrative action type.
      */
     ProgressPercent?: ProgressPercent;
     /**
@@ -398,7 +398,7 @@ declare namespace FSx {
      */
     RequestTime?: RequestTime;
     /**
-     * The status of the administrative action, as follows:    FAILED - Amazon FSx failed to process the administrative action successfully.    IN_PROGRESS - Amazon FSx is processing the administrative action.    PENDING - Amazon FSx is waiting to process the administrative action.    COMPLETED - Amazon FSx has finished processing the administrative task.    UPDATED_OPTIMIZING - For a storage-capacity increase update, Amazon FSx has updated the file system with the new storage capacity, and is now performing the storage-optimization process.  
+     * The status of the administrative action, as follows:    FAILED - Amazon FSx failed to process the administrative action successfully.    IN_PROGRESS - Amazon FSx is processing the administrative action.    PENDING - Amazon FSx is waiting to process the administrative action.    COMPLETED - Amazon FSx has finished processing the administrative task. For a backup restore to a second-generation FSx for ONTAP file system, indicates that all data has been downloaded to the volume, and clients now have read-write access to volume.    UPDATED_OPTIMIZING - For a storage-capacity increase update, Amazon FSx has updated the file system with the new storage capacity, and is now performing the storage-optimization process.    PENDING - For a backup restore to a second-generation FSx for ONTAP file system, indicates that the file metadata is being downloaded onto the volume. The volume's Lifecycle state is CREATING.    IN_PROGRESS - For a backup restore to a second-generation FSx for ONTAP file system, indicates that all metadata has been downloaded to the new volume and client can access data with read-only access while Amazon FSx downloads the file data to the volume. Track the progress of this process with the ProgressPercent element.  
      */
     Status?: Status;
     /**
@@ -423,12 +423,12 @@ declare namespace FSx {
      */
     Message?: ErrorMessage;
   }
-  export type AdministrativeActionType = "FILE_SYSTEM_UPDATE"|"STORAGE_OPTIMIZATION"|"FILE_SYSTEM_ALIAS_ASSOCIATION"|"FILE_SYSTEM_ALIAS_DISASSOCIATION"|"VOLUME_UPDATE"|"SNAPSHOT_UPDATE"|"RELEASE_NFS_V3_LOCKS"|"VOLUME_RESTORE"|"THROUGHPUT_OPTIMIZATION"|"IOPS_OPTIMIZATION"|"STORAGE_TYPE_OPTIMIZATION"|"MISCONFIGURED_STATE_RECOVERY"|"VOLUME_UPDATE_WITH_SNAPSHOT"|"VOLUME_INITIALIZE_WITH_SNAPSHOT"|string;
+  export type AdministrativeActionType = "FILE_SYSTEM_UPDATE"|"STORAGE_OPTIMIZATION"|"FILE_SYSTEM_ALIAS_ASSOCIATION"|"FILE_SYSTEM_ALIAS_DISASSOCIATION"|"VOLUME_UPDATE"|"SNAPSHOT_UPDATE"|"RELEASE_NFS_V3_LOCKS"|"VOLUME_RESTORE"|"THROUGHPUT_OPTIMIZATION"|"IOPS_OPTIMIZATION"|"STORAGE_TYPE_OPTIMIZATION"|"MISCONFIGURED_STATE_RECOVERY"|"VOLUME_UPDATE_WITH_SNAPSHOT"|"VOLUME_INITIALIZE_WITH_SNAPSHOT"|"DOWNLOAD_DATA_FROM_BACKUP"|string;
   export type AdministrativeActions = AdministrativeAction[];
   export type Aggregate = string;
   export interface AggregateConfiguration {
     /**
-     * The list of aggregates that this volume resides on. Aggregates are storage pools which make up your primary storage tier. Each high-availability (HA) pair has one aggregate. The names of the aggregates map to the names of the aggregates in the ONTAP CLI and REST API. For FlexVols, there will always be a single entry. Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The strings in the value of Aggregates are not are not formatted as aggrX, where X is a number between 1 and 6.   The value of Aggregates contains aggregates that are not present.   One or more of the aggregates supplied are too close to the volume limit to support adding more volumes.  
+     * The list of aggregates that this volume resides on. Aggregates are storage pools which make up your primary storage tier. Each high-availability (HA) pair has one aggregate. The names of the aggregates map to the names of the aggregates in the ONTAP CLI and REST API. For FlexVols, there will always be a single entry. Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The strings in the value of Aggregates are not are not formatted as aggrX, where X is a number between 1 and 12.   The value of Aggregates contains aggregates that are not present.   One or more of the aggregates supplied are too close to the volume limit to support adding more volumes.  
      */
     Aggregates?: Aggregates;
     /**
@@ -928,7 +928,7 @@ declare namespace FSx {
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
     DailyAutomaticBackupStartTime?: DailyTime;
     /**
-     * Specifies the FSx for ONTAP file system deployment type to use in creating the file system.     MULTI_AZ_1 - (Default) A high availability file system configured for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability.     SINGLE_AZ_1 - A file system configured for Single-AZ redundancy.    SINGLE_AZ_2 - A file system configured with multiple high-availability (HA) pairs for Single-AZ redundancy.   For information about the use cases for Multi-AZ and Single-AZ deployments, refer to Choosing a file system deployment type. 
+     * Specifies the FSx for ONTAP file system deployment type to use in creating the file system.     MULTI_AZ_1 - A high availability file system configured for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability. This is a first-generation FSx for ONTAP file system.    MULTI_AZ_2 - A high availability file system configured for Multi-AZ redundancy to tolerate temporary AZ unavailability. This is a second-generation FSx for ONTAP file system.    SINGLE_AZ_1 - A file system configured for Single-AZ redundancy. This is a first-generation FSx for ONTAP file system.    SINGLE_AZ_2 - A file system configured with multiple high-availability (HA) pairs for Single-AZ redundancy. This is a second-generation FSx for ONTAP file system.   For information about the use cases for Multi-AZ and Single-AZ deployments, refer to Choosing a file system deployment type. 
      */
     DeploymentType: OntapDeploymentType;
     /**
@@ -944,7 +944,7 @@ declare namespace FSx {
      */
     DiskIopsConfiguration?: DiskIopsConfiguration;
     /**
-     * Required when DeploymentType is set to MULTI_AZ_1. This specifies the subnet in which you want the preferred file server to be located.
+     * Required when DeploymentType is set to MULTI_AZ_1 or MULTI_AZ_2. This specifies the subnet in which you want the preferred file server to be located.
      */
     PreferredSubnetId?: SubnetId;
     /**
@@ -957,11 +957,11 @@ declare namespace FSx {
     ThroughputCapacity?: MegabytesPerSecond;
     WeeklyMaintenanceStartTime?: WeeklyTime;
     /**
-     * Specifies how many high-availability (HA) pairs of file servers will power your file system. Scale-up file systems are powered by 1 HA pair. The default value is 1. FSx for ONTAP scale-out file systems are powered by up to 12 HA pairs. The value of this property affects the values of StorageCapacity, Iops, and ThroughputCapacity. For more information, see High-availability (HA) pairs in the FSx for ONTAP user guide. Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of HAPairs is less than 1 or greater than 12.   The value of HAPairs is greater than 1 and the value of DeploymentType is SINGLE_AZ_1 or MULTI_AZ_1.  
+     * Specifies how many high-availability (HA) pairs of file servers will power your file system. First-generation file systems are powered by 1 HA pair. Second-generation multi-AZ file systems are powered by 1 HA pair. Second generation single-AZ file systems are powered by up to 12 HA pairs. The default value is 1. The value of this property affects the values of StorageCapacity, Iops, and ThroughputCapacity. For more information, see High-availability (HA) pairs in the FSx for ONTAP user guide. Block storage protocol support (iSCSI and NVMe over TCP) is disabled on file systems with more than 6 HA pairs. For more information, see Using block storage protocols.  Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of HAPairs is less than 1 or greater than 12.   The value of HAPairs is greater than 1 and the value of DeploymentType is SINGLE_AZ_1, MULTI_AZ_1, or MULTI_AZ_2.  
      */
     HAPairs?: HAPairs;
     /**
-     * Use to choose the throughput capacity per HA pair, rather than the total throughput for the file system.  You can define either the ThroughputCapacityPerHAPair or the ThroughputCapacity when creating a file system, but not both. This field and ThroughputCapacity are the same for scale-up file systems powered by one HA pair.   For SINGLE_AZ_1 and MULTI_AZ_1 file systems, valid values are 128, 256, 512, 1024, 2048, or 4096 MBps.   For SINGLE_AZ_2 file systems, valid values are 3072 or 6144 MBps.   Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the same value for file systems with one HA pair.   The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity / ThroughputCapacityPerHAPair is a valid HA pair (a value between 2 and 12).   The value of ThroughputCapacityPerHAPair is not a valid value.  
+     * Use to choose the throughput capacity per HA pair, rather than the total throughput for the file system.  You can define either the ThroughputCapacityPerHAPair or the ThroughputCapacity when creating a file system, but not both. This field and ThroughputCapacity are the same for file systems powered by one HA pair.   For SINGLE_AZ_1 and MULTI_AZ_1 file systems, valid values are 128, 256, 512, 1024, 2048, or 4096 MBps.   For SINGLE_AZ_2, valid values are 1536, 3072, or 6144 MBps.   For MULTI_AZ_2, valid values are 384, 768, 1536, 3072, or 6144 MBps.   Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the same value for file systems with one HA pair.   The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity / ThroughputCapacityPerHAPair is not a valid HA pair (a value between 1 and 12).   The value of ThroughputCapacityPerHAPair is not a valid value.  
      */
     ThroughputCapacityPerHAPair?: ThroughputCapacityPerHAPair;
   }
@@ -977,7 +977,7 @@ declare namespace FSx {
     CopyTagsToVolumes?: Flag;
     DailyAutomaticBackupStartTime?: DailyTime;
     /**
-     * Specifies the file system deployment type. Single AZ deployment types are configured for redundancy within a single Availability Zone in an Amazon Web Services Region . Valid values are the following:    MULTI_AZ_1- Creates file systems with high availability that are configured for Multi-AZ redundancy to tolerate temporary unavailability in Availability Zones (AZs). Multi_AZ_1 is available only in the US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Singapore), Asia Pacific (Tokyo), and Europe (Ireland) Amazon Web Services Regions.    SINGLE_AZ_1- Creates file systems with throughput capacities of 64 - 4,096 MB/s. Single_AZ_1 is available in all Amazon Web Services Regions where Amazon FSx for OpenZFS is available.    SINGLE_AZ_2- Creates file systems with throughput capacities of 160 - 10,240 MB/s using an NVMe L2ARC cache. Single_AZ_2 is available only in the US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Singapore), Asia Pacific (Tokyo), and Europe (Ireland) Amazon Web Services Regions.   For more information, see Deployment type availability and File system performance in the Amazon FSx for OpenZFS User Guide.
+     * Specifies the file system deployment type. Valid values are the following:    MULTI_AZ_1- Creates file systems with high availability and durability by replicating your data and supporting failover across multiple Availability Zones in the same Amazon Web Services Region.    SINGLE_AZ_HA_2- Creates file systems with high availability and throughput capacities of 160 - 10,240 MB/s using an NVMe L2ARC cache by deploying a primary and standby file system within the same Availability Zone.    SINGLE_AZ_HA_1- Creates file systems with high availability and throughput capacities of 64 - 4,096 MB/s by deploying a primary and standby file system within the same Availability Zone.    SINGLE_AZ_2- Creates file systems with throughput capacities of 160 - 10,240 MB/s using an NVMe L2ARC cache that automatically recover within a single Availability Zone.    SINGLE_AZ_1- Creates file systems with throughput capacities of 64 - 4,096 MBs that automatically recover within a single Availability Zone.   For a list of which Amazon Web Services Regions each deployment type is available in, see Deployment type availability. For more information on the differences in performance between deployment types, see File system performance in the Amazon FSx for OpenZFS User Guide.
      */
     DeploymentType: OpenZFSDeploymentType;
     /**
@@ -2063,7 +2063,7 @@ declare namespace FSx {
      */
     Lifecycle?: FileCacheLifecycle;
     /**
-     * A structure providing details of any failures that occurred.
+     * A structure providing details of any failures that occurred in creating a cache.
      */
     FailureDetails?: FileCacheFailureDetails;
     /**
@@ -2451,13 +2451,13 @@ declare namespace FSx {
   export type NetworkInterfaceIds = NetworkInterfaceId[];
   export type NextToken = string;
   export type NfsVersion = "NFS3"|string;
-  export type OntapDeploymentType = "MULTI_AZ_1"|"SINGLE_AZ_1"|"SINGLE_AZ_2"|string;
+  export type OntapDeploymentType = "MULTI_AZ_1"|"SINGLE_AZ_1"|"SINGLE_AZ_2"|"MULTI_AZ_2"|string;
   export type OntapEndpointIpAddresses = IpAddress[];
   export interface OntapFileSystemConfiguration {
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
     DailyAutomaticBackupStartTime?: DailyTime;
     /**
-     * Specifies the FSx for ONTAP file system deployment type in use in the file system.     MULTI_AZ_1 - (Default) A high availability file system configured for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability.     SINGLE_AZ_1 - A file system configured for Single-AZ redundancy.    SINGLE_AZ_2 - A file system configured with multiple high-availability (HA) pairs for Single-AZ redundancy.   For information about the use cases for Multi-AZ and Single-AZ deployments, refer to Choosing Multi-AZ or Single-AZ file system deployment. 
+     * Specifies the FSx for ONTAP file system deployment type in use in the file system.     MULTI_AZ_1 - A high availability file system configured for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability. This is a first-generation FSx for ONTAP file system.    MULTI_AZ_2 - A high availability file system configured for Multi-AZ redundancy to tolerate temporary AZ unavailability. This is a second-generation FSx for ONTAP file system.    SINGLE_AZ_1 - A file system configured for Single-AZ redundancy. This is a first-generation FSx for ONTAP file system.    SINGLE_AZ_2 - A file system configured with multiple high-availability (HA) pairs for Single-AZ redundancy. This is a second-generation FSx for ONTAP file system.   For information about the use cases for Multi-AZ and Single-AZ deployments, refer to Choosing Multi-AZ or Single-AZ file system deployment. 
      */
     DeploymentType?: OntapDeploymentType;
     /**
@@ -2484,11 +2484,11 @@ declare namespace FSx {
      */
     FsxAdminPassword?: AdminPassword;
     /**
-     * Specifies how many high-availability (HA) file server pairs the file system will have. The default value is 1. The value of this property affects the values of StorageCapacity, Iops, and ThroughputCapacity. For more information, see High-availability (HA) pairs in the FSx for ONTAP user guide. Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of HAPairs is less than 1 or greater than 12.   The value of HAPairs is greater than 1 and the value of DeploymentType is SINGLE_AZ_1 or MULTI_AZ_1.  
+     * Specifies how many high-availability (HA) file server pairs the file system will have. The default value is 1. The value of this property affects the values of StorageCapacity, Iops, and ThroughputCapacity. For more information, see High-availability (HA) pairs in the FSx for ONTAP user guide. Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of HAPairs is less than 1 or greater than 12.   The value of HAPairs is greater than 1 and the value of DeploymentType is SINGLE_AZ_1, MULTI_AZ_1, or MULTI_AZ_2.  
      */
     HAPairs?: HAPairs;
     /**
-     * Use to choose the throughput capacity per HA pair. When the value of HAPairs is equal to 1, the value of ThroughputCapacityPerHAPair is the total throughput for the file system. This field and ThroughputCapacity cannot be defined in the same API call, but one is required. This field and ThroughputCapacity are the same for file systems with one HA pair.   For SINGLE_AZ_1 and MULTI_AZ_1, valid values are 128, 256, 512, 1024, 2048, or 4096 MBps.   For SINGLE_AZ_2, valid values are 3072 or 6144 MBps.   Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the same value.   The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity / ThroughputCapacityPerHAPair is a valid HA pair (a value between 2 and 12).   The value of ThroughputCapacityPerHAPair is not a valid value.  
+     * Use to choose the throughput capacity per HA pair. When the value of HAPairs is equal to 1, the value of ThroughputCapacityPerHAPair is the total throughput for the file system. This field and ThroughputCapacity cannot be defined in the same API call, but one is required. This field and ThroughputCapacity are the same for file systems with one HA pair.   For SINGLE_AZ_1 and MULTI_AZ_1 file systems, valid values are 128, 256, 512, 1024, 2048, or 4096 MBps.   For SINGLE_AZ_2, valid values are 1536, 3072, or 6144 MBps.   For MULTI_AZ_2, valid values are 384, 768, 1536, 3072, or 6144 MBps.   Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the same value.   The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity / ThroughputCapacityPerHAPair is not a valid HA pair (a value between 1 and 12).   The value of ThroughputCapacityPerHAPair is not a valid value.  
      */
     ThroughputCapacityPerHAPair?: ThroughputCapacityPerHAPair;
   }
@@ -2599,7 +2599,7 @@ declare namespace FSx {
     ReadOnly?: ReadOnly;
   }
   export type OpenZFSDataCompressionType = "NONE"|"ZSTD"|"LZ4"|string;
-  export type OpenZFSDeploymentType = "SINGLE_AZ_1"|"SINGLE_AZ_2"|"MULTI_AZ_1"|string;
+  export type OpenZFSDeploymentType = "SINGLE_AZ_1"|"SINGLE_AZ_2"|"SINGLE_AZ_HA_1"|"SINGLE_AZ_HA_2"|"MULTI_AZ_1"|string;
   export interface OpenZFSFileSystemConfiguration {
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
     /**
@@ -2612,7 +2612,7 @@ declare namespace FSx {
     CopyTagsToVolumes?: Flag;
     DailyAutomaticBackupStartTime?: DailyTime;
     /**
-     * Specifies the file-system deployment type. Amazon FSx for OpenZFS supports&#x2028; MULTI_AZ_1, SINGLE_AZ_1, and SINGLE_AZ_2.
+     * Specifies the file-system deployment type. Amazon FSx for OpenZFS supports&#x2028; MULTI_AZ_1, SINGLE_AZ_HA_2, SINGLE_AZ_HA_1, SINGLE_AZ_2, and SINGLE_AZ_1.
      */
     DeploymentType?: OpenZFSDeploymentType;
     /**
@@ -3000,7 +3000,7 @@ declare namespace FSx {
     FileSystem?: FileSystem;
   }
   export type StartTime = Date;
-  export type Status = "FAILED"|"IN_PROGRESS"|"PENDING"|"COMPLETED"|"UPDATED_OPTIMIZING"|string;
+  export type Status = "FAILED"|"IN_PROGRESS"|"PENDING"|"COMPLETED"|"UPDATED_OPTIMIZING"|"OPTIMIZING"|string;
   export type StorageCapacity = number;
   export type StorageType = "SSD"|"HDD"|string;
   export interface StorageVirtualMachine {
@@ -3270,9 +3270,13 @@ declare namespace FSx {
      */
     RemoveRouteTableIds?: RouteTableIds;
     /**
-     * Use to choose the throughput capacity per HA pair, rather than the total throughput for the file system.  This field and ThroughputCapacity cannot be defined in the same API call, but one is required. This field and ThroughputCapacity are the same for file systems with one HA pair.   For SINGLE_AZ_1 and MULTI_AZ_1, valid values are 128, 256, 512, 1024, 2048, or 4096 MBps.   For SINGLE_AZ_2, valid values are 3072 or 6144 MBps.   Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the same value for file systems with one HA pair.   The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity / ThroughputCapacityPerHAPair is a valid HA pair (a value between 2 and 12).   The value of ThroughputCapacityPerHAPair is not a valid value.  
+     * Use to choose the throughput capacity per HA pair, rather than the total throughput for the file system.  This field and ThroughputCapacity cannot be defined in the same API call, but one is required. This field and ThroughputCapacity are the same for file systems with one HA pair.   For SINGLE_AZ_1 and MULTI_AZ_1 file systems, valid values are 128, 256, 512, 1024, 2048, or 4096 MBps.   For SINGLE_AZ_2, valid values are 1536, 3072, or 6144 MBps.   For MULTI_AZ_2, valid values are 384, 768, 1536, 3072, or 6144 MBps.   Amazon FSx responds with an HTTP status code 400 (Bad Request) for the following conditions:   The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the same value for file systems with one HA pair.   The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity / ThroughputCapacityPerHAPair is not a valid HA pair (a value between 1 and 12).   The value of ThroughputCapacityPerHAPair is not a valid value.  
      */
     ThroughputCapacityPerHAPair?: ThroughputCapacityPerHAPair;
+    /**
+     * Use to update the number of high-availability (HA) pairs for a second-generation single-AZ file system. If you increase the number of HA pairs for your file system, you must specify proportional increases for StorageCapacity, Iops, and ThroughputCapacity. For more information, see High-availability (HA) pairs in the FSx for ONTAP user guide. Block storage protocol support (iSCSI and NVMe over TCP) is disabled on file systems with more than 6 HA pairs. For more information, see Using block storage protocols.
+     */
+    HAPairs?: HAPairs;
   }
   export interface UpdateFileSystemOpenZFSConfiguration {
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;

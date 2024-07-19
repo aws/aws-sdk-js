@@ -8,7 +8,10 @@
     "protocol": "rest-json",
     "jsonVersion": "1.1",
     "uid": "mediaconnect-2018-11-14",
-    "signatureVersion": "v4"
+    "signatureVersion": "v4",
+    "auth": [
+      "aws.auth#sigv4"
+    ]
   },
   "operations": {
     "AddBridgeOutputs": {
@@ -2664,6 +2667,11 @@
           "shape": "VpcInterfaceAttachment",
           "locationName": "vpcInterfaceAttachment",
           "documentation": "The name of the VPC interface attachment to use for this output."
+        },
+        "OutputStatus": {
+          "shape": "OutputStatus",
+          "locationName": "outputStatus",
+          "documentation": "An indication of whether the new output should be enabled or disabled as soon as it is created. If you don't specify the outputStatus field in your request, MediaConnect sets it to ENABLED."
         }
       },
       "documentation": "The output that you want to add to this flow.",
@@ -5057,12 +5065,24 @@
           "shape": "__listOf__integer",
           "locationName": "bridgePorts",
           "documentation": "The bridge output ports currently in use."
+        },
+        "OutputStatus": {
+          "shape": "OutputStatus",
+          "locationName": "outputStatus",
+          "documentation": "An indication of whether the output is transmitting data or not."
         }
       },
       "documentation": "The settings for an output.",
       "required": [
         "OutputArn",
         "Name"
+      ]
+    },
+    "OutputStatus": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
       ]
     },
     "PriceUnits": {
@@ -6589,6 +6609,11 @@
           "shape": "VpcInterfaceAttachment",
           "locationName": "vpcInterfaceAttachment",
           "documentation": "The name of the VPC interface attachment to use for this output."
+        },
+        "OutputStatus": {
+          "shape": "OutputStatus",
+          "locationName": "outputStatus",
+          "documentation": "An indication of whether the output should transmit data or not. If you don't specify the outputStatus field in your request, MediaConnect leaves the value unchanged."
         }
       },
       "documentation": "The fields that you want to update in the output.",

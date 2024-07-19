@@ -12,7 +12,10 @@
     "serviceId": "RDS",
     "signatureVersion": "v4",
     "uid": "rds-2014-09-01",
-    "xmlNamespace": "http://rds.amazonaws.com/doc/2014-09-01/"
+    "xmlNamespace": "http://rds.amazonaws.com/doc/2014-09-01/",
+    "auth": [
+      "aws.auth#sigv4"
+    ]
   },
   "operations": {
     "AddSourceIdentifierToSubscription": {

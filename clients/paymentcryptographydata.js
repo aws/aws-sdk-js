@@ -9,6 +9,7 @@ Object.defineProperty(apiLoader.services['paymentcryptographydata'], '2022-02-03
   get: function get() {
     var model = require('../apis/payment-cryptography-data-2022-02-03.min.json');
     model.paginators = require('../apis/payment-cryptography-data-2022-02-03.paginators.json').pagination;
+    model.waiters = require('../apis/payment-cryptography-data-2022-02-03.waiters2.json').waiters;
     return model;
   },
   enumerable: true,

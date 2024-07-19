@@ -140,6 +140,14 @@ declare class WorkSpaces extends Service {
    */
   createWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspacesResult) => void): Request<WorkSpaces.Types.CreateWorkspacesResult, AWSError>;
   /**
+   * Creates a pool of WorkSpaces.
+   */
+  createWorkspacesPool(params: WorkSpaces.Types.CreateWorkspacesPoolRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspacesPoolResult) => void): Request<WorkSpaces.Types.CreateWorkspacesPoolResult, AWSError>;
+  /**
+   * Creates a pool of WorkSpaces.
+   */
+  createWorkspacesPool(callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspacesPoolResult) => void): Request<WorkSpaces.Types.CreateWorkspacesPoolResult, AWSError>;
+  /**
    * Deletes the account link invitation.
    */
   deleteAccountLinkInvitation(params: WorkSpaces.Types.DeleteAccountLinkInvitationRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteAccountLinkInvitationResult) => void): Request<WorkSpaces.Types.DeleteAccountLinkInvitationResult, AWSError>;
@@ -388,6 +396,22 @@ declare class WorkSpaces extends Service {
    */
   describeWorkspacesConnectionStatus(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesConnectionStatusResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesConnectionStatusResult, AWSError>;
   /**
+   * Retrieves a list that describes the streaming sessions for a specified pool.
+   */
+  describeWorkspacesPoolSessions(params: WorkSpaces.Types.DescribeWorkspacesPoolSessionsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesPoolSessionsResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesPoolSessionsResult, AWSError>;
+  /**
+   * Retrieves a list that describes the streaming sessions for a specified pool.
+   */
+  describeWorkspacesPoolSessions(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesPoolSessionsResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesPoolSessionsResult, AWSError>;
+  /**
+   * Describes the specified WorkSpaces Pools.
+   */
+  describeWorkspacesPools(params: WorkSpaces.Types.DescribeWorkspacesPoolsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesPoolsResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesPoolsResult, AWSError>;
+  /**
+   * Describes the specified WorkSpaces Pools.
+   */
+  describeWorkspacesPools(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesPoolsResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesPoolsResult, AWSError>;
+  /**
    * Disassociates a connection alias from a directory. Disassociating a connection alias disables cross-Region redirection between two directories in different Regions. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.  Before performing this operation, call  DescribeConnectionAliases to make sure that the current state of the connection alias is CREATED. 
    */
   disassociateConnectionAlias(params: WorkSpaces.Types.DisassociateConnectionAliasRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DisassociateConnectionAliasResult) => void): Request<WorkSpaces.Types.DisassociateConnectionAliasResult, AWSError>;
@@ -500,6 +524,14 @@ declare class WorkSpaces extends Service {
    */
   modifySelfservicePermissions(callback?: (err: AWSError, data: WorkSpaces.Types.ModifySelfservicePermissionsResult) => void): Request<WorkSpaces.Types.ModifySelfservicePermissionsResult, AWSError>;
   /**
+   * Modifies the specified streaming properties.
+   */
+  modifyStreamingProperties(params: WorkSpaces.Types.ModifyStreamingPropertiesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifyStreamingPropertiesResult) => void): Request<WorkSpaces.Types.ModifyStreamingPropertiesResult, AWSError>;
+  /**
+   * Modifies the specified streaming properties.
+   */
+  modifyStreamingProperties(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyStreamingPropertiesResult) => void): Request<WorkSpaces.Types.ModifyStreamingPropertiesResult, AWSError>;
+  /**
    * Specifies which devices and operating systems users can use to access their WorkSpaces. For more information, see  Control Device Access.
    */
   modifyWorkspaceAccessProperties(params: WorkSpaces.Types.ModifyWorkspaceAccessPropertiesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifyWorkspaceAccessPropertiesResult) => void): Request<WorkSpaces.Types.ModifyWorkspaceAccessPropertiesResult, AWSError>;
@@ -588,6 +620,14 @@ declare class WorkSpaces extends Service {
    */
   startWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.StartWorkspacesResult) => void): Request<WorkSpaces.Types.StartWorkspacesResult, AWSError>;
   /**
+   * Starts the specified pool. You cannot start a pool unless it has a running mode of AutoStop and a state of STOPPED.
+   */
+  startWorkspacesPool(params: WorkSpaces.Types.StartWorkspacesPoolRequest, callback?: (err: AWSError, data: WorkSpaces.Types.StartWorkspacesPoolResult) => void): Request<WorkSpaces.Types.StartWorkspacesPoolResult, AWSError>;
+  /**
+   * Starts the specified pool. You cannot start a pool unless it has a running mode of AutoStop and a state of STOPPED.
+   */
+  startWorkspacesPool(callback?: (err: AWSError, data: WorkSpaces.Types.StartWorkspacesPoolResult) => void): Request<WorkSpaces.Types.StartWorkspacesPoolResult, AWSError>;
+  /**
    *  Stops the specified WorkSpaces. You cannot stop a WorkSpace unless it has a running mode of AutoStop and a state of AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.
    */
   stopWorkspaces(params: WorkSpaces.Types.StopWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.StopWorkspacesResult) => void): Request<WorkSpaces.Types.StopWorkspacesResult, AWSError>;
@@ -596,6 +636,14 @@ declare class WorkSpaces extends Service {
    */
   stopWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.StopWorkspacesResult) => void): Request<WorkSpaces.Types.StopWorkspacesResult, AWSError>;
   /**
+   * Stops the specified pool. You cannot stop a WorkSpace pool unless it has a running mode of AutoStop and a state of AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.
+   */
+  stopWorkspacesPool(params: WorkSpaces.Types.StopWorkspacesPoolRequest, callback?: (err: AWSError, data: WorkSpaces.Types.StopWorkspacesPoolResult) => void): Request<WorkSpaces.Types.StopWorkspacesPoolResult, AWSError>;
+  /**
+   * Stops the specified pool. You cannot stop a WorkSpace pool unless it has a running mode of AutoStop and a state of AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.
+   */
+  stopWorkspacesPool(callback?: (err: AWSError, data: WorkSpaces.Types.StopWorkspacesPoolResult) => void): Request<WorkSpaces.Types.StopWorkspacesPoolResult, AWSError>;
+  /**
    * Terminates the specified WorkSpaces.  Terminating a WorkSpace is a permanent action and cannot be undone. The user's data is destroyed. If you need to archive any user data, contact Amazon Web Services Support before terminating the WorkSpace.  You can terminate a WorkSpace that is in any state except SUSPENDED. This operation is asynchronous and returns before the WorkSpaces have been completely terminated. After a WorkSpace is terminated, the TERMINATED state is returned only briefly before the WorkSpace directory metadata is cleaned up, so this state is rarely returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID by using  DescribeWorkSpaces. If the WorkSpace ID isn't returned, then the WorkSpace has been successfully terminated.  Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, and you will be charged for this directory as per the Directory Service pricing terms. To delete empty directories, see  Delete the Directory for Your WorkSpaces. If you delete your Simple AD or AD Connector directory, you can always create a new one when you want to start using WorkSpaces again. 
    */
   terminateWorkspaces(params: WorkSpaces.Types.TerminateWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesResult, AWSError>;
@@ -603,6 +651,22 @@ declare class WorkSpaces extends Service {
    * Terminates the specified WorkSpaces.  Terminating a WorkSpace is a permanent action and cannot be undone. The user's data is destroyed. If you need to archive any user data, contact Amazon Web Services Support before terminating the WorkSpace.  You can terminate a WorkSpace that is in any state except SUSPENDED. This operation is asynchronous and returns before the WorkSpaces have been completely terminated. After a WorkSpace is terminated, the TERMINATED state is returned only briefly before the WorkSpace directory metadata is cleaned up, so this state is rarely returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID by using  DescribeWorkSpaces. If the WorkSpace ID isn't returned, then the WorkSpace has been successfully terminated.  Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, and you will be charged for this directory as per the Directory Service pricing terms. To delete empty directories, see  Delete the Directory for Your WorkSpaces. If you delete your Simple AD or AD Connector directory, you can always create a new one when you want to start using WorkSpaces again. 
    */
   terminateWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesResult, AWSError>;
+  /**
+   * Terminates the specified pool.
+   */
+  terminateWorkspacesPool(params: WorkSpaces.Types.TerminateWorkspacesPoolRequest, callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesPoolResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesPoolResult, AWSError>;
+  /**
+   * Terminates the specified pool.
+   */
+  terminateWorkspacesPool(callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesPoolResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesPoolResult, AWSError>;
+  /**
+   * Terminates the pool session.
+   */
+  terminateWorkspacesPoolSession(params: WorkSpaces.Types.TerminateWorkspacesPoolSessionRequest, callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesPoolSessionResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesPoolSessionResult, AWSError>;
+  /**
+   * Terminates the pool session.
+   */
+  terminateWorkspacesPoolSession(callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesPoolSessionResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesPoolSessionResult, AWSError>;
   /**
    * Updates a Amazon Connect client add-in. Use this action to update the name and endpoint URL of a Amazon Connect client add-in.
    */
@@ -643,6 +707,14 @@ declare class WorkSpaces extends Service {
    * Shares or unshares an image with one account in the same Amazon Web Services Region by specifying whether that account has permission to copy the image. If the copy image permission is granted, the image is shared with that account. If the copy image permission is revoked, the image is unshared with the account. After an image has been shared, the recipient account can copy the image to other Regions as needed. In the China (Ningxia) Region, you can copy images only within the same Region. In Amazon Web Services GovCloud (US), to copy images to and from other Regions, contact Amazon Web Services Support. For more information about sharing images, see  Share or Unshare a Custom WorkSpaces Image.    To delete an image that has been shared, you must unshare the image before you delete it.   Sharing Bring Your Own License (BYOL) images across Amazon Web Services accounts isn't supported at this time in Amazon Web Services GovCloud (US). To share BYOL images across accounts in Amazon Web Services GovCloud (US), contact Amazon Web Services Support.   
    */
   updateWorkspaceImagePermission(callback?: (err: AWSError, data: WorkSpaces.Types.UpdateWorkspaceImagePermissionResult) => void): Request<WorkSpaces.Types.UpdateWorkspaceImagePermissionResult, AWSError>;
+  /**
+   * Updates the specified pool.
+   */
+  updateWorkspacesPool(params: WorkSpaces.Types.UpdateWorkspacesPoolRequest, callback?: (err: AWSError, data: WorkSpaces.Types.UpdateWorkspacesPoolResult) => void): Request<WorkSpaces.Types.UpdateWorkspacesPoolResult, AWSError>;
+  /**
+   * Updates the specified pool.
+   */
+  updateWorkspacesPool(callback?: (err: AWSError, data: WorkSpaces.Types.UpdateWorkspacesPoolResult) => void): Request<WorkSpaces.Types.UpdateWorkspacesPoolResult, AWSError>;
 }
 declare namespace WorkSpaces {
   export type ARN = string;
@@ -710,6 +782,18 @@ declare namespace WorkSpaces {
     ErrorMessage?: Description;
   }
   export type AccountModificationList = AccountModification[];
+  export interface ActiveDirectoryConfig {
+    /**
+     * The name of the domain.
+     */
+    DomainName: DomainName;
+    /**
+     * Indicates the secret ARN on the service account.
+     */
+    ServiceAccountSecretArn: SecretsManagerArn;
+  }
+  export type ActiveUserSessions = number;
+  export type ActualUserSessions = number;
   export type AddInName = string;
   export type AddInUrl = string;
   export type Alias = string;
@@ -749,6 +833,31 @@ declare namespace WorkSpaces {
     StateReason?: AssociationStateReason;
   }
   export type ApplicationResourceAssociationList = ApplicationResourceAssociation[];
+  export interface ApplicationSettingsRequest {
+    /**
+     * Enables or disables persistent application settings for users during their pool sessions.
+     */
+    Status: ApplicationSettingsStatusEnum;
+    /**
+     * The path prefix for the S3 bucket where users’ persistent application settings are stored. You can allow the same persistent application settings to be used across multiple pools by specifying the same settings group for each pool.
+     */
+    SettingsGroup?: SettingsGroup;
+  }
+  export interface ApplicationSettingsResponse {
+    /**
+     * Specifies whether persistent application settings are enabled for users during their pool sessions.
+     */
+    Status: ApplicationSettingsStatusEnum;
+    /**
+     * The path prefix for the S3 bucket where users’ persistent application settings are stored.
+     */
+    SettingsGroup?: SettingsGroup;
+    /**
+     * The S3 bucket where users’ persistent application settings are stored. When persistent application settings are enabled for the first time for an account in an Amazon Web Services Region, an S3 bucket is created. The bucket is unique to the Amazon Web Services account and the Region.
+     */
+    S3BucketName?: S3BucketName;
+  }
+  export type ApplicationSettingsStatusEnum = "DISABLED"|"ENABLED"|string;
   export interface AssociateConnectionAliasRequest {
     /**
      * The identifier of the connection alias.
@@ -806,6 +915,7 @@ declare namespace WorkSpaces {
     ErrorMessage?: String2048;
   }
   export type AssociationStatus = "NOT_ASSOCIATED"|"ASSOCIATED_WITH_OWNER_ACCOUNT"|"ASSOCIATED_WITH_SHARED_ACCOUNT"|"PENDING_ASSOCIATION"|"PENDING_DISASSOCIATION"|string;
+  export type AuthenticationType = "SAML"|string;
   export interface AuthorizeIpRulesRequest {
     /**
      * The identifier of the group.
@@ -818,6 +928,7 @@ declare namespace WorkSpaces {
   }
   export interface AuthorizeIpRulesResult {
   }
+  export type AvailableUserSessions = number;
   export type AwsAccount = string;
   export type BooleanObject = boolean;
   export type BundleAssociatedResourceType = "APPLICATION"|string;
@@ -858,6 +969,30 @@ declare namespace WorkSpaces {
   }
   export type BundleResourceAssociationList = BundleResourceAssociation[];
   export type BundleType = "REGULAR"|"STANDBY"|string;
+  export interface Capacity {
+    /**
+     * The desired number of user sessions for a multi-session pool. This is not allowed for single-session pools.
+     */
+    DesiredUserSessions: DesiredUserSessions;
+  }
+  export interface CapacityStatus {
+    /**
+     * The number of user sessions currently being used for pool sessions. This only applies to multi-session pools.
+     */
+    AvailableUserSessions: AvailableUserSessions;
+    /**
+     * The total number of sessions slots that are either running or pending. This represents the total number of concurrent streaming sessions your pool can support in a steady state.
+     */
+    DesiredUserSessions: DesiredUserSessions;
+    /**
+     * The total number of session slots that are available for a pool of WorkSpaces.
+     */
+    ActualUserSessions: ActualUserSessions;
+    /**
+     * The number of user sessions currently being used for pool sessions. This only applies to multi-session pools.
+     */
+    ActiveUserSessions: ActiveUserSessions;
+  }
   export type CertificateAuthorityArn = string;
   export interface CertificateBasedAuthProperties {
     /**
@@ -1221,6 +1356,46 @@ declare namespace WorkSpaces {
      */
     OwnerAccountId?: AwsAccount;
   }
+  export interface CreateWorkspacesPoolRequest {
+    /**
+     * The name of the pool.
+     */
+    PoolName: WorkspacesPoolName;
+    /**
+     * The pool description.
+     */
+    Description: UpdateDescription;
+    /**
+     * The identifier of the bundle for the pool.
+     */
+    BundleId: BundleId;
+    /**
+     * The identifier of the directory for the pool.
+     */
+    DirectoryId: DirectoryId;
+    /**
+     * The user capacity of the pool.
+     */
+    Capacity: Capacity;
+    /**
+     * The tags for the pool.
+     */
+    Tags?: TagList;
+    /**
+     * Indicates the application settings of the pool.
+     */
+    ApplicationSettings?: ApplicationSettingsRequest;
+    /**
+     * Indicates the timeout settings of the pool.
+     */
+    TimeoutSettings?: TimeoutSettings;
+  }
+  export interface CreateWorkspacesPoolResult {
+    /**
+     * Indicates the pool to create.
+     */
+    WorkspacesPool?: WorkspacesPool;
+  }
   export interface CreateWorkspacesRequest {
     /**
      * The WorkSpaces to create. You can specify up to 25 WorkSpaces.
@@ -1325,6 +1500,10 @@ declare namespace WorkSpaces {
      * Specifies whether maintenance mode is enabled for WorkSpaces. For more information, see WorkSpace Maintenance.
      */
     EnableMaintenanceMode?: BooleanObject;
+    /**
+     * Indicates the IAM role ARN of the instance.
+     */
+    InstanceIamRoleArn?: ARN;
   }
   export type DeletableCertificateBasedAuthPropertiesList = DeletableCertificateBasedAuthProperty[];
   export type DeletableCertificateBasedAuthProperty = "CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARN"|string;
@@ -1776,6 +1955,10 @@ declare namespace WorkSpaces {
      */
     DirectoryIds?: DirectoryIdList;
     /**
+     * The names of the WorkSpace directories.
+     */
+    WorkspaceDirectoryNames?: WorkspaceDirectoryNameList;
+    /**
      * The maximum number of directories to return.
      */
     Limit?: Limit;
@@ -1886,6 +2069,81 @@ declare namespace WorkSpaces {
      */
     NextToken?: PaginationToken;
   }
+  export interface DescribeWorkspacesPoolSessionsRequest {
+    /**
+     * The identifier of the pool.
+     */
+    PoolId: WorkspacesPoolId;
+    /**
+     * The identifier of the user.
+     */
+    UserId?: WorkspacesPoolUserId;
+    /**
+     * The maximum number of items to return.
+     */
+    Limit?: Limit50;
+    /**
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface DescribeWorkspacesPoolSessionsResult {
+    /**
+     * Describes the pool sessions.
+     */
+    Sessions?: WorkspacesPoolSessions;
+    /**
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface DescribeWorkspacesPoolsFilter {
+    /**
+     * The name of the pool to filter.
+     */
+    Name: DescribeWorkspacesPoolsFilterName;
+    /**
+     * The values for filtering WorkSpaces Pools.
+     */
+    Values: DescribeWorkspacesPoolsFilterValues;
+    /**
+     * The operator values for filtering WorkSpaces Pools.
+     */
+    Operator: DescribeWorkspacesPoolsFilterOperator;
+  }
+  export type DescribeWorkspacesPoolsFilterName = "PoolName"|string;
+  export type DescribeWorkspacesPoolsFilterOperator = "EQUALS"|"NOTEQUALS"|"CONTAINS"|"NOTCONTAINS"|string;
+  export type DescribeWorkspacesPoolsFilterValue = string;
+  export type DescribeWorkspacesPoolsFilterValues = DescribeWorkspacesPoolsFilterValue[];
+  export type DescribeWorkspacesPoolsFilters = DescribeWorkspacesPoolsFilter[];
+  export interface DescribeWorkspacesPoolsRequest {
+    /**
+     * The identifier of the WorkSpaces Pools.
+     */
+    PoolIds?: WorkspacesPoolIds;
+    /**
+     * The filter conditions for the WorkSpaces Pool to return.
+     */
+    Filters?: DescribeWorkspacesPoolsFilters;
+    /**
+     * The maximum number of items to return.
+     */
+    Limit?: Limit;
+    /**
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface DescribeWorkspacesPoolsResult {
+    /**
+     * Information about the WorkSpaces Pools.
+     */
+    WorkspacesPools?: WorkspacesPools;
+    /**
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
+     */
+    NextToken?: PaginationToken;
+  }
   export interface DescribeWorkspacesRequest {
     /**
      * The identifiers of the WorkSpaces. You cannot combine this parameter with any other filter. Because the CreateWorkspaces operation is asynchronous, the identifier it returns is not immediately available. If you immediately call DescribeWorkspaces with this identifier, no information is returned.
@@ -1927,6 +2185,7 @@ declare namespace WorkSpaces {
     NextToken?: PaginationToken;
   }
   export type Description = string;
+  export type DesiredUserSessions = number;
   export type DirectoryId = string;
   export type DirectoryIdList = DirectoryId[];
   export type DirectoryList = WorkspaceDirectory[];
@@ -1967,7 +2226,9 @@ declare namespace WorkSpaces {
      */
     Association?: WorkspaceResourceAssociation;
   }
+  export type DisconnectTimeoutInSeconds = number;
   export type DnsIpAddresses = IpAddress[];
+  export type DomainName = string;
   export type Ec2ImageId = string;
   export interface ErrorDetails {
     /**
@@ -1980,6 +2241,7 @@ declare namespace WorkSpaces {
     ErrorMessage?: Description;
   }
   export type ErrorDetailsList = ErrorDetails[];
+  export type ErrorMessage = string;
   export type ErrorType = string;
   export interface FailedCreateStandbyWorkspacesRequest {
     /**
@@ -2046,6 +2308,7 @@ declare namespace WorkSpaces {
      */
     AccountLink?: AccountLink;
   }
+  export type IdleDisconnectTimeoutInSeconds = number;
   export type ImageAssociatedResourceType = "APPLICATION"|string;
   export type ImageAssociatedResourceTypeList = ImageAssociatedResourceType[];
   export interface ImagePermission {
@@ -2258,6 +2521,7 @@ declare namespace WorkSpaces {
   }
   export type IpRuleList = IpRuleItem[];
   export type Limit = number;
+  export type Limit50 = number;
   export type LinkId = string;
   export type LinkStatusFilterList = AccountLinkStatusEnum[];
   export interface ListAccountLinksRequest {
@@ -2312,6 +2576,8 @@ declare namespace WorkSpaces {
   export type LoginMessage = {[key: string]: ClientLoginMessage};
   export type ManagementCidrRangeConstraint = string;
   export type ManagementCidrRangeMaxResults = number;
+  export type MaxUserDurationInSeconds = number;
+  export type MaximumLength = number;
   export interface MigrateWorkspaceRequest {
     /**
      * The identifier of the WorkSpace to migrate from.
@@ -2413,6 +2679,18 @@ declare namespace WorkSpaces {
   }
   export interface ModifySelfservicePermissionsResult {
   }
+  export interface ModifyStreamingPropertiesRequest {
+    /**
+     * The identifier of the resource.
+     */
+    ResourceId: DirectoryId;
+    /**
+     * The streaming properties to configure.
+     */
+    StreamingProperties?: StreamingProperties;
+  }
+  export interface ModifyStreamingPropertiesResult {
+  }
   export interface ModifyWorkspaceAccessPropertiesRequest {
     /**
      * The identifier of the directory.
@@ -2465,6 +2743,16 @@ declare namespace WorkSpaces {
   }
   export interface ModifyWorkspaceStateResult {
   }
+  export interface NetworkAccessConfiguration {
+    /**
+     * The private IP address of the elastic network interface that is attached to instances in your VPC.
+     */
+    EniPrivateIpAddress?: NonEmptyString;
+    /**
+     * The resource identifier of the elastic network interface that is attached to instances in your VPC. All network interfaces have the eni-xxxxxxxx resource identifier.
+     */
+    EniId?: NonEmptyString;
+  }
   export type NonEmptyString = string;
   export interface OperatingSystem {
     /**
@@ -2472,7 +2760,7 @@ declare namespace WorkSpaces {
      */
     Type?: OperatingSystemType;
   }
-  export type OperatingSystemName = "AMAZON_LINUX_2"|"UBUNTU_18_04"|"UBUNTU_20_04"|"UBUNTU_22_04"|"UNKNOWN"|"WINDOWS_10"|"WINDOWS_11"|"WINDOWS_7"|"WINDOWS_SERVER_2016"|"WINDOWS_SERVER_2019"|"WINDOWS_SERVER_2022"|string;
+  export type OperatingSystemName = "AMAZON_LINUX_2"|"UBUNTU_18_04"|"UBUNTU_20_04"|"UBUNTU_22_04"|"UNKNOWN"|"WINDOWS_10"|"WINDOWS_11"|"WINDOWS_7"|"WINDOWS_SERVER_2016"|"WINDOWS_SERVER_2019"|"WINDOWS_SERVER_2022"|"RHEL_8"|string;
   export type OperatingSystemNameList = OperatingSystemName[];
   export type OperatingSystemType = "WINDOWS"|"LINUX"|string;
   export type PaginationToken = string;
@@ -2541,7 +2829,7 @@ declare namespace WorkSpaces {
     /**
      * The identifier of the directory. You cannot register a directory if it does not have a status of Active. If the directory does not have a status of Active, you will receive an InvalidResourceStateException error. If you have already registered the maximum number of directories that you can register with Amazon WorkSpaces, you will receive a ResourceLimitExceededException error. Deregister directories that you are not using for WorkSpaces, and try again.
      */
-    DirectoryId: DirectoryId;
+    DirectoryId?: DirectoryId;
     /**
      * The identifiers of the subnets for your virtual private cloud (VPC). Make sure that the subnets are in supported Availability Zones. The subnets must also be in separate Availability Zones. If these conditions are not met, you will receive an OperationNotSupportedException error.
      */
@@ -2549,7 +2837,7 @@ declare namespace WorkSpaces {
     /**
      * Indicates whether Amazon WorkDocs is enabled or disabled. If you have enabled this parameter and WorkDocs is not available in the Region, you will receive an OperationNotSupportedException error. Set EnableWorkDocs to disabled, and try again.
      */
-    EnableWorkDocs: BooleanObject;
+    EnableWorkDocs?: BooleanObject;
     /**
      * Indicates whether self-service capabilities are enabled or disabled.
      */
@@ -2562,8 +2850,36 @@ declare namespace WorkSpaces {
      * The tags associated with the directory.
      */
     Tags?: TagList;
+    /**
+     * The name of the directory to register.
+     */
+    WorkspaceDirectoryName?: WorkspaceDirectoryName;
+    /**
+     * Description of the directory to register.
+     */
+    WorkspaceDirectoryDescription?: WorkspaceDirectoryDescription;
+    /**
+     * The type of identity management the user is using.
+     */
+    UserIdentityType?: UserIdentityType;
+    /**
+     * Indicates whether the directory's WorkSpace type is personal or pools.
+     */
+    WorkspaceType?: WorkspaceType;
+    /**
+     * The active directory config of the directory.
+     */
+    ActiveDirectoryConfig?: ActiveDirectoryConfig;
   }
   export interface RegisterWorkspaceDirectoryResult {
+    /**
+     * The identifier of the directory.
+     */
+    DirectoryId?: DirectoryId;
+    /**
+     * The registration status of the WorkSpace directory.
+     */
+    State?: WorkspaceDirectoryState;
   }
   export type RegistrationCode = string;
   export interface RejectAccountLinkInvitationRequest {
@@ -2626,11 +2942,12 @@ declare namespace WorkSpaces {
     /**
      * The size of the root volume.
      */
-    Capacity?: NonEmptyString;
+    Capacity: NonEmptyString;
   }
   export type RootVolumeSizeGib = number;
   export type RunningMode = "AUTO_STOP"|"ALWAYS_ON"|"MANUAL"|string;
   export type RunningModeAutoStopTimeoutInMinutes = number;
+  export type S3BucketName = string;
   export interface SamlProperties {
     /**
      * Indicates the status of SAML 2.0 authentication. These statuses include the following.   If the setting is DISABLED, end users will be directed to login with their directory credentials.   If the setting is ENABLED, end users will be directed to login via the user access URL. Users attempting to connect to WorkSpaces from a client application that does not support SAML 2.0 authentication will not be able to connect.   If the setting is ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK, end users will be directed to login via the user access URL on supported client applications, but will not prevent clients that do not support SAML 2.0 authentication from connecting as if SAML 2.0 authentication was disabled.  
@@ -2647,6 +2964,7 @@ declare namespace WorkSpaces {
   }
   export type SamlStatusEnum = "DISABLED"|"ENABLED"|"ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK"|string;
   export type SamlUserAccessUrl = string;
+  export type SecretsManagerArn = string;
   export type SecurityGroupId = string;
   export interface SelfservicePermissions {
     /**
@@ -2670,6 +2988,9 @@ declare namespace WorkSpaces {
      */
     RebuildWorkspace?: ReconnectEnum;
   }
+  export type SessionConnectionState = "CONNECTED"|"NOT_CONNECTED"|string;
+  export type SessionInstanceId = string;
+  export type SettingsGroup = string;
   export interface Snapshot {
     /**
      * The time when the snapshot was created.
@@ -2723,6 +3044,14 @@ declare namespace WorkSpaces {
     WorkspaceId?: WorkspaceId;
   }
   export type StartWorkspaceRequests = StartRequest[];
+  export interface StartWorkspacesPoolRequest {
+    /**
+     * The identifier of the pool.
+     */
+    PoolId: WorkspacesPoolId;
+  }
+  export interface StartWorkspacesPoolResult {
+  }
   export interface StartWorkspacesRequest {
     /**
      * The WorkSpaces to start. You can specify up to 25 WorkSpaces.
@@ -2742,6 +3071,14 @@ declare namespace WorkSpaces {
     WorkspaceId?: WorkspaceId;
   }
   export type StopWorkspaceRequests = StopRequest[];
+  export interface StopWorkspacesPoolRequest {
+    /**
+     * The identifier of the pool.
+     */
+    PoolId: WorkspacesPoolId;
+  }
+  export interface StopWorkspacesPoolResult {
+  }
   export interface StopWorkspacesRequest {
     /**
      * The WorkSpaces to stop. You can specify up to 25 WorkSpaces.
@@ -2753,6 +3090,34 @@ declare namespace WorkSpaces {
      * Information about the WorkSpaces that could not be stopped.
      */
     FailedRequests?: FailedStopWorkspaceRequests;
+  }
+  export interface StorageConnector {
+    /**
+     * The type of connector used to save user files.
+     */
+    ConnectorType: StorageConnectorTypeEnum;
+    /**
+     * Indicates if the storage connetor is enabled or disabled.
+     */
+    Status: StorageConnectorStatusEnum;
+  }
+  export type StorageConnectorStatusEnum = "ENABLED"|"DISABLED"|string;
+  export type StorageConnectorTypeEnum = "HOME_FOLDER"|string;
+  export type StorageConnectors = StorageConnector[];
+  export type StreamingExperiencePreferredProtocolEnum = "TCP"|"UDP"|string;
+  export interface StreamingProperties {
+    /**
+     * Indicates the type of preferred protocol for the streaming experience.
+     */
+    StreamingExperiencePreferredProtocol?: StreamingExperiencePreferredProtocolEnum;
+    /**
+     * Indicates the permission settings asscoiated with the user.
+     */
+    UserSettings?: UserSettings;
+    /**
+     * Indicates the storage connector used 
+     */
+    StorageConnectors?: StorageConnectors;
   }
   export type String2048 = string;
   export type SubnetId = string;
@@ -2780,6 +3145,22 @@ declare namespace WorkSpaces {
     WorkspaceId: WorkspaceId;
   }
   export type TerminateWorkspaceRequests = TerminateRequest[];
+  export interface TerminateWorkspacesPoolRequest {
+    /**
+     * The identifier of the pool.
+     */
+    PoolId: WorkspacesPoolId;
+  }
+  export interface TerminateWorkspacesPoolResult {
+  }
+  export interface TerminateWorkspacesPoolSessionRequest {
+    /**
+     * The identifier of the pool session.
+     */
+    SessionId: AmazonUuid;
+  }
+  export interface TerminateWorkspacesPoolSessionResult {
+  }
   export interface TerminateWorkspacesRequest {
     /**
      * The WorkSpaces to terminate. You can specify up to 25 WorkSpaces.
@@ -2791,6 +3172,20 @@ declare namespace WorkSpaces {
      * Information about the WorkSpaces that could not be terminated.
      */
     FailedRequests?: FailedTerminateWorkspaceRequests;
+  }
+  export interface TimeoutSettings {
+    /**
+     * Specifies the amount of time, in seconds, that a streaming session remains active after users disconnect. If users try to reconnect to the streaming session after a disconnection or network interruption within the time set, they are connected to their previous session. Otherwise, they are connected to a new session with a new streaming instance.
+     */
+    DisconnectTimeoutInSeconds?: DisconnectTimeoutInSeconds;
+    /**
+     * The amount of time in seconds a connection will stay active while idle.
+     */
+    IdleDisconnectTimeoutInSeconds?: IdleDisconnectTimeoutInSeconds;
+    /**
+     * Specifies the maximum amount of time, in seconds, that a streaming session can remain active. If users are still connected to a streaming instance five minutes before this limit is reached, they are prompted to save any open documents before being disconnected. After this time elapses, the instance is terminated and replaced by a new instance.
+     */
+    MaxUserDurationInSeconds?: MaxUserDurationInSeconds;
   }
   export type Timestamp = Date;
   export interface UpdateConnectClientAddInRequest {
@@ -2876,12 +3271,66 @@ declare namespace WorkSpaces {
   }
   export interface UpdateWorkspaceImagePermissionResult {
   }
+  export interface UpdateWorkspacesPoolRequest {
+    /**
+     * The identifier of the specified pool to update.
+     */
+    PoolId: WorkspacesPoolId;
+    /**
+     * Describes the specified pool to update.
+     */
+    Description?: UpdateDescription;
+    /**
+     * The identifier of the bundle.
+     */
+    BundleId?: BundleId;
+    /**
+     * The identifier of the directory.
+     */
+    DirectoryId?: DirectoryId;
+    /**
+     * The desired capacity for the pool.
+     */
+    Capacity?: Capacity;
+    /**
+     * The persistent application settings for users in the pool.
+     */
+    ApplicationSettings?: ApplicationSettingsRequest;
+    /**
+     * Indicates the timeout settings of the specified pool.
+     */
+    TimeoutSettings?: TimeoutSettings;
+  }
+  export interface UpdateWorkspacesPoolResult {
+    /**
+     * Describes the specified pool.
+     */
+    WorkspacesPool?: WorkspacesPool;
+  }
+  export type UserIdentityType = "CUSTOMER_MANAGED"|"AWS_DIRECTORY_SERVICE"|string;
   export type UserName = string;
+  export interface UserSetting {
+    /**
+     * Indicates the type of action.
+     */
+    Action: UserSettingActionEnum;
+    /**
+     * Indicates if the setting is enabled or disabled.
+     */
+    Permission: UserSettingPermissionEnum;
+    /**
+     * Indicates the maximum character length for the specified user setting.
+     */
+    MaximumLength?: MaximumLength;
+  }
+  export type UserSettingActionEnum = "CLIPBOARD_COPY_FROM_LOCAL_DEVICE"|"CLIPBOARD_COPY_TO_LOCAL_DEVICE"|"PRINTING_TO_LOCAL_DEVICE"|"SMART_CARD"|string;
+  export type UserSettingPermissionEnum = "ENABLED"|"DISABLED"|string;
+  export type UserSettings = UserSetting[];
   export interface UserStorage {
     /**
      * The size of the user volume.
      */
-    Capacity?: NonEmptyString;
+    Capacity: NonEmptyString;
   }
   export type UserVolumeSizeGib = number;
   export type VolumeEncryptionKey = string;
@@ -3146,6 +3595,10 @@ declare namespace WorkSpaces {
      * Indicates whether maintenance mode is enabled for your WorkSpaces. For more information, see WorkSpace Maintenance. 
      */
     EnableMaintenanceMode?: BooleanObject;
+    /**
+     * Indicates the IAM role ARN of the instance.
+     */
+    InstanceIamRoleArn?: ARN;
   }
   export interface WorkspaceDirectory {
     /**
@@ -3220,9 +3673,40 @@ declare namespace WorkSpaces {
      * The certificate-based authentication properties used to authenticate SAML 2.0 Identity Provider (IdP) user identities to Active Directory for WorkSpaces login.
      */
     CertificateBasedAuthProperties?: CertificateBasedAuthProperties;
+    /**
+     * The name fo the WorkSpace directory.
+     */
+    WorkspaceDirectoryName?: WorkspaceDirectoryName;
+    /**
+     * The description of the WorkSpace directory
+     */
+    WorkspaceDirectoryDescription?: WorkspaceDirectoryDescription;
+    /**
+     * Indicates the identity type of the specifired user.
+     */
+    UserIdentityType?: UserIdentityType;
+    /**
+     * Indicates whether the directory's WorkSpace type is personal or pools.
+     */
+    WorkspaceType?: WorkspaceType;
+    /**
+     * Information about the Active Directory config.
+     */
+    ActiveDirectoryConfig?: ActiveDirectoryConfig;
+    /**
+     * The streaming properties to configure.
+     */
+    StreamingProperties?: StreamingProperties;
+    /**
+     * The error message returned.
+     */
+    ErrorMessage?: Description;
   }
+  export type WorkspaceDirectoryDescription = string;
+  export type WorkspaceDirectoryName = string;
+  export type WorkspaceDirectoryNameList = WorkspaceDirectoryName[];
   export type WorkspaceDirectoryState = "REGISTERING"|"REGISTERED"|"DEREGISTERING"|"DEREGISTERED"|"ERROR"|string;
-  export type WorkspaceDirectoryType = "SIMPLE_AD"|"AD_CONNECTOR"|string;
+  export type WorkspaceDirectoryType = "SIMPLE_AD"|"AD_CONNECTOR"|"CUSTOMER_MANAGED"|string;
   export type WorkspaceErrorCode = string;
   export type WorkspaceId = string;
   export type WorkspaceIdList = WorkspaceId[];
@@ -3389,6 +3873,7 @@ declare namespace WorkSpaces {
   }
   export type WorkspaceResourceAssociationList = WorkspaceResourceAssociation[];
   export type WorkspaceState = "PENDING"|"AVAILABLE"|"IMPAIRED"|"UNHEALTHY"|"REBOOTING"|"STARTING"|"REBUILDING"|"RESTORING"|"MAINTENANCE"|"ADMIN_MAINTENANCE"|"TERMINATING"|"TERMINATED"|"SUSPENDED"|"UPDATING"|"STOPPING"|"STOPPED"|"ERROR"|string;
+  export type WorkspaceType = "PERSONAL"|"POOLS"|string;
   export interface WorkspacesIpGroup {
     /**
      * The identifier of the group.
@@ -3408,6 +3893,113 @@ declare namespace WorkSpaces {
     userRules?: IpRuleList;
   }
   export type WorkspacesIpGroupsList = WorkspacesIpGroup[];
+  export interface WorkspacesPool {
+    /**
+     * The identifier of a pool.
+     */
+    PoolId: WorkspacesPoolId;
+    /**
+     * The Amazon Resource Name (ARN) for the pool.
+     */
+    PoolArn: ARN;
+    /**
+     * The capacity status for the pool
+     */
+    CapacityStatus: CapacityStatus;
+    /**
+     * The name of the pool,
+     */
+    PoolName: WorkspacesPoolName;
+    /**
+     * The description of the pool.
+     */
+    Description?: UpdateDescription;
+    /**
+     * The current state of the pool.
+     */
+    State: WorkspacesPoolState;
+    /**
+     * The time the pool was created.
+     */
+    CreatedAt: Timestamp;
+    /**
+     * The identifier of the bundle used by the pool.
+     */
+    BundleId: BundleId;
+    /**
+     * The identifier of the directory used by the pool.
+     */
+    DirectoryId: DirectoryId;
+    /**
+     * The pool errors.
+     */
+    Errors?: WorkspacesPoolErrors;
+    /**
+     * The persistent application settings for users of the pool.
+     */
+    ApplicationSettings?: ApplicationSettingsResponse;
+    /**
+     * The amount of time that a pool session remains active after users disconnect. If they try to reconnect to the pool session after a disconnection or network interruption within this time interval, they are connected to their previous session. Otherwise, they are connected to a new session with a new pool instance.
+     */
+    TimeoutSettings?: TimeoutSettings;
+  }
+  export interface WorkspacesPoolError {
+    /**
+     * The error code.
+     */
+    ErrorCode?: WorkspacesPoolErrorCode;
+    /**
+     * The error message.
+     */
+    ErrorMessage?: ErrorMessage;
+  }
+  export type WorkspacesPoolErrorCode = "IAM_SERVICE_ROLE_IS_MISSING"|"IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION"|"IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION"|"IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION"|"NETWORK_INTERFACE_LIMIT_EXCEEDED"|"INTERNAL_SERVICE_ERROR"|"MACHINE_ROLE_IS_MISSING"|"STS_DISABLED_IN_REGION"|"SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES"|"IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION"|"SUBNET_NOT_FOUND"|"IMAGE_NOT_FOUND"|"INVALID_SUBNET_CONFIGURATION"|"SECURITY_GROUPS_NOT_FOUND"|"IGW_NOT_ATTACHED"|"IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION"|"WORKSPACES_POOL_STOPPED"|"WORKSPACES_POOL_INSTANCE_PROVISIONING_FAILURE"|"DOMAIN_JOIN_ERROR_FILE_NOT_FOUND"|"DOMAIN_JOIN_ERROR_ACCESS_DENIED"|"DOMAIN_JOIN_ERROR_LOGON_FAILURE"|"DOMAIN_JOIN_ERROR_INVALID_PARAMETER"|"DOMAIN_JOIN_ERROR_MORE_DATA"|"DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN"|"DOMAIN_JOIN_ERROR_NOT_SUPPORTED"|"DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME"|"DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED"|"DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED"|"DOMAIN_JOIN_NERR_PASSWORD_EXPIRED"|"DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"|"DOMAIN_JOIN_ERROR_SECRET_ACTION_PERMISSION_IS_MISSING"|"DOMAIN_JOIN_ERROR_SECRET_DECRYPTION_FAILURE"|"DOMAIN_JOIN_ERROR_SECRET_STATE_INVALID"|"DOMAIN_JOIN_ERROR_SECRET_NOT_FOUND"|"DOMAIN_JOIN_ERROR_SECRET_VALUE_KEY_NOT_FOUND"|"DOMAIN_JOIN_ERROR_SECRET_INVALID"|"BUNDLE_NOT_FOUND"|"DIRECTORY_NOT_FOUND"|"INSUFFICIENT_PERMISSIONS_ERROR"|"DEFAULT_OU_IS_MISSING"|string;
+  export type WorkspacesPoolErrors = WorkspacesPoolError[];
+  export type WorkspacesPoolId = string;
+  export type WorkspacesPoolIds = WorkspacesPoolId[];
+  export type WorkspacesPoolName = string;
+  export interface WorkspacesPoolSession {
+    /**
+     * The authentication method. The user is authenticated using a WorkSpaces Pools URL (API) or SAML 2.0 federation (SAML).
+     */
+    AuthenticationType?: AuthenticationType;
+    /**
+     * Specifies whether a user is connected to the pool session.
+     */
+    ConnectionState?: SessionConnectionState;
+    /**
+     * The identifier of the session.
+     */
+    SessionId: AmazonUuid;
+    /**
+     * The identifier for the instance hosting the session.
+     */
+    InstanceId?: SessionInstanceId;
+    /**
+     * The identifier of the pool.
+     */
+    PoolId: WorkspacesPoolId;
+    /**
+     * The time that the pool session ended.
+     */
+    ExpirationTime?: Timestamp;
+    /**
+     * Describes the network details of the pool.
+     */
+    NetworkAccessConfiguration?: NetworkAccessConfiguration;
+    /**
+     * The time that the pool sission started.
+     */
+    StartTime?: Timestamp;
+    /**
+     * The identifier of the user.
+     */
+    UserId: WorkspacesPoolUserId;
+  }
+  export type WorkspacesPoolSessions = WorkspacesPoolSession[];
+  export type WorkspacesPoolState = "CREATING"|"DELETING"|"RUNNING"|"STARTING"|"STOPPED"|"STOPPING"|"UPDATING"|string;
+  export type WorkspacesPoolUserId = string;
+  export type WorkspacesPools = WorkspacesPool[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

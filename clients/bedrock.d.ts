@@ -20,11 +20,11 @@ declare class Bedrock extends Service {
    */
   createEvaluationJob(callback?: (err: AWSError, data: Bedrock.Types.CreateEvaluationJobResponse) => void): Request<Bedrock.Types.CreateEvaluationJobResponse, AWSError>;
   /**
-   * Creates a guardrail to block topics and to filter out harmful content.   Specify a name and optional description.   Specify messages for when the guardrail successfully blocks a prompt or a model response in the blockedInputMessaging and blockedOutputsMessaging fields.   Specify topics for the guardrail to deny in the topicPolicyConfig object. Each GuardrailTopicConfig object in the topicsConfig list pertains to one topic.   Give a name and description so that the guardrail can properly identify the topic.   Specify DENY in the type field.   (Optional) Provide up to five prompts that you would categorize as belonging to the topic in the examples list.     Specify filter strengths for the harmful categories defined in Amazon Bedrock in the contentPolicyConfig object. Each GuardrailContentFilterConfig object in the filtersConfig list pertains to a harmful category. For more information, see Content filters. For more information about the fields in a content filter, see GuardrailContentFilterConfig.   Specify the category in the type field.   Specify the strength of the filter for prompts in the inputStrength field and for model responses in the strength field of the GuardrailContentFilterConfig.     (Optional) For security, include the ARN of a KMS key in the kmsKeyId field.   (Optional) Attach any tags to the guardrail in the tags object. For more information, see Tag resources.  
+   * Creates a guardrail to block topics and to implement safeguards for your generative AI applications. You can configure the following policies in a guardrail to avoid undesirable and harmful content, filter out denied topics and words, and remove sensitive information for privacy protection.    Content filters - Adjust filter strengths to block input prompts or model responses containing harmful content.    Denied topics - Define a set of topics that are undesirable in the context of your application. These topics will be blocked if detected in user queries or model responses.    Word filters - Configure filters to block undesirable words, phrases, and profanity. Such words can include offensive terms, competitor names etc.    Sensitive information filters - Block or mask sensitive information such as personally identifiable information (PII) or custom regex in user inputs and model responses.   In addition to the above policies, you can also configure the messages to be returned to the user if a user input or model response is in violation of the policies defined in the guardrail. For more information, see Guardrails for Amazon Bedrock in the Amazon Bedrock User Guide.
    */
   createGuardrail(params: Bedrock.Types.CreateGuardrailRequest, callback?: (err: AWSError, data: Bedrock.Types.CreateGuardrailResponse) => void): Request<Bedrock.Types.CreateGuardrailResponse, AWSError>;
   /**
-   * Creates a guardrail to block topics and to filter out harmful content.   Specify a name and optional description.   Specify messages for when the guardrail successfully blocks a prompt or a model response in the blockedInputMessaging and blockedOutputsMessaging fields.   Specify topics for the guardrail to deny in the topicPolicyConfig object. Each GuardrailTopicConfig object in the topicsConfig list pertains to one topic.   Give a name and description so that the guardrail can properly identify the topic.   Specify DENY in the type field.   (Optional) Provide up to five prompts that you would categorize as belonging to the topic in the examples list.     Specify filter strengths for the harmful categories defined in Amazon Bedrock in the contentPolicyConfig object. Each GuardrailContentFilterConfig object in the filtersConfig list pertains to a harmful category. For more information, see Content filters. For more information about the fields in a content filter, see GuardrailContentFilterConfig.   Specify the category in the type field.   Specify the strength of the filter for prompts in the inputStrength field and for model responses in the strength field of the GuardrailContentFilterConfig.     (Optional) For security, include the ARN of a KMS key in the kmsKeyId field.   (Optional) Attach any tags to the guardrail in the tags object. For more information, see Tag resources.  
+   * Creates a guardrail to block topics and to implement safeguards for your generative AI applications. You can configure the following policies in a guardrail to avoid undesirable and harmful content, filter out denied topics and words, and remove sensitive information for privacy protection.    Content filters - Adjust filter strengths to block input prompts or model responses containing harmful content.    Denied topics - Define a set of topics that are undesirable in the context of your application. These topics will be blocked if detected in user queries or model responses.    Word filters - Configure filters to block undesirable words, phrases, and profanity. Such words can include offensive terms, competitor names etc.    Sensitive information filters - Block or mask sensitive information such as personally identifiable information (PII) or custom regex in user inputs and model responses.   In addition to the above policies, you can also configure the messages to be returned to the user if a user input or model response is in violation of the policies defined in the guardrail. For more information, see Guardrails for Amazon Bedrock in the Amazon Bedrock User Guide.
    */
   createGuardrail(callback?: (err: AWSError, data: Bedrock.Types.CreateGuardrailResponse) => void): Request<Bedrock.Types.CreateGuardrailResponse, AWSError>;
   /**
@@ -236,11 +236,11 @@ declare class Bedrock extends Service {
    */
   untagResource(callback?: (err: AWSError, data: Bedrock.Types.UntagResourceResponse) => void): Request<Bedrock.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates a guardrail with the values you specify.   Specify a name and optional description.   Specify messages for when the guardrail successfully blocks a prompt or a model response in the blockedInputMessaging and blockedOutputsMessaging fields.   Specify topics for the guardrail to deny in the topicPolicyConfig object. Each GuardrailTopicConfig object in the topicsConfig list pertains to one topic.   Give a name and description so that the guardrail can properly identify the topic.   Specify DENY in the type field.   (Optional) Provide up to five prompts that you would categorize as belonging to the topic in the examples list.     Specify filter strengths for the harmful categories defined in Amazon Bedrock in the contentPolicyConfig object. Each GuardrailContentFilterConfig object in the filtersConfig list pertains to a harmful category. For more information, see Content filters. For more information about the fields in a content filter, see GuardrailContentFilterConfig.   Specify the category in the type field.   Specify the strength of the filter for prompts in the inputStrength field and for model responses in the strength field of the GuardrailContentFilterConfig.     (Optional) For security, include the ARN of a KMS key in the kmsKeyId field.   (Optional) Attach any tags to the guardrail in the tags object. For more information, see Tag resources.  
+   * Updates a guardrail with the values you specify.   Specify a name and optional description.   Specify messages for when the guardrail successfully blocks a prompt or a model response in the blockedInputMessaging and blockedOutputsMessaging fields.   Specify topics for the guardrail to deny in the topicPolicyConfig object. Each GuardrailTopicConfig object in the topicsConfig list pertains to one topic.   Give a name and description so that the guardrail can properly identify the topic.   Specify DENY in the type field.   (Optional) Provide up to five prompts that you would categorize as belonging to the topic in the examples list.     Specify filter strengths for the harmful categories defined in Amazon Bedrock in the contentPolicyConfig object. Each GuardrailContentFilterConfig object in the filtersConfig list pertains to a harmful category. For more information, see Content filters. For more information about the fields in a content filter, see GuardrailContentFilterConfig.   Specify the category in the type field.   Specify the strength of the filter for prompts in the inputStrength field and for model responses in the strength field of the GuardrailContentFilterConfig.     (Optional) For security, include the ARN of a KMS key in the kmsKeyId field.  
    */
   updateGuardrail(params: Bedrock.Types.UpdateGuardrailRequest, callback?: (err: AWSError, data: Bedrock.Types.UpdateGuardrailResponse) => void): Request<Bedrock.Types.UpdateGuardrailResponse, AWSError>;
   /**
-   * Updates a guardrail with the values you specify.   Specify a name and optional description.   Specify messages for when the guardrail successfully blocks a prompt or a model response in the blockedInputMessaging and blockedOutputsMessaging fields.   Specify topics for the guardrail to deny in the topicPolicyConfig object. Each GuardrailTopicConfig object in the topicsConfig list pertains to one topic.   Give a name and description so that the guardrail can properly identify the topic.   Specify DENY in the type field.   (Optional) Provide up to five prompts that you would categorize as belonging to the topic in the examples list.     Specify filter strengths for the harmful categories defined in Amazon Bedrock in the contentPolicyConfig object. Each GuardrailContentFilterConfig object in the filtersConfig list pertains to a harmful category. For more information, see Content filters. For more information about the fields in a content filter, see GuardrailContentFilterConfig.   Specify the category in the type field.   Specify the strength of the filter for prompts in the inputStrength field and for model responses in the strength field of the GuardrailContentFilterConfig.     (Optional) For security, include the ARN of a KMS key in the kmsKeyId field.   (Optional) Attach any tags to the guardrail in the tags object. For more information, see Tag resources.  
+   * Updates a guardrail with the values you specify.   Specify a name and optional description.   Specify messages for when the guardrail successfully blocks a prompt or a model response in the blockedInputMessaging and blockedOutputsMessaging fields.   Specify topics for the guardrail to deny in the topicPolicyConfig object. Each GuardrailTopicConfig object in the topicsConfig list pertains to one topic.   Give a name and description so that the guardrail can properly identify the topic.   Specify DENY in the type field.   (Optional) Provide up to five prompts that you would categorize as belonging to the topic in the examples list.     Specify filter strengths for the harmful categories defined in Amazon Bedrock in the contentPolicyConfig object. Each GuardrailContentFilterConfig object in the filtersConfig list pertains to a harmful category. For more information, see Content filters. For more information about the fields in a content filter, see GuardrailContentFilterConfig.   Specify the category in the type field.   Specify the strength of the filter for prompts in the inputStrength field and for model responses in the strength field of the GuardrailContentFilterConfig.     (Optional) For security, include the ARN of a KMS key in the kmsKeyId field.  
    */
   updateGuardrail(callback?: (err: AWSError, data: Bedrock.Types.UpdateGuardrailResponse) => void): Request<Bedrock.Types.UpdateGuardrailResponse, AWSError>;
   /**
@@ -349,6 +349,10 @@ declare namespace Bedrock {
      */
     sensitiveInformationPolicyConfig?: GuardrailSensitiveInformationPolicyConfig;
     /**
+     * The contextual grounding policy configuration used to create a guardrail.
+     */
+    contextualGroundingPolicyConfig?: GuardrailContextualGroundingPolicyConfig;
+    /**
      * The message to return when the guardrail blocks a prompt.
      */
     blockedInputMessaging: GuardrailBlockedMessaging;
@@ -375,11 +379,11 @@ declare namespace Bedrock {
      */
     guardrailId: GuardrailId;
     /**
-     * The ARN of the guardrail that was created.
+     * The ARN of the guardrail.
      */
     guardrailArn: GuardrailArn;
     /**
-     * The version of the guardrail that was created. This value should be 1.
+     * The version of the guardrail that was created. This value will always be DRAFT.
      */
     version: GuardrailDraftVersion;
     /**
@@ -389,7 +393,7 @@ declare namespace Bedrock {
   }
   export interface CreateGuardrailVersionRequest {
     /**
-     * The unique identifier of the guardrail.
+     * The unique identifier of the guardrail. This can be an ID or the ARN.
      */
     guardrailIdentifier: GuardrailIdentifier;
     /**
@@ -547,7 +551,7 @@ declare namespace Bedrock {
   }
   export interface DeleteGuardrailRequest {
     /**
-     * The unique identifier of the guardrail.
+     * The unique identifier of the guardrail. This can be an ID or the ARN.
      */
     guardrailIdentifier: GuardrailIdentifier;
     /**
@@ -920,7 +924,7 @@ declare namespace Bedrock {
   }
   export interface GetGuardrailRequest {
     /**
-     * The unique identifier of the guardrail for which to get details.
+     * The unique identifier of the guardrail for which to get details. This can be an ID or the ARN.
      */
     guardrailIdentifier: GuardrailIdentifier;
     /**
@@ -942,7 +946,7 @@ declare namespace Bedrock {
      */
     guardrailId: GuardrailId;
     /**
-     * The ARN of the guardrail that was created.
+     * The ARN of the guardrail.
      */
     guardrailArn: GuardrailArn;
     /**
@@ -969,6 +973,10 @@ declare namespace Bedrock {
      * The sensitive information policy that was configured for the guardrail.
      */
     sensitiveInformationPolicy?: GuardrailSensitiveInformationPolicy;
+    /**
+     * The contextual grounding policy used in the guardrail.
+     */
+    contextualGroundingPolicy?: GuardrailContextualGroundingPolicy;
     /**
      * The date and time at which the guardrail was created.
      */
@@ -1203,6 +1211,43 @@ declare namespace Bedrock {
      */
     filtersConfig: GuardrailContentFiltersConfig;
   }
+  export interface GuardrailContextualGroundingFilter {
+    /**
+     * The filter type details for the guardrails contextual grounding filter.
+     */
+    type: GuardrailContextualGroundingFilterType;
+    /**
+     * The threshold details for the guardrails contextual grounding filter.
+     */
+    threshold: GuardrailContextualGroundingFilterThresholdDouble;
+  }
+  export interface GuardrailContextualGroundingFilterConfig {
+    /**
+     * The filter details for the guardrails contextual grounding filter.
+     */
+    type: GuardrailContextualGroundingFilterType;
+    /**
+     * The threshold details for the guardrails contextual grounding filter.
+     */
+    threshold: GuardrailContextualGroundingFilterConfigThresholdDouble;
+  }
+  export type GuardrailContextualGroundingFilterConfigThresholdDouble = number;
+  export type GuardrailContextualGroundingFilterThresholdDouble = number;
+  export type GuardrailContextualGroundingFilterType = "GROUNDING"|"RELEVANCE"|string;
+  export type GuardrailContextualGroundingFilters = GuardrailContextualGroundingFilter[];
+  export type GuardrailContextualGroundingFiltersConfig = GuardrailContextualGroundingFilterConfig[];
+  export interface GuardrailContextualGroundingPolicy {
+    /**
+     * The filter details for the guardrails contextual grounding policy.
+     */
+    filters: GuardrailContextualGroundingFilters;
+  }
+  export interface GuardrailContextualGroundingPolicyConfig {
+    /**
+     * The filter configuration details for the guardrails contextual grounding policy.
+     */
+    filtersConfig: GuardrailContextualGroundingFiltersConfig;
+  }
   export type GuardrailDescription = string;
   export type GuardrailDraftVersion = string;
   export type GuardrailFailureRecommendation = string;
@@ -1241,7 +1286,7 @@ declare namespace Bedrock {
   }
   export interface GuardrailPiiEntityConfig {
     /**
-     * Configure guardrail type when the PII entity is detected.
+     * Configure guardrail type when the PII entity is detected. The following PIIs are used to block or mask sensitive information:    General     ADDRESS  A physical address, such as "100 Main Street, Anytown, USA" or "Suite #12, Building 123". An address can include information such as the street, building, location, city, state, country, county, zip code, precinct, and neighborhood.     AGE  An individual's age, including the quantity and unit of time. For example, in the phrase "I am 40 years old," Guarrails recognizes "40 years" as an age.     NAME  An individual's name. This entity type does not include titles, such as Dr., Mr., Mrs., or Miss. guardrails doesn't apply this entity type to names that are part of organizations or addresses. For example, guardrails recognizes the "John Doe Organization" as an organization, and it recognizes "Jane Doe Street" as an address.     EMAIL  An email address, such as marymajor@email.com.    PHONE  A phone number. This entity type also includes fax and pager numbers.     USERNAME  A user name that identifies an account, such as a login name, screen name, nick name, or handle.     PASSWORD  An alphanumeric string that is used as a password, such as "*very20special#pass*".     DRIVER_ID  The number assigned to a driver's license, which is an official document permitting an individual to operate one or more motorized vehicles on a public road. A driver's license number consists of alphanumeric characters.     LICENSE_PLATE  A license plate for a vehicle is issued by the state or country where the vehicle is registered. The format for passenger vehicles is typically five to eight digits, consisting of upper-case letters and numbers. The format varies depending on the location of the issuing state or country.     VEHICLE_IDENTIFICATION_NUMBER  A Vehicle Identification Number (VIN) uniquely identifies a vehicle. VIN content and format are defined in the ISO 3779 specification. Each country has specific codes and formats for VINs.       Finance     REDIT_DEBIT_CARD_CVV  A three-digit card verification code (CVV) that is present on VISA, MasterCard, and Discover credit and debit cards. For American Express credit or debit cards, the CVV is a four-digit numeric code.     CREDIT_DEBIT_CARD_EXPIRY  The expiration date for a credit or debit card. This number is usually four digits long and is often formatted as month/year or MM/YY. Guardrails recognizes expiration dates such as 01/21, 01/2021, and Jan 2021.     CREDIT_DEBIT_CARD_NUMBER  The number for a credit or debit card. These numbers can vary from 13 to 16 digits in length. However, Amazon Comprehend also recognizes credit or debit card numbers when only the last four digits are present.     PIN  A four-digit personal identification number (PIN) with which you can access your bank account.     INTERNATIONAL_BANK_ACCOUNT_NUMBER  An International Bank Account Number has specific formats in each country. For more information, see www.iban.com/structure.    SWIFT_CODE  A SWIFT code is a standard format of Bank Identifier Code (BIC) used to specify a particular bank or branch. Banks use these codes for money transfers such as international wire transfers. SWIFT codes consist of eight or 11 characters. The 11-digit codes refer to specific branches, while eight-digit codes (or 11-digit codes ending in 'XXX') refer to the head or primary office.      IT     IP_ADDRESS  An IPv4 address, such as 198.51.100.0.     MAC_ADDRESS  A media access control (MAC) address is a unique identifier assigned to a network interface controller (NIC).     URL  A web address, such as www.example.com.     AWS_ACCESS_KEY  A unique identifier that's associated with a secret access key; you use the access key ID and secret access key to sign programmatic Amazon Web Services requests cryptographically.     AWS_SECRET_KEY  A unique identifier that's associated with an access key. You use the access key ID and secret access key to sign programmatic Amazon Web Services requests cryptographically.       USA specific     US_BANK_ACCOUNT_NUMBER  A US bank account number, which is typically 10 to 12 digits long.     US_BANK_ROUTING_NUMBER  A US bank account routing number. These are typically nine digits long,     US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER  A US Individual Taxpayer Identification Number (ITIN) is a nine-digit number that starts with a "9" and contain a "7" or "8" as the fourth digit. An ITIN can be formatted with a space or a dash after the third and forth digits.     US_PASSPORT_NUMBER  A US passport number. Passport numbers range from six to nine alphanumeric characters.     US_SOCIAL_SECURITY_NUMBER  A US Social Security Number (SSN) is a nine-digit number that is issued to US citizens, permanent residents, and temporary working residents.       Canada specific     CA_HEALTH_NUMBER  A Canadian Health Service Number is a 10-digit unique identifier, required for individuals to access healthcare benefits.     CA_SOCIAL_INSURANCE_NUMBER  A Canadian Social Insurance Number (SIN) is a nine-digit unique identifier, required for individuals to access government programs and benefits. The SIN is formatted as three groups of three digits, such as 123-456-789. A SIN can be validated through a simple check-digit process called the Luhn algorithm.      UK Specific     UK_NATIONAL_HEALTH_SERVICE_NUMBER  A UK National Health Service Number is a 10-17 digit number, such as 485 777 3456. The current system formats the 10-digit number with spaces after the third and sixth digits. The final digit is an error-detecting checksum.    UK_NATIONAL_INSURANCE_NUMBER  A UK National Insurance Number (NINO) provides individuals with access to National Insurance (social security) benefits. It is also used for some purposes in the UK tax system. The number is nine digits long and starts with two letters, followed by six numbers and one letter. A NINO can be formatted with a space or a dash after the two letters and after the second, forth, and sixth digits.    UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER  A UK Unique Taxpayer Reference (UTR) is a 10-digit number that identifies a taxpayer or a business.       Custom     Regex filter - You can use a regular expressions to define patterns for a guardrail to recognize and act upon such as serial number, booking ID etc..    
      */
     type: GuardrailPiiEntityType;
     /**
@@ -1610,7 +1655,7 @@ declare namespace Bedrock {
   }
   export interface ListGuardrailsRequest {
     /**
-     * The unique identifier of the guardrail.
+     * The unique identifier of the guardrail. This can be an ID or the ARN.
      */
     guardrailIdentifier?: GuardrailIdentifier;
     /**
@@ -1979,7 +2024,7 @@ declare namespace Bedrock {
   }
   export interface UpdateGuardrailRequest {
     /**
-     * The unique identifier of the guardrail
+     * The unique identifier of the guardrail. This can be an ID or the ARN.
      */
     guardrailIdentifier: GuardrailIdentifier;
     /**
@@ -2007,6 +2052,10 @@ declare namespace Bedrock {
      */
     sensitiveInformationPolicyConfig?: GuardrailSensitiveInformationPolicyConfig;
     /**
+     * The contextual grounding policy configuration used to update a guardrail.
+     */
+    contextualGroundingPolicyConfig?: GuardrailContextualGroundingPolicyConfig;
+    /**
      * The message to return when the guardrail blocks a prompt.
      */
     blockedInputMessaging: GuardrailBlockedMessaging;
@@ -2025,7 +2074,7 @@ declare namespace Bedrock {
      */
     guardrailId: GuardrailId;
     /**
-     * The ARN of the guardrail that was created.
+     * The ARN of the guardrail.
      */
     guardrailArn: GuardrailArn;
     /**

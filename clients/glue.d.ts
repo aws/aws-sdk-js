@@ -3546,6 +3546,21 @@ declare namespace Glue {
      */
     CrawlState?: CrawlState;
   }
+  export interface ConditionExpression {
+    /**
+     * The condition of the condition expression.
+     */
+    Condition: DatabrewCondition;
+    /**
+     * The value of the condition expression.
+     */
+    Value?: DatabrewConditionValue;
+    /**
+     * The target column of the condition expressions.
+     */
+    TargetColumn: TargetColumn;
+  }
+  export type ConditionExpressionList = ConditionExpression[];
   export type ConditionList = Condition[];
   export type ConfigValueString = string;
   export type ConfigurationMap = {[key: string]: ConfigurationObject};
@@ -5542,6 +5557,8 @@ declare namespace Glue {
      */
     FederatedDatabase?: FederatedDatabase;
   }
+  export type DatabaseAttributes = "NAME"|string;
+  export type DatabaseAttributesList = DatabaseAttributes[];
   export interface DatabaseIdentifier {
     /**
      * The ID of the Data Catalog in which the database resides.
@@ -5588,6 +5605,8 @@ declare namespace Glue {
   }
   export type DatabaseList = Database[];
   export type DatabaseName = string;
+  export type DatabrewCondition = string;
+  export type DatabrewConditionValue = string;
   export interface Datatype {
     /**
      * The datatype of the value.
@@ -7321,6 +7340,10 @@ declare namespace Glue {
      * Allows you to specify that you want to list the databases shared with your account. The allowable values are FEDERATED, FOREIGN or ALL.    If set to FEDERATED, will list the federated databases (referencing an external entity) shared with your account.   If set to FOREIGN, will list the databases shared with your account.    If set to ALL, will list the databases shared with your account, as well as the databases in yor local account.   
      */
     ResourceShareType?: ResourceShareType;
+    /**
+     * Specifies the database fields returned by the GetDatabases call. This parameter doesn’t accept an empty list. The request must include the NAME.
+     */
+    AttributesToGet?: DatabaseAttributesList;
   }
   export interface GetDatabasesResponse {
     /**
@@ -10734,6 +10757,7 @@ declare namespace Glue {
      */
     IcebergInput?: IcebergInput;
   }
+  export type Operation = string;
   export interface Option {
     /**
      * Specifies the value of the option.
@@ -10851,6 +10875,9 @@ declare namespace Glue {
   export type PageSize = number;
   export type PaginationToken = string;
   export type ParamType = "str"|"int"|"float"|"complex"|"bool"|"list"|"null"|string;
+  export type ParameterMap = {[key: string]: ParameterValue};
+  export type ParameterName = string;
+  export type ParameterValue = string;
   export type ParametersMap = {[key: string]: ParametersMapValue};
   export type ParametersMapValue = string;
   export type ParquetCompressionType = "snappy"|"lzo"|"gzip"|"uncompressed"|"none"|string;
@@ -11267,7 +11294,21 @@ declare namespace Glue {
     /**
      * A reference to the DataBrew recipe used by the node.
      */
-    RecipeReference: RecipeReference;
+    RecipeReference?: RecipeReference;
+    /**
+     * Transform steps used in the recipe node.
+     */
+    RecipeSteps?: RecipeSteps;
+  }
+  export interface RecipeAction {
+    /**
+     * The operation of the recipe action.
+     */
+    Operation: Operation;
+    /**
+     * The parameters of the recipe action.
+     */
+    Parameters?: ParameterMap;
   }
   export interface RecipeReference {
     /**
@@ -11279,6 +11320,17 @@ declare namespace Glue {
      */
     RecipeVersion: RecipeVersion;
   }
+  export interface RecipeStep {
+    /**
+     * The transformation action of the recipe step.
+     */
+    Action: RecipeAction;
+    /**
+     * The condition expressions for the recipe step.
+     */
+    ConditionExpressions?: ConditionExpressionList;
+  }
+  export type RecipeSteps = RecipeStep[];
   export type RecipeVersion = string;
   export type RecordsCount = number;
   export type RecrawlBehavior = "CRAWL_EVERYTHING"|"CRAWL_NEW_FOLDERS_ONLY"|"CRAWL_EVENT_MODE"|string;
@@ -13612,6 +13664,7 @@ declare namespace Glue {
   }
   export type TagValue = string;
   export type TagsMap = {[key: string]: TagValue};
+  export type TargetColumn = string;
   export type TargetFormat = "json"|"csv"|"avro"|"orc"|"parquet"|"hudi"|"delta"|string;
   export interface TaskRun {
     /**

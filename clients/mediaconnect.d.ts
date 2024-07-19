@@ -752,6 +752,10 @@ declare namespace MediaConnect {
      * The name of the VPC interface attachment to use for this output.
      */
     VpcInterfaceAttachment?: VpcInterfaceAttachment;
+    /**
+     * An indication of whether the new output should be enabled or disabled as soon as it is created. If you don't specify the outputStatus field in your request, MediaConnect sets it to ENABLED.
+     */
+    OutputStatus?: OutputStatus;
   }
   export type Algorithm = "aes128"|"aes192"|"aes256"|string;
   export interface Bridge {
@@ -2036,7 +2040,12 @@ declare namespace MediaConnect {
      * The bridge output ports currently in use.
      */
     BridgePorts?: __listOf__integer;
+    /**
+     * An indication of whether the output is transmitting data or not.
+     */
+    OutputStatus?: OutputStatus;
   }
+  export type OutputStatus = "ENABLED"|"DISABLED"|string;
   export type PriceUnits = "HOURLY"|string;
   export type Protocol = "zixi-push"|"rtp-fec"|"rtp"|"zixi-pull"|"rist"|"st2110-jpegxs"|"cdi"|"srt-listener"|"srt-caller"|"fujitsu-qos"|"udp"|string;
   export interface PurchaseOfferingRequest {
@@ -2904,6 +2913,10 @@ declare namespace MediaConnect {
      * The name of the VPC interface attachment to use for this output.
      */
     VpcInterfaceAttachment?: VpcInterfaceAttachment;
+    /**
+     * An indication of whether the output should transmit data or not. If you don't specify the outputStatus field in your request, MediaConnect leaves the value unchanged.
+     */
+    OutputStatus?: OutputStatus;
   }
   export interface UpdateFlowOutputResponse {
     /**

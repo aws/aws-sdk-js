@@ -8,7 +8,10 @@
     "protocol": "rest-json",
     "jsonVersion": "1.1",
     "uid": "mq-2017-11-27",
-    "signatureVersion": "v4"
+    "signatureVersion": "v4",
+    "auth": [
+      "aws.auth#sigv4"
+    ]
   },
   "operations": {
     "CreateBroker": {
@@ -1010,7 +1013,7 @@
         "EngineVersion": {
           "shape": "__string",
           "locationName": "engineVersion",
-          "documentation": "<p>Required. The broker engine's version. For a list of supported engine versions, see, <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html\">Supported engines</a>.</p>"
+          "documentation": "<p>The broker engine version. Defaults to the latest available version for the specified broker engine type. For a list of supported engine versions, see the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html\">ActiveMQ version management</a> and the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html\">RabbitMQ version management</a> sections in the Amazon MQ Developer Guide.</p>"
         },
         "Id": {
           "shape": "__string",
@@ -1122,7 +1125,7 @@
         "AutoMinorVersionUpgrade": {
           "shape": "__boolean",
           "locationName": "autoMinorVersionUpgrade",
-          "documentation": "<p>Enables automatic upgrades to new minor versions for brokers, as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window of the broker or after a manual broker reboot. Set to true by default, if no value is specified.</p>"
+          "documentation": "<p>Enables automatic upgrades to new patch versions for brokers as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window or after a manual broker reboot. Set to true by default, if no value is specified.</p> <note><p>Must be set to true for ActiveMQ brokers version 5.18 and above and for RabbitMQ brokers version 3.13 and above.</p></note>"
         },
         "BrokerName": {
           "shape": "__string",
@@ -1158,7 +1161,7 @@
         "EngineVersion": {
           "shape": "__string",
           "locationName": "engineVersion",
-          "documentation": "<p>Required. The broker engine's version. For a list of supported engine versions, see <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html\">Supported engines</a>.</p>"
+          "documentation": "<p>The broker engine version. Defaults to the latest available version for the specified broker engine type. For more information, see the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html\">ActiveMQ version management</a> and the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html\">RabbitMQ version management</a> sections in the Amazon MQ Developer Guide.</p>"
         },
         "HostInstanceType": {
           "shape": "__string",
@@ -1223,9 +1226,7 @@
       },
       "documentation": "<p>Creates a broker using the specified properties.</p>",
       "required": [
-        "EngineVersion",
         "HostInstanceType",
-        "AutoMinorVersionUpgrade",
         "Users",
         "BrokerName",
         "DeploymentMode",
@@ -1264,7 +1265,7 @@
         "EngineVersion": {
           "shape": "__string",
           "locationName": "engineVersion",
-          "documentation": "<p>Required. The broker engine's version. For a list of supported engine versions, see <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html\">Supported engines</a>.</p>"
+          "documentation": "<p>The broker engine version. Defaults to the latest available version for the specified broker engine type. For more information, see the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html\">ActiveMQ version management</a> and the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html\">RabbitMQ version management</a> sections in the Amazon MQ Developer Guide.</p>"
         },
         "Name": {
           "shape": "__string",
@@ -1279,7 +1280,6 @@
       },
       "documentation": "<p>Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version).</p>",
       "required": [
-        "EngineVersion",
         "EngineType",
         "Name"
       ]
@@ -1652,7 +1652,7 @@
         "AutoMinorVersionUpgrade": {
           "shape": "__boolean",
           "locationName": "autoMinorVersionUpgrade",
-          "documentation": "<p>Enables automatic upgrades to new minor versions for brokers, as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window of the broker or after a manual broker reboot.</p>"
+          "documentation": "<p>Enables automatic upgrades to new patch versions for brokers as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window or after a manual broker reboot.</p>"
         },
         "BrokerArn": {
           "shape": "__string",
@@ -1707,7 +1707,7 @@
         "EngineVersion": {
           "shape": "__string",
           "locationName": "engineVersion",
-          "documentation": "<p>The broker engine's version. For a list of supported engine versions, see <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html\">Supported engines</a>.</p>"
+          "documentation": "<p>The broker engine version. For more information, see the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html\">ActiveMQ version management</a> and the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html\">RabbitMQ version management</a> sections in the Amazon MQ Developer Guide.</p>"
         },
         "HostInstanceType": {
           "shape": "__string",
@@ -1737,7 +1737,7 @@
         "PendingEngineVersion": {
           "shape": "__string",
           "locationName": "pendingEngineVersion",
-          "documentation": "<p>The broker engine version to upgrade to. For a list of supported engine versions, see <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html\">Supported engines</a>.</p>"
+          "documentation": "<p>The broker engine version to upgrade to. For more information, see the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html\">ActiveMQ version management</a> and the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html\">RabbitMQ version management</a> sections in the Amazon MQ Developer Guide.</p>"
         },
         "PendingHostInstanceType": {
           "shape": "__string",
@@ -1851,7 +1851,7 @@
         "EngineVersion": {
           "shape": "__string",
           "locationName": "engineVersion",
-          "documentation": "<p>Required. The broker engine's version. For a list of supported engine versions, see, <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html\">Supported engines</a>.</p>"
+          "documentation": "<p>The broker engine version. Defaults to the latest available version for the specified broker engine type. For a list of supported engine versions, see the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html\">ActiveMQ version management</a> and the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html\">RabbitMQ version management</a> sections in the Amazon MQ Developer Guide.</p>"
         },
         "Id": {
           "shape": "__string",
@@ -2517,7 +2517,7 @@
         "AutoMinorVersionUpgrade": {
           "shape": "__boolean",
           "locationName": "autoMinorVersionUpgrade",
-          "documentation": "<p>Enables automatic upgrades to new minor versions for brokers, as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window of the broker or after a manual broker reboot.</p>"
+          "documentation": "<p>Enables automatic upgrades to new patch versions for brokers as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window or after a manual broker reboot.</p> <note><p>Must be set to true for ActiveMQ brokers version 5.18 and above and for RabbitMQ brokers version 3.13 and above.</p></note>"
         },
         "BrokerId": {
           "shape": "__string",
@@ -2533,7 +2533,7 @@
         "EngineVersion": {
           "shape": "__string",
           "locationName": "engineVersion",
-          "documentation": "<p>The broker engine version. For a list of supported engine versions, see <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html\">Supported engines</a>.</p>"
+          "documentation": "<p>The broker engine version. For more information, see the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html\">ActiveMQ version management</a> and the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html\">RabbitMQ version management</a> sections in the Amazon MQ Developer Guide.</p> <note><p>When upgrading to ActiveMQ version 5.18 and above or RabbitMQ version 3.13 and above, you must have autoMinorVersionUpgrade set to true for the broker.</p></note>"
         },
         "HostInstanceType": {
           "shape": "__string",
@@ -2582,7 +2582,7 @@
         "AutoMinorVersionUpgrade": {
           "shape": "__boolean",
           "locationName": "autoMinorVersionUpgrade",
-          "documentation": "<p>The new boolean value that specifies whether broker engines automatically upgrade to new minor versions as new versions are released and supported by Amazon MQ.</p>"
+          "documentation": "<p>Enables automatic upgrades to new patch versions for brokers as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window or after a manual broker reboot.</p>"
         },
         "BrokerId": {
           "shape": "__string",
@@ -2597,7 +2597,7 @@
         "EngineVersion": {
           "shape": "__string",
           "locationName": "engineVersion",
-          "documentation": "<p>The broker engine version to upgrade to. For a list of supported engine versions, see <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html\">Supported engines</a>.</p>"
+          "documentation": "<p>The broker engine version to upgrade to. For more information, see the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html\">ActiveMQ version management</a> and the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html\">RabbitMQ version management</a> sections in the Amazon MQ Developer Guide.</p>"
         },
         "HostInstanceType": {
           "shape": "__string",

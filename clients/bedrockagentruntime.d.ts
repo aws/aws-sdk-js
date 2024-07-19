@@ -13,13 +13,37 @@ declare class BedrockAgentRuntime extends Service {
   constructor(options?: BedrockAgentRuntime.Types.ClientConfiguration)
   config: Config & BedrockAgentRuntime.Types.ClientConfiguration;
   /**
-   *  The CLI doesn't support InvokeAgent.  Sends a prompt for the agent to process and respond to. Note the following fields for the request:   To continue the same conversation with an agent, use the same sessionId value in the request.   To activate trace enablement, turn enableTrace to true. Trace enablement helps you follow the agent's reasoning process that led it to the information it processed, the actions it took, and the final result it yielded. For more information, see Trace enablement.   End a conversation by setting endSession to true.   In the sessionState object, you can include attributes for the session or prompt or, if you configured an action group to return control, results from invocation of the action group.   The response is returned in the bytes field of the chunk object.   The attribution object contains citations for parts of the response.   If you set enableTrace to true in the request, you can trace the agent's steps and reasoning process that led it to the response.   If the action predicted was configured to return control, the response returns parameters for the action, elicited from the user, in the returnControl field.   Errors are also surfaced in the response.  
+   * Deletes memory from the specified memory identifier.
+   */
+  deleteAgentMemory(params: BedrockAgentRuntime.Types.DeleteAgentMemoryRequest, callback?: (err: AWSError, data: BedrockAgentRuntime.Types.DeleteAgentMemoryResponse) => void): Request<BedrockAgentRuntime.Types.DeleteAgentMemoryResponse, AWSError>;
+  /**
+   * Deletes memory from the specified memory identifier.
+   */
+  deleteAgentMemory(callback?: (err: AWSError, data: BedrockAgentRuntime.Types.DeleteAgentMemoryResponse) => void): Request<BedrockAgentRuntime.Types.DeleteAgentMemoryResponse, AWSError>;
+  /**
+   * Gets the sessions stored in the memory of the agent.
+   */
+  getAgentMemory(params: BedrockAgentRuntime.Types.GetAgentMemoryRequest, callback?: (err: AWSError, data: BedrockAgentRuntime.Types.GetAgentMemoryResponse) => void): Request<BedrockAgentRuntime.Types.GetAgentMemoryResponse, AWSError>;
+  /**
+   * Gets the sessions stored in the memory of the agent.
+   */
+  getAgentMemory(callback?: (err: AWSError, data: BedrockAgentRuntime.Types.GetAgentMemoryResponse) => void): Request<BedrockAgentRuntime.Types.GetAgentMemoryResponse, AWSError>;
+  /**
+   *  The CLI doesn't support streaming operations in Amazon Bedrock, including InvokeAgent.  Sends a prompt for the agent to process and respond to. Note the following fields for the request:   To continue the same conversation with an agent, use the same sessionId value in the request.   To activate trace enablement, turn enableTrace to true. Trace enablement helps you follow the agent's reasoning process that led it to the information it processed, the actions it took, and the final result it yielded. For more information, see Trace enablement.   End a conversation by setting endSession to true.   In the sessionState object, you can include attributes for the session or prompt or, if you configured an action group to return control, results from invocation of the action group.   The response is returned in the bytes field of the chunk object.   The attribution object contains citations for parts of the response.   If you set enableTrace to true in the request, you can trace the agent's steps and reasoning process that led it to the response.   If the action predicted was configured to return control, the response returns parameters for the action, elicited from the user, in the returnControl field.   Errors are also surfaced in the response.  
    */
   invokeAgent(params: BedrockAgentRuntime.Types.InvokeAgentRequest, callback?: (err: AWSError, data: BedrockAgentRuntime.Types.InvokeAgentResponse) => void): Request<BedrockAgentRuntime.Types.InvokeAgentResponse, AWSError>;
   /**
-   *  The CLI doesn't support InvokeAgent.  Sends a prompt for the agent to process and respond to. Note the following fields for the request:   To continue the same conversation with an agent, use the same sessionId value in the request.   To activate trace enablement, turn enableTrace to true. Trace enablement helps you follow the agent's reasoning process that led it to the information it processed, the actions it took, and the final result it yielded. For more information, see Trace enablement.   End a conversation by setting endSession to true.   In the sessionState object, you can include attributes for the session or prompt or, if you configured an action group to return control, results from invocation of the action group.   The response is returned in the bytes field of the chunk object.   The attribution object contains citations for parts of the response.   If you set enableTrace to true in the request, you can trace the agent's steps and reasoning process that led it to the response.   If the action predicted was configured to return control, the response returns parameters for the action, elicited from the user, in the returnControl field.   Errors are also surfaced in the response.  
+   *  The CLI doesn't support streaming operations in Amazon Bedrock, including InvokeAgent.  Sends a prompt for the agent to process and respond to. Note the following fields for the request:   To continue the same conversation with an agent, use the same sessionId value in the request.   To activate trace enablement, turn enableTrace to true. Trace enablement helps you follow the agent's reasoning process that led it to the information it processed, the actions it took, and the final result it yielded. For more information, see Trace enablement.   End a conversation by setting endSession to true.   In the sessionState object, you can include attributes for the session or prompt or, if you configured an action group to return control, results from invocation of the action group.   The response is returned in the bytes field of the chunk object.   The attribution object contains citations for parts of the response.   If you set enableTrace to true in the request, you can trace the agent's steps and reasoning process that led it to the response.   If the action predicted was configured to return control, the response returns parameters for the action, elicited from the user, in the returnControl field.   Errors are also surfaced in the response.  
    */
   invokeAgent(callback?: (err: AWSError, data: BedrockAgentRuntime.Types.InvokeAgentResponse) => void): Request<BedrockAgentRuntime.Types.InvokeAgentResponse, AWSError>;
+  /**
+   * Invokes an alias of a flow to run the inputs that you specify and return the output of each node as a stream. If there's an error, the error is returned. For more information, see Test a flow in Amazon Bedrock in the Amazon Bedrock User Guide.
+   */
+  invokeFlow(params: BedrockAgentRuntime.Types.InvokeFlowRequest, callback?: (err: AWSError, data: BedrockAgentRuntime.Types.InvokeFlowResponse) => void): Request<BedrockAgentRuntime.Types.InvokeFlowResponse, AWSError>;
+  /**
+   * Invokes an alias of a flow to run the inputs that you specify and return the output of each node as a stream. If there's an error, the error is returned. For more information, see Test a flow in Amazon Bedrock in the Amazon Bedrock User Guide.
+   */
+  invokeFlow(callback?: (err: AWSError, data: BedrockAgentRuntime.Types.InvokeFlowResponse) => void): Request<BedrockAgentRuntime.Types.InvokeFlowResponse, AWSError>;
   /**
    * Queries a knowledge base and retrieves information from it.
    */
@@ -51,9 +75,17 @@ declare namespace BedrockAgentRuntime {
      */
     apiPath?: ApiPath;
     /**
+     * How fulfillment of the action is handled. For more information, see Handling fulfillment of the action.
+     */
+    executionType?: ExecutionType;
+    /**
      * The function in the action group to call.
      */
     function?: Function;
+    /**
+     * The unique identifier of the invocation. Only returned if the executionType is RETURN_CONTROL.
+     */
+    invocationId?: String;
     /**
      * The parameters in the Lambda input event.
      */
@@ -183,6 +215,16 @@ declare namespace BedrockAgentRuntime {
      */
     identifier: Identifier;
   }
+  export interface ByteContentFile {
+    /**
+     * The byte value of the file to attach, encoded as Base-64 string. The maximum size of all files that is attached is 10MB. You can attach a maximum of 5 files. 
+     */
+    data: ByteContentBlob;
+    /**
+     * The MIME type of data contained in the file used for chat.
+     */
+    mediaType: MimeType;
+  }
   export interface Citation {
     /**
      * Contains the generated response and metadata 
@@ -194,6 +236,34 @@ declare namespace BedrockAgentRuntime {
     retrievedReferences?: RetrievedReferences;
   }
   export type Citations = Citation[];
+  export interface CodeInterpreterInvocationInput {
+    /**
+     * The code for the code interpreter to use.
+     */
+    code?: String;
+    /**
+     * Files that are uploaded for code interpreter to use.
+     */
+    files?: Files;
+  }
+  export interface CodeInterpreterInvocationOutput {
+    /**
+     * Contains the error returned from code execution.
+     */
+    executionError?: String;
+    /**
+     * Contains the successful output returned from code execution
+     */
+    executionOutput?: String;
+    /**
+     * Indicates if the execution of the code timed out.
+     */
+    executionTimeout?: Boolean;
+    /**
+     * Contains output files, if generated by code execution.
+     */
+    files?: Files;
+  }
   export interface ConflictException {
     message?: NonBlankString;
   }
@@ -206,6 +276,23 @@ declare namespace BedrockAgentRuntime {
   export type ContentMap = {[key: string]: Parameters};
   export type ContentType = string;
   export type CreationMode = "DEFAULT"|"OVERRIDDEN"|string;
+  export type DateTimestamp = Date;
+  export interface DeleteAgentMemoryRequest {
+    /**
+     * The unique identifier of an alias of an agent.
+     */
+    agentAliasId: AgentAliasId;
+    /**
+     * The unique identifier of the agent to which the alias belongs.
+     */
+    agentId: AgentId;
+    /**
+     * The unique identifier of the memory.
+     */
+    memoryId?: MemoryId;
+  }
+  export interface DeleteAgentMemoryResponse {
+  }
   export interface DependencyFailedException {
     message?: NonBlankString;
     /**
@@ -213,7 +300,10 @@ declare namespace BedrockAgentRuntime {
      */
     resourceName?: NonBlankString;
   }
+  export interface Document {
+  }
   export type Double = number;
+  export type ExecutionType = "LAMBDA"|"RETURN_CONTROL"|string;
   export interface ExternalSource {
     /**
      * The identifier, contentType, and data of the external source wrapper object.
@@ -273,6 +363,30 @@ declare namespace BedrockAgentRuntime {
      */
     traceId?: TraceId;
   }
+  export type FileBody = Buffer|Uint8Array|Blob|string;
+  export interface FilePart {
+    /**
+     * Files containing intermediate response for the user.
+     */
+    files?: OutputFiles;
+  }
+  export interface FileSource {
+    /**
+     * The data and the text of the attached files.
+     */
+    byteContent?: ByteContentFile;
+    /**
+     * The s3 location of the files to attach.
+     */
+    s3Location?: S3ObjectFile;
+    /**
+     * The source type of the files to attach.
+     */
+    sourceType: FileSourceType;
+  }
+  export type FileSourceType = "S3"|"BYTE_CONTENT"|string;
+  export type FileUseCase = "CODE_INTERPRETER"|"CHAT"|string;
+  export type Files = String[];
   export interface FilterAttribute {
     /**
      * The name that the metadata attribute must match.
@@ -293,6 +407,57 @@ declare namespace BedrockAgentRuntime {
     text?: FinalResponseString;
   }
   export type FinalResponseString = string;
+  export type FlowAliasIdentifier = string;
+  export interface FlowCompletionEvent {
+    /**
+     * The reason that the flow completed.
+     */
+    completionReason: FlowCompletionReason;
+  }
+  export type FlowCompletionReason = "SUCCESS"|string;
+  export type FlowIdentifier = string;
+  export interface FlowInput {
+    /**
+     * Contains information about an input into the flow.
+     */
+    content: FlowInputContent;
+    /**
+     * A name for the input of the flow input node.
+     */
+    nodeName: NodeName;
+    /**
+     * A name for the output of the flow input node.
+     */
+    nodeOutputName: NodeOutputName;
+  }
+  export interface FlowInputContent {
+    /**
+     * The input for the flow input node.
+     */
+    document?: Document;
+  }
+  export type FlowInputs = FlowInput[];
+  export interface FlowOutputContent {
+    /**
+     * A name for the output of the flow.
+     */
+    document?: Document;
+  }
+  export interface FlowOutputEvent {
+    /**
+     * The output of the node.
+     */
+    content: FlowOutputContent;
+    /**
+     * The name of the node to which input was provided.
+     */
+    nodeName: NodeName;
+    /**
+     * The type of node to which input was provided.
+     */
+    nodeType: NodeType;
+  }
+  export type FlowResponseStream = EventStream<{accessDeniedException?:AccessDeniedException,badGatewayException?:BadGatewayException,conflictException?:ConflictException,dependencyFailedException?:DependencyFailedException,flowCompletionEvent?:FlowCompletionEvent,flowOutputEvent?:FlowOutputEvent,internalServerException?:InternalServerException,resourceNotFoundException?:ResourceNotFoundException,serviceQuotaExceededException?:ServiceQuotaExceededException,throttlingException?:ThrottlingException,validationException?:ValidationException}>;
   export type Function = string;
   export interface FunctionInvocationInput {
     /**
@@ -364,6 +529,42 @@ declare namespace BedrockAgentRuntime {
      * Contains the template for the prompt that's sent to the model for response generation.
      */
     promptTemplate?: PromptTemplate;
+  }
+  export interface GetAgentMemoryRequest {
+    /**
+     * The unique identifier of an alias of an agent.
+     */
+    agentAliasId: AgentAliasId;
+    /**
+     * The unique identifier of the agent to which the alias belongs.
+     */
+    agentId: AgentId;
+    /**
+     * The maximum number of items to return in the response. If the total number of results is greater than this value, use the token returned in the response in the nextToken field when making another request to return the next batch of results.
+     */
+    maxItems?: MaxResults;
+    /**
+     * The unique identifier of the memory. 
+     */
+    memoryId: MemoryId;
+    /**
+     * The type of memory.
+     */
+    memoryType: MemoryType;
+    /**
+     * If the total number of results is greater than the maxItems value provided in the request, enter the token returned in the nextToken field in the response in this field to return the next batch of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface GetAgentMemoryResponse {
+    /**
+     * Contains details of the sessions stored in the memory
+     */
+    memoryContents?: Memories;
+    /**
+     * If the total number of results is greater than the maxItems value provided in the request, use this token when making another request in the nextToken field to return the next batch of results.
+     */
+    nextToken?: NextToken;
   }
   export type GuadrailAction = "INTERVENED"|"NONE"|string;
   export type GuardrailAction = "INTERVENED"|"NONE"|string;
@@ -576,6 +777,21 @@ declare namespace BedrockAgentRuntime {
      */
     topP?: TopP;
   }
+  export interface InputFile {
+    /**
+     * The name of the source file.
+     */
+    name: String;
+    /**
+     * Specifies where the files are located.
+     */
+    source: FileSource;
+    /**
+     * Specifies how the source files will be used by the code interpreter.
+     */
+    useCase: FileUseCase;
+  }
+  export type InputFiles = InputFile[];
   export type InputText = string;
   export type Integer = number;
   export interface InternalServerException {
@@ -586,6 +802,10 @@ declare namespace BedrockAgentRuntime {
      * Contains information about the action group to be invoked.
      */
     actionGroupInvocationInput?: ActionGroupInvocationInput;
+    /**
+     * Contains information about the code interpreter to be invoked.
+     */
+    codeInterpreterInvocationInput?: CodeInterpreterInvocationInput;
     /**
      * Specifies whether the agent is invoking an action group or a knowledge base.
      */
@@ -620,7 +840,7 @@ declare namespace BedrockAgentRuntime {
      */
     functionResult?: FunctionResult;
   }
-  export type InvocationType = "ACTION_GROUP"|"KNOWLEDGE_BASE"|"FINISH"|string;
+  export type InvocationType = "ACTION_GROUP"|"KNOWLEDGE_BASE"|"FINISH"|"ACTION_GROUP_CODE_INTERPRETER"|string;
   export interface InvokeAgentRequest {
     /**
      * The alias of the agent to use.
@@ -643,6 +863,10 @@ declare namespace BedrockAgentRuntime {
      */
     inputText?: InputText;
     /**
+     * The unique identifier of the agent memory.
+     */
+    memoryId?: MemoryId;
+    /**
      * The unique identifier of the session. Use the same value across requests to continue the same conversation.
      */
     sessionId: SessionId;
@@ -661,11 +885,46 @@ declare namespace BedrockAgentRuntime {
      */
     contentType: MimeType;
     /**
+     * The unique identifier of the agent memory.
+     */
+    memoryId?: MemoryId;
+    /**
      * The unique identifier of the session with the agent.
      */
     sessionId: SessionId;
   }
+  export interface InvokeFlowRequest {
+    /**
+     * The unique identifier of the flow alias.
+     */
+    flowAliasIdentifier: FlowAliasIdentifier;
+    /**
+     * The unique identifier of the flow.
+     */
+    flowIdentifier: FlowIdentifier;
+    /**
+     * A list of objects, each containing information about an input into the flow.
+     */
+    inputs: FlowInputs;
+  }
+  export interface InvokeFlowResponse {
+    /**
+     * The output of the flow, returned as a stream. If there's an error, the error is returned.
+     */
+    responseStream: FlowResponseStream;
+  }
   export type KmsKeyArn = string;
+  export interface KnowledgeBaseConfiguration {
+    /**
+     * The unique identifier for a knowledge base attached to the agent.
+     */
+    knowledgeBaseId: KnowledgeBaseId;
+    /**
+     * The configurations to apply to the knowledge base during query. For more information, see Query configurations.
+     */
+    retrievalConfiguration: KnowledgeBaseRetrievalConfiguration;
+  }
+  export type KnowledgeBaseConfigurations = KnowledgeBaseConfiguration[];
   export type KnowledgeBaseId = string;
   export interface KnowledgeBaseLookupInput {
     /**
@@ -718,7 +977,7 @@ declare namespace BedrockAgentRuntime {
   export type KnowledgeBaseRetrievalResults = KnowledgeBaseRetrievalResult[];
   export interface KnowledgeBaseRetrieveAndGenerateConfiguration {
     /**
-     * Contains configurations for response generation based on the knowwledge base query results.
+     * Contains configurations for response generation based on the knowledge base query results.
      */
     generationConfiguration?: GenerationConfiguration;
     /**
@@ -729,6 +988,10 @@ declare namespace BedrockAgentRuntime {
      * The ARN of the foundation model used to generate a response.
      */
     modelArn: BedrockModelArn;
+    /**
+     * Settings for how the model processes the prompt prior to retrieval and generation.
+     */
+    orchestrationConfiguration?: OrchestrationConfiguration;
     /**
      * Contains configurations for how to retrieve and return the knowledge base query.
      */
@@ -750,8 +1013,40 @@ declare namespace BedrockAgentRuntime {
   }
   export type KnowledgeBaseVectorSearchConfigurationNumberOfResultsInteger = number;
   export type LambdaArn = string;
+  export type MaxResults = number;
   export type MaxTokens = number;
   export type MaximumLength = number;
+  export type Memories = Memory[];
+  export interface Memory {
+    /**
+     * Contains summary of a session.
+     */
+    sessionSummary?: MemorySessionSummary;
+  }
+  export type MemoryId = string;
+  export interface MemorySessionSummary {
+    /**
+     * The unique identifier of the memory where the session summary is stored.
+     */
+    memoryId?: MemoryId;
+    /**
+     * The time when the memory duration for the session is set to end.
+     */
+    sessionExpiryTime?: DateTimestamp;
+    /**
+     * The identifier for this session.
+     */
+    sessionId?: SessionId;
+    /**
+     * The start time for this session.
+     */
+    sessionStartTime?: DateTimestamp;
+    /**
+     * The summarized text for this session.
+     */
+    summaryText?: SummaryText;
+  }
+  export type MemoryType = "SESSION_SUMMARY"|string;
   export type MimeType = string;
   export interface ModelInvocationInput {
     /**
@@ -784,12 +1079,19 @@ declare namespace BedrockAgentRuntime {
     type?: PromptType;
   }
   export type NextToken = string;
+  export type NodeName = string;
+  export type NodeOutputName = string;
+  export type NodeType = "FlowInputNode"|"FlowOutputNode"|"LambdaFunctionNode"|"KnowledgeBaseNode"|"PromptNode"|"ConditionNode"|"LexNode"|string;
   export type NonBlankString = string;
   export interface Observation {
     /**
      * Contains the JSON-formatted string returned by the API invoked by the action group.
      */
     actionGroupInvocationOutput?: ActionGroupInvocationOutput;
+    /**
+     * Contains the JSON-formatted string returned by the API invoked by the code interpreter.
+     */
+    codeInterpreterInvocationOutput?: CodeInterpreterInvocationOutput;
     /**
      * Contains details about the response to the user.
      */
@@ -811,6 +1113,12 @@ declare namespace BedrockAgentRuntime {
      */
     type?: Type;
   }
+  export interface OrchestrationConfiguration {
+    /**
+     * To split up the prompt and retrieve multiple sources, set the transformation type to QUERY_DECOMPOSITION.
+     */
+    queryTransformationConfiguration: QueryTransformationConfiguration;
+  }
   export interface OrchestrationTrace {
     /**
      * Contains information pertaining to the action group or knowledge base that is being invoked.
@@ -829,6 +1137,21 @@ declare namespace BedrockAgentRuntime {
      */
     rationale?: Rationale;
   }
+  export interface OutputFile {
+    /**
+     * The byte count of files that contains response from code interpreter.
+     */
+    bytes?: FileBody;
+    /**
+     * The name of the file containing response from code interpreter.
+     */
+    name?: String;
+    /**
+     * The type of file that contains response from the code interpreter.
+     */
+    type?: MimeType;
+  }
+  export type OutputFiles = OutputFile[];
   export type OutputString = string;
   export interface Parameter {
     /**
@@ -928,6 +1251,13 @@ declare namespace BedrockAgentRuntime {
      */
     properties?: ParameterList;
   }
+  export interface QueryTransformationConfiguration {
+    /**
+     * The type of transformation to apply to the prompt.
+     */
+    type: QueryTransformationType;
+  }
+  export type QueryTransformationType = "QUERY_DECOMPOSITION"|string;
   export type RAGStopSequences = RAGStopSequencesMemberString[];
   export type RAGStopSequencesMemberString = string;
   export interface Rationale {
@@ -962,7 +1292,7 @@ declare namespace BedrockAgentRuntime {
   }
   export type ResponseBody = {[key: string]: ContentBody};
   export type ResponseState = "FAILURE"|"REPROMPT"|string;
-  export type ResponseStream = EventStream<{accessDeniedException?:AccessDeniedException,badGatewayException?:BadGatewayException,chunk?:PayloadPart,conflictException?:ConflictException,dependencyFailedException?:DependencyFailedException,internalServerException?:InternalServerException,resourceNotFoundException?:ResourceNotFoundException,returnControl?:ReturnControlPayload,serviceQuotaExceededException?:ServiceQuotaExceededException,throttlingException?:ThrottlingException,trace?:TracePart,validationException?:ValidationException}>;
+  export type ResponseStream = EventStream<{accessDeniedException?:AccessDeniedException,badGatewayException?:BadGatewayException,chunk?:PayloadPart,conflictException?:ConflictException,dependencyFailedException?:DependencyFailedException,files?:FilePart,internalServerException?:InternalServerException,resourceNotFoundException?:ResourceNotFoundException,returnControl?:ReturnControlPayload,serviceQuotaExceededException?:ServiceQuotaExceededException,throttlingException?:ThrottlingException,trace?:TracePart,validationException?:ValidationException}>;
   export interface RetrievalFilter {
     /**
      * Knowledge base data sources are returned if their metadata attributes fulfill all the filter conditions inside this list.
@@ -1018,6 +1348,12 @@ declare namespace BedrockAgentRuntime {
     stringContains?: FilterAttribute;
   }
   export type RetrievalFilterList = RetrievalFilter[];
+  export interface RetrievalResultConfluenceLocation {
+    /**
+     * The Confluence host URL for the data source location.
+     */
+    url?: String;
+  }
   export interface RetrievalResultContent {
     /**
      * The cited text from the data source.
@@ -1026,24 +1362,58 @@ declare namespace BedrockAgentRuntime {
   }
   export interface RetrievalResultLocation {
     /**
-     * Contains the S3 location of the data source.
+     * The Confluence data source location.
+     */
+    confluenceLocation?: RetrievalResultConfluenceLocation;
+    /**
+     * The S3 data source location.
      */
     s3Location?: RetrievalResultS3Location;
     /**
-     * The type of the location of the data source.
+     * The Salesforce data source location.
+     */
+    salesforceLocation?: RetrievalResultSalesforceLocation;
+    /**
+     * The SharePoint data source location.
+     */
+    sharePointLocation?: RetrievalResultSharePointLocation;
+    /**
+     * The type of data source location.
      */
     type: RetrievalResultLocationType;
+    /**
+     * The web URL/URLs data source location.
+     */
+    webLocation?: RetrievalResultWebLocation;
   }
-  export type RetrievalResultLocationType = "S3"|string;
+  export type RetrievalResultLocationType = "S3"|"WEB"|"CONFLUENCE"|"SALESFORCE"|"SHAREPOINT"|string;
   export type RetrievalResultMetadata = {[key: string]: RetrievalResultMetadataValue};
   export type RetrievalResultMetadataKey = string;
   export interface RetrievalResultMetadataValue {
   }
   export interface RetrievalResultS3Location {
     /**
-     * The S3 URI of the data source.
+     * The S3 URI for the data source location.
      */
     uri?: String;
+  }
+  export interface RetrievalResultSalesforceLocation {
+    /**
+     * The Salesforce host URL for the data source location.
+     */
+    url?: String;
+  }
+  export interface RetrievalResultSharePointLocation {
+    /**
+     * The SharePoint site URL for the data source location.
+     */
+    url?: String;
+  }
+  export interface RetrievalResultWebLocation {
+    /**
+     * The web URL/URLs for the data source location.
+     */
+    url?: String;
   }
   export interface RetrieveAndGenerateConfiguration {
     /**
@@ -1086,7 +1456,7 @@ declare namespace BedrockAgentRuntime {
      */
     sessionConfiguration?: RetrieveAndGenerateSessionConfiguration;
     /**
-     * The unique identifier of the session. Reuse the same value to continue the same session with the knowledge base.
+     * The unique identifier of the session. When you first make a RetrieveAndGenerate request, Amazon Bedrock automatically generates this value. You must reuse this value for all subsequent requests in the same conversational session. This value allows Amazon Bedrock to maintain context and knowledge from previous interactions. You can't explicitly set the sessionId yourself.
      */
     sessionId?: SessionId;
   }
@@ -1104,7 +1474,7 @@ declare namespace BedrockAgentRuntime {
      */
     output: RetrieveAndGenerateOutput;
     /**
-     * The unique identifier of the session. Reuse the same value to continue the same session with the knowledge base.
+     * The unique identifier of the session. When you first make a RetrieveAndGenerate request, Amazon Bedrock automatically generates this value. You must reuse this value for all subsequent requests in the same conversational session. This value allows Amazon Bedrock to maintain context and knowledge from previous interactions. You can't explicitly set the sessionId yourself.
      */
     sessionId: SessionId;
   }
@@ -1175,6 +1545,12 @@ declare namespace BedrockAgentRuntime {
      */
     uri: S3Uri;
   }
+  export interface S3ObjectFile {
+    /**
+     * The uri of the s3 object.
+     */
+    uri: S3Uri;
+  }
   export type S3Uri = string;
   export type SearchType = "HYBRID"|"SEMANTIC"|string;
   export interface ServiceQuotaExceededException {
@@ -1184,9 +1560,17 @@ declare namespace BedrockAgentRuntime {
   export type SessionId = string;
   export interface SessionState {
     /**
+     * Contains information about the files used by code interpreter.
+     */
+    files?: InputFiles;
+    /**
      * The identifier of the invocation of an action. This value must match the invocationId returned in the InvokeAgent response for the action whose results are provided in the returnControlInvocationResults field. For more information, see Return control to the agent developer and Control session context.
      */
     invocationId?: String;
+    /**
+     * An array of configurations, each of which applies to a knowledge base attached to the agent.
+     */
+    knowledgeBaseConfigurations?: KnowledgeBaseConfigurations;
     /**
      * Contains attributes that persist across a prompt and the values of those attributes. These attributes replace the $prompt_session_attributes$ placeholder variable in the orchestration prompt template. For more information, see Prompt template placeholder variables.
      */
@@ -1215,6 +1599,7 @@ declare namespace BedrockAgentRuntime {
   export type SpanStartInteger = number;
   export type StopSequences = String[];
   export type String = string;
+  export type SummaryText = string;
   export type Temperature = number;
   export interface TextInferenceConfig {
     /**

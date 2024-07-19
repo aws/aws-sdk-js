@@ -2,6 +2,9 @@
   "version": "2.0",
   "metadata": {
     "apiVersion": "2023-11-27",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
     "endpointPrefix": "qbusiness",
     "protocol": "rest-json",
     "protocolSettings": {
@@ -164,7 +167,7 @@
           "shape": "ServiceQuotaExceededException"
         }
       ],
-      "documentation": "<p>Creates an Amazon Q Business application.</p> <note> <p>There are new tiers for Amazon Q Business. Not all features in Amazon Q Business Pro are also available in Amazon Q Business Lite. For information on what's included in Amazon Q Business Lite and what's included in Amazon Q Business Pro, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/what-is.html#tiers\">Amazon Q Business tiers</a>. You must use the Amazon Q Business console to assign subscription tiers to users.</p> </note>",
+      "documentation": "<p>Creates an Amazon Q Business application.</p> <note> <p>There are new tiers for Amazon Q Business. Not all features in Amazon Q Business Pro are also available in Amazon Q Business Lite. For information on what's included in Amazon Q Business Lite and what's included in Amazon Q Business Pro, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/tiers.html#user-sub-tiers\">Amazon Q Business tiers</a>. You must use the Amazon Q Business console to assign subscription tiers to users.</p> </note>",
       "idempotent": true
     },
     "CreateDataSource": {
@@ -2361,7 +2364,7 @@
         },
         "containsAny": {
           "shape": "DocumentAttribute",
-          "documentation": "<p>Returns <code>true</code> when a document contains any of the specified document attributes or metadata fields. Supported for the following <a href=\"https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html\">document attribute value types</a>: <code>dateValue</code>, <code>longValue</code>, <code>stringListValue</code> and <code>stringValue</code>.</p>"
+          "documentation": "<p>Returns <code>true</code> when a document contains any of the specified document attributes or metadata fields. Supported for the following <a href=\"https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html\">document attribute value types</a>: <code>stringListValue</code>.</p>"
         },
         "greaterThan": {
           "shape": "DocumentAttribute",
@@ -2672,7 +2675,7 @@
         },
         "parentMessageId": {
           "shape": "MessageId",
-          "documentation": "<p>The identifier of the previous end user text input message in a conversation.</p>"
+          "documentation": "<p>The identifier of the previous system message in a conversation.</p>"
         },
         "attributeFilter": {
           "shape": "AttributeFilter",
@@ -2843,6 +2846,14 @@
         "attachmentsConfiguration": {
           "shape": "AttachmentsConfiguration",
           "documentation": "<p>An option to allow end users to upload files directly during chat.</p>"
+        },
+        "qAppsConfiguration": {
+          "shape": "QAppsConfiguration",
+          "documentation": "<p>An option to allow end users to create and use Amazon Q Apps in the web experience.</p>"
+        },
+        "personalizationConfiguration": {
+          "shape": "PersonalizationConfiguration",
+          "documentation": "<p>Configuration information about chat response personalization. For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/personalizing-chat-responses.html\">Personalizing chat responses</a> </p>"
         }
       }
     },
@@ -2950,7 +2961,7 @@
         },
         "type": {
           "shape": "IndexType",
-          "documentation": "<p>The index type that's suitable for your needs. For more information on what's included in each type of index or index tier, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/what-is.html#tiers\">Amazon Q Business tiers</a>.</p>"
+          "documentation": "<p>The index type that's suitable for your needs. For more information on what's included in each type of index, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/tiers.html#index-tiers\">Amazon Q Business tiers</a>.</p>"
         },
         "description": {
           "shape": "Description",
@@ -4224,6 +4235,14 @@
         "attachmentsConfiguration": {
           "shape": "AppliedAttachmentsConfiguration",
           "documentation": "<p>Settings for whether end users can upload files directly during chat.</p>"
+        },
+        "qAppsConfiguration": {
+          "shape": "QAppsConfiguration",
+          "documentation": "<p>Settings for whether end users can create and use Amazon Q Apps in the web experience.</p>"
+        },
+        "personalizationConfiguration": {
+          "shape": "PersonalizationConfiguration",
+          "documentation": "<p>Configuration information about chat response personalization. For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/personalizing-chat-responses.html\">Personalizing chat responses</a>.</p>"
         }
       }
     },
@@ -5884,6 +5903,26 @@
       "type": "string",
       "sensitive": true
     },
+    "PersonalizationConfiguration": {
+      "type": "structure",
+      "required": [
+        "personalizationControlMode"
+      ],
+      "members": {
+        "personalizationControlMode": {
+          "shape": "PersonalizationControlMode",
+          "documentation": "<p>An option to allow Amazon Q Business to customize chat responses using user specific metadata—specifically, location and job information—in your IAM Identity Center instance.</p>"
+        }
+      },
+      "documentation": "<p>Configuration information about chat response personalization. For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/personalizing-chat-responses.html\">Personalizing chat responses</a>.</p>"
+    },
+    "PersonalizationControlMode": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
     "Plugin": {
       "type": "structure",
       "members": {
@@ -6159,6 +6198,26 @@
     "PutGroupResponse": {
       "type": "structure",
       "members": {}
+    },
+    "QAppsConfiguration": {
+      "type": "structure",
+      "required": [
+        "qAppsControlMode"
+      ],
+      "members": {
+        "qAppsControlMode": {
+          "shape": "QAppsControlMode",
+          "documentation": "<p>Status information about whether end users can create and use Amazon Q Apps in the web experience.</p>"
+        }
+      },
+      "documentation": "<p>Configuration information about Amazon Q Apps. (preview feature)</p>"
+    },
+    "QAppsControlMode": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
     },
     "ReadAccessType": {
       "type": "string",
@@ -6826,6 +6885,14 @@
         "attachmentsConfiguration": {
           "shape": "AttachmentsConfiguration",
           "documentation": "<p>An option to allow end users to upload files directly during chat.</p>"
+        },
+        "qAppsConfiguration": {
+          "shape": "QAppsConfiguration",
+          "documentation": "<p>An option to allow end users to create and use Amazon Q Apps in the web experience.</p>"
+        },
+        "personalizationConfiguration": {
+          "shape": "PersonalizationConfiguration",
+          "documentation": "<p>Configuration information about chat response personalization. For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/personalizing-chat-responses.html\">Personalizing chat responses</a>.</p>"
         }
       }
     },
@@ -7311,5 +7378,5 @@
       }
     }
   },
-  "documentation": "<p>This is the <i>Amazon Q Business</i> API Reference. Amazon Q Business is a fully managed, generative-AI powered enterprise chat assistant that you can deploy within your organization. Amazon Q Business enhances employee productivity by supporting key tasks such as question-answering, knowledge discovery, writing email messages, summarizing text, drafting document outlines, and brainstorming ideas. Users ask questions of Amazon Q Business and get answers that are presented in a conversational manner. For an introduction to the service, see the <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/what-is.html\"> <i>Amazon Q Business User Guide</i> </a>.</p> <p>For an overview of the Amazon Q Business APIs, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/api-ref.html#api-overview\">Overview of Amazon Q Business API operations</a>.</p> <p>For information about the IAM access control permissions you need to use this API, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/iam-roles.html\">IAM roles for Amazon Q Business</a> in the <i>Amazon Q Business User Guide</i>.</p> <p>You can use the following AWS SDKs to access Amazon Q Business APIs:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/sdk-for-cpp\">AWS SDK for C++</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/sdk-for-go\">AWS SDK for Go</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/sdk-for-java\">AWS SDK for Java</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/sdk-for-javascript\">AWS SDK for JavaScript</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/sdk-for-net\">AWS SDK for .NET</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/pythonsdk\">AWS SDK for Python (Boto3)</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/sdk-for-ruby\">AWS SDK for Ruby</a> </p> </li> </ul> <p>The following resources provide additional information about using the Amazon Q Business API:</p> <ul> <li> <p> <i> <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/setting-up.html\">Setting up for Amazon Q Business</a> </i> </p> </li> <li> <p> <i> <a href=\"https://awscli.amazonaws.com/v2/documentation/api/latest/reference/qbusiness/index.html\">Amazon Q Business CLI Reference</a> </i> </p> </li> <li> <p> <i> <a href=\"https://docs.aws.amazon.com/general/latest/gr/amazonq.html\">Amazon Web Services General Reference</a> </i> </p> </li> </ul>"
+  "documentation": "<p>This is the <i>Amazon Q Business</i> API Reference. Amazon Q Business is a fully managed, generative-AI powered enterprise chat assistant that you can deploy within your organization. Amazon Q Business enhances employee productivity by supporting key tasks such as question-answering, knowledge discovery, writing email messages, summarizing text, drafting document outlines, and brainstorming ideas. Users ask questions of Amazon Q Business and get answers that are presented in a conversational manner. For an introduction to the service, see the <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/what-is.html\"> <i>Amazon Q Business User Guide</i> </a>.</p> <p>For an overview of the Amazon Q Business APIs, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/api-ref.html#api-overview\">Overview of Amazon Q Business API operations</a>.</p> <p>For information about the IAM access control permissions you need to use this API, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/iam-roles.html\">IAM roles for Amazon Q Business</a> in the <i>Amazon Q Business User Guide</i>.</p> <p>The following resources provide additional information about using the Amazon Q Business API:</p> <ul> <li> <p> <i> <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/setting-up.html\">Setting up for Amazon Q Business</a> </i> </p> </li> <li> <p> <i> <a href=\"https://awscli.amazonaws.com/v2/documentation/api/latest/reference/qbusiness/index.html\">Amazon Q Business CLI Reference</a> </i> </p> </li> <li> <p> <i> <a href=\"https://docs.aws.amazon.com/general/latest/gr/amazonq.html\">Amazon Web Services General Reference</a> </i> </p> </li> </ul>"
 }

@@ -382,5 +382,6 @@ module.exports = {
   TaxSettings: require('./taxsettings'),
   ApplicationSignals: require('./applicationsignals'),
   PcaConnectorScep: require('./pcaconnectorscep'),
-  AppTest: require('./apptest')
+  AppTest: require('./apptest'),
+  QApps: require('./qapps')
 };

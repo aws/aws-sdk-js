@@ -20,19 +20,19 @@ declare class BedrockAgent extends Service {
    */
   associateAgentKnowledgeBase(callback?: (err: AWSError, data: BedrockAgent.Types.AssociateAgentKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.AssociateAgentKnowledgeBaseResponse, AWSError>;
   /**
-   * Creates an agent that orchestrates interactions between foundation models, data sources, software applications, user conversations, and APIs to carry out tasks to help customers.   Specify the following fields for security purposes.    agentResourceRoleArn – The Amazon Resource Name (ARN) of the role with permissions to invoke API operations on an agent.   (Optional) customerEncryptionKeyArn – The Amazon Resource Name (ARN) of a KMS key to encrypt the creation of the agent.   (Optional) idleSessionTTLinSeconds – Specify the number of seconds for which the agent should maintain session information. After this time expires, the subsequent InvokeAgent request begins a new session.     To override the default prompt behavior for agent orchestration and to use advanced prompts, include a promptOverrideConfiguration object. For more information, see Advanced prompts.   If you agent fails to be created, the response returns a list of failureReasons alongside a list of recommendedActions for you to troubleshoot.  
+   * Creates an agent that orchestrates interactions between foundation models, data sources, software applications, user conversations, and APIs to carry out tasks to help customers.   Specify the following fields for security purposes.    agentResourceRoleArn – The Amazon Resource Name (ARN) of the role with permissions to invoke API operations on an agent.   (Optional) customerEncryptionKeyArn – The Amazon Resource Name (ARN) of a KMS key to encrypt the creation of the agent.   (Optional) idleSessionTTLinSeconds – Specify the number of seconds for which the agent should maintain session information. After this time expires, the subsequent InvokeAgent request begins a new session.     To enable your agent to retain conversational context across multiple sessions, include a memoryConfiguration object. For more information, see Configure memory.   To override the default prompt behavior for agent orchestration and to use advanced prompts, include a promptOverrideConfiguration object. For more information, see Advanced prompts.   If you agent fails to be created, the response returns a list of failureReasons alongside a list of recommendedActions for you to troubleshoot.  
    */
   createAgent(params: BedrockAgent.Types.CreateAgentRequest, callback?: (err: AWSError, data: BedrockAgent.Types.CreateAgentResponse) => void): Request<BedrockAgent.Types.CreateAgentResponse, AWSError>;
   /**
-   * Creates an agent that orchestrates interactions between foundation models, data sources, software applications, user conversations, and APIs to carry out tasks to help customers.   Specify the following fields for security purposes.    agentResourceRoleArn – The Amazon Resource Name (ARN) of the role with permissions to invoke API operations on an agent.   (Optional) customerEncryptionKeyArn – The Amazon Resource Name (ARN) of a KMS key to encrypt the creation of the agent.   (Optional) idleSessionTTLinSeconds – Specify the number of seconds for which the agent should maintain session information. After this time expires, the subsequent InvokeAgent request begins a new session.     To override the default prompt behavior for agent orchestration and to use advanced prompts, include a promptOverrideConfiguration object. For more information, see Advanced prompts.   If you agent fails to be created, the response returns a list of failureReasons alongside a list of recommendedActions for you to troubleshoot.  
+   * Creates an agent that orchestrates interactions between foundation models, data sources, software applications, user conversations, and APIs to carry out tasks to help customers.   Specify the following fields for security purposes.    agentResourceRoleArn – The Amazon Resource Name (ARN) of the role with permissions to invoke API operations on an agent.   (Optional) customerEncryptionKeyArn – The Amazon Resource Name (ARN) of a KMS key to encrypt the creation of the agent.   (Optional) idleSessionTTLinSeconds – Specify the number of seconds for which the agent should maintain session information. After this time expires, the subsequent InvokeAgent request begins a new session.     To enable your agent to retain conversational context across multiple sessions, include a memoryConfiguration object. For more information, see Configure memory.   To override the default prompt behavior for agent orchestration and to use advanced prompts, include a promptOverrideConfiguration object. For more information, see Advanced prompts.   If you agent fails to be created, the response returns a list of failureReasons alongside a list of recommendedActions for you to troubleshoot.  
    */
   createAgent(callback?: (err: AWSError, data: BedrockAgent.Types.CreateAgentResponse) => void): Request<BedrockAgent.Types.CreateAgentResponse, AWSError>;
   /**
-   * Creates an action group for an agent. An action group represents the actions that an agent can carry out for the customer by defining the APIs that an agent can call and the logic for calling them. To allow your agent to request the user for additional information when trying to complete a task, add an action group with the parentActionGroupSignature field set to AMAZON.UserInput. You must leave the description, apiSchema, and actionGroupExecutor fields blank for this action group. During orchestration, if your agent determines that it needs to invoke an API in an action group, but doesn't have enough information to complete the API request, it will invoke this action group instead and return an Observation reprompting the user for more information.
+   * Creates an action group for an agent. An action group represents the actions that an agent can carry out for the customer by defining the APIs that an agent can call and the logic for calling them. To allow your agent to request the user for additional information when trying to complete a task, add an action group with the parentActionGroupSignature field set to AMAZON.UserInput.  To allow your agent to generate, run, and troubleshoot code when trying to complete a task, add an action group with the parentActionGroupSignature field set to AMAZON.CodeInterpreter.  You must leave the description, apiSchema, and actionGroupExecutor fields blank for this action group. During orchestration, if your agent determines that it needs to invoke an API in an action group, but doesn't have enough information to complete the API request, it will invoke this action group instead and return an Observation reprompting the user for more information.
    */
   createAgentActionGroup(params: BedrockAgent.Types.CreateAgentActionGroupRequest, callback?: (err: AWSError, data: BedrockAgent.Types.CreateAgentActionGroupResponse) => void): Request<BedrockAgent.Types.CreateAgentActionGroupResponse, AWSError>;
   /**
-   * Creates an action group for an agent. An action group represents the actions that an agent can carry out for the customer by defining the APIs that an agent can call and the logic for calling them. To allow your agent to request the user for additional information when trying to complete a task, add an action group with the parentActionGroupSignature field set to AMAZON.UserInput. You must leave the description, apiSchema, and actionGroupExecutor fields blank for this action group. During orchestration, if your agent determines that it needs to invoke an API in an action group, but doesn't have enough information to complete the API request, it will invoke this action group instead and return an Observation reprompting the user for more information.
+   * Creates an action group for an agent. An action group represents the actions that an agent can carry out for the customer by defining the APIs that an agent can call and the logic for calling them. To allow your agent to request the user for additional information when trying to complete a task, add an action group with the parentActionGroupSignature field set to AMAZON.UserInput.  To allow your agent to generate, run, and troubleshoot code when trying to complete a task, add an action group with the parentActionGroupSignature field set to AMAZON.CodeInterpreter.  You must leave the description, apiSchema, and actionGroupExecutor fields blank for this action group. During orchestration, if your agent determines that it needs to invoke an API in an action group, but doesn't have enough information to complete the API request, it will invoke this action group instead and return an Observation reprompting the user for more information.
    */
   createAgentActionGroup(callback?: (err: AWSError, data: BedrockAgent.Types.CreateAgentActionGroupResponse) => void): Request<BedrockAgent.Types.CreateAgentActionGroupResponse, AWSError>;
   /**
@@ -44,13 +44,37 @@ declare class BedrockAgent extends Service {
    */
   createAgentAlias(callback?: (err: AWSError, data: BedrockAgent.Types.CreateAgentAliasResponse) => void): Request<BedrockAgent.Types.CreateAgentAliasResponse, AWSError>;
   /**
-   * Sets up a data source to be added to a knowledge base.  You can't change the chunkingConfiguration after you create the data source. 
+   * Creates a data source connector for a knowledge base.  You can't change the chunkingConfiguration after you create the data source connector. 
    */
   createDataSource(params: BedrockAgent.Types.CreateDataSourceRequest, callback?: (err: AWSError, data: BedrockAgent.Types.CreateDataSourceResponse) => void): Request<BedrockAgent.Types.CreateDataSourceResponse, AWSError>;
   /**
-   * Sets up a data source to be added to a knowledge base.  You can't change the chunkingConfiguration after you create the data source. 
+   * Creates a data source connector for a knowledge base.  You can't change the chunkingConfiguration after you create the data source connector. 
    */
   createDataSource(callback?: (err: AWSError, data: BedrockAgent.Types.CreateDataSourceResponse) => void): Request<BedrockAgent.Types.CreateDataSourceResponse, AWSError>;
+  /**
+   * Creates a prompt flow that you can use to send an input through various steps to yield an output. Configure nodes, each of which corresponds to a step of the flow, and create connections between the nodes to create paths to different outputs. For more information, see How it works and Create a flow in Amazon Bedrock in the Amazon Bedrock User Guide.
+   */
+  createFlow(params: BedrockAgent.Types.CreateFlowRequest, callback?: (err: AWSError, data: BedrockAgent.Types.CreateFlowResponse) => void): Request<BedrockAgent.Types.CreateFlowResponse, AWSError>;
+  /**
+   * Creates a prompt flow that you can use to send an input through various steps to yield an output. Configure nodes, each of which corresponds to a step of the flow, and create connections between the nodes to create paths to different outputs. For more information, see How it works and Create a flow in Amazon Bedrock in the Amazon Bedrock User Guide.
+   */
+  createFlow(callback?: (err: AWSError, data: BedrockAgent.Types.CreateFlowResponse) => void): Request<BedrockAgent.Types.CreateFlowResponse, AWSError>;
+  /**
+   * Creates an alias of a flow for deployment. For more information, see Deploy a flow in Amazon Bedrock in the Amazon Bedrock User Guide.
+   */
+  createFlowAlias(params: BedrockAgent.Types.CreateFlowAliasRequest, callback?: (err: AWSError, data: BedrockAgent.Types.CreateFlowAliasResponse) => void): Request<BedrockAgent.Types.CreateFlowAliasResponse, AWSError>;
+  /**
+   * Creates an alias of a flow for deployment. For more information, see Deploy a flow in Amazon Bedrock in the Amazon Bedrock User Guide.
+   */
+  createFlowAlias(callback?: (err: AWSError, data: BedrockAgent.Types.CreateFlowAliasResponse) => void): Request<BedrockAgent.Types.CreateFlowAliasResponse, AWSError>;
+  /**
+   * Creates a version of the flow that you can deploy. For more information, see Deploy a flow in Amazon Bedrock in the Amazon Bedrock User Guide.
+   */
+  createFlowVersion(params: BedrockAgent.Types.CreateFlowVersionRequest, callback?: (err: AWSError, data: BedrockAgent.Types.CreateFlowVersionResponse) => void): Request<BedrockAgent.Types.CreateFlowVersionResponse, AWSError>;
+  /**
+   * Creates a version of the flow that you can deploy. For more information, see Deploy a flow in Amazon Bedrock in the Amazon Bedrock User Guide.
+   */
+  createFlowVersion(callback?: (err: AWSError, data: BedrockAgent.Types.CreateFlowVersionResponse) => void): Request<BedrockAgent.Types.CreateFlowVersionResponse, AWSError>;
   /**
    * Creates a knowledge base that contains data sources from which information can be queried and used by LLMs. To create a knowledge base, you must first set up your data sources and configure a supported vector store. For more information, see Set up your data for ingestion.  If you prefer to let Amazon Bedrock create and manage a vector store for you in Amazon OpenSearch Service, use the console. For more information, see Create a knowledge base.    Provide the name and an optional description.   Provide the Amazon Resource Name (ARN) with permissions to create a knowledge base in the roleArn field.   Provide the embedding model to use in the embeddingModelArn field in the knowledgeBaseConfiguration object.   Provide the configuration for your vector store in the storageConfiguration object.   For an Amazon OpenSearch Service database, use the opensearchServerlessConfiguration object. For more information, see Create a vector store in Amazon OpenSearch Service.   For an Amazon Aurora database, use the RdsConfiguration object. For more information, see Create a vector store in Amazon Aurora.   For a Pinecone database, use the pineconeConfiguration object. For more information, see Create a vector store in Pinecone.   For a Redis Enterprise Cloud database, use the redisEnterpriseCloudConfiguration object. For more information, see Create a vector store in Redis Enterprise Cloud.    
    */
@@ -59,6 +83,22 @@ declare class BedrockAgent extends Service {
    * Creates a knowledge base that contains data sources from which information can be queried and used by LLMs. To create a knowledge base, you must first set up your data sources and configure a supported vector store. For more information, see Set up your data for ingestion.  If you prefer to let Amazon Bedrock create and manage a vector store for you in Amazon OpenSearch Service, use the console. For more information, see Create a knowledge base.    Provide the name and an optional description.   Provide the Amazon Resource Name (ARN) with permissions to create a knowledge base in the roleArn field.   Provide the embedding model to use in the embeddingModelArn field in the knowledgeBaseConfiguration object.   Provide the configuration for your vector store in the storageConfiguration object.   For an Amazon OpenSearch Service database, use the opensearchServerlessConfiguration object. For more information, see Create a vector store in Amazon OpenSearch Service.   For an Amazon Aurora database, use the RdsConfiguration object. For more information, see Create a vector store in Amazon Aurora.   For a Pinecone database, use the pineconeConfiguration object. For more information, see Create a vector store in Pinecone.   For a Redis Enterprise Cloud database, use the redisEnterpriseCloudConfiguration object. For more information, see Create a vector store in Redis Enterprise Cloud.    
    */
   createKnowledgeBase(callback?: (err: AWSError, data: BedrockAgent.Types.CreateKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.CreateKnowledgeBaseResponse, AWSError>;
+  /**
+   * Creates a prompt in your prompt library that you can add to a flow. For more information, see Prompt management in Amazon Bedrock, Create a prompt using Prompt management and Prompt flows in Amazon Bedrock in the Amazon Bedrock User Guide.
+   */
+  createPrompt(params: BedrockAgent.Types.CreatePromptRequest, callback?: (err: AWSError, data: BedrockAgent.Types.CreatePromptResponse) => void): Request<BedrockAgent.Types.CreatePromptResponse, AWSError>;
+  /**
+   * Creates a prompt in your prompt library that you can add to a flow. For more information, see Prompt management in Amazon Bedrock, Create a prompt using Prompt management and Prompt flows in Amazon Bedrock in the Amazon Bedrock User Guide.
+   */
+  createPrompt(callback?: (err: AWSError, data: BedrockAgent.Types.CreatePromptResponse) => void): Request<BedrockAgent.Types.CreatePromptResponse, AWSError>;
+  /**
+   * Creates a static snapshot of your prompt that can be deployed to production. For more information, see Deploy prompts using Prompt management by creating versions in the Amazon Bedrock User Guide.
+   */
+  createPromptVersion(params: BedrockAgent.Types.CreatePromptVersionRequest, callback?: (err: AWSError, data: BedrockAgent.Types.CreatePromptVersionResponse) => void): Request<BedrockAgent.Types.CreatePromptVersionResponse, AWSError>;
+  /**
+   * Creates a static snapshot of your prompt that can be deployed to production. For more information, see Deploy prompts using Prompt management by creating versions in the Amazon Bedrock User Guide.
+   */
+  createPromptVersion(callback?: (err: AWSError, data: BedrockAgent.Types.CreatePromptVersionResponse) => void): Request<BedrockAgent.Types.CreatePromptVersionResponse, AWSError>;
   /**
    * Deletes an agent.
    */
@@ -100,6 +140,30 @@ declare class BedrockAgent extends Service {
    */
   deleteDataSource(callback?: (err: AWSError, data: BedrockAgent.Types.DeleteDataSourceResponse) => void): Request<BedrockAgent.Types.DeleteDataSourceResponse, AWSError>;
   /**
+   * Deletes a flow.
+   */
+  deleteFlow(params: BedrockAgent.Types.DeleteFlowRequest, callback?: (err: AWSError, data: BedrockAgent.Types.DeleteFlowResponse) => void): Request<BedrockAgent.Types.DeleteFlowResponse, AWSError>;
+  /**
+   * Deletes a flow.
+   */
+  deleteFlow(callback?: (err: AWSError, data: BedrockAgent.Types.DeleteFlowResponse) => void): Request<BedrockAgent.Types.DeleteFlowResponse, AWSError>;
+  /**
+   * Deletes an alias of a flow.
+   */
+  deleteFlowAlias(params: BedrockAgent.Types.DeleteFlowAliasRequest, callback?: (err: AWSError, data: BedrockAgent.Types.DeleteFlowAliasResponse) => void): Request<BedrockAgent.Types.DeleteFlowAliasResponse, AWSError>;
+  /**
+   * Deletes an alias of a flow.
+   */
+  deleteFlowAlias(callback?: (err: AWSError, data: BedrockAgent.Types.DeleteFlowAliasResponse) => void): Request<BedrockAgent.Types.DeleteFlowAliasResponse, AWSError>;
+  /**
+   * Deletes a version of a flow.
+   */
+  deleteFlowVersion(params: BedrockAgent.Types.DeleteFlowVersionRequest, callback?: (err: AWSError, data: BedrockAgent.Types.DeleteFlowVersionResponse) => void): Request<BedrockAgent.Types.DeleteFlowVersionResponse, AWSError>;
+  /**
+   * Deletes a version of a flow.
+   */
+  deleteFlowVersion(callback?: (err: AWSError, data: BedrockAgent.Types.DeleteFlowVersionResponse) => void): Request<BedrockAgent.Types.DeleteFlowVersionResponse, AWSError>;
+  /**
    * Deletes a knowledge base. Before deleting a knowledge base, you should disassociate the knowledge base from any agents that it is associated with by making a DisassociateAgentKnowledgeBase request.
    */
   deleteKnowledgeBase(params: BedrockAgent.Types.DeleteKnowledgeBaseRequest, callback?: (err: AWSError, data: BedrockAgent.Types.DeleteKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.DeleteKnowledgeBaseResponse, AWSError>;
@@ -107,6 +171,14 @@ declare class BedrockAgent extends Service {
    * Deletes a knowledge base. Before deleting a knowledge base, you should disassociate the knowledge base from any agents that it is associated with by making a DisassociateAgentKnowledgeBase request.
    */
   deleteKnowledgeBase(callback?: (err: AWSError, data: BedrockAgent.Types.DeleteKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.DeleteKnowledgeBaseResponse, AWSError>;
+  /**
+   * Deletes a prompt or a prompt version from the Prompt management tool. For more information, see Delete prompts from the Prompt management tool and Delete a version of a prompt from the Prompt management tool in the Amazon Bedrock User Guide.
+   */
+  deletePrompt(params: BedrockAgent.Types.DeletePromptRequest, callback?: (err: AWSError, data: BedrockAgent.Types.DeletePromptResponse) => void): Request<BedrockAgent.Types.DeletePromptResponse, AWSError>;
+  /**
+   * Deletes a prompt or a prompt version from the Prompt management tool. For more information, see Delete prompts from the Prompt management tool and Delete a version of a prompt from the Prompt management tool in the Amazon Bedrock User Guide.
+   */
+  deletePrompt(callback?: (err: AWSError, data: BedrockAgent.Types.DeletePromptResponse) => void): Request<BedrockAgent.Types.DeletePromptResponse, AWSError>;
   /**
    * Disassociates a knowledge base from an agent.
    */
@@ -164,6 +236,30 @@ declare class BedrockAgent extends Service {
    */
   getDataSource(callback?: (err: AWSError, data: BedrockAgent.Types.GetDataSourceResponse) => void): Request<BedrockAgent.Types.GetDataSourceResponse, AWSError>;
   /**
+   * Retrieves information about a flow. For more information, see Manage a flow in Amazon Bedrock in the Amazon Bedrock User Guide.
+   */
+  getFlow(params: BedrockAgent.Types.GetFlowRequest, callback?: (err: AWSError, data: BedrockAgent.Types.GetFlowResponse) => void): Request<BedrockAgent.Types.GetFlowResponse, AWSError>;
+  /**
+   * Retrieves information about a flow. For more information, see Manage a flow in Amazon Bedrock in the Amazon Bedrock User Guide.
+   */
+  getFlow(callback?: (err: AWSError, data: BedrockAgent.Types.GetFlowResponse) => void): Request<BedrockAgent.Types.GetFlowResponse, AWSError>;
+  /**
+   * Retrieves information about a flow. For more information, see Deploy a flow in Amazon Bedrock in the Amazon Bedrock User Guide.
+   */
+  getFlowAlias(params: BedrockAgent.Types.GetFlowAliasRequest, callback?: (err: AWSError, data: BedrockAgent.Types.GetFlowAliasResponse) => void): Request<BedrockAgent.Types.GetFlowAliasResponse, AWSError>;
+  /**
+   * Retrieves information about a flow. For more information, see Deploy a flow in Amazon Bedrock in the Amazon Bedrock User Guide.
+   */
+  getFlowAlias(callback?: (err: AWSError, data: BedrockAgent.Types.GetFlowAliasResponse) => void): Request<BedrockAgent.Types.GetFlowAliasResponse, AWSError>;
+  /**
+   * Retrieves information about a version of a flow. For more information, see Deploy a flow in Amazon Bedrock in the Amazon Bedrock User Guide.
+   */
+  getFlowVersion(params: BedrockAgent.Types.GetFlowVersionRequest, callback?: (err: AWSError, data: BedrockAgent.Types.GetFlowVersionResponse) => void): Request<BedrockAgent.Types.GetFlowVersionResponse, AWSError>;
+  /**
+   * Retrieves information about a version of a flow. For more information, see Deploy a flow in Amazon Bedrock in the Amazon Bedrock User Guide.
+   */
+  getFlowVersion(callback?: (err: AWSError, data: BedrockAgent.Types.GetFlowVersionResponse) => void): Request<BedrockAgent.Types.GetFlowVersionResponse, AWSError>;
+  /**
    * Gets information about a ingestion job, in which a data source is added to a knowledge base.
    */
   getIngestionJob(params: BedrockAgent.Types.GetIngestionJobRequest, callback?: (err: AWSError, data: BedrockAgent.Types.GetIngestionJobResponse) => void): Request<BedrockAgent.Types.GetIngestionJobResponse, AWSError>;
@@ -179,6 +275,14 @@ declare class BedrockAgent extends Service {
    * Gets information about a knoweldge base.
    */
   getKnowledgeBase(callback?: (err: AWSError, data: BedrockAgent.Types.GetKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.GetKnowledgeBaseResponse, AWSError>;
+  /**
+   * Retrieves information about a prompt or a version of it. For more information, see View information about prompts using Prompt management and View information about a version of your prompt in the Amazon Bedrock User Guide.
+   */
+  getPrompt(params: BedrockAgent.Types.GetPromptRequest, callback?: (err: AWSError, data: BedrockAgent.Types.GetPromptResponse) => void): Request<BedrockAgent.Types.GetPromptResponse, AWSError>;
+  /**
+   * Retrieves information about a prompt or a version of it. For more information, see View information about prompts using Prompt management and View information about a version of your prompt in the Amazon Bedrock User Guide.
+   */
+  getPrompt(callback?: (err: AWSError, data: BedrockAgent.Types.GetPromptResponse) => void): Request<BedrockAgent.Types.GetPromptResponse, AWSError>;
   /**
    * Lists the action groups for an agent and information about each one.
    */
@@ -228,6 +332,30 @@ declare class BedrockAgent extends Service {
    */
   listDataSources(callback?: (err: AWSError, data: BedrockAgent.Types.ListDataSourcesResponse) => void): Request<BedrockAgent.Types.ListDataSourcesResponse, AWSError>;
   /**
+   * Returns a list of aliases for a flow.
+   */
+  listFlowAliases(params: BedrockAgent.Types.ListFlowAliasesRequest, callback?: (err: AWSError, data: BedrockAgent.Types.ListFlowAliasesResponse) => void): Request<BedrockAgent.Types.ListFlowAliasesResponse, AWSError>;
+  /**
+   * Returns a list of aliases for a flow.
+   */
+  listFlowAliases(callback?: (err: AWSError, data: BedrockAgent.Types.ListFlowAliasesResponse) => void): Request<BedrockAgent.Types.ListFlowAliasesResponse, AWSError>;
+  /**
+   * Returns a list of information about each flow. For more information, see Deploy a flow in Amazon Bedrock in the Amazon Bedrock User Guide.
+   */
+  listFlowVersions(params: BedrockAgent.Types.ListFlowVersionsRequest, callback?: (err: AWSError, data: BedrockAgent.Types.ListFlowVersionsResponse) => void): Request<BedrockAgent.Types.ListFlowVersionsResponse, AWSError>;
+  /**
+   * Returns a list of information about each flow. For more information, see Deploy a flow in Amazon Bedrock in the Amazon Bedrock User Guide.
+   */
+  listFlowVersions(callback?: (err: AWSError, data: BedrockAgent.Types.ListFlowVersionsResponse) => void): Request<BedrockAgent.Types.ListFlowVersionsResponse, AWSError>;
+  /**
+   * Returns a list of flows and information about each flow. For more information, see Manage a flow in Amazon Bedrock in the Amazon Bedrock User Guide.
+   */
+  listFlows(params: BedrockAgent.Types.ListFlowsRequest, callback?: (err: AWSError, data: BedrockAgent.Types.ListFlowsResponse) => void): Request<BedrockAgent.Types.ListFlowsResponse, AWSError>;
+  /**
+   * Returns a list of flows and information about each flow. For more information, see Manage a flow in Amazon Bedrock in the Amazon Bedrock User Guide.
+   */
+  listFlows(callback?: (err: AWSError, data: BedrockAgent.Types.ListFlowsResponse) => void): Request<BedrockAgent.Types.ListFlowsResponse, AWSError>;
+  /**
    * Lists the ingestion jobs for a data source and information about each of them.
    */
   listIngestionJobs(params: BedrockAgent.Types.ListIngestionJobsRequest, callback?: (err: AWSError, data: BedrockAgent.Types.ListIngestionJobsResponse) => void): Request<BedrockAgent.Types.ListIngestionJobsResponse, AWSError>;
@@ -244,6 +372,14 @@ declare class BedrockAgent extends Service {
    */
   listKnowledgeBases(callback?: (err: AWSError, data: BedrockAgent.Types.ListKnowledgeBasesResponse) => void): Request<BedrockAgent.Types.ListKnowledgeBasesResponse, AWSError>;
   /**
+   * Returns a list of prompts from the Prompt management tool and information about each prompt. For more information, see View information about prompts using Prompt management in the Amazon Bedrock User Guide.
+   */
+  listPrompts(params: BedrockAgent.Types.ListPromptsRequest, callback?: (err: AWSError, data: BedrockAgent.Types.ListPromptsResponse) => void): Request<BedrockAgent.Types.ListPromptsResponse, AWSError>;
+  /**
+   * Returns a list of prompts from the Prompt management tool and information about each prompt. For more information, see View information about prompts using Prompt management in the Amazon Bedrock User Guide.
+   */
+  listPrompts(callback?: (err: AWSError, data: BedrockAgent.Types.ListPromptsResponse) => void): Request<BedrockAgent.Types.ListPromptsResponse, AWSError>;
+  /**
    * List all the tags for the resource you specify.
    */
   listTagsForResource(params: BedrockAgent.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: BedrockAgent.Types.ListTagsForResourceResponse) => void): Request<BedrockAgent.Types.ListTagsForResourceResponse, AWSError>;
@@ -259,6 +395,14 @@ declare class BedrockAgent extends Service {
    * Creates a DRAFT version of the agent that can be used for internal testing.
    */
   prepareAgent(callback?: (err: AWSError, data: BedrockAgent.Types.PrepareAgentResponse) => void): Request<BedrockAgent.Types.PrepareAgentResponse, AWSError>;
+  /**
+   * Prepares the DRAFT version of a flow so that it can be invoked. For more information, see Test a flow in Amazon Bedrock in the Amazon Bedrock User Guide.
+   */
+  prepareFlow(params: BedrockAgent.Types.PrepareFlowRequest, callback?: (err: AWSError, data: BedrockAgent.Types.PrepareFlowResponse) => void): Request<BedrockAgent.Types.PrepareFlowResponse, AWSError>;
+  /**
+   * Prepares the DRAFT version of a flow so that it can be invoked. For more information, see Test a flow in Amazon Bedrock in the Amazon Bedrock User Guide.
+   */
+  prepareFlow(callback?: (err: AWSError, data: BedrockAgent.Types.PrepareFlowResponse) => void): Request<BedrockAgent.Types.PrepareFlowResponse, AWSError>;
   /**
    * Begins an ingestion job, in which a data source is added to a knowledge base.
    */
@@ -316,13 +460,29 @@ declare class BedrockAgent extends Service {
    */
   updateAgentKnowledgeBase(callback?: (err: AWSError, data: BedrockAgent.Types.UpdateAgentKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.UpdateAgentKnowledgeBaseResponse, AWSError>;
   /**
-   * Updates configurations for a data source.  You can't change the chunkingConfiguration after you create the data source. Specify the existing chunkingConfiguration. 
+   * Updates the configurations for a data source connector.  You can't change the chunkingConfiguration after you create the data source connector. Specify the existing chunkingConfiguration. 
    */
   updateDataSource(params: BedrockAgent.Types.UpdateDataSourceRequest, callback?: (err: AWSError, data: BedrockAgent.Types.UpdateDataSourceResponse) => void): Request<BedrockAgent.Types.UpdateDataSourceResponse, AWSError>;
   /**
-   * Updates configurations for a data source.  You can't change the chunkingConfiguration after you create the data source. Specify the existing chunkingConfiguration. 
+   * Updates the configurations for a data source connector.  You can't change the chunkingConfiguration after you create the data source connector. Specify the existing chunkingConfiguration. 
    */
   updateDataSource(callback?: (err: AWSError, data: BedrockAgent.Types.UpdateDataSourceResponse) => void): Request<BedrockAgent.Types.UpdateDataSourceResponse, AWSError>;
+  /**
+   * Modifies a flow. Include both fields that you want to keep and fields that you want to change. For more information, see How it works and Create a flow in Amazon Bedrock in the Amazon Bedrock User Guide.
+   */
+  updateFlow(params: BedrockAgent.Types.UpdateFlowRequest, callback?: (err: AWSError, data: BedrockAgent.Types.UpdateFlowResponse) => void): Request<BedrockAgent.Types.UpdateFlowResponse, AWSError>;
+  /**
+   * Modifies a flow. Include both fields that you want to keep and fields that you want to change. For more information, see How it works and Create a flow in Amazon Bedrock in the Amazon Bedrock User Guide.
+   */
+  updateFlow(callback?: (err: AWSError, data: BedrockAgent.Types.UpdateFlowResponse) => void): Request<BedrockAgent.Types.UpdateFlowResponse, AWSError>;
+  /**
+   * Modifies the alias of a flow. Include both fields that you want to keep and ones that you want to change. For more information, see Deploy a flow in Amazon Bedrock in the Amazon Bedrock User Guide.
+   */
+  updateFlowAlias(params: BedrockAgent.Types.UpdateFlowAliasRequest, callback?: (err: AWSError, data: BedrockAgent.Types.UpdateFlowAliasResponse) => void): Request<BedrockAgent.Types.UpdateFlowAliasResponse, AWSError>;
+  /**
+   * Modifies the alias of a flow. Include both fields that you want to keep and ones that you want to change. For more information, see Deploy a flow in Amazon Bedrock in the Amazon Bedrock User Guide.
+   */
+  updateFlowAlias(callback?: (err: AWSError, data: BedrockAgent.Types.UpdateFlowAliasResponse) => void): Request<BedrockAgent.Types.UpdateFlowAliasResponse, AWSError>;
   /**
    * Updates the configuration of a knowledge base with the fields that you specify. Because all fields will be overwritten, you must include the same values for fields that you want to keep the same. You can change the following fields:    name     description     roleArn    You can't change the knowledgeBaseConfiguration or storageConfiguration fields, so you must specify the same configurations as when you created the knowledge base. You can send a GetKnowledgeBase request and copy the same configurations.
    */
@@ -331,6 +491,14 @@ declare class BedrockAgent extends Service {
    * Updates the configuration of a knowledge base with the fields that you specify. Because all fields will be overwritten, you must include the same values for fields that you want to keep the same. You can change the following fields:    name     description     roleArn    You can't change the knowledgeBaseConfiguration or storageConfiguration fields, so you must specify the same configurations as when you created the knowledge base. You can send a GetKnowledgeBase request and copy the same configurations.
    */
   updateKnowledgeBase(callback?: (err: AWSError, data: BedrockAgent.Types.UpdateKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.UpdateKnowledgeBaseResponse, AWSError>;
+  /**
+   * Modifies a prompt in your prompt library. Include both fields that you want to keep and fields that you want to replace. For more information, see Prompt management in Amazon Bedrock and Edit prompts in your prompt library in the Amazon Bedrock User Guide.
+   */
+  updatePrompt(params: BedrockAgent.Types.UpdatePromptRequest, callback?: (err: AWSError, data: BedrockAgent.Types.UpdatePromptResponse) => void): Request<BedrockAgent.Types.UpdatePromptResponse, AWSError>;
+  /**
+   * Modifies a prompt in your prompt library. Include both fields that you want to keep and fields that you want to replace. For more information, see Prompt management in Amazon Bedrock and Edit prompts in your prompt library in the Amazon Bedrock User Guide.
+   */
+  updatePrompt(callback?: (err: AWSError, data: BedrockAgent.Types.UpdatePromptResponse) => void): Request<BedrockAgent.Types.UpdatePromptResponse, AWSError>;
 }
 declare namespace BedrockAgent {
   export interface APISchema {
@@ -353,7 +521,7 @@ declare namespace BedrockAgent {
      */
     lambda?: LambdaArn;
   }
-  export type ActionGroupSignature = "AMAZON.UserInput"|string;
+  export type ActionGroupSignature = "AMAZON.UserInput"|"AMAZON.CodeInterpreter"|string;
   export type ActionGroupState = "ENABLED"|"DISABLED"|string;
   export type ActionGroupSummaries = ActionGroupSummary[];
   export interface ActionGroupSummary {
@@ -428,7 +596,7 @@ declare namespace BedrockAgent {
      */
     foundationModel?: ModelIdentifier;
     /**
-     * The guardrails configuration assigned to the agent.
+     * Details about the guardrail associated with the agent.
      */
     guardrailConfiguration?: GuardrailConfiguration;
     /**
@@ -439,6 +607,10 @@ declare namespace BedrockAgent {
      * Instructions that tell the agent what it should do and how it should interact with users.
      */
     instruction?: Instruction;
+    /**
+     * Contains memory configuration for the agent.
+     */
+    memoryConfiguration?: MemoryConfiguration;
     /**
      * The time at which the agent was last prepared.
      */
@@ -621,6 +793,12 @@ declare namespace BedrockAgent {
     updatedAt: DateTimestamp;
   }
   export type AgentArn = string;
+  export interface AgentFlowNodeConfiguration {
+    /**
+     * The Amazon Resource Name (ARN) of the alias of the agent to invoke.
+     */
+    agentAliasArn: AgentAliasArn;
+  }
   export interface AgentKnowledgeBase {
     /**
      * The unique identifier of the agent with which the knowledge base is associated.
@@ -691,7 +869,7 @@ declare namespace BedrockAgent {
      */
     description?: Description;
     /**
-     * The details of the guardrails configuration in the agent summary.
+     * Details about the guardrail associated with the agent.
      */
     guardrailConfiguration?: GuardrailConfiguration;
     /**
@@ -745,7 +923,7 @@ declare namespace BedrockAgent {
      */
     foundationModel?: ModelIdentifier;
     /**
-     * The guardrails configuration assigned to the agent version.
+     * Details about the guardrail associated with the agent.
      */
     guardrailConfiguration?: GuardrailConfiguration;
     /**
@@ -756,6 +934,10 @@ declare namespace BedrockAgent {
      * The instructions provided to the agent.
      */
     instruction?: Instruction;
+    /**
+     *  Contains details of the memory configuration on the version of the agent. 
+     */
+    memoryConfiguration?: MemoryConfiguration;
     /**
      * Contains configurations to override prompt templates in different parts of an agent sequence. For more information, see Advanced prompts.
      */
@@ -796,7 +978,7 @@ declare namespace BedrockAgent {
      */
     description?: Description;
     /**
-     * The details of the guardrails configuration in the agent version summary.
+     * Details about the guardrail associated with the agent.
      */
     guardrailConfiguration?: GuardrailConfiguration;
     /**
@@ -840,21 +1022,95 @@ declare namespace BedrockAgent {
      */
     dimensions?: Dimensions;
   }
+  export interface BedrockFoundationModelConfiguration {
+    /**
+     * The model's ARN.
+     */
+    modelArn: BedrockModelArn;
+    /**
+     * Instructions for interpreting the contents of a document.
+     */
+    parsingPrompt?: ParsingPrompt;
+  }
+  export type BedrockModelArn = string;
   export type Boolean = boolean;
   export type BucketOwnerAccountId = string;
   export interface ChunkingConfiguration {
     /**
-     * Knowledge base can split your source data into chunks. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried. You have the following options for chunking your data. If you opt for NONE, then you may want to pre-process your files by splitting them up such that each file corresponds to a chunk.    FIXED_SIZE – Amazon Bedrock splits your source data into chunks of the approximate size that you set in the fixedSizeChunkingConfiguration.    NONE – Amazon Bedrock treats each file as one chunk. If you choose this option, you may want to pre-process your documents by splitting them into separate files.  
+     * Knowledge base can split your source data into chunks. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried. You have the following options for chunking your data. If you opt for NONE, then you may want to pre-process your files by splitting them up such that each file corresponds to a chunk.    FIXED_SIZE – Amazon Bedrock splits your source data into chunks of the approximate size that you set in the fixedSizeChunkingConfiguration.    HIERARCHICAL – Split documents into layers of chunks where the first layer contains large chunks, and the second layer contains smaller chunks derived from the first layer.    SEMANTIC – Split documents into chunks based on groups of similar content derived with natural language processing.    NONE – Amazon Bedrock treats each file as one chunk. If you choose this option, you may want to pre-process your documents by splitting them into separate files.  
      */
     chunkingStrategy: ChunkingStrategy;
     /**
      * Configurations for when you choose fixed-size chunking. If you set the chunkingStrategy as NONE, exclude this field.
      */
     fixedSizeChunkingConfiguration?: FixedSizeChunkingConfiguration;
+    /**
+     * Settings for hierarchical document chunking for a data source. Hierarchical chunking splits documents into layers of chunks where the first layer contains large chunks, and the second layer contains smaller chunks derived from the first layer.
+     */
+    hierarchicalChunkingConfiguration?: HierarchicalChunkingConfiguration;
+    /**
+     * Settings for semantic document chunking for a data source. Semantic chunking splits a document into into smaller documents based on groups of similar content derived from the text with natural language processing.
+     */
+    semanticChunkingConfiguration?: SemanticChunkingConfiguration;
   }
-  export type ChunkingStrategy = "FIXED_SIZE"|"NONE"|string;
+  export type ChunkingStrategy = "FIXED_SIZE"|"NONE"|"HIERARCHICAL"|"SEMANTIC"|string;
   export type ClientToken = string;
+  export interface CollectorFlowNodeConfiguration {
+  }
   export type ColumnName = string;
+  export interface ConditionFlowNodeConfiguration {
+    /**
+     * An array of conditions. Each member contains the name of a condition and an expression that defines the condition.
+     */
+    conditions: FlowConditions;
+  }
+  export type ConfluenceAuthType = "BASIC"|"OAUTH2_CLIENT_CREDENTIALS"|string;
+  export interface ConfluenceCrawlerConfiguration {
+    /**
+     * The configuration of filtering the Confluence content. For example, configuring regular expression patterns to include or exclude certain content.
+     */
+    filterConfiguration?: CrawlFilterConfiguration;
+  }
+  export interface ConfluenceDataSourceConfiguration {
+    /**
+     * The configuration of the Confluence content. For example, configuring specific types of Confluence content.
+     */
+    crawlerConfiguration?: ConfluenceCrawlerConfiguration;
+    /**
+     * The endpoint information to connect to your Confluence data source.
+     */
+    sourceConfiguration: ConfluenceSourceConfiguration;
+  }
+  export type ConfluenceHostType = "SAAS"|string;
+  export interface ConfluenceSourceConfiguration {
+    /**
+     * The supported authentication type to authenticate and connect to your Confluence instance.
+     */
+    authType: ConfluenceAuthType;
+    /**
+     * The Amazon Resource Name of an Secrets Manager secret that stores your authentication credentials for your SharePoint site/sites. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Confluence connection configuration.
+     */
+    credentialsSecretArn: SecretArn;
+    /**
+     * The supported host type, whether online/cloud or server/on-premises.
+     */
+    hostType: ConfluenceHostType;
+    /**
+     * The Confluence host URL or instance URL.
+     */
+    hostUrl: HttpsUrl;
+  }
+  export interface CrawlFilterConfiguration {
+    /**
+     * The configuration of filtering certain objects or content types of the data source.
+     */
+    patternObjectFilter?: PatternObjectFilterConfiguration;
+    /**
+     * The type of filtering that you want to apply to certain objects or content of the data source. For example, the PATTERN type is regular expression patterns you can apply to filter your content.
+     */
+    type: CrawlFilterConfigurationType;
+  }
+  export type CrawlFilterConfigurationType = "PATTERN"|string;
   export interface CreateAgentActionGroupRequest {
     /**
      * The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action or the custom control method for handling the information elicited from the user.
@@ -893,7 +1149,7 @@ declare namespace BedrockAgent {
      */
     functionSchema?: FunctionSchema;
     /**
-     * To allow your agent to request the user for additional information when trying to complete a task, set this field to AMAZON.UserInput. You must leave the description, apiSchema, and actionGroupExecutor fields blank for this action group. During orchestration, if your agent determines that it needs to invoke an API in an action group, but doesn't have enough information to complete the API request, it will invoke this action group instead and return an Observation reprompting the user for more information.
+     * To allow your agent to request the user for additional information when trying to complete a task, set this field to AMAZON.UserInput. You must leave the description, apiSchema, and actionGroupExecutor fields blank for this action group. To allow your agent to generate, run, and troubleshoot code when trying to complete a task, set this field to AMAZON.CodeInterpreter. You must leave the description, apiSchema, and actionGroupExecutor fields blank for this action group. During orchestration, if your agent determines that it needs to invoke an API in an action group, but doesn't have enough information to complete the API request, it will invoke this action group instead and return an Observation reprompting the user for more information.
      */
     parentActionGroupSignature?: ActionGroupSignature;
   }
@@ -973,6 +1229,10 @@ declare namespace BedrockAgent {
      */
     instruction?: Instruction;
     /**
+     *  Contains the details of the memory configured for the agent.
+     */
+    memoryConfiguration?: MemoryConfiguration;
+    /**
      * Contains configurations to override prompts in different parts of an agent sequence. For more information, see Advanced prompts.
      */
     promptOverrideConfiguration?: PromptOverrideConfiguration;
@@ -993,11 +1253,11 @@ declare namespace BedrockAgent {
      */
     clientToken?: ClientToken;
     /**
-     * The data deletion policy assigned to the data source.
+     * The data deletion policy for the data source. You can set the data deletion policy to:   DELETE: Deletes all underlying data belonging to the data source from the vector store upon deletion of a knowledge base or data source resource. Note that the vector store itself is not deleted, only the underlying data. This flag is ignored if an Amazon Web Services account is deleted.   RETAIN: Retains all underlying data in your vector store upon deletion of a knowledge base or data source resource.  
      */
     dataDeletionPolicy?: DataDeletionPolicy;
     /**
-     * Contains metadata about where the data source is stored.
+     * The connection configuration for the data source.
      */
     dataSourceConfiguration: DataSourceConfiguration;
     /**
@@ -1026,6 +1286,198 @@ declare namespace BedrockAgent {
      * Contains details about the data source.
      */
     dataSource: DataSource;
+  }
+  export interface CreateFlowAliasRequest {
+    /**
+     * A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see Ensuring idempotency.
+     */
+    clientToken?: ClientToken;
+    /**
+     * A description for the alias.
+     */
+    description?: Description;
+    /**
+     * The unique identifier of the flow for which to create an alias.
+     */
+    flowIdentifier: FlowIdentifier;
+    /**
+     * A name for the alias.
+     */
+    name: Name;
+    /**
+     * Contains information about the version to which to map the alias.
+     */
+    routingConfiguration: FlowAliasRoutingConfiguration;
+    /**
+     * Any tags that you want to attach to the alias of the flow. For more information, see Tagging resources in Amazon Bedrock.
+     */
+    tags?: TagsMap;
+  }
+  export interface CreateFlowAliasResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the alias.
+     */
+    arn: FlowAliasArn;
+    /**
+     * The time at which the alias was created.
+     */
+    createdAt: DateTimestamp;
+    /**
+     * The description of the alias.
+     */
+    description?: Description;
+    /**
+     * The unique identifier of the flow that the alias belongs to.
+     */
+    flowId: FlowId;
+    /**
+     * The unique identifier of the alias.
+     */
+    id: FlowAliasId;
+    /**
+     * The name of the alias.
+     */
+    name: Name;
+    /**
+     * Contains information about the version that the alias is mapped to.
+     */
+    routingConfiguration: FlowAliasRoutingConfiguration;
+    /**
+     * The time at which the alias of the flow was last updated.
+     */
+    updatedAt: DateTimestamp;
+  }
+  export interface CreateFlowRequest {
+    /**
+     * A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see Ensuring idempotency.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS key to encrypt the flow.
+     */
+    customerEncryptionKeyArn?: KmsKeyArn;
+    /**
+     * A definition of the nodes and connections between nodes in the flow.
+     */
+    definition?: FlowDefinition;
+    /**
+     * A description for the flow.
+     */
+    description?: FlowDescription;
+    /**
+     * The Amazon Resource Name (ARN) of the service role with permissions to create and manage a flow. For more information, see Create a service role for flows in Amazon Bedrock in the Amazon Bedrock User Guide.
+     */
+    executionRoleArn: FlowExecutionRoleArn;
+    /**
+     * A name for the flow.
+     */
+    name: FlowName;
+    /**
+     * Any tags that you want to attach to the flow. For more information, see Tagging resources in Amazon Bedrock.
+     */
+    tags?: TagsMap;
+  }
+  export interface CreateFlowResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the flow.
+     */
+    arn: FlowArn;
+    /**
+     * The time at which the flow was created.
+     */
+    createdAt: DateTimestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS key that you encrypted the flow with.
+     */
+    customerEncryptionKeyArn?: KmsKeyArn;
+    /**
+     * A definition of the nodes and connections between nodes in the flow.
+     */
+    definition?: FlowDefinition;
+    /**
+     * The description of the flow.
+     */
+    description?: FlowDescription;
+    /**
+     * The Amazon Resource Name (ARN) of the service role with permissions to create a flow. For more information, see Create a service role for flows in Amazon Bedrock in the Amazon Bedrock User Guide.
+     */
+    executionRoleArn: FlowExecutionRoleArn;
+    /**
+     * The unique identifier of the flow.
+     */
+    id: FlowId;
+    /**
+     * The name of the flow.
+     */
+    name: FlowName;
+    /**
+     * The status of the flow. When you submit this request, the status will be NotPrepared. If creation fails, the status becomes Failed.
+     */
+    status: FlowStatus;
+    /**
+     * The time at which the flow was last updated.
+     */
+    updatedAt: DateTimestamp;
+    /**
+     * The version of the flow. When you create a flow, the version created is the DRAFT version.
+     */
+    version: DraftVersion;
+  }
+  export interface CreateFlowVersionRequest {
+    /**
+     * A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see Ensuring idempotency.
+     */
+    clientToken?: ClientToken;
+    /**
+     * A description of the version of the flow.
+     */
+    description?: FlowDescription;
+    /**
+     * The unique identifier of the flow that you want to create a version of.
+     */
+    flowIdentifier: FlowIdentifier;
+  }
+  export interface CreateFlowVersionResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the flow.
+     */
+    arn: FlowArn;
+    /**
+     * The time at which the flow was created.
+     */
+    createdAt: DateTimestamp;
+    /**
+     * The KMS key that the flow is encrypted with.
+     */
+    customerEncryptionKeyArn?: KmsKeyArn;
+    /**
+     * A definition of the nodes and connections in the flow.
+     */
+    definition?: FlowDefinition;
+    /**
+     * The description of the flow version.
+     */
+    description?: FlowDescription;
+    /**
+     * The Amazon Resource Name (ARN) of the service role with permissions to create a flow. For more information, see Create a service role for flows in Amazon Bedrock in the Amazon Bedrock User Guide.
+     */
+    executionRoleArn: FlowExecutionRoleArn;
+    /**
+     * The unique identifier of the flow.
+     */
+    id: FlowId;
+    /**
+     * The name of the flow version.
+     */
+    name: FlowName;
+    /**
+     * The status of the flow.
+     */
+    status: FlowStatus;
+    /**
+     * The version of the flow that was created. Versions are numbered incrementally, starting from 1.
+     */
+    version: NumericalVersion;
   }
   export interface CreateKnowledgeBaseRequest {
     /**
@@ -1063,8 +1515,150 @@ declare namespace BedrockAgent {
      */
     knowledgeBase: KnowledgeBase;
   }
+  export interface CreatePromptRequest {
+    /**
+     * A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see Ensuring idempotency.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS key to encrypt the prompt.
+     */
+    customerEncryptionKeyArn?: KmsKeyArn;
+    /**
+     * The name of the default variant for the prompt. This value must match the name field in the relevant PromptVariant object.
+     */
+    defaultVariant?: PromptVariantName;
+    /**
+     * A description for the prompt.
+     */
+    description?: PromptDescription;
+    /**
+     * A name for the prompt.
+     */
+    name: PromptName;
+    /**
+     * Any tags that you want to attach to the prompt. For more information, see Tagging resources in Amazon Bedrock.
+     */
+    tags?: TagsMap;
+    /**
+     * A list of objects, each containing details about a variant of the prompt.
+     */
+    variants?: PromptVariantList;
+  }
+  export interface CreatePromptResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the prompt.
+     */
+    arn: PromptArn;
+    /**
+     * The time at which the prompt was created.
+     */
+    createdAt: DateTimestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS key that you encrypted the prompt with.
+     */
+    customerEncryptionKeyArn?: KmsKeyArn;
+    /**
+     * The name of the default variant for your prompt.
+     */
+    defaultVariant?: PromptVariantName;
+    /**
+     * The description of the prompt.
+     */
+    description?: PromptDescription;
+    /**
+     * The unique identifier of the prompt.
+     */
+    id: PromptId;
+    /**
+     * The name of the prompt.
+     */
+    name: PromptName;
+    /**
+     * The time at which the prompt was last updated.
+     */
+    updatedAt: DateTimestamp;
+    /**
+     * A list of objects, each containing details about a variant of the prompt.
+     */
+    variants?: PromptVariantList;
+    /**
+     * The version of the prompt. When you create a prompt, the version created is the DRAFT version.
+     */
+    version: Version;
+  }
+  export interface CreatePromptVersionRequest {
+    /**
+     * A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see Ensuring idempotency.
+     */
+    clientToken?: ClientToken;
+    /**
+     * A description for the version of the prompt.
+     */
+    description?: PromptDescription;
+    /**
+     * The unique identifier of the prompt that you want to create a version of.
+     */
+    promptIdentifier: PromptIdentifier;
+    /**
+     * Any tags that you want to attach to the version of the prompt. For more information, see Tagging resources in Amazon Bedrock.
+     */
+    tags?: TagsMap;
+  }
+  export interface CreatePromptVersionResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the version of the prompt.
+     */
+    arn: PromptArn;
+    /**
+     * The time at which the prompt was created.
+     */
+    createdAt: DateTimestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS key to encrypt the version of the prompt.
+     */
+    customerEncryptionKeyArn?: KmsKeyArn;
+    /**
+     * The name of the default variant for the prompt. This value must match the name field in the relevant PromptVariant object.
+     */
+    defaultVariant?: PromptVariantName;
+    /**
+     * A description for the prompt version.
+     */
+    description?: PromptDescription;
+    /**
+     * The unique identifier of the prompt.
+     */
+    id: PromptId;
+    /**
+     * The name of the prompt version.
+     */
+    name: PromptName;
+    /**
+     * The time at which the prompt was last updated.
+     */
+    updatedAt: DateTimestamp;
+    /**
+     * A list of objects, each containing details about a variant of the prompt.
+     */
+    variants?: PromptVariantList;
+    /**
+     * The version of the prompt that was created. Versions are numbered incrementally, starting from 1.
+     */
+    version: Version;
+  }
   export type CreationMode = "DEFAULT"|"OVERRIDDEN"|string;
   export type CustomControlMethod = "RETURN_CONTROL"|string;
+  export interface CustomTransformationConfiguration {
+    /**
+     * An S3 bucket path for input and output objects.
+     */
+    intermediateStorage: IntermediateStorage;
+    /**
+     * A Lambda function that processes documents.
+     */
+    transformations: Transformations;
+  }
   export type DataDeletionPolicy = "RETAIN"|"DELETE"|string;
   export interface DataSource {
     /**
@@ -1072,11 +1666,11 @@ declare namespace BedrockAgent {
      */
     createdAt: DateTimestamp;
     /**
-     * The data deletion policy for a data source.
+     * The data deletion policy for the data source.
      */
     dataDeletionPolicy?: DataDeletionPolicy;
     /**
-     * Contains details about how the data source is stored.
+     * The connection configuration for the data source.
      */
     dataSourceConfiguration: DataSourceConfiguration;
     /**
@@ -1118,13 +1712,29 @@ declare namespace BedrockAgent {
   }
   export interface DataSourceConfiguration {
     /**
-     * Contains details about the configuration of the S3 object containing the data source.
+     * The configuration information to connect to Confluence as your data source.  Confluence data source connector is in preview release and is subject to change. 
+     */
+    confluenceConfiguration?: ConfluenceDataSourceConfiguration;
+    /**
+     * The configuration information to connect to Amazon S3 as your data source.
      */
     s3Configuration?: S3DataSourceConfiguration;
     /**
-     * The type of storage for the data source.
+     * The configuration information to connect to Salesforce as your data source.  Salesforce data source connector is in preview release and is subject to change. 
+     */
+    salesforceConfiguration?: SalesforceDataSourceConfiguration;
+    /**
+     * The configuration information to connect to SharePoint as your data source.  SharePoint data source connector is in preview release and is subject to change. 
+     */
+    sharePointConfiguration?: SharePointDataSourceConfiguration;
+    /**
+     * The type of data source.
      */
     type: DataSourceType;
+    /**
+     * The configuration of web URLs to crawl for your data source. You should be authorized to crawl the URLs.  Crawling web URLs as your data source is in preview release and is subject to change. 
+     */
+    webConfiguration?: WebDataSourceConfiguration;
   }
   export type DataSourceStatus = "AVAILABLE"|"DELETING"|"DELETE_UNSUCCESSFUL"|string;
   export type DataSourceSummaries = DataSourceSummary[];
@@ -1154,7 +1764,7 @@ declare namespace BedrockAgent {
      */
     updatedAt: DateTimestamp;
   }
-  export type DataSourceType = "S3"|string;
+  export type DataSourceType = "S3"|"WEB"|"CONFLUENCE"|"SALESFORCE"|"SHAREPOINT"|string;
   export type DateTimestamp = Date;
   export interface DeleteAgentActionGroupRequest {
     /**
@@ -1272,6 +1882,66 @@ declare namespace BedrockAgent {
      */
     status: DataSourceStatus;
   }
+  export interface DeleteFlowAliasRequest {
+    /**
+     * The unique identifier of the alias to be deleted.
+     */
+    aliasIdentifier: FlowAliasIdentifier;
+    /**
+     * The unique identifier of the flow that the alias belongs to.
+     */
+    flowIdentifier: FlowIdentifier;
+  }
+  export interface DeleteFlowAliasResponse {
+    /**
+     * The unique identifier of the flow that the alias belongs to.
+     */
+    flowId: FlowId;
+    /**
+     * The unique identifier of the flow.
+     */
+    id: FlowAliasId;
+  }
+  export interface DeleteFlowRequest {
+    /**
+     * The unique identifier of the flow.
+     */
+    flowIdentifier: FlowIdentifier;
+    /**
+     * By default, this value is false and deletion is stopped if the resource is in use. If you set it to true, the resource will be deleted even if the resource is in use.
+     */
+    skipResourceInUseCheck?: Boolean;
+  }
+  export interface DeleteFlowResponse {
+    /**
+     * The unique identifier of the flow.
+     */
+    id: FlowId;
+  }
+  export interface DeleteFlowVersionRequest {
+    /**
+     * The unique identifier of the flow whose version that you want to delete
+     */
+    flowIdentifier: FlowIdentifier;
+    /**
+     * The version of the flow that you want to delete.
+     */
+    flowVersion: NumericalVersion;
+    /**
+     * By default, this value is false and deletion is stopped if the resource is in use. If you set it to true, the resource will be deleted even if the resource is in use.
+     */
+    skipResourceInUseCheck?: Boolean;
+  }
+  export interface DeleteFlowVersionResponse {
+    /**
+     * The unique identifier of the flow.
+     */
+    id: Id;
+    /**
+     * The version of the flow being deleted.
+     */
+    version: NumericalVersion;
+  }
   export interface DeleteKnowledgeBaseRequest {
     /**
      * The unique identifier of the knowledge base to delete.
@@ -1287,6 +1957,26 @@ declare namespace BedrockAgent {
      * The status of the knowledge base and whether it has been successfully deleted.
      */
     status: KnowledgeBaseStatus;
+  }
+  export interface DeletePromptRequest {
+    /**
+     * The unique identifier of the prompt.
+     */
+    promptIdentifier: PromptIdentifier;
+    /**
+     * The version of the prompt to delete.
+     */
+    promptVersion?: NumericalVersion;
+  }
+  export interface DeletePromptResponse {
+    /**
+     * The unique identifier of the prompt that was deleted.
+     */
+    id: PromptId;
+    /**
+     * The version of the prompt that was deleted.
+     */
+    version?: NumericalVersion;
   }
   export type Description = string;
   export type Dimensions = number;
@@ -1313,9 +2003,13 @@ declare namespace BedrockAgent {
      */
     bedrockEmbeddingModelConfiguration?: BedrockEmbeddingModelConfiguration;
   }
+  export type EnabledMemoryTypes = MemoryType[];
   export type FailureReason = string;
   export type FailureReasons = FailureReason[];
   export type FieldName = string;
+  export type FilterList = FilterPattern[];
+  export type FilterPattern = string;
+  export type FilteredObjectType = string;
   export interface FixedSizeChunkingConfiguration {
     /**
      * The maximum number of tokens to include in a chunk.
@@ -1328,6 +2022,307 @@ declare namespace BedrockAgent {
   }
   export type FixedSizeChunkingConfigurationMaxTokensInteger = number;
   export type FixedSizeChunkingConfigurationOverlapPercentageInteger = number;
+  export type FlowAliasArn = string;
+  export type FlowAliasId = string;
+  export type FlowAliasIdentifier = string;
+  export type FlowAliasRoutingConfiguration = FlowAliasRoutingConfigurationListItem[];
+  export interface FlowAliasRoutingConfigurationListItem {
+    /**
+     * The version that the alias maps to.
+     */
+    flowVersion?: Version;
+  }
+  export type FlowAliasSummaries = FlowAliasSummary[];
+  export interface FlowAliasSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the flow alias.
+     */
+    arn: FlowAliasArn;
+    /**
+     * The time at which the alias was created.
+     */
+    createdAt: DateTimestamp;
+    /**
+     * A description of the alias.
+     */
+    description?: Description;
+    /**
+     * The unique identifier of the flow.
+     */
+    flowId: FlowId;
+    /**
+     * The unique identifier of the alias of the flow.
+     */
+    id: FlowAliasId;
+    /**
+     * The name of the alias.
+     */
+    name: Name;
+    /**
+     * A list of configurations about the versions that the alias maps to. Currently, you can only specify one.
+     */
+    routingConfiguration: FlowAliasRoutingConfiguration;
+    /**
+     * The time at which the alias was last updated.
+     */
+    updatedAt: DateTimestamp;
+  }
+  export type FlowArn = string;
+  export interface FlowCondition {
+    /**
+     * Defines the condition. You must refer to at least one of the inputs in the condition. For more information, expand the Condition node section in Node types in prompt flows.
+     */
+    expression?: FlowConditionExpression;
+    /**
+     * A name for the condition that you can reference.
+     */
+    name: FlowConditionName;
+  }
+  export type FlowConditionExpression = string;
+  export type FlowConditionName = string;
+  export interface FlowConditionalConnectionConfiguration {
+    /**
+     * The condition that triggers this connection. For more information about how to write conditions, see the Condition node type in the Node types topic in the Amazon Bedrock User Guide.
+     */
+    condition: FlowConditionName;
+  }
+  export type FlowConditions = FlowCondition[];
+  export interface FlowConnection {
+    /**
+     * The configuration of the connection.
+     */
+    configuration?: FlowConnectionConfiguration;
+    /**
+     * A name for the connection that you can reference.
+     */
+    name: FlowConnectionName;
+    /**
+     * The node that the connection starts at.
+     */
+    source: FlowNodeName;
+    /**
+     * The node that the connection ends at.
+     */
+    target: FlowNodeName;
+    /**
+     * Whether the source node that the connection begins from is a condition node (Conditional) or not (Data).
+     */
+    type: FlowConnectionType;
+  }
+  export interface FlowConnectionConfiguration {
+    /**
+     * The configuration of a connection originating from a Condition node.
+     */
+    conditional?: FlowConditionalConnectionConfiguration;
+    /**
+     * The configuration of a connection originating from a node that isn't a Condition node.
+     */
+    data?: FlowDataConnectionConfiguration;
+  }
+  export type FlowConnectionName = string;
+  export type FlowConnectionType = "Data"|"Conditional"|string;
+  export type FlowConnections = FlowConnection[];
+  export interface FlowDataConnectionConfiguration {
+    /**
+     * The name of the output in the source node that the connection begins from.
+     */
+    sourceOutput: FlowNodeOutputName;
+    /**
+     * The name of the input in the target node that the connection ends at.
+     */
+    targetInput: FlowNodeInputName;
+  }
+  export interface FlowDefinition {
+    /**
+     * An array of connection definitions in the flow.
+     */
+    connections?: FlowConnections;
+    /**
+     * An array of node definitions in the flow.
+     */
+    nodes?: FlowNodes;
+  }
+  export type FlowDescription = string;
+  export type FlowExecutionRoleArn = string;
+  export type FlowId = string;
+  export type FlowIdentifier = string;
+  export type FlowName = string;
+  export interface FlowNode {
+    /**
+     * Contains configurations for the node.
+     */
+    configuration?: FlowNodeConfiguration;
+    /**
+     * An array of objects, each of which contains information about an input into the node.
+     */
+    inputs?: FlowNodeInputs;
+    /**
+     * A name for the node.
+     */
+    name: FlowNodeName;
+    /**
+     * A list of objects, each of which contains information about an output from the node.
+     */
+    outputs?: FlowNodeOutputs;
+    /**
+     * The type of node. This value must match the name of the key that you provide in the configuration you provide in the FlowNodeConfiguration field.
+     */
+    type: FlowNodeType;
+  }
+  export interface FlowNodeConfiguration {
+    /**
+     * Contains configurations for an agent node in your flow. Invokes an alias of an agent and returns the response.
+     */
+    agent?: AgentFlowNodeConfiguration;
+    /**
+     * Contains configurations for a collector node in your flow. Collects an iteration of inputs and consolidates them into an array of outputs.
+     */
+    collector?: CollectorFlowNodeConfiguration;
+    /**
+     * Contains configurations for a Condition node in your flow. Defines conditions that lead to different branches of the flow.
+     */
+    condition?: ConditionFlowNodeConfiguration;
+    /**
+     * Contains configurations for an input flow node in your flow. The first node in the flow. inputs can't be specified for this node.
+     */
+    input?: InputFlowNodeConfiguration;
+    /**
+     * Contains configurations for an iterator node in your flow. Takes an input that is an array and iteratively sends each item of the array as an output to the following node. The size of the array is also returned in the output. The output flow node at the end of the flow iteration will return a response for each member of the array. To return only one response, you can include a collector node downstream from the iterator node.
+     */
+    iterator?: IteratorFlowNodeConfiguration;
+    /**
+     * Contains configurations for a knowledge base node in your flow. Queries a knowledge base and returns the retrieved results or generated response.
+     */
+    knowledgeBase?: KnowledgeBaseFlowNodeConfiguration;
+    /**
+     * Contains configurations for a Lambda function node in your flow. Invokes an Lambda function.
+     */
+    lambdaFunction?: LambdaFunctionFlowNodeConfiguration;
+    /**
+     * Contains configurations for a Lex node in your flow. Invokes an Amazon Lex bot to identify the intent of the input and return the intent as the output.
+     */
+    lex?: LexFlowNodeConfiguration;
+    /**
+     * Contains configurations for an output flow node in your flow. The last node in the flow. outputs can't be specified for this node.
+     */
+    output?: OutputFlowNodeConfiguration;
+    /**
+     * Contains configurations for a prompt node in your flow. Runs a prompt and generates the model response as the output. You can use a prompt from Prompt management or you can configure one in this node.
+     */
+    prompt?: PromptFlowNodeConfiguration;
+    /**
+     * Contains configurations for a Retrieval node in your flow. Retrieves data from an Amazon S3 location and returns it as the output.
+     */
+    retrieval?: RetrievalFlowNodeConfiguration;
+    /**
+     * Contains configurations for a Storage node in your flow. Stores an input in an Amazon S3 location.
+     */
+    storage?: StorageFlowNodeConfiguration;
+  }
+  export type FlowNodeIODataType = "String"|"Number"|"Boolean"|"Object"|"Array"|string;
+  export interface FlowNodeInput {
+    /**
+     * An expression that formats the input for the node. For an explanation of how to create expressions, see Expressions in Prompt flows in Amazon Bedrock.
+     */
+    expression: FlowNodeInputExpression;
+    /**
+     * A name for the input that you can reference.
+     */
+    name: FlowNodeInputName;
+    /**
+     * The data type of the input. If the input doesn't match this type at runtime, a validation error will be thrown.
+     */
+    type: FlowNodeIODataType;
+  }
+  export type FlowNodeInputExpression = string;
+  export type FlowNodeInputName = string;
+  export type FlowNodeInputs = FlowNodeInput[];
+  export type FlowNodeName = string;
+  export interface FlowNodeOutput {
+    /**
+     * A name for the output that you can reference.
+     */
+    name: FlowNodeOutputName;
+    /**
+     * The data type of the output. If the output doesn't match this type at runtime, a validation error will be thrown.
+     */
+    type: FlowNodeIODataType;
+  }
+  export type FlowNodeOutputName = string;
+  export type FlowNodeOutputs = FlowNodeOutput[];
+  export type FlowNodeType = "Input"|"Output"|"KnowledgeBase"|"Condition"|"Lex"|"Prompt"|"LambdaFunction"|"Storage"|"Agent"|"Retrieval"|"Iterator"|"Collector"|string;
+  export type FlowNodes = FlowNode[];
+  export type FlowStatus = "Failed"|"Prepared"|"Preparing"|"NotPrepared"|string;
+  export type FlowSummaries = FlowSummary[];
+  export interface FlowSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the flow.
+     */
+    arn: FlowArn;
+    /**
+     * The time at which the flow was created.
+     */
+    createdAt: DateTimestamp;
+    /**
+     * A description of the flow.
+     */
+    description?: FlowDescription;
+    /**
+     * The unique identifier of the flow.
+     */
+    id: FlowId;
+    /**
+     * The name of the flow.
+     */
+    name: FlowName;
+    /**
+     * The status of the flow. The following statuses are possible:   NotPrepared – The flow has been created or updated, but hasn't been prepared. If you just created the flow, you can't test it. If you updated the flow, the DRAFT version won't contain the latest changes for testing. Send a PrepareFlow request to package the latest changes into the DRAFT version.   Preparing – The flow is being prepared so that the DRAFT version contains the latest changes for testing.   Prepared – The flow is prepared and the DRAFT version contains the latest changes for testing.   Failed – The last API operation that you invoked on the flow failed. Send a GetFlow request and check the error message in the validations field.  
+     */
+    status: FlowStatus;
+    /**
+     * The time at which the flow was last updated.
+     */
+    updatedAt: DateTimestamp;
+    /**
+     * The latest version of the flow.
+     */
+    version: DraftVersion;
+  }
+  export interface FlowValidation {
+    /**
+     * A message describing the validation error.
+     */
+    message: NonBlankString;
+    /**
+     * The severity of the issue described in the message.
+     */
+    severity: FlowValidationSeverity;
+  }
+  export type FlowValidationSeverity = "Warning"|"Error"|string;
+  export type FlowValidations = FlowValidation[];
+  export type FlowVersionSummaries = FlowVersionSummary[];
+  export interface FlowVersionSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the flow that the version belongs to.
+     */
+    arn: FlowArn;
+    /**
+     * The time at the flow version was created.
+     */
+    createdAt: DateTimestamp;
+    /**
+     * The unique identifier of the flow.
+     */
+    id: FlowId;
+    /**
+     * The status of the flow.
+     */
+    status: FlowStatus;
+    /**
+     * The version of the flow.
+     */
+    version: NumericalVersion;
+  }
   export interface Function {
     /**
      * A description of the function and its purpose.
@@ -1450,6 +2445,158 @@ declare namespace BedrockAgent {
      */
     dataSource: DataSource;
   }
+  export interface GetFlowAliasRequest {
+    /**
+     * The unique identifier of the alias for which to retrieve information.
+     */
+    aliasIdentifier: FlowAliasIdentifier;
+    /**
+     * The unique identifier of the flow that the alias belongs to.
+     */
+    flowIdentifier: FlowIdentifier;
+  }
+  export interface GetFlowAliasResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the flow.
+     */
+    arn: FlowAliasArn;
+    /**
+     * The time at which the flow was created.
+     */
+    createdAt: DateTimestamp;
+    /**
+     * The description of the flow.
+     */
+    description?: Description;
+    /**
+     * The unique identifier of the flow that the alias belongs to.
+     */
+    flowId: FlowId;
+    /**
+     * The unique identifier of the alias of the flow.
+     */
+    id: FlowAliasId;
+    /**
+     * The name of the flow alias.
+     */
+    name: Name;
+    /**
+     * Contains information about the version that the alias is mapped to.
+     */
+    routingConfiguration: FlowAliasRoutingConfiguration;
+    /**
+     * The time at which the flow alias was last updated.
+     */
+    updatedAt: DateTimestamp;
+  }
+  export interface GetFlowRequest {
+    /**
+     * The unique identifier of the flow.
+     */
+    flowIdentifier: FlowIdentifier;
+  }
+  export interface GetFlowResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the flow.
+     */
+    arn: FlowArn;
+    /**
+     * The time at which the flow was created.
+     */
+    createdAt: DateTimestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS key that the flow is encrypted with.
+     */
+    customerEncryptionKeyArn?: KmsKeyArn;
+    /**
+     * The definition of the nodes and connections between the nodes in the flow.
+     */
+    definition?: FlowDefinition;
+    /**
+     * The description of the flow.
+     */
+    description?: FlowDescription;
+    /**
+     * The Amazon Resource Name (ARN) of the service role with permissions to create a flow. For more information, see Create a service row for flows in the Amazon Bedrock User Guide.
+     */
+    executionRoleArn: FlowExecutionRoleArn;
+    /**
+     * The unique identifier of the flow.
+     */
+    id: FlowId;
+    /**
+     * The name of the flow.
+     */
+    name: FlowName;
+    /**
+     * The status of the flow. The following statuses are possible:   NotPrepared – The flow has been created or updated, but hasn't been prepared. If you just created the flow, you can't test it. If you updated the flow, the DRAFT version won't contain the latest changes for testing. Send a PrepareFlow request to package the latest changes into the DRAFT version.   Preparing – The flow is being prepared so that the DRAFT version contains the latest changes for testing.   Prepared – The flow is prepared and the DRAFT version contains the latest changes for testing.   Failed – The last API operation that you invoked on the flow failed. Send a GetFlow request and check the error message in the validations field.  
+     */
+    status: FlowStatus;
+    /**
+     * The time at which the flow was last updated.
+     */
+    updatedAt: DateTimestamp;
+    /**
+     * A list of validation error messages related to the last failed operation on the flow.
+     */
+    validations?: FlowValidations;
+    /**
+     * The version of the flow for which information was retrieved.
+     */
+    version: DraftVersion;
+  }
+  export interface GetFlowVersionRequest {
+    /**
+     * The unique identifier of the flow for which to get information.
+     */
+    flowIdentifier: FlowIdentifier;
+    /**
+     * The version of the flow for which to get information.
+     */
+    flowVersion: NumericalVersion;
+  }
+  export interface GetFlowVersionResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the flow.
+     */
+    arn: FlowArn;
+    /**
+     * The time at which the flow was created.
+     */
+    createdAt: DateTimestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS key that the version of the flow is encrypted with.
+     */
+    customerEncryptionKeyArn?: KmsKeyArn;
+    /**
+     * The definition of the nodes and connections between nodes in the flow.
+     */
+    definition?: FlowDefinition;
+    /**
+     * The description of the flow.
+     */
+    description?: FlowDescription;
+    /**
+     * The Amazon Resource Name (ARN) of the service role with permissions to create a flow. For more information, see Create a service role for flows in Amazon Bedrock in the Amazon Bedrock User Guide.
+     */
+    executionRoleArn: FlowExecutionRoleArn;
+    /**
+     * The unique identifier of the flow.
+     */
+    id: FlowId;
+    /**
+     * The name of the flow version.
+     */
+    name: FlowName;
+    /**
+     * The status of the flow.
+     */
+    status: FlowStatus;
+    /**
+     * The version of the flow for which information was retrieved.
+     */
+    version: NumericalVersion;
+  }
   export interface GetIngestionJobRequest {
     /**
      * The unique identifier of the data source in the ingestion job.
@@ -1482,18 +2629,90 @@ declare namespace BedrockAgent {
      */
     knowledgeBase: KnowledgeBase;
   }
+  export interface GetPromptRequest {
+    /**
+     * The unique identifier of the prompt.
+     */
+    promptIdentifier: PromptIdentifier;
+    /**
+     * The version of the prompt about which you want to retrieve information.
+     */
+    promptVersion?: Version;
+  }
+  export interface GetPromptResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the prompt.
+     */
+    arn: PromptArn;
+    /**
+     * The time at which the prompt was created.
+     */
+    createdAt: DateTimestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS key that the prompt is encrypted with.
+     */
+    customerEncryptionKeyArn?: KmsKeyArn;
+    /**
+     * The name of the default variant for the prompt. This value must match the name field in the relevant PromptVariant object.
+     */
+    defaultVariant?: PromptVariantName;
+    /**
+     * The descriptino of the prompt.
+     */
+    description?: PromptDescription;
+    /**
+     * The unique identifier of the prompt.
+     */
+    id: PromptId;
+    /**
+     * The name of the prompt.
+     */
+    name: PromptName;
+    /**
+     * The time at which the prompt was last updated.
+     */
+    updatedAt: DateTimestamp;
+    /**
+     * A list of objects, each containing details about a variant of the prompt.
+     */
+    variants?: PromptVariantList;
+    /**
+     * The version of the prompt.
+     */
+    version: Version;
+  }
   export interface GuardrailConfiguration {
     /**
-     * The guardrails identifier assigned to the guardrails configuration.
+     * The unique identifier of the guardrail.
      */
     guardrailIdentifier?: GuardrailIdentifier;
     /**
-     * The guardrails version assigned to the guardrails configuration.
+     * The version of the guardrail.
      */
     guardrailVersion?: GuardrailVersion;
   }
   export type GuardrailIdentifier = string;
   export type GuardrailVersion = string;
+  export interface HierarchicalChunkingConfiguration {
+    /**
+     * Token settings for each layer.
+     */
+    levelConfigurations: HierarchicalChunkingLevelConfigurations;
+    /**
+     * The number of tokens to repeat across chunks in the same layer.
+     */
+    overlapTokens: HierarchicalChunkingConfigurationOverlapTokensInteger;
+  }
+  export type HierarchicalChunkingConfigurationOverlapTokensInteger = number;
+  export interface HierarchicalChunkingLevelConfiguration {
+    /**
+     * The maximum number of tokens that a chunk can contain in this layer.
+     */
+    maxTokens: HierarchicalChunkingLevelConfigurationMaxTokensInteger;
+  }
+  export type HierarchicalChunkingLevelConfigurationMaxTokensInteger = number;
+  export type HierarchicalChunkingLevelConfigurations = HierarchicalChunkingLevelConfiguration[];
+  export type HttpsUrl = string;
   export type Id = string;
   export interface InferenceConfiguration {
     /**
@@ -1651,7 +2870,17 @@ declare namespace BedrockAgent {
      */
     updatedAt: DateTimestamp;
   }
+  export interface InputFlowNodeConfiguration {
+  }
   export type Instruction = string;
+  export interface IntermediateStorage {
+    /**
+     * An S3 bucket path.
+     */
+    s3Location: S3Location;
+  }
+  export interface IteratorFlowNodeConfiguration {
+  }
   export type KmsKeyArn = string;
   export interface KnowledgeBase {
     /**
@@ -1710,6 +2939,17 @@ declare namespace BedrockAgent {
      */
     vectorKnowledgeBaseConfiguration?: VectorKnowledgeBaseConfiguration;
   }
+  export interface KnowledgeBaseFlowNodeConfiguration {
+    /**
+     * The unique identifier of the knowledge base to query.
+     */
+    knowledgeBaseId: KnowledgeBaseId;
+    /**
+     * The unique identifier of the model to use to generate a response from the query results. Omit this field if you want to return the retrieved results as an array.
+     */
+    modelId?: ModelIdentifier;
+  }
+  export type KnowledgeBaseId = string;
   export type KnowledgeBaseRoleArn = string;
   export type KnowledgeBaseState = "ENABLED"|"DISABLED"|string;
   export type KnowledgeBaseStatus = "CREATING"|"ACTIVE"|"DELETING"|"UPDATING"|"FAILED"|"DELETE_UNSUCCESSFUL"|string;
@@ -1739,6 +2979,24 @@ declare namespace BedrockAgent {
   }
   export type KnowledgeBaseType = "VECTOR"|string;
   export type LambdaArn = string;
+  export interface LambdaFunctionFlowNodeConfiguration {
+    /**
+     * The Amazon Resource Name (ARN) of the Lambda function to invoke.
+     */
+    lambdaArn: LambdaArn;
+  }
+  export type LexBotAliasArn = string;
+  export type LexBotLocaleId = string;
+  export interface LexFlowNodeConfiguration {
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon Lex bot alias to invoke.
+     */
+    botAliasArn: LexBotAliasArn;
+    /**
+     * The Region to invoke the Amazon Lex bot in.
+     */
+    localeId: LexBotLocaleId;
+  }
   export interface ListAgentActionGroupsRequest {
     /**
      * The unique identifier of the agent.
@@ -1887,6 +3145,74 @@ declare namespace BedrockAgent {
      */
     nextToken?: NextToken;
   }
+  export interface ListFlowAliasesRequest {
+    /**
+     * The unique identifier of the flow for which aliases are being returned.
+     */
+    flowIdentifier: FlowIdentifier;
+    /**
+     * The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the nextToken field when making another request to return the next batch of results.
+     */
+    maxResults?: MaxResults;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, enter the token returned in the nextToken field in the response in this field to return the next batch of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListFlowAliasesResponse {
+    /**
+     * A list, each member of which contains information about a flow alias.
+     */
+    flowAliasSummaries: FlowAliasSummaries;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, use this token when making another request in the nextToken field to return the next batch of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListFlowVersionsRequest {
+    /**
+     * The unique identifier of the flow.
+     */
+    flowIdentifier: FlowIdentifier;
+    /**
+     * The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the nextToken field when making another request to return the next batch of results.
+     */
+    maxResults?: MaxResults;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, enter the token returned in the nextToken field in the response in this field to return the next batch of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListFlowVersionsResponse {
+    /**
+     * A list, each member of which contains information about a flow.
+     */
+    flowVersionSummaries: FlowVersionSummaries;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, use this token when making another request in the nextToken field to return the next batch of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListFlowsRequest {
+    /**
+     * The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the nextToken field when making another request to return the next batch of results.
+     */
+    maxResults?: MaxResults;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, enter the token returned in the nextToken field in the response in this field to return the next batch of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListFlowsResponse {
+    /**
+     * A list, each member of which contains information about a flow.
+     */
+    flowSummaries: FlowSummaries;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, use this token when making another request in the nextToken field to return the next batch of results.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListIngestionJobsRequest {
     /**
      * The unique identifier of the data source for which to return ingestion jobs.
@@ -1943,6 +3269,30 @@ declare namespace BedrockAgent {
      */
     nextToken?: NextToken;
   }
+  export interface ListPromptsRequest {
+    /**
+     * The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the nextToken field when making another request to return the next batch of results.
+     */
+    maxResults?: MaxResults;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, enter the token returned in the nextToken field in the response in this field to return the next batch of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The unique identifier of the prompt.
+     */
+    promptIdentifier?: PromptIdentifier;
+  }
+  export interface ListPromptsResponse {
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, use this token when making another request in the nextToken field to return the next batch of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * A list, each member of which contains information about a prompt using Prompt management.
+     */
+    promptSummaries: PromptSummaries;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource for which to list tags.
@@ -1957,6 +3307,18 @@ declare namespace BedrockAgent {
   }
   export type MaxResults = number;
   export type MaximumLength = number;
+  export interface MemoryConfiguration {
+    /**
+     * The type of memory that is stored. 
+     */
+    enabledMemoryTypes: EnabledMemoryTypes;
+    /**
+     * The number of days the agent is configured to retain the conversational context.
+     */
+    storageDays?: StorageDays;
+  }
+  export type MemoryType = "SESSION_SUMMARY"|string;
+  export type Microsoft365TenantId = string;
   export type ModelIdentifier = string;
   export type MongoDbAtlasCollectionName = string;
   export interface MongoDbAtlasConfiguration {
@@ -2009,6 +3371,7 @@ declare namespace BedrockAgent {
   export type MongoDbAtlasIndexName = string;
   export type Name = string;
   export type NextToken = string;
+  export type NonBlankString = string;
   export type NumericalVersion = string;
   export type OpenSearchServerlessCollectionArn = string;
   export interface OpenSearchServerlessConfiguration {
@@ -2040,6 +3403,8 @@ declare namespace BedrockAgent {
     vectorField: FieldName;
   }
   export type OpenSearchServerlessIndexName = string;
+  export interface OutputFlowNodeConfiguration {
+  }
   export type ParameterDescription = string;
   export interface ParameterDetail {
     /**
@@ -2056,6 +3421,45 @@ declare namespace BedrockAgent {
     type: Type;
   }
   export type ParameterMap = {[key: string]: ParameterDetail};
+  export interface ParsingConfiguration {
+    /**
+     * Settings for a foundation model used to parse documents for a data source.
+     */
+    bedrockFoundationModelConfiguration?: BedrockFoundationModelConfiguration;
+    /**
+     * The parsing strategy for the data source.
+     */
+    parsingStrategy: ParsingStrategy;
+  }
+  export interface ParsingPrompt {
+    /**
+     * Instructions for interpreting the contents of a document.
+     */
+    parsingPromptText: ParsingPromptText;
+  }
+  export type ParsingPromptText = string;
+  export type ParsingStrategy = "BEDROCK_FOUNDATION_MODEL"|string;
+  export interface PatternObjectFilter {
+    /**
+     * A list of one or more exclusion regular expression patterns to exclude certain object types that adhere to the pattern. If you specify an inclusion and exclusion filter/pattern and both match a document, the exclusion filter takes precedence and the document isn’t crawled.
+     */
+    exclusionFilters?: FilterList;
+    /**
+     * A list of one or more inclusion regular expression patterns to include certain object types that adhere to the pattern. If you specify an inclusion and exclusion filter/pattern and both match a document, the exclusion filter takes precedence and the document isn’t crawled.
+     */
+    inclusionFilters?: FilterList;
+    /**
+     * The supported object type or content type of the data source.
+     */
+    objectType: FilteredObjectType;
+  }
+  export interface PatternObjectFilterConfiguration {
+    /**
+     * The configuration of specific filters applied to your data source content. You can filter out or include certain content.
+     */
+    filters: PatternObjectFilterList;
+  }
+  export type PatternObjectFilterList = PatternObjectFilter[];
   export type Payload = string;
   export interface PineconeConfiguration {
     /**
@@ -2111,7 +3515,24 @@ declare namespace BedrockAgent {
      */
     preparedAt: DateTimestamp;
   }
+  export interface PrepareFlowRequest {
+    /**
+     * The unique identifier of the flow.
+     */
+    flowIdentifier: FlowIdentifier;
+  }
+  export interface PrepareFlowResponse {
+    /**
+     * The unique identifier of the flow.
+     */
+    id: FlowId;
+    /**
+     * The status of the flow. When you submit this request, the status will be NotPrepared. If preparation succeeds, the status becomes Prepared. If it fails, the status becomes FAILED.
+     */
+    status: FlowStatus;
+  }
   export type PrimitiveLong = number;
+  export type PromptArn = string;
   export interface PromptConfiguration {
     /**
      * Defines the prompt template with which to replace the default prompt template. You can use placeholder variables in the base prompt template to customize the prompt. For more information, see Prompt template placeholder variables. For more information, see Configure the prompt templates.
@@ -2139,6 +3560,87 @@ declare namespace BedrockAgent {
     promptType?: PromptType;
   }
   export type PromptConfigurations = PromptConfiguration[];
+  export type PromptDescription = string;
+  export interface PromptFlowNodeConfiguration {
+    /**
+     * Specifies whether the prompt is from Prompt management or defined inline.
+     */
+    sourceConfiguration: PromptFlowNodeSourceConfiguration;
+  }
+  export interface PromptFlowNodeInlineConfiguration {
+    /**
+     * Contains inference configurations for the prompt.
+     */
+    inferenceConfiguration?: PromptInferenceConfiguration;
+    /**
+     * The unique identifier of the model to run inference with.
+     */
+    modelId: PromptModelIdentifier;
+    /**
+     * Contains a prompt and variables in the prompt that can be replaced with values at runtime.
+     */
+    templateConfiguration: PromptTemplateConfiguration;
+    /**
+     * The type of prompt template.
+     */
+    templateType: PromptTemplateType;
+  }
+  export interface PromptFlowNodeResourceConfiguration {
+    /**
+     * The Amazon Resource Name (ARN) of the prompt from Prompt management.
+     */
+    promptArn: PromptArn;
+  }
+  export interface PromptFlowNodeSourceConfiguration {
+    /**
+     * Contains configurations for a prompt that is defined inline
+     */
+    inline?: PromptFlowNodeInlineConfiguration;
+    /**
+     * Contains configurations for a prompt from Prompt management.
+     */
+    resource?: PromptFlowNodeResourceConfiguration;
+  }
+  export type PromptId = string;
+  export type PromptIdentifier = string;
+  export interface PromptInferenceConfiguration {
+    /**
+     * Contains inference configurations for a text prompt.
+     */
+    text?: PromptModelInferenceConfiguration;
+  }
+  export interface PromptInputVariable {
+    /**
+     * The name of the variable.
+     */
+    name?: PromptInputVariableName;
+  }
+  export type PromptInputVariableName = string;
+  export type PromptInputVariablesList = PromptInputVariable[];
+  export type PromptModelIdentifier = string;
+  export interface PromptModelInferenceConfiguration {
+    /**
+     * The maximum number of tokens to return in the response.
+     */
+    maxTokens?: MaximumLength;
+    /**
+     * A list of strings that define sequences after which the model will stop generating.
+     */
+    stopSequences?: StopSequences;
+    /**
+     * Controls the randomness of the response. Choose a lower value for more predictable outputs and a higher value for more surprising outputs.
+     */
+    temperature?: Temperature;
+    /**
+     * The number of most-likely candidates that the model considers for the next token during generation.
+     */
+    topK?: TopK;
+    /**
+     * The percentage of most-likely candidates that the model considers for the next token.
+     */
+    topP?: TopP;
+  }
+  export type PromptName = string;
   export interface PromptOverrideConfiguration {
     /**
      * The ARN of the Lambda function to use when parsing the raw foundation model output in parts of the agent sequence. If you specify this field, at least one of the promptConfigurations must contain a parserMode value that is set to OVERRIDDEN. For more information, see Parser Lambda function in Agents for Amazon Bedrock.
@@ -2150,7 +3652,69 @@ declare namespace BedrockAgent {
     promptConfigurations: PromptConfigurations;
   }
   export type PromptState = "ENABLED"|"DISABLED"|string;
+  export type PromptSummaries = PromptSummary[];
+  export interface PromptSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the prompt.
+     */
+    arn: PromptArn;
+    /**
+     * The time at which the prompt was created.
+     */
+    createdAt: DateTimestamp;
+    /**
+     * The description of the prompt.
+     */
+    description?: PromptDescription;
+    /**
+     * The unique identifier of the prompt.
+     */
+    id: PromptId;
+    /**
+     * The name of the prompt.
+     */
+    name: PromptName;
+    /**
+     * The time at which the prompt was last updated.
+     */
+    updatedAt: DateTimestamp;
+    /**
+     * The version of the prompt that this summary applies to.
+     */
+    version: Version;
+  }
+  export interface PromptTemplateConfiguration {
+    /**
+     * Contains configurations for the text in a message for a prompt.
+     */
+    text?: TextPromptTemplateConfiguration;
+  }
+  export type PromptTemplateType = "TEXT"|string;
   export type PromptType = "PRE_PROCESSING"|"ORCHESTRATION"|"POST_PROCESSING"|"KNOWLEDGE_BASE_RESPONSE_GENERATION"|string;
+  export interface PromptVariant {
+    /**
+     * Contains inference configurations for the prompt variant.
+     */
+    inferenceConfiguration?: PromptInferenceConfiguration;
+    /**
+     * The unique identifier of the model with which to run inference on the prompt.
+     */
+    modelId?: PromptModelIdentifier;
+    /**
+     * The name of the prompt variant.
+     */
+    name: PromptVariantName;
+    /**
+     * Contains configurations for the prompt template.
+     */
+    templateConfiguration?: PromptTemplateConfiguration;
+    /**
+     * The type of prompt template to use.
+     */
+    templateType: PromptTemplateType;
+  }
+  export type PromptVariantList = PromptVariant[];
+  export type PromptVariantName = string;
   export type ProvisionedModelIdentifier = string;
   export type RdsArn = string;
   export interface RdsConfiguration {
@@ -2231,19 +3795,38 @@ declare namespace BedrockAgent {
     vectorField: FieldName;
   }
   export type RedisEnterpriseCloudIndexName = string;
+  export interface RetrievalFlowNodeConfiguration {
+    /**
+     * Contains configurations for the service to use for retrieving data to return as the output from the node.
+     */
+    serviceConfiguration: RetrievalFlowNodeServiceConfiguration;
+  }
+  export interface RetrievalFlowNodeS3Configuration {
+    /**
+     * The name of the Amazon S3 bucket from which to retrieve data.
+     */
+    bucketName: S3BucketName;
+  }
+  export interface RetrievalFlowNodeServiceConfiguration {
+    /**
+     * Contains configurations for the Amazon S3 location from which to retrieve data to return as the output from the node.
+     */
+    s3?: RetrievalFlowNodeS3Configuration;
+  }
   export type S3BucketArn = string;
   export type S3BucketName = string;
+  export type S3BucketUri = string;
   export interface S3DataSourceConfiguration {
     /**
-     * The Amazon Resource Name (ARN) of the bucket that contains the data source.
+     * The Amazon Resource Name (ARN) of the S3 bucket that contains your data.
      */
     bucketArn: S3BucketArn;
     /**
-     * The bucket account owner ID for the S3 bucket.
+     * The account ID for the owner of the S3 bucket.
      */
     bucketOwnerAccountId?: BucketOwnerAccountId;
     /**
-     * A list of S3 prefixes that define the object containing the data sources. For more information, see Organizing objects using prefixes.
+     * A list of S3 prefixes to include certain files or content. For more information, see Organizing objects using prefixes.
      */
     inclusionPrefixes?: S3Prefixes;
   }
@@ -2253,14 +3836,75 @@ declare namespace BedrockAgent {
      */
     s3BucketName?: S3BucketName;
     /**
-     * The S3 object key containing the resource.
+     * The S3 object key for the S3 resource.
      */
     s3ObjectKey?: S3ObjectKey;
+  }
+  export interface S3Location {
+    /**
+     * The location's URI. For example, s3://my-bucket/chunk-processor/.
+     */
+    uri: S3BucketUri;
   }
   export type S3ObjectKey = string;
   export type S3Prefix = string;
   export type S3Prefixes = S3Prefix[];
+  export type SalesforceAuthType = "OAUTH2_CLIENT_CREDENTIALS"|string;
+  export interface SalesforceCrawlerConfiguration {
+    /**
+     * The configuration of filtering the Salesforce content. For example, configuring regular expression patterns to include or exclude certain content.
+     */
+    filterConfiguration?: CrawlFilterConfiguration;
+  }
+  export interface SalesforceDataSourceConfiguration {
+    /**
+     * The configuration of the Salesforce content. For example, configuring specific types of Salesforce content.
+     */
+    crawlerConfiguration?: SalesforceCrawlerConfiguration;
+    /**
+     * The endpoint information to connect to your Salesforce data source.
+     */
+    sourceConfiguration: SalesforceSourceConfiguration;
+  }
+  export interface SalesforceSourceConfiguration {
+    /**
+     * The supported authentication type to authenticate and connect to your Salesforce instance.
+     */
+    authType: SalesforceAuthType;
+    /**
+     * The Amazon Resource Name of an Secrets Manager secret that stores your authentication credentials for your SharePoint site/sites. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Salesforce connection configuration.
+     */
+    credentialsSecretArn: SecretArn;
+    /**
+     * The Salesforce host URL or instance URL.
+     */
+    hostUrl: HttpsUrl;
+  }
   export type SecretArn = string;
+  export interface SeedUrl {
+    /**
+     * A seed or starting point URL.
+     */
+    url?: Url;
+  }
+  export type SeedUrls = SeedUrl[];
+  export interface SemanticChunkingConfiguration {
+    /**
+     * The dissimilarity threshold for splitting chunks.
+     */
+    breakpointPercentileThreshold: SemanticChunkingConfigurationBreakpointPercentileThresholdInteger;
+    /**
+     * The buffer size.
+     */
+    bufferSize: SemanticChunkingConfigurationBufferSizeInteger;
+    /**
+     * The maximum number of tokens that a chunk can contain.
+     */
+    maxTokens: SemanticChunkingConfigurationMaxTokensInteger;
+  }
+  export type SemanticChunkingConfigurationBreakpointPercentileThresholdInteger = number;
+  export type SemanticChunkingConfigurationBufferSizeInteger = number;
+  export type SemanticChunkingConfigurationMaxTokensInteger = number;
   export interface ServerSideEncryptionConfiguration {
     /**
      * The Amazon Resource Name (ARN) of the KMS key used to encrypt the resource.
@@ -2268,6 +3912,52 @@ declare namespace BedrockAgent {
     kmsKeyArn?: KmsKeyArn;
   }
   export type SessionTTL = number;
+  export type SharePointAuthType = "OAUTH2_CLIENT_CREDENTIALS"|string;
+  export interface SharePointCrawlerConfiguration {
+    /**
+     * The configuration of filtering the SharePoint content. For example, configuring regular expression patterns to include or exclude certain content.
+     */
+    filterConfiguration?: CrawlFilterConfiguration;
+  }
+  export interface SharePointDataSourceConfiguration {
+    /**
+     * The configuration of the SharePoint content. For example, configuring specific types of SharePoint content.
+     */
+    crawlerConfiguration?: SharePointCrawlerConfiguration;
+    /**
+     * The endpoint information to connect to your SharePoint data source.
+     */
+    sourceConfiguration: SharePointSourceConfiguration;
+  }
+  export type SharePointDomain = string;
+  export type SharePointHostType = "ONLINE"|string;
+  export type SharePointSiteUrls = HttpsUrl[];
+  export interface SharePointSourceConfiguration {
+    /**
+     * The supported authentication type to authenticate and connect to your SharePoint site/sites.
+     */
+    authType: SharePointAuthType;
+    /**
+     * The Amazon Resource Name of an Secrets Manager secret that stores your authentication credentials for your SharePoint site/sites. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see SharePoint connection configuration.
+     */
+    credentialsSecretArn: SecretArn;
+    /**
+     * The domain of your SharePoint instance or site URL/URLs.
+     */
+    domain: SharePointDomain;
+    /**
+     * The supported host type, whether online/cloud or server/on-premises.
+     */
+    hostType: SharePointHostType;
+    /**
+     * A list of one or more SharePoint site URLs.
+     */
+    siteUrls: SharePointSiteUrls;
+    /**
+     * The identifier of your Microsoft 365 tenant.
+     */
+    tenantId?: Microsoft365TenantId;
+  }
   export type SortOrder = "ASCENDING"|"DESCENDING"|string;
   export interface StartIngestionJobRequest {
     /**
@@ -2293,6 +3983,7 @@ declare namespace BedrockAgent {
      */
     ingestionJob: IngestionJob;
   }
+  export type StepType = "POST_CHUNKING"|string;
   export type StopSequences = String[];
   export interface StorageConfiguration {
     /**
@@ -2320,6 +4011,25 @@ declare namespace BedrockAgent {
      */
     type: KnowledgeBaseStorageType;
   }
+  export type StorageDays = number;
+  export interface StorageFlowNodeConfiguration {
+    /**
+     * Contains configurations for the service to use for storing the input into the node.
+     */
+    serviceConfiguration: StorageFlowNodeServiceConfiguration;
+  }
+  export interface StorageFlowNodeS3Configuration {
+    /**
+     * The name of the Amazon S3 bucket in which to store the input into the node.
+     */
+    bucketName: S3BucketName;
+  }
+  export interface StorageFlowNodeServiceConfiguration {
+    /**
+     * Contains configurations for the Amazon S3 location in which to store the input into the node.
+     */
+    s3?: StorageFlowNodeS3Configuration;
+  }
   export type String = string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
@@ -2339,8 +4049,42 @@ declare namespace BedrockAgent {
   export type TaggableResourcesArn = string;
   export type TagsMap = {[key: string]: TagValue};
   export type Temperature = number;
+  export type TextPrompt = string;
+  export interface TextPromptTemplateConfiguration {
+    /**
+     * An array of the variables in the prompt template.
+     */
+    inputVariables?: PromptInputVariablesList;
+    /**
+     * The message for the prompt.
+     */
+    text: TextPrompt;
+  }
   export type TopK = number;
   export type TopP = number;
+  export interface Transformation {
+    /**
+     * When the service applies the transformation.
+     */
+    stepToApply: StepType;
+    /**
+     * A Lambda function that processes documents.
+     */
+    transformationFunction: TransformationFunction;
+  }
+  export interface TransformationFunction {
+    /**
+     * The Lambda function.
+     */
+    transformationLambdaConfiguration: TransformationLambdaConfiguration;
+  }
+  export interface TransformationLambdaConfiguration {
+    /**
+     * The function's ARN identifier.
+     */
+    lambdaArn: LambdaArn;
+  }
+  export type Transformations = Transformation[];
   export type Type = "string"|"number"|"integer"|"boolean"|"array"|string;
   export interface UntagResourceRequest {
     /**
@@ -2496,6 +4240,10 @@ declare namespace BedrockAgent {
      */
     instruction?: Instruction;
     /**
+     * Specifies the new memory configuration for the agent. 
+     */
+    memoryConfiguration?: MemoryConfiguration;
+    /**
      * Contains configurations to override prompts in different parts of an agent sequence. For more information, see Advanced prompts.
      */
     promptOverrideConfiguration?: PromptOverrideConfiguration;
@@ -2508,11 +4256,11 @@ declare namespace BedrockAgent {
   }
   export interface UpdateDataSourceRequest {
     /**
-     * The data deletion policy of the updated data source.
+     * The data deletion policy for the data source that you want to update.
      */
     dataDeletionPolicy?: DataDeletionPolicy;
     /**
-     * Contains details about the storage configuration of the data source.
+     * The connection configuration for the data source that you want to update.
      */
     dataSourceConfiguration: DataSourceConfiguration;
     /**
@@ -2524,7 +4272,7 @@ declare namespace BedrockAgent {
      */
     description?: Description;
     /**
-     * The unique identifier of the knowledge base to which the data source belongs.
+     * The unique identifier of the knowledge base for the data source.
      */
     knowledgeBaseId: Id;
     /**
@@ -2545,6 +4293,134 @@ declare namespace BedrockAgent {
      * Contains details about the data source.
      */
     dataSource: DataSource;
+  }
+  export interface UpdateFlowAliasRequest {
+    /**
+     * The unique identifier of the alias.
+     */
+    aliasIdentifier: FlowAliasIdentifier;
+    /**
+     * A description for the flow alias.
+     */
+    description?: Description;
+    /**
+     * The unique identifier of the flow.
+     */
+    flowIdentifier: FlowIdentifier;
+    /**
+     * The name of the flow alias.
+     */
+    name: Name;
+    /**
+     * Contains information about the version to which to map the alias.
+     */
+    routingConfiguration: FlowAliasRoutingConfiguration;
+  }
+  export interface UpdateFlowAliasResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the flow.
+     */
+    arn: FlowAliasArn;
+    /**
+     * The time at which the flow was created.
+     */
+    createdAt: DateTimestamp;
+    /**
+     * The description of the flow.
+     */
+    description?: Description;
+    /**
+     * The unique identifier of the flow.
+     */
+    flowId: FlowId;
+    /**
+     * The unique identifier of the alias.
+     */
+    id: FlowAliasId;
+    /**
+     * The name of the flow alias.
+     */
+    name: Name;
+    /**
+     * Contains information about the version that the alias is mapped to.
+     */
+    routingConfiguration: FlowAliasRoutingConfiguration;
+    /**
+     * The time at which the flow alias was last updated.
+     */
+    updatedAt: DateTimestamp;
+  }
+  export interface UpdateFlowRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the KMS key to encrypt the flow.
+     */
+    customerEncryptionKeyArn?: KmsKeyArn;
+    /**
+     * A definition of the nodes and the connections between the nodes in the flow.
+     */
+    definition?: FlowDefinition;
+    /**
+     * A description for the flow.
+     */
+    description?: FlowDescription;
+    /**
+     * The Amazon Resource Name (ARN) of the service role with permissions to create and manage a flow. For more information, see Create a service role for flows in Amazon Bedrock in the Amazon Bedrock User Guide.
+     */
+    executionRoleArn: FlowExecutionRoleArn;
+    /**
+     * The unique identifier of the flow.
+     */
+    flowIdentifier: FlowIdentifier;
+    /**
+     * A name for the flow.
+     */
+    name: FlowName;
+  }
+  export interface UpdateFlowResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the flow.
+     */
+    arn: FlowArn;
+    /**
+     * The time at which the flow was created.
+     */
+    createdAt: DateTimestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS key that the flow was encrypted with.
+     */
+    customerEncryptionKeyArn?: KmsKeyArn;
+    /**
+     * A definition of the nodes and the connections between nodes in the flow.
+     */
+    definition?: FlowDefinition;
+    /**
+     * The description of the flow.
+     */
+    description?: FlowDescription;
+    /**
+     * The Amazon Resource Name (ARN) of the service role with permissions to create a flow. For more information, see Create a service role for flows in Amazon Bedrock in the Amazon Bedrock User Guide.
+     */
+    executionRoleArn: FlowExecutionRoleArn;
+    /**
+     * The unique identifier of the flow.
+     */
+    id: FlowId;
+    /**
+     * The name of the flow.
+     */
+    name: FlowName;
+    /**
+     * The status of the flow. When you submit this request, the status will be NotPrepared. If updating fails, the status becomes Failed.
+     */
+    status: FlowStatus;
+    /**
+     * The time at which the flow was last updated.
+     */
+    updatedAt: DateTimestamp;
+    /**
+     * The version of the flow. When you update a flow, the version updated is the DRAFT version.
+     */
+    version: DraftVersion;
   }
   export interface UpdateKnowledgeBaseRequest {
     /**
@@ -2578,11 +4454,94 @@ declare namespace BedrockAgent {
      */
     knowledgeBase: KnowledgeBase;
   }
+  export interface UpdatePromptRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the KMS key to encrypt the prompt.
+     */
+    customerEncryptionKeyArn?: KmsKeyArn;
+    /**
+     * The name of the default variant for the prompt. This value must match the name field in the relevant PromptVariant object.
+     */
+    defaultVariant?: PromptVariantName;
+    /**
+     * A description for the prompt.
+     */
+    description?: PromptDescription;
+    /**
+     * A name for the prompt.
+     */
+    name: PromptName;
+    /**
+     * The unique identifier of the prompt.
+     */
+    promptIdentifier: PromptIdentifier;
+    /**
+     * A list of objects, each containing details about a variant of the prompt.
+     */
+    variants?: PromptVariantList;
+  }
+  export interface UpdatePromptResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the prompt.
+     */
+    arn: PromptArn;
+    /**
+     * The time at which the prompt was created.
+     */
+    createdAt: DateTimestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS key to encrypt the prompt.
+     */
+    customerEncryptionKeyArn?: KmsKeyArn;
+    /**
+     * The name of the default variant for the prompt. This value must match the name field in the relevant PromptVariant object.
+     */
+    defaultVariant?: PromptVariantName;
+    /**
+     * The description of the prompt.
+     */
+    description?: PromptDescription;
+    /**
+     * The unique identifier of the prompt.
+     */
+    id: PromptId;
+    /**
+     * The name of the prompt.
+     */
+    name: PromptName;
+    /**
+     * The time at which the prompt was last updated.
+     */
+    updatedAt: DateTimestamp;
+    /**
+     * A list of objects, each containing details about a variant of the prompt.
+     */
+    variants?: PromptVariantList;
+    /**
+     * The version of the prompt. When you update a prompt, the version updated is the DRAFT version.
+     */
+    version: Version;
+  }
+  export type Url = string;
+  export interface UrlConfiguration {
+    /**
+     * One or more seed or starting point URLs.
+     */
+    seedUrls?: SeedUrls;
+  }
   export interface VectorIngestionConfiguration {
     /**
      * Details about how to chunk the documents in the data source. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried.
      */
     chunkingConfiguration?: ChunkingConfiguration;
+    /**
+     * A custom document transformer for parsed data source documents.
+     */
+    customTransformationConfiguration?: CustomTransformationConfiguration;
+    /**
+     * A custom parser for data source documents.
+     */
+    parsingConfiguration?: ParsingConfiguration;
   }
   export interface VectorKnowledgeBaseConfiguration {
     /**
@@ -2595,6 +4554,48 @@ declare namespace BedrockAgent {
     embeddingModelConfiguration?: EmbeddingModelConfiguration;
   }
   export type Version = string;
+  export interface WebCrawlerConfiguration {
+    /**
+     * The configuration of crawl limits for the web URLs.
+     */
+    crawlerLimits?: WebCrawlerLimits;
+    /**
+     * A list of one or more exclusion regular expression patterns to exclude certain URLs. If you specify an inclusion and exclusion filter/pattern and both match a URL, the exclusion filter takes precedence and the web content of the URL isn’t crawled.
+     */
+    exclusionFilters?: FilterList;
+    /**
+     * A list of one or more inclusion regular expression patterns to include certain URLs. If you specify an inclusion and exclusion filter/pattern and both match a URL, the exclusion filter takes precedence and the web content of the URL isn’t crawled.
+     */
+    inclusionFilters?: FilterList;
+    /**
+     * The scope of what is crawled for your URLs. You can choose to crawl only web pages that belong to the same host or primary domain. For example, only web pages that contain the seed URL "https://docs.aws.amazon.com/bedrock/latest/userguide/" and no other domains. You can choose to include sub domains in addition to the host or primary domain. For example, web pages that contain "aws.amazon.com" can also include sub domain "docs.aws.amazon.com".
+     */
+    scope?: WebScopeType;
+  }
+  export interface WebCrawlerLimits {
+    /**
+     * The max rate at which pages are crawled, up to 300 per minute per host.
+     */
+    rateLimit?: WebCrawlerLimitsRateLimitInteger;
+  }
+  export type WebCrawlerLimitsRateLimitInteger = number;
+  export interface WebDataSourceConfiguration {
+    /**
+     * The Web Crawler configuration details for the web data source.
+     */
+    crawlerConfiguration?: WebCrawlerConfiguration;
+    /**
+     * The source configuration details for the web data source.
+     */
+    sourceConfiguration: WebSourceConfiguration;
+  }
+  export type WebScopeType = "HOST_ONLY"|"SUBDOMAINS"|string;
+  export interface WebSourceConfiguration {
+    /**
+     * The configuration of the URL/URLs.
+     */
+    urlConfiguration: UrlConfiguration;
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
