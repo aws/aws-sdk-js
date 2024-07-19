@@ -860,7 +860,7 @@ declare namespace EKS {
   export type BoxedBoolean = boolean;
   export type BoxedInteger = number;
   export type Capacity = number;
-  export type CapacityTypes = "ON_DEMAND"|"SPOT"|string;
+  export type CapacityTypes = "ON_DEMAND"|"SPOT"|"CAPACITY_BLOCK"|string;
   export type Category = "UPGRADE_READINESS"|string;
   export type CategoryList = Category[];
   export interface Certificate {
@@ -1183,6 +1183,10 @@ declare namespace EKS {
      * The access configuration for the cluster.
      */
     accessConfig?: CreateAccessConfigRequest;
+    /**
+     * If you set this value to False when creating a cluster, the default networking add-ons will not be installed. The default networking addons include vpc-cni, coredns, and kube-proxy. Use this option when you plan to install third-party alternative add-ons or self-manage the default networking add-ons.
+     */
+    bootstrapSelfManagedAddons?: BoxedBoolean;
   }
   export interface CreateClusterResponse {
     /**

@@ -28,11 +28,11 @@ declare class CustomerProfiles extends Service {
    */
   createCalculatedAttributeDefinition(callback?: (err: AWSError, data: CustomerProfiles.Types.CreateCalculatedAttributeDefinitionResponse) => void): Request<CustomerProfiles.Types.CreateCalculatedAttributeDefinitionResponse, AWSError>;
   /**
-   * Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys. You can create multiple domains, and each domain can have multiple third-party integrations. Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain. Use this API or UpdateDomain to enable identity resolution: set Matching to true. To prevent cross-service impersonation when you call this API, see Cross-service confused deputy prevention for sample policies that you should apply. 
+   * Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys. You can create multiple domains, and each domain can have multiple third-party integrations. Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain. Use this API or UpdateDomain to enable identity resolution: set Matching to true. To prevent cross-service impersonation when you call this API, see Cross-service confused deputy prevention for sample policies that you should apply.   It is not possible to associate a Customer Profiles domain with an Amazon Connect Instance directly from the API. If you would like to create a domain and associate a Customer Profiles domain, use the Amazon Connect admin website. For more information, see Enable Customer Profiles. Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain. 
    */
   createDomain(params: CustomerProfiles.Types.CreateDomainRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.CreateDomainResponse) => void): Request<CustomerProfiles.Types.CreateDomainResponse, AWSError>;
   /**
-   * Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys. You can create multiple domains, and each domain can have multiple third-party integrations. Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain. Use this API or UpdateDomain to enable identity resolution: set Matching to true. To prevent cross-service impersonation when you call this API, see Cross-service confused deputy prevention for sample policies that you should apply. 
+   * Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys. You can create multiple domains, and each domain can have multiple third-party integrations. Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain. Use this API or UpdateDomain to enable identity resolution: set Matching to true. To prevent cross-service impersonation when you call this API, see Cross-service confused deputy prevention for sample policies that you should apply.   It is not possible to associate a Customer Profiles domain with an Amazon Connect Instance directly from the API. If you would like to create a domain and associate a Customer Profiles domain, use the Amazon Connect admin website. For more information, see Enable Customer Profiles. Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain. 
    */
   createDomain(callback?: (err: AWSError, data: CustomerProfiles.Types.CreateDomainResponse) => void): Request<CustomerProfiles.Types.CreateDomainResponse, AWSError>;
   /**
@@ -915,7 +915,7 @@ declare namespace CustomerProfiles {
      */
     DomainName: name;
     /**
-     * A unique account number that you have given to the customer.
+     * An account number that you have given to the customer.
      */
     AccountNumber?: sensitiveString1To255;
     /**
@@ -1799,6 +1799,14 @@ declare namespace CustomerProfiles {
      */
     SourceLastUpdatedTimestampFormat?: string1To255;
     /**
+     * The amount of provisioned profile object max count available.
+     */
+    MaxAvailableProfileObjectCount?: minSize0;
+    /**
+     * The amount of profile object max count assigned to the object type.
+     */
+    MaxProfileObjectCount?: minSize1;
+    /**
      * A map of the name and ObjectType field.
      */
     Fields?: FieldMap;
@@ -2358,6 +2366,14 @@ declare namespace CustomerProfiles {
      */
     LastUpdatedAt?: timestamp;
     /**
+     * The amount of profile object max count assigned to the object type.
+     */
+    MaxProfileObjectCount?: minSize1;
+    /**
+     * The amount of provisioned profile object max count available.
+     */
+    MaxAvailableProfileObjectCount?: minSize0;
+    /**
      * The tags used to organize, track, or control access for this resource.
      */
     Tags?: TagMap;
@@ -2717,7 +2733,7 @@ declare namespace CustomerProfiles {
      */
     ProfileId?: uuid;
     /**
-     * A unique account number that you have given to the customer.
+     * An account number that you have given to the customer.
      */
     AccountNumber?: sensitiveString1To255;
     /**
@@ -2938,6 +2954,10 @@ declare namespace CustomerProfiles {
      */
     SourceLastUpdatedTimestampFormat?: string1To255;
     /**
+     * The amount of profile object max count assigned to the object type
+     */
+    MaxProfileObjectCount?: minSize1;
+    /**
      * A map of the name and ObjectType field.
      */
     Fields?: FieldMap;
@@ -2979,6 +2999,14 @@ declare namespace CustomerProfiles {
      * The format of your sourceLastUpdatedTimestamp that was previously set up in fields that were parsed using SimpleDateFormat. If you have sourceLastUpdatedTimestamp in your field, you must set up sourceLastUpdatedTimestampFormat.
      */
     SourceLastUpdatedTimestampFormat?: string1To255;
+    /**
+     * The amount of profile object max count assigned to the object type.
+     */
+    MaxProfileObjectCount?: minSize1;
+    /**
+     * The amount of provisioned profile object max count available.
+     */
+    MaxAvailableProfileObjectCount?: minSize0;
     /**
      * A map of the name and ObjectType field.
      */
@@ -3504,7 +3532,7 @@ declare namespace CustomerProfiles {
      */
     AdditionalInformation?: sensitiveString0To1000;
     /**
-     * A unique account number that you have given to the customer.
+     * An account number that you have given to the customer.
      */
     AccountNumber?: sensitiveString0To255;
     /**
@@ -3638,6 +3666,8 @@ declare namespace CustomerProfiles {
   export type matchesNumber = number;
   export type maxSize100 = number;
   export type message = string;
+  export type minSize0 = number;
+  export type minSize1 = number;
   export type optionalBoolean = boolean;
   export type requestValueList = string1To255[];
   export type s3BucketName = string;

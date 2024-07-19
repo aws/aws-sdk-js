@@ -734,11 +734,11 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   listStreamingDistributions(callback?: (err: AWSError, data: CloudFront.Types.ListStreamingDistributionsResult) => void): Request<CloudFront.Types.ListStreamingDistributionsResult, AWSError>;
   /**
-   * List tags for a CloudFront resource.
+   * List tags for a CloudFront resource. For more information, see Tagging a distribution in the Amazon CloudFront Developer Guide.
    */
   listTagsForResource(params: CloudFront.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: CloudFront.Types.ListTagsForResourceResult) => void): Request<CloudFront.Types.ListTagsForResourceResult, AWSError>;
   /**
-   * List tags for a CloudFront resource.
+   * List tags for a CloudFront resource. For more information, see Tagging a distribution in the Amazon CloudFront Developer Guide.
    */
   listTagsForResource(callback?: (err: AWSError, data: CloudFront.Types.ListTagsForResourceResult) => void): Request<CloudFront.Types.ListTagsForResourceResult, AWSError>;
   /**
@@ -750,11 +750,11 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   publishFunction(callback?: (err: AWSError, data: CloudFront.Types.PublishFunctionResult) => void): Request<CloudFront.Types.PublishFunctionResult, AWSError>;
   /**
-   * Add tags to a CloudFront resource.
+   * Add tags to a CloudFront resource. For more information, see Tagging a distribution in the Amazon CloudFront Developer Guide.
    */
   tagResource(params: CloudFront.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Add tags to a CloudFront resource.
+   * Add tags to a CloudFront resource. For more information, see Tagging a distribution in the Amazon CloudFront Developer Guide.
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -766,11 +766,11 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   testFunction(callback?: (err: AWSError, data: CloudFront.Types.TestFunctionResult) => void): Request<CloudFront.Types.TestFunctionResult, AWSError>;
   /**
-   * Remove tags from a CloudFront resource.
+   * Remove tags from a CloudFront resource. For more information, see Tagging a distribution in the Amazon CloudFront Developer Guide.
    */
   untagResource(params: CloudFront.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Remove tags from a CloudFront resource.
+   * Remove tags from a CloudFront resource. For more information, see Tagging a distribution in the Amazon CloudFront Developer Guide.
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1195,7 +1195,7 @@ declare namespace CloudFront {
      */
     Quantity: integer;
     /**
-     * A complex type that contains the HTTP methods that you want CloudFront to cache responses to.
+     * A complex type that contains the HTTP methods that you want CloudFront to cache responses to. Valid values for CachedMethods include GET, HEAD, and OPTIONS, depending on which caching option you choose. For more information, see the preceding section.
      */
     Items: MethodsList;
   }

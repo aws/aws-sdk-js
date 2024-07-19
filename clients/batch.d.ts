@@ -1257,6 +1257,10 @@ declare namespace Batch {
      */
     initContainers?: EksAttemptContainerDetails;
     /**
+     * The Amazon Resource Name (ARN) of the Amazon EKS cluster.
+     */
+    eksClusterArn?: String;
+    /**
      * The name of the pod for this job attempt.
      */
     podName?: String;
@@ -2316,6 +2320,10 @@ declare namespace Batch {
      * An object that contains the instance types that you want to replace for the existing resources of a job.
      */
     instanceTypes?: StringList;
+    /**
+     * An object that contains the properties that you want to replace for the existing Amazon EKS resources of a job.
+     */
+    eksPropertiesOverride?: EksPropertiesOverride;
   }
   export type NodePropertyOverrides = NodePropertyOverride[];
   export type NodeRangeProperties = NodeRangeProperty[];
@@ -2336,6 +2344,10 @@ declare namespace Batch {
      * This is an object that represents the properties of the node range for a multi-node parallel job.
      */
     ecsProperties?: EcsProperties;
+    /**
+     * This is an object that represents the properties of the node range for a multi-node parallel job.
+     */
+    eksProperties?: EksProperties;
   }
   export type OrchestrationType = "ECS"|"EKS"|string;
   export type ParametersMap = {[key: string]: String};

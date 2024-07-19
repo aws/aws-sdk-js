@@ -186,6 +186,10 @@ declare namespace WorkSpacesThinClient {
      * A map of the key-value pairs of the tag or tags to assign to the resource.
      */
     tags?: TagsMap;
+    /**
+     * A map of the key-value pairs of the tag or tags to assign to the newly created devices for this environment.
+     */
+    deviceCreationTags?: DeviceCreationTagsMap;
   }
   export interface CreateEnvironmentResponse {
     /**
@@ -323,6 +327,9 @@ declare namespace WorkSpacesThinClient {
      */
     tags?: TagsMap;
   }
+  export type DeviceCreationTagKey = string;
+  export type DeviceCreationTagValue = string;
+  export type DeviceCreationTagsMap = {[key: string]: DeviceCreationTagValue};
   export type DeviceId = string;
   export type DeviceList = DeviceSummary[];
   export type DeviceName = string;
@@ -467,6 +474,10 @@ declare namespace WorkSpacesThinClient {
      * The tag keys and optional values for the resource.
      */
     tags?: TagsMap;
+    /**
+     * "The tag keys and optional values for the newly created devices for this environment."
+     */
+    deviceCreationTags?: DeviceCreationTagsMap;
   }
   export type EnvironmentId = string;
   export type EnvironmentList = EnvironmentSummary[];
@@ -839,6 +850,10 @@ declare namespace WorkSpacesThinClient {
      * The ID of the software set to apply.
      */
     desiredSoftwareSetId?: SoftwareSetIdOrEmptyString;
+    /**
+     * A map of the key-value pairs of the tag or tags to assign to the newly created devices for this environment.
+     */
+    deviceCreationTags?: DeviceCreationTagsMap;
   }
   export interface UpdateEnvironmentResponse {
     /**

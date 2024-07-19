@@ -1,0 +1,57 @@
+[
+    {
+        "type": "bugfix",
+        "category": "s3",
+        "description": "update s3 status 200 error classification"
+    },
+    {
+        "type": "feature",
+        "category": "ACMPCA",
+        "description": "Minor refactoring of C2J model for AWS Private CA"
+    },
+    {
+        "type": "feature",
+        "category": "ARCZonalShift",
+        "description": "Adds the option to subscribe to get notifications when a zonal autoshift occurs in a region."
+    },
+    {
+        "type": "feature",
+        "category": "AutoScaling",
+        "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing."
+    },
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing."
+    },
+    {
+        "type": "feature",
+        "category": "DynamoDB",
+        "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing."
+    },
+    {
+        "type": "feature",
+        "category": "GlobalAccelerator",
+        "description": "This feature adds exceptions to the Customer API to avoid throwing Internal Service errors"
+    },
+    {
+        "type": "feature",
+        "category": "Pinpoint",
+        "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing."
+    },
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "Vega ally control options and Support for Reviewed Answers in Topics"
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "Update path for CreateDBCluster resource identifier, and Add v2 smoke tests and smithy smokeTests trait for SDK testing."
+    },
+    {
+        "type": "feature",
+        "category": "SNS",
+        "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing."
+    }
+]

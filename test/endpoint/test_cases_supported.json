@@ -4904,38 +4904,6 @@
     "hostname": "nimble-fips.ap-southeast-2.api.aws"
   },
   {
-    "endpointPrefix": "opsworks",
-    "clientName": "OpsWorks",
-    "region": "ap-northeast-1",
-    "useFipsEndpoint": false,
-    "useDualstackEndpoint": false,
-    "hostname": "opsworks.ap-northeast-1.amazonaws.com"
-  },
-  {
-    "endpointPrefix": "opsworks",
-    "clientName": "OpsWorks",
-    "region": "ap-northeast-1",
-    "useFipsEndpoint": false,
-    "useDualstackEndpoint": true,
-    "hostname": "opsworks.ap-northeast-1.api.aws"
-  },
-  {
-    "endpointPrefix": "opsworks",
-    "clientName": "OpsWorks",
-    "region": "ap-northeast-1",
-    "useFipsEndpoint": true,
-    "useDualstackEndpoint": false,
-    "hostname": "opsworks-fips.ap-northeast-1.amazonaws.com"
-  },
-  {
-    "endpointPrefix": "opsworks",
-    "clientName": "OpsWorks",
-    "region": "ap-northeast-1",
-    "useFipsEndpoint": true,
-    "useDualstackEndpoint": true,
-    "hostname": "opsworks-fips.ap-northeast-1.api.aws"
-  },
-  {
     "endpointPrefix": "opsworks-cm",
     "clientName": "OpsWorksCM",
     "region": "ap-northeast-1",

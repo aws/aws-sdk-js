@@ -886,7 +886,31 @@ declare namespace NetworkManager {
      * The timestamp when the attachment was last updated.
      */
     UpdatedAt?: DateTime;
+    /**
+     * Describes the error associated with the attachment request.
+     */
+    LastModificationErrors?: AttachmentErrorList;
   }
+  export interface AttachmentError {
+    /**
+     * The error code for the attachment request. 
+     */
+    Code?: AttachmentErrorCode;
+    /**
+     * The message associated with the error code.
+     */
+    Message?: ServerSideString;
+    /**
+     * The ARN of the requested attachment resource.
+     */
+    ResourceArn?: ResourceArn;
+    /**
+     * The ID of the attachment request.
+     */
+    RequestId?: ServerSideString;
+  }
+  export type AttachmentErrorCode = "VPC_NOT_FOUND"|"SUBNET_NOT_FOUND"|"SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE"|"SUBNET_NO_FREE_ADDRESSES"|"SUBNET_UNSUPPORTED_AVAILABILITY_ZONE"|"SUBNET_NO_IPV6_CIDRS"|"VPN_CONNECTION_NOT_FOUND"|"MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED"|string;
+  export type AttachmentErrorList = AttachmentError[];
   export type AttachmentId = string;
   export type AttachmentList = Attachment[];
   export type AttachmentState = "REJECTED"|"PENDING_ATTACHMENT_ACCEPTANCE"|"CREATING"|"FAILED"|"AVAILABLE"|"UPDATING"|"PENDING_NETWORK_UPDATE"|"PENDING_TAG_ACCEPTANCE"|"DELETING"|string;
@@ -970,6 +994,10 @@ declare namespace NetworkManager {
      * The subnet ARN for the Connect peer. This only applies only when the protocol is NO_ENCAP.
      */
     SubnetArn?: SubnetArn;
+    /**
+     * Describes the error associated with the attachment request.
+     */
+    LastModificationErrors?: ConnectPeerErrorList;
   }
   export interface ConnectPeerAssociation {
     /**
@@ -1036,6 +1064,26 @@ declare namespace NetworkManager {
      */
     BgpConfigurations?: ConnectPeerBgpConfigurationList;
   }
+  export interface ConnectPeerError {
+    /**
+     * The error code for the Connect peer request.
+     */
+    Code?: ConnectPeerErrorCode;
+    /**
+     * The message associated with the error code.
+     */
+    Message?: ServerSideString;
+    /**
+     * The ARN of the requested Connect peer resource.
+     */
+    ResourceArn?: ResourceArn;
+    /**
+     * The ID of the Connect peer request.
+     */
+    RequestId?: ServerSideString;
+  }
+  export type ConnectPeerErrorCode = "EDGE_LOCATION_NO_FREE_IPS"|"EDGE_LOCATION_PEER_DUPLICATE"|"SUBNET_NOT_FOUND"|"IP_OUTSIDE_SUBNET_CIDR_RANGE"|"INVALID_INSIDE_CIDR_BLOCK"|"NO_ASSOCIATED_CIDR_BLOCK"|string;
+  export type ConnectPeerErrorList = ConnectPeerError[];
   export type ConnectPeerId = string;
   export type ConnectPeerIdList = ConnectPeerId[];
   export type ConnectPeerState = "CREATING"|"FAILED"|"AVAILABLE"|"DELETING"|string;
@@ -3483,11 +3531,45 @@ declare namespace NetworkManager {
      * The timestamp when the attachment peer was created.
      */
     CreatedAt?: DateTime;
+    /**
+     * Describes the error associated with the Connect peer request.
+     */
+    LastModificationErrors?: PeeringErrorList;
   }
+  export interface PeeringError {
+    /**
+     * The error code for the peering request.
+     */
+    Code?: PeeringErrorCode;
+    /**
+     * The message associated with the error code.
+     */
+    Message?: ServerSideString;
+    /**
+     * The ARN of the requested peering resource.
+     */
+    ResourceArn?: ResourceArn;
+    /**
+     * The ID of the Peering request.
+     */
+    RequestId?: ServerSideString;
+    /**
+     * Provides additional information about missing permissions for the peering error.
+     */
+    MissingPermissionsContext?: PermissionsErrorContext;
+  }
+  export type PeeringErrorCode = "TRANSIT_GATEWAY_NOT_FOUND"|"TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED"|"MISSING_PERMISSIONS"|"INTERNAL_ERROR"|"EDGE_LOCATION_PEER_DUPLICATE"|"INVALID_TRANSIT_GATEWAY_STATE"|string;
+  export type PeeringErrorList = PeeringError[];
   export type PeeringId = string;
   export type PeeringList = Peering[];
   export type PeeringState = "CREATING"|"FAILED"|"AVAILABLE"|"DELETING"|string;
   export type PeeringType = "TRANSIT_GATEWAY"|string;
+  export interface PermissionsErrorContext {
+    /**
+     * The missing permissions.
+     */
+    MissingPermission?: ServerSideString;
+  }
   export interface ProposedNetworkFunctionGroupChange {
     /**
      * The list of proposed changes to the key-value tags associated with the network function group.

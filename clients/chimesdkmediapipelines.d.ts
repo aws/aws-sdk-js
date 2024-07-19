@@ -52,11 +52,11 @@ declare class ChimeSDKMediaPipelines extends Service {
    */
   createMediaLiveConnectorPipeline(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.CreateMediaLiveConnectorPipelineResponse) => void): Request<ChimeSDKMediaPipelines.Types.CreateMediaLiveConnectorPipelineResponse, AWSError>;
   /**
-   * Creates an Kinesis video stream pool for the media pipeline.
+   * Creates an Amazon Kinesis Video Stream pool for use with media stream pipelines.  If a meeting uses an opt-in Region as its MediaRegion, the KVS stream must be in that same Region. For example, if a meeting uses the af-south-1 Region, the KVS stream must also be in af-south-1. However, if the meeting uses a Region that AWS turns on by default, the KVS stream can be in any available Region, including an opt-in Region. For example, if the meeting uses ca-central-1, the KVS stream can be in eu-west-2, us-east-1, af-south-1, or any other Region that the Amazon Chime SDK supports. To learn which AWS Region a meeting uses, call the GetMeeting API and use the MediaRegion parameter from the response. For more information about opt-in Regions, refer to Available Regions in the Amazon Chime SDK Developer Guide, and Specify which AWS Regions your account can use, in the AWS Account Management Reference Guide. 
    */
   createMediaPipelineKinesisVideoStreamPool(params: ChimeSDKMediaPipelines.Types.CreateMediaPipelineKinesisVideoStreamPoolRequest, callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.CreateMediaPipelineKinesisVideoStreamPoolResponse) => void): Request<ChimeSDKMediaPipelines.Types.CreateMediaPipelineKinesisVideoStreamPoolResponse, AWSError>;
   /**
-   * Creates an Kinesis video stream pool for the media pipeline.
+   * Creates an Amazon Kinesis Video Stream pool for use with media stream pipelines.  If a meeting uses an opt-in Region as its MediaRegion, the KVS stream must be in that same Region. For example, if a meeting uses the af-south-1 Region, the KVS stream must also be in af-south-1. However, if the meeting uses a Region that AWS turns on by default, the KVS stream can be in any available Region, including an opt-in Region. For example, if the meeting uses ca-central-1, the KVS stream can be in eu-west-2, us-east-1, af-south-1, or any other Region that the Amazon Chime SDK supports. To learn which AWS Region a meeting uses, call the GetMeeting API and use the MediaRegion parameter from the response. For more information about opt-in Regions, refer to Available Regions in the Amazon Chime SDK Developer Guide, and Specify which AWS Regions your account can use, in the AWS Account Management Reference Guide. 
    */
   createMediaPipelineKinesisVideoStreamPool(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.CreateMediaPipelineKinesisVideoStreamPoolResponse) => void): Request<ChimeSDKMediaPipelines.Types.CreateMediaPipelineKinesisVideoStreamPoolResponse, AWSError>;
   /**
@@ -92,11 +92,11 @@ declare class ChimeSDKMediaPipelines extends Service {
    */
   deleteMediaPipeline(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an Kinesis video stream pool.
+   * Deletes an Amazon Kinesis Video Stream pool.
    */
   deleteMediaPipelineKinesisVideoStreamPool(params: ChimeSDKMediaPipelines.Types.DeleteMediaPipelineKinesisVideoStreamPoolRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an Kinesis video stream pool.
+   * Deletes an Amazon Kinesis Video Stream pool.
    */
   deleteMediaPipelineKinesisVideoStreamPool(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -252,11 +252,11 @@ declare class ChimeSDKMediaPipelines extends Service {
    */
   updateMediaInsightsPipelineStatus(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates an Kinesis video stream pool in a media pipeline.
+   * Updates an Amazon Kinesis Video Stream pool in a media pipeline.
    */
   updateMediaPipelineKinesisVideoStreamPool(params: ChimeSDKMediaPipelines.Types.UpdateMediaPipelineKinesisVideoStreamPoolRequest, callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.UpdateMediaPipelineKinesisVideoStreamPoolResponse) => void): Request<ChimeSDKMediaPipelines.Types.UpdateMediaPipelineKinesisVideoStreamPoolResponse, AWSError>;
   /**
-   * Updates an Kinesis video stream pool in a media pipeline.
+   * Updates an Amazon Kinesis Video Stream pool in a media pipeline.
    */
   updateMediaPipelineKinesisVideoStreamPool(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.UpdateMediaPipelineKinesisVideoStreamPoolResponse) => void): Request<ChimeSDKMediaPipelines.Types.UpdateMediaPipelineKinesisVideoStreamPoolResponse, AWSError>;
 }
@@ -376,6 +376,10 @@ declare namespace ChimeSDKMediaPipelines {
      * Turns language identification on or off.
      */
     IdentifyLanguage?: Boolean;
+    /**
+     * Turns language identification on or off for multiple languages.
+     */
+    IdentifyMultipleLanguages?: Boolean;
     /**
      * The language options for the transcription, such as automatic language detection.
      */
@@ -735,11 +739,11 @@ declare namespace ChimeSDKMediaPipelines {
   }
   export interface CreateMediaPipelineKinesisVideoStreamPoolRequest {
     /**
-     * The configuration settings for the video stream.
+     * The configuration settings for the stream.
      */
     StreamConfiguration: KinesisVideoStreamConfiguration;
     /**
-     * The name of the video stream pool.
+     * The name of the pool.
      */
     PoolName: KinesisVideoStreamPoolName;
     /**
@@ -747,13 +751,13 @@ declare namespace ChimeSDKMediaPipelines {
      */
     ClientRequestToken?: ClientRequestToken;
     /**
-     * The tags assigned to the video stream pool.
+     * The tags assigned to the stream pool.
      */
     Tags?: TagList;
   }
   export interface CreateMediaPipelineKinesisVideoStreamPoolResponse {
     /**
-     * The configuration for the Kinesis video stream pool.
+     * The configuration for applying the streams to the pool.   
      */
     KinesisVideoStreamPoolConfiguration?: KinesisVideoStreamPoolConfiguration;
   }
@@ -803,7 +807,7 @@ declare namespace ChimeSDKMediaPipelines {
   }
   export interface DeleteMediaPipelineKinesisVideoStreamPoolRequest {
     /**
-     * The ID of the pool being deleted.
+     * The unique identifier of the requested resource. Valid values include the name and ARN of the media pipeline Kinesis Video Stream pool.
      */
     Identifier: NonEmptyString;
   }
@@ -853,7 +857,7 @@ declare namespace ChimeSDKMediaPipelines {
   }
   export interface GetMediaPipelineKinesisVideoStreamPoolRequest {
     /**
-     * The ID of the video stream pool.
+     * The unique identifier of the requested resource. Valid values include the name and ARN of the media pipeline Kinesis Video Stream pool.
      */
     Identifier: NonEmptyString;
   }
@@ -1579,7 +1583,7 @@ declare namespace ChimeSDKMediaPipelines {
   export type MediaStreamPipelineSinkType = "KinesisVideoStreamPool"|string;
   export interface MediaStreamSink {
     /**
-     * The ARN of the media stream sink.
+     * The ARN of the Kinesis Video Stream pool returned by the CreateMediaPipelineKinesisVideoStreamPool API.
      */
     SinkArn: Arn;
     /**
@@ -1602,7 +1606,7 @@ declare namespace ChimeSDKMediaPipelines {
      */
     SourceType: MediaPipelineSourceType;
     /**
-     * The ARN of the media stream source. 
+     * The ARN of the meeting.
      */
     SourceArn: Arn;
   }
@@ -1964,7 +1968,7 @@ declare namespace ChimeSDKMediaPipelines {
   }
   export interface UpdateMediaPipelineKinesisVideoStreamPoolRequest {
     /**
-     * The ID of the video stream pool.
+     * The unique identifier of the requested resource. Valid values include the name and ARN of the media pipeline Kinesis Video Stream pool.
      */
     Identifier: NonEmptyString;
     /**

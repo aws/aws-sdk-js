@@ -148,6 +148,14 @@ declare class KinesisAnalyticsV2 extends Service {
    */
   describeApplication(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DescribeApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.DescribeApplicationResponse, AWSError>;
   /**
+   * Returns information about a specific operation performed on a Managed Service for Apache Flink application
+   */
+  describeApplicationOperation(params: KinesisAnalyticsV2.Types.DescribeApplicationOperationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DescribeApplicationOperationResponse) => void): Request<KinesisAnalyticsV2.Types.DescribeApplicationOperationResponse, AWSError>;
+  /**
+   * Returns information about a specific operation performed on a Managed Service for Apache Flink application
+   */
+  describeApplicationOperation(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DescribeApplicationOperationResponse) => void): Request<KinesisAnalyticsV2.Types.DescribeApplicationOperationResponse, AWSError>;
+  /**
    * Returns information about a snapshot of application state data.
    */
   describeApplicationSnapshot(params: KinesisAnalyticsV2.Types.DescribeApplicationSnapshotRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DescribeApplicationSnapshotResponse) => void): Request<KinesisAnalyticsV2.Types.DescribeApplicationSnapshotResponse, AWSError>;
@@ -171,6 +179,14 @@ declare class KinesisAnalyticsV2 extends Service {
    * Infers a schema for a SQL-based Kinesis Data Analytics application by evaluating sample records on the specified streaming source (Kinesis data stream or Kinesis Data Firehose delivery stream) or Amazon S3 object. In the response, the operation returns the inferred schema and also the sample records that the operation used to infer the schema.  You can use the inferred schema when configuring a streaming source for your application. When you create an application using the Kinesis Data Analytics console, the console uses this operation to infer a schema and show it in the console user interface. 
    */
   discoverInputSchema(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DiscoverInputSchemaResponse) => void): Request<KinesisAnalyticsV2.Types.DiscoverInputSchemaResponse, AWSError>;
+  /**
+   * Lists information about operations performed on a Managed Service for Apache Flink application
+   */
+  listApplicationOperations(params: KinesisAnalyticsV2.Types.ListApplicationOperationsRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.ListApplicationOperationsResponse) => void): Request<KinesisAnalyticsV2.Types.ListApplicationOperationsResponse, AWSError>;
+  /**
+   * Lists information about operations performed on a Managed Service for Apache Flink application
+   */
+  listApplicationOperations(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.ListApplicationOperationsResponse) => void): Request<KinesisAnalyticsV2.Types.ListApplicationOperationsResponse, AWSError>;
   /**
    * Lists information about the current application snapshots.
    */
@@ -204,11 +220,11 @@ declare class KinesisAnalyticsV2 extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.ListTagsForResourceResponse) => void): Request<KinesisAnalyticsV2.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Reverts the application to the previous running version. You can roll back an application if you suspect it is stuck in a transient status.  You can roll back an application only if it is in the UPDATING or AUTOSCALING status. When you rollback an application, it loads state data from the last successful snapshot. If the application has no snapshots, Managed Service for Apache Flink rejects the rollback request. This action is not supported for Managed Service for Apache Flink for SQL applications.
+   * Reverts the application to the previous running version. You can roll back an application if you suspect it is stuck in a transient status or in the running status.  You can roll back an application only if it is in the UPDATING, AUTOSCALING, or RUNNING statuses. When you rollback an application, it loads state data from the last successful snapshot. If the application has no snapshots, Managed Service for Apache Flink rejects the rollback request.
    */
   rollbackApplication(params: KinesisAnalyticsV2.Types.RollbackApplicationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.RollbackApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.RollbackApplicationResponse, AWSError>;
   /**
-   * Reverts the application to the previous running version. You can roll back an application if you suspect it is stuck in a transient status.  You can roll back an application only if it is in the UPDATING or AUTOSCALING status. When you rollback an application, it loads state data from the last successful snapshot. If the application has no snapshots, Managed Service for Apache Flink rejects the rollback request. This action is not supported for Managed Service for Apache Flink for SQL applications.
+   * Reverts the application to the previous running version. You can roll back an application if you suspect it is stuck in a transient status or in the running status.  You can roll back an application only if it is in the UPDATING, AUTOSCALING, or RUNNING statuses. When you rollback an application, it loads state data from the last successful snapshot. If the application has no snapshots, Managed Service for Apache Flink rejects the rollback request.
    */
   rollbackApplication(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.RollbackApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.RollbackApplicationResponse, AWSError>;
   /**
@@ -292,6 +308,10 @@ declare namespace KinesisAnalyticsV2 {
      * The descriptions of the current CloudWatch logging options for the SQL-based Kinesis Data Analytics application.
      */
     CloudWatchLoggingOptionDescriptions?: CloudWatchLoggingOptionDescriptions;
+    /**
+     * Operation ID for tracking AddApplicationCloudWatchLoggingOption request
+     */
+    OperationId?: OperationId;
   }
   export interface AddApplicationInputProcessingConfigurationRequest {
     /**
@@ -444,6 +464,10 @@ declare namespace KinesisAnalyticsV2 {
      * The parameters of the new VPC configuration.
      */
     VpcConfigurationDescription?: VpcConfigurationDescription;
+    /**
+     * Operation ID for tracking AddApplicationVpcConfiguration request
+     */
+    OperationId?: OperationId;
   }
   export interface ApplicationCodeConfiguration {
     /**
@@ -496,6 +520,7 @@ declare namespace KinesisAnalyticsV2 {
      * Describes whether snapshots are enabled for a Managed Service for Apache Flink application.
      */
     ApplicationSnapshotConfiguration?: ApplicationSnapshotConfiguration;
+    ApplicationSystemRollbackConfiguration?: ApplicationSystemRollbackConfiguration;
     /**
      * The array of descriptions of VPC configurations available to the application.
      */
@@ -530,6 +555,7 @@ declare namespace KinesisAnalyticsV2 {
      * Describes whether snapshots are enabled for a Managed Service for Apache Flink application.
      */
     ApplicationSnapshotConfigurationDescription?: ApplicationSnapshotConfigurationDescription;
+    ApplicationSystemRollbackConfigurationDescription?: ApplicationSystemRollbackConfigurationDescription;
     /**
      * The array of descriptions of VPC configurations available to the application.
      */
@@ -560,6 +586,7 @@ declare namespace KinesisAnalyticsV2 {
      * Describes whether snapshots are enabled for a Managed Service for Apache Flink application.
      */
     ApplicationSnapshotConfigurationUpdate?: ApplicationSnapshotConfigurationUpdate;
+    ApplicationSystemRollbackConfigurationUpdate?: ApplicationSystemRollbackConfigurationUpdate;
     /**
      * Updates to the array of descriptions of VPC configurations available to the application.
      */
@@ -628,6 +655,10 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationVersionRolledBackFrom?: ApplicationVersionId;
     /**
+     * The current timestamp when the application version was created.
+     */
+    ApplicationVersionCreateTimestamp?: Timestamp;
+    /**
      * A value you use to implement strong concurrency for application updates.
      */
     ConditionalToken?: ConditionalToken;
@@ -660,6 +691,34 @@ declare namespace KinesisAnalyticsV2 {
   export type ApplicationMaintenanceWindowStartTime = string;
   export type ApplicationMode = "STREAMING"|"INTERACTIVE"|string;
   export type ApplicationName = string;
+  export interface ApplicationOperationInfo {
+    Operation?: Operation;
+    OperationId?: OperationId;
+    /**
+     * The timestamp at which the operation was created
+     */
+    StartTime?: Timestamp;
+    /**
+     * The timestamp at which the operation finished for the application
+     */
+    EndTime?: Timestamp;
+    OperationStatus?: OperationStatus;
+  }
+  export interface ApplicationOperationInfoDetails {
+    Operation: Operation;
+    /**
+     * The timestamp at which the operation was created
+     */
+    StartTime: Timestamp;
+    /**
+     * The timestamp at which the operation finished for the application
+     */
+    EndTime: Timestamp;
+    OperationStatus: OperationStatus;
+    ApplicationVersionChangeDetails?: ApplicationVersionChangeDetails;
+    OperationFailureDetails?: OperationFailureDetails;
+  }
+  export type ApplicationOperationInfoList = ApplicationOperationInfo[];
   export interface ApplicationRestoreConfiguration {
     /**
      * Specifies how the application should be restored.
@@ -716,6 +775,34 @@ declare namespace KinesisAnalyticsV2 {
      * For a Managed Service for Apache Flink application, the mode is STREAMING. For a Managed Service for Apache Flink Studio notebook, it is INTERACTIVE.
      */
     ApplicationMode?: ApplicationMode;
+  }
+  export interface ApplicationSystemRollbackConfiguration {
+    /**
+     * Describes whether system rollbacks are enabled for a Managed Service for Apache Flink application
+     */
+    RollbackEnabled: BooleanObject;
+  }
+  export interface ApplicationSystemRollbackConfigurationDescription {
+    /**
+     * Describes whether system rollbacks are enabled for a Managed Service for Apache Flink application
+     */
+    RollbackEnabled: BooleanObject;
+  }
+  export interface ApplicationSystemRollbackConfigurationUpdate {
+    /**
+     * Describes whether system rollbacks are enabled for a Managed Service for Apache Flink application
+     */
+    RollbackEnabledUpdate: BooleanObject;
+  }
+  export interface ApplicationVersionChangeDetails {
+    /**
+     * The operation was performed on this version of the application
+     */
+    ApplicationVersionUpdatedFrom: ApplicationVersionId;
+    /**
+     * The operation execution resulted in the transition to the following version of the application
+     */
+    ApplicationVersionUpdatedTo: ApplicationVersionId;
   }
   export type ApplicationVersionId = number;
   export type ApplicationVersionSummaries = ApplicationVersionSummary[];
@@ -1029,6 +1116,10 @@ declare namespace KinesisAnalyticsV2 {
      * The descriptions of the remaining CloudWatch logging options for the application.
      */
     CloudWatchLoggingOptionDescriptions?: CloudWatchLoggingOptionDescriptions;
+    /**
+     * Operation ID for tracking DeleteApplicationCloudWatchLoggingOption request
+     */
+    OperationId?: OperationId;
   }
   export interface DeleteApplicationInputProcessingConfigurationRequest {
     /**
@@ -1157,6 +1248,10 @@ declare namespace KinesisAnalyticsV2 {
      * The updated version ID of the application.
      */
     ApplicationVersionId?: ApplicationVersionId;
+    /**
+     * Operation ID for tracking DeleteApplicationVpcConfiguration request
+     */
+    OperationId?: OperationId;
   }
   export interface DeployAsApplicationConfiguration {
     /**
@@ -1175,6 +1270,13 @@ declare namespace KinesisAnalyticsV2 {
      * Updates to the location that holds the data required to specify an Amazon Data Analytics application.
      */
     S3ContentLocationUpdate?: S3ContentBaseLocationUpdate;
+  }
+  export interface DescribeApplicationOperationRequest {
+    ApplicationName: ApplicationName;
+    OperationId: OperationId;
+  }
+  export interface DescribeApplicationOperationResponse {
+    ApplicationOperationInfoDetails?: ApplicationOperationInfoDetails;
   }
   export interface DescribeApplicationRequest {
     /**
@@ -1285,6 +1387,10 @@ declare namespace KinesisAnalyticsV2 {
      */
     PropertyGroups: PropertyGroups;
   }
+  export interface ErrorInfo {
+    ErrorString?: ErrorString;
+  }
+  export type ErrorString = string;
   export type FileKey = string;
   export interface FlinkApplicationConfiguration {
     /**
@@ -1649,6 +1755,18 @@ declare namespace KinesisAnalyticsV2 {
      */
     ResourceARNUpdate: ResourceARN;
   }
+  export type ListApplicationOperationsInputLimit = number;
+  export interface ListApplicationOperationsRequest {
+    ApplicationName: ApplicationName;
+    Limit?: ListApplicationOperationsInputLimit;
+    NextToken?: NextToken;
+    Operation?: Operation;
+    OperationStatus?: OperationStatus;
+  }
+  export interface ListApplicationOperationsResponse {
+    ApplicationOperationInfoList?: ApplicationOperationInfoList;
+    NextToken?: NextToken;
+  }
   export interface ListApplicationSnapshotsRequest {
     /**
      * The name of an existing application.
@@ -1807,6 +1925,16 @@ declare namespace KinesisAnalyticsV2 {
   }
   export type NextToken = string;
   export type ObjectVersion = string;
+  export type Operation = string;
+  export interface OperationFailureDetails {
+    /**
+     * Provides the operation ID of a system-rollback operation executed due to failure in the current operation
+     */
+    RollbackOperationId?: OperationId;
+    ErrorInfo?: ErrorInfo;
+  }
+  export type OperationId = string;
+  export type OperationStatus = "IN_PROGRESS"|"CANCELLED"|"SUCCESSFUL"|"FAILED"|string;
   export interface Output {
     /**
      * The name of the in-application stream.
@@ -2065,6 +2193,10 @@ declare namespace KinesisAnalyticsV2 {
   }
   export interface RollbackApplicationResponse {
     ApplicationDetail: ApplicationDetail;
+    /**
+     * Operation ID for tracking RollbackApplication request
+     */
+    OperationId?: OperationId;
   }
   export interface RunConfiguration {
     /**
@@ -2097,7 +2229,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationRestoreConfiguration?: ApplicationRestoreConfiguration;
   }
-  export type RuntimeEnvironment = "SQL-1_0"|"FLINK-1_6"|"FLINK-1_8"|"ZEPPELIN-FLINK-1_0"|"FLINK-1_11"|"FLINK-1_13"|"ZEPPELIN-FLINK-2_0"|"FLINK-1_15"|"ZEPPELIN-FLINK-3_0"|"FLINK-1_18"|string;
+  export type RuntimeEnvironment = "SQL-1_0"|"FLINK-1_6"|"FLINK-1_8"|"ZEPPELIN-FLINK-1_0"|"FLINK-1_11"|"FLINK-1_13"|"ZEPPELIN-FLINK-2_0"|"FLINK-1_15"|"ZEPPELIN-FLINK-3_0"|"FLINK-1_18"|"FLINK-1_19"|string;
   export interface S3ApplicationCodeLocationDescription {
     /**
      * The Amazon Resource Name (ARN) for the S3 bucket containing the application code.
@@ -2320,6 +2452,10 @@ declare namespace KinesisAnalyticsV2 {
     RunConfiguration?: RunConfiguration;
   }
   export interface StartApplicationResponse {
+    /**
+     * Operation ID for tracking StartApplication request
+     */
+    OperationId?: OperationId;
   }
   export interface StopApplicationRequest {
     /**
@@ -2332,6 +2468,10 @@ declare namespace KinesisAnalyticsV2 {
     Force?: BooleanObject;
   }
   export interface StopApplicationResponse {
+    /**
+     * Operation ID for tracking StopApplication request
+     */
+    OperationId?: OperationId;
   }
   export type SubnetId = string;
   export type SubnetIds = SubnetId[];
@@ -2434,6 +2574,10 @@ declare namespace KinesisAnalyticsV2 {
      * Describes application updates.
      */
     ApplicationDetail: ApplicationDetail;
+    /**
+     * Operation ID for tracking UpdateApplication request
+     */
+    OperationId?: OperationId;
   }
   export type UrlType = "FLINK_DASHBOARD_URL"|"ZEPPELIN_UI_URL"|string;
   export interface VpcConfiguration {

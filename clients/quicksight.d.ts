@@ -12,6 +12,22 @@ declare class QuickSight extends Service {
   constructor(options?: QuickSight.Types.ClientConfiguration)
   config: Config & QuickSight.Types.ClientConfiguration;
   /**
+   * Creates new reviewed answers for a Q Topic.
+   */
+  batchCreateTopicReviewedAnswer(params: QuickSight.Types.BatchCreateTopicReviewedAnswerRequest, callback?: (err: AWSError, data: QuickSight.Types.BatchCreateTopicReviewedAnswerResponse) => void): Request<QuickSight.Types.BatchCreateTopicReviewedAnswerResponse, AWSError>;
+  /**
+   * Creates new reviewed answers for a Q Topic.
+   */
+  batchCreateTopicReviewedAnswer(callback?: (err: AWSError, data: QuickSight.Types.BatchCreateTopicReviewedAnswerResponse) => void): Request<QuickSight.Types.BatchCreateTopicReviewedAnswerResponse, AWSError>;
+  /**
+   * Deletes reviewed answers for Q Topic.
+   */
+  batchDeleteTopicReviewedAnswer(params: QuickSight.Types.BatchDeleteTopicReviewedAnswerRequest, callback?: (err: AWSError, data: QuickSight.Types.BatchDeleteTopicReviewedAnswerResponse) => void): Request<QuickSight.Types.BatchDeleteTopicReviewedAnswerResponse, AWSError>;
+  /**
+   * Deletes reviewed answers for Q Topic.
+   */
+  batchDeleteTopicReviewedAnswer(callback?: (err: AWSError, data: QuickSight.Types.BatchDeleteTopicReviewedAnswerResponse) => void): Request<QuickSight.Types.BatchDeleteTopicReviewedAnswerResponse, AWSError>;
+  /**
    * Cancels an ongoing ingestion of data into SPICE.
    */
   cancelIngestion(params: QuickSight.Types.CancelIngestionRequest, callback?: (err: AWSError, data: QuickSight.Types.CancelIngestionResponse) => void): Request<QuickSight.Types.CancelIngestionResponse, AWSError>;
@@ -988,6 +1004,14 @@ declare class QuickSight extends Service {
    */
   listTopicRefreshSchedules(callback?: (err: AWSError, data: QuickSight.Types.ListTopicRefreshSchedulesResponse) => void): Request<QuickSight.Types.ListTopicRefreshSchedulesResponse, AWSError>;
   /**
+   * Lists all reviewed answers for a Q Topic.
+   */
+  listTopicReviewedAnswers(params: QuickSight.Types.ListTopicReviewedAnswersRequest, callback?: (err: AWSError, data: QuickSight.Types.ListTopicReviewedAnswersResponse) => void): Request<QuickSight.Types.ListTopicReviewedAnswersResponse, AWSError>;
+  /**
+   * Lists all reviewed answers for a Q Topic.
+   */
+  listTopicReviewedAnswers(callback?: (err: AWSError, data: QuickSight.Types.ListTopicReviewedAnswersResponse) => void): Request<QuickSight.Types.ListTopicReviewedAnswersResponse, AWSError>;
+  /**
    * Lists all of the topics within an account.
    */
   listTopics(params: QuickSight.Types.ListTopicsRequest, callback?: (err: AWSError, data: QuickSight.Types.ListTopicsResponse) => void): Request<QuickSight.Types.ListTopicsResponse, AWSError>;
@@ -1487,6 +1511,28 @@ declare namespace QuickSight {
     AvailabilityStatus?: DashboardBehavior;
   }
   export type AdditionalDashboardIdList = ShortRestrictiveResourceId[];
+  export interface AggFunction {
+    /**
+     * The aggregation of an Agg function.
+     */
+    Aggregation?: AggType;
+    /**
+     * The aggregation parameters for an Agg function.
+     */
+    AggregationFunctionParameters?: AggFunctionParamMap;
+    /**
+     * The period of an Agg function.
+     */
+    Period?: TopicTimeGranularity;
+    /**
+     * The period field for an Agg function.
+     */
+    PeriodField?: LimitedString;
+  }
+  export type AggFunctionParamKey = string;
+  export type AggFunctionParamMap = {[key: string]: AggFunctionParamValue};
+  export type AggFunctionParamValue = string;
+  export type AggType = "SUM"|"MIN"|"MAX"|"COUNT"|"AVERAGE"|"DISTINCT_COUNT"|"STDEV"|"STDEVP"|"VAR"|"VARP"|"PERCENTILE"|"MEDIAN"|"PTD_SUM"|"PTD_MIN"|"PTD_MAX"|"PTD_COUNT"|"PTD_DISTINCT_COUNT"|"PTD_AVERAGE"|"COLUMN"|"CUSTOM"|string;
   export interface AggregationFunction {
     /**
      * Aggregation for numerical values.
@@ -1506,6 +1552,17 @@ declare namespace QuickSight {
     AttributeAggregationFunction?: AttributeAggregationFunction;
   }
   export type AggregationFunctionParameters = {[key: string]: LimitedString};
+  export interface AggregationPartitionBy {
+    /**
+     * The field Name for an AggregationPartitionBy.
+     */
+    FieldName?: LimitedString;
+    /**
+     * The TimeGranularity for an AggregationPartitionBy.
+     */
+    TimeGranularity?: TimeGranularity;
+  }
+  export type AggregationPartitionByList = AggregationPartitionBy[];
   export interface AggregationSortConfiguration {
     /**
      * The column that determines the sort order of aggregated values.
@@ -1691,6 +1748,20 @@ declare namespace QuickSight {
     LastUpdatedTime?: Timestamp;
   }
   export type AnalysisSummaryList = AnalysisSummary[];
+  export interface Anchor {
+    /**
+     * The AnchorType for the Anchor.
+     */
+    AnchorType?: AnchorType;
+    /**
+     * The TimeGranularity of the Anchor.
+     */
+    TimeGranularity?: TimeGranularity;
+    /**
+     * The offset of the Anchor.
+     */
+    Offset?: Integer;
+  }
   export interface AnchorDateConfiguration {
     /**
      * The options for the date configuration. Choose one of the options below:    NOW   
@@ -1702,6 +1773,7 @@ declare namespace QuickSight {
     ParameterName?: ParameterName;
   }
   export type AnchorOption = "NOW"|string;
+  export type AnchorType = "TODAY"|string;
   export interface AnonymousUserDashboardEmbeddingConfiguration {
     /**
      * The dashboard ID for the dashboard that you want the user to see first. This ID is included in the output URL. When the URL in response is accessed, Amazon QuickSight renders this dashboard. The Amazon Resource Name (ARN) of this dashboard must be included in the AuthorizedResourceArns parameter. Otherwise, the request will fail with InvalidParameterValueException.
@@ -1751,6 +1823,8 @@ declare namespace QuickSight {
     FileGroups?: SnapshotJobResultFileGroupList;
   }
   export type AnonymousUserSnapshotJobResultList = AnonymousUserSnapshotJobResult[];
+  export type AnswerId = string;
+  export type AnswerIds = AnswerId[];
   export interface ArcAxisConfiguration {
     /**
      * The arc axis range of a GaugeChartVisual.
@@ -2777,6 +2851,86 @@ declare namespace QuickSight {
   }
   export type BarsArrangement = "CLUSTERED"|"STACKED"|"STACKED_PERCENT"|string;
   export type BaseMapStyleType = "LIGHT_GRAY"|"DARK_GRAY"|"STREET"|"IMAGERY"|string;
+  export interface BatchCreateTopicReviewedAnswerRequest {
+    /**
+     * The ID of the Amazon Web Services account that you want to create a reviewed answer in.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID for the topic reviewed answer that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId: TopicId;
+    /**
+     * The definition of the Answers to be created.
+     */
+    Answers: CreateTopicReviewedAnswers;
+  }
+  export interface BatchCreateTopicReviewedAnswerResponse {
+    /**
+     * The ID for the topic reviewed answer that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId?: TopicId;
+    /**
+     * The Amazon Resource Name (ARN) of the topic.
+     */
+    TopicArn?: Arn;
+    /**
+     * The definition of Answers that are successfully created.
+     */
+    SucceededAnswers?: SucceededTopicReviewedAnswers;
+    /**
+     * The definition of Answers that are invalid and not created.
+     */
+    InvalidAnswers?: InvalidTopicReviewedAnswers;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+  }
+  export interface BatchDeleteTopicReviewedAnswerRequest {
+    /**
+     * The ID of the Amazon Web Services account that you want to delete a reviewed answers in.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID for the topic reviewed answer that you want to delete. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId: TopicId;
+    /**
+     * The Answer IDs of the Answers to be deleted.
+     */
+    AnswerIds?: AnswerIds;
+  }
+  export interface BatchDeleteTopicReviewedAnswerResponse {
+    /**
+     * The ID of the topic reviewed answer that you want to delete. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId?: TopicId;
+    /**
+     * The Amazon Resource Name (ARN) of the topic.
+     */
+    TopicArn?: Arn;
+    /**
+     * The definition of Answers that are successfully deleted.
+     */
+    SucceededAnswers?: SucceededTopicReviewedAnswers;
+    /**
+     * The definition of Answers that are invalid and not deleted.
+     */
+    InvalidAnswers?: InvalidTopicReviewedAnswers;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
   export interface BigQueryParameters {
     /**
      * The Google Cloud Platform project ID where your datasource was created.
@@ -2823,6 +2977,10 @@ declare namespace QuickSight {
      * The configuration of a page break for a section.
      */
     PageBreakConfiguration?: SectionPageBreakConfiguration;
+    /**
+     * Describes the configurations that are required to declare a section as repeating.
+     */
+    RepeatConfiguration?: BodySectionRepeatConfiguration;
   }
   export type BodySectionConfigurationList = BodySectionConfiguration[];
   export interface BodySectionContent {
@@ -2830,6 +2988,58 @@ declare namespace QuickSight {
      * The layout configuration of a body section.
      */
     Layout?: SectionLayoutConfiguration;
+  }
+  export interface BodySectionDynamicCategoryDimensionConfiguration {
+    Column: ColumnIdentifier;
+    /**
+     * Number of values to use from the column for repetition.
+     */
+    Limit?: BodySectionDynamicDimensionLimit;
+    /**
+     * Sort criteria on the column values that you use for repetition. 
+     */
+    SortByMetrics?: BodySectionDynamicDimensionSortConfigurationList;
+  }
+  export type BodySectionDynamicDimensionLimit = number;
+  export type BodySectionDynamicDimensionSortConfigurationList = ColumnSort[];
+  export interface BodySectionDynamicNumericDimensionConfiguration {
+    Column: ColumnIdentifier;
+    /**
+     * Number of values to use from the column for repetition.
+     */
+    Limit?: BodySectionDynamicDimensionLimit;
+    /**
+     * Sort criteria on the column values that you use for repetition. 
+     */
+    SortByMetrics?: BodySectionDynamicDimensionSortConfigurationList;
+  }
+  export interface BodySectionRepeatConfiguration {
+    /**
+     * List of BodySectionRepeatDimensionConfiguration values that describe the dataset column and constraints for the column used to repeat the contents of a section.
+     */
+    DimensionConfigurations?: BodySectionRepeatDimensionConfigurationList;
+    /**
+     * Page break configuration to apply for each repeating instance.
+     */
+    PageBreakConfiguration?: BodySectionRepeatPageBreakConfiguration;
+    /**
+     * List of visuals to exclude from repetition in repeating sections. The visuals will render identically, and ignore the repeating configurations in all repeating instances.
+     */
+    NonRepeatingVisuals?: NonRepeatingVisualsList;
+  }
+  export interface BodySectionRepeatDimensionConfiguration {
+    /**
+     * Describes the Category dataset column and constraints around the dynamic values that will be used in repeating the section contents.
+     */
+    DynamicCategoryDimensionConfiguration?: BodySectionDynamicCategoryDimensionConfiguration;
+    /**
+     * Describes the Numeric dataset column and constraints around the dynamic values used to repeat the contents of a section.
+     */
+    DynamicNumericDimensionConfiguration?: BodySectionDynamicNumericDimensionConfiguration;
+  }
+  export type BodySectionRepeatDimensionConfigurationList = BodySectionRepeatDimensionConfiguration[];
+  export interface BodySectionRepeatPageBreakConfiguration {
+    After?: SectionAfterPageBreak;
   }
   export interface BookmarksConfigurations {
     /**
@@ -2998,6 +3208,7 @@ declare namespace QuickSight {
     Expression: CalculatedFieldExpression;
   }
   export type CalculatedFieldExpression = string;
+  export type CalculatedFieldReferenceList = Identifier[];
   export type CalculatedFields = CalculatedField[];
   export interface CalculatedMeasureField {
     /**
@@ -3160,6 +3371,11 @@ declare namespace QuickSight {
   export type CategoryFilterMatchOperator = "EQUALS"|"DOES_NOT_EQUAL"|"CONTAINS"|"DOES_NOT_CONTAIN"|"STARTS_WITH"|"ENDS_WITH"|string;
   export type CategoryFilterSelectAllOptions = "FILTER_ALL_VALUES"|string;
   export type CategoryFilterType = "CUSTOM_FILTER"|"CUSTOM_FILTER_LIST"|"FILTER_LIST"|string;
+  export interface CategoryInnerFilter {
+    Column: ColumnIdentifier;
+    Configuration: CategoryFilterConfiguration;
+    DefaultFilterControlConfiguration?: DefaultFilterControlConfiguration;
+  }
   export type CategoryValue = string;
   export type CategoryValueList = CategoryValue[];
   export interface CellValueSynonym {
@@ -3206,6 +3422,17 @@ declare namespace QuickSight {
      */
     ValueList?: StringList;
   }
+  export interface CollectiveConstantEntry {
+    /**
+     * The ConstantType of a CollectiveConstantEntry.
+     */
+    ConstantType?: ConstantType;
+    /**
+     * The value of a CollectiveConstantEntry.
+     */
+    Value?: ConstantValueString;
+  }
+  export type CollectiveConstantEntryList = CollectiveConstantEntry[];
   export type ColorFillType = "DISCRETE"|"GRADIENT"|string;
   export type ColorList = HexColor[];
   export interface ColorScale {
@@ -3561,6 +3788,7 @@ declare namespace QuickSight {
     PercentageDisplayFormatConfiguration?: PercentageDisplayFormatConfiguration;
   }
   export type ComparisonMethod = "DIFFERENCE"|"PERCENT_DIFFERENCE"|"PERCENT"|string;
+  export type ComparisonMethodType = "DIFF"|"PERC_DIFF"|"DIFF_AS_PERC"|"POP_CURRENT_DIFF_AS_PERC"|"POP_CURRENT_DIFF"|"POP_OVERTIME_DIFF_AS_PERC"|"POP_OVERTIME_DIFF"|"PERCENT_OF_TOTAL"|"RUNNING_SUM"|"MOVING_AVERAGE"|string;
   export interface Computation {
     /**
      * The top ranked and bottom ranked computation configuration.
@@ -3691,6 +3919,7 @@ declare namespace QuickSight {
     Color?: HexColor;
   }
   export type ConstantType = "SINGULAR"|"RANGE"|"COLLECTIVE"|string;
+  export type ConstantValueString = string;
   export interface ContextMenuOption {
     /**
      * The availability status of the context menu options. If the value of this property is set to ENABLED, dashboard readers can interact with the context menu.
@@ -3708,6 +3937,25 @@ declare namespace QuickSight {
     ContributorDimensions: ContributorDimensionList;
   }
   export type ContributionAnalysisDefaultList = ContributionAnalysisDefault[];
+  export type ContributionAnalysisDirection = "INCREASE"|"DECREASE"|"NEUTRAL"|string;
+  export interface ContributionAnalysisFactor {
+    /**
+     * The field name of the ContributionAnalysisFactor.
+     */
+    FieldName?: LimitedString;
+  }
+  export type ContributionAnalysisFactorsList = ContributionAnalysisFactor[];
+  export type ContributionAnalysisSortType = "ABSOLUTE_DIFFERENCE"|"CONTRIBUTION_PERCENTAGE"|"DEVIATION_FROM_EXPECTED"|"PERCENTAGE_DIFFERENCE"|string;
+  export interface ContributionAnalysisTimeRanges {
+    /**
+     * The start range for the ContributionAnalysisTimeRanges.
+     */
+    StartRange?: TopicIRFilterOption;
+    /**
+     * The end range for the ContributionAnalysisTimeRanges.
+     */
+    EndRange?: TopicIRFilterOption;
+  }
   export type ContributorDimensionList = ColumnIdentifier[];
   export type CopySourceArn = string;
   export interface CreateAccountCustomizationRequest {
@@ -4789,6 +5037,33 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
   }
+  export interface CreateTopicReviewedAnswer {
+    /**
+     * The answer ID for the CreateTopicReviewedAnswer.
+     */
+    AnswerId: AnswerId;
+    /**
+     * The Dataset arn for the CreateTopicReviewedAnswer.
+     */
+    DatasetArn: Arn;
+    /**
+     * The Question to be created.
+     */
+    Question: LimitedString;
+    /**
+     * The Mir for the CreateTopicReviewedAnswer.
+     */
+    Mir?: TopicIR;
+    /**
+     * The PrimaryVisual for the CreateTopicReviewedAnswer.
+     */
+    PrimaryVisual?: TopicVisual;
+    /**
+     * The template for the CreateTopicReviewedAnswer.
+     */
+    Template?: TopicTemplate;
+  }
+  export type CreateTopicReviewedAnswers = CreateTopicReviewedAnswer[];
   export interface CreateVPCConnectionRequest {
     /**
      * The Amazon Web Services account ID of the account where you want to create a new VPC connection.
@@ -6233,6 +6508,14 @@ declare namespace QuickSight {
      * The configuration of info icon label options.
      */
     InfoIconLabelOptions?: SheetControlInfoIconLabelOptions;
+    /**
+     * The helper text visibility of the DateTimePickerControlDisplayOptions.
+     */
+    HelperTextVisibility?: Visibility;
+    /**
+     * The date icon visibility of the DateTimePickerControlDisplayOptions.
+     */
+    DateIconVisibility?: Visibility;
   }
   export interface DateTimeValueWhenUnsetConfiguration {
     /**
@@ -9237,7 +9520,26 @@ declare namespace QuickSight {
      * A TopBottomFilter filters data to the top or bottom values for a given column.
      */
     TopBottomFilter?: TopBottomFilter;
+    /**
+     * A NestedFilter filters data with a subset of data that is defined by the nested inner filter.
+     */
+    NestedFilter?: NestedFilter;
   }
+  export interface FilterAggMetrics {
+    /**
+     * The metric operand of the FilterAggMetrics.
+     */
+    MetricOperand?: Identifier;
+    /**
+     * The function for the FilterAggMetrics.
+     */
+    Function?: AggType;
+    /**
+     * The sort direction for FilterAggMetrics.
+     */
+    SortDirection?: TopicSortDirection;
+  }
+  export type FilterAggMetricsList = FilterAggMetrics[];
   export type FilterClass = "ENFORCED_VALUE_FILTER"|"CONDITIONAL_VALUE_FILTER"|"NAMED_VALUE_FILTER"|string;
   export interface FilterControl {
     /**
@@ -10873,6 +11175,12 @@ declare namespace QuickSight {
   export type IAMPolicyAssignmentSummaryList = IAMPolicyAssignmentSummary[];
   export type IPv4Address = string;
   export type Icon = "CARET_UP"|"CARET_DOWN"|"PLUS"|"MINUS"|"ARROW_UP"|"ARROW_DOWN"|"ARROW_LEFT"|"ARROW_UP_LEFT"|"ARROW_DOWN_LEFT"|"ARROW_RIGHT"|"ARROW_UP_RIGHT"|"ARROW_DOWN_RIGHT"|"FACE_UP"|"FACE_DOWN"|"FACE_FLAT"|"ONE_BAR"|"TWO_BAR"|"THREE_BAR"|"CIRCLE"|"TRIANGLE"|"SQUARE"|"FLAG"|"THUMBS_UP"|"THUMBS_DOWN"|"CHECKMARK"|"X"|string;
+  export interface Identifier {
+    /**
+     * The identity of the identifier.
+     */
+    Identity: LimitedString;
+  }
   export interface IdentityCenterConfiguration {
     /**
      * A Boolean option that controls whether Trusted Identity Propagation should be used.
@@ -10938,6 +11246,12 @@ declare namespace QuickSight {
   export type IngestionStatus = "INITIALIZED"|"QUEUED"|"RUNNING"|"FAILED"|"COMPLETED"|"CANCELLED"|string;
   export type IngestionType = "INCREMENTAL_REFRESH"|"FULL_REFRESH"|string;
   export type Ingestions = Ingestion[];
+  export interface InnerFilter {
+    /**
+     * A CategoryInnerFilter filters text values for the NestedFilter.
+     */
+    CategoryInnerFilter?: CategoryInnerFilter;
+  }
   export interface InputColumn {
     /**
      * The name of this column in the underlying data source.
@@ -11073,6 +11387,17 @@ declare namespace QuickSight {
      */
     CustomValue?: SensitiveLong;
   }
+  export interface InvalidTopicReviewedAnswer {
+    /**
+     * The answer ID for the InvalidTopicReviewedAnswer.
+     */
+    AnswerId?: AnswerId;
+    /**
+     * The error that is returned for the InvalidTopicReviewedAnswer.
+     */
+    Error?: ReviewedAnswerErrorCode;
+  }
+  export type InvalidTopicReviewedAnswers = InvalidTopicReviewedAnswer[];
   export type IpRestrictionRuleDescription = string;
   export type IpRestrictionRuleMap = {[key: string]: IpRestrictionRuleDescription};
   export interface ItemsLimitConfiguration {
@@ -12534,6 +12859,38 @@ declare namespace QuickSight {
      */
     RequestId?: String;
   }
+  export interface ListTopicReviewedAnswersRequest {
+    /**
+     * The ID of the Amazon Web Services account that containd the reviewed answers that you want listed.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID for the topic that contains the reviewed answer that you want to list. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId: TopicId;
+  }
+  export interface ListTopicReviewedAnswersResponse {
+    /**
+     * The ID for the topic that contains the reviewed answer that you want to list. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId?: TopicId;
+    /**
+     * The Amazon Resource Name (ARN) of the topic.
+     */
+    TopicArn?: Arn;
+    /**
+     * The definition of all Answers in the topic.
+     */
+    Answers?: TopicReviewedAnswers;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+  }
   export interface ListTopicsRequest {
     /**
      * The ID of the Amazon Web Services account that contains the topics that you want to list.
@@ -12932,6 +13289,12 @@ declare namespace QuickSight {
     AggregationFunctionParameters?: AggregationFunctionParameters;
   }
   export type NamedEntityDefinitions = NamedEntityDefinition[];
+  export interface NamedEntityRef {
+    /**
+     * The NamedEntityName for the NamedEntityRef.
+     */
+    NamedEntityName?: LimitedString;
+  }
   export type NamedFilterAggType = "NO_AGGREGATION"|"SUM"|"AVERAGE"|"COUNT"|"DISTINCT_COUNT"|"MAX"|"MEDIAN"|"MIN"|"STDEV"|"STDEVP"|"VAR"|"VARP"|string;
   export type NamedFilterType = "CATEGORY_FILTER"|"NUMERIC_EQUALITY_FILTER"|"NUMERIC_RANGE_FILTER"|"DATE_RANGE_FILTER"|"RELATIVE_DATE_FILTER"|string;
   export type Namespace = string;
@@ -12992,6 +13355,24 @@ declare namespace QuickSight {
     DisplayMode: NegativeValueDisplayMode;
   }
   export type NegativeValueDisplayMode = "POSITIVE"|"NEGATIVE"|string;
+  export interface NestedFilter {
+    /**
+     * An identifier that uniquely identifies a filter within a dashboard, analysis, or template.
+     */
+    FilterId: ShortRestrictiveResourceId;
+    /**
+     * The column that the filter is applied to.
+     */
+    Column: ColumnIdentifier;
+    /**
+     * A boolean condition to include or exclude the subset that is defined by the values of the nested inner filter.
+     */
+    IncludeInnerSet: Boolean;
+    /**
+     * The InnerFilter defines the subset of data to be used with the NestedFilter.
+     */
+    InnerFilter: InnerFilter;
+  }
   export interface NetworkInterface {
     /**
      * The subnet ID associated with the network interface.
@@ -13036,6 +13417,8 @@ declare namespace QuickSight {
     IntegerStaticValues?: IntegerDatasetParameterValueList;
   }
   export type NonEmptyString = string;
+  export type NonRepeatingVisualsList = ShortRestrictiveResourceId[];
+  export type NullFilterOption = "ALL_VALUES"|"NON_NULLS_ONLY"|"NULLS_ONLY"|string;
   export type NullString = string;
   export interface NullValueFormatConfiguration {
     /**
@@ -13265,6 +13648,7 @@ declare namespace QuickSight {
     FormatConfiguration?: NumberFormatConfiguration;
   }
   export type OnClause = string;
+  export type OperandList = Identifier[];
   export type OptionalPort = number;
   export interface OracleParameters {
     /**
@@ -14952,6 +15336,7 @@ declare namespace QuickSight {
     RequestId?: String;
   }
   export type RestrictiveResourceId = string;
+  export type ReviewedAnswerErrorCode = "INTERNAL_ERROR"|"MISSING_ANSWER"|"DATASET_DOES_NOT_EXIST"|"INVALID_DATASET_ARN"|"DUPLICATED_ANSWER"|"INVALID_DATA"|"MISSING_REQUIRED_FIELDS"|string;
   export type Role = "ADMIN"|"AUTHOR"|"READER"|"ADMIN_PRO"|"AUTHOR_PRO"|"READER_PRO"|string;
   export type RoleArn = string;
   export type RoleName = string;
@@ -15955,6 +16340,17 @@ declare namespace QuickSight {
      */
     InfoIconLabelOptions?: SheetControlInfoIconLabelOptions;
   }
+  export interface Slot {
+    /**
+     * The slot ID of the slot.
+     */
+    SlotId?: LimitedString;
+    /**
+     * The visual ID for the slot.
+     */
+    VisualId?: LimitedString;
+  }
+  export type Slots = Slot[];
   export type SmallMultiplesAxisPlacement = "OUTSIDE"|"INSIDE"|string;
   export interface SmallMultiplesAxisProperties {
     /**
@@ -16497,6 +16893,13 @@ declare namespace QuickSight {
      */
     StyleTargets?: TableStyleTargetList;
   }
+  export interface SucceededTopicReviewedAnswer {
+    /**
+     * The answer ID for the SucceededTopicReviewedAnswer.
+     */
+    AnswerId?: AnswerId;
+  }
+  export type SucceededTopicReviewedAnswers = SucceededTopicReviewedAnswer[];
   export type SuccessfulKeyRegistrationEntries = SuccessfulKeyRegistrationEntry[];
   export interface SuccessfulKeyRegistrationEntry {
     /**
@@ -17791,6 +18194,28 @@ declare namespace QuickSight {
     NonAdditive?: NullableBoolean;
   }
   export type TopicColumns = TopicColumn[];
+  export interface TopicConstantValue {
+    /**
+     * The constant type of a TopicConstantValue.
+     */
+    ConstantType?: ConstantType;
+    /**
+     * The value of the TopicConstantValue.
+     */
+    Value?: ConstantValueString;
+    /**
+     * The minimum for the TopicConstantValue.
+     */
+    Minimum?: ConstantValueString;
+    /**
+     * The maximum for the TopicConstantValue.
+     */
+    Maximum?: ConstantValueString;
+    /**
+     * The value list of the TopicConstantValue.
+     */
+    ValueList?: CollectiveConstantEntryList;
+  }
   export interface TopicDateRangeFilter {
     /**
      * A Boolean value that indicates whether the date range filter should include the boundary values. If set to true, the filter includes the start and end dates. If set to false, the filter excludes them.
@@ -17866,6 +18291,202 @@ declare namespace QuickSight {
     RelativeDateFilter?: TopicRelativeDateFilter;
   }
   export type TopicFilters = TopicFilter[];
+  export interface TopicIR {
+    /**
+     * The metrics for the TopicIR.
+     */
+    Metrics?: TopicIRMetricList;
+    /**
+     * The GroupBy list for the TopicIR.
+     */
+    GroupByList?: TopicIRGroupByList;
+    /**
+     * The filters for the TopicIR.
+     */
+    Filters?: TopicIRFilterList;
+    /**
+     * The sort for the TopicIR.
+     */
+    Sort?: TopicSortClause;
+    /**
+     * The contribution analysis for the TopicIR.
+     */
+    ContributionAnalysis?: TopicIRContributionAnalysis;
+    /**
+     * The visual for the TopicIR.
+     */
+    Visual?: VisualOptions;
+  }
+  export interface TopicIRComparisonMethod {
+    /**
+     * The type for the TopicIRComparisonMethod.
+     */
+    Type?: ComparisonMethodType;
+    /**
+     * The period for the TopicIRComparisonMethod.
+     */
+    Period?: TopicTimeGranularity;
+    /**
+     * The window size for the TopicIRComparisonMethod.
+     */
+    WindowSize?: Integer;
+  }
+  export interface TopicIRContributionAnalysis {
+    /**
+     * The factors for a TopicIRContributionAnalysis.
+     */
+    Factors?: ContributionAnalysisFactorsList;
+    /**
+     * The time ranges for the TopicIRContributionAnalysis.
+     */
+    TimeRanges?: ContributionAnalysisTimeRanges;
+    /**
+     * The direction for the TopicIRContributionAnalysis.
+     */
+    Direction?: ContributionAnalysisDirection;
+    /**
+     * The sort type for the TopicIRContributionAnalysis.
+     */
+    SortType?: ContributionAnalysisSortType;
+  }
+  export type TopicIRFilterEntry = TopicIRFilterOption[];
+  export type TopicIRFilterFunction = "CONTAINS"|"EXACT"|"STARTS_WITH"|"ENDS_WITH"|"CONTAINS_STRING"|"PREVIOUS"|"THIS"|"LAST"|"NEXT"|"NOW"|string;
+  export type TopicIRFilterList = TopicIRFilterEntry[];
+  export interface TopicIRFilterOption {
+    /**
+     * The filter type for the TopicIRFilterOption.
+     */
+    FilterType?: TopicIRFilterType;
+    /**
+     * The filter class for the TopicIRFilterOption.
+     */
+    FilterClass?: FilterClass;
+    /**
+     * The operand field for the TopicIRFilterOption.
+     */
+    OperandField?: Identifier;
+    /**
+     * The function for the TopicIRFilterOption.
+     */
+    Function?: TopicIRFilterFunction;
+    /**
+     * The constant for the TopicIRFilterOption.
+     */
+    Constant?: TopicConstantValue;
+    /**
+     * The inverse for the TopicIRFilterOption.
+     */
+    Inverse?: Boolean;
+    /**
+     * The null filter for the TopicIRFilterOption.
+     */
+    NullFilter?: NullFilterOption;
+    /**
+     * The aggregation for the TopicIRFilterOption.
+     */
+    Aggregation?: AggType;
+    /**
+     * The aggregation function parameters for the TopicIRFilterOption.
+     */
+    AggregationFunctionParameters?: AggFunctionParamMap;
+    /**
+     * The AggregationPartitionBy for the TopicIRFilterOption.
+     */
+    AggregationPartitionBy?: AggregationPartitionByList;
+    /**
+     * The range for the TopicIRFilterOption.
+     */
+    Range?: TopicConstantValue;
+    /**
+     * The inclusive for the TopicIRFilterOption.
+     */
+    Inclusive?: Boolean;
+    /**
+     * The time granularity for the TopicIRFilterOption.
+     */
+    TimeGranularity?: TimeGranularity;
+    /**
+     * The last next offset for the TopicIRFilterOption.
+     */
+    LastNextOffset?: TopicConstantValue;
+    /**
+     * The agg metrics for the TopicIRFilterOption.
+     */
+    AggMetrics?: FilterAggMetricsList;
+    /**
+     * The TopBottomLimit for the TopicIRFilterOption.
+     */
+    TopBottomLimit?: TopicConstantValue;
+    /**
+     * The sort direction for the TopicIRFilterOption.
+     */
+    SortDirection?: TopicSortDirection;
+    /**
+     * The anchor for the TopicIRFilterOption.
+     */
+    Anchor?: Anchor;
+  }
+  export type TopicIRFilterType = "CATEGORY_FILTER"|"NUMERIC_EQUALITY_FILTER"|"NUMERIC_RANGE_FILTER"|"DATE_RANGE_FILTER"|"RELATIVE_DATE_FILTER"|"TOP_BOTTOM_FILTER"|"EQUALS"|"RANK_LIMIT_FILTER"|"ACCEPT_ALL_FILTER"|string;
+  export interface TopicIRGroupBy {
+    /**
+     * The field name for the TopicIRGroupBy.
+     */
+    FieldName?: Identifier;
+    /**
+     * The time granularity for the TopicIRGroupBy.
+     */
+    TimeGranularity?: TopicTimeGranularity;
+    /**
+     * The sort for the TopicIRGroupBy.
+     */
+    Sort?: TopicSortClause;
+    /**
+     * The display format for the TopicIRGroupBy.
+     */
+    DisplayFormat?: DisplayFormat;
+    DisplayFormatOptions?: DisplayFormatOptions;
+    /**
+     * The named entity for the TopicIRGroupBy.
+     */
+    NamedEntity?: NamedEntityRef;
+  }
+  export type TopicIRGroupByList = TopicIRGroupBy[];
+  export interface TopicIRMetric {
+    /**
+     * The metric ID for the TopicIRMetric.
+     */
+    MetricId?: Identifier;
+    /**
+     * The function for the TopicIRMetric.
+     */
+    Function?: AggFunction;
+    /**
+     * The operands for the TopicIRMetric.
+     */
+    Operands?: OperandList;
+    /**
+     * The comparison method for the TopicIRMetric.
+     */
+    ComparisonMethod?: TopicIRComparisonMethod;
+    /**
+     * The expression for the TopicIRMetric.
+     */
+    Expression?: Expression;
+    /**
+     * The calculated field references for the TopicIRMetric.
+     */
+    CalculatedFieldReferences?: CalculatedFieldReferenceList;
+    /**
+     * The display format for the TopicIRMetric.
+     */
+    DisplayFormat?: DisplayFormat;
+    DisplayFormatOptions?: DisplayFormatOptions;
+    /**
+     * The named entity for the TopicIRMetric.
+     */
+    NamedEntity?: NamedEntityRef;
+  }
+  export type TopicIRMetricList = TopicIRMetric[];
   export type TopicId = string;
   export type TopicNamedEntities = TopicNamedEntity[];
   export interface TopicNamedEntity {
@@ -18000,6 +18621,37 @@ declare namespace QuickSight {
     Constant?: TopicSingularFilterConstant;
   }
   export type TopicRelativeDateFilterFunction = "PREVIOUS"|"THIS"|"LAST"|"NEXT"|"NOW"|string;
+  export interface TopicReviewedAnswer {
+    /**
+     * The Amazon Resource Name (ARN) of the reviewed answer.
+     */
+    Arn?: Arn;
+    /**
+     * The answer ID of the reviewed answer.
+     */
+    AnswerId: AnswerId;
+    /**
+     * The Dataset ARN for the TopicReviewedAnswer.
+     */
+    DatasetArn: Arn;
+    /**
+     * The question for the TopicReviewedAnswer.
+     */
+    Question: LimitedString;
+    /**
+     * The mir for the TopicReviewedAnswer.
+     */
+    Mir?: TopicIR;
+    /**
+     * The primary visual for the TopicReviewedAnswer.
+     */
+    PrimaryVisual?: TopicVisual;
+    /**
+     * The template for the TopicReviewedAnswer.
+     */
+    Template?: TopicTemplate;
+  }
+  export type TopicReviewedAnswers = TopicReviewedAnswer[];
   export type TopicScheduleType = "HOURLY"|"DAILY"|"WEEKLY"|"MONTHLY"|string;
   export interface TopicSingularFilterConstant {
     /**
@@ -18011,6 +18663,17 @@ declare namespace QuickSight {
      */
     SingularConstant?: LimitedString;
   }
+  export interface TopicSortClause {
+    /**
+     * The operand for a TopicSortClause.
+     */
+    Operand?: Identifier;
+    /**
+     * The sort direction for the TopicSortClause.
+     */
+    SortDirection?: TopicSortDirection;
+  }
+  export type TopicSortDirection = "ASCENDING"|"DESCENDING"|string;
   export type TopicSummaries = TopicSummary[];
   export interface TopicSummary {
     /**
@@ -18030,8 +18693,37 @@ declare namespace QuickSight {
      */
     UserExperienceVersion?: TopicUserExperienceVersion;
   }
+  export interface TopicTemplate {
+    /**
+     * The template type for the TopicTemplate.
+     */
+    TemplateType?: LimitedString;
+    /**
+     * The slots for the TopicTemplate.
+     */
+    Slots?: Slots;
+  }
   export type TopicTimeGranularity = "SECOND"|"MINUTE"|"HOUR"|"DAY"|"WEEK"|"MONTH"|"QUARTER"|"YEAR"|string;
   export type TopicUserExperienceVersion = "LEGACY"|"NEW_READER_EXPERIENCE"|string;
+  export interface TopicVisual {
+    /**
+     * The visual ID for the TopicVisual.
+     */
+    VisualId?: LimitedString;
+    /**
+     * The role for the TopicVisual.
+     */
+    Role?: VisualRole;
+    /**
+     * The ir for the TopicVisual.
+     */
+    Ir?: TopicIR;
+    /**
+     * The supporting visuals for the TopicVisual.
+     */
+    SupportingVisuals?: TopicVisuals;
+  }
+  export type TopicVisuals = TopicVisual[];
   export interface TotalAggregationComputation {
     /**
      * The ID for a computation.
@@ -20118,6 +20810,12 @@ declare namespace QuickSight {
      */
     AvailabilityStatus?: DashboardBehavior;
   }
+  export interface VisualOptions {
+    /**
+     * The type for a VisualOptions.
+     */
+    type?: LimitedString;
+  }
   export interface VisualPalette {
     /**
      * The chart color options for the visual palette.
@@ -20128,6 +20826,7 @@ declare namespace QuickSight {
      */
     ColorMap?: DataPathColorList;
   }
+  export type VisualRole = "PRIMARY"|"COMPLIMENTARY"|"MULTI_INTENT"|"FALLBACK"|"FRAGMENT"|string;
   export interface VisualSubtitleLabelOptions {
     /**
      * The visibility of the subtitle label.
