@@ -60,6 +60,14 @@ declare class DataZone extends Service {
    */
   createAsset(callback?: (err: AWSError, data: DataZone.Types.CreateAssetOutput) => void): Request<DataZone.Types.CreateAssetOutput, AWSError>;
   /**
+   * Creates a data asset filter.
+   */
+  createAssetFilter(params: DataZone.Types.CreateAssetFilterInput, callback?: (err: AWSError, data: DataZone.Types.CreateAssetFilterOutput) => void): Request<DataZone.Types.CreateAssetFilterOutput, AWSError>;
+  /**
+   * Creates a data asset filter.
+   */
+  createAssetFilter(callback?: (err: AWSError, data: DataZone.Types.CreateAssetFilterOutput) => void): Request<DataZone.Types.CreateAssetFilterOutput, AWSError>;
+  /**
    * Creates a revision of the asset.
    */
   createAssetRevision(params: DataZone.Types.CreateAssetRevisionInput, callback?: (err: AWSError, data: DataZone.Types.CreateAssetRevisionOutput) => void): Request<DataZone.Types.CreateAssetRevisionOutput, AWSError>;
@@ -212,6 +220,14 @@ declare class DataZone extends Service {
    */
   deleteAsset(callback?: (err: AWSError, data: DataZone.Types.DeleteAssetOutput) => void): Request<DataZone.Types.DeleteAssetOutput, AWSError>;
   /**
+   * Deletes an asset filter.
+   */
+  deleteAssetFilter(params: DataZone.Types.DeleteAssetFilterInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an asset filter.
+   */
+  deleteAssetFilter(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes an asset type in Amazon DataZone.
    */
   deleteAssetType(params: DataZone.Types.DeleteAssetTypeInput, callback?: (err: AWSError, data: DataZone.Types.DeleteAssetTypeOutput) => void): Request<DataZone.Types.DeleteAssetTypeOutput, AWSError>;
@@ -363,6 +379,14 @@ declare class DataZone extends Service {
    * Gets an Amazon DataZone asset.
    */
   getAsset(callback?: (err: AWSError, data: DataZone.Types.GetAssetOutput) => void): Request<DataZone.Types.GetAssetOutput, AWSError>;
+  /**
+   * Gets an asset filter.
+   */
+  getAssetFilter(params: DataZone.Types.GetAssetFilterInput, callback?: (err: AWSError, data: DataZone.Types.GetAssetFilterOutput) => void): Request<DataZone.Types.GetAssetFilterOutput, AWSError>;
+  /**
+   * Gets an asset filter.
+   */
+  getAssetFilter(callback?: (err: AWSError, data: DataZone.Types.GetAssetFilterOutput) => void): Request<DataZone.Types.GetAssetFilterOutput, AWSError>;
   /**
    * Gets an Amazon DataZone asset type.
    */
@@ -555,6 +579,14 @@ declare class DataZone extends Service {
    * Gets a user profile in Amazon DataZone.
    */
   getUserProfile(callback?: (err: AWSError, data: DataZone.Types.GetUserProfileOutput) => void): Request<DataZone.Types.GetUserProfileOutput, AWSError>;
+  /**
+   * Lists asset filters.
+   */
+  listAssetFilters(params: DataZone.Types.ListAssetFiltersInput, callback?: (err: AWSError, data: DataZone.Types.ListAssetFiltersOutput) => void): Request<DataZone.Types.ListAssetFiltersOutput, AWSError>;
+  /**
+   * Lists asset filters.
+   */
+  listAssetFilters(callback?: (err: AWSError, data: DataZone.Types.ListAssetFiltersOutput) => void): Request<DataZone.Types.ListAssetFiltersOutput, AWSError>;
   /**
    * Lists the revisions for the asset.
    */
@@ -844,6 +876,14 @@ declare class DataZone extends Service {
    */
   untagResource(callback?: (err: AWSError, data: DataZone.Types.UntagResourceResponse) => void): Request<DataZone.Types.UntagResourceResponse, AWSError>;
   /**
+   * Updates an asset filter.
+   */
+  updateAssetFilter(params: DataZone.Types.UpdateAssetFilterInput, callback?: (err: AWSError, data: DataZone.Types.UpdateAssetFilterOutput) => void): Request<DataZone.Types.UpdateAssetFilterOutput, AWSError>;
+  /**
+   * Updates an asset filter.
+   */
+  updateAssetFilter(callback?: (err: AWSError, data: DataZone.Types.UpdateAssetFilterOutput) => void): Request<DataZone.Types.UpdateAssetFilterOutput, AWSError>;
+  /**
    * Updates the specified data source in Amazon DataZone.
    */
   updateDataSource(params: DataZone.Types.UpdateDataSourceInput, callback?: (err: AWSError, data: DataZone.Types.UpdateDataSourceOutput) => void): Request<DataZone.Types.UpdateDataSourceOutput, AWSError>;
@@ -1089,6 +1129,59 @@ declare namespace DataZone {
     awsConsoleLink?: AwsConsoleLinkParameters;
   }
   export type ApplicableAssetTypes = TypeName[];
+  export interface AssetFilterConfiguration {
+    /**
+     * The column configuration of the asset filter.
+     */
+    columnConfiguration?: ColumnFilterConfiguration;
+    /**
+     * The row configuration of the asset filter.
+     */
+    rowConfiguration?: RowFilterConfiguration;
+  }
+  export interface AssetFilterSummary {
+    /**
+     * The ID of the data asset.
+     */
+    assetId: AssetId;
+    /**
+     * The timestamp at which the asset filter was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The description of the asset filter.
+     */
+    description?: Description;
+    /**
+     * The ID of the domain where the asset filter lives.
+     */
+    domainId: DomainId;
+    /**
+     * The effective column names of the asset filter.
+     */
+    effectiveColumnNames?: ColumnNameList;
+    /**
+     * The effective row filter of the asset filter.
+     */
+    effectiveRowFilter?: String;
+    /**
+     * The error message that is displayed if the action does not succeed.
+     */
+    errorMessage?: String;
+    /**
+     * The ID of the asset filter.
+     */
+    id: FilterId;
+    /**
+     * The name of the asset filter.
+     */
+    name: FilterName;
+    /**
+     * The status of the asset filter.
+     */
+    status?: FilterStatus;
+  }
+  export type AssetFilters = AssetFilterSummary[];
   export type AssetId = string;
   export type AssetIdentifier = string;
   export interface AssetItem {
@@ -1468,6 +1561,13 @@ declare namespace DataZone {
      */
     templateUrl: String;
   }
+  export interface ColumnFilterConfiguration {
+    /**
+     * Specifies whether to include column names.
+     */
+    includedColumnNames?: ColumnNameList;
+  }
+  export type ColumnNameList = String[];
   export interface ConfigurableActionParameter {
     /**
      * The key of the configurable action parameter.
@@ -1493,6 +1593,78 @@ declare namespace DataZone {
      * The type of a configurable action in a Amazon DataZone environment.
      */
     type: String;
+  }
+  export interface CreateAssetFilterInput {
+    /**
+     * The ID of the data asset.
+     */
+    assetIdentifier: AssetId;
+    /**
+     * A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.
+     */
+    clientToken?: String;
+    /**
+     * The configuration of the asset filter.
+     */
+    configuration: AssetFilterConfiguration;
+    /**
+     * The description of the asset filter.
+     */
+    description?: Description;
+    /**
+     * The ID of the domain in which you want to create an asset filter.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The name of the asset filter.
+     */
+    name: FilterName;
+  }
+  export interface CreateAssetFilterOutput {
+    /**
+     * The ID of the asset.
+     */
+    assetId: AssetId;
+    /**
+     * The configuration of the asset filter.
+     */
+    configuration: AssetFilterConfiguration;
+    /**
+     * The timestamp at which the asset filter was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The description of the asset filter.
+     */
+    description?: Description;
+    /**
+     * The ID of the domain where the asset filter is created.
+     */
+    domainId: DomainId;
+    /**
+     * The column names in the asset filter.
+     */
+    effectiveColumnNames?: ColumnNameList;
+    /**
+     * The row filter in the asset filter.
+     */
+    effectiveRowFilter?: String;
+    /**
+     * The error message that is displayed if the asset filter is not created successfully.
+     */
+    errorMessage?: String;
+    /**
+     * The ID of the asset filter.
+     */
+    id: FilterId;
+    /**
+     * The name of the asset filter.
+     */
+    name: FilterName;
+    /**
+     * The status of the asset filter.
+     */
+    status?: FilterStatus;
   }
   export interface CreateAssetInput {
     /**
@@ -3155,6 +3327,20 @@ declare namespace DataZone {
   export type DataSourceType = string;
   export type DateTime = Date;
   export type DecisionComment = string;
+  export interface DeleteAssetFilterInput {
+    /**
+     * The ID of the data asset.
+     */
+    assetIdentifier: AssetId;
+    /**
+     * The ID of the domain where you want to delete an asset filter.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The ID of the asset filter that you want to delete.
+     */
+    identifier: FilterId;
+  }
   export interface DeleteAssetInput {
     /**
      * The ID of the Amazon DataZone domain in which the asset is deleted.
@@ -3703,6 +3889,10 @@ declare namespace DataZone {
      */
     manageAccessRoleArn?: RoleArn;
     /**
+     * The provisioning configuration of a blueprint.
+     */
+    provisioningConfigurations?: ProvisioningConfigurationList;
+    /**
      * The ARN of the provisioning role specified in the environment blueprint configuration.
      */
     provisioningRoleArn?: RoleArn;
@@ -3877,6 +4067,16 @@ declare namespace DataZone {
      */
     updatedAt?: SyntheticTimestamp_date_time;
   }
+  export interface EqualToExpression {
+    /**
+     * The name of the column.
+     */
+    columnName: String;
+    /**
+     * The value that might be equal to an expression.
+     */
+    value: String;
+  }
   export type ExternalIdentifier = string;
   export interface FailureCause {
     /**
@@ -3922,7 +4122,10 @@ declare namespace DataZone {
   export type FilterExpressionExpressionString = string;
   export type FilterExpressionType = "INCLUDE"|"EXCLUDE"|string;
   export type FilterExpressions = FilterExpression[];
+  export type FilterId = string;
   export type FilterList = FilterClause[];
+  export type FilterName = string;
+  export type FilterStatus = "VALID"|"INVALID"|string;
   export type FilterValueString = string;
   export type FirstName = string;
   export type Float = number;
@@ -4050,6 +4253,66 @@ declare namespace DataZone {
   export type Forms = string;
   export type FormsInputMap = {[key: string]: FormEntryInput};
   export type FormsOutputMap = {[key: string]: FormEntryOutput};
+  export interface GetAssetFilterInput {
+    /**
+     * The ID of the data asset.
+     */
+    assetIdentifier: AssetId;
+    /**
+     * The ID of the domain where you want to get an asset filter.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The ID of the asset filter.
+     */
+    identifier: FilterId;
+  }
+  export interface GetAssetFilterOutput {
+    /**
+     * The ID of the data asset.
+     */
+    assetId: AssetId;
+    /**
+     * The configuration of the asset filter.
+     */
+    configuration: AssetFilterConfiguration;
+    /**
+     * The timestamp at which the asset filter was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The description of the asset filter.
+     */
+    description?: Description;
+    /**
+     * The ID of the domain where you want to get an asset filter.
+     */
+    domainId: DomainId;
+    /**
+     * The column names of the asset filter.
+     */
+    effectiveColumnNames?: ColumnNameList;
+    /**
+     * The row filter of the asset filter.
+     */
+    effectiveRowFilter?: String;
+    /**
+     * The error message that is displayed if the action does not complete successfully.
+     */
+    errorMessage?: String;
+    /**
+     * The ID of the asset filter.
+     */
+    id: FilterId;
+    /**
+     * The name of the asset filter.
+     */
+    name: FilterName;
+    /**
+     * The status of the asset filter.
+     */
+    status?: FilterStatus;
+  }
   export interface GetAssetInput {
     /**
      * The ID of the Amazon DataZone domain to which the asset belongs.
@@ -4493,6 +4756,10 @@ declare namespace DataZone {
      * The ARN of the manage access role with which this blueprint is created.
      */
     manageAccessRoleArn?: RoleArn;
+    /**
+     * The provisioning configuration of a blueprint.
+     */
+    provisioningConfigurations?: ProvisioningConfigurationList;
     /**
      * The ARN of the provisioning role with which this blueprint is created.
      */
@@ -5651,6 +5918,26 @@ declare namespace DataZone {
      */
     listing?: ListingRevisionInput;
   }
+  export interface GreaterThanExpression {
+    /**
+     * The name of the column.
+     */
+    columnName: String;
+    /**
+     * The value that might be greater than an expression.
+     */
+    value: String;
+  }
+  export interface GreaterThanOrEqualToExpression {
+    /**
+     * The name of the column.
+     */
+    columnName: String;
+    /**
+     * The value that might be greater than or equal to an expression.
+     */
+    value: String;
+  }
   export interface GroupDetails {
     /**
      * The identifier of the group in Amazon DataZone.
@@ -5699,10 +5986,72 @@ declare namespace DataZone {
     revision: Revision;
   }
   export type ImportList = Import[];
+  export interface InExpression {
+    /**
+     * The name of the column.
+     */
+    columnName: String;
+    /**
+     * The values that might be in the expression.
+     */
+    values: StringList;
+  }
   export type Integer = number;
   export type InventorySearchScope = "ASSET"|"GLOSSARY"|"GLOSSARY_TERM"|string;
+  export interface IsNotNullExpression {
+    /**
+     * The name of the column.
+     */
+    columnName: String;
+  }
+  export interface IsNullExpression {
+    /**
+     * The name of the column.
+     */
+    columnName: String;
+  }
   export type KmsKeyArn = string;
+  export interface LakeFormationConfiguration {
+    /**
+     * Specifies certain Amazon S3 locations if you do not want Amazon DataZone to automatically register them in hybrid mode. 
+     */
+    locationRegistrationExcludeS3Locations?: S3LocationList;
+    /**
+     * The role that is used to manage read/write access to the chosen Amazon S3 bucket(s) for Data Lake using AWS Lake Formation hybrid access mode.
+     */
+    locationRegistrationRole?: RoleArn;
+  }
   export type LastName = string;
+  export interface LessThanExpression {
+    /**
+     * The name of the column.
+     */
+    columnName: String;
+    /**
+     * The value that might be less than the expression.
+     */
+    value: String;
+  }
+  export interface LessThanOrEqualToExpression {
+    /**
+     * The name of the column.
+     */
+    columnName: String;
+    /**
+     * The value that might be less than or equal to an expression.
+     */
+    value: String;
+  }
+  export interface LikeExpression {
+    /**
+     * The name of the column.
+     */
+    columnName: String;
+    /**
+     * The value that might be like the expression.
+     */
+    value: String;
+  }
   export type LineageEvent = Buffer|Uint8Array|Blob|string;
   export type LineageNodeId = string;
   export type LineageNodeIdentifier = string;
@@ -5805,6 +6154,38 @@ declare namespace DataZone {
      * The user who updated the data lineage node type.
      */
     updatedBy?: UpdatedBy;
+  }
+  export interface ListAssetFiltersInput {
+    /**
+     * The ID of the data asset.
+     */
+    assetIdentifier: AssetId;
+    /**
+     * The ID of the domain where you want to list asset filters.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The maximum number of asset filters to return in a single call to ListAssetFilters. When the number of asset filters to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListAssetFilters to list the next set of asset filters.
+     */
+    maxResults?: MaxResults;
+    /**
+     * When the number of asset filters is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of asset filters, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListAssetFilters to list the next set of asset filters.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The status of the asset filter.
+     */
+    status?: FilterStatus;
+  }
+  export interface ListAssetFiltersOutput {
+    /**
+     * The results of the ListAssetFilters action.
+     */
+    items: AssetFilters;
+    /**
+     * When the number of asset filters is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of asset filters, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListAssetFilters to list the next set of asset filters.
+     */
+    nextToken?: PaginationToken;
   }
   export interface ListAssetRevisionsInput {
     /**
@@ -6697,6 +7078,36 @@ declare namespace DataZone {
     smithy?: Smithy;
   }
   export type Name = string;
+  export interface NotEqualToExpression {
+    /**
+     * The name of the column.
+     */
+    columnName: String;
+    /**
+     * The value that might not be equal to the expression.
+     */
+    value: String;
+  }
+  export interface NotInExpression {
+    /**
+     * The name of the column.
+     */
+    columnName: String;
+    /**
+     * The value that might not be in the expression.
+     */
+    values: StringList;
+  }
+  export interface NotLikeExpression {
+    /**
+     * The name of the column.
+     */
+    columnName: String;
+    /**
+     * The value that might not be like the expression.
+     */
+    value: String;
+  }
   export interface NotificationOutput {
     /**
      * The action link included in the notification.
@@ -6889,6 +7300,13 @@ declare namespace DataZone {
      */
     updatedAt?: SyntheticTimestamp_date_time;
   }
+  export interface ProvisioningConfiguration {
+    /**
+     * The Lake Formation configuration of the Data Lake blueprint.
+     */
+    lakeFormationConfiguration?: LakeFormationConfiguration;
+  }
+  export type ProvisioningConfigurationList = ProvisioningConfiguration[];
   export interface ProvisioningProperties {
     /**
      * The cloud formation properties included as part of the provisioning properties of an environment blueprint.
@@ -6912,6 +7330,10 @@ declare namespace DataZone {
      * The ARN of the manage access role.
      */
     manageAccessRoleArn?: RoleArn;
+    /**
+     * The provisioning configuration of a blueprint.
+     */
+    provisioningConfigurations?: ProvisioningConfigurationList;
     /**
      * The ARN of the provisioning role.
      */
@@ -6942,6 +7364,10 @@ declare namespace DataZone {
      * The ARN of the manage access role.
      */
     manageAccessRoleArn?: RoleArn;
+    /**
+     * The provisioning configuration of a blueprint.
+     */
+    provisioningConfigurations?: ProvisioningConfigurationList;
     /**
      * The ARN of the provisioning role.
      */
@@ -7264,6 +7690,81 @@ declare namespace DataZone {
     updatedBy?: UpdatedBy;
   }
   export type RoleArn = string;
+  export interface RowFilter {
+    /**
+     * The 'and' clause of the row filter.
+     */
+    and?: RowFilterList;
+    /**
+     * The expression of the row filter.
+     */
+    expression?: RowFilterExpression;
+    /**
+     * The 'or' clause of the row filter.
+     */
+    or?: RowFilterList;
+  }
+  export interface RowFilterConfiguration {
+    /**
+     * The row filter.
+     */
+    rowFilter: RowFilter;
+    /**
+     * Specifies whether the row filter is sensitive.
+     */
+    sensitive?: Boolean;
+  }
+  export interface RowFilterExpression {
+    /**
+     * The 'equal to' clause of the row filter expression.
+     */
+    equalTo?: EqualToExpression;
+    /**
+     * The 'greater than' clause of the row filter expression.
+     */
+    greaterThan?: GreaterThanExpression;
+    /**
+     * The 'greater than or equal to' clause of the filter expression.
+     */
+    greaterThanOrEqualTo?: GreaterThanOrEqualToExpression;
+    /**
+     * The 'in' clause of the row filter expression.
+     */
+    in?: InExpression;
+    /**
+     * The 'is not null' clause of the row filter expression.
+     */
+    isNotNull?: IsNotNullExpression;
+    /**
+     * The 'is null' clause of the row filter expression.
+     */
+    isNull?: IsNullExpression;
+    /**
+     * The 'less than' clause of the row filter expression.
+     */
+    lessThan?: LessThanExpression;
+    /**
+     * The 'less than or equal to' clause of the row filter expression.
+     */
+    lessThanOrEqualTo?: LessThanOrEqualToExpression;
+    /**
+     * The 'like' clause of the row filter expression.
+     */
+    like?: LikeExpression;
+    /**
+     * The 'no equal to' clause of the row filter expression.
+     */
+    notEqualTo?: NotEqualToExpression;
+    /**
+     * The 'not in' clause of the row filter expression.
+     */
+    notIn?: NotInExpression;
+    /**
+     * The 'not like' clause of the row filter expression.
+     */
+    notLike?: NotLikeExpression;
+  }
+  export type RowFilterList = RowFilter[];
   export interface RunStatisticsForAssets {
     /**
      * The added statistic for the data source run.
@@ -7286,6 +7787,8 @@ declare namespace DataZone {
      */
     updated?: Integer;
   }
+  export type S3Location = string;
+  export type S3LocationList = S3Location[];
   export interface ScheduleConfiguration {
     /**
      * The schedule of the data source runs.
@@ -7759,6 +8262,7 @@ declare namespace DataZone {
     type?: MetadataGenerationRunType;
   }
   export type String = string;
+  export type StringList = String[];
   export interface SubscribedAsset {
     /**
      * The identifier of the asset for which the subscription grant is created.
@@ -8255,6 +8759,78 @@ declare namespace DataZone {
     tagKeys: TagKeyList;
   }
   export interface UntagResourceResponse {
+  }
+  export interface UpdateAssetFilterInput {
+    /**
+     * The ID of the data asset.
+     */
+    assetIdentifier: AssetId;
+    /**
+     * The configuration of the asset filter.
+     */
+    configuration?: AssetFilterConfiguration;
+    /**
+     * The description of the asset filter.
+     */
+    description?: Description;
+    /**
+     * The ID of the domain where you want to update an asset filter.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The ID of the asset filter.
+     */
+    identifier: FilterId;
+    /**
+     * The name of the asset filter.
+     */
+    name?: String;
+  }
+  export interface UpdateAssetFilterOutput {
+    /**
+     * The ID of the data asset.
+     */
+    assetId: AssetId;
+    /**
+     * The configuration of the asset filter.
+     */
+    configuration: AssetFilterConfiguration;
+    /**
+     * The timestamp at which the asset filter was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The description of the asset filter.
+     */
+    description?: Description;
+    /**
+     * The ID of the domain where the asset filter was created.
+     */
+    domainId: DomainId;
+    /**
+     * The column names of the asset filter.
+     */
+    effectiveColumnNames?: ColumnNameList;
+    /**
+     * The row filter of the asset filter.
+     */
+    effectiveRowFilter?: String;
+    /**
+     * The error message that is displayed if the action is not completed successfully.
+     */
+    errorMessage?: String;
+    /**
+     * The ID of the asset filter.
+     */
+    id: FilterId;
+    /**
+     * The name of the asset filter.
+     */
+    name: FilterName;
+    /**
+     * The status of the asset filter.
+     */
+    status?: FilterStatus;
   }
   export interface UpdateDataSourceInput {
     /**

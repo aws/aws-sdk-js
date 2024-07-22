@@ -640,7 +640,7 @@ declare namespace RedshiftServerless {
      */
     namespaceName: NamespaceName;
     /**
-     * The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots. (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. For more information about the IAM role to use with the Amazon Redshift scheduler, see Using Identity-Based Policies for Amazon Redshift in the Amazon Redshift Cluster Management Guide
+     * The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots. (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. For more information about the IAM role to use with the Amazon Redshift scheduler, see Using Identity-Based Policies for Amazon Redshift in the Amazon Redshift Management Guide
      */
     roleArn: IamRoleArn;
     /**
@@ -774,6 +774,10 @@ declare namespace RedshiftServerless {
      * The value that specifies whether to turn on enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC instead of over the internet.
      */
     enhancedVpcRouting?: Boolean;
+    /**
+     * The IP address type that the workgroup supports. Possible values are ipv4 and dualstack.
+     */
+    ipAddressType?: IpAddressType;
     /**
      * The maximum data-warehouse capacity Amazon Redshift Serverless uses to serve queries. The max capacity is specified in RPUs.
      */
@@ -1171,6 +1175,7 @@ declare namespace RedshiftServerless {
   export type IamRoleArn = string;
   export type IamRoleArnList = IamRoleArn[];
   export type Integer = number;
+  export type IpAddressType = string;
   export type KmsKeyId = string;
   export interface ListCustomDomainAssociationsRequest {
     /**
@@ -1544,6 +1549,10 @@ declare namespace RedshiftServerless {
      */
     availabilityZone?: String;
     /**
+     * The IPv6 address of the network interface within the subnet.
+     */
+    ipv6Address?: String;
+    /**
      * The unique identifier of the network interface.
      */
     networkInterfaceId?: String;
@@ -1809,7 +1818,7 @@ declare namespace RedshiftServerless {
      */
     nextInvocations?: NextInvocationsList;
     /**
-     * The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots. (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. For more information about the IAM role to use with the Amazon Redshift scheduler, see Using Identity-Based Policies for Amazon Redshift in the Amazon Redshift Cluster Management Guide
+     * The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots. (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. For more information about the IAM role to use with the Amazon Redshift scheduler, see Using Identity-Based Policies for Amazon Redshift in the Amazon Redshift Management Guide
      */
     roleArn?: IamRoleArn;
     /**
@@ -2177,7 +2186,7 @@ declare namespace RedshiftServerless {
      */
     endTime?: Timestamp;
     /**
-     * The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. For more information about the IAM role to use with the Amazon Redshift scheduler, see Using Identity-Based Policies for Amazon Redshift in the Amazon Redshift Cluster Management Guide
+     * The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. For more information about the IAM role to use with the Amazon Redshift scheduler, see Using Identity-Based Policies for Amazon Redshift in the Amazon Redshift Management Guide
      */
     roleArn?: IamRoleArn;
     /**
@@ -2269,6 +2278,10 @@ declare namespace RedshiftServerless {
      * The value that specifies whether to turn on enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC.
      */
     enhancedVpcRouting?: Boolean;
+    /**
+     * The IP address type that the workgroup supports. Possible values are ipv4 and dualstack.
+     */
+    ipAddressType?: IpAddressType;
     /**
      * The maximum data-warehouse capacity Amazon Redshift Serverless uses to serve queries. The max capacity is specified in RPUs.
      */
@@ -2400,6 +2413,10 @@ declare namespace RedshiftServerless {
      * The value that specifies whether to enable enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC.
      */
     enhancedVpcRouting?: Boolean;
+    /**
+     * The IP address type that the workgroup supports. Possible values are ipv4 and dualstack.
+     */
+    ipAddressType?: IpAddressType;
     /**
      * The maximum data-warehouse capacity Amazon Redshift Serverless uses to serve queries. The max capacity is specified in RPUs.
      */

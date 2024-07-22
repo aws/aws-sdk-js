@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1659.0-->
+<!--LATEST=2.1660.0-->
 <!--ENTRYINSERT-->
+
+## 2.1660.0
+* bugfix: Mobilehub: deprecate mobilehub
+* feature: DataZone: This release adds 1/ support of register S3 locations of assets in AWS Lake Formation hybrid access mode for DefaultDataLake blueprint. 2/ support of CRUD operations for Asset Filters.
+* feature: IVS: Documentation update for IVS Low Latency API Reference.
+* feature: RedshiftServerless: Adds dualstack support for Redshift Serverless workgroup.
 
 ## 2.1659.0
 * bugfix: s3: update s3 status 200 error classification

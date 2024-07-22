@@ -295,21 +295,21 @@ declare class IVS extends Service {
 declare namespace IVS {
   export interface AudioConfiguration {
     /**
-     * Number of audio channels.
-     */
-    channels?: Integer;
-    /**
      * Codec used for the audio encoding.
      */
     codec?: String;
+    /**
+     * The expected ingest bitrate (bits per second). This is configured in the encoder.
+     */
+    targetBitrate?: Integer;
     /**
      * Number of audio samples recorded per second.
      */
     sampleRate?: Integer;
     /**
-     * The expected ingest bitrate (bits per second). This is configured in the encoder.
+     * Number of audio channels.
      */
-    targetBitrate?: Integer;
+    channels?: Integer;
   }
   export interface BatchError {
     /**
@@ -352,17 +352,21 @@ declare namespace IVS {
     /**
      * 
      */
-    errors?: BatchErrors;
+    streamKeys?: StreamKeys;
     /**
      * 
      */
-    streamKeys?: StreamKeys;
+    errors?: BatchErrors;
   }
   export interface BatchStartViewerSessionRevocationError {
     /**
      * Channel ARN.
      */
     channelArn: ChannelArn;
+    /**
+     * The ID of the viewer session to revoke.
+     */
+    viewerId: ViewerId;
     /**
      * Error code.
      */
@@ -371,10 +375,6 @@ declare namespace IVS {
      * Error message, determined by the application.
      */
     message?: errorMessage;
-    /**
-     * The ID of the viewer session to revoke.
-     */
-    viewerId: ViewerId;
   }
   export type BatchStartViewerSessionRevocationErrors = BatchStartViewerSessionRevocationError[];
   export interface BatchStartViewerSessionRevocationRequest {
@@ -411,53 +411,53 @@ declare namespace IVS {
      */
     arn?: ChannelArn;
     /**
-     * Whether the channel is private (enabled for playback authorization). Default: false.
+     * Channel name.
      */
-    authorized?: IsAuthorized;
-    /**
-     * Channel ingest endpoint, part of the definition of an ingest server, used when you set up streaming software.
-     */
-    ingestEndpoint?: IngestEndpoint;
-    /**
-     * Whether the channel allows insecure RTMP ingest. Default: false.
-     */
-    insecureIngest?: InsecureIngest;
+    name?: ChannelName;
     /**
      * Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full HD. Use LOW for near-real-time interaction with viewers. Default: LOW.
      */
     latencyMode?: ChannelLatencyMode;
     /**
-     * Channel name.
+     * Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable input resolution or bitrate, the stream probably will disconnect immediately. Default: STANDARD. For details, see Channel Types.
      */
-    name?: ChannelName;
-    /**
-     * Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables playback restriction. Default: "" (empty string, no playback restriction policy is applied).
-     */
-    playbackRestrictionPolicyArn?: ChannelPlaybackRestrictionPolicyArn;
-    /**
-     * Channel playback URL.
-     */
-    playbackUrl?: PlaybackURL;
-    /**
-     * Optional transcode preset for the channel. This is selectable only for ADVANCED_HD and ADVANCED_SD channel types. For those channel types, the default preset is HIGHER_BANDWIDTH_DELIVERY. For other channel types (BASIC and STANDARD), preset is the empty string ("").
-     */
-    preset?: TranscodePreset;
+    type?: ChannelType;
     /**
      * Recording-configuration ARN. A valid ARN value here both specifies the ARN and enables recording. Default: "" (empty string, recording is disabled).
      */
     recordingConfigurationArn?: ChannelRecordingConfigurationArn;
     /**
-     * Specifies the endpoint and optional passphrase for streaming with the SRT protocol.
+     * Channel ingest endpoint, part of the definition of an ingest server, used when you set up streaming software.
      */
-    srt?: Srt;
+    ingestEndpoint?: IngestEndpoint;
+    /**
+     * Channel playback URL.
+     */
+    playbackUrl?: PlaybackURL;
+    /**
+     * Whether the channel is private (enabled for playback authorization). Default: false.
+     */
+    authorized?: IsAuthorized;
     /**
      * Tags attached to the resource. Array of 1-50 maps, each of the form string:string (key:value). See Tagging Amazon Web Services Resources for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.
      */
     tags?: Tags;
     /**
-     * Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable input resolution or bitrate, the stream probably will disconnect immediately. Default: STANDARD. For details, see Channel Types.
+     * Whether the channel allows insecure RTMP ingest. Default: false.
      */
-    type?: ChannelType;
+    insecureIngest?: InsecureIngest;
+    /**
+     * Optional transcode preset for the channel. This is selectable only for ADVANCED_HD and ADVANCED_SD channel types. For those channel types, the default preset is HIGHER_BANDWIDTH_DELIVERY. For other channel types (BASIC and STANDARD), preset is the empty string ("").
+     */
+    preset?: TranscodePreset;
+    /**
+     * Specifies the endpoint and optional passphrase for streaming with the SRT protocol.
+     */
+    srt?: Srt;
+    /**
+     * Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables playback restriction. Default: "" (empty string, no playback restriction policy is applied).
+     */
+    playbackRestrictionPolicyArn?: ChannelPlaybackRestrictionPolicyArn;
   }
   export type ChannelArn = string;
   export type ChannelArnList = ChannelArn[];
@@ -472,29 +472,17 @@ declare namespace IVS {
      */
     arn?: ChannelArn;
     /**
-     * Whether the channel is private (enabled for playback authorization). Default: false.
+     * Channel name.
      */
-    authorized?: IsAuthorized;
-    /**
-     * Whether the channel allows insecure RTMP ingest. Default: false.
-     */
-    insecureIngest?: InsecureIngest;
+    name?: ChannelName;
     /**
      * Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full HD. Use LOW for near-real-time interaction with viewers. Default: LOW.
      */
     latencyMode?: ChannelLatencyMode;
     /**
-     * Channel name.
+     * Whether the channel is private (enabled for playback authorization). Default: false.
      */
-    name?: ChannelName;
-    /**
-     * Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables playback restriction. Default: "" (empty string, no playback restriction policy is applied).
-     */
-    playbackRestrictionPolicyArn?: ChannelPlaybackRestrictionPolicyArn;
-    /**
-     * Optional transcode preset for the channel. This is selectable only for ADVANCED_HD and ADVANCED_SD channel types. For those channel types, the default preset is HIGHER_BANDWIDTH_DELIVERY. For other channel types (BASIC and STANDARD), preset is the empty string ("").
-     */
-    preset?: TranscodePreset;
+    authorized?: IsAuthorized;
     /**
      * Recording-configuration ARN. A valid ARN value here both specifies the ARN and enables recording. Default: "" (empty string, recording is disabled).
      */
@@ -504,37 +492,41 @@ declare namespace IVS {
      */
     tags?: Tags;
     /**
+     * Whether the channel allows insecure RTMP ingest. Default: false.
+     */
+    insecureIngest?: InsecureIngest;
+    /**
      * Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable input resolution or bitrate, the stream probably will disconnect immediately. Default: STANDARD. For details, see Channel Types.
      */
     type?: ChannelType;
+    /**
+     * Optional transcode preset for the channel. This is selectable only for ADVANCED_HD and ADVANCED_SD channel types. For those channel types, the default preset is HIGHER_BANDWIDTH_DELIVERY. For other channel types (BASIC and STANDARD), preset is the empty string ("").
+     */
+    preset?: TranscodePreset;
+    /**
+     * Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables playback restriction. Default: "" (empty string, no playback restriction policy is applied).
+     */
+    playbackRestrictionPolicyArn?: ChannelPlaybackRestrictionPolicyArn;
   }
   export type ChannelType = "BASIC"|"STANDARD"|"ADVANCED_SD"|"ADVANCED_HD"|string;
   export type Channels = Channel[];
   export interface CreateChannelRequest {
     /**
-     * Whether the channel is private (enabled for playback authorization). Default: false.
+     * Channel name.
      */
-    authorized?: Boolean;
-    /**
-     * Whether the channel allows insecure RTMP and SRT ingest. Default: false.
-     */
-    insecureIngest?: Boolean;
+    name?: ChannelName;
     /**
      * Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full HD. Use LOW for near-real-time interaction with viewers. Default: LOW.
      */
     latencyMode?: ChannelLatencyMode;
     /**
-     * Channel name.
+     * Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable input resolution or bitrate, the stream probably will disconnect immediately. Default: STANDARD. For details, see Channel Types.
      */
-    name?: ChannelName;
+    type?: ChannelType;
     /**
-     * Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables playback restriction. Default: "" (empty string, no playback restriction policy is applied).
+     * Whether the channel is private (enabled for playback authorization). Default: false.
      */
-    playbackRestrictionPolicyArn?: ChannelPlaybackRestrictionPolicyArn;
-    /**
-     * Optional transcode preset for the channel. This is selectable only for ADVANCED_HD and ADVANCED_SD channel types. For those channel types, the default preset is HIGHER_BANDWIDTH_DELIVERY. For other channel types (BASIC and STANDARD), preset is the empty string ("").
-     */
-    preset?: TranscodePreset;
+    authorized?: Boolean;
     /**
      * Recording-configuration ARN. A valid ARN value here both specifies the ARN and enables recording. Default: "" (empty string, recording is disabled).
      */
@@ -544,9 +536,17 @@ declare namespace IVS {
      */
     tags?: Tags;
     /**
-     * Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable input resolution or bitrate, the stream probably will disconnect immediately. Default: STANDARD. For details, see Channel Types.
+     * Whether the channel allows insecure RTMP and SRT ingest. Default: false.
      */
-    type?: ChannelType;
+    insecureIngest?: Boolean;
+    /**
+     * Optional transcode preset for the channel. This is selectable only for ADVANCED_HD and ADVANCED_SD channel types. For those channel types, the default preset is HIGHER_BANDWIDTH_DELIVERY. For other channel types (BASIC and STANDARD), preset is the empty string ("").
+     */
+    preset?: TranscodePreset;
+    /**
+     * Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables playback restriction. Default: "" (empty string, no playback restriction policy is applied).
+     */
+    playbackRestrictionPolicyArn?: ChannelPlaybackRestrictionPolicyArn;
   }
   export interface CreateChannelResponse {
     /**
@@ -588,21 +588,13 @@ declare namespace IVS {
   }
   export interface CreateRecordingConfigurationRequest {
     /**
-     * A complex type that contains a destination configuration for where recorded video will be stored.
-     */
-    destinationConfiguration: DestinationConfiguration;
-    /**
      * Recording-configuration name. The value does not need to be unique.
      */
     name?: RecordingConfigurationName;
     /**
-     * If a broadcast disconnects and then reconnects within the specified interval, the multiple streams will be considered a single broadcast and merged together. Default: 0.
+     * A complex type that contains a destination configuration for where recorded video will be stored.
      */
-    recordingReconnectWindowSeconds?: RecordingReconnectWindowSeconds;
-    /**
-     * Object that describes which renditions should be recorded for a stream.
-     */
-    renditionConfiguration?: RenditionConfiguration;
+    destinationConfiguration: DestinationConfiguration;
     /**
      * Array of 1-50 maps, each of the form string:string (key:value). See Tagging Amazon Web Services Resources for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.
      */
@@ -611,6 +603,14 @@ declare namespace IVS {
      * A complex type that allows you to enable/disable the recording of thumbnails for a live session and modify the interval at which thumbnails are generated for the live session.
      */
     thumbnailConfiguration?: ThumbnailConfiguration;
+    /**
+     * If a broadcast disconnects and then reconnects within the specified interval, the multiple streams will be considered a single broadcast and merged together. Default: 0.
+     */
+    recordingReconnectWindowSeconds?: RecordingReconnectWindowSeconds;
+    /**
+     * Object that describes which renditions should be recorded for a stream.
+     */
+    renditionConfiguration?: RenditionConfiguration;
   }
   export interface CreateRecordingConfigurationResponse {
     /**
@@ -762,13 +762,13 @@ declare namespace IVS {
   }
   export interface ImportPlaybackKeyPairRequest {
     /**
-     * Playback-key-pair name. The value does not need to be unique.
-     */
-    name?: PlaybackKeyPairName;
-    /**
      * The public portion of a customer-generated key pair.
      */
     publicKeyMaterial: PlaybackPublicKeyMaterial;
+    /**
+     * Playback-key-pair name. The value does not need to be unique.
+     */
+    name?: PlaybackKeyPairName;
     /**
      * Any tags provided with the request are added to the playback key pair tags. See Tagging Amazon Web Services Resources for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.
      */
@@ -782,13 +782,13 @@ declare namespace IVS {
   }
   export interface IngestConfiguration {
     /**
-     * Encoder settings for audio.
-     */
-    audio?: AudioConfiguration;
-    /**
      * Encoder settings for video.
      */
     video?: VideoConfiguration;
+    /**
+     * Encoder settings for audio.
+     */
+    audio?: AudioConfiguration;
   }
   export type IngestEndpoint = string;
   export type InsecureIngest = boolean;
@@ -800,21 +800,21 @@ declare namespace IVS {
      */
     filterByName?: ChannelName;
     /**
-     * Filters the channel list to match the specified policy.
-     */
-    filterByPlaybackRestrictionPolicyArn?: ChannelPlaybackRestrictionPolicyArn;
-    /**
      * Filters the channel list to match the specified recording-configuration ARN.
      */
     filterByRecordingConfigurationArn?: ChannelRecordingConfigurationArn;
     /**
-     * Maximum number of channels to return. Default: 100.
+     * Filters the channel list to match the specified policy.
      */
-    maxResults?: MaxChannelResults;
+    filterByPlaybackRestrictionPolicyArn?: ChannelPlaybackRestrictionPolicyArn;
     /**
      * The first channel to retrieve. This is used for pagination; see the nextToken response field.
      */
     nextToken?: PaginationToken;
+    /**
+     * Maximum number of channels to return. Default: 100.
+     */
+    maxResults?: MaxChannelResults;
   }
   export interface ListChannelsResponse {
     /**
@@ -828,13 +828,13 @@ declare namespace IVS {
   }
   export interface ListPlaybackKeyPairsRequest {
     /**
-     * Maximum number of key pairs to return. Default: your service quota or 100, whichever is smaller.
-     */
-    maxResults?: MaxPlaybackKeyPairResults;
-    /**
      * The first key pair to retrieve. This is used for pagination; see the nextToken response field.
      */
     nextToken?: PaginationToken;
+    /**
+     * Maximum number of key pairs to return. Default: your service quota or 100, whichever is smaller.
+     */
+    maxResults?: MaxPlaybackKeyPairResults;
   }
   export interface ListPlaybackKeyPairsResponse {
     /**
@@ -848,43 +848,43 @@ declare namespace IVS {
   }
   export interface ListPlaybackRestrictionPoliciesRequest {
     /**
-     * Maximum number of policies to return. Default: 1.
-     */
-    maxResults?: MaxPlaybackRestrictionPolicyResults;
-    /**
      * The first policy to retrieve. This is used for pagination; see the nextToken response field.
      */
     nextToken?: PaginationToken;
+    /**
+     * Maximum number of policies to return. Default: 1.
+     */
+    maxResults?: MaxPlaybackRestrictionPolicyResults;
   }
   export interface ListPlaybackRestrictionPoliciesResponse {
-    /**
-     * If there are more channels than maxResults, use nextToken in the request to get the next set.
-     */
-    nextToken?: PaginationToken;
     /**
      * List of the matching policies.
      */
     playbackRestrictionPolicies: PlaybackRestrictionPolicyList;
+    /**
+     * If there are more channels than maxResults, use nextToken in the request to get the next set.
+     */
+    nextToken?: PaginationToken;
   }
   export interface ListRecordingConfigurationsRequest {
-    /**
-     * Maximum number of recording configurations to return. Default: your service quota or 100, whichever is smaller. 
-     */
-    maxResults?: MaxRecordingConfigurationResults;
     /**
      * The first recording configuration to retrieve. This is used for pagination; see the nextToken response field.
      */
     nextToken?: PaginationToken;
+    /**
+     * Maximum number of recording configurations to return. Default: your service quota or 100, whichever is smaller. 
+     */
+    maxResults?: MaxRecordingConfigurationResults;
   }
   export interface ListRecordingConfigurationsResponse {
-    /**
-     * If there are more recording configurations than maxResults, use nextToken in the request to get the next set.
-     */
-    nextToken?: PaginationToken;
     /**
      * List of the matching recording configurations.
      */
     recordingConfigurations: RecordingConfigurationList;
+    /**
+     * If there are more recording configurations than maxResults, use nextToken in the request to get the next set.
+     */
+    nextToken?: PaginationToken;
   }
   export interface ListStreamKeysRequest {
     /**
@@ -892,23 +892,23 @@ declare namespace IVS {
      */
     channelArn: ChannelArn;
     /**
-     * Maximum number of streamKeys to return. Default: 1.
-     */
-    maxResults?: MaxStreamKeyResults;
-    /**
      * The first stream key to retrieve. This is used for pagination; see the nextToken response field.
      */
     nextToken?: PaginationToken;
+    /**
+     * Maximum number of streamKeys to return. Default: 1.
+     */
+    maxResults?: MaxStreamKeyResults;
   }
   export interface ListStreamKeysResponse {
-    /**
-     * If there are more stream keys than maxResults, use nextToken in the request to get the next set.
-     */
-    nextToken?: PaginationToken;
     /**
      * List of stream keys.
      */
     streamKeys: StreamKeyList;
+    /**
+     * If there are more stream keys than maxResults, use nextToken in the request to get the next set.
+     */
+    nextToken?: PaginationToken;
   }
   export interface ListStreamSessionsRequest {
     /**
@@ -916,23 +916,23 @@ declare namespace IVS {
      */
     channelArn: ChannelArn;
     /**
-     * Maximum number of streams to return. Default: 100.
-     */
-    maxResults?: MaxStreamResults;
-    /**
      * The first stream to retrieve. This is used for pagination; see the nextToken response field.
      */
     nextToken?: PaginationToken;
+    /**
+     * Maximum number of streams to return. Default: 100.
+     */
+    maxResults?: MaxStreamResults;
   }
   export interface ListStreamSessionsResponse {
-    /**
-     * If there are more streams than maxResults, use nextToken in the request to get the next set.
-     */
-    nextToken?: PaginationToken;
     /**
      * List of stream sessions.
      */
     streamSessions: StreamSessionList;
+    /**
+     * If there are more streams than maxResults, use nextToken in the request to get the next set.
+     */
+    nextToken?: PaginationToken;
   }
   export interface ListStreamsRequest {
     /**
@@ -940,23 +940,23 @@ declare namespace IVS {
      */
     filterBy?: StreamFilters;
     /**
-     * Maximum number of streams to return. Default: 100.
-     */
-    maxResults?: MaxStreamResults;
-    /**
      * The first stream to retrieve. This is used for pagination; see the nextToken response field.
      */
     nextToken?: PaginationToken;
+    /**
+     * Maximum number of streams to return. Default: 100.
+     */
+    maxResults?: MaxStreamResults;
   }
   export interface ListStreamsResponse {
-    /**
-     * If there are more streams than maxResults, use nextToken in the request to get the next set.
-     */
-    nextToken?: PaginationToken;
     /**
      * List of streams.
      */
     streams: StreamList;
+    /**
+     * If there are more streams than maxResults, use nextToken in the request to get the next set.
+     */
+    nextToken?: PaginationToken;
   }
   export interface ListTagsForResourceRequest {
     /**
@@ -983,13 +983,13 @@ declare namespace IVS {
      */
     arn?: PlaybackKeyPairArn;
     /**
-     * Key-pair identifier.
-     */
-    fingerprint?: PlaybackKeyPairFingerprint;
-    /**
      * Playback-key-pair name. The value does not need to be unique.
      */
     name?: PlaybackKeyPairName;
+    /**
+     * Key-pair identifier.
+     */
+    fingerprint?: PlaybackKeyPairFingerprint;
     /**
      * Tags attached to the resource. Array of 1-50 maps, each of the form string:string (key:value). See Tagging Amazon Web Services Resources for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.
      */
@@ -1016,6 +1016,10 @@ declare namespace IVS {
   export type PlaybackPublicKeyMaterial = string;
   export interface PlaybackRestrictionPolicy {
     /**
+     * Playback-restriction-policy ARN
+     */
+    arn: PlaybackRestrictionPolicyArn;
+    /**
      * A list of country codes that control geoblocking restriction. Allowed values are the officially assigned ISO 3166-1 alpha-2 codes. Default: All countries (an empty array).
      */
     allowedCountries: PlaybackRestrictionPolicyAllowedCountryList;
@@ -1023,10 +1027,6 @@ declare namespace IVS {
      * A list of origin sites that control CORS restriction. Allowed values are the same as valid values of the Origin header defined at https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin. Default: All origins (an empty array).
      */
     allowedOrigins: PlaybackRestrictionPolicyAllowedOriginList;
-    /**
-     * Playback-restriction-policy ARN
-     */
-    arn: PlaybackRestrictionPolicyArn;
     /**
      * Whether channel playback is constrained by origin site. Default: false.
      */
@@ -1050,6 +1050,10 @@ declare namespace IVS {
   export type PlaybackRestrictionPolicyName = string;
   export interface PlaybackRestrictionPolicySummary {
     /**
+     * Playback-restriction-policy ARN
+     */
+    arn: PlaybackRestrictionPolicyArn;
+    /**
      * A list of country codes that control geoblocking restriction. Allowed values are the officially assigned ISO 3166-1 alpha-2 codes. Default: All countries (an empty array).
      */
     allowedCountries: PlaybackRestrictionPolicyAllowedCountryList;
@@ -1057,10 +1061,6 @@ declare namespace IVS {
      * A list of origin sites that control CORS restriction. Allowed values are the same as valid values of the Origin header defined at https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin. Default: All origins (an empty array).
      */
     allowedOrigins: PlaybackRestrictionPolicyAllowedOriginList;
-    /**
-     * Playback-restriction-policy ARN
-     */
-    arn: PlaybackRestrictionPolicyArn;
     /**
      * Whether channel playback is constrained by origin site. Default: false.
      */
@@ -1091,21 +1091,13 @@ declare namespace IVS {
      */
     arn: RecordingConfigurationArn;
     /**
-     * A complex type that contains information about where recorded video will be stored.
-     */
-    destinationConfiguration: DestinationConfiguration;
-    /**
      * Recording-configuration name. The value does not need to be unique.
      */
     name?: RecordingConfigurationName;
     /**
-     * If a broadcast disconnects and then reconnects within the specified interval, the multiple streams will be considered a single broadcast and merged together. Default: 0.
+     * A complex type that contains information about where recorded video will be stored.
      */
-    recordingReconnectWindowSeconds?: RecordingReconnectWindowSeconds;
-    /**
-     * Object that describes which renditions should be recorded for a stream.
-     */
-    renditionConfiguration?: RenditionConfiguration;
+    destinationConfiguration: DestinationConfiguration;
     /**
      * Indicates the current state of the recording configuration. When the state is ACTIVE, the configuration is ready for recording a channel stream.
      */
@@ -1118,6 +1110,14 @@ declare namespace IVS {
      * A complex type that allows you to enable/disable the recording of thumbnails for a live session and modify the interval at which thumbnails are generated for the live session.
      */
     thumbnailConfiguration?: ThumbnailConfiguration;
+    /**
+     * If a broadcast disconnects and then reconnects within the specified interval, the multiple streams will be considered a single broadcast and merged together. Default: 0.
+     */
+    recordingReconnectWindowSeconds?: RecordingReconnectWindowSeconds;
+    /**
+     * Object that describes which renditions should be recorded for a stream.
+     */
+    renditionConfiguration?: RenditionConfiguration;
   }
   export type RecordingConfigurationArn = string;
   export type RecordingConfigurationList = RecordingConfigurationSummary[];
@@ -1129,13 +1129,13 @@ declare namespace IVS {
      */
     arn: RecordingConfigurationArn;
     /**
-     * A complex type that contains information about where recorded video will be stored.
-     */
-    destinationConfiguration: DestinationConfiguration;
-    /**
      * Recording-configuration name. The value does not need to be unique.
      */
     name?: RecordingConfigurationName;
+    /**
+     * A complex type that contains information about where recorded video will be stored.
+     */
+    destinationConfiguration: DestinationConfiguration;
     /**
      * Indicates the current state of the recording configuration. When the state is ACTIVE, the configuration is ready for recording a channel stream.
      */
@@ -1157,7 +1157,7 @@ declare namespace IVS {
      */
     renditions?: RenditionConfigurationRenditionList;
   }
-  export type RenditionConfigurationRendition = "FULL_HD"|"HD"|"SD"|"LOWEST_RESOLUTION"|string;
+  export type RenditionConfigurationRendition = "SD"|"HD"|"FULL_HD"|"LOWEST_RESOLUTION"|string;
   export type RenditionConfigurationRenditionList = RenditionConfigurationRendition[];
   export type RenditionConfigurationRenditionSelection = "ALL"|"NONE"|"CUSTOM"|string;
   export type ResourceArn = string;
@@ -1210,9 +1210,9 @@ declare namespace IVS {
      */
     channelArn?: ChannelArn;
     /**
-     * The stream’s health.
+     * Unique identifier for a live or previously live stream in the specified channel.
      */
-    health?: StreamHealth;
+    streamId?: StreamId;
     /**
      * URL of the master playlist, required by the video player to play the HLS stream.
      */
@@ -1226,19 +1226,15 @@ declare namespace IVS {
      */
     state?: StreamState;
     /**
-     * Unique identifier for a live or previously live stream in the specified channel.
+     * The stream’s health.
      */
-    streamId?: StreamId;
+    health?: StreamHealth;
     /**
      * A count of concurrent views of the stream. Typically, a new view appears in viewerCount within 15 seconds of when video playback starts and a view is removed from viewerCount within 1 minute of when video playback ends. A value of -1 indicates that the request timed out; in this case, retry.
      */
     viewerCount?: StreamViewerCount;
   }
   export interface StreamEvent {
-    /**
-     * Time when the event occurred. This is an ISO 8601 timestamp; note that this is returned as a string.
-     */
-    eventTime?: Time;
     /**
      * Name that identifies the stream event within a type.
      */
@@ -1247,6 +1243,10 @@ declare namespace IVS {
      * Logical group for certain events.
      */
     type?: String;
+    /**
+     * Time when the event occurred. This is an ISO 8601 timestamp; note that this is returned as a string.
+     */
+    eventTime?: Time;
   }
   export type StreamEvents = StreamEvent[];
   export interface StreamFilters {
@@ -1263,6 +1263,10 @@ declare namespace IVS {
      */
     arn?: StreamKeyArn;
     /**
+     * Stream-key value.
+     */
+    value?: StreamKeyValue;
+    /**
      * Channel ARN for the stream.
      */
     channelArn?: ChannelArn;
@@ -1270,10 +1274,6 @@ declare namespace IVS {
      * Tags attached to the resource. Array of 1-50 maps, each of the form string:string (key:value). See Tagging Amazon Web Services Resources for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.
      */
     tags?: Tags;
-    /**
-     * Stream-key value.
-     */
-    value?: StreamKeyValue;
   }
   export type StreamKeyArn = string;
   export type StreamKeyArnList = StreamKeyArn[];
@@ -1298,13 +1298,21 @@ declare namespace IVS {
   export type StreamMetadata = string;
   export interface StreamSession {
     /**
-     * The properties of the channel at the time of going live.
+     * Unique identifier for a live or previously live stream in the specified channel.
      */
-    channel?: Channel;
+    streamId?: StreamId;
+    /**
+     * Time when the channel went live. This is an ISO 8601 timestamp; note that this is returned as a string.
+     */
+    startTime?: Time;
     /**
      * Time when the channel went offline. This is an ISO 8601 timestamp; note that this is returned as a string. For live streams, this is NULL.
      */
     endTime?: Time;
+    /**
+     * The properties of the channel at the time of going live.
+     */
+    channel?: Channel;
     /**
      * The properties of the incoming RTMP stream for the stream.
      */
@@ -1314,20 +1322,20 @@ declare namespace IVS {
      */
     recordingConfiguration?: RecordingConfiguration;
     /**
-     * Time when the channel went live. This is an ISO 8601 timestamp; note that this is returned as a string.
-     */
-    startTime?: Time;
-    /**
-     * Unique identifier for a live or previously live stream in the specified channel.
-     */
-    streamId?: StreamId;
-    /**
      * List of Amazon IVS events that the stream encountered. The list is sorted by most recent events and contains up to 500 events. For Amazon IVS events, see Using Amazon EventBridge with Amazon IVS.
      */
     truncatedEvents?: StreamEvents;
   }
   export type StreamSessionList = StreamSessionSummary[];
   export interface StreamSessionSummary {
+    /**
+     * Unique identifier for a live or previously live stream in the specified channel.
+     */
+    streamId?: StreamId;
+    /**
+     * Time when the channel went live. This is an ISO 8601 timestamp; note that this is returned as a string.
+     */
+    startTime?: Time;
     /**
      * Time when the channel went offline. This is an ISO 8601 timestamp; note that this is returned as a string. For live streams, this is NULL.
      */
@@ -1336,14 +1344,6 @@ declare namespace IVS {
      * If true, this stream encountered a quota breach or failure.
      */
     hasErrorEvent?: Boolean;
-    /**
-     * Time when the channel went live. This is an ISO 8601 timestamp; note that this is returned as a string.
-     */
-    startTime?: Time;
-    /**
-     * Unique identifier for a live or previously live stream in the specified channel.
-     */
-    streamId?: StreamId;
   }
   export type StreamStartTime = Date;
   export type StreamState = "LIVE"|"OFFLINE"|string;
@@ -1353,25 +1353,25 @@ declare namespace IVS {
      */
     channelArn?: ChannelArn;
     /**
-     * The stream’s health.
+     * Unique identifier for a live or previously live stream in the specified channel.
      */
-    health?: StreamHealth;
-    /**
-     * Time of the stream’s start. This is an ISO 8601 timestamp; note that this is returned as a string. 
-     */
-    startTime?: StreamStartTime;
+    streamId?: StreamId;
     /**
      * The stream’s state. Do not rely on the OFFLINE state, as the API may not return it; instead, a "NotBroadcasting" error will indicate that the stream is not live.
      */
     state?: StreamState;
     /**
-     * Unique identifier for a live or previously live stream in the specified channel.
+     * The stream’s health.
      */
-    streamId?: StreamId;
+    health?: StreamHealth;
     /**
      * A count of concurrent views of the stream. Typically, a new view appears in viewerCount within 15 seconds of when video playback starts and a view is removed from viewerCount within 1 minute of when video playback ends. A value of -1 indicates that the request timed out; in this case, retry.
      */
     viewerCount?: StreamViewerCount;
+    /**
+     * Time of the stream’s start. This is an ISO 8601 timestamp; note that this is returned as a string. 
+     */
+    startTime?: StreamStartTime;
   }
   export type StreamViewerCount = number;
   export type String = string;
@@ -1398,6 +1398,10 @@ declare namespace IVS {
      */
     recordingMode?: RecordingMode;
     /**
+     * The targeted thumbnail-generation interval in seconds. This is configurable (and required) only if recordingMode is INTERVAL. Default: 60.  Important: For the BASIC channel type, setting a value for targetIntervalSeconds does not guarantee that thumbnails are generated at the specified interval. For thumbnails to be generated at the targetIntervalSeconds interval, the IDR/Keyframe value for the input video must be less than the targetIntervalSeconds value. See  Amazon IVS Streaming Configuration for information on setting IDR/Keyframe to the recommended value in video-encoder settings.
+     */
+    targetIntervalSeconds?: TargetIntervalSeconds;
+    /**
      * Indicates the desired resolution of recorded thumbnails. Thumbnails are recorded at the selected resolution if the corresponding rendition is available during the stream; otherwise, they are recorded at source resolution. For more information about resolution values and their corresponding height and width dimensions, see Auto-Record to Amazon S3. Default: Null (source resolution is returned).
      */
     resolution?: ThumbnailConfigurationResolution;
@@ -1405,12 +1409,8 @@ declare namespace IVS {
      * Indicates the format in which thumbnails are recorded. SEQUENTIAL records all generated thumbnails in a serial manner, to the media/thumbnails directory. LATEST saves the latest thumbnail in media/latest_thumbnail/thumb.jpg and overwrites it at the interval specified by targetIntervalSeconds. You can enable both SEQUENTIAL and LATEST. Default: SEQUENTIAL.
      */
     storage?: ThumbnailConfigurationStorageList;
-    /**
-     * The targeted thumbnail-generation interval in seconds. This is configurable (and required) only if recordingMode is INTERVAL. Default: 60.  Important: For the BASIC channel type, setting a value for targetIntervalSeconds does not guarantee that thumbnails are generated at the specified interval. For thumbnails to be generated at the targetIntervalSeconds interval, the IDR/Keyframe value for the input video must be less than the targetIntervalSeconds value. See  Amazon IVS Streaming Configuration for information on setting IDR/Keyframe to the recommended value in video-encoder settings.
-     */
-    targetIntervalSeconds?: TargetIntervalSeconds;
   }
-  export type ThumbnailConfigurationResolution = "FULL_HD"|"HD"|"SD"|"LOWEST_RESOLUTION"|string;
+  export type ThumbnailConfigurationResolution = "SD"|"HD"|"FULL_HD"|"LOWEST_RESOLUTION"|string;
   export type ThumbnailConfigurationStorage = "SEQUENTIAL"|"LATEST"|string;
   export type ThumbnailConfigurationStorageList = ThumbnailConfigurationStorage[];
   export type Time = Date;
@@ -1433,37 +1433,37 @@ declare namespace IVS {
      */
     arn: ChannelArn;
     /**
-     * Whether the channel is private (enabled for playback authorization).
+     * Channel name.
      */
-    authorized?: Boolean;
-    /**
-     * Whether the channel allows insecure RTMP and SRT ingest. Default: false.
-     */
-    insecureIngest?: Boolean;
+    name?: ChannelName;
     /**
      * Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full HD. Use LOW for near-real-time interaction with viewers.
      */
     latencyMode?: ChannelLatencyMode;
     /**
-     * Channel name.
+     * Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable input resolution or bitrate, the stream probably will disconnect immediately. Default: STANDARD. For details, see Channel Types.
      */
-    name?: ChannelName;
+    type?: ChannelType;
     /**
-     * Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables playback restriction. If this is set to an empty string, playback restriction policy is disabled.
+     * Whether the channel is private (enabled for playback authorization).
      */
-    playbackRestrictionPolicyArn?: ChannelPlaybackRestrictionPolicyArn;
-    /**
-     * Optional transcode preset for the channel. This is selectable only for ADVANCED_HD and ADVANCED_SD channel types. For those channel types, the default preset is HIGHER_BANDWIDTH_DELIVERY. For other channel types (BASIC and STANDARD), preset is the empty string ("").
-     */
-    preset?: TranscodePreset;
+    authorized?: Boolean;
     /**
      * Recording-configuration ARN. A valid ARN value here both specifies the ARN and enables recording. If this is set to an empty string, recording is disabled.
      */
     recordingConfigurationArn?: ChannelRecordingConfigurationArn;
     /**
-     * Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable input resolution or bitrate, the stream probably will disconnect immediately. Default: STANDARD. For details, see Channel Types.
+     * Whether the channel allows insecure RTMP and SRT ingest. Default: false.
      */
-    type?: ChannelType;
+    insecureIngest?: Boolean;
+    /**
+     * Optional transcode preset for the channel. This is selectable only for ADVANCED_HD and ADVANCED_SD channel types. For those channel types, the default preset is HIGHER_BANDWIDTH_DELIVERY. For other channel types (BASIC and STANDARD), preset is the empty string ("").
+     */
+    preset?: TranscodePreset;
+    /**
+     * Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables playback restriction. If this is set to an empty string, playback restriction policy is disabled.
+     */
+    playbackRestrictionPolicyArn?: ChannelPlaybackRestrictionPolicyArn;
   }
   export interface UpdateChannelResponse {
     /**
@@ -1473,6 +1473,10 @@ declare namespace IVS {
   }
   export interface UpdatePlaybackRestrictionPolicyRequest {
     /**
+     * ARN of the playback-restriction-policy to be updated.
+     */
+    arn: PlaybackRestrictionPolicyArn;
+    /**
      * A list of country codes that control geoblocking restriction. Allowed values are the officially assigned ISO 3166-1 alpha-2 codes. Default: All countries (an empty array).
      */
     allowedCountries?: PlaybackRestrictionPolicyAllowedCountryList;
@@ -1480,10 +1484,6 @@ declare namespace IVS {
      * A list of origin sites that control CORS restriction. Allowed values are the same as valid values of the Origin header defined at https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin. Default: All origins (an empty array).
      */
     allowedOrigins?: PlaybackRestrictionPolicyAllowedOriginList;
-    /**
-     * ARN of the playback-restriction-policy to be updated.
-     */
-    arn: PlaybackRestrictionPolicyArn;
     /**
      * Whether channel playback is constrained by origin site. Default: false.
      */
@@ -1501,13 +1501,13 @@ declare namespace IVS {
   }
   export interface VideoConfiguration {
     /**
-     * Indicates the degree of required decoder performance for a profile. Normally this is set automatically by the encoder. For details, see the H.264 specification.
-     */
-    avcLevel?: String;
-    /**
      * Indicates to the decoder the requirements for decoding the stream. For definitions of the valid values, see the H.264 specification.
      */
     avcProfile?: String;
+    /**
+     * Indicates the degree of required decoder performance for a profile. Normally this is set automatically by the encoder. For details, see the H.264 specification.
+     */
+    avcLevel?: String;
     /**
      * Codec used for the video encoding.
      */
