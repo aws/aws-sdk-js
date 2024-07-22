@@ -106,7 +106,6 @@ export abstract class ConfigurationServicePlaceholders {
   migrationhub?: AWS.MigrationHub.Types.ClientConfiguration;
   cloudhsmv2?: AWS.CloudHSMV2.Types.ClientConfiguration;
   glue?: AWS.Glue.Types.ClientConfiguration;
-  mobile?: AWS.Mobile.Types.ClientConfiguration;
   pricing?: AWS.Pricing.Types.ClientConfiguration;
   costexplorer?: AWS.CostExplorer.Types.ClientConfiguration;
   mediaconvert?: AWS.MediaConvert.Types.ClientConfiguration;
@@ -493,7 +492,6 @@ export interface ConfigurationServiceApiVersions {
   migrationhub?: AWS.MigrationHub.Types.apiVersion;
   cloudhsmv2?: AWS.CloudHSMV2.Types.apiVersion;
   glue?: AWS.Glue.Types.apiVersion;
-  mobile?: AWS.Mobile.Types.apiVersion;
   pricing?: AWS.Pricing.Types.apiVersion;
   costexplorer?: AWS.CostExplorer.Types.apiVersion;
   mediaconvert?: AWS.MediaConvert.Types.apiVersion;
