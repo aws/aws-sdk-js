@@ -9,7 +9,10 @@
     "uid": "medialive-2017-10-14",
     "signatureVersion": "v4",
     "serviceAbbreviation": "MediaLive",
-    "jsonVersion": "1.1"
+    "jsonVersion": "1.1",
+    "auth": [
+      "aws.auth#sigv4"
+    ]
   },
   "operations": {
     "AcceptInputDeviceTransfer": {
@@ -6158,6 +6161,11 @@
         "Vpc": {
           "shape": "InputVpcRequest",
           "locationName": "vpc"
+        },
+        "SrtSettings": {
+          "shape": "SrtSettingsRequest",
+          "locationName": "srtSettings",
+          "documentation": "The settings associated with an SRT input."
         }
       },
       "documentation": "The name of the input"
@@ -7154,6 +7162,11 @@
         "Type": {
           "shape": "InputType",
           "locationName": "type"
+        },
+        "SrtSettings": {
+          "shape": "SrtSettings",
+          "locationName": "srtSettings",
+          "documentation": "The settings associated with an SRT input."
         }
       },
       "documentation": "Placeholder documentation for DescribeInputResponse"
@@ -7931,7 +7944,7 @@
         "Bitrate": {
           "shape": "__double",
           "locationName": "bitrate",
-          "documentation": "Average bitrate in bits/second. Valid bitrates depend on the coding mode.\n//  * @affectsRightSizing true"
+          "documentation": "Average bitrate in bits/second. Valid bitrates depend on the coding mode."
         },
         "CodingMode": {
           "shape": "Eac3AtmosCodingMode",
@@ -9005,7 +9018,7 @@
         "FilterSettings": {
           "shape": "H264FilterSettings",
           "locationName": "filterSettings",
-          "documentation": "Optional filters that you can apply to an encode."
+          "documentation": "Optional. Both filters reduce bandwidth by removing imperceptible details. You can enable one of the filters. We\nrecommend that you try both filters and observe the results to decide which one to use.\n\nThe Temporal Filter reduces bandwidth by removing imperceptible details in the content. It combines perceptual\nfiltering and motion compensated temporal filtering (MCTF). It operates independently of the compression level.\n\nThe Bandwidth Reduction filter is a perceptual filter located within the encoding loop. It adapts to the current\ncompression level to filter imperceptible signals. This filter works only when the resolution is 1080p or lower."
         },
         "FixedAfd": {
           "shape": "FixedAfd",
@@ -9399,7 +9412,7 @@
         "FilterSettings": {
           "shape": "H265FilterSettings",
           "locationName": "filterSettings",
-          "documentation": "Optional filters that you can apply to an encode."
+          "documentation": "Optional. Both filters reduce bandwidth by removing imperceptible details. You can enable one of the filters. We\nrecommend that you try both filters and observe the results to decide which one to use.\n\nThe Temporal Filter reduces bandwidth by removing imperceptible details in the content. It combines perceptual\nfiltering and motion compensated temporal filtering (MCTF). It operates independently of the compression level.\n\nThe Bandwidth Reduction filter is a perceptual filter located within the encoding loop. It adapts to the current\ncompression level to filter imperceptible signals. This filter works only when the resolution is 1080p or lower."
         },
         "FixedAfd": {
           "shape": "FixedAfd",
@@ -10408,6 +10421,11 @@
         "Type": {
           "shape": "InputType",
           "locationName": "type"
+        },
+        "SrtSettings": {
+          "shape": "SrtSettings",
+          "locationName": "srtSettings",
+          "documentation": "The settings associated with an SRT input."
         }
       },
       "documentation": "Placeholder documentation for Input"
@@ -11398,7 +11416,8 @@
         "MEDIACONNECT",
         "INPUT_DEVICE",
         "AWS_CDI",
-        "TS_FILE"
+        "TS_FILE",
+        "SRT_CALLER"
       ]
     },
     "InputVpcRequest": {
@@ -16353,6 +16372,11 @@
           "shape": "__listOfInputSourceRequest",
           "locationName": "sources",
           "documentation": "The source URLs for a PULL-type input. Every PULL type input needs\nexactly two source URLs for redundancy.\nOnly specify sources for PULL type Inputs. Leave Destinations empty."
+        },
+        "SrtSettings": {
+          "shape": "SrtSettingsRequest",
+          "locationName": "srtSettings",
+          "documentation": "The settings associated with an SRT input."
         }
       },
       "documentation": "A request to update an input.",
@@ -20578,6 +20602,141 @@
         "ALL_OUTPUT_GROUPS",
         "SCTE35_ENABLED_OUTPUT_GROUPS"
       ]
+    },
+    "Algorithm": {
+      "type": "string",
+      "enum": [
+        "AES128",
+        "AES192",
+        "AES256"
+      ],
+      "documentation": "Placeholder documentation for Algorithm"
+    },
+    "SrtCallerDecryption": {
+      "type": "structure",
+      "members": {
+        "Algorithm": {
+          "shape": "Algorithm",
+          "locationName": "algorithm",
+          "documentation": "The algorithm used to encrypt content."
+        },
+        "PassphraseSecretArn": {
+          "shape": "__string",
+          "locationName": "passphraseSecretArn",
+          "documentation": "The ARN for the secret in Secrets Manager. Someone in your organization must create a secret and provide you with its ARN. The secret holds the passphrase that MediaLive uses to decrypt the source content."
+        }
+      },
+      "documentation": "The decryption settings for the SRT caller source. Present only if the source has decryption enabled."
+    },
+    "SrtCallerDecryptionRequest": {
+      "type": "structure",
+      "members": {
+        "Algorithm": {
+          "shape": "Algorithm",
+          "locationName": "algorithm",
+          "documentation": "The algorithm used to encrypt content."
+        },
+        "PassphraseSecretArn": {
+          "shape": "__string",
+          "locationName": "passphraseSecretArn",
+          "documentation": "The ARN for the secret in Secrets Manager. Someone in your organization must create a secret and provide you with its ARN. This secret holds the passphrase that MediaLive will use to decrypt the source content."
+        }
+      },
+      "documentation": "Complete these parameters only if the content is encrypted."
+    },
+    "SrtCallerSource": {
+      "type": "structure",
+      "members": {
+        "Decryption": {
+          "shape": "SrtCallerDecryption",
+          "locationName": "decryption"
+        },
+        "MinimumLatency": {
+          "shape": "__integer",
+          "locationName": "minimumLatency",
+          "documentation": "The preferred latency (in milliseconds) for implementing packet loss and recovery. Packet recovery is a key feature of SRT."
+        },
+        "SrtListenerAddress": {
+          "shape": "__string",
+          "locationName": "srtListenerAddress",
+          "documentation": "The IP address at the upstream system (the listener) that MediaLive (the caller) connects to."
+        },
+        "SrtListenerPort": {
+          "shape": "__string",
+          "locationName": "srtListenerPort",
+          "documentation": "The port at the upstream system (the listener) that MediaLive (the caller) connects to."
+        },
+        "StreamId": {
+          "shape": "__string",
+          "locationName": "streamId",
+          "documentation": "The stream ID, if the upstream system uses this identifier."
+        }
+      },
+      "documentation": "The configuration for a source that uses SRT as the connection protocol. In terms of establishing the connection, MediaLive is always caller and the upstream system is always the listener. In terms of transmission of the source content, MediaLive is always the receiver and the upstream system is always the sender."
+    },
+    "SrtCallerSourceRequest": {
+      "type": "structure",
+      "members": {
+        "Decryption": {
+          "shape": "SrtCallerDecryptionRequest",
+          "locationName": "decryption"
+        },
+        "MinimumLatency": {
+          "shape": "__integer",
+          "locationName": "minimumLatency",
+          "documentation": "The preferred latency (in milliseconds) for implementing packet loss and recovery. Packet recovery is a key feature of SRT. Obtain this value from the operator at the upstream system."
+        },
+        "SrtListenerAddress": {
+          "shape": "__string",
+          "locationName": "srtListenerAddress",
+          "documentation": "The IP address at the upstream system (the listener) that MediaLive (the caller) will connect to."
+        },
+        "SrtListenerPort": {
+          "shape": "__string",
+          "locationName": "srtListenerPort",
+          "documentation": "The port at the upstream system (the listener) that MediaLive (the caller) will connect to."
+        },
+        "StreamId": {
+          "shape": "__string",
+          "locationName": "streamId",
+          "documentation": "This value is required if the upstream system uses this identifier because without it, the SRT handshake between MediaLive (the caller) and the upstream system (the listener) might fail."
+        }
+      },
+      "documentation": "Configures the connection for a source that uses SRT as the connection protocol. In terms of establishing the connection, MediaLive is always the caller and the upstream system is always the listener. In terms of transmission of the source content, MediaLive is always the receiver and the upstream system is always the sender."
+    },
+    "SrtSettings": {
+      "type": "structure",
+      "members": {
+        "SrtCallerSources": {
+          "shape": "__listOfSrtCallerSource",
+          "locationName": "srtCallerSources"
+        }
+      },
+      "documentation": "The configured sources for this SRT input."
+    },
+    "SrtSettingsRequest": {
+      "type": "structure",
+      "members": {
+        "SrtCallerSources": {
+          "shape": "__listOfSrtCallerSourceRequest",
+          "locationName": "srtCallerSources"
+        }
+      },
+      "documentation": "Configures the sources for this SRT input. For a single-pipeline input, include one srtCallerSource in the array. For a standard-pipeline input, include two srtCallerSource."
+    },
+    "__listOfSrtCallerSource": {
+      "type": "list",
+      "member": {
+        "shape": "SrtCallerSource"
+      },
+      "documentation": "Placeholder documentation for __listOfSrtCallerSource"
+    },
+    "__listOfSrtCallerSourceRequest": {
+      "type": "list",
+      "member": {
+        "shape": "SrtCallerSourceRequest"
+      },
+      "documentation": "Placeholder documentation for __listOfSrtCallerSourceRequest"
     }
   },
   "documentation": "API for AWS Elemental MediaLive"

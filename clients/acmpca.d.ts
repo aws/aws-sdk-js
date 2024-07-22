@@ -197,29 +197,29 @@ declare class ACMPCA extends Service {
    */
   updateCertificateAuthority(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Waits for the auditReportCreated state by periodically calling the underlying ACMPCA.describeCertificateAuthorityAuditReportoperation every 3 seconds (at most 40 times). Wait until a Audit Report is created
-   */
-  waitFor(state: "auditReportCreated", params: ACMPCA.Types.DescribeCertificateAuthorityAuditReportRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ACMPCA.Types.DescribeCertificateAuthorityAuditReportResponse) => void): Request<ACMPCA.Types.DescribeCertificateAuthorityAuditReportResponse, AWSError>;
-  /**
-   * Waits for the auditReportCreated state by periodically calling the underlying ACMPCA.describeCertificateAuthorityAuditReportoperation every 3 seconds (at most 40 times). Wait until a Audit Report is created
-   */
-  waitFor(state: "auditReportCreated", callback?: (err: AWSError, data: ACMPCA.Types.DescribeCertificateAuthorityAuditReportResponse) => void): Request<ACMPCA.Types.DescribeCertificateAuthorityAuditReportResponse, AWSError>;
-  /**
-   * Waits for the certificateAuthorityCSRCreated state by periodically calling the underlying ACMPCA.getCertificateAuthorityCsroperation every 3 seconds (at most 40 times). Wait until a Certificate Authority CSR is created
+   * Waits for the certificateAuthorityCSRCreated state by periodically calling the underlying ACMPCA.getCertificateAuthorityCsroperation every 3 seconds (at most 60 times). Wait until a Certificate Authority CSR is created
    */
   waitFor(state: "certificateAuthorityCSRCreated", params: ACMPCA.Types.GetCertificateAuthorityCsrRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ACMPCA.Types.GetCertificateAuthorityCsrResponse) => void): Request<ACMPCA.Types.GetCertificateAuthorityCsrResponse, AWSError>;
   /**
-   * Waits for the certificateAuthorityCSRCreated state by periodically calling the underlying ACMPCA.getCertificateAuthorityCsroperation every 3 seconds (at most 40 times). Wait until a Certificate Authority CSR is created
+   * Waits for the certificateAuthorityCSRCreated state by periodically calling the underlying ACMPCA.getCertificateAuthorityCsroperation every 3 seconds (at most 60 times). Wait until a Certificate Authority CSR is created
    */
   waitFor(state: "certificateAuthorityCSRCreated", callback?: (err: AWSError, data: ACMPCA.Types.GetCertificateAuthorityCsrResponse) => void): Request<ACMPCA.Types.GetCertificateAuthorityCsrResponse, AWSError>;
   /**
-   * Waits for the certificateIssued state by periodically calling the underlying ACMPCA.getCertificateoperation every 1 seconds (at most 120 times). Wait until a certificate is issued
+   * Waits for the certificateIssued state by periodically calling the underlying ACMPCA.getCertificateoperation every 1 seconds (at most 60 times). Wait until a certificate is issued
    */
   waitFor(state: "certificateIssued", params: ACMPCA.Types.GetCertificateRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ACMPCA.Types.GetCertificateResponse) => void): Request<ACMPCA.Types.GetCertificateResponse, AWSError>;
   /**
-   * Waits for the certificateIssued state by periodically calling the underlying ACMPCA.getCertificateoperation every 1 seconds (at most 120 times). Wait until a certificate is issued
+   * Waits for the certificateIssued state by periodically calling the underlying ACMPCA.getCertificateoperation every 1 seconds (at most 60 times). Wait until a certificate is issued
    */
   waitFor(state: "certificateIssued", callback?: (err: AWSError, data: ACMPCA.Types.GetCertificateResponse) => void): Request<ACMPCA.Types.GetCertificateResponse, AWSError>;
+  /**
+   * Waits for the auditReportCreated state by periodically calling the underlying ACMPCA.describeCertificateAuthorityAuditReportoperation every 3 seconds (at most 60 times). Wait until a Audit Report is created
+   */
+  waitFor(state: "auditReportCreated", params: ACMPCA.Types.DescribeCertificateAuthorityAuditReportRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ACMPCA.Types.DescribeCertificateAuthorityAuditReportResponse) => void): Request<ACMPCA.Types.DescribeCertificateAuthorityAuditReportResponse, AWSError>;
+  /**
+   * Waits for the auditReportCreated state by periodically calling the underlying ACMPCA.describeCertificateAuthorityAuditReportoperation every 3 seconds (at most 60 times). Wait until a Audit Report is created
+   */
+  waitFor(state: "auditReportCreated", callback?: (err: AWSError, data: ACMPCA.Types.DescribeCertificateAuthorityAuditReportResponse) => void): Request<ACMPCA.Types.DescribeCertificateAuthorityAuditReportResponse, AWSError>;
 }
 declare namespace ACMPCA {
   export type ASN1PrintableString64 = string;

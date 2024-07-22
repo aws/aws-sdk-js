@@ -9,6 +9,7 @@ Object.defineProperty(apiLoader.services['ivschat'], '2020-07-14', {
   get: function get() {
     var model = require('../apis/ivschat-2020-07-14.min.json');
     model.paginators = require('../apis/ivschat-2020-07-14.paginators.json').pagination;
+    model.waiters = require('../apis/ivschat-2020-07-14.waiters2.json').waiters;
     return model;
   },
   enumerable: true,

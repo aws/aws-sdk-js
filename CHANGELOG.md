@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1660.0-->
+<!--LATEST=2.1661.0-->
 <!--ENTRYINSERT-->
+
+## 2.1661.0
+* feature: ACMPCA: Fix broken waiters for the acm-pca client.  Waiters broke in version 1.13.144 of the Boto3 SDK.
+* feature: Connect: Amazon Connect expands search API coverage for additional resources.  Search for hierarchy groups by name, ID, tag, or other criteria (new endpoint). Search for agent statuses by name, ID, tag, or other criteria (new endpoint). Search for users by their assigned proficiencies (enhanced endpoint)
+* feature: EC2: Amazon VPC IP Address Manager (IPAM) now supports Bring-Your-Own-IP (BYOIP) for IP addresses registered with any Internet Registry. This feature uses DNS TXT records to validate ownership of a public IP address range.
+* feature: Firehose: This release 1) Add configurable buffering hints for Snowflake as destination. 2) Add ReadFromTimestamp for MSK As Source. Firehose will start reading data from MSK Cluster using offset associated with this timestamp. 3) Gated public beta release to add Apache Iceberg tables as destination.
+* feature: MediaLive: AWS Elemental MediaLive now supports the SRT protocol via the new SRT Caller input type.
+* feature: SageMaker: SageMaker Training supports R5, T3 and R5D instances family. And SageMaker Processing supports G5 and R5D instances family.
+* feature: TaxSettings: Set default endpoint for aws partition. Requests from all regions in aws partition will be forward to us-east-1 endpoint.
 
 ## 2.1660.0
 * bugfix: Mobilehub: deprecate mobilehub

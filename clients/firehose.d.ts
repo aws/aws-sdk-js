@@ -398,6 +398,12 @@ declare namespace Firehose {
      */
     IntervalInSeconds?: IntervalInSeconds;
   }
+  export interface CatalogConfiguration {
+    /**
+     *  Specifies the Glue catalog ARN indentifier of the destination Apache Iceberg Tables. You must specify the ARN in the format arn:aws:glue:region:account-id:catalog.  Amazon Data Firehose is in preview release and is subject to change.
+     */
+    CatalogARN?: GlueDataCatalogARN;
+  }
   export interface CloudWatchLoggingOptions {
     /**
      * Enables or disables CloudWatch logging.
@@ -490,6 +496,10 @@ declare namespace Firehose {
      * Configure Snowflake destination
      */
     SnowflakeDestinationConfiguration?: SnowflakeDestinationConfiguration;
+    /**
+     *  Configure Apache Iceberg Tables destination.  Amazon Data Firehose is in preview release and is subject to change.
+     */
+    IcebergDestinationConfiguration?: IcebergDestinationConfiguration;
   }
   export interface CreateDeliveryStreamOutput {
     /**
@@ -691,9 +701,32 @@ declare namespace Firehose {
      * The destination in the Serverless offering for Amazon OpenSearch Service.
      */
     AmazonOpenSearchServerlessDestinationDescription?: AmazonOpenSearchServerlessDestinationDescription;
+    /**
+     *  Describes a destination in Apache Iceberg Tables.  Amazon Data Firehose is in preview release and is subject to change.
+     */
+    IcebergDestinationDescription?: IcebergDestinationDescription;
   }
   export type DestinationDescriptionList = DestinationDescription[];
   export type DestinationId = string;
+  export interface DestinationTableConfiguration {
+    /**
+     *  Specifies the name of the Apache Iceberg Table.  Amazon Data Firehose is in preview release and is subject to change.
+     */
+    DestinationTableName: NonEmptyStringWithoutWhitespace;
+    /**
+     *  The name of the Apache Iceberg database.  Amazon Data Firehose is in preview release and is subject to change.
+     */
+    DestinationDatabaseName: NonEmptyStringWithoutWhitespace;
+    /**
+     *  A list of unique keys for a given Apache Iceberg table. Firehose will use these for running Create/Update/Delete operations on the given Iceberg table.  Amazon Data Firehose is in preview release and is subject to change.
+     */
+    UniqueKeys?: ListOfNonEmptyStringsWithoutWhitespace;
+    /**
+     *  The table specific S3 error output prefix. All the errors that occurred while delivering to this table will be prefixed with this value in S3 destination.  Amazon Data Firehose is in preview release and is subject to change.
+     */
+    S3ErrorOutputPrefix?: ErrorOutputPrefix;
+  }
+  export type DestinationTableConfigurationList = DestinationTableConfiguration[];
   export interface DocumentIdOptions {
     /**
      * When the FIREHOSE_DEFAULT option is chosen, Firehose generates a unique document ID for each record based on a unique internal identifier. The generated document ID is stable across multiple delivery attempts, which helps prevent the same record from being indexed multiple times with different document IDs. When the NO_DOCUMENT_ID option is chosen, Firehose does not include any document IDs in the requests it sends to the Amazon OpenSearch Service. This causes the Amazon OpenSearch Service domain to generate document IDs. In case of multiple delivery attempts, this may cause the same record to be indexed more than once with different document IDs. This option enables write-heavy operations, such as the ingestion of logs and observability data, to consume less resources in the Amazon OpenSearch Service domain, resulting in improved performance.
@@ -1111,6 +1144,7 @@ declare namespace Firehose {
     Details: NonEmptyString;
   }
   export type FileExtension = string;
+  export type GlueDataCatalogARN = string;
   export type HECAcknowledgmentTimeoutInSeconds = number;
   export type HECEndpoint = string;
   export type HECEndpointType = "Raw"|"Event"|string;
@@ -1290,6 +1324,76 @@ declare namespace Firehose {
   }
   export type HttpEndpointS3BackupMode = "FailedDataOnly"|"AllData"|string;
   export type HttpEndpointUrl = string;
+  export interface IcebergDestinationConfiguration {
+    /**
+     *  Provides a list of DestinationTableConfigurations which Firehose uses to deliver data to Apache Iceberg tables.  Amazon Data Firehose is in preview release and is subject to change.
+     */
+    DestinationTableConfigurationList?: DestinationTableConfigurationList;
+    BufferingHints?: BufferingHints;
+    CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
+    ProcessingConfiguration?: ProcessingConfiguration;
+    /**
+     *  Describes how Firehose will backup records. Currently,Firehose only supports FailedDataOnly for preview.  Amazon Data Firehose is in preview release and is subject to change.
+     */
+    S3BackupMode?: IcebergS3BackupMode;
+    RetryOptions?: RetryOptions;
+    /**
+     *  The Amazon Resource Name (ARN) of the Apache Iceberg tables role.  Amazon Data Firehose is in preview release and is subject to change.
+     */
+    RoleARN: RoleARN;
+    /**
+     *  Configuration describing where the destination Apache Iceberg Tables are persisted.  Amazon Data Firehose is in preview release and is subject to change.
+     */
+    CatalogConfiguration: CatalogConfiguration;
+    S3Configuration: S3DestinationConfiguration;
+  }
+  export interface IcebergDestinationDescription {
+    /**
+     *  Provides a list of DestinationTableConfigurations which Firehose uses to deliver data to Apache Iceberg tables.  Amazon Data Firehose is in preview release and is subject to change.
+     */
+    DestinationTableConfigurationList?: DestinationTableConfigurationList;
+    BufferingHints?: BufferingHints;
+    CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
+    ProcessingConfiguration?: ProcessingConfiguration;
+    /**
+     *  Describes how Firehose will backup records. Currently,Firehose only supports FailedDataOnly for preview.  Amazon Data Firehose is in preview release and is subject to change.
+     */
+    S3BackupMode?: IcebergS3BackupMode;
+    RetryOptions?: RetryOptions;
+    /**
+     *  The Amazon Resource Name (ARN) of the Apache Iceberg Tables role.  Amazon Data Firehose is in preview release and is subject to change.
+     */
+    RoleARN?: RoleARN;
+    /**
+     *  Configuration describing where the destination Iceberg tables are persisted.  Amazon Data Firehose is in preview release and is subject to change.
+     */
+    CatalogConfiguration?: CatalogConfiguration;
+    S3DestinationDescription?: S3DestinationDescription;
+  }
+  export interface IcebergDestinationUpdate {
+    /**
+     *  Provides a list of DestinationTableConfigurations which Firehose uses to deliver data to Apache Iceberg tables.  Amazon Data Firehose is in preview release and is subject to change.
+     */
+    DestinationTableConfigurationList?: DestinationTableConfigurationList;
+    BufferingHints?: BufferingHints;
+    CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
+    ProcessingConfiguration?: ProcessingConfiguration;
+    /**
+     *  Describes how Firehose will backup records. Currently,Firehose only supports FailedDataOnly for preview.  Amazon Data Firehose is in preview release and is subject to change.
+     */
+    S3BackupMode?: IcebergS3BackupMode;
+    RetryOptions?: RetryOptions;
+    /**
+     *  The Amazon Resource Name (ARN) of the Apache Iceberg Tables role.  Amazon Data Firehose is in preview release and is subject to change.
+     */
+    RoleARN?: RoleARN;
+    /**
+     *  Configuration describing where the destination Iceberg tables are persisted.  Amazon Data Firehose is in preview release and is subject to change.
+     */
+    CatalogConfiguration?: CatalogConfiguration;
+    S3Configuration?: S3DestinationConfiguration;
+  }
+  export type IcebergS3BackupMode = "FailedDataOnly"|"AllData"|string;
   export interface InputFormatConfiguration {
     /**
      * Specifies which deserializer to use. You can choose either the Apache Hive JSON SerDe or the OpenX JSON SerDe. If both are non-null, the server rejects the request.
@@ -1398,6 +1502,10 @@ declare namespace Firehose {
      * The authentication configuration of the Amazon MSK cluster.
      */
     AuthenticationConfiguration: AuthenticationConfiguration;
+    /**
+     * The start date and time in UTC for the offset position within your MSK topic from where Firehose begins to read. By default, this is set to timestamp when Firehose becomes Active.  If you want to create a Firehose stream with Earliest start position from SDK or CLI, you need to set the ReadFromTimestamp parameter to Epoch (1970-01-01T00:00:00Z). 
+     */
+    ReadFromTimestamp?: ReadFromTimestamp;
   }
   export interface MSKSourceDescription {
     /**
@@ -1416,6 +1524,10 @@ declare namespace Firehose {
      * Firehose starts retrieving records from the topic within the Amazon MSK cluster starting with this timestamp.
      */
     DeliveryStartTimestamp?: DeliveryStartTimestamp;
+    /**
+     * The start date and time in UTC for the offset position within your MSK topic from where Firehose begins to read. By default, this is set to timestamp when Firehose becomes Active.  If you want to create a Firehose stream with Earliest start position from SDK or CLI, you need to set the ReadFromTimestampUTC parameter to Epoch (1970-01-01T00:00:00Z). 
+     */
+    ReadFromTimestamp?: ReadFromTimestamp;
   }
   export type NoEncryptionConfig = "NoEncryption"|string;
   export type NonEmptyString = string;
@@ -1615,6 +1727,7 @@ declare namespace Firehose {
     Encrypted?: BooleanObject;
   }
   export type PutResponseRecordId = string;
+  export type ReadFromTimestamp = Date;
   export interface Record {
     /**
      * The data blob, which is base64-encoded when the blob is serialized. The maximum size of the data blob, before base64-encoding, is 1,000 KiB.
@@ -1940,6 +2053,18 @@ declare namespace Firehose {
   }
   export type SizeInMBs = number;
   export type SnowflakeAccountUrl = string;
+  export interface SnowflakeBufferingHints {
+    /**
+     *  Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 1. 
+     */
+    SizeInMBs?: SnowflakeBufferingSizeInMBs;
+    /**
+     *  Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 0. 
+     */
+    IntervalInSeconds?: SnowflakeBufferingIntervalInSeconds;
+  }
+  export type SnowflakeBufferingIntervalInSeconds = number;
+  export type SnowflakeBufferingSizeInMBs = number;
   export type SnowflakeContentColumnName = string;
   export type SnowflakeDataLoadingOption = "JSON_MAPPING"|"VARIANT_CONTENT_MAPPING"|"VARIANT_CONTENT_AND_METADATA_MAPPING"|string;
   export type SnowflakeDatabase = string;
@@ -2011,6 +2136,10 @@ declare namespace Firehose {
      *  The configuration that defines how you access secrets for Snowflake. 
      */
     SecretsManagerConfiguration?: SecretsManagerConfiguration;
+    /**
+     *  Describes the buffering to perform before delivering data to the Snowflake destination. If you do not specify any value, Firehose uses the default values. 
+     */
+    BufferingHints?: SnowflakeBufferingHints;
   }
   export interface SnowflakeDestinationDescription {
     /**
@@ -2072,6 +2201,10 @@ declare namespace Firehose {
      *  The configuration that defines how you access secrets for Snowflake. 
      */
     SecretsManagerConfiguration?: SecretsManagerConfiguration;
+    /**
+     *  Describes the buffering to perform before delivering data to the Snowflake destination. If you do not specify any value, Firehose uses the default values. 
+     */
+    BufferingHints?: SnowflakeBufferingHints;
   }
   export interface SnowflakeDestinationUpdate {
     /**
@@ -2137,6 +2270,10 @@ declare namespace Firehose {
      *  Describes the Secrets Manager configuration in Snowflake. 
      */
     SecretsManagerConfiguration?: SecretsManagerConfiguration;
+    /**
+     *  Describes the buffering to perform before delivering data to the Snowflake destination. 
+     */
+    BufferingHints?: SnowflakeBufferingHints;
   }
   export type SnowflakeKeyPassphrase = string;
   export type SnowflakeMetaDataColumnName = string;
@@ -2448,6 +2585,10 @@ declare namespace Firehose {
      * Update to the Snowflake destination configuration settings.
      */
     SnowflakeDestinationUpdate?: SnowflakeDestinationUpdate;
+    /**
+     *  Describes an update for a destination in Apache Iceberg Tables.  Amazon Data Firehose is in preview release and is subject to change.
+     */
+    IcebergDestinationUpdate?: IcebergDestinationUpdate;
   }
   export interface UpdateDestinationOutput {
   }

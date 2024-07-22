@@ -475,7 +475,7 @@ declare namespace WorkSpacesThinClient {
      */
     tags?: TagsMap;
     /**
-     * "The tag keys and optional values for the newly created devices for this environment."
+     * The tag keys and optional values for the newly created devices for this environment.
      */
     deviceCreationTags?: DeviceCreationTagsMap;
   }

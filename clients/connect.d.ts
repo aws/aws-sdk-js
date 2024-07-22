@@ -1396,6 +1396,14 @@ declare class Connect extends Service {
    */
   resumeContactRecording(callback?: (err: AWSError, data: Connect.Types.ResumeContactRecordingResponse) => void): Request<Connect.Types.ResumeContactRecordingResponse, AWSError>;
   /**
+   * Searches AgentStatuses in an Amazon Connect instance, with optional filtering.
+   */
+  searchAgentStatuses(params: Connect.Types.SearchAgentStatusesRequest, callback?: (err: AWSError, data: Connect.Types.SearchAgentStatusesResponse) => void): Request<Connect.Types.SearchAgentStatusesResponse, AWSError>;
+  /**
+   * Searches AgentStatuses in an Amazon Connect instance, with optional filtering.
+   */
+  searchAgentStatuses(callback?: (err: AWSError, data: Connect.Types.SearchAgentStatusesResponse) => void): Request<Connect.Types.SearchAgentStatusesResponse, AWSError>;
+  /**
    * Searches for available phone numbers that you can claim to your Amazon Connect instance or traffic distribution group. If the provided TargetArn is a traffic distribution group, you can call this API in both Amazon Web Services Regions associated with the traffic distribution group.
    */
   searchAvailablePhoneNumbers(params: Connect.Types.SearchAvailablePhoneNumbersRequest, callback?: (err: AWSError, data: Connect.Types.SearchAvailablePhoneNumbersResponse) => void): Request<Connect.Types.SearchAvailablePhoneNumbersResponse, AWSError>;
@@ -1491,6 +1499,14 @@ declare class Connect extends Service {
    * Searches security profiles in an Amazon Connect instance, with optional filtering.
    */
   searchSecurityProfiles(callback?: (err: AWSError, data: Connect.Types.SearchSecurityProfilesResponse) => void): Request<Connect.Types.SearchSecurityProfilesResponse, AWSError>;
+  /**
+   * Searches UserHierarchyGroups in an Amazon Connect instance, with optional filtering.  The UserHierarchyGroup with "LevelId": "0" is the foundation for building levels on top of an instance. It is not user-definable, nor is it visible in the UI. 
+   */
+  searchUserHierarchyGroups(params: Connect.Types.SearchUserHierarchyGroupsRequest, callback?: (err: AWSError, data: Connect.Types.SearchUserHierarchyGroupsResponse) => void): Request<Connect.Types.SearchUserHierarchyGroupsResponse, AWSError>;
+  /**
+   * Searches UserHierarchyGroups in an Amazon Connect instance, with optional filtering.  The UserHierarchyGroup with "LevelId": "0" is the foundation for building levels on top of an instance. It is not user-definable, nor is it visible in the UI. 
+   */
+  searchUserHierarchyGroups(callback?: (err: AWSError, data: Connect.Types.SearchUserHierarchyGroupsResponse) => void): Request<Connect.Types.SearchUserHierarchyGroupsResponse, AWSError>;
   /**
    * Searches users in an Amazon Connect instance, with optional filtering.    AfterContactWorkTimeLimit is returned in milliseconds.  
    */
@@ -2220,6 +2236,7 @@ declare namespace Connect {
   }
   export type AgentStatusDescription = string;
   export type AgentStatusId = string;
+  export type AgentStatusList = AgentStatus[];
   export type AgentStatusName = string;
   export type AgentStatusOrderNumber = number;
   export interface AgentStatusReference {
@@ -2235,6 +2252,27 @@ declare namespace Connect {
      * The name of the agent status.
      */
     StatusName?: AgentStatusName;
+  }
+  export type AgentStatusSearchConditionList = AgentStatusSearchCriteria[];
+  export interface AgentStatusSearchCriteria {
+    /**
+     * A list of conditions which would be applied together with an OR condition.
+     */
+    OrConditions?: AgentStatusSearchConditionList;
+    /**
+     * A leaf node condition which can be used to specify a string condition.  The currently supported values for FieldName are name,&#x2028;&#x2028; description, state, type, displayOrder,&#x2028; and resourceID. 
+     */
+    AndConditions?: AgentStatusSearchConditionList;
+    /**
+     * A leaf node condition which can be used to specify a string condition.  The currently supported values for FieldName are name,&#x2028;&#x2028; description, state, type, displayOrder,&#x2028; and resourceID. 
+     */
+    StringCondition?: StringCondition;
+  }
+  export interface AgentStatusSearchFilter {
+    /**
+     * An object that can be used to specify Tag conditions inside the SearchFilter. This accepts an OR of AND (List of List) input where:    The top level list specifies conditions that need to be applied with OR operator.   The inner list specifies conditions that need to be applied with AND operator.  
+     */
+    AttributeFilter?: ControlPlaneAttributeFilter;
   }
   export type AgentStatusState = "ENABLED"|"DISABLED"|string;
   export interface AgentStatusSummary {
@@ -3051,6 +3089,13 @@ declare namespace Connect {
     SourcePhoneNumberArn?: ARN;
   }
   export type ClientToken = string;
+  export interface CommonAttributeAndCondition {
+    /**
+     * A leaf node condition which can be used to specify a tag condition.
+     */
+    TagConditions?: TagAndConditionList;
+  }
+  export type CommonAttributeOrConditionList = CommonAttributeAndCondition[];
   export type CommonNameLength127 = string;
   export type Comparison = "LT"|string;
   export type ComparisonOperator = string;
@@ -3071,6 +3116,17 @@ declare namespace Connect {
   export interface CompleteAttachedFileUploadResponse {
   }
   export type Concurrency = number;
+  export interface Condition {
+    /**
+     * A leaf node condition which can be used to specify a string condition.  The currently supported values for FieldName are name and&#x2028; value. 
+     */
+    StringCondition?: StringCondition;
+    /**
+     * A leaf node condition which can be used to specify a numeric condition.
+     */
+    NumberCondition?: NumberCondition;
+  }
+  export type Conditions = Condition[];
   export interface ConnectionData {
     /**
      * The attendee information, including attendee ID and join token.
@@ -3501,6 +3557,17 @@ declare namespace Connect {
   export type Contacts = ContactSearchSummary[];
   export type Content = string;
   export type ContentType = string;
+  export interface ControlPlaneAttributeFilter {
+    /**
+     * A list of conditions which would be applied together with an OR condition.
+     */
+    OrConditions?: CommonAttributeOrConditionList;
+    /**
+     * A list of conditions which would be applied together with an AND condition.
+     */
+    AndCondition?: CommonAttributeAndCondition;
+    TagCondition?: TagCondition;
+  }
   export interface ControlPlaneTagFilter {
     /**
      * A list of conditions which would be applied together with an OR condition. 
@@ -6474,7 +6541,7 @@ declare namespace Connect {
      */
     Groupings?: GroupingsV2;
     /**
-     * The metrics to retrieve. Specify the name, groupings, and filters for each metric. The following historical metrics are available. For a description of each metric, see Historical metrics definitions in the Amazon Connect Administrator Guide.  ABANDONMENT_RATE  Unit: Percent Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Abandonment rate   AGENT_ADHERENT_TIME  This metric is available only in Amazon Web Services Regions where Forecasting, capacity planning, and scheduling is available. Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy  UI name: Adherent time   AGENT_ANSWER_RATE  Unit: Percent Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy UI name: Agent answer rate   AGENT_NON_ADHERENT_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy UI name: Non-adherent time   AGENT_NON_RESPONSE  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy  UI name: Agent non-response   AGENT_NON_RESPONSE_WITHOUT_CUSTOMER_ABANDONS  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy Data for this metric is available starting from October 1, 2023 0:00:00 GMT. UI name: Agent non-response without customer abandons   AGENT_OCCUPANCY  Unit: Percentage Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy  UI name: Occupancy   AGENT_SCHEDULE_ADHERENCE  This metric is available only in Amazon Web Services Regions where Forecasting, capacity planning, and scheduling is available. Unit: Percent Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy UI name: Adherence   AGENT_SCHEDULED_TIME  This metric is available only in Amazon Web Services Regions where Forecasting, capacity planning, and scheduling is available. Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy UI name: Scheduled time   AVG_ABANDON_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average queue abandon time   AVG_ACTIVE_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Q in Connect UI name: Average active time   AVG_AFTER_CONTACT_WORK_TIME  Unit: Seconds Valid metric filter key: INITIATION_METHOD  Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average after contact work time   Feature is a valid filter but not a valid grouping.   AVG_AGENT_CONNECTING_TIME  Unit: Seconds Valid metric filter key: INITIATION_METHOD. For now, this metric only supports the following as INITIATION_METHOD: INBOUND | OUTBOUND | CALLBACK | API  Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy UI name: Average agent API connecting time   The Negate key in Metric Level Filters is not applicable for this metric.   AVG_AGENT_PAUSE_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Q in Connect UI name: Average agent pause time   AVG_CASE_RELATED_CONTACTS  Unit: Count Required filter key: CASE_TEMPLATE_ARN Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS UI name: Average contacts per case   AVG_CASE_RESOLUTION_TIME  Unit: Seconds Required filter key: CASE_TEMPLATE_ARN Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS UI name: Average case resolution time   AVG_CONTACT_DURATION  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average contact duration   Feature is a valid filter but not a valid grouping.   AVG_CONVERSATION_DURATION  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average conversation duration   AVG_FLOW_TIME  Unit: Seconds Valid groupings and filters: Channel, contact/segmentAttributes/connect:Subtype, Flow type, Flows module resource ID, Flows next resource ID, Flows next resource queue ID, Flows outcome type, Flows resource ID, Initiation method, Resource published timestamp UI name: Average flow time   AVG_GREETING_TIME_AGENT  This metric is available only for contacts analyzed by Contact Lens conversational analytics. Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average agent greeting time   AVG_HANDLE_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, RoutingStepExpression UI name: Average handle time   Feature is a valid filter but not a valid grouping.   AVG_HOLD_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average customer hold time   Feature is a valid filter but not a valid grouping.   AVG_HOLD_TIME_ALL_CONTACTS  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average customer hold time all contacts   AVG_HOLDS  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average holds   Feature is a valid filter but not a valid grouping.   AVG_INTERACTION_AND_HOLD_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average agent interaction and customer hold time   AVG_INTERACTION_TIME  Unit: Seconds Valid metric filter key: INITIATION_METHOD  Valid groupings and filters: Queue, Channel, Routing Profile, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average agent interaction time   Feature is a valid filter but not a valid grouping.   AVG_INTERRUPTIONS_AGENT  This metric is available only for contacts analyzed by Contact Lens conversational analytics. Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average agent interruptions   AVG_INTERRUPTION_TIME_AGENT  This metric is available only for contacts analyzed by Contact Lens conversational analytics. Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average agent interruption time   AVG_NON_TALK_TIME  This metric is available only for contacts analyzed by Contact Lens conversational analytics. Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average non-talk time   AVG_QUEUE_ANSWER_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average queue answer time   Feature is a valid filter but not a valid grouping.   AVG_RESOLUTION_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average resolution time   AVG_TALK_TIME  This metric is available only for contacts analyzed by Contact Lens conversational analytics. Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average talk time   AVG_TALK_TIME_AGENT  This metric is available only for contacts analyzed by Contact Lens conversational analytics. Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average agent talk time   AVG_TALK_TIME_CUSTOMER  This metric is available only for contacts analyzed by Contact Lens conversational analytics. Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average customer talk time   CASES_CREATED  Unit: Count Required filter key: CASE_TEMPLATE_ARN Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS UI name: Cases created   CONTACTS_CREATED  Unit: Count Valid metric filter key: INITIATION_METHOD  Valid groupings and filters: Queue, Channel, Routing Profile, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Contacts created   Feature is a valid filter but not a valid grouping.   CONTACTS_HANDLED  Unit: Count Valid metric filter key: INITIATION_METHOD, DISCONNECT_REASON  Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, RoutingStepExpression, Q in Connect UI name: API contacts handled   Feature is a valid filter but not a valid grouping.   CONTACTS_HANDLED_BY_CONNECTED_TO_AGENT  Unit: Count Valid metric filter key: INITIATION_METHOD  Valid groupings and filters: Queue, Channel, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Contacts handled (connected to agent timestamp)   CONTACTS_HOLD_ABANDONS  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Contacts hold disconnect   CONTACTS_ON_HOLD_AGENT_DISCONNECT  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Q in Connect UI name: Contacts hold agent disconnect   CONTACTS_ON_HOLD_CUSTOMER_DISCONNECT  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Q in Connect UI name: Contacts hold customer disconnect   CONTACTS_PUT_ON_HOLD  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Q in Connect UI name: Contacts put on hold   CONTACTS_TRANSFERRED_OUT_EXTERNAL  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Q in Connect UI name: Contacts transferred out external   CONTACTS_TRANSFERRED_OUT_INTERNAL  Unit: Percent Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Q in Connect UI name: Contacts transferred out internal   CONTACTS_QUEUED  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Contacts queued   CONTACTS_QUEUED_BY_ENQUEUE  Unit: Count Valid groupings and filters: Queue, Channel, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype UI name: Contacts queued (enqueue timestamp)   CONTACTS_REMOVED_FROM_QUEUE_IN_X  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Q in Connect Threshold: For ThresholdValue, enter any whole number from 1 to 604800 (inclusive), in seconds. For Comparison, you must enter LT (for "Less than"). UI name: This metric is not available in Amazon Connect admin website.   CONTACTS_RESOLVED_IN_X  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, contact/segmentAttributes/connect:Subtype, Q in Connect Threshold: For ThresholdValue enter any whole number from 1 to 604800 (inclusive), in seconds. For Comparison, you must enter LT (for "Less than"). UI name: Contacts resolved in X   CONTACTS_TRANSFERRED_OUT  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Contacts transferred out   Feature is a valid filter but not a valid grouping.   CONTACTS_TRANSFERRED_OUT_BY_AGENT  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Contacts transferred out by agent   CONTACTS_TRANSFERRED_OUT_FROM_QUEUE  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Contacts transferred out queue   CURRENT_CASES  Unit: Count Required filter key: CASE_TEMPLATE_ARN Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS UI name: Current cases   FLOWS_OUTCOME  Unit: Count Valid groupings and filters: Channel, contact/segmentAttributes/connect:Subtype, Flow type, Flows module resource ID, Flows next resource ID, Flows next resource queue ID, Flows outcome type, Flows resource ID, Initiation method, Resource published timestamp UI name: Flows outcome   FLOWS_STARTED  Unit: Count Valid groupings and filters: Channel, contact/segmentAttributes/connect:Subtype, Flow type, Flows module resource ID, Flows resource ID, Initiation method, Resource published timestamp UI name: Flows started   MAX_FLOW_TIME  Unit: Seconds Valid groupings and filters: Channel, contact/segmentAttributes/connect:Subtype, Flow type, Flows module resource ID, Flows next resource ID, Flows next resource queue ID, Flows outcome type, Flows resource ID, Initiation method, Resource published timestamp UI name: Maximum flow time   MAX_QUEUED_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Maximum queued time   MIN_FLOW_TIME  Unit: Seconds Valid groupings and filters: Channel, contact/segmentAttributes/connect:Subtype, Flow type, Flows module resource ID, Flows next resource ID, Flows next resource queue ID, Flows outcome type, Flows resource ID, Initiation method, Resource published timestamp UI name: Minimum flow time   PERCENT_CASES_FIRST_CONTACT_RESOLVED  Unit: Percent Required filter key: CASE_TEMPLATE_ARN Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS UI name: Cases resolved on first contact   PERCENT_CONTACTS_STEP_EXPIRED  Unit: Percent Valid groupings and filters: Queue, RoutingStepExpression UI name: This metric is available in Real-time Metrics UI but not on the Historical Metrics UI.  PERCENT_CONTACTS_STEP_JOINED  Unit: Percent Valid groupings and filters: Queue, RoutingStepExpression UI name: This metric is available in Real-time Metrics UI but not on the Historical Metrics UI.  PERCENT_FLOWS_OUTCOME  Unit: Percent Valid metric filter key: FLOWS_OUTCOME_TYPE  Valid groupings and filters: Channel, contact/segmentAttributes/connect:Subtype, Flow type, Flows module resource ID, Flows next resource ID, Flows next resource queue ID, Flows outcome type, Flows resource ID, Initiation method, Resource published timestamp UI name: Flows outcome percentage.  The FLOWS_OUTCOME_TYPE is not a valid grouping.   PERCENT_NON_TALK_TIME  This metric is available only for contacts analyzed by Contact Lens conversational analytics. Unit: Percentage Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Non-talk time percent   PERCENT_TALK_TIME  This metric is available only for contacts analyzed by Contact Lens conversational analytics. Unit: Percentage Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Talk time percent   PERCENT_TALK_TIME_AGENT  This metric is available only for contacts analyzed by Contact Lens conversational analytics. Unit: Percentage Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Agent talk time percent   PERCENT_TALK_TIME_CUSTOMER  This metric is available only for contacts analyzed by Contact Lens conversational analytics. Unit: Percentage Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Customer talk time percent   REOPENED_CASE_ACTIONS  Unit: Count Required filter key: CASE_TEMPLATE_ARN Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS UI name: Cases reopened   RESOLVED_CASE_ACTIONS  Unit: Count Required filter key: CASE_TEMPLATE_ARN Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS UI name: Cases resolved   SERVICE_LEVEL  You can include up to 20 SERVICE_LEVEL metrics in a request. Unit: Percent Valid groupings and filters: Queue, Channel, Routing Profile, Q in Connect Threshold: For ThresholdValue, enter any whole number from 1 to 604800 (inclusive), in seconds. For Comparison, you must enter LT (for "Less than").  UI name: Service level X   STEP_CONTACTS_QUEUED  Unit: Count Valid groupings and filters: Queue, RoutingStepExpression UI name: This metric is available in Real-time Metrics UI but not on the Historical Metrics UI.  SUM_AFTER_CONTACT_WORK_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Q in Connect UI name: After contact work time   SUM_CONNECTING_TIME_AGENT  Unit: Seconds Valid metric filter key: INITIATION_METHOD. This metric only supports the following filter keys as INITIATION_METHOD: INBOUND | OUTBOUND | CALLBACK | API  Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy UI name: Agent API connecting time   The Negate key in Metric Level Filters is not applicable for this metric.   SUM_CONTACTS_ABANDONED  Unit: Count Metric filter:    Valid values: API| Incoming | Outbound | Transfer | Callback | Queue_Transfer| Disconnect    Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, RoutingStepExpression, Q in Connect UI name: Contact abandoned   SUM_CONTACTS_ABANDONED_IN_X  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, contact/segmentAttributes/connect:Subtype, Q in Connect Threshold: For ThresholdValue, enter any whole number from 1 to 604800 (inclusive), in seconds. For Comparison, you must enter LT (for "Less than").  UI name: Contacts abandoned in X seconds   SUM_CONTACTS_ANSWERED_IN_X  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, contact/segmentAttributes/connect:Subtype, Q in Connect Threshold: For ThresholdValue, enter any whole number from 1 to 604800 (inclusive), in seconds. For Comparison, you must enter LT (for "Less than").  UI name: Contacts answered in X seconds   SUM_CONTACT_FLOW_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Q in Connect UI name: Contact flow time   SUM_CONTACT_TIME_AGENT  Unit: Seconds Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy UI name: Agent on contact time   SUM_CONTACTS_DISCONNECTED   Valid metric filter key: DISCONNECT_REASON  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Contact disconnected   SUM_ERROR_STATUS_TIME_AGENT  Unit: Seconds Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy UI name: Error status time   SUM_HANDLE_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Q in Connect UI name: Contact handle time   SUM_HOLD_TIME  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Q in Connect UI name: Customer hold time   SUM_IDLE_TIME_AGENT  Unit: Seconds Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy UI name: Agent idle time   SUM_INTERACTION_AND_HOLD_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Q in Connect UI name: Agent interaction and hold time   SUM_INTERACTION_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy UI name: Agent interaction time   SUM_NON_PRODUCTIVE_TIME_AGENT  Unit: Seconds Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy UI name: Non-Productive Time   SUM_ONLINE_TIME_AGENT  Unit: Seconds Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy UI name: Online time   SUM_RETRY_CALLBACK_ATTEMPTS  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Callback attempts   
+     * The metrics to retrieve. Specify the name, groupings, and filters for each metric. The following historical metrics are available. For a description of each metric, see Historical metrics definitions in the Amazon Connect Administrator Guide.  ABANDONMENT_RATE  Unit: Percent Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Abandonment rate   AGENT_ADHERENT_TIME  This metric is available only in Amazon Web Services Regions where Forecasting, capacity planning, and scheduling is available. Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy  UI name: Adherent time   AGENT_ANSWER_RATE  Unit: Percent Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy UI name: Agent answer rate   AGENT_NON_ADHERENT_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy UI name: Non-adherent time   AGENT_NON_RESPONSE  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy  UI name: Agent non-response   AGENT_NON_RESPONSE_WITHOUT_CUSTOMER_ABANDONS  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy Data for this metric is available starting from October 1, 2023 0:00:00 GMT. UI name: Agent non-response without customer abandons   AGENT_OCCUPANCY  Unit: Percentage Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy  UI name: Occupancy   AGENT_SCHEDULE_ADHERENCE  This metric is available only in Amazon Web Services Regions where Forecasting, capacity planning, and scheduling is available. Unit: Percent Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy UI name: Adherence   AGENT_SCHEDULED_TIME  This metric is available only in Amazon Web Services Regions where Forecasting, capacity planning, and scheduling is available. Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy UI name: Scheduled time   AVG_ABANDON_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average queue abandon time   AVG_ACTIVE_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Q in Connect UI name: Average active time   AVG_AFTER_CONTACT_WORK_TIME  Unit: Seconds Valid metric filter key: INITIATION_METHOD  Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average after contact work time   Feature is a valid filter but not a valid grouping.   AVG_AGENT_CONNECTING_TIME  Unit: Seconds Valid metric filter key: INITIATION_METHOD. For now, this metric only supports the following as INITIATION_METHOD: INBOUND | OUTBOUND | CALLBACK | API  Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy UI name: Average agent API connecting time   The Negate key in Metric Level Filters is not applicable for this metric.   AVG_AGENT_PAUSE_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Q in Connect UI name: Average agent pause time   AVG_CASE_RELATED_CONTACTS  Unit: Count Required filter key: CASE_TEMPLATE_ARN Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS UI name: Average contacts per case   AVG_CASE_RESOLUTION_TIME  Unit: Seconds Required filter key: CASE_TEMPLATE_ARN Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS UI name: Average case resolution time   AVG_CONTACT_DURATION  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average contact duration   Feature is a valid filter but not a valid grouping.   AVG_CONVERSATION_DURATION  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average conversation duration   AVG_FLOW_TIME  Unit: Seconds Valid groupings and filters: Channel, contact/segmentAttributes/connect:Subtype, Flow type, Flows module resource ID, Flows next resource ID, Flows next resource queue ID, Flows outcome type, Flows resource ID, Initiation method, Resource published timestamp UI name: Average flow time   AVG_GREETING_TIME_AGENT  This metric is available only for contacts analyzed by Contact Lens conversational analytics. Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average agent greeting time   AVG_HANDLE_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, RoutingStepExpression UI name: Average handle time   Feature is a valid filter but not a valid grouping.   AVG_HOLD_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average customer hold time   Feature is a valid filter but not a valid grouping.   AVG_HOLD_TIME_ALL_CONTACTS  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average customer hold time all contacts   AVG_HOLDS  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average holds   Feature is a valid filter but not a valid grouping.   AVG_INTERACTION_AND_HOLD_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average agent interaction and customer hold time   AVG_INTERACTION_TIME  Unit: Seconds Valid metric filter key: INITIATION_METHOD  Valid groupings and filters: Queue, Channel, Routing Profile, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average agent interaction time   Feature is a valid filter but not a valid grouping.   AVG_INTERRUPTIONS_AGENT  This metric is available only for contacts analyzed by Contact Lens conversational analytics. Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average agent interruptions   AVG_INTERRUPTION_TIME_AGENT  This metric is available only for contacts analyzed by Contact Lens conversational analytics. Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average agent interruption time   AVG_NON_TALK_TIME  This metric is available only for contacts analyzed by Contact Lens conversational analytics. Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average non-talk time   AVG_QUEUE_ANSWER_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average queue answer time   Feature is a valid filter but not a valid grouping.   AVG_RESOLUTION_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average resolution time   AVG_TALK_TIME  This metric is available only for contacts analyzed by Contact Lens conversational analytics. Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average talk time   AVG_TALK_TIME_AGENT  This metric is available only for contacts analyzed by Contact Lens conversational analytics. Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average agent talk time   AVG_TALK_TIME_CUSTOMER  This metric is available only for contacts analyzed by Contact Lens conversational analytics. Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Average customer talk time   CASES_CREATED  Unit: Count Required filter key: CASE_TEMPLATE_ARN Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS UI name: Cases created   CONTACTS_CREATED  Unit: Count Valid metric filter key: INITIATION_METHOD  Valid groupings and filters: Queue, Channel, Routing Profile, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Contacts created   Feature is a valid filter but not a valid grouping.   CONTACTS_HANDLED  Unit: Count Valid metric filter key: INITIATION_METHOD, DISCONNECT_REASON  Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, RoutingStepExpression, Q in Connect UI name: API contacts handled   Feature is a valid filter but not a valid grouping.   CONTACTS_HANDLED_BY_CONNECTED_TO_AGENT  Unit: Count Valid metric filter key: INITIATION_METHOD  Valid groupings and filters: Queue, Channel, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Contacts handled (connected to agent timestamp)   CONTACTS_HOLD_ABANDONS  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Contacts hold disconnect   CONTACTS_ON_HOLD_AGENT_DISCONNECT  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Q in Connect UI name: Contacts hold agent disconnect   CONTACTS_ON_HOLD_CUSTOMER_DISCONNECT  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Q in Connect UI name: Contacts hold customer disconnect   CONTACTS_PUT_ON_HOLD  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Q in Connect UI name: Contacts put on hold   CONTACTS_TRANSFERRED_OUT_EXTERNAL  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Q in Connect UI name: Contacts transferred out external   CONTACTS_TRANSFERRED_OUT_INTERNAL  Unit: Percent Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Q in Connect UI name: Contacts transferred out internal   CONTACTS_QUEUED  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Contacts queued   CONTACTS_QUEUED_BY_ENQUEUE  Unit: Count Valid groupings and filters: Queue, Channel, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype UI name: Contacts queued (enqueue timestamp)   CONTACTS_REMOVED_FROM_QUEUE_IN_X  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Q in Connect Threshold: For ThresholdValue, enter any whole number from 1 to 604800 (inclusive), in seconds. For Comparison, you must enter LT (for "Less than"). UI name: Contacts removed from queue in X seconds   CONTACTS_RESOLVED_IN_X  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, contact/segmentAttributes/connect:Subtype, Q in Connect Threshold: For ThresholdValue enter any whole number from 1 to 604800 (inclusive), in seconds. For Comparison, you must enter LT (for "Less than"). UI name: Contacts resolved in X   CONTACTS_TRANSFERRED_OUT  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Contacts transferred out   Feature is a valid filter but not a valid grouping.   CONTACTS_TRANSFERRED_OUT_BY_AGENT  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Contacts transferred out by agent   CONTACTS_TRANSFERRED_OUT_FROM_QUEUE  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Contacts transferred out queue   CURRENT_CASES  Unit: Count Required filter key: CASE_TEMPLATE_ARN Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS UI name: Current cases   FLOWS_OUTCOME  Unit: Count Valid groupings and filters: Channel, contact/segmentAttributes/connect:Subtype, Flow type, Flows module resource ID, Flows next resource ID, Flows next resource queue ID, Flows outcome type, Flows resource ID, Initiation method, Resource published timestamp UI name: Flows outcome   FLOWS_STARTED  Unit: Count Valid groupings and filters: Channel, contact/segmentAttributes/connect:Subtype, Flow type, Flows module resource ID, Flows resource ID, Initiation method, Resource published timestamp UI name: Flows started   MAX_FLOW_TIME  Unit: Seconds Valid groupings and filters: Channel, contact/segmentAttributes/connect:Subtype, Flow type, Flows module resource ID, Flows next resource ID, Flows next resource queue ID, Flows outcome type, Flows resource ID, Initiation method, Resource published timestamp UI name: Maximum flow time   MAX_QUEUED_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Maximum queued time   MIN_FLOW_TIME  Unit: Seconds Valid groupings and filters: Channel, contact/segmentAttributes/connect:Subtype, Flow type, Flows module resource ID, Flows next resource ID, Flows next resource queue ID, Flows outcome type, Flows resource ID, Initiation method, Resource published timestamp UI name: Minimum flow time   PERCENT_CASES_FIRST_CONTACT_RESOLVED  Unit: Percent Required filter key: CASE_TEMPLATE_ARN Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS UI name: Cases resolved on first contact   PERCENT_CONTACTS_STEP_EXPIRED  Unit: Percent Valid groupings and filters: Queue, RoutingStepExpression UI name: This metric is available in Real-time Metrics UI but not on the Historical Metrics UI.  PERCENT_CONTACTS_STEP_JOINED  Unit: Percent Valid groupings and filters: Queue, RoutingStepExpression UI name: This metric is available in Real-time Metrics UI but not on the Historical Metrics UI.  PERCENT_FLOWS_OUTCOME  Unit: Percent Valid metric filter key: FLOWS_OUTCOME_TYPE  Valid groupings and filters: Channel, contact/segmentAttributes/connect:Subtype, Flow type, Flows module resource ID, Flows next resource ID, Flows next resource queue ID, Flows outcome type, Flows resource ID, Initiation method, Resource published timestamp UI name: Flows outcome percentage.  The FLOWS_OUTCOME_TYPE is not a valid grouping.   PERCENT_NON_TALK_TIME  This metric is available only for contacts analyzed by Contact Lens conversational analytics. Unit: Percentage Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Non-talk time percent   PERCENT_TALK_TIME  This metric is available only for contacts analyzed by Contact Lens conversational analytics. Unit: Percentage Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Talk time percent   PERCENT_TALK_TIME_AGENT  This metric is available only for contacts analyzed by Contact Lens conversational analytics. Unit: Percentage Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Agent talk time percent   PERCENT_TALK_TIME_CUSTOMER  This metric is available only for contacts analyzed by Contact Lens conversational analytics. Unit: Percentage Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Customer talk time percent   REOPENED_CASE_ACTIONS  Unit: Count Required filter key: CASE_TEMPLATE_ARN Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS UI name: Cases reopened   RESOLVED_CASE_ACTIONS  Unit: Count Required filter key: CASE_TEMPLATE_ARN Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS UI name: Cases resolved   SERVICE_LEVEL  You can include up to 20 SERVICE_LEVEL metrics in a request. Unit: Percent Valid groupings and filters: Queue, Channel, Routing Profile, Q in Connect Threshold: For ThresholdValue, enter any whole number from 1 to 604800 (inclusive), in seconds. For Comparison, you must enter LT (for "Less than").  UI name: Service level X   STEP_CONTACTS_QUEUED  Unit: Count Valid groupings and filters: Queue, RoutingStepExpression UI name: This metric is available in Real-time Metrics UI but not on the Historical Metrics UI.  SUM_AFTER_CONTACT_WORK_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Q in Connect UI name: After contact work time   SUM_CONNECTING_TIME_AGENT  Unit: Seconds Valid metric filter key: INITIATION_METHOD. This metric only supports the following filter keys as INITIATION_METHOD: INBOUND | OUTBOUND | CALLBACK | API  Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy UI name: Agent API connecting time   The Negate key in Metric Level Filters is not applicable for this metric.   SUM_CONTACTS_ABANDONED  Unit: Count Metric filter:    Valid values: API| Incoming | Outbound | Transfer | Callback | Queue_Transfer| Disconnect    Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, RoutingStepExpression, Q in Connect UI name: Contact abandoned   SUM_CONTACTS_ABANDONED_IN_X  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, contact/segmentAttributes/connect:Subtype, Q in Connect Threshold: For ThresholdValue, enter any whole number from 1 to 604800 (inclusive), in seconds. For Comparison, you must enter LT (for "Less than").  UI name: Contacts abandoned in X seconds   SUM_CONTACTS_ANSWERED_IN_X  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, contact/segmentAttributes/connect:Subtype, Q in Connect Threshold: For ThresholdValue, enter any whole number from 1 to 604800 (inclusive), in seconds. For Comparison, you must enter LT (for "Less than").  UI name: Contacts answered in X seconds   SUM_CONTACT_FLOW_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Q in Connect UI name: Contact flow time   SUM_CONTACT_TIME_AGENT  Unit: Seconds Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy UI name: Agent on contact time   SUM_CONTACTS_DISCONNECTED   Valid metric filter key: DISCONNECT_REASON  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Contact disconnected   SUM_ERROR_STATUS_TIME_AGENT  Unit: Seconds Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy UI name: Error status time   SUM_HANDLE_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Q in Connect UI name: Contact handle time   SUM_HOLD_TIME  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Q in Connect UI name: Customer hold time   SUM_IDLE_TIME_AGENT  Unit: Seconds Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy UI name: Agent idle time   SUM_INTERACTION_AND_HOLD_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Q in Connect UI name: Agent interaction and hold time   SUM_INTERACTION_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy UI name: Agent interaction time   SUM_NON_PRODUCTIVE_TIME_AGENT  Unit: Seconds Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy UI name: Non-Productive Time   SUM_ONLINE_TIME_AGENT  Unit: Seconds Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy UI name: Online time   SUM_RETRY_CALLBACK_ATTEMPTS  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, contact/segmentAttributes/connect:Subtype, Q in Connect UI name: Callback attempts   
      */
     Metrics: MetricsV2;
     /**
@@ -7411,6 +7478,16 @@ declare namespace Connect {
      * If there are additional results, this is the token for the next set of results.
      */
     NextToken?: NextToken;
+  }
+  export interface ListCondition {
+    /**
+     * The type of target list that will be used to filter the users.
+     */
+    TargetListType?: TargetListType;
+    /**
+     * A list of Condition objects which would be applied together with an AND condition.
+     */
+    Conditions?: Conditions;
   }
   export interface ListContactEvaluationsRequest {
     /**
@@ -8790,6 +8867,26 @@ declare namespace Connect {
     UserIds?: UserIdList;
   }
   export type NullableProficiencyLevel = number;
+  export type NullableProficiencyLimitValue = number;
+  export type NumberComparisonType = "GREATER_OR_EQUAL"|"GREATER"|"LESSER_OR_EQUAL"|"LESSER"|"EQUAL"|"NOT_EQUAL"|"RANGE"|string;
+  export interface NumberCondition {
+    /**
+     * The name of the field in the number condition.
+     */
+    FieldName?: String;
+    /**
+     * The minValue to be used while evaluating the number condition.
+     */
+    MinValue?: NullableProficiencyLimitValue;
+    /**
+     * The maxValue to be used while evaluating the number condition.
+     */
+    MaxValue?: NullableProficiencyLimitValue;
+    /**
+     * The type of comparison to be made when evaluating the number condition.
+     */
+    ComparisonType?: NumberComparisonType;
+  }
   export interface NumberReference {
     /**
      * Identifier of the number reference.
@@ -10066,6 +10163,42 @@ declare namespace Connect {
     EncryptionConfig?: EncryptionConfig;
   }
   export type S3Uri = string;
+  export interface SearchAgentStatusesRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken2500;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult100;
+    /**
+     * Filters to be applied to search results.
+     */
+    SearchFilter?: AgentStatusSearchFilter;
+    /**
+     * The search criteria to be used to return agent statuses.
+     */
+    SearchCriteria?: AgentStatusSearchCriteria;
+  }
+  export interface SearchAgentStatusesResponse {
+    /**
+     * The search criteria to be used to return agent statuses.
+     */
+    AgentStatuses?: AgentStatusList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken2500;
+    /**
+     * The total number of agent statuses which matched your search query.
+     */
+    ApproximateTotalCount?: ApproximateTotalCount;
+  }
   export interface SearchAvailablePhoneNumbersRequest {
     /**
      * The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone number inbound traffic is routed through. You must enter InstanceId or TargetArn. 
@@ -10446,7 +10579,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceIdOrArn;
     /**
-     * The list of resource types to be used to search tags from. If not provided or if any empty list is provided, this API will search from all supported resource types.
+     * The list of resource types to be used to search tags from. If not provided or if any empty list is provided, this API will search from all supported resource types.  Supported resource types    AGENT   ROUTING_PROFILE   STANDARD_QUEUE   SECURITY_PROFILE   OPERATING_HOURS   PROMPT   CONTACT_FLOW   FLOW_MODULE  
      */
     ResourceTypes?: ResourceTypeList;
     /**
@@ -10546,6 +10679,42 @@ declare namespace Connect {
   }
   export type SearchText = string;
   export type SearchTextList = SearchText[];
+  export interface SearchUserHierarchyGroupsRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken2500;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult100;
+    /**
+     * Filters to be applied to search results.
+     */
+    SearchFilter?: UserHierarchyGroupSearchFilter;
+    /**
+     * The search criteria to be used to return UserHierarchyGroups.
+     */
+    SearchCriteria?: UserHierarchyGroupSearchCriteria;
+  }
+  export interface SearchUserHierarchyGroupsResponse {
+    /**
+     * Information about the userHierarchyGroups.
+     */
+    UserHierarchyGroups?: UserHierarchyGroupList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken2500;
+    /**
+     * The total number of userHierarchyGroups which matched your search query.
+     */
+    ApproximateTotalCount?: ApproximateTotalCount;
+  }
   export interface SearchUsersRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.  InstanceID is a required field. The "Required: No" below is incorrect. 
@@ -11496,6 +11665,7 @@ declare namespace Connect {
   export type TagValue = string;
   export type TagValueString = string;
   export type TagsList = TagSet[];
+  export type TargetListType = "PROFICIENCIES"|string;
   export interface TaskActionDefinition {
     /**
      * The name. Supports variable injection. For more information, see JSONPath reference in the Amazon Connect Administrators Guide.
@@ -12962,6 +13132,28 @@ declare namespace Connect {
   }
   export type UserDataHierarchyGroups = HierarchyGroupId[];
   export type UserDataList = UserData[];
+  export type UserHierarchyGroupList = HierarchyGroup[];
+  export type UserHierarchyGroupSearchConditionList = UserHierarchyGroupSearchCriteria[];
+  export interface UserHierarchyGroupSearchCriteria {
+    /**
+     * A list of conditions which would be applied together with an OR condition.
+     */
+    OrConditions?: UserHierarchyGroupSearchConditionList;
+    /**
+     * A list of conditions which would be applied together with an AND condition.
+     */
+    AndConditions?: UserHierarchyGroupSearchConditionList;
+    /**
+     * A leaf node condition which can be used to specify a string condition.  The currently supported values for FieldName are name,&#x2028;&#x2028; parentId, levelId, and resourceID. 
+     */
+    StringCondition?: StringCondition;
+  }
+  export interface UserHierarchyGroupSearchFilter {
+    /**
+     * An object that can be used to specify Tag conditions inside the SearchFilter. This accepts an OR or AND (List of List) input where:   The top level list specifies conditions that need to be applied with OR operator.   The inner list specifies conditions that need to be applied with AND operator.  
+     */
+    AttributeFilter?: ControlPlaneAttributeFilter;
+  }
   export type UserId = string;
   export type UserIdList = UserId[];
   export interface UserIdentityInfo {
@@ -13074,6 +13266,10 @@ declare namespace Connect {
      * A leaf node condition which can be used to specify a string condition. The currently supported values for FieldName are Username, FirstName, LastName, RoutingProfileId, SecurityProfileId, ResourceId.
      */
     StringCondition?: StringCondition;
+    /**
+     * A leaf node condition which can be used to specify a List condition to search users with attributes included in Lists like Proficiencies.
+     */
+    ListCondition?: ListCondition;
     /**
      * A leaf node condition which can be used to specify a hierarchy group condition.
      */

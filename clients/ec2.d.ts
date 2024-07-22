@@ -621,6 +621,14 @@ declare class EC2 extends Service {
    */
   createIpam(callback?: (err: AWSError, data: EC2.Types.CreateIpamResult) => void): Request<EC2.Types.CreateIpamResult, AWSError>;
   /**
+   * Create a verification token. A verification token is an Amazon Web Services-generated random value that you can use to prove ownership of an external resource. For example, you can use a verification token to validate that you control a public IP address range when you bring an IP address range to Amazon Web Services (BYOIP). 
+   */
+  createIpamExternalResourceVerificationToken(params: EC2.Types.CreateIpamExternalResourceVerificationTokenRequest, callback?: (err: AWSError, data: EC2.Types.CreateIpamExternalResourceVerificationTokenResult) => void): Request<EC2.Types.CreateIpamExternalResourceVerificationTokenResult, AWSError>;
+  /**
+   * Create a verification token. A verification token is an Amazon Web Services-generated random value that you can use to prove ownership of an external resource. For example, you can use a verification token to validate that you control a public IP address range when you bring an IP address range to Amazon Web Services (BYOIP). 
+   */
+  createIpamExternalResourceVerificationToken(callback?: (err: AWSError, data: EC2.Types.CreateIpamExternalResourceVerificationTokenResult) => void): Request<EC2.Types.CreateIpamExternalResourceVerificationTokenResult, AWSError>;
+  /**
    * Create an IP address pool for Amazon VPC IP Address Manager (IPAM). In IPAM, a pool is a collection of contiguous IP addresses CIDRs. Pools enable you to organize your IP addresses according to your routing and security needs. For example, if you have separate routing and security needs for development and production applications, you can create a pool for each. For more information, see Create a top-level pool in the Amazon VPC IPAM User Guide. 
    */
   createIpamPool(params: EC2.Types.CreateIpamPoolRequest, callback?: (err: AWSError, data: EC2.Types.CreateIpamPoolResult) => void): Request<EC2.Types.CreateIpamPoolResult, AWSError>;
@@ -1228,6 +1236,14 @@ declare class EC2 extends Service {
    * Delete an IPAM. Deleting an IPAM removes all monitored data associated with the IPAM including the historical data for CIDRs. For more information, see Delete an IPAM in the Amazon VPC IPAM User Guide. 
    */
   deleteIpam(callback?: (err: AWSError, data: EC2.Types.DeleteIpamResult) => void): Request<EC2.Types.DeleteIpamResult, AWSError>;
+  /**
+   * Delete a verification token. A verification token is an Amazon Web Services-generated random value that you can use to prove ownership of an external resource. For example, you can use a verification token to validate that you control a public IP address range when you bring an IP address range to Amazon Web Services (BYOIP). 
+   */
+  deleteIpamExternalResourceVerificationToken(params: EC2.Types.DeleteIpamExternalResourceVerificationTokenRequest, callback?: (err: AWSError, data: EC2.Types.DeleteIpamExternalResourceVerificationTokenResult) => void): Request<EC2.Types.DeleteIpamExternalResourceVerificationTokenResult, AWSError>;
+  /**
+   * Delete a verification token. A verification token is an Amazon Web Services-generated random value that you can use to prove ownership of an external resource. For example, you can use a verification token to validate that you control a public IP address range when you bring an IP address range to Amazon Web Services (BYOIP). 
+   */
+  deleteIpamExternalResourceVerificationToken(callback?: (err: AWSError, data: EC2.Types.DeleteIpamExternalResourceVerificationTokenResult) => void): Request<EC2.Types.DeleteIpamExternalResourceVerificationTokenResult, AWSError>;
   /**
    * Delete an IPAM pool.  You cannot delete an IPAM pool if there are allocations in it or CIDRs provisioned to it. To release allocations, see ReleaseIpamPoolAllocation. To deprovision pool CIDRs, see DeprovisionIpamPoolCidr.  For more information, see Delete a pool in the Amazon VPC IPAM User Guide. 
    */
@@ -2221,6 +2237,14 @@ declare class EC2 extends Service {
    */
   describeIpamByoasn(callback?: (err: AWSError, data: EC2.Types.DescribeIpamByoasnResult) => void): Request<EC2.Types.DescribeIpamByoasnResult, AWSError>;
   /**
+   * Describe verification tokens. A verification token is an Amazon Web Services-generated random value that you can use to prove ownership of an external resource. For example, you can use a verification token to validate that you control a public IP address range when you bring an IP address range to Amazon Web Services (BYOIP). 
+   */
+  describeIpamExternalResourceVerificationTokens(params: EC2.Types.DescribeIpamExternalResourceVerificationTokensRequest, callback?: (err: AWSError, data: EC2.Types.DescribeIpamExternalResourceVerificationTokensResult) => void): Request<EC2.Types.DescribeIpamExternalResourceVerificationTokensResult, AWSError>;
+  /**
+   * Describe verification tokens. A verification token is an Amazon Web Services-generated random value that you can use to prove ownership of an external resource. For example, you can use a verification token to validate that you control a public IP address range when you bring an IP address range to Amazon Web Services (BYOIP). 
+   */
+  describeIpamExternalResourceVerificationTokens(callback?: (err: AWSError, data: EC2.Types.DescribeIpamExternalResourceVerificationTokensResult) => void): Request<EC2.Types.DescribeIpamExternalResourceVerificationTokensResult, AWSError>;
+  /**
    * Get information about your IPAM pools.
    */
   describeIpamPools(params: EC2.Types.DescribeIpamPoolsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeIpamPoolsResult) => void): Request<EC2.Types.DescribeIpamPoolsResult, AWSError>;
@@ -2445,11 +2469,11 @@ declare class EC2 extends Service {
    */
   describeNetworkInterfaces(callback?: (err: AWSError, data: EC2.Types.DescribeNetworkInterfacesResult) => void): Request<EC2.Types.DescribeNetworkInterfacesResult, AWSError>;
   /**
-   * Describes the specified placement groups or all of your placement groups. For more information, see Placement groups in the Amazon EC2 User Guide.
+   * Describes the specified placement groups or all of your placement groups.  To describe a specific placement group that is shared with your account, you must specify the ID of the placement group using the GroupId parameter. Specifying the name of a shared placement group using the GroupNames parameter will result in an error.  For more information, see Placement groups in the Amazon EC2 User Guide.
    */
   describePlacementGroups(params: EC2.Types.DescribePlacementGroupsRequest, callback?: (err: AWSError, data: EC2.Types.DescribePlacementGroupsResult) => void): Request<EC2.Types.DescribePlacementGroupsResult, AWSError>;
   /**
-   * Describes the specified placement groups or all of your placement groups. For more information, see Placement groups in the Amazon EC2 User Guide.
+   * Describes the specified placement groups or all of your placement groups.  To describe a specific placement group that is shared with your account, you must specify the ID of the placement group using the GroupId parameter. Specifying the name of a shared placement group using the GroupNames parameter will result in an error.  For more information, see Placement groups in the Amazon EC2 User Guide.
    */
   describePlacementGroups(callback?: (err: AWSError, data: EC2.Types.DescribePlacementGroupsResult) => void): Request<EC2.Types.DescribePlacementGroupsResult, AWSError>;
   /**
@@ -2861,11 +2885,11 @@ declare class EC2 extends Service {
    */
   describeVolumes(callback?: (err: AWSError, data: EC2.Types.DescribeVolumesResult) => void): Request<EC2.Types.DescribeVolumesResult, AWSError>;
   /**
-   * Describes the most recent volume modification request for the specified EBS volumes. If a volume has never been modified, some information in the output will be null. If a volume has been modified more than once, the output includes only the most recent modification request. For more information, see  Monitor the progress of volume modifications in the Amazon EBS User Guide.
+   * Describes the most recent volume modification request for the specified EBS volumes. For more information, see  Monitor the progress of volume modifications in the Amazon EBS User Guide.
    */
   describeVolumesModifications(params: EC2.Types.DescribeVolumesModificationsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVolumesModificationsResult) => void): Request<EC2.Types.DescribeVolumesModificationsResult, AWSError>;
   /**
-   * Describes the most recent volume modification request for the specified EBS volumes. If a volume has never been modified, some information in the output will be null. If a volume has been modified more than once, the output includes only the most recent modification request. For more information, see  Monitor the progress of volume modifications in the Amazon EBS User Guide.
+   * Describes the most recent volume modification request for the specified EBS volumes. For more information, see  Monitor the progress of volume modifications in the Amazon EBS User Guide.
    */
   describeVolumesModifications(callback?: (err: AWSError, data: EC2.Types.DescribeVolumesModificationsResult) => void): Request<EC2.Types.DescribeVolumesModificationsResult, AWSError>;
   /**
@@ -3485,11 +3509,11 @@ declare class EC2 extends Service {
    */
   getCoipPoolUsage(callback?: (err: AWSError, data: EC2.Types.GetCoipPoolUsageResult) => void): Request<EC2.Types.GetCoipPoolUsageResult, AWSError>;
   /**
-   * Gets the console output for the specified instance. For Linux instances, the instance console output displays the exact console output that would normally be displayed on a physical monitor attached to a computer. For Windows instances, the instance console output includes the last three system event log errors. By default, the console output returns buffered information that was posted shortly after an instance transition state (start, stop, reboot, or terminate). This information is available for at least one hour after the most recent post. Only the most recent 64 KB of console output is available. You can optionally retrieve the latest serial console output at any time during the instance lifecycle. This option is supported on instance types that use the Nitro hypervisor. For more information, see Instance console output in the Amazon EC2 User Guide.
+   * Gets the console output for the specified instance. For Linux instances, the instance console output displays the exact console output that would normally be displayed on a physical monitor attached to a computer. For Windows instances, the instance console output includes the last three system event log errors. For more information, see Instance console output in the Amazon EC2 User Guide.
    */
   getConsoleOutput(params: EC2.Types.GetConsoleOutputRequest, callback?: (err: AWSError, data: EC2.Types.GetConsoleOutputResult) => void): Request<EC2.Types.GetConsoleOutputResult, AWSError>;
   /**
-   * Gets the console output for the specified instance. For Linux instances, the instance console output displays the exact console output that would normally be displayed on a physical monitor attached to a computer. For Windows instances, the instance console output includes the last three system event log errors. By default, the console output returns buffered information that was posted shortly after an instance transition state (start, stop, reboot, or terminate). This information is available for at least one hour after the most recent post. Only the most recent 64 KB of console output is available. You can optionally retrieve the latest serial console output at any time during the instance lifecycle. This option is supported on instance types that use the Nitro hypervisor. For more information, see Instance console output in the Amazon EC2 User Guide.
+   * Gets the console output for the specified instance. For Linux instances, the instance console output displays the exact console output that would normally be displayed on a physical monitor attached to a computer. For Windows instances, the instance console output includes the last three system event log errors. For more information, see Instance console output in the Amazon EC2 User Guide.
    */
   getConsoleOutput(callback?: (err: AWSError, data: EC2.Types.GetConsoleOutputResult) => void): Request<EC2.Types.GetConsoleOutputResult, AWSError>;
   /**
@@ -9640,6 +9664,30 @@ declare namespace EC2 {
      */
     InternetGateway?: InternetGateway;
   }
+  export interface CreateIpamExternalResourceVerificationTokenRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the IPAM that will create the token.
+     */
+    IpamId: IpamId;
+    /**
+     * Token tags.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring idempotency.
+     */
+    ClientToken?: String;
+  }
+  export interface CreateIpamExternalResourceVerificationTokenResult {
+    /**
+     * The verification token.
+     */
+    IpamExternalResourceVerificationToken?: IpamExternalResourceVerificationToken;
+  }
   export interface CreateIpamPoolRequest {
     /**
      * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -9650,7 +9698,7 @@ declare namespace EC2 {
      */
     IpamScopeId: IpamScopeId;
     /**
-     * In IPAM, the locale is the Amazon Web Services Region or, for IPAM IPv4 pools in the public scope, the network border group for an Amazon Web Services Local Zone where you want to make an IPAM pool available for allocations (supported Local Zones). If you do not choose a locale, resources in Regions others than the IPAM's home region cannot use CIDRs from this pool. Possible values: Any Amazon Web Services Region, such as us-east-1.
+     * The locale for the pool should be one of the following:   An Amazon Web Services Region where you want this IPAM pool to be available for allocations.   The network border group for an Amazon Web Services Local Zone where you want this IPAM pool to be available for allocations (supported Local Zones). This option is only available for IPAM IPv4 pools in the public scope.   If you do not choose a locale, resources in Regions others than the IPAM's home region cannot use CIDRs from this pool. Possible values: Any Amazon Web Services Region or supported Amazon Web Services Local Zone.
      */
     Locale?: String;
     /**
@@ -12399,6 +12447,22 @@ declare namespace EC2 {
      * The ID of the internet gateway.
      */
     InternetGatewayId: InternetGatewayId;
+  }
+  export interface DeleteIpamExternalResourceVerificationTokenRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The token ID.
+     */
+    IpamExternalResourceVerificationTokenId: IpamExternalResourceVerificationTokenId;
+  }
+  export interface DeleteIpamExternalResourceVerificationTokenResult {
+    /**
+     * The verification token.
+     */
+    IpamExternalResourceVerificationToken?: IpamExternalResourceVerificationToken;
   }
   export interface DeleteIpamPoolRequest {
     /**
@@ -15382,6 +15446,38 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export interface DescribeIpamExternalResourceVerificationTokensRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * One or more filters for the request. For more information about filtering, see Filtering CLI output. Available filters:    ipam-arn     ipam-external-resource-verification-token-arn     ipam-external-resource-verification-token-id     ipam-id     ipam-region     state     status     token-name     token-value   
+     */
+    Filters?: FilterList;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of tokens to return in one page of results.
+     */
+    MaxResults?: IpamMaxResults;
+    /**
+     * Verification token IDs.
+     */
+    IpamExternalResourceVerificationTokenIds?: ValueStringList;
+  }
+  export interface DescribeIpamExternalResourceVerificationTokensResult {
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+    /**
+     * Verification tokens.
+     */
+    IpamExternalResourceVerificationTokens?: IpamExternalResourceVerificationTokenSet;
+  }
   export interface DescribeIpamPoolsRequest {
     /**
      * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -16340,7 +16436,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The names of the placement groups. Default: Describes all your placement groups, or only those otherwise specified.
+     * The names of the placement groups. Constraints:   You can specify a name only if the placement group is owned by your account.   If a placement group is shared with your account, specifying the name results in an error. You must use the GroupId parameter instead.  
      */
     GroupNames?: PlacementGroupStringList;
     /**
@@ -21076,7 +21172,7 @@ declare namespace EC2 {
      */
     AvailabilityZone?: String;
     /**
-     * The number of units provided by the specified instance type.  When specifying weights, the price used in the lowest-price and price-capacity-optimized allocation strategies is per unit hour (where the instance price is divided by the specified weight). However, if all the specified weights are above the requested TargetCapacity, resulting in only 1 instance being launched, the price used is per instance hour. 
+     * The number of units provided by the specified instance type. These are the same units that you chose to set the target capacity in terms of instances, or a performance characteristic such as vCPUs, memory, or I/O. If the target capacity divided by this value is not a whole number, Amazon EC2 rounds the number of instances to the next whole number. If this value is not specified, the default is 1.  When specifying weights, the price used in the lowest-price and price-capacity-optimized allocation strategies is per unit hour (where the instance price is divided by the specified weight). However, if all the specified weights are above the requested TargetCapacity, resulting in only 1 instance being launched, the price used is per instance hour. 
      */
     WeightedCapacity?: Double;
     /**
@@ -21116,7 +21212,7 @@ declare namespace EC2 {
      */
     AvailabilityZone?: String;
     /**
-     * The number of units provided by the specified instance type.  When specifying weights, the price used in the lowest-price and price-capacity-optimized allocation strategies is per unit hour (where the instance price is divided by the specified weight). However, if all the specified weights are above the requested TargetCapacity, resulting in only 1 instance being launched, the price used is per instance hour. 
+     * The number of units provided by the specified instance type. These are the same units that you chose to set the target capacity in terms of instances, or a performance characteristic such as vCPUs, memory, or I/O. If the target capacity divided by this value is not a whole number, Amazon EC2 rounds the number of instances to the next whole number. If this value is not specified, the default is 1.  When specifying weights, the price used in the lowest-price and price-capacity-optimized allocation strategies is per unit hour (where the instance price is divided by the specified weight). However, if all the specified weights are above the requested TargetCapacity, resulting in only 1 instance being launched, the price used is per instance hour. 
      */
     WeightedCapacity?: Double;
     /**
@@ -25919,7 +26015,7 @@ declare namespace EC2 {
      */
     VpcId?: String;
     /**
-     * For elastic IP addresses, this is the status of an attached network interface.
+     * For elastic network interfaces, this is the status of whether or not the elastic network interface is attached.
      */
     NetworkInterfaceAttachmentStatus?: IpamNetworkInterfaceAttachmentStatus;
     /**
@@ -25943,6 +26039,55 @@ declare namespace EC2 {
      */
     Message?: String;
   }
+  export interface IpamExternalResourceVerificationToken {
+    /**
+     * The ID of the token.
+     */
+    IpamExternalResourceVerificationTokenId?: IpamExternalResourceVerificationTokenId;
+    /**
+     * Token ARN.
+     */
+    IpamExternalResourceVerificationTokenArn?: ResourceArn;
+    /**
+     * The ID of the IPAM that created the token.
+     */
+    IpamId?: IpamId;
+    /**
+     * ARN of the IPAM that created the token.
+     */
+    IpamArn?: ResourceArn;
+    /**
+     * Region of the IPAM that created the token.
+     */
+    IpamRegion?: String;
+    /**
+     * Token value.
+     */
+    TokenValue?: String;
+    /**
+     * Token name.
+     */
+    TokenName?: String;
+    /**
+     * Token expiration.
+     */
+    NotAfter?: MillisecondDateTime;
+    /**
+     * Token status.
+     */
+    Status?: TokenState;
+    /**
+     * Token tags.
+     */
+    Tags?: TagList;
+    /**
+     * Token state.
+     */
+    State?: IpamExternalResourceVerificationTokenState;
+  }
+  export type IpamExternalResourceVerificationTokenId = string;
+  export type IpamExternalResourceVerificationTokenSet = IpamExternalResourceVerificationToken[];
+  export type IpamExternalResourceVerificationTokenState = "create-in-progress"|"create-complete"|"create-failed"|"delete-in-progress"|"delete-complete"|"delete-failed"|string;
   export type IpamId = string;
   export type IpamManagementState = "managed"|"unmanaged"|"ignored"|string;
   export type IpamMaxResults = number;
@@ -25990,7 +26135,7 @@ declare namespace EC2 {
      */
     IpamRegion?: String;
     /**
-     * The locale of the IPAM pool. In IPAM, the locale is the Amazon Web Services Region or, for IPAM IPv4 pools in the public scope, the network border group for an Amazon Web Services Local Zone where you want to make an IPAM pool available for allocations (supported Local Zones). If you choose an Amazon Web Services Region for locale that has not been configured as an operating Region for the IPAM, you'll get an error.
+     * The locale of the IPAM pool. The locale for the pool should be one of the following:   An Amazon Web Services Region where you want this IPAM pool to be available for allocations.   The network border group for an Amazon Web Services Local Zone where you want this IPAM pool to be available for allocations (supported Local Zones). This option is only available for IPAM IPv4 pools in the public scope.   If you choose an Amazon Web Services Region for locale that has not been configured as an operating Region for the IPAM, you'll get an error.
      */
     Locale?: String;
     /**
@@ -27273,7 +27418,7 @@ declare namespace EC2 {
      */
     AvailabilityZone?: String;
     /**
-     * The number of units provided by the specified instance type.  When specifying weights, the price used in the lowest-price and price-capacity-optimized allocation strategies is per unit hour (where the instance price is divided by the specified weight). However, if all the specified weights are above the requested TargetCapacity, resulting in only 1 instance being launched, the price used is per instance hour. 
+     * The number of units provided by the specified instance type. These are the same units that you chose to set the target capacity in terms of instances, or a performance characteristic such as vCPUs, memory, or I/O. If the target capacity divided by this value is not a whole number, Amazon EC2 rounds the number of instances to the next whole number. If this value is not specified, the default is 1.  When specifying weights, the price used in the lowestPrice and priceCapacityOptimized allocation strategies is per unit hour (where the instance price is divided by the specified weight). However, if all the specified weights are above the requested TargetCapacity, resulting in only 1 instance being launched, the price used is per instance hour. 
      */
     WeightedCapacity?: Double;
     /**
@@ -32258,7 +32403,7 @@ declare namespace EC2 {
      */
     Cidr?: String;
     /**
-     * A signed document that proves that you are authorized to bring a specified IP address range to Amazon using BYOIP. This option applies to public pools only.
+     * A signed document that proves that you are authorized to bring a specified IP address range to Amazon using BYOIP. This option only applies to IPv4 and IPv6 pools in the public scope.
      */
     CidrAuthorizationContext?: IpamCidrAuthorizationContext;
     /**
@@ -32269,6 +32414,14 @@ declare namespace EC2 {
      * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring idempotency.
      */
     ClientToken?: String;
+    /**
+     * The method for verifying control of a public IP address range. Defaults to remarks-x509 if not specified. This option only applies to IPv4 and IPv6 pools in the public scope.
+     */
+    VerificationMethod?: VerificationMethod;
+    /**
+     * Verification token ID. This option only applies to IPv4 and IPv6 pools in the public scope.
+     */
+    IpamExternalResourceVerificationTokenId?: IpamExternalResourceVerificationTokenId;
   }
   export interface ProvisionIpamPoolCidrResult {
     /**
@@ -34032,7 +34185,7 @@ declare namespace EC2 {
      */
     ResourceTypes?: ValueStringList;
   }
-  export type ResourceType = "capacity-reservation"|"client-vpn-endpoint"|"customer-gateway"|"carrier-gateway"|"coip-pool"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"instance-event-window"|"internet-gateway"|"ipam"|"ipam-pool"|"ipam-scope"|"ipv4pool-ec2"|"ipv6pool-ec2"|"key-pair"|"launch-template"|"local-gateway"|"local-gateway-route-table"|"local-gateway-virtual-interface"|"local-gateway-virtual-interface-group"|"local-gateway-route-table-vpc-association"|"local-gateway-route-table-virtual-interface-group-association"|"natgateway"|"network-acl"|"network-interface"|"network-insights-analysis"|"network-insights-path"|"network-insights-access-scope"|"network-insights-access-scope-analysis"|"placement-group"|"prefix-list"|"replace-root-volume-task"|"reserved-instances"|"route-table"|"security-group"|"security-group-rule"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"subnet-cidr-reservation"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-connect-peer"|"transit-gateway-multicast-domain"|"transit-gateway-policy-table"|"transit-gateway-route-table"|"transit-gateway-route-table-announcement"|"volume"|"vpc"|"vpc-endpoint"|"vpc-endpoint-connection"|"vpc-endpoint-service"|"vpc-endpoint-service-permission"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|"capacity-reservation-fleet"|"traffic-mirror-filter-rule"|"vpc-endpoint-connection-device-type"|"verified-access-instance"|"verified-access-group"|"verified-access-endpoint"|"verified-access-policy"|"verified-access-trust-provider"|"vpn-connection-device-type"|"vpc-block-public-access-exclusion"|"vpc-encryption-control"|"ipam-resource-discovery"|"ipam-resource-discovery-association"|"instance-connect-endpoint"|string;
+  export type ResourceType = "capacity-reservation"|"client-vpn-endpoint"|"customer-gateway"|"carrier-gateway"|"coip-pool"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"instance-event-window"|"internet-gateway"|"ipam"|"ipam-pool"|"ipam-scope"|"ipv4pool-ec2"|"ipv6pool-ec2"|"key-pair"|"launch-template"|"local-gateway"|"local-gateway-route-table"|"local-gateway-virtual-interface"|"local-gateway-virtual-interface-group"|"local-gateway-route-table-vpc-association"|"local-gateway-route-table-virtual-interface-group-association"|"natgateway"|"network-acl"|"network-interface"|"network-insights-analysis"|"network-insights-path"|"network-insights-access-scope"|"network-insights-access-scope-analysis"|"placement-group"|"prefix-list"|"replace-root-volume-task"|"reserved-instances"|"route-table"|"security-group"|"security-group-rule"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"subnet-cidr-reservation"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-connect-peer"|"transit-gateway-multicast-domain"|"transit-gateway-policy-table"|"transit-gateway-route-table"|"transit-gateway-route-table-announcement"|"volume"|"vpc"|"vpc-endpoint"|"vpc-endpoint-connection"|"vpc-endpoint-service"|"vpc-endpoint-service-permission"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|"capacity-reservation-fleet"|"traffic-mirror-filter-rule"|"vpc-endpoint-connection-device-type"|"verified-access-instance"|"verified-access-group"|"verified-access-endpoint"|"verified-access-policy"|"verified-access-trust-provider"|"vpn-connection-device-type"|"vpc-block-public-access-exclusion"|"vpc-encryption-control"|"ipam-resource-discovery"|"ipam-resource-discovery-association"|"instance-connect-endpoint"|"ipam-external-resource-verification-token"|string;
   export interface ResponseError {
     /**
      * The error code.
@@ -36125,7 +36278,7 @@ declare namespace EC2 {
      */
     UserData?: SensitiveUserData;
     /**
-     * The number of units provided by the specified instance type. These are the same units that you chose to set the target capacity in terms of instances, or a performance characteristic such as vCPUs, memory, or I/O. If the target capacity divided by this value is not a whole number, Amazon EC2 rounds the number of instances to the next whole number. If this value is not specified, the default is 1.
+     * The number of units provided by the specified instance type. These are the same units that you chose to set the target capacity in terms of instances, or a performance characteristic such as vCPUs, memory, or I/O. If the target capacity divided by this value is not a whole number, Amazon EC2 rounds the number of instances to the next whole number. If this value is not specified, the default is 1.  When specifying weights, the price used in the lowestPrice and priceCapacityOptimized allocation strategies is per unit hour (where the instance price is divided by the specified weight). However, if all the specified weights are above the requested TargetCapacity, resulting in only 1 instance being launched, the price used is per instance hour. 
      */
     WeightedCapacity?: Double;
     /**
@@ -37244,6 +37397,7 @@ declare namespace EC2 {
   }
   export type ThroughResourcesStatementRequestList = ThroughResourcesStatementRequest[];
   export type TieringOperationStatus = "archival-in-progress"|"archival-completed"|"archival-failed"|"temporary-restore-in-progress"|"temporary-restore-completed"|"temporary-restore-failed"|"permanent-restore-in-progress"|"permanent-restore-completed"|"permanent-restore-failed"|string;
+  export type TokenState = "valid"|"expired"|string;
   export interface TotalLocalStorageGB {
     /**
      * The minimum amount of total local storage, in GB. If this parameter is not specified, there is no minimum limit.
@@ -38925,6 +39079,7 @@ declare namespace EC2 {
     Errors?: ErrorSet;
   }
   export type ValueStringList = String[];
+  export type VerificationMethod = "remarks-x509"|"dns-token"|string;
   export interface VerifiedAccessEndpoint {
     /**
      * The ID of the Amazon Web Services Verified Access instance.
@@ -39537,7 +39692,7 @@ declare namespace EC2 {
      */
     VolumeId?: String;
     /**
-     * The current modification state. The modification state is null for unmodified volumes.
+     * The current modification state.
      */
     ModificationState?: VolumeModificationState;
     /**
