@@ -214,6 +214,7 @@ declare class CleanRoomsML extends Service {
 }
 declare namespace CleanRoomsML {
   export type AccountId = string;
+  export type AnalysisTemplateArn = string;
   export interface AudienceDestination {
     /**
      * The Amazon S3 bucket and path for the configured audience.
@@ -224,129 +225,133 @@ declare namespace CleanRoomsML {
   export type AudienceExportJobStatus = "CREATE_PENDING"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"ACTIVE"|string;
   export interface AudienceExportJobSummary {
     /**
-     * The Amazon Resource Name (ARN) of the audience generation job that was exported.
-     */
-    audienceGenerationJobArn: AudienceGenerationJobArn;
-    audienceSize: AudienceSize;
-    /**
      * The time at which the audience export job was created.
      */
     createTime: SyntheticTimestamp_date_time;
     /**
-     * The description of the audience export job.
+     * The most recent time at which the audience export job was updated.
      */
-    description?: ResourceDescription;
+    updateTime: SyntheticTimestamp_date_time;
     /**
      * The name of the audience export job.
      */
     name: NameString;
     /**
-     * The Amazon S3 bucket where the audience export is stored.
+     * The Amazon Resource Name (ARN) of the audience generation job that was exported.
      */
-    outputLocation?: S3Path;
+    audienceGenerationJobArn: AudienceGenerationJobArn;
+    audienceSize: AudienceSize;
+    /**
+     * The description of the audience export job.
+     */
+    description?: ResourceDescription;
     /**
      * The status of the audience export job.
      */
     status: AudienceExportJobStatus;
     statusDetails?: StatusDetails;
     /**
-     * The most recent time at which the audience export job was updated.
+     * The Amazon S3 bucket where the audience export is stored.
      */
-    updateTime: SyntheticTimestamp_date_time;
+    outputLocation?: S3Path;
   }
   export type AudienceGenerationJobArn = string;
   export interface AudienceGenerationJobDataSource {
     /**
      * Defines the Amazon S3 bucket where the seed audience for the generating audience is stored. A valid data source is a JSON line file in the following format:  {"user_id": "111111"}   {"user_id": "222222"}   ... 
      */
-    dataSource: S3ConfigMap;
+    dataSource?: S3ConfigMap;
     /**
-     * The ARN of the IAM role that can read the Amazon S3 bucket where the training data is stored.
+     * The ARN of the IAM role that can read the Amazon S3 bucket where the seed audience is stored.
      */
     roleArn: IamRoleArn;
+    /**
+     * The protected SQL query parameters.
+     */
+    sqlParameters?: ProtectedQuerySQLParameters;
   }
   export type AudienceGenerationJobList = AudienceGenerationJobSummary[];
   export type AudienceGenerationJobStatus = "CREATE_PENDING"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"ACTIVE"|"DELETE_PENDING"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|string;
   export interface AudienceGenerationJobSummary {
     /**
-     * The Amazon Resource Name (ARN) of the audience generation job.
-     */
-    audienceGenerationJobArn: AudienceGenerationJobArn;
-    /**
-     * The identifier of the collaboration that contains this audience generation job.
-     */
-    collaborationId?: UUID;
-    /**
-     * The Amazon Resource Name (ARN) of the configured audience model that was used for this audience generation job.
-     */
-    configuredAudienceModelArn: ConfiguredAudienceModelArn;
-    /**
      * The time at which the audience generation job was created.
      */
     createTime: SyntheticTimestamp_date_time;
     /**
-     * The description of the audience generation job.
+     * The most recent time at which the audience generation job was updated.
      */
-    description?: ResourceDescription;
+    updateTime: SyntheticTimestamp_date_time;
+    /**
+     * The Amazon Resource Name (ARN) of the audience generation job.
+     */
+    audienceGenerationJobArn: AudienceGenerationJobArn;
     /**
      * The name of the audience generation job.
      */
     name: NameString;
     /**
-     * The AWS Account that submitted the job.
+     * The description of the audience generation job.
      */
-    startedBy?: AccountId;
+    description?: ResourceDescription;
     /**
      * The status of the audience generation job.
      */
     status: AudienceGenerationJobStatus;
     /**
-     * The most recent time at which the audience generation job was updated.
+     * The Amazon Resource Name (ARN) of the configured audience model that was used for this audience generation job.
      */
-    updateTime: SyntheticTimestamp_date_time;
+    configuredAudienceModelArn: ConfiguredAudienceModelArn;
+    /**
+     * The identifier of the collaboration that contains this audience generation job.
+     */
+    collaborationId?: UUID;
+    /**
+     * The AWS Account that submitted the job.
+     */
+    startedBy?: AccountId;
   }
   export type AudienceModelArn = string;
   export type AudienceModelList = AudienceModelSummary[];
   export type AudienceModelStatus = "CREATE_PENDING"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"ACTIVE"|"DELETE_PENDING"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|string;
   export interface AudienceModelSummary {
     /**
-     * The Amazon Resource Name (ARN) of the audience model.
-     */
-    audienceModelArn: AudienceModelArn;
-    /**
      * The time at which the audience model was created.
      */
     createTime: SyntheticTimestamp_date_time;
     /**
-     * The description of the audience model.
+     * The most recent time at which the audience model was updated.
      */
-    description?: ResourceDescription;
+    updateTime: SyntheticTimestamp_date_time;
+    /**
+     * The Amazon Resource Name (ARN) of the audience model.
+     */
+    audienceModelArn: AudienceModelArn;
     /**
      * The name of the audience model.
      */
     name: NameString;
     /**
-     * The status of the audience model.
-     */
-    status: AudienceModelStatus;
-    /**
      * The Amazon Resource Name (ARN) of the training dataset that was used for the audience model.
      */
     trainingDatasetArn: TrainingDatasetArn;
     /**
-     * The most recent time at which the audience model was updated.
+     * The status of the audience model.
      */
-    updateTime: SyntheticTimestamp_date_time;
+    status: AudienceModelStatus;
+    /**
+     * The description of the audience model.
+     */
+    description?: ResourceDescription;
   }
   export interface AudienceQualityMetrics {
-    /**
-     * The recall score of the generated audience. Recall is the percentage of the most similar users (by default, the most similar 20%) from a sample of the training data that are included in the seed audience by the audience generation job. Values range from 0-1, larger values indicate a better audience. A recall value approximately equal to the maximum bin size indicates that the audience model is equivalent to random selection. 
-     */
-    recallMetric?: Double;
     /**
      * The relevance scores of the generated audience.
      */
     relevanceMetrics: RelevanceMetrics;
+    /**
+     * The recall score of the generated audience. Recall is the percentage of the most similar users (by default, the most similar 20%) from a sample of the training data that are included in the seed audience by the audience generation job. Values range from 0-1, larger values indicate a better audience. A recall value approximately equal to the maximum bin size indicates that the audience model is equivalent to random selection. 
+     */
+    recallMetric?: Double;
   }
   export interface AudienceSize {
     /**
@@ -361,13 +366,13 @@ declare namespace CleanRoomsML {
   export type AudienceSizeBins = AudienceSizeValue[];
   export interface AudienceSizeConfig {
     /**
-     * An array of the different audience output sizes.
-     */
-    audienceSizeBins: AudienceSizeBins;
-    /**
      * Whether the audience output sizes are defined as an absolute number or a percentage.
      */
     audienceSizeType: AudienceSizeType;
+    /**
+     * An array of the different audience output sizes.
+     */
+    audienceSizeBins: AudienceSizeBins;
   }
   export type AudienceSizeType = "ABSOLUTE"|"PERCENTAGE"|string;
   export type AudienceSizeValue = number;
@@ -397,67 +402,67 @@ declare namespace CleanRoomsML {
   export type ConfiguredAudienceModelStatus = "ACTIVE"|string;
   export interface ConfiguredAudienceModelSummary {
     /**
-     * The Amazon Resource Name (ARN) of the audience model that was used to create the configured audience model.
-     */
-    audienceModelArn: AudienceModelArn;
-    /**
-     * The Amazon Resource Name (ARN) of the configured audience model that you are interested in.
-     */
-    configuredAudienceModelArn: ConfiguredAudienceModelArn;
-    /**
      * The time at which the configured audience model was created.
      */
     createTime: SyntheticTimestamp_date_time;
     /**
-     * The description of the configured audience model.
+     * The most recent time at which the configured audience model was updated.
      */
-    description?: ResourceDescription;
+    updateTime: SyntheticTimestamp_date_time;
     /**
      * The name of the configured audience model.
      */
     name: NameString;
     /**
+     * The Amazon Resource Name (ARN) of the audience model that was used to create the configured audience model.
+     */
+    audienceModelArn: AudienceModelArn;
+    /**
      * The output configuration of the configured audience model.
      */
     outputConfig: ConfiguredAudienceModelOutputConfig;
     /**
-     * The status of the configured audience model.
-     */
-    status: ConfiguredAudienceModelStatus;
-    /**
-     * The most recent time at which the configured audience model was updated.
-     */
-    updateTime: SyntheticTimestamp_date_time;
-  }
-  export interface CreateAudienceModelRequest {
-    /**
-     * The description of the audience model.
+     * The description of the configured audience model.
      */
     description?: ResourceDescription;
     /**
-     * The Amazon Resource Name (ARN) of the KMS key. This key is used to encrypt and decrypt customer-owned data in the trained ML model and the associated data.
+     * The Amazon Resource Name (ARN) of the configured audience model that you are interested in.
      */
-    kmsKeyArn?: KmsKeyArn;
+    configuredAudienceModelArn: ConfiguredAudienceModelArn;
     /**
-     * The name of the audience model resource.
+     * The status of the configured audience model.
      */
-    name: NameString;
-    /**
-     * The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50.   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8.   Maximum value length - 256 Unicode characters in UTF-8.   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.  
-     */
-    tags?: TagMap;
-    /**
-     * The end date and time of the training window.
-     */
-    trainingDataEndTime?: SyntheticTimestamp_date_time;
+    status: ConfiguredAudienceModelStatus;
+  }
+  export interface CreateAudienceModelRequest {
     /**
      * The start date and time of the training window.
      */
     trainingDataStartTime?: SyntheticTimestamp_date_time;
     /**
+     * The end date and time of the training window.
+     */
+    trainingDataEndTime?: SyntheticTimestamp_date_time;
+    /**
+     * The name of the audience model resource.
+     */
+    name: NameString;
+    /**
      * The Amazon Resource Name (ARN) of the training dataset for this audience model.
      */
     trainingDatasetArn: TrainingDatasetArn;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS key. This key is used to encrypt and decrypt customer-owned data in the trained ML model and the associated data.
+     */
+    kmsKeyArn?: KmsKeyArn;
+    /**
+     * The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50.   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8.   Maximum value length - 256 Unicode characters in UTF-8.   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.  
+     */
+    tags?: TagMap;
+    /**
+     * The description of the audience model.
+     */
+    description?: ResourceDescription;
   }
   export interface CreateAudienceModelResponse {
     /**
@@ -467,41 +472,41 @@ declare namespace CleanRoomsML {
   }
   export interface CreateConfiguredAudienceModelRequest {
     /**
-     * The Amazon Resource Name (ARN) of the audience model to use for the configured audience model.
-     */
-    audienceModelArn: AudienceModelArn;
-    /**
-     * Configure the list of output sizes of audiences that can be created using this configured audience model. A request to StartAudienceGenerationJob that uses this configured audience model must have an audienceSize selected from this list. You can use the ABSOLUTE AudienceSize to configure out audience sizes using the count of identifiers in the output. You can use the Percentage AudienceSize to configure sizes in the range 1-100 percent.
-     */
-    audienceSizeConfig?: AudienceSizeConfig;
-    /**
-     * Configure how the service tags audience generation jobs created using this configured audience model. If you specify NONE, the tags from the StartAudienceGenerationJob request determine the tags of the audience generation job. If you specify FROM_PARENT_RESOURCE, the audience generation job inherits the tags from the configured audience model, by default. Tags in the StartAudienceGenerationJob will override the default. When the client is in a different account than the configured audience model, the tags from the client are never applied to a resource in the caller's account.
-     */
-    childResourceTagOnCreatePolicy?: TagOnCreatePolicy;
-    /**
-     * The description of the configured audience model.
-     */
-    description?: ResourceDescription;
-    /**
-     * The minimum number of users from the seed audience that must match with users in the training data of the audience model. The default value is 500.
-     */
-    minMatchingSeedSize?: MinMatchingSeedSize;
-    /**
      * The name of the configured audience model.
      */
     name: NameString;
+    /**
+     * The Amazon Resource Name (ARN) of the audience model to use for the configured audience model.
+     */
+    audienceModelArn: AudienceModelArn;
     /**
      * Configure the Amazon S3 location and IAM Role for audiences created using this configured audience model. Each audience will have a unique location. The IAM Role must have s3:PutObject permission on the destination Amazon S3 location. If the destination is protected with Amazon S3 KMS-SSE, then the Role must also have the required KMS permissions.
      */
     outputConfig: ConfiguredAudienceModelOutputConfig;
     /**
+     * The description of the configured audience model.
+     */
+    description?: ResourceDescription;
+    /**
      * Whether audience metrics are shared.
      */
     sharedAudienceMetrics: MetricsList;
     /**
+     * The minimum number of users from the seed audience that must match with users in the training data of the audience model. The default value is 500.
+     */
+    minMatchingSeedSize?: MinMatchingSeedSize;
+    /**
+     * Configure the list of output sizes of audiences that can be created using this configured audience model. A request to StartAudienceGenerationJob that uses this configured audience model must have an audienceSize selected from this list. You can use the ABSOLUTE AudienceSize to configure out audience sizes using the count of identifiers in the output. You can use the Percentage AudienceSize to configure sizes in the range 1-100 percent.
+     */
+    audienceSizeConfig?: AudienceSizeConfig;
+    /**
      * The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50.   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8.   Maximum value length - 256 Unicode characters in UTF-8.   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.  
      */
     tags?: TagMap;
+    /**
+     * Configure how the service tags audience generation jobs created using this configured audience model. If you specify NONE, the tags from the StartAudienceGenerationJob request determine the tags of the audience generation job. If you specify FROM_PARENT_RESOURCE, the audience generation job inherits the tags from the configured audience model, by default. Tags in the StartAudienceGenerationJob will override the default. When the client is in a different account than the configured audience model, the tags from the client are never applied to a resource in the caller's account.
+     */
+    childResourceTagOnCreatePolicy?: TagOnCreatePolicy;
   }
   export interface CreateConfiguredAudienceModelResponse {
     /**
@@ -511,10 +516,6 @@ declare namespace CleanRoomsML {
   }
   export interface CreateTrainingDatasetRequest {
     /**
-     * The description of the training dataset.
-     */
-    description?: ResourceDescription;
-    /**
      * The name of the training dataset. This name must be unique in your account and region.
      */
     name: NameString;
@@ -523,13 +524,17 @@ declare namespace CleanRoomsML {
      */
     roleArn: IamRoleArn;
     /**
+     * An array of information that lists the Dataset objects, which specifies the dataset type and details on its location and schema. You must provide a role that has read access to these tables.
+     */
+    trainingData: CreateTrainingDatasetRequestTrainingDataList;
+    /**
      * The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50.   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8.   Maximum value length - 256 Unicode characters in UTF-8.   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.  
      */
     tags?: TagMap;
     /**
-     * An array of information that lists the Dataset objects, which specifies the dataset type and details on its location and schema. You must provide a role that has read access to these tables.
+     * The description of the training dataset.
      */
-    trainingData: CreateTrainingDatasetRequestTrainingDataList;
+    description?: ResourceDescription;
   }
   export type CreateTrainingDatasetRequestTrainingDataList = Dataset[];
   export interface CreateTrainingDatasetResponse {
@@ -546,23 +551,23 @@ declare namespace CleanRoomsML {
   }
   export interface Dataset {
     /**
-     * A DatasetInputConfig object that defines the data source and schema mapping.
-     */
-    inputConfig: DatasetInputConfig;
-    /**
      * What type of information is found in the dataset.
      */
     type: DatasetType;
+    /**
+     * A DatasetInputConfig object that defines the data source and schema mapping.
+     */
+    inputConfig: DatasetInputConfig;
   }
   export interface DatasetInputConfig {
-    /**
-     * A DataSource object that specifies the Glue data source for the training data.
-     */
-    dataSource: DataSource;
     /**
      * The schema information for the training data.
      */
     schema: DatasetInputConfigSchemaList;
+    /**
+     * A DataSource object that specifies the Glue data source for the training data.
+     */
+    dataSource: DataSource;
   }
   export type DatasetInputConfigSchemaList = ColumnSchema[];
   export type DatasetList = Dataset[];
@@ -606,45 +611,25 @@ declare namespace CleanRoomsML {
   }
   export interface GetAudienceGenerationJobResponse {
     /**
-     * The Amazon Resource Name (ARN) of the audience generation job.
-     */
-    audienceGenerationJobArn: AudienceGenerationJobArn;
-    /**
-     * The identifier of the collaboration that this audience generation job is associated with.
-     */
-    collaborationId?: UUID;
-    /**
-     * The Amazon Resource Name (ARN) of the configured audience model used for this audience generation job.
-     */
-    configuredAudienceModelArn: ConfiguredAudienceModelArn;
-    /**
      * The time at which the audience generation job was created.
      */
     createTime: SyntheticTimestamp_date_time;
     /**
-     * The description of the audience generation job.
+     * The most recent time at which the audience generation job was updated.
      */
-    description?: ResourceDescription;
+    updateTime: SyntheticTimestamp_date_time;
     /**
-     * Configure whether the seed users are included in the output audience. By default, Clean Rooms ML removes seed users from the output audience. If you specify TRUE, the seed users will appear first in the output. Clean Rooms ML does not explicitly reveal whether a user was in the seed, but the recipient of the audience will know that the first minimumSeedSize count of users are from the seed.
+     * The Amazon Resource Name (ARN) of the audience generation job.
      */
-    includeSeedInOutput?: Boolean;
-    /**
-     * The relevance scores for different audience sizes and the recall score of the generated audience. 
-     */
-    metrics?: AudienceQualityMetrics;
+    audienceGenerationJobArn: AudienceGenerationJobArn;
     /**
      * The name of the audience generation job.
      */
     name: NameString;
     /**
-     * The seed audience that was used for this audience generation job. This field will be null if the account calling the API is the account that started this audience generation job. 
+     * The description of the audience generation job.
      */
-    seedAudience?: AudienceGenerationJobDataSource;
-    /**
-     * The AWS account that started this audience generation job.
-     */
-    startedBy?: AccountId;
+    description?: ResourceDescription;
     /**
      * The status of the audience generation job.
      */
@@ -654,13 +639,37 @@ declare namespace CleanRoomsML {
      */
     statusDetails?: StatusDetails;
     /**
+     * The Amazon Resource Name (ARN) of the configured audience model used for this audience generation job.
+     */
+    configuredAudienceModelArn: ConfiguredAudienceModelArn;
+    /**
+     * The seed audience that was used for this audience generation job. This field will be null if the account calling the API is the account that started this audience generation job. 
+     */
+    seedAudience?: AudienceGenerationJobDataSource;
+    /**
+     * Configure whether the seed users are included in the output audience. By default, Clean Rooms ML removes seed users from the output audience. If you specify TRUE, the seed users will appear first in the output. Clean Rooms ML does not explicitly reveal whether a user was in the seed, but the recipient of the audience will know that the first minimumSeedSize count of users are from the seed.
+     */
+    includeSeedInOutput?: Boolean;
+    /**
+     * The identifier of the collaboration that this audience generation job is associated with.
+     */
+    collaborationId?: UUID;
+    /**
+     * The relevance scores for different audience sizes and the recall score of the generated audience. 
+     */
+    metrics?: AudienceQualityMetrics;
+    /**
+     * The AWS account that started this audience generation job.
+     */
+    startedBy?: AccountId;
+    /**
      * The tags that are associated to this audience generation job.
      */
     tags?: TagMap;
     /**
-     * The most recent time at which the audience generation job was updated.
+     * The unique identifier of the protected query for this audience generation job.
      */
-    updateTime: SyntheticTimestamp_date_time;
+    protectedQueryIdentifier?: String;
   }
   export interface GetAudienceModelRequest {
     /**
@@ -670,25 +679,33 @@ declare namespace CleanRoomsML {
   }
   export interface GetAudienceModelResponse {
     /**
-     * The Amazon Resource Name (ARN) of the audience model.
-     */
-    audienceModelArn: AudienceModelArn;
-    /**
      * The time at which the audience model was created.
      */
     createTime: SyntheticTimestamp_date_time;
     /**
-     * The description of the audience model.
+     * The most recent time at which the audience model was updated.
      */
-    description?: ResourceDescription;
+    updateTime: SyntheticTimestamp_date_time;
     /**
-     * The KMS key ARN used for the audience model.
+     * The start date specified for the training window.
      */
-    kmsKeyArn?: KmsKeyArn;
+    trainingDataStartTime?: SyntheticTimestamp_date_time;
+    /**
+     * The end date specified for the training window.
+     */
+    trainingDataEndTime?: SyntheticTimestamp_date_time;
+    /**
+     * The Amazon Resource Name (ARN) of the audience model.
+     */
+    audienceModelArn: AudienceModelArn;
     /**
      * The name of the audience model.
      */
     name: NameString;
+    /**
+     * The Amazon Resource Name (ARN) of the training dataset that was used for this audience model.
+     */
+    trainingDatasetArn: TrainingDatasetArn;
     /**
      * The status of the audience model.
      */
@@ -698,25 +715,17 @@ declare namespace CleanRoomsML {
      */
     statusDetails?: StatusDetails;
     /**
+     * The KMS key ARN used for the audience model.
+     */
+    kmsKeyArn?: KmsKeyArn;
+    /**
      * The tags that are assigned to the audience model.
      */
     tags?: TagMap;
     /**
-     * The end date specified for the training window.
+     * The description of the audience model.
      */
-    trainingDataEndTime?: SyntheticTimestamp_date_time;
-    /**
-     * The start date specified for the training window.
-     */
-    trainingDataStartTime?: SyntheticTimestamp_date_time;
-    /**
-     * The Amazon Resource Name (ARN) of the training dataset that was used for this audience model.
-     */
-    trainingDatasetArn: TrainingDatasetArn;
-    /**
-     * The most recent time at which the audience model was updated.
-     */
-    updateTime: SyntheticTimestamp_date_time;
+    description?: ResourceDescription;
   }
   export interface GetConfiguredAudienceModelPolicyRequest {
     /**
@@ -746,57 +755,57 @@ declare namespace CleanRoomsML {
   }
   export interface GetConfiguredAudienceModelResponse {
     /**
-     * The Amazon Resource Name (ARN) of the audience model used for this configured audience model.
+     * The time at which the configured audience model was created.
      */
-    audienceModelArn: AudienceModelArn;
+    createTime: SyntheticTimestamp_date_time;
     /**
-     * The list of output sizes of audiences that can be created using this configured audience model. A request to StartAudienceGenerationJob that uses this configured audience model must have an audienceSize selected from this list. You can use the ABSOLUTE AudienceSize to configure out audience sizes using the count of identifiers in the output. You can use the Percentage AudienceSize to configure sizes in the range 1-100 percent.
+     * The most recent time at which the configured audience model was updated.
      */
-    audienceSizeConfig?: AudienceSizeConfig;
-    /**
-     * Provides the childResourceTagOnCreatePolicy that was used for this configured audience model.
-     */
-    childResourceTagOnCreatePolicy?: TagOnCreatePolicy;
+    updateTime: SyntheticTimestamp_date_time;
     /**
      * The Amazon Resource Name (ARN) of the configured audience model.
      */
     configuredAudienceModelArn: ConfiguredAudienceModelArn;
     /**
-     * The time at which the configured audience model was created.
-     */
-    createTime: SyntheticTimestamp_date_time;
-    /**
-     * The description of the configured audience model.
-     */
-    description?: ResourceDescription;
-    /**
-     * The minimum number of users from the seed audience that must match with users in the training data of the audience model.
-     */
-    minMatchingSeedSize?: MinMatchingSeedSize;
-    /**
      * The name of the configured audience model.
      */
     name: NameString;
+    /**
+     * The Amazon Resource Name (ARN) of the audience model used for this configured audience model.
+     */
+    audienceModelArn: AudienceModelArn;
     /**
      * The output configuration of the configured audience model
      */
     outputConfig: ConfiguredAudienceModelOutputConfig;
     /**
-     * Whether audience metrics are shared.
+     * The description of the configured audience model.
      */
-    sharedAudienceMetrics: MetricsList;
+    description?: ResourceDescription;
     /**
      * The status of the configured audience model.
      */
     status: ConfiguredAudienceModelStatus;
     /**
+     * Whether audience metrics are shared.
+     */
+    sharedAudienceMetrics: MetricsList;
+    /**
+     * The minimum number of users from the seed audience that must match with users in the training data of the audience model.
+     */
+    minMatchingSeedSize?: MinMatchingSeedSize;
+    /**
+     * The list of output sizes of audiences that can be created using this configured audience model. A request to StartAudienceGenerationJob that uses this configured audience model must have an audienceSize selected from this list. You can use the ABSOLUTE AudienceSize to configure out audience sizes using the count of identifiers in the output. You can use the Percentage AudienceSize to configure sizes in the range 1-100 percent.
+     */
+    audienceSizeConfig?: AudienceSizeConfig;
+    /**
      * The tags that are associated to this configured audience model.
      */
     tags?: TagMap;
     /**
-     * The most recent time at which the configured audience model was updated.
+     * Provides the childResourceTagOnCreatePolicy that was used for this configured audience model.
      */
-    updateTime: SyntheticTimestamp_date_time;
+    childResourceTagOnCreatePolicy?: TagOnCreatePolicy;
   }
   export interface GetTrainingDatasetRequest {
     /**
@@ -810,51 +819,51 @@ declare namespace CleanRoomsML {
      */
     createTime: SyntheticTimestamp_date_time;
     /**
-     * The description of the training dataset.
+     * The most recent time at which the training dataset was updated.
      */
-    description?: ResourceDescription;
-    /**
-     * The name of the training dataset.
-     */
-    name: NameString;
-    /**
-     * The IAM role used to read the training data.
-     */
-    roleArn: IamRoleArn;
-    /**
-     * The status of the training dataset.
-     */
-    status: TrainingDatasetStatus;
-    /**
-     * The tags that are assigned to this training dataset.
-     */
-    tags?: TagMap;
-    /**
-     * Metadata about the requested training data. 
-     */
-    trainingData: DatasetList;
+    updateTime: SyntheticTimestamp_date_time;
     /**
      * The Amazon Resource Name (ARN) of the training dataset.
      */
     trainingDatasetArn: TrainingDatasetArn;
     /**
-     * The most recent time at which the training dataset was updated.
+     * The name of the training dataset.
      */
-    updateTime: SyntheticTimestamp_date_time;
+    name: NameString;
+    /**
+     * Metadata about the requested training data. 
+     */
+    trainingData: DatasetList;
+    /**
+     * The status of the training dataset.
+     */
+    status: TrainingDatasetStatus;
+    /**
+     * The IAM role used to read the training data.
+     */
+    roleArn: IamRoleArn;
+    /**
+     * The tags that are assigned to this training dataset.
+     */
+    tags?: TagMap;
+    /**
+     * The description of the training dataset.
+     */
+    description?: ResourceDescription;
   }
   export interface GlueDataSource {
     /**
-     * The Glue catalog that contains the training data.
+     * The Glue table that contains the training data.
      */
-    catalogId?: AccountId;
+    tableName: GlueTableName;
     /**
      * The Glue database that contains the training data.
      */
     databaseName: GlueDatabaseName;
     /**
-     * The Glue table that contains the training data.
+     * The Glue catalog that contains the training data.
      */
-    tableName: GlueTableName;
+    catalogId?: AccountId;
   }
   export type GlueDatabaseName = string;
   export type GlueTableName = string;
@@ -863,95 +872,95 @@ declare namespace CleanRoomsML {
   export type KmsKeyArn = string;
   export interface ListAudienceExportJobsRequest {
     /**
-     * The Amazon Resource Name (ARN) of the audience generation job that you are interested in.
+     * The token value retrieved from a previous call to access the next page of results.
      */
-    audienceGenerationJobArn?: AudienceGenerationJobArn;
+    nextToken?: NextToken;
     /**
      * The maximum size of the results that is returned per call.
      */
     maxResults?: MaxResults;
     /**
+     * The Amazon Resource Name (ARN) of the audience generation job that you are interested in.
+     */
+    audienceGenerationJobArn?: AudienceGenerationJobArn;
+  }
+  export interface ListAudienceExportJobsResponse {
+    /**
      * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: NextToken;
-  }
-  export interface ListAudienceExportJobsResponse {
     /**
      * The audience export jobs that match the request.
      */
     audienceExportJobs: AudienceExportJobList;
+  }
+  export interface ListAudienceGenerationJobsRequest {
     /**
      * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: NextToken;
-  }
-  export interface ListAudienceGenerationJobsRequest {
     /**
-     * The identifier of the collaboration that contains the audience generation jobs that you are interested in.
+     * The maximum size of the results that is returned per call.
      */
-    collaborationId?: UUID;
+    maxResults?: MaxResults;
     /**
      * The Amazon Resource Name (ARN) of the configured audience model that was used for the audience generation jobs that you are interested in.
      */
     configuredAudienceModelArn?: ConfiguredAudienceModelArn;
     /**
-     * The maximum size of the results that is returned per call.
+     * The identifier of the collaboration that contains the audience generation jobs that you are interested in.
      */
-    maxResults?: MaxResults;
+    collaborationId?: UUID;
+  }
+  export interface ListAudienceGenerationJobsResponse {
     /**
      * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: NextToken;
-  }
-  export interface ListAudienceGenerationJobsResponse {
     /**
      * The audience generation jobs that match the request.
      */
     audienceGenerationJobs: AudienceGenerationJobList;
+  }
+  export interface ListAudienceModelsRequest {
     /**
      * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: NextToken;
-  }
-  export interface ListAudienceModelsRequest {
     /**
      * The maximum size of the results that is returned per call.
      */
     maxResults?: MaxResults;
+  }
+  export interface ListAudienceModelsResponse {
     /**
      * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: NextToken;
-  }
-  export interface ListAudienceModelsResponse {
     /**
      * The audience models that match the request.
      */
     audienceModels: AudienceModelList;
+  }
+  export interface ListConfiguredAudienceModelsRequest {
     /**
      * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: NextToken;
-  }
-  export interface ListConfiguredAudienceModelsRequest {
     /**
      * The maximum size of the results that is returned per call.
      */
     maxResults?: MaxResults;
+  }
+  export interface ListConfiguredAudienceModelsResponse {
     /**
      * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: NextToken;
-  }
-  export interface ListConfiguredAudienceModelsResponse {
     /**
      * The configured audience models.
      */
     configuredAudienceModels: ConfiguredAudienceModelList;
-    /**
-     * The token value retrieved from a previous call to access the next page of results.
-     */
-    nextToken?: NextToken;
   }
   export interface ListTagsForResourceRequest {
     /**
@@ -967,13 +976,13 @@ declare namespace CleanRoomsML {
   }
   export interface ListTrainingDatasetsRequest {
     /**
-     * The maximum size of the results that is returned per call.
-     */
-    maxResults?: MaxResults;
-    /**
      * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: NextToken;
+    /**
+     * The maximum size of the results that is returned per call.
+     */
+    maxResults?: MaxResults;
   }
   export interface ListTrainingDatasetsResponse {
     /**
@@ -990,7 +999,25 @@ declare namespace CleanRoomsML {
   export type MinMatchingSeedSize = number;
   export type NameString = string;
   export type NextToken = string;
+  export type ParameterKey = string;
+  export type ParameterMap = {[key: string]: ParameterValue};
+  export type ParameterValue = string;
   export type PolicyExistenceCondition = "POLICY_MUST_EXIST"|"POLICY_MUST_NOT_EXIST"|string;
+  export interface ProtectedQuerySQLParameters {
+    /**
+     * The query string to be submitted.
+     */
+    queryString?: ProtectedQuerySQLParametersQueryStringString;
+    /**
+     * The Amazon Resource Name (ARN) associated with the analysis template within a collaboration.
+     */
+    analysisTemplateArn?: AnalysisTemplateArn;
+    /**
+     * The protected query SQL parameters.
+     */
+    parameters?: ParameterMap;
+  }
+  export type ProtectedQuerySQLParametersQueryStringString = string;
   export interface PutConfiguredAudienceModelPolicyRequest {
     /**
      * The Amazon Resource Name (ARN) of the configured audience model that the resource policy will govern.
@@ -1001,13 +1028,13 @@ declare namespace CleanRoomsML {
      */
     configuredAudienceModelPolicy: ResourcePolicy;
     /**
-     * Use this to prevent unexpected concurrent modification of the policy.
-     */
-    policyExistenceCondition?: PolicyExistenceCondition;
-    /**
      * A cryptographic hash of the contents of the policy used to prevent unexpected concurrent modification of the policy.
      */
     previousPolicyHash?: Hash;
+    /**
+     * Use this to prevent unexpected concurrent modification of the policy.
+     */
+    policyExistenceCondition?: PolicyExistenceCondition;
   }
   export interface PutConfiguredAudienceModelPolicyResponse {
     /**
@@ -1039,6 +1066,10 @@ declare namespace CleanRoomsML {
   export type SharedAudienceMetrics = "ALL"|"NONE"|string;
   export interface StartAudienceExportJobRequest {
     /**
+     * The name of the audience export job.
+     */
+    name: NameString;
+    /**
      * The Amazon Resource Name (ARN) of the audience generation job that you want to export.
      */
     audienceGenerationJobArn: AudienceGenerationJobArn;
@@ -1047,36 +1078,32 @@ declare namespace CleanRoomsML {
      * The description of the audience export job.
      */
     description?: ResourceDescription;
-    /**
-     * The name of the audience export job.
-     */
-    name: NameString;
   }
   export interface StartAudienceGenerationJobRequest {
-    /**
-     * The identifier of the collaboration that contains the audience generation job.
-     */
-    collaborationId?: UUID;
-    /**
-     * The Amazon Resource Name (ARN) of the configured audience model that is used for this audience generation job.
-     */
-    configuredAudienceModelArn: ConfiguredAudienceModelArn;
-    /**
-     * The description of the audience generation job.
-     */
-    description?: ResourceDescription;
-    /**
-     * Whether the seed audience is included in the audience generation output.
-     */
-    includeSeedInOutput?: Boolean;
     /**
      * The name of the audience generation job.
      */
     name: NameString;
     /**
+     * The Amazon Resource Name (ARN) of the configured audience model that is used for this audience generation job.
+     */
+    configuredAudienceModelArn: ConfiguredAudienceModelArn;
+    /**
      * The seed audience that is used to generate the audience.
      */
     seedAudience: AudienceGenerationJobDataSource;
+    /**
+     * Whether the seed audience is included in the audience generation output.
+     */
+    includeSeedInOutput?: Boolean;
+    /**
+     * The identifier of the collaboration that contains the audience generation job.
+     */
+    collaborationId?: UUID;
+    /**
+     * The description of the audience generation job.
+     */
+    description?: ResourceDescription;
     /**
      * The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50.   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8.   Maximum value length - 256 Unicode characters in UTF-8.   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.  
      */
@@ -1090,13 +1117,13 @@ declare namespace CleanRoomsML {
   }
   export interface StatusDetails {
     /**
-     * The error message that was returned. The message is intended for human consumption and can change at any time. Use the statusCode for programmatic error handling.
-     */
-    message?: String;
-    /**
      * The status code that was returned. The status code is intended for programmatic error handling. Clean Rooms ML will not change the status code for existing error conditions.
      */
     statusCode?: String;
+    /**
+     * The error message that was returned. The message is intended for human consumption and can change at any time. Use the statusCode for programmatic error handling.
+     */
+    message?: String;
   }
   export type String = string;
   export type SyntheticTimestamp_date_time = Date;
@@ -1127,9 +1154,13 @@ declare namespace CleanRoomsML {
      */
     createTime: SyntheticTimestamp_date_time;
     /**
-     * The description of the training dataset.
+     * The most recent time at which the training dataset was updated.
      */
-    description?: ResourceDescription;
+    updateTime: SyntheticTimestamp_date_time;
+    /**
+     * The Amazon Resource Name (ARN) of the training dataset.
+     */
+    trainingDatasetArn: TrainingDatasetArn;
     /**
      * The name of the training dataset.
      */
@@ -1139,13 +1170,9 @@ declare namespace CleanRoomsML {
      */
     status: TrainingDatasetStatus;
     /**
-     * The Amazon Resource Name (ARN) of the training dataset.
+     * The description of the training dataset.
      */
-    trainingDatasetArn: TrainingDatasetArn;
-    /**
-     * The most recent time at which the training dataset was updated.
-     */
-    updateTime: SyntheticTimestamp_date_time;
+    description?: ResourceDescription;
   }
   export type UUID = string;
   export interface UntagResourceRequest {
@@ -1162,33 +1189,33 @@ declare namespace CleanRoomsML {
   }
   export interface UpdateConfiguredAudienceModelRequest {
     /**
-     * The Amazon Resource Name (ARN) of the new audience model that you want to use.
-     */
-    audienceModelArn?: AudienceModelArn;
-    /**
-     * The new audience size configuration.
-     */
-    audienceSizeConfig?: AudienceSizeConfig;
-    /**
      * The Amazon Resource Name (ARN) of the configured audience model that you want to update.
      */
     configuredAudienceModelArn: ConfiguredAudienceModelArn;
-    /**
-     * The new description of the configured audience model.
-     */
-    description?: ResourceDescription;
-    /**
-     * The minimum number of users from the seed audience that must match with users in the training data of the audience model.
-     */
-    minMatchingSeedSize?: MinMatchingSeedSize;
     /**
      * The new output configuration.
      */
     outputConfig?: ConfiguredAudienceModelOutputConfig;
     /**
+     * The Amazon Resource Name (ARN) of the new audience model that you want to use.
+     */
+    audienceModelArn?: AudienceModelArn;
+    /**
      * The new value for whether to share audience metrics.
      */
     sharedAudienceMetrics?: MetricsList;
+    /**
+     * The minimum number of users from the seed audience that must match with users in the training data of the audience model.
+     */
+    minMatchingSeedSize?: MinMatchingSeedSize;
+    /**
+     * The new audience size configuration.
+     */
+    audienceSizeConfig?: AudienceSizeConfig;
+    /**
+     * The new description of the configured audience model.
+     */
+    description?: ResourceDescription;
   }
   export interface UpdateConfiguredAudienceModelResponse {
     /**

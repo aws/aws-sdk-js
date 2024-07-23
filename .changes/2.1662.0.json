@@ -1,0 +1,37 @@
+[
+    {
+        "type": "feature",
+        "category": "AppSync",
+        "description": "Adding support for paginators in AppSync list APIs"
+    },
+    {
+        "type": "feature",
+        "category": "CleanRooms",
+        "description": "This release adds AWS Entity Resolution integration to associate ID namespaces & ID mapping workflow resources as part of ID namespace association and  ID mapping table  in AWS Clean Rooms. It also introduces a new ID_MAPPING_TABLE analysis rule to manage the protection on ID mapping table."
+    },
+    {
+        "type": "feature",
+        "category": "CleanRoomsML",
+        "description": "Adds SQL query as the source of seed audience for audience generation job."
+    },
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "Added PostContactSummary segment type on ListRealTimeContactAnalysisSegmentsV2 API"
+    },
+    {
+        "type": "feature",
+        "category": "ConnectContactLens",
+        "description": "Added PostContactSummary segment type on ListRealTimeContactAnalysisSegments API"
+    },
+    {
+        "type": "feature",
+        "category": "DataZone",
+        "description": "This release removes the deprecated dataProductItem field from Search API output."
+    },
+    {
+        "type": "feature",
+        "category": "EntityResolution",
+        "description": "Support First Party ID Mapping"
+    }
+]

@@ -323,7 +323,7 @@ declare namespace EntityResolution {
      */
     condition?: StatementCondition;
     /**
-     * Determines whether the permissions specified in the policy are to be allowed (Allow) or denied (Deny).
+     * Determines whether the permissions specified in the policy are to be allowed (Allow) or denied (Deny).   If you set the value of the effect parameter to Deny for the AddPolicyStatement operation, you must also set the value of the effect parameter in the policy to Deny for the PutPolicy operation. 
      */
     effect: StatementEffect;
     /**
@@ -393,7 +393,7 @@ declare namespace EntityResolution {
      */
     description?: Description;
     /**
-     * An object which defines the idMappingType and the providerProperties.
+     * An object which defines the ID mapping technique and any additional configurations.
      */
     idMappingTechniques: IdMappingTechniques;
     /**
@@ -407,7 +407,7 @@ declare namespace EntityResolution {
     /**
      * The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.
      */
-    roleArn: RoleArn;
+    roleArn?: IdMappingRoleArn;
     /**
      * The tags used to organize, track, or control access for this resource.
      */
@@ -423,7 +423,7 @@ declare namespace EntityResolution {
      */
     description?: Description;
     /**
-     * An object which defines the idMappingType and the providerProperties.
+     * An object which defines the ID mapping technique and any additional configurations.
      */
     idMappingTechniques: IdMappingTechniques;
     /**
@@ -437,7 +437,7 @@ declare namespace EntityResolution {
     /**
      * The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.
      */
-    roleArn: RoleArn;
+    roleArn?: IdMappingRoleArn;
     /**
      * The ARN (Amazon Resource Name) that Entity Resolution generated for the IDMappingWorkflow.
      */
@@ -782,7 +782,7 @@ declare namespace EntityResolution {
      */
     description?: Description;
     /**
-     * An object which defines the idMappingType and the providerProperties.
+     * An object which defines the ID mapping technique and any additional configurations.
      */
     idMappingTechniques: IdMappingTechniques;
     /**
@@ -796,7 +796,7 @@ declare namespace EntityResolution {
     /**
      * The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to access Amazon Web Services resources on your behalf.
      */
-    roleArn: RoleArn;
+    roleArn?: IdMappingRoleArn;
     /**
      * The tags used to organize, track, or control access for this resource.
      */
@@ -1104,7 +1104,7 @@ declare namespace EntityResolution {
   }
   export interface IdMappingJobMetrics {
     /**
-     * The total number of input records.
+     * The total number of records that were input for processing.
      */
     inputRecords?: Integer;
     /**
@@ -1112,7 +1112,19 @@ declare namespace EntityResolution {
      */
     recordsNotProcessed?: Integer;
     /**
-     * The total number of records processed.
+     *  The total number of records that were mapped.
+     */
+    totalMappedRecords?: Integer;
+    /**
+     *  The total number of mapped source records.
+     */
+    totalMappedSourceRecords?: Integer;
+    /**
+     *  The total number of distinct mapped target records.
+     */
+    totalMappedTargetRecords?: Integer;
+    /**
+     * The total number of records that were processed.
      */
     totalRecordsProcessed?: Integer;
   }
@@ -1131,6 +1143,26 @@ declare namespace EntityResolution {
     roleArn: RoleArn;
   }
   export type IdMappingJobOutputSourceConfig = IdMappingJobOutputSource[];
+  export type IdMappingRoleArn = string;
+  export interface IdMappingRuleBasedProperties {
+    /**
+     * The comparison type. You can either choose ONE_TO_ONE or MANY_TO_MANY as the attributeMatchingModel.  If you choose MANY_TO_MANY, the system can match attributes across the sub-types of an attribute type. For example, if the value of the Email field of Profile A matches the value of the BusinessEmail field of Profile B, the two profiles are matched on the Email attribute type.  If you choose ONE_TO_ONE, the system can only match attributes if the sub-types are an exact match. For example, for the Email attribute type, the system will only consider it a match if the value of the Email field of Profile A matches the value of the Email field of Profile B.
+     */
+    attributeMatchingModel: AttributeMatchingModel;
+    /**
+     *  The type of matching record that is allowed to be used in an ID mapping workflow.  If the value is set to ONE_SOURCE_TO_ONE_TARGET, only one record in the source can be matched to the same record in the target. If the value is set to MANY_SOURCE_TO_ONE_TARGET, multiple records in the source can be matched to one record in the target.
+     */
+    recordMatchingModel: RecordMatchingModel;
+    /**
+     *  The set of rules you can use in an ID mapping workflow. The limitations specified for the source or target to define the match rules must be compatible.
+     */
+    ruleDefinitionType: IdMappingWorkflowRuleDefinitionType;
+    /**
+     *  The rules that can be used for ID mapping.
+     */
+    rules?: IdMappingRuleBasedPropertiesRulesList;
+  }
+  export type IdMappingRuleBasedPropertiesRulesList = Rule[];
   export interface IdMappingTechniques {
     /**
      * The type of ID mapping.
@@ -1140,12 +1172,16 @@ declare namespace EntityResolution {
      * An object which defines any additional configurations required by the provider service.
      */
     providerProperties?: ProviderProperties;
+    /**
+     *  An object which defines any additional configurations required by rule-based matching.
+     */
+    ruleBasedProperties?: IdMappingRuleBasedProperties;
   }
-  export type IdMappingType = "PROVIDER"|string;
+  export type IdMappingType = "PROVIDER"|"RULE_BASED"|string;
   export type IdMappingWorkflowArn = string;
   export interface IdMappingWorkflowInputSource {
     /**
-     * An Glue table ARN for the input source table.
+     * An Glue table Amazon Resource Name (ARN) or a matching workflow ARN for the input source table.
      */
     inputSourceARN: IdMappingWorkflowInputSourceInputSourceARNString;
     /**
@@ -1153,7 +1189,7 @@ declare namespace EntityResolution {
      */
     schemaName?: EntityName;
     /**
-     * The type of ID namespace. There are two types: SOURCE and TARGET.  The SOURCE contains configurations for sourceId data that will be processed in an ID mapping workflow.  The TARGET contains a configuration of targetId to which all sourceIds will resolve to.
+     * The type of ID namespace. There are two types: SOURCE and TARGET.  The SOURCE contains configurations for sourceId data that will be processed in an ID mapping workflow.  The TARGET contains a configuration of targetId which all sourceIds will resolve to.
      */
     type?: IdNamespaceType;
   }
@@ -1171,6 +1207,8 @@ declare namespace EntityResolution {
     outputS3Path: S3Path;
   }
   export type IdMappingWorkflowOutputSourceConfig = IdMappingWorkflowOutputSource[];
+  export type IdMappingWorkflowRuleDefinitionType = "SOURCE"|"TARGET"|string;
+  export type IdMappingWorkflowRuleDefinitionTypeList = IdMappingWorkflowRuleDefinitionType[];
   export interface IdMappingWorkflowSummary {
     /**
      * The timestamp of when the workflow was created.
@@ -1190,6 +1228,13 @@ declare namespace EntityResolution {
     workflowName: EntityName;
   }
   export type IdNamespaceArn = string;
+  export interface IdNamespaceIdMappingWorkflowMetadata {
+    /**
+     * The type of ID mapping.
+     */
+    idMappingType: IdMappingType;
+  }
+  export type IdNamespaceIdMappingWorkflowMetadataList = IdNamespaceIdMappingWorkflowMetadata[];
   export interface IdNamespaceIdMappingWorkflowProperties {
     /**
      * The type of ID mapping.
@@ -1199,11 +1244,15 @@ declare namespace EntityResolution {
      * An object which defines any additional configurations required by the provider service.
      */
     providerProperties?: NamespaceProviderProperties;
+    /**
+     *  An object which defines any additional configurations required by rule-based matching.
+     */
+    ruleBasedProperties?: NamespaceRuleBasedProperties;
   }
   export type IdNamespaceIdMappingWorkflowPropertiesList = IdNamespaceIdMappingWorkflowProperties[];
   export interface IdNamespaceInputSource {
     /**
-     * An Glue table ARN for the input source table.
+     * An Glue table Amazon Resource Name (ARN) or a matching workflow ARN for the input source table.
      */
     inputSourceARN: IdNamespaceInputSourceInputSourceARNString;
     /**
@@ -1224,6 +1273,10 @@ declare namespace EntityResolution {
      */
     description?: Description;
     /**
+     * An object which defines any additional configurations required by the ID mapping workflow.
+     */
+    idMappingWorkflowProperties?: IdNamespaceIdMappingWorkflowMetadataList;
+    /**
      * The Amazon Resource Name (ARN) of the ID namespace.
      */
     idNamespaceArn: IdNamespaceArn;
@@ -1232,7 +1285,7 @@ declare namespace EntityResolution {
      */
     idNamespaceName: EntityName;
     /**
-     * The type of ID namespace. There are two types: SOURCE and TARGET. The SOURCE contains configurations for sourceId data that will be processed in an ID mapping workflow.  The TARGET contains a configuration of targetId to which all sourceIds will resolve to.
+     * The type of ID namespace. There are two types: SOURCE and TARGET. The SOURCE contains configurations for sourceId data that will be processed in an ID mapping workflow.  The TARGET contains a configuration of targetId which all sourceIds will resolve to.
      */
     type: IdNamespaceType;
     /**
@@ -1254,7 +1307,7 @@ declare namespace EntityResolution {
      */
     applyNormalization?: Boolean;
     /**
-     * An Glue table ARN for the input source table.
+     * An Glue table Amazon Resource Name (ARN) for the input source table.
      */
     inputSourceARN: InputSourceInputSourceARNString;
     /**
@@ -1497,6 +1550,7 @@ declare namespace EntityResolution {
      */
     tags: TagMap;
   }
+  export type MatchPurpose = "IDENTIFIER_GENERATION"|"INDEXING"|string;
   export type MatchingWorkflowArn = string;
   export type MatchingWorkflowList = MatchingWorkflowSummary[];
   export interface MatchingWorkflowSummary {
@@ -1531,6 +1585,25 @@ declare namespace EntityResolution {
      */
     providerServiceArn: ProviderServiceArn;
   }
+  export interface NamespaceRuleBasedProperties {
+    /**
+     * The comparison type. You can either choose ONE_TO_ONE or MANY_TO_MANY as the attributeMatchingModel.  If you choose MANY_TO_MANY, the system can match attributes across the sub-types of an attribute type. For example, if the value of the Email field of Profile A matches the value of BusinessEmail field of Profile B, the two profiles are matched on the Email attribute type.  If you choose ONE_TO_ONE, the system can only match attributes if the sub-types are an exact match. For example, for the Email attribute type, the system will only consider it a match if the value of the Email field of Profile A matches the value of the Email field of Profile B.
+     */
+    attributeMatchingModel?: AttributeMatchingModel;
+    /**
+     *  The type of matching record that is allowed to be used in an ID mapping workflow.  If the value is set to ONE_SOURCE_TO_ONE_TARGET, only one record in the source is matched to one record in the target.  If the value is set to MANY_SOURCE_TO_ONE_TARGET, all matching records in the source are matched to one record in the target.
+     */
+    recordMatchingModels?: RecordMatchingModelList;
+    /**
+     *  The sets of rules you can use in an ID mapping workflow. The limitations specified for the source and target must be compatible.
+     */
+    ruleDefinitionTypes?: IdMappingWorkflowRuleDefinitionTypeList;
+    /**
+     *  The rules for the ID namespace.
+     */
+    rules?: NamespaceRuleBasedPropertiesRulesList;
+  }
+  export type NamespaceRuleBasedPropertiesRulesList = Rule[];
   export type NextToken = string;
   export interface OutputAttribute {
     /**
@@ -1686,7 +1759,7 @@ declare namespace EntityResolution {
      */
     arn: VeniceGlobalArn;
     /**
-     * The resource-based policy.
+     * The resource-based policy.  If you set the value of the effect parameter in the policy to Deny for the PutPolicy operation, you must also set the value of the effect parameter to Deny for the AddPolicyStatement operation. 
      */
     policy: PolicyDocument;
     /**
@@ -1711,6 +1784,8 @@ declare namespace EntityResolution {
   export type RecordAttributeMap = {[key: string]: RecordAttributeMapValueString};
   export type RecordAttributeMapKeyString = string;
   export type RecordAttributeMapValueString = string;
+  export type RecordMatchingModel = "ONE_SOURCE_TO_ONE_TARGET"|"MANY_SOURCE_TO_ONE_TARGET"|string;
+  export type RecordMatchingModelList = RecordMatchingModel[];
   export type RequiredBucketActionsList = String[];
   export interface ResolutionTechniques {
     /**
@@ -1740,9 +1815,13 @@ declare namespace EntityResolution {
   }
   export interface RuleBasedProperties {
     /**
-     * The comparison type. You can either choose ONE_TO_ONE or MANY_TO_MANY as the AttributeMatchingModel. When choosing MANY_TO_MANY, the system can match attributes across the sub-types of an attribute type. For example, if the value of the Email field of Profile A and the value of BusinessEmail field of Profile B matches, the two profiles are matched on the Email type. When choosing ONE_TO_ONE ,the system can only match if the sub-types are exact matches. For example, only when the value of the Email field of Profile A and the value of the Email field of Profile B matches, the two profiles are matched on the Email type.
+     * The comparison type. You can either choose ONE_TO_ONE or MANY_TO_MANY as the attributeMatchingModel.  If you choose MANY_TO_MANY, the system can match attributes across the sub-types of an attribute type. For example, if the value of the Email field of Profile A and the value of BusinessEmail field of Profile B matches, the two profiles are matched on the Email attribute type.  If you choose ONE_TO_ONE, the system can only match attributes if the sub-types are an exact match. For example, for the Email attribute type, the system will only consider it a match if the value of the Email field of Profile A matches the value of the Email field of Profile B.
      */
     attributeMatchingModel: AttributeMatchingModel;
+    /**
+     *  An indicator of whether to generate IDs and index the data or not. If you choose IDENTIFIER_GENERATION, the process generates IDs and indexes the data. If you choose INDEXING, the process indexes the data without generating IDs.
+     */
+    matchPurpose?: MatchPurpose;
     /**
      * A list of Rule objects, each of which have fields RuleName and MatchingKeys.
      */
@@ -1763,7 +1842,11 @@ declare namespace EntityResolution {
      */
     groupName?: AttributeName;
     /**
-     * A key that allows grouping of multiple input attributes into a unified matching group. For example, consider a scenario where the source table contains various addresses, such as business_address and shipping_address. By assigning a matchKey called address to both attributes, Entity Resolution will match records across these fields to create a consolidated matching group. If no matchKey is specified for a column, it won't be utilized for matching purposes but will still be included in the output table.
+     *  Indicates if the column values are hashed in the schema input. If the value is set to TRUE, the column values are hashed. If the value is set to FALSE, the column values are cleartext.
+     */
+    hashed?: Boolean;
+    /**
+     * A key that allows grouping of multiple input attributes into a unified matching group.  For example, consider a scenario where the source table contains various addresses, such as business_address and shipping_address. By assigning a matchKey called address to both attributes, Entity Resolution will match records across these fields to create a consolidated matching group. If no matchKey is specified for a column, it won't be utilized for matching purposes but will still be included in the output table.
      */
     matchKey?: AttributeName;
     /**
@@ -1880,7 +1963,7 @@ declare namespace EntityResolution {
      */
     description?: Description;
     /**
-     * An object which defines the idMappingType and the providerProperties.
+     * An object which defines the ID mapping technique and any additional configurations.
      */
     idMappingTechniques: IdMappingTechniques;
     /**
@@ -1894,7 +1977,7 @@ declare namespace EntityResolution {
     /**
      * The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to access Amazon Web Services resources on your behalf.
      */
-    roleArn: RoleArn;
+    roleArn?: IdMappingRoleArn;
     /**
      * The name of the workflow.
      */
@@ -1906,7 +1989,7 @@ declare namespace EntityResolution {
      */
     description?: Description;
     /**
-     * An object which defines the idMappingType and the providerProperties.
+     * An object which defines the ID mapping technique and any additional configurations.
      */
     idMappingTechniques: IdMappingTechniques;
     /**
@@ -1920,7 +2003,7 @@ declare namespace EntityResolution {
     /**
      * The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to access Amazon Web Services resources on your behalf.
      */
-    roleArn: RoleArn;
+    roleArn?: IdMappingRoleArn;
     /**
      * The Amazon Resource Name (ARN) of the workflow role. Entity Resolution assumes this role to access Amazon Web Services resources on your behalf.
      */

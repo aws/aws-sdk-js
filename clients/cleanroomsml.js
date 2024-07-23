@@ -9,6 +9,7 @@ Object.defineProperty(apiLoader.services['cleanroomsml'], '2023-09-06', {
   get: function get() {
     var model = require('../apis/cleanroomsml-2023-09-06.min.json');
     model.paginators = require('../apis/cleanroomsml-2023-09-06.paginators.json').pagination;
+    model.waiters = require('../apis/cleanroomsml-2023-09-06.waiters2.json').waiters;
     return model;
   },
   enumerable: true,

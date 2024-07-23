@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1661.0-->
+<!--LATEST=2.1662.0-->
 <!--ENTRYINSERT-->
+
+## 2.1662.0
+* feature: AppSync: Adding support for paginators in AppSync list APIs
+* feature: CleanRooms: This release adds AWS Entity Resolution integration to associate ID namespaces & ID mapping workflow resources as part of ID namespace association and  ID mapping table  in AWS Clean Rooms. It also introduces a new ID_MAPPING_TABLE analysis rule to manage the protection on ID mapping table.
+* feature: CleanRoomsML: Adds SQL query as the source of seed audience for audience generation job.
+* feature: Connect: Added PostContactSummary segment type on ListRealTimeContactAnalysisSegmentsV2 API
+* feature: ConnectContactLens: Added PostContactSummary segment type on ListRealTimeContactAnalysisSegments API
+* feature: DataZone: This release removes the deprecated dataProductItem field from Search API output.
+* feature: EntityResolution: Support First Party ID Mapping
 
 ## 2.1661.0
 * feature: ACMPCA: Fix broken waiters for the acm-pca client.  Waiters broke in version 1.13.144 of the Boto3 SDK.

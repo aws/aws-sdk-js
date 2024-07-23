@@ -3094,66 +3094,6 @@ declare namespace DataZone {
   export type CustomParameterList = CustomParameter[];
   export type DataAssetActivityStatus = "FAILED"|"PUBLISHING_FAILED"|"SUCCEEDED_CREATED"|"SUCCEEDED_UPDATED"|"SKIPPED_ALREADY_IMPORTED"|"SKIPPED_ARCHIVED"|"SKIPPED_NO_ACCESS"|"UNCHANGED"|string;
   export type DataPointIdentifier = string;
-  export type DataProductDescription = string;
-  export type DataProductId = string;
-  export interface DataProductItem {
-    /**
-     * 
-     */
-    domainId?: DomainId;
-    /**
-     * 
-     */
-    itemId?: DataProductId;
-  }
-  export type DataProductItems = DataProductItem[];
-  export type DataProductName = string;
-  export interface DataProductSummary {
-    /**
-     * 
-     */
-    createdAt?: CreatedAt;
-    /**
-     * 
-     */
-    createdBy?: CreatedBy;
-    /**
-     * 
-     */
-    dataProductItems?: DataProductItems;
-    /**
-     * 
-     */
-    description?: DataProductDescription;
-    /**
-     * 
-     */
-    domainId: DomainId;
-    /**
-     * 
-     */
-    glossaryTerms?: GlossaryTerms;
-    /**
-     * 
-     */
-    id: DataProductId;
-    /**
-     * 
-     */
-    name: DataProductName;
-    /**
-     * 
-     */
-    owningProjectId: ProjectId;
-    /**
-     * 
-     */
-    updatedAt?: UpdatedAt;
-    /**
-     * 
-     */
-    updatedBy?: UpdatedBy;
-  }
   export interface DataSourceConfigurationInput {
     /**
      * The configuration of the Amazon Web Services Glue data source.
@@ -7885,10 +7825,6 @@ declare namespace DataZone {
      * The asset item included in the search results.
      */
     assetItem?: AssetItem;
-    /**
-     * The data product item included in the search results.
-     */
-    dataProductItem?: DataProductSummary;
     /**
      * The glossary item included in the search results.
      */

@@ -68,7 +68,7 @@ declare namespace ConnectContactLens {
      */
     ContactId: ContactId;
     /**
-     * The maximimum number of results to return per page.
+     * The maximum number of results to return per page.
      */
     MaxResults?: MaxResults;
     /**
@@ -104,6 +104,23 @@ declare namespace ConnectContactLens {
     EndOffsetMillis: OffsetMillis;
   }
   export type PointsOfInterest = PointOfInterest[];
+  export interface PostContactSummary {
+    /**
+     * The content of the summary.
+     */
+    Content?: PostContactSummaryContent;
+    /**
+     * Whether the summary was successfully COMPLETED or FAILED to be generated.
+     */
+    Status: PostContactSummaryStatus;
+    /**
+     * If the summary failed to be generated, one of the following failure codes occurs:    QUOTA_EXCEEDED: The number of concurrent analytics jobs reached your service quota.    INSUFFICIENT_CONVERSATION_CONTENT: The conversation needs to have at least one turn from both the participants in order to generate the summary.    FAILED_SAFETY_GUIDELINES: The generated summary cannot be provided because it failed to meet system safety guidelines.    INVALID_ANALYSIS_CONFIGURATION: This code occurs when, for example, you're using a language that isn't supported by generative AI-powered post-contact summaries.     INTERNAL_ERROR: Internal system error.  
+     */
+    FailureCode?: PostContactSummaryFailureCode;
+  }
+  export type PostContactSummaryContent = string;
+  export type PostContactSummaryFailureCode = "QUOTA_EXCEEDED"|"INSUFFICIENT_CONVERSATION_CONTENT"|"FAILED_SAFETY_GUIDELINES"|"INVALID_ANALYSIS_CONFIGURATION"|"INTERNAL_ERROR"|string;
+  export type PostContactSummaryStatus = "FAILED"|"COMPLETED"|string;
   export interface RealtimeContactAnalysisSegment {
     /**
      * The analyzed transcript.
@@ -113,6 +130,10 @@ declare namespace ConnectContactLens {
      * The matched category rules.
      */
     Categories?: Categories;
+    /**
+     * Information about the post-contact summary.
+     */
+    PostContactSummary?: PostContactSummary;
   }
   export type RealtimeContactAnalysisSegments = RealtimeContactAnalysisSegment[];
   export type SentimentValue = "POSITIVE"|"NEUTRAL"|"NEGATIVE"|string;
@@ -122,7 +143,7 @@ declare namespace ConnectContactLens {
      */
     Id: TranscriptId;
     /**
-     * The identifier of the participant.
+     * The identifier of the participant. Valid values are CUSTOMER or AGENT.
      */
     ParticipantId: ParticipantId;
     /**
@@ -142,7 +163,7 @@ declare namespace ConnectContactLens {
      */
     EndOffsetMillis: OffsetMillis;
     /**
-     * The sentiment of the detected for this piece of transcript.
+     * The sentiment detected for this piece of transcript.
      */
     Sentiment: SentimentValue;
     /**
