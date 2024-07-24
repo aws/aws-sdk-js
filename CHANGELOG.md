@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1662.0-->
+<!--LATEST=2.1663.0-->
 <!--ENTRYINSERT-->
+
+## 2.1663.0
+* feature: CleanRooms: Three enhancements to the AWS Clean Rooms: Disallowed Output Columns, Flexible Result Receivers, SQL as a Seed
+* feature: IoTSiteWise: Adds support for creating SiteWise Edge gateways that run on a Siemens Industrial Edge Device.
+* feature: MediaPackageV2: This release adds support for Irdeto DRM encryption in DASH manifests.
+* feature: MedicalImaging: CopyImageSet API adds copying selected instances between image sets, and overriding inconsistent metadata with a force parameter. UpdateImageSetMetadata API enables reverting to prior versions; updates to Study, Series, and SOP Instance UIDs; and updates to private elements, with a force parameter.
 
 ## 2.1662.0
 * feature: AppSync: Adding support for paginators in AppSync list APIs

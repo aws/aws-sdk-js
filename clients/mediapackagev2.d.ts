@@ -676,7 +676,7 @@ declare namespace MediaPackageV2 {
   }
   export interface DeleteOriginEndpointResponse {
   }
-  export type DrmSystem = "CLEAR_KEY_AES_128"|"FAIRPLAY"|"PLAYREADY"|"WIDEVINE"|string;
+  export type DrmSystem = "CLEAR_KEY_AES_128"|"FAIRPLAY"|"PLAYREADY"|"WIDEVINE"|"IRDETO"|string;
   export interface Encryption {
     /**
      * A 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting content. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).

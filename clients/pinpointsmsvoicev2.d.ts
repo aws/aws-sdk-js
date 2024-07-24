@@ -36,19 +36,19 @@ declare class PinpointSMSVoiceV2 extends Service {
    */
   createConfigurationSet(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.CreateConfigurationSetResult) => void): Request<PinpointSMSVoiceV2.Types.CreateConfigurationSetResult, AWSError>;
   /**
-   * Creates a new event destination in a configuration set. An event destination is a location where you send message events. The event options are Amazon CloudWatch, Amazon Kinesis Data Firehose, or Amazon SNS. For example, when a message is delivered successfully, you can send information about that event to an event destination, or send notifications to endpoints that are subscribed to an Amazon SNS topic. Each configuration set can contain between 0 and 5 event destinations. Each event destination can contain a reference to a single destination, such as a CloudWatch or Kinesis Data Firehose destination.
+   * Creates a new event destination in a configuration set. An event destination is a location where you send message events. The event options are Amazon CloudWatch, Amazon Data Firehose, or Amazon SNS. For example, when a message is delivered successfully, you can send information about that event to an event destination, or send notifications to endpoints that are subscribed to an Amazon SNS topic. Each configuration set can contain between 0 and 5 event destinations. Each event destination can contain a reference to a single destination, such as a CloudWatch or Firehose destination.
    */
   createEventDestination(params: PinpointSMSVoiceV2.Types.CreateEventDestinationRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.CreateEventDestinationResult) => void): Request<PinpointSMSVoiceV2.Types.CreateEventDestinationResult, AWSError>;
   /**
-   * Creates a new event destination in a configuration set. An event destination is a location where you send message events. The event options are Amazon CloudWatch, Amazon Kinesis Data Firehose, or Amazon SNS. For example, when a message is delivered successfully, you can send information about that event to an event destination, or send notifications to endpoints that are subscribed to an Amazon SNS topic. Each configuration set can contain between 0 and 5 event destinations. Each event destination can contain a reference to a single destination, such as a CloudWatch or Kinesis Data Firehose destination.
+   * Creates a new event destination in a configuration set. An event destination is a location where you send message events. The event options are Amazon CloudWatch, Amazon Data Firehose, or Amazon SNS. For example, when a message is delivered successfully, you can send information about that event to an event destination, or send notifications to endpoints that are subscribed to an Amazon SNS topic. Each configuration set can contain between 0 and 5 event destinations. Each event destination can contain a reference to a single destination, such as a CloudWatch or Firehose destination.
    */
   createEventDestination(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.CreateEventDestinationResult) => void): Request<PinpointSMSVoiceV2.Types.CreateEventDestinationResult, AWSError>;
   /**
-   * Creates a new opt-out list. If the opt-out list name already exists, an error is returned. An opt-out list is a list of phone numbers that are opted out, meaning you can't send SMS or voice messages to them. If end user replies with the keyword "STOP," an entry for the phone number is added to the opt-out list. In addition to STOP, your recipients can use any supported opt-out keyword, such as CANCEL or OPTOUT. For a list of supported opt-out keywords, see  SMS opt out  in the Amazon Pinpoint User Guide.
+   * Creates a new opt-out list. If the opt-out list name already exists, an error is returned. An opt-out list is a list of phone numbers that are opted out, meaning you can't send SMS or voice messages to them. If end user replies with the keyword "STOP," an entry for the phone number is added to the opt-out list. In addition to STOP, your recipients can use any supported opt-out keyword, such as CANCEL or OPTOUT. For a list of supported opt-out keywords, see  SMS opt out  in the AWS End User Messaging SMS User Guide.
    */
   createOptOutList(params: PinpointSMSVoiceV2.Types.CreateOptOutListRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.CreateOptOutListResult) => void): Request<PinpointSMSVoiceV2.Types.CreateOptOutListResult, AWSError>;
   /**
-   * Creates a new opt-out list. If the opt-out list name already exists, an error is returned. An opt-out list is a list of phone numbers that are opted out, meaning you can't send SMS or voice messages to them. If end user replies with the keyword "STOP," an entry for the phone number is added to the opt-out list. In addition to STOP, your recipients can use any supported opt-out keyword, such as CANCEL or OPTOUT. For a list of supported opt-out keywords, see  SMS opt out  in the Amazon Pinpoint User Guide.
+   * Creates a new opt-out list. If the opt-out list name already exists, an error is returned. An opt-out list is a list of phone numbers that are opted out, meaning you can't send SMS or voice messages to them. If end user replies with the keyword "STOP," an entry for the phone number is added to the opt-out list. In addition to STOP, your recipients can use any supported opt-out keyword, such as CANCEL or OPTOUT. For a list of supported opt-out keywords, see  SMS opt out  in the AWS End User Messaging SMS User Guide.
    */
   createOptOutList(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.CreateOptOutListResult) => void): Request<PinpointSMSVoiceV2.Types.CreateOptOutListResult, AWSError>;
   /**
@@ -148,11 +148,11 @@ declare class PinpointSMSVoiceV2 extends Service {
    */
   deleteEventDestination(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DeleteEventDestinationResult) => void): Request<PinpointSMSVoiceV2.Types.DeleteEventDestinationResult, AWSError>;
   /**
-   * Deletes an existing keyword from an origination phone number or pool. A keyword is a word that you can search for on a particular phone number or pool. It is also a specific word or phrase that an end user can send to your number to elicit a response, such as an informational message or a special offer. When your number receives a message that begins with a keyword, Amazon Pinpoint responds with a customizable message. Keywords "HELP" and "STOP" can't be deleted or modified.
+   * Deletes an existing keyword from an origination phone number or pool. A keyword is a word that you can search for on a particular phone number or pool. It is also a specific word or phrase that an end user can send to your number to elicit a response, such as an informational message or a special offer. When your number receives a message that begins with a keyword, AWS End User Messaging SMS and Voice responds with a customizable message. Keywords "HELP" and "STOP" can't be deleted or modified.
    */
   deleteKeyword(params: PinpointSMSVoiceV2.Types.DeleteKeywordRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DeleteKeywordResult) => void): Request<PinpointSMSVoiceV2.Types.DeleteKeywordResult, AWSError>;
   /**
-   * Deletes an existing keyword from an origination phone number or pool. A keyword is a word that you can search for on a particular phone number or pool. It is also a specific word or phrase that an end user can send to your number to elicit a response, such as an informational message or a special offer. When your number receives a message that begins with a keyword, Amazon Pinpoint responds with a customizable message. Keywords "HELP" and "STOP" can't be deleted or modified.
+   * Deletes an existing keyword from an origination phone number or pool. A keyword is a word that you can search for on a particular phone number or pool. It is also a specific word or phrase that an end user can send to your number to elicit a response, such as an informational message or a special offer. When your number receives a message that begins with a keyword, AWS End User Messaging SMS and Voice responds with a customizable message. Keywords "HELP" and "STOP" can't be deleted or modified.
    */
   deleteKeyword(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DeleteKeywordResult) => void): Request<PinpointSMSVoiceV2.Types.DeleteKeywordResult, AWSError>;
   /**
@@ -220,11 +220,11 @@ declare class PinpointSMSVoiceV2 extends Service {
    */
   deleteRegistrationFieldValue(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DeleteRegistrationFieldValueResult) => void): Request<PinpointSMSVoiceV2.Types.DeleteRegistrationFieldValueResult, AWSError>;
   /**
-   * Deletes an account-level monthly spending limit override for sending text messages. Deleting a spend limit override will set the EnforcedLimit to equal the MaxLimit, which is controlled by Amazon Web Services. For more information on spend limits (quotas) see Amazon Pinpoint quotas  in the Amazon Pinpoint Developer Guide.
+   * Deletes an account-level monthly spending limit override for sending text messages. Deleting a spend limit override will set the EnforcedLimit to equal the MaxLimit, which is controlled by Amazon Web Services. For more information on spend limits (quotas) see Quotas  in the AWS End User Messaging SMS User Guide.
    */
   deleteTextMessageSpendLimitOverride(params: PinpointSMSVoiceV2.Types.DeleteTextMessageSpendLimitOverrideRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DeleteTextMessageSpendLimitOverrideResult) => void): Request<PinpointSMSVoiceV2.Types.DeleteTextMessageSpendLimitOverrideResult, AWSError>;
   /**
-   * Deletes an account-level monthly spending limit override for sending text messages. Deleting a spend limit override will set the EnforcedLimit to equal the MaxLimit, which is controlled by Amazon Web Services. For more information on spend limits (quotas) see Amazon Pinpoint quotas  in the Amazon Pinpoint Developer Guide.
+   * Deletes an account-level monthly spending limit override for sending text messages. Deleting a spend limit override will set the EnforcedLimit to equal the MaxLimit, which is controlled by Amazon Web Services. For more information on spend limits (quotas) see Quotas  in the AWS End User Messaging SMS User Guide.
    */
   deleteTextMessageSpendLimitOverride(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DeleteTextMessageSpendLimitOverrideResult) => void): Request<PinpointSMSVoiceV2.Types.DeleteTextMessageSpendLimitOverrideResult, AWSError>;
   /**
@@ -236,27 +236,27 @@ declare class PinpointSMSVoiceV2 extends Service {
    */
   deleteVerifiedDestinationNumber(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DeleteVerifiedDestinationNumberResult) => void): Request<PinpointSMSVoiceV2.Types.DeleteVerifiedDestinationNumberResult, AWSError>;
   /**
-   * Deletes an account level monthly spend limit override for sending voice messages. Deleting a spend limit override sets the EnforcedLimit equal to the MaxLimit, which is controlled by Amazon Web Services. For more information on spending limits (quotas) see Amazon Pinpoint quotas in the Amazon Pinpoint Developer Guide.
+   * Deletes an account level monthly spend limit override for sending voice messages. Deleting a spend limit override sets the EnforcedLimit equal to the MaxLimit, which is controlled by Amazon Web Services. For more information on spending limits (quotas) see Quotas  in the AWS End User Messaging SMS User Guide.
    */
   deleteVoiceMessageSpendLimitOverride(params: PinpointSMSVoiceV2.Types.DeleteVoiceMessageSpendLimitOverrideRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DeleteVoiceMessageSpendLimitOverrideResult) => void): Request<PinpointSMSVoiceV2.Types.DeleteVoiceMessageSpendLimitOverrideResult, AWSError>;
   /**
-   * Deletes an account level monthly spend limit override for sending voice messages. Deleting a spend limit override sets the EnforcedLimit equal to the MaxLimit, which is controlled by Amazon Web Services. For more information on spending limits (quotas) see Amazon Pinpoint quotas in the Amazon Pinpoint Developer Guide.
+   * Deletes an account level monthly spend limit override for sending voice messages. Deleting a spend limit override sets the EnforcedLimit equal to the MaxLimit, which is controlled by Amazon Web Services. For more information on spending limits (quotas) see Quotas  in the AWS End User Messaging SMS User Guide.
    */
   deleteVoiceMessageSpendLimitOverride(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DeleteVoiceMessageSpendLimitOverrideResult) => void): Request<PinpointSMSVoiceV2.Types.DeleteVoiceMessageSpendLimitOverrideResult, AWSError>;
   /**
-   * Describes attributes of your Amazon Web Services account. The supported account attributes include account tier, which indicates whether your account is in the sandbox or production environment. When you're ready to move your account out of the sandbox, create an Amazon Web Services Support case for a service limit increase request. New Amazon Pinpoint accounts are placed into an SMS or voice sandbox. The sandbox protects both Amazon Web Services end recipients and SMS or voice recipients from fraud and abuse. 
+   * Describes attributes of your Amazon Web Services account. The supported account attributes include account tier, which indicates whether your account is in the sandbox or production environment. When you're ready to move your account out of the sandbox, create an Amazon Web Services Support case for a service limit increase request. New accounts are placed into an SMS or voice sandbox. The sandbox protects both Amazon Web Services end recipients and SMS or voice recipients from fraud and abuse. 
    */
   describeAccountAttributes(params: PinpointSMSVoiceV2.Types.DescribeAccountAttributesRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DescribeAccountAttributesResult) => void): Request<PinpointSMSVoiceV2.Types.DescribeAccountAttributesResult, AWSError>;
   /**
-   * Describes attributes of your Amazon Web Services account. The supported account attributes include account tier, which indicates whether your account is in the sandbox or production environment. When you're ready to move your account out of the sandbox, create an Amazon Web Services Support case for a service limit increase request. New Amazon Pinpoint accounts are placed into an SMS or voice sandbox. The sandbox protects both Amazon Web Services end recipients and SMS or voice recipients from fraud and abuse. 
+   * Describes attributes of your Amazon Web Services account. The supported account attributes include account tier, which indicates whether your account is in the sandbox or production environment. When you're ready to move your account out of the sandbox, create an Amazon Web Services Support case for a service limit increase request. New accounts are placed into an SMS or voice sandbox. The sandbox protects both Amazon Web Services end recipients and SMS or voice recipients from fraud and abuse. 
    */
   describeAccountAttributes(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DescribeAccountAttributesResult) => void): Request<PinpointSMSVoiceV2.Types.DescribeAccountAttributesResult, AWSError>;
   /**
-   * Describes the current Amazon Pinpoint SMS Voice V2 resource quotas for your account. The description for a quota includes the quota name, current usage toward that quota, and the quota's maximum value. When you establish an Amazon Web Services account, the account has initial quotas on the maximum number of configuration sets, opt-out lists, phone numbers, and pools that you can create in a given Region. For more information see  Amazon Pinpoint quotas  in the Amazon Pinpoint Developer Guide.
+   * Describes the current AWS End User Messaging SMS and Voice SMS Voice V2 resource quotas for your account. The description for a quota includes the quota name, current usage toward that quota, and the quota's maximum value. When you establish an Amazon Web Services account, the account has initial quotas on the maximum number of configuration sets, opt-out lists, phone numbers, and pools that you can create in a given Region. For more information see Quotas  in the AWS End User Messaging SMS User Guide.
    */
   describeAccountLimits(params: PinpointSMSVoiceV2.Types.DescribeAccountLimitsRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DescribeAccountLimitsResult) => void): Request<PinpointSMSVoiceV2.Types.DescribeAccountLimitsResult, AWSError>;
   /**
-   * Describes the current Amazon Pinpoint SMS Voice V2 resource quotas for your account. The description for a quota includes the quota name, current usage toward that quota, and the quota's maximum value. When you establish an Amazon Web Services account, the account has initial quotas on the maximum number of configuration sets, opt-out lists, phone numbers, and pools that you can create in a given Region. For more information see  Amazon Pinpoint quotas  in the Amazon Pinpoint Developer Guide.
+   * Describes the current AWS End User Messaging SMS and Voice SMS Voice V2 resource quotas for your account. The description for a quota includes the quota name, current usage toward that quota, and the quota's maximum value. When you establish an Amazon Web Services account, the account has initial quotas on the maximum number of configuration sets, opt-out lists, phone numbers, and pools that you can create in a given Region. For more information see Quotas  in the AWS End User Messaging SMS User Guide.
    */
   describeAccountLimits(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DescribeAccountLimitsResult) => void): Request<PinpointSMSVoiceV2.Types.DescribeAccountLimitsResult, AWSError>;
   /**
@@ -268,11 +268,11 @@ declare class PinpointSMSVoiceV2 extends Service {
    */
   describeConfigurationSets(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DescribeConfigurationSetsResult) => void): Request<PinpointSMSVoiceV2.Types.DescribeConfigurationSetsResult, AWSError>;
   /**
-   * Describes the specified keywords or all keywords on your origination phone number or pool. A keyword is a word that you can search for on a particular phone number or pool. It is also a specific word or phrase that an end user can send to your number to elicit a response, such as an informational message or a special offer. When your number receives a message that begins with a keyword, Amazon Pinpoint responds with a customizable message. If you specify a keyword that isn't valid, an error is returned.
+   * Describes the specified keywords or all keywords on your origination phone number or pool. A keyword is a word that you can search for on a particular phone number or pool. It is also a specific word or phrase that an end user can send to your number to elicit a response, such as an informational message or a special offer. When your number receives a message that begins with a keyword, AWS End User Messaging SMS and Voice responds with a customizable message. If you specify a keyword that isn't valid, an error is returned.
    */
   describeKeywords(params: PinpointSMSVoiceV2.Types.DescribeKeywordsRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DescribeKeywordsResult) => void): Request<PinpointSMSVoiceV2.Types.DescribeKeywordsResult, AWSError>;
   /**
-   * Describes the specified keywords or all keywords on your origination phone number or pool. A keyword is a word that you can search for on a particular phone number or pool. It is also a specific word or phrase that an end user can send to your number to elicit a response, such as an informational message or a special offer. When your number receives a message that begins with a keyword, Amazon Pinpoint responds with a customizable message. If you specify a keyword that isn't valid, an error is returned.
+   * Describes the specified keywords or all keywords on your origination phone number or pool. A keyword is a word that you can search for on a particular phone number or pool. It is also a specific word or phrase that an end user can send to your number to elicit a response, such as an informational message or a special offer. When your number receives a message that begins with a keyword, AWS End User Messaging SMS and Voice responds with a customizable message. If you specify a keyword that isn't valid, an error is returned.
    */
   describeKeywords(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DescribeKeywordsResult) => void): Request<PinpointSMSVoiceV2.Types.DescribeKeywordsResult, AWSError>;
   /**
@@ -380,11 +380,11 @@ declare class PinpointSMSVoiceV2 extends Service {
    */
   describeSenderIds(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DescribeSenderIdsResult) => void): Request<PinpointSMSVoiceV2.Types.DescribeSenderIdsResult, AWSError>;
   /**
-   * Describes the current Amazon Pinpoint monthly spend limits for sending voice and text messages. When you establish an Amazon Web Services account, the account has initial monthly spend limit in a given Region. For more information on increasing your monthly spend limit, see  Requesting increases to your monthly SMS spending quota for Amazon Pinpoint  in the Amazon Pinpoint User Guide.
+   * Describes the current monthly spend limits for sending voice and text messages. When you establish an Amazon Web Services account, the account has initial monthly spend limit in a given Region. For more information on increasing your monthly spend limit, see  Requesting increases to your monthly SMS, MMS, or Voice spending quota  in the AWS End User Messaging SMS User Guide.
    */
   describeSpendLimits(params: PinpointSMSVoiceV2.Types.DescribeSpendLimitsRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DescribeSpendLimitsResult) => void): Request<PinpointSMSVoiceV2.Types.DescribeSpendLimitsResult, AWSError>;
   /**
-   * Describes the current Amazon Pinpoint monthly spend limits for sending voice and text messages. When you establish an Amazon Web Services account, the account has initial monthly spend limit in a given Region. For more information on increasing your monthly spend limit, see  Requesting increases to your monthly SMS spending quota for Amazon Pinpoint  in the Amazon Pinpoint User Guide.
+   * Describes the current monthly spend limits for sending voice and text messages. When you establish an Amazon Web Services account, the account has initial monthly spend limit in a given Region. For more information on increasing your monthly spend limit, see  Requesting increases to your monthly SMS, MMS, or Voice spending quota  in the AWS End User Messaging SMS User Guide.
    */
   describeSpendLimits(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.DescribeSpendLimitsResult) => void): Request<PinpointSMSVoiceV2.Types.DescribeSpendLimitsResult, AWSError>;
   /**
@@ -452,11 +452,11 @@ declare class PinpointSMSVoiceV2 extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.ListTagsForResourceResult) => void): Request<PinpointSMSVoiceV2.Types.ListTagsForResourceResult, AWSError>;
   /**
-   * Creates or updates a keyword configuration on an origination phone number or pool.  A keyword is a word that you can search for on a particular phone number or pool. It is also a specific word or phrase that an end user can send to your number to elicit a response, such as an informational message or a special offer. When your number receives a message that begins with a keyword, Amazon Pinpoint responds with a customizable message. If you specify a keyword that isn't valid, an error is returned.
+   * Creates or updates a keyword configuration on an origination phone number or pool.  A keyword is a word that you can search for on a particular phone number or pool. It is also a specific word or phrase that an end user can send to your number to elicit a response, such as an informational message or a special offer. When your number receives a message that begins with a keyword, AWS End User Messaging SMS and Voice responds with a customizable message. If you specify a keyword that isn't valid, an error is returned.
    */
   putKeyword(params: PinpointSMSVoiceV2.Types.PutKeywordRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.PutKeywordResult) => void): Request<PinpointSMSVoiceV2.Types.PutKeywordResult, AWSError>;
   /**
-   * Creates or updates a keyword configuration on an origination phone number or pool.  A keyword is a word that you can search for on a particular phone number or pool. It is also a specific word or phrase that an end user can send to your number to elicit a response, such as an informational message or a special offer. When your number receives a message that begins with a keyword, Amazon Pinpoint responds with a customizable message. If you specify a keyword that isn't valid, an error is returned.
+   * Creates or updates a keyword configuration on an origination phone number or pool.  A keyword is a word that you can search for on a particular phone number or pool. It is also a specific word or phrase that an end user can send to your number to elicit a response, such as an informational message or a special offer. When your number receives a message that begins with a keyword, AWS End User Messaging SMS and Voice responds with a customizable message. If you specify a keyword that isn't valid, an error is returned.
    */
   putKeyword(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.PutKeywordResult) => void): Request<PinpointSMSVoiceV2.Types.PutKeywordResult, AWSError>;
   /**
@@ -492,11 +492,11 @@ declare class PinpointSMSVoiceV2 extends Service {
    */
   releaseSenderId(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.ReleaseSenderIdResult) => void): Request<PinpointSMSVoiceV2.Types.ReleaseSenderIdResult, AWSError>;
   /**
-   * Request an origination phone number for use in your account. For more information on phone number request see  Requesting a number  in the Amazon Pinpoint User Guide.
+   * Request an origination phone number for use in your account. For more information on phone number request see Request a phone number in the AWS End User Messaging SMS User Guide.
    */
   requestPhoneNumber(params: PinpointSMSVoiceV2.Types.RequestPhoneNumberRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.RequestPhoneNumberResult) => void): Request<PinpointSMSVoiceV2.Types.RequestPhoneNumberResult, AWSError>;
   /**
-   * Request an origination phone number for use in your account. For more information on phone number request see  Requesting a number  in the Amazon Pinpoint User Guide.
+   * Request an origination phone number for use in your account. For more information on phone number request see Request a phone number in the AWS End User Messaging SMS User Guide.
    */
   requestPhoneNumber(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.RequestPhoneNumberResult) => void): Request<PinpointSMSVoiceV2.Types.RequestPhoneNumberResult, AWSError>;
   /**
@@ -524,19 +524,19 @@ declare class PinpointSMSVoiceV2 extends Service {
    */
   sendMediaMessage(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.SendMediaMessageResult) => void): Request<PinpointSMSVoiceV2.Types.SendMediaMessageResult, AWSError>;
   /**
-   * Creates a new text message and sends it to a recipient's phone number. SMS throughput limits are measured in Message Parts per Second (MPS). Your MPS limit depends on the destination country of your messages, as well as the type of phone number (origination number) that you use to send the message. For more information, see Message Parts per Second (MPS) limits in the Amazon Pinpoint User Guide.
+   * Creates a new text message and sends it to a recipient's phone number. SendTextMessage only sends an SMS message to one recipient each time it is invoked. SMS throughput limits are measured in Message Parts per Second (MPS). Your MPS limit depends on the destination country of your messages, as well as the type of phone number (origination number) that you use to send the message. For more information about MPS, see Message Parts per Second (MPS) limits in the AWS End User Messaging SMS User Guide.
    */
   sendTextMessage(params: PinpointSMSVoiceV2.Types.SendTextMessageRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.SendTextMessageResult) => void): Request<PinpointSMSVoiceV2.Types.SendTextMessageResult, AWSError>;
   /**
-   * Creates a new text message and sends it to a recipient's phone number. SMS throughput limits are measured in Message Parts per Second (MPS). Your MPS limit depends on the destination country of your messages, as well as the type of phone number (origination number) that you use to send the message. For more information, see Message Parts per Second (MPS) limits in the Amazon Pinpoint User Guide.
+   * Creates a new text message and sends it to a recipient's phone number. SendTextMessage only sends an SMS message to one recipient each time it is invoked. SMS throughput limits are measured in Message Parts per Second (MPS). Your MPS limit depends on the destination country of your messages, as well as the type of phone number (origination number) that you use to send the message. For more information about MPS, see Message Parts per Second (MPS) limits in the AWS End User Messaging SMS User Guide.
    */
   sendTextMessage(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.SendTextMessageResult) => void): Request<PinpointSMSVoiceV2.Types.SendTextMessageResult, AWSError>;
   /**
-   * Allows you to send a request that sends a voice message through Amazon Pinpoint. This operation uses Amazon Polly to convert a text script into a voice message.
+   * Allows you to send a request that sends a voice message. This operation uses Amazon Polly to convert a text script into a voice message.
    */
   sendVoiceMessage(params: PinpointSMSVoiceV2.Types.SendVoiceMessageRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.SendVoiceMessageResult) => void): Request<PinpointSMSVoiceV2.Types.SendVoiceMessageResult, AWSError>;
   /**
-   * Allows you to send a request that sends a voice message through Amazon Pinpoint. This operation uses Amazon Polly to convert a text script into a voice message.
+   * Allows you to send a request that sends a voice message. This operation uses Amazon Polly to convert a text script into a voice message.
    */
   sendVoiceMessage(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.SendVoiceMessageResult) => void): Request<PinpointSMSVoiceV2.Types.SendVoiceMessageResult, AWSError>;
   /**
@@ -596,27 +596,27 @@ declare class PinpointSMSVoiceV2 extends Service {
    */
   submitRegistrationVersion(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.SubmitRegistrationVersionResult) => void): Request<PinpointSMSVoiceV2.Types.SubmitRegistrationVersionResult, AWSError>;
   /**
-   * Adds or overwrites only the specified tags for the specified Amazon Pinpoint SMS Voice, version 2 resource. When you specify an existing tag key, the value is overwritten with the new value. Each resource can have a maximum of 50 tags. Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see  Tagging Amazon Pinpoint resources in the Amazon Pinpoint Developer Guide.
+   * Adds or overwrites only the specified tags for the specified resource. When you specify an existing tag key, the value is overwritten with the new value. Each resource can have a maximum of 50 tags. Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see Tags  in the AWS End User Messaging SMS User Guide.
    */
   tagResource(params: PinpointSMSVoiceV2.Types.TagResourceRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.TagResourceResult) => void): Request<PinpointSMSVoiceV2.Types.TagResourceResult, AWSError>;
   /**
-   * Adds or overwrites only the specified tags for the specified Amazon Pinpoint SMS Voice, version 2 resource. When you specify an existing tag key, the value is overwritten with the new value. Each resource can have a maximum of 50 tags. Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see  Tagging Amazon Pinpoint resources in the Amazon Pinpoint Developer Guide.
+   * Adds or overwrites only the specified tags for the specified resource. When you specify an existing tag key, the value is overwritten with the new value. Each resource can have a maximum of 50 tags. Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see Tags  in the AWS End User Messaging SMS User Guide.
    */
   tagResource(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.TagResourceResult) => void): Request<PinpointSMSVoiceV2.Types.TagResourceResult, AWSError>;
   /**
-   * Removes the association of the specified tags from an Amazon Pinpoint SMS Voice V2 resource. For more information on tags see  Tagging Amazon Pinpoint resources in the Amazon Pinpoint Developer Guide. 
+   * Removes the association of the specified tags from a resource. For more information on tags see Tags  in the AWS End User Messaging SMS User Guide.
    */
   untagResource(params: PinpointSMSVoiceV2.Types.UntagResourceRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.UntagResourceResult) => void): Request<PinpointSMSVoiceV2.Types.UntagResourceResult, AWSError>;
   /**
-   * Removes the association of the specified tags from an Amazon Pinpoint SMS Voice V2 resource. For more information on tags see  Tagging Amazon Pinpoint resources in the Amazon Pinpoint Developer Guide. 
+   * Removes the association of the specified tags from a resource. For more information on tags see Tags  in the AWS End User Messaging SMS User Guide.
    */
   untagResource(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.UntagResourceResult) => void): Request<PinpointSMSVoiceV2.Types.UntagResourceResult, AWSError>;
   /**
-   * Updates an existing event destination in a configuration set. You can update the IAM role ARN for CloudWatch Logs and Kinesis Data Firehose. You can also enable or disable the event destination. You may want to update an event destination to change its matching event types or updating the destination resource ARN. You can't change an event destination's type between CloudWatch Logs, Kinesis Data Firehose, and Amazon SNS.
+   * Updates an existing event destination in a configuration set. You can update the IAM role ARN for CloudWatch Logs and Firehose. You can also enable or disable the event destination. You may want to update an event destination to change its matching event types or updating the destination resource ARN. You can't change an event destination's type between CloudWatch Logs, Firehose, and Amazon SNS.
    */
   updateEventDestination(params: PinpointSMSVoiceV2.Types.UpdateEventDestinationRequest, callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.UpdateEventDestinationResult) => void): Request<PinpointSMSVoiceV2.Types.UpdateEventDestinationResult, AWSError>;
   /**
-   * Updates an existing event destination in a configuration set. You can update the IAM role ARN for CloudWatch Logs and Kinesis Data Firehose. You can also enable or disable the event destination. You may want to update an event destination to change its matching event types or updating the destination resource ARN. You can't change an event destination's type between CloudWatch Logs, Kinesis Data Firehose, and Amazon SNS.
+   * Updates an existing event destination in a configuration set. You can update the IAM role ARN for CloudWatch Logs and Firehose. You can also enable or disable the event destination. You may want to update an event destination to change its matching event types or updating the destination resource ARN. You can't change an event destination's type between CloudWatch Logs, Firehose, and Amazon SNS.
    */
   updateEventDestination(callback?: (err: AWSError, data: PinpointSMSVoiceV2.Types.UpdateEventDestinationResult) => void): Request<PinpointSMSVoiceV2.Types.UpdateEventDestinationResult, AWSError>;
   /**
@@ -873,7 +873,7 @@ declare namespace PinpointSMSVoiceV2 {
      */
     EventDestinationName: EventDestinationName;
     /**
-     * An array of event types that determine which events to log. If "ALL" is used, then Amazon Pinpoint logs every event type.  The TEXT_SENT event type is not supported. 
+     * An array of event types that determine which events to log. If "ALL" is used, then AWS End User Messaging SMS and Voice logs every event type.  The TEXT_SENT event type is not supported. 
      */
     MatchingEventTypes: EventTypeList;
     /**
@@ -881,7 +881,7 @@ declare namespace PinpointSMSVoiceV2 {
      */
     CloudWatchLogsDestination?: CloudWatchLogsDestination;
     /**
-     * An object that contains information about an event destination for logging to Amazon Kinesis Data Firehose.
+     * An object that contains information about an event destination for logging to Amazon Data Firehose.
      */
     KinesisFirehoseDestination?: KinesisFirehoseDestination;
     /**
@@ -941,7 +941,7 @@ declare namespace PinpointSMSVoiceV2 {
   }
   export interface CreatePoolRequest {
     /**
-     * The origination identity to use such as a PhoneNumberId, PhoneNumberArn, SenderId or SenderIdArn. You can use DescribePhoneNumbers to find the values for PhoneNumberId and PhoneNumberArn while DescribeSenderIds can be used to get the values for SenderId and SenderIdArn.
+     * The origination identity to use such as a PhoneNumberId, PhoneNumberArn, SenderId or SenderIdArn. You can use DescribePhoneNumbers to find the values for PhoneNumberId and PhoneNumberArn while DescribeSenderIds can be used to get the values for SenderId and SenderIdArn. After the pool is created you can add more origination identities to the pool by using AssociateOriginationIdentity.
      */
     OriginationIdentity: PhoneOrSenderIdOrArn;
     /**
@@ -949,7 +949,7 @@ declare namespace PinpointSMSVoiceV2 {
      */
     IsoCountryCode: IsoCountryCode;
     /**
-     * The type of message. Valid values are TRANSACTIONAL for messages that are critical or time-sensitive and PROMOTIONAL for messages that aren't critical or time-sensitive.
+     * The type of message. Valid values are TRANSACTIONAL for messages that are critical or time-sensitive and PROMOTIONAL for messages that aren't critical or time-sensitive. After the pool is created the MessageType can't be changed.
      */
     MessageType: MessageType;
     /**
@@ -995,7 +995,7 @@ declare namespace PinpointSMSVoiceV2 {
      */
     TwoWayChannelRole?: IamRoleArn;
     /**
-     * By default this is set to false. When an end recipient sends a message that begins with HELP or STOP to one of your dedicated numbers, Amazon Pinpoint automatically replies with a customizable message and adds the end recipient to the OptOutList. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.
+     * By default this is set to false. When an end recipient sends a message that begins with HELP or STOP to one of your dedicated numbers, AWS End User Messaging SMS and Voice automatically replies with a customizable message and adds the end recipient to the OptOutList. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.
      */
     SelfManagedOptOutsEnabled?: PrimitiveBoolean;
     /**
@@ -1003,7 +1003,7 @@ declare namespace PinpointSMSVoiceV2 {
      */
     OptOutListName?: OptOutListName;
     /**
-     * Indicates whether shared routes are enabled for the pool.
+     * Indicates whether shared routes are enabled for the pool. Set to false and only origination identities in this pool are used to send messages. 
      */
     SharedRoutesEnabled?: PrimitiveBoolean;
     /**
@@ -1495,7 +1495,7 @@ declare namespace PinpointSMSVoiceV2 {
      */
     TwoWayChannelRole?: IamRoleArn;
     /**
-     * By default this is set to false. When an end recipient sends a message that begins with HELP or STOP to one of your dedicated numbers, Amazon Pinpoint automatically replies with a customizable message and adds the end recipient to the OptOutList. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.
+     * By default this is set to false. When an end recipient sends a message that begins with HELP or STOP to one of your dedicated numbers, AWS End User Messaging SMS and Voice automatically replies with a customizable message and adds the end recipient to the OptOutList. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.
      */
     SelfManagedOptOutsEnabled?: PrimitiveBoolean;
     /**
@@ -2386,7 +2386,7 @@ declare namespace PinpointSMSVoiceV2 {
      */
     CloudWatchLogsDestination?: CloudWatchLogsDestination;
     /**
-     * An object that contains information about an event destination for logging to Amazon Kinesis Data Firehose.
+     * An object that contains information about an event destination for logging to Amazon Data Firehose.
      */
     KinesisFirehoseDestination?: KinesisFirehoseDestination;
     /**
@@ -2428,7 +2428,7 @@ declare namespace PinpointSMSVoiceV2 {
      */
     NumberCapability: NumberCapability;
     /**
-     * A map of ProtectConfigurationCountryRuleSetInformation objects that contain the details for the requested NumberCapability. The Key is the two-letter ISO country code. For a list of supported ISO country codes, see Supported countries and regions (SMS channel) in the Amazon Pinpoint SMS user guide.
+     * A map of ProtectConfigurationCountryRuleSetInformation objects that contain the details for the requested NumberCapability. The Key is the two-letter ISO country code. For a list of supported ISO country codes, see Supported countries and regions (SMS channel) in the AWS End User Messaging SMS User Guide.
      */
     CountryRuleSet: ProtectConfigurationCountryRuleSet;
   }
@@ -2468,7 +2468,7 @@ declare namespace PinpointSMSVoiceV2 {
   export type KeywordMessage = string;
   export interface KinesisFirehoseDestination {
     /**
-     * The ARN of an Identity and Access Management role that is able to write event data to an Amazon Kinesis Data Firehose destination.
+     * The ARN of an Identity and Access Management role that is able to write event data to an Amazon Data Firehose destination.
      */
     IamRoleArn: IamRoleArn;
     /**
@@ -2718,7 +2718,7 @@ declare namespace PinpointSMSVoiceV2 {
      */
     TwoWayChannelRole?: IamRoleArn;
     /**
-     * When set to false an end recipient sends a message that begins with HELP or STOP to one of your dedicated numbers, Amazon Pinpoint automatically replies with a customizable message and adds the end recipient to the OptOutList. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out request. For more information see Self-managed opt-outs 
+     * When set to false an end recipient sends a message that begins with HELP or STOP to one of your dedicated numbers, AWS End User Messaging SMS and Voice automatically replies with a customizable message and adds the end recipient to the OptOutList. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out request. For more information see Self-managed opt-outs 
      */
     SelfManagedOptOutsEnabled: PrimitiveBoolean;
     /**
@@ -2789,7 +2789,7 @@ declare namespace PinpointSMSVoiceV2 {
      */
     TwoWayChannelRole?: IamRoleArn;
     /**
-     * When set to false, an end recipient sends a message that begins with HELP or STOP to one of your dedicated numbers, Amazon Pinpoint automatically replies with a customizable message and adds the end recipient to the OptOutList. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests. For more information see Self-managed opt-outs 
+     * When set to false, an end recipient sends a message that begins with HELP or STOP to one of your dedicated numbers, AWS End User Messaging SMS and Voice automatically replies with a customizable message and adds the end recipient to the OptOutList. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests. For more information see Self-managed opt-outs 
      */
     SelfManagedOptOutsEnabled: PrimitiveBoolean;
     /**
@@ -2797,7 +2797,7 @@ declare namespace PinpointSMSVoiceV2 {
      */
     OptOutListName: OptOutListName;
     /**
-     * Allows you to enable shared routes on your pool. By default, this is set to False. If you set this value to True, your messages are sent using phone numbers or sender IDs (depending on the country) that are shared with other Amazon Pinpoint users. In some countries, such as the United States, senders aren't allowed to use shared routes and must use a dedicated phone number or short code.
+     * Allows you to enable shared routes on your pool. By default, this is set to False. If you set this value to True, your messages are sent using phone numbers or sender IDs (depending on the country) that are shared with other users. In some countries, such as the United States, senders aren't allowed to use shared routes and must use a dedicated phone number or short code.
      */
     SharedRoutesEnabled: PrimitiveBoolean;
     /**
@@ -3443,7 +3443,7 @@ declare namespace PinpointSMSVoiceV2 {
      */
     TwoWayChannelRole?: IamRoleArn;
     /**
-     * By default this is set to false. When an end recipient sends a message that begins with HELP or STOP to one of your dedicated numbers, Amazon Pinpoint automatically replies with a customizable message and adds the end recipient to the OptOutList. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.
+     * By default this is set to false. When an end recipient sends a message that begins with HELP or STOP to one of your dedicated numbers, AWS End User Messaging SMS and Voice automatically replies with a customizable message and adds the end recipient to the OptOutList. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.
      */
     SelfManagedOptOutsEnabled?: PrimitiveBoolean;
     /**
@@ -3591,7 +3591,7 @@ declare namespace PinpointSMSVoiceV2 {
      */
     TwoWayChannelRole?: IamRoleArn;
     /**
-     * By default this is set to false. When an end recipient sends a message that begins with HELP or STOP to one of your dedicated numbers, Amazon Pinpoint automatically replies with a customizable message and adds the end recipient to the OptOutList. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.
+     * By default this is set to false. When an end recipient sends a message that begins with HELP or STOP to one of your dedicated numbers, AWS End User Messaging SMS and Voice automatically replies with a customizable message and adds the end recipient to the OptOutList. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.
      */
     SelfManagedOptOutsEnabled?: PrimitiveBoolean;
     /**
@@ -3824,11 +3824,11 @@ declare namespace PinpointSMSVoiceV2 {
      */
     ConfigurationSetName?: ConfigurationSetNameOrArn;
     /**
-     * The maximum amount that you want to spend, in US dollars, per each text message part. A text message can contain multiple parts.
+     * The maximum amount that you want to spend, in US dollars, per each text message. If the calculated amount to send the text message is greater than MaxPrice, the message is not sent and an error is returned.
      */
     MaxPrice?: MaxPrice;
     /**
-     * How long the text message is valid for. By default this is 72 hours.
+     * How long the text message is valid for, in seconds. By default this is 72 hours. If the messages isn't handed off before the TTL expires we stop attempting to hand off the message and return TTL_EXPIRED event.
      */
     TimeToLive?: TimeToLive;
     /**
@@ -3836,11 +3836,11 @@ declare namespace PinpointSMSVoiceV2 {
      */
     Context?: ContextMap;
     /**
-     * This field is used for any country-specific registration requirements. Currently, this setting is only used when you send messages to recipients in India using a sender ID. For more information see Special requirements for sending SMS messages to recipients in India. 
+     * This field is used for any country-specific registration requirements. Currently, this setting is only used when you send messages to recipients in India using a sender ID. For more information see Special requirements for sending SMS messages to recipients in India.     IN_ENTITY_ID The entity ID or Principal Entity (PE) ID that you received after completing the sender ID registration process.    IN_TEMPLATE_ID The template ID that you received after completing the sender ID registration process.  Make sure that the Template ID that you specify matches your message template exactly. If your message doesn't match the template that you provided during the registration process, the mobile carriers might reject your message.   
      */
     DestinationCountryParameters?: DestinationCountryParameters;
     /**
-     * When set to true, the message is checked and validated, but isn't sent to the end recipient.
+     * When set to true, the message is checked and validated, but isn't sent to the end recipient. You are not charged for using DryRun. The Message Parts per Second (MPS) limit when using DryRun is five. If your origination identity has a lower MPS limit then the lower MPS limit is used. For more information about MPS limits, see Message Parts per Second (MPS) limits in the AWS End User Messaging SMS User Guide..
      */
     DryRun?: PrimitiveBoolean;
     /**
@@ -4223,7 +4223,7 @@ declare namespace PinpointSMSVoiceV2 {
      */
     CloudWatchLogsDestination?: CloudWatchLogsDestination;
     /**
-     * An object that contains information about an event destination for logging to Kinesis Data Firehose.
+     * An object that contains information about an event destination for logging to Firehose.
      */
     KinesisFirehoseDestination?: KinesisFirehoseDestination;
     /**
@@ -4263,7 +4263,7 @@ declare namespace PinpointSMSVoiceV2 {
      */
     TwoWayChannelRole?: IamRoleArn;
     /**
-     * By default this is set to false. When an end recipient sends a message that begins with HELP or STOP to one of your dedicated numbers, Amazon Pinpoint automatically replies with a customizable message and adds the end recipient to the OptOutList. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.
+     * By default this is set to false. When an end recipient sends a message that begins with HELP or STOP to one of your dedicated numbers, AWS End User Messaging SMS and Voice automatically replies with a customizable message and adds the end recipient to the OptOutList. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.
      */
     SelfManagedOptOutsEnabled?: Boolean;
     /**
@@ -4363,7 +4363,7 @@ declare namespace PinpointSMSVoiceV2 {
      */
     TwoWayChannelRole?: IamRoleArn;
     /**
-     * By default this is set to false. When an end recipient sends a message that begins with HELP or STOP to one of your dedicated numbers, Amazon Pinpoint automatically replies with a customizable message and adds the end recipient to the OptOutList. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.
+     * By default this is set to false. When an end recipient sends a message that begins with HELP or STOP to one of your dedicated numbers, AWS End User Messaging SMS and Voice automatically replies with a customizable message and adds the end recipient to the OptOutList. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.
      */
     SelfManagedOptOutsEnabled?: Boolean;
     /**
@@ -4409,7 +4409,7 @@ declare namespace PinpointSMSVoiceV2 {
      */
     TwoWayChannelRole?: IamRoleArn;
     /**
-     * When an end recipient sends a message that begins with HELP or STOP to one of your dedicated numbers, Amazon Pinpoint automatically replies with a customizable message and adds the end recipient to the OptOutList. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.
+     * When an end recipient sends a message that begins with HELP or STOP to one of your dedicated numbers, AWS End User Messaging SMS and Voice automatically replies with a customizable message and adds the end recipient to the OptOutList. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.
      */
     SelfManagedOptOutsEnabled?: PrimitiveBoolean;
     /**
@@ -4439,7 +4439,7 @@ declare namespace PinpointSMSVoiceV2 {
      */
     NumberCapability: NumberCapability;
     /**
-     * A map of ProtectConfigurationCountryRuleSetInformation objects that contain the details for the requested NumberCapability. The Key is the two-letter ISO country code. For a list of supported ISO country codes, see Supported countries and regions (SMS channel) in the Amazon Pinpoint SMS user guide.
+     * A map of ProtectConfigurationCountryRuleSetInformation objects that contain the details for the requested NumberCapability. The Key is the two-letter ISO country code. For a list of supported ISO country codes, see Supported countries and regions (SMS channel) in the AWS End User Messaging SMS User Guide.
      */
     CountryRuleSetUpdates: ProtectConfigurationCountryRuleSet;
   }

@@ -84,6 +84,14 @@ declare class CleanRooms extends Service {
    */
   createConfiguredTableAssociation(callback?: (err: AWSError, data: CleanRooms.Types.CreateConfiguredTableAssociationOutput) => void): Request<CleanRooms.Types.CreateConfiguredTableAssociationOutput, AWSError>;
   /**
+   *  Creates a new analysis rule for an associated configured table.
+   */
+  createConfiguredTableAssociationAnalysisRule(params: CleanRooms.Types.CreateConfiguredTableAssociationAnalysisRuleInput, callback?: (err: AWSError, data: CleanRooms.Types.CreateConfiguredTableAssociationAnalysisRuleOutput) => void): Request<CleanRooms.Types.CreateConfiguredTableAssociationAnalysisRuleOutput, AWSError>;
+  /**
+   *  Creates a new analysis rule for an associated configured table.
+   */
+  createConfiguredTableAssociationAnalysisRule(callback?: (err: AWSError, data: CleanRooms.Types.CreateConfiguredTableAssociationAnalysisRuleOutput) => void): Request<CleanRooms.Types.CreateConfiguredTableAssociationAnalysisRuleOutput, AWSError>;
+  /**
    * Creates an ID mapping table.
    */
   createIdMappingTable(params: CleanRooms.Types.CreateIdMappingTableInput, callback?: (err: AWSError, data: CleanRooms.Types.CreateIdMappingTableOutput) => void): Request<CleanRooms.Types.CreateIdMappingTableOutput, AWSError>;
@@ -163,6 +171,14 @@ declare class CleanRooms extends Service {
    * Deletes a configured table association.
    */
   deleteConfiguredTableAssociation(callback?: (err: AWSError, data: CleanRooms.Types.DeleteConfiguredTableAssociationOutput) => void): Request<CleanRooms.Types.DeleteConfiguredTableAssociationOutput, AWSError>;
+  /**
+   * Deletes an analysis rule for a configured table association.
+   */
+  deleteConfiguredTableAssociationAnalysisRule(params: CleanRooms.Types.DeleteConfiguredTableAssociationAnalysisRuleInput, callback?: (err: AWSError, data: CleanRooms.Types.DeleteConfiguredTableAssociationAnalysisRuleOutput) => void): Request<CleanRooms.Types.DeleteConfiguredTableAssociationAnalysisRuleOutput, AWSError>;
+  /**
+   * Deletes an analysis rule for a configured table association.
+   */
+  deleteConfiguredTableAssociationAnalysisRule(callback?: (err: AWSError, data: CleanRooms.Types.DeleteConfiguredTableAssociationAnalysisRuleOutput) => void): Request<CleanRooms.Types.DeleteConfiguredTableAssociationAnalysisRuleOutput, AWSError>;
   /**
    * Deletes an ID mapping table.
    */
@@ -283,6 +299,14 @@ declare class CleanRooms extends Service {
    * Retrieves a configured table association.
    */
   getConfiguredTableAssociation(callback?: (err: AWSError, data: CleanRooms.Types.GetConfiguredTableAssociationOutput) => void): Request<CleanRooms.Types.GetConfiguredTableAssociationOutput, AWSError>;
+  /**
+   *  Retrieves the analysis rule for a configured table association.
+   */
+  getConfiguredTableAssociationAnalysisRule(params: CleanRooms.Types.GetConfiguredTableAssociationAnalysisRuleInput, callback?: (err: AWSError, data: CleanRooms.Types.GetConfiguredTableAssociationAnalysisRuleOutput) => void): Request<CleanRooms.Types.GetConfiguredTableAssociationAnalysisRuleOutput, AWSError>;
+  /**
+   *  Retrieves the analysis rule for a configured table association.
+   */
+  getConfiguredTableAssociationAnalysisRule(callback?: (err: AWSError, data: CleanRooms.Types.GetConfiguredTableAssociationAnalysisRuleOutput) => void): Request<CleanRooms.Types.GetConfiguredTableAssociationAnalysisRuleOutput, AWSError>;
   /**
    * Retrieves an ID mapping table.
    */
@@ -580,6 +604,14 @@ declare class CleanRooms extends Service {
    */
   updateConfiguredTableAssociation(callback?: (err: AWSError, data: CleanRooms.Types.UpdateConfiguredTableAssociationOutput) => void): Request<CleanRooms.Types.UpdateConfiguredTableAssociationOutput, AWSError>;
   /**
+   *  Updates the analysis rule for a configured table association.
+   */
+  updateConfiguredTableAssociationAnalysisRule(params: CleanRooms.Types.UpdateConfiguredTableAssociationAnalysisRuleInput, callback?: (err: AWSError, data: CleanRooms.Types.UpdateConfiguredTableAssociationAnalysisRuleOutput) => void): Request<CleanRooms.Types.UpdateConfiguredTableAssociationAnalysisRuleOutput, AWSError>;
+  /**
+   *  Updates the analysis rule for a configured table association.
+   */
+  updateConfiguredTableAssociationAnalysisRule(callback?: (err: AWSError, data: CleanRooms.Types.UpdateConfiguredTableAssociationAnalysisRuleOutput) => void): Request<CleanRooms.Types.UpdateConfiguredTableAssociationAnalysisRuleOutput, AWSError>;
+  /**
    * Provides the details that are necessary to update an ID mapping table.
    */
   updateIdMappingTable(params: CleanRooms.Types.UpdateIdMappingTableInput, callback?: (err: AWSError, data: CleanRooms.Types.UpdateIdMappingTableOutput) => void): Request<CleanRooms.Types.UpdateIdMappingTableOutput, AWSError>;
@@ -622,6 +654,8 @@ declare class CleanRooms extends Service {
 }
 declare namespace CleanRooms {
   export type AccountId = string;
+  export type AdditionalAnalyses = "ALLOWED"|"REQUIRED"|"NOT_ALLOWED"|string;
+  export type AdditionalAnalysesResourceArn = string;
   export interface AggregateColumn {
     /**
      * Column names in configured table of aggregate columns.
@@ -651,7 +685,9 @@ declare namespace CleanRooms {
   export type AggregationConstraintMinimumInteger = number;
   export type AggregationConstraints = AggregationConstraint[];
   export type AggregationType = "COUNT_DISTINCT"|string;
+  export type AllowedAdditionalAnalyses = AdditionalAnalysesResourceArn[];
   export type AllowedColumnList = ColumnName[];
+  export type AllowedResultReceivers = AccountId[];
   export type AnalysisFormat = "SQL"|string;
   export type AnalysisMethod = "DIRECT_QUERY"|string;
   export interface AnalysisParameter {
@@ -724,6 +760,10 @@ declare namespace CleanRooms {
      * Columns that must meet a specific threshold value (after an aggregation function is applied to it) for each output row to be returned.
      */
     outputConstraints: AggregationConstraints;
+    /**
+     *  An indicator as to whether additional analyses (such as Clean Rooms ML) can be applied to the output of the direct query.  The additionalAnalyses parameter is currently supported for the list analysis rule (AnalysisRuleList) and the custom analysis rule (AnalysisRuleCustom).
+     */
+    additionalAnalyses?: AdditionalAnalyses;
   }
   export type AnalysisRuleAggregationAggregateColumnsList = AggregateColumn[];
   export type AnalysisRuleColumnList = AnalysisRuleColumnName[];
@@ -737,6 +777,14 @@ declare namespace CleanRooms {
      * The IDs of the Amazon Web Services accounts that are allowed to query by the custom analysis rule. Required when allowedAnalyses is ANY_QUERY.
      */
     allowedAnalysisProviders?: AnalysisRuleCustomAllowedAnalysisProvidersList;
+    /**
+     *  An indicator as to whether additional analyses (such as Clean Rooms ML) can be applied to the output of the direct query.
+     */
+    additionalAnalyses?: AdditionalAnalyses;
+    /**
+     *  A list of columns that aren't allowed to be shown in the query output.
+     */
+    disallowedOutputColumns?: AnalysisRuleColumnList;
     /**
      * The differential privacy configuration.
      */
@@ -772,6 +820,10 @@ declare namespace CleanRooms {
      * Columns that can be listed in the output.
      */
     listColumns: AnalysisRuleColumnList;
+    /**
+     *  An indicator as to whether additional analyses (such as Clean Rooms ML) can be applied to the output of the direct query.
+     */
+    additionalAnalyses?: AdditionalAnalyses;
   }
   export type AnalysisRuleListJoinColumnsList = AnalysisRuleColumnName[];
   export interface AnalysisRulePolicy {
@@ -946,6 +998,7 @@ declare namespace CleanRooms {
   }
   export type AnalysisTemplateValidationStatusReasonList = AnalysisTemplateValidationStatusReason[];
   export type AnalysisTemplateValidationType = "DIFFERENTIAL_PRIVACY"|string;
+  export type AnalysisType = "DIRECT_ANALYSIS"|"ADDITIONAL_ANALYSIS"|string;
   export interface BatchGetCollaborationAnalysisTemplateError {
     /**
      * The Amazon Resource Name (ARN) of the analysis template.
@@ -1240,7 +1293,7 @@ declare namespace CleanRooms {
      */
     description?: ResourceDescription;
     /**
-     * The identifier used to reference members of the collaboration. Only supports Amazon Web Services account ID.
+     * The identifier used to reference members of the collaboration. Only supports AWS account ID.
      */
     creatorAccountId: AccountId;
     /**
@@ -1282,7 +1335,7 @@ declare namespace CleanRooms {
      */
     collaborationId: UUID;
     /**
-     * The identifier used to reference members of the collaboration. Only supports Amazon Web Services account ID.
+     * The identifier used to reference members of the collaboration. Only supports AWS account ID.
      */
     creatorAccountId: AccountId;
     /**
@@ -1565,6 +1618,12 @@ declare namespace CleanRooms {
   export type ColumnList = Column[];
   export type ColumnName = string;
   export type ColumnTypeString = string;
+  export interface ConfigurationDetails {
+    /**
+     *  The direct analysis configuration details.
+     */
+    directAnalysisConfigurationDetails?: DirectAnalysisConfigurationDetails;
+  }
   export type ConfiguredAudienceModelArn = string;
   export interface ConfiguredAudienceModelAssociation {
     /**
@@ -1792,6 +1851,10 @@ declare namespace CleanRooms {
      */
     description?: TableDescription;
     /**
+     *  The analysis rule types for the configured table association.
+     */
+    analysisRuleTypes?: ConfiguredTableAssociationAnalysisRuleTypeList;
+    /**
      * The time the configured table association was created.
      */
     createTime: Timestamp;
@@ -1800,6 +1863,88 @@ declare namespace CleanRooms {
      */
     updateTime: Timestamp;
   }
+  export interface ConfiguredTableAssociationAnalysisRule {
+    /**
+     *  The membership identifier for the configured table association analysis rule.
+     */
+    membershipIdentifier: MembershipIdentifier;
+    /**
+     *  The unique identifier for the configured table association.
+     */
+    configuredTableAssociationId: ConfiguredTableAssociationIdentifier;
+    /**
+     *  The Amazon Resource Name (ARN) of the configured table association.
+     */
+    configuredTableAssociationArn: ConfiguredTableAssociationArn;
+    /**
+     *  The policy of the configured table association analysis rule.
+     */
+    policy: ConfiguredTableAssociationAnalysisRulePolicy;
+    /**
+     *  The type of the configured table association analysis rule.
+     */
+    type: ConfiguredTableAssociationAnalysisRuleType;
+    /**
+     *  The creation time of the configured table association analysis rule.
+     */
+    createTime: Timestamp;
+    /**
+     *  The update time of the configured table association analysis rule.
+     */
+    updateTime: Timestamp;
+  }
+  export interface ConfiguredTableAssociationAnalysisRuleAggregation {
+    /**
+     *  The list of collaboration members who are allowed to receive results of queries run with this configured table.
+     */
+    allowedResultReceivers?: AllowedResultReceivers;
+    /**
+     *  The list of resources or wildcards (ARNs) that are allowed to perform additional analysis on query output. The allowedAdditionalAnalyses parameter is currently supported for the list analysis rule (AnalysisRuleList) and the custom analysis rule (AnalysisRuleCustom).
+     */
+    allowedAdditionalAnalyses?: AllowedAdditionalAnalyses;
+  }
+  export interface ConfiguredTableAssociationAnalysisRuleCustom {
+    /**
+     *  The list of collaboration members who are allowed to receive results of queries run with this configured table.
+     */
+    allowedResultReceivers?: AllowedResultReceivers;
+    /**
+     *  The list of resources or wildcards (ARNs) that are allowed to perform additional analysis on query output.
+     */
+    allowedAdditionalAnalyses?: AllowedAdditionalAnalyses;
+  }
+  export interface ConfiguredTableAssociationAnalysisRuleList {
+    /**
+     *  The list of collaboration members who are allowed to receive results of queries run with this configured table.
+     */
+    allowedResultReceivers?: AllowedResultReceivers;
+    /**
+     *  The list of resources or wildcards (ARNs) that are allowed to perform additional analysis on query output.
+     */
+    allowedAdditionalAnalyses?: AllowedAdditionalAnalyses;
+  }
+  export interface ConfiguredTableAssociationAnalysisRulePolicy {
+    /**
+     *  The policy for the configured table association analysis rule.
+     */
+    v1?: ConfiguredTableAssociationAnalysisRulePolicyV1;
+  }
+  export interface ConfiguredTableAssociationAnalysisRulePolicyV1 {
+    /**
+     *  Analysis rule type that enables only list queries on a configured table.
+     */
+    list?: ConfiguredTableAssociationAnalysisRuleList;
+    /**
+     *  Analysis rule type that enables only aggregation queries on a configured table.
+     */
+    aggregation?: ConfiguredTableAssociationAnalysisRuleAggregation;
+    /**
+     *  Analysis rule type that enables the table owner to approve custom SQL queries on their configured tables. It supports differential privacy.
+     */
+    custom?: ConfiguredTableAssociationAnalysisRuleCustom;
+  }
+  export type ConfiguredTableAssociationAnalysisRuleType = "AGGREGATION"|"LIST"|"CUSTOM"|string;
+  export type ConfiguredTableAssociationAnalysisRuleTypeList = ConfiguredTableAssociationAnalysisRuleType[];
   export type ConfiguredTableAssociationArn = string;
   export type ConfiguredTableAssociationIdentifier = string;
   export interface ConfiguredTableAssociationSummary {
@@ -1945,7 +2090,7 @@ declare namespace CleanRooms {
   }
   export interface CreateCollaborationOutput {
     /**
-     * The entire created collaboration object.
+     * The collaboration.
      */
     collaboration: Collaboration;
   }
@@ -1991,15 +2136,39 @@ declare namespace CleanRooms {
      */
     analysisRuleType: ConfiguredTableAnalysisRuleType;
     /**
-     * The entire created configured table analysis rule object.
+     * The analysis rule policy that was created for the configured table.
      */
     analysisRulePolicy: ConfiguredTableAnalysisRulePolicy;
   }
   export interface CreateConfiguredTableAnalysisRuleOutput {
     /**
-     * The entire created analysis rule.
+     * The analysis rule that was created for the configured table.
      */
     analysisRule: ConfiguredTableAnalysisRule;
+  }
+  export interface CreateConfiguredTableAssociationAnalysisRuleInput {
+    /**
+     *  A unique identifier for the membership that the configured table association belongs to. Currently accepts the membership ID.
+     */
+    membershipIdentifier: MembershipIdentifier;
+    /**
+     *  The unique ID for the configured table association. Currently accepts the configured table association ID.
+     */
+    configuredTableAssociationIdentifier: ConfiguredTableAssociationIdentifier;
+    /**
+     *  The type of analysis rule.
+     */
+    analysisRuleType: ConfiguredTableAssociationAnalysisRuleType;
+    /**
+     * The analysis rule policy that was created for the configured table association.
+     */
+    analysisRulePolicy: ConfiguredTableAssociationAnalysisRulePolicy;
+  }
+  export interface CreateConfiguredTableAssociationAnalysisRuleOutput {
+    /**
+     * The analysis rule for the conﬁgured table association. In the console, the ConfiguredTableAssociationAnalysisRule is referred to as the collaboration analysis rule.
+     */
+    analysisRule: ConfiguredTableAssociationAnalysisRule;
   }
   export interface CreateConfiguredTableAssociationInput {
     /**
@@ -2029,7 +2198,7 @@ declare namespace CleanRooms {
   }
   export interface CreateConfiguredTableAssociationOutput {
     /**
-     * The entire configured table association object.
+     * The configured table association.
      */
     configuredTableAssociation: ConfiguredTableAssociation;
   }
@@ -2247,6 +2416,22 @@ declare namespace CleanRooms {
   }
   export interface DeleteConfiguredTableAnalysisRuleOutput {
   }
+  export interface DeleteConfiguredTableAssociationAnalysisRuleInput {
+    /**
+     *  A unique identifier for the membership that the configured table association belongs to. Currently accepts the membership ID.
+     */
+    membershipIdentifier: MembershipIdentifier;
+    /**
+     * The identiﬁer for the conﬁgured table association that's related to the analysis rule that you want to delete.
+     */
+    configuredTableAssociationIdentifier: ConfiguredTableAssociationIdentifier;
+    /**
+     * The type of the analysis rule that you want to delete.
+     */
+    analysisRuleType: ConfiguredTableAssociationAnalysisRuleType;
+  }
+  export interface DeleteConfiguredTableAssociationAnalysisRuleOutput {
+  }
   export interface DeleteConfiguredTableAssociationInput {
     /**
      * The unique ID for the configured table association to be deleted. Currently accepts the configured table ID.
@@ -2453,6 +2638,12 @@ declare namespace CleanRooms {
      */
     usersNoisePerQuery?: UsersNoisePerQuery;
   }
+  export interface DirectAnalysisConfigurationDetails {
+    /**
+     *  The account IDs for the member who received the results of a protected query.
+     */
+    receiverAccountIds?: ReceiverAccountIds;
+  }
   export type DisplayName = string;
   export interface Document {
   }
@@ -2583,6 +2774,26 @@ declare namespace CleanRooms {
      * The entire analysis rule output.
      */
     analysisRule: ConfiguredTableAnalysisRule;
+  }
+  export interface GetConfiguredTableAssociationAnalysisRuleInput {
+    /**
+     *  A unique identifier for the membership that the configured table association belongs to. Currently accepts the membership ID.
+     */
+    membershipIdentifier: MembershipIdentifier;
+    /**
+     *  The identiﬁer for the conﬁgured table association that's related to the analysis rule.
+     */
+    configuredTableAssociationIdentifier: ConfiguredTableAssociationIdentifier;
+    /**
+     *  The type of analysis rule that you want to retrieve.
+     */
+    analysisRuleType: ConfiguredTableAssociationAnalysisRuleType;
+  }
+  export interface GetConfiguredTableAssociationAnalysisRuleOutput {
+    /**
+     * The analysis rule for the conﬁgured table association. In the console, the ConfiguredTableAssociationAnalysisRule is referred to as the collaboration analysis rule.
+     */
+    analysisRule: ConfiguredTableAssociationAnalysisRule;
   }
   export interface GetConfiguredTableAssociationInput {
     /**
@@ -3025,17 +3236,17 @@ declare namespace CleanRooms {
      */
     membershipIdentifier: MembershipIdentifier;
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
     /**
-     * The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.
+     * The maximum size of the results that is returned per call.
      */
     maxResults?: MaxResults;
   }
   export interface ListAnalysisTemplatesOutput {
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
     /**
@@ -3049,17 +3260,17 @@ declare namespace CleanRooms {
      */
     collaborationIdentifier: CollaborationIdentifier;
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
     /**
-     * The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.
+     * The maximum size of the results that is returned per call.
      */
     maxResults?: MaxResults;
   }
   export interface ListCollaborationAnalysisTemplatesOutput {
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
     /**
@@ -3073,11 +3284,11 @@ declare namespace CleanRooms {
      */
     collaborationIdentifier: CollaborationIdentifier;
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
     /**
-     * The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.
+     * The maximum size of the results that is returned per call.
      */
     maxResults?: MaxResults;
   }
@@ -3087,7 +3298,7 @@ declare namespace CleanRooms {
      */
     collaborationConfiguredAudienceModelAssociationSummaries: CollaborationConfiguredAudienceModelAssociationSummaryList;
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
   }
@@ -3121,17 +3332,17 @@ declare namespace CleanRooms {
      */
     collaborationIdentifier: CollaborationIdentifier;
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
     /**
-     * The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.
+     * The maximum size of the results that is returned per call. Service chooses a default if it has not been set. Service may return a nextToken even if the maximum results has not been met.
      */
     maxResults?: MaxResults;
   }
   export interface ListCollaborationPrivacyBudgetTemplatesOutput {
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
     /**
@@ -3149,11 +3360,11 @@ declare namespace CleanRooms {
      */
     privacyBudgetType: PrivacyBudgetType;
     /**
-     * The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.
+     * The maximum size of the results that is returned per call. Service chooses a default if it has not been set. Service may return a nextToken even if the maximum results has not been met.
      */
     maxResults?: MaxResults;
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
   }
@@ -3163,17 +3374,17 @@ declare namespace CleanRooms {
      */
     collaborationPrivacyBudgetSummaries: CollaborationPrivacyBudgetSummaryList;
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
   }
   export interface ListCollaborationsInput {
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
     /**
-     * The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.
+     * The maximum size of the results that is returned per call. Service chooses a default if it has not been set. Service may return a nextToken even if the maximum results has not been met.
      */
     maxResults?: MaxResults;
     /**
@@ -3183,7 +3394,7 @@ declare namespace CleanRooms {
   }
   export interface ListCollaborationsOutput {
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
     /**
@@ -3197,11 +3408,11 @@ declare namespace CleanRooms {
      */
     membershipIdentifier: MembershipIdentifier;
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
     /**
-     * The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.
+     * The maximum size of the results that is returned per call. Service chooses a default if it has not been set. Service may return a nextToken even if the maximum results has not been met.
      */
     maxResults?: MaxResults;
   }
@@ -3221,11 +3432,11 @@ declare namespace CleanRooms {
      */
     membershipIdentifier: MembershipIdentifier;
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
     /**
-     * The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.
+     * The maximum size of the results that is returned per call.
      */
     maxResults?: MaxResults;
   }
@@ -3235,17 +3446,17 @@ declare namespace CleanRooms {
      */
     configuredTableAssociationSummaries: ConfiguredTableAssociationSummaryList;
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
   }
   export interface ListConfiguredTablesInput {
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
     /**
-     * The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.
+     * The maximum size of the results that is returned per call.
      */
     maxResults?: MaxResults;
   }
@@ -3255,7 +3466,7 @@ declare namespace CleanRooms {
      */
     configuredTableSummaries: ConfiguredTableSummaryList;
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
   }
@@ -3313,17 +3524,17 @@ declare namespace CleanRooms {
      */
     collaborationIdentifier: CollaborationIdentifier;
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
     /**
-     * The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.
+     * The maximum size of the results that is returned per call.
      */
     maxResults?: MaxResults;
   }
   export interface ListMembersOutput {
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
     /**
@@ -3333,11 +3544,11 @@ declare namespace CleanRooms {
   }
   export interface ListMembershipsInput {
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
     /**
-     * The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.
+     * The maximum size of the results that is returned per call.
      */
     maxResults?: MaxResults;
     /**
@@ -3347,7 +3558,7 @@ declare namespace CleanRooms {
   }
   export interface ListMembershipsOutput {
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
     /**
@@ -3361,17 +3572,17 @@ declare namespace CleanRooms {
      */
     membershipIdentifier: MembershipIdentifier;
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
     /**
-     * The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.
+     * The maximum size of the results that is returned per call. Service chooses a default if it has not been set. Service may return a nextToken even if the maximum results has not been met.
      */
     maxResults?: MaxResults;
   }
   export interface ListPrivacyBudgetTemplatesOutput {
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
     /**
@@ -3389,11 +3600,11 @@ declare namespace CleanRooms {
      */
     privacyBudgetType: PrivacyBudgetType;
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
     /**
-     * The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.
+     * The maximum size of the results that is returned per call. Service chooses a default if it has not been set. Service may return a nextToken even if the maximum results has not been met.
      */
     maxResults?: MaxResults;
   }
@@ -3403,7 +3614,7 @@ declare namespace CleanRooms {
      */
     privacyBudgetSummaries: PrivacyBudgetSummaryList;
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
   }
@@ -3417,17 +3628,17 @@ declare namespace CleanRooms {
      */
     status?: ProtectedQueryStatus;
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
     /**
-     * The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met. 
+     * The maximum size of the results that is returned per call. Service chooses a default if it has not been set. Service can return a nextToken even if the maximum results has not been met. 
      */
     maxResults?: MaxResults;
   }
   export interface ListProtectedQueriesOutput {
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
     /**
@@ -3441,15 +3652,15 @@ declare namespace CleanRooms {
      */
     collaborationIdentifier: CollaborationIdentifier;
     /**
-     * If present, filter schemas by schema type.
+     * If present, filter schemas by schema type. The only valid schema type is currently `TABLE`.
      */
     schemaType?: SchemaType;
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
     /**
-     * The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.
+     * The maximum size of the results that is returned per call.
      */
     maxResults?: MaxResults;
   }
@@ -3459,7 +3670,7 @@ declare namespace CleanRooms {
      */
     schemaSummaries: SchemaSummaryList;
     /**
-     * The pagination token that's used to fetch the next set of results.
+     * The token value retrieved from a previous call to access the next page of results.
      */
     nextToken?: PaginationToken;
   }
@@ -3948,6 +4159,12 @@ declare namespace CleanRooms {
     code: String;
   }
   export type ProtectedQueryIdentifier = string;
+  export interface ProtectedQueryMemberOutputConfiguration {
+    /**
+     * The unique identifier for the account.
+     */
+    accountId: AccountId;
+  }
   export type ProtectedQueryMemberOutputList = ProtectedQuerySingleMemberOutput[];
   export interface ProtectedQueryOutput {
     /**
@@ -3961,9 +4178,13 @@ declare namespace CleanRooms {
   }
   export interface ProtectedQueryOutputConfiguration {
     /**
-     * Required configuration for a protected query with an `S3` output type.
+     * Required configuration for a protected query with an s3 output type.
      */
     s3?: ProtectedQueryS3OutputConfiguration;
+    /**
+     *  Required configuration for a protected query with a member output type.
+     */
+    member?: ProtectedQueryMemberOutputConfiguration;
   }
   export interface ProtectedQueryResult {
     /**
@@ -4021,7 +4242,7 @@ declare namespace CleanRooms {
   }
   export interface ProtectedQueryStatistics {
     /**
-     * The duration of the Protected Query, from creation until query completion.
+     * The duration of the protected query, from creation until query completion.
      */
     totalDurationInMillis?: Long;
   }
@@ -4047,6 +4268,10 @@ declare namespace CleanRooms {
      * The status of the protected query. Value values are `SUBMITTED`, `STARTED`, `CANCELLED`, `CANCELLING`, `FAILED`, `SUCCESS`, `TIMED_OUT`.
      */
     status: ProtectedQueryStatus;
+    /**
+     *  The receiver configuration.
+     */
+    receiverConfigurations: ReceiverConfigurationsList;
   }
   export type ProtectedQuerySummaryList = ProtectedQuerySummary[];
   export type ProtectedQueryType = "SQL"|string;
@@ -4070,6 +4295,18 @@ declare namespace CleanRooms {
     columns?: AnalysisRuleColumnList;
   }
   export type QueryTables = TableAlias[];
+  export type ReceiverAccountIds = AccountId[];
+  export interface ReceiverConfiguration {
+    /**
+     *  The type of analysis for the protected query. The results of the query can be analyzed directly (DIRECT_ANALYSIS) or used as input into additional analyses (ADDITIONAL_ANALYSIS), such as a query that is a seed for a lookalike ML model.
+     */
+    analysisType: AnalysisType;
+    /**
+     *  The configuration details of the receiver configuration.
+     */
+    configurationDetails?: ConfigurationDetails;
+  }
+  export type ReceiverConfigurationsList = ReceiverConfiguration[];
   export type ResourceAlias = string;
   export type ResourceDescription = string;
   export type ResultFormat = "CSV"|"PARQUET"|string;
@@ -4078,7 +4315,7 @@ declare namespace CleanRooms {
   export type ScalarFunctionsList = ScalarFunctions[];
   export interface Schema {
     /**
-     * The columns for the relation that this schema represents.
+     * The columns for the relation this schema represents.
      */
     columns: ColumnList;
     /**
@@ -4086,7 +4323,7 @@ declare namespace CleanRooms {
      */
     partitionKeys: ColumnList;
     /**
-     * The analysis rule types that are associated with the schema. Currently, only one entry is present.
+     * The analysis rule types associated with the schema. Currently, only one entry is present.
      */
     analysisRuleTypes: AnalysisRuleTypeList;
     /**
@@ -4106,7 +4343,7 @@ declare namespace CleanRooms {
      */
     collaborationId: UUID;
     /**
-     * The unique Amazon Resource Name (ARN) for the collaboration that the schema belongs to.
+     * The unique ARN for the collaboration that the schema belongs to.
      */
     collaborationArn: CollaborationArn;
     /**
@@ -4114,15 +4351,15 @@ declare namespace CleanRooms {
      */
     description: TableDescription;
     /**
-     * The time at which the schema was created.
+     * The time the schema was created.
      */
     createTime: Timestamp;
     /**
-     * The most recent time at which the schema was updated.
+     * The time the schema was last updated.
      */
     updateTime: Timestamp;
     /**
-     * The type of schema.
+     * The type of schema. The only valid value is currently `TABLE`.
      */
     type: SchemaType;
     /**
@@ -4146,13 +4383,13 @@ declare namespace CleanRooms {
     type: AnalysisRuleType;
   }
   export type SchemaAnalysisRuleRequestList = SchemaAnalysisRuleRequest[];
-  export type SchemaConfiguration = "DIFFERENTIAL_PRIVACY"|"CUSTOM_ANALYSIS_NOT_ALLOWED"|"NO_MEMBER_ACCOUNT_ALLOWED_TO_PROVIDE_ANALYSIS"|"DIFFERENTIAL_PRIVACY_BUDGET_NOT_CONFIGURED"|"ID_MAPPING_TABLE_NOT_POPULATED"|string;
+  export type SchemaConfiguration = "DIFFERENTIAL_PRIVACY"|string;
   export type SchemaConfigurationList = SchemaConfiguration[];
   export type SchemaList = Schema[];
   export type SchemaStatus = "READY"|"NOT_READY"|string;
   export interface SchemaStatusDetail {
     /**
-     * The status of the schema.
+     * The status of the schema, indicating if it is ready to query.
      */
     status: SchemaStatus;
     /**
@@ -4167,6 +4404,10 @@ declare namespace CleanRooms {
      * The configuration details of the schema analysis rule for the given type.
      */
     configurations?: SchemaConfigurationList;
+    /**
+     * The type of analysis that can be performed on the schema. A schema can have an analysisType of DIRECT_ANALYSIS, ADDITIONAL_ANALYSIS_FOR_AUDIENCE_GENERATION, or both.
+     */
+    analysisType: AnalysisType;
   }
   export type SchemaStatusDetailList = SchemaStatusDetail[];
   export interface SchemaStatusReason {
@@ -4179,7 +4420,7 @@ declare namespace CleanRooms {
      */
     message: String;
   }
-  export type SchemaStatusReasonCode = "ANALYSIS_RULE_MISSING"|"ANALYSIS_TEMPLATES_NOT_CONFIGURED"|"ANALYSIS_PROVIDERS_NOT_CONFIGURED"|"DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED"|"ID_MAPPING_TABLE_NOT_POPULATED"|string;
+  export type SchemaStatusReasonCode = "ANALYSIS_RULE_MISSING"|"ANALYSIS_TEMPLATES_NOT_CONFIGURED"|"ANALYSIS_PROVIDERS_NOT_CONFIGURED"|"DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED"|"ID_MAPPING_TABLE_NOT_POPULATED"|"COLLABORATION_ANALYSIS_RULE_NOT_CONFIGURED"|"ADDITIONAL_ANALYSES_NOT_CONFIGURED"|"RESULT_RECEIVERS_NOT_CONFIGURED"|"ADDITIONAL_ANALYSES_NOT_ALLOWED"|"RESULT_RECEIVERS_NOT_ALLOWED"|"ANALYSIS_RULE_TYPES_NOT_COMPATIBLE"|string;
   export type SchemaStatusReasonList = SchemaStatusReason[];
   export interface SchemaSummary {
     /**
@@ -4187,7 +4428,7 @@ declare namespace CleanRooms {
      */
     name: TableAlias;
     /**
-     * The type of schema object.
+     * The type of schema object. The only valid schema type is currently `TABLE`.
      */
     type: SchemaType;
     /**
@@ -4375,6 +4616,30 @@ declare namespace CleanRooms {
      * The entire updated analysis rule.
      */
     analysisRule: ConfiguredTableAnalysisRule;
+  }
+  export interface UpdateConfiguredTableAssociationAnalysisRuleInput {
+    /**
+     *  A unique identifier for the membership that the configured table association belongs to. Currently accepts the membership ID.
+     */
+    membershipIdentifier: MembershipIdentifier;
+    /**
+     *  The identifier for the configured table association to update.
+     */
+    configuredTableAssociationIdentifier: ConfiguredTableAssociationIdentifier;
+    /**
+     *  The analysis rule type that you want to update.
+     */
+    analysisRuleType: ConfiguredTableAssociationAnalysisRuleType;
+    /**
+     *  The updated analysis rule policy for the conﬁgured table association.
+     */
+    analysisRulePolicy: ConfiguredTableAssociationAnalysisRulePolicy;
+  }
+  export interface UpdateConfiguredTableAssociationAnalysisRuleOutput {
+    /**
+     *  The updated analysis rule for the conﬁgured table association. In the console, the ConfiguredTableAssociationAnalysisRule is referred to as the collaboration analysis rule.
+     */
+    analysisRule: ConfiguredTableAssociationAnalysisRule;
   }
   export interface UpdateConfiguredTableAssociationInput {
     /**

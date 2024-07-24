@@ -160,7 +160,9 @@ declare class MedicalImaging extends Service {
 declare namespace MedicalImaging {
   export type Arn = string;
   export type AwsAccountId = string;
+  export type Boolean = boolean;
   export type ClientToken = string;
+  export type CopiableAttributes = string;
   export interface CopyDestinationImageSet {
     /**
      * The image set identifier for the destination image set.
@@ -224,6 +226,10 @@ declare namespace MedicalImaging {
      * Copy image set information.
      */
     copyImageSetInformation: CopyImageSetInformation;
+    /**
+     * Setting this flag will force the CopyImageSet operation, even if Patient, Study, or Series level metadata are mismatched across the sourceImageSet and destinationImageSet.
+     */
+    force?: Boolean;
   }
   export interface CopyImageSetResponse {
     /**
@@ -244,6 +250,10 @@ declare namespace MedicalImaging {
      * The latest version identifier for the source image set.
      */
     latestVersionId: ImageSetExternalVersionId;
+    /**
+     * Contains MetadataCopies structure and wraps information related to specific copy use cases. For example, when copying subsets.
+     */
+    DICOMCopies?: MetadataCopies;
   }
   export interface CopySourceImageSetProperties {
     /**
@@ -723,6 +733,10 @@ declare namespace MedicalImaging {
      * The Amazon Resource Name (ARN) assigned to the image set.
      */
     imageSetArn?: Arn;
+    /**
+     * This object contains the details of any overrides used while creating a specific image set version. If an image set was copied or updated using the force flag, this object will contain the forced flag.
+     */
+    overrides?: Overrides;
   }
   export type ImageFrameId = string;
   export interface ImageFrameInformation {
@@ -767,6 +781,10 @@ declare namespace MedicalImaging {
      * The error message thrown if an image set action fails.
      */
     message?: Message;
+    /**
+     * Contains details on overrides used when creating the returned version of an image set. For example, if forced exists, the forced flag was used when creating the image set.
+     */
+    overrides?: Overrides;
   }
   export type ImageSetPropertiesList = ImageSetProperties[];
   export type ImageSetState = "ACTIVE"|"LOCKED"|"DELETED"|string;
@@ -895,14 +913,30 @@ declare namespace MedicalImaging {
     tags: TagMap;
   }
   export type Message = string;
+  export interface MetadataCopies {
+    /**
+     * The JSON string used to specify a subset of SOP Instances to copy from source to destination image set.
+     */
+    copiableAttributes: CopiableAttributes;
+  }
   export interface MetadataUpdates {
     /**
      * The object containing removableAttributes and updatableAttributes.
      */
     DICOMUpdates?: DICOMUpdates;
+    /**
+     * Specifies the previous image set version ID to revert the current image set back to.  You must provide either revertToVersionId or DICOMUpdates in your request. A ValidationException error is thrown if both parameters are provided at the same time. 
+     */
+    revertToVersionId?: ImageSetExternalVersionId;
   }
   export type NextToken = string;
   export type Operator = "EQUAL"|"BETWEEN"|string;
+  export interface Overrides {
+    /**
+     * Setting this flag will force the CopyImageSet and UpdateImageSetMetadata operations, even if Patient, Study, or Series level metadata are mismatched.
+     */
+    forced?: Boolean;
+  }
   export type PayloadBlob = Buffer|Uint8Array|Blob|string|Readable;
   export type RoleArn = string;
   export type S3Uri = string;
@@ -1097,6 +1131,10 @@ declare namespace MedicalImaging {
      * The latest image set version identifier.
      */
     latestVersionId: ImageSetExternalVersionId;
+    /**
+     * Setting this flag will force the UpdateImageSetMetadata operation for the following attributes:    Tag.StudyInstanceUID, Tag.SeriesInstanceUID, Tag.SOPInstanceUID, and Tag.StudyID    Adding, removing, or updating private tags for an individual SOP Instance  
+     */
+    force?: Boolean;
     /**
      * Update image set metadata updates.
      */
