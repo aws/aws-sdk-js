@@ -969,6 +969,10 @@ declare namespace EKS {
      * The access configuration for the cluster.
      */
     accessConfig?: AccessConfigResponse;
+    /**
+     * This value indicates if extended support is enabled or disabled for the cluster.  Learn more about EKS Extended Support in the EKS User Guide. 
+     */
+    upgradePolicy?: UpgradePolicyResponse;
   }
   export interface ClusterHealth {
     /**
@@ -1187,6 +1191,10 @@ declare namespace EKS {
      * If you set this value to False when creating a cluster, the default networking add-ons will not be installed. The default networking addons include vpc-cni, coredns, and kube-proxy. Use this option when you plan to install third-party alternative add-ons or self-manage the default networking add-ons.
      */
     bootstrapSelfManagedAddons?: BoxedBoolean;
+    /**
+     * New clusters, by default, have extended support enabled. You can disable extended support when creating a cluster by setting this value to STANDARD.
+     */
+    upgradePolicy?: UpgradePolicyRequest;
   }
   export interface CreateClusterResponse {
     /**
@@ -2890,6 +2898,7 @@ declare namespace EKS {
   export type RoleArn = string;
   export type String = string;
   export type StringList = String[];
+  export type SupportType = "STANDARD"|"EXTENDED"|string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagMap = {[key: string]: TagValue};
@@ -3049,6 +3058,10 @@ declare namespace EKS {
      * The access configuration for the cluster.
      */
     accessConfig?: UpdateAccessConfigRequest;
+    /**
+     * You can enable or disable extended support for clusters currently on standard support. You cannot disable extended support once it starts. You must enable extended support before your cluster exits standard support.
+     */
+    upgradePolicy?: UpgradePolicyRequest;
   }
   export interface UpdateClusterConfigResponse {
     update?: Update;
@@ -3179,7 +3192,7 @@ declare namespace EKS {
      */
     value?: String;
   }
-  export type UpdateParamType = "Version"|"PlatformVersion"|"EndpointPrivateAccess"|"EndpointPublicAccess"|"ClusterLogging"|"DesiredSize"|"LabelsToAdd"|"LabelsToRemove"|"TaintsToAdd"|"TaintsToRemove"|"MaxSize"|"MinSize"|"ReleaseVersion"|"PublicAccessCidrs"|"LaunchTemplateName"|"LaunchTemplateVersion"|"IdentityProviderConfig"|"EncryptionConfig"|"AddonVersion"|"ServiceAccountRoleArn"|"ResolveConflicts"|"MaxUnavailable"|"MaxUnavailablePercentage"|"ConfigurationValues"|"SecurityGroups"|"Subnets"|"AuthenticationMode"|"PodIdentityAssociations"|string;
+  export type UpdateParamType = "Version"|"PlatformVersion"|"EndpointPrivateAccess"|"EndpointPublicAccess"|"ClusterLogging"|"DesiredSize"|"LabelsToAdd"|"LabelsToRemove"|"TaintsToAdd"|"TaintsToRemove"|"MaxSize"|"MinSize"|"ReleaseVersion"|"PublicAccessCidrs"|"LaunchTemplateName"|"LaunchTemplateVersion"|"IdentityProviderConfig"|"EncryptionConfig"|"AddonVersion"|"ServiceAccountRoleArn"|"ResolveConflicts"|"MaxUnavailable"|"MaxUnavailablePercentage"|"ConfigurationValues"|"SecurityGroups"|"Subnets"|"AuthenticationMode"|"PodIdentityAssociations"|"UpgradePolicy"|string;
   export type UpdateParams = UpdateParam[];
   export interface UpdatePodIdentityAssociationRequest {
     /**
@@ -3216,7 +3229,19 @@ declare namespace EKS {
      */
     removeTaints?: taintsList;
   }
-  export type UpdateType = "VersionUpdate"|"EndpointAccessUpdate"|"LoggingUpdate"|"ConfigUpdate"|"AssociateIdentityProviderConfig"|"DisassociateIdentityProviderConfig"|"AssociateEncryptionConfig"|"AddonUpdate"|"VpcConfigUpdate"|"AccessConfigUpdate"|string;
+  export type UpdateType = "VersionUpdate"|"EndpointAccessUpdate"|"LoggingUpdate"|"ConfigUpdate"|"AssociateIdentityProviderConfig"|"DisassociateIdentityProviderConfig"|"AssociateEncryptionConfig"|"AddonUpdate"|"VpcConfigUpdate"|"AccessConfigUpdate"|"UpgradePolicyUpdate"|string;
+  export interface UpgradePolicyRequest {
+    /**
+     * If the cluster is set to EXTENDED, it will enter extended support at the end of standard support. If the cluster is set to STANDARD, it will be automatically upgraded at the end of standard support.  Learn more about EKS Extended Support in the EKS User Guide. 
+     */
+    supportType?: SupportType;
+  }
+  export interface UpgradePolicyResponse {
+    /**
+     * If the cluster is set to EXTENDED, it will enter extended support at the end of standard support. If the cluster is set to STANDARD, it will be automatically upgraded at the end of standard support.  Learn more about EKS Extended Support in the EKS User Guide. 
+     */
+    supportType?: SupportType;
+  }
   export interface VpcConfigRequest {
     /**
      * Specify subnets for your Amazon EKS nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your nodes and the Kubernetes control plane.

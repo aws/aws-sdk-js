@@ -1,6 +1,20 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1663.0-->
+<!--LATEST=2.1664.0-->
 <!--ENTRYINSERT-->
+
+## 2.1664.0
+* feature: ApplicationAutoScaling: Application Auto Scaling is now more responsive to the changes in demand of your SageMaker Inference endpoints. To get started, create or update a Target Tracking policy based on High Resolution CloudWatch metrics.
+* feature: ApplicationSignals: CloudWatch Application Signals now supports application logs correlation with traces and operational health metrics of applications running on EC2 instances. Users can view the most relevant telemetry to troubleshoot application health anomalies such as spikes in latency, errors, and availability.
+* feature: BedrockRuntime: Provides ServiceUnavailableException error message
+* feature: CodeCommit: CreateRepository API now throws OperationNotAllowedException when the account has been restricted from creating a repository.
+* feature: DataZone: Introduces GetEnvironmentCredentials operation to SDK
+* feature: EC2: EC2 Fleet now supports using custom identifiers to reference Amazon Machine Images (AMI) in launch requests that are configured to choose from a diversified list of instance types.
+* feature: ECR: API and documentation updates for Amazon ECR, adding support for creating, updating, describing and deleting ECR Repository Creation Template.
+* feature: EKS: This release adds support for EKS cluster to manage extended support.
+* feature: ELBv2: This release adds support for sharing trust stores across accounts and organizations through integration with AWS Resource Access Manager.
+* feature: NetworkFirewall: You can now log events that are related to TLS inspection, in addition to the existing alert and flow logging.
+* feature: Outposts: Adding default vCPU information to GetOutpostSupportedInstanceTypes and GetOutpostInstanceTypes responses
+* feature: StepFunctions: This release adds support to customer managed KMS key encryption in AWS Step Functions.
 
 ## 2.1663.0
 * feature: CleanRooms: Three enhancements to the AWS Clean Rooms: Disallowed Output Columns, Flexible Result Receivers, SQL as a Seed

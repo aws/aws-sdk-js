@@ -452,6 +452,14 @@ declare class DataZone extends Service {
    */
   getEnvironmentBlueprintConfiguration(callback?: (err: AWSError, data: DataZone.Types.GetEnvironmentBlueprintConfigurationOutput) => void): Request<DataZone.Types.GetEnvironmentBlueprintConfigurationOutput, AWSError>;
   /**
+   * Gets the credentials of an environment in Amazon DataZone.
+   */
+  getEnvironmentCredentials(params: DataZone.Types.GetEnvironmentCredentialsInput, callback?: (err: AWSError, data: DataZone.Types.GetEnvironmentCredentialsOutput) => void): Request<DataZone.Types.GetEnvironmentCredentialsOutput, AWSError>;
+  /**
+   * Gets the credentials of an environment in Amazon DataZone.
+   */
+  getEnvironmentCredentials(callback?: (err: AWSError, data: DataZone.Types.GetEnvironmentCredentialsOutput) => void): Request<DataZone.Types.GetEnvironmentCredentialsOutput, AWSError>;
+  /**
    * Gets an evinronment profile in Amazon DataZone.
    */
   getEnvironmentProfile(params: DataZone.Types.GetEnvironmentProfileInput, callback?: (err: AWSError, data: DataZone.Types.GetEnvironmentProfileOutput) => void): Request<DataZone.Types.GetEnvironmentProfileOutput, AWSError>;
@@ -4764,6 +4772,34 @@ declare namespace DataZone {
      * The user parameters of this blueprint.
      */
     userParameters?: CustomParameterList;
+  }
+  export interface GetEnvironmentCredentialsInput {
+    /**
+     * The ID of the Amazon DataZone domain in which this environment and its credentials exist.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The ID of the environment whose credentials this operation gets.
+     */
+    environmentIdentifier: EnvironmentId;
+  }
+  export interface GetEnvironmentCredentialsOutput {
+    /**
+     * The access key ID of the environment.
+     */
+    accessKeyId?: String;
+    /**
+     * The expiration timestamp of the environment credentials.
+     */
+    expiration?: SyntheticTimestamp_date_time;
+    /**
+     * The secret access key of the environment credentials.
+     */
+    secretAccessKey?: String;
+    /**
+     * The session token of the environment credentials.
+     */
+    sessionToken?: String;
   }
   export interface GetEnvironmentInput {
     /**

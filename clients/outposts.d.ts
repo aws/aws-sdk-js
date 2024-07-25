@@ -790,6 +790,10 @@ declare namespace Outposts {
   export type InstanceTypeCount = number;
   export interface InstanceTypeItem {
     InstanceType?: InstanceType;
+    /**
+     * The number of default VCPUs in an instance type.
+     */
+    VCPUs?: VCPUCount;
   }
   export type InstanceTypeListDefinition = InstanceTypeItem[];
   export type InstanceTypeName = string;
@@ -1424,6 +1428,7 @@ declare namespace Outposts {
   }
   export type UplinkCount = "UPLINK_COUNT_1"|"UPLINK_COUNT_2"|"UPLINK_COUNT_3"|"UPLINK_COUNT_4"|"UPLINK_COUNT_5"|"UPLINK_COUNT_6"|"UPLINK_COUNT_7"|"UPLINK_COUNT_8"|"UPLINK_COUNT_12"|"UPLINK_COUNT_16"|string;
   export type UplinkGbps = "UPLINK_1G"|"UPLINK_10G"|"UPLINK_40G"|"UPLINK_100G"|string;
+  export type VCPUCount = number;
   export type WireGuardPublicKey = string;
   export type outpostListDefinition = Outpost[];
   export type siteListDefinition = Site[];

@@ -232,11 +232,11 @@ declare namespace ApplicationSignals {
   export type DurationUnit = "DAY"|"MONTH"|string;
   export interface GetServiceInput {
     /**
-     * The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057 
+     * The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057  Your requested start time will be rounded to the nearest hour.
      */
     StartTime: Timestamp;
     /**
-     * The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057 
+     * The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057  Your requested start time will be rounded to the nearest hour.
      */
     EndTime: Timestamp;
     /**
@@ -262,13 +262,17 @@ declare namespace ApplicationSignals {
      */
     Service: Service;
     /**
-     * The start time of the data included in the response. In a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057.
+     * The start time of the data included in the response. In a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057. This displays the time that Application Signals used for the request. It might not match your request exactly, because it was rounded to the nearest hour.
      */
     StartTime: Timestamp;
     /**
-     * The end time of the data included in the response. In a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057.
+     * The end time of the data included in the response. In a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057. This displays the time that Application Signals used for the request. It might not match your request exactly, because it was rounded to the nearest hour.
      */
     EndTime: Timestamp;
+    /**
+     * An array of string-to-string maps that each contain information about one log group associated with this service. Each string-to-string map includes the following fields:    "Type": "AWS::Resource"     "ResourceType": "AWS::Logs::LogGroup"     "Identifier": "name-of-log-group"   
+     */
+    LogGroupReferences?: LogGroupReferences;
   }
   export interface Goal {
     /**
@@ -298,11 +302,11 @@ declare namespace ApplicationSignals {
   export type KeyAttributeValue = string;
   export interface ListServiceDependenciesInput {
     /**
-     * The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057 
+     * The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057  Your requested start time will be rounded to the nearest hour.
      */
     StartTime: Timestamp;
     /**
-     * The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057 
+     * The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057  Your requested end time will be rounded to the nearest hour.
      */
     EndTime: Timestamp;
     /**
@@ -321,11 +325,11 @@ declare namespace ApplicationSignals {
   export type ListServiceDependenciesMaxResults = number;
   export interface ListServiceDependenciesOutput {
     /**
-     * The start of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057 
+     * The start of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057  This displays the time that Application Signals used for the request. It might not match your request exactly, because it was rounded to the nearest hour.
      */
     StartTime: Timestamp;
     /**
-     * The end of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057 
+     * The end of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057  This displays the time that Application Signals used for the request. It might not match your request exactly, because it was rounded to the nearest hour.
      */
     EndTime: Timestamp;
     /**
@@ -339,11 +343,11 @@ declare namespace ApplicationSignals {
   }
   export interface ListServiceDependentsInput {
     /**
-     * The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057 
+     * The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057  Your requested start time will be rounded to the nearest hour.
      */
     StartTime: Timestamp;
     /**
-     * The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057 
+     * The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057  Your requested start time will be rounded to the nearest hour.
      */
     EndTime: Timestamp;
     /**
@@ -362,11 +366,11 @@ declare namespace ApplicationSignals {
   export type ListServiceDependentsMaxResults = number;
   export interface ListServiceDependentsOutput {
     /**
-     * The start of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057 
+     * The start of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057  This displays the time that Application Signals used for the request. It might not match your request exactly, because it was rounded to the nearest hour.
      */
     StartTime: Timestamp;
     /**
-     * The end of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057 
+     * The end of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057  This displays the time that Application Signals used for the request. It might not match your request exactly, because it was rounded to the nearest hour.
      */
     EndTime: Timestamp;
     /**
@@ -410,11 +414,11 @@ declare namespace ApplicationSignals {
   export type ListServiceOperationMaxResults = number;
   export interface ListServiceOperationsInput {
     /**
-     * The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057 
+     * The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057  Your requested start time will be rounded to the nearest hour.
      */
     StartTime: Timestamp;
     /**
-     * The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057 
+     * The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057  Your requested end time will be rounded to the nearest hour.
      */
     EndTime: Timestamp;
     /**
@@ -432,11 +436,11 @@ declare namespace ApplicationSignals {
   }
   export interface ListServiceOperationsOutput {
     /**
-     * The start of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057 
+     * The start of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057  This displays the time that Application Signals used for the request. It might not match your request exactly, because it was rounded to the nearest hour.
      */
     StartTime: Timestamp;
     /**
-     * The end of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057 
+     * The end of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057  This displays the time that Application Signals used for the request. It might not match your request exactly, because it was rounded to the nearest hour.
      */
     EndTime: Timestamp;
     /**
@@ -450,11 +454,11 @@ declare namespace ApplicationSignals {
   }
   export interface ListServicesInput {
     /**
-     * The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057 
+     * The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057  Your requested start time will be rounded to the nearest hour.
      */
     StartTime: Timestamp;
     /**
-     * The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057 
+     * The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057  Your requested start time will be rounded to the nearest hour.
      */
     EndTime: Timestamp;
     /**
@@ -469,11 +473,11 @@ declare namespace ApplicationSignals {
   export type ListServicesMaxResults = number;
   export interface ListServicesOutput {
     /**
-     * The start of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057 
+     * The start of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057  This displays the time that Application Signals used for the request. It might not match your request exactly, because it was rounded to the nearest hour.
      */
     StartTime: Timestamp;
     /**
-     * The end of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057 
+     * The end of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057  This displays the time that Application Signals used for the request. It might not match your request exactly, because it was rounded to the nearest hour.
      */
     EndTime: Timestamp;
     /**
@@ -497,6 +501,7 @@ declare namespace ApplicationSignals {
      */
     Tags?: TagList;
   }
+  export type LogGroupReferences = Attributes[];
   export interface Metric {
     /**
      * The namespace of the metric. For more information, see Namespaces.
@@ -614,6 +619,10 @@ declare namespace ApplicationSignals {
      * An array of structures that each contain information about one metric associated with this service.
      */
     MetricReferences: MetricReferences;
+    /**
+     * An array of string-to-string maps that each contain information about one log group associated with this service. Each string-to-string map includes the following fields:    "Type": "AWS::Resource"     "ResourceType": "AWS::Logs::LogGroup"     "Identifier": "name-of-log-group"   
+     */
+    LogGroupReferences?: LogGroupReferences;
   }
   export type ServiceDependencies = ServiceDependency[];
   export interface ServiceDependency {

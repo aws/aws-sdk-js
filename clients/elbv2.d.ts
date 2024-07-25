@@ -101,6 +101,14 @@ declare class ELBv2 extends Service {
    */
   deleteRule(callback?: (err: AWSError, data: ELBv2.Types.DeleteRuleOutput) => void): Request<ELBv2.Types.DeleteRuleOutput, AWSError>;
   /**
+   * Deletes a shared trust store association.
+   */
+  deleteSharedTrustStoreAssociation(params: ELBv2.Types.DeleteSharedTrustStoreAssociationInput, callback?: (err: AWSError, data: ELBv2.Types.DeleteSharedTrustStoreAssociationOutput) => void): Request<ELBv2.Types.DeleteSharedTrustStoreAssociationOutput, AWSError>;
+  /**
+   * Deletes a shared trust store association.
+   */
+  deleteSharedTrustStoreAssociation(callback?: (err: AWSError, data: ELBv2.Types.DeleteSharedTrustStoreAssociationOutput) => void): Request<ELBv2.Types.DeleteSharedTrustStoreAssociationOutput, AWSError>;
+  /**
    * Deletes the specified target group. You can delete a target group if it is not referenced by any actions. Deleting a target group also deletes any associated health checks. Deleting a target group does not affect its registered targets. For example, any EC2 instances continue to run until you stop or terminate them.
    */
   deleteTargetGroup(params: ELBv2.Types.DeleteTargetGroupInput, callback?: (err: AWSError, data: ELBv2.Types.DeleteTargetGroupOutput) => void): Request<ELBv2.Types.DeleteTargetGroupOutput, AWSError>;
@@ -221,21 +229,29 @@ declare class ELBv2 extends Service {
    */
   describeTrustStoreAssociations(callback?: (err: AWSError, data: ELBv2.Types.DescribeTrustStoreAssociationsOutput) => void): Request<ELBv2.Types.DescribeTrustStoreAssociationsOutput, AWSError>;
   /**
-   * Describes the revocation files in use by the specified trust store arn, or revocation ID.
+   * Describes the revocation files in use by the specified trust store or revocation files.
    */
   describeTrustStoreRevocations(params: ELBv2.Types.DescribeTrustStoreRevocationsInput, callback?: (err: AWSError, data: ELBv2.Types.DescribeTrustStoreRevocationsOutput) => void): Request<ELBv2.Types.DescribeTrustStoreRevocationsOutput, AWSError>;
   /**
-   * Describes the revocation files in use by the specified trust store arn, or revocation ID.
+   * Describes the revocation files in use by the specified trust store or revocation files.
    */
   describeTrustStoreRevocations(callback?: (err: AWSError, data: ELBv2.Types.DescribeTrustStoreRevocationsOutput) => void): Request<ELBv2.Types.DescribeTrustStoreRevocationsOutput, AWSError>;
   /**
-   * Describes all trust stores for a given account by trust store arn’s or name.
+   * Describes all trust stores for the specified account.
    */
   describeTrustStores(params: ELBv2.Types.DescribeTrustStoresInput, callback?: (err: AWSError, data: ELBv2.Types.DescribeTrustStoresOutput) => void): Request<ELBv2.Types.DescribeTrustStoresOutput, AWSError>;
   /**
-   * Describes all trust stores for a given account by trust store arn’s or name.
+   * Describes all trust stores for the specified account.
    */
   describeTrustStores(callback?: (err: AWSError, data: ELBv2.Types.DescribeTrustStoresOutput) => void): Request<ELBv2.Types.DescribeTrustStoresOutput, AWSError>;
+  /**
+   * Retrieves the resource policy for a specified resource.
+   */
+  getResourcePolicy(params: ELBv2.Types.GetResourcePolicyInput, callback?: (err: AWSError, data: ELBv2.Types.GetResourcePolicyOutput) => void): Request<ELBv2.Types.GetResourcePolicyOutput, AWSError>;
+  /**
+   * Retrieves the resource policy for a specified resource.
+   */
+  getResourcePolicy(callback?: (err: AWSError, data: ELBv2.Types.GetResourcePolicyOutput) => void): Request<ELBv2.Types.GetResourcePolicyOutput, AWSError>;
   /**
    * Retrieves the ca certificate bundle. This action returns a pre-signed S3 URI which is active for ten minutes.
    */
@@ -293,11 +309,11 @@ declare class ELBv2 extends Service {
    */
   modifyTargetGroupAttributes(callback?: (err: AWSError, data: ELBv2.Types.ModifyTargetGroupAttributesOutput) => void): Request<ELBv2.Types.ModifyTargetGroupAttributesOutput, AWSError>;
   /**
-   * Update the ca certificate bundle for a given trust store.
+   * Update the ca certificate bundle for the specified trust store.
    */
   modifyTrustStore(params: ELBv2.Types.ModifyTrustStoreInput, callback?: (err: AWSError, data: ELBv2.Types.ModifyTrustStoreOutput) => void): Request<ELBv2.Types.ModifyTrustStoreOutput, AWSError>;
   /**
-   * Update the ca certificate bundle for a given trust store.
+   * Update the ca certificate bundle for the specified trust store.
    */
   modifyTrustStore(callback?: (err: AWSError, data: ELBv2.Types.ModifyTrustStoreOutput) => void): Request<ELBv2.Types.ModifyTrustStoreOutput, AWSError>;
   /**
@@ -903,6 +919,18 @@ declare namespace ELBv2 {
   }
   export interface DeleteRuleOutput {
   }
+  export interface DeleteSharedTrustStoreAssociationInput {
+    /**
+     * The Amazon Resource Name (ARN) of the trust store.
+     */
+    TrustStoreArn: TrustStoreArn;
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: ResourceArn;
+  }
+  export interface DeleteSharedTrustStoreAssociationOutput {
+  }
   export interface DeleteTargetGroupInput {
     /**
      * The Amazon Resource Name (ARN) of the target group.
@@ -1165,7 +1193,7 @@ declare namespace ELBv2 {
      */
     Targets?: TargetDescriptions;
     /**
-     * Used to inclue anomaly detection information.
+     * Used to include anomaly detection information.
      */
     Include?: ListOfDescribeTargetHealthIncludeOptions;
   }
@@ -1304,6 +1332,18 @@ declare namespace ELBv2 {
      * The target group stickiness for the rule.
      */
     TargetGroupStickinessConfig?: TargetGroupStickinessConfig;
+  }
+  export interface GetResourcePolicyInput {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: ResourceArn;
+  }
+  export interface GetResourcePolicyOutput {
+    /**
+     * The content of the resource policy.
+     */
+    Policy?: Policy;
   }
   export interface GetTrustStoreCaCertificatesBundleInput {
     /**
@@ -1722,6 +1762,10 @@ declare namespace ELBv2 {
      * Indicates whether expired client certificates are ignored.
      */
     IgnoreClientCertificateExpiry?: IgnoreClientCertificateExpiry;
+    /**
+     * Indicates a shared trust stores association status.
+     */
+    TrustStoreAssociationStatus?: TrustStoreAssociationStatusEnum;
   }
   export type Name = string;
   export type NumberOfCaCertificates = number;
@@ -1735,6 +1779,7 @@ declare namespace ELBv2 {
      */
     Values?: ListOfString;
   }
+  export type Policy = string;
   export type Port = number;
   export type PrivateIPv4Address = string;
   export type ProtocolEnum = "HTTP"|"HTTPS"|"TCP"|"TLS"|"UDP"|"TCP_UDP"|"GENEVE"|string;
@@ -1943,7 +1988,7 @@ declare namespace ELBv2 {
      */
     LoadBalancerArn: LoadBalancerArn;
     /**
-     * Note: Internal load balancers must use the ipv4 IP address type. [Application Load Balancers] The IP address type. The possible values are ipv4 (for only IPv4 addresses), dualstack (for IPv4 and IPv6 addresses), and dualstack-without-public-ipv4 (for IPv6 only public addresses, with private IPv4 and IPv6 addresses). [Network Load Balancers] The IP address type. The possible values are ipv4 (for only IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses). You can’t specify dualstack for a load balancer with a UDP or TCP_UDP listener. [Gateway Load Balancers] The IP address type. The possible values are ipv4 (for only IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses).
+     * Note: Internal load balancers must use the ipv4 IP address type. [Application Load Balancers] The IP address type. The possible values are ipv4 (for only IPv4 addresses), dualstack (for IPv4 and IPv6 addresses), and dualstack-without-public-ipv4 (for IPv6 only public addresses, with private IPv4 and IPv6 addresses). Note: Application Load Balancer authentication only supports IPv4 addresses when connecting to an Identity Provider (IdP) or Amazon Cognito endpoint. Without a public IPv4 address the load balancer cannot complete the authentication process, resulting in HTTP 500 errors. [Network Load Balancers] The IP address type. The possible values are ipv4 (for only IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses). You can’t specify dualstack for a load balancer with a UDP or TCP_UDP listener. [Gateway Load Balancers] The IP address type. The possible values are ipv4 (for only IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses).
      */
     IpAddressType: IpAddressType;
   }
@@ -2296,6 +2341,7 @@ declare namespace ELBv2 {
     ResourceArn?: TrustStoreAssociationResourceArn;
   }
   export type TrustStoreAssociationResourceArn = string;
+  export type TrustStoreAssociationStatusEnum = "active"|"removed"|string;
   export type TrustStoreAssociations = TrustStoreAssociation[];
   export type TrustStoreName = string;
   export type TrustStoreNames = TrustStoreName[];
