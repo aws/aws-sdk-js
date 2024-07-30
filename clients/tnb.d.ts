@@ -68,11 +68,11 @@ declare class Tnb extends Service {
    */
   deleteSolNetworkPackage(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Gets the details of a network function instance, including the instantation state and metadata from the function package descriptor in the network function package. A network function instance is a function in a function package .
+   * Gets the details of a network function instance, including the instantiation state and metadata from the function package descriptor in the network function package. A network function instance is a function in a function package .
    */
   getSolFunctionInstance(params: Tnb.Types.GetSolFunctionInstanceInput, callback?: (err: AWSError, data: Tnb.Types.GetSolFunctionInstanceOutput) => void): Request<Tnb.Types.GetSolFunctionInstanceOutput, AWSError>;
   /**
-   * Gets the details of a network function instance, including the instantation state and metadata from the function package descriptor in the network function package. A network function instance is a function in a function package .
+   * Gets the details of a network function instance, including the instantiation state and metadata from the function package descriptor in the network function package. A network function instance is a function in a function package .
    */
   getSolFunctionInstance(callback?: (err: AWSError, data: Tnb.Types.GetSolFunctionInstanceOutput) => void): Request<Tnb.Types.GetSolFunctionInstanceOutput, AWSError>;
   /**
@@ -244,11 +244,11 @@ declare class Tnb extends Service {
    */
   updateSolFunctionPackage(callback?: (err: AWSError, data: Tnb.Types.UpdateSolFunctionPackageOutput) => void): Request<Tnb.Types.UpdateSolFunctionPackageOutput, AWSError>;
   /**
-   * Update a network instance. A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.
+   * Update a network instance. A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed. Choose the updateType parameter to target the necessary update of the network instance.
    */
   updateSolNetworkInstance(params: Tnb.Types.UpdateSolNetworkInstanceInput, callback?: (err: AWSError, data: Tnb.Types.UpdateSolNetworkInstanceOutput) => void): Request<Tnb.Types.UpdateSolNetworkInstanceOutput, AWSError>;
   /**
-   * Update a network instance. A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.
+   * Update a network instance. A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed. Choose the updateType parameter to target the necessary update of the network instance.
    */
   updateSolNetworkInstance(callback?: (err: AWSError, data: Tnb.Types.UpdateSolNetworkInstanceOutput) => void): Request<Tnb.Types.UpdateSolNetworkInstanceOutput, AWSError>;
   /**
@@ -663,9 +663,21 @@ declare namespace Tnb {
      */
     createdAt: SyntheticTimestamp_date_time;
     /**
+     * Metadata related to the network operation occurrence for network instantiation. This is populated only if the lcmOperationType is INSTANTIATE.
+     */
+    instantiateMetadata?: InstantiateMetadata;
+    /**
      * The date that the resource was last modified.
      */
     lastModified: SyntheticTimestamp_date_time;
+    /**
+     * Metadata related to the network operation occurrence for network function updates in a network instance. This is populated only if the lcmOperationType is UPDATE and the updateType is MODIFY_VNF_INFORMATION.
+     */
+    modifyVnfInfoMetadata?: ModifyVnfInfoMetadata;
+    /**
+     * Metadata related to the network operation occurrence for network instance updates. This is populated only if the lcmOperationType is UPDATE and the updateType is UPDATE_NS.
+     */
+    updateNsMetadata?: UpdateNsMetadata;
   }
   export interface GetSolNetworkOperationOutput {
     /**
@@ -704,6 +716,10 @@ declare namespace Tnb {
      * All tasks associated with this operation occurrence.
      */
     tasks?: GetSolNetworkOperationTasksList;
+    /**
+     * Type of the update. Only present if the network operation lcmOperationType is UPDATE.
+     */
+    updateType?: UpdateSolNetworkType;
   }
   export interface GetSolNetworkOperationTaskDetails {
     /**
@@ -862,6 +878,16 @@ declare namespace Tnb {
      */
     nodeGroup?: String;
   }
+  export interface InstantiateMetadata {
+    /**
+     * The configurable properties used during instantiation.
+     */
+    additionalParamsForNs?: Document;
+    /**
+     * The network service descriptor used for instantiating the network instance.
+     */
+    nsdInfoId: NsdInfoId;
+  }
   export interface InstantiateSolNetworkInstanceInput {
     /**
      * Provides values for the configurable properties.
@@ -876,7 +902,7 @@ declare namespace Tnb {
      */
     nsInstanceId: NsInstanceId;
     /**
-     * A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.
+     * A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are only applied to the network operation that is created. These tags are not applied to the network instance. Use tags to search and filter your resources or track your Amazon Web Services costs.
      */
     tags?: TagMap;
   }
@@ -886,7 +912,7 @@ declare namespace Tnb {
      */
     nsLcmOpOccId: NsLcmOpOccId;
     /**
-     * A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.
+     * A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are only applied to the network operation that is created. These tags are not applied to the network instance. Use tags to search and filter your resources or track your Amazon Web Services costs.
      */
     tags?: TagMap;
   }
@@ -1129,6 +1155,10 @@ declare namespace Tnb {
      * The state of the network operation.
      */
     operationState: NsLcmOperationState;
+    /**
+     * Type of the update. Only present if the network operation lcmOperationType is UPDATE.
+     */
+    updateType?: UpdateSolNetworkType;
   }
   export interface ListSolNetworkOperationsInput {
     /**
@@ -1139,6 +1169,10 @@ declare namespace Tnb {
      * The token for the next page of results.
      */
     nextToken?: PaginationToken;
+    /**
+     * Network instance id filter, to retrieve network operations associated to a network instance.
+     */
+    nsInstanceId?: NsInstanceId;
   }
   export type ListSolNetworkOperationsInputMaxResultsInteger = number;
   export interface ListSolNetworkOperationsMetadata {
@@ -1150,6 +1184,14 @@ declare namespace Tnb {
      * The date that the resource was last modified.
      */
     lastModified: SyntheticTimestamp_date_time;
+    /**
+     * The network service descriptor id used for the operation. Only present if the updateType is UPDATE_NS.
+     */
+    nsdInfoId?: NsdInfoId;
+    /**
+     * The network function id used for the operation. Only present if the updateType is MODIFY_VNF_INFO.
+     */
+    vnfInstanceId?: VnfInstanceId;
   }
   export interface ListSolNetworkOperationsOutput {
     /**
@@ -1256,6 +1298,16 @@ declare namespace Tnb {
      */
     tags: TagMap;
   }
+  export interface ModifyVnfInfoMetadata {
+    /**
+     * The configurable properties used during update of the network function instance.
+     */
+    vnfConfigurableProperties: Document;
+    /**
+     * The network function instance that was updated in the network instance.
+     */
+    vnfInstanceId: VnfInstanceId;
+  }
   export interface NetworkArtifactMeta {
     /**
      * Lists network package overrides.
@@ -1267,7 +1319,7 @@ declare namespace Tnb {
   export type NsLcmOpOccArn = string;
   export type NsLcmOpOccId = string;
   export type NsLcmOperationState = "PROCESSING"|"COMPLETED"|"FAILED"|"CANCELLING"|"CANCELLED"|string;
-  export type NsState = "INSTANTIATED"|"NOT_INSTANTIATED"|"IMPAIRED"|"STOPPED"|"DELETED"|"INSTANTIATE_IN_PROGRESS"|"UPDATE_IN_PROGRESS"|"TERMINATE_IN_PROGRESS"|string;
+  export type NsState = "INSTANTIATED"|"NOT_INSTANTIATED"|"UPDATED"|"IMPAIRED"|"UPDATE_FAILED"|"STOPPED"|"DELETED"|"INSTANTIATE_IN_PROGRESS"|"INTENT_TO_UPDATE_IN_PROGRESS"|"UPDATE_IN_PROGRESS"|"TERMINATE_IN_PROGRESS"|string;
   export type NsdId = string;
   export type NsdInfoArn = string;
   export type NsdInfoId = string;
@@ -1297,7 +1349,7 @@ declare namespace Tnb {
     /**
      * Function package file.
      */
-    file: _Blob;
+    file: SensitiveBlob;
     /**
      * Function package ID.
      */
@@ -1340,7 +1392,7 @@ declare namespace Tnb {
     /**
      * Network package file.
      */
-    file: _Blob;
+    file: SensitiveBlob;
     /**
      * Network service descriptor info ID.
      */
@@ -1379,6 +1431,7 @@ declare namespace Tnb {
      */
     vnfPkgIds: VnfPkgIdList;
   }
+  export type SensitiveBlob = Buffer|Uint8Array|Blob|string;
   export type String = string;
   export type StringMap = {[key: string]: String};
   export type SyntheticTimestamp_date_time = Date;
@@ -1406,7 +1459,7 @@ declare namespace Tnb {
      */
     nsInstanceId: NsInstanceId;
     /**
-     * A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.
+     * A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are only applied to the network operation that is created. These tags are not applied to the network instance. Use tags to search and filter your resources or track your Amazon Web Services costs.
      */
     tags?: TagMap;
   }
@@ -1416,7 +1469,7 @@ declare namespace Tnb {
      */
     nsLcmOpOccId?: NsLcmOpOccId;
     /**
-     * A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.
+     * A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are only applied to the network operation that is created. These tags are not applied to the network instance. Use tags to search and filter your resources or track your Amazon Web Services costs.
      */
     tags?: TagMap;
   }
@@ -1442,6 +1495,16 @@ declare namespace Tnb {
   }
   export interface UntagResourceOutput {
   }
+  export interface UpdateNsMetadata {
+    /**
+     * The configurable properties used during update.
+     */
+    additionalParamsForNs?: Document;
+    /**
+     * The network service descriptor used for updating the network instance.
+     */
+    nsdInfoId: NsdInfoId;
+  }
   export interface UpdateSolFunctionPackageInput {
     /**
      * Operational state of the function package.
@@ -1460,7 +1523,7 @@ declare namespace Tnb {
   }
   export interface UpdateSolNetworkInstanceInput {
     /**
-     * Identifies the network function information parameters and/or the configurable properties of the network function to be modified.
+     * Identifies the network function information parameters and/or the configurable properties of the network function to be modified. Include this property only if the update type is MODIFY_VNF_INFORMATION.
      */
     modifyVnfInfoData?: UpdateSolNetworkModify;
     /**
@@ -1468,11 +1531,15 @@ declare namespace Tnb {
      */
     nsInstanceId: NsInstanceId;
     /**
-     * A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.
+     * A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are only applied to the network operation that is created. These tags are not applied to the network instance. Use tags to search and filter your resources or track your Amazon Web Services costs.
      */
     tags?: TagMap;
     /**
-     * The type of update.
+     * Identifies the network service descriptor and the configurable properties of the descriptor, to be used for the update. Include this property only if the update type is UPDATE_NS.
+     */
+    updateNs?: UpdateSolNetworkServiceData;
+    /**
+     * The type of update.   Use the MODIFY_VNF_INFORMATION update type, to update a specific network function configuration, in the network instance.   Use the UPDATE_NS update type, to update the network instance to a new network service descriptor.  
      */
     updateType: UpdateSolNetworkType;
   }
@@ -1482,7 +1549,7 @@ declare namespace Tnb {
      */
     nsLcmOpOccId?: NsLcmOpOccId;
     /**
-     * A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.
+     * A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are only applied to the network operation that is created. These tags are not applied to the network instance. Use tags to search and filter your resources or track your Amazon Web Services costs.
      */
     tags?: TagMap;
   }
@@ -1512,7 +1579,17 @@ declare namespace Tnb {
      */
     nsdOperationalState: NsdOperationalState;
   }
-  export type UpdateSolNetworkType = "MODIFY_VNF_INFORMATION"|string;
+  export interface UpdateSolNetworkServiceData {
+    /**
+     * Values for the configurable properties declared in the network service descriptor.
+     */
+    additionalParamsForNs?: Document;
+    /**
+     * ID of the network service descriptor.
+     */
+    nsdInfoId: NsdInfoId;
+  }
+  export type UpdateSolNetworkType = "MODIFY_VNF_INFORMATION"|"UPDATE_NS"|string;
   export type UsageState = "IN_USE"|"NOT_IN_USE"|string;
   export interface ValidateSolFunctionPackageContentInput {
     /**
@@ -1522,7 +1599,7 @@ declare namespace Tnb {
     /**
      * Function package file.
      */
-    file: _Blob;
+    file: SensitiveBlob;
     /**
      * Function package ID.
      */
@@ -1565,7 +1642,7 @@ declare namespace Tnb {
     /**
      * Network package file.
      */
-    file: _Blob;
+    file: SensitiveBlob;
     /**
      * Network service descriptor file.
      */

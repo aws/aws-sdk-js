@@ -1,6 +1,17 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1664.0-->
+<!--LATEST=2.1665.0-->
 <!--ENTRYINSERT-->
+
+## 2.1665.0
+* feature: AppStream: Added support for Red Hat Enterprise Linux 8 on Amazon AppStream 2.0
+* feature: AutoScaling: Increase the length limit for VPCZoneIdentifier from 2047 to 5000
+* feature: CloudWatchLogs: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: CodePipeline: AWS CodePipeline V2 type pipelines now support stage level conditions to enable development teams to safely release changes that meet quality and compliance requirements.
+* feature: ELB: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: EventBridge: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: LexModelsV2: This release adds new capabilities to the AMAZON.QnAIntent: Custom prompting, Guardrails integration and ExactResponse support for Bedrock Knowledge Base.
+* feature: RolesAnywhere: IAM RolesAnywhere now supports custom role session name on the CreateSession. This release adds the acceptRoleSessionName option to a profile to control whether a role session name will be accepted in a session request with a given profile.
+* feature: Tnb: This release adds Network Service Update, through which customers will be able to update their instantiated networks to a new network package. See the documentation for limitations. The release also enhances the Get network operation API to return parameter overrides used during the operation.
 
 ## 2.1664.0
 * feature: ApplicationAutoScaling: Application Auto Scaling is now more responsive to the changes in demand of your SageMaker Inference endpoints. To get started, create or update a Target Tracking policy based on High Resolution CloudWatch metrics.

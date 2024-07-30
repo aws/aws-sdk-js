@@ -172,6 +172,22 @@ declare class CodePipeline extends Service {
    */
   listPipelines(callback?: (err: AWSError, data: CodePipeline.Types.ListPipelinesOutput) => void): Request<CodePipeline.Types.ListPipelinesOutput, AWSError>;
   /**
+   * Lists the rule executions that have occurred in a pipeline configured for conditions with rules.
+   */
+  listRuleExecutions(params: CodePipeline.Types.ListRuleExecutionsInput, callback?: (err: AWSError, data: CodePipeline.Types.ListRuleExecutionsOutput) => void): Request<CodePipeline.Types.ListRuleExecutionsOutput, AWSError>;
+  /**
+   * Lists the rule executions that have occurred in a pipeline configured for conditions with rules.
+   */
+  listRuleExecutions(callback?: (err: AWSError, data: CodePipeline.Types.ListRuleExecutionsOutput) => void): Request<CodePipeline.Types.ListRuleExecutionsOutput, AWSError>;
+  /**
+   * Lists the rules for the condition.
+   */
+  listRuleTypes(params: CodePipeline.Types.ListRuleTypesInput, callback?: (err: AWSError, data: CodePipeline.Types.ListRuleTypesOutput) => void): Request<CodePipeline.Types.ListRuleTypesOutput, AWSError>;
+  /**
+   * Lists the rules for the condition.
+   */
+  listRuleTypes(callback?: (err: AWSError, data: CodePipeline.Types.ListRuleTypesOutput) => void): Request<CodePipeline.Types.ListRuleTypesOutput, AWSError>;
+  /**
    * Gets the set of key-value pairs (metadata) that are used to manage the resource.
    */
   listTagsForResource(params: CodePipeline.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: CodePipeline.Types.ListTagsForResourceOutput) => void): Request<CodePipeline.Types.ListTagsForResourceOutput, AWSError>;
@@ -187,6 +203,14 @@ declare class CodePipeline extends Service {
    * Gets a listing of all the webhooks in this Amazon Web Services Region for this account. The output lists all webhooks and includes the webhook URL and ARN and the configuration for each webhook.
    */
   listWebhooks(callback?: (err: AWSError, data: CodePipeline.Types.ListWebhooksOutput) => void): Request<CodePipeline.Types.ListWebhooksOutput, AWSError>;
+  /**
+   * Used to override a stage condition.
+   */
+  overrideStageCondition(params: CodePipeline.Types.OverrideStageConditionInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Used to override a stage condition.
+   */
+  overrideStageCondition(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Returns information about any jobs for CodePipeline to act on. PollForJobs is valid only for action types with "Custom" in the owner field. If the action type contains AWS or ThirdParty in the owner field, the PollForJobs action returns an error.  When this API is called, CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. This API also returns any secret values defined for the action. 
    */
@@ -981,6 +1005,12 @@ declare namespace CodePipeline {
   export type ArtifactStoreLocation = string;
   export type ArtifactStoreMap = {[key: string]: ArtifactStore};
   export type ArtifactStoreType = "S3"|string;
+  export interface BeforeEntryConditions {
+    /**
+     * The conditions that are configured as entry conditions.
+     */
+    conditions: ConditionList;
+  }
   export interface BlockerDeclaration {
     /**
      * Reserved for future use.
@@ -998,6 +1028,44 @@ declare namespace CodePipeline {
   export type ClientRequestToken = string;
   export type ClientToken = string;
   export type Code = string;
+  export interface Condition {
+    /**
+     * The action to be done when the condition is met. For example, rolling back an execution for a failure condition.
+     */
+    result?: Result;
+    /**
+     * The rules that make up the condition.
+     */
+    rules?: RuleDeclarationList;
+  }
+  export interface ConditionExecution {
+    /**
+     * The status of the run for a condition.
+     */
+    status?: ConditionExecutionStatus;
+    /**
+     * The summary of information about a run for a condition.
+     */
+    summary?: ExecutionSummary;
+    /**
+     * The last status change of the condition.
+     */
+    lastStatusChange?: Timestamp;
+  }
+  export type ConditionExecutionStatus = "InProgress"|"Failed"|"Errored"|"Succeeded"|"Cancelled"|"Abandoned"|"Overridden"|string;
+  export type ConditionList = Condition[];
+  export interface ConditionState {
+    /**
+     * The state of the latest run of the rule.
+     */
+    latestExecution?: ConditionExecution;
+    /**
+     * The state of the rules for the condition.
+     */
+    ruleStates?: RuleStateList;
+  }
+  export type ConditionStateList = ConditionState[];
+  export type ConditionType = "BEFORE_ENTRY"|"ON_SUCCESS"|string;
   export type ContinuationToken = string;
   export interface CreateCustomActionTypeInput {
     /**
@@ -1220,6 +1288,10 @@ declare namespace CodePipeline {
      * The specified result for when the failure conditions are met, such as rolling back the stage.
      */
     result?: Result;
+    /**
+     * The conditions that are configured as failure conditions.
+     */
+    conditions?: ConditionList;
   }
   export interface FailureDetails {
     /**
@@ -1642,6 +1714,50 @@ declare namespace CodePipeline {
      */
     nextToken?: NextToken;
   }
+  export interface ListRuleExecutionsInput {
+    /**
+     * The name of the pipeline for which you want to get execution summary information.
+     */
+    pipelineName: PipelineName;
+    /**
+     * Input information used to filter rule execution history.
+     */
+    filter?: RuleExecutionFilter;
+    /**
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned nextToken value. Pipeline history is limited to the most recent 12 months, based on pipeline execution start times. Default value is 100.
+     */
+    maxResults?: MaxResults;
+    /**
+     * The token that was returned from the previous ListRuleExecutions call, which can be used to return the next set of rule executions in the list.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListRuleExecutionsOutput {
+    /**
+     * Details about the output for listing rule executions.
+     */
+    ruleExecutionDetails?: RuleExecutionDetailList;
+    /**
+     * A token that can be used in the next ListRuleExecutions call. To view all items in the list, continue to call this operation with each subsequent token until no more nextToken values are returned.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListRuleTypesInput {
+    /**
+     * The rule owner to filter on.
+     */
+    ruleOwnerFilter?: RuleOwner;
+    /**
+     * The rule Region to filter on.
+     */
+    regionFilter?: AWSRegionName;
+  }
+  export interface ListRuleTypesOutput {
+    /**
+     * Lists the rules that are configured for the condition.
+     */
+    ruleTypes: RuleTypeList;
+  }
   export interface ListTagsForResourceInput {
     /**
      * The Amazon Resource Name (ARN) of the resource to get tags for.
@@ -1737,6 +1853,24 @@ declare namespace CodePipeline {
   export type OutputVariablesKey = string;
   export type OutputVariablesMap = {[key: string]: OutputVariablesValue};
   export type OutputVariablesValue = string;
+  export interface OverrideStageConditionInput {
+    /**
+     * The name of the pipeline with the stage that will override the condition.
+     */
+    pipelineName: PipelineName;
+    /**
+     * The name of the stage for the override.
+     */
+    stageName: StageName;
+    /**
+     * The ID of the pipeline execution for the override.
+     */
+    pipelineExecutionId: PipelineExecutionId;
+    /**
+     * The type of condition to override for the stage, such as entry conditions, failure conditions, or success conditions.
+     */
+    conditionType: ConditionType;
+  }
   export type Percentage = number;
   export type PipelineArn = string;
   export interface PipelineContext {
@@ -2199,8 +2333,9 @@ declare namespace CodePipeline {
     resolvedValue?: String;
   }
   export type ResolvedPipelineVariableList = ResolvedPipelineVariable[];
+  export type ResolvedRuleConfigurationMap = {[key: string]: String};
   export type ResourceArn = string;
-  export type Result = "ROLLBACK"|string;
+  export type Result = "ROLLBACK"|"FAIL"|string;
   export interface RetryStageExecutionInput {
     /**
      * The name of the pipeline that contains the failed stage.
@@ -2248,6 +2383,305 @@ declare namespace CodePipeline {
      * The execution ID of the pipeline execution for the stage that has been rolled back.
      */
     pipelineExecutionId: PipelineExecutionId;
+  }
+  export type RuleCategory = "Rule"|string;
+  export type RuleConfigurationKey = string;
+  export type RuleConfigurationMap = {[key: string]: RuleConfigurationValue};
+  export interface RuleConfigurationProperty {
+    /**
+     * The name of the rule configuration property.
+     */
+    name: RuleConfigurationKey;
+    /**
+     * Whether the configuration property is a required value.
+     */
+    required: Boolean;
+    /**
+     * Whether the configuration property is a key.
+     */
+    key: Boolean;
+    /**
+     * Whether the configuration property is secret. When updating a pipeline, passing * * * * * without changing any other values of the action preserves the previous value of the secret.
+     */
+    secret: Boolean;
+    /**
+     * Indicates whether the property can be queried. If you create a pipeline with a condition and rule, and that rule contains a queryable property, the value for that configuration property is subject to other restrictions. The value must be less than or equal to twenty (20) characters. The value can contain only alphanumeric characters, underscores, and hyphens.
+     */
+    queryable?: Boolean;
+    /**
+     * The description of the action configuration property that is displayed to users.
+     */
+    description?: Description;
+    /**
+     * The type of the configuration property.
+     */
+    type?: RuleConfigurationPropertyType;
+  }
+  export type RuleConfigurationPropertyList = RuleConfigurationProperty[];
+  export type RuleConfigurationPropertyType = "String"|"Number"|"Boolean"|string;
+  export type RuleConfigurationValue = string;
+  export interface RuleDeclaration {
+    /**
+     * The name of the rule that is created for the condition, such as CheckAllResults.
+     */
+    name: RuleName;
+    /**
+     * The ID for the rule type, which is made up of the combined values for category, owner, provider, and version.
+     */
+    ruleTypeId: RuleTypeId;
+    /**
+     * The action configuration fields for the rule.
+     */
+    configuration?: RuleConfigurationMap;
+    /**
+     * The input artifacts fields for the rule, such as specifying an input file for the rule.
+     */
+    inputArtifacts?: InputArtifactList;
+    /**
+     * The pipeline role ARN associated with the rule.
+     */
+    roleArn?: RoleArn;
+    /**
+     * The Region for the condition associated with the rule.
+     */
+    region?: AWSRegionName;
+    /**
+     * The action timeout for the rule.
+     */
+    timeoutInMinutes?: RuleTimeout;
+  }
+  export type RuleDeclarationList = RuleDeclaration[];
+  export interface RuleExecution {
+    /**
+     * The execution ID for the run of the rule.
+     */
+    ruleExecutionId?: RuleExecutionId;
+    /**
+     * The status of the run of the rule, such as FAILED.
+     */
+    status?: RuleExecutionStatus;
+    /**
+     * A summary of the run of the rule.
+     */
+    summary?: ExecutionSummary;
+    /**
+     * The last status change of the rule.
+     */
+    lastStatusChange?: Timestamp;
+    /**
+     * The system-generated token used to identify a unique request.
+     */
+    token?: RuleExecutionToken;
+    /**
+     * The ARN of the user who last changed the rule.
+     */
+    lastUpdatedBy?: LastUpdatedBy;
+    /**
+     * The external ID of the run of the rule.
+     */
+    externalExecutionId?: ExecutionId;
+    /**
+     * The URL of a resource external to Amazon Web Services that is used when running the rule (for example, an external repository URL).
+     */
+    externalExecutionUrl?: Url;
+    errorDetails?: ErrorDetails;
+  }
+  export interface RuleExecutionDetail {
+    /**
+     * The ID of the pipeline execution in the stage where the rule was run. Use the GetPipelineState action to retrieve the current pipelineExecutionId of the stage.
+     */
+    pipelineExecutionId?: PipelineExecutionId;
+    /**
+     * The ID of the run for the rule.
+     */
+    ruleExecutionId?: RuleExecutionId;
+    /**
+     * The version number of the pipeline with the stage where the rule was run.
+     */
+    pipelineVersion?: PipelineVersion;
+    /**
+     * The name of the stage where the rule was run.
+     */
+    stageName?: StageName;
+    /**
+     * The name of the rule that was run in the stage.
+     */
+    ruleName?: RuleName;
+    /**
+     * The start time of the rule execution.
+     */
+    startTime?: Timestamp;
+    /**
+     * The date and time of the last change to the rule execution, in timestamp format.
+     */
+    lastUpdateTime?: Timestamp;
+    /**
+     * The ARN of the user who changed the rule execution details.
+     */
+    updatedBy?: LastUpdatedBy;
+    /**
+     * The status of the rule execution. Status categories are InProgress, Succeeded, and Failed. 
+     */
+    status?: RuleExecutionStatus;
+    /**
+     * Input details for the rule execution, such as role ARN, Region, and input artifacts.
+     */
+    input?: RuleExecutionInput;
+    /**
+     * Output details for the rule execution, such as the rule execution result.
+     */
+    output?: RuleExecutionOutput;
+  }
+  export type RuleExecutionDetailList = RuleExecutionDetail[];
+  export interface RuleExecutionFilter {
+    /**
+     * The pipeline execution ID used to filter rule execution history.
+     */
+    pipelineExecutionId?: PipelineExecutionId;
+    latestInPipelineExecution?: LatestInPipelineExecutionFilter;
+  }
+  export type RuleExecutionId = string;
+  export interface RuleExecutionInput {
+    /**
+     * The ID for the rule type, which is made up of the combined values for category, owner, provider, and version.
+     */
+    ruleTypeId?: RuleTypeId;
+    /**
+     * Configuration data for a rule execution, such as the resolved values for that run.
+     */
+    configuration?: RuleConfigurationMap;
+    /**
+     * Configuration data for a rule execution with all variable references replaced with their real values for the execution.
+     */
+    resolvedConfiguration?: ResolvedRuleConfigurationMap;
+    /**
+     * The ARN of the IAM service role that performs the declared rule. This is assumed through the roleArn for the pipeline.
+     */
+    roleArn?: RoleArn;
+    /**
+     * The Amazon Web Services Region for the rule, such as us-east-1.
+     */
+    region?: AWSRegionName;
+    /**
+     * Details of input artifacts of the rule that correspond to the rule execution.
+     */
+    inputArtifacts?: ArtifactDetailList;
+  }
+  export interface RuleExecutionOutput {
+    /**
+     * Execution result information listed in the output details for a rule execution.
+     */
+    executionResult?: RuleExecutionResult;
+  }
+  export interface RuleExecutionResult {
+    /**
+     * The external ID for the rule execution.
+     */
+    externalExecutionId?: ExternalExecutionId;
+    /**
+     * The external provider summary for the rule execution.
+     */
+    externalExecutionSummary?: ExternalExecutionSummary;
+    /**
+     * The deepest external link to the external resource (for example, a repository URL or deployment endpoint) that is used when running the rule.
+     */
+    externalExecutionUrl?: Url;
+    errorDetails?: ErrorDetails;
+  }
+  export type RuleExecutionStatus = "InProgress"|"Abandoned"|"Succeeded"|"Failed"|string;
+  export type RuleExecutionToken = string;
+  export type RuleName = string;
+  export type RuleOwner = "AWS"|string;
+  export type RuleProvider = string;
+  export interface RuleRevision {
+    /**
+     * The system-generated unique ID that identifies the revision number of the rule.
+     */
+    revisionId: Revision;
+    /**
+     * The unique identifier of the change that set the state to this revision (for example, a deployment ID or timestamp).
+     */
+    revisionChangeId: RevisionChangeIdentifier;
+    /**
+     * The date and time when the most recent version of the rule was created, in timestamp format.
+     */
+    created: Timestamp;
+  }
+  export interface RuleState {
+    /**
+     * The name of the rule.
+     */
+    ruleName?: RuleName;
+    /**
+     * The ID of the current revision of the artifact successfully worked on by the job.
+     */
+    currentRevision?: RuleRevision;
+    /**
+     * Represents information about the latest run of an rule.
+     */
+    latestExecution?: RuleExecution;
+    /**
+     * A URL link for more information about the state of the action, such as a details page.
+     */
+    entityUrl?: Url;
+    /**
+     * A URL link for more information about the revision, such as a commit details page.
+     */
+    revisionUrl?: Url;
+  }
+  export type RuleStateList = RuleState[];
+  export type RuleTimeout = number;
+  export interface RuleType {
+    /**
+     * Represents information about a rule type.
+     */
+    id: RuleTypeId;
+    /**
+     * Returns information about the settings for a rule type.
+     */
+    settings?: RuleTypeSettings;
+    /**
+     * The configuration properties for the rule type.
+     */
+    ruleConfigurationProperties?: RuleConfigurationPropertyList;
+    inputArtifactDetails: ArtifactDetails;
+  }
+  export interface RuleTypeId {
+    /**
+     * A category defines what kind of rule can be run in the stage, and constrains the provider type for the rule. Valid categories are limited to one of the following values.    INVOKE   Approval   Rule  
+     */
+    category: RuleCategory;
+    /**
+     * The creator of the rule being called. The valid value for the Owner field in the rule category is AWS. 
+     */
+    owner?: RuleOwner;
+    /**
+     * The provider of the service being called by the rule. Valid providers are determined by the rulecategory. For example, a managed rule in the Rule category type has an owner of AWS, which would be specified as AWS.
+     */
+    provider: RuleProvider;
+    /**
+     * A string that describes the rule version.
+     */
+    version?: Version;
+  }
+  export type RuleTypeList = RuleType[];
+  export interface RuleTypeSettings {
+    /**
+     * The URL of a sign-up page where users can sign up for an external service and perform initial configuration of the action provided by that service.
+     */
+    thirdPartyConfigurationUrl?: Url;
+    /**
+     * The URL returned to the CodePipeline console that provides a deep link to the resources of the external system, such as the configuration page for a CodeDeploy deployment group. This link is provided as part of the action display in the pipeline.
+     */
+    entityUrlTemplate?: UrlTemplate;
+    /**
+     * The URL returned to the CodePipeline console that contains a link to the top-level landing page for the external system, such as the console page for CodeDeploy. This link is shown on the pipeline view page in the CodePipeline console and provides a link to the execution entity of the external action.
+     */
+    executionUrlTemplate?: UrlTemplate;
+    /**
+     * The URL returned to the CodePipeline console that contains a link to the page where customers can update or change the configuration of the external action.
+     */
+    revisionUrlTemplate?: UrlTemplate;
   }
   export interface S3ArtifactLocation {
     /**
@@ -2313,6 +2747,26 @@ declare namespace CodePipeline {
   export type SourceRevisionType = "COMMIT_ID"|"IMAGE_DIGEST"|"S3_OBJECT_VERSION_ID"|"S3_OBJECT_KEY"|string;
   export type StageActionDeclarationList = ActionDeclaration[];
   export type StageBlockerDeclarationList = BlockerDeclaration[];
+  export interface StageConditionState {
+    /**
+     * Represents information about the latest run of a condition for a stage.
+     */
+    latestExecution?: StageConditionsExecution;
+    /**
+     * The states of the conditions for a run of a condition for a stage.
+     */
+    conditionStates?: ConditionStateList;
+  }
+  export interface StageConditionsExecution {
+    /**
+     * The status of a run of a condition for a stage.
+     */
+    status?: ConditionExecutionStatus;
+    /**
+     * A summary of the run of the condition for a stage.
+     */
+    summary?: ExecutionSummary;
+  }
   export interface StageContext {
     /**
      * The name of the stage.
@@ -2336,6 +2790,14 @@ declare namespace CodePipeline {
      * The method to use when a stage has not completed successfully. For example, configuring this field for rollback will roll back a failed stage automatically to the last successful pipeline execution in the stage.
      */
     onFailure?: FailureConditions;
+    /**
+     * The method to use when a stage has succeeded. For example, configuring this field for conditions will allow the stage to succeed when the conditions are met.
+     */
+    onSuccess?: SuccessConditions;
+    /**
+     * The method to use when a stage allows entry. For example, configuring this field for conditions will allow entry to the stage when the conditions are met.
+     */
+    beforeEntry?: BeforeEntryConditions;
   }
   export interface StageExecution {
     /**
@@ -2377,6 +2839,18 @@ declare namespace CodePipeline {
      * Information about the latest execution in the stage, including its ID and status.
      */
     latestExecution?: StageExecution;
+    /**
+     * The state of the entry conditions for a stage.
+     */
+    beforeEntryConditionState?: StageConditionState;
+    /**
+     * The state of the success conditions for a stage.
+     */
+    onSuccessConditionState?: StageConditionState;
+    /**
+     * The state of the failure conditions for a stage.
+     */
+    onFailureConditionState?: StageConditionState;
   }
   export type StageStateList = StageState[];
   export type StageTransitionType = "Inbound"|"Outbound"|string;
@@ -2442,6 +2916,12 @@ declare namespace CodePipeline {
      * The name of the stage for filtering for pipeline executions where the stage was successful in the current pipeline version.
      */
     stageName?: StageName;
+  }
+  export interface SuccessConditions {
+    /**
+     * The conditions that are success conditions.
+     */
+    conditions: ConditionList;
   }
   export interface Tag {
     /**

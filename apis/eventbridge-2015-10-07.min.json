@@ -12,7 +12,10 @@
     "serviceId": "EventBridge",
     "signatureVersion": "v4",
     "targetPrefix": "AWSEvents",
-    "uid": "eventbridge-2015-10-07"
+    "uid": "eventbridge-2015-10-07",
+    "auth": [
+      "aws.auth#sigv4"
+    ]
   },
   "operations": {
     "ActivateEventSource": {

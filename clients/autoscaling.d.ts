@@ -756,7 +756,7 @@ declare namespace AutoScaling {
     /**
      * One or more subnet IDs, if applicable, separated by commas.
      */
-    VPCZoneIdentifier?: XmlStringMaxLen2047;
+    VPCZoneIdentifier?: XmlStringMaxLen5000;
     /**
      * The metrics enabled for the group.
      */
@@ -1095,7 +1095,7 @@ declare namespace AutoScaling {
     /**
      * A comma-separated list of subnet IDs for a virtual private cloud (VPC) where instances in the Auto Scaling group can be created. If you specify VPCZoneIdentifier with AvailabilityZones, the subnets that you specify must reside in those Availability Zones.
      */
-    VPCZoneIdentifier?: XmlStringMaxLen2047;
+    VPCZoneIdentifier?: XmlStringMaxLen5000;
     /**
      * A policy or a list of policies that are used to select the instance to terminate. These policies are executed in the order that you list them. For more information, see Configure termination policies for Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide. Valid values: Default | AllocationStrategy | ClosestToNextInstanceHour | NewestInstance | OldestInstance | OldestLaunchConfiguration | OldestLaunchTemplate | arn:aws:lambda:region:account-id:function:my-function:my-alias 
      */
@@ -3570,7 +3570,7 @@ declare namespace AutoScaling {
     /**
      * A comma-separated list of subnet IDs for a virtual private cloud (VPC). If you specify VPCZoneIdentifier with AvailabilityZones, the subnets that you specify must reside in those Availability Zones.
      */
-    VPCZoneIdentifier?: XmlStringMaxLen2047;
+    VPCZoneIdentifier?: XmlStringMaxLen5000;
     /**
      * A policy or a list of policies that are used to select the instances to terminate. The policies are executed in the order that you list them. For more information, see Configure termination policies for Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide. Valid values: Default | AllocationStrategy | ClosestToNextInstanceHour | NewestInstance | OldestInstance | OldestLaunchConfiguration | OldestLaunchTemplate | arn:aws:lambda:region:account-id:function:my-function:my-alias 
      */
@@ -3652,6 +3652,7 @@ declare namespace AutoScaling {
   export type XmlStringMaxLen2047 = string;
   export type XmlStringMaxLen255 = string;
   export type XmlStringMaxLen32 = string;
+  export type XmlStringMaxLen5000 = string;
   export type XmlStringMaxLen511 = string;
   export type XmlStringMaxLen64 = string;
   export type XmlStringMetricLabel = string;

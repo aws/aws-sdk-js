@@ -108,11 +108,11 @@ declare class LexModelsV2 extends Service {
    */
   createResourcePolicy(callback?: (err: AWSError, data: LexModelsV2.Types.CreateResourcePolicyResponse) => void): Request<LexModelsV2.Types.CreateResourcePolicyResponse, AWSError>;
   /**
-   * Adds a new resource policy statement to a bot or bot alias. If a resource policy exists, the statement is added to the current resource policy. If a policy doesn't exist, a new policy is created. You can't create a resource policy statement that allows cross-account access.
+   * Adds a new resource policy statement to a bot or bot alias. If a resource policy exists, the statement is added to the current resource policy. If a policy doesn't exist, a new policy is created. You can't create a resource policy statement that allows cross-account access. You need to add the CreateResourcePolicy or UpdateResourcePolicy action to the bot role in order to call the API.
    */
   createResourcePolicyStatement(params: LexModelsV2.Types.CreateResourcePolicyStatementRequest, callback?: (err: AWSError, data: LexModelsV2.Types.CreateResourcePolicyStatementResponse) => void): Request<LexModelsV2.Types.CreateResourcePolicyStatementResponse, AWSError>;
   /**
-   * Adds a new resource policy statement to a bot or bot alias. If a resource policy exists, the statement is added to the current resource policy. If a policy doesn't exist, a new policy is created. You can't create a resource policy statement that allows cross-account access.
+   * Adds a new resource policy statement to a bot or bot alias. If a resource policy exists, the statement is added to the current resource policy. If a policy doesn't exist, a new policy is created. You can't create a resource policy statement that allows cross-account access. You need to add the CreateResourcePolicy or UpdateResourcePolicy action to the bot role in order to call the API.
    */
   createResourcePolicyStatement(callback?: (err: AWSError, data: LexModelsV2.Types.CreateResourcePolicyStatementResponse) => void): Request<LexModelsV2.Types.CreateResourcePolicyStatementResponse, AWSError>;
   /**
@@ -228,11 +228,11 @@ declare class LexModelsV2 extends Service {
    */
   deleteResourcePolicy(callback?: (err: AWSError, data: LexModelsV2.Types.DeleteResourcePolicyResponse) => void): Request<LexModelsV2.Types.DeleteResourcePolicyResponse, AWSError>;
   /**
-   * Deletes a policy statement from a resource policy. If you delete the last statement from a policy, the policy is deleted. If you specify a statement ID that doesn't exist in the policy, or if the bot or bot alias doesn't have a policy attached, Amazon Lex returns an exception.
+   * Deletes a policy statement from a resource policy. If you delete the last statement from a policy, the policy is deleted. If you specify a statement ID that doesn't exist in the policy, or if the bot or bot alias doesn't have a policy attached, Amazon Lex returns an exception. You need to add the DeleteResourcePolicy or UpdateResourcePolicy action to the bot role in order to call the API.
    */
   deleteResourcePolicyStatement(params: LexModelsV2.Types.DeleteResourcePolicyStatementRequest, callback?: (err: AWSError, data: LexModelsV2.Types.DeleteResourcePolicyStatementResponse) => void): Request<LexModelsV2.Types.DeleteResourcePolicyStatementResponse, AWSError>;
   /**
-   * Deletes a policy statement from a resource policy. If you delete the last statement from a policy, the policy is deleted. If you specify a statement ID that doesn't exist in the policy, or if the bot or bot alias doesn't have a policy attached, Amazon Lex returns an exception.
+   * Deletes a policy statement from a resource policy. If you delete the last statement from a policy, the policy is deleted. If you specify a statement ID that doesn't exist in the policy, or if the bot or bot alias doesn't have a policy attached, Amazon Lex returns an exception. You need to add the DeleteResourcePolicy or UpdateResourcePolicy action to the bot role in order to call the API.
    */
   deleteResourcePolicyStatement(callback?: (err: AWSError, data: LexModelsV2.Types.DeleteResourcePolicyStatementResponse) => void): Request<LexModelsV2.Types.DeleteResourcePolicyStatementResponse, AWSError>;
   /**
@@ -1549,20 +1549,60 @@ declare namespace LexModelsV2 {
      */
     resources?: CustomVocabularyItems;
   }
+  export interface BedrockGuardrailConfiguration {
+    /**
+     * The unique guardrail id for the Bedrock guardrail configuration.
+     */
+    identifier: BedrockGuardrailIdentifier;
+    /**
+     * The guardrail version for the Bedrock guardrail configuration.
+     */
+    version: BedrockGuardrailVersion;
+  }
+  export type BedrockGuardrailIdentifier = string;
+  export type BedrockGuardrailVersion = string;
   export type BedrockKnowledgeBaseArn = string;
   export interface BedrockKnowledgeStoreConfiguration {
     /**
-     * The ARN of the knowledge base used.
+     * The base ARN of the knowledge base used.
      */
     bedrockKnowledgeBaseArn: BedrockKnowledgeBaseArn;
+    /**
+     * Specifies whether to return an exact response, or to return an answer generated by the model, using the fields you specify from the database.
+     */
+    exactResponse?: Boolean;
+    /**
+     * Contains the names of the fields used for an exact response to the user.
+     */
+    exactResponseFields?: BedrockKnowledgeStoreExactResponseFields;
+  }
+  export interface BedrockKnowledgeStoreExactResponseFields {
+    /**
+     * The answer field used for an exact response from Bedrock Knowledge Store.
+     */
+    answerField?: AnswerField;
   }
   export type BedrockModelArn = string;
+  export type BedrockModelCustomPrompt = string;
   export interface BedrockModelSpecification {
     /**
      * The ARN of the foundation model used in descriptive bot building.
      */
     modelArn: BedrockModelArn;
+    /**
+     * The guardrail configuration in the Bedrock model specification details.
+     */
+    guardrail?: BedrockGuardrailConfiguration;
+    /**
+     * The Bedrock trace status in the Bedrock model specification details.
+     */
+    traceStatus?: BedrockTraceStatus;
+    /**
+     * The custom prompt used in the Bedrock model specification details.
+     */
+    customPrompt?: BedrockModelCustomPrompt;
   }
+  export type BedrockTraceStatus = "ENABLED"|"DISABLED"|string;
   export type Boolean = boolean;
   export interface BotAliasHistoryEvent {
     /**

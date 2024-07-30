@@ -270,6 +270,10 @@ declare namespace RolesAnywhere {
   export type CertificateField = "x509Subject"|"x509Issuer"|"x509SAN"|string;
   export interface CreateProfileRequest {
     /**
+     * Used to determine if a custom role session name will be accepted in a temporary credential request.
+     */
+    acceptRoleSessionName?: Boolean;
+    /**
      *  Used to determine how long sessions vended using this profile are valid for. See the Expiration section of the CreateSession API documentation page for more details. In requests, if this value is not provided, the default value will be 3600. 
      */
     durationSeconds?: CreateProfileRequestDurationSecondsInteger;
@@ -588,6 +592,10 @@ declare namespace RolesAnywhere {
   export type NotificationSettings = NotificationSetting[];
   export type ProfileArn = string;
   export interface ProfileDetail {
+    /**
+     * Used to determine if a custom role session name will be accepted in a temporary credential request.
+     */
+    acceptRoleSessionName?: Boolean;
     /**
      * A mapping applied to the authenticating end-entity certificate.
      */
@@ -917,6 +925,10 @@ declare namespace RolesAnywhere {
   }
   export type UpdateCrlRequestCrlDataBlob = Buffer|Uint8Array|Blob|string;
   export interface UpdateProfileRequest {
+    /**
+     * Used to determine if a custom role session name will be accepted in a temporary credential request.
+     */
+    acceptRoleSessionName?: Boolean;
     /**
      *  Used to determine how long sessions vended using this profile are valid for. See the Expiration section of the CreateSession API documentation page for more details. In requests, if this value is not provided, the default value will be 3600. 
      */

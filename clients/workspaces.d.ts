@@ -132,11 +132,11 @@ declare class WorkSpaces extends Service {
    */
   createWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspaceImageResult) => void): Request<WorkSpaces.Types.CreateWorkspaceImageResult, AWSError>;
   /**
-   * Creates one or more WorkSpaces. This operation is asynchronous and returns before the WorkSpaces are created.    The MANUAL running mode value is only supported by Amazon WorkSpaces Core. Contact your account team to be allow-listed to use this value. For more information, see Amazon WorkSpaces Core.   You don't need to specify the PCOIP protocol for Linux bundles because WSP is the default protocol for those bundles.   User-decoupled WorkSpaces are only supported by Amazon WorkSpaces Core.   
+   * Creates one or more WorkSpaces. This operation is asynchronous and returns before the WorkSpaces are created.    The MANUAL running mode value is only supported by Amazon WorkSpaces Core. Contact your account team to be allow-listed to use this value. For more information, see Amazon WorkSpaces Core.   You don't need to specify the PCOIP protocol for Linux bundles because WSP is the default protocol for those bundles.   User-decoupled WorkSpaces are only supported by Amazon WorkSpaces Core.   Review your running mode to ensure you are using one that is optimal for your needs and budget. For more information on switching running modes, see  Can I switch between hourly and monthly billing?    
    */
   createWorkspaces(params: WorkSpaces.Types.CreateWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspacesResult) => void): Request<WorkSpaces.Types.CreateWorkspacesResult, AWSError>;
   /**
-   * Creates one or more WorkSpaces. This operation is asynchronous and returns before the WorkSpaces are created.    The MANUAL running mode value is only supported by Amazon WorkSpaces Core. Contact your account team to be allow-listed to use this value. For more information, see Amazon WorkSpaces Core.   You don't need to specify the PCOIP protocol for Linux bundles because WSP is the default protocol for those bundles.   User-decoupled WorkSpaces are only supported by Amazon WorkSpaces Core.   
+   * Creates one or more WorkSpaces. This operation is asynchronous and returns before the WorkSpaces are created.    The MANUAL running mode value is only supported by Amazon WorkSpaces Core. Contact your account team to be allow-listed to use this value. For more information, see Amazon WorkSpaces Core.   You don't need to specify the PCOIP protocol for Linux bundles because WSP is the default protocol for those bundles.   User-decoupled WorkSpaces are only supported by Amazon WorkSpaces Core.   Review your running mode to ensure you are using one that is optimal for your needs and budget. For more information on switching running modes, see  Can I switch between hourly and monthly billing?    
    */
   createWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspacesResult) => void): Request<WorkSpaces.Types.CreateWorkspacesResult, AWSError>;
   /**
@@ -971,13 +971,13 @@ declare namespace WorkSpaces {
   export type BundleType = "REGULAR"|"STANDBY"|string;
   export interface Capacity {
     /**
-     * The desired number of user sessions for a multi-session pool. This is not allowed for single-session pools.
+     * The desired number of user sessions for the WorkSpaces in the pool.
      */
     DesiredUserSessions: DesiredUserSessions;
   }
   export interface CapacityStatus {
     /**
-     * The number of user sessions currently being used for pool sessions. This only applies to multi-session pools.
+     * The number of user sessions currently available for streaming from your pool. AvailableUserSessions = ActualUserSessions - ActiveUserSessions
      */
     AvailableUserSessions: AvailableUserSessions;
     /**
@@ -985,11 +985,11 @@ declare namespace WorkSpaces {
      */
     DesiredUserSessions: DesiredUserSessions;
     /**
-     * The total number of session slots that are available for a pool of WorkSpaces.
+     * The total number of user sessions that are available for streaming or are currently streaming in your pool. ActualUserSessions = AvailableUserSessions + ActiveUserSessions
      */
     ActualUserSessions: ActualUserSessions;
     /**
-     * The number of user sessions currently being used for pool sessions. This only applies to multi-session pools.
+     * The number of user sessions currently being used for your pool.
      */
     ActiveUserSessions: ActiveUserSessions;
   }
@@ -3774,7 +3774,7 @@ declare namespace WorkSpaces {
   export type WorkspaceName = string;
   export interface WorkspaceProperties {
     /**
-     * The running mode. For more information, see Manage the WorkSpace Running Mode.  The MANUAL value is only supported by Amazon WorkSpaces Core. Contact your account team to be allow-listed to use this value. For more information, see Amazon WorkSpaces Core. 
+     * The running mode. For more information, see Manage the WorkSpace Running Mode.  The MANUAL value is only supported by Amazon WorkSpaces Core. Contact your account team to be allow-listed to use this value. For more information, see Amazon WorkSpaces Core.  Review your running mode to ensure you are using one that is optimal for your needs and budget. For more information on switching running modes, see  Can I switch between hourly and monthly billing? 
      */
     RunningMode?: RunningMode;
     /**
