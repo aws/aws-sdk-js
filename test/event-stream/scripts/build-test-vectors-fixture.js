@@ -96,7 +96,7 @@ function headerValue(type, vectorRepresentation) {
             return `new Date(${vectorRepresentation})`;
         case 9:
             const hex = Buffer.from(vectorRepresentation, 'base64').toString('hex');
-            return `'${hex.substr(0, 8)}-${hex.substr(8, 4)}-${hex.substr(12, 4)}-${hex.substr(16, 4)}-${hex.substr(20)}'`;
+            return `'${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}'`;
         default:
             return vectorRepresentation;
     }
