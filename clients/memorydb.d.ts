@@ -84,11 +84,11 @@ declare class MemoryDB extends Service {
    */
   deleteACL(callback?: (err: AWSError, data: MemoryDB.Types.DeleteACLResponse) => void): Request<MemoryDB.Types.DeleteACLResponse, AWSError>;
   /**
-   * Deletes a cluster. It also deletes all associated nodes and node endpoints
+   * Deletes a cluster. It also deletes all associated nodes and node endpoints   CreateSnapshot permission is required to create a final snapshot. Without this permission, the API call will fail with an Access Denied exception. 
    */
   deleteCluster(params: MemoryDB.Types.DeleteClusterRequest, callback?: (err: AWSError, data: MemoryDB.Types.DeleteClusterResponse) => void): Request<MemoryDB.Types.DeleteClusterResponse, AWSError>;
   /**
-   * Deletes a cluster. It also deletes all associated nodes and node endpoints
+   * Deletes a cluster. It also deletes all associated nodes and node endpoints   CreateSnapshot permission is required to create a final snapshot. Without this permission, the API call will fail with an Access Denied exception. 
    */
   deleteCluster(callback?: (err: AWSError, data: MemoryDB.Types.DeleteClusterResponse) => void): Request<MemoryDB.Types.DeleteClusterResponse, AWSError>;
   /**

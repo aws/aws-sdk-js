@@ -1,0 +1,454 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2018-05-10",
+    "endpointPrefix": "ssm-quicksetup",
+    "jsonVersion": "1.1",
+    "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
+    "serviceFullName": "AWS Systems Manager QuickSetup",
+    "serviceId": "SSM QuickSetup",
+    "signatureVersion": "v4",
+    "signingName": "ssm-quicksetup",
+    "uid": "ssm-quicksetup-2018-05-10",
+    "auth": [
+      "aws.auth#sigv4"
+    ]
+  },
+  "operations": {
+    "CreateConfigurationManager": {
+      "http": {
+        "requestUri": "/configurationManager",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ConfigurationDefinitions"
+        ],
+        "members": {
+          "ConfigurationDefinitions": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "Parameters",
+                "Type"
+              ],
+              "members": {
+                "LocalDeploymentAdministrationRoleArn": {},
+                "LocalDeploymentExecutionRoleName": {},
+                "Parameters": {
+                  "shape": "S6"
+                },
+                "Type": {},
+                "TypeVersion": {}
+              }
+            }
+          },
+          "Description": {},
+          "Name": {},
+          "Tags": {
+            "shape": "Sd"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "ManagerArn"
+        ],
+        "members": {
+          "ManagerArn": {}
+        }
+      }
+    },
+    "DeleteConfigurationManager": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/configurationManager/{ManagerArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ManagerArn"
+        ],
+        "members": {
+          "ManagerArn": {
+            "location": "uri",
+            "locationName": "ManagerArn"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "GetConfigurationManager": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/configurationManager/{ManagerArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ManagerArn"
+        ],
+        "members": {
+          "ManagerArn": {
+            "location": "uri",
+            "locationName": "ManagerArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "ManagerArn"
+        ],
+        "members": {
+          "ConfigurationDefinitions": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "Parameters",
+                "Type"
+              ],
+              "members": {
+                "Id": {},
+                "LocalDeploymentAdministrationRoleArn": {},
+                "LocalDeploymentExecutionRoleName": {},
+                "Parameters": {
+                  "shape": "S6"
+                },
+                "Type": {},
+                "TypeVersion": {}
+              }
+            }
+          },
+          "CreatedAt": {
+            "shape": "Ss"
+          },
+          "Description": {},
+          "LastModifiedAt": {
+            "shape": "Ss"
+          },
+          "ManagerArn": {},
+          "Name": {},
+          "StatusSummaries": {
+            "shape": "St"
+          },
+          "Tags": {
+            "shape": "Sd"
+          }
+        }
+      }
+    },
+    "GetServiceSettings": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/serviceSettings",
+        "responseCode": 200
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ServiceSettings": {
+            "type": "structure",
+            "members": {
+              "ExplorerEnablingRoleArn": {}
+            }
+          }
+        }
+      }
+    },
+    "ListConfigurationManagers": {
+      "http": {
+        "requestUri": "/listConfigurationManagers",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Filters": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "Key",
+                "Values"
+              ],
+              "members": {
+                "Key": {},
+                "Values": {
+                  "type": "list",
+                  "member": {}
+                }
+              }
+            }
+          },
+          "MaxItems": {
+            "type": "integer"
+          },
+          "StartingToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ConfigurationManagersList": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "ManagerArn"
+              ],
+              "members": {
+                "ConfigurationDefinitionSummaries": {
+                  "type": "list",
+                  "member": {
+                    "type": "structure",
+                    "members": {
+                      "FirstClassParameters": {
+                        "shape": "S6"
+                      },
+                      "Id": {},
+                      "Type": {},
+                      "TypeVersion": {}
+                    }
+                  }
+                },
+                "Description": {},
+                "ManagerArn": {},
+                "Name": {},
+                "StatusSummaries": {
+                  "shape": "St"
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListQuickSetupTypes": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/listQuickSetupTypes",
+        "responseCode": 200
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "QuickSetupTypeList": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "LatestVersion": {},
+                "Type": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListTagsForResource": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{ResourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceArn"
+        ],
+        "members": {
+          "ResourceArn": {
+            "location": "uri",
+            "locationName": "ResourceArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Tags": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "Key": {},
+                "Value": {}
+              },
+              "sensitive": true
+            },
+            "sensitive": true
+          }
+        }
+      }
+    },
+    "TagResource": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/tags/{ResourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceArn",
+          "Tags"
+        ],
+        "members": {
+          "ResourceArn": {
+            "location": "uri",
+            "locationName": "ResourceArn"
+          },
+          "Tags": {
+            "shape": "Sd"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "UntagResource": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{ResourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceArn",
+          "TagKeys"
+        ],
+        "members": {
+          "ResourceArn": {
+            "location": "uri",
+            "locationName": "ResourceArn"
+          },
+          "TagKeys": {
+            "location": "querystring",
+            "locationName": "tagKeys",
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "UpdateConfigurationDefinition": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/configurationDefinition/{ManagerArn}/{Id}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id",
+          "ManagerArn"
+        ],
+        "members": {
+          "Id": {
+            "location": "uri",
+            "locationName": "Id"
+          },
+          "LocalDeploymentAdministrationRoleArn": {},
+          "LocalDeploymentExecutionRoleName": {},
+          "ManagerArn": {
+            "location": "uri",
+            "locationName": "ManagerArn"
+          },
+          "Parameters": {
+            "shape": "S6"
+          },
+          "TypeVersion": {}
+        }
+      },
+      "idempotent": true
+    },
+    "UpdateConfigurationManager": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/configurationManager/{ManagerArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ManagerArn"
+        ],
+        "members": {
+          "Description": {},
+          "ManagerArn": {
+            "location": "uri",
+            "locationName": "ManagerArn"
+          },
+          "Name": {}
+        }
+      },
+      "idempotent": true
+    },
+    "UpdateServiceSettings": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/serviceSettings",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "ExplorerEnablingRoleArn": {}
+        }
+      },
+      "idempotent": true
+    }
+  },
+  "shapes": {
+    "S6": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "Sd": {
+      "type": "map",
+      "key": {},
+      "value": {},
+      "sensitive": true
+    },
+    "Ss": {
+      "type": "timestamp",
+      "timestampFormat": "iso8601"
+    },
+    "St": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "LastUpdatedAt",
+          "StatusType"
+        ],
+        "members": {
+          "LastUpdatedAt": {
+            "shape": "Ss"
+          },
+          "Status": {},
+          "StatusDetails": {
+            "type": "map",
+            "key": {},
+            "value": {}
+          },
+          "StatusMessage": {},
+          "StatusType": {}
+        }
+      }
+    }
+  }
+}

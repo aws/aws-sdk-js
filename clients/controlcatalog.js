@@ -9,6 +9,7 @@ Object.defineProperty(apiLoader.services['controlcatalog'], '2018-05-10', {
   get: function get() {
     var model = require('../apis/controlcatalog-2018-05-10.min.json');
     model.paginators = require('../apis/controlcatalog-2018-05-10.paginators.json').pagination;
+    model.waiters = require('../apis/controlcatalog-2018-05-10.waiters2.json').waiters;
     return model;
   },
   enumerable: true,

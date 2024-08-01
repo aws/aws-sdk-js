@@ -226,7 +226,7 @@ declare namespace Support {
      */
     subject?: Subject;
     /**
-     * The status of the case. Valid values:    opened     pending-customer-action     reopened     resolved     unassigned     work-in-progress   
+     * The status of the case. Valid values:    all-open     customer-action-completed     opened     pending-customer-action     reopened     resolved     unassigned     work-in-progress   
      */
     status?: Status;
     /**

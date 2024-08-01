@@ -384,6 +384,7 @@ export abstract class ConfigurationServicePlaceholders {
   pcaconnectorscep?: AWS.PcaConnectorScep.Types.ClientConfiguration;
   apptest?: AWS.AppTest.Types.ClientConfiguration;
   qapps?: AWS.QApps.Types.ClientConfiguration;
+  ssmquicksetup?: AWS.SSMQuickSetup.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -770,4 +771,5 @@ export interface ConfigurationServiceApiVersions {
   pcaconnectorscep?: AWS.PcaConnectorScep.Types.apiVersion;
   apptest?: AWS.AppTest.Types.apiVersion;
   qapps?: AWS.QApps.Types.apiVersion;
+  ssmquicksetup?: AWS.SSMQuickSetup.Types.apiVersion;
 }

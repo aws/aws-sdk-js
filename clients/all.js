@@ -383,5 +383,6 @@ module.exports = {
   ApplicationSignals: require('./applicationsignals'),
   PcaConnectorScep: require('./pcaconnectorscep'),
   AppTest: require('./apptest'),
-  QApps: require('./qapps')
+  QApps: require('./qapps'),
+  SSMQuickSetup: require('./ssmquicksetup')
 };

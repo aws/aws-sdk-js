@@ -2874,6 +2874,10 @@ declare namespace RDS {
      */
     MaxACU: DoubleOptional;
     /**
+     * The minimum capacity of the DB shard group in Aurora capacity units (ACUs).
+     */
+    MinACU?: DoubleOptional;
+    /**
      * Specifies whether the DB shard group is publicly accessible. When the DB shard group is publicly accessible, its Domain Name System (DNS) endpoint resolves to the private IP address from within the DB shard group's virtual private cloud (VPC). It resolves to the public IP address from outside of the DB shard group's VPC. Access to the DB shard group is ultimately controlled by the security group it uses. That public access is not permitted if the security group assigned to the DB shard group doesn't permit it. When the DB shard group isn't publicly accessible, it is an internal DB shard group with a DNS name that resolves to a private IP address. Default: The default behavior varies depending on whether DBSubnetGroupName is specified. If DBSubnetGroupName isn't specified, and PubliclyAccessible isn't specified, the following applies:   If the default VPC in the target Region doesn’t have an internet gateway attached to it, the DB shard group is private.   If the default VPC in the target Region has an internet gateway attached to it, the DB shard group is public.   If DBSubnetGroupName is specified, and PubliclyAccessible isn't specified, the following applies:   If the subnets are part of a VPC that doesn’t have an internet gateway attached to it, the DB shard group is private.   If the subnets are part of a VPC that has an internet gateway attached to it, the DB shard group is public.  
      */
     PubliclyAccessible?: BooleanOptional;
@@ -4952,6 +4956,10 @@ declare namespace RDS {
      */
     MaxACU?: DoubleOptional;
     /**
+     * The minimum capacity of the DB shard group in Aurora capacity units (ACUs).
+     */
+    MinACU?: DoubleOptional;
+    /**
      * Specifies whether to create standby instances for the DB shard group. Valid values are the following:   0 - Creates a single, primary DB instance for each physical shard. This is the default value, and the only one supported for the preview.   1 - Creates a primary DB instance and a standby instance in a different Availability Zone (AZ) for each physical shard.   2 - Creates a primary DB instance and two standby instances in different AZs for each physical shard.  
      */
     ComputeRedundancy?: IntegerOptional;
@@ -5294,15 +5302,15 @@ declare namespace RDS {
      */
     DBClusterIdentifier: String;
     /**
-     * Specifies whether to skip the creation of a final DB cluster snapshot before the DB cluster is deleted. If skip is specified, no DB cluster snapshot is created. If skip isn't specified, a DB cluster snapshot is created before the DB cluster is deleted. By default, skip isn't specified, and the DB cluster snapshot is created. By default, this parameter is disabled.  You must specify a FinalDBSnapshotIdentifier parameter if SkipFinalSnapshot is disabled. 
+     * Specifies whether to skip the creation of a final DB cluster snapshot before RDS deletes the DB cluster. If you set this value to true, RDS doesn't create a final DB cluster snapshot. If you set this value to false or don't specify it, RDS creates a DB cluster snapshot before it deletes the DB cluster. By default, this parameter is disabled, so RDS creates a final DB cluster snapshot.  If SkipFinalSnapshot is disabled, you must specify a value for the FinalDBSnapshotIdentifier parameter. 
      */
     SkipFinalSnapshot?: Boolean;
     /**
-     * The DB cluster snapshot identifier of the new DB cluster snapshot created when SkipFinalSnapshot is disabled.  Specifying this parameter and also skipping the creation of a final DB cluster snapshot with the SkipFinalShapshot parameter results in an error.  Constraints:   Must be 1 to 255 letters, numbers, or hyphens.   First character must be a letter   Can't end with a hyphen or contain two consecutive hyphens  
+     * The DB cluster snapshot identifier of the new DB cluster snapshot created when SkipFinalSnapshot is disabled.  If you specify this parameter and also skip the creation of a final DB cluster snapshot with the SkipFinalShapshot parameter, the request results in an error.  Constraints:   Must be 1 to 255 letters, numbers, or hyphens.   First character must be a letter   Can't end with a hyphen or contain two consecutive hyphens  
      */
     FinalDBSnapshotIdentifier?: String;
     /**
-     * Specifies whether to remove automated backups immediately after the DB cluster is deleted. This parameter isn't case-sensitive. The default is to remove automated backups immediately after the DB cluster is deleted.   You must delete automated backups for Amazon RDS Multi-AZ DB clusters. For more information about managing automated backups for RDS Multi-AZ DB clusters, see Managing automated backups. 
+     * Specifies whether to remove automated backups immediately after the DB cluster is deleted. This parameter isn't case-sensitive. The default is to remove automated backups immediately after the DB cluster is deleted.
      */
     DeleteAutomatedBackups?: BooleanOptional;
   }
@@ -5624,7 +5632,7 @@ declare namespace RDS {
      */
     DBClusterParameterGroupName: String;
     /**
-     * A specific source to return parameters for. Valid Values:    user     engine     service   
+     * A specific source to return parameters for. Valid Values:    customer     engine     service   
      */
     Source?: String;
     /**
@@ -7962,6 +7970,10 @@ declare namespace RDS {
      * The maximum capacity of the DB shard group in Aurora capacity units (ACUs).
      */
     MaxACU?: DoubleOptional;
+    /**
+     * The minimum capacity of the DB shard group in Aurora capacity units (ACUs).
+     */
+    MinACU?: DoubleOptional;
   }
   export interface ModifyDBSnapshotAttributeMessage {
     /**
@@ -8180,11 +8192,11 @@ declare namespace RDS {
      */
     OptionVersion?: String;
     /**
-     * A list of DBSecurityGroupMembership name strings used for this option.
+     * A list of DB security groups used for this option.
      */
     DBSecurityGroupMemberships?: DBSecurityGroupNameList;
     /**
-     * A list of VpcSecurityGroupMembership name strings used for this option.
+     * A list of VPC security group names used for this option.
      */
     VpcSecurityGroupMemberships?: VpcSecurityGroupIdList;
     /**

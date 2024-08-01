@@ -12,6 +12,14 @@ declare class ControlCatalog extends Service {
   constructor(options?: ControlCatalog.Types.ClientConfiguration)
   config: Config & ControlCatalog.Types.ClientConfiguration;
   /**
+   * Returns details about a specific control, most notably a list of Amazon Web Services Regions where this control is supported. Input a value for the ControlArn parameter, in ARN form. GetControl accepts controltower or controlcatalog control ARNs as input. Returns a controlcatalog ARN format. In the API response, controls that have the value GLOBAL in the Scope field do not show the DeployableRegions field, because it does not apply. Controls that have the value REGIONAL in the Scope field return a value for the DeployableRegions field, as shown in the example.
+   */
+  getControl(params: ControlCatalog.Types.GetControlRequest, callback?: (err: AWSError, data: ControlCatalog.Types.GetControlResponse) => void): Request<ControlCatalog.Types.GetControlResponse, AWSError>;
+  /**
+   * Returns details about a specific control, most notably a list of Amazon Web Services Regions where this control is supported. Input a value for the ControlArn parameter, in ARN form. GetControl accepts controltower or controlcatalog control ARNs as input. Returns a controlcatalog ARN format. In the API response, controls that have the value GLOBAL in the Scope field do not show the DeployableRegions field, because it does not apply. Controls that have the value REGIONAL in the Scope field return a value for the DeployableRegions field, as shown in the example.
+   */
+  getControl(callback?: (err: AWSError, data: ControlCatalog.Types.GetControlResponse) => void): Request<ControlCatalog.Types.GetControlResponse, AWSError>;
+  /**
    * Returns a paginated list of common controls from the Amazon Web Services Control Catalog. You can apply an optional filter to see common controls that have a specific objective. If you don’t provide a filter, the operation returns all common controls. 
    */
   listCommonControls(params: ControlCatalog.Types.ListCommonControlsRequest, callback?: (err: AWSError, data: ControlCatalog.Types.ListCommonControlsResponse) => void): Request<ControlCatalog.Types.ListCommonControlsResponse, AWSError>;
@@ -19,6 +27,14 @@ declare class ControlCatalog extends Service {
    * Returns a paginated list of common controls from the Amazon Web Services Control Catalog. You can apply an optional filter to see common controls that have a specific objective. If you don’t provide a filter, the operation returns all common controls. 
    */
   listCommonControls(callback?: (err: AWSError, data: ControlCatalog.Types.ListCommonControlsResponse) => void): Request<ControlCatalog.Types.ListCommonControlsResponse, AWSError>;
+  /**
+   * Returns a paginated list of all available controls in the Amazon Web Services Control Catalog library. Allows you to discover available controls. The list of controls is given as structures of type controlSummary. The ARN is returned in the global controlcatalog format, as shown in the examples.
+   */
+  listControls(params: ControlCatalog.Types.ListControlsRequest, callback?: (err: AWSError, data: ControlCatalog.Types.ListControlsResponse) => void): Request<ControlCatalog.Types.ListControlsResponse, AWSError>;
+  /**
+   * Returns a paginated list of all available controls in the Amazon Web Services Control Catalog library. Allows you to discover available controls. The list of controls is given as structures of type controlSummary. The ARN is returned in the global controlcatalog format, as shown in the examples.
+   */
+  listControls(callback?: (err: AWSError, data: ControlCatalog.Types.ListControlsResponse) => void): Request<ControlCatalog.Types.ListControlsResponse, AWSError>;
   /**
    * Returns a paginated list of domains from the Amazon Web Services Control Catalog.
    */
@@ -70,9 +86,9 @@ declare namespace ControlCatalog {
      */
     Arn: CommonControlArn;
     /**
-     * The time when the common control was created.
+     * The name of the common control.
      */
-    CreateTime: Timestamp;
+    Name: String;
     /**
      * The description of the common control.
      */
@@ -82,19 +98,38 @@ declare namespace ControlCatalog {
      */
     Domain: AssociatedDomainSummary;
     /**
-     * The time when the common control was most recently updated.
-     */
-    LastUpdateTime: Timestamp;
-    /**
-     * The name of the common control.
-     */
-    Name: String;
-    /**
      * The objective that the common control belongs to.
      */
     Objective: AssociatedObjectiveSummary;
+    /**
+     * The time when the common control was created.
+     */
+    CreateTime: Timestamp;
+    /**
+     * The time when the common control was most recently updated.
+     */
+    LastUpdateTime: Timestamp;
   }
   export type CommonControlSummaryList = CommonControlSummary[];
+  export type ControlArn = string;
+  export type ControlBehavior = "PREVENTIVE"|"PROACTIVE"|"DETECTIVE"|string;
+  export type ControlScope = "GLOBAL"|"REGIONAL"|string;
+  export interface ControlSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the control.
+     */
+    Arn: ControlArn;
+    /**
+     * The display name of the control.
+     */
+    Name: String;
+    /**
+     * A description of the control, as it may appear in the console. Describes the functionality of the control.
+     */
+    Description: String;
+  }
+  export type Controls = ControlSummary[];
+  export type DeployableRegions = RegionCode[];
   export type DomainArn = string;
   export interface DomainResourceFilter {
     /**
@@ -109,28 +144,49 @@ declare namespace ControlCatalog {
      */
     Arn: DomainArn;
     /**
-     * The time when the domain was created.
+     * The name of the domain.
      */
-    CreateTime: Timestamp;
+    Name: String;
     /**
      * The description of the domain.
      */
     Description: String;
     /**
+     * The time when the domain was created.
+     */
+    CreateTime: Timestamp;
+    /**
      * The time when the domain was most recently updated.
      */
     LastUpdateTime: Timestamp;
-    /**
-     * The name of the domain.
-     */
-    Name: String;
   }
   export type DomainSummaryList = DomainSummary[];
-  export interface ListCommonControlsRequest {
+  export interface GetControlRequest {
     /**
-     * An optional filter that narrows the results to a specific objective. This filter allows you to specify one objective ARN at a time. Passing multiple ARNs in the CommonControlFilter isn’t currently supported.
+     * The Amazon Resource Name (ARN) of the control. It has one of the following formats:  Global format   arn:{PARTITION}:controlcatalog:::control/{CONTROL_CATALOG_OPAQUE_ID}   Or Regional format   arn:{PARTITION}:controltower:{REGION}::control/{CONTROL_TOWER_OPAQUE_ID}  Here is a more general pattern that covers Amazon Web Services Control Tower and Control Catalog ARNs:  ^arn:(aws(?:[-a-z]*)?):(controlcatalog|controltower):[a-zA-Z0-9-]*::control/[0-9a-zA-Z_\\-]+$ 
      */
-    CommonControlFilter?: CommonControlFilter;
+    ControlArn: ControlArn;
+  }
+  export interface GetControlResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the control.
+     */
+    Arn: ControlArn;
+    /**
+     * The display name of the control.
+     */
+    Name: String;
+    /**
+     * A description of what the control does.
+     */
+    Description: String;
+    /**
+     * A term that identifies the control's functional behavior. One of Preventive, Deteictive, Proactive 
+     */
+    Behavior: ControlBehavior;
+    RegionConfiguration: RegionConfiguration;
+  }
+  export interface ListCommonControlsRequest {
     /**
      * The maximum number of results on a page or for an API request call.
      */
@@ -139,12 +195,36 @@ declare namespace ControlCatalog {
      * The pagination token that's used to fetch the next set of results.
      */
     NextToken?: PaginationToken;
+    /**
+     * An optional filter that narrows the results to a specific objective. This filter allows you to specify one objective ARN at a time. Passing multiple ARNs in the CommonControlFilter isn’t currently supported.
+     */
+    CommonControlFilter?: CommonControlFilter;
   }
   export interface ListCommonControlsResponse {
     /**
      * The list of common controls that the ListCommonControls API returns.
      */
     CommonControls: CommonControlSummaryList;
+    /**
+     * The pagination token that's used to fetch the next set of results.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListControlsRequest {
+    /**
+     * The pagination token that's used to fetch the next set of results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of results on a page or for an API request call.
+     */
+    MaxResults?: MaxListControlsResults;
+  }
+  export interface ListControlsResponse {
+    /**
+     * Returns a list of controls, given as structures of type controlSummary.
+     */
+    Controls: Controls;
     /**
      * The pagination token that's used to fetch the next set of results.
      */
@@ -186,15 +266,16 @@ declare namespace ControlCatalog {
   }
   export interface ListObjectivesResponse {
     /**
-     * The pagination token that's used to fetch the next set of results.
-     */
-    NextToken?: PaginationToken;
-    /**
      * The list of objectives that the ListObjectives API returns.
      */
     Objectives: ObjectiveSummaryList;
+    /**
+     * The pagination token that's used to fetch the next set of results.
+     */
+    NextToken?: PaginationToken;
   }
   export type MaxListCommonControlsResults = number;
+  export type MaxListControlsResults = number;
   export type MaxListDomainsResults = number;
   export type MaxListObjectivesResults = number;
   export type ObjectiveArn = string;
@@ -217,9 +298,9 @@ declare namespace ControlCatalog {
      */
     Arn: ObjectiveArn;
     /**
-     * The time when the objective was created.
+     * The name of the objective.
      */
-    CreateTime: Timestamp;
+    Name: String;
     /**
      * The description of the objective.
      */
@@ -229,16 +310,27 @@ declare namespace ControlCatalog {
      */
     Domain: AssociatedDomainSummary;
     /**
+     * The time when the objective was created.
+     */
+    CreateTime: Timestamp;
+    /**
      * The time when the objective was most recently updated.
      */
     LastUpdateTime: Timestamp;
-    /**
-     * The name of the objective.
-     */
-    Name: String;
   }
   export type ObjectiveSummaryList = ObjectiveSummary[];
   export type PaginationToken = string;
+  export type RegionCode = string;
+  export interface RegionConfiguration {
+    /**
+     * The coverage of the control, if deployed. Scope is an enumerated type, with value Regional, or Global. A control with Global scope is effective in all Amazon Web Services Regions, regardless of the Region from which it is enabled, or to which it is deployed. A control implemented by an SCP is usually Global in scope. A control with Regional scope has operations that are restricted specifically to the Region from which it is enabled and to which it is deployed. Controls implemented by Config rules and CloudFormation hooks usually are Regional in scope. Security Hub controls usually are Regional in scope.
+     */
+    Scope: ControlScope;
+    /**
+     * Regions in which the control is available to be deployed.
+     */
+    DeployableRegions?: DeployableRegions;
+  }
   export type String = string;
   export type Timestamp = Date;
   /**

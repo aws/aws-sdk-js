@@ -12,11 +12,11 @@ declare class Bedrock extends Service {
   constructor(options?: Bedrock.Types.ClientConfiguration)
   config: Config & Bedrock.Types.ClientConfiguration;
   /**
-   * API operation for creating and managing Amazon Bedrock automatic model evaluation jobs and model evaluation jobs that use human workers. To learn more about the requirements for creating a model evaluation job see, Model evaluations.
+   * API operation for creating and managing Amazon Bedrock automatic model evaluation jobs and model evaluation jobs that use human workers. To learn more about the requirements for creating a model evaluation job see, Model evaluation.
    */
   createEvaluationJob(params: Bedrock.Types.CreateEvaluationJobRequest, callback?: (err: AWSError, data: Bedrock.Types.CreateEvaluationJobResponse) => void): Request<Bedrock.Types.CreateEvaluationJobResponse, AWSError>;
   /**
-   * API operation for creating and managing Amazon Bedrock automatic model evaluation jobs and model evaluation jobs that use human workers. To learn more about the requirements for creating a model evaluation job see, Model evaluations.
+   * API operation for creating and managing Amazon Bedrock automatic model evaluation jobs and model evaluation jobs that use human workers. To learn more about the requirements for creating a model evaluation job see, Model evaluation.
    */
   createEvaluationJob(callback?: (err: AWSError, data: Bedrock.Types.CreateEvaluationJobResponse) => void): Request<Bedrock.Types.CreateEvaluationJobResponse, AWSError>;
   /**
@@ -35,6 +35,14 @@ declare class Bedrock extends Service {
    * Creates a version of the guardrail. Use this API to create a snapshot of the guardrail when you are satisfied with a configuration, or to compare the configuration with another version.
    */
   createGuardrailVersion(callback?: (err: AWSError, data: Bedrock.Types.CreateGuardrailVersionResponse) => void): Request<Bedrock.Types.CreateGuardrailVersionResponse, AWSError>;
+  /**
+   * Copies a model to another region so that it can be used there. For more information, see Copy models to be used in other regions in the Amazon Bedrock User Guide.
+   */
+  createModelCopyJob(params: Bedrock.Types.CreateModelCopyJobRequest, callback?: (err: AWSError, data: Bedrock.Types.CreateModelCopyJobResponse) => void): Request<Bedrock.Types.CreateModelCopyJobResponse, AWSError>;
+  /**
+   * Copies a model to another region so that it can be used there. For more information, see Copy models to be used in other regions in the Amazon Bedrock User Guide.
+   */
+  createModelCopyJob(callback?: (err: AWSError, data: Bedrock.Types.CreateModelCopyJobResponse) => void): Request<Bedrock.Types.CreateModelCopyJobResponse, AWSError>;
   /**
    * Creates a fine-tuning job to customize a base model. You specify the base foundation model and the location of the training data. After the model-customization job completes successfully, your custom model resource will be ready to use. Amazon Bedrock returns validation loss metrics and output generations after the job completes.  For information on the format of training and validation data, see Prepare the datasets.  Model-customization jobs are asynchronous and the completion time depends on the base model and the training/validation data size. To monitor a job, use the GetModelCustomizationJob operation to retrieve the job status. For more information, see Custom models in the Amazon Bedrock User Guide.
    */
@@ -92,11 +100,11 @@ declare class Bedrock extends Service {
    */
   getCustomModel(callback?: (err: AWSError, data: Bedrock.Types.GetCustomModelResponse) => void): Request<Bedrock.Types.GetCustomModelResponse, AWSError>;
   /**
-   * Retrieves the properties associated with a model evaluation job, including the status of the job. For more information, see Model evaluations.
+   * Retrieves the properties associated with a model evaluation job, including the status of the job. For more information, see Model evaluation.
    */
   getEvaluationJob(params: Bedrock.Types.GetEvaluationJobRequest, callback?: (err: AWSError, data: Bedrock.Types.GetEvaluationJobResponse) => void): Request<Bedrock.Types.GetEvaluationJobResponse, AWSError>;
   /**
-   * Retrieves the properties associated with a model evaluation job, including the status of the job. For more information, see Model evaluations.
+   * Retrieves the properties associated with a model evaluation job, including the status of the job. For more information, see Model evaluation.
    */
   getEvaluationJob(callback?: (err: AWSError, data: Bedrock.Types.GetEvaluationJobResponse) => void): Request<Bedrock.Types.GetEvaluationJobResponse, AWSError>;
   /**
@@ -115,6 +123,14 @@ declare class Bedrock extends Service {
    * Gets details about a guardrail. If you don't specify a version, the response returns details for the DRAFT version.
    */
   getGuardrail(callback?: (err: AWSError, data: Bedrock.Types.GetGuardrailResponse) => void): Request<Bedrock.Types.GetGuardrailResponse, AWSError>;
+  /**
+   * Retrieves information about a model copy job. For more information, see Copy models to be used in other regions in the Amazon Bedrock User Guide.
+   */
+  getModelCopyJob(params: Bedrock.Types.GetModelCopyJobRequest, callback?: (err: AWSError, data: Bedrock.Types.GetModelCopyJobResponse) => void): Request<Bedrock.Types.GetModelCopyJobResponse, AWSError>;
+  /**
+   * Retrieves information about a model copy job. For more information, see Copy models to be used in other regions in the Amazon Bedrock User Guide.
+   */
+  getModelCopyJob(callback?: (err: AWSError, data: Bedrock.Types.GetModelCopyJobResponse) => void): Request<Bedrock.Types.GetModelCopyJobResponse, AWSError>;
   /**
    * Retrieves the properties associated with a model-customization job, including the status of the job. For more information, see Custom models in the Amazon Bedrock User Guide.
    */
@@ -171,6 +187,14 @@ declare class Bedrock extends Service {
    * Lists details about all the guardrails in an account. To list the DRAFT version of all your guardrails, don't specify the guardrailIdentifier field. To list all versions of a guardrail, specify the ARN of the guardrail in the guardrailIdentifier field. You can set the maximum number of results to return in a response in the maxResults field. If there are more results than the number you set, the response returns a nextToken that you can send in another ListGuardrails request to see the next batch of results.
    */
   listGuardrails(callback?: (err: AWSError, data: Bedrock.Types.ListGuardrailsResponse) => void): Request<Bedrock.Types.ListGuardrailsResponse, AWSError>;
+  /**
+   * Returns a list of model copy jobs that you have submitted. You can filter the jobs to return based on one or more criteria. For more information, see Copy models to be used in other regions in the Amazon Bedrock User Guide.
+   */
+  listModelCopyJobs(params: Bedrock.Types.ListModelCopyJobsRequest, callback?: (err: AWSError, data: Bedrock.Types.ListModelCopyJobsResponse) => void): Request<Bedrock.Types.ListModelCopyJobsResponse, AWSError>;
+  /**
+   * Returns a list of model copy jobs that you have submitted. You can filter the jobs to return based on one or more criteria. For more information, see Copy models to be used in other regions in the Amazon Bedrock User Guide.
+   */
+  listModelCopyJobs(callback?: (err: AWSError, data: Bedrock.Types.ListModelCopyJobsResponse) => void): Request<Bedrock.Types.ListModelCopyJobsResponse, AWSError>;
   /**
    * Returns a list of model customization jobs that you have submitted. You can filter the jobs to return based on one or more criteria. For more information, see Custom models in the Amazon Bedrock User Guide.
    */
@@ -253,6 +277,7 @@ declare class Bedrock extends Service {
   updateProvisionedModelThroughput(callback?: (err: AWSError, data: Bedrock.Types.UpdateProvisionedModelThroughputResponse) => void): Request<Bedrock.Types.UpdateProvisionedModelThroughputResponse, AWSError>;
 }
 declare namespace Bedrock {
+  export type AccountId = string;
   export interface AutomatedEvaluationConfig {
     /**
      * Specifies the required elements for an automatic model evaluation job.
@@ -415,6 +440,34 @@ declare namespace Bedrock {
      */
     version: GuardrailNumericalVersion;
   }
+  export interface CreateModelCopyJobRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the model to be copied.
+     */
+    sourceModelArn: ModelArn;
+    /**
+     * A name for the copied model.
+     */
+    targetModelName: CustomModelName;
+    /**
+     * The ARN of the KMS key that you use to encrypt the model copy.
+     */
+    modelKmsKeyId?: KmsKeyId;
+    /**
+     * Tags to associate with the target model. For more information, see Tag resources in the Amazon Bedrock User Guide.
+     */
+    targetModelTags?: TagList;
+    /**
+     * A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see Ensuring idempotency.
+     */
+    clientRequestToken?: IdempotencyToken;
+  }
+  export interface CreateModelCopyJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the model copy job.
+     */
+    jobArn: ModelCopyJobArn;
+  }
   export interface CreateModelCustomizationJobRequest {
     /**
      * A name for the fine-tuning job.
@@ -497,7 +550,7 @@ declare namespace Bedrock {
      */
     modelId: ModelIdentifier;
     /**
-     * The commitment duration requested for the Provisioned Throughput. Billing occurs hourly and is discounted for longer commitment terms. To request a no-commit Provisioned Throughput, omit this field. Custom models support all levels of commitment. To see which base models support no commitment, see Supported regions and models for Provisioned Throughput in the Amazon Bedrock User Guide
+     * The commitment duration requested for the Provisioned Throughput. Billing occurs hourly and is discounted for longer commitment terms. To request a no-commit Provisioned Throughput, omit this field. Custom models support all levels of commitment. To see which base models support no commitment, see Supported regions and models for Provisioned Throughput in the Amazon Bedrock User Guide 
      */
     commitmentDuration?: CommitmentDuration;
     /**
@@ -538,6 +591,10 @@ declare namespace Bedrock {
      * Specifies whether to carry out continued pre-training of a model or whether to fine-tune it. For more information, see Custom models.
      */
     customizationType?: CustomizationType;
+    /**
+     * The unique identifier of the account that owns the model.
+     */
+    ownerAccountId?: AccountId;
   }
   export type CustomModelSummaryList = CustomModelSummary[];
   export type CustomizationType = "FINE_TUNING"|"CONTINUED_PRE_TRAINING"|string;
@@ -1006,6 +1063,58 @@ declare namespace Bedrock {
      */
     kmsKeyArn?: KmsKeyArn;
   }
+  export interface GetModelCopyJobRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the model copy job.
+     */
+    jobArn: ModelCopyJobArn;
+  }
+  export interface GetModelCopyJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the model copy job.
+     */
+    jobArn: ModelCopyJobArn;
+    /**
+     * The status of the model copy job.
+     */
+    status: ModelCopyJobStatus;
+    /**
+     * The time at which the model copy job was created.
+     */
+    creationTime: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the copied model.
+     */
+    targetModelArn: CustomModelArn;
+    /**
+     * The name of the copied model.
+     */
+    targetModelName?: CustomModelName;
+    /**
+     * The unique identifier of the account that the model being copied originated from.
+     */
+    sourceAccountId: AccountId;
+    /**
+     * The Amazon Resource Name (ARN) of the original model being copied.
+     */
+    sourceModelArn: ModelArn;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS key encrypting the copied model.
+     */
+    targetModelKmsKeyArn?: KmsKeyArn;
+    /**
+     * The tags associated with the copied model.
+     */
+    targetModelTags?: TagList;
+    /**
+     * An error message for why the model copy job failed.
+     */
+    failureMessage?: ErrorMessage;
+    /**
+     * The name of the original model being copied.
+     */
+    sourceModelName?: CustomModelName;
+  }
   export interface GetModelCustomizationJobRequest {
     /**
      * Identifier for the customization job.
@@ -1276,7 +1385,7 @@ declare namespace Bedrock {
   export type GuardrailPiiEntitiesConfig = GuardrailPiiEntityConfig[];
   export interface GuardrailPiiEntity {
     /**
-     * The type of PII entity. For example, Social Security Number.
+     * The type of PII entity. For exampvle, Social Security Number.
      */
     type: GuardrailPiiEntityType;
     /**
@@ -1559,11 +1668,11 @@ declare namespace Bedrock {
      */
     foundationModelArnEquals?: FoundationModelArn;
     /**
-     * Maximum number of results to return in the response.
+     * The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the nextToken field when making another request to return the next batch of results.
      */
     maxResults?: MaxResults;
     /**
-     * Continuation token from the previous response, for Amazon Bedrock to list the next set of results.
+     * If the total number of results is greater than the maxResults value provided in the request, enter the token returned in the nextToken field in the response in this field to return the next batch of results.
      */
     nextToken?: PaginationToken;
     /**
@@ -1574,10 +1683,14 @@ declare namespace Bedrock {
      * The sort order of the results.
      */
     sortOrder?: SortOrder;
+    /**
+     * Return custom models depending on if the current account owns them (true) or if they were shared with the current account (false).
+     */
+    isOwned?: Boolean;
   }
   export interface ListCustomModelsResponse {
     /**
-     * Continuation token for the next request to list the next set of results.
+     * If the total number of results is greater than the maxResults value provided in the request, use this token when making another request in the nextToken field to return the next batch of results.
      */
     nextToken?: PaginationToken;
     /**
@@ -1677,6 +1790,58 @@ declare namespace Bedrock {
      */
     nextToken?: PaginationToken;
   }
+  export interface ListModelCopyJobsRequest {
+    /**
+     * Filters for model copy jobs created after the specified time.
+     */
+    creationTimeAfter?: Timestamp;
+    /**
+     * Filters for model copy jobs created before the specified time. 
+     */
+    creationTimeBefore?: Timestamp;
+    /**
+     * Filters for model copy jobs whose status matches the value that you specify.
+     */
+    statusEquals?: ModelCopyJobStatus;
+    /**
+     * Filters for model copy jobs in which the account that the source model belongs to is equal to the value that you specify.
+     */
+    sourceAccountEquals?: AccountId;
+    /**
+     * Filters for model copy jobs in which the Amazon Resource Name (ARN) of the source model to is equal to the value that you specify.
+     */
+    sourceModelArnEquals?: ModelArn;
+    /**
+     * Filters for model copy jobs in which the name of the copied model contains the string that you specify.
+     */
+    targetModelNameContains?: CustomModelName;
+    /**
+     * The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the nextToken field when making another request to return the next batch of results.
+     */
+    maxResults?: MaxResults;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, enter the token returned in the nextToken field in the response in this field to return the next batch of results.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The field to sort by in the returned list of model copy jobs.
+     */
+    sortBy?: SortJobsBy;
+    /**
+     * Specifies whether to sort the results in ascending or descending order.
+     */
+    sortOrder?: SortOrder;
+  }
+  export interface ListModelCopyJobsResponse {
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, use this token when making another request in the nextToken field to return the next batch of results.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * A list of information about each model copy job.
+     */
+    modelCopyJobSummaries?: ModelCopyJobSummaries;
+  }
   export interface ListModelCustomizationJobsRequest {
     /**
      * Return customization jobs created after the specified time. 
@@ -1695,11 +1860,11 @@ declare namespace Bedrock {
      */
     nameContains?: JobName;
     /**
-     * Maximum number of results to return in the response.
+     * The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the nextToken field when making another request to return the next batch of results.
      */
     maxResults?: MaxResults;
     /**
-     * Continuation token from the previous response, for Amazon Bedrock to list the next set of results.
+     * If the total number of results is greater than the maxResults value provided in the request, enter the token returned in the nextToken field in the response in this field to return the next batch of results.
      */
     nextToken?: PaginationToken;
     /**
@@ -1713,7 +1878,7 @@ declare namespace Bedrock {
   }
   export interface ListModelCustomizationJobsResponse {
     /**
-     * Page continuation token to use in the next request.
+     * If the total number of results is greater than the maxResults value provided in the request, use this token when making another request in the nextToken field to return the next batch of results.
      */
     nextToken?: PaginationToken;
     /**
@@ -1807,6 +1972,55 @@ declare namespace Bedrock {
   export type MaxResults = number;
   export type MetricFloat = number;
   export type ModelArn = string;
+  export type ModelCopyJobArn = string;
+  export type ModelCopyJobStatus = "InProgress"|"Completed"|"Failed"|string;
+  export type ModelCopyJobSummaries = ModelCopyJobSummary[];
+  export interface ModelCopyJobSummary {
+    /**
+     * The Amazon Resoource Name (ARN) of the model copy job.
+     */
+    jobArn: ModelCopyJobArn;
+    /**
+     * The status of the model copy job.
+     */
+    status: ModelCopyJobStatus;
+    /**
+     * The time that the model copy job was created.
+     */
+    creationTime: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the copied model.
+     */
+    targetModelArn: CustomModelArn;
+    /**
+     * The name of the copied model.
+     */
+    targetModelName?: CustomModelName;
+    /**
+     * The unique identifier of the account that the model being copied originated from.
+     */
+    sourceAccountId: AccountId;
+    /**
+     * The Amazon Resource Name (ARN) of the original model being copied.
+     */
+    sourceModelArn: ModelArn;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS key used to encrypt the copied model.
+     */
+    targetModelKmsKeyArn?: KmsKeyArn;
+    /**
+     * Tags associated with the copied model.
+     */
+    targetModelTags?: TagList;
+    /**
+     * If a model fails to be copied, a message describing why the job failed is included here.
+     */
+    failureMessage?: ErrorMessage;
+    /**
+     * The name of the original model being copied.
+     */
+    sourceModelName?: CustomModelName;
+  }
   export type ModelCustomization = "FINE_TUNING"|"CONTINUED_PRE_TRAINING"|string;
   export type ModelCustomizationHyperParameters = {[key: string]: String};
   export type ModelCustomizationJobArn = string;

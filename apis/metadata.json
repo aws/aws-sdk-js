@@ -1432,5 +1432,9 @@
   },
   "qapps": {
     "name": "QApps"
+  },
+  "ssmquicksetup": {
+    "prefix": "ssm-quicksetup",
+    "name": "SSMQuickSetup"
   }
 }

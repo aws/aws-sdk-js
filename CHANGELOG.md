@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1665.0-->
+<!--LATEST=2.1666.0-->
 <!--ENTRYINSERT-->
+
+## 2.1666.0
+* feature: Bedrock: API and Documentation for Bedrock Model Copy feature. This feature lets you share and copy a custom model from one region to another or one account to another.
+* feature: ControlCatalog: AWS Control Tower provides two new public APIs controlcatalog:ListControls and controlcatalog:GetControl under controlcatalog service namespace, which enable customers to programmatically retrieve control metadata of available controls.
+* feature: IAM: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: RDS: This release adds support for specifying optional MinACU parameter in CreateDBShardGroup and ModifyDBShardGroup API. DBShardGroup response will contain MinACU if specified.
+* feature: SSMQuickSetup: This release adds API support for the QuickSetup feature of AWS Systems Manager
+* feature: SageMaker: This release adds support for Amazon EMR Serverless applications in SageMaker Studio for running data processing jobs.
 
 ## 2.1665.0
 * feature: AppStream: Added support for Red Hat Enterprise Linux 8 on Amazon AppStream 2.0
