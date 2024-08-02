@@ -1,0 +1,57 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudWatch",
+        "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing."
+    },
+    {
+        "type": "feature",
+        "category": "ECS",
+        "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing."
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing."
+    },
+    {
+        "type": "feature",
+        "category": "IVS",
+        "description": "updates cloudtrail event source for SDKs"
+    },
+    {
+        "type": "feature",
+        "category": "IVSRealTime",
+        "description": "updates cloudtrail event source for SDKs"
+    },
+    {
+        "type": "feature",
+        "category": "Ivschat",
+        "description": "updates cloudtrail event source for SDKs"
+    },
+    {
+        "type": "feature",
+        "category": "Kinesis",
+        "description": "Updates API to latest version."
+    },
+    {
+        "type": "feature",
+        "category": "Resiliencehub",
+        "description": "Customers are presented with the grouping recommendations and can determine if the recommendations are accurate and apply to their case. This feature simplifies onboarding by organizing resources into appropriate AppComponents."
+    },
+    {
+        "type": "feature",
+        "category": "Route53",
+        "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing."
+    },
+    {
+        "type": "feature",
+        "category": "WAFRegional",
+        "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing."
+    }
+]

@@ -1,6 +1,19 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1666.0-->
+<!--LATEST=2.1667.0-->
 <!--ENTRYINSERT-->
+
+## 2.1667.0
+* feature: CloudWatch: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: ECS: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: Glue: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: IVS: updates cloudtrail event source for SDKs
+* feature: IVSRealTime: updates cloudtrail event source for SDKs
+* feature: Ivschat: updates cloudtrail event source for SDKs
+* feature: Kinesis: Updates API to latest version.
+* feature: Resiliencehub: Customers are presented with the grouping recommendations and can determine if the recommendations are accurate and apply to their case. This feature simplifies onboarding by organizing resources into appropriate AppComponents.
+* feature: Route53: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: SSM: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* feature: WAFRegional: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
 
 ## 2.1666.0
 * feature: Bedrock: API and Documentation for Bedrock Model Copy feature. This feature lets you share and copy a custom model from one region to another or one account to another.

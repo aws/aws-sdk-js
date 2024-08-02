@@ -12,11 +12,19 @@ declare class Resiliencehub extends Service {
   constructor(options?: Resiliencehub.Types.ClientConfiguration)
   config: Config & Resiliencehub.Types.ClientConfiguration;
   /**
-   * Adds the source of resource-maps to the draft version of an application. During assessment, Resilience Hub will use these resource-maps to resolve the latest physical ID for each resource in the application template. For more information about different types of resources suported by Resilience Hub and how to add them in your application, see Step 2: How is your application managed? in the Resilience Hub User Guide.
+   * Accepts the resource grouping recommendations suggested by Resilience Hub for your application.
+   */
+  acceptResourceGroupingRecommendations(params: Resiliencehub.Types.AcceptResourceGroupingRecommendationsRequest, callback?: (err: AWSError, data: Resiliencehub.Types.AcceptResourceGroupingRecommendationsResponse) => void): Request<Resiliencehub.Types.AcceptResourceGroupingRecommendationsResponse, AWSError>;
+  /**
+   * Accepts the resource grouping recommendations suggested by Resilience Hub for your application.
+   */
+  acceptResourceGroupingRecommendations(callback?: (err: AWSError, data: Resiliencehub.Types.AcceptResourceGroupingRecommendationsResponse) => void): Request<Resiliencehub.Types.AcceptResourceGroupingRecommendationsResponse, AWSError>;
+  /**
+   * Adds the source of resource-maps to the draft version of an application. During assessment, Resilience Hub will use these resource-maps to resolve the latest physical ID for each resource in the application template. For more information about different types of resources supported by Resilience Hub and how to add them in your application, see Step 2: How is your application managed? in the Resilience Hub User Guide.
    */
   addDraftAppVersionResourceMappings(params: Resiliencehub.Types.AddDraftAppVersionResourceMappingsRequest, callback?: (err: AWSError, data: Resiliencehub.Types.AddDraftAppVersionResourceMappingsResponse) => void): Request<Resiliencehub.Types.AddDraftAppVersionResourceMappingsResponse, AWSError>;
   /**
-   * Adds the source of resource-maps to the draft version of an application. During assessment, Resilience Hub will use these resource-maps to resolve the latest physical ID for each resource in the application template. For more information about different types of resources suported by Resilience Hub and how to add them in your application, see Step 2: How is your application managed? in the Resilience Hub User Guide.
+   * Adds the source of resource-maps to the draft version of an application. During assessment, Resilience Hub will use these resource-maps to resolve the latest physical ID for each resource in the application template. For more information about different types of resources supported by Resilience Hub and how to add them in your application, see Step 2: How is your application managed? in the Resilience Hub User Guide.
    */
   addDraftAppVersionResourceMappings(callback?: (err: AWSError, data: Resiliencehub.Types.AddDraftAppVersionResourceMappingsResponse) => void): Request<Resiliencehub.Types.AddDraftAppVersionResourceMappingsResponse, AWSError>;
   /**
@@ -156,11 +164,11 @@ declare class Resiliencehub extends Service {
    */
   describeAppVersionAppComponent(callback?: (err: AWSError, data: Resiliencehub.Types.DescribeAppVersionAppComponentResponse) => void): Request<Resiliencehub.Types.DescribeAppVersionAppComponentResponse, AWSError>;
   /**
-   * Describes a resource of the Resilience Hub application.  This API accepts only one of the following parameters to descibe the resource:    resourceName     logicalResourceId     physicalResourceId (Along with physicalResourceId, you can also provide awsAccountId, and awsRegion)   
+   * Describes a resource of the Resilience Hub application.  This API accepts only one of the following parameters to describe the resource:    resourceName     logicalResourceId     physicalResourceId (Along with physicalResourceId, you can also provide awsAccountId, and awsRegion)   
    */
   describeAppVersionResource(params: Resiliencehub.Types.DescribeAppVersionResourceRequest, callback?: (err: AWSError, data: Resiliencehub.Types.DescribeAppVersionResourceResponse) => void): Request<Resiliencehub.Types.DescribeAppVersionResourceResponse, AWSError>;
   /**
-   * Describes a resource of the Resilience Hub application.  This API accepts only one of the following parameters to descibe the resource:    resourceName     logicalResourceId     physicalResourceId (Along with physicalResourceId, you can also provide awsAccountId, and awsRegion)   
+   * Describes a resource of the Resilience Hub application.  This API accepts only one of the following parameters to describe the resource:    resourceName     logicalResourceId     physicalResourceId (Along with physicalResourceId, you can also provide awsAccountId, and awsRegion)   
    */
   describeAppVersionResource(callback?: (err: AWSError, data: Resiliencehub.Types.DescribeAppVersionResourceResponse) => void): Request<Resiliencehub.Types.DescribeAppVersionResourceResponse, AWSError>;
   /**
@@ -195,6 +203,14 @@ declare class Resiliencehub extends Service {
    * Describes a specified resiliency policy for an Resilience Hub application. The returned policy object includes creation time, data location constraints, the Amazon Resource Name (ARN) for the policy, tags, tier, and more.
    */
   describeResiliencyPolicy(callback?: (err: AWSError, data: Resiliencehub.Types.DescribeResiliencyPolicyResponse) => void): Request<Resiliencehub.Types.DescribeResiliencyPolicyResponse, AWSError>;
+  /**
+   * Describes the resource grouping recommendation tasks run by Resilience Hub for your application.
+   */
+  describeResourceGroupingRecommendationTask(params: Resiliencehub.Types.DescribeResourceGroupingRecommendationTaskRequest, callback?: (err: AWSError, data: Resiliencehub.Types.DescribeResourceGroupingRecommendationTaskResponse) => void): Request<Resiliencehub.Types.DescribeResourceGroupingRecommendationTaskResponse, AWSError>;
+  /**
+   * Describes the resource grouping recommendation tasks run by Resilience Hub for your application.
+   */
+  describeResourceGroupingRecommendationTask(callback?: (err: AWSError, data: Resiliencehub.Types.DescribeResourceGroupingRecommendationTaskResponse) => void): Request<Resiliencehub.Types.DescribeResourceGroupingRecommendationTaskResponse, AWSError>;
   /**
    * Imports resources to Resilience Hub application draft version from different input sources. For more information about the input sources supported by Resilience Hub, see Discover the structure and describe your Resilience Hub application.
    */
@@ -316,6 +332,14 @@ declare class Resiliencehub extends Service {
    */
   listResiliencyPolicies(callback?: (err: AWSError, data: Resiliencehub.Types.ListResiliencyPoliciesResponse) => void): Request<Resiliencehub.Types.ListResiliencyPoliciesResponse, AWSError>;
   /**
+   * Lists the resource grouping recommendations suggested by Resilience Hub for your application.
+   */
+  listResourceGroupingRecommendations(params: Resiliencehub.Types.ListResourceGroupingRecommendationsRequest, callback?: (err: AWSError, data: Resiliencehub.Types.ListResourceGroupingRecommendationsResponse) => void): Request<Resiliencehub.Types.ListResourceGroupingRecommendationsResponse, AWSError>;
+  /**
+   * Lists the resource grouping recommendations suggested by Resilience Hub for your application.
+   */
+  listResourceGroupingRecommendations(callback?: (err: AWSError, data: Resiliencehub.Types.ListResourceGroupingRecommendationsResponse) => void): Request<Resiliencehub.Types.ListResourceGroupingRecommendationsResponse, AWSError>;
+  /**
    * Lists the standard operating procedure (SOP) recommendations for the Resilience Hub applications.
    */
   listSopRecommendations(params: Resiliencehub.Types.ListSopRecommendationsRequest, callback?: (err: AWSError, data: Resiliencehub.Types.ListSopRecommendationsResponse) => void): Request<Resiliencehub.Types.ListSopRecommendationsResponse, AWSError>;
@@ -372,6 +396,14 @@ declare class Resiliencehub extends Service {
    */
   putDraftAppVersionTemplate(callback?: (err: AWSError, data: Resiliencehub.Types.PutDraftAppVersionTemplateResponse) => void): Request<Resiliencehub.Types.PutDraftAppVersionTemplateResponse, AWSError>;
   /**
+   * Rejects resource grouping recommendations.
+   */
+  rejectResourceGroupingRecommendations(params: Resiliencehub.Types.RejectResourceGroupingRecommendationsRequest, callback?: (err: AWSError, data: Resiliencehub.Types.RejectResourceGroupingRecommendationsResponse) => void): Request<Resiliencehub.Types.RejectResourceGroupingRecommendationsResponse, AWSError>;
+  /**
+   * Rejects resource grouping recommendations.
+   */
+  rejectResourceGroupingRecommendations(callback?: (err: AWSError, data: Resiliencehub.Types.RejectResourceGroupingRecommendationsResponse) => void): Request<Resiliencehub.Types.RejectResourceGroupingRecommendationsResponse, AWSError>;
+  /**
    * Removes resource mappings from a draft application version.
    */
   removeDraftAppVersionResourceMappings(params: Resiliencehub.Types.RemoveDraftAppVersionResourceMappingsRequest, callback?: (err: AWSError, data: Resiliencehub.Types.RemoveDraftAppVersionResourceMappingsResponse) => void): Request<Resiliencehub.Types.RemoveDraftAppVersionResourceMappingsResponse, AWSError>;
@@ -395,6 +427,14 @@ declare class Resiliencehub extends Service {
    * Creates a new application assessment for an application.
    */
   startAppAssessment(callback?: (err: AWSError, data: Resiliencehub.Types.StartAppAssessmentResponse) => void): Request<Resiliencehub.Types.StartAppAssessmentResponse, AWSError>;
+  /**
+   * Starts grouping recommendation task.
+   */
+  startResourceGroupingRecommendationTask(params: Resiliencehub.Types.StartResourceGroupingRecommendationTaskRequest, callback?: (err: AWSError, data: Resiliencehub.Types.StartResourceGroupingRecommendationTaskResponse) => void): Request<Resiliencehub.Types.StartResourceGroupingRecommendationTaskResponse, AWSError>;
+  /**
+   * Starts grouping recommendation task.
+   */
+  startResourceGroupingRecommendationTask(callback?: (err: AWSError, data: Resiliencehub.Types.StartResourceGroupingRecommendationTaskResponse) => void): Request<Resiliencehub.Types.StartResourceGroupingRecommendationTaskResponse, AWSError>;
   /**
    * Applies one or more tags to a resource.
    */
@@ -453,6 +493,33 @@ declare class Resiliencehub extends Service {
   updateResiliencyPolicy(callback?: (err: AWSError, data: Resiliencehub.Types.UpdateResiliencyPolicyResponse) => void): Request<Resiliencehub.Types.UpdateResiliencyPolicyResponse, AWSError>;
 }
 declare namespace Resiliencehub {
+  export type AcceptGroupingRecommendationEntries = AcceptGroupingRecommendationEntry[];
+  export interface AcceptGroupingRecommendationEntry {
+    /**
+     * Indicates the identifier of the grouping recommendation.
+     */
+    groupingRecommendationId: String255;
+  }
+  export interface AcceptResourceGroupingRecommendationsRequest {
+    /**
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the Amazon Web Services General Reference guide.
+     */
+    appArn: Arn;
+    /**
+     * Indicates the list of resource grouping recommendations you want to include in your application.
+     */
+    entries: AcceptGroupingRecommendationEntries;
+  }
+  export interface AcceptResourceGroupingRecommendationsResponse {
+    /**
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the Amazon Web Services General Reference guide.
+     */
+    appArn: Arn;
+    /**
+     * Indicates the list of resource grouping recommendations that could not be included in your application.
+     */
+    failedEntries: FailedGroupingRecommendationEntries;
+  }
   export interface AddDraftAppVersionResourceMappingsRequest {
     /**
      * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the Amazon Web Services General Reference guide.
@@ -664,6 +731,10 @@ declare namespace Resiliencehub {
      */
     startTime?: TimeStamp;
     /**
+     * Indicates a concise summary that provides an overview of the Resilience Hub assessment.
+     */
+    summary?: AssessmentSummary;
+    /**
      * Tags assigned to the resource. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key/value pair.
      */
     tags?: TagMap;
@@ -695,7 +766,7 @@ declare namespace Resiliencehub {
      */
     assessmentStatus: AssessmentStatus;
     /**
-     * TCurrent status of compliance for the resiliency policy.
+     * Current status of compliance for the resiliency policy.
      */
     complianceStatus?: ComplianceStatus;
     /**
@@ -732,7 +803,7 @@ declare namespace Resiliencehub {
     versionName?: EntityVersion;
   }
   export type AppAssessmentSummaryList = AppAssessmentSummary[];
-  export type AppComplianceStatusType = "PolicyBreached"|"PolicyMet"|"NotAssessed"|"ChangesDetected"|string;
+  export type AppComplianceStatusType = "PolicyBreached"|"PolicyMet"|"NotAssessed"|"ChangesDetected"|"NotApplicable"|"MissingPolicy"|string;
   export interface AppComponent {
     /**
      * Additional configuration parameters for an Resilience Hub application. If you want to implement additionalInfo through the Resilience Hub console rather than using an API call, see Configure the application configuration parameters.  Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account. Key: "failover-regions"  Value: "[{"region":"&lt;REGION&gt;", "accounts":[{"id":"&lt;ACCOUNT_ID&gt;"}]}]"  
@@ -741,11 +812,11 @@ declare namespace Resiliencehub {
     /**
      * Identifier of the Application Component.
      */
-    id?: String255;
+    id?: EntityName255;
     /**
      * Name of the Application Component.
      */
-    name: String255;
+    name: EntityName255;
     /**
      * The type of Application Component.
      */
@@ -883,8 +954,33 @@ declare namespace Resiliencehub {
   export type ArnList = Arn[];
   export type AssessmentCompliance = {[key: string]: DisruptionCompliance};
   export type AssessmentInvoker = "User"|"System"|string;
+  export interface AssessmentRiskRecommendation {
+    /**
+     * Indicates the Application Components (AppComponents) that were assessed as part of the assessnent and are associated with the identified risk and recommendation.  This property is available only in the US East (N. Virginia) Region. 
+     */
+    appComponents?: AppComponentNameList;
+    /**
+     * Indicates the recommendation provided by the Resilience Hub to address the identified risks in the application.  This property is available only in the US East (N. Virginia) Region. 
+     */
+    recommendation?: String255;
+    /**
+     * Indicates the description of the potential risk identified in the application as part of the Resilience Hub assessment.  This property is available only in the US East (N. Virginia) Region. 
+     */
+    risk?: String255;
+  }
+  export type AssessmentRiskRecommendationList = AssessmentRiskRecommendation[];
   export type AssessmentStatus = "Pending"|"InProgress"|"Failed"|"Success"|string;
   export type AssessmentStatusList = AssessmentStatus[];
+  export interface AssessmentSummary {
+    /**
+     * Indicates the top risks and recommendations identified by the Resilience Hub assessment, each representing a specific risk and the corresponding recommendation to address it.  This property is available only in the US East (N. Virginia) Region. 
+     */
+    riskRecommendations?: AssessmentRiskRecommendationList;
+    /**
+     * Indicates a concise summary that provides an overview of the Resilience Hub assessment.  This property is available only in the US East (N. Virginia) Region. 
+     */
+    summary?: String500;
+  }
   export type AwsRegion = string;
   export type BatchUpdateRecommendationStatusFailedEntries = BatchUpdateRecommendationStatusFailedEntry[];
   export interface BatchUpdateRecommendationStatusFailedEntry {
@@ -989,7 +1085,7 @@ declare namespace Resiliencehub {
     expectedValue?: AssessmentCompliance;
   }
   export type ComplianceDriftList = ComplianceDrift[];
-  export type ComplianceStatus = "PolicyBreached"|"PolicyMet"|string;
+  export type ComplianceStatus = "PolicyBreached"|"PolicyMet"|"NotApplicable"|"MissingPolicy"|string;
   export type ComponentCompliancesList = AppComponentCompliance[];
   export interface ComponentRecommendation {
     /**
@@ -1680,6 +1776,30 @@ declare namespace Resiliencehub {
      */
     policy: ResiliencyPolicy;
   }
+  export interface DescribeResourceGroupingRecommendationTaskRequest {
+    /**
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the Amazon Web Services General Reference guide.
+     */
+    appArn: Arn;
+    /**
+     * Indicates the identifier of the grouping recommendation task.
+     */
+    groupingId?: String255;
+  }
+  export interface DescribeResourceGroupingRecommendationTaskResponse {
+    /**
+     * Indicates the error that occurred while generating a grouping recommendation.
+     */
+    errorMessage?: String500;
+    /**
+     * Indicates the identifier of the grouping recommendation task.
+     */
+    groupingId: String255;
+    /**
+     * Status of the action.
+     */
+    status: ResourcesGroupingRecGenStatusType;
+  }
   export type DifferenceType = "NotEqual"|"Added"|"Removed"|string;
   export interface DisruptionCompliance {
     /**
@@ -1756,6 +1876,7 @@ declare namespace Resiliencehub {
   export type EntityDescription = string;
   export type EntityId = string;
   export type EntityName = string;
+  export type EntityName255 = string;
   export type EntityNameList = EntityName[];
   export type EntityVersion = string;
   export type ErrorMessage = string;
@@ -1777,6 +1898,17 @@ declare namespace Resiliencehub {
   export type EventSubscriptionList = EventSubscription[];
   export type EventType = "ScheduledAssessmentFailure"|"DriftDetected"|string;
   export type ExcludeRecommendationReason = "AlreadyImplemented"|"NotRelevant"|"ComplexityOfImplementation"|string;
+  export type FailedGroupingRecommendationEntries = FailedGroupingRecommendationEntry[];
+  export interface FailedGroupingRecommendationEntry {
+    /**
+     * Indicates the error that occurred while implementing a grouping recommendation.
+     */
+    errorMessage: ErrorMessage;
+    /**
+     * Indicates the identifier of the grouping recommendation.
+     */
+    groupingRecommendationId: String255;
+  }
   export interface FailurePolicy {
     /**
      * Recovery Point Objective (RPO) in seconds.
@@ -1787,6 +1919,85 @@ declare namespace Resiliencehub {
      */
     rtoInSecs: Seconds;
   }
+  export interface GroupingAppComponent {
+    /**
+     * Indicates the identifier of an AppComponent.
+     */
+    appComponentId: EntityName255;
+    /**
+     * Indicates the name of an AppComponent.
+     */
+    appComponentName: EntityName255;
+    /**
+     * Indicates the type of an AppComponent.
+     */
+    appComponentType: String255;
+  }
+  export interface GroupingRecommendation {
+    /**
+     * Indicates the confidence level of Resilience Hub on the grouping recommendation.
+     */
+    confidenceLevel: GroupingRecommendationConfidenceLevel;
+    /**
+     * Indicates the creation time of the grouping recommendation.
+     */
+    creationTime: TimeStamp;
+    /**
+     * Indicates the name of the recommended Application Component (AppComponent).
+     */
+    groupingAppComponent: GroupingAppComponent;
+    /**
+     * Indicates all the reasons available for rejecting a grouping recommendation.
+     */
+    groupingRecommendationId: String255;
+    /**
+     * Indicates all the reasons available for rejecting a grouping recommendation.
+     */
+    recommendationReasons: String255List;
+    /**
+     * Indicates the reason you had selected while rejecting a grouping recommendation.
+     */
+    rejectionReason?: GroupingRecommendationRejectionReason;
+    /**
+     * Indicates the resources that are grouped in a recommended AppComponent.
+     */
+    resources: GroupingResourceList;
+    /**
+     * Indicates the confidence level of the grouping recommendation.
+     */
+    score: Double;
+    /**
+     * Indicates the status of grouping resources into AppComponents.
+     */
+    status: GroupingRecommendationStatusType;
+  }
+  export type GroupingRecommendationConfidenceLevel = "High"|"Medium"|string;
+  export type GroupingRecommendationList = GroupingRecommendation[];
+  export type GroupingRecommendationRejectionReason = "DistinctBusinessPurpose"|"SeparateDataConcern"|"DistinctUserGroupHandling"|"Other"|string;
+  export type GroupingRecommendationStatusType = "Accepted"|"Rejected"|"PendingDecision"|string;
+  export interface GroupingResource {
+    /**
+     * Indicates the logical identifier of the resource.
+     */
+    logicalResourceId: LogicalResourceId;
+    /**
+     * Indicates the physical identifier of the resource.
+     */
+    physicalResourceId: PhysicalResourceId;
+    /**
+     * Indicates the resource name.
+     */
+    resourceName: String255;
+    /**
+     * Indicates the resource type.
+     */
+    resourceType: String255;
+    /**
+     * Indicates the identifier of the source AppComponents in which the resources were previously grouped into.
+     */
+    sourceAppComponentIds: String255List;
+  }
+  export type GroupingResourceList = GroupingResource[];
   export type HaArchitecture = "MultiSite"|"WarmStandby"|"PilotLight"|"BackupAndRestore"|"NoRecoveryPlan"|string;
   export type IamRoleArn = string;
   export type IamRoleArnList = IamRoleArn[];
@@ -1871,11 +2082,11 @@ declare namespace Resiliencehub {
      */
     assessmentArn: Arn;
     /**
-     * Indicates the maximum number of applications requested.
+     * Indicates the maximum number of compliance drifts requested.
      */
     maxResults?: MaxResults;
     /**
-     * Indicates the unique token number of the next application to be checked for compliance and regulatory requirements from the list of applications.
+     * Null, or the token from a previous call to get the next set of results.
      */
     nextToken?: NextToken;
   }
@@ -1885,7 +2096,7 @@ declare namespace Resiliencehub {
      */
     complianceDrifts: ComplianceDriftList;
     /**
-     * Token number of the next application to be checked for compliance and regulatory requirements from the list of applications.
+     * Null, or the token from a previous call to get the next set of results.
      */
     nextToken?: NextToken;
   }
@@ -2187,7 +2398,7 @@ declare namespace Resiliencehub {
      */
     nextToken?: NextToken;
     /**
-     * The application list is sorted based on the values of lastAppComplianceEvaluationTime field. By default, application list is sorted in ascending order. To sort the appliation list in descending order, set this field to True.
+     * The application list is sorted based on the values of lastAppComplianceEvaluationTime field. By default, application list is sorted in ascending order. To sort the application list in descending order, set this field to True.
      */
     reverseOrder?: BooleanOptional;
     /**
@@ -2268,6 +2479,30 @@ declare namespace Resiliencehub {
      * The resiliency policies for the Resilience Hub applications.
      */
     resiliencyPolicies: ResiliencyPolicies;
+  }
+  export interface ListResourceGroupingRecommendationsRequest {
+    /**
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the Amazon Web Services General Reference guide.
+     */
+    appArn?: Arn;
+    /**
+     * Maximum number of grouping recommendations to be displayed per Resilience Hub application.
+     */
+    maxResults?: MaxResults;
+    /**
+     * Null, or the token from a previous call to get the next set of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListResourceGroupingRecommendationsResponse {
+    /**
+     * List of resource grouping recommendations generated by Resilience Hub.
+     */
+    groupingRecommendations: GroupingRecommendationList;
+    /**
+     * Null, or the token from a previous call to get the next set of results.
+     */
+    nextToken?: NextToken;
   }
   export interface ListSopRecommendationsRequest {
     /**
@@ -2533,7 +2768,7 @@ declare namespace Resiliencehub {
     appVersion?: EntityVersion;
   }
   export type RecommendationCompliance = {[key: string]: RecommendationDisruptionCompliance};
-  export type RecommendationComplianceStatus = "BreachedUnattainable"|"BreachedCanMeet"|"MetCanImprove"|string;
+  export type RecommendationComplianceStatus = "BreachedUnattainable"|"BreachedCanMeet"|"MetCanImprove"|"MissingPolicy"|string;
   export interface RecommendationDisruptionCompliance {
     /**
      * The expected compliance status after applying the recommended configuration change.
@@ -2646,6 +2881,37 @@ declare namespace Resiliencehub {
   export type RecommendationTemplateList = RecommendationTemplate[];
   export type RecommendationTemplateStatus = "Pending"|"InProgress"|"Failed"|"Success"|string;
   export type RecommendationTemplateStatusList = RecommendationTemplateStatus[];
+  export type RejectGroupingRecommendationEntries = RejectGroupingRecommendationEntry[];
+  export interface RejectGroupingRecommendationEntry {
+    /**
+     * Indicates the identifier of the grouping recommendation.
+     */
+    groupingRecommendationId: String255;
+    /**
+     * Indicates the reason you had selected while rejecting a grouping recommendation.
+     */
+    rejectionReason?: GroupingRecommendationRejectionReason;
+  }
+  export interface RejectResourceGroupingRecommendationsRequest {
+    /**
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the Amazon Web Services General Reference guide.
+     */
+    appArn: Arn;
+    /**
+     * Indicates the list of resource grouping recommendations you have selected to exclude from your application.
+     */
+    entries: RejectGroupingRecommendationEntries;
+  }
+  export interface RejectResourceGroupingRecommendationsResponse {
+    /**
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the Amazon Web Services General Reference guide.
+     */
+    appArn: Arn;
+    /**
+     * Indicates the list of resource grouping recommendations that failed to get excluded in your application.
+     */
+    failedEntries: FailedGroupingRecommendationEntries;
+  }
   export interface RemoveDraftAppVersionResourceMappingsRequest {
     /**
      * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the Amazon Web Services General Reference guide.
@@ -2869,6 +3135,7 @@ declare namespace Resiliencehub {
   export type ResourceMappingType = "CfnStack"|"Resource"|"AppRegistryApp"|"ResourceGroup"|"Terraform"|"EKS"|string;
   export type ResourceResolutionStatusType = "Pending"|"InProgress"|"Failed"|"Success"|string;
   export type ResourceSourceType = "AppTemplate"|"Discovered"|string;
+  export type ResourcesGroupingRecGenStatusType = "Pending"|"InProgress"|"Failed"|"Success"|string;
   export interface S3Location {
     /**
      * The name of the Amazon S3 bucket.
@@ -2968,6 +3235,30 @@ declare namespace Resiliencehub {
      * The assessment created.
      */
     assessment: AppAssessment;
+  }
+  export interface StartResourceGroupingRecommendationTaskRequest {
+    /**
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the Amazon Web Services General Reference guide.
+     */
+    appArn: Arn;
+  }
+  export interface StartResourceGroupingRecommendationTaskResponse {
+    /**
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the Amazon Web Services General Reference guide.
+     */
+    appArn: Arn;
+    /**
+     * Indicates the error that occurred while executing a grouping recommendation task.
+     */
+    errorMessage?: String500;
+    /**
+     * Indicates the identifier of the grouping recommendation task.
+     */
+    groupingId: String255;
+    /**
+     * Status of the action.
+     */
+    status: ResourcesGroupingRecGenStatusType;
   }
   export type String1024 = string;
   export type String128WithoutWhitespace = string;
