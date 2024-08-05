@@ -653,6 +653,31 @@
       ],
       "documentation": "<p>Returns details about the repository creation templates in a registry. The <code>prefixes</code> request parameter can be used to return the details for a specific repository creation template.</p>"
     },
+    "GetAccountSetting": {
+      "name": "GetAccountSetting",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetAccountSettingRequest"
+      },
+      "output": {
+        "shape": "GetAccountSettingResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServerException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        }
+      ],
+      "documentation": "<p>Retrieves the basic scan type version name.</p>"
+    },
     "GetAuthorizationToken": {
       "name": "GetAuthorizationToken",
       "http": {
@@ -929,6 +954,34 @@
         }
       ],
       "documentation": "<p>List the tags for an Amazon ECR resource.</p>"
+    },
+    "PutAccountSetting": {
+      "name": "PutAccountSetting",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutAccountSettingRequest"
+      },
+      "output": {
+        "shape": "PutAccountSettingResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServerException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p>Allows you to change the basic scan type version by setting the <code>name</code> parameter to either <code>CLAIR</code> to <code>AWS_NATIVE</code>.</p>"
     },
     "PutImage": {
       "name": "PutImage",
@@ -1422,6 +1475,14 @@
     }
   },
   "shapes": {
+    "AccountSettingName": {
+      "type": "string",
+      "max": 64,
+      "min": 1
+    },
+    "AccountSettingValue": {
+      "type": "string"
+    },
     "Arch": {
       "type": "string"
     },
@@ -1826,7 +1887,7 @@
         },
         "customRoleArn": {
           "shape": "CustomRoleArn",
-          "documentation": "<p>The ARN of the role to be assumed by Amazon ECR. This role must be in the same account as the registry that you are configuring.</p>"
+          "documentation": "<p>The ARN of the role to be assumed by Amazon ECR. This role must be in the same account as the registry that you are configuring. Amazon ECR will assume your supplied role when the customRoleArn is specified. When this field isn't specified, Amazon ECR will use the service-linked role for the repository creation template.</p>"
         }
       }
     },
@@ -2578,6 +2639,31 @@
     },
     "ForceFlag": {
       "type": "boolean"
+    },
+    "GetAccountSettingRequest": {
+      "type": "structure",
+      "required": [
+        "name"
+      ],
+      "members": {
+        "name": {
+          "shape": "AccountSettingName",
+          "documentation": "<p>Basic scan type version name. </p>"
+        }
+      }
+    },
+    "GetAccountSettingResponse": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "AccountSettingName",
+          "documentation": "<p>Retrieves the basic scan type version name.</p>"
+        },
+        "value": {
+          "shape": "AccountSettingName",
+          "documentation": "<p>Retrieves the value that specifies what basic scan type is being used: <code>AWS_NATIVE</code> or <code>CLAIR</code>.</p>"
+        }
+      }
     },
     "GetAuthorizationTokenRegistryIdList": {
       "type": "list",
@@ -3582,6 +3668,36 @@
     "PushTimestamp": {
       "type": "timestamp"
     },
+    "PutAccountSettingRequest": {
+      "type": "structure",
+      "required": [
+        "name",
+        "value"
+      ],
+      "members": {
+        "name": {
+          "shape": "AccountSettingName",
+          "documentation": "<p>Basic scan type version name. </p>"
+        },
+        "value": {
+          "shape": "AccountSettingValue",
+          "documentation": "<p>Setting value that determines what basic scan type is being used: <code>AWS_NATIVE</code> or <code>CLAIR</code>.</p>"
+        }
+      }
+    },
+    "PutAccountSettingResponse": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "AccountSettingName",
+          "documentation": "<p>Retrieves the the basic scan type version name.</p>"
+        },
+        "value": {
+          "shape": "AccountSettingValue",
+          "documentation": "<p>Retrieves the basic scan type value, either <code>AWS_NATIVE</code> or <code>-</code>.</p>"
+        }
+      }
+    },
     "PutImageRequest": {
       "type": "structure",
       "required": [
@@ -4074,7 +4190,7 @@
         },
         "customRoleArn": {
           "shape": "CustomRoleArn",
-          "documentation": "<p>The ARN of the role to be assumed by Amazon ECR.</p>"
+          "documentation": "<p>The ARN of the role to be assumed by Amazon ECR. Amazon ECR will assume your supplied role when the customRoleArn is specified. When this field isn't specified, Amazon ECR will use the service-linked role for the repository creation template.</p>"
         },
         "createdAt": {
           "shape": "Date",
@@ -4686,7 +4802,7 @@
         },
         "customRoleArn": {
           "shape": "CustomRoleArn",
-          "documentation": "<p>The ARN of the role to be assumed by Amazon ECR. This role must be in the same account as the registry that you are configuring.</p>"
+          "documentation": "<p>The ARN of the role to be assumed by Amazon ECR. This role must be in the same account as the registry that you are configuring. Amazon ECR will assume your supplied role when the customRoleArn is specified. When this field isn't specified, Amazon ECR will use the service-linked role for the repository creation template.</p>"
         }
       }
     },

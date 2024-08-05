@@ -181,6 +181,14 @@ declare class ECR extends Service {
    */
   describeRepositoryCreationTemplates(callback?: (err: AWSError, data: ECR.Types.DescribeRepositoryCreationTemplatesResponse) => void): Request<ECR.Types.DescribeRepositoryCreationTemplatesResponse, AWSError>;
   /**
+   * Retrieves the basic scan type version name.
+   */
+  getAccountSetting(params: ECR.Types.GetAccountSettingRequest, callback?: (err: AWSError, data: ECR.Types.GetAccountSettingResponse) => void): Request<ECR.Types.GetAccountSettingResponse, AWSError>;
+  /**
+   * Retrieves the basic scan type version name.
+   */
+  getAccountSetting(callback?: (err: AWSError, data: ECR.Types.GetAccountSettingResponse) => void): Request<ECR.Types.GetAccountSettingResponse, AWSError>;
+  /**
    * Retrieves an authorization token. An authorization token represents your IAM authentication credentials and can be used to access any Amazon ECR registry that your IAM principal has access to. The authorization token is valid for 12 hours. The authorizationToken returned is a base64 encoded string that can be decoded and used in a docker login command to authenticate to a registry. The CLI offers an get-login-password command that simplifies the login process. For more information, see Registry authentication in the Amazon Elastic Container Registry User Guide.
    */
   getAuthorizationToken(params: ECR.Types.GetAuthorizationTokenRequest, callback?: (err: AWSError, data: ECR.Types.GetAuthorizationTokenResponse) => void): Request<ECR.Types.GetAuthorizationTokenResponse, AWSError>;
@@ -260,6 +268,14 @@ declare class ECR extends Service {
    * List the tags for an Amazon ECR resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: ECR.Types.ListTagsForResourceResponse) => void): Request<ECR.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Allows you to change the basic scan type version by setting the name parameter to either CLAIR to AWS_NATIVE.
+   */
+  putAccountSetting(params: ECR.Types.PutAccountSettingRequest, callback?: (err: AWSError, data: ECR.Types.PutAccountSettingResponse) => void): Request<ECR.Types.PutAccountSettingResponse, AWSError>;
+  /**
+   * Allows you to change the basic scan type version by setting the name parameter to either CLAIR to AWS_NATIVE.
+   */
+  putAccountSetting(callback?: (err: AWSError, data: ECR.Types.PutAccountSettingResponse) => void): Request<ECR.Types.PutAccountSettingResponse, AWSError>;
   /**
    * Creates or updates the image manifest and tags associated with an image. When an image is pushed and all new image layers have been uploaded, the PutImage API is called once to create or update the image manifest and the tags associated with the image.  This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
@@ -406,6 +422,8 @@ declare class ECR extends Service {
   waitFor(state: "lifecyclePolicyPreviewComplete", callback?: (err: AWSError, data: ECR.Types.GetLifecyclePolicyPreviewResponse) => void): Request<ECR.Types.GetLifecyclePolicyPreviewResponse, AWSError>;
 }
 declare namespace ECR {
+  export type AccountSettingName = string;
+  export type AccountSettingValue = string;
   export type Arch = string;
   export type Arn = string;
   export interface Attribute {
@@ -685,7 +703,7 @@ declare namespace ECR {
      */
     appliedFor: RCTAppliedForList;
     /**
-     * The ARN of the role to be assumed by Amazon ECR. This role must be in the same account as the registry that you are configuring.
+     * The ARN of the role to be assumed by Amazon ECR. This role must be in the same account as the registry that you are configuring. Amazon ECR will assume your supplied role when the customRoleArn is specified. When this field isn't specified, Amazon ECR will use the service-linked role for the repository creation template.
      */
     customRoleArn?: CustomRoleArn;
   }
@@ -1215,6 +1233,22 @@ declare namespace ECR {
   export type FindingSeverity = "INFORMATIONAL"|"LOW"|"MEDIUM"|"HIGH"|"CRITICAL"|"UNDEFINED"|string;
   export type FindingSeverityCounts = {[key: string]: SeverityCount};
   export type ForceFlag = boolean;
+  export interface GetAccountSettingRequest {
+    /**
+     * Basic scan type version name. 
+     */
+    name: AccountSettingName;
+  }
+  export interface GetAccountSettingResponse {
+    /**
+     * Retrieves the basic scan type version name.
+     */
+    name?: AccountSettingName;
+    /**
+     * Retrieves the value that specifies what basic scan type is being used: AWS_NATIVE or CLAIR.
+     */
+    value?: AccountSettingName;
+  }
   export type GetAuthorizationTokenRegistryIdList = RegistryId[];
   export interface GetAuthorizationTokenRequest {
     /**
@@ -1833,6 +1867,26 @@ declare namespace ECR {
   export type PullThroughCacheRuleRepositoryPrefix = string;
   export type PullThroughCacheRuleRepositoryPrefixList = PullThroughCacheRuleRepositoryPrefix[];
   export type PushTimestamp = Date;
+  export interface PutAccountSettingRequest {
+    /**
+     * Basic scan type version name. 
+     */
+    name: AccountSettingName;
+    /**
+     * Setting value that determines what basic scan type is being used: AWS_NATIVE or CLAIR.
+     */
+    value: AccountSettingValue;
+  }
+  export interface PutAccountSettingResponse {
+    /**
+     * Retrieves the the basic scan type version name.
+     */
+    name?: AccountSettingName;
+    /**
+     * Retrieves the basic scan type value, either AWS_NATIVE or -.
+     */
+    value?: AccountSettingValue;
+  }
   export interface PutImageRequest {
     /**
      * The Amazon Web Services account ID associated with the registry that contains the repository in which to put the image. If you do not specify a registry, the default registry is assumed.
@@ -2137,7 +2191,7 @@ declare namespace ECR {
      */
     appliedFor?: RCTAppliedForList;
     /**
-     * The ARN of the role to be assumed by Amazon ECR.
+     * The ARN of the role to be assumed by Amazon ECR. Amazon ECR will assume your supplied role when the customRoleArn is specified. When this field isn't specified, Amazon ECR will use the service-linked role for the repository creation template.
      */
     customRoleArn?: CustomRoleArn;
     /**
@@ -2462,7 +2516,7 @@ declare namespace ECR {
      */
     appliedFor?: RCTAppliedForList;
     /**
-     * The ARN of the role to be assumed by Amazon ECR. This role must be in the same account as the registry that you are configuring.
+     * The ARN of the role to be assumed by Amazon ECR. This role must be in the same account as the registry that you are configuring. Amazon ECR will assume your supplied role when the customRoleArn is specified. When this field isn't specified, Amazon ECR will use the service-linked role for the repository creation template.
      */
     customRoleArn?: CustomRoleArn;
   }

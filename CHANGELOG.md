@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1667.0-->
+<!--LATEST=2.1668.0-->
 <!--ENTRYINSERT-->
+
+## 2.1668.0
+* feature: DataZone: This releases Data Product feature. Data Products allow grouping data assets into cohesive, self-contained units for ease of publishing for data producers, and ease of finding and accessing for data consumers.
+* feature: ECR: Released two new APIs along with documentation updates. The GetAccountSetting API is used to view the current basic scan type version setting for your registry, while the PutAccountSetting API is used to update the basic scan type version for your registry.
+* feature: KinesisVideoWebRTCStorage: Add JoinStorageSessionAsViewer API
 
 ## 2.1667.0
 * feature: CloudWatch: Add v2 smoke tests and smithy smokeTests trait for SDK testing.

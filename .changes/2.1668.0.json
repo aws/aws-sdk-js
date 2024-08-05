@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "DataZone",
+        "description": "This releases Data Product feature. Data Products allow grouping data assets into cohesive, self-contained units for ease of publishing for data producers, and ease of finding and accessing for data consumers."
+    },
+    {
+        "type": "feature",
+        "category": "ECR",
+        "description": "Released two new APIs along with documentation updates. The GetAccountSetting API is used to view the current basic scan type version setting for your registry, while the PutAccountSetting API is used to update the basic scan type version for your registry."
+    },
+    {
+        "type": "feature",
+        "category": "KinesisVideoWebRTCStorage",
+        "description": "Add JoinStorageSessionAsViewer API"
+    }
+]

@@ -84,6 +84,22 @@ declare class DataZone extends Service {
    */
   createAssetType(callback?: (err: AWSError, data: DataZone.Types.CreateAssetTypeOutput) => void): Request<DataZone.Types.CreateAssetTypeOutput, AWSError>;
   /**
+   * Creates a data product.
+   */
+  createDataProduct(params: DataZone.Types.CreateDataProductInput, callback?: (err: AWSError, data: DataZone.Types.CreateDataProductOutput) => void): Request<DataZone.Types.CreateDataProductOutput, AWSError>;
+  /**
+   * Creates a data product.
+   */
+  createDataProduct(callback?: (err: AWSError, data: DataZone.Types.CreateDataProductOutput) => void): Request<DataZone.Types.CreateDataProductOutput, AWSError>;
+  /**
+   * Creates a data product revision.
+   */
+  createDataProductRevision(params: DataZone.Types.CreateDataProductRevisionInput, callback?: (err: AWSError, data: DataZone.Types.CreateDataProductRevisionOutput) => void): Request<DataZone.Types.CreateDataProductRevisionOutput, AWSError>;
+  /**
+   * Creates a data product revision.
+   */
+  createDataProductRevision(callback?: (err: AWSError, data: DataZone.Types.CreateDataProductRevisionOutput) => void): Request<DataZone.Types.CreateDataProductRevisionOutput, AWSError>;
+  /**
    * Creates an Amazon DataZone data source.
    */
   createDataSource(params: DataZone.Types.CreateDataSourceInput, callback?: (err: AWSError, data: DataZone.Types.CreateDataSourceOutput) => void): Request<DataZone.Types.CreateDataSourceOutput, AWSError>;
@@ -212,11 +228,11 @@ declare class DataZone extends Service {
    */
   createUserProfile(callback?: (err: AWSError, data: DataZone.Types.CreateUserProfileOutput) => void): Request<DataZone.Types.CreateUserProfileOutput, AWSError>;
   /**
-   * Delets an asset in Amazon DataZone.
+   * Deletes an asset in Amazon DataZone.
    */
   deleteAsset(params: DataZone.Types.DeleteAssetInput, callback?: (err: AWSError, data: DataZone.Types.DeleteAssetOutput) => void): Request<DataZone.Types.DeleteAssetOutput, AWSError>;
   /**
-   * Delets an asset in Amazon DataZone.
+   * Deletes an asset in Amazon DataZone.
    */
   deleteAsset(callback?: (err: AWSError, data: DataZone.Types.DeleteAssetOutput) => void): Request<DataZone.Types.DeleteAssetOutput, AWSError>;
   /**
@@ -235,6 +251,14 @@ declare class DataZone extends Service {
    * Deletes an asset type in Amazon DataZone.
    */
   deleteAssetType(callback?: (err: AWSError, data: DataZone.Types.DeleteAssetTypeOutput) => void): Request<DataZone.Types.DeleteAssetTypeOutput, AWSError>;
+  /**
+   * Deletes an data product in Amazon DataZone.
+   */
+  deleteDataProduct(params: DataZone.Types.DeleteDataProductInput, callback?: (err: AWSError, data: DataZone.Types.DeleteDataProductOutput) => void): Request<DataZone.Types.DeleteDataProductOutput, AWSError>;
+  /**
+   * Deletes an data product in Amazon DataZone.
+   */
+  deleteDataProduct(callback?: (err: AWSError, data: DataZone.Types.DeleteDataProductOutput) => void): Request<DataZone.Types.DeleteDataProductOutput, AWSError>;
   /**
    * Deletes a data source in Amazon DataZone.
    */
@@ -396,6 +420,14 @@ declare class DataZone extends Service {
    */
   getAssetType(callback?: (err: AWSError, data: DataZone.Types.GetAssetTypeOutput) => void): Request<DataZone.Types.GetAssetTypeOutput, AWSError>;
   /**
+   * Gets the data product.
+   */
+  getDataProduct(params: DataZone.Types.GetDataProductInput, callback?: (err: AWSError, data: DataZone.Types.GetDataProductOutput) => void): Request<DataZone.Types.GetDataProductOutput, AWSError>;
+  /**
+   * Gets the data product.
+   */
+  getDataProduct(callback?: (err: AWSError, data: DataZone.Types.GetDataProductOutput) => void): Request<DataZone.Types.GetDataProductOutput, AWSError>;
+  /**
    * Gets an Amazon DataZone data source.
    */
   getDataSource(params: DataZone.Types.GetDataSourceInput, callback?: (err: AWSError, data: DataZone.Types.GetDataSourceOutput) => void): Request<DataZone.Types.GetDataSourceOutput, AWSError>;
@@ -516,11 +548,11 @@ declare class DataZone extends Service {
    */
   getLineageNode(callback?: (err: AWSError, data: DataZone.Types.GetLineageNodeOutput) => void): Request<DataZone.Types.GetLineageNodeOutput, AWSError>;
   /**
-   * Gets a listing (a record of an asset at a given time).
+   * Gets a listing (a record of an asset at a given time). If you specify a listing version, only details that are specific to that version are returned.
    */
   getListing(params: DataZone.Types.GetListingInput, callback?: (err: AWSError, data: DataZone.Types.GetListingOutput) => void): Request<DataZone.Types.GetListingOutput, AWSError>;
   /**
-   * Gets a listing (a record of an asset at a given time).
+   * Gets a listing (a record of an asset at a given time). If you specify a listing version, only details that are specific to that version are returned.
    */
   getListing(callback?: (err: AWSError, data: DataZone.Types.GetListingOutput) => void): Request<DataZone.Types.GetListingOutput, AWSError>;
   /**
@@ -603,6 +635,14 @@ declare class DataZone extends Service {
    * Lists the revisions for the asset.
    */
   listAssetRevisions(callback?: (err: AWSError, data: DataZone.Types.ListAssetRevisionsOutput) => void): Request<DataZone.Types.ListAssetRevisionsOutput, AWSError>;
+  /**
+   * Lists data product revisions.
+   */
+  listDataProductRevisions(params: DataZone.Types.ListDataProductRevisionsInput, callback?: (err: AWSError, data: DataZone.Types.ListDataProductRevisionsOutput) => void): Request<DataZone.Types.ListDataProductRevisionsOutput, AWSError>;
+  /**
+   * Lists data product revisions.
+   */
+  listDataProductRevisions(callback?: (err: AWSError, data: DataZone.Types.ListDataProductRevisionsOutput) => void): Request<DataZone.Types.ListDataProductRevisionsOutput, AWSError>;
   /**
    * Lists data source run activities.
    */
@@ -1192,6 +1232,21 @@ declare namespace DataZone {
   export type AssetFilters = AssetFilterSummary[];
   export type AssetId = string;
   export type AssetIdentifier = string;
+  export interface AssetInDataProductListingItem {
+    /**
+     * The entity ID of the listing of the asset in a data product.
+     */
+    entityId?: String;
+    /**
+     * The entity revision of the listing of the asset in a data product.
+     */
+    entityRevision?: String;
+    /**
+     * The entity type of the listing of the asset in a data product.
+     */
+    entityType?: String;
+  }
+  export type AssetInDataProductListingItems = AssetInDataProductListingItem[];
   export interface AssetItem {
     /**
      * The additional attributes of a Amazon DataZone inventory asset. 
@@ -1985,6 +2040,190 @@ declare namespace DataZone {
      * The Amazon DataZone user that created the custom asset type.
      */
     updatedBy?: UpdatedBy;
+  }
+  export interface CreateDataProductInput {
+    /**
+     * A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The description of the data product.
+     */
+    description?: DataProductDescription;
+    /**
+     * The ID of the domain where the data product is created.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The metadata forms of the data product.
+     */
+    formsInput?: FormInputList;
+    /**
+     * The glossary terms of the data product.
+     */
+    glossaryTerms?: GlossaryTerms;
+    /**
+     * The data assets of the data product.
+     */
+    items?: DataProductItems;
+    /**
+     * The name of the data product.
+     */
+    name: DataProductName;
+    /**
+     * The ID of the owning project of the data product.
+     */
+    owningProjectIdentifier: ProjectId;
+  }
+  export interface CreateDataProductOutput {
+    /**
+     * The timestamp at which the data product was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The user who created the data product.
+     */
+    createdBy?: CreatedBy;
+    /**
+     * The description of the data product.
+     */
+    description?: DataProductDescription;
+    /**
+     * The ID of the domain where the data product lives.
+     */
+    domainId: DomainId;
+    /**
+     * The timestamp at which the first revision of the data product was created.
+     */
+    firstRevisionCreatedAt?: CreatedAt;
+    /**
+     * The user who created the first revision of the data product.
+     */
+    firstRevisionCreatedBy?: CreatedBy;
+    /**
+     * The metadata forms of the data product.
+     */
+    formsOutput?: FormOutputList;
+    /**
+     * The glossary terms of the data product.
+     */
+    glossaryTerms?: GlossaryTerms;
+    /**
+     * The ID of the data product.
+     */
+    id: DataProductId;
+    /**
+     * The data assets of the data product.
+     */
+    items?: DataProductItems;
+    /**
+     * The name of the data product.
+     */
+    name: DataProductName;
+    /**
+     * The ID of the owning project of the data product.
+     */
+    owningProjectId: ProjectId;
+    /**
+     * The revision of the data product.
+     */
+    revision: Revision;
+    /**
+     * The status of the data product.
+     */
+    status: DataProductStatus;
+  }
+  export interface CreateDataProductRevisionInput {
+    /**
+     * A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The description of the data product revision.
+     */
+    description?: DataProductDescription;
+    /**
+     * The ID of the domain where the data product revision is created.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The metadata forms of the data product revision.
+     */
+    formsInput?: FormInputList;
+    /**
+     * The glossary terms of the data product revision.
+     */
+    glossaryTerms?: GlossaryTerms;
+    /**
+     * The ID of the data product revision.
+     */
+    identifier: DataProductId;
+    /**
+     * The data assets of the data product revision.
+     */
+    items?: DataProductItems;
+    /**
+     * The name of the data product revision.
+     */
+    name: DataProductName;
+  }
+  export interface CreateDataProductRevisionOutput {
+    /**
+     * The timestamp at which the data product revision is created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The user who created the data product revision.
+     */
+    createdBy?: CreatedBy;
+    /**
+     * The description of the data product revision.
+     */
+    description?: DataProductDescription;
+    /**
+     * The ID of the domain where data product revision is created.
+     */
+    domainId: DomainId;
+    /**
+     * The timestamp at which the first revision of the data product is created.
+     */
+    firstRevisionCreatedAt?: CreatedAt;
+    /**
+     * The user who created the first revision of the data product.
+     */
+    firstRevisionCreatedBy?: CreatedBy;
+    /**
+     * The metadata forms of the data product revision.
+     */
+    formsOutput?: FormOutputList;
+    /**
+     * The glossary terms of the data product revision.
+     */
+    glossaryTerms?: GlossaryTerms;
+    /**
+     * The ID of the data product revision.
+     */
+    id: DataProductId;
+    /**
+     * The data assets of the data product revision.
+     */
+    items?: DataProductItems;
+    /**
+     * The name of the data product revision.
+     */
+    name: DataProductName;
+    /**
+     * The ID of the owning project of the data product revision.
+     */
+    owningProjectId: ProjectId;
+    /**
+     * The revision of the data product revision.
+     */
+    revision: Revision;
+    /**
+     * The status of the data product revision.
+     */
+    status: DataProductStatus;
   }
   export interface CreateDataSourceInput {
     /**
@@ -3102,6 +3341,185 @@ declare namespace DataZone {
   export type CustomParameterList = CustomParameter[];
   export type DataAssetActivityStatus = "FAILED"|"PUBLISHING_FAILED"|"SUCCEEDED_CREATED"|"SUCCEEDED_UPDATED"|"SKIPPED_ALREADY_IMPORTED"|"SKIPPED_ARCHIVED"|"SKIPPED_NO_ACCESS"|"UNCHANGED"|string;
   export type DataPointIdentifier = string;
+  export type DataProductDescription = string;
+  export type DataProductId = string;
+  export interface DataProductItem {
+    /**
+     * The glossary terms of the data product.
+     */
+    glossaryTerms?: ItemGlossaryTerms;
+    /**
+     * The ID of the data product.
+     */
+    identifier: EntityIdentifier;
+    /**
+     * The type of the data product.
+     */
+    itemType: DataProductItemType;
+    /**
+     * The revision of the data product.
+     */
+    revision?: Revision;
+  }
+  export type DataProductItemType = "ASSET"|string;
+  export type DataProductItems = DataProductItem[];
+  export interface DataProductListing {
+    /**
+     * The timestamp at which the data product listing was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The ID of the data product listing.
+     */
+    dataProductId?: DataProductId;
+    /**
+     * The revision of the data product listing.
+     */
+    dataProductRevision?: Revision;
+    /**
+     * The metadata forms of the data product listing.
+     */
+    forms?: Forms;
+    /**
+     * The glossary terms of the data product listing.
+     */
+    glossaryTerms?: DetailedGlossaryTerms;
+    /**
+     * The data assets of the data product listing.
+     */
+    items?: ListingSummaries;
+    /**
+     * The ID of the owning project of the data product listing.
+     */
+    owningProjectId?: ProjectId;
+  }
+  export interface DataProductListingItem {
+    /**
+     * The additional attributes of the asset of the data product.
+     */
+    additionalAttributes?: DataProductListingItemAdditionalAttributes;
+    /**
+     * The timestamp at which the asset of the data product listing was created. 
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The description of the asset of the asset of the data product. 
+     */
+    description?: Description;
+    /**
+     * The entity ID of the asset of the asset of the data product. 
+     */
+    entityId?: DataProductId;
+    /**
+     * The revision of the asset of the asset of the data product. 
+     */
+    entityRevision?: Revision;
+    /**
+     * The glossary terms of the asset of the asset of the data product. 
+     */
+    glossaryTerms?: DetailedGlossaryTerms;
+    /**
+     * The data of the asset of the data product. 
+     */
+    items?: ListingSummaryItems;
+    /**
+     * The timestamp at which the listing was created.
+     */
+    listingCreatedBy?: CreatedBy;
+    /**
+     * The ID of the listing.
+     */
+    listingId?: ListingId;
+    /**
+     * The revision of the listing.
+     */
+    listingRevision?: Revision;
+    /**
+     * The user who updated the listing.
+     */
+    listingUpdatedBy?: UpdatedBy;
+    /**
+     * The name of the asset of the data product. 
+     */
+    name?: DataProductName;
+    /**
+     * The ID of the owning project of the asset of the data product. 
+     */
+    owningProjectId?: ProjectId;
+  }
+  export interface DataProductListingItemAdditionalAttributes {
+    /**
+     * The metadata forms of the asset of the data product. 
+     */
+    forms?: Forms;
+  }
+  export type DataProductName = string;
+  export interface DataProductResultItem {
+    /**
+     * The timestamp at which the data product was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The user who created the data product.
+     */
+    createdBy?: CreatedBy;
+    /**
+     * The description of the data product.
+     */
+    description?: DataProductDescription;
+    /**
+     * The ID of the domain where the data product lives.
+     */
+    domainId: DomainId;
+    /**
+     * The timestamp at which first revision of the data product was created.
+     */
+    firstRevisionCreatedAt?: CreatedAt;
+    /**
+     * The user who created the first revision of the data product.
+     */
+    firstRevisionCreatedBy?: CreatedBy;
+    /**
+     * The glossary terms of the data product.
+     */
+    glossaryTerms?: GlossaryTerms;
+    /**
+     * The ID of the data product.
+     */
+    id: DataProductId;
+    /**
+     * The name of the data product.
+     */
+    name: DataProductName;
+    /**
+     * The ID of the owning project of the data product.
+     */
+    owningProjectId: ProjectId;
+  }
+  export interface DataProductRevision {
+    /**
+     * The timestamp at which the data product revision was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The user who created the data product revision.
+     */
+    createdBy?: CreatedBy;
+    /**
+     * The ID of the domain where the data product revision lives.
+     */
+    domainId?: DomainId;
+    /**
+     * The ID of the data product revision.
+     */
+    id?: DataProductId;
+    /**
+     * The data product revision.
+     */
+    revision?: Revision;
+  }
+  export type DataProductRevisions = DataProductRevision[];
+  export type DataProductStatus = "CREATED"|"CREATING"|"CREATE_FAILED"|string;
   export interface DataSourceConfigurationInput {
     /**
      * The configuration of the Amazon Web Services Glue data source.
@@ -3312,6 +3730,18 @@ declare namespace DataZone {
     identifier: AssetTypeIdentifier;
   }
   export interface DeleteAssetTypeOutput {
+  }
+  export interface DeleteDataProductInput {
+    /**
+     * The ID of the Amazon DataZone domain in which the data product is deleted.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The identifier of the data product that is deleted.
+     */
+    identifier: DataProductId;
+  }
+  export interface DeleteDataProductOutput {
   }
   export interface DeleteDataSourceInput {
     /**
@@ -3786,7 +4216,7 @@ declare namespace DataZone {
   export type EnabledRegionList = RegionName[];
   export type EntityId = string;
   export type EntityIdentifier = string;
-  export type EntityType = "ASSET"|string;
+  export type EntityType = "ASSET"|"DATA_PRODUCT"|string;
   export type EnvironmentActionId = string;
   export type EnvironmentActionList = ConfigurableEnvironmentAction[];
   export interface EnvironmentActionSummary {
@@ -4412,6 +4842,78 @@ declare namespace DataZone {
      * The Amazon DataZone user that updated the asset type.
      */
     updatedBy?: UpdatedBy;
+  }
+  export interface GetDataProductInput {
+    /**
+     * The ID of the domain where the data product lives.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The ID of the data product.
+     */
+    identifier: DataProductId;
+    /**
+     * The revision of the data product.
+     */
+    revision?: Revision;
+  }
+  export interface GetDataProductOutput {
+    /**
+     * The timestamp at which the data product is created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The user who created the data product.
+     */
+    createdBy?: CreatedBy;
+    /**
+     * The description of the data product.
+     */
+    description?: DataProductDescription;
+    /**
+     * The ID of the domain where the data product lives.
+     */
+    domainId: DomainId;
+    /**
+     * The timestamp at which the first revision of the data product is created.
+     */
+    firstRevisionCreatedAt?: CreatedAt;
+    /**
+     * The user who created the first revision of the data product.
+     */
+    firstRevisionCreatedBy?: CreatedBy;
+    /**
+     * The metadata forms of the data product.
+     */
+    formsOutput?: FormOutputList;
+    /**
+     * The glossary terms of the data product.
+     */
+    glossaryTerms?: GlossaryTerms;
+    /**
+     * The ID of the data product.
+     */
+    id: DataProductId;
+    /**
+     * The data assets of the data product.
+     */
+    items?: DataProductItems;
+    /**
+     * The name of the data product.
+     */
+    name: DataProductName;
+    /**
+     * The ID of the owning project of the data product.
+     */
+    owningProjectId: ProjectId;
+    /**
+     * The revision of the data product.
+     */
+    revision: Revision;
+    /**
+     * The status of the data product.
+     */
+    status: DataProductStatus;
   }
   export interface GetDataSourceInput {
     /**
@@ -5973,7 +6475,7 @@ declare namespace DataZone {
     values: StringList;
   }
   export type Integer = number;
-  export type InventorySearchScope = "ASSET"|"GLOSSARY"|"GLOSSARY_TERM"|string;
+  export type InventorySearchScope = "ASSET"|"GLOSSARY"|"GLOSSARY_TERM"|"DATA_PRODUCT"|string;
   export interface IsNotNullExpression {
     /**
      * The name of the column.
@@ -5986,6 +6488,7 @@ declare namespace DataZone {
      */
     columnName: String;
   }
+  export type ItemGlossaryTerms = GlossaryTermId[];
   export type KmsKeyArn = string;
   export interface LakeFormationConfiguration {
     /**
@@ -6188,6 +6691,34 @@ declare namespace DataZone {
     items?: AssetRevisions;
     /**
      * When the number of revisions is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of revisions, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListAssetRevisions to list the next set of revisions.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListDataProductRevisionsInput {
+    /**
+     * The ID of the domain of the data product revisions that you want to list.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The ID of the data product revision.
+     */
+    identifier: DataProductId;
+    /**
+     * The maximum number of asset filters to return in a single call to ListDataProductRevisions. When the number of data product revisions to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListDataProductRevisions to list the next set of data product revisions.
+     */
+    maxResults?: MaxResults;
+    /**
+     * When the number of data product revisions is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of data product revisions, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListDataProductRevisions to list the next set of data product revisions.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListDataProductRevisionsOutput {
+    /**
+     * The results of the ListDataProductRevisions action.
+     */
+    items: DataProductRevisions;
+    /**
+     * When the number of data product revisions is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of data product revisions, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListDataProductRevisions to list the next set of data product revisions.
      */
     nextToken?: PaginationToken;
   }
@@ -6718,6 +7249,10 @@ declare namespace DataZone {
      */
     nextToken?: PaginationToken;
     /**
+     * The ID of the owning project of the subscription grants.
+     */
+    owningProjectId?: ProjectId;
+    /**
      * Specifies the way of sorting the results of this action.
      */
     sortBy?: SortKey;
@@ -6778,7 +7313,7 @@ declare namespace DataZone {
      */
     sortOrder?: SortOrder;
     /**
-     * Specifies the status of the subscription requests.
+     * Specifies the status of the subscription requests.  This is not a required parameter, but if not specified, by default, Amazon DataZone returns only PENDING subscription requests.  
      */
     status?: SubscriptionRequestStatus;
     /**
@@ -6862,7 +7397,7 @@ declare namespace DataZone {
      */
     sortOrder?: SortOrder;
     /**
-     * The status of the subscriptions that you want to list.
+     * The status of the subscriptions that you want to list.  This is not a required parameter, but if not provided, by default, Amazon DataZone returns only APPROVED subscriptions.  
      */
     status?: SubscriptionStatus;
     /**
@@ -6946,6 +7481,10 @@ declare namespace DataZone {
      * An asset published in an Amazon DataZone catalog.
      */
     assetListing?: AssetListing;
+    /**
+     * The data product listing.
+     */
+    dataProductListing?: DataProductListing;
   }
   export type ListingName = string;
   export interface ListingRevision {
@@ -6969,6 +7508,36 @@ declare namespace DataZone {
     revision: Revision;
   }
   export type ListingStatus = "CREATING"|"ACTIVE"|"INACTIVE"|string;
+  export type ListingSummaries = ListingSummary[];
+  export interface ListingSummary {
+    /**
+     * The glossary terms of the data product.
+     */
+    glossaryTerms?: DetailedGlossaryTerms;
+    /**
+     * The ID of the data product listing.
+     */
+    listingId?: ListingId;
+    /**
+     * The revision of the data product listing.
+     */
+    listingRevision?: Revision;
+  }
+  export interface ListingSummaryItem {
+    /**
+     * The glossary terms of the data product listing.
+     */
+    glossaryTerms?: DetailedGlossaryTerms;
+    /**
+     * The ID of the data product listing.
+     */
+    listingId?: ListingId;
+    /**
+     * The revision of the data product listing.
+     */
+    listingRevision?: Revision;
+  }
+  export type ListingSummaryItems = ListingSummaryItem[];
   export type LongDescription = string;
   export type MaxResults = number;
   export type MaxResultsForListDomains = number;
@@ -7862,6 +8431,10 @@ declare namespace DataZone {
      */
     assetItem?: AssetItem;
     /**
+     * The data product.
+     */
+    dataProductItem?: DataProductResultItem;
+    /**
      * The glossary item included in the search results.
      */
     glossaryItem?: GlossaryItem;
@@ -7940,6 +8513,10 @@ declare namespace DataZone {
      * The asset listing included in the results of the SearchListings action.
      */
     assetListing?: AssetListingItem;
+    /**
+     * The data product listing.
+     */
+    dataProductListing?: DataProductListingItem;
   }
   export type SearchResultItems = SearchResultItem[];
   export interface SearchSort {
@@ -8330,6 +8907,10 @@ declare namespace DataZone {
      * The asset for which the subscription grant is created.
      */
     assetListing?: SubscribedAssetListing;
+    /**
+     * The data product listing.
+     */
+    productListing?: SubscribedProductListing;
   }
   export interface SubscribedPrincipal {
     /**
@@ -8344,6 +8925,32 @@ declare namespace DataZone {
     project?: SubscribedProjectInput;
   }
   export type SubscribedPrincipalInputs = SubscribedPrincipalInput[];
+  export interface SubscribedProductListing {
+    /**
+     * The data assets of the data product listing.
+     */
+    assetListings?: AssetInDataProductListingItems;
+    /**
+     * The description of the data product listing.
+     */
+    description?: String;
+    /**
+     * The ID of the data product listing.
+     */
+    entityId?: AssetId;
+    /**
+     * The revision of the data product listing.
+     */
+    entityRevision?: Revision;
+    /**
+     * The glossary terms of the data product listing.
+     */
+    glossaryTerms?: DetailedGlossaryTerms;
+    /**
+     * The name of the data product listing.
+     */
+    name?: String;
+  }
   export interface SubscribedProject {
     /**
      * The identifier of the project that has the subscription grant.
@@ -8393,7 +9000,7 @@ declare namespace DataZone {
      */
     status: SubscriptionGrantOverallStatus;
     /**
-     * The ID of the subscription grant.
+     * The ID of the subscription.
      */
     subscriptionId?: SubscriptionId;
     /**
