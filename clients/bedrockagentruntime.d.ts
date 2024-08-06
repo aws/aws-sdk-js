@@ -37,11 +37,11 @@ declare class BedrockAgentRuntime extends Service {
    */
   invokeAgent(callback?: (err: AWSError, data: BedrockAgentRuntime.Types.InvokeAgentResponse) => void): Request<BedrockAgentRuntime.Types.InvokeAgentResponse, AWSError>;
   /**
-   * Invokes an alias of a flow to run the inputs that you specify and return the output of each node as a stream. If there's an error, the error is returned. For more information, see Test a flow in Amazon Bedrock in the Amazon Bedrock User Guide.
+   * Invokes an alias of a flow to run the inputs that you specify and return the output of each node as a stream. If there's an error, the error is returned. For more information, see Test a flow in Amazon Bedrock in the Amazon Bedrock User Guide.  The CLI doesn't support streaming operations in Amazon Bedrock, including InvokeFlow. 
    */
   invokeFlow(params: BedrockAgentRuntime.Types.InvokeFlowRequest, callback?: (err: AWSError, data: BedrockAgentRuntime.Types.InvokeFlowResponse) => void): Request<BedrockAgentRuntime.Types.InvokeFlowResponse, AWSError>;
   /**
-   * Invokes an alias of a flow to run the inputs that you specify and return the output of each node as a stream. If there's an error, the error is returned. For more information, see Test a flow in Amazon Bedrock in the Amazon Bedrock User Guide.
+   * Invokes an alias of a flow to run the inputs that you specify and return the output of each node as a stream. If there's an error, the error is returned. For more information, see Test a flow in Amazon Bedrock in the Amazon Bedrock User Guide.  The CLI doesn't support streaming operations in Amazon Bedrock, including InvokeFlow. 
    */
   invokeFlow(callback?: (err: AWSError, data: BedrockAgentRuntime.Types.InvokeFlowResponse) => void): Request<BedrockAgentRuntime.Types.InvokeFlowResponse, AWSError>;
   /**
@@ -418,42 +418,42 @@ declare namespace BedrockAgentRuntime {
   export type FlowIdentifier = string;
   export interface FlowInput {
     /**
-     * Contains information about an input into the flow.
+     * Contains information about an input into the prompt flow.
      */
     content: FlowInputContent;
     /**
-     * A name for the input of the flow input node.
+     * The name of the flow input node that begins the prompt flow.
      */
     nodeName: NodeName;
     /**
-     * A name for the output of the flow input node.
+     * The name of the output from the flow input node that begins the prompt flow.
      */
     nodeOutputName: NodeOutputName;
   }
   export interface FlowInputContent {
     /**
-     * The input for the flow input node.
+     * The input to send to the prompt flow input node.
      */
     document?: Document;
   }
   export type FlowInputs = FlowInput[];
   export interface FlowOutputContent {
     /**
-     * A name for the output of the flow.
+     * The content in the output.
      */
     document?: Document;
   }
   export interface FlowOutputEvent {
     /**
-     * The output of the node.
+     * The content in the output.
      */
     content: FlowOutputContent;
     /**
-     * The name of the node to which input was provided.
+     * The name of the flow output node that the output is from.
      */
     nodeName: NodeName;
     /**
-     * The type of node to which input was provided.
+     * The type of the node that the output is from.
      */
     nodeType: NodeType;
   }
@@ -773,7 +773,7 @@ declare namespace BedrockAgentRuntime {
      */
     topK?: TopK;
     /**
-     * While generating a response, the model determines the probability of the following token at each point of generation. The value that you set for Top P determines the number of most-likely candidates from which the model chooses the next token in the sequence. For example, if you set topP to 80, the model only selects the next token from the top 80% of the probability distribution of next tokens.
+     * While generating a response, the model determines the probability of the following token at each point of generation. The value that you set for Top P determines the number of most-likely candidates from which the model chooses the next token in the sequence. For example, if you set topP to 0.8, the model only selects the next token from the top 80% of the probability distribution of next tokens.
      */
     topP?: TopP;
   }
@@ -1047,6 +1047,12 @@ declare namespace BedrockAgentRuntime {
     summaryText?: SummaryText;
   }
   export type MemoryType = "SESSION_SUMMARY"|string;
+  export interface Metadata {
+    /**
+     * Contains details of the foundation model usage.
+     */
+    usage?: Usage;
+  }
   export type MimeType = string;
   export interface ModelInvocationInput {
     /**
@@ -1119,6 +1125,20 @@ declare namespace BedrockAgentRuntime {
      */
     queryTransformationConfiguration: QueryTransformationConfiguration;
   }
+  export interface OrchestrationModelInvocationOutput {
+    /**
+     * Contains information about the foundation model output.
+     */
+    metadata?: Metadata;
+    /**
+     * Contains details of the raw response from the foundation model output.
+     */
+    rawResponse?: RawResponse;
+    /**
+     * The unique identifier of the trace.
+     */
+    traceId?: TraceId;
+  }
   export interface OrchestrationTrace {
     /**
      * Contains information pertaining to the action group or knowledge base that is being invoked.
@@ -1128,6 +1148,10 @@ declare namespace BedrockAgentRuntime {
      * The input for the orchestration step.   The type is ORCHESTRATION.   The text contains the prompt.   The inferenceConfiguration, parserMode, and overrideLambda values are set in the PromptOverrideConfiguration object that was set when the agent was created or updated.  
      */
     modelInvocationInput?: ModelInvocationInput;
+    /**
+     * Contains information pertaining to the output from the foundation model that is being invoked.
+     */
+    modelInvocationOutput?: OrchestrationModelInvocationOutput;
     /**
      * Details about the observation (the output of the action group Lambda or knowledge base) made by the agent.
      */
@@ -1271,6 +1295,12 @@ declare namespace BedrockAgentRuntime {
     traceId?: TraceId;
   }
   export type RationaleString = string;
+  export interface RawResponse {
+    /**
+     * The foundation model's raw output content.
+     */
+    content?: String;
+  }
   export interface RepromptResponse {
     /**
      * Specifies what output is prompting the agent to reprompt the input.
@@ -1682,6 +1712,16 @@ declare namespace BedrockAgentRuntime {
     trace?: Trace;
   }
   export type Type = "ACTION_GROUP"|"KNOWLEDGE_BASE"|"FINISH"|"ASK_USER"|"REPROMPT"|string;
+  export interface Usage {
+    /**
+     * Contains information about the input tokens from the foundation model usage.
+     */
+    inputTokens?: Integer;
+    /**
+     * Contains information about the output tokens from the foundation model usage.
+     */
+    outputTokens?: Integer;
+  }
   export interface ValidationException {
     message?: NonBlankString;
   }

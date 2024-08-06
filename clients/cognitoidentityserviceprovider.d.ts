@@ -28,11 +28,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   adminAddUserToGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This IAM-authenticated API operation provides a code that Amazon Cognito sent to your user when they signed up in your user pool. After your user enters their code, they confirm ownership of the email address or phone number that they provided, and their user account becomes active. Depending on your user pool configuration, your users will receive their confirmation code in an email or SMS message. Local users who signed up in your user pool are the only type of user who can confirm sign-up with a code. Users who federate through an external identity provider (IdP) have already been confirmed by their IdP. Administrator-created users confirm their accounts when they respond to their invitation email message and choose a password.  Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you must use IAM credentials to authorize requests, and you must grant yourself the corresponding IAM permission in a policy.  Learn more     Signing Amazon Web Services API Requests     Using the Amazon Cognito user pools API and user pool endpoints    
+   * This IAM-authenticated API operation confirms user sign-up as an administrator. Unlike ConfirmSignUp, your IAM credentials authorize user account confirmation. No confirmation code is required. This request sets a user account active in a user pool that requires confirmation of new user accounts before they can sign in. You can configure your user pool to not send confirmation codes to new users and instead confirm them with this API operation on the back end.  Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you must use IAM credentials to authorize requests, and you must grant yourself the corresponding IAM permission in a policy.  Learn more     Signing Amazon Web Services API Requests     Using the Amazon Cognito user pools API and user pool endpoints    
    */
   adminConfirmSignUp(params: CognitoIdentityServiceProvider.Types.AdminConfirmSignUpRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminConfirmSignUpResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminConfirmSignUpResponse, AWSError>;
   /**
-   * This IAM-authenticated API operation provides a code that Amazon Cognito sent to your user when they signed up in your user pool. After your user enters their code, they confirm ownership of the email address or phone number that they provided, and their user account becomes active. Depending on your user pool configuration, your users will receive their confirmation code in an email or SMS message. Local users who signed up in your user pool are the only type of user who can confirm sign-up with a code. Users who federate through an external identity provider (IdP) have already been confirmed by their IdP. Administrator-created users confirm their accounts when they respond to their invitation email message and choose a password.  Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you must use IAM credentials to authorize requests, and you must grant yourself the corresponding IAM permission in a policy.  Learn more     Signing Amazon Web Services API Requests     Using the Amazon Cognito user pools API and user pool endpoints    
+   * This IAM-authenticated API operation confirms user sign-up as an administrator. Unlike ConfirmSignUp, your IAM credentials authorize user account confirmation. No confirmation code is required. This request sets a user account active in a user pool that requires confirmation of new user accounts before they can sign in. You can configure your user pool to not send confirmation codes to new users and instead confirm them with this API operation on the back end.  Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you must use IAM credentials to authorize requests, and you must grant yourself the corresponding IAM permission in a policy.  Learn more     Signing Amazon Web Services API Requests     Using the Amazon Cognito user pools API and user pool endpoints    
    */
   adminConfirmSignUp(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminConfirmSignUpResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminConfirmSignUpResponse, AWSError>;
   /**
@@ -228,11 +228,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   adminUserGlobalSignOut(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutResponse, AWSError>;
   /**
-   * Begins setup of time-based one-time password (TOTP) multi-factor authentication (MFA) for a user, with a unique private key that Amazon Cognito generates and returns in the API response. You can authorize an AssociateSoftwareToken request with either the user's access token, or a session string from a challenge response that you received from Amazon Cognito.  Amazon Cognito disassociates an existing software token when you verify the new token in a  VerifySoftwareToken API request. If you don't verify the software token and your user pool doesn't require MFA, the user can then authenticate with user name and password credentials alone. If your user pool requires TOTP MFA, Amazon Cognito generates an MFA_SETUP or SOFTWARE_TOKEN_SETUP challenge each time your user signs. Complete setup with AssociateSoftwareToken and VerifySoftwareToken. After you set up software token MFA for your user, Amazon Cognito generates a SOFTWARE_TOKEN_MFA challenge when they authenticate. Respond to this challenge with your user's TOTP.   Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you can't use IAM credentials to authorize requests, and you can't grant IAM permissions in policies. For more information about authorization models in Amazon Cognito, see Using the Amazon Cognito user pools API and user pool endpoints. 
+   * Begins setup of time-based one-time password (TOTP) multi-factor authentication (MFA) for a user, with a unique private key that Amazon Cognito generates and returns in the API response. You can authorize an AssociateSoftwareToken request with either the user's access token, or a session string from a challenge response that you received from Amazon Cognito.  Amazon Cognito disassociates an existing software token when you verify the new token in a  VerifySoftwareToken API request. If you don't verify the software token and your user pool doesn't require MFA, the user can then authenticate with user name and password credentials alone. If your user pool requires TOTP MFA, Amazon Cognito generates an MFA_SETUP or SOFTWARE_TOKEN_SETUP challenge each time your user signs in. Complete setup with AssociateSoftwareToken and VerifySoftwareToken. After you set up software token MFA for your user, Amazon Cognito generates a SOFTWARE_TOKEN_MFA challenge when they authenticate. Respond to this challenge with your user's TOTP.   Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you can't use IAM credentials to authorize requests, and you can't grant IAM permissions in policies. For more information about authorization models in Amazon Cognito, see Using the Amazon Cognito user pools API and user pool endpoints. 
    */
   associateSoftwareToken(params: CognitoIdentityServiceProvider.Types.AssociateSoftwareTokenRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AssociateSoftwareTokenResponse) => void): Request<CognitoIdentityServiceProvider.Types.AssociateSoftwareTokenResponse, AWSError>;
   /**
-   * Begins setup of time-based one-time password (TOTP) multi-factor authentication (MFA) for a user, with a unique private key that Amazon Cognito generates and returns in the API response. You can authorize an AssociateSoftwareToken request with either the user's access token, or a session string from a challenge response that you received from Amazon Cognito.  Amazon Cognito disassociates an existing software token when you verify the new token in a  VerifySoftwareToken API request. If you don't verify the software token and your user pool doesn't require MFA, the user can then authenticate with user name and password credentials alone. If your user pool requires TOTP MFA, Amazon Cognito generates an MFA_SETUP or SOFTWARE_TOKEN_SETUP challenge each time your user signs. Complete setup with AssociateSoftwareToken and VerifySoftwareToken. After you set up software token MFA for your user, Amazon Cognito generates a SOFTWARE_TOKEN_MFA challenge when they authenticate. Respond to this challenge with your user's TOTP.   Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you can't use IAM credentials to authorize requests, and you can't grant IAM permissions in policies. For more information about authorization models in Amazon Cognito, see Using the Amazon Cognito user pools API and user pool endpoints. 
+   * Begins setup of time-based one-time password (TOTP) multi-factor authentication (MFA) for a user, with a unique private key that Amazon Cognito generates and returns in the API response. You can authorize an AssociateSoftwareToken request with either the user's access token, or a session string from a challenge response that you received from Amazon Cognito.  Amazon Cognito disassociates an existing software token when you verify the new token in a  VerifySoftwareToken API request. If you don't verify the software token and your user pool doesn't require MFA, the user can then authenticate with user name and password credentials alone. If your user pool requires TOTP MFA, Amazon Cognito generates an MFA_SETUP or SOFTWARE_TOKEN_SETUP challenge each time your user signs in. Complete setup with AssociateSoftwareToken and VerifySoftwareToken. After you set up software token MFA for your user, Amazon Cognito generates a SOFTWARE_TOKEN_MFA challenge when they authenticate. Respond to this challenge with your user's TOTP.   Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in requests for this API operation. For this operation, you can't use IAM credentials to authorize requests, and you can't grant IAM permissions in policies. For more information about authorization models in Amazon Cognito, see Using the Amazon Cognito user pools API and user pool endpoints. 
    */
   associateSoftwareToken(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AssociateSoftwareTokenResponse) => void): Request<CognitoIdentityServiceProvider.Types.AssociateSoftwareTokenResponse, AWSError>;
   /**
@@ -492,11 +492,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   getIdentityProviderByIdentifier(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetIdentityProviderByIdentifierResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetIdentityProviderByIdentifierResponse, AWSError>;
   /**
-   * Gets the detailed activity logging configuration for a user pool.
+   * Gets the logging configuration of a user pool.
    */
   getLogDeliveryConfiguration(params: CognitoIdentityServiceProvider.Types.GetLogDeliveryConfigurationRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetLogDeliveryConfigurationResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetLogDeliveryConfigurationResponse, AWSError>;
   /**
-   * Gets the detailed activity logging configuration for a user pool.
+   * Gets the logging configuration of a user pool.
    */
   getLogDeliveryConfiguration(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetLogDeliveryConfigurationResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetLogDeliveryConfigurationResponse, AWSError>;
   /**
@@ -660,11 +660,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   revokeToken(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.RevokeTokenResponse) => void): Request<CognitoIdentityServiceProvider.Types.RevokeTokenResponse, AWSError>;
   /**
-   * Sets up or modifies the detailed activity logging configuration of a user pool.
+   * Sets up or modifies the logging configuration of a user pool. User pools can export user notification logs and advanced security features user activity logs.
    */
   setLogDeliveryConfiguration(params: CognitoIdentityServiceProvider.Types.SetLogDeliveryConfigurationRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetLogDeliveryConfigurationResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetLogDeliveryConfigurationResponse, AWSError>;
   /**
-   * Sets up or modifies the detailed activity logging configuration of a user pool.
+   * Sets up or modifies the logging configuration of a user pool. User pools can export user notification logs and advanced security features user activity logs.
    */
   setLogDeliveryConfiguration(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetLogDeliveryConfigurationResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetLogDeliveryConfigurationResponse, AWSError>;
   /**
@@ -1997,7 +1997,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     AnalyticsConfiguration?: AnalyticsConfigurationType;
     /**
-     * Errors and responses that you want Amazon Cognito APIs to return during authentication, account confirmation, and password recovery when the user doesn't exist in the user pool. When set to ENABLED and the user doesn't exist, authentication returns an error indicating either the username or password was incorrect. Account confirmation and password recovery return a response indicating a code was sent to a simulated destination. When set to LEGACY, those APIs return a UserNotFoundException exception if the user doesn't exist in the user pool. Valid values include:    ENABLED - This prevents user existence-related errors.    LEGACY - This represents the early behavior of Amazon Cognito where user existence related errors aren't prevented.  
+     * Errors and responses that you want Amazon Cognito APIs to return during authentication, account confirmation, and password recovery when the user doesn't exist in the user pool. When set to ENABLED and the user doesn't exist, authentication returns an error indicating either the username or password was incorrect. Account confirmation and password recovery return a response indicating a code was sent to a simulated destination. When set to LEGACY, those APIs return a UserNotFoundException exception if the user doesn't exist in the user pool. Valid values include:    ENABLED - This prevents user existence-related errors.    LEGACY - This represents the early behavior of Amazon Cognito where user existence related errors aren't prevented.   Defaults to LEGACY when you don't provide a value.
      */
     PreventUserExistenceErrors?: PreventUserExistenceErrorTypes;
     /**
@@ -2522,11 +2522,17 @@ declare namespace CognitoIdentityServiceProvider {
      */
     CompromisedCredentialsDetected?: WrappedBooleanType;
   }
-  export type EventSourceName = "userNotification"|string;
+  export type EventSourceName = "userNotification"|"userAuthEvents"|string;
   export type EventType = "SignIn"|"SignUp"|"ForgotPassword"|"PasswordChange"|"ResendCode"|string;
   export type ExplicitAuthFlowsListType = ExplicitAuthFlowsType[];
   export type ExplicitAuthFlowsType = "ADMIN_NO_SRP_AUTH"|"CUSTOM_AUTH_FLOW_ONLY"|"USER_PASSWORD_AUTH"|"ALLOW_ADMIN_USER_PASSWORD_AUTH"|"ALLOW_CUSTOM_AUTH"|"ALLOW_USER_PASSWORD_AUTH"|"ALLOW_USER_SRP_AUTH"|"ALLOW_REFRESH_TOKEN_AUTH"|string;
   export type FeedbackValueType = "Valid"|"Invalid"|string;
+  export interface FirehoseConfigurationType {
+    /**
+     * The ARN of an Amazon Data Firehose stream that's the destination for advanced security features log export.
+     */
+    StreamArn?: ArnType;
+  }
   export type ForceAliasCreation = boolean;
   export interface ForgetDeviceRequest {
     /**
@@ -2637,13 +2643,13 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export interface GetLogDeliveryConfigurationRequest {
     /**
-     * The ID of the user pool where you want to view detailed activity logging configuration.
+     * The ID of the user pool that has the logging configuration that you want to view.
      */
     UserPoolId: UserPoolIdType;
   }
   export interface GetLogDeliveryConfigurationResponse {
     /**
-     * The detailed activity logging configuration of the requested user pool.
+     * The logging configuration of the requested user pool.
      */
     LogDeliveryConfiguration?: LogDeliveryConfigurationType;
   }
@@ -3180,29 +3186,37 @@ declare namespace CognitoIdentityServiceProvider {
   export type LogConfigurationListType = LogConfigurationType[];
   export interface LogConfigurationType {
     /**
-     * The errorlevel selection of logs that a user pool sends for detailed activity logging.
+     * The errorlevel selection of logs that a user pool sends for detailed activity logging. To send userNotification activity with information about message delivery, choose ERROR with CloudWatchLogsConfiguration. To send userAuthEvents activity with user logs from advanced security features, choose INFO with one of CloudWatchLogsConfiguration, FirehoseConfiguration, or S3Configuration.
      */
     LogLevel: LogLevel;
     /**
-     * The source of events that your user pool sends for detailed activity logging.
+     * The source of events that your user pool sends for logging. To send error-level logs about user notification activity, set to userNotification. To send info-level logs about advanced security features user activity, set to userAuthEvents.
      */
     EventSource: EventSourceName;
     /**
-     * The CloudWatch logging destination of a user pool.
+     * The CloudWatch log group destination of user pool detailed activity logs, or of user activity log export with advanced security features.
      */
     CloudWatchLogsConfiguration?: CloudWatchLogsConfigurationType;
+    /**
+     * The Amazon S3 bucket destination of user activity log export with advanced security features. To activate this setting,  advanced security features must be active in your user pool.
+     */
+    S3Configuration?: S3ConfigurationType;
+    /**
+     * The Amazon Data Firehose stream destination of user activity log export with advanced security features. To activate this setting,  advanced security features must be active in your user pool.
+     */
+    FirehoseConfiguration?: FirehoseConfigurationType;
   }
   export interface LogDeliveryConfigurationType {
     /**
-     * The ID of the user pool where you configured detailed activity logging.
+     * The ID of the user pool where you configured logging.
      */
     UserPoolId: UserPoolIdType;
     /**
-     * The detailed activity logging destination of a user pool.
+     * A logging destination of a user pool. User pools can have multiple logging destinations for message-delivery and user-activity logs.
      */
     LogConfigurations: LogConfigurationListType;
   }
-  export type LogLevel = "ERROR"|string;
+  export type LogLevel = "ERROR"|"INFO"|string;
   export type LogoutURLsListType = RedirectUrlType[];
   export type LongType = number;
   export type MFAOptionListType = MFAOptionType[];
@@ -3295,6 +3309,7 @@ declare namespace CognitoIdentityServiceProvider {
   export type OAuthFlowsType = OAuthFlowType[];
   export type PaginationKey = string;
   export type PaginationKeyType = string;
+  export type PasswordHistorySizeType = number;
   export type PasswordPolicyMinLengthType = number;
   export interface PasswordPolicyType {
     /**
@@ -3317,6 +3332,10 @@ declare namespace CognitoIdentityServiceProvider {
      * In the password policy that you have set, refers to whether you have required users to use at least one symbol in their password.
      */
     RequireSymbols?: BooleanType;
+    /**
+     * The number of previous passwords that you want Amazon Cognito to restrict each user from reusing. Users can't set a password that matches any of n previous passwords, where n is the value of PasswordHistorySize. Password history isn't enforced and isn't displayed in DescribeUserPool responses when you set this value to 0 or don't provide it. To activate this setting,  advanced security features must be active in your user pool.
+     */
+    PasswordHistorySize?: PasswordHistorySizeType;
     /**
      * The number of days a temporary password is valid in the password policy. If the user doesn't sign in during this time, an administrator must reset their password. Defaults to 7. If you submit a value of 0, Amazon Cognito treats it as a null value and sets TemporaryPasswordValidityDays to its default value.  When you set TemporaryPasswordValidityDays for a user pool, you can no longer set a value for the legacy UnusedAccountValidityDays parameter in that user pool. 
      */
@@ -3560,7 +3579,14 @@ declare namespace CognitoIdentityServiceProvider {
     SkippedIPRangeList?: SkippedIPRangeListType;
   }
   export type RiskLevelType = "Low"|"Medium"|"High"|string;
+  export type S3ArnType = string;
   export type S3BucketType = string;
+  export interface S3ConfigurationType {
+    /**
+     * The ARN of an Amazon S3 bucket that's the destination for advanced security features log export.
+     */
+    BucketArn?: S3ArnType;
+  }
   export type SESConfigurationSet = string;
   export interface SMSMfaSettingsType {
     /**
@@ -3612,11 +3638,11 @@ declare namespace CognitoIdentityServiceProvider {
   export type SessionType = string;
   export interface SetLogDeliveryConfigurationRequest {
     /**
-     * The ID of the user pool where you want to configure detailed activity logging .
+     * The ID of the user pool where you want to configure logging.
      */
     UserPoolId: UserPoolIdType;
     /**
-     * A collection of all of the detailed activity logging configurations for a user pool.
+     * A collection of the logging configurations for a user pool.
      */
     LogConfigurations: LogConfigurationListType;
   }
@@ -3786,7 +3812,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     CodeDeliveryDetails?: CodeDeliveryDetailsType;
     /**
-     * The UUID of the authenticated user. This isn't the same as username.
+     * The 128-bit ID of the authenticated user. This isn't the same as username.
      */
     UserSub: StringType;
   }
@@ -4165,7 +4191,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     AnalyticsConfiguration?: AnalyticsConfigurationType;
     /**
-     * Errors and responses that you want Amazon Cognito APIs to return during authentication, account confirmation, and password recovery when the user doesn't exist in the user pool. When set to ENABLED and the user doesn't exist, authentication returns an error indicating either the username or password was incorrect. Account confirmation and password recovery return a response indicating a code was sent to a simulated destination. When set to LEGACY, those APIs return a UserNotFoundException exception if the user doesn't exist in the user pool. Valid values include:    ENABLED - This prevents user existence-related errors.    LEGACY - This represents the early behavior of Amazon Cognito where user existence related errors aren't prevented.  
+     * Errors and responses that you want Amazon Cognito APIs to return during authentication, account confirmation, and password recovery when the user doesn't exist in the user pool. When set to ENABLED and the user doesn't exist, authentication returns an error indicating either the username or password was incorrect. Account confirmation and password recovery return a response indicating a code was sent to a simulated destination. When set to LEGACY, those APIs return a UserNotFoundException exception if the user doesn't exist in the user pool. Valid values include:    ENABLED - This prevents user existence-related errors.    LEGACY - This represents the early behavior of Amazon Cognito where user existence related errors aren't prevented.   Defaults to LEGACY when you don't provide a value.
      */
     PreventUserExistenceErrors?: PreventUserExistenceErrorTypes;
     /**
@@ -4470,7 +4496,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     AnalyticsConfiguration?: AnalyticsConfigurationType;
     /**
-     * Errors and responses that you want Amazon Cognito APIs to return during authentication, account confirmation, and password recovery when the user doesn't exist in the user pool. When set to ENABLED and the user doesn't exist, authentication returns an error indicating either the username or password was incorrect. Account confirmation and password recovery return a response indicating a code was sent to a simulated destination. When set to LEGACY, those APIs return a UserNotFoundException exception if the user doesn't exist in the user pool. Valid values include:    ENABLED - This prevents user existence-related errors.    LEGACY - This represents the old behavior of Amazon Cognito where user existence related errors aren't prevented.  
+     * Errors and responses that you want Amazon Cognito APIs to return during authentication, account confirmation, and password recovery when the user doesn't exist in the user pool. When set to ENABLED and the user doesn't exist, authentication returns an error indicating either the username or password was incorrect. Account confirmation and password recovery return a response indicating a code was sent to a simulated destination. When set to LEGACY, those APIs return a UserNotFoundException exception if the user doesn't exist in the user pool. Valid values include:    ENABLED - This prevents user existence-related errors.    LEGACY - This represents the early behavior of Amazon Cognito where user existence related errors aren't prevented.   Defaults to LEGACY when you don't provide a value.
      */
     PreventUserExistenceErrors?: PreventUserExistenceErrorTypes;
     /**

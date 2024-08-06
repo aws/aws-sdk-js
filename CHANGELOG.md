@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1668.0-->
+<!--LATEST=2.1669.0-->
 <!--ENTRYINSERT-->
+
+## 2.1669.0
+* feature: BedrockAgentRuntime: Introduce model invocation output traces for orchestration traces, which contain the model's raw response and usage.
+* feature: CognitoIdentityServiceProvider: Advanced security feature updates to include password history and log export for Cognito user pools.
+* feature: CostOptimizationHub: This release adds savings percentage support to the ListRecommendationSummaries API.
+* feature: WorkSpaces: Added support for BYOL_GRAPHICS_G4DN_WSP IngestionProcess
 
 ## 2.1668.0
 * feature: DataZone: This releases Data Product feature. Data Products allow grouping data assets into cohesive, self-contained units for ease of publishing for data producers, and ease of finding and accessing for data consumers.

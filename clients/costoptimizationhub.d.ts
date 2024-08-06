@@ -52,11 +52,11 @@ declare class CostOptimizationHub extends Service {
    */
   listRecommendations(callback?: (err: AWSError, data: CostOptimizationHub.Types.ListRecommendationsResponse) => void): Request<CostOptimizationHub.Types.ListRecommendationsResponse, AWSError>;
   /**
-   * Updates the enrollment (opt in and opt out) status of an account to the Cost Optimization Hub service. If the account is a management account of an organization, this action can also be used to enroll member accounts of the organization. You must have the appropriate permissions to opt in to Cost Optimization Hub and to view its recommendations. When you opt in, Cost Optimization Hub automatically creates a service-linked role in your account to access its data.
+   * Updates the enrollment (opt in and opt out) status of an account to the Cost Optimization Hub service. If the account is a management account or delegated administrator of an organization, this action can also be used to enroll member accounts of the organization. You must have the appropriate permissions to opt in to Cost Optimization Hub and to view its recommendations. When you opt in, Cost Optimization Hub automatically creates a service-linked role in your account to access its data.
    */
   updateEnrollmentStatus(params: CostOptimizationHub.Types.UpdateEnrollmentStatusRequest, callback?: (err: AWSError, data: CostOptimizationHub.Types.UpdateEnrollmentStatusResponse) => void): Request<CostOptimizationHub.Types.UpdateEnrollmentStatusResponse, AWSError>;
   /**
-   * Updates the enrollment (opt in and opt out) status of an account to the Cost Optimization Hub service. If the account is a management account of an organization, this action can also be used to enroll member accounts of the organization. You must have the appropriate permissions to opt in to Cost Optimization Hub and to view its recommendations. When you opt in, Cost Optimization Hub automatically creates a service-linked role in your account to access its data.
+   * Updates the enrollment (opt in and opt out) status of an account to the Cost Optimization Hub service. If the account is a management account or delegated administrator of an organization, this action can also be used to enroll member accounts of the organization. You must have the appropriate permissions to opt in to Cost Optimization Hub and to view its recommendations. When you opt in, Cost Optimization Hub automatically creates a service-linked role in your account to access its data.
    */
   updateEnrollmentStatus(callback?: (err: AWSError, data: CostOptimizationHub.Types.UpdateEnrollmentStatusResponse) => void): Request<CostOptimizationHub.Types.UpdateEnrollmentStatusResponse, AWSError>;
   /**
@@ -627,7 +627,7 @@ declare namespace CostOptimizationHub {
      */
     items?: AccountEnrollmentStatuses;
     /**
-     * The enrollment status of all member accounts in the organization if the account is the management account.
+     * The enrollment status of all member accounts in the organization if the account is the management account or delegated administrator.
      */
     includeMemberAccounts?: Boolean;
     /**
@@ -642,9 +642,13 @@ declare namespace CostOptimizationHub {
      */
     groupBy: String;
     /**
-     * The maximum number of recommendations that are returned for the request.
+     * The maximum number of recommendations to be returned for the request.
      */
     maxResults?: ListRecommendationSummariesRequestMaxResultsInteger;
+    /**
+     * Additional metrics to be returned for the request. The only valid value is savingsPercentage.
+     */
+    metrics?: SummaryMetricsList;
     /**
      * The token to retrieve the next set of results.
      */
@@ -657,7 +661,7 @@ declare namespace CostOptimizationHub {
      */
     estimatedTotalDedupedSavings?: Double;
     /**
-     * List of all savings recommendations.
+     * A list of all savings recommendations.
      */
     items?: RecommendationSummariesList;
     /**
@@ -668,6 +672,10 @@ declare namespace CostOptimizationHub {
      * The currency code used for the recommendation.
      */
     currencyCode?: String;
+    /**
+     * The results or descriptions for the additional metrics, based on whether the metrics were or were not requested.
+     */
+    metrics?: SummaryMetricsResult;
     /**
      * The token to retrieve the next set of results.
      */
@@ -1249,6 +1257,14 @@ declare namespace CostOptimizationHub {
     sizeInGb?: Double;
   }
   export type String = string;
+  export type SummaryMetrics = "SavingsPercentage"|string;
+  export type SummaryMetricsList = SummaryMetrics[];
+  export interface SummaryMetricsResult {
+    /**
+     * The savings percentage based on your Amazon Web Services spend over the past 30 days.  Savings percentage is only supported when filtering by Region, account ID, or tags. 
+     */
+    savingsPercentage?: String;
+  }
   export interface Tag {
     /**
      * The key that's associated with the tag.
@@ -1267,7 +1283,7 @@ declare namespace CostOptimizationHub {
      */
     status: EnrollmentStatus;
     /**
-     * Indicates whether to enroll member accounts of the organization if the account is the management account.
+     * Indicates whether to enroll member accounts of the organization if the account is the management account or delegated administrator.
      */
     includeMemberAccounts?: Boolean;
   }
