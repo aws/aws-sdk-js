@@ -132,6 +132,14 @@ declare class Glue extends Service {
    */
   batchGetWorkflows(callback?: (err: AWSError, data: Glue.Types.BatchGetWorkflowsResponse) => void): Request<Glue.Types.BatchGetWorkflowsResponse, AWSError>;
   /**
+   * Annotate datapoints over time for a specific data quality statistic.
+   */
+  batchPutDataQualityStatisticAnnotation(params: Glue.Types.BatchPutDataQualityStatisticAnnotationRequest, callback?: (err: AWSError, data: Glue.Types.BatchPutDataQualityStatisticAnnotationResponse) => void): Request<Glue.Types.BatchPutDataQualityStatisticAnnotationResponse, AWSError>;
+  /**
+   * Annotate datapoints over time for a specific data quality statistic.
+   */
+  batchPutDataQualityStatisticAnnotation(callback?: (err: AWSError, data: Glue.Types.BatchPutDataQualityStatisticAnnotationResponse) => void): Request<Glue.Types.BatchPutDataQualityStatisticAnnotationResponse, AWSError>;
+  /**
    * Stops one or more job runs for a specified job definition.
    */
   batchStopJobRun(params: Glue.Types.BatchStopJobRunRequest, callback?: (err: AWSError, data: Glue.Types.BatchStopJobRunResponse) => void): Request<Glue.Types.BatchStopJobRunResponse, AWSError>;
@@ -724,6 +732,22 @@ declare class Glue extends Service {
    */
   getDataCatalogEncryptionSettings(callback?: (err: AWSError, data: Glue.Types.GetDataCatalogEncryptionSettingsResponse) => void): Request<Glue.Types.GetDataCatalogEncryptionSettingsResponse, AWSError>;
   /**
+   * Retrieve the training status of the model along with more information (CompletedOn, StartedOn, FailureReason).
+   */
+  getDataQualityModel(params: Glue.Types.GetDataQualityModelRequest, callback?: (err: AWSError, data: Glue.Types.GetDataQualityModelResponse) => void): Request<Glue.Types.GetDataQualityModelResponse, AWSError>;
+  /**
+   * Retrieve the training status of the model along with more information (CompletedOn, StartedOn, FailureReason).
+   */
+  getDataQualityModel(callback?: (err: AWSError, data: Glue.Types.GetDataQualityModelResponse) => void): Request<Glue.Types.GetDataQualityModelResponse, AWSError>;
+  /**
+   * Retrieve a statistic's predictions for a given Profile ID.
+   */
+  getDataQualityModelResult(params: Glue.Types.GetDataQualityModelResultRequest, callback?: (err: AWSError, data: Glue.Types.GetDataQualityModelResultResponse) => void): Request<Glue.Types.GetDataQualityModelResultResponse, AWSError>;
+  /**
+   * Retrieve a statistic's predictions for a given Profile ID.
+   */
+  getDataQualityModelResult(callback?: (err: AWSError, data: Glue.Types.GetDataQualityModelResultResponse) => void): Request<Glue.Types.GetDataQualityModelResultResponse, AWSError>;
+  /**
    * Retrieves the result of a data quality rule evaluation.
    */
   getDataQualityResult(params: Glue.Types.GetDataQualityResultRequest, callback?: (err: AWSError, data: Glue.Types.GetDataQualityResultResponse) => void): Request<Glue.Types.GetDataQualityResultResponse, AWSError>;
@@ -1220,6 +1244,22 @@ declare class Glue extends Service {
    */
   listDataQualityRulesets(callback?: (err: AWSError, data: Glue.Types.ListDataQualityRulesetsResponse) => void): Request<Glue.Types.ListDataQualityRulesetsResponse, AWSError>;
   /**
+   * Retrieve annotations for a data quality statistic.
+   */
+  listDataQualityStatisticAnnotations(params: Glue.Types.ListDataQualityStatisticAnnotationsRequest, callback?: (err: AWSError, data: Glue.Types.ListDataQualityStatisticAnnotationsResponse) => void): Request<Glue.Types.ListDataQualityStatisticAnnotationsResponse, AWSError>;
+  /**
+   * Retrieve annotations for a data quality statistic.
+   */
+  listDataQualityStatisticAnnotations(callback?: (err: AWSError, data: Glue.Types.ListDataQualityStatisticAnnotationsResponse) => void): Request<Glue.Types.ListDataQualityStatisticAnnotationsResponse, AWSError>;
+  /**
+   * Retrieves a list of data quality statistics.
+   */
+  listDataQualityStatistics(params: Glue.Types.ListDataQualityStatisticsRequest, callback?: (err: AWSError, data: Glue.Types.ListDataQualityStatisticsResponse) => void): Request<Glue.Types.ListDataQualityStatisticsResponse, AWSError>;
+  /**
+   * Retrieves a list of data quality statistics.
+   */
+  listDataQualityStatistics(callback?: (err: AWSError, data: Glue.Types.ListDataQualityStatisticsResponse) => void): Request<Glue.Types.ListDataQualityStatisticsResponse, AWSError>;
+  /**
    * Retrieves the names of all DevEndpoint resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
   listDevEndpoints(params: Glue.Types.ListDevEndpointsRequest, callback?: (err: AWSError, data: Glue.Types.ListDevEndpointsResponse) => void): Request<Glue.Types.ListDevEndpointsResponse, AWSError>;
@@ -1323,6 +1363,14 @@ declare class Glue extends Service {
    * Sets the security configuration for a specified catalog. After the configuration has been set, the specified encryption is applied to every catalog write thereafter.
    */
   putDataCatalogEncryptionSettings(callback?: (err: AWSError, data: Glue.Types.PutDataCatalogEncryptionSettingsResponse) => void): Request<Glue.Types.PutDataCatalogEncryptionSettingsResponse, AWSError>;
+  /**
+   * Annotate all datapoints for a Profile.
+   */
+  putDataQualityProfileAnnotation(params: Glue.Types.PutDataQualityProfileAnnotationRequest, callback?: (err: AWSError, data: Glue.Types.PutDataQualityProfileAnnotationResponse) => void): Request<Glue.Types.PutDataQualityProfileAnnotationResponse, AWSError>;
+  /**
+   * Annotate all datapoints for a Profile.
+   */
+  putDataQualityProfileAnnotation(callback?: (err: AWSError, data: Glue.Types.PutDataQualityProfileAnnotationResponse) => void): Request<Glue.Types.PutDataQualityProfileAnnotationResponse, AWSError>;
   /**
    * Sets the Data Catalog resource policy for access control.
    */
@@ -1962,6 +2010,22 @@ declare namespace Glue {
      */
     Inputs?: OneInput;
   }
+  export interface AnnotationError {
+    /**
+     * The Profile ID for the failed annotation.
+     */
+    ProfileId?: HashString;
+    /**
+     * The Statistic ID for the failed annotation.
+     */
+    StatisticId?: HashString;
+    /**
+     * The reason why the annotation failed.
+     */
+    FailureReason?: DescriptionString;
+  }
+  export type AnnotationErrorList = AnnotationError[];
+  export type AnnotationList = StatisticAnnotation[];
   export interface ApplyMapping {
     /**
      * The name of the transform node.
@@ -2442,6 +2506,22 @@ declare namespace Glue {
      * A list of names of workflows not found.
      */
     MissingWorkflows?: WorkflowNames;
+  }
+  export interface BatchPutDataQualityStatisticAnnotationRequest {
+    /**
+     * A list of DatapointInclusionAnnotation's.
+     */
+    InclusionAnnotations: InclusionAnnotationList;
+    /**
+     * Client Token.
+     */
+    ClientToken?: HashString;
+  }
+  export interface BatchPutDataQualityStatisticAnnotationResponse {
+    /**
+     * A list of AnnotationError's.
+     */
+    FailedInclusionAnnotations?: AnnotationErrorList;
   }
   export type BatchSize = number;
   export interface BatchStopJobRunError {
@@ -4217,6 +4297,10 @@ declare namespace Glue {
      */
     TargetTable?: DataQualityTargetTable;
     /**
+     * The name of the security configuration created with the data quality encryption option.
+     */
+    DataQualitySecurityConfiguration?: NameString;
+    /**
      * Used for idempotency and is recommended to be set to a random ID (such as a UUID) to avoid creating or starting multiple instances of the same resource.
      */
     ClientToken?: HashString;
@@ -5231,6 +5315,7 @@ declare namespace Glue {
      */
     UpperLimit?: NullableDouble;
   }
+  export type DataQualityModelStatus = "RUNNING"|"SUCCEEDED"|"FAILED"|string;
   export interface DataQualityObservation {
     /**
      * A description of the data quality observation.
@@ -5248,6 +5333,10 @@ declare namespace Glue {
      * A unique result ID for the data quality result.
      */
     ResultId?: HashString;
+    /**
+     * The Profile ID for the data quality result.
+     */
+    ProfileId?: HashString;
     /**
      * An aggregate data quality score. Represents the ratio of rules that passed to the total number of rules.
      */
@@ -5399,6 +5488,10 @@ declare namespace Glue {
      * A map of metrics associated with the evaluation of the rule.
      */
     EvaluatedMetrics?: EvaluatedMetricsMap;
+    /**
+     * The evaluated rule.
+     */
+    EvaluatedRule?: DataQualityRuleResultDescription;
   }
   export type DataQualityRuleResultDescription = string;
   export type DataQualityRuleResultStatus = "PASS"|"FAIL"|"ERROR"|string;
@@ -5607,6 +5700,20 @@ declare namespace Glue {
   export type DatabaseName = string;
   export type DatabrewCondition = string;
   export type DatabrewConditionValue = string;
+  export interface DatapointInclusionAnnotation {
+    /**
+     * The ID of the data quality profile the statistic belongs to.
+     */
+    ProfileId?: HashString;
+    /**
+     * The Statistic ID.
+     */
+    StatisticId?: HashString;
+    /**
+     * The inclusion annotation value to apply to the statistic.
+     */
+    InclusionAnnotation?: InclusionAnnotationValue;
+  }
   export interface Datatype {
     /**
      * The datatype of the value.
@@ -7083,6 +7190,54 @@ declare namespace Glue {
      */
     DataCatalogEncryptionSettings?: DataCatalogEncryptionSettings;
   }
+  export interface GetDataQualityModelRequest {
+    /**
+     * The Statistic ID.
+     */
+    StatisticId?: HashString;
+    /**
+     * The Profile ID.
+     */
+    ProfileId: HashString;
+  }
+  export interface GetDataQualityModelResponse {
+    /**
+     * The training status of the data quality model.
+     */
+    Status?: DataQualityModelStatus;
+    /**
+     * The timestamp when the data quality model training started.
+     */
+    StartedOn?: Timestamp;
+    /**
+     * The timestamp when the data quality model training completed.
+     */
+    CompletedOn?: Timestamp;
+    /**
+     * The training failure reason.
+     */
+    FailureReason?: HashString;
+  }
+  export interface GetDataQualityModelResultRequest {
+    /**
+     * The Statistic ID.
+     */
+    StatisticId: HashString;
+    /**
+     * The Profile ID.
+     */
+    ProfileId: HashString;
+  }
+  export interface GetDataQualityModelResultResponse {
+    /**
+     * The timestamp when the data quality model training completed.
+     */
+    CompletedOn?: Timestamp;
+    /**
+     * A list of StatisticModelResult 
+     */
+    Model?: StatisticModelResults;
+  }
   export interface GetDataQualityResultRequest {
     /**
      * A unique result ID for the data quality result.
@@ -7094,6 +7249,10 @@ declare namespace Glue {
      * A unique result ID for the data quality result.
      */
     ResultId?: HashString;
+    /**
+     * The Profile ID for the data quality result.
+     */
+    ProfileId?: HashString;
     /**
      * An aggregate data quality score. Represents the ratio of rules that passed to the total number of rules.
      */
@@ -7202,6 +7361,10 @@ declare namespace Glue {
      * The name of the ruleset that was created by the run.
      */
     CreatedRulesetName?: NameString;
+    /**
+     * The name of the security configuration created with the data quality encryption option.
+     */
+    DataQualitySecurityConfiguration?: NameString;
   }
   export interface GetDataQualityRulesetEvaluationRunRequest {
     /**
@@ -7306,6 +7469,10 @@ declare namespace Glue {
      * When a ruleset was created from a recommendation run, this run ID is generated to link the two together.
      */
     RecommendationRunId?: HashString;
+    /**
+     * The name of the security configuration created with the data quality encryption option.
+     */
+    DataQualitySecurityConfiguration?: NameString;
   }
   export interface GetDatabaseRequest {
     /**
@@ -8932,6 +9099,8 @@ declare namespace Glue {
      */
     Replace?: ReplaceBoolean;
   }
+  export type InclusionAnnotationList = DatapointInclusionAnnotation[];
+  export type InclusionAnnotationValue = "INCLUDE"|"EXCLUDE"|string;
   export type Integer = number;
   export type IntegerFlag = number;
   export type IntegerValue = number;
@@ -9967,6 +10136,70 @@ declare namespace Glue {
      */
     NextToken?: PaginationToken;
   }
+  export interface ListDataQualityStatisticAnnotationsRequest {
+    /**
+     * The Statistic ID.
+     */
+    StatisticId?: HashString;
+    /**
+     * The Profile ID.
+     */
+    ProfileId?: HashString;
+    /**
+     * A timestamp filter.
+     */
+    TimestampFilter?: TimestampFilter;
+    /**
+     * The maximum number of results to return in this request.
+     */
+    MaxResults?: PageSize;
+    /**
+     * A pagination token to retrieve the next set of results.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListDataQualityStatisticAnnotationsResponse {
+    /**
+     * A list of StatisticAnnotation applied to the Statistic
+     */
+    Annotations?: AnnotationList;
+    /**
+     * A pagination token to retrieve the next set of results.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListDataQualityStatisticsRequest {
+    /**
+     * The Statistic ID.
+     */
+    StatisticId?: HashString;
+    /**
+     * The Profile ID.
+     */
+    ProfileId?: HashString;
+    /**
+     * A timestamp filter.
+     */
+    TimestampFilter?: TimestampFilter;
+    /**
+     * The maximum number of results to return in this request.
+     */
+    MaxResults?: PageSize;
+    /**
+     * A pagination token to request the next page of results.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListDataQualityStatisticsResponse {
+    /**
+     * A StatisticSummaryList.
+     */
+    Statistics?: StatisticSummaryList;
+    /**
+     * A pagination token to request the next page of results.
+     */
+    NextToken?: PaginationToken;
+  }
   export interface ListDevEndpointsRequest {
     /**
      * A continuation token, if this is a continuation request.
@@ -10536,6 +10769,10 @@ declare namespace Glue {
      * The name of the data quality metric used for generating the observation.
      */
     MetricName?: NameString;
+    /**
+     * The Statistic ID.
+     */
+    StatisticId?: HashString;
     /**
      * An object of type DataQualityMetricValues representing the analysis of the data quality metric value.
      */
@@ -11120,6 +11357,18 @@ declare namespace Glue {
   }
   export interface PutDataCatalogEncryptionSettingsResponse {
   }
+  export interface PutDataQualityProfileAnnotationRequest {
+    /**
+     * The ID of the data quality monitoring profile to annotate.
+     */
+    ProfileId: HashString;
+    /**
+     * The inclusion annotation value to apply to the profile.
+     */
+    InclusionAnnotation: InclusionAnnotationValue;
+  }
+  export interface PutDataQualityProfileAnnotationResponse {
+  }
   export interface PutResourcePolicyRequest {
     /**
      * Contains the policy document to set, in JSON format.
@@ -11393,6 +11642,7 @@ declare namespace Glue {
      */
     UpsertRedshiftOptions?: UpsertRedshiftTargetOptions;
   }
+  export type ReferenceDatasetsList = NameString[];
   export interface RegisterSchemaVersionInput {
     /**
      * This is a wrapper structure to contain schema identity fields. The structure contains:   SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema. Either SchemaArn or SchemaName and RegistryName has to be provided.   SchemaId$SchemaName: The name of the schema. Either SchemaArn or SchemaName and RegistryName has to be provided.  
@@ -11599,6 +11849,16 @@ declare namespace Glue {
   export type RowTag = string;
   export type RulesetNames = NameString[];
   export type RunId = string;
+  export interface RunIdentifier {
+    /**
+     * The Run ID.
+     */
+    RunId?: HashString;
+    /**
+     * The Job Run ID.
+     */
+    JobRunId?: HashString;
+  }
   export interface RunMetrics {
     /**
      * The number of bytes removed by the compaction job run.
@@ -12954,6 +13214,10 @@ declare namespace Glue {
      */
     CreatedRulesetName?: NameString;
     /**
+     * The name of the security configuration created with the data quality encryption option.
+     */
+    DataQualitySecurityConfiguration?: NameString;
+    /**
      * Used for idempotency and is recommended to be set to a random ID (such as a UUID) to avoid creating or starting multiple instances of the same resource.
      */
     ClientToken?: HashString;
@@ -13223,6 +13487,101 @@ declare namespace Glue {
     TextPlain?: GenericString;
   }
   export type StatementState = "WAITING"|"RUNNING"|"AVAILABLE"|"CANCELLING"|"CANCELLED"|"ERROR"|string;
+  export interface StatisticAnnotation {
+    /**
+     * The Profile ID.
+     */
+    ProfileId?: HashString;
+    /**
+     * The Statistic ID.
+     */
+    StatisticId?: HashString;
+    /**
+     * The timestamp when the annotated statistic was recorded.
+     */
+    StatisticRecordedOn?: Timestamp;
+    /**
+     * The inclusion annotation applied to the statistic.
+     */
+    InclusionAnnotation?: TimestampedInclusionAnnotation;
+  }
+  export type StatisticEvaluationLevel = "Dataset"|"Column"|"Multicolumn"|string;
+  export interface StatisticModelResult {
+    /**
+     * The lower bound.
+     */
+    LowerBound?: NullableDouble;
+    /**
+     * The upper bound.
+     */
+    UpperBound?: NullableDouble;
+    /**
+     * The predicted value.
+     */
+    PredictedValue?: NullableDouble;
+    /**
+     * The actual value.
+     */
+    ActualValue?: NullableDouble;
+    /**
+     * The date.
+     */
+    Date?: Timestamp;
+    /**
+     * The inclusion annotation.
+     */
+    InclusionAnnotation?: InclusionAnnotationValue;
+  }
+  export type StatisticModelResults = StatisticModelResult[];
+  export type StatisticNameString = string;
+  export type StatisticPropertiesMap = {[key: string]: DescriptionString};
+  export interface StatisticSummary {
+    /**
+     * The Statistic ID.
+     */
+    StatisticId?: HashString;
+    /**
+     * The Profile ID.
+     */
+    ProfileId?: HashString;
+    /**
+     * The Run Identifier
+     */
+    RunIdentifier?: RunIdentifier;
+    /**
+     * The name of the statistic.
+     */
+    StatisticName?: StatisticNameString;
+    /**
+     * The value of the statistic.
+     */
+    DoubleValue?: double;
+    /**
+     * The evaluation level of the statistic. Possible values: Dataset, Column, Multicolumn.
+     */
+    EvaluationLevel?: StatisticEvaluationLevel;
+    /**
+     * The list of columns referenced by the statistic.
+     */
+    ColumnsReferenced?: ColumnNameList;
+    /**
+     * The list of datasets referenced by the statistic.
+     */
+    ReferencedDatasets?: ReferenceDatasetsList;
+    /**
+     * A StatisticPropertiesMap, which contains a NameString and DescriptionString 
+     */
+    StatisticProperties?: StatisticPropertiesMap;
+    /**
+     * The timestamp when the statistic was recorded.
+     */
+    RecordedOn?: Timestamp;
+    /**
+     * The inclusion annotation for the statistic.
+     */
+    InclusionAnnotation?: TimestampedInclusionAnnotation;
+  }
+  export type StatisticSummaryList = StatisticSummary[];
   export interface StopColumnStatisticsTaskRunRequest {
     /**
      * The name of the database where the table resides.
@@ -13764,7 +14123,27 @@ declare namespace Glue {
   export type TaskType = "EVALUATION"|"LABELING_SET_GENERATION"|"IMPORT_LABELS"|"EXPORT_LABELS"|"FIND_MATCHES"|string;
   export type Timeout = number;
   export type Timestamp = Date;
+  export interface TimestampFilter {
+    /**
+     * The timestamp before which statistics should be included in the results.
+     */
+    RecordedBefore?: Timestamp;
+    /**
+     * The timestamp after which statistics should be included in the results.
+     */
+    RecordedAfter?: Timestamp;
+  }
   export type TimestampValue = Date;
+  export interface TimestampedInclusionAnnotation {
+    /**
+     * The inclusion annotation value.
+     */
+    Value?: InclusionAnnotationValue;
+    /**
+     * The timestamp when the inclusion annotation was last modified.
+     */
+    LastModifiedOn?: Timestamp;
+  }
   export type Token = string;
   export type TokenUrl = string;
   export type TokenUrlParameterKey = string;
@@ -15071,6 +15450,7 @@ declare namespace Glue {
     RowTag?: RowTag;
   }
   export type databaseNameString = string;
+  export type double = number;
   export type tableNameString = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
