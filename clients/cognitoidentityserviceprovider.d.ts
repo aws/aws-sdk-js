@@ -1484,6 +1484,13 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export interface AdminUserGlobalSignOutResponse {
   }
+  export interface AdvancedSecurityAdditionalFlowsType {
+    /**
+     * The operating mode of advanced security features in custom authentication with  Custom authentication challenge Lambda triggers. 
+     */
+    CustomAuthMode?: AdvancedSecurityEnabledModeType;
+  }
+  export type AdvancedSecurityEnabledModeType = "AUDIT"|"ENFORCED"|string;
   export type AdvancedSecurityModeType = "OFF"|"AUDIT"|"ENFORCED"|string;
   export type AliasAttributeType = "phone_number"|"email"|"preferred_username"|string;
   export type AliasAttributesListType = AliasAttributeType[];
@@ -4391,9 +4398,13 @@ declare namespace CognitoIdentityServiceProvider {
   export type UserMFASettingListType = StringType[];
   export interface UserPoolAddOnsType {
     /**
-     * The operating mode of advanced security features in your user pool.
+     * The operating mode of advanced security features for standard authentication types in your user pool, including username-password and secure remote password (SRP) authentication. 
      */
     AdvancedSecurityMode: AdvancedSecurityModeType;
+    /**
+     * Advanced security configuration options for additional authentication types in your user pool, including custom authentication and refresh-token authentication. 
+     */
+    AdvancedSecurityAdditionalFlows?: AdvancedSecurityAdditionalFlowsType;
   }
   export interface UserPoolClientDescription {
     /**

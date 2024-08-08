@@ -9789,6 +9789,10 @@ declare namespace EC2 {
      * IPAM is offered in a Free Tier and an Advanced Tier. For more information about the features available in each tier and the costs associated with the tiers, see Amazon VPC pricing &gt; IPAM tab.
      */
     Tier?: IpamTier;
+    /**
+     * Enable this option to use your own GUA ranges as private IPv6 addresses. This option is disabled by default.
+     */
+    EnablePrivateGua?: Boolean;
   }
   export interface CreateIpamResourceDiscoveryRequest {
     /**
@@ -25748,6 +25752,7 @@ declare namespace EC2 {
   }
   export type IpRangeList = IpRange[];
   export type IpRanges = String[];
+  export type IpSource = "amazon"|"byoip"|"none"|string;
   export interface Ipam {
     /**
      * The Amazon Web Services account ID of the owner of the IPAM.
@@ -25813,6 +25818,10 @@ declare namespace EC2 {
      * IPAM is offered in a Free Tier and an Advanced Tier. For more information about the features available in each tier and the costs associated with the tiers, see Amazon VPC pricing &gt; IPAM tab.
      */
     Tier?: IpamTier;
+    /**
+     * Enable this option to use your own GUA ranges as private IPv6 addresses. This option is disabled by default.
+     */
+    EnablePrivateGua?: Boolean;
   }
   export type IpamAddressHistoryMaxResults = number;
   export interface IpamAddressHistoryRecord {
@@ -25998,6 +26007,10 @@ declare namespace EC2 {
      * The resource CIDR.
      */
     ResourceCidr?: String;
+    /**
+     * The source that allocated the IP address space. byoip or amazon indicates public IP address space allocated by Amazon or space that you have allocated with Bring your own IP (BYOIP). none indicates private space.
+     */
+    IpSource?: IpamResourceCidrIpSource;
     /**
      * The resource type.
      */
@@ -26409,6 +26422,7 @@ declare namespace EC2 {
      */
     AvailabilityZoneId?: String;
   }
+  export type IpamResourceCidrIpSource = "amazon"|"byoip"|"none"|string;
   export type IpamResourceCidrSet = IpamResourceCidr[];
   export interface IpamResourceDiscovery {
     /**
@@ -26589,6 +26603,7 @@ declare namespace EC2 {
   }
   export type Ipv4PrefixesList = Ipv4PrefixSpecification[];
   export type Ipv6Address = string;
+  export type Ipv6AddressAttribute = "public"|"private"|string;
   export type Ipv6AddressList = String[];
   export interface Ipv6CidrAssociation {
     /**
@@ -29101,6 +29116,10 @@ declare namespace EC2 {
      * IPAM is offered in a Free Tier and an Advanced Tier. For more information about the features available in each tier and the costs associated with the tiers, see Amazon VPC pricing &gt; IPAM tab.
      */
     Tier?: IpamTier;
+    /**
+     * Enable this option to use your own GUA ranges as private IPv6 addresses. This option is disabled by default.
+     */
+    EnablePrivateGua?: Boolean;
   }
   export interface ModifyIpamResourceCidrRequest {
     /**
@@ -32443,7 +32462,7 @@ declare namespace EC2 {
      */
     PoolId: Ipv4PoolEc2Id;
     /**
-     * The netmask length of the CIDR you would like to allocate to the public IPv4 pool.
+     * The netmask length of the CIDR you would like to allocate to the public IPv4 pool. The least specific netmask length you can define is 24.
      */
     NetmaskLength: Integer;
     /**
@@ -37110,6 +37129,14 @@ declare namespace EC2 {
      * The state of the CIDR block.
      */
     Ipv6CidrBlockState?: SubnetCidrBlockState;
+    /**
+     * Public IPv6 addresses are those advertised on the internet from Amazon Web Services. Private IP addresses are not and cannot be advertised on the internet from Amazon Web Services.
+     */
+    Ipv6AddressAttribute?: Ipv6AddressAttribute;
+    /**
+     * The source that allocated the IP address space. byoip or amazon indicates public IP address space allocated by Amazon or space that you have allocated with Bring your own IP (BYOIP). none indicates private space.
+     */
+    IpSource?: IpSource;
   }
   export type SubnetIpv6CidrBlockAssociationSet = SubnetIpv6CidrBlockAssociation[];
   export type SubnetList = Subnet[];
@@ -40122,6 +40149,14 @@ declare namespace EC2 {
      * The ID of the IPv6 address pool from which the IPv6 CIDR block is allocated.
      */
     Ipv6Pool?: String;
+    /**
+     * Public IPv6 addresses are those advertised on the internet from Amazon Web Services. Private IP addresses are not and cannot be advertised on the internet from Amazon Web Services.
+     */
+    Ipv6AddressAttribute?: Ipv6AddressAttribute;
+    /**
+     * The source that allocated the IP address space. byoip or amazon indicates public IP address space allocated by Amazon or space that you have allocated with Bring your own IP (BYOIP). none indicates private space.
+     */
+    IpSource?: IpSource;
   }
   export type VpcIpv6CidrBlockAssociationSet = VpcIpv6CidrBlockAssociation[];
   export type VpcList = Vpc[];
