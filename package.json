@@ -41,7 +41,7 @@
     "webpack": "^1.15.0"
   },
   "dependencies": {
-    "buffer": "4.9.2",
+    "buffer": "6.0.3",
     "events": "1.1.1",
     "ieee754": "1.1.13",
     "jmespath": "0.16.0",
