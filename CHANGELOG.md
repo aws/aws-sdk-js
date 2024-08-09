@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1671.0-->
+<!--LATEST=2.1672.0-->
 <!--ENTRYINSERT-->
+
+## 2.1672.0
+* feature: Connect: This release supports adding RoutingCriteria via UpdateContactRoutingData public API.
 
 ## 2.1671.0
 * feature: CognitoIdentityServiceProvider: Added support for threat protection for custom authentication in Amazon Cognito user pools.

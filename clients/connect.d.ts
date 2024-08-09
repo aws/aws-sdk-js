@@ -228,11 +228,11 @@ declare class Connect extends Service {
    */
   createHoursOfOperation(callback?: (err: AWSError, data: Connect.Types.CreateHoursOfOperationResponse) => void): Request<Connect.Types.CreateHoursOfOperationResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Initiates an Amazon Connect instance with all the supported channels enabled. It does not attach any storage, such as Amazon Simple Storage Service (Amazon S3) or Amazon Kinesis. It also does not allow for any configurations on features, such as Contact Lens for Amazon Connect.  Amazon Connect enforces a limit on the total number of instances that you can create or delete in 30 days. If you exceed this limit, you will get an error message indicating there has been an excessive number of attempts at creating or deleting instances. You must wait 30 days before you can restart creating and deleting instances in your account.
+   * This API is in preview release for Amazon Connect and is subject to change. Initiates an Amazon Connect instance with all the supported channels enabled. It does not attach any storage, such as Amazon Simple Storage Service (Amazon S3) or Amazon Kinesis. It also does not allow for any configurations on features, such as Contact Lens for Amazon Connect.  For more information, see Create an Amazon Connect instance in the Amazon Connect Administrator Guide. Amazon Connect enforces a limit on the total number of instances that you can create or delete in 30 days. If you exceed this limit, you will get an error message indicating there has been an excessive number of attempts at creating or deleting instances. You must wait 30 days before you can restart creating and deleting instances in your account.
    */
   createInstance(params: Connect.Types.CreateInstanceRequest, callback?: (err: AWSError, data: Connect.Types.CreateInstanceResponse) => void): Request<Connect.Types.CreateInstanceResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Initiates an Amazon Connect instance with all the supported channels enabled. It does not attach any storage, such as Amazon Simple Storage Service (Amazon S3) or Amazon Kinesis. It also does not allow for any configurations on features, such as Contact Lens for Amazon Connect.  Amazon Connect enforces a limit on the total number of instances that you can create or delete in 30 days. If you exceed this limit, you will get an error message indicating there has been an excessive number of attempts at creating or deleting instances. You must wait 30 days before you can restart creating and deleting instances in your account.
+   * This API is in preview release for Amazon Connect and is subject to change. Initiates an Amazon Connect instance with all the supported channels enabled. It does not attach any storage, such as Amazon Simple Storage Service (Amazon S3) or Amazon Kinesis. It also does not allow for any configurations on features, such as Contact Lens for Amazon Connect.  For more information, see Create an Amazon Connect instance in the Amazon Connect Administrator Guide. Amazon Connect enforces a limit on the total number of instances that you can create or delete in 30 days. If you exceed this limit, you will get an error message indicating there has been an excessive number of attempts at creating or deleting instances. You must wait 30 days before you can restart creating and deleting instances in your account.
    */
   createInstance(callback?: (err: AWSError, data: Connect.Types.CreateInstanceResponse) => void): Request<Connect.Types.CreateInstanceResponse, AWSError>;
   /**
@@ -260,11 +260,11 @@ declare class Connect extends Service {
    */
   createPersistentContactAssociation(callback?: (err: AWSError, data: Connect.Types.CreatePersistentContactAssociationResponse) => void): Request<Connect.Types.CreatePersistentContactAssociationResponse, AWSError>;
   /**
-   * Creates a new predefined attribute for the specified Amazon Connect instance.
+   * Creates a new predefined attribute for the specified Amazon Connect instance. Predefined attributes are attributes in an Amazon Connect instance that can be used to route contacts to an agent or pools of agents within a queue. For more information, see Create predefined attributes for routing contacts to agents.
    */
   createPredefinedAttribute(params: Connect.Types.CreatePredefinedAttributeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a new predefined attribute for the specified Amazon Connect instance.
+   * Creates a new predefined attribute for the specified Amazon Connect instance. Predefined attributes are attributes in an Amazon Connect instance that can be used to route contacts to an agent or pools of agents within a queue. For more information, see Create predefined attributes for routing contacts to agents.
    */
   createPredefinedAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -308,11 +308,11 @@ declare class Connect extends Service {
    */
   createRule(callback?: (err: AWSError, data: Connect.Types.CreateRuleResponse) => void): Request<Connect.Types.CreateRuleResponse, AWSError>;
   /**
-   * Creates a security profile.
+   * Creates a security profile. For information about security profiles, see Security Profiles in the Amazon Connect Administrator Guide. For a mapping of the API name and user interface name of the security profile permissions, see List of security profile permissions. 
    */
   createSecurityProfile(params: Connect.Types.CreateSecurityProfileRequest, callback?: (err: AWSError, data: Connect.Types.CreateSecurityProfileResponse) => void): Request<Connect.Types.CreateSecurityProfileResponse, AWSError>;
   /**
-   * Creates a security profile.
+   * Creates a security profile. For information about security profiles, see Security Profiles in the Amazon Connect Administrator Guide. For a mapping of the API name and user interface name of the security profile permissions, see List of security profile permissions. 
    */
   createSecurityProfile(callback?: (err: AWSError, data: Connect.Types.CreateSecurityProfileResponse) => void): Request<Connect.Types.CreateSecurityProfileResponse, AWSError>;
   /**
@@ -436,11 +436,11 @@ declare class Connect extends Service {
    */
   deleteHoursOfOperation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Deletes the Amazon Connect instance. Amazon Connect enforces a limit on the total number of instances that you can create or delete in 30 days. If you exceed this limit, you will get an error message indicating there has been an excessive number of attempts at creating or deleting instances. You must wait 30 days before you can restart creating and deleting instances in your account.
+   * This API is in preview release for Amazon Connect and is subject to change. Deletes the Amazon Connect instance. For more information, see Delete your Amazon Connect instance in the Amazon Connect Administrator Guide. Amazon Connect enforces a limit on the total number of instances that you can create or delete in 30 days. If you exceed this limit, you will get an error message indicating there has been an excessive number of attempts at creating or deleting instances. You must wait 30 days before you can restart creating and deleting instances in your account.
    */
   deleteInstance(params: Connect.Types.DeleteInstanceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Deletes the Amazon Connect instance. Amazon Connect enforces a limit on the total number of instances that you can create or delete in 30 days. If you exceed this limit, you will get an error message indicating there has been an excessive number of attempts at creating or deleting instances. You must wait 30 days before you can restart creating and deleting instances in your account.
+   * This API is in preview release for Amazon Connect and is subject to change. Deletes the Amazon Connect instance. For more information, see Delete your Amazon Connect instance in the Amazon Connect Administrator Guide. Amazon Connect enforces a limit on the total number of instances that you can create or delete in 30 days. If you exceed this limit, you will get an error message indicating there has been an excessive number of attempts at creating or deleting instances. You must wait 30 days before you can restart creating and deleting instances in your account.
    */
   deleteInstance(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -468,11 +468,11 @@ declare class Connect extends Service {
    */
   deletePrompt(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a queue.
+   * Deletes a queue. It isn't possible to delete a queue by using the Amazon Connect admin website.
    */
   deleteQueue(params: Connect.Types.DeleteQueueRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a queue.
+   * Deletes a queue. It isn't possible to delete a queue by using the Amazon Connect admin website.
    */
   deleteQueue(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -668,11 +668,11 @@ declare class Connect extends Service {
    */
   describePhoneNumber(callback?: (err: AWSError, data: Connect.Types.DescribePhoneNumberResponse) => void): Request<Connect.Types.DescribePhoneNumberResponse, AWSError>;
   /**
-   * Describes a predefined attribute for the specified Amazon Connect instance.
+   * Describes a predefined attribute for the specified Amazon Connect instance. Predefined attributes are attributes in an Amazon Connect instance that can be used to route contacts to an agent or pools of agents within a queue. For more information, see Create predefined attributes for routing contacts to agents.
    */
   describePredefinedAttribute(params: Connect.Types.DescribePredefinedAttributeRequest, callback?: (err: AWSError, data: Connect.Types.DescribePredefinedAttributeResponse) => void): Request<Connect.Types.DescribePredefinedAttributeResponse, AWSError>;
   /**
-   * Describes a predefined attribute for the specified Amazon Connect instance.
+   * Describes a predefined attribute for the specified Amazon Connect instance. Predefined attributes are attributes in an Amazon Connect instance that can be used to route contacts to an agent or pools of agents within a queue. For more information, see Create predefined attributes for routing contacts to agents.
    */
   describePredefinedAttribute(callback?: (err: AWSError, data: Connect.Types.DescribePredefinedAttributeResponse) => void): Request<Connect.Types.DescribePredefinedAttributeResponse, AWSError>;
   /**
@@ -716,11 +716,11 @@ declare class Connect extends Service {
    */
   describeRule(callback?: (err: AWSError, data: Connect.Types.DescribeRuleResponse) => void): Request<Connect.Types.DescribeRuleResponse, AWSError>;
   /**
-   * Gets basic information about the security profle.
+   * Gets basic information about the security profile. For information about security profiles, see Security Profiles in the Amazon Connect Administrator Guide. For a mapping of the API name and user interface name of the security profile permissions, see List of security profile permissions. 
    */
   describeSecurityProfile(params: Connect.Types.DescribeSecurityProfileRequest, callback?: (err: AWSError, data: Connect.Types.DescribeSecurityProfileResponse) => void): Request<Connect.Types.DescribeSecurityProfileResponse, AWSError>;
   /**
-   * Gets basic information about the security profle.
+   * Gets basic information about the security profile. For information about security profiles, see Security Profiles in the Amazon Connect Administrator Guide. For a mapping of the API name and user interface name of the security profile permissions, see List of security profile permissions. 
    */
   describeSecurityProfile(callback?: (err: AWSError, data: Connect.Types.DescribeSecurityProfileResponse) => void): Request<Connect.Types.DescribeSecurityProfileResponse, AWSError>;
   /**
@@ -1156,11 +1156,11 @@ declare class Connect extends Service {
    */
   listPhoneNumbersV2(callback?: (err: AWSError, data: Connect.Types.ListPhoneNumbersV2Response) => void): Request<Connect.Types.ListPhoneNumbersV2Response, AWSError>;
   /**
-   * Lists predefined attributes for the specified Amazon Connect instance.
+   * Lists predefined attributes for the specified Amazon Connect instance. Predefined attributes are attributes in an Amazon Connect instance that can be used to route contacts to an agent or pools of agents within a queue. For more information, see Create predefined attributes for routing contacts to agents.
    */
   listPredefinedAttributes(params: Connect.Types.ListPredefinedAttributesRequest, callback?: (err: AWSError, data: Connect.Types.ListPredefinedAttributesResponse) => void): Request<Connect.Types.ListPredefinedAttributesResponse, AWSError>;
   /**
-   * Lists predefined attributes for the specified Amazon Connect instance.
+   * Lists predefined attributes for the specified Amazon Connect instance. Predefined attributes are attributes in an Amazon Connect instance that can be used to route contacts to an agent or pools of agents within a queue. For more information, see Create predefined attributes for routing contacts to agents.
    */
   listPredefinedAttributes(callback?: (err: AWSError, data: Connect.Types.ListPredefinedAttributesResponse) => void): Request<Connect.Types.ListPredefinedAttributesResponse, AWSError>;
   /**
@@ -1244,19 +1244,19 @@ declare class Connect extends Service {
    */
   listSecurityProfileApplications(callback?: (err: AWSError, data: Connect.Types.ListSecurityProfileApplicationsResponse) => void): Request<Connect.Types.ListSecurityProfileApplicationsResponse, AWSError>;
   /**
-   * Lists the permissions granted to a security profile.
+   * Lists the permissions granted to a security profile. For information about security profiles, see Security Profiles in the Amazon Connect Administrator Guide. For a mapping of the API name and user interface name of the security profile permissions, see List of security profile permissions. 
    */
   listSecurityProfilePermissions(params: Connect.Types.ListSecurityProfilePermissionsRequest, callback?: (err: AWSError, data: Connect.Types.ListSecurityProfilePermissionsResponse) => void): Request<Connect.Types.ListSecurityProfilePermissionsResponse, AWSError>;
   /**
-   * Lists the permissions granted to a security profile.
+   * Lists the permissions granted to a security profile. For information about security profiles, see Security Profiles in the Amazon Connect Administrator Guide. For a mapping of the API name and user interface name of the security profile permissions, see List of security profile permissions. 
    */
   listSecurityProfilePermissions(callback?: (err: AWSError, data: Connect.Types.ListSecurityProfilePermissionsResponse) => void): Request<Connect.Types.ListSecurityProfilePermissionsResponse, AWSError>;
   /**
-   * Provides summary information about the security profiles for the specified Amazon Connect instance. For more information about security profiles, see Security Profiles in the Amazon Connect Administrator Guide.
+   * Provides summary information about the security profiles for the specified Amazon Connect instance. For more information about security profiles, see Security Profiles in the Amazon Connect Administrator Guide. For a mapping of the API name and user interface name of the security profile permissions, see List of security profile permissions. 
    */
   listSecurityProfiles(params: Connect.Types.ListSecurityProfilesRequest, callback?: (err: AWSError, data: Connect.Types.ListSecurityProfilesResponse) => void): Request<Connect.Types.ListSecurityProfilesResponse, AWSError>;
   /**
-   * Provides summary information about the security profiles for the specified Amazon Connect instance. For more information about security profiles, see Security Profiles in the Amazon Connect Administrator Guide.
+   * Provides summary information about the security profiles for the specified Amazon Connect instance. For more information about security profiles, see Security Profiles in the Amazon Connect Administrator Guide. For a mapping of the API name and user interface name of the security profile permissions, see List of security profile permissions. 
    */
   listSecurityProfiles(callback?: (err: AWSError, data: Connect.Types.ListSecurityProfilesResponse) => void): Request<Connect.Types.ListSecurityProfilesResponse, AWSError>;
   /**
@@ -1444,11 +1444,11 @@ declare class Connect extends Service {
    */
   searchHoursOfOperations(callback?: (err: AWSError, data: Connect.Types.SearchHoursOfOperationsResponse) => void): Request<Connect.Types.SearchHoursOfOperationsResponse, AWSError>;
   /**
-   * Predefined attributes that meet certain criteria.
+   * Searches predefined attributes that meet certain criteria. Predefined attributes are attributes in an Amazon Connect instance that can be used to route contacts to an agent or pools of agents within a queue. For more information, see Create predefined attributes for routing contacts to agents.
    */
   searchPredefinedAttributes(params: Connect.Types.SearchPredefinedAttributesRequest, callback?: (err: AWSError, data: Connect.Types.SearchPredefinedAttributesResponse) => void): Request<Connect.Types.SearchPredefinedAttributesResponse, AWSError>;
   /**
-   * Predefined attributes that meet certain criteria.
+   * Searches predefined attributes that meet certain criteria. Predefined attributes are attributes in an Amazon Connect instance that can be used to route contacts to an agent or pools of agents within a queue. For more information, see Create predefined attributes for routing contacts to agents.
    */
   searchPredefinedAttributes(callback?: (err: AWSError, data: Connect.Types.SearchPredefinedAttributesResponse) => void): Request<Connect.Types.SearchPredefinedAttributesResponse, AWSError>;
   /**
@@ -1492,11 +1492,11 @@ declare class Connect extends Service {
    */
   searchRoutingProfiles(callback?: (err: AWSError, data: Connect.Types.SearchRoutingProfilesResponse) => void): Request<Connect.Types.SearchRoutingProfilesResponse, AWSError>;
   /**
-   * Searches security profiles in an Amazon Connect instance, with optional filtering.
+   * Searches security profiles in an Amazon Connect instance, with optional filtering. For information about security profiles, see Security Profiles in the Amazon Connect Administrator Guide. For a mapping of the API name and user interface name of the security profile permissions, see List of security profile permissions. 
    */
   searchSecurityProfiles(params: Connect.Types.SearchSecurityProfilesRequest, callback?: (err: AWSError, data: Connect.Types.SearchSecurityProfilesResponse) => void): Request<Connect.Types.SearchSecurityProfilesResponse, AWSError>;
   /**
-   * Searches security profiles in an Amazon Connect instance, with optional filtering.
+   * Searches security profiles in an Amazon Connect instance, with optional filtering. For information about security profiles, see Security Profiles in the Amazon Connect Administrator Guide. For a mapping of the API name and user interface name of the security profile permissions, see List of security profile permissions. 
    */
   searchSecurityProfiles(callback?: (err: AWSError, data: Connect.Types.SearchSecurityProfilesResponse) => void): Request<Connect.Types.SearchSecurityProfilesResponse, AWSError>;
   /**
@@ -1828,11 +1828,11 @@ declare class Connect extends Service {
    */
   updatePhoneNumberMetadata(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates a predefined attribute for the specified Amazon Connect instance.
+   * Updates a predefined attribute for the specified Amazon Connect instance. Predefined attributes are attributes in an Amazon Connect instance that can be used to route contacts to an agent or pools of agents within a queue. For more information, see Create predefined attributes for routing contacts to agents.
    */
   updatePredefinedAttribute(params: Connect.Types.UpdatePredefinedAttributeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates a predefined attribute for the specified Amazon Connect instance.
+   * Updates a predefined attribute for the specified Amazon Connect instance. Predefined attributes are attributes in an Amazon Connect instance that can be used to route contacts to an agent or pools of agents within a queue. For more information, see Create predefined attributes for routing contacts to agents.
    */
   updatePredefinedAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1948,11 +1948,11 @@ declare class Connect extends Service {
    */
   updateRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates a security profile.
+   * Updates a security profile. For information about security profiles, see Security Profiles in the Amazon Connect Administrator Guide. For a mapping of the API name and user interface name of the security profile permissions, see List of security profile permissions. 
    */
   updateSecurityProfile(params: Connect.Types.UpdateSecurityProfileRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates a security profile.
+   * Updates a security profile. For information about security profiles, see Security Profiles in the Amazon Connect Administrator Guide. For a mapping of the API name and user interface name of the security profile permissions, see List of security profile permissions. 
    */
   updateSecurityProfile(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -2307,7 +2307,7 @@ declare namespace Connect {
   export type AgentUsername = string;
   export interface AgentsCriteria {
     /**
-     * An object to specify a list of agents, by Agent ID.
+     * An object to specify a list of agents, by user ID.
      */
     AgentIds?: AgentIds;
   }
@@ -8652,7 +8652,7 @@ declare namespace Connect {
   export type Long = number;
   export interface MatchCriteria {
     /**
-     * An object to define AgentIds.
+     * An object to define agentIds.
      */
     AgentsCriteria?: AgentsCriteria;
   }
@@ -9861,6 +9861,29 @@ declare namespace Connect {
      */
     Index?: Index;
   }
+  export interface RoutingCriteriaInput {
+    /**
+     * When Amazon Connect does not find an available agent meeting the requirements in a step for&#x2028; a given step duration, the routing criteria will move on to the next step sequentially until a&#x2028; join is completed with an agent. When all steps are exhausted, the contact will be offered to any agent in the queue.
+     */
+    Steps?: RoutingCriteriaInputSteps;
+  }
+  export interface RoutingCriteriaInputStep {
+    /**
+     * An object to specify the expiration of a routing step.
+     */
+    Expiry?: RoutingCriteriaInputStepExpiry;
+    /**
+     * A tagged union to specify expression for a routing step.
+     */
+    Expression?: Expression;
+  }
+  export interface RoutingCriteriaInputStepExpiry {
+    /**
+     * The number of seconds that the contact will be routed only to agents matching this routing&#x2028; step, if expiry was configured for this routing step.
+     */
+    DurationInSeconds?: DurationInSeconds;
+  }
+  export type RoutingCriteriaInputSteps = RoutingCriteriaInputStep[];
   export type RoutingCriteriaStepStatus = "ACTIVE"|"INACTIVE"|"JOINED"|"EXPIRED"|string;
   export type RoutingExpression = string;
   export type RoutingExpressions = RoutingExpression[];
@@ -12254,6 +12277,10 @@ declare namespace Connect {
      * Priority of the contact in the queue. The default priority for new contacts is 5. You can raise the priority of a contact compared to other contacts in the queue by assigning them a higher priority, such as 1 or 2.
      */
     QueuePriority?: QueuePriority;
+    /**
+     * Updates the routing criteria on the contact. These properties can be used to change how a&#x2028; contact is routed within the queue.
+     */
+    RoutingCriteria?: RoutingCriteriaInput;
   }
   export interface UpdateContactRoutingDataResponse {
   }
