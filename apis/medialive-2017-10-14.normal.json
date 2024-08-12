@@ -13197,6 +13197,22 @@
         "VideoPid": {
           "shape": "__integer",
           "locationName": "videoPid"
+        },
+        "AribCaptionsPid": {
+          "shape": "__integer",
+          "locationName": "aribCaptionsPid"
+        },
+        "DvbTeletextPids": {
+          "shape": "__listOf__integer",
+          "locationName": "dvbTeletextPids"
+        },
+        "EcmPid": {
+          "shape": "__integer",
+          "locationName": "ecmPid"
+        },
+        "Smpte2038Pid": {
+          "shape": "__integer",
+          "locationName": "smpte2038Pid"
         }
       },
       "documentation": "Packet identifiers map for a given Multiplex program."
@@ -16485,6 +16501,10 @@
           "shape": "__string",
           "locationName": "name",
           "documentation": "Name of the multiplex."
+        },
+        "PacketIdentifiersMapping": {
+          "shape": "MultiplexPacketIdentifiersMapping",
+          "locationName": "packetIdentifiersMapping"
         }
       },
       "documentation": "A request to update a multiplex.",
@@ -20737,6 +20757,16 @@
         "shape": "SrtCallerSourceRequest"
       },
       "documentation": "Placeholder documentation for __listOfSrtCallerSourceRequest"
+    },
+    "MultiplexPacketIdentifiersMapping": {
+      "type": "map",
+      "key": {
+        "shape": "__string"
+      },
+      "value": {
+        "shape": "MultiplexProgramPacketIdentifiersMap"
+      },
+      "documentation": "Placeholder documentation for MultiplexPacketIdentifiersMapping"
     }
   },
   "documentation": "API for AWS Elemental MediaLive"

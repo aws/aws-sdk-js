@@ -5834,6 +5834,10 @@ The Multiplex must be in the same region as the Channel.
     Scte35Pid?: __integer;
     TimedMetadataPid?: __integer;
     VideoPid?: __integer;
+    AribCaptionsPid?: __integer;
+    DvbTeletextPids?: __listOf__integer;
+    EcmPid?: __integer;
+    Smpte2038Pid?: __integer;
   }
   export interface MultiplexProgramPipelineDetail {
     /**
@@ -7607,6 +7611,7 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
      * Name of the multiplex.
      */
     Name?: __string;
+    PacketIdentifiersMapping?: MultiplexPacketIdentifiersMapping;
   }
   export interface UpdateMultiplexResponse {
     /**
@@ -9315,6 +9320,7 @@ one destination per packager.
   }
   export type __listOfSrtCallerSource = SrtCallerSource[];
   export type __listOfSrtCallerSourceRequest = SrtCallerSourceRequest[];
+  export type MultiplexPacketIdentifiersMapping = {[key: string]: MultiplexProgramPacketIdentifiersMap};
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

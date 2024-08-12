@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1672.0-->
+<!--LATEST=2.1673.0-->
 <!--ENTRYINSERT-->
+
+## 2.1673.0
+* feature: ConfigService: Documentation update for the OrganizationConfigRuleName regex pattern.
+* feature: EC2: This release adds new capabilities to manage On-Demand Capacity Reservations including the ability to split your reservation, move capacity between reservations, and modify the instance eligibility of your reservation.
+* feature: EKS: Added support for new AL2023 GPU AMIs to the supported AMITypes.
+* feature: MediaLive: AWS Elemental MediaLive now supports now supports editing the PID values for a Multiplex.
+* feature: SageMaker: Releasing large data support as part of CreateAutoMLJobV2 in SageMaker Autopilot and CreateDomain API for SageMaker Canvas.
 
 ## 2.1672.0
 * feature: Connect: This release supports adding RoutingCriteria via UpdateContactRoutingData public API.

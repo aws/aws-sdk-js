@@ -713,7 +713,7 @@ declare namespace ComputeOptimizer {
      */
     name?: ECSServiceRecommendationFilterName;
     /**
-     *  The value of the filter.  The valid values for this parameter are as follows:   If you specify the name parameter as Finding, specify Optimized, NotOptimized, or Unavailable.   If you specify the name parameter as FindingReasonCode, specify CPUUnderprovisioned, CPUOverprovisioned, MemoryUnderprovisioned, or MemoryOverprovisioned.  
+     *  The value of the filter.  The valid values for this parameter are as follows:   If you specify the name parameter as Finding, specify Optimized, Underprovisioned, or Overprovisioned.   If you specify the name parameter as FindingReasonCode, specify CPUUnderprovisioned, CPUOverprovisioned, MemoryUnderprovisioned, or MemoryOverprovisioned.  
      */
     values?: FilterValues;
   }
@@ -2228,7 +2228,7 @@ declare namespace ComputeOptimizer {
      */
     externalMetricsPreference?: ExternalMetricsPreference;
     /**
-     *  The preference to control the number of days the utilization metrics of the Amazon Web Services resource are analyzed. When this preference isn't specified, we use the default value DAYS_14.   You can only set this preference for the Amazon EC2 instance and Auto Scaling group resource types. 
+     *  The preference to control the number of days the utilization metrics of the Amazon Web Services resource are analyzed. When this preference isn't specified, we use the default value DAYS_14.  You can only set this preference for the Amazon EC2 instance and Auto Scaling group resource types.     Amazon EC2 instance lookback preferences can be set at the organization, account, and resource levels.   Auto Scaling group lookback preferences can only be set at the resource level.   
      */
     lookBackPeriod?: LookBackPeriodPreference;
     /**
