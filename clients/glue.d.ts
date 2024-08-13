@@ -8485,6 +8485,10 @@ declare namespace Glue {
      * Specifies whether to include status details related to a request to create or update an Glue Data Catalog view.
      */
     IncludeStatusDetails?: BooleanNullable;
+    /**
+     *  Specifies the table fields returned by the GetTables call. This parameter doesn’t accept an empty list. The request must include NAME. The following are the valid combinations of values:    NAME - Names of all tables in the database.    NAME, TABLE_TYPE - Names of all tables and the table types.  
+     */
+    AttributesToGet?: TableAttributesList;
   }
   export interface GetTablesResponse {
     /**
@@ -13870,6 +13874,8 @@ declare namespace Glue {
     IsMultiDialectView?: NullableBoolean;
     Status?: TableStatus;
   }
+  export type TableAttributes = "NAME"|"TABLE_TYPE"|string;
+  export type TableAttributesList = TableAttributes[];
   export interface TableError {
     /**
      * The name of the table. For Hive compatibility, this must be entirely lowercase.

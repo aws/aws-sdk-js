@@ -596,6 +596,23 @@ declare namespace Fis {
     logGroupArn?: CloudWatchLogGroupArn;
   }
   export type ExperimentEndTime = Date;
+  export interface ExperimentError {
+    /**
+     * The Amazon Web Services Account ID where the experiment failure occurred.
+     */
+    accountId?: ExperimentErrorAccountId;
+    /**
+     * The error code for the failed experiment.
+     */
+    code?: ExperimentErrorCode;
+    /**
+     * Context for the section of the experiment template that failed.
+     */
+    location?: ExperimentErrorLocation;
+  }
+  export type ExperimentErrorAccountId = string;
+  export type ExperimentErrorCode = string;
+  export type ExperimentErrorLocation = string;
   export type ExperimentId = string;
   export interface ExperimentLogConfiguration {
     /**
@@ -645,6 +662,10 @@ declare namespace Fis {
      * The reason for the state.
      */
     reason?: ExperimentStatusReason;
+    /**
+     * The error information of the experiment when the action has failed.
+     */
+    error?: ExperimentError;
   }
   export type ExperimentStatus = "pending"|"initiating"|"running"|"completed"|"stopping"|"stopped"|"failed"|string;
   export type ExperimentStatusReason = string;

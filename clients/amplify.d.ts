@@ -408,6 +408,10 @@ declare namespace Amplify {
      *  This is for internal use.  The Amplify service uses this parameter to specify the authentication protocol to use to access the Git repository for an Amplify app. Amplify specifies TOKEN for a GitHub repository, SIGV4 for an Amazon Web Services CodeCommit repository, and SSH for GitLab and Bitbucket repositories.
      */
     repositoryCloneMethod?: RepositoryCloneMethod;
+    /**
+     * The cache configuration for the Amplify app. If you don't specify the cache configuration type, Amplify uses the default AMPLIFY_MANAGED setting.
+     */
+    cacheConfig?: CacheConfig;
   }
   export type AppArn = string;
   export type AppId = string;
@@ -626,9 +630,16 @@ declare namespace Amplify {
   export type BranchName = string;
   export type Branches = Branch[];
   export type BuildSpec = string;
+  export interface CacheConfig {
+    /**
+     * The type of cache configuration to use for an Amplify app. The AMPLIFY_MANAGED cache configuration automatically applies an optimized cache configuration for your app based on its platform, routing rules, and rewrite rules. This is the default setting. The AMPLIFY_MANAGED_NO_COOKIES cache configuration type is the same as AMPLIFY_MANAGED, except that it excludes all cookies from the cache key.
+     */
+    type: CacheConfigType;
+  }
+  export type CacheConfigType = "AMPLIFY_MANAGED"|"AMPLIFY_MANAGED_NO_COOKIES"|string;
   export interface Certificate {
     /**
-     * The type of SSL/TLS certificate that you want to use. Specify AMPLIFY_MANAGED to use the default certificate that Amplify provisions for you. Specify CUSTOM to use your own certificate that you have already added to Certificate Manager in your Amazon Web Services account. Make sure you request (or import) the certificate in the US East (N. Virginia) Region (us-east-1). For more information about using ACM, see Importing certificates into Certificate Manager in the ACM User guide .
+     * The type of SSL/TLS certificate that you want to use. Specify AMPLIFY_MANAGED to use the default certificate that Amplify provisions for you. Specify CUSTOM to use your own certificate that you have already added to Certificate Manager in your Amazon Web Services account. Make sure you request (or import) the certificate in the US East (N. Virginia) Region (us-east-1). For more information about using ACM, see Importing certificates into Certificate Manager in the ACM User guide.
      */
     type: CertificateType;
     /**
@@ -735,6 +746,10 @@ declare namespace Amplify {
      * The automated branch creation configuration for an Amplify app. 
      */
     autoBranchCreationConfig?: AutoBranchCreationConfig;
+    /**
+     * The cache configuration for the Amplify app.
+     */
+    cacheConfig?: CacheConfig;
   }
   export interface CreateAppResult {
     app: App;
@@ -1791,6 +1806,10 @@ declare namespace Amplify {
      * The personal access token for a GitHub repository for an Amplify app. The personal access token is used to authorize access to a GitHub repository using the Amplify GitHub App. The token is not stored. Use accessToken for GitHub repositories only. To authorize access to a repository provider such as Bitbucket or CodeCommit, use oauthToken. You must specify either accessToken or oauthToken when you update an app. Existing Amplify apps deployed from a GitHub repository using OAuth continue to work with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub App. For more information, see Migrating an existing OAuth app to the Amplify GitHub App in the Amplify User Guide .
      */
     accessToken?: AccessToken;
+    /**
+     * The cache configuration for the Amplify app.
+     */
+    cacheConfig?: CacheConfig;
   }
   export interface UpdateAppResult {
     /**

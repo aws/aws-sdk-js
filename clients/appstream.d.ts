@@ -157,6 +157,14 @@ declare class AppStream extends Service {
    */
   createStreamingURL(callback?: (err: AWSError, data: AppStream.Types.CreateStreamingURLResult) => void): Request<AppStream.Types.CreateStreamingURLResult, AWSError>;
   /**
+   * Creates custom branding that customizes the appearance of the streaming application catalog page.
+   */
+  createThemeForStack(params: AppStream.Types.CreateThemeForStackRequest, callback?: (err: AWSError, data: AppStream.Types.CreateThemeForStackResult) => void): Request<AppStream.Types.CreateThemeForStackResult, AWSError>;
+  /**
+   * Creates custom branding that customizes the appearance of the streaming application catalog page.
+   */
+  createThemeForStack(callback?: (err: AWSError, data: AppStream.Types.CreateThemeForStackResult) => void): Request<AppStream.Types.CreateThemeForStackResult, AWSError>;
+  /**
    * Creates a new image with the latest Windows operating system updates, driver updates, and AppStream 2.0 agent software. For more information, see the "Update an Image by Using Managed AppStream 2.0 Image Updates" section in Administer Your AppStream 2.0 Images, in the Amazon AppStream 2.0 Administration Guide.
    */
   createUpdatedImage(params: AppStream.Types.CreateUpdatedImageRequest, callback?: (err: AWSError, data: AppStream.Types.CreateUpdatedImageResult) => void): Request<AppStream.Types.CreateUpdatedImageResult, AWSError>;
@@ -260,6 +268,14 @@ declare class AppStream extends Service {
    * Deletes the specified stack. After the stack is deleted, the application streaming environment provided by the stack is no longer available to users. Also, any reservations made for application streaming sessions for the stack are released.
    */
   deleteStack(callback?: (err: AWSError, data: AppStream.Types.DeleteStackResult) => void): Request<AppStream.Types.DeleteStackResult, AWSError>;
+  /**
+   * Deletes custom branding that customizes the appearance of the streaming application catalog page.
+   */
+  deleteThemeForStack(params: AppStream.Types.DeleteThemeForStackRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteThemeForStackResult) => void): Request<AppStream.Types.DeleteThemeForStackResult, AWSError>;
+  /**
+   * Deletes custom branding that customizes the appearance of the streaming application catalog page.
+   */
+  deleteThemeForStack(callback?: (err: AWSError, data: AppStream.Types.DeleteThemeForStackResult) => void): Request<AppStream.Types.DeleteThemeForStackResult, AWSError>;
   /**
    * Disables usage report generation.
    */
@@ -380,6 +396,14 @@ declare class AppStream extends Service {
    * Retrieves a list that describes one or more specified stacks, if the stack names are provided. Otherwise, all stacks in the account are described.
    */
   describeStacks(callback?: (err: AWSError, data: AppStream.Types.DescribeStacksResult) => void): Request<AppStream.Types.DescribeStacksResult, AWSError>;
+  /**
+   * Retrieves a list that describes the theme for a specified stack. A theme is custom branding that customizes the appearance of the streaming application catalog page.
+   */
+  describeThemeForStack(params: AppStream.Types.DescribeThemeForStackRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeThemeForStackResult) => void): Request<AppStream.Types.DescribeThemeForStackResult, AWSError>;
+  /**
+   * Retrieves a list that describes the theme for a specified stack. A theme is custom branding that customizes the appearance of the streaming application catalog page.
+   */
+  describeThemeForStack(callback?: (err: AWSError, data: AppStream.Types.DescribeThemeForStackResult) => void): Request<AppStream.Types.DescribeThemeForStackResult, AWSError>;
   /**
    * Retrieves a list that describes one or more usage report subscriptions.
    */
@@ -612,6 +636,14 @@ declare class AppStream extends Service {
    * Updates the specified fields for the specified stack.
    */
   updateStack(callback?: (err: AWSError, data: AppStream.Types.UpdateStackResult) => void): Request<AppStream.Types.UpdateStackResult, AWSError>;
+  /**
+   * Updates custom branding that customizes the appearance of the streaming application catalog page.
+   */
+  updateThemeForStack(params: AppStream.Types.UpdateThemeForStackRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateThemeForStackResult) => void): Request<AppStream.Types.UpdateThemeForStackResult, AWSError>;
+  /**
+   * Updates custom branding that customizes the appearance of the streaming application catalog page.
+   */
+  updateThemeForStack(callback?: (err: AWSError, data: AppStream.Types.UpdateThemeForStackResult) => void): Request<AppStream.Types.UpdateThemeForStackResult, AWSError>;
   /**
    * Waits for the fleetStarted state by periodically calling the underlying AppStream.describeFleetsoperation every 30 seconds (at most 40 times).
    */
@@ -1270,7 +1302,7 @@ declare namespace AppStream {
      */
     ImageArn?: Arn;
     /**
-     * The instance type to use when launching fleet instances. The following instance types are available:   stream.standard.small   stream.standard.medium   stream.standard.large   stream.standard.xlarge   stream.standard.2xlarge   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.memory.z1d.large   stream.memory.z1d.xlarge   stream.memory.z1d.2xlarge   stream.memory.z1d.3xlarge   stream.memory.z1d.6xlarge   stream.memory.z1d.12xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics.g4dn.xlarge   stream.graphics.g4dn.2xlarge   stream.graphics.g4dn.4xlarge   stream.graphics.g4dn.8xlarge   stream.graphics.g4dn.12xlarge   stream.graphics.g4dn.16xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge   The following instance types are available for Elastic fleets:   stream.standard.small   stream.standard.medium   stream.standard.large   stream.standard.xlarge   stream.standard.2xlarge  
+     * The instance type to use when launching fleet instances. The following instance types are available:   stream.standard.small   stream.standard.medium   stream.standard.large   stream.standard.xlarge   stream.standard.2xlarge   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.memory.z1d.large   stream.memory.z1d.xlarge   stream.memory.z1d.2xlarge   stream.memory.z1d.3xlarge   stream.memory.z1d.6xlarge   stream.memory.z1d.12xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics.g4dn.xlarge   stream.graphics.g4dn.2xlarge   stream.graphics.g4dn.4xlarge   stream.graphics.g4dn.8xlarge   stream.graphics.g4dn.12xlarge   stream.graphics.g4dn.16xlarge   stream.graphics.g5.xlarge   stream.graphics.g5.2xlarge   stream.graphics.g5.4xlarge   stream.graphics.g5.8xlarge   stream.graphics.g5.12xlarge   stream.graphics.g5.16xlarge   stream.graphics.g5.24xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge   The following instance types are available for Elastic fleets:   stream.standard.small   stream.standard.medium   stream.standard.large   stream.standard.xlarge   stream.standard.2xlarge  
      */
     InstanceType: String;
     /**
@@ -1524,6 +1556,38 @@ declare namespace AppStream {
      */
     Expires?: Timestamp;
   }
+  export interface CreateThemeForStackRequest {
+    /**
+     * The name of the stack for the theme.
+     */
+    StackName: Name;
+    /**
+     * The links that are displayed in the footer of the streaming application catalog page. These links are helpful resources for users, such as the organization's IT support and product marketing sites.
+     */
+    FooterLinks?: ThemeFooterLinks;
+    /**
+     * The title that is displayed at the top of the browser tab during users' application streaming sessions.
+     */
+    TitleText: ThemeTitleText;
+    /**
+     * The color theme that is applied to website links, text, and buttons. These colors are also applied as accents in the background for the streaming application catalog page.
+     */
+    ThemeStyling: ThemeStyling;
+    /**
+     * The organization logo that appears on the streaming application catalog page.
+     */
+    OrganizationLogoS3Location: S3Location;
+    /**
+     * The S3 location of the favicon. The favicon enables users to recognize their application streaming site in a browser full of tabs or bookmarks. It is displayed at the top of the browser tab for the application streaming site during users' streaming sessions.
+     */
+    FaviconS3Location: S3Location;
+  }
+  export interface CreateThemeForStackResult {
+    /**
+     *  The theme object that contains the metadata of the custom branding.
+     */
+    Theme?: Theme;
+  }
   export interface CreateUpdatedImageRequest {
     /**
      * The name of the image to update.
@@ -1688,6 +1752,14 @@ declare namespace AppStream {
     Name: String;
   }
   export interface DeleteStackResult {
+  }
+  export interface DeleteThemeForStackRequest {
+    /**
+     * The name of the stack for the theme.
+     */
+    StackName: Name;
+  }
+  export interface DeleteThemeForStackResult {
   }
   export interface DeleteUsageReportSubscriptionRequest {
   }
@@ -2054,6 +2126,18 @@ declare namespace AppStream {
      */
     NextToken?: String;
   }
+  export interface DescribeThemeForStackRequest {
+    /**
+     * The name of the stack for the theme.
+     */
+    StackName: Name;
+  }
+  export interface DescribeThemeForStackResult {
+    /**
+     *  The theme object that contains the metadata of the custom branding.
+     */
+    Theme?: Theme;
+  }
   export interface DescribeUsageReportSubscriptionsRequest {
     /**
      * The maximum size of each page of results.
@@ -2233,6 +2317,7 @@ declare namespace AppStream {
     OrganizationalUnitDistinguishedName?: OrganizationalUnitDistinguishedName;
   }
   export type DomainList = Domain[];
+  export type DynamicAppProvidersEnabled = "ENABLED"|"DISABLED"|string;
   export type EmbedHostDomain = string;
   export type EmbedHostDomains = EmbedHostDomain[];
   export interface EnableUserRequest {
@@ -2504,6 +2589,22 @@ declare namespace AppStream {
      * Describes the errors that are returned when a new image can't be created.
      */
     ImageErrors?: ResourceErrors;
+    /**
+     * Indicates whether the image is using the latest AppStream 2.0 agent version or not.
+     */
+    LatestAppstreamAgentVersion?: LatestAppstreamAgentVersion;
+    /**
+     * The supported instances families that determine which image a customer can use when the customer launches a fleet or image builder. The following instances families are supported:   General Purpose   Compute Optimized   Memory Optimized   Graphics   Graphics Design   Graphics Pro   Graphics G4   Graphics G5  
+     */
+    SupportedInstanceFamilies?: StringList;
+    /**
+     * Indicates whether dynamic app providers are enabled within an AppStream 2.0 image or not.
+     */
+    DynamicAppProvidersEnabled?: DynamicAppProvidersEnabled;
+    /**
+     * Indicates whether the image is shared with another account ID.
+     */
+    ImageSharedWithOthers?: ImageSharedWithOthers;
   }
   export interface ImageBuilder {
     /**
@@ -2575,6 +2676,10 @@ declare namespace AppStream {
      * The list of virtual private cloud (VPC) interface endpoint objects. Administrators can connect to the image builder only through the specified endpoints.
      */
     AccessEndpoints?: AccessEndpointList;
+    /**
+     * Indicates whether the image builder is using the latest AppStream 2.0 agent version or not.
+     */
+    LatestAppstreamAgentVersion?: LatestAppstreamAgentVersion;
   }
   export type ImageBuilderList = ImageBuilder[];
   export type ImageBuilderState = "PENDING"|"UPDATING_AGENT"|"RUNNING"|"STOPPING"|"STOPPED"|"REBOOTING"|"SNAPSHOTTING"|"DELETING"|"FAILED"|"UPDATING"|"PENDING_QUALIFICATION"|string;
@@ -2600,6 +2705,7 @@ declare namespace AppStream {
      */
     allowImageBuilder?: BooleanObject;
   }
+  export type ImageSharedWithOthers = "TRUE"|"FALSE"|string;
   export type ImageState = "PENDING"|"AVAILABLE"|"FAILED"|"COPYING"|"DELETING"|"CREATING"|"IMPORTING"|string;
   export interface ImageStateChangeReason {
     /**
@@ -2624,6 +2730,7 @@ declare namespace AppStream {
     ErrorMessage?: String;
   }
   export type LastReportGenerationExecutionErrors = LastReportGenerationExecutionError[];
+  export type LatestAppstreamAgentVersion = "TRUE"|"FALSE"|string;
   export interface ListAssociatedFleetsRequest {
     /**
      * The name of the stack.
@@ -3024,6 +3131,58 @@ declare namespace AppStream {
   }
   export type TagValue = string;
   export type Tags = {[key: string]: TagValue};
+  export interface Theme {
+    /**
+     * The stack that has the custom branding theme.
+     */
+    StackName?: Name;
+    /**
+     * The state of the theme.
+     */
+    State?: ThemeState;
+    /**
+     * The browser tab page title.
+     */
+    ThemeTitleText?: ThemeTitleText;
+    /**
+     * The color that is used for the website links, text, buttons, and catalog page background.
+     */
+    ThemeStyling?: ThemeStyling;
+    /**
+     * The website links that display in the catalog page footer.
+     */
+    ThemeFooterLinks?: ThemeFooterLinks;
+    /**
+     * The URL of the logo that displays in the catalog page header.
+     */
+    ThemeOrganizationLogoURL?: String;
+    /**
+     * The URL of the icon that displays at the top of a user's browser tab during streaming sessions.
+     */
+    ThemeFaviconURL?: String;
+    /**
+     * The time the theme was created.
+     */
+    CreatedTime?: Timestamp;
+  }
+  export type ThemeAttribute = "FOOTER_LINKS"|string;
+  export type ThemeAttributes = ThemeAttribute[];
+  export interface ThemeFooterLink {
+    /**
+     * The name of the websites that display in the catalog page footer.
+     */
+    DisplayName?: ThemeFooterLinkDisplayName;
+    /**
+     * The URL of the websites that display in the catalog page footer.
+     */
+    FooterLinkURL?: ThemeFooterLinkURL;
+  }
+  export type ThemeFooterLinkDisplayName = string;
+  export type ThemeFooterLinkURL = string;
+  export type ThemeFooterLinks = ThemeFooterLink[];
+  export type ThemeState = "ENABLED"|"DISABLED"|string;
+  export type ThemeStyling = "LIGHT_BLUE"|"BLUE"|"PINK"|"RED"|string;
+  export type ThemeTitleText = string;
   export type Timestamp = Date;
   export interface UntagResourceRequest {
     /**
@@ -3346,6 +3505,46 @@ declare namespace AppStream {
      * Information about the stack.
      */
     Stack?: Stack;
+  }
+  export interface UpdateThemeForStackRequest {
+    /**
+     * The name of the stack for the theme.
+     */
+    StackName: Name;
+    /**
+     * The links that are displayed in the footer of the streaming application catalog page. These links are helpful resources for users, such as the organization's IT support and product marketing sites.
+     */
+    FooterLinks?: ThemeFooterLinks;
+    /**
+     * The title that is displayed at the top of the browser tab during users' application streaming sessions.
+     */
+    TitleText?: ThemeTitleText;
+    /**
+     * The color theme that is applied to website links, text, and buttons. These colors are also applied as accents in the background for the streaming application catalog page.
+     */
+    ThemeStyling?: ThemeStyling;
+    /**
+     * The organization logo that appears on the streaming application catalog page.
+     */
+    OrganizationLogoS3Location?: S3Location;
+    /**
+     * The S3 location of the favicon. The favicon enables users to recognize their application streaming site in a browser full of tabs or bookmarks. It is displayed at the top of the browser tab for the application streaming site during users' streaming sessions.
+     */
+    FaviconS3Location?: S3Location;
+    /**
+     * Specifies whether custom branding should be applied to catalog page or not.
+     */
+    State?: ThemeState;
+    /**
+     * The attributes to delete.
+     */
+    AttributesToDelete?: ThemeAttributes;
+  }
+  export interface UpdateThemeForStackResult {
+    /**
+     *  The theme object that contains the metadata of the custom branding.
+     */
+    Theme?: Theme;
   }
   export type UsageReportExecutionErrorCode = "RESOURCE_NOT_FOUND"|"ACCESS_DENIED"|"INTERNAL_SERVICE_ERROR"|string;
   export type UsageReportSchedule = "DAILY"|string;

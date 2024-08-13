@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1673.0-->
+<!--LATEST=2.1674.0-->
 <!--ENTRYINSERT-->
+
+## 2.1674.0
+* feature: Amplify: Add a new field "cacheConfig" that enables users to configure the CDN cache settings for an App
+* feature: AppStream: This release includes following new APIs: CreateThemeForStack, DescribeThemeForStack, UpdateThemeForStack, DeleteThemeForStack to support custom branding programmatically.
+* feature: Fis: This release adds support for additional error information on experiment failure. It adds the error code, location, and account id on relevant failures to the GetExperiment and ListExperiment API responses.
+* feature: Glue: Add AttributesToGet parameter support for Glue GetTables
 
 ## 2.1673.0
 * feature: ConfigService: Documentation update for the OrganizationConfigRuleName regex pattern.
