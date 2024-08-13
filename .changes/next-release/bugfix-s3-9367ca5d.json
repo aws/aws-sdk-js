@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "s3",
+  "description": "omit locationConstraint in createBucket to us-east-1"
+}
