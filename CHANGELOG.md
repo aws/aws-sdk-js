@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1674.0-->
+<!--LATEST=2.1675.0-->
 <!--ENTRYINSERT-->
+
+## 2.1675.0
+* bugfix: s3: omit locationConstraint in createBucket to us-east-1
+* feature: CodeBuild: AWS CodeBuild now supports using Secrets Manager to store git credentials and using multiple source credentials in a single project.
 
 ## 2.1674.0
 * feature: Amplify: Add a new field "cacheConfig" that enables users to configure the CDN cache settings for an App

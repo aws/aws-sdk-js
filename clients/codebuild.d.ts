@@ -196,11 +196,11 @@ declare class CodeBuild extends Service {
    */
   getResourcePolicy(callback?: (err: AWSError, data: CodeBuild.Types.GetResourcePolicyOutput) => void): Request<CodeBuild.Types.GetResourcePolicyOutput, AWSError>;
   /**
-   *  Imports the source repository credentials for an CodeBuild project that has its source code stored in a GitHub, GitHub Enterprise, or Bitbucket repository. 
+   *  Imports the source repository credentials for an CodeBuild project that has its source code stored in a GitHub, GitHub Enterprise, GitLab, GitLab Self Managed, or Bitbucket repository. 
    */
   importSourceCredentials(params: CodeBuild.Types.ImportSourceCredentialsInput, callback?: (err: AWSError, data: CodeBuild.Types.ImportSourceCredentialsOutput) => void): Request<CodeBuild.Types.ImportSourceCredentialsOutput, AWSError>;
   /**
-   *  Imports the source repository credentials for an CodeBuild project that has its source code stored in a GitHub, GitHub Enterprise, or Bitbucket repository. 
+   *  Imports the source repository credentials for an CodeBuild project that has its source code stored in a GitHub, GitHub Enterprise, GitLab, GitLab Self Managed, or Bitbucket repository. 
    */
   importSourceCredentials(callback?: (err: AWSError, data: CodeBuild.Types.ImportSourceCredentialsOutput) => void): Request<CodeBuild.Types.ImportSourceCredentialsOutput, AWSError>;
   /**
@@ -416,7 +416,7 @@ declare namespace CodeBuild {
   export type ArtifactNamespace = "NONE"|"BUILD_ID"|string;
   export type ArtifactPackaging = "NONE"|"ZIP"|string;
   export type ArtifactsType = "CODEPIPELINE"|"S3"|"NO_ARTIFACTS"|string;
-  export type AuthType = "OAUTH"|"BASIC_AUTH"|"PERSONAL_ACCESS_TOKEN"|"CODECONNECTIONS"|string;
+  export type AuthType = "OAUTH"|"BASIC_AUTH"|"PERSONAL_ACCESS_TOKEN"|"CODECONNECTIONS"|"SECRETS_MANAGER"|string;
   export interface BatchDeleteBuildsInput {
     /**
      * The IDs of the builds to delete.
@@ -1578,7 +1578,7 @@ declare namespace CodeBuild {
      */
     username?: NonEmptyString;
     /**
-     *  For GitHub or GitHub Enterprise, this is the personal access token. For Bitbucket, this is either the access token or the app password. For the authType CODECONNECTIONS, this is the connectionArn.
+     *  For GitHub or GitHub Enterprise, this is the personal access token. For Bitbucket, this is either the access token or the app password. For the authType CODECONNECTIONS, this is the connectionArn. For the authType SECRETS_MANAGER, this is the secretArn.
      */
     token: SensitiveNonEmptyString;
     /**
@@ -1586,7 +1586,7 @@ declare namespace CodeBuild {
      */
     serverType: ServerType;
     /**
-     *  The type of authentication used to connect to a GitHub, GitHub Enterprise, GitLab, GitLab Self Managed, or Bitbucket repository. An OAUTH connection is not supported by the API and must be created using the CodeBuild console. Note that CODECONNECTIONS is only valid for GitLab and GitLab Self Managed.
+     *  The type of authentication used to connect to a GitHub, GitHub Enterprise, GitLab, GitLab Self Managed, or Bitbucket repository. An OAUTH connection is not supported by the API and must be created using the CodeBuild console.
      */
     authType: AuthType;
     /**
@@ -2290,7 +2290,7 @@ declare namespace CodeBuild {
      */
     buildspec?: String;
     /**
-     * Information about the authorization settings for CodeBuild to access the source code to be built. This information is for the CodeBuild console's use only. Your code should not get or set this information directly.
+     * Information about the authorization settings for CodeBuild to access the source code to be built.
      */
     auth?: SourceAuth;
     /**
@@ -2629,7 +2629,7 @@ declare namespace CodeBuild {
   export type SortOrderType = "ASCENDING"|"DESCENDING"|string;
   export interface SourceAuth {
     /**
-     * The authorization type to use. Valid options are OAUTH or CODECONNECTIONS.
+     * The authorization type to use. Valid options are OAUTH, CODECONNECTIONS, or SECRETS_MANAGER.
      */
     type: SourceAuthType;
     /**
@@ -2637,7 +2637,7 @@ declare namespace CodeBuild {
      */
     resource?: String;
   }
-  export type SourceAuthType = "OAUTH"|"CODECONNECTIONS"|string;
+  export type SourceAuthType = "OAUTH"|"CODECONNECTIONS"|"SECRETS_MANAGER"|string;
   export interface SourceCredentialsInfo {
     /**
      *  The Amazon Resource Name (ARN) of the token. 
@@ -2648,11 +2648,11 @@ declare namespace CodeBuild {
      */
     serverType?: ServerType;
     /**
-     *  The type of authentication used by the credentials. Valid options are OAUTH, BASIC_AUTH, PERSONAL_ACCESS_TOKEN, or CODECONNECTIONS. 
+     *  The type of authentication used by the credentials. Valid options are OAUTH, BASIC_AUTH, PERSONAL_ACCESS_TOKEN, CODECONNECTIONS, or SECRETS_MANAGER. 
      */
     authType?: AuthType;
     /**
-     * The connection ARN if your serverType type is GITLAB or GITLAB_SELF_MANAGED and your authType is CODECONNECTIONS.
+     * The connection ARN if your authType is CODECONNECTIONS or SECRETS_MANAGER.
      */
     resource?: String;
   }
