@@ -301,6 +301,14 @@ declare class DocDB extends Service {
    */
   failoverDBCluster(callback?: (err: AWSError, data: DocDB.Types.FailoverDBClusterResult) => void): Request<DocDB.Types.FailoverDBClusterResult, AWSError>;
   /**
+   * Promotes the specified secondary DB cluster to be the primary DB cluster in the global cluster when failing over a global cluster occurs. Use this operation to respond to an unplanned event, such as a regional disaster in the primary region. Failing over can result in a loss of write transaction data that wasn't replicated to the chosen secondary before the failover event occurred. However, the recovery process that promotes a DB instance on the chosen seconday DB cluster to be the primary writer DB instance guarantees that the data is in a transactionally consistent state.
+   */
+  failoverGlobalCluster(params: DocDB.Types.FailoverGlobalClusterMessage, callback?: (err: AWSError, data: DocDB.Types.FailoverGlobalClusterResult) => void): Request<DocDB.Types.FailoverGlobalClusterResult, AWSError>;
+  /**
+   * Promotes the specified secondary DB cluster to be the primary DB cluster in the global cluster when failing over a global cluster occurs. Use this operation to respond to an unplanned event, such as a regional disaster in the primary region. Failing over can result in a loss of write transaction data that wasn't replicated to the chosen secondary before the failover event occurred. However, the recovery process that promotes a DB instance on the chosen seconday DB cluster to be the primary writer DB instance guarantees that the data is in a transactionally consistent state.
+   */
+  failoverGlobalCluster(callback?: (err: AWSError, data: DocDB.Types.FailoverGlobalClusterResult) => void): Request<DocDB.Types.FailoverGlobalClusterResult, AWSError>;
+  /**
    * Lists all tags on an Amazon DocumentDB resource.
    */
   listTagsForResource(params: DocDB.Types.ListTagsForResourceMessage, callback?: (err: AWSError, data: DocDB.Types.TagListMessage) => void): Request<DocDB.Types.TagListMessage, AWSError>;
@@ -1027,6 +1035,7 @@ declare namespace DocDB {
      */
     StorageType?: String;
   }
+  export type DBClusterIdentifier = string;
   export type DBClusterList = DBCluster[];
   export interface DBClusterMember {
     /**
@@ -2025,6 +2034,27 @@ declare namespace DocDB {
   export interface FailoverDBClusterResult {
     DBCluster?: DBCluster;
   }
+  export interface FailoverGlobalClusterMessage {
+    /**
+     * The identifier of the Amazon DocumentDB global cluster to apply this operation. The identifier is the unique key assigned by the user when the cluster is created. In other words, it's the name of the global cluster. Constraints:   Must match the identifier of an existing global cluster.   Minimum length of 1. Maximum length of 255.   Pattern: [A-Za-z][0-9A-Za-z-:._]* 
+     */
+    GlobalClusterIdentifier: GlobalClusterIdentifier;
+    /**
+     * The identifier of the secondary Amazon DocumentDB cluster that you want to promote to the primary for the global cluster. Use the Amazon Resource Name (ARN) for the identifier so that Amazon DocumentDB can locate the cluster in its Amazon Web Services region. Constraints:   Must match the identifier of an existing secondary cluster.   Minimum length of 1. Maximum length of 255.   Pattern: [A-Za-z][0-9A-Za-z-:._]* 
+     */
+    TargetDbClusterIdentifier: DBClusterIdentifier;
+    /**
+     * Specifies whether to allow data loss for this global cluster operation. Allowing data loss triggers a global failover operation. If you don't specify AllowDataLoss, the global cluster operation defaults to a switchover. Constraints:   Can't be specified together with the Switchover parameter.  
+     */
+    AllowDataLoss?: BooleanOptional;
+    /**
+     * Specifies whether to switch over this global database cluster. Constraints:   Can't be specified together with the AllowDataLoss parameter.  
+     */
+    Switchover?: BooleanOptional;
+  }
+  export interface FailoverGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
+  }
   export interface Filter {
     /**
      * The name of the filter. Filter names are case sensitive.
@@ -2756,7 +2786,7 @@ declare namespace DocDB {
     /**
      * The identifier of the secondary Amazon DocumentDB cluster to promote to the new primary for the global database cluster. Use the Amazon Resource Name (ARN) for the identifier so that Amazon DocumentDB can locate the cluster in its Amazon Web Services region. Constraints:   Must match the identifier of an existing secondary cluster.   Minimum length of 1. Maximum length of 255.   Pattern: [A-Za-z][0-9A-Za-z-:._]* 
      */
-    TargetDbClusterIdentifier: String;
+    TargetDbClusterIdentifier: DBClusterIdentifier;
   }
   export interface SwitchoverGlobalClusterResult {
     GlobalCluster?: GlobalCluster;
