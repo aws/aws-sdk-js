@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "Batch",
+        "description": "Improvements of integration between AWS Batch and EC2."
+    },
+    {
+        "type": "feature",
+        "category": "Inspector2",
+        "description": "Update the correct format of key and values for resource tags"
+    },
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "Amazon QuickSight launches Customer Managed Key (CMK) encryption for Data Source metadata"
+    },
+    {
+        "type": "feature",
+        "category": "SESV2",
+        "description": "Marking use case description field of account details as deprecated."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Introduce Endpoint and EndpointConfig Arns in sagemaker:ListPipelineExecutionSteps API response"
+    }
+]

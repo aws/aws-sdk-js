@@ -12252,6 +12252,12 @@ declare namespace SageMaker {
   export type EndpointConfigName = string;
   export type EndpointConfigNameContains = string;
   export type EndpointConfigSortKey = "Name"|"CreationTime"|string;
+  export interface EndpointConfigStepMetadata {
+    /**
+     * The Amazon Resource Name (ARN) of the endpoint configuration used in the step.
+     */
+    Arn?: EndpointConfigArn;
+  }
   export interface EndpointConfigSummary {
     /**
      * The name of the endpoint configuration.
@@ -12384,6 +12390,12 @@ declare namespace SageMaker {
   export type EndpointPerformances = EndpointPerformance[];
   export type EndpointSortKey = "Name"|"CreationTime"|"Status"|string;
   export type EndpointStatus = "OutOfService"|"Creating"|"Updating"|"SystemUpdating"|"RollingBack"|"InService"|"Deleting"|"Failed"|"UpdateRollbackFailed"|string;
+  export interface EndpointStepMetadata {
+    /**
+     * The Amazon Resource Name (ARN) of the endpoint in the step.
+     */
+    Arn?: EndpointArn;
+  }
   export interface EndpointSummary {
     /**
      * The name of the endpoint.
@@ -20588,6 +20600,14 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) of the AutoML job that was run by this step.
      */
     AutoMLJob?: AutoMLJobStepMetadata;
+    /**
+     * The endpoint that was invoked during this step execution.
+     */
+    Endpoint?: EndpointStepMetadata;
+    /**
+     * The endpoint configuration used to create an endpoint during this step execution.
+     */
+    EndpointConfig?: EndpointConfigStepMetadata;
   }
   export interface PipelineExecutionSummary {
     /**

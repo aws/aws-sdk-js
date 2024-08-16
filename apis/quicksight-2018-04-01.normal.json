@@ -357,6 +357,9 @@
           "shape": "ThrottlingException"
         },
         {
+          "shape": "CustomerManagedKeyUnavailableException"
+        },
+        {
           "shape": "InternalFailureException"
         }
       ],
@@ -5555,6 +5558,9 @@
         },
         {
           "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "CustomerManagedKeyUnavailableException"
         },
         {
           "shape": "InternalFailureException"

@@ -4481,11 +4481,13 @@ declare namespace Inspector2 {
   }
   export interface TagResourceResponse {
   }
-  export type TagValueList = String[];
+  export type TagValueList = TargetResourceTagsValue[];
   export type Target = string;
   export type TargetAccount = string;
   export type TargetAccountList = TargetAccount[];
   export type TargetResourceTags = {[key: string]: TagValueList};
+  export type TargetResourceTagsKey = string;
+  export type TargetResourceTagsValue = string;
   export type TargetStatusFilterList = CisTargetStatusFilter[];
   export type TargetStatusReasonFilterList = CisTargetStatusReasonFilter[];
   export type Targets = Target[];

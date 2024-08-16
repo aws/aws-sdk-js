@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1676.0-->
+<!--LATEST=2.1677.0-->
 <!--ENTRYINSERT-->
+
+## 2.1677.0
+* feature: Batch: Improvements of integration between AWS Batch and EC2.
+* feature: Inspector2: Update the correct format of key and values for resource tags
+* feature: QuickSight: Amazon QuickSight launches Customer Managed Key (CMK) encryption for Data Source metadata
+* feature: SESV2: Marking use case description field of account details as deprecated.
+* feature: SageMaker: Introduce Endpoint and EndpointConfig Arns in sagemaker:ListPipelineExecutionSteps API response
 
 ## 2.1676.0
 * feature: DocDB: This release adds Global Cluster Failover capability which enables you to change your global cluster's primary AWS region, the region that serves writes, during a regional outage. Performing a failover action preserves your Global Cluster setup.

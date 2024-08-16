@@ -3148,7 +3148,7 @@ declare namespace SESV2 {
     /**
      * A description of the types of email that you plan to send.
      */
-    UseCaseDescription: UseCaseDescription;
+    UseCaseDescription?: UseCaseDescription;
     /**
      * Additional email addresses that you would like to be notified regarding Amazon SES matters.
      */
