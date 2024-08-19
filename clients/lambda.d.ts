@@ -223,6 +223,14 @@ declare class Lambda extends Service {
    */
   getFunctionEventInvokeConfig(callback?: (err: AWSError, data: Lambda.Types.FunctionEventInvokeConfig) => void): Request<Lambda.Types.FunctionEventInvokeConfig, AWSError>;
   /**
+   * Returns your function's recursive loop detection configuration. 
+   */
+  getFunctionRecursionConfig(params: Lambda.Types.GetFunctionRecursionConfigRequest, callback?: (err: AWSError, data: Lambda.Types.GetFunctionRecursionConfigResponse) => void): Request<Lambda.Types.GetFunctionRecursionConfigResponse, AWSError>;
+  /**
+   * Returns your function's recursive loop detection configuration. 
+   */
+  getFunctionRecursionConfig(callback?: (err: AWSError, data: Lambda.Types.GetFunctionRecursionConfigResponse) => void): Request<Lambda.Types.GetFunctionRecursionConfigResponse, AWSError>;
+  /**
    * Returns details about a Lambda function URL.
    */
   getFunctionUrlConfig(params: Lambda.Types.GetFunctionUrlConfigRequest, callback?: (err: AWSError, data: Lambda.Types.GetFunctionUrlConfigResponse) => void): Request<Lambda.Types.GetFunctionUrlConfigResponse, AWSError>;
@@ -438,6 +446,14 @@ declare class Lambda extends Service {
    * Configures options for asynchronous invocation on a function, version, or alias. If a configuration already exists for a function, version, or alias, this operation overwrites it. If you exclude any settings, they are removed. To set one option without affecting existing settings for other options, use UpdateFunctionEventInvokeConfig. By default, Lambda retries an asynchronous invocation twice if the function returns an error. It retains events in a queue for up to six hours. When an event fails all processing attempts or stays in the asynchronous invocation queue for too long, Lambda discards it. To retain discarded events, configure a dead-letter queue with UpdateFunctionConfiguration. To send an invocation record to a queue, topic, function, or event bus, specify a destination. You can configure separate destinations for successful invocations (on-success) and events that fail all processing attempts (on-failure). You can configure destinations in addition to or instead of a dead-letter queue.
    */
   putFunctionEventInvokeConfig(callback?: (err: AWSError, data: Lambda.Types.FunctionEventInvokeConfig) => void): Request<Lambda.Types.FunctionEventInvokeConfig, AWSError>;
+  /**
+   * Sets your function's recursive loop detection configuration. When you configure a Lambda function to output to the same service or resource that invokes the function, it's possible to create an infinite recursive loop. For example, a Lambda function might write a message to an Amazon Simple Queue Service (Amazon SQS) queue, which then invokes the same function. This invocation causes the function to write another message to the queue, which in turn invokes the function again. Lambda can detect certain types of recursive loops shortly after they occur. When Lambda detects a recursive loop and your function's recursive loop detection configuration is set to Terminate, it stops your function being invoked and notifies you.
+   */
+  putFunctionRecursionConfig(params: Lambda.Types.PutFunctionRecursionConfigRequest, callback?: (err: AWSError, data: Lambda.Types.PutFunctionRecursionConfigResponse) => void): Request<Lambda.Types.PutFunctionRecursionConfigResponse, AWSError>;
+  /**
+   * Sets your function's recursive loop detection configuration. When you configure a Lambda function to output to the same service or resource that invokes the function, it's possible to create an infinite recursive loop. For example, a Lambda function might write a message to an Amazon Simple Queue Service (Amazon SQS) queue, which then invokes the same function. This invocation causes the function to write another message to the queue, which in turn invokes the function again. Lambda can detect certain types of recursive loops shortly after they occur. When Lambda detects a recursive loop and your function's recursive loop detection configuration is set to Terminate, it stops your function being invoked and notifies you.
+   */
+  putFunctionRecursionConfig(callback?: (err: AWSError, data: Lambda.Types.PutFunctionRecursionConfigResponse) => void): Request<Lambda.Types.PutFunctionRecursionConfigResponse, AWSError>;
   /**
    * Adds a provisioned concurrency configuration to a function's alias or version.
    */
@@ -912,7 +928,7 @@ declare namespace Lambda {
      */
     FilterCriteria?: FilterCriteria;
     /**
-     * The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function. You can configure MaximumBatchingWindowInSeconds to any value from 0 seconds to 300 seconds in increments of seconds. For streams and Amazon SQS event sources, the default batching window is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, Amazon MQ, and DocumentDB event sources, the default batching window is 500 ms. Note that because you can only change MaximumBatchingWindowInSeconds in increments of seconds, you cannot revert back to the 500 ms default batching window after you have changed it. To restore the default batching window, you must create a new event source mapping. Related setting: For streams and Amazon SQS event sources, when you set BatchSize to a value greater than 10, you must set MaximumBatchingWindowInSeconds to at least 1.
+     * The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function. You can configure MaximumBatchingWindowInSeconds to any value from 0 seconds to 300 seconds in increments of seconds. For Kinesis, DynamoDB, and Amazon SQS event sources, the default batching window is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, Amazon MQ, and DocumentDB event sources, the default batching window is 500 ms. Note that because you can only change MaximumBatchingWindowInSeconds in increments of seconds, you cannot revert back to the 500 ms default batching window after you have changed it. To restore the default batching window, you must create a new event source mapping. Related setting: For Kinesis, DynamoDB, and Amazon SQS event sources, when you set BatchSize to a value greater than 10, you must set MaximumBatchingWindowInSeconds to at least 1.
      */
     MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
     /**
@@ -990,7 +1006,7 @@ declare namespace Lambda {
      */
     FunctionName: FunctionName;
     /**
-     * The identifier of the function's runtime. Runtime is required if the deployment package is a .zip file archive. The following list includes deprecated runtimes. For more information, see Runtime deprecation policy.
+     * The identifier of the function's  runtime. Runtime is required if the deployment package is a .zip file archive. Specifying a runtime results in an error if you're deploying a function using a container image. The following list includes deprecated runtimes. Lambda blocks creating new functions and updating existing functions shortly after each runtime is deprecated. For more information, see Runtime use after deprecation. For a list of all currently supported runtimes, see Supported runtimes.
      */
     Runtime?: Runtime;
     /**
@@ -1482,7 +1498,7 @@ declare namespace Lambda {
      */
     FunctionArn?: NameSpacedFunctionArn;
     /**
-     * The identifier of the function's runtime. Runtime is required if the deployment package is a .zip file archive. The following list includes deprecated runtimes. For more information, see Runtime deprecation policy.
+     * The identifier of the function's  runtime. Runtime is required if the deployment package is a .zip file archive. Specifying a runtime results in an error if you're deploying a function using a container image. The following list includes deprecated runtimes. Lambda blocks creating new functions and updating existing functions shortly after each runtime is deprecated. For more information, see Runtime use after deprecation. For a list of all currently supported runtimes, see Supported runtimes.
      */
     Runtime?: Runtime;
     /**
@@ -1768,6 +1784,18 @@ declare namespace Lambda {
      */
     Qualifier?: Qualifier;
   }
+  export interface GetFunctionRecursionConfigRequest {
+    /**
+     * 
+     */
+    FunctionName: UnqualifiedFunctionName;
+  }
+  export interface GetFunctionRecursionConfigResponse {
+    /**
+     * If your function's recursive loop detection configuration is Allow, Lambda doesn't take any action when it detects your function being invoked as part of a recursive loop. If your function's recursive loop detection configuration is Terminate, Lambda stops your function being invoked and notifies you when it detects your function being invoked as part of a recursive loop. By default, Lambda sets your function's configuration to Terminate. You can update this configuration using the PutFunctionRecursionConfig action.
+     */
+    RecursiveLoop?: RecursiveLoop;
+  }
   export interface GetFunctionRequest {
     /**
      * The name or ARN of the Lambda function, version, or alias.  Name formats     Function name – my-function (name-only), my-function:v1 (with alias).    Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function.    Partial ARN – 123456789012:function:my-function.   You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
@@ -1898,7 +1926,7 @@ declare namespace Lambda {
      */
     Version?: LayerVersionNumber;
     /**
-     * The layer's compatible runtimes. The following list includes deprecated runtimes. For more information, see Runtime deprecation policy.
+     * The layer's compatible runtimes. The following list includes deprecated runtimes. For more information, see Runtime use after deprecation. For a list of all currently supported runtimes, see Supported runtimes.
      */
     CompatibleRuntimes?: CompatibleRuntimes;
     /**
@@ -2248,7 +2276,7 @@ declare namespace Lambda {
      */
     CreatedDate?: Timestamp;
     /**
-     * The layer's compatible runtimes. The following list includes deprecated runtimes. For more information, see Runtime deprecation policy.
+     * The layer's compatible runtimes. The following list includes deprecated runtimes. For more information, see Runtime use after deprecation. For a list of all currently supported runtimes, see Supported runtimes.
      */
     CompatibleRuntimes?: CompatibleRuntimes;
     /**
@@ -2455,7 +2483,7 @@ declare namespace Lambda {
   }
   export interface ListLayerVersionsRequest {
     /**
-     * A runtime identifier. For example, java21. The following list includes deprecated runtimes. For more information, see Runtime deprecation policy.
+     * A runtime identifier. The following list includes deprecated runtimes. For more information, see Runtime use after deprecation. For a list of all currently supported runtimes, see Supported runtimes.
      */
     CompatibleRuntime?: Runtime;
     /**
@@ -2487,7 +2515,7 @@ declare namespace Lambda {
   }
   export interface ListLayersRequest {
     /**
-     * A runtime identifier. For example, java21. The following list includes deprecated runtimes. For more information, see Runtime deprecation policy.
+     * A runtime identifier. The following list includes deprecated runtimes. For more information, see Runtime use after deprecation. For a list of all currently supported runtimes, see Supported runtimes.
      */
     CompatibleRuntime?: Runtime;
     /**
@@ -2720,7 +2748,7 @@ declare namespace Lambda {
      */
     Version?: LayerVersionNumber;
     /**
-     * The layer's compatible runtimes. The following list includes deprecated runtimes. For more information, see Runtime deprecation policy.
+     * The layer's compatible runtimes. The following list includes deprecated runtimes. For more information, see Runtime use after deprecation. For a list of all currently supported runtimes, see Supported runtimes.
      */
     CompatibleRuntimes?: CompatibleRuntimes;
     /**
@@ -2802,6 +2830,22 @@ declare namespace Lambda {
      */
     DestinationConfig?: DestinationConfig;
   }
+  export interface PutFunctionRecursionConfigRequest {
+    /**
+     * The name or ARN of the Lambda function.  Name formats     Function name – my-function.    Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function.    Partial ARN – 123456789012:function:my-function.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     */
+    FunctionName: UnqualifiedFunctionName;
+    /**
+     * If you set your function's recursive loop detection configuration to Allow, Lambda doesn't take any action when it detects your function being invoked as part of a recursive loop. We recommend that you only use this setting if your design intentionally uses a Lambda function to write data back to the same Amazon Web Services resource that invokes it. If you set your function's recursive loop detection configuration to Terminate, Lambda stops your function being invoked and notifies you when it detects your function being invoked as part of a recursive loop. By default, Lambda sets your function's configuration to Terminate.  If your design intentionally uses a Lambda function to write data back to the same Amazon Web Services resource that invokes the function, then use caution and implement suitable guard rails to prevent unexpected charges being billed to your Amazon Web Services account. To learn more about best practices for using recursive invocation patterns, see Recursive patterns that cause run-away Lambda functions in Serverless Land. 
+     */
+    RecursiveLoop: RecursiveLoop;
+  }
+  export interface PutFunctionRecursionConfigResponse {
+    /**
+     * The status of your function's recursive loop detection configuration. When this value is set to Allowand Lambda detects your function being invoked as part of a recursive loop, it doesn't take any action. When this value is set to Terminate and Lambda detects your function being invoked as part of a recursive loop, it stops your function being invoked and notifies you. 
+     */
+    RecursiveLoop?: RecursiveLoop;
+  }
   export interface PutProvisionedConcurrencyConfigRequest {
     /**
      * The name or ARN of the Lambda function.  Name formats     Function name – my-function.    Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function.    Partial ARN – 123456789012:function:my-function.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
@@ -2877,6 +2921,7 @@ declare namespace Lambda {
   export type Qualifier = string;
   export type Queue = string;
   export type Queues = Queue[];
+  export type RecursiveLoop = "Allow"|"Terminate"|string;
   export interface RemoveLayerVersionPermissionRequest {
     /**
      * The name or Amazon Resource Name (ARN) of the layer.
@@ -3037,6 +3082,7 @@ declare namespace Lambda {
   export type TracingMode = "Active"|"PassThrough"|string;
   export type TumblingWindowInSeconds = number;
   export type URI = string;
+  export type UnqualifiedFunctionName = string;
   export type UnreservedConcurrentExecutions = number;
   export interface UntagResourceRequest {
     /**
@@ -3120,7 +3166,7 @@ declare namespace Lambda {
      */
     FilterCriteria?: FilterCriteria;
     /**
-     * The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function. You can configure MaximumBatchingWindowInSeconds to any value from 0 seconds to 300 seconds in increments of seconds. For streams and Amazon SQS event sources, the default batching window is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, Amazon MQ, and DocumentDB event sources, the default batching window is 500 ms. Note that because you can only change MaximumBatchingWindowInSeconds in increments of seconds, you cannot revert back to the 500 ms default batching window after you have changed it. To restore the default batching window, you must create a new event source mapping. Related setting: For streams and Amazon SQS event sources, when you set BatchSize to a value greater than 10, you must set MaximumBatchingWindowInSeconds to at least 1.
+     * The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function. You can configure MaximumBatchingWindowInSeconds to any value from 0 seconds to 300 seconds in increments of seconds. For Kinesis, DynamoDB, and Amazon SQS event sources, the default batching window is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, Amazon MQ, and DocumentDB event sources, the default batching window is 500 ms. Note that because you can only change MaximumBatchingWindowInSeconds in increments of seconds, you cannot revert back to the 500 ms default batching window after you have changed it. To restore the default batching window, you must create a new event source mapping. Related setting: For Kinesis, DynamoDB, and Amazon SQS event sources, when you set BatchSize to a value greater than 10, you must set MaximumBatchingWindowInSeconds to at least 1.
      */
     MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
     /**
@@ -3240,7 +3286,7 @@ declare namespace Lambda {
      */
     Environment?: Environment;
     /**
-     * The identifier of the function's runtime. Runtime is required if the deployment package is a .zip file archive. The following list includes deprecated runtimes. For more information, see Runtime deprecation policy.
+     * The identifier of the function's  runtime. Runtime is required if the deployment package is a .zip file archive. Specifying a runtime results in an error if you're deploying a function using a container image. The following list includes deprecated runtimes. Lambda blocks creating new functions and updating existing functions shortly after each runtime is deprecated. For more information, see Runtime use after deprecation. For a list of all currently supported runtimes, see Supported runtimes.
      */
     Runtime?: Runtime;
     /**

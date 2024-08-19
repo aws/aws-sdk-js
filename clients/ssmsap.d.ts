@@ -220,7 +220,12 @@ declare namespace SsmSap {
      * The status message.
      */
     StatusMessage?: String;
+    /**
+     * The Amazon Resource Names of the associated AWS Systems Manager for SAP applications.
+     */
+    AssociatedApplicationArns?: ApplicationArnList;
   }
+  export type ApplicationArnList = SsmSapArn[];
   export interface ApplicationCredential {
     /**
      * The name of the SAP HANA database.
@@ -377,6 +382,7 @@ declare namespace SsmSap {
      */
     Arn?: SsmSapArn;
   }
+  export type ComponentArnList = SsmSapArn[];
   export type ComponentId = string;
   export type ComponentIdList = ComponentId[];
   export type ComponentStatus = "ACTIVATED"|"STARTING"|"STOPPED"|"STOPPING"|"RUNNING"|"RUNNING_WITH_ERROR"|"UNDEFINED"|string;
@@ -451,6 +457,10 @@ declare namespace SsmSap {
      * The time at which the database was last updated.
      */
     LastUpdated?: Timestamp;
+    /**
+     * The Amazon Resource Names of the connected AWS Systems Manager for SAP components.
+     */
+    ConnectedComponentArns?: ComponentArnList;
   }
   export interface DatabaseConnection {
     /**

@@ -1053,6 +1053,10 @@ declare namespace CodeBuild {
     overflowBehavior?: FleetOverflowBehavior;
     vpcConfig?: VpcConfig;
     /**
+     * The Amazon Machine Image (AMI) of the compute fleet.
+     */
+    imageId?: NonEmptyString;
+    /**
      * The service role associated with the compute fleet. For more information, see  Allow a user to add a permission policy for a fleet service role in the CodeBuild User Guide.
      */
     fleetServiceRole?: NonEmptyString;
@@ -1415,7 +1419,7 @@ declare namespace CodeBuild {
     languages?: EnvironmentLanguages;
   }
   export type EnvironmentPlatforms = EnvironmentPlatform[];
-  export type EnvironmentType = "WINDOWS_CONTAINER"|"LINUX_CONTAINER"|"LINUX_GPU_CONTAINER"|"ARM_CONTAINER"|"WINDOWS_SERVER_2019_CONTAINER"|"LINUX_LAMBDA_CONTAINER"|"ARM_LAMBDA_CONTAINER"|string;
+  export type EnvironmentType = "WINDOWS_CONTAINER"|"LINUX_CONTAINER"|"LINUX_GPU_CONTAINER"|"ARM_CONTAINER"|"WINDOWS_SERVER_2019_CONTAINER"|"LINUX_LAMBDA_CONTAINER"|"ARM_LAMBDA_CONTAINER"|"MAC_ARM"|string;
   export interface EnvironmentVariable {
     /**
      * The name or key of the environment variable.
@@ -1493,6 +1497,10 @@ declare namespace CodeBuild {
     overflowBehavior?: FleetOverflowBehavior;
     vpcConfig?: VpcConfig;
     /**
+     * The Amazon Machine Image (AMI) of the compute fleet.
+     */
+    imageId?: NonEmptyString;
+    /**
      * The service role associated with the compute fleet. For more information, see  Allow a user to add a permission policy for a fleet service role in the CodeBuild User Guide.
      */
     fleetServiceRole?: NonEmptyString;
@@ -1503,7 +1511,7 @@ declare namespace CodeBuild {
   }
   export type FleetArns = NonEmptyString[];
   export type FleetCapacity = number;
-  export type FleetContextCode = "CREATE_FAILED"|"UPDATE_FAILED"|"ACTION_REQUIRED"|string;
+  export type FleetContextCode = "CREATE_FAILED"|"UPDATE_FAILED"|"ACTION_REQUIRED"|"PENDING_DELETION"|"INSUFFICIENT_CAPACITY"|string;
   export type FleetName = string;
   export type FleetNames = NonEmptyString[];
   export type FleetOverflowBehavior = "QUEUE"|"ON_DEMAND"|string;
@@ -3059,6 +3067,10 @@ declare namespace CodeBuild {
      */
     overflowBehavior?: FleetOverflowBehavior;
     vpcConfig?: VpcConfig;
+    /**
+     * The Amazon Machine Image (AMI) of the compute fleet.
+     */
+    imageId?: NonEmptyString;
     /**
      * The service role associated with the compute fleet. For more information, see  Allow a user to add a permission policy for a fleet service role in the CodeBuild User Guide.
      */

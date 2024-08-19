@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1677.0-->
+<!--LATEST=2.1678.0-->
 <!--ENTRYINSERT-->
+
+## 2.1678.0
+* feature: Bedrock: Amazon Bedrock Batch Inference/ Model Invocation is a feature which allows customers to asynchronously run inference on a large set of records/files stored in S3.
+* feature: CodeBuild: AWS CodeBuild now supports creating fleets with macOS platform for running builds.
+* feature: Deadline: This release adds additional search fields and provides sorting by multiple fields.
+* feature: Lambda: Release Lambda FunctionRecursiveConfig, enabling customers to turn recursive loop detection on or off on individual functions. This release adds two new APIs, GetFunctionRecursionConfig and PutFunctionRecursionConfig.
+* feature: SsmSap: Add new attributes to the outputs of GetApplication and GetDatabase APIs.
 
 ## 2.1677.0
 * feature: Batch: Improvements of integration between AWS Batch and EC2.

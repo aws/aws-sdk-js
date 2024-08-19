@@ -2036,6 +2036,10 @@
         "vpcConfig": {
           "shape": "VpcConfig"
         },
+        "imageId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Machine Image (AMI) of the compute fleet.</p>"
+        },
         "fleetServiceRole": {
           "shape": "NonEmptyString",
           "documentation": "<p>The service role associated with the compute fleet. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-permission-policy-fleet-service-role.html\"> Allow a user to add a permission policy for a fleet service role</a> in the <i>CodeBuild User Guide</i>.</p>"
@@ -2565,7 +2569,8 @@
         "ARM_CONTAINER",
         "WINDOWS_SERVER_2019_CONTAINER",
         "LINUX_LAMBDA_CONTAINER",
-        "ARM_LAMBDA_CONTAINER"
+        "ARM_LAMBDA_CONTAINER",
+        "MAC_ARM"
       ]
     },
     "EnvironmentVariable": {
@@ -2692,6 +2697,10 @@
         "vpcConfig": {
           "shape": "VpcConfig"
         },
+        "imageId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Machine Image (AMI) of the compute fleet.</p>"
+        },
         "fleetServiceRole": {
           "shape": "NonEmptyString",
           "documentation": "<p>The service role associated with the compute fleet. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-permission-policy-fleet-service-role.html\"> Allow a user to add a permission policy for a fleet service role</a> in the <i>CodeBuild User Guide</i>.</p>"
@@ -2720,7 +2729,9 @@
       "enum": [
         "CREATE_FAILED",
         "UPDATE_FAILED",
-        "ACTION_REQUIRED"
+        "ACTION_REQUIRED",
+        "PENDING_DELETION",
+        "INSUFFICIENT_CAPACITY"
       ]
     },
     "FleetName": {
@@ -5071,6 +5082,10 @@
         },
         "vpcConfig": {
           "shape": "VpcConfig"
+        },
+        "imageId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Machine Image (AMI) of the compute fleet.</p>"
         },
         "fleetServiceRole": {
           "shape": "NonEmptyString",

@@ -52,6 +52,14 @@ declare class Bedrock extends Service {
    */
   createModelCustomizationJob(callback?: (err: AWSError, data: Bedrock.Types.CreateModelCustomizationJobResponse) => void): Request<Bedrock.Types.CreateModelCustomizationJobResponse, AWSError>;
   /**
+   * Creates a job to invoke a model on multiple prompts (batch inference). Format your data according to Format your inference data and upload it to an Amazon S3 bucket. For more information, see Create a batch inference job. The response returns a jobArn that you can use to stop or get details about the job. You can check the status of the job by sending a GetModelCustomizationJob request.
+   */
+  createModelInvocationJob(params: Bedrock.Types.CreateModelInvocationJobRequest, callback?: (err: AWSError, data: Bedrock.Types.CreateModelInvocationJobResponse) => void): Request<Bedrock.Types.CreateModelInvocationJobResponse, AWSError>;
+  /**
+   * Creates a job to invoke a model on multiple prompts (batch inference). Format your data according to Format your inference data and upload it to an Amazon S3 bucket. For more information, see Create a batch inference job. The response returns a jobArn that you can use to stop or get details about the job. You can check the status of the job by sending a GetModelCustomizationJob request.
+   */
+  createModelInvocationJob(callback?: (err: AWSError, data: Bedrock.Types.CreateModelInvocationJobResponse) => void): Request<Bedrock.Types.CreateModelInvocationJobResponse, AWSError>;
+  /**
    * Creates dedicated throughput for a base or custom model with the model units and for the duration that you specify. For pricing details, see Amazon Bedrock Pricing. For more information, see Provisioned Throughput in the Amazon Bedrock User Guide.
    */
   createProvisionedModelThroughput(params: Bedrock.Types.CreateProvisionedModelThroughputRequest, callback?: (err: AWSError, data: Bedrock.Types.CreateProvisionedModelThroughputResponse) => void): Request<Bedrock.Types.CreateProvisionedModelThroughputResponse, AWSError>;
@@ -140,6 +148,14 @@ declare class Bedrock extends Service {
    */
   getModelCustomizationJob(callback?: (err: AWSError, data: Bedrock.Types.GetModelCustomizationJobResponse) => void): Request<Bedrock.Types.GetModelCustomizationJobResponse, AWSError>;
   /**
+   * Gets details about a batch inference job. For more information, see View details about a batch inference job 
+   */
+  getModelInvocationJob(params: Bedrock.Types.GetModelInvocationJobRequest, callback?: (err: AWSError, data: Bedrock.Types.GetModelInvocationJobResponse) => void): Request<Bedrock.Types.GetModelInvocationJobResponse, AWSError>;
+  /**
+   * Gets details about a batch inference job. For more information, see View details about a batch inference job 
+   */
+  getModelInvocationJob(callback?: (err: AWSError, data: Bedrock.Types.GetModelInvocationJobResponse) => void): Request<Bedrock.Types.GetModelInvocationJobResponse, AWSError>;
+  /**
    * Get the current configuration values for model invocation logging.
    */
   getModelInvocationLoggingConfiguration(params: Bedrock.Types.GetModelInvocationLoggingConfigurationRequest, callback?: (err: AWSError, data: Bedrock.Types.GetModelInvocationLoggingConfigurationResponse) => void): Request<Bedrock.Types.GetModelInvocationLoggingConfigurationResponse, AWSError>;
@@ -204,6 +220,14 @@ declare class Bedrock extends Service {
    */
   listModelCustomizationJobs(callback?: (err: AWSError, data: Bedrock.Types.ListModelCustomizationJobsResponse) => void): Request<Bedrock.Types.ListModelCustomizationJobsResponse, AWSError>;
   /**
+   * Lists all batch inference jobs in the account. For more information, see View details about a batch inference job.
+   */
+  listModelInvocationJobs(params: Bedrock.Types.ListModelInvocationJobsRequest, callback?: (err: AWSError, data: Bedrock.Types.ListModelInvocationJobsResponse) => void): Request<Bedrock.Types.ListModelInvocationJobsResponse, AWSError>;
+  /**
+   * Lists all batch inference jobs in the account. For more information, see View details about a batch inference job.
+   */
+  listModelInvocationJobs(callback?: (err: AWSError, data: Bedrock.Types.ListModelInvocationJobsResponse) => void): Request<Bedrock.Types.ListModelInvocationJobsResponse, AWSError>;
+  /**
    * Lists the Provisioned Throughputs in the account. For more information, see Provisioned Throughput in the Amazon Bedrock User Guide.
    */
   listProvisionedModelThroughputs(params: Bedrock.Types.ListProvisionedModelThroughputsRequest, callback?: (err: AWSError, data: Bedrock.Types.ListProvisionedModelThroughputsResponse) => void): Request<Bedrock.Types.ListProvisionedModelThroughputsResponse, AWSError>;
@@ -243,6 +267,14 @@ declare class Bedrock extends Service {
    * Stops an active model customization job. For more information, see Custom models in the Amazon Bedrock User Guide.
    */
   stopModelCustomizationJob(callback?: (err: AWSError, data: Bedrock.Types.StopModelCustomizationJobResponse) => void): Request<Bedrock.Types.StopModelCustomizationJobResponse, AWSError>;
+  /**
+   * Stops a batch inference job. You're only charged for tokens that were already processed. For more information, see Stop a batch inference job.
+   */
+  stopModelInvocationJob(params: Bedrock.Types.StopModelInvocationJobRequest, callback?: (err: AWSError, data: Bedrock.Types.StopModelInvocationJobResponse) => void): Request<Bedrock.Types.StopModelInvocationJobResponse, AWSError>;
+  /**
+   * Stops a batch inference job. You're only charged for tokens that were already processed. For more information, see Stop a batch inference job.
+   */
+  stopModelInvocationJob(callback?: (err: AWSError, data: Bedrock.Types.StopModelInvocationJobResponse) => void): Request<Bedrock.Types.StopModelInvocationJobResponse, AWSError>;
   /**
    * Associate tags with a resource. For more information, see Tagging resources in the Amazon Bedrock User Guide.
    */
@@ -531,6 +563,46 @@ declare namespace Bedrock {
      * Amazon Resource Name (ARN) of the fine tuning job
      */
     jobArn: ModelCustomizationJobArn;
+  }
+  export interface CreateModelInvocationJobRequest {
+    /**
+     * A name to give the batch inference job.
+     */
+    jobName: ModelInvocationJobName;
+    /**
+     * The Amazon Resource Name (ARN) of the service role with permissions to carry out and manage batch inference. You can use the console to create a default service role or follow the steps at Create a service role for batch inference.
+     */
+    roleArn: RoleArn;
+    /**
+     * A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see Ensuring idempotency.
+     */
+    clientRequestToken?: ModelInvocationIdempotencyToken;
+    /**
+     * The unique identifier of the foundation model to use for the batch inference job.
+     */
+    modelId: ModelId;
+    /**
+     * Details about the location of the input to the batch inference job.
+     */
+    inputDataConfig: ModelInvocationJobInputDataConfig;
+    /**
+     * Details about the location of the output of the batch inference job.
+     */
+    outputDataConfig: ModelInvocationJobOutputDataConfig;
+    /**
+     * The number of hours after which to force the batch inference job to time out.
+     */
+    timeoutDurationInHours?: ModelInvocationJobTimeoutDurationInHours;
+    /**
+     * Any tags to associate with the batch inference job. For more information, see Tagging Amazon Bedrock resources.
+     */
+    tags?: TagList;
+  }
+  export interface CreateModelInvocationJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the batch inference job.
+     */
+    jobArn: ModelInvocationJobArn;
   }
   export interface CreateProvisionedModelThroughputRequest {
     /**
@@ -1206,6 +1278,70 @@ declare namespace Bedrock {
      * VPC configuration for the custom model job.
      */
     vpcConfig?: VpcConfig;
+  }
+  export interface GetModelInvocationJobRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the batch inference job.
+     */
+    jobIdentifier: ModelInvocationJobIdentifier;
+  }
+  export interface GetModelInvocationJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the batch inference job.
+     */
+    jobArn: ModelInvocationJobArn;
+    /**
+     * The name of the batch inference job.
+     */
+    jobName?: ModelInvocationJobName;
+    /**
+     * The unique identifier of the foundation model used for model inference.
+     */
+    modelId: ModelId;
+    /**
+     * A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see Ensuring idempotency.
+     */
+    clientRequestToken?: ModelInvocationIdempotencyToken;
+    /**
+     * The Amazon Resource Name (ARN) of the service role with permissions to carry out and manage batch inference. You can use the console to create a default service role or follow the steps at Create a service role for batch inference.
+     */
+    roleArn: RoleArn;
+    /**
+     * The status of the batch inference job.
+     */
+    status?: ModelInvocationJobStatus;
+    /**
+     * If the batch inference job failed, this field contains a message describing why the job failed.
+     */
+    message?: Message;
+    /**
+     * The time at which the batch inference job was submitted.
+     */
+    submitTime: Timestamp;
+    /**
+     * The time at which the batch inference job was last modified.
+     */
+    lastModifiedTime?: Timestamp;
+    /**
+     * The time at which the batch inference job ended.
+     */
+    endTime?: Timestamp;
+    /**
+     * Details about the location of the input to the batch inference job.
+     */
+    inputDataConfig: ModelInvocationJobInputDataConfig;
+    /**
+     * Details about the location of the output of the batch inference job.
+     */
+    outputDataConfig: ModelInvocationJobOutputDataConfig;
+    /**
+     * The number of hours after which batch inference job was set to time out.
+     */
+    timeoutDurationInHours?: ModelInvocationJobTimeoutDurationInHours;
+    /**
+     * The time at which the batch inference job times or timed out.
+     */
+    jobExpirationTime?: Timestamp;
   }
   export interface GetModelInvocationLoggingConfigurationRequest {
   }
@@ -1886,6 +2022,50 @@ declare namespace Bedrock {
      */
     modelCustomizationJobSummaries?: ModelCustomizationJobSummaries;
   }
+  export interface ListModelInvocationJobsRequest {
+    /**
+     * Specify a time to filter for batch inference jobs that were submitted after the time you specify.
+     */
+    submitTimeAfter?: Timestamp;
+    /**
+     * Specify a time to filter for batch inference jobs that were submitted before the time you specify.
+     */
+    submitTimeBefore?: Timestamp;
+    /**
+     * Specify a status to filter for batch inference jobs whose statuses match the string you specify.
+     */
+    statusEquals?: ModelInvocationJobStatus;
+    /**
+     * Specify a string to filter for batch inference jobs whose names contain the string.
+     */
+    nameContains?: ModelInvocationJobName;
+    /**
+     * The maximum number of results to return. If there are more results than the number that you specify, a nextToken value is returned. Use the nextToken in a request to return the next batch of results.
+     */
+    maxResults?: MaxResults;
+    /**
+     * If there were more results than the value you specified in the maxResults field in a previous ListModelInvocationJobs request, the response would have returned a nextToken value. To see the next batch of results, send the nextToken value in another request.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * An attribute by which to sort the results.
+     */
+    sortBy?: SortJobsBy;
+    /**
+     * Specifies whether to sort the results by ascending or descending order.
+     */
+    sortOrder?: SortOrder;
+  }
+  export interface ListModelInvocationJobsResponse {
+    /**
+     * If there are more results than can fit in the response, a nextToken is returned. Use the nextToken in a request to return the next batch of results.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * A list of items, each of which contains a summary about a batch inference job.
+     */
+    invocationJobSummaries?: ModelInvocationJobSummaries;
+  }
   export interface ListProvisionedModelThroughputsRequest {
     /**
      * A filter that returns Provisioned Throughputs created after the specified time. 
@@ -1970,6 +2150,7 @@ declare namespace Bedrock {
     embeddingDataDeliveryEnabled?: Boolean;
   }
   export type MaxResults = number;
+  export type Message = string;
   export type MetricFloat = number;
   export type ModelArn = string;
   export type ModelCopyJobArn = string;
@@ -2070,7 +2251,105 @@ declare namespace Bedrock {
     customizationType?: CustomizationType;
   }
   export type ModelCustomizationList = ModelCustomization[];
+  export type ModelId = string;
   export type ModelIdentifier = string;
+  export type ModelInvocationIdempotencyToken = string;
+  export type ModelInvocationJobArn = string;
+  export type ModelInvocationJobIdentifier = string;
+  export interface ModelInvocationJobInputDataConfig {
+    /**
+     * Contains the configuration of the S3 location of the input data.
+     */
+    s3InputDataConfig?: ModelInvocationJobS3InputDataConfig;
+  }
+  export type ModelInvocationJobName = string;
+  export interface ModelInvocationJobOutputDataConfig {
+    /**
+     * Contains the configuration of the S3 location of the output data.
+     */
+    s3OutputDataConfig?: ModelInvocationJobS3OutputDataConfig;
+  }
+  export interface ModelInvocationJobS3InputDataConfig {
+    /**
+     * The format of the input data.
+     */
+    s3InputFormat?: S3InputFormat;
+    /**
+     * The S3 location of the input data.
+     */
+    s3Uri: S3Uri;
+  }
+  export interface ModelInvocationJobS3OutputDataConfig {
+    /**
+     * The S3 location of the output data.
+     */
+    s3Uri: S3Uri;
+    /**
+     * The unique identifier of the key that encrypts the S3 location of the output data.
+     */
+    s3EncryptionKeyId?: KmsKeyId;
+  }
+  export type ModelInvocationJobStatus = "Submitted"|"InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped"|"PartiallyCompleted"|"Expired"|"Validating"|"Scheduled"|string;
+  export type ModelInvocationJobSummaries = ModelInvocationJobSummary[];
+  export interface ModelInvocationJobSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the batch inference job.
+     */
+    jobArn: ModelInvocationJobArn;
+    /**
+     * The name of the batch inference job.
+     */
+    jobName: ModelInvocationJobName;
+    /**
+     * The unique identifier of the foundation model used for model inference.
+     */
+    modelId: ModelId;
+    /**
+     * A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see Ensuring idempotency.
+     */
+    clientRequestToken?: ModelInvocationIdempotencyToken;
+    /**
+     * The Amazon Resource Name (ARN) of the service role with permissions to carry out and manage batch inference. You can use the console to create a default service role or follow the steps at Create a service role for batch inference.
+     */
+    roleArn: RoleArn;
+    /**
+     * The status of the batch inference job.
+     */
+    status?: ModelInvocationJobStatus;
+    /**
+     * If the batch inference job failed, this field contains a message describing why the job failed.
+     */
+    message?: Message;
+    /**
+     * The time at which the batch inference job was submitted.
+     */
+    submitTime: Timestamp;
+    /**
+     * The time at which the batch inference job was last modified.
+     */
+    lastModifiedTime?: Timestamp;
+    /**
+     * The time at which the batch inference job ended.
+     */
+    endTime?: Timestamp;
+    /**
+     * Details about the location of the input to the batch inference job.
+     */
+    inputDataConfig: ModelInvocationJobInputDataConfig;
+    /**
+     * Details about the location of the output of the batch inference job.
+     */
+    outputDataConfig: ModelInvocationJobOutputDataConfig;
+    /**
+     * The number of hours after which the batch inference job was set to time out.
+     */
+    timeoutDurationInHours?: ModelInvocationJobTimeoutDurationInHours;
+    /**
+     * The time at which the batch inference job times or timed out.
+     */
+    jobExpirationTime?: Timestamp;
+  }
+  export type ModelInvocationJobTimeoutDurationInHours = number;
   export type ModelModality = "TEXT"|"IMAGE"|"EMBEDDING"|string;
   export type ModelModalityList = ModelModality[];
   export type ModelName = string;
@@ -2157,6 +2436,7 @@ declare namespace Bedrock {
      */
     keyPrefix?: KeyPrefix;
   }
+  export type S3InputFormat = "JSONL"|string;
   export type S3Uri = string;
   export type SageMakerFlowDefinitionArn = string;
   export type SecurityGroupId = string;
@@ -2180,6 +2460,14 @@ declare namespace Bedrock {
     jobIdentifier: ModelCustomizationJobIdentifier;
   }
   export interface StopModelCustomizationJobResponse {
+  }
+  export interface StopModelInvocationJobRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the batch inference job to stop.
+     */
+    jobIdentifier: ModelInvocationJobIdentifier;
+  }
+  export interface StopModelInvocationJobResponse {
   }
   export type String = string;
   export type SubnetId = string;

@@ -125,11 +125,11 @@ declare class Deadline extends Service {
    */
   createFleet(callback?: (err: AWSError, data: Deadline.Types.CreateFleetResponse) => void): Request<Deadline.Types.CreateFleetResponse, AWSError>;
   /**
-   * Creates a job. A job is a render submission submitted by a user. It contains specific job properties outlined as steps and tasks.
+   * Creates a job. A job is a set of instructions that AWS Deadline Cloud uses to schedule and run work on available workers. For more information, see Deadline Cloud jobs.
    */
   createJob(params: Deadline.Types.CreateJobRequest, callback?: (err: AWSError, data: Deadline.Types.CreateJobResponse) => void): Request<Deadline.Types.CreateJobResponse, AWSError>;
   /**
-   * Creates a job. A job is a render submission submitted by a user. It contains specific job properties outlined as steps and tasks.
+   * Creates a job. A job is a set of instructions that AWS Deadline Cloud uses to schedule and run work on available workers. For more information, see Deadline Cloud jobs.
    */
   createJob(callback?: (err: AWSError, data: Deadline.Types.CreateJobResponse) => void): Request<Deadline.Types.CreateJobResponse, AWSError>;
   /**
@@ -237,11 +237,11 @@ declare class Deadline extends Service {
    */
   deleteMonitor(callback?: (err: AWSError, data: Deadline.Types.DeleteMonitorResponse) => void): Request<Deadline.Types.DeleteMonitorResponse, AWSError>;
   /**
-   * Deletes a queue.
+   * Deletes a queue.  You can't recover the jobs in a queue if you delete the queue. Deleting the queue also deletes the jobs in that queue. 
    */
   deleteQueue(params: Deadline.Types.DeleteQueueRequest, callback?: (err: AWSError, data: Deadline.Types.DeleteQueueResponse) => void): Request<Deadline.Types.DeleteQueueResponse, AWSError>;
   /**
-   * Deletes a queue.
+   * Deletes a queue.  You can't recover the jobs in a queue if you delete the queue. Deleting the queue also deletes the jobs in that queue. 
    */
   deleteQueue(callback?: (err: AWSError, data: Deadline.Types.DeleteQueueResponse) => void): Request<Deadline.Types.DeleteQueueResponse, AWSError>;
   /**
@@ -693,11 +693,11 @@ declare class Deadline extends Service {
    */
   searchWorkers(callback?: (err: AWSError, data: Deadline.Types.SearchWorkersResponse) => void): Request<Deadline.Types.SearchWorkersResponse, AWSError>;
   /**
-   * Starts an asynchronous request for getting aggregated statistics about queues and farms. Get the statistics using the GetSessionsStatisticsAggregation operation. Statistics are available for 1 hour after you call the StartSessionsStatisticsAggregation operation.
+   * Starts an asynchronous request for getting aggregated statistics about queues and farms. Get the statistics using the GetSessionsStatisticsAggregation operation. You can only have one running aggregation for your Deadline Cloud farm. Call the GetSessionsStatisticsAggregation operation and check the status field to see if an aggregation is running. Statistics are available for 1 hour after you call the StartSessionsStatisticsAggregation operation.
    */
   startSessionsStatisticsAggregation(params: Deadline.Types.StartSessionsStatisticsAggregationRequest, callback?: (err: AWSError, data: Deadline.Types.StartSessionsStatisticsAggregationResponse) => void): Request<Deadline.Types.StartSessionsStatisticsAggregationResponse, AWSError>;
   /**
-   * Starts an asynchronous request for getting aggregated statistics about queues and farms. Get the statistics using the GetSessionsStatisticsAggregation operation. Statistics are available for 1 hour after you call the StartSessionsStatisticsAggregation operation.
+   * Starts an asynchronous request for getting aggregated statistics about queues and farms. Get the statistics using the GetSessionsStatisticsAggregation operation. You can only have one running aggregation for your Deadline Cloud farm. Call the GetSessionsStatisticsAggregation operation and check the status field to see if an aggregation is running. Statistics are available for 1 hour after you call the StartSessionsStatisticsAggregation operation.
    */
   startSessionsStatisticsAggregation(callback?: (err: AWSError, data: Deadline.Types.StartSessionsStatisticsAggregationResponse) => void): Request<Deadline.Types.StartSessionsStatisticsAggregationResponse, AWSError>;
   /**
@@ -741,11 +741,11 @@ declare class Deadline extends Service {
    */
   updateFleet(callback?: (err: AWSError, data: Deadline.Types.UpdateFleetResponse) => void): Request<Deadline.Types.UpdateFleetResponse, AWSError>;
   /**
-   * Updates a job.
+   * Updates a job.  When you change the status of the job to ARCHIVED, the job can't be scheduled or archived.  An archived jobs and its steps and tasks are deleted after 120 days. The job can't be recovered. 
    */
   updateJob(params: Deadline.Types.UpdateJobRequest, callback?: (err: AWSError, data: Deadline.Types.UpdateJobResponse) => void): Request<Deadline.Types.UpdateJobResponse, AWSError>;
   /**
-   * Updates a job.
+   * Updates a job.  When you change the status of the job to ARCHIVED, the job can't be scheduled or archived.  An archived jobs and its steps and tasks are deleted after 120 days. The job can't be recovered. 
    */
   updateJob(callback?: (err: AWSError, data: Deadline.Types.UpdateJobResponse) => void): Request<Deadline.Types.UpdateJobResponse, AWSError>;
   /**
@@ -888,23 +888,23 @@ declare class Deadline extends Service {
 declare namespace Deadline {
   export interface AcceleratorCountRange {
     /**
-     * The maximum GPU for the accelerator.
-     */
-    max?: MinZeroMaxInteger;
-    /**
      * The minimum GPU for the accelerator.
      */
     min: MinZeroMaxInteger;
-  }
-  export interface AcceleratorTotalMemoryMiBRange {
     /**
-     * The maximum amount of memory to use for the accelerator, measured in MiB.
+     * The maximum GPU for the accelerator.
      */
     max?: MinZeroMaxInteger;
+  }
+  export interface AcceleratorTotalMemoryMiBRange {
     /**
      * The minimum amount of memory to use for the accelerator, measured in MiB.
      */
     min: MinZeroMaxInteger;
+    /**
+     * The maximum amount of memory to use for the accelerator, measured in MiB.
+     */
+    max?: MinZeroMaxInteger;
   }
   export type AcceleratorType = "gpu"|string;
   export type AcceleratorTypes = AcceleratorType[];
@@ -926,31 +926,31 @@ declare namespace Deadline {
   }
   export interface AssignedSession {
     /**
-     * The job ID for the assigned session.
-     */
-    jobId: JobId;
-    /**
-     * The log configuration for the worker's assigned session.
-     */
-    logConfiguration: LogConfiguration;
-    /**
      * The queue ID of the assigned session.
      */
     queueId: QueueId;
     /**
+     * The job ID for the assigned session.
+     */
+    jobId: JobId;
+    /**
      * The session actions to apply to the assigned session.
      */
     sessionActions: AssignedSessionActions;
+    /**
+     * The log configuration for the worker's assigned session.
+     */
+    logConfiguration: LogConfiguration;
   }
   export interface AssignedSessionAction {
-    /**
-     * The definition of the assigned session action.
-     */
-    definition: AssignedSessionActionDefinition;
     /**
      * The session action ID for the assigned session.
      */
     sessionActionId: SessionActionId;
+    /**
+     * The definition of the assigned session action.
+     */
+    definition: AssignedSessionActionDefinition;
   }
   export interface AssignedSessionActionDefinition {
     /**
@@ -962,13 +962,13 @@ declare namespace Deadline {
      */
     envExit?: AssignedEnvironmentExitSessionActionDefinition;
     /**
-     * The job attachment to sync with an assigned session action.
-     */
-    syncInputJobAttachments?: AssignedSyncInputJobAttachmentsSessionActionDefinition;
-    /**
      * The task run.
      */
     taskRun?: AssignedTaskRunSessionActionDefinition;
+    /**
+     * The job attachment to sync with an assigned session action.
+     */
+    syncInputJobAttachments?: AssignedSyncInputJobAttachmentsSessionActionDefinition;
   }
   export type AssignedSessionActions = AssignedSessionAction[];
   export type AssignedSessions = {[key: string]: AssignedSession};
@@ -980,31 +980,23 @@ declare namespace Deadline {
   }
   export interface AssignedTaskRunSessionActionDefinition {
     /**
-     * The parameters to include.
+     * The task ID.
      */
-    parameters: TaskParameters;
+    taskId: TaskId;
     /**
      * The step ID.
      */
     stepId: StepId;
     /**
-     * The task ID.
+     * The parameters to include.
      */
-    taskId: TaskId;
+    parameters: TaskParameters;
   }
   export interface AssociateMemberToFarmRequest {
     /**
      * The ID of the farm to associate with the member.
      */
     farmId: FarmId;
-    /**
-     * The identity store ID of the member to associate with the farm.
-     */
-    identityStoreId: IdentityStoreId;
-    /**
-     * The principal's membership level for the associated farm.
-     */
-    membershipLevel: MembershipLevel;
     /**
      * The member's principal ID to associate with the farm.
      */
@@ -1013,6 +1005,14 @@ declare namespace Deadline {
      * The principal type of the member to associate with the farm.
      */
     principalType: PrincipalType;
+    /**
+     * The identity store ID of the member to associate with the farm.
+     */
+    identityStoreId: IdentityStoreId;
+    /**
+     * The principal's membership level for the associated farm.
+     */
+    membershipLevel: MembershipLevel;
   }
   export interface AssociateMemberToFarmResponse {
   }
@@ -1026,14 +1026,6 @@ declare namespace Deadline {
      */
     fleetId: FleetId;
     /**
-     * The member's identity store ID to associate with the fleet.
-     */
-    identityStoreId: IdentityStoreId;
-    /**
-     * The principal's membership level for the associated fleet.
-     */
-    membershipLevel: MembershipLevel;
-    /**
      * The member's principal ID to associate with a fleet.
      */
     principalId: IdentityCenterPrincipalId;
@@ -1041,6 +1033,14 @@ declare namespace Deadline {
      * The member's principal type to associate with the fleet.
      */
     principalType: PrincipalType;
+    /**
+     * The member's identity store ID to associate with the fleet.
+     */
+    identityStoreId: IdentityStoreId;
+    /**
+     * The principal's membership level for the associated fleet.
+     */
+    membershipLevel: MembershipLevel;
   }
   export interface AssociateMemberToFleetResponse {
   }
@@ -1050,17 +1050,13 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The member's identity store ID to associate with the job.
+     * The queue ID to associate to the member.
      */
-    identityStoreId: IdentityStoreId;
+    queueId: QueueId;
     /**
      * The job ID to associate with the member.
      */
     jobId: JobId;
-    /**
-     * The principal's membership level for the associated job.
-     */
-    membershipLevel: MembershipLevel;
     /**
      * The member's principal ID to associate with the job.
      */
@@ -1070,9 +1066,13 @@ declare namespace Deadline {
      */
     principalType: PrincipalType;
     /**
-     * The queue ID to associate to the member.
+     * The member's identity store ID to associate with the job.
      */
-    queueId: QueueId;
+    identityStoreId: IdentityStoreId;
+    /**
+     * The principal's membership level for the associated job.
+     */
+    membershipLevel: MembershipLevel;
   }
   export interface AssociateMemberToJobResponse {
   }
@@ -1082,13 +1082,9 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The member's identity store ID to associate with the queue.
+     * The ID of the queue to associate to the member.
      */
-    identityStoreId: IdentityStoreId;
-    /**
-     * The principal's membership level for the associated queue.
-     */
-    membershipLevel: MembershipLevel;
+    queueId: QueueId;
     /**
      * The member's principal ID to associate with the queue.
      */
@@ -1098,9 +1094,13 @@ declare namespace Deadline {
      */
     principalType: PrincipalType;
     /**
-     * The ID of the queue to associate to the member.
+     * The member's identity store ID to associate with the queue.
      */
-    queueId: QueueId;
+    identityStoreId: IdentityStoreId;
+    /**
+     * The principal's membership level for the associated queue.
+     */
+    membershipLevel: MembershipLevel;
   }
   export interface AssociateMemberToQueueResponse {
   }
@@ -1182,13 +1182,13 @@ declare namespace Deadline {
      */
     fleetId: FleetId;
     /**
-     * The queue ID of the worker assuming the queue role.
-     */
-    queueId: QueueId;
-    /**
      * The worker ID of the worker assuming the queue role.
      */
     workerId: WorkerId;
+    /**
+     * The queue ID of the worker assuming the queue role.
+     */
+    queueId: QueueId;
   }
   export interface AssumeQueueRoleForWorkerResponse {
     /**
@@ -1198,13 +1198,13 @@ declare namespace Deadline {
   }
   export interface Attachments {
     /**
-     * The file system.
-     */
-    fileSystem?: JobAttachmentsFileSystem;
-    /**
      * A list of manifests which describe job attachment configurations.
      */
     manifests: ManifestPropertiesList;
+    /**
+     * The file system.
+     */
+    fileSystem?: JobAttachmentsFileSystem;
   }
   export type AttributeCapabilityName = string;
   export type AttributeCapabilityValue = string;
@@ -1217,10 +1217,6 @@ declare namespace Deadline {
      */
     accessKeyId: AccessKeyId;
     /**
-     * The expiration date and time of the IAM credentials.
-     */
-    expiration: SyntheticTimestamp_date_time;
-    /**
      * The IAM secret access key.
      */
     secretAccessKey: SecretAccessKey;
@@ -1228,6 +1224,10 @@ declare namespace Deadline {
      * The IAM session token
      */
     sessionToken: SessionToken;
+    /**
+     * The expiration date and time of the IAM credentials.
+     */
+    expiration: SyntheticTimestamp_date_time;
   }
   export type BatchGetJobEntityErrors = GetJobEntityError[];
   export type BatchGetJobEntityList = JobEntity[];
@@ -1241,13 +1241,13 @@ declare namespace Deadline {
      */
     fleetId: FleetId;
     /**
-     * The job identifiers to include within the job entity batch details.
-     */
-    identifiers: JobEntityIdentifiers;
-    /**
      * The worker ID of the worker containing the job details to get.
      */
     workerId: WorkerId;
+    /**
+     * The job identifiers to include within the job entity batch details.
+     */
+    identifiers: JobEntityIdentifiers;
   }
   export interface BatchGetJobEntityResponse {
     /**
@@ -1262,27 +1262,27 @@ declare namespace Deadline {
   export type BoundedString = string;
   export interface BudgetActionToAdd {
     /**
-     * A description for the budget action to add.
+     * The type of budget action to add.
      */
-    description?: Description;
+    type: BudgetActionType;
     /**
      * The percentage threshold for the budget action to add.
      */
     thresholdPercentage: ThresholdPercentage;
     /**
-     * The type of budget action to add.
+     * A description for the budget action to add.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
      */
-    type: BudgetActionType;
+    description?: Description;
   }
   export interface BudgetActionToRemove {
-    /**
-     * The percentage threshold for the budget action to remove.
-     */
-    thresholdPercentage: ThresholdPercentage;
     /**
      * The type of budget action to remove.
      */
     type: BudgetActionType;
+    /**
+     * The percentage threshold for the budget action to remove.
+     */
+    thresholdPercentage: ThresholdPercentage;
   }
   export type BudgetActionType = "STOP_SCHEDULING_AND_COMPLETE_TASKS"|"STOP_SCHEDULING_AND_CANCEL_TASKS"|string;
   export type BudgetActionsToAdd = BudgetActionToAdd[];
@@ -1298,49 +1298,49 @@ declare namespace Deadline {
   export type BudgetSummaries = BudgetSummary[];
   export interface BudgetSummary {
     /**
-     * The approximate dollar limit of the budget.
-     */
-    approximateDollarLimit: ConsumedUsageLimit;
-    /**
      * The budget ID.
      */
     budgetId: BudgetId;
-    /**
-     * The date and time the resource was created.
-     */
-    createdAt: CreatedAt;
-    /**
-     * The user or system that created this resource.
-     */
-    createdBy: CreatedBy;
-    /**
-     * The description of the budget summary.
-     */
-    description?: Description;
-    /**
-     * The display name of the budget summary to update.
-     */
-    displayName: ResourceName;
-    /**
-     * The status of the budget.    ACTIVE–The budget is being evaluated.    INACTIVE–The budget is inactive. This can include Expired, Canceled, or deleted Deleted statuses.  
-     */
-    status: BudgetStatus;
-    /**
-     * The date and time the resource was updated.
-     */
-    updatedAt?: UpdatedAt;
-    /**
-     * The user or system that updated this resource.
-     */
-    updatedBy?: UpdatedBy;
     /**
      * The resource used to track expenditure in the budget.
      */
     usageTrackingResource: UsageTrackingResource;
     /**
+     * The status of the budget.    ACTIVE–The budget is being evaluated.    INACTIVE–The budget is inactive. This can include Expired, Canceled, or deleted Deleted statuses.  
+     */
+    status: BudgetStatus;
+    /**
+     * The display name of the budget summary to update.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    displayName: ResourceName;
+    /**
+     * The description of the budget summary.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    description?: Description;
+    /**
+     * The approximate dollar limit of the budget.
+     */
+    approximateDollarLimit: ConsumedUsageLimit;
+    /**
      * The consumed usage for the budget.
      */
     usages: ConsumedUsages;
+    /**
+     * The user or system that created this resource.
+     */
+    createdBy: CreatedBy;
+    /**
+     * The date and time the resource was created.
+     */
+    createdAt: CreatedAt;
+    /**
+     * The user or system that updated this resource.
+     */
+    updatedBy?: UpdatedBy;
+    /**
+     * The date and time the resource was updated.
+     */
+    updatedAt?: UpdatedAt;
   }
   export type CancelSessionActions = {[key: string]: SessionActionIdList};
   export type ClientToken = string;
@@ -1381,37 +1381,37 @@ declare namespace Deadline {
   export type CpuArchitectureType = "x86_64"|"arm64"|string;
   export interface CreateBudgetRequest {
     /**
-     * The budget actions to specify what happens when the budget runs out.
-     */
-    actions: BudgetActionsToAdd;
-    /**
-     * The dollar limit based on consumed usage.
-     */
-    approximateDollarLimit: ConsumedUsageLimit;
-    /**
      * The unique token which the server uses to recognize retries of the same request.
      */
     clientToken?: ClientToken;
-    /**
-     * The description of the budget.
-     */
-    description?: Description;
-    /**
-     * The display name of the budget.
-     */
-    displayName: ResourceName;
     /**
      * The farm ID to include in this budget.
      */
     farmId: FarmId;
     /**
-     * The schedule to associate with this budget.
-     */
-    schedule: BudgetSchedule;
-    /**
      * The queue ID provided to this budget to track usage.
      */
     usageTrackingResource: UsageTrackingResource;
+    /**
+     * The display name of the budget.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    displayName: ResourceName;
+    /**
+     * The description of the budget.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    description?: Description;
+    /**
+     * The dollar limit based on consumed usage.
+     */
+    approximateDollarLimit: ConsumedUsageLimit;
+    /**
+     * The budget actions to specify what happens when the budget runs out.
+     */
+    actions: BudgetActionsToAdd;
+    /**
+     * The schedule to associate with this budget.
+     */
+    schedule: BudgetSchedule;
   }
   export interface CreateBudgetResponse {
     /**
@@ -1425,13 +1425,13 @@ declare namespace Deadline {
      */
     clientToken?: ClientToken;
     /**
-     * The description of the farm.
-     */
-    description?: Description;
-    /**
-     * The display name of the farm.
+     * The display name of the farm.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
      */
     displayName: ResourceName;
+    /**
+     * The description of the farm.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    description?: Description;
     /**
      * The ARN of the KMS key to use on the farm.
      */
@@ -1453,33 +1453,33 @@ declare namespace Deadline {
      */
     clientToken?: ClientToken;
     /**
-     * The configuration settings for the fleet. Customer managed fleets are self-managed. Service managed Amazon EC2 fleets are managed by Deadline Cloud.
-     */
-    configuration: FleetConfiguration;
-    /**
-     * The description of the fleet.
-     */
-    description?: Description;
-    /**
-     * The display name of the fleet.
-     */
-    displayName: ResourceName;
-    /**
      * The farm ID of the farm to connect to the fleet.
      */
     farmId: FarmId;
     /**
-     * The maximum number of workers for the fleet.
+     * The display name of the fleet.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
      */
-    maxWorkerCount: MinZeroMaxInteger;
+    displayName: ResourceName;
+    /**
+     * The description of the fleet.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    description?: Description;
+    /**
+     * The IAM role ARN for the role that the fleet's workers will use.
+     */
+    roleArn: IamRoleArn;
     /**
      * The minimum number of workers for the fleet.
      */
     minWorkerCount?: MinZeroMaxInteger;
     /**
-     * The IAM role ARN for the role that the fleet's workers will use.
+     * The maximum number of workers for the fleet.
      */
-    roleArn: IamRoleArn;
+    maxWorkerCount: MinZeroMaxInteger;
+    /**
+     * The configuration settings for the fleet. Customer managed fleets are self-managed. Service managed Amazon EC2 fleets are managed by Deadline Cloud.
+     */
+    configuration: FleetConfiguration;
     /**
      * Each tag consists of a tag key and a tag value. Tag keys and values are both required, but tag values can be empty strings.
      */
@@ -1493,45 +1493,17 @@ declare namespace Deadline {
   }
   export interface CreateJobRequest {
     /**
-     * The attachments for the job. Attach files required for the job to run to a render job.
-     */
-    attachments?: Attachments;
-    /**
-     * The unique token which the server uses to recognize retries of the same request.
-     */
-    clientToken?: ClientToken;
-    /**
      * The farm ID of the farm to connect to the job.
      */
     farmId: FarmId;
-    /**
-     * The number of task failures before the job stops running and is marked as FAILED.
-     */
-    maxFailedTasksCount?: MaxFailedTasksCount;
-    /**
-     * The maximum number of retries for a job.
-     */
-    maxRetriesPerTask?: MaxRetriesPerTask;
-    /**
-     * The parameters for the job.
-     */
-    parameters?: JobParameters;
-    /**
-     * The priority of the job on a scale of 1 to 100. The highest priority is 1.
-     */
-    priority: JobPriority;
     /**
      * The ID of the queue that the job is submitted to.
      */
     queueId: QueueId;
     /**
-     * The storage profile ID for the storage profile to connect to the job.
+     * The unique token which the server uses to recognize retries of the same request.
      */
-    storageProfileId?: StorageProfileId;
-    /**
-     * The initial status of the job's tasks when they are created. Tasks that are created with a SUSPENDED status will not run until you update their status.
-     */
-    targetTaskRunStatus?: CreateJobTargetTaskRunStatus;
+    clientToken?: ClientToken;
     /**
      * The job template to use for this job.
      */
@@ -1540,6 +1512,34 @@ declare namespace Deadline {
      * The file type for the job template.
      */
     templateType: JobTemplateType;
+    /**
+     * The priority of the job on a scale of 0 to 100. The highest priority (first scheduled) is 100. When two jobs have the same priority, the oldest job is scheduled first.
+     */
+    priority: JobPriority;
+    /**
+     * The parameters for the job.
+     */
+    parameters?: JobParameters;
+    /**
+     * The attachments for the job. Attach files required for the job to run to a render job.
+     */
+    attachments?: Attachments;
+    /**
+     * The storage profile ID for the storage profile to connect to the job.
+     */
+    storageProfileId?: StorageProfileId;
+    /**
+     * The initial job status when it is created. Jobs that are created with a SUSPENDED status will not run until manually requeued.
+     */
+    targetTaskRunStatus?: CreateJobTargetTaskRunStatus;
+    /**
+     * The number of task failures before the job stops running and is marked as FAILED.
+     */
+    maxFailedTasksCount?: MaxFailedTasksCount;
+    /**
+     * The maximum number of retries for each task.
+     */
+    maxRetriesPerTask?: MaxRetriesPerTask;
   }
   export interface CreateJobResponse {
     /**
@@ -1554,21 +1554,21 @@ declare namespace Deadline {
      */
     clientToken?: ClientToken;
     /**
-     * The security group IDs.
+     * The VPC (virtual private cloud) ID to use with the license endpoint.
      */
-    securityGroupIds: CreateLicenseEndpointRequestSecurityGroupIdsList;
+    vpcId: VpcId;
     /**
      * The subnet IDs.
      */
     subnetIds: CreateLicenseEndpointRequestSubnetIdsList;
     /**
+     * The security group IDs.
+     */
+    securityGroupIds: CreateLicenseEndpointRequestSecurityGroupIdsList;
+    /**
      * Each tag consists of a tag key and a tag value. Tag keys and values are both required, but tag values can be empty strings.
      */
     tags?: Tags;
-    /**
-     * The VPC (virtual private cloud) ID to use with the license endpoint.
-     */
-    vpcId: VpcId;
   }
   export type CreateLicenseEndpointRequestSecurityGroupIdsList = SecurityGroupId[];
   export type CreateLicenseEndpointRequestSubnetIdsList = SubnetId[];
@@ -1584,7 +1584,7 @@ declare namespace Deadline {
      */
     clientToken?: ClientToken;
     /**
-     * The name that you give the monitor that is displayed in the Deadline Cloud console.
+     * The name that you give the monitor that is displayed in the Deadline Cloud console.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
      */
     displayName: ResourceName;
     /**
@@ -1592,23 +1592,23 @@ declare namespace Deadline {
      */
     identityCenterInstanceArn: IdentityCenterInstanceArn;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role that the monitor uses to connect to Deadline Cloud. Every user that signs in to the monitor using IAM Identity Center uses this role to access Deadline Cloud resources.
-     */
-    roleArn: IamRoleArn;
-    /**
      * The subdomain to use when creating the monitor URL. The full URL of the monitor is subdomain.Region.deadlinecloud.amazonaws.com.
      */
     subdomain: Subdomain;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role that the monitor uses to connect to Deadline Cloud. Every user that signs in to the monitor using IAM Identity Center uses this role to access Deadline Cloud resources.
+     */
+    roleArn: IamRoleArn;
   }
   export interface CreateMonitorResponse {
-    /**
-     * The Amazon Resource Name (ARN) that IAM Identity Center assigns to the monitor.
-     */
-    identityCenterApplicationArn: IdentityCenterApplicationArn;
     /**
      * The unique identifier of the monitor.
      */
     monitorId: MonitorId;
+    /**
+     * The Amazon Resource Name (ARN) that IAM Identity Center assigns to the monitor.
+     */
+    identityCenterApplicationArn: IdentityCenterApplicationArn;
   }
   export interface CreateQueueEnvironmentRequest {
     /**
@@ -1620,21 +1620,21 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * Sets the priority of the environments in the queue from 0 to 10,000, where 0 is the highest priority. If two environments share the same priority value, the environment created first takes higher priority.
-     */
-    priority: Priority;
-    /**
      * The queue ID to connect the queue and environment.
      */
     queueId: QueueId;
     /**
-     * The environment template to use in the queue.
+     * Sets the priority of the environments in the queue from 0 to 10,000, where 0 is the highest priority. If two environments share the same priority value, the environment created first takes higher priority.
      */
-    template: EnvironmentTemplate;
+    priority: Priority;
     /**
      * The template's file type, JSON or YAML.
      */
     templateType: EnvironmentTemplateType;
+    /**
+     * The environment template to use in the queue.
+     */
+    template: EnvironmentTemplate;
   }
   export interface CreateQueueEnvironmentResponse {
     /**
@@ -1648,45 +1648,45 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The fleet ID.
-     */
-    fleetId: FleetId;
-    /**
      * The queue ID.
      */
     queueId: QueueId;
+    /**
+     * The fleet ID.
+     */
+    fleetId: FleetId;
   }
   export interface CreateQueueFleetAssociationResponse {
   }
   export interface CreateQueueRequest {
     /**
-     * The storage profile IDs to include in the queue.
-     */
-    allowedStorageProfileIds?: AllowedStorageProfileIds;
-    /**
      * The unique token which the server uses to recognize retries of the same request.
      */
     clientToken?: ClientToken;
-    /**
-     * The default action to take on a queue if a budget isn't configured.
-     */
-    defaultBudgetAction?: DefaultQueueBudgetAction;
-    /**
-     * The description of the queue.
-     */
-    description?: Description;
-    /**
-     * The display name of the queue.
-     */
-    displayName: ResourceName;
     /**
      * The farm ID of the farm to connect to the queue.
      */
     farmId: FarmId;
     /**
+     * The display name of the queue.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    displayName: ResourceName;
+    /**
+     * The description of the queue.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    description?: Description;
+    /**
+     * The default action to take on a queue if a budget isn't configured.
+     */
+    defaultBudgetAction?: DefaultQueueBudgetAction;
+    /**
      * The job attachment settings for the queue. These are the Amazon S3 bucket name and the Amazon S3 prefix.
      */
     jobAttachmentSettings?: JobAttachmentSettings;
+    /**
+     * The IAM role ARN that workers will use while running jobs for this queue.
+     */
+    roleArn?: IamRoleArn;
     /**
      * The jobs in the queue run as the specified POSIX user.
      */
@@ -1696,9 +1696,9 @@ declare namespace Deadline {
      */
     requiredFileSystemLocationNames?: RequiredFileSystemLocationNames;
     /**
-     * The IAM role ARN that workers will use while running jobs for this queue.
+     * The storage profile IDs to include in the queue.
      */
-    roleArn?: IamRoleArn;
+    allowedStorageProfileIds?: AllowedStorageProfileIds;
     /**
      * Each tag consists of a tag key and a tag value. Tag keys and values are both required, but tag values can be empty strings.
      */
@@ -1716,21 +1716,21 @@ declare namespace Deadline {
      */
     clientToken?: ClientToken;
     /**
-     * The display name of the storage profile.
-     */
-    displayName: ResourceName;
-    /**
      * The farm ID of the farm to connect to the storage profile.
      */
     farmId: FarmId;
     /**
-     * File system paths to include in the storage profile.
+     * The display name of the storage profile.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
      */
-    fileSystemLocations?: FileSystemLocationsList;
+    displayName: ResourceName;
     /**
      * The type of operating system (OS) for the storage profile.
      */
     osFamily: StorageProfileOperatingSystemFamily;
+    /**
+     * File system paths to include in the storage profile.
+     */
+    fileSystemLocations?: FileSystemLocationsList;
   }
   export interface CreateStorageProfileResponse {
     /**
@@ -1739,10 +1739,6 @@ declare namespace Deadline {
     storageProfileId: StorageProfileId;
   }
   export interface CreateWorkerRequest {
-    /**
-     * The unique token which the server uses to recognize retries of the same request.
-     */
-    clientToken?: ClientToken;
     /**
      * The farm ID of the farm to connect to the worker.
      */
@@ -1755,6 +1751,10 @@ declare namespace Deadline {
      * The IP address and host name of the worker.
      */
     hostProperties?: HostPropertiesRequest;
+    /**
+     * The unique token which the server uses to recognize retries of the same request.
+     */
+    clientToken?: ClientToken;
   }
   export interface CreateWorkerResponse {
     /**
@@ -1772,16 +1772,28 @@ declare namespace Deadline {
      */
     mode: AutoScalingMode;
     /**
-     * The storage profile ID.
-     */
-    storageProfileId?: StorageProfileId;
-    /**
      * The worker capabilities for a customer managed fleet configuration.
      */
     workerCapabilities: CustomerManagedWorkerCapabilities;
+    /**
+     * The storage profile ID.
+     */
+    storageProfileId?: StorageProfileId;
   }
   export type CustomerManagedFleetOperatingSystemFamily = "WINDOWS"|"LINUX"|"MACOS"|string;
   export interface CustomerManagedWorkerCapabilities {
+    /**
+     * The vCPU count for the customer manged worker capabilities.
+     */
+    vCpuCount: VCpuCountRange;
+    /**
+     * The memory (MiB).
+     */
+    memoryMiB: MemoryMiBRange;
+    /**
+     * The accelerator types for the customer managed worker capabilities.
+     */
+    acceleratorTypes?: AcceleratorTypes;
     /**
      * The range of the accelerator.
      */
@@ -1791,9 +1803,9 @@ declare namespace Deadline {
      */
     acceleratorTotalMemoryMiB?: AcceleratorTotalMemoryMiBRange;
     /**
-     * The accelerator types for the customer managed worker capabilities.
+     * The operating system (OS) family.
      */
-    acceleratorTypes?: AcceleratorTypes;
+    osFamily: CustomerManagedFleetOperatingSystemFamily;
     /**
      * The CPU architecture type for the customer managed worker capabilities.
      */
@@ -1806,24 +1818,8 @@ declare namespace Deadline {
      * Custom attributes for the customer manged worker capabilities.
      */
     customAttributes?: CustomFleetAttributeCapabilities;
-    /**
-     * The memory (MiB).
-     */
-    memoryMiB: MemoryMiBRange;
-    /**
-     * The operating system (OS) family.
-     */
-    osFamily: CustomerManagedFleetOperatingSystemFamily;
-    /**
-     * The vCPU count for the customer manged worker capabilities.
-     */
-    vCpuCount: VCpuCountRange;
   }
   export interface DateTimeFilterExpression {
-    /**
-     * The date and time.
-     */
-    dateTime: SyntheticTimestamp_date_time;
     /**
      * The name of the date-time field to filter on.
      */
@@ -1832,17 +1828,21 @@ declare namespace Deadline {
      * The type of comparison to use to filter the results.
      */
     operator: ComparisonOperator;
+    /**
+     * The date and time.
+     */
+    dateTime: SyntheticTimestamp_date_time;
   }
   export type DefaultQueueBudgetAction = "NONE"|"STOP_SCHEDULING_AND_COMPLETE_TASKS"|"STOP_SCHEDULING_AND_CANCEL_TASKS"|string;
   export interface DeleteBudgetRequest {
     /**
-     * The budget ID of the budget to delete.
-     */
-    budgetId: BudgetId;
-    /**
      * The farm ID of the farm to remove from the budget.
      */
     farmId: FarmId;
+    /**
+     * The budget ID of the budget to delete.
+     */
+    budgetId: BudgetId;
   }
   export interface DeleteBudgetResponse {
   }
@@ -1904,13 +1904,13 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The queue environment ID of the queue environment to delete.
-     */
-    queueEnvironmentId: QueueEnvironmentId;
-    /**
      * The queue ID of the queue environment to delete.
      */
     queueId: QueueId;
+    /**
+     * The queue environment ID of the queue environment to delete.
+     */
+    queueEnvironmentId: QueueEnvironmentId;
   }
   export interface DeleteQueueEnvironmentResponse {
   }
@@ -1920,13 +1920,13 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The fleet ID of the queue-fleet association.
-     */
-    fleetId: FleetId;
-    /**
      * The queue ID of the queue-fleet association.
      */
     queueId: QueueId;
+    /**
+     * The fleet ID of the queue-fleet association.
+     */
+    fleetId: FleetId;
   }
   export interface DeleteQueueFleetAssociationResponse {
   }
@@ -1974,14 +1974,6 @@ declare namespace Deadline {
   export type DependencyConsumerResolutionStatus = "RESOLVED"|"UNRESOLVED"|string;
   export interface DependencyCounts {
     /**
-     * The number of consumers resolved.
-     */
-    consumersResolved: Integer;
-    /**
-     * The number of unresolved consumers.
-     */
-    consumersUnresolved: Integer;
-    /**
      * The number of resolved dependencies.
      */
     dependenciesResolved: Integer;
@@ -1989,6 +1981,14 @@ declare namespace Deadline {
      * The number of unresolved dependencies.
      */
     dependenciesUnresolved: Integer;
+    /**
+     * The number of consumers resolved.
+     */
+    consumersResolved: Integer;
+    /**
+     * The number of unresolved consumers.
+     */
+    consumersUnresolved: Integer;
   }
   export type Description = string;
   export type DesiredWorkerStatus = "STOPPED"|string;
@@ -2026,6 +2026,10 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
+     * The queue ID connected to a job for which you're disassociating a member.
+     */
+    queueId: QueueId;
+    /**
      * The job ID to disassociate from a member in a job.
      */
     jobId: JobId;
@@ -2033,10 +2037,6 @@ declare namespace Deadline {
      * A member's principal ID to disassociate from a job.
      */
     principalId: IdentityCenterPrincipalId;
-    /**
-     * The queue ID connected to a job for which you're disassociating a member.
-     */
-    queueId: QueueId;
   }
   export interface DisassociateMemberFromJobResponse {
   }
@@ -2046,13 +2046,13 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * A member's principal ID to disassociate from a queue.
-     */
-    principalId: IdentityCenterPrincipalId;
-    /**
      * The queue ID of the queue in which you're disassociating from a member.
      */
     queueId: QueueId;
+    /**
+     * A member's principal ID to disassociate from a queue.
+     */
+    principalId: IdentityCenterPrincipalId;
   }
   export interface DisassociateMemberFromQueueResponse {
   }
@@ -2064,13 +2064,13 @@ declare namespace Deadline {
   export type EbsThroughputMiB = number;
   export interface Ec2EbsVolume {
     /**
-     * The IOPS per volume.
-     */
-    iops?: EbsIops;
-    /**
      * The EBS volume size in GiB.
      */
     sizeGiB?: Integer;
+    /**
+     * The IOPS per volume.
+     */
+    iops?: EbsIops;
     /**
      * The throughput per volume in MiB.
      */
@@ -2081,13 +2081,13 @@ declare namespace Deadline {
   export type EndsAt = Date;
   export interface EnvironmentDetailsEntity {
     /**
-     * The environment ID.
-     */
-    environmentId: EnvironmentId;
-    /**
      * The job ID.
      */
     jobId: JobId;
+    /**
+     * The environment ID.
+     */
+    environmentId: EnvironmentId;
     /**
      * The schema version in the environment.
      */
@@ -2099,17 +2099,17 @@ declare namespace Deadline {
   }
   export interface EnvironmentDetailsError {
     /**
-     * The error code.
+     * The job ID.
      */
-    code: JobEntityErrorCode;
+    jobId: JobId;
     /**
      * The environment ID.
      */
     environmentId: EnvironmentId;
     /**
-     * The job ID.
+     * The error code.
      */
-    jobId: JobId;
+    code: JobEntityErrorCode;
     /**
      * The error message detailing the error's cause.
      */
@@ -2117,13 +2117,13 @@ declare namespace Deadline {
   }
   export interface EnvironmentDetailsIdentifiers {
     /**
-     * The environment ID.
-     */
-    environmentId: EnvironmentId;
-    /**
      * The job ID.
      */
     jobId: JobId;
+    /**
+     * The environment ID.
+     */
+    environmentId: EnvironmentId;
   }
   export interface EnvironmentEnterSessionActionDefinition {
     /**
@@ -2160,14 +2160,6 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The identity store ID of the farm member.
-     */
-    identityStoreId: IdentityStoreId;
-    /**
-     * The farm member's membership level.
-     */
-    membershipLevel: MembershipLevel;
-    /**
      * The principal ID of the farm member.
      */
     principalId: IdentityCenterPrincipalId;
@@ -2175,10 +2167,30 @@ declare namespace Deadline {
      * The principal type of the farm member.
      */
     principalType: PrincipalType;
+    /**
+     * The identity store ID of the farm member.
+     */
+    identityStoreId: IdentityStoreId;
+    /**
+     * The farm member's membership level.
+     */
+    membershipLevel: MembershipLevel;
   }
   export type FarmMembers = FarmMember[];
   export type FarmSummaries = FarmSummary[];
   export interface FarmSummary {
+    /**
+     * The farm ID.
+     */
+    farmId: FarmId;
+    /**
+     * The display name of the farm.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    displayName: ResourceName;
+    /**
+     * The ARN for the KMS key.
+     */
+    kmsKeyArn?: KmsKeyArn;
     /**
      * The date and time the resource was created.
      */
@@ -2187,18 +2199,6 @@ declare namespace Deadline {
      * The user or system that created this resource.
      */
     createdBy: CreatedBy;
-    /**
-     * The display name of the farm.
-     */
-    displayName: ResourceName;
-    /**
-     * The farm ID.
-     */
-    farmId: FarmId;
-    /**
-     * The ARN for the KMS key.
-     */
-    kmsKeyArn?: KmsKeyArn;
     /**
      * The date and time the resource was updated.
      */
@@ -2210,13 +2210,13 @@ declare namespace Deadline {
   }
   export interface FieldSortExpression {
     /**
-     * The name of the field.
-     */
-    name: String;
-    /**
      * The sort order for the field.
      */
     sortOrder: SortOrder;
+    /**
+     * The name of the field.
+     */
+    name: String;
   }
   export interface FileSystemLocation {
     /**
@@ -2237,28 +2237,28 @@ declare namespace Deadline {
   export type FileSystemLocationsList = FileSystemLocation[];
   export interface FixedBudgetSchedule {
     /**
-     * When the budget ends.
-     */
-    endTime: EndsAt;
-    /**
      * When the budget starts.
      */
     startTime: StartsAt;
+    /**
+     * When the budget ends.
+     */
+    endTime: EndsAt;
   }
   export type FleetAmountCapabilities = FleetAmountCapability[];
   export interface FleetAmountCapability {
     /**
-     * The maximum amount of the fleet worker capability.
+     * The name of the fleet capability.
      */
-    max?: Float;
+    name: AmountCapabilityName;
     /**
      * The minimum amount of fleet worker capability.
      */
     min: Float;
     /**
-     * The name of the fleet capability.
+     * The maximum amount of the fleet worker capability.
      */
-    name: AmountCapabilityName;
+    max?: Float;
   }
   export type FleetAttributeCapabilities = FleetAttributeCapability[];
   export interface FleetAttributeCapability {
@@ -2302,14 +2302,6 @@ declare namespace Deadline {
      */
     fleetId: FleetId;
     /**
-     * The identity store ID.
-     */
-    identityStoreId: IdentityStoreId;
-    /**
-     * The fleet member's membership level.
-     */
-    membershipLevel: MembershipLevel;
-    /**
      * The principal ID of the fleet member.
      */
     principalId: IdentityCenterPrincipalId;
@@ -2317,15 +2309,55 @@ declare namespace Deadline {
      * The principal type of the fleet member.
      */
     principalType: PrincipalType;
+    /**
+     * The identity store ID.
+     */
+    identityStoreId: IdentityStoreId;
+    /**
+     * The fleet member's membership level.
+     */
+    membershipLevel: MembershipLevel;
   }
   export type FleetMembers = FleetMember[];
   export type FleetStatus = "ACTIVE"|"CREATE_IN_PROGRESS"|"UPDATE_IN_PROGRESS"|"CREATE_FAILED"|"UPDATE_FAILED"|string;
   export type FleetSummaries = FleetSummary[];
   export interface FleetSummary {
     /**
+     * The fleet ID.
+     */
+    fleetId: FleetId;
+    /**
+     * The farm ID.
+     */
+    farmId: FarmId;
+    /**
+     * The display name of the fleet summary to update.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    displayName: ResourceName;
+    /**
+     * The status of the fleet.
+     */
+    status: FleetStatus;
+    /**
      * The Auto Scaling status of a fleet.
      */
     autoScalingStatus?: AutoScalingStatus;
+    /**
+     * The target number of workers in a fleet.
+     */
+    targetWorkerCount?: Integer;
+    /**
+     * The number of workers in the fleet summary.
+     */
+    workerCount: Integer;
+    /**
+     * The minimum number of workers in the fleet.
+     */
+    minWorkerCount: MinZeroMaxInteger;
+    /**
+     * The maximum number of workers specified in the fleet.
+     */
+    maxWorkerCount: MinZeroMaxInteger;
     /**
      * The configuration details for the fleet.
      */
@@ -2339,34 +2371,6 @@ declare namespace Deadline {
      */
     createdBy: CreatedBy;
     /**
-     * The display name of the fleet summary to update.
-     */
-    displayName: ResourceName;
-    /**
-     * The farm ID.
-     */
-    farmId: FarmId;
-    /**
-     * The fleet ID.
-     */
-    fleetId: FleetId;
-    /**
-     * The maximum number of workers specified in the fleet.
-     */
-    maxWorkerCount: MinZeroMaxInteger;
-    /**
-     * The minimum number of workers in the fleet.
-     */
-    minWorkerCount: MinZeroMaxInteger;
-    /**
-     * The status of the fleet.
-     */
-    status: FleetStatus;
-    /**
-     * The target number of workers in a fleet.
-     */
-    targetWorkerCount?: Integer;
-    /**
      * The date and time the resource was updated.
      */
     updatedAt?: UpdatedAt;
@@ -2374,80 +2378,76 @@ declare namespace Deadline {
      * The user or system that updated this resource.
      */
     updatedBy?: UpdatedBy;
-    /**
-     * The number of workers in the fleet summary.
-     */
-    workerCount: Integer;
   }
   export type Float = number;
   export type FloatString = string;
   export interface GetBudgetRequest {
     /**
-     * The budget ID.
-     */
-    budgetId: BudgetId;
-    /**
      * The farm ID of the farm connected to the budget.
      */
     farmId: FarmId;
-  }
-  export interface GetBudgetResponse {
-    /**
-     * The budget actions for the budget.
-     */
-    actions: ResponseBudgetActionList;
-    /**
-     * The consumed usage limit for the budget.
-     */
-    approximateDollarLimit: ConsumedUsageLimit;
     /**
      * The budget ID.
      */
     budgetId: BudgetId;
+  }
+  export interface GetBudgetResponse {
     /**
-     * The date and time the resource was created.
+     * The budget ID.
      */
-    createdAt: CreatedAt;
-    /**
-     * The user or system that created this resource.
-     */
-    createdBy: CreatedBy;
-    /**
-     * The description of the budget.
-     */
-    description?: Description;
-    /**
-     * The display name of the budget.
-     */
-    displayName: ResourceName;
-    /**
-     * The date and time the queue stopped.
-     */
-    queueStoppedAt?: UpdatedAt;
-    /**
-     * The budget schedule.
-     */
-    schedule: BudgetSchedule;
-    /**
-     * The status of the budget.    ACTIVE–Get a budget being evaluated.    INACTIVE–Get an inactive budget. This can include expired, canceled, or deleted statuses.  
-     */
-    status: BudgetStatus;
-    /**
-     * The date and time the resource was updated.
-     */
-    updatedAt?: UpdatedAt;
-    /**
-     * The user or system that updated this resource.
-     */
-    updatedBy?: UpdatedBy;
+    budgetId: BudgetId;
     /**
      * The resource that the budget is tracking usage for.
      */
     usageTrackingResource: UsageTrackingResource;
     /**
+     * The status of the budget.    ACTIVE–Get a budget being evaluated.    INACTIVE–Get an inactive budget. This can include expired, canceled, or deleted statuses.  
+     */
+    status: BudgetStatus;
+    /**
+     * The display name of the budget.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    displayName: ResourceName;
+    /**
+     * The description of the budget.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    description?: Description;
+    /**
+     * The consumed usage limit for the budget.
+     */
+    approximateDollarLimit: ConsumedUsageLimit;
+    /**
      * The usages of the budget.
      */
     usages: ConsumedUsages;
+    /**
+     * The budget actions for the budget.
+     */
+    actions: ResponseBudgetActionList;
+    /**
+     * The budget schedule.
+     */
+    schedule: BudgetSchedule;
+    /**
+     * The user or system that created this resource.
+     */
+    createdBy: CreatedBy;
+    /**
+     * The date and time the resource was created.
+     */
+    createdAt: CreatedAt;
+    /**
+     * The user or system that updated this resource.
+     */
+    updatedBy?: UpdatedBy;
+    /**
+     * The date and time the resource was updated.
+     */
+    updatedAt?: UpdatedAt;
+    /**
+     * The date and time the queue stopped.
+     */
+    queueStoppedAt?: UpdatedAt;
   }
   export interface GetFarmRequest {
     /**
@@ -2457,6 +2457,22 @@ declare namespace Deadline {
   }
   export interface GetFarmResponse {
     /**
+     * The farm ID of the farm to get.
+     */
+    farmId: FarmId;
+    /**
+     * The display name of the farm.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    displayName: ResourceName;
+    /**
+     * The description of the farm.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    description?: Description;
+    /**
+     * The ARN of the KMS key used on the farm.
+     */
+    kmsKeyArn: KmsKeyArn;
+    /**
      * The date and time the resource was created.
      */
     createdAt: CreatedAt;
@@ -2464,22 +2480,6 @@ declare namespace Deadline {
      * The user or system that created this resource.
      */
     createdBy: CreatedBy;
-    /**
-     * The description of the farm.
-     */
-    description?: Description;
-    /**
-     * The display name of the farm.
-     */
-    displayName: ResourceName;
-    /**
-     * The farm ID of the farm to get.
-     */
-    farmId: FarmId;
-    /**
-     * The ARN of the KMS key used on the farm.
-     */
-    kmsKeyArn: KmsKeyArn;
     /**
      * The date and time the resource was updated.
      */
@@ -2501,17 +2501,57 @@ declare namespace Deadline {
   }
   export interface GetFleetResponse {
     /**
+     * The fleet ID.
+     */
+    fleetId: FleetId;
+    /**
+     * The farm ID of the farm in the fleet.
+     */
+    farmId: FarmId;
+    /**
+     * The display name of the fleet.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    displayName: ResourceName;
+    /**
+     * The description of the fleet.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    description?: Description;
+    /**
+     * The Auto Scaling status of the fleet.
+     */
+    status: FleetStatus;
+    /**
      * The Auto Scaling status of the fleet. Either GROWING, STEADY, or SHRINKING.
      */
     autoScalingStatus?: AutoScalingStatus;
+    /**
+     * The number of target workers in the fleet.
+     */
+    targetWorkerCount?: Integer;
+    /**
+     * The number of workers in the fleet.
+     */
+    workerCount: Integer;
+    /**
+     * The minimum number of workers specified in the fleet.
+     */
+    minWorkerCount: MinZeroMaxInteger;
+    /**
+     * The maximum number of workers specified in the fleet.
+     */
+    maxWorkerCount: MinZeroMaxInteger;
+    /**
+     * The configuration setting for the fleet.
+     */
+    configuration: FleetConfiguration;
     /**
      * Outlines what the fleet is capable of for minimums, maximums, and naming, in addition to attribute names and values.
      */
     capabilities?: FleetCapabilities;
     /**
-     * The configuration setting for the fleet.
+     * The IAM role ARN.
      */
-    configuration: FleetConfiguration;
+    roleArn: IamRoleArn;
     /**
      * The date and time the resource was created.
      */
@@ -2521,42 +2561,6 @@ declare namespace Deadline {
      */
     createdBy: CreatedBy;
     /**
-     * The description of the fleet.
-     */
-    description?: Description;
-    /**
-     * The display name of the fleet.
-     */
-    displayName: ResourceName;
-    /**
-     * The farm ID of the farm in the fleet.
-     */
-    farmId: FarmId;
-    /**
-     * The fleet ID.
-     */
-    fleetId: FleetId;
-    /**
-     * The maximum number of workers specified in the fleet.
-     */
-    maxWorkerCount: MinZeroMaxInteger;
-    /**
-     * The minimum number of workers specified in the fleet.
-     */
-    minWorkerCount: MinZeroMaxInteger;
-    /**
-     * The IAM role ARN.
-     */
-    roleArn: IamRoleArn;
-    /**
-     * The Auto Scaling status of the fleet.
-     */
-    status: FleetStatus;
-    /**
-     * The number of target workers in the fleet.
-     */
-    targetWorkerCount?: Integer;
-    /**
      * The date and time the resource was updated.
      */
     updatedAt?: UpdatedAt;
@@ -2564,28 +2568,24 @@ declare namespace Deadline {
      * The user or system that updated this resource.
      */
     updatedBy?: UpdatedBy;
-    /**
-     * The number of workers in the fleet.
-     */
-    workerCount: Integer;
   }
   export interface GetJobEntityError {
-    /**
-     * The environment details for the failed job entity.
-     */
-    environmentDetails?: EnvironmentDetailsError;
-    /**
-     * The job attachment details for the failed job entity.
-     */
-    jobAttachmentDetails?: JobAttachmentDetailsError;
     /**
      * The job details for the failed job entity.
      */
     jobDetails?: JobDetailsError;
     /**
+     * The job attachment details for the failed job entity.
+     */
+    jobAttachmentDetails?: JobAttachmentDetailsError;
+    /**
      * The step details for the failed job entity.
      */
     stepDetails?: StepDetailsError;
+    /**
+     * The environment details for the failed job entity.
+     */
+    environmentDetails?: EnvironmentDetailsError;
   }
   export interface GetJobRequest {
     /**
@@ -2603,9 +2603,25 @@ declare namespace Deadline {
   }
   export interface GetJobResponse {
     /**
-     * The attachments for the job.
+     * The job ID.
      */
-    attachments?: Attachments;
+    jobId: JobId;
+    /**
+     * The name of the job.
+     */
+    name: JobName;
+    /**
+     * The life cycle status for the job. 
+     */
+    lifecycleStatus: JobLifecycleStatus;
+    /**
+     * A message that communicates the status of the life cycle for the job.
+     */
+    lifecycleStatusMessage: String;
+    /**
+     * The job priority.
+     */
+    priority: JobPriority;
     /**
      * The date and time the resource was created.
      */
@@ -2615,25 +2631,37 @@ declare namespace Deadline {
      */
     createdBy: CreatedBy;
     /**
-     * The description of the job.
+     * The date and time the resource was updated.
      */
-    description?: JobDescription;
+    updatedAt?: UpdatedAt;
+    /**
+     * The user or system that updated this resource.
+     */
+    updatedBy?: UpdatedBy;
+    /**
+     * The date and time the resource started running.
+     */
+    startedAt?: StartedAt;
     /**
      * The date and time the resource ended running.
      */
     endedAt?: EndedAt;
     /**
-     * The job ID.
+     * The task run status for the job.
      */
-    jobId: JobId;
+    taskRunStatus?: TaskRunStatus;
     /**
-     * The life cycle status for the job.
+     * The task status with which the job started.
      */
-    lifecycleStatus: JobLifecycleStatus;
+    targetTaskRunStatus?: JobTargetTaskRunStatus;
     /**
-     * A message that communicates the status of the life cycle for the job.
+     * The number of tasks running on the job.
      */
-    lifecycleStatusMessage: String;
+    taskRunStatusCounts?: TaskRunStatusCounts;
+    /**
+     * The storage profile ID associated with the job.
+     */
+    storageProfileId?: StorageProfileId;
     /**
      * The number of task failures before the job stops running and is marked as FAILED.
      */
@@ -2643,45 +2671,17 @@ declare namespace Deadline {
      */
     maxRetriesPerTask?: MaxRetriesPerTask;
     /**
-     * The name of the job.
-     */
-    name: JobName;
-    /**
      * The parameters for the job.
      */
     parameters?: JobParameters;
     /**
-     * The job priority.
+     * The attachments for the job.
      */
-    priority: JobPriority;
+    attachments?: Attachments;
     /**
-     * The date and time the resource started running.
+     * The description of the job.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
      */
-    startedAt?: StartedAt;
-    /**
-     * The storage profile ID associated with the job.
-     */
-    storageProfileId?: StorageProfileId;
-    /**
-     * The task status with which the job started.
-     */
-    targetTaskRunStatus?: JobTargetTaskRunStatus;
-    /**
-     * The task run status for the job.
-     */
-    taskRunStatus?: TaskRunStatus;
-    /**
-     * The number of tasks running on the job.
-     */
-    taskRunStatusCounts?: TaskRunStatusCounts;
-    /**
-     * The date and time the resource was updated.
-     */
-    updatedAt?: UpdatedAt;
-    /**
-     * The user or system that updated this resource.
-     */
-    updatedBy?: UpdatedBy;
+    description?: JobDescription;
   }
   export interface GetLicenseEndpointRequest {
     /**
@@ -2691,17 +2691,9 @@ declare namespace Deadline {
   }
   export interface GetLicenseEndpointResponse {
     /**
-     * The DNS name.
-     */
-    dnsName?: DnsName;
-    /**
      * The license endpoint ID.
      */
     licenseEndpointId: LicenseEndpointId;
-    /**
-     * The security group IDs for the license endpoint.
-     */
-    securityGroupIds?: GetLicenseEndpointResponseSecurityGroupIdsList;
     /**
      * The status of the license endpoint.
      */
@@ -2711,13 +2703,21 @@ declare namespace Deadline {
      */
     statusMessage: StatusMessage;
     /**
+     * The VCP(virtual private cloud) ID associated with the license endpoint.
+     */
+    vpcId?: VpcId;
+    /**
+     * The DNS name.
+     */
+    dnsName?: DnsName;
+    /**
      * The subnet IDs.
      */
     subnetIds?: GetLicenseEndpointResponseSubnetIdsList;
     /**
-     * The VCP(virtual private cloud) ID associated with the license endpoint.
+     * The security group IDs for the license endpoint.
      */
-    vpcId?: VpcId;
+    securityGroupIds?: GetLicenseEndpointResponseSecurityGroupIdsList;
   }
   export type GetLicenseEndpointResponseSecurityGroupIdsList = SecurityGroupId[];
   export type GetLicenseEndpointResponseSubnetIdsList = SubnetId[];
@@ -2729,6 +2729,34 @@ declare namespace Deadline {
   }
   export interface GetMonitorResponse {
     /**
+     * The unique identifier for the monitor.
+     */
+    monitorId: MonitorId;
+    /**
+     * The name used to identify the monitor on the Deadline Cloud console.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    displayName: ResourceName;
+    /**
+     * The subdomain used for the monitor URL. The full URL of the monitor is subdomain.Region.deadlinecloud.amazonaws.com.
+     */
+    subdomain: Subdomain;
+    /**
+     * The complete URL of the monitor. The full URL of the monitor is subdomain.Region.deadlinecloud.amazonaws.com.
+     */
+    url: Url;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role for the monitor. Users of the monitor use this role to access Deadline Cloud resources.
+     */
+    roleArn: IamRoleArn;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM Identity Center instance responsible for authenticating monitor users.
+     */
+    identityCenterInstanceArn: IdentityCenterInstanceArn;
+    /**
+     * The Amazon Resource Name (ARN) that the IAM Identity Center assigned to the monitor when it was created.
+     */
+    identityCenterApplicationArn: IdentityCenterApplicationArn;
+    /**
      * The UNIX timestamp of the date and time that the monitor was created.
      */
     createdAt: CreatedAt;
@@ -2737,30 +2765,6 @@ declare namespace Deadline {
      */
     createdBy: CreatedBy;
     /**
-     * The name used to identify the monitor on the Deadline Cloud console.
-     */
-    displayName: ResourceName;
-    /**
-     * The Amazon Resource Name (ARN) that the IAM Identity Center assigned to the monitor when it was created.
-     */
-    identityCenterApplicationArn: IdentityCenterApplicationArn;
-    /**
-     * The Amazon Resource Name (ARN) of the IAM Identity Center instance responsible for authenticating monitor users.
-     */
-    identityCenterInstanceArn: IdentityCenterInstanceArn;
-    /**
-     * The unique identifier for the monitor.
-     */
-    monitorId: MonitorId;
-    /**
-     * The Amazon Resource Name (ARN) of the IAM role for the monitor. Users of the monitor use this role to access Deadline Cloud resources.
-     */
-    roleArn: IamRoleArn;
-    /**
-     * The subdomain used for the monitor URL. The full URL of the monitor is subdomain.Region.deadlinecloud.amazonaws.com.
-     */
-    subdomain: Subdomain;
-    /**
      * The UNIX timestamp of the last date and time that the monitor was updated.
      */
     updatedAt?: UpdatedAt;
@@ -2768,10 +2772,6 @@ declare namespace Deadline {
      * The user name of the person that last updated the monitor.
      */
     updatedBy?: UpdatedBy;
-    /**
-     * The complete URL of the monitor. The full URL of the monitor is subdomain.Region.deadlinecloud.amazonaws.com.
-     */
-    url: Url;
   }
   export interface GetQueueEnvironmentRequest {
     /**
@@ -2779,23 +2779,19 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The queue environment ID.
-     */
-    queueEnvironmentId: QueueEnvironmentId;
-    /**
      * The queue ID for the queue environment.
      */
     queueId: QueueId;
+    /**
+     * The queue environment ID.
+     */
+    queueEnvironmentId: QueueEnvironmentId;
   }
   export interface GetQueueEnvironmentResponse {
     /**
-     * The date and time the resource was created.
+     * The queue environment ID.
      */
-    createdAt: CreatedAt;
-    /**
-     * The user or system that created this resource.&gt;
-     */
-    createdBy: CreatedBy;
+    queueEnvironmentId: QueueEnvironmentId;
     /**
      * The name of the queue environment.
      */
@@ -2805,17 +2801,21 @@ declare namespace Deadline {
      */
     priority: Priority;
     /**
-     * The queue environment ID.
+     * The type of template for the queue environment.
      */
-    queueEnvironmentId: QueueEnvironmentId;
+    templateType: EnvironmentTemplateType;
     /**
      * The template for the queue environment.
      */
     template: EnvironmentTemplate;
     /**
-     * The type of template for the queue environment.
+     * The date and time the resource was created.
      */
-    templateType: EnvironmentTemplateType;
+    createdAt: CreatedAt;
+    /**
+     * The user or system that created this resource.&gt;
+     */
+    createdBy: CreatedBy;
     /**
      * The date and time the resource was updated.
      */
@@ -2831,15 +2831,27 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
+     * The queue ID for the queue-fleet association.
+     */
+    queueId: QueueId;
+    /**
      * The fleet ID for the queue-fleet association.
      */
     fleetId: FleetId;
+  }
+  export interface GetQueueFleetAssociationResponse {
     /**
      * The queue ID for the queue-fleet association.
      */
     queueId: QueueId;
-  }
-  export interface GetQueueFleetAssociationResponse {
+    /**
+     * The fleet ID for the queue-fleet association.
+     */
+    fleetId: FleetId;
+    /**
+     * The status of the queue-fleet association.
+     */
+    status: QueueFleetAssociationStatus;
     /**
      * The date and time the resource was created.
      */
@@ -2848,18 +2860,6 @@ declare namespace Deadline {
      * The user or system that created this resource.
      */
     createdBy: CreatedBy;
-    /**
-     * The fleet ID for the queue-fleet association.
-     */
-    fleetId: FleetId;
-    /**
-     * The queue ID for the queue-fleet association.
-     */
-    queueId: QueueId;
-    /**
-     * The status of the queue-fleet association.
-     */
-    status: QueueFleetAssociationStatus;
     /**
      * The date and time the resource was updated.
      */
@@ -2881,13 +2881,53 @@ declare namespace Deadline {
   }
   export interface GetQueueResponse {
     /**
-     * The storage profile IDs for the queue.
+     * The queue ID.
      */
-    allowedStorageProfileIds?: AllowedStorageProfileIds;
+    queueId: QueueId;
+    /**
+     * The display name of the queue.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    displayName: ResourceName;
+    /**
+     * The description of the queue.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    description?: Description;
+    /**
+     * The farm ID for the queue.
+     */
+    farmId: FarmId;
+    /**
+     * The status of the queue.    ACTIVE–The queue is active.    SCHEDULING–The queue is scheduling.    SCHEDULING_BLOCKED–The queue scheduling is blocked. See the provided reason.  
+     */
+    status: QueueStatus;
+    /**
+     * The default action taken on a queue if a budget wasn't configured.
+     */
+    defaultBudgetAction: DefaultQueueBudgetAction;
     /**
      * The reason the queue was blocked.
      */
     blockedReason?: QueueBlockedReason;
+    /**
+     * The job attachment settings for the queue.
+     */
+    jobAttachmentSettings?: JobAttachmentSettings;
+    /**
+     * The IAM role ARN.
+     */
+    roleArn?: IamRoleArn;
+    /**
+     * A list of the required file system location names in the queue.
+     */
+    requiredFileSystemLocationNames?: RequiredFileSystemLocationNames;
+    /**
+     * The storage profile IDs for the queue.
+     */
+    allowedStorageProfileIds?: AllowedStorageProfileIds;
+    /**
+     * The jobs in the queue ran as this specified POSIX user.
+     */
+    jobRunAsUser?: JobRunAsUser;
     /**
      * The date and time the resource was created.
      */
@@ -2896,46 +2936,6 @@ declare namespace Deadline {
      * The user or system that created this resource.
      */
     createdBy: CreatedBy;
-    /**
-     * The default action taken on a queue if a budget wasn't configured.
-     */
-    defaultBudgetAction: DefaultQueueBudgetAction;
-    /**
-     * The description of the queue.
-     */
-    description?: Description;
-    /**
-     * The display name of the queue.
-     */
-    displayName: ResourceName;
-    /**
-     * The farm ID for the queue.
-     */
-    farmId: FarmId;
-    /**
-     * The job attachment settings for the queue.
-     */
-    jobAttachmentSettings?: JobAttachmentSettings;
-    /**
-     * The jobs in the queue ran as this specified POSIX user.
-     */
-    jobRunAsUser?: JobRunAsUser;
-    /**
-     * The queue ID.
-     */
-    queueId: QueueId;
-    /**
-     * A list of the required file system location names in the queue.
-     */
-    requiredFileSystemLocationNames?: RequiredFileSystemLocationNames;
-    /**
-     * The IAM role ARN.
-     */
-    roleArn?: IamRoleArn;
-    /**
-     * The status of the queue.    ACTIVE–The queue is active.    SCHEDULING–The queue is scheduling.    SCHEDULING_BLOCKED–The queue scheduling is blocked. See the provided reason.  
-     */
-    status: QueueStatus;
     /**
      * The date and time the resource was updated.
      */
@@ -2951,13 +2951,13 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The job ID for the session.
-     */
-    jobId: JobId;
-    /**
      * The queue ID for the session action.
      */
     queueId: QueueId;
+    /**
+     * The job ID for the session.
+     */
+    jobId: JobId;
     /**
      * The session action ID for the session.
      */
@@ -2965,13 +2965,33 @@ declare namespace Deadline {
   }
   export interface GetSessionActionResponse {
     /**
-     * The session action definition.
+     * The session action ID.
      */
-    definition: SessionActionDefinition;
+    sessionActionId: SessionActionId;
+    /**
+     * The status of the session action.
+     */
+    status: SessionActionStatus;
+    /**
+     * The date and time the resource started running.
+     */
+    startedAt?: StartedAt;
     /**
      * The date and time the resource ended running.
      */
     endedAt?: EndedAt;
+    /**
+     * The Linux timestamp of the date and time the session action was last updated.
+     */
+    workerUpdatedAt?: Timestamp;
+    /**
+     * The percentage completed for a session action.
+     */
+    progressPercent?: SessionActionProgressPercent;
+    /**
+     * The session ID for the session action.
+     */
+    sessionId: SessionId;
     /**
      * The exit code to exit the session.
      */
@@ -2981,29 +3001,9 @@ declare namespace Deadline {
      */
     progressMessage?: SessionActionProgressMessage;
     /**
-     * The percentage completed for a session action.
+     * The session action definition.
      */
-    progressPercent?: SessionActionProgressPercent;
-    /**
-     * The session action ID.
-     */
-    sessionActionId: SessionActionId;
-    /**
-     * The session ID for the session action.
-     */
-    sessionId: SessionId;
-    /**
-     * The date and time the resource started running.
-     */
-    startedAt?: StartedAt;
-    /**
-     * The status of the session action.
-     */
-    status: SessionActionStatus;
-    /**
-     * The Linux timestamp of the date and time the session action was last updated.
-     */
-    workerUpdatedAt?: Timestamp;
+    definition: SessionActionDefinition;
   }
   export interface GetSessionRequest {
     /**
@@ -3011,13 +3011,13 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The job ID for the session.
-     */
-    jobId: JobId;
-    /**
      * The queue ID for the session.
      */
     queueId: QueueId;
+    /**
+     * The job ID for the session.
+     */
+    jobId: JobId;
     /**
      * The session ID.
      */
@@ -3025,37 +3025,33 @@ declare namespace Deadline {
   }
   export interface GetSessionResponse {
     /**
-     * The date and time the resource ended running.
+     * The session ID.
      */
-    endedAt?: EndedAt;
+    sessionId: SessionId;
     /**
      * The fleet ID for the session.
      */
     fleetId: FleetId;
     /**
-     * Provides the Amazon EC2 properties of the host.
+     * The worker ID for the session.
      */
-    hostProperties?: HostPropertiesResponse;
-    /**
-     * The life cycle status of the session.
-     */
-    lifecycleStatus: SessionLifecycleStatus;
-    /**
-     * The session log.
-     */
-    log: LogConfiguration;
-    /**
-     * The session ID.
-     */
-    sessionId: SessionId;
+    workerId: WorkerId;
     /**
      * The date and time the resource started running.
      */
     startedAt: StartedAt;
     /**
-     * The life cycle status with which the session started.
+     * The session log.
      */
-    targetLifecycleStatus?: SessionLifecycleTargetStatus;
+    log: LogConfiguration;
+    /**
+     * The life cycle status of the session.
+     */
+    lifecycleStatus: SessionLifecycleStatus;
+    /**
+     * The date and time the resource ended running.
+     */
+    endedAt?: EndedAt;
     /**
      * The date and time the resource was updated.
      */
@@ -3065,9 +3061,13 @@ declare namespace Deadline {
      */
     updatedBy?: UpdatedBy;
     /**
-     * The worker ID for the session.
+     * The life cycle status with which the session started.
      */
-    workerId: WorkerId;
+    targetLifecycleStatus?: SessionLifecycleTargetStatus;
+    /**
+     * Provides the Amazon EC2 properties of the host.
+     */
+    hostProperties?: HostPropertiesResponse;
     /**
      * The worker log for the session.
      */
@@ -3075,13 +3075,13 @@ declare namespace Deadline {
   }
   export interface GetSessionsStatisticsAggregationRequest {
     /**
-     * The identifier returned by the StartSessionsStatisticsAggregation operation that identifies the aggregated statistics.
-     */
-    aggregationId: AggregationId;
-    /**
      * The identifier of the farm to include in the statistics. This should be the same as the farm ID used in the call to the StartSessionsStatisticsAggregation operation.
      */
     farmId: FarmId;
+    /**
+     * The identifier returned by the StartSessionsStatisticsAggregation operation that identifies the aggregated statistics.
+     */
+    aggregationId: AggregationId;
     /**
      * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
      */
@@ -3093,15 +3093,15 @@ declare namespace Deadline {
   }
   export interface GetSessionsStatisticsAggregationResponse {
     /**
-     * If Deadline Cloud returns nextToken, then there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 ValidationException error.
-     */
-    nextToken?: String;
-    /**
      * The statistics for the specified fleets or queues.
      */
     statistics?: StatisticsList;
     /**
-     * The status of the aggregated results.
+     * If Deadline Cloud returns nextToken, then there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 ValidationException error.
+     */
+    nextToken?: String;
+    /**
+     * The status of the aggregated results. An aggregation may fail or time out if the results are too large. If this happens, you can call the StartSessionsStatisticsAggregation operation after you reduce the aggregation time frame, reduce the number of queues or fleets in the aggregation, or increase the period length. If you call the StartSessionsStatisticsAggregation  operation when the status is IN_PROGRESS, you will receive a ThrottlingException.
      */
     status: SessionsStatisticsAggregationStatus;
     /**
@@ -3115,13 +3115,13 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The job ID for the step.
-     */
-    jobId: JobId;
-    /**
      * The queue ID for the step.
      */
     queueId: QueueId;
+    /**
+     * The job ID for the step.
+     */
+    jobId: JobId;
     /**
      * The step ID.
      */
@@ -3129,25 +3129,13 @@ declare namespace Deadline {
   }
   export interface GetStepResponse {
     /**
-     * The date and time the resource was created.
+     * The step ID.
      */
-    createdAt: CreatedAt;
+    stepId: StepId;
     /**
-     * The user or system that created this resource.
+     * The name of the step.
      */
-    createdBy: CreatedBy;
-    /**
-     * The number of dependencies in the step.
-     */
-    dependencyCounts?: DependencyCounts;
-    /**
-     * The description of the step.
-     */
-    description?: StepDescription;
-    /**
-     * The date and time the resource ended running.
-     */
-    endedAt?: EndedAt;
+    name: StepName;
     /**
      * The life cycle status of the step.
      */
@@ -3157,30 +3145,6 @@ declare namespace Deadline {
      */
     lifecycleStatusMessage?: String;
     /**
-     * The name of the step.
-     */
-    name: StepName;
-    /**
-     * A list of step parameters and the combination expression for the step.
-     */
-    parameterSpace?: ParameterSpace;
-    /**
-     * The required capabilities of the step.
-     */
-    requiredCapabilities?: StepRequiredCapabilities;
-    /**
-     * The date and time the resource started running.
-     */
-    startedAt?: StartedAt;
-    /**
-     * The step ID.
-     */
-    stepId: StepId;
-    /**
-     * The task status with which the job started.
-     */
-    targetTaskRunStatus?: StepTargetTaskRunStatus;
-    /**
      * The task run status for the job.
      */
     taskRunStatus: TaskRunStatus;
@@ -3189,6 +3153,18 @@ declare namespace Deadline {
      */
     taskRunStatusCounts: TaskRunStatusCounts;
     /**
+     * The task status with which the job started.
+     */
+    targetTaskRunStatus?: StepTargetTaskRunStatus;
+    /**
+     * The date and time the resource was created.
+     */
+    createdAt: CreatedAt;
+    /**
+     * The user or system that created this resource.
+     */
+    createdBy: CreatedBy;
+    /**
      * The date and time the resource was updated.
      */
     updatedAt?: UpdatedAt;
@@ -3196,6 +3172,30 @@ declare namespace Deadline {
      * The user or system that updated this resource.
      */
     updatedBy?: UpdatedBy;
+    /**
+     * The date and time the resource started running.
+     */
+    startedAt?: StartedAt;
+    /**
+     * The date and time the resource ended running.
+     */
+    endedAt?: EndedAt;
+    /**
+     * The number of dependencies in the step.
+     */
+    dependencyCounts?: DependencyCounts;
+    /**
+     * The required capabilities of the step.
+     */
+    requiredCapabilities?: StepRequiredCapabilities;
+    /**
+     * A list of step parameters and the combination expression for the step.
+     */
+    parameterSpace?: ParameterSpace;
+    /**
+     * The description of the step.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    description?: StepDescription;
   }
   export interface GetStorageProfileForQueueRequest {
     /**
@@ -3213,21 +3213,21 @@ declare namespace Deadline {
   }
   export interface GetStorageProfileForQueueResponse {
     /**
-     * The display name of the storage profile connected to a queue.
+     * The storage profile ID.
+     */
+    storageProfileId: StorageProfileId;
+    /**
+     * The display name of the storage profile connected to a queue.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
      */
     displayName: ResourceName;
-    /**
-     * The location of the files for the storage profile within the queue.
-     */
-    fileSystemLocations?: FileSystemLocationsList;
     /**
      * The operating system of the storage profile in the queue.
      */
     osFamily: StorageProfileOperatingSystemFamily;
     /**
-     * The storage profile ID.
+     * The location of the files for the storage profile within the queue.
      */
-    storageProfileId: StorageProfileId;
+    fileSystemLocations?: FileSystemLocationsList;
   }
   export interface GetStorageProfileRequest {
     /**
@@ -3241,6 +3241,18 @@ declare namespace Deadline {
   }
   export interface GetStorageProfileResponse {
     /**
+     * The storage profile ID.
+     */
+    storageProfileId: StorageProfileId;
+    /**
+     * The display name of the storage profile.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    displayName: ResourceName;
+    /**
+     * The operating system (OS) for the storage profile.
+     */
+    osFamily: StorageProfileOperatingSystemFamily;
+    /**
      * The date and time the resource was created.
      */
     createdAt: CreatedAt;
@@ -3249,22 +3261,6 @@ declare namespace Deadline {
      */
     createdBy: CreatedBy;
     /**
-     * The display name of the storage profile.
-     */
-    displayName: ResourceName;
-    /**
-     * The location of the files for the storage profile.
-     */
-    fileSystemLocations?: FileSystemLocationsList;
-    /**
-     * The operating system (OS) for the storage profile.
-     */
-    osFamily: StorageProfileOperatingSystemFamily;
-    /**
-     * The storage profile ID.
-     */
-    storageProfileId: StorageProfileId;
-    /**
      * The date and time the resource was updated.
      */
     updatedAt?: UpdatedAt;
@@ -3272,6 +3268,10 @@ declare namespace Deadline {
      * The user or system that updated this resource.
      */
     updatedBy?: UpdatedBy;
+    /**
+     * The location of the files for the storage profile.
+     */
+    fileSystemLocations?: FileSystemLocationsList;
   }
   export interface GetTaskRequest {
     /**
@@ -3279,13 +3279,13 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The job ID of the job connected to the task.
-     */
-    jobId: JobId;
-    /**
      * The queue ID for the queue connected to the task.
      */
     queueId: QueueId;
+    /**
+     * The job ID of the job connected to the task.
+     */
+    jobId: JobId;
     /**
      * The step ID for the step connected to the task.
      */
@@ -3297,6 +3297,10 @@ declare namespace Deadline {
   }
   export interface GetTaskResponse {
     /**
+     * The task ID.
+     */
+    taskId: TaskId;
+    /**
      * The date and time the resource was created.
      */
     createdAt: CreatedAt;
@@ -3305,37 +3309,29 @@ declare namespace Deadline {
      */
     createdBy: CreatedBy;
     /**
-     * The date and time the resource ended running.
-     */
-    endedAt?: EndedAt;
-    /**
-     * The number of times that the task failed and was retried.
-     */
-    failureRetryCount?: TaskRetryCount;
-    /**
-     * The latest session ID for the task.
-     */
-    latestSessionActionId?: SessionActionId;
-    /**
-     * The parameters for the task.
-     */
-    parameters?: TaskParameters;
-    /**
      * The run status for the task.
      */
     runStatus: TaskRunStatus;
-    /**
-     * The date and time the resource started running.
-     */
-    startedAt?: StartedAt;
     /**
      * The run status with which to start the task.
      */
     targetRunStatus?: TaskTargetRunStatus;
     /**
-     * The task ID.
+     * The number of times that the task failed and was retried.
      */
-    taskId: TaskId;
+    failureRetryCount?: TaskRetryCount;
+    /**
+     * The parameters for the task.
+     */
+    parameters?: TaskParameters;
+    /**
+     * The date and time the resource started running.
+     */
+    startedAt?: StartedAt;
+    /**
+     * The date and time the resource ended running.
+     */
+    endedAt?: EndedAt;
     /**
      * The date and time the resource was updated.
      */
@@ -3344,6 +3340,10 @@ declare namespace Deadline {
      * The user or system that updated this resource.
      */
     updatedBy?: UpdatedBy;
+    /**
+     * The latest session ID for the task.
+     */
+    latestSessionActionId?: SessionActionId;
   }
   export interface GetWorkerRequest {
     /**
@@ -3361,13 +3361,9 @@ declare namespace Deadline {
   }
   export interface GetWorkerResponse {
     /**
-     * The date and time the resource was created.
+     * The worker ID.
      */
-    createdAt: CreatedAt;
-    /**
-     * The user or system that created this resource.
-     */
-    createdBy: CreatedBy;
+    workerId: WorkerId;
     /**
      * The farm ID.
      */
@@ -3381,13 +3377,21 @@ declare namespace Deadline {
      */
     hostProperties?: HostPropertiesResponse;
     /**
+     * The status of the worker.
+     */
+    status: WorkerStatus;
+    /**
      * The logs for the associated worker.
      */
     log?: LogConfiguration;
     /**
-     * The status of the worker.
+     * The date and time the resource was created.
      */
-    status: WorkerStatus;
+    createdAt: CreatedAt;
+    /**
+     * The user or system that created this resource.
+     */
+    createdBy: CreatedBy;
     /**
      * The date and time the resource was updated.
      */
@@ -3396,23 +3400,27 @@ declare namespace Deadline {
      * The user or system that updated this resource.
      */
     updatedBy?: UpdatedBy;
-    /**
-     * The worker ID.
-     */
-    workerId: WorkerId;
   }
   export type HostName = string;
   export interface HostPropertiesRequest {
     /**
+     * The IP address of the host.
+     */
+    ipAddresses?: IpAddresses;
+    /**
      * The host name.
      */
     hostName?: HostName;
+  }
+  export interface HostPropertiesResponse {
     /**
      * The IP address of the host.
      */
     ipAddresses?: IpAddresses;
-  }
-  export interface HostPropertiesResponse {
+    /**
+     * The host name.
+     */
+    hostName?: HostName;
     /**
      * The ARN of the host EC2 instance.
      */
@@ -3421,14 +3429,6 @@ declare namespace Deadline {
      * The instance type of the host EC2 instance.
      */
     ec2InstanceType?: InstanceType;
-    /**
-     * The host name.
-     */
-    hostName?: HostName;
-    /**
-     * The IP address of the host.
-     */
-    ipAddresses?: IpAddresses;
   }
   export type IamRoleArn = string;
   export type IdentityCenterApplicationArn = string;
@@ -3455,23 +3455,23 @@ declare namespace Deadline {
   export type IpV6Addresses = IpV6Address[];
   export interface JobAttachmentDetailsEntity {
     /**
+     * The job ID.
+     */
+    jobId: JobId;
+    /**
      * The job attachments.
      */
     attachments: Attachments;
+  }
+  export interface JobAttachmentDetailsError {
     /**
      * The job ID.
      */
     jobId: JobId;
-  }
-  export interface JobAttachmentDetailsError {
     /**
      * The error code.
      */
     code: JobEntityErrorCode;
-    /**
-     * The job ID.
-     */
-    jobId: JobId;
     /**
      * The error message detailing the error's cause.
      */
@@ -3485,25 +3485,25 @@ declare namespace Deadline {
   }
   export interface JobAttachmentSettings {
     /**
-     * The root prefix.
-     */
-    rootPrefix: S3Prefix;
-    /**
      * The Amazon S3 bucket name.
      */
     s3BucketName: S3BucketName;
+    /**
+     * The root prefix.
+     */
+    rootPrefix: S3Prefix;
   }
   export type JobAttachmentsFileSystem = "COPIED"|"VIRTUAL"|string;
   export type JobDescription = string;
   export interface JobDetailsEntity {
     /**
-     * The job attachment settings.
-     */
-    jobAttachmentSettings?: JobAttachmentSettings;
-    /**
      * The job ID.
      */
     jobId: JobId;
+    /**
+     * The job attachment settings.
+     */
+    jobAttachmentSettings?: JobAttachmentSettings;
     /**
      * The user name and group that the job uses when run.
      */
@@ -3513,31 +3513,31 @@ declare namespace Deadline {
      */
     logGroupName: String;
     /**
-     * The parameters.
-     */
-    parameters?: JobParameters;
-    /**
-     * The path mapping rules.
-     */
-    pathMappingRules?: PathMappingRules;
-    /**
      * The queue role ARN.
      */
     queueRoleArn?: IamRoleArn;
     /**
+     * The parameters.
+     */
+    parameters?: JobParameters;
+    /**
      * The schema version.
      */
     schemaVersion: String;
+    /**
+     * The path mapping rules.
+     */
+    pathMappingRules?: PathMappingRules;
   }
   export interface JobDetailsError {
-    /**
-     * The error code.
-     */
-    code: JobEntityErrorCode;
     /**
      * The job ID.
      */
     jobId: JobId;
+    /**
+     * The error code.
+     */
+    code: JobEntityErrorCode;
     /**
      * The error message detailing the error's cause.
      */
@@ -3551,41 +3551,41 @@ declare namespace Deadline {
   }
   export interface JobEntity {
     /**
-     * The environment details for the job entity.
+     * The job details.
      */
-    environmentDetails?: EnvironmentDetailsEntity;
+    jobDetails?: JobDetailsEntity;
     /**
      * The job attachment details.
      */
     jobAttachmentDetails?: JobAttachmentDetailsEntity;
     /**
-     * The job details.
-     */
-    jobDetails?: JobDetailsEntity;
-    /**
      * The step details.
      */
     stepDetails?: StepDetailsEntity;
+    /**
+     * The environment details for the job entity.
+     */
+    environmentDetails?: EnvironmentDetailsEntity;
   }
   export type JobEntityErrorCode = "AccessDeniedException"|"InternalServerException"|"ValidationException"|"ResourceNotFoundException"|"MaxPayloadSizeExceeded"|"ConflictException"|string;
   export type JobEntityIdentifiers = JobEntityIdentifiersUnion[];
   export interface JobEntityIdentifiersUnion {
     /**
-     * The environment details.
+     * The job details.
      */
-    environmentDetails?: EnvironmentDetailsIdentifiers;
+    jobDetails?: JobDetailsIdentifiers;
     /**
      * The job attachment details.
      */
     jobAttachmentDetails?: JobAttachmentDetailsIdentifiers;
     /**
-     * The job details.
-     */
-    jobDetails?: JobDetailsIdentifiers;
-    /**
      * The step details.
      */
     stepDetails?: StepDetailsIdentifiers;
+    /**
+     * The environment details.
+     */
+    environmentDetails?: EnvironmentDetailsIdentifiers;
   }
   export type JobId = string;
   export type JobLifecycleStatus = "CREATE_IN_PROGRESS"|"CREATE_FAILED"|"CREATE_COMPLETE"|"UPLOAD_IN_PROGRESS"|"UPLOAD_FAILED"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|"UPDATE_SUCCEEDED"|"ARCHIVED"|string;
@@ -3595,17 +3595,13 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The identity store ID.
+     * The queue ID.
      */
-    identityStoreId: IdentityStoreId;
+    queueId: QueueId;
     /**
      * The job ID.
      */
     jobId: JobId;
-    /**
-     * The job member's membership level.
-     */
-    membershipLevel: MembershipLevel;
     /**
      * The principal ID of the job member.
      */
@@ -3615,29 +3611,33 @@ declare namespace Deadline {
      */
     principalType: PrincipalType;
     /**
-     * The queue ID.
+     * The identity store ID.
      */
-    queueId: QueueId;
+    identityStoreId: IdentityStoreId;
+    /**
+     * The job member's membership level.
+     */
+    membershipLevel: MembershipLevel;
   }
   export type JobMembers = JobMember[];
   export type JobName = string;
   export interface JobParameter {
     /**
-     * A double precision IEEE-754 floating point number represented as a string.
-     */
-    float?: FloatString;
-    /**
      * A signed integer represented as a string.
      */
     int?: IntString;
     /**
-     * A file system path represented as a string.
+     * A double precision IEEE-754 floating point number represented as a string.
      */
-    path?: PathString;
+    float?: FloatString;
     /**
      * A UTF-8 string.
      */
     string?: ParameterString;
+    /**
+     * A file system path represented as a string.
+     */
+    path?: PathString;
   }
   export type JobParameters = {[key: string]: JobParameter};
   export type JobPriority = number;
@@ -3647,36 +3647,28 @@ declare namespace Deadline {
      */
     posix?: PosixUser;
     /**
-     * Specifies whether the job should run using the queue's system user or if the job should run using the worker agent system user.
-     */
-    runAs: RunAs;
-    /**
      * Identifies a Microsoft Windows user.
      */
     windows?: WindowsUser;
+    /**
+     * Specifies whether the job should run using the queue's system user or if the job should run using the worker agent system user.
+     */
+    runAs: RunAs;
   }
   export type JobSearchSummaries = JobSearchSummary[];
   export interface JobSearchSummary {
-    /**
-     * The date and time the resource was created.
-     */
-    createdAt?: CreatedAt;
-    /**
-     * The user or system that created this resource.
-     */
-    createdBy?: CreatedBy;
-    /**
-     * The date and time the resource ended running.
-     */
-    endedAt?: EndedAt;
     /**
      * The job ID.
      */
     jobId?: JobId;
     /**
-     * The job parameters.
+     * The queue ID.
      */
-    jobParameters?: JobParameters;
+    queueId?: QueueId;
+    /**
+     * The job name.
+     */
+    name?: JobName;
     /**
      * The life cycle status.
      */
@@ -3686,6 +3678,22 @@ declare namespace Deadline {
      */
     lifecycleStatusMessage?: String;
     /**
+     * The task run status for the job.    PENDING–pending and waiting for resources.    READY–ready to be processed.    ASSIGNED–assigned and will run next on a worker.    SCHEDULED–scheduled to be run on a worker.    INTERRUPTING–being interrupted.    RUNNING–running on a worker.    SUSPENDED–the task is suspended.    CANCELED–the task has been canceled.    FAILED–the task has failed.    SUCCEEDED–the task has succeeded.  
+     */
+    taskRunStatus?: TaskRunStatus;
+    /**
+     * The task status to start with on the job.
+     */
+    targetTaskRunStatus?: JobTargetTaskRunStatus;
+    /**
+     * The number of tasks running on the job.
+     */
+    taskRunStatusCounts?: TaskRunStatusCounts;
+    /**
+     * The job priority.
+     */
+    priority?: JobPriority;
+    /**
      * The number of task failures before the job stops running and is marked as FAILED.
      */
     maxFailedTasksCount?: MaxFailedTasksCount;
@@ -3694,52 +3702,36 @@ declare namespace Deadline {
      */
     maxRetriesPerTask?: MaxRetriesPerTask;
     /**
-     * The job name.
+     * The user or system that created this resource.
      */
-    name?: JobName;
-    /**
-     * The job priority.
-     */
-    priority?: JobPriority;
-    /**
-     * The queue ID.
-     */
-    queueId?: QueueId;
-    /**
-     * The date and time the resource started running.
-     */
-    startedAt?: StartedAt;
-    /**
-     * The task status to start with on the job.
-     */
-    targetTaskRunStatus?: JobTargetTaskRunStatus;
-    /**
-     * task run status for the job.    PENDING–pending and waiting for resources.    READY–ready to be processed.    ASSIGNED–assigned and will run next on a worker.    SCHEDULED–scheduled to be run on a worker.    INTERRUPTING–being interrupted.    RUNNING–running on a worker.    SUSPENDED–the task is suspended.    CANCELED–the task has been canceled.    FAILED–the task has failed.    SUCCEEDED–the task has succeeded.  
-     */
-    taskRunStatus?: TaskRunStatus;
-    /**
-     * The number of tasks running on the job.
-     */
-    taskRunStatusCounts?: TaskRunStatusCounts;
-  }
-  export type JobSummaries = JobSummary[];
-  export interface JobSummary {
+    createdBy?: CreatedBy;
     /**
      * The date and time the resource was created.
      */
-    createdAt: CreatedAt;
-    /**
-     * The user or system that created this resource.
-     */
-    createdBy: CreatedBy;
+    createdAt?: CreatedAt;
     /**
      * The date and time the resource ended running.
      */
     endedAt?: EndedAt;
     /**
+     * The date and time the resource started running.
+     */
+    startedAt?: StartedAt;
+    /**
+     * The job parameters.
+     */
+    jobParameters?: JobParameters;
+  }
+  export type JobSummaries = JobSummary[];
+  export interface JobSummary {
+    /**
      * The job ID.
      */
     jobId: JobId;
+    /**
+     * The job name.
+     */
+    name: JobName;
     /**
      * The life cycle status.
      */
@@ -3749,37 +3741,17 @@ declare namespace Deadline {
      */
     lifecycleStatusMessage: String;
     /**
-     * The number of task failures before the job stops running and is marked as FAILED.
-     */
-    maxFailedTasksCount?: MaxFailedTasksCount;
-    /**
-     * The maximum number of retries for a job.
-     */
-    maxRetriesPerTask?: MaxRetriesPerTask;
-    /**
-     * The job name.
-     */
-    name: JobName;
-    /**
      * The job priority.
      */
     priority: JobPriority;
     /**
-     * The date and time the resource started running.
+     * The date and time the resource was created.
      */
-    startedAt?: StartedAt;
+    createdAt: CreatedAt;
     /**
-     * The task status to start with on the job.
+     * The user or system that created this resource.
      */
-    targetTaskRunStatus?: JobTargetTaskRunStatus;
-    /**
-     * The task run status for the job.    PENDING–pending and waiting for resources.    READY–ready to be processed.    ASSIGNED–assigned and will run next on a worker.    SCHEDULED–scheduled to be run on a worker.    INTERRUPTING–being interrupted.    RUNNING–running on a worker.    SUSPENDED–the task is suspended.    CANCELED–the task has been canceled.    FAILED–the task has failed.    SUCCEEDED–the task has succeeded.  
-     */
-    taskRunStatus?: TaskRunStatus;
-    /**
-     * The number of tasks running on the job.
-     */
-    taskRunStatusCounts?: TaskRunStatusCounts;
+    createdBy: CreatedBy;
     /**
      * The date and time the resource was updated.
      */
@@ -3788,6 +3760,34 @@ declare namespace Deadline {
      * The user or system that updated this resource.
      */
     updatedBy?: UpdatedBy;
+    /**
+     * The date and time the resource started running.
+     */
+    startedAt?: StartedAt;
+    /**
+     * The date and time the resource ended running.
+     */
+    endedAt?: EndedAt;
+    /**
+     * The task run status for the job.    PENDING–pending and waiting for resources.    READY–ready to be processed.    ASSIGNED–assigned and will run next on a worker.    SCHEDULED–scheduled to be run on a worker.    INTERRUPTING–being interrupted.    RUNNING–running on a worker.    SUSPENDED–the task is suspended.    CANCELED–the task has been canceled.    FAILED–the task has failed.    SUCCEEDED–the task has succeeded.  
+     */
+    taskRunStatus?: TaskRunStatus;
+    /**
+     * The task status to start with on the job.
+     */
+    targetTaskRunStatus?: JobTargetTaskRunStatus;
+    /**
+     * The number of tasks running on the job.
+     */
+    taskRunStatusCounts?: TaskRunStatusCounts;
+    /**
+     * The number of task failures before the job stops running and is marked as FAILED.
+     */
+    maxFailedTasksCount?: MaxFailedTasksCount;
+    /**
+     * The maximum number of retries for a job.
+     */
+    maxRetriesPerTask?: MaxRetriesPerTask;
   }
   export type JobTargetTaskRunStatus = "READY"|"FAILED"|"SUCCEEDED"|"CANCELED"|"SUSPENDED"|"PENDING"|string;
   export type JobTemplate = string;
@@ -3818,13 +3818,13 @@ declare namespace Deadline {
   export type ListAttributeCapabilityValue = AttributeCapabilityValue[];
   export interface ListAvailableMeteredProductsRequest {
     /**
-     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
-     */
-    maxResults?: MaxResults;
-    /**
      * The token for the next set of results, or null to start from the beginning.
      */
     nextToken?: String;
+    /**
+     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
+     */
+    maxResults?: MaxResults;
   }
   export interface ListAvailableMeteredProductsResponse {
     /**
@@ -3838,6 +3838,10 @@ declare namespace Deadline {
   }
   export interface ListBudgetsRequest {
     /**
+     * The token for the next set of results, or null to start from the beginning.
+     */
+    nextToken?: String;
+    /**
      * The farm ID associated with the budgets.
      */
     farmId: FarmId;
@@ -3846,23 +3850,19 @@ declare namespace Deadline {
      */
     maxResults?: MaxResults;
     /**
-     * The token for the next set of results, or null to start from the beginning.
-     */
-    nextToken?: String;
-    /**
      * The status to list for the budgets.
      */
     status?: BudgetStatus;
   }
   export interface ListBudgetsResponse {
     /**
-     * The budgets to include on the list.
-     */
-    budgets: BudgetSummaries;
-    /**
      * If Deadline Cloud returns nextToken, then there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 ValidationException error.
      */
     nextToken?: String;
+    /**
+     * The budgets to include on the list.
+     */
+    budgets: BudgetSummaries;
   }
   export interface ListFarmMembersRequest {
     /**
@@ -3870,13 +3870,13 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
-     */
-    maxResults?: MaxResults;
-    /**
      * The token for the next set of results, or null to start from the beginning.
      */
     nextToken?: String;
+    /**
+     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
+     */
+    maxResults?: MaxResults;
   }
   export interface ListFarmMembersResponse {
     /**
@@ -3890,10 +3890,6 @@ declare namespace Deadline {
   }
   export interface ListFarmsRequest {
     /**
-     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
-     */
-    maxResults?: MaxResults;
-    /**
      * The token for the next set of results, or null to start from the beginning.
      */
     nextToken?: String;
@@ -3901,16 +3897,20 @@ declare namespace Deadline {
      * The principal ID of the member to list on the farm.
      */
     principalId?: IdentityCenterPrincipalId;
+    /**
+     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
+     */
+    maxResults?: MaxResults;
   }
   export interface ListFarmsResponse {
-    /**
-     * Farms on the list.
-     */
-    farms: FarmSummaries;
     /**
      * If Deadline Cloud returns nextToken, then there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 ValidationException error.
      */
     nextToken?: String;
+    /**
+     * Farms on the list.
+     */
+    farms: FarmSummaries;
   }
   export interface ListFleetMembersRequest {
     /**
@@ -3922,13 +3922,13 @@ declare namespace Deadline {
      */
     fleetId: FleetId;
     /**
-     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
-     */
-    maxResults?: MaxResults;
-    /**
      * The token for the next set of results, or null to start from the beginning.
      */
     nextToken?: String;
+    /**
+     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
+     */
+    maxResults?: MaxResults;
   }
   export interface ListFleetMembersResponse {
     /**
@@ -3942,29 +3942,29 @@ declare namespace Deadline {
   }
   export interface ListFleetsRequest {
     /**
-     * The display names of a list of fleets.
-     */
-    displayName?: ResourceName;
-    /**
      * The farm ID of the fleets.
      */
     farmId: FarmId;
-    /**
-     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
-     */
-    maxResults?: MaxResults;
-    /**
-     * The token for the next set of results, or null to start from the beginning.
-     */
-    nextToken?: String;
     /**
      * The principal ID of the members to include in the fleet.
      */
     principalId?: IdentityCenterPrincipalId;
     /**
+     * The display names of a list of fleets.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    displayName?: ResourceName;
+    /**
      * The status of the fleet.
      */
     status?: FleetStatus;
+    /**
+     * The token for the next set of results, or null to start from the beginning.
+     */
+    nextToken?: String;
+    /**
+     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
+     */
+    maxResults?: MaxResults;
   }
   export interface ListFleetsResponse {
     /**
@@ -3982,21 +3982,21 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
+     * The queue ID to include on the list.
+     */
+    queueId: QueueId;
+    /**
      * The job ID to include on the list.
      */
     jobId: JobId;
-    /**
-     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
-     */
-    maxResults?: MaxResults;
     /**
      * The token for the next set of results, or null to start from the beginning.
      */
     nextToken?: String;
     /**
-     * The queue ID to include on the list.
+     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
      */
-    queueId: QueueId;
+    maxResults?: MaxResults;
   }
   export interface ListJobMembersResponse {
     /**
@@ -4014,14 +4014,6 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
-     */
-    maxResults?: MaxResults;
-    /**
-     * The token for the next set of results, or null to start from the beginning.
-     */
-    nextToken?: String;
-    /**
      * The principal ID of the members on the jobs.
      */
     principalId?: IdentityCenterPrincipalId;
@@ -4029,6 +4021,14 @@ declare namespace Deadline {
      * The queue ID for the job.
      */
     queueId: QueueId;
+    /**
+     * The token for the next set of results, or null to start from the beginning.
+     */
+    nextToken?: String;
+    /**
+     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
+     */
+    maxResults?: MaxResults;
   }
   export interface ListJobsResponse {
     /**
@@ -4042,13 +4042,13 @@ declare namespace Deadline {
   }
   export interface ListLicenseEndpointsRequest {
     /**
-     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
-     */
-    maxResults?: MaxResults;
-    /**
      * The token for the next set of results, or null to start from the beginning.
      */
     nextToken?: String;
+    /**
+     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
+     */
+    maxResults?: MaxResults;
   }
   export interface ListLicenseEndpointsResponse {
     /**
@@ -4066,13 +4066,13 @@ declare namespace Deadline {
      */
     licenseEndpointId: LicenseEndpointId;
     /**
-     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
-     */
-    maxResults?: MaxResults;
-    /**
      * The token for the next set of results, or null to start from the beginning.
      */
     nextToken?: String;
+    /**
+     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
+     */
+    maxResults?: MaxResults;
   }
   export interface ListMeteredProductsResponse {
     /**
@@ -4086,23 +4086,23 @@ declare namespace Deadline {
   }
   export interface ListMonitorsRequest {
     /**
-     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
-     */
-    maxResults?: MaxResults;
-    /**
      * The token for the next set of results, or null to start from the beginning.
      */
     nextToken?: String;
+    /**
+     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
+     */
+    maxResults?: MaxResults;
   }
   export interface ListMonitorsResponse {
-    /**
-     * A list of MonitorSummary objects that describe your monitors in the Deadline Cloud.
-     */
-    monitors: MonitorSummaries;
     /**
      * If Deadline Cloud returns nextToken, then there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 ValidationException error.
      */
     nextToken?: String;
+    /**
+     * A list of MonitorSummary objects that describe your monitors in the Deadline Cloud.
+     */
+    monitors: MonitorSummaries;
   }
   export interface ListQueueEnvironmentsRequest {
     /**
@@ -4110,17 +4110,17 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
+     * The queue ID for the queue environment list.
      */
-    maxResults?: MaxResults;
+    queueId: QueueId;
     /**
      * The token for the next set of results, or null to start from the beginning.
      */
     nextToken?: String;
     /**
-     * The queue ID for the queue environment list.
+     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
      */
-    queueId: QueueId;
+    maxResults?: MaxResults;
   }
   export interface ListQueueEnvironmentsResponse {
     /**
@@ -4138,31 +4138,31 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
+     * The queue ID for the queue-fleet association list.
+     */
+    queueId?: QueueId;
+    /**
      * The fleet ID for the queue-fleet association list.
      */
     fleetId?: FleetId;
-    /**
-     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
-     */
-    maxResults?: MaxResults;
     /**
      * The token for the next set of results, or null to start from the beginning.
      */
     nextToken?: String;
     /**
-     * The queue ID for the queue-fleet association list.
+     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
      */
-    queueId?: QueueId;
+    maxResults?: MaxResults;
   }
   export interface ListQueueFleetAssociationsResponse {
-    /**
-     * If Deadline Cloud returns nextToken, then there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 ValidationException error.
-     */
-    nextToken?: String;
     /**
      * The queue-fleet associations on the list.
      */
     queueFleetAssociations: QueueFleetAssociationSummaries;
+    /**
+     * If Deadline Cloud returns nextToken, then there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 ValidationException error.
+     */
+    nextToken?: String;
   }
   export interface ListQueueMembersRequest {
     /**
@@ -4170,17 +4170,17 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
+     * The queue ID to include on the list.
      */
-    maxResults?: MaxResults;
+    queueId: QueueId;
     /**
      * The token for the next set of results, or null to start from the beginning.
      */
     nextToken?: String;
     /**
-     * The queue ID to include on the list.
+     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
      */
-    queueId: QueueId;
+    maxResults?: MaxResults;
   }
   export interface ListQueueMembersResponse {
     /**
@@ -4198,31 +4198,31 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
-     */
-    maxResults?: MaxResults;
-    /**
-     * The token for the next set of results, or null to start from the beginning.
-     */
-    nextToken?: String;
-    /**
-     * The principal ID. This filter is only valid when using Nimble Studio credentials and should match the user ID in the credentials of the caller.
+     * The principal IDs to include in the list of queues.
      */
     principalId?: IdentityCenterPrincipalId;
     /**
      * The status of the queues listed.    ACTIVE–The queues are active.    SCHEDULING–The queues are scheduling.    SCHEDULING_BLOCKED–The queue scheduling is blocked for these queues.  
      */
     status?: QueueStatus;
-  }
-  export interface ListQueuesResponse {
     /**
-     * If Deadline Cloud returns nextToken, then there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 ValidationException error.
+     * The token for the next set of results, or null to start from the beginning.
      */
     nextToken?: String;
+    /**
+     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListQueuesResponse {
     /**
      * The queues on the list.
      */
     queues: QueueSummaries;
+    /**
+     * If Deadline Cloud returns nextToken, then there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 ValidationException error.
+     */
+    nextToken?: String;
   }
   export interface ListSessionActionsRequest {
     /**
@@ -4230,21 +4230,13 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The job ID for the session actions list.
-     */
-    jobId: JobId;
-    /**
-     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
-     */
-    maxResults?: MaxResults;
-    /**
-     * The token for the next set of results, or null to start from the beginning.
-     */
-    nextToken?: String;
-    /**
      * The queue ID for the session actions list.
      */
     queueId: QueueId;
+    /**
+     * The job ID for the session actions list.
+     */
+    jobId: JobId;
     /**
      * The session ID to include on the sessions action list.
      */
@@ -4253,16 +4245,24 @@ declare namespace Deadline {
      * The task ID for the session actions list.
      */
     taskId?: TaskId;
-  }
-  export interface ListSessionActionsResponse {
     /**
-     * If Deadline Cloud returns nextToken, then there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 ValidationException error.
+     * The token for the next set of results, or null to start from the beginning.
      */
     nextToken?: String;
+    /**
+     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListSessionActionsResponse {
     /**
      * The session actions.
      */
     sessionActions: SessionActionSummaries;
+    /**
+     * If Deadline Cloud returns nextToken, then there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 ValidationException error.
+     */
+    nextToken?: String;
   }
   export interface ListSessionsForWorkerRequest {
     /**
@@ -4274,27 +4274,27 @@ declare namespace Deadline {
      */
     fleetId: FleetId;
     /**
-     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
-     */
-    maxResults?: MaxResults;
-    /**
-     * The token for the next set of results, or null to start from the beginning.
-     */
-    nextToken?: String;
-    /**
      * The worker ID for the session.
      */
     workerId: WorkerId;
-  }
-  export interface ListSessionsForWorkerResponse {
     /**
      * The token for the next set of results, or null to start from the beginning.
      */
     nextToken?: String;
+    /**
+     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListSessionsForWorkerResponse {
     /**
      * The sessions in the response.
      */
     sessions: ListSessionsForWorkerSummaries;
+    /**
+     * The token for the next set of results, or null to start from the beginning.
+     */
+    nextToken?: String;
   }
   export type ListSessionsForWorkerSummaries = WorkerSessionSummary[];
   export interface ListSessionsRequest {
@@ -4303,31 +4303,31 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
+     * The queue ID for the list of sessions
+     */
+    queueId: QueueId;
+    /**
      * The job ID for the list of sessions.
      */
     jobId: JobId;
-    /**
-     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
-     */
-    maxResults?: MaxResults;
     /**
      * The token for the next set of results, or null to start from the beginning.
      */
     nextToken?: String;
     /**
-     * The queue ID for the list of sessions
+     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
      */
-    queueId: QueueId;
+    maxResults?: MaxResults;
   }
   export interface ListSessionsResponse {
-    /**
-     * If Deadline Cloud returns nextToken, then there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 ValidationException error.
-     */
-    nextToken?: String;
     /**
      * The sessions on the list.
      */
     sessions: SessionSummaries;
+    /**
+     * If Deadline Cloud returns nextToken, then there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 ValidationException error.
+     */
+    nextToken?: String;
   }
   export interface ListStepConsumersRequest {
     /**
@@ -4335,25 +4335,25 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
+     * The queue ID for the step consumer.
+     */
+    queueId: QueueId;
+    /**
      * The job ID for the step consumer.
      */
     jobId: JobId;
     /**
-     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
+     * The step ID to include on the list.
      */
-    maxResults?: ListStepConsumersRequestMaxResultsInteger;
+    stepId: StepId;
     /**
      * The token for the next set of results, or null to start from the beginning.
      */
     nextToken?: String;
     /**
-     * The queue ID for the step consumer.
+     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
      */
-    queueId: QueueId;
-    /**
-     * The step ID to include on the list.
-     */
-    stepId: StepId;
+    maxResults?: ListStepConsumersRequestMaxResultsInteger;
   }
   export type ListStepConsumersRequestMaxResultsInteger = number;
   export interface ListStepConsumersResponse {
@@ -4372,25 +4372,25 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
+     * The queue ID for the step dependencies list.
+     */
+    queueId: QueueId;
+    /**
      * The job ID for the step dependencies list.
      */
     jobId: JobId;
     /**
-     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
+     * The step ID to include on the list.
      */
-    maxResults?: ListStepDependenciesRequestMaxResultsInteger;
+    stepId: StepId;
     /**
      * The token for the next set of results, or null to start from the beginning.
      */
     nextToken?: String;
     /**
-     * The queue ID for the step dependencies list.
+     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
      */
-    queueId: QueueId;
-    /**
-     * The step ID to include on the list.
-     */
-    stepId: StepId;
+    maxResults?: ListStepDependenciesRequestMaxResultsInteger;
   }
   export type ListStepDependenciesRequestMaxResultsInteger = number;
   export interface ListStepDependenciesResponse {
@@ -4409,31 +4409,31 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
+     * The queue ID to include on the list of steps.
+     */
+    queueId: QueueId;
+    /**
      * The job ID to include on the list of steps.
      */
     jobId: JobId;
-    /**
-     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
-     */
-    maxResults?: MaxResults;
     /**
      * The token for the next set of results, or null to start from the beginning.
      */
     nextToken?: String;
     /**
-     * The queue ID to include on the list of steps.
+     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
      */
-    queueId: QueueId;
+    maxResults?: MaxResults;
   }
   export interface ListStepsResponse {
-    /**
-     * If Deadline Cloud returns nextToken, then there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 ValidationException error.
-     */
-    nextToken?: String;
     /**
      * The steps on the list.
      */
     steps: StepSummaries;
+    /**
+     * If Deadline Cloud returns nextToken, then there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 ValidationException error.
+     */
+    nextToken?: String;
   }
   export interface ListStorageProfilesForQueueRequest {
     /**
@@ -4441,27 +4441,27 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
+     * The queue ID for the storage profile.
      */
-    maxResults?: MaxResults;
+    queueId: QueueId;
     /**
      * The token for the next set of results, or null to start from the beginning.
      */
     nextToken?: String;
     /**
-     * The queue ID for the storage profile.
+     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
      */
-    queueId: QueueId;
+    maxResults?: MaxResults;
   }
   export interface ListStorageProfilesForQueueResponse {
-    /**
-     * If Deadline Cloud returns nextToken, then there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 ValidationException error.
-     */
-    nextToken?: String;
     /**
      * The storage profiles in the queue.
      */
     storageProfiles: StorageProfileSummaries;
+    /**
+     * If Deadline Cloud returns nextToken, then there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 ValidationException error.
+     */
+    nextToken?: String;
   }
   export interface ListStorageProfilesRequest {
     /**
@@ -4469,23 +4469,23 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
-     */
-    maxResults?: MaxResults;
-    /**
      * The token for the next set of results, or null to start from the beginning.
      */
     nextToken?: String;
+    /**
+     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
+     */
+    maxResults?: MaxResults;
   }
   export interface ListStorageProfilesResponse {
-    /**
-     * If Deadline Cloud returns nextToken, then there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 ValidationException error.
-     */
-    nextToken?: String;
     /**
      * The storage profiles.
      */
     storageProfiles: StorageProfileSummaries;
+    /**
+     * If Deadline Cloud returns nextToken, then there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 ValidationException error.
+     */
+    nextToken?: String;
   }
   export interface ListTagsForResourceRequest {
     /**
@@ -4505,35 +4505,35 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
+     * The queue ID connected to the tasks.
+     */
+    queueId: QueueId;
+    /**
      * The job ID for the tasks.
      */
     jobId: JobId;
     /**
-     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
+     * The step ID for the tasks.
      */
-    maxResults?: MaxResults;
+    stepId: StepId;
     /**
      * The token for the next set of results, or null to start from the beginning.
      */
     nextToken?: String;
     /**
-     * The queue ID connected to the tasks.
+     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
      */
-    queueId: QueueId;
-    /**
-     * The step ID for the tasks.
-     */
-    stepId: StepId;
+    maxResults?: MaxResults;
   }
   export interface ListTasksResponse {
-    /**
-     * If Deadline Cloud returns nextToken, then there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 ValidationException error.
-     */
-    nextToken?: String;
     /**
      * Tasks for the job.
      */
     tasks: TaskSummaries;
+    /**
+     * If Deadline Cloud returns nextToken, then there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 ValidationException error.
+     */
+    nextToken?: String;
   }
   export interface ListWorkersRequest {
     /**
@@ -4545,13 +4545,13 @@ declare namespace Deadline {
      */
     fleetId: FleetId;
     /**
-     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
-     */
-    maxResults?: MaxResults;
-    /**
      * The token for the next set of results, or null to start from the beginning.
      */
     nextToken?: String;
+    /**
+     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
+     */
+    maxResults?: MaxResults;
   }
   export interface ListWorkersResponse {
     /**
@@ -4565,10 +4565,6 @@ declare namespace Deadline {
   }
   export interface LogConfiguration {
     /**
-     * The log configuration error details.
-     */
-    error?: LogError;
-    /**
      * The log drivers for worker related logs.
      */
     logDriver: LogDriver;
@@ -4580,6 +4576,10 @@ declare namespace Deadline {
      * The parameters for the log configuration.
      */
     parameters?: LogParameters;
+    /**
+     * The log configuration error details.
+     */
+    error?: LogError;
   }
   export type LogDriver = string;
   export type LogError = string;
@@ -4592,18 +4592,6 @@ declare namespace Deadline {
      */
     fileSystemLocationName?: FileSystemLocationName;
     /**
-     * The has value of the file.
-     */
-    inputManifestHash?: ManifestPropertiesInputManifestHashString;
-    /**
-     * The file path.
-     */
-    inputManifestPath?: ManifestPropertiesInputManifestPathString;
-    /**
-     * The file path relative to the directory.
-     */
-    outputRelativeDirectories?: OutputRelativeDirectoriesList;
-    /**
      * The file's root path.
      */
     rootPath: ManifestPropertiesRootPathString;
@@ -4611,6 +4599,18 @@ declare namespace Deadline {
      * The format of the root path.
      */
     rootPathFormat: PathFormat;
+    /**
+     * The file path relative to the directory.
+     */
+    outputRelativeDirectories?: OutputRelativeDirectoriesList;
+    /**
+     * The file path.
+     */
+    inputManifestPath?: ManifestPropertiesInputManifestPathString;
+    /**
+     * The has value of the file.
+     */
+    inputManifestHash?: ManifestPropertiesInputManifestHashString;
   }
   export type ManifestPropertiesInputManifestHashString = string;
   export type ManifestPropertiesInputManifestPathString = string;
@@ -4623,32 +4623,32 @@ declare namespace Deadline {
   export type MemoryAmountMiB = number;
   export interface MemoryMiBRange {
     /**
-     * The maximum amount of memory (in MiB).
-     */
-    max?: MemoryAmountMiB;
-    /**
      * The minimum amount of memory (in MiB).
      */
     min: MemoryAmountMiB;
+    /**
+     * The maximum amount of memory (in MiB).
+     */
+    max?: MemoryAmountMiB;
   }
   export type MeteredProductId = string;
   export interface MeteredProductSummary {
-    /**
-     * The family to which the metered product belongs.
-     */
-    family: BoundedString;
-    /**
-     * The port on which the metered product should run.
-     */
-    port: PortNumber;
     /**
      * The product ID.
      */
     productId: MeteredProductId;
     /**
+     * The family to which the metered product belongs.
+     */
+    family: BoundedString;
+    /**
      * The vendor.
      */
     vendor: BoundedString;
+    /**
+     * The port on which the metered product should run.
+     */
+    port: PortNumber;
   }
   export type MeteredProductSummaryList = MeteredProductSummary[];
   export type MinOneMaxTenThousand = number;
@@ -4656,6 +4656,34 @@ declare namespace Deadline {
   export type MonitorId = string;
   export type MonitorSummaries = MonitorSummary[];
   export interface MonitorSummary {
+    /**
+     * The unique identifier for the monitor.
+     */
+    monitorId: MonitorId;
+    /**
+     * The name of the monitor that displays on the Deadline Cloud console.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    displayName: ResourceName;
+    /**
+     * The subdomain used for the monitor URL. The full URL of the monitor is subdomain.Region.deadlinecloud.amazonaws.com.
+     */
+    subdomain: Subdomain;
+    /**
+     * The complete URL of the monitor. The full URL of the monitor is subdomain.Region.deadlinecloud.amazonaws.com.
+     */
+    url: Url;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role for the monitor. Users of the monitor use this role to access Deadline Cloud resources.
+     */
+    roleArn: IamRoleArn;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM Identity Center instance responsible for authenticating monitor users.
+     */
+    identityCenterInstanceArn: IdentityCenterInstanceArn;
+    /**
+     * The Amazon Resource Name (ARN) that the IAM Identity Center assigned to the monitor when it was created.
+     */
+    identityCenterApplicationArn: IdentityCenterApplicationArn;
     /**
      * The UNIX timestamp of the date and time that the monitor was created.
      */
@@ -4665,30 +4693,6 @@ declare namespace Deadline {
      */
     createdBy: CreatedBy;
     /**
-     * The name of the monitor that displays on the Deadline Cloud console.
-     */
-    displayName: ResourceName;
-    /**
-     * The Amazon Resource Name (ARN) that the IAM Identity Center assigned to the monitor when it was created.
-     */
-    identityCenterApplicationArn: IdentityCenterApplicationArn;
-    /**
-     * The Amazon Resource Name (ARN) of the IAM Identity Center instance responsible for authenticating monitor users.
-     */
-    identityCenterInstanceArn: IdentityCenterInstanceArn;
-    /**
-     * The unique identifier for the monitor.
-     */
-    monitorId: MonitorId;
-    /**
-     * The Amazon Resource Name (ARN) of the IAM role for the monitor. Users of the monitor use this role to access Deadline Cloud resources.
-     */
-    roleArn: IamRoleArn;
-    /**
-     * The subdomain used for the monitor URL. The full URL of the monitor is subdomain.Region.deadlinecloud.amazonaws.com.
-     */
-    subdomain: Subdomain;
-    /**
      * The UNIX timestamp of the date and time that the monitor was last updated.
      */
     updatedAt?: UpdatedAt;
@@ -4696,10 +4700,6 @@ declare namespace Deadline {
      * The user name of the person that last updated the monitor.
      */
     updatedBy?: UpdatedBy;
-    /**
-     * The complete URL of the monitor. The full URL of the monitor is subdomain.Region.deadlinecloud.amazonaws.com.
-     */
-    url: Url;
   }
   export type NextItemOffset = number;
   export type OutputRelativeDirectoriesList = OutputRelativeDirectoriesListMemberString[];
@@ -4720,40 +4720,40 @@ declare namespace Deadline {
   }
   export interface ParameterSortExpression {
     /**
-     * The parameter name to sort by.
-     */
-    name: String;
-    /**
      * The sort order for the parameter.
      */
     sortOrder: SortOrder;
+    /**
+     * The parameter name to sort by.
+     */
+    name: String;
   }
   export interface ParameterSpace {
-    /**
-     * The combination expression to use in the search.
-     */
-    combination?: CombinationExpression;
     /**
      * The parameters to search for.
      */
     parameters: StepParameterList;
+    /**
+     * The combination expression to use in the search.
+     */
+    combination?: CombinationExpression;
   }
   export type ParameterString = string;
   export type ParameterValue = string;
   export type PathFormat = "windows"|"posix"|string;
   export interface PathMappingRule {
     /**
-     * The destination path.
+     * The source path format.
      */
-    destinationPath: String;
+    sourcePathFormat: PathFormat;
     /**
      * The source path.
      */
     sourcePath: String;
     /**
-     * The source path format.
+     * The destination path.
      */
-    sourcePathFormat: PathFormat;
+    destinationPath: String;
   }
   export type PathMappingRules = PathMappingRule[];
   export type PathString = string;
@@ -4761,13 +4761,13 @@ declare namespace Deadline {
   export type PortNumber = number;
   export interface PosixUser {
     /**
-     * The name of the POSIX user's group.
-     */
-    group: PosixUserGroupString;
-    /**
      * The name of the POSIX user.
      */
     user: PosixUserUserString;
+    /**
+     * The name of the POSIX user's group.
+     */
+    group: PosixUserGroupString;
   }
   export type PosixUserGroupString = string;
   export type PosixUserUserString = string;
@@ -4791,6 +4791,10 @@ declare namespace Deadline {
   export type QueueEnvironmentSummaries = QueueEnvironmentSummary[];
   export interface QueueEnvironmentSummary {
     /**
+     * The queue environment ID.
+     */
+    queueEnvironmentId: QueueEnvironmentId;
+    /**
      * The name of the queue environment.
      */
     name: EnvironmentName;
@@ -4798,14 +4802,22 @@ declare namespace Deadline {
      * The queue environment's priority.
      */
     priority: Priority;
-    /**
-     * The queue environment ID.
-     */
-    queueEnvironmentId: QueueEnvironmentId;
   }
   export type QueueFleetAssociationStatus = "ACTIVE"|"STOP_SCHEDULING_AND_COMPLETE_TASKS"|"STOP_SCHEDULING_AND_CANCEL_TASKS"|"STOPPED"|string;
   export type QueueFleetAssociationSummaries = QueueFleetAssociationSummary[];
   export interface QueueFleetAssociationSummary {
+    /**
+     * The queue ID.
+     */
+    queueId: QueueId;
+    /**
+     * The fleet ID.
+     */
+    fleetId: FleetId;
+    /**
+     * The status of task scheduling in the queue-fleet association.    ACTIVE–Association is active.    STOP_SCHEDULING_AND_COMPLETE_TASKS–Association has stopped scheduling new tasks and is completing current tasks.    STOP_SCHEDULING_AND_CANCEL_TASKS–Association has stopped scheduling new tasks and is canceling current tasks.    STOPPED–Association has been stopped.  
+     */
+    status: QueueFleetAssociationStatus;
     /**
      * The date and time the resource was created.
      */
@@ -4814,18 +4826,6 @@ declare namespace Deadline {
      * The user or system that created this resource.
      */
     createdBy: CreatedBy;
-    /**
-     * The fleet ID.
-     */
-    fleetId: FleetId;
-    /**
-     * The queue ID.
-     */
-    queueId: QueueId;
-    /**
-     * The status of task scheduling in the queue-fleet association.    ACTIVE–Association is active.    STOP_SCHEDULING_AND_COMPLETE_TASKS–Association has stopped scheduling new tasks and is completing current tasks.    STOP_SCHEDULING_AND_CANCEL_TASKS–Association has stopped scheduling new tasks and is canceling current tasks.    STOPPED–Association has been stopped.  
-     */
-    status: QueueFleetAssociationStatus;
     /**
      * The date and time the resource was updated.
      */
@@ -4842,13 +4842,9 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The identity store ID.
+     * The queue ID.
      */
-    identityStoreId: IdentityStoreId;
-    /**
-     * The queue member's membership level.
-     */
-    membershipLevel: MembershipLevel;
+    queueId: QueueId;
     /**
      * The principal ID of the queue member.
      */
@@ -4858,14 +4854,38 @@ declare namespace Deadline {
      */
     principalType: PrincipalType;
     /**
-     * The queue ID.
+     * The identity store ID.
      */
-    queueId: QueueId;
+    identityStoreId: IdentityStoreId;
+    /**
+     * The queue member's membership level.
+     */
+    membershipLevel: MembershipLevel;
   }
   export type QueueMemberList = QueueMember[];
   export type QueueStatus = "IDLE"|"SCHEDULING"|"SCHEDULING_BLOCKED"|string;
   export type QueueSummaries = QueueSummary[];
   export interface QueueSummary {
+    /**
+     * The farm ID.
+     */
+    farmId: FarmId;
+    /**
+     * The queue ID.
+     */
+    queueId: QueueId;
+    /**
+     * The display name of the queue summary to update.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    displayName: ResourceName;
+    /**
+     * That status of the queue.
+     */
+    status: QueueStatus;
+    /**
+     * The default action taken on a queue summary if a budget wasn't configured.
+     */
+    defaultBudgetAction: DefaultQueueBudgetAction;
     /**
      * The reason the queue is blocked, if applicable.
      */
@@ -4879,26 +4899,6 @@ declare namespace Deadline {
      */
     createdBy: CreatedBy;
     /**
-     * The default action taken on a queue summary if a budget wasn't configured.
-     */
-    defaultBudgetAction: DefaultQueueBudgetAction;
-    /**
-     * The display name of the queue summary to update.
-     */
-    displayName: ResourceName;
-    /**
-     * The farm ID.
-     */
-    farmId: FarmId;
-    /**
-     * The queue ID.
-     */
-    queueId: QueueId;
-    /**
-     * That status of the queue.
-     */
-    status: QueueStatus;
-    /**
      * The date and time the resource was updated.
      */
     updatedAt?: UpdatedAt;
@@ -4911,17 +4911,17 @@ declare namespace Deadline {
   export type ResourceName = string;
   export interface ResponseBudgetAction {
     /**
-     * The budget action description.
+     * The action taken on the budget once scheduling stops.
      */
-    description?: Description;
+    type: BudgetActionType;
     /**
      * The percentage threshold for the budget.
      */
     thresholdPercentage: ThresholdPercentage;
     /**
-     * The action taken on the budget once scheduling stops.
+     * The budget action description.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
      */
-    type: BudgetActionType;
+    description?: Description;
   }
   export type ResponseBudgetActionList = ResponseBudgetAction[];
   export type RunAs = "QUEUE_CONFIGURED_USER"|"WORKER_AGENT_USER"|string;
@@ -4944,10 +4944,6 @@ declare namespace Deadline {
      */
     dateTimeFilter?: DateTimeFilterExpression;
     /**
-     * Filters by group.
-     */
-    groupFilter?: SearchGroupedFilterExpressions;
-    /**
      * Filters by parameter.
      */
     parameterFilter?: ParameterFilterExpression;
@@ -4959,6 +4955,10 @@ declare namespace Deadline {
      * Filters by a string.
      */
     stringFilter?: StringFilterExpression;
+    /**
+     * Filters by group.
+     */
+    groupFilter?: SearchGroupedFilterExpressions;
   }
   export type SearchFilterExpressions = SearchFilterExpression[];
   export interface SearchGroupedFilterExpressions {
@@ -4977,9 +4977,17 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
+     * The queue ID to use in the job search.
+     */
+    queueIds: SearchJobsRequestQueueIdsList;
+    /**
      * The filter expression, AND or OR, to use when searching among a group of search strings in a resource. You can use two groupings per search each within parenthesis ().
      */
     filterExpressions?: SearchGroupedFilterExpressions;
+    /**
+     * The search terms for a resource.
+     */
+    sortExpressions?: SearchSortExpressions;
     /**
      * Defines how far into the scrollable list to start the return of results.
      */
@@ -4988,14 +4996,6 @@ declare namespace Deadline {
      * Specifies the number of items per page for the resource.
      */
     pageSize?: SearchJobsRequestPageSizeInteger;
-    /**
-     * The queue ID to use in the job search.
-     */
-    queueIds: SearchJobsRequestQueueIdsList;
-    /**
-     * The search terms for a resource.
-     */
-    sortExpressions?: SearchSortExpressions;
   }
   export type SearchJobsRequestItemOffsetInteger = number;
   export type SearchJobsRequestPageSizeInteger = number;
@@ -5016,6 +5016,10 @@ declare namespace Deadline {
   }
   export interface SearchSortExpression {
     /**
+     * Options for sorting a particular user's jobs first.
+     */
+    userJobsFirst?: UserJobsFirst;
+    /**
      * Options for sorting by a field.
      */
     fieldSort?: FieldSortExpression;
@@ -5023,10 +5027,6 @@ declare namespace Deadline {
      * Options for sorting by a parameter.
      */
     parameterSort?: ParameterSortExpression;
-    /**
-     * Options for sorting a particular user's jobs first.
-     */
-    userJobsFirst?: UserJobsFirst;
   }
   export type SearchSortExpressions = SearchSortExpression[];
   export interface SearchStepsRequest {
@@ -5035,42 +5035,42 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The filter expression, AND or OR, to use when searching among a group of search strings in a resource. You can use two groupings per search each within parenthesis ().
+     * The queue IDs in the step search.
      */
-    filterExpressions?: SearchGroupedFilterExpressions;
-    /**
-     * Defines how far into the scrollable list to start the return of results.
-     */
-    itemOffset: SearchStepsRequestItemOffsetInteger;
+    queueIds: SearchStepsRequestQueueIdsList;
     /**
      * The job ID to use in the step search.
      */
     jobId?: JobId;
     /**
-     * Specifies the number of items per page for the resource.
+     * The filter expression, AND or OR, to use when searching among a group of search strings in a resource. You can use two groupings per search each within parenthesis ().
      */
-    pageSize?: SearchStepsRequestPageSizeInteger;
-    /**
-     * The queue IDs in the step search.
-     */
-    queueIds: SearchStepsRequestQueueIdsList;
+    filterExpressions?: SearchGroupedFilterExpressions;
     /**
      * The search terms for a resource.
      */
     sortExpressions?: SearchSortExpressions;
+    /**
+     * Defines how far into the scrollable list to start the return of results.
+     */
+    itemOffset: SearchStepsRequestItemOffsetInteger;
+    /**
+     * Specifies the number of items per page for the resource.
+     */
+    pageSize?: SearchStepsRequestPageSizeInteger;
   }
   export type SearchStepsRequestItemOffsetInteger = number;
   export type SearchStepsRequestPageSizeInteger = number;
   export type SearchStepsRequestQueueIdsList = QueueId[];
   export interface SearchStepsResponse {
     /**
-     * The next incremental starting point after the defined itemOffset.
-     */
-    nextItemOffset?: NextItemOffset;
-    /**
      * The steps in the search.
      */
     steps: StepSearchSummaries;
+    /**
+     * The next incremental starting point after the defined itemOffset.
+     */
+    nextItemOffset?: NextItemOffset;
     /**
      * The total number of results in the search.
      */
@@ -5082,42 +5082,42 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The filter expression, AND or OR, to use when searching among a group of search strings in a resource. You can use two groupings per search each within parenthesis ().
+     * The queue IDs to include in the search.
      */
-    filterExpressions?: SearchGroupedFilterExpressions;
-    /**
-     * Defines how far into the scrollable list to start the return of results.
-     */
-    itemOffset: SearchTasksRequestItemOffsetInteger;
+    queueIds: SearchTasksRequestQueueIdsList;
     /**
      * The job ID for the task search.
      */
     jobId?: JobId;
     /**
-     * Specifies the number of items per page for the resource.
+     * The filter expression, AND or OR, to use when searching among a group of search strings in a resource. You can use two groupings per search each within parenthesis ().
      */
-    pageSize?: SearchTasksRequestPageSizeInteger;
-    /**
-     * The queue IDs to include in the search.
-     */
-    queueIds: SearchTasksRequestQueueIdsList;
+    filterExpressions?: SearchGroupedFilterExpressions;
     /**
      * The search terms for a resource.
      */
     sortExpressions?: SearchSortExpressions;
+    /**
+     * Defines how far into the scrollable list to start the return of results.
+     */
+    itemOffset: SearchTasksRequestItemOffsetInteger;
+    /**
+     * Specifies the number of items per page for the resource.
+     */
+    pageSize?: SearchTasksRequestPageSizeInteger;
   }
   export type SearchTasksRequestItemOffsetInteger = number;
   export type SearchTasksRequestPageSizeInteger = number;
   export type SearchTasksRequestQueueIdsList = QueueId[];
   export interface SearchTasksResponse {
     /**
-     * The next incremental starting point after the defined itemOffset.
-     */
-    nextItemOffset?: NextItemOffset;
-    /**
      * Tasks in the search.
      */
     tasks: TaskSearchSummaries;
+    /**
+     * The next incremental starting point after the defined itemOffset.
+     */
+    nextItemOffset?: NextItemOffset;
     /**
      * The total number of results in the search.
      */
@@ -5136,13 +5136,17 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
+     * The fleet ID of the workers to search for.
+     */
+    fleetIds: SearchWorkersRequestFleetIdsList;
+    /**
      * The filter expression, AND or OR, to use when searching among a group of search strings in a resource. You can use two groupings per search each within parenthesis ().
      */
     filterExpressions?: SearchGroupedFilterExpressions;
     /**
-     * The fleet ID of the workers to search for.
+     * The search terms for a resource.
      */
-    fleetIds: SearchWorkersRequestFleetIdsList;
+    sortExpressions?: SearchSortExpressions;
     /**
      * Defines how far into the scrollable list to start the return of results.
      */
@@ -5151,15 +5155,15 @@ declare namespace Deadline {
      * Specifies the number of items per page for the resource.
      */
     pageSize?: SearchWorkersRequestPageSizeInteger;
-    /**
-     * The search terms for a resource.
-     */
-    sortExpressions?: SearchSortExpressions;
   }
   export type SearchWorkersRequestFleetIdsList = FleetId[];
   export type SearchWorkersRequestItemOffsetInteger = number;
   export type SearchWorkersRequestPageSizeInteger = number;
   export interface SearchWorkersResponse {
+    /**
+     * The workers for the search.
+     */
+    workers: WorkerSearchSummaries;
     /**
      * The next incremental starting point after the defined itemOffset.
      */
@@ -5168,10 +5172,6 @@ declare namespace Deadline {
      * The total number of results in the search.
      */
     totalResults: TotalResults;
-    /**
-     * The workers for the search.
-     */
-    workers: WorkerSearchSummaries;
   }
   export type SecretAccessKey = string;
   export type SecurityGroupId = string;
@@ -5187,25 +5187,9 @@ declare namespace Deadline {
   }
   export interface ServiceManagedEc2InstanceCapabilities {
     /**
-     * The allowable Amazon EC2 instance types.
+     * The amount of vCPU to require for instances in this fleet.
      */
-    allowedInstanceTypes?: InstanceTypes;
-    /**
-     * The CPU architecture type.
-     */
-    cpuArchitectureType: CpuArchitectureType;
-    /**
-     * The custom capability amounts to require for instances in this fleet.
-     */
-    customAmounts?: CustomFleetAmountCapabilities;
-    /**
-     * The custom capability attributes to require for instances in this fleet.
-     */
-    customAttributes?: CustomFleetAttributeCapabilities;
-    /**
-     * The instance types to exclude from the fleet.
-     */
-    excludedInstanceTypes?: InstanceTypes;
+    vCpuCount: VCpuCountRange;
     /**
      * The memory, as MiB, for the Amazon EC2 instance type.
      */
@@ -5215,13 +5199,29 @@ declare namespace Deadline {
      */
     osFamily: ServiceManagedFleetOperatingSystemFamily;
     /**
+     * The CPU architecture type.
+     */
+    cpuArchitectureType: CpuArchitectureType;
+    /**
      * The root EBS volume.
      */
     rootEbsVolume?: Ec2EbsVolume;
     /**
-     * The amount of vCPU to require for instances in this fleet.
+     * The allowable Amazon EC2 instance types.
      */
-    vCpuCount: VCpuCountRange;
+    allowedInstanceTypes?: InstanceTypes;
+    /**
+     * The instance types to exclude from the fleet.
+     */
+    excludedInstanceTypes?: InstanceTypes;
+    /**
+     * The custom capability amounts to require for instances in this fleet.
+     */
+    customAmounts?: CustomFleetAmountCapabilities;
+    /**
+     * The custom capability attributes to require for instances in this fleet.
+     */
+    customAttributes?: CustomFleetAttributeCapabilities;
   }
   export interface ServiceManagedEc2InstanceMarketOptions {
     /**
@@ -5240,13 +5240,13 @@ declare namespace Deadline {
      */
     envExit?: EnvironmentExitSessionActionDefinition;
     /**
-     * The job attachments to sync with a session action.
-     */
-    syncInputJobAttachments?: SyncInputJobAttachmentsSessionActionDefinition;
-    /**
      * The task run in the session.
      */
     taskRun?: TaskRunSessionActionDefinition;
+    /**
+     * The job attachments to sync with a session action.
+     */
+    syncInputJobAttachments?: SyncInputJobAttachmentsSessionActionDefinition;
   }
   export interface SessionActionDefinitionSummary {
     /**
@@ -5258,13 +5258,13 @@ declare namespace Deadline {
      */
     envExit?: EnvironmentExitSessionActionDefinitionSummary;
     /**
-     * The job attachments to sync with the session action definition.
-     */
-    syncInputJobAttachments?: SyncInputJobAttachmentsSessionActionDefinitionSummary;
-    /**
      * The task run.
      */
     taskRun?: TaskRunSessionActionDefinitionSummary;
+    /**
+     * The job attachments to sync with the session action definition.
+     */
+    syncInputJobAttachments?: SyncInputJobAttachmentsSessionActionDefinitionSummary;
   }
   export type SessionActionId = string;
   export type SessionActionIdList = SessionActionId[];
@@ -5274,33 +5274,33 @@ declare namespace Deadline {
   export type SessionActionSummaries = SessionActionSummary[];
   export interface SessionActionSummary {
     /**
-     * The session action definition.
-     */
-    definition: SessionActionDefinitionSummary;
-    /**
-     * The date and time the resource ended running.
-     */
-    endedAt?: EndedAt;
-    /**
-     * The completion percentage for the session action.
-     */
-    progressPercent?: SessionActionProgressPercent;
-    /**
      * The session action ID.
      */
     sessionActionId: SessionActionId;
-    /**
-     * The date and time the resource started running.
-     */
-    startedAt?: StartedAt;
     /**
      * The status of the session action.
      */
     status: SessionActionStatus;
     /**
+     * The date and time the resource started running.
+     */
+    startedAt?: StartedAt;
+    /**
+     * The date and time the resource ended running.
+     */
+    endedAt?: EndedAt;
+    /**
      * The Linux timestamp of the last date and time that the session action was updated.
      */
     workerUpdatedAt?: Timestamp;
+    /**
+     * The completion percentage for the session action.
+     */
+    progressPercent?: SessionActionProgressPercent;
+    /**
+     * The session action definition.
+     */
+    definition: SessionActionDefinitionSummary;
   }
   export type SessionId = string;
   export type SessionLifecycleStatus = "STARTED"|"UPDATE_IN_PROGRESS"|"UPDATE_SUCCEEDED"|"UPDATE_FAILED"|"ENDED"|string;
@@ -5308,29 +5308,29 @@ declare namespace Deadline {
   export type SessionSummaries = SessionSummary[];
   export interface SessionSummary {
     /**
-     * The date and time the resource ended running.
+     * The session ID.
      */
-    endedAt?: EndedAt;
+    sessionId: SessionId;
     /**
      * The fleet ID.
      */
     fleetId: FleetId;
     /**
-     * The life cycle status for the session.
+     * The worker ID.
      */
-    lifecycleStatus: SessionLifecycleStatus;
-    /**
-     * The session ID.
-     */
-    sessionId: SessionId;
+    workerId: WorkerId;
     /**
      * The date and time the resource started running.
      */
     startedAt: StartedAt;
     /**
-     * The target life cycle status for the session.
+     * The life cycle status for the session.
      */
-    targetLifecycleStatus?: SessionLifecycleTargetStatus;
+    lifecycleStatus: SessionLifecycleStatus;
+    /**
+     * The date and time the resource ended running.
+     */
+    endedAt?: EndedAt;
     /**
      * The date and time the resource was updated.
      */
@@ -5340,42 +5340,30 @@ declare namespace Deadline {
      */
     updatedBy?: UpdatedBy;
     /**
-     * The worker ID.
+     * The target life cycle status for the session.
      */
-    workerId: WorkerId;
+    targetLifecycleStatus?: SessionLifecycleTargetStatus;
   }
   export type SessionToken = string;
   export type SessionsStatisticsAggregationStatus = "IN_PROGRESS"|"TIMEOUT"|"FAILED"|"COMPLETED"|string;
   export interface SessionsStatisticsResources {
     /**
-     * One to 10 fleet IDs that specify the fleets to return statistics for. If you specify the fleetIds field, you can't specify the queueIds field.
-     */
-    fleetIds?: SessionsStatisticsResourcesFleetIdsList;
-    /**
      * One to 10 queue IDs that specify the queues to return statistics for. If you specify the queueIds field, you can't specify the fleetIds field.
      */
     queueIds?: SessionsStatisticsResourcesQueueIdsList;
+    /**
+     * One to 10 fleet IDs that specify the fleets to return statistics for. If you specify the fleetIds field, you can't specify the queueIds field.
+     */
+    fleetIds?: SessionsStatisticsResourcesFleetIdsList;
   }
   export type SessionsStatisticsResourcesFleetIdsList = FleetId[];
   export type SessionsStatisticsResourcesQueueIdsList = QueueId[];
   export type SortOrder = "ASCENDING"|"DESCENDING"|string;
   export interface StartSessionsStatisticsAggregationRequest {
     /**
-     * The Linux timestamp of the date and time that the statistics end.
-     */
-    endTime: SyntheticTimestamp_date_time;
-    /**
      * The identifier of the farm that contains queues or fleets to return statistics for.
      */
     farmId: FarmId;
-    /**
-     * The field to use to group the statistics.
-     */
-    groupBy: UsageGroupBy;
-    /**
-     * The period to aggregate the statistics.
-     */
-    period?: Period;
     /**
      * A list of fleet IDs or queue IDs to gather statistics for.
      */
@@ -5385,13 +5373,25 @@ declare namespace Deadline {
      */
     startTime: SyntheticTimestamp_date_time;
     /**
-     * One to four statistics to return.
+     * The Linux timestamp of the date and time that the statistics end.
      */
-    statistics: UsageStatistics;
+    endTime: SyntheticTimestamp_date_time;
     /**
      * The timezone to use for the statistics. Use UTC notation such as "UTC+8."
      */
     timezone?: Timezone;
+    /**
+     * The period to aggregate the statistics.
+     */
+    period?: Period;
+    /**
+     * The field to use to group the statistics.
+     */
+    groupBy: UsageGroupBy;
+    /**
+     * One to four statistics to return.
+     */
+    statistics: UsageStatistics;
   }
   export interface StartSessionsStatisticsAggregationResponse {
     /**
@@ -5403,29 +5403,13 @@ declare namespace Deadline {
   export type StartsAt = Date;
   export interface Statistics {
     /**
-     * The end time for the aggregation.
+     * The queue ID.
      */
-    aggregationEndTime?: SyntheticTimestamp_date_time;
-    /**
-     * The start time for the aggregation.
-     */
-    aggregationStartTime?: SyntheticTimestamp_date_time;
-    /**
-     * How the statistics should appear in USD. Options include: minimum, maximum, average or sum.
-     */
-    costInUsd: Stats;
-    /**
-     * The number of instances in a list of statistics.
-     */
-    count: Integer;
+    queueId?: QueueId;
     /**
      * The fleet ID.
      */
     fleetId?: FleetId;
-    /**
-     * The type of instance.
-     */
-    instanceType?: InstanceType;
     /**
      * The job ID.
      */
@@ -5435,40 +5419,56 @@ declare namespace Deadline {
      */
     jobName?: JobName;
     /**
-     * The licensed product.
+     * The user ID.
      */
-    licenseProduct?: LicenseProduct;
-    /**
-     * The queue ID.
-     */
-    queueId?: QueueId;
-    /**
-     * The total aggregated runtime.
-     */
-    runtimeInSeconds: Stats;
+    userId?: UserId;
     /**
      * The type of usage for the statistics.
      */
     usageType?: UsageType;
     /**
-     * The user ID.
+     * The licensed product.
      */
-    userId?: UserId;
+    licenseProduct?: LicenseProduct;
+    /**
+     * The type of instance.
+     */
+    instanceType?: InstanceType;
+    /**
+     * The number of instances in a list of statistics.
+     */
+    count: Integer;
+    /**
+     * How the statistics should appear in USD. Options include: minimum, maximum, average or sum.
+     */
+    costInUsd: Stats;
+    /**
+     * The total aggregated runtime.
+     */
+    runtimeInSeconds: Stats;
+    /**
+     * The start time for the aggregation.
+     */
+    aggregationStartTime?: SyntheticTimestamp_date_time;
+    /**
+     * The end time for the aggregation.
+     */
+    aggregationEndTime?: SyntheticTimestamp_date_time;
   }
   export type StatisticsList = Statistics[];
   export interface Stats {
     /**
-     * The average of the usage statistics.
+     * The minimum of the usage statistics.
      */
-    avg?: Double;
+    min?: Double;
     /**
      * The maximum among the usage statistics.
      */
     max?: Double;
     /**
-     * The minimum of the usage statistics.
+     * The average of the usage statistics.
      */
-    min?: Double;
+    avg?: Double;
     /**
      * The sum of the usage statistics.
      */
@@ -5478,17 +5478,17 @@ declare namespace Deadline {
   export type StepAmountCapabilities = StepAmountCapability[];
   export interface StepAmountCapability {
     /**
-     * The maximum amount.
+     * The name of the step.
      */
-    max?: Double;
+    name: AmountCapabilityName;
     /**
      * The minimum amount.
      */
     min?: Double;
     /**
-     * The name of the step.
+     * The maximum amount.
      */
-    name: AmountCapabilityName;
+    max?: Double;
     /**
      * The amount value.
      */
@@ -5497,80 +5497,80 @@ declare namespace Deadline {
   export type StepAttributeCapabilities = StepAttributeCapability[];
   export interface StepAttributeCapability {
     /**
-     * Requires all of the step attribute values.
+     * The name of the step attribute.
      */
-    allOf?: ListAttributeCapabilityValue;
+    name: AttributeCapabilityName;
     /**
      * Requires any of the step attributes in a given list.
      */
     anyOf?: ListAttributeCapabilityValue;
     /**
-     * The name of the step attribute.
+     * Requires all of the step attribute values.
      */
-    name: AttributeCapabilityName;
+    allOf?: ListAttributeCapabilityValue;
   }
   export interface StepConsumer {
-    /**
-     * The step consumer status.
-     */
-    status: DependencyConsumerResolutionStatus;
     /**
      * The step ID.
      */
     stepId: StepId;
+    /**
+     * The step consumer status.
+     */
+    status: DependencyConsumerResolutionStatus;
   }
   export type StepConsumers = StepConsumer[];
   export type StepDependencies = StepDependency[];
   export interface StepDependency {
     /**
-     * The step dependency status.
-     */
-    status: DependencyConsumerResolutionStatus;
-    /**
      * The step ID.
      */
     stepId: StepId;
+    /**
+     * The step dependency status.
+     */
+    status: DependencyConsumerResolutionStatus;
   }
   export type StepDescription = string;
   export interface StepDetailsEntity {
     /**
-     * The dependencies for a step.
-     */
-    dependencies: DependenciesList;
-    /**
      * The job ID.
      */
     jobId: JobId;
+    /**
+     * The step ID.
+     */
+    stepId: StepId;
     /**
      * The schema version for a step template.
      */
     schemaVersion: String;
     /**
-     * The step ID.
-     */
-    stepId: StepId;
-    /**
      * The template for a step.
      */
     template: Document;
+    /**
+     * The dependencies for a step.
+     */
+    dependencies: DependenciesList;
   }
   export interface StepDetailsError {
-    /**
-     * The error code.
-     */
-    code: JobEntityErrorCode;
     /**
      * The job ID.
      */
     jobId: JobId;
     /**
-     * The error message detailing the error's cause.
-     */
-    message: String;
-    /**
      * The step ID.
      */
     stepId: StepId;
+    /**
+     * The error code.
+     */
+    code: JobEntityErrorCode;
+    /**
+     * The error message detailing the error's cause.
+     */
+    message: String;
   }
   export interface StepDetailsIdentifiers {
     /**
@@ -5600,28 +5600,32 @@ declare namespace Deadline {
   export type StepParameterType = "INT"|"FLOAT"|"STRING"|"PATH"|string;
   export interface StepRequiredCapabilities {
     /**
-     * The capability amounts that the step requires.
-     */
-    amounts: StepAmountCapabilities;
-    /**
      * The capability attributes that the step requires.
      */
     attributes: StepAttributeCapabilities;
+    /**
+     * The capability amounts that the step requires.
+     */
+    amounts: StepAmountCapabilities;
   }
   export type StepSearchSummaries = StepSearchSummary[];
   export interface StepSearchSummary {
     /**
-     * The date and time the resource was created.
+     * The step ID.
      */
-    createdAt?: CreatedAt;
-    /**
-     * The date and time the resource ended running.
-     */
-    endedAt?: EndedAt;
+    stepId?: StepId;
     /**
      * The job ID.
      */
     jobId?: JobId;
+    /**
+     * The queue ID.
+     */
+    queueId?: QueueId;
+    /**
+     * The step name.
+     */
+    name?: StepName;
     /**
      * The life cycle status.
      */
@@ -5631,56 +5635,44 @@ declare namespace Deadline {
      */
     lifecycleStatusMessage?: String;
     /**
-     * The step name.
+     * The task run status for the job.    PENDING–pending and waiting for resources.    READY–ready to be processed.    ASSIGNED–assigned and will run next on a worker.    SCHEDULED–scheduled to be run on a worker.    INTERRUPTING–being interrupted.    RUNNING–running on a worker.    SUSPENDED–the task is suspended.    CANCELED–the task has been canceled.    FAILED–the task has failed.    SUCCEEDED–the task has succeeded.  
      */
-    name?: StepName;
-    /**
-     * The parameters and combination expressions for the search.
-     */
-    parameterSpace?: ParameterSpace;
-    /**
-     * The queue ID.
-     */
-    queueId?: QueueId;
-    /**
-     * The date and time the resource started running.
-     */
-    startedAt?: StartedAt;
-    /**
-     * The step ID.
-     */
-    stepId?: StepId;
+    taskRunStatus?: TaskRunStatus;
     /**
      * The task status to start with on the job.
      */
     targetTaskRunStatus?: StepTargetTaskRunStatus;
     /**
-     * The task run status for the job.    PENDING–pending and waiting for resources.    READY–ready to be processed.    ASSIGNED–assigned and will run next on a worker.    SCHEDULED–scheduled to be run on a worker.    INTERRUPTING–being interrupted.    RUNNING–running on a worker.    SUSPENDED–the task is suspended.    CANCELED–the task has been canceled.    FAILED–the task has failed.    SUCCEEDED–the task has succeeded.  
-     */
-    taskRunStatus?: TaskRunStatus;
-    /**
      * The number of tasks running on the job.
      */
     taskRunStatusCounts?: TaskRunStatusCounts;
-  }
-  export type StepSummaries = StepSummary[];
-  export interface StepSummary {
     /**
      * The date and time the resource was created.
      */
-    createdAt: CreatedAt;
+    createdAt?: CreatedAt;
     /**
-     * The user or system that created this resource.
+     * The date and time the resource started running.
      */
-    createdBy: CreatedBy;
-    /**
-     * The number of dependencies for the step.
-     */
-    dependencyCounts?: DependencyCounts;
+    startedAt?: StartedAt;
     /**
      * The date and time the resource ended running.
      */
     endedAt?: EndedAt;
+    /**
+     * The parameters and combination expressions for the search.
+     */
+    parameterSpace?: ParameterSpace;
+  }
+  export type StepSummaries = StepSummary[];
+  export interface StepSummary {
+    /**
+     * The step ID.
+     */
+    stepId: StepId;
+    /**
+     * The name of the step.
+     */
+    name: StepName;
     /**
      * The life cycle status.
      */
@@ -5690,22 +5682,6 @@ declare namespace Deadline {
      */
     lifecycleStatusMessage?: String;
     /**
-     * The name of the step.
-     */
-    name: StepName;
-    /**
-     * The date and time the resource started running.
-     */
-    startedAt?: StartedAt;
-    /**
-     * The step ID.
-     */
-    stepId: StepId;
-    /**
-     * The task status to start with on the job.
-     */
-    targetTaskRunStatus?: StepTargetTaskRunStatus;
-    /**
      * The task run status for the job.    PENDING–pending and waiting for resources.    READY–ready to process.    ASSIGNED–assigned and will run next on a worker.    SCHEDULED–scheduled to run on a worker.    INTERRUPTING–being interrupted.    RUNNING–running on a worker.    SUSPENDED–the task is suspended.    CANCELED–the task has been canceled.    FAILED–the task has failed.    SUCCEEDED–the task has succeeded.  
      */
     taskRunStatus: TaskRunStatus;
@@ -5714,6 +5690,18 @@ declare namespace Deadline {
      */
     taskRunStatusCounts: TaskRunStatusCounts;
     /**
+     * The task status to start with on the job.
+     */
+    targetTaskRunStatus?: StepTargetTaskRunStatus;
+    /**
+     * The date and time the resource was created.
+     */
+    createdAt: CreatedAt;
+    /**
+     * The user or system that created this resource.
+     */
+    createdBy: CreatedBy;
+    /**
      * The date and time the resource was updated.
      */
     updatedAt?: UpdatedAt;
@@ -5721,6 +5709,18 @@ declare namespace Deadline {
      * The user or system that updated this resource.
      */
     updatedBy?: UpdatedBy;
+    /**
+     * The date and time the resource started running.
+     */
+    startedAt?: StartedAt;
+    /**
+     * The date and time the resource ended running.
+     */
+    endedAt?: EndedAt;
+    /**
+     * The number of dependencies for the step.
+     */
+    dependencyCounts?: DependencyCounts;
   }
   export type StepTargetTaskRunStatus = "READY"|"FAILED"|"SUCCEEDED"|"CANCELED"|"SUSPENDED"|"PENDING"|string;
   export type StorageProfileId = string;
@@ -5728,17 +5728,17 @@ declare namespace Deadline {
   export type StorageProfileSummaries = StorageProfileSummary[];
   export interface StorageProfileSummary {
     /**
-     * The display name of the storage profile summary to update.
+     * The storage profile ID.
+     */
+    storageProfileId: StorageProfileId;
+    /**
+     * The display name of the storage profile summary to update.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
      */
     displayName: ResourceName;
     /**
      * The operating system (OS) family.
      */
     osFamily: StorageProfileOperatingSystemFamily;
-    /**
-     * The storage profile ID.
-     */
-    storageProfileId: StorageProfileId;
   }
   export type String = string;
   export type StringFilter = string;
@@ -5788,68 +5788,64 @@ declare namespace Deadline {
   export type TaskId = string;
   export interface TaskParameterValue {
     /**
-     * A double precision IEEE-754 floating point number represented as a string.
-     */
-    float?: FloatString;
-    /**
      * A signed integer represented as a string.
      */
     int?: IntString;
     /**
-     * A file system path represented as a string.
+     * A double precision IEEE-754 floating point number represented as a string.
      */
-    path?: PathString;
+    float?: FloatString;
     /**
      * A UTF-8 string.
      */
     string?: ParameterString;
+    /**
+     * A file system path represented as a string.
+     */
+    path?: PathString;
   }
   export type TaskParameters = {[key: string]: TaskParameterValue};
   export type TaskRetryCount = number;
   export interface TaskRunSessionActionDefinition {
     /**
+     * The task ID.
+     */
+    taskId: TaskId;
+    /**
+     * The step ID.
+     */
+    stepId: StepId;
+    /**
      * The task parameters.
      */
     parameters: TaskParameters;
-    /**
-     * The step ID.
-     */
-    stepId: StepId;
-    /**
-     * The task ID.
-     */
-    taskId: TaskId;
   }
   export interface TaskRunSessionActionDefinitionSummary {
     /**
-     * The step ID.
-     */
-    stepId: StepId;
-    /**
      * The task ID.
      */
     taskId: TaskId;
+    /**
+     * The step ID.
+     */
+    stepId: StepId;
   }
   export type TaskRunStatus = "PENDING"|"READY"|"ASSIGNED"|"STARTING"|"SCHEDULED"|"INTERRUPTING"|"RUNNING"|"SUSPENDED"|"CANCELED"|"FAILED"|"SUCCEEDED"|"NOT_COMPATIBLE"|string;
   export type TaskRunStatusCounts = {[key: string]: Integer};
   export type TaskSearchSummaries = TaskSearchSummary[];
   export interface TaskSearchSummary {
     /**
-     * The date and time the resource ended running.
+     * The task ID.
      */
-    endedAt?: EndedAt;
+    taskId?: TaskId;
     /**
-     * The number of times that the task failed and was retried.
+     * The step ID.
      */
-    failureRetryCount?: TaskRetryCount;
+    stepId?: StepId;
     /**
      * The job ID.
      */
     jobId?: JobId;
-    /**
-     * The parameters to search for.
-     */
-    parameters?: TaskParameters;
     /**
      * The queue ID.
      */
@@ -5859,24 +5855,32 @@ declare namespace Deadline {
      */
     runStatus?: TaskRunStatus;
     /**
-     * The date and time the resource started running.
-     */
-    startedAt?: StartedAt;
-    /**
-     * The step ID.
-     */
-    stepId?: StepId;
-    /**
      * The run status that the task is being updated to.
      */
     targetRunStatus?: TaskTargetRunStatus;
     /**
-     * The task ID.
+     * The parameters to search for.
      */
-    taskId?: TaskId;
+    parameters?: TaskParameters;
+    /**
+     * The number of times that the task failed and was retried.
+     */
+    failureRetryCount?: TaskRetryCount;
+    /**
+     * The date and time the resource started running.
+     */
+    startedAt?: StartedAt;
+    /**
+     * The date and time the resource ended running.
+     */
+    endedAt?: EndedAt;
   }
   export type TaskSummaries = TaskSummary[];
   export interface TaskSummary {
+    /**
+     * The task ID.
+     */
+    taskId: TaskId;
     /**
      * The date and time the resource was created.
      */
@@ -5886,37 +5890,29 @@ declare namespace Deadline {
      */
     createdBy: CreatedBy;
     /**
-     * The date and time the resource ended running.
-     */
-    endedAt?: EndedAt;
-    /**
-     * The number of times that the task failed and was retried.
-     */
-    failureRetryCount?: TaskRetryCount;
-    /**
-     * The latest session action for the task.
-     */
-    latestSessionActionId?: SessionActionId;
-    /**
-     * The task parameters.
-     */
-    parameters?: TaskParameters;
-    /**
      * The run status of the task.
      */
     runStatus: TaskRunStatus;
-    /**
-     * The date and time the resource started running.
-     */
-    startedAt?: StartedAt;
     /**
      * The run status on which the started.
      */
     targetRunStatus?: TaskTargetRunStatus;
     /**
-     * The task ID.
+     * The number of times that the task failed and was retried.
      */
-    taskId: TaskId;
+    failureRetryCount?: TaskRetryCount;
+    /**
+     * The task parameters.
+     */
+    parameters?: TaskParameters;
+    /**
+     * The date and time the resource started running.
+     */
+    startedAt?: StartedAt;
+    /**
+     * The date and time the resource ended running.
+     */
+    endedAt?: EndedAt;
     /**
      * The date and time the resource was updated.
      */
@@ -5925,6 +5921,10 @@ declare namespace Deadline {
      * The user or system that updated this resource.
      */
     updatedBy?: UpdatedBy;
+    /**
+     * The latest session action for the task.
+     */
+    latestSessionActionId?: SessionActionId;
   }
   export type TaskTargetRunStatus = "READY"|"FAILED"|"SUCCEEDED"|"CANCELED"|"SUSPENDED"|"PENDING"|string;
   export type ThresholdPercentage = number;
@@ -5945,6 +5945,34 @@ declare namespace Deadline {
   }
   export interface UpdateBudgetRequest {
     /**
+     * The unique token which the server uses to recognize retries of the same request.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The farm ID of the budget to update.
+     */
+    farmId: FarmId;
+    /**
+     * The budget ID to update.
+     */
+    budgetId: BudgetId;
+    /**
+     * The display name of the budget to update.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    displayName?: ResourceName;
+    /**
+     * The description of the budget to update.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    description?: Description;
+    /**
+     * Updates the status of the budget.    ACTIVE–The budget is being evaluated.    INACTIVE–The budget is inactive. This can include Expired, Canceled, or deleted Deleted statuses.  
+     */
+    status?: BudgetStatus;
+    /**
+     * The dollar limit to update on the budget. Based on consumed usage.
+     */
+    approximateDollarLimit?: ConsumedUsageLimit;
+    /**
      * The budget actions to add. Budget actions specify what happens when the budget runs out.
      */
     actionsToAdd?: BudgetActionsToAdd;
@@ -5953,53 +5981,25 @@ declare namespace Deadline {
      */
     actionsToRemove?: BudgetActionsToRemove;
     /**
-     * The dollar limit to update on the budget. Based on consumed usage.
-     */
-    approximateDollarLimit?: ConsumedUsageLimit;
-    /**
-     * The budget ID to update.
-     */
-    budgetId: BudgetId;
-    /**
-     * The unique token which the server uses to recognize retries of the same request.
-     */
-    clientToken?: ClientToken;
-    /**
-     * The description of the budget to update.
-     */
-    description?: Description;
-    /**
-     * The display name of the budget to update.
-     */
-    displayName?: ResourceName;
-    /**
-     * The farm ID of the budget to update.
-     */
-    farmId: FarmId;
-    /**
      * The schedule to update.
      */
     schedule?: BudgetSchedule;
-    /**
-     * Updates the status of the budget.    ACTIVE–The budget is being evaluated.    INACTIVE–The budget is inactive. This can include Expired, Canceled, or deleted Deleted statuses.  
-     */
-    status?: BudgetStatus;
   }
   export interface UpdateBudgetResponse {
   }
   export interface UpdateFarmRequest {
     /**
-     * The description of the farm to update.
-     */
-    description?: Description;
-    /**
-     * The display name of the farm to update.
-     */
-    displayName?: ResourceName;
-    /**
      * The farm ID to update.
      */
     farmId: FarmId;
+    /**
+     * The display name of the farm to update.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    displayName?: ResourceName;
+    /**
+     * The description of the farm to update.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    description?: Description;
   }
   export interface UpdateFarmResponse {
   }
@@ -6009,18 +6009,6 @@ declare namespace Deadline {
      */
     clientToken?: ClientToken;
     /**
-     * The fleet configuration to update.
-     */
-    configuration?: FleetConfiguration;
-    /**
-     * The description of the fleet to update.
-     */
-    description?: Description;
-    /**
-     * The display name of the fleet to update.
-     */
-    displayName?: ResourceName;
-    /**
      * The farm ID to update.
      */
     farmId: FarmId;
@@ -6029,17 +6017,29 @@ declare namespace Deadline {
      */
     fleetId: FleetId;
     /**
-     * The maximum number of workers in the fleet.
+     * The display name of the fleet to update.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
      */
-    maxWorkerCount?: MinZeroMaxInteger;
+    displayName?: ResourceName;
+    /**
+     * The description of the fleet to update.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    description?: Description;
+    /**
+     * The IAM role ARN that the fleet's workers assume while running jobs.
+     */
+    roleArn?: IamRoleArn;
     /**
      * The minimum number of workers in the fleet.
      */
     minWorkerCount?: MinZeroMaxInteger;
     /**
-     * The IAM role ARN that the fleet's workers assume while running jobs.
+     * The maximum number of workers in the fleet.
      */
-    roleArn?: IamRoleArn;
+    maxWorkerCount?: MinZeroMaxInteger;
+    /**
+     * The fleet configuration to update.
+     */
+    configuration?: FleetConfiguration;
   }
   export interface UpdateFleetResponse {
   }
@@ -6054,13 +6054,21 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
+     * The queue ID of the job to update.
+     */
+    queueId: QueueId;
+    /**
      * The job ID to update.
      */
     jobId: JobId;
     /**
-     * The status of a job in its lifecycle.
+     * The task status to update the job's tasks to.
      */
-    lifecycleStatus?: UpdateJobLifecycleStatus;
+    targetTaskRunStatus?: JobTargetTaskRunStatus;
+    /**
+     * The job priority to update.
+     */
+    priority?: JobPriority;
     /**
      * The number of task failures before the job stops running and is marked as FAILED.
      */
@@ -6070,37 +6078,29 @@ declare namespace Deadline {
      */
     maxRetriesPerTask?: MaxRetriesPerTask;
     /**
-     * The job priority to update.
+     * The status of a job in its lifecycle. When you change the status of the job to ARCHIVED, the job can't be scheduled or archived.  An archived jobs and its steps and tasks are deleted after 120 days. The job can't be recovered. 
      */
-    priority?: JobPriority;
-    /**
-     * The queue ID of the job to update.
-     */
-    queueId: QueueId;
-    /**
-     * The task status to update the job's tasks to.
-     */
-    targetTaskRunStatus?: JobTargetTaskRunStatus;
+    lifecycleStatus?: UpdateJobLifecycleStatus;
   }
   export interface UpdateJobResponse {
   }
   export interface UpdateMonitorRequest {
     /**
-     * The new value to use for the monitor's display name.
-     */
-    displayName?: ResourceName;
-    /**
      * The unique identifier of the monitor to update.
      */
     monitorId: MonitorId;
     /**
-     * The Amazon Resource Name (ARN) of the new IAM role to use with the monitor.
-     */
-    roleArn?: IamRoleArn;
-    /**
      * The new value of the subdomain to use when forming the monitor URL.
      */
     subdomain?: Subdomain;
+    /**
+     * The new value to use for the monitor's display name.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    displayName?: ResourceName;
+    /**
+     * The Amazon Resource Name (ARN) of the new IAM role to use with the monitor.
+     */
+    roleArn?: IamRoleArn;
   }
   export interface UpdateMonitorResponse {
   }
@@ -6114,25 +6114,25 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The priority to update.
+     * The queue ID of the queue environment to update.
      */
-    priority?: Priority;
+    queueId: QueueId;
     /**
      * The queue environment ID to update.
      */
     queueEnvironmentId: QueueEnvironmentId;
     /**
-     * The queue ID of the queue environment to update.
+     * The priority to update.
      */
-    queueId: QueueId;
-    /**
-     * The template to update.
-     */
-    template?: EnvironmentTemplate;
+    priority?: Priority;
     /**
      * The template type to update.
      */
     templateType?: EnvironmentTemplateType;
+    /**
+     * The template to update.
+     */
+    template?: EnvironmentTemplate;
   }
   export interface UpdateQueueEnvironmentResponse {
   }
@@ -6142,13 +6142,13 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The fleet ID to update.
-     */
-    fleetId: FleetId;
-    /**
      * The queue ID to update.
      */
     queueId: QueueId;
+    /**
+     * The fleet ID to update.
+     */
+    fleetId: FleetId;
     /**
      * The status to update.
      */
@@ -6159,45 +6159,41 @@ declare namespace Deadline {
   export type UpdateQueueFleetAssociationStatus = "ACTIVE"|"STOP_SCHEDULING_AND_COMPLETE_TASKS"|"STOP_SCHEDULING_AND_CANCEL_TASKS"|string;
   export interface UpdateQueueRequest {
     /**
-     * The storage profile IDs to add.
-     */
-    allowedStorageProfileIdsToAdd?: AllowedStorageProfileIds;
-    /**
-     * The storage profile ID to remove.
-     */
-    allowedStorageProfileIdsToRemove?: AllowedStorageProfileIds;
-    /**
      * The idempotency token to update in the queue.
      */
     clientToken?: ClientToken;
-    /**
-     * The default action to take for a queue update if a budget isn't configured.
-     */
-    defaultBudgetAction?: DefaultQueueBudgetAction;
-    /**
-     * The description of the queue to update.
-     */
-    description?: Description;
-    /**
-     * The display name of the queue to update.
-     */
-    displayName?: ResourceName;
     /**
      * The farm ID to update in the queue.
      */
     farmId: FarmId;
     /**
+     * The queue ID to update.
+     */
+    queueId: QueueId;
+    /**
+     * The display name of the queue to update.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    displayName?: ResourceName;
+    /**
+     * The description of the queue to update.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    description?: Description;
+    /**
+     * The default action to take for a queue update if a budget isn't configured.
+     */
+    defaultBudgetAction?: DefaultQueueBudgetAction;
+    /**
      * The job attachment settings to update for the queue.
      */
     jobAttachmentSettings?: JobAttachmentSettings;
     /**
+     * The IAM role ARN that's used to run jobs from this queue.
+     */
+    roleArn?: IamRoleArn;
+    /**
      * Update the jobs in the queue to run as a specified POSIX user.
      */
     jobRunAsUser?: JobRunAsUser;
-    /**
-     * The queue ID to update.
-     */
-    queueId: QueueId;
     /**
      * The required file system location names to add to the queue.
      */
@@ -6207,9 +6203,13 @@ declare namespace Deadline {
      */
     requiredFileSystemLocationNamesToRemove?: RequiredFileSystemLocationNames;
     /**
-     * The IAM role ARN that's used to run jobs from this queue.
+     * The storage profile IDs to add.
      */
-    roleArn?: IamRoleArn;
+    allowedStorageProfileIdsToAdd?: AllowedStorageProfileIds;
+    /**
+     * The storage profile ID to remove.
+     */
+    allowedStorageProfileIdsToRemove?: AllowedStorageProfileIds;
   }
   export interface UpdateQueueResponse {
   }
@@ -6223,13 +6223,13 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The job ID to update in the session.
-     */
-    jobId: JobId;
-    /**
      * The queue ID to update in the session.
      */
     queueId: QueueId;
+    /**
+     * The job ID to update in the session.
+     */
+    jobId: JobId;
     /**
      * The session ID to update.
      */
@@ -6251,13 +6251,13 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The job ID to update.
-     */
-    jobId: JobId;
-    /**
      * The queue ID to update.
      */
     queueId: QueueId;
+    /**
+     * The job ID to update.
+     */
+    jobId: JobId;
     /**
      * The step ID to update.
      */
@@ -6275,13 +6275,21 @@ declare namespace Deadline {
      */
     clientToken?: ClientToken;
     /**
-     * The display name of the storage profile to update.
-     */
-    displayName?: ResourceName;
-    /**
      * The farm ID to update.
      */
     farmId: FarmId;
+    /**
+     * The storage profile ID to update.
+     */
+    storageProfileId: StorageProfileId;
+    /**
+     * The display name of the storage profile to update.  This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field. 
+     */
+    displayName?: ResourceName;
+    /**
+     * The OS system to update.
+     */
+    osFamily?: StorageProfileOperatingSystemFamily;
     /**
      * The file system location names to add.
      */
@@ -6290,14 +6298,6 @@ declare namespace Deadline {
      * The file system location names to remove.
      */
     fileSystemLocationsToRemove?: FileSystemLocationsList;
-    /**
-     * The OS system to update.
-     */
-    osFamily?: StorageProfileOperatingSystemFamily;
-    /**
-     * The storage profile ID to update.
-     */
-    storageProfileId: StorageProfileId;
   }
   export interface UpdateStorageProfileResponse {
   }
@@ -6311,33 +6311,29 @@ declare namespace Deadline {
      */
     farmId: FarmId;
     /**
-     * The job ID to update.
-     */
-    jobId: JobId;
-    /**
      * The queue ID to update.
      */
     queueId: QueueId;
+    /**
+     * The job ID to update.
+     */
+    jobId: JobId;
     /**
      * The step ID to update.
      */
     stepId: StepId;
     /**
-     * The run status with which to start the task.
-     */
-    targetRunStatus: TaskTargetRunStatus;
-    /**
      * The task ID to update.
      */
     taskId: TaskId;
+    /**
+     * The run status with which to start the task.
+     */
+    targetRunStatus: TaskTargetRunStatus;
   }
   export interface UpdateTaskResponse {
   }
   export interface UpdateWorkerRequest {
-    /**
-     * The worker capabilities to update.
-     */
-    capabilities?: WorkerCapabilities;
     /**
      * The farm ID to update.
      */
@@ -6347,17 +6343,21 @@ declare namespace Deadline {
      */
     fleetId: FleetId;
     /**
-     * The host properties to update.
+     * The worker ID to update.
      */
-    hostProperties?: HostPropertiesRequest;
+    workerId: WorkerId;
     /**
      * The worker status to update.
      */
     status?: UpdatedWorkerStatus;
     /**
-     * The worker ID to update.
+     * The worker capabilities to update.
      */
-    workerId: WorkerId;
+    capabilities?: WorkerCapabilities;
+    /**
+     * The host properties to update.
+     */
+    hostProperties?: HostPropertiesRequest;
   }
   export interface UpdateWorkerResponse {
     /**
@@ -6376,13 +6376,13 @@ declare namespace Deadline {
      */
     fleetId: FleetId;
     /**
-     * The session actions associated with the worker schedule to update.
-     */
-    updatedSessionActions?: UpdatedSessionActions;
-    /**
      * The worker ID to update.
      */
     workerId: WorkerId;
+    /**
+     * The session actions associated with the worker schedule to update.
+     */
+    updatedSessionActions?: UpdatedSessionActions;
   }
   export interface UpdateWorkerScheduleResponse {
     /**
@@ -6410,10 +6410,6 @@ declare namespace Deadline {
      */
     completedStatus?: CompletedStatus;
     /**
-     * The date and time the resource ended running.
-     */
-    endedAt?: SyntheticTimestamp_date_time;
-    /**
      * The process exit code.
      */
     processExitCode?: ProcessExitCode;
@@ -6422,17 +6418,21 @@ declare namespace Deadline {
      */
     progressMessage?: SessionActionProgressMessage;
     /**
-     * The percentage completed.
-     */
-    progressPercent?: SessionActionProgressPercent;
-    /**
      * The date and time the resource started running.
      */
     startedAt?: SyntheticTimestamp_date_time;
     /**
+     * The date and time the resource ended running.
+     */
+    endedAt?: SyntheticTimestamp_date_time;
+    /**
      * The updated time.
      */
     updatedAt?: SyntheticTimestamp_date_time;
+    /**
+     * The percentage completed.
+     */
+    progressPercent?: SessionActionProgressPercent;
   }
   export type UpdatedSessionActions = {[key: string]: UpdatedSessionActionInfo};
   export type UpdatedWorkerStatus = "STARTED"|"STOPPING"|"STOPPED"|string;
@@ -6457,24 +6457,24 @@ declare namespace Deadline {
   }
   export interface VCpuCountRange {
     /**
-     * The maximum amount of vCPU.
-     */
-    max?: MinOneMaxTenThousand;
-    /**
      * The minimum amount of vCPU.
      */
     min: MinOneMaxTenThousand;
+    /**
+     * The maximum amount of vCPU.
+     */
+    max?: MinOneMaxTenThousand;
   }
   export type VpcId = string;
   export interface WindowsUser {
     /**
-     * The password ARN for the Windows user.
-     */
-    passwordArn: WindowsUserPasswordArnString;
-    /**
      * The user.
      */
     user: WindowsUserUserString;
+    /**
+     * The password ARN for the Windows user.
+     */
+    passwordArn: WindowsUserPasswordArnString;
   }
   export type WindowsUserPasswordArnString = string;
   export type WindowsUserUserString = string;
@@ -6514,63 +6514,63 @@ declare namespace Deadline {
   export type WorkerSearchSummaries = WorkerSearchSummary[];
   export interface WorkerSearchSummary {
     /**
-     * The date and time the resource was created.
-     */
-    createdAt?: CreatedAt;
-    /**
-     * The user or system that created this resource.
-     */
-    createdBy?: CreatedBy;
-    /**
      * The fleet ID.
      */
     fleetId?: FleetId;
     /**
-     * Provides the Amazon EC2 instance properties of the worker host.
+     * The worker ID.
      */
-    hostProperties?: HostPropertiesResponse;
+    workerId?: WorkerId;
     /**
      * The status of the worker search.
      */
     status?: WorkerStatus;
     /**
-     * The date and time the resource was updated.
+     * Provides the Amazon EC2 instance properties of the worker host.
      */
-    updatedAt?: UpdatedAt;
+    hostProperties?: HostPropertiesResponse;
+    /**
+     * The user or system that created this resource.
+     */
+    createdBy?: CreatedBy;
+    /**
+     * The date and time the resource was created.
+     */
+    createdAt?: CreatedAt;
     /**
      * The user or system that updated this resource.
      */
     updatedBy?: UpdatedBy;
     /**
-     * The worker ID.
+     * The date and time the resource was updated.
      */
-    workerId?: WorkerId;
+    updatedAt?: UpdatedAt;
   }
   export interface WorkerSessionSummary {
-    /**
-     * The date and time the resource ended running.
-     */
-    endedAt?: EndedAt;
-    /**
-     * The job ID for the job associated with the worker's session.
-     */
-    jobId: JobId;
-    /**
-     * The life cycle status for the worker's session.
-     */
-    lifecycleStatus: SessionLifecycleStatus;
-    /**
-     * The queue ID for the queue associated to the worker.
-     */
-    queueId: QueueId;
     /**
      * The session ID for the session action.
      */
     sessionId: SessionId;
     /**
+     * The queue ID for the queue associated to the worker.
+     */
+    queueId: QueueId;
+    /**
+     * The job ID for the job associated with the worker's session.
+     */
+    jobId: JobId;
+    /**
      * The date and time the resource started running.
      */
     startedAt: StartedAt;
+    /**
+     * The life cycle status for the worker's session.
+     */
+    lifecycleStatus: SessionLifecycleStatus;
+    /**
+     * The date and time the resource ended running.
+     */
+    endedAt?: EndedAt;
     /**
      * The life cycle status 
      */
@@ -6580,13 +6580,9 @@ declare namespace Deadline {
   export type WorkerSummaries = WorkerSummary[];
   export interface WorkerSummary {
     /**
-     * The date and time the resource was created.
+     * The worker ID.
      */
-    createdAt: CreatedAt;
-    /**
-     * The user or system that created this resource.
-     */
-    createdBy: CreatedBy;
+    workerId: WorkerId;
     /**
      * The farm ID.
      */
@@ -6596,6 +6592,10 @@ declare namespace Deadline {
      */
     fleetId: FleetId;
     /**
+     * The status of the worker.
+     */
+    status: WorkerStatus;
+    /**
      * The host properties of the worker.
      */
     hostProperties?: HostPropertiesResponse;
@@ -6604,9 +6604,13 @@ declare namespace Deadline {
      */
     log?: LogConfiguration;
     /**
-     * The status of the worker.
+     * The date and time the resource was created.
      */
-    status: WorkerStatus;
+    createdAt: CreatedAt;
+    /**
+     * The user or system that created this resource.
+     */
+    createdBy: CreatedBy;
     /**
      * The date and time the resource was updated.
      */
@@ -6615,10 +6619,6 @@ declare namespace Deadline {
      * The user or system that updated this resource.
      */
     updatedBy?: UpdatedBy;
-    /**
-     * The worker ID.
-     */
-    workerId: WorkerId;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
