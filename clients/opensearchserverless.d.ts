@@ -479,6 +479,14 @@ declare namespace OpenSearchServerless {
      */
     description?: String;
     /**
+     * A failure code associated with the request.
+     */
+    failureCode?: String;
+    /**
+     * A message associated with the failure code.
+     */
+    failureMessage?: String;
+    /**
      * A unique identifier for the collection.
      */
     id?: CollectionId;
@@ -1778,6 +1786,14 @@ declare namespace OpenSearchServerless {
      * The date the endpoint was created.
      */
     createdDate?: Long;
+    /**
+     * A failure code associated with the request.
+     */
+    failureCode?: String;
+    /**
+     * A message associated with the failure code.
+     */
+    failureMessage?: String;
     /**
      * The unique identifier of the endpoint.
      */

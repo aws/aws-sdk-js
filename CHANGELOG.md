@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1678.0-->
+<!--LATEST=2.1679.0-->
 <!--ENTRYINSERT-->
+
+## 2.1679.0
+* feature: OpenSearchServerless: Added FailureCode and FailureMessage to BatchGetCollectionResponse for BatchGetVPCEResponse for non-Active Collection and VPCE.
+* feature: S3: Amazon Simple Storage Service / Features : Add support for conditional writes for PutObject and CompleteMultipartUpload APIs.
 
 ## 2.1678.0
 * feature: Bedrock: Amazon Bedrock Batch Inference/ Model Invocation is a feature which allows customers to asynchronously run inference on a large set of records/files stored in S3.
