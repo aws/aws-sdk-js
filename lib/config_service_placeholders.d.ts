@@ -97,7 +97,6 @@ export abstract class ConfigurationServicePlaceholders {
   wafregional?: AWS.WAFRegional.Types.ClientConfiguration;
   workdocs?: AWS.WorkDocs.Types.ClientConfiguration;
   workspaces?: AWS.WorkSpaces.Types.ClientConfiguration;
-  codestar?: AWS.CodeStar.Types.ClientConfiguration;
   lexmodelbuildingservice?: AWS.LexModelBuildingService.Types.ClientConfiguration;
   marketplaceentitlementservice?: AWS.MarketplaceEntitlementService.Types.ClientConfiguration;
   athena?: AWS.Athena.Types.ClientConfiguration;
@@ -484,7 +483,6 @@ export interface ConfigurationServiceApiVersions {
   wafregional?: AWS.WAFRegional.Types.apiVersion;
   workdocs?: AWS.WorkDocs.Types.apiVersion;
   workspaces?: AWS.WorkSpaces.Types.apiVersion;
-  codestar?: AWS.CodeStar.Types.apiVersion;
   lexmodelbuildingservice?: AWS.LexModelBuildingService.Types.apiVersion;
   marketplaceentitlementservice?: AWS.MarketplaceEntitlementService.Types.apiVersion;
   athena?: AWS.Athena.Types.apiVersion;

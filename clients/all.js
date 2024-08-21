@@ -97,7 +97,6 @@ module.exports = {
   WAFRegional: require('./wafregional'),
   WorkDocs: require('./workdocs'),
   WorkSpaces: require('./workspaces'),
-  CodeStar: require('./codestar'),
   LexModelBuildingService: require('./lexmodelbuildingservice'),
   MarketplaceEntitlementService: require('./marketplaceentitlementservice'),
   Athena: require('./athena'),
