@@ -596,11 +596,11 @@ declare class SecurityHub extends Service {
    */
   updateFindingAggregator(callback?: (err: AWSError, data: SecurityHub.Types.UpdateFindingAggregatorResponse) => void): Request<SecurityHub.Types.UpdateFindingAggregatorResponse, AWSError>;
   /**
-   *  UpdateFindings is a deprecated operation. Instead of UpdateFindings, use the BatchUpdateFindings operation. Updates the Note and RecordState of the Security Hub-aggregated findings that the filter attributes specify. Any member account that can view the finding also sees the update to the finding. Finding updates made with UpdateFindings might not be persisted if the same finding is later updated by the finding provider through the BatchImportFindings operation.
+   *  UpdateFindings is a deprecated operation. Instead of UpdateFindings, use the BatchUpdateFindings operation. The UpdateFindings operation updates the Note and RecordState of the Security Hub aggregated findings that the filter attributes specify. Any member account that can view the finding can also see the update to the finding. Finding updates made with UpdateFindings aren't persisted if the same finding is later updated by the finding provider through the BatchImportFindings operation. In addition, Security Hub doesn't record updates made with UpdateFindings in the finding history.
    */
   updateFindings(params: SecurityHub.Types.UpdateFindingsRequest, callback?: (err: AWSError, data: SecurityHub.Types.UpdateFindingsResponse) => void): Request<SecurityHub.Types.UpdateFindingsResponse, AWSError>;
   /**
-   *  UpdateFindings is a deprecated operation. Instead of UpdateFindings, use the BatchUpdateFindings operation. Updates the Note and RecordState of the Security Hub-aggregated findings that the filter attributes specify. Any member account that can view the finding also sees the update to the finding. Finding updates made with UpdateFindings might not be persisted if the same finding is later updated by the finding provider through the BatchImportFindings operation.
+   *  UpdateFindings is a deprecated operation. Instead of UpdateFindings, use the BatchUpdateFindings operation. The UpdateFindings operation updates the Note and RecordState of the Security Hub aggregated findings that the filter attributes specify. Any member account that can view the finding can also see the update to the finding. Finding updates made with UpdateFindings aren't persisted if the same finding is later updated by the finding provider through the BatchImportFindings operation. In addition, Security Hub doesn't record updates made with UpdateFindings in the finding history.
    */
   updateFindings(callback?: (err: AWSError, data: SecurityHub.Types.UpdateFindingsResponse) => void): Request<SecurityHub.Types.UpdateFindingsResponse, AWSError>;
   /**
@@ -1017,7 +1017,7 @@ declare namespace SecurityHub {
      */
     ResourceType?: StringFilterList;
     /**
-     *  The identifier for the given resource type. For Amazon Web Services resources that are identified by Amazon Resource Names (ARNs), this is the ARN. For Amazon Web Services resources that lack ARNs, this is the identifier as defined by the Amazon Web Service that created the resource. For non-Amazon Web Services resources, this is a unique identifier that is associated with the resource.   Array Members: Minimum number of 1 item. Maximum number of 100 items. 
+     *  The identifier for the given resource type. For Amazon Web Services resources that are identified by Amazon Resource Names (ARNs), this is the ARN. For Amazon Web Services resources that lack ARNs, this is the identifier as defined by the Amazon Web Servicesservice that created the resource. For non-Amazon Web Services resources, this is a unique identifier that is associated with the resource.   Array Members: Minimum number of 1 item. Maximum number of 100 items. 
      */
     ResourceId?: StringFilterList;
     /**
@@ -11134,7 +11134,7 @@ declare namespace SecurityHub {
      */
     Sample?: BooleanFilterList;
     /**
-     *  The unique identifier of a control across standards. Values for this field typically consist of an Amazon Web Service and a number, such as APIGateway.5. 
+     *  The unique identifier of a control across standards. Values for this field typically consist of an Amazon Web Servicesservice and a number, such as APIGateway.5. 
      */
     ComplianceSecurityControlId?: StringFilterList;
     /**
@@ -12322,7 +12322,7 @@ declare namespace SecurityHub {
      */
     StatusReasons?: StatusReasonsList;
     /**
-     *  The unique identifier of a control across standards. Values for this field typically consist of an Amazon Web Service and a number, such as APIGateway.5. 
+     *  The unique identifier of a control across standards. Values for this field typically consist of an Amazon Web Servicesservice and a number, such as APIGateway.5. 
      */
     SecurityControlId?: NonEmptyString;
     /**
@@ -12588,11 +12588,11 @@ declare namespace SecurityHub {
   }
   export interface CreateFindingAggregatorRequest {
     /**
-     * Indicates whether to aggregate findings from all of the available Regions in the current partition. Also determines whether to automatically aggregate findings from new Regions as Security Hub supports them and you opt into them. The selected option also determines how to use the Regions provided in the Regions list. The options are as follows:    ALL_REGIONS - Indicates to aggregate findings from all of the Regions where Security Hub is enabled. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them.     ALL_REGIONS_EXCEPT_SPECIFIED - Indicates to aggregate findings from all of the Regions where Security Hub is enabled, except for the Regions listed in the Regions parameter. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them.     SPECIFIED_REGIONS - Indicates to aggregate findings only from the Regions listed in the Regions parameter. Security Hub does not automatically aggregate findings from new Regions.   
+     * Indicates whether to aggregate findings from all of the available Regions in the current partition. Also determines whether to automatically aggregate findings from new Regions as Security Hub supports them and you opt into them. The selected option also determines how to use the Regions provided in the Regions list. The options are as follows:    ALL_REGIONS - Aggregates findings from all of the Regions where Security Hub is enabled. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them.     ALL_REGIONS_EXCEPT_SPECIFIED - Aggregates findings from all of the Regions where Security Hub is enabled, except for the Regions listed in the Regions parameter. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them.     SPECIFIED_REGIONS - Aggregates findings only from the Regions listed in the Regions parameter. Security Hub does not automatically aggregate findings from new Regions.     NO_REGIONS - Aggregates no data because no Regions are selected as linked Regions.   
      */
     RegionLinkingMode: NonEmptyString;
     /**
-     * If RegionLinkingMode is ALL_REGIONS_EXCEPT_SPECIFIED, then this is a space-separated list of Regions that do not aggregate findings to the aggregation Region. If RegionLinkingMode is SPECIFIED_REGIONS, then this is a space-separated list of Regions that do aggregate findings to the aggregation Region. 
+     * If RegionLinkingMode is ALL_REGIONS_EXCEPT_SPECIFIED, then this is a space-separated list of Regions that do not aggregate findings to the aggregation Region. If RegionLinkingMode is SPECIFIED_REGIONS, then this is a space-separated list of Regions that do aggregate findings to the aggregation Region.  An InvalidInputException error results if you populate this field while RegionLinkingMode is NO_REGIONS.
      */
     Regions?: StringList;
   }
@@ -13111,7 +13111,7 @@ declare namespace SecurityHub {
      */
     FindingCreated?: Boolean;
     /**
-     *  Identifies the source of the event that changed the finding. For example, an integrated Amazon Web Service or third-party partner integration may call  BatchImportFindings , or an Security Hub customer may call  BatchUpdateFindings . 
+     *  Identifies the source of the event that changed the finding. For example, an integrated Amazon Web Servicesservice or third-party partner integration may call  BatchImportFindings , or an Security Hub customer may call  BatchUpdateFindings . 
      */
     UpdateSource?: FindingHistoryUpdateSource;
     /**
@@ -13140,7 +13140,7 @@ declare namespace SecurityHub {
   }
   export interface FindingHistoryUpdateSource {
     /**
-     *  Describes the type of finding change event, such as a call to  BatchImportFindings  (by an integrated Amazon Web Service or third party partner integration) or  BatchUpdateFindings  (by a Security Hub customer). 
+     *  Describes the type of finding change event, such as a call to  BatchImportFindings  (by an integrated Amazon Web Servicesservice or third party partner integration) or  BatchUpdateFindings  (by a Security Hub customer). 
      */
     Type?: FindingHistoryUpdateSourceType;
     /**
@@ -14164,6 +14164,10 @@ declare namespace SecurityHub {
      */
     Lte?: Double;
     /**
+     * The equal-to condition to be applied to a single field when querying for findings.
+     */
+    Eq?: Double;
+    /**
      *  The greater-than condition to be applied to a single field when querying for findings. 
      */
     Gt?: Double;
@@ -14171,10 +14175,6 @@ declare namespace SecurityHub {
      *  The less-than condition to be applied to a single field when querying for findings. 
      */
     Lt?: Double;
-    /**
-     * The equal-to condition to be applied to a single field when querying for findings.
-     */
-    Eq?: Double;
   }
   export type NumberFilterList = NumberFilter[];
   export interface Occurrences {
@@ -14336,7 +14336,7 @@ declare namespace SecurityHub {
   }
   export interface Policy {
     /**
-     *  The Amazon Web Service that the configuration policy applies to. 
+     *  The Amazon Web Servicesservice that the configuration policy applies to. 
      */
     SecurityHub?: SecurityHubPolicy;
   }
@@ -14975,7 +14975,7 @@ declare namespace SecurityHub {
      */
     DestinationIpv6CidrBlock?: NonEmptyString;
     /**
-     *  The prefix of the destination Amazon Web Service. 
+     *  The prefix of the destination Amazon Web Servicesservice. 
      */
     DestinationPrefixListId?: NonEmptyString;
     /**
@@ -15261,7 +15261,7 @@ declare namespace SecurityHub {
   export type RuleStatus = "ENABLED"|"DISABLED"|string;
   export interface SecurityControl {
     /**
-     *  The unique identifier of a security control across standards. Values for this field typically consist of an Amazon Web Service name and a number, such as APIGateway.3. 
+     *  The unique identifier of a security control across standards. Values for this field typically consist of an Amazon Web Servicesservice name and a number, such as APIGateway.3. 
      */
     SecurityControlId: NonEmptyString;
     /**
@@ -15289,7 +15289,7 @@ declare namespace SecurityHub {
      */
     SecurityControlStatus: ControlStatus;
     /**
-     *  Identifies whether customizable properties of a security control are reflected in Security Hub findings. A status of READY indicates findings include the current parameter values. A status of UPDATING indicates that all findings may not include the current parameter values. 
+     *  Identifies whether customizable properties of a security control are reflected in Security Hub findings. A status of READY indicates that Security Hub uses the current control parameter values when running security checks of the control. A status of UPDATING indicates that all security checks might not use the current parameter values. 
      */
     UpdateStatus?: UpdateStatus;
     /**
@@ -15314,7 +15314,7 @@ declare namespace SecurityHub {
   export type SecurityControlCustomParametersList = SecurityControlCustomParameter[];
   export interface SecurityControlDefinition {
     /**
-     *  The unique identifier of a security control across standards. Values for this field typically consist of an Amazon Web Service name and a number (for example, APIGateway.3). This parameter differs from SecurityControlArn, which is a unique Amazon Resource Name (ARN) assigned to a control. The ARN references the security control ID (for example, arn:aws:securityhub:eu-central-1:123456789012:security-control/APIGateway.3). 
+     *  The unique identifier of a security control across standards. Values for this field typically consist of an Amazon Web Servicesservice name and a number (for example, APIGateway.3). This parameter differs from SecurityControlArn, which is a unique Amazon Resource Name (ARN) assigned to a control. The ARN references the security control ID (for example, arn:aws:securityhub:eu-central-1:123456789012:security-control/APIGateway.3). 
      */
     SecurityControlId: NonEmptyString;
     /**
@@ -15585,7 +15585,7 @@ declare namespace SecurityHub {
      */
     StandardsArn: NonEmptyString;
     /**
-     *  The unique identifier of a security control across standards. Values for this field typically consist of an Amazon Web Service name and a number, such as APIGateway.3. 
+     *  The unique identifier of a security control across standards. Values for this field typically consist of an Amazon Web Servicesservice name and a number, such as APIGateway.3. 
      */
     SecurityControlId: NonEmptyString;
     /**
@@ -15640,7 +15640,7 @@ declare namespace SecurityHub {
      */
     StandardsArn: NonEmptyString;
     /**
-     *  A unique standard-agnostic identifier for a control. Values for this field typically consist of an Amazon Web Service and a number, such as APIGateway.5. This field doesn't reference a specific standard. 
+     *  A unique standard-agnostic identifier for a control. Values for this field typically consist of an Amazon Web Servicesservice and a number, such as APIGateway.5. This field doesn't reference a specific standard. 
      */
     SecurityControlId: NonEmptyString;
     /**
@@ -16151,11 +16151,11 @@ declare namespace SecurityHub {
      */
     FindingAggregatorArn: NonEmptyString;
     /**
-     * Indicates whether to aggregate findings from all of the available Regions in the current partition. Also determines whether to automatically aggregate findings from new Regions as Security Hub supports them and you opt into them. The selected option also determines how to use the Regions provided in the Regions list. The options are as follows:    ALL_REGIONS - Indicates to aggregate findings from all of the Regions where Security Hub is enabled. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them.     ALL_REGIONS_EXCEPT_SPECIFIED - Indicates to aggregate findings from all of the Regions where Security Hub is enabled, except for the Regions listed in the Regions parameter. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them.     SPECIFIED_REGIONS - Indicates to aggregate findings only from the Regions listed in the Regions parameter. Security Hub does not automatically aggregate findings from new Regions.   
+     * Indicates whether to aggregate findings from all of the available Regions in the current partition. Also determines whether to automatically aggregate findings from new Regions as Security Hub supports them and you opt into them. The selected option also determines how to use the Regions provided in the Regions list. The options are as follows:    ALL_REGIONS - Aggregates findings from all of the Regions where Security Hub is enabled. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them.     ALL_REGIONS_EXCEPT_SPECIFIED - Aggregates findings from all of the Regions where Security Hub is enabled, except for the Regions listed in the Regions parameter. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them.     SPECIFIED_REGIONS - Aggregates findings only from the Regions listed in the Regions parameter. Security Hub does not automatically aggregate findings from new Regions.     NO_REGIONS - Aggregates no data because no Regions are selected as linked Regions.   
      */
     RegionLinkingMode: NonEmptyString;
     /**
-     * If RegionLinkingMode is ALL_REGIONS_EXCEPT_SPECIFIED, then this is a space-separated list of Regions that do not aggregate findings to the aggregation Region. If RegionLinkingMode is SPECIFIED_REGIONS, then this is a space-separated list of Regions that do aggregate findings to the aggregation Region.
+     * If RegionLinkingMode is ALL_REGIONS_EXCEPT_SPECIFIED, then this is a space-separated list of Regions that do not aggregate findings to the aggregation Region. If RegionLinkingMode is SPECIFIED_REGIONS, then this is a space-separated list of Regions that do aggregate findings to the aggregation Region. An InvalidInputException error results if you populate this field while RegionLinkingMode is NO_REGIONS.
      */
     Regions?: StringList;
   }

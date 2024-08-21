@@ -4499,6 +4499,10 @@ declare namespace Glue {
      */
     JobMode?: JobMode;
     /**
+     * Specifies whether job run queuing is enabled for the job runs for this job. A value of true means job run queuing is enabled for the job runs. If false or not populated, the job runs will not be considered for queueing. If this field does not match the value set in the job run, then the value from the job run field will be used.
+     */
+    JobRunQueuingEnabled?: NullableBoolean;
+    /**
      * Description of the job being defined.
      */
     Description?: DescriptionString;
@@ -9257,6 +9261,10 @@ declare namespace Glue {
      */
     JobMode?: JobMode;
     /**
+     * Specifies whether job run queuing is enabled for the job runs for this job. A value of true means job run queuing is enabled for the job runs. If false or not populated, the job runs will not be considered for queueing. If this field does not match the value set in the job run, then the value from the job run field will be used.
+     */
+    JobRunQueuingEnabled?: NullableBoolean;
+    /**
      * A description of the job.
      */
     Description?: DescriptionString;
@@ -9448,6 +9456,10 @@ declare namespace Glue {
      */
     JobMode?: JobMode;
     /**
+     * Specifies whether job run queuing is enabled for the job run. A value of true means job run queuing is enabled for the job run. If false or not populated, the job run will not be considered for queueing.
+     */
+    JobRunQueuingEnabled?: NullableBoolean;
+    /**
      * The date and time at which this job run was started.
      */
     StartedOn?: TimestampValue;
@@ -9531,6 +9543,10 @@ declare namespace Glue {
      * The name of an Glue usage profile associated with the job run.
      */
     ProfileName?: NameString;
+    /**
+     * This field holds details that pertain to the state of a job run. The field is nullable. For example, when a job run is in a WAITING state as a result of job run queuing, the field has the reason why the job run is in that state.
+     */
+    StateDetail?: OrchestrationMessageString;
   }
   export type JobRunList = JobRun[];
   export type JobRunState = "STARTING"|"RUNNING"|"STOPPING"|"STOPPED"|"SUCCEEDED"|"FAILED"|"TIMEOUT"|"ERROR"|"WAITING"|"EXPIRED"|string;
@@ -9539,6 +9555,10 @@ declare namespace Glue {
      * A mode that describes how a job was created. Valid values are:    SCRIPT - The job was created using the Glue Studio script editor.    VISUAL - The job was created using the Glue Studio visual editor.    NOTEBOOK - The job was created using an interactive sessions notebook.   When the JobMode field is missing or null, SCRIPT is assigned as the default value.
      */
     JobMode?: JobMode;
+    /**
+     * Specifies whether job run queuing is enabled for the job runs for this job. A value of true means job run queuing is enabled for the job runs. If false or not populated, the job runs will not be considered for queueing. If this field does not match the value set in the job run, then the value from the job run field will be used.
+     */
+    JobRunQueuingEnabled?: NullableBoolean;
     /**
      * Description of the job being defined.
      */
@@ -11061,6 +11081,7 @@ declare namespace Glue {
   export type OrchestrationArgumentsMap = {[key: string]: OrchestrationArgumentsValue};
   export type OrchestrationArgumentsValue = string;
   export type OrchestrationIAMRoleArn = string;
+  export type OrchestrationMessageString = string;
   export type OrchestrationNameString = string;
   export type OrchestrationPageSize200 = number;
   export type OrchestrationPageSize25 = number;
@@ -13331,6 +13352,10 @@ declare namespace Glue {
      * The name of the job definition to use.
      */
     JobName: NameString;
+    /**
+     * Specifies whether job run queuing is enabled for the job run. A value of true means job run queuing is enabled for the job run. If false or not populated, the job run will not be considered for queueing.
+     */
+    JobRunQueuingEnabled?: NullableBoolean;
     /**
      * The ID of a previous JobRun to retry.
      */

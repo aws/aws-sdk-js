@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1679.0-->
+<!--LATEST=2.1680.0-->
 <!--ENTRYINSERT-->
+
+## 2.1680.0
+* feature: EC2: DescribeInstanceStatus now returns health information on EBS volumes attached to Nitro instances
+* feature: EntityResolution: Increase the mapping attributes in Schema to 35.
+* feature: Glue: Add optional field JobRunQueuingEnabled to CreateJob and UpdateJob APIs.
+* feature: Lambda: Release FilterCriteria encryption for Lambda EventSourceMapping,  enabling customers to encrypt their filter criteria using a customer-owned KMS key.
+* feature: SES: Enable email receiving customers to provide SES with access to their S3 buckets via an IAM role for "Deliver to S3 Action"
+* feature: SecurityHub: Security Hub documentation and definition updates
 
 ## 2.1679.0
 * feature: OpenSearchServerless: Added FailureCode and FailureMessage to BatchGetCollectionResponse for BatchGetVPCEResponse for non-Active Collection and VPCE.

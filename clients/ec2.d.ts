@@ -437,11 +437,11 @@ declare class EC2 extends Service {
    */
   copyFpgaImage(callback?: (err: AWSError, data: EC2.Types.CopyFpgaImageResult) => void): Request<EC2.Types.CopyFpgaImageResult, AWSError>;
   /**
-   * Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a Region to an Outpost. You can't copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost. To copy an AMI to another partition, see CreateStoreImageTask. To copy an AMI from one Region to another, specify the source Region using the SourceRegion parameter, and specify the destination Region using its endpoint. Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, unless you set Encrypted during the copy operation. You cannot create an unencrypted copy of an encrypted backing snapshot. To copy an AMI from a Region to an Outpost, specify the source Region using the SourceRegion parameter, and specify the ARN of the destination Outpost using DestinationOutpostArn. Backing snapshots copied to an Outpost are encrypted by default using the default encryption key for the Region, or a different key that you specify in the request using KmsKeyId. Outposts do not support unencrypted snapshots. For more information,  Amazon EBS local snapshots on Outposts in the Amazon EBS User Guide. For more information about the prerequisites and limits when copying an AMI, see Copy an AMI in the Amazon EC2 User Guide.
+   * Initiates an AMI copy operation. You can copy an AMI from one Region to another, or from a Region to an Outpost. You can't copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost. To copy an AMI to another partition, see CreateStoreImageTask. When you copy an AMI from one Region to another, the destination Region is the current Region. When you copy an AMI from a Region to an Outpost, specify the ARN of the Outpost as the destination. Backing snapshots copied to an Outpost are encrypted by default using the default encryption key for the Region or the key that you specify. Outposts do not support unencrypted snapshots. For information about the prerequisites when copying an AMI, see Copy an AMI in the Amazon EC2 User Guide.
    */
   copyImage(params: EC2.Types.CopyImageRequest, callback?: (err: AWSError, data: EC2.Types.CopyImageResult) => void): Request<EC2.Types.CopyImageResult, AWSError>;
   /**
-   * Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a Region to an Outpost. You can't copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost. To copy an AMI to another partition, see CreateStoreImageTask. To copy an AMI from one Region to another, specify the source Region using the SourceRegion parameter, and specify the destination Region using its endpoint. Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, unless you set Encrypted during the copy operation. You cannot create an unencrypted copy of an encrypted backing snapshot. To copy an AMI from a Region to an Outpost, specify the source Region using the SourceRegion parameter, and specify the ARN of the destination Outpost using DestinationOutpostArn. Backing snapshots copied to an Outpost are encrypted by default using the default encryption key for the Region, or a different key that you specify in the request using KmsKeyId. Outposts do not support unencrypted snapshots. For more information,  Amazon EBS local snapshots on Outposts in the Amazon EBS User Guide. For more information about the prerequisites and limits when copying an AMI, see Copy an AMI in the Amazon EC2 User Guide.
+   * Initiates an AMI copy operation. You can copy an AMI from one Region to another, or from a Region to an Outpost. You can't copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost. To copy an AMI to another partition, see CreateStoreImageTask. When you copy an AMI from one Region to another, the destination Region is the current Region. When you copy an AMI from a Region to an Outpost, specify the ARN of the Outpost as the destination. Backing snapshots copied to an Outpost are encrypted by default using the default encryption key for the Region or the key that you specify. Outposts do not support unencrypted snapshots. For information about the prerequisites when copying an AMI, see Copy an AMI in the Amazon EC2 User Guide.
    */
   copyImage(callback?: (err: AWSError, data: EC2.Types.CopyImageResult) => void): Request<EC2.Types.CopyImageResult, AWSError>;
   /**
@@ -1453,11 +1453,11 @@ declare class EC2 extends Service {
    */
   deleteRouteTable(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a security group. If you attempt to delete a security group that is associated with an instance or network interface or is referenced by another security group, the operation fails with DependencyViolation.
+   * Deletes a security group. If you attempt to delete a security group that is associated with an instance or network interface or is referenced by another security group in the same VPC, the operation fails with DependencyViolation.
    */
   deleteSecurityGroup(params: EC2.Types.DeleteSecurityGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a security group. If you attempt to delete a security group that is associated with an instance or network interface or is referenced by another security group, the operation fails with DependencyViolation.
+   * Deletes a security group. If you attempt to delete a security group that is associated with an instance or network interface or is referenced by another security group in the same VPC, the operation fails with DependencyViolation.
    */
   deleteSecurityGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -2677,11 +2677,11 @@ declare class EC2 extends Service {
    */
   describeSpotPriceHistory(callback?: (err: AWSError, data: EC2.Types.DescribeSpotPriceHistoryResult) => void): Request<EC2.Types.DescribeSpotPriceHistoryResult, AWSError>;
   /**
-   * Describes the stale security group rules for security groups in a specified VPC. Rules are stale when they reference a deleted security group in the same VPC or peered VPC. Rules can also be stale if they reference a security group in a peer VPC for which the VPC peering connection has been deleted.
+   * Describes the stale security group rules for security groups in a specified VPC. Rules are stale when they reference a deleted security group in a peered VPC. Rules can also be stale if they reference a security group in a peer VPC for which the VPC peering connection has been deleted.
    */
   describeStaleSecurityGroups(params: EC2.Types.DescribeStaleSecurityGroupsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeStaleSecurityGroupsResult) => void): Request<EC2.Types.DescribeStaleSecurityGroupsResult, AWSError>;
   /**
-   * Describes the stale security group rules for security groups in a specified VPC. Rules are stale when they reference a deleted security group in the same VPC or peered VPC. Rules can also be stale if they reference a security group in a peer VPC for which the VPC peering connection has been deleted.
+   * Describes the stale security group rules for security groups in a specified VPC. Rules are stale when they reference a deleted security group in a peered VPC. Rules can also be stale if they reference a security group in a peer VPC for which the VPC peering connection has been deleted.
    */
   describeStaleSecurityGroups(callback?: (err: AWSError, data: EC2.Types.DescribeStaleSecurityGroupsResult) => void): Request<EC2.Types.DescribeStaleSecurityGroupsResult, AWSError>;
   /**
@@ -3141,11 +3141,11 @@ declare class EC2 extends Service {
    */
   disableSerialConsoleAccess(callback?: (err: AWSError, data: EC2.Types.DisableSerialConsoleAccessResult) => void): Request<EC2.Types.DisableSerialConsoleAccessResult, AWSError>;
   /**
-   * Disables the block public access for snapshots setting at the account level for the specified Amazon Web Services Region. After you disable block public access for snapshots in a Region, users can publicly share snapshots in that Region. If block public access is enabled in block-all-sharing mode, and you disable block public access, all snapshots that were previously publicly shared are no longer treated as private and they become publicly accessible again. For more information, see  Block public access for snapshots in the Amazon EBS User Guide . 
+   * Disables the block public access for snapshots setting at the account level for the specified Amazon Web Services Region. After you disable block public access for snapshots in a Region, users can publicly share snapshots in that Region.  Enabling block public access for snapshots in block-all-sharing mode does not change the permissions for snapshots that are already publicly shared. Instead, it prevents these snapshots from be publicly visible and publicly accessible. Therefore, the attributes for these snapshots still indicate that they are publicly shared, even though they are not publicly available. If you disable block public access , these snapshots will become publicly available again.  For more information, see  Block public access for snapshots in the Amazon EBS User Guide . 
    */
   disableSnapshotBlockPublicAccess(params: EC2.Types.DisableSnapshotBlockPublicAccessRequest, callback?: (err: AWSError, data: EC2.Types.DisableSnapshotBlockPublicAccessResult) => void): Request<EC2.Types.DisableSnapshotBlockPublicAccessResult, AWSError>;
   /**
-   * Disables the block public access for snapshots setting at the account level for the specified Amazon Web Services Region. After you disable block public access for snapshots in a Region, users can publicly share snapshots in that Region. If block public access is enabled in block-all-sharing mode, and you disable block public access, all snapshots that were previously publicly shared are no longer treated as private and they become publicly accessible again. For more information, see  Block public access for snapshots in the Amazon EBS User Guide . 
+   * Disables the block public access for snapshots setting at the account level for the specified Amazon Web Services Region. After you disable block public access for snapshots in a Region, users can publicly share snapshots in that Region.  Enabling block public access for snapshots in block-all-sharing mode does not change the permissions for snapshots that are already publicly shared. Instead, it prevents these snapshots from be publicly visible and publicly accessible. Therefore, the attributes for these snapshots still indicate that they are publicly shared, even though they are not publicly available. If you disable block public access , these snapshots will become publicly available again.  For more information, see  Block public access for snapshots in the Amazon EBS User Guide . 
    */
   disableSnapshotBlockPublicAccess(callback?: (err: AWSError, data: EC2.Types.DisableSnapshotBlockPublicAccessResult) => void): Request<EC2.Types.DisableSnapshotBlockPublicAccessResult, AWSError>;
   /**
@@ -3397,11 +3397,11 @@ declare class EC2 extends Service {
    */
   enableSerialConsoleAccess(callback?: (err: AWSError, data: EC2.Types.EnableSerialConsoleAccessResult) => void): Request<EC2.Types.EnableSerialConsoleAccessResult, AWSError>;
   /**
-   * Enables or modifies the block public access for snapshots setting at the account level for the specified Amazon Web Services Region. After you enable block public access for snapshots in a Region, users can no longer request public sharing for snapshots in that Region. Snapshots that are already publicly shared are either treated as private or they remain publicly shared, depending on the State that you specify. If block public access is enabled in block-all-sharing mode, and you change the mode to block-new-sharing, all snapshots that were previously publicly shared are no longer treated as private and they become publicly accessible again. For more information, see  Block public access for snapshots in the Amazon EBS User Guide.
+   * Enables or modifies the block public access for snapshots setting at the account level for the specified Amazon Web Services Region. After you enable block public access for snapshots in a Region, users can no longer request public sharing for snapshots in that Region. Snapshots that are already publicly shared are either treated as private or they remain publicly shared, depending on the State that you specify.  Enabling block public access for snapshots in block all sharing mode does not change the permissions for snapshots that are already publicly shared. Instead, it prevents these snapshots from be publicly visible and publicly accessible. Therefore, the attributes for these snapshots still indicate that they are publicly shared, even though they are not publicly available. If you later disable block public access or change the mode to block new sharing, these snapshots will become publicly available again.  For more information, see  Block public access for snapshots in the Amazon EBS User Guide.
    */
   enableSnapshotBlockPublicAccess(params: EC2.Types.EnableSnapshotBlockPublicAccessRequest, callback?: (err: AWSError, data: EC2.Types.EnableSnapshotBlockPublicAccessResult) => void): Request<EC2.Types.EnableSnapshotBlockPublicAccessResult, AWSError>;
   /**
-   * Enables or modifies the block public access for snapshots setting at the account level for the specified Amazon Web Services Region. After you enable block public access for snapshots in a Region, users can no longer request public sharing for snapshots in that Region. Snapshots that are already publicly shared are either treated as private or they remain publicly shared, depending on the State that you specify. If block public access is enabled in block-all-sharing mode, and you change the mode to block-new-sharing, all snapshots that were previously publicly shared are no longer treated as private and they become publicly accessible again. For more information, see  Block public access for snapshots in the Amazon EBS User Guide.
+   * Enables or modifies the block public access for snapshots setting at the account level for the specified Amazon Web Services Region. After you enable block public access for snapshots in a Region, users can no longer request public sharing for snapshots in that Region. Snapshots that are already publicly shared are either treated as private or they remain publicly shared, depending on the State that you specify.  Enabling block public access for snapshots in block all sharing mode does not change the permissions for snapshots that are already publicly shared. Instead, it prevents these snapshots from be publicly visible and publicly accessible. Therefore, the attributes for these snapshots still indicate that they are publicly shared, even though they are not publicly available. If you later disable block public access or change the mode to block new sharing, these snapshots will become publicly available again.  For more information, see  Block public access for snapshots in the Amazon EBS User Guide.
    */
   enableSnapshotBlockPublicAccess(callback?: (err: AWSError, data: EC2.Types.EnableSnapshotBlockPublicAccessResult) => void): Request<EC2.Types.EnableSnapshotBlockPublicAccessResult, AWSError>;
   /**
@@ -8716,7 +8716,7 @@ declare namespace EC2 {
      */
     Description?: String;
     /**
-     * Specifies whether the destination snapshots of the copied image should be encrypted. You can encrypt a copy of an unencrypted snapshot, but you cannot create an unencrypted copy of an encrypted snapshot. The default KMS key for Amazon EBS is used unless you specify a non-default Key Management Service (KMS) KMS key using KmsKeyId. For more information, see Amazon EBS encryption in the Amazon EBS User Guide.
+     * Specifies whether the destination snapshots of the copied image should be encrypted. You can encrypt a copy of an unencrypted snapshot, but you cannot create an unencrypted copy of an encrypted snapshot. The default KMS key for Amazon EBS is used unless you specify a non-default Key Management Service (KMS) KMS key using KmsKeyId. For more information, see Use encryption with EBS-backed AMIs in the Amazon EC2 User Guide.
      */
     Encrypted?: Boolean;
     /**
@@ -12182,7 +12182,7 @@ declare namespace EC2 {
      */
     Destination?: String;
     /**
-     * The metric, aggregation-latency, indicating that network latency is aggregated for the query. This is the only supported metric.
+     * The metric used for the network performance request.
      */
     Metric?: MetricType;
     /**
@@ -12208,7 +12208,7 @@ declare namespace EC2 {
      */
     Destination?: String;
     /**
-     * The metric used for the network performance request. Only aggregate-latency is supported, which shows network latency during a specified period. 
+     * The metric used for the network performance request.
      */
     Metric?: MetricType;
     /**
@@ -15275,7 +15275,7 @@ declare namespace EC2 {
   }
   export interface DescribeInstanceStatusRequest {
     /**
-     * The filters.    availability-zone - The Availability Zone of the instance.    event.code - The code for the scheduled event (instance-reboot | system-reboot | system-maintenance | instance-retirement | instance-stop).    event.description - A description of the event.    event.instance-event-id - The ID of the event whose date and time you are modifying.    event.not-after - The latest end time for the scheduled event (for example, 2014-09-15T17:15:20.000Z).    event.not-before - The earliest start time for the scheduled event (for example, 2014-09-15T17:15:20.000Z).    event.not-before-deadline - The deadline for starting the event (for example, 2014-09-15T17:15:20.000Z).    instance-state-code - The code for the instance state, as a 16-bit unsigned integer. The high byte is used for internal purposes and should be ignored. The low byte is set based on the state represented. The valid values are 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).    instance-state-name - The state of the instance (pending | running | shutting-down | terminated | stopping | stopped).    instance-status.reachability - Filters on instance status where the name is reachability (passed | failed | initializing | insufficient-data).    instance-status.status - The status of the instance (ok | impaired | initializing | insufficient-data | not-applicable).    system-status.reachability - Filters on system status where the name is reachability (passed | failed | initializing | insufficient-data).    system-status.status - The system status of the instance (ok | impaired | initializing | insufficient-data | not-applicable).  
+     * The filters.    availability-zone - The Availability Zone of the instance.    event.code - The code for the scheduled event (instance-reboot | system-reboot | system-maintenance | instance-retirement | instance-stop).    event.description - A description of the event.    event.instance-event-id - The ID of the event whose date and time you are modifying.    event.not-after - The latest end time for the scheduled event (for example, 2014-09-15T17:15:20.000Z).    event.not-before - The earliest start time for the scheduled event (for example, 2014-09-15T17:15:20.000Z).    event.not-before-deadline - The deadline for starting the event (for example, 2014-09-15T17:15:20.000Z).    instance-state-code - The code for the instance state, as a 16-bit unsigned integer. The high byte is used for internal purposes and should be ignored. The low byte is set based on the state represented. The valid values are 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).    instance-state-name - The state of the instance (pending | running | shutting-down | terminated | stopping | stopped).    instance-status.reachability - Filters on instance status where the name is reachability (passed | failed | initializing | insufficient-data).    instance-status.status - The status of the instance (ok | impaired | initializing | insufficient-data | not-applicable).    system-status.reachability - Filters on system status where the name is reachability (passed | failed | initializing | insufficient-data).    system-status.status - The system status of the instance (ok | impaired | initializing | insufficient-data | not-applicable).    attached-ebs-status.status - The status of the attached EBS volume for the instance (ok | impaired | initializing | insufficient-data | not-applicable).  
      */
     Filters?: FilterList;
     /**
@@ -19690,6 +19690,31 @@ declare namespace EC2 {
     MaximumIops?: MaximumIops;
   }
   export type EbsOptimizedSupport = "unsupported"|"supported"|"default"|string;
+  export interface EbsStatusDetails {
+    /**
+     * The date and time when the attached EBS status check failed.
+     */
+    ImpairedSince?: MillisecondDateTime;
+    /**
+     * The name of the attached EBS status check.
+     */
+    Name?: StatusName;
+    /**
+     * The result of the attached EBS status check.
+     */
+    Status?: StatusType;
+  }
+  export type EbsStatusDetailsList = EbsStatusDetails[];
+  export interface EbsStatusSummary {
+    /**
+     * Details about the attached EBS status check for an instance.
+     */
+    Details?: EbsStatusDetailsList;
+    /**
+     * The current status.
+     */
+    Status?: SummaryStatus;
+  }
   export interface Ec2InstanceConnectEndpoint {
     /**
      * The ID of the Amazon Web Services account that created the EC2 Instance Connect Endpoint.
@@ -20264,7 +20289,7 @@ declare namespace EC2 {
   }
   export interface EnableSnapshotBlockPublicAccessRequest {
     /**
-     * The mode in which to enable block public access for snapshots for the Region. Specify one of the following values:    block-all-sharing - Prevents all public sharing of snapshots in the Region. Users in the account will no longer be able to request new public sharing. Additionally, snapshots that are already publicly shared are treated as private and they are no longer publicly available.  If you enable block public access for snapshots in block-all-sharing mode, it does not change the permissions for snapshots that are already publicly shared. Instead, it prevents these snapshots from be publicly visible and publicly accessible. Therefore, the attributes for these snapshots still indicate that they are publicly shared, even though they are not publicly available.     block-new-sharing - Prevents only new public sharing of snapshots in the Region. Users in the account will no longer be able to request new public sharing. However, snapshots that are already publicly shared, remain publicly available.    unblocked is not a valid value for EnableSnapshotBlockPublicAccess.
+     * The mode in which to enable block public access for snapshots for the Region. Specify one of the following values:    block-all-sharing - Prevents all public sharing of snapshots in the Region. Users in the account will no longer be able to request new public sharing. Additionally, snapshots that are already publicly shared are treated as private and they are no longer publicly available.    block-new-sharing - Prevents only new public sharing of snapshots in the Region. Users in the account will no longer be able to request new public sharing. However, snapshots that are already publicly shared, remain publicly available.    unblocked is not a valid value for EnableSnapshotBlockPublicAccess.
      */
     State: SnapshotBlockPublicAccessState;
     /**
@@ -25442,6 +25467,10 @@ declare namespace EC2 {
      * Reports impaired functionality that stems from issues related to the systems that support an instance, such as hardware failures and network connectivity problems.
      */
     SystemStatus?: InstanceStatusSummary;
+    /**
+     * Reports impaired functionality that stems from an attached Amazon EBS volume that is unreachable and unable to complete I/O operations.
+     */
+    AttachedEbsStatus?: EbsStatusSummary;
   }
   export interface InstanceStatusDetails {
     /**
@@ -29581,7 +29610,7 @@ declare namespace EC2 {
      */
     CustomerOwnedIpv4Pool?: CoipPoolId;
     /**
-     * Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet should return synthetic IPv6 addresses for IPv4-only destinations.
+     * Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet should return synthetic IPv6 addresses for IPv4-only destinations.  You must first configure a NAT gateway in a public subnet (separate from the subnet containing the IPv6-only workloads). For example, the subnet containing the NAT gateway should have a 0.0.0.0/0 route pointing to the internet gateway. For more information, see Configure DNS64 and NAT64 in the Amazon VPC User Guide. 
      */
     EnableDns64?: AttributeBooleanValue;
     /**
@@ -29771,7 +29800,7 @@ declare namespace EC2 {
      */
     PropagationDefaultRouteTableId?: TransitGatewayRouteTableId;
     /**
-     * A private Autonomous System Number (ASN) for the Amazon side of a BGP session. The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs. The modify ASN operation is not allowed on a transit gateway with active BGP sessions. You must first delete all transit gateway attachments that have BGP configured prior to modifying the ASN on the transit gateway.
+     * A private Autonomous System Number (ASN) for the Amazon side of a BGP session. The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs. The modify ASN operation is not allowed on a transit gateway if it has the following attachments:   Dynamic VPN   Static VPN   Direct Connect Gateway   Connect   You must first delete all transit gateway attachments configured prior to modifying the ASN on the transit gateway.
      */
     AmazonSideAsn?: Long;
   }
@@ -33555,7 +33584,7 @@ declare namespace EC2 {
      */
     NetworkInterfaces?: LaunchTemplateInstanceNetworkInterfaceSpecificationRequestList;
     /**
-     * The ID of the AMI in the format ami-17characters00000. Alternatively, you can specify a Systems Manager parameter, using one of the following formats. The Systems Manager parameter will resolve to an AMI ID on launch. To reference a public parameter:    resolve:ssm:public-parameter     To reference a parameter stored in the same account:    resolve:ssm:parameter-name      resolve:ssm:parameter-name:version-number      resolve:ssm:parameter-name:label     To reference a parameter shared from another Amazon Web Services account:    resolve:ssm:parameter-ARN      resolve:ssm:parameter-ARN:version-number      resolve:ssm:parameter-ARN:label     For more information, see Use a Systems Manager parameter instead of an AMI ID in the Amazon EC2 User Guide.  If the launch template will be used for an EC2 Fleet or Spot Fleet, note the following:   Only EC2 Fleets of type instant support specifying a Systems Manager parameter.   For EC2 Fleets of type maintain or request, or for Spot Fleets, you must specify the AMI ID.   
+     * The ID of the AMI in the format ami-0ac394d6a3example. Alternatively, you can specify a Systems Manager parameter, using one of the following formats. The Systems Manager parameter will resolve to an AMI ID on launch. To reference a public parameter:    resolve:ssm:public-parameter     To reference a parameter stored in the same account:    resolve:ssm:parameter-name      resolve:ssm:parameter-name:version-number      resolve:ssm:parameter-name:label     To reference a parameter shared from another Amazon Web Services account:    resolve:ssm:parameter-ARN      resolve:ssm:parameter-ARN:version-number      resolve:ssm:parameter-ARN:label     For more information, see Use a Systems Manager parameter instead of an AMI ID in the Amazon EC2 User Guide.  If the launch template will be used for an EC2 Fleet or Spot Fleet, note the following:   Only EC2 Fleets of type instant support specifying a Systems Manager parameter.   For EC2 Fleets of type maintain or request, or for Spot Fleets, you must specify the AMI ID.   
      */
     ImageId?: ImageId;
     /**

@@ -3905,7 +3905,7 @@
       "member": {
         "shape": "SchemaInputAttribute"
       },
-      "max": 25,
+      "max": 35,
       "min": 2
     },
     "SchemaList": {
