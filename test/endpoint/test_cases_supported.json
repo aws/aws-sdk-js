@@ -1488,38 +1488,6 @@
     "hostname": "codepipeline-fips.ap-east-1.api.aws"
   },
   {
-    "endpointPrefix": "codestar",
-    "clientName": "CodeStar",
-    "region": "ap-northeast-1",
-    "useFipsEndpoint": false,
-    "useDualstackEndpoint": false,
-    "hostname": "codestar.ap-northeast-1.amazonaws.com"
-  },
-  {
-    "endpointPrefix": "codestar",
-    "clientName": "CodeStar",
-    "region": "ap-northeast-1",
-    "useFipsEndpoint": false,
-    "useDualstackEndpoint": true,
-    "hostname": "codestar.ap-northeast-1.api.aws"
-  },
-  {
-    "endpointPrefix": "codestar",
-    "clientName": "CodeStar",
-    "region": "ap-northeast-1",
-    "useFipsEndpoint": true,
-    "useDualstackEndpoint": false,
-    "hostname": "codestar-fips.ap-northeast-1.amazonaws.com"
-  },
-  {
-    "endpointPrefix": "codestar",
-    "clientName": "CodeStar",
-    "region": "ap-northeast-1",
-    "useFipsEndpoint": true,
-    "useDualstackEndpoint": true,
-    "hostname": "codestar-fips.ap-northeast-1.api.aws"
-  },
-  {
     "endpointPrefix": "codestar-connections",
     "clientName": "CodeStarconnections",
     "region": "ap-northeast-1",

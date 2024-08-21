@@ -435,9 +435,6 @@
   "workspaces": {
     "name": "WorkSpaces"
   },
-  "codestar": {
-    "name": "CodeStar"
-  },
   "lexmodelbuildingservice": {
     "prefix": "lex-models",
     "name": "LexModelBuildingService",
