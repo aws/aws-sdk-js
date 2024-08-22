@@ -1671,6 +1671,7 @@ declare namespace QuickSight {
      * An array of option definitions for an analysis.
      */
     Options?: AssetOptions;
+    QueryExecutionOptions?: QueryExecutionOptions;
   }
   export interface AnalysisError {
     /**
@@ -1779,6 +1780,28 @@ declare namespace QuickSight {
      * The dashboard ID for the dashboard that you want the user to see first. This ID is included in the output URL. When the URL in response is accessed, Amazon QuickSight renders this dashboard. The Amazon Resource Name (ARN) of this dashboard must be included in the AuthorizedResourceArns parameter. Otherwise, the request will fail with InvalidParameterValueException.
      */
     InitialDashboardId: ShortRestrictiveResourceId;
+    /**
+     * A list of all enabled features of a specified anonymous dashboard.
+     */
+    EnabledFeatures?: AnonymousUserDashboardEmbeddingConfigurationEnabledFeatures;
+    /**
+     * A list of all disabled features of a specified anonymous dashboard.
+     */
+    DisabledFeatures?: AnonymousUserDashboardEmbeddingConfigurationDisabledFeatures;
+    /**
+     * The feature configuration for an embedded dashboard.
+     */
+    FeatureConfigurations?: AnonymousUserDashboardFeatureConfigurations;
+  }
+  export type AnonymousUserDashboardEmbeddingConfigurationDisabledFeature = "SHARED_VIEW"|string;
+  export type AnonymousUserDashboardEmbeddingConfigurationDisabledFeatures = AnonymousUserDashboardEmbeddingConfigurationDisabledFeature[];
+  export type AnonymousUserDashboardEmbeddingConfigurationEnabledFeature = "SHARED_VIEW"|string;
+  export type AnonymousUserDashboardEmbeddingConfigurationEnabledFeatures = AnonymousUserDashboardEmbeddingConfigurationEnabledFeature[];
+  export interface AnonymousUserDashboardFeatureConfigurations {
+    /**
+     * The shared view settings of an embedded dashboard.
+     */
+    SharedView?: SharedViewConfigurations;
   }
   export interface AnonymousUserDashboardVisualEmbeddingConfiguration {
     /**
@@ -14646,6 +14669,13 @@ declare namespace QuickSight {
     Status?: StatusCode;
   }
   export type Query = string;
+  export type QueryExecutionMode = "AUTO"|"MANUAL"|string;
+  export interface QueryExecutionOptions {
+    /**
+     * A structure that describes the query execution mode.
+     */
+    QueryExecutionMode?: QueryExecutionMode;
+  }
   export interface QueueInfo {
     /**
      * The ID of the queued ingestion.
@@ -15124,6 +15154,10 @@ declare namespace QuickSight {
      * The state persistence configurations of an embedded Amazon QuickSight console.
      */
     StatePersistence?: StatePersistenceConfigurations;
+    /**
+     * The shared view settings of an embedded dashboard.
+     */
+    SharedView?: SharedViewConfigurations;
   }
   export interface RegisteredUserDashboardEmbeddingConfiguration {
     /**
@@ -15140,6 +15174,10 @@ declare namespace QuickSight {
      * The state persistence settings of an embedded dashboard.
      */
     StatePersistence?: StatePersistenceConfigurations;
+    /**
+     * The shared view settings of an embedded dashboard.
+     */
+    SharedView?: SharedViewConfigurations;
     /**
      * The bookmarks configuration for an embedded dashboard in Amazon QuickSight.
      */
@@ -16124,6 +16162,12 @@ declare namespace QuickSight {
      * The conditional formatting for the shape background color of a filled map visual.
      */
     BackgroundColor: ConditionalFormattingColor;
+  }
+  export interface SharedViewConfigurations {
+    /**
+     * The shared view settings of an embedded dashboard.
+     */
+    Enabled: Boolean;
   }
   export type SharingModel = "ACCOUNT"|"NAMESPACE"|string;
   export interface Sheet {
@@ -17497,6 +17541,7 @@ declare namespace QuickSight {
      * An array of option definitions for a template.
      */
     Options?: AssetOptions;
+    QueryExecutionOptions?: QueryExecutionOptions;
   }
   export interface TemplateVersionSummary {
     /**

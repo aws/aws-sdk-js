@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1680.0-->
+<!--LATEST=2.1681.0-->
 <!--ENTRYINSERT-->
+
+## 2.1681.0
+* bugfix: CodeStar: deprecate CodeStar
+* feature: Bedrock: Amazon Bedrock Evaluation BatchDeleteEvaluationJob API allows customers to delete evaluation jobs under terminated evaluation job statuses - Stopped, Failed, or Completed. Customers can submit a batch of 25 evaluation jobs to be deleted at once.
+* feature: EMRcontainers: Correct endpoint for FIPS is configured for US Gov Regions.
+* feature: Inspector2: Add enums for Agentless scan statuses and EC2 enablement error states
+* feature: QuickSight: Explicit query for authors and dashboard viewing sharing for embedded users
+* feature: Route53: Amazon Route 53 now supports the Asia Pacific (Malaysia) Region (ap-southeast-5) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
 
 ## 2.1680.0
 * feature: EC2: DescribeInstanceStatus now returns health information on EBS volumes attached to Nitro instances

@@ -12,6 +12,14 @@ declare class Bedrock extends Service {
   constructor(options?: Bedrock.Types.ClientConfiguration)
   config: Config & Bedrock.Types.ClientConfiguration;
   /**
+   * Creates a batch deletion job. A model evaluation job can only be deleted if it has following status FAILED, COMPLETED, and STOPPED. You can request up to 25 model evaluation jobs be deleted in a single request.
+   */
+  batchDeleteEvaluationJob(params: Bedrock.Types.BatchDeleteEvaluationJobRequest, callback?: (err: AWSError, data: Bedrock.Types.BatchDeleteEvaluationJobResponse) => void): Request<Bedrock.Types.BatchDeleteEvaluationJobResponse, AWSError>;
+  /**
+   * Creates a batch deletion job. A model evaluation job can only be deleted if it has following status FAILED, COMPLETED, and STOPPED. You can request up to 25 model evaluation jobs be deleted in a single request.
+   */
+  batchDeleteEvaluationJob(callback?: (err: AWSError, data: Bedrock.Types.BatchDeleteEvaluationJobResponse) => void): Request<Bedrock.Types.BatchDeleteEvaluationJobResponse, AWSError>;
+  /**
    * API operation for creating and managing Amazon Bedrock automatic model evaluation jobs and model evaluation jobs that use human workers. To learn more about the requirements for creating a model evaluation job see, Model evaluation.
    */
   createEvaluationJob(params: Bedrock.Types.CreateEvaluationJobRequest, callback?: (err: AWSError, data: Bedrock.Types.CreateEvaluationJobResponse) => void): Request<Bedrock.Types.CreateEvaluationJobResponse, AWSError>;
@@ -52,6 +60,14 @@ declare class Bedrock extends Service {
    */
   createModelCustomizationJob(callback?: (err: AWSError, data: Bedrock.Types.CreateModelCustomizationJobResponse) => void): Request<Bedrock.Types.CreateModelCustomizationJobResponse, AWSError>;
   /**
+   * Creates a model import job to import model that you have customized in other environments, such as Amazon SageMaker. For more information, see Import a customized model 
+   */
+  createModelImportJob(params: Bedrock.Types.CreateModelImportJobRequest, callback?: (err: AWSError, data: Bedrock.Types.CreateModelImportJobResponse) => void): Request<Bedrock.Types.CreateModelImportJobResponse, AWSError>;
+  /**
+   * Creates a model import job to import model that you have customized in other environments, such as Amazon SageMaker. For more information, see Import a customized model 
+   */
+  createModelImportJob(callback?: (err: AWSError, data: Bedrock.Types.CreateModelImportJobResponse) => void): Request<Bedrock.Types.CreateModelImportJobResponse, AWSError>;
+  /**
    * Creates a job to invoke a model on multiple prompts (batch inference). Format your data according to Format your inference data and upload it to an Amazon S3 bucket. For more information, see Create a batch inference job. The response returns a jobArn that you can use to stop or get details about the job. You can check the status of the job by sending a GetModelCustomizationJob request.
    */
   createModelInvocationJob(params: Bedrock.Types.CreateModelInvocationJobRequest, callback?: (err: AWSError, data: Bedrock.Types.CreateModelInvocationJobResponse) => void): Request<Bedrock.Types.CreateModelInvocationJobResponse, AWSError>;
@@ -83,6 +99,14 @@ declare class Bedrock extends Service {
    * Deletes a guardrail.   To delete a guardrail, only specify the ARN of the guardrail in the guardrailIdentifier field. If you delete a guardrail, all of its versions will be deleted.   To delete a version of a guardrail, specify the ARN of the guardrail in the guardrailIdentifier field and the version in the guardrailVersion field.  
    */
   deleteGuardrail(callback?: (err: AWSError, data: Bedrock.Types.DeleteGuardrailResponse) => void): Request<Bedrock.Types.DeleteGuardrailResponse, AWSError>;
+  /**
+   * Deletes a custom model that you imported earlier. For more information, see Import a customized model in the Amazon Bedrock User Guide. 
+   */
+  deleteImportedModel(params: Bedrock.Types.DeleteImportedModelRequest, callback?: (err: AWSError, data: Bedrock.Types.DeleteImportedModelResponse) => void): Request<Bedrock.Types.DeleteImportedModelResponse, AWSError>;
+  /**
+   * Deletes a custom model that you imported earlier. For more information, see Import a customized model in the Amazon Bedrock User Guide. 
+   */
+  deleteImportedModel(callback?: (err: AWSError, data: Bedrock.Types.DeleteImportedModelResponse) => void): Request<Bedrock.Types.DeleteImportedModelResponse, AWSError>;
   /**
    * Delete the invocation logging. 
    */
@@ -132,6 +156,14 @@ declare class Bedrock extends Service {
    */
   getGuardrail(callback?: (err: AWSError, data: Bedrock.Types.GetGuardrailResponse) => void): Request<Bedrock.Types.GetGuardrailResponse, AWSError>;
   /**
+   * Gets properties associated with a customized model you imported. 
+   */
+  getImportedModel(params: Bedrock.Types.GetImportedModelRequest, callback?: (err: AWSError, data: Bedrock.Types.GetImportedModelResponse) => void): Request<Bedrock.Types.GetImportedModelResponse, AWSError>;
+  /**
+   * Gets properties associated with a customized model you imported. 
+   */
+  getImportedModel(callback?: (err: AWSError, data: Bedrock.Types.GetImportedModelResponse) => void): Request<Bedrock.Types.GetImportedModelResponse, AWSError>;
+  /**
    * Retrieves information about a model copy job. For more information, see Copy models to be used in other regions in the Amazon Bedrock User Guide.
    */
   getModelCopyJob(params: Bedrock.Types.GetModelCopyJobRequest, callback?: (err: AWSError, data: Bedrock.Types.GetModelCopyJobResponse) => void): Request<Bedrock.Types.GetModelCopyJobResponse, AWSError>;
@@ -147,6 +179,14 @@ declare class Bedrock extends Service {
    * Retrieves the properties associated with a model-customization job, including the status of the job. For more information, see Custom models in the Amazon Bedrock User Guide.
    */
   getModelCustomizationJob(callback?: (err: AWSError, data: Bedrock.Types.GetModelCustomizationJobResponse) => void): Request<Bedrock.Types.GetModelCustomizationJobResponse, AWSError>;
+  /**
+   * Retrieves the properties associated with import model job, including the status of the job. For more information, see Import a customized model in the Amazon Bedrock User Guide.
+   */
+  getModelImportJob(params: Bedrock.Types.GetModelImportJobRequest, callback?: (err: AWSError, data: Bedrock.Types.GetModelImportJobResponse) => void): Request<Bedrock.Types.GetModelImportJobResponse, AWSError>;
+  /**
+   * Retrieves the properties associated with import model job, including the status of the job. For more information, see Import a customized model in the Amazon Bedrock User Guide.
+   */
+  getModelImportJob(callback?: (err: AWSError, data: Bedrock.Types.GetModelImportJobResponse) => void): Request<Bedrock.Types.GetModelImportJobResponse, AWSError>;
   /**
    * Gets details about a batch inference job. For more information, see View details about a batch inference job 
    */
@@ -204,6 +244,14 @@ declare class Bedrock extends Service {
    */
   listGuardrails(callback?: (err: AWSError, data: Bedrock.Types.ListGuardrailsResponse) => void): Request<Bedrock.Types.ListGuardrailsResponse, AWSError>;
   /**
+   * Returns a list of models you've imported. You can filter the results to return based on one or more criteria. For more information, see Import a customized model in the Amazon Bedrock User Guide.
+   */
+  listImportedModels(params: Bedrock.Types.ListImportedModelsRequest, callback?: (err: AWSError, data: Bedrock.Types.ListImportedModelsResponse) => void): Request<Bedrock.Types.ListImportedModelsResponse, AWSError>;
+  /**
+   * Returns a list of models you've imported. You can filter the results to return based on one or more criteria. For more information, see Import a customized model in the Amazon Bedrock User Guide.
+   */
+  listImportedModels(callback?: (err: AWSError, data: Bedrock.Types.ListImportedModelsResponse) => void): Request<Bedrock.Types.ListImportedModelsResponse, AWSError>;
+  /**
    * Returns a list of model copy jobs that you have submitted. You can filter the jobs to return based on one or more criteria. For more information, see Copy models to be used in other regions in the Amazon Bedrock User Guide.
    */
   listModelCopyJobs(params: Bedrock.Types.ListModelCopyJobsRequest, callback?: (err: AWSError, data: Bedrock.Types.ListModelCopyJobsResponse) => void): Request<Bedrock.Types.ListModelCopyJobsResponse, AWSError>;
@@ -219,6 +267,14 @@ declare class Bedrock extends Service {
    * Returns a list of model customization jobs that you have submitted. You can filter the jobs to return based on one or more criteria. For more information, see Custom models in the Amazon Bedrock User Guide.
    */
   listModelCustomizationJobs(callback?: (err: AWSError, data: Bedrock.Types.ListModelCustomizationJobsResponse) => void): Request<Bedrock.Types.ListModelCustomizationJobsResponse, AWSError>;
+  /**
+   * Returns a list of import jobs you've submitted. You can filter the results to return based on one or more criteria. For more information, see Import a customized model in the Amazon Bedrock User Guide.
+   */
+  listModelImportJobs(params: Bedrock.Types.ListModelImportJobsRequest, callback?: (err: AWSError, data: Bedrock.Types.ListModelImportJobsResponse) => void): Request<Bedrock.Types.ListModelImportJobsResponse, AWSError>;
+  /**
+   * Returns a list of import jobs you've submitted. You can filter the results to return based on one or more criteria. For more information, see Import a customized model in the Amazon Bedrock User Guide.
+   */
+  listModelImportJobs(callback?: (err: AWSError, data: Bedrock.Types.ListModelImportJobsResponse) => void): Request<Bedrock.Types.ListModelImportJobsResponse, AWSError>;
   /**
    * Lists all batch inference jobs in the account. For more information, see View details about a batch inference job.
    */
@@ -317,6 +373,48 @@ declare namespace Bedrock {
     datasetMetricConfigs: EvaluationDatasetMetricConfigs;
   }
   export type BaseModelIdentifier = string;
+  export interface BatchDeleteEvaluationJobError {
+    /**
+     * The ARN of the model evaluation job being deleted.
+     */
+    jobIdentifier: EvaluationJobIdentifier;
+    /**
+     * A HTTP status code of the model evaluation job being deleted.
+     */
+    code: String;
+    /**
+     * A status message about the model evaluation job deletion.
+     */
+    message?: String;
+  }
+  export type BatchDeleteEvaluationJobErrors = BatchDeleteEvaluationJobError[];
+  export interface BatchDeleteEvaluationJobItem {
+    /**
+     * The ARN of model evaluation job to be deleted.
+     */
+    jobIdentifier: EvaluationJobIdentifier;
+    /**
+     * The status of the job's deletion.
+     */
+    jobStatus: EvaluationJobStatus;
+  }
+  export type BatchDeleteEvaluationJobItems = BatchDeleteEvaluationJobItem[];
+  export interface BatchDeleteEvaluationJobRequest {
+    /**
+     * An array of model evaluation job ARNs to be deleted.
+     */
+    jobIdentifiers: EvaluationJobIdentifiers;
+  }
+  export interface BatchDeleteEvaluationJobResponse {
+    /**
+     * A JSON object containing the HTTP status codes and the ARNs of model evaluation jobs that failed to be deleted.
+     */
+    errors: BatchDeleteEvaluationJobErrors;
+    /**
+     * The list of model evaluation jobs to be deleted.
+     */
+    evaluationJobs: BatchDeleteEvaluationJobItems;
+  }
   export type BedrockModelId = string;
   export type Boolean = boolean;
   export type BrandedName = string;
@@ -564,6 +662,50 @@ declare namespace Bedrock {
      */
     jobArn: ModelCustomizationJobArn;
   }
+  export interface CreateModelImportJobRequest {
+    /**
+     * The name of the import job.
+     */
+    jobName: JobName;
+    /**
+     * The name of the imported model.
+     */
+    importedModelName: ImportedModelName;
+    /**
+     * The Amazon Resource Name (ARN) of the model import job.
+     */
+    roleArn: RoleArn;
+    /**
+     * The data source for the imported model.
+     */
+    modelDataSource: ModelDataSource;
+    /**
+     * Tags to attach to this import job. 
+     */
+    jobTags?: TagList;
+    /**
+     * Tags to attach to the imported model.
+     */
+    importedModelTags?: TagList;
+    /**
+     * A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see Ensuring idempotency.
+     */
+    clientRequestToken?: IdempotencyToken;
+    /**
+     * VPC configuration parameters for the private Virtual Private Cloud (VPC) that contains the resources you are using for the import job.
+     */
+    vpcConfig?: VpcConfig;
+    /**
+     * The imported model is encrypted at rest using this key.
+     */
+    importedModelKmsKeyId?: KmsKeyId;
+  }
+  export interface CreateModelImportJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the model import job.
+     */
+    jobArn: ModelImportJobArn;
+  }
   export interface CreateModelInvocationJobRequest {
     /**
      * A name to give the batch inference job.
@@ -690,6 +832,14 @@ declare namespace Bedrock {
   }
   export interface DeleteGuardrailResponse {
   }
+  export interface DeleteImportedModelRequest {
+    /**
+     * Name of the imported model to delete.
+     */
+    modelIdentifier: ImportedModelIdentifier;
+  }
+  export interface DeleteImportedModelResponse {
+  }
   export interface DeleteModelInvocationLoggingConfigurationRequest {
   }
   export interface DeleteModelInvocationLoggingConfigurationResponse {
@@ -726,7 +876,7 @@ declare namespace Bedrock {
   }
   export interface EvaluationDataset {
     /**
-     * Used to specify supported built-in prompt datasets. Valid values are Builtin.Bold, Builtin.BoolQ, Builtin.NaturalQuestions, Builtin.Gigaword, Builtin.RealToxicityPrompts, Builtin.TriviaQa, Builtin.T-Rex, Builtin.WomensEcommerceClothingReviews and Builtin.Wikitext2.
+     * Used to specify supported built-in prompt datasets. Valid values are Builtin.Bold, Builtin.BoolQ, Builtin.NaturalQuestions, Builtin.Gigaword, Builtin.RealToxicityPrompts, Builtin.TriviaQA, Builtin.T-Rex, Builtin.WomensEcommerceClothingReviews and Builtin.Wikitext2.
      */
     name: EvaluationDatasetName;
     /**
@@ -765,8 +915,9 @@ declare namespace Bedrock {
   export type EvaluationJobArn = string;
   export type EvaluationJobDescription = string;
   export type EvaluationJobIdentifier = string;
+  export type EvaluationJobIdentifiers = EvaluationJobIdentifier[];
   export type EvaluationJobName = string;
-  export type EvaluationJobStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped"|string;
+  export type EvaluationJobStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped"|"Deleting"|string;
   export type EvaluationJobType = "Human"|"Automated"|string;
   export type EvaluationMetricDescription = string;
   export type EvaluationMetricName = string;
@@ -1135,6 +1286,46 @@ declare namespace Bedrock {
      */
     kmsKeyArn?: KmsKeyArn;
   }
+  export interface GetImportedModelRequest {
+    /**
+     * Name or Amazon Resource Name (ARN) of the imported model.
+     */
+    modelIdentifier: ImportedModelIdentifier;
+  }
+  export interface GetImportedModelResponse {
+    /**
+     * The Amazon Resource Name (ARN) associated with this imported model.
+     */
+    modelArn?: ImportedModelArn;
+    /**
+     * The name of the imported model.
+     */
+    modelName?: ImportedModelName;
+    /**
+     * Job name associated with the imported model.
+     */
+    jobName?: JobName;
+    /**
+     * Job Amazon Resource Name (ARN) associated with the imported model.
+     */
+    jobArn?: ModelImportJobArn;
+    /**
+     * The data source for this imported model.
+     */
+    modelDataSource?: ModelDataSource;
+    /**
+     * Creation time of the imported model.
+     */
+    creationTime?: Timestamp;
+    /**
+     * The architecture of the imported model.
+     */
+    modelArchitecture?: String;
+    /**
+     * The imported model is encrypted at rest using this key.
+     */
+    modelKmsKeyArn?: KmsKeyArn;
+  }
   export interface GetModelCopyJobRequest {
     /**
      * The Amazon Resource Name (ARN) of the model copy job.
@@ -1278,6 +1469,66 @@ declare namespace Bedrock {
      * VPC configuration for the custom model job.
      */
     vpcConfig?: VpcConfig;
+  }
+  export interface GetModelImportJobRequest {
+    /**
+     * The identifier of the import job.
+     */
+    jobIdentifier: ModelImportJobIdentifier;
+  }
+  export interface GetModelImportJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the import job.
+     */
+    jobArn?: ModelImportJobArn;
+    /**
+     * The name of the import job.
+     */
+    jobName?: JobName;
+    /**
+     * The name of the imported model.
+     */
+    importedModelName?: ImportedModelName;
+    /**
+     * The Amazon Resource Name (ARN) of the imported model.
+     */
+    importedModelArn?: ImportedModelArn;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role associated with this job.
+     */
+    roleArn?: RoleArn;
+    /**
+     * The data source for the imported model.
+     */
+    modelDataSource?: ModelDataSource;
+    /**
+     * The status of the job. A successful job transitions from in-progress to completed when the imported model is ready to use. If the job failed, the failure message contains information about why the job failed.
+     */
+    status?: ModelImportJobStatus;
+    /**
+     * Information about why the import job failed.
+     */
+    failureMessage?: ErrorMessage;
+    /**
+     * The time the resource was created.
+     */
+    creationTime?: Timestamp;
+    /**
+     * Time the resource was last modified.
+     */
+    lastModifiedTime?: Timestamp;
+    /**
+     * Time that the resource transitioned to terminal state.
+     */
+    endTime?: Timestamp;
+    /**
+     * The Virtual Private Cloud (VPC) configuration of the import model job.
+     */
+    vpcConfig?: VpcConfig;
+    /**
+     * The imported model is encrypted at rest using this key.
+     */
+    importedModelKmsKeyArn?: KmsKeyArn;
   }
   export interface GetModelInvocationJobRequest {
     /**
@@ -1776,6 +2027,24 @@ declare namespace Bedrock {
     instructions?: HumanTaskInstructions;
   }
   export type IdempotencyToken = string;
+  export type ImportedModelArn = string;
+  export type ImportedModelIdentifier = string;
+  export type ImportedModelName = string;
+  export interface ImportedModelSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the imported model.
+     */
+    modelArn: ImportedModelArn;
+    /**
+     * Name of the imported model.
+     */
+    modelName: ImportedModelName;
+    /**
+     * Creation time of the imported model.
+     */
+    creationTime: Timestamp;
+  }
+  export type ImportedModelSummaryList = ImportedModelSummary[];
   export type InferenceType = "ON_DEMAND"|"PROVISIONED"|string;
   export type InferenceTypeList = InferenceType[];
   export type JobName = string;
@@ -1926,6 +2195,46 @@ declare namespace Bedrock {
      */
     nextToken?: PaginationToken;
   }
+  export interface ListImportedModelsRequest {
+    /**
+     * Return imported models that created before the specified time.
+     */
+    creationTimeBefore?: Timestamp;
+    /**
+     * Return imported models that were created after the specified time.
+     */
+    creationTimeAfter?: Timestamp;
+    /**
+     * Return imported models only if the model name contains these characters.
+     */
+    nameContains?: ImportedModelName;
+    /**
+     * The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the nextToken field when making another request to return the next batch of results.
+     */
+    maxResults?: MaxResults;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, enter the token returned in the nextToken field in the response in this field to return the next batch of results.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The field to sort by in the returned list of imported models.
+     */
+    sortBy?: SortModelsBy;
+    /**
+     * Specifies whetehr to sort the results in ascending or descending order.
+     */
+    sortOrder?: SortOrder;
+  }
+  export interface ListImportedModelsResponse {
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, use this token when making another request in the nextToken field to return the next batch of results.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * Model summaries.
+     */
+    modelSummaries?: ImportedModelSummaryList;
+  }
   export interface ListModelCopyJobsRequest {
     /**
      * Filters for model copy jobs created after the specified time.
@@ -2021,6 +2330,50 @@ declare namespace Bedrock {
      * Job summaries.
      */
     modelCustomizationJobSummaries?: ModelCustomizationJobSummaries;
+  }
+  export interface ListModelImportJobsRequest {
+    /**
+     * Return import jobs that were created after the specified time.
+     */
+    creationTimeAfter?: Timestamp;
+    /**
+     * Return import jobs that were created before the specified time.
+     */
+    creationTimeBefore?: Timestamp;
+    /**
+     * Return imported jobs with the specified status.
+     */
+    statusEquals?: ModelImportJobStatus;
+    /**
+     * Return imported jobs only if the job name contains these characters.
+     */
+    nameContains?: JobName;
+    /**
+     * The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the nextToken field when making another request to return the next batch of results.
+     */
+    maxResults?: MaxResults;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, enter the token returned in the nextToken field in the response in this field to return the next batch of results.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The field to sort by in the returned list of imported jobs.
+     */
+    sortBy?: SortJobsBy;
+    /**
+     * Specifies whether to sort the results in ascending or descending order.
+     */
+    sortOrder?: SortOrder;
+  }
+  export interface ListModelImportJobsResponse {
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, enter the token returned in the nextToken field in the response in this field to return the next batch of results.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * Import job summaries.
+     */
+    modelImportJobSummaries?: ModelImportJobSummaries;
   }
   export interface ListModelInvocationJobsRequest {
     /**
@@ -2251,8 +2604,52 @@ declare namespace Bedrock {
     customizationType?: CustomizationType;
   }
   export type ModelCustomizationList = ModelCustomization[];
+  export interface ModelDataSource {
+    /**
+     * The Amazon S3 data source of the imported model.
+     */
+    s3DataSource?: S3DataSource;
+  }
   export type ModelId = string;
   export type ModelIdentifier = string;
+  export type ModelImportJobArn = string;
+  export type ModelImportJobIdentifier = string;
+  export type ModelImportJobStatus = "InProgress"|"Completed"|"Failed"|string;
+  export type ModelImportJobSummaries = ModelImportJobSummary[];
+  export interface ModelImportJobSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the import job.
+     */
+    jobArn: ModelImportJobArn;
+    /**
+     * The name of the import job.
+     */
+    jobName: JobName;
+    /**
+     * The status of the imported job. 
+     */
+    status: ModelImportJobStatus;
+    /**
+     * The time when the import job was last modified.
+     */
+    lastModifiedTime?: Timestamp;
+    /**
+     * The time import job was created.
+     */
+    creationTime: Timestamp;
+    /**
+     * The time when import job ended.
+     */
+    endTime?: Timestamp;
+    /**
+     * The Amazon resource Name (ARN) of the imported model.
+     */
+    importedModelArn?: ImportedModelArn;
+    /**
+     * The name of the imported model.
+     */
+    importedModelName?: ImportedModelName;
+  }
   export type ModelInvocationIdempotencyToken = string;
   export type ModelInvocationJobArn = string;
   export type ModelInvocationJobIdentifier = string;
@@ -2435,6 +2832,12 @@ declare namespace Bedrock {
      * S3 prefix. 
      */
     keyPrefix?: KeyPrefix;
+  }
+  export interface S3DataSource {
+    /**
+     * The URI of the Amazon S3 data source.
+     */
+    s3Uri: S3Uri;
   }
   export type S3InputFormat = "JSONL"|string;
   export type S3Uri = string;

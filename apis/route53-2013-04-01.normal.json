@@ -2565,7 +2565,8 @@
         "us-isob-east-1",
         "ap-southeast-4",
         "il-central-1",
-        "ca-west-1"
+        "ca-west-1",
+        "ap-southeast-5"
       ],
       "max": 64,
       "min": 1
@@ -5919,7 +5920,8 @@
         "eu-south-2",
         "ap-southeast-4",
         "il-central-1",
-        "ca-west-1"
+        "ca-west-1",
+        "ap-southeast-5"
       ],
       "max": 64,
       "min": 1
@@ -6683,7 +6685,8 @@
         "eu-south-2",
         "ap-southeast-4",
         "il-central-1",
-        "ca-west-1"
+        "ca-west-1",
+        "ap-southeast-5"
       ],
       "max": 64,
       "min": 1
