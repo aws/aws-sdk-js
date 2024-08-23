@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1681.0-->
+<!--LATEST=2.1682.0-->
 <!--ENTRYINSERT-->
+
+## 2.1682.0
+* feature: BedrockAgent: Releasing the support for Action User Confirmation.
+* feature: BedrockAgentRuntime: Releasing the support for Action User Confirmation.
+* feature: Organizations: Releasing minor partitional endpoint updates.
+* feature: QBusiness: Updates API to latest version.
 
 ## 2.1681.0
 * bugfix: CodeStar: deprecate CodeStar

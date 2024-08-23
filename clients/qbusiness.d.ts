@@ -597,6 +597,10 @@ declare namespace QBusiness {
      * The status of the Amazon Q Business application. The application is ready to use when the status is ACTIVE.
      */
     status?: ApplicationStatus;
+    /**
+     * The authentication type being used by a Amazon Q Business application.
+     */
+    identityType?: IdentityType;
   }
   export type ApplicationArn = string;
   export type ApplicationId = string;
@@ -710,6 +714,17 @@ declare namespace QBusiness {
   export type AuthResponseKey = string;
   export type AuthResponseValue = string;
   export type AuthorizationResponseMap = {[key: string]: AuthResponseValue};
+  export interface AutoSubscriptionConfiguration {
+    /**
+     * Describes whether automatic subscriptions are enabled for an Amazon Q Business application using IAM identity federation for user management.
+     */
+    autoSubscribe: AutoSubscriptionStatus;
+    /**
+     * Describes the default subscription type assigned to an Amazon Q Business application using IAM identity federation for user management. If the value for autoSubscribe is set to ENABLED you must select a value for this field.
+     */
+    defaultSubscriptionType?: SubscriptionType;
+  }
+  export type AutoSubscriptionStatus = "ENABLED"|"DISABLED"|string;
   export interface BasicAuthConfiguration {
     /**
      * The ARN of the Secrets Manager secret that stores the basic authentication credentials used for plugin configuration..
@@ -896,6 +911,8 @@ declare namespace QBusiness {
      */
     failedAttachments?: AttachmentsOutput;
   }
+  export type ClientIdForOIDC = string;
+  export type ClientIdsForOIDC = ClientIdForOIDC[];
   export type ClientToken = string;
   export interface ContentBlockerRule {
     /**
@@ -937,9 +954,21 @@ declare namespace QBusiness {
      */
     roleArn?: RoleArn;
     /**
+     * The authentication type being used by a Amazon Q Business application.
+     */
+    identityType?: IdentityType;
+    /**
+     * The Amazon Resource Name (ARN) of an identity provider being used by an Amazon Q Business application.
+     */
+    iamIdentityProviderArn?: IamIdentityProviderArn;
+    /**
      *  The Amazon Resource Name (ARN) of the IAM Identity Center instance you are either creating for—or connecting to—your Amazon Q Business application.
      */
     identityCenterInstanceArn?: InstanceArn;
+    /**
+     * The OIDC client ID for a Amazon Q Business application.
+     */
+    clientIdsForOIDC?: ClientIdsForOIDC;
     /**
      * A description for the Amazon Q Business application. 
      */
@@ -993,7 +1022,7 @@ declare namespace QBusiness {
      */
     displayName: DataSourceName;
     /**
-     * Configuration information to connect to your data source repository. For configuration templates for your specific data source, see Supported connectors.
+     * Configuration information to connect your data source repository to Amazon Q Business. Use this parameter to provide a JSON schema with configuration information specific to your data source connector. Each data source has a JSON schema provided by Amazon Q Business that you must use. For example, the Amazon S3 and Web Crawler connectors require the following JSON schemas:    Amazon S3 JSON schema     Web Crawler JSON schema    You can find configuration templates for your specific data source using the following steps:   Navigate to the Supported connectors page in the Amazon Q Business User Guide, and select the data source of your choice.   Then, from your specific data source connector page, select Using the API. You will find the JSON schema for your data source, including parameter descriptions, in this section.  
      */
     configuration: DataSourceConfiguration;
     /**
@@ -1197,7 +1226,7 @@ declare namespace QBusiness {
      */
     samplePromptsControlMode?: WebExperienceSamplePromptsControlMode;
     /**
-     * The Amazon Resource Name (ARN) of the service role attached to your web experience.
+     * The Amazon Resource Name (ARN) of the service role attached to your web experience.  You must provide this value if you're using IAM Identity Center to manage end user access to your application. If you're using legacy identity management to manage user access, you don't need to provide this value. 
      */
     roleArn?: RoleArn;
     /**
@@ -1208,6 +1237,10 @@ declare namespace QBusiness {
      * A token you provide to identify a request to create an Amazon Q Business web experience. 
      */
     clientToken?: ClientToken;
+    /**
+     * Information about the identity provider (IdP) used to authenticate end users of an Amazon Q Business web experience.
+     */
+    identityProviderConfiguration?: IdentityProviderConfiguration;
   }
   export interface CreateWebExperienceResponse {
     /**
@@ -1718,6 +1751,14 @@ declare namespace QBusiness {
      */
     applicationArn?: ApplicationArn;
     /**
+     * The authentication type being used by a Amazon Q Business application.
+     */
+    identityType?: IdentityType;
+    /**
+     * The Amazon Resource Name (ARN) of an identity provider being used by an Amazon Q Business application.
+     */
+    iamIdentityProviderArn?: IamIdentityProviderArn;
+    /**
      * The Amazon Resource Name (ARN) of the AWS IAM Identity Center instance attached to your Amazon Q Business application.
      */
     identityCenterApplicationArn?: IdcApplicationArn;
@@ -1761,6 +1802,14 @@ declare namespace QBusiness {
      * Configuration information about chat response personalization. For more information, see Personalizing chat responses.
      */
     personalizationConfiguration?: PersonalizationConfiguration;
+    /**
+     * Settings for auto-subscription behavior for this application. This is only applicable to SAML and OIDC applications.
+     */
+    autoSubscriptionConfiguration?: AutoSubscriptionConfiguration;
+    /**
+     * The OIDC client ID for a Amazon Q Business application.
+     */
+    clientIdsForOIDC?: ClientIdsForOIDC;
   }
   export interface GetChatControlsConfigurationRequest {
     /**
@@ -2149,6 +2198,10 @@ declare namespace QBusiness {
      */
     roleArn?: RoleArn;
     /**
+     * Information about the identity provider (IdP) used to authenticate end users of an Amazon Q Business web experience.
+     */
+    identityProviderConfiguration?: IdentityProviderConfiguration;
+    /**
      * The authentication configuration information for your Amazon Q Business web experience.
      */
     authenticationConfiguration?: WebExperienceAuthConfiguration;
@@ -2209,7 +2262,13 @@ declare namespace QBusiness {
      */
     roleArn?: RoleArn;
   }
+  export type IamIdentityProviderArn = string;
   export type IdcApplicationArn = string;
+  export interface IdentityProviderConfiguration {
+    samlConfiguration?: SamlProviderConfiguration;
+    openIDConnectConfiguration?: OpenIDConnectProviderConfiguration;
+  }
+  export type IdentityType = "AWS_IAM_IDP_SAML"|"AWS_IAM_IDP_OIDC"|"AWS_IAM_IDC"|string;
   export interface Index {
     /**
      * The name of the index.
@@ -2726,6 +2785,16 @@ declare namespace QBusiness {
      */
     roleArn: RoleArn;
   }
+  export interface OpenIDConnectProviderConfiguration {
+    /**
+     * The Amazon Resource Name (ARN) of a Secrets Manager secret containing the OIDC client secret.
+     */
+    secretsArn: SecretArn;
+    /**
+     * An IAM role with permissions to access KMS to decrypt the Secrets Manager secret containing your OIDC client secret.
+     */
+    secretsRole: RoleArn;
+  }
   export type Payload = string;
   export interface PersonalizationConfiguration {
     /**
@@ -2871,7 +2940,7 @@ declare namespace QBusiness {
      */
     indexId: IndexId;
     /**
-     * The list that contains your users or sub groups that belong the same group. For example, the group "Company" includes the user "CEO" and the sub groups "Research", "Engineering", and "Sales and Marketing". If you have more than 1000 users and/or sub groups for a single group, you need to provide the path to the S3 file that lists your users and sub groups for a group. Your sub groups can contain more than 1000 users, but the list of sub groups that belong to a group (and/or users) must be no more than 1000.
+     * The list that contains your users or sub groups that belong the same group. For example, the group "Company" includes the user "CEO" and the sub groups "Research", "Engineering", and "Sales and Marketing".
      */
     groupName: GroupName;
     /**
@@ -2974,6 +3043,7 @@ declare namespace QBusiness {
   export type S3BucketName = string;
   export type S3ObjectKey = string;
   export type SamlAttribute = string;
+  export type SamlAuthenticationUrl = string;
   export interface SamlConfiguration {
     /**
      * The metadata XML that your IdP generated.
@@ -2993,6 +3063,12 @@ declare namespace QBusiness {
     userGroupAttribute?: SamlAttribute;
   }
   export type SamlMetadataXML = string;
+  export interface SamlProviderConfiguration {
+    /**
+     * The URL where Amazon Q Business end users will be redirected for authentication. 
+     */
+    authenticationUrl: SamlAuthenticationUrl;
+  }
   export type SecretArn = string;
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
@@ -3088,6 +3164,7 @@ declare namespace QBusiness {
   }
   export type SubnetId = string;
   export type SubnetIds = SubnetId[];
+  export type SubscriptionType = "Q_LITE"|"Q_BUSINESS"|string;
   export type SyncSchedule = string;
   export type SystemMessageId = string;
   export type SystemMessageOverride = string;
@@ -3210,6 +3287,10 @@ declare namespace QBusiness {
      * Configuration information about chat response personalization. For more information, see Personalizing chat responses.
      */
     personalizationConfiguration?: PersonalizationConfiguration;
+    /**
+     * An option to enable updating the default subscription type assigned to an Amazon Q Business application using IAM identity federation for user management.
+     */
+    autoSubscriptionConfiguration?: AutoSubscriptionConfiguration;
   }
   export interface UpdateApplicationResponse {
   }
@@ -3426,6 +3507,10 @@ declare namespace QBusiness {
      * Determines whether sample prompts are enabled in the web experience for an end user.
      */
     samplePromptsControlMode?: WebExperienceSamplePromptsControlMode;
+    /**
+     * Information about the identity provider (IdP) used to authenticate end users of an Amazon Q Business web experience.
+     */
+    identityProviderConfiguration?: IdentityProviderConfiguration;
   }
   export interface UpdateWebExperienceResponse {
   }

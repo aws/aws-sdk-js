@@ -172,11 +172,11 @@ declare class BedrockAgent extends Service {
    */
   deleteKnowledgeBase(callback?: (err: AWSError, data: BedrockAgent.Types.DeleteKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.DeleteKnowledgeBaseResponse, AWSError>;
   /**
-   * Deletes a prompt or a prompt version from the Prompt management tool. For more information, see Delete prompts from the Prompt management tool and Delete a version of a prompt from the Prompt management tool in the Amazon Bedrock User Guide.
+   * Deletes a prompt or a version of it, depending on whether you include the promptVersion field or not. For more information, see Delete prompts from the Prompt management tool and Delete a version of a prompt from the Prompt management tool in the Amazon Bedrock User Guide.
    */
   deletePrompt(params: BedrockAgent.Types.DeletePromptRequest, callback?: (err: AWSError, data: BedrockAgent.Types.DeletePromptResponse) => void): Request<BedrockAgent.Types.DeletePromptResponse, AWSError>;
   /**
-   * Deletes a prompt or a prompt version from the Prompt management tool. For more information, see Delete prompts from the Prompt management tool and Delete a version of a prompt from the Prompt management tool in the Amazon Bedrock User Guide.
+   * Deletes a prompt or a version of it, depending on whether you include the promptVersion field or not. For more information, see Delete prompts from the Prompt management tool and Delete a version of a prompt from the Prompt management tool in the Amazon Bedrock User Guide.
    */
   deletePrompt(callback?: (err: AWSError, data: BedrockAgent.Types.DeletePromptResponse) => void): Request<BedrockAgent.Types.DeletePromptResponse, AWSError>;
   /**
@@ -276,11 +276,11 @@ declare class BedrockAgent extends Service {
    */
   getKnowledgeBase(callback?: (err: AWSError, data: BedrockAgent.Types.GetKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.GetKnowledgeBaseResponse, AWSError>;
   /**
-   * Retrieves information about a prompt or a version of it. For more information, see View information about prompts using Prompt management and View information about a version of your prompt in the Amazon Bedrock User Guide.
+   * Retrieves information about the working draft (DRAFT version) of a prompt or a version of it, depending on whether you include the promptVersion field or not. For more information, see View information about prompts using Prompt management and View information about a version of your prompt in the Amazon Bedrock User Guide.
    */
   getPrompt(params: BedrockAgent.Types.GetPromptRequest, callback?: (err: AWSError, data: BedrockAgent.Types.GetPromptResponse) => void): Request<BedrockAgent.Types.GetPromptResponse, AWSError>;
   /**
-   * Retrieves information about a prompt or a version of it. For more information, see View information about prompts using Prompt management and View information about a version of your prompt in the Amazon Bedrock User Guide.
+   * Retrieves information about the working draft (DRAFT version) of a prompt or a version of it, depending on whether you include the promptVersion field or not. For more information, see View information about prompts using Prompt management and View information about a version of your prompt in the Amazon Bedrock User Guide.
    */
   getPrompt(callback?: (err: AWSError, data: BedrockAgent.Types.GetPromptResponse) => void): Request<BedrockAgent.Types.GetPromptResponse, AWSError>;
   /**
@@ -372,11 +372,11 @@ declare class BedrockAgent extends Service {
    */
   listKnowledgeBases(callback?: (err: AWSError, data: BedrockAgent.Types.ListKnowledgeBasesResponse) => void): Request<BedrockAgent.Types.ListKnowledgeBasesResponse, AWSError>;
   /**
-   * Returns a list of prompts from the Prompt management tool and information about each prompt. For more information, see View information about prompts using Prompt management in the Amazon Bedrock User Guide.
+   * Returns either information about the working draft (DRAFT version) of each prompt in an account, or information about of all versions of a prompt, depending on whether you include the promptIdentifier field or not. For more information, see View information about prompts using Prompt management in the Amazon Bedrock User Guide.
    */
   listPrompts(params: BedrockAgent.Types.ListPromptsRequest, callback?: (err: AWSError, data: BedrockAgent.Types.ListPromptsResponse) => void): Request<BedrockAgent.Types.ListPromptsResponse, AWSError>;
   /**
-   * Returns a list of prompts from the Prompt management tool and information about each prompt. For more information, see View information about prompts using Prompt management in the Amazon Bedrock User Guide.
+   * Returns either information about the working draft (DRAFT version) of each prompt in an account, or information about of all versions of a prompt, depending on whether you include the promptIdentifier field or not. For more information, see View information about prompts using Prompt management in the Amazon Bedrock User Guide.
    */
   listPrompts(callback?: (err: AWSError, data: BedrockAgent.Types.ListPromptsResponse) => void): Request<BedrockAgent.Types.ListPromptsResponse, AWSError>;
   /**
@@ -1088,7 +1088,7 @@ declare namespace BedrockAgent {
      */
     authType: ConfluenceAuthType;
     /**
-     * The Amazon Resource Name of an Secrets Manager secret that stores your authentication credentials for your SharePoint site/sites. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Confluence connection configuration.
+     * The Amazon Resource Name of an Secrets Manager secret that stores your authentication credentials for your Confluence instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Confluence connection configuration.
      */
     credentialsSecretArn: SecretArn;
     /**
@@ -1253,7 +1253,7 @@ declare namespace BedrockAgent {
      */
     clientToken?: ClientToken;
     /**
-     * The data deletion policy for the data source. You can set the data deletion policy to:   DELETE: Deletes all underlying data belonging to the data source from the vector store upon deletion of a knowledge base or data source resource. Note that the vector store itself is not deleted, only the underlying data. This flag is ignored if an Amazon Web Services account is deleted.   RETAIN: Retains all underlying data in your vector store upon deletion of a knowledge base or data source resource.  
+     * The data deletion policy for the data source. You can set the data deletion policy to:   DELETE: Deletes all data from your data source that’s converted into vector embeddings upon deletion of a knowledge base or data source resource. Note that the vector store itself is not deleted, only the data. This flag is ignored if an Amazon Web Services account is deleted.   RETAIN: Retains all data from your data source that’s converted into vector embeddings upon deletion of a knowledge base or data source resource. Note that the vector store itself is not deleted if you delete a knowledge base or data source resource.  
      */
     dataDeletionPolicy?: DataDeletionPolicy;
     /**
@@ -1455,7 +1455,7 @@ declare namespace BedrockAgent {
      */
     definition?: FlowDefinition;
     /**
-     * The description of the flow version.
+     * The description of the version.
      */
     description?: FlowDescription;
     /**
@@ -1467,7 +1467,7 @@ declare namespace BedrockAgent {
      */
     id: FlowId;
     /**
-     * The name of the flow version.
+     * The name of the version.
      */
     name: FlowName;
     /**
@@ -1623,7 +1623,7 @@ declare namespace BedrockAgent {
      */
     defaultVariant?: PromptVariantName;
     /**
-     * A description for the prompt version.
+     * A description for the version.
      */
     description?: PromptDescription;
     /**
@@ -1631,7 +1631,7 @@ declare namespace BedrockAgent {
      */
     id: PromptId;
     /**
-     * The name of the prompt version.
+     * The name of the prompt.
      */
     name: PromptName;
     /**
@@ -1964,7 +1964,7 @@ declare namespace BedrockAgent {
      */
     promptIdentifier: PromptIdentifier;
     /**
-     * The version of the prompt to delete.
+     * The version of the prompt to delete. To delete the prompt, omit this field.
      */
     promptVersion?: NumericalVersion;
   }
@@ -2035,7 +2035,7 @@ declare namespace BedrockAgent {
   export type FlowAliasSummaries = FlowAliasSummary[];
   export interface FlowAliasSummary {
     /**
-     * The Amazon Resource Name (ARN) of the flow alias.
+     * The Amazon Resource Name (ARN) of the alias.
      */
     arn: FlowAliasArn;
     /**
@@ -2307,7 +2307,7 @@ declare namespace BedrockAgent {
      */
     arn: FlowArn;
     /**
-     * The time at the flow version was created.
+     * The time at the version was created.
      */
     createdAt: DateTimestamp;
     /**
@@ -2336,6 +2336,10 @@ declare namespace BedrockAgent {
      * The parameters that the agent elicits from the user to fulfill the function.
      */
     parameters?: ParameterMap;
+    /**
+     * Contains information if user confirmation is required to invoke the function.
+     */
+    requireConfirmation?: RequireConfirmation;
   }
   export type FunctionDescription = string;
   export interface FunctionSchema {
@@ -2477,7 +2481,7 @@ declare namespace BedrockAgent {
      */
     id: FlowAliasId;
     /**
-     * The name of the flow alias.
+     * The name of the alias.
      */
     name: Name;
     /**
@@ -2485,7 +2489,7 @@ declare namespace BedrockAgent {
      */
     routingConfiguration: FlowAliasRoutingConfiguration;
     /**
-     * The time at which the flow alias was last updated.
+     * The time at which the alias was last updated.
      */
     updatedAt: DateTimestamp;
   }
@@ -2585,7 +2589,7 @@ declare namespace BedrockAgent {
      */
     id: FlowId;
     /**
-     * The name of the flow version.
+     * The name of the version.
      */
     name: FlowName;
     /**
@@ -2635,13 +2639,13 @@ declare namespace BedrockAgent {
      */
     promptIdentifier: PromptIdentifier;
     /**
-     * The version of the prompt about which you want to retrieve information.
+     * The version of the prompt about which you want to retrieve information. Omit this field to return information about the working draft of the prompt.
      */
     promptVersion?: Version;
   }
   export interface GetPromptResponse {
     /**
-     * The Amazon Resource Name (ARN) of the prompt.
+     * The Amazon Resource Name (ARN) of the prompt or the prompt version (if you specified a version in the request).
      */
     arn: PromptArn;
     /**
@@ -3161,7 +3165,7 @@ declare namespace BedrockAgent {
   }
   export interface ListFlowAliasesResponse {
     /**
-     * A list, each member of which contains information about a flow alias.
+     * A list, each member of which contains information about an alias.
      */
     flowAliasSummaries: FlowAliasSummaries;
     /**
@@ -3279,7 +3283,7 @@ declare namespace BedrockAgent {
      */
     nextToken?: NextToken;
     /**
-     * The unique identifier of the prompt.
+     * The unique identifier of the prompt for whose versions you want to return information. Omit this field to list information about all prompts in an account.
      */
     promptIdentifier?: PromptIdentifier;
   }
@@ -3655,7 +3659,7 @@ declare namespace BedrockAgent {
   export type PromptSummaries = PromptSummary[];
   export interface PromptSummary {
     /**
-     * The Amazon Resource Name (ARN) of the prompt.
+     * The Amazon Resource Name (ARN) of the prompt or the prompt version (if you specified a version in the request).
      */
     arn: PromptArn;
     /**
@@ -3795,6 +3799,7 @@ declare namespace BedrockAgent {
     vectorField: FieldName;
   }
   export type RedisEnterpriseCloudIndexName = string;
+  export type RequireConfirmation = "ENABLED"|"DISABLED"|string;
   export interface RetrievalFlowNodeConfiguration {
     /**
      * Contains configurations for the service to use for retrieving data to return as the output from the node.
@@ -3872,7 +3877,7 @@ declare namespace BedrockAgent {
      */
     authType: SalesforceAuthType;
     /**
-     * The Amazon Resource Name of an Secrets Manager secret that stores your authentication credentials for your SharePoint site/sites. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Salesforce connection configuration.
+     * The Amazon Resource Name of an Secrets Manager secret that stores your authentication credentials for your Salesforce instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Salesforce connection configuration.
      */
     credentialsSecretArn: SecretArn;
     /**
@@ -4300,7 +4305,7 @@ declare namespace BedrockAgent {
      */
     aliasIdentifier: FlowAliasIdentifier;
     /**
-     * A description for the flow alias.
+     * A description for the alias.
      */
     description?: Description;
     /**
@@ -4308,7 +4313,7 @@ declare namespace BedrockAgent {
      */
     flowIdentifier: FlowIdentifier;
     /**
-     * The name of the flow alias.
+     * The name of the alias.
      */
     name: Name;
     /**
@@ -4338,7 +4343,7 @@ declare namespace BedrockAgent {
      */
     id: FlowAliasId;
     /**
-     * The name of the flow alias.
+     * The name of the alias.
      */
     name: Name;
     /**
@@ -4346,7 +4351,7 @@ declare namespace BedrockAgent {
      */
     routingConfiguration: FlowAliasRoutingConfiguration;
     /**
-     * The time at which the flow alias was last updated.
+     * The time at which the alias was last updated.
      */
     updatedAt: DateTimestamp;
   }

@@ -28,11 +28,11 @@ declare class SupplyChain extends Service {
    */
   getBillOfMaterialsImportJob(callback?: (err: AWSError, data: SupplyChain.Types.GetBillOfMaterialsImportJobResponse) => void): Request<SupplyChain.Types.GetBillOfMaterialsImportJobResponse, AWSError>;
   /**
-   * Send transactional data events with real-time data for analysis or monitoring.
+   * Send the transactional data payload for the event with real-time data for analysis or monitoring. The real-time data events are stored in an Amazon Web Services service before being processed and stored in data lake. New data events are synced with data lake at 5 PM GMT everyday. The updated transactional data is available in data lake after ingestion.
    */
   sendDataIntegrationEvent(params: SupplyChain.Types.SendDataIntegrationEventRequest, callback?: (err: AWSError, data: SupplyChain.Types.SendDataIntegrationEventResponse) => void): Request<SupplyChain.Types.SendDataIntegrationEventResponse, AWSError>;
   /**
-   * Send transactional data events with real-time data for analysis or monitoring.
+   * Send the transactional data payload for the event with real-time data for analysis or monitoring. The real-time data events are stored in an Amazon Web Services service before being processed and stored in data lake. New data events are synced with data lake at 5 PM GMT everyday. The updated transactional data is available in data lake after ingestion.
    */
   sendDataIntegrationEvent(callback?: (err: AWSError, data: SupplyChain.Types.SendDataIntegrationEventResponse) => void): Request<SupplyChain.Types.SendDataIntegrationEventResponse, AWSError>;
 }
@@ -111,7 +111,7 @@ declare namespace SupplyChain {
      */
     eventType: DataIntegrationEventType;
     /**
-     * The data payload of the event.
+     * The data payload of the event. For more information on the data schema to use, see Data entities supported in AWS Supply Chain .
      */
     data: DataIntegrationEventData;
     /**

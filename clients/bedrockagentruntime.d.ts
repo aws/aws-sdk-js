@@ -107,6 +107,7 @@ declare namespace BedrockAgentRuntime {
   }
   export type ActionGroupName = string;
   export type ActionGroupOutputString = string;
+  export type ActionInvocationType = "RESULT"|"USER_CONFIRMATION"|"USER_CONFIRMATION_AND_RESULT"|string;
   export type AdditionalModelRequestFields = {[key: string]: AdditionalModelRequestFieldsValue};
   export type AdditionalModelRequestFieldsKey = string;
   export interface AdditionalModelRequestFieldsValue {
@@ -120,6 +121,10 @@ declare namespace BedrockAgentRuntime {
      * The action group that the API operation belongs to.
      */
     actionGroup: String;
+    /**
+     * Contains information about the API operation to invoke.
+     */
+    actionInvocationType?: ActionInvocationType;
     /**
      * The path to the API operation.
      */
@@ -168,6 +173,10 @@ declare namespace BedrockAgentRuntime {
      * The path to the API operation.
      */
     apiPath?: ApiPath;
+    /**
+     * Controls the API operations or functions to invoke based on the user confirmation.
+     */
+    confirmationState?: ConfirmationState;
     /**
      * The HTTP method for the API operation.
      */
@@ -264,6 +273,7 @@ declare namespace BedrockAgentRuntime {
      */
     files?: Files;
   }
+  export type ConfirmationState = "CONFIRM"|"DENY"|string;
   export interface ConflictException {
     message?: NonBlankString;
   }
@@ -465,6 +475,10 @@ declare namespace BedrockAgentRuntime {
      */
     actionGroup: String;
     /**
+     * Contains information about the function to invoke,
+     */
+    actionInvocationType?: ActionInvocationType;
+    /**
      * The name of the function.
      */
     function?: String;
@@ -493,6 +507,10 @@ declare namespace BedrockAgentRuntime {
      * The action group that the function belongs to.
      */
     actionGroup: String;
+    /**
+     * Contains the user confirmation information about the function that was called.
+     */
+    confirmationState?: ConfirmationState;
     /**
      * The name of the function that was called.
      */
