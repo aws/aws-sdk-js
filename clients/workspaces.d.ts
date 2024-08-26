@@ -1949,6 +1949,20 @@ declare namespace WorkSpaces {
      */
     NextToken?: PaginationToken;
   }
+  export interface DescribeWorkspaceDirectoriesFilter {
+    /**
+     * The name of the WorkSpaces to filter.
+     */
+    Name: DescribeWorkspaceDirectoriesFilterName;
+    /**
+     * The values for filtering WorkSpaces
+     */
+    Values: DescribeWorkspaceDirectoriesFilterValues;
+  }
+  export type DescribeWorkspaceDirectoriesFilterList = DescribeWorkspaceDirectoriesFilter[];
+  export type DescribeWorkspaceDirectoriesFilterName = "USER_IDENTITY_TYPE"|"WORKSPACE_TYPE"|string;
+  export type DescribeWorkspaceDirectoriesFilterValue = string;
+  export type DescribeWorkspaceDirectoriesFilterValues = DescribeWorkspaceDirectoriesFilterValue[];
   export interface DescribeWorkspaceDirectoriesRequest {
     /**
      * The identifiers of the directories. If the value is null, all directories are retrieved.
@@ -1966,6 +1980,10 @@ declare namespace WorkSpaces {
      * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
      */
     NextToken?: PaginationToken;
+    /**
+     * The filter condition for the WorkSpaces.
+     */
+    Filters?: DescribeWorkspaceDirectoriesFilterList;
   }
   export interface DescribeWorkspaceDirectoriesResult {
     /**
@@ -2308,6 +2326,16 @@ declare namespace WorkSpaces {
      */
     AccountLink?: AccountLink;
   }
+  export interface IDCConfig {
+    /**
+     * The Amazon Resource Name (ARN) of the identity center instance.
+     */
+    InstanceArn?: ARN;
+    /**
+     * The Amazon Resource Name (ARN) of the application.
+     */
+    ApplicationArn?: ARN;
+  }
   export type IdleDisconnectTimeoutInSeconds = number;
   export type ImageAssociatedResourceType = "APPLICATION"|string;
   export type ImageAssociatedResourceTypeList = ImageAssociatedResourceType[];
@@ -2578,6 +2606,17 @@ declare namespace WorkSpaces {
   export type ManagementCidrRangeMaxResults = number;
   export type MaxUserDurationInSeconds = number;
   export type MaximumLength = number;
+  export interface MicrosoftEntraConfig {
+    /**
+     * The identifier of the tenant.
+     */
+    TenantId?: MicrosoftEntraConfigTenantId;
+    /**
+     * The Amazon Resource Name (ARN) of the application config.
+     */
+    ApplicationConfigSecretArn?: SecretsManagerArn;
+  }
+  export type MicrosoftEntraConfigTenantId = string;
   export interface MigrateWorkspaceRequest {
     /**
      * The identifier of the WorkSpace to migrate from.
@@ -2862,6 +2901,14 @@ declare namespace WorkSpaces {
      * The type of identity management the user is using.
      */
     UserIdentityType?: UserIdentityType;
+    /**
+     * The Amazon Resource Name (ARN) of the identity center instance.
+     */
+    IdcInstanceArn?: ARN;
+    /**
+     * The details about Microsoft Entra config.
+     */
+    MicrosoftEntraConfig?: MicrosoftEntraConfig;
     /**
      * Indicates whether the directory's WorkSpace type is personal or pools.
      */
@@ -3307,7 +3354,7 @@ declare namespace WorkSpaces {
      */
     WorkspacesPool?: WorkspacesPool;
   }
-  export type UserIdentityType = "CUSTOMER_MANAGED"|"AWS_DIRECTORY_SERVICE"|string;
+  export type UserIdentityType = "CUSTOMER_MANAGED"|"AWS_DIRECTORY_SERVICE"|"AWS_IAM_IDENTITY_CENTER"|string;
   export type UserName = string;
   export interface UserSetting {
     /**
@@ -3674,6 +3721,10 @@ declare namespace WorkSpaces {
      */
     CertificateBasedAuthProperties?: CertificateBasedAuthProperties;
     /**
+     * Specifies details about Microsoft Entra configurations.
+     */
+    MicrosoftEntraConfig?: MicrosoftEntraConfig;
+    /**
      * The name fo the WorkSpace directory.
      */
     WorkspaceDirectoryName?: WorkspaceDirectoryName;
@@ -3689,6 +3740,10 @@ declare namespace WorkSpaces {
      * Indicates whether the directory's WorkSpace type is personal or pools.
      */
     WorkspaceType?: WorkspaceType;
+    /**
+     * Specifies details about identity center configurations.
+     */
+    IDCConfig?: IDCConfig;
     /**
      * Information about the Active Directory config.
      */
@@ -3706,7 +3761,7 @@ declare namespace WorkSpaces {
   export type WorkspaceDirectoryName = string;
   export type WorkspaceDirectoryNameList = WorkspaceDirectoryName[];
   export type WorkspaceDirectoryState = "REGISTERING"|"REGISTERED"|"DEREGISTERING"|"DEREGISTERED"|"ERROR"|string;
-  export type WorkspaceDirectoryType = "SIMPLE_AD"|"AD_CONNECTOR"|"CUSTOMER_MANAGED"|string;
+  export type WorkspaceDirectoryType = "SIMPLE_AD"|"AD_CONNECTOR"|"CUSTOMER_MANAGED"|"AWS_IAM_IDENTITY_CENTER"|string;
   export type WorkspaceErrorCode = string;
   export type WorkspaceId = string;
   export type WorkspaceIdList = WorkspaceId[];

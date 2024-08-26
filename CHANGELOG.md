@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1682.0-->
+<!--LATEST=2.1683.0-->
 <!--ENTRYINSERT-->
+
+## 2.1683.0
+* feature: IoTSiteWise: AWS IoT SiteWise now supports versioning for asset models. It enables users to retrieve active version of their asset model and perform asset model writes with optimistic lock.
+* feature: WorkSpaces: This release adds support for creating and managing directories that use AWS IAM Identity Center as user identity source. Such directories can be used to create non-Active Directory domain joined WorkSpaces Personal.Updated RegisterWorkspaceDirectory and DescribeWorkspaceDirectories APIs.
 
 ## 2.1682.0
 * feature: BedrockAgent: Releasing the support for Action User Confirmation.
