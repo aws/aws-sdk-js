@@ -68,11 +68,11 @@ declare class Bedrock extends Service {
    */
   createModelImportJob(callback?: (err: AWSError, data: Bedrock.Types.CreateModelImportJobResponse) => void): Request<Bedrock.Types.CreateModelImportJobResponse, AWSError>;
   /**
-   * Creates a job to invoke a model on multiple prompts (batch inference). Format your data according to Format your inference data and upload it to an Amazon S3 bucket. For more information, see Create a batch inference job. The response returns a jobArn that you can use to stop or get details about the job. You can check the status of the job by sending a GetModelCustomizationJob request.
+   * Creates a batch inference job to invoke a model on multiple prompts. Format your data according to Format your inference data and upload it to an Amazon S3 bucket. For more information, see Process multiple prompts with batch inference. The response returns a jobArn that you can use to stop or get details about the job.
    */
   createModelInvocationJob(params: Bedrock.Types.CreateModelInvocationJobRequest, callback?: (err: AWSError, data: Bedrock.Types.CreateModelInvocationJobResponse) => void): Request<Bedrock.Types.CreateModelInvocationJobResponse, AWSError>;
   /**
-   * Creates a job to invoke a model on multiple prompts (batch inference). Format your data according to Format your inference data and upload it to an Amazon S3 bucket. For more information, see Create a batch inference job. The response returns a jobArn that you can use to stop or get details about the job. You can check the status of the job by sending a GetModelCustomizationJob request.
+   * Creates a batch inference job to invoke a model on multiple prompts. Format your data according to Format your inference data and upload it to an Amazon S3 bucket. For more information, see Process multiple prompts with batch inference. The response returns a jobArn that you can use to stop or get details about the job.
    */
   createModelInvocationJob(callback?: (err: AWSError, data: Bedrock.Types.CreateModelInvocationJobResponse) => void): Request<Bedrock.Types.CreateModelInvocationJobResponse, AWSError>;
   /**
@@ -164,6 +164,14 @@ declare class Bedrock extends Service {
    */
   getImportedModel(callback?: (err: AWSError, data: Bedrock.Types.GetImportedModelResponse) => void): Request<Bedrock.Types.GetImportedModelResponse, AWSError>;
   /**
+   * Gets information about an inference profile. For more information, see the Amazon Bedrock User Guide.
+   */
+  getInferenceProfile(params: Bedrock.Types.GetInferenceProfileRequest, callback?: (err: AWSError, data: Bedrock.Types.GetInferenceProfileResponse) => void): Request<Bedrock.Types.GetInferenceProfileResponse, AWSError>;
+  /**
+   * Gets information about an inference profile. For more information, see the Amazon Bedrock User Guide.
+   */
+  getInferenceProfile(callback?: (err: AWSError, data: Bedrock.Types.GetInferenceProfileResponse) => void): Request<Bedrock.Types.GetInferenceProfileResponse, AWSError>;
+  /**
    * Retrieves information about a model copy job. For more information, see Copy models to be used in other regions in the Amazon Bedrock User Guide.
    */
   getModelCopyJob(params: Bedrock.Types.GetModelCopyJobRequest, callback?: (err: AWSError, data: Bedrock.Types.GetModelCopyJobResponse) => void): Request<Bedrock.Types.GetModelCopyJobResponse, AWSError>;
@@ -251,6 +259,14 @@ declare class Bedrock extends Service {
    * Returns a list of models you've imported. You can filter the results to return based on one or more criteria. For more information, see Import a customized model in the Amazon Bedrock User Guide.
    */
   listImportedModels(callback?: (err: AWSError, data: Bedrock.Types.ListImportedModelsResponse) => void): Request<Bedrock.Types.ListImportedModelsResponse, AWSError>;
+  /**
+   * Returns a list of inference profiles that you can use.
+   */
+  listInferenceProfiles(params: Bedrock.Types.ListInferenceProfilesRequest, callback?: (err: AWSError, data: Bedrock.Types.ListInferenceProfilesResponse) => void): Request<Bedrock.Types.ListInferenceProfilesResponse, AWSError>;
+  /**
+   * Returns a list of inference profiles that you can use.
+   */
+  listInferenceProfiles(callback?: (err: AWSError, data: Bedrock.Types.ListInferenceProfilesResponse) => void): Request<Bedrock.Types.ListInferenceProfilesResponse, AWSError>;
   /**
    * Returns a list of model copy jobs that you have submitted. You can filter the jobs to return based on one or more criteria. For more information, see Copy models to be used in other regions in the Amazon Bedrock User Guide.
    */
@@ -1326,6 +1342,50 @@ declare namespace Bedrock {
      */
     modelKmsKeyArn?: KmsKeyArn;
   }
+  export interface GetInferenceProfileRequest {
+    /**
+     * The unique identifier of the inference profile.
+     */
+    inferenceProfileIdentifier: InferenceProfileIdentifier;
+  }
+  export interface GetInferenceProfileResponse {
+    /**
+     * The name of the inference profile.
+     */
+    inferenceProfileName: InferenceProfileName;
+    /**
+     * A list of information about each model in the inference profile.
+     */
+    models: InferenceProfileModels;
+    /**
+     * The description of the inference profile.
+     */
+    description?: InferenceProfileDescription;
+    /**
+     * The time at which the inference profile was created.
+     */
+    createdAt?: Timestamp;
+    /**
+     * The time at which the inference profile was last updated.
+     */
+    updatedAt?: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the inference profile.
+     */
+    inferenceProfileArn: InferenceProfileArn;
+    /**
+     * The unique identifier of the inference profile.
+     */
+    inferenceProfileId: InferenceProfileId;
+    /**
+     * The status of the inference profile. ACTIVE means that the inference profile is available to use.
+     */
+    status: InferenceProfileStatus;
+    /**
+     * The type of the inference profile. SYSTEM_DEFINED means that the inference profile is defined by Amazon Bedrock.
+     */
+    type: InferenceProfileType;
+  }
   export interface GetModelCopyJobRequest {
     /**
      * The Amazon Resource Name (ARN) of the model copy job.
@@ -2045,6 +2105,59 @@ declare namespace Bedrock {
     creationTime: Timestamp;
   }
   export type ImportedModelSummaryList = ImportedModelSummary[];
+  export type InferenceProfileArn = string;
+  export type InferenceProfileDescription = string;
+  export type InferenceProfileId = string;
+  export type InferenceProfileIdentifier = string;
+  export interface InferenceProfileModel {
+    /**
+     * The Amazon Resource Name (ARN) of the model.
+     */
+    modelArn?: FoundationModelArn;
+  }
+  export type InferenceProfileModels = InferenceProfileModel[];
+  export type InferenceProfileName = string;
+  export type InferenceProfileStatus = "ACTIVE"|string;
+  export type InferenceProfileSummaries = InferenceProfileSummary[];
+  export interface InferenceProfileSummary {
+    /**
+     * The name of the inference profile.
+     */
+    inferenceProfileName: InferenceProfileName;
+    /**
+     * A list of information about each model in the inference profile.
+     */
+    models: InferenceProfileModels;
+    /**
+     * The description of the inference profile.
+     */
+    description?: InferenceProfileDescription;
+    /**
+     * The time at which the inference profile was created.
+     */
+    createdAt?: Timestamp;
+    /**
+     * The time at which the inference profile was last updated.
+     */
+    updatedAt?: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the inference profile.
+     */
+    inferenceProfileArn: InferenceProfileArn;
+    /**
+     * The unique identifier of the inference profile.
+     */
+    inferenceProfileId: InferenceProfileId;
+    /**
+     * The status of the inference profile. ACTIVE means that the inference profile is available to use.
+     */
+    status: InferenceProfileStatus;
+    /**
+     * The type of the inference profile. SYSTEM_DEFINED means that the inference profile is defined by Amazon Bedrock.
+     */
+    type: InferenceProfileType;
+  }
+  export type InferenceProfileType = "SYSTEM_DEFINED"|string;
   export type InferenceType = "ON_DEMAND"|"PROVISIONED"|string;
   export type InferenceTypeList = InferenceType[];
   export type JobName = string;
@@ -2234,6 +2347,26 @@ declare namespace Bedrock {
      * Model summaries.
      */
     modelSummaries?: ImportedModelSummaryList;
+  }
+  export interface ListInferenceProfilesRequest {
+    /**
+     * The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the nextToken field when making another request to return the next batch of results.
+     */
+    maxResults?: MaxResults;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, enter the token returned in the nextToken field in the response in this field to return the next batch of results.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListInferenceProfilesResponse {
+    /**
+     * A list of information about each inference profile that you can use.
+     */
+    inferenceProfileSummaries?: InferenceProfileSummaries;
+    /**
+     * If the total number of results is greater than the maxResults value provided in the request, use this token when making another request in the nextToken field to return the next batch of results.
+     */
+    nextToken?: PaginationToken;
   }
   export interface ListModelCopyJobsRequest {
     /**

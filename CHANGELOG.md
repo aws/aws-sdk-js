@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1683.0-->
+<!--LATEST=2.1684.0-->
 <!--ENTRYINSERT-->
+
+## 2.1684.0
+* feature: Bedrock: Amazon Bedrock SDK updates for Inference Profile.
+* feature: BedrockRuntime: Amazon Bedrock SDK updates for Inference Profile.
+* feature: Chatbot: Update documentation to be consistent with the API docs
+* feature: Omics: Adds data provenance to import jobs from read sets and references
+* feature: Polly: Amazon Polly adds 2 new voices: Jitka (cs-CZ) and Sabrina (de-CH).
 
 ## 2.1683.0
 * feature: IoTSiteWise: AWS IoT SiteWise now supports versioning for asset models. It enables users to retrieve active version of their asset model and perform asset model writes with optimistic lock.

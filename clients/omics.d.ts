@@ -102,11 +102,11 @@ declare class Omics extends Service {
    */
   createReferenceStore(callback?: (err: AWSError, data: Omics.Types.CreateReferenceStoreResponse) => void): Request<Omics.Types.CreateReferenceStoreResponse, AWSError>;
   /**
-   * Creates a run group.
+   * You can optionally create a run group to limit the compute resources for the runs that you add to the group.
    */
   createRunGroup(params: Omics.Types.CreateRunGroupRequest, callback?: (err: AWSError, data: Omics.Types.CreateRunGroupResponse) => void): Request<Omics.Types.CreateRunGroupResponse, AWSError>;
   /**
-   * Creates a run group.
+   * You can optionally create a run group to limit the compute resources for the runs that you add to the group.
    */
   createRunGroup(callback?: (err: AWSError, data: Omics.Types.CreateRunGroupResponse) => void): Request<Omics.Types.CreateRunGroupResponse, AWSError>;
   /**
@@ -118,11 +118,11 @@ declare class Omics extends Service {
    */
   createSequenceStore(callback?: (err: AWSError, data: Omics.Types.CreateSequenceStoreResponse) => void): Request<Omics.Types.CreateSequenceStoreResponse, AWSError>;
   /**
-   * Creates a cross-account shared resource. The resource owner makes an offer to share the resource with the principal subscriber (an AWS user with a different account than the resource owner). The following resources support cross-account sharing:   Healthomics variant stores   Healthomics annotation stores   Private workflows  
+   * Creates a cross-account shared resource. The resource owner makes an offer to share the resource with the principal subscriber (an AWS user with a different account than the resource owner). The following resources support cross-account sharing:   HealthOmics variant stores   HealthOmics annotation stores   Private workflows  
    */
   createShare(params: Omics.Types.CreateShareRequest, callback?: (err: AWSError, data: Omics.Types.CreateShareResponse) => void): Request<Omics.Types.CreateShareResponse, AWSError>;
   /**
-   * Creates a cross-account shared resource. The resource owner makes an offer to share the resource with the principal subscriber (an AWS user with a different account than the resource owner). The following resources support cross-account sharing:   Healthomics variant stores   Healthomics annotation stores   Private workflows  
+   * Creates a cross-account shared resource. The resource owner makes an offer to share the resource with the principal subscriber (an AWS user with a different account than the resource owner). The following resources support cross-account sharing:   HealthOmics variant stores   HealthOmics annotation stores   Private workflows  
    */
   createShare(callback?: (err: AWSError, data: Omics.Types.CreateShareResponse) => void): Request<Omics.Types.CreateShareResponse, AWSError>;
   /**
@@ -1392,15 +1392,15 @@ declare namespace Omics {
      */
     name?: RunGroupName;
     /**
-     * The maximum number of CPUs to use in the group.
+     * The maximum number of CPUs that can run concurrently across all active runs in the run group.
      */
     maxCpus?: CreateRunGroupRequestMaxCpusInteger;
     /**
-     * The maximum number of concurrent runs for the group.
+     * The maximum number of runs that can be running at the same time.
      */
     maxRuns?: CreateRunGroupRequestMaxRunsInteger;
     /**
-     * A maximum run time for the group in minutes.
+     * The maximum time for each run (in minutes). If a run exceeds the maximum run time, the run fails automatically.
      */
     maxDuration?: CreateRunGroupRequestMaxDurationInteger;
     /**
@@ -1412,7 +1412,7 @@ declare namespace Omics {
      */
     requestId: RunGroupRequestId;
     /**
-     * The maximum GPUs that can be used by a run group.
+     * The maximum number of GPUs that can run concurrently across all active runs in the run group.
      */
     maxGpus?: CreateRunGroupRequestMaxGpusInteger;
   }
@@ -1600,7 +1600,7 @@ declare namespace Omics {
      */
     parameterTemplate?: WorkflowParameterTemplate;
     /**
-     * The storage capacity for the workflow in gibibytes.
+     * The default storage capacity for the workflow runs, in gibibytes.
      */
     storageCapacity?: CreateWorkflowRequestStorageCapacityInteger;
     /**
@@ -1635,6 +1635,7 @@ declare namespace Omics {
      */
     tags?: TagMap;
   }
+  export type CreationJobId = string;
   export type CreationTime = Date;
   export type CreationType = "IMPORT"|"UPLOAD"|string;
   export interface DeleteAnnotationStoreRequest {
@@ -2274,6 +2275,10 @@ declare namespace Omics {
      * The entity tag (ETag) is a hash of the object meant to represent its semantic content.
      */
     etag?: ETag;
+    /**
+     * The read set's creation job ID.
+     */
+    creationJobId?: CreationJobId;
   }
   export interface GetReadSetRequest {
     /**
@@ -2395,6 +2400,14 @@ declare namespace Omics {
      * The reference's files.
      */
     files?: ReferenceFiles;
+    /**
+     * The reference's creation type.
+     */
+    creationType?: ReferenceCreationType;
+    /**
+     * The reference's creation job ID.
+     */
+    creationJobId?: CreationJobId;
   }
   export interface GetReferenceRequest {
     /**
@@ -2938,7 +2951,7 @@ declare namespace Omics {
      */
     parameterTemplate?: WorkflowParameterTemplate;
     /**
-     * The workflow's storage capacity in gibibytes.
+     * The workflow's default run storage capacity in gibibytes.
      */
     storageCapacity?: GetWorkflowResponseStorageCapacityInteger;
     /**
@@ -3051,6 +3064,10 @@ declare namespace Omics {
      * The source's tags.
      */
     tags?: TagMap;
+    /**
+     * The source's read set ID.
+     */
+    readSetId?: ReadSetId;
   }
   export type ImportReadSetSourceList = ImportReadSetSourceItem[];
   export interface ImportReferenceFilter {
@@ -3119,6 +3136,10 @@ declare namespace Omics {
      * The source's tags.
      */
     tags?: TagMap;
+    /**
+     * The source's reference ID.
+     */
+    referenceId?: ReferenceId;
   }
   export type ImportReferenceSourceList = ImportReferenceSourceItem[];
   export type Integer = number;
@@ -4043,6 +4064,7 @@ declare namespace Omics {
   export type ReadSetUploadPartListItemPartSizeLong = number;
   export type ReferenceArn = string;
   export type ReferenceArnFilter = string;
+  export type ReferenceCreationType = "IMPORT"|string;
   export type ReferenceDescription = string;
   export type ReferenceFile = "SOURCE"|"INDEX"|string;
   export interface ReferenceFiles {
