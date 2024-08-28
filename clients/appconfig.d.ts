@@ -60,43 +60,43 @@ declare class AppConfig extends Service {
    */
   createExtensionAssociation(callback?: (err: AWSError, data: AppConfig.Types.ExtensionAssociation) => void): Request<AppConfig.Types.ExtensionAssociation, AWSError>;
   /**
-   * Creates a new configuration in the AppConfig hosted configuration store.
+   * Creates a new configuration in the AppConfig hosted configuration store. If you're creating a feature flag, we recommend you familiarize yourself with the JSON schema for feature flag data. For more information, see Type reference for AWS.AppConfig.FeatureFlags in the AppConfig User Guide.
    */
   createHostedConfigurationVersion(params: AppConfig.Types.CreateHostedConfigurationVersionRequest, callback?: (err: AWSError, data: AppConfig.Types.HostedConfigurationVersion) => void): Request<AppConfig.Types.HostedConfigurationVersion, AWSError>;
   /**
-   * Creates a new configuration in the AppConfig hosted configuration store.
+   * Creates a new configuration in the AppConfig hosted configuration store. If you're creating a feature flag, we recommend you familiarize yourself with the JSON schema for feature flag data. For more information, see Type reference for AWS.AppConfig.FeatureFlags in the AppConfig User Guide.
    */
   createHostedConfigurationVersion(callback?: (err: AWSError, data: AppConfig.Types.HostedConfigurationVersion) => void): Request<AppConfig.Types.HostedConfigurationVersion, AWSError>;
   /**
-   * Deletes an application. Deleting an application does not delete a configuration from a host.
+   * Deletes an application.
    */
   deleteApplication(params: AppConfig.Types.DeleteApplicationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an application. Deleting an application does not delete a configuration from a host.
+   * Deletes an application.
    */
   deleteApplication(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a configuration profile. Deleting a configuration profile does not delete a configuration from a host.
+   * Deletes a configuration profile. To prevent users from unintentionally deleting actively-used configuration profiles, enable deletion protection.
    */
   deleteConfigurationProfile(params: AppConfig.Types.DeleteConfigurationProfileRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a configuration profile. Deleting a configuration profile does not delete a configuration from a host.
+   * Deletes a configuration profile. To prevent users from unintentionally deleting actively-used configuration profiles, enable deletion protection.
    */
   deleteConfigurationProfile(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a deployment strategy. Deleting a deployment strategy does not delete a configuration from a host.
+   * Deletes a deployment strategy.
    */
   deleteDeploymentStrategy(params: AppConfig.Types.DeleteDeploymentStrategyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a deployment strategy. Deleting a deployment strategy does not delete a configuration from a host.
+   * Deletes a deployment strategy.
    */
   deleteDeploymentStrategy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an environment. Deleting an environment does not delete a configuration from a host.
+   * Deletes an environment. To prevent users from unintentionally deleting actively-used environments, enable deletion protection.
    */
   deleteEnvironment(params: AppConfig.Types.DeleteEnvironmentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an environment. Deleting an environment does not delete a configuration from a host.
+   * Deletes an environment. To prevent users from unintentionally deleting actively-used environments, enable deletion protection.
    */
   deleteEnvironment(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -123,6 +123,10 @@ declare class AppConfig extends Service {
    * Deletes a version of a configuration from the AppConfig hosted configuration store.
    */
   deleteHostedConfigurationVersion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Returns information about the status of the DeletionProtection parameter.
+   */
+  getAccountSettings(callback?: (err: AWSError, data: AppConfig.Types.AccountSettings) => void): Request<AppConfig.Types.AccountSettings, AWSError>;
   /**
    * Retrieves information about an application.
    */
@@ -300,6 +304,14 @@ declare class AppConfig extends Service {
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Updates the value of the DeletionProtection parameter.
+   */
+  updateAccountSettings(params: AppConfig.Types.UpdateAccountSettingsRequest, callback?: (err: AWSError, data: AppConfig.Types.AccountSettings) => void): Request<AppConfig.Types.AccountSettings, AWSError>;
+  /**
+   * Updates the value of the DeletionProtection parameter.
+   */
+  updateAccountSettings(callback?: (err: AWSError, data: AppConfig.Types.AccountSettings) => void): Request<AppConfig.Types.AccountSettings, AWSError>;
+  /**
    * Updates an application.
    */
   updateApplication(params: AppConfig.Types.UpdateApplicationRequest, callback?: (err: AWSError, data: AppConfig.Types.Application) => void): Request<AppConfig.Types.Application, AWSError>;
@@ -357,6 +369,12 @@ declare class AppConfig extends Service {
   validateConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace AppConfig {
+  export interface AccountSettings {
+    /**
+     * A parameter to configure deletion protection. If enabled, deletion protection prevents a user from deleting a configuration profile or an environment if AppConfig has called either GetLatestConfiguration or for the configuration profile or from the environment during the specified interval. Deletion protection is disabled by default. The default interval for ProtectionPeriodInMinutes is 60.
+     */
+    DeletionProtection?: DeletionProtectionSettings;
+  }
   export interface Action {
     /**
      * The action name.
@@ -720,7 +738,7 @@ declare namespace AppConfig {
      */
     Description?: Description;
     /**
-     * The content of the configuration or the configuration data.
+     * The configuration data, as bytes.  AppConfig accepts any type of data, including text formats like JSON or TOML, or binary formats like protocol buffers or compressed data. 
      */
     Content: _Blob;
     /**
@@ -751,6 +769,10 @@ declare namespace AppConfig {
      * The ID of the configuration profile you want to delete.
      */
     ConfigurationProfileId: Id;
+    /**
+     * A parameter to configure deletion protection. If enabled, deletion protection prevents a user from deleting a configuration profile if your application has called either GetLatestConfiguration or for the configuration profile during the specified interval.  This parameter supports the following values:    BYPASS: Instructs AppConfig to bypass the deletion protection check and delete a configuration profile even if deletion protection would have otherwise prevented it.     APPLY: Instructs the deletion protection check to run, even if deletion protection is disabled at the account level. APPLY also forces the deletion protection check to run against resources created in the past hour, which are normally excluded from deletion protection checks.     ACCOUNT_DEFAULT: The default setting, which instructs AppConfig to implement the deletion protection value specified in the UpdateAccountSettings API.  
+     */
+    DeletionProtectionCheck?: DeletionProtectionCheck;
   }
   export interface DeleteDeploymentStrategyRequest {
     /**
@@ -760,13 +782,17 @@ declare namespace AppConfig {
   }
   export interface DeleteEnvironmentRequest {
     /**
+     * The ID of the environment that you want to delete.
+     */
+    EnvironmentId: Id;
+    /**
      * The application ID that includes the environment that you want to delete.
      */
     ApplicationId: Id;
     /**
-     * The ID of the environment that you want to delete.
+     * A parameter to configure deletion protection. If enabled, deletion protection prevents a user from deleting an environment if your application called either GetLatestConfiguration or in the environment during the specified interval.  This parameter supports the following values:    BYPASS: Instructs AppConfig to bypass the deletion protection check and delete a configuration profile even if deletion protection would have otherwise prevented it.     APPLY: Instructs the deletion protection check to run, even if deletion protection is disabled at the account level. APPLY also forces the deletion protection check to run against resources created in the past hour, which are normally excluded from deletion protection checks.     ACCOUNT_DEFAULT: The default setting, which instructs AppConfig to implement the deletion protection value specified in the UpdateAccountSettings API.  
      */
-    EnvironmentId: Id;
+    DeletionProtectionCheck?: DeletionProtectionCheck;
   }
   export interface DeleteExtensionAssociationRequest {
     /**
@@ -797,6 +823,18 @@ declare namespace AppConfig {
      * The versions number to delete.
      */
     VersionNumber: Integer;
+  }
+  export type DeletionProtectionCheck = "ACCOUNT_DEFAULT"|"APPLY"|"BYPASS"|string;
+  export type DeletionProtectionDuration = number;
+  export interface DeletionProtectionSettings {
+    /**
+     * A parameter that indicates if deletion protection is enabled or not.
+     */
+    Enabled?: Boolean;
+    /**
+     * The time interval during which AppConfig monitors for calls to GetLatestConfiguration or for a configuration profile or from an environment. AppConfig returns an error if a user calls or for the designated configuration profile or environment. To bypass the error and delete a configuration profile or an environment, specify BYPASS for the DeletionProtectionCheck parameter for either or .
+     */
+    ProtectionPeriodInMinutes?: DeletionProtectionDuration;
   }
   export interface Deployment {
     /**
@@ -1615,6 +1653,12 @@ declare namespace AppConfig {
      */
     TagKeys: TagKeyList;
   }
+  export interface UpdateAccountSettingsRequest {
+    /**
+     * A parameter to configure deletion protection. If enabled, deletion protection prevents a user from deleting a configuration profile or an environment if AppConfig has called either GetLatestConfiguration or for the configuration profile or from the environment during the specified interval. Deletion protection is disabled by default. The default interval for ProtectionPeriodInMinutes is 60.
+     */
+    DeletionProtection?: DeletionProtectionSettings;
+  }
   export interface UpdateApplicationRequest {
     /**
      * The application ID.
@@ -1641,7 +1685,7 @@ declare namespace AppConfig {
     /**
      * The name of the configuration profile.
      */
-    Name?: Name;
+    Name?: LongName;
     /**
      * A description of the configuration profile.
      */

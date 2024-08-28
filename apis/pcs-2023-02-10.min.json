@@ -1,0 +1,903 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2023-02-10",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "pcs",
+    "jsonVersion": "1.0",
+    "protocol": "json",
+    "protocols": [
+      "json"
+    ],
+    "serviceFullName": "AWS Parallel Computing Service",
+    "serviceId": "PCS",
+    "signatureVersion": "v4",
+    "signingName": "pcs",
+    "targetPrefix": "AWSParallelComputingService",
+    "uid": "pcs-2023-02-10"
+  },
+  "operations": {
+    "CreateCluster": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "clusterName",
+          "scheduler",
+          "size",
+          "networking"
+        ],
+        "members": {
+          "clusterName": {},
+          "scheduler": {
+            "type": "structure",
+            "required": [
+              "type",
+              "version"
+            ],
+            "members": {
+              "type": {},
+              "version": {}
+            }
+          },
+          "size": {},
+          "networking": {
+            "type": "structure",
+            "members": {
+              "subnetIds": {
+                "shape": "S8"
+              },
+              "securityGroupIds": {
+                "shape": "Sa"
+              }
+            }
+          },
+          "slurmConfiguration": {
+            "type": "structure",
+            "members": {
+              "scaleDownIdleTimeInSeconds": {
+                "type": "integer"
+              },
+              "slurmCustomSettings": {
+                "shape": "Se"
+              }
+            }
+          },
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "tags": {
+            "shape": "Sh"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "cluster": {
+            "shape": "Sl"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "CreateComputeNodeGroup": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "clusterIdentifier",
+          "computeNodeGroupName",
+          "subnetIds",
+          "customLaunchTemplate",
+          "iamInstanceProfileArn",
+          "scalingConfiguration",
+          "instanceConfigs"
+        ],
+        "members": {
+          "clusterIdentifier": {},
+          "computeNodeGroupName": {},
+          "amiId": {},
+          "subnetIds": {
+            "shape": "S12"
+          },
+          "purchaseOption": {},
+          "customLaunchTemplate": {
+            "shape": "S14"
+          },
+          "iamInstanceProfileArn": {},
+          "scalingConfiguration": {
+            "shape": "S16"
+          },
+          "instanceConfigs": {
+            "shape": "S19"
+          },
+          "spotOptions": {
+            "shape": "S1b"
+          },
+          "slurmConfiguration": {
+            "type": "structure",
+            "members": {
+              "slurmCustomSettings": {
+                "shape": "Se"
+              }
+            }
+          },
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "tags": {
+            "shape": "Sh"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "computeNodeGroup": {
+            "shape": "S1f"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "CreateQueue": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "clusterIdentifier",
+          "queueName"
+        ],
+        "members": {
+          "clusterIdentifier": {},
+          "queueName": {},
+          "computeNodeGroupConfigurations": {
+            "shape": "S1n"
+          },
+          "clientToken": {
+            "idempotencyToken": true
+          },
+          "tags": {
+            "shape": "Sh"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "queue": {
+            "shape": "S1q"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "DeleteCluster": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "clusterIdentifier"
+        ],
+        "members": {
+          "clusterIdentifier": {},
+          "clientToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "DeleteComputeNodeGroup": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "clusterIdentifier",
+          "computeNodeGroupIdentifier"
+        ],
+        "members": {
+          "clusterIdentifier": {},
+          "computeNodeGroupIdentifier": {},
+          "clientToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "DeleteQueue": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "clusterIdentifier",
+          "queueIdentifier"
+        ],
+        "members": {
+          "clusterIdentifier": {},
+          "queueIdentifier": {},
+          "clientToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "GetCluster": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "clusterIdentifier"
+        ],
+        "members": {
+          "clusterIdentifier": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "cluster": {
+            "shape": "Sl"
+          }
+        }
+      }
+    },
+    "GetComputeNodeGroup": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "clusterIdentifier",
+          "computeNodeGroupIdentifier"
+        ],
+        "members": {
+          "clusterIdentifier": {},
+          "computeNodeGroupIdentifier": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "computeNodeGroup": {
+            "shape": "S1f"
+          }
+        }
+      }
+    },
+    "GetQueue": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "clusterIdentifier",
+          "queueIdentifier"
+        ],
+        "members": {
+          "clusterIdentifier": {},
+          "queueIdentifier": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "queue": {
+            "shape": "S1q"
+          }
+        }
+      }
+    },
+    "ListClusters": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "nextToken": {},
+          "maxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "clusters"
+        ],
+        "members": {
+          "clusters": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "name",
+                "id",
+                "arn",
+                "createdAt",
+                "modifiedAt",
+                "status"
+              ],
+              "members": {
+                "name": {},
+                "id": {},
+                "arn": {},
+                "createdAt": {
+                  "shape": "Sn"
+                },
+                "modifiedAt": {
+                  "shape": "Sn"
+                },
+                "status": {}
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListComputeNodeGroups": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "clusterIdentifier"
+        ],
+        "members": {
+          "clusterIdentifier": {},
+          "nextToken": {},
+          "maxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "computeNodeGroups"
+        ],
+        "members": {
+          "computeNodeGroups": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "name",
+                "id",
+                "arn",
+                "clusterId",
+                "createdAt",
+                "modifiedAt",
+                "status"
+              ],
+              "members": {
+                "name": {},
+                "id": {},
+                "arn": {},
+                "clusterId": {},
+                "createdAt": {
+                  "shape": "Sn"
+                },
+                "modifiedAt": {
+                  "shape": "Sn"
+                },
+                "status": {}
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListQueues": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "clusterIdentifier"
+        ],
+        "members": {
+          "clusterIdentifier": {},
+          "nextToken": {},
+          "maxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "queues"
+        ],
+        "members": {
+          "queues": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "name",
+                "id",
+                "arn",
+                "clusterId",
+                "createdAt",
+                "modifiedAt",
+                "status"
+              ],
+              "members": {
+                "name": {},
+                "id": {},
+                "arn": {},
+                "clusterId": {},
+                "createdAt": {
+                  "shape": "Sn"
+                },
+                "modifiedAt": {
+                  "shape": "Sn"
+                },
+                "status": {}
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "ListTagsForResource": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn"
+        ],
+        "members": {
+          "resourceArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "tags": {
+            "type": "map",
+            "key": {},
+            "value": {}
+          }
+        }
+      }
+    },
+    "RegisterComputeNodeGroupInstance": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "clusterIdentifier",
+          "bootstrapId"
+        ],
+        "members": {
+          "clusterIdentifier": {},
+          "bootstrapId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "nodeID",
+          "sharedSecret",
+          "endpoints"
+        ],
+        "members": {
+          "nodeID": {},
+          "sharedSecret": {
+            "type": "string",
+            "sensitive": true
+          },
+          "endpoints": {
+            "shape": "St"
+          }
+        }
+      }
+    },
+    "TagResource": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn",
+          "tags"
+        ],
+        "members": {
+          "resourceArn": {},
+          "tags": {
+            "shape": "Sh"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "UntagResource": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn",
+          "tagKeys"
+        ],
+        "members": {
+          "resourceArn": {},
+          "tagKeys": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "UpdateComputeNodeGroup": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "clusterIdentifier",
+          "computeNodeGroupIdentifier"
+        ],
+        "members": {
+          "clusterIdentifier": {},
+          "computeNodeGroupIdentifier": {},
+          "amiId": {},
+          "subnetIds": {
+            "shape": "S12"
+          },
+          "customLaunchTemplate": {
+            "shape": "S14"
+          },
+          "purchaseOption": {},
+          "spotOptions": {
+            "shape": "S1b"
+          },
+          "scalingConfiguration": {
+            "shape": "S16"
+          },
+          "iamInstanceProfileArn": {},
+          "slurmConfiguration": {
+            "type": "structure",
+            "members": {
+              "slurmCustomSettings": {
+                "shape": "Se"
+              }
+            }
+          },
+          "clientToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "computeNodeGroup": {
+            "shape": "S1f"
+          }
+        }
+      },
+      "idempotent": true
+    },
+    "UpdateQueue": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "clusterIdentifier",
+          "queueIdentifier"
+        ],
+        "members": {
+          "clusterIdentifier": {},
+          "queueIdentifier": {},
+          "computeNodeGroupConfigurations": {
+            "shape": "S1n"
+          },
+          "clientToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "queue": {
+            "shape": "S1q"
+          }
+        }
+      },
+      "idempotent": true
+    }
+  },
+  "shapes": {
+    "S8": {
+      "type": "list",
+      "member": {}
+    },
+    "Sa": {
+      "type": "list",
+      "member": {}
+    },
+    "Se": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "parameterName",
+          "parameterValue"
+        ],
+        "members": {
+          "parameterName": {},
+          "parameterValue": {}
+        }
+      }
+    },
+    "Sh": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "Sl": {
+      "type": "structure",
+      "required": [
+        "name",
+        "id",
+        "arn",
+        "status",
+        "createdAt",
+        "modifiedAt",
+        "scheduler",
+        "size",
+        "networking"
+      ],
+      "members": {
+        "name": {},
+        "id": {},
+        "arn": {},
+        "status": {},
+        "createdAt": {
+          "shape": "Sn"
+        },
+        "modifiedAt": {
+          "shape": "Sn"
+        },
+        "scheduler": {
+          "type": "structure",
+          "required": [
+            "type",
+            "version"
+          ],
+          "members": {
+            "type": {},
+            "version": {}
+          }
+        },
+        "size": {},
+        "slurmConfiguration": {
+          "type": "structure",
+          "members": {
+            "scaleDownIdleTimeInSeconds": {
+              "type": "integer"
+            },
+            "slurmCustomSettings": {
+              "shape": "Se"
+            },
+            "authKey": {
+              "type": "structure",
+              "required": [
+                "secretArn",
+                "secretVersion"
+              ],
+              "members": {
+                "secretArn": {},
+                "secretVersion": {}
+              }
+            }
+          }
+        },
+        "networking": {
+          "type": "structure",
+          "members": {
+            "subnetIds": {
+              "shape": "S8"
+            },
+            "securityGroupIds": {
+              "shape": "Sa"
+            }
+          }
+        },
+        "endpoints": {
+          "shape": "St"
+        },
+        "errorInfo": {
+          "shape": "Sw"
+        }
+      }
+    },
+    "Sn": {
+      "type": "timestamp",
+      "timestampFormat": "iso8601"
+    },
+    "St": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "type",
+          "privateIpAddress",
+          "port"
+        ],
+        "members": {
+          "type": {},
+          "privateIpAddress": {},
+          "publicIpAddress": {},
+          "port": {}
+        }
+      }
+    },
+    "Sw": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "code": {},
+          "message": {}
+        }
+      }
+    },
+    "S12": {
+      "type": "list",
+      "member": {}
+    },
+    "S14": {
+      "type": "structure",
+      "required": [
+        "id",
+        "version"
+      ],
+      "members": {
+        "id": {},
+        "version": {}
+      }
+    },
+    "S16": {
+      "type": "structure",
+      "required": [
+        "minInstanceCount",
+        "maxInstanceCount"
+      ],
+      "members": {
+        "minInstanceCount": {
+          "type": "integer"
+        },
+        "maxInstanceCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "S19": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "instanceType": {}
+        }
+      }
+    },
+    "S1b": {
+      "type": "structure",
+      "members": {
+        "allocationStrategy": {}
+      }
+    },
+    "S1f": {
+      "type": "structure",
+      "required": [
+        "name",
+        "id",
+        "arn",
+        "clusterId",
+        "createdAt",
+        "modifiedAt",
+        "status",
+        "subnetIds",
+        "customLaunchTemplate",
+        "iamInstanceProfileArn",
+        "scalingConfiguration",
+        "instanceConfigs"
+      ],
+      "members": {
+        "name": {},
+        "id": {},
+        "arn": {},
+        "clusterId": {},
+        "createdAt": {
+          "shape": "Sn"
+        },
+        "modifiedAt": {
+          "shape": "Sn"
+        },
+        "status": {},
+        "amiId": {},
+        "subnetIds": {
+          "shape": "S8"
+        },
+        "purchaseOption": {},
+        "customLaunchTemplate": {
+          "shape": "S14"
+        },
+        "iamInstanceProfileArn": {},
+        "scalingConfiguration": {
+          "type": "structure",
+          "required": [
+            "minInstanceCount",
+            "maxInstanceCount"
+          ],
+          "members": {
+            "minInstanceCount": {
+              "type": "integer"
+            },
+            "maxInstanceCount": {
+              "type": "integer"
+            }
+          }
+        },
+        "instanceConfigs": {
+          "shape": "S19"
+        },
+        "spotOptions": {
+          "shape": "S1b"
+        },
+        "slurmConfiguration": {
+          "type": "structure",
+          "members": {
+            "slurmCustomSettings": {
+              "shape": "Se"
+            }
+          }
+        },
+        "errorInfo": {
+          "shape": "Sw"
+        }
+      }
+    },
+    "S1n": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "computeNodeGroupId": {}
+        }
+      }
+    },
+    "S1q": {
+      "type": "structure",
+      "required": [
+        "name",
+        "id",
+        "arn",
+        "clusterId",
+        "createdAt",
+        "modifiedAt",
+        "status",
+        "computeNodeGroupConfigurations"
+      ],
+      "members": {
+        "name": {},
+        "id": {},
+        "arn": {},
+        "clusterId": {},
+        "createdAt": {
+          "shape": "Sn"
+        },
+        "modifiedAt": {
+          "shape": "Sn"
+        },
+        "status": {},
+        "computeNodeGroupConfigurations": {
+          "shape": "S1n"
+        },
+        "errorInfo": {
+          "shape": "Sw"
+        }
+      }
+    }
+  }
+}

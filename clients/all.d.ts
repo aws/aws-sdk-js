@@ -382,3 +382,4 @@ export import PcaConnectorScep = require('./pcaconnectorscep');
 export import AppTest = require('./apptest');
 export import QApps = require('./qapps');
 export import SSMQuickSetup = require('./ssmquicksetup');
+export import PCS = require('./pcs');

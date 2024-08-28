@@ -1433,5 +1433,8 @@
   "ssmquicksetup": {
     "prefix": "ssm-quicksetup",
     "name": "SSMQuickSetup"
+  },
+  "pcs": {
+    "name": "PCS"
   }
 }

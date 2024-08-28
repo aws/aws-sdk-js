@@ -252,11 +252,11 @@ declare class DataZone extends Service {
    */
   deleteAssetType(callback?: (err: AWSError, data: DataZone.Types.DeleteAssetTypeOutput) => void): Request<DataZone.Types.DeleteAssetTypeOutput, AWSError>;
   /**
-   * Deletes an data product in Amazon DataZone.
+   * Deletes a data product in Amazon DataZone.
    */
   deleteDataProduct(params: DataZone.Types.DeleteDataProductInput, callback?: (err: AWSError, data: DataZone.Types.DeleteDataProductOutput) => void): Request<DataZone.Types.DeleteDataProductOutput, AWSError>;
   /**
-   * Deletes an data product in Amazon DataZone.
+   * Deletes a data product in Amazon DataZone.
    */
   deleteDataProduct(callback?: (err: AWSError, data: DataZone.Types.DeleteDataProductOutput) => void): Request<DataZone.Types.DeleteDataProductOutput, AWSError>;
   /**

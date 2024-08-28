@@ -384,6 +384,7 @@ export abstract class ConfigurationServicePlaceholders {
   apptest?: AWS.AppTest.Types.ClientConfiguration;
   qapps?: AWS.QApps.Types.ClientConfiguration;
   ssmquicksetup?: AWS.SSMQuickSetup.Types.ClientConfiguration;
+  pcs?: AWS.PCS.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -770,4 +771,5 @@ export interface ConfigurationServiceApiVersions {
   apptest?: AWS.AppTest.Types.apiVersion;
   qapps?: AWS.QApps.Types.apiVersion;
   ssmquicksetup?: AWS.SSMQuickSetup.Types.apiVersion;
+  pcs?: AWS.PCS.Types.apiVersion;
 }
