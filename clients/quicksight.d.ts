@@ -3213,7 +3213,7 @@ declare namespace QuickSight {
     /**
      * An expression that defines the calculated column.
      */
-    Expression: Expression;
+    Expression: DataSetCalculatedFieldExpression;
   }
   export type CalculatedColumnList = CalculatedColumn[];
   export interface CalculatedField {
@@ -5947,6 +5947,7 @@ declare namespace QuickSight {
     DatasetParameters?: DatasetParameterList;
   }
   export type DataSetArnsList = Arn[];
+  export type DataSetCalculatedFieldExpression = string;
   export interface DataSetConfiguration {
     /**
      * Placeholder.

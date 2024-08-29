@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1685.0-->
+<!--LATEST=2.1686.0-->
 <!--ENTRYINSERT-->
+
+## 2.1686.0
+* feature: BedrockAgentRuntime: Lifting the maximum length on Bedrock KnowledgeBase RetrievalFilter array
+* feature: BedrockRuntime: Add support for imported-model in invokeModel and InvokeModelWithResponseStream.
+* feature: Personalize: This releases ability to update automatic training scheduler for customer solutions
+* feature: QuickSight: Increased Character Limit for Dataset Calculation Field expressions
+* feature: StepFunctions: This release adds support for static analysis to ValidateStateMachineDefinition API, which can now return optional WARNING diagnostics for semantic errors on the definition of an Amazon States Language (ASL) state machine.
+* feature: WAFV2: The minimum request rate for a rate-based rule is now 10. Before this, it was 100.
 
 ## 2.1685.0
 * feature: AppConfig: This release adds support for deletion protection, which is a safety guardrail to prevent the unintentional deletion of a recently used AWS AppConfig Configuration Profile or Environment. This also includes a change to increase the maximum length of the Name parameter in UpdateConfigurationProfile.

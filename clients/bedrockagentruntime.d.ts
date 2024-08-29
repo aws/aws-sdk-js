@@ -226,7 +226,7 @@ declare namespace BedrockAgentRuntime {
   }
   export interface ByteContentFile {
     /**
-     * The byte value of the file to attach, encoded as Base-64 string. The maximum size of all files that is attached is 10MB. You can attach a maximum of 5 files. 
+     * The raw bytes of the file to attach. The maximum size of all files that is attached is 10MB. You can attach a maximum of 5 files. 
      */
     data: ByteContentBlob;
     /**

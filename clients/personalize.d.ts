@@ -116,11 +116,11 @@ declare class Personalize extends Service {
    */
   createSchema(callback?: (err: AWSError, data: Personalize.Types.CreateSchemaResponse) => void): Request<Personalize.Types.CreateSchemaResponse, AWSError>;
   /**
-   *  After you create a solution, you can’t change its configuration. By default, all new solutions use automatic training. With automatic training, you incur training costs while your solution is active. You can't stop automatic training for a solution. To avoid unnecessary costs, make sure to delete the solution when you are finished. For information about training costs, see Amazon Personalize pricing.  Creates the configuration for training a model (creating a solution version). This configuration includes the recipe to use for model training and optional training configuration, such as columns to use in training and feature transformation parameters. For more information about configuring a solution, see Creating and configuring a solution.   By default, new solutions use automatic training to create solution versions every 7 days. You can change the training frequency. Automatic solution version creation starts one hour after the solution is ACTIVE. If you manually create a solution version within the hour, the solution skips the first automatic training. For more information, see Configuring automatic training.  To turn off automatic training, set performAutoTraining to false. If you turn off automatic training, you must manually create a solution version by calling the CreateSolutionVersion operation. After training starts, you can get the solution version's Amazon Resource Name (ARN) with the ListSolutionVersions API operation. To get its status, use the DescribeSolutionVersion.  After training completes you can evaluate model accuracy by calling GetSolutionMetrics. When you are satisfied with the solution version, you deploy it using CreateCampaign. The campaign provides recommendations to a client through the GetRecommendations API.  Amazon Personalize doesn't support configuring the hpoObjective for solution hyperparameter optimization at this time.   Status  A solution can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   DELETE PENDING &gt; DELETE IN_PROGRESS   To get the status of the solution, call DescribeSolution. If you use manual training, the status must be ACTIVE before you call CreateSolutionVersion.  Related APIs     ListSolutions     CreateSolutionVersion     DescribeSolution     DeleteSolution       ListSolutionVersions     DescribeSolutionVersion   
+   *  By default, all new solutions use automatic training. With automatic training, you incur training costs while your solution is active. To avoid unnecessary costs, when you are finished you can update the solution to turn off automatic training. For information about training costs, see Amazon Personalize pricing.  Creates the configuration for training a model (creating a solution version). This configuration includes the recipe to use for model training and optional training configuration, such as columns to use in training and feature transformation parameters. For more information about configuring a solution, see Creating and configuring a solution.   By default, new solutions use automatic training to create solution versions every 7 days. You can change the training frequency. Automatic solution version creation starts within one hour after the solution is ACTIVE. If you manually create a solution version within the hour, the solution skips the first automatic training. For more information, see Configuring automatic training.  To turn off automatic training, set performAutoTraining to false. If you turn off automatic training, you must manually create a solution version by calling the CreateSolutionVersion operation. After training starts, you can get the solution version's Amazon Resource Name (ARN) with the ListSolutionVersions API operation. To get its status, use the DescribeSolutionVersion.  After training completes you can evaluate model accuracy by calling GetSolutionMetrics. When you are satisfied with the solution version, you deploy it using CreateCampaign. The campaign provides recommendations to a client through the GetRecommendations API.  Amazon Personalize doesn't support configuring the hpoObjective for solution hyperparameter optimization at this time.   Status  A solution can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   DELETE PENDING &gt; DELETE IN_PROGRESS   To get the status of the solution, call DescribeSolution. If you use manual training, the status must be ACTIVE before you call CreateSolutionVersion.  Related APIs     UpdateSolution     ListSolutions     CreateSolutionVersion     DescribeSolution     DeleteSolution       ListSolutionVersions     DescribeSolutionVersion   
    */
   createSolution(params: Personalize.Types.CreateSolutionRequest, callback?: (err: AWSError, data: Personalize.Types.CreateSolutionResponse) => void): Request<Personalize.Types.CreateSolutionResponse, AWSError>;
   /**
-   *  After you create a solution, you can’t change its configuration. By default, all new solutions use automatic training. With automatic training, you incur training costs while your solution is active. You can't stop automatic training for a solution. To avoid unnecessary costs, make sure to delete the solution when you are finished. For information about training costs, see Amazon Personalize pricing.  Creates the configuration for training a model (creating a solution version). This configuration includes the recipe to use for model training and optional training configuration, such as columns to use in training and feature transformation parameters. For more information about configuring a solution, see Creating and configuring a solution.   By default, new solutions use automatic training to create solution versions every 7 days. You can change the training frequency. Automatic solution version creation starts one hour after the solution is ACTIVE. If you manually create a solution version within the hour, the solution skips the first automatic training. For more information, see Configuring automatic training.  To turn off automatic training, set performAutoTraining to false. If you turn off automatic training, you must manually create a solution version by calling the CreateSolutionVersion operation. After training starts, you can get the solution version's Amazon Resource Name (ARN) with the ListSolutionVersions API operation. To get its status, use the DescribeSolutionVersion.  After training completes you can evaluate model accuracy by calling GetSolutionMetrics. When you are satisfied with the solution version, you deploy it using CreateCampaign. The campaign provides recommendations to a client through the GetRecommendations API.  Amazon Personalize doesn't support configuring the hpoObjective for solution hyperparameter optimization at this time.   Status  A solution can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   DELETE PENDING &gt; DELETE IN_PROGRESS   To get the status of the solution, call DescribeSolution. If you use manual training, the status must be ACTIVE before you call CreateSolutionVersion.  Related APIs     ListSolutions     CreateSolutionVersion     DescribeSolution     DeleteSolution       ListSolutionVersions     DescribeSolutionVersion   
+   *  By default, all new solutions use automatic training. With automatic training, you incur training costs while your solution is active. To avoid unnecessary costs, when you are finished you can update the solution to turn off automatic training. For information about training costs, see Amazon Personalize pricing.  Creates the configuration for training a model (creating a solution version). This configuration includes the recipe to use for model training and optional training configuration, such as columns to use in training and feature transformation parameters. For more information about configuring a solution, see Creating and configuring a solution.   By default, new solutions use automatic training to create solution versions every 7 days. You can change the training frequency. Automatic solution version creation starts within one hour after the solution is ACTIVE. If you manually create a solution version within the hour, the solution skips the first automatic training. For more information, see Configuring automatic training.  To turn off automatic training, set performAutoTraining to false. If you turn off automatic training, you must manually create a solution version by calling the CreateSolutionVersion operation. After training starts, you can get the solution version's Amazon Resource Name (ARN) with the ListSolutionVersions API operation. To get its status, use the DescribeSolutionVersion.  After training completes you can evaluate model accuracy by calling GetSolutionMetrics. When you are satisfied with the solution version, you deploy it using CreateCampaign. The campaign provides recommendations to a client through the GetRecommendations API.  Amazon Personalize doesn't support configuring the hpoObjective for solution hyperparameter optimization at this time.   Status  A solution can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   DELETE PENDING &gt; DELETE IN_PROGRESS   To get the status of the solution, call DescribeSolution. If you use manual training, the status must be ACTIVE before you call CreateSolutionVersion.  Related APIs     UpdateSolution     ListSolutions     CreateSolutionVersion     DescribeSolution     DeleteSolution       ListSolutionVersions     DescribeSolutionVersion   
    */
   createSolution(callback?: (err: AWSError, data: Personalize.Types.CreateSolutionResponse) => void): Request<Personalize.Types.CreateSolutionResponse, AWSError>;
   /**
@@ -571,6 +571,14 @@ declare class Personalize extends Service {
    * Updates the recommender to modify the recommender configuration. If you update the recommender to modify the columns used in training, Amazon Personalize automatically starts a full retraining of the models backing your recommender. While the update completes, you can still get recommendations from the recommender. The recommender uses the previous configuration until the update completes. To track the status of this update, use the latestRecommenderUpdate returned in the DescribeRecommender operation. 
    */
   updateRecommender(callback?: (err: AWSError, data: Personalize.Types.UpdateRecommenderResponse) => void): Request<Personalize.Types.UpdateRecommenderResponse, AWSError>;
+  /**
+   * Updates an Amazon Personalize solution to use a different automatic training configuration. When you update a solution, you can change whether the solution uses automatic training, and you can change the training frequency. For more information about updating a solution, see Updating a solution. A solution update can be in one of the following states: CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED To get the status of a solution update, call the DescribeSolution API operation and find the status in the latestSolutionUpdate. 
+   */
+  updateSolution(params: Personalize.Types.UpdateSolutionRequest, callback?: (err: AWSError, data: Personalize.Types.UpdateSolutionResponse) => void): Request<Personalize.Types.UpdateSolutionResponse, AWSError>;
+  /**
+   * Updates an Amazon Personalize solution to use a different automatic training configuration. When you update a solution, you can change whether the solution uses automatic training, and you can change the training frequency. For more information about updating a solution, see Updating a solution. A solution update can be in one of the following states: CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED To get the status of a solution update, call the DescribeSolution API operation and find the status in the latestSolutionUpdate. 
+   */
+  updateSolution(callback?: (err: AWSError, data: Personalize.Types.UpdateSolutionResponse) => void): Request<Personalize.Types.UpdateSolutionResponse, AWSError>;
 }
 declare namespace Personalize {
   export type AccountId = string;
@@ -1404,7 +1412,7 @@ declare namespace Personalize {
      */
     performAutoML?: PerformAutoML;
     /**
-     * Whether the solution uses automatic training to create new solution versions (trained models). The default is True and the solution automatically creates new solution versions every 7 days. You can change the training frequency by specifying a schedulingExpression in the AutoTrainingConfig as part of solution configuration. For more information about automatic training, see Configuring automatic training.  Automatic solution version creation starts one hour after the solution is ACTIVE. If you manually create a solution version within the hour, the solution skips the first automatic training.   After training starts, you can get the solution version's Amazon Resource Name (ARN) with the ListSolutionVersions API operation. To get its status, use the DescribeSolutionVersion. 
+     * Whether the solution uses automatic training to create new solution versions (trained models). The default is True and the solution automatically creates new solution versions every 7 days. You can change the training frequency by specifying a schedulingExpression in the AutoTrainingConfig as part of solution configuration. For more information about automatic training, see Configuring automatic training.  Automatic solution version creation starts within one hour after the solution is ACTIVE. If you manually create a solution version within the hour, the solution skips the first automatic training.   After training starts, you can get the solution version's Amazon Resource Name (ARN) with the ListSolutionVersions API operation. To get its status, use the DescribeSolutionVersion. 
      */
     performAutoTraining?: PerformAutoTraining;
     /**
@@ -1420,7 +1428,7 @@ declare namespace Personalize {
      */
     eventType?: EventType;
     /**
-     * The configuration to use with the solution. When performAutoML is set to true, Amazon Personalize only evaluates the autoMLConfig section of the solution configuration.  Amazon Personalize doesn't support configuring the hpoObjective at this time. 
+     * The configuration properties for the solution. When performAutoML is set to true, Amazon Personalize only evaluates the autoMLConfig section of the solution configuration.  Amazon Personalize doesn't support configuring the hpoObjective at this time. 
      */
     solutionConfig?: SolutionConfig;
     /**
@@ -3191,7 +3199,7 @@ declare namespace Personalize {
      */
     lastUpdatedDateTime?: _Date;
     /**
-     * The status of the recommender update. A recommender can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   STOP PENDING &gt; STOP IN_PROGRESS &gt; INACTIVE &gt; START PENDING &gt; START IN_PROGRESS &gt; ACTIVE   DELETE PENDING &gt; DELETE IN_PROGRESS  
+     * The status of the recommender update. A recommender update can be in one of the following states: CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED
      */
     status?: Status;
     /**
@@ -3272,6 +3280,10 @@ declare namespace Personalize {
      * Describes the latest version of the solution, including the status and the ARN.
      */
     latestSolutionVersion?: SolutionVersionSummary;
+    /**
+     * Provides a summary of the latest updates to the solution.
+     */
+    latestSolutionUpdate?: SolutionUpdateSummary;
   }
   export interface SolutionConfig {
     /**
@@ -3332,6 +3344,35 @@ declare namespace Personalize {
      * The Amazon Resource Name (ARN) of the recipe used by the solution.
      */
     recipeArn?: Arn;
+  }
+  export interface SolutionUpdateConfig {
+    autoTrainingConfig?: AutoTrainingConfig;
+  }
+  export interface SolutionUpdateSummary {
+    /**
+     * The configuration details of the solution.
+     */
+    solutionUpdateConfig?: SolutionUpdateConfig;
+    /**
+     * The status of the solution update. A solution update can be in one of the following states: CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED
+     */
+    status?: Status;
+    /**
+     * Whether the solution automatically creates solution versions.
+     */
+    performAutoTraining?: PerformAutoTraining;
+    /**
+     * The date and time (in Unix format) that the solution update was created.
+     */
+    creationDateTime?: _Date;
+    /**
+     * The date and time (in Unix time) that the solution update was last updated.
+     */
+    lastUpdatedDateTime?: _Date;
+    /**
+     * If a solution update fails, the reason behind the failure.
+     */
+    failureReason?: FailureReason;
   }
   export interface SolutionVersion {
     /**
@@ -3608,6 +3649,26 @@ declare namespace Personalize {
      * The same recommender Amazon Resource Name (ARN) as given in the request.
      */
     recommenderArn?: Arn;
+  }
+  export interface UpdateSolutionRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the solution to update.
+     */
+    solutionArn: Arn;
+    /**
+     * Whether the solution uses automatic training to create new solution versions (trained models). You can change the training frequency by specifying a schedulingExpression in the AutoTrainingConfig as part of solution configuration.   If you turn on automatic training, the first automatic training starts within one hour after the solution update completes. If you manually create a solution version within the hour, the solution skips the first automatic training. For more information about automatic training, see Configuring automatic training.   After training starts, you can get the solution version's Amazon Resource Name (ARN) with the ListSolutionVersions API operation. To get its status, use the DescribeSolutionVersion. 
+     */
+    performAutoTraining?: PerformAutoTraining;
+    /**
+     * The new configuration details of the solution.
+     */
+    solutionUpdateConfig?: SolutionUpdateConfig;
+  }
+  export interface UpdateSolutionResponse {
+    /**
+     * The same solution Amazon Resource Name (ARN) as given in the request.
+     */
+    solutionArn?: Arn;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
