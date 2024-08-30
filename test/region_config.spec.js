@@ -139,6 +139,10 @@ describe('region_config.js', function() {
   it('resolves the endpoint suffix for eu-isoe-west-1', function() {
     expect(getEndpointSuffix('eu-isoe-west-1')).to.equal('cloud.adc-e.uk');
   });
+
+  it('resolves the endpoint suffix for us-isof-south-1', function() {
+    expect(getEndpointSuffix('us-isof-south-1')).to.equal('csp.hci.ic.gov');
+  });
 });
 
 describe('region_config_data.json', function() {
