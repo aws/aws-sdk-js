@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "region endpoint",
-  "description": "add endpoint suffix for a region"
-}

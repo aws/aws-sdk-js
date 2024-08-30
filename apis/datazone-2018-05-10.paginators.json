@@ -36,11 +36,23 @@
       "limit_key": "maxResults",
       "result_key": "items"
     },
+    "ListDomainUnitsForParent": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults",
+      "result_key": "items"
+    },
     "ListDomains": {
       "input_token": "nextToken",
       "output_token": "nextToken",
       "limit_key": "maxResults",
       "result_key": "items"
+    },
+    "ListEntityOwners": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults",
+      "result_key": "owners"
     },
     "ListEnvironmentActions": {
       "input_token": "nextToken",
@@ -89,6 +101,12 @@
       "output_token": "nextToken",
       "limit_key": "maxResults",
       "result_key": "notifications"
+    },
+    "ListPolicyGrants": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults",
+      "result_key": "grantList"
     },
     "ListProjectMemberships": {
       "input_token": "nextToken",

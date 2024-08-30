@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1686.0',
+	  VERSION: '2.1687.0',
 
 	  /**
 	   * @api private
@@ -5739,6 +5739,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    '^us\\-iso\\-\\w+\\-\\d+$': 'c2s.ic.gov',
 	    '^us\\-isob\\-\\w+\\-\\d+$': 'sc2s.sgov.gov',
 	    '^eu\\-isoe\\-west\\-1$': 'cloud.adc-e.uk',
+	    '^us\\-isof\\-\\w+\\-\\d+$': 'csp.hci.ic.gov',
 	  };
 	  var defaultSuffix = 'amazonaws.com';
 	  var regexes = Object.keys(regionRegexes);

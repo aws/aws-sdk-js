@@ -28,6 +28,22 @@ declare class DataZone extends Service {
    */
   acceptSubscriptionRequest(callback?: (err: AWSError, data: DataZone.Types.AcceptSubscriptionRequestOutput) => void): Request<DataZone.Types.AcceptSubscriptionRequestOutput, AWSError>;
   /**
+   * Adds the owner of an entity (a domain unit).
+   */
+  addEntityOwner(params: DataZone.Types.AddEntityOwnerInput, callback?: (err: AWSError, data: DataZone.Types.AddEntityOwnerOutput) => void): Request<DataZone.Types.AddEntityOwnerOutput, AWSError>;
+  /**
+   * Adds the owner of an entity (a domain unit).
+   */
+  addEntityOwner(callback?: (err: AWSError, data: DataZone.Types.AddEntityOwnerOutput) => void): Request<DataZone.Types.AddEntityOwnerOutput, AWSError>;
+  /**
+   * Adds a policy grant (an authorization policy) to a specified entity, including domain units, environment blueprint configurations, or environment profiles.
+   */
+  addPolicyGrant(params: DataZone.Types.AddPolicyGrantInput, callback?: (err: AWSError, data: DataZone.Types.AddPolicyGrantOutput) => void): Request<DataZone.Types.AddPolicyGrantOutput, AWSError>;
+  /**
+   * Adds a policy grant (an authorization policy) to a specified entity, including domain units, environment blueprint configurations, or environment profiles.
+   */
+  addPolicyGrant(callback?: (err: AWSError, data: DataZone.Types.AddPolicyGrantOutput) => void): Request<DataZone.Types.AddPolicyGrantOutput, AWSError>;
+  /**
    * Associates the environment role in Amazon DataZone.
    */
   associateEnvironmentRole(params: DataZone.Types.AssociateEnvironmentRoleInput, callback?: (err: AWSError, data: DataZone.Types.AssociateEnvironmentRoleOutput) => void): Request<DataZone.Types.AssociateEnvironmentRoleOutput, AWSError>;
@@ -115,6 +131,14 @@ declare class DataZone extends Service {
    * Creates an Amazon DataZone domain.
    */
   createDomain(callback?: (err: AWSError, data: DataZone.Types.CreateDomainOutput) => void): Request<DataZone.Types.CreateDomainOutput, AWSError>;
+  /**
+   * Creates a domain unit in Amazon DataZone.
+   */
+  createDomainUnit(params: DataZone.Types.CreateDomainUnitInput, callback?: (err: AWSError, data: DataZone.Types.CreateDomainUnitOutput) => void): Request<DataZone.Types.CreateDomainUnitOutput, AWSError>;
+  /**
+   * Creates a domain unit in Amazon DataZone.
+   */
+  createDomainUnit(callback?: (err: AWSError, data: DataZone.Types.CreateDomainUnitOutput) => void): Request<DataZone.Types.CreateDomainUnitOutput, AWSError>;
   /**
    * Create an Amazon DataZone environment.
    */
@@ -275,6 +299,14 @@ declare class DataZone extends Service {
    * Deletes a Amazon DataZone domain.
    */
   deleteDomain(callback?: (err: AWSError, data: DataZone.Types.DeleteDomainOutput) => void): Request<DataZone.Types.DeleteDomainOutput, AWSError>;
+  /**
+   * Deletes a domain unit.
+   */
+  deleteDomainUnit(params: DataZone.Types.DeleteDomainUnitInput, callback?: (err: AWSError, data: DataZone.Types.DeleteDomainUnitOutput) => void): Request<DataZone.Types.DeleteDomainUnitOutput, AWSError>;
+  /**
+   * Deletes a domain unit.
+   */
+  deleteDomainUnit(callback?: (err: AWSError, data: DataZone.Types.DeleteDomainUnitOutput) => void): Request<DataZone.Types.DeleteDomainUnitOutput, AWSError>;
   /**
    * Deletes an environment in Amazon DataZone.
    */
@@ -451,6 +483,14 @@ declare class DataZone extends Service {
    * Gets an Amazon DataZone domain.
    */
   getDomain(callback?: (err: AWSError, data: DataZone.Types.GetDomainOutput) => void): Request<DataZone.Types.GetDomainOutput, AWSError>;
+  /**
+   * Gets the details of the specified domain unit.
+   */
+  getDomainUnit(params: DataZone.Types.GetDomainUnitInput, callback?: (err: AWSError, data: DataZone.Types.GetDomainUnitOutput) => void): Request<DataZone.Types.GetDomainUnitOutput, AWSError>;
+  /**
+   * Gets the details of the specified domain unit.
+   */
+  getDomainUnit(callback?: (err: AWSError, data: DataZone.Types.GetDomainUnitOutput) => void): Request<DataZone.Types.GetDomainUnitOutput, AWSError>;
   /**
    * Gets an Amazon DataZone environment.
    */
@@ -668,6 +708,14 @@ declare class DataZone extends Service {
    */
   listDataSources(callback?: (err: AWSError, data: DataZone.Types.ListDataSourcesOutput) => void): Request<DataZone.Types.ListDataSourcesOutput, AWSError>;
   /**
+   * Lists child domain units for the specified parent domain unit.
+   */
+  listDomainUnitsForParent(params: DataZone.Types.ListDomainUnitsForParentInput, callback?: (err: AWSError, data: DataZone.Types.ListDomainUnitsForParentOutput) => void): Request<DataZone.Types.ListDomainUnitsForParentOutput, AWSError>;
+  /**
+   * Lists child domain units for the specified parent domain unit.
+   */
+  listDomainUnitsForParent(callback?: (err: AWSError, data: DataZone.Types.ListDomainUnitsForParentOutput) => void): Request<DataZone.Types.ListDomainUnitsForParentOutput, AWSError>;
+  /**
    * Lists Amazon DataZone domains.
    */
   listDomains(params: DataZone.Types.ListDomainsInput, callback?: (err: AWSError, data: DataZone.Types.ListDomainsOutput) => void): Request<DataZone.Types.ListDomainsOutput, AWSError>;
@@ -675,6 +723,14 @@ declare class DataZone extends Service {
    * Lists Amazon DataZone domains.
    */
   listDomains(callback?: (err: AWSError, data: DataZone.Types.ListDomainsOutput) => void): Request<DataZone.Types.ListDomainsOutput, AWSError>;
+  /**
+   * Lists the entity (domain units) owners.
+   */
+  listEntityOwners(params: DataZone.Types.ListEntityOwnersInput, callback?: (err: AWSError, data: DataZone.Types.ListEntityOwnersOutput) => void): Request<DataZone.Types.ListEntityOwnersOutput, AWSError>;
+  /**
+   * Lists the entity (domain units) owners.
+   */
+  listEntityOwners(callback?: (err: AWSError, data: DataZone.Types.ListEntityOwnersOutput) => void): Request<DataZone.Types.ListEntityOwnersOutput, AWSError>;
   /**
    * Lists existing environment actions.
    */
@@ -739,6 +795,14 @@ declare class DataZone extends Service {
    * Lists all Amazon DataZone notifications.
    */
   listNotifications(callback?: (err: AWSError, data: DataZone.Types.ListNotificationsOutput) => void): Request<DataZone.Types.ListNotificationsOutput, AWSError>;
+  /**
+   * Lists policy grants.
+   */
+  listPolicyGrants(params: DataZone.Types.ListPolicyGrantsInput, callback?: (err: AWSError, data: DataZone.Types.ListPolicyGrantsOutput) => void): Request<DataZone.Types.ListPolicyGrantsOutput, AWSError>;
+  /**
+   * Lists policy grants.
+   */
+  listPolicyGrants(callback?: (err: AWSError, data: DataZone.Types.ListPolicyGrantsOutput) => void): Request<DataZone.Types.ListPolicyGrantsOutput, AWSError>;
   /**
    * Lists all members of the specified project.
    */
@@ -844,6 +908,22 @@ declare class DataZone extends Service {
    */
   rejectSubscriptionRequest(callback?: (err: AWSError, data: DataZone.Types.RejectSubscriptionRequestOutput) => void): Request<DataZone.Types.RejectSubscriptionRequestOutput, AWSError>;
   /**
+   * Removes an owner from an entity.
+   */
+  removeEntityOwner(params: DataZone.Types.RemoveEntityOwnerInput, callback?: (err: AWSError, data: DataZone.Types.RemoveEntityOwnerOutput) => void): Request<DataZone.Types.RemoveEntityOwnerOutput, AWSError>;
+  /**
+   * Removes an owner from an entity.
+   */
+  removeEntityOwner(callback?: (err: AWSError, data: DataZone.Types.RemoveEntityOwnerOutput) => void): Request<DataZone.Types.RemoveEntityOwnerOutput, AWSError>;
+  /**
+   * Removes a policy grant.
+   */
+  removePolicyGrant(params: DataZone.Types.RemovePolicyGrantInput, callback?: (err: AWSError, data: DataZone.Types.RemovePolicyGrantOutput) => void): Request<DataZone.Types.RemovePolicyGrantOutput, AWSError>;
+  /**
+   * Removes a policy grant.
+   */
+  removePolicyGrant(callback?: (err: AWSError, data: DataZone.Types.RemovePolicyGrantOutput) => void): Request<DataZone.Types.RemovePolicyGrantOutput, AWSError>;
+  /**
    * Revokes a specified subscription in Amazon DataZone.
    */
   revokeSubscription(params: DataZone.Types.RevokeSubscriptionInput, callback?: (err: AWSError, data: DataZone.Types.RevokeSubscriptionOutput) => void): Request<DataZone.Types.RevokeSubscriptionOutput, AWSError>;
@@ -947,6 +1027,14 @@ declare class DataZone extends Service {
    * Updates a Amazon DataZone domain.
    */
   updateDomain(callback?: (err: AWSError, data: DataZone.Types.UpdateDomainOutput) => void): Request<DataZone.Types.UpdateDomainOutput, AWSError>;
+  /**
+   * Updates the domain unit.
+   */
+  updateDomainUnit(params: DataZone.Types.UpdateDomainUnitInput, callback?: (err: AWSError, data: DataZone.Types.UpdateDomainUnitOutput) => void): Request<DataZone.Types.UpdateDomainUnitOutput, AWSError>;
+  /**
+   * Updates the domain unit.
+   */
+  updateDomainUnit(callback?: (err: AWSError, data: DataZone.Types.UpdateDomainUnitOutput) => void): Request<DataZone.Types.UpdateDomainUnitOutput, AWSError>;
   /**
    * Updates the specified environment in Amazon DataZone.
    */
@@ -1175,6 +1263,72 @@ declare namespace DataZone {
      * The console link specified as part of the environment action.
      */
     awsConsoleLink?: AwsConsoleLinkParameters;
+  }
+  export interface AddEntityOwnerInput {
+    /**
+     * A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The ID of the domain in which you want to add the entity owner.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The ID of the entity to which you want to add an owner.
+     */
+    entityIdentifier: String;
+    /**
+     * The type of an entity.
+     */
+    entityType: DataZoneEntityType;
+    /**
+     * The owner that you want to add to the entity.
+     */
+    owner: OwnerProperties;
+  }
+  export interface AddEntityOwnerOutput {
+  }
+  export interface AddPolicyGrantInput {
+    /**
+     * A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The details of the policy grant.
+     */
+    detail: PolicyGrantDetail;
+    /**
+     * The ID of the domain where you want to add a policy grant.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The ID of the entity (resource) to which you want to add a policy grant.
+     */
+    entityIdentifier: String;
+    /**
+     * The type of entity (resource) to which the grant is added.
+     */
+    entityType: TargetEntityType;
+    /**
+     * The type of policy that you want to grant.
+     */
+    policyType: ManagedPolicyType;
+    /**
+     * The principal to whom the permissions are granted.
+     */
+    principal: PolicyGrantPrincipal;
+  }
+  export interface AddPolicyGrantOutput {
+  }
+  export interface AddToProjectMemberPoolPolicyGrantDetail {
+    /**
+     * Specifies whether the policy grant is applied to child domain units.
+     */
+    includeChildDomainUnits?: Boolean;
+  }
+  export interface AllDomainUnitsGrantFilter {
+  }
+  export interface AllUsersGrantFilter {
   }
   export type ApplicableAssetTypes = TypeName[];
   export interface AssetFilterConfiguration {
@@ -2041,6 +2195,12 @@ declare namespace DataZone {
      */
     updatedBy?: UpdatedBy;
   }
+  export interface CreateAssetTypePolicyGrantDetail {
+    /**
+     * Specifies whether the policy grant is applied to child domain units.
+     */
+    includeChildDomainUnits?: Boolean;
+  }
   export interface CreateDataProductInput {
     /**
      * A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.
@@ -2421,6 +2581,10 @@ declare namespace DataZone {
      */
     portalUrl?: String;
     /**
+     * The ID of the root domain unit.
+     */
+    rootDomainUnitId?: DomainUnitId;
+    /**
      * The single-sign on configuration of the Amazon DataZone domain.
      */
     singleSignOn?: SingleSignOn;
@@ -2432,6 +2596,72 @@ declare namespace DataZone {
      * The tags specified for the Amazon DataZone domain.
      */
     tags?: Tags;
+  }
+  export interface CreateDomainUnitInput {
+    /**
+     * A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The description of the domain unit.
+     */
+    description?: DomainUnitDescription;
+    /**
+     * The ID of the domain where you want to crate a domain unit.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The name of the domain unit.
+     */
+    name: DomainUnitName;
+    /**
+     * The ID of the parent domain unit.
+     */
+    parentDomainUnitIdentifier: DomainUnitId;
+  }
+  export interface CreateDomainUnitOutput {
+    /**
+     * The IDs of the ancestor domain units.
+     */
+    ancestorDomainUnitIds: DomainUnitIds;
+    /**
+     * The timestamp at which the domain unit was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The user who created the domain unit.
+     */
+    createdBy?: CreatedBy;
+    /**
+     * The description of the domain unit.
+     */
+    description?: DomainUnitDescription;
+    /**
+     * The ID of the domain where the domain unit was created.
+     */
+    domainId: DomainId;
+    /**
+     * The ID of the domain unit.
+     */
+    id: DomainUnitId;
+    /**
+     * The name of the domain unit.
+     */
+    name: DomainUnitName;
+    /**
+     * The owners of the domain unit.
+     */
+    owners: DomainUnitOwners;
+    /**
+     * The ID of the parent domain unit.
+     */
+    parentDomainUnitId?: DomainUnitId;
+  }
+  export interface CreateDomainUnitPolicyGrantDetail {
+    /**
+     * Specifies whether the policy grant is applied to child domain units.
+     */
+    includeChildDomainUnits?: Boolean;
   }
   export interface CreateEnvironmentActionInput {
     /**
@@ -2693,6 +2923,12 @@ declare namespace DataZone {
      */
     userParameters?: CustomParameterList;
   }
+  export interface CreateEnvironmentProfilePolicyGrantDetail {
+    /**
+     * The ID of the domain unit.
+     */
+    domainUnitId?: DomainUnitId;
+  }
   export interface CreateFormTypeInput {
     /**
      * The description of this Amazon DataZone metadata form type.
@@ -2749,6 +2985,12 @@ declare namespace DataZone {
      */
     revision: Revision;
   }
+  export interface CreateFormTypePolicyGrantDetail {
+    /**
+     * Specifies whether the policy grant is applied to child domain units.
+     */
+    includeChildDomainUnits?: Boolean;
+  }
   export interface CreateGlossaryInput {
     /**
      * A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.
@@ -2800,6 +3042,12 @@ declare namespace DataZone {
      * The status of this business glossary.
      */
     status?: GlossaryStatus;
+  }
+  export interface CreateGlossaryPolicyGrantDetail {
+    /**
+     * Specifies whether the policy grant is applied to child domain units.
+     */
+    includeChildDomainUnits?: Boolean;
   }
   export interface CreateGlossaryTermInput {
     /**
@@ -2951,6 +3199,10 @@ declare namespace DataZone {
      */
     domainIdentifier: DomainId;
     /**
+     * The ID of the domain unit. This parameter is not required and if it is not specified, then the project is created at the root domain unit level.
+     */
+    domainUnitId?: DomainUnitId;
+    /**
      * The glossary terms that can be used in this Amazon DataZone project.
      */
     glossaryTerms?: GlossaryTerms;
@@ -2997,6 +3249,10 @@ declare namespace DataZone {
      */
     domainId: DomainId;
     /**
+     * The ID of the domain unit.
+     */
+    domainUnitId?: DomainUnitId;
+    /**
      * Specifies the error message that is returned if the operation cannot be successfully completed.
      */
     failureReasons?: FailureReasons;
@@ -3020,6 +3276,12 @@ declare namespace DataZone {
      * The status of the Amazon DataZone project that was created.
      */
     projectStatus?: ProjectStatus;
+  }
+  export interface CreateProjectPolicyGrantDetail {
+    /**
+     * Specifies whether the policy grant is applied to child domain units.
+     */
+    includeChildDomainUnits?: Boolean;
   }
   export interface CreateSubscriptionGrantInput {
     /**
@@ -3691,6 +3953,7 @@ declare namespace DataZone {
     updatedAt?: DateTime;
   }
   export type DataSourceType = string;
+  export type DataZoneEntityType = "DOMAIN_UNIT"|string;
   export type DateTime = Date;
   export type DecisionComment = string;
   export interface DeleteAssetFilterInput {
@@ -3866,6 +4129,18 @@ declare namespace DataZone {
      * The status of the domain.
      */
     status: DomainStatus;
+  }
+  export interface DeleteDomainUnitInput {
+    /**
+     * The ID of the domain where you want to delete a domain unit.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The ID of the domain unit that you want to delete.
+     */
+    identifier: DomainUnitId;
+  }
+  export interface DeleteDomainUnitOutput {
   }
   export interface DeleteEnvironmentActionInput {
     /**
@@ -4210,12 +4485,82 @@ declare namespace DataZone {
      */
     status: DomainStatus;
   }
+  export type DomainUnitDescription = string;
+  export type DomainUnitDesignation = "OWNER"|string;
+  export interface DomainUnitFilterForProject {
+    /**
+     * The domain unit ID to use in the filter.
+     */
+    domainUnit: DomainUnitId;
+    /**
+     * Specifies whether to include child domain units.
+     */
+    includeChildDomainUnits?: Boolean;
+  }
+  export interface DomainUnitGrantFilter {
+    /**
+     * Specifies a grant filter containing all domain units.
+     */
+    allDomainUnitsGrantFilter?: AllDomainUnitsGrantFilter;
+  }
+  export interface DomainUnitGroupProperties {
+    /**
+     * The ID of the domain unit group.
+     */
+    groupId?: String;
+  }
+  export type DomainUnitId = string;
+  export type DomainUnitIds = DomainUnitId[];
+  export type DomainUnitName = string;
+  export interface DomainUnitOwnerProperties {
+    /**
+     * Indicates that the domain unit owner is a group.
+     */
+    group?: DomainUnitGroupProperties;
+    /**
+     * Indicates that the domain unit owner is a user.
+     */
+    user?: DomainUnitUserProperties;
+  }
+  export type DomainUnitOwners = DomainUnitOwnerProperties[];
+  export interface DomainUnitPolicyGrantPrincipal {
+    /**
+     * Specifes the designation of the domain unit users.
+     */
+    domainUnitDesignation: DomainUnitDesignation;
+    /**
+     * The grant filter for the domain unit.
+     */
+    domainUnitGrantFilter?: DomainUnitGrantFilter;
+    /**
+     * The ID of the domain unit.
+     */
+    domainUnitIdentifier?: DomainUnitId;
+  }
+  export type DomainUnitSummaries = DomainUnitSummary[];
+  export interface DomainUnitSummary {
+    /**
+     * The ID of the domain unit summary.
+     */
+    id: DomainUnitId;
+    /**
+     * The name of the domain unit summary.
+     */
+    name: String;
+  }
+  export interface DomainUnitUserProperties {
+    /**
+     * The ID of teh domain unit user.
+     */
+    userId?: String;
+  }
   export type EdgeDirection = "UPSTREAM"|"DOWNSTREAM"|string;
   export type EditedValue = string;
   export type EnableSetting = "ENABLED"|"DISABLED"|string;
   export type EnabledRegionList = RegionName[];
   export type EntityId = string;
   export type EntityIdentifier = string;
+  export type EntityOwners = OwnerPropertiesOutput[];
   export type EntityType = "ASSET"|"DATA_PRODUCT"|string;
   export type EnvironmentActionId = string;
   export type EnvironmentActionList = ConfigurableEnvironmentAction[];
@@ -5123,6 +5468,10 @@ declare namespace DataZone {
      */
     portalUrl?: String;
     /**
+     * The ID of the root domain in Amazon Datazone.
+     */
+    rootDomainUnitId?: DomainUnitId;
+    /**
      * The single sing-on option of the specified Amazon DataZone domain.
      */
     singleSignOn?: SingleSignOn;
@@ -5134,6 +5483,58 @@ declare namespace DataZone {
      * The tags specified for the Amazon DataZone domain.
      */
     tags?: Tags;
+  }
+  export interface GetDomainUnitInput {
+    /**
+     * The ID of the domain where you want to get a domain unit.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The identifier of the domain unit that you want to get.
+     */
+    identifier: DomainUnitId;
+  }
+  export interface GetDomainUnitOutput {
+    /**
+     * The time stamp at which the domain unit was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The user who created the domain unit.
+     */
+    createdBy?: CreatedBy;
+    /**
+     * The description of the domain unit.
+     */
+    description?: DomainUnitDescription;
+    /**
+     * The ID of the domain in which the domain unit lives.
+     */
+    domainId: DomainId;
+    /**
+     * The ID of the domain unit.
+     */
+    id: DomainUnitId;
+    /**
+     * The timestamp at which the domain unit was last updated.
+     */
+    lastUpdatedAt?: UpdatedAt;
+    /**
+     * The user who last updated the domain unit.
+     */
+    lastUpdatedBy?: UpdatedBy;
+    /**
+     * The name of the domain unit.
+     */
+    name: DomainUnitName;
+    /**
+     * The owners of the domain unit.
+     */
+    owners: DomainUnitOwners;
+    /**
+     * The ID of the parent domain unit.
+     */
+    parentDomainUnitId?: DomainUnitId;
   }
   export interface GetEnvironmentActionInput {
     /**
@@ -5887,6 +6288,10 @@ declare namespace DataZone {
      */
     domainId: DomainId;
     /**
+     * The ID of the domain unit.
+     */
+    domainUnitId?: DomainUnitId;
+    /**
      * Specifies the error message that is returned if the operation cannot be successfully completed.
      */
     failureReasons?: FailureReasons;
@@ -6423,6 +6828,12 @@ declare namespace DataZone {
     groupId: String;
   }
   export type GroupIdentifier = string;
+  export interface GroupPolicyGrantPrincipal {
+    /**
+     * The ID Of the group of the group principal.
+     */
+    groupIdentifier?: GroupIdentifier;
+  }
   export type GroupProfileId = string;
   export type GroupProfileName = string;
   export type GroupProfileStatus = "ASSIGNED"|"NOT_ASSIGNED"|string;
@@ -6830,6 +7241,34 @@ declare namespace DataZone {
      */
     nextToken?: PaginationToken;
   }
+  export interface ListDomainUnitsForParentInput {
+    /**
+     * The ID of the domain in which you want to list domain units for a parent domain unit.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The maximum number of domain units to return in a single call to ListDomainUnitsForParent. When the number of domain units to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListDomainUnitsForParent to list the next set of domain units.
+     */
+    maxResults?: MaxResultsForListDomains;
+    /**
+     * When the number of domain units is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of domain units, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListDomainUnitsForParent to list the next set of domain units.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The ID of the parent domain unit.
+     */
+    parentDomainUnitIdentifier: DomainUnitId;
+  }
+  export interface ListDomainUnitsForParentOutput {
+    /**
+     * The results returned by this action.
+     */
+    items: DomainUnitSummaries;
+    /**
+     * When the number of domain units is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of domain units, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListDomainUnitsForParent to list the next set of domain units.
+     */
+    nextToken?: PaginationToken;
+  }
   export interface ListDomainsInput {
     /**
      * The maximum number of domains to return in a single call to ListDomains. When the number of domains to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListDomains to list the next set of domains.
@@ -6853,6 +7292,38 @@ declare namespace DataZone {
      * When the number of domains is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of domains, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListDomains to list the next set of domains.
      */
     nextToken?: PaginationToken;
+  }
+  export interface ListEntityOwnersInput {
+    /**
+     * The ID of the domain where you want to list entity owners.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The ID of the entity that you want to list.
+     */
+    entityIdentifier: String;
+    /**
+     * The type of the entity that you want to list.
+     */
+    entityType: DataZoneEntityType;
+    /**
+     * The maximum number of entities to return in a single call to ListEntityOwners. When the number of entities to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListEntityOwners to list the next set of entities.
+     */
+    maxResults?: MaxResultsForListDomains;
+    /**
+     * When the number of entities is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of entities, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListEntityOwners to list the next set of entities.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListEntityOwnersOutput {
+    /**
+     * When the number of entities is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of entities, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListEntityOwners to list the next set of entities.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The owners of the entity.
+     */
+    owners: EntityOwners;
   }
   export type ListEnvironmentActionSummaries = EnvironmentActionSummary[];
   export interface ListEnvironmentActionsInput {
@@ -7158,6 +7629,42 @@ declare namespace DataZone {
      * The results of the ListNotifications action.
      */
     notifications?: NotificationsList;
+  }
+  export interface ListPolicyGrantsInput {
+    /**
+     * The ID of the domain where you want to list policy grants.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The ID of the entity for which you want to list policy grants.
+     */
+    entityIdentifier: String;
+    /**
+     * The type of entity for which you want to list policy grants.
+     */
+    entityType: TargetEntityType;
+    /**
+     * The maximum number of grants to return in a single call to ListPolicyGrants. When the number of grants to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListPolicyGrants to list the next set of grants.
+     */
+    maxResults?: MaxResultsForListDomains;
+    /**
+     * When the number of grants is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of grants, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListPolicyGrants to list the next set of grants.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The type of policy that you want to list.
+     */
+    policyType: ManagedPolicyType;
+  }
+  export interface ListPolicyGrantsOutput {
+    /**
+     * The results of this action - the listed grants.
+     */
+    grantList: PolicyGrantList;
+    /**
+     * When the number of grants is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of grants, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListPolicyGrants to list the next set of grants.
+     */
+    nextToken?: PaginationToken;
   }
   export interface ListProjectMembershipsInput {
     /**
@@ -7539,6 +8046,7 @@ declare namespace DataZone {
   }
   export type ListingSummaryItems = ListingSummaryItem[];
   export type LongDescription = string;
+  export type ManagedPolicyType = "CREATE_DOMAIN_UNIT"|"OVERRIDE_DOMAIN_UNIT_OWNERS"|"ADD_TO_PROJECT_MEMBER_POOL"|"OVERRIDE_PROJECT_OWNERS"|"CREATE_GLOSSARY"|"CREATE_FORM_TYPE"|"CREATE_ASSET_TYPE"|"CREATE_PROJECT"|"CREATE_ENVIRONMENT_PROFILE"|"DELEGATE_CREATE_ENVIRONMENT_PROFILE"|"CREATE_ENVIRONMENT"|string;
   export type MaxResults = number;
   export type MaxResultsForListDomains = number;
   export interface Member {
@@ -7718,7 +8226,146 @@ declare namespace DataZone {
   export type NotificationSubjects = String[];
   export type NotificationType = "TASK"|"EVENT"|string;
   export type NotificationsList = NotificationOutput[];
+  export interface OverrideDomainUnitOwnersPolicyGrantDetail {
+    /**
+     * Specifies whether the policy is inherited by child domain units.
+     */
+    includeChildDomainUnits?: Boolean;
+  }
+  export interface OverrideProjectOwnersPolicyGrantDetail {
+    /**
+     * Specifies whether the policy is inherited by child domain units.
+     */
+    includeChildDomainUnits?: Boolean;
+  }
+  export interface OwnerGroupProperties {
+    /**
+     * The ID of the domain unit owners group.
+     */
+    groupIdentifier: GroupIdentifier;
+  }
+  export interface OwnerGroupPropertiesOutput {
+    /**
+     * The ID of the domain unit owners group.
+     */
+    groupId?: String;
+  }
+  export interface OwnerProperties {
+    /**
+     * Specifies that the domain unit owner is a group.
+     */
+    group?: OwnerGroupProperties;
+    /**
+     * Specifies that the domain unit owner is a user.
+     */
+    user?: OwnerUserProperties;
+  }
+  export interface OwnerPropertiesOutput {
+    /**
+     * Specifies that the domain unit owner is a group.
+     */
+    group?: OwnerGroupPropertiesOutput;
+    /**
+     * Specifies that the domain unit owner is a user.
+     */
+    user?: OwnerUserPropertiesOutput;
+  }
+  export interface OwnerUserProperties {
+    /**
+     * The ID of the owner user.
+     */
+    userIdentifier: UserIdentifier;
+  }
+  export interface OwnerUserPropertiesOutput {
+    /**
+     * The ID of the owner user.
+     */
+    userId?: String;
+  }
   export type PaginationToken = string;
+  export interface PolicyGrantDetail {
+    /**
+     * Specifies that the policy grant is to be added to the members of the project.
+     */
+    addToProjectMemberPool?: AddToProjectMemberPoolPolicyGrantDetail;
+    /**
+     * Specifies that this is a create asset type policy.
+     */
+    createAssetType?: CreateAssetTypePolicyGrantDetail;
+    /**
+     * Specifies that this is a create domain unit policy.
+     */
+    createDomainUnit?: CreateDomainUnitPolicyGrantDetail;
+    /**
+     * Specifies that this is a create environment policy.
+     */
+    createEnvironment?: Unit;
+    /**
+     * Specifies that this is a create environment profile policy.
+     */
+    createEnvironmentProfile?: CreateEnvironmentProfilePolicyGrantDetail;
+    /**
+     * Specifies that this is a create form type policy.
+     */
+    createFormType?: CreateFormTypePolicyGrantDetail;
+    /**
+     * Specifies that this is a create glossary policy.
+     */
+    createGlossary?: CreateGlossaryPolicyGrantDetail;
+    /**
+     * Specifies that this is a create project policy.
+     */
+    createProject?: CreateProjectPolicyGrantDetail;
+    /**
+     * Specifies that this is the delegation of the create environment profile policy.
+     */
+    delegateCreateEnvironmentProfile?: Unit;
+    /**
+     * Specifies whether to override domain unit owners.
+     */
+    overrideDomainUnitOwners?: OverrideDomainUnitOwnersPolicyGrantDetail;
+    /**
+     * Specifies whether to override project owners.
+     */
+    overrideProjectOwners?: OverrideProjectOwnersPolicyGrantDetail;
+  }
+  export type PolicyGrantList = PolicyGrantMember[];
+  export interface PolicyGrantMember {
+    /**
+     * Specifies the timestamp at which policy grant member was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * Specifies the user who created the policy grant member.
+     */
+    createdBy?: CreatedBy;
+    /**
+     * The details of the policy grant member.
+     */
+    detail?: PolicyGrantDetail;
+    /**
+     * The principal of the policy grant member.
+     */
+    principal?: PolicyGrantPrincipal;
+  }
+  export interface PolicyGrantPrincipal {
+    /**
+     * The domain unit of the policy grant principal.
+     */
+    domainUnit?: DomainUnitPolicyGrantPrincipal;
+    /**
+     * The group of the policy grant principal.
+     */
+    group?: GroupPolicyGrantPrincipal;
+    /**
+     * The project of the policy grant principal.
+     */
+    project?: ProjectPolicyGrantPrincipal;
+    /**
+     * The user of the policy grant principal.
+     */
+    user?: UserPolicyGrantPrincipal;
+  }
   export interface PostLineageEventInput {
     /**
      * A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.
@@ -7792,6 +8439,13 @@ declare namespace DataZone {
      */
     message?: String;
   }
+  export type ProjectDesignation = "OWNER"|"CONTRIBUTOR"|string;
+  export interface ProjectGrantFilter {
+    /**
+     * The domain unit filter of the project grant filter.
+     */
+    domainUnitFilter?: DomainUnitFilterForProject;
+  }
   export type ProjectId = string;
   export interface ProjectMember {
     /**
@@ -7805,6 +8459,20 @@ declare namespace DataZone {
   }
   export type ProjectMembers = ProjectMember[];
   export type ProjectName = string;
+  export interface ProjectPolicyGrantPrincipal {
+    /**
+     * The project designation of the project policy grant principal.
+     */
+    projectDesignation: ProjectDesignation;
+    /**
+     * The project grant filter of the project policy grant principal.
+     */
+    projectGrantFilter?: ProjectGrantFilter;
+    /**
+     * The project ID of the project policy grant principal.
+     */
+    projectIdentifier?: ProjectId;
+  }
   export type ProjectStatus = "ACTIVE"|"DELETING"|"DELETE_FAILED"|string;
   export type ProjectSummaries = ProjectSummary[];
   export interface ProjectSummary {
@@ -7824,6 +8492,10 @@ declare namespace DataZone {
      * The identifier of a Amazon DataZone domain where the project exists.
      */
     domainId: DomainId;
+    /**
+     * The ID of the domain unit.
+     */
+    domainUnitId?: DomainUnitId;
     /**
      * Specifies the error message that is returned if the operation cannot be successfully completed.
      */
@@ -8153,6 +8825,58 @@ declare namespace DataZone {
   export type RelationalFilterConfigurationDatabaseNameString = string;
   export type RelationalFilterConfigurationSchemaNameString = string;
   export type RelationalFilterConfigurations = RelationalFilterConfiguration[];
+  export interface RemoveEntityOwnerInput {
+    /**
+     * A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The ID of the domain where you want to remove an owner from an entity.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The ID of the entity from which you want to remove an owner.
+     */
+    entityIdentifier: String;
+    /**
+     * The type of the entity from which you want to remove an owner.
+     */
+    entityType: DataZoneEntityType;
+    /**
+     * The owner that you want to remove from an entity.
+     */
+    owner: OwnerProperties;
+  }
+  export interface RemoveEntityOwnerOutput {
+  }
+  export interface RemovePolicyGrantInput {
+    /**
+     * A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The ID of the domain where you want to remove a policy grant.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The ID of the entity from which you want to remove a policy grant.
+     */
+    entityIdentifier: String;
+    /**
+     * The type of the entity from which you want to remove a policy grant.
+     */
+    entityType: TargetEntityType;
+    /**
+     * The type of the policy that you want to remove.
+     */
+    policyType: ManagedPolicyType;
+    /**
+     * The principal from which you want to remove a policy grant.
+     */
+    principal: PolicyGrantPrincipal;
+  }
+  export interface RemovePolicyGrantOutput {
+  }
   export type RequestReason = string;
   export interface Resource {
     /**
@@ -9214,6 +9938,7 @@ declare namespace DataZone {
   }
   export type TagValue = string;
   export type Tags = {[key: string]: TagValue};
+  export type TargetEntityType = "DOMAIN_UNIT"|"ENVIRONMENT_BLUEPRINT_CONFIGURATION"|"ENVIRONMENT_PROFILE"|string;
   export type TaskId = string;
   export type TaskStatus = "ACTIVE"|"INACTIVE"|string;
   export interface TermRelations {
@@ -9327,6 +10052,8 @@ declare namespace DataZone {
   }
   export type TypeName = string;
   export type TypesSearchScope = "ASSET_TYPE"|"FORM_TYPE"|"LINEAGE_NODE_TYPE"|string;
+  export interface Unit {
+  }
   export interface UntagResourceRequest {
     /**
      * The ARN of the resource to be untagged in Amazon DataZone.
@@ -9595,9 +10322,73 @@ declare namespace DataZone {
      */
     name?: String;
     /**
+     * The ID of the root domain unit.
+     */
+    rootDomainUnitId?: DomainUnitId;
+    /**
      * The single sign-on option of the Amazon DataZone domain.
      */
     singleSignOn?: SingleSignOn;
+  }
+  export interface UpdateDomainUnitInput {
+    /**
+     * The description of the domain unit that you want to update.
+     */
+    description?: DomainUnitDescription;
+    /**
+     * The ID of the domain where you want to update a domain unit.
+     */
+    domainIdentifier: DomainId;
+    /**
+     * The ID of the domain unit that you want to update.
+     */
+    identifier: DomainUnitId;
+    /**
+     * The name of the domain unit that you want to update.
+     */
+    name?: DomainUnitName;
+  }
+  export interface UpdateDomainUnitOutput {
+    /**
+     * The time stamp at which the domain unit that you want to update was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The user who created the domain unit that you want to update.
+     */
+    createdBy?: CreatedBy;
+    /**
+     * The description of the domain unit that you want to update.
+     */
+    description?: DomainUnitDescription;
+    /**
+     * The ID of the domain where you want to update the domain unit.
+     */
+    domainId: DomainId;
+    /**
+     * The ID of the domain unit that you want to update.
+     */
+    id: DomainUnitId;
+    /**
+     * The timestamp at which the domain unit was last updated.
+     */
+    lastUpdatedAt?: UpdatedAt;
+    /**
+     * The user who last updated the domain unit.
+     */
+    lastUpdatedBy?: UpdatedBy;
+    /**
+     * The name of the domain unit that you want to update.
+     */
+    name: DomainUnitName;
+    /**
+     * The owners of the domain unit that you want to update.
+     */
+    owners: DomainUnitOwners;
+    /**
+     * The ID of the parent domain unit.
+     */
+    parentDomainUnitId?: DomainUnitId;
   }
   export interface UpdateEnvironmentActionInput {
     /**
@@ -9997,7 +10788,7 @@ declare namespace DataZone {
      */
     description?: Description;
     /**
-     * The identifier of the Amazon DataZone domain in which a project is to be updated.
+     * The ID of the Amazon DataZone domain where a project is being updated.
      */
     domainIdentifier: DomainId;
     /**
@@ -10030,6 +10821,10 @@ declare namespace DataZone {
      * The identifier of the Amazon DataZone domain in which a project is updated.
      */
     domainId: DomainId;
+    /**
+     * The ID of the domain unit.
+     */
+    domainUnitId?: DomainUnitId;
     /**
      * Specifies the error message that is returned if the operation cannot be successfully completed.
      */
@@ -10341,6 +11136,16 @@ declare namespace DataZone {
     userId: String;
   }
   export type UserIdentifier = string;
+  export interface UserPolicyGrantPrincipal {
+    /**
+     * The all users grant filter of the user policy grant principal.
+     */
+    allUsersGrantFilter?: AllUsersGrantFilter;
+    /**
+     * The user ID of the user policy grant principal.
+     */
+    userIdentifier?: UserIdentifier;
+  }
   export interface UserProfileDetails {
     /**
      * The IAM details included in the user profile details.

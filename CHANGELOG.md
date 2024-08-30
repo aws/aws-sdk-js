@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1686.0-->
+<!--LATEST=2.1687.0-->
 <!--ENTRYINSERT-->
+
+## 2.1687.0
+* bugfix: region endpoint: add endpoint suffix for a region
+* feature: Backup: The latest update introduces two new attributes, VaultType and VaultState, to the DescribeBackupVault and ListBackupVaults APIs. The VaultState attribute reflects the current status of the vault, while the VaultType attribute indicates the specific category of the vault.
+* feature: CloudWatchLogs: This release introduces a new optional parameter: Entity, in PutLogEvents request
+* feature: DataZone: Amazon DataZone now adds new governance capabilities of Domain Units for organization within your Data Domains, and Authorization Policies for tighter controls.
+* feature: RedshiftData: The release include the new Redshift DataAPI feature for session use, customer execute query with --session-keep-alive-seconds parameter and can submit follow-up queries to same sessions with returned`session-id`
 
 ## 2.1686.0
 * feature: BedrockAgentRuntime: Lifting the maximum length on Bedrock KnowledgeBase RetrievalFilter array
