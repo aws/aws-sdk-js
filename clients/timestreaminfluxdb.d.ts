@@ -639,7 +639,7 @@ declare namespace TimestreamInfluxDB {
     enabled: Boolean;
   }
   export type S3ConfigurationBucketNameString = string;
-  export type Status = "CREATING"|"AVAILABLE"|"DELETING"|"MODIFYING"|"UPDATING"|"DELETED"|"FAILED"|string;
+  export type Status = "CREATING"|"AVAILABLE"|"DELETING"|"MODIFYING"|"UPDATING"|"DELETED"|"FAILED"|"UPDATING_DEPLOYMENT_TYPE"|"UPDATING_INSTANCE_TYPE"|string;
   export type String = string;
   export type TagKey = string;
   export type TagKeys = TagKey[];
@@ -678,6 +678,14 @@ declare namespace TimestreamInfluxDB {
      * The id of the DB parameter group to assign to your DB instance. DB parameter groups specify how the database is configured. For example, DB parameter groups can specify the limit for query concurrency.
      */
     dbParameterGroupIdentifier?: DbParameterGroupIdentifier;
+    /**
+     * The Timestream for InfluxDB DB instance type to run InfluxDB on.
+     */
+    dbInstanceType?: DbInstanceType;
+    /**
+     * Specifies whether the DB instance will be deployed as a standalone instance or with a Multi-AZ standby for high availability.
+     */
+    deploymentType?: DeploymentType;
   }
   export interface UpdateDbInstanceOutput {
     /**

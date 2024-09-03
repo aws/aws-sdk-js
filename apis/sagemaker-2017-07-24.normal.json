@@ -6361,7 +6361,7 @@
       "type": "string",
       "max": 2048,
       "min": 1,
-      "pattern": "^arn:aws(-cn|-us-gov)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:algorithm/[\\S]{1,2048}$"
+      "pattern": "^arn:aws(-cn|-us-gov|-iso-f)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:algorithm/[\\S]{1,2048}$"
     },
     "AlgorithmImage": {
       "type": "string",
@@ -8099,6 +8099,14 @@
         "Descending"
       ]
     },
+    "AutoMountHomeEFS": {
+      "type": "string",
+      "enum": [
+        "Enabled",
+        "Disabled",
+        "DefaultAsDomain"
+      ]
+    },
     "AutoParameter": {
       "type": "structure",
       "required": [
@@ -9392,7 +9400,7 @@
       "member": {
         "shape": "ClusterInstanceGroupSpecification"
       },
-      "max": 20,
+      "max": 100,
       "min": 1
     },
     "ClusterInstancePlacement": {
@@ -9750,7 +9758,7 @@
       "type": "string",
       "max": 2048,
       "min": 1,
-      "pattern": "^arn:aws(-cn|-us-gov)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:code-repository/[\\S]{1,2048}$"
+      "pattern": "^arn:aws(-cn|-us-gov|-iso-f)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:code-repository/[\\S]{1,2048}$"
     },
     "CodeRepositoryContains": {
       "type": "string",
@@ -10128,7 +10136,7 @@
         },
         "Environment": {
           "shape": "EnvironmentMap",
-          "documentation": "<p>The environment variables to set in the Docker container.</p> <p>The maximum length of each key and value in the <code>Environment</code> map is 1024 bytes. The maximum length of all keys and values in the map, combined, is 32 KB. If you pass multiple containers to a <code>CreateModel</code> request, then the maximum length of all of their maps, combined, is also 32 KB.</p>"
+          "documentation": "<p>The environment variables to set in the Docker container. Don't include any sensitive data in your environment variables.</p> <p>The maximum length of each key and value in the <code>Environment</code> map is 1024 bytes. The maximum length of all keys and values in the map, combined, is 32 KB. If you pass multiple containers to a <code>CreateModel</code> request, then the maximum length of all of their maps, combined, is also 32 KB.</p>"
         },
         "ModelPackageName": {
           "shape": "VersionedArnOrName",
@@ -13125,7 +13133,7 @@
         },
         "Environment": {
           "shape": "TransformEnvironmentMap",
-          "documentation": "<p>The environment variables to set in the Docker container. We support up to 16 key and values entries in the map.</p>"
+          "documentation": "<p>The environment variables to set in the Docker container. Don't include any sensitive data in your environment variables. We support up to 16 key and values entries in the map.</p>"
         },
         "TransformInput": {
           "shape": "TransformInput",
@@ -23815,7 +23823,7 @@
     "ImageArn": {
       "type": "string",
       "max": 256,
-      "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"
+      "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-zA-Z0-9]([-.]?[a-zA-Z0-9])*$"
     },
     "ImageBaseImage": {
       "type": "string",
@@ -31351,7 +31359,7 @@
       "type": "string",
       "max": 2048,
       "min": 1,
-      "pattern": "^arn:aws(-cn|-us-gov)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:model-package/[\\S]{1,2048}$"
+      "pattern": "^arn:aws(-cn|-us-gov|-iso-f)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:model-package/[\\S]{1,2048}$"
     },
     "ModelPackageArnList": {
       "type": "list",
@@ -31469,7 +31477,7 @@
       "type": "string",
       "max": 2048,
       "min": 1,
-      "pattern": "^arn:aws(-cn|-us-gov)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:model-package-group/[\\S]{1,2048}$"
+      "pattern": "^arn:aws(-cn|-us-gov|-iso-f)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:model-package-group/[\\S]{1,2048}$"
     },
     "ModelPackageGroupSortBy": {
       "type": "string",
@@ -35725,7 +35733,7 @@
       "type": "string",
       "max": 2048,
       "min": 1,
-      "pattern": "^arn:aws(-cn|-us-gov)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:project/[\\S]{1,2048}$"
+      "pattern": "^arn:aws(-cn|-us-gov|-iso-f)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:project/[\\S]{1,2048}$"
     },
     "ProjectEntityName": {
       "type": "string",
@@ -38937,7 +38945,7 @@
     "StudioLifecycleConfigArn": {
       "type": "string",
       "max": 256,
-      "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*"
+      "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"
     },
     "StudioLifecycleConfigContent": {
       "type": "string",
@@ -42958,6 +42966,10 @@
         "StudioWebPortalSettings": {
           "shape": "StudioWebPortalSettings",
           "documentation": "<p>Studio settings. If these settings are applied on a user level, they take priority over the settings applied on a domain level.</p>"
+        },
+        "AutoMountHomeEFS": {
+          "shape": "AutoMountHomeEFS",
+          "documentation": "<p>Indicates whether auto-mounting of an EFS volume is supported for the user profile. The <code>DefaultAsDomain</code> value is only supported for user profiles. Do not use the <code>DefaultAsDomain</code> value when setting this parameter for a domain.</p>"
         }
       },
       "documentation": "<p>A collection of settings that apply to users in a domain. These settings are specified when the <code>CreateUserProfile</code> API is called, and as <code>DefaultUserSettings</code> when the <code>CreateDomain</code> API is called.</p> <p> <code>SecurityGroups</code> is aggregated when specified in both calls. For all other settings in <code>UserSettings</code>, the values specified in <code>CreateUserProfile</code> take precedence over those specified in <code>CreateDomain</code>.</p>"

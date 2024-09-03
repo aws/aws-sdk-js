@@ -1193,6 +1193,10 @@ declare namespace DataZone {
   export type AcceptRuleBehavior = "ALL"|"NONE"|string;
   export interface AcceptSubscriptionRequestInput {
     /**
+     * The asset scopes of the accept subscription request.
+     */
+    assetScopes?: AcceptedAssetScopes;
+    /**
      * A description that specifies the reason for accepting the specified subscription request.
      */
     decisionComment?: DecisionComment;
@@ -1257,6 +1261,17 @@ declare namespace DataZone {
   }
   export type AcceptSubscriptionRequestOutputSubscribedListingsList = SubscribedListing[];
   export type AcceptSubscriptionRequestOutputSubscribedPrincipalsList = SubscribedPrincipal[];
+  export interface AcceptedAssetScope {
+    /**
+     * The asset ID of the accepted asset scope.
+     */
+    assetId: AssetId;
+    /**
+     * The filter IDs of the accepted asset scope.
+     */
+    filterIds: FilterIds;
+  }
+  export type AcceptedAssetScopes = AcceptedAssetScope[];
   export type ActionLink = string;
   export interface ActionParameters {
     /**
@@ -1605,6 +1620,24 @@ declare namespace DataZone {
     revision?: Revision;
   }
   export type AssetRevisions = AssetRevision[];
+  export interface AssetScope {
+    /**
+     * The asset ID of the asset scope.
+     */
+    assetId: AssetId;
+    /**
+     * The error message of the asset scope.
+     */
+    errorMessage?: String;
+    /**
+     * The filter IDs of the asset scope.
+     */
+    filterIds: FilterIds;
+    /**
+     * The status of the asset scope.
+     */
+    status: String;
+  }
   export interface AssetTargetNameMap {
     /**
      * The identifier of the inventory asset.
@@ -4846,6 +4879,7 @@ declare namespace DataZone {
   export type FilterExpressionType = "INCLUDE"|"EXCLUDE"|string;
   export type FilterExpressions = FilterExpression[];
   export type FilterId = string;
+  export type FilterIds = FilterId[];
   export type FilterList = FilterClause[];
   export type FilterName = string;
   export type FilterStatus = "VALID"|"INVALID"|string;
@@ -9546,6 +9580,10 @@ declare namespace DataZone {
      */
     assetRevision: Revision;
     /**
+     * The asset scope of the subscribed asset.
+     */
+    assetScope?: AssetScope;
+    /**
      * The failure cause included in the details of the asset for which the subscription grant is created.
      */
     failureCause?: FailureCause;
@@ -9567,6 +9605,10 @@ declare namespace DataZone {
     targetName?: String;
   }
   export interface SubscribedAssetListing {
+    /**
+     * The asset scope of the subscribed asset listing.
+     */
+    assetScope?: AssetScope;
     /**
      * The identifier of the published asset for which the subscription grant is created.
      */

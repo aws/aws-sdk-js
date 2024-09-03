@@ -417,6 +417,24 @@
         "title": "To deregister a target from a target group"
       }
     ],
+    "DescribeListenerAttributes": [
+      {
+        "input": {
+          "ListenerArn": "aws:elasticloadbalancing:us-east-1:123456789012:listener/net/my-listener/73e2d6bc24d8a067/d5dc06411fa5bcea"
+        },
+        "output": {
+        },
+        "comments": {
+          "input": {
+          },
+          "output": {
+          }
+        },
+        "description": "This example describes the attributes of the specified listener.",
+        "id": "describe-listener-attributes-1724874395194",
+        "title": "Describe listener attributes"
+      }
+    ],
     "DescribeListeners": [
       {
         "input": {

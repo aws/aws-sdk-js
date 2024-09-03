@@ -141,6 +141,14 @@ declare class MediaConnect extends Service {
    */
   describeFlowSourceMetadata(callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowSourceMetadataResponse) => void): Request<MediaConnect.Types.DescribeFlowSourceMetadataResponse, AWSError>;
   /**
+   * Displays the thumbnail details of a flow's source stream.
+   */
+  describeFlowSourceThumbnail(params: MediaConnect.Types.DescribeFlowSourceThumbnailRequest, callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowSourceThumbnailResponse) => void): Request<MediaConnect.Types.DescribeFlowSourceThumbnailResponse, AWSError>;
+  /**
+   * Displays the thumbnail details of a flow's source stream.
+   */
+  describeFlowSourceThumbnail(callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowSourceThumbnailResponse) => void): Request<MediaConnect.Types.DescribeFlowSourceThumbnailResponse, AWSError>;
+  /**
    * Displays the details of a gateway. The response includes the gateway ARN, name, and CIDR blocks, as well as details about the networks.
    */
   describeGateway(params: MediaConnect.Types.DescribeGatewayRequest, callback?: (err: AWSError, data: MediaConnect.Types.DescribeGatewayResponse) => void): Request<MediaConnect.Types.DescribeGatewayResponse, AWSError>;
@@ -939,6 +947,7 @@ declare namespace MediaConnect {
      */
     VpcInterfaces?: __listOfVpcInterfaceRequest;
     Maintenance?: AddMaintenance;
+    SourceMonitoringConfig?: MonitoringConfig;
   }
   export interface CreateFlowResponse {
     Flow?: Flow;
@@ -1059,6 +1068,15 @@ declare namespace MediaConnect {
      */
     Timestamp?: __timestampIso8601;
     TransportMediaInfo?: TransportMediaInfo;
+  }
+  export interface DescribeFlowSourceThumbnailRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the flow.
+     */
+    FlowArn: __string;
+  }
+  export interface DescribeFlowSourceThumbnailResponse {
+    ThumbnailDetails?: ThumbnailDetails;
   }
   export interface DescribeGatewayInstanceRequest {
     /**
@@ -1292,6 +1310,7 @@ declare namespace MediaConnect {
      */
     VpcInterfaces?: __listOfVpcInterface;
     Maintenance?: Maintenance;
+    SourceMonitoringConfig?: MonitoringConfig;
   }
   export interface Fmtp {
     /**
@@ -1944,6 +1963,12 @@ declare namespace MediaConnect {
      */
     Errors: __listOf__string;
   }
+  export interface MonitoringConfig {
+    /**
+     * The state of thumbnail monitoring.
+     */
+    ThumbnailState?: ThumbnailState;
+  }
   export type NetworkInterfaceType = "ena"|"efa"|string;
   export interface Offering {
     /**
@@ -2467,6 +2492,29 @@ declare namespace MediaConnect {
     Tags: __mapOf__string;
   }
   export type Tcs = "SDR"|"PQ"|"HLG"|"LINEAR"|"BT2100LINPQ"|"BT2100LINHLG"|"ST2065-1"|"ST428-1"|"DENSITY"|string;
+  export interface ThumbnailDetails {
+    /**
+     * The ARN of the flow that DescribeFlowSourceThumbnail was performed on.
+     */
+    FlowArn: __string;
+    /**
+     * Thumbnail Base64 string.
+     */
+    Thumbnail?: __string;
+    /**
+     * Status code and messages about the flow source thumbnail.
+     */
+    ThumbnailMessages: __listOfMessageDetail;
+    /**
+     * Timecode of thumbnail.
+     */
+    Timecode?: __string;
+    /**
+     * The timestamp of when thumbnail was generated.
+     */
+    Timestamp?: __timestampIso8601;
+  }
+  export type ThumbnailState = "ENABLED"|"DISABLED"|string;
   export interface Transport {
     /**
      * The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
@@ -2935,6 +2983,7 @@ declare namespace MediaConnect {
     FlowArn: __string;
     SourceFailoverConfig?: UpdateFailoverConfig;
     Maintenance?: UpdateMaintenance;
+    SourceMonitoringConfig?: MonitoringConfig;
   }
   export interface UpdateFlowResponse {
     Flow?: Flow;

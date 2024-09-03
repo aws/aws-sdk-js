@@ -360,7 +360,7 @@
       "type": "string",
       "max": 64,
       "min": 2,
-      "pattern": "[^_][^\"]*"
+      "pattern": "[^_\"][^\"]*"
     },
     "CreateDbInstanceInput": {
       "type": "structure",
@@ -1100,7 +1100,8 @@
       "min": 1
     },
     "NextToken": {
-      "type": "string"
+      "type": "string",
+      "min": 1
     },
     "Organization": {
       "type": "string",
@@ -1180,7 +1181,9 @@
         "MODIFYING",
         "UPDATING",
         "DELETED",
-        "FAILED"
+        "FAILED",
+        "UPDATING_DEPLOYMENT_TYPE",
+        "UPDATING_INSTANCE_TYPE"
       ]
     },
     "String": {
@@ -1262,6 +1265,14 @@
         "dbParameterGroupIdentifier": {
           "shape": "DbParameterGroupIdentifier",
           "documentation": "<p>The id of the DB parameter group to assign to your DB instance. DB parameter groups specify how the database is configured. For example, DB parameter groups can specify the limit for query concurrency.</p>"
+        },
+        "dbInstanceType": {
+          "shape": "DbInstanceType",
+          "documentation": "<p>The Timestream for InfluxDB DB instance type to run InfluxDB on.</p>"
+        },
+        "deploymentType": {
+          "shape": "DeploymentType",
+          "documentation": "<p>Specifies whether the DB instance will be deployed as a standalone instance or with a Multi-AZ standby for high availability.</p>"
         }
       }
     },

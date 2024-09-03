@@ -3729,6 +3729,7 @@ declare namespace SageMaker {
   }
   export type AutoMLSortBy = "Name"|"CreationTime"|"Status"|string;
   export type AutoMLSortOrder = "Ascending"|"Descending"|string;
+  export type AutoMountHomeEFS = "Enabled"|"Disabled"|"DefaultAsDomain"|string;
   export interface AutoParameter {
     /**
      * The name of the hyperparameter to optimize using Autotune.
@@ -4730,7 +4731,7 @@ declare namespace SageMaker {
      */
     AdditionalModelDataSources?: AdditionalModelDataSources;
     /**
-     * The environment variables to set in the Docker container. The maximum length of each key and value in the Environment map is 1024 bytes. The maximum length of all keys and values in the map, combined, is 32 KB. If you pass multiple containers to a CreateModel request, then the maximum length of all of their maps, combined, is also 32 KB.
+     * The environment variables to set in the Docker container. Don't include any sensitive data in your environment variables. The maximum length of each key and value in the Environment map is 1024 bytes. The maximum length of all keys and values in the map, combined, is 32 KB. If you pass multiple containers to a CreateModel request, then the maximum length of all of their maps, combined, is also 32 KB.
      */
     Environment?: EnvironmentMap;
     /**
@@ -6845,7 +6846,7 @@ declare namespace SageMaker {
      */
     BatchStrategy?: BatchStrategy;
     /**
-     * The environment variables to set in the Docker container. We support up to 16 key and values entries in the map.
+     * The environment variables to set in the Docker container. Don't include any sensitive data in your environment variables. We support up to 16 key and values entries in the map.
      */
     Environment?: TransformEnvironmentMap;
     /**
@@ -25288,6 +25289,10 @@ declare namespace SageMaker {
      * Studio settings. If these settings are applied on a user level, they take priority over the settings applied on a domain level.
      */
     StudioWebPortalSettings?: StudioWebPortalSettings;
+    /**
+     * Indicates whether auto-mounting of an EFS volume is supported for the user profile. The DefaultAsDomain value is only supported for user profiles. Do not use the DefaultAsDomain value when setting this parameter for a domain.
+     */
+    AutoMountHomeEFS?: AutoMountHomeEFS;
   }
   export type UsersPerStep = number;
   export type UtilizationMetric = number;

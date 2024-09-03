@@ -141,6 +141,14 @@ declare class ELBv2 extends Service {
    */
   describeAccountLimits(callback?: (err: AWSError, data: ELBv2.Types.DescribeAccountLimitsOutput) => void): Request<ELBv2.Types.DescribeAccountLimitsOutput, AWSError>;
   /**
+   * Describes the attributes for the specified listener.
+   */
+  describeListenerAttributes(params: ELBv2.Types.DescribeListenerAttributesInput, callback?: (err: AWSError, data: ELBv2.Types.DescribeListenerAttributesOutput) => void): Request<ELBv2.Types.DescribeListenerAttributesOutput, AWSError>;
+  /**
+   * Describes the attributes for the specified listener.
+   */
+  describeListenerAttributes(callback?: (err: AWSError, data: ELBv2.Types.DescribeListenerAttributesOutput) => void): Request<ELBv2.Types.DescribeListenerAttributesOutput, AWSError>;
+  /**
    * Describes the default certificate and the certificate list for the specified HTTPS or TLS listener. If the default certificate is also in the certificate list, it appears twice in the results (once with IsDefault set to true and once with IsDefault set to false). For more information, see SSL certificates in the Application Load Balancers Guide or Server certificates in the Network Load Balancers Guide.
    */
   describeListenerCertificates(params: ELBv2.Types.DescribeListenerCertificatesInput, callback?: (err: AWSError, data: ELBv2.Types.DescribeListenerCertificatesOutput) => void): Request<ELBv2.Types.DescribeListenerCertificatesOutput, AWSError>;
@@ -276,6 +284,14 @@ declare class ELBv2 extends Service {
    * Replaces the specified properties of the specified listener. Any properties that you do not specify remain unchanged. Changing the protocol from HTTPS to HTTP, or from TLS to TCP, removes the security policy and default certificate properties. If you change the protocol from HTTP to HTTPS, or from TCP to TLS, you must add the security policy and default certificate properties. To add an item to a list, remove an item from a list, or update an item in a list, you must provide the entire list. For example, to add an action, specify a list with the current actions plus the new action.
    */
   modifyListener(callback?: (err: AWSError, data: ELBv2.Types.ModifyListenerOutput) => void): Request<ELBv2.Types.ModifyListenerOutput, AWSError>;
+  /**
+   * Modifies the specified attributes of the specified listener.
+   */
+  modifyListenerAttributes(params: ELBv2.Types.ModifyListenerAttributesInput, callback?: (err: AWSError, data: ELBv2.Types.ModifyListenerAttributesOutput) => void): Request<ELBv2.Types.ModifyListenerAttributesOutput, AWSError>;
+  /**
+   * Modifies the specified attributes of the specified listener.
+   */
+  modifyListenerAttributes(callback?: (err: AWSError, data: ELBv2.Types.ModifyListenerAttributesOutput) => void): Request<ELBv2.Types.ModifyListenerAttributesOutput, AWSError>;
   /**
    * Modifies the specified attributes of the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer. If any of the specified attributes can't be modified as requested, the call fails. Any existing attributes that you do not modify retain their current values.
    */
@@ -979,6 +995,18 @@ declare namespace ELBv2 {
      */
     NextMarker?: Marker;
   }
+  export interface DescribeListenerAttributesInput {
+    /**
+     * The Amazon Resource Name (ARN) of the listener.
+     */
+    ListenerArn: ListenerArn;
+  }
+  export interface DescribeListenerAttributesOutput {
+    /**
+     * Information about the listener attributes.
+     */
+    Attributes?: ListenerAttributes;
+  }
   export interface DescribeListenerCertificatesInput {
     /**
      * The Amazon Resource Names (ARN) of the listener.
@@ -1461,6 +1489,19 @@ declare namespace ELBv2 {
   }
   export type ListenerArn = string;
   export type ListenerArns = ListenerArn[];
+  export interface ListenerAttribute {
+    /**
+     * The name of the attribute. The following attribute is supported by Network Load Balancers, and Gateway Load Balancers.    tcp.idle_timeout.seconds - The tcp idle timeout value, in seconds. The valid range is 60-6000 seconds. The default is 350 seconds.  
+     */
+    Key?: ListenerAttributeKey;
+    /**
+     * The value of the attribute.
+     */
+    Value?: ListenerAttributeValue;
+  }
+  export type ListenerAttributeKey = string;
+  export type ListenerAttributeValue = string;
+  export type ListenerAttributes = ListenerAttribute[];
   export type Listeners = Listener[];
   export interface LoadBalancer {
     /**
@@ -1585,6 +1626,22 @@ declare namespace ELBv2 {
   export type Max = string;
   export type MitigationInEffectEnum = "yes"|"no"|string;
   export type Mode = string;
+  export interface ModifyListenerAttributesInput {
+    /**
+     * The Amazon Resource Name (ARN) of the listener.
+     */
+    ListenerArn: ListenerArn;
+    /**
+     * The listener attributes.
+     */
+    Attributes: ListenerAttributes;
+  }
+  export interface ModifyListenerAttributesOutput {
+    /**
+     * Information about the listener attributes.
+     */
+    Attributes?: ListenerAttributes;
+  }
   export interface ModifyListenerInput {
     /**
      * The Amazon Resource Name (ARN) of the listener.
@@ -1667,13 +1724,13 @@ declare namespace ELBv2 {
      */
     TargetGroupArn: TargetGroupArn;
     /**
-     * The attributes.
+     * The target group attributes.
      */
     Attributes: TargetGroupAttributes;
   }
   export interface ModifyTargetGroupAttributesOutput {
     /**
-     * Information about the attributes.
+     * Information about the target group attributes.
      */
     Attributes?: TargetGroupAttributes;
   }

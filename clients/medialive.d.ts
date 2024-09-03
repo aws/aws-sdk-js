@@ -3635,6 +3635,11 @@ This field is optional; when no value is specified the encoder will choose the n
      * Timecode burn-in settings
      */
     TimecodeBurninSettings?: TimecodeBurninSettings;
+    /**
+     * Sets the minimum QP. If you aren't familiar with quantization adjustment, leave the field empty. MediaLive will
+apply an appropriate value.
+     */
+    MinQp?: __integerMin1Max51;
   }
   export type H264SpatialAq = "DISABLED"|"ENABLED"|string;
   export type H264SubGopLength = "DYNAMIC"|"FIXED"|string;
@@ -3839,6 +3844,11 @@ In all other configurations, you typically enter "none".
      * Select the tree block size used for encoding. If you enter "auto", the encoder will pick the best size. If you are setting up the picture as a tile, you must set this to 32x32. In all other configurations, you typically enter "auto".
      */
     TreeblockSize?: H265TreeblockSize;
+    /**
+     * Sets the minimum QP. If you aren't familiar with quantization adjustment, leave the field empty. MediaLive will
+apply an appropriate value.
+     */
+    MinQp?: __integerMin1Max51;
   }
   export type H265Tier = "HIGH"|"MAIN"|string;
   export type H265TimecodeInsertionBehavior = "DISABLED"|"PIC_TIMING_SEI"|string;
@@ -9321,6 +9331,7 @@ one destination per packager.
   export type __listOfSrtCallerSource = SrtCallerSource[];
   export type __listOfSrtCallerSourceRequest = SrtCallerSourceRequest[];
   export type MultiplexPacketIdentifiersMapping = {[key: string]: MultiplexProgramPacketIdentifiersMap};
+  export type __integerMin1Max51 = number;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
