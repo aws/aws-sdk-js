@@ -26,6 +26,12 @@
       "limit_key": "MaxResults",
       "result_key": "ObjectLambdaAccessPointList"
     },
+    "ListCallerAccessGrants": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults",
+      "result_key": "CallerAccessGrantsList"
+    },
     "ListJobs": {
       "input_token": "NextToken",
       "output_token": "NextToken",

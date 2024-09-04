@@ -197,6 +197,14 @@ declare class CloudWatchLogs extends Service {
    */
   describeAccountPolicies(callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeAccountPoliciesResponse) => void): Request<CloudWatchLogs.Types.DescribeAccountPoliciesResponse, AWSError>;
   /**
+   * Use this operation to return the valid and default values that are used when creating delivery sources, delivery destinations, and deliveries. For more information about deliveries, see CreateDelivery.
+   */
+  describeConfigurationTemplates(params: CloudWatchLogs.Types.DescribeConfigurationTemplatesRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeConfigurationTemplatesResponse) => void): Request<CloudWatchLogs.Types.DescribeConfigurationTemplatesResponse, AWSError>;
+  /**
+   * Use this operation to return the valid and default values that are used when creating delivery sources, delivery destinations, and deliveries. For more information about deliveries, see CreateDelivery.
+   */
+  describeConfigurationTemplates(callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeConfigurationTemplatesResponse) => void): Request<CloudWatchLogs.Types.DescribeConfigurationTemplatesResponse, AWSError>;
+  /**
    * Retrieves a list of the deliveries that have been created in the account. A delivery is a connection between a  delivery source  and a  delivery destination . A delivery source represents an Amazon Web Services resource that sends logs to an logs delivery destination. The destination can be CloudWatch Logs, Amazon S3, or Firehose. Only some Amazon Web Services services support being configured as a delivery source. These services are listed in Enable logging from Amazon Web Services services. 
    */
   describeDeliveries(params: CloudWatchLogs.Types.DescribeDeliveriesRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeDeliveriesResponse) => void): Request<CloudWatchLogs.Types.DescribeDeliveriesResponse, AWSError>;
@@ -597,6 +605,14 @@ declare class CloudWatchLogs extends Service {
    */
   updateAnomaly(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Use this operation to update the configuration of a delivery to change either the S3 path pattern or the format of the delivered logs. You can't use this operation to change the source or destination of the delivery.
+   */
+  updateDeliveryConfiguration(params: CloudWatchLogs.Types.UpdateDeliveryConfigurationRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.UpdateDeliveryConfigurationResponse) => void): Request<CloudWatchLogs.Types.UpdateDeliveryConfigurationResponse, AWSError>;
+  /**
+   * Use this operation to update the configuration of a delivery to change either the S3 path pattern or the format of the delivered logs. You can't use this operation to change the source or destination of the delivery.
+   */
+  updateDeliveryConfiguration(callback?: (err: AWSError, data: CloudWatchLogs.Types.UpdateDeliveryConfigurationResponse) => void): Request<CloudWatchLogs.Types.UpdateDeliveryConfigurationResponse, AWSError>;
+  /**
    * Updates an existing log anomaly detector.
    */
   updateLogAnomalyDetector(params: CloudWatchLogs.Types.UpdateLogAnomalyDetectorRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -641,6 +657,9 @@ declare namespace CloudWatchLogs {
     accountId?: AccountId;
   }
   export type AccountPolicyDocument = string;
+  export type AllowedActionForAllowVendedLogsDeliveryForResource = string;
+  export type AllowedFieldDelimiters = FieldDelimiter[];
+  export type AllowedFields = RecordField[];
   export type AmazonResourceName = string;
   export type Anomalies = Anomaly[];
   export interface Anomaly {
@@ -788,6 +807,63 @@ declare namespace CloudWatchLogs {
     taskId: ExportTaskId;
   }
   export type ClientToken = string;
+  export interface ConfigurationTemplate {
+    /**
+     * A string specifying which service this configuration template applies to. For more information about supported services see Enable logging from Amazon Web Services services..
+     */
+    service?: Service;
+    /**
+     * A string specifying which log type this configuration template applies to.
+     */
+    logType?: LogType;
+    /**
+     * A string specifying which resource type this configuration template applies to.
+     */
+    resourceType?: ResourceType;
+    /**
+     * A string specifying which destination type this configuration template applies to.
+     */
+    deliveryDestinationType?: DeliveryDestinationType;
+    /**
+     * A mapping that displays the default value of each property within a delivery’s configuration, if it is not specified in the request.
+     */
+    defaultDeliveryConfigValues?: ConfigurationTemplateDeliveryConfigValues;
+    /**
+     * The allowed fields that a caller can use in the recordFields parameter of a CreateDelivery or UpdateDeliveryConfiguration operation.
+     */
+    allowedFields?: AllowedFields;
+    /**
+     * The list of delivery destination output formats that are supported by this log source.
+     */
+    allowedOutputFormats?: OutputFormats;
+    /**
+     * The action permissions that a caller needs to have to be able to successfully create a delivery source on the desired resource type when calling PutDeliverySource.
+     */
+    allowedActionForAllowVendedLogsDeliveryForResource?: AllowedActionForAllowVendedLogsDeliveryForResource;
+    /**
+     * The valid values that a caller can use as field delimiters when calling CreateDelivery or UpdateDeliveryConfiguration on a delivery that delivers in Plain, W3C, or Raw format.
+     */
+    allowedFieldDelimiters?: AllowedFieldDelimiters;
+    /**
+     * The list of variable fields that can be used in the suffix path of a delivery that delivers to an S3 bucket.
+     */
+    allowedSuffixPathFields?: RecordFields;
+  }
+  export interface ConfigurationTemplateDeliveryConfigValues {
+    /**
+     * The default record fields that will be delivered when a list of record fields is not provided in a CreateDelivery operation.
+     */
+    recordFields?: RecordFields;
+    /**
+     * The default field delimiter that is used in a CreateDelivery operation when the field delimiter is not specified in that operation. The field delimiter is used only when the final output delivery is in Plain, W3C, or Raw format.
+     */
+    fieldDelimiter?: FieldDelimiter;
+    /**
+     * The delivery parameters that are used when you create a delivery to a delivery destination that is an S3 Bucket.
+     */
+    s3DeliveryConfiguration?: S3DeliveryConfiguration;
+  }
+  export type ConfigurationTemplates = ConfigurationTemplate[];
   export type Count = number;
   export interface CreateDeliveryRequest {
     /**
@@ -798,6 +874,18 @@ declare namespace CloudWatchLogs {
      * The ARN of the delivery destination to use for this delivery.
      */
     deliveryDestinationArn: Arn;
+    /**
+     * The list of record fields to be delivered to the destination, in order. If the delivery’s log source has mandatory fields, they must be included in this list.
+     */
+    recordFields?: RecordFields;
+    /**
+     * The field delimiter to use between record fields when the final output format of a delivery is in Plain, W3C, or Raw format.
+     */
+    fieldDelimiter?: FieldDelimiter;
+    /**
+     * This structure contains parameters that are valid only when the delivery’s delivery destination is an S3 bucket.
+     */
+    s3DeliveryConfiguration?: S3DeliveryConfiguration;
     /**
      * An optional list of key-value pairs to associate with the resource. For more information about tagging, see Tagging Amazon Web Services resources 
      */
@@ -1048,6 +1136,18 @@ declare namespace CloudWatchLogs {
      */
     deliveryDestinationType?: DeliveryDestinationType;
     /**
+     * The record fields used in this delivery.
+     */
+    recordFields?: RecordFields;
+    /**
+     * The field delimiter that is used between record fields when the final output format of a delivery is in Plain, W3C, or Raw format.
+     */
+    fieldDelimiter?: FieldDelimiter;
+    /**
+     * This structure contains delivery configurations that apply only when the delivery destination resource is an S3 bucket.
+     */
+    s3DeliveryConfiguration?: S3DeliveryConfiguration;
+    /**
      * The tags that have been assigned to this delivery.
      */
     tags?: Tags;
@@ -1087,6 +1187,7 @@ declare namespace CloudWatchLogs {
   export type DeliveryDestinationName = string;
   export type DeliveryDestinationPolicy = string;
   export type DeliveryDestinationType = "S3"|"CWL"|"FH"|string;
+  export type DeliveryDestinationTypes = DeliveryDestinationType[];
   export type DeliveryDestinations = DeliveryDestination[];
   export type DeliveryId = string;
   export interface DeliverySource {
@@ -1117,6 +1218,7 @@ declare namespace CloudWatchLogs {
   }
   export type DeliverySourceName = string;
   export type DeliverySources = DeliverySource[];
+  export type DeliverySuffixPath = string;
   export type Descending = boolean;
   export interface DescribeAccountPoliciesRequest {
     /**
@@ -1137,6 +1239,36 @@ declare namespace CloudWatchLogs {
      * An array of structures that contain information about the CloudWatch Logs account policies that match the specified filters.
      */
     accountPolicies?: AccountPolicies;
+  }
+  export interface DescribeConfigurationTemplatesRequest {
+    /**
+     * Use this parameter to filter the response to include only the configuration templates that apply to the Amazon Web Services service that you specify here.
+     */
+    service?: Service;
+    /**
+     * Use this parameter to filter the response to include only the configuration templates that apply to the log types that you specify here.
+     */
+    logTypes?: LogTypes;
+    /**
+     * Use this parameter to filter the response to include only the configuration templates that apply to the resource types that you specify here.
+     */
+    resourceTypes?: ResourceTypes;
+    /**
+     * Use this parameter to filter the response to include only the configuration templates that apply to the delivery destination types that you specify here.
+     */
+    deliveryDestinationTypes?: DeliveryDestinationTypes;
+    nextToken?: NextToken;
+    /**
+     * Use this parameter to limit the number of configuration templates that are returned in the response.
+     */
+    limit?: DescribeLimit;
+  }
+  export interface DescribeConfigurationTemplatesResponse {
+    /**
+     * An array of objects, where each object describes one configuration template that matches the filters that you specified in the request.
+     */
+    configurationTemplates?: ConfigurationTemplates;
+    nextToken?: NextToken;
   }
   export interface DescribeDeliveriesRequest {
     nextToken?: NextToken;
@@ -1463,11 +1595,11 @@ declare namespace CloudWatchLogs {
   export type EncryptionKey = string;
   export interface Entity {
     /**
-     * Reserved for future use.
+     * Reserved for internal use.
      */
     keyAttributes?: EntityKeyAttributes;
     /**
-     * Reserved for future use.
+     * Reserved for internal use.
      */
     attributes?: EntityAttributes;
   }
@@ -1552,6 +1684,8 @@ declare namespace CloudWatchLogs {
   export type ExportTasks = ExportTask[];
   export type ExtractedValues = {[key: string]: Value};
   export type Field = string;
+  export type FieldDelimiter = string;
+  export type FieldHeader = string;
   export type FilterCount = number;
   export interface FilterLogEventsRequest {
     /**
@@ -2126,6 +2260,7 @@ declare namespace CloudWatchLogs {
   export type LogStreamSearchedCompletely = boolean;
   export type LogStreams = LogStream[];
   export type LogType = string;
+  export type LogTypes = LogType[];
   export type Message = string;
   export interface MetricFilter {
     /**
@@ -2195,6 +2330,7 @@ declare namespace CloudWatchLogs {
   export type NextToken = string;
   export type OrderBy = "LogStreamName"|"LastEventTime"|string;
   export type OutputFormat = "json"|"plain"|"w3c"|"raw"|"parquet"|string;
+  export type OutputFormats = OutputFormat[];
   export interface OutputLogEvent {
     /**
      * The time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
@@ -2415,7 +2551,7 @@ declare namespace CloudWatchLogs {
      */
     sequenceToken?: SequenceToken;
     /**
-     * Reserved for future use.
+     * Reserved for internal use.
      */
     entity?: Entity;
   }
@@ -2429,7 +2565,7 @@ declare namespace CloudWatchLogs {
      */
     rejectedLogEventsInfo?: RejectedLogEventsInfo;
     /**
-     * Reserved for future use.
+     * Reserved for internal use.
      */
     rejectedEntityInfo?: RejectedEntityInfo;
   }
@@ -2595,9 +2731,20 @@ declare namespace CloudWatchLogs {
   }
   export type QueryStatus = "Scheduled"|"Running"|"Complete"|"Failed"|"Cancelled"|"Timeout"|"Unknown"|string;
   export type QueryString = string;
+  export interface RecordField {
+    /**
+     * The name to use when specifying this record field in a CreateDelivery or UpdateDeliveryConfiguration operation. 
+     */
+    name?: FieldHeader;
+    /**
+     * If this is true, the record field must be present in the recordFields parameter provided to a CreateDelivery or UpdateDeliveryConfiguration operation.
+     */
+    mandatory?: Boolean;
+  }
+  export type RecordFields = FieldHeader[];
   export interface RejectedEntityInfo {
     /**
-     * Reserved for future use.
+     * Reserved for internal use.
      */
     errorType: EntityRejectionErrorType;
   }
@@ -2633,6 +2780,8 @@ declare namespace CloudWatchLogs {
      */
     lastUpdatedTime?: Timestamp;
   }
+  export type ResourceType = string;
+  export type ResourceTypes = ResourceType[];
   export interface ResultField {
     /**
      * The log event field.
@@ -2645,6 +2794,16 @@ declare namespace CloudWatchLogs {
   }
   export type ResultRows = ResultField[];
   export type RoleArn = string;
+  export interface S3DeliveryConfiguration {
+    /**
+     * This string allows re-configuring the S3 object prefix to contain either static or variable sections. The valid variables to use in the suffix path will vary by each log source. See ConfigurationTemplate$allowedSuffixPathFields for more info on what values are supported in the suffix path for each log source.
+     */
+    suffixPath?: DeliverySuffixPath;
+    /**
+     * This parameter causes the S3 objects that contain delivered logs to use a prefix structure that allows for integration with Apache Hive.
+     */
+    enableHiveCompatiblePath?: Boolean;
+  }
   export type Scope = "ALL"|string;
   export interface SearchedLogStream {
     /**
@@ -2872,6 +3031,26 @@ declare namespace CloudWatchLogs {
      * If you are temporarily suppressing an anomaly or pattern, use this structure to specify how long the suppression is to last.
      */
     suppressionPeriod?: SuppressionPeriod;
+  }
+  export interface UpdateDeliveryConfigurationRequest {
+    /**
+     * The ID of the delivery to be updated by this request.
+     */
+    id: DeliveryId;
+    /**
+     * The list of record fields to be delivered to the destination, in order. If the delivery’s log source has mandatory fields, they must be included in this list.
+     */
+    recordFields?: RecordFields;
+    /**
+     * The field delimiter to use between record fields when the final output format of a delivery is in Plain, W3C, or Raw format.
+     */
+    fieldDelimiter?: FieldDelimiter;
+    /**
+     * This structure contains parameters that are valid only when the delivery’s delivery destination is an S3 bucket.
+     */
+    s3DeliveryConfiguration?: S3DeliveryConfiguration;
+  }
+  export interface UpdateDeliveryConfigurationResponse {
   }
   export interface UpdateLogAnomalyDetectorRequest {
     /**

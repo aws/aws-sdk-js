@@ -76,6 +76,14 @@ declare class Fis extends Service {
    */
   getExperimentTemplate(callback?: (err: AWSError, data: Fis.Types.GetExperimentTemplateResponse) => void): Request<Fis.Types.GetExperimentTemplateResponse, AWSError>;
   /**
+   *  Gets information about the specified safety lever. 
+   */
+  getSafetyLever(params: Fis.Types.GetSafetyLeverRequest, callback?: (err: AWSError, data: Fis.Types.GetSafetyLeverResponse) => void): Request<Fis.Types.GetSafetyLeverResponse, AWSError>;
+  /**
+   *  Gets information about the specified safety lever. 
+   */
+  getSafetyLever(callback?: (err: AWSError, data: Fis.Types.GetSafetyLeverResponse) => void): Request<Fis.Types.GetSafetyLeverResponse, AWSError>;
+  /**
    * Gets information about the specified target account configuration of the experiment template.
    */
   getTargetAccountConfiguration(params: Fis.Types.GetTargetAccountConfigurationRequest, callback?: (err: AWSError, data: Fis.Types.GetTargetAccountConfigurationResponse) => void): Request<Fis.Types.GetTargetAccountConfigurationResponse, AWSError>;
@@ -195,6 +203,14 @@ declare class Fis extends Service {
    * Updates the specified experiment template.
    */
   updateExperimentTemplate(callback?: (err: AWSError, data: Fis.Types.UpdateExperimentTemplateResponse) => void): Request<Fis.Types.UpdateExperimentTemplateResponse, AWSError>;
+  /**
+   *  Updates the specified safety lever state. 
+   */
+  updateSafetyLeverState(params: Fis.Types.UpdateSafetyLeverStateRequest, callback?: (err: AWSError, data: Fis.Types.UpdateSafetyLeverStateResponse) => void): Request<Fis.Types.UpdateSafetyLeverStateResponse, AWSError>;
+  /**
+   *  Updates the specified safety lever state. 
+   */
+  updateSafetyLeverState(callback?: (err: AWSError, data: Fis.Types.UpdateSafetyLeverStateResponse) => void): Request<Fis.Types.UpdateSafetyLeverStateResponse, AWSError>;
   /**
    * Updates the target account configuration for the specified experiment template.
    */
@@ -667,7 +683,7 @@ declare namespace Fis {
      */
     error?: ExperimentError;
   }
-  export type ExperimentStatus = "pending"|"initiating"|"running"|"completed"|"stopping"|"stopped"|"failed"|string;
+  export type ExperimentStatus = "pending"|"initiating"|"running"|"completed"|"stopping"|"stopped"|"failed"|"cancelled"|string;
   export type ExperimentStatusReason = string;
   export interface ExperimentStopCondition {
     /**
@@ -1077,6 +1093,18 @@ declare namespace Fis {
      */
     experimentTemplate?: ExperimentTemplate;
   }
+  export interface GetSafetyLeverRequest {
+    /**
+     *  The ID of the safety lever. 
+     */
+    id: SafetyLeverId;
+  }
+  export interface GetSafetyLeverResponse {
+    /**
+     *  Information about the safety lever. 
+     */
+    safetyLever?: SafetyLever;
+  }
   export interface GetTargetAccountConfigurationRequest {
     /**
      * The ID of the experiment template.
@@ -1302,6 +1330,34 @@ declare namespace Fis {
   export type RoleArn = string;
   export type S3BucketName = string;
   export type S3ObjectKey = string;
+  export interface SafetyLever {
+    /**
+     *  The ID of the safety lever. 
+     */
+    id?: SafetyLeverId;
+    /**
+     *  The Amazon Resource Name (ARN) of the safety lever. 
+     */
+    arn?: ResourceArn;
+    /**
+     *  The state of the safety lever. 
+     */
+    state?: SafetyLeverState;
+  }
+  export type SafetyLeverId = string;
+  export interface SafetyLeverState {
+    /**
+     *  The state of the safety lever. 
+     */
+    status?: SafetyLeverStatus;
+    /**
+     *  The reason for the state of the safety lever. 
+     */
+    reason?: SafetyLeverStatusReason;
+  }
+  export type SafetyLeverStatus = "disengaged"|"engaged"|"engaging"|string;
+  export type SafetyLeverStatusInput = "disengaged"|"engaged"|string;
+  export type SafetyLeverStatusReason = string;
   export interface StartExperimentExperimentOptionsInput {
     /**
      * Specifies the actions mode for experiment options.
@@ -1572,6 +1628,32 @@ declare namespace Fis {
     parameters?: ExperimentTemplateTargetParameterMap;
   }
   export type UpdateExperimentTemplateTargetInputMap = {[key: string]: UpdateExperimentTemplateTargetInput};
+  export interface UpdateSafetyLeverStateInput {
+    /**
+     *  The updated state of the safety lever. 
+     */
+    status: SafetyLeverStatusInput;
+    /**
+     *  The reason for updating the state of the safety lever. 
+     */
+    reason: SafetyLeverStatusReason;
+  }
+  export interface UpdateSafetyLeverStateRequest {
+    /**
+     *  The ID of the safety lever. 
+     */
+    id: SafetyLeverId;
+    /**
+     *  The state of the safety lever. 
+     */
+    state: UpdateSafetyLeverStateInput;
+  }
+  export interface UpdateSafetyLeverStateResponse {
+    /**
+     *  Information about the safety lever. 
+     */
+    safetyLever?: SafetyLever;
+  }
   export interface UpdateTargetAccountConfigurationRequest {
     /**
      * The ID of the experiment template.

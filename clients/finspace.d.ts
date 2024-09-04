@@ -992,7 +992,7 @@ declare namespace Finspace {
      */
     scalingGroupName: KxScalingGroupName;
     /**
-     *  The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed. You can add one of the following values:    kx.sg.4xlarge – The host type with a configuration of 108 GiB memory and 16 vCPUs.    kx.sg.8xlarge – The host type with a configuration of 216 GiB memory and 32 vCPUs.    kx.sg.16xlarge – The host type with a configuration of 432 GiB memory and 64 vCPUs.    kx.sg.32xlarge – The host type with a configuration of 864 GiB memory and 128 vCPUs.    kx.sg1.16xlarge – The host type with a configuration of 1949 GiB memory and 64 vCPUs.    kx.sg1.24xlarge – The host type with a configuration of 2948 GiB memory and 96 vCPUs.  
+     *  The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed. You can add one of the following values:    kx.sg.large – The host type with a configuration of 16 GiB memory and 2 vCPUs.    kx.sg.xlarge – The host type with a configuration of 32 GiB memory and 4 vCPUs.    kx.sg.2xlarge – The host type with a configuration of 64 GiB memory and 8 vCPUs.    kx.sg.4xlarge – The host type with a configuration of 108 GiB memory and 16 vCPUs.    kx.sg.8xlarge – The host type with a configuration of 216 GiB memory and 32 vCPUs.    kx.sg.16xlarge – The host type with a configuration of 432 GiB memory and 64 vCPUs.    kx.sg.32xlarge – The host type with a configuration of 864 GiB memory and 128 vCPUs.    kx.sg1.16xlarge – The host type with a configuration of 1949 GiB memory and 64 vCPUs.    kx.sg1.24xlarge – The host type with a configuration of 2948 GiB memory and 96 vCPUs.  
      */
     hostType: KxHostType;
     /**
@@ -1816,7 +1816,7 @@ declare namespace Finspace {
      */
     scalingGroupArn?: arn;
     /**
-     *  The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed. It can have one of the following values:    kx.sg.4xlarge – The host type with a configuration of 108 GiB memory and 16 vCPUs.    kx.sg.8xlarge – The host type with a configuration of 216 GiB memory and 32 vCPUs.    kx.sg.16xlarge – The host type with a configuration of 432 GiB memory and 64 vCPUs.    kx.sg.32xlarge – The host type with a configuration of 864 GiB memory and 128 vCPUs.    kx.sg1.16xlarge – The host type with a configuration of 1949 GiB memory and 64 vCPUs.    kx.sg1.24xlarge – The host type with a configuration of 2948 GiB memory and 96 vCPUs.  
+     *  The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed. It can have one of the following values:    kx.sg.large – The host type with a configuration of 16 GiB memory and 2 vCPUs.    kx.sg.xlarge – The host type with a configuration of 32 GiB memory and 4 vCPUs.    kx.sg.2xlarge – The host type with a configuration of 64 GiB memory and 8 vCPUs.    kx.sg.4xlarge – The host type with a configuration of 108 GiB memory and 16 vCPUs.    kx.sg.8xlarge – The host type with a configuration of 216 GiB memory and 32 vCPUs.    kx.sg.16xlarge – The host type with a configuration of 432 GiB memory and 64 vCPUs.    kx.sg.32xlarge – The host type with a configuration of 864 GiB memory and 128 vCPUs.    kx.sg1.16xlarge – The host type with a configuration of 1949 GiB memory and 64 vCPUs.    kx.sg1.24xlarge – The host type with a configuration of 2948 GiB memory and 96 vCPUs.  
      */
     hostType?: KxHostType;
     /**
@@ -2396,7 +2396,7 @@ declare namespace Finspace {
      */
     scalingGroupName?: KxScalingGroupName;
     /**
-     *  The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed. You can add one of the following values:    kx.sg.4xlarge – The host type with a configuration of 108 GiB memory and 16 vCPUs.    kx.sg.8xlarge – The host type with a configuration of 216 GiB memory and 32 vCPUs.    kx.sg.16xlarge – The host type with a configuration of 432 GiB memory and 64 vCPUs.    kx.sg.32xlarge – The host type with a configuration of 864 GiB memory and 128 vCPUs.    kx.sg1.16xlarge – The host type with a configuration of 1949 GiB memory and 64 vCPUs.    kx.sg1.24xlarge – The host type with a configuration of 2948 GiB memory and 96 vCPUs.  
+     *  The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed. You can add one of the following values:    kx.sg.large – The host type with a configuration of 16 GiB memory and 2 vCPUs.    kx.sg.xlarge – The host type with a configuration of 32 GiB memory and 4 vCPUs.    kx.sg.2xlarge – The host type with a configuration of 64 GiB memory and 8 vCPUs.    kx.sg.4xlarge – The host type with a configuration of 108 GiB memory and 16 vCPUs.    kx.sg.8xlarge – The host type with a configuration of 216 GiB memory and 32 vCPUs.    kx.sg.16xlarge – The host type with a configuration of 432 GiB memory and 64 vCPUs.    kx.sg.32xlarge – The host type with a configuration of 864 GiB memory and 128 vCPUs.    kx.sg1.16xlarge – The host type with a configuration of 1949 GiB memory and 64 vCPUs.    kx.sg1.24xlarge – The host type with a configuration of 2948 GiB memory and 96 vCPUs.  
      */
     hostType?: KxHostType;
     /**

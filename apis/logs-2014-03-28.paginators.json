@@ -1,5 +1,11 @@
 {
   "pagination": {
+    "DescribeConfigurationTemplates": {
+      "input_token": "nextToken",
+      "limit_key": "limit",
+      "output_token": "nextToken",
+      "result_key": "configurationTemplates"
+    },
     "DescribeDeliveries": {
       "input_token": "nextToken",
       "limit_key": "limit",

@@ -20,11 +20,11 @@ declare class BedrockAgent extends Service {
    */
   associateAgentKnowledgeBase(callback?: (err: AWSError, data: BedrockAgent.Types.AssociateAgentKnowledgeBaseResponse) => void): Request<BedrockAgent.Types.AssociateAgentKnowledgeBaseResponse, AWSError>;
   /**
-   * Creates an agent that orchestrates interactions between foundation models, data sources, software applications, user conversations, and APIs to carry out tasks to help customers.   Specify the following fields for security purposes.    agentResourceRoleArn – The Amazon Resource Name (ARN) of the role with permissions to invoke API operations on an agent.   (Optional) customerEncryptionKeyArn – The Amazon Resource Name (ARN) of a KMS key to encrypt the creation of the agent.   (Optional) idleSessionTTLinSeconds – Specify the number of seconds for which the agent should maintain session information. After this time expires, the subsequent InvokeAgent request begins a new session.     To enable your agent to retain conversational context across multiple sessions, include a memoryConfiguration object. For more information, see Configure memory.   To override the default prompt behavior for agent orchestration and to use advanced prompts, include a promptOverrideConfiguration object. For more information, see Advanced prompts.   If you agent fails to be created, the response returns a list of failureReasons alongside a list of recommendedActions for you to troubleshoot.  
+   * Creates an agent that orchestrates interactions between foundation models, data sources, software applications, user conversations, and APIs to carry out tasks to help customers.   Specify the following fields for security purposes.    agentResourceRoleArn – The Amazon Resource Name (ARN) of the role with permissions to invoke API operations on an agent.   (Optional) customerEncryptionKeyArn – The Amazon Resource Name (ARN) of a KMS key to encrypt the creation of the agent.   (Optional) idleSessionTTLinSeconds – Specify the number of seconds for which the agent should maintain session information. After this time expires, the subsequent InvokeAgent request begins a new session.     To enable your agent to retain conversational context across multiple sessions, include a memoryConfiguration object. For more information, see Configure memory.   To override the default prompt behavior for agent orchestration and to use advanced prompts, include a promptOverrideConfiguration object. For more information, see Advanced prompts.   If your agent fails to be created, the response returns a list of failureReasons alongside a list of recommendedActions for you to troubleshoot.   The agent instructions will not be honored if your agent has only one knowledge base, uses default prompts, has no action group, and user input is disabled.  
    */
   createAgent(params: BedrockAgent.Types.CreateAgentRequest, callback?: (err: AWSError, data: BedrockAgent.Types.CreateAgentResponse) => void): Request<BedrockAgent.Types.CreateAgentResponse, AWSError>;
   /**
-   * Creates an agent that orchestrates interactions between foundation models, data sources, software applications, user conversations, and APIs to carry out tasks to help customers.   Specify the following fields for security purposes.    agentResourceRoleArn – The Amazon Resource Name (ARN) of the role with permissions to invoke API operations on an agent.   (Optional) customerEncryptionKeyArn – The Amazon Resource Name (ARN) of a KMS key to encrypt the creation of the agent.   (Optional) idleSessionTTLinSeconds – Specify the number of seconds for which the agent should maintain session information. After this time expires, the subsequent InvokeAgent request begins a new session.     To enable your agent to retain conversational context across multiple sessions, include a memoryConfiguration object. For more information, see Configure memory.   To override the default prompt behavior for agent orchestration and to use advanced prompts, include a promptOverrideConfiguration object. For more information, see Advanced prompts.   If you agent fails to be created, the response returns a list of failureReasons alongside a list of recommendedActions for you to troubleshoot.  
+   * Creates an agent that orchestrates interactions between foundation models, data sources, software applications, user conversations, and APIs to carry out tasks to help customers.   Specify the following fields for security purposes.    agentResourceRoleArn – The Amazon Resource Name (ARN) of the role with permissions to invoke API operations on an agent.   (Optional) customerEncryptionKeyArn – The Amazon Resource Name (ARN) of a KMS key to encrypt the creation of the agent.   (Optional) idleSessionTTLinSeconds – Specify the number of seconds for which the agent should maintain session information. After this time expires, the subsequent InvokeAgent request begins a new session.     To enable your agent to retain conversational context across multiple sessions, include a memoryConfiguration object. For more information, see Configure memory.   To override the default prompt behavior for agent orchestration and to use advanced prompts, include a promptOverrideConfiguration object. For more information, see Advanced prompts.   If your agent fails to be created, the response returns a list of failureReasons alongside a list of recommendedActions for you to troubleshoot.   The agent instructions will not be honored if your agent has only one knowledge base, uses default prompts, has no action group, and user input is disabled.  
    */
   createAgent(callback?: (err: AWSError, data: BedrockAgent.Types.CreateAgentResponse) => void): Request<BedrockAgent.Types.CreateAgentResponse, AWSError>;
   /**
@@ -3621,6 +3621,19 @@ declare namespace BedrockAgent {
   }
   export type PromptInputVariableName = string;
   export type PromptInputVariablesList = PromptInputVariable[];
+  export interface PromptMetadataEntry {
+    /**
+     * The key of a metadata tag for a prompt variant.
+     */
+    key: PromptMetadataKey;
+    /**
+     * The value of a metadata tag for a prompt variant.
+     */
+    value: PromptMetadataValue;
+  }
+  export type PromptMetadataKey = string;
+  export type PromptMetadataList = PromptMetadataEntry[];
+  export type PromptMetadataValue = string;
   export type PromptModelIdentifier = string;
   export interface PromptModelInferenceConfiguration {
     /**
@@ -3700,6 +3713,10 @@ declare namespace BedrockAgent {
      * Contains inference configurations for the prompt variant.
      */
     inferenceConfiguration?: PromptInferenceConfiguration;
+    /**
+     * An array of objects, each containing a key-value pair that defines a metadata tag and value to attach to a prompt variant. For more information, see Create a prompt using Prompt management.
+     */
+    metadata?: PromptMetadataList;
     /**
      * The unique identifier of the model with which to run inference on the prompt.
      */

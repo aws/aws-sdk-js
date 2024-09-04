@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1688.0-->
+<!--LATEST=2.1689.0-->
 <!--ENTRYINSERT-->
+
+## 2.1689.0
+* feature: AppSync: Adds new logging levels (INFO and DEBUG) for additional log output control
+* feature: BedrockAgent: Add support for user metadata inside PromptVariant.
+* feature: CloudWatchLogs: Update to support new APIs for delivery of logs from AWS services.
+* feature: Fis: This release adds safety levers, a new mechanism to stop all running experiments and prevent new experiments from starting.
+* feature: S3Control: Amazon Simple Storage Service /S3 Access Grants / Features : This release launches new Access Grants API - ListCallerAccessGrants.
 
 ## 2.1688.0
 * feature: Connect: Release ReplicaConfiguration as part of DescribeInstance
