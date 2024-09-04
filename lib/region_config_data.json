@@ -36,6 +36,8 @@
       "globalEndpoint": true,
       "signingRegion": "us-isob-east-1"
     },
+    "us-isof-*/route53": "globalUsIsof",
+    "eu-isoe-*/route53": "globalEuIsoe",
 
     "*/waf": "globalSSL",
 
@@ -240,6 +242,16 @@
       "endpoint": "{service}.us-gov.amazonaws.com",
       "globalEndpoint": true,
       "signingRegion": "us-gov-west-1"
+    },
+    "globalUsIsof": {
+      "endpoint": "{service}.csp.hci.ic.gov",
+      "globalEndpoint": true,
+      "signingRegion": "us-isof-south-1"
+    },
+    "globalEuIsoe": {
+      "endpoint": "{service}.cloud.adc-e.uk",
+      "globalEndpoint": true,
+      "signingRegion": "eu-isoe-west-1"
     },
     "s3signature": {
       "endpoint": "{service}.{region}.amazonaws.com",

@@ -18,6 +18,19 @@ describe('region_config.js', function() {
     });
   });
 
+  [AWS.Route53].forEach(function(svcClass) {
+    ['us-isof-south-1', 'eu-isoe-west-1'].forEach(function(region) {
+      it('uses a global partition endpoint for ' + svcClass.serviceIdentifier, function() {
+        var service = new svcClass({
+          region: region
+        });
+        expect(service.endpoint.host).to.contain(service.serviceIdentifier + '.');
+        expect(service.endpoint.host).not.to.contain(region);
+        expect(service.isGlobalEndpoint).to.equal(true);
+      });
+    });
+  });
+
   it('always enables SSL for Route53', function() {
     var service = new AWS.Route53;
     expect(service.config.sslEnabled).to.equal(true);
