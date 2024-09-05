@@ -19,7 +19,13 @@ describe('region_config.js', function() {
   });
 
   [AWS.Route53].forEach(function(svcClass) {
-    ['us-isof-south-1', 'eu-isoe-west-1'].forEach(function(region) {
+    [
+      'us-isof-south-1',
+      'eu-isoe-west-1',
+      'us-gov-west-1',
+      'cn-northwest-1',
+      'cn-north-1'
+    ].forEach(function(region) {
       it('uses a global partition endpoint for ' + svcClass.serviceIdentifier, function() {
         var service = new svcClass({
           region: region
