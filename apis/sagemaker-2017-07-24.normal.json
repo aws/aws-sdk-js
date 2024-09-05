@@ -6838,6 +6838,16 @@
         "ml.r6id.32xlarge"
       ]
     },
+    "AppLifecycleManagement": {
+      "type": "structure",
+      "members": {
+        "IdleSettings": {
+          "shape": "IdleSettings",
+          "documentation": "<p>Settings related to idle shutdown of Studio applications.</p>"
+        }
+      },
+      "documentation": "<p>Settings that are used to configure and manage the lifecycle of Amazon SageMaker Studio applications.</p>"
+    },
     "AppList": {
       "type": "list",
       "member": {
@@ -9328,7 +9338,7 @@
           "documentation": "<p>Details of LifeCycle configuration for the instance group.</p>"
         },
         "ExecutionRole": {
-          "shape": "RoleArn",
+          "shape": "IAMRoleArn",
           "documentation": "<p>The execution role for the instance group to assume.</p>"
         },
         "ThreadsPerCore": {
@@ -9381,7 +9391,7 @@
           "documentation": "<p>Specifies the LifeCycle configuration for the instance group.</p>"
         },
         "ExecutionRole": {
-          "shape": "RoleArn",
+          "shape": "IAMRoleArn",
           "documentation": "<p>Specifies an IAM execution role to be assumed by the instance group.</p>"
         },
         "ThreadsPerCore": {
@@ -9730,6 +9740,10 @@
         "LifecycleConfigArns": {
           "shape": "LifecycleConfigArns",
           "documentation": "<p>The Amazon Resource Name (ARN) of the Code Editor application lifecycle configuration.</p>"
+        },
+        "AppLifecycleManagement": {
+          "shape": "AppLifecycleManagement",
+          "documentation": "<p>Settings that are used to configure and manage the lifecycle of CodeEditor applications.</p> <p/>"
         }
       },
       "documentation": "<p>The Code Editor application settings.</p> <p>For more information about Code Editor, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/code-editor.html\">Get started with Code Editor in Amazon SageMaker</a>.</p>"
@@ -23713,6 +23727,12 @@
       "type": "integer",
       "min": 1
     },
+    "IAMRoleArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 20,
+      "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/[\\w+=,.@-]{1,64}$"
+    },
     "IamIdentity": {
       "type": "structure",
       "members": {
@@ -23774,6 +23794,33 @@
         "shape": "IdentityProviderOAuthSetting"
       },
       "max": 20
+    },
+    "IdleSettings": {
+      "type": "structure",
+      "members": {
+        "LifecycleManagement": {
+          "shape": "LifecycleManagement",
+          "documentation": "<p>Indicates whether idle shutdown is activated for the application type.</p>"
+        },
+        "IdleTimeoutInMinutes": {
+          "shape": "IdleTimeoutInMinutes",
+          "documentation": "<p>The time that SageMaker waits after the application becomes idle before shutting it down.</p>"
+        },
+        "MinIdleTimeoutInMinutes": {
+          "shape": "IdleTimeoutInMinutes",
+          "documentation": "<p>The minimum value in minutes that custom idle shutdown can be set to by the user.</p>"
+        },
+        "MaxIdleTimeoutInMinutes": {
+          "shape": "IdleTimeoutInMinutes",
+          "documentation": "<p>The maximum value in minutes that custom idle shutdown can be set to by the user.</p>"
+        }
+      },
+      "documentation": "<p>Settings related to idle shutdown of Studio applications.</p>"
+    },
+    "IdleTimeoutInMinutes": {
+      "type": "integer",
+      "max": 525600,
+      "min": 60
     },
     "Image": {
       "type": "structure",
@@ -25183,6 +25230,10 @@
           "shape": "CodeRepositories",
           "documentation": "<p>A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterLab application.</p>"
         },
+        "AppLifecycleManagement": {
+          "shape": "AppLifecycleManagement",
+          "documentation": "<p>Indicates whether idle shutdown is activated for JupyterLab applications.</p>"
+        },
         "EmrSettings": {
           "shape": "EmrSettings",
           "documentation": "<p>The configuration parameters that specify the IAM roles assumed by the execution role of SageMaker (assumable roles) and the cluster instances or job execution environments (execution roles or runtime roles) to manage and access resources required for running Amazon EMR clusters or Amazon EMR Serverless applications.</p>"
@@ -25704,6 +25755,13 @@
       "member": {
         "shape": "StudioLifecycleConfigArn"
       }
+    },
+    "LifecycleManagement": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
     },
     "LineageEntityParameters": {
       "type": "map",
@@ -38210,6 +38268,16 @@
       "min": 1,
       "pattern": ".*"
     },
+    "SpaceAppLifecycleManagement": {
+      "type": "structure",
+      "members": {
+        "IdleSettings": {
+          "shape": "SpaceIdleSettings",
+          "documentation": "<p>Settings related to idle shutdown of Studio applications.</p>"
+        }
+      },
+      "documentation": "<p>Settings that are used to configure and manage the lifecycle of Amazon SageMaker Studio applications in a space.</p>"
+    },
     "SpaceArn": {
       "type": "string",
       "max": 256,
@@ -38220,6 +38288,10 @@
       "members": {
         "DefaultResourceSpec": {
           "shape": "ResourceSpec"
+        },
+        "AppLifecycleManagement": {
+          "shape": "SpaceAppLifecycleManagement",
+          "documentation": "<p>Settings that are used to configure and manage the lifecycle of CodeEditor applications in a space.</p>"
         }
       },
       "documentation": "<p>The application settings for a Code Editor space.</p>"
@@ -38271,6 +38343,16 @@
       "max": 16384,
       "min": 5
     },
+    "SpaceIdleSettings": {
+      "type": "structure",
+      "members": {
+        "IdleTimeoutInMinutes": {
+          "shape": "IdleTimeoutInMinutes",
+          "documentation": "<p>The time that SageMaker waits after the application becomes idle before shutting it down.</p>"
+        }
+      },
+      "documentation": "<p>Settings related to idle shutdown of Studio applications in a space.</p>"
+    },
     "SpaceJupyterLabAppSettings": {
       "type": "structure",
       "members": {
@@ -38280,6 +38362,10 @@
         "CodeRepositories": {
           "shape": "CodeRepositories",
           "documentation": "<p>A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterLab application.</p>"
+        },
+        "AppLifecycleManagement": {
+          "shape": "SpaceAppLifecycleManagement",
+          "documentation": "<p>Settings that are used to configure and manage the lifecycle of JupyterLab applications in a space.</p>"
         }
       },
       "documentation": "<p>The settings for the JupyterLab application within a space.</p>"

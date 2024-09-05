@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1689.0-->
+<!--LATEST=2.1690.0-->
 <!--ENTRYINSERT-->
+
+## 2.1690.0
+* feature: ApplicationSignals: Amazon CloudWatch Application Signals now supports creating Service Level Objectives using a new calculation type. Users can now create SLOs which are configured with request-based SLIs to help meet their specific business requirements.
+* feature: Connect: Amazon Connect Custom Vocabulary now supports Catalan (Spain), Danish (Denmark), Dutch (Netherlands), Finnish (Finland), Indonesian (Indonesia), Malay (Malaysia), Norwegian Bokmal (Norway), Polish (Poland), Swedish (Sweden), and Tagalog/Filipino (Philippines).
+* feature: GameLift: Amazon GameLift provides additional events for tracking the fleet creation process.
+* feature: KinesisAnalyticsV2: Support for Flink 1.20 in Managed Service for Apache Flink
+* feature: SageMaker: Amazon SageMaker now supports idle shutdown of JupyterLab and CodeEditor applications on SageMaker Studio.
 
 ## 2.1689.0
 * feature: AppSync: Adds new logging levels (INFO and DEBUG) for additional log output control

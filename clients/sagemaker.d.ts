@@ -3156,6 +3156,12 @@ declare namespace SageMaker {
   export type AppImageConfigName = string;
   export type AppImageConfigSortKey = "CreationTime"|"LastModifiedTime"|"Name"|string;
   export type AppInstanceType = "system"|"ml.t3.micro"|"ml.t3.small"|"ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.8xlarge"|"ml.m5.12xlarge"|"ml.m5.16xlarge"|"ml.m5.24xlarge"|"ml.m5d.large"|"ml.m5d.xlarge"|"ml.m5d.2xlarge"|"ml.m5d.4xlarge"|"ml.m5d.8xlarge"|"ml.m5d.12xlarge"|"ml.m5d.16xlarge"|"ml.m5d.24xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.12xlarge"|"ml.c5.18xlarge"|"ml.c5.24xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.8xlarge"|"ml.r5.12xlarge"|"ml.r5.16xlarge"|"ml.r5.24xlarge"|"ml.g5.xlarge"|"ml.g5.2xlarge"|"ml.g5.4xlarge"|"ml.g5.8xlarge"|"ml.g5.16xlarge"|"ml.g5.12xlarge"|"ml.g5.24xlarge"|"ml.g5.48xlarge"|"ml.g6.xlarge"|"ml.g6.2xlarge"|"ml.g6.4xlarge"|"ml.g6.8xlarge"|"ml.g6.12xlarge"|"ml.g6.16xlarge"|"ml.g6.24xlarge"|"ml.g6.48xlarge"|"ml.geospatial.interactive"|"ml.p4d.24xlarge"|"ml.p4de.24xlarge"|"ml.trn1.2xlarge"|"ml.trn1.32xlarge"|"ml.trn1n.32xlarge"|"ml.p5.48xlarge"|"ml.m6i.large"|"ml.m6i.xlarge"|"ml.m6i.2xlarge"|"ml.m6i.4xlarge"|"ml.m6i.8xlarge"|"ml.m6i.12xlarge"|"ml.m6i.16xlarge"|"ml.m6i.24xlarge"|"ml.m6i.32xlarge"|"ml.m7i.large"|"ml.m7i.xlarge"|"ml.m7i.2xlarge"|"ml.m7i.4xlarge"|"ml.m7i.8xlarge"|"ml.m7i.12xlarge"|"ml.m7i.16xlarge"|"ml.m7i.24xlarge"|"ml.m7i.48xlarge"|"ml.c6i.large"|"ml.c6i.xlarge"|"ml.c6i.2xlarge"|"ml.c6i.4xlarge"|"ml.c6i.8xlarge"|"ml.c6i.12xlarge"|"ml.c6i.16xlarge"|"ml.c6i.24xlarge"|"ml.c6i.32xlarge"|"ml.c7i.large"|"ml.c7i.xlarge"|"ml.c7i.2xlarge"|"ml.c7i.4xlarge"|"ml.c7i.8xlarge"|"ml.c7i.12xlarge"|"ml.c7i.16xlarge"|"ml.c7i.24xlarge"|"ml.c7i.48xlarge"|"ml.r6i.large"|"ml.r6i.xlarge"|"ml.r6i.2xlarge"|"ml.r6i.4xlarge"|"ml.r6i.8xlarge"|"ml.r6i.12xlarge"|"ml.r6i.16xlarge"|"ml.r6i.24xlarge"|"ml.r6i.32xlarge"|"ml.r7i.large"|"ml.r7i.xlarge"|"ml.r7i.2xlarge"|"ml.r7i.4xlarge"|"ml.r7i.8xlarge"|"ml.r7i.12xlarge"|"ml.r7i.16xlarge"|"ml.r7i.24xlarge"|"ml.r7i.48xlarge"|"ml.m6id.large"|"ml.m6id.xlarge"|"ml.m6id.2xlarge"|"ml.m6id.4xlarge"|"ml.m6id.8xlarge"|"ml.m6id.12xlarge"|"ml.m6id.16xlarge"|"ml.m6id.24xlarge"|"ml.m6id.32xlarge"|"ml.c6id.large"|"ml.c6id.xlarge"|"ml.c6id.2xlarge"|"ml.c6id.4xlarge"|"ml.c6id.8xlarge"|"ml.c6id.12xlarge"|"ml.c6id.16xlarge"|"ml.c6id.24xlarge"|"ml.c6id.32xlarge"|"ml.r6id.large"|"ml.r6id.xlarge"|"ml.r6id.2xlarge"|"ml.r6id.4xlarge"|"ml.r6id.8xlarge"|"ml.r6id.12xlarge"|"ml.r6id.16xlarge"|"ml.r6id.24xlarge"|"ml.r6id.32xlarge"|string;
+  export interface AppLifecycleManagement {
+    /**
+     * Settings related to idle shutdown of Studio applications.
+     */
+    IdleSettings?: IdleSettings;
+  }
   export type AppList = AppDetails[];
   export type AppManaged = boolean;
   export type AppName = string;
@@ -4346,7 +4352,7 @@ declare namespace SageMaker {
     /**
      * The execution role for the instance group to assume.
      */
-    ExecutionRole?: RoleArn;
+    ExecutionRole?: IAMRoleArn;
     /**
      * The number you specified to TreadsPerCore in CreateCluster for enabling or disabling multithreading. For instance types that support multithreading, you can specify 1 for disabling multithreading and 2 for enabling multithreading. For more information, see the reference table of CPU cores and threads per CPU core per instance type in the Amazon Elastic Compute Cloud User Guide.
      */
@@ -4378,7 +4384,7 @@ declare namespace SageMaker {
     /**
      * Specifies an IAM execution role to be assumed by the instance group.
      */
-    ExecutionRole: RoleArn;
+    ExecutionRole: IAMRoleArn;
     /**
      * Specifies the value for Threads per core. For instance types that support multithreading, you can specify 1 for disabling multithreading and 2 for enabling multithreading. For instance types that doesn't support multithreading, specify 1. For more information, see the reference table of CPU cores and threads per CPU core per instance type in the Amazon Elastic Compute Cloud User Guide.
      */
@@ -4540,6 +4546,10 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) of the Code Editor application lifecycle configuration.
      */
     LifecycleConfigArns?: LifecycleConfigArns;
+    /**
+     * Settings that are used to configure and manage the lifecycle of CodeEditor applications. 
+     */
+    AppLifecycleManagement?: AppLifecycleManagement;
   }
   export type CodeRepositories = CodeRepository[];
   export interface CodeRepository {
@@ -13726,6 +13736,7 @@ declare namespace SageMaker {
   }
   export type HyperbandStrategyMaxResource = number;
   export type HyperbandStrategyMinResource = number;
+  export type IAMRoleArn = string;
   export interface IamIdentity {
     /**
      * The Amazon Resource Name (ARN) of the IAM identity.
@@ -13766,6 +13777,25 @@ declare namespace SageMaker {
     SecretArn?: SecretArn;
   }
   export type IdentityProviderOAuthSettings = IdentityProviderOAuthSetting[];
+  export interface IdleSettings {
+    /**
+     * Indicates whether idle shutdown is activated for the application type.
+     */
+    LifecycleManagement?: LifecycleManagement;
+    /**
+     * The time that SageMaker waits after the application becomes idle before shutting it down.
+     */
+    IdleTimeoutInMinutes?: IdleTimeoutInMinutes;
+    /**
+     * The minimum value in minutes that custom idle shutdown can be set to by the user.
+     */
+    MinIdleTimeoutInMinutes?: IdleTimeoutInMinutes;
+    /**
+     * The maximum value in minutes that custom idle shutdown can be set to by the user.
+     */
+    MaxIdleTimeoutInMinutes?: IdleTimeoutInMinutes;
+  }
+  export type IdleTimeoutInMinutes = number;
   export interface Image {
     /**
      * When the image was created.
@@ -14407,6 +14437,10 @@ declare namespace SageMaker {
      */
     CodeRepositories?: CodeRepositories;
     /**
+     * Indicates whether idle shutdown is activated for JupyterLab applications.
+     */
+    AppLifecycleManagement?: AppLifecycleManagement;
+    /**
      * The configuration parameters that specify the IAM roles assumed by the execution role of SageMaker (assumable roles) and the cluster instances or job execution environments (execution roles or runtime roles) to manage and access resources required for running Amazon EMR clusters or Amazon EMR Serverless applications.
      */
     EmrSettings?: EmrSettings;
@@ -14709,6 +14743,7 @@ declare namespace SageMaker {
   }
   export type LastUpdateStatusValue = "Successful"|"Failed"|"InProgress"|string;
   export type LifecycleConfigArns = StudioLifecycleConfigArn[];
+  export type LifecycleManagement = "ENABLED"|"DISABLED"|string;
   export type LineageEntityParameters = {[key: string]: StringParameterValue};
   export type LineageGroupArn = string;
   export type LineageGroupNameOrArn = string;
@@ -22500,9 +22535,19 @@ declare namespace SageMaker {
   }
   export type SourceType = string;
   export type SourceUri = string;
+  export interface SpaceAppLifecycleManagement {
+    /**
+     * Settings related to idle shutdown of Studio applications.
+     */
+    IdleSettings?: SpaceIdleSettings;
+  }
   export type SpaceArn = string;
   export interface SpaceCodeEditorAppSettings {
     DefaultResourceSpec?: ResourceSpec;
+    /**
+     * Settings that are used to configure and manage the lifecycle of CodeEditor applications in a space.
+     */
+    AppLifecycleManagement?: SpaceAppLifecycleManagement;
   }
   export interface SpaceDetails {
     /**
@@ -22543,12 +22588,22 @@ declare namespace SageMaker {
     SpaceDisplayName?: NonEmptyString64;
   }
   export type SpaceEbsVolumeSizeInGb = number;
+  export interface SpaceIdleSettings {
+    /**
+     * The time that SageMaker waits after the application becomes idle before shutting it down.
+     */
+    IdleTimeoutInMinutes?: IdleTimeoutInMinutes;
+  }
   export interface SpaceJupyterLabAppSettings {
     DefaultResourceSpec?: ResourceSpec;
     /**
      * A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterLab application.
      */
     CodeRepositories?: CodeRepositories;
+    /**
+     * Settings that are used to configure and manage the lifecycle of JupyterLab applications in a space.
+     */
+    AppLifecycleManagement?: SpaceAppLifecycleManagement;
   }
   export type SpaceList = SpaceDetails[];
   export type SpaceName = string;

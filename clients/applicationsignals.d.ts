@@ -12,19 +12,19 @@ declare class ApplicationSignals extends Service {
   constructor(options?: ApplicationSignals.Types.ClientConfiguration)
   config: Config & ApplicationSignals.Types.ClientConfiguration;
   /**
-   * Use this operation to retrieve one or more service level objective (SLO) budget reports. An error budget is the amount of time in unhealthy periods that your service can accumulate during an interval before your overall SLO budget health is breached and the SLO is considered to be unmet. For example, an SLO with a threshold of 99.95% and a monthly interval translates to an error budget of 21.9 minutes of downtime in a 30-day month. Budget reports include a health indicator, the attainment value, and remaining budget. For more information about SLO error budgets, see  SLO concepts.
+   * Use this operation to retrieve one or more service level objective (SLO) budget reports. An error budget is the amount of time or requests in an unhealthy state that your service can accumulate during an interval before your overall SLO budget health is breached and the SLO is considered to be unmet. For example, an SLO with a threshold of 99.95% and a monthly interval translates to an error budget of 21.9 minutes of downtime in a 30-day month. Budget reports include a health indicator, the attainment value, and remaining budget. For more information about SLO error budgets, see  SLO concepts.
    */
   batchGetServiceLevelObjectiveBudgetReport(params: ApplicationSignals.Types.BatchGetServiceLevelObjectiveBudgetReportInput, callback?: (err: AWSError, data: ApplicationSignals.Types.BatchGetServiceLevelObjectiveBudgetReportOutput) => void): Request<ApplicationSignals.Types.BatchGetServiceLevelObjectiveBudgetReportOutput, AWSError>;
   /**
-   * Use this operation to retrieve one or more service level objective (SLO) budget reports. An error budget is the amount of time in unhealthy periods that your service can accumulate during an interval before your overall SLO budget health is breached and the SLO is considered to be unmet. For example, an SLO with a threshold of 99.95% and a monthly interval translates to an error budget of 21.9 minutes of downtime in a 30-day month. Budget reports include a health indicator, the attainment value, and remaining budget. For more information about SLO error budgets, see  SLO concepts.
+   * Use this operation to retrieve one or more service level objective (SLO) budget reports. An error budget is the amount of time or requests in an unhealthy state that your service can accumulate during an interval before your overall SLO budget health is breached and the SLO is considered to be unmet. For example, an SLO with a threshold of 99.95% and a monthly interval translates to an error budget of 21.9 minutes of downtime in a 30-day month. Budget reports include a health indicator, the attainment value, and remaining budget. For more information about SLO error budgets, see  SLO concepts.
    */
   batchGetServiceLevelObjectiveBudgetReport(callback?: (err: AWSError, data: ApplicationSignals.Types.BatchGetServiceLevelObjectiveBudgetReportOutput) => void): Request<ApplicationSignals.Types.BatchGetServiceLevelObjectiveBudgetReportOutput, AWSError>;
   /**
-   * Creates a service level objective (SLO), which can help you ensure that your critical business operations are meeting customer expectations. Use SLOs to set and track specific target levels for the reliability and availability of your applications and services. SLOs use service level indicators (SLIs) to calculate whether the application is performing at the level that you want. Create an SLO to set a target for a service or operation’s availability or latency. CloudWatch measures this target frequently you can find whether it has been breached.  When you create an SLO, you set an attainment goal for it. An attainment goal is the ratio of good periods that meet the threshold requirements to the total periods within the interval. For example, an attainment goal of 99.9% means that within your interval, you are targeting 99.9% of the periods to be in healthy state. After you have created an SLO, you can retrieve error budget reports for it. An error budget is the number of periods or amount of time that your service can accumulate during an interval before your overall SLO budget health is breached and the SLO is considered to be unmet. for example, an SLO with a threshold that 99.95% of requests must be completed under 2000ms every month translates to an error budget of 21.9 minutes of downtime per month. When you call this operation, Application Signals creates the AWSServiceRoleForCloudWatchApplicationSignals service-linked role, if it doesn't already exist in your account. This service- linked role has the following permissions:    xray:GetServiceGraph     logs:StartQuery     logs:GetQueryResults     cloudwatch:GetMetricData     cloudwatch:ListMetrics     tag:GetResources     autoscaling:DescribeAutoScalingGroups    You can easily set SLO targets for your applications that are discovered by Application Signals, using critical metrics such as latency and availability. You can also set SLOs against any CloudWatch metric or math expression that produces a time series. For more information about SLOs, see  Service level objectives (SLOs). 
+   * Creates a service level objective (SLO), which can help you ensure that your critical business operations are meeting customer expectations. Use SLOs to set and track specific target levels for the reliability and availability of your applications and services. SLOs use service level indicators (SLIs) to calculate whether the application is performing at the level that you want. Create an SLO to set a target for a service or operation’s availability or latency. CloudWatch measures this target frequently you can find whether it has been breached.  The target performance quality that is defined for an SLO is the attainment goal. You can set SLO targets for your applications that are discovered by Application Signals, using critical metrics such as latency and availability. You can also set SLOs against any CloudWatch metric or math expression that produces a time series. When you create an SLO, you specify whether it is a period-based SLO or a request-based SLO. Each type of SLO has a different way of evaluating your application's performance against its attainment goal.   A period-based SLO uses defined periods of time within a specified total time interval. For each period of time, Application Signals determines whether the application met its goal. The attainment rate is calculated as the number of good periods/number of total periods. For example, for a period-based SLO, meeting an attainment goal of 99.9% means that within your interval, your application must meet its performance goal during at least 99.9% of the time periods.   A request-based SLO doesn't use pre-defined periods of time. Instead, the SLO measures number of good requests/number of total requests during the interval. At any time, you can find the ratio of good requests to total requests for the interval up to the time stamp that you specify, and measure that ratio against the goal set in your SLO.   After you have created an SLO, you can retrieve error budget reports for it. An error budget is the amount of time or amount of requests that your application can be non-compliant with the SLO's goal, and still have your application meet the goal.   For a period-based SLO, the error budget starts at a number defined by the highest number of periods that can fail to meet the threshold, while still meeting the overall goal. The remaining error budget decreases with every failed period that is recorded. The error budget within one interval can never increase. For example, an SLO with a threshold that 99.95% of requests must be completed under 2000ms every month translates to an error budget of 21.9 minutes of downtime per month.   For a request-based SLO, the remaining error budget is dynamic and can increase or decrease, depending on the ratio of good requests to total requests.   For more information about SLOs, see  Service level objectives (SLOs).  When you perform a CreateServiceLevelObjective operation, Application Signals creates the AWSServiceRoleForCloudWatchApplicationSignals service-linked role, if it doesn't already exist in your account. This service- linked role has the following permissions:    xray:GetServiceGraph     logs:StartQuery     logs:GetQueryResults     cloudwatch:GetMetricData     cloudwatch:ListMetrics     tag:GetResources     autoscaling:DescribeAutoScalingGroups   
    */
   createServiceLevelObjective(params: ApplicationSignals.Types.CreateServiceLevelObjectiveInput, callback?: (err: AWSError, data: ApplicationSignals.Types.CreateServiceLevelObjectiveOutput) => void): Request<ApplicationSignals.Types.CreateServiceLevelObjectiveOutput, AWSError>;
   /**
-   * Creates a service level objective (SLO), which can help you ensure that your critical business operations are meeting customer expectations. Use SLOs to set and track specific target levels for the reliability and availability of your applications and services. SLOs use service level indicators (SLIs) to calculate whether the application is performing at the level that you want. Create an SLO to set a target for a service or operation’s availability or latency. CloudWatch measures this target frequently you can find whether it has been breached.  When you create an SLO, you set an attainment goal for it. An attainment goal is the ratio of good periods that meet the threshold requirements to the total periods within the interval. For example, an attainment goal of 99.9% means that within your interval, you are targeting 99.9% of the periods to be in healthy state. After you have created an SLO, you can retrieve error budget reports for it. An error budget is the number of periods or amount of time that your service can accumulate during an interval before your overall SLO budget health is breached and the SLO is considered to be unmet. for example, an SLO with a threshold that 99.95% of requests must be completed under 2000ms every month translates to an error budget of 21.9 minutes of downtime per month. When you call this operation, Application Signals creates the AWSServiceRoleForCloudWatchApplicationSignals service-linked role, if it doesn't already exist in your account. This service- linked role has the following permissions:    xray:GetServiceGraph     logs:StartQuery     logs:GetQueryResults     cloudwatch:GetMetricData     cloudwatch:ListMetrics     tag:GetResources     autoscaling:DescribeAutoScalingGroups    You can easily set SLO targets for your applications that are discovered by Application Signals, using critical metrics such as latency and availability. You can also set SLOs against any CloudWatch metric or math expression that produces a time series. For more information about SLOs, see  Service level objectives (SLOs). 
+   * Creates a service level objective (SLO), which can help you ensure that your critical business operations are meeting customer expectations. Use SLOs to set and track specific target levels for the reliability and availability of your applications and services. SLOs use service level indicators (SLIs) to calculate whether the application is performing at the level that you want. Create an SLO to set a target for a service or operation’s availability or latency. CloudWatch measures this target frequently you can find whether it has been breached.  The target performance quality that is defined for an SLO is the attainment goal. You can set SLO targets for your applications that are discovered by Application Signals, using critical metrics such as latency and availability. You can also set SLOs against any CloudWatch metric or math expression that produces a time series. When you create an SLO, you specify whether it is a period-based SLO or a request-based SLO. Each type of SLO has a different way of evaluating your application's performance against its attainment goal.   A period-based SLO uses defined periods of time within a specified total time interval. For each period of time, Application Signals determines whether the application met its goal. The attainment rate is calculated as the number of good periods/number of total periods. For example, for a period-based SLO, meeting an attainment goal of 99.9% means that within your interval, your application must meet its performance goal during at least 99.9% of the time periods.   A request-based SLO doesn't use pre-defined periods of time. Instead, the SLO measures number of good requests/number of total requests during the interval. At any time, you can find the ratio of good requests to total requests for the interval up to the time stamp that you specify, and measure that ratio against the goal set in your SLO.   After you have created an SLO, you can retrieve error budget reports for it. An error budget is the amount of time or amount of requests that your application can be non-compliant with the SLO's goal, and still have your application meet the goal.   For a period-based SLO, the error budget starts at a number defined by the highest number of periods that can fail to meet the threshold, while still meeting the overall goal. The remaining error budget decreases with every failed period that is recorded. The error budget within one interval can never increase. For example, an SLO with a threshold that 99.95% of requests must be completed under 2000ms every month translates to an error budget of 21.9 minutes of downtime per month.   For a request-based SLO, the remaining error budget is dynamic and can increase or decrease, depending on the ratio of good requests to total requests.   For more information about SLOs, see  Service level objectives (SLOs).  When you perform a CreateServiceLevelObjective operation, Application Signals creates the AWSServiceRoleForCloudWatchApplicationSignals service-linked role, if it doesn't already exist in your account. This service- linked role has the following permissions:    xray:GetServiceGraph     logs:StartQuery     logs:GetQueryResults     cloudwatch:GetMetricData     cloudwatch:ListMetrics     tag:GetResources     autoscaling:DescribeAutoScalingGroups   
    */
   createServiceLevelObjective(callback?: (err: AWSError, data: ApplicationSignals.Types.CreateServiceLevelObjectiveOutput) => void): Request<ApplicationSignals.Types.CreateServiceLevelObjectiveOutput, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class ApplicationSignals extends Service {
    */
   untagResource(callback?: (err: AWSError, data: ApplicationSignals.Types.UntagResourceResponse) => void): Request<ApplicationSignals.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates an existing service level objective (SLO). If you omit parameters, the previous values of those parameters are retained. 
+   * Updates an existing service level objective (SLO). If you omit parameters, the previous values of those parameters are retained.  You cannot change from a period-based SLO to a request-based SLO, or change from a request-based SLO to a period-based SLO.
    */
   updateServiceLevelObjective(params: ApplicationSignals.Types.UpdateServiceLevelObjectiveInput, callback?: (err: AWSError, data: ApplicationSignals.Types.UpdateServiceLevelObjectiveOutput) => void): Request<ApplicationSignals.Types.UpdateServiceLevelObjectiveOutput, AWSError>;
   /**
-   * Updates an existing service level objective (SLO). If you omit parameters, the previous values of those parameters are retained. 
+   * Updates an existing service level objective (SLO). If you omit parameters, the previous values of those parameters are retained.  You cannot change from a period-based SLO to a request-based SLO, or change from a request-based SLO to a period-based SLO.
    */
   updateServiceLevelObjective(callback?: (err: AWSError, data: ApplicationSignals.Types.UpdateServiceLevelObjectiveOutput) => void): Request<ApplicationSignals.Types.UpdateServiceLevelObjectiveOutput, AWSError>;
 }
@@ -164,6 +164,7 @@ declare namespace ApplicationSignals {
      */
     Errors: ServiceLevelObjectiveBudgetReportErrors;
   }
+  export type BudgetRequestsRemaining = number;
   export type BudgetSecondsRemaining = number;
   export interface CalendarInterval {
     /**
@@ -190,11 +191,15 @@ declare namespace ApplicationSignals {
      */
     Description?: ServiceLevelObjectiveDescription;
     /**
-     * A structure that contains information about what service and what performance metric that this SLO will monitor.
+     * If this SLO is a period-based SLO, this structure defines the information about what performance metric this SLO will monitor. You can't specify both RequestBasedSliConfig and SliConfig in the same operation.
      */
-    SliConfig: ServiceLevelIndicatorConfig;
+    SliConfig?: ServiceLevelIndicatorConfig;
     /**
-     * A structure that contains the attributes that determine the goal of the SLO. This includes the time period for evaluation and the attainment threshold.
+     * If this SLO is a request-based SLO, this structure defines the information about what performance metric this SLO will monitor. You can't specify both RequestBasedSliConfig and SliConfig in the same operation.
+     */
+    RequestBasedSliConfig?: RequestBasedServiceLevelIndicatorConfig;
+    /**
+     * This structure contains the attributes that determine the goal of the SLO.
      */
     Goal?: Goal;
     /**
@@ -229,7 +234,8 @@ declare namespace ApplicationSignals {
   export type DimensionName = string;
   export type DimensionValue = string;
   export type Dimensions = Dimension[];
-  export type DurationUnit = "DAY"|"MONTH"|string;
+  export type DurationUnit = "MINUTE"|"HOUR"|"DAY"|"MONTH"|string;
+  export type EvaluationType = "PeriodBased"|"RequestBased"|string;
   export interface GetServiceInput {
     /**
      * The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: 1698778057  Your requested start time will be rounded to the nearest hour.
@@ -280,7 +286,7 @@ declare namespace ApplicationSignals {
      */
     Interval?: Interval;
     /**
-     * The threshold that determines if the goal is being met. An attainment goal is the ratio of good periods that meet the threshold requirements to the total periods within the interval. For example, an attainment goal of 99.9% means that within your interval, you are targeting 99.9% of the periods to be in healthy state. If you omit this parameter, 99 is used to represent 99% as the attainment goal.
+     * The threshold that determines if the goal is being met. If this is a period-based SLO, the attainment goal is the percentage of good periods that meet the threshold requirements to the total periods within the interval. For example, an attainment goal of 99.9% means that within your interval, you are targeting 99.9% of the periods to be in healthy state. If this is a request-based SLO, the attainment goal is the percentage of requests that must be successful to meet the attainment goal. If you omit this parameter, 99 is used to represent 99% as the attainment goal.
      */
     AttainmentGoal?: AttainmentGoal;
     /**
@@ -543,7 +549,7 @@ declare namespace ApplicationSignals {
      */
     Period?: Period;
     /**
-     * The ID of the account where this metric is located. If you are performing this operatiion in a monitoring account, use this to specify which source account to retrieve this metric from.
+     * The ID of the account where this metric is located. If you are performing this operation in a monitoring account, use this to specify which source account to retrieve this metric from.
      */
     AccountId?: AccountId;
   }
@@ -589,10 +595,92 @@ declare namespace ApplicationSignals {
     Unit?: StandardUnit;
   }
   export type MetricType = string;
+  export interface MonitoredRequestCountMetricDataQueries {
+    /**
+     * If you want to count "good requests" to determine the percentage of successful requests for this request-based SLO, specify the metric to use as "good requests" in this structure.
+     */
+    GoodCountMetric?: MetricDataQueries;
+    /**
+     * If you want to count "bad requests" to determine the percentage of successful requests for this request-based SLO, specify the metric to use as "bad requests" in this structure.
+     */
+    BadCountMetric?: MetricDataQueries;
+  }
   export type Namespace = string;
   export type NextToken = string;
   export type OperationName = string;
   export type Period = number;
+  export interface RequestBasedServiceLevelIndicator {
+    /**
+     * A structure that contains information about the metric that the SLO monitors. 
+     */
+    RequestBasedSliMetric: RequestBasedServiceLevelIndicatorMetric;
+    /**
+     * This value is the threshold that the observed metric values of the SLI metric are compared to.
+     */
+    MetricThreshold?: ServiceLevelIndicatorMetricThreshold;
+    /**
+     * The arithmetic operation used when comparing the specified metric to the threshold.
+     */
+    ComparisonOperator?: ServiceLevelIndicatorComparisonOperator;
+  }
+  export interface RequestBasedServiceLevelIndicatorConfig {
+    /**
+     * Use this structure to specify the metric to be used for the SLO.
+     */
+    RequestBasedSliMetricConfig: RequestBasedServiceLevelIndicatorMetricConfig;
+    /**
+     * The value that the SLI metric is compared to. This parameter is required if this SLO is tracking the Latency metric.
+     */
+    MetricThreshold?: ServiceLevelIndicatorMetricThreshold;
+    /**
+     * The arithmetic operation to use when comparing the specified metric to the threshold. This parameter is required if this SLO is tracking the Latency metric.
+     */
+    ComparisonOperator?: ServiceLevelIndicatorComparisonOperator;
+  }
+  export interface RequestBasedServiceLevelIndicatorMetric {
+    /**
+     * This is a string-to-string map that contains information about the type of object that this SLO is related to. It can include the following fields.    Type designates the type of object that this SLO is related to.    ResourceType specifies the type of the resource. This field is used only when the value of the Type field is Resource or AWS::Resource.    Name specifies the name of the object. This is used only if the value of the Type field is Service, RemoteService, or AWS::Service.    Identifier identifies the resource objects of this resource. This is used only if the value of the Type field is Resource or AWS::Resource.    Environment specifies the location where this object is hosted, or what it belongs to.  
+     */
+    KeyAttributes?: Attributes;
+    /**
+     * If the SLO monitors a specific operation of the service, this field displays that operation name.
+     */
+    OperationName?: OperationName;
+    /**
+     * If the SLO monitors either the LATENCY or AVAILABILITY metric that Application Signals collects, this field displays which of those metrics is used.
+     */
+    MetricType?: ServiceLevelIndicatorMetricType;
+    /**
+     * This structure defines the metric that is used as the "total requests" number for a request-based SLO. The number observed for this metric is divided by the number of "good requests" or "bad requests" that is observed for the metric defined in MonitoredRequestCountMetric.
+     */
+    TotalRequestCountMetric: MetricDataQueries;
+    /**
+     * This structure defines the metric that is used as the "good request" or "bad request" value for a request-based SLO. This value observed for the metric defined in TotalRequestCountMetric is divided by the number found for MonitoredRequestCountMetric to determine the percentage of successful requests that this SLO tracks.
+     */
+    MonitoredRequestCountMetric: MonitoredRequestCountMetricDataQueries;
+  }
+  export interface RequestBasedServiceLevelIndicatorMetricConfig {
+    /**
+     * If this SLO is related to a metric collected by Application Signals, you must use this field to specify which service the SLO metric is related to. To do so, you must specify at least the Type, Name, and Environment attributes. This is a string-to-string map. It can include the following fields.    Type designates the type of object this is.    ResourceType specifies the type of the resource. This field is used only when the value of the Type field is Resource or AWS::Resource.    Name specifies the name of the object. This is used only if the value of the Type field is Service, RemoteService, or AWS::Service.    Identifier identifies the resource objects of this resource. This is used only if the value of the Type field is Resource or AWS::Resource.    Environment specifies the location where this object is hosted, or what it belongs to.  
+     */
+    KeyAttributes?: Attributes;
+    /**
+     * If the SLO is to monitor a specific operation of the service, use this field to specify the name of that operation.
+     */
+    OperationName?: OperationName;
+    /**
+     * If the SLO is to monitor either the LATENCY or AVAILABILITY metric that Application Signals collects, use this field to specify which of those metrics is used.
+     */
+    MetricType?: ServiceLevelIndicatorMetricType;
+    /**
+     * Use this structure to define the metric that you want to use as the "total requests" number for a request-based SLO. This result will be divided by the "good request" or "bad request" value defined in MonitoredRequestCountMetric.
+     */
+    TotalRequestCountMetric?: MetricDataQueries;
+    /**
+     * Use this structure to define the metric that you want to use as the "good request" or "bad request" value for a request-based SLO. This value observed for the metric defined in TotalRequestCountMetric will be divided by the number found for MonitoredRequestCountMetric to determine the percentage of successful requests that this SLO tracks.
+     */
+    MonitoredRequestCountMetric?: MonitoredRequestCountMetricDataQueries;
+  }
   export type ReturnData = boolean;
   export interface RollingInterval {
     /**
@@ -612,7 +700,7 @@ declare namespace ApplicationSignals {
      */
     KeyAttributes: Attributes;
     /**
-     * This structure contains one or more string-to-string maps that help identify this service. It can include platform attributes, application attributes, and telemetry attributes. Platform attributes contain information the service's platform.    PlatformType defines the hosted-in platform.    EKS.Cluster is the name of the Amazon EKS cluster.    K8s.Cluster is the name of the self-hosted Kubernetes cluster.    K8s.Namespace is the name of the Kubernetes namespace in either Amazon EKS or Kubernetes clusters.    K8s.Workload is the name of the Kubernetes workload in either Amazon EKS or Kubernetes clusters.    K8s.Node is the name of the Kubernetes node in either Amazon EKS or Kubernetes clusters.    K8s.Pod is the name of the Kubernetes pod in either Amazon EKS or Kubernetes clusters.    EC2.AutoScalingGroup is the name of the Amazon EC2 Auto Scaling group.    EC2.InstanceId is the ID of the Amazon EC2 instance.    Host is the name of the host, for all platform types.   Applciation attributes contain information about the application.    AWS.Application is the application's name in Amazon Web Services Service Catalog AppRegistry.    AWS.Application.ARN is the application's ARN in Amazon Web Services Service Catalog AppRegistry.   Telemetry attributes contain telemetry information.    Telemetry.SDK is the fingerprint of the OpenTelemetry SDK version for instrumented services.    Telemetry.Agent is the fingerprint of the agent used to collect and send telemetry data.    Telemetry.Source Specifies the point of application where the telemetry was collected or specifies what was used for the source of telemetry data.  
+     * This structure contains one or more string-to-string maps that help identify this service. It can include platform attributes, application attributes, and telemetry attributes. Platform attributes contain information the service's platform.    PlatformType defines the hosted-in platform.    EKS.Cluster is the name of the Amazon EKS cluster.    K8s.Cluster is the name of the self-hosted Kubernetes cluster.    K8s.Namespace is the name of the Kubernetes namespace in either Amazon EKS or Kubernetes clusters.    K8s.Workload is the name of the Kubernetes workload in either Amazon EKS or Kubernetes clusters.    K8s.Node is the name of the Kubernetes node in either Amazon EKS or Kubernetes clusters.    K8s.Pod is the name of the Kubernetes pod in either Amazon EKS or Kubernetes clusters.    EC2.AutoScalingGroup is the name of the Amazon EC2 Auto Scaling group.    EC2.InstanceId is the ID of the Amazon EC2 instance.    Host is the name of the host, for all platform types.   Application attributes contain information about the application.    AWS.Application is the application's name in Amazon Web Services Service Catalog AppRegistry.    AWS.Application.ARN is the application's ARN in Amazon Web Services Service Catalog AppRegistry.   Telemetry attributes contain telemetry information.    Telemetry.SDK is the fingerprint of the OpenTelemetry SDK version for instrumented services.    Telemetry.Agent is the fingerprint of the agent used to collect and send telemetry data.    Telemetry.Source Specifies the point of application where the telemetry was collected or specifies what was used for the source of telemetry data.  
      */
     AttributeMaps?: AttributeMaps;
     /**
@@ -683,7 +771,7 @@ declare namespace ApplicationSignals {
      */
     SliMetricConfig: ServiceLevelIndicatorMetricConfig;
     /**
-     * The value that the SLI metric is compared to.
+     * This parameter is used only when a request-based SLO tracks the Latency metric. Specify the threshold value that the observed Latency metric values are to be compared to.
      */
     MetricThreshold: ServiceLevelIndicatorMetricThreshold;
     /**
@@ -760,9 +848,17 @@ declare namespace ApplicationSignals {
      */
     LastUpdatedTime: Timestamp;
     /**
-     * A structure containing information about the performance metric that this SLO monitors.
+     * A structure containing information about the performance metric that this SLO monitors, if this is a period-based SLO.
      */
-    Sli: ServiceLevelIndicator;
+    Sli?: ServiceLevelIndicator;
+    /**
+     * A structure containing information about the performance metric that this SLO monitors, if this is a request-based SLO.
+     */
+    RequestBasedSli?: RequestBasedServiceLevelIndicator;
+    /**
+     * Displays whether this is a period-based SLO or a request-based SLO.
+     */
+    EvaluationType?: EvaluationType;
     Goal: Goal;
   }
   export type ServiceLevelObjectiveArn = string;
@@ -776,25 +872,38 @@ declare namespace ApplicationSignals {
      */
     Name: ServiceLevelObjectiveName;
     /**
-     * The status of this SLO, as it relates to the error budget for the entire time interval.    OK means that the SLO had remaining budget above the warning threshold, as of the time that you specified in TimeStamp.    WARNING means that the SLO's remaining budget was below the warning threshold, as of the time that you specified in TimeStamp.    BREACHED means that the SLO's budget was exhausted, as of the time that you specified in TimeStamp.    INSUFFICIENT_DATA means that the specifed start and end times were before the SLO was created, or that attainment data is missing.  
+     * Displays whether this budget report is for a period-based SLO or a request-based SLO.
+     */
+    EvaluationType?: EvaluationType;
+    /**
+     * The status of this SLO, as it relates to the error budget for the entire time interval.    OK means that the SLO had remaining budget above the warning threshold, as of the time that you specified in TimeStamp.    WARNING means that the SLO's remaining budget was below the warning threshold, as of the time that you specified in TimeStamp.    BREACHED means that the SLO's budget was exhausted, as of the time that you specified in TimeStamp.    INSUFFICIENT_DATA means that the specified start and end times were before the SLO was created, or that attainment data is missing.  
      */
     BudgetStatus: ServiceLevelObjectiveBudgetStatus;
     /**
-     * A number between 0 and 100 that represents the percentage of time periods that the service has attained the SLO's attainment goal, as of the time of the request.
+     * A number between 0 and 100 that represents the success percentage of your application compared to the goal set by the SLO. If this is a period-based SLO, the number is the percentage of time periods that the service has attained the SLO's attainment goal, as of the time of the request. If this is a request-based SLO, the number is the number of successful requests divided by the number of total requests, multiplied by 100, during the time range that you specified in your request.
      */
     Attainment?: Attainment;
     /**
-     * The total number of seconds in the error budget for the interval.
+     * The total number of seconds in the error budget for the interval. This field is included only if the SLO is a period-based SLO.
      */
     TotalBudgetSeconds?: TotalBudgetSeconds;
     /**
-     * The budget amount remaining before the SLO status becomes BREACHING, at the time specified in the Timestemp parameter of the request. If this value is negative, then the SLO is already in BREACHING status.
+     * The budget amount remaining before the SLO status becomes BREACHING, at the time specified in the Timestemp parameter of the request. If this value is negative, then the SLO is already in BREACHING status.  This field is included only if the SLO is a period-based SLO.
      */
     BudgetSecondsRemaining?: BudgetSecondsRemaining;
+    /**
+     * This field is displayed only for request-based SLOs. It displays the total number of failed requests that can be tolerated during the time range between the start of the interval and the time stamp supplied in the budget report request. It is based on the total number of requests that occurred, and the percentage specified in the attainment goal. If the number of failed requests matches this number or is higher, then this SLO is currently breaching. This number can go up and down between reports with different time stamps, based on both how many total requests occur.
+     */
+    TotalBudgetRequests?: TotalBudgetRequests;
+    /**
+     * This field is displayed only for request-based SLOs. It displays the number of failed requests that can be tolerated before any more successful requests occur, and still have the application meet its SLO goal. This number can go up and down between different reports, based on both how many successful requests and how many failed requests occur in that time.
+     */
+    BudgetRequestsRemaining?: BudgetRequestsRemaining;
     /**
      * A structure that contains information about the performance metric that this SLO monitors.
      */
     Sli?: ServiceLevelIndicator;
+    RequestBasedSli?: RequestBasedServiceLevelIndicator;
     Goal?: Goal;
   }
   export interface ServiceLevelObjectiveBudgetReportError {
@@ -865,7 +974,7 @@ declare namespace ApplicationSignals {
      */
     KeyAttributes: Attributes;
     /**
-     * This structure contains one or more string-to-string maps that help identify this service. It can include platform attributes, application attributes, and telemetry attributes. Platform attributes contain information the service's platform.    PlatformType defines the hosted-in platform.    EKS.Cluster is the name of the Amazon EKS cluster.    K8s.Cluster is the name of the self-hosted Kubernetes cluster.    K8s.Namespace is the name of the Kubernetes namespace in either Amazon EKS or Kubernetes clusters.    K8s.Workload is the name of the Kubernetes workload in either Amazon EKS or Kubernetes clusters.    K8s.Node is the name of the Kubernetes node in either Amazon EKS or Kubernetes clusters.    K8s.Pod is the name of the Kubernetes pod in either Amazon EKS or Kubernetes clusters.    EC2.AutoScalingGroup is the name of the Amazon EC2 Auto Scaling group.    EC2.InstanceId is the ID of the Amazon EC2 instance.    Host is the name of the host, for all platform types.   Applciation attributes contain information about the application.    AWS.Application is the application's name in Amazon Web Services Service Catalog AppRegistry.    AWS.Application.ARN is the application's ARN in Amazon Web Services Service Catalog AppRegistry.   Telemetry attributes contain telemetry information.    Telemetry.SDK is the fingerprint of the OpenTelemetry SDK version for instrumented services.    Telemetry.Agent is the fingerprint of the agent used to collect and send telemetry data.    Telemetry.Source Specifies the point of application where the telemetry was collected or specifies what was used for the source of telemetry data.  
+     * This structure contains one or more string-to-string maps that help identify this service. It can include platform attributes, application attributes, and telemetry attributes. Platform attributes contain information the service's platform.    PlatformType defines the hosted-in platform.    EKS.Cluster is the name of the Amazon EKS cluster.    K8s.Cluster is the name of the self-hosted Kubernetes cluster.    K8s.Namespace is the name of the Kubernetes namespace in either Amazon EKS or Kubernetes clusters.    K8s.Workload is the name of the Kubernetes workload in either Amazon EKS or Kubernetes clusters.    K8s.Node is the name of the Kubernetes node in either Amazon EKS or Kubernetes clusters.    K8s.Pod is the name of the Kubernetes pod in either Amazon EKS or Kubernetes clusters.    EC2.AutoScalingGroup is the name of the Amazon EC2 Auto Scaling group.    EC2.InstanceId is the ID of the Amazon EC2 instance.    Host is the name of the host, for all platform types.   Application attributes contain information about the application.    AWS.Application is the application's name in Amazon Web Services Service Catalog AppRegistry.    AWS.Application.ARN is the application's ARN in Amazon Web Services Service Catalog AppRegistry.   Telemetry attributes contain telemetry information.    Telemetry.SDK is the fingerprint of the OpenTelemetry SDK version for instrumented services.    Telemetry.Agent is the fingerprint of the agent used to collect and send telemetry data.    Telemetry.Source Specifies the point of application where the telemetry was collected or specifies what was used for the source of telemetry data.  
      */
     AttributeMaps?: AttributeMaps;
     /**
@@ -907,6 +1016,7 @@ declare namespace ApplicationSignals {
   }
   export type TagValue = string;
   export type Timestamp = Date;
+  export type TotalBudgetRequests = number;
   export type TotalBudgetSeconds = number;
   export interface UntagResourceRequest {
     /**
@@ -930,9 +1040,13 @@ declare namespace ApplicationSignals {
      */
     Description?: ServiceLevelObjectiveDescription;
     /**
-     * A structure that contains information about what performance metric this SLO will monitor.
+     * If this SLO is a period-based SLO, this structure defines the information about what performance metric this SLO will monitor.
      */
     SliConfig?: ServiceLevelIndicatorConfig;
+    /**
+     * If this SLO is a request-based SLO, this structure defines the information about what performance metric this SLO will monitor. You can't specify both SliConfig and RequestBasedSliConfig in the same operation.
+     */
+    RequestBasedSliConfig?: RequestBasedServiceLevelIndicatorConfig;
     /**
      * A structure that contains the attributes that determine the goal of the SLO. This includes the time period for evaluation and the attainment threshold.
      */
