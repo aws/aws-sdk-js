@@ -172,13 +172,21 @@ declare class QApps extends Service {
    */
   untagResource(callback?: (err: AWSError, data: QApps.Types.UntagResourceResponse) => void): Request<QApps.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates the metadata and status of a library item for an Amazon Q App.
+   * Updates the library item for an Amazon Q App.
    */
   updateLibraryItem(params: QApps.Types.UpdateLibraryItemInput, callback?: (err: AWSError, data: QApps.Types.UpdateLibraryItemOutput) => void): Request<QApps.Types.UpdateLibraryItemOutput, AWSError>;
   /**
-   * Updates the metadata and status of a library item for an Amazon Q App.
+   * Updates the library item for an Amazon Q App.
    */
   updateLibraryItem(callback?: (err: AWSError, data: QApps.Types.UpdateLibraryItemOutput) => void): Request<QApps.Types.UpdateLibraryItemOutput, AWSError>;
+  /**
+   * Updates the verification status of a library item for an Amazon Q App.
+   */
+  updateLibraryItemMetadata(params: QApps.Types.UpdateLibraryItemMetadataInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the verification status of a library item for an Amazon Q App.
+   */
+  updateLibraryItemMetadata(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates an existing Amazon Q App, allowing modifications to its title, description, and definition.
    */
@@ -424,6 +432,10 @@ declare namespace QApps {
      * The number of ratings the library item has received from users.
      */
     ratingCount: Integer;
+    /**
+     * Indicates whether the library item has been verified.
+     */
+    isVerified?: Boolean;
   }
   export interface CreateQAppInput {
     /**
@@ -693,6 +705,10 @@ declare namespace QApps {
      * The number of users who have associated the Q App with their account.
      */
     userCount?: Integer;
+    /**
+     * Indicates whether the library item has been verified.
+     */
+    isVerified?: Boolean;
   }
   export interface GetQAppInput {
     /**
@@ -875,6 +891,10 @@ declare namespace QApps {
      * The number of users who have the associated Q App.
      */
     userCount?: Integer;
+    /**
+     * Indicates whether the library item has been verified.
+     */
+    isVerified?: Boolean;
   }
   export type LibraryItemStatus = "PUBLISHED"|"DISABLED"|string;
   export interface ListLibraryItemsInput {
@@ -1246,6 +1266,20 @@ declare namespace QApps {
      */
     categories?: CategoryIdList;
   }
+  export interface UpdateLibraryItemMetadataInput {
+    /**
+     * The unique identifier of the Amazon Q Business application environment instance.
+     */
+    instanceId: InstanceId;
+    /**
+     * The unique identifier of the updated library item.
+     */
+    libraryItemId: UUID;
+    /**
+     * The verification status of the library item
+     */
+    isVerified?: Boolean;
+  }
   export interface UpdateLibraryItemOutput {
     /**
      * The unique identifier of the updated library item.
@@ -1295,6 +1329,10 @@ declare namespace QApps {
      * The number of users who have the associated Q App.
      */
     userCount?: Integer;
+    /**
+     * Indicates whether the library item has been verified.
+     */
+    isVerified?: Boolean;
   }
   export interface UpdateQAppInput {
     /**
@@ -1421,6 +1459,10 @@ declare namespace QApps {
      * The status of the user's association with the Q App.
      */
     status?: String;
+    /**
+     * Indicates whether the Q App has been verified.
+     */
+    isVerified?: Boolean;
   }
   export type UserAppsList = UserAppItem[];
   /**

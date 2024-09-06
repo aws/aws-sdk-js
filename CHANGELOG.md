@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1690.0-->
+<!--LATEST=2.1691.0-->
 <!--ENTRYINSERT-->
+
+## 2.1691.0
+* feature: QApps: Adds UpdateLibraryItemMetadata api to change status of app for admin verification feature and returns isVerified field in any api returning the app or library item.
+* feature: Support: Update maintenance mode message to indicate it has entered maintenance mode
 
 ## 2.1690.0
 * feature: ApplicationSignals: Amazon CloudWatch Application Signals now supports creating Service Level Objectives using a new calculation type. Users can now create SLOs which are configured with request-based SLIs to help meet their specific business requirements.

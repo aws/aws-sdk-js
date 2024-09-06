@@ -35,6 +35,9 @@
           "shape": "AccessDeniedException"
         },
         {
+          "shape": "ConflictException"
+        },
+        {
           "shape": "ValidationException"
         },
         {
@@ -251,6 +254,9 @@
         },
         {
           "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
         },
         {
           "shape": "ValidationException"
@@ -745,6 +751,9 @@
           "shape": "AccessDeniedException"
         },
         {
+          "shape": "ConflictException"
+        },
+        {
           "shape": "ValidationException"
         },
         {
@@ -757,7 +766,43 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Updates the metadata and status of a library item for an Amazon Q App.</p>"
+      "documentation": "<p>Updates the library item for an Amazon Q App.</p>"
+    },
+    "UpdateLibraryItemMetadata": {
+      "name": "UpdateLibraryItemMetadata",
+      "http": {
+        "method": "POST",
+        "requestUri": "/catalog.updateItemMetadata",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateLibraryItemMetadataInput"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Updates the verification status of a library item for an Amazon Q App.</p>",
+      "idempotent": true
     },
     "UpdateQApp": {
       "name": "UpdateQApp",
@@ -1266,6 +1311,10 @@
         "ratingCount": {
           "shape": "Integer",
           "documentation": "<p>The number of ratings the library item has received from users.</p>"
+        },
+        "isVerified": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the library item has been verified.</p>"
         }
       }
     },
@@ -1697,6 +1746,10 @@
         "userCount": {
           "shape": "Integer",
           "documentation": "<p>The number of users who have associated the Q App with their account.</p>"
+        },
+        "isVerified": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the library item has been verified.</p>"
         }
       }
     },
@@ -1968,6 +2021,10 @@
         "userCount": {
           "shape": "Integer",
           "documentation": "<p>The number of users who have the associated Q App.</p>"
+        },
+        "isVerified": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the library item has been verified.</p>"
         }
       },
       "documentation": "<p>A library item is a snapshot of an Amazon Q App that can be published so the users in their Amazon Q Apps library can discover it, clone it, and run it.</p>"
@@ -2587,7 +2644,8 @@
     "Title": {
       "type": "string",
       "max": 100,
-      "min": 0
+      "min": 0,
+      "pattern": "[^{}\\\\\"<>]+"
     },
     "UUID": {
       "type": "string",
@@ -2642,6 +2700,29 @@
         "categories": {
           "shape": "CategoryIdList",
           "documentation": "<p>The new categories to associate with the library item.</p>"
+        }
+      }
+    },
+    "UpdateLibraryItemMetadataInput": {
+      "type": "structure",
+      "required": [
+        "instanceId",
+        "libraryItemId"
+      ],
+      "members": {
+        "instanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The unique identifier of the Amazon Q Business application environment instance.</p>",
+          "location": "header",
+          "locationName": "instance-id"
+        },
+        "libraryItemId": {
+          "shape": "UUID",
+          "documentation": "<p>The unique identifier of the updated library item.</p>"
+        },
+        "isVerified": {
+          "shape": "Boolean",
+          "documentation": "<p>The verification status of the library item</p>"
         }
       }
     },
@@ -2705,6 +2786,10 @@
         "userCount": {
           "shape": "Integer",
           "documentation": "<p>The number of users who have the associated Q App.</p>"
+        },
+        "isVerified": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the library item has been verified.</p>"
         }
       }
     },
@@ -2879,6 +2964,10 @@
         "status": {
           "shape": "String",
           "documentation": "<p>The status of the user's association with the Q App.</p>"
+        },
+        "isVerified": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the Q App has been verified.</p>"
         }
       },
       "documentation": "<p>An Amazon Q App associated with a user, either owned by the user or favorited.</p>"
@@ -2890,5 +2979,5 @@
       }
     }
   },
-  "documentation": "<p>The Amazon Q Apps feature capability within Amazon Q Business allows web experience users to create lightweight, purpose-built AI apps to fulfill specific tasks from within their web experience. For example, users can create an Q Appthat exclusively generates marketing-related content to improve your marketing team's productivity or a Q App for marketing content-generation like writing customer emails and creating promotional content using a certain style of voice, tone, and branding. For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/purpose-built-qapps.html\">Amazon Q App</a> in the <i>Amazon Q Business User Guide</i>. </p>"
+  "documentation": "<p>The Amazon Q Apps feature capability within Amazon Q Business allows web experience users to create lightweight, purpose-built AI apps to fulfill specific tasks from within their web experience. For example, users can create a Q App that exclusively generates marketing-related content to improve your marketing team's productivity or a Q App for writing customer emails and creating promotional content using a certain style of voice, tone, and branding. For more information on the capabilities, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/deploy-experience-iam-role.html#q-apps-actions\">Amazon Q Apps capabilities</a> in the <i>Amazon Q Business User Guide</i>. </p> <p>For an overview of the Amazon Q App APIs, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/api-reference/API_Operations_QApps.html\">Overview of Amazon Q Apps API operations</a>.</p> <p>For information about the IAM access control permissions you need to use the Amazon Q Apps API, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/deploy-experience-iam-role.html\"> IAM role for the Amazon Q Business web experience including Amazon Q Apps</a> in the <i>Amazon Q Business User Guide</i>.</p>"
 }

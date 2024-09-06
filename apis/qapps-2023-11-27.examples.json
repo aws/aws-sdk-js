@@ -34,6 +34,7 @@
         "output": {
           "createdAt": "2024-05-21T23:17:27.350Z",
           "createdBy": "a841e300-40c1-7062-fa34-5b46dadbbaac",
+          "isVerified": false,
           "libraryItemId": "cb9ecf72-8563-450d-9db9-994f98297316",
           "ratingCount": 0,
           "status": "PUBLISHED",
@@ -155,6 +156,7 @@
           "createdAt": "2024-05-08T16:09:56.080Z",
           "createdBy": "a841e300-40c1-7062-fa34-5b46dadbbaac",
           "isRatedByUser": false,
+          "isVerified": false,
           "libraryItemId": "18cbebaa-196a-4aa5-a840-88d548e07f8f",
           "ratingCount": 0,
           "status": "PUBLISHED",
@@ -296,6 +298,7 @@
               "createdAt": "2024-05-21T23:17:27.350Z",
               "createdBy": "a841e300-40c1-7062-fa34-5b46dadbbaac",
               "isRatedByUser": true,
+              "isVerified": false,
               "libraryItemId": "cb9ecf72-8563-450d-9db9-994f98297316",
               "ratingCount": 3,
               "status": "PUBLISHED",
@@ -315,6 +318,7 @@
               "createdAt": "2024-05-08T16:09:56.080Z",
               "createdBy": "a841e300-40c1-7062-fa34-5b46dadbbaac",
               "isRatedByUser": false,
+              "isVerified": false,
               "libraryItemId": "18cbebaa-196a-4aa5-a840-88d548e07f8f",
               "ratingCount": 5,
               "status": "PUBLISHED",
@@ -334,6 +338,7 @@
               "createdAt": "2024-05-07T22:57:59.327Z",
               "createdBy": "a841e300-40c1-7062-fa34-5b46dadbbaac",
               "isRatedByUser": false,
+              "isVerified": false,
               "libraryItemId": "549abfe0-f5c4-45a2-bb9b-c05987a49c6d",
               "ratingCount": 8,
               "status": "PUBLISHED",
@@ -361,6 +366,7 @@
               "appId": "7b9fe303-18bb-4643-952c-bfcf9f4c427f",
               "createdAt": "2024-05-21T04:09:10.401Z",
               "description": "Description 1",
+              "isVerified": false,
               "status": "DRAFT",
               "title": "App 1"
             },
@@ -369,6 +375,7 @@
               "appId": "dd178fd6-ad3d-49b3-a32d-e915cf423e37",
               "createdAt": "2024-05-21T04:09:10.401Z",
               "description": "Description 2",
+              "isVerified": true,
               "status": "PUBLISHED",
               "title": "App 2"
             },
@@ -377,6 +384,7 @@
               "appId": "3274b744-1a13-4aad-953f-eda2e4149e6e",
               "createdAt": "2024-05-21T04:09:10.401Z",
               "description": "Description 3",
+              "isVerified": false,
               "status": "DRAFT",
               "title": "App 3"
             }
@@ -399,6 +407,7 @@
               "appId": "bec8ee64-2635-41e8-aace-e1e418f4f295",
               "createdAt": "2024-05-21T04:09:10.401Z",
               "description": "Description 4",
+              "isVerified": true,
               "status": "PUBLISHED",
               "title": "App 4"
             },
@@ -407,6 +416,7 @@
               "appId": "c380a45d-bd77-45b0-a0e5-8a266c1d8bc4",
               "createdAt": "2024-05-21T04:09:10.401Z",
               "description": "Description 5",
+              "isVerified": false,
               "status": "PUBLISHED",
               "title": "App 5"
             },
@@ -415,6 +425,7 @@
               "appId": "afc4ee80-9722-4396-85a6-7aeaff52c177",
               "createdAt": "2024-05-21T04:09:10.401Z",
               "description": "Description 6",
+              "isVerified": false,
               "status": "PUBLISHED",
               "title": "App 6"
             }
@@ -510,6 +521,7 @@
           ],
           "createdAt": "2024-05-21T23:17:27.350Z",
           "createdBy": "a841e300-40c1-7062-fa34-5b46dadbbaac",
+          "isVerified": false,
           "libraryItemId": "cb9ecf72-8563-450d-9db9-994f98297316",
           "ratingCount": 24,
           "status": "DISABLED",
@@ -518,6 +530,17 @@
         },
         "id": "example-1",
         "title": "Sets the status of a library item to DISABLED"
+      }
+    ],
+    "UpdateLibraryItemMetadata": [
+      {
+        "input": {
+          "instanceId": "0b95c9c4-89cc-4aa8-9aae-aa91cbec699f",
+          "isVerified": true,
+          "libraryItemId": "cb9ecf72-8563-450d-9db9-994f98297316"
+        },
+        "id": "example-1",
+        "title": "Update a library item to be verified"
       }
     ],
     "UpdateQApp": [

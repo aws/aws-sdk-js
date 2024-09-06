@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1690.0',
+	  VERSION: '2.1691.0',
 
 	  /**
 	   * @api private
@@ -14867,10 +14867,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {var warning = [
-	  'The AWS SDK for JavaScript (v2) will enter maintenance mode',
-	  'on September 8, 2024 and reach end-of-support on September 8, 2025.\n',
+	  'The AWS SDK for JavaScript (v2) is in maintenance mode.',
+	  ' SDK releases are limited to address critical bug fixes and security issues only.\n',
 	  'Please migrate your code to use AWS SDK for JavaScript (v3).',
-	  'For more information, check blog post at https://a.co/cUPnyil'
+	  'For more information, check the blog post at https://a.co/cUPnyil'
 	].join('\n');
 
 	module.exports = {
