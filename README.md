@@ -1,24 +1,17 @@
 # AWS SDK for JavaScript
 
 [![NPM version](https://img.shields.io/npm/v/aws-sdk.svg)](https://www.npmjs.com/package/aws-sdk)
-[![NPM downloads](https://img.shields.io/npm/dm/aws-sdk.svg)](https://www.npmjs.com/package/aws-sdk)
-[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/aws/aws-sdk-js)
-
-[![Build Status](https://travis-ci.org/aws/aws-sdk-js.svg?branch=master)](https://travis-ci.org/aws/aws-sdk-js)
-[![Coverage Status](https://codecov.io/gh/aws/aws-sdk-js/branch/master/graph/badge.svg)](https://codecov.io/gh/aws/aws-sdk-js)
-[![Known Vulnerabilities](https://snyk.io/test/github/aws/aws-sdk-js/badge.svg)](https://snyk.io/test/github/aws/aws-sdk-js)
 
 ## In Maintenance Mode as of September 8, 2024
 
-The AWS SDK for JavaScript v2 [has entered][v2-maintenance-mode] maintenance mode on September 8, 2024 and will be reaching end-of-support on September 8, 2025. During maintenance mode, AWS will limit SDK releases to address critical bug fixes and security issues only. The SDK will not receive API updates for new or existing services, or be updated to support new regions.
+The AWS SDK for JavaScript v2 [has entered][v2-maintenance-mode] maintenance mode on **September 8, 2024** and will be reaching end-of-support on **September 8, 2025**. During maintenance mode, AWS will limit SDK releases to address critical bug fixes and security issues only. The SDK will not receive API updates for new or existing services, or be updated to support new regions.
 
 We recommend that you migrate to [AWS SDK for JavaScript v3][aws-sdk-js-v3].
 For dates, additional details, and information on how to migrate, please refer to the linked announcement.
 
 The **AWS SDK for JavaScript v3** is the latest and recommended version, 
 which has been GA since December 2020. Here is [why and how you should use
-**AWS SDK for JavaScript v3**][v3-recommended-blog]. You can try our experimental
-migration scripts in [aws-sdk-js-codemod][aws-sdk-js-codemod] to migrate
+**AWS SDK for JavaScript v3**][v3-recommended-blog]. You can try our migration scripts in [aws-sdk-js-codemod][aws-sdk-js-codemod] to migrate
 your application from v2 to v3.
 
 To get help with your migration, please follow our general guidelines to 
