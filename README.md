@@ -8,9 +8,10 @@
 [![Coverage Status](https://codecov.io/gh/aws/aws-sdk-js/branch/master/graph/badge.svg)](https://codecov.io/gh/aws/aws-sdk-js)
 [![Known Vulnerabilities](https://snyk.io/test/github/aws/aws-sdk-js/badge.svg)](https://snyk.io/test/github/aws/aws-sdk-js)
 
-## Version 2.x Upcoming End-of-Support
+## In Maintenance Mode as of September 8, 2024
 
-We [announced][v2-maintenance-mode] the upcoming end-of-support for AWS SDK for JavaScript v2.
+The AWS SDK for JavaScript v2 [has entered][v2-maintenance-mode] maintenance mode on September 8, 2024 and will be reaching end-of-support on September 8, 2025. During maintenance mode, AWS will limit SDK releases to address critical bug fixes and security issues only. The SDK will not receive API updates for new or existing services, or be updated to support new regions.
+
 We recommend that you migrate to [AWS SDK for JavaScript v3][aws-sdk-js-v3].
 For dates, additional details, and information on how to migrate, please refer to the linked announcement.
 
