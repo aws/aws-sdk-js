@@ -1,9 +1,15 @@
 ---
 blank_issues_enabled: false
 contact_links:
-  - name: 🚀 Feature Request
+  - name: :rocket: Feature Request
     url: https://github.com/aws/aws-sdk-js-v3
     about: Feature requests are no longer accepted in this repository. Please migrate to AWS SDK for JavaScript v3.
-  - name: 💬 General Question
+  - name: :bug: Bug Report
+    url: https://github.com/aws/aws-sdk-js-v3
+    about: In Maintenance mode, we accept only critical bugs and security issues. Otherwise, migrate to AWS SDK for JavaScript v3.
+  - name: :closed_book: Documentation Issue
+    url: https://github.com/aws/aws-sdk-js-v3
+    about: Documentation requests are no longer accepted in this repository. Please migrate to AWS SDK for JavaScript v3.
+  - name: :speech_balloon: General Question
     url: https://github.com/aws/aws-sdk-js/discussions/categories/q-a
     about: Please ask and answer questions as a discussion thread
