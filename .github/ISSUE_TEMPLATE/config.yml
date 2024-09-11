@@ -4,9 +4,6 @@ contact_links:
   - name: 🚀 Feature Request
     url: https://github.com/aws/aws-sdk-js-v3
     about: Feature requests are no longer accepted in this repository. Please migrate to AWS SDK for JavaScript v3.
-  - name: 🐛 Bug Report
-    url: https://github.com/aws/aws-sdk-js-v3
-    about: In Maintenance mode, we accept only critical bugs and security issues. Otherwise, migrate to AWS SDK for JavaScript v3.
   - name: 📕 Documentation Issue
     url: https://github.com/aws/aws-sdk-js-v3
     about: Documentation requests are no longer accepted in this repository. Please migrate to AWS SDK for JavaScript v3.
